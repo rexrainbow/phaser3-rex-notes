@@ -480,8 +480,8 @@
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$c = Phaser.Utils.Objects.GetValue;
 
-  var RenderTexture = /*#__PURE__*/function (_PerspectiveImage) {
-    _inherits(RenderTexture, _PerspectiveImage);
+  var RenderTexture = /*#__PURE__*/function (_Image) {
+    _inherits(RenderTexture, _Image);
 
     var _super = _createSuper(RenderTexture);
 

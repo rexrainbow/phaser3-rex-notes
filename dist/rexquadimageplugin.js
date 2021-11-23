@@ -123,6 +123,36 @@
     };
   }
 
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get(target, property, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get;
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get(target, property, receiver || target);
+  }
+
   var RotateAround = Phaser.Math.RotateAround;
 
   var LocalXYToWorldXY = function LocalXYToWorldXY(gameObject, localX, localY) {
@@ -156,17 +186,24 @@
     y: 0
   };
 
-  var Vertex$1 = /*#__PURE__*/function () {
-    function Vertex(parent, vertexDataIndex, x, y) {
-      _classCallCheck(this, Vertex);
+  var ControlPoint = /*#__PURE__*/function () {
+    function ControlPoint(parent, vertexData) {
+      _classCallCheck(this, ControlPoint);
 
       this.parent = parent;
-      this.vertexDataIndex = vertexDataIndex;
-      this._localX = x;
-      this._localY = y;
+      this.vertexData = vertexData;
+      this._localX = undefined;
+      this._localY = undefined;
+      parent.on('destroy', this.destroy, this);
     }
 
-    _createClass(Vertex, [{
+    _createClass(ControlPoint, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent = undefined;
+        this.vertexData = undefined;
+      }
+    }, {
       key: "updateVertexPosition",
       value: function updateVertexPosition(x, y) {
         var gameObject = this.parent;
@@ -175,10 +212,9 @@
         var vHalfHeight = gameObject.frame.cutHeight / srcHeight / 2;
         var vx = x / srcHeight - vHalfWidth;
         var vy = y / srcHeight - vHalfHeight;
-        var flipY = gameObject.frame.source.isRenderTexture;
-        var vertex = gameObject.vertices[this.vertexDataIndex];
+        var vertex = this.vertexData;
         vertex.x = vx;
-        vertex.y = flipY ? vy : -vy;
+        vertex.y = -vy;
         gameObject.forceUpdate();
         return this;
       }
@@ -200,14 +236,18 @@
       }
     }, {
       key: "setLocalXY",
-      value: function setLocalXY(x, y) {
+      value: function setLocalXY(x, y, ignoreUpdateVertex) {
         if (this._localX === x && this._localY === y) {
           return this;
         }
 
         this._localX = x;
         this._localY = y;
-        this.updateVertexPosition(x, y);
+
+        if (!ignoreUpdateVertex) {
+          this.updateVertexPosition(x, y);
+        }
+
         return this;
       }
     }, {
@@ -252,14 +292,45 @@
       }
     }]);
 
-    return Vertex;
+    return ControlPoint;
   }();
 
-  var Mesh = Phaser.GameObjects.Mesh;
   var Vertex = Phaser.Geom.Mesh.Vertex;
   var Face = Phaser.Geom.Mesh.Face;
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+
+  var InitFaces = function InitFaces(quad) {
+    /*
+    vertices: 
+        0 : top-left
+        1 : top-right
+        2 : bottom-left
+        3 : bottom-right
+    */
+    var vertices = quad.vertices;
+    var faces = quad.faces;
+
+    for (var i = 0; i < 4; i++) {
+      vertices.push(new Vertex());
+    }
+
+    for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
+      var vert1 = vertices[indices[i + 0]];
+      var vert2 = vertices[indices[i + 1]];
+      var vert3 = vertices[indices[i + 2]];
+      faces.push(new Face(vert1, vert2, vert3));
+    }
+
+    quad.topLeft = new ControlPoint(quad, vertices[0]);
+    quad.topRight = new ControlPoint(quad, vertices[1]);
+    quad.bottomLeft = new ControlPoint(quad, vertices[2]);
+    quad.bottomRight = new ControlPoint(quad, vertices[3]);
+  };
+
+  var indices = [0, 2, 1, 2, 3, 1];
+
+  var Mesh = Phaser.GameObjects.Mesh;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var DegToRad = Phaser.Math.DegToRad;
   var FOV = 45;
   var PanZ = 1 + 1 / Math.sin(DegToRad(FOV));
@@ -274,16 +345,17 @@
 
       _classCallCheck(this, Image);
 
-      if (IsPlainObject(x)) {
+      if (IsPlainObject$1(x)) {
         config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        key = GetValue(config, 'key', null);
-        frame = GetValue(config, 'frame', null);
+        x = GetValue$1(config, 'x', 0);
+        y = GetValue$1(config, 'y', 0);
+        key = GetValue$1(config, 'key', null);
+        frame = GetValue$1(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
+      InitFaces(_assertThisInitialized(_this));
 
       _this.setSizeToFrame();
 
@@ -291,18 +363,10 @@
 
       _this.panZ(PanZ);
 
-      _this.hideCCW = GetValue(config, 'hideCCW', true);
+      _this.hideCCW = GetValue$1(config, 'hideCCW', true);
 
       _this.resetVerts();
 
-      var left = 0,
-          right = _this.width,
-          top = 0,
-          bottom = _this.height;
-      _this.topLeft = new Vertex$1(_assertThisInitialized(_this), 0, left, top);
-      _this.topRight = new Vertex$1(_assertThisInitialized(_this), 1, right, top);
-      _this.bottomLeft = new Vertex$1(_assertThisInitialized(_this), 2, left, bottom);
-      _this.bottomRight = new Vertex$1(_assertThisInitialized(_this), 3, right, bottom);
       return _this;
     }
 
@@ -315,10 +379,7 @@
     }, {
       key: "resetVerts",
       value: function resetVerts() {
-        var _this$vertices, _this$faces;
-
-        // Clear faces and vertices
-        this.clear();
+        // Clear faces and vertices        
         this.dirtyCache[9] = -1;
         var top = 0,
             bottom = this.height,
@@ -328,8 +389,7 @@
         [right, top], // top-right
         [left, bottom], // bottom-left
         [right, bottom] // bottom-right
-        ];
-        var indices = [0, 2, 1, 2, 3, 1]; // Calculate vertex data
+        ]; // Calculate vertex data
 
         var srcWidth = this.width;
         var srcHeight = this.height;
@@ -341,7 +401,7 @@
         var frameV0 = !flipY ? this.frame.v0 : this.frame.v1;
         var frameV1 = !flipY ? this.frame.v1 : this.frame.v0;
         var frameU = frameU1 - frameU0;
-        var frameV = frameV1 - frameV0; // Build vertex
+        var frameV = frameV1 - frameV0; // Update vertex
 
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
           var p = vertices[i];
@@ -351,24 +411,10 @@
           var y = py / srcHeight - vHalfHeight;
           var u = frameU0 + frameU * (px / srcWidth);
           var v = frameV0 + frameV * (py / srcHeight);
-          vertices[i] = new Vertex(x, -y, 0, u, v);
-        } // Build face
-
-
-        var faces = [];
-
-        for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
-          var vert1 = vertices[indices[i + 0]];
-          var vert2 = vertices[indices[i + 1]];
-          var vert3 = vertices[indices[i + 2]];
-          var face = new Face(vert1, vert2, vert3);
-          faces.push(face);
+          this.vertices[i].set(x, -y, 0).setUVs(u, v);
         }
 
-        (_this$vertices = this.vertices).push.apply(_this$vertices, vertices);
-
-        (_this$faces = this.faces).push.apply(_this$faces, faces);
-
+        this.reesetControlPoints();
         return this;
       }
     }, {
@@ -380,6 +426,19 @@
 
         this.resetVerts(); // Reset verts
 
+        return this;
+      }
+    }, {
+      key: "reesetControlPoints",
+      value: function reesetControlPoints() {
+        var top = 0,
+            bottom = this.height,
+            left = 0,
+            right = this.width;
+        this.topLeft.setLocalXY(left, top, true);
+        this.topRight.setLocalXY(right, top, true);
+        this.bottomLeft.setLocalXY(left, bottom, true);
+        this.bottomRight.setLocalXY(right, bottom, true);
         return this;
       }
     }, {
@@ -399,8 +458,8 @@
     return gameObject;
   }
 
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
   function QuadImageCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
@@ -410,9 +469,78 @@
       config.add = addToScene;
     }
 
-    var key = GetAdvancedValue(config, 'key', null);
-    var frame = GetAdvancedValue(config, 'frame', null);
+    var key = GetAdvancedValue$1(config, 'key', null);
+    var frame = GetAdvancedValue$1(config, 'frame', null);
     var gameObject = new Image(this.scene, 0, 0, key, frame, config);
+    BuildGameObject$1(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var RT = Phaser.GameObjects.RenderTexture;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+
+  var RenderTexture = /*#__PURE__*/function (_Image) {
+    _inherits(RenderTexture, _Image);
+
+    var _super = _createSuper(RenderTexture);
+
+    function RenderTexture(scene, x, y, width, height, config) {
+      var _this;
+
+      _classCallCheck(this, RenderTexture);
+
+      if (IsPlainObject(x)) {
+        config = x;
+        x = GetValue(config, 'x', 0);
+        y = GetValue(config, 'y', 0);
+        width = GetValue(config, 'width', 32);
+        height = GetValue(config, 'height', 32);
+      } // render-texture -> quad-image
+
+
+      var rt = new RT(scene, x, y, width, height).setOrigin(0.5);
+      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
+      _this.type = 'rexQuadRenderTexture';
+      _this.rt = rt;
+      return _this;
+    }
+
+    _createClass(RenderTexture, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+
+        this.rt.destroy();
+        this.rt = null;
+      }
+    }]);
+
+    return RenderTexture;
+  }(Image);
+
+  function QuadRenderTextureFactory (x, y, width, height, config) {
+    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function QuadRenderTextureCreator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+
+    var x = GetAdvancedValue(config, 'x', 0);
+    var y = GetAdvancedValue(config, 'y', 0);
+    var width = GetAdvancedValue(config, 'width', 32);
+    var height = GetAdvancedValue(config, 'height', 32);
+    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -496,6 +624,7 @@
       _this = _super.call(this, pluginManager); //  Register our new Game Object type
 
       pluginManager.registerGameObject('rexQuadImage', QuadImageFactory, QuadImageCreator);
+      pluginManager.registerGameObject('rexQuadRenderTexture', QuadRenderTextureFactory, QuadRenderTextureCreator);
       return _this;
     }
 
@@ -511,6 +640,7 @@
   }(Phaser.Plugins.BasePlugin);
 
   SetValue(window, 'RexPlugins.GameObjects.QuadImage', Image);
+  SetValue(window, 'RexPlugins.GameObjects.QuadRenderTexture', RenderTexture);
 
   return QuadImagePlugin;
 

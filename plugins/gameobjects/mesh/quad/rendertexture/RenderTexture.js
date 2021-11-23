@@ -14,12 +14,12 @@ class RenderTexture extends Image {
             height = GetValue(config, 'height', 32);
         }
 
-        // render-texture -> perspective-image
+        // render-texture -> quad-image
         var rt = (new RT(scene, x, y, width, height))
             .setOrigin(0.5);
 
         super(scene, x, y, rt.texture.key, null, config);
-        this.type = 'rexPerspectiveRenderTexture';
+        this.type = 'rexQuadRenderTexture';
         this.rt = rt;
     }
 

@@ -1,9 +1,6 @@
-import Point from './Vertex.js';
 import InitFaces from './InitFaces.js';
 
 const Mesh = Phaser.GameObjects.Mesh;
-const Vertex = Phaser.Geom.Mesh.Vertex;
-const Face = Phaser.Geom.Mesh.Face;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
@@ -28,13 +25,6 @@ class Image extends Mesh {
         this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
         this.resetVerts();
-
-        var top = 0, bottom = this.height,
-            left = 0, right = this.width;
-        this.topLeft = new Point(this, this.vertices[0], left, top);
-        this.topRight = new Point(this, this.vertices[1], right, top);
-        this.bottomLeft = new Point(this, this.vertices[2], left, bottom);
-        this.bottomRight = new Point(this, this.vertices[3], right, bottom);
     }
 
     resetPerspective() {
@@ -84,6 +74,8 @@ class Image extends Mesh {
                 .setUVs(u, v)
         }
 
+        this.reesetControlPoints();
+
         return this;
     }
 
@@ -91,6 +83,16 @@ class Image extends Mesh {
         this.setSizeToFrame();  // Reset size
         this.resetPerspective();  // Reset perspective
         this.resetVerts();  // Reset verts
+        return this;
+    }
+
+    reesetControlPoints() {
+        var top = 0, bottom = this.height,
+            left = 0, right = this.width;
+        this.topLeft.setLocalXY(left, top, true);
+        this.topRight.setLocalXY(right, top, true);
+        this.bottomLeft.setLocalXY(left, bottom, true);
+        this.bottomRight.setLocalXY(right, bottom, true);
         return this;
     }
 

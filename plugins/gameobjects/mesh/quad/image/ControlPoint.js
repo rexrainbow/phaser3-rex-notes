@@ -1,12 +1,18 @@
 import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/LocalXY.js';
 
-
-class Vertex {
-    constructor(parent, vertexData, x, y) {
+class ControlPoint {
+    constructor(parent, vertexData) {
         this.parent = parent;
         this.vertexData = vertexData;
-        this._localX = x;
-        this._localY = y;
+        this._localX = undefined;
+        this._localY = undefined;
+
+        parent.on('destroy', this.destroy, this);
+    }
+
+    destroy() {
+        this.parent = undefined;
+        this.vertexData = undefined;
     }
 
     updateVertexPosition(x, y) {
@@ -18,10 +24,9 @@ class Vertex {
         var vx = (x / srcHeight) - vHalfWidth;
         var vy = (y / srcHeight) - vHalfHeight;
 
-        var flipY = gameObject.frame.source.isRenderTexture;
         var vertex = this.vertexData;
         vertex.x = vx;
-        vertex.y = (flipY) ? vy : -vy;
+        vertex.y = -vy;
         gameObject.forceUpdate();
         return this;
     }
@@ -42,14 +47,17 @@ class Vertex {
         this.setLocalXY(this._localX, y);
     }
 
-    setLocalXY(x, y) {
+    setLocalXY(x, y, ignoreUpdateVertex) {
         if ((this._localX === x) && (this._localY === y)) {
             return this;
         }
 
         this._localX = x;
         this._localY = y;
-        this.updateVertexPosition(x, y);
+
+        if (!ignoreUpdateVertex) {
+            this.updateVertexPosition(x, y);
+        }
 
         return this;
     }
@@ -93,4 +101,4 @@ class Vertex {
     }
 }
 
-export default Vertex;
+export default ControlPoint;
