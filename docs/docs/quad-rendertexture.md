@@ -79,6 +79,7 @@ Render texture with 4 vertex control points.
 ```javascript
 var image = scene.add.rexQuadRenderTexturege(x, y, width, height, {
     // hideCCW: true,
+    // ninePointMode: false,
 });
 ```
 
@@ -91,8 +92,13 @@ var image = scene.add.rexQuadRenderTexturege({
     // width: 32,
     // height: 32,
     // hideCCW: true,
+    // ninePointMode: false,
 });
 ```
+
+- `ninePointMode` :
+    - `true` : Add 9 vertex control points.
+    - `false` : Add 4 vertex control points. Default behavior.
 
 Add prespective render texture from JSON
 
@@ -104,6 +110,7 @@ var image = scene.make.rexQuadRenderTexturege({
     height: 32,
 
     // hideCCW: false,
+    // ninePointMode: false,
 
     add: true
 });

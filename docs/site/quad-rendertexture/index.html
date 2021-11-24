@@ -7844,6 +7844,7 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexQuadRenderTexturege</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// hideCCW: true,</span>
+    <span class="c1">// ninePointMode: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or</p>
@@ -7853,8 +7854,16 @@
     <span class="c1">// width: 32,</span>
     <span class="c1">// height: 32,</span>
     <span class="c1">// hideCCW: true,</span>
+    <span class="c1">// ninePointMode: false,</span>
 <span class="p">});</span>
 </code></pre></div>
+<ul>
+<li><code>ninePointMode</code> :<ul>
+<li><code>true</code> : Add 9 vertex control points.</li>
+<li><code>false</code> : Add 4 vertex control points. Default behavior.</li>
+</ul>
+</li>
+</ul>
 <p>Add prespective render texture from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexQuadRenderTexturege</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -7863,6 +7872,7 @@
     <span class="nx">height</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
 
     <span class="c1">// hideCCW: false,</span>
+    <span class="c1">// ninePointMode: false,</span>
 
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
