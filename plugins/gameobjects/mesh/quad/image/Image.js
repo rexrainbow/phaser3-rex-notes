@@ -21,6 +21,7 @@ class Image extends Mesh {
         super(scene, x, y, key, frame);
         this.type = 'rexQuadImage';
         this.isNinePointMode = GetValue(config, 'ninePointMode', false);
+        this.controlPoints = [];
 
         InitFaces(this);
         this.setSizeToFrame();
@@ -28,6 +29,15 @@ class Image extends Mesh {
         this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
         this.resetVerts();
+    }
+
+    preDestroy() {
+        for (var i = 0, cnt = this.controlPoints.length; i < cnt; i++) {
+            this.controlPoints[i].destroy();
+        }
+        this.controlPoints = undefined;
+
+        super.preDestroy();
     }
 
     resetPerspective() {

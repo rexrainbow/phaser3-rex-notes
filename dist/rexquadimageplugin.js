@@ -187,21 +187,20 @@
   };
 
   var ControlPoint = /*#__PURE__*/function () {
-    function ControlPoint(parent, vertexData) {
+    function ControlPoint(parent, vertex) {
       _classCallCheck(this, ControlPoint);
 
       this.parent = parent;
-      this.vertexData = vertexData;
+      this.vertex = vertex;
       this._localX = undefined;
       this._localY = undefined;
-      parent.on('destroy', this.destroy, this);
     }
 
     _createClass(ControlPoint, [{
       key: "destroy",
       value: function destroy() {
         this.parent = undefined;
-        this.vertexData = undefined;
+        this.vertex = undefined;
       }
     }, {
       key: "updateVertexPosition",
@@ -212,7 +211,7 @@
         var vHalfHeight = gameObject.frame.cutHeight / srcHeight / 2;
         var vx = x / srcHeight - vHalfWidth;
         var vy = y / srcHeight - vHalfHeight;
-        var vertex = this.vertexData;
+        var vertex = this.vertex;
         vertex.x = vx;
         vertex.y = -vy;
         gameObject.forceUpdate();
@@ -301,7 +300,6 @@
   var InitFaces = function InitFaces(quad) {
     var isNinePointMode = quad.isNinePointMode;
     var pointCount = isNinePointMode ? 9 : 4;
-    quad.controlPoints = [];
     var vertices = quad.vertices;
     var faces = quad.faces;
     var controlPoints = quad.controlPoints;
@@ -412,6 +410,7 @@
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
       _this.isNinePointMode = GetValue$1(config, 'ninePointMode', false);
+      _this.controlPoints = [];
       InitFaces(_assertThisInitialized(_this));
 
       _this.setSizeToFrame();
@@ -428,6 +427,17 @@
     }
 
     _createClass(Image, [{
+      key: "preDestroy",
+      value: function preDestroy() {
+        for (var i = 0, cnt = this.controlPoints.length; i < cnt; i++) {
+          this.controlPoints[i].destroy();
+        }
+
+        this.controlPoints = undefined;
+
+        _get(_getPrototypeOf(Image.prototype), "preDestroy", this).call(this);
+      }
+    }, {
       key: "resetPerspective",
       value: function resetPerspective() {
         this.setPerspective(this.width, this.height, FOV);

@@ -1,18 +1,16 @@
 import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/LocalXY.js';
 
 class ControlPoint {
-    constructor(parent, vertexData) {
+    constructor(parent, vertex) {
         this.parent = parent;
-        this.vertexData = vertexData;
+        this.vertex = vertex;
         this._localX = undefined;
         this._localY = undefined;
-
-        parent.on('destroy', this.destroy, this);
     }
 
     destroy() {
         this.parent = undefined;
-        this.vertexData = undefined;
+        this.vertex = undefined;
     }
 
     updateVertexPosition(x, y) {
@@ -24,7 +22,7 @@ class ControlPoint {
         var vx = (x / srcHeight) - vHalfWidth;
         var vy = (y / srcHeight) - vHalfHeight;
 
-        var vertex = this.vertexData;
+        var vertex = this.vertex;
         vertex.x = vx;
         vertex.y = -vy;
         gameObject.forceUpdate();

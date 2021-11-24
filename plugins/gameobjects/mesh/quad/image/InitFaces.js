@@ -7,7 +7,6 @@ var InitFaces = function (quad) {
     var isNinePointMode = quad.isNinePointMode;
     var pointCount = (isNinePointMode) ? 9 : 4;
 
-    quad.controlPoints = [];
     var vertices = quad.vertices;
     var faces = quad.faces;
     var controlPoints = quad.controlPoints;
