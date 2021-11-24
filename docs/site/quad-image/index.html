@@ -7896,7 +7896,6 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">controlPoint</span><span class="p">.</span><span class="nx">getWorldXY</span><span class="p">();</span>
 <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">worldXY</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">worldXY</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="c1">// More effective</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">controlPoint</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
@@ -7905,7 +7904,6 @@
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">controlPoint</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// controlPoint.setWorldXY(x, y);</span>
-<span class="c1">// More effective</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">controlPoint</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>

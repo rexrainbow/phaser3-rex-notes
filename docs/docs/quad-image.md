@@ -177,7 +177,6 @@ var quadimage = scene.make.rexQuadImage({
     var worldXY = controlPoint.getWorldXY();
     var x = worldXY.x;
     var y = worldXY.y;
-    // More effective
     ```
     or
     ```javascript
@@ -188,7 +187,6 @@ var quadimage = scene.make.rexQuadImage({
     ```javascript
     controlPoint.setPosition(x, y);
     // controlPoint.setWorldXY(x, y);
-    // More effective
     ```
     or
     ```javascript
