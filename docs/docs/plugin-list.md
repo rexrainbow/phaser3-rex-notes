@@ -95,8 +95,8 @@
 1. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
 1. [Perspective/Sprite](perspective-sprite.md): Play animation on perspective-image..
 1. [Pop up](popup.md): Scale up game object.
-1. [Quad/Image](quad-image.md): Image with 4 vertex control points.
-1. [Quad/Render texture](quad-rendertexture.md): Render texture with 4 vertex control points.
+1. [Quad/Image](quad-image.md): Image with 4 or 9 vertex control points.
+1. [Quad/Render texture](quad-rendertexture.md): Render texture with 4 or 9 vertex control points.
 1. [Quest](quest.md): Question manager.
 1. [Raycaster](raycaster.md): Raycaster between obstacles.
 1. [Random place](randomplace.md): Place objects randomly inside an area without overlapping.
