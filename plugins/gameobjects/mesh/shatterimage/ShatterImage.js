@@ -8,6 +8,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const Vertex = Phaser.Geom.Mesh.Vertex;
 const DistanceSquared = Phaser.Math.Distance.Squared;
+const DegToRad = Phaser.Math.DegToRad;
+
+const FOV = 45;
+const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
 class ShatterImage extends Mesh {
     constructor(scene, x, y, key, frame, config) {
@@ -22,7 +26,8 @@ class ShatterImage extends Mesh {
         super(scene, x, y, key, frame);
         this.type = 'rexShatterImage';
         this.setSizeToFrame();
-        this.setOrtho();
+        this.resetPerspective();
+        this.panZ(PanZ);
         this.hideCCW = false;
         this.resetImage();
 
@@ -30,6 +35,11 @@ class ShatterImage extends Mesh {
 
         this.setVariation(GetValue(config, 'variation', 0.25));
         this.setSamplesPerRing(GetValue(config, 'samplesPerRing', 12));
+    }
+
+    resetPerspective() {
+        this.setPerspective(this.width, this.height, FOV);
+        return this;
     }
 
     setVariation(variation) {
