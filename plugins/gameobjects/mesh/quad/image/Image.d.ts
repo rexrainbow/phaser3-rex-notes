@@ -8,7 +8,6 @@ declare namespace Image {
         x: number, y: number,
         key?: string,
         frame?: string,
-        hideCCW?: boolean,
         ninePointMode?: boolean,
     }
 

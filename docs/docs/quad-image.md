@@ -79,7 +79,6 @@ Image with 4 or 9 vertex control points.
 
 ```javascript
 var image = scene.add.rexQuadImage(x, y, texture, frame, {
-    // hideCCW: true,
     // ninePointMode: false,
 });
 ```
@@ -92,7 +91,6 @@ var image = scene.add.rexQuadImage({
     // y: 0,
     key,
     // frame: null,
-    // hideCCW: true,
     // ninePointMode: false,
 });
 ```
@@ -111,7 +109,6 @@ var quadimage = scene.make.rexQuadImage({
     key: null,
     frame: null,
 
-    // hideCCW: false,
     // ninePointMode: false,
 
     add: true

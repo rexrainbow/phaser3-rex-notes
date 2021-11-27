@@ -4,9 +4,6 @@ import GetPointPosition from './GetPointPosition.js';
 const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
-const FOV = 45;
-const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
 class Image extends Mesh {
     constructor(scene, x, y, key, frame, config) {
@@ -24,11 +21,8 @@ class Image extends Mesh {
         this.controlPoints = [];
 
         InitFaces(this);
-        this.setSizeToFrame();
-        this.resetPerspective();
-        this.panZ(PanZ);
-        this.hideCCW = GetValue(config, 'hideCCW', true);
-        this.resetVerts();
+        this.hideCCW = false;
+        this.syncSize();
     }
 
     preDestroy() {
@@ -38,11 +32,6 @@ class Image extends Mesh {
         this.controlPoints = undefined;
 
         super.preDestroy();
-    }
-
-    resetPerspective() {
-        this.setPerspective(this.width, this.height, FOV);
-        return this;
     }
 
     resetVerts() {
@@ -88,7 +77,7 @@ class Image extends Mesh {
 
     syncSize() {
         this.setSizeToFrame();  // Reset size
-        this.resetPerspective();  // Reset perspective
+        this.setOrtho(this.width / this.height, 1);
         this.resetVerts();  // Reset verts
         return this;
     }

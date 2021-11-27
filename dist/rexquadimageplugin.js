@@ -385,9 +385,6 @@
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var DegToRad = Phaser.Math.DegToRad;
-  var FOV = 45;
-  var PanZ = 1 + 1 / Math.sin(DegToRad(FOV));
 
   var Image = /*#__PURE__*/function (_Mesh) {
     _inherits(Image, _Mesh);
@@ -412,16 +409,9 @@
       _this.isNinePointMode = GetValue$1(config, 'ninePointMode', false);
       _this.controlPoints = [];
       InitFaces(_assertThisInitialized(_this));
+      _this.hideCCW = false;
 
-      _this.setSizeToFrame();
-
-      _this.resetPerspective();
-
-      _this.panZ(PanZ);
-
-      _this.hideCCW = GetValue$1(config, 'hideCCW', true);
-
-      _this.resetVerts();
+      _this.syncSize();
 
       return _this;
     }
@@ -436,12 +426,6 @@
         this.controlPoints = undefined;
 
         _get(_getPrototypeOf(Image.prototype), "preDestroy", this).call(this);
-      }
-    }, {
-      key: "resetPerspective",
-      value: function resetPerspective() {
-        this.setPerspective(this.width, this.height, FOV);
-        return this;
       }
     }, {
       key: "resetVerts",
@@ -483,8 +467,7 @@
       value: function syncSize() {
         this.setSizeToFrame(); // Reset size
 
-        this.resetPerspective(); // Reset perspective
-
+        this.setOrtho(this.width / this.height, 1);
         this.resetVerts(); // Reset verts
 
         return this;

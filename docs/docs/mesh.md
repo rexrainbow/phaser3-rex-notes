@@ -41,7 +41,8 @@ Render a group of textured vertices and manipulate the view of those vertices, s
         - `near`, `far` : The near/far value of the view. Default value are `0.01`/`1000`.
     - Orthographic projection
         ```javascript
-        mesh.setOrtho(scaleX, scaleY, near, far);
+        mesh.setOrtho(mesh.width/mesh.height, 1);
+        // mesh.setOrtho(scaleX, scaleY, near, far);
         ```
         - `scaleX`, `scaleY` : The default horizontal/vertical scale in relation to the Mesh / Renderer dimensions.
         - `near`, `far` : The near/far value of the view. Default value are `0.01`/`1000`.

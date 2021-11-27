@@ -21,8 +21,6 @@ class ShatterImage extends Mesh {
 
         super(scene, x, y, key, frame);
         this.type = 'rexShatterImage';
-        this.setSizeToFrame();
-        this.setOrtho(this.width / this.height, 1);
         this.hideCCW = false;
         this.resetImage();
 
@@ -43,6 +41,8 @@ class ShatterImage extends Mesh {
     }
 
     resetImage() {
+        this.setSizeToFrame();
+
         this.clear();
         this.dirtyCache[9] = -1;
         GenerateGridVerts({
@@ -52,6 +52,8 @@ class ShatterImage extends Mesh {
             height: this.frame.cutHeight / this.height,
             flipY: this.frame.source.isRenderTexture
         });
+
+        this.setOrtho(this.width / this.height, 1);
         return this
     }
 

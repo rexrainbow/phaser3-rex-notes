@@ -585,11 +585,6 @@
 
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexShatterImage';
-
-      _this.setSizeToFrame();
-
-      _this.setOrtho(_this.width / _this.height, 1);
-
       _this.hideCCW = false;
 
       _this.resetImage();
@@ -621,6 +616,7 @@
     }, {
       key: "resetImage",
       value: function resetImage() {
+        this.setSizeToFrame();
         this.clear();
         this.dirtyCache[9] = -1;
         GenerateGridVerts({
@@ -631,6 +627,7 @@
           height: this.frame.cutHeight / this.height,
           flipY: this.frame.source.isRenderTexture
         });
+        this.setOrtho(this.width / this.height, 1);
         return this;
       }
     }, {
