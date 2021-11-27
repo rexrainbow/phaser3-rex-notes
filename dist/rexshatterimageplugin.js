@@ -479,7 +479,7 @@
   };
 
   var Base = Phaser.Geom.Mesh.Face;
-  var DegToRad$1 = Phaser.Math.DegToRad;
+  var DegToRad = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
   var RotateFace = Phaser.Geom.Mesh.RotateFace;
 
@@ -519,7 +519,7 @@
         return RadToDeg(this.rotation);
       },
       set: function set(value) {
-        this.rotation = DegToRad$1(value);
+        this.rotation = DegToRad(value);
       }
     }, {
       key: "setAngle",
@@ -564,9 +564,6 @@
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var Vertex = Phaser.Geom.Mesh.Vertex;
   var DistanceSquared = Phaser.Math.Distance.Squared;
-  var DegToRad = Phaser.Math.DegToRad;
-  var FOV = 45;
-  var PanZ = 1 + 1 / Math.sin(DegToRad(FOV));
 
   var ShatterImage = /*#__PURE__*/function (_Mesh) {
     _inherits(ShatterImage, _Mesh);
@@ -591,9 +588,7 @@
 
       _this.setSizeToFrame();
 
-      _this.resetPerspective();
-
-      _this.panZ(PanZ);
+      _this.setOrtho(_this.width / _this.height, 1);
 
       _this.hideCCW = false;
 
@@ -612,12 +607,6 @@
     }
 
     _createClass(ShatterImage, [{
-      key: "resetPerspective",
-      value: function resetPerspective() {
-        this.setPerspective(this.width, this.height, FOV);
-        return this;
-      }
-    }, {
       key: "setVariation",
       value: function setVariation(variation) {
         this.variation = variation;
