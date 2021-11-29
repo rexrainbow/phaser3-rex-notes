@@ -7797,7 +7797,8 @@
 </ul>
 </li>
 <li>Orthographic projection
-    <div class="highlight"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">setOrtho</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">,</span> <span class="nx">near</span><span class="p">,</span> <span class="nx">far</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">setOrtho</span><span class="p">(</span><span class="nx">mesh</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="nx">mesh</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span> <span class="mf">1</span><span class="p">);</span>
+<span class="c1">// mesh.setOrtho(scaleX, scaleY, near, far);</span>
 </code></pre></div><ul>
 <li><code>scaleX</code>, <code>scaleY</code> : The default horizontal/vertical scale in relation to the Mesh / Renderer dimensions.</li>
 <li><code>near</code>, <code>far</code> : The near/far value of the view. Default value are <code>0.01</code>/<code>1000</code>.</li>
