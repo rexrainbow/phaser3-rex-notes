@@ -1,6 +1,11 @@
-import Factory from './gameobjects/mesh/shatterimage/Factory.js';
-import Creator from './gameobjects/mesh/shatterimage/Creator.js';
-import ShatterImage from './gameobjects/mesh/shatterimage/ShatterImage.js';
+import ShatterImageFactory from './gameobjects/mesh/shatter/image/Factory.js';
+import ShatterImageCreator from './gameobjects/mesh/shatter/image/Creator.js';
+import ShatterImage from './gameobjects/mesh/shatter/image/Image.js';
+
+import ShatterRenderTextureFactory from './gameobjects/mesh/shatter/rendertexture/Factory.js';
+import ShatterRenderTextureCreator from './gameobjects/mesh/shatter/rendertexture/Creator.js';
+import ShatterRenderTexture from './gameobjects/mesh/shatter/rendertexture/RenderTexture.js';
+
 import SetValue from './utils/object/SetValue.js';
 
 class ShatterImagePlugin extends Phaser.Plugins.BasePlugin {
@@ -9,7 +14,8 @@ class ShatterImagePlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexShatterImage', Factory, Creator);
+        pluginManager.registerGameObject('rexShatterImage', ShatterImageFactory, ShatterImageCreator);
+        pluginManager.registerGameObject('rexShatterRenderTexture', ShatterRenderTextureFactory, ShatterRenderTextureCreator);
     }
 
     start() {
@@ -19,5 +25,6 @@ class ShatterImagePlugin extends Phaser.Plugins.BasePlugin {
 }
 
 SetValue(window, 'RexPlugins.GameObjects.ShatterImage', ShatterImage);
+SetValue(window, 'RexPlugins.GameObjects.ShatterRenderTexture', ShatterRenderTexture);
 
 export default ShatterImagePlugin;

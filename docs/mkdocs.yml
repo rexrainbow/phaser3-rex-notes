@@ -54,7 +54,9 @@ nav:
         - Quad:
             - Image: quad-image.md
             - Render texture: quad-rendertexture.md
-        - Shatter image: shatter-image.md
+        - Shatter:
+            - Image: shatter-image.md
+            - Render texture: shatter-rendertexture.md
         - Rope: rope.md
     - Text:
         - Canvas text:

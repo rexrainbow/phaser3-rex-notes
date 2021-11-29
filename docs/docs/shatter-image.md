@@ -68,7 +68,7 @@ Reference: [Delaunay Triangulation](https://github.com/darkskyapp/delaunay-fast)
     ```
 - Import class
     ```javascript
-    import ShatterImage from 'phaser3-rex-plugins/plugins/shatterimage.js';
+    import { ShatterImage } from 'phaser3-rex-plugins/plugins/shatterimage.js';
     ```
 - Add image object
     ```javascript    

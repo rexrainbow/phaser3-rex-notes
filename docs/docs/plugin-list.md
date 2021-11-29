@@ -134,7 +134,8 @@
 1. [Shape/Full window rectangle](shape-fullwindowrectangle.md): Rectangle shape covered full window.
 1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
-1. [Shatter image](shatter-image.md): Shatter image to triangle faces.
+1. [Shatter/Image](shatter-image.md): Shatter image to triangle faces.
+1. [Shatter/Render texture](shatter-rendertexture.md): Shatter render texture to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.

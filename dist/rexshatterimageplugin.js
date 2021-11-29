@@ -123,6 +123,36 @@
     };
   }
 
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get(target, property, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get;
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get(target, property, receiver || target);
+  }
+
   function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
@@ -403,7 +433,7 @@
     }
   };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
 
   var ShatterRectangleToTriangles = function ShatterRectangleToTriangles(config) {
@@ -437,8 +467,8 @@
 
     var vertices = [];
     vertices.push([centerX, centerY]);
-    var ringSamples = GetValue$1(config, 'samplesPerRing', 12);
-    var variation = GetValue$1(config, 'variation', 0.25);
+    var ringSamples = GetValue$2(config, 'samplesPerRing', 12);
+    var variation = GetValue$2(config, 'variation', 0.25);
     var radius = Math.min(width, height);
     var randMin = 1 - variation,
         randMax = 1 + variation;
@@ -451,7 +481,7 @@
 
     var radius = Math.min(width, height) * 2;
     AddRingVertices(vertices, centerX, centerY, radius, ringSamples, randMin, randMax, left, right, top, bottom);
-    var triangleOutput = GetValue$1(config, 'triangleOutput', true);
+    var triangleOutput = GetValue$2(config, 'triangleOutput', true);
     return Triangulate(vertices, triangleOutput);
   };
 
@@ -559,8 +589,8 @@
   };
 
   var Mesh = Phaser.GameObjects.Mesh;
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var Vertex = Phaser.Geom.Mesh.Vertex;
   var DistanceSquared = Phaser.Math.Distance.Squared;
@@ -575,12 +605,12 @@
 
       _classCallCheck(this, ShatterImage);
 
-      if (IsPlainObject(x)) {
+      if (IsPlainObject$1(x)) {
         config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        key = GetValue(config, 'key', null);
-        frame = GetValue(config, 'frame', null);
+        x = GetValue$1(config, 'x', 0);
+        y = GetValue$1(config, 'y', 0);
+        key = GetValue$1(config, 'key', null);
+        frame = GetValue$1(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
@@ -594,9 +624,9 @@
         y: null
       };
 
-      _this.setVariation(GetValue(config, 'variation', 0.25));
+      _this.setVariation(GetValue$1(config, 'variation', 0.25));
 
-      _this.setSamplesPerRing(GetValue(config, 'samplesPerRing', 12));
+      _this.setSamplesPerRing(GetValue$1(config, 'samplesPerRing', 12));
 
       return _this;
     }
@@ -727,15 +757,15 @@
     return ShatterImage;
   }(Mesh);
 
-  function Factory (x, y, texture, frame, config) {
+  function ShatterImageFactory (x, y, texture, frame, config) {
     var gameObject = new ShatterImage(this.scene, x, y, texture, frame, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
 
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function Creator (config, addToScene) {
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+  function ShatterImageCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
     }
@@ -744,9 +774,78 @@
       config.add = addToScene;
     }
 
-    var key = GetAdvancedValue(config, 'key', null);
-    var frame = GetAdvancedValue(config, 'frame', null);
+    var key = GetAdvancedValue$1(config, 'key', null);
+    var frame = GetAdvancedValue$1(config, 'frame', null);
     var gameObject = new ShatterImage(this.scene, 0, 0, key, frame, config);
+    BuildGameObject$1(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var RT = Phaser.GameObjects.RenderTexture;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+
+  var RenderTexture = /*#__PURE__*/function (_Image) {
+    _inherits(RenderTexture, _Image);
+
+    var _super = _createSuper(RenderTexture);
+
+    function RenderTexture(scene, x, y, width, height, config) {
+      var _this;
+
+      _classCallCheck(this, RenderTexture);
+
+      if (IsPlainObject(x)) {
+        config = x;
+        x = GetValue(config, 'x', 0);
+        y = GetValue(config, 'y', 0);
+        width = GetValue(config, 'width', 32);
+        height = GetValue(config, 'height', 32);
+      } // render-texture -> perspective-image
+
+
+      var rt = new RT(scene, x, y, width, height).setOrigin(0.5);
+      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
+      _this.type = 'rexShatterRenderTexture';
+      _this.rt = rt;
+      return _this;
+    }
+
+    _createClass(RenderTexture, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+
+        this.rt.destroy();
+        this.rt = null;
+      }
+    }]);
+
+    return RenderTexture;
+  }(ShatterImage);
+
+  function ShatterRenderTextureFactory (x, y, width, height, config) {
+    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function ShatterRenderTextureCreator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+
+    var x = GetAdvancedValue(config, 'x', 0);
+    var y = GetAdvancedValue(config, 'y', 0);
+    var width = GetAdvancedValue(config, 'width', 32);
+    var height = GetAdvancedValue(config, 'height', 32);
+    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -829,7 +928,8 @@
 
       _this = _super.call(this, pluginManager); //  Register our new Game Object type
 
-      pluginManager.registerGameObject('rexShatterImage', Factory, Creator);
+      pluginManager.registerGameObject('rexShatterImage', ShatterImageFactory, ShatterImageCreator);
+      pluginManager.registerGameObject('rexShatterRenderTexture', ShatterRenderTextureFactory, ShatterRenderTextureCreator);
       return _this;
     }
 
@@ -845,6 +945,7 @@
   }(Phaser.Plugins.BasePlugin);
 
   SetValue(window, 'RexPlugins.GameObjects.ShatterImage', ShatterImage);
+  SetValue(window, 'RexPlugins.GameObjects.ShatterRenderTexture', RenderTexture);
 
   return ShatterImagePlugin;
 
