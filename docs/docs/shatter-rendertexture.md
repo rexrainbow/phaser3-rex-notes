@@ -10,7 +10,7 @@ Shatter render texture to triangle faces.
 
 ## Live demos
 
-- [RenderTexture](https://codepen.io/rexrainbow/pen/ExvzZBJ)
+- [RenderTexture](https://codepen.io/rexrainbow/pen/oNGNGMx)
 
 ## Usage
 
