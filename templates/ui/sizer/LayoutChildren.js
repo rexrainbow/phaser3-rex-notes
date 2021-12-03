@@ -16,7 +16,7 @@ var LayoutChildren = function () {
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
+        child = (!this.rtl) ? children[i] : children[cnt - i - 1];
         if (child.rexSizer.hidden) {
             continue;
         }

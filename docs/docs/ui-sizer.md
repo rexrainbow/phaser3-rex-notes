@@ -81,6 +81,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 ```javascript
 var sizer = scene.rexUI.add.sizer({
     orientation: 0,
+    // rtl: false,
 
     // x: 0,
     // y: 0,
@@ -100,6 +101,7 @@ or
 ```javascript
 var sizer = scene.rexUI.add.sizer(x, y, {
     orientation: 0,
+    // rtl: false,
 
     // width: undefined,
     // height: undefined,
@@ -117,6 +119,7 @@ or
 ```javascript
 var sizer = scene.rexUI.add.sizer(x, y, width, height, {
     orientation: 0,
+    // rtl: false,
     // anchor: undefined,
     // space: { left: 0, right:0, top:0, bottom:0, item:0 },
 
@@ -130,6 +133,7 @@ or
 
 ```javascript
 var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
+    // rtl: false,
     // anchor: undefined,
     // space: { left: 0, right:0, top:0, bottom:0, item:0 }
 });
@@ -150,6 +154,9 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
 - `orientation` : Main orientation of the sizer.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
+- `rtl` : 
+    - `true` : Layout children from right to left.
+    - `false` : Layout children from left to right. Default behavior.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space between 2 children game objects.

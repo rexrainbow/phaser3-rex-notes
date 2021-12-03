@@ -26,6 +26,7 @@ declare namespace Sizer {
         width?: number,
         height?: number,
         orientation?: OrientationTypes,
+        rtl?: boolean,
         space?: {
             left?: number, right?: number, top?: number, bottom?: number,
 

@@ -34,6 +34,7 @@ class Sizer extends BaseSizer {
         this.sizerChildren = [];
         this.setOrientation(orientation);
         this.setItemSpacing(GetValue(config, 'space.item', 0));
+        this.setRTL(GetValue(config, 'rtl', false));
 
         this.addChildrenMap('items', this.sizerChildren);
     }
@@ -45,6 +46,14 @@ class Sizer extends BaseSizer {
 
     setItemSpacing(space) {
         this.space.item = space;
+        return this;
+    }
+
+    setRTL(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.rtl = enable;
         return this;
     }
 

@@ -83,6 +83,7 @@ var label = scene.rexUI.add.label({
     // height: undefined,
 
     orientation: 0,
+    // rtl: false,
 
     background: backgroundGameObject,
     icon: iconGameObject,
@@ -125,6 +126,9 @@ var label = scene.rexUI.add.label({
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
+- `rtl` : 
+    - `true` : Layout children from right to left.
+    - `false` : Layout children from left to right. Default behavior.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.

@@ -22383,7 +22383,7 @@
     var childWidth, childHeight;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      child = children[i];
+      child = !this.rtl ? children[i] : children[cnt - i - 1];
 
       if (child.rexSizer.hidden) {
         continue;
@@ -22760,6 +22760,8 @@
 
       _this.setItemSpacing(GetValue$13(config, 'space.item', 0));
 
+      _this.setRTL(GetValue$13(config, 'rtl', false));
+
       _this.addChildrenMap('items', _this.sizerChildren);
 
       return _this;
@@ -22775,6 +22777,16 @@
       key: "setItemSpacing",
       value: function setItemSpacing(space) {
         this.space.item = space;
+        return this;
+      }
+    }, {
+      key: "setRTL",
+      value: function setRTL(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.rtl = enable;
         return this;
       }
     }, {
