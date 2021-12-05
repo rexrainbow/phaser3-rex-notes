@@ -24,16 +24,6 @@ scene.load.once('complete', callback, scope);  // add callback of 'complete' eve
 scene.load.start();                     // start loading
 ```
 
-### Load file complete event
-
-```javascript
-scene.load.on('filecomplete', function(key, type, data) {}, scope);
-```
-
-```javascript
-scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {}, scope);
-```
-
 ### Set path
 
 ```javascript
@@ -42,6 +32,13 @@ scene.loader.setPath(path)
 
 ### Events
 
+- Load file complete event
+    ```javascript
+    scene.load.on('filecomplete', function(key, type, data) {}, scope);
+    ```
+    ```javascript
+    scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {}, scope);
+    ```
 - Start loading
     ```javascript
     scene.load.once('start', function(){}, scope);
