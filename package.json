@@ -35,6 +35,9 @@
         "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",
         "chart.js": "^2.9.4",
+        "lokijs": "^1.5.12",
+        "localforage": "^1.10.0",
+        "js-yaml": "^4.1.0",
         "clean-webpack-plugin": "^0.1.19",
         "copy-webpack-plugin": "^4.6.0",
         "eslint": "^5.16.0",
@@ -58,9 +61,7 @@
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",
-        "lokijs": "^1.5.12",
         "papaparse": "^5.3.1",
-        "webfontloader": "^1.6.28",
-        "localforage": "^1.10.0"
+        "webfontloader": "^1.6.28"
     }
 }
