@@ -522,6 +522,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#with-dom-game-object" class="md-nav__link">
+    With DOM game object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7645,6 +7652,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#with-dom-game-object" class="md-nav__link">
+    With DOM game object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7725,6 +7739,15 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterfullscreen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 </ul>
+<h3 id="with-dom-game-object">With DOM game object<a class="headerlink" href="#with-dom-game-object" title="Permanent link">&para;</a></h3>
+<p>Set <code>gameConfig.fullscreenTarget</code> to parent id.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">parentDivID</span><span class="p">,</span>
+    <span class="nx">fullscreenTarget</span><span class="o">:</span> <span class="nx">parentDivID</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
                 
               
               

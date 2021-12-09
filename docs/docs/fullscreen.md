@@ -66,3 +66,16 @@ gameObject.setInteractive().on('pointerdown', function() {
     ```javascript
     scene.scale.on('enterfullscreen', function() {});
     ```
+
+### With DOM game object
+
+Set `gameConfig.fullscreenTarget` to parent id.
+
+```javascript
+var config = {
+    parent: parentDivID,
+    fullscreenTarget: parentDivID
+};
+
+var game = new Phaser.Game(config);
+```
