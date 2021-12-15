@@ -28,9 +28,9 @@ class Image extends Mesh {
         this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
 
-        var girdWidth = GetValue(config, 'gridWidth', 32);
-        var girdHeight = GetValue(config, 'girdHeight', girdWidth);
-        this.resetVerts(girdWidth, girdHeight);
+        var gridWidth = GetValue(config, 'gridWidth', 32);
+        var gridHeight = GetValue(config, 'gridHeight', gridWidth);
+        this.resetVerts(gridWidth, gridHeight);
     }
 
     resetPerspective() {
@@ -38,12 +38,12 @@ class Image extends Mesh {
         return this;
     }
 
-    resetVerts(girdWidth, girdHeight) {
-        if (girdWidth !== undefined) {
-            this.girdWidth = girdWidth;
+    resetVerts(gridWidth, gridHeight) {
+        if (gridWidth !== undefined) {
+            this.gridWidth = gridWidth;
         }
-        if (girdHeight !== undefined) {
-            this.girdHeight = girdHeight;
+        if (gridHeight !== undefined) {
+            this.gridHeight = gridHeight;
         }
 
         // Clear faces and vertices
@@ -63,8 +63,8 @@ class Image extends Mesh {
             width: frameWidth / this.height,
             height: frameHeight / this.height,
 
-            widthSegments: Math.ceil(frameWidth / this.girdWidth),
-            heightSegments: Math.ceil(frameHeight / this.girdHeight),
+            widthSegments: Math.ceil(frameWidth / this.gridWidth),
+            heightSegments: Math.ceil(frameHeight / this.gridHeight),
             flipY: this.frame.source.isRenderTexture
         });
 

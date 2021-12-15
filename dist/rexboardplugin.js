@@ -13932,9 +13932,9 @@
   Object.assign(ContainerLite.prototype, methods);
 
   var AddChess = function AddChess(gameObject, tileX, tileY, tileZ) {
-    var gird = this.grid;
-    gird.saveOrigin();
-    gird.setOriginPosition(this.x, this.y); // Add chess to borad
+    var grid = this.grid;
+    grid.saveOrigin();
+    grid.setOriginPosition(this.x, this.y); // Add chess to borad
 
     this.board.addChess(gameObject, tileX, tileY, tileZ, true); // Add chess to container
 
@@ -13943,7 +13943,7 @@
     }
 
     this.add(gameObject);
-    gird.restoreOrigin();
+    grid.restoreOrigin();
     return this;
   };
 
@@ -14138,13 +14138,13 @@
 
   var OnTouchTileStart = function OnTouchTileStart(pointer) {
     // Get touched tileX, tileY
-    var gird = this.grid;
-    gird.saveOrigin();
-    gird.setOriginPosition(this.x, this.y);
+    var grid = this.grid;
+    grid.saveOrigin();
+    grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
         tileY = out.y;
-    gird.restoreOrigin();
+    grid.restoreOrigin();
     this.input.tilePosition.x = tileX;
     this.input.tilePosition.y = tileY; // Get touched chess
 
@@ -14223,13 +14223,13 @@
 
   var OnTouchTileEnd = function OnTouchTileEnd(pointer) {
     // Get touched tileX, tileY
-    var gird = this.grid;
-    gird.saveOrigin();
-    gird.setOriginPosition(this.x, this.y);
+    var grid = this.grid;
+    grid.saveOrigin();
+    grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
         tileY = out.y;
-    gird.restoreOrigin();
+    grid.restoreOrigin();
     this.input.tilePosition.x = tileX;
     this.input.tilePosition.y = tileY; // Get touched chess
 
@@ -14270,13 +14270,13 @@
 
   var OnTouchTileMove = function OnTouchTileMove(pointer) {
     // Get touched tileX, tileY
-    var gird = this.grid;
-    gird.saveOrigin();
-    gird.setOriginPosition(this.x, this.y);
+    var grid = this.grid;
+    grid.saveOrigin();
+    grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
         tileY = out.y;
-    gird.restoreOrigin();
+    grid.restoreOrigin();
 
     if (this.input.tilePosition.x === tileX && this.input.tilePosition.y === tileY) {
       // Tile position dose not change

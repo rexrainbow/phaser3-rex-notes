@@ -328,10 +328,10 @@
       _this.panZ(PanZ);
 
       _this.hideCCW = GetValue$d(config, 'hideCCW', true);
-      var girdWidth = GetValue$d(config, 'gridWidth', 32);
-      var girdHeight = GetValue$d(config, 'girdHeight', girdWidth);
+      var gridWidth = GetValue$d(config, 'gridWidth', 32);
+      var gridHeight = GetValue$d(config, 'gridHeight', gridWidth);
 
-      _this.resetVerts(girdWidth, girdHeight);
+      _this.resetVerts(gridWidth, gridHeight);
 
       return _this;
     }
@@ -344,13 +344,13 @@
       }
     }, {
       key: "resetVerts",
-      value: function resetVerts(girdWidth, girdHeight) {
-        if (girdWidth !== undefined) {
-          this.girdWidth = girdWidth;
+      value: function resetVerts(gridWidth, gridHeight) {
+        if (gridWidth !== undefined) {
+          this.gridWidth = gridWidth;
         }
 
-        if (girdHeight !== undefined) {
-          this.girdHeight = girdHeight;
+        if (gridHeight !== undefined) {
+          this.gridHeight = gridHeight;
         } // Clear faces and vertices
 
 
@@ -370,8 +370,8 @@
           frame: this.frame.name,
           width: frameWidth / this.height,
           height: frameHeight / this.height,
-          widthSegments: Math.ceil(frameWidth / this.girdWidth),
-          heightSegments: Math.ceil(frameHeight / this.girdHeight),
+          widthSegments: Math.ceil(frameWidth / this.gridWidth),
+          heightSegments: Math.ceil(frameHeight / this.gridHeight),
           flipY: this.frame.source.isRenderTexture
         });
         return this;

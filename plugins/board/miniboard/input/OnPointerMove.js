@@ -9,13 +9,13 @@ var OnPointerMove = function (pointer) {
 
 var OnTouchTileMove = function (pointer) {
     // Get touched tileX, tileY
-    var gird = this.grid;
-    gird.saveOrigin();
-    gird.setOriginPosition(this.x, this.y);
+    var grid = this.grid;
+    grid.saveOrigin();
+    grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
         tileY = out.y;
-    gird.restoreOrigin();
+    grid.restoreOrigin();
 
     if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
         // Tile position dose not change

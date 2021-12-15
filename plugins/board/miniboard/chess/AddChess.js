@@ -1,9 +1,9 @@
 import IsUID from '../../chess/IsUID.js';
 
 var AddChess = function (gameObject, tileX, tileY, tileZ) {
-    var gird = this.grid;
-    gird.saveOrigin();
-    gird.setOriginPosition(this.x, this.y);
+    var grid = this.grid;
+    grid.saveOrigin();
+    grid.setOriginPosition(this.x, this.y);
 
     // Add chess to borad
     this.board.addChess(gameObject, tileX, tileY, tileZ, true);
@@ -13,7 +13,7 @@ var AddChess = function (gameObject, tileX, tileY, tileZ) {
     }
     this.add(gameObject);
 
-    gird.restoreOrigin();
+    grid.restoreOrigin();
     return this;
 }
 
