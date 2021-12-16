@@ -473,16 +473,14 @@
     var randMin = 1 - variation,
         randMax = 1 + variation;
 
-    for (var i = 0; i < 4; i++) {
-      // r = 1/27, 3/27, 9/27, 27/27
+    for (var i = 0; i < 3; i++) {
+      // r = 1/27, 3/27, 9/27
       AddRingVertices(vertices, centerX, centerY, radius * Math.pow(3, i) / 27, ringSamples, randMin, randMax, left, right, top, bottom);
-    } // Add 4 corner vertices
+    } // r = 27/27
 
 
-    vertices.push([left, top]);
-    vertices.push([right, top]);
-    vertices.push([right, bottom]);
-    vertices.push([left, bottom]);
+    var radius = Math.max(width, height) * 2;
+    AddRingVertices(vertices, centerX, centerY, radius, ringSamples, randMin, randMax, left, right, top, bottom);
     var triangleOutput = GetValue$2(config, 'triangleOutput', true);
     return Triangulate(vertices, triangleOutput);
   };

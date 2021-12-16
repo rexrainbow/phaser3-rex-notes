@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.rexShatterImage(400, 300, 'classroom')
+        var image = this.add.rexShatterImage(400, 300, 'narrowrect')
             .shatter()
 
         this.debug = this.add.graphics();
