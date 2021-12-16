@@ -10,16 +10,18 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('card2', 'assets/images/card2.png');
+        this.load.image('narrowrect', 'assets/images/narrowrect.png');
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
     }
 
     create() {
-        var image = this.add.rexShatterImage(400, 300, 'card2')
-        //.shatter()
+        var image = this.add.rexShatterImage(400, 300, 'classroom')
+            .shatter()
 
-        // this.debug = this.add.graphics();
-        // image.setDebug(this.debug);
+        this.debug = this.add.graphics();
+        image.setDebug(this.debug);
 
+        /*
         this.input
             .on('pointerdown', function (pointer) {
                 if (image.task) {
@@ -47,11 +49,12 @@ class Demo extends Phaser.Scene {
                     }
                 });
             }, this)
+            */
     }
 
     update() {
-        //this.debug.clear();
-        //this.debug.lineStyle(1, 0x00ff00);
+        this.debug.clear();
+        this.debug.lineStyle(1, 0x00ff00);
     }
 }
 

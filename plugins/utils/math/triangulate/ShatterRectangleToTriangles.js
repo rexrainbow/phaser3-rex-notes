@@ -38,8 +38,8 @@ var ShatterRectangleToTriangles = function (config) {
     var radius = Math.min(width, height);
     var randMin = 1 - variation,
         randMax = 1 + variation;
-    for (var i = 0; i < 3; i++) {
-        // r = 1/27, 3/27, 9/27
+    for (var i = 0; i < 4; i++) {
+        // r = 1/27, 3/27, 9/27, 27/27
         AddRingVertices(
             vertices,
             centerX, centerY, (radius * (3 ** i) / 27), ringSamples,
@@ -48,14 +48,11 @@ var ShatterRectangleToTriangles = function (config) {
         )
     }
 
-    // r = 27/27
-    var radius = Math.min(width, height) * 2;
-    AddRingVertices(
-        vertices,
-        centerX, centerY, radius, ringSamples,
-        randMin, randMax,
-        left, right, top, bottom
-    )
+    // Add 4 corner vertices
+    vertices.push([left, top]);
+    vertices.push([right, top]);
+    vertices.push([right, bottom]);
+    vertices.push([left, bottom]);
 
     var triangleOutput = GetValue(config, 'triangleOutput', true);
     return Triangulate(vertices, triangleOutput);
