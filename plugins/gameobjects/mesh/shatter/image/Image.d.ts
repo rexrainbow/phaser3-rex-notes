@@ -32,4 +32,8 @@ declare class ShatterImage extends Phaser.GameObjects.Mesh {
     stopUpdate(): this;
 
     resetImage(): this;
+
+    tint: number;
+    setTint(color: number): this;
+
 }

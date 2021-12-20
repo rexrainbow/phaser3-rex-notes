@@ -135,6 +135,26 @@ class Image extends Mesh {
         this.dirtyCache[10] = 1;
         return this;
     }
+    
+    get tint() {
+        if (this.vertices.length === 0) {
+            return 0xffffff;
+        } else {
+            return this.vertices[0].color;
+        }
+    }
+
+    set tint(value) {
+        var vertices = this.vertices;
+        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+            vertices[i].color = value;
+        }
+    }
+
+    setTint(color) {
+        this.tint = color;
+        return this;
+    }
 }
 
 export default Image;

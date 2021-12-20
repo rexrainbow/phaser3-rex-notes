@@ -1197,6 +1197,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tint-color" class="md-nav__link">
+    Tint color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#change-frame" class="md-nav__link">
     Change frame
   </a>
@@ -7772,6 +7779,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tint-color" class="md-nav__link">
+    Tint color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#change-frame" class="md-nav__link">
     Change frame
   </a>
@@ -7979,6 +7993,18 @@
     <span class="nx">angleY</span><span class="o">:</span> <span class="p">{</span> <span class="nx">start</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">to</span><span class="o">:</span> <span class="o">-</span><span class="mf">180</span><span class="p">}</span>
 <span class="p">})</span>
 </code></pre></div>
+<h3 id="tint-color">Tint color<a class="headerlink" href="#tint-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+   <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">tint</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">tint</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTint</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="change-frame">Change frame<a class="headerlink" href="#change-frame" title="Permanent link">&para;</a></h3>
 <p>Frame is bound with vertices. Use <a href="../perspective-rendertexture/">perspective renderTexture</a> to change frame without recreate vertices again (assume that size of frame won't changed).</p>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>

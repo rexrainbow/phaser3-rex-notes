@@ -238,6 +238,37 @@ var faces = mesh.faces;
         - `x` : 0(left) ~ 1(right)
         - `y` : 1(top) ~ 0(bottom)
 
+### Vertices
+
+Each face has 3 vertices.
+
+```javascript
+var vertices = mesh.vertices;
+```
+
+- `vertices` : Array of vertex.
+
+#### Properties
+
+- Alpha
+    - Get
+        ```javascript
+        var alpha = vertex.alpha;
+        ```
+    - Set
+        ```javascript
+        vertex.alpha = alpha;
+        ```
+- Tint
+    - Get
+        ```javascript
+        var color = vertex.color;
+        ```
+    - Set
+        ```javascript
+        vertex.color = color;
+        ```
+
 ##### Update properties
 
 - Start updating

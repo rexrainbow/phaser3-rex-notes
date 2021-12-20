@@ -180,6 +180,19 @@ Faces will be sorted nearby shatter-center to far away.
         ```javascript
         face.setAlpha(value);
         ```
+- Tint color
+    - Get
+        ```javascript
+        var color = face.tint;
+        ```
+    - Set
+        ```javascript
+        face.tint = color;
+        ```
+        or
+        ```javascript
+        face.setTint(color);
+        ```
 - Angle
     - Get
         ```javascript
@@ -262,3 +275,18 @@ Display original image with 2 faces.
 ```javascript
 image.resetImage();
 ```
+
+### Tint color
+
+- Get
+   ```javascript
+   var color = image.tint;
+   ```
+- Set
+    ```javascript
+    image.tint = color;
+    ```
+    or
+    ```javascript
+    image.setTint(color);
+    ```

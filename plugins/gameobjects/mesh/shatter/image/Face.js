@@ -41,6 +41,26 @@ class Face extends Base {
         this.alpha = alpha;
         return this;
     }
+
+    get tint() {
+        var tint1 = this.vertex1.color;
+        var tint2 = this.vertex2.color;
+        var tint3 = this.vertex3.color;
+        return (((((tint1 >> 0) & 0xff) + ((tint2 >> 0) & 0xff) + ((tint3 >> 0) & 0xff)) / 3) << 0) +
+            (((((tint1 >> 8) & 0xff) + ((tint2 >> 8) & 0xff) + ((tint3 >> 8) & 0xff)) / 3) << 8) +
+            (((((tint1 >> 16) & 0xff) + ((tint2 >> 16) & 0xff) + ((tint3 >> 16) & 0xff)) / 3) << 16);
+    }
+
+    set tint(value) {
+        this.vertex1.color = value;
+        this.vertex2.color = value;
+        this.vertex3.color = value;
+    }
+
+    setTint(value) {
+        this.tint = value;
+        return this;
+    }
 }
 
 export default Face;
