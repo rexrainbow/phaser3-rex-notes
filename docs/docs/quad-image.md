@@ -191,6 +191,21 @@ var quadimage = scene.make.rexQuadImage({
     controlPoint.y = y;
     ```
 
+### Tint color
+
+- Get
+   ```javascript
+   var color = image.tint;
+   ```
+- Set
+    ```javascript
+    image.tint = color;
+    ```
+    or
+    ```javascript
+    image.setTint(color);
+    ```
+
 ### Other properties
 
 See [Mesh](mesh.md) game object.
