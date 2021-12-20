@@ -8,6 +8,7 @@ Layout children game objects overlapped.
 ## Live demos
 
 - [Overlap](https://codepen.io/rexrainbow/pen/MWKWpyX)
+- [Fit viewport](https://codepen.io/rexrainbow/pen/WNpoMzx)
 
 ## Usage
 
