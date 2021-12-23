@@ -1,4 +1,4 @@
-import Container from '../../containerlite/ContainerLite';
+import Container from '../../../containerlite/ContainerLite';
 import Image from '../image/Image';
 import RenderTexture from '../rendertexture/RenderTexture';
 
