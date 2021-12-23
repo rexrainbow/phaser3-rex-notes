@@ -1,18 +1,18 @@
 // import * as Phaser from 'phaser';
-import { IConfig as IConfigClick } from '../../../../plugins/button';
-import { IConfig as IConfigTap } from '../../../../plugins/input/gestures/tap/Tap';
-import { IConfig as IConfigPress } from '../../../../plugins/input/gestures/press/Press';
-import { IConfig as IConfigSwipe } from '../../../../plugins/input/gestures/swipe/Swipe';
+import Button from '../../../../plugins/button';
+import Tap from '../../../../plugins/input/gestures/tap/Tap';
+import Press from '../../../../plugins/input/gestures/press/Press';
+import Swipe from '../../../../plugins/input/gestures/swipe/Swipe';
 
 
 export interface IConfig {
     targets?: Phaser.GameObjects.GameObject[],
 
-    click?: IConfigClick | boolean,
+    click?: Button.IConfig | boolean,
     over?: {} | boolean,
-    tap?: IConfigTap | boolean,
-    press?: IConfigPress | boolean,
-    swipe?: IConfigSwipe | boolean,
+    tap?: Tap.IConfig | boolean,
+    press?: Press.IConfig | boolean,
+    swipe?: Swipe.IConfig | boolean,
 
     inputEventPrefix?: string,
     eventEmitter?: Phaser.Events.EventEmitter,
