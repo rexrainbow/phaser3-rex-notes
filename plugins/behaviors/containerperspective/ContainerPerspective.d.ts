@@ -1,4 +1,4 @@
-import RenderTexture from "../../gameobjects/perspective/rendertexture/RenderTexture";
+import RenderTexture from "../../gameobjects/mesh/perspective/rendertexture/RenderTexture";
 import ContainerLite from "../../gameobjects/containerlite/ContainerLite";
 
 export default ContainerPerspective;
