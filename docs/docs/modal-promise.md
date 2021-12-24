@@ -99,6 +99,10 @@ OnClose --> Resolve
 
 ### Events
 
+- To invoke `modal.requestClose()` method
+    ```javascript
+    gameObject.emit('modal.requestClose', closeEventData);
+    ```
 - On opened dialog
     ```javascript
     gameObject.on('modal.open', function(modalBehavior) {

@@ -7824,6 +7824,9 @@ TimeOut --&gt; |Transition-out| OnClose
 OnClose --&gt; Resolve</code></pre>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>To invoke <code>modal.requestClose()</code> method
+    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;modal.requestClose&#39;</span><span class="p">,</span> <span class="nx">closeEventData</span><span class="p">);</span>
+</code></pre></div></li>
 <li>On opened dialog
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;modal.open&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">modalBehavior</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
