@@ -1,7 +1,2 @@
-import { ModalBehavoir, Modal, ModalPromise } from '../../../plugins/modal.js';
-
-var ModalClose = function (gameObject, closeEventData) {
-    gameObject.emit('modal.requestClose', closeEventData);
-}
-
+import { ModalBehavoir, Modal, ModalPromise, ModalClose } from '../../../plugins/modal.js';
 export { ModalBehavoir, Modal, ModalPromise, ModalClose };

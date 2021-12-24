@@ -1,4 +1,4 @@
 import ModalBehavoir from './behaviors/modal/Modal';
-import { Modal, ModalPromise } from './behaviors/modal/ModalPromise';
+import { Modal, ModalPromise, ModalClose } from './behaviors/modal/ModalPromise';
 
-export { ModalBehavoir, Modal, ModalPromise };
+export { ModalBehavoir, Modal, ModalPromise, ModalClose };

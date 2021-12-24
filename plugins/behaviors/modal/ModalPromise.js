@@ -29,4 +29,8 @@ var ModalPromise = function (gameObject, config) {
     });
 }
 
-export { Modal, ModalPromise };
+var ModalClose = function (gameObject, closeEventData) {
+    gameObject.emit('modal.requestClose', closeEventData);
+}
+
+export { Modal, ModalPromise, ModalClose };

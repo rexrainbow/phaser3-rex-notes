@@ -2187,6 +2187,10 @@
     });
   };
 
+  var ModalClose = function ModalClose(gameObject, closeEventData) {
+    gameObject.emit('modal.requestClose', closeEventData);
+  };
+
   var ModalPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ModalPlugin, _Phaser$Plugins$BaseP);
 
@@ -2218,6 +2222,11 @@
       key: "promise",
       value: function promise(gameObject, config) {
         return ModalPromise(gameObject, config);
+      }
+    }, {
+      key: "close",
+      value: function close(gameObject, closeEventData) {
+        return ModalClose(gameObject, closeEventData);
       }
     }]);
 

@@ -1,8 +1,2 @@
-import { ModalBehavoir, Modal, ModalPromise } from '../../../plugins/modal';
-
-declare function ModalClose(
-    gameObject: Phaser.GameObjects.GameObject,
-    closeEventData?: unknown
-): void;
-
+import { ModalBehavoir, Modal, ModalPromise, ModalClose } from '../../../plugins/modal';
 export { ModalBehavoir, Modal, ModalPromise, ModalClose };

@@ -38200,6 +38200,10 @@
     });
   };
 
+  var ModalClose = function ModalClose(gameObject, closeEventData) {
+    gameObject.emit('modal.requestClose', closeEventData);
+  };
+
   var UIPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(UIPlugin, _Phaser$Plugins$Scene);
 
@@ -38256,7 +38260,8 @@
     easeMoveTo: EaseMoveTo,
     easeMoveFrom: EaseMoveFrom,
     modal: Modal,
-    modalPromise: ModalPromise
+    modalPromise: ModalPromise,
+    modalClose: ModalClose
   };
   Object.assign(UIPlugin.prototype, methods);
 

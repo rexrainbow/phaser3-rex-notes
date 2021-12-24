@@ -73,6 +73,11 @@ scene.plugins.get('rexModal').promise(gameObject, config)
 ### Close
 
 ```javascript
+scene.plugins.get('rexModal').close(gameObject);
+// scene.plugins.get('rexModal').close(gameObject, closeEventData);
+```
+or
+```javascript
 gameObject.emit('modal.requestClose');
 // gameObject.emit('modal.requestClose', closeEventData);
 ```

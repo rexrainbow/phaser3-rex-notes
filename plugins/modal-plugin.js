@@ -1,4 +1,4 @@
-import { ModalBehavoir, Modal, ModalPromise } from './modal.js'
+import { ModalBehavoir, Modal, ModalPromise, ModalClose } from './modal.js'
 
 class ModalPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -20,6 +20,10 @@ class ModalPlugin extends Phaser.Plugins.BasePlugin {
 
     promise(gameObject, config) {
         return ModalPromise(gameObject, config);
+    }
+
+    close(gameObject, closeEventData) {
+        return ModalClose(gameObject, closeEventData);
     }
 }
 
