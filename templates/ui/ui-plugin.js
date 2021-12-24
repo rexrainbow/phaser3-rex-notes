@@ -66,7 +66,7 @@ import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
-import { Modal, ModalPromise } from './modal/Modal.js';
+import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -110,7 +110,8 @@ var methods = {
     easeMoveTo: EaseMoveTo,
     easeMoveFrom: EaseMoveFrom,
     modal: Modal,
-    modalPromise: ModalPromise
+    modalPromise: ModalPromise,
+    modalClose: ModalClose
 }
 
 Object.assign(

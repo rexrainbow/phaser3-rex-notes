@@ -8478,6 +8478,10 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">closeEventData</span><span class="p">){</span> <span class="p">})</span>
 </code></pre></div><ul>
 <li>Close modal dialog:
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">modalClose</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// scene.rexUI.modalClose(gameObject, closeEventData);</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;modal.requestClose&#39;</span><span class="p">);</span>
 <span class="c1">// gameObject.emit(&#39;modal.requestClose&#39;, closeEventData);</span>
 </code></pre></div><ul>

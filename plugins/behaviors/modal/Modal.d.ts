@@ -33,5 +33,7 @@ declare class Modal extends Phaser.Events.EventEmitter {
         config?: Modal.IConfig
     );
 
-    requestClose(): this;
+    requestClose(
+        closeEventData?: unknown
+    ): this;
 }

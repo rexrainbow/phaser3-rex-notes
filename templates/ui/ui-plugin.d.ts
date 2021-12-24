@@ -53,7 +53,7 @@ import TouchEventStopFactory from './toucheventstop/Factory';
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import { Edit } from '../../plugins/textedit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
-import { Modal, ModalPromise } from './modal/Modal';
+import { Modal, ModalPromise, ModalClose } from './modal/Modal';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
@@ -125,6 +125,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     fadeOutDestroy: typeof FadeOutDestroy;
     modal: typeof Modal;
     modalPromise: typeof ModalPromise;
+    modalClose: typeof ModalClose;
     getParentSizer: typeof GetParentSizer;
     getTopmostSizer: typeof GetTopmostSizer;
     hide: typeof Hide;

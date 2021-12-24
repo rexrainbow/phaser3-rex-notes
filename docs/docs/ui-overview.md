@@ -542,6 +542,11 @@ scene.rexUI.setChildrenInteractive(sizer, {
     ```
     - Close modal dialog:
         ```javascript
+        scene.rexUI.modalClose(gameObject);
+        // scene.rexUI.modalClose(gameObject, closeEventData);
+        ```
+        or
+        ```javascript
         gameObject.emit('modal.requestClose');
         // gameObject.emit('modal.requestClose', closeEventData);
         ```
