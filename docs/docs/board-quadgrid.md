@@ -22,6 +22,13 @@ var grid = scene.rexBoard.add.quadGrid({
 });
 ```
 
+or
+
+```javascript
+// import { QuadGrid } from 'phaser3-rex-plugins/plugins/board-components.js';
+var grid = new QuadGrid(config);
+```
+
 - `x`, `y` : World position of tile (0, 0)
 - `cellWidth` : The width of the cell, in pixels.
 - `cellHeight` : The height of the cell, in pixels.

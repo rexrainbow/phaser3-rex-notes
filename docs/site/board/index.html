@@ -8600,7 +8600,10 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Board</span><span class="p">,</span> <span class="nx">HexagonGrid</span><span class="p">,</span> <span class="nx">QuadGrid</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add board object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Board</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Board</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">grid</span><span class="o">:</span> <span class="nx">QuadGrid</span><span class="p">(</span><span class="nx">gridConfig</span><span class="p">),</span>  <span class="c1">// or HexagonGrid(gridConfig)</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-board-object">Add board object<a class="headerlink" href="#add-board-object" title="Permanent link">&para;</a></h3>

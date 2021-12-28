@@ -23,6 +23,13 @@ var grid = scene.rexBoard.add.hexagonGrid({
 });
 ```
 
+or
+
+```javascript
+// import { HexagonGrid } from 'phaser3-rex-plugins/plugins/board-components.js';
+var grid = new HexagonGrid(config);
+```
+
 - `x`, `y` : World position of origin tile (i.e. tileX = 0, tileY = 0)
 - `cellWidth` : The width of the cell, in pixels.
 - `cellHeight` : The height of the cell, in pixels.

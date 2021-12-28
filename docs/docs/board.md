@@ -71,7 +71,10 @@ Core object of Board system.
     ```
 - Add board object
     ```javascript
-    var board = new Board(scene, config);
+    var board = new Board(scene, {
+        grid: QuadGrid(gridConfig),  // or HexagonGrid(gridConfig)
+        // ...
+    });
     ```
 
 ### Add board object
