@@ -6,8 +6,13 @@ var InitData = function (config, initialValue) {
     }
 
     var dataManager = GetValue(config, 'dataManager', undefined);
-    var setValueCallback = GetValue(config, 'setValueCallback', undefined);
-    var setValueCallbackScope = GetValue(config, 'setValueCallbackScope', undefined);
+    var setValueCallback, setValueCallbackScope;
+    setValueCallback = GetValue(config, 'setValueCallback', undefined);
+    setValueCallbackScope = GetValue(config, 'setValueCallbackScope', undefined);
+    if (setValueCallback === undefined) {
+        setValueCallback = GetValue(config, 'setButtonStateCallback', undefined);
+        setValueCallbackScope = GetValue(config, 'setButtonStateCallbackScope', undefined);
+    }
 
     if (dataManager === undefined) {
         var parent = this.parent;
@@ -37,6 +42,7 @@ var InitData = function (config, initialValue) {
 export default {
     setType(config) {
         var type = GetValue(config, 'type', undefined);
+        this.buttonsType = type;
         switch (type) {
             case 'radio':
                 this.setRadioType(config);
@@ -101,5 +107,28 @@ export default {
         });
 
         return this;
+    },
+
+    // For radio
+    setSelectedButtonName(name) {
+        this.parent.value = name;
+        return this;
+    },
+
+    getSelectedButtonName() {
+        return this.parent.value;
+    },
+
+    // For checkboxes
+    setButtonState(name, state) {
+        if (state === undefined) {
+            state = true;
+        }
+        this.dataManager.set(name, state);
+        return this;
+    },
+
+    getButtonState(name) {
+        return this.dataManager.get(name);
     }
 }

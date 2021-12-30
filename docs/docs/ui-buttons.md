@@ -112,8 +112,8 @@ var buttons = scene.rexUI.add.buttons({
     // groupName: undefined,
 
     // type: undefined,
-    // setValueCallback: undefined,
-    // setValueCallbackScope: undefined
+    // setValueCallback: undefined,  // or setButtonStateCallback: undefined
+    // setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined
 });
 ```
 
@@ -158,7 +158,7 @@ var buttons = scene.rexUI.add.buttons({
     - `undefined` : No extra behavior, default value.
     - `'checkboxes'` : Set these buttons to checkboxes.
     - `'radio'` : Set these buttons to radio.
-- `setValueCallback` : Callback to set value of a button.
+- `setValueCallback`, or `setButtonStateCallback` : Callback to set value of a button.
     - `undefined` : No callback, default value.
     - A function object.
         ```javascript
@@ -460,11 +460,19 @@ buttons.forEachButtton(callback, scope);
 
 - Read state
     ```javascript
-    var state = buttons.getData(key);
+    var state = buttons.getButtonState(key);
     ```
+    or
+    ```javascript
+    var state = buttons.getData(key);
+    ```    
     - `key` : `name` property of a button game object. (i.e. `button.name`)
     - `state` : `true`, or `false`
 - Set state
+    ```javascript
+    buttons.setButtonState(key, state);
+    ```
+    or
     ```javascript
     buttons.setData(key, state);
     ```
@@ -475,10 +483,18 @@ buttons.forEachButtton(callback, scope);
 
 - Read state
     ```javascript
+    var value = buttons.getSelectedButtonName();
+    ```
+    or
+    ```javascript
     var value = buttons.value;
     ```
     - `value` : `name` property of a button game object. (i.e. `button.name`)
 - Set state
+    ```javascript
+    buttons.setSelectedButtonName(key);
+    ```
+    or
     ```javascript
     buttons.value = key;
     ```

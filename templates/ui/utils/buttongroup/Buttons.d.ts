@@ -61,5 +61,21 @@ export interface IButtons {
         scop?: unknown
     ): this;
 
+    buttonsType: string;
     value: unknown;
+
+    setSelectedButtonName(
+        name: string
+    ): this;
+
+    getSelectedButtonName(): string;
+
+    setButtonState(
+        name: string,
+        state?: boolean
+    ): this;
+
+    getButtonState(
+        name: string
+    ): boolean;
 }

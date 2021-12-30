@@ -8031,8 +8031,8 @@
     <span class="c1">// groupName: undefined,</span>
 
     <span class="c1">// type: undefined,</span>
-    <span class="c1">// setValueCallback: undefined,</span>
-    <span class="c1">// setValueCallbackScope: undefined</span>
+    <span class="c1">// setValueCallback: undefined,  // or setButtonStateCallback: undefined</span>
+    <span class="c1">// setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8099,7 +8099,7 @@
 <li><code>'radio'</code> : Set these buttons to radio.</li>
 </ul>
 </li>
-<li><code>setValueCallback</code> : Callback to set value of a button.<ul>
+<li><code>setValueCallback</code>, or <code>setButtonStateCallback</code> : Callback to set value of a button.<ul>
 <li><code>undefined</code> : No callback, default value.</li>
 <li>A function object.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
@@ -8384,6 +8384,9 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 <h4 id="checkboxes">Checkboxes<a class="headerlink" href="#checkboxes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Read state
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getButtonState</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
@@ -8391,6 +8394,9 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 </ul>
 </li>
 <li>Set state
+    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setButtonState</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">state</span><span class="p">);</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">state</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
@@ -8401,12 +8407,18 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 <h4 id="radio">Radio<a class="headerlink" href="#radio" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Read state
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getSelectedButtonName</span><span class="p">();</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>value</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
 </ul>
 </li>
 <li>Set state
+    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setSelectedButtonName</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+    or
     <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>

@@ -7080,8 +7080,14 @@
     }
 
     var dataManager = GetValue$2(config, 'dataManager', undefined);
-    var setValueCallback = GetValue$2(config, 'setValueCallback', undefined);
-    var setValueCallbackScope = GetValue$2(config, 'setValueCallbackScope', undefined);
+    var setValueCallback, setValueCallbackScope;
+    setValueCallback = GetValue$2(config, 'setValueCallback', undefined);
+    setValueCallbackScope = GetValue$2(config, 'setValueCallbackScope', undefined);
+
+    if (setValueCallback === undefined) {
+      setValueCallback = GetValue$2(config, 'setButtonStateCallback', undefined);
+      setValueCallbackScope = GetValue$2(config, 'setButtonStateCallbackScope', undefined);
+    }
 
     if (dataManager === undefined) {
       var parent = this.parent;
@@ -7111,6 +7117,7 @@
   var SetTypeMethods = {
     setType: function setType(config) {
       var type = GetValue$2(config, 'type', undefined);
+      this.buttonsType = type;
 
       switch (type) {
         case 'radio':
@@ -7172,6 +7179,26 @@
         dataManager.toggle(button.name);
       });
       return this;
+    },
+    // For radio
+    setSelectedButtonName: function setSelectedButtonName(name) {
+      this.parent.value = name;
+      return this;
+    },
+    getSelectedButtonName: function getSelectedButtonName() {
+      return this.parent.value;
+    },
+    // For checkboxes
+    setButtonState: function setButtonState(name, state) {
+      if (state === undefined) {
+        state = true;
+      }
+
+      this.dataManager.set(name, state);
+      return this;
+    },
+    getButtonState: function getButtonState(name) {
+      return this.dataManager.get(name);
     }
   };
 
@@ -7343,6 +7370,26 @@
   };
   Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$1, methods);
 
+  // Include in Buttons/GridButtons/FixedWidthButtons class
+  var ButtonStateMethods = {
+    // For radio
+    setSelectedButtonName: function setSelectedButtonName(name) {
+      this.buttonGroup.setSelectedButtonName(name);
+      return this;
+    },
+    getSelectedButtonName: function getSelectedButtonName() {
+      return this.buttonGroup.getSelectedButtonName();
+    },
+    // For checkboxes
+    setButtonState: function setButtonState(name, state) {
+      this.buttonGroup.setButtonState(name, state);
+      return this;
+    },
+    getButtonState: function getButtonState(name) {
+      return this.buttonGroup.getButtonState(name);
+    }
+  };
+
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var Buttons = /*#__PURE__*/function (_Sizer) {
@@ -7436,7 +7483,7 @@
     return Buttons;
   }(Sizer);
 
-  Object.assign(Buttons.prototype, AddChildMethods, RemoveChildMethods, ButtonMethods$1);
+  Object.assign(Buttons.prototype, AddChildMethods, RemoveChildMethods, ButtonMethods$1, ButtonStateMethods);
 
   var ButtonMethods = {
     getButtonsSizer: function getButtonsSizer(groupName) {

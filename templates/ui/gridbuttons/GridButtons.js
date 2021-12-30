@@ -3,6 +3,7 @@ import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import ButtonGroup from '../utils/buttongroup/ButtonGroup.js';
 import ButtonMethods from '../utils/buttongroup/ButtonMethods.js';
+import ButtonStateMethods from '../utils/buttongroup/ButtonStateMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -117,7 +118,8 @@ Object.assign(
     GridButtons.prototype,
     AddChildMethods,
     RemoveChildMethods,
-    ButtonMethods
+    ButtonMethods,
+    ButtonStateMethods
 );
 
 export default GridButtons;

@@ -1,3 +1,5 @@
+// Include in ButtonGroup class and Buttons/GridButtons/FixedWidthButtons class
+
 import GetGameObjectByName from '../GetGameObjectByName.js';
 import { Show, Hide, IsShown } from '../Hide.js';
 
@@ -92,5 +94,7 @@ export default {
             }
         }
         return this;
-    }
+    },
+
+
 }

@@ -73,5 +73,21 @@ declare class Buttons extends Sizer {
     ): this;
 
     readonly buttons: Phaser.GameObjects.GameObject[];
+
     value: unknown;
+
+    setSelectedButtonName(
+        name: string
+    ): this;
+
+    getSelectedButtonName(): string;
+
+    setButtonState(
+        name: string,
+        state?: boolean
+    ): this;
+
+    getButtonState(
+        name: string
+    ): boolean;
 }
