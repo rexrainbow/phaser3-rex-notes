@@ -6,6 +6,8 @@ const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
 class Demo extends Phaser.Scene {
+    rexUI: UIPlugin;
+
     constructor() {
         super({
             key: 'examples'
@@ -64,7 +66,7 @@ class Demo extends Phaser.Scene {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
-            
+
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1
@@ -87,8 +89,8 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '');
         this.input.topOnly = false;
         var labels = [];
-        labels.push(...scrollablePanel.getElement('#skills.items', true));
-        labels.push(...scrollablePanel.getElement('#items.items', true));
+        labels.push(...scrollablePanel.getElement('#skills.items', true) as Phaser.GameObjects.GameObject[]);
+        labels.push(...scrollablePanel.getElement('#items.items', true) as Phaser.GameObjects.GameObject[]);
         var scene = this;
         labels.forEach(function (label) {
             if (!label) {
@@ -109,7 +111,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createPanel = function (scene, data) {
+var createPanel = function (scene: Demo, data) {
     var sizer = scene.rexUI.add.sizer({
         orientation: 'x',
         space: { item: 10 }
@@ -129,7 +131,7 @@ var createPanel = function (scene, data) {
     return sizer;
 }
 
-var createHeader = function (scene, data) {
+var createHeader = function (scene: Demo, data) {
     var title = scene.rexUI.add.label({
         orientation: 'x',
         text: scene.add.text(0, 0, 'Character'),
@@ -158,7 +160,7 @@ var createHeader = function (scene, data) {
         );
 };
 
-var createTable = function (scene, data, key, rows) {
+var createTable = function (scene: Demo, data, key, rows) {
     var capKey = key.charAt(0).toUpperCase() + key.slice(1);
     var title = scene.rexUI.add.label({
         orientation: 'x',
@@ -212,7 +214,7 @@ var createTable = function (scene, data, key, rows) {
         );
 }
 
-var createIcon = function (scene, item, iconWidth, iconHeight) {
+var createIcon = function (scene: Demo, item, iconWidth, iconHeight) {
     var label = scene.rexUI.add.label({
         orientation: 'y',
         icon: scene.rexUI.add.roundRectangle(0, 0, iconWidth, iconHeight, 5, COLOR_LIGHT),

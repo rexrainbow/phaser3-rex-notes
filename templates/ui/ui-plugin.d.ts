@@ -71,7 +71,7 @@ declare class Factories {
     circleMaskImage: typeof CircleMaskImageFactory;
     circularProgressCanvas: typeof CircularProgressCanvasFactory;
     circularProgress: typeof CircularProgressFactory;
-    clickFactory: typeof ClickFactory;
+    click: typeof ClickFactory;
     container: typeof ContainerFactory;
     cover: typeof CoverFactory;
     customProgress: typeof CustomProgressFactory;

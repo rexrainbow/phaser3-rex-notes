@@ -149,7 +149,10 @@ declare class BaseSizer extends ContainerLite {
     getElement(
         name: string,
         recursive?: boolean
-    ): Phaser.GameObjects.GameObject | null;
+    ): Phaser.GameObjects.GameObject |
+        Phaser.GameObjects.GameObject[] |
+        { [name: string]: Phaser.GameObjects.GameObject } |
+        null;
 
     getParentSizer(
         gameObject?: Phaser.GameObjects.GameObject
