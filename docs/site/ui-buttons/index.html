@@ -8351,11 +8351,10 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
         <span class="c1">// ...</span>
     <span class="p">],</span>
 
-    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkboxes&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkboxes&#39;</span><span class="p">,</span> <span class="c1">// or &#39;radio&#39;</span>
     <span class="nx">setValueCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// ...</span>
-    <span class="p">},</span>
-    <span class="c1">// setValueCallbackScope: undefined</span>
+    <span class="p">},</span> <span class="c1">// or setButtonStateCallback</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>buttons</code> : Array of button game objects.<ul>
@@ -8363,7 +8362,7 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 </ul>
 </li>
 <li><code>type</code> : Set type to <code>'checkboxes'</code>, or <code>'radio'</code>.</li>
-<li><code>setValueCallback</code> : Callback to set value of a button.
+<li><code>setValueCallback</code> or <code>setButtonStateCallback</code> : Callback to set value of a button.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>

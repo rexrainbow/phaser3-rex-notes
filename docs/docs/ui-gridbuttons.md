@@ -115,8 +115,8 @@ var buttons = scene.rexUI.add.gridButtons({
     // groupName: undefined,
 
     // type: undefined,
-    // setValueCallback: undefined,
-    // setValueCallbackScope: undefined
+    // setValueCallback: undefined,  // or setButtonStateCallback: undefined
+    // setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined
 });
 ```
 
@@ -159,7 +159,7 @@ var buttons = scene.rexUI.add.gridButtons({
     - `undefined` : No extra behavior, default value.
     - `'checkboxes'` : Set these buttons to checkboxes.
     - `'radio'` : Set these buttons to radio.
-- `setValueCallback` : Callback to set value of a button.
+- `setValueCallback` or `setButtonStateCallback` : Callback to set value of a button.
     - `undefined` : No callback, default value.
     - A function object.
         ```javascript
@@ -237,6 +237,10 @@ The same as [events of buttons](ui-buttons.md#events).
     // var gameObject = buttons.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+### Show/hide button
+
+The same as [for each button of buttons](ui-buttons.md#showhide-button).
 
 ### For each button
 

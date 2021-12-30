@@ -6631,6 +6631,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#showhide-button" class="md-nav__link">
+    Show/hide button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#for-each-button" class="md-nav__link">
     For each button
   </a>
@@ -7772,6 +7779,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#showhide-button" class="md-nav__link">
+    Show/hide button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#for-each-button" class="md-nav__link">
     For each button
   </a>
@@ -7912,8 +7926,8 @@
     <span class="c1">// groupName: undefined,</span>
 
     <span class="c1">// type: undefined,</span>
-    <span class="c1">// setValueCallback: undefined,</span>
-    <span class="c1">// setValueCallbackScope: undefined</span>
+    <span class="c1">// setValueCallback: undefined,  // or setButtonStateCallback: undefined</span>
+    <span class="c1">// setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -7971,7 +7985,7 @@
 <li><code>'radio'</code> : Set these buttons to radio.</li>
 </ul>
 </li>
-<li><code>setValueCallback</code> : Callback to set value of a button.<ul>
+<li><code>setValueCallback</code> or <code>setButtonStateCallback</code> : Callback to set value of a button.<ul>
 <li><code>undefined</code> : No callback, default value.</li>
 <li>A function object.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
@@ -8040,6 +8054,8 @@
 </ul>
 </li>
 </ul>
+<h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
+<p>The same as <a href="../ui-buttons/#showhide-button">for each button of buttons</a>.</p>
 <h3 id="for-each-button">For each button<a class="headerlink" href="#for-each-button" title="Permanent link">&para;</a></h3>
 <p>The same as <a href="../ui-buttons/#for-each-button">for each button of buttons</a>.</p>
 <h3 id="checkboxesradio">Checkboxes/radio<a class="headerlink" href="#checkboxesradio" title="Permanent link">&para;</a></h3>

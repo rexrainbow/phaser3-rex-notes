@@ -105,8 +105,8 @@ var buttons = scene.rexUI.add.fixWidthButtons({
     // groupName: undefined,
 
     // type: undefined,
-    // setValueCallback: undefined,
-    // setValueCallbackScope: undefined
+    // setValueCallback: undefined,  // or setButtonStateCallback: undefined
+    // setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined
 });
 ```
 
@@ -151,7 +151,7 @@ var buttons = scene.rexUI.add.fixWidthButtons({
     - `undefined` : No extra behavior, default value.
     - `'checkboxes'` : Set these buttons to checkboxes.
     - `'radio'` : Set these buttons to radio.
-- `setValueCallback` : Callback to set value of a button.
+- `setValueCallback` or `setButtonStateCallback` : Callback to set value of a button.
     - `undefined` : No callback, default value.
     - A function object.
         ```javascript
@@ -382,92 +382,12 @@ buttons.emitButtonClick(index);
 
 ### Show/hide button
 
-Hidden elements won't be counted when layouting. 
-Call `buttons.layout()`, or `topSizer.layout()` after show/hide any button.
-
-- Show button
-    ```javascript
-    buttons.showButton(index);
-    ```
-    - `index` : A number index, or a button game object.
-- Hide button.
-    ```javascript
-    buttons.hideButton(index);
-    ```
-    - `index` : A number index, or a button game object.
+The same as [for each button of buttons](ui-buttons.md#showhide-button).
 
 ### For each button
 
-```javascript
-buttons.forEachButtton(callback, scope);
-```
-
-- `callback` : 
-    ```javascript
-    function(button, index, buttonArray) {
-        // ...
-    }
-    ```
+The same as [for each button of buttons](ui-buttons.md#for-each-button).
 
 ### Checkboxes/radio
 
-- Configure buttons to checkboxes/radio
-    ```javascript
-    var buttons = scene.rexUI.add.fixWidthButtons({
-        buttons: [
-            buttonGameObject,
-            buttonGameObject,
-            // ...
-        ],
-    
-        type: 'checkboxes',
-        setValueCallback: function(button, value, previousValue) {
-            // ...
-        },
-        // setValueCallbackScope: undefined
-    });
-    ```
-    - `buttons` : Array of button game objects.
-        - Property `name` of each button game object will be used as a key in [`buttons.data`](gameobject.md#private-data)
-    - `type` : Set type to `'checkboxes'`, or `'radio'`.
-    - `setValueCallback` : Callback to set value of a button.
-        ```javascript
-        function(button, value, previousValue) {
-            // ...
-        }
-        ```
-        - `button` : Button game object.
-        - `value`: `true`, or `false`.
-        - `previousValue` : `true`, or `false`.
-    - State of a button : Stored in [`buttons.data`](gameobject.md#private-data)
-
-!!! note
-    Checkboxes and radio don't support add, remove, show, or hide methods.
-
-#### Checkboxes
-
-- Read state
-    ```javascript
-    var state = buttons.getData(key);
-    ```
-    - `key` : `name` property of a button game object. (i.e. `button.name`)
-    - `state` : `true`, or `false`
-- Set state
-    ```javascript
-    buttons.setData(key, state);
-    ```
-    - `key` : `name` property of a button game object. (i.e. `button.name`)
-    - `state` : `true`, or `false`
-
-#### Radio
-
-- Read state
-    ```javascript
-    var value = buttons.value;
-    ```
-    - `value` : `name` property of a button game object. (i.e. `button.name`)
-- Set state
-    ```javascript
-    buttons.value = key;
-    ```
-    - `key` : `name` property of a button game object. (i.e. `button.name`)
+The same as [checkboxes/radio of buttons](ui-buttons.md#checkboxesradio).

@@ -432,17 +432,16 @@ buttons.forEachButtton(callback, scope);
             // ...
         ],
     
-        type: 'checkboxes',
+        type: 'checkboxes', // or 'radio'
         setValueCallback: function(button, value, previousValue) {
             // ...
-        },
-        // setValueCallbackScope: undefined
+        }, // or setButtonStateCallback
     });
     ```
     - `buttons` : Array of button game objects.
         - Property `name` of each button game object will be used as a key in [`buttons.data`](gameobject.md#private-data)
     - `type` : Set type to `'checkboxes'`, or `'radio'`.
-    - `setValueCallback` : Callback to set value of a button.
+    - `setValueCallback` or `setButtonStateCallback` : Callback to set value of a button.
         ```javascript
         function(button, value) {
             // ...

@@ -6697,26 +6697,6 @@
     Checkboxes/radio
   </a>
   
-    <nav class="md-nav" aria-label="Checkboxes/radio">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#checkboxes" class="md-nav__link">
-    Checkboxes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#radio" class="md-nav__link">
-    Radio
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -7885,26 +7865,6 @@
     Checkboxes/radio
   </a>
   
-    <nav class="md-nav" aria-label="Checkboxes/radio">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#checkboxes" class="md-nav__link">
-    Checkboxes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#radio" class="md-nav__link">
-    Radio
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -8024,8 +7984,8 @@
     <span class="c1">// groupName: undefined,</span>
 
     <span class="c1">// type: undefined,</span>
-    <span class="c1">// setValueCallback: undefined,</span>
-    <span class="c1">// setValueCallbackScope: undefined</span>
+    <span class="c1">// setValueCallback: undefined,  // or setButtonStateCallback: undefined</span>
+    <span class="c1">// setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8088,7 +8048,7 @@
 <li><code>'radio'</code> : Set these buttons to radio.</li>
 </ul>
 </li>
-<li><code>setValueCallback</code> : Callback to set value of a button.<ul>
+<li><code>setValueCallback</code> or <code>setButtonStateCallback</code> : Callback to set value of a button.<ul>
 <li><code>undefined</code> : No callback, default value.</li>
 <li>A function object.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
@@ -8299,104 +8259,11 @@
 </code></pre></div></li>
 </ul>
 <h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
-<p>Hidden elements won't be counted when layouting. 
-Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
-<ul>
-<li>Show button
-    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">showButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
-</ul>
-</li>
-<li>Hide button.
-    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">hideButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
-</ul>
-</li>
-</ul>
+<p>The same as <a href="../ui-buttons/#showhide-button">for each button of buttons</a>.</p>
 <h3 id="for-each-button">For each button<a class="headerlink" href="#for-each-button" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">forEachButtton</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-<ul>
-<li><code>callback</code> : 
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">buttonArray</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
+<p>The same as <a href="../ui-buttons/#for-each-button">for each button of buttons</a>.</p>
 <h3 id="checkboxesradio">Checkboxes/radio<a class="headerlink" href="#checkboxesradio" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Configure buttons to checkboxes/radio
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthButtons</span><span class="p">({</span>
-    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-
-    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkboxes&#39;</span><span class="p">,</span>
-    <span class="nx">setValueCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// ...</span>
-    <span class="p">},</span>
-    <span class="c1">// setValueCallbackScope: undefined</span>
-<span class="p">});</span>
-</code></pre></div><ul>
-<li><code>buttons</code> : Array of button game objects.<ul>
-<li>Property <code>name</code> of each button game object will be used as a key in <a href="../gameobject/#private-data"><code>buttons.data</code></a></li>
-</ul>
-</li>
-<li><code>type</code> : Set type to <code>'checkboxes'</code>, or <code>'radio'</code>.</li>
-<li><code>setValueCallback</code> : Callback to set value of a button.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div><ul>
-<li><code>button</code> : Button game object.</li>
-<li><code>value</code>: <code>true</code>, or <code>false</code>.</li>
-<li><code>previousValue</code> : <code>true</code>, or <code>false</code>.</li>
-</ul>
-</li>
-<li>State of a button : Stored in <a href="../gameobject/#private-data"><code>buttons.data</code></a></li>
-</ul>
-</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Checkboxes and radio don't support add, remove, show, or hide methods.</p>
-</div>
-<h4 id="checkboxes">Checkboxes<a class="headerlink" href="#checkboxes" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Read state
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
-<li><code>state</code> : <code>true</code>, or <code>false</code></li>
-</ul>
-</li>
-<li>Set state
-    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">state</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
-<li><code>state</code> : <code>true</code>, or <code>false</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="radio">Radio<a class="headerlink" href="#radio" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Read state
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
-</code></pre></div><ul>
-<li><code>value</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
-</ul>
-</li>
-<li>Set state
-    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
-</code></pre></div><ul>
-<li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
-</ul>
-</li>
-</ul>
+<p>The same as <a href="../ui-buttons/#checkboxesradio">checkboxes/radio of buttons</a>.</p>
                 
               
               
