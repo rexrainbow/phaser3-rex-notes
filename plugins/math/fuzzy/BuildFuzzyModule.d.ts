@@ -1,4 +1,4 @@
-import { FuzzyModule } from './FuzzyModule';
+import FuzzyModule from './FuzzyModule';
 export default BuildFuzzyModule;
 
 declare namespace BuildFuzzyModule {
