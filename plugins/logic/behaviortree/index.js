@@ -7,9 +7,9 @@ import Runner from './actions/Runner.js';
 import Succeeder from './actions/Succeeder.js';
 import Wait from './actions/Wait.js';
 
-import MemPriority from './composites/MemPriority.js';
+import MemSelector from './composites/MemSelector.js';
 import MemSequence from './composites/MemSequence.js';
-import Priority from './composites/Priority.js';
+import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
 
 import Action from './core/Action.js';
@@ -43,9 +43,9 @@ export {
     Runner,
     Succeeder,
     Wait,
-    MemPriority,
+    MemSelector,
     MemSequence,
-    Priority,
+    Selector,
     Sequence,
     Action,
     BaseNode,

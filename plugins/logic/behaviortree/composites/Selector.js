@@ -1,11 +1,11 @@
 import Composite from '../core/Composite.js';
 import { FAILURE } from '../constants.js';
 
-class Priority extends Composite {
+class Selector extends Composite {
 
     constructor({ children = [] } = {}) {
         super({
-            name: 'Priority',
+            name: 'Selector',
             children
         });
     }
@@ -23,4 +23,4 @@ class Priority extends Composite {
     }
 };
 
-export default Priority;
+export default Selector;

@@ -1,11 +1,11 @@
-import MemPriority from './MemPriority.js';
+import MemSelector from './MemSelector.js';
 import MemSequence from './MemSequence.js';
-import Priority from './Priority.js';
+import Selector from './Selector.js';
 import Sequence from './Sequence.js';
 
 export {
-    MemPriority,
+    MemSelector,
     MemSequence,
-    Priority,
+    Selector,
     Sequence
 }

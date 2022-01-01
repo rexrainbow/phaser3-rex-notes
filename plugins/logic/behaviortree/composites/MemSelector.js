@@ -1,12 +1,12 @@
 import Composite from '../core/Composite.js';
 import { FAILURE, RUNNING } from '../constants.js';
 
-class MemPriority extends Composite {
+class MemSelector extends Composite {
 
     constructor({ children = [] } = {}) {
         super({
             children,
-            name: 'MemPriority',
+            name: 'MemSelector',
         });
     }
 
@@ -32,4 +32,4 @@ class MemPriority extends Composite {
     }
 };
 
-export default MemPriority;
+export default MemSelector;

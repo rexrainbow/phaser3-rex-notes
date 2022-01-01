@@ -6,9 +6,9 @@ import {
     Action
 } from './core/Factory.js';
 import {
-    MemPriority,
+    MemSelector,
     MemSequence,
-    Priority,
+    Selector,
     Sequence
 } from './composites/Factory.js';
 import {
@@ -36,9 +36,9 @@ export {
     Action,
 
     // Composites
-    MemPriority,
+    MemSelector,
     MemSequence,
-    Priority,
+    Selector,
     Sequence,
     Inverter,
 
