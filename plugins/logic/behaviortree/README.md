@@ -18,17 +18,18 @@ This library include the following core structures...
 ## Nodes
 
 - Composite Nodes: 
-    - Sequence
-    - Selector
-    - MemSequence
-    - MemSelector
-- Decorators:
-    - Inverter
-    - Limiter
-    - MaxTime
-    - Repeater
+    - Selector : MemSelector
+    - Sequence : MemSequence
+    - [TODO] SimpleParallel
+- Decorators: Abort
+    - [TODO] Condition : From Blackboard comparision
+    - [TODO] Success
+    - [TODO] MaxTime : Time from Blackboard
+    - [TODO] Repeater : Max loop from Blackboard
     - RepeaterUntilFailure
     - RepeaterUntilSuccess
+    - Inverter
+    - Limiter
 - Actions:
     - Succeeder
     - Failer

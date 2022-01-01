@@ -90,7 +90,9 @@ class BehaviorTree {
         data.nodes = {};
         data.custom_nodes = [];
 
-        if (!this.root) return data;
+        if (!this.root) {
+            return data;
+        }
 
         var stack = [this.root];
         while (stack.length > 0) {

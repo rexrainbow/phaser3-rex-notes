@@ -7,8 +7,6 @@ import Runner from './actions/Runner.js';
 import Succeeder from './actions/Succeeder.js';
 import Wait from './actions/Wait.js';
 
-import MemSelector from './composites/MemSelector.js';
-import MemSequence from './composites/MemSequence.js';
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
 
@@ -43,8 +41,6 @@ export {
     Runner,
     Succeeder,
     Wait,
-    MemSelector,
-    MemSequence,
     Selector,
     Sequence,
     Action,

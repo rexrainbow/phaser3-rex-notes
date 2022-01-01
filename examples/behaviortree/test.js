@@ -1,7 +1,7 @@
 import 'phaser';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 
-const Action = RexPlugins.Behavior3Js.Action;
+const Action = RexPlugins.BehaviorTree.Action;
 class MyActionNode extends Action {
     constructor({ i = 0 } = {}) {
         super({
@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
     create() {
         var btAdd = this.plugins.get('rexBT').add;
         var tree = btAdd.behaviorTree();
-        tree.root = btAdd.memSequence({
+        tree.root = btAdd.sequence({
             children: [
                 new MyActionNode({ i: 0 }),
                 btAdd.wait({ milliseconds: 3 }),

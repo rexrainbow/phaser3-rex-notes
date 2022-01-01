@@ -6,10 +6,8 @@ import {
     Action
 } from './core/Factory.js';
 import {
-    MemSelector,
-    MemSequence,
     Selector,
-    Sequence
+    Sequence,
 } from './composites/Factory.js';
 import {
     Inverter,
@@ -36,8 +34,6 @@ export {
     Action,
 
     // Composites
-    MemSelector,
-    MemSequence,
     Selector,
     Sequence,
     Inverter,

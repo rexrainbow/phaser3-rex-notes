@@ -23,11 +23,11 @@ ObjectFactory.register('wait', function (config) {
     return new Wait(config);
 });
 
-SetValue(window, 'RexPlugins.Behavior3Js.Errror', Error);
-SetValue(window, 'RexPlugins.Behavior3Js.Failer', Failer);
-SetValue(window, 'RexPlugins.Behavior3Js.Failer', Runner);
-SetValue(window, 'RexPlugins.Behavior3Js.Failer', Succeeder);
-SetValue(window, 'RexPlugins.Behavior3Js.Wait', Wait);
+SetValue(window, 'RexPlugins.BehaviorTree.Errror', Error);
+SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);
+SetValue(window, 'RexPlugins.BehaviorTree.Failer', Runner);
+SetValue(window, 'RexPlugins.BehaviorTree.Failer', Succeeder);
+SetValue(window, 'RexPlugins.BehaviorTree.Wait', Wait);
 
 export {
     Error,

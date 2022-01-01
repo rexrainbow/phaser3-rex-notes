@@ -27,12 +27,12 @@ ObjectFactory.register('repeater', function (config) {
     return new Repeater(config);
 });
 
-SetValue(window, 'RexPlugins.Behavior3Js.Inverter', Inverter);
-SetValue(window, 'RexPlugins.Behavior3Js.Limiter', Limiter);
-SetValue(window, 'RexPlugins.Behavior3Js.Failer', MaxTime);
-SetValue(window, 'RexPlugins.Behavior3Js.Failer', RepeatUntilFailure);
-SetValue(window, 'RexPlugins.Behavior3Js.RepeatUntilSuccess', RepeatUntilSuccess);
-SetValue(window, 'RexPlugins.Behavior3Js.Repeater', Repeater);
+SetValue(window, 'RexPlugins.BehaviorTree.Inverter', Inverter);
+SetValue(window, 'RexPlugins.BehaviorTree.Limiter', Limiter);
+SetValue(window, 'RexPlugins.BehaviorTree.Failer', MaxTime);
+SetValue(window, 'RexPlugins.BehaviorTree.Failer', RepeatUntilFailure);
+SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilSuccess', RepeatUntilSuccess);
+SetValue(window, 'RexPlugins.BehaviorTree.Repeater', Repeater);
 
 export {
     Inverter,

@@ -14,11 +14,11 @@ ObjectFactory.register('blackboard', function (config) {
     return new Blackboard(config);
 });
 
-SetValue(window, 'RexPlugins.Behavior3Js.BehaviorTree', BehaviorTree);
-SetValue(window, 'RexPlugins.Behavior3Js.Blackboard', Blackboard);
-SetValue(window, 'RexPlugins.Behavior3Js.Composite', Composite);
-SetValue(window, 'RexPlugins.Behavior3Js.Decorator', Decorator);
-SetValue(window, 'RexPlugins.Behavior3Js.Action', Action);
+SetValue(window, 'RexPlugins.BehaviorTree.BehaviorTree', BehaviorTree);
+SetValue(window, 'RexPlugins.BehaviorTree.Blackboard', Blackboard);
+SetValue(window, 'RexPlugins.BehaviorTree.Composite', Composite);
+SetValue(window, 'RexPlugins.BehaviorTree.Decorator', Decorator);
+SetValue(window, 'RexPlugins.BehaviorTree.Action', Action);
 
 export {
     BehaviorTree,

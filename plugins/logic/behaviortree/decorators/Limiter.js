@@ -32,8 +32,9 @@ class Limiter extends Decorator {
         if (i < this.maxLoop) {
             var status = this.child._execute(tick);
 
-            if (status == SUCCESS || status == FAILURE)
+            if (status == SUCCESS || status == FAILURE) {
                 tick.blackboard.set('i', i + 1, tick.tree.id, this.id);
+            }
 
             return status;
         }
