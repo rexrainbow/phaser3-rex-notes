@@ -5,33 +5,34 @@
 %%
 
 \s+                   /* skip whitespace */
-[0-9]+("."[0-9]+)?\b         return 'NUMBER'
-\b0x[0-9A-Fa-f]+\b           return 'HEXNUMBER'
-"*"                          return '*'
-"/"                          return '/'
-"-"                          return '-'
-"+"                          return '+'
-"^"                          return '^'
-"%"                          return '%'
-">="                         return ">="
-"<="                         return "<="
-">"                          return '>'
-"<"                          return '<'
-"=="                         return "=="
-"!="                         return "!="
-"||"                         return "||"
-"&&"                         return "&&"
-"?"                          return "?"
-":"                          return ":"
-"("                          return '('
-")"                          return ')'
-","                          return ','
-"."                          return '.'
-'true'                       return 'true'
-'false'                      return 'false'
-[a-zA-Z]+("_"[0-9a-zA-Z]+)?  return 'NAME'
-<<EOF>>                      return 'EOF'
-.                            return 'INVALID'
+[0-9]+("."[0-9]+)?\b                    return 'NUMBER'
+\b0x[0-9A-Fa-f]+\b                      return 'HEXNUMBER'
+"*"                                     return '*'
+"/"                                     return '/'
+"-"                                     return '-'
+"+"                                     return '+'
+"^"                                     return '^'
+"%"                                     return '%'
+">="                                    return ">="
+"<="                                    return "<="
+">"                                     return '>'
+"<"                                     return '<'
+"=="                                    return "=="
+"!="                                    return "!="
+"||"                                    return "||"
+"&&"                                    return "&&"
+"?"                                     return "?"
+":"                                     return ":"
+"("                                     return '('
+")"                                     return ')'
+","                                     return ','
+"."                                     return '.'
+'true'                                  return 'true'
+'false'                                 return 'false'
+[a-zA-Z]+("_"[0-9a-zA-Z]+)?             return 'NAME'
+\"(\\.|[^\"\\])*\"|\'(\\.|[^\'\\])*\'   return 'QUOTED_STRING'
+<<EOF>>                                 return 'EOF'
+.                                       return 'INVALID'
 
 /lex
 
@@ -44,15 +45,23 @@
         if (dotMode === undefined) {
             dotMode = false;
         }
-        var method = self[(dotMode)? "getDotProperty" : "getProperty"](ctx, name);
-        if (method === undefined) {
-            method = self.getProperty(ctx, 'defaultHandler');
+
+        var callback, scope;
+        if (dotMode) {
+            var names = name.split('.');
+            var callbackName = names.pop();
+            scope = self.getDotProperty(ctx, names);
+            callback = scope[callbackName];
+        } else {
+            callback = self.getProperty(ctx, name);
+            scope = self;
         }
 
         if (args) {
             args = args.map(function(arg){ return runFn(arg, ctx); });
         }
-        return method.apply(self, args);
+
+        return callback.apply(scope, args);
     }
 %}
 
@@ -175,6 +184,8 @@ e
         {
             $$ = function(ctx) { return runMethod(yy.parser, ctx, $dot_name, $expression_list, true); }
         }
+    | QUOTED_STRING
+        { $$ = yytext.slice(1,-1); }
     | NUMBER
         { $$ = Number(yytext); }
     | HEXNUMBER

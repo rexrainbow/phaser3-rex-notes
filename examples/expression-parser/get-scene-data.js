@@ -11,15 +11,15 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.data.set('coin', 3);
         var parser = this.plugins.get('rexExpressionParser').add();
 
         var expression = "scene.data.get('coin') > 0";
         var f = parser.compile(expression);
-        
+
         var context = {
             scene: this
-        }        
+        }
+        this.data.set('coin', 3);
         console.log(f(context));
     }
 
