@@ -9,6 +9,7 @@ import Wait from './actions/Wait.js';
 
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
+import SimpleParallel from './composites/SimpleParallel.js';
 
 import Action from './core/Action.js';
 import BaseNode from './core/BaseNode.js';
@@ -43,6 +44,7 @@ export {
     Wait,
     Selector,
     Sequence,
+    SimpleParallel,
     Action,
     BaseNode,
     BehaviorTree,

@@ -10,7 +10,7 @@ class Composite extends BaseNode {
             title,
             properties,
         });
-        this.children = (children).slice(0);
+        this.children = children.slice(0);
     }
 
 };

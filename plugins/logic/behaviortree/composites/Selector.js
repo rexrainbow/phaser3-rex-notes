@@ -15,8 +15,8 @@ class Selector extends Composite {
     }
 
     tick(tick) {
-        var child = tick.blackboard.get('runningChild', tick.tree.id, this.id);
-        for (var i = child; i < this.children.length; i++) {
+        var childIndex = tick.blackboard.get('runningChild', tick.tree.id, this.id);
+        for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
             var status = this.children[i]._execute(tick);
 
             if (status !== FAILURE) {
