@@ -5,7 +5,7 @@ var GetProperty = function (context, key, defaultValue, dotMode) {
 
     if (!context || typeof (context) === 'number' || typeof (context) === 'string') {
         return defaultValue;
-    } else if (HasProperty(context, key)) {
+    } else if (key in context) {
         return context[key];
     } else if (dotMode &&
         ((key.indexOf('.') !== -1) || (Array.isArray(key)))
@@ -15,7 +15,7 @@ var GetProperty = function (context, key, defaultValue, dotMode) {
         //  Use for loop here so we can break early
         for (var i = 0; i < keys.length; i++) {
             var key = keys[i];
-            if (HasProperty(value, key)) {
+            if (key in value) {
                 value = value[key];
             }
             else {
@@ -28,10 +28,6 @@ var GetProperty = function (context, key, defaultValue, dotMode) {
     } else {
         return defaultValue;
     }
-}
-
-var HasProperty = function (obj, name) {
-    return obj.hasOwnProperty(name) || obj[name];
 }
 
 export default GetProperty;
