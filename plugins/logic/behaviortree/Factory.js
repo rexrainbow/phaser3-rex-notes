@@ -10,6 +10,7 @@ import {
     Sequence,
 } from './composites/Factory.js';
 import {
+    Bypass,
     Inverter,
     Limiter,
     MaxTime,
@@ -36,9 +37,10 @@ export {
     // Composites
     Selector,
     Sequence,
-    Inverter,
 
     // Decorators
+    Bypass,
+    Inverter,
     Limiter,
     MaxTime,
     RepeatUntilFailure,

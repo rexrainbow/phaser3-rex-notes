@@ -1,3 +1,4 @@
+import Bypass from './Bypass.js';
 import Inverter from './Inverter.js';
 import Limiter from './Limiter.js';
 import MaxTime from './MaxTime.js';
@@ -7,7 +8,9 @@ import Repeater from './Repeater.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
 
-
+ObjectFactory.register('bypass', function (config) {
+    return new Bypass();
+});
 ObjectFactory.register('inverter', function (config) {
     return new Inverter();
 });
@@ -27,6 +30,7 @@ ObjectFactory.register('repeater', function (config) {
     return new Repeater(config);
 });
 
+SetValue(window, 'RexPlugins.BehaviorTree.Bypass', Bypass);
 SetValue(window, 'RexPlugins.BehaviorTree.Inverter', Inverter);
 SetValue(window, 'RexPlugins.BehaviorTree.Limiter', Limiter);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', MaxTime);
@@ -35,6 +39,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilSuccess', RepeatUntilSucces
 SetValue(window, 'RexPlugins.BehaviorTree.Repeater', Repeater);
 
 export {
+    Bypass,
     Inverter,
     Limiter,
     MaxTime,

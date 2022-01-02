@@ -21,11 +21,11 @@ This library include the following core structures...
     - Selector : MemSelector
     - Sequence : MemSequence
     - [TODO] SimpleParallel
-- Decorators: Abort
-    - [TODO] Condition : From Blackboard comparision
-    - [TODO] Success
-    - [TODO] MaxTime : Time from Blackboard
-    - [TODO] Repeater : Max loop from Blackboard
+- Decorators: *Abort*
+    - [TODO] Condition : From expression
+    - Bypass
+    - [TODO] MaxTime : Time from expression
+    - [TODO] Repeater : Max loop from expression
     - RepeaterUntilFailure
     - RepeaterUntilSuccess
     - Inverter
@@ -36,3 +36,39 @@ This library include the following core structures...
     - Error
     - Runner
     - Wait
+
+## Logic mapping
+
+### If
+
+```
+if ConditionA
+    TaskA
+else if ConditionB
+    TaskB
+else
+    TaskC
+```
+
+Map to
+
+- Selector
+    - ConditionA
+        - TaskA
+    - ConditionB
+        - TaskB   
+    - Bypass
+        - TaskC
+
+### While
+
+```
+while ConditionA
+    TaskA
+```
+
+Map to
+
+- RepeaterUntilFailure
+    - ConditionA
+        - TaskA
