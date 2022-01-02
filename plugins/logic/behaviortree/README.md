@@ -20,8 +20,8 @@ This library include the following core structures...
 - Composite Nodes: 
     - Selector : MemSelector
     - Sequence : MemSequence
-    - [TODO] SimpleParallel
-- Decorators: *Abort*
+    - SimpleParallel
+- Decorators: [TODO] Abort children
     - [TODO] Condition : From expression
     - Bypass
     - [TODO] MaxTime : Time from expression
