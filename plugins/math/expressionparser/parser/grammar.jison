@@ -70,7 +70,7 @@
         }
 
         if (callback == null) {
-            callback = self.getProperty(ctx, 'defaultHandler', self.defaultHandler);
+            callback = self.getProperty(ctx, 'defaultHandler');
             scope = self;
         }
 

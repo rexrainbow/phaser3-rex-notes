@@ -1633,7 +1633,7 @@
         }
 
         if (callback == null) {
-          callback = self.getProperty(ctx, 'defaultHandler', self.defaultHandler);
+          callback = self.getProperty(ctx, 'defaultHandler');
           scope = self;
         }
 
@@ -2157,7 +2157,7 @@
           return value;
         }
 
-        return FormulaParser.GetProperty(this, name, defaultValue, false);
+        return GetProperty(this, name, defaultValue, false);
       }
     }, {
       key: "getDotProperty",
@@ -2168,7 +2168,7 @@
           return value;
         }
 
-        return FormulaParser.GetProperty(this, name, defaultValue, true);
+        return GetProperty(this, name, defaultValue, true);
       }
     }, {
       key: "_add",
