@@ -1,4 +1,8 @@
 var GetProperty = function (context, key, defaultValue, dotMode) {
+    if (dotMode === undefined) {
+        dotMode = true;
+    }
+
     if (!context || typeof (context) === 'number' || typeof (context) === 'string') {
         return defaultValue;
     } else if (HasProperty(context, key)) {

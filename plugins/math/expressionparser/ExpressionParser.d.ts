@@ -22,5 +22,11 @@ declare class ExpressionParser {
         context: object
     ): number;
 
+    static GetProperty(
+        context: Object,
+        key: string | string[],
+        defaultValue: any,
+        dotMode?: boolean
+    ): any;
 
 }

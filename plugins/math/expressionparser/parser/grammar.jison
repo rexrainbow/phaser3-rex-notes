@@ -57,6 +57,11 @@
             scope = self;
         }
 
+        if (callback == null) {
+            callback = self.getProperty(ctx, 'defaultHandler', self.defaultHandler);
+            scope = self;
+        }
+
         if (args) {
             args = args.map(function(arg){ return runFn(arg, ctx); });
         }

@@ -7,7 +7,7 @@ class FormulaParser extends parser.Parser {
         if (value !== undefined) {
             return value;
         }
-        return GetProperty(this, name, defaultValue, false);
+        return FormulaParser.GetProperty(this, name, defaultValue, false);
     }
 
     getDotProperty(context, name, defaultValue) {
@@ -15,7 +15,11 @@ class FormulaParser extends parser.Parser {
         if (value !== undefined) {
             return value;
         }
-        return GetProperty(this, name, defaultValue, true);
+        return FormulaParser.GetProperty(this, name, defaultValue, true);
+    }
+
+    static GetProperty(context, key, defaultValue, dotMode) {
+        return GetProperty(context, key, defaultValue, dotMode);
     }
 
     _add(a, b) {

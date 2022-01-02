@@ -2094,6 +2094,10 @@
   parser_1.main;
 
   var GetProperty = function GetProperty(context, key, defaultValue, dotMode) {
+    if (dotMode === undefined) {
+      dotMode = true;
+    }
+
     if (!context || typeof context === 'number' || typeof context === 'string') {
       return defaultValue;
     } else if (HasProperty(context, key)) {
@@ -2143,7 +2147,7 @@
           return value;
         }
 
-        return GetProperty(this, name, defaultValue, false);
+        return FormulaParser.GetProperty(this, name, defaultValue, false);
       }
     }, {
       key: "getDotProperty",
@@ -2154,7 +2158,7 @@
           return value;
         }
 
-        return GetProperty(this, name, defaultValue, true);
+        return FormulaParser.GetProperty(this, name, defaultValue, true);
       }
     }, {
       key: "_add",
@@ -2229,6 +2233,11 @@
         }
 
         return input(data);
+      }
+    }], [{
+      key: "GetProperty",
+      value: function GetProperty$1(context, key, defaultValue, dotMode) {
+        return GetProperty(context, key, defaultValue, dotMode);
       }
     }]);
 
