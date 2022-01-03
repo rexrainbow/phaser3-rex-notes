@@ -60,7 +60,7 @@ class BehaviorTree {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
         }
 
-        /* CREATE A TICK OBJECT */
+        /* RESET TICK OBJECT */
         var tick = this._ticker;
         tick
             .setTarget(target).setBlackBoard(blackboard)

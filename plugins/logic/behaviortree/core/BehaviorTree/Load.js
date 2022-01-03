@@ -29,8 +29,7 @@ var Load = function (data, names) {
             Cls = Actions[spec.name];
         } else {
             // Invalid node name
-            throw new EvalError('BehaviorTree.load: Invalid node name + "' +
-                spec.name + '".');
+            throw new EvalError(`BehaviorTree.load: Invalid node name "${spec.name}".`);
         }
 
         node = new Cls(spec.properties);
