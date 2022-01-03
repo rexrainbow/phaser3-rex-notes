@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     create() {
         var parser = this.plugins.get('rexExpressionParser').add();
 
-        var expression = "coin > 0";
+        var expression = 'coin > 0';
         var f = parser.compile(expression);
 
         var data = this.data;
@@ -27,6 +27,10 @@ class Demo extends Phaser.Scene {
         })
         this.data.set('coin', 3);
         console.log(f(context));
+
+        // Test dot-notation
+        this.data.set('data', { value: 10 });
+        console.log(parser.exec('data.value', context));
     }
 
     update() {
