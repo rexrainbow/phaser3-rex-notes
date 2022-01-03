@@ -47,14 +47,6 @@ class Blackboard {
         var memory = this._getMemory(treeScope, nodeScope);
         return memory[key];
     }
-
-    clearTreeData(treeScope) {
-        if (this._treeMemory.hasOwnProperty(treeScope)) {
-            delete this._treeMemory[treeScope];
-        }
-
-        return this;
-    }
 };
 
 export default Blackboard;
