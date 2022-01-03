@@ -10,6 +10,7 @@ Parser is generated from [jison](https://github.com/zaach/jison)
 
 - [Dot-notation](https://codepen.io/rexrainbow/pen/eYBxabb)
 - [Custom method](https://codepen.io/rexrainbow/pen/bGBzyZY)
+- [Proxy as context](https://codepen.io/rexrainbow/pen/Bawreqm)
 
 ## Usage
 
@@ -153,3 +154,21 @@ var value = parser.exec(f, context);
     }
     var value = parser.exec('randomInt(a, b)', context);
     ```
+
+### Proxy as context
+
+[Proxy](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Proxy) 
+with `has` and `get` handlers could be a context.
+
+For example, proxy scene data :
+
+```javascript
+var context = new Proxy({}, {
+    has(target, key) {
+        return scene.data.has(key);
+    },
+    get: function (target, prop) {
+        return scene.data.get(prop);
+    }
+})
+```
