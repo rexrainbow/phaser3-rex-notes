@@ -40,15 +40,15 @@ class Demo extends Phaser.Scene {
         var nodes = tree.getNodes();
         debugger
 
-        var blackBard = btAdd.blackboard();
+        var blackboard = btAdd.blackboard();
         var state;
         do {
-            state = tree.tick(null, blackBard);
+            state = tree.tick(blackboard);
             console.log(state);
         } while (state === 3)
 
         do {
-            state = tree.tick(null, blackBard);
+            state = tree.tick(blackboard);
             console.log(state);
         } while (state === 3)
     }

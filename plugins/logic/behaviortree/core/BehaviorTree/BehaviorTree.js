@@ -18,8 +18,6 @@ class BehaviorTree {
 
         this.properties = {};
 
-        this._ticker = new Tick();
-
         this._root = null;
     }
 
@@ -55,15 +53,16 @@ class BehaviorTree {
         return out;
     }
 
-    tick(target, blackboard) {
+    tick(blackboard, target) {
         if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an instance of Blackboard';
         }
 
-        /* RESET TICK OBJECT */
-        var tick = this._ticker;
+        /* CREATE TICK OBJECT */
+        // TODO: Reuse tick object
+        var tick = new Tick();
         tick
-            .setTarget(target).setBlackBoard(blackboard)
+            .setBlackBoard(blackboard).setTarget(target)
             .setTree(this)
             .reset();
 
