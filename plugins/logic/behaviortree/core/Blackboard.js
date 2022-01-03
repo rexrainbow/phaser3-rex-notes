@@ -10,8 +10,8 @@ class Blackboard {
             this._treeMemory[treeScope] = {
                 'nodeMemory': {},
                 'openNodes': [],
-                'traversalDepth': 0,
-                'traversalCycle': 0,
+                'traversalDepth': 0,  // TODO
+                'traversalCycle': 0,  // TODO
             };
         }
         return this._treeMemory[treeScope];

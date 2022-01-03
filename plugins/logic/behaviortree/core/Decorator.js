@@ -13,6 +13,14 @@ class Decorator extends BaseNode {
         this.child = child;
     }
 
+    _close(tick) {
+        super._close(tick);
+
+        var childNode = this.child;
+        if (childNode.getOpenState(tick)) {
+            childNode._close(tick);
+        }
+    }
 };
 
 export default Decorator;

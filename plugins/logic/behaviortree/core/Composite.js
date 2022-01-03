@@ -13,6 +13,17 @@ class Composite extends BaseNode {
         this.children = children.slice(0);
     }
 
+    _close(tick) {
+        super._close(tick);
+
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            var childNode = this.children[i];
+            if (childNode.getOpenState(tick)) {
+                childNode._close(tick);
+            }
+        }
+    }
+
 };
 
 export default Composite;

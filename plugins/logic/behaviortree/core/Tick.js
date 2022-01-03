@@ -1,3 +1,5 @@
+import RemoveItem from "../../../utils/array/Remove.js";
+
 class Tick {
 
     constructor() {
@@ -5,41 +7,54 @@ class Tick {
 
         this.tree = null;
 
-        this.debug = null;
-
         this.target = null;
 
         this.blackboard = null;
 
         // updated during the tick signal
 
-        this._openNodes = [];
+        this._openNodes = [];  // Open nodes of current tick
 
         this._nodeCount = 0;
+    }
+
+    setTree(tree) {
+        this.tree = tree;
+        return this;
+    }
+
+    setTarget(target) {
+        this.target = target;
+        return this;
+    }
+
+    setBlackBoard(blackboard) {
+        this.blackboard = blackboard;
+        return this;
+    }
+
+    reset() {
+        this._openNodes.length = 0;
+        this._nodeCount = 0;
+        return this;
     }
 
     _enterNode(node) {
         this._nodeCount++;
         this._openNodes.push(node);
-
-        // TODO: call debug here
     }
 
     _openNode(node) {
-        // TODO: call debug here
     }
 
     _tickNode(node) {
-        // TODO: call debug here
     }
 
     _closeNode(node) {
-        // TODO: call debug here
-        this._openNodes.pop();
+        RemoveItem(this._openNodes, node);
     }
 
     _exitNode(node) {
-        // TODO: call debug here
     }
 };
 

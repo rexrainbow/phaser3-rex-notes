@@ -23,7 +23,7 @@ export default class BaseNode {
         this._enter(tick);
 
         // OPEN
-        if (!tick.blackboard.get('isOpen', tick.tree.id, this.id)) {
+        if (!this.getOpenState(tick)) {
             this._open(tick);
         }
 
@@ -48,7 +48,7 @@ export default class BaseNode {
 
     _open(tick) {
         tick._openNode(this);
-        tick.blackboard.set('isOpen', true, tick.tree.id, this.id);
+        this.setOpenState(tick, true);
         this.open(tick);
     }
 
@@ -59,7 +59,7 @@ export default class BaseNode {
 
     _close(tick) {
         tick._closeNode(this);
-        tick.blackboard.set('isOpen', false, tick.tree.id, this.id);
+        this.setOpenState(tick, false);
         this.close(tick);
     }
 
@@ -77,6 +77,19 @@ export default class BaseNode {
     close(tick) { }
 
     exit(tick) { }
+
+    // open state of this node
+    getOpenState(tick) {
+        return tick.blackboard.get('isOpen', tick.tree.id, this.id);
+    }
+
+    setOpenState(tick, state) {
+        if (state === undefined) {
+            state = true;
+        }
+        tick.blackboard.set('isOpen', state, tick.tree.id, this.id);
+        return this;
+    }
 
     // Return state value
     get SUCCESS() {
