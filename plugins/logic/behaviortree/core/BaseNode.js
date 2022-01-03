@@ -5,6 +5,8 @@ export default class BaseNode {
 
     constructor({ category, name, title, description, properties } = {}) {
 
+        this.parent = null;
+
         this.id = CreateUUID();
 
         this.category = category || '';
@@ -16,6 +18,20 @@ export default class BaseNode {
         this.description = description || '';
 
         this.properties = properties || {};
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    getChildren(out) {
+        if (out === undefined) {
+            out = [];
+        }
+
+        out.push(this);
+        return out;
     }
 
     _execute(tick) {

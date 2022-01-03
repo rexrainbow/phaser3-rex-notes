@@ -10,7 +10,26 @@ class Decorator extends BaseNode {
             title,
             properties,
         });
-        this.child = child;
+
+        this.child = null;
+        if (child) {
+            this.addChild(child);
+        }
+    }
+
+    addChild(node) {
+        this.child = node;
+        node.setParent(this);
+        return this;
+    }
+
+    getChildren(out) {
+        super.getChildren(out);
+
+        if (this.child) {
+            this.child.getChildren(out);
+        }
+        return out;
     }
 
     _close(tick) {

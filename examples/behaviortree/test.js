@@ -37,6 +37,7 @@ class Demo extends Phaser.Scene {
             ]
         });
         var result = tree.dump();
+        var nodes = tree.getNodes();
         debugger
 
         var blackBard = btAdd.blackboard();

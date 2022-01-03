@@ -10,7 +10,27 @@ class Composite extends BaseNode {
             title,
             properties,
         });
-        this.children = children.slice(0);
+
+        this.children = [];
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            this.addChild(children[i]);
+        }
+    }
+
+    addChild(node) {
+        this.children.push(node);
+        node.setParent(this);
+        return this;
+    }
+
+    getChildren(out) {
+        super.getChildren(out);
+
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            this.children[i].getChildren(out);
+        }
+
+        return out;
     }
 
     _close(tick) {

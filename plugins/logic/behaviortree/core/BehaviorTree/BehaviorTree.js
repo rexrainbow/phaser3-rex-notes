@@ -1,3 +1,4 @@
+import { TREE } from '../../constants.js'
 import CreateUUID from '../../utils/CreateUUID.js';
 import Load from './Load.js';
 import Dump from './Dump.js';
@@ -9,13 +10,47 @@ class BehaviorTree {
 
         this.id = CreateUUID();
 
+        this.category = TREE;
+
         this.title = '';
 
         this.description = '';
 
         this.properties = {};
 
-        this.root = null;
+        this._root = null;
+    }
+
+    addChild(node) {
+        this.root = node;
+        return this;
+    }
+
+    get root() {
+        return this._root;
+    }
+
+    set root(node) {
+        if (node) {
+            this._root = node;
+            node.setParent(this);
+        } else {
+            if (this._root) {
+                this._root.setParent(null);
+            }
+            this._root = null;
+        }
+    }
+
+    getNodes(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        if (this.root) {
+            this.root.getChildren(out);
+        }
+
+        return out;
     }
 
     tick(target, blackboard) {
@@ -39,6 +74,7 @@ class BehaviorTree {
 
         return state;
     }
+
 };
 
 var Methods = {
