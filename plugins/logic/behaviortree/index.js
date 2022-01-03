@@ -13,7 +13,7 @@ import SimpleParallel from './composites/SimpleParallel.js';
 
 import Action from './core/Action.js';
 import BaseNode from './core/BaseNode.js';
-import BehaviorTree from './core/BehaviorTree.js';
+import BehaviorTree from './core/BehaviorTree/BehaviorTree.js';
 import Blackboard from './core/Blackboard.js';
 import Composite from './core/Composite.js';
 import Condition from './core/Condition.js';

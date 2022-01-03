@@ -1,4 +1,4 @@
-import BehaviorTree from './BehaviorTree.js';
+import BehaviorTree from './BehaviorTree/BehaviorTree.js';
 import Blackboard from './Blackboard.js';
 import Composite from './Composite.js';
 import Decorator from './Decorator.js';

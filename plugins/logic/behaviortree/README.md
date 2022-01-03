@@ -73,6 +73,11 @@ Map to
     - ConditionA
         - TaskA
 
+### Tick
+
+- Why create new Tick object in each `tree.tick()`?
+- [TODO] Get current time one time in each `tree.tick()`.
+
 ### Expression
 
 TODO: math\ExpressionParser
