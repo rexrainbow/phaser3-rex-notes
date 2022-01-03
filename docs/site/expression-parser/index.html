@@ -6036,6 +6036,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#proxy-as-context" class="md-nav__link">
+    Proxy as context
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7753,6 +7760,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#proxy-as-context" class="md-nav__link">
+    Proxy as context
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7788,6 +7802,7 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/eYBxabb">Dot-notation</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/bGBzyZY">Custom method</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/Bawreqm">Proxy as context</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/expression-parser">Sample code</a></p>
@@ -7911,6 +7926,19 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">&#39;randomInt(a, b)&#39;</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="proxy-as-context">Proxy as context<a class="headerlink" href="#proxy-as-context" title="Permanent link">&para;</a></h3>
+<p><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a> 
+with <code>has</code> and <code>get</code> handlers could be a context.</p>
+<p>For example, proxy scene data :</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="ow">new</span> <span class="nb">Proxy</span><span class="p">({},</span> <span class="p">{</span>
+    <span class="nx">has</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">prop</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
                 
               
               
