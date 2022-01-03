@@ -16,7 +16,6 @@ import BaseNode from './core/BaseNode.js';
 import BehaviorTree from './core/BehaviorTree/BehaviorTree.js';
 import Blackboard from './core/Blackboard.js';
 import Composite from './core/Composite.js';
-import Condition from './core/Condition.js';
 import Decorator from './core/Decorator.js';
 import Tick from './core/Tick.js';
 
@@ -50,7 +49,6 @@ export {
     BehaviorTree,
     Blackboard,
     Composite,
-    Condition,
     Decorator,
     Tick,
     Inverter,
