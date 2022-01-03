@@ -11,8 +11,6 @@ This library include the following core structures...
 - Composite: base class for all composite nodes;
 - Decorator: base class for all decorator nodes;
 - Action: base class for all action nodes;
-- Condition: base class for all condition nodes;
-    - **Replaced by Condition Decorator**
 - Tick: used as container and tracking object through the tree during the tick signal;
 - BaseNode: the base class that provide all common node features;
 
@@ -95,7 +93,6 @@ CLOSE --> EXIT
 TICK  --> |isRunning| EXIT
 ```
 
-- Why create new Tick object in each `tree.tick()`?
 - [TODO] Get current time one time in each `tree.tick()`.
 - When closing a node, also close children nodes.
 

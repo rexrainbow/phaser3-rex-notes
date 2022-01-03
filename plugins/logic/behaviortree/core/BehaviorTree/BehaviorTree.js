@@ -18,6 +18,8 @@ class BehaviorTree {
 
         this.properties = {};
 
+        this._ticker = new Tick();
+
         this._root = null;
     }
 
@@ -59,11 +61,11 @@ class BehaviorTree {
         }
 
         /* CREATE A TICK OBJECT */
-        var tick = new Tick();
-        tick.target = target;
-        tick.blackboard = blackboard;
-        tick.tree = this;
-        tick.reset();
+        var tick = this._ticker;
+        tick
+            .setTarget(target).setBlackBoard(blackboard)
+            .setTree(this)
+            .reset();
 
         /* TICK NODE */
         var state = this.root._execute(tick);
