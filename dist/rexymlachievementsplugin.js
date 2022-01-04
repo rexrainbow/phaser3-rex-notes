@@ -6282,7 +6282,7 @@
 
   var parser = new FormulaParser();
 
-  var CreateTestFunction = function CreateTestFunction(expression) {
+  var Compile = function Compile(expression) {
     return parser.compile(expression);
   };
 
@@ -6314,7 +6314,7 @@
           var levelAchevements = doc[levelName];
 
           for (var achievementName in levelAchevements) {
-            this.add(levelName, achievementName, CreateTestFunction(levelAchevements[achievementName]));
+            this.add(levelName, achievementName, Compile(levelAchevements[achievementName]));
           }
         }
 

@@ -28,6 +28,11 @@ Parser is generated from [jison](https://github.com/zaach/jison)
     ```javascript
     var parser = scene.plugins.get('rexexpressionparserplugin').add();
     ```
+- Or, parse expression to function object.
+    ```javascript
+    var f = scene.plugins.get('rexexpressionparserplugin').compile(expressionString);
+    // var value = f(context);
+    ```
 
 #### Import plugin
 
@@ -56,6 +61,11 @@ Parser is generated from [jison](https://github.com/zaach/jison)
 - Add parser
     ```javascript
     var parser = scene.plugins.get('rexExpressionParserPlugin').add();
+    ```
+- Or, parse expression to function object.
+    ```javascript
+    var f = scene.plugins.get('rexExpressionParserPlugin').compile(expressionString);
+    // var value = f(context);
     ```
 
 #### Import class
@@ -86,6 +96,10 @@ var parser = scene.plugins.get('rexExpressionParserPlugin').add();
 1. Compile expression string into function
     ```javascript
     var f = parser.compile(expressionString);
+    ```
+    or
+    ```javascript
+    var f = scene.plugins.get('rexExpressionParserPlugin').compile(expressionString);
     ```
     - `expressionString` :
         - Number : `1`, `1.5`, `0xf`.

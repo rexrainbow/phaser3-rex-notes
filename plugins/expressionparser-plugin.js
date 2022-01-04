@@ -1,4 +1,5 @@
 import ExpressionParser from './expressionparser.js';
+import Compile from './math/expressionparser/Complile.js';
 import SetValue from './utils/object/SetValue.js';
 
 class ExpressionParserPlugin extends Phaser.Plugins.BasePlugin {
@@ -14,6 +15,10 @@ class ExpressionParserPlugin extends Phaser.Plugins.BasePlugin {
 
     add() {
         return new ExpressionParser();
+    }
+
+    compile(expression) {
+        return Compile(expression);
     }
 }
 

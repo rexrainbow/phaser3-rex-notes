@@ -2254,6 +2254,12 @@
     return FormulaParser;
   }(parser_1.Parser);
 
+  var parser = new FormulaParser();
+
+  var Compile = function Compile(expression) {
+    return parser.compile(expression);
+  };
+
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
@@ -2341,6 +2347,11 @@
       key: "add",
       value: function add() {
         return new FormulaParser();
+      }
+    }, {
+      key: "compile",
+      value: function compile(expression) {
+        return Compile(expression);
       }
     }]);
 

@@ -1,6 +1,6 @@
 import Base from '../conditiontable/ConditionsTable.js';
 import yaml from 'js-yaml';
-import CreateTestFunction from './CreateTestFunction.js';
+import CreateTestFunction from '../../../math/expressionparser/Complile.js';
 
 class ConditionsTable extends Base {
     loadYML(ymlString) {

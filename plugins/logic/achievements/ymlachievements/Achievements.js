@@ -1,6 +1,6 @@
 import Base from '../achievements/Achievements.js';
 import yaml from 'js-yaml';
-import CreateTestFunction from '../../conditionstable/ymlconditiontable/CreateTestFunction.js';
+import CreateTestFunction from '../../../math/expressionparser/Complile.js';
 
 class Achievements extends Base {
     loadYML(ymlString) {

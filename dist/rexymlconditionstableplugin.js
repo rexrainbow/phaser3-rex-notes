@@ -6203,7 +6203,7 @@
 
   var parser = new FormulaParser();
 
-  var CreateTestFunction = function CreateTestFunction(expression) {
+  var Compile = function Compile(expression) {
     return parser.compile(expression);
   };
 
@@ -6238,12 +6238,12 @@
             doc = docArray[i];
 
             for (var testName in doc) {
-              this.add(testName, CreateTestFunction(doc[testName]));
+              this.add(testName, Compile(doc[testName]));
             }
           }
         } else {
           for (var testName in doc) {
-            this.add(testName, CreateTestFunction(doc[testName]));
+            this.add(testName, Compile(doc[testName]));
           }
         }
 
