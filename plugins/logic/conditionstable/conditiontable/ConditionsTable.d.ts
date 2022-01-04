@@ -1,11 +1,8 @@
 export default ConditionsTable;
 
 declare namespace ConditionsTable {
-    interface ILoadConfig {
-        delimiter?: string
-    }
 
-    type ValuesType = {
+    type ContextType = {
         [name: string]: any
     }
 
@@ -16,33 +13,28 @@ declare namespace ConditionsTable {
 
 declare class ConditionsTable {
 
-    loadCSV(
-        csvString: string,
-        config?: ConditionsTable.ILoadConfig
-    ): this;
-
     getTestResults(
-        values: ConditionsTable.ValuesType,
+        context: ConditionsTable.ContextType,
     ): ConditionsTable.ResultsType;
 
     anyPassTest(
-        values: ConditionsTable.ValuesType,
+        context: ConditionsTable.ContextType,
         callback: (testName: string) => void,
         scope?: object
     ): this;
 
     anyPassTest(
-        values: ConditionsTable.ValuesType
+        context: ConditionsTable.ContextType
     ): string;
 
     eachPassTest(
-        values: ConditionsTable.ValuesType,
+        context: ConditionsTable.ContextType,
         callback: (testName: string) => void,
         scope?: object
     ): this;
 
     eachTest(
-        values: ConditionsTable.ValuesType,
+        context: ConditionsTable.ContextType,
         callback: (testName: string, result: boolean) => void,
         scope?: object
     ): this;

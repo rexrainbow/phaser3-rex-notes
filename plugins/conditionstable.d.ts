@@ -1,2 +1,2 @@
-import ConditionsTable from './logic/conditionstable/ConditionsTable';
+import ConditionsTable from './logic/conditionstable/csvconditiontable/ConditionsTable';
 export default ConditionsTable;

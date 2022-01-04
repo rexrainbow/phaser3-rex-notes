@@ -7864,17 +7864,17 @@ Test2: (B==3)
 </code></pre></div>
 <h3 id="test">Test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h3>
 <h4 id="get-test-results">Get test results<a class="headerlink" href="#get-test-results" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getTestResults</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getTestResults</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>values</code> : Inputs in Key-value pairs</li>
+<li><code>context</code> : Inputs in Key-value pairs</li>
 <li><code>results</code> : <code>{name: boolean}</code>, use OR operation to combine result of tests with the same name.</li>
 </ul>
 <h4 id="get-first-pass-test-name">Get first pass test name<a class="headerlink" href="#get-first-pass-test-name" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">testName</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">anyPassTest</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">testName</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">anyPassTest</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>values</code> : Inputs in Key-value pairs</li>
+<li><code>context</code> : Inputs in Key-value pairs</li>
 </ul>
                 
               

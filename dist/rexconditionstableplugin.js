@@ -107,6 +107,106 @@
     };
   }
 
+  var ConditionsTable$1 = /*#__PURE__*/function () {
+    function ConditionsTable() {
+      _classCallCheck(this, ConditionsTable);
+
+      this.tests = []; // [{name, function}, ...]
+    }
+
+    _createClass(ConditionsTable, [{
+      key: "getTestResults",
+      value: function getTestResults(context) {
+        var results = {}; // {name: boolean}
+
+        var name, f;
+
+        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
+          name = this.tests[i].name;
+          f = this.tests[i]["function"];
+
+          if (f(context)) {
+            results[name] = true;
+          } else if (!results.hasOwnProperty(name)) {
+            results[name] = false;
+          }
+        }
+
+        return results;
+      }
+    }, {
+      key: "anyPassTest",
+      value: function anyPassTest(context, callback, scope) {
+        var name, f;
+
+        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
+          name = this.tests[i].name;
+          f = this.tests[i]["function"];
+
+          if (!f(context)) {
+            name = false;
+            continue;
+          }
+
+          if (callback) {
+            if (scope) {
+              callback.call(scope, name);
+            } else {
+              callback(name);
+            }
+          }
+
+          break;
+        }
+
+        return callback ? this : name;
+      }
+    }, {
+      key: "eachPassTest",
+      value: function eachPassTest(context, callback, scope) {
+        var name, f;
+
+        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
+          name = this.tests[i].name;
+          f = this.tests[i]["function"];
+
+          if (!f(context)) {
+            continue;
+          }
+
+          if (scope) {
+            callback.call(scope, name);
+          } else {
+            callback(name);
+          }
+        }
+
+        return this;
+      }
+    }, {
+      key: "eachTest",
+      value: function eachTest(context, callback, scope) {
+        var pass, name, f;
+
+        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
+          name = this.tests[i].name;
+          f = this.tests[i]["function"];
+          pass = f(context);
+
+          if (scope) {
+            callback.call(scope, name, pass);
+          } else {
+            callback(name, pass);
+          }
+        }
+
+        return this;
+      }
+    }]);
+
+    return ConditionsTable;
+  }();
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -182,6 +282,10 @@
     }
   };
 
+  var IsEquation = function IsEquation(s) {
+    return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
+  };
+
   var CreateTestFunction = function CreateTestFunction(keys, equations) {
     var conditions = [];
 
@@ -198,27 +302,27 @@
     return f;
   };
 
-  var isEquation = function isEquation(s) {
-    return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
-  };
-
   var CreateComparisonLogic = function CreateComparisonLogic(key, equation) {
-    if (!isEquation(equation)) {
+    if (!IsEquation(equation)) {
       if (isNaN(equation)) {
-        equation = '\'' + equation + '\'';
+        equation = "'".concat(equation, "'");
       }
 
-      equation = '==(' + equation + ')';
+      equation = "==(".concat(equation, ")");
     }
 
-    return '(values[\'' + key + '\']' + equation + ')';
+    return "(values['".concat(key, "']").concat(equation, ")");
   };
 
-  var ConditionsTable = /*#__PURE__*/function () {
+  var ConditionsTable = /*#__PURE__*/function (_Base) {
+    _inherits(ConditionsTable, _Base);
+
+    var _super = _createSuper(ConditionsTable);
+
     function ConditionsTable() {
       _classCallCheck(this, ConditionsTable);
 
-      this.tests = [];
+      return _super.apply(this, arguments);
     }
 
     _createClass(ConditionsTable, [{
@@ -236,97 +340,11 @@
         for (var i = 1, cnt = table.length; i < cnt; i++) {
           items = table[i];
           testName = items.shift();
+          testFunction = CreateTestFunction(keys, items);
           this.tests.push({
             name: testName,
-            "function": CreateTestFunction(keys, items)
+            "function": testFunction
           });
-        }
-
-        return this;
-      }
-    }, {
-      key: "getTestResults",
-      value: function getTestResults(values) {
-        var results = {};
-        var name, f;
-
-        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
-          name = this.tests[i].name;
-          f = this.tests[i]["function"];
-
-          if (f(values)) {
-            results[name] = true;
-          } else if (!results.hasOwnProperty(name)) {
-            results[name] = false;
-          }
-        }
-
-        return results;
-      }
-    }, {
-      key: "anyPassTest",
-      value: function anyPassTest(values, callback, scope) {
-        var name, f;
-
-        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
-          name = this.tests[i].name;
-          f = this.tests[i]["function"];
-
-          if (!f(values)) {
-            name = false;
-            continue;
-          }
-
-          if (callback) {
-            if (scope) {
-              callback.call(scope, name);
-            } else {
-              callback(name);
-            }
-          }
-
-          break;
-        }
-
-        return callback ? this : name;
-      }
-    }, {
-      key: "eachPassTest",
-      value: function eachPassTest(values, callback, scope) {
-        var name, f;
-
-        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
-          name = this.tests[i].name;
-          f = this.tests[i]["function"];
-
-          if (!f(values)) {
-            continue;
-          }
-
-          if (scope) {
-            callback.call(scope, name);
-          } else {
-            callback(name);
-          }
-        }
-
-        return this;
-      }
-    }, {
-      key: "eachTest",
-      value: function eachTest(values, callback, scope) {
-        var pass, name, f;
-
-        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
-          name = this.tests[i].name;
-          f = this.tests[i]["function"];
-          pass = f(values);
-
-          if (scope) {
-            callback.call(scope, name, pass);
-          } else {
-            callback(name, pass);
-          }
         }
 
         return this;
@@ -334,7 +352,7 @@
     }]);
 
     return ConditionsTable;
-  }();
+  }(ConditionsTable$1);
 
   var ConditionsTablePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ConditionsTablePlugin, _Phaser$Plugins$BaseP);

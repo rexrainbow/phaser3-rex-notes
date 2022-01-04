@@ -1,2 +1,2 @@
-import ConditionsTable from './logic/conditionstable/ConditionsTable.js';
+import ConditionsTable from './logic/conditionstable/csvconditiontable/ConditionsTable.js';
 export default ConditionsTable;

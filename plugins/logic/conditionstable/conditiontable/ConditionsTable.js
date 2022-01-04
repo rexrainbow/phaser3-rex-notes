@@ -1,42 +1,16 @@
-import GetValue from '../../utils/object/GetValue.js';
-import CSVParser from 'papaparse/papaparse.min.js';
-import Clear from '../../utils/object/Clear.js';
-import CreateTestFunction from './CreateTestFunction.js';
-
-
 class ConditionsTable {
     constructor() {
-        this.tests = [];
+        this.tests = [];  // [{name, function}, ...]
     }
 
-    loadCSV(csvString, config) {
-        Clear(this.tests);
-        var delimiter = GetValue(config, 'delimiter', ',');
-        var table = CSVParser.parse(csvString, {
-            delimiter: delimiter
-        }).data;
-        var keys = table[0];
-        keys.shift();
-        var items, testName;
-        for (var i = 1, cnt = table.length; i < cnt; i++) {
-            items = table[i];
-            testName = items.shift();
-            this.tests.push({
-                name: testName,
-                function: CreateTestFunction(keys, items)
-            });
-        }
-        return this;
-    }
-
-    getTestResults(values) {
-        var results = {};
+    getTestResults(context) {
+        var results = {};  // {name: boolean}
         var name, f;
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
             name = this.tests[i].name;
             f = this.tests[i].function;
 
-            if (f(values)) {
+            if (f(context)) {
                 results[name] = true;
             } else if (!results.hasOwnProperty(name)) {
                 results[name] = false;
@@ -46,12 +20,12 @@ class ConditionsTable {
         return results;
     }
 
-    anyPassTest(values, callback, scope) {
+    anyPassTest(context, callback, scope) {
         var name, f;
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
             name = this.tests[i].name;
             f = this.tests[i].function;
-            if (!f(values)) {
+            if (!f(context)) {
                 name = false;
                 continue;
             }
@@ -69,12 +43,12 @@ class ConditionsTable {
         return (callback) ? this : name;
     }
 
-    eachPassTest(values, callback, scope) {
+    eachPassTest(context, callback, scope) {
         var name, f;
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
             name = this.tests[i].name;
             f = this.tests[i].function;
-            if (!f(values)) {
+            if (!f(context)) {
                 continue;
             }
 
@@ -87,12 +61,12 @@ class ConditionsTable {
         return this;
     }
 
-    eachTest(values, callback, scope) {
+    eachTest(context, callback, scope) {
         var pass, name, f;
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
             name = this.tests[i].name;
             f = this.tests[i].function;
-            pass = f(values);
+            pass = f(context);
             if (scope) {
                 callback.call(scope, name, pass);
             } else {

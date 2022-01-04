@@ -1,4 +1,4 @@
-import CreateTestFunction from '../conditionstable/CreateTestFunction.js';
+import CreateTestFunction from '../conditionstable/csvconditiontable/CreateTestFunction.js';
 
 class Achievement {
     constructor(keys, items) {

@@ -182,6 +182,10 @@
     }
   };
 
+  var IsEquation = function IsEquation(s) {
+    return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
+  };
+
   var CreateTestFunction = function CreateTestFunction(keys, equations) {
     var conditions = [];
 
@@ -198,20 +202,16 @@
     return f;
   };
 
-  var isEquation = function isEquation(s) {
-    return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
-  };
-
   var CreateComparisonLogic = function CreateComparisonLogic(key, equation) {
-    if (!isEquation(equation)) {
+    if (!IsEquation(equation)) {
       if (isNaN(equation)) {
-        equation = '\'' + equation + '\'';
+        equation = "'".concat(equation, "'");
       }
 
-      equation = '==(' + equation + ')';
+      equation = "==(".concat(equation, ")");
     }
 
-    return '(values[\'' + key + '\']' + equation + ')';
+    return "(values['".concat(key, "']").concat(equation, ")");
   };
 
   var Achievement = /*#__PURE__*/function () {

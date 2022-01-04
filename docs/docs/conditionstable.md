@@ -105,16 +105,16 @@ Test2: (B==3)
 #### Get test results
 
 ```javascript
-var results = table.getTestResults(values);
+var results = table.getTestResults(context);
 ```
 
-- `values` : Inputs in Key-value pairs
+- `context` : Inputs in Key-value pairs
 - `results` : `{name: boolean}`, use OR operation to combine result of tests with the same name.
 
 #### Get first pass test name
 
 ```javascript
-var testName = table.anyPassTest(values);
+var testName = table.anyPassTest(context);
 ```
 
-- `values` : Inputs in Key-value pairs
+- `context` : Inputs in Key-value pairs
