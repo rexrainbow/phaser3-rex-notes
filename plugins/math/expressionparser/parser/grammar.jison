@@ -159,7 +159,7 @@ e
         }
     | e '<=' e
         {
-            $$ = function(ctx) { return runBuildInMethod(yy.parser, '_greaterThen', [$1, $3]) == false; };
+            $$ = function(ctx) { return runBuildInMethod(yy.parser, ctx, '_greaterThen', [$1, $3]) == false; };
         }
     | e '||' e
         {

@@ -17,10 +17,9 @@ class ConditionsTable extends Base {
         for (var i = 1, cnt = table.length; i < cnt; i++) {
             items = table[i];
             testName = items.shift();
-            testFunction = CreateTestFunction(keys, items)
             this.tests.push({
                 name: testName,
-                function: testFunction
+                function: CreateTestFunction(keys, items)
             });
         }
         return this;

@@ -911,7 +911,7 @@
 
             case 17:
               this.$ = function (ctx) {
-                return runBuildInMethod(yy.parser, '_greaterThen', [$$[$0 - 2], $$[$0]]) == false;
+                return runBuildInMethod(yy.parser, ctx, '_greaterThen', [$$[$0 - 2], $$[$0]]) == false;
               };
 
               break;

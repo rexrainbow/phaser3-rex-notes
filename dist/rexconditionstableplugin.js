@@ -282,10 +282,6 @@
     }
   };
 
-  var IsEquation = function IsEquation(s) {
-    return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
-  };
-
   var CreateTestFunction = function CreateTestFunction(keys, equations) {
     var conditions = [];
 
@@ -300,6 +296,10 @@
     var logic = conditions.length > 0 ? conditions.join('&&') : 'false';
     var f = new Function('values', 'return ' + logic);
     return f;
+  };
+
+  var IsEquation = function IsEquation(s) {
+    return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
   };
 
   var CreateComparisonLogic = function CreateComparisonLogic(key, equation) {
@@ -340,10 +340,9 @@
         for (var i = 1, cnt = table.length; i < cnt; i++) {
           items = table[i];
           testName = items.shift();
-          testFunction = CreateTestFunction(keys, items);
           this.tests.push({
             name: testName,
-            "function": testFunction
+            "function": CreateTestFunction(keys, items)
           });
         }
 

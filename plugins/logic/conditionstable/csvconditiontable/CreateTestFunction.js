@@ -1,5 +1,3 @@
-import IsEquation from './IsEquation.js';
-
 var CreateTestFunction = function (keys, equations) {
     var conditions = [];
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
@@ -14,6 +12,15 @@ var CreateTestFunction = function (keys, equations) {
     var logic = (conditions.length > 0) ? conditions.join('&&') : 'false';
     var f = new Function('values', 'return ' + logic);
     return f;
+};
+
+var IsEquation = function (s) {
+    return (s.indexOf('==') != -1) ||
+        (s.indexOf('!=') != -1) ||
+        (s.indexOf('>=') != -1) ||
+        (s.indexOf('<=') != -1) ||
+        (s.indexOf('>') != -1) ||
+        (s.indexOf('<') != -1);
 };
 
 var CreateComparisonLogic = function (key, equation) {

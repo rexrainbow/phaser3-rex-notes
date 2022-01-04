@@ -110,6 +110,7 @@ module.exports = {
     'eventpromiseplugin': './plugins/eventpromise-plugin.js',
     'achievementsplugin': './plugins/achievements-plugin.js',
     'conditionstableplugin': './plugins/conditionstable-plugin.js',
+    'ymlconditionstableplugin': './plugins/ymlconditionstable-plugin.js',
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
     'bracketparserplugin': './plugins/bracketparser-plugin.js',
