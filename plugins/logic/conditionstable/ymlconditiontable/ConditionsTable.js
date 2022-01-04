@@ -1,11 +1,10 @@
 import Base from '../conditiontable/ConditionsTable.js';
 import yaml from 'js-yaml';
-import Clear from '../../../utils/object/Clear.js';
 import CreateTestFunction from './CreateTestFunction.js';
 
 class ConditionsTable extends Base {
     loadYML(ymlString) {
-        Clear(this.tests);
+        this.clear();
 
         var doc;
         try {
@@ -20,18 +19,12 @@ class ConditionsTable extends Base {
             for (var i = 0, cnt = docArray.length; i < cnt; i++) {
                 doc = docArray[i];
                 for (var testName in doc) {
-                    this.tests.push({
-                        name: testName,
-                        function: CreateTestFunction(doc[testName])
-                    });
+                    this.add(testName, CreateTestFunction(doc[testName]));
                 }
             }
         } else {
             for (var testName in doc) {
-                this.tests.push({
-                    name: testName,
-                    function: CreateTestFunction(doc[testName])
-                });
+                this.add(testName, CreateTestFunction(doc[testName]));
             }
         }
 

@@ -1,12 +1,11 @@
 import Base from '../conditiontable/ConditionsTable.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.min.js';
-import Clear from '../../../utils/object/Clear.js';
 import CreateTestFunction from './CreateTestFunction.js';
 
 class ConditionsTable extends Base {
     loadCSV(csvString, config) {
-        Clear(this.tests);
+        this.clear();
         var delimiter = GetValue(config, 'delimiter', ',');
         var table = CSVParser.parse(csvString, {
             delimiter: delimiter
@@ -17,10 +16,7 @@ class ConditionsTable extends Base {
         for (var i = 1, cnt = table.length; i < cnt; i++) {
             items = table[i];
             testName = items.shift();
-            this.tests.push({
-                name: testName,
-                function: CreateTestFunction(keys, items)
-            });
+            this.add(testName, CreateTestFunction(keys, items));
         }
         return this;
     }

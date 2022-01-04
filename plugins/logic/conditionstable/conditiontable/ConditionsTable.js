@@ -3,6 +3,19 @@ class ConditionsTable {
         this.tests = [];  // [{name, function}, ...]
     }
 
+    clear() {
+        this.tests.length = 0;
+        return this;
+    }
+
+    add(name, callback) {
+        this.tests.push({
+            name: name,
+            function: callback
+        });
+        return this;
+    }
+
     getTestResults(context) {
         var results = {};  // {name: boolean}
         var name, f;

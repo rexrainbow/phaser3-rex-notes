@@ -9,9 +9,21 @@ declare namespace ConditionsTable {
     type ResultsType = {
         [name: string]: boolean
     }
+
+    type TestFunction = (
+        context: ContextType
+    ) => boolean;
+
 }
 
 declare class ConditionsTable {
+
+    clear(): this;
+
+    add(
+        name: string,
+        callback: ConditionsTable.TestFunction
+    ): this;
 
     getTestResults(
         context: ConditionsTable.ContextType,

@@ -115,6 +115,21 @@
     }
 
     _createClass(ConditionsTable, [{
+      key: "clear",
+      value: function clear() {
+        this.tests.length = 0;
+        return this;
+      }
+    }, {
+      key: "add",
+      value: function add(name, callback) {
+        this.tests.push({
+          name: name,
+          "function": callback
+        });
+        return this;
+      }
+    }, {
       key: "getTestResults",
       value: function getTestResults(context) {
         var results = {}; // {name: boolean}
@@ -4055,16 +4070,6 @@
   	safeDump: safeDump
   };
 
-  var Clear = function Clear(obj) {
-    if (Array.isArray(obj)) {
-      obj.length = 0;
-    } else {
-      for (var key in obj) {
-        delete obj[key];
-      }
-    }
-  };
-
   var global$1 = (typeof global !== "undefined" ? global :
               typeof self !== "undefined" ? self :
               typeof window !== "undefined" ? window : {});
@@ -6216,7 +6221,7 @@
     _createClass(ConditionsTable, [{
       key: "loadYML",
       value: function loadYML(ymlString) {
-        Clear(this.tests);
+        this.clear();
         var doc;
 
         try {
@@ -6233,18 +6238,12 @@
             doc = docArray[i];
 
             for (var testName in doc) {
-              this.tests.push({
-                name: testName,
-                "function": CreateTestFunction(doc[testName])
-              });
+              this.add(testName, CreateTestFunction(doc[testName]));
             }
           }
         } else {
           for (var testName in doc) {
-            this.tests.push({
-              name: testName,
-              "function": CreateTestFunction(doc[testName])
-            });
+            this.add(testName, CreateTestFunction(doc[testName]));
           }
         }
 
