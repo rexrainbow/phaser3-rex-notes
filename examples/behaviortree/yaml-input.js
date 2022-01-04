@@ -1,5 +1,5 @@
 import 'phaser';
-import YamlParser from '../../plugins/logic/behaviortree/utils/YamlParser.js';
+import ParseYaml from '../../plugins/utils/yaml/ParseYaml.js';
 // import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 
 var content = `
@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var doc = YamlParser(content);
+        var doc = ParseYaml(content);
         console.log(doc);
     }
 

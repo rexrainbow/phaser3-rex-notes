@@ -4149,6 +4149,18 @@
   	safeDump: safeDump
   };
 
+  var ParseYaml = function ParseYaml(ymlString) {
+    var doc;
+
+    try {
+      doc = jsYaml.load(ymlString);
+    } catch (e) {
+      console.log(e);
+    }
+
+    return doc;
+  };
+
   var global$1 = (typeof global !== "undefined" ? global :
               typeof self !== "undefined" ? self :
               typeof window !== "undefined" ? window : {});
@@ -6301,12 +6313,9 @@
       key: "loadYML",
       value: function loadYML(ymlString) {
         this.clear();
-        var doc;
+        var doc = ParseYaml(ymlString);
 
-        try {
-          doc = jsYaml.load(ymlString);
-        } catch (e) {
-          console.log(e);
+        if (!doc) {
           return this;
         }
 

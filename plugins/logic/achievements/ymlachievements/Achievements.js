@@ -1,16 +1,13 @@
 import Base from '../achievements/Achievements.js';
-import yaml from 'js-yaml';
+import ParseYaml from '../../../utils/yaml/ParseYaml.js';
 import CreateTestFunction from '../../../math/expressionparser/Complile.js';
 
 class Achievements extends Base {
     loadYML(ymlString) {
         this.clear();
 
-        var doc;
-        try {
-            doc = yaml.load(ymlString);
-        } catch (e) {
-            console.log(e);
+        var doc = ParseYaml(ymlString);
+        if (!doc) {
             return this;
         }
 
