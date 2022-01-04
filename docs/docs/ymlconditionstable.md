@@ -1,6 +1,6 @@
 ## Introduction
 
-Check conditions to find passed tests listed in a YAML table.
+Check conditions to find passed tests listed in a [YAML](https://en.wikipedia.org/wiki/YAML) table.
 
 - Author: Rex
 - Member of scene
