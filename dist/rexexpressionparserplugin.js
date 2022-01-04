@@ -2260,6 +2260,25 @@
     return parser.compile(expression);
   };
 
+  var CreateProxyContext = function CreateProxyContext(config, baseContext) {
+    if (!config.hasOwnProperty('has')) {
+      throw 'Need has(target, key):boolean handler';
+    }
+
+    if (!config.hasOwnProperty('get')) {
+      throw 'Need get(target, key):any handler';
+    }
+
+    if (baseContext === undefined) {
+      baseContext = {};
+    }
+
+    return new Proxy(baseContext, {
+      has: config.has,
+      get: config.get
+    });
+  };
+
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
@@ -2352,6 +2371,11 @@
       key: "compile",
       value: function compile(expression) {
         return Compile(expression);
+      }
+    }, {
+      key: "createProxyContext",
+      value: function createProxyContext(config, baseContext) {
+        return CreateProxyContext(config, baseContext);
       }
     }]);
 

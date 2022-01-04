@@ -1,4 +1,4 @@
-import ExpressionParser from './ExpressionParser.js';
+import ExpressionParser from '../ExpressionParser.js';
 
 var parser = new ExpressionParser();
 var Compile = function(expression) {

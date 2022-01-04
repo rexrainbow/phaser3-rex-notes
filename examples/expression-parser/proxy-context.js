@@ -17,12 +17,22 @@ class Demo extends Phaser.Scene {
         var f = parser.compile(expression);
 
         var data = this.data;
+        /*
         var context = new Proxy({}, {
             has(target, key) {
                 return data.has(key);
             },
-            get: function (target, prop) {
-                return data.get(prop);
+            get(target, key) {
+                return data.get(key);
+            }
+        })
+        */
+        var context = this.plugins.get('rexExpressionParser').createProxyContext({
+            has(target, key) {
+                return data.has(key);
+            },
+            get(target, key) {
+                return data.get(key);
             }
         })
         this.data.set('coin', 3);

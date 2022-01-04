@@ -187,3 +187,16 @@ var context = new Proxy({}, {
     }
 })
 ```
+
+or
+
+```javascript
+var context = scene.plugins.get('rexExpressionParserPlugin').createProxyContext({
+    has(target, key) {
+        // return boolean
+    },
+    get: function (target, prop) {
+        // return any;
+    }
+})
+```

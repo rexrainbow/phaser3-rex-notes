@@ -1,4 +1,4 @@
-import ExpressionParser from './ExpressionParser';
+import ExpressionParser from '../ExpressionParser';
 
 export default Compile;
 
