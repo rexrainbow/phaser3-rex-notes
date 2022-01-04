@@ -6,6 +6,7 @@ import CreateTestFunction from './CreateTestFunction.js';
 class ConditionsTable extends Base {
     loadCSV(csvString, config) {
         this.clear();
+
         var delimiter = GetValue(config, 'delimiter', ',');
         var table = CSVParser.parse(csvString, {
             delimiter: delimiter

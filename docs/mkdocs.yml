@@ -250,8 +250,9 @@ nav:
     - Conditions table:
         - CSV input: conditionstable.md
         - YAML input: ymlconditionstable.md
-    - Achievements table:        
-        - CSV achievements table: achievements.md
+    - Achievements:       
+        - CSV input: achievements.md
+        - YAML input: ymlachievements.md
     - Quest: 
         - Quest: quest.md
         - Dialog-quest: dialog-quest.md

@@ -1,8 +1,4 @@
-import GetValue from '../../utils/object/GetValue.js';
-import CSVParser from 'papaparse/papaparse.min.js';
-import Clear from '../../utils/object/Clear.js';
-import Achievement from './Achievement.js';
-
+import Clear from '../../../utils/object/Clear.js';
 
 class Achievements {
     constructor() {
@@ -10,25 +6,23 @@ class Achievements {
         this.obtainedStates = {};
     }
 
-    loadCSV(csvString, config) {
+    clear() {
         Clear(this.achievements);
-        var delimiter = GetValue(config, 'delimiter', ',');
-        var table = CSVParser.parse(csvString, {
-            delimiter: delimiter
-        }).data;
-        var keys = table[0];
-        keys.splice(0, 2);
-        var items, achievement, levelName;
-        for (var i = 1, cnt = table.length; i < cnt; i++) {
-            items = table[i];
-            levelName = items[0];
-            achievement = new Achievement(keys, items);
+        Clear(this.obtainedStates);
 
-            if (!this.achievements.hasOwnProperty(levelName)) {
-                this.achievements[levelName] = [];
-            }
-            this.achievements[levelName].push(achievement);
+        return this;
+    }
+
+    add(levelName, achievementName, callback) {
+        if (!this.achievements.hasOwnProperty(levelName)) {
+            this.achievements[levelName] = [];
         }
+
+        this.achievements[levelName].push({
+            name: achievementName,
+            function: callback
+        });
+
         return this;
     }
 
@@ -59,7 +53,7 @@ class Achievements {
         return obtainedStates[achievementName];
     }
 
-    runTest(levelName, values) {
+    runTest(levelName, context) {
         var achievements = this.getAchievements(levelName);
         if (achievements === undefined) {
             return this;
@@ -73,7 +67,7 @@ class Achievements {
                 continue;
             }
 
-            if (!achievements[i].runTest(values)) {
+            if (!achievements[i].function(context)) {
                 continue;
             }
 
@@ -84,8 +78,8 @@ class Achievements {
         return this;
     }
 
-    getTestResults(levelName, values) {
-        this.runTest(levelName, values);
+    getTestResults(levelName, context) {
+        this.runTest(levelName, context);
         return this.getObtainedState(levelName);
     }
 
@@ -147,7 +141,7 @@ class Achievements {
         }
         var obtainedState = this.getObtainedState(levelName, achievementName);
         obtainedState.wasObtained = value;
-        obtainedState.justObtained = value;        
+        obtainedState.justObtained = value;
         return this;
     }
 

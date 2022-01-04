@@ -109,6 +109,7 @@ module.exports = {
     'waiteventsplugin': './plugins/waitevents-plugin.js',
     'eventpromiseplugin': './plugins/eventpromise-plugin.js',
     'achievementsplugin': './plugins/achievements-plugin.js',
+    'ymlachievementsplugin': './plugins/ymlachievements-plugin.js',
     'conditionstableplugin': './plugins/conditionstable-plugin.js',
     'ymlconditionstableplugin': './plugins/ymlconditionstable-plugin.js',
     'questplugin': './plugins/quest-plugin.js',
