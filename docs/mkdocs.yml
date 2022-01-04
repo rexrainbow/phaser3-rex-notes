@@ -248,11 +248,11 @@ nav:
             - Player: arcade-tcrp-player.md          
     - FSM: fsm.md
     - Conditions table:
-        - CSV input: conditionstable.md
-        - YAML input: ymlconditionstable.md
+        - CSV Conditions table: conditionstable.md
+        - YAML Conditions table: ymlconditionstable.md
     - Achievements:       
-        - CSV input: achievements.md
-        - YAML input: ymlachievements.md
+        - CSV Achievements: achievements.md
+        - YAML Achievements: ymlachievements.md
     - Quest: 
         - Quest: quest.md
         - Dialog-quest: dialog-quest.md
