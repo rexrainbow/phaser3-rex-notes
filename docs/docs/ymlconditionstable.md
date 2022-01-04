@@ -85,6 +85,8 @@ Test1 : (A >= 10) && (A <= 20)
 Test2 : B == 3
 ```
 
+Equations will be parsed by [expression-parser](expression-parser.md).
+
 ### Test
 
 #### Get test results

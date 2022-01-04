@@ -100,6 +100,8 @@ Test1: (A>=10) && (A<=20)
 Test2: (B==3)
 ```
 
+Equations will be evaled by [new Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function).
+
 ### Test
 
 #### Get test results
