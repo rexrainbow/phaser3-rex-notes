@@ -104,10 +104,11 @@ var parser = scene.plugins.get('rexExpressionParserPlugin').add();
     - `expressionString` :
         - Number : `1`, `1.5`, `0xf`.
         - Variable : `a`, `a.b.c`.
-        - Arithmetic : `+`, `-`, `*`, `\`, `%`, `(`, `)`, ex : `'(a + b.c) * 3 + (2 % 3)'`
-        - Boolean : `>`, `<`, `>=`, `<=`, `==`, `!=`, `&&`, `||`, ex `'(a > 10) && (a < 30) || (b.c > c)'`
-        - Condition : `(cond)? v0:v1`, ex`'(a > b.c)? a:b.c'`
-        - [Custom method](expression-parser.md#custom-method) : `randomInt(a, b.c)`
+        - Arithmetic : `+`, `-`, `*`, `\`, `%`, `(`, `)`, ex : `'(a + b.c) * 3 + (2 % 3)'`.
+        - Boolean : `>`, `<`, `>=`, `<=`, `==`, `!=`, `&&`, `||`, ex `'(a > 10) && (a < 30) || (b.c > c)'`.
+        - Condition : `(cond)? v0:v1`, ex`'(a > b.c)? a:b.c'`.
+        - [Custom method](expression-parser.md#custom-method) : `randomInt(a, b.c)`.
+        - String concat : `'Hello ' + name`.
 1. Invoke function
     ```javascript
     var value = f(context);
