@@ -1,13 +1,13 @@
 export default Achievements;
 
 declare namespace Achievements {
-    interface ILoadCSVConfig {
-        delimiter?: string
-    }
-
-    type ValuesType = {
+    type ContextType = {
         [name: string]: any
     }
+
+    type TestFunctionType = (
+        context: ContextType
+    ) => boolean;
 
     type AchievementStateType = {
         wasObtained: boolean,
@@ -28,19 +28,23 @@ declare namespace Achievements {
 
 }
 declare class Achievements {
-    loadCSV(
-        csvString: string,
-        config?: Achievements.ILoadCSVConfig
+
+    clear(): this;
+
+    add(
+        levelName: string,
+        achievementName: string,
+        callback: Achievements.TestFunctionType
     ): this;
 
     runTest(
         levelName: string,
-        values: Achievements.ValuesType
+        context: Achievements.ContextType
     ): this;
 
     getTestResults(
         levelName: string,
-        values: Achievements.ValuesType
+        context: Achievements.ContextType
     ): Achievements.LevelStateType;
 
     getObtainedState(

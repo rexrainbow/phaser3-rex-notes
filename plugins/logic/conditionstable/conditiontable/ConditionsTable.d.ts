@@ -10,7 +10,7 @@ declare namespace ConditionsTable {
         [name: string]: boolean
     }
 
-    type TestFunction = (
+    type TestFunctionType = (
         context: ContextType
     ) => boolean;
 
@@ -22,7 +22,7 @@ declare class ConditionsTable {
 
     add(
         name: string,
-        callback: ConditionsTable.TestFunction
+        callback: ConditionsTable.TestFunctionType
     ): this;
 
     getTestResults(
