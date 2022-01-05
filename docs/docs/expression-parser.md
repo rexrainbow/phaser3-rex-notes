@@ -182,7 +182,7 @@ var context = new Proxy({}, {
     has(target, key) {
         return scene.data.has(key);
     },
-    get: function (target, prop) {
+    get(target, prop) {
         return scene.data.get(prop);
     }
 })
@@ -195,7 +195,7 @@ var context = scene.plugins.get('rexExpressionParserPlugin').createProxyContext(
     has(target, key) {
         // return boolean
     },
-    get: function (target, prop) {
+    get(target, prop) {
         // return any;
     }
 })
