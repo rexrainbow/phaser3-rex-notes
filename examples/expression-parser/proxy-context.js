@@ -29,9 +29,11 @@ class Demo extends Phaser.Scene {
         */
         var context = this.plugins.get('rexExpressionParser').createProxyContext({
             has(target, key) {
+                console.log(`has handler : ${key}`)
                 return data.has(key);
             },
             get(target, key) {
+                console.log(`get handler : ${key}`)
                 return data.get(key);
             }
         })
@@ -39,8 +41,9 @@ class Demo extends Phaser.Scene {
         console.log(f(context));
 
         // Test dot-notation
-        this.data.set('data', { value: 10 });
+        this.data.set('data', { value: { a: 10, b: 20 } });
         console.log(parser.exec('data.value', context));
+        console.log(parser.exec('data.value.a', context));
     }
 
     update() {
