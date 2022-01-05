@@ -6,16 +6,18 @@ class Tick {
         // set by BehaviorTree
 
         this.tree = null;
+    
+        this.blackboard = null;
 
         this.target = null;
-
-        this.blackboard = null;
 
         // updated during the tick signal
 
         this._openNodes = [];  // Open nodes of current tick
 
         this._nodeCount = 0;
+
+        this._currentNode = null;
     }
 
     setTree(tree) {
@@ -23,13 +25,13 @@ class Tick {
         return this;
     }
 
-    setTarget(target) {
-        this.target = target;
+    setBlackBoard(blackboard) {
+        this.blackboard = blackboard;
         return this;
     }
 
-    setBlackBoard(blackboard) {
-        this.blackboard = blackboard;
+    setTarget(target) {
+        this.target = target;
         return this;
     }
 
@@ -42,6 +44,7 @@ class Tick {
     _enterNode(node) {
         this._nodeCount++;
         this._openNodes.push(node);
+        this._currentNode = node;
     }
 
     _openNode(node) {
@@ -55,6 +58,7 @@ class Tick {
     }
 
     _exitNode(node) {
+        this._currentNode = null;
     }
 };
 

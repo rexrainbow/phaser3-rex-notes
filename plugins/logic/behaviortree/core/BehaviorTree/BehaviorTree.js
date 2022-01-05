@@ -62,8 +62,8 @@ class BehaviorTree {
         // TODO: Reuse tick object
         var tick = new Tick();
         tick
-            .setBlackBoard(blackboard).setTarget(target)
-            .setTree(this)
+            .setBlackBoard(blackboard).setTree(this)
+            .setTarget(target)
             .reset();
 
         /* TICK NODE */
