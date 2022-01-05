@@ -17,10 +17,14 @@ class TagText extends Text {
     }
 
     addTags(tags) {
-        for(var name in tags){
+        for (var name in tags) {
             this.parser.addTag(name, tags[name]);
         }
         return this.updateText(true);
+    }
+
+    getTag(name) {
+        return this.parser.getTag(name);
     }
 
     preDestroy() {

@@ -19,6 +19,10 @@ class parser {
         this.tags[name] = prop;
     }
 
+    getTag(name) {
+        return this.tags[name];
+    }
+
     splitText(text, mode) {
         var result = [];
         var charIdx = 0;
