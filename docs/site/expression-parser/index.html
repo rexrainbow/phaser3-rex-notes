@@ -7876,6 +7876,10 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <li>Add parser
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexexpressionparserplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Or, parse expression to function object.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexexpressionparserplugin&#39;</span><span class="p">).</span><span class="nx">compile</span><span class="p">(</span><span class="nx">expressionString</span><span class="p">);</span>
+<span class="c1">// var value = f(context);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
@@ -7902,6 +7906,10 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <li>Add parser
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Or, parse expression to function object.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">compile</span><span class="p">(</span><span class="nx">expressionString</span><span class="p">);</span>
+<span class="c1">// var value = f(context);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
@@ -7923,14 +7931,18 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <ol>
 <li>Compile expression string into function
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">expressionString</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">compile</span><span class="p">(</span><span class="nx">expressionString</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>expressionString</code> :<ul>
 <li>Number : <code>1</code>, <code>1.5</code>, <code>0xf</code>.</li>
 <li>Variable : <code>a</code>, <code>a.b.c</code>.</li>
-<li>Arithmetic : <code>+</code>, <code>-</code>, <code>*</code>, <code>\</code>, <code>%</code>, <code>(</code>, <code>)</code>, ex : <code>'(a + b.c) * 3 + (2 % 3)'</code></li>
-<li>Boolean : <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, <code>||</code>, ex <code>'(a &gt; 10) &amp;&amp; (a &lt; 30) || (b.c &gt; c)'</code></li>
-<li>Condition : <code>(cond)? v0:v1</code>, ex<code>'(a &gt; b.c)? a:b.c'</code></li>
-<li><a href="./#custom-method">Custom method</a> : <code>randomInt(a, b.c)</code></li>
+<li>Arithmetic : <code>+</code>, <code>-</code>, <code>*</code>, <code>\</code>, <code>%</code>, <code>(</code>, <code>)</code>, ex : <code>'(a + b.c) * 3 + (2 % 3)'</code>.</li>
+<li>Boolean : <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, <code>||</code>, ex <code>'(a &gt; 10) &amp;&amp; (a &lt; 30) || (b.c &gt; c)'</code>.</li>
+<li>Condition : <code>(cond)? v0:v1</code>, ex<code>'(a &gt; b.c)? a:b.c'</code>.</li>
+<li><a href="./#custom-method">Custom method</a> : <code>randomInt(a, b.c)</code>.</li>
+<li>String concat : <code>'Hello ' + name</code>.</li>
 </ul>
 </li>
 </ul>
@@ -7997,6 +8009,16 @@ with <code>has</code> and <code>get</code> handlers could be a context.</p>
     <span class="p">},</span>
     <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">prop</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">createProxyContext</span><span class="p">({</span>
+    <span class="nx">has</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// return boolean</span>
+    <span class="p">},</span>
+    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// return any;</span>
     <span class="p">}</span>
 <span class="p">})</span>
 </code></pre></div>

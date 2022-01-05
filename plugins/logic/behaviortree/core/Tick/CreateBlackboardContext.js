@@ -1,12 +1,13 @@
 import CreateProxyContext from '../../../../math/expressionparser/utils/CreateProxyContext.js';
 
-const TreeMemory = '$tree';
-const NodeMemory = '$node';
+// Global : key
+const TreeMemory = '$tree';  // $tree.key
+const NodeMemory = '$node';  // $node.key
 
 var CreateBlackboardContext = function (tick) {
     var blackboard = tick.blackboard;
 
-    // 2nd level proxy, for TreeMemory, and NodeMemory
+    // 2nd level proxy, for TreeMemory, and NodeMemory    
     var baseContext = {
         treeID: undefined,
         nodeID: undefined
