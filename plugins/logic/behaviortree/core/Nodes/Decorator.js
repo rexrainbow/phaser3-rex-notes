@@ -1,5 +1,5 @@
 import BaseNode from './BaseNode.js';
-import { DECORATOR } from '../constants.js';
+import { DECORATOR } from '../../constants.js';
 
 class Decorator extends BaseNode {
 

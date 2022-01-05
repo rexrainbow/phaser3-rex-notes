@@ -1,4 +1,4 @@
-import Composite from '../core/Composite.js';
+import Composite from '../core/Nodes/Composite.js';
 import { FAILURE, RUNNING } from '../constants.js';
 
 class Selector extends Composite {

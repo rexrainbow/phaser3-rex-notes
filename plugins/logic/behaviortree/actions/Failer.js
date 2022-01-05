@@ -1,4 +1,4 @@
-import Action from '../core/Action.js';
+import Action from '../core/Nodes/Action.js';
 import { FAILURE } from '../constants.js';
 
 class Failer extends Action {

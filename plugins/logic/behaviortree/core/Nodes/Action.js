@@ -1,5 +1,5 @@
 import BaseNode from './BaseNode.js';
-import { ACTION } from '../constants.js';
+import { ACTION } from '../../constants.js';
 
 class Action extends BaseNode {
 

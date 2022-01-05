@@ -1,5 +1,5 @@
 import BaseNode from './BaseNode.js';
-import { COMPOSITE } from '../constants.js';
+import { COMPOSITE } from '../../constants.js';
 
 class Composite extends BaseNode {
 

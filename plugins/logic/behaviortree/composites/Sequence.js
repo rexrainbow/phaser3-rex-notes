@@ -1,4 +1,4 @@
-import Composite from '../core/Composite.js';
+import Composite from '../core/Nodes/Composite.js';
 import { SUCCESS, RUNNING } from '../constants.js';
 
 class Sequence extends Composite {

@@ -1,4 +1,4 @@
-import RemoveItem from "../../../utils/array/Remove.js";
+import RemoveItem from "../../../../utils/array/Remove.js";
 
 class Tick {
 

@@ -1,4 +1,4 @@
-import Action from '../core/Action.js';
+import Action from '../core/Nodes/Action.js';
 import { RUNNING } from '../constants.js';
 
 class Runner extends Action {

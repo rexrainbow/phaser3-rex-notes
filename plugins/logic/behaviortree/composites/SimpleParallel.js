@@ -1,4 +1,4 @@
-import Composite from '../core/Composite.js';
+import Composite from '../core/Nodes/Composite.js';
 import { RUNNING } from '../constants.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 

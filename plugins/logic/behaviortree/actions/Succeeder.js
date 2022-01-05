@@ -1,4 +1,4 @@
-import Action from '../core/Action.js';
+import Action from '../core/Nodes/Action.js';
 import { SUCCESS } from '../constants.js';
 
 class Succeeder extends Action {

@@ -1,4 +1,4 @@
-import Decorator from '../core/Decorator.js';
+import Decorator from '../core/Nodes/Decorator.js';
 import { FAILURE, ERROR } from '../constants.js';
 
 class MaxTime extends Decorator {

@@ -1,4 +1,4 @@
-import Decorator from '../core/Decorator.js';
+import Decorator from '../core/Nodes/Decorator.js';
 import { SUCCESS, ERROR, FAILURE } from '../constants.js';
 
 class Repeater extends Decorator {

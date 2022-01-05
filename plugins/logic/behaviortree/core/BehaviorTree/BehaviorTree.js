@@ -2,7 +2,7 @@ import { TREE } from '../../constants.js'
 import CreateUUID from '../../utils/CreateUUID.js';
 import Load from './Load.js';
 import Dump from './Dump.js';
-import Tick from '../Tick.js';
+import Tick from '../Tick/Tick.js';
 
 class BehaviorTree {
 

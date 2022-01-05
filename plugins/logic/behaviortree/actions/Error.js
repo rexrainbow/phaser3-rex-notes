@@ -1,5 +1,5 @@
 import { ERROR } from '../constants.js';
-import Action from '../core/Action.js';
+import Action from '../core/Nodes/Action.js';
 
 class Error extends Action {
 

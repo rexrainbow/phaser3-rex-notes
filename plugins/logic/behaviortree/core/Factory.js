@@ -1,8 +1,8 @@
 import BehaviorTree from './BehaviorTree/BehaviorTree.js';
-import Blackboard from './Blackboard.js';
-import Composite from './Composite.js';
-import Decorator from './Decorator.js';
-import Action from './Action.js';
+import Blackboard from './Blackboard/Blackboard.js';
+import Composite from './Nodes/Composite.js';
+import Decorator from './Nodes/Decorator.js';
+import Action from './Nodes/Action.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
 

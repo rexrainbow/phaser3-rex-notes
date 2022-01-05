@@ -1,5 +1,5 @@
-import CreateUUID from '../utils/CreateUUID.js';
-import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
+import CreateUUID from '../../utils/CreateUUID.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 export default class BaseNode {
 

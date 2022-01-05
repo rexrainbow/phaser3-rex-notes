@@ -1,4 +1,4 @@
-import Action from '../core/Action';
+import Action from '../core/Nodes/Action';
 import { SUCCESS, RUNNING } from '../constants';
 
 class Wait extends Action {
