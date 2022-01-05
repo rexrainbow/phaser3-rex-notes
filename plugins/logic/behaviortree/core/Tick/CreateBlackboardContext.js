@@ -5,19 +5,21 @@ const TreeMemory = '$tree';  // $tree.key
 const NodeMemory = '$node';  // $node.key
 
 var CreateBlackboardContext = function (tick) {
-    var blackboard = tick.blackboard;
-
-    // 2nd level proxy, for TreeMemory, and NodeMemory    
-    var baseContext = {
-        treeID: undefined,
-        nodeID: undefined
-    }
-    var proxyContent = CreateProxyContext({
+    var treeMemoryProxyContext = CreateProxyContext({
         has(target, key) {
-            return blackboard.has(key, target.treeID, target.nodeID);
+            return tick.blackboard.has(key, tick.tree.id);
         },
         get(target, key) {
-            return blackboard.get(key, target.treeID, target.nodeID);
+            return tick.blackboard.get(key, tick.tree.id);
+        }
+    })
+
+    var nodeMemoryProxyContext = CreateProxyContext({
+        has(target, key) {
+            return tick.blackboard.has(key, tick.tree.id, tick._currentNode.id);
+        },
+        get(target, key) {
+            return tick.blackboard.get(key, tick.tree.id, tick._currentNode.id);
         }
     }, baseContext)
 
@@ -25,29 +27,23 @@ var CreateBlackboardContext = function (tick) {
         has(target, key) {
             switch (key) {
                 case TreeMemory:
-                    return true;
-
                 case NodeMemory:
                     return true;
 
                 default:
-                    return blackboard.has(key)
+                    return tick.blackboard.has(key)
             }
         },
         get(target, key) {
             switch (key) {
                 case TreeMemory:
-                    baseContext.treeID = tick.tree.id;
-                    baseContext.nodeID = undefined;
-                    return proxyContent;
+                    return treeMemoryProxyContext;
 
                 case NodeMemory:
-                    baseContext.treeID = tick.tree.id;
-                    baseContext.nodeID = tick._currentNode.id;
-                    return proxyContent;
+                    return nodeMemoryProxyContext;
 
                 default:
-                    return blackboard.get(key)
+                    return tick.blackboard.get(key)
             }
         }
     })
