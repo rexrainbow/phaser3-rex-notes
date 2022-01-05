@@ -108,11 +108,12 @@ class Cell {
             table.nonZeroDeltaHeightCount--;
         }
 
-        var tableHeightChanged = (this._deltaHeight !== deltaHeight);
+        var isTableHeightChanged = (this._deltaHeight !== deltaHeight);
 
         this._deltaHeight = deltaHeight;
 
-        if (tableHeightChanged) {
+        if (isTableHeightChanged) {
+            table.resetTotalRowsHeight();
             var eventName = (this.scrollMode === 0) ? 'cellheightchange' : 'cellwidthchange';
             this.parentContainer.emit(eventName, this, this.container, this.parentContainer);
         }

@@ -1873,10 +1873,11 @@
           table.nonZeroDeltaHeightCount--;
         }
 
-        var tableHeightChanged = this._deltaHeight !== deltaHeight;
+        var isTableHeightChanged = this._deltaHeight !== deltaHeight;
         this._deltaHeight = deltaHeight;
 
-        if (tableHeightChanged) {
+        if (isTableHeightChanged) {
+          table.resetTotalRowsHeight();
           var eventName = this.scrollMode === 0 ? 'cellheightchange' : 'cellwidthchange';
           this.parentContainer.emit(eventName, this, this.container, this.parentContainer);
         }
@@ -2019,7 +2020,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.colCount = undefined;
-        this._nonZeroDeltaHeightCount = 0;
+        this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
         this.setDefaultCellHeight(GetValue$2(o, 'cellHeight', 30));
         this.setDefaultCellWidth(GetValue$2(o, 'cellWidth', 30));
@@ -2035,19 +2036,6 @@
         this.cellPool.destroy();
         this.cells = undefined;
         this.parent = undefined;
-      }
-    }, {
-      key: "nonZeroDeltaHeightCount",
-      get: function get() {
-        return this._nonZeroDeltaHeightCount;
-      },
-      set: function set(count) {
-        if (this._nonZeroDeltaHeightCount === count) {
-          return;
-        }
-
-        this._nonZeroDeltaHeightCount = count;
-        this.resetTotalRowsHeight();
       }
     }, {
       key: "defaultCellHeightMode",

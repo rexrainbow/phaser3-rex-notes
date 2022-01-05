@@ -14,7 +14,7 @@ class Table {
 
     resetFromJSON(o) {
         this.colCount = undefined;
-        this._nonZeroDeltaHeightCount = 0;
+        this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
         this.setDefaultCellHeight(GetValue(o, 'cellHeight', 30));
         this.setDefaultCellWidth(GetValue(o, 'cellWidth', 30));
@@ -29,18 +29,6 @@ class Table {
         this.cellPool.destroy();
         this.cells = undefined;
         this.parent = undefined;
-    }
-
-    get nonZeroDeltaHeightCount() {
-        return this._nonZeroDeltaHeightCount;
-    }
-
-    set nonZeroDeltaHeightCount(count) {
-        if (this._nonZeroDeltaHeightCount === count) {
-            return;
-        }
-        this._nonZeroDeltaHeightCount = count;
-        this.resetTotalRowsHeight();
     }
 
     get defaultCellHeightMode() {

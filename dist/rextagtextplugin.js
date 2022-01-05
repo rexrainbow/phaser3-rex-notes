@@ -3522,6 +3522,11 @@
         this.tags[name] = prop;
       }
     }, {
+      key: "getTag",
+      value: function getTag(name) {
+        return this.tags[name];
+      }
+    }, {
       key: "splitText",
       value: function splitText(text, mode) {
         var result = [];
@@ -3870,6 +3875,11 @@
         }
 
         return this.updateText(true);
+      }
+    }, {
+      key: "getTag",
+      value: function getTag(name) {
+        return this.parser.getTag(name);
       }
     }, {
       key: "preDestroy",

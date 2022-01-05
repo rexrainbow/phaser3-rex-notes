@@ -5569,6 +5569,11 @@
         this.tags[name] = prop;
       }
     }, {
+      key: "getTag",
+      value: function getTag(name) {
+        return this.tags[name];
+      }
+    }, {
       key: "splitText",
       value: function splitText(text, mode) {
         var result = [];
@@ -5917,6 +5922,11 @@
         }
 
         return this.updateText(true);
+      }
+    }, {
+      key: "getTag",
+      value: function getTag(name) {
+        return this.parser.getTag(name);
       }
     }, {
       key: "preDestroy",
@@ -28657,10 +28667,11 @@
           table.nonZeroDeltaHeightCount--;
         }
 
-        var tableHeightChanged = this._deltaHeight !== deltaHeight;
+        var isTableHeightChanged = this._deltaHeight !== deltaHeight;
         this._deltaHeight = deltaHeight;
 
-        if (tableHeightChanged) {
+        if (isTableHeightChanged) {
+          table.resetTotalRowsHeight();
           var eventName = this.scrollMode === 0 ? 'cellheightchange' : 'cellwidthchange';
           this.parentContainer.emit(eventName, this, this.container, this.parentContainer);
         }
@@ -28761,7 +28772,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.colCount = undefined;
-        this._nonZeroDeltaHeightCount = 0;
+        this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
         this.setDefaultCellHeight(GetValue$K(o, 'cellHeight', 30));
         this.setDefaultCellWidth(GetValue$K(o, 'cellWidth', 30));
@@ -28777,19 +28788,6 @@
         this.cellPool.destroy();
         this.cells = undefined;
         this.parent = undefined;
-      }
-    }, {
-      key: "nonZeroDeltaHeightCount",
-      get: function get() {
-        return this._nonZeroDeltaHeightCount;
-      },
-      set: function set(count) {
-        if (this._nonZeroDeltaHeightCount === count) {
-          return;
-        }
-
-        this._nonZeroDeltaHeightCount = count;
-        this.resetTotalRowsHeight();
       }
     }, {
       key: "defaultCellHeightMode",
