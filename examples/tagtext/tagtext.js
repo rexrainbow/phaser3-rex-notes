@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
                 color: 'red',
                 fontStyle: 'bold italic'
             },
-            superscript : {
+            superscript: {
                 y: -16,
                 size: 20
             },
@@ -57,9 +57,19 @@ class Demo extends Phaser.Scene {
         console.log(text.getPlainText());
         console.log(text.getText(undefined, 1, 4));
 
+
+        this.input.once('pointerdown', function () {
+            // Change size of image
+            text.addImage('key', {
+                key: 'key',
+                width: 64,
+            })
+
+            text.updateText()
+        })
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
