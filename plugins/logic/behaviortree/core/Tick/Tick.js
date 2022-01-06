@@ -1,4 +1,5 @@
 import RemoveItem from "../../../../utils/array/Remove.js";
+import { CURRENT_TIME } from '../../constants.js'
 
 class Tick {
 
@@ -6,7 +7,7 @@ class Tick {
         // set by BehaviorTree
 
         this.tree = null;
-    
+
         this.blackboard = null;
 
         this.target = null;
@@ -20,6 +21,7 @@ class Tick {
         this._currentNode = null;
     }
 
+    // Set members
     setTree(tree) {
         this.tree = tree;
         return this;
@@ -39,6 +41,15 @@ class Tick {
         this._openNodes.length = 0;
         this._nodeCount = 0;
         return this;
+    }
+
+    get currentTime() {
+        if (this.blackboard.has(CURRENT_TIME)) {
+            // Inject current-time through blackboard
+            return this.blackboard.get(CURRENT_TIME);
+        } else {
+            return (new Date()).getTime();
+        }
     }
 
     _enterNode(node) {

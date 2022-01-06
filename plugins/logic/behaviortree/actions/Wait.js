@@ -14,12 +14,12 @@ class Wait extends Action {
     }
 
     open(tick) {
-        var startTime = (new Date()).getTime();
+        var startTime = tick.currentTime;
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
     }
 
     tick(tick) {
-        var currTime = (new Date()).getTime();
+        var currTime = tick.currentTime;
         var startTime = tick.blackboard.get('startTime', tick.tree.id, this.id);
 
         if (currTime - startTime > this.endTime) {

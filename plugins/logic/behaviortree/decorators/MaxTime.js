@@ -19,7 +19,7 @@ class MaxTime extends Decorator {
     }
 
     open(tick) {
-        var startTime = (new Date()).getTime();
+        var startTime = tick.currentTime;
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
     }
 
@@ -28,7 +28,7 @@ class MaxTime extends Decorator {
             return ERROR;
         }
 
-        var currTime = (new Date()).getTime();
+        var currTime = tick.currentTime;
         var startTime = tick.blackboard.get('startTime', tick.tree.id, this.id);
 
         var status = this.child._execute(tick);

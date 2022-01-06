@@ -7,3 +7,4 @@ export const COMPOSITE = 'composite';
 export const DECORATOR = 'decorator';
 export const ACTION = 'action';
 export const CONDITION = 'condition';
+export const CURRENT_TIME = '$currentTime';
