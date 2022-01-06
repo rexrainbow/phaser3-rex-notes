@@ -237,7 +237,7 @@ var panel = scene.rexUI.add.scrollablePanel({
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 
-#### Children bounds
+#### Child bounds
 
 Scrollable panel will mask child if child's bounds (`child.getBounds()`)  is across mask area. 
 **Bitmaptext game object does not have `getBounds` method**. 
