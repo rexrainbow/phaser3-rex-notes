@@ -237,6 +237,23 @@ var panel = scene.rexUI.add.scrollablePanel({
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 
+#### Children bounds
+
+Scrollable panel will mask child if child's bounds (`child.getBounds()`)  is across mask area. 
+**Bitmaptext game object does not have `getBounds` method**. 
+User can inject it by
+
+```javascript
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(
+    Phaser.GameObjects.BitmapText,
+    [
+        Components.ComputedSize,
+        Components.GetBounds
+    ]
+);
+```
+
 ### Custom class
 
 - Define class

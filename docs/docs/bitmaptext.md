@@ -244,7 +244,7 @@ txt.dropShadowAlpha = alpha;
     txt.setMaxWidth(0);
     ```
 
-### Get bound
+### Get bounds
 
 ```javascript
 var width = txt.width;
@@ -314,6 +314,21 @@ var bounds = txt.getTextBounds(round);
     - `w` , `h` : Width/height of word
     - `cr` : Is last word of current line
 - `scaleX`, `scaleY` : Scale of width and height.
+
+
+**Bitmaptext game object does not have `getBounds` method**. 
+User can inject it by
+
+```javascript
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(
+    Phaser.GameObjects.BitmapText,
+    [
+        Components.ComputedSize,
+        Components.GetBounds
+    ]
+);
+```
 
 #### Get information of character
 
