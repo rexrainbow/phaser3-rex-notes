@@ -240,6 +240,7 @@ var panel = scene.rexUI.add.scrollablePanel({
 #### Child bounds
 
 Scrollable panel will mask child if child's bounds (`child.getBounds()`)  is across mask area. 
+
 **Bitmaptext game object does not have `getBounds` method**. 
 User can inject it by
 
