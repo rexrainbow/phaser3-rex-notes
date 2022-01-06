@@ -36,21 +36,25 @@ class Demo extends Phaser.Scene {
                 new MyActionNode({ i: 1 })
             ]
         });
-        var result = tree.dump();
-        var nodes = tree.getNodes();
-        debugger
+        // var result = tree.dump();
+        // var nodes = tree.getNodes();
+        // debugger
 
         var blackboard = btAdd.blackboard();
-        var state;
-        do {
-            state = tree.tick(blackboard);
-            console.log(state);
-        } while (state === 3)
 
-        do {
-            state = tree.tick(blackboard);
-            console.log(state);
-        } while (state === 3)
+        var scene = this;
+        var RunTick = function (time, delta) {
+            blackboard.setCurrentTime(time);
+            var state = tree.tick(blackboard);
+            console.log(`Run tick ${state}`);
+
+            // Stop ticking
+            if (state !== 3) {
+                scene.events.off("update", RunTick);
+            }
+        };
+
+        scene.events.on("update", RunTick);
     }
 
     update() {

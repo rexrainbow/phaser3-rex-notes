@@ -93,7 +93,6 @@ CLOSE --> EXIT
 TICK  --> |isRunning| EXIT
 ```
 
-- [TODO] Get current time one time in each `tree.tick()`.
 - When closing a node, also close children nodes.
 
 ### Expression
