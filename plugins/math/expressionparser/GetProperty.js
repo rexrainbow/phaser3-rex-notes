@@ -8,7 +8,7 @@ var GetProperty = function (context, key, defaultValue, dotMode) {
     } else if (key in context) {
         return context[key];
     } else if (dotMode &&
-        ((key.indexOf('.') !== -1) || (Array.isArray(key)))
+        ((Array.isArray(key) || (key.indexOf('.') !== -1)))
     ) {
         var keys = (Array.isArray(key)) ? key : key.split('.');
         var value = context;

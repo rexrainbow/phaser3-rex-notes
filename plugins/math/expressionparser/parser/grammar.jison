@@ -25,6 +25,8 @@
 ":"                                     return ":"
 "("                                     return '('
 ")"                                     return ')'
+"["                                     return '['
+"]"                                     return ']'
 ","                                     return ','
 "."                                     return '.'
 'true'                                  return 'true'
@@ -107,9 +109,15 @@ expression_list
 
 dot_name
     : dot_name '.' NAME
-        { $$ = `${$1}.${$3}`}
+        { $$ = $1.concat([$3]); }
+    | dot_name '[' QUOTED_STRING ']'
+        { $$ = $1.concat([$3.slice(1,-1)]); }
+    | dot_name '[' NUMBER ']'
+        { $$ = $1.concat([Number($3)]); }
     | NAME
-        { $$ = $1; }
+        { $$ = [$1]; }
+    | '[' QUOTED_STRING ']'
+        { $$ = [$1.slice(1,-1)]; }
     ;
 
 e

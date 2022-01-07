@@ -13,9 +13,9 @@ class Demo extends Phaser.Scene {
     create() {
         var parser = this.plugins.get('rexExpressionParser').add();
 
-        var expression = "($a._b_.__c + d.e.f)*0.5";
+        var expression = "($a._b_.__c + d['a a'][0])*0.5";
         var f = parser.compile(expression);
-        
+
         var context = {
             $a: {
                 _b_: {
@@ -23,15 +23,13 @@ class Demo extends Phaser.Scene {
                 }
             },
             d: {
-                e: {
-                    f: 20
-                }
+                'a a': [20]
             }
         }
         console.log(f(context));
-        
+
         context.$a._b_.__c = 100;
-        context.d.e.f = 200;
+        context.d['a a'][0] = 200;
         console.log(f(context));
     }
 
