@@ -45,7 +45,9 @@
 
     function mapArgs(args, ctx) {
         if (args) {
-            args = args.map(function(arg){ return runFn(arg, ctx); });
+            for(var i=0, cnt=args.length; i<cnt; i++) {
+                args[i] = runFn(args[i], ctx);
+            }
         }
         return args;
     }
@@ -114,6 +116,12 @@ dot_name
         { $$ = $1.concat([$3.slice(1,-1)]); }
     | dot_name '[' NUMBER ']'
         { $$ = $1.concat([Number($3)]); }
+    | dot_name '[' dot_name ']'
+        { 
+            $$ = $1.concat([
+                function(ctx) { return yy.parser.getDotProperty(ctx, $3, 0); }
+            ]); 
+        }
     | NAME
         { $$ = [$1]; }
     | '[' QUOTED_STRING ']'
@@ -194,16 +202,22 @@ e
     | 'false'
         { $$ = false; }
     | dot_name 
-        {
-            $$ = function(ctx) { return yy.parser.getDotProperty(ctx, $dot_name, 0); }
+        {            
+            $$ = function(ctx) {
+                return yy.parser.getDotProperty(ctx, mapArgs($1, ctx), 0); 
+            }
         }        
     | dot_name '(' ')'
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, $dot_name, undefined, true); }
-        }        
+            $$ = function(ctx) { 
+                return runMethod(yy.parser, ctx, mapArgs($1, ctx), undefined, true); 
+            }
+        }
     | dot_name '(' expression_list ')'
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, $dot_name, $expression_list, true); }
+            $$ = function(ctx) { 
+                return runMethod(yy.parser, ctx, mapArgs($1, ctx), $expression_list, true); 
+            }
         }
     | QUOTED_STRING
         { $$ = yytext.slice(1,-1); }
