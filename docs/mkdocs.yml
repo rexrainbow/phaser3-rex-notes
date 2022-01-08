@@ -317,6 +317,7 @@ nav:
     - Format:
         - Format: format.md
         - Mustache: mustache.md
+        - Handlebars : handlebars.md
     - Pad: pad.md
     - Capitalizes first: capitalizes-first.md
     - Reverse: reverse-string.md
