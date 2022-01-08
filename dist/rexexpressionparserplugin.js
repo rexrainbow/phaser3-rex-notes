@@ -1661,9 +1661,9 @@
 
       function mapArgs(args, ctx) {
         if (args) {
-          for (var i = 0, cnt = args.length; i < cnt; i++) {
-            args[i] = runFn(args[i], ctx);
-          }
+          args = args.map(function (arg) {
+            return runFn(arg, ctx);
+          });
         }
 
         return args;
