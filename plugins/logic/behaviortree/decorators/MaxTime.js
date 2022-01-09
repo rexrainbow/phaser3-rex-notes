@@ -24,7 +24,7 @@ class MaxTime extends Decorator {
         var startTime = tick.currentTime;
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
 
-        this.maxTime = this.maxTimeExpression.eval(tick.blackboard);
+        this.maxTime = this.maxTimeExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {

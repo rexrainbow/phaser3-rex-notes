@@ -22,7 +22,7 @@ class Limiter extends Decorator {
 
     open(tick) {
         tick.blackboard.set('i', 0, tick.tree.id, this.id);
-        this.maxLoop = this.maxLoopExpression.eval(tick.blackboard);
+        this.maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {

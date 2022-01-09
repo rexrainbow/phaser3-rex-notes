@@ -19,7 +19,7 @@ class Wait extends Action {
         var startTime = tick.currentTime;
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
 
-        this.endTime = this.endTimeExpression.eval(tick.blackboard);
+        this.endTime = this.endTimeExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {

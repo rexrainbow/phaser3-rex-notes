@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
         tree.root = btAdd.sequence({
             children: [
                 new MyActionNode({ i: 0 }),
-                btAdd.wait({ milliseconds: '1+1+1' }),
+                btAdd.wait({ milliseconds: 'i+10' }),
                 new MyActionNode({ i: 1 })
             ]
         });
@@ -43,6 +43,7 @@ class Demo extends Phaser.Scene {
         var blackboard = btAdd.blackboard();
 
         var scene = this;
+        blackboard.set('i', 10);
         var RunTick = function (time, delta) {
             blackboard.setCurrentTime(time);
             var state = tree.tick(blackboard);

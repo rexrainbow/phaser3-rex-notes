@@ -21,7 +21,7 @@ var CreateBlackboardContext = function (tick) {
         get(target, key) {
             return tick.blackboard.get(key, tick.tree.id, tick._currentNode.id);
         }
-    }, baseContext)
+    })
 
     return CreateProxyContext({
         has(target, key) {
