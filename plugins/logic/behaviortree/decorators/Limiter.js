@@ -1,4 +1,5 @@
 import Decorator from '../core/Nodes/Decorator.js';
+import NumberVariable from '../core/Variable/NumberVariable.js';
 import { FAILURE, SUCCESS, ERROR } from '../constants.js';
 
 class Limiter extends Decorator {
@@ -15,11 +16,13 @@ class Limiter extends Decorator {
             throw 'maxLoop parameter in Limiter decorator is an obligatory parameter';
         }
 
-        this.maxLoop = maxLoop;
+        this.maxLoopExpression = new NumberVariable(maxLoop);
+        this.maxLoop = null;
     }
 
     open(tick) {
         tick.blackboard.set('i', 0, tick.tree.id, this.id);
+        this.maxLoop = this.maxLoopExpression.eval(tick.blackboard);
     }
 
     tick(tick) {

@@ -1,4 +1,5 @@
 import Decorator from '../core/Nodes/Decorator.js';
+import NumberVariable from '../core/Variable/NumberVariable.js';
 import { FAILURE, ERROR } from '../constants.js';
 
 class MaxTime extends Decorator {
@@ -15,12 +16,15 @@ class MaxTime extends Decorator {
             throw 'maxTime parameter in MaxTime decorator is an obligatory parameter';
         }
 
-        this.maxTime = maxTime;
+        this.maxTimeExpression = new NumberVariable(maxTime);
+        this.maxTime = undefined;
     }
 
     open(tick) {
         var startTime = tick.currentTime;
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
+
+        this.maxTime = this.maxTimeExpression.eval(tick.blackboard);
     }
 
     tick(tick) {

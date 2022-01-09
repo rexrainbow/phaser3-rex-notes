@@ -1,4 +1,5 @@
 import Action from '../core/Nodes/Action';
+import NumberVariable from '../core/Variable/NumberVariable.js';
 import { SUCCESS, RUNNING } from '../constants';
 
 class Wait extends Action {
@@ -10,19 +11,22 @@ class Wait extends Action {
             properties: { milliseconds: 0 },
         });
 
-        this.endTime = milliseconds;
+        this.endTimeExpression = new NumberVariable(milliseconds);
+        this.endTime = undefined;
     }
 
     open(tick) {
         var startTime = tick.currentTime;
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
+
+        this.endTime = this.endTimeExpression.eval(tick.blackboard);
     }
 
     tick(tick) {
         var currTime = tick.currentTime;
         var startTime = tick.blackboard.get('startTime', tick.tree.id, this.id);
 
-        if (currTime - startTime > this.endTime) {
+        if ((currTime - startTime) > this.endTime) {
             return SUCCESS;
         }
 

@@ -1,4 +1,5 @@
 import Decorator from '../core/Nodes/Decorator.js';
+import NumberVariable from '../core/Variable/NumberVariable.js';
 import { SUCCESS, ERROR, FAILURE } from '../constants.js';
 
 class Repeater extends Decorator {
@@ -11,11 +12,14 @@ class Repeater extends Decorator {
             properties: { maxLoop: -1 },
         });
 
-        this.maxLoop = maxLoop;
+        this.maxLoopExpression = new NumberVariable(maxLoop);
+        this.maxLoop = undefined;
     }
 
     open(tick) {
         tick.blackboard.set('i', 0, tick.tree.id, this.id);
+
+        this.maxLoop = this.maxLoopExpression.eval(tick.blackboard);
     }
 
     tick(tick) {

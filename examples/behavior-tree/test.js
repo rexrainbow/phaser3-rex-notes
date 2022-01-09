@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
         tree.root = btAdd.sequence({
             children: [
                 new MyActionNode({ i: 0 }),
-                btAdd.wait({ milliseconds: 3 }),
+                btAdd.wait({ milliseconds: '1+1+1' }),
                 new MyActionNode({ i: 1 })
             ]
         });
