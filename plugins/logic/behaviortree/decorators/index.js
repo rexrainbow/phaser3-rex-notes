@@ -4,6 +4,7 @@ import MaxTime from './MaxTime.js';
 import RepeatUntilFailure from './RepeatUntilFailure.js';
 import RepeatUntilSuccess from './RepeatUntilSuccess.js';
 import Repeater from './Repeater.js';
+import Condition from './Condition.js';
 
 export {
     Inverter,
@@ -11,5 +12,6 @@ export {
     MaxTime,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeater
+    Repeater,
+    Condition
 }

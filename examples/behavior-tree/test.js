@@ -1,18 +1,18 @@
 import 'phaser';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
 
-const Action = RexPlugins.BehaviorTree.Action;
-class MyActionNode extends Action {
-    constructor({ i = 0 } = {}) {
+class PrintAction extends RexPlugins.BehaviorTree.Action {
+    constructor({ text = '' } = {}) {
         super({
             name: 'MyAction',
-            title: 'MyAction <i>',
-            properties: { i: i },
+            properties: { text: text },
         });
+
+        this.textExpression = this.addStringVariable(text);
     }
 
     tick(tick) {
-        console.log(`Tick - MyAction: ${this.properties.i}`);
+        console.log(`Tick - Print: ${this.textExpression.eval(tick.blackboardContext)}`);
         return this.SUCCESS;
     }
 }
@@ -29,21 +29,38 @@ class Demo extends Phaser.Scene {
     create() {
         var btAdd = this.plugins.get('rexBT').add;
         var tree = btAdd.behaviorTree();
-        tree.root = btAdd.sequence({
+        tree.root = btAdd.selector({
             children: [
-                new MyActionNode({ i: 0 }),
-                btAdd.wait({ milliseconds: 'i+10' }),
-                new MyActionNode({ i: 1 })
+                btAdd.condition({
+                    expression: 'i >= 10',
+                    child: btAdd.sequence({
+                        children: [
+                            new PrintAction({ text: 'Hello {{name}}' }),
+                            btAdd.wait({ milliseconds: 'i+10' }),
+                            new PrintAction({ text: 'Goodbye {{name}}' }),
+                        ]
+                    })
+                }),
+                btAdd.condition({
+                    expression: 'true',
+                    child: btAdd.sequence({
+                        children: [
+                            new PrintAction({ text: 'Else' }),
+                        ]
+                    })
+                }),
             ]
-        });
+        })
+
         // var result = tree.dump();
         // var nodes = tree.getNodes();
         // debugger
 
-        var blackboard = btAdd.blackboard();
+        var blackboard = btAdd.blackboard()
+            .set('name', 'res')
+            .set('i', 20);
 
         var scene = this;
-        blackboard.set('i', 10);
         var RunTick = function (time, delta) {
             blackboard.setCurrentTime(time);
             var state = tree.tick(blackboard);

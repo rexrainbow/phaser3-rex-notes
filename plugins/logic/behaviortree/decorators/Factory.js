@@ -5,6 +5,8 @@ import MaxTime from './MaxTime.js';
 import RepeatUntilFailure from './RepeatUntilFailure.js';
 import RepeatUntilSuccess from './RepeatUntilSuccess.js';
 import Repeater from './Repeater.js';
+import Condition from './Condition.js';
+
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
 
@@ -29,6 +31,9 @@ ObjectFactory.register('repeatUntilSuccess', function (config) {
 ObjectFactory.register('repeater', function (config) {
     return new Repeater(config);
 });
+ObjectFactory.register('condition', function (config) {
+    return new Condition(config);
+});
 
 SetValue(window, 'RexPlugins.BehaviorTree.Bypass', Bypass);
 SetValue(window, 'RexPlugins.BehaviorTree.Inverter', Inverter);
@@ -37,6 +42,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.Failer', MaxTime);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', RepeatUntilFailure);
 SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilSuccess', RepeatUntilSuccess);
 SetValue(window, 'RexPlugins.BehaviorTree.Repeater', Repeater);
+SetValue(window, 'RexPlugins.BehaviorTree.Condition', Condition);
 
 export {
     Bypass,
@@ -45,5 +51,6 @@ export {
     MaxTime,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeater
+    Repeater,
+    Condition
 };
