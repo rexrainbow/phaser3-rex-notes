@@ -1581,11 +1581,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-bound" class="md-nav__link">
-    Get bound
+  <a href="#get-bounds" class="md-nav__link">
+    Get bounds
   </a>
   
-    <nav class="md-nav" aria-label="Get bound">
+    <nav class="md-nav" aria-label="Get bounds">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -6259,6 +6259,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handlebars/" class="md-nav__link">
+        Handlebars
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -7856,11 +7870,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-bound" class="md-nav__link">
-    Get bound
+  <a href="#get-bounds" class="md-nav__link">
+    Get bounds
   </a>
   
-    <nav class="md-nav" aria-label="Get bound">
+    <nav class="md-nav" aria-label="Get bounds">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -8163,7 +8177,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setMaxWidth</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="get-bound">Get bound<a class="headerlink" href="#get-bound" title="Permanent link">&para;</a></h3>
+<h3 id="get-bounds">Get bounds<a class="headerlink" href="#get-bounds" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 </code></pre></div>
@@ -8231,6 +8245,17 @@
 </li>
 <li><code>scaleX</code>, <code>scaleY</code> : Scale of width and height.</li>
 </ul>
+<p><strong>Bitmaptext game object does not have <code>getBounds</code> method</strong>. 
+User can inject it by</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">Components</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Components</span><span class="p">;</span>
+<span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">mixin</span><span class="p">(</span>
+    <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">BitmapText</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="nx">Components</span><span class="p">.</span><span class="nx">ComputedSize</span><span class="p">,</span>
+        <span class="nx">Components</span><span class="p">.</span><span class="nx">GetBounds</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</code></pre></div>
 <h4 id="get-information-of-character">Get information of character<a class="headerlink" href="#get-information-of-character" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharacterAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// var data = txt.getCharacterAt(x, y, camera);</span>

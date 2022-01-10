@@ -6080,6 +6080,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handlebars/" class="md-nav__link">
+        Handlebars
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -6714,6 +6728,19 @@
   <a href="#add-scroll-able-panel-object" class="md-nav__link">
     Add scroll-able panel object
   </a>
+  
+    <nav class="md-nav" aria-label="Add scroll-able panel object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#child-bounds" class="md-nav__link">
+    Child bounds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -7822,6 +7849,19 @@
     Add scroll-able panel object
   </a>
   
+    <nav class="md-nav" aria-label="Add scroll-able panel object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#child-bounds" class="md-nav__link">
+    Child bounds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8197,6 +8237,19 @@
 <li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
 </ul>
+<h4 id="child-bounds">Child bounds<a class="headerlink" href="#child-bounds" title="Permanent link">&para;</a></h4>
+<p>Scrollable panel will mask child if child's bounds (<code>child.getBounds()</code>)  is across mask area. </p>
+<p><strong>Bitmaptext game object does not have <code>getBounds</code> method</strong>. 
+User can inject it by</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">Components</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Components</span><span class="p">;</span>
+<span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">mixin</span><span class="p">(</span>
+    <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">BitmapText</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="nx">Components</span><span class="p">.</span><span class="nx">ComputedSize</span><span class="p">,</span>
+        <span class="nx">Components</span><span class="p">.</span><span class="nx">GetBounds</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+</code></pre></div>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
