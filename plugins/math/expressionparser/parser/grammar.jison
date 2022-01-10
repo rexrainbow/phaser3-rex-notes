@@ -97,7 +97,13 @@
 
 expressions
     : e EOF
-        {return $1;}
+        {
+            if (typeof($1) === 'function') {
+                return $1;
+            } else {
+                return function(ctx) { return $1; }
+            }
+        }
     ;
 
 expression_list
