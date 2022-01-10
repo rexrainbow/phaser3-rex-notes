@@ -8,6 +8,7 @@ Set position of game object on a [path](path.md).
 ## Live demos
 
 - [Path follower](https://codepen.io/rexrainbow/pen/GXKPKB)
+- [Spaced points](https://codepen.io/rexrainbow/pen/Jjraeag)
 
 ## Usage
 
