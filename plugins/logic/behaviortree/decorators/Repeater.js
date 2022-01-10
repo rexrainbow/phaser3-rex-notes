@@ -1,5 +1,4 @@
 import Decorator from '../core/Nodes/Decorator.js';
-import NumberVariable from '../core/Variable/NumberVariable.js';
 import { SUCCESS, ERROR, FAILURE } from '../constants.js';
 
 class Repeater extends Decorator {
@@ -12,7 +11,7 @@ class Repeater extends Decorator {
             properties: { maxLoop: -1 },
         });
 
-        this.maxLoopExpression = new NumberVariable(maxLoop);
+        this.maxLoopExpression = this.addNumberVariable(maxLoop);
         this.maxLoop = undefined;
     }
 

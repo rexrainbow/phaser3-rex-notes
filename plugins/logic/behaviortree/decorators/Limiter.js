@@ -1,5 +1,4 @@
 import Decorator from '../core/Nodes/Decorator.js';
-import NumberVariable from '../core/Variable/NumberVariable.js';
 import { FAILURE, SUCCESS, ERROR } from '../constants.js';
 
 class Limiter extends Decorator {
@@ -16,7 +15,7 @@ class Limiter extends Decorator {
             throw 'maxLoop parameter in Limiter decorator is an obligatory parameter';
         }
 
-        this.maxLoopExpression = new NumberVariable(maxLoop);
+        this.maxLoopExpression = this.addNumberVariable(maxLoop);
         this.maxLoop = null;
     }
 

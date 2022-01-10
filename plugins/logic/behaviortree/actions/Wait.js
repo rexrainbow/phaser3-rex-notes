@@ -1,5 +1,4 @@
 import Action from '../core/Nodes/Action';
-import NumberVariable from '../core/Variable/NumberVariable.js';
 import { SUCCESS, RUNNING } from '../constants';
 
 class Wait extends Action {
@@ -11,7 +10,7 @@ class Wait extends Action {
             properties: { milliseconds: 0 },
         });
 
-        this.endTimeExpression = new NumberVariable(milliseconds);
+        this.endTimeExpression = this.addNumberVariable(milliseconds);
         this.endTime = undefined;
     }
 
