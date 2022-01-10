@@ -302,8 +302,10 @@
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var Vector2 = Phaser.Math.Vector2;
   var DegToRad = Phaser.Math.DegToRad;
   var AngleBetween = Phaser.Math.Angle.Between;
+  var Linear = Phaser.Math.Linear;
 
   var PathFollower = /*#__PURE__*/function (_ComponentBase) {
     _inherits(PathFollower, _ComponentBase);
@@ -321,7 +323,8 @@
       // this.parent = gameObject;
 
       _this._t = 0;
-      _this.pathVector = undefined;
+      _this.pathVector = new Vector2();
+      _this.spacePoints = undefined;
 
       _this.resetFromJSON(config);
 
@@ -332,12 +335,6 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setPath(GetValue(o, 'path', undefined));
-        var t = GetValue(o, 't', undefined);
-
-        if (t !== undefined) {
-          this.setT(t);
-        }
-
         var rotateToPath = GetValue(o, 'rotateToPath', false);
         var rotationOffset = GetValue(o, 'rotationOffset', undefined);
 
@@ -346,6 +343,20 @@
         }
 
         this.setRotateToPath(rotateToPath, rotationOffset);
+        var spacedPoints = GetValue(o, 'spacedPoints', false);
+
+        if (spacedPoints) {
+          this.setSpacedPointsMode(GetValue(spacedPoints, 'divisions', undefined), GetValue(spacedPoints, 'stepRate', 10));
+        } else {
+          this.setSpacedPointsMode(false);
+        }
+
+        var t = GetValue(o, 't', undefined);
+
+        if (t !== undefined) {
+          this.setT(t);
+        }
+
         return this;
       }
     }, {
@@ -387,6 +398,42 @@
         return this;
       }
     }, {
+      key: "setSpacedPointsMode",
+      value: function setSpacedPointsMode(divisions, stepRate) {
+        if (!divisions && !stepRate) {
+          this.spacePoints = undefined;
+        } else {
+          this.spacePoints = this.path.getSpacedPoints(divisions, stepRate, this.spacePoints); // Add point at t=1
+
+          this.spacePoints.push(this.path.getPoint(1));
+        }
+
+        return this;
+      }
+    }, {
+      key: "getPoint",
+      value: function getPoint(t) {
+        if (this.spacePoints === undefined) {
+          return this.path.getPoint(this.t, this.pathVector);
+        } else {
+          var start = (this.spacePoints.length - 1) * t;
+          var index = Math.floor(start);
+          var p0 = this.spacePoints[index],
+              p1 = this.spacePoints[index + 1];
+
+          if (!p1) {
+            this.pathVector.x = p0.x;
+            this.pathVector.y = p0.y;
+          } else {
+            var remainderT = start - index;
+            this.pathVector.x = Linear(p0.x, p1.x, remainderT);
+            this.pathVector.y = Linear(p0.y, p1.y, remainderT);
+          }
+
+          return this.pathVector;
+        }
+      }
+    }, {
       key: "update",
       value: function update() {
         if (this.path === undefined) {
@@ -396,7 +443,7 @@
         var gameObject = this.parent;
         var curX = gameObject.x,
             curY = gameObject.y;
-        this.pathVector = this.path.getPoint(this.t, this.pathVector);
+        this.pathVector = this.getPoint(this._t);
         var newX = this.pathVector.x,
             newY = this.pathVector.y;
 

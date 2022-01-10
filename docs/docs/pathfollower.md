@@ -79,7 +79,14 @@ var pathFollower = scene.plugins.get('rexPathFollower').add(gameObject, {
     // t: 0,                // t: 0~1
     // rotateToPath: false,
     // rotationOffset: 0,
-    // angleOffset: 0
+    // angleOffset: 0,
+
+    // spacedPoints: false,
+    // spacedPoints: {
+    //     divisions: undefined,
+    //     stepRate: 10,
+    // }
+
 });
 ```
 
@@ -87,6 +94,11 @@ var pathFollower = scene.plugins.get('rexPathFollower').add(gameObject, {
 - `t` : Initial value of property `t` (0~1)
 - `rotateToPath`: Set true to change angle towards path
 - `rotationOffset` : Rotation offset in radian, or `angleOffset` in degrees
+- `spacedPoints` :
+    - `false`, or `undefined` : Get point by `path.getPoint(t)`
+    - `spacedPoints.divisions`, `spacedPoints.stepRate` : 
+        1. Get points by `path.getSpacedPoints(divisions, stepRate)`
+        2. Get point from linear interpolation of points in step1.
 
 ### Move along path
 

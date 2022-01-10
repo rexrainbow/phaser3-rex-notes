@@ -1,8 +1,10 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Vector2 = Phaser.Math.Vector2;
 const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
+const Linear = Phaser.Math.Linear;
 
 class PathFollower extends ComponentBase {
     constructor(gameObject, config) {
@@ -11,16 +13,13 @@ class PathFollower extends ComponentBase {
         // this.parent = gameObject;
 
         this._t = 0;
-        this.pathVector = undefined;
+        this.pathVector = new Vector2();
+        this.spacePoints = undefined;
         this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
         this.setPath(GetValue(o, 'path', undefined));
-        var t = GetValue(o, 't', undefined);
-        if (t !== undefined) {
-            this.setT(t);
-        }
 
         var rotateToPath = GetValue(o, 'rotateToPath', false);
         var rotationOffset = GetValue(o, 'rotationOffset', undefined);
@@ -28,6 +27,21 @@ class PathFollower extends ComponentBase {
             rotationOffset = DegToRad(GetValue(o, 'angleOffset', 0));
         }
         this.setRotateToPath(rotateToPath, rotationOffset);
+
+        var spacedPoints = GetValue(o, 'spacedPoints', false);
+        if (spacedPoints) {
+            this.setSpacedPointsMode(
+                GetValue(spacedPoints, 'divisions', undefined),
+                GetValue(spacedPoints, 'stepRate', 10)
+            )
+        } else {
+            this.setSpacedPointsMode(false);
+        }
+
+        var t = GetValue(o, 't', undefined);
+        if (t !== undefined) {
+            this.setT(t);
+        }
         return this;
     }
 
@@ -65,6 +79,38 @@ class PathFollower extends ComponentBase {
         return this;
     }
 
+    setSpacedPointsMode(divisions, stepRate) {
+        if ((!divisions) && (!stepRate)) {
+            this.spacePoints = undefined;
+        } else {
+            this.spacePoints = this.path.getSpacedPoints(divisions, stepRate, this.spacePoints);
+            // Add point at t=1
+            this.spacePoints.push(this.path.getPoint(1));
+        }
+        return this;
+    }
+
+    getPoint(t) {
+        if (this.spacePoints === undefined) {
+            return this.path.getPoint(this.t, this.pathVector);
+
+        } else {
+            var start = (this.spacePoints.length - 1) * t;
+            var index = Math.floor(start);
+            var p0 = this.spacePoints[index],
+                p1 = this.spacePoints[index + 1];
+            if (!p1) {
+                this.pathVector.x = p0.x;
+                this.pathVector.y = p0.y;
+            } else {
+                var remainderT = start - index;
+                this.pathVector.x = Linear(p0.x, p1.x, remainderT);
+                this.pathVector.y = Linear(p0.y, p1.y, remainderT);
+            }
+            return this.pathVector;
+        }
+    }
+
     update() {
         if (this.path === undefined) {
             return;
@@ -73,7 +119,7 @@ class PathFollower extends ComponentBase {
         var gameObject = this.parent;
         var curX = gameObject.x,
             curY = gameObject.y;
-        this.pathVector = this.path.getPoint(this.t, this.pathVector);
+        this.pathVector = this.getPoint(this._t);
         var newX = this.pathVector.x,
             newY = this.pathVector.y;
 

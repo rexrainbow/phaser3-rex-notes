@@ -7895,7 +7895,14 @@
     <span class="c1">// t: 0,                // t: 0~1</span>
     <span class="c1">// rotateToPath: false,</span>
     <span class="c1">// rotationOffset: 0,</span>
-    <span class="c1">// angleOffset: 0</span>
+    <span class="c1">// angleOffset: 0,</span>
+
+    <span class="c1">// spacedPoints: false,</span>
+    <span class="c1">// spacedPoints: {</span>
+    <span class="c1">//     divisions: undefined,</span>
+    <span class="c1">//     stepRate: 10,</span>
+    <span class="c1">// }</span>
+
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -7903,6 +7910,15 @@
 <li><code>t</code> : Initial value of property <code>t</code> (0~1)</li>
 <li><code>rotateToPath</code>: Set true to change angle towards path</li>
 <li><code>rotationOffset</code> : Rotation offset in radian, or <code>angleOffset</code> in degrees</li>
+<li><code>spacedPoints</code> :<ul>
+<li><code>false</code>, or <code>undefined</code> : Get point by <code>path.getPoint(t)</code></li>
+<li><code>spacedPoints.divisions</code>, <code>spacedPoints.stepRate</code> : <ol>
+<li>Get points by <code>path.getSpacedPoints(divisions, stepRate)</code></li>
+<li>Get point from linear interpolation of points in step1.</li>
+</ol>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="move-along-path">Move along path<a class="headerlink" href="#move-along-path" title="Permanent link">&para;</a></h3>
 <p>Set <code>pathFollower.t</code> (0~1) to move along path</p>

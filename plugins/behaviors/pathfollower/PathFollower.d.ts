@@ -7,7 +7,12 @@ declare namespace PathFollower {
         t?: number,
         rotateToPath?: boolean,
         rotationOffset?: number,
-        angleOffset?: number
+        angleOffset?: number,
+
+        spacedPoints?: {
+            divisions?: number,
+            stepRate?: number
+        } | boolean
     }
 }
 
@@ -30,4 +35,8 @@ declare class PathFollower extends Phaser.Events.EventEmitter {
     rotateToPath: boolean;
     rotationOffset: number;
 
+    setSpacedPointsMode(
+        divisions?: number | boolean,
+        stepRate?: number
+    ): this;
 }
