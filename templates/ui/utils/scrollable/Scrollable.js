@@ -40,11 +40,25 @@ class Scrollable extends Sizer {
                 padding = { right: headerSpace };
             }
             var expand = GetValue(config, 'expand.header', true);
-            this.add(header, 0, align, padding, expand);
+            this.add(header,
+                {
+                    proportion: 0,
+                    align: align,
+                    padding: padding,
+                    expand: expand
+                }
+            );
         }
 
         if (scrollableSizer) {
-            this.add(scrollableSizer, 1, 'center', 0, true);
+            this.add(scrollableSizer,
+                {
+                    proportion: 1,
+                    align: 'center',
+                    padding: 0,
+                    expand: true
+                }
+            );
         }
 
         if (footer) {
@@ -57,7 +71,14 @@ class Scrollable extends Sizer {
                 padding = { left: footerSpace };
             }
             var expand = GetValue(config, 'expand.footer', true);
-            this.add(footer, 0, align, padding, expand);
+            this.add(footer,
+                {
+                    proportion: 0,
+                    align: align,
+                    padding: padding,
+                    expand: expand
+                }
+            );
         }
 
         this.addChildrenMap('background', background);
