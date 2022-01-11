@@ -47,6 +47,17 @@ Last line`;
         console.log(text.getPlainText());
         console.log(text.getText(undefined, 1, 4));
 
+        this.input.once('pointerdown', function () {
+            // Change size of image
+            text.addImage('key', {
+                key: 'key',
+                width: 64,
+            })
+
+            text.updateText()
+        })
+
+
         var s2 = `[color=red]red[/color]
 [color=blue]blue[/color]
 [color=green]green[/color]
