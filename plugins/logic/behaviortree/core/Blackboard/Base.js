@@ -72,6 +72,30 @@ class Blackboard {
             return false;
         }
     }
+
+    inc(key, inc, treeID, nodeID) {
+        var value;
+        if (this.has(key, treeID, nodeID)) {
+            value = 0;
+        } else {
+            value = this.get(key, treeID, nodeID);
+        }
+        value += inc;
+        this.set(key, value, treeID, nodeID);
+        return this;
+    }
+
+    toggle(key, treeID, nodeID) {
+        var value;
+        if (this.has(key, treeID, nodeID)) {
+            value = false;
+        } else {
+            value = this.get(key, treeID, nodeID);
+        }
+        value = !value;
+        this.set(key, value, treeID, nodeID);
+        return this;
+    }
 };
 
 export default Blackboard;

@@ -4,17 +4,15 @@ import ParseYaml from '../../plugins/utils/yaml/ParseYaml.js';
 
 var content = `
 selector :
+    repeat : 3
     children : 
         - task :
-            condition : level == 1
+            if : i > 10
             name : print
-            parameters :
-                text : Hello world
+            text : Hello {{name}}
         - task :
-            condition : level == 2
             name : print
-            parameters :
-                text : Goodbye
+            text : Goodbye {{name}}
 `
 
 
