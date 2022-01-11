@@ -17,5 +17,8 @@ var result = Mustache.render(template, view);
 
 ```javascript
 const template = Handlebars.compile("{{foo}}");
-template({});
+template({}, {
+    // allowProtoPropertiesByDefault: false,
+    // allowProtoMethodsByDefault: false
+});
 ```
