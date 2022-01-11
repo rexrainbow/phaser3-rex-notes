@@ -98,10 +98,11 @@
 expressions
     : e EOF
         {
-            if (typeof($1) === 'function') {
-                return $1;
+            var result = $1;
+            if (typeof(result) === 'function') {
+                return result;
             } else {
-                return function(ctx) { return $1; }
+                return function(ctx) { return result; }
             }
         }
     ;
@@ -210,7 +211,7 @@ e
     | dot_name '(' expression_list ')'
         {
             $$ = function(ctx) { 
-                return runMethod(yy.parser, ctx, mapArgs($1, ctx), $expression_list, true); 
+                return runMethod(yy.parser, ctx, mapArgs($1, ctx), $3, true); 
             }
         }
     | QUOTED_STRING

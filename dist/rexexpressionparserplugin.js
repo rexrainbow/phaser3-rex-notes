@@ -818,7 +818,15 @@
 
           switch (yystate) {
             case 1:
-              return $$[$0 - 1];
+              var result = $$[$0 - 1];
+
+              if (typeof result === 'function') {
+                return result;
+              } else {
+                return function (ctx) {
+                  return result;
+                };
+              }
 
             case 2:
             case 4:

@@ -85,10 +85,11 @@ var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
 
-            if (typeof($$[$0-1]) === 'function') {
-                return $$[$0-1];
+            var result = $$[$0-1];
+            if (typeof(result) === 'function') {
+                return result;
             } else {
-                return function(ctx) { return $$[$0-1]; }
+                return function(ctx) { return result; }
             }
         
 break;
