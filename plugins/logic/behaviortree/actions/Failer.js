@@ -3,8 +3,11 @@ import { FAILURE } from '../constants.js';
 
 class Failer extends Action {
 
-    constructor() {
-        super({ name: 'Failer' });
+    constructor({
+        name = 'Failer'
+    } = {}) {
+
+        super({ name });
     }
 
     tick(tick) {

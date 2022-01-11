@@ -2,11 +2,14 @@ import Composite from '../core/Nodes/Composite.js';
 import { FAILURE, RUNNING } from '../constants.js';
 
 class Selector extends Composite {
+    constructor({
+        children = [],
+        name = 'Selector'
+    } = {}) {
 
-    constructor({ children = [] } = {}) {
         super({
             children,
-            name: 'Selector',
+            name,
         });
     }
 

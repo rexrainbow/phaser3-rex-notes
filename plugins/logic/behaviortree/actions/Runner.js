@@ -3,8 +3,11 @@ import { RUNNING } from '../constants.js';
 
 class Runner extends Action {
 
-    constructor() {
-        super({ name: 'Runner' });
+    constructor({
+        name = 'Runner'
+    } = {}) {
+
+        super({ name });
     }
 
     tick(tick) {

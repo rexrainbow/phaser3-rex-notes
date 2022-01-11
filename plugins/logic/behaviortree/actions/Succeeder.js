@@ -3,8 +3,11 @@ import { SUCCESS } from '../constants.js';
 
 class Succeeder extends Action {
 
-    constructor() {
-        super({ name: 'Succeeder' });
+    constructor({
+        name = 'Succeeder'
+    } = {}) {
+
+        super({ name });
     }
 
     tick(tick) {

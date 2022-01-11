@@ -3,12 +3,18 @@ import { FAILURE, SUCCESS, ERROR } from '../constants.js';
 
 class Limiter extends Decorator {
 
-    constructor({ child = null, maxLoop } = {}) {
+    constructor({
+        maxLoop = 1,
+        child = null,
+        name = 'Limiter'
+    } = {}) {
+
         super({
             child,
-            name: 'Limiter',
-            title: 'Limit <maxLoop> Activations',
-            properties: { maxLoop: 1 },
+            name,
+            properties: {
+                maxLoop
+            },
         });
 
         if (!maxLoop) {

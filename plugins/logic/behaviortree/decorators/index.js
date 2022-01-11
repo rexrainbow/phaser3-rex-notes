@@ -4,7 +4,7 @@ import MaxTime from './MaxTime.js';
 import RepeatUntilFailure from './RepeatUntilFailure.js';
 import RepeatUntilSuccess from './RepeatUntilSuccess.js';
 import Repeater from './Repeater.js';
-import Condition from './Condition.js';
+import If from './If.js';
 
 export {
     Inverter,
@@ -13,5 +13,5 @@ export {
     RepeatUntilFailure,
     RepeatUntilSuccess,
     Repeater,
-    Condition
+    If
 }

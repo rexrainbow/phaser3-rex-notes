@@ -21,10 +21,10 @@ This library include the following core structures...
     - Sequence : MemSequence
     - SimpleParallel
 - Decorators: [TODO] Abort children
-    - [TODO] Condition : From expression
+    - If
     - Bypass
-    - [TODO] MaxTime : Time from expression
-    - [TODO] Repeater : Max loop from expression
+    - MaxTime
+    - Repeater
     - RepeaterUntilFailure
     - RepeaterUntilSuccess
     - Inverter

@@ -2,11 +2,14 @@ import Composite from '../core/Nodes/Composite.js';
 import { SUCCESS, RUNNING } from '../constants.js';
 
 class Sequence extends Composite {
+    constructor({
+        children = [],
+        name = 'Sequence'
+    } = {}) {
 
-    constructor({ children = [] } = {}) {
         super({
-            name: 'Sequence',
-            children
+            children,
+            name,
         });
     }
 

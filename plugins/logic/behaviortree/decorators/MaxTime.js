@@ -2,13 +2,18 @@ import Decorator from '../core/Nodes/Decorator.js';
 import { FAILURE, ERROR } from '../constants.js';
 
 class MaxTime extends Decorator {
+    constructor({
+        maxTime,
+        child = null,
+        name = 'MaxTime'
+    } = {}) {
 
-    constructor({ maxTime, child = null } = {}) {
         super({
             child,
-            name: 'MaxTime',
-            title: 'Max <maxTime>ms',
-            properties: { maxTime: 0 },
+            name,
+            properties: {
+                maxTime
+            },
         });
 
         if (!maxTime) {

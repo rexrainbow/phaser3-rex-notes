@@ -3,12 +3,18 @@ import { SUCCESS, ERROR } from '../constants.js';
 
 class RepeatUntilFailure extends Decorator {
 
-    constructor({ maxLoop = -1, child = null } = {}) {
+    constructor({
+        maxLoop = -1,
+        child = null,
+        name = 'RepeatUntilFailure',
+    } = {}) {
+
         super({
             child,
-            name: 'RepeatUntilFailure',
-            title: 'Repeat Until Failure',
-            properties: { maxLoop: -1 },
+            name,
+            properties: {
+                maxLoop
+            },
         });
 
         this.maxLoopExpression = this.addNumberVariable(maxLoop);

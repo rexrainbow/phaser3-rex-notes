@@ -3,11 +3,14 @@ import { FAILURE, SUCCESS, ERROR } from '../constants.js';
 
 
 class Inverter extends Decorator {
+    constructor({
+        child = null,
+        name = 'Inverter'
+    } = {}) {
 
-    constructor({ child = null } = {}) {
         super({
             child,
-            name: 'Inverter',
+            name,
         });
     }
 

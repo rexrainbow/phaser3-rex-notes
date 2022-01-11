@@ -3,14 +3,19 @@ import { SUCCESS, RUNNING } from '../constants';
 
 class Wait extends Action {
 
-    constructor({ milliseconds = 0 } = {}) {
+    constructor({
+        time = 0,
+        name = 'Wait'
+    } = {}) {
+
         super({
-            name: 'Wait',
-            title: 'Wait <milliseconds>ms',
-            properties: { milliseconds: 0 },
+            name,
+            properties: {
+                time
+            },
         });
 
-        this.endTimeExpression = this.addNumberVariable(milliseconds);
+        this.endTimeExpression = this.addNumberVariable(time);
         this.endTime = undefined;
     }
 

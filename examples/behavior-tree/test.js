@@ -31,17 +31,17 @@ class Demo extends Phaser.Scene {
         var tree = btAdd.behaviorTree();
         tree.root = btAdd.selector({
             children: [
-                btAdd.condition({
+                btAdd.if({
                     expression: 'i >= 10',
                     child: btAdd.sequence({
                         children: [
                             new PrintAction({ text: 'Hello {{name}}' }),
-                            btAdd.wait({ milliseconds: 'i+10' }),
+                            btAdd.wait({ time: 100 }),
                             new PrintAction({ text: 'Goodbye {{name}}' }),
                         ]
                     })
                 }),
-                btAdd.condition({
+                btAdd.if({
                     expression: 'true',
                     child: btAdd.sequence({
                         children: [
@@ -57,7 +57,7 @@ class Demo extends Phaser.Scene {
         // debugger
 
         var blackboard = btAdd.blackboard()
-            .set('name', 'res')
+            .set('name', 'rex')
             .set('i', 20);
 
         var scene = this;

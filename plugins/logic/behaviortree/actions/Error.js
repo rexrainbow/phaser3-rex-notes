@@ -3,8 +3,11 @@ import Action from '../core/Nodes/Action.js';
 
 class Error extends Action {
 
-    constructor() {
-        super({ name: 'Error' });
+    constructor({
+        name = 'Error'
+    } = {}) {
+
+        super({ name });
     }
 
     tick(tick) {

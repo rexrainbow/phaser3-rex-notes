@@ -2,17 +2,24 @@ import Decorator from '../core/Nodes/Decorator.js';
 import { FAILURE, SUCCESS, ERROR } from '../constants.js';
 
 
-class Condition extends Decorator {
+class If extends Decorator {
 
-    constructor({ child = null, expression = 'true' } = {}) {
+    constructor({
+        expression = 'true',
+        child = null,
+        name = 'If'
+    } = {}) {
+
         super({
             child,
-            name: 'Condition',
-            properties: { expression: expression },
+            name,
+            properties: {
+                expression
+            },
         });
 
         if (!expression) {
-            throw 'expression parameter in Condition decorator is an obligatory parameter';
+            throw 'expression parameter in If decorator is an obligatory parameter';
         }
 
         this.expression = this.addBooleanVariable(expression);
@@ -33,4 +40,4 @@ class Condition extends Decorator {
     }
 };
 
-export default Condition;
+export default If;
