@@ -26708,7 +26708,6 @@
   var GetValue$R = Phaser.Utils.Objects.GetValue;
 
   var GetScrollMode = function GetScrollMode(config, key) {
-
     var scrollMode = GetValue$R(config, 'scrollMode', 0); // Vertical
 
     if (typeof scrollMode === 'string') {
@@ -28047,8 +28046,8 @@
 
   var GetValue$M = Phaser.Utils.Objects.GetValue;
 
-  var CreateScrollableSizer = function CreateScrollableSizer(config) {
-    var scene = this.scene;
+  var CreateScrollableSizer = function CreateScrollableSizer(parent, config) {
+    var scene = parent.scene;
     var scrollMode = GetScrollMode(config);
     var scrollableSizer = new Sizer(scene, {
       orientation: scrollMode
@@ -28073,7 +28072,7 @@
     if (child) {
       var childSpace = GetValue$M(config, 'space.child', 0);
       var childPadding = {};
-      this.childMargin = {};
+      parent.childMargin = {};
 
       if (typeof childSpace !== 'number') {
         var paddingConfig = childSpace;
@@ -28081,13 +28080,13 @@
         if (scrollMode === 0) {
           childPadding.left = GetValue$M(paddingConfig, 'left', 0);
           childPadding.right = GetValue$M(paddingConfig, 'right', 0);
-          this.childMargin.top = GetValue$M(paddingConfig, 'top', 0);
-          this.childMargin.bottom = GetValue$M(paddingConfig, 'bottom', 0);
+          parent.childMargin.top = GetValue$M(paddingConfig, 'top', 0);
+          parent.childMargin.bottom = GetValue$M(paddingConfig, 'bottom', 0);
         } else {
           childPadding.top = GetValue$M(paddingConfig, 'top', 0);
           childPadding.bottom = GetValue$M(paddingConfig, 'bottom', 0);
-          this.childMargin.top = GetValue$M(paddingConfig, 'left', 0);
-          this.childMargin.bottom = GetValue$M(paddingConfig, 'right', 0);
+          parent.childMargin.top = GetValue$M(paddingConfig, 'left', 0);
+          parent.childMargin.bottom = GetValue$M(paddingConfig, 'right', 0);
         }
       } else {
         if (sliderConfig) {
@@ -28107,8 +28106,8 @@
           }
         }
 
-        this.childMargin.top = 0;
-        this.childMargin.bottom = 0;
+        parent.childMargin.top = 0;
+        parent.childMargin.bottom = 0;
       }
 
       if (sliderConfig) {
@@ -28166,28 +28165,28 @@
 
     if (slider) {
       slider.on('valuechange', function (newValue) {
-        this.t = newValue;
-        this.emit('scroll', this);
-      }, this);
+        parent.t = newValue;
+        parent.emit('scroll', parent);
+      });
     }
 
     if (scroller) {
       scroller.on('valuechange', function (newValue) {
-        this.childOY = newValue;
-        this.emit('scroll', this);
-      }, this);
+        parent.childOY = newValue;
+        parent.emit('scroll', parent);
+      });
     }
 
     if (mouseWheelScroller) {
       mouseWheelScroller.on('scroll', function (incValue) {
-        this.addChildOY(-incValue, true);
-      }, this);
+        parent.addChildOY(-incValue, true);
+      });
     }
 
-    this.addChildrenMap('child', child);
-    this.addChildrenMap('slider', slider);
-    this.addChildrenMap('scroller', scroller);
-    this.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
+    parent.addChildrenMap('child', child);
+    parent.addChildrenMap('slider', slider);
+    parent.addChildrenMap('scroller', scroller);
+    parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
     return scrollableSizer;
   };
 
@@ -28254,7 +28253,7 @@
       _this.type = GetValue$L(config, 'type', 'rexScrollable'); // Add elements
 
       var background = GetValue$L(config, 'background', undefined);
-      var scrollableSizer = CreateScrollableSizer.call(_assertThisInitialized(_this), config);
+      var scrollableSizer = CreateScrollableSizer(_assertThisInitialized(_this), config);
       var header = GetValue$L(config, 'header', undefined);
       var footer = GetValue$L(config, 'footer', undefined); // Background
 
@@ -28279,11 +28278,21 @@
 
         var expand = GetValue$L(config, 'expand.header', true);
 
-        _this.add(header, 0, align, padding, expand);
+        _this.add(header, {
+          proportion: 0,
+          align: align,
+          padding: padding,
+          expand: expand
+        });
       }
 
       if (scrollableSizer) {
-        _this.add(scrollableSizer, 1, 'center', 0, true);
+        _this.add(scrollableSizer, {
+          proportion: 1,
+          align: 'center',
+          padding: 0,
+          expand: true
+        });
       }
 
       if (footer) {
@@ -28303,7 +28312,12 @@
 
         var expand = GetValue$L(config, 'expand.footer', true);
 
-        _this.add(footer, 0, align, padding, expand);
+        _this.add(footer, {
+          proportion: 0,
+          align: align,
+          padding: padding,
+          expand: expand
+        });
       }
 
       _this.addChildrenMap('background', background);
@@ -28386,6 +28400,11 @@
       get: function get() {
         var child = this.childrenMap.child;
         return child.topChildOY !== child.bottomChildOY;
+      }
+    }, {
+      key: "scrollMode",
+      get: function get() {
+        return this.orientation === 0 ? 1 : 0;
       }
     }, {
       key: "setChildOY",

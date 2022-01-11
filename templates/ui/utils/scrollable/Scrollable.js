@@ -21,7 +21,7 @@ class Scrollable extends Sizer {
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
-        var scrollableSizer = CreateScrollableSizer.call(this, config);
+        var scrollableSizer = CreateScrollableSizer(this, config);
         var header = GetValue(config, 'header', undefined);
         var footer = GetValue(config, 'footer', undefined);
 
@@ -149,6 +149,10 @@ class Scrollable extends Sizer {
     get isOverflow() {
         var child = this.childrenMap.child;
         return child.topChildOY !== child.bottomChildOY;
+    }
+
+    get scrollMode() {
+        return (this.orientation === 0) ? 1 : 0;
     }
 
     setChildOY(value, clamp) {

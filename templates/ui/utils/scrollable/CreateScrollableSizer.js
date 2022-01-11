@@ -6,8 +6,8 @@ import MouseWheelScroller from '../../../../plugins/input/mousewheeldcroller/Mou
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateScrollableSizer = function (config) {
-    var scene = this.scene;
+var CreateScrollableSizer = function (parent, config) {
+    var scene = parent.scene;
     var scrollMode = GetScrollMode(config);
     var scrollableSizer = new Sizer(scene, { orientation: scrollMode });
     // A child which not put into scene
@@ -30,19 +30,19 @@ var CreateScrollableSizer = function (config) {
     if (child) {
         var childSpace = GetValue(config, 'space.child', 0);
         var childPadding = {};
-        this.childMargin = {};
+        parent.childMargin = {};
         if (typeof (childSpace) !== 'number') {
             var paddingConfig = childSpace;
             if (scrollMode === 0) {
                 childPadding.left = GetValue(paddingConfig, 'left', 0);
                 childPadding.right = GetValue(paddingConfig, 'right', 0);
-                this.childMargin.top = GetValue(paddingConfig, 'top', 0);
-                this.childMargin.bottom = GetValue(paddingConfig, 'bottom', 0);
+                parent.childMargin.top = GetValue(paddingConfig, 'top', 0);
+                parent.childMargin.bottom = GetValue(paddingConfig, 'bottom', 0);
             } else {
                 childPadding.top = GetValue(paddingConfig, 'top', 0);
                 childPadding.bottom = GetValue(paddingConfig, 'bottom', 0);
-                this.childMargin.top = GetValue(paddingConfig, 'left', 0);
-                this.childMargin.bottom = GetValue(paddingConfig, 'right', 0);
+                parent.childMargin.top = GetValue(paddingConfig, 'left', 0);
+                parent.childMargin.bottom = GetValue(paddingConfig, 'right', 0);
             }
         } else {
             if (sliderConfig) { // Has slider
@@ -52,8 +52,8 @@ var CreateScrollableSizer = function (config) {
                     childPadding = (isRightSlider) ? { bottom: childSpace } : { top: childSpace };
                 }
             }
-            this.childMargin.top = 0;
-            this.childMargin.bottom = 0;
+            parent.childMargin.top = 0;
+            parent.childMargin.bottom = 0;
         }
 
         if (sliderConfig) {
@@ -118,26 +118,26 @@ var CreateScrollableSizer = function (config) {
     // Control
     if (slider) {
         slider.on('valuechange', function (newValue) {
-            this.t = newValue;
-            this.emit('scroll', this);
-        }, this);
+            parent.t = newValue;
+            parent.emit('scroll', parent);
+        });
     }
     if (scroller) {
         scroller.on('valuechange', function (newValue) {
-            this.childOY = newValue;
-            this.emit('scroll', this);
-        }, this);
+            parent.childOY = newValue;
+            parent.emit('scroll', parent);
+        });
     }
     if (mouseWheelScroller) {
         mouseWheelScroller.on('scroll', function (incValue) {
-            this.addChildOY(-incValue, true);
-        }, this);
+            parent.addChildOY(-incValue, true);
+        });
     }
 
-    this.addChildrenMap('child', child);
-    this.addChildrenMap('slider', slider);
-    this.addChildrenMap('scroller', scroller);
-    this.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
+    parent.addChildrenMap('child', child);
+    parent.addChildrenMap('slider', slider);
+    parent.addChildrenMap('scroller', scroller);
+    parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
 
     return scrollableSizer;
 }
