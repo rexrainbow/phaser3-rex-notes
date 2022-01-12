@@ -18,13 +18,13 @@ class RepeatUntilFailure extends Decorator {
         });
 
         this.maxLoopExpression = this.addNumberVariable(maxLoop);
-        this.maxLoop = undefined;
     }
 
     open(tick) {
-        tick.blackboard.set('$i', 0, tick.tree.id, this.id);
+        var maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
+        tick.blackboard.set('$maxLoop', maxLoop, tick.tree.id, this.id);
 
-        this.maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
+        tick.blackboard.set('$i', 0, tick.tree.id, this.id);
     }
 
     tick(tick) {
@@ -32,11 +32,12 @@ class RepeatUntilFailure extends Decorator {
             return ERROR;
         }
 
+        var maxLoop = tick.blackboard.get('$maxLoop', tick.tree.id, this.id);
         var i = tick.blackboard.get('$i', tick.tree.id, this.id);
         var status = ERROR;
 
         // Execute child many times in a tick
-        while (this.maxLoop < 0 || i < this.maxLoop) {
+        while (maxLoop < 0 || i < maxLoop) {
             status = this.child._execute(tick);
 
             if (status == SUCCESS) {

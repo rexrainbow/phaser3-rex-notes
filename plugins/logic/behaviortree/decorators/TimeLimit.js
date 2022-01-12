@@ -1,34 +1,34 @@
 import Decorator from '../core/Nodes/Decorator.js';
 import { FAILURE, ERROR } from '../constants.js';
 
-class MaxTime extends Decorator {
+class TimeLimit extends Decorator {
     constructor({
-        maxTime,
+        duration,
         child = null,
-        name = 'MaxTime'
+        name = 'TimeLimit'
     } = {}) {
 
         super({
             child,
             name,
             properties: {
-                maxTime
+                duration
             },
         });
 
-        if (!maxTime) {
-            throw 'maxTime parameter in MaxTime decorator is an obligatory parameter';
+        if (!duration) {
+            throw 'duration parameter in TimeLimit decorator is an obligatory parameter';
         }
 
-        this.maxTimeExpression = this.addNumberVariable(maxTime);
-        this.maxTime = undefined;
+        this.durationExpression = this.addNumberVariable(duration);
     }
 
     open(tick) {
         var startTime = tick.currentTime;
         tick.blackboard.set('$startTime', startTime, tick.tree.id, this.id);
 
-        this.maxTime = this.maxTimeExpression.eval(tick.blackboardContext);
+        var duration = this.durationExpression.eval(tick.blackboardContext);
+        tick.blackboard.set('$duration', duration, tick.tree.id, this.id);
     }
 
     tick(tick) {
@@ -38,9 +38,10 @@ class MaxTime extends Decorator {
 
         var currTime = tick.currentTime;
         var startTime = tick.blackboard.get('$startTime', tick.tree.id, this.id);
+        var duration = tick.blackboard.get('$duration', tick.tree.id, this.id);
 
         var status = this.child._execute(tick);
-        if (currTime - startTime > this.maxTime) {
+        if ((currTime - startTime) > duration) {
             return FAILURE;
         }
 
@@ -48,4 +49,4 @@ class MaxTime extends Decorator {
     }
 };
 
-export default MaxTime;
+export default TimeLimit;

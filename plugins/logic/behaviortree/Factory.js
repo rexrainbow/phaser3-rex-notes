@@ -14,7 +14,7 @@ import {
     Bypass,
     Invert,
     Limiter,
-    MaxTime,
+    TimeLimit,
     RepeatUntilFailure,
     RepeatUntilSuccess,
     Repeat
@@ -40,7 +40,7 @@ export {
     Bypass,
     Invert,
     Limiter,
-    MaxTime,
+    TimeLimit,
     RepeatUntilFailure,
     RepeatUntilSuccess,
     Repeat,

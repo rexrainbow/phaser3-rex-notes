@@ -23,17 +23,14 @@ This library include the following core structures...
 - Decorators: [TODO] Abort children
     - If
     - Bypass
-    - MaxTime
+    - ForceSuccess
+    - TimeLimit
     - Repeat
     - RepeaterUntilFailure
     - RepeaterUntilSuccess
     - Invert
     - Limiter
 - Actions:
-    - Succeeder
-    - Failer
-    - Error
-    - Runner
     - Wait
 
 ## Logic mapping

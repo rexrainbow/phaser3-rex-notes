@@ -21,7 +21,7 @@ import Tick from './core/Tick.js';
 
 import Invert from './decorators/Invert.js';
 import Limiter from './decorators/Limiter.js';
-import MaxTime from './decorators/MaxTime.js';
+import TimeLimit from './decorators/TimeLimit.js';
 import RepeatUntilFailure from './decorators/RepeatUntilFailure.js';
 import RepeatUntilSuccess from './decorators/RepeatUntilSuccess.js';
 import Repeat from './decorators/Repeat.js';
@@ -53,7 +53,7 @@ export {
     Tick,
     Invert,
     Limiter,
-    MaxTime,
+    TimeLimit,
     RepeatUntilFailure,
     RepeatUntilSuccess,
     Repeat

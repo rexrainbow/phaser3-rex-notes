@@ -22,12 +22,13 @@ class Limiter extends Decorator {
         }
 
         this.maxLoopExpression = this.addNumberVariable(maxLoop);
-        this.maxLoop = null;
     }
 
     open(tick) {
+        var maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
+        tick.blackboard.set('$maxLoop', maxLoop, tick.tree.id, this.id);
+
         tick.blackboard.set('$i', 0, tick.tree.id, this.id);
-        this.maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {
@@ -35,10 +36,11 @@ class Limiter extends Decorator {
             return ERROR;
         }
 
+        var maxLoop = tick.blackboard.get('$maxLoop', tick.tree.id, this.id);
         var i = tick.blackboard.get('$i', tick.tree.id, this.id);
 
         // Execute child 1 time in a tick
-        if (i < this.maxLoop) {
+        if (i < maxLoop) {
             var status = this.child._execute(tick);
 
             if (status == SUCCESS || status == FAILURE) {

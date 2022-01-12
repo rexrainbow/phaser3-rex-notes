@@ -4,33 +4,34 @@ import { SUCCESS, RUNNING } from '../constants';
 class Wait extends Action {
 
     constructor({
-        time = 0,
+        duration = 0,
         name = 'Wait'
     } = {}) {
 
         super({
             name,
             properties: {
-                time
+                duration
             },
         });
 
-        this.endTimeExpression = this.addNumberVariable(time);
-        this.endTime = undefined;
+        this.durationExpression = this.addNumberVariable(duration);
     }
 
     open(tick) {
         var startTime = tick.currentTime;
         tick.blackboard.set('$startTime', startTime, tick.tree.id, this.id);
 
-        this.endTime = this.endTimeExpression.eval(tick.blackboardContext);
+        var duration = this.durationExpression.eval(tick.blackboardContext);
+        tick.blackboard.set('$duration', duration, tick.tree.id, this.id);
     }
 
     tick(tick) {
         var currTime = tick.currentTime;
         var startTime = tick.blackboard.get('$startTime', tick.tree.id, this.id);
+        var duration = tick.blackboard.get('$duration', tick.tree.id, this.id);
 
-        if ((currTime - startTime) > this.endTime) {
+        if ((currTime - startTime) > duration) {
             return SUCCESS;
         }
 
