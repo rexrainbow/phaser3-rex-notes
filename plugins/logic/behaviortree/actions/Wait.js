@@ -19,17 +19,17 @@ class Wait extends Action {
     }
 
     open(tick) {
-        var startTime = tick.currentTime;
-        tick.blackboard.set('$startTime', startTime, tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
 
-        var duration = this.durationExpression.eval(tick.blackboardContext);
-        tick.blackboard.set('$duration', duration, tick.tree.id, this.id);
+        nodeMemory.$startTime = tick.currentTime;
+        nodeMemory.$duration = this.durationExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {
+        var nodeMemory = tick.getNodeMemory();
         var currTime = tick.currentTime;
-        var startTime = tick.blackboard.get('$startTime', tick.tree.id, this.id);
-        var duration = tick.blackboard.get('$duration', tick.tree.id, this.id);
+        var startTime = nodeMemory.$startTime;
+        var duration = nodeMemory.$duration;
 
         if ((currTime - startTime) > duration) {
             return SUCCESS;

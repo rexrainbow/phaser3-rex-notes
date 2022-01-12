@@ -14,17 +14,20 @@ class Selector extends Composite {
     }
 
     open(tick) {
-        tick.blackboard.set('$runningChild', 0, tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+        nodeMemory.$runningChild = 0;
     }
 
     tick(tick) {
-        var childIndex = tick.blackboard.get('$runningChild', tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+
+        var childIndex = nodeMemory.$runningChild;
         for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
             var status = this.children[i]._execute(tick);
 
             if (status !== FAILURE) {
                 if (status === RUNNING) {
-                    tick.blackboard.set('$runningChild', i, tick.tree.id, this.id);
+                    nodeMemory.$runningChild = i;
                 }
 
                 return status;

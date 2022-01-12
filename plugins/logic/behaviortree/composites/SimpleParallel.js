@@ -19,12 +19,14 @@ class SimpleParallel extends Composite {
     }
 
     open(tick) {
-        tick.blackboard.set('$runningChildren', this.children.slice(0), tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+        nodeMemory.$runningChildren = this.children.slice(0);
         this.mainTaskStatus = RUNNING;
     }
 
     tick(tick) {
-        var childIndexes = tick.blackboard.get('$runningChildren', tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();        
+        var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];

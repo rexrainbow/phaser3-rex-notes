@@ -46,6 +46,18 @@ class Tick {
         return this;
     }
 
+    getGlobalMemory() {
+        return this.blackboard.getGlobalMemory();
+    }
+
+    getTreeMemory() {
+        return this.blackboard.getTreeMemory(this.tree.id);
+    }
+
+    getNodeMemory() {
+        return this.blackboard.getNodeMemory(this.tree.id, this._currentNode.id);
+    }
+
     get currentTime() {
         if (this.blackboard.has(CURRENT_TIME)) {
             // Inject current-time through blackboard

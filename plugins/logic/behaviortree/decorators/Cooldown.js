@@ -25,8 +25,8 @@ class Cooldown extends Decorator {
     }
 
     open(tick) {
-        var cooldownTime = this.durationExpression.eval(tick.blackboardContext);
-        tick.blackboard.set('$cooldownTime', cooldownTime, tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+        nodeMemory.$cooldownTime = this.durationExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {
@@ -34,16 +34,17 @@ class Cooldown extends Decorator {
             return ERROR;
         }
 
+        var nodeMemory = tick.getNodeMemory();
         var currTime = tick.currentTime;
-        var lastEndTime = tick.blackboard.get('$lastEndTime', tick.tree.id, this.id);
-        var cooldownTime = tick.blackboard.get('$cooldownTime', tick.tree.id, this.id);
+        var lastEndTime = nodeMemory.$lastEndTime || 0;
+        var cooldownTime = nodeMemory.$cooldownTime;
         if ((currTime - lastEndTime) < cooldownTime) {
             return FAILURE;
         }
 
         var status = this.child._execute(tick);
         if (status !== RUNNING) {
-            tick.blackboard.set('$lastEndTime', currTime, tick.tree.id, this.id);
+            nodeMemory.$lastEndTime = currTime;
         }
         return status;
     }

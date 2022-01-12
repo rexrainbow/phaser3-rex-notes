@@ -96,6 +96,18 @@ class Blackboard {
         this.set(key, value, treeID, nodeID);
         return this;
     }
+
+    getGlobalMemory() {
+        return this._baseMemory;
+    }
+
+    getTreeMemory(treeID) {
+        return this._getTreeMemory(treeID);
+    }
+
+    getNodeMemory(treeID, nodeID) {
+        return this._getNodeMemory(this._getTreeMemory(treeID), nodeID);
+    }
 };
 
 export default Blackboard;

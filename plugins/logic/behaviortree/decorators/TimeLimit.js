@@ -24,11 +24,9 @@ class TimeLimit extends Decorator {
     }
 
     open(tick) {
-        var startTime = tick.currentTime;
-        tick.blackboard.set('$startTime', startTime, tick.tree.id, this.id);
-
-        var duration = this.durationExpression.eval(tick.blackboardContext);
-        tick.blackboard.set('$duration', duration, tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+        nodeMemory.$startTime = tick.currentTime;
+        nodeMemory.$duration = this.durationExpression.eval(tick.blackboardContext);
     }
 
     tick(tick) {
@@ -36,9 +34,10 @@ class TimeLimit extends Decorator {
             return ERROR;
         }
 
+        var nodeMemory = tick.getNodeMemory();
         var currTime = tick.currentTime;
-        var startTime = tick.blackboard.get('$startTime', tick.tree.id, this.id);
-        var duration = tick.blackboard.get('$duration', tick.tree.id, this.id);
+        var startTime = nodeMemory.$startTime;
+        var duration = nodeMemory.$duration;
 
         var status = this.child._execute(tick);
         if ((currTime - startTime) > duration) {

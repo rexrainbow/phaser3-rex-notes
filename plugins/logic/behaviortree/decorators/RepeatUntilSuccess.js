@@ -18,14 +18,12 @@ class RepeatUntilSuccess extends Decorator {
         });
 
         this.maxLoopExpression = this.addNumberVariable(maxLoop);
-        this.maxLoop = undefined;
     }
 
     open(tick) {
-        var maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
-        tick.blackboard.set('$maxLoop', maxLoop, tick.tree.id, this.id);
-
-        tick.blackboard.set('$i', 0, tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+        nodeMemory.$maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
+        nodeMemory.$i = 0;
     }
 
     tick(tick) {
@@ -33,8 +31,9 @@ class RepeatUntilSuccess extends Decorator {
             return ERROR;
         }
 
-        var maxLoop = tick.blackboard.get('$maxLoop', tick.tree.id, this.id);
-        var i = tick.blackboard.get('$i', tick.tree.id, this.id);
+        var nodeMemory = tick.getNodeMemory();
+        var maxLoop = nodeMemory.$maxLoop;
+        var i = nodeMemory.$i;
         var status = ERROR;
 
         // Execute child many times in a tick
@@ -48,7 +47,7 @@ class RepeatUntilSuccess extends Decorator {
             }
         }
 
-        i = tick.blackboard.set('$i', i, tick.tree.id, this.id);
+        nodeMemory.$i = i;
         return status;
     }
 };
