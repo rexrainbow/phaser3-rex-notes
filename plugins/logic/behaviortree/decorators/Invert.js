@@ -2,10 +2,10 @@ import Decorator from '../core/Nodes/Decorator.js';
 import { FAILURE, SUCCESS, ERROR } from '../constants.js';
 
 
-class Inverter extends Decorator {
+class Invert extends Decorator {
     constructor({
         child = null,
-        name = 'Inverter'
+        name = 'Invert'
     } = {}) {
 
         super({
@@ -31,4 +31,4 @@ class Inverter extends Decorator {
     }
 };
 
-export default Inverter;
+export default Invert;

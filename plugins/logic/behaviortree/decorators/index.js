@@ -1,17 +1,17 @@
-import Inverter from './Inverter.js';
+import Invert from './Invert.js';
 import Limiter from './Limiter.js';
 import MaxTime from './MaxTime.js';
 import RepeatUntilFailure from './RepeatUntilFailure.js';
 import RepeatUntilSuccess from './RepeatUntilSuccess.js';
-import Repeater from './Repeater.js';
+import Repeat from './Repeat.js';
 import If from './If.js';
 
 export {
-    Inverter,
+    Invert,
     Limiter,
     MaxTime,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeater,
+    Repeat,
     If
 }

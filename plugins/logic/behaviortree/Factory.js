@@ -12,18 +12,14 @@ import {
 } from './composites/Factory.js';
 import {
     Bypass,
-    Inverter,
+    Invert,
     Limiter,
     MaxTime,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeater
+    Repeat
 } from './decorators/Factory.js';
 import {
-    Error,
-    Failer,
-    Runner,
-    Succeeder,
     Wait
 } from './actions/Factory.js';
 
@@ -42,17 +38,13 @@ export {
 
     // Decorators
     Bypass,
-    Inverter,
+    Invert,
     Limiter,
     MaxTime,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeater,
+    Repeat,
 
     // Actions
-    Error,
-    Failer,
-    Runner,
-    Succeeder,
     Wait
 };

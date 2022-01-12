@@ -24,10 +24,10 @@ This library include the following core structures...
     - If
     - Bypass
     - MaxTime
-    - Repeater
+    - Repeat
     - RepeaterUntilFailure
     - RepeaterUntilSuccess
-    - Inverter
+    - Invert
     - Limiter
 - Actions:
     - Succeeder

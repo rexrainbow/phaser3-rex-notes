@@ -19,12 +19,12 @@ import Composite from './core/Composite.js';
 import Decorator from './core/Decorator.js';
 import Tick from './core/Tick.js';
 
-import Inverter from './decorators/Inverter.js';
+import Invert from './decorators/Invert.js';
 import Limiter from './decorators/Limiter.js';
 import MaxTime from './decorators/MaxTime.js';
 import RepeatUntilFailure from './decorators/RepeatUntilFailure.js';
 import RepeatUntilSuccess from './decorators/RepeatUntilSuccess.js';
-import Repeater from './decorators/Repeater.js';
+import Repeat from './decorators/Repeat.js';
 
 export {
     SUCCESS,
@@ -51,10 +51,10 @@ export {
     Composite,
     Decorator,
     Tick,
-    Inverter,
+    Invert,
     Limiter,
     MaxTime,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeater
+    Repeat
 };

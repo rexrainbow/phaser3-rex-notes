@@ -22,7 +22,7 @@ class RepeatUntilFailure extends Decorator {
     }
 
     open(tick) {
-        tick.blackboard.set('i', 0, tick.tree.id, this.id);
+        tick.blackboard.set('$i', 0, tick.tree.id, this.id);
 
         this.maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
     }
@@ -32,9 +32,10 @@ class RepeatUntilFailure extends Decorator {
             return ERROR;
         }
 
-        var i = tick.blackboard.get('i', tick.tree.id, this.id);
+        var i = tick.blackboard.get('$i', tick.tree.id, this.id);
         var status = ERROR;
 
+        // Execute child many times in a tick
         while (this.maxLoop < 0 || i < this.maxLoop) {
             status = this.child._execute(tick);
 
@@ -45,7 +46,7 @@ class RepeatUntilFailure extends Decorator {
             }
         }
 
-        i = tick.blackboard.set('i', i, tick.tree.id, this.id);
+        i = tick.blackboard.set('$i', i, tick.tree.id, this.id);
         return status;
     }
 };

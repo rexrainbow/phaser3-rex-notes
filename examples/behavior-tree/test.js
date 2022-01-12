@@ -1,5 +1,6 @@
 import 'phaser';
 import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
+import ClockPlugin from '../../plugins/clock-plugin.js';
 
 class PrintAction extends RexPlugins.BehaviorTree.Action {
     constructor({ text = '' } = {}) {
@@ -28,29 +29,31 @@ class Demo extends Phaser.Scene {
 
     create() {
         var btAdd = this.plugins.get('rexBT').add;
-        var tree = btAdd.behaviorTree();
-        tree.root = btAdd.selector({
-            children: [
-                btAdd.if({
-                    expression: 'i >= 10',
-                    child: btAdd.sequence({
+        var tree = btAdd.behaviorTree()
+            .setRoot(
+                btAdd.repeat({
+                    maxLoop: 3,
+                    child: btAdd.selector({
                         children: [
-                            new PrintAction({ text: 'Hello {{name}}' }),
-                            btAdd.wait({ time: 100 }),
-                            new PrintAction({ text: 'Goodbye {{name}}' }),
+                            btAdd.if({
+                                expression: 'i >= 10',
+                                child: btAdd.sequence({
+                                    children: [
+                                        new PrintAction({ text: 'Hello {{name}}' }),
+                                        btAdd.wait({ time: 100 }),
+                                        new PrintAction({ text: 'Goodbye {{name}}' }),
+                                    ]
+                                })
+                            }),
+                            btAdd.if({
+                                // expression: 'true',
+                                child: new PrintAction({ text: 'Else' })
+                            }),
                         ]
                     })
-                }),
-                btAdd.if({
-                    expression: 'true',
-                    child: btAdd.sequence({
-                        children: [
-                            new PrintAction({ text: 'Else' }),
-                        ]
-                    })
-                }),
-            ]
-        })
+                })
+
+            )
 
         // var result = tree.dump();
         // var nodes = tree.getNodes();
@@ -60,19 +63,19 @@ class Demo extends Phaser.Scene {
             .set('name', 'rex')
             .set('i', 20);
 
-        var scene = this;
-        var RunTick = function (time, delta) {
-            blackboard.setCurrentTime(time);
-            var state = tree.tick(blackboard);
-            console.log(`Run tick ${state}`);
+        var clock = this.plugins.get('rexClock').add(this);
+        clock
+            .on('update', function (time, delta) {
+                blackboard.setCurrentTime(time);
+                var state = tree.tick(blackboard);
+                console.log(`Run tick ${state}`);
 
-            // Stop ticking
-            if (state !== 3) {
-                scene.events.off("update", RunTick);
-            }
-        };
-
-        scene.events.on("update", RunTick);
+                // Stop ticking
+                if (state !== 3) {
+                    clock.stop();
+                }
+            })
+            .start();
     }
 
     update() {
@@ -90,11 +93,18 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexBT',
-            plugin: BehaviorTreePlugin,
-            start: true
-        }]
+        global: [
+            {
+                key: 'rexBT',
+                plugin: BehaviorTreePlugin,
+                start: true
+            },
+            {
+                key: 'rexClock',
+                plugin: ClockPlugin,
+                start: true
+            }
+        ]
     }
 };
 

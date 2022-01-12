@@ -1,12 +1,12 @@
 import Decorator from '../core/Nodes/Decorator.js';
 import { SUCCESS, ERROR, FAILURE } from '../constants.js';
 
-class Repeater extends Decorator {
+class Repeat extends Decorator {
 
     constructor({
         maxLoop = -1,
         child = null,
-        name = 'Repeater'
+        name = 'Repeat'
     } = {}) {
 
         super({
@@ -22,7 +22,7 @@ class Repeater extends Decorator {
     }
 
     open(tick) {
-        tick.blackboard.set('i', 0, tick.tree.id, this.id);
+        tick.blackboard.set('$i', 0, tick.tree.id, this.id);
 
         this.maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
     }
@@ -32,9 +32,10 @@ class Repeater extends Decorator {
             return ERROR;
         }
 
-        var i = tick.blackboard.get('i', tick.tree.id, this.id);
+        var i = tick.blackboard.get('$i', tick.tree.id, this.id);
         var status = SUCCESS;
 
+        // Execute child many times in a tick
         while (this.maxLoop < 0 || i < this.maxLoop) {
             status = this.child._execute(tick);
 
@@ -45,9 +46,9 @@ class Repeater extends Decorator {
             }
         }
 
-        tick.blackboard.set('i', i, tick.tree.id, this.id);
+        tick.blackboard.set('$i', i, tick.tree.id, this.id);
         return status;
     }
 };
 
-export default Repeater;
+export default Repeat;
