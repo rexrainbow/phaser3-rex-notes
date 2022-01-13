@@ -51,7 +51,7 @@ class ScrollableBlock extends BaseSizer {
         this.child = child;
 
         // Create mask of child object
-        var maskEnable, maskPadding, maskUpdateMode;
+        var maskEnable, maskPadding, maskUpdateMode, maskLayer;
         if (maskConfig === true) {
             maskEnable = true;
             maskPadding = 0;
@@ -62,11 +62,13 @@ class ScrollableBlock extends BaseSizer {
             maskEnable = GetValue(maskConfig, 'mask', true);
             maskPadding = GetValue(maskConfig, 'padding', 0);
             maskUpdateMode = GetValue(config, 'updateMode', 0);
+            maskLayer = GetValue(maskConfig, 'layer', undefined);
         }
 
         if (maskEnable) {
             this.setMaskUpdateMode(maskUpdateMode);
             this.enableChildrenMask(maskPadding);
+            this.setMaskLayer(maskLayer);
             this.startMaskUpdate();
         }
     }

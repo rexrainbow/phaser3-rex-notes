@@ -29264,45 +29264,45 @@
         continue;
       }
 
-      if (!isVisible(child)) {
+      if (!IsVisible(child)) {
         // Child is invisible before masking
         continue;
       }
 
       if (child.getBounds) {
         childBounds = child.getBounds(childBounds);
-        visiblePointsNumber = containsPoints(parentBounds, childBounds);
+        visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
 
         switch (visiblePointsNumber) {
           case 4:
             // 4 points are all inside visible window, set visible
-            showAll(parent, child);
+            ShowAll(parent, child);
             break;
 
           case 0:
             // No point is inside visible window
             // Parent intersects with child, or parent is inside child, set visible, and apply mask
             if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-              showSome(parent, child, mask);
+              ShowSome(parent, child, mask);
             } else {
               // Set invisible
-              showNone(parent, child);
+              ShowNone(parent, child);
             }
 
             break;
 
           default:
             // Part of points are inside visible window, set visible, and apply mask
-            showSome(parent, child, mask);
+            ShowSome(parent, child, mask);
             break;
         }
       } else {
-        showSome(parent, child, mask);
+        ShowSome(parent, child, mask);
       }
     }
   };
 
-  var isVisible = function isVisible(gameObject) {
+  var IsVisible = function IsVisible(gameObject) {
     while (1) {
       var localState = gameObject.rexContainer;
 
@@ -29327,7 +29327,7 @@
     }
   };
 
-  var containsPoints = function containsPoints(rectA, rectB) {
+  var ContainsPoints = function ContainsPoints(rectA, rectB) {
     var result = 0;
     var top = rectB.top,
         bottom = rectB.bottom,
@@ -29340,7 +29340,7 @@
     return result;
   };
 
-  var showAll = function showAll(parent, child, mask) {
+  var ShowAll = function ShowAll(parent, child, mask) {
     parent.setChildMaskVisible(child, true);
 
     if (child.clearMask) {
@@ -29348,7 +29348,7 @@
     }
   };
 
-  var showSome = function showSome(parent, child, mask) {
+  var ShowSome = function ShowSome(parent, child, mask) {
     parent.setChildMaskVisible(child, true);
 
     if (child.setMask) {
@@ -29356,7 +29356,7 @@
     }
   };
 
-  var showNone = function showNone(parent, child, mask) {
+  var ShowNone = function ShowNone(parent, child, mask) {
     parent.setChildMaskVisible(child, false);
 
     if (child.clearMask) {
@@ -34793,6 +34793,11 @@
       this.maskChildrenFlag = value;
       return this;
     },
+    setMaskLayer: function setMaskLayer(layer) {
+      // To reduce amount of masked game object
+      this.maskLayer = layer;
+      return this;
+    },
     maskChildren: function maskChildren() {
       if (!this.childrenMask) {
         // No childrenMask
@@ -34805,7 +34810,14 @@
         return this;
       }
 
-      MaskChildren(this, this.childrenMask, this.getAllChildren());
+      if (this.maskLayer) {
+        // 1. Add parent and children into layer
+        this.addToLayer(this.maskLayer); // 2. Mask this layer
+
+        this.maskLayer.setMask(this.childrenMask);
+      } else {
+        MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
+      }
 
       if (this.maskUpdateMode === 0) {
         this.maskChildrenFlag = false;
@@ -34892,7 +34904,7 @@
       sizerConfig.expand = expand;
       _this.child = child; // Create mask of child object
 
-      var maskEnable, maskPadding, maskUpdateMode;
+      var maskEnable, maskPadding, maskUpdateMode, maskLayer;
 
       if (maskConfig === true) {
         maskEnable = true;
@@ -34904,12 +34916,15 @@
         maskEnable = GetValue$m(maskConfig, 'mask', true);
         maskPadding = GetValue$m(maskConfig, 'padding', 0);
         maskUpdateMode = GetValue$m(config, 'updateMode', 0);
+        maskLayer = GetValue$m(maskConfig, 'layer', undefined);
       }
 
       if (maskEnable) {
         _this.setMaskUpdateMode(maskUpdateMode);
 
         _this.enableChildrenMask(maskPadding);
+
+        _this.setMaskLayer(maskLayer);
 
         _this.startMaskUpdate();
       }

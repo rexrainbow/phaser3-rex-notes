@@ -39,6 +39,12 @@ export default {
         return this;
     },
 
+    setMaskLayer(layer) {
+        // To reduce amount of masked game object
+        this.maskLayer = layer;
+        return this;
+    },
+
     maskChildren() {
         if (!this.childrenMask) {
             // No childrenMask
@@ -51,7 +57,14 @@ export default {
             return this;
         }
 
-        MaskChildren(this, this.childrenMask, this.getAllChildren());
+        if (this.maskLayer) {
+            // 1. Add parent and children into layer
+            this.addToLayer(this.maskLayer);
+            // 2. Mask this layer
+            this.maskLayer.setMask(this.childrenMask);
+        } else {
+            MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
+        }
 
         if (this.maskUpdateMode === 0) {
             this.maskChildrenFlag = false;

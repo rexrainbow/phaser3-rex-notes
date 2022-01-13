@@ -56,7 +56,8 @@ class Demo extends Phaser.Scene {
                 child: createPanel(this, data),
 
                 mask: {
-                    padding: 1
+                    padding: 1,
+                    // layer: this.add.layer()
                 },
             },
 
@@ -64,7 +65,7 @@ class Demo extends Phaser.Scene {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
-            
+
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1

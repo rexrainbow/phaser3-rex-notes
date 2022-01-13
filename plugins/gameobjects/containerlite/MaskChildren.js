@@ -24,36 +24,36 @@ var MaskChildren = function (parent, mask, children) {
         if (child === maskGameObject) {
             continue;
         }
-        if (!isVisible(child)) {  // Child is invisible before masking
+        if (!IsVisible(child)) {  // Child is invisible before masking
             continue;
         }
 
         if (child.getBounds) {
             childBounds = child.getBounds(childBounds);
-            visiblePointsNumber = containsPoints(parentBounds, childBounds);
+            visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible
-                    showAll(parent, child, mask);
+                    ShowAll(parent, child, mask);
                     break;
                 case 0: // No point is inside visible window
                     // Parent intersects with child, or parent is inside child, set visible, and apply mask
                     if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                        showSome(parent, child, mask);
+                        ShowSome(parent, child, mask);
                     } else { // Set invisible
-                        showNone(parent, child, mask);
+                        ShowNone(parent, child, mask);
                     }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    showSome(parent, child, mask);
+                    ShowSome(parent, child, mask);
                     break;
             }
         } else {
-            showSome(parent, child, mask);
+            ShowSome(parent, child, mask);
         }
     }
 }
 
-var isVisible = function (gameObject) {
+var IsVisible = function (gameObject) {
     while (1) {
         var localState = gameObject.rexContainer;
         if (!localState) { // Top game object
@@ -72,7 +72,7 @@ var isVisible = function (gameObject) {
     }
 }
 
-var containsPoints = function (rectA, rectB) {
+var ContainsPoints = function (rectA, rectB) {
     var result = 0;
     var top = rectB.top,
         bottom = rectB.bottom,
@@ -85,21 +85,21 @@ var containsPoints = function (rectA, rectB) {
     return result;
 };
 
-var showAll = function (parent, child, mask) {
+var ShowAll = function (parent, child, mask) {
     parent.setChildMaskVisible(child, true);
     if (child.clearMask) {
         child.clearMask();
     }
 }
 
-var showSome = function (parent, child, mask) {
+var ShowSome = function (parent, child, mask) {
     parent.setChildMaskVisible(child, true);
     if (child.setMask) {
         child.setMask(mask);
     }
 }
 
-var showNone = function (parent, child, mask) {
+var ShowNone = function (parent, child, mask) {
     parent.setChildMaskVisible(child, false);
     if (child.clearMask) {
         child.clearMask();
