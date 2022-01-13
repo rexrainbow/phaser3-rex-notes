@@ -47,7 +47,18 @@ var AddLocal = function (gameObject) {
 }
 
 export default {
+    // Can override this method
     add(gameObject) {
+        if (Array.isArray(gameObject)) {
+            this.addMultiple(gameObject);
+        } else {
+            Add.call(this, gameObject);
+        }
+        return this;
+    },
+
+    // Don't override this method
+    pin(gameObject) {
         if (Array.isArray(gameObject)) {
             this.addMultiple(gameObject);
         } else {

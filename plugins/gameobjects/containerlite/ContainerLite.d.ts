@@ -29,6 +29,10 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
         child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
+    pin(
+        gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
+    ): this;
+
     addMultiple(
         children: Phaser.GameObjects.GameObject[]
     ): this;

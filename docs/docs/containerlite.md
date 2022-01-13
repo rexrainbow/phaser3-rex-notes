@@ -150,6 +150,7 @@ Add(pin) a game obejct to container
 
 ```javascript
 container.add(child);  // child: a game object
+// container.pin(child);
 ```
 
 Or add(pin) children

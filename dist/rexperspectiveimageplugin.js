@@ -958,7 +958,18 @@
   };
 
   var AddChild = {
+    // Can override this method
     add: function add(gameObject) {
+      if (Array.isArray(gameObject)) {
+        this.addMultiple(gameObject);
+      } else {
+        Add.call(this, gameObject);
+      }
+
+      return this;
+    },
+    // Don't override this method
+    pin: function pin(gameObject) {
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {

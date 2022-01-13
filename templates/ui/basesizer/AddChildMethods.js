@@ -2,14 +2,7 @@ import Container from '../container/Container.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import AddChild from './utils/AddChild.js';
 
-const ContainerAdd = Container.prototype.add;
-
 export default {
-    pin(gameObject) {
-        ContainerAdd.call(this, gameObject);
-        return this;
-    },
-
     addBackground(gameObject, paddingConfig, childKey) {
         if (this.backgroundChildren === undefined) {
             this.backgroundChildren = [];

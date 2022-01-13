@@ -6217,7 +6217,18 @@
   };
 
   var AddChild$1 = {
+    // Can override this method
     add: function add(gameObject) {
+      if (Array.isArray(gameObject)) {
+        this.addMultiple(gameObject);
+      } else {
+        Add$7.call(this, gameObject);
+      }
+
+      return this;
+    },
+    // Don't override this method
+    pin: function pin(gameObject) {
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
@@ -17367,10 +17378,10 @@
     return out;
   };
 
-  var ContainerAdd$2 = ContainerLite.prototype.add;
+  var ContainerAdd$1 = ContainerLite.prototype.add;
 
   var AddChild = function AddChild(gameObject) {
-    ContainerAdd$2.call(this, gameObject);
+    ContainerAdd$1.call(this, gameObject);
 
     if (this.sizerEventsEnable) {
       gameObject.emit('sizer.add', gameObject, this);
@@ -17380,12 +17391,7 @@
     return this;
   };
 
-  var ContainerAdd$1 = ContainerLite.prototype.add;
   var AddChildMethods$7 = {
-    pin: function pin(gameObject) {
-      ContainerAdd$1.call(this, gameObject);
-      return this;
-    },
     addBackground: function addBackground(gameObject, paddingConfig, childKey) {
       if (this.backgroundChildren === undefined) {
         this.backgroundChildren = [];

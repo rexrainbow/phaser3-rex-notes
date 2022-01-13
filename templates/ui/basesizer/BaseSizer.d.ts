@@ -111,10 +111,6 @@ declare class BaseSizer extends ContainerLite {
 
     readonly minInnerHeight: number;
 
-    pin(
-        gameObject: Phaser.GameObjects.GameObject
-    ): this;
-
     addBackground(
         gameObject: Phaser.GameObjects.GameObject,
         padding?: BaseSizer.PaddingTypes,
