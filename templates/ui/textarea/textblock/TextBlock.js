@@ -1,6 +1,6 @@
 import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
 import GetTextObjectType from '../../../../plugins/utils/text/GetTextObjectType.js';
-import AddChildMask from '../../utils/AddChildMask.js';
+import AddChildMask from '../../../../plugins/gameobjects/containerlite/mask/AddChildMask.js';
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import GetBoundsConfig from '../../utils/GetBoundsConfig.js';

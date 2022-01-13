@@ -1,6 +1,6 @@
-import MaskChildren from '../../../plugins/gameobjects/containerlite/MaskChildren.js';
+import MaskChildren from '../../../plugins/gameobjects/containerlite/mask/MaskChildren.js';
 import MaskToGameObject from '../../../plugins/utils/mask/MaskToGameObject.js';
-import AddChildMask from './AddChildMask.js';
+import AddChildMask from '../../../plugins/gameobjects/containerlite/mask/AddChildMask.js';
 
 const MASKUPDATEMODE = {
     update: 0,

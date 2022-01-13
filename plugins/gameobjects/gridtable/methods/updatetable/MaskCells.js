@@ -1,4 +1,4 @@
-import MaskChildren from '../../../containerlite/MaskChildren.js';
+import MaskChildren from '../../../containerlite/mask/MaskChildren.js';
 
 var MaskCells = function () {
     if (!this.cellsMask) {

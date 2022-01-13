@@ -1,4 +1,4 @@
-import DefaultMaskGraphics from '../../../plugins/utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import DefaultMaskGraphics from '../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 
 var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
     var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object

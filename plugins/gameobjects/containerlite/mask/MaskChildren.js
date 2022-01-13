@@ -1,4 +1,4 @@
-import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
+import MaskToGameObject from '../../../utils/mask/MaskToGameObject.js';
 
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
