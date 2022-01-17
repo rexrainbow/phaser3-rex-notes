@@ -67,6 +67,10 @@ class Tick {
         }
     }
 
+    evalExpression(expression) {
+        return expression.eval(this.blackboardContext);
+    }
+
     _enterNode(node) {
         this._nodeCount++;
         this._openNodes.push(node);

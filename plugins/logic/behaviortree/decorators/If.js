@@ -30,7 +30,7 @@ class If extends Decorator {
             return ERROR;
         }
 
-        if (!this.expression.eval(tick.blackboardContext)) {
+        if (!tick.evalExpression(this.expression)) {
             return FAILURE;
         }
 

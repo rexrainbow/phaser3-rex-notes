@@ -26,7 +26,7 @@ class TimeLimit extends Decorator {
     open(tick) {
         var nodeMemory = tick.getNodeMemory();
         nodeMemory.$startTime = tick.currentTime;
-        nodeMemory.$duration = this.durationExpression.eval(tick.blackboardContext);
+        nodeMemory.$duration = tick.evalExpression(this.durationExpression);
     }
 
     tick(tick) {

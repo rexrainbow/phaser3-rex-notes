@@ -26,7 +26,7 @@ class Limiter extends Decorator {
 
     open(tick) {
         var nodeMemory = tick.getNodeMemory();
-        nodeMemory.$maxLoop = this.maxLoopExpression.eval(tick.blackboardContext);
+        nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
         nodeMemory.$i = 0;
     }
 
