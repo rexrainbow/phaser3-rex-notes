@@ -98,7 +98,8 @@ var config = {
     scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
     mask: {
         padding: 0,
-        updateMode: 0
+        // updateMode: 0,
+        // layer: undefined,
     }
 }
 var table = scene.add.rexGridTable(x, y, width, height, config);
@@ -138,6 +139,13 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
     - `mask.updateMode` : When to update cells mask
         - `0`, or `update` : Apply mask to cell container only when `table.updateTable()` is invoked. Default behavior.
         - `1`, or `everyTick` : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after `table.updateTable()` and still been masked.
+        - `mask.updateMode` : When to update mask
+            - `0`, or `'update'` : Apply mask only when scrolling. Default behavior.
+            - `1`, or '`everyTick'` : Apply mask every tick. Use this mode if children game objects of panel are moved after scrolling and still been masked.
+        - `mask.layer` :
+            - `undefined`, `false`, `null` : Disable this feature, default behavior
+            - [Layer game object](layer.md) : Draw children game object of panel on this layer game object, then apply mask on this layer game object.
+        - `false` : No mask        
     - `false` : No mask.
 
 Add grid table from JSON

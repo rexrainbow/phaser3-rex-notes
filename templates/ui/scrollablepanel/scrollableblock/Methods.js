@@ -3,7 +3,7 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import ResetChildPosition from './ResetChildPosition.js';
 import LayoutChildren from './LayoutChildren.js';
-import ChildrenMaskMethods from '../../utils/ChildrenMaskMethods.js';
+import ChildrenMaskMethods from '../../../../plugins/gameobjects/containerlite/mask/ChildrenMaskMethods.js';
 
 var methods = {
     getChildrenWidth: GetChildrenWidth,

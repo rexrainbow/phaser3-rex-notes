@@ -8642,12 +8642,12 @@
         child.runLayout(this, childWidth, childHeight);
       } else {
         ResizeGameObject(child, childWidth, childHeight);
-      } // Layout children-mask
+      } // Update local state
 
 
-      this.layoutChildrenMask(); // Update local state
+      this.resetChildPosition(); // Layout children-mask
 
-      this.resetChildPosition(); // Re-mask children
+      this.layoutChildrenMask(); // Re-mask children
 
       this.maskChildren();
     }
@@ -8987,7 +8987,7 @@
         // No childrenMask
         return this;
       } else if (!this.maskChildrenFlag) {
-        // No maskCells flag
+        // No maskChildrenFlag set
         return this;
       } else if (this.alpha === 0 || !this.visible) {
         // Parent is not visible
@@ -9010,7 +9010,7 @@
       return this;
     },
     layoutChildrenMask: function layoutChildrenMask() {
-      if (this.childrenMask === undefined) {
+      if (!this.childrenMask) {
         return this;
       }
 
@@ -9072,7 +9072,6 @@
 
       var child = GetValue$1(config, 'child', undefined);
       var expand = GetValue$1(config, 'expand', true);
-      var maskConfig = GetValue$1(config, 'mask', undefined);
 
       if (child.setOrigin) {
         child.setOrigin(0);
@@ -9088,30 +9087,7 @@
       sizerConfig.expand = expand;
       _this.child = child; // Create mask of child object
 
-      var maskEnable, maskPadding, maskUpdateMode, maskLayer;
-
-      if (maskConfig === true) {
-        maskEnable = true;
-        maskPadding = 0;
-        maskUpdateMode = 0;
-      } else if (maskConfig === false) {
-        maskEnable = false;
-      } else {
-        maskEnable = GetValue$1(maskConfig, 'mask', true);
-        maskPadding = GetValue$1(maskConfig, 'padding', 0);
-        maskUpdateMode = GetValue$1(config, 'updateMode', 0);
-        maskLayer = GetValue$1(maskConfig, 'layer', undefined);
-      }
-
-      if (maskEnable) {
-        _this.setMaskUpdateMode(maskUpdateMode);
-
-        _this.enableChildrenMask(maskPadding);
-
-        _this.setMaskLayer(maskLayer);
-
-        _this.startMaskUpdate();
-      }
+      _this.setChildrenMask(GetValue$1(config, 'mask', undefined));
 
       return _this;
     }
@@ -9126,16 +9102,25 @@
 
         if (this.childrenMask) {
           this.stopMaskUpdate();
-        }
-
-        this.child = undefined;
-
-        if (this.childrenMask) {
           this.childrenMask.destroy();
           this.childrenMask = undefined;
         }
 
+        this.child = undefined;
+
         _get(_getPrototypeOf(ScrollableBlock.prototype), "destroy", this).call(this, fromScene);
+      }
+    }, {
+      key: "setChildrenMask",
+      value: function setChildrenMask(config) {
+        if (config === false) ; else {
+          this.setMaskUpdateMode(GetValue$1(config, 'updateMode', 0));
+          this.enableChildrenMask(GetValue$1(config, 'padding', 0));
+          this.setMaskLayer(GetValue$1(config, 'layer', undefined));
+          this.startMaskUpdate();
+        }
+
+        return this;
       }
     }, {
       key: "setScrollMode",

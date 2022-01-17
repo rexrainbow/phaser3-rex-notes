@@ -1,5 +1,6 @@
 import MaskChildren from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
+import MaskToGameObject from '../../../utils/mask/MaskToGameObject.js'
 
 const MASKUPDATEMODE = {
     update: 0,
@@ -49,7 +50,7 @@ export default {
             // No childrenMask
             return this;
         } else if (!this.maskChildrenFlag) {
-            // No maskCells flag
+            // No maskChildrenFlag set
             return this;
         } else if ((this.alpha === 0) || (!this.visible)) {
             // Parent is not visible
@@ -70,4 +71,15 @@ export default {
         }
         return this;
     },
+
+    layoutChildrenMask() {
+        if (!this.childrenMask) {
+            return this;
+        }
+
+        var maskGameObject = MaskToGameObject(this.childrenMask);
+        maskGameObject.setPosition().resize();
+        this.resetChildPositionState(maskGameObject);
+        return this;
+    }
 };

@@ -1371,10 +1371,10 @@
     return this;
   };
 
-  var methods = {
+  var methods$1 = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -1592,7 +1592,7 @@
     return ContainerLite;
   }(Base);
 
-  Object.assign(ContainerLite.prototype, methods);
+  Object.assign(ContainerLite.prototype, methods$1);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -2388,177 +2388,6 @@
     return Table;
   }();
 
-  var DrawShape = function DrawShape(width, height, padding, originX, originY) {
-    this.clear().fillStyle(0xffffff);
-
-    switch (this.shape) {
-      case 1:
-        // circle
-        var radius = Math.min(width, height) / 2;
-        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
-        break;
-
-      default:
-        // 0|'rectangle'
-        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
-        break;
-    }
-  };
-
-  var Graphics = Phaser.GameObjects.Graphics;
-
-  var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
-    _inherits(DefaultMaskGraphics, _Graphics);
-
-    var _super = _createSuper(DefaultMaskGraphics);
-
-    function DefaultMaskGraphics(parent, shape, padding) {
-      var _this;
-
-      _classCallCheck(this, DefaultMaskGraphics);
-
-      if (shape === undefined) {
-        shape = 0;
-      }
-
-      if (typeof shape === 'string') {
-        shape = SHAPEMODE[shape];
-      }
-
-      if (padding === undefined) {
-        padding = 0;
-      }
-
-      _this = _super.call(this, parent.scene);
-      _this.parent = parent;
-      _this.shape = shape;
-      _this.padding = padding;
-
-      _this.setPosition().resize().setVisible(false); // Don't add it to display list
-
-
-      return _this;
-    }
-
-    _createClass(DefaultMaskGraphics, [{
-      key: "destroy",
-      value: function destroy() {
-        this.parent = undefined;
-
-        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "destroy", this).call(this);
-
-        return this;
-      }
-    }, {
-      key: "setPosition",
-      value: function setPosition(x, y) {
-        var parent = this.parent;
-
-        if (x === undefined) {
-          x = parent.x;
-        }
-
-        if (y === undefined) {
-          y = parent.y;
-        }
-
-        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "setPosition", this).call(this, x, y);
-
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height, padding) {
-        var parent = this.parent;
-
-        if (width === undefined) {
-          width = parent.width;
-        }
-
-        if (height === undefined) {
-          height = parent.height;
-        }
-
-        if (padding === undefined) {
-          padding = this.padding;
-        }
-
-        if (this.widthSave === width && this.heightSave === height && this.paddingSave === padding) {
-          return this;
-        }
-
-        this.widthSave = width;
-        this.heightSave = height;
-        this.paddingSave = padding;
-        this.originXSave = parent.originX;
-        this.originYSave = parent.originY;
-        DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
-        return this;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(originX, originY) {
-        if (originY === undefined) {
-          originY = originX;
-        }
-
-        var parent = this.parent;
-
-        if (originX === undefined) {
-          originX = parent.originX;
-        }
-
-        if (originY === undefined) {
-          originY = parent.originY;
-        }
-
-        if (this.originXSave === originX && this.originYSave === originY) {
-          return this;
-        }
-
-        this.originXSave = originX;
-        this.originYSave = originY;
-        DrawShape.call(this, this.widthSave, this.heightSave, this.paddingSave, originX, originY);
-        return this;
-      }
-    }]);
-
-    return DefaultMaskGraphics;
-  }(Graphics);
-
-  var SHAPEMODE = {
-    rectangle: 0,
-    circle: 1
-  };
-
-  var ResizeGameObject = function ResizeGameObject(gameObject, newWidth, newHeight) {
-    if (!gameObject || newWidth === undefined && newHeight === undefined) {
-      return;
-    }
-
-    if (gameObject.resize) {
-      // Has `resize` method
-      if (newWidth === undefined) {
-        newWidth = gameObject.width;
-      }
-
-      if (newHeight === undefined) {
-        newHeight = gameObject.height;
-      }
-
-      gameObject.resize(newWidth, newHeight);
-    } else {
-      // Set display width/height
-      if (newWidth !== undefined) {
-        gameObject.displayWidth = newWidth;
-      }
-
-      if (newHeight !== undefined) {
-        gameObject.displayHeight = newHeight;
-      }
-    }
-  };
-
   var MaskToGameObject = function MaskToGameObject(mask) {
     return mask.hasOwnProperty('geometryMask') ? mask.geometryMask : mask.bitmapMask;
   };
@@ -2775,43 +2604,241 @@
     }
   };
 
-  var MaskCells = function MaskCells() {
-    if (!this.cellsMask) {
-      // No cellsMask
-      return this;
-    } else if (!this.maskCellsFlag) {
-      // No maskCells flag
-      return this;
-    } else if (this.alpha === 0 || !this.visible) {
-      // Grid table is not visible
-      return this;
+  var DrawShape = function DrawShape(width, height, padding, originX, originY) {
+    this.clear().fillStyle(0xffffff);
+
+    switch (this.shape) {
+      case 1:
+        // circle
+        var radius = Math.min(width, height) / 2;
+        this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
+        break;
+
+      default:
+        // 0|'rectangle'
+        this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
+        break;
     }
+  };
 
-    var children = [];
-    var cells = this.visibleCells.entries,
-        container;
+  var Graphics = Phaser.GameObjects.Graphics;
 
-    for (var i = 0, cnt = cells.length; i < cnt; i++) {
-      container = cells[i].getContainer();
+  var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
+    _inherits(DefaultMaskGraphics, _Graphics);
 
-      if (container) {
-        if (container.hasOwnProperty('isRexContainerLite')) {
-          // ContainerLite
-          container.getAllChildren(children);
-        } else {
-          // Others
-          children.push(container);
-        }
+    var _super = _createSuper(DefaultMaskGraphics);
+
+    function DefaultMaskGraphics(parent, shape, padding) {
+      var _this;
+
+      _classCallCheck(this, DefaultMaskGraphics);
+
+      if (shape === undefined) {
+        shape = 0;
       }
+
+      if (typeof shape === 'string') {
+        shape = SHAPEMODE[shape];
+      }
+
+      if (padding === undefined) {
+        padding = 0;
+      }
+
+      _this = _super.call(this, parent.scene);
+      _this.parent = parent;
+      _this.shape = shape;
+      _this.padding = padding;
+
+      _this.setPosition().resize().setVisible(false); // Don't add it to display list
+
+
+      return _this;
     }
 
-    MaskChildren(this, this.cellsMask, children);
+    _createClass(DefaultMaskGraphics, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent = undefined;
 
-    if (this.maskUpdateMode === 0) {
-      this.maskCellsFlag = false;
+        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "destroy", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        var parent = this.parent;
+
+        if (x === undefined) {
+          x = parent.x;
+        }
+
+        if (y === undefined) {
+          y = parent.y;
+        }
+
+        _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "setPosition", this).call(this, x, y);
+
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height, padding) {
+        var parent = this.parent;
+
+        if (width === undefined) {
+          width = parent.width;
+        }
+
+        if (height === undefined) {
+          height = parent.height;
+        }
+
+        if (padding === undefined) {
+          padding = this.padding;
+        }
+
+        if (this.widthSave === width && this.heightSave === height && this.paddingSave === padding) {
+          return this;
+        }
+
+        this.widthSave = width;
+        this.heightSave = height;
+        this.paddingSave = padding;
+        this.originXSave = parent.originX;
+        this.originYSave = parent.originY;
+        DrawShape.call(this, width, height, padding, parent.originX, parent.originY);
+        return this;
+      }
+    }, {
+      key: "setOrigin",
+      value: function setOrigin(originX, originY) {
+        if (originY === undefined) {
+          originY = originX;
+        }
+
+        var parent = this.parent;
+
+        if (originX === undefined) {
+          originX = parent.originX;
+        }
+
+        if (originY === undefined) {
+          originY = parent.originY;
+        }
+
+        if (this.originXSave === originX && this.originYSave === originY) {
+          return this;
+        }
+
+        this.originXSave = originX;
+        this.originYSave = originY;
+        DrawShape.call(this, this.widthSave, this.heightSave, this.paddingSave, originX, originY);
+        return this;
+      }
+    }]);
+
+    return DefaultMaskGraphics;
+  }(Graphics);
+
+  var SHAPEMODE = {
+    rectangle: 0,
+    circle: 1
+  };
+
+  var AddChildMask = function AddChildMask(maskTarget, sizeTarget, shape, padding) {
+    var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
+
+    if (maskTarget && !maskTarget.isRexSizer) {
+      // Sizer game object can't apply mask
+      var mask = maskGameObject.createGeometryMask();
+      maskTarget.setMask(mask);
+      this.once('destroy', function () {
+        maskTarget.setMask();
+        mask.destroy();
+      });
     }
 
-    return this;
+    this.pin(maskGameObject);
+    return maskGameObject;
+  };
+
+  var MASKUPDATEMODE = {
+    update: 0,
+    everyTick: 1
+  };
+  var ChildrenMaskMethods = {
+    setMaskUpdateMode: function setMaskUpdateMode(mode) {
+      if (typeof mode === 'string') {
+        mode = MASKUPDATEMODE[mode];
+      }
+
+      this.maskUpdateMode = mode;
+      return this;
+    },
+    startMaskUpdate: function startMaskUpdate() {
+      this.scene.game.events.on('poststep', this.maskChildren, this);
+    },
+    stopMaskUpdate: function stopMaskUpdate() {
+      this.scene.game.events.off('poststep', this.maskChildren, this);
+    },
+    enableChildrenMask: function enableChildrenMask(maskPadding) {
+      var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
+      this.childrenMask = maskGameObject.createGeometryMask(); // this.childrenMask is a mask object, not a (Graphics) game object
+
+      return this;
+    },
+    setMaskChildrenFlag: function setMaskChildrenFlag(value) {
+      if (value === undefined) {
+        value = true;
+      }
+
+      this.maskChildrenFlag = value;
+      return this;
+    },
+    setMaskLayer: function setMaskLayer(layer) {
+      // To reduce amount of masked game object
+      this.maskLayer = layer;
+      return this;
+    },
+    maskChildren: function maskChildren() {
+      if (!this.childrenMask) {
+        // No childrenMask
+        return this;
+      } else if (!this.maskChildrenFlag) {
+        // No maskChildrenFlag set
+        return this;
+      } else if (this.alpha === 0 || !this.visible) {
+        // Parent is not visible
+        return this;
+      }
+
+      if (this.maskLayer) {
+        // 1. Add parent and children into layer
+        this.addToLayer(this.maskLayer); // 2. Mask this layer
+
+        this.maskLayer.setMask(this.childrenMask);
+      } else {
+        MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
+      }
+
+      if (this.maskUpdateMode === 0) {
+        this.maskChildrenFlag = false;
+      }
+
+      return this;
+    },
+    layoutChildrenMask: function layoutChildrenMask() {
+      if (!this.childrenMask) {
+        return this;
+      }
+
+      var maskGameObject = MaskToGameObject(this.childrenMask);
+      maskGameObject.setPosition().resize();
+      this.resetChildPositionState(maskGameObject);
+      return this;
+    }
   };
 
   var HideCell = function HideCell(cell) {
@@ -2963,7 +2990,7 @@
     ClearVisibleCellIndexes.call(this);
     ShowCells.call(this);
     HideCells.call(this);
-    this.maskCellsFlag = true;
+    this.setMaskChildrenFlag();
     return this;
   };
 
@@ -3137,10 +3164,9 @@
     return this;
   };
 
-  var Methods = {
+  var methods = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
-    maskCells: MaskCells,
     updateTable: UpdateTable,
     isCellVisible: IsCellVisible,
     pointToCellIndex: PointToCellIndex,
@@ -3156,9 +3182,9 @@
     setGridSize: SetGridSize,
     updateVisibleCell: UpdateVisibleCell
   };
+  Object.assign(methods, ChildrenMaskMethods);
 
   var Group = Phaser.GameObjects.Group;
-  Phaser.GameObjects.Components;
   var Set = Phaser.Structs.Set;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
@@ -3208,7 +3234,7 @@
         _this.on('cellinvisible', callback, scope);
       }
 
-      _this.setCellsMask(GetValue$1(config, 'mask', true));
+      _this.setChildrenMask(GetValue$1(config, 'mask', undefined));
 
       _this.setScrollMode(GetValue$1(config, 'scrollMode', 0));
 
@@ -3250,10 +3276,10 @@
           return;
         }
 
-        if (this.cellsMask) {
-          this.scene.game.events.off('poststep', this.maskCells, this);
-          this.cellsMask.destroy();
-          this.cellsMask = undefined;
+        if (this.childrenMask) {
+          this.stopMaskUpdate();
+          this.childrenMask.destroy();
+          this.childrenMask = undefined;
         }
 
         this.table.destroy(fromScene);
@@ -3409,35 +3435,13 @@
         return this;
       }
     }, {
-      key: "setCellsMask",
-      value: function setCellsMask(config) {
-        var maskEnable, maskPadding, maskUpdateMode;
-
-        if (config === true) {
-          maskEnable = true;
-          maskPadding = 0;
-          maskUpdateMode = 0;
-        } else if (config === false) {
-          maskEnable = false;
-        } else {
-          maskEnable = GetValue$1(config, 'mask', true);
-          maskPadding = GetValue$1(config, 'padding', 0);
-          maskUpdateMode = GetValue$1(config, 'updateMode', 0);
-        }
-
-        this.maskCellsFlag = true;
-        this.maskUpdateMode = maskUpdateMode; // 0,1,undefined
-
-        if (maskEnable) {
-          var maskGameObject = new DefaultMaskGraphics(this, 0, maskPadding);
-          this.cellsMask = maskGameObject.createGeometryMask();
-          this.add(maskGameObject);
-
-          if (typeof maskUpdateMode === 'string') {
-            maskUpdateMode = MASKUPDATEMODE[maskUpdateMode];
-          }
-
-          this.scene.game.events.on('poststep', this.maskCells, this);
+      key: "setChildrenMask",
+      value: function setChildrenMask(config) {
+        if (config === false) ; else {
+          this.setMaskUpdateMode(GetValue$1(config, 'updateMode', 0));
+          this.enableChildrenMask(GetValue$1(config, 'padding', 0));
+          this.setMaskLayer(GetValue$1(config, 'layer', undefined));
+          this.startMaskUpdate();
         }
 
         return this;
@@ -3559,15 +3563,15 @@
 
         _get(_getPrototypeOf(GridTable.prototype), "resize", this).call(this, width, height);
 
-        if (this.cellsMask) {
-          ResizeGameObject(MaskToGameObject(this.cellsMask), width, height);
-        }
-
         if (this.expandCellSize) {
           this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
         }
 
-        this.updateTable(true);
+        this.updateTable(true); // Layout children-mask
+
+        this.layoutChildrenMask(); // Re-mask children
+
+        this.maskChildren();
         return this;
       }
     }]);
@@ -3575,16 +3579,12 @@
     return GridTable;
   }(ContainerLite);
 
-  Object.assign(GridTable.prototype, Methods);
+  Object.assign(GridTable.prototype, methods);
   var SCROLLMODE = {
     v: 0,
     vertical: 0,
     h: 1,
     horizontal: 1
-  };
-  var MASKUPDATEMODE = {
-    update: 0,
-    everyTick: 1
   };
 
   function Factory (x, y, width, height, config) {

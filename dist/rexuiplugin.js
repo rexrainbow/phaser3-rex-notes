@@ -640,7 +640,7 @@
     return this;
   };
 
-  var Methods$9 = {
+  var Methods$8 = {
     setTexture: SetTexture$1,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
@@ -788,7 +788,7 @@
     return NinePatch;
   }(RenderTexture$1);
 
-  Object.assign(NinePatch.prototype, Methods$9);
+  Object.assign(NinePatch.prototype, Methods$8);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -4413,10 +4413,10 @@
 
     return CanvasText;
   }();
-  var methods$i = {
+  var methods$j = {
     setInteractive: SetInteractive
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$i);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$j);
 
   var GetValue$2m = Phaser.Utils.Objects.GetValue;
 
@@ -4558,10 +4558,10 @@
     return ImageManager;
   }();
 
-  var methods$h = {
+  var methods$i = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$h);
+  Object.assign(ImageManager.prototype, methods$i);
 
   var IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
@@ -7068,10 +7068,10 @@
     return this;
   };
 
-  var methods$g = {
+  var methods$h = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$g, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$h, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -7289,7 +7289,7 @@
     return ContainerLite;
   }(Base$2);
 
-  Object.assign(ContainerLite.prototype, methods$g);
+  Object.assign(ContainerLite.prototype, methods$h);
 
   ObjectFactory.register('container', function (x, y, width, height, children) {
     var gameObject = new ContainerLite(this.scene, x, y, width, height, children);
@@ -9653,7 +9653,7 @@
     return GetAll(this.children, 'active', true);
   };
 
-  var Methods$8 = {
+  var Methods$7 = {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
@@ -9817,7 +9817,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$8);
+  Object.assign(DynamicText.prototype, Methods$7);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -11930,7 +11930,7 @@
     return this;
   };
 
-  var Methods$7 = {
+  var Methods$6 = {
     start: Start,
     typing: Typing,
     pause: Pause$1,
@@ -12712,7 +12712,7 @@
     }
   };
 
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$7);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$6);
 
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
@@ -14153,7 +14153,7 @@
     return this;
   };
 
-  var Methods$6 = {
+  var Methods$5 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -14314,7 +14314,7 @@
     return TextPlayer;
   }(DynamicText);
 
-  Object.assign(TextPlayer.prototype, Methods$6);
+  Object.assign(TextPlayer.prototype, Methods$5);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -19612,7 +19612,7 @@
     return this;
   };
 
-  var methods$f = {
+  var methods$g = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -19644,7 +19644,7 @@
     setDraggable: SetDraggable,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$f, PaddingMethods, AddChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$g, PaddingMethods, AddChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$1g = Phaser.Utils.Objects.GetValue;
 
@@ -19915,7 +19915,7 @@
     return Base;
   }(ContainerLite);
 
-  Object.assign(Base.prototype, methods$f);
+  Object.assign(Base.prototype, methods$g);
 
   var GetChildrenWidth$4 = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -20282,7 +20282,7 @@
     }
   };
 
-  var methods$e = {
+  var methods$f = {
     getChildrenWidth: GetChildrenWidth$4,
     getChildrenHeight: GetChildrenHeight$4,
     getExpandedChildWidth: GetExpandedChildWidth$2,
@@ -20290,7 +20290,7 @@
     getChildrenSizers: GetChildrenSizers$4,
     layoutChildren: LayoutChildren$5
   };
-  Object.assign(methods$e, AddChildMethods$6, RemoveChildMethods$6);
+  Object.assign(methods$f, AddChildMethods$6, RemoveChildMethods$6);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -20360,7 +20360,7 @@
     return OverlapSizer;
   }(Base);
 
-  Object.assign(OverlapSizer.prototype, methods$e);
+  Object.assign(OverlapSizer.prototype, methods$f);
 
   var GetDistance = Phaser.Math.Distance.Between;
 
@@ -21512,8 +21512,8 @@
     }
   };
 
-  var methods$d = {};
-  Object.assign(methods$d, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods);
+  var methods$e = {};
+  Object.assign(methods$e, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods);
 
   var OnStart = function OnStart(parent, currentImage, nextImage, t) {};
 
@@ -21738,7 +21738,7 @@
   }; // mixin
 
 
-  Object.assign(TransitionImage.prototype, methods$d);
+  Object.assign(TransitionImage.prototype, methods$e);
 
   ObjectFactory.register('transitionImage', function (x, y, texture, frame, config) {
     var gameObject = new TransitionImage(this.scene, x, y, texture, frame, config);
@@ -22172,14 +22172,14 @@
     return Chart;
   }(Canvas);
 
-  var methods$c = {
+  var methods$d = {
     setChart: SetChart,
     getChartDataset: GetChartDataset,
     getChartData: GetChartData,
     setChartData: SetChartData,
     updateChart: UpdateChart
   };
-  Object.assign(Chart$1.prototype, methods$c);
+  Object.assign(Chart$1.prototype, methods$d);
 
   ObjectFactory.register('chart', function (x, y, width, height, config) {
     var gameObject = new Chart$1(this.scene, x, y, width, height, config);
@@ -22680,7 +22680,7 @@
     }
   };
 
-  var methods$b = {
+  var methods$c = {
     getChildrenWidth: GetChildrenWidth$3,
     getChildrenHeight: GetChildrenHeight$3,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -22691,7 +22691,7 @@
     resolveWidth: ResolveWidth$1,
     resolveHeight: ResolveHeight$1
   };
-  Object.assign(methods$b, AddChildMethods$5, RemoveChildMethods$5);
+  Object.assign(methods$c, AddChildMethods$5, RemoveChildMethods$5);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -22819,7 +22819,7 @@
     return Sizer;
   }(Base);
 
-  Object.assign(Sizer.prototype, methods$b);
+  Object.assign(Sizer.prototype, methods$c);
 
   ObjectFactory.register('sizer', function (x, y, minWidth, minHeight, orientation, config) {
     var gameObject = new Sizer(this.scene, x, y, minWidth, minHeight, orientation, config);
@@ -23360,7 +23360,7 @@
     return this;
   };
 
-  var methods$a = {
+  var methods$b = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -23374,7 +23374,7 @@
     runWidthWrap: RunWidthWrap$1,
     resetGrid: ResetGrid
   };
-  Object.assign(methods$a, AddChildMethods$4, RemoveChildMethods$4);
+  Object.assign(methods$b, AddChildMethods$4, RemoveChildMethods$4);
 
   var GetTotalColumnProportions = function GetTotalColumnProportions() {
     var result = 0,
@@ -23576,7 +23576,7 @@
     return GridSizer;
   }(Base);
 
-  Object.assign(GridSizer.prototype, methods$a);
+  Object.assign(GridSizer.prototype, methods$b);
 
   ObjectFactory.register('gridSizer', function (x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion, config) {
     var gameObject = new GridSizer(this.scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion, config);
@@ -23916,7 +23916,7 @@
     }
   };
 
-  var methods$9 = {
+  var methods$a = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getChildrenSizers: GetChildrenSizers$1,
@@ -23924,7 +23924,7 @@
     layoutChildren: LayoutChildren$2,
     runWidthWrap: RunWidthWrap
   };
-  Object.assign(methods$9, AddChildMethods$3, RemoveChildMethods$3);
+  Object.assign(methods$a, AddChildMethods$3, RemoveChildMethods$3);
 
   var GetMaxChildWidth = function GetMaxChildWidth(children) {
     if (children === undefined) {
@@ -24096,7 +24096,7 @@
     'justify-bottom': 4,
     'justify-center': 5
   };
-  Object.assign(FixWidthSizer.prototype, methods$9);
+  Object.assign(FixWidthSizer.prototype, methods$a);
 
   ObjectFactory.register('fixWidthSizer', function (x, y, minWidth, minHeight, config) {
     var gameObject = new FixWidthSizer(this.scene, x, y, minWidth, minHeight, config);
@@ -24856,10 +24856,10 @@
     return ButtonGroup;
   }();
 
-  var methods$8 = {
+  var methods$9 = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$2, methods$8);
+  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$2, methods$9);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
   var ButtonStateMethods = {
@@ -26689,13 +26689,13 @@
     click: 1,
     none: -1
   };
-  var methods$7 = {
+  var methods$8 = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndoint,
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider.prototype, methods$7, EaseValueMethods);
+  Object.assign(Slider.prototype, methods$8, EaseValueMethods);
 
   ObjectFactory.register('slider', function (config) {
     var gameObject = new Slider(this.scene, config);
@@ -28559,12 +28559,12 @@
     return Scrollable;
   }(Sizer);
 
-  var Methods$5 = {
+  var Methods$4 = {
     resizeController: ResizeController,
     updateController: UpdateController
   }; // mixin
 
-  Object.assign(Scrollable.prototype, Methods$5);
+  Object.assign(Scrollable.prototype, Methods$4);
 
   var Cell = /*#__PURE__*/function () {
     function Cell(parent, config) {
@@ -29370,43 +29370,81 @@
     }
   };
 
-  var MaskCells = function MaskCells() {
-    if (!this.cellsMask) {
-      // No cellsMask
-      return this;
-    } else if (!this.maskCellsFlag) {
-      // No maskCells flag
-      return this;
-    } else if (this.alpha === 0 || !this.visible) {
-      // Grid table is not visible
-      return this;
-    }
-
-    var children = [];
-    var cells = this.visibleCells.entries,
-        container;
-
-    for (var i = 0, cnt = cells.length; i < cnt; i++) {
-      container = cells[i].getContainer();
-
-      if (container) {
-        if (container.hasOwnProperty('isRexContainerLite')) {
-          // ContainerLite
-          container.getAllChildren(children);
-        } else {
-          // Others
-          children.push(container);
-        }
+  var MASKUPDATEMODE = {
+    update: 0,
+    everyTick: 1
+  };
+  var ChildrenMaskMethods = {
+    setMaskUpdateMode: function setMaskUpdateMode(mode) {
+      if (typeof mode === 'string') {
+        mode = MASKUPDATEMODE[mode];
       }
+
+      this.maskUpdateMode = mode;
+      return this;
+    },
+    startMaskUpdate: function startMaskUpdate() {
+      this.scene.game.events.on('poststep', this.maskChildren, this);
+    },
+    stopMaskUpdate: function stopMaskUpdate() {
+      this.scene.game.events.off('poststep', this.maskChildren, this);
+    },
+    enableChildrenMask: function enableChildrenMask(maskPadding) {
+      var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
+      this.childrenMask = maskGameObject.createGeometryMask(); // this.childrenMask is a mask object, not a (Graphics) game object
+
+      return this;
+    },
+    setMaskChildrenFlag: function setMaskChildrenFlag(value) {
+      if (value === undefined) {
+        value = true;
+      }
+
+      this.maskChildrenFlag = value;
+      return this;
+    },
+    setMaskLayer: function setMaskLayer(layer) {
+      // To reduce amount of masked game object
+      this.maskLayer = layer;
+      return this;
+    },
+    maskChildren: function maskChildren() {
+      if (!this.childrenMask) {
+        // No childrenMask
+        return this;
+      } else if (!this.maskChildrenFlag) {
+        // No maskChildrenFlag set
+        return this;
+      } else if (this.alpha === 0 || !this.visible) {
+        // Parent is not visible
+        return this;
+      }
+
+      if (this.maskLayer) {
+        // 1. Add parent and children into layer
+        this.addToLayer(this.maskLayer); // 2. Mask this layer
+
+        this.maskLayer.setMask(this.childrenMask);
+      } else {
+        MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
+      }
+
+      if (this.maskUpdateMode === 0) {
+        this.maskChildrenFlag = false;
+      }
+
+      return this;
+    },
+    layoutChildrenMask: function layoutChildrenMask() {
+      if (!this.childrenMask) {
+        return this;
+      }
+
+      var maskGameObject = MaskToGameObject(this.childrenMask);
+      maskGameObject.setPosition().resize();
+      this.resetChildPositionState(maskGameObject);
+      return this;
     }
-
-    MaskChildren(this, this.cellsMask, children);
-
-    if (this.maskUpdateMode === 0) {
-      this.maskCellsFlag = false;
-    }
-
-    return this;
   };
 
   var HideCell = function HideCell(cell) {
@@ -29558,7 +29596,7 @@
     ClearVisibleCellIndexes.call(this);
     ShowCells.call(this);
     HideCells.call(this);
-    this.maskCellsFlag = true;
+    this.setMaskChildrenFlag();
     return this;
   };
 
@@ -29732,10 +29770,9 @@
     return this;
   };
 
-  var Methods$4 = {
+  var methods$7 = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
-    maskCells: MaskCells,
     updateTable: UpdateTable,
     isCellVisible: IsCellVisible,
     pointToCellIndex: PointToCellIndex,
@@ -29751,9 +29788,9 @@
     setGridSize: SetGridSize,
     updateVisibleCell: UpdateVisibleCell
   };
+  Object.assign(methods$7, ChildrenMaskMethods);
 
   var Group = Phaser.GameObjects.Group;
-  Phaser.GameObjects.Components;
   var Set = Phaser.Structs.Set;
   var GetValue$J = Phaser.Utils.Objects.GetValue;
 
@@ -29803,7 +29840,7 @@
         _this.on('cellinvisible', callback, scope);
       }
 
-      _this.setCellsMask(GetValue$J(config, 'mask', true));
+      _this.setChildrenMask(GetValue$J(config, 'mask', undefined));
 
       _this.setScrollMode(GetValue$J(config, 'scrollMode', 0));
 
@@ -29845,10 +29882,10 @@
           return;
         }
 
-        if (this.cellsMask) {
-          this.scene.game.events.off('poststep', this.maskCells, this);
-          this.cellsMask.destroy();
-          this.cellsMask = undefined;
+        if (this.childrenMask) {
+          this.stopMaskUpdate();
+          this.childrenMask.destroy();
+          this.childrenMask = undefined;
         }
 
         this.table.destroy(fromScene);
@@ -30004,35 +30041,13 @@
         return this;
       }
     }, {
-      key: "setCellsMask",
-      value: function setCellsMask(config) {
-        var maskEnable, maskPadding, maskUpdateMode;
-
-        if (config === true) {
-          maskEnable = true;
-          maskPadding = 0;
-          maskUpdateMode = 0;
-        } else if (config === false) {
-          maskEnable = false;
-        } else {
-          maskEnable = GetValue$J(config, 'mask', true);
-          maskPadding = GetValue$J(config, 'padding', 0);
-          maskUpdateMode = GetValue$J(config, 'updateMode', 0);
-        }
-
-        this.maskCellsFlag = true;
-        this.maskUpdateMode = maskUpdateMode; // 0,1,undefined
-
-        if (maskEnable) {
-          var maskGameObject = new DefaultMaskGraphics(this, 0, maskPadding);
-          this.cellsMask = maskGameObject.createGeometryMask();
-          this.add(maskGameObject);
-
-          if (typeof maskUpdateMode === 'string') {
-            maskUpdateMode = MASKUPDATEMODE$1[maskUpdateMode];
-          }
-
-          this.scene.game.events.on('poststep', this.maskCells, this);
+      key: "setChildrenMask",
+      value: function setChildrenMask(config) {
+        if (config === false) ; else {
+          this.setMaskUpdateMode(GetValue$J(config, 'updateMode', 0));
+          this.enableChildrenMask(GetValue$J(config, 'padding', 0));
+          this.setMaskLayer(GetValue$J(config, 'layer', undefined));
+          this.startMaskUpdate();
         }
 
         return this;
@@ -30154,15 +30169,15 @@
 
         _get(_getPrototypeOf(GridTable.prototype), "resize", this).call(this, width, height);
 
-        if (this.cellsMask) {
-          ResizeGameObject(MaskToGameObject(this.cellsMask), width, height);
-        }
-
         if (this.expandCellSize) {
           this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
         }
 
-        this.updateTable(true);
+        this.updateTable(true); // Layout children-mask
+
+        this.layoutChildrenMask(); // Re-mask children
+
+        this.maskChildren();
         return this;
       }
     }]);
@@ -30170,16 +30185,12 @@
     return GridTable;
   }(ContainerLite);
 
-  Object.assign(GridTable$1.prototype, Methods$4);
+  Object.assign(GridTable$1.prototype, methods$7);
   var SCROLLMODE = {
     v: 0,
     vertical: 0,
     h: 1,
     horizontal: 1
-  };
-  var MASKUPDATEMODE$1 = {
-    update: 0,
-    everyTick: 1
   };
 
   var InjectProperties$1 = function InjectProperties(table) {
@@ -34755,91 +34766,14 @@
         child.runLayout(this, childWidth, childHeight);
       } else {
         ResizeGameObject(child, childWidth, childHeight);
-      } // Layout children-mask
+      } // Update local state
 
 
-      this.layoutChildrenMask(); // Update local state
+      this.resetChildPosition(); // Layout children-mask
 
-      this.resetChildPosition(); // Re-mask children
+      this.layoutChildrenMask(); // Re-mask children
 
       this.maskChildren();
-    }
-  };
-
-  var MASKUPDATEMODE = {
-    update: 0,
-    everyTick: 1
-  };
-  var ChildrenMaskMethods = {
-    setMaskUpdateMode: function setMaskUpdateMode(mode) {
-      if (typeof mode === 'string') {
-        mode = MASKUPDATEMODE[mode];
-      }
-
-      this.maskUpdateMode = mode;
-      return this;
-    },
-    startMaskUpdate: function startMaskUpdate() {
-      this.scene.game.events.on('poststep', this.maskChildren, this);
-    },
-    stopMaskUpdate: function stopMaskUpdate() {
-      this.scene.game.events.off('poststep', this.maskChildren, this);
-    },
-    enableChildrenMask: function enableChildrenMask(maskPadding) {
-      var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
-      this.childrenMask = maskGameObject.createGeometryMask(); // this.childrenMask is a mask object, not a (Graphics) game object
-
-      return this;
-    },
-    setMaskChildrenFlag: function setMaskChildrenFlag(value) {
-      if (value === undefined) {
-        value = true;
-      }
-
-      this.maskChildrenFlag = value;
-      return this;
-    },
-    setMaskLayer: function setMaskLayer(layer) {
-      // To reduce amount of masked game object
-      this.maskLayer = layer;
-      return this;
-    },
-    maskChildren: function maskChildren() {
-      if (!this.childrenMask) {
-        // No childrenMask
-        return this;
-      } else if (!this.maskChildrenFlag) {
-        // No maskCells flag
-        return this;
-      } else if (this.alpha === 0 || !this.visible) {
-        // Parent is not visible
-        return this;
-      }
-
-      if (this.maskLayer) {
-        // 1. Add parent and children into layer
-        this.addToLayer(this.maskLayer); // 2. Mask this layer
-
-        this.maskLayer.setMask(this.childrenMask);
-      } else {
-        MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
-      }
-
-      if (this.maskUpdateMode === 0) {
-        this.maskChildrenFlag = false;
-      }
-
-      return this;
-    },
-    layoutChildrenMask: function layoutChildrenMask() {
-      if (this.childrenMask === undefined) {
-        return this;
-      }
-
-      var maskGameObject = MaskToGameObject(this.childrenMask);
-      maskGameObject.setPosition().resize();
-      this.resetChildPositionState(maskGameObject);
-      return this;
     }
   };
 
@@ -34894,7 +34828,6 @@
 
       var child = GetValue$m(config, 'child', undefined);
       var expand = GetValue$m(config, 'expand', true);
-      var maskConfig = GetValue$m(config, 'mask', undefined);
 
       if (child.setOrigin) {
         child.setOrigin(0);
@@ -34910,30 +34843,7 @@
       sizerConfig.expand = expand;
       _this.child = child; // Create mask of child object
 
-      var maskEnable, maskPadding, maskUpdateMode, maskLayer;
-
-      if (maskConfig === true) {
-        maskEnable = true;
-        maskPadding = 0;
-        maskUpdateMode = 0;
-      } else if (maskConfig === false) {
-        maskEnable = false;
-      } else {
-        maskEnable = GetValue$m(maskConfig, 'mask', true);
-        maskPadding = GetValue$m(maskConfig, 'padding', 0);
-        maskUpdateMode = GetValue$m(config, 'updateMode', 0);
-        maskLayer = GetValue$m(maskConfig, 'layer', undefined);
-      }
-
-      if (maskEnable) {
-        _this.setMaskUpdateMode(maskUpdateMode);
-
-        _this.enableChildrenMask(maskPadding);
-
-        _this.setMaskLayer(maskLayer);
-
-        _this.startMaskUpdate();
-      }
+      _this.setChildrenMask(GetValue$m(config, 'mask', undefined));
 
       return _this;
     }
@@ -34948,16 +34858,25 @@
 
         if (this.childrenMask) {
           this.stopMaskUpdate();
-        }
-
-        this.child = undefined;
-
-        if (this.childrenMask) {
           this.childrenMask.destroy();
           this.childrenMask = undefined;
         }
 
+        this.child = undefined;
+
         _get(_getPrototypeOf(ScrollableBlock.prototype), "destroy", this).call(this, fromScene);
+      }
+    }, {
+      key: "setChildrenMask",
+      value: function setChildrenMask(config) {
+        if (config === false) ; else {
+          this.setMaskUpdateMode(GetValue$m(config, 'updateMode', 0));
+          this.enableChildrenMask(GetValue$m(config, 'padding', 0));
+          this.setMaskLayer(GetValue$m(config, 'layer', undefined));
+          this.startMaskUpdate();
+        }
+
+        return this;
       }
     }, {
       key: "setScrollMode",

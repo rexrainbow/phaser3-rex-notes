@@ -36,6 +36,7 @@ class Demo extends Phaser.Scene {
 
                 mask: {
                     padding: 2,
+                    // layer: this.add.layer()
                 },
 
                 reuseCellContainer: true,

@@ -13,7 +13,7 @@ var UpdateTable = function (refresh) {
     ShowCells.call(this);
     HideCells.call(this);
 
-    this.maskCellsFlag = true;
+    this.setMaskChildrenFlag();
     return this;
 }
 

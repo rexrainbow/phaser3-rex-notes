@@ -1,6 +1,6 @@
 import SetTableOY from './SetTableOY.js';
 import SetTableOX from './SetTableOX.js';
-import MaskCells from './updatetable/MaskCells.js';
+import ChildrenMaskMethods from '../../containerlite/mask/ChildrenMaskMethods.js';
 import UpdateTable from './updatetable/UpdateTable.js';
 import IsCellVisible from './IsCellVisible.js';
 import { PointToCellIndex, PointToCellContainer } from './PointToCell.js';
@@ -13,10 +13,9 @@ import SetColumnCount from './SetColumnCount.js';
 import SetGridSize from './SetGridSize.js';
 import UpdateVisibleCell from './UpdateVisibleCell';
 
-export default {
+var methods = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
-    maskCells: MaskCells,
     updateTable: UpdateTable,
     isCellVisible: IsCellVisible,
     pointToCellIndex: PointToCellIndex,
@@ -33,3 +32,10 @@ export default {
     setGridSize: SetGridSize,
     updateVisibleCell: UpdateVisibleCell
 }
+
+Object.assign(
+    methods,
+    ChildrenMaskMethods
+);
+
+export default methods;
