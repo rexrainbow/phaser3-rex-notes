@@ -36,7 +36,6 @@ class ScrollableBlock extends BaseSizer {
         // No background object, and child does not have padding
         var child = GetValue(config, 'child', undefined);
         var expand = GetValue(config, 'expand', true);
-        var maskConfig = GetValue(config, 'mask', undefined);
 
         if (child.setOrigin) {
             child.setOrigin(0);
@@ -51,26 +50,7 @@ class ScrollableBlock extends BaseSizer {
         this.child = child;
 
         // Create mask of child object
-        var maskEnable, maskPadding, maskUpdateMode, maskLayer;
-        if (maskConfig === true) {
-            maskEnable = true;
-            maskPadding = 0;
-            maskUpdateMode = 0;
-        } else if (maskConfig === false) {
-            maskEnable = false;
-        } else {
-            maskEnable = GetValue(maskConfig, 'mask', true);
-            maskPadding = GetValue(maskConfig, 'padding', 0);
-            maskUpdateMode = GetValue(config, 'updateMode', 0);
-            maskLayer = GetValue(maskConfig, 'layer', undefined);
-        }
-
-        if (maskEnable) {
-            this.setMaskUpdateMode(maskUpdateMode);
-            this.enableChildrenMask(maskPadding);
-            this.setMaskLayer(maskLayer);
-            this.startMaskUpdate();
-        }
+        this.setChildrenMask(GetValue(config, 'mask', undefined));
     }
 
     destroy(fromScene) {
@@ -90,6 +70,17 @@ class ScrollableBlock extends BaseSizer {
         }
 
         super.destroy(fromScene);
+    }
+
+    setChildrenMask(config) {
+        if (config === false) {
+        } else {
+            this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
+            this.enableChildrenMask(GetValue(config, 'padding', 0));
+            this.setMaskLayer(GetValue(config, 'layer', undefined));
+            this.startMaskUpdate();
+        }
+        return this;
     }
 
     setScrollMode(mode) {
