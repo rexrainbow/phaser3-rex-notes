@@ -17,7 +17,10 @@ import {
     TimeLimit,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeat
+    Repeat,
+    If,
+    Or,
+    And
 } from './decorators/Factory.js';
 import {
     Wait
@@ -44,6 +47,9 @@ export {
     RepeatUntilFailure,
     RepeatUntilSuccess,
     Repeat,
+    If,
+    Or,
+    And,
 
     // Actions
     Wait
