@@ -1,10 +1,10 @@
 import Action from '../core/Nodes/Action';
 import { SUCCESS } from '../constants';
 
-class SuccessAction extends Action {
+class Succeeder extends Action {
 
     constructor({
-        name = 'SuccessAction'
+        name = 'Succeeder'
     } = {}) {
 
         super({
@@ -17,4 +17,4 @@ class SuccessAction extends Action {
     }
 };
 
-export default SuccessAction;
+export default Succeeder;

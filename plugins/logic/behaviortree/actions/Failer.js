@@ -1,10 +1,10 @@
 import Action from '../core/Nodes/Action';
 import { FAILURE } from '../constants';
 
-class FailureAction extends Action {
+class Failer extends Action {
 
     constructor({
-        name = 'FailureAction'
+        name = 'Failer'
     } = {}) {
 
         super({
@@ -17,4 +17,4 @@ class FailureAction extends Action {
     }
 };
 
-export default FailureAction;
+export default Failer;

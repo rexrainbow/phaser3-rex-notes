@@ -23,6 +23,10 @@ import {
     And
 } from './decorators/Factory.js';
 import {
+    Succeeder,
+    Failer,
+    Runner,
+    Error,
     Wait
 } from './actions/Factory.js';
 
@@ -52,5 +56,9 @@ export {
     And,
 
     // Actions
+    Succeeder,
+    Failer,
+    Runner,
+    Error,
     Wait
 };
