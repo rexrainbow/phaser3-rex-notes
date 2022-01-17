@@ -50,7 +50,7 @@ class ScrollableBlock extends BaseSizer {
         this.child = child;
 
         // Create mask of child object
-        this.setChildrenMask(GetValue(config, 'mask', undefined));
+        this.setupChildrenMask(GetValue(config, 'mask', undefined));
     }
 
     destroy(fromScene) {
@@ -59,26 +59,11 @@ class ScrollableBlock extends BaseSizer {
             return;
         }
 
-        if (this.childrenMask) {
-            this.stopMaskUpdate();
-            this.childrenMask.destroy();
-            this.childrenMask = undefined;
-        }
+        this.destroyChildrenMask();
 
         this.child = undefined;
 
         super.destroy(fromScene);
-    }
-
-    setChildrenMask(config) {
-        if (config === false) {
-        } else {
-            this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
-            this.enableChildrenMask(GetValue(config, 'padding', 0));
-            this.setMaskLayer(GetValue(config, 'layer', undefined));
-            this.startMaskUpdate();
-        }
-        return this;
     }
 
     setScrollMode(mode) {

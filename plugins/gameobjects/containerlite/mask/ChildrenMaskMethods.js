@@ -2,12 +2,40 @@ import MaskChildren from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
 import MaskToGameObject from '../../../utils/mask/MaskToGameObject.js'
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 const MASKUPDATEMODE = {
     update: 0,
     everyTick: 1
 };
 
 export default {
+    setupChildrenMask(config) {
+        if (config === false) {
+            // No children mask
+            return this;
+        }
+
+        this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
+        this.enableChildrenMask(GetValue(config, 'padding', 0));
+        this.setMaskLayer(GetValue(config, 'layer', undefined));
+        this.startMaskUpdate();
+
+        return this;
+    },
+
+    destroyChildrenMask() {
+        if (!this.childrenMask) {
+            return this;
+        }
+
+        this.stopMaskUpdate();
+        this.childrenMask.destroy();
+        this.childrenMask = undefined;
+
+        return this;
+    },
+
     setMaskUpdateMode(mode) {
         if (typeof (mode) === 'string') {
             mode = MASKUPDATEMODE[mode];

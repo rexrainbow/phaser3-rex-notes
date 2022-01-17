@@ -1,7 +1,5 @@
 import ContainerLite from '../containerlite/ContainerLite.js';
 import Table from './Table.js';
-import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
-import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
 import Methods from './methods/Methods.js';
 
 const Group = Phaser.GameObjects.Group;
@@ -40,7 +38,7 @@ class GridTable extends ContainerLite {
             this.on('cellinvisible', callback, scope);
         }
 
-        this.setChildrenMask(GetValue(config, 'mask', undefined));
+        this.setupChildrenMask(GetValue(config, 'mask', undefined));
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
@@ -72,11 +70,7 @@ class GridTable extends ContainerLite {
             return;
         }
 
-        if (this.childrenMask) {
-            this.stopMaskUpdate();
-            this.childrenMask.destroy();
-            this.childrenMask = undefined;
-        }
+        this.destroyChildrenMask();
 
         this.table.destroy(fromScene);
         this.table = undefined;
@@ -201,17 +195,6 @@ class GridTable extends ContainerLite {
             cell = cellIdx;
         }
         cell.width = width; // Only worked when scrollMode is 1
-        return this;
-    }
-
-    setChildrenMask(config) {
-        if (config === false) {
-        } else {
-            this.setMaskUpdateMode(GetValue(config, 'updateMode', 0));
-            this.enableChildrenMask(GetValue(config, 'padding', 0));
-            this.setMaskLayer(GetValue(config, 'layer', undefined));
-            this.startMaskUpdate();
-        }
         return this;
     }
 

@@ -1615,7 +1615,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$3 = function GetValue(source, key, defaultValue) {
+  var GetValue$4 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -1694,7 +1694,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$3(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$4(this.data, key, defaultValue);
     },
     setData: function setData(key, value) {
       this.enableData();
@@ -2013,7 +2013,7 @@
     return Stack;
   }();
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
 
   var Table = /*#__PURE__*/function () {
@@ -2033,10 +2033,10 @@
         this.colCount = undefined;
         this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
-        this.setDefaultCellHeight(GetValue$2(o, 'cellHeight', 30));
-        this.setDefaultCellWidth(GetValue$2(o, 'cellWidth', 30));
-        this.initCells(GetValue$2(o, 'cellsCount', 0));
-        this.setColumnCount(GetValue$2(o, 'columns', 1));
+        this.setDefaultCellHeight(GetValue$3(o, 'cellHeight', 30));
+        this.setDefaultCellWidth(GetValue$3(o, 'cellWidth', 30));
+        this.initCells(GetValue$3(o, 'cellsCount', 0));
+        this.setColumnCount(GetValue$3(o, 'columns', 1));
         return this;
       }
     }, {
@@ -2388,10 +2388,6 @@
     return Table;
   }();
 
-  var MaskToGameObject = function MaskToGameObject(mask) {
-    return mask.hasOwnProperty('geometryMask') ? mask.geometryMask : mask.bitmapMask;
-  };
-
   var SetTableOY = function SetTableOY(oy) {
     var table = this.table;
     var topTableOY = this.topTableOY;
@@ -2475,6 +2471,10 @@
 
     this.execeedRightState = tableOXExeceedRight;
     return this;
+  };
+
+  var MaskToGameObject = function MaskToGameObject(mask) {
+    return mask.hasOwnProperty('geometryMask') ? mask.geometryMask : mask.bitmapMask;
   };
 
   var Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
@@ -2764,11 +2764,34 @@
     return maskGameObject;
   };
 
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var MASKUPDATEMODE = {
     update: 0,
     everyTick: 1
   };
   var ChildrenMaskMethods = {
+    setupChildrenMask: function setupChildrenMask(config) {
+      if (config === false) {
+        // No children mask
+        return this;
+      }
+
+      this.setMaskUpdateMode(GetValue$2(config, 'updateMode', 0));
+      this.enableChildrenMask(GetValue$2(config, 'padding', 0));
+      this.setMaskLayer(GetValue$2(config, 'layer', undefined));
+      this.startMaskUpdate();
+      return this;
+    },
+    destroyChildrenMask: function destroyChildrenMask() {
+      if (!this.childrenMask) {
+        return this;
+      }
+
+      this.stopMaskUpdate();
+      this.childrenMask.destroy();
+      this.childrenMask = undefined;
+      return this;
+    },
     setMaskUpdateMode: function setMaskUpdateMode(mode) {
       if (typeof mode === 'string') {
         mode = MASKUPDATEMODE[mode];
@@ -3234,7 +3257,7 @@
         _this.on('cellinvisible', callback, scope);
       }
 
-      _this.setChildrenMask(GetValue$1(config, 'mask', undefined));
+      _this.setupChildrenMask(GetValue$1(config, 'mask', undefined));
 
       _this.setScrollMode(GetValue$1(config, 'scrollMode', 0));
 
@@ -3276,12 +3299,7 @@
           return;
         }
 
-        if (this.childrenMask) {
-          this.stopMaskUpdate();
-          this.childrenMask.destroy();
-          this.childrenMask = undefined;
-        }
-
+        this.destroyChildrenMask();
         this.table.destroy(fromScene);
         this.table = undefined;
 
@@ -3431,18 +3449,6 @@
         }
 
         cell.width = width; // Only worked when scrollMode is 1
-
-        return this;
-      }
-    }, {
-      key: "setChildrenMask",
-      value: function setChildrenMask(config) {
-        if (config === false) ; else {
-          this.setMaskUpdateMode(GetValue$1(config, 'updateMode', 0));
-          this.enableChildrenMask(GetValue$1(config, 'padding', 0));
-          this.setMaskLayer(GetValue$1(config, 'layer', undefined));
-          this.startMaskUpdate();
-        }
 
         return this;
       }
