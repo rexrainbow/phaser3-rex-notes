@@ -6,15 +6,20 @@ var content = `
 selector :
     repeat : 3
     children : 
+        - sequence :
+            if : i >= 10
+            cooldown : 1000
+            children : 
+                - task :
+                    name : print
+                    text : Hello {{name}}, {{$currentTime}}
+                - wait : 500
+                - task :
+                    name : print
+                    text : Goodbye {{name}}, {{$currentTime}}
         - task :
-            or : 
-                - if : i >= 10
-                - if : i < 0
             name : print
-            text : Hello {{name}}
-        - task :
-            name : print
-            text : Goodbye {{name}}
+            text : Else
 `
 
 
