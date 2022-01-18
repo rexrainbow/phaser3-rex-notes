@@ -23067,13 +23067,8 @@
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
 
-      if (!child) {
-        continue;
-      }
-
-      colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
-
-      if (child.isRexSizer) {
+      if (child && child.isRexSizer && !child.ignoreLayout) {
+        colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
         childWidth = this.getExpandedChildWidth(child, colWidth);
         childWidth = child.resolveWidth(childWidth);
         child.resolveChildrenWidth(childWidth);
@@ -23089,7 +23084,7 @@
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
 
-      if (!child || !child.runWidthWrap) {
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
         continue;
       }
 

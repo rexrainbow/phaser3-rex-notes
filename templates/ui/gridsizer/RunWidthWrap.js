@@ -6,6 +6,7 @@ var RunWidthWrap = function (width) {
         child = this.sizerChildren[i];
         if (
             (!child) ||
+            (child.isRexSizer && child.ignoreLayout) ||
             (!child.runWidthWrap)
         ) {
             continue;
