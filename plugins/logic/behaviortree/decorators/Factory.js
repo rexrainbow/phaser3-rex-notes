@@ -8,8 +8,8 @@ import RepeatUntilFailure from './RepeatUntilFailure.js';
 import RepeatUntilSuccess from './RepeatUntilSuccess.js';
 import Repeat from './Repeat.js';
 import If from './If.js';
-import Or from './Or.js';
 import And from './And.js';
+import Or from './Or.js';
 
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
@@ -44,11 +44,11 @@ ObjectFactory.register('repeat', function (config) {
 ObjectFactory.register('if', function (config) {
     return new If(config);
 });
-ObjectFactory.register('or', function (config) {
-    return new Or(config);
-});
 ObjectFactory.register('and', function (config) {
     return new And(config);
+});
+ObjectFactory.register('or', function (config) {
+    return new Or(config);
 });
 
 SetValue(window, 'RexPlugins.BehaviorTree.Bypass', Bypass);
@@ -61,8 +61,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilFailure', RepeatUntilFailur
 SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilSuccess', RepeatUntilSuccess);
 SetValue(window, 'RexPlugins.BehaviorTree.Repeat', Repeat);
 SetValue(window, 'RexPlugins.BehaviorTree.If', If);
-SetValue(window, 'RexPlugins.BehaviorTree.Or', Or);
 SetValue(window, 'RexPlugins.BehaviorTree.And', And);
+SetValue(window, 'RexPlugins.BehaviorTree.Or', Or);
 
 export {
     Bypass,

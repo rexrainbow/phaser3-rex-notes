@@ -1,5 +1,5 @@
-import Action from '../core/Nodes/Action';
-import { SUCCESS, RUNNING } from '../constants';
+import Action from '../core/Nodes/Action.js';
+import { SUCCESS, RUNNING } from '../constants.js';
 
 class Wait extends Action {
 

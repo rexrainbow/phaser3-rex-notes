@@ -1,5 +1,5 @@
-import Action from '../core/Nodes/Action';
-import { FAILURE } from '../constants';
+import Action from '../core/Nodes/Action.js';
+import { FAILURE } from '../constants.js';
 
 class Failer extends Action {
 
