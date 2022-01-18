@@ -38,7 +38,7 @@ class Demo extends Phaser.Scene {
                             btAdd.and({
                                 subDecorators: [
                                     btAdd.if({ expression: 'i >= 10' }),
-                                    btAdd.cooldown({ duration:1000 })
+                                    btAdd.cooldown({ duration: 1000 })
                                 ],
                                 child: btAdd.sequence({
                                     children: [
@@ -78,7 +78,8 @@ class Demo extends Phaser.Scene {
                     clock.stop();
                 }
             })
-            .start();
+            .start()
+            .tick(0);
     }
 
     update() {
