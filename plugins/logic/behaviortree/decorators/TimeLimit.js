@@ -39,10 +39,11 @@ class TimeLimit extends Decorator {
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;
 
-        var status = this.child._execute(tick);
         if ((currTime - startTime) > duration) {
             return FAILURE;
         }
+
+        var status = this.child._execute(tick);
 
         return status;
     }

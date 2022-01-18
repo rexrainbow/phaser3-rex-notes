@@ -21,11 +21,12 @@ class Invert extends Decorator {
 
         var status = this.child._execute(tick);
 
-        if (status == SUCCESS) {
+        if (status === SUCCESS) {
             status = FAILURE;
-        } else if (status == FAILURE) {
+        } else if (status === FAILURE) {
             status = SUCCESS;
         }
+        // Bypass RUNNING status
 
         return status;
     }

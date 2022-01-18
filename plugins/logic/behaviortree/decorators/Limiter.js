@@ -40,17 +40,16 @@ class Limiter extends Decorator {
         var i = nodeMemory.$i;
 
         // Execute child 1 time in a tick
-        if (i < maxLoop) {
-            var status = this.child._execute(tick);
-
-            if (status == SUCCESS || status == FAILURE) {
-                nodeMemory.$i = i + 1;
-            }
-
-            return status;
+        if (i >= maxLoop) {
+            return FAILURE;
         }
 
-        return FAILURE;
+        var status = this.child._execute(tick);
+        if ((status === SUCCESS) || (status === FAILURE)) {
+            nodeMemory.$i = i + 1;
+        }
+
+        return status;
     }
 };
 

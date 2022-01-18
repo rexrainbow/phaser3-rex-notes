@@ -35,16 +35,16 @@ class Demo extends Phaser.Scene {
                     maxLoop: 3,
                     child: btAdd.selector({
                         children: [
-                            btAdd.or({
+                            btAdd.and({
                                 subDecorators: [
                                     btAdd.if({ expression: 'i >= 10' }),
-                                    btAdd.if({ expression: 'i < 0' })
+                                    btAdd.cooldown({ duration:1000 })
                                 ],
                                 child: btAdd.sequence({
                                     children: [
-                                        new PrintAction({ text: 'Hello {{name}}' }),
-                                        btAdd.wait({ time: 100 }),
-                                        new PrintAction({ text: 'Goodbye {{name}}' }),
+                                        new PrintAction({ text: 'Hello {{name}}, {{$currentTime}}' }),
+                                        btAdd.wait({ duration: 500 }),
+                                        new PrintAction({ text: 'Goodbye {{name}}, {{$currentTime}}' }),
                                     ]
                                 })
                             }),

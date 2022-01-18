@@ -1,5 +1,5 @@
 import Composite from '../core/Nodes/Composite.js';
-import { SUCCESS, RUNNING } from '../constants.js';
+import { SUCCESS, FAILURE, RUNNING } from '../constants.js';
 
 class Sequence extends Composite {
     constructor({
@@ -25,11 +25,11 @@ class Sequence extends Composite {
         for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
             var status = this.children[i]._execute(tick);
 
-            if (status !== SUCCESS) {
-                if (status === RUNNING) {
-                    nodeMemory.$runningChild = i;
-                }
-                return status;
+            if (status === RUNNING) {
+                nodeMemory.$runningChild = i;
+                return RUNNING;
+            } else if (status === FAILURE) {
+                return FAILURE;
             }
         }
 

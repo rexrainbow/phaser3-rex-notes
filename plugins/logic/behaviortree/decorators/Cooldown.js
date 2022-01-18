@@ -3,7 +3,7 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 class Cooldown extends Decorator {
     constructor({
-        duration,
+        duration = 0,
         child = null,
         name = 'Cooldown'
     } = {}) {
@@ -36,14 +36,18 @@ class Cooldown extends Decorator {
 
         var nodeMemory = tick.getNodeMemory();
         var currTime = tick.currentTime;
-        var lastEndTime = nodeMemory.$lastEndTime || 0;
+        var lastEndTime = nodeMemory.$lastEndTime;
         var cooldownTime = nodeMemory.$cooldownTime;
-        if ((currTime - lastEndTime) < cooldownTime) {
-            return FAILURE;
+
+        if (
+            (lastEndTime !== undefined) &&
+            ((currTime - lastEndTime) <= cooldownTime)
+        ) {
+            return RUNNING;
         }
 
         var status = this.child._execute(tick);
-        if (status !== RUNNING) {
+        if ((status === SUCCESS) || (status === FAILURE)) {
             nodeMemory.$lastEndTime = currTime;
         }
         return status;

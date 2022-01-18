@@ -1,5 +1,5 @@
 import CompositeDecorator from './CompositeDecorator.js';
-import { FAILURE, SUCCESS, ERROR } from '../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 class Or extends CompositeDecorator {
 
@@ -17,16 +17,25 @@ class Or extends CompositeDecorator {
     }
 
     tick(tick) {
-        var subDecorators = this.subDecorators;
         if (!this.child || !this.subDecorators.length) {
             return ERROR;
         }
 
-        for (var i = 0, cnt = subDecorators.length; i < cnt; i++) {
-            if (subDecorators[i].tick(tick) === SUCCESS) {
+        var nodeMemory = tick.getNodeMemory();
+
+        var subDecoratorIndex = nodeMemory.$runningSubDecorator;
+        for (var i = subDecoratorIndex, cnt = this.subDecorators.length; i < cnt; i++) {
+            var status = this.subDecorators[i]._execute(tick);
+
+            if (status === RUNNING) {
+                nodeMemory.$runningSubDecorator = i;
+                return RUNNING;
+            } else if (status === SUCCESS) {
+                // SUCCESS, tick child
                 return this.child._execute(tick);
             }
         }
+
         return FAILURE;
     }
 };

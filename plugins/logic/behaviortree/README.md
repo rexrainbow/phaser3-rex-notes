@@ -22,6 +22,8 @@ This library include the following core structures...
     - SimpleParallel
 - Decorators: [TODO] Abort children
     - If
+    - And
+    - Or
     - Bypass
     - ForceSuccess
     - TimeLimit
@@ -31,6 +33,10 @@ This library include the following core structures...
     - Invert
     - Limiter
 - Actions:
+    - Succeeder
+    - Failer
+    - Runner
+    - Failer
     - Wait
 
 ## Logic mapping

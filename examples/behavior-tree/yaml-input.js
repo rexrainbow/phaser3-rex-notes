@@ -7,7 +7,9 @@ selector :
     repeat : 3
     children : 
         - task :
-            if : i > 10
+            or : 
+                - if : i >= 10
+                - if : i < 0
             name : print
             text : Hello {{name}}
         - task :

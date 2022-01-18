@@ -40,7 +40,7 @@ class RepeatUntilSuccess extends Decorator {
         while (maxLoop < 0 || i < maxLoop) {
             status = this.child._execute(tick);
 
-            if (status == FAILURE) {
+            if (status === FAILURE) {
                 i++;
             } else {
                 break;
