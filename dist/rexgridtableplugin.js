@@ -2826,14 +2826,8 @@
       return this;
     },
     maskChildren: function maskChildren() {
-      if (!this.childrenMask) {
-        // No childrenMask
-        return this;
-      } else if (!this.maskChildrenFlag) {
-        // No maskChildrenFlag set
-        return this;
-      } else if (this.alpha === 0 || !this.visible) {
-        // Parent is not visible
+      if (!this.childrenMask || !this.maskChildrenFlag || this.alpha === 0 || !this.visible // Parent is not visible
+      ) {
         return this;
       }
 

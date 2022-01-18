@@ -2289,16 +2289,14 @@
   };
 
   var ResolveWidth$1 = function ResolveWidth(width) {
-    var minWidth = Math.max(this.childrenWidth, this.minWidth);
-
     if (width === undefined) {
-      width = minWidth;
+      width = Math.max(this.childrenWidth, this.minWidth);
     }
 
     return width;
   };
 
-  var ResolveChildrenWidth$1 = function ResolveChildrenWidth(width) {
+  var ResolveChildrenWidth$1 = function ResolveChildrenWidth(parentWidth) {
     // Resolve width of sizer children
     var child, childWidth;
 
@@ -2306,7 +2304,7 @@
       child = this.sizerChildren[i];
 
       if (child && child.isRexSizer && !child.ignoreLayout) {
-        childWidth = this.getExpandedChildWidth(child, width);
+        childWidth = this.getExpandedChildWidth(child, parentWidth);
         childWidth = child.resolveWidth(childWidth);
         child.resolveChildrenWidth(childWidth);
       }
@@ -2536,7 +2534,7 @@
   };
 
   // Default method
-  var RunWidthWrap$1 = function RunWidthWrap(width) {
+  var RunWidthWrap$1 = function RunWidthWrap(parentWidth) {
     var child, childWidth;
 
     for (var i in this.sizerChildren) {
@@ -2546,10 +2544,10 @@
         continue;
       }
 
-      childWidth = this.getExpandedChildWidth(child, width);
+      childWidth = this.getExpandedChildWidth(child, parentWidth);
 
-      if (childWidth === undefined) {
-        childWidth = this.resolveWidth(childWidth);
+      if (child.isRexSizer) {
+        childWidth = child.resolveWidth(childWidth);
       }
 
       if (child.runWidthWrap) {
@@ -5681,7 +5679,7 @@
     return height;
   };
 
-  var ResolveChildrenWidth = function ResolveChildrenWidth(width) {
+  var ResolveChildrenWidth = function ResolveChildrenWidth(parentWidth) {
     // Resolve width of sizer children
     var child, childWidth;
     var colWidth;

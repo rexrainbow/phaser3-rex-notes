@@ -1,11 +1,13 @@
 var ResolveWidth = function (width) {
-    var minWidth = Math.max(this.childrenWidth, this.minWidth);
     if (width === undefined) {
-        width = minWidth;
+        width = Math.max(this.childrenWidth, this.minWidth);
     } else {
+        /*
+        var minWidth = Math.max(this.childrenWidth, this.minWidth);
         if (minWidth > width) {
             // Warning
         }
+        */
     }
 
     return width;

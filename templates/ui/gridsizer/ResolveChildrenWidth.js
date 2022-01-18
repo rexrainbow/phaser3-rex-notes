@@ -1,4 +1,4 @@
-var ResolveChildrenWidth = function (width) {
+var ResolveChildrenWidth = function (parentWidth) {
     // Resolve width of sizer children
     var child, childWidth;
     var colWidth;
