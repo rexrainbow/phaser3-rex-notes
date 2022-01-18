@@ -83,6 +83,13 @@ clock.start();
 // clock.start(startAt);  // start-at time in ms
 ```
 
+### Force ticking
+
+```javascript
+clock.tick(0);
+// clock.tick(delta);
+```
+
 ### Get elapsed time
 
 ```javascript
