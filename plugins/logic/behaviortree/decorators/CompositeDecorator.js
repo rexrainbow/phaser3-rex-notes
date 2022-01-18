@@ -19,11 +19,6 @@ class CompositeDecorator extends Decorator {
         }
         this.subDecorators = subDecorators;
     }
-
-    open(tick) {
-        var nodeMemory = tick.getNodeMemory();
-        nodeMemory.$runningSubDecorator = 0;
-    }
 };
 
 export default CompositeDecorator;

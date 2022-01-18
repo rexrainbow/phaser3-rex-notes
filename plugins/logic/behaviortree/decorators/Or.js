@@ -21,22 +21,21 @@ class Or extends CompositeDecorator {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
-
-        var subDecoratorIndex = nodeMemory.$runningSubDecorator;
-        for (var i = subDecoratorIndex, cnt = this.subDecorators.length; i < cnt; i++) {
+        var anyRunningFlag = false;
+        for (var i = 0, cnt = this.subDecorators.length; i < cnt; i++) {
             var status = this.subDecorators[i]._execute(tick);
 
-            if (status === RUNNING) {
-                nodeMemory.$runningSubDecorator = i;
-                return RUNNING;
-            } else if (status === SUCCESS) {
-                // SUCCESS, tick child
+            if (status === SUCCESS) {
+                // Any condition return SUCCESS, tick child 
                 return this.child._execute(tick);
+
+            } else if (status === RUNNING) {
+                // Any condition return RUNNING, set anyRunningFlag
+                anyRunningFlag = true;
             }
         }
 
-        return FAILURE;
+        return (anyRunningFlag) ? RUNNING : FAILURE;
     }
 };
 

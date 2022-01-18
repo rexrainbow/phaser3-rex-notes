@@ -1,5 +1,5 @@
 import CompositeDecorator from './CompositeDecorator.js';
-import  { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 class And extends CompositeDecorator {
 
@@ -21,22 +21,16 @@ class And extends CompositeDecorator {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
-
-        var subDecoratorIndex = nodeMemory.$runningSubDecorator;
-        for (var i = subDecoratorIndex, cnt = this.subDecorators.length; i < cnt; i++) {
+        for (var i = 0, cnt = this.subDecorators.length; i < cnt; i++) {
             var status = this.subDecorators[i]._execute(tick);
             
-            if (status === RUNNING) {
-                nodeMemory.$runningSubDecorator = i;
-                return RUNNING;
-            } else if (status === FAILURE) {
-                return FAILURE;
+            if ((status === FAILURE) || (status === RUNNING)) {
+                // Any condition returns FAILURE, or RUNNING
+                return status;
             }
-
         }
 
-        // SUCCESS, tick child
+        // All conditions return SUCCESS, tick child
         return this.child._execute(tick);
     }
 };
