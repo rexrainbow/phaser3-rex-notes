@@ -2540,7 +2540,7 @@
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
 
-      if (!child || child.isRexSizer && child.ignoreLayout) {
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
         continue;
       }
 
@@ -2550,9 +2550,7 @@
         childWidth = child.resolveWidth(childWidth);
       }
 
-      if (child.runWidthWrap) {
-        child.runWidthWrap(childWidth);
-      }
+      child.runWidthWrap(childWidth);
     }
 
     return this;
@@ -5709,20 +5707,18 @@
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
 
-      if (!child) {
+      if (!child || !child.runWidthWrap) {
         continue;
       }
 
       colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
       childWidth = this.getExpandedChildWidth(child, colWidth);
 
-      if (childWidth === undefined) {
-        childWidth = this.resolveWidth(childWidth);
+      if (child.isRexSizer) {
+        childWidth = child.resolveWidth(childWidth);
       }
 
-      if (child.runWidthWrap) {
-        child.runWidthWrap(childWidth);
-      }
+      child.runWidthWrap(childWidth);
     }
 
     return this;

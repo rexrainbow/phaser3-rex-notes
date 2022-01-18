@@ -2540,7 +2540,7 @@
     for (var i in this.sizerChildren) {
       child = this.sizerChildren[i];
 
-      if (!child || child.isRexSizer && child.ignoreLayout) {
+      if (!child || child.isRexSizer && child.ignoreLayout || !child.runWidthWrap) {
         continue;
       }
 
@@ -2550,9 +2550,7 @@
         childWidth = child.resolveWidth(childWidth);
       }
 
-      if (child.runWidthWrap) {
-        child.runWidthWrap(childWidth);
-      }
+      child.runWidthWrap(childWidth);
     }
 
     return this;

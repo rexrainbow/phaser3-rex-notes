@@ -4,18 +4,19 @@ var RunWidthWrap = function (width) {
     var colWidth;
     for (var i in this.sizerChildren) {
         child = this.sizerChildren[i];
-        if (!child) {
+        if (
+            (!child) ||
+            (!child.runWidthWrap)
+        ) {
             continue;
         }
 
         colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
         childWidth = this.getExpandedChildWidth(child, colWidth);
-        if (childWidth === undefined) {
-            childWidth = this.resolveWidth(childWidth);
+        if (child.isRexSizer) {
+            childWidth = child.resolveWidth(childWidth);
         }
-        if (child.runWidthWrap) {
-            child.runWidthWrap(childWidth);
-        }
+        child.runWidthWrap(childWidth);
     }
     return this;
 }

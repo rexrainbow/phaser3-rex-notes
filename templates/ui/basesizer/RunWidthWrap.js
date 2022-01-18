@@ -5,7 +5,8 @@ var RunWidthWrap = function (parentWidth) {
         child = this.sizerChildren[i];
         if (
             (!child) ||
-            (child.isRexSizer && child.ignoreLayout)
+            (child.isRexSizer && child.ignoreLayout) ||
+            (!child.runWidthWrap)
         ) {
             continue;
         }
@@ -14,9 +15,7 @@ var RunWidthWrap = function (parentWidth) {
         if (child.isRexSizer) {
             childWidth = child.resolveWidth(childWidth);
         }
-        if (child.runWidthWrap) {
-            child.runWidthWrap(childWidth);
-        }
+        child.runWidthWrap(childWidth);
     }
     return this;
 }
