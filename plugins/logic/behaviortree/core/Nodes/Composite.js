@@ -1,6 +1,5 @@
 import BaseNode from './BaseNode.js';
 import { COMPOSITE } from '../../constants.js';
-import Add from '../../../../utils/array/Add.js';
 
 class Composite extends BaseNode {
 
@@ -19,8 +18,10 @@ class Composite extends BaseNode {
     }
 
     addChild(node) {
-        Add(this.children, node);
-        node.setParent(this);
+        if (this.children.indexOf(node) === -1) {
+            this.children.push(node);
+            node.setParent(this);
+        }
         return this;
     }
 
