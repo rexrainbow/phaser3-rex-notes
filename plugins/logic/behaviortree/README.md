@@ -20,6 +20,7 @@ This library include the following core structures...
     - Selector : MemSelector
     - Sequence : MemSequence
     - SimpleParallel
+    - Switch
 - Decorators: [TODO] Abort children
     - If
     - And
@@ -79,6 +80,10 @@ Map to
 
 #### State machine
 
+```javascript
+node._execute(tick);
+```
+
 ```mermaid
 graph TD
 
@@ -98,6 +103,6 @@ TICK  --> |isRunning| EXIT
 
 - When closing a node, also close children nodes.
 
-### Expression
+### Load from JSON
 
-TODO: math\ExpressionParser
+- [TODO] Static method in each node class

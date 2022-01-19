@@ -8,7 +8,8 @@ import {
 import {
     Selector,
     Sequence,
-    SimpleParallel
+    SimpleParallel,
+    Switch
 } from './composites/Factory.js';
 import {
     Bypass,
@@ -42,6 +43,7 @@ export {
     Selector,
     Sequence,
     SimpleParallel,
+    Switch,
 
     // Decorators
     Bypass,

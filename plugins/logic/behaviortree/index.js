@@ -12,7 +12,8 @@ import {
 import {
     Selector,
     Sequence,
-    SimpleParallel
+    SimpleParallel,
+    Switch
 } from './composites';
 
 import {
@@ -73,6 +74,7 @@ export {
     Selector,
     Sequence,
     SimpleParallel,
+    Switch,
 
     Bypass,
     ForceSuccess,
@@ -83,7 +85,7 @@ export {
     RepeatUntilFailure,
     RepeatUntilSuccess,
     Repeat,
-    If,    
+    If,
     And,
     Or,
 
