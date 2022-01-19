@@ -9,7 +9,7 @@ class Switch extends Composite {
     } = {}) {
 
         super({
-            children = Object.values(children),
+            children: Object.values(children),
             name,
             properties: {
                 expression
