@@ -20,6 +20,7 @@ This library include the following core structures...
     - Selector : MemSelector
     - Sequence : MemSequence
     - SimpleParallel
+    - IfBranch
     - Switch
 - Decorators: [TODO] Abort children
     - If

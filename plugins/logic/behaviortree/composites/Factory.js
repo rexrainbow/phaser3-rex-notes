@@ -1,6 +1,7 @@
 import Selector from './Selector.js';
 import Sequence from './Sequence.js';
 import SimpleParallel from './SimpleParallel.js';
+import IfBranch from './IfBranch.js';
 import Switch from './Switch.js';
 
 import ObjectFactory from '../ObjectFactory.js';
@@ -16,6 +17,9 @@ ObjectFactory.register('sequence', function (config) {
 ObjectFactory.register('simpleParallel', function (config) {
     return new SimpleParallel(config);
 });
+ObjectFactory.register('ifBranch', function (config) {
+    return new IfBranch(config);
+});
 ObjectFactory.register('switch', function (config) {
     return new Switch(config);
 });
@@ -24,11 +28,13 @@ ObjectFactory.register('switch', function (config) {
 SetValue(window, 'RexPlugins.BehaviorTree.Selector', Selector);
 SetValue(window, 'RexPlugins.BehaviorTree.Sequence', Sequence);
 SetValue(window, 'RexPlugins.BehaviorTree.SimpleParallel', SimpleParallel);
+SetValue(window, 'RexPlugins.BehaviorTree.IfBranch', IfBranch);
 SetValue(window, 'RexPlugins.BehaviorTree.Switch', Switch);
 
 export {
     Selector,
     Sequence,
     SimpleParallel,
+    IfBranch,
     Switch
 };

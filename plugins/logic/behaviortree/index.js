@@ -13,6 +13,7 @@ import {
     Selector,
     Sequence,
     SimpleParallel,
+    IfBranch,
     Switch
 } from './composites';
 
@@ -74,6 +75,7 @@ export {
     Selector,
     Sequence,
     SimpleParallel,
+    IfBranch,
     Switch,
 
     Bypass,

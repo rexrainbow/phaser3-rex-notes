@@ -9,6 +9,7 @@ import {
     Selector,
     Sequence,
     SimpleParallel,
+    IfBranch,
     Switch
 } from './composites/Factory.js';
 import {
@@ -43,6 +44,7 @@ export {
     Selector,
     Sequence,
     SimpleParallel,
+    IfBranch,
     Switch,
 
     // Decorators
