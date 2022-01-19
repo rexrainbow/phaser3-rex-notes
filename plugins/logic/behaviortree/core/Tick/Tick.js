@@ -78,17 +78,20 @@ class Tick {
     }
 
     _openNode(node) {
+        this._currentNode = node;
     }
 
     _tickNode(node) {
+        this._currentNode = node;
     }
 
     _closeNode(node) {
         RemoveItem(this._openNodes, node);
+        this._currentNode = node;
     }
 
     _exitNode(node) {
-        this._currentNode = null;
+        this._currentNode = node;
     }
 };
 

@@ -16,18 +16,22 @@ This library include the following core structures...
 
 ## Nodes
 
-- Composite Nodes: 
+- Composite Nodes: [TODO] Close child nodes
     - Selector : MemSelector
     - Sequence : MemSequence
     - SimpleParallel
     - Switch
 - Decorators: [TODO] Abort children
     - If
-    - And
-    - Or
+    - And : [TODO] Bug
+    - Or : [TODO] Bug
     - Bypass
     - ForceSuccess
     - TimeLimit
+        - Return FAILURE when timeout, else return child statue
+    - Cooldown : 
+        - Start cooldown when child status is not RUNNING
+        - Return FAILURE during cooldown, else return child statue
     - Repeat
     - RepeaterUntilFailure
     - RepeaterUntilSuccess

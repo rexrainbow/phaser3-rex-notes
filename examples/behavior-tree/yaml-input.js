@@ -7,19 +7,24 @@ selector :
     repeat : 3
     children : 
         - sequence :
-            if : i >= 10
             cooldown : 1000
             children : 
                 - task :
                     name : print
-                    text : Hello {{name}}, {{$currentTime}}
+                    text : B0.Start : {{$currentTime}}
                 - wait : 500
                 - task :
                     name : print
-                    text : Goodbye {{name}}, {{$currentTime}}
-        - task :
-            name : print
-            text : Else
+                    text : B0.End : {{$currentTime}}
+        - sequence :
+            children : 
+                - task :
+                    name : print
+                    text : B1.Start : {{$currentTime}}
+                - wait : 1000
+                - task :
+                    name : print
+                    text : B1.End : {{$currentTime}}
 `
 
 

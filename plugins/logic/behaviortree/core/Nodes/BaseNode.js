@@ -109,14 +109,14 @@ export default class BaseNode {
 
     // open state of this node
     getOpenState(tick) {
-        return tick.blackboard.get('$isOpen', tick.tree.id, this.id);
+        return tick.getNodeMemory().$isOpen;
     }
 
     setOpenState(tick, state) {
         if (state === undefined) {
             state = true;
         }
-        tick.blackboard.set('$isOpen', state, tick.tree.id, this.id);
+        tick.getNodeMemory().$isOpen = state;
         return this;
     }
 
