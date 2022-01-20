@@ -470,7 +470,7 @@ This method also wull reset all local state of children.
 
 - Add to [built-in container](container.md)
     ```javascript
-    container.addToContainer(container);
+    containerLite.addToContainer(p3Container);
     ```
     - `container` : [Container](container.md) game object.
 - Add to [Layer](layer.md)
