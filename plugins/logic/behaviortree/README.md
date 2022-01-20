@@ -22,6 +22,7 @@ This library include the following core structures...
     - SimpleParallel
     - IfBranch
     - Switch
+    - WeightSelector : Random select a child with weight
 - Decorators: [TODO] Abort children
     - If
     - And : [TODO] Bug

@@ -46,14 +46,13 @@ class Demo extends Phaser.Scene {
         var tree = btAdd.behaviorTree()
             .setRoot(
                 btAdd.repeat({
-                    maxLoop: 3,
-                    child: btAdd.selector({
+                    maxLoop: 10,
+                    child: btAdd.weightSelector({
                         children: [
-                            btAdd.cooldown({
-                                duration: 1000,
-                                child: CreateTask('TaskA', 500)
-                            }),
-                            CreateTask('TaskB', 1000)
+                            { weight: 3, child: CreateTask('TaskA', 500) },
+                            CreateTask('TaskB', 500),
+                            CreateTask('TaskC', 500),
+                            CreateTask('TaskD', 500),
                         ]
                     })
                 })

@@ -14,7 +14,8 @@ import {
     Sequence,
     SimpleParallel,
     IfBranch,
-    Switch
+    Switch,
+    WeightSelector
 } from './composites';
 
 import {
@@ -77,6 +78,7 @@ export {
     SimpleParallel,
     IfBranch,
     Switch,
+    WeightSelector,
 
     Bypass,
     ForceSuccess,

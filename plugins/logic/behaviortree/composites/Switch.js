@@ -1,5 +1,5 @@
 import Composite from '../core/Nodes/Composite.js';
-import { SUCCESS, FAILURE, RUNNING } from '../constants.js';
+import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 class Switch extends Composite {
     constructor({
@@ -32,18 +32,35 @@ class Switch extends Composite {
         return this;
     }
 
+    open(tick) {
+        var nodeMemory = tick.getNodeMemory();
+        nodeMemory.$runningChild = -1;  // No running child
+    }
+
     tick(tick) {
-        var key = tick.evalExpression(this.expression);
-        var child = this.childrenMap[key];
-        if (!child) {
-            child = this.childrenMap['default'];
+        if (this.children.length === 0) {
+            return ERROR;
         }
 
-        if (!child) {
-            return FAILURE;
+        var nodeMemory = tick.getNodeMemory();
+        var childIndex = nodeMemory.$runningChild;
+        if (childIndex < 0) {
+            var key = tick.evalExpression(this.expression);
+            var child = this.childrenMap[key];
+            if (!child) {
+                child = this.childrenMap['default'];
+            }
+
+            if (!child) {
+                return ERROR;
+            }
+
+            childIndex = this.children.indexOf(child);
         }
 
+        var child = this.children[childIndex];
         var status = child._execute(tick);
+        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
         return status;
     }
 };

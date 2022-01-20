@@ -10,7 +10,8 @@ import {
     Sequence,
     SimpleParallel,
     IfBranch,
-    Switch
+    Switch,
+    WeightSelector
 } from './composites/Factory.js';
 import {
     Bypass,
@@ -46,6 +47,7 @@ export {
     SimpleParallel,
     IfBranch,
     Switch,
+    WeightSelector,
 
     // Decorators
     Bypass,

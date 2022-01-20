@@ -48,12 +48,11 @@ class Cooldown extends Decorator {
 
         var status = this.child._execute(tick);
 
-        return status;
-    }
+        if ((status === SUCCESS) || (status === FAILURE)) {
+            nodeMemory.$lastEndTime = currTime;
+        }
 
-    close(tick) {
-        var nodeMemory = tick.getNodeMemory();
-        nodeMemory.$lastEndTime = tick.currentTime;
+        return status;
     }
 };
 
