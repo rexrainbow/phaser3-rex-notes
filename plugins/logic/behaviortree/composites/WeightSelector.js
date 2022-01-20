@@ -34,7 +34,7 @@ class WeightSelector extends Composite {
             },
         });
 
-        this.expression = (expression) ? this.addNumberVariable(expression) : null;
+        this.expression = (expression) ? this.addVariable(expression) : null;
 
         this.weights = weights;
     }

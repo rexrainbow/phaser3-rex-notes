@@ -9,7 +9,7 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
             properties: { text: text },
         });
 
-        this.textExpression = this.addStringVariable(text);
+        this.textExpression = this.addStringTemplateVariable(text);
     }
 
     tick(tick) {

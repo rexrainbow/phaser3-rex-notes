@@ -20,7 +20,7 @@ class TimeLimit extends Decorator {
             throw 'duration parameter in TimeLimit decorator is an obligatory parameter';
         }
 
-        this.durationExpression = this.addNumberVariable(duration);
+        this.durationExpression = this.addVariable(duration);
     }
 
     open(tick) {

@@ -21,7 +21,7 @@ class Limiter extends Decorator {
             throw 'maxLoop parameter in Limiter decorator is an obligatory parameter';
         }
 
-        this.maxLoopExpression = this.addNumberVariable(maxLoop);
+        this.maxLoopExpression = this.addVariable(maxLoop);
     }
 
     open(tick) {

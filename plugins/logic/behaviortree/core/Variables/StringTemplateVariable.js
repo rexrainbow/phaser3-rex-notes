@@ -5,7 +5,7 @@ const RuntimeOptions = {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true
 }
-class StringVariable extends BaseVariable {
+class StringTemplateVariable extends BaseVariable {
     constructor(expression) {
         super();
 
@@ -18,4 +18,4 @@ class StringVariable extends BaseVariable {
     }
 }
 
-export default StringVariable;
+export default StringTemplateVariable;

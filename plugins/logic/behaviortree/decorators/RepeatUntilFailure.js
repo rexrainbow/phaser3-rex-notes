@@ -17,7 +17,7 @@ class RepeatUntilFailure extends Decorator {
             },
         });
 
-        this.maxLoopExpression = this.addNumberVariable(maxLoop);
+        this.maxLoopExpression = this.addVariable(maxLoop);
     }
 
     open(tick) {

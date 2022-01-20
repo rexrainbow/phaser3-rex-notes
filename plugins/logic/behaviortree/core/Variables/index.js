@@ -1,9 +1,9 @@
-import NumberVariable from './NumberVariable.js';
+import Variable from './Variable.js';
 import BooleanVariable from './BooleanVariable.js';
-import StringVariable from './StringVariable.js';
+import StringTemplateVariable from './StringTemplateVariable.js';
 
 export {
-    NumberVariable,
+    Variable,
     BooleanVariable,
-    StringVariable
+    StringTemplateVariable
 }

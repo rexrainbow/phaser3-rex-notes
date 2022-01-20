@@ -1,7 +1,7 @@
 import BaseVariable from './BaseVariable.js';
 import Compile from '../../../../math/expressionparser/utils/Complile.js';
 
-class NumberVariable extends BaseVariable {
+class Variable extends BaseVariable {
     constructor(expression) {
         super();
 
@@ -18,4 +18,4 @@ class NumberVariable extends BaseVariable {
     }
 }
 
-export default NumberVariable;
+export default Variable;

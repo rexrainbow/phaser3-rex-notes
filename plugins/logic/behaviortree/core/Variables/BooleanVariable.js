@@ -1,6 +1,6 @@
-import NumberVariable from './NumberVariable.js';
+import Variable from './Variable.js';
 
-class BooleanVariable extends NumberVariable {
+class BooleanVariable extends Variable {
     eval(context) {
         return !!super.eval(context);
     }

@@ -20,7 +20,7 @@ class Cooldown extends Decorator {
             throw 'duration parameter in Cooldown decorator is an obligatory parameter';
         }
 
-        this.durationExpression = this.addNumberVariable(duration);
+        this.durationExpression = this.addVariable(duration);
         this.duration = undefined;
     }
 

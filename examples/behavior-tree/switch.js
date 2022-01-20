@@ -9,7 +9,7 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
             properties: { text: text },
         });
 
-        this.textExpression = this.addStringVariable(text);
+        this.textExpression = this.addStringTemplateVariable(text);
     }
 
     tick(tick) {
@@ -51,7 +51,7 @@ class Demo extends Phaser.Scene {
                         'A': CreateTask('TaskA', 500),
                         'B': CreateTask('TaskB', 500),
                         'C': CreateTask('TaskC', 500),
-                        'D': CreateTask('TaskD', 500),
+                        'default': CreateTask('TaskD', 500),
                     }
                 })
 
