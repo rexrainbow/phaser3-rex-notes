@@ -21,7 +21,7 @@ class Switch extends Composite {
             throw 'expression parameter in Switch composite is an obligatory parameter';
         }
 
-        this.expression = this.addBooleanVariable(expression);
+        this.expression = this.addNumberVariable(expression);
 
         this.childrenMap = children;
     }

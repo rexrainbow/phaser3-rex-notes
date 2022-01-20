@@ -45,16 +45,14 @@ class Demo extends Phaser.Scene {
         }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.repeat({
-                    maxLoop: 10,
-                    child: btAdd.weightSelector({
-                        children: [
-                            { weight: 3, child: CreateTask('TaskA', 500) },
-                            CreateTask('TaskB', 500),
-                            CreateTask('TaskC', 500),
-                            CreateTask('TaskD', 500),
-                        ]
-                    })
+                btAdd.switch({
+                    expression: 'key',
+                    children: {
+                        'A': CreateTask('TaskA', 500),
+                        'B': CreateTask('TaskB', 500),
+                        'C': CreateTask('TaskC', 500),
+                        'D': CreateTask('TaskD', 500),
+                    }
                 })
 
             )
@@ -64,6 +62,7 @@ class Demo extends Phaser.Scene {
         // debugger
 
         var blackboard = btAdd.blackboard()
+            .set('key', 'C')
 
         var clock = this.plugins.get('rexClock').add(this);
         clock
