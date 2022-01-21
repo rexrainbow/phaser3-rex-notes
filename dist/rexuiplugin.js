@@ -24250,7 +24250,8 @@
       _this.addChildrenMap('actionMask', actionMask);
 
       return _this;
-    }
+    } // Access text game object
+
 
     _createClass(Label, [{
       key: "text",
@@ -24261,15 +24262,7 @@
           return '';
         }
 
-        var value;
-
-        if (textObject.text) {
-          value = textObject.text;
-        } else {
-          value = textObject.getData('text');
-        }
-
-        return value;
+        return textObject.text;
       },
       set: function set(value) {
         var textObject = this.childrenMap.text;
@@ -24278,11 +24271,7 @@
           return;
         }
 
-        if (textObject.setText) {
-          textObject.setText(value);
-        } else {
-          textObject.setData('text', value);
-        }
+        textObject.setText(value);
       }
     }, {
       key: "setText",
@@ -24295,6 +24284,41 @@
       value: function appendText(value) {
         this.text += value;
         return this;
+      } // Access icon game object
+
+    }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        var imageObject = this.childrenMap.icon;
+
+        if (imageObject === undefined) {
+          return;
+        }
+
+        imageObject.setTexture(key, frame);
+        return this;
+      }
+    }, {
+      key: "texture",
+      get: function get() {
+        var imageObject = this.childrenMap.icon;
+
+        if (imageObject === undefined) {
+          return undefined;
+        }
+
+        return imageObject.texture;
+      }
+    }, {
+      key: "frame",
+      get: function get() {
+        var imageObject = this.childrenMap.icon;
+
+        if (imageObject === undefined) {
+          return undefined;
+        }
+
+        return imageObject.frame;
       }
     }, {
       key: "runLayout",

@@ -1,7 +1,5 @@
 import { COMPOSITE, DECORATOR } from '../../constants.js';
-import * as Decorators from '../../decorators';
-import * as Composites from '../../composites';
-import * as Actions from '../../actions';
+import * as Nodes from '../nodes';
 
 var Dump = function () {
     var data = {};
@@ -32,9 +30,7 @@ var Dump = function () {
         // verify custom node
         var proto = (node.constructor && node.constructor.prototype);
         var nodeName = (proto && proto.name) || node.name;
-        if (!Decorators[nodeName] &&
-            !Composites[nodeName] &&
-            !Actions[nodeName] &&
+        if (!Nodes[nodeName] &&
             customNames.indexOf(nodeName) < 0) {
             var subdata = {};
             subdata.name = nodeName;

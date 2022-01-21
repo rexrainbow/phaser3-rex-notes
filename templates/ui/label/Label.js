@@ -95,18 +95,13 @@ class Label extends Sizer {
         this.addChildrenMap('actionMask', actionMask);
     }
 
+    // Access text game object
     get text() {
         var textObject = this.childrenMap.text;
         if (textObject === undefined) {
             return '';
         }
-        var value;
-        if (textObject.text) {
-            value = textObject.text;
-        } else {
-            value = textObject.getData('text');
-        }
-        return value;
+        return textObject.text;
     }
 
     set text(value) {
@@ -114,11 +109,7 @@ class Label extends Sizer {
         if (textObject === undefined) {
             return;
         }
-        if (textObject.setText) {
-            textObject.setText(value);
-        } else {
-            textObject.setData('text', value);
-        }
+        textObject.setText(value);
     }
 
     setText(value) {
@@ -129,6 +120,32 @@ class Label extends Sizer {
     appendText(value) {
         this.text += value;
         return this;
+    }
+
+    // Access icon game object
+    setTexture(key, frame) {
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+            return;
+        }
+        imageObject.setTexture(key, frame);
+        return this;
+    }
+
+    get texture() {
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+            return undefined;
+        }
+        return imageObject.texture;
+    }
+
+    get frame() {
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+            return undefined;
+        }
+        return imageObject.frame;
     }
 
     runLayout(parent, newWidth, newHeight) {

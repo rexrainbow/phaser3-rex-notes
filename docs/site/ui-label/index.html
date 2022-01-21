@@ -6637,6 +6637,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#icon-texture" class="md-nav__link">
+    Icon texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -7852,6 +7859,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#icon-texture" class="md-nav__link">
+    Icon texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8116,6 +8130,25 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="icon-texture">Icon texture<a class="headerlink" href="#icon-texture" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set texture
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// label.setTexture(key, frame);</span>
+</code></pre></div></li>
+<li>Set texture via texture object
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">texture</span><span class="p">);</span>
+<span class="c1">// label.setTexture(texture, frame);</span>
+</code></pre></div></li>
+<li>Get texture, frame.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">texture</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">frame</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get texture key, frame name.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">textureKey</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>

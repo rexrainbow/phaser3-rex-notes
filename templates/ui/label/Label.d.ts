@@ -38,8 +38,13 @@ declare class Label extends Sizer {
     );
 
     text: string;
-
     setText(text: string): this;
-
     appendText(text: string): this;
+
+    setTexture(
+        key: string | Phaser.Textures.Texture,
+        frame?: string | number
+    ): this;
+    readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
+    readonly frame: Phaser.Textures.Frame;
 }

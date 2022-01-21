@@ -246,6 +246,29 @@ See also - [dirty](ui-basesizer.md#dirty)
     label.text = s;
     ```
 
+### Icon texture
+
+- Set texture
+    ```javascript
+    label.setTexture(key);
+    // label.setTexture(key, frame);
+    ```
+- Set texture via texture object
+    ```javascript
+    label.setTexture(texture);
+    // label.setTexture(texture, frame);
+    ```
+- Get texture, frame.
+    ```javascript
+    var texture = label.texture;
+    var frame = label.frame;
+    ```
+- Get texture key, frame name.
+    ```javascript
+    var textureKey = label.texture.key;
+    var frameName = label.frame.name;
+    ```
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
