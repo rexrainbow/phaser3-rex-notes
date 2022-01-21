@@ -142,6 +142,7 @@ declare class Text extends CanvasGameObjectBase {
         mode: 0 | 1 | 2 | 'none' | 'word' | 'char' | 'character'
     ): this;
     setWrapWidth(width: number): this;
+    setWordWrapWidth(width: number): this;
 
     setFont(font: Text.FontConfigType): this;
     setFontFamily(family: string): this;

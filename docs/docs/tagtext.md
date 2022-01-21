@@ -319,6 +319,7 @@ var txt = scene.make.rexTagText({
     - Set
         ```javascript
         txt.setWrapWidth(width);
+        // txt.setWordWrapWidth(width);
         ```
 
 ### Content

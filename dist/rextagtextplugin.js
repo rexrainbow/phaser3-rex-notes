@@ -3185,6 +3185,12 @@
       key: "setWrapWidth",
       value: function setWrapWidth(width) {
         return this.style.setWrapWidth(width);
+      } // Align with built-in text game object
+
+    }, {
+      key: "setWordWrapWidth",
+      value: function setWordWrapWidth(width) {
+        return this.style.setWrapWidth(width);
       }
     }, {
       key: "setAlign",

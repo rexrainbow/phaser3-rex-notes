@@ -293,6 +293,11 @@ class Text extends GameObject {
         return this.style.setWrapWidth(width);
     }
 
+    // Align with built-in text game object
+    setWordWrapWidth(width) {
+        return this.style.setWrapWidth(width);
+    }    
+
     setAlign(align) {
         return this.style.setHAlign(align);
     }

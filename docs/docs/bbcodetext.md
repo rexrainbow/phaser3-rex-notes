@@ -286,6 +286,7 @@ var txt = scene.make.rexBBCodeText({
     - Set
         ```javascript
         txt.setWrapWidth(width);
+        // txt.setWordWrapWidth(width);
         ```
         - `width` : Maximun wrapping width of a line.
             - Wrap-fit : Set wrapping width to `fixedWidth - padding.left - padding.right` if `fixedWidth > 0`
