@@ -29,8 +29,6 @@ import {
     RepeatUntilSuccess,
     Repeat,
     If,
-    And,
-    Or
 } from './decorators';
 
 import {
@@ -90,8 +88,6 @@ export {
     RepeatUntilSuccess,
     Repeat,
     If,
-    And,
-    Or,
 
     BehaviorTree,
     Blackboard,
