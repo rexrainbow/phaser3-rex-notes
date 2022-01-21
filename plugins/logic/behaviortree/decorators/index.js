@@ -8,6 +8,8 @@ import RepeatUntilFailure from './RepeatUntilFailure.js';
 import RepeatUntilSuccess from './RepeatUntilSuccess.js';
 import Repeat from './Repeat.js';
 import If from './If.js';
+import And from './And.js';
+import Or from './Or.js';
 
 export {
     Bypass,
@@ -20,4 +22,6 @@ export {
     RepeatUntilSuccess,
     Repeat,
     If,
+    And,
+    Or
 }
