@@ -25,8 +25,8 @@ This library include the following core structures...
     - WeightSelector : Random select a child with weight
 - Decorators: [TODO] Abort children
     - If
-    - And : [TODO] Bug
-    - Or : [TODO] Bug
+    - And : [TODO]
+    - Or : [TODO]
     - Bypass
     - ForceSuccess
     - TimeLimit

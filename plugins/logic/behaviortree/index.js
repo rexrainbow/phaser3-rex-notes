@@ -1,55 +1,40 @@
 import { SUCCESS, FAILURE, RUNNING, ERROR, COMPOSITE, DECORATOR, ACTION, CONDITION } from './constants';
 import CreateUUID from './utils/CreateUUID.js';
 
-import {
-    Succeeder,
-    Failer,
-    Runner,
-    Error,
-    Wait
-} from './actions';
-
-import {
-    Selector,
-    Sequence,
-    SimpleParallel,
-    IfBranch,
-    Switch,
-    WeightSelector
-} from './composites';
-
-import {
-    Bypass,
-    ForceSuccess,
-    Invert,
-    Limiter,
-    TimeLimit,
-    Cooldown,
-    RepeatUntilFailure,
-    RepeatUntilSuccess,
-    Repeat,
-    If,
-    And,
-    Or
-} from './decorators';
+import BehaviorTree from './behaviortree/BehaviorTree.js';
+import Blackboard from './blackboard/Blackboard.js';
+import Tick from './tick/Tick.js';
 
 import {
     BaseNode,
     Action,
     Composite,
-    Decorator
-} from './core/Nodes';
+    Decorator,
 
-import BehaviorTree from './core/BehaviorTree/BehaviorTree.js';
-import Blackboard from './core/BehaviorTree/BehaviorTree.js';
-import Tick from './core/Tick/Tick.js';
+    Succeeder,
+    Failer,
+    Runner,
+    Error,
+    Wait,
 
-import Invert from './decorators/Invert.js';
-import Limiter from './decorators/Limiter.js';
-import TimeLimit from './decorators/TimeLimit.js';
-import RepeatUntilFailure from './decorators/RepeatUntilFailure.js';
-import RepeatUntilSuccess from './decorators/RepeatUntilSuccess.js';
-import Repeat from './decorators/Repeat.js';
+    Selector,
+    Sequence,
+    SimpleParallel,
+    IfBranch,
+    Switch,
+    WeightSelector,
+
+    Bypass,
+    ForceSuccess,
+    Invert,
+    TimeLimit,
+    Cooldown,
+    Repeat,
+    RepeatUntilFailure,
+    RepeatUntilSuccess,
+    Limiter,
+    If,
+} from './nodes';
 
 export {
     SUCCESS,
@@ -61,6 +46,10 @@ export {
     ACTION,
     CONDITION,
     CreateUUID,
+
+    BehaviorTree,
+    Blackboard,
+    Tick,
 
     BaseNode,
     Action,
@@ -83,18 +72,11 @@ export {
     Bypass,
     ForceSuccess,
     Invert,
-    Limiter,
     TimeLimit,
     Cooldown,
+    Repeat,
     RepeatUntilFailure,
     RepeatUntilSuccess,
-    Repeat,
+    Limiter,
     If,
-    And,
-    Or,
-
-    BehaviorTree,
-    Blackboard,
-    Tick,
-
 };
