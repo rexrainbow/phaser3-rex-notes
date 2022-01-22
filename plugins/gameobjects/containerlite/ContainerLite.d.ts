@@ -157,6 +157,14 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
         out?: Phaser.GameObjects.GameObject[]
     ): Phaser.GameObjects.GameObject[];
 
+    bfs(
+        callback: (child: Phaser.GameObjects.GameObject) => boolean
+    ): this;
+
+    dfs(
+        callback: (child: Phaser.GameObjects.GameObject) => boolean
+    ): this;
+
     contains(
         gameObject: Phaser.GameObjects.GameObject
     ): boolean;

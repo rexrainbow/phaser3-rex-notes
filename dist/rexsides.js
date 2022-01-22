@@ -1136,6 +1136,31 @@
     }
   };
 
+  var DepthFirstSearch = function DepthFirstSearch(root, callback) {
+    var skip = callback(root);
+
+    if (!skip && root.isRexContainerLite) {
+      var children = root.children;
+
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        DepthFirstSearch(children[i], callback);
+      }
+    }
+  };
+
+  var BreadthFirstSearch = function BreadthFirstSearch(root, callback) {
+    var queue = [root];
+
+    while (queue.length > 0) {
+      var current = queue.shift();
+      var skip = callback(current);
+
+      if (!skip && current.isRexContainerLite) {
+        queue.push.apply(queue, _toConsumableArray(current.children));
+      }
+    }
+  };
+
   var ArrayUtils = Phaser.Utils.Array;
   var Children = {
     getChildren: function getChildren(out) {
@@ -1155,20 +1180,15 @@
         out = [];
       }
 
-      var children = this.children,
-          child;
-
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
-        out.push(child);
-
-        if (child.hasOwnProperty('isRexContainerLite')) {
-          var _out;
-
-          (_out = out).push.apply(_out, _toConsumableArray(child.getAllChildren()));
+      var root = this;
+      BreadthFirstSearch(root, function (child) {
+        // Don't add root
+        if (child === root) {
+          return;
         }
-      }
 
+        out.push(child);
+      });
       return out;
     },
     getAllVisibleChildren: function getAllVisibleChildren(out) {
@@ -1176,26 +1196,37 @@
         out = [];
       }
 
-      var children = this.children,
-          child;
+      var root = this;
+      BreadthFirstSearch(root, function (child) {
+        // Don't add root
+        if (child === root) {
+          return;
+        } // Don't add invisible child
 
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
 
         if (!child.visible) {
-          continue;
+          return true;
         }
 
         out.push(child);
-
-        if (child.hasOwnProperty('isRexContainerLite')) {
-          var _out2;
-
-          (_out2 = out).push.apply(_out2, _toConsumableArray(child.getAllVisibleChildren()));
-        }
+      });
+      return out;
+    },
+    bfs: function bfs(callback, root) {
+      if (root === undefined) {
+        root = this;
       }
 
-      return out;
+      BreadthFirstSearch(root, callback);
+      return this;
+    },
+    dfs: function dfs(callback, root) {
+      if (root === undefined) {
+        root = this;
+      }
+
+      DepthFirstSearch(root, callback);
+      return this;
     },
     contains: function contains(gameObject) {
       // Override Base.contains method

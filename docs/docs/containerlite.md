@@ -245,6 +245,23 @@ For example, container-lite is at (100, 100), and child is at **(10, 10)**, then
         camera.ignore(container.getAllChildren());
         ```
 
+### Traversal
+
+- Depth-First Search
+    ```javascript
+    container.dfs(function(current) {
+        // return true;  // Discard children traveraling
+    })
+    ```
+    - Return `true` to discard children traveraling
+- Breadth-First Search
+    ```javascript
+    container.bfs(function(current) {
+        // return true;  // Discard children traveraling
+    })
+    ```
+    - Return `true` to discard children traveraling
+
 ### Exist
 
 Return true if child is under this container-lite (nested).

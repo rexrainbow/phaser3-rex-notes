@@ -2293,6 +2293,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#traversal" class="md-nav__link">
+    Traversal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#exist" class="md-nav__link">
     Exist
   </a>
@@ -8034,6 +8041,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#traversal" class="md-nav__link">
+    Traversal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#exist" class="md-nav__link">
     Exist
   </a>
@@ -8410,6 +8424,25 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <li>Ignored in <a href="../camera/#ignore-game-object">camera</a>
     <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">getAllChildren</span><span class="p">());</span>
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="traversal">Traversal<a class="headerlink" href="#traversal" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Depth-First Search
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">dfs</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return true;  // Discard children traveraling</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li>Return <code>true</code> to discard children traveraling</li>
+</ul>
+</li>
+<li>Breadth-First Search
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bfs</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return true;  // Discard children traveraling</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li>Return <code>true</code> to discard children traveraling</li>
 </ul>
 </li>
 </ul>

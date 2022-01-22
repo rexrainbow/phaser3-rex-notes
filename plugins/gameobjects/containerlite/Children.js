@@ -1,4 +1,5 @@
 import { GetParent } from './GetParent.js';
+import { DepthFirstSearch, BreadthFirstSearch } from './utils/Traversal.js';
 
 const ArrayUtils = Phaser.Utils.Array;
 
@@ -19,16 +20,15 @@ export default {
         if (out === undefined) {
             out = [];
         }
-        var children = this.children,
-            child;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = children[i];
-            out.push(child);
 
-            if (child.hasOwnProperty('isRexContainerLite')) {
-                out.push(...child.getAllChildren());
+        var root = this;
+        BreadthFirstSearch(root, function (child) {
+            // Don't add root
+            if (child === root) {
+                return;
             }
-        }
+            out.push(child);
+        });
 
         return out;
     },
@@ -37,21 +37,37 @@ export default {
         if (out === undefined) {
             out = [];
         }
-        var children = this.children,
-            child;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = children[i];
+
+        var root = this;
+        BreadthFirstSearch(root, function (child) {
+            // Don't add root
+            if (child === root) {
+                return;
+            }
+            // Don't add invisible child
             if (!child.visible) {
-                continue;
+                return true;
             }
             out.push(child);
-
-            if (child.hasOwnProperty('isRexContainerLite')) {
-                out.push(...child.getAllVisibleChildren());
-            }
-        }
+        });
 
         return out;
+    },
+
+    bfs(callback, root) {
+        if (root === undefined) {
+            root = this;
+        }
+        BreadthFirstSearch(root, callback);
+        return this;
+    },
+
+    dfs(callback, root) {
+        if (root === undefined) {
+            root = this;
+        }
+        DepthFirstSearch(root, callback);
+        return this;
     },
 
     contains(gameObject) { // Override Base.contains method
