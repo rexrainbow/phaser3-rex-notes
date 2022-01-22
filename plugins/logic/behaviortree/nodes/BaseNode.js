@@ -29,16 +29,6 @@ export default class BaseNode {
         this.properties = properties || {};
     }
 
-    dump() {
-        return {
-            id: this.id,
-            name: this.name,
-            title: this.title,
-            description: this.description,
-            properties: this.properties
-        }
-    }
-
     setParent(parent) {
         this.parent = parent;
         return this;

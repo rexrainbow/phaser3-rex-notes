@@ -26,13 +26,6 @@ class Composite extends BaseNode {
         }
     }
 
-    dump() {
-        var data = super.dump();
-        data.children = this.children.map((child) => child.id);
-
-        return data;
-    }
-
     addChild(node, nodePool) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];
