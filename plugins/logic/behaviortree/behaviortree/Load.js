@@ -1,7 +1,5 @@
 import { COMPOSITE, DECORATOR } from '../constants.js';
-import * as Decorators from '../../decorators';
-import * as Composites from '../../composites';
-import * as Actions from '../../actions';
+import * as Nodes from '../nodes';
 
 var Load = function (data, names) {
     names = names || {};
@@ -20,13 +18,9 @@ var Load = function (data, names) {
         if (spec.name in names) {
             // Look for the name in custom nodes
             Cls = names[spec.name];
-        } else if (spec.name in Decorators) {
+        } else if (spec.name in Nodes) {
             // Look for the name in default nodes
-            Cls = Decorators[spec.name];
-        } else if (spec.name in Composites) {
-            Cls = Composites[spec.name];
-        } else if (spec.name in Actions) {
-            Cls = Actions[spec.name];
+            Cls = Nodes[spec.name];
         } else {
             // Invalid node name
             throw new EvalError(`BehaviorTree.load: Invalid node name "${spec.name}".`);
