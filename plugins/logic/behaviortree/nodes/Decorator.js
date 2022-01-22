@@ -26,6 +26,13 @@ class Decorator extends BaseNode {
         }
     }
 
+    dump() {
+        var data = super.dump();
+        data.child = this.child.id;
+
+        return data;
+    }
+
     addChild(node, nodePool) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];
@@ -34,15 +41,6 @@ class Decorator extends BaseNode {
         this.child = node;
         node.setParent(this);
         return this;
-    }
-
-    getChildren(out) {
-        super.getChildren(out);
-
-        if (this.child) {
-            this.child.getChildren(out);
-        }
-        return out;
     }
 
     _close(tick) {

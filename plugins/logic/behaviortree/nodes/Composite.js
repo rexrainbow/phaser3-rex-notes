@@ -26,6 +26,13 @@ class Composite extends BaseNode {
         }
     }
 
+    dump() {
+        var data = super.dump();
+        data.children = this.children.map((child) => child.id);
+
+        return data;
+    }
+
     addChild(node, nodePool) {
         if (typeof (node) === 'string') {  // Node ID
             node = nodePool[node];
@@ -37,16 +44,6 @@ class Composite extends BaseNode {
         }
 
         return this;
-    }
-
-    getChildren(out) {
-        super.getChildren(out);
-
-        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-            this.children[i].getChildren(out);
-        }
-
-        return out;
     }
 
     _close(tick) {

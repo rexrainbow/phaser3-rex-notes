@@ -4,7 +4,7 @@ import { ERROR } from '../../constants.js';
 class Error extends Action {
 
     constructor({
-        name = 'Error'
+        name = 'Error',
     } = {}) {
 
         super({

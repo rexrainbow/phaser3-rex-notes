@@ -1,4 +1,4 @@
-import { COMPOSITE, DECORATOR } from '../../constants.js';
+import { BreadthFirstSearch } from './Traversal.js';
 import * as Nodes from '../nodes';
 
 var Dump = function () {
@@ -9,52 +9,20 @@ var Dump = function () {
     data.description = this.description;
     data.root = (this.root) ? this.root.id : null;
     data.properties = this.properties;
-    data.nodes = {};
-    data.custom_nodes = [];
+    data.nodes = [];
 
     if (!this.root) {
         return data;
     }
 
-    var stack = [this.root];
-    while (stack.length > 0) {
-        var node = stack.pop();
+    var nodes = [];
+    BreadthFirstSearch(this.root, function (child) {
+        nodes.push(child);
+    })
 
-        var spec = {};
-        spec.id = node.id;
-        spec.name = node.name;
-        spec.title = node.title;
-        spec.description = node.description;
-        spec.properties = node.properties;
-
-        // verify custom node
-        var proto = (node.constructor && node.constructor.prototype);
-        var nodeName = (proto && proto.name) || node.name;
-        if (!Nodes[nodeName] &&
-            customNames.indexOf(nodeName) < 0) {
-            var subdata = {};
-            subdata.name = nodeName;
-            subdata.title = (proto && proto.title) || node.title;
-            subdata.category = node.category;
-
-            customNames.push(nodeName);
-            data.custom_nodes.push(subdata);
-        }
-
-        // store children/child
-        if (node.category === COMPOSITE && node.children) {
-            var children = [];
-            for (var i = node.children.length - 1; i >= 0; i--) {
-                children.push(node.children[i].id);
-                stack.push(node.children[i]);
-            }
-            spec.children = children;
-        } else if (node.category === DECORATOR && node.child) {
-            stack.push(node.child);
-            spec.child = node.child.id;
-        }
-
-        data.nodes[node.id] = spec;
+    for (var i = 0, cnt = nodes.length; i < cnt; i++) {
+        var node = nodes[i];
+        data.nodes.push(node.dump());
     }
 
     return data;

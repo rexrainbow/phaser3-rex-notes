@@ -16,16 +16,16 @@ import IfBranch from './composites/IfBranch.js';
 import Switch from './composites/Switch.js';
 import WeightSelector from './composites/WeightSelector.js';
 
-import Bypass from './Decorators/Bypass.js';
-import ForceSuccess from './Decorators/ForceSuccess.js';
-import Invert from './Decorators/Invert.js';
-import TimeLimit from './Decorators/TimeLimit.js';
-import Cooldown from './Decorators/Cooldown.js';
-import Repeat from './Decorators/Repeat.js';
-import RepeatUntilFailure from './Decorators/RepeatUntilFailure.js';
-import RepeatUntilSuccess from './Decorators/RepeatUntilSuccess.js';
-import Limiter from './Decorators/Limiter.js';
-import If from './Decorators/If.js';
+import Bypass from './decorators/Bypass.js';
+import ForceSuccess from './decorators/ForceSuccess.js';
+import Invert from './decorators/Invert.js';
+import TimeLimit from './decorators/TimeLimit.js';
+import Cooldown from './decorators/Cooldown.js';
+import Repeat from './decorators/Repeat.js';
+import RepeatUntilFailure from './decorators/RepeatUntilFailure.js';
+import RepeatUntilSuccess from './decorators/RepeatUntilSuccess.js';
+import Limiter from './decorators/Limiter.js';
+import If from './decorators/If.js';
 
 export {
     BaseNode,
