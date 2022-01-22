@@ -3,7 +3,16 @@ import { COMPOSITE } from '../constants.js';
 
 class Composite extends BaseNode {
 
-    constructor({ children = [], name = 'Composite', title, properties } = {}) {
+    constructor(
+        {
+            children = [],
+            name = 'Composite',
+            title,
+            properties
+        } = {},
+        nodePool
+    ) {
+
         super({
             category: COMPOSITE,
             name,
@@ -13,15 +22,20 @@ class Composite extends BaseNode {
 
         this.children = [];
         for (var i = 0, cnt = children.length; i < cnt; i++) {
-            this.addChild(children[i]);
+            this.addChild(children[i], nodePool);
         }
     }
 
-    addChild(node) {
+    addChild(node, nodePool) {
+        if (typeof (node) === 'string') {  // Node ID
+            node = nodePool[node];
+        }
+
         if (this.children.indexOf(node) === -1) {
             this.children.push(node);
             node.setParent(this);
         }
+
         return this;
     }
 

@@ -2,15 +2,22 @@ import Composite from '../Composite.js';
 import { SUCCESS, FAILURE, RUNNING } from '../../constants.js';
 
 class Sequence extends Composite {
-    constructor({
-        children = [],
-        name = 'Sequence'
-    } = {}) {
+    constructor(
+        {
+            children = [],
+            name = 'Sequence'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            children,
-            name,
-        });
+        super(
+            {
+                children,
+                name,
+            },
+            nodePool
+        );
+
     }
 
     open(tick) {

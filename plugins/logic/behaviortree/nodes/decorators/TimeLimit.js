@@ -2,19 +2,25 @@ import Decorator from '../Decorator.js';
 import { FAILURE, ERROR } from '../../constants.js';
 
 class TimeLimit extends Decorator {
-    constructor({
-        duration,
-        child = null,
-        name = 'TimeLimit'
-    } = {}) {
+    constructor(
+        {
+            duration,
+            child = null,
+            name = 'TimeLimit'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-            properties: {
-                duration
+        super(
+            {
+                child,
+                name,
+                properties: {
+                    duration
+                },
             },
-        });
+            nodePool
+        );
 
         if (!duration) {
             throw 'duration parameter in TimeLimit decorator is an obligatory parameter';

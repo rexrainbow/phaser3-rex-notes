@@ -4,19 +4,25 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 class If extends Decorator {
 
-    constructor({
-        expression = 'true',
-        child = null,
-        name = 'If'
-    } = {}) {
+    constructor(
+        {
+            expression = 'true',
+            child = null,
+            name = 'If'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-            properties: {
-                expression
+        super(
+            {
+                child,
+                name,
+                properties: {
+                    expression
+                },
             },
-        });
+            nodePool
+        );
 
         if (!expression) {
             throw 'expression parameter in If decorator is an obligatory parameter';

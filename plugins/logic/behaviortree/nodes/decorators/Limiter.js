@@ -3,19 +3,25 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 class Limiter extends Decorator {
 
-    constructor({
-        maxLoop = 1,
-        child = null,
-        name = 'Limiter'
-    } = {}) {
+    constructor(
+        {
+            maxLoop = 1,
+            child = null,
+            name = 'Limiter'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-            properties: {
-                maxLoop
+        super(
+            {
+                child,
+                name,
+                properties: {
+                    maxLoop
+                },
             },
-        });
+            nodePool
+        );
 
         if (!maxLoop) {
             throw 'maxLoop parameter in Limiter decorator is an obligatory parameter';

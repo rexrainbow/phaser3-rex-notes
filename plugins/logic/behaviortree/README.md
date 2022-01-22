@@ -109,6 +109,8 @@ TICK  --> |isRunning| EXIT
 
 - When closing a node, also close children nodes.
 
-### Load from JSON
+### Serialize/Deserialize
 
-- [TODO] Static method in each node class
+- Save values into JSON
+- Create nodes by JSON, from leaf to root
+    - Get nodes from node pool?

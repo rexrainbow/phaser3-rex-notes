@@ -3,7 +3,14 @@ import { ACTION } from '../constants.js';
 
 class Action extends BaseNode {
 
-    constructor({ name = 'Action', title, properties } = {}) {
+    constructor(
+        {
+            name = 'Action',
+            title,
+            properties
+        } = {}
+    ) {
+
         super({
             category: ACTION,
             name,

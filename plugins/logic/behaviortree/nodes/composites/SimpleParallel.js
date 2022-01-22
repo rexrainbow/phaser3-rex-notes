@@ -3,16 +3,22 @@ import { RUNNING } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class SimpleParallel extends Composite {
-    constructor({
-        finishMode = 0,
-        children = [],
-        name = 'SimpleParallel'
-    } = {}) {
+    constructor(
+        {
+            finishMode = 0,
+            children = [],
+            name = 'SimpleParallel'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            children,
-            name,
-        });
+        super(
+            {
+                children,
+                name,
+            },
+            nodePool
+        );
 
         this.finishMode = finishMode;
         this.mainTaskStatus = undefined;

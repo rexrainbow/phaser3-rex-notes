@@ -3,19 +3,25 @@ import { SUCCESS, ERROR, FAILURE } from '../../constants.js';
 
 class Repeat extends Decorator {
 
-    constructor({
-        maxLoop = -1,
-        child = null,
-        name = 'Repeat'
-    } = {}) {
+    constructor(
+        {
+            maxLoop = -1,
+            child = null,
+            name = 'Repeat'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-            properties: {
-                maxLoop
+        super(
+            {
+                child,
+                name,
+                properties: {
+                    maxLoop
+                },
             },
-        });
+            nodePool
+        );
 
         this.maxLoopExpression = this.addVariable(maxLoop);
     }

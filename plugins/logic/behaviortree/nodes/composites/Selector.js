@@ -2,15 +2,22 @@ import Composite from '../Composite.js';
 import { SUCCESS, FAILURE, RUNNING } from '../../constants.js';
 
 class Selector extends Composite {
-    constructor({
-        children = [],
-        name = 'Selector'
-    } = {}) {
+    constructor(
+        {
+            children = [],
+            name = 'Selector'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            children,
-            name,
-        });
+        super(
+            {
+                children,
+                name,
+            },
+            nodePool
+        );
+
     }
 
     open(tick) {

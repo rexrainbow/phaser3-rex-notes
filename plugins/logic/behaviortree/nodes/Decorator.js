@@ -3,7 +3,16 @@ import { DECORATOR } from '../constants.js';
 
 class Decorator extends BaseNode {
 
-    constructor({ child = null, name = 'Decorator', title, properties } = {}) {
+    constructor(
+        {
+            child = null,
+            name = 'Decorator',
+            title,
+            properties
+        } = {},
+        nodePool
+    ) {
+
         super({
             category: DECORATOR,
             name,
@@ -13,11 +22,15 @@ class Decorator extends BaseNode {
 
         this.child = null;
         if (child) {
-            this.addChild(child);
+            this.addChild(child, nodePool);
         }
     }
 
-    addChild(node) {
+    addChild(node, nodePool) {
+        if (typeof (node) === 'string') {  // Node ID
+            node = nodePool[node];
+        }
+
         this.child = node;
         node.setParent(this);
         return this;

@@ -4,7 +4,15 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 export default class BaseNode {
 
-    constructor({ category, name, title, description, properties } = {}) {
+    constructor(
+        {
+            category,
+            name,
+            title,
+            description,
+            properties
+        } = {}
+    ) {
 
         this.parent = null;
 

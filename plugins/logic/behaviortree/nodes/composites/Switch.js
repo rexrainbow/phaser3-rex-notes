@@ -2,19 +2,25 @@ import Composite from '../Composite.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class Switch extends Composite {
-    constructor({
-        expression = null,
-        children = {},
-        name = 'Switch'
-    } = {}) {
+    constructor(
+        {
+            expression = null,
+            children = {},
+            name = 'Switch'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            children: Object.values(children),
-            name,
-            properties: {
-                expression
+        super(
+            {
+                children: Object.values(children),
+                name,
+                properties: {
+                    expression
+                },
             },
-        });
+            nodePool
+        );
 
 
         if (!expression) {
@@ -23,12 +29,12 @@ class Switch extends Composite {
 
         this.expression = this.addVariable(expression);
 
-        this.childrenMap = children;
+        this.keys = Object.keys(children);  // Index of children
     }
 
     addCase(key, node) {
         this.addChild(node);
-        this.childrenMap[key] = node;
+        this.keys.push(key);
         return this;
     }
 
@@ -46,16 +52,13 @@ class Switch extends Composite {
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
             var key = tick.evalExpression(this.expression);
-            var child = this.childrenMap[key];
-            if (!child) {
-                child = this.childrenMap['default'];
+            childIndex = this.keys.indexOf(key);
+            if (childIndex === -1) {
+                childIndex = this.keys.indexOf('default');
             }
-
-            if (!child) {
+            if (childIndex === -1) {
                 return ERROR;
             }
-
-            childIndex = this.children.indexOf(child);
         }
 
         var child = this.children[childIndex];

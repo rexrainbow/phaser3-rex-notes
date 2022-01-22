@@ -2,19 +2,25 @@ import Decorator from '../Decorator.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class Cooldown extends Decorator {
-    constructor({
-        duration = 0,
-        child = null,
-        name = 'Cooldown'
-    } = {}) {
+    constructor(
+        {
+            duration = 0,
+            child = null,
+            name = 'Cooldown'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-            properties: {
-                duration
+        super(
+            {
+                child,
+                name,
+                properties: {
+                    duration
+                },
             },
-        });
+            nodePool
+        );
 
         if (!duration) {
             throw 'duration parameter in Cooldown decorator is an obligatory parameter';

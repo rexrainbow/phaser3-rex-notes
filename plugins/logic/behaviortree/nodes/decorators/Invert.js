@@ -3,15 +3,21 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 
 class Invert extends Decorator {
-    constructor({
-        child = null,
-        name = 'Invert'
-    } = {}) {
+    constructor(
+        {
+            child = null,
+            name = 'Invert'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-        });
+        super(
+            {
+                child,
+                name,
+            },
+            nodePool
+        );
     }
 
     tick(tick) {

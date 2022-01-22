@@ -2,19 +2,25 @@ import Composite from '../Composite.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
 class IfBranch extends Composite {
-    constructor({
-        expression = null,
-        children = [],
-        name = 'IfBranch'
-    } = {}) {
+    constructor(
+        {
+            expression = null,
+            children = [],
+            name = 'IfBranch'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            children: children,
-            name,
-            properties: {
-                expression
+        super(
+            {
+                children: children,
+                name,
+                properties: {
+                    expression
+                },
             },
-        });
+            nodePool
+        );
 
 
         if (!expression) {

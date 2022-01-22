@@ -4,15 +4,22 @@ import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 class ForceSuccess extends Decorator {
 
-    constructor({
-        child = null,
-        name = 'ForceSuccess'
-    } = {}) {
+    constructor(
+        {
+            child = null,
+            name = 'ForceSuccess'
+        } = {},
+        nodePool
+    ) {
 
-        super({
-            child,
-            name,
-        });
+        super(
+            {
+                child,
+                name,
+            },
+            nodePool
+        );
+
     }
 
     tick(tick) {

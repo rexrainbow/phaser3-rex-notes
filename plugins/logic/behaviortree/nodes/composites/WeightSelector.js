@@ -3,21 +3,25 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 import BaseNode from '../BaseNode.js';
 
 class WeightSelector extends Composite {
-    constructor({
-        children = [],
-        expression = null,
-        name = 'WeightSelector'
-    } = {}) {
+    constructor(
+        {
+            children = [],
+            expression = null,
+            name = 'WeightSelector'
+        } = {},
+        nodePool
+    ) {
 
         var weights = [];
         var totalWeight = 0;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
+            var child = children[i];
             var weight;
-            if (children[i] instanceof BaseNode) {
+            if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
                 weight = 1;
             } else {
-                weight = children[i].weight;
-                children[i] = children[i].child;
+                weight = child.weight;
+                children[i] = child.child;
             }
             weights.push(weight);
             totalWeight += weight;
@@ -26,13 +30,16 @@ class WeightSelector extends Composite {
             weights[i] /= totalWeight;
         }
 
-        super({
-            children: children,
-            name,
-            properties: {
-                expression
+        super(
+            {
+                children: children,
+                name,
+                properties: {
+                    expression
+                },
             },
-        });
+            nodePool
+        );
 
         this.expression = (expression) ? this.addVariable(expression) : null;
 
