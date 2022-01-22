@@ -5,8 +5,8 @@ import BaseNode from '../BaseNode.js';
 class WeightSelector extends Composite {
     constructor(
         {
-            weights = undefined,    // Or [weight, ...]
             expression = null,
+            weights = undefined,    // Or [weight, ...]
             children = [],
             name = 'WeightSelector'
         } = {},

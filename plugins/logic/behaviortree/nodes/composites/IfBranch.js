@@ -4,7 +4,7 @@ import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 class IfBranch extends Composite {
     constructor(
         {
-            expression = null,
+            expression = 'true',
             children = [],
             name = 'IfBranch'
         } = {},
@@ -21,11 +21,6 @@ class IfBranch extends Composite {
             },
             nodePool
         );
-
-
-        if (!expression) {
-            throw 'expression parameter in IfBranch composite is an obligatory parameter';
-        }
 
         this.expression = this.addBooleanVariable(expression);
     }

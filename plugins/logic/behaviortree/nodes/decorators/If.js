@@ -24,10 +24,6 @@ class If extends Decorator {
             nodePool
         );
 
-        if (!expression) {
-            throw 'expression parameter in If decorator is an obligatory parameter';
-        }
-
         this.expression = this.addBooleanVariable(expression);
     }
 

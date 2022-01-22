@@ -4,7 +4,7 @@ import { FAILURE, ERROR } from '../../constants.js';
 class TimeLimit extends Decorator {
     constructor(
         {
-            duration,
+            duration = 0,
             child = null,
             name = 'TimeLimit'
         } = {},
@@ -21,10 +21,6 @@ class TimeLimit extends Decorator {
             },
             nodePool
         );
-
-        if (!duration) {
-            throw 'duration parameter in TimeLimit decorator is an obligatory parameter';
-        }
 
         this.durationExpression = this.addVariable(duration);
     }

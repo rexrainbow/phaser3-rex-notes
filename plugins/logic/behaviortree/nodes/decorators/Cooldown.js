@@ -22,10 +22,6 @@ class Cooldown extends Decorator {
             nodePool
         );
 
-        if (!duration) {
-            throw 'duration parameter in Cooldown decorator is an obligatory parameter';
-        }
-
         this.durationExpression = this.addVariable(duration);
     }
 

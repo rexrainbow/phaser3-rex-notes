@@ -23,10 +23,6 @@ class Limiter extends Decorator {
             nodePool
         );
 
-        if (!maxLoop) {
-            throw 'maxLoop parameter in Limiter decorator is an obligatory parameter';
-        }
-
         this.maxLoopExpression = this.addVariable(maxLoop);
     }
 

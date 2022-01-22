@@ -29,11 +29,6 @@ class Switch extends Composite {
             nodePool
         );
 
-
-        if (!expression) {
-            throw 'expression parameter in Switch composite is an obligatory parameter';
-        }
-
         this.expression = this.addVariable(expression);
 
         this.keys = keys;  // Index of children
