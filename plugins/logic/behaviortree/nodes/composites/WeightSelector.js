@@ -5,29 +5,33 @@ import BaseNode from '../BaseNode.js';
 class WeightSelector extends Composite {
     constructor(
         {
-            children = [],
+            weights = undefined,    // Or [weight, ...]
             expression = null,
+            children = [],
             name = 'WeightSelector'
         } = {},
         nodePool
     ) {
 
-        var weights = [];
-        var totalWeight = 0;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            var child = children[i];
-            var weight;
-            if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
-                weight = 1;
-            } else {
-                weight = child.weight;
-                children[i] = child.child;
+        if (weights === undefined) {
+            weights = [];
+
+            var totalWeight = 0;
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                var child = children[i];
+                var weight;
+                if ((child instanceof BaseNode) || (typeof (child) === 'string')) {
+                    weight = 1;
+                } else {
+                    weight = child.weight;
+                    children[i] = child.child;
+                }
+                weights.push(weight);
+                totalWeight += weight;
             }
-            weights.push(weight);
-            totalWeight += weight;
-        }
-        for (var i = 0, cnt = weights.length; i < cnt; i++) {
-            weights[i] /= totalWeight;
+            for (var i = 0, cnt = weights.length; i < cnt; i++) {
+                weights[i] /= totalWeight;
+            }
         }
 
         super(
@@ -35,7 +39,8 @@ class WeightSelector extends Composite {
                 children: children,
                 name,
                 properties: {
-                    expression
+                    expression,
+                    weights
                 },
             },
             nodePool

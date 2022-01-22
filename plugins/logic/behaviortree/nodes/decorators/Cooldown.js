@@ -27,7 +27,6 @@ class Cooldown extends Decorator {
         }
 
         this.durationExpression = this.addVariable(duration);
-        this.duration = undefined;
     }
 
     open(tick) {

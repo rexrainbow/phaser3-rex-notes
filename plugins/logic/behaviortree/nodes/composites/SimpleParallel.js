@@ -15,7 +15,10 @@ class SimpleParallel extends Composite {
         super(
             {
                 children,
-                name,
+                name,                
+                properties: {
+                    finishMode
+                },
             },
             nodePool
         );

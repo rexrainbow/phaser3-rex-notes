@@ -5,18 +5,25 @@ class Switch extends Composite {
     constructor(
         {
             expression = null,
-            children = {},
+            keys = undefined, // Or [key, ...]
+            children = {},    // Or [child, ...]
             name = 'Switch'
         } = {},
         nodePool
     ) {
 
+        if (keys === undefined) {
+            keys = Object.keys(children);
+            children = Object.values(children);
+        }
+
         super(
             {
-                children: Object.values(children),
+                children: children,
                 name,
                 properties: {
-                    expression
+                    expression,
+                    keys
                 },
             },
             nodePool
@@ -29,7 +36,7 @@ class Switch extends Composite {
 
         this.expression = this.addVariable(expression);
 
-        this.keys = Object.keys(children);  // Index of children
+        this.keys = keys;  // Index of children
     }
 
     addCase(key, node) {
