@@ -34,12 +34,6 @@ class Switch extends Composite {
         this.keys = keys;  // Index of children
     }
 
-    addCase(key, node) {
-        this.addChild(node);
-        this.keys.push(key);
-        return this;
-    }
-
     open(tick) {
         var nodeMemory = tick.getNodeMemory();
         nodeMemory.$runningChild = -1;  // No running child

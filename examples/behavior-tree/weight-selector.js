@@ -59,10 +59,6 @@ class Demo extends Phaser.Scene {
 
             )
 
-        // var result = tree.dump();
-        // var nodes = tree.getNodes();
-        // debugger
-
         var blackboard = btAdd.blackboard()
 
         var clock = this.plugins.get('rexClock').add(this);

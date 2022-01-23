@@ -45,18 +45,32 @@ class Demo extends Phaser.Scene {
         }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.ifBranch({
-                    expression: 'coin > 100',
-                    children: [
-                        CreateTask('TaskA', 500),
-                        CreateTask('TaskB', 500)
-                    ]
+                btAdd.repeat({
+                    maxLoop: 3,
+                    child: btAdd.shuffleSelector({
+                        children: [
+                            btAdd.if({
+                                expression: 'A > 10',
+                                child: CreateTask('TaskA', 500)
+                            }),
+                            btAdd.if({
+                                expression: 'B > 10',
+                                child: CreateTask('TaskB', 500)
+                            }),
+                            btAdd.if({
+                                expression: 'C > 10',
+                                child: CreateTask('TaskC', 500)
+                            }),
+                        ]
+                    })
                 })
 
             )
 
         var blackboard = btAdd.blackboard()
-            .set('coin', 10)
+            .set('A', 20)
+            .set('B', 5)
+            .set('C', 20)
 
         var clock = this.plugins.get('rexClock').add(this);
         clock

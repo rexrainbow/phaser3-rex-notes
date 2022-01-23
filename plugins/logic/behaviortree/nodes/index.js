@@ -15,6 +15,7 @@ import SimpleParallel from './composites/SimpleParallel.js';
 import IfBranch from './composites/IfBranch.js';
 import Switch from './composites/Switch.js';
 import WeightSelector from './composites/WeightSelector.js';
+import ShuffleSelector from './composites/ShuffleSelector.js';
 
 import Bypass from './decorators/Bypass.js';
 import ForceSuccess from './decorators/ForceSuccess.js';
@@ -45,6 +46,7 @@ export {
     IfBranch,
     Switch,
     WeightSelector,
+    ShuffleSelector,
 
     Bypass,
     ForceSuccess,

@@ -23,6 +23,7 @@ import {
     IfBranch,
     Switch,
     WeightSelector,
+    ShuffleSelector,
 
     Bypass,
     ForceSuccess,
@@ -68,6 +69,7 @@ export {
     IfBranch,
     Switch,
     WeightSelector,
+    ShuffleSelector,
 
     Bypass,
     ForceSuccess,

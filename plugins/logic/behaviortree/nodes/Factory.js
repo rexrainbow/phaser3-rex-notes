@@ -15,6 +15,7 @@ import SimpleParallel from './composites/SimpleParallel.js';
 import IfBranch from './composites/IfBranch.js';
 import Switch from './composites/Switch.js';
 import WeightSelector from './composites/WeightSelector.js';
+import ShuffleSelector from './composites/ShuffleSelector.js';
 
 import Bypass from './decorators/Bypass.js';
 import ForceSuccess from './decorators/ForceSuccess.js';
@@ -66,6 +67,9 @@ ObjectFactory.register('switch', function (config) {
 ObjectFactory.register('weightSelector', function (config) {
     return new WeightSelector(config);
 });
+ObjectFactory.register('shuffleSelector', function (config) {
+    return new ShuffleSelector(config);
+});
 
 // Decorators
 ObjectFactory.register('bypass', function (config) {
@@ -115,6 +119,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.SimpleParallel', SimpleParallel);
 SetValue(window, 'RexPlugins.BehaviorTree.IfBranch', IfBranch);
 SetValue(window, 'RexPlugins.BehaviorTree.Switch', Switch);
 SetValue(window, 'RexPlugins.BehaviorTree.WeightSelector', WeightSelector);
+SetValue(window, 'RexPlugins.BehaviorTree.ShuffleSelector', ShuffleSelector);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Bypass', Bypass);
 SetValue(window, 'RexPlugins.BehaviorTree.ForceSuccess', ForceSuccess);
@@ -145,6 +150,7 @@ export {
     IfBranch,
     Switch,
     WeightSelector,
+    ShuffleSelector,
 
     Bypass,
     ForceSuccess,

@@ -23,6 +23,7 @@ This library include the following core structures...
     - IfBranch
     - Switch
     - WeightSelector : Random select a child with weight
+    - ShuffleSelector : Shuffle children of selector
 - Decorators: [TODO] Abort children
     - If
     - And : [TODO]
@@ -108,9 +109,3 @@ TICK  --> |isRunning| EXIT
 ```
 
 - When closing a node, also close children nodes.
-
-### Serialize/Deserialize
-
-- Save values into JSON
-- Create nodes by JSON, from leaf to root
-    - Get nodes from node pool?
