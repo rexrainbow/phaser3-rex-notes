@@ -1,4 +1,3 @@
-import { COMPOSITE, DECORATOR } from '../constants.js';
 import * as Nodes from '../nodes';
 
 var Load = function (data, names) {
@@ -8,49 +7,49 @@ var Load = function (data, names) {
     this.description = data.description || this.description;
     this.properties = data.properties || this.properties;
 
+    var nodeData = data.nodes;
     var nodes = {};
-    var id, spec, node;
-    // Create the node list (without connection between them)
-    for (id in data.nodes) {
-        spec = data.nodes[id];
-        var Cls;
+    for (var i = nodeData.length - 1; i >= 0; i--) {
+        var spec = nodeData[i],
+            className = spec.name;
 
-        if (spec.name in names) {
+        var Cls;
+        if (className in names) {
             // Look for the name in custom nodes
-            Cls = names[spec.name];
-        } else if (spec.name in Nodes) {
+            Cls = names[className];
+        } else if (className in Nodes) {
             // Look for the name in default nodes
-            Cls = Nodes[spec.name];
+            Cls = Nodes[className];
         } else {
             // Invalid node name
-            throw new EvalError(`BehaviorTree.load: Invalid node name "${spec.name}".`);
+            throw new EvalError(`BehaviorTree.load: Invalid node name "${className}".`);
         }
 
-        node = new Cls(spec.properties);
+        var config = {};
+        if (spec.hasOwnProperty('children')) {
+            config.children = spec.children;
+        }
+        if (spec.hasOwnProperty('child')) {
+            config.child = spec.child;
+        }
+
+        config = Object.assign(
+            config,
+            spec.properties,
+        )
+
+        var node = new Cls(config, nodes);
         node.id = spec.id || node.id;
         node.title = spec.title || node.title;
         node.description = spec.description || node.description;
         node.properties = spec.properties || node.properties;
 
-        nodes[id] = node;
-    }
-
-    // Connect the nodes
-    for (id in data.nodes) {
-        spec = data.nodes[id];
-        node = nodes[id];
-
-        if (node.category === COMPOSITE && spec.children) {
-            for (var i = 0; i < spec.children.length; i++) {
-                var cid = spec.children[i];
-                node.children.push(nodes[cid]);
-            }
-        } else if (node.category === DECORATOR && spec.child) {
-            node.child = nodes[spec.child];
-        }
+        nodes[node.id] = node;
     }
 
     this.root = nodes[data.root];
+
+    return this;
 }
 
 export default Load;

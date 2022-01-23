@@ -1,7 +1,7 @@
 import { TREE } from '../constants.js'
 import CreateUUID from '../utils/CreateUUID.js';
 import Dump from './Dump.js';
-// import Load from './Load.js';
+import Load from './Load.js';
 import Tick from '../tick/Tick.js';
 
 class BehaviorTree {
@@ -80,7 +80,7 @@ class BehaviorTree {
 
 var Methods = {
     dump: Dump,
-    // load: Load,    
+    load: Load,
 }
 Object.assign(
     BehaviorTree.prototype,

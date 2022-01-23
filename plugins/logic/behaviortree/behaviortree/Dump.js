@@ -1,15 +1,15 @@
 import { BreadthFirstSearch } from './Traversal.js';
 import { COMPOSITE, DECORATOR } from '../constants.js';
+import Clone from '../../../utils/object/Clone.js';
 
 var Dump = function () {
-    var data = {};
-    var customNames = [];
-
-    data.title = this.title;
-    data.description = this.description;
-    data.root = (this.root) ? this.root.id : null;
-    data.properties = this.properties;
-    data.nodes = [];
+    var data = {
+        title: this.title,
+        description: this.description,
+        root: (this.root) ? this.root.id : null,
+        properties: this.properties,
+        nodes: []
+    };
 
     if (!this.root) {
         return data;
@@ -28,7 +28,7 @@ var Dump = function () {
             name: node.name,
             title: node.title,
             description: node.description,
-            properties: node.properties
+            properties: Clone(node.properties)
         };
 
         switch (node.category) {

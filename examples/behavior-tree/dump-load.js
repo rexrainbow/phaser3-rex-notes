@@ -60,8 +60,12 @@ class Demo extends Phaser.Scene {
 
             )
 
-        var result = tree.dump();
-        debugger
+        // Dump
+        var data = tree.dump();
+        // Load
+        var tree2 = btAdd.behaviorTree().load(data, {
+            MyAction: PrintAction
+        });
 
         var blackboard = btAdd.blackboard()
             .set('name', 'rex')
@@ -71,7 +75,7 @@ class Demo extends Phaser.Scene {
         clock
             .on('update', function (time, delta) {
                 blackboard.setCurrentTime(time);
-                var state = tree.tick(blackboard);
+                var state = tree2.tick(blackboard);
                 console.log(`Run tick ${state}`);
 
                 // Stop ticking
