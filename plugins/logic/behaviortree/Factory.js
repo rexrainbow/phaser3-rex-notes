@@ -33,6 +33,8 @@ import {
     If,
 } from './nodes/Factory.js';
 
+import { LoadYaml } from './parsers/yaml/Factory.js'
+
 export {
     // Core
     BehaviorTree,
@@ -69,5 +71,8 @@ export {
     Failer,
     Runner,
     Error,
-    Wait
+    Wait,
+
+    // Parsers
+    LoadYaml,
 };

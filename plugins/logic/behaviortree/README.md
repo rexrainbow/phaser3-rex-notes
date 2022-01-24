@@ -26,8 +26,6 @@ This library include the following core structures...
     - ShuffleSelector : Shuffle children of selector
 - Decorators: [TODO] Abort children
     - If
-    - And : [TODO]
-    - Or : [TODO]
     - Bypass
     - ForceSuccess
     - TimeLimit
@@ -40,6 +38,8 @@ This library include the following core structures...
     - RepeaterUntilSuccess
     - Invert
     - Limiter
+    - And : [TODO]
+    - Or : [TODO]
 - Actions:
     - Succeeder
     - Failer

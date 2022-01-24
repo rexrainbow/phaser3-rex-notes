@@ -1,6 +1,6 @@
 import 'phaser';
-import ParseYaml from '../../plugins/utils/yaml/ParseYaml.js';
-// import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
+import BehaviorTreePlugin from '../../plugins/behaviortree-plugin.js';
+import ClockPlugin from '../../plugins/clock-plugin.js';
 
 var content = `
 selector :
@@ -9,24 +9,42 @@ selector :
         - sequence :
             cooldown : 1000
             children : 
-                - task :
-                    name : print
-                    text : B0.Start : {{$currentTime}}
+                - print : |
+                    TaskA.Start : {{$currentTime}}
                 - wait : 500
-                - task :
-                    name : print
-                    text : B0.End : {{$currentTime}}
+                - print : |
+                    TaskA.End : {{$currentTime}}
         - sequence :
             children : 
-                - task :
-                    name : print
-                    text : B1.Start : {{$currentTime}}
+                - print : |
+                    TaskB.Start : {{$currentTime}}
                 - wait : 1000
-                - task :
-                    name : print
-                    text : B1.End : {{$currentTime}}
+                - print : |
+                    TaskB.End : {{$currentTime}}
 `
 
+class PrintAction extends RexPlugins.BehaviorTree.Action {
+    constructor({ text = '' } = {}) {
+        super({
+            name: 'MyAction',
+            properties: { text: text },
+        });
+
+        this.textExpression = this.addStringTemplateVariable(text);
+    }
+
+    tick(tick) {
+        var text = this.textExpression.eval(tick.blackboardContext);
+        console.log(`Print: ${text}`);
+        return this.SUCCESS;
+    }
+}
+
+var CreatePrintNode = function (text) {
+    return new PrintAction({
+        text: text
+    });
+}
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -38,8 +56,32 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var doc = ParseYaml(content);
-        console.log(doc);
+        var btAdd = this.plugins.get('rexBT').add;
+
+        var tree = btAdd.behaviorTree()
+            .setRoot(
+                btAdd.yaml(content, {
+                    'print': CreatePrintNode
+                })
+            )
+
+        var blackboard = btAdd.blackboard();
+        var clock = this.plugins.get('rexClock').add(this);
+        clock
+            .on('update', function (time, delta) {
+                blackboard.setCurrentTime(time);
+                var state = tree.tick(blackboard);
+                console.log(`Run tick ${state}`);
+
+                // Stop ticking
+                if (state !== 3) {
+                    clock.stop();
+                }
+            })
+            .start()
+            .tick(0);
+
+
     }
 
     update() {
@@ -56,13 +98,20 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
-    // plugins: {
-    //     global: [{
-    //         key: 'rexBT',
-    //         plugin: BehaviorTreePlugin,
-    //         start: true
-    //     }]
-    // }
+    plugins: {
+        global: [
+            {
+                key: 'rexBT',
+                plugin: BehaviorTreePlugin,
+                start: true
+            },
+            {
+                key: 'rexClock',
+                plugin: ClockPlugin,
+                start: true
+            }
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);
