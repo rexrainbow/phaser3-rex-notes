@@ -7,14 +7,17 @@ import CreateShuffleNode from './composites/ShuffleSelector.js';
 import CreateWaitNode from './actions/Wait.js';
 // Decorators
 import CreateRepeatNode from './decorators/Repeat.js';
-import CreateIfNode from './decorators/If';
-import CreateCooldownNode from './decorators/Cooldown';
+import CreateIfNode from './decorators/If.js';
+import CreateCooldownNode from './decorators/Cooldown.js';
+import CreateTimeLimitNode from './decorators/TimeLimit.js';
+import CreateInvertNode from './decorators/Invert.js';
+import CreateForceSuccessNode from './decorators/ForceSuccess.js';
 
 const CreateCompositeHandlers = {
     'selector': CreateSelectorNode,
-    'random-selector':CreateRandomSelectorNode,
+    'random-selector': CreateRandomSelectorNode,
     'sequence': CreateSequenceNode,
-    'shuffle-selector':CreateShuffleNode,
+    'shuffle-selector': CreateShuffleNode,
 }
 
 const CreateActionHandlers = {
@@ -25,6 +28,10 @@ const CreateDecoratorHandles = {
     'repeat': CreateRepeatNode,
     'if': CreateIfNode,
     'cooldown': CreateCooldownNode,
+    'time-limit': CreateTimeLimitNode,
+    'invert': CreateInvertNode,
+    'force-true': CreateForceSuccessNode,
+    'force-success': CreateForceSuccessNode
 };
 
 export {
