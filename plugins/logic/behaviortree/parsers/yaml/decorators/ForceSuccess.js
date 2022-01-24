@@ -1,8 +1,12 @@
 import { ForceSuccess } from '../../../nodes';
 
+// force-success: 
+// force-true:
+/*
+conditions:
+    force-true:
+*/
 var CreateForceSuccessNode = function (data, child) {
-    // force-success: 
-    // force-true
     return new ForceSuccess({
         child: child
     })

@@ -53,16 +53,27 @@ var CreateNode = function (data, customNodeHandlers) {
 
     // 3. Create decorators
     if (!isSingleValue) {
-        var decoratorKeys = [];
-        for (var key in data) {
-            if (key in CreateDecoratorHandles) {
-                decoratorKeys.push(key);
+        var decorators = (data.conditions) ? data.conditions : data;
+        var handlerNames = [];
+
+        for (var handlerName in decorators) {
+            if (
+                (handlerName in CreateDecoratorHandles) ||
+                (handlerName in customNodeHandlers)
+            ) {
+                handlerNames.push(handlerName);
             }
         }
         // Create decorators from last to first
-        for (var i = decoratorKeys.length - 1; i >= 0; i--) {
-            var key = decoratorKeys[i];
-            retNode = CreateDecoratorHandles[key](data[key], retNode);
+        for (var i = handlerNames.length - 1; i >= 0; i--) {
+            var handlerName = handlerNames[i];
+            var handler;
+            if (handlerName in CreateDecoratorHandles) {
+                handler = CreateDecoratorHandles[handlerName];
+            } else {
+                handler = customNodeHandlers[handlerName];
+            }
+            retNode = handler(decorators[handlerName], retNode);
         }
     }
 

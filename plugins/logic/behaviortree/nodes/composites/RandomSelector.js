@@ -1,4 +1,4 @@
-import WeightSelector from '../WeightSelector.js';
+import WeightSelector from './WeightSelector.js';
 
 class RandomSelector extends WeightSelector {
     constructor(

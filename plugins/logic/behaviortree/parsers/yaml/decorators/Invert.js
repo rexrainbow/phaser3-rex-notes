@@ -1,7 +1,11 @@
 import { Invert } from '../../../nodes';
 
+// invert: 
+/*
+conditions:
+    invert: 
+*/
 var CreateInvertNode = function (data, child) {
-    // invert: 
     return new Invert({
         child: child
     })
