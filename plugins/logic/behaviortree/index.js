@@ -23,6 +23,7 @@ import {
     IfBranch,
     Switch,
     WeightSelector,
+    RandomSelector,
     ShuffleSelector,
 
     Bypass,
@@ -69,6 +70,7 @@ export {
     IfBranch,
     Switch,
     WeightSelector,
+    RandomSelector,
     ShuffleSelector,
 
     Bypass,
