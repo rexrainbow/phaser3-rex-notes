@@ -4,7 +4,8 @@ var CreateRandomSelectorNode = function (data, children) {
     /* 
     random-selector:
         children:
-            - 
+            - sequence
+            - sequence
     */
     return new RandomSelector({
         children

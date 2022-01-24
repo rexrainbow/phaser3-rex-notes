@@ -4,7 +4,8 @@ var CreateSelectorNode = function (data, children) {
     /* 
     sequence:
         children:
-            - 
+            - sequence
+            - sequence
     */
     return new Sequence({
         children
