@@ -14,6 +14,7 @@ var s;
 s = `
 a : 10
 b : 20
+c :    # null
 `
 print(s)
 
