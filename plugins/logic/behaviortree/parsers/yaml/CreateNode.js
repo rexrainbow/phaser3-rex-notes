@@ -1,13 +1,9 @@
 import IsPlainObject from '../../../../utils/object/IsPlainObject.js';
-// Composites
-import CreateSelectorNode from './composites/Selector.js';
-import CreateSequenceNode from './composites/Sequence.js';
-// Actions
-import CreateWaitNode from './actions/Wait.js';
-// Decorators
-import CreateRepeatNode from './decorators/Repeat.js';
-import CreateIfNode from './decorators/If';
-import CreateCooldownNode from './decorators/Cooldown';
+import {
+    CreateCompositeHandlers,
+    CreateActionHandlers,
+    CreateDecoratorHandles
+} from './Handlers.js';
 
 
 var CreateNode = function (data, customNodeHandlers) {
@@ -72,20 +68,5 @@ var CreateNode = function (data, customNodeHandlers) {
 
     return retNode;
 }
-
-const CreateCompositeHandlers = {
-    'selector': CreateSelectorNode,
-    'sequence': CreateSequenceNode,
-}
-
-const CreateActionHandlers = {
-    'wait': CreateWaitNode
-}
-
-const CreateDecoratorHandles = {
-    'repeat': CreateRepeatNode,
-    'if': CreateIfNode,
-    'cooldown': CreateCooldownNode,
-};
 
 export default CreateNode;
