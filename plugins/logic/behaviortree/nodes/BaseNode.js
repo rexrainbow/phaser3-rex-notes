@@ -1,5 +1,5 @@
 import CreateUUID from '../utils/CreateUUID.js';
-import { Variable, BooleanVariable, StringTemplateVariable } from '../utils/Variables/';
+import { Variable, BooleanVariable, StringTemplateVariable } from './variables';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 export default class BaseNode {
