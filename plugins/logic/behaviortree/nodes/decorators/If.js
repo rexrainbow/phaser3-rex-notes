@@ -24,7 +24,7 @@ class If extends Decorator {
             nodePool
         );
 
-        this.expression = this.addBooleanVariable(expression);
+        this.expression = this.addBooleanExpression(expression);
     }
 
     tick(tick) {

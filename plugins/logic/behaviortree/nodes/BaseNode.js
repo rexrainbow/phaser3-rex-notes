@@ -1,5 +1,5 @@
 import CreateUUID from '../utils/CreateUUID.js';
-import { Variable, BooleanVariable, StringTemplateVariable } from './variables';
+import { Expression, BooleanExpression, StringTemplateExpression } from './expressions';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../constants.js';
 
 export default class BaseNode {
@@ -34,16 +34,16 @@ export default class BaseNode {
         return this;
     }
 
-    addVariable(expression) {
-        return new Variable(expression);
+    addExpression(expression) {
+        return new Expression(expression);
     }
 
-    addBooleanVariable(expression) {
-        return new BooleanVariable(expression);
+    addBooleanExpression(expression) {
+        return new BooleanExpression(expression);
     }
 
-    addStringTemplateVariable(expression) {
-        return new StringTemplateVariable(expression);
+    addStringTemplateExpression(expression) {
+        return new StringTemplateExpression(expression);
     }
 
     _execute(tick) {

@@ -46,7 +46,7 @@ class WeightSelector extends Composite {
             nodePool
         );
 
-        this.expression = (expression) ? this.addVariable(expression) : null;
+        this.expression = (expression) ? this.addExpression(expression) : null;
 
         this.weights = weights;
     }

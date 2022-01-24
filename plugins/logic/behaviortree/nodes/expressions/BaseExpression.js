@@ -1,4 +1,4 @@
-class BaseVariable {
+class BaseExpression {
     setExpressionHandler(callback) {
         this.expressionHandler = callback;
         return this;
@@ -9,4 +9,4 @@ class BaseVariable {
     }
 }
 
-export default BaseVariable;
+export default BaseExpression;

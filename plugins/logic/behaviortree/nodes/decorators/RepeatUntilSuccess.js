@@ -23,7 +23,7 @@ class RepeatUntilSuccess extends Decorator {
             nodePool
         );
 
-        this.maxLoopExpression = this.addVariable(maxLoop);
+        this.maxLoopExpression = this.addExpression(maxLoop);
     }
 
     open(tick) {

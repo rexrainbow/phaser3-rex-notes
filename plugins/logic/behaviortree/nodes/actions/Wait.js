@@ -15,7 +15,7 @@ class Wait extends Action {
             },
         });
 
-        this.durationExpression = this.addVariable(duration);
+        this.durationExpression = this.addExpression(duration);
     }
 
     open(tick) {

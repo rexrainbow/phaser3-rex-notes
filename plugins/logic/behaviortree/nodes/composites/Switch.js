@@ -29,7 +29,7 @@ class Switch extends Composite {
             nodePool
         );
 
-        this.expression = this.addVariable(expression);
+        this.expression = this.addExpression(expression);
 
         this.keys = keys;  // Index of children
     }

@@ -22,7 +22,7 @@ class IfBranch extends Composite {
             nodePool
         );
 
-        this.expression = this.addBooleanVariable(expression);
+        this.expression = this.addBooleanExpression(expression);
     }
 
     open(tick) {

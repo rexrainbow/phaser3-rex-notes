@@ -1,11 +1,11 @@
-import BaseVariable from './BaseVariable.js';
+import BaseExpression from './BaseExpression.js';
 import Handlebars from 'handlebars';
 
 const RuntimeOptions = {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true
 }
-class StringTemplateVariable extends BaseVariable {
+class StringTemplateExpression extends BaseExpression {
     constructor(expression) {
         super();
 
@@ -18,4 +18,4 @@ class StringTemplateVariable extends BaseVariable {
     }
 }
 
-export default StringTemplateVariable;
+export default StringTemplateExpression;
