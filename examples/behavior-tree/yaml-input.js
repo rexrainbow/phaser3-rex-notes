@@ -4,10 +4,12 @@ import ClockPlugin from '../../plugins/clock-plugin.js';
 
 var content = `
 selector :
-    repeat : 3
+    decorators:
+        repeat : 3
     children : 
         - sequence :
-            cooldown : 1000
+            decorators:
+                cooldown : 1000
             children : 
                 - print : |
                     TaskA.Start : {{$currentTime}}

@@ -1,11 +1,17 @@
 import { ForceSuccess } from '../../../nodes';
 
-// force-success: 
-// force-true:
 /*
-conditions:
+```yaml
+decorators:
     force-true:
+```
+or
+```yaml
+force-success: 
+force-true:
+```
 */
+
 var CreateForceSuccessNode = function (data, child) {
     return new ForceSuccess({
         child: child

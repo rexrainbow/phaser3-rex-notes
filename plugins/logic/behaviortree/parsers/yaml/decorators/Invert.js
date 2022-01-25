@@ -1,10 +1,16 @@
 import { Invert } from '../../../nodes';
 
-// invert: 
 /*
-conditions:
+```yaml
+decorators:
     invert: 
+```
+or
+```yaml
+invert: 
+```
 */
+
 var CreateInvertNode = function (data, child) {
     return new Invert({
         child: child
