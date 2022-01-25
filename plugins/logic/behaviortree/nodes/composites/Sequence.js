@@ -26,6 +26,10 @@ class Sequence extends Composite {
     }
 
     tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
         var nodeMemory = tick.getNodeMemory();
 
         var childIndex = nodeMemory.$runningChild;
