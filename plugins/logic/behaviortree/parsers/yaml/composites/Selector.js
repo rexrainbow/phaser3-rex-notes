@@ -1,15 +1,16 @@
 import { Selector } from '../../../nodes';
 
-var CreateSelectorNode = function (data, children) {
-    /* 
-    selector:
-        children:
-            - seqence
-            - seqence
-    */
-    return new Selector({
-        children
-    });
+/*
+```yaml
+selector:
+    children:
+        - sequence
+        - sequence
+```
+*/
+
+var CreateSelectorNode = function (data) {
+    return new Selector(data);
 }
 
 export default CreateSelectorNode;

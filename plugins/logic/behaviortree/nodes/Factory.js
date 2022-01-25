@@ -12,8 +12,8 @@ import Wait from './actions/Wait.js';
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
 import SimpleParallel from './composites/SimpleParallel.js';
-import IfBranch from './composites/IfBranch.js';
-import Switch from './composites/Switch.js';
+import IfSelector from './composites/IfSelector.js';
+import SwitchSelector from './composites/SwitchSelector.js';
 import WeightSelector from './composites/WeightSelector.js';
 import RandomSelector from './composites/RandomSelector.js';
 import ShuffleSelector from './composites/ShuffleSelector.js';
@@ -59,11 +59,11 @@ ObjectFactory.register('sequence', function (config) {
 ObjectFactory.register('simpleParallel', function (config) {
     return new SimpleParallel(config);
 });
-ObjectFactory.register('ifBranch', function (config) {
-    return new IfBranch(config);
+ObjectFactory.register('ifSelector', function (config) {
+    return new IfSelector(config);
 });
-ObjectFactory.register('switch', function (config) {
-    return new Switch(config);
+ObjectFactory.register('switchSelector', function (config) {
+    return new SwitchSelector(config);
 });
 ObjectFactory.register('weightSelector', function (config) {
     return new WeightSelector(config);
@@ -120,8 +120,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.Wait', Wait);
 SetValue(window, 'RexPlugins.BehaviorTree.Selector', Selector);
 SetValue(window, 'RexPlugins.BehaviorTree.Sequence', Sequence);
 SetValue(window, 'RexPlugins.BehaviorTree.SimpleParallel', SimpleParallel);
-SetValue(window, 'RexPlugins.BehaviorTree.IfBranch', IfBranch);
-SetValue(window, 'RexPlugins.BehaviorTree.Switch', Switch);
+SetValue(window, 'RexPlugins.BehaviorTree.IfSelector', IfSelector);
+SetValue(window, 'RexPlugins.BehaviorTree.SwitchSelector', SwitchSelector);
 SetValue(window, 'RexPlugins.BehaviorTree.WeightSelector', WeightSelector);
 SetValue(window, 'RexPlugins.BehaviorTree.RandomSelector', RandomSelector);
 SetValue(window, 'RexPlugins.BehaviorTree.ShuffleSelector', ShuffleSelector);
@@ -152,8 +152,8 @@ export {
     Selector,
     Sequence,
     SimpleParallel,
-    IfBranch,
-    Switch,
+    IfSelector,
+    SwitchSelector,
     WeightSelector,
     RandomSelector,
     ShuffleSelector,

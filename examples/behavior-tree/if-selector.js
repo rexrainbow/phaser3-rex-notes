@@ -46,7 +46,7 @@ class Demo extends Phaser.Scene {
         }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.ifBranch({
+                btAdd.ifSelector({
                     expression: 'coin > 100',
                     children: [
                         CreateTask('TaskA', 500),

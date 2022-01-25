@@ -50,7 +50,7 @@ class Demo extends Phaser.Scene {
                     maxLoop: 10,
                     child: btAdd.weightSelector({
                         children: [
-                            { weight: 3, child: CreateTask('TaskA', 500) },
+                            { weight: 3, node: CreateTask('TaskA', 500) },
                             CreateTask('TaskB', 500),
                             CreateTask('TaskC', 500),
                             CreateTask('TaskD', 500),

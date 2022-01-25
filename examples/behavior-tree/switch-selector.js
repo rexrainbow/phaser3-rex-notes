@@ -46,7 +46,7 @@ class Demo extends Phaser.Scene {
         }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.switch({
+                btAdd.switchSelector({
                     expression: 'key',
                     children: {
                         'A': CreateTask('TaskA', 500),

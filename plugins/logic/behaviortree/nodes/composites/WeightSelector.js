@@ -7,7 +7,7 @@ class WeightSelector extends Composite {
         {
             expression = null,
             weights = undefined,    // Or [weight, ...]
-            children = [],
+            children = [],          // [node, ...], or [{weight, node}, ...]
             name = 'WeightSelector'
         } = {},
         nodePool
@@ -24,7 +24,7 @@ class WeightSelector extends Composite {
                     weight = 1;
                 } else {
                     weight = child.weight;
-                    children[i] = child.child;
+                    children[i] = child.node;
                 }
                 weights.push(weight);
                 totalWeight += weight;

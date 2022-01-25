@@ -12,8 +12,8 @@ import Wait from './actions/Wait.js';
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
 import SimpleParallel from './composites/SimpleParallel.js';
-import IfBranch from './composites/IfBranch.js';
-import Switch from './composites/Switch.js';
+import IfSelector from './composites/IfSelector.js';
+import SwitchSelector from './composites/SwitchSelector.js';
 import WeightSelector from './composites/WeightSelector.js';
 import RandomSelector from './composites/RandomSelector.js';
 import ShuffleSelector from './composites/ShuffleSelector.js';
@@ -44,8 +44,8 @@ export {
     Selector,
     Sequence,
     SimpleParallel,
-    IfBranch,
-    Switch,
+    IfSelector,
+    SwitchSelector,
     WeightSelector,
     RandomSelector,
     ShuffleSelector,

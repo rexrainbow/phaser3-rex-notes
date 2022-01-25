@@ -1,8 +1,11 @@
 // Composites
 import CreateSelectorNode from './composites/Selector.js';
-import CreateRandomSelectorNode from './composites/RandomSelector.js';
 import CreateSequenceNode from './composites/Sequence.js';
+import CreateSwitchSelectorNode from './composites/SwitchSelector.js';
+import CreateIfSelectorNode from './composites/IfSelector.js';
+import CreateRandomSelectorNode from './composites/RandomSelector.js';
 import CreateShuffleNode from './composites/ShuffleSelector.js';
+import CreateWeightSelectorNode from './composites/WeightSelector.js';
 // Actions
 import CreateWaitNode from './actions/Wait.js';
 // Decorators
@@ -15,9 +18,12 @@ import CreateForceSuccessNode from './decorators/ForceSuccess.js';
 
 const CreateCompositeHandlers = {
     'selector': CreateSelectorNode,
-    'random-selector': CreateRandomSelectorNode,
     'sequence': CreateSequenceNode,
+    'switch-selector': CreateSwitchSelectorNode,
+    'if-selector': CreateIfSelectorNode,
+    'random-selector': CreateRandomSelectorNode,
     'shuffle-selector': CreateShuffleNode,
+    'weight-selector': CreateWeightSelectorNode,
 }
 
 const CreateActionHandlers = {

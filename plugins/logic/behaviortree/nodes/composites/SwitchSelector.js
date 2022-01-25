@@ -1,28 +1,37 @@
 import Composite from '../Composite.js';
 import { SUCCESS, FAILURE, RUNNING, ERROR } from '../../constants.js';
 
-class IfBranch extends Composite {
+class SwitchSelector extends Composite {
     constructor(
         {
-            expression = 'true',
-            children = [],
-            name = 'IfBranch'
+            expression = null,
+            keys = undefined, // Or [key, ...]
+            children = {},    // Or [child, ...]
+            name = 'SwitchSelector'
         } = {},
         nodePool
     ) {
+
+        if (keys === undefined) {
+            keys = Object.keys(children);
+            children = Object.values(children);
+        }
 
         super(
             {
                 children: children,
                 name,
                 properties: {
-                    expression
+                    expression,
+                    keys
                 },
             },
             nodePool
         );
 
-        this.expression = this.addBooleanExpression(expression);
+        this.expression = this.addExpression(expression);
+
+        this.keys = keys;  // Index of children
     }
 
     open(tick) {
@@ -38,7 +47,14 @@ class IfBranch extends Composite {
         var nodeMemory = tick.getNodeMemory();
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
-            childIndex = tick.evalExpression(this.expression) ? 0 : 1;
+            var key = tick.evalExpression(this.expression);
+            childIndex = this.keys.indexOf(key);
+            if (childIndex === -1) {
+                childIndex = this.keys.indexOf('default');
+            }
+            if (childIndex === -1) {
+                return ERROR;
+            }
         }
 
         var child = this.children[childIndex];
@@ -48,4 +64,4 @@ class IfBranch extends Composite {
     }
 };
 
-export default IfBranch;
+export default SwitchSelector;

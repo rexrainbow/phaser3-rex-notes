@@ -1,15 +1,16 @@
 import { RandomSelector } from '../../../nodes';
 
-var CreateRandomSelectorNode = function (data, children) {
-    /* 
-    random-selector:
-        children:
-            - sequence
-            - sequence
-    */
-    return new RandomSelector({
-        children
-    });
+/*
+```yaml
+random-selector:
+    children:
+        - sequence
+        - sequence
+```
+*/
+
+var CreateRandomSelectorNode = function (data) {
+    return new RandomSelector(data);
 }
 
 export default CreateRandomSelectorNode;

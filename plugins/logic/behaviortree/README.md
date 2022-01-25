@@ -8,8 +8,8 @@ Reference: https://github.com/behavior3/behavior3js/
     - Selector : MemSelector
     - Sequence : MemSequence
     - SimpleParallel
-    - IfBranch
-    - Switch
+    - IfSelector
+    - SwitchSelector
     - WeightSelector : Random select a child with weight
     - ShuffleSelector : Shuffle children of selector
 - Decorators: [TODO] Abort children
