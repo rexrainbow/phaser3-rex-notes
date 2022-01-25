@@ -5,11 +5,7 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 ```yaml
 decorators:
     time-limit: 1000
-```
-or
-```yaml
-time-limit: 1000
-time-limit: {duration:1000}
+    # time-limit: {duration:1000}
 ```
 */
 

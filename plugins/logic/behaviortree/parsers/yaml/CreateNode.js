@@ -52,8 +52,8 @@ var CreateNode = function (data, customNodeHandlers) {
     }
 
     // 3. Create decorators
-    if (!isSingleValue) {
-        var decorators = (data.decorators) ? data.decorators : data;
+    var decorators = data.decorators;
+    if (!isSingleValue && decorators) {
         var handlerNames = [];
 
         for (var handlerName in decorators) {

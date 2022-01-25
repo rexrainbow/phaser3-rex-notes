@@ -4,11 +4,7 @@ import { ForceSuccess } from '../../../nodes';
 ```yaml
 decorators:
     force-true:
-```
-or
-```yaml
-force-success: 
-force-true:
+    # force-success: 
 ```
 */
 

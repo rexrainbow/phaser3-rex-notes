@@ -5,13 +5,7 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 ```yaml
 decorators:
     cooldown: 1000
-```
-or
-```yaml
-cooldown: 1000
-```
-```yaml
-cooldown: {duration:1000}
+    # cooldown: {duration:1000}
 ```
 */
 

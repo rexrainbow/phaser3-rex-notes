@@ -5,10 +5,6 @@ import { Invert } from '../../../nodes';
 decorators:
     invert: 
 ```
-or
-```yaml
-invert: 
-```
 */
 
 var CreateInvertNode = function (data, child) {
