@@ -36,7 +36,7 @@ class Parallel extends Composite {
         var nodeMemory = tick.getNodeMemory();
         var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
-        var hasAnyFinishStatus = false;        
+        var hasAnyFinishStatus = false;
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
             var status = this.children[childIndex]._execute(tick);

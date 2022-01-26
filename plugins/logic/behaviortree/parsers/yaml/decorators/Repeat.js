@@ -4,7 +4,8 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 /*
 ```yaml
 decorators:
-    repeat: 3
+    repeat:
+    # repeat: 3
     # repeat: {maxLoop:3}
 ```
 */

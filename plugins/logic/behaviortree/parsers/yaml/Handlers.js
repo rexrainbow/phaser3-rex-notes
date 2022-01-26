@@ -10,6 +10,8 @@ import CreateWeightSelectorNode from './composites/WeightSelector.js';
 import CreateWaitNode from './actions/Wait.js';
 // Decorators
 import CreateRepeatNode from './decorators/Repeat.js';
+import CreateRepeatUntilFailureNode from './decorators/RepeatUntilFailure.js';
+import CreateRepeatUntilSuccessNode from './decorators/RepeatUntilSuccess.js';
 import CreateIfNode from './decorators/If.js';
 import CreateCooldownNode from './decorators/Cooldown.js';
 import CreateTimeLimitNode from './decorators/TimeLimit.js';
@@ -32,12 +34,13 @@ const CreateActionHandlers = {
 
 const CreateDecoratorHandles = {
     'repeat': CreateRepeatNode,
+    'rpeeat-until-false': CreateRepeatUntilFailureNode,
+    'repeat-until-true': CreateRepeatUntilSuccessNode,
     'if': CreateIfNode,
     'cooldown': CreateCooldownNode,
     'time-limit': CreateTimeLimitNode,
     'invert': CreateInvertNode,
     'force-true': CreateForceSuccessNode,
-    'force-success': CreateForceSuccessNode
 };
 
 export {
