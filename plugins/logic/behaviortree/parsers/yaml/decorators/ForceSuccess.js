@@ -2,7 +2,7 @@ import { ForceSuccess } from '../../../nodes';
 
 /*
 ```yaml
-decorators:
+conditions:
     force-true:
 ```
 */

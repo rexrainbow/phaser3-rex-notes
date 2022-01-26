@@ -4,11 +4,11 @@ import ClockPlugin from '../../plugins/clock-plugin.js';
 
 var content = `
 selector :
-    decorators:
+    conditions:
         repeat : 3
     children : 
         - sequence :
-            decorators:
+            conditions:
                 cooldown : 1000
             children : 
                 - print : |

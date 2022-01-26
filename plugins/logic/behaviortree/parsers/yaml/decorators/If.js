@@ -3,7 +3,7 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*
 ```yaml
-decorators:
+conditions:
     if: A > 10
     # if: {expression:'A > 10'}
 ```

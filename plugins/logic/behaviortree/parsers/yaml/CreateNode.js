@@ -10,15 +10,15 @@ var CreateNode = function (data, customNodeHandlers) {
     // SingleValue : data is not an object
     var handlerName = data.__handlerName__,
         isSingleValue = data.__isSingleValue__;
-    var children, decorators;
+    var children, conditions;
     if (isSingleValue) {
         // Get origin data
         data = data[handlerName];
     } else {
         children = data.children;
-        decorators = data.decorators;
+        conditions = data.conditions;
 
-        delete data.decorators;
+        delete data.conditions;
     }
 
     // 1. Replace node data of child to node instance of child
@@ -68,9 +68,9 @@ var CreateNode = function (data, customNodeHandlers) {
     var retNode = handler(data);
 
     // 3. Create decorator instance
-    if (decorators) {
-        var handlerNames = Object.keys(decorators);
-        // Create decorators from last to first
+    if (conditions) {
+        var handlerNames = Object.keys(conditions);
+        // Create conditions from last to first
         for (var i = handlerNames.length - 1; i >= 0; i--) {
             var handlerName = handlerNames[i];
             var handler;
@@ -81,7 +81,7 @@ var CreateNode = function (data, customNodeHandlers) {
             } else {
                 throw `Can't create '${handlerName}' decorator node`
             }
-            retNode = handler(decorators[handlerName], retNode);
+            retNode = handler(conditions[handlerName], retNode);
         }
     }
 

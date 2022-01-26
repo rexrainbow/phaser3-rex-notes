@@ -2,7 +2,7 @@ import { Invert } from '../../../nodes';
 
 /*
 ```yaml
-decorators:
+conditions:
     invert: 
 ```
 */

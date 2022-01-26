@@ -3,7 +3,7 @@ import IsPlainObject from '../../../../../utils/object/IsPlainObject.js';
 
 /*
 ```yaml
-decorators:
+conditions:
     repeat-until-false:
     # repeat-until-false: 3
     # repeat-until-false: {maxLoop:3}
