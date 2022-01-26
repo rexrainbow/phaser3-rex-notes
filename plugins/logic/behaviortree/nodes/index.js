@@ -11,7 +11,7 @@ import Wait from './actions/Wait.js';
 
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
-import SimpleParallel from './composites/SimpleParallel.js';
+import Parallel from './composites/Parallel.js';
 import IfSelector from './composites/IfSelector.js';
 import SwitchSelector from './composites/SwitchSelector.js';
 import WeightSelector from './composites/WeightSelector.js';
@@ -43,7 +43,7 @@ export {
 
     Selector,
     Sequence,
-    SimpleParallel,
+    Parallel,
     IfSelector,
     SwitchSelector,
     WeightSelector,

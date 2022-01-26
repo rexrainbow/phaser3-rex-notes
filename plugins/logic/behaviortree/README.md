@@ -7,7 +7,7 @@ Reference: https://github.com/behavior3/behavior3js/
 - Composite Nodes: [TODO] Close child nodes
     - Selector : MemSelector
     - Sequence : MemSequence
-    - SimpleParallel
+    - Parallel
     - IfSelector
     - SwitchSelector
     - WeightSelector : Random select a child with weight

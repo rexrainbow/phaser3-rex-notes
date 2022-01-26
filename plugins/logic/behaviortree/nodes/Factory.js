@@ -11,7 +11,7 @@ import Wait from './actions/Wait.js';
 
 import Selector from './composites/Selector.js';
 import Sequence from './composites/Sequence.js';
-import SimpleParallel from './composites/SimpleParallel.js';
+import Parallel from './composites/Parallel.js';
 import IfSelector from './composites/IfSelector.js';
 import SwitchSelector from './composites/SwitchSelector.js';
 import WeightSelector from './composites/WeightSelector.js';
@@ -56,8 +56,8 @@ ObjectFactory.register('selector', function (config) {
 ObjectFactory.register('sequence', function (config) {
     return new Sequence(config);
 });
-ObjectFactory.register('simpleParallel', function (config) {
-    return new SimpleParallel(config);
+ObjectFactory.register('parallel', function (config) {
+    return new Parallel(config);
 });
 ObjectFactory.register('ifSelector', function (config) {
     return new IfSelector(config);
@@ -119,7 +119,7 @@ SetValue(window, 'RexPlugins.BehaviorTree.Wait', Wait);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Selector', Selector);
 SetValue(window, 'RexPlugins.BehaviorTree.Sequence', Sequence);
-SetValue(window, 'RexPlugins.BehaviorTree.SimpleParallel', SimpleParallel);
+SetValue(window, 'RexPlugins.BehaviorTree.Parallel', Parallel);
 SetValue(window, 'RexPlugins.BehaviorTree.IfSelector', IfSelector);
 SetValue(window, 'RexPlugins.BehaviorTree.SwitchSelector', SwitchSelector);
 SetValue(window, 'RexPlugins.BehaviorTree.WeightSelector', WeightSelector);
@@ -151,7 +151,7 @@ export {
 
     Selector,
     Sequence,
-    SimpleParallel,
+    Parallel,
     IfSelector,
     SwitchSelector,
     WeightSelector,

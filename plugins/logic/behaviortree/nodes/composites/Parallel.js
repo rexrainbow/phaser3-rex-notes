@@ -2,12 +2,12 @@ import Composite from '../Composite.js';
 import { RUNNING } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
-class SimpleParallel extends Composite {
+class Parallel extends Composite {
     constructor(
         {
             finishMode = 0,
             children = [],
-            name = 'SimpleParallel'
+            name = 'Parallel'
         } = {},
         nodePool
     ) {
@@ -15,7 +15,7 @@ class SimpleParallel extends Composite {
         super(
             {
                 children,
-                name,                
+                name,
                 properties: {
                     finishMode
                 },
@@ -24,66 +24,65 @@ class SimpleParallel extends Composite {
         );
 
         this.finishMode = finishMode;
-        this.mainTaskStatus = undefined;
     }
 
     open(tick) {
         var nodeMemory = tick.getNodeMemory();
         nodeMemory.$runningChildren = this.children.map((child, index) => index);
-        this.mainTaskStatus = RUNNING;
+        nodeMemory.$mainTaskStatus = RUNNING;
     }
 
     tick(tick) {
         var nodeMemory = tick.getNodeMemory();
         var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
+        var hasAnyFinishStatus = false;        
         for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
             var childIndex = childIndexes[i];
             var status = this.children[childIndex]._execute(tick);
             statusMap[childIndex] = status;
 
-            // Save status of main task
-            if (childIndex === 0) {
-                this.mainTaskStatus = status;
+            if (status !== RUNNING) {
+                hasAnyFinishStatus = true;
+
+                if (childIndex === 0) {
+                    nodeMemory.$mainTaskStatus = status;
+                }
             }
         }
 
+        // Clear none-running child
+        if (hasAnyFinishStatus) {
+            for (var childIndex in statusMap) {
+                if (statusMap[childIndex] !== RUNNING) {
+                    RemoveItem(childIndexes, parseInt(childIndex));
+                }
+            }
+        }
+
+        var mainTaskStatus = nodeMemory.$mainTaskStatus;
         if (this.finishMode === 0) {
-            if (this.mainTaskStatus !== RUNNING) {
+            if (mainTaskStatus !== RUNNING) {
                 // Main task is not running
                 // TODO: Abort running tasks
                 for (var childIndex in statusMap) {
                     // this.children[childIndex].abort();
                 }
-
-                return this.mainTaskStatus;
-            } else {
-                // Clear not-running child
-                for (var childIndex in statusMap) {
-                    if (statusMap[childIndex] !== RUNNING) {
-                        RemoveItem(childIndexes, childIndex);
-                    }
-                }
-                return RUNNING;
             }
+            return mainTaskStatus;
+
         } else {
-            // Clear not-running child
             var hasAnyRunningChild = false;
             for (var childIndex in statusMap) {
-                if (statusMap[childIndex] !== RUNNING) {
-                    RemoveItem(childIndexes, childIndex);
-                } else {
+                if (statusMap[childIndex] === RUNNING) {
                     hasAnyRunningChild = true;
+                    break;
                 }
             }
 
-            if (!hasAnyRunningChild) {
-                return this.mainTaskStatus;
-            } else {
-                return RUNNING;
-            }
+            return (hasAnyRunningChild) ? RUNNING : mainTaskStatus;
         }
     }
 };
 
-export default SimpleParallel;
+export default Parallel;

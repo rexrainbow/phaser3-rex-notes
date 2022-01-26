@@ -19,7 +19,7 @@ import {
 
     Selector,
     Sequence,
-    SimpleParallel,
+    Parallel,
     IfSelector,
     SwitchSelector,
     WeightSelector,
@@ -66,7 +66,7 @@ export {
 
     Selector,
     Sequence,
-    SimpleParallel,
+    Parallel,
     IfSelector,
     SwitchSelector,
     WeightSelector,
