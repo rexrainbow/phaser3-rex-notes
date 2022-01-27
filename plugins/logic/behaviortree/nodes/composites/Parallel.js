@@ -1,5 +1,5 @@
 import Composite from '../Composite.js';
-import { RUNNING } from '../../constants.js';
+import { SUCCESS, FAILURE, RUNNING } from '../../constants.js';
 import RemoveItem from '../../../../utils/array/Remove.js';
 
 class Parallel extends Composite {
@@ -31,10 +31,13 @@ class Parallel extends Composite {
     open(tick) {
         var nodeMemory = tick.getNodeMemory();
         nodeMemory.$runningChildren = this.children.map((child, index) => index);
-        nodeMemory.$mainTaskStatus = RUNNING;
     }
 
     tick(tick) {
+        if (this.children.length === 0) {
+            return ERROR;
+        }
+
         var nodeMemory = tick.getNodeMemory();
         var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
@@ -44,12 +47,11 @@ class Parallel extends Composite {
             var status = this.children[childIndex]._execute(tick);
             statusMap[childIndex] = status;
 
-            if (status !== RUNNING) {
+            if (childIndex === 0) {
+                nodeMemory.$mainTaskStatus = status;
+            }
+            if ((status === SUCCESS) || (status === FAILURE)) {
                 hasAnyFinishStatus = true;
-
-                if (childIndex === 0) {
-                    nodeMemory.$mainTaskStatus = status;
-                }
             }
         }
 
@@ -74,15 +76,7 @@ class Parallel extends Composite {
             return mainTaskStatus;
 
         } else {
-            var hasAnyRunningChild = false;
-            for (var childIndex in statusMap) {
-                if (statusMap[childIndex] === RUNNING) {
-                    hasAnyRunningChild = true;
-                    break;
-                }
-            }
-
-            return (hasAnyRunningChild) ? RUNNING : mainTaskStatus;
+            return (childIndexes.length > 0) ? RUNNING : mainTaskStatus;
         }
     }
 };
