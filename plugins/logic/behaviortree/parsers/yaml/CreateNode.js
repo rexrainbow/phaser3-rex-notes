@@ -10,13 +10,14 @@ var CreateNode = function (data, customNodeHandlers) {
     // SingleValue : data is not an object
     var handlerName = data.__handlerName__,
         isSingleValue = data.__isSingleValue__;
-    var children, conditions;
+    var children, conditions, services;
     if (isSingleValue) {
         // Get origin data
         data = data[handlerName];
     } else {
         children = data.children;
         conditions = data.conditions;
+        services = data.services;
 
         delete data.conditions;
     }
@@ -54,7 +55,15 @@ var CreateNode = function (data, customNodeHandlers) {
         }
     }
 
-    // 2. Create (composite/action) node instance
+    // 2. Replace node data of service to node instance of services
+    if (services) {
+        // services is an array
+        for (var i = 0, cnt = services.length; i < cnt; i++) {            
+            services[i] = CreateChildNode(services[i], customNodeHandlers);        
+        }
+    }
+
+    // 3. Create (composite/action) node instance
     var handler;
     if (handlerName in CreateCompositeHandlers) {
         handler = CreateCompositeHandlers[handlerName];
@@ -63,11 +72,11 @@ var CreateNode = function (data, customNodeHandlers) {
     } else if (handlerName in customNodeHandlers) {
         handler = customNodeHandlers[handlerName];
     } else {
-        throw `Can't create '${handlerName}' composite/action node`
-    }    
+        throw `Can't create '${handlerName}' composite/action/service node`
+    }
     var retNode = handler(data);
 
-    // 3. Create decorator instance
+    // 4. Create decorator instance
     if (conditions) {
         var handlerNames = Object.keys(conditions);
         // Create conditions from last to first

@@ -17,6 +17,9 @@ selector :
                 - wait : 500
                 - print : |
                     TaskA.End : {{$currentTime}}
+            services :
+                - print-service: |
+                    {{$currentTime}}
         - sequence :
             title: TaskB
             children : 
@@ -50,6 +53,33 @@ var CreatePrintNode = function (text) {
     });
 }
 
+class PrintService extends RexPlugins.BehaviorTree.Service {
+    constructor({
+        text = '',
+        interval = 70
+    } = {}) {
+        super({
+            name: 'MyPrintService',
+            interval: interval,
+            properties: { text: text },
+        });
+
+        this.textExpression = this.addStringTemplateExpression(text);
+    }
+
+    tick(tick) {
+        var text = this.textExpression.eval(tick.blackboardContext);
+        console.log(`Print-Service: ${text}`);
+    }
+}
+
+var CreatePrintServiceNode = function (text) {
+    return new PrintService({
+        text: text
+    });
+}
+
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -65,7 +95,8 @@ class Demo extends Phaser.Scene {
         var tree = btAdd.behaviorTree()
             .setRoot(
                 btAdd.yaml(content, {
-                    'print': CreatePrintNode
+                    'print': CreatePrintNode,
+                    'print-service': CreatePrintServiceNode
                 })
             )
 
