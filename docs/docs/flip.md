@@ -5,6 +5,11 @@ Flipping game object to another face by scaling width/height.
 - Author: Rex
 - Behavior of game object
 
+## Live demos
+
+- [Flip image](https://codepen.io/rexrainbow/pen/OJLWzMj)
+- [Flip ui](https://codepen.io/rexrainbow/pen/xxKgYYX)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/flip), [Sample code-2](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-flip)
