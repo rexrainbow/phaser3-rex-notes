@@ -19,6 +19,26 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
     }
 }
 
+class MyPrintService extends RexPlugins.BehaviorTree.Service {
+    constructor({
+        text = '',
+        interval = 70
+    } = {}) {
+        super({
+            name: 'MyPrintService',
+            interval: interval,
+            properties: { text: text },
+        });
+
+        this.textExpression = this.addStringTemplateExpression(text);
+    }
+
+    tick(tick) {
+        var text = this.textExpression.eval(tick.blackboardContext);
+        console.log(`Print-Service: ${text}`);
+    }
+}
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -46,16 +66,17 @@ class Demo extends Phaser.Scene {
         }
         var tree = btAdd.behaviorTree()
             .setRoot(
-                btAdd.parallel({
-                    finishMode: 0,  // 0|1
+                btAdd.sequence({
                     children: [
-                        CreateTask('TaskA', 500),
-                        btAdd.repeat({
-                            maxLoop: 10,
-                            child: CreateTask('Sub-task', 70),
-                        })
+                        CreateTask('TaskA', 500)
+                            .setTitle('TaskA')
+                            .addService(new MyPrintService({ text: `{{$currentTime}}` })),
+
+                        CreateTask('TaskB', 500)
+                            .setTitle('TaskB')
                     ]
                 })
+
             )
 
         var blackboard = btAdd.blackboard()
@@ -65,7 +86,7 @@ class Demo extends Phaser.Scene {
             .on('update', function (time, delta) {
                 blackboard.setCurrentTime(time);
                 var state = tree.tick(blackboard);
-                // console.log(`Run tick ${state}`);
+                console.log(`Run tick ${state}`);
 
                 // Stop ticking
                 if (state !== 3) {

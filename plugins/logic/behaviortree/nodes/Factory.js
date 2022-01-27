@@ -2,6 +2,7 @@ import BaseNode from './BaseNode.js';
 import Action from './Action.js';
 import Composite from './Composite.js';
 import Decorator from './Decorator';
+import Service from './Service.js';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
@@ -110,6 +111,7 @@ ObjectFactory.register('if', function (config) {
 SetValue(window, 'RexPlugins.BehaviorTree.Action', Action);
 SetValue(window, 'RexPlugins.BehaviorTree.Composite', Composite);
 SetValue(window, 'RexPlugins.BehaviorTree.Decorator', Decorator);
+SetValue(window, 'RexPlugins.BehaviorTree.Service', Service);
 
 SetValue(window, 'RexPlugins.BehaviorTree.Succeeder', Succeeder);
 SetValue(window, 'RexPlugins.BehaviorTree.Failer', Failer);

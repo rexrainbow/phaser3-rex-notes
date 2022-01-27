@@ -33,7 +33,7 @@ class Wait extends Action {
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;
 
-        if ((currTime - startTime) <= duration) {
+        if ((currTime - startTime) < duration) {
             return RUNNING;
         }
 

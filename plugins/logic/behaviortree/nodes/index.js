@@ -2,6 +2,7 @@ import BaseNode from './BaseNode.js';
 import Action from './Action.js';
 import Composite from './Composite.js';
 import Decorator from './Decorator.js';
+import Service from './Service.js';
 
 import Succeeder from './actions/Succeeder.js';
 import Failer from './actions/Failer.js';
@@ -34,6 +35,7 @@ export {
     Action,
     Composite,
     Decorator,
+    Service,
 
     Succeeder,
     Failer,

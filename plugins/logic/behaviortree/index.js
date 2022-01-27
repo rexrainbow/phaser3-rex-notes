@@ -1,4 +1,7 @@
-import { SUCCESS, FAILURE, RUNNING, ERROR, COMPOSITE, DECORATOR, ACTION, CONDITION } from './constants';
+import {
+    SUCCESS, FAILURE, RUNNING, ERROR,
+    COMPOSITE, DECORATOR, ACTION, SERVICE
+} from './constants';
 import CreateUUID from './utils/CreateUUID.js';
 
 import BehaviorTree from './behaviortree/BehaviorTree.js';
@@ -43,10 +46,12 @@ export {
     FAILURE,
     RUNNING,
     ERROR,
+
     COMPOSITE,
     DECORATOR,
     ACTION,
-    CONDITION,
+    SERVICE,
+
     CreateUUID,
 
     BehaviorTree,

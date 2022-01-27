@@ -43,7 +43,7 @@ class TimeLimit extends Decorator {
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;
 
-        if ((currTime - startTime) > duration) {
+        if ((currTime - startTime) >= duration) {
             return FAILURE;
         }
 

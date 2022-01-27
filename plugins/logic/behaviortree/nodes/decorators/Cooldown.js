@@ -44,7 +44,7 @@ class Cooldown extends Decorator {
 
         if (
             (lastEndTime !== undefined) &&
-            ((currTime - lastEndTime) <= cooldownTime)
+            ((currTime - lastEndTime) < cooldownTime)
         ) {
             return FAILURE;
         }

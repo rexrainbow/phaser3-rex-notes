@@ -8,7 +8,8 @@ class Composite extends BaseNode {
             children = [],
             name = 'Composite',
             title,
-            properties
+            properties,
+            services,
         } = {},
         nodePool
     ) {
@@ -24,6 +25,12 @@ class Composite extends BaseNode {
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             this.addChild(children[i], nodePool);
         }
+
+        if (services) {
+            for (var i = 0, cnt = services.length; i < cnt; i++) {
+                this.addService(services[i], nodePool);
+            }
+        }
     }
 
     addChild(node, nodePool) {
@@ -37,6 +44,36 @@ class Composite extends BaseNode {
         }
 
         return this;
+    }
+
+
+    addService(node, nodePool) {
+        if (typeof (node) === 'string') {  // Node ID
+            node = nodePool[node];
+        }
+
+        if (this.services === undefined) {
+            this.services = [];
+        }
+
+        if (this.services.indexOf(node) === -1) {
+            this.services.push(node);
+            node.setParent(this);
+        }
+
+        return this;
+    }
+
+    _tick(tick) {
+        tick._tickNode(this);
+
+        if (this.services) {
+            for (var i = 0, cnt = this.services.length; i < cnt; i++) {
+                this.services[i]._tick(tick);
+            }
+        }
+
+        return this.tick(tick);
     }
 
     _close(tick) {

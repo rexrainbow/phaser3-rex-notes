@@ -1,5 +1,5 @@
 import { BreadthFirstSearch } from './Traversal.js';
-import { COMPOSITE, DECORATOR } from '../constants.js';
+import { ACTION, COMPOSITE, DECORATOR } from '../constants.js';
 import Clone from '../../../utils/object/Clone.js';
 
 var Dump = function () {
@@ -34,12 +34,25 @@ var Dump = function () {
         switch (node.category) {
             case COMPOSITE:
                 spec.children = node.children.map((child) => child.id);
+
+                if (node.services) {
+                    spec.services = node.services.map((child) => child.id);
+                }
+
                 break;
 
             case DECORATOR:
                 if (node.child) {
                     spec.child = node.child.id;
                 }
+
+                break;
+
+            case ACTION:
+                if (node.services) {
+                    spec.services = node.services.map((child) => child.id);
+                }
+
                 break;
         }
 

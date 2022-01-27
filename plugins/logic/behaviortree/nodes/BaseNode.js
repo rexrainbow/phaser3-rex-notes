@@ -29,6 +29,21 @@ export default class BaseNode {
         this.properties = properties || {};
     }
 
+    setTitle(title) {
+        this.title = title;
+        return this;
+    }
+
+    setName(name) {
+        this.name = name;
+        return this;
+    }
+
+    setDescription(description) {
+        this.description = description;
+        return this;
+    }
+
     setParent(parent) {
         this.parent = parent;
         return this;

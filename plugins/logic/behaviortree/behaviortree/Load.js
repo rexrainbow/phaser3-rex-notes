@@ -32,6 +32,9 @@ var Load = function (data, names) {
         if (spec.hasOwnProperty('child')) {
             config.child = spec.child;
         }
+        if (spec.hasOwnProperty('services')) {
+            config.services = spec.services;
+        }
 
         config = Object.assign(
             config,
