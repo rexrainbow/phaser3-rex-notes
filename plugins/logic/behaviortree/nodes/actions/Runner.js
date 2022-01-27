@@ -4,11 +4,13 @@ import { RUNNING } from '../../constants.js';
 class Runner extends Action {
 
     constructor({
+        services,
         title,
         name = 'Runner'
     } = {}) {
 
         super({
+            services,
             title,
             name,
         });

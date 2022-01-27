@@ -19,7 +19,7 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
     }
 }
 
-class MyPrintService extends RexPlugins.BehaviorTree.Service {
+class PrintService extends RexPlugins.BehaviorTree.Service {
     constructor({
         text = '',
         interval = 70
@@ -70,7 +70,7 @@ class Demo extends Phaser.Scene {
                     children: [
                         CreateTask('TaskA', 500)
                             .setTitle('TaskA')
-                            .addService(new MyPrintService({ text: `{{$currentTime}}` })),
+                            .addService(new PrintService({ text: `{{$currentTime}}` })),
 
                         CreateTask('TaskB', 500)
                             .setTitle('TaskB')

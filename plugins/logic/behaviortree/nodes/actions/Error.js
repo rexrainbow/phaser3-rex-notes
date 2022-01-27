@@ -4,11 +4,13 @@ import { ERROR } from '../../constants.js';
 class Error extends Action {
 
     constructor({
+        services,
         title,
         name = 'Error',
     } = {}) {
 
         super({
+            services,
             title,
             name,
         });

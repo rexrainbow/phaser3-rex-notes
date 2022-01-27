@@ -4,11 +4,13 @@ import { FAILURE } from '../../constants.js';
 class Failer extends Action {
 
     constructor({
+        services,
         title,
         name = 'Failer'
     } = {}) {
 
         super({
+            services,
             title,
             name,
         });

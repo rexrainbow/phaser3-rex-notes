@@ -5,6 +5,7 @@ class Wait extends Action {
 
     constructor({
         duration = 0,
+        services,
         title,
         name = 'Wait'
     } = {}) {
@@ -15,6 +16,7 @@ class Wait extends Action {
             properties: {
                 duration
             },
+            services,
         });
 
         this.durationExpression = this.addExpression(duration);

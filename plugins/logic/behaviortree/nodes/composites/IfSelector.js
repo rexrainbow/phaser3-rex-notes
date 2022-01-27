@@ -6,6 +6,7 @@ class IfSelector extends Composite {
         {
             expression = 'true',
             children = [],
+            services,
             title,
             name = 'IfSelector'
         } = {},
@@ -15,6 +16,7 @@ class IfSelector extends Composite {
         super(
             {
                 children: children,
+                services,
                 title,
                 name,
                 properties: {

@@ -4,6 +4,7 @@ class RandomSelector extends Composite {
     constructor(
         {
             children = [],
+            services,
             title,
             name = 'RandomSelector'
         } = {},
@@ -13,6 +14,7 @@ class RandomSelector extends Composite {
         super(
             {
                 children,
+                services,
                 title,
                 name,
             },

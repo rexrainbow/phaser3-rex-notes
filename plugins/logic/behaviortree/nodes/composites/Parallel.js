@@ -7,6 +7,7 @@ class Parallel extends Composite {
         {
             finishMode = 0,
             children = [],
+            services,
             title,
             name = 'Parallel'
         } = {},
@@ -16,6 +17,7 @@ class Parallel extends Composite {
         super(
             {
                 children,
+                services,
                 title,
                 name,
                 properties: {

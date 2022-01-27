@@ -7,6 +7,7 @@ class SwitchSelector extends Composite {
             expression = null,
             keys = undefined, // Or [key, ...]
             children = {},    // Or [child, ...]
+            services,
             title,
             name = 'SwitchSelector'
         } = {},
@@ -21,6 +22,7 @@ class SwitchSelector extends Composite {
         super(
             {
                 children: children,
+                services,
                 title,
                 name,
                 properties: {

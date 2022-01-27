@@ -19,6 +19,26 @@ class PrintAction extends RexPlugins.BehaviorTree.Action {
     }
 }
 
+class PrintService extends RexPlugins.BehaviorTree.Service {
+    constructor({
+        text = '',
+        interval = 70
+    } = {}) {
+        super({
+            name: 'MyPrintService',
+            interval: interval,
+            properties: { text: text },
+        });
+
+        this.textExpression = this.addStringTemplateExpression(text);
+    }
+
+    tick(tick) {
+        var text = this.textExpression.eval(tick.blackboardContext);
+        console.log(`Print-Service: ${text}`);
+    }
+}
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -53,6 +73,7 @@ class Demo extends Phaser.Scene {
                             btAdd.cooldown({
                                 duration: 1000,
                                 child: CreateTask('TaskA', 500)
+                                    .addService(new PrintService({ text: `{{$currentTime}}` })),
                             }),
                             CreateTask('TaskB', 1000)
                         ]
@@ -65,7 +86,8 @@ class Demo extends Phaser.Scene {
         var data = tree.dump();
         // Load
         var tree2 = btAdd.behaviorTree().load(data, {
-            MyAction: PrintAction
+            MyAction: PrintAction,
+            MyPrintService: PrintService
         });
 
         var blackboard = btAdd.blackboard()

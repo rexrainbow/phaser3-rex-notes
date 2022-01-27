@@ -5,6 +5,7 @@ class Selector extends Composite {
     constructor(
         {
             children = [],
+            services,
             title,
             name = 'Selector'
         } = {},
@@ -14,6 +15,7 @@ class Selector extends Composite {
         super(
             {
                 children,
+                services,
                 title,
                 name,
             },
