@@ -7,6 +7,7 @@ class ForceSuccess extends Decorator {
     constructor(
         {
             child = null,
+            title,
             name = 'ForceSuccess'
         } = {},
         nodePool
@@ -15,6 +16,7 @@ class ForceSuccess extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
             },
             nodePool

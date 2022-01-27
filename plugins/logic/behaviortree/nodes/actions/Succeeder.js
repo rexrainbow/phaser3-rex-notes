@@ -4,10 +4,12 @@ import { SUCCESS } from '../../constants.js';
 class Succeeder extends Action {
 
     constructor({
+        title,
         name = 'Succeeder'
     } = {}) {
 
         super({
+            title,
             name,
         });
     }

@@ -6,6 +6,7 @@ class Cooldown extends Decorator {
         {
             duration = 0,
             child = null,
+            title,
             name = 'Cooldown'
         } = {},
         nodePool
@@ -14,6 +15,7 @@ class Cooldown extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
                 properties: {
                     duration

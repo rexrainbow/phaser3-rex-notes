@@ -5,10 +5,12 @@ class Wait extends Action {
 
     constructor({
         duration = 0,
+        title,
         name = 'Wait'
     } = {}) {
 
         super({
+            title,
             name,
             properties: {
                 duration

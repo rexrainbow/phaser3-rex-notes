@@ -6,6 +6,7 @@ class ShuffleSelector extends Composite {
     constructor(
         {
             children = [],
+            title,
             name = 'ShuffleSelector'
         } = {},
         nodePool
@@ -14,6 +15,7 @@ class ShuffleSelector extends Composite {
         super(
             {
                 children,
+                title,
                 name,
             },
             nodePool

@@ -5,6 +5,7 @@ class Sequence extends Composite {
     constructor(
         {
             children = [],
+            title,
             name = 'Sequence'
         } = {},
         nodePool
@@ -13,6 +14,7 @@ class Sequence extends Composite {
         super(
             {
                 children,
+                title,
                 name,
             },
             nodePool

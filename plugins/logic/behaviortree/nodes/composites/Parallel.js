@@ -7,6 +7,7 @@ class Parallel extends Composite {
         {
             finishMode = 0,
             children = [],
+            title,
             name = 'Parallel'
         } = {},
         nodePool
@@ -15,6 +16,7 @@ class Parallel extends Composite {
         super(
             {
                 children,
+                title,
                 name,
                 properties: {
                     finishMode

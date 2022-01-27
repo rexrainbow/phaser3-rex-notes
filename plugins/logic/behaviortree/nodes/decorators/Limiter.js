@@ -7,6 +7,7 @@ class Limiter extends Decorator {
         {
             maxLoop = 1,
             child = null,
+            title,
             name = 'Limiter'
         } = {},
         nodePool
@@ -15,6 +16,7 @@ class Limiter extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
                 properties: {
                     maxLoop

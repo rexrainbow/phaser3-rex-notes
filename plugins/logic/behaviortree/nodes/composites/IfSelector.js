@@ -6,6 +6,7 @@ class IfSelector extends Composite {
         {
             expression = 'true',
             children = [],
+            title,
             name = 'IfSelector'
         } = {},
         nodePool
@@ -14,6 +15,7 @@ class IfSelector extends Composite {
         super(
             {
                 children: children,
+                title,
                 name,
                 properties: {
                     expression

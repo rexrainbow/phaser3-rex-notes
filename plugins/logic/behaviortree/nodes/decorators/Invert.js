@@ -6,6 +6,7 @@ class Invert extends Decorator {
     constructor(
         {
             child = null,
+            title,
             name = 'Invert'
         } = {},
         nodePool
@@ -14,6 +15,7 @@ class Invert extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
             },
             nodePool

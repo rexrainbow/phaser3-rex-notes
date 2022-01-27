@@ -7,6 +7,7 @@ class SwitchSelector extends Composite {
             expression = null,
             keys = undefined, // Or [key, ...]
             children = {},    // Or [child, ...]
+            title,
             name = 'SwitchSelector'
         } = {},
         nodePool
@@ -20,6 +21,7 @@ class SwitchSelector extends Composite {
         super(
             {
                 children: children,
+                title,
                 name,
                 properties: {
                     expression,

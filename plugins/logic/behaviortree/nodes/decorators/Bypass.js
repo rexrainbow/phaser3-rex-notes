@@ -7,6 +7,7 @@ class Bypass extends Decorator {
     constructor(
         {
             child = null,
+            title,
             name = 'Bypass'
         } = {},
         nodePool
@@ -15,6 +16,7 @@ class Bypass extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
             },
             nodePool

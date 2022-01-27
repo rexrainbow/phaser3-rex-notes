@@ -7,6 +7,7 @@ class Repeat extends Decorator {
         {
             maxLoop = -1,
             child = null,
+            title,
             name = 'Repeat'
         } = {},
         nodePool
@@ -15,6 +16,7 @@ class Repeat extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
                 properties: {
                     maxLoop

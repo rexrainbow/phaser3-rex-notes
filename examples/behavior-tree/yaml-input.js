@@ -8,6 +8,7 @@ selector :
         repeat : 3
     children : 
         - sequence :
+            title: TaskA
             conditions:
                 cooldown : 1000
             children : 
@@ -17,6 +18,7 @@ selector :
                 - print : |
                     TaskA.End : {{$currentTime}}
         - sequence :
+            title: TaskB
             children : 
                 - print : |
                     TaskB.Start : {{$currentTime}}
@@ -66,6 +68,8 @@ class Demo extends Phaser.Scene {
                     'print': CreatePrintNode
                 })
             )
+
+        console.log(tree.dump());
 
         var blackboard = btAdd.blackboard();
         var clock = this.plugins.get('rexClock').add(this);

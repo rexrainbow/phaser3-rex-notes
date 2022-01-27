@@ -6,6 +6,7 @@ class TimeLimit extends Decorator {
         {
             duration = 0,
             child = null,
+            title,
             name = 'TimeLimit'
         } = {},
         nodePool
@@ -14,6 +15,7 @@ class TimeLimit extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
                 properties: {
                     duration

@@ -8,6 +8,7 @@ class If extends Decorator {
         {
             expression = 'true',
             child = null,
+            title,
             name = 'If'
         } = {},
         nodePool
@@ -16,6 +17,7 @@ class If extends Decorator {
         super(
             {
                 child,
+                title,
                 name,
                 properties: {
                     expression

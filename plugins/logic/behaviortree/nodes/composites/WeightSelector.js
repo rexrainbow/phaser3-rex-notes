@@ -8,6 +8,7 @@ class WeightSelector extends Composite {
             expression = null,
             weights = undefined,    // Or [weight, ...]
             children = [],          // [node, ...], or [{weight, node}, ...]
+            title,
             name = 'WeightSelector'
         } = {},
         nodePool
@@ -37,6 +38,7 @@ class WeightSelector extends Composite {
         super(
             {
                 children: children,
+                title,
                 name,
                 properties: {
                     expression,
