@@ -8,9 +8,14 @@ conditions:
 */
 
 var CreateForceSuccessNode = function (data, child) {
-    return new ForceSuccess({
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            child: child
+        }
+    }
+    return new ForceSuccess(data);
 }
 
 export default CreateForceSuccessNode;

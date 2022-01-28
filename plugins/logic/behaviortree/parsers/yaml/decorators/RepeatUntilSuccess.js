@@ -11,10 +11,15 @@ conditions:
 */
 
 var CreateRepeatUntilSuccessNode = function (data, child) {
-    return new RepeatUntilSuccess({
-        maxLoop: (IsPlainObject(data)) ? data.maxLoop : data,
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            maxLoop: data,
+            child: child
+        }
+    }
+    return new RepeatUntilSuccess(data)
 }
 
 export default CreateRepeatUntilSuccessNode;

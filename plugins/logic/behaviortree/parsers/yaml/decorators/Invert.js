@@ -8,9 +8,14 @@ conditions:
 */
 
 var CreateInvertNode = function (data, child) {
-    return new Invert({
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            child: child
+        }
+    }
+    return new Invert(data);
 }
 
 export default CreateInvertNode;

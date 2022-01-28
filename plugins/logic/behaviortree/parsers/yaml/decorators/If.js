@@ -10,10 +10,15 @@ conditions:
 */
 
 var CreateIfNode = function (data, child) {
-    return new If({
-        expression: (IsPlainObject(data)) ? data.expression : data,
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            expression: data,
+            child: child
+        }
+    }
+    return new If(data);
 }
 
 export default CreateIfNode;

@@ -11,10 +11,15 @@ conditions:
 */
 
 var CreateRepeatUntilFailureNode = function (data, child) {
-    return new RepeatUntilFailure({
-        maxLoop: (IsPlainObject(data)) ? data.maxLoop : data,
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            maxLoop: data,
+            child: child
+        }
+    }
+    return new RepeatUntilFailure(data);
 }
 
 export default CreateRepeatUntilFailureNode;

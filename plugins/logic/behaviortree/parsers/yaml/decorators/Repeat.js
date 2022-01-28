@@ -11,10 +11,15 @@ conditions:
 */
 
 var CreateRepeatNode = function (data, child) {
-    return new Repeat({
-        maxLoop: (IsPlainObject(data)) ? data.maxLoop : data,
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            maxLoop: data,
+            child: child
+        }
+    }
+    return new Repeat(data);
 }
 
 export default CreateRepeatNode;

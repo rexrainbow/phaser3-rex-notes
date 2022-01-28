@@ -10,10 +10,15 @@ conditions:
 */
 
 var CreateCooldownNode = function (data, child) {
-    return new Cooldown({
-        duration: (IsPlainObject(data)) ? data.duration : data,
-        child: child
-    })
+    if (IsPlainObject(data)) {
+        data.child = child;
+    } else {
+        data = {
+            duration: data,
+            child: child
+        }
+    }
+    return new Cooldown(data);
 }
 
 export default CreateCooldownNode;
