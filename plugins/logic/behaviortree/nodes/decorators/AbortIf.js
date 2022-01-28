@@ -36,9 +36,9 @@ class AbortIf extends Decorator {
             return ERROR;
         }
 
-        // child is not running
+        // child is running
         if (this.isChildRunning(tick)) {
-            // Abort child if eval result is false
+            // Abort child if eval result is true
             if (tick.evalExpression(this.expression)) {
                 return (this.returnSuccess) ? SUCCESS : FAILURE;
             }

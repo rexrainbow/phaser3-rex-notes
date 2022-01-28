@@ -36,7 +36,7 @@ class ContinueIf extends Decorator {
             return ERROR;
         }
 
-        // child is not running
+        // child is running
         if (this.isChildRunning(tick)) {
             // Abort child if eval result is false
             if (!tick.evalExpression(this.expression)) {
