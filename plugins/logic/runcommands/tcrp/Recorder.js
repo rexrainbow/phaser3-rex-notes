@@ -41,8 +41,8 @@ class Recorder extends ComponentBase {
     }
 
     start(startAt) {
-        this.clock.start(startAt);
         this.clear();
+        this.clock.start(startAt);
         return this;
     }
 
