@@ -29,6 +29,7 @@ class ForceSuccess extends Decorator {
             return ERROR;
         }
 
+        // Won't abort child
         var status = this.child._execute(tick);
 
         return SUCCESS;

@@ -29,6 +29,8 @@ import RepeatUntilFailure from './decorators/RepeatUntilFailure.js';
 import RepeatUntilSuccess from './decorators/RepeatUntilSuccess.js';
 import Limiter from './decorators/Limiter.js';
 import If from './decorators/If.js';
+import ContinueIf from './decorators/ContinueIf.js';
+import AbortIf from './decorators/AbortIf.js';
 
 export {
     BaseNode,
@@ -62,4 +64,6 @@ export {
     RepeatUntilSuccess,
     Limiter,
     If,
+    ContinueIf,
+    AbortIf,
 }

@@ -38,6 +38,7 @@ class TimeLimit extends Decorator {
             return ERROR;
         }
 
+        // Abort child when timeout
         var nodeMemory = this.getNodeMemory(tick);
         var currTime = tick.currentTime;
         var startTime = nodeMemory.$startTime;

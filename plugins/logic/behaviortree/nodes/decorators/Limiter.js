@@ -39,10 +39,12 @@ class Limiter extends Decorator {
             return ERROR;
         }
 
+        // Won't abort child
         var nodeMemory = this.getNodeMemory(tick);
         var maxLoop = nodeMemory.$maxLoop;
         var i = nodeMemory.$i;
 
+        // Open child before exceed maxLoop
         // Execute child 1 time in a tick
         if (i >= maxLoop) {
             return FAILURE;

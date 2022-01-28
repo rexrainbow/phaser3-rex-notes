@@ -32,6 +32,8 @@ import {
     RepeatUntilSuccess,
     Limiter,
     If,
+    ContinueIf,
+    AbortIf,
 } from './nodes/Factory.js';
 
 import { LoadYaml } from './parsers/yaml/Factory.js'
@@ -67,6 +69,8 @@ export {
     RepeatUntilSuccess,
     Limiter,
     If,
+    ContinueIf,
+    AbortIf,
 
     // Actions
     Succeeder,

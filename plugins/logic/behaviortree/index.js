@@ -39,6 +39,8 @@ import {
     RepeatUntilSuccess,
     Limiter,
     If,
+    ContinueIf,
+    AbortIf,
 } from './nodes';
 
 export {
@@ -88,4 +90,6 @@ export {
     RepeatUntilSuccess,
     Limiter,
     If,
+    ContinueIf,
+    AbortIf,
 };

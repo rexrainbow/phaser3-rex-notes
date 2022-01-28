@@ -2,14 +2,15 @@ import Decorator from '../Decorator.js';
 import { FAILURE, SUCCESS, ERROR } from '../../constants.js';
 
 
-class If extends Decorator {
+class ContinueIf extends Decorator {
 
     constructor(
         {
             expression = 'true',
+            returnSuccess = true,
             child = null,
             title,
-            name = 'If'
+            name = 'ContinueIf'
         } = {},
         nodePool
     ) {
@@ -27,6 +28,7 @@ class If extends Decorator {
         );
 
         this.expression = this.addBooleanExpression(expression);
+        this.returnSuccess = returnSuccess;
     }
 
     tick(tick) {
@@ -35,10 +37,10 @@ class If extends Decorator {
         }
 
         // child is not running
-        if (!this.isChildRunning(tick)) {
+        if (this.isChildRunning(tick)) {
             // Abort child if eval result is false
             if (!tick.evalExpression(this.expression)) {
-                return FAILURE;
+                return (this.returnSuccess) ? SUCCESS : FAILURE;
             }
         }
 
@@ -48,4 +50,4 @@ class If extends Decorator {
     }
 };
 
-export default If;
+export default ContinueIf;

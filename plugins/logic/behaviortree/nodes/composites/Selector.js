@@ -26,7 +26,7 @@ class Selector extends Composite {
 
     open(tick) {
         var nodeMemory = this.getNodeMemory(tick);
-        nodeMemory.$runningChild = 0;
+        nodeMemory.$runningChild = -1;  // No running child
     }
 
     tick(tick) {
@@ -35,18 +35,23 @@ class Selector extends Composite {
         }
 
         var nodeMemory = this.getNodeMemory(tick);
-
         var childIndex = nodeMemory.$runningChild;
         var status;
-        for (var i = childIndex, cnt = this.children.length; i < cnt; i++) {
-            status = this.children[i]._execute(tick);
+        if (childIndex < 0) {
+            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+                status = this.children[i]._execute(tick);
 
-            if ((status === RUNNING) || (status === SUCCESS)) {
-                break;
+                if ((status === RUNNING) || (status === SUCCESS)) {
+                    childIndex = i;
+                    break;
+                }
             }
+        } else {
+            var child = this.children[childIndex];
+            status = child._execute(tick);
         }
 
-        nodeMemory.$runningChild = (status === RUNNING) ? i : -1;
+        nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
         return status;
     }
 

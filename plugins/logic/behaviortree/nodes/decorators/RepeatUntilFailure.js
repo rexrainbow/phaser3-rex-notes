@@ -39,11 +39,13 @@ class RepeatUntilFailure extends Decorator {
             return ERROR;
         }
 
+        // Won't abort child
         var nodeMemory = this.getNodeMemory(tick);
         var maxLoop = nodeMemory.$maxLoop;
         var i = nodeMemory.$i;
         var status = ERROR;
 
+        // Open child before exceed maxLoop
         // Execute child many times in a tick
         while (maxLoop < 0 || i < maxLoop) {
             status = this.child._execute(tick);

@@ -1,5 +1,5 @@
 import Decorator from '../Decorator.js';
-import { SUCCESS, ERROR, FAILURE } from '../../constants.js';
+import { SUCCESS, ERROR, FAILURE, RUNNING } from '../../constants.js';
 
 class Repeat extends Decorator {
 
@@ -39,11 +39,13 @@ class Repeat extends Decorator {
             return ERROR;
         }
 
+        // Won't abort child
         var nodeMemory = this.getNodeMemory(tick);
         var maxLoop = nodeMemory.$maxLoop;
         var i = nodeMemory.$i;
         var status = SUCCESS;
 
+        // Open child before exceed maxLoop
         // Execute child many times in a tick
         while (maxLoop < 0 || i < maxLoop) {
             status = this.child._execute(tick);

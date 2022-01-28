@@ -29,6 +29,8 @@ import RepeatUntilFailure from './decorators/RepeatUntilFailure.js';
 import RepeatUntilSuccess from './decorators/RepeatUntilSuccess.js';
 import Limiter from './decorators/Limiter.js';
 import If from './decorators/If.js';
+import ContinueIf from './decorators/ContinueIf.js';
+import AbortIf from './decorators/AbortIf.js';
 
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../utils/object/SetValue.js';
@@ -107,6 +109,13 @@ ObjectFactory.register('limiter', function (config) {
 ObjectFactory.register('if', function (config) {
     return new If(config);
 });
+ObjectFactory.register('continueIf', function (config) {
+    return new ContinueIf(config);
+});
+ObjectFactory.register('abortIf', function (config) {
+    return new AbortIf(config);
+});
+
 
 SetValue(window, 'RexPlugins.BehaviorTree.Action', Action);
 SetValue(window, 'RexPlugins.BehaviorTree.Composite', Composite);
@@ -138,6 +147,8 @@ SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilFailure', RepeatUntilFailur
 SetValue(window, 'RexPlugins.BehaviorTree.RepeatUntilSuccess', RepeatUntilSuccess);
 SetValue(window, 'RexPlugins.BehaviorTree.Limiter', Limiter);
 SetValue(window, 'RexPlugins.BehaviorTree.If', If);
+SetValue(window, 'RexPlugins.BehaviorTree.ContinueIf', ContinueIf);
+SetValue(window, 'RexPlugins.BehaviorTree.AbortIf', AbortIf);
 
 export {
     BaseNode,
@@ -170,4 +181,6 @@ export {
     RepeatUntilSuccess,
     Limiter,
     If,
+    ContinueIf,
+    AbortIf,
 };

@@ -37,11 +37,13 @@ class Cooldown extends Decorator {
             return ERROR;
         }
 
+        // Won't abort child
         var nodeMemory = this.getNodeMemory(tick);
         var currTime = tick.currentTime;
         var lastEndTime = nodeMemory.$lastEndTime;
         var cooldownTime = nodeMemory.$cooldownTime;
 
+        // Open child after cooldown timeout
         if (
             (lastEndTime !== undefined) &&
             ((currTime - lastEndTime) < cooldownTime)

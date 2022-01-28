@@ -13,6 +13,8 @@ import CreateRepeatNode from './decorators/Repeat.js';
 import CreateRepeatUntilFailureNode from './decorators/RepeatUntilFailure.js';
 import CreateRepeatUntilSuccessNode from './decorators/RepeatUntilSuccess.js';
 import CreateIfNode from './decorators/If.js';
+import CreateContinueIfNode from './decorators/ContinueIf.js';
+import CreateAbortIfNode from './decorators/AbortIf.js';
 import CreateCooldownNode from './decorators/Cooldown.js';
 import CreateTimeLimitNode from './decorators/TimeLimit.js';
 import CreateInvertNode from './decorators/Invert.js';
@@ -37,6 +39,8 @@ const CreateDecoratorHandles = {
     'rpeeat-until-false': CreateRepeatUntilFailureNode,
     'repeat-until-true': CreateRepeatUntilSuccessNode,
     'if': CreateIfNode,
+    'continue-if': CreateContinueIfNode,
+    'abort-if': CreateAbortIfNode,
     'cooldown': CreateCooldownNode,
     'time-limit': CreateTimeLimitNode,
     'invert': CreateInvertNode,

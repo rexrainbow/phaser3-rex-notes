@@ -36,10 +36,13 @@ class Decorator extends BaseNode {
         return this;
     }
 
+    isChildRunning(tick) {
+        return this.child.getOpenState(tick);
+    }
+
     abortChildren(tick) {
-        var childNode = this.child;
-        if (childNode.getOpenState(tick)) {
-            childNode._abort(tick);
+        if (this.isChildRunning(tick)) {
+            this.child._abort(tick);
         }
     }
 };
