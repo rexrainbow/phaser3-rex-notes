@@ -36,7 +36,7 @@ class If extends Decorator {
 
         // child is not running
         if (!this.isChildRunning(tick)) {
-            // Abort child if eval result is false
+            // Return FAILURE to run next node
             if (!tick.evalExpression(this.expression)) {
                 return FAILURE;
             }

@@ -5,6 +5,7 @@ class TimeLimit extends Decorator {
     constructor(
         {
             duration = 0,
+            returnSuccess = true,
             child = null,
             title,
             name = 'TimeLimit'
@@ -18,13 +19,15 @@ class TimeLimit extends Decorator {
                 title,
                 name,
                 properties: {
-                    duration
+                    duration,
+                    returnSuccess
                 },
             },
             nodePool
         );
 
         this.durationExpression = this.addExpression(duration);
+        this.returnSuccess = returnSuccess;
     }
 
     open(tick) {
@@ -45,7 +48,7 @@ class TimeLimit extends Decorator {
         var duration = nodeMemory.$duration;
 
         if ((currTime - startTime) >= duration) {
-            return FAILURE;
+            return (this.returnSuccess) ? SUCCESS : FAILURE;
         }
 
         var status = this.child._execute(tick);
