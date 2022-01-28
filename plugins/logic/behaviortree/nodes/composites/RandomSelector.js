@@ -24,7 +24,7 @@ class RandomSelector extends Composite {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1;  // No running child
     }
 
@@ -33,7 +33,7 @@ class RandomSelector extends Composite {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
             childIndex = Math.floor(Math.random() * this.children.length);
@@ -43,6 +43,15 @@ class RandomSelector extends Composite {
         var status = child._execute(tick);
         nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
         return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
     }
 };
 

@@ -56,7 +56,7 @@ class WeightSelector extends Composite {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChild = -1;  // No running child
     }
 
@@ -65,7 +65,7 @@ class WeightSelector extends Composite {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var childIndex = nodeMemory.$runningChild;
         if (childIndex < 0) {
             var value = (this.expression) ? tick.evalExpression(this.expression) : Math.random();
@@ -83,6 +83,15 @@ class WeightSelector extends Composite {
         var status = child._execute(tick);
         nodeMemory.$runningChild = (status === RUNNING) ? childIndex : -1;
         return status;
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var child = this.children[nodeMemory.$runningChild];
+        if (child) {
+            child._abort(tick);
+            nodeMemory.$runningChild = -1;
+        }
     }
 };
 

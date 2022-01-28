@@ -31,7 +31,7 @@ class Parallel extends Composite {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$runningChildren = this.children.map((child, index) => index);
     }
 
@@ -40,7 +40,7 @@ class Parallel extends Composite {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var childIndexes = nodeMemory.$runningChildren;
         var statusMap = {};
         var hasAnyFinishStatus = false;
@@ -80,6 +80,16 @@ class Parallel extends Composite {
         } else {
             return (childIndexes.length > 0) ? RUNNING : mainTaskStatus;
         }
+    }
+
+    abortChildren(tick) {
+        var nodeMemory = this.getNodeMemory(tick);
+        var childIndexes = nodeMemory.$runningChildren;
+        for (var i = 0, cnt = childIndexes.length; i < cnt; i++) {
+            var childIndex = childIndexes[i];
+            this.children[childIndex]._abort(tick);
+        }
+        nodeMemory.$runningChildren.length = 0;
     }
 };
 

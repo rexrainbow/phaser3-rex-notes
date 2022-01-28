@@ -28,7 +28,7 @@ class TimeLimit extends Decorator {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$startTime = tick.currentTime;
         nodeMemory.$duration = tick.evalExpression(this.durationExpression);
     }
@@ -38,7 +38,7 @@ class TimeLimit extends Decorator {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var currTime = tick.currentTime;
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;

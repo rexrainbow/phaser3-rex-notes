@@ -28,7 +28,7 @@ class Cooldown extends Decorator {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$cooldownTime = tick.evalExpression(this.durationExpression);
     }
 
@@ -37,7 +37,7 @@ class Cooldown extends Decorator {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var currTime = tick.currentTime;
         var lastEndTime = nodeMemory.$lastEndTime;
         var cooldownTime = nodeMemory.$cooldownTime;

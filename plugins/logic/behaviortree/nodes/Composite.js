@@ -76,13 +76,11 @@ class Composite extends BaseNode {
         return this.tick(tick);
     }
 
-    _close(tick) {
-        super._close(tick);
-
+    abortChildren(tick) {
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
             var childNode = this.children[i];
             if (childNode.getOpenState(tick)) {
-                childNode._close(tick);
+                childNode._abort(tick);
             }
         }
     }

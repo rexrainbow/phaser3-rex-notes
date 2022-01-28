@@ -54,8 +54,8 @@ class Tick {
         return this.blackboard.getTreeMemory(this.tree.id);
     }
 
-    getNodeMemory() {
-        return this.blackboard.getNodeMemory(this.tree.id, this._currentNode.id);
+    getNodeMemory(nodeID) {
+        return this.blackboard.getNodeMemory(this.tree.id, nodeID);
     }
 
     get currentTime() {

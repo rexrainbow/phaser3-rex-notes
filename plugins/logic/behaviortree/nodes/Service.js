@@ -39,7 +39,7 @@ class Service extends BaseNode {
     }
 
     canTick(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var currTime = tick.currentTime;
         var lastEndTime = nodeMemory.$lastEndTime;
         var interval = nodeMemory.$interval;

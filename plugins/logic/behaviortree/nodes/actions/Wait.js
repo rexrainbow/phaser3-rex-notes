@@ -23,14 +23,14 @@ class Wait extends Action {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
 
         nodeMemory.$startTime = tick.currentTime;
         nodeMemory.$duration = tick.evalExpression(this.durationExpression);
     }
 
     tick(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var currTime = tick.currentTime;
         var startTime = nodeMemory.$startTime;
         var duration = nodeMemory.$duration;

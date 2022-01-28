@@ -29,7 +29,7 @@ class RepeatUntilSuccess extends Decorator {
     }
 
     open(tick) {
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         nodeMemory.$maxLoop = tick.evalExpression(this.maxLoopExpression);
         nodeMemory.$i = 0;
     }
@@ -39,7 +39,7 @@ class RepeatUntilSuccess extends Decorator {
             return ERROR;
         }
 
-        var nodeMemory = tick.getNodeMemory();
+        var nodeMemory = this.getNodeMemory(tick);
         var maxLoop = nodeMemory.$maxLoop;
         var i = nodeMemory.$i;
         var status = ERROR;

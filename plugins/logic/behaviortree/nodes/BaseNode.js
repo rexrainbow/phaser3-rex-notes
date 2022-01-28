@@ -104,11 +104,18 @@ export default class BaseNode {
         tick._closeNode(this);
         this.setOpenState(tick, false);
         this.close(tick);
+        // Children will be closed before parent, otherwise abort children
+        this.abortChildren(tick);
     }
 
     _exit(tick) {
         tick._exitNode(this);
         this.exit(tick);
+    }
+
+    _abort(tick) {
+        this._close(tick);
+        this.abort(tick);
     }
 
     enter(tick) { }
@@ -121,16 +128,24 @@ export default class BaseNode {
 
     exit(tick) { }
 
+    abortChildren(tick) { }
+
+    abort(tick) { }
+
     // open state of this node
+    getNodeMemory(tick) {
+        return tick.getNodeMemory(this.id);
+    }
+
     getOpenState(tick) {
-        return tick.getNodeMemory().$isOpen;
+        return this.getNodeMemory(tick).$isOpen;
     }
 
     setOpenState(tick, state) {
         if (state === undefined) {
             state = true;
         }
-        tick.getNodeMemory().$isOpen = state;
+        this.getNodeMemory(tick).$isOpen = state;
         return this;
     }
 
