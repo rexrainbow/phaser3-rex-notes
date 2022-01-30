@@ -60,7 +60,7 @@ declare class VirtualJoyStick {
     readonly right: boolean;
     readonly up: boolean;
     readonly down: boolean;
-    readonly nokey: boolean;
+    readonly noKey: boolean;
     readonly force: number;
     readonly forceX: number;
     readonly forceY: number;
