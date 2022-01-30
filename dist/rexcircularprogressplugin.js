@@ -1837,6 +1837,8 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
+  var Percent$1 = Phaser.Math.Percent;
+
   var SetEaseValuePropName = function SetEaseValuePropName(name) {
     this.easeValuePropName = name;
     return this;
@@ -1866,7 +1868,7 @@
     }
 
     if (min !== undefined) {
-      value = Percent(value, min, max);
+      value = Percent$1(value, min, max);
     }
 
     if (this.easeValueTask === undefined) {
@@ -1896,7 +1898,7 @@
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var Clamp = Phaser.Math.Clamp;
   var Linear = Phaser.Math.Linear;
-  var Percent$1 = Phaser.Math.Percent;
+  var Percent = Phaser.Math.Percent;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   var RadToDeg = Phaser.Math.RadToDeg;
 
@@ -1993,7 +1995,7 @@
         }
 
         if (min !== undefined) {
-          value = Percent$1(value, min, max);
+          value = Percent(value, min, max);
         }
 
         this.value = value;
@@ -2003,7 +2005,7 @@
       key: "addValue",
       value: function addValue(inc, min, max) {
         if (min !== undefined) {
-          inc = Percent$1(inc, min, max);
+          inc = Percent(inc, min, max);
         }
 
         this.value += inc;

@@ -14536,6 +14536,8 @@
     return EaseValueTask;
   }(EaseValueTaskBase);
 
+  var Percent$6 = Phaser.Math.Percent;
+
   var SetEaseValuePropName = function SetEaseValuePropName(name) {
     this.easeValuePropName = name;
     return this;
@@ -14565,7 +14567,7 @@
     }
 
     if (min !== undefined) {
-      value = Percent(value, min, max);
+      value = Percent$6(value, min, max);
     }
 
     if (this.easeValueTask === undefined) {
@@ -14595,7 +14597,7 @@
   var IsPlainObject$p = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$9 = Phaser.Math.Clamp;
   var Linear$9 = Phaser.Math.Linear;
-  var Percent$6 = Phaser.Math.Percent;
+  var Percent$5 = Phaser.Math.Percent;
   var DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
 
   var CircularProgress$1 = /*#__PURE__*/function (_Canvas) {
@@ -14703,7 +14705,7 @@
         }
 
         if (min !== undefined) {
-          value = Percent$6(value, min, max);
+          value = Percent$5(value, min, max);
         }
 
         this.value = value;
@@ -14713,7 +14715,7 @@
       key: "addValue",
       value: function addValue(inc, min, max) {
         if (min !== undefined) {
-          inc = Percent$6(inc, min, max);
+          inc = Percent$5(inc, min, max);
         }
 
         this.value += inc;
@@ -16591,7 +16593,7 @@
   var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$8 = Phaser.Math.Clamp;
   var Linear$8 = Phaser.Math.Linear;
-  var Percent$5 = Phaser.Math.Percent;
+  var Percent$4 = Phaser.Math.Percent;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   var RadToDeg$3 = Phaser.Math.RadToDeg;
 
@@ -16688,7 +16690,7 @@
         }
 
         if (min !== undefined) {
-          value = Percent$5(value, min, max);
+          value = Percent$4(value, min, max);
         }
 
         this.value = value;
@@ -16698,7 +16700,7 @@
       key: "addValue",
       value: function addValue(inc, min, max) {
         if (min !== undefined) {
-          inc = Percent$5(inc, min, max);
+          inc = Percent$4(inc, min, max);
         }
 
         this.value += inc;
@@ -20570,7 +20572,7 @@
 
   var GetValue$1e = Phaser.Utils.Objects.GetValue;
   var Linear$4 = Phaser.Math.Linear;
-  var Percent$4 = Phaser.Math.Percent;
+  var Percent$3 = Phaser.Math.Percent;
   var SnapTo$1 = Phaser.Math.Snap.To;
 
   var Knob = /*#__PURE__*/function (_OverlapSizer) {
@@ -20708,7 +20710,7 @@
         }
 
         if (min !== undefined) {
-          value = Percent$4(value, min, max);
+          value = Percent$3(value, min, max);
         }
 
         this.value = value;
@@ -20718,7 +20720,7 @@
       key: "addValue",
       value: function addValue(inc, min, max) {
         if (min !== undefined) {
-          inc = Percent$4(inc, min, max);
+          inc = Percent$3(inc, min, max);
         }
 
         this.value += inc;
@@ -20891,7 +20893,7 @@
   var IsPlainObject$f = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$7 = Phaser.Math.Clamp;
   var Linear$3 = Phaser.Math.Linear;
-  var Percent$3 = Phaser.Math.Percent;
+  var Percent$2 = Phaser.Math.Percent;
 
   var CustomProgress = /*#__PURE__*/function (_CustomShapes) {
     _inherits(CustomProgress, _CustomShapes);
@@ -20975,7 +20977,7 @@
         }
 
         if (min !== undefined) {
-          value = Percent$3(value, min, max);
+          value = Percent$2(value, min, max);
         }
 
         this.value = value;
@@ -20985,7 +20987,7 @@
       key: "addValue",
       value: function addValue(inc, min, max) {
         if (min !== undefined) {
-          inc = Percent$3(inc, min, max);
+          inc = Percent$2(inc, min, max);
         }
 
         this.value += inc;
@@ -26341,7 +26343,7 @@
   });
   SetValue(window, 'RexPlugins.UI.Tabs', Tabs);
 
-  var Percent$2 = Phaser.Math.Percent;
+  var Percent$1 = Phaser.Math.Percent;
 
   var PositionToPercent = function PositionToPercent(startPoint, endPoint, currentPoint) {
     var min, max, value;
@@ -26349,11 +26351,11 @@
     if (startPoint.y === endPoint.y) {
       min = Math.min(startPoint.x, endPoint.x);
       max = Math.max(startPoint.x, endPoint.x);
-      value = Percent$2(currentPoint.x, min, max);
+      value = Percent$1(currentPoint.x, min, max);
     } else if (startPoint.x === endPoint.x) {
       min = Math.min(startPoint.y, endPoint.y);
       max = Math.max(startPoint.y, endPoint.y);
-      value = Percent$2(currentPoint.y, min, max);
+      value = Percent$1(currentPoint.y, min, max);
     }
 
     return value;
@@ -26544,7 +26546,7 @@
   var GetValue$T = Phaser.Utils.Objects.GetValue;
   var Clamp$5 = Phaser.Math.Clamp;
   var Linear$1 = Phaser.Math.Linear;
-  var Percent$1 = Phaser.Math.Percent;
+  var Percent = Phaser.Math.Percent;
   var SnapTo = Phaser.Math.Snap.To;
 
   var Slider = /*#__PURE__*/function (_Sizer) {
@@ -26687,7 +26689,7 @@
         }
 
         if (min !== undefined) {
-          value = Percent$1(value, min, max);
+          value = Percent(value, min, max);
         }
 
         this.value = value;
@@ -26697,7 +26699,7 @@
       key: "addValue",
       value: function addValue(inc, min, max) {
         if (min !== undefined) {
-          inc = Percent$1(inc, min, max);
+          inc = Percent(inc, min, max);
         }
 
         this.value += inc;
