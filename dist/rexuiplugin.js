@@ -426,7 +426,9 @@
         if (colWidth >= 1 && rowHeight >= 1) {
           frameName = this.getFrameNameCallback(i, j, baseFrameName);
 
-          if (frameName) {
+          var frameNameType = _typeof(frameName);
+
+          if (frameNameType === 'string' || frameNameType === 'number') {
             texture.add(frameName, 0, offsetX + baseFrame.cutX, offsetY + baseFrame.cutY, colWidth, rowHeight); // Do nothing if frameName is existed
           }
         }
@@ -548,7 +550,7 @@
         colWidth = col.stretch === 0 ? col.width * fixedPartScaleX : proportionWidth * col.stretch;
         frameName = this.getFrameNameCallback(i, j, this.baseFrameName);
 
-        if (frameName && colWidth > 0 && rowHeight > 0 && texture.has(frameName)) {
+        if (texture.has(frameName) && colWidth > 0 && rowHeight > 0) {
           if (row.stretch === 0 && col.stretch === 0) {
             // Fixed parts
             imageType = 0; // Draw image

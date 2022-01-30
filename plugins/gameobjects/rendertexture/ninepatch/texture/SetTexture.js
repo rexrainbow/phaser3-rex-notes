@@ -110,7 +110,8 @@ var SetTexture = function (key, baseFrameName, columns, rows) {
 
             if ((colWidth >= 1) && (rowHeight >= 1)) {
                 frameName = this.getFrameNameCallback(i, j, baseFrameName);
-                if (frameName) {
+                var frameNameType = typeof (frameName);
+                if ((frameNameType === 'string') || (frameNameType === 'number')) {
                     texture.add(
                         frameName, 0,
                         (offsetX + baseFrame.cutX), (offsetY + baseFrame.cutY),

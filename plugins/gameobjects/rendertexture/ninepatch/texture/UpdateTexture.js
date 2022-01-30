@@ -69,7 +69,7 @@ var UpdateTexture = function () {
             colWidth = (col.stretch === 0) ? (col.width * fixedPartScaleX) : (proportionWidth * col.stretch);
 
             frameName = this.getFrameNameCallback(i, j, this.baseFrameName);
-            if (frameName && (colWidth > 0) && (rowHeight > 0) && texture.has(frameName)) {
+            if (texture.has(frameName) && (colWidth > 0) && (rowHeight > 0)) {
                 if ((row.stretch === 0) && (col.stretch === 0)) { // Fixed parts
                     imageType = 0; // Draw image
                 } else { // Stretchable parts
