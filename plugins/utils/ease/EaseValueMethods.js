@@ -1,5 +1,7 @@
 import EaseValueTask from './EaseValueTask.js';
 
+const Percent = Phaser.Math.Percent;
+
 var SetEaseValuePropName = function (name) {
     this.easeValuePropName = name;
     return this;
