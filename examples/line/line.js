@@ -13,9 +13,12 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
     }
 
     create() {
+        this.add.image(400, 300, 'classroom')
+
         var extendMode = 1; // 0, or 1
         if (extendMode === 1) {
             CreateDashedTexture(this, 'body', 10, 0.4, 0x8888ff);

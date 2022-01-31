@@ -185,8 +185,8 @@
       return this;
     }
 
-    this.redraw = false;
-    this.clear();
+    this.redraw = false; // this.clear();  // this.setSize(w,h) will clear content
+
     var lineStartFrame = this.lineStartFrame;
     var lineEndFrame = this.lineEndFrame;
     var lineBodyFrame = this.lineBodyFrame;

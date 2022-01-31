@@ -8,7 +8,7 @@ var UpdateTexture = function () {
         return this;
     }
     this.redraw = false;
-    this.clear();
+    // this.clear();  // this.setSize(w,h) will clear content
 
     var lineStartFrame = this.lineStartFrame;
     var lineEndFrame = this.lineEndFrame;
