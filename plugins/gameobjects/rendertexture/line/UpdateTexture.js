@@ -8,6 +8,8 @@ var UpdateTexture = function () {
         return this;
     }
     this.redraw = false;
+
+    // Note: Don't use clear method here
     // this.clear();  // this.setSize(w,h) will clear content
 
     var lineStartFrame = this.lineStartFrame;
@@ -43,9 +45,13 @@ var UpdateTexture = function () {
         return this;
     }
 
+    if ((this.width === width) && (this.height === height)) {
+        this.setSize(width + 1, height + 1); // Force size changing, to clear content
+    }
+
     this
-        .setPosition(this.x0, this.y0)
         .setSize(width, height)
+        .setPosition(this.x0, this.y0)
         .setRotation(rotation)
         .setOrigin(0, 0); // Set origin to (0,0) before pasting textures
 

@@ -185,7 +185,8 @@
       return this;
     }
 
-    this.redraw = false; // this.clear();  // this.setSize(w,h) will clear content
+    this.redraw = false; // Note: Don't use clear method here
+    // this.clear();  // this.setSize(w,h) will clear content
 
     var lineStartFrame = this.lineStartFrame;
     var lineEndFrame = this.lineEndFrame;
@@ -219,7 +220,11 @@
       return this;
     }
 
-    this.setPosition(this.x0, this.y0).setSize(width, height).setRotation(rotation).setOrigin(0, 0); // Set origin to (0,0) before pasting textures
+    if (this.width === width && this.height === height) {
+      this.setSize(width + 1, height + 1); // Force size changing, to clear content
+    }
+
+    this.setSize(width, height).setPosition(this.x0, this.y0).setRotation(rotation).setOrigin(0, 0); // Set origin to (0,0) before pasting textures
 
     var offsetX, offsetY;
     var remainderWidth = this.width; // Draw line start
