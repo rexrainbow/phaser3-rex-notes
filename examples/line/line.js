@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(400, 300, 'classroom')
+        this.add.image(400, 300, 'classroom').setAlpha(0.3);
 
         var extendMode = 1; // 0, or 1
         if (extendMode === 1) {
