@@ -37,15 +37,19 @@ class Demo extends Phaser.Scene {
 
             actions: [], // Assing an empty array instead of `undefined`
 
+            choices: [], // Assing an empty array instead of `undefined`
+
             space: {
                 title: 25,
                 content: 25,
                 action: 15,
+                choice: 15,
 
                 left: 20,
                 right: 20,
                 top: 20,
                 bottom: 20,
+                choices: 20,
             },
 
             align: {
@@ -59,6 +63,10 @@ class Demo extends Phaser.Scene {
             .addAction([
                 createLabel(this, 'Yes'),
                 createLabel(this, 'No')
+            ])
+            .addChoice([
+                createLabel(this, 'Choice-A'),
+                createLabel(this, 'Choice-B')
             ])
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
