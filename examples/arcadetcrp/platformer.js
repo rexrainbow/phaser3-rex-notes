@@ -103,7 +103,7 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 0, `\
 Press Space to start recording/playing
-Left/right key to move sprite\
+Left/right/up key to move/jump sprite\
 `);
 
         var spaceKey = this.input.keyboard.addKey('SPACE')
