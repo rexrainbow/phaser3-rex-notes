@@ -75,14 +75,23 @@ class Demo extends Phaser.Scene {
         var stepRunner = TCRPplugin.addStepRunner(this);
 
         // Loop player
-        player.on('complete', function () { player.start() });
+        var playerMaxLoop = 3;
+        player.on('complete', function () {
+            playerMaxLoop--;
+            if (playerMaxLoop > 0) {
+                player.start();
+            }
+        });
 
         var spriteA = (new PlayerSprite(this, 300, 200, 0x00cccc)).setName('A');
         var spriteB = (new PlayerSprite(this, 300, 400, 0xcccc00)).setName('B');
         var blocker = new ObstacleSprite(this, 600, 300, 100, 400, 0x333333);
         blocker.pushOut([spriteA, spriteB]);
 
-        var print = this.add.text(0, 0, 'Press Space to start recording/playing\nLeft/right key to move sprite');
+        var print = this.add.text(0, 0, `\
+Press Space to start recording/playing
+Left/right key to move sprite\
+`);
 
         var spaceKey = this.input.keyboard.addKey('SPACE')
         spaceKey.on('down', function (event) {
@@ -128,7 +137,7 @@ class Demo extends Phaser.Scene {
                 if (recorder.isRecording) {
                     var command = [
                         'moveLeft',  // function name
-                        100, // speed
+                        300, // speed
                     ]
                     recorder.addCommand(command);
                     stepRunner.add(command, spriteA);
@@ -150,7 +159,7 @@ class Demo extends Phaser.Scene {
                 if (recorder.isRecording) {
                     var command = [
                         'moveRight',  // function name
-                        100, // speed
+                        300, // speed
                     ]
                     recorder.addCommand(command);
                     stepRunner.add(command, spriteA);
@@ -166,6 +175,39 @@ class Demo extends Phaser.Scene {
                 }
             });
 
+        // Check position result
+        // Store spriteA's position
+        var spriteAXs = [];
+        recorder
+            .on('start', function () {
+                spriteAXs.length = 0;
+            })
+            .on('stop', function () {
+                // console.log(spriteAXs)
+            })
+        this.physics.world.on('worldstep', function () {
+            if (recorder.isRecording) {
+                spriteAXs.push(spriteA.x);
+            }
+        });
+
+        // Check spriteB's position
+        var spriteBXIndex;
+        player.on('start', function () {
+            spriteBXIndex = 0;
+        })
+        this.physics.world.on('worldstep', function () {
+            if (player.isPlaying) {
+                var xDiff = spriteB.x - spriteAXs[spriteBXIndex];
+                if (xDiff !== 0) {
+                    console.log(`[${spriteBXIndex}] A: ${spriteAXs[spriteBXIndex]}, B: ${spriteB.x}`)
+                } else {
+                    // console.log(`[${spriteBXIndex}] match`)
+                }
+                spriteBXIndex++;
+            }
+        });
+        // Check position result
     }
 
     update() { }

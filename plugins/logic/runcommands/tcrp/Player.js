@@ -10,8 +10,11 @@ class Player extends ComponentBase {
     constructor(parent, config) {
         super(parent, config);
 
-        var clockClass = GetValue(config, 'clockClass', Clock);
-        this.clock = new clockClass(parent);
+        var clock = GetValue(config, 'clock', undefined);
+        if (!clock) {
+            clock = new Clock(parent);
+        }
+        this.clock = clock;
         this.clock.on('update', this.update, this);
 
         this.resetFromJSON(config); // this function had been called in super(config)
@@ -104,22 +107,26 @@ class Player extends ComponentBase {
 
         this.clock.start(startAt);
         this.update(startAt);
+        this.emit('start', this.parent, this);
         return this;
     }
 
     pause() {
         this.clock.pause();
+        this.emit('pause', this.parent, this);
         return this;
     }
 
     resume() {
         this.clock.resume();
+        this.emit('resume', this.parent, this);
         return this;
     }
 
     stop() {
         this.clock.stop();
         this.state = 0;
+        this.emit('stop', this.parent, this);
         return this;
     }
 

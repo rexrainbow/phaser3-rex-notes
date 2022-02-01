@@ -6,11 +6,13 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Recorder extends ComponentBase {
     constructor(parent, config) {
-        super(parent, { eventEmitter: false });
-        // No event emitter
+        super(parent, config);
 
-        var clockClass = GetValue(config, 'clockClass', Clock);
-        this.clock = new clockClass(parent);
+        var clock = GetValue(config, 'clock', undefined);
+        if (!clock) {
+            clock = new Clock(parent);
+        }
+        this.clock = clock;
 
         this.resetFromJSON(config); // This function had been called in super(config)
     }
@@ -43,21 +45,25 @@ class Recorder extends ComponentBase {
     start(startAt) {
         this.clear();
         this.clock.start(startAt);
+        this.emit('start', this.parent, this);
         return this;
     }
 
     pause() {
         this.clock.pause();
+        this.emit('pause', this.parent, this);
         return this;
     }
 
     resume() {
         this.clock.resume();
+        this.emit('resume', this.parent, this);
         return this;
     }
 
     stop() {
         this.clock.stop();
+        this.emit('stop', this.parent, this);
         return this;
     }
 

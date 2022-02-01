@@ -6,7 +6,7 @@ class Player extends BasePlayer {
         if (config === undefined) {
             config = {};
         }
-        config.clockClass = ArcadeStepClock;
+        config.clock = new ArcadeStepClock(parent);
         config.timeUnit = 0; // Force timeUnit to 0
         config.dtMode = 0;   // Force dtMode to 0
         super(parent, config);

@@ -6,7 +6,7 @@ class Recorder extends BaseRecorder {
         if (config === undefined) {
             config = {};
         }
-        config.clockClass = ArcadeStepClock;
+        config.clock = new ArcadeStepClock(parent);
         super(parent, config);
     }
 }

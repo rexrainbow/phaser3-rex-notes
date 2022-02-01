@@ -82,6 +82,7 @@ var player = scene.plugins.get('rexTCRP').addPlayer(scene, {
 });
 ```
 
+- `scene` : A scene object, or a game object.
 - `timeUnit` : see [next section](tcrp-player.md#load-commands)
 - `dtMode` : see [next section](tcrp-player.md#load-commands)
 - `commands` : see [next section](tcrp-player.md#load-commands)
@@ -132,9 +133,25 @@ player.start();
 
 ### Events
 
+- Start
+    ```javascript
+    player.on('start', function(scene, player){});
+    ```
+- Pause
+    ```javascript
+    player.on('pause', function(scene, player){});
+    ```
+- Resume
+    ```javascript
+    player.on('resume', function(scene, player){});
+    ```
+- Stop
+    ```javascript
+    player.on('stop', function(scene, player){});
+    ```
 - Complete
     ```javascript
-    player.on('complete', function(player){});
+    player.on('complete', function(scene, player){});
     ```
 - Run command
     ```javascript

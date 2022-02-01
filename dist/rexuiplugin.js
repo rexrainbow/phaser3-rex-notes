@@ -35253,8 +35253,13 @@
       _classCallCheck(this, Player);
 
       _this = _super.call(this, parent, config);
-      var clockClass = GetValue$j(config, 'clockClass', Clock);
-      _this.clock = new clockClass(parent);
+      var clock = GetValue$j(config, 'clock', undefined);
+
+      if (!clock) {
+        clock = new Clock(parent);
+      }
+
+      _this.clock = clock;
 
       _this.clock.on('update', _this.update, _assertThisInitialized(_this));
 
@@ -35360,18 +35365,21 @@
         this.nextTime = this.getNextDt(0);
         this.clock.start(startAt);
         this.update(startAt);
+        this.emit('start', this.parent, this);
         return this;
       }
     }, {
       key: "pause",
       value: function pause() {
         this.clock.pause();
+        this.emit('pause', this.parent, this);
         return this;
       }
     }, {
       key: "resume",
       value: function resume() {
         this.clock.resume();
+        this.emit('resume', this.parent, this);
         return this;
       }
     }, {
@@ -35379,6 +35387,7 @@
       value: function stop() {
         this.clock.stop();
         this.state = 0;
+        this.emit('stop', this.parent, this);
         return this;
       }
     }, {

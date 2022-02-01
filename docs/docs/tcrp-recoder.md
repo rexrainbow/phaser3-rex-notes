@@ -158,3 +158,22 @@ var now = recorder.now;
     ```javascript
     var timeScale = recorder.timeScale;
     ```
+
+### Events
+
+- Start
+    ```javascript
+    recorder.on('start', function(scene, recorder){});
+    ```
+- Pause
+    ```javascript
+    recorder.on('pause', function(scene, recorder){});
+    ```
+- Resume
+    ```javascript
+    recorder.on('resume', function(scene, recorder){});
+    ```
+- Stop
+    ```javascript
+    recorder.on('stop', function(scene, recorder){});
+    ```
