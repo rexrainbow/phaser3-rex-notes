@@ -3,6 +3,8 @@
 A invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp), to update 
 the rendering result of [text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
 
+Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
+
 - Author: Rex
 - [DOM Game object](domelement.md)
 
