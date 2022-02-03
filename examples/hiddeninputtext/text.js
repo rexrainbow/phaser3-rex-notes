@@ -20,15 +20,6 @@ class Demo extends Phaser.Scene {
 
         var hiddenInputText = this.add.rexHiddenInputText(textObject, {
             type: 'textarea',
-            updateTextCallback: function (text, hiddenInputText) {
-                if (hiddenInputText.isFocused) {
-                    var curosrChar = '|';
-                    var cursorPosition = hiddenInputText.cursorPosition;
-                    return text.substring(0, cursorPosition) + curosrChar + text.substring(cursorPosition);
-                } else {
-                    return text;
-                }
-            }
         })
             .on('focus', function (hiddenInputText) {
                 hiddenInputText.textObject.setBackgroundColor('#555555')

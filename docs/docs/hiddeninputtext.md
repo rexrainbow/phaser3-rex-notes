@@ -106,68 +106,48 @@ the rendering result of [text](text.md), [bbocodetext](bbcodetext.md), or [tagte
 ### Add input text object
 
 ```javascript
-var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, config);
-```
-
-Default configuration
-
-```javascript
-{
+var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, {
     type: 'text',    // 'text'|'password'|'textarea'|'number'|'color'|...
+
+    cursor: '|',
+    // updateTextCallback: DefaultUpdateTextCallback,
+    // updateTextCallbackScope: undefined
 
     // Element properties
     id: undefined,
     text: undefined,
     maxLength: undefined,
-    minLength: undefined,    
-    placeholder: undefined,
-    tooltip: undefined,
+    minLength: undefined,
     readOnly: false,
-    spellCheck: false,
-    autoComplete: 'off',
 
     // Style properties
-    align: undefined,
-    paddingLeft: undefined,
-    paddingRight: undefined,
-    paddingTop: undefined,
-    paddingBottom: undefined,
-    fontFamily: undefined,
-    fontSize: undefined,
-    color: '#ffffff',
-    border: 0,
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    outline: 'none',
     direction: 'ltr',
-
-    selectAll: false
-}
+});
 ```
 
 - `type` : Type of element
     - `'text'`, `'password'`, `'textarea'`, `'number'`, `'color'`, ...
+- `cursor` : Cursor character used in default update text callback.
+- `updateTextCallback` : Callback of updating text at each tick. Default update text callback will insert `cursor` in to current string of this hidden input text.
+    ```javascript
+    function (text, hiddenInputText) {
+        if (hiddenInputText.isFocused) {
+            var cursorPosition = hiddenInputText.cursorPosition;
+            return text.substring(0, cursorPosition) + hiddenInputText.cursor + text.substring(cursorPosition);
+        } else {
+            return text;
+        }
+    }
+    ```
+- `updateTextCallbackScope` : Scope of `updateTextCallback`.
 - Element properties
     - `id` : `id` element property.
     - `text` : `value` element property.
     - `maxLength` : `maxLength` element property.
     - `minLength` : `minLength` element property.
-    - `placeholder` : `placeholder` element property.
-    - `tooltip` : `title` element property.
     - `readOnly` : `readonly` element property.
-    - `spellCheck` : `spellcheck` element property.
-    - `autoComplete` : `autocomplete` element property.
 - Element style properties
-    - `align` : `text-align` style property.
-    - `paddingLeft`, `paddingRight`, `paddingTop`, `paddingBottom` : `padding-left`, `padding-right`, `padding-top`, `padding-bottom` style property.
-    - `fontFamily` : `font-family` style property.
-    - `fontSize` : `font-size` style property.
-    - `color` : `color` style property.
-    - `backgroundColor` : `backgroundColor` style property.
-    - `border`, `borderColor` : `border`, `borderColor` style property.
-    - `outline` : `outline` style property.
     - `direction` : `direction` style property.
-- `selectAll` : Set `true` to select all text.
 
 !!! note
 

@@ -642,7 +642,9 @@
 
       style.transform = 'scale(0)';
 
-      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', undefined), GetValue(config, 'updateTextCallbackScope', undefined));
+      _this.setCursor(GetValue(config, 'cursor', '|'));
+
+      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', DefaultUpdateTextCallback), GetValue(config, 'updateTextCallbackScope', undefined));
 
       _this.textObject = textObject;
       textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
@@ -701,10 +703,25 @@
         this.updateTextCallbackScope = scope;
         return this;
       }
+    }, {
+      key: "setCursor",
+      value: function setCursor(s) {
+        this.cursor = s;
+        return s;
+      }
     }]);
 
     return HiddenInputText;
   }(InputText);
+
+  var DefaultUpdateTextCallback = function DefaultUpdateTextCallback(text, hiddenInputText) {
+    if (hiddenInputText.isFocused) {
+      var cursorPosition = hiddenInputText.cursorPosition;
+      return text.substring(0, cursorPosition) + hiddenInputText.cursor + text.substring(cursorPosition);
+    } else {
+      return text;
+    }
+  };
 
   function Factory (textObject, config) {
     var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene

@@ -17,8 +17,10 @@ class HiddenInputText extends InputText {
         // hide native blue text cursor on iOS
         style.transform = 'scale(0)';
 
+        this.setCursor(GetValue(config, 'cursor', '|'));
+
         this.setUpdateTextCallback(
-            GetValue(config, 'updateTextCallback', undefined),
+            GetValue(config, 'updateTextCallback', DefaultUpdateTextCallback),
             GetValue(config, 'updateTextCallbackScope', undefined)
         );
 
@@ -74,6 +76,20 @@ class HiddenInputText extends InputText {
         this.updateTextCallback = callback;
         this.updateTextCallbackScope = scope;
         return this;
+    }
+
+    setCursor(s) {
+        this.cursor = s;
+        return s;
+    }
+}
+
+var DefaultUpdateTextCallback = function (text, hiddenInputText) {
+    if (hiddenInputText.isFocused) {
+        var cursorPosition = hiddenInputText.cursorPosition;
+        return text.substring(0, cursorPosition) + hiddenInputText.cursor + text.substring(cursorPosition);
+    } else {
+        return text;
     }
 }
 
