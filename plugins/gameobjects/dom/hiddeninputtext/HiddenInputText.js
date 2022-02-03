@@ -5,12 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class HiddenInputText extends InputText {
     constructor(textObject, config) {
-        super(
-            textObject.scene,
-            textObject.x, textObject.y,
-            textObject.displayWidth, textObject.displayHeight,
-            config
-        );
+        super(textObject.scene, config);
         // Note: Don't add this game object into scene
 
         // Set style
@@ -22,33 +17,23 @@ class HiddenInputText extends InputText {
         // hide native blue text cursor on iOS
         style.transform = 'scale(0)';
 
-        this.textObject = textObject;
-        this.setOrigin(textObject.originX, textObject.originY);
-        textObject.once('destroy', this.destroy, this);
-
         this.setUpdateTextCallback(
             GetValue(config, 'updateTextCallback', undefined),
             GetValue(config, 'updateTextCallbackScope', undefined)
         );
 
-        // Start edit when click text game object
+        this.textObject = textObject;
         textObject
             .setInteractive()
-            .on('pointerdown', function () {
-                this.setFocus();
-            }, this)
+            .on('pointerdown', this.setFocus, this)
+            .on('destroy', this.destroy, this)
 
         this.scene.events.on('postupdate', this.update, this);
-
         this.scene.input.on('pointerdown', this.onClickOutside, this)
 
         this
-            .on('focus', function () {
-                this.updateText();
-            }, this)
-            .on('blur', function () {
-                this.updateText();
-            }, this)
+            .on('focus', this.updateText, this)
+            .on('blur', this.updateText, this)
     }
 
     preDestroy() {
@@ -59,16 +44,6 @@ class HiddenInputText extends InputText {
     }
 
     update() {
-        var textObject = this.textObject;
-
-        if ((this.x !== textObject.x) || (this.y !== textObject.y)) {
-            this.setPosition(textObject.x, textObject.y);
-        }
-
-        if ((this.width !== textObject.displayWidth) || (this.height !== textObject.displayHeight)) {
-            this.resize(textObject.displayWidth, textObject.displayHeight);
-        }
-
         var newText = this.text;
         if (newText !== this.prevText) {
             this.prevText = newText;

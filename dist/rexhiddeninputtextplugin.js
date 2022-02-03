@@ -626,7 +626,7 @@
 
       _classCallCheck(this, HiddenInputText);
 
-      _this = _super.call(this, textObject.scene, textObject.x, textObject.y, textObject.displayWidth, textObject.displayHeight, config); // Note: Don't add this game object into scene
+      _this = _super.call(this, textObject.scene, config); // Note: Don't add this game object into scene
       // Set style
 
       var style = _this.node.style;
@@ -636,28 +636,17 @@
       style.zIndex = 0; // hide native blue text cursor on iOS
 
       style.transform = 'scale(0)';
+
+      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', undefined), GetValue(config, 'updateTextCallbackScope', undefined));
+
       _this.textObject = textObject;
-
-      _this.setOrigin(textObject.originX, textObject.originY);
-
-      textObject.once('destroy', _this.destroy, _assertThisInitialized(_this));
-
-      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', undefined), GetValue(config, 'updateTextCallbackScope', undefined)); // Start edit when click text game object
-
-
-      textObject.setInteractive().on('pointerdown', function () {
-        this.setFocus();
-      }, _assertThisInitialized(_this));
+      textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
 
       _this.scene.events.on('postupdate', _this.update, _assertThisInitialized(_this));
 
-      _this.scene.input.on('pointerdown', _this.onClickOutsideText, _assertThisInitialized(_this));
+      _this.scene.input.on('pointerdown', _this.onClickOutside, _assertThisInitialized(_this));
 
-      _this.on('focus', function () {
-        this.updateText();
-      }, _assertThisInitialized(_this)).on('blur', function () {
-        this.updateText();
-      }, _assertThisInitialized(_this));
+      _this.on('focus', _this.updateText, _assertThisInitialized(_this)).on('blur', _this.updateText, _assertThisInitialized(_this));
 
       return _this;
     }
@@ -666,23 +655,13 @@
       key: "preDestroy",
       value: function preDestroy() {
         this.scene.events.off('postupdate', this.update, this);
-        this.scene.input.off('pointerdown', this.onClickOutsideText, this);
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);
       }
     }, {
       key: "update",
       value: function update() {
-        var textObject = this.textObject;
-
-        if (this.x !== textObject.x || this.y !== textObject.y) {
-          this.setPosition(textObject.x, textObject.y);
-        }
-
-        if (this.width !== textObject.displayWidth || this.height !== textObject.displayHeight) {
-          this.resize(textObject.displayWidth, textObject.displayHeight);
-        }
-
         var newText = this.text;
 
         if (newText !== this.prevText) {
@@ -691,8 +670,8 @@
         }
       }
     }, {
-      key: "onClickOutsideText",
-      value: function onClickOutsideText(pointer) {
+      key: "onClickOutside",
+      value: function onClickOutside(pointer) {
         if (!IsPointerInHitArea(this.textObject, pointer)) {
           this.setBlur();
         }
