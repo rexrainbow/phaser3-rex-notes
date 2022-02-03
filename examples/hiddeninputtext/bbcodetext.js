@@ -25,7 +25,9 @@ class Demo extends Phaser.Scene {
             type: 'textarea',
             updateTextCallback: function (text, hiddenInputText) {
                 if (hiddenInputText.isFocused) {
-                    return text + '[color=blue][b]:)[/b][/color]';
+                    var curosrChar = '[color=blue][size=12][b][y=-2]|[/y][/b][/size][/color]';
+                    var cursorPosition = hiddenInputText.cursorPosition;
+                    return text.substring(0, cursorPosition) + curosrChar + text.substring(cursorPosition);
                 } else {
                     return text;
                 }

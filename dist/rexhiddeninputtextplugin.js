@@ -391,6 +391,11 @@
         return node.value.substring(node.selectionStart, node.selectionEnd);
       }
     }, {
+      key: "cursorPosition",
+      get: function get() {
+        return this.node.selectionStart;
+      }
+    }, {
       key: "tooltip",
       get: function get() {
         return this.node.title;
@@ -642,11 +647,14 @@
       _this.textObject = textObject;
       textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
 
-      _this.scene.events.on('postupdate', _this.update, _assertThisInitialized(_this));
-
-      _this.scene.input.on('pointerdown', _this.onClickOutside, _assertThisInitialized(_this));
-
-      _this.on('focus', _this.updateText, _assertThisInitialized(_this)).on('blur', _this.updateText, _assertThisInitialized(_this));
+      _this.on('focus', function () {
+        this.scene.events.on('postupdate', this.updateText, this);
+        this.scene.input.on('pointerdown', this.onClickOutside, this);
+      }, _assertThisInitialized(_this)).on('blur', function () {
+        this.updateText();
+        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
+      }, _assertThisInitialized(_this));
 
       return _this;
     }
@@ -654,20 +662,12 @@
     _createClass(HiddenInputText, [{
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.events.off('postupdate', this.update, this);
+        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('destroy', this.destroy, this);
+        this.scene.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);
-      }
-    }, {
-      key: "update",
-      value: function update() {
-        var newText = this.text;
-
-        if (newText !== this.prevText) {
-          this.prevText = newText;
-          this.updateText();
-        }
       }
     }, {
       key: "onClickOutside",

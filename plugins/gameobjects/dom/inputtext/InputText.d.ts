@@ -80,6 +80,7 @@ declare class InputText extends Phaser.GameObjects.DOMElement {
     readonly selectionStart: number;
     readonly selectionEnd: number;
     readonly selectedText: string;
+    readonly cursorPosition: number;
 
     scrollToBottom(): this;
 

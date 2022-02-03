@@ -28,27 +28,25 @@ class HiddenInputText extends InputText {
             .on('pointerdown', this.setFocus, this)
             .on('destroy', this.destroy, this)
 
-        this.scene.events.on('postupdate', this.update, this);
-        this.scene.input.on('pointerdown', this.onClickOutside, this)
-
         this
-            .on('focus', this.updateText, this)
-            .on('blur', this.updateText, this)
+            .on('focus', function () {
+                this.scene.events.on('postupdate', this.updateText, this);
+                this.scene.input.on('pointerdown', this.onClickOutside, this);
+            }, this)
+            .on('blur', function () {
+                this.updateText();
+                this.scene.events.off('postupdate', this.updateText, this);
+                this.scene.input.off('pointerdown', this.onClickOutside, this);
+            }, this)
     }
 
     preDestroy() {
-        this.scene.events.off('postupdate', this.update, this);
-        this.scene.input.off('pointerdown', this.onClickOutside, this)
+        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('destroy', this.destroy, this);
+        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         super.preDestroy();
-    }
-
-    update() {
-        var newText = this.text;
-        if (newText !== this.prevText) {
-            this.prevText = newText;
-            this.updateText();
-        }
     }
 
     onClickOutside(pointer) {

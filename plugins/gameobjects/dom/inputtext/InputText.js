@@ -153,6 +153,10 @@ class InputText extends DOMElement {
         return node.value.substring(node.selectionStart, node.selectionEnd);
     }
 
+    get cursorPosition() {
+        return this.node.selectionStart; 
+    }
+
     get tooltip() {
         return this.node.title;
     }

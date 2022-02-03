@@ -569,6 +569,11 @@
         return node.value.substring(node.selectionStart, node.selectionEnd);
       }
     }, {
+      key: "cursorPosition",
+      get: function get() {
+        return this.node.selectionStart;
+      }
+    }, {
       key: "tooltip",
       get: function get() {
         return this.node.title;
