@@ -116,9 +116,31 @@ class InputText extends DOMElement {
         return this;
     }
 
-    selectText() {
-        this.node.select();
+    selectText(selectionStart, selectionEnd) {
+        if (selectionStart === undefined) {
+            this.node.select();
+        } else {
+            this.node.setSelectionRange(selectionStart, selectionEnd);
+        }
         return this;
+    }
+
+    selectAll() {
+        this.selectText();
+        return this;
+    }
+
+    get selectionStart() {
+        return this.node.selectionStart;
+    }
+
+    get selectionEnd() {
+        return this.node.selectionEnd;
+    }
+
+    get selectedText() {
+        var node = this.node;
+        return node.value.substring(node.selectionStart, node.selectionEnd);
     }
 
     get tooltip() {
@@ -212,11 +234,6 @@ class InputText extends DOMElement {
         this.node.focus();
         return this;
     }
-
-    selectAll() {
-        this.node.select();
-        return this;
-    }
 }
 
 var methods = {
@@ -257,11 +274,27 @@ const StyleProperties = {
 };
 
 const ElementEvents = {
-    textchange: 'oninput',
-    click: 'onclick',
-    dblclick: 'ondblclick',
-    focus: 'onfocus',
-    blur: 'onblur',
+    input: 'textchange',
+
+    click: 'click',
+    dblclick: 'dblclick',
+
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress',
+
+    focus: 'focus',
+    blur: 'blur',
+
+    select: 'select'
 };
 
 export default InputText;

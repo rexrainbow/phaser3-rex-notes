@@ -211,10 +211,6 @@ Default configuration
     inputText.setText(text);
     // inputText.text = text;
     ```
-- Select all text
-    ```javascript
-    inputText.selectText();
-    ```
 - Scroll to bottom
     ```javascript
     inputText.scrollToBottom();
@@ -329,7 +325,12 @@ inputText.resize(width, height);
 
 - Select all text
     ```javascript
-    inputText.selectAll();
+    inputText.selectText();
+    // inputText.selectAll();
+    ```
+- Select sub-string
+    ```javascript
+    inputText.selectText(selectionStart, selectionEnd);
     ```
 
 ### Events
@@ -354,3 +355,30 @@ inputText.resize(width, height);
     inputText.on('dblclick', function(inputText, e){ }, scope);
     ```
     Touch/mouse events on input text object won't be propagated to game canvas.
+- On keydown, keyup
+    ```javascript
+    inputText.on('keydown', function(inputText, e){ }, scope);
+    ```
+    ```javascript
+    inputText.on('keyup', function(inputText, e){ }, scope);
+    ```
+    Keyboard events on input text object won't be propagated to game canvas.
+- On pointerdown, pointermove, pointerup
+    ```javascript
+    inputText.on('pointerdown', function(inputText, e){ }, scope);
+    ```
+    ```javascript
+    inputText.on('pointermove', function(inputText, e){ }, scope);
+    ```
+    ```javascript
+    inputText.on('pointerup', function(inputText, e){ }, scope);
+    ```
+    Mouse/touch events on input text object won't be propagated to game canvas.
+- On select
+    ```javascript
+    inputText.on('select', function(inputText, e){ 
+        var selectedString = inputText.selectedText;
+        var selectionStart = inputText.selectionStart;
+        var selectionEnd = inputText.selectionEnd;
+    }, scope);
+    ```

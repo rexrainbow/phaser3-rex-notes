@@ -38,12 +38,26 @@ class Demo extends Phaser.Scene {
             .on('dblclick', function (inputText) {
                 console.log('On dblclick');
             })
+            .on('pointermove', function (inputText) {
+                console.log('On pointermove');
+            })
+            .on('keydown', function (inputText, e) {
+                //console.log(`Keydown ${e.which} : ${e.code}`)
+            })
+            .on('keypress', function (inputText, e) {
+                //console.log(`keypress ${e.which} : ${e.code}`)
+            })
 
         printText.text = inputText.text;
 
         // this.input.keyboard.addKey('ENTER').on('down', function (event) {
         //     console.log('enter');
         // });
+
+        this.input.on('pointerdown', function () {
+            inputText.setBlur();
+            console.log('pointerdown outside');
+        })
     }
 
     update() { }

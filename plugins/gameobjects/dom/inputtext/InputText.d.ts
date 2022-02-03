@@ -65,7 +65,14 @@ declare class InputText extends Phaser.GameObjects.DOMElement {
     setText(text: string): this;
     text: string;
 
-    selectText(): this;
+    selectText(
+        selectionStart?: number,
+        selectionEnd?: number
+    ): this;
+    selectAll(): this;
+    readonly selectionStart: number;
+    readonly selectionEnd: number;
+    readonly selectedText: string;
 
     scrollToBottom(): this;
 
@@ -92,6 +99,4 @@ declare class InputText extends Phaser.GameObjects.DOMElement {
     tooltip: string;
 
     resize(width: number, height: number): this;
-
-    selectAll(): this;
 }

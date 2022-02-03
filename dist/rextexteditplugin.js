@@ -371,15 +371,15 @@
   };
 
   var RouteEvents = function RouteEvents(gameObject, element, elementEvents) {
-    var _loop = function _loop(eventName) {
+    var _loop = function _loop(elementEventName) {
       // Note: Don't use `var` here
-      element[elementEvents[eventName]] = function (e) {
-        gameObject.emit(eventName, gameObject, e);
-      };
+      element.addEventListener(elementEventName, function (e) {
+        gameObject.emit(elementEvents[elementEventName], gameObject, e);
+      });
     };
 
-    for (var eventName in elementEvents) {
-      _loop(eventName);
+    for (var elementEventName in elementEvents) {
+      _loop(elementEventName);
     }
   };
 
@@ -529,9 +529,36 @@
       }
     }, {
       key: "selectText",
-      value: function selectText() {
-        this.node.select();
+      value: function selectText(selectionStart, selectionEnd) {
+        if (selectionStart === undefined) {
+          this.node.select();
+        } else {
+          this.node.setSelectionRange(selectionStart, selectionEnd);
+        }
+
         return this;
+      }
+    }, {
+      key: "selectAll",
+      value: function selectAll() {
+        this.selectText();
+        return this;
+      }
+    }, {
+      key: "selectionStart",
+      get: function get() {
+        return this.node.selectionStart;
+      }
+    }, {
+      key: "selectionEnd",
+      get: function get() {
+        return this.node.selectionEnd;
+      }
+    }, {
+      key: "selectedText",
+      get: function get() {
+        var node = this.node;
+        return node.value.substring(node.selectionStart, node.selectionEnd);
       }
     }, {
       key: "tooltip",
@@ -638,12 +665,6 @@
         this.node.focus();
         return this;
       }
-    }, {
-      key: "selectAll",
-      value: function selectAll() {
-        this.node.select();
-        return this;
-      }
     }]);
 
     return InputText;
@@ -680,11 +701,21 @@
     direction: ['direction', undefined]
   };
   var ElementEvents = {
-    textchange: 'oninput',
-    click: 'onclick',
-    dblclick: 'ondblclick',
-    focus: 'onfocus',
-    blur: 'onblur'
+    input: 'textchange',
+    click: 'click',
+    dblclick: 'dblclick',
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress',
+    focus: 'focus',
+    blur: 'blur',
+    select: 'select'
   };
 
   var TextKlass = Phaser.GameObjects.Text;
