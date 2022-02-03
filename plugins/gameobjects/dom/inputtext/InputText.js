@@ -62,6 +62,16 @@ class InputText extends DOMElement {
         if (GetValue(config, 'selectAll', false)) {
             this.selectAll();
         }
+
+        this._isFocused = false;
+        this
+            .on('focus', function () {
+                this._isFocused = true;
+            }, this)
+            .on('blur', function () {
+                this._isFocused = false;
+            }, this)
+
     }
 
     get text() {
@@ -233,6 +243,10 @@ class InputText extends DOMElement {
     setFocus() {
         this.node.focus();
         return this;
+    }
+
+    get isFocused() {
+        return this._isFocused;
     }
 }
 

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rextexteditplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexhiddeninputtextplugin = factory());
 }(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -153,184 +153,6 @@
     return _get(target, property, receiver || target);
   }
 
-  var EventEmitterMethods = {
-    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
-      if (EventEmitterClass === undefined) {
-        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
-      }
-
-      this._privateEE = eventEmitter === true || eventEmitter === undefined;
-      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
-      return this;
-    },
-    destroyEventEmitter: function destroyEventEmitter() {
-      if (this._eventEmitter && this._privateEE) {
-        this._eventEmitter.shutdown();
-      }
-
-      return this;
-    },
-    getEventEmitter: function getEventEmitter() {
-      return this._eventEmitter;
-    },
-    on: function on() {
-      if (this._eventEmitter) {
-        this._eventEmitter.on.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    once: function once() {
-      if (this._eventEmitter) {
-        this._eventEmitter.once.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    off: function off() {
-      if (this._eventEmitter) {
-        this._eventEmitter.off.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    emit: function emit(event) {
-      if (this._eventEmitter && event) {
-        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    addListener: function addListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    removeListener: function removeListener() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    removeAllListeners: function removeAllListeners() {
-      if (this._eventEmitter) {
-        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
-      }
-
-      return this;
-    },
-    listenerCount: function listenerCount() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
-      }
-
-      return 0;
-    },
-    listeners: function listeners() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
-      }
-
-      return [];
-    },
-    eventNames: function eventNames() {
-      if (this._eventEmitter) {
-        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
-      }
-
-      return [];
-    }
-  };
-
-  var SceneClass = Phaser.Scene;
-
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetSceneObject = function GetSceneObject(object) {
-    if (object == null || _typeof(object) !== 'object') {
-      return null;
-    } else if (IsSceneObject(object)) {
-      // object = scene
-      return object;
-    } else if (object.scene && IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene;
-    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
-      // parent = bob object
-      return object.parent.scene;
-    }
-  };
-
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
-
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-
-      this.parent = parent; // gameObject or scene
-
-      this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
-
-      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
-
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
-        // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
-      }
-    }
-
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        } // parent might not be shutdown yet
-
-
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
-          // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
-        }
-
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }]);
-
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
-
   var Resize = function Resize(width, height) {
     if (this.scene.scale.autoRound) {
       width = Math.floor(width);
@@ -348,7 +170,7 @@
     return this;
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
@@ -360,7 +182,7 @@
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
 
-      value = GetValue$3(config, key, property[1]);
+      value = GetValue$2(config, key, property[1]);
 
       if (value !== undefined) {
         out[property[0]] = value;
@@ -399,7 +221,7 @@
 
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var InputText = /*#__PURE__*/function (_DOMElement) {
     _inherits(InputText, _DOMElement);
@@ -413,14 +235,14 @@
 
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue$2(config, 'x', 0);
-        y = GetValue$2(config, 'y', 0);
-        width = GetValue$2(config, 'width', 0);
-        height = GetValue$2(config, 'height', 0);
+        x = GetValue$1(config, 'x', 0);
+        y = GetValue$1(config, 'y', 0);
+        width = GetValue$1(config, 'width', 0);
+        height = GetValue$1(config, 'height', 0);
       } else if (IsPlainObject(width)) {
         config = width;
-        width = GetValue$2(config, 'width', 0);
-        height = GetValue$2(config, 'height', 0);
+        width = GetValue$1(config, 'width', 0);
+        height = GetValue$1(config, 'height', 0);
       }
 
       if (config === undefined) {
@@ -428,7 +250,7 @@
       }
 
       var element;
-      var textType = GetValue$2(config, 'type', 'text');
+      var textType = GetValue$1(config, 'type', 'text');
 
       if (textType === 'textarea') {
         element = document.createElement('textarea');
@@ -439,7 +261,7 @@
       }
 
       SetProperties(ElementProperties, config, element);
-      var style = GetValue$2(config, 'style', undefined);
+      var style = GetValue$1(config, 'style', undefined);
       style = SetProperties(StyleProperties, config, style); // Apply other style properties
 
       var elementStyle = element.style;
@@ -463,7 +285,7 @@
 
       StopPropagationTouchEvents(element);
 
-      if (GetValue$2(config, 'selectAll', false)) {
+      if (GetValue$1(config, 'selectAll', false)) {
         _this.selectAll();
       }
 
@@ -683,10 +505,10 @@
     return InputText;
   }(DOMElement);
 
-  var methods$1 = {
+  var methods = {
     resize: Resize
   };
-  Object.assign(InputText.prototype, methods$1);
+  Object.assign(InputText.prototype, methods);
   var ElementProperties = {
     id: ['id', undefined],
     text: ['value', undefined],
@@ -731,246 +553,228 @@
     select: 'select'
   };
 
-  var TextKlass = Phaser.GameObjects.Text;
-
-  var IsTextGameObject = function IsTextGameObject(gameObject) {
-    return gameObject instanceof TextKlass;
-  };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
-  var CreateInputText = function CreateInputText(text, config) {
-    if (config === undefined) {
-      config = {};
-    }
-
-    var scene = text.scene;
-    var style = text.style;
-    var backgroundColor = GetValue$1(config, 'backgroundColor', style.backgroundColor);
-
-    if (backgroundColor === null) {
-      backgroundColor = 'transparent';
-    }
-
-    config.text = GetValue$1(config, 'text', text.text);
-    config.fontFamily = GetValue$1(config, 'fontFamily', style.fontFamily);
-    config.fontSize = GetValue$1(config, 'fontSize', style.fontSize);
-    config.color = GetValue$1(config, 'color', style.color);
-    config.backgroundColor = backgroundColor;
-    config.direction = GetValue$1(config, 'rtl', style.rtl) ? 'rtl' : 'ltr';
-    config.align = GetValue$1(config, 'align', GetHAlign(style)); // Built-in text game object with RTL only has 'right' align
-
-    if (config.direction === 'rtl' && IsTextGameObject(text)) {
-      config.align = 'right';
-    } // config.paddingLeft = 0;
-    // config.paddingRight = 0;
-    // config.paddingTop = 0;
-    // config.paddingBottom = 0;
-    // var valign = GetVAlign(style);
-    // switch (valign) {
-    //     case 'top':
-    //         break;
-    //     case 'bottom':
-    //         break;
-    // }
-
-
-    var inputText = new InputText(scene, text.x, text.y, GetValue$1(config, 'width', text.width), GetValue$1(config, 'height', text.height), config);
-    inputText.setOrigin(text.originX, text.originY);
-    scene.add.existing(inputText);
-    return inputText;
-  };
-
-  var GetHAlign = function GetHAlign(style) {
-    if (style.hasOwnProperty('align')) {
-      return style.align;
-    } else if (style.hasOwnProperty('halign')) {
-      return style.halign;
-    } else {
-      return 'left';
-    }
-  };
-
-  var IsFunction = function IsFunction(obj) {
-    return obj && typeof obj === 'function';
-  };
-
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var LastOpenedEditor = undefined;
 
-  var TextEdit = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TextEdit, _ComponentBase);
+  var HiddenInputText = /*#__PURE__*/function (_InputText) {
+    _inherits(HiddenInputText, _InputText);
 
-    var _super = _createSuper(TextEdit);
+    var _super = _createSuper(HiddenInputText);
 
-    function TextEdit(gameObject) {
+    function HiddenInputText(textObject, config) {
       var _this;
 
-      _classCallCheck(this, TextEdit);
+      _classCallCheck(this, HiddenInputText);
 
-      // No event emitter
-      _this = _super.call(this, gameObject, {
-        eventEmitter: false
-      }); // this.parent = gameObject;
+      _this = _super.call(this, textObject.scene, textObject.x, textObject.y, textObject.displayWidth, textObject.displayHeight, config); // Note: Don't add this game object into scene
+      // Set style
 
-      _this.inputText = undefined;
-      _this.onClose = undefined;
-      _this.delayCall = undefined;
+      var style = _this.node.style;
+      style.position = 'absolute';
+      style.opacity = 0;
+      style.pointerEvents = 'none';
+      style.zIndex = 0; // hide native blue text cursor on iOS
+
+      style.transform = 'scale(0)';
+      _this.textObject = textObject;
+
+      _this.setOrigin(textObject.originX, textObject.originY);
+
+      _this.setText(textObject.text);
+
+      textObject.once('destroy', _this.destroy, _assertThisInitialized(_this));
+
+      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', undefined), GetValue(config, 'updateTextCallbackScope', undefined));
+
+      _this.delayCall = undefined; // Start edit when click text game object
+
+      textObject.setInteractive().on('pointerdown', function () {
+        this.setFocus();
+      }, _assertThisInitialized(_this));
+
+      _this.scene.events.on('postupdate', _this.update, _assertThisInitialized(_this));
+
+      _this.on('focus', function () {
+        this.updateText(); // Attach pointerdown (outside of input-text) event, at next tick
+
+        this.delayCall = this.scene.time.delayedCall(0, function () {
+          this.scene.input.once('pointerdown', this.setBlur, this);
+        }, [], this);
+      }, _assertThisInitialized(_this)).on('blur', function () {
+        this.updateText();
+      }, _assertThisInitialized(_this));
+
       return _this;
     }
 
-    _createClass(TextEdit, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        this.close();
-
-        if (LastOpenedEditor === this) {
-          LastOpenedEditor = undefined;
-        }
-
-        _get(_getPrototypeOf(TextEdit.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "open",
-      value: function open(config, onCloseCallback) {
-        if (LastOpenedEditor !== undefined) {
-          LastOpenedEditor.close();
-        }
-
-        LastOpenedEditor = this;
-
-        if (IsFunction(config)) {
-          onCloseCallback = config;
-          config = undefined;
-        }
-
-        if (onCloseCallback === undefined) {
-          onCloseCallback = GetValue(config, 'onClose', undefined);
-        }
-
-        var onOpenCallback = GetValue(config, 'onOpen', undefined);
-        var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
-        this.inputText = CreateInputText(this.parent, config).on('textchange', function (inputText) {
-          var text = inputText.text;
-
-          if (customOnTextChanged) {
-            // Custom on-text-changed callback
-            customOnTextChanged(this.parent, text);
-          } else {
-            // Default on-text-changed callback
-            this.parent.text = text;
-          }
-        }, this).setFocus();
-        this.parent.setVisible(false); // Set parent text invisible
-        // Attach close event
-
-        this.onClose = onCloseCallback;
-
-        if (GetValue(config, 'enterClose', true)) {
-          this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-        } // Attach pointerdown (outside of input-text) event, at next tick
-
-
-        this.delayCall = this.scene.time.delayedCall(0, function () {
-          this.scene.input.once('pointerdown', this.close, this); // Open editor completly, invoke onOpenCallback
-
-          if (onOpenCallback) {
-            onOpenCallback(this.parent);
-          }
-        }, [], this);
-        return this;
-      }
-    }, {
-      key: "close",
-      value: function close() {
-        LastOpenedEditor = undefined;
-
-        if (!this.inputText) {
-          return this;
-        }
-
-        this.parent.setVisible(true); // Set parent text visible
-
-        this.inputText.destroy();
-        this.inputText = undefined;
+    _createClass(HiddenInputText, [{
+      key: "preDestroy",
+      value: function preDestroy() {
+        this.scene.events.off('postupdate', this.update, this);
 
         if (this.delayCall) {
           this.delayCall.remove();
           this.delayCall = undefined;
-        } // Remove close event
-
-
-        this.scene.input.keyboard.off('keydown-ENTER', this.close, this);
-        this.scene.input.off('pointerdown', this.close, this);
-
-        if (this.onClose) {
-          this.onClose(this.parent);
         }
 
+        _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);
+      }
+    }, {
+      key: "update",
+      value: function update() {
+        var textObject = this.textObject;
+
+        if (this.x !== textObject.x || this.y !== textObject.y) {
+          this.setPosition(textObject.x, textObject.y);
+        }
+
+        if (this.width !== textObject.displayWidth || this.height !== textObject.displayHeight) {
+          this.resize(textObject.displayWidth, textObject.displayHeight);
+        }
+
+        var newText = this.text;
+
+        if (newText !== this.prevText) {
+          this.prevText = newText;
+          this.updateText();
+        }
+      }
+    }, {
+      key: "updateText",
+      value: function updateText() {
+        var newText = this.text;
+        var callback = this.updateTextCallback,
+            scope = this.updateTextCallbackScope;
+
+        if (callback) {
+          if (scope) {
+            newText = callback.call(scope, newText, this);
+          } else {
+            newText = callback(newText, this);
+          }
+        }
+
+        this.textObject.setText(newText);
         return this;
       }
     }, {
-      key: "isOpened",
-      get: function get() {
-        return this.inputText !== undefined;
-      }
-    }, {
-      key: "text",
-      get: function get() {
-        return this.isOpened ? this.inputText.text : this.parent.text;
+      key: "setUpdateTextCallback",
+      value: function setUpdateTextCallback(callback, scope) {
+        this.updateTextCallback = callback;
+        this.updateTextCallbackScope = scope;
+        return this;
       }
     }]);
 
-    return TextEdit;
-  }(ComponentBase);
+    return HiddenInputText;
+  }(InputText);
 
-  var Edit = function Edit(gameObject, config, onCloseCallback) {
-    if (!gameObject._edit) {
-      gameObject._edit = new TextEdit(gameObject);
-    }
+  function Factory (textObject, config) {
+    var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene
 
-    gameObject._edit.open(config, onCloseCallback);
+    return gameObject;
+  }
 
-    return gameObject._edit;
+  function Creator (textObject, config) {
+    var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene
+
+    return gameObject;
+  }
+
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
   };
 
-  var TextEditPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(TextEditPlugin, _Phaser$Plugins$BaseP);
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
 
-    var _super = _createSuper(TextEditPlugin);
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
 
-    function TextEditPlugin(pluginManager) {
-      _classCallCheck(this, TextEditPlugin);
+      var key;
 
-      return _super.call(this, pluginManager);
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+
+          entry[key] = newEntry;
+        }
+
+        entry = entry[key];
+      }
     }
 
-    _createClass(TextEditPlugin, [{
+    return entry;
+  };
+
+  var SetValue = function SetValue(target, keys, value) {
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    } // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      } // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+
+    return target;
+  };
+
+  var HiddenInputTextPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(HiddenInputTextPlugin, _Phaser$Plugins$BaseP);
+
+    var _super = _createSuper(HiddenInputTextPlugin);
+
+    function HiddenInputTextPlugin(pluginManager) {
+      var _this;
+
+      _classCallCheck(this, HiddenInputTextPlugin);
+
+      _this = _super.call(this, pluginManager); //  Register our new Game Object type
+
+      pluginManager.registerGameObject('rexHiddenInputText', Factory, Creator);
+      return _this;
+    }
+
+    _createClass(HiddenInputTextPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
-    }, {
-      key: "add",
-      value: function add(gameObject) {
-        return new TextEdit(gameObject);
-      }
     }]);
 
-    return TextEditPlugin;
+    return HiddenInputTextPlugin;
   }(Phaser.Plugins.BasePlugin);
 
-  var methods = {
-    edit: Edit
-  };
-  Object.assign(TextEditPlugin.prototype, methods);
+  SetValue(window, 'RexPlugins.GameObjects.HiddenInputText', HiddenInputText);
 
-  return TextEditPlugin;
+  return HiddenInputTextPlugin;
 
 })));

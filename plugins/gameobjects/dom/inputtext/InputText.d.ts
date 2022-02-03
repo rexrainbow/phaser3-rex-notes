@@ -43,6 +43,13 @@ declare namespace InputText {
         type BlurCallbackType = (inputText: InputText, e: Event) => void;
         type ClickCallbackType = (inputText: InputText, e: Event) => void;
         type DoubleClickCallbackType = (inputText: InputText, e: Event) => void;
+        type SelectCallbackType = (inputText: InputText, e: Event) => void;
+        type PointerDownCallbackType = (inputText: InputText, e: Event) => void;
+        type PointerMoveCallbackType = (inputText: InputText, e: Event) => void;
+        type PointerUpCallbackType = (inputText: InputText, e: Event) => void;
+        type KeyDownCallbackType = (inputText: InputText, e: Event) => void;
+        type KeyPressCallbackType = (inputText: InputText, e: Event) => void;
+        type KeyUpCallbackType = (inputText: InputText, e: Event) => void;
     }
 }
 

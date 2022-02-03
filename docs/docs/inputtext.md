@@ -237,6 +237,10 @@ Default configuration
     ```javascript
     inputText.setBlur();
     ```
+- Is focused
+    ```javascript
+    var isFocused = inputText.isFocused;
+    ```
 
 ### Font color
 
@@ -313,6 +317,21 @@ Default configuration
     or
     ```javascript
     inputText.setTooltip(value);
+    ```
+
+### Readonly
+
+- Get
+    ```javascript
+    var readOnly = inputText.readOnly;
+    ```
+- Set
+    ```javascript
+    inputText.readOnly = value;
+    ```
+    ```javascript
+    inputText.setReadOnly();
+    // inputText.setReadOnly(value);
     ```
 
 ### Resize

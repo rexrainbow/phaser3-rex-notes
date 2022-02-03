@@ -259,6 +259,14 @@
         _this.selectAll();
       }
 
+      _this._isFocused = false;
+
+      _this.on('focus', function () {
+        this._isFocused = true;
+      }, _assertThisInitialized(_this)).on('blur', function () {
+        this._isFocused = false;
+      }, _assertThisInitialized(_this));
+
       return _this;
     }
 
@@ -456,6 +464,11 @@
       value: function setFocus() {
         this.node.focus();
         return this;
+      }
+    }, {
+      key: "isFocused",
+      get: function get() {
+        return this._isFocused;
       }
     }]);
 

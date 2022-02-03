@@ -15,6 +15,7 @@ module.exports = {
     'circularprogressplugin': './plugins/circularprogress-plugin.js',
     'customprogressplugin': './plugins/customprogress-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
+    'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
     'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
     'lineplugin': './plugins/line-plugin.js',

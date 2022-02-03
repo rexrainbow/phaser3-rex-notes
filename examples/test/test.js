@@ -27,14 +27,7 @@ var config = {
         width: 800,
         height: 600,
     },
-    scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexLine',
-            plugin: LinePlugin,
-            start: true
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
