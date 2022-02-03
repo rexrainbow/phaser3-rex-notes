@@ -1,4 +1,5 @@
 import InputText from '../inputtext/InputText.js';
+import IsPointerInHitArea from '../../../utils/input/IsPointerInHitArea.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -23,15 +24,12 @@ class HiddenInputText extends InputText {
 
         this.textObject = textObject;
         this.setOrigin(textObject.originX, textObject.originY);
-        this.setText(textObject.text);
         textObject.once('destroy', this.destroy, this);
 
         this.setUpdateTextCallback(
             GetValue(config, 'updateTextCallback', undefined),
             GetValue(config, 'updateTextCallbackScope', undefined)
         );
-
-        this.delayCall = undefined;
 
         // Start edit when click text game object
         textObject
@@ -42,15 +40,11 @@ class HiddenInputText extends InputText {
 
         this.scene.events.on('postupdate', this.update, this);
 
+        this.scene.input.on('pointerdown', this.onClickOutside, this)
+
         this
             .on('focus', function () {
                 this.updateText();
-
-                // Attach pointerdown (outside of input-text) event, at next tick
-                this.delayCall = this.scene.time.delayedCall(0, function () {
-                    this.scene.input.once('pointerdown', this.setBlur, this);
-                }, [], this);
-
             }, this)
             .on('blur', function () {
                 this.updateText();
@@ -59,11 +53,7 @@ class HiddenInputText extends InputText {
 
     preDestroy() {
         this.scene.events.off('postupdate', this.update, this);
-
-        if (this.delayCall) {
-            this.delayCall.remove();
-            this.delayCall = undefined;
-        }
+        this.scene.input.off('pointerdown', this.onClickOutside, this)
 
         super.preDestroy();
     }
@@ -83,6 +73,12 @@ class HiddenInputText extends InputText {
         if (newText !== this.prevText) {
             this.prevText = newText;
             this.updateText();
+        }
+    }
+
+    onClickOutside(pointer) {
+        if (!IsPointerInHitArea(this.textObject, pointer)) {
+            this.setBlur();
         }
     }
 

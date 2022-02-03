@@ -553,6 +553,67 @@
     select: 'select'
   };
 
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+    if (pointer) {
+      if (preTest && !preTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (!HitTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (postTest && !postTest(gameObject, pointer)) {
+        return false;
+      }
+
+      return true;
+    } else {
+      var inputManager = gameObject.scene.input.manager;
+      var pointersTotal = inputManager.pointersTotal;
+      var pointers = inputManager.pointers,
+          pointer;
+
+      for (var i = 0; i < pointersTotal; i++) {
+        pointer = pointers[i];
+
+        if (preTest && !preTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (!HitTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (postTest && !postTest(gameObject, pointer)) {
+          continue;
+        }
+
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  var HitTest = function HitTest(gameObject, pointer) {
+    var scene = gameObject.scene;
+    var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
+    var inputManager = scene.input.manager;
+    var gameObjects = [gameObject];
+    var output;
+
+    for (var i = 0, len = cameras.length; i < len; i++) {
+      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
+
+      if (output.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var HiddenInputText = /*#__PURE__*/function (_InputText) {
@@ -579,13 +640,10 @@
 
       _this.setOrigin(textObject.originX, textObject.originY);
 
-      _this.setText(textObject.text);
-
       textObject.once('destroy', _this.destroy, _assertThisInitialized(_this));
 
-      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', undefined), GetValue(config, 'updateTextCallbackScope', undefined));
+      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', undefined), GetValue(config, 'updateTextCallbackScope', undefined)); // Start edit when click text game object
 
-      _this.delayCall = undefined; // Start edit when click text game object
 
       textObject.setInteractive().on('pointerdown', function () {
         this.setFocus();
@@ -593,12 +651,10 @@
 
       _this.scene.events.on('postupdate', _this.update, _assertThisInitialized(_this));
 
-      _this.on('focus', function () {
-        this.updateText(); // Attach pointerdown (outside of input-text) event, at next tick
+      _this.scene.input.on('pointerdown', _this.onClickOutsideText, _assertThisInitialized(_this));
 
-        this.delayCall = this.scene.time.delayedCall(0, function () {
-          this.scene.input.once('pointerdown', this.setBlur, this);
-        }, [], this);
+      _this.on('focus', function () {
+        this.updateText();
       }, _assertThisInitialized(_this)).on('blur', function () {
         this.updateText();
       }, _assertThisInitialized(_this));
@@ -610,11 +666,7 @@
       key: "preDestroy",
       value: function preDestroy() {
         this.scene.events.off('postupdate', this.update, this);
-
-        if (this.delayCall) {
-          this.delayCall.remove();
-          this.delayCall = undefined;
-        }
+        this.scene.input.off('pointerdown', this.onClickOutsideText, this);
 
         _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);
       }
@@ -636,6 +688,13 @@
         if (newText !== this.prevText) {
           this.prevText = newText;
           this.updateText();
+        }
+      }
+    }, {
+      key: "onClickOutsideText",
+      value: function onClickOutsideText(pointer) {
+        if (!IsPointerInHitArea(this.textObject, pointer)) {
+          this.setBlur();
         }
       }
     }, {
