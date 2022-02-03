@@ -118,6 +118,7 @@ nav:
     - DOM element:
         - DOM element: domelement.md
         - Input text: inputtext.md
+        - Hidden input text: hiddeninputtext.md
         - File chooser: filechooser.md
         - Youtube player: youtubeplayer.md
     - Behaviors:
