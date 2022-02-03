@@ -253,11 +253,9 @@ Default configuration
     hiddenInputText.setMinLength(value);
     ```
 
-### Resize
+### Select text
 
-```javascript
-hiddenInputText.resize(width, height);
-```
+This feature does not support.
 
 ### Events
 
