@@ -72,7 +72,7 @@ nav:
             - Typing: texttyping.md    
             - Page: textpage.md
             - Edit: textedit.md
-            - Hidden input text: hiddeninputtext.md
+            - Hidden edit: hiddeninputtext.md
     - Graphics:
         - Graphics: graphics.md
         - Render texture: rendertexture.md
