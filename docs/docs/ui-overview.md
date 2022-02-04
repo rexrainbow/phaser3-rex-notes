@@ -355,7 +355,12 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 #### Behaviors of text
 
-1. [Text editor](textedit.md): Create an [input text object](inputtext.md) above a text object to edit string content.
+1. [Hidden text edit](hiddeninputtext.md): Create an invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp) to edit string content.
+    ```javascript
+    var textEdit = this.rexUI.add.hiddenTextEdit(textObject, config);
+    ```
+    - `textObject` : [text](text.md), [bbocodetext](bbcodetext.md), [tagtext](tagtext.md), or [label](ui-label.md).
+1. [Text edit](textedit.md): Create an [input text object](inputtext.md) above a text object to edit string content.
     ```javascript
     scene.rexUI.add.edit(textObject, config);
     // scene.rexUI.add.edit(textObject, config, onClose);

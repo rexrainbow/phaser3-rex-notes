@@ -2,6 +2,8 @@ import RoundRectangle from './roundrectangle/RoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
+import HiddenTextEdit from './hiddentextedit/HiddenTextEdit';
+
 import Container from './container/Container';
 import Canvas from './canvas/Canvas';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage';
@@ -74,6 +76,8 @@ export {
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
+    HiddenTextEdit,
+
     Container,
     Canvas,
     CircleMaskImage,

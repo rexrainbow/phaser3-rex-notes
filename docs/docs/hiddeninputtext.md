@@ -1,6 +1,6 @@
 ## Introduction
 
-A invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp), to 
+An invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp), to 
 receive character input and update text value of 
 [text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
 Extends from [InputText](inputtext.md)
