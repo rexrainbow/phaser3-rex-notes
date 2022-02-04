@@ -117,6 +117,8 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
     type: 'text',    // 'text'|'password'|'textarea'|'number'|'color'|...
 
     cursor: '|',
+    cursorFlashDuration: 1000,
+
     // updateTextCallback: DefaultUpdateTextCallback,
     // updateTextCallbackScope: undefined
 });
@@ -125,6 +127,7 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 - `type` : Type of element
     - `'text'`, `'password'`, `'textarea'`, `'number'`, `'color'`, ...
 - `cursor` : Cursor character used in default update text callback.
+- `cursorFlashDuration` : Display cursor character or a space string to create a flash cursor.
 - `updateTextCallback` : Callback of updating text at each tick. Default update text callback will insert `cursor` in to current string of this hidden input text.
     ```javascript
     function (text, hiddenInputText) {

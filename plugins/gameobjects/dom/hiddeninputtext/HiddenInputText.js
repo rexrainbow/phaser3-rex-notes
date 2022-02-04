@@ -2,6 +2,7 @@ import InputText from '../inputtext/InputText.js';
 import IsPointerInHitArea from '../../../utils/input/IsPointerInHitArea.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Wrap = Phaser.Math.Wrap;
 
 class HiddenInputText extends InputText {
     constructor(textObject, config) {
@@ -15,6 +16,8 @@ class HiddenInputText extends InputText {
         style.transform = 'scale(0)';
 
         this.setCursor(GetValue(config, 'cursor', '|'));
+        this.setCursorFlashDuration(GetValue(config, 'cursorFlashDuration', 1000));
+        this.cursorFlashTimer = 0;
 
         this.setUpdateTextCallback(
             GetValue(config, 'updateTextCallback', DefaultUpdateTextCallback),
@@ -34,6 +37,8 @@ class HiddenInputText extends InputText {
             }, this)
             .on('blur', function () {
                 this.updateText();
+                this.cursorFlashTimer = 0;
+
                 this.scene.events.off('postupdate', this.updateText, this);
                 this.scene.input.off('pointerdown', this.onClickOutside, this);
             }, this)
@@ -76,8 +81,26 @@ class HiddenInputText extends InputText {
     }
 
     setCursor(s) {
-        this.cursor = s;
+        this._cursor = s;
         return s;
+    }
+
+    setCursorFlashDuration(duration) {
+        this.cursorFlashDuration = duration;
+        return this;
+    }
+
+    get cursor() {
+        var cursor;
+        if (this.cursorFlashTimer < (this.cursorFlashDuration / 2)) {
+            cursor = this._cursor;
+        } else {
+            cursor = ' ';
+        }
+
+        var timerValue = this.cursorFlashTimer + this.scene.game.loop.delta;
+        this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
+        return cursor;
     }
 }
 

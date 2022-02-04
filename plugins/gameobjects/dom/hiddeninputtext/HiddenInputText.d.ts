@@ -4,11 +4,17 @@ export default HiddenInputText;
 
 declare namespace HiddenInputText {
     interface IConfig extends InputText.IConfig {
+        cursor?: string;
+        cursorFlashDuration?: number;
+
         updateTextCallback?: UpdateTextCallbackType;
         updateTextCallbackScope?: Object,
     }
 
-    type UpdateTextCallbackType = (newText: string) => string;
+    type UpdateTextCallbackType = (
+        newText: string,
+        hiddenInputText: HiddenInputText,
+    ) => string;
 }
 
 declare class HiddenInputText extends InputText {
@@ -20,5 +26,16 @@ declare class HiddenInputText extends InputText {
     setUpdateTextCallback(
         callback?: HiddenInputText.UpdateTextCallbackType,
         scope?: Object
+    ): this;
+    updateTextCallback: HiddenInputText.UpdateTextCallbackType;
+    updateTextCallbackScope: Object;
+
+    setCursor(
+        s: string
+    ): this;
+    readonly cursor: string;
+
+    setCursorFlashDuration(
+        duration: number
     ): this;
 }

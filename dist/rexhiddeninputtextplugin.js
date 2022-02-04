@@ -620,6 +620,7 @@
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var Wrap = Phaser.Math.Wrap;
 
   var HiddenInputText = /*#__PURE__*/function (_InputText) {
     _inherits(HiddenInputText, _InputText);
@@ -641,6 +642,10 @@
 
       _this.setCursor(GetValue(config, 'cursor', '|'));
 
+      _this.setCursorFlashDuration(GetValue(config, 'cursorFlashDuration', 1000));
+
+      _this.cursorFlashTimer = 0;
+
       _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', DefaultUpdateTextCallback), GetValue(config, 'updateTextCallbackScope', undefined));
 
       _this.textObject = textObject;
@@ -651,6 +656,7 @@
         this.scene.input.on('pointerdown', this.onClickOutside, this);
       }, _assertThisInitialized(_this)).on('blur', function () {
         this.updateText();
+        this.cursorFlashTimer = 0;
         this.scene.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
       }, _assertThisInitialized(_this));
@@ -703,8 +709,29 @@
     }, {
       key: "setCursor",
       value: function setCursor(s) {
-        this.cursor = s;
+        this._cursor = s;
         return s;
+      }
+    }, {
+      key: "setCursorFlashDuration",
+      value: function setCursorFlashDuration(duration) {
+        this.cursorFlashDuration = duration;
+        return this;
+      }
+    }, {
+      key: "cursor",
+      get: function get() {
+        var cursor;
+
+        if (this.cursorFlashTimer < this.cursorFlashDuration / 2) {
+          cursor = this._cursor;
+        } else {
+          cursor = ' ';
+        }
+
+        var timerValue = this.cursorFlashTimer + this.scene.game.loop.delta;
+        this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
+        return cursor;
       }
     }]);
 
