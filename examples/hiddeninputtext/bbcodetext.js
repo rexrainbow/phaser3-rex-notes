@@ -21,16 +21,19 @@ class Demo extends Phaser.Scene {
             valign: 'center'
         })
 
-        var hiddenInputText = this.plugins.get('rexHiddenInputText').add(textObject, {
+        this.plugins.get('rexHiddenInputText').add(textObject, {
             type: 'textarea',
             cursor: '[color=blue][size=12][b][y=-2]|[/y][/b][/size][/color]',
+            enterClose: false,
+
+            onOpen(textObject) {
+                textObject.setBackgroundColor('#555555')
+            },
+
+            onClose(textObject) {
+                textObject.setBackgroundColor('#222222')
+            }
         })
-            .on('focus', function (hiddenInputText) {
-                hiddenInputText.textObject.setBackgroundColor('#555555')
-            })
-            .on('blur', function () {
-                hiddenInputText.textObject.setBackgroundColor('#222222')
-            })
     }
 
     update() {

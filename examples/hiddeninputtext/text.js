@@ -18,15 +18,18 @@ class Demo extends Phaser.Scene {
             backgroundColor: '#222222',
         })
 
-        var hiddenInputText = this.plugins.get('rexHiddenInputText').add(textObject, {
+        this.plugins.get('rexHiddenInputText').add(textObject, {
             type: 'textarea',
+            enterClose: false,
+
+            onOpen(textObject) {
+                textObject.setBackgroundColor('#555555')
+            },
+
+            onClose(textObject) {
+                textObject.setBackgroundColor('#222222')
+            }
         })
-            .on('focus', function (hiddenInputText) {
-                hiddenInputText.textObject.setBackgroundColor('#555555')
-            })
-            .on('blur', function () {
-                hiddenInputText.textObject.setBackgroundColor('#222222')
-            })
     }
 
     update() {

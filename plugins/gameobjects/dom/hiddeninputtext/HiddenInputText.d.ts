@@ -6,9 +6,23 @@ declare namespace HiddenInputText {
     interface IConfig extends InputText.IConfig {
         cursor?: string;
         cursorFlashDuration?: number;
+        enterClose?: boolean;
 
-        updateTextCallback?: UpdateTextCallbackType;
-        updateTextCallbackScope?: Object,
+        onOpen: (
+            textObject: Phaser.GameObjects.GameObject,
+            hiddenInputText: HiddenInputText,
+        ) => void;
+
+        onClose: (
+            textObject: Phaser.GameObjects.GameObject,
+            hiddenInputText: HiddenInputText,
+        ) => void;
+
+        onUpdate: (
+            text: string,
+            textObject: Phaser.GameObjects.GameObject,
+            hiddenInputText: HiddenInputText,
+        ) => void | string;
     }
 
     type UpdateTextCallbackType = (
@@ -23,13 +37,6 @@ declare class HiddenInputText extends InputText {
         config?: InputText.IConfig
     );
 
-    setUpdateTextCallback(
-        callback?: HiddenInputText.UpdateTextCallbackType,
-        scope?: Object
-    ): this;
-    updateTextCallback: HiddenInputText.UpdateTextCallbackType;
-    updateTextCallbackScope: Object;
-
     setCursor(
         s: string
     ): this;
@@ -38,4 +45,12 @@ declare class HiddenInputText extends InputText {
     setCursorFlashDuration(
         duration: number
     ): this;
+
+    setEnterClose(
+        value?: boolean
+    ): this;
+
+    open(): this;
+    close(): this;
+    readonly isOpened: boolean;
 }

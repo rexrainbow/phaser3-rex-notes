@@ -649,19 +649,36 @@
 
       _this.cursorFlashTimer = 0;
 
-      _this.setUpdateTextCallback(GetValue(config, 'updateTextCallback', DefaultUpdateTextCallback), GetValue(config, 'updateTextCallbackScope', undefined));
+      _this.setEnterClose(GetValue(config, 'enterClose', true));
 
+      _this.onOpenCallback = GetValue(config, 'onOpen', undefined);
+      _this.onCloseCallback = GetValue(config, 'onClose', undefined);
+      _this.onUpdateCallback = GetValue(config, 'onUpdate', undefined);
       _this.textObject = textObject;
       textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
 
       _this.on('focus', function () {
+        this.cursorFlashTimer = 0;
+
+        if (this.enterClose) {
+          this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
+        }
+
+        this.setText(this.textObject.text);
         this.scene.events.on('postupdate', this.updateText, this);
         this.scene.input.on('pointerdown', this.onClickOutside, this);
+
+        if (this.onOpenCallback) {
+          this.onOpenCallback(this.textObject, this);
+        }
       }, _assertThisInitialized(_this)).on('blur', function () {
         this.updateText();
-        this.cursorFlashTimer = 0;
         this.scene.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
+
+        if (this.onCloseCallback) {
+          this.onCloseCallback(this.textObject, this);
+        }
       }, _assertThisInitialized(_this));
 
       return _this;
@@ -687,32 +704,30 @@
     }, {
       key: "updateText",
       value: function updateText() {
-        var newText = this.text;
-        var callback = this.updateTextCallback,
-            scope = this.updateTextCallbackScope;
+        var text = this.text;
 
-        if (callback) {
-          if (scope) {
-            newText = callback.call(scope, newText, this);
-          } else {
-            newText = callback(newText, this);
+        if (this.onUpdateCallback) {
+          var newText = this.onUpdateCallback(text, this.textObject, this);
+
+          if (newText) {
+            text = newText;
           }
         }
 
-        this.textObject.setText(newText);
-        return this;
-      }
-    }, {
-      key: "setUpdateTextCallback",
-      value: function setUpdateTextCallback(callback, scope) {
-        this.updateTextCallback = callback;
-        this.updateTextCallbackScope = scope;
+        if (this.isFocused && this.hasCursor) {
+          // Insert Cursor
+          var cursorPosition = this.cursorPosition;
+          text = text.substring(0, cursorPosition) + this.cursor + text.substring(cursorPosition);
+        }
+
+        this.textObject.setText(text);
         return this;
       }
     }, {
       key: "setCursor",
       value: function setCursor(s) {
         this._cursor = s;
+        this.hasCursor = s && s !== '';
         return s;
       }
     }, {
@@ -724,6 +739,7 @@
     }, {
       key: "cursor",
       get: function get() {
+        // Flash Cursor
         var cursor;
 
         if (this.cursorFlashTimer < this.cursorFlashDuration / 2) {
@@ -736,19 +752,37 @@
         this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
         return cursor;
       }
+    }, {
+      key: "setEnterClose",
+      value: function setEnterClose(value) {
+        if (value === undefined) {
+          value = true;
+        }
+
+        this.enterClose = value;
+        return this;
+      }
+    }, {
+      key: "open",
+      value: function open() {
+        this.setFocus();
+        return this;
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        this.setBlur();
+        return this;
+      }
+    }, {
+      key: "isOpened",
+      get: function get() {
+        return this._isFocused;
+      }
     }]);
 
     return HiddenInputText;
   }(InputText);
-
-  var DefaultUpdateTextCallback = function DefaultUpdateTextCallback(text, hiddenInputText) {
-    if (hiddenInputText.isFocused) {
-      var cursorPosition = hiddenInputText.cursorPosition;
-      return text.substring(0, cursorPosition) + hiddenInputText.cursor + text.substring(cursorPosition);
-    } else {
-      return text;
-    }
-  };
 
   function Factory (textObject, config) {
     var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene

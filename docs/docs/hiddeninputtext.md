@@ -119,27 +119,46 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
     cursor: '|',
     cursorFlashDuration: 1000,
 
-    // updateTextCallback: DefaultUpdateTextCallback,
-    // updateTextCallbackScope: undefined
+    // updateTextCallback: undefined,
+    // updateTextCallbackScope: undefined,
+    
+    // enterClose: true,
+
+    // onOpen: undefined,
+    // onClose: undefined,
+    // onTextChanged: undefined,
 });
 ```
 
+- `textGameObject` : 
 - `type` : Type of element
     - `'text'`, `'password'`, `'textarea'`, `'number'`, `'color'`, ...
 - `cursor` : Cursor character used in default update text callback.
+    - `null`, or `''` : Don't insert cursor character.
 - `cursorFlashDuration` : Display cursor character or a space string to create a flash cursor.
-- `updateTextCallback` : Callback of updating text at each tick. Default update text callback will insert `cursor` in to current string of this hidden input text.
+- `updateTextCallback` : Callback when text updating
     ```javascript
     function (text, hiddenInputText) {
-        if (hiddenInputText.isFocused) {
-            var cursorPosition = hiddenInputText.cursorPosition;
-            return text.substring(0, cursorPosition) + hiddenInputText.cursor + text.substring(cursorPosition);
-        } else {
-            return text;
-        }
+        return text;
     }
     ```
-- `updateTextCallbackScope` : Scope of `updateTextCallback`.
+- `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
+- `onOpen` : Callback invoked when focus on this hidden input text.
+    ```javascript
+    function (textObject, hiddenInputText) {
+    }
+    ```
+- `onClose` : Callback invoked when blur.
+    ```javascript
+    function (textObject, hiddenInputText) {
+    }
+    ```
+- `onUpdate` : Invoke iin each tick of editing. Can return a new string for text game object displaying. Cursor character will insert in this new string.
+    ```javascript
+    function (text, textObject, hiddenInputText) {
+        // return text;
+    }
+    ```
 
 !!! note
 
@@ -166,6 +185,30 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
     ```javascript
     var hiddenInputText = new MyHiddenText(textGameObject, config);
     ```
+
+### Open editor
+
+```javascript
+hiddenInputText.open();
+```
+
+Equal to `hiddenInputText.setFocus()`
+
+### Close editor
+
+```javascript
+hiddenInputText.close();
+```
+
+Equal to `hiddenInputText.setBlur()`;
+
+#### Is opened
+
+```javascript
+var isOpened = hiddenInputText.isOpened;
+```
+
+Equal to `hiddenInputText.isFocused`
 
 ### Select text
 

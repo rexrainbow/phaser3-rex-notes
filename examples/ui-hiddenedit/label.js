@@ -42,15 +42,18 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        var hiddenEdit = this.rexUI.add.hiddenEdit(label, {
+        this.rexUI.add.hiddenEdit(label, {
             type: 'textarea',
+            enterClose: false,
+
+            onOpen(textObject) {
+                textObject.getElement('background').setStrokeStyle(2, 0xffffff)
+            },
+
+            onClose(textObject) {
+                textObject.getElement('background').setStrokeStyle()
+            }
         })
-            .on('focus', function (hiddenEdit) {
-                hiddenEdit.textObject.getElement('background').setStrokeStyle(2, 0xffffff)
-            })
-            .on('blur', function () {
-                hiddenEdit.textObject.getElement('background').setStrokeStyle()
-            })
     }
 
     update() {

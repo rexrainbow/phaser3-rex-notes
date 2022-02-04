@@ -90,6 +90,7 @@ declare class InputText extends Phaser.GameObjects.DOMElement {
 
     setFocus(): this;
     setBlur(): this;
+    readonly isFocused: boolean;
 
     setFontColor(color: string): this;
     fontColor: string;
