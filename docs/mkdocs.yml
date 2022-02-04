@@ -72,6 +72,7 @@ nav:
             - Typing: texttyping.md    
             - Page: textpage.md
             - Edit: textedit.md
+            - Hidden input text: hiddeninputtext.md
     - Graphics:
         - Graphics: graphics.md
         - Render texture: rendertexture.md
@@ -117,8 +118,7 @@ nav:
         - Group: group.md
     - DOM element:
         - DOM element: domelement.md
-        - Input text: inputtext.md
-        - Hidden input text: hiddeninputtext.md
+        - Input text: inputtext.md        
         - File chooser: filechooser.md
         - Youtube player: youtubeplayer.md
     - Behaviors:
