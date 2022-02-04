@@ -7909,9 +7909,8 @@
   <h1>Hidden edit</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>An invisible <a href="https://www.w3schools.com/tags/tag_input.asp">Input DOM element</a>, to 
-receive character input and update text value of 
-<a href="../text/">text</a>, <a href="../bbcodetext/">bbocodetext</a>, or <a href="../tagtext/">tagtext</a>.
+<p>An invisible <a href="https://www.w3schools.com/tags/tag_input.asp">Input DOM element</a> to 
+receive character input and display on <a href="../text/">text</a>, <a href="../bbcodetext/">bbocodetext</a>, or <a href="../tagtext/">tagtext</a>.
 Extends from <a href="../inputtext/">InputText</a></p>
 <p>Inspirited by <a href="https://goldfirestudios.com/canvasinput-html5-canvas-text-input">CanvasInput</a>.</p>
 <ul>
@@ -8037,11 +8036,6 @@ Extends from <a href="../inputtext/">InputText</a></p>
 </ul>
 </li>
 <li><code>cursorFlashDuration</code> : Display cursor character or a space string to create a flash cursor.</li>
-<li><code>updateTextCallback</code> : Callback when text updating
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">text</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></li>
 <li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is true.</li>
 <li><code>onOpen</code> : Callback invoked when focus on this hidden input text.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
@@ -8051,7 +8045,7 @@ Extends from <a href="../inputtext/">InputText</a></p>
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>onUpdate</code> : Invoke iin each tick of editing. Can return a new string for text game object displaying. Cursor character will insert in this new string.
+<li><code>onUpdate</code> : Invoke iin each tick of editing. Can return a new string for text game object displaying.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return text;</span>
 <span class="p">}</span>

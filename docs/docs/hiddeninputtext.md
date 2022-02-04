@@ -1,8 +1,7 @@
 ## Introduction
 
-An invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp), to 
-receive character input and update text value of 
-[text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
+An invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp) to 
+receive character input and display on [text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
 Extends from [InputText](inputtext.md)
 
 Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
@@ -136,12 +135,6 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 - `cursor` : Cursor character used in default update text callback.
     - `null`, or `''` : Don't insert cursor character.
 - `cursorFlashDuration` : Display cursor character or a space string to create a flash cursor.
-- `updateTextCallback` : Callback when text updating
-    ```javascript
-    function (text, hiddenInputText) {
-        return text;
-    }
-    ```
 - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
 - `onOpen` : Callback invoked when focus on this hidden input text.
     ```javascript
@@ -153,7 +146,7 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
     function (textObject, hiddenInputText) {
     }
     ```
-- `onUpdate` : Invoke iin each tick of editing. Can return a new string for text game object displaying. Cursor character will insert in this new string.
+- `onUpdate` : Invoke iin each tick of editing. Can return a new string for text game object displaying.
     ```javascript
     function (text, textObject, hiddenInputText) {
         // return text;

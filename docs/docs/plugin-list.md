@@ -71,7 +71,7 @@
 1. [Gesture/Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
-1. [Hidden input text](hiddeninputtext.md): A invisible Input DOM element, to update the rendering result of text, bbocodetext, or tagtext.
+1. [Hidden input text](hiddeninputtext.md): An invisible Input DOM element to receive character input and display on text game object.
 1. [Image URI loader](imageuriloader.md): Load image by uri in preload stage.
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
