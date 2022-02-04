@@ -16,6 +16,10 @@ class HiddenInputTextPlugin extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
     }
+
+    add(textObject, config) {
+        return new HiddenInputText(textObject, config);
+    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.HiddenInputText', HiddenInputText);

@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             backgroundColor: '#222222',
         })
 
-        var hiddenInputText = this.add.rexHiddenInputText(textObject, {
+        var hiddenInputText = this.plugins.get('rexHiddenInputText').add(textObject, {
             type: 'textarea',
         })
             .on('focus', function (hiddenInputText) {

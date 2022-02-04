@@ -1,9 +1,11 @@
 ## Introduction
 
-A invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp), to update 
-the rendering result of [text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
+A invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp), to 
+receive character input and update the rendering result of 
+[text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
+Extends from [InputText](inputtext.md)
 
-Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
+Inspirited  [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
 
 - Author: Rex
 - [DOM Game object](domelement.md)
@@ -40,7 +42,7 @@ Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas
     ```
 - Add input-text object
     ```javascript
-    var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, config);
+    var hiddenInputText = scene.plugins.get('rexhiddeninputtextplugin').add(textGameObject, config);
     ```
 
 #### Import plugin
@@ -73,7 +75,7 @@ Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas
     ```
 - Add input-text object
     ```javascript
-    var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, config);
+    var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, config);
     ```
 
 #### Import class
@@ -102,28 +104,21 @@ Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas
 - Add input-text object
     ```javascript    
     var hiddenInputText = new HiddenInputText(textGameObject, config);
-    scene.add.existing(hiddenInputText);
     ```
+
+!!! note
+
+    Don't add this game object into scene
 
 ### Add input text object
 
 ```javascript
-var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, {
+var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, {
     type: 'text',    // 'text'|'password'|'textarea'|'number'|'color'|...
 
     cursor: '|',
     // updateTextCallback: DefaultUpdateTextCallback,
     // updateTextCallbackScope: undefined
-
-    // Element properties
-    id: undefined,
-    text: undefined,
-    maxLength: undefined,
-    minLength: undefined,
-    readOnly: false,
-
-    // Style properties
-    direction: 'ltr',
 });
 ```
 
@@ -142,14 +137,6 @@ var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, {
     }
     ```
 - `updateTextCallbackScope` : Scope of `updateTextCallback`.
-- Element properties
-    - `id` : `id` element property.
-    - `text` : `value` element property.
-    - `maxLength` : `maxLength` element property.
-    - `minLength` : `minLength` element property.
-    - `readOnly` : `readonly` element property.
-- Element style properties
-    - `direction` : `direction` style property.
 
 !!! note
 
@@ -162,8 +149,7 @@ var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, {
     class MyHiddenText extends HiddenInputText {
         constructor(textGameObject, config) {
             super(textGameObject, config) {
-            // ...
-            scene.add.existing(this);
+            // ...            
         }
         // ...
 
@@ -178,113 +164,10 @@ var hiddenInputText = scene.add.rexHiddenInputText(textGameObject, {
     var hiddenInputText = new MyHiddenText(textGameObject, config);
     ```
 
-### Text
-
-- Get
-    ```javascript
-    var text = hiddenInputText.text;
-    ```
-- Set
-    ```javascript
-    hiddenInputText.setText(text);
-    // hiddenInputText.text = text;
-    ```
-
-### Focus
-
-- Focus
-    ```javascript
-    hiddenInputText.setFocus();
-    ```
-- Blur
-    ```javascript
-    hiddenInputText.setBlur();
-    ```
-- Is focused
-    ```javascript
-    var isFocused = hiddenInputText.isFocused;
-    ```
-
-### Max length
-
-- Get
-    ```javascript
-    var value = hiddenInputText.maxLength;
-    ```
-- Set
-    ```javascript
-    hiddenInputText.maxLength = value;
-    ```
-    or
-    ```javascript
-    hiddenInputText.setMaxLength(value);
-    ```
-
-### Min length
-
-- Get
-    ```javascript
-    var value = hiddenInputText.minLength;
-    ```
-- Set
-    ```javascript
-    hiddenInputText.minLength = value;
-    ```
-    or
-    ```javascript
-    hiddenInputText.setMinLength(value);
-    ```
-
 ### Select text
 
 This feature does not support.
 
-### Events
+### Other properties
 
-- On text changed
-    ```javascript
-    hiddenInputText.on('textchange', function(hiddenInputText, e){ }, scope);
-    ```
-- On focus
-    ```javascript
-    hiddenInputText.on('focus', function(hiddenInputText, e){ }, scope);
-    ```
-- On blur
-    ```javascript
-    hiddenInputText.on('blur', function(hiddenInputText, e){ }, scope);
-    ```
-- On click, double click
-    ```javascript
-    hiddenInputText.on('click', function(hiddenInputText, e){ }, scope);
-    ```
-    ```javascript
-    hiddenInputText.on('dblclick', function(hiddenInputText, e){ }, scope);
-    ```
-    Touch/mouse events on input text object won't be propagated to game canvas.
-- On keydown, keyup
-    ```javascript
-    hiddenInputText.on('keydown', function(hiddenInputText, e){ }, scope);
-    ```
-    ```javascript
-    hiddenInputText.on('keyup', function(hiddenInputText, e){ }, scope);
-    ```
-    Keyboard events on input text object won't be propagated to game canvas.
-- On pointerdown, pointermove, pointerup
-    ```javascript
-    hiddenInputText.on('pointerdown', function(hiddenInputText, e){ }, scope);
-    ```
-    ```javascript
-    hiddenInputText.on('pointermove', function(hiddenInputText, e){ }, scope);
-    ```
-    ```javascript
-    hiddenInputText.on('pointerup', function(hiddenInputText, e){ }, scope);
-    ```
-    Mouse/touch events on input text object won't be propagated to game canvas.
-- On select
-    ```javascript
-    hiddenInputText.on('select', function(hiddenInputText, e){ 
-        var selectedString = hiddenInputText.selectedText;
-        var selectionStart = hiddenInputText.selectionStart;
-        var selectionEnd = hiddenInputText.selectionEnd;
-    }, scope);
-    ```
+See [InputText](inputtext.md), [DOM game object](domelement.md).

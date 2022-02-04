@@ -635,9 +635,6 @@
       // Set style
 
       var style = _this.node.style;
-      style.position = 'absolute';
-      style.opacity = 0;
-      style.pointerEvents = 'none';
       style.zIndex = 0; // hide native blue text cursor on iOS
 
       style.transform = 'scale(0)';
@@ -822,6 +819,11 @@
       value: function start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
+      }
+    }, {
+      key: "add",
+      value: function add(textObject, config) {
+        return new HiddenInputText(textObject, config);
       }
     }]);
 
