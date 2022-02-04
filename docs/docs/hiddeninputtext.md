@@ -186,6 +186,17 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
     var hiddenInputText = new MyHiddenText(textGameObject, config);
     ```
 
+### Cursor
+
+- Set
+    ```javascript
+    hiddenInputText.setCursor(s);
+    ```
+- Get
+    ```javascript
+    var cursor = hiddenInputText.cursor;
+    ```
+
 ### Open editor
 
 ```javascript

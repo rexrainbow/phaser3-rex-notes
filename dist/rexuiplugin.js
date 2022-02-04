@@ -6542,7 +6542,11 @@
     }, {
       key: "cursor",
       get: function get() {
-        // Flash Cursor
+        if (!this._isFocused) {
+          return this._cursor;
+        } // Flash Cursor
+
+
         var cursor;
 
         if (this.cursorFlashTimer < this.cursorFlashDuration / 2) {

@@ -54,6 +54,7 @@ class HiddenInputText extends InputText {
             }, this)
             .on('blur', function () {
                 this.updateText();
+
                 this.scene.events.off('postupdate', this.updateText, this);
                 this.scene.input.off('pointerdown', this.onClickOutside, this);
 
@@ -112,6 +113,10 @@ class HiddenInputText extends InputText {
     }
 
     get cursor() {
+        if (!this._isFocused) {
+            return this._cursor;
+        }
+
         // Flash Cursor
         var cursor;
         if (this.cursorFlashTimer < (this.cursorFlashDuration / 2)) {
