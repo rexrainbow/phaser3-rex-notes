@@ -6439,6 +6439,9 @@
       // Set style
 
       var style = _this.node.style;
+      style.position = 'absolute';
+      style.opacity = 0;
+      style.pointerEvents = 'none';
       style.zIndex = 0; // hide native blue text cursor on iOS
 
       style.transform = 'scale(0)';
@@ -6550,12 +6553,12 @@
     }
   };
 
-  ObjectFactory.register('hiddenTextEdit', function (textObject, config) {
+  ObjectFactory.register('hiddenEdit', function (textObject, config) {
     var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene
 
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.HiddenTextEdit', HiddenInputText);
+  SetValue(window, 'RexPlugins.UI.HiddenEdit', HiddenInputText);
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;

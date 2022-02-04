@@ -11,6 +11,9 @@ class HiddenInputText extends InputText {
 
         // Set style
         var style = this.node.style;
+        style.position = 'absolute';
+        style.opacity = 0;
+        style.pointerEvents = 'none';
         style.zIndex = 0;
         // hide native blue text cursor on iOS
         style.transform = 'scale(0)';

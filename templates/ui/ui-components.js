@@ -3,7 +3,7 @@ import RoundRectangle from './roundrectangle/RoundRectangle.js';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
-import HiddenTextEdit from './hiddentextedit/HiddenTextEdit.js';
+import HiddenEdit from './hiddenedit/HiddenEdit.js';
 
 import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
@@ -78,7 +78,7 @@ export {
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
-    HiddenTextEdit,
+    HiddenEdit,
 
     Container,
     Canvas,

@@ -2,7 +2,6 @@ import RoundRectangle from './roundrectangle/RoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
-import HiddenTextEdit from './hiddentextedit/HiddenTextEdit';
 
 import Container from './container/Container';
 import Canvas from './canvas/Canvas';
@@ -66,6 +65,7 @@ import {
     IsShown,
 } from './utils/Hide';
 import { Edit } from '../../plugins/textedit';
+import HiddenEdit from './hiddenedit/HiddenEdit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import GetViewport from '../../plugins/utils/system/GetViewport';
@@ -76,7 +76,7 @@ export {
     RoundRectangleCanvas,
     BBCodeText,
     TagText,
-    HiddenTextEdit,
+    HiddenEdit,
 
     Container,
     Canvas,

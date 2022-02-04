@@ -5,7 +5,7 @@ import RoundRectangleFactory from './roundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
-import HiddenTextEditFactory from './hiddentextedit/Factory.js';
+import HiddenTextEditFactory from './hiddenedit/Factory.js';
 
 import ContainerFactory from './container/Factory.js';
 import CanvasFactory from './canvas/Factory.js';
