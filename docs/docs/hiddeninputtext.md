@@ -2,9 +2,8 @@
 
 An invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp) to 
 receive character input and display on [text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
-Extends from [InputText](inputtext.md)
 
-Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
+Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
 
 - Author: Rex
 - [DOM Game object](domelement.md)
@@ -13,6 +12,7 @@ Inspirited by [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas
 
 - [With Text](https://codepen.io/rexrainbow/pen/WNXxEMV)
 - [With BBCodeText](https://codepen.io/rexrainbow/pen/YzEWrzR)
+- [With rexui-Label](https://codepen.io/rexrainbow/pen/MWOjJzZ)
 
 ## Usage
 
