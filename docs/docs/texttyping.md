@@ -70,6 +70,7 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 - Add typing behavior
     ```javascript
     var typing = new TextTyping(textGameObject, config);
+    ```
 
 ### Create instance
 
