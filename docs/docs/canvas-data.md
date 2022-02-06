@@ -82,7 +82,7 @@ var canvasData = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(gameObj
 ```
 
 - `gameObject` : 
-    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md). 
+    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md).
     - [Canvas](canvas.md) object
 - For each pixel data
     ```javascript

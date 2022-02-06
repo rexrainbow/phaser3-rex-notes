@@ -120,7 +120,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
 // var editor = scene.plugins.get('rexTextEdit').edit(textObject, config, onClose);
 ```
 
-- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md).
 - `config` : 
     - `config.type` : 
         - `'text'` (default), or 
