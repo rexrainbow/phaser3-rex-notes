@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import TCRPPlugin from '../../plugins/tcrp-plugin.js';
 
 class Demo extends Phaser.Scene {

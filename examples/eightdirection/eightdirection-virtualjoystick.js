@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import EightDirectionPlugin from '../../plugins/eightdirection-plugin.js';
 import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 

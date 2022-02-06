@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import DefaultMask from '../../plugins/utils/mask/DefaultMask.js';
 import ContainerLite from '../../plugins/gameobjects/containerlite/ContainerLite.js';
 

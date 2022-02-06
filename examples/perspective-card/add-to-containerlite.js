@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 

@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import ScriptTagLoaderPlugin from '../../plugins/scripttagloader-plugin.js';
 
 class Demo extends Phaser.Scene {

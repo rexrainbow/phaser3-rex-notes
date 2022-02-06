@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 
 class Demo extends Phaser.Scene {

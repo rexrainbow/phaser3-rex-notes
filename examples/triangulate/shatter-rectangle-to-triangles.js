@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import ShatterRectangleToTriangles from '../../plugins/utils/math/triangulate/ShatterRectangleToTriangles.js';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

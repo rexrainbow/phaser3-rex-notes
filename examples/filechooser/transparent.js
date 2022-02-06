@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import FileChooserPlugin from '../../plugins/filechooser-plugin.js'
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
 import FitTo from '../../plugins/utils/size/FitTo.js';

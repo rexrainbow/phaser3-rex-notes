@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import Mustache from '../../plugins/utils/mustache/mustache.min.js';
 
 class Demo extends Phaser.Scene {

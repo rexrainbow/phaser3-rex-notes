@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 

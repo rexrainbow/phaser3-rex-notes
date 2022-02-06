@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import ContainerLite from '../../plugins/containerlite.js';
 
 class MyContainer extends ContainerLite {

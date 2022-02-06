@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
 
 class Demo extends Phaser.Scene {

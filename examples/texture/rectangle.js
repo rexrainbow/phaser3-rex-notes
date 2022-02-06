@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 
 class Demo extends Phaser.Scene {

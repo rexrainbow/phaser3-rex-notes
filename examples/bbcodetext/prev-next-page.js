@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 import TextPage from '../../plugins/textpage.js'
 

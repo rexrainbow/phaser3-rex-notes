@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import TintRGBPlugin from '../../plugins/tintrgb-plugin.js';
 
 const Between = Phaser.Math.Between;

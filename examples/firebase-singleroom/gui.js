@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import FirebasePlugin from '../../plugins/firebase-plugin.js';
 import firebaseConfig from './firebaseConfig.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';

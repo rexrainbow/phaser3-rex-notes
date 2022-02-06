@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import ScaleOuterPlugin from '../../plugins/scaleouter-plugin.js';
 
 class Background extends Phaser.Scene {

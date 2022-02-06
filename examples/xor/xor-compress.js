@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import XOR from '../../plugins/xor.js';
 import LZString from '../../plugins/lzstring.js';
 

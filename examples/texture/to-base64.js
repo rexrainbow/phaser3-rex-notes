@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import ToBase64 from '../../plugins/utils/texture/ToBase64.js';
 
 class Demo extends Phaser.Scene {

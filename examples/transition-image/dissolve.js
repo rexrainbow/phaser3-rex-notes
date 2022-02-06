@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
 import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js';
 

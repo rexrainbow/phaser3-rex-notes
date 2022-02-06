@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 

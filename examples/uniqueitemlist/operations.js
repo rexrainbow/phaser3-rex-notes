@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import UniqueItemListPlugin from '../../plugins/uniqueitemlist-plugin.js';
 
 

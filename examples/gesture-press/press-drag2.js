@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import GesturesPlugin from '../../plugins/gestures-plugin.js';
 import DragPlugin from '../../plugins/drag-plugin.js';
 

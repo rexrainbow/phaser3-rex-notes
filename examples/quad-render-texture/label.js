@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import Snapshot from '../../plugins/utils/rendertexture/Snapshot.js';
 import QuadImagePlugin from '../../plugins/quadimage-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';

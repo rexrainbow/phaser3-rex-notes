@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import GridAlignPlugin from '../../plugins/gridalign-plugin.js';
 import HexagonPlugin from '../../plugins/hexagon-plugin.js';
 

@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import OutlineEffectLayerPlugin from '../../plugins/outlineeffectlayer-plugin.js'
 
 class Demo extends Phaser.Scene {

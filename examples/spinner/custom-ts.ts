@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin';
 import {Custom} from '../../templates/spinner/spinner-components';
 

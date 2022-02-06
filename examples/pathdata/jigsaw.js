@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import PathData from '../../plugins/geom/pathdata/PathData';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import AddDataMonitor from '../../plugins/utils/proxy/datamonitor/AddDataMonitor.js';
 
 class Demo extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import SequencePlugin from '../../plugins/sequence-plugin.js';
 import CSVToArrayPlugin from '../../plugins/csvtoarray-plugin.js';
 

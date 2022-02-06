@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import loki from 'lokijs/src/lokijs.js';
 
 var Between = Phaser.Math.Between;

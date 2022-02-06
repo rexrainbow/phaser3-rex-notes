@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import SoundFadePlugin from '../../plugins/soundfade-plugin.js';
 
 const Format = Phaser.Utils.String.Format;

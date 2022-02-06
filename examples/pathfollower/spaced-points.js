@@ -1,4 +1,4 @@
-import 'phaser';
+import phaser from 'phaser/src/phaser.js';
 import PathFollowerPlugin from '../../plugins/pathfollower-plugin.js';
 
 const COLOR_PRIMARY = 0x43a047;
