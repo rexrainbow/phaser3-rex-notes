@@ -642,12 +642,6 @@
       key: "setSize",
       value: function setSize(width, height) {
         // Override Shape's setSize method
-        this.resize(width, height);
-        return this;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
         if (height === undefined) {
           height = width;
         }
@@ -666,6 +660,12 @@
           input.hitArea.height = height;
         }
 
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        this.setSize(width, height);
         return this;
       }
     }, {

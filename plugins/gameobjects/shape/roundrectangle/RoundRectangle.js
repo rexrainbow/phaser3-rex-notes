@@ -104,11 +104,6 @@ class RoundRectangle extends Shape {
 
     setSize(width, height) {
         // Override Shape's setSize method
-        this.resize(width, height);
-        return this;
-    }
-
-    resize(width, height) {
         if (height === undefined) {
             height = width;
         }
@@ -124,6 +119,11 @@ class RoundRectangle extends Shape {
             input.hitArea.width = width;
             input.hitArea.height = height;
         }
+        return this;
+    }
+
+    resize(width, height) {
+        this.setSize(width, height);
         return this;
     }
 
