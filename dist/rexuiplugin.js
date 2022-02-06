@@ -1381,6 +1381,13 @@
         this.resize(this.width, value);
       }
     }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        // Override Shape's setSize method
+        this.resize(width, height);
+        return this;
+      }
+    }, {
       key: "resize",
       value: function resize(width, height) {
         if (height === undefined) {
@@ -1391,8 +1398,7 @@
           return this;
         }
 
-        this.geom.height = height;
-        this.geom.width = width;
+        this.geom.setSize(width, height);
         this.updateDisplayOrigin();
         this.dirty = true;
         var input = this.input;

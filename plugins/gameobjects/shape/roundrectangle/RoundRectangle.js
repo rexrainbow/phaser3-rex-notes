@@ -102,6 +102,12 @@ class RoundRectangle extends Shape {
         this.resize(this.width, value);
     }
 
+    setSize(width, height) {
+        // Override Shape's setSize method
+        this.resize(width, height);
+        return this;
+    }
+
     resize(width, height) {
         if (height === undefined) {
             height = width;
@@ -109,8 +115,7 @@ class RoundRectangle extends Shape {
         if ((this.geom.width === width) && (this.geom.height === height)) {
             return this;
         }
-        this.geom.height = height;
-        this.geom.width = width
+        this.geom.setSize(width, height);
         this.updateDisplayOrigin();
         this.dirty = true;
 

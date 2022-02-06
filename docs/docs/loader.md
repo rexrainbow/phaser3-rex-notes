@@ -333,8 +333,10 @@ The `key` matches the **class name** in the JavaScript file.
 
 ```javascript
 scene.load.script(key, url);
-// scene.load.script(key, url, xhrSettings);
+// scene.load.script(key, url, type, xhrSettings);
 ```
+
+- `type` :　`'script'`, or `'module'`.
 
 ##### Scripts
 
