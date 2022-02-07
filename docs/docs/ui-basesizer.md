@@ -622,7 +622,7 @@ sizer.pin(gameObject);
 - Set outter padding, will shrink layout size.
     - Set outter padding via config
         ```javascript
-        sizer.setOutterPadding({
+        sizer.setOuterPadding({
             left: leftPadding, 
             right: rightPadding,
             top: topPadding,
@@ -631,11 +631,11 @@ sizer.pin(gameObject);
         ```
     - Set outter padding via single number
         ```javascript
-        sizer.setOutterPadding(value);
+        sizer.setOuterPadding(value);
         ```
     - Set specific outter padding
         ```javascript
-        sizer.setOutterPadding(key, value);
+        sizer.setOuterPadding(key, value);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
 - Get outter padding
