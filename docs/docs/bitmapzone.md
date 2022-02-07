@@ -77,7 +77,7 @@ var bitmapZone = scene.plugins.get('rexBitmapZone').add(gameObject);
 ```
 
 - `gameObject` :
-    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md).
     - [Canvas](canvas.md) object
 
 ### [Emit zone](particles.md#emit-zone)

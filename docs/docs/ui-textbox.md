@@ -136,7 +136,7 @@ var textBox = scene.rexUI.add.textBox({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of textBox.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
-- `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
+- `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md)
     - Max lines and wrapped width
         - [Built-in text object](text.md) : `maxLines` and wrap width (`wordWrap.width`).
         - [BBcode text object](bbcodetext.md) : `maxLines` and wrap width (`wrap.width`).

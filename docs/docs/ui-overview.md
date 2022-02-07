@@ -370,13 +370,13 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     var textObject = scene.rexUI.wrapExpandText(textObject);
     // var textObject = scene.rexUI.wrapExpandText(textObject, minWidth);
     ```
-    - `textObject` : 
-        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), 
+    - `textObject` :
+        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md),
         - [Bitmap text object](bitmaptext.md)
         - [Dynamic text object](dynamictext.md), With default wrap configuration, ex:
             ```javascript
             {
-                lineHeight: 24, 
+                lineHeight: 24,
                 padding: {bottom: 12}
             }
             ```

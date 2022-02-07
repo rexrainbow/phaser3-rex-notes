@@ -1,6 +1,6 @@
 ## Introduction
 
-Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md).
 
 - Author: Rex
 - Behavior of text object
@@ -70,6 +70,7 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 - Add typing behavior
     ```javascript
     var typing = new TextTyping(textGameObject, config);
+    ```
 
 ### Create instance
 
@@ -83,7 +84,7 @@ var typing = scene.plugins.get('rexTextTyping').add(textGameObject, {
 });
 ```
 
-- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md), or [bitmap text object](bitmaptext.md)
 - `wrap` : 
     - `false` : Don't insert `\n`, default behavior.
     - `true` : Insert `\n` to wrap content according to style of text, to prevent typing jittering.

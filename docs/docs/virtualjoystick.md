@@ -1,6 +1,6 @@
 ## Introduction
 
-Simulate curosr keys according touch events.
+Simulate cursor keys according to touch events.
 
 - Author: Rex
 - Member of scene
