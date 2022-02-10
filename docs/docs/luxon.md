@@ -91,7 +91,7 @@ dur.toISO()       //=> 'PT2H7M'
     // var s = dt.setLocale('fr').toFormat('MMMM dd, yyyy')
     ```
 
-### Related date
+### Relative time
 
 Returns a string representation of this date relative to today.
 
