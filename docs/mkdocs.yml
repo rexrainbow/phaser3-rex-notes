@@ -327,7 +327,9 @@ nav:
     - UUID: uuid.md
     - Base64: base64.md
 - Time:
-    - Date: date.md
+    - Dates and times:
+        - Date: date.md
+        - Luxon: luxon.md
     - Timer: timer.md
     - Timeline: timeline.md
     - Clock: clock.md
