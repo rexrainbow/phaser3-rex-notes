@@ -2295,14 +2295,14 @@
       SetPadding(this.space, key, value);
       return this;
     },
-    getOutterPadding: function getOutterPadding(key) {
+    getOuterPadding: function getOuterPadding(key) {
       return GetPadding(this.getSizerConfig(this).padding, key);
     },
     setOuterPadding: function setOuterPadding(key, value) {
       SetPadding(this.getSizerConfig(this).padding, key, value);
       return this;
     },
-    getChildOutterPadding: function getChildOutterPadding(child, key) {
+    getChildOuterPadding: function getChildOuterPadding(child, key) {
       if (typeof child === 'string') {
         child = this.getElement(child);
       }

@@ -619,8 +619,8 @@ sizer.pin(gameObject);
         var value = sizer.getInnerPadding(key);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Set outter padding, which is equal to `padding` parameter when adding this sizer to parent sizer.
-    - Set outter padding via config
+- Set outer padding, which is equal to `padding` parameter when adding this sizer to parent sizer.
+    - Set outer padding via config
         ```javascript
         sizer.setOuterPadding({
             left: leftPadding, 
@@ -629,27 +629,27 @@ sizer.pin(gameObject);
             bottom: bottomPadding
         });
         ```
-    - Set outter padding via single number
+    - Set outer padding via single number
         ```javascript
         sizer.setOuterPadding(value);
         ```
-    - Set specific outter padding
+    - Set specific outer padding
         ```javascript
         sizer.setOuterPadding(key, value);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Get outter padding
-    - Get outter padding values
+- Get outer padding
+    - Get outer padding values
         ```javascript
-        var outterPadding = sizer.getOutterrPadding();
+        var outerPadding = sizer.getOuterPadding();
         ```
-    - Get specific outter padding
+    - Get specific outer padding
         ```javascript
-        var value = sizer.getOutterPadding(key);
+        var value = sizer.getOuterPadding(key);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Set outter padding of child, which is equal to `padding` parameter when adding this sizer to parent sizer.
-    - Set outter padding via config
+- Set outer padding of child, which is equal to `padding` parameter when adding this sizer to parent sizer.
+    - Set outer padding via config
         ```javascript
         sizer.setChildOuterPadding(
             child,
@@ -662,26 +662,26 @@ sizer.pin(gameObject);
         );
         ```
         - `child` : A string key or game object.
-    - Set outter padding via single number
+    - Set outer padding via single number
         ```javascript
         sizer.setChildOuterPadding(child, value);
         ```
         - `child` : A string key or game object.
-    - Set specific outter padding
+    - Set specific outer padding
         ```javascript
         sizer.setChildOuterPadding(child, key, value);
         ```
         - `child` : A string key or game object.
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Get outter padding of child
-    - Get outter padding values
+- Get outer padding of child
+    - Get outer padding values
         ```javascript
-        var outterPadding = sizer.getChildOutterPadding(child);
+        var outerPadding = sizer.getChildOuterPadding(child);
         ```
         - `child` : A string key or game object.
-    - Get specific outter padding
+    - Get specific outer padding
         ```javascript
-        var value = sizer.getChildOutterPadding(child, key);
+        var value = sizer.getChildOuterPadding(child, key);
         ```
         - `child` : A string key or game object.
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`

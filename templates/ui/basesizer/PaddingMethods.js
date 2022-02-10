@@ -10,7 +10,7 @@ export default {
         return this;
     },
 
-    getOutterPadding(key) {
+    getOuterPadding(key) {
         return GetPadding(this.getSizerConfig(this).padding, key);
     },
 
@@ -19,7 +19,7 @@ export default {
         return this;
     },
 
-    getChildOutterPadding(child, key) {
+    getChildOuterPadding(child, key) {
         if (typeof (child) === 'string') {
             child = this.getElement(child);
         }
