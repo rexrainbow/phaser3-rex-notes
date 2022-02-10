@@ -60,9 +60,9 @@
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",
-        "papaparse": "^5.3.1",
-        "webfontloader": "^1.6.28",
+        "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
-        "handlebars": "^4.7.7"
+        "papaparse": "^5.3.1",
+        "webfontloader": "^1.6.28"
     }
 }

@@ -619,7 +619,7 @@ sizer.pin(gameObject);
         var value = sizer.getInnerPadding(key);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Set outter padding, will shrink layout size.
+- Set outter padding, which is equal to `padding` parameter when adding this sizer to parent sizer.
     - Set outter padding via config
         ```javascript
         sizer.setOutterPadding({
