@@ -4254,6 +4254,16 @@
             wrapLines = null;
             context.restore();
           }
+        } // Add strokeThinkness to last pen of each line
+
+
+        for (var i = 0, len = this.lines.length; i < len; i++) {
+          var line = this.lines[i];
+          var lastPen = line[line.length - 1];
+
+          if (lastPen) {
+            lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
+          }
         }
 
         return penManager;
@@ -4290,7 +4300,7 @@
     }, {
       key: "linesWidth",
       get: function get() {
-        return this.penManager.getMaxLineWidth();
+        return Math.ceil(this.penManager.getMaxLineWidth());
       }
     }, {
       key: "linesHeight",
@@ -4987,16 +4997,17 @@
 
         var padding = this.padding;
         var textWidth, textHeight;
+        var linesWidth = Math.ceil(canvasText.linesWidth);
 
         if (style.fixedWidth === 0) {
-          this.width = canvasText.linesWidth + padding.left + padding.right;
-          textWidth = canvasText.linesWidth;
+          this.width = linesWidth + padding.left + padding.right;
+          textWidth = linesWidth;
         } else {
           this.width = style.fixedWidth;
           textWidth = this.width - padding.left - padding.right;
 
-          if (textWidth < canvasText.linesWidth) {
-            textWidth = canvasText.linesWidth;
+          if (textWidth < linesWidth) {
+            textWidth = linesWidth;
           }
         }
 
@@ -5431,6 +5442,17 @@
 
       return result;
     },
+    getStrokeThinkness: function getStrokeThinkness(defaultStyle, prop) {
+      var strokeThickness;
+
+      if (prop.hasOwnProperty('stroke')) {
+        strokeThickness = defaultStyle.strokeThickness;
+      } else {
+        strokeThickness = 0;
+      }
+
+      return strokeThickness;
+    },
     propToTagText: function propToTagText(text, prop, prevProp) {
       if (prevProp == null) {
         prevProp = EMPTYPROP;
@@ -5760,6 +5782,21 @@
         }
 
         return result;
+      }
+    }, {
+      key: "getStrokeThinkness",
+      value: function getStrokeThinkness(defaultStyle, prop) {
+        var strokeThinkness;
+
+        if (prop.hasOwnProperty('stroke')) {
+          var stroke = prop.stroke; // {color, thinkness}           
+
+          strokeThinkness = stroke.hasOwnProperty('thinkness') ? stroke.thinkness : defaultStyle.strokeThickness;
+        } else {
+          strokeThinkness = defaultStyle.strokeThickness;
+        }
+
+        return strokeThinkness;
       }
     }, {
       key: "propToTagText",

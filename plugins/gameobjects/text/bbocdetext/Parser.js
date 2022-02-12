@@ -228,6 +228,16 @@ var parser = {
         return result;
     },
 
+    getStrokeThinkness(defaultStyle, prop) {
+        var strokeThickness;
+        if (prop.hasOwnProperty('stroke')) {
+            strokeThickness = defaultStyle.strokeThickness;
+        } else {
+            strokeThickness = 0;
+        }
+        return strokeThickness;
+    },
+
     propToTagText: function (text, prop, prevProp) {
         if (prevProp == null) {
             prevProp = EMPTYPROP;

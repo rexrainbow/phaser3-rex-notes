@@ -182,6 +182,17 @@ class parser {
         return result;
     }
 
+    getStrokeThinkness(defaultStyle, prop) {
+        var strokeThinkness;
+        if (prop.hasOwnProperty('stroke')) {
+            var stroke = prop.stroke; // {color, thinkness}           
+            strokeThinkness = (stroke.hasOwnProperty('thinkness')) ? stroke.thinkness : defaultStyle.strokeThickness;
+        } else {
+            strokeThinkness = defaultStyle.strokeThickness;
+        }
+        return strokeThinkness;
+    }
+
     propToTagText(text, prop, prevProp) {
         if (prop.hasOwnProperty('_class')) { // class mode
             if (text === '') {

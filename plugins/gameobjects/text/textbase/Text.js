@@ -296,7 +296,7 @@ class Text extends GameObject {
     // Align with built-in text game object
     setWordWrapWidth(width) {
         return this.style.setWrapWidth(width);
-    }    
+    }
 
     setAlign(align) {
         return this.style.setHAlign(align);
@@ -392,15 +392,16 @@ class Text extends GameObject {
         // resize
         var padding = this.padding;
         var textWidth, textHeight;
+        var linesWidth = Math.ceil(canvasText.linesWidth);
         if (style.fixedWidth === 0) {
-            this.width = canvasText.linesWidth + padding.left + padding.right;
-            textWidth = canvasText.linesWidth;
+            this.width = linesWidth + padding.left + padding.right;
+            textWidth = linesWidth;
         }
         else {
             this.width = style.fixedWidth;
             textWidth = this.width - padding.left - padding.right;
-            if (textWidth < canvasText.linesWidth) {
-                textWidth = canvasText.linesWidth;
+            if (textWidth < linesWidth) {
+                textWidth = linesWidth;
             }
         }
         if (style.fixedHeight === 0) {

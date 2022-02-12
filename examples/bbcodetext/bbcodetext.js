@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         var s1 = `[size=20]1[y=-4]2[y=-8]3[y=-12]4[y=-16]5[/y]6[/size][color=blue]AA[/color]
 [i][color=red]B
 B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]D[/size]D
-[size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][stroke=blue]GGG[/stroke]
+[size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][color=green][stroke=black]GGG[/stroke][/color]
 [color=white][size=36]This is a [img=key]
 Last line`;
         var text = this.add.rexBBCodeText(100, 30, s1, {

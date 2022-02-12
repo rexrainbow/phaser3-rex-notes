@@ -425,6 +425,13 @@ scene.load.pack(key, url);
 // scene.load.pack(key, url, dataKey, xhrSettings);
 ```
 
+or
+
+```javascript
+scene.load.pack(key, json);
+// scene.load.pack(key, json, dataKey);
+```
+
 - `dataKey` : When the JSON file loads only this property will be stored in the Cache.
 
 JSON pack file:

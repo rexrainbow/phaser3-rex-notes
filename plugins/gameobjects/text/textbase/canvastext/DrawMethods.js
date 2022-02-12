@@ -106,10 +106,7 @@ export default {
         var context = this.context;
         context.save();
 
-        var curStyle = this.parser.propToContextStyle(
-            this.defaultStyle,
-            pen.prop
-        );
+        var curStyle = this.parser.propToContextStyle(this.defaultStyle, pen.prop);
         curStyle.buildFont();
         curStyle.syncFont(canvas, context);
         curStyle.syncStyle(canvas, context);

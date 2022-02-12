@@ -105,10 +105,7 @@ class CanvasText {
                 // wrap text to lines
                 // Save the current context.
                 context.save();
-                curStyle = this.parser.propToContextStyle(
-                    this.defaultStyle,
-                    curProp
-                );
+                curStyle = this.parser.propToContextStyle(this.defaultStyle, curProp);
                 curStyle.buildFont();
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
@@ -167,6 +164,15 @@ class CanvasText {
 
         }
 
+        // Add strokeThinkness to last pen of each line
+        for (var i = 0, len = this.lines.length; i < len; i++) {
+            var line = this.lines[i];
+            var lastPen = line[line.length - 1];
+            if (lastPen) {
+                lastPen.width += this.parser.getStrokeThinkness(this.defaultStyle, lastPen.prop);
+            }
+        }
+
         return penManager;
     }
 
@@ -194,7 +200,7 @@ class CanvasText {
     }
 
     get linesWidth() {
-        return this.penManager.getMaxLineWidth();
+        return Math.ceil(this.penManager.getMaxLineWidth());
     }
 
     get linesHeight() {
