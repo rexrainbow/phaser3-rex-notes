@@ -24,6 +24,11 @@ class ScaleOuter {
             scene.scale.on('resize', this.scale, this);
             scene.events.once('preupdate', this.onFirstTick, this);
         }
+
+        scene.events.on('shutdown', function () {
+            // cameras of this scene will be destroyed when scene shutdown
+            this.cameras.clear();
+        }, this);
     }
 
     destroy() {
