@@ -1,0 +1,16 @@
+{
+    "test1": {
+        "files": [
+            {
+                "type": "image",
+                "key": "bolt",
+                "url": "assets/images/bolt.png"
+            },
+            {
+                "type": "image",
+                "key": "key",
+                "url": "assets/images/key.png"
+            }
+        ]
+    }
+}
