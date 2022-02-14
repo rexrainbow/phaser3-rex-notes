@@ -170,6 +170,7 @@ module.exports = {
     'colorreplacepipelineplugin': './plugins/colorreplacepipeline-plugin.js',
     'kawaseblurpipelineplugin': './plugins/kawaseblurpipeline-plugin.js',
     'dropshadowpipelineplugin': './plugins/dropshadowpipeline-plugin.js',
+    'noisefadepipelineplugin': './plugins/noisefadepipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',

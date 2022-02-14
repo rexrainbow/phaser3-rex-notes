@@ -1,10 +1,10 @@
-import FragSrc from './noisedelayfade-postfxfrag.js';
+import FragSrc from './noisefade-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-class NoiseDelayFadePostFxPipeline extends PostFXPipeline {
+class NoiseFadePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             name: 'rexNoiseDelayFadePostFx',
@@ -15,7 +15,6 @@ class NoiseDelayFadePostFxPipeline extends PostFXPipeline {
 
         // Progress
         this._progress = 0;
-        this._activeRate = 0.5;
         // Noise
         this.noiseX = 0;
         this.noiseY = 0;
@@ -27,7 +26,6 @@ class NoiseDelayFadePostFxPipeline extends PostFXPipeline {
 
     resetFromJSON(o) {
         this.setProgress(GetValue(o, 'progress', 0));
-        this.setActiveRate(GetValue(o, 'activeRate', 0.5));
         this.setNoise(GetValue(o, 'noiseX', undefined), GetValue(o, 'noiseY', undefined), GetValue(o, 'noiseZ', undefined));
         this.setFadeMode(GetValue(o, 'mode', 0));
         return this;
@@ -55,19 +53,6 @@ class NoiseDelayFadePostFxPipeline extends PostFXPipeline {
 
     setProgress(value) {
         this.progress = value;
-        return this;
-    }
-
-    get activeRate() {
-        return this._activeRate;
-    }
-
-    set activeRate(value) {
-        this._activeRate = Clamp(value, 0, 1);
-    }
-
-    setActiveRate(value) {
-        this.activeRate = value;
         return this;
     }
 
@@ -108,4 +93,4 @@ const FadeMode = {
     fadeIn: 1
 }
 
-export default NoiseDelayFadePostFxPipeline;
+export default NoiseFadePostFxPipeline;
