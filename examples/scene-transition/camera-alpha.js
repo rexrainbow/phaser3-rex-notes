@@ -2,21 +2,20 @@ import phaser from 'phaser/src/phaser.js';
 
 class BaseScene extends Phaser.Scene {
     setupTransition() {
-        this.events.on('transitionstart', function (fromScene, duration) {
-            this.tweens.add({
-                targets: this.cameras.main,
-                alpha: { start: 0, to: 1 },
-                delay: (duration / 2),
+        this.events.on('transitionout', function (toScene, duration) {
+            var fromScene = this;
+            fromScene.tweens.add({
+                targets: fromScene.cameras.main,
+                alpha: { start: 1, to: 0 },
+                delay: 0,
                 duration: (duration / 2),
                 repeat: 0,
             });
-        }, this);
 
-        this.events.on('transitionout', function (toScene, duration) {
-            this.tweens.add({
-                targets: this.cameras.main,
-                alpha: { start: 1, to: 0 },
-                delay: 0,
+            toScene.tweens.add({
+                targets: toScene.cameras.main,
+                alpha: { start: 0, to: 1 },
+                delay: (duration / 2),
                 duration: (duration / 2),
                 repeat: 0,
             });

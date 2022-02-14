@@ -2,20 +2,19 @@ import phaser from 'phaser/src/phaser.js';
 
 class BaseScene extends Phaser.Scene {
     setupTransition() {
-        this.events.on('transitionstart', function (fromScene, duration) {
-            var camera = this.cameras.main;
-            camera.setVisible(false);
-            this.time.delayedCall(duration / 2, function () {
-                camera.setVisible(true);
-                camera.fadeIn(duration / 2);
-            });
-        }, this);
-
         this.events.on('transitionout', function (toScene, duration) {
-            var camera = this.cameras.main;
-            camera.fadeOut(duration / 2);
+            var fromScene = this;
+            var fromSceneCamera = fromScene.cameras.main
+            fromSceneCamera.fadeOut(duration / 2);
+            fromScene.time.delayedCall(duration / 2, function () {
+                fromSceneCamera.setVisible(false);
+            });
+
+            var toSceneCamera = toScene.cameras.main;
+            toSceneCamera.setVisible(false);
             this.time.delayedCall(duration / 2, function () {
-                camera.setVisible(false);
+                toSceneCamera.setVisible(true);
+                toSceneCamera.fadeIn(duration / 2);
             });
         }, this);
 
