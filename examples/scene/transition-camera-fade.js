@@ -1,7 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 
 class BaseScene extends Phaser.Scene {
-    create() {
+    setupTransition() {
         this.events.on('transitionstart', function (fromScene, duration) {
             var camera = this.cameras.main;
             camera.setVisible(false);
@@ -38,7 +38,7 @@ class SceneA extends BaseScene {
     }
 
     create() {
-        super.create();
+        this.setupTransition();
         console.log('Create SceneA')
         this.add.image(400, 300, 'classroom');
 
@@ -68,7 +68,7 @@ class SceneB extends BaseScene {
     }
 
     create() {
-        super.create();
+        this.setupTransition();
         console.log('Create SceneB')
         this.add.image(400, 300, 'road');
 
