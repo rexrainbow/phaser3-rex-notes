@@ -9,7 +9,7 @@ Apply mask on game object. Built-in render of phaser.
 ### Add mask
 
 1. Create mask object
-    - Create mask from texture
+    - Create alpha mask from texture
         1. Create image ([image](image.md), [sprite](sprite.md), [bitmap text](bitmaptext.md), [particles](particles.md), [text](text.md)), or [shader](shader.md)
             ```javascript
             var shape = scene.add.image(x, y, key).setVisible(false);
@@ -22,8 +22,7 @@ Apply mask on game object. Built-in render of phaser.
             ```javascript
             var mask = new Phaser.Display.Masks.BitmapMask(scene, shape);
             ```
-        WebGL only
-    - Create mask from [graphics](graphics.md)
+    - Create mask from [graphics](graphics.md), masked pixel *fully visible* or *fully invisible* without changing its alpha (opacity).
         1. Create graphics
             ```javascript
             var shape = scene.make.graphics();
@@ -45,6 +44,14 @@ Apply mask on game object. Built-in render of phaser.
 
 !!! error
     Don't put game object and its mask into a [container](container.md) together.
+
+!!! note
+    Bitmap Mask is WebGL only.
+
+!!! note
+    Can combine Geometry Masks and Blend Modes on the same Game Object, 
+    but Bitmap Masks can't.
+
 
 ### Clear mask
 
