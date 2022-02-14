@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import 'phaser';
 import BoardPlugin from '../../plugins/board-plugin';
 
 const Random = Phaser.Math.Between;

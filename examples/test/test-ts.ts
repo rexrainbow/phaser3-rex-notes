@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import 'phaser';
 
 class Demo extends Phaser.Scene {
     constructor() {
