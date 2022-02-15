@@ -494,6 +494,8 @@ var cache = scene.cache.json;  // pack json is stored in json cache
 var data = cache.get(key);
 ```
 
+Event name in `'filecomplete'` event : `'filecomplete-packfile-' + key`
+
 ### Release data
 
 ```javascript
