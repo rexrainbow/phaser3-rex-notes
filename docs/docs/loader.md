@@ -487,6 +487,13 @@ File type:
 - `tilemapJSON`
 - `xml`
 
+Get pack json data from cache
+
+```javascript
+var cache = scene.cache.json;  // pack json is stored in json cache
+var data = cache.get(key);
+```
+
 ### Release data
 
 ```javascript
