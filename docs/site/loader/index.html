@@ -8277,7 +8277,10 @@
 </code></pre></div></li>
 <li>Loading progressing
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>progress</code> value will increase when a file is loaded, and decrease when a new file loading request is added.</li>
+</ul>
+</li>
 <li>Loading file progressing
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fileprogress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">progress</span><span class="p">){</span>
     <span class="c1">// var key = file.key;</span>
