@@ -47,6 +47,12 @@ scene.loader.setPath(path)
     ```javascript
     scene.load.on('progress', function(progress){}, scope);
     ```
+- Loading file progressing
+    ```javascript
+    scene.load.on('fileprogress', function(file, progress){
+        // var key = file.key;
+    }, scope);
+    ```
 - Loading a file object successful
     ```javascript
     scene.load.once('load', function(fileObj){}, scope);
@@ -59,6 +65,7 @@ scene.loader.setPath(path)
     ```javascript
     scene.load.once('complete', function(){}, scope);
     ```
+- Scene's `'preupdate'`, `'update'`, `'postupdate'`, `'render'` events will be triggered during preload stage.
 
 ### Status of loader
 
@@ -219,7 +226,11 @@ scene.load.bitmapFont(key, textureURL, fontDataURL);
 ```
 
 - `textureURL` : The absolute or relative URL to load the font image file from.
-- `fontDataURL` : The absolute or relative URL to load the font xml data file from.
+- `fontDataURL` : The absolute or relative URL to load the font *xml* data file from, which created by software such as 
+    - [Angelcode Bitmap Font Generator](http://www.angelcode.com/products/bmfont/)
+    - [Littera](http://kvazars.com/littera/) 
+    - [Glyph Designer](https://71squared.com/glyphdesigner)
+
 
 Get data from cache
 
