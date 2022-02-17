@@ -1,12 +1,11 @@
 import IsPointerInHitArea from './IsPointerInHitArea.js';
 
-var DragStart = function (gameObject) {
+var TryDrag = function (gameObject) {
     var inputPlugin = gameObject.scene.input;
     var inputManager = inputPlugin.manager;
     var pointersTotal = inputManager.pointersTotal;
     var pointers = inputManager.pointers,
         pointer;
-    var dragResult = false;
     for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
         if (
@@ -28,12 +27,12 @@ var DragStart = function (gameObject) {
             //  Check the distance / time on the next event
             inputPlugin.setDragState(pointer, 2);
         }
-        dragResult = true;
-        break;
         // For 3.18.0
+
+        return true;
     }
 
-    return dragResult;
+    return false;
 }
 
-export default DragStart;
+export default TryDrag;
