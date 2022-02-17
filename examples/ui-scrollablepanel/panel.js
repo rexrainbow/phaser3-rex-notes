@@ -84,8 +84,23 @@ class Demo extends Phaser.Scene {
         // .drawBounds(this.add.graphics(), 0xff0000);
         // .popUp(300)
 
-        // Set icon interactive
         var print = this.add.text(0, 0, '');
+
+        // Add children-interactive
+        // Solution A:
+        scrollablePanel.setChildrenInteractive({
+            targets: [
+                scrollablePanel.getByName('skills', true),
+                scrollablePanel.getByName('items', true)
+            ]
+        })
+            .on('child.click', function (child) {
+                var category = child.getParentSizer().name;
+                print.text += `${category}:${child.text}\n`;
+            })
+
+        // Solution B:
+        /*
         this.input.topOnly = false;
         var labels = [];
         labels.push(...scrollablePanel.getElement('#skills.items', true));
@@ -105,6 +120,7 @@ class Demo extends Phaser.Scene {
                     print.text += `${category}:${label.text}\n`;
                 });
         })
+        */
     }
 
     update() { }

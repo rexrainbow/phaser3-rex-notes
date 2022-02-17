@@ -1,6 +1,7 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
+import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -45,6 +46,16 @@ class ScrollablePanel extends Scrollable {
         super(scene, config);
 
         this.addChildrenMap('panel', this.childrenMap.child.child);
+    }
+    
+    setChildrenInteractive(config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.eventEmitter = this;
+
+        SetChildrenInteractive(this.childrenMap.child, config);
+        return this;
     }
 }
 

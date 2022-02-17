@@ -392,13 +392,12 @@
     return false;
   };
 
-  var DragStart = function DragStart(gameObject) {
+  var TryDrag = function TryDrag(gameObject) {
     var inputPlugin = gameObject.scene.input;
     var inputManager = inputPlugin.manager;
     var pointersTotal = inputManager.pointersTotal;
     var pointers = inputManager.pointers,
         pointer;
-    var dragResult = false;
 
     for (var i = 0; i < pointersTotal; i++) {
       pointer = pointers[i];
@@ -418,13 +417,13 @@
       } else {
         //  Check the distance / time on the next event
         inputPlugin.setDragState(pointer, 2);
-      }
+      } // For 3.18.0
 
-      dragResult = true;
-      break; // For 3.18.0
+
+      return true;
     }
 
-    return dragResult;
+    return false;
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -551,7 +550,7 @@
     }, {
       key: "drag",
       value: function drag() {
-        DragStart(this.parent);
+        TryDrag(this.parent);
         return this;
       }
     }, {

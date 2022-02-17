@@ -4,6 +4,7 @@ import CreateScrollableSizer from './CreateScrollableSizer.js';
 import ResizeController from './ResizeController.js';
 import UpdateController from './UpdateController.js';
 
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
@@ -271,6 +272,7 @@ class Scrollable extends Sizer {
         this.mouseWheelScrollerEnable = enabled;
         return this;
     }
+
 }
 
 var Methods = {

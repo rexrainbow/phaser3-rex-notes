@@ -15,7 +15,7 @@ var OverChild = function (config) {
         .on('pointerout', OnOut, this)  // pointer-up is included too
 }
 
-var OnMove = function (pointer) {
+var OnMove = function (pointer, localX, localY, event) {
     var child = PointToChild(this.input.targetSizers, pointer.x, pointer.y);
     var preChild = this.input.lastOverChild;
     if (child && preChild &&
@@ -29,18 +29,18 @@ var OnMove = function (pointer) {
         `${this.input.eventNamePrefix}out`,
         this.input.targetSizers,
         preChild, undefined,
-        pointer
+        pointer, event
     );
     EmitChildEvent(
         this.eventEmitter,
         `${this.input.eventNamePrefix}over`,
         this.input.targetSizers,
         child, undefined,
-        pointer
+        pointer, event
     );
 }
 
-var OnOut = function (pointer) {
+var OnOut = function (pointer, event) {
     var child = this.input.lastOverChild;
     this.input.lastOverChild = null;
     EmitChildEvent(
@@ -48,7 +48,7 @@ var OnOut = function (pointer) {
         `${this.input.eventNamePrefix}out`,
         this.input.targetSizers,
         child, undefined,
-        pointer
+        pointer, event
     );
 }
 

@@ -431,6 +431,84 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 
 ### Input events
 
+Two possible solution to register input events to children of scrollable panel.
+
+#### Set children interactive
+
+```javascript
+panel.setChildrenInteractive({
+    targets: targetSizers,
+
+    // click: {mode: 'release', clickInterval: 100},
+
+    // over: undefined,
+    
+    // press: {time: 251, threshold: 9},
+
+    // tap: {time: 250, tapInterval: 200, threshold: 9, tapOffset: 10, 
+    //       taps: undefined, minTaps: undefined, maxTaps: undefined,},
+
+    // swipe: {threshold: 10, velocityThreshold: 1000, dir: '8dir'},
+
+    // inputEventPrefix: 'child.',
+})
+```
+
+- `targetSizers` : Array of target children-sizer.
+- `click` : [Configuration](button.md#create-instance) of Button behavior.
+    - `false` : Don't install Button behavior.
+- `over` :
+    - `false` : Don't fire over/out events
+- `press` : [Configuration](gesture-press.md#create-instance) of Press behavior.
+    - `false` : Don't install Press behavior.
+- `tap` : [Configuration](gesture-tap.md#create-instance) of Tap behavior.
+    - `false` : Don't install Tap behavior.
+- `swipe` : [Configuration](gesture-swipe.md#create-instance) of Swipe behavior.
+    - `false` : Don't install Swipe behavior.
+- `inputEventPrefix` : Prefix string of each event, default is `'child.'`.
+
+##### Events
+
+- Click
+    ```javascript
+    panel.on('child.click', function(child, pointer, event) { })
+    ```
+- Over, out
+    ```javascript
+    panel.on('child.over', function(child, pointer, event) { })
+    ```
+    ```javascript
+    panel.on('child.out', function(child, pointer, event) { })
+    ```
+- Press-start, press-end
+    ```javascript
+    panel.on('child.pressstart', function(child, pointer) { })
+    ```
+    ```javascript
+    panel.on('child.pressend', function(child, pointer) { })
+    ```
+- Swipe
+    ```javascript
+    panel.on('child.swipeleft', function(child, pointer) { })
+    ```
+    ```javascript
+    panel.on('child.swiperight', function(child, pointer) { })
+    ```
+    ```javascript
+    panel.on('child.swipeup', function(child, pointer) { })
+    ```
+    ```javascript
+    panel.on('child.swipedown', function(child, pointer) { })
+    ```
+- Tap
+    ```javascript
+    panel.on('child.' + tapsCount + 'tap', function(child, pointer) { })
+    ```
+    - `'child.1tap'`, `'child.2tap'`, ...
+
+
+#### Individual input events
+
 When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value), input events of children elememts will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)
 
 - Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.

@@ -1,6 +1,6 @@
 import PointToChild from './PointToChild.js';
 
-var EmitChildEvent = function (eventEmitter, eventName, parents, x, y, pointer) {
+var EmitChildEvent = function (eventEmitter, eventName, parents, x, y, pointer, event) {
     var child;
     if (y === undefined) {
         child = x;
@@ -12,7 +12,7 @@ var EmitChildEvent = function (eventEmitter, eventName, parents, x, y, pointer) 
         return;
     }
 
-    eventEmitter.emit(eventName, child, pointer);
+    eventEmitter.emit(eventName, child, pointer, event);
 }
 
 export default EmitChildEvent;

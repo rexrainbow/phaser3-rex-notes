@@ -17,13 +17,13 @@ var ClickChild = function (config) {
     }
 
     this._click = new Button(this, clickConfig);
-    this._click.on('click', function (button, gameObject, pointer) {
+    this._click.on('click', function (button, gameObject, pointer, event) {
         EmitChildEvent(
             this.eventEmitter,
             `${this.input.eventNamePrefix}click`,
             this.input.targetSizers,
             pointer.x, pointer.y,
-            pointer
+            pointer, event
         );
     }, this);
 };
