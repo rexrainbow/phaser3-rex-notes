@@ -49,6 +49,10 @@ class Demo extends Phaser.Scene {
                 footer: 0,
             },
 
+            scroller: {
+                // pointerOutRelease: false,
+            },
+
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1

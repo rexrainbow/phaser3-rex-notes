@@ -66,6 +66,10 @@ class Demo extends Phaser.Scene {
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 
+            scroller: {
+                // pointerOutRelease: false,
+            },
+
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1

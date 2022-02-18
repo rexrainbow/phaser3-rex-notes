@@ -47,6 +47,10 @@ class Demo extends Phaser.Scene {
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 
+            scroller: {
+                // pointerOutRelease: false,
+            },
+
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1
@@ -112,7 +116,7 @@ class Demo extends Phaser.Scene {
         })
             .setDraggable('header')  // Draggable-header
             .layout()
-            
+
         //.drawBounds(this.add.graphics(), 0xff0000);
 
         this.print = this.add.text(0, 0, '');
