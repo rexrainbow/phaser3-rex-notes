@@ -6551,32 +6551,6 @@
     Touch input
   </a>
   
-    <nav class="md-nav" aria-label="Touch input">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-children-interactive" class="md-nav__link">
-    Set children interactive
-  </a>
-  
-    <nav class="md-nav" aria-label="Set children interactive">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -7997,32 +7971,6 @@
     Touch input
   </a>
   
-    <nav class="md-nav" aria-label="Touch input">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-children-interactive" class="md-nav__link">
-    Set children interactive
-  </a>
-  
-    <nav class="md-nav" aria-label="Set children interactive">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -8512,103 +8460,6 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">touchEventStop</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TouchEventStop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
-<h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>
-<p>Helper method, which applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on a game object, to detect input events of children.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">setChildrenInteractive</span><span class="p">(</span><span class="nx">sizer</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">targets</span><span class="o">:</span> <span class="nx">targetSizers</span><span class="p">,</span>
-
-    <span class="c1">// click: {mode: &#39;release&#39;, clickInterval: 100},</span>
-
-    <span class="c1">// over: undefined,</span>
-
-    <span class="c1">// press: {time: 251, threshold: 9},</span>
-
-    <span class="c1">// tap: {time: 250, tapInterval: 200, threshold: 9, tapOffset: 10, </span>
-    <span class="c1">//       taps: undefined, minTaps: undefined, maxTaps: undefined,},</span>
-
-    <span class="c1">// swipe: {threshold: 10, velocityThreshold: 1000, dir: &#39;8dir&#39;},</span>
-
-    <span class="c1">// inputEventPrefix: &#39;child.&#39;,</span>
-    <span class="c1">// eventEmitter: undefined</span>
-<span class="p">})</span>
-</code></pre></div>
-<ul>
-<li><code>targetSizers</code> : Array of target children-sizer.</li>
-<li><code>click</code> : <a href="../button/#create-instance">Configuration</a> of Button behavior.<ul>
-<li><code>false</code> : Don't install Button behavior.</li>
-</ul>
-</li>
-<li><code>over</code> :<ul>
-<li><code>false</code> : Don't fire over/out events</li>
-</ul>
-</li>
-<li><code>press</code> : <a href="../gesture-press/#create-instance">Configuration</a> of Press behavior.<ul>
-<li><code>false</code> : Don't install Press behavior.</li>
-</ul>
-</li>
-<li><code>tap</code> : <a href="../gesture-tap/#create-instance">Configuration</a> of Tap behavior.<ul>
-<li><code>false</code> : Don't install Tap behavior.</li>
-</ul>
-</li>
-<li><code>swipe</code> : <a href="../gesture-swipe/#create-instance">Configuration</a> of Swipe behavior.<ul>
-<li><code>false</code> : Don't install Swipe behavior.</li>
-</ul>
-</li>
-<li><code>inputEventPrefix</code> : Prefix string of each event, default is <code>'child.'</code>.</li>
-<li><code>eventEmitter</code> : Fire event through specific game object.</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Input behaviors are installed to this Sizer game object, not each child. And it assumes that all children are not overlapped.
-Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input behaviors of each child individually.</p>
-</div>
-<h5 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h5>
-<ul>
-<li>Click
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>child</code> : Triggered child game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.    </li>
-</ul>
-</li>
-<li>Pointer-over
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Pointer-out
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Press
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Tap
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>tapEventName</code> :  <code>'child.1tap'</code>, <code>'child.2tap'</code>, <code>'child.3tap'</code>, etc ...</li>
-</ul>
-</li>
-<li>Swipe
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>swipeEventName</code> :  <code>'child.swipeleft'</code>, <code>'child.swiperight'</code>, <code>'child.swipeup'</code>, <code>'child.swipedown'</code>.</li>
-</ul>
-</li>
-</ul>
 <h3 id="behaviors">Behaviors<a class="headerlink" href="#behaviors" title="Permanent link">&para;</a></h3>
 <ol>
 <li><a href="../modal-promise/">Modal promise</a>: <a href="../modal/">Modal behavior</a> wrapped into promise.

@@ -8530,6 +8530,7 @@ User can inject it by</p>
 <h3 id="input-events">Input events<a class="headerlink" href="#input-events" title="Permanent link">&para;</a></h3>
 <p>Two possible solution to register input events to children of scrollable panel.</p>
 <h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>
+<p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this scrollable panel, to detect input events of children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">setChildrenInteractive</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">targetSizers</span><span class="p">,</span>
 
@@ -8572,36 +8573,7 @@ User can inject it by</p>
 <li><code>inputEventPrefix</code> : Prefix string of each event, default is <code>'child.'</code>.</li>
 </ul>
 <h5 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h5>
-<ul>
-<li>Click
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div></li>
-<li>Over, out
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div></li>
-<li>Press-start, press-end
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div></li>
-<li>Swipe
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.swipeleft&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.swiperight&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.swipeup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.swipedown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div></li>
-<li>Tap
-    <div class="highlight"><pre><span></span><code><span class="nx">panel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.&#39;</span> <span class="o">+</span> <span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
-</code></pre></div><ul>
-<li><code>'child.1tap'</code>, <code>'child.2tap'</code>, ...</li>
-</ul>
-</li>
-</ul>
+<p>See <a href="ui-basesizer.md/#set-children-interactive">Base-sizer</a></p>
 <h4 id="individual-input-events">Individual input events<a class="headerlink" href="#individual-input-events" title="Permanent link">&para;</a></h4>
 <p>When <a href="../touchevents/#top-only"><code>scene.input.topOnly</code></a> is <code>true</code> (default value), input events of children elememts will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)</p>
 <ul>

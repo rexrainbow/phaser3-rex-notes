@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
         sizer.layout();
 
         var print = this.add.text(0, 0, '');
-        this.rexUI.setChildrenInteractive(sizer)
+        sizer.setChildrenInteractive()
             .on('child.click', function (child) {
                 var index = sizer.getElement('items').indexOf(child);
                 print.text += `click ${index}\n`;

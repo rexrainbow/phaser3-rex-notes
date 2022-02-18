@@ -9,13 +9,14 @@ var TapChild = function (config) {
         return;
     }
 
+    var childrenInteractive = this._childrenInteractive;
     this._tap = new Tap(this, tapConfig);
     this._tap
         .on('tap', function (tap, gameObject, lastPointer) {
             EmitChildEvent(
-                this.eventEmitter,
-                `${this.input.eventNamePrefix}${tap.tapsCount}tap`,
-                this.input.targetSizers,
+                childrenInteractive.eventEmitter,
+                `${childrenInteractive.eventNamePrefix}${tap.tapsCount}tap`,
+                childrenInteractive.targetSizers,
                 tap.x, tap.y,
                 lastPointer
             );

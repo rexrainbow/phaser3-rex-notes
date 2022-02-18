@@ -409,8 +409,8 @@
     return gameObject;
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
-  var RadToDeg = Phaser.Math.RadToDeg;
+  var DegToRad$1 = Phaser.Math.DegToRad;
+  var RadToDeg$2 = Phaser.Math.RadToDeg;
 
   var GetLocalState = function GetLocalState(gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -428,10 +428,10 @@
       };
       Object.defineProperty(rexContainer, 'angle', {
         get: function get() {
-          return RadToDeg(this.rotation);
+          return RadToDeg$2(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad(value);
+          this.rotation = DegToRad$1(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -620,14 +620,14 @@
     }
   };
 
-  var RotateAround$1 = Phaser.Math.RotateAround;
+  var RotateAround$2 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y; // Rotate
 
-      RotateAround$1(point, 0, 0, -this.rotation); // Scale
+      RotateAround$2(point, 0, 0, -this.rotation); // Scale
 
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -638,7 +638,7 @@
       point.x *= this.scaleX;
       point.y *= this.scaleY; // Rotate
 
-      RotateAround$1(point, 0, 0, this.rotation); // Transform
+      RotateAround$2(point, 0, 0, this.rotation); // Transform
 
       point.x += this.x;
       point.y += this.y;
@@ -1382,7 +1382,7 @@
     addToContainer: AddToLayer
   };
 
-  var RotateAround = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
@@ -1393,7 +1393,7 @@
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
     };
-    RotateAround(deltaXY, 0, 0, gameObject.rotation);
+    RotateAround$1(deltaXY, 0, 0, gameObject.rotation);
     gameObject.originX = originX;
     gameObject.originY = originY;
     gameObject.x = gameObject.x + deltaXY.x;
@@ -1414,10 +1414,10 @@
     return this;
   };
 
-  var methods$3 = {
+  var methods$4 = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$3, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$4, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -1635,7 +1635,7 @@
     return ContainerLite;
   }(Base$1);
 
-  Object.assign(ContainerLite.prototype, methods$3);
+  Object.assign(ContainerLite.prototype, methods$4);
 
   var GetSizerConfig = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -2067,7 +2067,7 @@
     QuickSet(child, globZone, align);
   };
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$r = Phaser.Utils.Objects.GetValue;
   var Group = Phaser.GameObjects.Group;
 
   var DrawBounds = function DrawBounds(graphics, config) {
@@ -2078,13 +2078,13 @@
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$e(config, 'color', 0xffffff);
-      var nameTextConfig = GetValue$e(config, 'name', false);
+      color = GetValue$r(config, 'color', 0xffffff);
+      var nameTextConfig = GetValue$r(config, 'name', false);
 
       if (nameTextConfig) {
-        createTextCallback = GetValue$e(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
-        createTextCallbackScope = GetValue$e(nameTextConfig, 'createTextCallbackScope', undefined);
-        textAlign = GetValue$e(nameTextConfig, 'align', 'left-top');
+        createTextCallback = GetValue$r(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
+        createTextCallbackScope = GetValue$r(nameTextConfig, 'createTextCallbackScope', undefined);
+        textAlign = GetValue$r(nameTextConfig, 'align', 'left-top');
 
         if (typeof textAlign === 'string') {
           textAlign = ALIGNMODE[textAlign];
@@ -2145,7 +2145,7 @@
 
   var GlobRect = new Phaser.Geom.Rectangle();
 
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$q = Phaser.Utils.Objects.GetValue;
 
   var GetBoundsConfig = function GetBoundsConfig(config, out) {
     if (out === undefined) {
@@ -2158,10 +2158,10 @@
       out.top = config;
       out.bottom = config;
     } else {
-      out.left = GetValue$d(config, 'left', 0);
-      out.right = GetValue$d(config, 'right', 0);
-      out.top = GetValue$d(config, 'top', 0);
-      out.bottom = GetValue$d(config, 'bottom', 0);
+      out.left = GetValue$q(config, 'left', 0);
+      out.right = GetValue$q(config, 'right', 0);
+      out.top = GetValue$q(config, 'top', 0);
+      out.bottom = GetValue$q(config, 'bottom', 0);
     }
 
     return out;
@@ -2271,7 +2271,7 @@
 
   var RE_OBJ = /(\S+)\[(\d+)\]/i;
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$p = Phaser.Utils.Objects.GetValue;
 
   var GetPadding = function GetPadding(padding, key) {
     if (key === undefined) {
@@ -2292,10 +2292,10 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$c(key, 'left', 0);
-      padding.right = GetValue$c(key, 'right', 0);
-      padding.top = GetValue$c(key, 'top', 0);
-      padding.bottom = GetValue$c(key, 'bottom', 0);
+      padding.left = GetValue$p(key, 'left', 0);
+      padding.right = GetValue$p(key, 'right', 0);
+      padding.top = GetValue$p(key, 'top', 0);
+      padding.bottom = GetValue$p(key, 'bottom', 0);
     }
   };
 
@@ -2712,7 +2712,7 @@
     }
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$o = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -2723,7 +2723,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$o(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -3148,7 +3148,7 @@
     return this;
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$n = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -3165,7 +3165,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$n(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -3326,7 +3326,7 @@
     return SceneUpdateTickTask;
   }(TickTask);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$m = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
 
   var Timer = /*#__PURE__*/function () {
@@ -3339,14 +3339,14 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$9(o, 'state', IDLE);
-        this.timeScale = GetValue$9(o, 'timeScale', 1);
-        this.delay = GetValue$9(o, 'delay', 0);
-        this.repeat = GetValue$9(o, 'repeat', 0);
-        this.repeatCounter = GetValue$9(o, 'repeatCounter', 0);
-        this.duration = GetValue$9(o, 'duration', 0);
-        this.nowTime = GetValue$9(o, 'nowTime', 0);
-        this.justRestart = GetValue$9(o, 'justRestart', false);
+        this.state = GetValue$m(o, 'state', IDLE$6);
+        this.timeScale = GetValue$m(o, 'timeScale', 1);
+        this.delay = GetValue$m(o, 'delay', 0);
+        this.repeat = GetValue$m(o, 'repeat', 0);
+        this.repeatCounter = GetValue$m(o, 'repeatCounter', 0);
+        this.duration = GetValue$m(o, 'duration', 0);
+        this.nowTime = GetValue$m(o, 'nowTime', 0);
+        this.justRestart = GetValue$m(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -3410,13 +3410,13 @@
     }, {
       key: "stop",
       value: function stop() {
-        this.state = IDLE;
+        this.state = IDLE$6;
         return this;
       }
     }, {
       key: "update",
       value: function update(time, delta) {
-        if (this.state === IDLE || this.state === DONE || delta === 0 || this.timeScale === 0) {
+        if (this.state === IDLE$6 || this.state === DONE || delta === 0 || this.timeScale === 0) {
           return;
         }
 
@@ -3441,7 +3441,7 @@
         var t;
 
         switch (this.state) {
-          case IDLE:
+          case IDLE$6:
           case DELAY:
             t = 0;
             break;
@@ -3475,7 +3475,7 @@
     }, {
       key: "isIdle",
       get: function get() {
-        return this.state === IDLE;
+        return this.state === IDLE$6;
       }
     }, {
       key: "isDelay",
@@ -3512,7 +3512,7 @@
     return Timer;
   }();
 
-  var IDLE = 0;
+  var IDLE$6 = 0;
   var DELAY = 1;
   var COUNTDOWN = 2;
   var DONE = -1;
@@ -3579,7 +3579,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$l = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
@@ -3597,12 +3597,12 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$8(o, 'timer'));
-        this.setEnable(GetValue$8(o, 'enable', true));
+        this.timer.resetFromJSON(GetValue$l(o, 'timer'));
+        this.setEnable(GetValue$l(o, 'enable', true));
         this.setDelay(GetAdvancedValue$3(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$3(o, 'duration', 1000));
-        this.setEase(GetValue$8(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$8(o, 'repeat', 0));
+        this.setEase(GetValue$l(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$l(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -3701,7 +3701,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$k = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$2 = Phaser.Math.Linear;
 
@@ -3733,7 +3733,7 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Scale.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setMode(GetValue$7(o, 'mode', 0));
+        this.setMode(GetValue$k(o, 'mode', 0));
         this.setScaleRange(GetAdvancedValue$2(o, 'start', undefined), GetAdvancedValue$2(o, 'end', 0));
         return this;
       }
@@ -4011,7 +4011,7 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$j = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$1 = Phaser.Math.Linear;
 
@@ -4040,7 +4040,7 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setMode(GetValue$6(o, 'mode', 0));
+        this.setMode(GetValue$j(o, 'mode', 0));
         this.setAlphaRange(GetAdvancedValue$1(o, 'start', this.parent.alpha), GetAdvancedValue$1(o, 'end', 0));
         return this;
       }
@@ -4246,7 +4246,7 @@
     }
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$i = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
 
@@ -4275,7 +4275,7 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(EaseMove.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setMode(GetValue$5(o, 'mode', 0));
+        this.setMode(GetValue$i(o, 'mode', 0));
 
         if (o && (o.hasOwnProperty('x') || o.hasOwnProperty('y'))) {
           var endX = GetAdvancedValue(o, 'x', undefined);
@@ -4481,7 +4481,7 @@
   };
 
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-  var DistanceBetween = Phaser.Math.Distance.Between;
+  var DistanceBetween$3 = Phaser.Math.Distance.Between;
 
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -4510,7 +4510,7 @@
         y = config.y;
 
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$3(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -4547,7 +4547,7 @@
         y = config.y;
 
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$3(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -4717,7 +4717,7 @@
     return postTest;
   };
 
-  var PointToChild = function PointToChild(x, y, preTest, postTest, children) {
+  var PointToChild$1 = function PointToChild(x, y, preTest, postTest, children) {
     if (!IsFunction(preTest)) {
       children = preTest;
       preTest = undefined;
@@ -4903,7 +4903,7 @@
     return this;
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$h = Phaser.Utils.Objects.GetValue;
 
   var Button = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Button, _ComponentBase);
@@ -4918,7 +4918,7 @@
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this._enable = undefined;
-      gameObject.setInteractive(GetValue$4(config, "inputConfig", undefined));
+      gameObject.setInteractive(GetValue$h(config, "inputConfig", undefined));
 
       _this.resetFromJSON(config);
 
@@ -4932,10 +4932,10 @@
       value: function resetFromJSON(o) {
         this.pointer = undefined;
         this.lastClickTime = undefined;
-        this.setEnable(GetValue$4(o, "enable", true));
-        this.setMode(GetValue$4(o, "mode", 1));
-        this.setClickInterval(GetValue$4(o, "clickInterval", 100));
-        this.setDragThreshold(GetValue$4(o, 'threshold', undefined));
+        this.setEnable(GetValue$h(o, "enable", true));
+        this.setMode(GetValue$h(o, "mode", 1));
+        this.setClickInterval(GetValue$h(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue$h(o, 'threshold', undefined));
         return this;
       }
     }, {
@@ -5157,6 +5157,2009 @@
     }
   };
 
+  var PointToChild = function PointToChild(parents, x, y) {
+    var parent;
+
+    for (var i = 0, cnt = parents.length; i < cnt; i++) {
+      parent = parents[i];
+
+      if (!ContainsPoint(parent, x, y)) {
+        continue;
+      }
+
+      return parent.pointToChild(x, y);
+    }
+
+    return null;
+  };
+
+  var EmitChildEvent = function EmitChildEvent(eventEmitter, eventName, parents, x, y, pointer, event) {
+    var child;
+
+    if (y === undefined) {
+      child = x;
+    } else {
+      child = PointToChild(parents, x, y);
+    }
+
+    if (!child) {
+      return;
+    }
+
+    eventEmitter.emit(eventName, child, pointer, event);
+  };
+
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
+
+  var ClickChild = function ClickChild(config) {
+    var clickConfig = GetValue$g(config, 'click', undefined);
+
+    if (clickConfig === false) {
+      return;
+    }
+
+    if (clickConfig === undefined) {
+      clickConfig = {};
+    }
+
+    if (!clickConfig.hasOwnProperty('threshold')) {
+      clickConfig.threshold = 10;
+    }
+
+    var childrenInteractive = this._childrenInteractive;
+    this._click = new Button(this, clickConfig);
+
+    this._click.on('click', function (button, gameObject, pointer, event) {
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "click"), childrenInteractive.targetSizers, pointer.x, pointer.y, pointer, event);
+    }, this);
+  };
+
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
+
+  var OverChild = function OverChild(config) {
+    var overConfig = GetValue$f(config, 'over', undefined);
+
+    if (overConfig === false) {
+      return;
+    }
+
+    this.on('pointermove', OnMove, this).on('pointerover', OnMove, this).on('pointerout', OnOut, this); // pointer-up is included too
+  };
+
+  var OnMove = function OnMove(pointer, localX, localY, event) {
+    var child = PointToChild(this.input.targetSizers, pointer.x, pointer.y);
+    var preChild = this.input.lastOverChild;
+
+    if (child && preChild && child === preChild) {
+      return;
+    }
+
+    var childrenInteractive = this._childrenInteractive;
+    this.input.lastOverChild = child;
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, preChild, undefined, pointer, event);
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "over"), childrenInteractive.targetSizers, child, undefined, pointer, event);
+  };
+
+  var OnOut = function OnOut(pointer, event) {
+    var childrenInteractive = this._childrenInteractive;
+    var child = this.input.lastOverChild;
+    this.input.lastOverChild = null;
+    EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, child, undefined, pointer, event);
+  };
+
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
+
+  var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
+    _inherits(OnePointerTracer, _TickTask);
+
+    var _super = _createSuper(OnePointerTracer);
+
+    function OnePointerTracer(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, OnePointerTracer);
+
+      var scene = GetSceneObject(gameObject);
+
+      if (scene === gameObject) {
+        gameObject = undefined;
+      }
+
+      _this = _super.call(this, scene, config);
+      _this.gameObject = gameObject;
+
+      if (gameObject) {
+        gameObject.setInteractive(GetValue$e(config, "inputConfig", undefined));
+      }
+
+      _this._enable = undefined;
+
+      _this.resetFromJSON(config);
+
+      _this.boot();
+
+      return _this;
+    }
+
+    _createClass(OnePointerTracer, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setEnable(GetValue$e(o, 'enable', true));
+        this.setDetectBounds();
+
+        if (this.gameObject === undefined) {
+          this.setDetectBounds(GetValue$e(o, 'bounds', undefined));
+        } else {
+          this.setDetectBounds();
+        }
+
+        this.tracerState = TOUCH0$1; // this.recongizedState = new stateClass(this);
+
+        this.pointer = undefined;
+        this.lastPointer = undefined; // Last catched pointer
+
+        this.movedState = false;
+        this.isTouchingAnyObject = false;
+        return this;
+      }
+    }, {
+      key: "boot",
+      value: function boot() {
+        _get(_getPrototypeOf(OnePointerTracer.prototype), "boot", this).call(this);
+
+        if (this.gameObject) {
+          this.gameObject.on('pointerdown', this.onPointerDown, this);
+        } else {
+          this.scene.input.on('pointerdown', this.onPointerDown, this);
+        }
+
+        this.scene.input.on('pointerup', this.onPointerUp, this);
+        this.scene.input.on('pointermove', this.onPointerMove, this);
+        this.scene.events.once('shutdown', this.destroy, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        if (!this.scene) {
+          return;
+        }
+
+        if (this.gameObject) ; else {
+          this.scene.input.off('pointerdown', this.onPointerDown, this);
+        }
+
+        this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('shutdown', this.destroy, this);
+        this.gameObject = undefined;
+        this.bounds = undefined;
+        this.pointer = undefined;
+        this.lastPointer = undefined; // Last catched pointer
+
+        this.movedState = false;
+
+        _get(_getPrototypeOf(OnePointerTracer.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+
+        if (!e) {
+          this.dragCancel();
+        }
+
+        this._enable = e;
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setDetectBounds",
+      value: function setDetectBounds(bounds) {
+        this.bounds = bounds;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "onPointerDown",
+      value: function onPointerDown(pointer, gameObjects) {
+        if (!this.enable) {
+          return;
+        }
+
+        if (this.pointer !== undefined) {
+          return;
+        }
+
+        var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
+
+        if (!isInsideBounds) {
+          return;
+        }
+
+        if (this.pointer === pointer) {
+          return;
+        }
+
+        this.pointer = pointer;
+        this.lastPointer = pointer;
+        this.movedState = false;
+        this.tracerState = TOUCH1$1;
+
+        if (this.gameObject === undefined) {
+          this.isTouchingAnyObject = gameObjects.length > 0;
+        }
+
+        this.onDragStart();
+      }
+    }, {
+      key: "onPointerUp",
+      value: function onPointerUp(pointer) {
+        if (!this.enable) {
+          return;
+        }
+
+        var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
+
+        if (!isInsideBounds) {
+          return;
+        }
+
+        if (this.pointer !== pointer) {
+          return;
+        }
+
+        this.pointer = undefined;
+        this.movedState = false;
+        this.tracerState = TOUCH0$1;
+        this.onDragEnd();
+      }
+    }, {
+      key: "onPointerMove",
+      value: function onPointerMove(pointer) {
+        if (!this.enable) {
+          return;
+        }
+
+        if (pointer.isDown) {
+          var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
+          var isCatchedPointer = this.pointer === pointer;
+
+          if (!isCatchedPointer && isInsideBounds) ; else if (isCatchedPointer && !isInsideBounds) {
+            // Pointer moves out of bounds
+            this.onPointerUp(pointer);
+          } else {
+            // Pointer drags in bounds
+            if (!this.movedState) {
+              this.movedState = pointer.x !== pointer.downX || pointer.y !== pointer.downY;
+            }
+
+            if (this.movedState) {
+              this.onDrag();
+            }
+          }
+        }
+      }
+    }, {
+      key: "dragCancel",
+      value: function dragCancel() {
+        if (this.tracerState === TOUCH1$1) {
+          this.onDragEnd();
+        }
+
+        this.pointer = undefined;
+        this.tracerState = TOUCH0$1;
+        return this;
+      }
+    }, {
+      key: "onDragStart",
+      value: function onDragStart() {
+        this.emit('dragstart', this);
+      }
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd() {
+        this.emit('dragend', this);
+      }
+    }, {
+      key: "onDrag",
+      value: function onDrag() {
+        this.emit('drag', this);
+      } // onLastPointerMove() { }
+
+    }, {
+      key: "preUpdate",
+      value: function preUpdate(time, delta) {}
+    }, {
+      key: "postUpdate",
+      value: function postUpdate(time, delta) {}
+    }, {
+      key: "startTicking",
+      value: function startTicking() {
+        _get(_getPrototypeOf(OnePointerTracer.prototype), "startTicking", this).call(this);
+
+        this.scene.events.on('preupdate', this.preUpdate, this);
+        this.scene.events.on('postupdate', this.postUpdate, this);
+      }
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        _get(_getPrototypeOf(OnePointerTracer.prototype), "stopTicking", this).call(this);
+
+        if (this.scene) {
+          // Scene might be destoryed
+          this.scene.events.off('preupdate', this.preUpdate, this);
+          this.scene.events.off('postupdate', this.postUpdate, this);
+        }
+      }
+    }, {
+      key: "setRecongizedStateObject",
+      value: function setRecongizedStateObject(stateObject) {
+        this.recongizedState = stateObject;
+        return this;
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this.recongizedState.state;
+      },
+      set: function set(newState) {
+        this.recongizedState.state = newState;
+      }
+    }, {
+      key: "cancel",
+      value: function cancel() {
+        this.state = IDLE$5;
+        return this;
+      }
+    }]);
+
+    return OnePointerTracer;
+  }(TickTask);
+
+  var TOUCH0$1 = 0;
+  var TOUCH1$1 = 1;
+  var IDLE$5 = 'IDLE';
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$d = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var FSM = /*#__PURE__*/function () {
+    /*
+    var config = {
+        start: 'A',   // default: undefined
+        states: {
+            A: {
+                next: 'B',  // function() { return 'B'; }
+                enter: function() {},
+                exit: function() {}
+            },
+            // ...
+        },        
+        extend: {
+            i: 0,
+            name: 'abc'
+            // ...
+        },
+        init: function() {},
+        enable: true,
+        eventEmitter: true,
+    };
+    */
+    function FSM(config) {
+      _classCallCheck(this, FSM);
+
+      // Attach get-next-state function
+      var states = GetValue$d(config, 'states', undefined);
+
+      if (states) {
+        this.addStates(states);
+      } // Attach extend members
+
+
+      var extend = GetValue$d(config, 'extend', undefined);
+
+      if (extend) {
+        for (var name in extend) {
+          if (!this.hasOwnProperty(name) || this[name] === undefined) {
+            this[name] = extend[name];
+          }
+        }
+      } // Event emitter
+
+
+      var eventEmitter = GetValue$d(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$d(config, 'EventEmitterClass', undefined);
+      this.setEventEmitter(eventEmitter, EventEmitterClass);
+      this._stateLock = false;
+      this.resetFromJSON(config);
+    }
+
+    _createClass(FSM, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.destroyEventEmitter();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.shutdown();
+      }
+    }, {
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setEnable(GetValue$d(o, 'enable', true));
+        this.start(GetValue$d(o, 'start', undefined));
+        var init = GetValue$d(o, 'init', undefined);
+
+        if (init) {
+          init.call(this);
+        }
+
+        return this;
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          curState: this.state,
+          prevState: this.prevState,
+          enable: this.enable,
+          start: this._start
+        };
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this._state;
+      },
+      set: function set(newState) {
+        if (!this.enable || this._stateLock) {
+          return;
+        }
+
+        if (this._state === newState) {
+          return;
+        }
+
+        this._prevState = this._state;
+        this._state = newState;
+        this._stateLock = true; // lock state
+
+        this.emit('statechange', this);
+
+        if (this._prevState != null) {
+          var exitEventName = 'exit_' + this._prevState;
+          var exitCallback = this[exitEventName];
+
+          if (exitCallback) {
+            exitCallback.call(this);
+          }
+
+          this.emit(exitEventName, this);
+        }
+
+        this._stateLock = false;
+
+        if (this._state != null) {
+          var enterEventName = 'enter_' + this._state;
+          var enterCallback = this[enterEventName];
+
+          if (enterCallback) {
+            enterCallback.call(this);
+          }
+
+          this.emit(enterEventName, this);
+        }
+      }
+    }, {
+      key: "prevState",
+      get: function get() {
+        return this._prevState;
+      }
+    }, {
+      key: "start",
+      value: function start(state) {
+        this._start = state;
+        this._prevState = undefined;
+        this._state = state; // Won't fire statechange events
+
+        return this;
+      }
+    }, {
+      key: "goto",
+      value: function goto(nextState) {
+        if (nextState != null) {
+          this.state = nextState;
+        }
+
+        return this;
+      }
+    }, {
+      key: "next",
+      value: function next() {
+        var nextState;
+        var getNextState = this['next_' + this.state];
+
+        if (getNextState) {
+          if (typeof getNextState === 'string') {
+            nextState = getNextState;
+          } else {
+            nextState = getNextState.call(this);
+          }
+        }
+
+        this["goto"](nextState);
+        return this;
+      }
+    }, {
+      key: "addState",
+      value: function addState(name, config) {
+        var getNextStateCallback = GetValue$d(config, 'next', undefined);
+
+        if (getNextStateCallback) {
+          this['next_' + name] = getNextStateCallback;
+        }
+
+        var exitCallback = GetValue$d(config, 'exit', undefined);
+
+        if (exitCallback) {
+          this['exit_' + name] = exitCallback;
+        }
+
+        var enterCallback = GetValue$d(config, 'enter', undefined);
+
+        if (enterCallback) {
+          this['enter_' + name] = enterCallback;
+        }
+
+        return this;
+      }
+    }, {
+      key: "addStates",
+      value: function addStates(states) {
+        for (var name in states) {
+          this.addState(name, states[name]);
+        }
+
+        return this;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta, key) {
+        if (key === undefined) {
+          key = 'update';
+        }
+
+        var fn = this[key + '_' + this.state];
+
+        if (fn) {
+          fn.call(this, time, delta);
+        }
+      }
+    }, {
+      key: "preupdate",
+      value: function preupdate(time, delta) {
+        this.update(time, delta, 'preupdate');
+      }
+    }, {
+      key: "postupdate",
+      value: function postupdate(time, delta) {
+        this.update(time, delta, 'postupdate');
+      }
+    }]);
+
+    return FSM;
+  }();
+
+  Object.assign(FSM.prototype, EventEmitterMethods);
+
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var DistanceBetween$2 = Phaser.Math.Distance.Between;
+
+  var Tap = /*#__PURE__*/function (_OnePointerTracer) {
+    _inherits(Tap, _OnePointerTracer);
+
+    var _super = _createSuper(Tap);
+
+    function Tap(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, Tap);
+
+      _this = _super.call(this, gameObject, config);
+
+      var self = _assertThisInitialized(_this);
+
+      var stateConfig = {
+        states: {
+          IDLE: {
+            enter: function enter() {
+              self.stop();
+              self.tapsCount = 0;
+              self.x = 0;
+              self.y = 0;
+              self.worldX = 0;
+              self.worldY = 0;
+            },
+            exit: function exit() {
+              var pointer = self.lastPointer;
+              self.x = pointer.x;
+              self.y = pointer.y;
+              self.worldX = pointer.worldX;
+              self.worldY = pointer.worldY;
+            }
+          },
+          BEGIN: {
+            enter: function enter() {
+              self.start();
+              self.tapsCount = 0;
+              self.emit('tappingstart', self, self.gameObject, self.lastPointer);
+            }
+          },
+          RECOGNIZED: {
+            enter: function enter() {
+              self.start();
+              self.emit('tap', self, self.gameObject, self.lastPointer);
+              self.emit("".concat(self.tapsCount, "tap"), self, self.gameObject, self.lastPointer);
+            }
+          }
+        },
+        init: function init() {
+          this.state = IDLE$4;
+        },
+        eventEmitter: false
+      };
+
+      _this.setRecongizedStateObject(new FSM(stateConfig));
+
+      return _this;
+    }
+
+    _createClass(Tap, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Tap.prototype), "resetFromJSON", this).call(this, o);
+
+        this.setHoldTime(GetValue$c(o, 'time', 250)); // min-hold-time of Press is 251
+
+        this.setTapInterval(GetValue$c(o, 'tapInterval', 200));
+        this.setDragThreshold(GetValue$c(o, 'threshold', 9));
+        this.setTapOffset(GetValue$c(o, 'tapOffset', 10));
+        var taps = GetValue$c(o, 'taps', undefined);
+
+        if (taps !== undefined) {
+          this.setTaps(taps);
+        } else {
+          this.setMaxTaps(GetValue$c(o, 'maxTaps', undefined));
+          this.setMinTaps(GetValue$c(o, 'minTaps', undefined));
+        }
+
+        return this;
+      }
+    }, {
+      key: "onDragStart",
+      value: function onDragStart() {
+        switch (this.state) {
+          case IDLE$4:
+            this.state = BEGIN$3;
+            break;
+
+          case BEGIN$3:
+            var pointer = this.lastPointer;
+            var tapsOffset = DistanceBetween$2(pointer.upX, pointer.upY, pointer.x, pointer.y);
+
+            if (tapsOffset > this.tapOffset) {
+              // Can't recognize next level, restart here
+              this.state = RECOGNIZED$3;
+              this.state = BEGIN$3;
+            }
+
+            break;
+
+          case RECOGNIZED$3:
+            this.state = BEGIN$3;
+            break;
+        }
+      }
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd() {
+        if (this.state === BEGIN$3) {
+          this.tapsCount++; // Try recognize next level
+
+          this.emit('tapping', this, this.gameObject, this.lastPointer);
+
+          if (this.maxTaps !== undefined && this.tapsCount === this.maxTaps) {
+            // Reach to maxTaps, stop here                
+            this.state = RECOGNIZED$3;
+          }
+        }
+      }
+    }, {
+      key: "onDrag",
+      value: function onDrag() {
+        if (this.state === IDLE$4) {
+          return;
+        }
+
+        if (this.pointer.getDistance() > this.dragThreshold) {
+          // Cancel
+          this.state = IDLE$4;
+        }
+      }
+    }, {
+      key: "preUpdate",
+      value: function preUpdate(time, delta) {
+        if (!this.isRunning || !this.enable) {
+          return;
+        }
+
+        if (this.state === BEGIN$3) {
+          var pointer = this.lastPointer;
+
+          if (pointer.isDown) {
+            var holdTime = time - pointer.downTime;
+
+            if (holdTime > this.holdTime) {
+              this.state = IDLE$4;
+            }
+          } else {
+            // isUp
+            var releasedTime = time - pointer.upTime;
+
+            if (releasedTime > this.tapInterval) {
+              if (this.minTaps === undefined || this.tapsCount >= this.minTaps) {
+                this.state = RECOGNIZED$3;
+              } else {
+                this.state = IDLE$4;
+              }
+            }
+          }
+        }
+      }
+    }, {
+      key: "postUpdate",
+      value: function postUpdate(time, delta) {
+        if (!this.isRunning || !this.enable) {
+          return;
+        } // Clear RECOGNIZED after update()
+
+
+        if (this.state === RECOGNIZED$3) {
+          this.state = IDLE$4;
+        }
+      }
+    }, {
+      key: "isTapped",
+      get: function get() {
+        return this.state === RECOGNIZED$3;
+      }
+    }, {
+      key: "setHoldTime",
+      value: function setHoldTime(time) {
+        this.holdTime = time; // ms
+
+        return this;
+      }
+    }, {
+      key: "setTapInterval",
+      value: function setTapInterval(time) {
+        this.tapInterval = time; // ms
+
+        return this;
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+    }, {
+      key: "setTapOffset",
+      value: function setTapOffset(distance) {
+        this.tapOffset = distance;
+        return this;
+      }
+    }, {
+      key: "setMaxTaps",
+      value: function setMaxTaps(taps) {
+        this.maxTaps = taps;
+        return this;
+      }
+    }, {
+      key: "setMinTaps",
+      value: function setMinTaps(taps) {
+        this.minTaps = taps;
+        return this;
+      }
+    }, {
+      key: "setTaps",
+      value: function setTaps(minTaps, maxTaps) {
+        if (maxTaps === undefined) {
+          maxTaps = minTaps;
+        }
+
+        this.setMinTaps(minTaps).setMaxTaps(maxTaps);
+        return this;
+      }
+    }]);
+
+    return Tap;
+  }(OnePointerTracer);
+
+  var IDLE$4 = 'IDLE';
+  var BEGIN$3 = 'BEGIN';
+  var RECOGNIZED$3 = 'RECOGNIZED';
+
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
+
+  var Press = /*#__PURE__*/function (_OnePointerTracer) {
+    _inherits(Press, _OnePointerTracer);
+
+    var _super = _createSuper(Press);
+
+    function Press(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, Press);
+
+      _this = _super.call(this, gameObject, config);
+
+      var self = _assertThisInitialized(_this);
+
+      var stateConfig = {
+        states: {
+          IDLE: {
+            enter: function enter() {
+              self.x = 0;
+              self.y = 0;
+              self.worldX = 0;
+              self.worldY = 0;
+            },
+            exit: function exit() {
+              var pointer = self.lastPointer;
+              self.x = pointer.x;
+              self.y = pointer.y;
+              self.worldX = pointer.worldX;
+              self.worldY = pointer.worldY;
+            }
+          },
+          BEGIN: {
+            enter: function enter() {
+              self.start();
+            },
+            exit: function exit() {
+              self.stop();
+            }
+          },
+          RECOGNIZED: {
+            enter: function enter() {
+              self.emit('pressstart', self, self.gameObject, self.lastPointer);
+            },
+            exit: function exit() {
+              self.emit('pressend', self, self.gameObject, self.lastPointer);
+            }
+          }
+        },
+        init: function init() {
+          this.state = IDLE$3;
+        },
+        eventEmitter: false
+      };
+
+      _this.setRecongizedStateObject(new FSM(stateConfig));
+
+      return _this;
+    }
+
+    _createClass(Press, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Press.prototype), "resetFromJSON", this).call(this, o);
+
+        this.setDragThreshold(GetValue$b(o, 'threshold', 9));
+        this.setHoldTime(GetValue$b(o, 'time', 251));
+        return this;
+      }
+    }, {
+      key: "onDragStart",
+      value: function onDragStart() {
+        this.state = BEGIN$2;
+
+        if (this.holdTime === 0) {
+          this.state = RECOGNIZED$2;
+        }
+      }
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd() {
+        this.state = IDLE$3;
+      }
+    }, {
+      key: "onDrag",
+      value: function onDrag() {
+        if (this.state === IDLE$3) {
+          return;
+        }
+
+        if (this.pointer.getDistance() > this.dragThreshold) {
+          this.state = IDLE$3;
+        }
+      }
+    }, {
+      key: "preUpdate",
+      value: function preUpdate(time, delta) {
+        if (!this.isRunning || !this.enable) {
+          return;
+        }
+
+        if (this.state === BEGIN$2) {
+          var holdTime = time - this.pointer.downTime;
+
+          if (holdTime >= this.holdTime) {
+            this.state = RECOGNIZED$2;
+          }
+        }
+      }
+    }, {
+      key: "isPressed",
+      get: function get() {
+        return this.state === RECOGNIZED$2;
+      }
+    }, {
+      key: "setHoldTime",
+      value: function setHoldTime(time) {
+        this.holdTime = time; // ms
+
+        return this;
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+    }]);
+
+    return Press;
+  }(OnePointerTracer);
+
+  var IDLE$3 = 'IDLE';
+  var BEGIN$2 = 'BEGIN';
+  var RECOGNIZED$2 = 'RECOGNIZED';
+
+  Phaser.Utils.Objects.GetValue;
+
+  var DistanceBetween$1 = Phaser.Math.Distance.Between;
+  var AngleBetween$1 = Phaser.Math.Angle.Between;
+  var VelocityMethods = {
+    getDt: function getDt() {
+      var game = this.scene.sys.game;
+      var dt = game.loop.delta;
+      return dt;
+    },
+    getVelocity: function getVelocity() {
+      var p1 = this.pointer.position;
+      var p0 = this.pointer.prevPosition;
+      var d = DistanceBetween$1(p0.x, p0.y, p1.x, p1.y);
+      var velocity = d / (this.getDt() * 0.001);
+      return velocity;
+    },
+    getVelocityX: function getVelocityX() {
+      var p1 = this.pointer.position;
+      var p0 = this.pointer.prevPosition;
+      var d = Math.abs(p1.x - p0.x);
+      var velocity = d / (this.getDt() * 0.001);
+      return velocity;
+    },
+    getVelocityY: function getVelocityY() {
+      var p1 = this.pointer.position;
+      var p0 = this.pointer.prevPosition;
+      var d = Math.abs(p1.y - p0.y);
+      var velocity = d / (this.getDt() * 0.001);
+      return velocity;
+    },
+    getVelocityAngle: function getVelocityAngle() {
+      var p1 = this.pointer.position;
+      var p0 = this.pointer.prevPosition;
+      var angle = AngleBetween$1(p0.x, p0.y, p1.x, p1.y);
+      return angle;
+    }
+  };
+
+  var DIRMODE = {
+    'up&down': 0,
+    'left&right': 1,
+    '4dir': 2,
+    '8dir': 3
+  };
+
+  var AngleToDirections = function AngleToDirections(angle, dirMode, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+
+    out.left = false;
+    out.right = false;
+    out.up = false;
+    out.down = false;
+    angle = (angle + 360) % 360;
+
+    switch (dirMode) {
+      case 0:
+        // up & down
+        if (angle < 180) {
+          out.down = true;
+        } else {
+          out.up = true;
+        }
+
+        break;
+
+      case 1:
+        // left & right
+        if (angle > 90 && angle <= 270) {
+          out.left = true;
+        } else {
+          out.right = true;
+        }
+
+        break;
+
+      case 2:
+        // 4 dir
+        if (angle > 45 && angle <= 135) {
+          out.down = true;
+        } else if (angle > 135 && angle <= 225) {
+          out.left = true;
+        } else if (angle > 225 && angle <= 315) {
+          out.up = true;
+        } else {
+          out.right = true;
+        }
+
+        break;
+
+      case 3:
+        // 8 dir
+        if (angle > 22.5 && angle <= 67.5) {
+          out.down = true;
+          out.right = true;
+        } else if (angle > 67.5 && angle <= 112.5) {
+          out.down = true;
+        } else if (angle > 112.5 && angle <= 157.5) {
+          out.down = true;
+          out.left = true;
+        } else if (angle > 157.5 && angle <= 202.5) {
+          out.left = true;
+        } else if (angle > 202.5 && angle <= 247.5) {
+          out.left = true;
+          out.up = true;
+        } else if (angle > 247.5 && angle <= 292.5) {
+          out.up = true;
+        } else if (angle > 292.5 && angle <= 337.5) {
+          out.up = true;
+          out.right = true;
+        } else {
+          out.right = true;
+        }
+
+        break;
+    }
+
+    return out;
+  };
+
+  var globOut = {};
+
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var RadToDeg$1 = Phaser.Math.RadToDeg;
+
+  var Swipe = /*#__PURE__*/function (_OnePointerTracer) {
+    _inherits(Swipe, _OnePointerTracer);
+
+    var _super = _createSuper(Swipe);
+
+    function Swipe(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, Swipe);
+
+      _this = _super.call(this, gameObject, config);
+
+      var self = _assertThisInitialized(_this);
+
+      var stateConfig = {
+        states: {
+          IDLE: {
+            enter: function enter() {
+              self.x = 0;
+              self.y = 0;
+              self.worldX = 0;
+              self.worldY = 0;
+            },
+            exit: function exit() {
+              var pointer = self.lastPointer;
+              self.x = pointer.x;
+              self.y = pointer.y;
+              self.worldX = pointer.worldX;
+              self.worldY = pointer.worldY;
+            }
+          },
+          BEGIN: {
+            enter: function enter() {
+              self.validDrag = false;
+            }
+          },
+          RECOGNIZED: {
+            enter: function enter() {
+              self.start();
+              self.updateDirectionStates();
+              self.emit('swipe', self, self.gameObject, self.lastPointer);
+            },
+            exit: function exit() {
+              self.stop();
+              self.clearDirectionStates();
+            }
+          }
+        },
+        init: function init() {
+          this.state = IDLE$2;
+        },
+        eventEmitter: false
+      };
+
+      _this.setRecongizedStateObject(new FSM(stateConfig));
+
+      _this.clearDirectionStates();
+
+      return _this;
+    }
+
+    _createClass(Swipe, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Swipe.prototype), "resetFromJSON", this).call(this, o);
+
+        this.setDragThreshold(GetValue$a(o, 'threshold', 10));
+        this.setVelocityThreshold(GetValue$a(o, 'velocityThreshold', 1000));
+        this.setDirectionMode(GetValue$a(o, 'dir', '8dir'));
+        return this;
+      }
+    }, {
+      key: "onDragStart",
+      value: function onDragStart() {
+        this.state = BEGIN$1;
+      }
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd() {
+        this.state = IDLE$2;
+      }
+    }, {
+      key: "onDrag",
+      value: function onDrag() {
+        if (this.state === BEGIN$1) {
+          if (!this.validDrag) {
+            this.validDrag = this.dragThreshold === 0 || this.pointer.getDistance() >= this.dragThreshold;
+          }
+
+          if (this.validDrag && this.dragVelocity > this.velocityThreshold) {
+            this.state = RECOGNIZED$1;
+          }
+        }
+      }
+    }, {
+      key: "postUpdate",
+      value: function postUpdate(time, delta) {
+        if (!this.isRunning || !this.enable) {
+          return;
+        } // Clear RECOGNIZED after update()
+
+
+        if (this.state === RECOGNIZED$1) {
+          this.state = IDLE$2;
+        }
+      }
+    }, {
+      key: "isSwiped",
+      get: function get() {
+        return this.state === RECOGNIZED$1;
+      }
+    }, {
+      key: "dragVelocity",
+      get: function get() {
+        var velocity;
+
+        switch (this.dirMode) {
+          case 0:
+            velocity = this.getVelocityY();
+            break;
+          // up & down
+
+          case 1:
+            velocity = this.getVelocityX();
+            break;
+          // left & right
+
+          default:
+            velocity = this.getVelocity();
+            break;
+          // 4 dir, 8 dir
+        }
+
+        return velocity;
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+    }, {
+      key: "setVelocityThreshold",
+      value: function setVelocityThreshold(velocity) {
+        this.velocityThreshold = velocity;
+        return this;
+      }
+    }, {
+      key: "setDirectionMode",
+      value: function setDirectionMode(m) {
+        if (typeof m === 'string') {
+          m = DIRMODE[m];
+        }
+
+        this.dirMode = m;
+        return this;
+      }
+    }, {
+      key: "updateDirectionStates",
+      value: function updateDirectionStates() {
+        var angle = RadToDeg$1(this.getVelocityAngle());
+        AngleToDirections(angle, this.dirMode, this);
+        return this;
+      }
+    }, {
+      key: "clearDirectionStates",
+      value: function clearDirectionStates() {
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.down = false;
+        return this;
+      }
+    }]);
+
+    return Swipe;
+  }(OnePointerTracer);
+
+  Object.assign(Swipe.prototype, VelocityMethods);
+  var IDLE$2 = 'IDLE';
+  var BEGIN$1 = 'BEGIN';
+  var RECOGNIZED$1 = 'RECOGNIZED';
+
+  var Clear = function Clear(obj) {
+    if (Array.isArray(obj)) {
+      obj.length = 0;
+    } else {
+      for (var key in obj) {
+        delete obj[key];
+      }
+    }
+  };
+
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var SpliceOne = Phaser.Utils.Array.SpliceOne;
+  var DistanceBetween = Phaser.Math.Distance.Between;
+  var AngleBetween = Phaser.Math.Angle.Between;
+
+  var TwoPointersTracer = /*#__PURE__*/function () {
+    function TwoPointersTracer(scene, config) {
+      _classCallCheck(this, TwoPointersTracer);
+
+      var amount = scene.input.manager.pointersTotal - 1;
+
+      if (amount < 2) {
+        scene.input.addPointer(2 - amount);
+      }
+
+      this.scene = scene; // Event emitter
+
+      this.setEventEmitter(GetValue$9(config, 'eventEmitter', undefined));
+      this._enable = undefined;
+      this.pointers = [];
+      this.movedState = {};
+      this.resetFromJSON(config);
+      this.boot();
+    }
+
+    _createClass(TwoPointersTracer, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setEnable(GetValue$9(o, "enable", true));
+        this.bounds = GetValue$9(o, 'bounds', undefined);
+        this.tracerState = TOUCH0;
+        this.pointers.length = 0;
+        Clear(this.movedState);
+        return this;
+      }
+    }, {
+      key: "boot",
+      value: function boot() {
+        this.scene.input.on('pointerdown', this.onPointerDown, this);
+        this.scene.input.on('pointerup', this.onPointerUp, this);
+        this.scene.input.on('pointermove', this.onPointerMove, this);
+        this.scene.events.once('shutdown', this.destroy, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown() {
+        if (!this.scene) {
+          return;
+        }
+
+        this.destroyEventEmitter();
+        this.pointers.length = 0;
+        Clear(this.movedState);
+        this.scene.input.off('pointerdown', this.onPointerDown, this);
+        this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene = undefined;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.shutdown();
+      }
+    }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+
+        if (!e) {
+          this.dragCancel();
+        }
+
+        this._enable = e;
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "onPointerDown",
+      value: function onPointerDown(pointer) {
+        if (!this.enable) {
+          return;
+        }
+
+        if (this.pointers.length === 2) {
+          return;
+        }
+
+        var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
+
+        if (!isInsideBounds) {
+          return;
+        }
+
+        var index = this.pointers.indexOf(pointer);
+
+        if (index !== -1) {
+          // Already in catched pointers
+          return;
+        }
+
+        this.movedState[pointer.id] = false;
+        this.pointers.push(pointer);
+
+        switch (this.tracerState) {
+          case TOUCH0:
+            this.tracerState = TOUCH1;
+            this.onDrag1Start();
+            break;
+
+          case TOUCH1:
+            this.tracerState = TOUCH2;
+            this.onDrag2Start();
+            break;
+        }
+      }
+    }, {
+      key: "onPointerUp",
+      value: function onPointerUp(pointer) {
+        if (!this.enable) {
+          return;
+        }
+
+        var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
+
+        if (!isInsideBounds) {
+          return;
+        }
+
+        var index = this.pointers.indexOf(pointer);
+
+        if (index === -1) {
+          // Not in catched pointers
+          return;
+        } else {
+          delete this.movedState[pointer.id];
+          SpliceOne(this.pointers, index);
+        }
+
+        switch (this.tracerState) {
+          case TOUCH1:
+            this.tracerState = TOUCH0;
+            this.onDrag1End();
+            break;
+
+          case TOUCH2:
+            this.tracerState = TOUCH1;
+            this.onDrag2End();
+            this.onDrag1Start();
+            break;
+        }
+      }
+    }, {
+      key: "onPointerMove",
+      value: function onPointerMove(pointer) {
+        if (!this.enable) {
+          return;
+        }
+
+        if (pointer.isDown) {
+          var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
+          var isCatchedPointer = this.pointers.indexOf(pointer) !== -1;
+
+          if (!isCatchedPointer && isInsideBounds) ; else if (isCatchedPointer && !isInsideBounds) {
+            // Pointer moves out of bounds, lose pointer
+            this.onPointerUp(pointer);
+          } else {
+            // Pointer drags in bounds
+            if (!this.movedState[pointer.id]) {
+              this.movedState[pointer.id] = pointer.x !== pointer.downX || pointer.y !== pointer.downY;
+            }
+
+            if (this.movedState[pointer.id]) {
+              switch (this.tracerState) {
+                case TOUCH1:
+                  this.onDrag1();
+                  break;
+
+                case TOUCH2:
+                  this.onDrag2();
+                  break;
+              }
+            }
+          }
+        }
+      }
+    }, {
+      key: "dragCancel",
+      value: function dragCancel() {
+        if (this.tracerState === TOUCH2) {
+          this.onDrag2End();
+        }
+
+        this.pointers.length = 0;
+        Clear(this.movedState);
+        this.tracerState = TOUCH0;
+        return this;
+      }
+    }, {
+      key: "onDrag1Start",
+      value: function onDrag1Start() {
+        this.emit('drag1start', this);
+      }
+    }, {
+      key: "onDrag1End",
+      value: function onDrag1End() {
+        this.emit('drag1end', this);
+      }
+    }, {
+      key: "onDrag1",
+      value: function onDrag1() {
+        this.emit('drag1', this);
+      }
+    }, {
+      key: "onDrag2Start",
+      value: function onDrag2Start() {
+        this.emit('drag2start', this);
+      }
+    }, {
+      key: "onDrag2End",
+      value: function onDrag2End() {
+        this.emit('drag2end', this);
+      }
+    }, {
+      key: "onDrag2",
+      value: function onDrag2() {
+        this.emit('drag2', this);
+      }
+    }, {
+      key: "distanceBetween",
+      get: function get() {
+        if (this.tracerState !== TOUCH2) {
+          return 0;
+        }
+
+        var p0 = this.pointers[0],
+            p1 = this.pointers[1];
+        return DistanceBetween(p0.x, p0.y, p1.x, p1.y);
+      }
+    }, {
+      key: "angleBetween",
+      get: function get() {
+        if (this.tracerState !== TOUCH2) {
+          return 0;
+        }
+
+        var p0 = this.pointers[0],
+            p1 = this.pointers[1];
+        return AngleBetween(p0.x, p0.y, p1.x, p1.y);
+      }
+    }, {
+      key: "drag1Vector",
+      get: function get() {
+        var pointer = this.pointers[0];
+
+        if (pointer && this.movedState[pointer.id]) {
+          var p1 = pointer.position;
+          var p0 = pointer.prevPosition;
+          tmpDragVector.x = p1.x - p0.x;
+          tmpDragVector.y = p1.y - p0.y;
+        } else {
+          tmpDragVector.x = 0;
+          tmpDragVector.y = 0;
+        }
+
+        return tmpDragVector;
+      }
+    }, {
+      key: "centerX",
+      get: function get() {
+        if (this.tracerState !== TOUCH2) {
+          return 0;
+        }
+
+        var p0 = this.pointers[0].position;
+        var p1 = this.pointers[1].position;
+        return (p0.x + p1.x) / 2;
+      }
+    }, {
+      key: "centerY",
+      get: function get() {
+        if (this.tracerState !== TOUCH2) {
+          return 0;
+        }
+
+        var p0 = this.pointers[0].position;
+        var p1 = this.pointers[1].position;
+        return (p0.y + p1.y) / 2;
+      }
+    }, {
+      key: "prevCenterX",
+      get: function get() {
+        if (this.tracerState !== TOUCH2) {
+          return 0;
+        }
+
+        var preP0 = this.movedState[this.pointers[0].id] ? this.pointers[0].prevPosition : this.pointers[0].position;
+        var preP1 = this.movedState[this.pointers[1].id] ? this.pointers[1].prevPosition : this.pointers[1].position;
+        return (preP0.x + preP1.x) / 2;
+      }
+    }, {
+      key: "prevCenterY",
+      get: function get() {
+        if (this.tracerState !== TOUCH2) {
+          return 0;
+        }
+
+        var preP0 = this.movedState[this.pointers[0].id] ? this.pointers[0].prevPosition : this.pointers[0].position;
+        var preP1 = this.movedState[this.pointers[1].id] ? this.pointers[1].prevPosition : this.pointers[1].position;
+        return (preP0.y + preP1.y) / 2;
+      }
+    }, {
+      key: "movementCenterX",
+      get: function get() {
+        return this.centerX - this.prevCenterX;
+      }
+    }, {
+      key: "movementCenterY",
+      get: function get() {
+        return this.centerY - this.prevCenterY;
+      }
+    }, {
+      key: "setRecongizedStateObject",
+      value: function setRecongizedStateObject(stateObject) {
+        this.recongizedState = stateObject;
+        return this;
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this.recongizedState.state;
+      },
+      set: function set(newState) {
+        this.recongizedState.state = newState;
+      }
+    }, {
+      key: "cancel",
+      value: function cancel() {
+        this.state = IDLE$1;
+        return this;
+      }
+    }]);
+
+    return TwoPointersTracer;
+  }();
+
+  Object.assign(TwoPointersTracer.prototype, EventEmitterMethods);
+  var tmpDragVector = {};
+  var TOUCH0 = 0;
+  var TOUCH1 = 1;
+  var TOUCH2 = 2;
+  var IDLE$1 = 'IDLE';
+
+  Phaser.Utils.Objects.GetValue;
+
+  var RotateAround = Phaser.Math.RotateAround;
+
+  var RotateObjectAround = function RotateObjectAround(gameObject, x, y, angle) {
+    RotateAround(gameObject, x, y, angle);
+    gameObject.rotation += angle;
+    return gameObject;
+  };
+
+  var SpinObject = function SpinObject(gameObject, camera) {
+    if (!this.isRotation) {
+      return this;
+    }
+
+    if (camera === undefined) {
+      camera = this.pointers[0].camera;
+    }
+
+    var movementX = this.movementCenterX,
+        movementY = this.movementCenterY;
+    camera.getWorldPoint(this.centerX, this.centerY, tmpPos);
+    var centerWorldX = tmpPos.x;
+    var centerWorldY = tmpPos.y;
+    var angle = this.rotation;
+
+    if (Array.isArray(gameObject)) {
+      var gameObjects = gameObject;
+
+      for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        gameObject = gameObjects[i];
+        gameObject.x += movementX;
+        gameObject.y += movementY;
+        RotateObjectAround(gameObject, centerWorldX, centerWorldY, angle);
+      }
+    } else {
+      gameObject.x += movementX;
+      gameObject.y += movementY;
+      RotateObjectAround(gameObject, centerWorldX, centerWorldY, angle);
+    }
+
+    return this;
+  };
+
+  var tmpPos = {};
+
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
+
+  var ShortestBetween = Phaser.Math.Angle.ShortestBetween;
+  var RadToDeg = Phaser.Math.RadToDeg;
+  var DegToRad = Phaser.Math.DegToRad;
+
+  var Rotate = /*#__PURE__*/function (_TwoPointersTracer) {
+    _inherits(Rotate, _TwoPointersTracer);
+
+    var _super = _createSuper(Rotate);
+
+    function Rotate(scene, config) {
+      var _this;
+
+      _classCallCheck(this, Rotate);
+
+      _this = _super.call(this, scene, config);
+
+      var self = _assertThisInitialized(_this);
+
+      var stateConfig = {
+        states: {
+          IDLE: {
+            enter: function enter() {
+              self.prevAngle = undefined;
+              self.angle = 0;
+            }
+          },
+          BEGIN: {},
+          RECOGNIZED: {
+            enter: function enter() {
+              self.emit('rotatestart', self);
+            },
+            exit: function exit() {
+              self.emit('rotateend', self);
+            }
+          }
+        },
+        init: function init() {
+          this.state = IDLE;
+        },
+        eventEmitter: false
+      };
+
+      _this.setRecongizedStateObject(new FSM(stateConfig));
+
+      return _this;
+    }
+
+    _createClass(Rotate, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Rotate.prototype), "resetFromJSON", this).call(this, o);
+
+        this.setDragThreshold(GetValue$8(o, 'threshold', 0));
+        return this;
+      }
+    }, {
+      key: "onDrag2Start",
+      value: function onDrag2Start() {
+        this.prevAngle = WrapDegrees(RadToDeg(this.angleBetween)); // Degrees
+
+        this.state = BEGIN;
+
+        if (this.dragThreshold === 0) {
+          this.state = RECOGNIZED;
+        }
+      }
+    }, {
+      key: "onDrag2End",
+      value: function onDrag2End() {
+        this.state = IDLE;
+      }
+    }, {
+      key: "onDrag2",
+      value: function onDrag2() {
+        switch (this.state) {
+          case BEGIN:
+            if (this.pointers[0].getDistance() >= this.dragThreshold && this.pointers[1].getDistance() >= this.dragThreshold) {
+              var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
+              this.angle = ShortestBetween(this.prevAngle, curAngle);
+              this.prevAngle = curAngle;
+              this.state = RECOGNIZED;
+            }
+
+            break;
+
+          case RECOGNIZED:
+            var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
+            this.angle = ShortestBetween(this.prevAngle, curAngle);
+            this.prevAngle = curAngle;
+            this.emit('rotate', this);
+            break;
+        }
+      }
+    }, {
+      key: "isRotated",
+      get: function get() {
+        return this.state === RECOGNIZED;
+      }
+    }, {
+      key: "rotation",
+      get: function get() {
+        return DegToRad(this.angle);
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+    }]);
+
+    return Rotate;
+  }(TwoPointersTracer);
+
+  var methods$3 = {
+    spinObject: SpinObject
+  };
+  Object.assign(Rotate.prototype, methods$3);
+  var IDLE = 'IDLE';
+  var BEGIN = 'BEGIN';
+  var RECOGNIZED = 'RECOGNIZED';
+
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+
+  var TapChild = function TapChild(config) {
+    var tapConfig = GetValue$7(config, 'tap', undefined);
+
+    if (tapConfig === false) {
+      return;
+    }
+
+    var childrenInteractive = this._childrenInteractive;
+    this._tap = new Tap(this, tapConfig);
+
+    this._tap.on('tap', function (tap, gameObject, lastPointer) {
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix).concat(tap.tapsCount, "tap"), childrenInteractive.targetSizers, tap.x, tap.y, lastPointer);
+    }, this);
+  };
+
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+
+  var PressChild = function PressChild(config) {
+    var pressConfig = GetValue$6(config, 'press', undefined);
+
+    if (pressConfig === false) {
+      return;
+    }
+
+    var childrenInteractive = this._childrenInteractive;
+    this._press = new Press(this, pressConfig);
+
+    this._press.on('pressstart', function (press, gameObject, lastPointer) {
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressstart"), childrenInteractive.targetSizers, press.x, press.y, lastPointer);
+    }, this).on('pressend', function (press, gameObject, lastPointer) {
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressend"), childrenInteractive.targetSizers, press.x, press.y, lastPointer);
+    }, this);
+  };
+
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+
+  var SwipeChild = function SwipeChild(config) {
+    var swipeConfig = GetValue$5(config, 'swipe', undefined);
+
+    if (swipeConfig === false) {
+      return;
+    }
+
+    if (swipeConfig === undefined) {
+      swipeConfig = {};
+    }
+
+    if (!swipeConfig.hasOwnProperty('dir')) {
+      swipeConfig.dir = '4dir';
+    }
+
+    var childrenInteractive = this._childrenInteractive;
+    this._swipe = new Swipe(this, swipeConfig);
+
+    this._swipe.on('swipe', function (swipe, gameObject, lastPointer) {
+      var dirName = swipe.left ? 'left' : swipe.right ? 'right' : swipe.up ? 'up' : 'down';
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "swipe").concat(dirName), childrenInteractive.targetSizers, swipe.x, swipe.y, lastPointer);
+    }, this);
+  };
+
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
+  var SetChildrenInteractive = function SetChildrenInteractive(gameObject, config) {
+    gameObject.setInteractive();
+    gameObject._childrenInteractive = {
+      targetSizers: GetValue$4(config, 'targets', [gameObject]),
+      eventEmitter: GetValue$4(config, 'eventEmitter', gameObject),
+      eventNamePrefix: GetValue$4(config, 'inputEventPrefix', 'child.')
+    };
+    ClickChild.call(gameObject, config);
+    OverChild.call(gameObject, config);
+    TapChild.call(gameObject, config);
+    PressChild.call(gameObject, config);
+    SwipeChild.call(gameObject, config);
+    return gameObject;
+  };
+
+  var SetChildrenInteractiveWrap = function SetChildrenInteractiveWrap(config) {
+    SetChildrenInteractive(this, config);
+    return this;
+  };
+
   var BroadcastEvent = function BroadcastEvent() {
     var gameObjects = this.getAllChildren([this]);
 
@@ -5196,8 +7199,9 @@
     postLayout: PostLayout,
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
-    pointToChild: PointToChild,
+    pointToChild: PointToChild$1,
     setDraggable: SetDraggable,
+    setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
   Object.assign(methods$2, PaddingMethods, AddChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);

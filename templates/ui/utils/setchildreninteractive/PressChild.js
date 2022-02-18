@@ -9,22 +9,23 @@ var PressChild = function (config) {
         return;
     }
 
+    var childrenInteractive = this._childrenInteractive;
     this._press = new Press(this, pressConfig);
     this._press
         .on('pressstart', function (press, gameObject, lastPointer) {
             EmitChildEvent(
-                this.eventEmitter,
-                `${this.input.eventNamePrefix}pressstart`,
-                this.input.targetSizers,
+                childrenInteractive.eventEmitter,
+                `${childrenInteractive.eventNamePrefix}pressstart`,
+                childrenInteractive.targetSizers,
                 press.x, press.y,
                 lastPointer
             );
         }, this)
         .on('pressend', function (press, gameObject, lastPointer) {
             EmitChildEvent(
-                this.eventEmitter,
-                `${this.input.eventNamePrefix}pressend`,
-                this.input.targetSizers,
+                childrenInteractive.eventEmitter,
+                `${childrenInteractive.eventNamePrefix}pressend`,
+                childrenInteractive.targetSizers,
                 press.x, press.y,
                 lastPointer
             );

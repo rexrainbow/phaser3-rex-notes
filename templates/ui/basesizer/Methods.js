@@ -36,6 +36,7 @@ import GetParentSizerMethods from './GetParentSizerMethods.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
 import ClickMethods from './ClickMethods.js';
+import SetChildrenInteractive from './SetChildrenInteractive.js';
 import BroadcastEvent from './BroadcastEvent.js';
 
 var methods = {
@@ -70,6 +71,7 @@ var methods = {
     isInTouching: IsInTouching,
     pointToChild: PointToChild,
     setDraggable: SetDraggable,
+    setChildrenInteractive: SetChildrenInteractive,
     broadcastEvent: BroadcastEvent,
 
 };

@@ -9,9 +9,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var SetChildrenInteractive = function (gameObject, config) {
     gameObject.setInteractive();
 
-    gameObject.eventEmitter = GetValue(config, 'eventEmitter', gameObject);
-    gameObject.input.targetSizers = GetValue(config, 'targets', [gameObject]);
-    gameObject.input.eventNamePrefix = GetValue(config, 'inputEventPrefix', 'child.');
+    gameObject._childrenInteractive = {
+        targetSizers: GetValue(config, 'targets', [gameObject]),
+        eventEmitter: GetValue(config, 'eventEmitter', gameObject),
+        eventNamePrefix: GetValue(config, 'inputEventPrefix', 'child.')
+    }
 
     ClickChild.call(gameObject, config);
     OverChild.call(gameObject, config);

@@ -435,6 +435,8 @@ Two possible solution to register input events to children of scrollable panel.
 
 #### Set children interactive
 
+Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaviors on this scrollable panel, to detect input events of children.
+
 ```javascript
 panel.setChildrenInteractive({
     targets: targetSizers,
@@ -469,43 +471,7 @@ panel.setChildrenInteractive({
 
 ##### Events
 
-- Click
-    ```javascript
-    panel.on('child.click', function(child, pointer, event) { })
-    ```
-- Over, out
-    ```javascript
-    panel.on('child.over', function(child, pointer, event) { })
-    ```
-    ```javascript
-    panel.on('child.out', function(child, pointer, event) { })
-    ```
-- Press-start, press-end
-    ```javascript
-    panel.on('child.pressstart', function(child, pointer) { })
-    ```
-    ```javascript
-    panel.on('child.pressend', function(child, pointer) { })
-    ```
-- Swipe
-    ```javascript
-    panel.on('child.swipeleft', function(child, pointer) { })
-    ```
-    ```javascript
-    panel.on('child.swiperight', function(child, pointer) { })
-    ```
-    ```javascript
-    panel.on('child.swipeup', function(child, pointer) { })
-    ```
-    ```javascript
-    panel.on('child.swipedown', function(child, pointer) { })
-    ```
-- Tap
-    ```javascript
-    panel.on('child.' + tapsCount + 'tap', function(child, pointer) { })
-    ```
-    - `'child.1tap'`, `'child.2tap'`, ...
-
+See [Base-sizer](ui-basesizer.md/#set-children-interactive)
 
 #### Individual input events
 

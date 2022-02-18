@@ -12,7 +12,11 @@ var SwipeChild = function (config) {
     if (swipeConfig === undefined) {
         swipeConfig = {};
     }
-    swipeConfig.dir = '4dir';
+    if (!swipeConfig.hasOwnProperty('dir')) {
+        swipeConfig.dir = '4dir';
+    }
+
+    var childrenInteractive = this._childrenInteractive;
     this._swipe = new Swipe(this, swipeConfig);
     this._swipe
         .on('swipe', function (swipe, gameObject, lastPointer) {
@@ -22,9 +26,9 @@ var SwipeChild = function (config) {
                         (swipe.up) ? 'up' :
                             'down';
             EmitChildEvent(
-                this.eventEmitter,
-                `${this.input.eventNamePrefix}swipe${dirName}`,
-                this.input.targetSizers,
+                childrenInteractive.eventEmitter,
+                `${childrenInteractive.eventNamePrefix}swipe${dirName}`,
+                childrenInteractive.targetSizers,
                 swipe.x, swipe.y,
                 lastPointer
             );

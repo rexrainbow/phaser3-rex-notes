@@ -16,12 +16,13 @@ var ClickChild = function (config) {
         clickConfig.threshold = 10;
     }
 
+    var childrenInteractive = this._childrenInteractive;
     this._click = new Button(this, clickConfig);
     this._click.on('click', function (button, gameObject, pointer, event) {
         EmitChildEvent(
-            this.eventEmitter,
-            `${this.input.eventNamePrefix}click`,
-            this.input.targetSizers,
+            childrenInteractive.eventEmitter,
+            `${childrenInteractive.eventNamePrefix}click`,
+            childrenInteractive.targetSizers,
             pointer.x, pointer.y,
             pointer, event
         );

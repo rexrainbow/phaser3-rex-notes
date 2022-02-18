@@ -23,30 +23,32 @@ var OnMove = function (pointer, localX, localY, event) {
         return;
     }
 
+    var childrenInteractive = this._childrenInteractive;
     this.input.lastOverChild = child;
     EmitChildEvent(
-        this.eventEmitter,
-        `${this.input.eventNamePrefix}out`,
-        this.input.targetSizers,
+        childrenInteractive.eventEmitter,
+        `${childrenInteractive.eventNamePrefix}out`,
+        childrenInteractive.targetSizers,
         preChild, undefined,
         pointer, event
     );
     EmitChildEvent(
-        this.eventEmitter,
-        `${this.input.eventNamePrefix}over`,
-        this.input.targetSizers,
+        childrenInteractive.eventEmitter,
+        `${childrenInteractive.eventNamePrefix}over`,
+        childrenInteractive.targetSizers,
         child, undefined,
         pointer, event
     );
 }
 
 var OnOut = function (pointer, event) {
+    var childrenInteractive = this._childrenInteractive;
     var child = this.input.lastOverChild;
     this.input.lastOverChild = null;
     EmitChildEvent(
-        this.eventEmitter,
-        `${this.input.eventNamePrefix}out`,
-        this.input.targetSizers,
+        childrenInteractive.eventEmitter,
+        `${childrenInteractive.eventNamePrefix}out`,
+        childrenInteractive.targetSizers,
         child, undefined,
         pointer, event
     );
