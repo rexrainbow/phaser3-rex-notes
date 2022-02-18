@@ -10,6 +10,7 @@ Layout children game objects into lines.
 - [Fix-width sizer](https://codepen.io/rexrainbow/pen/WPJPdK)
 - [Scrollable, fix-width sizer](https://codepen.io/rexrainbow/pen/eYOdKBR)
 - [Drag-drop item](https://codepen.io/rexrainbow/pen/rNOKJrK)
+- [Set children interactive](https://codepen.io/rexrainbow/pen/gOXvYgE)
 
 ## Usage
 

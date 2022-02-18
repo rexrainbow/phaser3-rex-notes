@@ -20393,23 +20393,23 @@
   };
 
   var OnMove$1 = function OnMove(pointer, localX, localY, event) {
-    var child = PointToChild(this.input.targetSizers, pointer.x, pointer.y);
-    var preChild = this.input.lastOverChild;
+    var childrenInteractive = this._childrenInteractive;
+    var child = PointToChild(childrenInteractive.targetSizers, pointer.x, pointer.y);
+    var preChild = childrenInteractive.lastOverChild;
 
     if (child && preChild && child === preChild) {
       return;
     }
 
-    var childrenInteractive = this._childrenInteractive;
-    this.input.lastOverChild = child;
+    childrenInteractive.lastOverChild = child;
     EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, preChild, undefined, pointer, event);
     EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "over"), childrenInteractive.targetSizers, child, undefined, pointer, event);
   };
 
   var OnOut$1 = function OnOut(pointer, event) {
     var childrenInteractive = this._childrenInteractive;
-    var child = this.input.lastOverChild;
-    this.input.lastOverChild = null;
+    var child = childrenInteractive.lastOverChild;
+    childrenInteractive.lastOverChild = null;
     EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "out"), childrenInteractive.targetSizers, child, undefined, pointer, event);
   };
 

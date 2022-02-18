@@ -16,15 +16,15 @@ var OverChild = function (config) {
 }
 
 var OnMove = function (pointer, localX, localY, event) {
-    var child = PointToChild(this.input.targetSizers, pointer.x, pointer.y);
-    var preChild = this.input.lastOverChild;
+    var childrenInteractive = this._childrenInteractive;
+    var child = PointToChild(childrenInteractive.targetSizers, pointer.x, pointer.y);
+    var preChild = childrenInteractive.lastOverChild;
     if (child && preChild &&
         (child === preChild)) {
         return;
     }
 
-    var childrenInteractive = this._childrenInteractive;
-    this.input.lastOverChild = child;
+    childrenInteractive.lastOverChild = child;
     EmitChildEvent(
         childrenInteractive.eventEmitter,
         `${childrenInteractive.eventNamePrefix}out`,
@@ -43,8 +43,8 @@ var OnMove = function (pointer, localX, localY, event) {
 
 var OnOut = function (pointer, event) {
     var childrenInteractive = this._childrenInteractive;
-    var child = this.input.lastOverChild;
-    this.input.lastOverChild = null;
+    var child = childrenInteractive.lastOverChild;
+    childrenInteractive.lastOverChild = null;
     EmitChildEvent(
         childrenInteractive.eventEmitter,
         `${childrenInteractive.eventNamePrefix}out`,
