@@ -148,6 +148,7 @@ pages.addBackground(child, {left: 0, right: 0, top: 0, bottom: 0}, key);
 
 ```javascript
 pages.addPage(child, key, align, padding, expand);
+// pages.add(child, key, align, padding, expand);
 ```
 
 or 
@@ -161,6 +162,7 @@ pages.addPage(child,
         expand: true
     }
 );
+// pages.add(child, config);
 ```
 
 - `child` : A game object.
