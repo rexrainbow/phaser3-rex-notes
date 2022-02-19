@@ -14,6 +14,7 @@ import CoverFactory from './cover/Factory';
 import CustomProgressFactory from './customprogress/Factory';
 import CustomShapesFactory from './customshapes/Factory';
 import DialogFactory from './dialog/Factory';
+import DragFactory from './drag/Factory';
 import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
@@ -60,6 +61,7 @@ import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
+import RequestDrag from '../../plugins/utils/input/RequestDrag';
 
 export default UIPlugins;
 
@@ -78,6 +80,7 @@ declare class Factories {
     customProgress: typeof CustomProgressFactory;
     customShapes: typeof CustomShapesFactory;
     dialog: typeof DialogFactory;
+    drag: typeof DragFactory;
     dynamicTextFactory: typeof DynamicTextFactory;
     flip: typeof FlipFactory;
     fixWidthButtons: typeof FixWidthButtonsFactory;
@@ -137,6 +140,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     waitEvent: typeof WaitEvent;
     waitComplete: typeof WaitComplete;
     wrapExpandText: typeof WrapExpandText;
+    requestDrag: typeof RequestDrag;
 
     isInTouching(
         gameObject: Phaser.GameObjects.GameObject,
@@ -162,6 +166,7 @@ import CoverClass from './cover/Cover';
 import CustomProgressClass from './customprogress/CustomProgress';
 import CustomShapesClass from './customshapes/CustomShapes';
 import DialogClass from './dialog/Dialog';
+import DragClass from './drag/Drag';
 import DynamicTextClass from './dynamictext/DynamicText';
 import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
 import { Fade as FadeClass } from './fade/Fade.js';
@@ -215,6 +220,7 @@ declare namespace UIPlugins {
     type CustomProgress = CustomProgressClass;
     type CustomShapes = CustomShapesClass;
     type Dialog = DialogClass;
+    type Drag = DragClass;
     type DynamicText = DynamicTextClass;
     type EaseMove = EaseMoveClass;
     type Fade = FadeClass;

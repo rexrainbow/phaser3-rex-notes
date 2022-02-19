@@ -284,6 +284,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     sizer.clear(true);
     ```
+- Remove from parent sizer
+    ```javascript
+    sizer.removeFromParentSizer();
+    ```
 
 ### Get element
 

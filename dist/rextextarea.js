@@ -2203,6 +2203,18 @@
     }
   };
 
+  var RemoveChildMethods$1 = {
+    removeFromParentSizer: function removeFromParentSizer() {
+      var parent = this.getParentSizer();
+
+      if (parent) {
+        parent.remove(this);
+      }
+
+      return this;
+    }
+  };
+
   var AddChildrenMap = function AddChildrenMap(key, gameObject) {
     if (this.childrenMap === undefined) {
       this.childrenMap = {};
@@ -7192,7 +7204,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$3, PaddingMethods, AddChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$3, PaddingMethods, AddChildMethods$1, RemoveChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$d = Phaser.Utils.Objects.GetValue;
 
@@ -10278,6 +10290,23 @@
         }
 
         this.mouseWheelScrollerEnable = enabled;
+        return this;
+      }
+    }, {
+      key: "interactiveChild",
+      get: function get() {
+        return this.childrenMap.child;
+      }
+    }, {
+      key: "setDropZoneEnable",
+      value: function setDropZoneEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        var child = this.interactiveChild;
+        child.setInteractive();
+        child.input.dropZone = enable;
         return this;
       }
     }]);

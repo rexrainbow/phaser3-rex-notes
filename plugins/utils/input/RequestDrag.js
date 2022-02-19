@@ -1,6 +1,6 @@
 import IsPointerInHitArea from './IsPointerInHitArea.js';
 
-var TryDrag = function (gameObject) {
+var RequestDrag = function (gameObject) {
     var inputPlugin = gameObject.scene.input;
     var inputManager = inputPlugin.manager;
     var pointersTotal = inputManager.pointersTotal;
@@ -35,4 +35,4 @@ var TryDrag = function (gameObject) {
     return false;
 }
 
-export default TryDrag;
+export default RequestDrag;

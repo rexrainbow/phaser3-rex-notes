@@ -1,5 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import TryDrag from '../../utils/input/TryDrag.js'
+import RequestDrag from '../../utils/input/RequestDrag.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -100,7 +100,7 @@ class Drag extends ComponentBase {
     }
 
     drag() {
-        TryDrag(this.parent);
+        RequestDrag(this.parent);
         return this;
     }
 

@@ -282,7 +282,9 @@ class Scrollable extends Sizer {
             enable = true;
         }
 
-        this.interactiveChild.input.dropZone = enable;
+        var child = this.interactiveChild;
+        child.setInteractive();
+        child.input.dropZone = enable;
         return this;
     }
 

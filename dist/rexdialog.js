@@ -2203,6 +2203,18 @@
     }
   };
 
+  var RemoveChildMethods$2 = {
+    removeFromParentSizer: function removeFromParentSizer() {
+      var parent = this.getParentSizer();
+
+      if (parent) {
+        parent.remove(this);
+      }
+
+      return this;
+    }
+  };
+
   var AddChildrenMap = function AddChildrenMap(key, gameObject) {
     if (this.childrenMap === undefined) {
       this.childrenMap = {};
@@ -7192,7 +7204,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$2, PaddingMethods, AddChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$2, PaddingMethods, AddChildMethods$2, RemoveChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
 

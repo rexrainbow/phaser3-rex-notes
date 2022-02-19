@@ -374,6 +374,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     gridSizer.clear(true);
     ```
+- Remove from parent sizer
+    ```javascript
+    sizer.removeFromParentSizer();
+    ```
 
 ### Grid size
 

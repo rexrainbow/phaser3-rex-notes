@@ -105,10 +105,11 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Toast](ui-toast.md): Show text message for a short while.
 
 !!! note "Scroll-able table"
-    There are 2 kinds of scroll-able tables :
+    There are 3 kinds of scroll-able tables :
 
     - [Grid-table](ui-gridtable.md) only creates visible objects. It is suitable for large table.
     - [Grid-sizer](ui-gridsizer.md) adds all objects. Put this grid-sizer into scroll-able panel to have a scroll-able table.
+    - [Fixwidth-sizer](ui-fixwidthsizer.md) adds all objects. Put this fixwidth-sizer into scroll-able panel to have a scroll-able table.
 
 ### Basic container
 

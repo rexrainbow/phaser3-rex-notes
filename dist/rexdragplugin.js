@@ -392,7 +392,7 @@
     return false;
   };
 
-  var TryDrag = function TryDrag(gameObject) {
+  var RequestDrag = function RequestDrag(gameObject) {
     var inputPlugin = gameObject.scene.input;
     var inputManager = inputPlugin.manager;
     var pointersTotal = inputManager.pointersTotal;
@@ -550,7 +550,7 @@
     }, {
       key: "drag",
       value: function drag() {
-        TryDrag(this.parent);
+        RequestDrag(this.parent);
         return this;
       }
     }, {

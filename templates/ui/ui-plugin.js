@@ -51,6 +51,7 @@ import TapFactory from './tap/Factory.js';
 import PressFactory from './press/Factory.js';
 import SwipeFactory from './swipe/Factory.js';
 import PanFactory from './pan/Factory.js';
+import DragFactory from './drag/Factory.js';
 import PinchFactory from './pinch/Factory.js';
 import RotateFactory from './rotate/Factory.js';
 import FlipFactory from './flip/Factory.js';
@@ -69,6 +70,7 @@ import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenIn
 import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
+import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -113,7 +115,8 @@ var methods = {
     easeMoveFrom: EaseMoveFrom,
     modal: Modal,
     modalPromise: ModalPromise,
-    modalClose: ModalClose
+    modalClose: ModalClose,
+    requestDrag: RequestDrag,
 }
 
 Object.assign(

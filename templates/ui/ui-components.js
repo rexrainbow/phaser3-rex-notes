@@ -49,6 +49,7 @@ import Tap from './tap/Tap.js';
 import Press from './press/Press.js';
 import Swipe from './swipe/Swipe.js';
 import Pan from './pan/Pan.js';
+import Drag from './drag/Drag.js';
 import Pinch from './pinch/Pinch.js';
 import Rotate from './rotate/Rotate.js';
 import Flip from './flip/Flip.js';
@@ -71,6 +72,8 @@ import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
+import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
+
 
 export {
     NinePatch,
@@ -124,6 +127,7 @@ export {
     Press,
     Swipe,
     Pan,
+    Drag,
     Pinch,
     Rotate,
     Flip,
@@ -145,5 +149,6 @@ export {
     WaitEvent,
     WaitComplete,
     GetViewport,
-    SetChildrenInteractive
+    SetChildrenInteractive,
+    RequestDrag,
 }

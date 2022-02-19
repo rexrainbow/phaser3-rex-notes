@@ -47,6 +47,7 @@ import Tap from './tap/Tap';
 import Press from './press/Press';
 import Swipe from './swipe/Swipe';
 import Pan from './pan/Pan';
+import Drag from './drag/Drag';
 import Pinch from './pinch/Pinch';
 import Rotate from './rotate/Rotate';
 import Flip from './flip/Flip';
@@ -70,6 +71,8 @@ import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import GetViewport from '../../plugins/utils/system/GetViewport';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
+import RequestDrag from '../../plugins/utils/input/RequestDrag';
+
 
 export {
     RoundRectangle,
@@ -122,6 +125,7 @@ export {
     Press,
     Swipe,
     Pan,
+    Drag,
     Pinch,
     Rotate,
     Flip,
@@ -143,5 +147,6 @@ export {
     WaitEvent,
     WaitComplete,
     GetViewport,
-    SetChildrenInteractive
+    SetChildrenInteractive,
+    RequestDrag
 }

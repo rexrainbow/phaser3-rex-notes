@@ -1,3 +1,3 @@
-export default function TryDrag(
+export default function RequestDrag(
     gameObject: Phaser.GameObjects.GameObject,
 ): boolean;
