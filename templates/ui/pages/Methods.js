@@ -1,9 +1,15 @@
-import AddPage from './AddPage.js';
+import AddChildMethods from './AddChildMethods.js';
 import GetPage from './GetPage.js';
 import SwapPage from './SwapPage.js';
 
-export default {
-    addPage: AddPage,
+var methods = {
     getPage: GetPage,
     swapPage: SwapPage
-};
+}
+
+Object.assign(
+    methods,
+    AddChildMethods,
+);
+
+export default methods;

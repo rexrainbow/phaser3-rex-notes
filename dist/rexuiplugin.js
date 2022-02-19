@@ -642,7 +642,7 @@
     return this;
   };
 
-  var Methods$8 = {
+  var Methods$7 = {
     setTexture: SetTexture$1,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
@@ -790,7 +790,7 @@
     return NinePatch;
   }(RenderTexture$1);
 
-  Object.assign(NinePatch.prototype, Methods$8);
+  Object.assign(NinePatch.prototype, Methods$7);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -4431,10 +4431,10 @@
 
     return CanvasText;
   }();
-  var methods$j = {
+  var methods$k = {
     setInteractive: SetInteractive
   };
-  Object.assign(CanvasText.prototype, DrawMethods, methods$j);
+  Object.assign(CanvasText.prototype, DrawMethods, methods$k);
 
   var GetValue$2o = Phaser.Utils.Objects.GetValue;
 
@@ -4576,10 +4576,10 @@
     return ImageManager;
   }();
 
-  var methods$i = {
+  var methods$j = {
     draw: DrawImage
   };
-  Object.assign(ImageManager.prototype, methods$i);
+  Object.assign(ImageManager.prototype, methods$j);
 
   var IsPlainObject$s = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
@@ -6356,10 +6356,10 @@
     return InputText;
   }(DOMElement);
 
-  var methods$h = {
+  var methods$i = {
     resize: Resize
   };
-  Object.assign(InputText.prototype, methods$h);
+  Object.assign(InputText.prototype, methods$i);
   var ElementProperties = {
     id: ['id', undefined],
     text: ['value', undefined],
@@ -6872,7 +6872,7 @@
 
   var BaseAdd = Base$2.prototype.add;
 
-  var Add$7 = function Add(gameObject) {
+  var Add$8 = function Add(gameObject) {
     this.setParent(gameObject);
     this.resetChildState(gameObject) // Reset local state of child
     .updateChildVisible(gameObject) // Apply parent's visible to child
@@ -6915,7 +6915,7 @@
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add$7.call(this, gameObject);
+        Add$8.call(this, gameObject);
       }
 
       return this;
@@ -6925,14 +6925,14 @@
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add$7.call(this, gameObject);
+        Add$8.call(this, gameObject);
       }
 
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add$7.call(this, gameObjects[i]);
+        Add$8.call(this, gameObjects[i]);
       }
 
       return this;
@@ -7792,10 +7792,10 @@
     return this;
   };
 
-  var methods$g = {
+  var methods$h = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$g, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$h, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -8013,7 +8013,7 @@
     return ContainerLite;
   }(Base$2);
 
-  Object.assign(ContainerLite.prototype, methods$g);
+  Object.assign(ContainerLite.prototype, methods$h);
 
   ObjectFactory.register('container', function (x, y, width, height, children) {
     var gameObject = new ContainerLite(this.scene, x, y, width, height, children);
@@ -10377,7 +10377,7 @@
     return GetAll(this.children, 'active', true);
   };
 
-  var Methods$7 = {
+  var Methods$6 = {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
@@ -10541,7 +10541,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$7);
+  Object.assign(DynamicText.prototype, Methods$6);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -12654,7 +12654,7 @@
     return this;
   };
 
-  var Methods$6 = {
+  var Methods$5 = {
     start: Start,
     typing: Typing,
     pause: Pause$1,
@@ -13436,7 +13436,7 @@
     }
   };
 
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$6);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$5);
 
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
@@ -14877,7 +14877,7 @@
     return this;
   };
 
-  var Methods$5 = {
+  var Methods$4 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -15038,7 +15038,7 @@
     return TextPlayer;
   }(DynamicText);
 
-  Object.assign(TextPlayer.prototype, Methods$5);
+  Object.assign(TextPlayer.prototype, Methods$4);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -18117,7 +18117,7 @@
     return this;
   };
 
-  var AddChildMethods$7 = {
+  var AddChildMethods$8 = {
     addBackground: function addBackground(gameObject, paddingConfig, childKey) {
       if (this.backgroundChildren === undefined) {
         this.backgroundChildren = [];
@@ -22402,10 +22402,10 @@
     return Rotate;
   }(TwoPointersTracer);
 
-  var methods$f = {
+  var methods$g = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$f);
+  Object.assign(Rotate.prototype, methods$g);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -22505,7 +22505,7 @@
     return this;
   };
 
-  var methods$e = {
+  var methods$f = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -22538,7 +22538,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$e, PaddingMethods, AddChildMethods$7, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$f, PaddingMethods, AddChildMethods$8, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$11 = Phaser.Utils.Objects.GetValue;
 
@@ -22809,7 +22809,7 @@
     return Base;
   }(ContainerLite);
 
-  Object.assign(Base.prototype, methods$e);
+  Object.assign(Base.prototype, methods$f);
 
   var GetChildrenWidth$4 = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -22972,7 +22972,7 @@
   var ALIGN_CENTER$3 = Phaser.Display.Align.CENTER;
   var UUID = Phaser.Utils.String.UUID;
 
-  var Add$6 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+  var Add$7 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     AddChild.call(this, gameObject);
 
     if (IsPlainObject$i(childKey)) {
@@ -23076,8 +23076,8 @@
     return this;
   };
 
-  var AddChildMethods$6 = {
-    add: Add$6
+  var AddChildMethods$7 = {
+    add: Add$7
   };
 
   var RemoveItem$5 = Phaser.Utils.Array.Remove;
@@ -23176,7 +23176,7 @@
     }
   };
 
-  var methods$d = {
+  var methods$e = {
     getChildrenWidth: GetChildrenWidth$4,
     getChildrenHeight: GetChildrenHeight$4,
     getExpandedChildWidth: GetExpandedChildWidth$2,
@@ -23184,7 +23184,7 @@
     getChildrenSizers: GetChildrenSizers$4,
     layoutChildren: LayoutChildren$5
   };
-  Object.assign(methods$d, AddChildMethods$6, RemoveChildMethods$6);
+  Object.assign(methods$e, AddChildMethods$7, RemoveChildMethods$6);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -23254,7 +23254,7 @@
     return OverlapSizer;
   }(Base);
 
-  Object.assign(OverlapSizer.prototype, methods$d);
+  Object.assign(OverlapSizer.prototype, methods$e);
 
   var GetDistance = Phaser.Math.Distance.Between;
 
@@ -24406,8 +24406,8 @@
     }
   };
 
-  var methods$c = {};
-  Object.assign(methods$c, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods);
+  var methods$d = {};
+  Object.assign(methods$d, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods);
 
   var OnStart = function OnStart(parent, currentImage, nextImage, t) {};
 
@@ -24632,7 +24632,7 @@
   }; // mixin
 
 
-  Object.assign(TransitionImage.prototype, methods$c);
+  Object.assign(TransitionImage.prototype, methods$d);
 
   ObjectFactory.register('transitionImage', function (x, y, texture, frame, config) {
     var gameObject = new TransitionImage(this.scene, x, y, texture, frame, config);
@@ -25066,14 +25066,14 @@
     return Chart;
   }(Canvas);
 
-  var methods$b = {
+  var methods$c = {
     setChart: SetChart,
     getChartDataset: GetChartDataset,
     getChartData: GetChartData,
     setChartData: SetChartData,
     updateChart: UpdateChart
   };
-  Object.assign(Chart$1.prototype, methods$b);
+  Object.assign(Chart$1.prototype, methods$c);
 
   ObjectFactory.register('chart', function (x, y, width, height, config) {
     var gameObject = new Chart$1(this.scene, x, y, width, height, config);
@@ -25427,7 +25427,7 @@
     full: -1
   };
 
-  var Add$5 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
+  var Add$6 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
     AddChild.call(this, gameObject);
 
     var proportionType = _typeof(proportion);
@@ -25521,8 +25521,8 @@
     return this;
   };
 
-  var AddChildMethods$5 = {
-    add: Add$5,
+  var AddChildMethods$6 = {
+    add: Add$6,
     // sizer.add could be override
     addSpace: function addSpace(proportion) {
       this.insertSpace(undefined, proportion);
@@ -25533,7 +25533,7 @@
         proportion = 1;
       }
 
-      Add$5.call(this, new Space(this.scene), {
+      Add$6.call(this, new Space(this.scene), {
         proportion: proportion,
         minWidth: 0,
         minHeight: 0,
@@ -25543,7 +25543,7 @@
       return this;
     },
     insert: function insert(index, gameObject, proportion, align, paddingConfig, expand, childKey) {
-      Add$5.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index); // No problem if sizer.add is override
+      Add$6.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index); // No problem if sizer.add is override
 
       return this;
     }
@@ -25574,7 +25574,7 @@
     }
   };
 
-  var methods$a = {
+  var methods$b = {
     getChildrenWidth: GetChildrenWidth$3,
     getChildrenHeight: GetChildrenHeight$3,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -25585,7 +25585,7 @@
     resolveWidth: ResolveWidth$1,
     resolveHeight: ResolveHeight$1
   };
-  Object.assign(methods$a, AddChildMethods$5, RemoveChildMethods$5);
+  Object.assign(methods$b, AddChildMethods$6, RemoveChildMethods$5);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -25713,7 +25713,7 @@
     return Sizer;
   }(Base);
 
-  Object.assign(Sizer.prototype, methods$a);
+  Object.assign(Sizer.prototype, methods$b);
 
   ObjectFactory.register('sizer', function (x, y, minWidth, minHeight, orientation, config) {
     var gameObject = new Sizer(this.scene, x, y, minWidth, minHeight, orientation, config);
@@ -25723,10 +25723,10 @@
   SetValue(window, 'RexPlugins.UI.Sizer', Sizer);
 
   var Sum = function Sum() {
-    return Array.prototype.reduce.call(arguments, Add$4, 0);
+    return Array.prototype.reduce.call(arguments, Add$5, 0);
   };
 
-  var Add$4 = function Add(a, b) {
+  var Add$5 = function Add(a, b) {
     return a + b;
   };
 
@@ -26055,7 +26055,7 @@
     return null;
   };
 
-  var Add$3 = function Add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
+  var Add$4 = function Add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
     AddChild.call(this, gameObject);
 
     if (IsPlainObject$8(columnIndex)) {
@@ -26104,8 +26104,8 @@
     return this;
   };
 
-  var AddChildMethods$4 = {
-    add: Add$3
+  var AddChildMethods$5 = {
+    add: Add$4
   };
 
   var Fill = function Fill(arr, value, startIdx, endIdx) {
@@ -26247,7 +26247,7 @@
     return this;
   };
 
-  var methods$9 = {
+  var methods$a = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -26261,7 +26261,7 @@
     runWidthWrap: RunWidthWrap$1,
     resetGrid: ResetGrid
   };
-  Object.assign(methods$9, AddChildMethods$4, RemoveChildMethods$4);
+  Object.assign(methods$a, AddChildMethods$5, RemoveChildMethods$4);
 
   var GetTotalColumnProportions = function GetTotalColumnProportions() {
     var result = 0,
@@ -26463,7 +26463,7 @@
     return GridSizer;
   }(Base);
 
-  Object.assign(GridSizer.prototype, methods$9);
+  Object.assign(GridSizer.prototype, methods$a);
 
   ObjectFactory.register('gridSizer', function (x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion, config) {
     var gameObject = new GridSizer(this.scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion, config);
@@ -26718,7 +26718,7 @@
   var GetValue$M = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
-  var Add$2 = function Add(gameObject, paddingConfig, childKey, index) {
+  var Add$3 = function Add(gameObject, paddingConfig, childKey, index) {
     if (gameObject === '\n') {
       this.addNewLine();
       return this;
@@ -26754,16 +26754,16 @@
     return this;
   };
 
-  var AddChildMethods$3 = {
+  var AddChildMethods$4 = {
     add: function add(gameObject, paddingConfig, childKey) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
 
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add$2.call(this, gameObjects[i], paddingConfig);
+          Add$3.call(this, gameObjects[i], paddingConfig);
         }
       } else {
-        Add$2.call(this, gameObject, paddingConfig, childKey);
+        Add$3.call(this, gameObject, paddingConfig, childKey);
       }
 
       return this;
@@ -26773,7 +26773,7 @@
       return this;
     },
     insert: function insert(index, gameObject, paddingConfig, childKey) {
-      Add$2.call(this, gameObject, paddingConfig, childKey, index);
+      Add$3.call(this, gameObject, paddingConfig, childKey, index);
       return this;
     }
   };
@@ -26803,7 +26803,7 @@
     }
   };
 
-  var methods$8 = {
+  var methods$9 = {
     getChildrenWidth: GetChildrenWidth$1,
     getChildrenHeight: GetChildrenHeight$1,
     getChildrenSizers: GetChildrenSizers$1,
@@ -26811,7 +26811,7 @@
     layoutChildren: LayoutChildren$2,
     runWidthWrap: RunWidthWrap
   };
-  Object.assign(methods$8, AddChildMethods$3, RemoveChildMethods$3);
+  Object.assign(methods$9, AddChildMethods$4, RemoveChildMethods$3);
 
   var GetMaxChildWidth = function GetMaxChildWidth(children) {
     if (children === undefined) {
@@ -26983,7 +26983,7 @@
     'justify-bottom': 4,
     'justify-center': 5
   };
-  Object.assign(FixWidthSizer.prototype, methods$8);
+  Object.assign(FixWidthSizer.prototype, methods$9);
 
   ObjectFactory.register('fixWidthSizer', function (x, y, minWidth, minHeight, config) {
     var gameObject = new FixWidthSizer(this.scene, x, y, minWidth, minHeight, config);
@@ -27275,7 +27275,7 @@
   var SizerAdd$2 = Sizer.prototype.add;
   var SizerAddSpace = Sizer.prototype.addSpace;
 
-  var Add$1 = function Add(gameObject) {
+  var Add$2 = function Add(gameObject) {
     var isNormalGameObject = !gameObject.isRexSpace;
     var proportion = !isNormalGameObject || this.buttonsExpand ? 1 : 0;
 
@@ -27334,23 +27334,23 @@
     return this;
   };
 
-  var AddChildMethods$2 = {
+  var AddChildMethods$3 = {
     addButton: function addButton(gameObject) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
 
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add$1.call(this, gameObjects[i]);
+          Add$2.call(this, gameObjects[i]);
         }
       } else {
-        Add$1.call(this, gameObject);
+        Add$2.call(this, gameObject);
       }
 
       return this;
     },
     addButtons: function addButtons(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add$1.call(this, gameObjects[i]);
+        Add$2.call(this, gameObjects[i]);
       }
 
       return this;
@@ -27767,10 +27767,10 @@
     return ButtonGroup;
   }();
 
-  var methods$7 = {
+  var methods$8 = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$2, methods$7);
+  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$2, methods$8);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
   var ButtonStateMethods = {
@@ -27885,7 +27885,7 @@
     return Buttons;
   }(Sizer);
 
-  Object.assign(Buttons$1.prototype, AddChildMethods$2, RemoveChildMethods$2, ButtonMethods$2, ButtonStateMethods);
+  Object.assign(Buttons$1.prototype, AddChildMethods$3, RemoveChildMethods$2, ButtonMethods$2, ButtonStateMethods);
 
   ObjectFactory.register('buttons', function (config) {
     var gameObject = new Buttons$1(this.scene, config);
@@ -27895,7 +27895,7 @@
   SetValue(window, 'RexPlugins.UI.Buttons', Buttons$1);
 
   var SizerAdd$1 = GridSizer.prototype.add;
-  var AddChildMethods$1 = {
+  var AddChildMethods$2 = {
     addButton: function addButton(gameObject, columnIndex, rowIndex) {
       SizerAdd$1.call(this, gameObject, columnIndex, rowIndex, undefined, 0, this.buttonsExpand);
       this.buttonGroup.add(gameObject);
@@ -28093,7 +28093,7 @@
     return GridButtons;
   }(GridSizer);
 
-  Object.assign(GridButtons.prototype, AddChildMethods$1, RemoveChildMethods$1, ButtonMethods$2, ButtonStateMethods);
+  Object.assign(GridButtons.prototype, AddChildMethods$2, RemoveChildMethods$1, ButtonMethods$2, ButtonStateMethods);
 
   ObjectFactory.register('gridButtons', function (config) {
     var gameObject = new GridButtons(this.scene, config);
@@ -28104,22 +28104,22 @@
 
   var SizerAdd = FixWidthSizer.prototype.add;
 
-  var Add = function Add(gameObject) {
+  var Add$1 = function Add(gameObject) {
     SizerAdd.call(this, gameObject);
     this.buttonGroup.add(gameObject);
     return this;
   };
 
-  var AddChildMethods = {
+  var AddChildMethods$1 = {
     addButton: function addButton(gameObject) {
       if (IsArray(gameObject)) {
         var gameObjects = gameObject;
 
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add.call(this, gameObjects[i]);
+          Add$1.call(this, gameObjects[i]);
         }
       } else {
-        Add.call(this, gameObject);
+        Add$1.call(this, gameObject);
       }
 
       return this;
@@ -28134,7 +28134,7 @@
           line = lines[lineIdx];
 
           for (var i = 0, cnt = line.length; i < cnt; i++) {
-            Add.call(this, line[i]);
+            Add$1.call(this, line[i]);
           }
 
           if (lineIdx > lastLineIdx) {
@@ -28144,7 +28144,7 @@
       } else {
         // 1d array
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-          Add.call(this, gameObjects[i]);
+          Add$1.call(this, gameObjects[i]);
         }
       }
 
@@ -28297,7 +28297,7 @@
     return Buttons;
   }(FixWidthSizer);
 
-  Object.assign(Buttons.prototype, AddChildMethods, RemoveChildMethods, ButtonMethods$2, ButtonStateMethods);
+  Object.assign(Buttons.prototype, AddChildMethods$1, RemoveChildMethods, ButtonMethods$2, ButtonStateMethods);
 
   ObjectFactory.register('fixWidthButtons', function (config) {
     var gameObject = new Buttons(this.scene, config);
@@ -29600,13 +29600,13 @@
     click: 1,
     none: -1
   };
-  var methods$6 = {
+  var methods$7 = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndoint,
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider.prototype, methods$6, EaseValueMethods);
+  Object.assign(Slider.prototype, methods$7, EaseValueMethods);
 
   ObjectFactory.register('slider', function (config) {
     var gameObject = new Slider(this.scene, config);
@@ -31224,12 +31224,12 @@
     return Scrollable;
   }(Sizer);
 
-  var Methods$4 = {
+  var Methods$3 = {
     resizeController: ResizeController,
     updateController: UpdateController
   }; // mixin
 
-  Object.assign(Scrollable.prototype, Methods$4);
+  Object.assign(Scrollable.prototype, Methods$3);
 
   var Cell = /*#__PURE__*/function () {
     function Cell(parent, config) {
@@ -32452,7 +32452,7 @@
     return this;
   };
 
-  var methods$5 = {
+  var methods$6 = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
     updateTable: UpdateTable,
@@ -32470,7 +32470,7 @@
     setGridSize: SetGridSize,
     updateVisibleCell: UpdateVisibleCell
   };
-  Object.assign(methods$5, ChildrenMaskMethods);
+  Object.assign(methods$6, ChildrenMaskMethods);
 
   var Group = Phaser.GameObjects.Group;
   var Set = Phaser.Structs.Set;
@@ -32850,7 +32850,7 @@
     return GridTable;
   }(ContainerLite);
 
-  Object.assign(GridTable$1.prototype, methods$5);
+  Object.assign(GridTable$1.prototype, methods$6);
   var SCROLLMODE = {
     v: 0,
     vertical: 0,
@@ -33198,10 +33198,10 @@
     return GridTable;
   }(Scrollable);
 
-  var methods$4 = {
+  var methods$5 = {
     setItems: SetItems
   };
-  Object.assign(GridTable.prototype, methods$4);
+  Object.assign(GridTable.prototype, methods$5);
 
   ObjectFactory.register('gridTable', function (config) {
     var gameObject = new GridTable(this.scene, config);
@@ -33268,7 +33268,7 @@
     return this;
   };
 
-  var Methods$3 = {
+  var Methods$2 = {
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
     collapseSubMenu: CollapseSubMenu
@@ -33546,7 +33546,7 @@
     left: SUBMENU_LEFT,
     right: SUBMENU_RIGHT
   };
-  Object.assign(Menu.prototype, Methods$3);
+  Object.assign(Menu.prototype, Methods$2);
 
   ObjectFactory.register('menu', function (config) {
     var gameObject = new Menu(this.scene, config);
@@ -33794,10 +33794,10 @@
     }
   };
 
-  var Methods$2 = {
+  var Methods$1 = {
     getLines: GetLines$1
   };
-  Object.assign(Methods$2, SetContentMethods, GetPageMethods, ShowMethods);
+  Object.assign(Methods$1, SetContentMethods, GetPageMethods, ShowMethods);
 
   var GetValue$m = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
@@ -33967,7 +33967,7 @@
     return TextPage;
   }(ComponentBase);
 
-  Object.assign(TextPage.prototype, Methods$2);
+  Object.assign(TextPage.prototype, Methods$1);
 
   var GetWrapText = function GetWrapText(textObject, text) {
     var textObjectType = GetTextObjectType(textObject);
@@ -34855,11 +34855,18 @@
   });
   SetValue(window, 'RexPlugins.UI.BadgeLabel', Badge);
 
-  var AddPage = function AddPage(gameObject, key, align, padding, expand, minWidth, minHeight) {
+  var OverlapSizerAdd = OverlapSizer.prototype.add;
+
+  var Add = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     gameObject.setVisible(false); // Default is invisible
 
-    this.add(gameObject, key, align, padding, expand, minWidth, minHeight);
+    OverlapSizerAdd.call(this, gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY);
     return this;
+  };
+
+  var AddChildMethods = {
+    add: Add,
+    addPage: Add
   };
 
   var GetPage = function GetPage(key) {
@@ -34904,11 +34911,11 @@
     return this;
   };
 
-  var Methods$1 = {
-    addPage: AddPage,
+  var methods$4 = {
     getPage: GetPage,
     swapPage: SwapPage
   };
+  Object.assign(methods$4, AddChildMethods);
 
   var GetValue$h = Phaser.Utils.Objects.GetValue;
 
@@ -34976,7 +34983,7 @@
     return Pages;
   }(OverlapSizer);
 
-  Object.assign(Pages.prototype, Methods$1);
+  Object.assign(Pages.prototype, methods$4);
   var SWAPMODE = {
     invisible: 0,
     destroy: 1

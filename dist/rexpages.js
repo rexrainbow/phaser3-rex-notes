@@ -482,7 +482,7 @@
 
   var BaseAdd = Base$1.prototype.add;
 
-  var Add$1 = function Add(gameObject) {
+  var Add$2 = function Add(gameObject) {
     this.setParent(gameObject);
     this.resetChildState(gameObject) // Reset local state of child
     .updateChildVisible(gameObject) // Apply parent's visible to child
@@ -525,7 +525,7 @@
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add$1.call(this, gameObject);
+        Add$2.call(this, gameObject);
       }
 
       return this;
@@ -535,14 +535,14 @@
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add$1.call(this, gameObject);
+        Add$2.call(this, gameObject);
       }
 
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add$1.call(this, gameObjects[i]);
+        Add$2.call(this, gameObjects[i]);
       }
 
       return this;
@@ -1402,10 +1402,10 @@
     return this;
   };
 
-  var methods$3 = {
+  var methods$4 = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$3, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$4, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -1623,7 +1623,7 @@
     return ContainerLite;
   }(Base$1);
 
-  Object.assign(ContainerLite.prototype, methods$3);
+  Object.assign(ContainerLite.prototype, methods$4);
 
   var GetSizerConfig = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -2168,7 +2168,7 @@
     return this;
   };
 
-  var AddChildMethods$1 = {
+  var AddChildMethods$2 = {
     addBackground: function addBackground(gameObject, paddingConfig, childKey) {
       if (this.backgroundChildren === undefined) {
         this.backgroundChildren = [];
@@ -7056,10 +7056,10 @@
     return Rotate;
   }(TwoPointersTracer);
 
-  var methods$2 = {
+  var methods$3 = {
     spinObject: SpinObject
   };
-  Object.assign(Rotate.prototype, methods$2);
+  Object.assign(Rotate.prototype, methods$3);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
   var RECOGNIZED = 'RECOGNIZED';
@@ -7159,7 +7159,7 @@
     return this;
   };
 
-  var methods$1 = {
+  var methods$2 = {
     getSizerConfig: GetSizerConfig,
     getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
@@ -7192,7 +7192,7 @@
     setChildrenInteractive: SetChildrenInteractiveWrap,
     broadcastEvent: BroadcastEvent
   };
-  Object.assign(methods$1, PaddingMethods, AddChildMethods$1, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
+  Object.assign(methods$2, PaddingMethods, AddChildMethods$2, GetParentSizerMethods, ScaleMethods, FadeMethods, EaseMoveMethods, ClickMethods, HideMethods, GetShownChildrenMethods);
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
@@ -7463,7 +7463,7 @@
     return Base;
   }(ContainerLite);
 
-  Object.assign(Base.prototype, methods$1);
+  Object.assign(Base.prototype, methods$2);
 
   var GetChildrenWidth = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -7626,7 +7626,7 @@
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
   var UUID = Phaser.Utils.String.UUID;
 
-  var Add = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+  var Add$1 = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     AddChild.call(this, gameObject);
 
     if (IsPlainObject$1(childKey)) {
@@ -7730,8 +7730,8 @@
     return this;
   };
 
-  var AddChildMethods = {
-    add: Add
+  var AddChildMethods$1 = {
+    add: Add$1
   };
 
   var RemoveItem = Phaser.Utils.Array.Remove;
@@ -7830,7 +7830,7 @@
     }
   };
 
-  var methods = {
+  var methods$1 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getExpandedChildWidth: GetExpandedChildWidth,
@@ -7838,7 +7838,7 @@
     getChildrenSizers: GetChildrenSizers,
     layoutChildren: LayoutChildren
   };
-  Object.assign(methods, AddChildMethods, RemoveChildMethods);
+  Object.assign(methods$1, AddChildMethods$1, RemoveChildMethods);
 
   var IndexOf = function IndexOf(obj, child) {
     if (Array.isArray(obj)) {
@@ -7908,13 +7908,20 @@
     return OverlapSizer;
   }(Base);
 
-  Object.assign(OverlapSizer.prototype, methods);
+  Object.assign(OverlapSizer.prototype, methods$1);
 
-  var AddPage = function AddPage(gameObject, key, align, padding, expand, minWidth, minHeight) {
+  var OverlapSizerAdd = OverlapSizer.prototype.add;
+
+  var Add = function Add(gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     gameObject.setVisible(false); // Default is invisible
 
-    this.add(gameObject, key, align, padding, expand, minWidth, minHeight);
+    OverlapSizerAdd.call(this, gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY);
     return this;
+  };
+
+  var AddChildMethods = {
+    add: Add,
+    addPage: Add
   };
 
   var GetPage = function GetPage(key) {
@@ -7959,11 +7966,11 @@
     return this;
   };
 
-  var Methods = {
-    addPage: AddPage,
+  var methods = {
     getPage: GetPage,
     swapPage: SwapPage
   };
+  Object.assign(methods, AddChildMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8031,7 +8038,7 @@
     return Pages;
   }(OverlapSizer);
 
-  Object.assign(Pages.prototype, Methods);
+  Object.assign(Pages.prototype, methods);
   var SWAPMODE = {
     invisible: 0,
     destroy: 1
