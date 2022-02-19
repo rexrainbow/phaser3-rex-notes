@@ -61,7 +61,7 @@ class ScrollablePanel extends Scrollable {
             config.targets = [this.childrenMap.panel];
         }
 
-        SetChildrenInteractive(this.childrenMap.child, config);
+        SetChildrenInteractive(this.interactiveChild, config);
         return this;
     }
 }

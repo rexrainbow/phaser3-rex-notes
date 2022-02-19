@@ -8,9 +8,9 @@ A container with a panel, slider, and scroller.
 ## Live demos
 
 - [Scroll-able panel + grid sizer](https://codepen.io/rexrainbow/pen/YMyBom)
+- [Scroll-able panel + table by fix-width sizer](https://codepen.io/rexrainbow/pen/NWwymOO)
 - [Scroll-able panel + fix-width sizer](https://codepen.io/rexrainbow/pen/eYOdKBR)
 - [Dropdown, scrollable list](https://codepen.io/rexrainbow/pen/zYzVgZd)
-- [Children interactive](https://codepen.io/rexrainbow/pen/WNRLZxW)
 - [Add child](https://codepen.io/rexrainbow/pen/PopLRVm)
 
 ## Usage
@@ -471,7 +471,7 @@ panel.setChildrenInteractive({
 
 ##### Events
 
-See [Base-sizer](ui-basesizer.md/#set-children-interactive)
+See [Base-sizer](ui-basesizer.md#set-children-interactive)
 
 #### Individual input events
 
