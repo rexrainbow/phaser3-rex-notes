@@ -59,12 +59,8 @@ var SetDragable = function (items) {
                 parent.remove(item);
                 ArrangeItems(parent);
 
-                var insertIndex = GetInsertIndex(target, pointer);
                 // Item is placed to new position in fixWidthSizer
-                target
-                    .add(item, {
-                        index: (insertIndex >= 0) ? insertIndex : undefined
-                    })
+                target.insertAtPosition(pointer.x, pointer.y, item);
                 // Move item from start position to new position
                 ArrangeItems(target);
             })
@@ -107,46 +103,6 @@ var ArrangeItems = function (panel) {
             speed: 300
         })
     })
-}
-
-var DistanceBetween = Phaser.Math.Distance.Between;
-var GetInsertIndex = function (panel, pointer) {
-    var items = panel.getElement('items');
-    if (items.length === 0) {
-        return -1;
-    }
-
-    var candidators = [];
-    items.forEach(function (item, index, arr) {
-        if (Math.abs(item.centerY - pointer.y) > (item.height / 2)) {
-            return;
-        }
-
-        candidators.push({
-            index: index,
-            distance: DistanceBetween(item.left, item.centerY, pointer.x, pointer.y)
-        })
-
-        var nextItem = arr[index + 1];
-        if (!nextItem || (nextItem.y === item.y)) {
-            return;
-        }
-
-        // nextItem is at next line
-        candidators.push({
-            index: (index + 1),
-            distance: DistanceBetween(item.right, item.centrtY, pointer.x, pointer.y)
-        })
-    })
-    if (candidators.length === 0) {
-        return -1;
-    }
-    candidators.sort(function (data0, data1) {
-        var d0 = data0.distance, d1 = data1.distance;
-        return (d0 > d1) ? 1 :
-            (d0 < d1) ? -1 : 0;
-    })
-    return candidators[0].index;
 }
 
 var CreatePanel = function (scene, words) {

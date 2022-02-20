@@ -1,6 +1,7 @@
 import AddChild from '../basesizer/utils/AddChild.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
+import GetNearestChildIndex from './GetNearestChildIndex.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -59,6 +60,15 @@ export default {
 
     insert(index, gameObject, paddingConfig, childKey) {
         Add.call(this, gameObject, paddingConfig, childKey, index);
+        return this;
+    },
+
+    insertAtPosition(x, y, gameObject, paddingConfig, childKey) {
+        var index = GetNearestChildIndex.call(this, x, y);
+        if (index === -1) {
+            index = undefined;
+        }
+        this.insert(index, gameObject, paddingConfig, childKey);
         return this;
     }
 }
