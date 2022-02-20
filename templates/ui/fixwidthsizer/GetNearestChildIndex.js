@@ -17,6 +17,18 @@ var GetNearestChildIndex = function (x, y) {
             minDistance = distance;
             nearestIndex = i;
         }
+
+        var nextChild = children[i + 1];
+        if (!nextChild || (nextChild.y === child.y)) {
+            continue;
+        }
+
+        // nextChild is at next line
+        distance = DistanceBetween(child.right, child.centerY, x, y);
+        if (minDistance > distance) {
+            minDistance = distance;
+            nearestIndex = i + 1;
+        }
     }
 
     return nearestIndex;
