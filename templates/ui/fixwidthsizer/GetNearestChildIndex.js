@@ -11,24 +11,16 @@ var GetNearestChildIndex = function (x, y) {
             continue;
         }
 
+        // Check left bound
         var distance = DistanceBetween(child.left, child.centerY, x, y);
         if (minDistance > distance) {
             minDistance = distance;
             nearestIndex = i;
         }
 
-        // Is last child
-        if (i === cnt - 1) {
-            var distance = DistanceBetween(child.right, child.centerY, x, y);
-            if (minDistance > distance) {
-                minDistance = distance;
-                nearestIndex = i + 1;
-            }
-        }
-
-        // nextChild is at next line
+        // Is last child of this line
         var nextChild = children[i + 1];
-        if (!nextChild || (nextChild.y === child.y)) {
+        if (nextChild && (nextChild.y === child.y)) {
             continue;
         }
 
