@@ -31232,18 +31232,13 @@
         return this;
       }
     }, {
-      key: "interactiveChild",
-      get: function get() {
-        return this.childrenMap.child;
-      }
-    }, {
       key: "setDropZoneEnable",
       value: function setDropZoneEnable(enable) {
         if (enable === undefined) {
           enable = true;
         }
 
-        var child = this.interactiveChild;
+        var child = this.childrenMap.child;
         child.setInteractive();
         child.input.dropZone = enable;
         return this;
@@ -36045,7 +36040,7 @@
           config.targets = [this.childrenMap.panel];
         }
 
-        SetChildrenInteractive(this.interactiveChild, config);
+        SetChildrenInteractive(this.childrenMap.child, config);
         return this;
       }
     }]);

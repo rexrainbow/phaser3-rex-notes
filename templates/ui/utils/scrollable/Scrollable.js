@@ -273,16 +273,12 @@ class Scrollable extends Sizer {
         return this;
     }
 
-    get interactiveChild() {
-        return this.childrenMap.child;
-    }
-
     setDropZoneEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
 
-        var child = this.interactiveChild;
+        var child = this.childrenMap.child;
         child.setInteractive();
         child.input.dropZone = enable;
         return this;
