@@ -3,6 +3,7 @@ import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 import Space from '../space/Space.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import GetNearestChildIndex from './GetNearestChildIndex.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -122,6 +123,15 @@ export default {
     insert(index, gameObject, proportion, align, paddingConfig, expand, childKey) {
         Add.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index);
         // No problem if sizer.add is override
+        return this;
+    },
+
+    insertAtPosition(x, y, gameObject, proportion, align, paddingConfig, expand, childKey) {
+        var index = GetNearestChildIndex.call(this, x, y);
+        if (index === -1) {
+            index = undefined;
+        }
+        this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey);
         return this;
     }
 }

@@ -2,6 +2,10 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 
 var GetNearestChildIndex = function (x, y) {
     var children = this.sizerChildren;
+    if (children.length === 0) {
+        return -1;
+    }
+
     var nearestIndex = -1,
         minDistance = Infinity;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
