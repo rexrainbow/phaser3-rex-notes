@@ -14,6 +14,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 - [DOM child](https://codepen.io/rexrainbow/pen/xxELGJb)
 - [More nested sizer](https://codepen.io/rexrainbow/pen/jOwWmMm)
 - [Set children interactive](https://codepen.io/rexrainbow/pen/vYWdBZQ)
+- [Drag drop child](https://codepen.io/rexrainbow/pen/YzEaRwd)
 
 ## Usage
 
