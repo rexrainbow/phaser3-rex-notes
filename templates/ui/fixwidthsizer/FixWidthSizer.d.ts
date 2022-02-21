@@ -73,6 +73,33 @@ declare class FixWidthSizer extends BaseSizer {
     insert(
         index: number,
         gameObject: Phaser.GameObjects.GameObject,
+        config?: {
+            padding?: FixWidthSizer.PaddingTypes,
+            key?: string,
+        }
+    ): this;
+
+    insert(
+        index: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        paddingConfig?: FixWidthSizer.PaddingTypes,
+        childKey?: string
+    ): this;
+
+    insertAtPosition(
+        x: number,
+        y: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: {
+            padding?: FixWidthSizer.PaddingTypes,
+            key?: string,
+        }
+    ): this;
+
+    insertAtPosition(
+        x: number,
+        y: number,
+        gameObject: Phaser.GameObjects.GameObject,
         paddingConfig?: FixWidthSizer.PaddingTypes,
         childKey?: string
     ): this;

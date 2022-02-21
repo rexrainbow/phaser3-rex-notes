@@ -19659,7 +19659,7 @@
   };
 
   var IsPlainObject$j = Phaser.Utils.Objects.IsPlainObject;
-  var DistanceBetween$5 = Phaser.Math.Distance.Between;
+  var DistanceBetween$6 = Phaser.Math.Distance.Between;
 
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -19688,7 +19688,7 @@
         y = config.y;
 
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween$5(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$6(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -19725,7 +19725,7 @@
         y = config.y;
 
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween$5(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$6(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -20965,7 +20965,7 @@
   Object.assign(FSM.prototype, EventEmitterMethods);
 
   var GetValue$1d = Phaser.Utils.Objects.GetValue;
-  var DistanceBetween$4 = Phaser.Math.Distance.Between;
+  var DistanceBetween$5 = Phaser.Math.Distance.Between;
 
   var Tap = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Tap, _OnePointerTracer);
@@ -21057,7 +21057,7 @@
 
           case BEGIN$5:
             var pointer = this.lastPointer;
-            var tapsOffset = DistanceBetween$4(pointer.upX, pointer.upY, pointer.x, pointer.y);
+            var tapsOffset = DistanceBetween$5(pointer.upX, pointer.upY, pointer.x, pointer.y);
 
             if (tapsOffset > this.tapOffset) {
               // Can't recognize next level, restart here
@@ -21459,7 +21459,7 @@
   var BEGIN$3 = 'BEGIN';
   var RECOGNIZED$3 = 'RECOGNIZED';
 
-  var DistanceBetween$3 = Phaser.Math.Distance.Between;
+  var DistanceBetween$4 = Phaser.Math.Distance.Between;
   var AngleBetween$1 = Phaser.Math.Angle.Between;
   var VelocityMethods = {
     getDt: function getDt() {
@@ -21470,7 +21470,7 @@
     getVelocity: function getVelocity() {
       var p1 = this.pointer.position;
       var p0 = this.pointer.prevPosition;
-      var d = DistanceBetween$3(p0.x, p0.y, p1.x, p1.y);
+      var d = DistanceBetween$4(p0.x, p0.y, p1.x, p1.y);
       var velocity = d / (this.getDt() * 0.001);
       return velocity;
     },
@@ -21771,7 +21771,7 @@
 
   var GetValue$19 = Phaser.Utils.Objects.GetValue;
   var SpliceOne$1 = Phaser.Utils.Array.SpliceOne;
-  var DistanceBetween$2 = Phaser.Math.Distance.Between;
+  var DistanceBetween$3 = Phaser.Math.Distance.Between;
   var AngleBetween = Phaser.Math.Angle.Between;
 
   var TwoPointersTracer = /*#__PURE__*/function () {
@@ -22026,7 +22026,7 @@
 
         var p0 = this.pointers[0],
             p1 = this.pointers[1];
-        return DistanceBetween$2(p0.x, p0.y, p1.x, p1.y);
+        return DistanceBetween$3(p0.x, p0.y, p1.x, p1.y);
       }
     }, {
       key: "angleBetween",
@@ -25431,6 +25431,52 @@
     return Space;
   }(Zone);
 
+  var GetNearestChildIndex$1 = function GetNearestChildIndex(x, y) {
+    var children = this.sizerChildren;
+
+    if (children.length === 0) {
+      return -1;
+    }
+
+    var nearestIndex = -1,
+        minDistance = Infinity;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+      var distance;
+
+      if (this.orientation === 0) {
+        // x
+        distance = Math.abs(child.left - x);
+      } else {
+        distance = Math.abs(child.top - y);
+      }
+
+      if (minDistance > distance) {
+        minDistance = distance;
+        nearestIndex = i;
+      }
+    } // Check right bound of last child
+
+
+    var child = children[children.length - 1];
+    var distance;
+
+    if (this.orientation === 0) {
+      // x
+      distance = Math.abs(child.right - x);
+    } else {
+      distance = Math.abs(child.bottom - y);
+    }
+
+    if (minDistance > distance) {
+      minDistance = distance;
+      nearestIndex = i + 1;
+    }
+
+    return nearestIndex;
+  };
+
   var IsPlainObject$a = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$S = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER$2 = Phaser.Display.Align.CENTER;
@@ -25554,9 +25600,23 @@
 
       return this;
     },
-    insert: function insert(index, gameObject, proportion, align, paddingConfig, expand, childKey) {
-      Add$6.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index); // No problem if sizer.add is override
+    insert: function insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+      if (IsPlainObject$a(proportion)) {
+        proportion.index = index;
+      }
 
+      Add$6.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize); // No problem if sizer.add is override
+
+      return this;
+    },
+    insertAtPosition: function insertAtPosition(x, y, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+      var index = GetNearestChildIndex$1.call(this, x, y);
+
+      if (index === -1) {
+        index = undefined;
+      }
+
+      this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
       return this;
     }
   };
@@ -26726,6 +26786,51 @@
     RunWidthWrap$2.call(this, width);
   };
 
+  var DistanceBetween$2 = Phaser.Math.Distance.Between;
+
+  var GetNearestChildIndex = function GetNearestChildIndex(x, y) {
+    var children = this.sizerChildren;
+
+    if (children.length === 0) {
+      return -1;
+    }
+
+    var nearestIndex = -1,
+        minDistance = Infinity;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i]; // position is not at this line
+
+      if (Math.abs(child.centerY - y) > child.height / 2) {
+        continue;
+      } // Check left bound
+
+
+      var distance = DistanceBetween$2(child.left, child.centerY, x, y);
+
+      if (minDistance > distance) {
+        minDistance = distance;
+        nearestIndex = i;
+      } // Is last child of this line
+
+
+      var nextChild = children[i + 1];
+
+      if (nextChild && nextChild.y === child.y) {
+        continue;
+      }
+
+      var distance = DistanceBetween$2(child.right, child.centerY, x, y);
+
+      if (minDistance > distance) {
+        minDistance = distance;
+        nearestIndex = i + 1;
+      }
+    }
+
+    return nearestIndex;
+  };
+
   var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$N = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER = Phaser.Display.Align.CENTER;
@@ -26786,6 +26891,16 @@
     },
     insert: function insert(index, gameObject, paddingConfig, childKey) {
       Add$3.call(this, gameObject, paddingConfig, childKey, index);
+      return this;
+    },
+    insertAtPosition: function insertAtPosition(x, y, gameObject, paddingConfig, childKey) {
+      var index = GetNearestChildIndex.call(this, x, y);
+
+      if (index === -1) {
+        index = undefined;
+      }
+
+      this.insert(index, gameObject, paddingConfig, childKey);
       return this;
     }
   };

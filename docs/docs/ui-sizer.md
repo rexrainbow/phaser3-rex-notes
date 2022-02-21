@@ -263,6 +263,51 @@ sizer.add(child, proportion, align, padding, expand, key, index);
 - `minWidth` : Minimum width of normal (non-sizer) game object, used when `orientation` is `x`, and `proportion` is not `0`. Default value is current display width.
 - `minHeight` : Minimum height of normal (non-sizer) game object, used when `orientation` is `y`, and `proportion` is not `0`. Default value is current display height.
 
+### Insert child
+
+```javascript
+sizer.insert(index, child, 
+    {
+        proportion: 0,
+        align: 'center',
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        expand: false,
+        key: undefined,
+        minWidth: undefined,
+        minHeight: undefined
+    }
+);
+```
+
+or 
+
+```javascript
+sizer.insert(index, child, proportion, align, padding, expand, key);
+```
+
+#### Insert at position
+
+```javascript
+sizer.insertAtPosition(x, y, 
+    child, 
+    {
+        proportion: 0,
+        align: 'center',
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        expand: false,
+        key: undefined,
+        minWidth: undefined,
+        minHeight: undefined
+    }
+);
+```
+
+or 
+
+```javascript
+sizer.insertAtPosition(x, y, index, child, proportion, align, padding, expand, key);
+```
+
 ### Add space
 
 -  Add a stretchable space.

@@ -6612,6 +6612,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-child" class="md-nav__link">
+    Insert child
+  </a>
+  
+    <nav class="md-nav" aria-label="Insert child">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert-at-position" class="md-nav__link">
+    Insert at position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-new-line" class="md-nav__link">
     Add new line
   </a>
@@ -7897,6 +7917,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-child" class="md-nav__link">
+    Insert child
+  </a>
+  
+    <nav class="md-nav" aria-label="Insert child">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert-at-position" class="md-nav__link">
+    Insert at position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-new-line" class="md-nav__link">
     Add new line
   </a>
@@ -8184,6 +8224,29 @@
 </ul>
 </li>
 </ul>
+<h3 id="insert-child">Insert child<a class="headerlink" href="#insert-child" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>or </p>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="insert-at-position">Insert at position<a class="headerlink" href="#insert-at-position" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insertAtPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> 
+    <span class="nx">child</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>or </p>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insertAtPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="add-new-line">Add new line<a class="headerlink" href="#add-new-line" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addNewLine</span><span class="p">();</span>
 </code></pre></div>

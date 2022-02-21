@@ -6584,6 +6584,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-child" class="md-nav__link">
+    Insert child
+  </a>
+  
+    <nav class="md-nav" aria-label="Insert child">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert-at-position" class="md-nav__link">
+    Insert at position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-space" class="md-nav__link">
     Add space
   </a>
@@ -7897,6 +7917,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-child" class="md-nav__link">
+    Insert child
+  </a>
+  
+    <nav class="md-nav" aria-label="Insert child">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert-at-position" class="md-nav__link">
+    Insert at position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-space" class="md-nav__link">
     Add space
   </a>
@@ -8207,6 +8247,39 @@
 <li><code>minWidth</code> : Minimum width of normal (non-sizer) game object, used when <code>orientation</code> is <code>x</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display width.</li>
 <li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when <code>orientation</code> is <code>y</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display height.</li>
 </ul>
+<h3 id="insert-child">Insert child<a class="headerlink" href="#insert-child" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="nx">proportion</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
+        <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>or </p>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="insert-at-position">Insert at position<a class="headerlink" href="#insert-at-position" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insertAtPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> 
+    <span class="nx">child</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="nx">proportion</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
+        <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>or </p>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insertAtPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="add-space">Add space<a class="headerlink" href="#add-space" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add a stretchable space.

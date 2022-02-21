@@ -242,6 +242,41 @@ sizer.add(child, padding, key, index);
 - `index` : Insert child to.
     - `undefined` : Insert child at last.
 
+### Insert child
+
+```javascript
+sizer.insert(index, child, 
+    {
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        key: undefined,
+    }
+);
+```
+
+or 
+
+```javascript
+sizer.insert(index, child, padding, key);
+```
+
+#### Insert at position
+
+```javascript
+sizer.insertAtPosition(x, y, 
+    child, 
+    {
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        key: undefined,
+    }
+);
+```
+
+or 
+
+```javascript
+sizer.insertAtPosition(x, y, index, child, padding, key);
+```
+
 ### Add new line
 
 ```javascript

@@ -8525,14 +8525,14 @@
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <p>A glsl file can contain multiple shaders, all separated by a frontmatter block.</p>
-<div class="highlight"><pre><span></span><code><span class="o">---</span><span class="w"></span>
-<span class="n">name</span><span class="o">:</span><span class="w"> </span>
-<span class="n">type</span><span class="o">:</span><span class="w"> </span>
-<span class="o">---</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="o">---</span>
+<span class="n">name</span><span class="o">:</span> 
+<span class="n">type</span><span class="o">:</span> 
+<span class="o">---</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="binary">Binary<a class="headerlink" href="#binary" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">binary</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">);</span>  <span class="c1">// dataType: Uint8Array</span>

@@ -120,18 +120,22 @@ export default {
         return this;
     },
 
-    insert(index, gameObject, proportion, align, paddingConfig, expand, childKey) {
-        Add.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index);
+    insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
+        if (IsPlainObject(proportion)) {
+            proportion.index = index;
+        }
+
+        Add.call(this, gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize);
         // No problem if sizer.add is override
         return this;
     },
 
-    insertAtPosition(x, y, gameObject, proportion, align, paddingConfig, expand, childKey) {
+    insertAtPosition(x, y, gameObject, proportion, align, paddingConfig, expand, childKey, minSize) {
         var index = GetNearestChildIndex.call(this, x, y);
         if (index === -1) {
             index = undefined;
         }
-        this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey);
+        this.insert(index, gameObject, proportion, align, paddingConfig, expand, childKey, minSize);
         return this;
     }
 }

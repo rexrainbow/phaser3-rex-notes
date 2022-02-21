@@ -75,19 +75,12 @@ declare class Sizer extends BaseSizer {
         gameObject: Phaser.GameObjects.GameObject,
         config?: {
             proportion?: number,
-
             align?: Sizer.AlignTypes,
-
             padding?: Sizer.PaddingTypes,
-
             expand?: boolean,
-
             childKey?: string,
-
             index?: number,
-
             minWidth?: number,
-
             minHeight?: number
         }
     ): this;
@@ -105,6 +98,46 @@ declare class Sizer extends BaseSizer {
 
     insert(
         index: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: {
+            proportion?: number,
+            align?: Sizer.AlignTypes,
+            padding?: Sizer.PaddingTypes,
+            expand?: boolean,
+            childKey?: string,
+            minWidth?: number,
+            minHeight?: number
+        }
+    ): this;
+
+    insert(
+        index: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        proportion?: number,
+        align?: Sizer.AlignTypes,
+        padding?: Sizer.PaddingTypes,
+        expand?: boolean,
+        childKey?: string
+    ): this;
+
+    insertAtPosition(
+        x: number,
+        y: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: {
+            proportion?: number,
+            align?: Sizer.AlignTypes,
+            padding?: Sizer.PaddingTypes,
+            expand?: boolean,
+            childKey?: string,
+            minWidth?: number,
+            minHeight?: number
+        }
+    ): this;
+
+    insertAtPosition(
+        x: number,
+        y: number,
         gameObject: Phaser.GameObjects.GameObject,
         proportion?: number,
         align?: Sizer.AlignTypes,
