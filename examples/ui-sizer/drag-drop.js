@@ -15,26 +15,35 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var sizer = CreatePanel(this)
-            .setPosition(400, 300)
-            .layout()
-            .setInteractive({ dropZone: true });
+        var sizer0 = CreatePanel(this, 12).setPosition(250, 300).layout();
+        var sizer1 = CreatePanel(this, 8).setPosition(400, 300).layout();
+        var sizer2 = CreatePanel(this, 0).setPosition(550, 300).layout();
 
-        SetDragable(sizer.getElement('items'));
+
+        var sizers = [sizer0, sizer1, sizer2];
+        sizers.forEach(function (sizer) {
+            sizer.setInteractive({ dropZone: true });
+            SetDragable(sizer.getElement('items'));
+        })
     }
 
     update() { }
 }
 
-var CreatePanel = function (scene) {
+var CreatePanel = function (scene, itemCount) {
+    if (itemCount === undefined) {
+        itemCount = 0;
+    }
+
     var sizer = scene.rexUI.add.sizer({
         width: 120, height: 500,
         orientation: 'y',
         space: { left: 6, right: 6, top: 6, bottom: 6, item: 6 },
     })
-        .addBackground(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK))
+        .setDepth(-1)
+        .addBackground(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK).setDepth(-1))
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < itemCount; i++) {
         sizer.add(
             CreateLabel(scene, i.toString()),
             {
