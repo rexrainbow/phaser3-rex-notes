@@ -12,7 +12,7 @@
 
 ### Rex plugins
 
-- [Plugin list]([plugin-list.md](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/plugin-list/))
+- [Plugin list](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/plugin-list/)
     - [Demos](https://codepen.io/rexrainbow/pens/public)
 - [Discord channel](https://discord.gg/kWkuFZK)
 - [Bug report](https://github.com/rexrainbow/phaser3-rex-notes/issues)
