@@ -98,7 +98,7 @@ var SetDragable = function (items) {
                 parent.remove(item);
                 ArrangeItems(parent);
 
-                // Item is placed to new position in fixWidthSizer
+                // Item is placed to new position in sizer
                 target.insertAtPosition(
                     pointer.x, pointer.y,
                     item,
@@ -118,7 +118,7 @@ var ArrangeItems = function (panel) {
     items.forEach(function (item) {
         item.setData({ startX: item.x, startY: item.y });
     })
-    // Item is placed to new position in fixWidthSizer
+    // Item is placed to new position in sizer
     panel.layout();
     // Move item from start position to new position
     items.forEach(function (item) {
