@@ -9,13 +9,13 @@ A collection of unique elements, built-in data structure of phaser.
 ### Create instance
 
 ```javascript
-var set = Phaser.Structs.Set();
+var set = new Phaser.Structs.Set();
 ```
 
 or
 
 ```javascript
-var set = Phaser.Structs.Set(elements);
+var set = new Phaser.Structs.Set(elements);
 ```
 
 ### Add an element

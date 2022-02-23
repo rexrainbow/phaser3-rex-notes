@@ -9,7 +9,7 @@ An ordered list, built-in data structure of phaser.
 ### Create instance
 
 ```javascript
-var list = Phaser.Structs.List();
+var list = new Phaser.Structs.List();
 ```
 
 ### Add child
