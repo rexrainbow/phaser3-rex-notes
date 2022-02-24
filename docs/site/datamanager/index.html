@@ -8074,18 +8074,27 @@
 <ul>
 <li>Set value
     <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>key</code> : Key string.</li>
 </ul>
 </li>
 <li>Increase number value. If the key doesn't already exist in the Data Manager then it is increased from 0.
     <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">inc</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>data</code> : The value to increase. </li>
 </ul>
 </li>
 <li>Toggle boolean value. If the key doesn't already exist in the Data Manager then it is toggled from false.
     <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="o">!</span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
 </code></pre></div></li>
 </ul>
 <h4 id="set-values">Set values<a class="headerlink" href="#set-values" title="Permanent link">&para;</a></h4>
@@ -8106,8 +8115,11 @@
 </code></pre></div>
 <h3 id="read">Read<a class="headerlink" href="#read" title="Permanent link">&para;</a></h3>
 <h4 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<p><div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+or
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+</code></pre></div></p>
 <h4 id="get-values">Get values<a class="headerlink" href="#get-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">keys</span><span class="p">);</span> <span class="c1">// values: [value, value, ...], keys: [key, key, ...]</span>
 </code></pre></div>

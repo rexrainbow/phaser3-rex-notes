@@ -14,15 +14,27 @@ Store data in key-value pairs, built-in object of phaser.
     ```javascript
     parent.data.set(key, value);
     ```
+    or
+    ```javascript
+    parent.data.values[key] = value;
+    ```
     - `key` : Key string.
 - Increase number value. If the key doesn't already exist in the Data Manager then it is increased from 0.
     ```javascript
     parent.data.inc(key, data);
     ```
+    or
+    ```javascript
+    parent.data.values[key] += value;
+    ```
     - `data` : The value to increase. 
 - Toggle boolean value. If the key doesn't already exist in the Data Manager then it is toggled from false.
     ```javascript
     parent.data.toggle(key);
+    ```
+    or
+    ```javascript
+    parent.data.values[key] = !parent.data.values[key];
     ```
 
 #### Set values
@@ -62,6 +74,10 @@ parent.data.events.on('changedata-' + key, function(parent, value, previousValue
 
 ```javascript
 var value = parent.data.get(key);
+```
+or
+```javascript
+var value = parent.data.values[key];
 ```
 
 #### Get values
