@@ -11158,7 +11158,9 @@
 
       _this = _super.call(this, scene, config);
 
-      _this.addChildrenMap('panel', _this.childrenMap.child.child);
+      _this.addChildrenMap('panel', scrollableBlock.child);
+
+      _this.addChildrenMap('panelLayer', scrollableBlock.maskLayer);
 
       return _this;
     }

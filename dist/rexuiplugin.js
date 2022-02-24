@@ -33258,6 +33258,8 @@
 
       _this.addChildrenMap('table', table);
 
+      _this.addChildrenMap('tableLayer', table.maskLayer);
+
       _this.eventEmitter = GetValue$p(config, 'eventEmitter', _assertThisInitialized(_this));
       var callback = GetValue$p(config, 'createCellContainerCallback', NOOP);
       var scope = GetValue$p(config, 'createCellContainerCallbackScope', undefined);
@@ -36135,7 +36137,9 @@
 
       _this = _super.call(this, scene, config);
 
-      _this.addChildrenMap('panel', _this.childrenMap.child.child);
+      _this.addChildrenMap('panel', scrollableBlock.child);
+
+      _this.addChildrenMap('panelLayer', scrollableBlock.maskLayer);
 
       return _this;
     }

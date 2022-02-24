@@ -577,6 +577,10 @@ See [base sizer object](ui-basesizer.md).
         ```javascript
         var tableBody = table.getElement('table');
         ```
+    - Layer of gridtable, assigned at config `table.mask.layer`.
+        ```javascript
+        var layer = table.getElement('tableLayer');
+        ```        
     - [Slider](ui-slider.md)
         - Track
             ```javascript

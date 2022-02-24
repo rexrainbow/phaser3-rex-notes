@@ -45,7 +45,8 @@ class ScrollablePanel extends Scrollable {
         }
         super(scene, config);
 
-        this.addChildrenMap('panel', this.childrenMap.child.child);
+        this.addChildrenMap('panel', scrollableBlock.child);
+        this.addChildrenMap('panelLayer', scrollableBlock.maskLayer);
     }
 
     setChildrenInteractive(config) {

@@ -12571,6 +12571,8 @@
 
       _this.addChildrenMap('table', table);
 
+      _this.addChildrenMap('tableLayer', table.maskLayer);
+
       _this.eventEmitter = GetValue(config, 'eventEmitter', _assertThisInitialized(_this));
       var callback = GetValue(config, 'createCellContainerCallback', NOOP);
       var scope = GetValue(config, 'createCellContainerCallbackScope', undefined);

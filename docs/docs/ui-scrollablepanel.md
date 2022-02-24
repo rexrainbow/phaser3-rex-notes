@@ -404,6 +404,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         ```javascript
         var panel = panel.getElement('panel');
         ```
+    - Layer of panel, assigned at config `panel.mask.layer`.
+        ```javascript
+        var layer = panel.getElement('panelLayer');
+        ```
     - Slider
         - Track
             ```javascript
