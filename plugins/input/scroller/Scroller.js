@@ -67,7 +67,7 @@ class Scroller extends ComponentBase {
     }
 
     boot() {
-        this.scene.events.on('update', this._state.update, this._state);
+        this.scene.events.on('preupdate', this._state.update, this._state);
     }
 
     shutdown(fromScene) {
@@ -76,7 +76,7 @@ class Scroller extends ComponentBase {
             return;
         }
 
-        this.scene.events.off('update', this._state.update, this._state);
+        this.scene.events.off('preupdate', this._state.update, this._state);
         this._state.destroy(fromScene);
         this.dragState.destroy(fromScene);
         this._state = undefined;
