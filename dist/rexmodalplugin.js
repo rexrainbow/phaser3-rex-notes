@@ -2062,8 +2062,14 @@
       }
     }, {
       key: "delayCall",
-      value: function delayCall(delay, callback, scope, args) {
-        this.timer = this.scene.time.delayedCall(delay, callback, args, scope);
+      value: function delayCall(delay, callback, scope) {
+        // Invoke callback under scene's 'postupdate' event
+        var sceneEE = this.scene.events;
+        this.timer = this.scene.time.delayedCall(delay, // delay
+        sceneEE.once, // callback
+        ['postupdate', callback, scope], // args
+        sceneEE // scope
+        );
         return this;
       }
     }, {

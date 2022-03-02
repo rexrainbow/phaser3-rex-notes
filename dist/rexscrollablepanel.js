@@ -9439,7 +9439,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.events.on('update', this._state.update, this._state);
+        this.scene.events.on('preupdate', this._state.update, this._state);
       }
     }, {
       key: "shutdown",
@@ -9449,7 +9449,7 @@
           return;
         }
 
-        this.scene.events.off('update', this._state.update, this._state);
+        this.scene.events.off('preupdate', this._state.update, this._state);
 
         this._state.destroy(fromScene);
 

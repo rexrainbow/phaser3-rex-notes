@@ -30433,7 +30433,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.events.on('update', this._state.update, this._state);
+        this.scene.events.on('preupdate', this._state.update, this._state);
       }
     }, {
       key: "shutdown",
@@ -30443,7 +30443,7 @@
           return;
         }
 
-        this.scene.events.off('update', this._state.update, this._state);
+        this.scene.events.off('preupdate', this._state.update, this._state);
 
         this._state.destroy(fromScene);
 
@@ -38896,8 +38896,14 @@
       }
     }, {
       key: "delayCall",
-      value: function delayCall(delay, callback, scope, args) {
-        this.timer = this.scene.time.delayedCall(delay, callback, args, scope);
+      value: function delayCall(delay, callback, scope) {
+        // Invoke callback under scene's 'postupdate' event
+        var sceneEE = this.scene.events;
+        this.timer = this.scene.time.delayedCall(delay, // delay
+        sceneEE.once, // callback
+        ['postupdate', callback, scope], // args
+        sceneEE // scope
+        );
         return this;
       }
     }, {
