@@ -1,6 +1,34 @@
 import phaser from 'phaser/src/phaser.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
+var CreateText = function (scene, count) {
+    var t0 = performance.now();
+    for (var i = 0; i < count; i++) {
+        scene.add.text(200, 300, '123');
+    }
+    var t1 = performance.now();
+    scene.add.text(200, 250, `Text: ${Math.floor(t1 - t0)}`);
+    /*
+     10: 28
+     100: 95
+     1000: 817
+     */
+}
+
+var CreateBBCodeText = function (scene, count) {
+    var t0 = performance.now();
+    for (var i = 0; i < count; i++) {
+        scene.add.rexBBCodeText(500, 300, '123');
+    }
+    var t1 = performance.now();
+    scene.add.text(500, 250, `BBCodeText: ${Math.floor(t1 - t0)}`);
+    /*
+    10: 28
+    100: 114
+    1000: 1439
+    */
+}
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -11,20 +39,9 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.input.once('pointerdown', function () {
-            var t0 = window.performance.now();
-            for (var i = 0; i < 10; i++) {
-                this.add.rexBBCodeText(400, 300, '123');
-            }
-            var t1 = window.performance.now();
-            console.log(t1 - t0);
-        }, this)
-        
-        /*        
-        10: 22.80000001192093
-        100: 121.20000004768372
-        1000: 1148.300000011921
-        */
+        var count = 1000;
+        this.time.delayedCall(1000, CreateText, [this, count]);
+        this.time.delayedCall(2000, CreateBBCodeText, [this, count]);
     }
 
     update() { }
