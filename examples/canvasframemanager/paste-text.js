@@ -18,9 +18,11 @@ class Demo extends Phaser.Scene {
             add: false,
             style: {
                 align: 'center',
+                backgroundColor: '#333333',
                 fontSize: 64,
                 fixedWidth: 64,
                 fixedHeight: 64,
+                padding: { top: 3 },
                 testString: '回'
             }
         });
