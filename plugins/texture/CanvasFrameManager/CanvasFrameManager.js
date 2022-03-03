@@ -2,7 +2,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CanvasFrameManager {
-    constructor(scene, key, width, height, cellWidth, cellHeight) {
+    constructor(scene, key, width, height, cellWidth, cellHeight, fillColor) {
         if (IsPlainObject(key)) {
             var config = key;
             key = GetValue(config, 'key');
@@ -10,6 +10,7 @@ class CanvasFrameManager {
             height = GetValue(config, 'height');
             cellWidth = GetValue(config, 'cellWidth');
             cellHeight = GetValue(config, 'cellHeight');
+            fillColor = GetValue(config, 'fillColor');
         }
 
         if (width === undefined) {
@@ -27,6 +28,13 @@ class CanvasFrameManager {
 
         this.texture = scene.textures.createCanvas(key, width, height);
         this.canvas = this.texture.getCanvas();
+        this.context = this.texture.getContext();
+
+        if (fillColor !== undefined) {
+            var context = this.context;
+            context.fillStyle = fillColor;
+            context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
 
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
@@ -75,7 +83,7 @@ class CanvasFrameManager {
             height: this.cellHeight
         }
 
-        var context = this.canvas.getContext('2d');
+        var context = this.context;
         context.save();
         context.translate(tl.x, tl.y);
         context.clearRect(0, 0, frameSize.width, frameSize.height);

@@ -11,8 +11,8 @@ class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(scene, key, width, height, cellWidth, cellHeight) {
-        return new CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight);
+    add(scene, key, width, height, cellWidth, cellHeight, fillColor) {
+        return new CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor);
     }
 }
 

@@ -12,7 +12,14 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var canvasFrames = this.plugins.get('rexCanvasFrameManager').add(this, 'test', 512, 512, 64, 64);
+        var canvasFrames = this.plugins.get('rexCanvasFrameManager').add(this,
+            {
+                key: 'test',
+                width: 512, height: 512,
+                cellWidth: 64, cellHeight: 64,
+                fillColor: '#666666'
+            });
+        this.add.image(400, 300, 'test');
 
         var txt = this.make.text({
             add: false,
@@ -37,7 +44,7 @@ class Demo extends Phaser.Scene {
 
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
-            this.add.image(300 + i * 64, 300, 'test', c);
+            this.add.image(50 + i * 64, 50, 'test', c);
         }
     }
 
