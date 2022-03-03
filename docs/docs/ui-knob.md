@@ -83,7 +83,7 @@ var knob = scene.rexUI.add.knob({
 
     background: backgroundGameObject,
 
-    color: undefined,
+    barColor: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -134,7 +134,7 @@ var knob = scene.rexUI.add.knob({
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of knob.
-- `color` : Color of circular bar, in number or css string value.
+- `barColor` : Color of circular bar, in number or css string value.
 - `trackColor` : Color of circular track, in number or css string value.
 - `centerColor` : Color of center circle, in number or css string value.
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)

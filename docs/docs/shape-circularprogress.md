@@ -96,6 +96,7 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, value, {
+    barColor: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,

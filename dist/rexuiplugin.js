@@ -17526,7 +17526,7 @@
 
         var trackShape = this.getShape('track');
 
-        if (this.trackColor && lineWidth > 0) {
+        if (this.trackColor != null && lineWidth > 0) {
           trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
         } else {
           trackShape.reset();
@@ -17535,7 +17535,7 @@
 
         var barShape = this.getShape('bar');
 
-        if (this.barColor && barRadius > 0) {
+        if (this.barColor != null && barRadius > 0) {
           var anticlockwise, startAngle, endAngle;
 
           if (this.value === 1) {
