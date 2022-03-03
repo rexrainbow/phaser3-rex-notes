@@ -28,7 +28,7 @@ export default class Canvas extends CanvasGameObjectBase {
     ): this;
 
     generateTexture(
-        key: string,
+        key: string | number,
         x?: number, y?: number,
         width?: number, height?: number
     ): this;

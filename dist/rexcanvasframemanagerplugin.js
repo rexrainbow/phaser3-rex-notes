@@ -111,7 +111,7 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var CanvasFrameManager = /*#__PURE__*/function () {
-    function CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight) {
+    function CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor) {
       _classCallCheck(this, CanvasFrameManager);
 
       if (IsPlainObject(key)) {
@@ -121,6 +121,7 @@
         height = GetValue(config, 'height');
         cellWidth = GetValue(config, 'cellWidth');
         cellHeight = GetValue(config, 'cellHeight');
+        fillColor = GetValue(config, 'fillColor');
       }
 
       if (width === undefined) {
@@ -141,28 +142,55 @@
 
       this.texture = scene.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
+      this.context = this.texture.getContext();
+
+      if (fillColor !== undefined) {
+        var context = this.context;
+        context.fillStyle = fillColor;
+        context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+
+      this.width = width;
+      this.height = height;
       this.cellWidth = cellWidth;
       this.cellHeight = cellHeight;
       this.columnCount = Math.floor(width / cellWidth);
       this.rowCount = Math.floor(height / cellHeight);
-      this.freeIndexes = [];
+      this.frameNames = Array(this.columnCount * this.rowCount);
 
-      for (var i = 0, cnt = this.columnCount * this.rowCount; i < cnt; i++) {
-        this.freeIndexes.push(i);
+      for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
+        this.frameNames[i] = undefined;
       }
-
-      this.frame2Index = {};
     }
 
     _createClass(CanvasFrameManager, [{
-      key: "isFull",
-      get: function get() {
-        return this.freeIndexes.length === 0;
+      key: "destroy",
+      value: function destroy() {
+        this.texture = undefined;
+        this.canvas = undefined;
+        this.context = undefined;
+        this.frameNames = undefined;
       }
     }, {
-      key: "getFreeFrameIndex",
-      value: function getFreeFrameIndex() {
-        return this.freeIndexes.pop();
+      key: "getFrameIndex",
+      value: function getFrameIndex(frameName) {
+        return this.frameNames.indexOf(frameName);
+      }
+    }, {
+      key: "hasFrameName",
+      value: function hasFrameName(frameName) {
+        return this.getFrameIndex(frameName) !== -1;
+      }
+    }, {
+      key: "addFrameName",
+      value: function addFrameName(index, frameName) {
+        this.frameNames[index] = frameName;
+        return this;
+      }
+    }, {
+      key: "isFull",
+      get: function get() {
+        return this.getFrameIndex(undefined) === -1;
       }
     }, {
       key: "getTopLeftPosition",
@@ -180,9 +208,13 @@
     }, {
       key: "draw",
       value: function draw(frameName, callback, scope) {
-        var index = this.getFreeFrameIndex();
+        var index = this.getFrameIndex(frameName);
 
-        if (index === undefined) {
+        if (index === -1) {
+          index = this.getFrameIndex(undefined);
+        }
+
+        if (index === -1) {
           console.warn('Does not have free space.');
           return this;
         }
@@ -192,7 +224,7 @@
           width: this.cellWidth,
           height: this.cellHeight
         };
-        var context = this.canvas.getContext('2d');
+        var context = this.context;
         context.save();
         context.translate(tl.x, tl.y);
         context.clearRect(0, 0, frameSize.width, frameSize.height);
@@ -206,7 +238,7 @@
 
         context.restore();
         this.texture.add(frameName, 0, tl.x, tl.y, frameSize.width, frameSize.height);
-        this.frame2Index[frameName] = index;
+        this.addFrameName(index, frameName);
         return this;
       }
     }, {
@@ -237,13 +269,13 @@
     }, {
       key: "remove",
       value: function remove(frameName) {
-        if (!this.frame2Index.hasOwnProperty(frameName)) {
+        var index = this.getFrameIndex(frameName);
+
+        if (index === -1) {
           return this;
         }
 
-        var index = this.frame2Index[frameName];
-        this.freeIndexes.push(index);
-        delete this.frame2Index[frameName];
+        this.addFrameName(index, undefined);
         this.texture.remove(frameName); // Don't clear canvas
 
         return this;
@@ -272,8 +304,8 @@
       }
     }, {
       key: "add",
-      value: function add(scene, key, width, height, cellWidth, cellHeight) {
-        return new CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight);
+      value: function add(scene, key, width, height, cellWidth, cellHeight, fillColor) {
+        return new CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor);
       }
     }]);
 

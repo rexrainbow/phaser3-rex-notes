@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
                 cellWidth: 64, cellHeight: 64,
                 fillColor: '#666666'
             });
-        this.add.image(400, 300, 'test');
+        this.add.image(800, 600, 'test').setOrigin(1).setScale(0.5);
 
         var txt = this.make.text({
             add: false,
@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
                 fontSize: 64,
                 fixedWidth: 64,
                 fixedHeight: 64,
-                padding: { top: 3 },
+                padding: { top: 4 },
                 testString: '回'
             }
         });

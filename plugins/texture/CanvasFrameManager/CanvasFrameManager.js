@@ -36,26 +36,41 @@ class CanvasFrameManager {
             context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         }
 
+        this.width = width;
+        this.height = height;
         this.cellWidth = cellWidth;
         this.cellHeight = cellHeight;
         this.columnCount = Math.floor(width / cellWidth);
         this.rowCount = Math.floor(height / cellHeight);
 
-        this.freeIndexes = [];
-        for (var i = 0, cnt = this.columnCount * this.rowCount; i < cnt; i++) {
-            this.freeIndexes.push(i);
+        this.frameNames = Array(this.columnCount * this.rowCount);
+        for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
+            this.frameNames[i] = undefined;
         }
+    }
 
-        this.frame2Index = {};
+    destroy() {
+        this.texture = undefined;
+        this.canvas = undefined;
+        this.context = undefined;
+        this.frameNames = undefined;
+    }
 
+    getFrameIndex(frameName) {
+        return this.frameNames.indexOf(frameName);
+    }
+
+    hasFrameName(frameName) {
+        return this.getFrameIndex(frameName) !== -1;
+    }
+
+    addFrameName(index, frameName) {
+        this.frameNames[index] = frameName;
+        return this;
     }
 
     get isFull() {
-        return this.freeIndexes.length === 0;
-    }
-
-    getFreeFrameIndex() {
-        return this.freeIndexes.pop();
+        return this.getFrameIndex(undefined) === -1;
     }
 
     getTopLeftPosition(frameIndex, out) {
@@ -71,8 +86,11 @@ class CanvasFrameManager {
     }
 
     draw(frameName, callback, scope) {
-        var index = this.getFreeFrameIndex();
-        if (index === undefined) {
+        var index = this.getFrameIndex(frameName);
+        if (index === -1) {
+            index = this.getFrameIndex(undefined);
+        }
+        if (index === -1) {
             console.warn('Does not have free space.');
             return this;
         }
@@ -98,7 +116,7 @@ class CanvasFrameManager {
         context.restore();
 
         this.texture.add(frameName, 0, tl.x, tl.y, frameSize.width, frameSize.height);
-        this.frame2Index[frameName] = index;
+        this.addFrameName(index, frameName);
 
         return this;
     }
@@ -128,14 +146,12 @@ class CanvasFrameManager {
     }
 
     remove(frameName) {
-        if (!this.frame2Index.hasOwnProperty(frameName)) {
+        var index = this.getFrameIndex(frameName);
+        if (index === -1) {
             return this;
         }
 
-        var index = this.frame2Index[frameName];
-        this.freeIndexes.push(index);
-        delete this.frame2Index[frameName];
-
+        this.addFrameName(index, undefined);
         this.texture.remove(frameName);
 
         // Don't clear canvas

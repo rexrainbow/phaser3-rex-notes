@@ -23492,6 +23492,8 @@
 
       if (textObject) {
         _this.add(textObject, 'text', 'center', 0, false);
+
+        scene.children.moveBelow(knob, textObject); // Move knob below textObject
       }
 
       _this.addChildrenMap('background', background);
