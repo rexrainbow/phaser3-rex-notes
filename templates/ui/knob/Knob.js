@@ -47,6 +47,7 @@ class Knob extends OverlapSizer {
         this.add(knob, 'knob');
         if (textObject) {
             this.add(textObject, 'text', 'center', 0, false);
+            scene.children.moveBelow(knob, textObject); // Move knob below textObject
         }
 
         this.addChildrenMap('background', background);
