@@ -476,7 +476,7 @@ See [data manager](datamanager.md)
     gameObject.setTexture(texture);
     // gameObject.setTexture(texture, frame);
     ```
-    - `texture` : [Texture object](textures.md#get-texture), or [canvas texture object](canvas-textures.md)
+    - `texture` : [Texture object](textures.md#get-texture), or [canvas texture object](canvas-texture.md)
 - Set frame
     ```javascript
     gameObject.setFrame(frame);
