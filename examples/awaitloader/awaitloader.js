@@ -12,10 +12,10 @@ class Demo extends Phaser.Scene {
     preload() {
         this.print = this.add.text(0, 0, 'Preload\n');
 
-        var callback = function(successCallback, failureCallback) {
+        var callback = function (successCallback, failureCallback) {
             setTimeout(successCallback, 1000);
         }
-        this.load.rexAwait(callback);        
+        this.load.rexAwait(callback);
     }
 
     create() {

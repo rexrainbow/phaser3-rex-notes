@@ -48,6 +48,10 @@ scene.loader.setPath(path)
     scene.load.on('progress', function(progress){}, scope);
     ```
     - `progress` value will increase when a file is loaded, and decrease when a new file loading request is added.
+        ```javascript
+        var loader = scene.load;
+        var progress = 1 - ((loader.list.size + loader.inflight.size) / loader.totalToLoad);
+        ```
 - Loading file progressing
     ```javascript
     scene.load.on('fileprogress', function(file, progress){
