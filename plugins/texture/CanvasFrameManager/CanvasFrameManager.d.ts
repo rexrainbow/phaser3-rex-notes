@@ -54,7 +54,7 @@ declare class CanvasFrameManager {
 
     draw(
         frameName: string | number,
-        callback?: CanvasFrameManager.DrawFrameCallback,
+        callback: CanvasFrameManager.DrawFrameCallback,
         scope?: object
     ): this;
 

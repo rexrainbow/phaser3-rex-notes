@@ -106,12 +106,10 @@ class CanvasFrameManager {
         context.translate(tl.x, tl.y);
         context.clearRect(0, 0, frameSize.width, frameSize.height);
 
-        if (callback) {
-            if (scope) {
-                callback.call(scope, this.canvas, context, frameSize);
-            } else {
-                callback(this.canvas, context, frameSize);
-            }
+        if (scope) {
+            callback.call(scope, this.canvas, context, frameSize);
+        } else {
+            callback(this.canvas, context, frameSize);
         }
         // frameSize might be changed
 
