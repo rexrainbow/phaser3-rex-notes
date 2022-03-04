@@ -106,10 +106,12 @@ class CanvasFrameManager {
         context.translate(tl.x, tl.y);
         context.clearRect(0, 0, frameSize.width, frameSize.height);
 
-        if (scope) {
-            callback.call(scope, this.canvas, context, frameSize);
-        } else {
-            callback(this.canvas, context, frameSize);
+        if (callback) {
+            if (scope) {
+                callback.call(scope, this.canvas, context, frameSize);
+            } else {
+                callback(this.canvas, context, frameSize);
+            }
         }
         // frameSize might be changed
 
@@ -130,11 +132,36 @@ class CanvasFrameManager {
 
         var srcWidth = srcCanvas.width,
             srcHeight = srcCanvas.height;
+        var dWidth, dHeight;
+        if ((srcWidth <= this.cellWidth) && (srcHeight <= this.cellHeight)) {
+            dWidth = srcWidth;
+            dHeight = srcHeight;
+        } else {
+            // Scale down and keep ratio
+            var scale = Math.max((srcWidth / this.cellWidth), (srcHeight / this.cellHeight));
+            dWidth = srcWidth / scale;
+            dHeight = srcHeight / scale;
+        }
         this.draw(frameName, function (canvas, context, frameSize) {
-            context.drawImage(srcCanvas, 0, 0, srcWidth, srcHeight);
+            context.drawImage(srcCanvas, 0, 0, srcWidth, srcHeight, 0, 0, dWidth, dHeight);
 
-            frameSize.width = srcWidth;
-            frameSize.height = srcHeight;
+            frameSize.width = dWidth;
+            frameSize.height = dHeight;
+        })
+
+        return this;
+    }
+
+    addEmptyFrame(frameName, width, height) {
+        if (width === undefined) {
+            width = this.cellWidth;
+        }
+        if (height === undefined) {
+            height = this.cellHeight;
+        }
+        this.draw(frameName, function (canvas, context, frameSize) {
+            frameSize.width = width;
+            frameSize.height = height;
         })
 
         return this;

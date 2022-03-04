@@ -54,7 +54,7 @@ declare class CanvasFrameManager {
 
     draw(
         frameName: string | number,
-        callback: CanvasFrameManager.DrawFrameCallback,
+        callback?: CanvasFrameManager.DrawFrameCallback,
         scope?: object
     ): this;
 
@@ -63,9 +63,19 @@ declare class CanvasFrameManager {
         gameObject: Phaser.GameObjects.GameObject
     ): this;
 
+    addEmptyFrame(
+        frameName: string | number,
+        width?: number,
+        height?: number
+    ): this;
+
     updateTexture(): this;
 
     remove(
         frameName: string | number
     ): this;
+
+    hasFrameName(
+        frameName: string | number
+    ): boolean;
 }
