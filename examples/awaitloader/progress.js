@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import AwaitLoaderPlugin from '../../plugins/awaitloader-plugin.js';
+import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,18 +14,22 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, 'Preload\n');
 
         var scene = this;
-        this.load.rexAwait(function (successCallback, failureCallback) {
-            scene.load.on('progress', function (progress) {
-                var loader = scene.load;
+        var WaitEvent = this.plugins.get('rexEventPromise').waitEvent;
+        this.load.rexAwait(async function (successCallback, failureCallback) {
+            var loader = scene.load;
+            var myprogress = 0;
+            while (myprogress < 1) {
+                await WaitEvent(loader, 'progress');
+
                 var total = loader.totalToLoad - 1;
                 var remainder = loader.list.size + loader.inflight.size - 1;
-                var myProgress = 1 - (remainder / total);
-                scene.print.text += `${Math.floor(progress * 100)}% vs ${Math.floor(myProgress * 100)}%\n`;
-                if (myProgress === 1) {
-                    scene.print.text += 'Complete\n';
-                    successCallback();
-                }
-            });
+                myprogress = 1 - (remainder / total);
+
+                scene.print.text += `${Math.floor(loader.progress * 100)}% vs ${Math.floor(myprogress * 100)}%\n`;
+            }
+
+            scene.print.text += 'Complete\n';
+            successCallback();
         });
 
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
@@ -50,11 +55,18 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexAwaitLoader',
-            plugin: AwaitLoaderPlugin,
-            start: true
-        }]
+        global: [
+            {
+                key: 'rexAwaitLoader',
+                plugin: AwaitLoaderPlugin,
+                start: true
+            },
+            {
+                key: 'rexEventPromise',
+                plugin: EventPromisePlugin,
+                start: true
+            }
+        ]
     }
 };
 
