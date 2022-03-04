@@ -141,7 +141,7 @@ class CanvasFrameManager {
             dHeight = srcHeight / scale;
         }
         this.draw(frameName, function (canvas, context, frameSize) {
-            context.drawImage(srcCanvas, 0, 0, srcWidth, srcHeight, 0, 0, dWidth, dHeight);
+            context.drawImage(srcCanvas, 0, 0, dWidth, dHeight);
 
             frameSize.width = dWidth;
             frameSize.height = dHeight;
