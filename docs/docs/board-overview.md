@@ -93,7 +93,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 ### Shapes
 
 - [Shape](board-shape.md)
-- [Tile texture](board-texture.md)
+- [Tile texture](board-textures.md)
 
 ### Behaviors
 

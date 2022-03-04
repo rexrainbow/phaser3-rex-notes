@@ -10,14 +10,14 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/texture/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/canvasframemanager/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
     
     
       
-        <title>Texture - Notes of Phaser 3</title>
+        <title>Canvas frame manager - Notes of Phaser 3</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Texture
+              Canvas frame manager
             
           </span>
         </div>
@@ -665,14 +665,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
       
       
       
@@ -965,187 +963,6 @@
       <a href="../shader/" class="md-nav__link">
         Shader
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Texture
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Texture
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#image-texture" class="md-nav__link">
-    Image texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-pixel" class="md-nav__link">
-    Get pixel
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#generate-texture-from-array" class="md-nav__link">
-    Generate texture from array
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-key" class="md-nav__link">
-    Has key
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-texture" class="md-nav__link">
-    Remove texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-base64" class="md-nav__link">
-    Get base64
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture" class="md-nav__link">
-    Texture
-  </a>
-  
-    <nav class="md-nav" aria-label="Texture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-texture" class="md-nav__link">
-    Get texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-frame" class="md-nav__link">
-    Has frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-frame" class="md-nav__link">
-    Add frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-frame" class="md-nav__link">
-    Remove frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#default-textures" class="md-nav__link">
-    Default textures
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#frame-object" class="md-nav__link">
-    Frame object
-  </a>
-  
-    <nav class="md-nav" aria-label="Frame object">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-frame" class="md-nav__link">
-    Get frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2167,20 +1984,6 @@
           
         </ul>
       </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../canvas-texture/" class="md-nav__link">
-        Canvas texture
-      </a>
     </li>
   
 
@@ -3275,23 +3078,260 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14" type="checkbox" id="__nav_4_14" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_14" type="checkbox" id="__nav_4_14" checked>
       
       
       
       
         <label class="md-nav__link" for="__nav_4_14">
+          Textures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Textures" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_14">
+          <span class="md-nav__icon md-icon"></span>
+          Textures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../textures/" class="md-nav__link">
+        Textures
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../canvas-texture/" class="md-nav__link">
+        Canvas texture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Canvas frame manager
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Canvas frame manager
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-frame" class="md-nav__link">
+    Add frame
+  </a>
+  
+    <nav class="md-nav" aria-label="Add frame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-game-object" class="md-nav__link">
+    From game object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-drawing" class="md-nav__link">
+    Custom drawing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-frame" class="md-nav__link">
+    Empty frame
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-texture" class="md-nav__link">
+    Update texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-frame" class="md-nav__link">
+    Remove frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-to-bitmapfont" class="md-nav__link">
+    Export to bitmapfont
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy-instance" class="md-nav__link">
+    Destroy instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_15" type="checkbox" id="__nav_4_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_15">
           Display
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Display" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_14">
+        <label class="md-nav__title" for="__nav_4_15">
           <span class="md-nav__icon md-icon"></span>
           Display
         </label>
@@ -7833,6 +7873,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -7841,65 +7888,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#image-texture" class="md-nav__link">
-    Image texture
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-pixel" class="md-nav__link">
-    Get pixel
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#generate-texture-from-array" class="md-nav__link">
-    Generate texture from array
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-key" class="md-nav__link">
-    Has key
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-texture" class="md-nav__link">
-    Remove texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-base64" class="md-nav__link">
-    Get base64
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture" class="md-nav__link">
-    Texture
-  </a>
-  
-    <nav class="md-nav" aria-label="Texture">
+    <nav class="md-nav" aria-label="Install plugin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-texture" class="md-nav__link">
-    Get texture
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#has-frame" class="md-nav__link">
-    Has frame
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
@@ -7907,6 +7931,40 @@
           <li class="md-nav__item">
   <a href="#add-frame" class="md-nav__link">
     Add frame
+  </a>
+  
+    <nav class="md-nav" aria-label="Add frame">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-game-object" class="md-nav__link">
+    From game object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-drawing" class="md-nav__link">
+    Custom drawing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-frame" class="md-nav__link">
+    Empty frame
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-texture" class="md-nav__link">
+    Update texture
   </a>
   
 </li>
@@ -7919,41 +7977,16 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#default-textures" class="md-nav__link">
-    Default textures
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#frame-object" class="md-nav__link">
-    Frame object
-  </a>
-  
-    <nav class="md-nav" aria-label="Frame object">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-frame" class="md-nav__link">
-    Get frame
+  <a href="#export-to-bitmapfont" class="md-nav__link">
+    Export to bitmapfont
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#destroy-instance" class="md-nav__link">
+    Destroy instance
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -7974,119 +8007,160 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/texture.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/canvasframemanager.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-  <h1>Texture</h1>
+  <h1>Canvas frame manager</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Textures cache, built-in object of phaser.</p>
+<p>Generate bitmapfont from <a href="../text/">text game object</a>, or <a href="../bbcodetext/">bbcode text game object</a>.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Member of scene</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/PoOXdwE">Paste text</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="image-texture">Image texture<a class="headerlink" href="#image-texture" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasframemanager">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Load image texture
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</code></pre></div>
-    Reference: <a href="../loader/#image">Loader</a></li>
-<li>Load image texture via base64 string
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addBase64</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcanvasframemanagerplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcanvasframemanagerplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Get image texture
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getSourceImage</span><span class="p">();</span>
-<span class="c1">// var width = image.width;</span>
-<span class="c1">// var height = image.height;</span>
+<li>Add canvas-frame-manager object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasFrames</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcanvasframemanagerplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="get-pixel">Get pixel<a class="headerlink" href="#get-pixel" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var color = scene.textures.getPixel(x, y, key, frame);</span>
-</code></pre></div>
-<p>Properties of <code>color</code></p>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>r</code> : 0 ~ 255</li>
-<li><code>g</code> : 0 ~ 255</li>
-<li><code>b</code> : 0 ~ 255</li>
-<li><code>a</code> : 0 ~ 255</li>
-<li><code>color</code> : <a href="../color/">color</a> integer</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getPixelAlpha</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var alpha = scene.textures.getPixelAlpha(x, y, key, frame);</span>
-</code></pre></div>
-<p>alpha : 0 ~ 255</p>
-<p>Return <code>null</code> if the coordinates were out of bounds.</p>
-<h3 id="generate-texture-from-array">Generate texture from array<a class="headerlink" href="#generate-texture-from-array" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span>
-    <span class="c1">// 3x3:</span>
-    <span class="c1">// [ &#39;...&#39;,</span>
-    <span class="c1">//   &#39;...&#39;,</span>
-    <span class="c1">//   &#39;...&#39; ]</span>
-    <span class="nx">pixelWidth</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>    <span class="c1">// pixel width of each data</span>
-    <span class="nx">pixelHeight</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>   <span class="c1">// pixel height of each data</span>
-    <span class="nx">preRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// callback, function(canvas, ctx) {}</span>
-    <span class="nx">postRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback, function(canvas, ctx) {}</span>
-
-    <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// create a canvas if null</span>
-    <span class="nx">resizeCanvas</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">clearCanvas</span><span class="o">:</span> <span class="kc">true</span>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">CanvasFrameManagerPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/canvasframemanager-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CanvasFrameManagerPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="has-key">Has key<a class="headerlink" href="#has-key" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="remove-texture">Remove texture<a class="headerlink" href="#remove-texture" title="Permanent link">&para;</a></h3>
-<p>Remove texture stored in texture cache.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="get-base64">Get base64<a class="headerlink" href="#get-base64" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getBase64</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>  <span class="c1">// type= &#39;image/png&#39;, encoderOptions= 0.92</span>
-<span class="c1">// var s = scene.textures.getBase64(key, frame, type, encoderOptions);</span>
-</code></pre></div>
-<h3 id="texture">Texture<a class="headerlink" href="#texture" title="Permanent link">&para;</a></h3>
-<h4 id="get-texture">Get texture<a class="headerlink" href="#get-texture" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-<h4 id="has-frame">Has frame<a class="headerlink" href="#has-frame" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasFrame</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
-</code></pre></div>
-<h4 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span> <span class="nx">sourceIndex</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add canvas-data object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasFrames</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">CanvasFrameManager</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/canvasframemanager.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Add canvas-data object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasFrames</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">CanvasFrameManager</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasFrames</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">4096</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">4096</span><span class="p">,</span>
+    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">64</span><span class="p">,</span>
+    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">64</span><span class="p">,</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>key</code> : Texture key.</li>
-<li><code>frameName</code> : The name of this Frame. The name is unique within the Texture.</li>
-<li><code>sourceIndex</code> : The index of the TextureSource that this Frame is a part of.</li>
-<li><code>x</code>, <code>y</code> : The x/y coordinate of the top-left of this Frame.</li>
-<li><code>width</code>, <code>height</code> : The width/height of this Frame.</li>
+<li><code>key</code> : Texture key in <a href="../textures/">texture manager</a></li>
+<li><code>width</code>, <code>height</code> : Size of canvas.</li>
+<li><code>cellWidth</code>, <code>cellHeight</code> : Maximum frame size.</li>
+<li><code>fillColor</code> : Fill an initial color, in css color string.<ul>
+<li><code>undefined</code> : Don't fill color.</li>
 </ul>
-<h4 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">removed</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasFrames</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasFrameManager&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">cellWidth</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="default-textures">Default textures<a class="headerlink" href="#default-textures" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Default : <code>'__DEFAULT'</code></li>
-<li>Missing : <code>'__MISSING'</code></li>
-<li>4x4 white : <code>'__WHITE'</code></li>
-</ul>
-<h3 id="frame-object">Frame object<a class="headerlink" href="#frame-object" title="Permanent link">&para;</a></h3>
-<h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+<p>Steps of generating bitmapfont :</p>
+<ol>
+<li>Add frames : 
+   <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Update texture
+   <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Export frame data to bitmapfont
+   <div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">addToBitmapFont</span><span class="p">();</span>
+</code></pre></div></li>
+</ol>
+<h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
+<h4 id="from-game-object">From game object<a class="headerlink" href="#from-game-object" title="Permanent link">&para;</a></h4>
+<p>After rendering content on <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, <a href="../canvas/">canvas</a></p>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">paste</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>frame.source.image</code> : Image of texture source.</li>
-<li><code>frame.cutX</code> : X position within the source image to cut from.</li>
-<li><code>frame.cutY</code> : Y position within the source image to cut from.</li>
-<li><code>frame.cutWidth</code> : The width of the area in the source image to cut.</li>
-<li><code>frame.cutHeight</code> : The height of the area in the source image to cut.</li>
+<li><code>frameName</code> : Frame name.</li>
+<li><code>gameObject</code> : <a href="../text/">text</a>, <a href="../bbcodetext/">bbcode text</a>, or <a href="../canvas/">canvas</a>.</li>
 </ul>
+<h4 id="custom-drawing">Custom drawing<a class="headerlink" href="#custom-drawing" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>frameName</code> : Frame name.</li>
+<li><code>callback</code> : 
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">frameSize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The maximum frame size</span>
+    <span class="kd">var</span> <span class="nx">cellWidth</span> <span class="o">=</span> <span class="nx">frameSize</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">cellHeight</span> <span class="o">=</span> <span class="nx">frameSize</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+    <span class="c1">// Draw content in area of (0, 0) - (cellWidth, cellHeight)</span>
+
+    <span class="c1">// Update frame size</span>
+    <span class="c1">// frameSize.width = ...</span>
+    <span class="c1">// frameSize.height = ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h4 id="empty-frame">Empty frame<a class="headerlink" href="#empty-frame" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">addEmptyFrame</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+<span class="c1">// canvasFrames.addEmptyFrame(frameName, width, height);</span>
+</code></pre></div>
+<ul>
+<li><code>frameName</code> : Frame name.</li>
+<li><code>width</code> : Frame width, default value is <code>cellWidth</code></li>
+<li><code>height</code> : Frame height, default value is <code>cellHeight</code></li>
+</ul>
+<h3 id="update-texture">Update texture<a class="headerlink" href="#update-texture" title="Permanent link">&para;</a></h3>
+<p>Update texture after adding frames.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>frameName</code> : Frame name.</li>
+</ul>
+<h3 id="export-to-bitmapfont">Export to bitmapfont<a class="headerlink" href="#export-to-bitmapfont" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">addToBitmapFont</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="destroy-instance">Destroy instance<a class="headerlink" href="#destroy-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">canvasFrames</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</code></pre></div>
 
               
             </article>
@@ -8100,7 +8174,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../shader/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Shader" rel="prev">
+        <a href="../canvas-texture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Canvas texture" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -8109,20 +8183,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Shader
+              Canvas texture
             </div>
           </div>
         </a>
       
       
         
-        <a href="../mesh/" class="md-footer__link md-footer__link--next" aria-label="Next: Mesh" rel="next">
+        <a href="../mask/" class="md-footer__link md-footer__link--next" aria-label="Next: Mask" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Mesh
+              Mask
             </div>
           </div>
           <div class="md-footer__button md-icon">

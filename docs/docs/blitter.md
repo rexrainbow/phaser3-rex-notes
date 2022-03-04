@@ -130,7 +130,7 @@ A Bob has a position, alpha value and a frame from a texture that it uses to ren
     ```javascript
     var frame = bob.frame;
     ```
-    - `frame` : [Frame object](texture.md#frame-object).
+    - `frame` : [Frame object](textures.md#frame-object).
 - Set
     ```javascript
     bob.setFrame(frame);

@@ -64,7 +64,7 @@ It supports authentication using passwords, phone numbers, popular federated ide
 
 ### Upload image
 
-1. Get image from [image texture](texture.md#image-texture)
+1. Get image from [image texture](textures.md#image-texture)
     ```javascript
     var image = scene.textures.get(key).getSourceImage();
     ```

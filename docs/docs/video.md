@@ -233,7 +233,7 @@ var duration = video.getDuration();  // time in seconds
     - `x`, `y` : The horizontal/vertical location of the top-left of the area to grab from.
     - `srcWidth`, `srcHeight` : The width/height of area to grab from the video.
     - `destWidth`, `destHeight` : The destination width/height of the grab, allowing you to resize it.
-    - `canvasTexture` : [Canvas texture object](canvas-texture.md).
+    - `canvasTexture` : [Canvas texture object](canvas-textures.md).
         - Get key of texture
             ```javascript
             var key = canvasTexture.key;

@@ -40,8 +40,7 @@ nav:
             - Tile sprite: tilesprite.md
             - Nine patch: ninepatch.md
             - Line: line.md
-        - Shader: shader.md
-        - Texture: texture.md
+        - Shader: shader.md        
     - Mesh:
         - Mesh: mesh.md
         - Perspective:
@@ -100,7 +99,6 @@ nav:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md
             - Circular progres: canvas-circularprogress.md
-        - Canvas texture: canvas-texture.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:
@@ -159,6 +157,10 @@ nav:
                 - Game object: matterjs-gameobject.md
                 - Wrap: matterjs-wrap.md
                 - Attractor: matterjs-attractor.md
+    - Textures:
+        - Textures: textures.md
+        - Canvas texture: canvas-texture.md 
+        - Canvas frame manager: canvasframemanager.md
     - Display:
         - Mask: mask.md
 - Input:

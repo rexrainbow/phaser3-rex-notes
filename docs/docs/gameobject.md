@@ -476,7 +476,7 @@ See [data manager](datamanager.md)
     gameObject.setTexture(texture);
     // gameObject.setTexture(texture, frame);
     ```
-    - `texture` : [Texture object](texture.md#get-texture), or [canvas texture object](canvas-texture.md)
+    - `texture` : [Texture object](textures.md#get-texture), or [canvas texture object](canvas-textures.md)
 - Set frame
     ```javascript
     gameObject.setFrame(frame);
@@ -495,7 +495,7 @@ See [data manager](datamanager.md)
         gameObject.setCrop();
         // gameObject.isCropped = false;
         ```
-- Get texture, [frame](texture.md#frame-object).
+- Get texture, [frame](textures.md#frame-object).
     ```javascript
     var texture = gameObject.texture;
     var frame = gameObject.frame;
