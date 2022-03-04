@@ -62,8 +62,8 @@ Drawing text by texture, built-in game object of phaser.
 ### Add bitmap text object
 
 ```javascript
-var txt = scene.bitmapText(x, y, key, text);
-// var txt = scene.bitmapText(x, y, key, text, size, align);
+var txt = scene.add.bitmapText(x, y, key, text);
+// var txt = scene.add.bitmapText(x, y, key, text, size, align);
 ```
 
 - `size` : The size of the font

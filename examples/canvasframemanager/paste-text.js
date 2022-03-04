@@ -19,13 +19,15 @@ class Demo extends Phaser.Scene {
                 cellWidth: 64, cellHeight: 64,
                 fillColor: '#666666'
             });
+
+        // Show canvas texture
         this.add.image(800, 600, 'test').setOrigin(1).setScale(0.5);
 
+        // A text object for drawing character
         var txt = this.make.text({
             add: false,
             style: {
                 align: 'center',
-                backgroundColor: '#333333',
                 fontSize: 64,
                 fixedWidth: 64,
                 fixedHeight: 64,
@@ -34,6 +36,7 @@ class Demo extends Phaser.Scene {
             }
         });
 
+        // Draw character on text object then paste to canvas texture
         var characters = '兒童樂園';
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
@@ -42,10 +45,18 @@ class Demo extends Phaser.Scene {
         }
         canvasFrames.updateTexture();
 
+        // Show frame by Image
         for (var i = 0, cnt = characters.length; i < cnt; i++) {
             var c = characters.charAt(i);
             this.add.image(50 + i * 64, 50, 'test', c);
         }
+
+        // Add frames to bitmapfont, for bitmaptext
+        canvasFrames.addToBitmapFont();
+        this.add.bitmapText(50, 100, 'test', '兒樂童園')
+            .setScale(0.5)
+            .setCharacterTint(0, 1, false, 0xff0000)
+            .setCharacterTint(-1, 1, false, 0x0000ff)
     }
 
     update() {

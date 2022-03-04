@@ -107,6 +107,147 @@
     };
   }
 
+  var Draw = function Draw(frameName, callback, scope) {
+    var index = this.getFrameIndex(frameName);
+
+    if (index === -1) {
+      index = this.getFrameIndex(undefined);
+    }
+
+    if (index === -1) {
+      console.warn('Does not have free space.');
+      return this;
+    }
+
+    var tl = this.getTopLeftPosition(index);
+    var frameSize = {
+      width: this.cellWidth,
+      height: this.cellHeight
+    };
+    var context = this.context;
+    context.save();
+    context.translate(tl.x, tl.y);
+    context.clearRect(0, 0, frameSize.width, frameSize.height);
+
+    if (scope) {
+      callback.call(scope, this.canvas, context, frameSize);
+    } else {
+      callback(this.canvas, context, frameSize);
+    } // frameSize might be changed
+
+
+    context.restore();
+    this.texture.add(frameName, 0, tl.x, tl.y, frameSize.width, frameSize.height);
+    this.addFrameName(index, frameName);
+    return this;
+  };
+
+  var Paste = function Paste(frameName, gameObject) {
+    var srcCanvas = gameObject.canvas;
+
+    if (!srcCanvas) {
+      console.warn("Can't get canvas of game object.");
+      return this;
+    }
+
+    var srcWidth = srcCanvas.width,
+        srcHeight = srcCanvas.height;
+    var dWidth, dHeight;
+
+    if (srcWidth <= this.cellWidth && srcHeight <= this.cellHeight) {
+      dWidth = srcWidth;
+      dHeight = srcHeight;
+    } else {
+      // Scale down and keep ratio
+      var scale = Math.max(srcWidth / this.cellWidth, srcHeight / this.cellHeight);
+      dWidth = srcWidth / scale;
+      dHeight = srcHeight / scale;
+    }
+
+    this.draw(frameName, function (canvas, context, frameSize) {
+      context.drawImage(srcCanvas, 0, 0, dWidth, dHeight);
+      frameSize.width = dWidth;
+      frameSize.height = dHeight;
+    });
+    return this;
+  };
+
+  var AddEmptyFrame = function AddEmptyFrame(frameName, width, height) {
+    if (width === undefined) {
+      width = this.cellWidth;
+    }
+
+    if (height === undefined) {
+      height = this.cellHeight;
+    }
+
+    this.draw(frameName, function (canvas, context, frameSize) {
+      frameSize.width = width;
+      frameSize.height = height;
+    });
+    return this;
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+  var AddToBitmapFont = function AddToBitmapFont(config) {
+    var lineSpacing = GetValue$1(config, 'lineSpacing', 0);
+    var textureKey = this.texture.key;
+    var letters = this.frameNames;
+    var data = {
+      retroFont: true,
+      font: textureKey,
+      size: this.cellWidth,
+      lineHeight: this.cellHeight + lineSpacing,
+      chars: {}
+    };
+
+    for (var i = 0, cnt = letters.length; i < cnt; i++) {
+      var _char = letters[i];
+
+      if (_char === undefined) {
+        continue;
+      }
+
+      var frame = this.texture.get(_char);
+      var x = frame.cutX,
+          y = frame.cutY,
+          width = frame.cutWidth,
+          height = frame.cutHeight;
+      data.chars[_char.charCodeAt(0)] = {
+        x: x,
+        y: y,
+        width: width,
+        height: height,
+        centerX: x + width / 2,
+        centerY: y + height / 2,
+        xOffset: 0,
+        yOffset: 0,
+        xAdvance: width,
+        data: {},
+        kerning: {},
+        u0: frame.u0,
+        v0: frame.v0,
+        u1: frame.u1,
+        v1: frame.v1
+      };
+    }
+
+    this.scene.cache.bitmapFont.add(textureKey, {
+      data: data,
+      texture: textureKey,
+      frame: null
+    });
+    return this;
+  };
+
+  var methods = {
+    draw: Draw,
+    paste: Paste,
+    addEmptyFrame: AddEmptyFrame,
+    addToBitmapFont: AddToBitmapFont
+  };
+
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -140,6 +281,7 @@
         cellHeight = 64;
       }
 
+      this.scene = scene;
       this.texture = scene.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
       this.context = this.texture.getContext();
@@ -166,6 +308,7 @@
     _createClass(CanvasFrameManager, [{
       key: "destroy",
       value: function destroy() {
+        this.scene = undefined;
         this.texture = undefined;
         this.canvas = undefined;
         this.context = undefined;
@@ -206,61 +349,6 @@
         return out;
       }
     }, {
-      key: "draw",
-      value: function draw(frameName, callback, scope) {
-        var index = this.getFrameIndex(frameName);
-
-        if (index === -1) {
-          index = this.getFrameIndex(undefined);
-        }
-
-        if (index === -1) {
-          console.warn('Does not have free space.');
-          return this;
-        }
-
-        var tl = this.getTopLeftPosition(index);
-        var frameSize = {
-          width: this.cellWidth,
-          height: this.cellHeight
-        };
-        var context = this.context;
-        context.save();
-        context.translate(tl.x, tl.y);
-        context.clearRect(0, 0, frameSize.width, frameSize.height);
-
-        if (scope) {
-          callback.call(scope, this.canvas, context, frameSize);
-        } else {
-          callback(this.canvas, context, frameSize);
-        } // frameSize might be changed
-
-
-        context.restore();
-        this.texture.add(frameName, 0, tl.x, tl.y, frameSize.width, frameSize.height);
-        this.addFrameName(index, frameName);
-        return this;
-      }
-    }, {
-      key: "paste",
-      value: function paste(frameName, gameObject) {
-        var srcCanvas = gameObject.canvas;
-
-        if (!srcCanvas) {
-          console.warn("Can't get canvas of game object.");
-          return this;
-        }
-
-        var srcWidth = srcCanvas.width,
-            srcHeight = srcCanvas.height;
-        this.draw(frameName, function (canvas, context, frameSize) {
-          context.drawImage(srcCanvas, 0, 0, srcWidth, srcHeight);
-          frameSize.width = srcWidth;
-          frameSize.height = srcHeight;
-        });
-        return this;
-      }
-    }, {
       key: "updateTexture",
       value: function updateTexture() {
         this.texture.refresh();
@@ -284,6 +372,8 @@
 
     return CanvasFrameManager;
   }();
+
+  Object.assign(CanvasFrameManager.prototype, methods);
 
   var CanvasFrameManagerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CanvasFrameManagerPlugin, _Phaser$Plugins$BaseP);

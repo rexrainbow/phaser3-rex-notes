@@ -1,3 +1,5 @@
+import Methods from "./Methods";
+
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -26,6 +28,7 @@ class CanvasFrameManager {
             cellHeight = 64;
         }
 
+        this.scene = scene;
         this.texture = scene.textures.createCanvas(key, width, height);
         this.canvas = this.texture.getCanvas();
         this.context = this.texture.getContext();
@@ -50,6 +53,7 @@ class CanvasFrameManager {
     }
 
     destroy() {
+        this.scene = undefined;
         this.texture = undefined;
         this.canvas = undefined;
         this.context = undefined;
@@ -85,86 +89,6 @@ class CanvasFrameManager {
         return out;
     }
 
-    draw(frameName, callback, scope) {
-        var index = this.getFrameIndex(frameName);
-        if (index === -1) {
-            index = this.getFrameIndex(undefined);
-        }
-        if (index === -1) {
-            console.warn('Does not have free space.');
-            return this;
-        }
-
-        var tl = this.getTopLeftPosition(index);
-        var frameSize = {
-            width: this.cellWidth,
-            height: this.cellHeight
-        }
-
-        var context = this.context;
-        context.save();
-        context.translate(tl.x, tl.y);
-        context.clearRect(0, 0, frameSize.width, frameSize.height);
-
-        if (scope) {
-            callback.call(scope, this.canvas, context, frameSize);
-        } else {
-            callback(this.canvas, context, frameSize);
-        }
-        // frameSize might be changed
-
-        context.restore();
-
-        this.texture.add(frameName, 0, tl.x, tl.y, frameSize.width, frameSize.height);
-        this.addFrameName(index, frameName);
-
-        return this;
-    }
-
-    paste(frameName, gameObject) {
-        var srcCanvas = gameObject.canvas;
-        if (!srcCanvas) {
-            console.warn(`Can't get canvas of game object.`);
-            return this;
-        }
-
-        var srcWidth = srcCanvas.width,
-            srcHeight = srcCanvas.height;
-        var dWidth, dHeight;
-        if ((srcWidth <= this.cellWidth) && (srcHeight <= this.cellHeight)) {
-            dWidth = srcWidth;
-            dHeight = srcHeight;
-        } else {
-            // Scale down and keep ratio
-            var scale = Math.max((srcWidth / this.cellWidth), (srcHeight / this.cellHeight));
-            dWidth = srcWidth / scale;
-            dHeight = srcHeight / scale;
-        }
-        this.draw(frameName, function (canvas, context, frameSize) {
-            context.drawImage(srcCanvas, 0, 0, dWidth, dHeight);
-
-            frameSize.width = dWidth;
-            frameSize.height = dHeight;
-        })
-
-        return this;
-    }
-
-    addEmptyFrame(frameName, width, height) {
-        if (width === undefined) {
-            width = this.cellWidth;
-        }
-        if (height === undefined) {
-            height = this.cellHeight;
-        }
-        this.draw(frameName, function (canvas, context, frameSize) {
-            frameSize.width = width;
-            frameSize.height = height;
-        })
-
-        return this;
-    }
-
     updateTexture() {
         this.texture.refresh();
         return this;
@@ -184,5 +108,10 @@ class CanvasFrameManager {
         return this;
     }
 }
+
+Object.assign(
+    CanvasFrameManager.prototype,
+    Methods
+);
 
 export default CanvasFrameManager;
