@@ -43,7 +43,7 @@ var AddToBitmapFont = function (config) {
         }
     }
 
-    this.scene.cache.bitmapFont.add(
+    this.bitmapFontCache.add(
         textureKey,
         {
             data: data,

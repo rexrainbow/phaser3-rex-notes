@@ -233,7 +233,7 @@
       };
     }
 
-    this.scene.cache.bitmapFont.add(textureKey, {
+    this.bitmapFontCache.add(textureKey, {
       data: data,
       texture: textureKey,
       frame: null
@@ -281,10 +281,10 @@
         cellHeight = 64;
       }
 
-      this.scene = scene;
       this.texture = scene.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
       this.context = this.texture.getContext();
+      this.bitmapFontCache = scene.cache.bitmapFont;
 
       if (fillColor !== undefined) {
         var context = this.context;
@@ -308,11 +308,11 @@
     _createClass(CanvasFrameManager, [{
       key: "destroy",
       value: function destroy() {
-        this.scene = undefined;
         this.texture = undefined;
         this.canvas = undefined;
         this.context = undefined;
         this.frameNames = undefined;
+        this.bitmapFontCache = undefined;
       }
     }, {
       key: "getFrameIndex",

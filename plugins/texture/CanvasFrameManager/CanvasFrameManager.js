@@ -28,10 +28,10 @@ class CanvasFrameManager {
             cellHeight = 64;
         }
 
-        this.scene = scene;
         this.texture = scene.textures.createCanvas(key, width, height);
         this.canvas = this.texture.getCanvas();
         this.context = this.texture.getContext();
+        this.bitmapFontCache = scene.cache.bitmapFont;
 
         if (fillColor !== undefined) {
             var context = this.context;
@@ -53,11 +53,11 @@ class CanvasFrameManager {
     }
 
     destroy() {
-        this.scene = undefined;
         this.texture = undefined;
         this.canvas = undefined;
         this.context = undefined;
         this.frameNames = undefined;
+        this.bitmapFontCache = undefined;
     }
 
     getFrameIndex(frameName) {
