@@ -86,8 +86,12 @@ class Scrollable extends Sizer {
         this.addChildrenMap('header', header);
         this.addChildrenMap('footer', footer);
 
-        // Necessary properties of child object
-        // child.t (RW), child.childOY (RW), child.topChildOY (R), child.bottomChildOY (R)
+        /* Necessary properties of child object
+        - child.t (RW), 
+        - child.childOY (RW)
+        - child.topChildOY (R)
+        - child.bottomChildOY (R)
+        */
     }
 
     runLayout(parent, newWidth, newHeight) {
