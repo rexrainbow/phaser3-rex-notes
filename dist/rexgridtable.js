@@ -10128,9 +10128,16 @@
 
       _this.addChildrenMap('header', header);
 
-      _this.addChildrenMap('footer', footer); // Necessary properties of child object
-      // child.t (RW), child.childOY (RW), child.topChildOY (R), child.bottomChildOY (R)
+      _this.addChildrenMap('footer', footer);
 
+      _this.runLayoutFlag = false;
+      /* Necessary properties of child object
+      - child.t (RW), 
+      - child.childOY (RW)
+      - child.topChildOY (R)
+      - child.bottomChildOY (R)
+      - child.childVisibleHeight (R)
+      */
 
       return _this;
     }
@@ -10145,7 +10152,13 @@
 
         _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
 
-        this.resizeController();
+        this.resizeController(); // Set `t` to 0 at first runLayout()
+
+        if (!this.runLayoutFlag) {
+          this.runLayoutFlag = true;
+          this.setT(0);
+        }
+
         return this;
       }
     }, {
@@ -10198,6 +10211,11 @@
       key: "bottomChildOY",
       get: function get() {
         return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
+      }
+    }, {
+      key: "childVisibleHeight",
+      get: function get() {
+        return this.childrenMap.child.childVisibleHeight;
       }
     }, {
       key: "isOverflow",
@@ -12200,6 +12218,11 @@
         return -this.tableVisibleHeight;
       }
     }, {
+      key: "childVisibleHeight",
+      get: function get() {
+        return this.instHeight;
+      }
+    }, {
       key: "leftTableOX",
       get: function get() {
         return 0;
@@ -12328,6 +12351,11 @@
     Object.defineProperty(table, 'bottomChildOY', {
       get: function get() {
         return table.bottomTableOY;
+      }
+    });
+    Object.defineProperty(table, 'childVisibleHeight', {
+      get: function get() {
+        return table.textObjectHeight;
       }
     });
   };

@@ -10128,9 +10128,16 @@
 
       _this.addChildrenMap('header', header);
 
-      _this.addChildrenMap('footer', footer); // Necessary properties of child object
-      // child.t (RW), child.childOY (RW), child.topChildOY (R), child.bottomChildOY (R)
+      _this.addChildrenMap('footer', footer);
 
+      _this.runLayoutFlag = false;
+      /* Necessary properties of child object
+      - child.t (RW), 
+      - child.childOY (RW)
+      - child.topChildOY (R)
+      - child.bottomChildOY (R)
+      - child.childVisibleHeight (R)
+      */
 
       return _this;
     }
@@ -10145,7 +10152,13 @@
 
         _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
 
-        this.resizeController();
+        this.resizeController(); // Set `t` to 0 at first runLayout()
+
+        if (!this.runLayoutFlag) {
+          this.runLayoutFlag = true;
+          this.setT(0);
+        }
+
         return this;
       }
     }, {
@@ -10198,6 +10211,11 @@
       key: "bottomChildOY",
       get: function get() {
         return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
+      }
+    }, {
+      key: "childVisibleHeight",
+      get: function get() {
+        return this.childrenMap.child.childVisibleHeight;
       }
     }, {
       key: "isOverflow",
@@ -10716,12 +10734,12 @@
   var ResizeText = function ResizeText(textObject, width, height) {
     height += this.textLineHeight + this.textLineSpacing; // Add 1 line
 
-    if (this.textObjectWidth === width && this.textObjectHeight === height) {
+    if (this.textObjectWidth === width && this._textObjectRealHeight === height) {
       return;
     }
 
     this.textObjectWidth = width;
-    this.textObjectHeight = height;
+    this._textObjectRealHeight = height;
 
     switch (this.textObjectType) {
       case TextType:
@@ -10970,7 +10988,7 @@
       key: "visibleLinesCount",
       get: function get() {
         if (this._visibleLinesCount === undefined) {
-          this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this.textObjectHeight));
+          this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
         }
 
         return this._visibleLinesCount;
@@ -10995,12 +11013,17 @@
         return this._textHeight;
       }
     }, {
+      key: "textObjectHeight",
+      get: function get() {
+        return this._textObjectRealHeight - (this.textLineHeight + this.textLineSpacing); // Remove 1 text line
+      }
+    }, {
       key: "textVisibleHeight",
       get: function get() {
         if (this._textVisibleHeight === undefined) {
           var h;
           var textHeight = this.textHeight;
-          var textObjectHeight = this.textObjectHeight - this.textLineHeight - this.textLineSpacing; // // Remove 1 text line
+          var textObjectHeight = this.textObjectHeight;
 
           if (textHeight > textObjectHeight) {
             h = textHeight - textObjectHeight;
@@ -11128,6 +11151,11 @@
     Object.defineProperty(textBlock, 'bottomChildOY', {
       get: function get() {
         return textBlock.bottomTextOY;
+      }
+    });
+    Object.defineProperty(textBlock, 'childVisibleHeight', {
+      get: function get() {
+        return textBlock.textObjectHeight;
       }
     });
   };

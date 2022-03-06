@@ -10128,9 +10128,16 @@
 
       _this.addChildrenMap('header', header);
 
-      _this.addChildrenMap('footer', footer); // Necessary properties of child object
-      // child.t (RW), child.childOY (RW), child.topChildOY (R), child.bottomChildOY (R)
+      _this.addChildrenMap('footer', footer);
 
+      _this.runLayoutFlag = false;
+      /* Necessary properties of child object
+      - child.t (RW), 
+      - child.childOY (RW)
+      - child.topChildOY (R)
+      - child.bottomChildOY (R)
+      - child.childVisibleHeight (R)
+      */
 
       return _this;
     }
@@ -10145,7 +10152,13 @@
 
         _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
 
-        this.resizeController();
+        this.resizeController(); // Set `t` to 0 at first runLayout()
+
+        if (!this.runLayoutFlag) {
+          this.runLayoutFlag = true;
+          this.setT(0);
+        }
+
         return this;
       }
     }, {
@@ -10198,6 +10211,11 @@
       key: "bottomChildOY",
       get: function get() {
         return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
+      }
+    }, {
+      key: "childVisibleHeight",
+      get: function get() {
+        return this.childrenMap.child.childVisibleHeight;
       }
     }, {
       key: "isOverflow",
@@ -10995,14 +11013,19 @@
         return -this.visibleHeight;
       }
     }, {
+      key: "childVisibleHeight",
+      get: function get() {
+        return this.instHeight;
+      }
+    }, {
       key: "visibleHeight",
       get: function get() {
         var h;
         var childHeight = this.childHeight;
-        var instHeight = this.instHeight;
+        var childVisibleHeight = this.childVisibleHeight;
 
-        if (childHeight > instHeight) {
-          h = childHeight - instHeight;
+        if (childHeight > childVisibleHeight) {
+          h = childHeight - childVisibleHeight;
         } else {
           h = 0;
         }
@@ -11039,7 +11062,7 @@
         var childOYExeceedBottom = this.childOYExeceedBottom(oy);
 
         if (this.clampChildOY) {
-          if (this.instHeight > this.childHeight) {
+          if (this.childVisibleHeight > this.childHeight) {
             oy = 0;
           } else if (childOYExceedTop) {
             oy = topChildOY;

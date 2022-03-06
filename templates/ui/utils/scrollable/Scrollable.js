@@ -86,6 +86,8 @@ class Scrollable extends Sizer {
         this.addChildrenMap('header', header);
         this.addChildrenMap('footer', footer);
 
+        this.runLayoutFlag = false;
+
         /* Necessary properties of child object
         - child.t (RW), 
         - child.childOY (RW)
@@ -102,6 +104,13 @@ class Scrollable extends Sizer {
         }
         super.runLayout(parent, newWidth, newHeight);
         this.resizeController();
+
+        // Set `t` to 0 at first runLayout()
+        if (!this.runLayoutFlag) {
+            this.runLayoutFlag = true;
+            this.setT(0);
+        }
+
         return this;
     }
 
