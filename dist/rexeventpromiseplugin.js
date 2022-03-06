@@ -103,6 +103,18 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
+  var Delay = function Delay(s, result) {
+    if (s === undefined) {
+      s = 0;
+    }
+
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, s);
+    });
+  };
+
   var EventPromisePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(EventPromisePlugin, _Phaser$Plugins$BaseP);
 
@@ -119,7 +131,8 @@
 
   var methods = {
     waitEvent: WaitEvent,
-    waitComplete: WaitComplete
+    waitComplete: WaitComplete,
+    delay: Delay
   }; // mixin
 
   Object.assign(EventPromisePlugin.prototype, methods);

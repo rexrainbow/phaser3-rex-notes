@@ -225,7 +225,7 @@
     _createClass(AwaitLoaderPlugin, [{
       key: "addToScene",
       value: function addToScene(scene) {
-        scene.sys.load['rexAwait'] = loaderCallback;
+        scene.sys.load.rexAwait = loaderCallback;
       }
     }]);
 

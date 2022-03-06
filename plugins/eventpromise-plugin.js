@@ -1,4 +1,4 @@
-import { WaitEvent, WaitComplete } from './eventpromise.js'
+import { WaitEvent, WaitComplete, Delay } from './eventpromise.js'
 
 class EventPromisePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -9,7 +9,8 @@ class EventPromisePlugin extends Phaser.Plugins.BasePlugin {
 
 var methods = {
     waitEvent: WaitEvent,
-    waitComplete: WaitComplete
+    waitComplete: WaitComplete,
+    delay: Delay,
 }
 
 // mixin

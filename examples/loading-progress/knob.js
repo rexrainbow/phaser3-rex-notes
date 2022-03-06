@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import LoadingProgress from '../../templates/loading-progress/LoadingProgress.js';
+import LoadingProgressPlugin from '../../plugins/loadingprogress-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
 
     preload() {
         var ui = CreateKnob(this, 400, 300).layout();
-        LoadingProgress(ui, {
+        this.plugins.get('rexLoadingProgress').add(ui, {
             transitIn: function (gameObject) {
                 // Return a promise
                 return gameObject.popUpPromise(300);
@@ -84,6 +84,11 @@ var config = {
     },
     scene: Demo,
     plugins: {
+        global: [{
+            key: 'rexLoadingProgress',
+            plugin: LoadingProgressPlugin,
+            start: true
+        }],
         scene: [
             {
                 key: 'rexUI',

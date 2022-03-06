@@ -38850,11 +38850,7 @@
       key: "transitionIn",
       value: function transitionIn() {
         var duration = this.transitInTime;
-
-        if (this.transitInCallback) {
-          this.transitInCallback(this.parent, duration);
-        }
-
+        this.transitInCallback(this.parent, duration);
         var cover = this.cover;
 
         if (cover) {
@@ -38867,11 +38863,7 @@
       key: "transitionOut",
       value: function transitionOut() {
         var duration = this.transitOutTime;
-
-        if (this.transitOutCallback) {
-          this.transitOutCallback(this.parent, duration);
-        }
-
+        this.transitOutCallback(this.parent, duration);
         var cover = this.cover;
 
         if (cover) {
@@ -38953,6 +38945,10 @@
             break;
         }
 
+        if (callback == null) {
+          callback = NOOP;
+        }
+
         this.transitInCallback = callback; // callback = function(gameObject, duration) {}
 
         return this;
@@ -38972,6 +38968,10 @@
           case TransitionMode.fadeOut:
             callback = DefaultTransitCallbacks.fadeOut;
             break;
+        }
+
+        if (callback == null) {
+          callback = NOOP;
         }
 
         this.transitOutCallback = callback; // callback = function(gameObject, duration) {}

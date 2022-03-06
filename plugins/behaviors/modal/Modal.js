@@ -1,6 +1,7 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CreateCover from './CreateCover.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
+import NOOP from '../../utils/object/NOOP.js';
 import State from './State.js';
 import FadeIn from '../../fade-in.js';
 import FadeOutDestroy from '../../fade-out-destroy.js';
@@ -86,9 +87,7 @@ class Modal extends ComponentBase {
 
     transitionIn() {
         var duration = this.transitInTime;
-        if (this.transitInCallback) {
-            this.transitInCallback(this.parent, duration);
-        }
+        this.transitInCallback(this.parent, duration);
 
         var cover = this.cover;
         if (cover) {
@@ -100,9 +99,7 @@ class Modal extends ComponentBase {
 
     transitionOut() {
         var duration = this.transitOutTime;
-        if (this.transitOutCallback) {
-            this.transitOutCallback(this.parent, duration);
-        }
+        this.transitOutCallback(this.parent, duration);
 
         var cover = this.cover;
         if (cover) {
@@ -176,6 +173,10 @@ class Modal extends ComponentBase {
                 break;
         }
 
+        if (callback == null) {
+            callback = NOOP;
+        }
+
         this.transitInCallback = callback;
         // callback = function(gameObject, duration) {}
         return this;
@@ -193,6 +194,10 @@ class Modal extends ComponentBase {
             case TransitionMode.fadeOut:
                 callback = DefaultTransitCallbacks.fadeOut;
                 break;
+        }
+
+        if (callback == null) {
+            callback = NOOP;
         }
 
         this.transitOutCallback = callback;

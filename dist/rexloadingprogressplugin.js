@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexloadingprogress = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexloadingprogressplugin = factory());
 }(this, (function () { 'use strict';
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -243,20 +243,6 @@
     return this;
   };
 
-  Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
-
-  var GetProgress = function GetProgress(scene, execludeCount) {
-    if (execludeCount === undefined) {
-      execludeCount = 0;
-    }
-
-    var loader = scene.load;
-    var total = loader.totalToLoad - execludeCount;
-    var remainder = loader.list.size + loader.inflight.size - execludeCount;
-    var progress = 1 - remainder / total;
-    return progress;
-  };
-
   var WaitEvent = function WaitEvent(eventEmitter, eventName) {
     return new Promise(function (resolve, reject) {
       eventEmitter.once(eventName, function () {
@@ -276,8 +262,11 @@
     var TransitionOutCallback = GetValue(config, 'transitionOut', NOOP);
     var scene = gameObject.scene; // Register AwaitLoader
 
-    Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
-    scene.sys.load['rexAwait'] = loaderCallback; // Add await-task
+    if (!scene.sys.load.rexAwait) {
+      Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
+      scene.sys.load.rexAwait = loaderCallback;
+    } // Add await-task
+
 
     scene.load.rexAwait( /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(successCallback, failureCallback) {
@@ -290,7 +279,7 @@
                 return TransitionInCallback(gameObject);
 
               case 2:
-                progress = GetProgress(scene, 1);
+                progress = GetProgress(scene);
 
                 if (!(progress < 1)) {
                   _context.next = 13;
@@ -307,7 +296,7 @@
                 return WaitEvent(scene.load, 'progress');
 
               case 7:
-                progress = GetProgress(scene, 1);
+                progress = GetProgress(scene);
                 ProgressCallback(gameObject, progress);
                 _context.next = 4;
                 break;
@@ -343,6 +332,35 @@
     }());
   };
 
-  return LoadingProgress;
+  var GetProgress = function GetProgress(scene) {
+    var loader = scene.load;
+    var total = loader.totalToLoad - 1;
+    var remainder = loader.list.size + loader.inflight.size - 1;
+    var progress = 1 - remainder / total;
+    return progress;
+  };
+
+  var LoadingProgressPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(LoadingProgressPlugin, _Phaser$Plugins$BaseP);
+
+    var _super = _createSuper(LoadingProgressPlugin);
+
+    function LoadingProgressPlugin(pluginManager) {
+      _classCallCheck(this, LoadingProgressPlugin);
+
+      return _super.call(this, pluginManager);
+    }
+
+    _createClass(LoadingProgressPlugin, [{
+      key: "add",
+      value: function add(gameObject, config) {
+        LoadingProgress(gameObject, config);
+      }
+    }]);
+
+    return LoadingProgressPlugin;
+  }(Phaser.Plugins.BasePlugin);
+
+  return LoadingProgressPlugin;
 
 })));

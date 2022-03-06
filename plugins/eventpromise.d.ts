@@ -1,2 +1,3 @@
 import { WaitEvent, WaitComplete } from './utils/promise/WaitEvent';
-export { WaitEvent, WaitComplete };
+import Delay from './utils/promise/Delay';
+export { WaitEvent, WaitComplete, Delay };

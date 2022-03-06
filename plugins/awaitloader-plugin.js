@@ -9,7 +9,7 @@ class AwaitLoaderPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addToScene(scene) {
-        scene.sys.load['rexAwait'] = LoaderCallback;
+        scene.sys.load.rexAwait = LoaderCallback;
     }
 }
 
