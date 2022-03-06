@@ -1,4 +1,4 @@
-var InjectProperties = function(textBlock) {
+var InjectProperties = function (textBlock) {
     Object.defineProperty(textBlock, 'childOY', {
         configurable: true,
         get: function () {
@@ -16,6 +16,11 @@ var InjectProperties = function(textBlock) {
     Object.defineProperty(textBlock, 'bottomChildOY', {
         get: function () {
             return textBlock.bottomTextOY;
+        }
+    });
+    Object.defineProperty(textBlock, 'childVisibleHeight', {
+        get: function () {
+            return textBlock.textObjectHeight;
         }
     });
 };

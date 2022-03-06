@@ -106,12 +106,16 @@ class ScrollableBlock extends BaseSizer {
         return -this.visibleHeight;
     }
 
+    get childVisibleHeight() {
+        return this.instHeight;
+    }
+
     get visibleHeight() {
         var h;
         var childHeight = this.childHeight;
-        var instHeight = this.instHeight;
-        if (childHeight > instHeight) {
-            h = childHeight - instHeight;
+        var childVisibleHeight = this.childVisibleHeight;
+        if (childHeight > childVisibleHeight) {
+            h = childHeight - childVisibleHeight;
         } else {
             h = 0;
         }
@@ -144,7 +148,7 @@ class ScrollableBlock extends BaseSizer {
         var childOYExeceedBottom = this.childOYExeceedBottom(oy);
 
         if (this.clampChildOY) {
-            if (this.instHeight > this.childHeight) {
+            if (this.childVisibleHeight > this.childHeight) {
                 oy = 0;
             } else if (childOYExceedTop) {
                 oy = topChildOY

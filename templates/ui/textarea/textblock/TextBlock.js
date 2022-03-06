@@ -159,7 +159,7 @@ class TextBlock extends BaseSizer {
 
     get visibleLinesCount() {
         if (this._visibleLinesCount === undefined) {
-            this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this.textObjectHeight));
+            this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
         }
         return this._visibleLinesCount;
     }
@@ -179,11 +179,15 @@ class TextBlock extends BaseSizer {
         return this._textHeight;
     }
 
+    get textObjectHeight() {
+        return this._textObjectRealHeight - (this.textLineHeight + this.textLineSpacing);  // Remove 1 text line
+    }
+
     get textVisibleHeight() {
         if (this._textVisibleHeight === undefined) {
             var h;
             var textHeight = this.textHeight;
-            var textObjectHeight = this.textObjectHeight - this.textLineHeight - this.textLineSpacing;  // // Remove 1 text line
+            var textObjectHeight = this.textObjectHeight;
             if (textHeight > textObjectHeight) {
                 h = textHeight - textObjectHeight;
             } else {

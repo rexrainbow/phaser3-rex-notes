@@ -18,5 +18,10 @@ var InjectProperties = function (table) {
             return table.bottomTableOY;
         }
     });
+    Object.defineProperty(table, 'childVisibleHeight', {
+        get: function () {
+            return table.textObjectHeight;
+        }
+    });
 };
 export default InjectProperties;

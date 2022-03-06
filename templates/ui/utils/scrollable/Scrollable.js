@@ -91,6 +91,7 @@ class Scrollable extends Sizer {
         - child.childOY (RW)
         - child.topChildOY (R)
         - child.bottomChildOY (R)
+        - child.childVisibleHeight (R)
         */
     }
 
@@ -149,6 +150,10 @@ class Scrollable extends Sizer {
 
     get bottomChildOY() {
         return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
+    }
+
+    get childVisibleHeight() {
+        return this.childrenMap.child.childVisibleHeight;
     }
 
     get isOverflow() {

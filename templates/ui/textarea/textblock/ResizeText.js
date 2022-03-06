@@ -1,12 +1,12 @@
 import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
 
 var ResizeText = function (textObject, width, height) {
-    height += this.textLineHeight + this.textLineSpacing; // Add 1 line
-    if ((this.textObjectWidth === width) && (this.textObjectHeight === height)) {
+    height += (this.textLineHeight + this.textLineSpacing); // Add 1 line
+    if ((this.textObjectWidth === width) && (this._textObjectRealHeight === height)) {
         return;
     }
     this.textObjectWidth = width;
-    this.textObjectHeight = height;
+    this._textObjectRealHeight = height;
 
     switch (this.textObjectType) {
         case TextType:
