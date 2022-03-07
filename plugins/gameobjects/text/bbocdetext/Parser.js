@@ -12,7 +12,7 @@ var EMPTYPROP = {};
 
 class Parser {
     constructor(config) {
-        this.setEscape(GetValue(config, 'escape', '~'));
+        this.setEscape(GetValue(config, 'escape', null));
     }
 
     setEscape(esc) {
@@ -152,7 +152,7 @@ class Parser {
             UpdateProp(prevProp, PROP_REMOVE, 'align');
             plainText = '';
         } else {
-            plainText = Escape(text, this.escRegex);
+            plainText = text;
         }
 
         var result = GETPROP_RESULT;
@@ -311,6 +311,10 @@ class Parser {
 
         return headers.join('');
     }
+
+    escape(s) {
+        return (this.escRegex) ? s.replace(this.escRegex, ']') : s;
+    }
 }
 
 var UpdateProp = function (prop, op, key, value) {
@@ -338,10 +342,6 @@ var GetFontStyle = function (isBold, isItalic) {
         return '';
     }
 };
-
-var Escape = function (s, escRegex) {
-    return (escRegex) ? s.replace(escRegex, ']') : s;
-}
 
 var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[y=([-.0-9]+)\]|\[\/y\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]|\[align=([^\]]+)\]|\[\/align\]/ig;
 

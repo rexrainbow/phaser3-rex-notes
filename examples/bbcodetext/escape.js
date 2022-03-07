@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
 [b~]Text[/b~]:[b]Text[/b]
 [size=40~]text[/size~]:[size=40]Text[/size]
 `
-        this.add.rexBBCodeText(300, 300, content);
+        this.add.rexBBCodeText(300, 300, content, { escape: '~' });
     }
 
     update() { }

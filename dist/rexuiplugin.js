@@ -4200,8 +4200,10 @@
             penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
             cursorX += imgWidth;
           } else if (plainText !== '') {
-            // wrap text to lines
+            // Escape content
+            plainText = this.parser.escape(plainText); // wrap text to lines
             // Save the current context.
+
             context.save();
             curStyle = this.parser.propToContextStyle(this.defaultStyle, curProp);
             curStyle.buildFont();
@@ -5222,7 +5224,7 @@
     function Parser(config) {
       _classCallCheck(this, Parser);
 
-      this.setEscape(GetValue$2o(config, 'escape', '~'));
+      this.setEscape(GetValue$2o(config, 'escape', null));
     }
 
     _createClass(Parser, [{
@@ -5371,7 +5373,7 @@
           UpdateProp(prevProp, PROP_REMOVE, 'align');
           plainText = '';
         } else {
-          plainText = Escape(text, this.escRegex);
+          plainText = text;
         }
 
         var result = GETPROP_RESULT$1;
@@ -5539,6 +5541,11 @@
         headers.push(text);
         return headers.join('');
       }
+    }, {
+      key: "escape",
+      value: function escape(s) {
+        return this.escRegex ? s.replace(this.escRegex, ']') : s;
+      }
     }]);
 
     return Parser;
@@ -5568,10 +5575,6 @@
     } else {
       return '';
     }
-  };
-
-  var Escape = function Escape(s, escRegex) {
-    return escRegex ? s.replace(escRegex, ']') : s;
   };
 
   var RE_SPLITTEXT$1 = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[y=([-.0-9]+)\]|\[\/y\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]|\[align=([^\]]+)\]|\[\/align\]/ig;
@@ -5866,6 +5869,11 @@
         } else {
           return text;
         }
+      }
+    }, {
+      key: "escape",
+      value: function escape(s) {
+        return s;
       }
     }, {
       key: "destroy",

@@ -95,7 +95,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[align=left]text[/align]`, 
     - `[align=center]text[/align]`, 
     - `[align=right]text[/align]`
-- Escape : `[xxx~]...[/xxx~]`, for example
+- Escape : Set `escape` character at `style.escape`. For example, set `style.escape` to `~`, will replace `~]` to `]`
     ```
     [b~]text[/b~]
     [i~]text[/i~]
@@ -169,7 +169,7 @@ Default style
     // images: {
     //    key: { y:-8 }
     // }
-    // escape: '~'
+    // escape: null
 }
 ```
 
@@ -187,6 +187,7 @@ var txt = scene.add.rexBBCodeText({
         align: 'center',
         backgroundColor: '#ff00ff',
         // ...
+        // escape: null
     },
 })
 ```
@@ -213,6 +214,7 @@ var txt = scene.make.rexBBCodeText({
         align: 'center',
         backgroundColor: '#ff00ff',
         // ...
+        // escape: null
     },
     // origin: {x: 0.5, y: 0.5},
     add: true
@@ -225,6 +227,7 @@ var txt = scene.make.rexBBCodeText({
     - `valign` : Vertical alignment.
         - `'top'`, `'center'`, `'bottom'`
 - `images` : See [Image](bbcodetext.md#image)
+- `escape` : Default value is `null`. No escape.
 
 ### Custom class
 

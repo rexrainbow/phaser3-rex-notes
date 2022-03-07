@@ -8275,7 +8275,7 @@
 <li><code>[align=right]text[/align]</code></li>
 </ul>
 </li>
-<li>Escape : <code>[xxx~]...[/xxx~]</code>, for example
+<li>Escape : Set <code>escape</code> character at <code>style.escape</code>. For example, set <code>style.escape</code> to <code>~</code>, will replace <code>~]</code> to <code>]</code>
     <div class="highlight"><pre><span></span><code>[b~]text[/b~]
 [i~]text[/i~]
 [color=red~]text[/color~]
@@ -8343,7 +8343,7 @@
     <span class="c1">// images: {</span>
     <span class="c1">//    key: { y:-8 }</span>
     <span class="c1">// }</span>
-    <span class="c1">// escape: &#39;~&#39;</span>
+    <span class="c1">// escape: null</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>or</p>
@@ -8358,6 +8358,7 @@
         <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#ff00ff&#39;</span><span class="p">,</span>
         <span class="c1">// ...</span>
+        <span class="c1">// escape: null</span>
     <span class="p">},</span>
 <span class="p">})</span>
 </code></pre></div>
@@ -8381,6 +8382,7 @@
         <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#ff00ff&#39;</span><span class="p">,</span>
         <span class="c1">// ...</span>
+        <span class="c1">// escape: null</span>
     <span class="p">},</span>
     <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
@@ -8399,6 +8401,7 @@
 </ul>
 </li>
 <li><code>images</code> : See <a href="./#image">Image</a></li>
+<li><code>escape</code> : Default value is <code>null</code>. No escape.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
