@@ -14,15 +14,6 @@ class Parser {
     constructor(config) {
     }
 
-    setEscape(esc) {
-        if (esc) {
-            this.escRegex = new RegExp(`${esc}]`, 'g');
-        } else {
-            this.escRegex = null;
-        }
-        return this;
-    }
-
     splitText(text, mode) {
         var result = [];
         var charIdx = 0;
