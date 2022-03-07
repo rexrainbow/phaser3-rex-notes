@@ -27,6 +27,7 @@ export default {
         if (IsPlainObject(duration)) {
             var config = duration;
             duration = config.duration;
+            alpha = config.alpha;
         }
 
         var isInit = (this._fade === undefined);

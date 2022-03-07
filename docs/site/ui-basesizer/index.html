@@ -6583,6 +6583,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#shake" class="md-nav__link">
+    Shake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drag-top-most-sizer" class="md-nav__link">
     Drag top-most sizer
   </a>
@@ -8047,6 +8054,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#shake" class="md-nav__link">
+    Shake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drag-top-most-sizer" class="md-nav__link">
     Drag top-most sizer
   </a>
@@ -8508,7 +8522,13 @@
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="p">{</span><span class="nx">start</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span><span class="mf">1</span><span class="p">});</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeInPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeInPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">endAlpha</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeInPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="p">{</span><span class="nx">start</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span><span class="mf">1</span><span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>
@@ -8633,6 +8653,16 @@
 </ul>
 </li>
 </ul>
+<h3 id="shake">Shake<a class="headerlink" href="#shake" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">shake</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.shake(duration, magnitude);</span>
+</code></pre></div>
+or
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">shakePromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">magnitude</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>
+</code></pre></div></p>
 <h3 id="drag-top-most-sizer">Drag top-most sizer<a class="headerlink" href="#drag-top-most-sizer" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Draggable child<ul>

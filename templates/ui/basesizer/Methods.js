@@ -30,6 +30,7 @@ import SetAnchor from './SetAnchor.js';
 import ScaleMethods from './ScaleMethods.js';
 import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
+import ShakeMethods from './ShakeMethods.js';
 import HideMethods from './HideMethods.js';
 import IsInTouching from './IsInTouching.js';
 import PointToChild from './PointToChild.js';
@@ -86,6 +87,7 @@ Object.assign(
     ScaleMethods,
     FadeMethods,
     EaseMoveMethods,
+    ShakeMethods,
     ClickMethods,
     HideMethods,
     GetShownChildrenMethods,

@@ -492,7 +492,11 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     scene.rexUI.easeMoveFrom(gameObject, duration, x, y);
     // scene.rexUI.easeMoveFrom(gameObject, duration, x, y, ease);
     ```
-1. [Perspective](containerlite-perspective.md): Snapshot children of [containerlite](containerlite.md), to a [perspective render texture](perspective-rendertexture.md).
+2. [Shake](shake-position.md)
+    ```javascript
+    scene.rexUI.shake(gameObject, config);
+    ```
+3. [Perspective](containerlite-perspective.md): Snapshot children of [containerlite](containerlite.md), to a [perspective render texture](perspective-rendertexture.md).
     ```javascript
     var perspective = scene.rexUI.add.perspective(gameObject, config);
     ```

@@ -362,6 +362,18 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): Promise<any>;
 
+    shake(
+        duration?: number,
+        magnitude?: number,
+        magnitudeMode?: 0 | 1 | 'constant' | 'decay'
+    ): this;
+
+    shakePromise(
+        duration?: number,
+        magnitude?: number,
+        magnitudeMode?: 0 | 1 | 'constant' | 'decay'
+    ): Promise<any>;
+
     setAnchor(config: {
         left?: string, right?: string, centerX?: string, x?: string,
         top?: string, bottom?: string, centerY?: string, y?: string

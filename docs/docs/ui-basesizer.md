@@ -458,6 +458,20 @@ sizer.pushIntoBounds(bounds);
         sizer.on('moveto.complete', function(sizer) { });
         ```
 
+### Shake
+
+```javascript
+sizer.shake(duration);
+// sizer.shake(duration, magnitude);
+```
+or
+```javascript
+sizer.shakePromise(duration, magnitude)
+    .then(function(){
+        // ...
+    })
+```
+
 ### Drag top-most sizer
 
 - Draggable child

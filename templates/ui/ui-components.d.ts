@@ -51,6 +51,7 @@ import Drag from './drag/Drag';
 import Pinch from './pinch/Pinch';
 import Rotate from './rotate/Rotate';
 import Flip from './flip/Flip';
+import Shake from './shake/Shake';
 import TouchEventStop from './toucheventstop/TouchEventStop';
 import Perspective from './perspective/Perspective';
 import Anchor from './anchor/Anchor';
@@ -129,6 +130,7 @@ export {
     Pinch,
     Rotate,
     Flip,
+    Shake,
     TouchEventStop,
     Perspective,
     Anchor,

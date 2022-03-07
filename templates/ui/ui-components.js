@@ -53,6 +53,7 @@ import Drag from './drag/Drag.js';
 import Pinch from './pinch/Pinch.js';
 import Rotate from './rotate/Rotate.js';
 import Flip from './flip/Flip.js';
+import Shake from './shake/Shake.js';
 import TouchEventStop from './toucheventstop/TouchEventStop.js';
 import Perspective from './perspective/Perspective.js';
 import Anchor from './anchor/Anchor.js';
@@ -131,6 +132,7 @@ export {
     Pinch,
     Rotate,
     Flip,
+    Shake,
     TouchEventStop,
     Perspective,
     Anchor,

@@ -16,46 +16,60 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var align = 'right';
         var buttons = this.rexUI.add.buttons({
-            x: 400, y: 300,
-            width: 300,
-            orientation: 'x',
+            x: 400, y: 400,
 
+            orientation: 'x',
+            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK),
             buttons: [
                 createButton(this, 'A'),
                 createButton(this, 'B'),
                 createButton(this, 'C'),
+                createButton(this, 'D'),
+                createButton(this, 'E'),
             ],
 
-            align: align
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10,
+                item: 6
+            }
+
         })
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000)
 
         buttons
             .on('button.click', function (button, index, pointer, event) {
-                console.log(`Click button-${button.text}`);
+                button.shake();
             })
 
+        this.buttons = buttons;
+        this.print = this.add.text(0, 0, '');
     }
 
-    update() { }
+    update() {
+        // Position of Button objects won't change
+        var print = this.print;
+        print.text = '';
+        this.buttons.getElement('buttons').forEach(function (gameObject) {
+            print.text += `${gameObject.x}, ${gameObject.y}\n`;
+        })
+
+    }
 }
 
 var createButton = function (scene, text) {
     return scene.rexUI.add.label({
-        width: 40,
-        height: 40,
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
+        width: 60,
+        height: 60,
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),
+        align: 'center',
         space: {
             left: 10,
             right: 10,
-        },
-        align: 'center'
+        }
     });
 }
 
@@ -64,6 +78,10 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     scene: Demo,
     plugins: {
         scene: [{

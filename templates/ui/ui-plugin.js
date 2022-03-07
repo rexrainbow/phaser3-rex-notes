@@ -55,6 +55,7 @@ import DragFactory from './drag/Factory.js';
 import PinchFactory from './pinch/Factory.js';
 import RotateFactory from './rotate/Factory.js';
 import FlipFactory from './flip/Factory.js';
+import ShakeFactory from './shake/Factory.js';
 import TouchEventStopFactory from './toucheventstop/Factory.js';
 import PerspectiveFactory from './perspective/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
