@@ -4211,7 +4211,7 @@
       this._fade.completeEventName = 'fadein.complete';
       return this;
     },
-    fadeInPromoise: function fadeInPromoise(duration, alpha) {
+    fadeInPromise: function fadeInPromise(duration, alpha) {
       this.fadeIn(duration, alpha);
       return WaitComplete(this._fade);
     },

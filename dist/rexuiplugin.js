@@ -5224,17 +5224,6 @@
     }
 
     _createClass(Parser, [{
-      key: "setEscape",
-      value: function setEscape(esc) {
-        if (esc) {
-          this.escRegex = new RegExp("".concat(esc, "]"), 'g');
-        } else {
-          this.escRegex = null;
-        }
-
-        return this;
-      }
-    }, {
       key: "splitText",
       value: function splitText(text, mode) {
         var result = [];
@@ -5654,7 +5643,29 @@
         while (true) {
           var regexResult = RE_SPLITTEXT.exec(text);
 
-          if (!regexResult) {
+          if (regexResult) {
+            var match = regexResult[0];
+            var matchStart = RE_SPLITTEXT.lastIndex - match.length;
+
+            if (charIdx < matchStart) {
+              result.push(text.substring(charIdx, matchStart));
+            }
+
+            if (mode === undefined) {
+              result.push(match);
+            } else if (mode === 1) {
+              // RAWTEXTONLY_MODE
+              if (RE_CLASS_HEADER.test(match)) {
+                var innerMatch = match.match(RE_CLASS);
+                result.push(innerMatch[2]);
+              } else if (RE_STYLE_HEADER.test(match)) {
+                var innerMatch = match.match(RE_STYLE);
+                result.push(innerMatch[2]);
+              }
+            }
+
+            charIdx = RE_SPLITTEXT.lastIndex;
+          } else {
             var totalLen = text.length;
 
             if (charIdx < totalLen) {
@@ -5662,31 +5673,11 @@
               result.push(text.substring(charIdx, totalLen));
             }
 
-            return result; // [text,...]
+            break;
           }
-
-          var match = regexResult[0];
-          var matchStart = RE_SPLITTEXT.lastIndex - match.length;
-
-          if (charIdx < matchStart) {
-            result.push(text.substring(charIdx, matchStart));
-          }
-
-          if (mode === undefined) {
-            result.push(match);
-          } else if (mode === 1) {
-            // RAWTEXTONLY_MODE
-            if (RE_CLASS_HEADER.test(match)) {
-              var innerMatch = match.match(RE_CLASS);
-              result.push(innerMatch[2]);
-            } else if (RE_STYLE_HEADER.test(match)) {
-              var innerMatch = match.match(RE_STYLE);
-              result.push(innerMatch[2]);
-            }
-          }
-
-          charIdx = RE_SPLITTEXT.lastIndex;
         }
+
+        return result; // [text,...]         
       }
     }, {
       key: "tagTextToProp",
@@ -19421,7 +19412,7 @@
       this._fade.completeEventName = 'fadein.complete';
       return this;
     },
-    fadeInPromoise: function fadeInPromoise(duration, alpha) {
+    fadeInPromise: function fadeInPromise(duration, alpha) {
       this.fadeIn(duration, alpha);
       return WaitComplete(this._fade);
     },

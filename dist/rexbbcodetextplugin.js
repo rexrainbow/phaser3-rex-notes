@@ -3501,17 +3501,6 @@
     }
 
     _createClass(Parser, [{
-      key: "setEscape",
-      value: function setEscape(esc) {
-        if (esc) {
-          this.escRegex = new RegExp("".concat(esc, "]"), 'g');
-        } else {
-          this.escRegex = null;
-        }
-
-        return this;
-      }
-    }, {
       key: "splitText",
       value: function splitText(text, mode) {
         var result = [];

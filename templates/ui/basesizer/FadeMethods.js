@@ -42,7 +42,7 @@ export default {
         return this;
     },
 
-    fadeInPromoise(duration, alpha) {
+    fadeInPromise(duration, alpha) {
         this.fadeIn(duration, alpha);
         return WaitComplete(this._fade);
     },

@@ -322,7 +322,14 @@ sizer.pushIntoBounds(bounds);
     ```
     or
     ```javascript
-    sizer.fadeInPromise(duration)
+    sizer.fadeInPromise(duration, endAlpha)
+        .then(function(){
+            // ...
+        })
+    ```
+    or
+    ```javascript
+    sizer.fadeInPromise(duration, {start:0, end:1})
         .then(function(){
             // ...
         })
