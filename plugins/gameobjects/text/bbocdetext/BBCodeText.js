@@ -6,11 +6,6 @@ class BBCodeText extends Text {
         var parser = new ParserKlass(style);
         super(scene, x, y, text, style, 'rexBBCodeText', parser);
     }
-
-    setEscape(escape) {
-        this.parser.setEscape(escape);
-        return this;
-    }
 }
 
 export default BBCodeText;

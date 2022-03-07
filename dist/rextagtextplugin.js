@@ -2460,10 +2460,8 @@
             penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
             cursorX += imgWidth;
           } else if (plainText !== '') {
-            // Escape content
-            plainText = this.parser.escape(plainText); // wrap text to lines
+            // wrap text to lines
             // Save the current context.
-
             context.save();
             curStyle = this.parser.propToContextStyle(this.defaultStyle, curProp);
             curStyle.buildFont();
@@ -3753,11 +3751,6 @@
         } else {
           return text;
         }
-      }
-    }, {
-      key: "escape",
-      value: function escape(s) {
-        return s;
       }
     }, {
       key: "destroy",

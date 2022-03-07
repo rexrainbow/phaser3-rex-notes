@@ -102,8 +102,6 @@ class CanvasText {
                 cursorX += imgWidth;
 
             } else if (plainText !== '') {
-                // Escape content
-                plainText = this.parser.escape(plainText);
                 // wrap text to lines
                 // Save the current context.
                 context.save();

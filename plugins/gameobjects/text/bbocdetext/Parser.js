@@ -12,7 +12,6 @@ var EMPTYPROP = {};
 
 class Parser {
     constructor(config) {
-        this.setEscape(GetValue(config, 'escape', null));
     }
 
     setEscape(esc) {
@@ -310,10 +309,6 @@ class Parser {
         headers.push(text);
 
         return headers.join('');
-    }
-
-    escape(s) {
-        return (this.escRegex) ? s.replace(this.escRegex, ']') : s;
     }
 }
 

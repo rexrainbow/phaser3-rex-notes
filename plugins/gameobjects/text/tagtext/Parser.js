@@ -208,10 +208,6 @@ class Parser {
         }
     }
 
-    escape(s) {
-        return s;
-    }
-
     destroy() {
         this.tags = undefined;
     }

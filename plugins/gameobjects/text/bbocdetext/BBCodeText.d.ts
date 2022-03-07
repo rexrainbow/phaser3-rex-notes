@@ -8,8 +8,4 @@ declare namespace BBCodeText {
 }
 
 declare class BBCodeText extends Text {
-    setEscape(
-        escape?: string
-    ): this;
-
 }
