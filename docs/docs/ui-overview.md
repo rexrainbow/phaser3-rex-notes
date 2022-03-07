@@ -562,6 +562,13 @@ var isInBounds = scene.rexUI.isInTouching(gameObject);
         })
     ```
     - `eventEmitter` : [Event emitter](eventemitter3.md) which will fire `'complete'` event, for example, [tween task](tween.md#events).
+- Delay time promise
+    ```javascript
+    var promise = scene.rexUI.delayPromise(time)
+        .then(function() {
+            
+        })
+    ```
 
 ### View port
 

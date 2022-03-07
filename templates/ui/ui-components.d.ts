@@ -70,6 +70,7 @@ import { Edit } from '../../plugins/textedit';
 import HiddenEdit from './hiddenedit/HiddenEdit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
+import DelayPromise from '../../plugins/utils/promise/Delay'
 import GetViewport from '../../plugins/utils/system/GetViewport';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
@@ -148,6 +149,7 @@ export {
     WrapExpandText,
     WaitEvent,
     WaitComplete,
+    DelayPromise,
     GetViewport,
     SetChildrenInteractive,
     RequestDrag

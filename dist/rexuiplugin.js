@@ -38972,6 +38972,18 @@
     return textObject;
   };
 
+  var Delay = function Delay(s, result) {
+    if (s === undefined) {
+      s = 0;
+    }
+
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, s);
+    });
+  };
+
   var CreateCover = function CreateCover(gameObject, config) {
     var scene = gameObject.scene;
     var cover = new Cover(scene, config);
@@ -39452,6 +39464,7 @@
     wrapExpandText: WrapExpandText,
     waitEvent: WaitEvent,
     waitComplete: WaitComplete,
+    delayPromise: Delay,
     setChildrenInteractive: SetChildrenInteractive,
     fadeIn: FadeIn,
     fadeOutDestroy: FadeOutDestroy,

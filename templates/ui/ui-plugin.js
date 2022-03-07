@@ -66,6 +66,7 @@ import { Show, Hide, IsShown, } from './utils/Hide.js';
 import { Edit } from '../../plugins/textedit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
+import Delay from '../../plugins/utils/promise/Delay.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
@@ -109,6 +110,7 @@ var methods = {
     wrapExpandText: WrapExpandText,
     waitEvent: WaitEvent,
     waitComplete: WaitComplete,
+    delayPromise: Delay,
     setChildrenInteractive: SetChildrenInteractive,
     fadeIn: FadeIn,
     fadeOutDestroy: FadeOutDestroy,

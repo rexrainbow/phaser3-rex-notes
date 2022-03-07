@@ -61,6 +61,7 @@ import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
+import Delay from '../../plugins/utils/promise/Delay';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 
@@ -141,6 +142,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     setChildrenInteractive: typeof SetChildrenInteractive;
     waitEvent: typeof WaitEvent;
     waitComplete: typeof WaitComplete;
+    delayPromise: typeof Delay;
     wrapExpandText: typeof WrapExpandText;
     requestDrag: typeof RequestDrag;
 

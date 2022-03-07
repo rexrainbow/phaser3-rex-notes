@@ -70,6 +70,7 @@ import {
 import { Edit } from '../../plugins/textedit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
+import DelayPromise from '../../plugins/utils/promise/Delay.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
@@ -150,6 +151,7 @@ export {
     WrapExpandText,
     WaitEvent,
     WaitComplete,
+    DelayPromise,
     GetViewport,
     SetChildrenInteractive,
     RequestDrag,
