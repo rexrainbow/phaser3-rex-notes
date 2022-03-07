@@ -7,4 +7,9 @@ declare namespace BBCodeText {
     interface TextStyle extends Text.TextStyle { }
 }
 
-declare class BBCodeText extends Text { }
+declare class BBCodeText extends Text {
+    setEscape(
+        escape?: string
+    ): this;
+
+}

@@ -95,6 +95,13 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[align=left]text[/align]`, 
     - `[align=center]text[/align]`, 
     - `[align=right]text[/align]`
+- Escape : `[xxx~]...[/xxx~]`, for example
+    ```
+    [b~]text[/b~]
+    [i~]text[/i~]
+    [color=red~]text[/color~]
+    [size=18~]text[/size~]
+    ```
 
 ### Add text object
 
@@ -162,6 +169,7 @@ Default style
     // images: {
     //    key: { y:-8 }
     // }
+    // escape: '~'
 }
 ```
 

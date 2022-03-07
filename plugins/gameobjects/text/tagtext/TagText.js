@@ -8,7 +8,6 @@ class TagText extends Text {
         var tags = GetValue(style, 'tags', undefined);
         var parser = new ParserKlass(tags);
         super(scene, x, y, text, style, 'rexTagText', parser);
-        this.parser = parser;
     }
 
     addTag(name, prop) {

@@ -112,6 +112,7 @@ class Text extends GameObject {
             style: this.style,
             pensPool: PensPools[type]
         });
+        this.parser = parser;
 
         this.initRTL();
 

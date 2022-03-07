@@ -1,5 +1,7 @@
 import TextStyle from '../textbase/textstyle/TextStyle.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 var GETPROP_RESULT = {
     plainText: null,
     prevProp: null
@@ -8,36 +10,55 @@ var GETPROP_RESULT = {
 var STYLE_RESULT = new TextStyle();
 var EMPTYPROP = {};
 
-var parser = {
-    splitText: function (text, mode) {
+class Parser {
+    constructor(config) {
+        this.setEscape(GetValue(config, 'escape', '~'));
+    }
+
+    setEscape(esc) {
+        if (esc) {
+            this.escRegex = new RegExp(`${esc}]`, 'g');
+        } else {
+            this.escRegex = null;
+        }
+        return this;
+    }
+
+    splitText(text, mode) {
         var result = [];
         var charIdx = 0;
         while (true) {
             var regexResult = RE_SPLITTEXT.exec(text);
-            if (!regexResult) {
+            if (regexResult) {
+                var match = regexResult[0];
+                var matchStart = RE_SPLITTEXT.lastIndex - match.length;
+
+                if (charIdx < matchStart) {
+                    var content = text.substring(charIdx, matchStart);
+                    result.push(content);
+                }
+
+                if (mode === undefined) {
+                    result.push(match);
+                }
+
+                charIdx = RE_SPLITTEXT.lastIndex;
+
+            } else {
                 var totalLen = text.length;
                 if (charIdx < totalLen) { // Push remainder string
                     result.push(text.substring(charIdx, totalLen));
                 }
-                return result; // [text,...]
+                break;
             }
 
-            var match = regexResult[0];
-            var matchStart = RE_SPLITTEXT.lastIndex - match.length;
-
-            if (charIdx < matchStart) {
-                result.push(text.substring(charIdx, matchStart));
-            }
-
-            if (mode === undefined) {
-                result.push(match);
-            }
-
-            charIdx = RE_SPLITTEXT.lastIndex;
         }
-    },
 
-    tagTextToProp: function (text, prevProp) {
+        return result; // [text,...]
+    }
+
+    tagTextToProp(text, prevProp) {
+        // text : result of splitText()
         var plainText, innerMatch;
 
         if (prevProp == null) {
@@ -131,16 +152,16 @@ var parser = {
             UpdateProp(prevProp, PROP_REMOVE, 'align');
             plainText = '';
         } else {
-            plainText = text
+            plainText = Escape(text, this.escRegex);
         }
 
         var result = GETPROP_RESULT;
         result.plainText = plainText;
         result.prop = prevProp;
         return result;
-    },
+    }
 
-    propToContextStyle: function (defaultStyle, prop) {
+    propToContextStyle(defaultStyle, prop) {
         var result = STYLE_RESULT;
         if (!prop.hasOwnProperty('img')) {
             result.image = null;
@@ -226,7 +247,7 @@ var parser = {
         }
 
         return result;
-    },
+    }
 
     getStrokeThinkness(defaultStyle, prop) {
         var strokeThickness;
@@ -236,9 +257,9 @@ var parser = {
             strokeThickness = 0;
         }
         return strokeThickness;
-    },
+    }
 
-    propToTagText: function (text, prop, prevProp) {
+    propToTagText(text, prop, prevProp) {
         if (prevProp == null) {
             prevProp = EMPTYPROP;
         }
@@ -250,7 +271,6 @@ var parser = {
                 headers.push(`[/${k}]`);
             }
         }
-
 
         for (var k in prop) {
             var value = prop[k];
@@ -291,7 +311,7 @@ var parser = {
 
         return headers.join('');
     }
-};
+}
 
 var UpdateProp = function (prop, op, key, value) {
     if (op === PROP_ADD) {
@@ -318,6 +338,10 @@ var GetFontStyle = function (isBold, isItalic) {
         return '';
     }
 };
+
+var Escape = function (s, escRegex) {
+    return (escRegex) ? s.replace(escRegex, ']') : s;
+}
 
 var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[y=([-.0-9]+)\]|\[\/y\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]|\[align=([^\]]+)\]|\[\/align\]/ig;
 
@@ -348,4 +372,4 @@ var RE_ALIGN_CLOSE = /\[\/align\]/i;
 const PROP_REMOVE = false;
 const PROP_ADD = true;
 
-export default parser;
+export default Parser;

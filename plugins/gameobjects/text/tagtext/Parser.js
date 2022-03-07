@@ -7,7 +7,7 @@ var GETPROP_RESULT = {
 
 var STYLE_RESULT = new TextStyle();
 
-class parser {
+class Parser {
     constructor(tags) {
         if (tags === undefined) {
             tags = {};
@@ -303,4 +303,4 @@ var RE_STYLE_HEADER = /<\s*style=/i;
 var RE_STYLE = /<\s*style=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/style\s*\>/;
 var RE_SPACE = /^\s+|\s+$/;
 
-export default parser;
+export default Parser;
