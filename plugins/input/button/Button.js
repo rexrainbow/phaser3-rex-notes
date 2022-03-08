@@ -29,6 +29,9 @@ class Button extends ComponentBase {
         gameObject.on('pointerup', this.onRelease, this);
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
+
+        gameObject.on('pointerover', this.onOver, this);
+        gameObject.on('pointeroutr', this.onOut, this);
     }
 
     shutdown(fromScene) {
@@ -163,6 +166,24 @@ class Button extends ComponentBase {
 
     cancel() {
         this.pointer = undefined;
+        return this;
+    }
+
+    onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+            return this;
+        }
+
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+    }
+
+    onOut(pointer, event) {
+        if (!this.enable) {
+            return this;
+        }
+
+        this.emit('out', this, this.parent, pointer, event);
         return this;
     }
 }

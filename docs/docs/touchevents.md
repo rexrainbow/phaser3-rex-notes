@@ -23,7 +23,7 @@ Built-in touch/mouse events of phaser.
         var touchX = pointer.x;
         var touchY = pointer.y;
         // ...
-     });
+    }, scope);
     ```
 - On any touching end
     ```javascript
@@ -31,19 +31,19 @@ Built-in touch/mouse events of phaser.
         var touchX = pointer.x;
         var touchY = pointer.y;
         // ...
-     });
+    }, scope);
     ```
 - On touch game object start
     ```javascript
     gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, event){
         // ...
-    });
+    }, scope);
     ```
 - On touch game object end
     ```javascript
     gameObject.setInteractive().on('pointerup', function(pointer, localX, localY, event){
         // ...
-    })
+    }, scope);
     ```
 - Drag game object
     ```javascript
@@ -51,13 +51,13 @@ Built-in touch/mouse events of phaser.
         .setInteractive({ draggable: true })
         .on('dragstart', function(pointer, dragX, dragY){
             // ...
-        })
+        }, scope);
         .on('drag', function(pointer, dragX, dragY){
             gameObject.setPosition(dragX, dragY);
-        })
+        }, scope);
         .on('dragend', function(pointer, dragX, dragY, dropped){
             // ...
-        })
+        }, scope);
     ```
 
 Reference : [Properties of point](touchevents.md#properties-of-point)
@@ -192,10 +192,10 @@ Trigger these events from top scene to bottom scene.
 
 1. Events on touched Game object
     ```javascript
-    gameObject.on('pointerdown', function(pointer, localX, localY, event){ /* ... */ });
-    gameObject.on('pointerup', function(pointer, localX, localY, event){ /* ... */ });
-    gameObject.on('pointermove', function(pointer, localX, localY, event){ /* ... */ });
-    gameObject.on('pointerover', function(pointer, localX, localY, event){ /* ... */ });
+    gameObject.on('pointerdown', function(pointer, localX, localY, event){ /* ... */ }, scope);
+    gameObject.on('pointerup', function(pointer, localX, localY, event){ /* ... */ }, scope);
+    gameObject.on('pointermove', function(pointer, localX, localY, event){ /* ... */ }, scope);
+    gameObject.on('pointerover', function(pointer, localX, localY, event){ /* ... */ }, scope);
     gameObject.on('pointerout', function(pointer, event){ /* ... */ });
     ```
     - Cancel remaining touched events
@@ -206,11 +206,11 @@ Trigger these events from top scene to bottom scene.
         ```
 1. Event on input plugin for each touched Game object
     ```javascript
-    scene.input.on('gameobjectdown', function(pointer, gameObject, event){ /* ... */ });
-    scene.input.on('gameobjectup', function(pointer, gameObject, event){ /* ... */ });
-    scene.input.on('gameobjectmove', function(pointer, gameObject, event){ /* ... */ });
-    scene.input.on('gameobjectover', function(pointer, gameObject, event){ /* ... */ });
-    scene.input.on('gameobjectout', function(pointer, gameObject, event){ /* ... */ });
+    scene.input.on('gameobjectdown', function(pointer, gameObject, event){ /* ... */ }, scope);
+    scene.input.on('gameobjectup', function(pointer, gameObject, event){ /* ... */ }, scope);
+    scene.input.on('gameobjectmove', function(pointer, gameObject, event){ /* ... */ }, scope);
+    scene.input.on('gameobjectover', function(pointer, gameObject, event){ /* ... */ }, scope);
+    scene.input.on('gameobjectout', function(pointer, gameObject, event){ /* ... */ }, scope);
     ```
     - Cancel remaining touched events
         ```javascript
@@ -220,15 +220,15 @@ Trigger these events from top scene to bottom scene.
         ```
 1. Events to get **all** touched Game Objects
     ```javascript
-    scene.input.on('pointerdown', function(pointer, currentlyOver){ /* ... */ });
-    scene.input.on('pointerdownoutside', function(pointer){ /* ... */ });
-    scene.input.on('pointerup', function(pointer, currentlyOver){ /* ... */ });
-    scene.input.on('pointerupoutside', function(pointer){ /* ... */ });
-    scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ });
-    scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
-    scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
-    scene.input.on('gameout', function(timeStamp, domEvent){ /* ... */ });
-    scene.input.on('gameover', function(timeStamp, domEvent){ /* ... */ });
+    scene.input.on('pointerdown', function(pointer, currentlyOver){ /* ... */ }, scope);
+    scene.input.on('pointerdownoutside', function(pointer){ /* ... */ }, scope);
+    scene.input.on('pointerup', function(pointer, currentlyOver){ /* ... */ }, scope);
+    scene.input.on('pointerupoutside', function(pointer){ /* ... */ }, scope);
+    scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ }, scope);
+    scene.input.on('pointerover', function(pointer, justOver){ /* ... */ }, scope);
+    scene.input.on('pointerout', function(pointer, justOut){ /* ... */ }, scope);
+    scene.input.on('gameout', function(timeStamp, domEvent){ /* ... */ }, scope);
+    scene.input.on('gameover', function(timeStamp, domEvent){ /* ... */ }, scope);
     ```
 
 ### Dragging
@@ -262,15 +262,15 @@ Trigger these events from top scene to bottom scene.
 #### Dragging events
 
 ```javascript
-gameObject.on('dragstart', function(pointer, dragX, dragY){ /* ... */ });
-gameObject.on('drag', function(pointer, dragX, dragY){ /* ... */ });
-gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /* ... */ });
+gameObject.on('dragstart', function(pointer, dragX, dragY){ /* ... */ }, scope);
+gameObject.on('drag', function(pointer, dragX, dragY){ /* ... */ }, scope);
+gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /* ... */ }, scope);
 ```
 
 ```javascript
-scene.input.on('dragstart', function(pointer, gameObject){ /* ... */ });
-scene.input.on('drag', function(pointer, gameObject, dragX, dragY){ /* ... */ });
-scene.input.on('dragend', function(pointer, gameObject, dropped){ /* ... */ });
+scene.input.on('dragstart', function(pointer, gameObject){ /* ... */ }, scope);
+scene.input.on('drag', function(pointer, gameObject, dragX, dragY){ /* ... */ }, scope);
+scene.input.on('dragend', function(pointer, gameObject, dropped){ /* ... */ }, scope);
 ```
 
 - `dropped` : `'dragend'` and also `'drop'`.
@@ -304,25 +304,25 @@ gameObject.input.dropZone = false;
 #### Dropping events
 
 ```javascript
-gameObject.on('drop', function(pointer, target){ /* ... */ });
+gameObject.on('drop', function(pointer, target){ /* ... */ }, scope);
 
-gameObject.on('dragenter', function(pointer, target){ /* ... */ });
-gameObject.on('dragover', function(pointer, target){ /* ... */ });
-gameObject.on('dragleave', function(pointer, target){ /* ... */ });
+gameObject.on('dragenter', function(pointer, target){ /* ... */ }, scope);
+gameObject.on('dragover', function(pointer, target){ /* ... */ }, scope);
+gameObject.on('dragleave', function(pointer, target){ /* ... */ }, scope);
 ```
 
 ```javascript
-scene.input.on('drop', function(pointer, gameObject, target){ /* ... */ });
+scene.input.on('drop', function(pointer, gameObject, target){ /* ... */ }, scope);
 
-scene.input.on('dragenter', function(pointer, gameObject, target){ /* ... */ });
-scene.input.on('dragover', function(pointer, gameObject, target){ /* ... */ });
-scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ });
+scene.input.on('dragenter', function(pointer, gameObject, target){ /* ... */ }, scope);
+scene.input.on('dragover', function(pointer, gameObject, target){ /* ... */ }, scope);
+scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ }, scope);
 ```
 
 ### First event of all
 
 ```javascript
-scene.input.on('preupdate', function() { /* ... */ })
+scene.input.on('preupdate', function() { /* ... */ }, scope);
 ```
 
 ### Single touch
