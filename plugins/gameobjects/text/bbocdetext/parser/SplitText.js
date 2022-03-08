@@ -1,4 +1,4 @@
-import { RE_SPLITTEXT } from './const.js';
+import { RE_SPLITTEXT } from './tags.js';
 
 var SplitText = function (text, mode) {
     var result = [];

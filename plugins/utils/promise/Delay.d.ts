@@ -1,4 +1,4 @@
 export default function (
-    s: number,
+    time: number,
     result?: any
 ): Promise<any>;

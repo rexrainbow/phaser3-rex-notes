@@ -114,4 +114,7 @@ export {
     RE_ALIGN_OPEN, RE_ALIGN_CLOSE,
 
     RE_SPLITTEXT,
+
+    GetOpenTagRegString, GetCloseTagRegString,
+    NUMBER_PARAM, COLOR_PARAM, STR_PARAM
 }

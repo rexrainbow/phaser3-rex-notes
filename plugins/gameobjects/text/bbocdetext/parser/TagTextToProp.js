@@ -10,7 +10,7 @@ import {
     RE_IMAGE_OPEN, RE_IMAGE_CLOSE,
     RE_AREA_OPEN, RE_AREA_CLOSE,
     RE_ALIGN_OPEN, RE_ALIGN_CLOSE
-} from './const.js';
+} from './tags.js';
 
 const PROP_REMOVE = false;
 const PROP_ADD = true;
