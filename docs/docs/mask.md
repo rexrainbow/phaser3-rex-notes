@@ -44,6 +44,7 @@ Apply mask on game object. Built-in render of phaser.
 
 !!! error
     Don't put game object and its mask into a [container](container.md) together.
+    See this [testing](https://codepen.io/rexrainbow/pen/mdBZJmb), enable line 22-24.
 
 !!! note
     Bitmap Mask is WebGL only.
