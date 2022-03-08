@@ -1,2 +1,2 @@
-import BBCodeText from './gameobjects/text/bbocdetext/BBCodeText'
+import BBCodeText from './gameobjects/text/bbcodetext/BBCodeText'
 export default BBCodeText;
