@@ -48,11 +48,11 @@ class Demo extends Phaser.Scene {
 
     update() {
         // Position of Button objects won't change
-        var print = this.print;
-        print.text = '';
+        var s = ''
         this.buttons.getElement('buttons').forEach(function (gameObject) {
-            print.text += `${gameObject.x}, ${gameObject.y}\n`;
+            s += `${gameObject.x}, ${gameObject.y}\n`;
         })
+        this.print.text = s;
 
     }
 }
