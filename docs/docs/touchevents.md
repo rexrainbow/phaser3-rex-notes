@@ -196,7 +196,7 @@ Trigger these events from top scene to bottom scene.
     gameObject.on('pointerup', function(pointer, localX, localY, event){ /* ... */ }, scope);
     gameObject.on('pointermove', function(pointer, localX, localY, event){ /* ... */ }, scope);
     gameObject.on('pointerover', function(pointer, localX, localY, event){ /* ... */ }, scope);
-    gameObject.on('pointerout', function(pointer, event){ /* ... */ });
+    gameObject.on('pointerout', function(pointer, event){ /* ... */ }, scope);
     ```
     - Cancel remaining touched events
         ```javascript
