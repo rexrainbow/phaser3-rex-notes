@@ -13,6 +13,14 @@ const NUMBER_PARAM = '[-.0-9]+';
 const COLOR_PARAM = '[a-z]+|#[0-9abcdef]+';
 const STR_PARAM = '[^\\]]+';
 
+const ESC = 'esc';
+const ESC_OPEN = GetOpenTagRegString(ESC);
+const ESC_CLOSE = GetCloseTagRegString(ESC);
+
+const RAW = 'raw';
+const RAW_OPEN = GetOpenTagRegString(RAW);
+const RAW_CLOSE = GetCloseTagRegString(RAW);
+
 const BLOD = 'b';
 const BLOD_OPEN = GetOpenTagRegString(BLOD);
 const BLOD_CLOSE = GetCloseTagRegString(BLOD);
@@ -60,32 +68,51 @@ const ALIGN_OPEN = GetOpenTagRegString(ALIGN, STR_PARAM);
 const ALIGN_CLOSE = GetCloseTagRegString(ALIGN);
 
 
+const RE_ESC_OPEN = new RegExp(ESC_OPEN, 'i');
+const RE_ESC_CLOSE = new RegExp(ESC_CLOSE, 'i');
+
+const RE_RAW_OPEN = new RegExp(RAW_OPEN, 'i');
+const RE_RAW_CLOSE = new RegExp(RAW_CLOSE, 'i');
+
 const RE_BLOD_OPEN = new RegExp(BLOD_OPEN, 'i');
 const RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
+
 const RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
 const RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
+
 const RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
 const RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
+
 const RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
 const RE_COLOR_CLOSE = new RegExp(COLOR_CLOSE, 'i');
+
 const RE_UNDERLINE_OPEN = new RegExp(UNDERLINE_OPEN, 'i');
 const RE_UNDERLINE_OPENC = new RegExp(UNDERLINE_OPENC, 'i');
 const RE_UNDERLINE_CLOSE = new RegExp(UNDERLINE_CLOSE, 'i');
+
 const RE_SHADOW_OPEN = new RegExp(SHADOW_OPEN, 'i');
 const RE_SHADOW_CLOSE = new RegExp(SHADOW_CLOSE, 'i');
+
 const RE_STROKE_OPEN = new RegExp(STROKE_OPEN, 'i');
 const RE_STROKE_OPENC = new RegExp(STROKE_OPENC, 'i');
 const RE_STROKE_CLOSE = new RegExp(STROKE_CLOSE, 'i');
+
 const RE_OFFSETY_OPEN = new RegExp(OFFSETY_OPEN, 'i');
 const RE_OFFSETY_CLOSE = new RegExp(OFFSETY_CLOSE, 'i');
+
 const RE_IMAGE_OPEN = new RegExp(IMAGE_OPEN, 'i');
 const RE_IMAGE_CLOSE = new RegExp(IMAGE_CLOSE, 'i');
+
 const RE_AREA_OPEN = new RegExp(AREA_OPEN, 'i')
 const RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
+
 const RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i')
 const RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
 
 const RE_SPLITTEXT = new RegExp([
+    RAW_OPEN, RAW_CLOSE,
+    ESC_OPEN, ESC_CLOSE,
+
     BLOD_OPEN, BLOD_CLOSE,
     ITALICS_OPEN, ITALICS_CLOSE,
     SIZE_OPEN, SIZE_CLOSE,
@@ -101,6 +128,9 @@ const RE_SPLITTEXT = new RegExp([
 
 
 export {
+    RE_ESC_OPEN, RE_ESC_CLOSE,
+    RE_RAW_OPEN, RE_RAW_CLOSE,
+
     RE_BLOD_OPEN, RE_BLOD_CLOSE,
     RE_ITALICS_OPEN, RE_ITALICS_CLOSE,
     RE_SIZE_OPEN, RE_SIZE_CLOSE,
