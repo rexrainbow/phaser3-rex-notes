@@ -1,5 +1,5 @@
 import Text from '../textbase/Text.js'
-import ParserKlass from './Parser.js';
+import ParserKlass from './parser/Parser.js';
 
 class BBCodeText extends Text {
     constructor(scene, x, y, text, style) {
