@@ -16,11 +16,11 @@ class Demo extends Phaser.Scene {
             txt;
         for (var i = 0; i < 50; i++) {
             if ((i % 4) === 0) {
-                txt = '[color=yellow]' + i.toString() + ' :yellow';
+                txt = `[color=yellow]${i}:yellow`;
             } else if ((i % 3) === 0) {
-                txt = '[color=gray]' + i.toString() + ' :gray';
+                txt = `[color=gray]${i}:gray`;
             } else {
-                txt = i.toString();
+                txt = `${i}`;
             }
             lines.push(txt);
         }

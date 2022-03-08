@@ -10,6 +10,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [BBCode text](https://codepen.io/rexrainbow/pen/OZbOyg)
 - [Hit area of words](https://codepen.io/rexrainbow/pen/voXPRM)
 - [Align](https://codepen.io/rexrainbow/pen/qGxrjZ)
+- [Escape](https://codepen.io/rexrainbow/pen/yLPWgWX)
 - [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
 - [Wrap](https://codepen.io/rexrainbow/pen/BaZEGOB)
 - [Measure margin of text](https://codepen.io/rexrainbow/pen/eYEOYzX)
@@ -95,6 +96,11 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - `[align=left]text[/align]`, 
     - `[align=center]text[/align]`, 
     - `[align=right]text[/align]`
+- Escape : Tags between `[esc]` ... `[/esc]` or `[raw]` ... `[/raw]` will be treated as content.
+    - `[esc][color=yellow]Text[/color][/esc]`
+    - `[esc][raw]Text[/raw][/esc]`
+    - `[raw][esc]Text[/esc][/raw]`
+    - `[raw][b]Text[/b][/raw]`
 
 ### Add text object
 

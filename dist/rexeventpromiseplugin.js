@@ -103,15 +103,15 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
-  var Delay = function Delay(s, result) {
-    if (s === undefined) {
-      s = 0;
+  var Delay = function Delay(time, result) {
+    if (time === undefined) {
+      time = 0;
     }
 
     return new Promise(function (resolve, reject) {
       setTimeout(function () {
         resolve(result);
-      }, s);
+      }, time);
     });
   };
 

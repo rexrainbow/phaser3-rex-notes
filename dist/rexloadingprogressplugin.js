@@ -340,6 +340,18 @@
     return progress;
   };
 
+  var Delay = function Delay(time, result) {
+    if (time === undefined) {
+      time = 0;
+    }
+
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve(result);
+      }, time);
+    });
+  };
+
   var LoadingProgressPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(LoadingProgressPlugin, _Phaser$Plugins$BaseP);
 
@@ -355,6 +367,11 @@
       key: "add",
       value: function add(gameObject, config) {
         LoadingProgress(gameObject, config);
+      }
+    }, {
+      key: "addDelayPromise",
+      value: function addDelayPromise(time) {
+        return Delay(time);
       }
     }]);
 
