@@ -61,6 +61,7 @@ Last line`;
         var s2 = `[color=red]red[/color]
 [color=blue]blue[/color]
 [color=green]green[/color]
+[esc][b]Text[/b][/esc]:[b]Text[/b]
 Last line`;
 
         this.add.rexBBCodeText(400, 30, s2, {
