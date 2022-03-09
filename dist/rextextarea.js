@@ -11445,18 +11445,7 @@
     }, {
       key: "alignTextToButtom",
       value: function alignTextToButtom() {
-        var textHeight = this.textHeight;
-        var textObjectHeight = this.textObjectHeight;
-        var oy;
-
-        if (textHeight > textObjectHeight) {
-          // Content is larger then one page.
-          oy = this.bottomTextOY;
-        } else {
-          oy = textObjectHeight - textHeight;
-        }
-
-        this.setTextOY(oy);
+        this.setTextOY(this.textObjectHeight - this.textHeight);
         return this;
       }
     }]);
