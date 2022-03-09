@@ -333,6 +333,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     textArea.scrollToBottom();
     ```
     - Equal to `textArea.t = 1;`
+- Align text to bottom
+    ```javascript
+    textArea.alignTextToButtom();
+    ```
 
 #### Enable/disable scrolling
 

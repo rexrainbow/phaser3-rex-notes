@@ -374,6 +374,8 @@
         gameObject.on('pointerup', this.onRelease, this);
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
+        gameObject.on('pointerover', this.onOver, this);
+        gameObject.on('pointeroutr', this.onOut, this);
       }
     }, {
       key: "shutdown",
@@ -528,6 +530,26 @@
       key: "cancel",
       value: function cancel() {
         this.pointer = undefined;
+        return this;
+      }
+    }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+
+        this.emit('out', this, this.parent, pointer, event);
         return this;
       }
     }]);

@@ -20528,6 +20528,8 @@
         gameObject.on('pointerup', this.onRelease, this);
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
+        gameObject.on('pointerover', this.onOver, this);
+        gameObject.on('pointeroutr', this.onOut, this);
       }
     }, {
       key: "shutdown",
@@ -20682,6 +20684,26 @@
       key: "cancel",
       value: function cancel() {
         this.pointer = undefined;
+        return this;
+      }
+    }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+
+        this.emit('out', this, this.parent, pointer, event);
         return this;
       }
     }]);
@@ -36043,6 +36065,23 @@
         this.t = percentage;
         return this;
       }
+    }, {
+      key: "alignTextToButtom",
+      value: function alignTextToButtom() {
+        var textHeight = this.textHeight;
+        var textObjectHeight = this.textObjectHeight;
+        var oy;
+
+        if (textHeight > textObjectHeight) {
+          // Content is larger then one page.
+          oy = this.bottomTextOY;
+        } else {
+          oy = textObjectHeight - textHeight;
+        }
+
+        this.setTextOY(oy);
+        return this;
+      }
     }]);
 
     return TextBlock;
@@ -36165,6 +36204,12 @@
       key: "contentHeight",
       get: function get() {
         return this.childrenMap.child.textHeight;
+      }
+    }, {
+      key: "alignTextToButtom",
+      value: function alignTextToButtom() {
+        this.childrenMap.child.alignTextToButtom();
+        return this;
       }
     }]);
 

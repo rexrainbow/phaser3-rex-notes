@@ -39,4 +39,6 @@ declare class TextArea extends Scrollable {
     appendText(text: string): this;
 
     readonly linesCount: number;
+
+    alignTextToButtom(): this;
 }

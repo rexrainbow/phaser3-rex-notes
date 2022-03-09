@@ -273,6 +273,19 @@ class TextBlock extends BaseSizer {
         this.t = percentage;
         return this;
     }
+
+    alignTextToButtom() {
+        var textHeight = this.textHeight;
+        var textObjectHeight = this.textObjectHeight;
+        var oy;
+        if (textHeight > textObjectHeight) { // Content is larger then one page.
+            oy = this.bottomTextOY;
+        } else {
+            oy = textObjectHeight - textHeight;
+        }
+        this.setTextOY(oy);
+        return this;
+    }
 }
 
 var CreateDefaultTextObject = function (scene) {
