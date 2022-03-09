@@ -61,8 +61,8 @@ class TextArea extends Scrollable {
         return this.childrenMap.child.textHeight;
     }
 
-    alignTextToButtom() {
-        this.childrenMap.child.alignTextToButtom();
+    alignLastLineToButtom() {
+        this.childrenMap.child.alignLastLineToButtom();
         return this;
     }
 }

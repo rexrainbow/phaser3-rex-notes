@@ -274,7 +274,7 @@ class TextBlock extends BaseSizer {
         return this;
     }
 
-    alignTextToButtom() {
+    alignLastLineToButtom() {
         this.setTextOY(this.textObjectHeight - this.textHeight);
         return this;
     }
