@@ -512,6 +512,13 @@ sizer.shakePromise(duration, magnitude)
     // sizer.onClick(callback, scope, config);
     ```
     - `config` : See [Button](button.md#create-instance)
+    - `callback` :
+        ```javascript
+        function(button, gameObject, pointer, event) {
+
+        }
+        ```
+        - `button` : [Button](button.md) behavior.
 - Turn off click event
     ```javascript
     sizer.offClick(callback, scope);
