@@ -36,14 +36,14 @@ var config = {
             height: 600
         },
         // Or set minimum size like these
-        // mixWidth: 800,
-        // mixHeight: 600,
+        // minWidth: 800,
+        // minHeight: 600,
 
         // Maximum size
         max: {
             width: 1600,
             height: 1200
-        }
+        },
         // Or set maximum size like these
         // maxWidth: 1600,
         // maxHeight: 1200,
