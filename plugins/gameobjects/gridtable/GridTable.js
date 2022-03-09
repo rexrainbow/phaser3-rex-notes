@@ -235,15 +235,10 @@ class GridTable extends ContainerLite {
     }
 
     get tableVisibleHeight() {
-        var h;
-        var tableHeight = this.tableHeight;
-        var instHeight = this.instHeight;
-        if (tableHeight > instHeight) {
-            h = tableHeight - instHeight;
-        } else {
+        var h = this.tableHeight - this.instHeight;
+        if (h < 0) {
             h = 0;
         }
-
         return h;
     }
 

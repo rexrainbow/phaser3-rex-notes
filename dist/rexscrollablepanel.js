@@ -11340,13 +11340,9 @@
     }, {
       key: "visibleHeight",
       get: function get() {
-        var h;
-        var childHeight = this.childHeight;
-        var childVisibleHeight = this.childVisibleHeight;
+        var h = this.childHeight - this.childVisibleHeight;
 
-        if (childHeight > childVisibleHeight) {
-          h = childHeight - childVisibleHeight;
-        } else {
+        if (h < 0) {
           h = 0;
         }
 

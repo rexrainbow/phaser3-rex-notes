@@ -12555,13 +12555,9 @@
     }, {
       key: "tableVisibleHeight",
       get: function get() {
-        var h;
-        var tableHeight = this.tableHeight;
-        var instHeight = this.instHeight;
+        var h = this.tableHeight - this.instHeight;
 
-        if (tableHeight > instHeight) {
-          h = tableHeight - instHeight;
-        } else {
+        if (h < 0) {
           h = 0;
         }
 

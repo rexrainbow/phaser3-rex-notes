@@ -185,12 +185,8 @@ class TextBlock extends BaseSizer {
 
     get textVisibleHeight() {
         if (this._textVisibleHeight === undefined) {
-            var h;
-            var textHeight = this.textHeight;
-            var textObjectHeight = this.textObjectHeight;
-            if (textHeight > textObjectHeight) {
-                h = textHeight - textObjectHeight;
-            } else {
+            var h = this.textHeight - this.textObjectHeight;
+            if (h < 0) {
                 h = 0;
             }
             this._textVisibleHeight = h;
@@ -274,7 +270,7 @@ class TextBlock extends BaseSizer {
         return this;
     }
 
-    alignLastLineToButtom() {
+    scrollLastLineToButtom() {
         this.setTextOY(this.textObjectHeight - this.textHeight);
         return this;
     }

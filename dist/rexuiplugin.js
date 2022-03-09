@@ -33350,13 +33350,9 @@
     }, {
       key: "tableVisibleHeight",
       get: function get() {
-        var h;
-        var tableHeight = this.tableHeight;
-        var instHeight = this.instHeight;
+        var h = this.tableHeight - this.instHeight;
 
-        if (tableHeight > instHeight) {
-          h = tableHeight - instHeight;
-        } else {
+        if (h < 0) {
           h = 0;
         }
 
@@ -35964,13 +35960,9 @@
       key: "textVisibleHeight",
       get: function get() {
         if (this._textVisibleHeight === undefined) {
-          var h;
-          var textHeight = this.textHeight;
-          var textObjectHeight = this.textObjectHeight;
+          var h = this.textHeight - this.textObjectHeight;
 
-          if (textHeight > textObjectHeight) {
-            h = textHeight - textObjectHeight;
-          } else {
+          if (h < 0) {
             h = 0;
           }
 
@@ -36066,8 +36058,8 @@
         return this;
       }
     }, {
-      key: "alignTextToButtom",
-      value: function alignTextToButtom() {
+      key: "scrollLastLineToButtom",
+      value: function scrollLastLineToButtom() {
         this.setTextOY(this.textObjectHeight - this.textHeight);
         return this;
       }
@@ -36195,9 +36187,9 @@
         return this.childrenMap.child.textHeight;
       }
     }, {
-      key: "alignTextToButtom",
-      value: function alignTextToButtom() {
-        this.childrenMap.child.alignTextToButtom();
+      key: "scrollLastLineToButtom",
+      value: function scrollLastLineToButtom() {
+        this.childrenMap.child.scrollLastLineToButtom();
         return this;
       }
     }]);
@@ -36459,13 +36451,9 @@
     }, {
       key: "visibleHeight",
       get: function get() {
-        var h;
-        var childHeight = this.childHeight;
-        var childVisibleHeight = this.childVisibleHeight;
+        var h = this.childHeight - this.childVisibleHeight;
 
-        if (childHeight > childVisibleHeight) {
-          h = childHeight - childVisibleHeight;
-        } else {
+        if (h < 0) {
           h = 0;
         }
 

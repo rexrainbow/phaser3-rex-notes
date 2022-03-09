@@ -56,12 +56,12 @@ class Demo extends Phaser.Scene {
             content: CreateContent(3),
         })
             .layout()
-            .alignTextToButtom();
+            .scrollLastLineToButtom();
 
         this.input.once('pointerdown', function () {
             textArea
                 .setText(CreateContent(100))
-                .alignTextToButtom()
+                .scrollLastLineToButtom()
         })
 
     }

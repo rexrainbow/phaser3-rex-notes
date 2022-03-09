@@ -111,12 +111,8 @@ class ScrollableBlock extends BaseSizer {
     }
 
     get visibleHeight() {
-        var h;
-        var childHeight = this.childHeight;
-        var childVisibleHeight = this.childVisibleHeight;
-        if (childHeight > childVisibleHeight) {
-            h = childHeight - childVisibleHeight;
-        } else {
+        var h = this.childHeight - this.childVisibleHeight;
+        if (h < 0) {
             h = 0;
         }
 
