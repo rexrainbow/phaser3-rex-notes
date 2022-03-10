@@ -8009,13 +8009,25 @@
 </ul>
 </li>
 <li><code>transitIn</code> : Tween behavior of opening dialog.<ul>
-<li><code>0</code>, <code>'popUp'</code> : Pop up dialog</li>
+<li><code>0</code>, <code>'popUp'</code> : Pop up dialog from <code>0</code> to current scale.</li>
 <li><code>1</code>, <code>'fadeIn'</code> : Fade in dialog</li>
+<li>Custom callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>false</code>, <code>null</code> : No transitIn.</li>
 </ul>
 </li>
 <li><code>transitOut</code> : Tween behavior of closing dialog.<ul>
 <li><code>0</code>, <code>'scaleDown'</code> : Scale down dialog</li>
 <li><code>1</code>, <code>'fadeOut'</code> : Fade out dialog</li>
+<li>Custom callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>false</code>, <code>null</code> : No transitOut.</li>
 </ul>
 </li>
 <li><code>destroy</code><ul>

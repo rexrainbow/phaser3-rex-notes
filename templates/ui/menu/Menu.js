@@ -44,7 +44,8 @@ class Menu extends Buttons {
         this.parentButton = parentButton;
 
         var isRootMenu = (this.root === this);
-        if (isRootMenu) { // Root menu
+         // Root menu
+        if (isRootMenu) {
             // Bounds
             var bounds = config.bounds;
             if (bounds === undefined) {
@@ -101,8 +102,11 @@ class Menu extends Buttons {
             .setOrigin(originX, originY)
             .layout();
 
-        // Sub-menu, align to parent button
-        if (!isRootMenu) {
+        // Sub-menu: 
+        // - scale to root's scale value
+        // - align to parent button
+        if (!isRootMenu) {            
+            this.setScale(this.root.scaleX, this.root.scaleY);
             var subMenuSide = this.root.subMenuSide[parentMenu.orientation];
             switch (subMenuSide) {
                 case SUBMENU_LEFT: //Put submene at left side

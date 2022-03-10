@@ -3836,13 +3836,17 @@
   };
 
   var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
-    var start;
+    // Ease scale from 0 to current scale
+    var start, end;
 
     switch (orientation) {
       case 0:
       case 'x':
         start = {
           x: 0
+        };
+        end = {
+          x: gameObject.scaleX
         };
         break;
 
@@ -3851,17 +3855,21 @@
         start = {
           y: 0
         };
+        end = {
+          y: gameObject.scaleY
+        };
         break;
 
       default:
         start = 0;
+        end = gameObject.scale;
         break;
     }
 
     var config = {
       mode: 0,
       start: start,
-      end: 1,
+      end: end,
       duration: duration,
       ease: ease === undefined ? 'Cubic' : ease
     };
@@ -3877,6 +3885,7 @@
   };
 
   var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
+    // Ease from current scale to 0
     if (destroyMode instanceof Scale) {
       scale = destroyMode;
       destroyMode = undefined;
@@ -9514,6 +9523,8 @@
         dtMode: 1
       });
       _this.messages = [];
+      _this.scaleX0 = undefined;
+      _this.scaleY0 = undefined;
 
       _this.setVisible(false);
 
@@ -9569,6 +9580,10 @@
             break;
         }
 
+        if (!callback) {
+          callback = NOOP;
+        }
+
         this.transitInCallback = callback; // callback = function(gameObject, duration) {}
 
         return this;
@@ -9590,13 +9605,41 @@
             break;
         }
 
+        if (!callback) {
+          callback = NOOP;
+        }
+
         this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
+
+        return this;
+      }
+    }, {
+      key: "setScale",
+      value: function setScale(scaleX, scaleY) {
+        if (scaleY === undefined) {
+          scaleY = scaleX;
+        } // Can override initial scale
+
+
+        this.scaleX0 = scaleX;
+        this.scaleY0 = scaleY;
+
+        _get(_getPrototypeOf(Toast.prototype), "setScale", this).call(this, scaleX, scaleY);
 
         return this;
       }
     }, {
       key: "showMessage",
       value: function showMessage(callback) {
+        // Remember first scaleX, scaleY as initial scale
+        if (this.scaleX0 === undefined) {
+          this.scaleX0 = this.scaleX;
+        }
+
+        if (this.scaleY0 === undefined) {
+          this.scaleY0 = this.scaleY;
+        }
+
         if (callback === undefined) {
           // Try pop up a pendding message
           if (this.messages.length === 0) {
@@ -9613,7 +9656,7 @@
         } // Recover to initial state
 
 
-        this.setScale(1, 1).setVisible(true);
+        this.setScale(this.scaleX0, this.scaleY0).setVisible(true);
 
         if (typeof callback === 'string') {
           this.setText(callback);

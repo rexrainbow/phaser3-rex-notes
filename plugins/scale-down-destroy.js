@@ -1,6 +1,7 @@
 import Scale from './scale.js';
 
 var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destroyMode, scale) {
+    // Ease from current scale to 0
     if (destroyMode instanceof Scale) {
         scale = destroyMode;
         destroyMode = undefined;

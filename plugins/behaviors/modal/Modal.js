@@ -173,7 +173,7 @@ class Modal extends ComponentBase {
                 break;
         }
 
-        if (callback == null) {
+        if (!callback) {
             callback = NOOP;
         }
 

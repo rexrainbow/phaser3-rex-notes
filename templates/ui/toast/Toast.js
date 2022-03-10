@@ -24,6 +24,8 @@ class Toast extends Label {
 
         this.player = new Player(this, { dtMode: 1 });
         this.messages = [];
+        this.scaleX0 = undefined;
+        this.scaleY0 = undefined;
 
         this.setVisible(false);
     }
@@ -70,6 +72,10 @@ class Toast extends Label {
                 break;
         }
 
+        if (!callback) {
+            callback = NOOP;
+        }
+
         this.transitInCallback = callback;
         // callback = function(gameObject, duration) {}
         return this;
@@ -89,12 +95,36 @@ class Toast extends Label {
                 break;
         }
 
+        if (!callback) {
+            callback = NOOP;
+        }
+
         this.transitOutCallback = callback;
         // callback = function(gameObject, duration) {}
         return this;
     }
 
+    setScale(scaleX, scaleY) {
+        if (scaleY === undefined) {
+            scaleY = scaleX;
+        }
+        // Can override initial scale
+        this.scaleX0 = scaleX;
+        this.scaleY0 = scaleY;
+
+        super.setScale(scaleX, scaleY);
+        return this;
+    }
+
     showMessage(callback) {
+        // Remember first scaleX, scaleY as initial scale
+        if (this.scaleX0 === undefined) {
+            this.scaleX0 = this.scaleX;
+        }
+        if (this.scaleY0 === undefined) {
+            this.scaleY0 = this.scaleY;
+        }
+
         if (callback === undefined) {
             // Try pop up a pendding message
             if (this.messages.length === 0) {
@@ -111,7 +141,7 @@ class Toast extends Label {
 
         // Recover to initial state
         this
-            .setScale(1, 1)
+            .setScale(this.scaleX0, this.scaleY0)
             .setVisible(true);
         if (typeof (callback) === 'string') {
             this.setText(callback);

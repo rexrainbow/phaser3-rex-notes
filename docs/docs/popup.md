@@ -1,6 +1,6 @@
 ## Introduction
 
-Scale up (i.e. ease scaleX, scaleY from `0` to `1`) game object.
+Scale up from `0` to *current scale* of game object.
 
 - Author: Rex
 - Method only

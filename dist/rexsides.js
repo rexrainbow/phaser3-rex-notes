@@ -3848,13 +3848,17 @@
   };
 
   var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
-    var start;
+    // Ease scale from 0 to current scale
+    var start, end;
 
     switch (orientation) {
       case 0:
       case 'x':
         start = {
           x: 0
+        };
+        end = {
+          x: gameObject.scaleX
         };
         break;
 
@@ -3863,17 +3867,21 @@
         start = {
           y: 0
         };
+        end = {
+          y: gameObject.scaleY
+        };
         break;
 
       default:
         start = 0;
+        end = gameObject.scale;
         break;
     }
 
     var config = {
       mode: 0,
       start: start,
-      end: 1,
+      end: end,
       duration: duration,
       ease: ease === undefined ? 'Cubic' : ease
     };
@@ -3889,6 +3897,7 @@
   };
 
   var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
+    // Ease from current scale to 0
     if (destroyMode instanceof Scale) {
       scale = destroyMode;
       destroyMode = undefined;

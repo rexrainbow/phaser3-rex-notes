@@ -156,6 +156,7 @@ var toast = scene.rexUI.add.toast({
             // ...
         }
         ```
+    - `false`, `null` : No transitOut.
 - `transitOut` : Transit-out action.
     - `0`, or `'scaleDown'` : Scale-down.
     - `1`, or `'fadeOut'` : Fade-out.
@@ -165,6 +166,7 @@ var toast = scene.rexUI.add.toast({
             // ...
         }
         ```
+    - `false`, `null` : No transitOut.
 
 Toast object will be invisible at beginning.
 

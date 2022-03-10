@@ -3836,13 +3836,17 @@
   };
 
   var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
-    var start;
+    // Ease scale from 0 to current scale
+    var start, end;
 
     switch (orientation) {
       case 0:
       case 'x':
         start = {
           x: 0
+        };
+        end = {
+          x: gameObject.scaleX
         };
         break;
 
@@ -3851,17 +3855,21 @@
         start = {
           y: 0
         };
+        end = {
+          y: gameObject.scaleY
+        };
         break;
 
       default:
         start = 0;
+        end = gameObject.scale;
         break;
     }
 
     var config = {
       mode: 0,
       start: start,
-      end: 1,
+      end: end,
       duration: duration,
       ease: ease === undefined ? 'Cubic' : ease
     };
@@ -3877,6 +3885,7 @@
   };
 
   var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
+    // Ease from current scale to 0
     if (destroyMode instanceof Scale) {
       scale = destroyMode;
       destroyMode = undefined;
@@ -9351,10 +9360,10 @@
       _this.parentMenu = parentMenu;
       _this.parentButton = parentButton;
 
-      var isRootMenu = _this.root === _assertThisInitialized(_this);
+      var isRootMenu = _this.root === _assertThisInitialized(_this); // Root menu
+
 
       if (isRootMenu) {
-        // Root menu
         // Bounds
         var bounds = config.bounds;
 
@@ -9409,10 +9418,14 @@
         }
       }
 
-      _this.setOrigin(originX, originY).layout(); // Sub-menu, align to parent button
+      _this.setOrigin(originX, originY).layout(); // Sub-menu: 
+      // - scale to root's scale value
+      // - align to parent button
 
 
       if (!isRootMenu) {
+        _this.setScale(_this.root.scaleX, _this.root.scaleY);
+
         var subMenuSide = _this.root.subMenuSide[parentMenu.orientation];
 
         switch (subMenuSide) {

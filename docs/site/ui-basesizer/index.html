@@ -8379,13 +8379,18 @@
 </ul>
 <h3 id="scale">Scale<a class="headerlink" href="#scale" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Pop-up<ul>
+<li>Scale up from <code>0</code> to <em>current scale</em> of game object.<ul>
 <li>Pop-up width and height
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScale(scaleX, scaleY)</span>
+    <span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+
 <span class="c1">// sizer.popUp(duration, undefined, ease);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScale(scaleX, scaleY)</span>
+    <span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// ....</span>
     <span class="p">})</span>
@@ -8394,34 +8399,48 @@
 </ul>
 </li>
 <li>Pop-up width only
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScaleX(scaleX)</span>
+    <span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+
 <span class="c1">// sizer.popUp(duration, &#39;x&#39;, ease);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScaleX(scaleX)</span>
+    <span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// ....</span>
     <span class="p">})</span>
 </code></pre></div></li>
 <li>Pop-up height only
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScaleY(scaleY)</span>
+    <span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+
 <span class="c1">// sizer.popUp(duration, &#39;y&#39;, ease);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScaleY(scaleY)</span>
+    <span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// ....</span>
     <span class="p">})</span>
 </code></pre></div></li>
 <li>Pop-up via config
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">({</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">orientation</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">ease</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-<span class="p">})</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScale(scaleX, scaleY)</span>
+        <span class="p">.</span><span class="nx">popUp</span><span class="p">({</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">orientation</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">})</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="c1">//.setScale(scaleX, scaleY)</span>
+    <span class="p">.</span><span class="nx">popUpPromise</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// ....</span>
     <span class="p">})</span>
