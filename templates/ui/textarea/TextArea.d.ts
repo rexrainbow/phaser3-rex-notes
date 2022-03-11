@@ -21,7 +21,8 @@ declare namespace TextArea {
         text: Phaser.GameObjects.GameObject,
         textWidth?: number | undefined,
         textHeight?: number | undefined,
-        textMask?: boolean
+        textMask?: boolean,
+        alwaysScrollable?: boolean,
 
         content?: string
     }
@@ -39,6 +40,4 @@ declare class TextArea extends Scrollable {
     appendText(text: string): this;
 
     readonly linesCount: number;
-
-    scrollLastLineToButtom(): this;
 }

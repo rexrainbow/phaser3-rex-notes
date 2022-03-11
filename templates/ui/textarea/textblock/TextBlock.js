@@ -50,6 +50,8 @@ class TextBlock extends BaseSizer {
 
         this.setClampMode(GetValue(config, 'clamplTextOY', true));
 
+        this.alwaysScrollable = GetValue(config, 'alwaysScrollable', false);
+
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var textObject = GetValue(config, 'text', undefined);
@@ -186,7 +188,7 @@ class TextBlock extends BaseSizer {
     get textVisibleHeight() {
         if (this._textVisibleHeight === undefined) {
             var h = this.textHeight - this.textObjectHeight;
-            if (h < 0) {
+            if (!this.alwaysScrollable && (h < 0)) {
                 h = 0;
             }
             this._textVisibleHeight = h;
@@ -267,11 +269,6 @@ class TextBlock extends BaseSizer {
 
     setTextOYByPercentage(percentage) {
         this.t = percentage;
-        return this;
-    }
-
-    scrollLastLineToButtom() {
-        this.setTextOY(this.textObjectHeight - this.textHeight);
         return this;
     }
 }

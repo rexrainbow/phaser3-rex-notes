@@ -8133,6 +8133,7 @@
     <span class="c1">// textWidth: undefined,</span>
     <span class="c1">// textHeight: undefined,</span>
     <span class="c1">// textMask: true,</span>
+    <span class="c1">// alwaysScrollable: false,</span>
 
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">background</span><span class="o">:</span> <span class="nx">sliderBackgroundGameObject</span><span class="p">,</span>
@@ -8267,6 +8268,11 @@
 </ul>
 </li>
 <li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
+<li><code>alwaysScrollable</code> : <ul>
+<li><code>false</code> : Can't scroll if content is less then 1 page. Default behavior.</li>
+<li><code>true</code> : Can scroll in all cases</li>
+</ul>
+</li>
 <li><code>header</code> : Game object of header, optional.</li>
 <li><code>footer</code> : Game object of footer, optional.</li>
 <li><code>space</code> : Pads spaces<ul>
@@ -8400,9 +8406,6 @@
 <li>Equal to <code>textArea.t = 1;</code></li>
 </ul>
 </li>
-<li>Scroll last line to bottom
-    <div class="highlight"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollLastLineToButtom</span><span class="p">();</span>
-</code></pre></div></li>
 </ul>
 <h4 id="enabledisable-scrolling">Enable/disable scrolling<a class="headerlink" href="#enabledisable-scrolling" title="Permanent link">&para;</a></h4>
 <ul>

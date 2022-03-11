@@ -54,16 +54,11 @@ class Demo extends Phaser.Scene {
             }),
 
             content: CreateContent(3),
+
+            alwaysScrollable: true
         })
             .layout()
-            .scrollLastLineToButtom();
-
-        this.input.once('pointerdown', function () {
-            textArea
-                .setText(CreateContent(100))
-                .scrollLastLineToButtom()
-        })
-
+            .scrollToBottom()
     }
 
     update() { }

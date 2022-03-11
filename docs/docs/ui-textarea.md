@@ -89,6 +89,7 @@ var textArea = scene.rexUI.add.textArea({
     // textWidth: undefined,
     // textHeight: undefined,
     // textMask: true,
+    // alwaysScrollable: false,
 
     slider: {
         background: sliderBackgroundGameObject,
@@ -197,6 +198,9 @@ var textArea = scene.rexUI.add.textArea({
     - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
     - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `clamplChildOY` : Set `true` to clamp scrolling.
+- `alwaysScrollable` : 
+    - `false` : Can't scroll if content is less then 1 page. Default behavior.
+    - `true` : Can scroll in all cases
 - `header` : Game object of header, optional.
 - `footer` : Game object of footer, optional.
 - `space` : Pads spaces
@@ -333,10 +337,6 @@ See also - [dirty](ui-basesizer.md#dirty)
     textArea.scrollToBottom();
     ```
     - Equal to `textArea.t = 1;`
-- Scroll last line to bottom
-    ```javascript
-    textArea.scrollLastLineToButtom();
-    ```
 
 #### Enable/disable scrolling
 

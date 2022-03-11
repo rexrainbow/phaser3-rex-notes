@@ -11184,8 +11184,9 @@
       _this.execeedTopState = false;
       _this.execeedBottomState = false;
 
-      _this.setClampMode(GetValue$1(config, 'clamplTextOY', true)); // Add elements
+      _this.setClampMode(GetValue$1(config, 'clamplTextOY', true));
 
+      _this.alwaysScrollable = GetValue$1(config, 'alwaysScrollable', false); // Add elements
 
       var background = GetValue$1(config, 'background', undefined);
       var textObject = GetValue$1(config, 'text', undefined);
@@ -11352,7 +11353,7 @@
         if (this._textVisibleHeight === undefined) {
           var h = this.textHeight - this.textObjectHeight;
 
-          if (h < 0) {
+          if (!this.alwaysScrollable && h < 0) {
             h = 0;
           }
 
@@ -11447,12 +11448,6 @@
         this.t = percentage;
         return this;
       }
-    }, {
-      key: "scrollLastLineToButtom",
-      value: function scrollLastLineToButtom() {
-        this.setTextOY(this.textObjectHeight - this.textHeight);
-        return this;
-      }
     }]);
 
     return TextBlock;
@@ -11531,7 +11526,8 @@
         text: textObject,
         textMask: textMask,
         content: content,
-        clamplTextOY: GetValue(config, 'clamplChildOY', false)
+        clamplTextOY: GetValue(config, 'clamplChildOY', false),
+        alwaysScrollable: GetValue(config, 'alwaysScrollable', false)
       });
       scene.add.existing(textBlock); // Important: Add to display list for touch detecting
 
@@ -11575,12 +11571,6 @@
       key: "contentHeight",
       get: function get() {
         return this.childrenMap.child.textHeight;
-      }
-    }, {
-      key: "scrollLastLineToButtom",
-      value: function scrollLastLineToButtom() {
-        this.childrenMap.child.scrollLastLineToButtom();
-        return this;
       }
     }]);
 
