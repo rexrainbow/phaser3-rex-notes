@@ -517,6 +517,30 @@ Size of hit-area is word-width x line-height, or image-width x line-height.
 
     }, scope)
     ```
+- Pointer over
+    ```javascript
+    txt.on('areaover', function(key, pointer, localX, localY){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areaover-' + key, function(pointer, localX, localY){
+
+    }, scope)
+    ```
+- Pointer out
+    ```javascript
+    txt.on('areaout', function(key, pointer){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areaout-' + key, function(pointer){
+
+    }, scope)
+    ```
 
 #### Draw hit-areas
 

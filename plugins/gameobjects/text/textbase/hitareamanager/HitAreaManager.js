@@ -29,10 +29,9 @@ class HitAreaManager {
         return this;
     }
 
-    getFirstHitArea(x, y) {
-        var hitAreas = this.hitAreas, hitArea;
-        for (var i = 0, cnt = hitAreas.length; i < cnt; i++) {
-            hitArea = hitAreas[i];
+    getFirst(x, y) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+            var hitArea = this.hitAreas[i];
             if (hitArea.contains(x, y)) {
                 return hitArea;
             }
@@ -53,10 +52,11 @@ class HitAreaManager {
                 .translateCanvas(parent.x, parent.y)
         }
 
-        var hitAreas = this.hitAreas, hitArea;
-        for (var i = 0, cnt = hitAreas.length; i < cnt; i++) {
-            hitArea = hitAreas[i];
-            graphics.lineStyle(1, color).strokeRect(hitArea.x, hitArea.y, hitArea.width, hitArea.height);
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+            var hitArea = this.hitAreas[i];
+            graphics
+                .lineStyle(1, color)
+                .strokeRect(hitArea.x, hitArea.y, hitArea.width, hitArea.height);
         }
 
         if (parent) {

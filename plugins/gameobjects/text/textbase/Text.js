@@ -502,9 +502,15 @@ class Text extends GameObject {
         return out;
     }
 
-    setInteractive(shape, callback, dropZone) {
-        GameObject.prototype.setInteractive.call(this, shape, callback, dropZone);
-        this.canvasText.setInteractive();
+    setInteractive(hitArea, hitAreaCallback, dropZone) {
+        var isInteractived = !!this.input;
+
+        GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+
+        if (!isInteractived) {
+            this.canvasText.setInteractive();
+        }
+
         return this;
     }
 

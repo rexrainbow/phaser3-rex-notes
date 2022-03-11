@@ -43,3 +43,11 @@ gameObject.setInteractive({
     useHandCursor: true
 });
 ```
+
+### Change current cursor
+
+```javascript
+scene.input.manager.canvas.style.cursor = cursor;
+```
+
+- `cursor` : CSSString

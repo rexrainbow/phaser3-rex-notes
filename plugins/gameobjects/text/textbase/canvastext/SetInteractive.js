@@ -1,19 +1,61 @@
 var SetInteractive = function () {
     this.parent
-        .on('pointerdown', function (pointer, localX, localY, event) {
-            FireEvent.call(this, 'areadown', pointer, localX, localY);
-        }, this)
-        .on('pointerup', function (pointer, localX, localY, event) {
-            FireEvent.call(this, 'areaup', pointer, localX, localY);
+
+        .on('pointerdown', OnAreaDown, this)
+
+        .on('pointerup', OnAreaUp, this)
+
+        .on('pointermove', OnAreaOverOut, this)
+        .on('pointerover', OnAreaOverOut, this)
+        .on('pointerout', function (pointer, event) {
+            OnAreaOverOut.call(this, pointer, null, null, event);
         }, this)
 }
 
-var FireEvent = function (eventName, pointer, localX, localY) {
-    var area = this.hitAreaManager.getFirstHitArea(localX, localY);
+var OnAreaDown = function (pointer, localX, localY, event) {
+    var area = this.hitAreaManager.getFirst(localX, localY);
     if (area === null) {
         return;
     }
-    var key = area.key;
+
+    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY);
+}
+
+var OnAreaUp = function (pointer, localX, localY, event) {
+    var area = this.hitAreaManager.getFirst(localX, localY);
+    if (area === null) {
+        return;
+    }
+
+    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY);
+}
+
+var OnAreaOverOut = function (pointer, localX, localY, event) {
+    if (localX === null) {  // Case of pointerout
+        if (this.lastHitAreaKey !== null) {
+            FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer);
+        }
+        this.lastHitAreaKey = null;
+        return;
+    }
+
+    var area = this.hitAreaManager.getFirst(localX, localY);
+    var hitAreaKey = (area) ? area.key : null;
+    if (this.lastHitAreaKey === hitAreaKey) {
+        return;
+    }
+
+    if (this.lastHitAreaKey !== null) {
+        FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer);
+    }
+    if (hitAreaKey !== null) {
+        FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY);
+    }
+
+    this.lastHitAreaKey = hitAreaKey;
+}
+
+var FireEvent = function (eventName, key, pointer, localX, localY) {
     this.parent.emit(`${eventName}-${key}`, pointer, localX, localY)
     this.parent.emit(eventName, key, pointer, localX, localY)
 }

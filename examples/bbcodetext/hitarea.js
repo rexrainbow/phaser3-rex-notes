@@ -36,6 +36,9 @@ class Demo extends Phaser.Scene {
             }
         })
             .drawAreaBounds(this.add.graphics(), 0xff0000)
+
+        var scene = this;
+        text
             .setInteractive()
             .on('areadown', function (key) {
                 if (!IsURLKey(key)) {
@@ -46,6 +49,16 @@ class Demo extends Phaser.Scene {
                 if (IsURLKey(key)) {
                     window.open(GetURL(key), '_blank');
                 }
+            })
+            .on('areaover', function (key) {
+                print.text += `Over area:${key}\n`;
+
+                scene.input.manager.canvas.style.cursor = 'pointer';
+            })
+            .on('areaout', function (key) {
+                print.text += `Out area:${key}\n`;
+
+                scene.input.manager.canvas.style.cursor = '';
             })
 
     }

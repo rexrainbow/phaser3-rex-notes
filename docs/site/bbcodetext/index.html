@@ -8720,6 +8720,26 @@
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
 </code></pre></div></li>
+<li>Pointer over
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaover-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Pointer out
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaout-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div></li>
 </ul>
 <h4 id="draw-hit-areas">Draw hit-areas<a class="headerlink" href="#draw-hit-areas" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">drawAreaBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>

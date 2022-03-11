@@ -2127,13 +2127,10 @@
         return this;
       }
     }, {
-      key: "getFirstHitArea",
-      value: function getFirstHitArea(x, y) {
-        var hitAreas = this.hitAreas,
-            hitArea;
-
-        for (var i = 0, cnt = hitAreas.length; i < cnt; i++) {
-          hitArea = hitAreas[i];
+      key: "getFirst",
+      value: function getFirst(x, y) {
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          var hitArea = this.hitAreas[i];
 
           if (hitArea.contains(x, y)) {
             return hitArea;
@@ -2153,11 +2150,8 @@
           graphics.save().scaleCanvas(parent.scaleX, parent.scaleY).rotateCanvas(parent.rotation).translateCanvas(parent.x, parent.y);
         }
 
-        var hitAreas = this.hitAreas,
-            hitArea;
-
-        for (var i = 0, cnt = hitAreas.length; i < cnt; i++) {
-          hitArea = hitAreas[i];
+        for (var i = 0, cnt = this.hitAreas.length; i < cnt; i++) {
+          var hitArea = this.hitAreas[i];
           graphics.lineStyle(1, color).strokeRect(hitArea.x, hitArea.y, hitArea.width, hitArea.height);
         }
 
@@ -2173,21 +2167,61 @@
   }();
 
   var SetInteractive = function SetInteractive() {
-    this.parent.on('pointerdown', function (pointer, localX, localY, event) {
-      FireEvent.call(this, 'areadown', pointer, localX, localY);
-    }, this).on('pointerup', function (pointer, localX, localY, event) {
-      FireEvent.call(this, 'areaup', pointer, localX, localY);
+    this.parent.on('pointerdown', OnAreaDown, this).on('pointerup', OnAreaUp, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
+      OnAreaOverOut.call(this, pointer, null, null, event);
     }, this);
   };
 
-  var FireEvent = function FireEvent(eventName, pointer, localX, localY) {
-    var area = this.hitAreaManager.getFirstHitArea(localX, localY);
+  var OnAreaDown = function OnAreaDown(pointer, localX, localY, event) {
+    var area = this.hitAreaManager.getFirst(localX, localY);
 
     if (area === null) {
       return;
     }
 
-    var key = area.key;
+    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY);
+  };
+
+  var OnAreaUp = function OnAreaUp(pointer, localX, localY, event) {
+    var area = this.hitAreaManager.getFirst(localX, localY);
+
+    if (area === null) {
+      return;
+    }
+
+    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY);
+  };
+
+  var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
+    if (localX === null) {
+      // Case of pointerout
+      if (this.lastHitAreaKey !== null) {
+        FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer);
+      }
+
+      this.lastHitAreaKey = null;
+      return;
+    }
+
+    var area = this.hitAreaManager.getFirst(localX, localY);
+    var hitAreaKey = area ? area.key : null;
+
+    if (this.lastHitAreaKey === hitAreaKey) {
+      return;
+    }
+
+    if (this.lastHitAreaKey !== null) {
+      FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer);
+    }
+
+    if (hitAreaKey !== null) {
+      FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY);
+    }
+
+    this.lastHitAreaKey = hitAreaKey;
+  };
+
+  var FireEvent = function FireEvent(eventName, key, pointer, localX, localY) {
     this.parent.emit("".concat(eventName, "-").concat(key), pointer, localX, localY);
     this.parent.emit(eventName, key, pointer, localX, localY);
   };
@@ -2371,6 +2405,7 @@
       this.penManager = this.newPenManager();
       this._tmpPenManager = null;
       this.hitAreaManager = new HitAreaManager();
+      this.lastHitAreaKey = null;
       var context = this.context;
 
       this.getTextWidth = function (text) {
@@ -3405,9 +3440,14 @@
       }
     }, {
       key: "setInteractive",
-      value: function setInteractive(shape, callback, dropZone) {
-        GameObject.prototype.setInteractive.call(this, shape, callback, dropZone);
-        this.canvasText.setInteractive();
+      value: function setInteractive(hitArea, hitAreaCallback, dropZone) {
+        var isInteractived = !!this.input;
+        GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+
+        if (!isInteractived) {
+          this.canvasText.setInteractive();
+        }
+
         return this;
       }
     }, {

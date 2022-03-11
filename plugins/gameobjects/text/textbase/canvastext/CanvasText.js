@@ -25,6 +25,7 @@ class CanvasText {
         this._tmpPenManager = null;
 
         this.hitAreaManager = new HitAreaManager();
+        this.lastHitAreaKey = null;
 
         var context = this.context;
         this.getTextWidth = function (text) {
