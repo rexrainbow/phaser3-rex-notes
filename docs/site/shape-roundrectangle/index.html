@@ -8282,6 +8282,10 @@
 <ul>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusTL</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">radiusTL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusTR</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">radiusTR</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusBL</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">radiusBL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusBR</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">radiusBR</span><span class="p">;</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cornerRadius</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">cornerRadius</span><span class="p">;</span>
@@ -8299,9 +8303,17 @@
 </li>
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">setRadiusTL</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// number, or {x,y}</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">setRadiusTR</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// number, or {x,y}</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">setRadiusBL</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// number, or {x,y}</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">setRadiusBR</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// number, or {x,y}</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">radiusTL</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>  <span class="c1">// number, or {x,y}</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">radiusTR</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>  <span class="c1">// number, or {x,y}</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">radiusBL</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>  <span class="c1">// number, or {x,y}</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">radiusBR</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>  <span class="c1">// number, or {x,y}</span>
 </code></pre></div><ul>
 <li><code>radius</code> :<ul>
 <li>Number : 4 corners with the same radius.</li>

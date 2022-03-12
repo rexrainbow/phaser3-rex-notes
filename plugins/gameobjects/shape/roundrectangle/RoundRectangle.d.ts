@@ -41,6 +41,30 @@ declare class RoundRectangle extends Phaser.GameObjects.Shape {
         value: number | RoundRectangle.IRadiusConfig
     ): this;
 
+    radiusTL: number;
+
+    setRadiusTL(
+        value: number | RoundRectangle.IRadiusConfig
+    ): this;
+
+    radiusTR: number;
+
+    setRadiusTR(
+        value: number | RoundRectangle.IRadiusConfig
+    ): this;
+
+    radiusBL: number;
+
+    setRadiusBL(
+        value: number | RoundRectangle.IRadiusConfig
+    ): this;
+
+    radiusBR: number;
+
+    setRadiusBR(
+        value: number | RoundRectangle.IRadiusConfig
+    ): this;
+
     readonly cornerRadius: {
         tl: { x: number, y: number },
         tr: { x: number, y: number },

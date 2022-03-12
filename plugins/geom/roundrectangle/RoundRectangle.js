@@ -27,24 +27,11 @@ class RoundRectangle {
         return this;
     }
 
-    setRadius(config) {
-        if (config === undefined) {
-            config = 0;
+    setRadius(value) {
+        if (value === undefined) {
+            value = 0;
         }
-        var defaultRadiusX, defaultRadiusY;
-        if (typeof (config) === 'number') {
-            defaultRadiusX = config;
-            defaultRadiusY = config;
-        } else {
-            defaultRadiusX = GetValue(config, 'x', 0);
-            defaultRadiusY = GetValue(config, 'y', 0);
-        }
-
-        var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue(config, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue(config, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue(config, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue(config, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        this.radius = value;
         return this;
     }
 
@@ -88,17 +75,65 @@ class RoundRectangle {
 
     get radius() {
         var radius = this.cornerRadius;
-        var max = Math.max(
-            radius.tl.x,
-            radius.tl.y,
-            radius.tr.x,
-            radius.tr.y,
-            radius.bl.x,
-            radius.bl.y,
-            radius.br.x,
-            radius.br.y
+        return Math.max(
+            radius.tl.x, radius.tl.y,
+            radius.tr.x, radius.tr.y,
+            radius.bl.x, radius.bl.y,
+            radius.br.x, radius.br.y
         );
-        return max;
+    }
+
+    set radius(value) {
+        var defaultRadiusX, defaultRadiusY;
+        if (typeof (value) === 'number') {
+            defaultRadiusX = value;
+            defaultRadiusY = value;
+        } else {
+            defaultRadiusX = GetValue(value, 'x', 0);
+            defaultRadiusY = GetValue(value, 'y', 0);
+        }
+
+        var radius = this.cornerRadius;
+        radius.tl = GetRadius(GetValue(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+    }
+
+    get radiusTL() {
+        var radius = this.cornerRadius.tl;
+        return Math.max(radius.x, radius.y);
+    }
+
+    set radiusTL(value) {
+        SetRadius(this.cornerRadius.tl, value);
+    }
+
+    get radiusTR() {
+        var radius = this.cornerRadius.tr;
+        return Math.max(radius.x, radius.y);
+    }
+
+    set radiusTR(value) {
+        SetRadius(this.cornerRadius.tr, value);
+    }
+
+    get radiusBL() {
+        var radius = this.cornerRadius.bl;
+        return Math.max(radius.x, radius.y);
+    }
+
+    set radiusBL(value) {
+        SetRadius(this.cornerRadius.bl, value);
+    }
+
+    get radiusBR() {
+        var radius = this.cornerRadius.br;
+        return Math.max(radius.x, radius.y);
+    }
+
+    set radiusBR(value) {
+        SetRadius(this.cornerRadius.br, value);
     }
 }
 
@@ -115,6 +150,16 @@ var GetRadius = function (radius, defaultRadiusX, defaultRadiusY) {
         };
     } else {
         return radius;
+    }
+}
+
+var SetRadius = function (radius, value) {
+    if (typeof (value) === 'number') {
+        radius.x = value;
+        radius.y = value;
+    } else {
+        radius.x = GetValue(value, 'x', 0);
+        radius.y = GetValue(value, 'y', 0);
     }
 }
 export default RoundRectangle;

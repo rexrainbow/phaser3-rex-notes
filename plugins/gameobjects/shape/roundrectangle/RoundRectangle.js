@@ -165,11 +165,79 @@ class RoundRectangle extends Shape {
         this.dirty = true;
     }
 
+    get radiusTL() {
+        return this.geom.radiusTL;
+    }
+
+    set radiusTL(value) {
+        this.geom.radiusTL = value;
+        this.dirty = true;
+    }
+
+    get radiusTR() {
+        return this.geom.radiusTR;
+    }
+
+    set radiusTR(value) {
+        this.geom.radiusTR = value;
+        this.dirty = true;
+    }
+
+    get radiusBL() {
+        return this.geom.radiusBL;
+    }
+
+    set radiusBL(value) {
+        this.geom.radiusBL = value;
+        this.dirty = true;
+    }
+
+    get radiusBR() {
+        return this.geom.radiusBR;
+    }
+
+    set radiusBR(value) {
+        this.geom.radiusBR = value;
+        this.dirty = true;
+    }
+
     setRadius(value) {
         if (value === undefined) {
             value = 0;
         }
         this.radius = value;
+        return this;
+    }
+
+    setRadiusTL(value) {
+        if (value === undefined) {
+            value = 0;
+        }
+        this.radiusTL = value;
+        return this;
+    }
+
+    setRadiusTR(value) {
+        if (value === undefined) {
+            value = 0;
+        }
+        this.radiusTR = value;
+        return this;
+    }
+
+    setRadiusBL(value) {
+        if (value === undefined) {
+            value = 0;
+        }
+        this.radiuBL = value;
+        return this;
+    }
+
+    setRadiusBR(value) {
+        if (value === undefined) {
+            value = 0;
+        }
+        this.radiusBR = value;
         return this;
     }
 

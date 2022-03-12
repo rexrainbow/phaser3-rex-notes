@@ -902,26 +902,12 @@
       }
     }, {
       key: "setRadius",
-      value: function setRadius(config) {
-        if (config === undefined) {
-          config = 0;
+      value: function setRadius(value) {
+        if (value === undefined) {
+          value = 0;
         }
 
-        var defaultRadiusX, defaultRadiusY;
-
-        if (typeof config === 'number') {
-          defaultRadiusX = config;
-          defaultRadiusY = config;
-        } else {
-          defaultRadiusX = GetValue$2w(config, 'x', 0);
-          defaultRadiusY = GetValue$2w(config, 'y', 0);
-        }
-
-        var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$2w(config, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$2w(config, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$2w(config, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$2w(config, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        this.radius = value;
         return this;
       }
     }, {
@@ -971,8 +957,60 @@
       key: "radius",
       get: function get() {
         var radius = this.cornerRadius;
-        var max = Math.max(radius.tl.x, radius.tl.y, radius.tr.x, radius.tr.y, radius.bl.x, radius.bl.y, radius.br.x, radius.br.y);
-        return max;
+        return Math.max(radius.tl.x, radius.tl.y, radius.tr.x, radius.tr.y, radius.bl.x, radius.bl.y, radius.br.x, radius.br.y);
+      },
+      set: function set(value) {
+        var defaultRadiusX, defaultRadiusY;
+
+        if (typeof value === 'number') {
+          defaultRadiusX = value;
+          defaultRadiusY = value;
+        } else {
+          defaultRadiusX = GetValue$2w(value, 'x', 0);
+          defaultRadiusY = GetValue$2w(value, 'y', 0);
+        }
+
+        var radius = this.cornerRadius;
+        radius.tl = GetRadius(GetValue$2w(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$2w(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$2w(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$2w(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+      }
+    }, {
+      key: "radiusTL",
+      get: function get() {
+        var radius = this.cornerRadius.tl;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.tl, value);
+      }
+    }, {
+      key: "radiusTR",
+      get: function get() {
+        var radius = this.cornerRadius.tr;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.tr, value);
+      }
+    }, {
+      key: "radiusBL",
+      get: function get() {
+        var radius = this.cornerRadius.bl;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.bl, value);
+      }
+    }, {
+      key: "radiusBR",
+      get: function get() {
+        var radius = this.cornerRadius.br;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.br, value);
       }
     }]);
 
@@ -992,6 +1030,16 @@
       };
     } else {
       return radius;
+    }
+  };
+
+  var SetRadius = function SetRadius(radius, value) {
+    if (typeof value === 'number') {
+      radius.x = value;
+      radius.y = value;
+    } else {
+      radius.x = GetValue$2w(value, 'x', 0);
+      radius.y = GetValue$2w(value, 'y', 0);
     }
   };
 
@@ -1451,6 +1499,42 @@
         this.dirty = true;
       }
     }, {
+      key: "radiusTL",
+      get: function get() {
+        return this.geom.radiusTL;
+      },
+      set: function set(value) {
+        this.geom.radiusTL = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "radiusTR",
+      get: function get() {
+        return this.geom.radiusTR;
+      },
+      set: function set(value) {
+        this.geom.radiusTR = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "radiusBL",
+      get: function get() {
+        return this.geom.radiusBL;
+      },
+      set: function set(value) {
+        this.geom.radiusBL = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "radiusBR",
+      get: function get() {
+        return this.geom.radiusBR;
+      },
+      set: function set(value) {
+        this.geom.radiusBR = value;
+        this.dirty = true;
+      }
+    }, {
       key: "setRadius",
       value: function setRadius(value) {
         if (value === undefined) {
@@ -1458,6 +1542,46 @@
         }
 
         this.radius = value;
+        return this;
+      }
+    }, {
+      key: "setRadiusTL",
+      value: function setRadiusTL(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.radiusTL = value;
+        return this;
+      }
+    }, {
+      key: "setRadiusTR",
+      value: function setRadiusTR(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.radiusTR = value;
+        return this;
+      }
+    }, {
+      key: "setRadiusBL",
+      value: function setRadiusBL(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.radiuBL = value;
+        return this;
+      }
+    }, {
+      key: "setRadiusBR",
+      value: function setRadiusBR(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.radiusBR = value;
         return this;
       }
     }, {

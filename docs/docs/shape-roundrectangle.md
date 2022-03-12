@@ -273,6 +273,10 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, f
 - Get
     ```javascript
     var radius = rect.radius;
+    var radiusTL = rect.radiusTL;
+    var radiusTR = rect.radiusTR;
+    var radiusBL = rect.radiusBL;
+    var radiusBR = rect.radiusBR;
     ```
     or
     ```javascript
@@ -291,10 +295,18 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, f
 - Set
     ```javascript
     rect.setRadius(value);
+    rect.setRadiusTL(value);  // number, or {x,y}
+    rect.setRadiusTR(value);  // number, or {x,y}
+    rect.setRadiusBL(value);  // number, or {x,y}
+    rect.setRadiusBR(value);  // number, or {x,y}
     ```
     or
     ```javascript
     rect.radius = radius;
+    rect.radiusTL = radius;  // number, or {x,y}
+    rect.radiusTR = radius;  // number, or {x,y}
+    rect.radiusBL = radius;  // number, or {x,y}
+    rect.radiusBR = radius;  // number, or {x,y}
     ```
     - `radius` :
         - Number : 4 corners with the same radius.
