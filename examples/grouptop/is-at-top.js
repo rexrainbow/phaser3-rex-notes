@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import IsAtTop from '../../plugins/utils/input/IsAtTop.js';
+import GroupTopPlugin from '../../plugins/grouptop-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -41,6 +41,7 @@ var CreateBtn = function (scene, config) {
     var y = GetValue(config, 'y', 0);
     var color = GetValue(config, 'color', 0xffffff);
     var name = GetValue(config, 'name', '');
+    var groupTop = scene.plugins.get('rexGroupTop');
 
     var btn = scene.add.rectangle(x, y, 120, 120, color)
         .setName(name);
@@ -51,9 +52,10 @@ var CreateBtn = function (scene, config) {
 
     btn
         .setInteractive()
-        .on('pointerdown', function () {            
-            if (IsAtTop(scene, 'btn')) {
+        .on('pointerdown', function (pointer, localX, localY, event) {
+            if (groupTop.isAtTop('btn')) {
                 scene.print.text += `click ${btn.name}\n`;
+                event.stopPropagation();
             }
         })
 
@@ -71,6 +73,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexGroupTop',
+            plugin: GroupTopPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
