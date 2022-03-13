@@ -1,6 +1,13 @@
 export default Anchor;
 
 declare namespace Anchor {
+    type OnResizeCallbackType = (
+      width: number,
+      height: number,
+      gameObject: Phaser.GameObjects.GameObject,
+      anchor: Anchor
+    ) => void;
+
     type OnUpdateViewportCallbackType = (
         viewport: Phaser.Geom.Rectangle,
         gameObject: Phaser.GameObjects.GameObject,
@@ -13,6 +20,9 @@ declare namespace Anchor {
 
         width?: string,
         height?: string,
+
+        onResizeCallback?: OnResizeCallbackType,
+        onResizeCallbackScope?: unknown
 
         onUpdateViewportCallback?: OnUpdateViewportCallbackType,
         onUpdateViewportCallbackScope?: unknown
