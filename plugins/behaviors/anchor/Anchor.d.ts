@@ -2,10 +2,10 @@ export default Anchor;
 
 declare namespace Anchor {
     type OnResizeCallbackType = (
-      width: number,
-      height: number,
-      gameObject: Phaser.GameObjects.GameObject,
-      anchor: Anchor
+        width: number,
+        height: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        anchor: Anchor
     ) => void;
 
     type OnUpdateViewportCallbackType = (
@@ -22,7 +22,7 @@ declare namespace Anchor {
         height?: string,
 
         onResizeCallback?: OnResizeCallbackType,
-        onResizeCallbackScope?: unknown
+        onResizeCallbackScope?: unknown,
 
         onUpdateViewportCallback?: OnUpdateViewportCallbackType,
         onUpdateViewportCallbackScope?: unknown
