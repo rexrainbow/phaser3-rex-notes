@@ -158,7 +158,7 @@ scene.matter.add.mouseSpring();
     scene.matter.world.setGravity(x, y);
     // scene.matter.world.setGravity(x, y, scale);
     ```
-- Disalbe
+- Disable
     ```javascript
     scene.matter.world.disableGravity();
     ```
