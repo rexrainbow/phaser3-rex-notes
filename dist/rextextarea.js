@@ -9477,10 +9477,10 @@
 
         if (pointer && !this.isInTouched) {
           // Touch start
-          this.x = pointer.x;
-          this.y = pointer.y;
-          this.preX = pointer.x;
-          this.preY = pointer.y;
+          this.x = pointer.worldX;
+          this.y = pointer.worldY;
+          this.preX = pointer.worldX;
+          this.preY = pointer.worldY;
           this.isInTouched = true;
           this.holdStartTime = undefined;
           this.emit('touchstart', pointer, this.localX, this.localY);
@@ -9498,8 +9498,8 @@
             // Move
             this.preX = this.x;
             this.preY = this.y;
-            this.x = pointer.x;
-            this.y = pointer.y;
+            this.x = pointer.worldX;
+            this.y = pointer.worldY;
             this.holdStartTime = undefined;
             this.justMoved = true;
             this.emit('touchmove', pointer, this.localX, this.localY);

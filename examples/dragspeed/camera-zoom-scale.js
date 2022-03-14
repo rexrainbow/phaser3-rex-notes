@@ -12,22 +12,27 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var bg = this.add.rectangle(400, 300, 800, 600, 0x333333)
+        var scale = 0.5;
+        var scrollX = 400, scrollY = 300;
+        var centerX = (400 - scrollX) / scale,
+            centerY = (300 - scrollY) / scale
+        var bg = this.add.rectangle(
+            centerX,
+            centerY,
+            800 / scale,
+            600 / scale,
+            0x333333
+        )
             .setInteractive();
+        var circle = this.add.circle(centerX, centerY, 32, 0x880000);
 
-        var txtSpeed = this.add.text(0, 0, '-');
         var touchState = this.plugins.get('rexDragSpeed').add(bg)
-            .on('touchstart', function (pointer) {
-                txtSpeed.text = '-';
-                txtSpeed.setText('-');
+            .on('touchmove', function (pointer) {
+                circle.x += touchState.dx;
+                circle.y += touchState.dy;
             })
-            .on('touchend', function (pointer) {
-                txtSpeed.text = `\
-${touchState.speed}
-${Math.floor(touchState.preX)},${Math.floor(touchState.preY)} -> ${Math.floor(touchState.x)},${Math.floor(touchState.y)}\
-`
-            });
 
+        this.cameras.main.setScroll(-scrollX, -scrollY).setZoom(scale)
     }
 
     update() { }
