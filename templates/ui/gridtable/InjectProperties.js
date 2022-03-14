@@ -20,7 +20,12 @@ var InjectProperties = function (table) {
     });
     Object.defineProperty(table, 'childVisibleHeight', {
         get: function () {
-            return table.textObjectHeight;
+            return table.instHeight;
+        }
+    });
+    Object.defineProperty(table, 'childHeight', {
+        get: function () {
+            return table.tableHeight;
         }
     });
 };

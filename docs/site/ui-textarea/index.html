@@ -8136,11 +8136,13 @@
     <span class="c1">// alwaysScrollable: false,</span>
 
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">background</span><span class="o">:</span> <span class="nx">sliderBackgroundGameObject</span><span class="p">,</span>
+        <span class="c1">// background: sliderBackgroundGameObject,</span>
         <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
         <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
-        <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;drag&#39;</span><span class="p">,</span>
-        <span class="nx">position</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span>
+        <span class="c1">// input: &#39;drag&#39;,</span>
+        <span class="c1">// position: &#39;right&#39;,</span>
+        <span class="c1">// adaptThumbSize: false,</span>
+        <span class="c1">// minThumbSize: undefined,</span>
     <span class="p">},</span>
 
     <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
@@ -8240,6 +8242,16 @@
 <li><code>1</code>, <code>'left'</code>, <code>'top'</code> : Sldier at left/top side.</li>
 </ul>
 </li>
+<li><code>slider.adaptThumbSize</code> :<ul>
+<li><code>false</code> : Don't adjust height/width of thumb. Default behavior.</li>
+<li><code>true</code> : Adjust height/width of thumb according to ratio of visible child.<ul>
+<li>Minimum height/width of thumb = <code>slider.minThumbSize</code>. If content is larger then a page.</li>
+<li>Maximum height/width of thumb = height/width of <code>slider.track</code>. If content is less then a page.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>slider.minThumbSize</code> : Minimum height/width of thumb used in <code>slider.adaptThumbSize</code> mode.</li>
 <li>Set to <code>false</code> to skip creating slider.</li>
 </ul>
 </li>

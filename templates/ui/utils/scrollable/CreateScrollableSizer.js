@@ -65,6 +65,11 @@ var CreateScrollableSizer = function (parent, config) {
             // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
             sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
             slider = new Slider(scene, sliderConfig);
+            parent.adaptThumbSizeMode = GetValue(sliderConfig, 'adaptThumbSize', false);
+            parent.minThumbSize = GetValue(sliderConfig, 'minThumbSize', undefined);
+        } else {
+            parent.adaptThumbSizeMode = false;
+            parent.minThumbSize = undefined;
         }
 
         if (scrollerConfig) {

@@ -222,10 +222,6 @@ class GridTable extends ContainerLite {
         return -this.tableVisibleHeight;
     }
 
-    get childVisibleHeight() {
-        return this.instHeight;
-    }
-
     get leftTableOX() {
         return 0;
     }

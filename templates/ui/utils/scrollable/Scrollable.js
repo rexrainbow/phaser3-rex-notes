@@ -94,6 +94,7 @@ class Scrollable extends Sizer {
         - child.topChildOY (R)
         - child.bottomChildOY (R)
         - child.childVisibleHeight (R)
+        - child.childHeight (R)
         */
     }
 
@@ -104,6 +105,40 @@ class Scrollable extends Sizer {
         }
         super.runLayout(parent, newWidth, newHeight);
         this.resizeController();
+
+        if (this.adaptThumbSizeMode) {
+            // Adjust size of slider.thumb, run layout again
+            // Don't layout child, header, footer again
+            var child = this.childrenMap.child;
+            var header = this.childrenMap.header;
+            var footer = this.childrenMap.footer;
+
+            var childDirtySave = (child) ? child.dirty : undefined;
+            var headerDirtySave = (header) ? header.dirty : undefined;
+            var footerDirtySave = (footer) ? footer.dirty : undefined;
+
+            if (child) {
+                child.dirty = false;
+            }
+            if (header) {
+                header.dirty = false;
+            }
+            if (footer) {
+                footer.dirty = false;
+            }
+
+            super.runLayout(parent, newWidth, newHeight);
+
+            if (child) {
+                child.dirty = childDirtySave;
+            }
+            if (header) {
+                header.dirty = headerDirtySave;
+            }
+            if (footer) {
+                footer.dirty = footerDirtySave;
+            }
+        }
 
         // Set `t` to 0 at first runLayout()
         if (!this.runLayoutFlag) {
@@ -163,6 +198,10 @@ class Scrollable extends Sizer {
 
     get childVisibleHeight() {
         return this.childrenMap.child.childVisibleHeight;
+    }
+
+    get childHeight() {
+        return this.childrenMap.child.childHeight;
     }
 
     get isOverflow() {

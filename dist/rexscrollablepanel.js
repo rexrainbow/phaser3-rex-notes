@@ -10252,6 +10252,11 @@
 
         sliderConfig.orientation = scrollableSizer.orientation === 0 ? 1 : 0;
         slider = new Slider(scene, sliderConfig);
+        parent.adaptThumbSizeMode = GetValue$4(sliderConfig, 'adaptThumbSize', false);
+        parent.minThumbSize = GetValue$4(sliderConfig, 'minThumbSize', undefined);
+      } else {
+        parent.adaptThumbSizeMode = false;
+        parent.minThumbSize = undefined;
       }
 
       if (scrollerConfig) {
@@ -10345,6 +10350,33 @@
     }
 
     this.updateController();
+
+    if (this.adaptThumbSizeMode) {
+      // Change slider size according to visible ratio
+      var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
+      var track = slider.childrenMap.track;
+      var thumb = slider.childrenMap.thumb;
+      var minThumbSize = this.minThumbSize;
+
+      if (this.scrollMode === 0) {
+        var newHeight = track.displayHeight * ratio;
+
+        if (minThumbSize !== undefined && newHeight < minThumbSize) {
+          newHeight = minThumbSize;
+        }
+
+        ResizeGameObject(thumb, undefined, newHeight);
+      } else {
+        var newWidth = track.displayWidth * ratio;
+
+        if (minThumbSize !== undefined && newWidth < minThumbSize) {
+          newWidth = minThumbSize;
+        }
+
+        ResizeGameObject(thumb, newWidth, undefined);
+      }
+    }
+
     return this;
   };
 
@@ -10466,6 +10498,7 @@
       - child.topChildOY (R)
       - child.bottomChildOY (R)
       - child.childVisibleHeight (R)
+      - child.childHeight (R)
       */
 
       return _this;
@@ -10481,7 +10514,45 @@
 
         _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
 
-        this.resizeController(); // Set `t` to 0 at first runLayout()
+        this.resizeController();
+
+        if (this.adaptThumbSizeMode) {
+          // Adjust size of slider.thumb, run layout again
+          // Don't layout child, header, footer again
+          var child = this.childrenMap.child;
+          var header = this.childrenMap.header;
+          var footer = this.childrenMap.footer;
+          var childDirtySave = child ? child.dirty : undefined;
+          var headerDirtySave = header ? header.dirty : undefined;
+          var footerDirtySave = footer ? footer.dirty : undefined;
+
+          if (child) {
+            child.dirty = false;
+          }
+
+          if (header) {
+            header.dirty = false;
+          }
+
+          if (footer) {
+            footer.dirty = false;
+          }
+
+          _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
+
+          if (child) {
+            child.dirty = childDirtySave;
+          }
+
+          if (header) {
+            header.dirty = headerDirtySave;
+          }
+
+          if (footer) {
+            footer.dirty = footerDirtySave;
+          }
+        } // Set `t` to 0 at first runLayout()
+
 
         if (!this.runLayoutFlag) {
           this.runLayoutFlag = true;
@@ -10545,6 +10616,11 @@
       key: "childVisibleHeight",
       get: function get() {
         return this.childrenMap.child.childVisibleHeight;
+      }
+    }, {
+      key: "childHeight",
+      get: function get() {
+        return this.childrenMap.child.childHeight;
       }
     }, {
       key: "isOverflow",

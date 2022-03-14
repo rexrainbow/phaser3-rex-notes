@@ -3508,11 +3508,6 @@
         return -this.tableVisibleHeight;
       }
     }, {
-      key: "childVisibleHeight",
-      get: function get() {
-        return this.instHeight;
-      }
-    }, {
       key: "leftTableOX",
       get: function get() {
         return 0;

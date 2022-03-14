@@ -23,5 +23,10 @@ var InjectProperties = function (textBlock) {
             return textBlock.textObjectHeight;
         }
     });
+    Object.defineProperty(textBlock, 'childHeight', {
+        get: function () {
+            return textBlock.textHeight;
+        }
+    });
 };
 export default InjectProperties;

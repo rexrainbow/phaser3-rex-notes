@@ -92,11 +92,13 @@ var textArea = scene.rexUI.add.textArea({
     // alwaysScrollable: false,
 
     slider: {
-        background: sliderBackgroundGameObject,
+        // background: sliderBackgroundGameObject,
         track: trackGameObject,
         thumb: thumbGameObject,
-        input: 'drag',
-        position: 'right',
+        // input: 'drag',
+        // position: 'right',
+        // adaptThumbSize: false,
+        // minThumbSize: undefined,
     },
 
     scroller: {
@@ -182,6 +184,12 @@ var textArea = scene.rexUI.add.textArea({
     - `slider.position` : Position of this sldier.
         - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
         - `1`, `'left'`, `'top'` : Sldier at left/top side.
+    - `slider.adaptThumbSize` :
+        - `false` : Don't adjust height/width of thumb. Default behavior.
+        - `true` : Adjust height/width of thumb according to ratio of visible child.
+            - Minimum height/width of thumb = `slider.minThumbSize`. If content is larger then a page.
+            - Maximum height/width of thumb = height/width of `slider.track`. If content is less then a page.
+    - `slider.minThumbSize` : Minimum height/width of thumb used in `slider.adaptThumbSize` mode.
     - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
