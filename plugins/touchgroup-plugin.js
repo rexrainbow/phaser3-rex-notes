@@ -1,4 +1,4 @@
-import GroupTop from './grouptop.js';
+import TouchGroup from './touchgroup.js';
 
 class GroupTopPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -10,20 +10,20 @@ class GroupTopPlugin extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
 
-        this.groupTop = this.add();
+        this.touchGroup = this.add();
     }
 
     destroy() {
-        this.groupTop.destroy();
+        this.touchGroup.destroy();
         super.destroy();
     }
 
     add() {
-        return new GroupTop(this.game);
+        return new TouchGroup(this.game);
     }
 
     isAtTop(groupName, key) {
-        return this.groupTop.isAtTop(groupName, key);
+        return this.touchGroup.isAtTop(groupName, key);
     }
 }
 

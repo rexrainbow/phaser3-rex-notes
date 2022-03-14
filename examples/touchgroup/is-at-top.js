@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import GroupTopPlugin from '../../plugins/grouptop-plugin.js';
+import TouchGroupPlugin from '../../plugins/touchgroup-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -41,7 +41,7 @@ var CreateBtn = function (scene, config) {
     var y = GetValue(config, 'y', 0);
     var color = GetValue(config, 'color', 0xffffff);
     var name = GetValue(config, 'name', '');
-    var groupTop = scene.plugins.get('rexGroupTop');
+    var groupTop = scene.plugins.get('rexTouchGroup');
 
     var btn = scene.add.rectangle(x, y, 120, 120, color)
         .setName(name);
@@ -75,8 +75,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexGroupTop',
-            plugin: GroupTopPlugin,
+            key: 'rexTouchGroup',
+            plugin: TouchGroupPlugin,
             start: true
         }]
     }

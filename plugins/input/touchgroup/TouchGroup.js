@@ -1,7 +1,7 @@
 import IsSceneObject from '../../utils/system/IsSceneObject';
 import Clear from '../../utils/object/Clear.js';
 
-class GroupTop {
+class TouchGroup {
     constructor(game) {
         if (IsSceneObject(game)) {
             game = game.game
@@ -47,4 +47,4 @@ class GroupTop {
     }
 }
 
-export default GroupTop;
+export default TouchGroup;
