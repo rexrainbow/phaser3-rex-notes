@@ -13,8 +13,8 @@ Matterjs physics Image/Sprite/Group object.
 #### Image object
 
 ```javascript
-var image = scene.matter.add.imag(x, y, key, frame);
-// var image = scene.matter.add.imag(x, y, key, frame, config);
+var image = scene.matter.add.image(x, y, key, frame);
+// var image = scene.matter.add.image(x, y, key, frame, config);
 ```
 
 - `config` : [Config object](matterjs-gameobject.md#config)
@@ -293,7 +293,7 @@ gameObject.setAngularVelocity(v);
     ```javascript
     gameObject.setSensor(value);
     ```
-    - `value` : Set `true` to enable senser.
+    - `value` : Set `true` to enable sensor.
 
 #### Collision group
 
