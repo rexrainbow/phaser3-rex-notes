@@ -327,6 +327,81 @@
     }
   };
 
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var Clear = function Clear(obj) {
+    if (Array.isArray(obj)) {
+      obj.length = 0;
+    } else {
+      for (var key in obj) {
+        delete obj[key];
+      }
+    }
+  };
+
+  var TouchGroup = /*#__PURE__*/function () {
+    function TouchGroup(game) {
+      _classCallCheck(this, TouchGroup);
+
+      if (IsSceneObject(game)) {
+        game = game.game;
+      }
+
+      this.ticker = game.loop;
+      this.topObjects = {};
+    }
+
+    _createClass(TouchGroup, [{
+      key: "destroy",
+      value: function destroy() {
+        this.ticker = undefined;
+        this.topObjects = undefined;
+      }
+    }, {
+      key: "isAtTop",
+      value: function isAtTop(groupName, key) {
+        var result;
+        var tick = this.ticker.frame;
+        var item = this.topObjects[groupName];
+
+        if (item) {
+          if (item.tick < tick) {
+            result = true;
+          } else if (item.tick === tick) {
+            result = key !== undefined && item.key === key;
+          } else {
+            result = false;
+          }
+
+          if (result) {
+            item.tick = tick;
+            item.key = key;
+          }
+        } else {
+          this.topObjects[groupName] = {
+            tick: tick,
+            key: key
+          };
+          result = true;
+        }
+
+        return result;
+      }
+    }, {
+      key: "clear",
+      value: function clear() {
+        Clear(this.topObjects);
+        return this;
+      }
+    }]);
+
+    return TouchGroup;
+  }();
+
   var TouchHelperPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(TouchHelperPlugin, _Phaser$Plugins$BaseP);
 
@@ -343,11 +418,19 @@
       value: function start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
+        this.touchGroup = new TouchGroup(this.game);
       }
     }, {
       key: "destroy",
       value: function destroy() {
+        this.touchGroup.destroy();
+
         _get(_getPrototypeOf(TouchHelperPlugin.prototype), "destroy", this).call(this);
+      }
+    }, {
+      key: "isAtTop",
+      value: function isAtTop(groupName, key) {
+        return this.touchGroup.isAtTop(groupName, key);
       }
     }]);
 

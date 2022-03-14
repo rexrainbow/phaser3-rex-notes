@@ -58,7 +58,7 @@ module.exports = {
     'pinchplugin': './plugins/pinch-plugin.js',
     'dragrotateplugin': './plugins/dragrotate-plugin.js',
     'gesturesplugin': './plugins/gestures-plugin.js',
-    'toucheventstopplugin': './plugins/toucheventstop-plugin.js',
+    'toucheventstopplugin': './plugins/toucheventstop-plugin.js',    
     'touchhelperplugin': './plugins/touchhelper-plugin.js',
     'keyshubplugin': './plugins/keyshub-plugin.js',
 

@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import TouchGroupPlugin from '../../plugins/touchgroup-plugin.js';
+import TouchHelperPlugin from '../../plugins/touchhelper-plugin';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -41,7 +41,7 @@ var CreateBtn = function (scene, config) {
     var y = GetValue(config, 'y', 0);
     var color = GetValue(config, 'color', 0xffffff);
     var name = GetValue(config, 'name', '');
-    var groupTop = scene.plugins.get('rexTouchGroup');
+    var touchHelper = scene.plugins.get('rexTouchHelper');
 
     var btn = scene.add.rectangle(x, y, 120, 120, color)
         .setName(name);
@@ -53,7 +53,7 @@ var CreateBtn = function (scene, config) {
     btn
         .setInteractive()
         .on('pointerdown', function (pointer, localX, localY, event) {
-            if (groupTop.isAtTop('btn')) {
+            if (touchHelper.isAtTop('btn')) {
                 scene.print.text += `click ${btn.name}\n`;
                 event.stopPropagation();
             }
@@ -75,8 +75,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexTouchGroup',
-            plugin: TouchGroupPlugin,
+            key: 'rexTouchHelper',
+            plugin: TouchHelperPlugin,
             start: true
         }]
     }
