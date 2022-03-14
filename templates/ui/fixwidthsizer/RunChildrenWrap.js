@@ -15,7 +15,9 @@ var RunChildrenWrap = function (lineWidth, out) {
 
     var children = this.sizerChildren;
     var child, childWidth, childHeight, remainder = 0;
-    var lastLine, lines = out.lines, newLine;
+    var lines = out.lines,
+        lastLine = undefined,
+        newLine;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (child === '\n') {
@@ -32,7 +34,7 @@ var RunChildrenWrap = function (lineWidth, out) {
             }
 
             childWidth = GetChildWidth(child);
-            newLine = (remainder < childWidth);
+            newLine = (remainder < childWidth) || (lastLine === undefined);
         }
         // New line
         if (newLine) {

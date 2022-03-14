@@ -7973,8 +7973,8 @@
         childWidth,
         childHeight,
         remainder = 0;
-    var lastLine,
-        lines = out.lines,
+    var lines = out.lines,
+        lastLine = undefined,
         newLine;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -7994,7 +7994,7 @@
         }
 
         childWidth = GetChildWidth(child);
-        newLine = remainder < childWidth;
+        newLine = remainder < childWidth || lastLine === undefined;
       } // New line
 
 
