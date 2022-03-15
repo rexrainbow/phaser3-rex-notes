@@ -17,7 +17,7 @@ var OverChild = function (config) {
 
 var OnMove = function (pointer, localX, localY, event) {
     var childrenInteractive = this._childrenInteractive;
-    var child = PointToChild(childrenInteractive.targetSizers, pointer.x, pointer.y);
+    var child = PointToChild(childrenInteractive.targetSizers, pointer.worldX, pointer.worldY);
     var preChild = childrenInteractive.lastOverChild;
     if (child && preChild &&
         (child === preChild)) {

@@ -23,7 +23,7 @@ var ClickChild = function (config) {
             childrenInteractive.eventEmitter,
             `${childrenInteractive.eventNamePrefix}click`,
             childrenInteractive.targetSizers,
-            pointer.x, pointer.y,
+            pointer.worldX, pointer.worldY,
             pointer, event
         );
     }, this);
