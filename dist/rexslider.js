@@ -5539,7 +5539,7 @@
     this._click = new Button(this, clickConfig);
 
     this._click.on('click', function (button, gameObject, pointer, event) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "click"), childrenInteractive.targetSizers, pointer.x, pointer.y, pointer, event);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "click"), childrenInteractive.targetSizers, pointer.worldX, pointer.worldY, pointer, event);
     }, this);
   };
 
@@ -5557,7 +5557,7 @@
 
   var OnMove = function OnMove(pointer, localX, localY, event) {
     var childrenInteractive = this._childrenInteractive;
-    var child = PointToChild(childrenInteractive.targetSizers, pointer.x, pointer.y);
+    var child = PointToChild(childrenInteractive.targetSizers, pointer.worldX, pointer.worldY);
     var preChild = childrenInteractive.lastOverChild;
 
     if (child && preChild && child === preChild) {
@@ -7418,7 +7418,7 @@
     this._tap = new Tap(this, tapConfig);
 
     this._tap.on('tap', function (tap, gameObject, lastPointer) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix).concat(tap.tapsCount, "tap"), childrenInteractive.targetSizers, tap.x, tap.y, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix).concat(tap.tapsCount, "tap"), childrenInteractive.targetSizers, tap.worldX, tap.worldY, lastPointer);
     }, this);
   };
 
@@ -7435,9 +7435,9 @@
     this._press = new Press(this, pressConfig);
 
     this._press.on('pressstart', function (press, gameObject, lastPointer) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressstart"), childrenInteractive.targetSizers, press.x, press.y, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressstart"), childrenInteractive.targetSizers, press.worldX, press.worldY, lastPointer);
     }, this).on('pressend', function (press, gameObject, lastPointer) {
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressend"), childrenInteractive.targetSizers, press.x, press.y, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "pressend"), childrenInteractive.targetSizers, press.worldX, press.worldY, lastPointer);
     }, this);
   };
 
@@ -7463,7 +7463,7 @@
 
     this._swipe.on('swipe', function (swipe, gameObject, lastPointer) {
       var dirName = swipe.left ? 'left' : swipe.right ? 'right' : swipe.up ? 'up' : 'down';
-      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "swipe").concat(dirName), childrenInteractive.targetSizers, swipe.x, swipe.y, lastPointer);
+      EmitChildEvent(childrenInteractive.eventEmitter, "".concat(childrenInteractive.eventNamePrefix, "swipe").concat(dirName), childrenInteractive.targetSizers, swipe.worldX, swipe.worldY, lastPointer);
     }, this);
   };
 
