@@ -1,4 +1,4 @@
-import CanvasFrameManager from './CanvasFrameManager.js';
+import CanvasFrameManager from './canvasframemanager.js';
 
 class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
 
