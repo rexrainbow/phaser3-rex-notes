@@ -73,6 +73,7 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
     // enable: true,
     // mode: 1,            // 0|'press'|1|'release'
     // clickInterval: 100  // ms
+    // threshold: undefined
 });
 ```
 
@@ -81,6 +82,8 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
     - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
     - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
 - `clickInterval` : Interval between 2 'click' events, in ms.
+- `threshold` : Cancel clicking detecting when dragging distance is larger then this threshold.
+    - `undefined` : Ignore this feature. Default behavior.
 
 ### Events
 
