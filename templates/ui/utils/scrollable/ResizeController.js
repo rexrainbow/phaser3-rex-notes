@@ -1,4 +1,7 @@
 import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
+import Sizer from '../../sizer/Sizer.js';
+
+const SizerRunLayout = Sizer.prototype.runLayout;
 
 var ResizeController = function () {
     var topChildOY = this.topChildOY;
@@ -13,8 +16,8 @@ var ResizeController = function () {
     }
     this.updateController();
 
+    // Change slider size according to visible ratio
     if (this.adaptThumbSizeMode) {
-        // Change slider size according to visible ratio
         var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
         var track = slider.childrenMap.track;
         var thumb = slider.childrenMap.thumb;
@@ -31,10 +34,54 @@ var ResizeController = function () {
                 newWidth = minThumbSize;
             }
             ResizeGameObject(thumb, newWidth, undefined);
+
         }
+        LayoutSlider.call(this);
     }
 
     return this;
+}
+
+var LayoutSlider = function () {
+    // Don't layout child, header, footer again
+    var child = this.childrenMap.child;
+    var header = this.childrenMap.header;
+    var footer = this.childrenMap.footer;
+
+    var childDirtySave = (child) ? child.dirty : undefined;
+    var headerDirtySave = (header) ? header.dirty : undefined;
+    var footerDirtySave = (footer) ? footer.dirty : undefined;
+
+    var minWidthSave = this.minWidth;
+    var minHeightSave = this.minHeight;
+
+    if (child) {
+        child.dirty = false;
+    }
+    if (header) {
+        header.dirty = false;
+    }
+    if (footer) {
+        footer.dirty = false;
+    }
+
+    this.minWidth = this.width;
+    this.minHeight = this.height;
+
+    SizerRunLayout.call(this);
+
+    if (child) {
+        child.dirty = childDirtySave;
+    }
+    if (header) {
+        header.dirty = headerDirtySave;
+    }
+    if (footer) {
+        footer.dirty = footerDirtySave;
+    }
+
+    this.minWidth = minWidthSave;
+    this.minHeight = minHeightSave;
 }
 
 export default ResizeController;

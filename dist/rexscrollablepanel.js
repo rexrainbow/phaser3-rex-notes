@@ -10335,6 +10335,8 @@
     top: 1
   };
 
+  var SizerRunLayout = Sizer.prototype.runLayout;
+
   var ResizeController = function ResizeController() {
     var topChildOY = this.topChildOY;
     var bottomChildOY = this.bottomChildOY;
@@ -10349,10 +10351,9 @@
       slider.setEnable(bottomChildOY !== topChildOY);
     }
 
-    this.updateController();
+    this.updateController(); // Change slider size according to visible ratio
 
     if (this.adaptThumbSizeMode) {
-      // Change slider size according to visible ratio
       var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
       var track = slider.childrenMap.track;
       var thumb = slider.childrenMap.thumb;
@@ -10375,9 +10376,54 @@
 
         ResizeGameObject(thumb, newWidth, undefined);
       }
+
+      LayoutSlider.call(this);
     }
 
     return this;
+  };
+
+  var LayoutSlider = function LayoutSlider() {
+    // Don't layout child, header, footer again
+    var child = this.childrenMap.child;
+    var header = this.childrenMap.header;
+    var footer = this.childrenMap.footer;
+    var childDirtySave = child ? child.dirty : undefined;
+    var headerDirtySave = header ? header.dirty : undefined;
+    var footerDirtySave = footer ? footer.dirty : undefined;
+    var minWidthSave = this.minWidth;
+    var minHeightSave = this.minHeight;
+
+    if (child) {
+      child.dirty = false;
+    }
+
+    if (header) {
+      header.dirty = false;
+    }
+
+    if (footer) {
+      footer.dirty = false;
+    }
+
+    this.minWidth = this.width;
+    this.minHeight = this.height;
+    SizerRunLayout.call(this);
+
+    if (child) {
+      child.dirty = childDirtySave;
+    }
+
+    if (header) {
+      header.dirty = headerDirtySave;
+    }
+
+    if (footer) {
+      footer.dirty = footerDirtySave;
+    }
+
+    this.minWidth = minWidthSave;
+    this.minHeight = minHeightSave;
   };
 
   var UpdateController = function UpdateController() {
@@ -10514,45 +10560,7 @@
 
         _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
 
-        this.resizeController();
-
-        if (this.adaptThumbSizeMode) {
-          // Adjust size of slider.thumb, run layout again
-          // Don't layout child, header, footer again
-          var child = this.childrenMap.child;
-          var header = this.childrenMap.header;
-          var footer = this.childrenMap.footer;
-          var childDirtySave = child ? child.dirty : undefined;
-          var headerDirtySave = header ? header.dirty : undefined;
-          var footerDirtySave = footer ? footer.dirty : undefined;
-
-          if (child) {
-            child.dirty = false;
-          }
-
-          if (header) {
-            header.dirty = false;
-          }
-
-          if (footer) {
-            footer.dirty = false;
-          }
-
-          _get(_getPrototypeOf(Scrollable.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
-
-          if (child) {
-            child.dirty = childDirtySave;
-          }
-
-          if (header) {
-            header.dirty = headerDirtySave;
-          }
-
-          if (footer) {
-            footer.dirty = footerDirtySave;
-          }
-        } // Set `t` to 0 at first runLayout()
-
+        this.resizeController(); // Set `t` to 0 at first runLayout()
 
         if (!this.runLayoutFlag) {
           this.runLayoutFlag = true;
