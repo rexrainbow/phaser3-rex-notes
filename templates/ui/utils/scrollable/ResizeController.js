@@ -16,30 +16,35 @@ var ResizeController = function () {
     }
     this.updateController();
 
-    // Change slider size according to visible ratio
     if (this.adaptThumbSizeMode) {
-        var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
-        var track = slider.childrenMap.track;
-        var thumb = slider.childrenMap.thumb;
-        var minThumbSize = this.minThumbSize;
-        if (this.scrollMode === 0) {
-            var newHeight = track.displayHeight * ratio;
-            if ((minThumbSize !== undefined) && (newHeight < minThumbSize)) {
-                newHeight = minThumbSize;
-            }
-            ResizeGameObject(thumb, undefined, newHeight);
-        } else {
-            var newWidth = track.displayWidth * ratio;
-            if ((minThumbSize !== undefined) && (newWidth < minThumbSize)) {
-                newWidth = minThumbSize;
-            }
-            ResizeGameObject(thumb, newWidth, undefined);
-
-        }
-        LayoutSlider.call(this);
+        AdaptThumbSize.call(this);
     }
 
     return this;
+}
+
+var AdaptThumbSize = function () {
+    // Change slider size according to visible ratio
+    var ratio = Math.min(this.childVisibleHeight / this.childHeight, 1);
+    var slider = this.childrenMap.slider;
+    var track = slider.childrenMap.track;
+    var thumb = slider.childrenMap.thumb;
+    var minThumbSize = this.minThumbSize;
+    if (this.scrollMode === 0) {
+        var newHeight = track.displayHeight * ratio;
+        if ((minThumbSize !== undefined) && (newHeight < minThumbSize)) {
+            newHeight = minThumbSize;
+        }
+        ResizeGameObject(thumb, undefined, newHeight);
+    } else {
+        var newWidth = track.displayWidth * ratio;
+        if ((minThumbSize !== undefined) && (newWidth < minThumbSize)) {
+            newWidth = minThumbSize;
+        }
+        ResizeGameObject(thumb, newWidth, undefined);
+
+    }
+    LayoutSlider.call(this);
 }
 
 var LayoutSlider = function () {
