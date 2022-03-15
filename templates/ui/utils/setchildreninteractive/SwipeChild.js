@@ -29,7 +29,7 @@ var SwipeChild = function (config) {
                 childrenInteractive.eventEmitter,
                 `${childrenInteractive.eventNamePrefix}swipe${dirName}`,
                 childrenInteractive.targetSizers,
-                swipe.x, swipe.y,
+                swipe.worldX, swipe.worldY,
                 lastPointer
             );
         }, this)

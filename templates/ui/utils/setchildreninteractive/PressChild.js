@@ -17,7 +17,7 @@ var PressChild = function (config) {
                 childrenInteractive.eventEmitter,
                 `${childrenInteractive.eventNamePrefix}pressstart`,
                 childrenInteractive.targetSizers,
-                press.x, press.y,
+                press.worldX, press.worldY,
                 lastPointer
             );
         }, this)
@@ -26,7 +26,7 @@ var PressChild = function (config) {
                 childrenInteractive.eventEmitter,
                 `${childrenInteractive.eventNamePrefix}pressend`,
                 childrenInteractive.targetSizers,
-                press.x, press.y,
+                press.worldX, press.worldY,
                 lastPointer
             );
         }, this)
