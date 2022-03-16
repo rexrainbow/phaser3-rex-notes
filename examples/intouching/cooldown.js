@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var btn = this.add.circle(400, 300, 48, 0x888888);
+        var btn = this.add.rectangle(400, 300, 96, 96, 0x888888);
         var inTouching = this.plugins.get('rexInTouching').add(btn, {
             cooldown: 300
         })
