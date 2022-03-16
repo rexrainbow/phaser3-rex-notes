@@ -4491,7 +4491,7 @@
   };
 
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-  var DistanceBetween$4 = Phaser.Math.Distance.Between;
+  var DistanceBetween$3 = Phaser.Math.Distance.Between;
 
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -4520,7 +4520,7 @@
         y = config.y;
 
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween$4(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$3(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -4557,7 +4557,7 @@
         y = config.y;
 
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween$4(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$3(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -5487,23 +5487,22 @@
   };
 
   var GetValue$h = Phaser.Utils.Objects.GetValue;
-  var DistanceBetween$3 = Phaser.Math.Distance.Between;
 
-  var TouchState = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TouchState, _ComponentBase);
+  var InTouching = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(InTouching, _ComponentBase);
 
-    var _super = _createSuper(TouchState);
+    var _super = _createSuper(InTouching);
 
-    function TouchState(gameObject, config) {
+    function InTouching(gameObject, config) {
       var _this;
 
-      _classCallCheck(this, TouchState);
+      _classCallCheck(this, InTouching);
 
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this._enable = undefined;
 
-      _this.parent.setInteractive(GetValue$h(config, "inputConfig", undefined));
+      _this.parent.setInteractive(GetValue$h(config, 'inputConfig', undefined));
 
       _this.resetFromJSON(config);
 
@@ -5512,17 +5511,13 @@
       return _this;
     }
 
-    _createClass(TouchState, [{
+    _createClass(InTouching, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.pointer = undefined;
         this.isInTouched = false;
-        this.x = undefined;
-        this.y = undefined;
-        this.preX = undefined;
-        this.preY = undefined;
-        this.justMoved = false;
-        this.setEnable(GetValue$h(o, "enable", true));
+        this.setEnable(GetValue$h(o, 'enable', true));
+        this.setCooldown(GetValue$h(o, 'cooldown', 0));
         return this;
       }
     }, {
@@ -5533,9 +5528,7 @@
         gameObject.on('pointerover', this.onPointIn, this);
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
-        gameObject.on('pointermove', this.onPointerMove, this);
         this.scene.events.on('preupdate', this.preupdate, this);
-        this.scene.events.on('postupdate', this.postupdate, this);
       }
     }, {
       key: "shutdown",
@@ -5548,14 +5541,12 @@
         // this.parent.off('pointerover', this.onPointIn, this);
         // this.parent.off('pointerup', this.onPointOut, this);
         // this.parent.off('pointerout', this.onPointOut, this);
-        // this.parent.off('pointermove', this.onPointerMove, this);
 
 
         this.scene.events.off('preupdate', this.preupdate, this);
-        this.scene.events.off('postupdate', this.postupdate, this);
         this.pointer = undefined;
 
-        _get(_getPrototypeOf(TouchState.prototype), "shutdown", this).call(this, fromScene);
+        _get(_getPrototypeOf(InTouching.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "enable",
@@ -5586,58 +5577,17 @@
         return this;
       }
     }, {
+      key: "setCooldown",
+      value: function setCooldown(time) {
+        this.cooldownTime = time;
+        this.startTime = undefined;
+        return this;
+      }
+    }, {
       key: "toggleEnable",
       value: function toggleEnable() {
         this.setEnable(!this.enable);
         return this;
-      }
-    }, {
-      key: "isDown",
-      get: function get() {
-        return this.pointer && this.pointer.isDown;
-      }
-    }, {
-      key: "isUp",
-      get: function get() {
-        return this.pointer === undefined;
-      }
-    }, {
-      key: "dx",
-      get: function get() {
-        return this.x - this.preX;
-      }
-    }, {
-      key: "dy",
-      get: function get() {
-        return this.y - this.preY;
-      }
-    }, {
-      key: "dt",
-      get: function get() {
-        var game = this.scene.sys.game;
-        var delta = game.loop.delta;
-        return delta;
-      }
-    }, {
-      key: "speed",
-      get: function get() {
-        if (this.x === this.preX && this.y === this.preY) {
-          return 0;
-        }
-
-        var d = DistanceBetween$3(this.x, this.preX, this.y, this.preY);
-        var speed = d / (this.dt * 0.001);
-        return speed;
-      }
-    }, {
-      key: "speedX",
-      get: function get() {
-        return this.dx / (this.dt * 0.001);
-      }
-    }, {
-      key: "speedY",
-      get: function get() {
-        return this.dy / (this.dt * 0.001);
       } // internal
 
     }, {
@@ -5649,11 +5599,6 @@
 
         this.pointer = pointer;
         this.isInTouched = true;
-        this.preX = pointer.x;
-        this.preY = pointer.y;
-        this.x = pointer.x;
-        this.y = pointer.y;
-        this.emit('touchstart', pointer, localX, localY);
       }
     }, {
       key: "onPointOut",
@@ -5664,50 +5609,41 @@
 
         this.pointer = undefined;
         this.isInTouched = false;
-        this.emit('touchend', pointer);
-      }
-    }, {
-      key: "onPointerMove",
-      value: function onPointerMove(pointer, localX, localY) {
-        if (!this.enable || !pointer.isDown || this.pointer !== pointer) {
-          return;
-        }
-
-        this.preX = this.x;
-        this.preY = this.y;
-        this.x = pointer.x;
-        this.y = pointer.y;
-        this.justMoved = true;
-        this.emit('touchmove', pointer, localX, localY);
       }
     }, {
       key: "preupdate",
       value: function preupdate(time, delta) {
         if (this.isInTouched) {
-          this.emit('intouch', this.pointer, this.x, this.y);
+          var overshootTime;
+
+          if (this.startTime === undefined) {
+            overshootTime = 0;
+          } else {
+            overshootTime = time - this.startTime - this.cooldownTime;
+          }
+
+          if (overshootTime >= 0) {
+            this.startTime = time - overshootTime;
+            this.emit('intouch', this, this.parent, this.pointer);
+          }
         }
-      }
-    }, {
-      key: "postupdate",
-      value: function postupdate(time, delta) {
-        this.justMoved = false;
       }
     }]);
 
-    return TouchState;
+    return InTouching;
   }(ComponentBase);
 
   var TouchingMethods = {
-    onTouching: function onTouching(callback, scope) {
+    onTouching: function onTouching(callback, scope, config) {
       if (!callback) {
         return this;
       }
 
-      if (this._touchState === undefined) {
-        this._touchState = new TouchState(this);
+      if (this._inTouching === undefined) {
+        this._inTouching = new InTouching(this, config);
       }
 
-      this._touchState.on('intouch', callback, scope);
+      this._inTouching.on('intouch', callback, scope);
 
       return this;
     },
@@ -5716,7 +5652,7 @@
         return this;
       }
 
-      this._touchState.off('intouch', callback, scope);
+      this._inTouching.off('intouch', callback, scope);
 
       return this;
     }

@@ -379,7 +379,6 @@
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
         this.scene.events.on('postupdate', this.postupdate, this);
       }
     }, {
@@ -396,7 +395,6 @@
         // this.parent.off('pointermove', this.onPointerMove, this);
 
 
-        this.scene.events.off('preupdate', this.preupdate, this);
         this.scene.events.off('postupdate', this.postupdate, this);
         this.pointer = undefined;
 
@@ -524,13 +522,6 @@
         this.y = pointer.y;
         this.justMoved = true;
         this.emit('touchmove', pointer, localX, localY);
-      }
-    }, {
-      key: "preupdate",
-      value: function preupdate(time, delta) {
-        if (this.isInTouched) {
-          this.emit('intouch', this.pointer, this.x, this.y);
-        }
       }
     }, {
       key: "postupdate",

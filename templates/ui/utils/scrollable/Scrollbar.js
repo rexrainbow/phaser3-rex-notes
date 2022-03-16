@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import Slider from '../../slider/Slider.js';
-import TouchState from '../../touchstate/TouchState.js';
+import InTouching from '../../intouching/InTouching.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -28,8 +28,8 @@ class Scrollbar extends Sizer {
         if (button0) {
             this.add(button0);
 
-            var touchState = new TouchState(button0);
-            touchState
+            var inTouching = new InTouching(button0);
+            inTouching
                 .on('intouch', function () {
                     slider.value -= this.scrollStep;
                 }, this)
@@ -44,8 +44,8 @@ class Scrollbar extends Sizer {
         if (button1) {
             this.add(button1);
 
-            var touchState = new TouchState(button1);
-            touchState
+            var inTouching = new InTouching(button1);
+            inTouching
                 .on('intouch', function () {
                     slider.value += this.scrollStep;
                 }, this)

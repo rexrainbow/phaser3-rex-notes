@@ -1,6 +1,7 @@
 // import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/containerlite.js';
 import Click from '../click/Click';
+import InTouching from '../intouching/InTouching';
 
 export default BaseSizer;
 
@@ -403,6 +404,21 @@ declare class BaseSizer extends ContainerLite {
     enableClick(enabled?: boolean): this;
 
     disableClick(): this;
+
+    onTouching(
+        callback: (
+            inTouch: InTouching,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+        ) => void,
+        scope?: object,
+        config?: InTouching.IConfig
+    ): this;
+
+    offTouching(
+        callback: Function,
+        scope?: object
+    ): this;
 
     show(
         gameObject: Phaser.GameObjects.GameObject
