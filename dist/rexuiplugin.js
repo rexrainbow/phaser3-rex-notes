@@ -31916,7 +31916,7 @@
     top: 1
   };
 
-  var SizerRunLayout = Sizer.prototype.runLayout;
+  Sizer.prototype.runLayout;
 
   var ResizeController = function ResizeController() {
     var topChildOY = this.topChildOY;
@@ -31971,46 +31971,18 @@
   };
 
   var LayoutSlider = function LayoutSlider() {
-    // Don't layout child, header, footer again
-    var child = this.childrenMap.child;
-    var header = this.childrenMap.header;
-    var footer = this.childrenMap.footer;
-    var childDirtySave = child ? child.dirty : undefined;
-    var headerDirtySave = header ? header.dirty : undefined;
-    var footerDirtySave = footer ? footer.dirty : undefined;
-    var minWidthSave = this.minWidth;
-    var minHeightSave = this.minHeight;
+    var scrollbar = this.childrenMap.scrollbar; // Save minSize
 
-    if (child) {
-      child.dirty = false;
-    }
+    var minWidthSave = scrollbar.minWidth;
+    var minHeightSave = scrollbar.minHeight; // Set minSize to current size
 
-    if (header) {
-      header.dirty = false;
-    }
+    scrollbar.minWidth = scrollbar.width;
+    scrollbar.minHeight = scrollbar.height; // Layout scrollbar
 
-    if (footer) {
-      footer.dirty = false;
-    }
+    scrollbar.layout(); // Restore minSize
 
-    this.minWidth = this.width;
-    this.minHeight = this.height;
-    SizerRunLayout.call(this);
-
-    if (child) {
-      child.dirty = childDirtySave;
-    }
-
-    if (header) {
-      header.dirty = headerDirtySave;
-    }
-
-    if (footer) {
-      footer.dirty = footerDirtySave;
-    }
-
-    this.minWidth = minWidthSave;
-    this.minHeight = minHeightSave;
+    scrollbar.minWidth = minWidthSave;
+    scrollbar.minHeight = minHeightSave;
   };
 
   var UpdateController = function UpdateController() {

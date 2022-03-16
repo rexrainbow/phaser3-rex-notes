@@ -48,45 +48,18 @@ var AdaptThumbSize = function () {
 }
 
 var LayoutSlider = function () {
-    // Don't layout child, header, footer again
-    var child = this.childrenMap.child;
-    var header = this.childrenMap.header;
-    var footer = this.childrenMap.footer;
-
-    var childDirtySave = (child) ? child.dirty : undefined;
-    var headerDirtySave = (header) ? header.dirty : undefined;
-    var footerDirtySave = (footer) ? footer.dirty : undefined;
-
-    var minWidthSave = this.minWidth;
-    var minHeightSave = this.minHeight;
-
-    if (child) {
-        child.dirty = false;
-    }
-    if (header) {
-        header.dirty = false;
-    }
-    if (footer) {
-        footer.dirty = false;
-    }
-
-    this.minWidth = this.width;
-    this.minHeight = this.height;
-
-    SizerRunLayout.call(this);
-
-    if (child) {
-        child.dirty = childDirtySave;
-    }
-    if (header) {
-        header.dirty = headerDirtySave;
-    }
-    if (footer) {
-        footer.dirty = footerDirtySave;
-    }
-
-    this.minWidth = minWidthSave;
-    this.minHeight = minHeightSave;
+    var scrollbar = this.childrenMap.scrollbar;
+    // Save minSize
+    var minWidthSave = scrollbar.minWidth;
+    var minHeightSave = scrollbar.minHeight;
+    // Set minSize to current size
+    scrollbar.minWidth = scrollbar.width;
+    scrollbar.minHeight = scrollbar.height;
+    // Layout scrollbar
+    scrollbar.layout();
+    // Restore minSize
+    scrollbar.minWidth = minWidthSave;
+    scrollbar.minHeight = minHeightSave;
 }
 
 export default ResizeController;
