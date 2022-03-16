@@ -90,6 +90,29 @@ class FSM {
         return this;
     }
 
+    runMethod(methodName, a1, a2, a3, a4, a5) {
+        var fn = this[methodName + '_' + this.state];
+        if (!fn) {
+            return undefined;
+        }
+        
+        // Copy from eventemitter3
+        var len = arguments.length;
+        switch (len) {
+            case 1: return fn.call(this);
+            case 2: return fn.call(this, a1);
+            case 3: return fn.call(this, a1, a2);
+            case 4: return fn.call(this, a1, a2, a3);
+            case 5: return fn.call(this, a1, a2, a3, a4);
+            case 6: return fn.call(this, a1, a2, a3, a4, a5);
+        }
+        var args = new Array(len - 1)
+        for (var i = 1; i < len; i++) {
+            args[i - 1] = arguments[i];
+        }
+        return fn.apply(this, args);
+    }
+
     set state(newState) {
         if (!this.enable || this._stateLock) {
             return;
@@ -187,22 +210,16 @@ class FSM {
         return this;
     }
 
-    update(time, delta, key) {
-        if (key === undefined) {
-            key = 'update';
-        }
-        var fn = this[key + '_' + this.state];
-        if (fn) {
-            fn.call(this, time, delta);
-        }
+    update(time, delta) {
+        this.runMethod('update', time, delta);
     }
 
     preupdate(time, delta) {
-        this.update(time, delta, 'preupdate');
+        this.runMethod('preupdate', time, delta);
     }
 
     postupdate(time, delta) {
-        this.update(time, delta, 'postupdate');
+        this.runMethod('postupdate', time, delta);
     }
 }
 

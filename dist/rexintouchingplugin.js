@@ -1,8 +1,24 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexpinchplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexintouchingplugin = factory());
 }(this, (function () { 'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -229,388 +245,91 @@
     }
   };
 
-  var Clear = function Clear(obj) {
-    if (Array.isArray(obj)) {
-      obj.length = 0;
-    } else {
-      for (var key in obj) {
-        delete obj[key];
-      }
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
     }
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var SpliceOne = Phaser.Utils.Array.SpliceOne;
-  var DistanceBetween = Phaser.Math.Distance.Between;
-  var AngleBetween = Phaser.Math.Angle.Between;
 
-  var TwoPointersTracer = /*#__PURE__*/function () {
-    function TwoPointersTracer(scene, config) {
-      _classCallCheck(this, TwoPointersTracer);
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
 
-      var amount = scene.input.manager.pointersTotal - 1;
+      this.parent = parent; // gameObject or scene
 
-      if (amount < 2) {
-        scene.input.addPointer(2 - amount);
+      this.scene = GetSceneObject(parent);
+      this.isShutdown = false; // Event emitter, default is private event emitter
+
+      this.setEventEmitter(GetValue$2(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+
+      if (this.parent && this.parent === this.scene) {
+        // parent is a scene
+        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+      } else if (this.parent && this.parent.once) {
+        // bob object does not have event emitter
+        this.parent.once('destroy', this.onParentDestroy, this);
       }
-
-      this.scene = scene; // Event emitter
-
-      this.setEventEmitter(GetValue$2(config, 'eventEmitter', undefined));
-      this._enable = undefined;
-      this.pointers = [];
-      this.movedState = {};
-      this.resetFromJSON(config);
-      this.boot();
     }
 
-    _createClass(TwoPointersTracer, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.setEnable(GetValue$2(o, "enable", true));
-        this.bounds = GetValue$2(o, 'bounds', undefined);
-        this.tracerState = TOUCH0;
-        this.pointers.length = 0;
-        Clear(this.movedState);
-        return this;
-      }
-    }, {
-      key: "boot",
-      value: function boot() {
-        this.scene.input.on('pointerdown', this.onPointerDown, this);
-        this.scene.input.on('pointerup', this.onPointerUp, this);
-        this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
-      }
-    }, {
+    _createClass(ComponentBase, [{
       key: "shutdown",
-      value: function shutdown() {
-        if (!this.scene) {
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
           return;
+        } // parent might not be shutdown yet
+
+
+        if (this.parent && this.parent === this.scene) {
+          // parent is a scene
+          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+        } else if (this.parent && this.parent.once) {
+          // bob object does not have event emitter
+          this.parent.off('destroy', this.onParentDestroy, this);
         }
 
         this.destroyEventEmitter();
-        this.pointers.length = 0;
-        Clear(this.movedState);
-        this.scene.input.off('pointerdown', this.onPointerDown, this);
-        this.scene.input.off('pointerup', this.onPointerUp, this);
-        this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.parent = undefined;
         this.scene = undefined;
+        this.isShutdown = true;
       }
     }, {
       key: "destroy",
-      value: function destroy() {
-        this.shutdown();
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
       }
     }, {
-      key: "enable",
-      get: function get() {
-        return this._enable;
-      },
-      set: function set(e) {
-        if (this._enable === e) {
-          return;
-        }
-
-        if (!e) {
-          this.dragCancel();
-        }
-
-        this._enable = e;
-        return this;
+      key: "onSceneDestroy",
+      value: function onSceneDestroy() {
+        this.destroy(true);
       }
     }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e === undefined) {
-          e = true;
-        }
-
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "toggleEnable",
-      value: function toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-      }
-    }, {
-      key: "onPointerDown",
-      value: function onPointerDown(pointer) {
-        if (!this.enable) {
-          return;
-        }
-
-        if (this.pointers.length === 2) {
-          return;
-        }
-
-        var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
-
-        if (!isInsideBounds) {
-          return;
-        }
-
-        var index = this.pointers.indexOf(pointer);
-
-        if (index !== -1) {
-          // Already in catched pointers
-          return;
-        }
-
-        this.movedState[pointer.id] = false;
-        this.pointers.push(pointer);
-
-        switch (this.tracerState) {
-          case TOUCH0:
-            this.tracerState = TOUCH1;
-            this.onDrag1Start();
-            break;
-
-          case TOUCH1:
-            this.tracerState = TOUCH2;
-            this.onDrag2Start();
-            break;
-        }
-      }
-    }, {
-      key: "onPointerUp",
-      value: function onPointerUp(pointer) {
-        if (!this.enable) {
-          return;
-        }
-
-        var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
-
-        if (!isInsideBounds) {
-          return;
-        }
-
-        var index = this.pointers.indexOf(pointer);
-
-        if (index === -1) {
-          // Not in catched pointers
-          return;
-        } else {
-          delete this.movedState[pointer.id];
-          SpliceOne(this.pointers, index);
-        }
-
-        switch (this.tracerState) {
-          case TOUCH1:
-            this.tracerState = TOUCH0;
-            this.onDrag1End();
-            break;
-
-          case TOUCH2:
-            this.tracerState = TOUCH1;
-            this.onDrag2End();
-            this.onDrag1Start();
-            break;
-        }
-      }
-    }, {
-      key: "onPointerMove",
-      value: function onPointerMove(pointer) {
-        if (!this.enable) {
-          return;
-        }
-
-        if (pointer.isDown) {
-          var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
-          var isCatchedPointer = this.pointers.indexOf(pointer) !== -1;
-
-          if (!isCatchedPointer && isInsideBounds) ; else if (isCatchedPointer && !isInsideBounds) {
-            // Pointer moves out of bounds, lose pointer
-            this.onPointerUp(pointer);
-          } else {
-            // Pointer drags in bounds
-            if (!this.movedState[pointer.id]) {
-              this.movedState[pointer.id] = pointer.x !== pointer.downX || pointer.y !== pointer.downY;
-            }
-
-            if (this.movedState[pointer.id]) {
-              switch (this.tracerState) {
-                case TOUCH1:
-                  this.onDrag1();
-                  break;
-
-                case TOUCH2:
-                  this.onDrag2();
-                  break;
-              }
-            }
-          }
-        }
-      }
-    }, {
-      key: "dragCancel",
-      value: function dragCancel() {
-        if (this.tracerState === TOUCH2) {
-          this.onDrag2End();
-        }
-
-        this.pointers.length = 0;
-        Clear(this.movedState);
-        this.tracerState = TOUCH0;
-        return this;
-      }
-    }, {
-      key: "onDrag1Start",
-      value: function onDrag1Start() {
-        this.emit('drag1start', this);
-      }
-    }, {
-      key: "onDrag1End",
-      value: function onDrag1End() {
-        this.emit('drag1end', this);
-      }
-    }, {
-      key: "onDrag1",
-      value: function onDrag1() {
-        this.emit('drag1', this);
-      }
-    }, {
-      key: "onDrag2Start",
-      value: function onDrag2Start() {
-        this.emit('drag2start', this);
-      }
-    }, {
-      key: "onDrag2End",
-      value: function onDrag2End() {
-        this.emit('drag2end', this);
-      }
-    }, {
-      key: "onDrag2",
-      value: function onDrag2() {
-        this.emit('drag2', this);
-      }
-    }, {
-      key: "distanceBetween",
-      get: function get() {
-        if (this.tracerState !== TOUCH2) {
-          return 0;
-        }
-
-        var p0 = this.pointers[0],
-            p1 = this.pointers[1];
-        return DistanceBetween(p0.x, p0.y, p1.x, p1.y);
-      }
-    }, {
-      key: "angleBetween",
-      get: function get() {
-        if (this.tracerState !== TOUCH2) {
-          return 0;
-        }
-
-        var p0 = this.pointers[0],
-            p1 = this.pointers[1];
-        return AngleBetween(p0.x, p0.y, p1.x, p1.y);
-      }
-    }, {
-      key: "drag1Vector",
-      get: function get() {
-        var pointer = this.pointers[0];
-
-        if (pointer && this.movedState[pointer.id]) {
-          var p1 = pointer.position;
-          var p0 = pointer.prevPosition;
-          tmpDragVector.x = p1.x - p0.x;
-          tmpDragVector.y = p1.y - p0.y;
-        } else {
-          tmpDragVector.x = 0;
-          tmpDragVector.y = 0;
-        }
-
-        return tmpDragVector;
-      }
-    }, {
-      key: "centerX",
-      get: function get() {
-        if (this.tracerState !== TOUCH2) {
-          return 0;
-        }
-
-        var p0 = this.pointers[0].position;
-        var p1 = this.pointers[1].position;
-        return (p0.x + p1.x) / 2;
-      }
-    }, {
-      key: "centerY",
-      get: function get() {
-        if (this.tracerState !== TOUCH2) {
-          return 0;
-        }
-
-        var p0 = this.pointers[0].position;
-        var p1 = this.pointers[1].position;
-        return (p0.y + p1.y) / 2;
-      }
-    }, {
-      key: "prevCenterX",
-      get: function get() {
-        if (this.tracerState !== TOUCH2) {
-          return 0;
-        }
-
-        var preP0 = this.movedState[this.pointers[0].id] ? this.pointers[0].prevPosition : this.pointers[0].position;
-        var preP1 = this.movedState[this.pointers[1].id] ? this.pointers[1].prevPosition : this.pointers[1].position;
-        return (preP0.x + preP1.x) / 2;
-      }
-    }, {
-      key: "prevCenterY",
-      get: function get() {
-        if (this.tracerState !== TOUCH2) {
-          return 0;
-        }
-
-        var preP0 = this.movedState[this.pointers[0].id] ? this.pointers[0].prevPosition : this.pointers[0].position;
-        var preP1 = this.movedState[this.pointers[1].id] ? this.pointers[1].prevPosition : this.pointers[1].position;
-        return (preP0.y + preP1.y) / 2;
-      }
-    }, {
-      key: "movementCenterX",
-      get: function get() {
-        return this.centerX - this.prevCenterX;
-      }
-    }, {
-      key: "movementCenterY",
-      get: function get() {
-        return this.centerY - this.prevCenterY;
-      }
-    }, {
-      key: "setRecongizedStateObject",
-      value: function setRecongizedStateObject(stateObject) {
-        this.recongizedState = stateObject;
-        return this;
-      }
-    }, {
-      key: "state",
-      get: function get() {
-        return this.recongizedState.state;
-      },
-      set: function set(newState) {
-        this.recongizedState.state = newState;
-      }
-    }, {
-      key: "cancel",
-      value: function cancel() {
-        this.state = IDLE$1;
-        return this;
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
       }
     }]);
 
-    return TwoPointersTracer;
+    return ComponentBase;
   }();
-
-  Object.assign(TwoPointersTracer.prototype, EventEmitterMethods);
-  var tmpDragVector = {};
-  var TOUCH0 = 0;
-  var TOUCH1 = 1;
-  var TOUCH2 = 2;
-  var IDLE$1 = 'IDLE';
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -939,129 +658,240 @@
 
   Object.assign(FSM.prototype, EventEmitterMethods);
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var Cooldown = /*#__PURE__*/function (_FSM) {
+    _inherits(Cooldown, _FSM);
 
-  var Pinch = /*#__PURE__*/function (_TwoPointersTracer) {
-    _inherits(Pinch, _TwoPointersTracer);
+    var _super = _createSuper(Cooldown);
 
-    var _super = _createSuper(Pinch);
-
-    function Pinch(scene, config) {
+    function Cooldown() {
       var _this;
 
-      _classCallCheck(this, Pinch);
+      _classCallCheck(this, Cooldown);
 
-      _this = _super.call(this, scene, config);
-
-      var self = _assertThisInitialized(_this);
-
-      var stateConfig = {
-        states: {
-          IDLE: {
-            enter: function enter() {
-              self.prevDistance = undefined;
-              self.scaleFactor = 1;
-            }
-          },
-          BEGIN: {},
-          RECOGNIZED: {
-            enter: function enter() {
-              self.emit('pinchstart', self);
-            },
-            exit: function exit() {
-              self.emit('pinchend', self);
-            }
-          }
-        },
-        init: function init() {
-          this.state = IDLE;
-        },
+      _this = _super.call(this, {
         eventEmitter: false
-      };
+      });
+      _this.extraRemainderTime = 0;
 
-      _this.setRecongizedStateObject(new FSM(stateConfig));
+      _this["goto"]('IDLE');
 
       return _this;
     }
 
-    _createClass(Pinch, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        _get(_getPrototypeOf(Pinch.prototype), "resetFromJSON", this).call(this, o);
-
-        this.setDragThreshold(GetValue(o, 'threshold', 0));
+    _createClass(Cooldown, [{
+      key: "setCooldownTime",
+      value: function setCooldownTime(time) {
+        this.cooldownTime = time;
         return this;
       }
     }, {
-      key: "onDrag2Start",
-      value: function onDrag2Start() {
-        this.scaleFactor = 1;
-        this.prevDistance = this.distanceBetween;
-        this.state = BEGIN;
+      key: "request",
+      value: function request() {
+        return this.runMethod('request');
+      } // IDLE state
 
-        if (this.dragThreshold === 0) {
-          this.state = RECOGNIZED;
+    }, {
+      key: "update_IDLE",
+      value: function update_IDLE() {
+        this.extraRemainderTime = 0;
+      }
+    }, {
+      key: "request_IDLE",
+      value: function request_IDLE() {
+        this.next();
+        return true;
+      }
+    }, {
+      key: "next_IDLE",
+      value: function next_IDLE() {
+        if (this.cooldownTime != null) {
+          return 'COOLDOWN';
+        }
+      } // COOLDOWN state
+
+    }, {
+      key: "enter_COOLDOWN",
+      value: function enter_COOLDOWN() {
+        this.remainderTime = this.cooldownTime + this.extraRemainderTime;
+      }
+    }, {
+      key: "update_COOLDOWN",
+      value: function update_COOLDOWN(time, delta) {
+        this.remainderTime -= delta;
+
+        if (this.remainderTime < 0) {
+          this.extraRemainderTime = -this.remainderTime;
+          this["goto"]('IDLE');
         }
       }
     }, {
-      key: "onDrag2End",
-      value: function onDrag2End() {
-        this.state = IDLE;
-      }
-    }, {
-      key: "onDrag2",
-      value: function onDrag2() {
-        switch (this.state) {
-          case BEGIN:
-            if (this.pointers[0].getDistance() >= this.dragThreshold && this.pointers[1].getDistance() >= this.dragThreshold) {
-              var curDistance = this.distanceBetween;
-              this.scaleFactor = curDistance / this.prevDistance;
-              this.prevDistance = curDistance;
-              this.state = RECOGNIZED;
-            }
-
-            break;
-
-          case RECOGNIZED:
-            var curDistance = this.distanceBetween;
-            this.scaleFactor = curDistance / this.prevDistance;
-            this.emit('pinch', this);
-            this.prevDistance = curDistance;
-            break;
-        }
-      }
-    }, {
-      key: "isPinched",
-      get: function get() {
-        return this.state === RECOGNIZED;
-      }
-    }, {
-      key: "setDragThreshold",
-      value: function setDragThreshold(distance) {
-        this.dragThreshold = distance;
-        return this;
+      key: "request_COOLDOWN",
+      value: function request_COOLDOWN() {
+        return false;
       }
     }]);
 
-    return Pinch;
-  }(TwoPointersTracer);
+    return Cooldown;
+  }(FSM);
 
-  var IDLE = 'IDLE';
-  var BEGIN = 'BEGIN';
-  var RECOGNIZED = 'RECOGNIZED';
+  var GetValue = Phaser.Utils.Objects.GetValue;
 
-  var PinchPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(PinchPlugin, _Phaser$Plugins$BaseP);
+  var InTouching = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(InTouching, _ComponentBase);
 
-    var _super = _createSuper(PinchPlugin);
+    var _super = _createSuper(InTouching);
 
-    function PinchPlugin(pluginManager) {
-      _classCallCheck(this, PinchPlugin);
+    function InTouching(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, InTouching);
+
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+
+      _this._enable = undefined;
+      _this.cooldown = new Cooldown();
+
+      _this.parent.setInteractive(GetValue(config, 'inputConfig', undefined));
+
+      _this.resetFromJSON(config);
+
+      _this.boot();
+
+      return _this;
+    }
+
+    _createClass(InTouching, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.pointer = undefined;
+        this.isInTouched = false;
+        this.setEnable(GetValue(o, 'enable', true));
+        this.setCooldown(GetValue(o, 'cooldown', undefined));
+        return this;
+      }
+    }, {
+      key: "boot",
+      value: function boot() {
+        var gameObject = this.parent;
+        gameObject.on('pointerdown', this.onPointIn, this);
+        gameObject.on('pointerover', this.onPointIn, this);
+        gameObject.on('pointerup', this.onPointOut, this);
+        gameObject.on('pointerout', this.onPointOut, this);
+        this.scene.events.on('preupdate', this.preupdate, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        } // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.off('pointerdown', this.onPointIn, this);
+        // this.parent.off('pointerover', this.onPointIn, this);
+        // this.parent.off('pointerup', this.onPointOut, this);
+        // this.parent.off('pointerout', this.onPointOut, this);
+
+
+        this.scene.events.off('preupdate', this.preupdate, this);
+        this.pointer = undefined;
+
+        _get(_getPrototypeOf(InTouching.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+
+        if (!e) {
+          this.isInTouched = false;
+          this.pointer = undefined;
+        }
+
+        this._enable = e;
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "cooldownTime",
+      get: function get() {
+        return this.cooldown.cooldownTime;
+      },
+      set: function set(time) {
+        this.cooldown.setCooldownTime(time);
+      }
+    }, {
+      key: "setCooldown",
+      value: function setCooldown(time) {
+        this.cooldownTime = time;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      } // internal
+
+    }, {
+      key: "onPointIn",
+      value: function onPointIn(pointer, localX, localY) {
+        if (!this.enable || !pointer.isDown || this.pointer !== undefined) {
+          return;
+        }
+
+        this.pointer = pointer;
+        this.isInTouched = true;
+      }
+    }, {
+      key: "onPointOut",
+      value: function onPointOut(pointer) {
+        if (!this.enable || this.pointer !== pointer) {
+          return;
+        }
+
+        this.pointer = undefined;
+        this.isInTouched = false;
+      }
+    }, {
+      key: "preupdate",
+      value: function preupdate(time, delta) {
+        this.cooldown.update(time, delta);
+
+        if (this.isInTouched && this.cooldown.request()) {
+          this.emit('intouch', this, this.parent, this.pointer);
+        }
+      }
+    }]);
+
+    return InTouching;
+  }(ComponentBase);
+
+  var InTouchingPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(InTouchingPlugin, _Phaser$Plugins$BaseP);
+
+    var _super = _createSuper(InTouchingPlugin);
+
+    function InTouchingPlugin(pluginManager) {
+      _classCallCheck(this, InTouchingPlugin);
 
       return _super.call(this, pluginManager);
     }
 
-    _createClass(PinchPlugin, [{
+    _createClass(InTouchingPlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
@@ -1069,14 +899,14 @@
       }
     }, {
       key: "add",
-      value: function add(scene, config) {
-        return new Pinch(scene, config);
+      value: function add(gameObject, config) {
+        return new InTouching(gameObject, config);
       }
     }]);
 
-    return PinchPlugin;
+    return InTouchingPlugin;
   }(Phaser.Plugins.BasePlugin);
 
-  return PinchPlugin;
+  return InTouchingPlugin;
 
 })));

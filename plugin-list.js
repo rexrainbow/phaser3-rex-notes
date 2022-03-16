@@ -44,7 +44,6 @@ module.exports = {
     'gridcutimageplugin': './plugins/gridcutimage-plugin.js',
 
     // input
-    'touchstateplugin': './plugins/touchstate-plugin.js',
     'dragplugin': './plugins/drag-plugin.js',
     'dragspeedplugin': './plugins/dragspeed-plugin.js',
     'sliderplugin': './plugins/slider-plugin.js',
@@ -58,8 +57,10 @@ module.exports = {
     'pinchplugin': './plugins/pinch-plugin.js',
     'dragrotateplugin': './plugins/dragrotate-plugin.js',
     'gesturesplugin': './plugins/gestures-plugin.js',
-    'toucheventstopplugin': './plugins/toucheventstop-plugin.js',    
+    'toucheventstopplugin': './plugins/toucheventstop-plugin.js',
+    'intouchingplugin': './plugins/intouching-plugin.js',
     'touchhelperplugin': './plugins/touchhelper-plugin.js',
+    'touchstateplugin': './plugins/touchstate-plugin.js',
     'keyshubplugin': './plugins/keyshub-plugin.js',
 
     // member of game object

@@ -20934,6 +20934,360 @@
     }
   };
 
+  var FSM = /*#__PURE__*/function () {
+    /*
+    var config = {
+        start: 'A',   // default: undefined
+        states: {
+            A: {
+                next: 'B',  // function() { return 'B'; }
+                enter: function() {},
+                exit: function() {}
+            },
+            // ...
+        },        
+        extend: {
+            i: 0,
+            name: 'abc'
+            // ...
+        },
+        init: function() {},
+        enable: true,
+        eventEmitter: true,
+    };
+    */
+    function FSM(config) {
+      _classCallCheck(this, FSM);
+
+      // Attach get-next-state function
+      var states = GetValue$2l(config, 'states', undefined);
+
+      if (states) {
+        this.addStates(states);
+      } // Attach extend members
+
+
+      var extend = GetValue$2l(config, 'extend', undefined);
+
+      if (extend) {
+        for (var name in extend) {
+          if (!this.hasOwnProperty(name) || this[name] === undefined) {
+            this[name] = extend[name];
+          }
+        }
+      } // Event emitter
+
+
+      var eventEmitter = GetValue$2l(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$2l(config, 'EventEmitterClass', undefined);
+      this.setEventEmitter(eventEmitter, EventEmitterClass);
+      this._stateLock = false;
+      this.resetFromJSON(config);
+    }
+
+    _createClass(FSM, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.destroyEventEmitter();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.shutdown();
+      }
+    }, {
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setEnable(GetValue$2l(o, 'enable', true));
+        this.start(GetValue$2l(o, 'start', undefined));
+        var init = GetValue$2l(o, 'init', undefined);
+
+        if (init) {
+          init.call(this);
+        }
+
+        return this;
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          curState: this.state,
+          prevState: this.prevState,
+          enable: this.enable,
+          start: this._start
+        };
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "runMethod",
+      value: function runMethod(methodName, a1, a2, a3, a4, a5) {
+        var fn = this[methodName + '_' + this.state];
+
+        if (!fn) {
+          return undefined;
+        } // Copy from eventemitter3
+
+
+        var len = arguments.length;
+
+        switch (len) {
+          case 1:
+            return fn.call(this);
+
+          case 2:
+            return fn.call(this, a1);
+
+          case 3:
+            return fn.call(this, a1, a2);
+
+          case 4:
+            return fn.call(this, a1, a2, a3);
+
+          case 5:
+            return fn.call(this, a1, a2, a3, a4);
+
+          case 6:
+            return fn.call(this, a1, a2, a3, a4, a5);
+        }
+
+        var args = new Array(len - 1);
+
+        for (var i = 1; i < len; i++) {
+          args[i - 1] = arguments[i];
+        }
+
+        return fn.apply(this, args);
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this._state;
+      },
+      set: function set(newState) {
+        if (!this.enable || this._stateLock) {
+          return;
+        }
+
+        if (this._state === newState) {
+          return;
+        }
+
+        this._prevState = this._state;
+        this._state = newState;
+        this._stateLock = true; // lock state
+
+        this.emit('statechange', this);
+
+        if (this._prevState != null) {
+          var exitEventName = 'exit_' + this._prevState;
+          var exitCallback = this[exitEventName];
+
+          if (exitCallback) {
+            exitCallback.call(this);
+          }
+
+          this.emit(exitEventName, this);
+        }
+
+        this._stateLock = false;
+
+        if (this._state != null) {
+          var enterEventName = 'enter_' + this._state;
+          var enterCallback = this[enterEventName];
+
+          if (enterCallback) {
+            enterCallback.call(this);
+          }
+
+          this.emit(enterEventName, this);
+        }
+      }
+    }, {
+      key: "prevState",
+      get: function get() {
+        return this._prevState;
+      }
+    }, {
+      key: "start",
+      value: function start(state) {
+        this._start = state;
+        this._prevState = undefined;
+        this._state = state; // Won't fire statechange events
+
+        return this;
+      }
+    }, {
+      key: "goto",
+      value: function goto(nextState) {
+        if (nextState != null) {
+          this.state = nextState;
+        }
+
+        return this;
+      }
+    }, {
+      key: "next",
+      value: function next() {
+        var nextState;
+        var getNextState = this['next_' + this.state];
+
+        if (getNextState) {
+          if (typeof getNextState === 'string') {
+            nextState = getNextState;
+          } else {
+            nextState = getNextState.call(this);
+          }
+        }
+
+        this["goto"](nextState);
+        return this;
+      }
+    }, {
+      key: "addState",
+      value: function addState(name, config) {
+        var getNextStateCallback = GetValue$2l(config, 'next', undefined);
+
+        if (getNextStateCallback) {
+          this['next_' + name] = getNextStateCallback;
+        }
+
+        var exitCallback = GetValue$2l(config, 'exit', undefined);
+
+        if (exitCallback) {
+          this['exit_' + name] = exitCallback;
+        }
+
+        var enterCallback = GetValue$2l(config, 'enter', undefined);
+
+        if (enterCallback) {
+          this['enter_' + name] = enterCallback;
+        }
+
+        return this;
+      }
+    }, {
+      key: "addStates",
+      value: function addStates(states) {
+        for (var name in states) {
+          this.addState(name, states[name]);
+        }
+
+        return this;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        this.runMethod('update', time, delta);
+      }
+    }, {
+      key: "preupdate",
+      value: function preupdate(time, delta) {
+        this.runMethod('preupdate', time, delta);
+      }
+    }, {
+      key: "postupdate",
+      value: function postupdate(time, delta) {
+        this.runMethod('postupdate', time, delta);
+      }
+    }]);
+
+    return FSM;
+  }();
+
+  Object.assign(FSM.prototype, EventEmitterMethods);
+
+  var Cooldown = /*#__PURE__*/function (_FSM) {
+    _inherits(Cooldown, _FSM);
+
+    var _super = _createSuper(Cooldown);
+
+    function Cooldown() {
+      var _this;
+
+      _classCallCheck(this, Cooldown);
+
+      _this = _super.call(this, {
+        eventEmitter: false
+      });
+      _this.extraRemainderTime = 0;
+
+      _this["goto"]('IDLE');
+
+      return _this;
+    }
+
+    _createClass(Cooldown, [{
+      key: "setCooldownTime",
+      value: function setCooldownTime(time) {
+        this.cooldownTime = time;
+        return this;
+      }
+    }, {
+      key: "request",
+      value: function request() {
+        return this.runMethod('request');
+      } // IDLE state
+
+    }, {
+      key: "update_IDLE",
+      value: function update_IDLE() {
+        this.extraRemainderTime = 0;
+      }
+    }, {
+      key: "request_IDLE",
+      value: function request_IDLE() {
+        this.next();
+        return true;
+      }
+    }, {
+      key: "next_IDLE",
+      value: function next_IDLE() {
+        if (this.cooldownTime != null) {
+          return 'COOLDOWN';
+        }
+      } // COOLDOWN state
+
+    }, {
+      key: "enter_COOLDOWN",
+      value: function enter_COOLDOWN() {
+        this.remainderTime = this.cooldownTime + this.extraRemainderTime;
+      }
+    }, {
+      key: "update_COOLDOWN",
+      value: function update_COOLDOWN(time, delta) {
+        this.remainderTime -= delta;
+
+        if (this.remainderTime < 0) {
+          this.extraRemainderTime = -this.remainderTime;
+          this["goto"]('IDLE');
+        }
+      }
+    }, {
+      key: "request_COOLDOWN",
+      value: function request_COOLDOWN() {
+        return false;
+      }
+    }]);
+
+    return Cooldown;
+  }(FSM);
+
   var GetValue$1i = Phaser.Utils.Objects.GetValue;
 
   var InTouching = /*#__PURE__*/function (_ComponentBase) {
@@ -20949,6 +21303,7 @@
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this._enable = undefined;
+      _this.cooldown = new Cooldown();
 
       _this.parent.setInteractive(GetValue$1i(config, 'inputConfig', undefined));
 
@@ -20965,7 +21320,7 @@
         this.pointer = undefined;
         this.isInTouched = false;
         this.setEnable(GetValue$1i(o, 'enable', true));
-        this.setCooldown(GetValue$1i(o, 'cooldown', 0));
+        this.setCooldown(GetValue$1i(o, 'cooldown', undefined));
         return this;
       }
     }, {
@@ -21025,10 +21380,17 @@
         return this;
       }
     }, {
+      key: "cooldownTime",
+      get: function get() {
+        return this.cooldown.cooldownTime;
+      },
+      set: function set(time) {
+        this.cooldown.setCooldownTime(time);
+      }
+    }, {
       key: "setCooldown",
       value: function setCooldown(time) {
         this.cooldownTime = time;
-        this.startTime = undefined;
         return this;
       }
     }, {
@@ -21061,19 +21423,10 @@
     }, {
       key: "preupdate",
       value: function preupdate(time, delta) {
-        if (this.isInTouched) {
-          var overshootTime;
+        this.cooldown.update(time, delta);
 
-          if (this.startTime === undefined) {
-            overshootTime = 0;
-          } else {
-            overshootTime = time - this.startTime - this.cooldownTime;
-          }
-
-          if (overshootTime >= 0) {
-            this.startTime = time;
-            this.emit('intouch', this, this.parent, this.pointer);
-          }
+        if (this.isInTouched && this.cooldown.request()) {
+          this.emit('intouch', this, this.parent, this.pointer);
         }
       }
     }]);
@@ -21488,252 +21841,6 @@
   var TOUCH0$2 = 0;
   var TOUCH1$2 = 1;
   var IDLE$7 = 'IDLE';
-
-  var FSM = /*#__PURE__*/function () {
-    /*
-    var config = {
-        start: 'A',   // default: undefined
-        states: {
-            A: {
-                next: 'B',  // function() { return 'B'; }
-                enter: function() {},
-                exit: function() {}
-            },
-            // ...
-        },        
-        extend: {
-            i: 0,
-            name: 'abc'
-            // ...
-        },
-        init: function() {},
-        enable: true,
-        eventEmitter: true,
-    };
-    */
-    function FSM(config) {
-      _classCallCheck(this, FSM);
-
-      // Attach get-next-state function
-      var states = GetValue$2l(config, 'states', undefined);
-
-      if (states) {
-        this.addStates(states);
-      } // Attach extend members
-
-
-      var extend = GetValue$2l(config, 'extend', undefined);
-
-      if (extend) {
-        for (var name in extend) {
-          if (!this.hasOwnProperty(name) || this[name] === undefined) {
-            this[name] = extend[name];
-          }
-        }
-      } // Event emitter
-
-
-      var eventEmitter = GetValue$2l(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$2l(config, 'EventEmitterClass', undefined);
-      this.setEventEmitter(eventEmitter, EventEmitterClass);
-      this._stateLock = false;
-      this.resetFromJSON(config);
-    }
-
-    _createClass(FSM, [{
-      key: "shutdown",
-      value: function shutdown() {
-        this.destroyEventEmitter();
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        this.shutdown();
-      }
-    }, {
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.setEnable(GetValue$2l(o, 'enable', true));
-        this.start(GetValue$2l(o, 'start', undefined));
-        var init = GetValue$2l(o, 'init', undefined);
-
-        if (init) {
-          init.call(this);
-        }
-
-        return this;
-      }
-    }, {
-      key: "toJSON",
-      value: function toJSON() {
-        return {
-          curState: this.state,
-          prevState: this.prevState,
-          enable: this.enable,
-          start: this._start
-        };
-      }
-    }, {
-      key: "setEnable",
-      value: function setEnable(e) {
-        if (e === undefined) {
-          e = true;
-        }
-
-        this.enable = e;
-        return this;
-      }
-    }, {
-      key: "toggleEnable",
-      value: function toggleEnable() {
-        this.setEnable(!this.enable);
-        return this;
-      }
-    }, {
-      key: "state",
-      get: function get() {
-        return this._state;
-      },
-      set: function set(newState) {
-        if (!this.enable || this._stateLock) {
-          return;
-        }
-
-        if (this._state === newState) {
-          return;
-        }
-
-        this._prevState = this._state;
-        this._state = newState;
-        this._stateLock = true; // lock state
-
-        this.emit('statechange', this);
-
-        if (this._prevState != null) {
-          var exitEventName = 'exit_' + this._prevState;
-          var exitCallback = this[exitEventName];
-
-          if (exitCallback) {
-            exitCallback.call(this);
-          }
-
-          this.emit(exitEventName, this);
-        }
-
-        this._stateLock = false;
-
-        if (this._state != null) {
-          var enterEventName = 'enter_' + this._state;
-          var enterCallback = this[enterEventName];
-
-          if (enterCallback) {
-            enterCallback.call(this);
-          }
-
-          this.emit(enterEventName, this);
-        }
-      }
-    }, {
-      key: "prevState",
-      get: function get() {
-        return this._prevState;
-      }
-    }, {
-      key: "start",
-      value: function start(state) {
-        this._start = state;
-        this._prevState = undefined;
-        this._state = state; // Won't fire statechange events
-
-        return this;
-      }
-    }, {
-      key: "goto",
-      value: function goto(nextState) {
-        if (nextState != null) {
-          this.state = nextState;
-        }
-
-        return this;
-      }
-    }, {
-      key: "next",
-      value: function next() {
-        var nextState;
-        var getNextState = this['next_' + this.state];
-
-        if (getNextState) {
-          if (typeof getNextState === 'string') {
-            nextState = getNextState;
-          } else {
-            nextState = getNextState.call(this);
-          }
-        }
-
-        this["goto"](nextState);
-        return this;
-      }
-    }, {
-      key: "addState",
-      value: function addState(name, config) {
-        var getNextStateCallback = GetValue$2l(config, 'next', undefined);
-
-        if (getNextStateCallback) {
-          this['next_' + name] = getNextStateCallback;
-        }
-
-        var exitCallback = GetValue$2l(config, 'exit', undefined);
-
-        if (exitCallback) {
-          this['exit_' + name] = exitCallback;
-        }
-
-        var enterCallback = GetValue$2l(config, 'enter', undefined);
-
-        if (enterCallback) {
-          this['enter_' + name] = enterCallback;
-        }
-
-        return this;
-      }
-    }, {
-      key: "addStates",
-      value: function addStates(states) {
-        for (var name in states) {
-          this.addState(name, states[name]);
-        }
-
-        return this;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta, key) {
-        if (key === undefined) {
-          key = 'update';
-        }
-
-        var fn = this[key + '_' + this.state];
-
-        if (fn) {
-          fn.call(this, time, delta);
-        }
-      }
-    }, {
-      key: "preupdate",
-      value: function preupdate(time, delta) {
-        this.update(time, delta, 'preupdate');
-      }
-    }, {
-      key: "postupdate",
-      value: function postupdate(time, delta) {
-        this.update(time, delta, 'postupdate');
-      }
-    }]);
-
-    return FSM;
-  }();
-
-  Object.assign(FSM.prototype, EventEmitterMethods);
 
   var GetValue$1e = Phaser.Utils.Objects.GetValue;
   var DistanceBetween$5 = Phaser.Math.Distance.Between;

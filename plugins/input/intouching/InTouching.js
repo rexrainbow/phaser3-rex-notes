@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import Cooldown from '../../utils/time/cooldown/Cooldown.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8,6 +9,7 @@ class InTouching extends ComponentBase {
         // this.parent = gameObject;
 
         this._enable = undefined;
+        this.cooldown = new Cooldown();
         this.parent.setInteractive(GetValue(config, 'inputConfig', undefined));
         this.resetFromJSON(config);
         this.boot();
@@ -17,7 +19,7 @@ class InTouching extends ComponentBase {
         this.pointer = undefined;
         this.isInTouched = false;
         this.setEnable(GetValue(o, 'enable', true));
-        this.setCooldown(GetValue(o, 'cooldown', 0));
+        this.setCooldown(GetValue(o, 'cooldown', undefined));
         return this;
     }
 
@@ -73,9 +75,16 @@ class InTouching extends ComponentBase {
         return this;
     }
 
+    get cooldownTime() {
+        return this.cooldown.cooldownTime;
+    }
+
+    set cooldownTime(time) {
+        this.cooldown.setCooldownTime(time);
+    }
+
     setCooldown(time) {
         this.cooldownTime = time;
-        this.startTime = undefined;
         return this;
     }
 
@@ -105,18 +114,9 @@ class InTouching extends ComponentBase {
     }
 
     preupdate(time, delta) {
-        if (this.isInTouched) {
-            var overshootTime;
-            if (this.startTime === undefined) {
-                overshootTime = 0;
-            } else {
-                overshootTime = time - this.startTime - this.cooldownTime;
-            }
-
-            if (overshootTime >= 0) {
-                this.startTime = time;
-                this.emit('intouch', this, this.parent, this.pointer);
-            }
+        this.cooldown.update(time, delta);
+        if (this.isInTouched && this.cooldown.request()) {
+            this.emit('intouch', this, this.parent, this.pointer);
         }
     }
 }
