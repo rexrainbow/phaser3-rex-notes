@@ -30619,18 +30619,25 @@
         delete config.background;
       }
 
+      var buttonsConfig = GetValue$D(config, 'buttons', undefined);
+
+      if (buttonsConfig) {
+        delete config.buttons;
+      }
+
       var slider = new Slider(scene, config);
-      var button0 = GetValue$D(config, 'buttons.top', GetValue$D(config, 'buttons.left', undefined));
-      var button1 = GetValue$D(config, 'buttons.bottom', GetValue$D(config, 'buttons.right', undefined));
-      var step = GetValue$D(config, 'buttons.step', 0.01);
+      var button0 = GetValue$D(buttonsConfig, 'top', GetValue$D(buttonsConfig, 'left', undefined));
+      var button1 = GetValue$D(buttonsConfig, 'bottom', GetValue$D(buttonsConfig, 'right', undefined));
+
+      _this.setScrollStep(GetValue$D(buttonsConfig, 'step', 0.01));
 
       if (button0) {
         _this.add(button0);
 
         var touchState = new TouchState(button0);
         touchState.on('intouch', function () {
-          slider.value -= step;
-        });
+          slider.value -= this.scrollStep;
+        }, _assertThisInitialized(_this));
       }
 
       _this.add(slider, {
@@ -30642,8 +30649,8 @@
 
         var touchState = new TouchState(button1);
         touchState.on('intouch', function () {
-          slider.value += step;
-        });
+          slider.value += this.scrollStep;
+        }, _assertThisInitialized(_this));
       }
 
       _this.addChildrenMap('slider', slider);
@@ -30652,6 +30659,14 @@
 
       return _this;
     }
+
+    _createClass(Scrollbar, [{
+      key: "setScrollStep",
+      value: function setScrollStep(value) {
+        this.scrollStep = value;
+        return this;
+      }
+    }]);
 
     return Scrollbar;
   }(Sizer);
@@ -31886,6 +31901,7 @@
 
     parent.addChildrenMap('child', child);
     parent.addChildrenMap('slider', slider);
+    parent.addChildrenMap('scrollbar', scrollbar);
     parent.addChildrenMap('scroller', scroller);
     parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller); // Attach scrollbar's buttons to slider
 

@@ -9353,18 +9353,25 @@
         delete config.background;
       }
 
+      var buttonsConfig = GetValue$9(config, 'buttons', undefined);
+
+      if (buttonsConfig) {
+        delete config.buttons;
+      }
+
       var slider = new Slider(scene, config);
-      var button0 = GetValue$9(config, 'buttons.top', GetValue$9(config, 'buttons.left', undefined));
-      var button1 = GetValue$9(config, 'buttons.bottom', GetValue$9(config, 'buttons.right', undefined));
-      var step = GetValue$9(config, 'buttons.step', 0.01);
+      var button0 = GetValue$9(buttonsConfig, 'top', GetValue$9(buttonsConfig, 'left', undefined));
+      var button1 = GetValue$9(buttonsConfig, 'bottom', GetValue$9(buttonsConfig, 'right', undefined));
+
+      _this.setScrollStep(GetValue$9(buttonsConfig, 'step', 0.01));
 
       if (button0) {
         _this.add(button0);
 
         var touchState = new TouchState(button0);
         touchState.on('intouch', function () {
-          slider.value -= step;
-        });
+          slider.value -= this.scrollStep;
+        }, _assertThisInitialized(_this));
       }
 
       _this.add(slider, {
@@ -9376,8 +9383,8 @@
 
         var touchState = new TouchState(button1);
         touchState.on('intouch', function () {
-          slider.value += step;
-        });
+          slider.value += this.scrollStep;
+        }, _assertThisInitialized(_this));
       }
 
       _this.addChildrenMap('slider', slider);
@@ -9386,6 +9393,14 @@
 
       return _this;
     }
+
+    _createClass(Scrollbar, [{
+      key: "setScrollStep",
+      value: function setScrollStep(value) {
+        this.scrollStep = value;
+        return this;
+      }
+    }]);
 
     return Scrollbar;
   }(Sizer);
@@ -10620,6 +10635,7 @@
 
     parent.addChildrenMap('child', child);
     parent.addChildrenMap('slider', slider);
+    parent.addChildrenMap('scrollbar', scrollbar);
     parent.addChildrenMap('scroller', scroller);
     parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller); // Attach scrollbar's buttons to slider
 

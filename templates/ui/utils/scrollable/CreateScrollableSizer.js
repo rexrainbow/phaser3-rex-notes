@@ -144,6 +144,7 @@ var CreateScrollableSizer = function (parent, config) {
 
     parent.addChildrenMap('child', child);
     parent.addChildrenMap('slider', slider);
+    parent.addChildrenMap('scrollbar', scrollbar);
     parent.addChildrenMap('scroller', scroller);
     parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
 

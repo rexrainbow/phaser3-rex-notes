@@ -15,10 +15,15 @@ class Scrollbar extends Sizer {
             delete config.background;
         }
 
+        var buttonsConfig = GetValue(config, 'buttons', undefined);
+        if (buttonsConfig) {
+            delete config.buttons;
+        }
+
         var slider = new Slider(scene, config);
-        var button0 = GetValue(config, 'buttons.top', GetValue(config, 'buttons.left', undefined));
-        var button1 = GetValue(config, 'buttons.bottom', GetValue(config, 'buttons.right', undefined));
-        var step = GetValue(config, 'buttons.step', 0.01);
+        var button0 = GetValue(buttonsConfig, 'top', GetValue(buttonsConfig, 'left', undefined));
+        var button1 = GetValue(buttonsConfig, 'bottom', GetValue(buttonsConfig, 'right', undefined));
+        this.setScrollStep(GetValue(buttonsConfig, 'step', 0.01))
 
         if (button0) {
             this.add(button0);
@@ -26,8 +31,8 @@ class Scrollbar extends Sizer {
             var touchState = new TouchState(button0);
             touchState
                 .on('intouch', function () {
-                    slider.value -= step;
-                })
+                    slider.value -= this.scrollStep;
+                }, this)
         }
 
         this.add(slider,
@@ -42,12 +47,17 @@ class Scrollbar extends Sizer {
             var touchState = new TouchState(button1);
             touchState
                 .on('intouch', function () {
-                    slider.value += step;
-                })
+                    slider.value += this.scrollStep;
+                }, this)
         }
 
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('buttons', [button0, button1]);
+    }
+
+    setScrollStep(value) {
+        this.scrollStep = value;
+        return this;
     }
 }
 
