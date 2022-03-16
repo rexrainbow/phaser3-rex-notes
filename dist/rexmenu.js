@@ -5623,7 +5623,7 @@
           }
 
           if (overshootTime >= 0) {
-            this.startTime = time - overshootTime;
+            this.startTime = time;
             this.emit('intouch', this, this.parent, this.pointer);
           }
         }
