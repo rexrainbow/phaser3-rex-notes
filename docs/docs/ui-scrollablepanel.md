@@ -107,6 +107,12 @@ var panel = scene.rexUI.add.scrollablePanel({
         // position: 'right',
         // adaptThumbSize: false,
         // minThumbSize: undefined,
+
+        // buttons: {
+        //     top: topButtonGameObject, bottom: bottomButtonGameObject,
+        //     left: leftButtonGameObject, right: rightButtonGameObject,
+        //     step: 0.01,
+        // }
     },
 
     scroller: {
@@ -204,6 +210,10 @@ var panel = scene.rexUI.add.scrollablePanel({
             - Minimum height/width of thumb = `slider.minThumbSize`. If content is larger then a page.
             - Maximum height/width of thumb = height/width of `slider.track`. If content is less then a page.
     - `slider.minThumbSize` : Minimum height/width of thumb used in `slider.adaptThumbSize` mode.
+    - `slider.buttons` : Press button to scroll content in each tick.
+        - `slider.buttons.top`, `slider.buttons.bottom` : Top and bottom buttons.
+        - `slider.buttons.left`, `slider.buttons.right` : Left and right buttons
+        - `slider.buttons.step` : Scrolling step in each tick. Default value is `0.01`.
     - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.

@@ -31,7 +31,18 @@ class Demo extends Phaser.Scene {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
                 adaptThumbSize: true,
-                minThumbSize: 26
+                minThumbSize: 26,
+
+                buttons: {
+                    top: this.rexUI.add.BBCodeText(0, 0, 'U', {
+                        fixedWidth: 20, fixedHeight: 20,
+                        halign: 'center', valign: 'center'
+                    }),
+                    bottom: this.rexUI.add.BBCodeText(0, 0, 'D', {
+                        fixedWidth: 20, fixedHeight: 20,
+                        halign: 'center', valign: 'center'
+                    })
+                }
             },
 
             space: {

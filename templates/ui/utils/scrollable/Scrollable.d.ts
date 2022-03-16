@@ -31,6 +31,14 @@ declare namespace Scrollable {
                 position?: SliderPositionTypes,
                 adaptThumbSize?: boolean,
                 minThumbSize?: number,
+
+                buttons?: {
+                    top?: Phaser.GameObjects.GameObject,
+                    bottom?: Phaser.GameObjects.GameObject,
+                    left?: Phaser.GameObjects.GameObject,
+                    right?: Phaser.GameObjects.GameObject,
+                    step?: number
+                }
             } |
             boolean
         ),

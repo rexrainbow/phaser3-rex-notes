@@ -38,6 +38,7 @@ import GetParentSizerMethods from './GetParentSizerMethods.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
 import ClickMethods from './ClickMethods.js';
+import TouchingMethods from './TouchingMethods.js';
 import SetChildrenInteractive from './SetChildrenInteractive.js';
 import BroadcastEvent from './BroadcastEvent.js';
 
@@ -89,6 +90,7 @@ Object.assign(
     EaseMoveMethods,
     ShakeMethods,
     ClickMethods,
+    TouchingMethods,
     HideMethods,
     GetShownChildrenMethods,
 );

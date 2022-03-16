@@ -8181,6 +8181,12 @@
         <span class="c1">// position: &#39;right&#39;,</span>
         <span class="c1">// adaptThumbSize: false,</span>
         <span class="c1">// minThumbSize: undefined,</span>
+
+        <span class="c1">// buttons: {</span>
+        <span class="c1">//     top: topButtonGameObject, bottom: bottomButtonGameObject,</span>
+        <span class="c1">//     left: leftButtonGameObject, right: rightButtonGameObject,</span>
+        <span class="c1">//     step: 0.01,</span>
+        <span class="c1">// }</span>
     <span class="p">},</span>
 
     <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
@@ -8361,6 +8367,12 @@
 </ul>
 </li>
 <li><code>slider.minThumbSize</code> : Minimum height/width of thumb used in <code>slider.adaptThumbSize</code> mode.</li>
+<li><code>slider.buttons</code> : Press button to scroll content in each tick.<ul>
+<li><code>slider.buttons.top</code>, <code>slider.buttons.bottom</code> : Top and bottom buttons.</li>
+<li><code>slider.buttons.left</code>, <code>slider.buttons.right</code> : Left and right buttons</li>
+<li><code>slider.buttons.step</code> : Scrolling step in each tick. Default value is <code>0.01</code>.</li>
+</ul>
+</li>
 <li>Set to <code>false</code> to skip creating slider.</li>
 </ul>
 </li>

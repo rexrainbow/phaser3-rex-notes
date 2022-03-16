@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetScrollMode from '../GetScrollMode.js';
-import Slider from '../../slider/Slider.js';
+import Scrollbar from './Scrollbar.js';
 import Scroller from '../../../../plugins/scroller.js';
 import MouseWheelScroller from '../../../../plugins/input/mousewheeldcroller/MouseWheelScroller.js';
 
@@ -14,8 +14,8 @@ var CreateScrollableSizer = function (parent, config) {
 
     var child = GetValue(config, 'child.gameObject', undefined);
     var sliderConfig = GetValue(config, 'slider', undefined),
-        slider,
-        sliderPosition = GetValue(sliderConfig, 'position', 0);
+        scrollbar, slider;
+    var sliderPosition = GetValue(sliderConfig, 'position', 0);
     if (typeof (sliderPosition) === 'string') {
         sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
     }
@@ -64,7 +64,10 @@ var CreateScrollableSizer = function (parent, config) {
             // Vertical slider(orientation=1) for left-right scrollableSizer(orientation=0)
             // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
             sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
-            slider = new Slider(scene, sliderConfig);
+            scrollbar = new Scrollbar(scene, sliderConfig);
+            scene.add.existing(scrollbar);
+
+            slider = scrollbar.childrenMap.slider;
             parent.adaptThumbSizeMode = GetValue(sliderConfig, 'adaptThumbSize', false);
             parent.minThumbSize = GetValue(sliderConfig, 'minThumbSize', undefined);
         } else {
@@ -84,9 +87,9 @@ var CreateScrollableSizer = function (parent, config) {
             mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
         }
 
-        // Add slider to parent sizer at left/top side
-        if (slider && (!isRightSlider)) {
-            scrollableSizer.add(slider,
+        // Add scrollbar to parent sizer at left/top side
+        if (scrollbar && (!isRightSlider)) {
+            scrollableSizer.add(scrollbar,
                 {
                     proportion: 0,
                     align: 'center',
@@ -107,9 +110,9 @@ var CreateScrollableSizer = function (parent, config) {
             }
         );
 
-        // Add slider to parent sizer at right/bottom side
-        if (slider && isRightSlider) {
-            scrollableSizer.add(slider,
+        // Add scrollbar to parent sizer at right/bottom side
+        if (scrollbar && isRightSlider) {
+            scrollableSizer.add(scrollbar,
                 {
                     proportion: 0,
                     align: 'center',
@@ -143,6 +146,9 @@ var CreateScrollableSizer = function (parent, config) {
     parent.addChildrenMap('slider', slider);
     parent.addChildrenMap('scroller', scroller);
     parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
+
+    // Attach scrollbar's buttons to slider
+    slider.addChildrenMap('buttons', scrollbar.childrenMap.buttons);
 
     return scrollableSizer;
 }
