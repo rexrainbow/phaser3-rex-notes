@@ -51,8 +51,13 @@ class Scrollbar extends Sizer {
                 }, this)
         }
 
+        var buttons = [button0, button1];
+
         this.addChildrenMap('slider', slider);
-        this.addChildrenMap('buttons', [button0, button1]);
+        this.addChildrenMap('buttons', buttons);
+
+        // Attach s buttons to slider
+        slider.addChildrenMap('buttons', buttons);
     }
 
     setScrollStep(value) {

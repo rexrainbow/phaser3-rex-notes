@@ -148,9 +148,6 @@ var CreateScrollableSizer = function (parent, config) {
     parent.addChildrenMap('scroller', scroller);
     parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
 
-    // Attach scrollbar's buttons to slider
-    slider.addChildrenMap('buttons', scrollbar.childrenMap.buttons);
-
     return scrollableSizer;
 }
 

@@ -30653,10 +30653,14 @@
         }, _assertThisInitialized(_this));
       }
 
+      var buttons = [button0, button1];
+
       _this.addChildrenMap('slider', slider);
 
-      _this.addChildrenMap('buttons', [button0, button1]);
+      _this.addChildrenMap('buttons', buttons); // Attach s buttons to slider
 
+
+      slider.addChildrenMap('buttons', buttons);
       return _this;
     }
 
@@ -31903,9 +31907,7 @@
     parent.addChildrenMap('slider', slider);
     parent.addChildrenMap('scrollbar', scrollbar);
     parent.addChildrenMap('scroller', scroller);
-    parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller); // Attach scrollbar's buttons to slider
-
-    slider.addChildrenMap('buttons', scrollbar.childrenMap.buttons);
+    parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
     return scrollableSizer;
   };
 
