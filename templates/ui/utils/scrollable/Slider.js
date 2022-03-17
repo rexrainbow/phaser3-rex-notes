@@ -1,4 +1,5 @@
 import Base from '../../scrollbar/ScrollBar.js';
+import Clone from '../../../../plugins/utils/object/Clone.js'
 
 class Slider extends Base {
     constructor(scene, config) {
@@ -6,7 +7,7 @@ class Slider extends Base {
             config = {};
         }
 
-        var sliderConfig = config;
+        var sliderConfig = Clone(config);
         config = {
             slider: sliderConfig
         }

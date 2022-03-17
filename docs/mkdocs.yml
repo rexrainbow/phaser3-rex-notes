@@ -359,6 +359,7 @@ nav:
         - Text area: ui-textarea.md
     - Slider:
         - Slider: ui-slider.md
+        - Scroll bar: ui-scrollbar.md
         - Number bar: ui-numberbar.md
         - Knob: ui-knob.md
     - Dialog: ui-dialog.md

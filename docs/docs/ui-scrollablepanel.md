@@ -109,8 +109,10 @@ var panel = scene.rexUI.add.scrollablePanel({
         // minThumbSize: undefined,
 
         // buttons: {
-        //     top: topButtonGameObject, bottom: bottomButtonGameObject,
-        //     left: leftButtonGameObject, right: rightButtonGameObject,
+        //     top: topButtonGameObject, 
+        //     bottom: bottomButtonGameObject,
+        //     left: leftButtonGameObject, 
+        //     right: rightButtonGameObject,
         //     step: 0.01,
         // }
     },

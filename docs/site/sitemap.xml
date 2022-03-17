@@ -1501,6 +1501,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-scrollbar/</loc>
+         <lastmod>2022-03-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-sizer/</loc>
          <lastmod>2022-03-17</lastmod>
          <changefreq>daily</changefreq>
