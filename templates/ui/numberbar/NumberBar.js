@@ -59,6 +59,7 @@ class NumberBar extends Sizer {
                 sliderConfig.input = -1;
             }
             slider = new Slider(scene, sliderConfig);
+            scene.add.existing(slider);
 
             var padding;
             if (this.orientation === 0) {
