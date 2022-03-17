@@ -11,6 +11,7 @@ class Cooldown extends FSM {
 
     setCooldownTime(time) {
         this.cooldownTime = time;
+        this.cooldownMode = (time !== undefined);
         return this;
     }
 
@@ -27,7 +28,7 @@ class Cooldown extends FSM {
         return true;
     }
     next_IDLE() {
-        if (this.cooldownTime != null) {
+        if (this.cooldownMode) {
             return 'COOLDOWN';
         }
     }
@@ -39,7 +40,7 @@ class Cooldown extends FSM {
     update_COOLDOWN(time, delta) {
         this.remainderTime -= delta;
         if (this.remainderTime < 0) {
-            this.extraRemainderTime = -this.remainderTime;
+            this.extraRemainderTime = (this.cooldownTime > delta) ? (-this.remainderTime) : 0;
             this.goto('IDLE');
         }
     }

@@ -186,6 +186,7 @@ nav:
         - Cursor at bound: cursoratbound.md
         - Drag rotate: dragrotate.md
         - Touch event stop: toucheventstop.md
+        - In touching: intouching.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
         - Combo events: keyboardcombo.md
