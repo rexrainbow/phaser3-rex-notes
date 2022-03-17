@@ -5826,7 +5826,6 @@
       _this = _super.call(this, {
         eventEmitter: false
       });
-      _this.extraRemainderTime = 0;
 
       _this["goto"]('IDLE');
 
@@ -5837,6 +5836,7 @@
       key: "setCooldownTime",
       value: function setCooldownTime(time) {
         this.cooldownTime = time;
+        this.cooldownMode = time !== undefined;
         return this;
       }
     }, {
@@ -5848,7 +5848,7 @@
     }, {
       key: "update_IDLE",
       value: function update_IDLE() {
-        this.extraRemainderTime = 0;
+        this.compensationTime = 0;
       }
     }, {
       key: "request_IDLE",
@@ -5859,7 +5859,7 @@
     }, {
       key: "next_IDLE",
       value: function next_IDLE() {
-        if (this.cooldownTime != null) {
+        if (this.cooldownMode) {
           return 'COOLDOWN';
         }
       } // COOLDOWN state
@@ -5867,7 +5867,7 @@
     }, {
       key: "enter_COOLDOWN",
       value: function enter_COOLDOWN() {
-        this.remainderTime = this.cooldownTime + this.extraRemainderTime;
+        this.remainderTime = this.cooldownTime + this.compensationTime;
       }
     }, {
       key: "update_COOLDOWN",
@@ -5875,7 +5875,7 @@
         this.remainderTime -= delta;
 
         if (this.remainderTime < 0) {
-          this.extraRemainderTime = -this.remainderTime;
+          this.compensationTime = this.cooldownTime > delta ? -this.remainderTime : 0;
           this["goto"]('IDLE');
         }
       }
@@ -9175,7 +9175,7 @@
   var Percent = Phaser.Math.Percent;
   var SnapTo = Phaser.Math.Snap.To;
 
-  var Slider = /*#__PURE__*/function (_Sizer) {
+  var Slider$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(Slider, _Sizer);
 
     var _super = _createSuper(Slider);
@@ -9373,84 +9373,263 @@
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider.prototype, methods$1, EaseValueMethods);
+  Object.assign(Slider$1.prototype, methods$1, EaseValueMethods);
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
 
-  var Scrollbar = /*#__PURE__*/function (_Sizer) {
-    _inherits(Scrollbar, _Sizer);
+  var ScrollBar = /*#__PURE__*/function (_Sizer) {
+    _inherits(ScrollBar, _Sizer);
 
-    var _super = _createSuper(Scrollbar);
+    var _super = _createSuper(ScrollBar);
 
-    function Scrollbar(scene, config) {
+    function ScrollBar(scene, config) {
       var _this;
 
-      _classCallCheck(this, Scrollbar);
+      _classCallCheck(this, ScrollBar);
 
+      // Create sizer
       _this = _super.call(this, scene, config);
-      var background = GetValue$8(config, 'background', undefined); // background is used in scrollbar, to cover slider and buttons
+      _this.type = 'rexScrollBar'; // Add elements
+
+      var background = GetValue$8(config, 'background', undefined);
+      var buttonsConfig = GetValue$8(config, 'buttons', undefined);
+      var button0 = GetValue$8(buttonsConfig, 'top', GetValue$8(buttonsConfig, 'left', undefined));
+      var button1 = GetValue$8(buttonsConfig, 'bottom', GetValue$8(buttonsConfig, 'right', undefined));
+      var slider,
+          sliderConfig = GetValue$8(config, 'slider', undefined);
 
       if (background) {
         _this.addBackground(background);
-
-        delete config.background;
       }
-
-      var buttonsConfig = GetValue$8(config, 'buttons', undefined);
-
-      if (buttonsConfig) {
-        delete config.buttons;
-      }
-
-      var slider = new Slider(scene, config);
-      var button0 = GetValue$8(buttonsConfig, 'top', GetValue$8(buttonsConfig, 'left', undefined));
-      var button1 = GetValue$8(buttonsConfig, 'bottom', GetValue$8(buttonsConfig, 'right', undefined));
-
-      _this.setScrollStep(GetValue$8(buttonsConfig, 'step', 0.01));
 
       if (button0) {
         _this.add(button0);
 
         var inTouching = new InTouching(button0);
         inTouching.on('intouch', function () {
-          slider.value -= this.scrollStep;
+          if (!this.enable) {
+            return;
+          }
+
+          this.value -= this.scrollStep;
         }, _assertThisInitialized(_this));
       }
 
-      _this.add(slider, {
-        proportion: 1
-      });
+      if (sliderConfig) {
+        sliderConfig.orientation = _this.orientation;
+        sliderConfig.eventEmitter = _assertThisInitialized(_this);
+        sliderConfig.value = null;
+        var proportion;
+
+        if (_this.orientation === 0) {
+          var sliderWidth = GetValue$8(sliderConfig, 'width', undefined);
+          proportion = sliderWidth === undefined ? 1 : 0;
+        } else {
+          var sliderHeight = GetValue$8(sliderConfig, 'height', undefined);
+          proportion = sliderHeight === undefined ? 1 : 0;
+        }
+
+        slider = new Slider$1(scene, sliderConfig);
+        scene.add.existing(slider);
+
+        _this.add(slider, {
+          proportion: proportion
+        });
+      }
 
       if (button1) {
         _this.add(button1);
 
         var inTouching = new InTouching(button1);
         inTouching.on('intouch', function () {
-          slider.value += this.scrollStep;
+          if (!this.enable) {
+            return;
+          }
+
+          this.value += this.scrollStep;
         }, _assertThisInitialized(_this));
       }
 
       var buttons = [button0, button1];
 
+      _this.addChildrenMap('background', background);
+
       _this.addChildrenMap('slider', slider);
 
-      _this.addChildrenMap('buttons', buttons); // Attach s buttons to slider
+      _this.addChildrenMap('buttons', buttons);
 
+      var callback = GetValue$8(config, 'valuechangeCallback', null);
 
-      slider.addChildrenMap('buttons', buttons);
+      if (callback !== null) {
+        var scope = GetValue$8(config, 'valuechangeCallbackScope', undefined);
+
+        _this.on('valuechange', callback, scope);
+      }
+
+      _this.setEnable(GetValue$8(config, 'enable', undefined));
+
+      _this.setValue(GetValue$8(config, 'value', 0));
+
+      _this.setScrollStep(GetValue$8(buttonsConfig, 'step', 0.01));
+
       return _this;
     }
 
-    _createClass(Scrollbar, [{
+    _createClass(ScrollBar, [{
       key: "setScrollStep",
       value: function setScrollStep(value) {
         this.scrollStep = value;
         return this;
       }
+    }, {
+      key: "enable",
+      get: function get() {
+        if (this.childrenMap.slider) {
+          return this.childrenMap.slider.enable;
+        } else {
+          return false;
+        }
+      },
+      set: function set(value) {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.setEnable(value);
+        }
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.enable = enable;
+        return this;
+      }
+    }, {
+      key: "value",
+      get: function get() {
+        if (this.childrenMap.slider) {
+          return this.childrenMap.slider.value;
+        } else {
+          return 0;
+        }
+      },
+      set: function set(value) {
+        if (!this.childrenMap.slider) {
+          return;
+        }
+
+        this.childrenMap.slider.value = value;
+      }
+    }, {
+      key: "setValue",
+      value: function setValue(value, min, max) {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.setValue(value, min, max);
+        }
+
+        return this;
+      }
+    }, {
+      key: "addValue",
+      value: function addValue(inc, min, max) {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.addValue(inc, min, max);
+        }
+
+        return this;
+      }
+    }, {
+      key: "getValue",
+      value: function getValue(min, max) {
+        if (this.childrenMap.slider) {
+          return this.childrenMap.slider.getValue(min, max);
+        } else {
+          return 0;
+        }
+      }
+    }, {
+      key: "easeValueTo",
+      value: function easeValueTo(value, min, max) {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.easeValueTo(value, min, max);
+        }
+
+        return this;
+      }
+    }, {
+      key: "stopEaseValue",
+      value: function stopEaseValue() {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.stopEaseValue();
+        }
+
+        return this;
+      }
+    }, {
+      key: "setEaseValueDuration",
+      value: function setEaseValueDuration(duration) {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.setEaseValueDuration(duration);
+        }
+
+        return this;
+      }
+    }, {
+      key: "setEaseValueFunction",
+      value: function setEaseValueFunction(ease) {
+        if (this.childrenMap.slider) {
+          this.childrenMap.slider.setEaseValueFunction(ease);
+        }
+
+        return this;
+      }
     }]);
 
-    return Scrollbar;
+    return ScrollBar;
   }(Sizer);
+
+  var Slider = /*#__PURE__*/function (_Base) {
+    _inherits(Slider, _Base);
+
+    var _super = _createSuper(Slider);
+
+    function Slider(scene, config) {
+      var _this;
+
+      _classCallCheck(this, Slider);
+
+      if (config === undefined) {
+        config = {};
+      }
+
+      var sliderConfig = config;
+      config = {
+        slider: sliderConfig
+      }; // Move orientation parameter from sliderConfig to config
+
+      config.orientation = sliderConfig.orientation;
+      delete sliderConfig.orientation; // Move background parameter from sliderConfig to config
+
+      config.background = sliderConfig.background;
+      delete sliderConfig.background; // Move buttons parameter from sliderConfig to config
+
+      config.buttons = sliderConfig.buttons;
+      delete sliderConfig.buttons;
+      _this = _super.call(this, scene, config);
+      var slider = _this.childrenMap.slider;
+
+      _this.addChildrenMap('track', slider.childrenMap.track);
+
+      _this.addChildrenMap('indicator', slider.childrenMap.indicator);
+
+      _this.addChildrenMap('thumb', slider.childrenMap.thumb);
+
+      return _this;
+    }
+
+    return Slider;
+  }(ScrollBar);
 
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
@@ -10544,7 +10723,6 @@
 
     var child = GetValue$3(config, 'child.gameObject', undefined);
     var sliderConfig = GetValue$3(config, 'slider', undefined),
-        scrollbar,
         slider;
     var sliderPosition = GetValue$3(sliderConfig, 'position', 0);
 
@@ -10608,9 +10786,7 @@
 
 
         sliderConfig.orientation = scrollableSizer.orientation === 0 ? 1 : 0;
-        scrollbar = new Scrollbar(scene, sliderConfig);
-        scene.add.existing(scrollbar);
-        slider = scrollbar.childrenMap.slider;
+        slider = new Slider(scene, sliderConfig);
         parent.adaptThumbSizeMode = GetValue$3(sliderConfig, 'adaptThumbSize', false);
         parent.minThumbSize = GetValue$3(sliderConfig, 'minThumbSize', undefined);
       } else {
@@ -10629,11 +10805,11 @@
 
       if (mouseWheelScrollerConfig) {
         mouseWheelScroller = new MouseWheelScroller(child, mouseWheelScrollerConfig);
-      } // Add scrollbar to parent sizer at left/top side
+      } // Add slider to parent sizer at left/top side
 
 
-      if (scrollbar && !isRightSlider) {
-        scrollableSizer.add(scrollbar, {
+      if (slider && !isRightSlider) {
+        scrollableSizer.add(slider, {
           proportion: 0,
           align: 'center',
           expand: true
@@ -10648,10 +10824,10 @@
         align: 'center',
         padding: childPadding,
         expand: expand
-      }); // Add scrollbar to parent sizer at right/bottom side
+      }); // Add slider to parent sizer at right/bottom side
 
-      if (scrollbar && isRightSlider) {
-        scrollableSizer.add(scrollbar, {
+      if (slider && isRightSlider) {
+        scrollableSizer.add(slider, {
           proportion: 0,
           align: 'center',
           expand: true
@@ -10682,7 +10858,6 @@
 
     parent.addChildrenMap('child', child);
     parent.addChildrenMap('slider', slider);
-    parent.addChildrenMap('scrollbar', scrollbar);
     parent.addChildrenMap('scroller', scroller);
     parent.addChildrenMap('mouseWheelScroller', mouseWheelScroller);
     return scrollableSizer;
@@ -10750,18 +10925,18 @@
   };
 
   var LayoutSlider = function LayoutSlider() {
-    var scrollbar = this.childrenMap.scrollbar; // Save minSize
+    var slider = this.childrenMap.slider; // Save minSize
 
-    var minWidthSave = scrollbar.minWidth;
-    var minHeightSave = scrollbar.minHeight; // Set minSize to current size
+    var minWidthSave = slider.minWidth;
+    var minHeightSave = slider.minHeight; // Set minSize to current size
 
-    scrollbar.minWidth = scrollbar.width;
-    scrollbar.minHeight = scrollbar.height; // Layout scrollbar
+    slider.minWidth = slider.width;
+    slider.minHeight = slider.height; // Layout slider
 
-    scrollbar.layout(); // Restore minSize
+    slider.layout(); // Restore minSize
 
-    scrollbar.minWidth = minWidthSave;
-    scrollbar.minHeight = minHeightSave;
+    slider.minWidth = minWidthSave;
+    slider.minHeight = minHeightSave;
   };
 
   var UpdateController = function UpdateController() {

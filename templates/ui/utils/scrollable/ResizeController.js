@@ -48,18 +48,18 @@ var AdaptThumbSize = function () {
 }
 
 var LayoutSlider = function () {
-    var scrollbar = this.childrenMap.scrollbar;
+    var slider = this.childrenMap.slider;
     // Save minSize
-    var minWidthSave = scrollbar.minWidth;
-    var minHeightSave = scrollbar.minHeight;
+    var minWidthSave = slider.minWidth;
+    var minHeightSave = slider.minHeight;
     // Set minSize to current size
-    scrollbar.minWidth = scrollbar.width;
-    scrollbar.minHeight = scrollbar.height;
-    // Layout scrollbar
-    scrollbar.layout();
+    slider.minWidth = slider.width;
+    slider.minHeight = slider.height;
+    // Layout slider
+    slider.layout();
     // Restore minSize
-    scrollbar.minWidth = minWidthSave;
-    scrollbar.minHeight = minHeightSave;
+    slider.minWidth = minWidthSave;
+    slider.minHeight = minHeightSave;
 }
 
 export default ResizeController;

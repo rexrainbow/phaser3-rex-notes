@@ -671,7 +671,6 @@
       _this = _super.call(this, {
         eventEmitter: false
       });
-      _this.extraRemainderTime = 0;
 
       _this["goto"]('IDLE');
 
@@ -682,6 +681,7 @@
       key: "setCooldownTime",
       value: function setCooldownTime(time) {
         this.cooldownTime = time;
+        this.cooldownMode = time !== undefined;
         return this;
       }
     }, {
@@ -693,7 +693,7 @@
     }, {
       key: "update_IDLE",
       value: function update_IDLE() {
-        this.extraRemainderTime = 0;
+        this.compensationTime = 0;
       }
     }, {
       key: "request_IDLE",
@@ -704,7 +704,7 @@
     }, {
       key: "next_IDLE",
       value: function next_IDLE() {
-        if (this.cooldownTime != null) {
+        if (this.cooldownMode) {
           return 'COOLDOWN';
         }
       } // COOLDOWN state
@@ -712,7 +712,7 @@
     }, {
       key: "enter_COOLDOWN",
       value: function enter_COOLDOWN() {
-        this.remainderTime = this.cooldownTime + this.extraRemainderTime;
+        this.remainderTime = this.cooldownTime + this.compensationTime;
       }
     }, {
       key: "update_COOLDOWN",
@@ -720,7 +720,7 @@
         this.remainderTime -= delta;
 
         if (this.remainderTime < 0) {
-          this.extraRemainderTime = -this.remainderTime;
+          this.compensationTime = this.cooldownTime > delta ? -this.remainderTime : 0;
           this["goto"]('IDLE');
         }
       }
