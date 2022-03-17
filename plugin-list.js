@@ -229,6 +229,8 @@ module.exports = {
     'scrollablepanel': './templates/ui/scrollablepanel/ScrollablePanel.js',
     'sizer': './templates/ui/sizer/Sizer.js',
     'slider': './templates/ui/slider/Slider.js',
+    'numberbar': './templates/ui/numberbar/NumberBar.js',
+    'scrollbar': './templates/ui/scrollbar/ScrollBar.js',
     'swipe': './templates/ui/swipe/Swipe.js',
     'tabs': './templates/ui/tabs/Tabs.js',
     'tagtext': './templates/ui/tagtext/TagText.js',

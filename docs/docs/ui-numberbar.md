@@ -344,8 +344,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 
 - On value changed
   ```javascript
-  numberBar.on(
-    "valuechange",
+  numberBar.on('valuechange',
     function (newValue, oldValue, numberBar) {
       // numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
     },

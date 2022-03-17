@@ -41,6 +41,7 @@ import BadgeLabel from './badgelabel/BadgeLabel.js';
 import Pages from './pages/Pages.js';
 import TextArea from './textarea/TextArea.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
+import ScrollBar from './scrollbar/ScrollBar.js';
 import Toast from './toast/Toast.js';
 import Sides from './sides/Sides.js';
 
@@ -121,6 +122,7 @@ export {
     Pages,
     TextArea,
     ScrollablePanel,
+    ScrollBar,
     Toast,
     Sides,
 

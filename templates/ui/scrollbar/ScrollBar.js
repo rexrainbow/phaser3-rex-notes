@@ -12,8 +12,11 @@ class ScrollBar extends Sizer {
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
+
+        var buttonsConfig = GetValue(config, 'buttons', undefined);
         var button0 = GetValue(buttonsConfig, 'top', GetValue(buttonsConfig, 'left', undefined));
         var button1 = GetValue(buttonsConfig, 'bottom', GetValue(buttonsConfig, 'right', undefined));
+
         var slider,
             sliderConfig = GetValue(config, 'slider', undefined);
 
@@ -38,12 +41,22 @@ class ScrollBar extends Sizer {
             sliderConfig.orientation = this.orientation;
             sliderConfig.eventEmitter = this;
             sliderConfig.value = null;
+
+            var proportion;
+            if (this.orientation === 0) {
+                var sliderWidth = GetValue(sliderConfig, 'width', undefined);
+                proportion = (sliderWidth === undefined) ? 1 : 0;
+            } else {
+                var sliderHeight = GetValue(sliderConfig, 'height', undefined);
+                proportion = (sliderHeight === undefined) ? 1 : 0;
+            }
+
             slider = new Slider(scene, sliderConfig);
             scene.add.existing(slider);
             this.add(
                 slider,
                 {
-                    proportion: 1,
+                    proportion: proportion,
                 }
             )
         }

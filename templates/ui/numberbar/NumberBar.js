@@ -80,6 +80,7 @@ class NumberBar extends Sizer {
                 var sliderHeight = GetValue(sliderConfig, 'height', undefined);
                 proportion = (sliderHeight === undefined) ? 1 : 0;
             }
+
             this.add(slider,
                 {
                     proportion: proportion,

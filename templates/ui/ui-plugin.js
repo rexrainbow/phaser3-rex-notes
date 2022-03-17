@@ -39,6 +39,7 @@ import GridTableFactory from './gridtable/Factory.js';
 import MenuFactory from './menu/Factory.js';
 import TextBoxFactory from './textbox/Factory.js';
 import NumberBarFactory from './numberbar/Factory.js';
+import ScrollBarFactory from './scrollbar/Factory.js';
 import BadgeLabelFactory from './badgelabel/Factory.js';
 import PagesFactory from './pages/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';

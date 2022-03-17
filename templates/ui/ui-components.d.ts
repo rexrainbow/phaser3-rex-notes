@@ -35,6 +35,7 @@ import GridTable from './gridtable/GridTable';
 import Menu from './menu/Menu';
 import TextBox from './textbox/TextBox';
 import NumberBar from './numberbar/NumberBar';
+import ScrollBar from './scrollbar/ScrollBar';
 import BadgeLabel from './badgelabel/BadgeLabel';
 import Pages from './pages/Pages';
 import TextArea from './textarea/TextArea';
@@ -115,6 +116,7 @@ export {
     Menu,
     TextBox,
     NumberBar,
+    ScrollBar,
     BadgeLabel,
     Pages,
     TextArea,
