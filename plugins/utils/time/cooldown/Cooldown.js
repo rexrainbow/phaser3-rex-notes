@@ -5,7 +5,6 @@ class Cooldown extends FSM {
             eventEmitter: false
         })
 
-        this.extraRemainderTime = 0;
         this.goto('IDLE');
     }
 
@@ -21,7 +20,7 @@ class Cooldown extends FSM {
 
     // IDLE state
     update_IDLE() {
-        this.extraRemainderTime = 0;
+        this.compensationTime = 0;
     }
     request_IDLE() {
         this.next();
@@ -35,12 +34,12 @@ class Cooldown extends FSM {
 
     // COOLDOWN state
     enter_COOLDOWN() {
-        this.remainderTime = this.cooldownTime + this.extraRemainderTime;
+        this.remainderTime = this.cooldownTime + this.compensationTime;
     }
     update_COOLDOWN(time, delta) {
         this.remainderTime -= delta;
         if (this.remainderTime < 0) {
-            this.extraRemainderTime = (this.cooldownTime > delta) ? (-this.remainderTime) : 0;
+            this.compensationTime = (this.cooldownTime > delta) ? (-this.remainderTime) : 0;
             this.goto('IDLE');
         }
     }
