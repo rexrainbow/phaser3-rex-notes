@@ -3,6 +3,10 @@ import {
 } from './CharacterQueryMethods.js';
 
 var Load = function (content, lock) {
+    if (Array.isArray(content)) {
+        content = content.join('');
+    }
+
     if (lock === undefined) {
         lock = false;
     }
@@ -44,23 +48,30 @@ var Load = function (content, lock) {
                 item.alive = true;
                 removeCharacters.push(freeItem.character);
             } else {
-
+                console.warn(`Character cache full, can't add '${item.character}' character.`);
             }
         }
     }
 
-    // Update cache
+    // Update frame-manager
     for (var i = 0, cnt = removeCharacters.length; i < cnt; i++) {
+        this.emit('remove', character, this.textObject);
         this.frameManager.remove(removeCharacters[i]);
     }
 
     for (var i = 0, cnt = insertCharacters.length; i < cnt; i++) {
         var character = insertCharacters[i];
+        this.emit('add', character, this.textObject);
+
         this.textObject.setText(character);
         this.frameManager.paste(character, this.textObject);
     }
 
-    this.frameManager.updateTexture();
+    if (insertCharacters.length > 0) {
+        this.frameManager.updateTexture();
+    }
+
+    this.frameManager.addToBitmapFont();
 
     return this;
 }

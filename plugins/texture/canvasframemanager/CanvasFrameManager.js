@@ -39,6 +39,7 @@ class CanvasFrameManager {
             context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         }
 
+        this.key = key;
         this.width = width;
         this.height = height;
         this.cellWidth = cellWidth;

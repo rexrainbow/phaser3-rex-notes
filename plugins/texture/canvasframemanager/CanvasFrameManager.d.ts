@@ -36,6 +36,7 @@ declare class CanvasFrameManager {
         config: CanvasFrameManager.IConfig
     );
 
+    readonly key: string;
     readonly canvas: HTMLCanvasElement;
     readonly context: CanvasRenderingContext2D;
     readonly width: number;

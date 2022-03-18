@@ -1,3 +1,4 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import CreateFrameManager from './methods/CreateFrameManager.js';
 import CreateCharacterCollection from './methods/CreateCharacterCollection.js';
 import Methods from './methods/Methods.js';
@@ -6,6 +7,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CharacterCache {
     constructor(scene, config) {
+        // Event emitter
+        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+        this.setEventEmitter(eventEmitter, EventEmitterClass);
+
         this.frameManager = CreateFrameManager(scene, config)
 
         // Create ChacacterCollection
@@ -20,21 +26,21 @@ class CharacterCache {
         this.inCacheCount = 0;
 
         // Load content
-        var content = GetValue(config, 'content')
-        if (content) {
-            this.load(content);
+        this.load(GetValue(config, 'content', ''));
+    }
+
+    shutdown() {
+        this.destroyEventEmitter();
+
+        this.frameManager.destroy();
+        this.characterCollection = undefined;
+        if (this.textObject) {
+            this.textObject.destroy();
         }
     }
 
     destroy() {
-        this.frameManager.destroy();
-
-        this.characterCollection = undefined;
-
-        if (this.textObject) {
-            this.textObject.destroy();
-        }
-
+        this.shutdown();
     }
 
     bindTextObject(textObject) {
@@ -42,14 +48,14 @@ class CharacterCache {
         return this;
     }
 
-    addToBitmapFont() {
-        this.frameManager.addToBitmapFont();
-        return this;
+    get fontKey() {
+        return this.frameManager.key;
     }
 }
 
 Object.assign(
     CharacterCache.prototype,
+    EventEmitterMethods,
     Methods
 );
 

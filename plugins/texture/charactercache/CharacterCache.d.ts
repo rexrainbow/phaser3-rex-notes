@@ -1,3 +1,5 @@
+import EventEmitter from "../../utils/eventemitter/EventEmitter";
+
 export default CharacterCache;
 
 declare namespace CharacterCache {
@@ -8,16 +10,20 @@ declare namespace CharacterCache {
         maxCharacterCount?: number,
 
         textObject?: Phaser.GameObjects.GameObject,
+
         content?: string,
+
+        eventEmitter?: EventEmitter | false,
     }
 }
 
-declare class CharacterCache {
+declare class CharacterCache extends EventEmitter {
     constructor(
         scene: Phaser.Scene,
         config: CharacterCache.IConfig
     );
 
+    readonly fontKey: string;
     readonly inCacheCount: number;
 
     destroy(): void;
@@ -33,5 +39,7 @@ declare class CharacterCache {
 
     unlock(): this;
 
-    addToBitmapFont(): this;
+    updateBitmapTextFont(
+        bitmapText: Phaser.GameObjects.GameObject
+    ): this;
 }
