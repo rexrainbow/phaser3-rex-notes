@@ -27,6 +27,13 @@ class CharacterCache {
     }
 
     destroy() {
+        this.frameManager.destroy();
+
+        this.characterCollection = undefined;
+
+        if (this.textObject) {
+            this.textObject.destroy();
+        }
 
     }
 
