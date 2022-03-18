@@ -26,6 +26,10 @@ class CharacterCache {
         }
     }
 
+    destroy() {
+
+    }
+
     bindTextObject(textObject) {
         this.textObject = textObject;
         return this;

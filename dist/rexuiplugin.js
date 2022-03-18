@@ -30869,7 +30869,7 @@
         config = {};
       }
 
-      var sliderConfig = config;
+      var sliderConfig = Clone(config);
       config = {
         slider: sliderConfig
       }; // Move orientation parameter from sliderConfig to config

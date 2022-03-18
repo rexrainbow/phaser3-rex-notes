@@ -9589,6 +9589,37 @@
     return ScrollBar;
   }(Sizer);
 
+  /**
+   * Shallow Object Clone. Will not out nested objects.
+   * @param {object} obj JSON object
+   * @param {object} ret JSON object to return, set null to return a new object
+   * @returns {object} this object
+   */
+
+  var Clone = function Clone(obj, out) {
+    var objIsArray = Array.isArray(obj);
+
+    if (out === undefined) {
+      out = objIsArray ? [] : {};
+    } else {
+      Clear(out);
+    }
+
+    if (objIsArray) {
+      out.length = obj.length;
+
+      for (var i = 0, cnt = obj.length; i < cnt; i++) {
+        out[i] = obj[i];
+      }
+    } else {
+      for (var key in obj) {
+        out[key] = obj[key];
+      }
+    }
+
+    return out;
+  };
+
   var Slider = /*#__PURE__*/function (_Base) {
     _inherits(Slider, _Base);
 
@@ -9603,7 +9634,7 @@
         config = {};
       }
 
-      var sliderConfig = config;
+      var sliderConfig = Clone(config);
       config = {
         slider: sliderConfig
       }; // Move orientation parameter from sliderConfig to config
@@ -11319,37 +11350,6 @@
   }; // mixin
 
   Object.assign(Scrollable.prototype, Methods);
-
-  /**
-   * Shallow Object Clone. Will not out nested objects.
-   * @param {object} obj JSON object
-   * @param {object} ret JSON object to return, set null to return a new object
-   * @returns {object} this object
-   */
-
-  var Clone = function Clone(obj, out) {
-    var objIsArray = Array.isArray(obj);
-
-    if (out === undefined) {
-      out = objIsArray ? [] : {};
-    } else {
-      Clear(out);
-    }
-
-    if (objIsArray) {
-      out.length = obj.length;
-
-      for (var i = 0, cnt = obj.length; i < cnt; i++) {
-        out[i] = obj[i];
-      }
-    } else {
-      for (var key in obj) {
-        out[key] = obj[key];
-      }
-    }
-
-    return out;
-  };
 
   var DataMethods = {
     enableData: function enableData() {

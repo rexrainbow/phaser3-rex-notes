@@ -1,6 +1,6 @@
 import CanvasFrameManager from './canvasframemanager';
 
-export default class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
+export default class CanvasFrameManagerPlugin extends Phaser.Plugins.BasePlugin {
     add(
         scene: Phaser.Scene,
         key: string,

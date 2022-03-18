@@ -28,6 +28,7 @@ module.exports = {
     'coverplugin': './plugins/cover-plugin.js',
     // texture
     'canvasframemanagerplugin': './plugins/canvasframemanager-plugin.js',
+    'charactercacheplugin': './plugins/charactercache-plugin.js',
     // effect layer (shader)
     'effectlayerplugin': './plugins/effectlayer-plugin.js',
     'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',
