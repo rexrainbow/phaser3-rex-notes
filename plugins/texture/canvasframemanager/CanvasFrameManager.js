@@ -1,4 +1,4 @@
-import Methods from "./Methods";
+import Methods from './methods/Methods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -45,8 +45,9 @@ class CanvasFrameManager {
         this.cellHeight = cellHeight;
         this.columnCount = Math.floor(width / cellWidth);
         this.rowCount = Math.floor(height / cellHeight);
+        this.totalCount = this.columnCount * this.rowCount;
 
-        this.frameNames = Array(this.columnCount * this.rowCount);
+        this.frameNames = Array(this.totalCount);
         for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
             this.frameNames[i] = undefined;
         }
