@@ -15,6 +15,13 @@ declare namespace CharacterCache {
 
         eventEmitter?: EventEmitter | false,
     }
+
+    interface CacheData {
+        character: string,
+        freq: number,
+        alive: boolean,
+        lock: boolean,
+    }
 }
 
 declare class CharacterCache extends EventEmitter {
@@ -32,6 +39,10 @@ declare class CharacterCache extends EventEmitter {
         textObject: Phaser.GameObjects.GameObject
     ): this;
 
+    overrideBitmapText(
+        bitmapText: Phaser.GameObjects.GameObject
+    ): this;
+
     load(
         content: string,
         lock?: boolean
@@ -39,7 +50,9 @@ declare class CharacterCache extends EventEmitter {
 
     unlock(): this;
 
-    updateBitmapTextFont(
-        bitmapText: Phaser.GameObjects.GameObject
-    ): this;
+    getAllData(
+    ): CharacterCache.CacheData[];
+
+    clear(): this;
+
 }

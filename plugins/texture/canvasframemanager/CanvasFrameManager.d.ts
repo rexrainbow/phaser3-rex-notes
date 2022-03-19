@@ -76,6 +76,8 @@ declare class CanvasFrameManager {
         frameName: string | number
     ): this;
 
+    clear(): this;
+
     hasFrameName(
         frameName: string | number
     ): boolean;
