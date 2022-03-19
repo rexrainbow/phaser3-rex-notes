@@ -466,6 +466,20 @@
 
         return this;
       }
+    }, {
+      key: "clear",
+      value: function clear() {
+        for (var i, cnt = this.frameNames.length; i < cnt; i++) {
+          var frameName = this.frameNames[i];
+
+          if (frameName !== undefined) {
+            this.addFrameName(index, undefined);
+            this.texture.remove(frameName);
+          }
+        }
+
+        return this;
+      }
     }]);
 
     return CanvasFrameManager;
@@ -9035,6 +9049,7 @@
   var GetInCacheCharacterItems = function GetInCacheCharacterItems(collection, config) {
     var excludeCharacters = GetValue$1(config, 'exclude', undefined);
     var lock = GetValue$1(config, 'lock', undefined);
+    var freqMode = GetValue$1(config, 'freq', false);
     var filter = {
       alive: true
     };
@@ -9053,9 +9068,13 @@
       filter.lock = lock;
     }
 
-    return collection.chain().find(filter).simplesort('freq', {
-      desc: true
-    }).data();
+    if (freqMode) {
+      return collection.chain().find(filter).simplesort('freq', {
+        desc: true
+      }).data();
+    } else {
+      return collection.chain().find(filter).data();
+    }
   };
 
   var GetLockedCharacterItems = function GetLockedCharacterItems(collection) {
@@ -9064,10 +9083,16 @@
     });
   };
 
-  var GetAllItems = function GetAllItems(collection) {
-    return collection.chain().simplesort('freq', {
-      desc: true
-    }).data();
+  var GetAllItems = function GetAllItems(collection, config) {
+    var freqMode = GetValue$1(config, 'freq', true);
+
+    if (freqMode) {
+      return collection.chain().simplesort('freq', {
+        desc: true
+      }).data();
+    } else {
+      return collection.chain().data();
+    }
   };
 
   var Load = function Load(content, lock) {
@@ -9079,7 +9104,6 @@
       lock = false;
     }
 
-    content = content.replaceAll('\n', '');
     var insertCharacters = [];
     var removeCharacters = [];
     var totalCacheCount = this.frameManager.totalCount;
@@ -9088,8 +9112,17 @@
 
     for (var i = 0, cnt = content.length; i < cnt; i++) {
       var character = content.charAt(i);
+
+      if (character === '\n') {
+        continue;
+      }
+
       var item = GetChatacter(this.characterCollection, character);
-      item.freq++;
+
+      if (this.freqMode) {
+        item.freq++;
+      }
+
       item.lock = lock;
 
       if (!item.alive) {
@@ -9111,7 +9144,8 @@
     if (penddingItems.length > 0) {
       var freeCandidateItems = GetInCacheCharacterItems(this.characterCollection, {
         exclude: content,
-        lock: false
+        lock: false,
+        freq: this.freqMode
       });
 
       for (var i = 0, cnt = penddingItems.length; i < cnt; i++) {
@@ -9144,10 +9178,9 @@
     }
 
     if (insertCharacters.length > 0) {
-      this.frameManager.updateTexture();
+      this.frameManager.updateTexture().addToBitmapFont();
     }
 
-    this.frameManager.addToBitmapFont();
     return this;
   };
 
@@ -9165,6 +9198,12 @@
     return GetAllItems(this.characterCollection);
   };
 
+  var Clear = function Clear() {
+    this.characterCollection.clear();
+    this.frameManager.clear().addToBitmapFont();
+    return this;
+  };
+
   var BitmapTextMethods = {
     overrideBitmapText: function overrideBitmapText(bitmapText) {
       var self = this;
@@ -9173,16 +9212,18 @@
       bitmapText.setText = function (text, lock) {
         self.load(text, lock);
         setTextSave.call(bitmapText, text);
+        return bitmapText;
       };
 
-      return this;
+      return bitmapText;
     }
   };
 
   var Methods = {
     load: Load,
     unlock: Unlock,
-    getAllData: GetAllData
+    getAllData: GetAllData,
+    clear: Clear
   };
   Object.assign(Methods, BitmapTextMethods);
 
@@ -9196,8 +9237,13 @@
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
+      this.freqMode = GetValue(config, 'freqMode', true);
       this.frameManager = CreateFrameManager(scene, config);
-      this.fontKey = this.frameManager.key; // Create ChacacterCollection
+      this.frameManager.addToBitmapFont(); // Add to bitmapfont at beginning
+
+      this.key = this.frameManager.key;
+      this.cellWidth = this.frameManager.cellWidth;
+      this.cellHeight = this.frameManager.cellHeight; // Create ChacacterCollection
 
       this.characterCollection = CreateCharacterDB(); // Bind text object
 

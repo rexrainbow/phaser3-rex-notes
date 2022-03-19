@@ -43,7 +43,7 @@ declare class CharacterCache extends EventEmitter {
 
     overrideBitmapText(
         bitmapText: Phaser.GameObjects.GameObject
-    ): this;
+    ): Phaser.GameObjects.GameObject;
 
     load(
         content: string,

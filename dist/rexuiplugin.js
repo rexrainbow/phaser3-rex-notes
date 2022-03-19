@@ -34967,7 +34967,12 @@
         break;
 
       case BitmapTextType:
-        lines = textObject.setText(text).getTextBounds().wrappedText.split('\n');
+        if (textObject.maxWidth > 0) {
+          lines = textObject.setText(text).getTextBounds().wrappedText.split('\n');
+        } else {
+          lines = text.split('\n');
+        }
+
         break;
     }
 

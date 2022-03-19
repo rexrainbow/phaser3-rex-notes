@@ -374,6 +374,20 @@
 
         return this;
       }
+    }, {
+      key: "clear",
+      value: function clear() {
+        for (var i, cnt = this.frameNames.length; i < cnt; i++) {
+          var frameName = this.frameNames[i];
+
+          if (frameName !== undefined) {
+            this.addFrameName(index, undefined);
+            this.texture.remove(frameName);
+          }
+        }
+
+        return this;
+      }
     }]);
 
     return CanvasFrameManager;

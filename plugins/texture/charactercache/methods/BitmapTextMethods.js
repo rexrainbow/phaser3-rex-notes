@@ -7,6 +7,6 @@ export default {
             setTextSave.call(bitmapText, text);
             return bitmapText;
         }
-        return this;
+        return bitmapText;
     }
 }
