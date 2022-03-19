@@ -12,6 +12,8 @@ class CharacterCache {
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
+        this.freqMode = GetValue(config, 'freqMode', true);
+
         this.frameManager = CreateFrameManager(scene, config);
         this.frameManager.addToBitmapFont(); // Add to bitmapfont at beginning
 

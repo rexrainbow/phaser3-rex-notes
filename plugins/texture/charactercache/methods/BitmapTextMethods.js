@@ -5,6 +5,7 @@ export default {
         bitmapText.setText = function (text, lock) {
             self.load(text, lock);
             setTextSave.call(bitmapText, text);
+            return bitmapText;
         }
         return this;
     }

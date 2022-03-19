@@ -12,9 +12,7 @@ class Demo extends Phaser.Scene {
         this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
     }
 
-    create() {
-        this.textPage = this.plugins.get('rexTextPage');
-
+    create() {    
         var lines = [];
         for (var i = 0; i < 50; i++) {
             lines.push(i.toString());
@@ -23,7 +21,7 @@ class Demo extends Phaser.Scene {
         var txt = this.add.bitmapText(100, 100, 'gothic')
             .setFontSize(20)
             .setMaxWidth(500)
-        txt.page = this.textPage.add(txt, {
+        txt.page = this.plugins.get('rexTextPage').add(txt, {
             //text: lines
             maxLines: 7
         });

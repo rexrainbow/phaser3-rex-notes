@@ -16,8 +16,7 @@ class Demo extends Phaser.Scene {
         var txt = this.add.bitmapText(100, 100, 'gothic', 'Touch to start typing');
         txt.typing = this.plugins.get('rexTextTyping').add(txt, {
             speed: 0.3 * 1000,
-            //typeMode: 'middle-to-sides',
-            //setTextCallback: myTypingFn
+            //typeMode: 'middle-to-sides'
         });
 
         this.input.on('pointerdown', function () {
@@ -32,16 +31,6 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
-}
-
-String.prototype.splice = function (idx, rem, str) {
-    return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
-};
-var myTypingFn = function (text, isLastChar, insertIdx) {
-    if (!isLastChar) {
-        text = text.splice(insertIdx, 0, '|');
-    }
-    return text;
 }
 
 var config = {

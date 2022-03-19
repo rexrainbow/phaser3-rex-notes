@@ -24,7 +24,10 @@ var Load = function (content, lock) {
         }
 
         var item = GetChatacter(this.characterCollection, character);
-        item.freq++;
+
+        if (this.freqMode) {
+            item.freq++;
+        }
         item.lock = lock;
         if (!item.alive) {
             insertCharacters.push(character);
@@ -43,7 +46,8 @@ var Load = function (content, lock) {
     if (penddingItems.length > 0) {
         var freeCandidateItems = GetInCacheCharacterItems(this.characterCollection, {
             exclude: content,
-            lock: false
+            lock: false,
+            freq: this.freqMode
         });
         for (var i = 0, cnt = penddingItems.length; i < cnt; i++) {
             var item = penddingItems[i];
