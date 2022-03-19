@@ -188,19 +188,28 @@
     return this;
   };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var AddToBitmapFont = function AddToBitmapFont() {
+    var textureKey = this.texture.key; // Don't add a new font data, resue current font data
 
-  var AddToBitmapFont = function AddToBitmapFont(config) {
-    var lineSpacing = GetValue$1(config, 'lineSpacing', 0);
-    var textureKey = this.texture.key;
+    var cacheData = this.bitmapFontCache.get(textureKey);
+
+    if (!cacheData) {
+      cacheData = {
+        data: {
+          retroFont: true,
+          font: textureKey,
+          size: this.cellWidth,
+          lineHeight: this.cellHeight,
+          chars: {}
+        },
+        texture: textureKey,
+        frame: null
+      };
+      this.bitmapFontCache.add(textureKey, cacheData);
+    }
+
+    var charData = cacheData.data.chars;
     var letters = this.frameNames;
-    var data = {
-      retroFont: true,
-      font: textureKey,
-      size: this.cellWidth,
-      lineHeight: this.cellHeight + lineSpacing,
-      chars: {}
-    };
 
     for (var i = 0, cnt = letters.length; i < cnt; i++) {
       var _char = letters[i];
@@ -214,7 +223,7 @@
           y = frame.cutY,
           width = frame.cutWidth,
           height = frame.cutHeight;
-      data.chars[_char.charCodeAt(0)] = {
+      charData[_char.charCodeAt(0)] = {
         x: x,
         y: y,
         width: width,
@@ -233,11 +242,6 @@
       };
     }
 
-    this.bitmapFontCache.add(textureKey, {
-      data: data,
-      texture: textureKey,
-      frame: null
-    });
     return this;
   };
 

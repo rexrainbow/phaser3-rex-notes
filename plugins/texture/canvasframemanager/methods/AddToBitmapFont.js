@@ -1,19 +1,24 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
-var AddToBitmapFont = function (config) {
-    var lineSpacing = GetValue(config, 'lineSpacing', 0);
-
+var AddToBitmapFont = function () {
     var textureKey = this.texture.key;
+    // Don't add a new font data, reuse current font data
+    var cacheData = this.bitmapFontCache.get(textureKey);
+    if (!cacheData) {
+        cacheData = {
+            data: {
+                retroFont: true,
+                font: textureKey,
+                size: this.cellWidth,
+                lineHeight: this.cellHeight,
+                chars: {}
+            },
+            texture: textureKey,
+            frame: null,
+        };
+        this.bitmapFontCache.add(textureKey, cacheData);
+    }
+    var charData = cacheData.data.chars;    
+
     var letters = this.frameNames;
-
-    var data = {
-        retroFont: true,
-        font: textureKey,
-        size: this.cellWidth,
-        lineHeight: this.cellHeight + lineSpacing,
-        chars: {}
-    };
-
     for (var i = 0, cnt = letters.length; i < cnt; i++) {
         var char = letters[i];
         if (char === undefined) {
@@ -26,7 +31,7 @@ var AddToBitmapFont = function (config) {
             width = frame.cutWidth,
             height = frame.cutHeight;
 
-        data.chars[char.charCodeAt(0)] = {
+        charData[char.charCodeAt(0)] = {
             x: x, y: y,
             width: width, height: height,
             centerX: x + (width / 2),
@@ -43,14 +48,6 @@ var AddToBitmapFont = function (config) {
         }
     }
 
-    this.bitmapFontCache.add(
-        textureKey,
-        {
-            data: data,
-            texture: textureKey,
-            frame: null
-        }
-    );
     return this;
 }
 export default AddToBitmapFont;
