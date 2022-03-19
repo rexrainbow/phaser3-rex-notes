@@ -107,6 +107,98 @@
     };
   }
 
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
+
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    }
+  };
+
   var Draw = function Draw(frameName, callback, scope) {
     var index = this.getFrameIndex(frameName);
 
@@ -292,6 +384,7 @@
         context.fillRect(0, 0, this.canvas.width, this.canvas.height);
       }
 
+      this.key = key;
       this.width = width;
       this.height = height;
       this.cellWidth = cellWidth;
@@ -8969,10 +9062,15 @@
   };
 
   var Load = function Load(content, lock) {
+    if (Array.isArray(content)) {
+      content = content.join('');
+    }
+
     if (lock === undefined) {
       lock = false;
     }
 
+    content = content.replaceAll('\n', '');
     var insertCharacters = [];
     var removeCharacters = [];
     var totalCacheCount = this.frameManager.totalCount;
@@ -9013,22 +9111,30 @@
           freeItem.alive = false;
           item.alive = true;
           removeCharacters.push(freeItem.character);
+        } else {
+          console.warn("Character cache full, can't add '".concat(item.character, "' character."));
         }
       }
-    } // Update cache
+    } // Update frame-manager
 
 
     for (var i = 0, cnt = removeCharacters.length; i < cnt; i++) {
+      this.emit('remove', character, this.textObject);
       this.frameManager.remove(removeCharacters[i]);
     }
 
     for (var i = 0, cnt = insertCharacters.length; i < cnt; i++) {
       var character = insertCharacters[i];
+      this.emit('add', character, this.textObject);
       this.textObject.setText(character);
       this.frameManager.paste(character, this.textObject);
     }
 
-    this.frameManager.updateTexture();
+    if (insertCharacters.length > 0) {
+      this.frameManager.updateTexture();
+    }
+
+    this.frameManager.addToBitmapFont();
     return this;
   };
 
@@ -9042,10 +9148,30 @@
     return this;
   };
 
+  var BitmapTextMethods = {
+    resetBitmapTextFont: function resetBitmapTextFont(bitmapText) {
+      bitmapText.font = undefined;
+      bitmapText.setFont(this.fontKey);
+      return this;
+    },
+    overrideBitmapText: function overrideBitmapText(bitmapText) {
+      var self = this;
+      var setTextSave = bitmapText.setText;
+
+      bitmapText.setText = function (text) {
+        self.load(text).resetBitmapTextFont(bitmapText);
+        setTextSave.call(bitmapText, text);
+      };
+
+      return this;
+    }
+  };
+
   var Methods = {
     load: Load,
     unlock: Unlock
   };
+  Object.assign(Methods, BitmapTextMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9053,7 +9179,12 @@
     function CharacterCache(scene, config) {
       _classCallCheck(this, CharacterCache);
 
-      this.frameManager = CreateFrameManager(scene, config); // Create ChacacterCollection
+      // Event emitter
+      var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+      this.setEventEmitter(eventEmitter, EventEmitterClass);
+      this.frameManager = CreateFrameManager(scene, config);
+      this.fontKey = this.frameManager.key; // Create ChacacterCollection
 
       this.characterCollection = CreateCharacterDB(); // Bind text object
 
@@ -9065,26 +9196,29 @@
 
       this.inCacheCount = 0; // Load content
 
-      var content = GetValue(config, 'content');
-
-      if (content) {
-        this.load(content);
-      }
+      this.load(GetValue(config, 'content', ''));
     }
 
     _createClass(CharacterCache, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.destroyEventEmitter();
+        this.frameManager.destroy();
+        this.characterCollection = undefined;
+
+        if (this.textObject) {
+          this.textObject.destroy();
+        }
+      }
+    }, {
       key: "destroy",
-      value: function destroy() {}
+      value: function destroy() {
+        this.shutdown();
+      }
     }, {
       key: "bindTextObject",
       value: function bindTextObject(textObject) {
         this.textObject = textObject;
-        return this;
-      }
-    }, {
-      key: "addToBitmapFont",
-      value: function addToBitmapFont() {
-        this.frameManager.addToBitmapFont();
         return this;
       }
     }]);
@@ -9092,7 +9226,7 @@
     return CharacterCache;
   }();
 
-  Object.assign(CharacterCache.prototype, Methods);
+  Object.assign(CharacterCache.prototype, EventEmitterMethods, Methods);
 
   var CharacterCachePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CharacterCachePlugin, _Phaser$Plugins$BaseP);
