@@ -281,7 +281,7 @@
   };
 
   var AddToBitmapFont = function AddToBitmapFont() {
-    var textureKey = this.texture.key; // Don't add a new font data, resue current font data
+    var textureKey = this.texture.key; // Don't add a new font data, reuse current font data
 
     var cacheData = this.bitmapFontCache.get(textureKey);
 
@@ -9157,8 +9157,8 @@
       var self = this;
       var setTextSave = bitmapText.setText;
 
-      bitmapText.setText = function (text) {
-        self.load(text);
+      bitmapText.setText = function (text, lock) {
+        self.load(text, lock);
         setTextSave.call(bitmapText, text);
       };
 
