@@ -12,8 +12,12 @@ class CharacterCache {
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.frameManager = CreateFrameManager(scene, config)
-        this.fontKey = this.frameManager.key;
+        this.frameManager = CreateFrameManager(scene, config);
+        this.frameManager.addToBitmapFont(); // Add to bitmapfont at beginning
+
+        this.key = this.frameManager.key;
+        this.cellWidth = this.frameManager.cellWidth;
+        this.cellHeight = this.frameManager.cellHeight;
 
         // Create ChacacterCollection
         this.characterCollection = CreateCharacterCollection();

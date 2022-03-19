@@ -1,6 +1,10 @@
 var Clear = function () {
     this.characterCollection.clear();
-    this.frameManager.clear();
+
+    this.frameManager
+        .clear()
+        .addToBitmapFont();
+
     return this;
 }
 

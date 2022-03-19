@@ -11,8 +11,6 @@ var Load = function (content, lock) {
         lock = false;
     }
 
-    content = content.replaceAll('\n', '');
-
     var insertCharacters = [];
     var removeCharacters = [];
 
@@ -21,6 +19,10 @@ var Load = function (content, lock) {
     var penddingItems = [];
     for (var i = 0, cnt = content.length; i < cnt; i++) {
         var character = content.charAt(i);
+        if (character === '\n') {
+            continue;
+        }
+
         var item = GetChatacter(this.characterCollection, character);
         item.freq++;
         item.lock = lock;
@@ -75,10 +77,10 @@ var Load = function (content, lock) {
     }
 
     if (insertCharacters.length > 0) {
-        this.frameManager.updateTexture();
+        this.frameManager
+            .updateTexture()
+            .addToBitmapFont();
     }
-
-    this.frameManager.addToBitmapFont();
 
     return this;
 }

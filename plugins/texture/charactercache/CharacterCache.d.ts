@@ -30,7 +30,9 @@ declare class CharacterCache extends EventEmitter {
         config: CharacterCache.IConfig
     );
 
-    readonly fontKey: string;
+    readonly key: string;
+    readonly cellWidth: number;
+    readonly cellHeight: number;
     readonly inCacheCount: number;
 
     destroy(): void;
