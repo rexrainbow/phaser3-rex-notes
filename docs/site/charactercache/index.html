@@ -3264,6 +3264,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#unlock-all-characters" class="md-nav__link">
+    Unlock all characters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-all-cache-data" class="md-nav__link">
     Get all cache data
   </a>
@@ -7972,6 +7979,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#unlock-all-characters" class="md-nav__link">
+    Unlock all characters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-all-cache-data" class="md-nav__link">
     Get all cache data
   </a>
@@ -8107,21 +8121,21 @@
 <li><code>content</code> : Load these characters into cache.</li>
 </ul>
 <h3 id="load-characters">Load characters<a class="headerlink" href="#load-characters" title="Permanent link">&para;</a></h3>
-<p>Load characters into bitmap font.</p>
+<p>Load characters into bitmap font, replace unused characters if no free character space.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">characterCache</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
 <span class="c1">// characterCache.load(content, lock);</span>
 </code></pre></div>
 <ul>
 <li><code>content</code> : Characters in a string.</li>
 <li><code>lock</code><ul>
-<li><code>true</code> : Lock these characters, won't be swapped out later.</li>
-<li><code>false</code> : Don't lock these characters, can be swapped out later. Default behavior.</li>
+<li><code>true</code> : Lock these characters, won't be replaced out later.</li>
+<li><code>false</code> : Don't lock these characters, can be replaced out later. Default behavior.</li>
 </ul>
 </li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Console.warn messages when a character can't add to cache due to cache full.</p>
+<p>Console.warn messages if no unused character is found.</p>
 </div>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
@@ -8142,6 +8156,9 @@
 </code></pre></div>
 <p>Now <code>setText</code> method has <code>lock</code> parameter : <code>bitmapText.setText(text, lock)</code>.</p>
 <p>Or user can override <code>bitmapText.setText</code> by extending <code>Phaser.GameObjects.BitmapText</code> class.</p>
+<h3 id="unlock-all-characters">Unlock all characters<a class="headerlink" href="#unlock-all-characters" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">characterCache</span><span class="p">.</span><span class="nx">unlock</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="get-all-cache-data">Get all cache data<a class="headerlink" href="#get-all-cache-data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cacheData</span> <span class="o">=</span> <span class="nx">characterCache</span><span class="p">.</span><span class="nx">getAllData</span><span class="p">();</span>
 </code></pre></div>

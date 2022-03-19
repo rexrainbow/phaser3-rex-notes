@@ -100,7 +100,7 @@ var characterCache = scene.plugins.get('rexCharacterCache').add(scene, {
 
 ### Load characters
 
-Load characters into bitmap font.
+Load characters into bitmap font, replace unused characters if no free character space.
 
 ```javascript
 characterCache.load(content);
@@ -109,11 +109,11 @@ characterCache.load(content);
 
 - `content` : Characters in a string.
 - `lock`
-    - `true` : Lock these characters, won't be swapped out later.
-    - `false` : Don't lock these characters, can be swapped out later. Default behavior.
+    - `true` : Lock these characters, won't be replaced out later.
+    - `false` : Don't lock these characters, can be replaced out later. Default behavior.
 
 !!! warning
-    Console.warn messages when a character can't add to cache due to cache full.
+    Console.warn messages if no unused character is found.
 
 ### Events
 
@@ -141,6 +141,12 @@ characterCache.overrideBitmapText(bitmapText);
 Now `setText` method has `lock` parameter : `bitmapText.setText(text, lock)`.
 
 Or user can override `bitmapText.setText` by extending `Phaser.GameObjects.BitmapText` class.
+
+### Unlock all characters
+
+```javascript
+characterCache.unlock();
+```
 
 ### Get all cache data
 
