@@ -491,8 +491,8 @@
 
   var CreateFrameManager = function CreateFrameManager(scene, config) {
     var key = GetValue$2(config, 'key');
-    var cellWidth = GetValue$2(config, 'cellWidth');
-    var cellHeight = GetValue$2(config, 'cellHeight');
+    var cellWidth = GetValue$2(config, 'cellWidth', 32);
+    var cellHeight = GetValue$2(config, 'cellHeight', 32);
     var maxCharacterCount = GetValue$2(config, 'maxCharacterCount', 4096);
     var colCount = Math.ceil(Math.sqrt(maxCharacterCount));
     var rowCount = colCount;

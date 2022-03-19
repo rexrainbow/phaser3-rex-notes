@@ -161,6 +161,7 @@ nav:
         - Textures: textures.md
         - Canvas texture: canvas-texture.md 
         - Canvas frame manager: canvasframemanager.md
+        - Character cache: charactercache.md
     - Display:
         - Mask: mask.md
 - Input:

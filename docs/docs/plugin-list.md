@@ -31,6 +31,7 @@
 1. [Canvas frame manager](canvasframemanager.md): Generate bitmapfont from text game object, or bbcode text game object.
 1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
 1. [Clock](clock.md): A clock to count elapsed time.
+1. [Character cache](charactercache): Generate bitmapfont from [text game object](text.md), or [bbcode text game object](bbcodetext.md).
 1. [Color/TintRGB](tintrgb.md): Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 1. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.

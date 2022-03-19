@@ -8,6 +8,7 @@ declare namespace CharacterCache {
         cellWidth: number,
         cellHeight: number,
         maxCharacterCount?: number,
+        freqMode?: boolean,
 
         textObject?: Phaser.GameObjects.GameObject,
 

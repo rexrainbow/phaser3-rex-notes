@@ -50,7 +50,7 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
     };
     var game = new Phaser.Game(config);
     ```
-- Add canvas-data object
+- Add canvas-frame-manager object
     ```javascript
     var canvasFrames = scene.plugins.get('rexCanvasFrameManager').add(scene, config);
     ```
@@ -65,7 +65,7 @@ Generate bitmapfont from [text game object](text.md), or [bbcode text game objec
     ```javascript
     import CanvasFrameManager from 'phaser3-rex-plugins/plugins/canvasframemanager.js';
     ```
-- Add canvas-data object
+- Add canvas-frame-manager object
     ```javascript
     var canvasFrames = new CanvasFrameManager(scene, config);
     ```

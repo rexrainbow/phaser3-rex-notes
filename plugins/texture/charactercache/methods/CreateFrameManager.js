@@ -4,8 +4,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateFrameManager = function (scene, config) {
     var key = GetValue(config, 'key');
-    var cellWidth = GetValue(config, 'cellWidth');
-    var cellHeight = GetValue(config, 'cellHeight');
+    var cellWidth = GetValue(config, 'cellWidth', 32);
+    var cellHeight = GetValue(config, 'cellHeight', 32);
     var maxCharacterCount = GetValue(config, 'maxCharacterCount', 4096);
 
     var colCount = Math.ceil(Math.sqrt(maxCharacterCount));
