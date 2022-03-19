@@ -10,8 +10,8 @@ var CreateCharacterItem = function (character) {
 }
 
 var GetChatacter = function (collection, character) {
-    var item = collection.findOne({ character: character });
-    if (item === null) {
+    var item = collection.by('character', character);    
+    if (item === undefined) {
         item = CreateCharacterItem(character);
         collection.insert(item);
     }
@@ -44,12 +44,20 @@ var GetInCacheCharacterItems = function (collection, config) {
         .data();
 }
 
-var GetLockedCharacterItem = function (collection) {
+var GetLockedCharacterItems = function (collection) {
     return collection.find({ lock: true });
+}
+
+var GetAllItems = function (collection) {
+    return collection
+        .chain()
+        .simplesort('freq', { desc: true })
+        .data();
 }
 
 export {
     GetChatacter,
     GetInCacheCharacterItems,
-    GetLockedCharacterItem,
+    GetLockedCharacterItems,
+    GetAllItems,
 }

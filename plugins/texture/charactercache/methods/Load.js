@@ -35,6 +35,7 @@ var Load = function (content, lock) {
                 penddingItems.push(item);
             }
         }
+        this.characterCollection.update(item);
     }
 
     if (penddingItems.length > 0) {
@@ -47,7 +48,11 @@ var Load = function (content, lock) {
             var freeItem = freeCandidateItems.pop();
             if (freeItem) {
                 freeItem.alive = false;
+                this.characterCollection.update(freeItem);
+
                 item.alive = true;
+                this.characterCollection.update(item);
+
                 removeCharacters.push(freeItem.character);
             } else {
                 console.warn(`Character cache full, can't add '${item.character}' character.`);

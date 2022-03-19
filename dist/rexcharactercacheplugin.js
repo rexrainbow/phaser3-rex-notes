@@ -9004,6 +9004,7 @@
 
     var collection = db.addCollection('characters', {
       disableMeta: true,
+      unique: ['character'],
       indices: ['character', 'freq', 'alive', 'lock']
     });
     return collection;
@@ -9021,11 +9022,9 @@
   };
 
   var GetChatacter = function GetChatacter(collection, character) {
-    var item = collection.findOne({
-      character: character
-    });
+    var item = collection.by('character', character);
 
-    if (item === null) {
+    if (item === undefined) {
       item = CreateCharacterItem(character);
       collection.insert(item);
     }
@@ -9059,10 +9058,16 @@
     }).data();
   };
 
-  var GetLockedCharacterItem = function GetLockedCharacterItem(collection) {
+  var GetLockedCharacterItems = function GetLockedCharacterItems(collection) {
     return collection.find({
       lock: true
     });
+  };
+
+  var GetAllItems = function GetAllItems(collection) {
+    return collection.chain().simplesort('freq', {
+      desc: true
+    }).data();
   };
 
   var Load = function Load(content, lock) {
@@ -9099,6 +9104,8 @@
           penddingItems.push(item);
         }
       }
+
+      this.characterCollection.update(item);
     }
 
     if (penddingItems.length > 0) {
@@ -9113,7 +9120,9 @@
 
         if (freeItem) {
           freeItem.alive = false;
+          this.characterCollection.update(freeItem);
           item.alive = true;
+          this.characterCollection.update(item);
           removeCharacters.push(freeItem.character);
         } else {
           console.warn("Character cache full, can't add '".concat(item.character, "' character."));
@@ -9143,13 +9152,17 @@
   };
 
   var Unlock = function Unlock() {
-    var items = GetLockedCharacterItem(this.characterCollection);
+    var items = GetLockedCharacterItems(this.characterCollection);
 
     for (var i = 0, cnt = items.length; i < cnt; i++) {
       items[i].lock = false;
     }
 
     return this;
+  };
+
+  var GetAllData = function GetAllData() {
+    return GetAllItems(this.characterCollection);
   };
 
   var BitmapTextMethods = {
@@ -9168,7 +9181,8 @@
 
   var Methods = {
     load: Load,
-    unlock: Unlock
+    unlock: Unlock,
+    getAllData: GetAllData
   };
   Object.assign(Methods, BitmapTextMethods);
 

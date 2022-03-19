@@ -8,6 +8,7 @@ var CreateCharacterDB = function (db) {
     }
     var collection = db.addCollection('characters', {
         disableMeta: true,
+        unique: ['character'],
         indices: ['character', 'freq', 'alive', 'lock']
     });
     return collection;

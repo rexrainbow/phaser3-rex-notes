@@ -47,6 +47,8 @@ class Demo extends Phaser.Scene {
         // Wrap text
         content = SplitTextByLength(content, 24).join('\n');
         txt.setText(content);
+
+        console.log(characterCache.getAllData());
     }
 
     update() {
