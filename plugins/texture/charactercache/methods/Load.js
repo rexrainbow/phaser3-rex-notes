@@ -11,6 +11,8 @@ var Load = function (content, lock) {
         lock = false;
     }
 
+    content = content.replaceAll('\n', '');
+
     var insertCharacters = [];
     var removeCharacters = [];
 

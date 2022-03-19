@@ -13,6 +13,7 @@ class CharacterCache {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.frameManager = CreateFrameManager(scene, config)
+        this.fontKey = this.frameManager.key;
 
         // Create ChacacterCollection
         this.characterCollection = CreateCharacterCollection();
@@ -46,10 +47,6 @@ class CharacterCache {
     bindTextObject(textObject) {
         this.textObject = textObject;
         return this;
-    }
-
-    get fontKey() {
-        return this.frameManager.key;
     }
 }
 

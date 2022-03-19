@@ -33,47 +33,24 @@ class Demo extends Phaser.Scene {
             .on('add', function (character, textObject) {
                 console.log(`Add '${character}'`)
             })
+            .on('remove', function (character, textObject) {
+                console.log(`Remove '${character}'`)
+            })
 
+        // Create bitmaptext
+        var txt = this.add.bitmapText(10, 10, characterCache.fontKey);
+        // Override `setText` method
+        characterCache.overrideBitmapText(txt);
+
+        // Now can setText
         var content = '正嚷間，大聖到了。叫一聲：開路！掣開鐵棒，幌一幌，碗來粗細，丈二長短，丟開架子，打將出來。九曜星那個敢抵，一時打退。那九曜星立住陣勢道：你這不知死活的弼馬溫！你犯了十惡之罪，先偷桃，後偷酒，攪亂了蟠桃大會，又竊了老君仙丹，又將御酒偷來此處享樂，你罪上加罪，豈不知之？大聖笑道：這幾樁事，實有，實有！但如今你怎麼？九曜星道：吾奉玉帝金旨，帥眾到此收降你，快早皈依，免教這些生靈納命。不然，就髹平了此山，掀翻了此洞也！大聖大怒道：量你這些毛神，有何法力，敢出浪言。不要走，請吃老孫一棒！這九曜星一齊踴躍。那美猴王不懼分毫，輪起金箍棒，左遮右擋，把那九曜星戰得筋疲力軟，一個個倒拖器械，敗陣而走，急入中軍帳下，對托塔天王道：那猴王果十分驍勇！我等戰他不過，敗陣來了。李天王即調四大天王與二十八宿，一路出師來鬥。大聖也公然不懼，調出獨腳鬼王、七十二洞妖王與四個健將，就於洞門外列成陣勢。你看這場混戰好驚人也';
-
-        var txt = new MyBitMapText(this, 10, 10, 'font');
-        this.add.existing(txt);
-
-        txt
-            .setCharacterCache(characterCache)
-            .setCharacterCountPerLine(24)
-            .setText(content)
-
+        // Wrap text
+        content = SplitTextByLength(content, 24).join('\n');
+        txt.setText(content);
     }
 
     update() {
 
-    }
-}
-
-class MyBitMapText extends Phaser.GameObjects.BitmapText {
-
-    setCharacterCache(cache) {
-        this._characterCache = cache;
-        return this;
-    }
-
-    setCharacterCountPerLine(charCount) {
-        this._charCount = charCount;
-        return this;
-    }
-
-    setText(text) {
-        if (this._characterCache) {
-            this._characterCache.load(text).updateBitmapTextFont(this);
-        }
-
-        if (this._charCount !== undefined) {
-            text = SplitTextByLength(text, this._charCount).join('\n');
-        }
-
-        super.setText(text);
-        return this;
     }
 }
 
