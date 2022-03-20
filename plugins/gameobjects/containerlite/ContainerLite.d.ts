@@ -1,4 +1,6 @@
 // import * as Phaser from 'phaser';
+import Base from './Base';
+
 export default ContainerLite;
 
 declare namespace ContainerLite {
@@ -15,7 +17,7 @@ declare namespace ContainerLite {
     }
 }
 
-declare class ContainerLite extends Phaser.GameObjects.Zone {
+declare class ContainerLite extends Base {
     isRexContainerLite: true;
 
     constructor(
@@ -24,10 +26,6 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
         width?: number, height?: number,
         children?: Phaser.GameObjects.GameObject[]
     );
-
-    add(
-        child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
-    ): this;
 
     pin(
         gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
@@ -43,15 +41,6 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
 
     addLocalMultiple(
         children: Phaser.GameObjects.GameObject[]
-    ): this;
-
-    remove(
-        gameObject: Phaser.GameObjects.GameObject,
-        destroyChild?: boolean
-    ): this;
-
-    clear(
-        destroyChild?: boolean
     ): this;
 
     setChildPosition(
@@ -165,10 +154,6 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
         callback: (child: Phaser.GameObjects.GameObject) => boolean
     ): this;
 
-    contains(
-        gameObject: Phaser.GameObjects.GameObject
-    ): boolean;
-
     getByName(
         name: string,
         recursive?: boolean
@@ -254,23 +239,4 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
         originX: number,
         originY: number
     ): this;
-
-
-    // Components
-    clearAlpha(): this;
-    setAlpha(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
-    alpha: number;
-    alphaTopLeft: number;
-    alphaTopRight: number;
-    alphaBottomLeft: number;
-    alphaBottomRight: number;
-
-
-    toggleFlipX(): this;
-    toggleFlipY(): this;
-    setFlipX(value: boolean): this;
-    setFlipY(value: boolean): this;
-    setFlip(x: boolean, y: boolean): this;
-    resetFlip(): this;
-
 }
