@@ -8219,18 +8219,18 @@ Rex,100,20
 Alice,300,40
 </code></pre></div>
 <p>will be converted to</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;Alice&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;hp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;mp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;Rex&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rex&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;hp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;mp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;Alice&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hp&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+        <span class="nt">&quot;mp&quot;</span><span class="p">:</span> <span class="mi">40</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;Rex&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Rex&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;hp&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nt">&quot;mp&quot;</span><span class="p">:</span> <span class="mi">20</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>Then get value by</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;Rex&#39;</span><span class="p">,</span> <span class="s1">&#39;hp&#39;</span><span class="p">);</span>

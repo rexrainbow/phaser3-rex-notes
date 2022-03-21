@@ -11666,6 +11666,22 @@
     this.textObject.y += config.offsetY - config.preOffsetY;
     config.preOffsetY = config.offsetY;
     this.resetChildPositionState(this.textObject);
+    CropTextObject.call(this);
+  };
+
+  var CropTextObject = function CropTextObject() {
+    var offsetY = this.textObject.rexSizer.offsetY;
+    var cropY, cropHeight;
+
+    if (offsetY <= 0) {
+      cropY = -offsetY;
+      cropHeight = this.height;
+    } else {
+      cropY = 0;
+      cropHeight = this.height - offsetY;
+    }
+
+    this.textObject.setCrop(0, cropY, this.width, cropHeight);
   };
 
   var UpdateTextObject = function UpdateTextObject() {
@@ -11828,7 +11844,7 @@
         textObject = CreateDefaultTextObject(scene);
       }
 
-      var textMaskEnable = GetValue$1(config, 'textMask', true);
+      var textMaskEnable = GetValue$1(config, 'textMask', false);
 
       if (background) {
         _this.addBackground(background);
@@ -12156,7 +12172,7 @@
       var textObject = GetValue(config, 'text', undefined);
       var textWidth = GetValue(config, 'textWidth', undefined);
       var textHeight = GetValue(config, 'textHeight', undefined);
-      var textMask = GetValue(config, 'textMask', true);
+      var textMask = GetValue(config, 'textMask', false);
       var content = GetValue(config, 'content', '');
       var textBlock = new TextBlock(scene, {
         width: textWidth,

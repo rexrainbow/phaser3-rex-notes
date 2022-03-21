@@ -16,7 +16,7 @@ class TextArea extends Scrollable {
         var textObject = GetValue(config, 'text', undefined);
         var textWidth = GetValue(config, 'textWidth', undefined);
         var textHeight = GetValue(config, 'textHeight', undefined);
-        var textMask = GetValue(config, 'textMask', true);
+        var textMask = GetValue(config, 'textMask', false);
         var content = GetValue(config, 'content', '');
         var textBlock = new TextBlock(scene, {
             width: textWidth,

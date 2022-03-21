@@ -88,7 +88,7 @@ var textArea = scene.rexUI.add.textArea({
     text: textGameObject,
     // textWidth: undefined,
     // textHeight: undefined,
-    // textMask: true,
+    // textMask: false,
     // alwaysScrollable: false,
 
     slider: {
@@ -177,8 +177,8 @@ var textArea = scene.rexUI.add.textArea({
 - `textWidth` : Fixed width of text game object. Set `undefined` to ignore this feature.
 - `textHeight` : Fixed height of text game object. Set `undefined` to ignore this feature.
 - `textMask` :
-    - `true` : Apply mask on text. Default behavior.
-    - `false` : Don't apply mask on text.
+    - `false` : Crop text game object. Default behavior.
+    - `true` : Apply mask on text to crop text game object.    
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
