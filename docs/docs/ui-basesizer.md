@@ -890,13 +890,21 @@ var isTouching = sizer.isInTouching();
 - Set property of child, then [reset local state of child](containerlite.md#reset-local-state-of-child)
 - [Tween local state of child](containerlite.md#tween-local-state)
 
-### Add to layer
+### Add to container
 
-```javascript
-sizer.addToLayer(layer);
-```
+- Add to [built-in container](container.md)
+    ```javascript
+    sizer.addToContainer(p3Container);
+    ```
+    - `container` : [Container](container.md) game object.
+- Add to [Layer](layer.md)
+    ```javascript
+    container.addToLayer(layer);
+    ```
+    - `layer` : [Layer](layer.md) game object.
 
-- `layer` : [Layer](layer.md) game object.
+!!! note
+    `container.add(sizer)`, or `layer.add(sizer)` won't add children of sizer.
 
 ### Events
 

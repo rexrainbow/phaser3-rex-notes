@@ -6715,8 +6715,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-to-layer" class="md-nav__link">
-    Add to layer
+  <a href="#add-to-container" class="md-nav__link">
+    Add to container
   </a>
   
 </li>
@@ -8200,8 +8200,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-to-layer" class="md-nav__link">
-    Add to layer
+  <a href="#add-to-container" class="md-nav__link">
+    Add to container
   </a>
   
 </li>
@@ -9135,12 +9135,25 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 <li>Set property of child, then <a href="../containerlite/#reset-local-state-of-child">reset local state of child</a></li>
 <li><a href="../containerlite/#tween-local-state">Tween local state of child</a></li>
 </ul>
-<h3 id="add-to-layer">Add to layer<a class="headerlink" href="#add-to-layer" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addToLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
-</code></pre></div>
+<h3 id="add-to-container">Add to container<a class="headerlink" href="#add-to-container" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Add to <a href="../container/">built-in container</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addToContainer</span><span class="p">(</span><span class="nx">p3Container</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>container</code> : <a href="../container/">Container</a> game object.</li>
+</ul>
+</li>
+<li>Add to <a href="../layer/">Layer</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addToLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>layer</code> : <a href="../layer/">Layer</a> game object.</li>
 </ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>container.add(sizer)</code>, or <code>layer.add(sizer)</code> won't add children of sizer.</p>
+</div>
 <h3 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h3>
 <h4 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h4>
 <div class="admonition note">

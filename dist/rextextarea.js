@@ -11666,7 +11666,10 @@
     this.textObject.y += config.offsetY - config.preOffsetY;
     config.preOffsetY = config.offsetY;
     this.resetChildPositionState(this.textObject);
-    CropTextObject.call(this);
+
+    if (!this.textMask) {
+      CropTextObject.call(this);
+    }
   };
 
   var CropTextObject = function CropTextObject() {
