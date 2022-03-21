@@ -13,8 +13,8 @@ Reference: [load bitmap font](bitmaptext.md##load-bitmap-font)
 ### Add bitmap text object
 
 ```javascript
-var txt = scene.dynamicBitmapText(x, y, key, text);
-// var txt = scene.dynamicBitmapText(x, y, key, text, size, align);
+var txt = scene.add.dynamicBitmapText(x, y, key, text);
+// var txt = scene.add.dynamicBitmapText(x, y, key, text, size, align);
 ```
 
 - `size` : The size of the font

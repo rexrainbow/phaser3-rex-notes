@@ -3954,7 +3954,7 @@
   }();
   var PEN_CONFIG = {};
 
-  var Rectangle$4 = Phaser.Geom.Rectangle;
+  var Rectangle$5 = Phaser.Geom.Rectangle;
   var RectanglePool = new Stack();
 
   var HitAreaManager = /*#__PURE__*/function () {
@@ -3981,7 +3981,7 @@
         var rectangle = RectanglePool.pop();
 
         if (rectangle === null) {
-          rectangle = new Rectangle$4(x, y, width, height);
+          rectangle = new Rectangle$5(x, y, width, height);
         } else {
           rectangle.setTo(x, y, width, height);
         }
@@ -7268,14 +7268,14 @@
     }
   };
 
-  var RotateAround$4 = Phaser.Math.RotateAround;
+  var RotateAround$5 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y; // Rotate
 
-      RotateAround$4(point, 0, 0, -this.rotation); // Scale
+      RotateAround$5(point, 0, 0, -this.rotation); // Scale
 
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -7286,7 +7286,7 @@
       point.x *= this.scaleX;
       point.y *= this.scaleY; // Rotate
 
-      RotateAround$4(point, 0, 0, this.rotation); // Transform
+      RotateAround$5(point, 0, 0, this.rotation); // Transform
 
       point.x += this.x;
       point.y += this.y;
@@ -8030,7 +8030,7 @@
     addToContainer: AddToLayer
   };
 
-  var RotateAround$3 = Phaser.Math.RotateAround;
+  var RotateAround$4 = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
@@ -8041,7 +8041,7 @@
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
     };
-    RotateAround$3(deltaXY, 0, 0, gameObject.rotation);
+    RotateAround$4(deltaXY, 0, 0, gameObject.rotation);
     gameObject.originX = originX;
     gameObject.originY = originY;
     gameObject.x = gameObject.x + deltaXY.x;
@@ -16824,7 +16824,7 @@
 
   var PointRotateAround$1 = Phaser.Math.RotateAround;
 
-  var RotateAround$2 = function RotateAround(centerX, centerY, angle, pathData) {
+  var RotateAround$3 = function RotateAround(centerX, centerY, angle, pathData) {
     var point = {
       x: 0,
       y: 0
@@ -17011,7 +17011,7 @@
         }
 
         angle = DegToRad$3(angle);
-        RotateAround$2(centerX, centerY, angle, this.pathData);
+        RotateAround$3(centerX, centerY, angle, this.pathData);
         var pathDataCnt = this.pathData.length;
         this.lastPointX = this.pathData[pathDataCnt - 2];
         this.lastPointY = this.pathData[pathDataCnt - 1];
@@ -17218,7 +17218,7 @@
 
   var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
-  var Rectangle$3 = /*#__PURE__*/function (_BaseGeom) {
+  var Rectangle$4 = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Rectangle, _BaseGeom);
 
     var _super = _createSuper(Rectangle);
@@ -18040,7 +18040,7 @@
     BOTTOM_RIGHT: 12
   };
 
-  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
+  var GetDisplayWidth$1 = function GetDisplayWidth(gameObject) {
     if (gameObject.displayWidth !== undefined) {
       return gameObject.displayWidth;
     } else {
@@ -18048,7 +18048,7 @@
     }
   };
 
-  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
+  var GetDisplayHeight$1 = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
     } else {
@@ -18057,23 +18057,23 @@
   };
 
   var GetBottom = function GetBottom(gameObject) {
-    var height = GetDisplayHeight(gameObject);
+    var height = GetDisplayHeight$1(gameObject);
     return gameObject.y + height - height * gameObject.originY;
   };
 
   var GetCenterX = function GetCenterX(gameObject) {
-    var width = GetDisplayWidth(gameObject);
+    var width = GetDisplayWidth$1(gameObject);
     return gameObject.x - width * gameObject.originX + width * 0.5;
   };
 
   var SetBottom = function SetBottom(gameObject, value) {
-    var height = GetDisplayHeight(gameObject);
+    var height = GetDisplayHeight$1(gameObject);
     gameObject.y = value - height + height * gameObject.originY;
     return gameObject;
   };
 
   var SetCenterX = function SetCenterX(gameObject, x) {
-    var width = GetDisplayWidth(gameObject);
+    var width = GetDisplayWidth$1(gameObject);
     var offsetX = width * gameObject.originX;
     gameObject.x = x + offsetX - width * 0.5;
     return gameObject;
@@ -18094,12 +18094,12 @@
   };
 
   var GetLeft = function GetLeft(gameObject) {
-    var width = GetDisplayWidth(gameObject);
+    var width = GetDisplayWidth$1(gameObject);
     return gameObject.x - width * gameObject.originX;
   };
 
   var SetLeft = function SetLeft(gameObject, value) {
-    var width = GetDisplayWidth(gameObject);
+    var width = GetDisplayWidth$1(gameObject);
     gameObject.x = value + width * gameObject.originX;
     return gameObject;
   };
@@ -18119,12 +18119,12 @@
   };
 
   var GetRight = function GetRight(gameObject) {
-    var width = GetDisplayWidth(gameObject);
+    var width = GetDisplayWidth$1(gameObject);
     return gameObject.x + width - width * gameObject.originX;
   };
 
   var SetRight = function SetRight(gameObject, value) {
-    var width = GetDisplayWidth(gameObject);
+    var width = GetDisplayWidth$1(gameObject);
     gameObject.x = value - width + width * gameObject.originX;
     return gameObject;
   };
@@ -18144,7 +18144,7 @@
   };
 
   var SetCenterY = function SetCenterY(gameObject, y) {
-    var height = GetDisplayHeight(gameObject);
+    var height = GetDisplayHeight$1(gameObject);
     var offsetY = height * gameObject.originY;
     gameObject.y = y + offsetY - height * 0.5;
     return gameObject;
@@ -18156,7 +18156,7 @@
   };
 
   var GetCenterY = function GetCenterY(gameObject) {
-    var height = GetDisplayHeight(gameObject);
+    var height = GetDisplayHeight$1(gameObject);
     return gameObject.y - height * gameObject.originY + height * 0.5;
   };
 
@@ -18202,12 +18202,12 @@
   };
 
   var GetTop = function GetTop(gameObject) {
-    var height = GetDisplayHeight(gameObject);
+    var height = GetDisplayHeight$1(gameObject);
     return gameObject.y - height * gameObject.originY;
   };
 
   var SetTop = function SetTop(gameObject, value) {
-    var height = GetDisplayHeight(gameObject);
+    var height = GetDisplayHeight$1(gameObject);
     gameObject.y = value + height * gameObject.originY;
     return gameObject;
   };
@@ -18274,6 +18274,133 @@
     QuickSet(child, globZone, align);
   };
 
+  var Rectangle$3 = Phaser.Geom.Rectangle;
+  var Vector2 = Phaser.Geom.Vector2;
+  var RotateAround$2 = Phaser.Math.RotateAround;
+
+  var GetBounds = function GetBounds(gameObject, output) {
+    if (output === undefined) {
+      output = new Rectangle$3();
+    } //  We can use the output object to temporarily store the x/y coords in:
+
+
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy; // Instead of doing a check if parent container is
+    // defined per corner we only do it once.
+
+    if (gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      GetTopLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BRx = output.x;
+      BRy = output.y;
+    } else {
+      GetTopLeft(gameObject, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      BRx = output.x;
+      BRy = output.y;
+    }
+
+    output.x = Math.min(TLx, TRx, BLx, BRx);
+    output.y = Math.min(TLy, TRy, BLy, BRy);
+    output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+    output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+    return output;
+  };
+
+  var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
+    if (!output) {
+      output = new Vector2();
+    }
+
+    debugger;
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
+    if (!output) {
+      output = new Vector2();
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
+    if (!output) {
+      output = new Vector2();
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
+    if (!output) {
+      output = new Vector2();
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
+    if (gameObject.displayWidth !== undefined) {
+      return gameObject.displayWidth;
+    } else {
+      return gameObject.width;
+    }
+  };
+
+  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
+    if (gameObject.displayHeight !== undefined) {
+      return gameObject.displayWidth;
+    } else {
+      return gameObject.height;
+    }
+  };
+
+  var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
+    if (includeParent === undefined) {
+      includeParent = false;
+    }
+
+    if (gameObject.rotation !== 0) {
+      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+    }
+
+    if (includeParent && gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      parentMatrix.transformPoint(output.x, output.y, output);
+    }
+
+    return output;
+  };
+
   var GetValue$1p = Phaser.Utils.Objects.GetValue;
   var Group$1 = Phaser.GameObjects.Group;
 
@@ -18320,12 +18447,16 @@
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       child = children[i];
 
-      if (!child.getBounds) {
+      if (child.getBounds) {
+        child.getBounds(GlobRect);
+      } else if (child.width !== undefined && child.height !== undefined) {
+        GetBounds(child, GlobRect);
+      } else {
         continue;
       }
 
-      if (color) {
-        graphics.lineStyle(1, color).strokeRectShape(child.getBounds(GlobRect));
+      if (color != null) {
+        graphics.lineStyle(1, color).strokeRectShape(GlobRect);
       }
 
       if (child.name && createTextCallback) {
@@ -18567,7 +18698,7 @@
         // Force minWidth
         childWidth = child.minWidth;
       } else {
-        childWidth = GetDisplayWidth(child);
+        childWidth = GetDisplayWidth$1(child);
       }
     }
 
@@ -18586,7 +18717,7 @@
         // Force minHeight
         childHeight = child.minHeight;
       } else {
-        childHeight = GetDisplayHeight(child);
+        childHeight = GetDisplayHeight$1(child);
       }
     }
 
@@ -23571,7 +23702,7 @@
     }, {
       key: "left",
       get: function get() {
-        return this.x - GetDisplayWidth(this) * this.originX;
+        return this.x - GetDisplayWidth$1(this) * this.originX;
       },
       set: function set(value) {
         this.x += value - this.left;
@@ -23585,7 +23716,7 @@
     }, {
       key: "right",
       get: function get() {
-        return this.left + GetDisplayWidth(this);
+        return this.left + GetDisplayWidth$1(this);
       },
       set: function set(value) {
         this.x += value - this.right;
@@ -23599,7 +23730,7 @@
     }, {
       key: "centerX",
       get: function get() {
-        return this.left + GetDisplayWidth(this) / 2;
+        return this.left + GetDisplayWidth$1(this) / 2;
       },
       set: function set(value) {
         this.x += value - this.centerX;
@@ -23613,7 +23744,7 @@
     }, {
       key: "top",
       get: function get() {
-        return this.y - GetDisplayHeight(this) * this.originY;
+        return this.y - GetDisplayHeight$1(this) * this.originY;
       },
       set: function set(value) {
         this.y += value - this.top;
@@ -23627,7 +23758,7 @@
     }, {
       key: "bottom",
       get: function get() {
-        return this.top + GetDisplayHeight(this);
+        return this.top + GetDisplayHeight$1(this);
       },
       set: function set(value) {
         this.y += value - this.bottom;
@@ -23641,7 +23772,7 @@
     }, {
       key: "centerY",
       get: function get() {
-        return this.top + GetDisplayHeight(this) / 2;
+        return this.top + GetDisplayHeight$1(this) / 2;
       },
       set: function set(value) {
         this.y += value - this.centerY;
@@ -23731,7 +23862,7 @@
 
     for (var key in children) {
       child = children[key];
-      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.minHeight !== undefined ? child.minHeight : GetDisplayHeight(child);
+      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.minHeight !== undefined ? child.minHeight : GetDisplayHeight$1(child);
       padding = child.rexSizer.padding;
       childHeight += padding.top + padding.bottom;
       result = Math.max(childHeight, result);
@@ -23940,14 +24071,14 @@
       // Expand normal game object
       if (config.expandWidth) {
         // minWidth is still undefined, uses current display width
-        gameObject.minWidth = minWidth === undefined ? GetDisplayWidth(gameObject) : minWidth;
+        gameObject.minWidth = minWidth === undefined ? GetDisplayWidth$1(gameObject) : minWidth;
       } else {
         gameObject.minWidth = undefined;
       }
 
       if (config.expandHeight) {
         // minHeight is still undefined, uses current display height
-        gameObject.minHeight = minHeight === undefined ? GetDisplayHeight(gameObject) : minHeight;
+        gameObject.minHeight = minHeight === undefined ? GetDisplayHeight$1(gameObject) : minHeight;
       } else {
         gameObject.minHeight = undefined;
       }
@@ -24515,7 +24646,7 @@
     ellipse: Ellipse,
     line: Line,
     lines: Lines,
-    rectangle: Rectangle$3,
+    rectangle: Rectangle$4,
     triangle: Triangle
   };
   var GetValue$$ = Phaser.Utils.Objects.GetValue;
@@ -26211,11 +26342,11 @@
       }
 
       if (childWidth === undefined) {
-        childWidth = GetDisplayWidth(child);
+        childWidth = GetDisplayWidth$1(child);
       }
 
       if (childHeight === undefined) {
-        childHeight = GetDisplayHeight(child);
+        childHeight = GetDisplayHeight$1(child);
       } // Set position
 
 
@@ -26443,12 +26574,12 @@
       if (this.orientation === 0) {
         // x
         // minSize is still undefined, uses current display width
-        gameObject.minWidth = minSize === undefined ? GetDisplayWidth(gameObject) : minSize;
+        gameObject.minWidth = minSize === undefined ? GetDisplayWidth$1(gameObject) : minSize;
         gameObject.minHeight = undefined;
       } else {
         gameObject.minWidth = undefined; // minSize is still undefined, uses current display height
 
-        gameObject.minHeight = minSize === undefined ? GetDisplayHeight(gameObject) : minSize;
+        gameObject.minHeight = minSize === undefined ? GetDisplayHeight$1(gameObject) : minSize;
       }
     }
 
@@ -26749,7 +26880,7 @@
             continue;
           }
 
-          childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight(child);
+          childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight$1(child);
           padding = child.rexSizer.padding;
           childHeight += padding.top + padding.bottom;
           rowHeight = Math.max(rowHeight, childHeight);
@@ -27558,8 +27689,8 @@
         }
 
         y = itemY + padding.top;
-        width = GetDisplayWidth(child);
-        height = GetDisplayHeight(child);
+        width = GetDisplayWidth$1(child);
+        height = GetDisplayHeight$1(child);
         itemX = x + width + padding.right + justifySpace;
         LayoutChild.call(this, child, x, y, width, height, childConfig.align);
       }
@@ -27652,12 +27783,12 @@
 
   var GetChildWidth = function GetChildWidth(child) {
     var padding = child.rexSizer.padding;
-    return GetDisplayWidth(child) + padding.left + padding.right;
+    return GetDisplayWidth$1(child) + padding.left + padding.right;
   };
 
   var GeChildHeight = function GeChildHeight(child) {
     var padding = child.rexSizer.padding;
-    return GetDisplayHeight(child) + padding.top + padding.bottom;
+    return GetDisplayHeight$1(child) + padding.top + padding.bottom;
   };
 
   var RunWidthWrap = function RunWidthWrap(width) {
@@ -27857,7 +27988,7 @@
         continue;
       }
 
-      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight(child);
+      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight$1(child);
       result = Math.max(childHeight, result);
     }
 
@@ -30384,12 +30515,12 @@
     if (thumb) {
       if (this.orientation === 0) {
         // x, extend width
-        var thumbWidth = GetDisplayWidth(thumb);
+        var thumbWidth = GetDisplayWidth$1(thumb);
         var thumbRight = thumb.x - thumbWidth * thumb.originX + thumbWidth;
         newWidth = thumbRight - this.left;
       } else {
         // y, extend height
-        var thumbHeight = GetDisplayHeight(thumb);
+        var thumbHeight = GetDisplayHeight$1(thumb);
         var thumbBottom = thumb.y - thumbHeight * thumb.originY + thumbHeight;
         newHeight = thumbBottom - this.top;
       }
@@ -37063,7 +37194,7 @@
       result = 0;
     } else {
       // scroll x
-      result = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight(child);
+      result = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight$1(child);
     }
 
     return result;
@@ -37241,12 +37372,12 @@
     }, {
       key: "childHeight",
       get: function get() {
-        return this.scrollMode === 0 ? GetDisplayHeight(this.child) : GetDisplayWidth(this.child);
+        return this.scrollMode === 0 ? GetDisplayHeight$1(this.child) : GetDisplayWidth$1(this.child);
       }
     }, {
       key: "childWidth",
       get: function get() {
-        return this.scrollMode === 0 ? GetDisplayWidth(this.child) : GetDisplayHeight(this.child);
+        return this.scrollMode === 0 ? GetDisplayWidth$1(this.child) : GetDisplayHeight$1(this.child);
       }
     }, {
       key: "topChildOY",
@@ -38346,12 +38477,12 @@
         switch (key) {
           case 'leftSide':
           case 'rightSide':
-            distance = GetDisplayWidth(child);
+            distance = GetDisplayWidth$1(child);
             break;
 
           case 'topSide':
           case 'bottomSide':
-            distance = GetDisplayHeight(child);
+            distance = GetDisplayHeight$1(child);
             break;
 
           default:
@@ -38361,12 +38492,12 @@
               switch (this.previousChildKey) {
                 case 'leftSide':
                 case 'rightSide':
-                  distance = GetDisplayWidth(this.sizerChildren[this.previousChildKey]);
+                  distance = GetDisplayWidth$1(this.sizerChildren[this.previousChildKey]);
                   break;
 
                 case 'topSide':
                 case 'bottomSide':
-                  distance = GetDisplayHeight(this.sizerChildren[this.previousChildKey]);
+                  distance = GetDisplayHeight$1(this.sizerChildren[this.previousChildKey]);
                   break;
 
                 default:
@@ -38378,12 +38509,12 @@
               switch (this.currentChildKey) {
                 case 'leftSide':
                 case 'rightSide':
-                  distance = GetDisplayWidth(this.sizerChildren[this.currentChildKey]);
+                  distance = GetDisplayWidth$1(this.sizerChildren[this.currentChildKey]);
                   break;
 
                 case 'topSide':
                 case 'bottomSide':
-                  distance = GetDisplayHeight(this.sizerChildren[this.currentChildKey]);
+                  distance = GetDisplayHeight$1(this.sizerChildren[this.currentChildKey]);
                   break;
 
                 default:
