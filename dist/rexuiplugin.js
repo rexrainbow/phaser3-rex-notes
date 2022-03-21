@@ -36445,6 +36445,11 @@
   };
 
   var CropTextObject = function CropTextObject() {
+    // Don't have setCrop method, return
+    if (!this.textObject.setCrop) {
+      return;
+    }
+
     var offsetY = this.textObject.rexSizer.offsetY;
     var cropY, cropHeight;
 

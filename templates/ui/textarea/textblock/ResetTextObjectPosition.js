@@ -10,6 +10,11 @@ var ResetTextObjectPosition = function () {
 }
 
 var CropTextObject = function () {
+    // Don't have setCrop method, return
+    if (!this.textObject.setCrop) {
+        return;
+    }
+
     var offsetY = this.textObject.rexSizer.offsetY;
     var cropY, cropHeight;
     if (offsetY <= 0) {
