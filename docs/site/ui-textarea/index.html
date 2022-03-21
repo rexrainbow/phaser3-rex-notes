@@ -8271,8 +8271,8 @@
 <li><code>textWidth</code> : Fixed width of text game object. Set <code>undefined</code> to ignore this feature.</li>
 <li><code>textHeight</code> : Fixed height of text game object. Set <code>undefined</code> to ignore this feature.</li>
 <li><code>textMask</code> :<ul>
-<li><code>false</code> : Crop text game object. Default behavior.</li>
-<li><code>true</code> : Apply mask on text to crop text game object.    </li>
+<li><code>false</code> : Crop text game object. Default behavior if text game object has <code>setCrop</code> method.</li>
+<li><code>true</code> : Apply mask on text to crop text game object. Default behavior if text game object does not have <code>setCrop</code> method (ex. bitmaptext game object).</li>
 </ul>
 </li>
 <li><code>slider</code> : Componments of slider, optional.<ul>

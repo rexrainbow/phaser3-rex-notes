@@ -177,8 +177,8 @@ var textArea = scene.rexUI.add.textArea({
 - `textWidth` : Fixed width of text game object. Set `undefined` to ignore this feature.
 - `textHeight` : Fixed height of text game object. Set `undefined` to ignore this feature.
 - `textMask` :
-    - `false` : Crop text game object. Default behavior.
-    - `true` : Apply mask on text to crop text game object.    
+    - `false` : Crop text game object. Default behavior if text game object has `setCrop` method.
+    - `true` : Apply mask on text to crop text game object. Default behavior if text game object does not have `setCrop` method (ex. bitmaptext game object).
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.

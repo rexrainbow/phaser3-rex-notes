@@ -92,6 +92,28 @@ or
 txt.text = '...';
 ```
 
+### Crop
+
+- Set size
+    ```javascript
+    txt.setSize(width, height);
+    ```
+    or
+    ```javascript
+    txt.cropWidth = width;
+    txt.cropHeight = height;
+    ```
+- Set offset
+    ```javascript
+    txt.setScrollX(scrollX);
+    txt.setScrollY(scrollY);
+    ```
+    or
+    ```javascript
+    this.scrollX = scrollX;
+    this.scrollY = scrollY;
+    ```
+
 ### Other properties
 
 This dynamic bitmap text class is extended from [bitmap text](bitmaptext.md)

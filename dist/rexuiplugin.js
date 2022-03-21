@@ -36947,7 +36947,8 @@
       var textObject = GetValue$g(config, 'text', undefined);
       var textWidth = GetValue$g(config, 'textWidth', undefined);
       var textHeight = GetValue$g(config, 'textHeight', undefined);
-      var textMask = GetValue$g(config, 'textMask', false);
+      var hasSetCropMethod = textObject && textObject.setCrop;
+      var textMask = GetValue$g(config, 'textMask', !hasSetCropMethod);
       var content = GetValue$g(config, 'content', '');
       var textBlock = new TextBlock(scene, {
         width: textWidth,
