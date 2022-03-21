@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
             // text: this.add.text(),
             text: this.rexUI.add.BBCodeText(),
-            // textMask: false,
+            // textMask: true,
 
             slider: {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),

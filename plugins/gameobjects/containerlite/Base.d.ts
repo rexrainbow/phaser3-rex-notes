@@ -24,6 +24,7 @@ declare class Base extends Phaser.GameObjects.Zone {
         destroyChild?: boolean
     ): this;
 
+
     // Components
     clearAlpha(): this;
     setAlpha(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
@@ -32,7 +33,6 @@ declare class Base extends Phaser.GameObjects.Zone {
     alphaTopRight: number;
     alphaBottomLeft: number;
     alphaBottomRight: number;
-
 
     toggleFlipX(): this;
     toggleFlipY(): this;
