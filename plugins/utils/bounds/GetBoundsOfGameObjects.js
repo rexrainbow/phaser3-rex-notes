@@ -1,3 +1,5 @@
+import { GetBounds } from './GetBounds.js';
+
 const Rectangle = Phaser.Geom.Rectangle;
 const Union = Phaser.Geom.Rectangle.Union;
 
@@ -5,10 +7,10 @@ var GetBoundsOfGameObjects = function (gameObjects, out) {
     if (out === undefined) {
         out = new Rectangle();
     } else if (out === true) {
-        if (globBounds === undefined) {
-            globBounds = new Rectangle();
+        if (GlobRect === undefined) {
+            GlobRect = new Rectangle();
         }
-        out = globBounds;
+        out = GlobRect;
     }
 
     var gameObject;
@@ -19,19 +21,19 @@ var GetBoundsOfGameObjects = function (gameObjects, out) {
             continue;
         }
 
-        GOBounds = gameObject.getBounds(GOBounds);
+        var boundsRect = GetBounds(gameObject, true);
 
         if (firstClone) {
-            out.setTo(GOBounds.x, GOBounds.y, GOBounds.width, GOBounds.height);
+            out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
             firstClone = false;
         } else {
-            Union(GOBounds, out, out);
+            Union(boundsRect, out, out);
         }
     }
 
     return out;
 }
 
-var GOBounds, globBounds;
+var GlobRect;
 
 export default GetBoundsOfGameObjects;

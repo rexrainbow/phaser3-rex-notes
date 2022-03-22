@@ -18040,7 +18040,7 @@
     BOTTOM_RIGHT: 12
   };
 
-  var GetDisplayWidth$1 = function GetDisplayWidth(gameObject) {
+  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
     if (gameObject.displayWidth !== undefined) {
       return gameObject.displayWidth;
     } else {
@@ -18048,7 +18048,7 @@
     }
   };
 
-  var GetDisplayHeight$1 = function GetDisplayHeight(gameObject) {
+  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
     } else {
@@ -18057,23 +18057,23 @@
   };
 
   var GetBottom = function GetBottom(gameObject) {
-    var height = GetDisplayHeight$1(gameObject);
+    var height = GetDisplayHeight(gameObject);
     return gameObject.y + height - height * gameObject.originY;
   };
 
   var GetCenterX = function GetCenterX(gameObject) {
-    var width = GetDisplayWidth$1(gameObject);
+    var width = GetDisplayWidth(gameObject);
     return gameObject.x - width * gameObject.originX + width * 0.5;
   };
 
   var SetBottom = function SetBottom(gameObject, value) {
-    var height = GetDisplayHeight$1(gameObject);
+    var height = GetDisplayHeight(gameObject);
     gameObject.y = value - height + height * gameObject.originY;
     return gameObject;
   };
 
   var SetCenterX = function SetCenterX(gameObject, x) {
-    var width = GetDisplayWidth$1(gameObject);
+    var width = GetDisplayWidth(gameObject);
     var offsetX = width * gameObject.originX;
     gameObject.x = x + offsetX - width * 0.5;
     return gameObject;
@@ -18094,12 +18094,12 @@
   };
 
   var GetLeft = function GetLeft(gameObject) {
-    var width = GetDisplayWidth$1(gameObject);
+    var width = GetDisplayWidth(gameObject);
     return gameObject.x - width * gameObject.originX;
   };
 
   var SetLeft = function SetLeft(gameObject, value) {
-    var width = GetDisplayWidth$1(gameObject);
+    var width = GetDisplayWidth(gameObject);
     gameObject.x = value + width * gameObject.originX;
     return gameObject;
   };
@@ -18119,12 +18119,12 @@
   };
 
   var GetRight = function GetRight(gameObject) {
-    var width = GetDisplayWidth$1(gameObject);
+    var width = GetDisplayWidth(gameObject);
     return gameObject.x + width - width * gameObject.originX;
   };
 
   var SetRight = function SetRight(gameObject, value) {
-    var width = GetDisplayWidth$1(gameObject);
+    var width = GetDisplayWidth(gameObject);
     gameObject.x = value - width + width * gameObject.originX;
     return gameObject;
   };
@@ -18144,7 +18144,7 @@
   };
 
   var SetCenterY = function SetCenterY(gameObject, y) {
-    var height = GetDisplayHeight$1(gameObject);
+    var height = GetDisplayHeight(gameObject);
     var offsetY = height * gameObject.originY;
     gameObject.y = y + offsetY - height * 0.5;
     return gameObject;
@@ -18156,7 +18156,7 @@
   };
 
   var GetCenterY = function GetCenterY(gameObject) {
-    var height = GetDisplayHeight$1(gameObject);
+    var height = GetDisplayHeight(gameObject);
     return gameObject.y - height * gameObject.originY + height * 0.5;
   };
 
@@ -18202,12 +18202,12 @@
   };
 
   var GetTop = function GetTop(gameObject) {
-    var height = GetDisplayHeight$1(gameObject);
+    var height = GetDisplayHeight(gameObject);
     return gameObject.y - height * gameObject.originY;
   };
 
   var SetTop = function SetTop(gameObject, value) {
-    var height = GetDisplayHeight$1(gameObject);
+    var height = GetDisplayHeight(gameObject);
     gameObject.y = value + height * gameObject.originY;
     return gameObject;
   };
@@ -18281,6 +18281,16 @@
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$3();
+    } else if (output === true) {
+      if (GlobRect$2 === undefined) {
+        GlobRect$2 = new Rectangle$3();
+      }
+
+      output = GlobRect$2;
+    }
+
+    if (gameObject.getBounds) {
+      return gameObject.getBounds(output);
     } //  We can use the output object to temporarily store the x/y coords in:
 
 
@@ -18327,20 +18337,41 @@
     return output;
   };
 
+  var GlobRect$2 = undefined;
+
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
-    if (!output) {
+    if (output === undefined) {
       output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
     }
 
-    debugger;
+    if (gameObject.getTopLeft) {
+      return gameObject.getTopLeft(output);
+    }
+
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
 
   var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
-    if (!output) {
+    if (output === undefined) {
       output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getTopRight) {
+      return gameObject.getTopRight(output);
     }
 
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
@@ -18349,8 +18380,18 @@
   };
 
   var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
-    if (!output) {
+    if (output === undefined) {
       output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getBottomLeft) {
+      return gameObject.getBottomLeft(output);
     }
 
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
@@ -18359,8 +18400,18 @@
   };
 
   var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
-    if (!output) {
+    if (output === undefined) {
       output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getBottomRight) {
+      return gameObject.getBottomRight(output);
     }
 
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
@@ -18368,21 +18419,7 @@
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
 
-  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
-    if (gameObject.displayWidth !== undefined) {
-      return gameObject.displayWidth;
-    } else {
-      return gameObject.width;
-    }
-  };
-
-  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
-    if (gameObject.displayHeight !== undefined) {
-      return gameObject.displayWidth;
-    } else {
-      return gameObject.height;
-    }
-  };
+  var GlobVector = undefined;
 
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
@@ -18447,16 +18484,14 @@
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       child = children[i];
 
-      if (child.getBounds) {
-        child.getBounds(GlobRect);
-      } else if (child.width !== undefined && child.height !== undefined) {
-        GetBounds(child, GlobRect);
+      if (child.getBounds || child.width !== undefined && child.height !== undefined) {
+        GlobRect$1 = GetBounds(child, GlobRect$1);
       } else {
         continue;
       }
 
       if (color != null) {
-        graphics.lineStyle(1, color).strokeRectShape(GlobRect);
+        graphics.lineStyle(1, color).strokeRectShape(GlobRect$1);
       }
 
       if (child.name && createTextCallback) {
@@ -18469,7 +18504,7 @@
         if (nameText) {
           nameText.setText(child.name);
           graphics.children.add(nameText);
-          AlignIn(nameText, GlobRect.x, GlobRect.y, GlobRect.width, GlobRect.height, textAlign);
+          AlignIn(nameText, GlobRect$1.x, GlobRect$1.y, GlobRect$1.width, GlobRect$1.height, textAlign);
         }
       }
     }
@@ -18481,7 +18516,7 @@
     return scene.add.text(0, 0, '');
   };
 
-  var GlobRect = new Phaser.Geom.Rectangle();
+  var GlobRect$1 = undefined;
 
   var GetValue$1o = Phaser.Utils.Objects.GetValue;
 
@@ -18698,7 +18733,7 @@
         // Force minWidth
         childWidth = child.minWidth;
       } else {
-        childWidth = GetDisplayWidth$1(child);
+        childWidth = GetDisplayWidth(child);
       }
     }
 
@@ -18717,7 +18752,7 @@
         // Force minHeight
         childHeight = child.minHeight;
       } else {
-        childHeight = GetDisplayHeight$1(child);
+        childHeight = GetDisplayHeight(child);
       }
     }
 
@@ -18928,7 +18963,7 @@
     if (out === undefined) {
       out = new Rectangle$2();
     } else if (out === true) {
-      out = globRect$1;
+      out = globRect;
     }
 
     var scaleManager = scene.scale;
@@ -18958,7 +18993,7 @@
     return out;
   };
 
-  var globRect$1 = new Rectangle$2();
+  var globRect = new Rectangle$2();
 
   var Anchor = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Anchor, _ComponentBase);
@@ -20528,9 +20563,9 @@
       return false;
     }
 
-    globRect = gameObject.getBounds(globRect);
+    var boundsRect = GetBounds(gameObject, true);
 
-    if (!globRect.contains(x, y)) {
+    if (!boundsRect.contains(x, y)) {
       return false;
     }
 
@@ -20540,8 +20575,6 @@
 
     return true;
   };
-
-  var globRect = undefined;
 
   var IsPointerInBounds = function IsPointerInBounds(gameObject, pointer, preTest, postTest) {
     if (pointer) {
@@ -23702,7 +23735,7 @@
     }, {
       key: "left",
       get: function get() {
-        return this.x - GetDisplayWidth$1(this) * this.originX;
+        return this.x - GetDisplayWidth(this) * this.originX;
       },
       set: function set(value) {
         this.x += value - this.left;
@@ -23716,7 +23749,7 @@
     }, {
       key: "right",
       get: function get() {
-        return this.left + GetDisplayWidth$1(this);
+        return this.left + GetDisplayWidth(this);
       },
       set: function set(value) {
         this.x += value - this.right;
@@ -23730,7 +23763,7 @@
     }, {
       key: "centerX",
       get: function get() {
-        return this.left + GetDisplayWidth$1(this) / 2;
+        return this.left + GetDisplayWidth(this) / 2;
       },
       set: function set(value) {
         this.x += value - this.centerX;
@@ -23744,7 +23777,7 @@
     }, {
       key: "top",
       get: function get() {
-        return this.y - GetDisplayHeight$1(this) * this.originY;
+        return this.y - GetDisplayHeight(this) * this.originY;
       },
       set: function set(value) {
         this.y += value - this.top;
@@ -23758,7 +23791,7 @@
     }, {
       key: "bottom",
       get: function get() {
-        return this.top + GetDisplayHeight$1(this);
+        return this.top + GetDisplayHeight(this);
       },
       set: function set(value) {
         this.y += value - this.bottom;
@@ -23772,7 +23805,7 @@
     }, {
       key: "centerY",
       get: function get() {
-        return this.top + GetDisplayHeight$1(this) / 2;
+        return this.top + GetDisplayHeight(this) / 2;
       },
       set: function set(value) {
         this.y += value - this.centerY;
@@ -23862,7 +23895,7 @@
 
     for (var key in children) {
       child = children[key];
-      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.minHeight !== undefined ? child.minHeight : GetDisplayHeight$1(child);
+      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.minHeight !== undefined ? child.minHeight : GetDisplayHeight(child);
       padding = child.rexSizer.padding;
       childHeight += padding.top + padding.bottom;
       result = Math.max(childHeight, result);
@@ -24071,14 +24104,14 @@
       // Expand normal game object
       if (config.expandWidth) {
         // minWidth is still undefined, uses current display width
-        gameObject.minWidth = minWidth === undefined ? GetDisplayWidth$1(gameObject) : minWidth;
+        gameObject.minWidth = minWidth === undefined ? GetDisplayWidth(gameObject) : minWidth;
       } else {
         gameObject.minWidth = undefined;
       }
 
       if (config.expandHeight) {
         // minHeight is still undefined, uses current display height
-        gameObject.minHeight = minHeight === undefined ? GetDisplayHeight$1(gameObject) : minHeight;
+        gameObject.minHeight = minHeight === undefined ? GetDisplayHeight(gameObject) : minHeight;
       } else {
         gameObject.minHeight = undefined;
       }
@@ -26342,11 +26375,11 @@
       }
 
       if (childWidth === undefined) {
-        childWidth = GetDisplayWidth$1(child);
+        childWidth = GetDisplayWidth(child);
       }
 
       if (childHeight === undefined) {
-        childHeight = GetDisplayHeight$1(child);
+        childHeight = GetDisplayHeight(child);
       } // Set position
 
 
@@ -26574,12 +26607,12 @@
       if (this.orientation === 0) {
         // x
         // minSize is still undefined, uses current display width
-        gameObject.minWidth = minSize === undefined ? GetDisplayWidth$1(gameObject) : minSize;
+        gameObject.minWidth = minSize === undefined ? GetDisplayWidth(gameObject) : minSize;
         gameObject.minHeight = undefined;
       } else {
         gameObject.minWidth = undefined; // minSize is still undefined, uses current display height
 
-        gameObject.minHeight = minSize === undefined ? GetDisplayHeight$1(gameObject) : minSize;
+        gameObject.minHeight = minSize === undefined ? GetDisplayHeight(gameObject) : minSize;
       }
     }
 
@@ -26880,7 +26913,7 @@
             continue;
           }
 
-          childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight$1(child);
+          childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight(child);
           padding = child.rexSizer.padding;
           childHeight += padding.top + padding.bottom;
           rowHeight = Math.max(rowHeight, childHeight);
@@ -27689,8 +27722,8 @@
         }
 
         y = itemY + padding.top;
-        width = GetDisplayWidth$1(child);
-        height = GetDisplayHeight$1(child);
+        width = GetDisplayWidth(child);
+        height = GetDisplayHeight(child);
         itemX = x + width + padding.right + justifySpace;
         LayoutChild.call(this, child, x, y, width, height, childConfig.align);
       }
@@ -27783,12 +27816,12 @@
 
   var GetChildWidth = function GetChildWidth(child) {
     var padding = child.rexSizer.padding;
-    return GetDisplayWidth$1(child) + padding.left + padding.right;
+    return GetDisplayWidth(child) + padding.left + padding.right;
   };
 
   var GeChildHeight = function GeChildHeight(child) {
     var padding = child.rexSizer.padding;
-    return GetDisplayHeight$1(child) + padding.top + padding.bottom;
+    return GetDisplayHeight(child) + padding.top + padding.bottom;
   };
 
   var RunWidthWrap = function RunWidthWrap(width) {
@@ -27988,7 +28021,7 @@
         continue;
       }
 
-      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight$1(child);
+      childHeight = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight(child);
       result = Math.max(childHeight, result);
     }
 
@@ -30515,12 +30548,12 @@
     if (thumb) {
       if (this.orientation === 0) {
         // x, extend width
-        var thumbWidth = GetDisplayWidth$1(thumb);
+        var thumbWidth = GetDisplayWidth(thumb);
         var thumbRight = thumb.x - thumbWidth * thumb.originX + thumbWidth;
         newWidth = thumbRight - this.left;
       } else {
         // y, extend height
-        var thumbHeight = GetDisplayHeight$1(thumb);
+        var thumbHeight = GetDisplayHeight(thumb);
         var thumbBottom = thumb.y - thumbHeight * thumb.originY + thumbHeight;
         newHeight = thumbBottom - this.top;
       }
@@ -37194,7 +37227,7 @@
       result = 0;
     } else {
       // scroll x
-      result = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight$1(child);
+      result = child.isRexSizer ? Math.max(child.minHeight, child.childrenHeight) : child.hasOwnProperty('minHeight') ? child.minHeight : GetDisplayHeight(child);
     }
 
     return result;
@@ -37372,12 +37405,12 @@
     }, {
       key: "childHeight",
       get: function get() {
-        return this.scrollMode === 0 ? GetDisplayHeight$1(this.child) : GetDisplayWidth$1(this.child);
+        return this.scrollMode === 0 ? GetDisplayHeight(this.child) : GetDisplayWidth(this.child);
       }
     }, {
       key: "childWidth",
       get: function get() {
-        return this.scrollMode === 0 ? GetDisplayWidth$1(this.child) : GetDisplayHeight$1(this.child);
+        return this.scrollMode === 0 ? GetDisplayWidth(this.child) : GetDisplayHeight(this.child);
       }
     }, {
       key: "topChildOY",
@@ -38477,12 +38510,12 @@
         switch (key) {
           case 'leftSide':
           case 'rightSide':
-            distance = GetDisplayWidth$1(child);
+            distance = GetDisplayWidth(child);
             break;
 
           case 'topSide':
           case 'bottomSide':
-            distance = GetDisplayHeight$1(child);
+            distance = GetDisplayHeight(child);
             break;
 
           default:
@@ -38492,12 +38525,12 @@
               switch (this.previousChildKey) {
                 case 'leftSide':
                 case 'rightSide':
-                  distance = GetDisplayWidth$1(this.sizerChildren[this.previousChildKey]);
+                  distance = GetDisplayWidth(this.sizerChildren[this.previousChildKey]);
                   break;
 
                 case 'topSide':
                 case 'bottomSide':
-                  distance = GetDisplayHeight$1(this.sizerChildren[this.previousChildKey]);
+                  distance = GetDisplayHeight(this.sizerChildren[this.previousChildKey]);
                   break;
 
                 default:
@@ -38509,12 +38542,12 @@
               switch (this.currentChildKey) {
                 case 'leftSide':
                 case 'rightSide':
-                  distance = GetDisplayWidth$1(this.sizerChildren[this.currentChildKey]);
+                  distance = GetDisplayWidth(this.sizerChildren[this.currentChildKey]);
                   break;
 
                 case 'topSide':
                 case 'bottomSide':
-                  distance = GetDisplayHeight$1(this.sizerChildren[this.currentChildKey]);
+                  distance = GetDisplayHeight(this.sizerChildren[this.currentChildKey]);
                   break;
 
                 default:
@@ -39590,11 +39623,11 @@
     if (out === undefined) {
       out = new Rectangle();
     } else if (out === true) {
-      if (globBounds === undefined) {
-        globBounds = new Rectangle();
+      if (GlobRect === undefined) {
+        GlobRect = new Rectangle();
       }
 
-      out = globBounds;
+      out = GlobRect;
     }
 
     var gameObject;
@@ -39607,20 +39640,20 @@
         continue;
       }
 
-      GOBounds = gameObject.getBounds(GOBounds);
+      var boundsRect = GetBounds(gameObject, true);
 
       if (firstClone) {
-        out.setTo(GOBounds.x, GOBounds.y, GOBounds.width, GOBounds.height);
+        out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
         firstClone = false;
       } else {
-        Union(GOBounds, out, out);
+        Union(boundsRect, out, out);
       }
     }
 
     return out;
   };
 
-  var GOBounds, globBounds;
+  var GlobRect;
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
 

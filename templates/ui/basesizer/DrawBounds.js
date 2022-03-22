@@ -1,6 +1,6 @@
 import ALIGNMODE from '../utils/AlignConst.js';
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
-import { GetBounds } from '../../../plugins/utils/size/GetBounds.js';
+import { GetBounds } from '../../../plugins/utils/bounds/GetBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Group = Phaser.GameObjects.Group;
@@ -42,10 +42,10 @@ var DrawBounds = function (graphics, config) {
     var nameText;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (child.getBounds) {
-            child.getBounds(GlobRect);
-        } else if ((child.width !== undefined) && (child.height !== undefined)) {
-            GetBounds(child, GlobRect);
+        if (child.getBounds ||
+            ((child.width !== undefined) && (child.height !== undefined))
+        ) {
+            GlobRect = GetBounds(child, GlobRect);
         } else {
             continue;
         }
@@ -77,6 +77,6 @@ var DefaultCreateTextCallback = function (scene, child, childBoundsRect) {
     return scene.add.text(0, 0, '');
 }
 
-var GlobRect = new Phaser.Geom.Rectangle();
+var GlobRect = undefined;
 
 export default DrawBounds;

@@ -1,3 +1,8 @@
+import {
+    GetTopLeft, GetTopRight,
+    GetBottomLeft, GetBottomRight
+} from './GetBounds.js';
+
 var BoundsToPath = function (gameObject, out) {
     if (out === undefined) {
         var out = Create4Lines();
@@ -5,18 +10,18 @@ var BoundsToPath = function (gameObject, out) {
     var lines = out.curves, line;
     // top-left -> top-right
     line = lines[0];
-    gameObject.getTopLeft(line.p0);
-    gameObject.getTopRight(line.p1);
+    GetTopLeft(gameObject, line.p0);
+    GetTopRight(gameObject, line.p1);
 
     // top-right -> bottom-right
     CopyEndPoint(lines[1], line);
     line = lines[1];
-    gameObject.getBottomRight(line.p1);
+    GetBottomRight(gameObject, line.p1);
 
     // bottom-right -> bottom-left
     CopyEndPoint(lines[2], line);
     line = lines[2];
-    gameObject.getBottomLeft(line.p1);
+    GetBottomLeft(gameObject, line.p1);
 
     // bottom-left -> top-left
     CopyEndPoint(lines[3], line);

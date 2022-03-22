@@ -1,9 +1,25 @@
+import {
+    GetDisplayWidth,
+    GetDisplayHeight
+} from '../size/GetDisplaySize.js';
+
 const Rectangle = Phaser.Geom.Rectangle;
 const Vector2 = Phaser.Geom.Vector2;
 const RotateAround = Phaser.Math.RotateAround;
 
 var GetBounds = function (gameObject, output) {
-    if (output === undefined) { output = new Rectangle(); }
+    if (output === undefined) {
+        output = new Rectangle();
+    } else if (output === true) {
+        if (GlobRect === undefined) {
+            GlobRect = new Rectangle();
+        }
+        output = GlobRect;
+    }
+
+    if (gameObject.getBounds) {
+        return gameObject.getBounds(output);
+    }
 
     //  We can use the output object to temporarily store the x/y coords in:
 
@@ -68,10 +84,22 @@ var GetBounds = function (gameObject, output) {
     return output;
 }
 
-var GetTopLeft = function (gameObject, output, includeParent) {
-    if (!output) { output = new Vector2(); }
+var GlobRect = undefined;
 
-    debugger
+var GetTopLeft = function (gameObject, output, includeParent) {
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    if (gameObject.getTopLeft) {
+        return gameObject.getTopLeft(output);
+    }
+
     output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
     output.y = gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY);
 
@@ -79,7 +107,18 @@ var GetTopLeft = function (gameObject, output, includeParent) {
 };
 
 var GetTopRight = function (gameObject, output, includeParent) {
-    if (!output) { output = new Vector2(); }
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    if (gameObject.getTopRight) {
+        return gameObject.getTopRight(output);
+    }
 
     output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
     output.y = gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY);
@@ -88,7 +127,18 @@ var GetTopRight = function (gameObject, output, includeParent) {
 };
 
 var GetBottomLeft = function (gameObject, output, includeParent) {
-    if (!output) { output = new Vector2(); }
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    if (gameObject.getBottomLeft) {
+        return gameObject.getBottomLeft(output);
+    }
 
     output.x = gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX);
     output.y = (gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY)) + GetDisplayHeight(gameObject);
@@ -97,7 +147,18 @@ var GetBottomLeft = function (gameObject, output, includeParent) {
 };
 
 var GetBottomRight = function (gameObject, output, includeParent) {
-    if (!output) { output = new Vector2(); }
+    if (output === undefined) {
+        output = new Vector2();
+    } else if (output === true) {
+        if (GlobVector === undefined) {
+            GlobVector = new Vector2();
+        }
+        output = GlobVector;
+    }
+
+    if (gameObject.getBottomRight) {
+        return gameObject.getBottomRight(output);
+    }
 
     output.x = (gameObject.x - (GetDisplayWidth(gameObject) * gameObject.originX)) + GetDisplayWidth(gameObject);
     output.y = (gameObject.y - (GetDisplayHeight(gameObject) * gameObject.originY)) + GetDisplayHeight(gameObject);
@@ -105,21 +166,7 @@ var GetBottomRight = function (gameObject, output, includeParent) {
     return PrepareBoundsOutput(gameObject, output, includeParent);
 };
 
-var GetDisplayWidth = function (gameObject) {
-    if (gameObject.displayWidth !== undefined) {
-        return gameObject.displayWidth;
-    } else {
-        return gameObject.width;
-    }
-}
-
-var GetDisplayHeight = function (gameObject) {
-    if (gameObject.displayHeight !== undefined) {
-        return gameObject.displayWidth;
-    } else {
-        return gameObject.height;
-    }
-}
+var GlobVector = undefined;
 
 var PrepareBoundsOutput = function (gameObject, output, includeParent) {
     if (includeParent === undefined) { includeParent = false; }
@@ -140,6 +187,7 @@ var PrepareBoundsOutput = function (gameObject, output, includeParent) {
 export {
     GetBounds,
     GetTopLeft,
+    GetTopRight,
     GetBottomLeft,
     GetBottomRight,
 }

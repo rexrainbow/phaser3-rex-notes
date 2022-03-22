@@ -1,3 +1,5 @@
+import { GetBounds } from './GetBounds.js';
+
 var IsPointInBounds = function (gameObject, x, y, preTest, postTest) {
     // Can't get bounds
     if (!gameObject || !gameObject.getBounds) {
@@ -8,9 +10,9 @@ var IsPointInBounds = function (gameObject, x, y, preTest, postTest) {
         return false;
     }
 
-    globRect = gameObject.getBounds(globRect);
+    var boundsRect = GetBounds(gameObject, true);
 
-    if (!globRect.contains(x, y)) {
+    if (!boundsRect.contains(x, y)) {
         return false;
     }
 
@@ -20,7 +22,5 @@ var IsPointInBounds = function (gameObject, x, y, preTest, postTest) {
 
     return true;
 }
-
-var globRect = undefined;
 
 export default IsPointInBounds;
