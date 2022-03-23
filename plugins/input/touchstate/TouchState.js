@@ -33,7 +33,7 @@ class TouchState extends ComponentBase {
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('postupdate', this.postupdate, this);
+        this.scene.sys.events.on('postupdate', this.postupdate, this);
     }
 
     shutdown(fromScene) {
@@ -48,7 +48,7 @@ class TouchState extends ComponentBase {
         // this.parent.off('pointerup', this.onPointOut, this);
         // this.parent.off('pointerout', this.onPointOut, this);
         // this.parent.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('postupdate', this.postupdate, this);
+        this.scene.sys.events.off('postupdate', this.postupdate, this);
 
         this.pointer = undefined;
         super.shutdown(fromScene);

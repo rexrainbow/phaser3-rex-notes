@@ -11,7 +11,7 @@ class FullWindowRectangle extends Rectangle {
 
     boot() {
         var scene = this.scene;
-        scene.events.on('prerender', this.resize, this);
+        scene.sys.events.on('prerender', this.resize, this);
     }
 
     destroy(fromScene) {  // preDestroy method does not have fromScene parameter
@@ -20,7 +20,7 @@ class FullWindowRectangle extends Rectangle {
             return;
         }
 
-        this.scene.events.off('prerender', this.resize, this);
+        this.scene.sys.events.off('prerender', this.resize, this);
 
         super.destroy(fromScene);
     }

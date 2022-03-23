@@ -7,7 +7,7 @@ class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
     }
 
     start() {
-        var eventEmitter = this.scene.events;
+        var eventEmitter = this.scene.sys.events;
         eventEmitter.on('destroy', this.destroy, this);
     }
 

@@ -30,7 +30,7 @@ class Board extends EE {
 
     boot() {
         if (this.scene && this.isBoard) {
-            this.scene.events.once('shutdown', this.destroy, this);
+            this.scene.sys.events.once('shutdown', this.destroy, this);
         }
     }
 
@@ -40,7 +40,7 @@ class Board extends EE {
         }
 
         if (this.scene && this.isBoard) {
-            this.scene.events.off('shutdown', this.destroy, this);
+            this.scene.sys.events.off('shutdown', this.destroy, this);
         }
 
         if (this.isBoard) {

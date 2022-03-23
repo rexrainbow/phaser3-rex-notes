@@ -59,7 +59,7 @@ class ShakePosition extends TickTask {
             this.scene.game.events.on('poststep', this.update, this);
             this.scene.game.events.on('prestep', this.backToOrigin, this);
         } else { // Behavior Mode
-            this.scene.events.on('preupdate', this.update, this);
+            this.scene.sys.events.on('preupdate', this.update, this);
         }
     }
 
@@ -71,7 +71,7 @@ class ShakePosition extends TickTask {
                 this.scene.game.events.off('poststep', this.update, this);
                 this.scene.game.events.off('prestep', this.backToOrigin, this);
             } else { // Behavior Mode
-                this.scene.events.off('preupdate', this.update, this);
+                this.scene.sys.events.off('preupdate', this.update, this);
             }
 
         }

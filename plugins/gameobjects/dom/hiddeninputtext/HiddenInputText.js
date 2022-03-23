@@ -44,7 +44,7 @@ class HiddenInputText extends InputText {
                 }
 
                 this.setText(this.textObject.text);
-                this.scene.events.on('postupdate', this.updateText, this);
+                this.scene.sys.events.on('postupdate', this.updateText, this);
                 this.scene.input.on('pointerdown', this.onClickOutside, this);
 
                 if (this.onOpenCallback) {
@@ -55,7 +55,7 @@ class HiddenInputText extends InputText {
             .on('blur', function () {
                 this.updateText();
 
-                this.scene.events.off('postupdate', this.updateText, this);
+                this.scene.sys.events.off('postupdate', this.updateText, this);
                 this.scene.input.off('pointerdown', this.onClickOutside, this);
 
                 if (this.onCloseCallback) {
@@ -68,7 +68,7 @@ class HiddenInputText extends InputText {
     preDestroy() {
         this.textObject.off('pointerdown', this.setFocus, this);
         this.textObject.off('destroy', this.destroy, this);
-        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         super.preDestroy();

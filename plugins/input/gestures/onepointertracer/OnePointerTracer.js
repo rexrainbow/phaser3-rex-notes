@@ -48,7 +48,7 @@ class OnePointerTracer extends TickTask {
         }
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
     }
 
     shutdown(fromScene) {
@@ -64,7 +64,7 @@ class OnePointerTracer extends TickTask {
         }
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
 
         this.gameObject = undefined;
         this.bounds = undefined;
@@ -217,15 +217,15 @@ class OnePointerTracer extends TickTask {
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.preUpdate, this);
-        this.scene.events.on('postupdate', this.postUpdate, this);
+        this.scene.sys.events.on('preupdate', this.preUpdate, this);
+        this.scene.sys.events.on('postupdate', this.postUpdate, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.preUpdate, this);
-            this.scene.events.off('postupdate', this.postUpdate, this);
+            this.scene.sys.events.off('preupdate', this.preUpdate, this);
+            this.scene.sys.events.off('postupdate', this.postUpdate, this);
         }
     }
 

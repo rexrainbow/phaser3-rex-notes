@@ -43,7 +43,7 @@ class DragSpeed extends ComponentBase {
         }
 
         this.parent.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
     }
 
     shutdown(fromScene) {
@@ -58,7 +58,7 @@ class DragSpeed extends ComponentBase {
         // this.parent.off('pointerout', this.onPointOut, this);
         // this.parent.off('pointermove', this.onPointerMove, this);
 
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
 
         this.pointer = undefined;
 

@@ -29,7 +29,7 @@ class InTouching extends ComponentBase {
         gameObject.on('pointerover', this.onPointIn, this);
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
     }
 
     shutdown(fromScene) {
@@ -43,7 +43,7 @@ class InTouching extends ComponentBase {
         // this.parent.off('pointerover', this.onPointIn, this);
         // this.parent.off('pointerup', this.onPointOut, this);
         // this.parent.off('pointerout', this.onPointOut, this);
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
 
         this.pointer = undefined;
         super.shutdown(fromScene);

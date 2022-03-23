@@ -26,13 +26,13 @@ class LoopInTicks extends TickTask {
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.preupdate, this);
+            this.scene.sys.events.off('preupdate', this.preupdate, this);
         }
     }
 

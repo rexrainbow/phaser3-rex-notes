@@ -4,7 +4,7 @@ class ObjectFactory {
         this.displayList = scene.sys.displayList;
         this.updateList = scene.sys.updateList;
 
-        scene.events.once('destroy', this.destroy, this);
+        scene.sys.events.once('destroy', this.destroy, this);
     }
 
     destroy() {

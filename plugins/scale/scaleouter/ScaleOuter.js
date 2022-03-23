@@ -22,10 +22,10 @@ class ScaleOuter {
         var scene = this.scene;
         if (CheckScaleMode(scene)) {
             scene.sys.scale.on('resize', this.scale, this);
-            scene.events.once('preupdate', this.onFirstTick, this);
+            scene.sys.events.once('preupdate', this.onFirstTick, this);
         }
 
-        scene.events.on('shutdown', function () {
+        scene.sys.events.on('shutdown', function () {
             // cameras of this scene will be destroyed when scene shutdown
             this.cameras.clear();
         }, this);
@@ -42,7 +42,7 @@ class ScaleOuter {
     stop() {
         var scene = this.scene;
         scene.sys.scale.off('resize', this.scale, this);
-        scene.events.off('preupdate', this.onFirstTick, this);
+        scene.sys.events.off('preupdate', this.onFirstTick, this);
         return this;
     }
 

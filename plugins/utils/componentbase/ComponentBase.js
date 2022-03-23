@@ -14,7 +14,7 @@ class ComponentBase {
 
         // Register callback of parent destroy event, also see `shutdown` method
         if (this.parent && (this.parent === this.scene)) { // parent is a scene
-            this.scene.events.once('shutdown', this.onSceneDestroy, this);
+            this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) { // bob object does not have event emitter
             this.parent.once('destroy', this.onParentDestroy, this);
         }
@@ -28,7 +28,7 @@ class ComponentBase {
 
         // parent might not be shutdown yet
         if (this.parent && (this.parent === this.scene)) { // parent is a scene
-            this.scene.events.off('shutdown', this.onSceneDestroy, this);
+            this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) { // bob object does not have event emitter
             this.parent.off('destroy', this.onParentDestroy, this);
         }
