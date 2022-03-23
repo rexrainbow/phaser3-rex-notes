@@ -230,6 +230,9 @@ txt.dropShadowAlpha = alpha;
 - `color` : The color of the drop shadow.
 - `alpha` : The alpha of the drop shadow.
 
+!!! note
+    WebGL only
+
 ### Wrap
 
 - Wrap
