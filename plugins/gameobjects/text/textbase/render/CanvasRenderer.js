@@ -19,7 +19,7 @@
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var TextCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
     if ((src.width === 0) || (src.height === 0)) {
         return;
     }
@@ -29,4 +29,4 @@ var TextCanvasRenderer = function (renderer, src, camera, parentMatrix) {
     renderer.batchSprite(src, src.frame, camera, parentMatrix);
 };
 
-export default TextCanvasRenderer;
+export default CanvasRenderer;
