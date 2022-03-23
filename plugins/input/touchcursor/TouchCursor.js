@@ -17,7 +17,7 @@ class TouchCursor extends VectorToCursorKeys {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.scene = scene;
-        this.mainCamera = scene.cameras.main;
+        this.mainCamera = scene.sys.cameras.main;
         this.pointer = undefined;
         this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);

@@ -44,7 +44,7 @@ class TextPlayer extends DynamicText {
             this._soundManager = new SoundManager(this.scene, soundManagerConfig);
         }
 
-        this.setTargetCamera(GetValue(config, 'camera', this.scene.cameras.main));
+        this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
         this._spriteManager = undefined;
         var spriteManagerConfig = GetValue(config, 'sprites', undefined);

@@ -64,7 +64,7 @@ class ScaleOuter {
     onFirstTick() {
         if (this.cameras.size === 0) {
             // Add default camera
-            this.add(this.scene.cameras.main);
+            this.add(this.scene.sys.cameras.main);
         }
         this.scale();
     }

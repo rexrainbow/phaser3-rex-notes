@@ -57,7 +57,7 @@ class EffectLayer extends Shader {
 
     drawTargets() {
         // Assume that game objects are displayed on main camera.
-        var camera = this.scene.cameras.main;
+        var camera = this.scene.sys.cameras.main;
         var offsetX = camera.scrollX + this.x;
         var offsetY = camera.scrollY + this.y;
 

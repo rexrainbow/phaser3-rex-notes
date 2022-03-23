@@ -25,7 +25,7 @@ class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
     scale() {
         if (this.scaleOuter.cameras.size === 0) {
             // Add default camera
-            this.add(this.scene.cameras.main);
+            this.add(this.scene.sys.cameras.main);
         }
         this.scaleOuter.scale();
         return this;
