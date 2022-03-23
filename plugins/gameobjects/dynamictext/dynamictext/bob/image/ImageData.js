@@ -46,7 +46,7 @@ class ImageData extends Base {
         this.key = key;
         this.frame = frame;
 
-        this.frameObj = this.scene.textures.getFrame(key, frame);
+        this.frameObj = this.scene.sys.textures.getFrame(key, frame);
         return this;
     }
 

@@ -17,7 +17,7 @@ var CreateRectangleTexture = function (scene, key, width, height, radiusConfig, 
         lineWidth = 2;
     }
 
-    var texture = scene.textures.createCanvas(key, width, width);
+    var texture = scene.sys.textures.createCanvas(key, width, width);
     var canvas = texture.getCanvas();
     var context = texture.getContext();
 

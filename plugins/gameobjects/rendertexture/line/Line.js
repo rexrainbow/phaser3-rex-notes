@@ -109,7 +109,7 @@ class Line extends RenderTexture {
     }
 
     get lineStartFrame() {
-        return this.scene.textures.getFrame(this.lineStartTexture, this.lineStartFrameName);
+        return this.scene.sys.textures.getFrame(this.lineStartTexture, this.lineStartFrameName);
     }
 
     setLineEndTexture(key, frame) {
@@ -129,7 +129,7 @@ class Line extends RenderTexture {
     }
 
     get lineEndFrame() {
-        return this.scene.textures.getFrame(this.lineEndTexture, this.lineEndFrameName);
+        return this.scene.sys.textures.getFrame(this.lineEndTexture, this.lineEndFrameName);
     }
 
     setLineBodyTexture(key, frame) {
@@ -154,7 +154,7 @@ class Line extends RenderTexture {
     }
 
     get lineBodyFrame() {
-        return this.scene.textures.getFrame(this.lineBodyTexture, this.lineBodyFrameName);
+        return this.scene.sys.textures.getFrame(this.lineBodyTexture, this.lineBodyFrameName);
     }
 
     renderWebGL(renderer, src,  camera, parentMatrix) {

@@ -4,7 +4,7 @@ var GetFaceSize = function (scene, images) {
     }
     if (Array.isArray(images)) {
         var textureKey = images[0];
-        var frame = scene.textures.getFrame(textureKey.key, textureKey.frame);
+        var frame = scene.sys.textures.getFrame(textureKey.key, textureKey.frame);
         result.width = frame.cutWidth;
         result.height = frame.cutHeight;
     } else {

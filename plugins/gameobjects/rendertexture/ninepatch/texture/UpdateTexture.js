@@ -6,7 +6,7 @@ var UpdateTexture = function () {
     if (this.textureKey === undefined) {
         return this;
     }
-    var texture = this.scene.textures.get(this.textureKey);
+    var texture = this.scene.sys.textures.get(this.textureKey);
     if (!texture) {
         return this;
     }

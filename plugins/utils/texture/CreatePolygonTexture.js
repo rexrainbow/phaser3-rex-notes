@@ -27,7 +27,7 @@ var CreatePolygonTexture = function (scene, key, points, fillStyle, strokeStyle,
     var width = maxX - minX;
     var height = maxY - minY;
 
-    var texture = scene.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
+    var texture = scene.sys.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
     var canvas = texture.getCanvas();
     var context = texture.getContext();
 

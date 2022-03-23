@@ -46,7 +46,7 @@ export default {
     },
 
     loadTexture(key, frame) {
-        var textureFrame = this.scene.textures.getFrame(key, frame);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
         if (!textureFrame) {
             return this;
         }

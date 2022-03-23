@@ -12,7 +12,7 @@ var CreateCircleTexture = function (scene, key, width, fillStyle, strokeStyle, l
         lineWidth = 2;
     }
 
-    var texture = scene.textures.createCanvas(key, width, width);
+    var texture = scene.sys.textures.createCanvas(key, width, width);
     var canvas = texture.getCanvas();
     var context = texture.getContext();
 

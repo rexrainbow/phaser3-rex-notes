@@ -1,5 +1,5 @@
 var CopyCanvasToTexture = function (scene, srcCanvas, key, x, y, width, height) {
-    var textures = scene.textures;
+    var textures = scene.sys.textures;
     var renderer = scene.renderer;
 
     if (x === undefined) {

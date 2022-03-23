@@ -3,7 +3,7 @@ import DrawImage from './DrawImage.js';
 
 class ImageManager {
     constructor(scene) {
-        this.textureManager = scene.textures;
+        this.textureManager = scene.sys.textures;
         this.images = {};
     }
 

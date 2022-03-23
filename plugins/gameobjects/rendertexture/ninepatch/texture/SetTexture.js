@@ -27,7 +27,7 @@ var SetTexture = function (key, baseFrameName, columns, rows) {
     this.rows.minHeight = 0;
     this.rows.scale = 1;
 
-    var texture = this.scene.textures.get(key);
+    var texture = this.scene.sys.textures.get(key);
     if (!texture) {
         this.clear();
         return this;
