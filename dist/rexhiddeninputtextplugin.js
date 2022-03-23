@@ -154,7 +154,7 @@
   }
 
   var Resize = function Resize(width, height) {
-    if (this.scene.scale.autoRound) {
+    if (this.scene.sys.scale.autoRound) {
       width = Math.floor(width);
       height = Math.floor(height);
     }
@@ -665,7 +665,7 @@
         }
 
         this.setText(this.textObject.text);
-        this.scene.events.on('postupdate', this.updateText, this);
+        this.scene.sys.events.on('postupdate', this.updateText, this);
         this.scene.input.on('pointerdown', this.onClickOutside, this);
 
         if (this.onOpenCallback) {
@@ -673,7 +673,7 @@
         }
       }, _assertThisInitialized(_this)).on('blur', function () {
         this.updateText();
-        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         if (this.onCloseCallback) {
@@ -689,7 +689,7 @@
       value: function preDestroy() {
         this.textObject.off('pointerdown', this.setFocus, this);
         this.textObject.off('destroy', this.destroy, this);
-        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);

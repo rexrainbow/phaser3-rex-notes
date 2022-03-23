@@ -217,7 +217,7 @@
   };
 
   var Resize = function Resize(width, height) {
-    if (this.scene.scale.autoRound) {
+    if (this.scene.sys.scale.autoRound) {
       width = Math.floor(width);
       height = Math.floor(height);
     }

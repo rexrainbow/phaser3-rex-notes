@@ -1,8 +1,9 @@
 import FillPathWebGL from '../../utils/render/FillPathWebGL.js';
 import StrokePathWebGL from '../../utils/render/StrokePathWebGL.js';
-import GetCalcMatrix from '../../../utils/GetCalcMatrix.js';
 
-var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
+
+var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {    
     if (src.dirty) {
         src.updateData();
         src.dirty = false;

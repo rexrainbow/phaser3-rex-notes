@@ -1021,7 +1021,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
@@ -1032,7 +1032,7 @@
 
         this.destroyEventEmitter();
         this.clear();
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
       }
     }, {

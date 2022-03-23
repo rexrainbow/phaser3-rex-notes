@@ -281,7 +281,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -299,7 +299,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -885,7 +885,7 @@
         }
 
         this.parent.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
       }
     }, {
       key: "shutdown",
@@ -900,7 +900,7 @@
         // this.parent.off('pointermove', this.onPointerMove, this);
 
 
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
 
         _get(_getPrototypeOf(DragSpeed.prototype), "shutdown", this).call(this, fromScene);
@@ -1330,7 +1330,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.events.on('preupdate', this._state.update, this._state);
+        this.scene.sys.events.on('preupdate', this._state.update, this._state);
       }
     }, {
       key: "shutdown",
@@ -1340,7 +1340,7 @@
           return;
         }
 
-        this.scene.events.off('preupdate', this._state.update, this._state);
+        this.scene.sys.events.off('preupdate', this._state.update, this._state);
 
         this._state.destroy(fromScene);
 

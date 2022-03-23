@@ -180,7 +180,7 @@
       key: "boot",
       value: function boot() {
         var scene = this.scene;
-        scene.events.on('prerender', this.resize, this);
+        scene.sys.events.on('prerender', this.resize, this);
       }
     }, {
       key: "destroy",
@@ -191,7 +191,7 @@
           return;
         }
 
-        this.scene.events.off('prerender', this.resize, this);
+        this.scene.sys.events.off('prerender', this.resize, this);
 
         _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
       }
@@ -207,8 +207,8 @@
       key: "resize",
       value: function resize() {
         var scene = this.scene;
-        var gameSize = scene.scale.gameSize;
-        var camera = scene.cameras.main;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
         var gameWidth = gameSize.width,
             gameHeight = gameSize.height,
             scale = 1 / camera.zoom;

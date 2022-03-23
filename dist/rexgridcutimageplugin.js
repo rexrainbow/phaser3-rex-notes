@@ -140,7 +140,7 @@
       getFrameNameCallback = GetFrameNameCallback(frame, getFrameNameCallback);
     }
 
-    var texture = scene.textures.get(key);
+    var texture = scene.sys.textures.get(key);
     var baseFrame = texture.frames[frame];
     var cellWidth = baseFrame.width / columns,
         cellHeight = baseFrame.height / rows;

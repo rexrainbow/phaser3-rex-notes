@@ -281,7 +281,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -299,7 +299,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -358,7 +358,7 @@
       key: "boot",
       value: function boot() {
         var scene = this.scene;
-        scene.events.on('prerender', this.resize, this);
+        scene.sys.events.on('prerender', this.resize, this);
       }
     }, {
       key: "destroy",
@@ -369,7 +369,7 @@
           return;
         }
 
-        this.scene.events.off('prerender', this.resize, this);
+        this.scene.sys.events.off('prerender', this.resize, this);
 
         _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
       }
@@ -385,8 +385,8 @@
       key: "resize",
       value: function resize() {
         var scene = this.scene;
-        var gameSize = scene.scale.gameSize;
-        var camera = scene.cameras.main;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
         var gameWidth = gameSize.width,
             gameHeight = gameSize.height,
             scale = 1 / camera.zoom;
@@ -708,7 +708,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -717,7 +717,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       } // update(time, delta) {
       //     
@@ -2100,7 +2100,7 @@
       key: "delayCall",
       value: function delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        var sceneEE = this.scene.events;
+        var sceneEE = this.scene.sys.events;
         this.timer = this.scene.time.delayedCall(delay, // delay
         sceneEE.once, // callback
         ['postupdate', callback, scope], // args

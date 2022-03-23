@@ -182,7 +182,7 @@
       var imageElement = new Image();
 
       imageElement.onload = function () {
-        var canvasTexture = loader.scene.textures.createCanvas(key, imageElement.width, imageElement.height);
+        var canvasTexture = loader.scene.sys.textures.createCanvas(key, imageElement.width, imageElement.height);
         canvasTexture.getContext().drawImage(imageElement, 0, 0);
         canvasTexture.refresh();
         successCallback();

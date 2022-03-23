@@ -230,13 +230,13 @@
       key: "boot",
       value: function boot() {
         this.scene.game.events.on('prerender', this.drawTargets, this);
-        this.scene.scale.on('resize', this.onWindowResize, this);
+        this.scene.sys.scale.on('resize', this.onWindowResize, this);
       }
     }, {
       key: "destroy",
       value: function destroy(fromScene) {
         this.scene.game.events.off('prerender', this.drawTargets, this);
-        this.scene.scale.off('resize', this.onWindowResize, this); // Private texture will be removed by shader game object
+        this.scene.sys.scale.off('resize', this.onWindowResize, this); // Private texture will be removed by shader game object
 
         this.clear();
 
@@ -249,7 +249,7 @@
       key: "drawTargets",
       value: function drawTargets() {
         // Assume that game objects are displayed on main camera.
-        var camera = this.scene.cameras.main;
+        var camera = this.scene.sys.cameras.main;
         var offsetX = camera.scrollX + this.x;
         var offsetY = camera.scrollY + this.y;
         var rt = this.rt;

@@ -313,7 +313,7 @@
   };
 
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
-    var textures = scene.textures;
+    var textures = scene.sys.textures;
     var renderer = scene.renderer;
 
     if (x === undefined) {
@@ -407,7 +407,7 @@
       return this;
     },
     loadTexture: function loadTexture(key, frame) {
-      var textureFrame = this.scene.textures.getFrame(key, frame);
+      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
       if (!textureFrame) {
         return this;
@@ -2422,7 +2422,7 @@
       value: function setTexture(key, frame) {
         this.key = key;
         this.frame = frame;
-        this.frameObj = this.scene.textures.getFrame(key, frame);
+        this.frameObj = this.scene.sys.textures.getFrame(key, frame);
         return this;
       }
     }, {
@@ -5593,7 +5593,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -5611,7 +5611,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -5884,7 +5884,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -5893,7 +5893,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       }
     }, {
@@ -6388,7 +6388,7 @@
     function ImageManager(scene) {
       _classCallCheck(this, ImageManager);
 
-      this.textureManager = scene.textures;
+      this.textureManager = scene.sys.textures;
       this.images = {};
     }
 
@@ -6487,7 +6487,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -6496,7 +6496,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       } // update(time, delta) {
       //     
@@ -7000,7 +7000,7 @@
     }; // create sound instance by key
 
     if (typeof sound === 'string') {
-      sound = scene.sound.add(sound);
+      sound = scene.sys.sound.add(sound);
     }
 
     var fade;
@@ -7124,7 +7124,7 @@
     }, {
       key: "playSoundEffect",
       value: function playSoundEffect(key) {
-        var soundEffect = this.scene.sound.add(key);
+        var soundEffect = this.scene.sys.sound.add(key);
         this.soundEffects.push(soundEffect);
         soundEffect.once('complete', function () {
           soundEffect.destroy(); // SoundManager has been destroyed
@@ -7215,7 +7215,7 @@
 
         this.stopBackgroundMusic(); // Stop previous background music
 
-        this.setCurrentBackgroundMusic(this.scene.sound.add(key));
+        this.setCurrentBackgroundMusic(this.scene.sys.sound.add(key));
 
         if (this.backgroundMusicFadeTime > 0) {
           this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
@@ -7975,7 +7975,7 @@
         _this._soundManager = new SoundManager(_this.scene, soundManagerConfig);
       }
 
-      _this.setTargetCamera(GetValue(config, 'camera', _this.scene.cameras.main));
+      _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
 
       _this._spriteManager = undefined;
       var spriteManagerConfig = GetValue(config, 'sprites', undefined);

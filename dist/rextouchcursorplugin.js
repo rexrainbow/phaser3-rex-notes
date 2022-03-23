@@ -698,7 +698,7 @@
       _this.setEventEmitter(eventEmitter, EventEmitterClass);
 
       _this.scene = scene;
-      _this.mainCamera = scene.cameras.main;
+      _this.mainCamera = scene.sys.cameras.main;
       _this.pointer = undefined;
       _this.gameObject = gameObject;
       _this.radius = GetValue(config, 'radius', 100);

@@ -285,10 +285,10 @@
         cellHeight = 64;
       }
 
-      this.texture = scene.textures.createCanvas(key, width, height);
+      this.texture = scene.sys.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
       this.context = this.texture.getContext();
-      this.bitmapFontCache = scene.cache.bitmapFont;
+      this.bitmapFontCache = scene.sys.cache.bitmapFont;
 
       if (fillColor !== undefined) {
         var context = this.context;

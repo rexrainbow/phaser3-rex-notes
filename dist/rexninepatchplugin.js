@@ -200,7 +200,7 @@
     this.rows.stretch = 0;
     this.rows.minHeight = 0;
     this.rows.scale = 1;
-    var texture = this.scene.textures.get(key);
+    var texture = this.scene.sys.textures.get(key);
 
     if (!texture) {
       this.clear();
@@ -337,7 +337,7 @@
       return this;
     }
 
-    var texture = this.scene.textures.get(this.textureKey);
+    var texture = this.scene.sys.textures.get(this.textureKey);
 
     if (!texture) {
       return this;

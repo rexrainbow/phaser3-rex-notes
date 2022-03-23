@@ -140,7 +140,7 @@
   var WarnCounter = 0;
 
   var CheckScaleMode = function CheckScaleMode(scene) {
-    var scaleManager = scene.scale;
+    var scaleManager = scene.sys.scale;
 
     if (scaleManager.scaleMode !== Phaser.Scale.RESIZE) {
       if (WarnCounter === 0) {
@@ -163,7 +163,7 @@
     var gameWidth = gameConfig.width,
         gameHeight = gameConfig.height;
     var gameAspectRatio = gameHeight === 0 ? 1 : gameWidth / gameHeight;
-    var displaySize = scene.scale.displaySize;
+    var displaySize = scene.sys.scale.displaySize;
     var displayWidth = displaySize.width,
         displayHeight = displaySize.height;
     var displayAspectRatio = displayHeight === 0 ? 1 : displayWidth / displayHeight;
@@ -201,7 +201,7 @@
     }
 
     var scale = scaleOuter.zoom;
-    var displaySize = scaleOuter.scene.scale.displaySize;
+    var displaySize = scaleOuter.scene.sys.scale.displaySize;
     out.width = displaySize.width / scale;
     out.height = displaySize.height / scale;
     var gameConfig = scaleOuter.scene.game.config;
@@ -231,11 +231,11 @@
         var scene = this.scene;
 
         if (CheckScaleMode(scene)) {
-          scene.scale.on('resize', this.scale, this);
-          scene.events.once('preupdate', this.onFirstTick, this);
+          scene.sys.scale.on('resize', this.scale, this);
+          scene.sys.events.once('preupdate', this.onFirstTick, this);
         }
 
-        scene.events.on('shutdown', function () {
+        scene.sys.events.on('shutdown', function () {
           // cameras of this scene will be destroyed when scene shutdown
           this.cameras.clear();
         }, this);
@@ -252,8 +252,8 @@
       key: "stop",
       value: function stop() {
         var scene = this.scene;
-        scene.scale.off('resize', this.scale, this);
-        scene.events.off('preupdate', this.onFirstTick, this);
+        scene.sys.scale.off('resize', this.scale, this);
+        scene.sys.events.off('preupdate', this.onFirstTick, this);
         return this;
       }
     }, {
@@ -279,7 +279,7 @@
       value: function onFirstTick() {
         if (this.cameras.size === 0) {
           // Add default camera
-          this.add(this.scene.cameras.main);
+          this.add(this.scene.sys.cameras.main);
         }
 
         this.scale();
@@ -319,7 +319,7 @@
     _createClass(ScaleOuterPlugin, [{
       key: "start",
       value: function start() {
-        var eventEmitter = this.scene.events;
+        var eventEmitter = this.scene.sys.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
     }, {
@@ -341,7 +341,7 @@
       value: function scale() {
         if (this.scaleOuter.cameras.size === 0) {
           // Add default camera
-          this.add(this.scene.cameras.main);
+          this.add(this.scene.sys.cameras.main);
         }
 
         this.scaleOuter.scale();

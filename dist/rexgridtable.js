@@ -2893,7 +2893,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -2911,7 +2911,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -2953,7 +2953,7 @@
       out = globRect;
     }
 
-    var scaleManager = scene.scale;
+    var scaleManager = scene.sys.scale;
     var baseSize = scaleManager.baseSize;
     var parentSize = scaleManager.parentSize;
     var canvasBounds = scaleManager.canvasBounds;
@@ -3107,7 +3107,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.scale.on('resize', this.anchor, this);
+        this.scene.sys.scale.on('resize', this.anchor, this);
         this.anchor();
       }
     }, {
@@ -3118,7 +3118,7 @@
           return;
         }
 
-        this.scene.scale.off('resize', this.anchor, this);
+        this.scene.sys.scale.off('resize', this.anchor, this);
         this.viewport = undefined;
         this.onUpdateViewportCallback = undefined;
         this.onUpdateViewportCallbackScope = undefined;
@@ -3472,7 +3472,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -3481,7 +3481,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       } // update(time, delta) {
       //     
@@ -4832,7 +4832,7 @@
           this.scene.game.events.on('prestep', this.backToOrigin, this);
         } else {
           // Behavior Mode
-          this.scene.events.on('preupdate', this.update, this);
+          this.scene.sys.events.on('preupdate', this.update, this);
         }
       }
     }, {
@@ -4848,7 +4848,7 @@
             this.scene.game.events.off('prestep', this.backToOrigin, this);
           } else {
             // Behavior Mode
-            this.scene.events.off('preupdate', this.update, this);
+            this.scene.sys.events.off('preupdate', this.update, this);
           }
         }
       }
@@ -6096,7 +6096,7 @@
         gameObject.on('pointerover', this.onPointIn, this);
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
       }
     }, {
       key: "shutdown",
@@ -6111,7 +6111,7 @@
         // this.parent.off('pointerout', this.onPointOut, this);
 
 
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
 
         _get(_getPrototypeOf(InTouching.prototype), "shutdown", this).call(this, fromScene);
@@ -6382,7 +6382,7 @@
 
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
@@ -6397,7 +6397,7 @@
 
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
         this.gameObject = undefined;
         this.bounds = undefined;
         this.pointer = undefined;
@@ -6564,8 +6564,8 @@
       value: function startTicking() {
         _get(_getPrototypeOf(OnePointerTracer.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('preupdate', this.preUpdate, this);
-        this.scene.events.on('postupdate', this.postUpdate, this);
+        this.scene.sys.events.on('preupdate', this.preUpdate, this);
+        this.scene.sys.events.on('postupdate', this.postUpdate, this);
       }
     }, {
       key: "stopTicking",
@@ -6574,8 +6574,8 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('preupdate', this.preUpdate, this);
-          this.scene.events.off('postupdate', this.postUpdate, this);
+          this.scene.sys.events.off('preupdate', this.preUpdate, this);
+          this.scene.sys.events.off('postupdate', this.postUpdate, this);
         }
       }
     }, {
@@ -7345,7 +7345,7 @@
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
@@ -7360,7 +7360,7 @@
         this.scene.input.off('pointerdown', this.onPointerDown, this);
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
       }
     }, {
@@ -10053,7 +10053,7 @@
         }
 
         this.parent.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
       }
     }, {
       key: "shutdown",
@@ -10068,7 +10068,7 @@
         // this.parent.off('pointermove', this.onPointerMove, this);
 
 
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
 
         _get(_getPrototypeOf(DragSpeed.prototype), "shutdown", this).call(this, fromScene);
@@ -10498,7 +10498,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.events.on('preupdate', this._state.update, this._state);
+        this.scene.sys.events.on('preupdate', this._state.update, this._state);
       }
     }, {
       key: "shutdown",
@@ -10508,7 +10508,7 @@
           return;
         }
 
-        this.scene.events.off('preupdate', this._state.update, this._state);
+        this.scene.sys.events.off('preupdate', this._state.update, this._state);
 
         this._state.destroy(fromScene);
 

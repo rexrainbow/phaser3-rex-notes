@@ -178,7 +178,7 @@
    * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
    */
 
-  var TextWebGLRenderer = function TextWebGLRenderer(renderer, src, camera, parentMatrix) {
+  var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
     }
@@ -216,7 +216,7 @@
    * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
    * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
    */
-  var TextCanvasRenderer = function TextCanvasRenderer(renderer, src, camera, parentMatrix) {
+  var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
     }
@@ -226,8 +226,8 @@
   };
 
   var Render = {
-    renderWebGL: TextWebGLRenderer,
-    renderCanvas: TextCanvasRenderer
+    renderWebGL: WebGLRenderer,
+    renderCanvas: CanvasRenderer
   };
 
   /**
@@ -2811,7 +2811,7 @@
     function ImageManager(scene) {
       _classCallCheck(this, ImageManager);
 
-      this.textureManager = scene.textures;
+      this.textureManager = scene.sys.textures;
       this.images = {};
     }
 
@@ -2895,7 +2895,7 @@
   Object.assign(ImageManager.prototype, methods$1);
 
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
-    var textures = scene.textures;
+    var textures = scene.sys.textures;
     var renderer = scene.renderer;
 
     if (x === undefined) {

@@ -258,7 +258,7 @@
       this.scene = scene;
       this.displayList = scene.sys.displayList;
       this.updateList = scene.sys.updateList;
-      scene.events.once('destroy', this.destroy, this);
+      scene.sys.events.once('destroy', this.destroy, this);
     }
 
     _createClass(ObjectFactory, [{
@@ -949,7 +949,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -967,7 +967,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -6947,7 +6947,7 @@
       key: "boot",
       value: function boot() {
         if (this.scene && this.isBoard) {
-          this.scene.events.once('shutdown', this.destroy, this);
+          this.scene.sys.events.once('shutdown', this.destroy, this);
         }
       }
     }, {
@@ -6958,7 +6958,7 @@
         }
 
         if (this.scene && this.isBoard) {
-          this.scene.events.off('shutdown', this.destroy, this);
+          this.scene.sys.events.off('shutdown', this.destroy, this);
         }
 
         if (this.isBoard) {
@@ -7501,7 +7501,7 @@
 
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
@@ -7516,7 +7516,7 @@
 
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
         this.gameObject = undefined;
         this.bounds = undefined;
         this.pointer = undefined;
@@ -7683,8 +7683,8 @@
       value: function startTicking() {
         _get(_getPrototypeOf(OnePointerTracer.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('preupdate', this.preUpdate, this);
-        this.scene.events.on('postupdate', this.postUpdate, this);
+        this.scene.sys.events.on('preupdate', this.preUpdate, this);
+        this.scene.sys.events.on('postupdate', this.postUpdate, this);
       }
     }, {
       key: "stopTicking",
@@ -7693,8 +7693,8 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('preupdate', this.preUpdate, this);
-          this.scene.events.off('postupdate', this.postUpdate, this);
+          this.scene.sys.events.off('preupdate', this.preUpdate, this);
+          this.scene.sys.events.off('postupdate', this.postUpdate, this);
         }
       }
     }, {
@@ -9126,7 +9126,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -9135,7 +9135,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       } // update(time, delta) {
       //     
@@ -15084,7 +15084,7 @@
 
     var width = maxX - minX;
     var height = maxY - minY;
-    var texture = scene.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
+    var texture = scene.sys.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
     var canvas = texture.getCanvas();
     var context = texture.getContext();
     var halfW = width / 2;
@@ -15143,7 +15143,7 @@
     _createClass(BoardPlugin, [{
       key: "start",
       value: function start() {
-        var eventEmitter = this.scene.events;
+        var eventEmitter = this.scene.sys.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);

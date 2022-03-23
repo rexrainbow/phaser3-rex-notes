@@ -407,7 +407,7 @@
     }, {
       key: "lineStartFrame",
       get: function get() {
-        return this.scene.textures.getFrame(this.lineStartTexture, this.lineStartFrameName);
+        return this.scene.sys.textures.getFrame(this.lineStartTexture, this.lineStartFrameName);
       }
     }, {
       key: "setLineEndTexture",
@@ -431,7 +431,7 @@
     }, {
       key: "lineEndFrame",
       get: function get() {
-        return this.scene.textures.getFrame(this.lineEndTexture, this.lineEndFrameName);
+        return this.scene.sys.textures.getFrame(this.lineEndTexture, this.lineEndFrameName);
       }
     }, {
       key: "setLineBodyTexture",
@@ -461,7 +461,7 @@
     }, {
       key: "lineBodyFrame",
       get: function get() {
-        return this.scene.textures.getFrame(this.lineBodyTexture, this.lineBodyFrameName);
+        return this.scene.sys.textures.getFrame(this.lineBodyTexture, this.lineBodyFrameName);
       }
     }, {
       key: "renderWebGL",

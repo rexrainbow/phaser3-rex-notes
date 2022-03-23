@@ -337,7 +337,7 @@
     this.rows.stretch = 0;
     this.rows.minHeight = 0;
     this.rows.scale = 1;
-    var texture = this.scene.textures.get(key);
+    var texture = this.scene.sys.textures.get(key);
 
     if (!texture) {
       this.clear();
@@ -474,7 +474,7 @@
       return this;
     }
 
-    var texture = this.scene.textures.get(this.textureKey);
+    var texture = this.scene.sys.textures.get(this.textureKey);
 
     if (!texture) {
       return this;
@@ -1156,62 +1156,7 @@
     }
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2020 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-  var tempMatrix1 = new TransformMatrix();
-  var tempMatrix2 = new TransformMatrix();
-  var tempMatrix3 = new TransformMatrix();
-  var result = {
-    camera: tempMatrix1,
-    sprite: tempMatrix2,
-    calc: tempMatrix3
-  };
-  /**
-   * Calculates the Transform Matrix of the given Game Object and Camera, factoring in
-   * the parent matrix if provided.
-   *
-   * Note that the object this results contains _references_ to the Transform Matrices,
-   * not new instances of them. Therefore, you should use their values immediately, or
-   * copy them to your own matrix, as they will be replaced as soon as another Game
-   * Object is rendered.
-   *
-   * @function Phaser.GameObjects.GetCalcMatrix
-   * @memberof Phaser.GameObjects
-   * @since 3.50.0
-   *
-   * @param {Phaser.GameObjects.GameObject} src - The Game Object to calculate the transform matrix for.
-   * @param {Phaser.Cameras.Scene2D.Camera} camera - The camera being used to render the Game Object.
-   * @param {Phaser.GameObjects.Components.TransformMatrix} [parentMatrix] - The transform matrix of the parent container, if any.
-   *
-   * @return {Phaser.Types.GameObjects.GetCalcMatrixResults} The results object containing the updated transform matrices.
-   */
-
-  var GetCalcMatrix = function GetCalcMatrix(src, camera, parentMatrix) {
-    var camMatrix = tempMatrix1;
-    var spriteMatrix = tempMatrix2;
-    var calcMatrix = tempMatrix3;
-    spriteMatrix.applyITRS(src.x, src.y, src.rotation, src.scaleX, src.scaleY);
-    camMatrix.copyFrom(camera.matrix);
-
-    if (parentMatrix) {
-      //  Multiply the camera by the parent matrix
-      camMatrix.multiplyWithOffset(parentMatrix, -camera.scrollX * src.scrollFactorX, -camera.scrollY * src.scrollFactorY); //  Undo the camera scroll
-
-      spriteMatrix.e = src.x;
-      spriteMatrix.f = src.y;
-    } else {
-      spriteMatrix.e -= camera.scrollX * src.scrollFactorX;
-      spriteMatrix.f -= camera.scrollY * src.scrollFactorY;
-    } //  Multiply by the Sprite matrix, store result in calcMatrix
-
-
-    camMatrix.multiply(spriteMatrix, calcMatrix);
-    return result;
-  };
+  var GetCalcMatrix$1 = Phaser.GameObjects.GetCalcMatrix;
 
   var PolygonWebGLRenderer = function PolygonWebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
@@ -1221,7 +1166,7 @@
 
     camera.addToRenderList(src);
     var pipeline = renderer.pipelines.set(src.pipeline);
-    var result = GetCalcMatrix(src, camera, parentMatrix);
+    var result = GetCalcMatrix$1(src, camera, parentMatrix);
     var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
     var dx = src._displayOriginX;
     var dy = src._displayOriginY;
@@ -1618,7 +1563,7 @@
   // copy from Phaser.GameObjects.Text
   var Utils$3 = Phaser.Renderer.WebGL.Utils;
 
-  var WebGLRenderer$1 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
+  var WebGLRenderer$2 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
       src.updateTexture();
       src.dirty = false;
@@ -1641,7 +1586,7 @@
   };
 
   // copy from Phaser.GameObjects.Text
-  var CanvasRenderer$1 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
+  var CanvasRenderer$2 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
       src.updateTexture();
       src.dirty = false;
@@ -1656,8 +1601,8 @@
   };
 
   var Render$2 = {
-    renderWebGL: WebGLRenderer$1,
-    renderCanvas: CanvasRenderer$1
+    renderWebGL: WebGLRenderer$2,
+    renderCanvas: CanvasRenderer$2
   };
 
   var Color = Phaser.Display.Color;
@@ -1742,7 +1687,7 @@
   };
 
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
-    var textures = scene.textures;
+    var textures = scene.sys.textures;
     var renderer = scene.renderer;
 
     if (x === undefined) {
@@ -1836,7 +1781,7 @@
       return this;
     },
     loadTexture: function loadTexture(key, frame) {
-      var textureFrame = this.scene.textures.getFrame(key, frame);
+      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
       if (!textureFrame) {
         return this;
@@ -2391,7 +2336,7 @@
    * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
    */
 
-  var TextWebGLRenderer = function TextWebGLRenderer(renderer, src, camera, parentMatrix) {
+  var WebGLRenderer$1 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
     }
@@ -2429,7 +2374,7 @@
    * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
    * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
    */
-  var TextCanvasRenderer = function TextCanvasRenderer(renderer, src, camera, parentMatrix) {
+  var CanvasRenderer$1 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
     }
@@ -2439,8 +2384,8 @@
   };
 
   var Render$1 = {
-    renderWebGL: TextWebGLRenderer,
-    renderCanvas: TextCanvasRenderer
+    renderWebGL: WebGLRenderer$1,
+    renderCanvas: CanvasRenderer$1
   };
 
   /**
@@ -4657,7 +4602,7 @@
     function ImageManager(scene) {
       _classCallCheck(this, ImageManager);
 
-      this.textureManager = scene.textures;
+      this.textureManager = scene.sys.textures;
       this.images = {};
     }
 
@@ -6270,7 +6215,7 @@
   SetValue(window, 'RexPlugins.UI.TagText', TagText);
 
   var Resize = function Resize(width, height) {
-    if (this.scene.scale.autoRound) {
+    if (this.scene.sys.scale.autoRound) {
       width = Math.floor(width);
       height = Math.floor(height);
     }
@@ -6781,7 +6726,7 @@
         }
 
         this.setText(this.textObject.text);
-        this.scene.events.on('postupdate', this.updateText, this);
+        this.scene.sys.events.on('postupdate', this.updateText, this);
         this.scene.input.on('pointerdown', this.onClickOutside, this);
 
         if (this.onOpenCallback) {
@@ -6789,7 +6734,7 @@
         }
       }, _assertThisInitialized(_this)).on('blur', function () {
         this.updateText();
-        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         if (this.onCloseCallback) {
@@ -6805,7 +6750,7 @@
       value: function preDestroy() {
         this.textObject.off('pointerdown', this.setFocus, this);
         this.textObject.off('destroy', this.destroy, this);
-        this.scene.events.off('postupdate', this.updateText, this);
+        this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);
@@ -9839,7 +9784,7 @@
       value: function setTexture(key, frame) {
         this.key = key;
         this.frame = frame;
-        this.frameObj = this.scene.textures.getFrame(key, frame);
+        this.frameObj = this.scene.sys.textures.getFrame(key, frame);
         return this;
       }
     }, {
@@ -12975,7 +12920,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -12993,7 +12938,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -13266,7 +13211,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -13275,7 +13220,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       }
     }, {
@@ -13724,7 +13669,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('update', this.update, this);
+        this.scene.sys.events.on('update', this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -13733,7 +13678,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('update', this.update, this);
+          this.scene.sys.events.off('update', this.update, this);
         }
       } // update(time, delta) {
       //     
@@ -14237,7 +14182,7 @@
     }; // create sound instance by key
 
     if (typeof sound === 'string') {
-      sound = scene.sound.add(sound);
+      sound = scene.sys.sound.add(sound);
     }
 
     var fade;
@@ -14361,7 +14306,7 @@
     }, {
       key: "playSoundEffect",
       value: function playSoundEffect(key) {
-        var soundEffect = this.scene.sound.add(key);
+        var soundEffect = this.scene.sys.sound.add(key);
         this.soundEffects.push(soundEffect);
         soundEffect.once('complete', function () {
           soundEffect.destroy(); // SoundManager has been destroyed
@@ -14452,7 +14397,7 @@
 
         this.stopBackgroundMusic(); // Stop previous background music
 
-        this.setCurrentBackgroundMusic(this.scene.sound.add(key));
+        this.setCurrentBackgroundMusic(this.scene.sys.sound.add(key));
 
         if (this.backgroundMusicFadeTime > 0) {
           this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
@@ -15212,7 +15157,7 @@
         _this._soundManager = new SoundManager(_this.scene, soundManagerConfig);
       }
 
-      _this.setTargetCamera(GetValue$1t(config, 'camera', _this.scene.cameras.main));
+      _this.setTargetCamera(GetValue$1t(config, 'camera', _this.scene.sys.cameras.main));
 
       _this._spriteManager = undefined;
       var spriteManagerConfig = GetValue$1t(config, 'sprites', undefined);
@@ -15931,6 +15876,8 @@
     return gameObject;
   });
   SetValue(window, 'RexPlugins.UI.CircularProgressCanvas', CircularProgress$1);
+
+  var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     src.updateData();
@@ -18966,7 +18913,7 @@
       out = globRect;
     }
 
-    var scaleManager = scene.scale;
+    var scaleManager = scene.sys.scale;
     var baseSize = scaleManager.baseSize;
     var parentSize = scaleManager.parentSize;
     var canvasBounds = scaleManager.canvasBounds;
@@ -19120,7 +19067,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.scale.on('resize', this.anchor, this);
+        this.scene.sys.scale.on('resize', this.anchor, this);
         this.anchor();
       }
     }, {
@@ -19131,7 +19078,7 @@
           return;
         }
 
-        this.scene.scale.off('resize', this.anchor, this);
+        this.scene.sys.scale.off('resize', this.anchor, this);
         this.viewport = undefined;
         this.onUpdateViewportCallback = undefined;
         this.onUpdateViewportCallbackScope = undefined;
@@ -20280,7 +20227,7 @@
           this.scene.game.events.on('prestep', this.backToOrigin, this);
         } else {
           // Behavior Mode
-          this.scene.events.on('preupdate', this.update, this);
+          this.scene.sys.events.on('preupdate', this.update, this);
         }
       }
     }, {
@@ -20296,7 +20243,7 @@
             this.scene.game.events.off('prestep', this.backToOrigin, this);
           } else {
             // Behavior Mode
-            this.scene.events.off('preupdate', this.update, this);
+            this.scene.sys.events.off('preupdate', this.update, this);
           }
         }
       }
@@ -21495,7 +21442,7 @@
         gameObject.on('pointerover', this.onPointIn, this);
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
       }
     }, {
       key: "shutdown",
@@ -21510,7 +21457,7 @@
         // this.parent.off('pointerout', this.onPointOut, this);
 
 
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
 
         _get(_getPrototypeOf(InTouching.prototype), "shutdown", this).call(this, fromScene);
@@ -21781,7 +21728,7 @@
 
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
@@ -21796,7 +21743,7 @@
 
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
         this.gameObject = undefined;
         this.bounds = undefined;
         this.pointer = undefined;
@@ -21963,8 +21910,8 @@
       value: function startTicking() {
         _get(_getPrototypeOf(OnePointerTracer.prototype), "startTicking", this).call(this);
 
-        this.scene.events.on('preupdate', this.preUpdate, this);
-        this.scene.events.on('postupdate', this.postUpdate, this);
+        this.scene.sys.events.on('preupdate', this.preUpdate, this);
+        this.scene.sys.events.on('postupdate', this.postUpdate, this);
       }
     }, {
       key: "stopTicking",
@@ -21973,8 +21920,8 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.events.off('preupdate', this.preUpdate, this);
-          this.scene.events.off('postupdate', this.postUpdate, this);
+          this.scene.sys.events.off('preupdate', this.preUpdate, this);
+          this.scene.sys.events.off('postupdate', this.postUpdate, this);
         }
       }
     }, {
@@ -22852,7 +22799,7 @@
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('shutdown', this.destroy, this);
+        this.scene.sys.events.once('shutdown', this.destroy, this);
       }
     }, {
       key: "shutdown",
@@ -22867,7 +22814,7 @@
         this.scene.input.off('pointerdown', this.onPointerDown, this);
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
-        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
       }
     }, {
@@ -25308,7 +25255,7 @@
       getFrameNameCallback = GetFrameNameCallback(frame, getFrameNameCallback);
     }
 
-    var texture = scene.textures.get(key);
+    var texture = scene.sys.textures.get(key);
     var baseFrame = texture.frames[frame];
     var cellWidth = baseFrame.width / columns,
         cellHeight = baseFrame.height / rows;
@@ -25724,7 +25671,7 @@
       key: "boot",
       value: function boot() {
         var scene = this.scene;
-        scene.events.on('prerender', this.resize, this);
+        scene.sys.events.on('prerender', this.resize, this);
       }
     }, {
       key: "destroy",
@@ -25735,7 +25682,7 @@
           return;
         }
 
-        this.scene.events.off('prerender', this.resize, this);
+        this.scene.sys.events.off('prerender', this.resize, this);
 
         _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
       }
@@ -25751,8 +25698,8 @@
       key: "resize",
       value: function resize() {
         var scene = this.scene;
-        var gameSize = scene.scale.gameSize;
-        var camera = scene.cameras.main;
+        var gameSize = scene.sys.scale.gameSize;
+        var camera = scene.sys.cameras.main;
         var gameWidth = gameSize.width,
             gameHeight = gameSize.height,
             scale = 1 / camera.zoom;
@@ -31288,7 +31235,7 @@
         }
 
         this.parent.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.sys.events.on('preupdate', this.preupdate, this);
       }
     }, {
       key: "shutdown",
@@ -31303,7 +31250,7 @@
         // this.parent.off('pointermove', this.onPointerMove, this);
 
 
-        this.scene.events.off('preupdate', this.preupdate, this);
+        this.scene.sys.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
 
         _get(_getPrototypeOf(DragSpeed.prototype), "shutdown", this).call(this, fromScene);
@@ -31733,7 +31680,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.scene.events.on('preupdate', this._state.update, this._state);
+        this.scene.sys.events.on('preupdate', this._state.update, this._state);
       }
     }, {
       key: "shutdown",
@@ -31743,7 +31690,7 @@
           return;
         }
 
-        this.scene.events.off('preupdate', this._state.update, this._state);
+        this.scene.sys.events.off('preupdate', this._state.update, this._state);
 
         this._state.destroy(fromScene);
 
@@ -40391,7 +40338,7 @@
       key: "delayCall",
       value: function delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        var sceneEE = this.scene.events;
+        var sceneEE = this.scene.sys.events;
         this.timer = this.scene.time.delayedCall(delay, // delay
         sceneEE.once, // callback
         ['postupdate', callback, scope], // args

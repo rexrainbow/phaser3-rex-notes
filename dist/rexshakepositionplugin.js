@@ -281,7 +281,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -299,7 +299,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -741,7 +741,7 @@
           this.scene.game.events.on('prestep', this.backToOrigin, this);
         } else {
           // Behavior Mode
-          this.scene.events.on('preupdate', this.update, this);
+          this.scene.sys.events.on('preupdate', this.update, this);
         }
       }
     }, {
@@ -757,7 +757,7 @@
             this.scene.game.events.off('prestep', this.backToOrigin, this);
           } else {
             // Behavior Mode
-            this.scene.events.off('preupdate', this.update, this);
+            this.scene.sys.events.off('preupdate', this.update, this);
           }
         }
       }

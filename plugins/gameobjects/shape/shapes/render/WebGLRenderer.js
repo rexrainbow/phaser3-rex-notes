@@ -1,4 +1,4 @@
-import GetCalcMatrix from '../../../utils/GetCalcMatrix.js';
+const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
 var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
     src.updateData();

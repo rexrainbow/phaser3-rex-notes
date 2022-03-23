@@ -281,7 +281,7 @@
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
-        this.scene.events.once('shutdown', this.onSceneDestroy, this);
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
       } else if (this.parent && this.parent.once) {
         // bob object does not have event emitter
         this.parent.once('destroy', this.onParentDestroy, this);
@@ -299,7 +299,7 @@
 
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
-          this.scene.events.off('shutdown', this.onSceneDestroy, this);
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
@@ -379,7 +379,7 @@
         gameObject.on('pointerup', this.onPointOut, this);
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('postupdate', this.postupdate, this);
+        this.scene.sys.events.on('postupdate', this.postupdate, this);
       }
     }, {
       key: "shutdown",
@@ -395,7 +395,7 @@
         // this.parent.off('pointermove', this.onPointerMove, this);
 
 
-        this.scene.events.off('postupdate', this.postupdate, this);
+        this.scene.sys.events.off('postupdate', this.postupdate, this);
         this.pointer = undefined;
 
         _get(_getPrototypeOf(TouchState.prototype), "shutdown", this).call(this, fromScene);

@@ -250,7 +250,7 @@
   };
 
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
-    var textures = scene.textures;
+    var textures = scene.sys.textures;
     var renderer = scene.renderer;
 
     if (x === undefined) {
@@ -344,7 +344,7 @@
       return this;
     },
     loadTexture: function loadTexture(key, frame) {
-      var textureFrame = this.scene.textures.getFrame(key, frame);
+      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
 
       if (!textureFrame) {
         return this;
