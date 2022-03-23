@@ -5,7 +5,7 @@ var GetOuterViewport = function (scaleOuter, out) {
     }
 
     var scale = scaleOuter.zoom;
-    var displaySize = scaleOuter.scene.scale.displaySize;
+    var displaySize = scaleOuter.scene.sys.scale.displaySize;
     out.width = displaySize.width / scale;
     out.height = displaySize.height / scale;
 

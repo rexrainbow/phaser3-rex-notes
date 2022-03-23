@@ -8,7 +8,7 @@ var GetViewport = function (scene, out) {
         out = globRect;
     }
 
-    var scaleManager = scene.scale;
+    var scaleManager = scene.sys.scale;
     var baseSize = scaleManager.baseSize;
     var parentSize = scaleManager.parentSize;
     var canvasBounds = scaleManager.canvasBounds;

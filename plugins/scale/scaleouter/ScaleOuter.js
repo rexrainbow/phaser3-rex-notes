@@ -21,7 +21,7 @@ class ScaleOuter {
     boot() {
         var scene = this.scene;
         if (CheckScaleMode(scene)) {
-            scene.scale.on('resize', this.scale, this);
+            scene.sys.scale.on('resize', this.scale, this);
             scene.events.once('preupdate', this.onFirstTick, this);
         }
 
@@ -41,7 +41,7 @@ class ScaleOuter {
 
     stop() {
         var scene = this.scene;
-        scene.scale.off('resize', this.scale, this);
+        scene.sys.scale.off('resize', this.scale, this);
         scene.events.off('preupdate', this.onFirstTick, this);
         return this;
     }

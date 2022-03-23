@@ -35,7 +35,7 @@ class FullWindowRectangle extends Rectangle {
 
     resize() {
         var scene = this.scene;
-        var gameSize = scene.scale.gameSize;
+        var gameSize = scene.sys.scale.gameSize;
         var camera = scene.cameras.main;
 
         var gameWidth = gameSize.width,

@@ -8,7 +8,7 @@ var GetScaleOutCameraParameters = function (scene, out) {
         gameHeight = gameConfig.height;
     var gameAspectRatio = (gameHeight === 0) ? 1 : gameWidth / gameHeight;
 
-    var displaySize = scene.scale.displaySize;
+    var displaySize = scene.sys.scale.displaySize;
     var displayWidth = displaySize.width,
         displayHeight = displaySize.height;
     var displayAspectRatio = (displayHeight === 0) ? 1 : displayWidth / displayHeight;

@@ -21,7 +21,7 @@ class VideoDOM extends VideoBase(DOMElement) {
         if (config === undefined) {
             config = {};
         }
-        var autoRound = scene.scale.autoRound;
+        var autoRound = scene.sys.scale.autoRound;
         if (width !== undefined) {
             if (autoRound) {
                 width = Math.floor(width);

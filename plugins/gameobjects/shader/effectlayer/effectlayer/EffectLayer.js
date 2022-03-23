@@ -40,12 +40,12 @@ class EffectLayer extends Shader {
 
     boot() {
         this.scene.game.events.on('prerender', this.drawTargets, this);
-        this.scene.scale.on('resize', this.onWindowResize, this);
+        this.scene.sys.scale.on('resize', this.onWindowResize, this);
     }
 
     destroy(fromScene) {
         this.scene.game.events.off('prerender', this.drawTargets, this);
-        this.scene.scale.off('resize', this.onWindowResize, this);
+        this.scene.sys.scale.off('resize', this.onWindowResize, this);
         // Private texture will be removed by shader game object
         this.clear();
 

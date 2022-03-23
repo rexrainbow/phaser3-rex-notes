@@ -102,7 +102,7 @@ class Anchor extends ComponentBase {
     }
 
     boot() {
-        this.scene.scale.on('resize', this.anchor, this);
+        this.scene.sys.scale.on('resize', this.anchor, this);
         this.anchor();
     }
 
@@ -112,7 +112,7 @@ class Anchor extends ComponentBase {
             return;
         }
 
-        this.scene.scale.off('resize', this.anchor, this);
+        this.scene.sys.scale.off('resize', this.anchor, this);
 
         this.viewport = undefined;
         this.onUpdateViewportCallback = undefined;
