@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/containerlite.js';
+import Anchor from '../anchor/Anchor';
 import Click from '../click/Click';
 import InTouching from '../intouching/InTouching';
 
@@ -24,10 +25,7 @@ declare namespace BaseSizer {
             left?: number, right?: number, top?: number, bottom?: number,
         },
 
-        anchor?: {
-            left?: string, right?: string, centerX?: string, x?: string,
-            top?: string, bottom?: string, centerY?: string, y?: string
-        },
+        anchor?: Anchor.IConfig,
 
         name?: string
 
