@@ -19,7 +19,7 @@ var FadeIn = function (scene, sound, duration, endVolume, startVolume) {
 
     // create sound instance by key
     if (typeof (sound) === 'string') {
-        sound = scene.sound.add(sound);
+        sound = scene.sys.sound.add(sound);
     }
 
     var fade;

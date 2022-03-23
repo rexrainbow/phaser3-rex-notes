@@ -62,7 +62,7 @@ class SoundManager {
     }
 
     playSoundEffect(key) {
-        var soundEffect = this.scene.sound.add(key);
+        var soundEffect = this.scene.sys.sound.add(key);
         this.soundEffects.push(soundEffect);
 
         soundEffect
@@ -150,7 +150,7 @@ class SoundManager {
 
         this.stopBackgroundMusic(); // Stop previous background music
 
-        this.setCurrentBackgroundMusic(this.scene.sound.add(key));
+        this.setCurrentBackgroundMusic(this.scene.sys.sound.add(key));
 
         if (this.backgroundMusicFadeTime > 0) {
             this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
