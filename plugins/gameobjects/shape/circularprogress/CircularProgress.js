@@ -238,7 +238,7 @@ class CircularProgress extends BaseShapes {
             if (this.value === 1) {
                 anticlockwise = false;
                 startAngle = 0;
-                endAngle = 360;
+                endAngle = 361;  // overshoot 1
             } else {
                 anticlockwise = this.anticlockwise;
                 startAngle = RadToDeg(this.startAngle);
