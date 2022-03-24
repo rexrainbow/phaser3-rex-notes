@@ -1,4 +1,4 @@
-import Base from '../Base.js';
+import Base from '../renderbase/RenderBase.js';
 import { ImageTypeName } from '../Types.js';
 
 class ImageData extends Base {

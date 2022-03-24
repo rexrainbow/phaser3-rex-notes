@@ -1,4 +1,4 @@
-import Base from "../Base";
+import Base from '../renderbase/RenderBase';
 
 export default class Command extends Base {
     readonly type: 'command';

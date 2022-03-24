@@ -1,4 +1,4 @@
-import Base from '../Base.js';
+import Base from '../renderbase/RenderBase.js';
 import { CharTypeName } from '../Types.js';
 import TextStyle from './TextStyle.js';
 

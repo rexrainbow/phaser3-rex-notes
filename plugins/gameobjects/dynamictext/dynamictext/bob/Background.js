@@ -1,4 +1,4 @@
-import Base from './Base.js';
+import Base from './renderbase/RenderBase.js';
 import GetStyle from '../../../../utils/canvas/GetStyle.js';
 import DrawRoundRectangleBackground from '../../../canvas/utils/DrawRoundRectangleBackground.js';
 
