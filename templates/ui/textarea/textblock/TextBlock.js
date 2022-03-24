@@ -162,7 +162,7 @@ class TextBlock extends BaseSizer {
 
     get visibleLinesCount() {
         if (this._visibleLinesCount === undefined) {
-            this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+            this._visibleLinesCount = Math.ceil(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
         }
         return this._visibleLinesCount;
     }

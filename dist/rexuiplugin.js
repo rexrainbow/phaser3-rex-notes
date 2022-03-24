@@ -36550,7 +36550,7 @@
     config.preOffsetY = config.offsetY;
     this.resetChildPositionState(this.textObject);
 
-    if (!this.textMask) {
+    if (this.textCropEnable) {
       CropTextObject.call(this);
     }
   };
@@ -36735,7 +36735,8 @@
         textObject = CreateDefaultTextObject(scene);
       }
 
-      var textMaskEnable = GetValue$h(config, 'textMask', false);
+      _this.textCropEnable = GetValue$h(config, 'textCrop', !!textObject.setCrop);
+      var textMaskEnable = GetValue$h(config, 'textMask', !_this.textCropEnable);
 
       if (background) {
         _this.addBackground(background);
@@ -36858,7 +36859,7 @@
       key: "visibleLinesCount",
       get: function get() {
         if (this._visibleLinesCount === undefined) {
-          this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+          this._visibleLinesCount = Math.ceil(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
         }
 
         return this._visibleLinesCount;
@@ -37063,14 +37064,15 @@
       var textObject = GetValue$g(config, 'text', undefined);
       var textWidth = GetValue$g(config, 'textWidth', undefined);
       var textHeight = GetValue$g(config, 'textHeight', undefined);
-      var hasSetCropMethod = textObject && textObject.setCrop;
-      var textMask = GetValue$g(config, 'textMask', !hasSetCropMethod);
+      var textCrop = GetValue$g(config, 'textCrop', !!textObject.setCrop);
+      var textMask = GetValue$g(config, 'textMask', !textCrop);
       var content = GetValue$g(config, 'content', '');
       var textBlock = new TextBlock(scene, {
         width: textWidth,
         height: textHeight,
         text: textObject,
         textMask: textMask,
+        textCrop: textCrop && !textMask,
         content: content,
         clamplTextOY: GetValue$g(config, 'clamplChildOY', false),
         alwaysScrollable: GetValue$g(config, 'alwaysScrollable', false)
