@@ -1,5 +1,4 @@
 import Base from '../Base.js';
-import DataMethods from '../../../../../utils/data/DataMethods.js'
 
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -337,10 +336,5 @@ class RenderBase extends Base {
         context.restore();
     }
 }
-
-Object.assign(
-    RenderBase.prototype,
-    DataMethods
-);
 
 export default RenderBase;
