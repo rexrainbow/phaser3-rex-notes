@@ -17,7 +17,6 @@ module.exports = {
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
-    'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',

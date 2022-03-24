@@ -4,7 +4,7 @@ var ResetTextObjectPosition = function () {
     config.preOffsetY = config.offsetY;
     this.resetChildPositionState(this.textObject);
 
-    if (!this.textMask) {
+    if (this.textCropEnable) {
         CropTextObject.call(this);
     }
 }

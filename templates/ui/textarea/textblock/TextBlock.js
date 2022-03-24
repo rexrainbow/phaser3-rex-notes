@@ -58,7 +58,8 @@ class TextBlock extends BaseSizer {
         if (textObject === undefined) {
             textObject = CreateDefaultTextObject(scene);
         }
-        var textMaskEnable = GetValue(config, 'textMask', false);
+        this.textCropEnable = GetValue(config, 'textCrop', !!textObject.setCrop)
+        var textMaskEnable = GetValue(config, 'textMask', !this.textCropEnable);
 
         if (background) {
             this.addBackground(background);
@@ -161,7 +162,7 @@ class TextBlock extends BaseSizer {
 
     get visibleLinesCount() {
         if (this._visibleLinesCount === undefined) {
-            this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+            this._visibleLinesCount = Math.ceil(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
         }
         return this._visibleLinesCount;
     }
