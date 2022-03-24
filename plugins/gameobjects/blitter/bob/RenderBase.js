@@ -1,4 +1,4 @@
-import Base from '../Base.js';
+import Base from './Base.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -9,6 +9,7 @@ class RenderBase extends Base {
         super(parent, type);
 
         this.originX = 0;
+        this.originY = 0;
         this.offsetX = 0;  // Override
         this.offsetY = 0;  // Override
     }
@@ -168,8 +169,40 @@ class RenderBase extends Base {
         return this;
     }
 
+    get topSpace() {
+        return this._topSpace;
+    }
+
+    set topSpace(value) {
+        this.setDirty(this._topSpace !== value);
+        this._topSpace = value;
+    }
+
+    setTopSpace(value) {
+        this.topSpace = value;
+        return this;
+    }
+
+    get bottomSpace() {
+        return this._bottomSpace;
+    }
+
+    set bottomSpace(value) {
+        this.setDirty(this._bottomSpace !== value);
+        this._bottomSpace = value;
+    }
+
+    setBottomSpace(value) {
+        this.bottomSpace = value;
+        return this;
+    }
+
     get outerWidth() {
         return this.width + this.leftSpace + this.rightSpace;
+    }
+
+    get outerHeight() {
+        return this.height + this.topSpace + this.bottomSpace;
     }
 
     get scaleY() {
@@ -213,11 +246,6 @@ class RenderBase extends Base {
 
         this.scaleX = scaleX;
         this.scaleY = scaleY;
-        return this;
-    }
-
-    setOrigin(x) {
-        this.originX = x;
         return this;
     }
 
@@ -276,16 +304,21 @@ class RenderBase extends Base {
         if (o.hasOwnProperty('rightSpace')) {
             this.setRightSpace(o.rightSpace);
         }
+        if (o.hasOwnProperty('toptSpace')) {
+            this.setTopSpace(o.topSpace);
+        }
+        if (o.hasOwnProperty('bottomSpace')) {
+            this.setBottomSpace(o.bottomSpace);
+        }
         return this;
     }
 
-    setDrawBelowCallback(callback) {
-        this.drawBelowCallback = callback;
-        return this;
-    }
-
-    setDrawAboveCallback(callback) {
-        this.drawAboveCallback = callback;
+    setOrigin(x, y) {
+        if (y !== undefined) {
+            y = x;
+        }
+        this.originX = x;
+        this.originY = y;
         return this;
     }
 
@@ -296,44 +329,17 @@ class RenderBase extends Base {
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
-            .setLeftSpace(0).setRightSpace(0)
+            .setLeftSpace(0).setRightSpace(0).setTopSpace(0).setBottomSpace(0)
             .setOrigin(0)
-            .setDrawBelowCallback()
-            .setDrawAboveCallback()
+
         return this;
     }
 
     // Override
-    drawContent() { }
-
+    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+    }
     // Override
-    draw() {
-        var context = this.context;
-        context.save();
-
-        var x = this.x + this.leftSpace + this.offsetX - (this.originX * this.width),
-            y = this.y + this.offsetY;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        context.translate(x, y);
-        context.globalAlpha = this.alpha;
-        context.scale(this.scaleX, this.scaleY);
-        context.rotate(this.rotation);
-
-        if (this.drawBelowCallback) {
-            this.drawBelowCallback.call(this);
-        }
-
-        this.drawContent();
-
-        if (this.drawAboveCallback) {
-            this.drawAboveCallback.call(this);
-        }
-
-        context.restore();
+    canvasRender(ctx, dx, dy) {
     }
 }
 

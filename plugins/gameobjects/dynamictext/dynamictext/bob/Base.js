@@ -50,10 +50,6 @@ class Base {
     }
 
     modifyPorperties(o) {
-        if (!o) {
-            return this;
-        }
-
         return this;
     }
 
@@ -66,12 +62,6 @@ class Base {
     reset() {
         return this;
     }
-
-    // Override
-    drawContent() { }
-
-    // Override
-    draw() { }
 }
 
 Object.assign(
