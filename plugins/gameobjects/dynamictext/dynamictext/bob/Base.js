@@ -9,17 +9,7 @@ class Base {
         this.setParent(parent);
         this.type = type;
 
-        this
-            .setActive()
-            .setVisible()
-            .setAlpha(1)
-            .setPosition(0, 0)
-            .setRotation(0)
-            .setScale(1, 1)
-            .setLeftSpace(0).setRightSpace(0)
-            .setOrigin(0)
-            .setDrawBelowCallback()
-            .setDrawAboveCallback()
+        this.reset().setActive();
 
         this.originX = 0;
         this.offsetX = 0;  // Override
@@ -345,8 +335,11 @@ class Base {
 
     // Override
     onFree() {
+        this.reset().setParent();
+    }
+
+    reset() {
         this
-            .setParent()
             .setVisible()
             .setAlpha(1)
             .setPosition(0, 0)
@@ -356,6 +349,7 @@ class Base {
             .setOrigin(0)
             .setDrawBelowCallback()
             .setDrawAboveCallback()
+        return this;
     }
 
     // Override
