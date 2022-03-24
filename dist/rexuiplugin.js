@@ -36522,7 +36522,7 @@
   };
 
   var GetLines = function GetLines(startLineIdx) {
-    var endLineIdx = startLineIdx + this.visibleLinesCount;
+    var endLineIdx = startLineIdx + this.visibleLinesCount + 1;
     var text;
 
     switch (this.textObjectType) {
@@ -36859,7 +36859,7 @@
       key: "visibleLinesCount",
       get: function get() {
         if (this._visibleLinesCount === undefined) {
-          this._visibleLinesCount = Math.ceil(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
+          this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this._textObjectRealHeight));
         }
 
         return this._visibleLinesCount;
