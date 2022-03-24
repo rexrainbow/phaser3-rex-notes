@@ -16,14 +16,15 @@ class TextArea extends Scrollable {
         var textObject = GetValue(config, 'text', undefined);
         var textWidth = GetValue(config, 'textWidth', undefined);
         var textHeight = GetValue(config, 'textHeight', undefined);
-        var hasSetCropMethod = textObject && textObject.setCrop;
-        var textMask = GetValue(config, 'textMask', !hasSetCropMethod);
+        var textCrop = GetValue(config, 'textCrop', !!textObject.setCrop);
+        var textMask = GetValue(config, 'textMask', !textCrop);
         var content = GetValue(config, 'content', '');
         var textBlock = new TextBlock(scene, {
             width: textWidth,
             height: textHeight,
             text: textObject,
             textMask: textMask,
+            textCrop: textCrop && !textMask,
             content: content,
             clamplTextOY: GetValue(config, 'clamplChildOY', false),
             alwaysScrollable: GetValue(config, 'alwaysScrollable', false),

@@ -58,7 +58,8 @@ class TextBlock extends BaseSizer {
         if (textObject === undefined) {
             textObject = CreateDefaultTextObject(scene);
         }
-        var textMaskEnable = GetValue(config, 'textMask', false);
+        this.textCropEnable = GetValue(config, 'textCrop', !!textObject.setCrop)
+        var textMaskEnable = GetValue(config, 'textMask', !this.textCropEnable);
 
         if (background) {
             this.addBackground(background);
