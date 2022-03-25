@@ -10,7 +10,7 @@ var DrawContent = function () {
     var child;
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
         child = this.children[i];
-        if (child.active && child.draw) {
+        if (child.active && child.visible) {
             child.draw();
         }
     }
