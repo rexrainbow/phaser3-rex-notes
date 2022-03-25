@@ -18,9 +18,9 @@ class EaseValueTask extends EaseValueTaskBase {
             return this;
         }
 
-        var gameObject = this.parent;
+        var target = this.target;
         this.propertyKey = GetValue(config, 'key', 'value');
-        var currentValue = gameObject[this.propertyKey];
+        var currentValue = target[this.propertyKey];
         this.fromValue = GetValue(config, 'from', currentValue);
         this.toValue = GetValue(config, 'to', currentValue);
 
@@ -29,17 +29,17 @@ class EaseValueTask extends EaseValueTaskBase {
 
         this.timer.setDuration(this.duration);
 
-        gameObject[this.propertyKey] = this.fromValue;
+        target[this.propertyKey] = this.fromValue;
 
         super.start();
         return this;
     }
 
-    updateGameObject(gameObject, timer) {
+    updateGameObject(target, timer) {
         var t = timer.t;
         t = this.easeFn(t);
 
-        gameObject[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
+        target[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
     }
 }
 

@@ -31,6 +31,7 @@ import ScaleMethods from './ScaleMethods.js';
 import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
 import ShakeMethods from './ShakeMethods.js';
+import EaseDataMethods from './EaseDataMethods.js';
 import HideMethods from './HideMethods.js';
 import IsInTouching from './IsInTouching.js';
 import PointToChild from './PointToChild.js';
@@ -89,6 +90,7 @@ Object.assign(
     FadeMethods,
     EaseMoveMethods,
     ShakeMethods,
+    EaseDataMethods,
     ClickMethods,
     TouchingMethods,
     HideMethods,

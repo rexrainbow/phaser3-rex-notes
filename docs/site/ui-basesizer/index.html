@@ -6618,6 +6618,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-data" class="md-nav__link">
+    Ease data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drag-top-most-sizer" class="md-nav__link">
     Drag top-most sizer
   </a>
@@ -8103,6 +8110,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-data" class="md-nav__link">
+    Ease data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drag-top-most-sizer" class="md-nav__link">
     Drag top-most sizer
   </a>
@@ -8724,6 +8738,27 @@ or
         <span class="c1">// ...</span>
     <span class="p">})</span>
 </code></pre></div></p>
+<h3 id="ease-data">Ease data<a class="headerlink" href="#ease-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Start
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">easeDataTo</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.easeDataTo(key, value, duration, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">easeDataToPromise</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>
+</code></pre></div></li>
+<li>Stop
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">stopEaseData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>           <span class="c1">// Set to end value</span>
+<span class="c1">// sizer.stopEaseData(key, false); // Stop at current value</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">stopAllEaseData</span><span class="p">();</span>           <span class="c1">// Set to end value</span>
+<span class="c1">// sizer.stopAllEaseData(false);   // Stop at current value</span>
+</code></pre></div></li>
+</ul>
 <h3 id="drag-top-most-sizer">Drag top-most sizer<a class="headerlink" href="#drag-top-most-sizer" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Draggable child<ul>

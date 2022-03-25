@@ -68,6 +68,7 @@ module.exports = {
     'scaleplugin': './plugins/scale-plugin.js',
     'flipplugin': './plugins/flip-plugin.js',
     'easemoveplugin': './plugins/easemove-plugin.js',
+    'easedataplugin': './plugins/easedata-plugin.js',
     'pathfollowerplugin': './plugins/pathfollower-plugin.js',
     'movetoplugin': './plugins/moveto-plugin.js',
     'rotatetoplugin': './plugins/rotateto-plugin.js',

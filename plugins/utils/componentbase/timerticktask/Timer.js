@@ -131,6 +131,11 @@ class Timer {
         }
     }
 
+    setT(t) {
+        this.t = t;
+        return this;
+    }
+
     get isIdle() {
         return this.state === IDLE;
     }

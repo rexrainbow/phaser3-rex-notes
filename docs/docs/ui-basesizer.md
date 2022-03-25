@@ -491,6 +491,31 @@ sizer.shakePromise(duration, magnitude)
     })
 ```
 
+### Ease data
+
+- Start
+    ```javascript
+    sizer.easeDataTo(key, value, duration);
+    // sizer.easeDataTo(key, value, duration, ease);
+    ```
+    or
+    ```javascript
+    sizer.easeDataToPromise(key, value, duration, ease)
+        .then(function(){
+            // ...
+        })
+    ```
+- Stop
+    ```javascript
+    sizer.stopEaseData(key);           // Set to end value
+    // sizer.stopEaseData(key, false); // Stop at current value
+    ```
+    or
+    ```javascript
+    sizer.stopAllEaseData();           // Set to end value
+    // sizer.stopAllEaseData(false);   // Stop at current value
+    ```
+
 ### Drag top-most sizer
 
 - Draggable child
