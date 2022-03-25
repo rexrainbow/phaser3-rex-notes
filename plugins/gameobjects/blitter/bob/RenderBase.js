@@ -8,8 +8,6 @@ class RenderBase extends Base {
     constructor(parent, type) {
         super(parent, type);
 
-        this.originX = 0;
-        this.originY = 0;
         this.offsetX = 0;  // Override
         this.offsetY = 0;  // Override
     }
@@ -19,7 +17,7 @@ class RenderBase extends Base {
     }
 
     set visible(value) {
-        this.setDirty(this._visible != value);
+        this.setDisplayListDirty(this._visible != value);
         this._visible = value;
     }
 
@@ -37,7 +35,7 @@ class RenderBase extends Base {
     }
 
     set alpha(value) {
-        this.setDirty(this._alpha != value);
+        this.setDisplayListDirty(!!this._alpha !== !!value);
         this._alpha = value;
     }
 
@@ -51,7 +49,6 @@ class RenderBase extends Base {
     }
 
     set x(value) {
-        this.setDirty(this._x != value);
         this._x = value;
     }
 
@@ -65,7 +62,6 @@ class RenderBase extends Base {
     }
 
     set y(value) {
-        this.setDirty(this._y != value);
         this._y = value;
     }
 
@@ -85,7 +81,6 @@ class RenderBase extends Base {
     }
 
     set rotation(value) {
-        this.setDirty(this._rotation != value);
         this._rotation = value;
     }
 
@@ -112,7 +107,6 @@ class RenderBase extends Base {
     }
 
     set scaleX(value) {
-        this.setDirty(this._scaleX !== value);
         this._scaleX = value;
     }
 
@@ -141,76 +135,35 @@ class RenderBase extends Base {
         return this;
     }
 
-    get leftSpace() {
-        return this._leftSpace;
-    }
-
-    set leftSpace(value) {
-        this.setDirty(this._leftSpace !== value);
-        this._leftSpace = value;
-    }
-
-    setLeftSpace(value) {
-        this.leftSpace = value;
-        return this;
-    }
-
-    get rightSpace() {
-        return this._rightSpace;
-    }
-
-    set rightSpace(value) {
-        this.setDirty(this._rightSpace !== value);
-        this._rightSpace = value;
-    }
-
-    setRightSpace(value) {
-        this.rightSpace = value;
-        return this;
-    }
-
-    get topSpace() {
-        return this._topSpace;
-    }
-
-    set topSpace(value) {
-        this.setDirty(this._topSpace !== value);
-        this._topSpace = value;
-    }
-
-    setTopSpace(value) {
-        this.topSpace = value;
-        return this;
-    }
-
-    get bottomSpace() {
-        return this._bottomSpace;
-    }
-
-    set bottomSpace(value) {
-        this.setDirty(this._bottomSpace !== value);
-        this._bottomSpace = value;
-    }
-
-    setBottomSpace(value) {
-        this.bottomSpace = value;
-        return this;
-    }
-
-    get outerWidth() {
-        return this.width + this.leftSpace + this.rightSpace;
-    }
-
-    get outerHeight() {
-        return this.height + this.topSpace + this.bottomSpace;
-    }
+    // get leftSpace() {
+    //     return this._leftSpace;
+    // }
+    // set leftSpace(value) {
+    //     this._leftSpace = value;
+    // }
+    // setLeftSpace(value) {
+    //     this.leftSpace = value;
+    //     return this;
+    // }
+    // get rightSpace() {
+    //     return this._rightSpace;
+    // }
+    // set rightSpace(value) {
+    //     this._rightSpace = value;
+    // }
+    // setRightSpace(value) {
+    //     this.rightSpace = value;
+    //     return this;
+    // }
+    // get outerWidth() {
+    //     return this.width + this.leftSpace + this.rightSpace;
+    // }
 
     get scaleY() {
         return this._scaleY;
     }
 
     set scaleY(value) {
-        this.setDirty(this._scaleY !== value);
         this._scaleY = value;
     }
 
@@ -238,6 +191,30 @@ class RenderBase extends Base {
         }
         return this;
     }
+
+    // get topSpace() {
+    //     return this._topSpace;
+    // }
+    // set topSpace(value) {
+    //     this._topSpace = value;
+    // }
+    // setTopSpace(value) {
+    //     this.topSpace = value;
+    //     return this;
+    // }
+    // get bottomSpace() {
+    //     return this._bottomSpace;
+    // }
+    // set bottomSpace(value) {
+    //     this._bottomSpace = value;
+    // }
+    // setBottomSpace(value) {
+    //     this.bottomSpace = value;
+    //     return this;
+    // }
+    // get outerHeight() {
+    //     return this.height + this.topSpace + this.bottomSpace;
+    // }
 
     setScale(scaleX, scaleY) {
         if (scaleY === undefined) {
@@ -298,18 +275,18 @@ class RenderBase extends Base {
             this.setScaleY(scaleY);
         }
 
-        if (o.hasOwnProperty('leftSpace')) {
-            this.setLeftSpace(o.leftSpace);
-        }
-        if (o.hasOwnProperty('rightSpace')) {
-            this.setRightSpace(o.rightSpace);
-        }
-        if (o.hasOwnProperty('toptSpace')) {
-            this.setTopSpace(o.topSpace);
-        }
-        if (o.hasOwnProperty('bottomSpace')) {
-            this.setBottomSpace(o.bottomSpace);
-        }
+        // if (o.hasOwnProperty('leftSpace')) {
+        //     this.setLeftSpace(o.leftSpace);
+        // }
+        // if (o.hasOwnProperty('rightSpace')) {
+        //     this.setRightSpace(o.rightSpace);
+        // }
+        // if (o.hasOwnProperty('toptSpace')) {
+        //     this.setTopSpace(o.topSpace);
+        // }
+        // if (o.hasOwnProperty('bottomSpace')) {
+        //     this.setBottomSpace(o.bottomSpace);
+        // }
         return this;
     }
 
@@ -329,14 +306,14 @@ class RenderBase extends Base {
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
-            .setLeftSpace(0).setRightSpace(0).setTopSpace(0).setBottomSpace(0)
+            //.setLeftSpace(0).setRightSpace(0).setTopSpace(0).setBottomSpace(0)
             .setOrigin(0)
 
         return this;
     }
 
     // Override
-    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
+    webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit) {
     }
     // Override
     canvasRender(ctx, dx, dy) {

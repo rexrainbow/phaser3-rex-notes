@@ -1,10 +1,14 @@
+import Render from './render/Render.js';
+import Methods from './methods/Methods.js';
+import PoolManager from './poolmanager/PoolManager.js';
+
 const GameObject = Phaser.GameObjects.GameObject;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const List = Phaser.Structs.List;
 
 class Blitter extends GameObject {
-    constructor(scene, x, y, texture, frame) {
+    constructor(scene, x, y, texture, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
@@ -17,7 +21,9 @@ class Blitter extends GameObject {
 
         this.children = new List();
         this.renderList = [];
-        this.dirty = false;
+        this.displayListDirty = false;
+        this.lastAppendedChildren = [];
+        this.poolManager = new PoolManager(config);
 
         this.setTexture(texture, frame);
         this.setPosition(x, y);
@@ -32,13 +38,13 @@ class Blitter extends GameObject {
     }
 
     childCanRender(child) {
-        return (child.visible && child.alpha > 0);
+        return (child.active && child.visible && (child.alpha > 0));
     }
 
     getRenderList() {
-        if (this.dirty) {
+        if (this.displayListDirty) {
             this.renderList = this.children.list.filter(this.childCanRender, this);
-            this.dirty = false;
+            this.displayListDirty = false;
         }
 
         return this.renderList;
@@ -50,7 +56,9 @@ Phaser.Class.mixin(Blitter,
     [
         Components.Alpha,
         Components.BlendMode,
+        Components.ComputedSize,
         Components.Depth,
+        Components.GetBounds,
         Components.Mask,
         Components.Origin,
         Components.Pipeline,

@@ -1,7 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Blitter from '../../plugins/gameobjects/blitter/blitterbase/Blitter.js';
-import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
-import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'
+import Blitter from '../../plugins/gameobjects/blitter/Blitter.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,33 +9,26 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
-        CreateRectangleTexture(this, 'dot', 16);
-        var blitter = new Blitter(this, 400, 300, 'dot');
+        var blitter = new Blitter(this, 400, 300, 'mushroom');
         this.add.existing(blitter);
 
-        var points = [
-            { x: 400, y: 300, color: 0xff0000, scale: 1 },
-            { x: 200, y: 200, color: 0x00ff00, scale: 2 },
-            { x: 600, y: 400, color: 0x0000ff, scale: 3 },
-        ]
-
-        for (var i = 0, cnt = points.length; i < cnt; i++) {
-            var point = points[i];
-            blitter.create(point.x - blitter.x, point.y - blitter.y)
-                .setTint(point.color)
-                .setScale(point.scale)
-        }
-
-        this.blitter = blitter;
+        blitter
+            .appendImage(undefined, {
+                x: 0, y: 0,
+                alpha: 0.5,
+                color: 0xff0000,
+                tintEffect: 1
+            })
+            .appendImage(undefined, {
+                x: 3, y: 3,
+            })
     }
 
-    update(time) {
-        this.blitter.rotation += 0.01;
-        LogMaxDelta(time);
-    }
+    update(time) { }
 }
 
 var config = {

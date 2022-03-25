@@ -1,9 +1,5 @@
 import DataMethods from '../../../utils/data/DataMethods.js'
 
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 class Base {
     constructor(parent, type) {
         this.setParent(parent);
@@ -21,9 +17,9 @@ class Base {
         return this.parent.scene;
     }
 
-    setDirty(dirty) {
-        if (dirty && this.parent) {
-            this.parent.dirty = true;
+    setDisplayListDirty(displayListDirty) {
+        if (displayListDirty && this.parent) {
+            this.parent.displayListDirty = true;
         }
         return this;
     }
@@ -33,7 +29,7 @@ class Base {
     }
 
     set active(value) {
-        this.setDirty(this._active != value);
+        this.setDisplayListDirty(this._active != value);
         this._active = value;
     }
 
