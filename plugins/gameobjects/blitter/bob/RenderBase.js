@@ -251,8 +251,9 @@ class RenderBase extends Base {
         // ScaleX, ScaleY
         var width = GetValue(o, 'width', undefined);
         var height = GetValue(o, 'height', undefined);
-        var scaleX = GetValue(o, 'scaleX', undefined);
-        var scaleY = GetValue(o, 'scaleY', undefined);
+        var scale = GetValue(o, 'scale', undefined);
+        var scaleX = GetValue(o, 'scaleX', scale);
+        var scaleY = GetValue(o, 'scaleY', scale);
 
         if (width !== undefined) {
             if ((height === undefined) && (scaleY === undefined)) {

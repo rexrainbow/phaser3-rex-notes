@@ -18,13 +18,25 @@ class Demo extends Phaser.Scene {
 
         blitter
             .appendImage(undefined, {
-                x: 0, y: 0,
-                alpha: 0.5,
-                color: 0xff0000,
-                tintEffect: 1
+                x: -6, y: -6,
+                angle: 45,
+                alpha: 0.3,
+                scale: 1.2,
+
+                color: 0xff0000, tintEffect: 1
             })
             .appendImage(undefined, {
-                x: 3, y: 3,
+                x: -3, y: -3,
+                angle: 45,
+                alpha: 0.8,
+                scale: 1.2,
+
+                color: 0xff0000, tintEffect: 1
+            })
+            .appendImage(undefined, {
+                x: 0, y: 0,
+                angle: 45,
+                scale: 1.2,
             })
     }
 
