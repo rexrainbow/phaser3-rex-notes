@@ -3,7 +3,7 @@ import ImageData from '../bob/image/Image';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-var AppendImage = function (frame, properties) {
+var AddImage = function (frame, properties) {
     var bob = this.poolManager.allocate(ImageTypeName);
     // TODO: Get frame data
     if (!IsPlainObject(frame)) {
@@ -22,10 +22,10 @@ var AppendImage = function (frame, properties) {
     }
     bob.modifyPorperties(properties);
 
-    this.lastAppendedChildren.length = 0;
+    this.lastAddedChildren.length = 0;
     this.children.add(bob);
-    this.lastAppendedChildren.push(bob);
+    this.lastAddedChildren.push(bob);
     return this;
 }
 
-export default AppendImage;
+export default AddImage;

@@ -1,9 +1,10 @@
-import AppendImage from './AppendImage.js';
-import GetLastAppendedChildren from './GetLastAppendedChildren.js'
+import addImage from './AddImage.js';
+import GetLastAddedChildren from './GetLastAddedChildren.js'
 
 var methods = {
-    appendImage: AppendImage,
-    getLastAppendedChildren: GetLastAppendedChildren,
+    add: addImage,
+    addImage: addImage,
+    getLastAddedChildren: GetLastAddedChildren,
 }
 
 export default methods;
