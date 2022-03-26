@@ -1,26 +1,21 @@
 import { ImageTypeName } from '../bob/Types.js';
 import ImageData from '../bob/image/Image';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
-var AddImage = function (frame, properties) {
+var AddImage = function (config) {
     var bob = this.poolManager.allocate(ImageTypeName);
-    // TODO: Get frame data
-    if (!IsPlainObject(frame)) {
-        frame = this.texture.get(frame);
+
+    if (typeof (config) === 'string') {
+        config = {
+            frame: config
+        }
     }
+
     if (bob === null) {
-        bob = new ImageData(
-            this,               // parent
-            frame
-        );
+        bob = new ImageData(this);
     } else {
-        bob
-            .setParent(this)
-            .setActive()
-            .setFrame(frame);
+        bob.setParent(this).setActive();
     }
-    bob.modifyPorperties(properties);
+    bob.modifyPorperties(config);
 
     this.lastAddedChildren.length = 0;
     this.children.add(bob);

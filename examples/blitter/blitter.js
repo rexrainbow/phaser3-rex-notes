@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         this.add.existing(blitter);
 
         blitter
-            .add(undefined, {
+            .addImage({
                 x: -6, y: -6,
                 angle: 45,
                 alpha: 0.3,
@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
                 color: 0xff0000, tintEffect: 1
             })
-            .add(undefined, {
+            .addImage({
                 x: -3, y: -3,
                 angle: 45,
                 alpha: 0.8,
@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
 
                 color: 0xff0000, tintEffect: 1
             })
-            .add(undefined, {
+            .addImage({
                 x: 0, y: 0,
                 angle: 45,
                 scale: 1.2,

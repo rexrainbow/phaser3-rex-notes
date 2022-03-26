@@ -135,30 +135,6 @@ class RenderBase extends Base {
         return this;
     }
 
-    // get leftSpace() {
-    //     return this._leftSpace;
-    // }
-    // set leftSpace(value) {
-    //     this._leftSpace = value;
-    // }
-    // setLeftSpace(value) {
-    //     this.leftSpace = value;
-    //     return this;
-    // }
-    // get rightSpace() {
-    //     return this._rightSpace;
-    // }
-    // set rightSpace(value) {
-    //     this._rightSpace = value;
-    // }
-    // setRightSpace(value) {
-    //     this.rightSpace = value;
-    //     return this;
-    // }
-    // get outerWidth() {
-    //     return this.width + this.leftSpace + this.rightSpace;
-    // }
-
     get scaleY() {
         return this._scaleY;
     }
@@ -191,30 +167,6 @@ class RenderBase extends Base {
         }
         return this;
     }
-
-    // get topSpace() {
-    //     return this._topSpace;
-    // }
-    // set topSpace(value) {
-    //     this._topSpace = value;
-    // }
-    // setTopSpace(value) {
-    //     this.topSpace = value;
-    //     return this;
-    // }
-    // get bottomSpace() {
-    //     return this._bottomSpace;
-    // }
-    // set bottomSpace(value) {
-    //     this._bottomSpace = value;
-    // }
-    // setBottomSpace(value) {
-    //     this.bottomSpace = value;
-    //     return this;
-    // }
-    // get outerHeight() {
-    //     return this.height + this.topSpace + this.bottomSpace;
-    // }
 
     setScale(scaleX, scaleY) {
         if (scaleY === undefined) {
@@ -276,18 +228,6 @@ class RenderBase extends Base {
             this.setScaleY(scaleY);
         }
 
-        // if (o.hasOwnProperty('leftSpace')) {
-        //     this.setLeftSpace(o.leftSpace);
-        // }
-        // if (o.hasOwnProperty('rightSpace')) {
-        //     this.setRightSpace(o.rightSpace);
-        // }
-        // if (o.hasOwnProperty('toptSpace')) {
-        //     this.setTopSpace(o.topSpace);
-        // }
-        // if (o.hasOwnProperty('bottomSpace')) {
-        //     this.setBottomSpace(o.bottomSpace);
-        // }
         return this;
     }
 
@@ -307,7 +247,6 @@ class RenderBase extends Base {
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
-            //.setLeftSpace(0).setRightSpace(0).setTopSpace(0).setBottomSpace(0)
             .setOrigin(0)
 
         return this;

@@ -1,6 +1,7 @@
 import RenderBase from '../RenderBase.js';
 import { ImageTypeName } from '../Types.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
 const Utils = Phaser.Renderer.WebGL.Utils;
 
@@ -11,7 +12,14 @@ class ImageData extends RenderBase {
         this.setFrame(frame);
     }
 
+    get texture() {
+        return this.parent.texture;
+    }
+
     setFrame(frame) {
+        if (arguments.length > 0 && !IsPlainObject(frame)) {
+            frame = this.texture.get(frame);
+        }
         this.frame = frame;
         return this;
     }
@@ -31,10 +39,6 @@ class ImageData extends RenderBase {
             .setTintEffect()
             .setFrame();
         return this;
-    }
-
-    get texture() {
-        return this.parent.frame.glTexture;
     }
 
     get color() {
@@ -67,6 +71,9 @@ class ImageData extends RenderBase {
 
         super.modifyPorperties(o);
 
+        if (o.hasOwnProperty('frame')) {
+            this.setFrame(o.frame);
+        }
         if (o.hasOwnProperty('color')) {
             this.setColor(o.color);
         }
@@ -116,7 +123,7 @@ class ImageData extends RenderBase {
             u1, v1,
             tint, tint, tint, tint,
             this.tintEffect,
-            this.texture,
+            this.frame.glTexture,
             textureUnit
         );
     }
