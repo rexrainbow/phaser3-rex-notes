@@ -479,17 +479,23 @@ sizer.pushIntoBounds(bounds);
 
 ### Shake
 
-```javascript
-sizer.shake(duration);
-// sizer.shake(duration, magnitude);
-```
-or
-```javascript
-sizer.shakePromise(duration, magnitude)
-    .then(function(){
-        // ...
-    })
-```
+- Start
+    ```javascript
+    sizer.shake(duration);
+    // sizer.shake(duration, magnitude);
+    ```
+    or
+    ```javascript
+    sizer.shakePromise(duration, magnitude)
+        .then(function(){
+            // ...
+        })
+    ```
+- Events
+    - Shake complete
+        ```javascript
+        sizer.on('shake.complete', function(sizer) { });
+        ```
 
 ### Ease data
 
@@ -515,6 +521,14 @@ sizer.shakePromise(duration, magnitude)
     sizer.stopAllEaseData();           // Set to end value
     // sizer.stopAllEaseData(false);   // Stop at current value
     ```
+- Events
+    - Easing complete
+        ```javascript
+        sizer.on('easedata.' + key + '.complete', function(sizer) { });
+        ```
+        ```javascript
+        sizer.on('easedata.complete', function(key, sizer) { });
+        ```
 
 ### Drag top-most sizer
 
