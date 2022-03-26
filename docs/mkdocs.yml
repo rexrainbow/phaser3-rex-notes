@@ -135,6 +135,7 @@ nav:
         - Scale down destroy: scaledowndestroy.md
         - Flip: flip.md
         - Ease-move: easemove.md
+        - Ease-data: easedata.md
         - Path follower: pathfollower.md
         - Anchor: anchor.md
         - Interception: interception.md

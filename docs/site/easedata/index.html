@@ -10,14 +10,14 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/shader-shockwave/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/easedata/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
     
     
       
-        <title>Shockwave - Notes of Phaser 3</title>
+        <title>Ease-data - Notes of Phaser 3</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Shockwave
+              Ease-data
             
           </span>
         </div>
@@ -623,12 +623,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -2392,12 +2394,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_13" type="checkbox" id="__nav_4_13" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_13" type="checkbox" id="__nav_4_13" checked>
       
       
       
@@ -2666,11 +2670,116 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../easedata/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Ease-data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Ease-data
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-method" class="md-nav__link">
+    Import method
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ease-data" class="md-nav__link">
+    Ease data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4063,14 +4172,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
       
       
       
@@ -4297,14 +4404,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_4" type="checkbox" id="__nav_9_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_4" type="checkbox" id="__nav_9_4" >
       
       
       
@@ -4381,137 +4486,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Shockwave
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../shader-shockwave/" class="md-nav__link">
         Shockwave
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-effect" class="md-nav__link">
-    Apply effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-effect" class="md-nav__link">
-    Remove effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-effect" class="md-nav__link">
-    Get effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wave-radius" class="md-nav__link">
-    Wave radius
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wave-width" class="md-nav__link">
-    Wave width
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -7895,13 +7874,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -7932,8 +7904,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
+  <a href="#import-method" class="md-nav__link">
+    Import method
   </a>
   
 </li>
@@ -7944,36 +7916,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-effect" class="md-nav__link">
-    Apply effect
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-effect" class="md-nav__link">
-    Remove effect
+  <a href="#ease-data" class="md-nav__link">
+    Ease data
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-effect" class="md-nav__link">
-    Get effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wave-radius" class="md-nav__link">
-    Wave radius
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wave-width" class="md-nav__link">
-    Wave width
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -7995,40 +7953,30 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-shockwave.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/easedata.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-  <h1>Shockwave</h1>
+  <h1>Ease-data</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Shockwave post processing filter. <a href="https://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/">Reference</a></p>
+<p>Easing data value of game object's data-manager.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A post-fx shader effect</li>
-</ul>
-<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://codepen.io/rexrainbow/pen/PopeyLv">Shockwave</a></li>
+<li>Method only</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-shockwave">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/easedata/">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexshockwavepipelineplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexshockwavepipelineplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexeasedataplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeasedataplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect<ul>
-<li>Apply effect to game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexshockwavepipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add ease-data behavior
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">easedata</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexeasedataplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect to camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexshockwavepipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
@@ -8036,13 +7984,13 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ShockwavePipelinePlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/shockwavepipeline-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">EaseDataPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/easedata-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ShockwavePipelinePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexEaseData&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">EaseDataPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -8052,107 +8000,50 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Apply effect<ul>
-<li>Apply effect to game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Apply effect to camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add ease-data behavior
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">easedata</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEaseData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<h4 id="import-method">Import method<a class="headerlink" href="#import-method" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Add to game config
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ShockwavePostFx</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/shockwavepipeline.js&#39;</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">pipeline</span><span class="o">:</span> <span class="p">[</span><span class="nx">ShockwavePostFx</span><span class="p">]</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Import method
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">EaseData</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/easedata.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Apply effect<ul>
-<li>Apply effect to game object
-    <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">ShockwavePostFx</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Apply effect to camera
-    <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">ShockwavePostFx</span><span class="p">);</span>
+<li>EaseData-out-destroy
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">easedata</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">EaseData</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
-<h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">easedata</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEaseData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ease-data">Ease data<a class="headerlink" href="#ease-data" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Apply effect to game object. A game object only can add 1 shockwave effect.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// center: {</span>
-    <span class="c1">//    x: windowWidth / 2,</span>
-    <span class="c1">//    y: windowHeight / 2</span>
-    <span class="c1">//}</span>
-    <span class="c1">// waveRadius: 0,</span>
-    <span class="c1">// waveWidth: 20,</span>
-    <span class="c1">// powBaseScale: 0.8,</span>
-    <span class="c1">// powExponent: 0.1,</span>
+<li>Start
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">easeTo</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// easedata.easeTo(key, value, duration, ease);</span>
+</code></pre></div></li>
+<li>Stop
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">stopEase</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>           <span class="c1">// Set to end value</span>
+<span class="c1">// easedata.stopEase(key, false); // Stop at current value</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">stopAll</span><span class="p">();</span>           <span class="c1">// Set to end value</span>
+<span class="c1">// easedata.stopAll(false);   // Stop at current value</span>
+</code></pre></div></li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Easing complete
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">easedata</span><span class="p">){</span>
 
-    <span class="c1">// name: &#39;rexShockwavePostFx&#39;</span>
-<span class="p">});</span>
-</code></pre></div><ul>
-<li><code>waveRadius</code> : Radius of shockwave, in pixels.</li>
-<li><code>waveWidth</code> : Width of shockwave, in pixels.</li>
-<li><code>powBaseScale</code>, <code>powExponent</code> : Parameters of shockwave.</li>
-</ul>
-</li>
-<li>Apply effect to camera. A camera only can add 1 shockwave effect.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="remove-effect">Remove effect<a class="headerlink" href="#remove-effect" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Remove effect from game object
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Remove effect from camera
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get effect from game object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
-<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexShockwavePipeline&#39;).get(gameObject);</span>
-</code></pre></div></li>
-<li>Get effect from camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">)[</span><span class="mf">0</span><span class="p">];</span>
-<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexShockwavePipeline&#39;).get(camera);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="wave-radius">Wave radius<a class="headerlink" href="#wave-radius" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">waveRadius</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">waveRadius</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">waveRadius</span> <span class="o">=</span> <span class="nx">waveRadius</span><span class="p">;</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setWaveRadius</span><span class="p">(</span><span class="nx">waveRadius</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="wave-width">Wave width<a class="headerlink" href="#wave-width" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">waveWidth</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">waveWidth</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">waveWidth</span> <span class="o">=</span> <span class="nx">waveWidth</span><span class="p">;</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setWaveWidth</span><span class="p">(</span><span class="nx">waveWidth</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">easedata</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 
@@ -8168,7 +8059,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../shader-fisheye/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fisheye" rel="prev">
+        <a href="../easemove/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Ease-move" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -8177,20 +8068,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Fisheye
+              Ease-move
             </div>
           </div>
         </a>
       
       
         
-        <a href="../shader-split/" class="md-footer__link md-footer__link--next" aria-label="Next: Split" rel="next">
+        <a href="../pathfollower/" class="md-footer__link md-footer__link--next" aria-label="Next: Path follower" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Split
+              Path follower
             </div>
           </div>
           <div class="md-footer__button md-icon">

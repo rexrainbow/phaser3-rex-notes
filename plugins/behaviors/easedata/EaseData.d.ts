@@ -44,7 +44,7 @@ declare class EaseData extends Phaser.Events.EventEmitter {
         toEnd?: boolean
     ): this;
 
-    stopAlll(
+    stopAll(
         toEnd?: boolean
     ): this;
 }

@@ -43,6 +43,7 @@
 1. [Drag](drag.md): Drag game object.
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
 1. [Dynamic text](dynamictext.md): Control position, angle of each character drawn on a canvas.
+1. [Ease-data](easedata.md): Easing data value of game object's data-manager.
 1. [Ease-move](easemove.md): Ease-move game object.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
 1. [Event promise](eventpromise.md): Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) of an event.
