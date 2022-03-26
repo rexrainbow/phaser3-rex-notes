@@ -12,6 +12,8 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     var textureUnit = pipeline.setGameObject(src);
 
+    var roundPixels = camera.roundPixels;
+
     var result = GetCalcMatrix(src, camera, parentMatrix);
 
     var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc);
@@ -24,7 +26,7 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
     renderer.pipelines.preBatch(src);
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
-        bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit);
+        bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels);
     }
 
     renderer.pipelines.postBatch(src);

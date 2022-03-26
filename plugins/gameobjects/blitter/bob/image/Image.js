@@ -85,14 +85,16 @@ class ImageData extends RenderBase {
     }
 
     // Override
-    webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit) {
+    webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
         var x, y,
             w = this.width, h = this.height,
             ws = this.scaleX, hs = this.scaleY,
             rotation = this.rotation;
 
-        x = (this.x * ws) - dx;
-        y = (this.y * hs) - dy;
+        x = this.x - (w * this.originX);
+        y = this.y - (h * this.originY);
+
+        console.log(x, y);
 
         FrameMatrix.applyITRS(x, y, rotation, ws, hs);
         calcMatrix.multiply(FrameMatrix, FrameMatrix);
@@ -112,6 +114,19 @@ class ImageData extends RenderBase {
         var v1 = this.frame.v1;
 
         var tint = Utils.getTintAppendFloatAlpha(this.color, this.alpha * alpha);
+
+        if (roundPixels) {
+            tx0 = Math.round(tx0);
+            ty0 = Math.round(ty0);
+            tx1 = Math.round(tx1);
+            ty1 = Math.round(ty1);
+            tx2 = Math.round(tx2);
+            ty2 = Math.round(ty2);
+            tx3 = Math.round(tx3);
+            ty3 = Math.round(ty3);
+        }
+
+        console.log(tx0, ty0);
 
         pipeline.batchQuad(
             this.parent,

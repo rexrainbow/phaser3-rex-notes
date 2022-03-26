@@ -255,6 +255,8 @@ class RenderBase extends Base {
             } else {
                 this.setWidth(width);
             }
+        } else if (scaleX !== undefined) {
+            this.setScaleX(scaleX);
         }
         if (height !== undefined) {
             if ((width === undefined) && (scaleX === undefined)) {
@@ -262,11 +264,7 @@ class RenderBase extends Base {
             } else {
                 this.setHeight(height);
             }
-        }
-        if ((scaleX !== undefined) && (width === undefined)) {
-            this.setScaleX(scaleX);
-        }
-        if ((scaleY !== undefined) && (height === undefined)) {
+        } else if (scaleY !== undefined) {
             this.setScaleY(scaleY);
         }
 

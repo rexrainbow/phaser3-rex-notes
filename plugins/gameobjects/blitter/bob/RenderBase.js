@@ -148,6 +148,15 @@ class RenderBase extends Base {
         return this;
     }
 
+    setScale(scaleX, scaleY) {
+        if (scaleY === undefined) {
+            scaleY = scaleX;
+        }
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        return this;
+    }
+
     // Override
     get height() {
         return 0;
@@ -213,6 +222,8 @@ class RenderBase extends Base {
             } else {
                 this.setWidth(width);
             }
+        } else if (scaleX !== undefined) {
+            this.setScaleX(scaleX);
         }
         if (height !== undefined) {
             if ((width === undefined) && (scaleX === undefined)) {
@@ -220,23 +231,40 @@ class RenderBase extends Base {
             } else {
                 this.setHeight(height);
             }
-        }
-        if ((scaleX !== undefined) && (width === undefined)) {
-            this.setScaleX(scaleX);
-        }
-        if ((scaleY !== undefined) && (height === undefined)) {
+        } else if (scaleY !== undefined) {
             this.setScaleY(scaleY);
         }
 
+        var origin = GetValue(o, 'origin', undefined);
+        if (origin !== undefined) {
+            this.setOrigin(origin);
+        } else {
+            if (o.hasOwnProperty('originX')) {
+                this.setOriginX(o.originX);
+            }
+            if (o.hasOwnProperty('originY')) {
+                this.setOriginY(o.originY);
+            }
+        }
         return this;
     }
 
-    setOrigin(x, y) {
-        if (y !== undefined) {
-            y = x;
+    setOriginX(originX) {
+        this.originX = originX;
+        return this;
+    }
+
+    setOriginY(originY) {
+        this.originY = originY;
+        return this;
+    }
+
+    setOrigin(originX, originY) {
+        if (originY === undefined) {
+            originY = originX;
         }
-        this.originX = x;
-        this.originY = y;
+        this.originX = originX;
+        this.originY = originY;
         return this;
     }
 
@@ -253,7 +281,7 @@ class RenderBase extends Base {
     }
 
     // Override
-    webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit) {
+    webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
     }
     // Override
     canvasRender(ctx, dx, dy) {
