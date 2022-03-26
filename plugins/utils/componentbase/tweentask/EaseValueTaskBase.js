@@ -91,18 +91,17 @@ class EaseValueTaskBase extends TickTask {
     }
 
     update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
+        if (
+            (!this.isRunning) ||
+            (!this.enable) ||
+            (!this.parent.active)
+        ) {
             return this;
         }
 
-        var target = this.target;
-        if (target === this.parent) {
-            if (!this.parent.active) {
-                return this;
-            }
-        }
+        var target = this.target,
+            timer = this.timer;
 
-        var timer = this.timer;
         timer.update(time, delta);
 
         // isDelay, isCountDown, isDone
@@ -115,6 +114,7 @@ class EaseValueTaskBase extends TickTask {
         if (timer.isDone) {
             this.complete();
         }
+
         return this;
     }
 
