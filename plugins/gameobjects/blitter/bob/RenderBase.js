@@ -188,6 +188,32 @@ class RenderBase extends Base {
         return this;
     }
 
+    get displayWidth() {
+        return this._width * this._scaleX;
+    }
+
+    set displayWidth(value) {
+        this._scaleX = value / this._width;
+    }
+
+    setDisplayWidth(width) {
+        this.displayWidth = width;
+        return this;
+    }
+
+    get displayHeight() {
+        return this._height * this._scaleY;
+    }
+
+    set displayHeight(value) {
+        this._scaleY = value / this._height;
+    }
+
+    setDisplayHeight(height) {
+        this.displayHeight = height;
+        return this;
+    }
+
     modifyPorperties(o) {
         if (!o) {
             return this;
@@ -225,7 +251,10 @@ class RenderBase extends Base {
             }
         } else if (scaleX !== undefined) {
             this.setScaleX(scaleX);
+        } else if (o.hasOwnProperty('displayWidth')) {
+            this.setDisplayWidth(o.displayWidth);
         }
+
         if (height !== undefined) {
             if ((width === undefined) && (scaleX === undefined)) {
                 this.setHeight(height, true);
@@ -234,6 +263,8 @@ class RenderBase extends Base {
             }
         } else if (scaleY !== undefined) {
             this.setScaleY(scaleY);
+        } else if (o.hasOwnProperty('displayHeight')) {
+            this.setDisplayHeight(o.displayHeight);
         }
 
         var origin = GetValue(o, 'origin', undefined);
