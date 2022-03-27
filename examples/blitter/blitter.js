@@ -18,27 +18,33 @@ class Demo extends Phaser.Scene {
 
         blitter
             .addImage({
+                x: 0, y: 0,
+                angle: 180,
+                //scale: 1.2,
+                originX: 0.5, originY: 0.5,
+                depth: 0,
+            })
+            .addImage({
                 x: -6, y: -6,
                 angle: 180,
                 alpha: 0.3,
                 //scale: 1.2,
                 originX: 0.5, originY: 0.5,
-                color: 0xff0000, tintEffect: 1
+                color: 0xff0000, tintEffect: 1,
+                depth: -1
             })
             .addImage({
                 x: -3, y: -3,
                 angle: 180,
-                alpha: 0.8,
+                alpha: 0.7,
                 //scale: 1.2,
                 originX: 0.5, originY: 0.5,
-                color: 0xff0000, tintEffect: 1
+                color: 0xff0000, tintEffect: 1,
+                depth: -1
             })
-            .addImage({
-                x: 0, y: 0,
-                angle: 180,
-                //scale: 1.2,
-                originX: 0.5, originY: 0.5,
-            })
+
+
+
 
         this.add.circle(400, 300, 10, 0x0000ff);
     }

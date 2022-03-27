@@ -6,6 +6,7 @@ const GameObject = Phaser.GameObjects.GameObject;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const List = Phaser.Structs.List;
+const StableSort = Phaser.Utils.Array.StableSort;
 
 class Blitter extends GameObject {
     constructor(scene, x, y, texture, frame, config) {
@@ -44,11 +45,16 @@ class Blitter extends GameObject {
     getRenderList() {
         if (this.displayListDirty) {
             this.renderList = this.children.list.filter(this.childCanRender, this);
+            StableSort(this.renderList, SortByDepth)
             this.displayListDirty = false;
         }
 
         return this.renderList;
     }
+}
+
+var SortByDepth = function (childA, childB) {
+    return childA._depth - childB._depth;
 }
 
 const Components = Phaser.GameObjects.Components;

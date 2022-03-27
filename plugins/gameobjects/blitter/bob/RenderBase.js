@@ -7,9 +7,6 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class RenderBase extends Base {
     constructor(parent, type) {
         super(parent, type);
-
-        this.offsetX = 0;  // Override
-        this.offsetY = 0;  // Override
     }
 
     get visible() {
@@ -250,6 +247,11 @@ class RenderBase extends Base {
                 this.setOriginY(o.originY);
             }
         }
+
+        if (o.hasOwnProperty('depth')) {
+            this.setDepth(o.depth);
+        }
+
         return this;
     }
 
@@ -273,6 +275,24 @@ class RenderBase extends Base {
         return this;
     }
 
+    get depth() {
+        return this._depth;
+    }
+
+    set depth(value) {
+        this.setDisplayListDirty(this._depth != value);
+        this._depth = value;
+    }
+
+    setDepth(depth) {
+        if (depth === undefined) {
+            depth = 0;
+        }
+
+        this.depth = depth;
+        return this;
+    }
+
     reset() {
         this
             .setVisible()
@@ -281,6 +301,7 @@ class RenderBase extends Base {
             .setRotation(0)
             .setScale(1, 1)
             .setOrigin(0)
+            .setDepth(0)
 
         return this;
     }
