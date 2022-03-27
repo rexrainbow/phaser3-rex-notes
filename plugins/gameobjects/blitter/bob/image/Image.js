@@ -26,12 +26,25 @@ class ImageData extends RenderBase {
         return this;
     }
 
-    reset() {
-        super.reset()
-        this
-            .setColor(0xffffff)
-            .setTintEffect()
-            .setFrame();
+    setFlipX(flipX) {
+        if (flipX === undefined) {
+            flipX = true;
+        }
+        this.flipX = flipX;
+        return this;
+    }
+
+    setFlipY(flipY) {
+        if (flipY === undefined) {
+            flipY = true;
+        }
+        this.flipY = flipY;
+        return this;
+    }
+
+    resetFlip() {
+        this.flipX = false;
+        this.flipY = false;
         return this;
     }
 
@@ -58,6 +71,16 @@ class ImageData extends RenderBase {
         return this;
     }
 
+    reset() {
+        super.reset()
+        this
+            .resetFlip()
+            .setColor(0xffffff)
+            .setTintEffect()
+            .setFrame();
+        return this;
+    }
+
     modifyPorperties(o) {
         if (!o) {
             return this;
@@ -68,9 +91,18 @@ class ImageData extends RenderBase {
         if (o.hasOwnProperty('frame')) {
             this.setFrame(o.frame);
         }
+
+        if (o.hasOwnProperty('flipX')) {
+            this.setFlipX(o.flipX);
+        }
+        if (o.hasOwnProperty('flipY')) {
+            this.setFlipY(o.flipY);
+        }
+
         if (o.hasOwnProperty('color')) {
             this.setColor(o.color);
         }
+
         if (o.hasOwnProperty('tintEffect')) {
             this.setTintEffect(o.tintEffect);
         }

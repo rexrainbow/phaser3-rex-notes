@@ -2,8 +2,24 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
 
     ctx.save();
 
-    var x = this._displayOriginX,
-        y = this._displayOriginY;
+    var width = this._width,
+        height = this._height;
+    var displayOriginX = this._displayOriginX,
+        displayOriginY = this._displayOriginY;
+    var x = -displayOriginX,
+        y = -displayOriginY;
+
+    var flipX = 1;
+    var flipY = 1;
+
+    if (this.flipX) {
+        x += width;
+        flipX = -1;
+    }
+    if (this.flipY) {
+        y += height;
+        flipY = -1;
+    }
 
     if (roundPixels) {
         x = Math.round(x);
@@ -14,7 +30,7 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
 
     ctx.rotate(this.rotation);
 
-    ctx.scale(this.scaleX, this.scaleY);
+    ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
 
     var frame = this.frame;
 

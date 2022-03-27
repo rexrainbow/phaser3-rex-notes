@@ -4,23 +4,42 @@ const Utils = Phaser.Renderer.WebGL.Utils;
 var FrameMatrix = new TransformMatrix();
 
 var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
-    FrameMatrix.applyITRS(this.x - dx, this.y - dy, this.rotation, this.scaleX, this.scaleY);
+    var width = this._width,
+        height = this._height;
+    var displayOriginX = this._displayOriginX,
+        displayOriginY = this._displayOriginY;
+    var x = this.x - dx,
+        y = this.y - dy;
+
+    var flipX = 1;
+    var flipY = 1;
+
+    if (this.flipX) {
+        x += width - (displayOriginX * 2);
+        flipX = -1;
+    }
+    if (this.flipY) {
+        y += height - (displayOriginY * 2);
+        flipY = -1;
+    }
+
+    FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
     calcMatrix.multiply(FrameMatrix, FrameMatrix);
 
-    var x = -this._displayOriginX;
-    var y = -this._displayOriginY;
-    var xw = x + this.width;
-    var yh = y + this.height;
+    var tx = -displayOriginX;
+    var ty = -displayOriginY;
+    var tw = tx + width;
+    var th = ty + height;
 
-    var tx0 = FrameMatrix.getXRound(x, y, roundPixels);
-    var tx1 = FrameMatrix.getXRound(x, yh, roundPixels);
-    var tx2 = FrameMatrix.getXRound(xw, yh, roundPixels);
-    var tx3 = FrameMatrix.getXRound(xw, y, roundPixels);
+    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
+    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
+    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
+    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
 
-    var ty0 = FrameMatrix.getYRound(x, y, roundPixels);
-    var ty1 = FrameMatrix.getYRound(x, yh, roundPixels);
-    var ty2 = FrameMatrix.getYRound(xw, yh, roundPixels);
-    var ty3 = FrameMatrix.getYRound(xw, y, roundPixels);
+    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
+    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
+    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
+    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
 
     var u0 = this.frame.u0;
     var v0 = this.frame.v0;
