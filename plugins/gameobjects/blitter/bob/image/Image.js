@@ -21,15 +21,9 @@ class ImageData extends RenderBase {
             frame = this.texture.get(frame);
         }
         this.frame = frame;
+        this.width = (frame) ? frame.width : 0;
+        this.height = (frame) ? frame.height : 0;
         return this;
-    }
-
-    get height() {
-        return this.frame.height;
-    }
-
-    get width() {
-        return this.frame.width;
     }
 
     reset() {
@@ -86,27 +80,23 @@ class ImageData extends RenderBase {
 
     // Override
     webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
-        var x, y,
-            w = this.width, h = this.height,
-            ws = this.scaleX, hs = this.scaleY,
-            rotation = this.rotation;
-
-        x = this.x - (w * this.originX);
-        y = this.y - (h * this.originY);
-
-        console.log(x, y);
-
-        FrameMatrix.applyITRS(x, y, rotation, ws, hs);
+        FrameMatrix.applyITRS(this.x - dx, this.y - dy, this.rotation, this.scaleX, this.scaleY);
         calcMatrix.multiply(FrameMatrix, FrameMatrix);
 
-        var tx0 = FrameMatrix.e;
-        var ty0 = FrameMatrix.f;
-        var tx1 = h * FrameMatrix.c + FrameMatrix.e;
-        var ty1 = h * FrameMatrix.d + FrameMatrix.f;
-        var tx2 = w * FrameMatrix.a + h * FrameMatrix.c + FrameMatrix.e;
-        var ty2 = w * FrameMatrix.b + h * FrameMatrix.d + FrameMatrix.f;
-        var tx3 = w * FrameMatrix.a + FrameMatrix.e;
-        var ty3 = w * FrameMatrix.b + FrameMatrix.f;
+        var x = - this._displayOriginX;
+        var y = - this._displayOriginY;
+        var xw = x + this.width;
+        var yh = y + this.height;
+
+        var tx0 = FrameMatrix.getXRound(x, y, roundPixels);
+        var tx1 = FrameMatrix.getXRound(x, yh, roundPixels);
+        var tx2 = FrameMatrix.getXRound(xw, yh, roundPixels);
+        var tx3 = FrameMatrix.getXRound(xw, y, roundPixels);
+
+        var ty0 = FrameMatrix.getYRound(x, y, roundPixels);
+        var ty1 = FrameMatrix.getYRound(x, yh, roundPixels);
+        var ty2 = FrameMatrix.getYRound(xw, yh, roundPixels);
+        var ty3 = FrameMatrix.getYRound(xw, y, roundPixels);
 
         var u0 = this.frame.u0;
         var v0 = this.frame.v0;
@@ -114,19 +104,6 @@ class ImageData extends RenderBase {
         var v1 = this.frame.v1;
 
         var tint = Utils.getTintAppendFloatAlpha(this.color, this.alpha * alpha);
-
-        if (roundPixels) {
-            tx0 = Math.round(tx0);
-            ty0 = Math.round(ty0);
-            tx1 = Math.round(tx1);
-            ty1 = Math.round(ty1);
-            tx2 = Math.round(tx2);
-            ty2 = Math.round(ty2);
-            tx3 = Math.round(tx3);
-            ty3 = Math.round(ty3);
-        }
-
-        console.log(tx0, ty0);
 
         pipeline.batchQuad(
             this.parent,

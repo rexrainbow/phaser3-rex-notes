@@ -115,13 +115,14 @@ class RenderBase extends Base {
         return this;
     }
 
-    // Override
     get width() {
-        return 0;
+        return this._width;
     }
 
-    // Override
-    set width(value) { }
+    set width(value) {
+        this._width = value;
+        this._displayOriginX = value * this.originX;
+    }
 
     setWidth(width, keepAspectRatio) {
         if (keepAspectRatio === undefined) {
@@ -159,11 +160,14 @@ class RenderBase extends Base {
 
     // Override
     get height() {
-        return 0;
+        return this._height;
     }
 
     // Override
-    set height(value) { }
+    set height(value) {
+        this._height = value;
+        this._displayOriginY = value * this.originY;
+    }
 
     setHeight(height, keepAspectRatio) {
         if (keepAspectRatio === undefined) {
@@ -251,11 +255,13 @@ class RenderBase extends Base {
 
     setOriginX(originX) {
         this.originX = originX;
+        this._displayOriginX = this.width * originX;
         return this;
     }
 
     setOriginY(originY) {
         this.originY = originY;
+        this._displayOriginY = this.height * originY;
         return this;
     }
 
@@ -263,8 +269,7 @@ class RenderBase extends Base {
         if (originY === undefined) {
             originY = originX;
         }
-        this.originX = originX;
-        this.originY = originY;
+        this.setOriginX(originX).setOriginY(originY);
         return this;
     }
 

@@ -17,22 +17,22 @@ class Demo extends Phaser.Scene {
         this.add.existing(blitter);
 
         blitter
-            //.addImage({
-            //    x: -6, y: -6,
-            //    angle: 180,
-            //    alpha: 0.3,
-            //    //scale: 1.2,
-            //    originX: 0.5, originY: 0.5,
-            //    color: 0xff0000, tintEffect: 1
-            //})
-            //.addImage({
-            //    x: -3, y: -3,
-            //    angle: 180,
-            //    alpha: 0.8,
-            //    //scale: 1.2,
-            //    originX: 0.5, originY: 0.5,
-            //    color: 0xff0000, tintEffect: 1
-            //})
+            .addImage({
+                x: -6, y: -6,
+                angle: 180,
+                alpha: 0.3,
+                //scale: 1.2,
+                originX: 0.5, originY: 0.5,
+                color: 0xff0000, tintEffect: 1
+            })
+            .addImage({
+                x: -3, y: -3,
+                angle: 180,
+                alpha: 0.8,
+                //scale: 1.2,
+                originX: 0.5, originY: 0.5,
+                color: 0xff0000, tintEffect: 1
+            })
             .addImage({
                 x: 0, y: 0,
                 angle: 180,
