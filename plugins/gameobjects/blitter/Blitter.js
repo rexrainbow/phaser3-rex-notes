@@ -23,7 +23,7 @@ class Blitter extends GameObject {
         this.children = new List();
         this.renderList = [];
         this.displayListDirty = false;
-        this.lastAddedChildren = [];
+        this.lastAppendedChildren = [];
         this.poolManager = new PoolManager(config);
 
         this.setTexture(texture, frame);

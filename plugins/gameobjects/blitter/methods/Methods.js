@@ -1,9 +1,11 @@
 import addImage from './AddImage.js';
-import GetLastAddedChildren from './GetLastAddedChildren.js'
+import Clear from './Clear.js';
+import GetLastAppendedChildren from './GetLastAppendedChildren.js'
 
 var methods = {
     addImage: addImage,
-    getLastAddedChildren: GetLastAddedChildren,
+    clear: Clear,
+    getLastAppendedChildren: GetLastAppendedChildren,
 }
 
 export default methods;
