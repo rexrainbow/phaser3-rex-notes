@@ -10,16 +10,19 @@ var SetFont = function (key) {
     if (entry) {
         this.fontData = entry.data;
         this.fromAtlas = (entry.fromAtlas === true);
+        this._fontSize = this.fontData.size;
+
         this.setTexture(entry.texture, entry.frame);
     } else {
         console.warn(`Invalid BitmapText key: ${key}`);
 
         this.fontData = undefined;
         this.fromAtlas = undefined;
+        this._fontSize = 0;
         this.setTexture();
     }
 
-    // TODO: Update render result
+    this.updateText();
 
     return this;
 }
