@@ -2,7 +2,7 @@ import Sizer from '../../sizer/Sizer.js';
 import GetScrollMode from '../GetScrollMode.js';
 import Slider from './Slider.js';
 import Scroller from '../../../../plugins/scroller.js';
-import MouseWheelScroller from '../../../../plugins/input/mousewheeldcroller/MouseWheelScroller.js';
+import MouseWheelScroller from '../../../../plugins/input/mousewheelscroller/MouseWheelScroller.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

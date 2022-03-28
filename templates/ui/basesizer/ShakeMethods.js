@@ -5,12 +5,8 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 var OnInitShake = function (gameObject, shake) {
     // Route 'complete' of shake to gameObject
-    shake.completeEventName = undefined;
     shake.on('complete', function () {
-        if (shake.completeEventName) {
-            gameObject.emit(shake.completeEventName, gameObject);
-            shake.completeEventName = undefined;
-        }
+        gameObject.emit('shake.complete', gameObject);
     })
 
     // Shake effect won't change position
@@ -32,8 +28,6 @@ export default {
             });
             OnInitShake(this, this._shake);
         }
-
-        this._shake.completeEventName = 'shake.complete';
 
         if (duration !== undefined) {
             this._shake.setDuration(duration);

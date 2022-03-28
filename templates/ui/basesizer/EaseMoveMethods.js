@@ -1,5 +1,5 @@
 import { EaseMoveTo, EaseMoveFrom } from '../easemove/EaseMove.js';
-import { WaitComplete } from '../utils/WaitEvent.js'
+import { WaitComplete } from '../utils/WaitEvent.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DistanceBetween = Phaser.Math.Distance.Between;

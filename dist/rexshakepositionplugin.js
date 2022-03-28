@@ -620,6 +620,12 @@
         }
       }
     }, {
+      key: "setT",
+      value: function setT(t) {
+        this.t = t;
+        return this;
+      }
+    }, {
       key: "isIdle",
       get: function get() {
         return this.state === IDLE;

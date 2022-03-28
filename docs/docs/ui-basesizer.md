@@ -479,17 +479,58 @@ sizer.pushIntoBounds(bounds);
 
 ### Shake
 
-```javascript
-sizer.shake(duration);
-// sizer.shake(duration, magnitude);
-```
-or
-```javascript
-sizer.shakePromise(duration, magnitude)
-    .then(function(){
-        // ...
-    })
-```
+- Start
+    ```javascript
+    sizer.shake(duration);
+    // sizer.shake(duration, magnitude);
+    ```
+    or
+    ```javascript
+    sizer.shakePromise(duration, magnitude)
+        .then(function(){
+            // ...
+        })
+    ```
+- Events
+    - Shake complete
+        ```javascript
+        sizer.on('shake.complete', function(sizer) { });
+        ```
+
+### Ease data
+
+- Start
+    ```javascript
+    sizer.easeDataTo(key, value, duration);
+    // sizer.easeDataTo(key, value, duration, ease);
+    // sizer.easeDataTo({ key, value, duration, ease });
+    // sizer.easeDataTo({ key, value, speed, ease });
+    ```
+    or
+    ```javascript
+    sizer.easeDataToPromise(key, value, duration, ease)
+        .then(function(){
+            // ...
+        })
+    ```
+- Stop
+    ```javascript
+    sizer.stopEaseData(key);           // Set to end value
+    // sizer.stopEaseData(key, false); // Stop at current value
+    ```
+    or
+    ```javascript
+    sizer.stopAllEaseData();           // Set to end value
+    // sizer.stopAllEaseData(false);   // Stop at current value
+    ```
+- Events
+    - Easing complete
+        ```javascript
+        sizer.on('easedata.' + key + '.complete', function(sizer) { });
+        ```
+        ```javascript
+        sizer.on('easedata.complete', function(key, sizer) { });
+        ```
 
 ### Drag top-most sizer
 

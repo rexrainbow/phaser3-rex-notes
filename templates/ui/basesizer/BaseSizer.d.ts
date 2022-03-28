@@ -373,6 +373,49 @@ declare class BaseSizer extends ContainerLite {
         magnitudeMode?: 0 | 1 | 'constant' | 'decay'
     ): Promise<any>;
 
+    easeDataTo(
+        key: string,
+        value: number,
+        duration?: number,
+        ease?: string
+    ): this;
+
+    easeDataTo(
+        config: {
+            key: string,
+            value: number,
+            duration?: number,
+            ease?: string,
+            speed?: number
+        }
+    ): this;
+
+    easeDataToPromise(
+        key: string,
+        value: number,
+        duration?: number,
+        ease?: string
+    ): Promise<any>;
+
+    easeDataToPromise(
+        config: {
+            key: string,
+            value: number,
+            duration?: number,
+            ease?: string,
+            speed?: number
+        }
+    ): Promise<any>;
+
+    stopEaseData(
+        key: string,
+        toEnd?: boolean
+    ): this;
+
+    stopAllEaseData(
+        toEnd?: boolean
+    ): this;
+
     setAnchor(config: {
         left?: string, right?: string, centerX?: string, x?: string,
         top?: string, bottom?: string, centerY?: string, y?: string

@@ -1,2 +1,2 @@
-import MouseWheelScroller from './input/mousewheeldcroller/MouseWheelScroller.js';
+import MouseWheelScroller from './input/mousewheelscroller/MouseWheelScroller.js';
 export default MouseWheelScroller;

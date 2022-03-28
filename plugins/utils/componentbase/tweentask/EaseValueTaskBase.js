@@ -8,6 +8,7 @@ class EaseValueTaskBase extends TickTask {
     resetFromJSON(o) {
         this.timer.resetFromJSON(GetValue(o, 'timer'));
         this.setEnable(GetValue(o, 'enable', true));
+        this.setTarget(GetValue(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', 'Linear'));
@@ -21,6 +22,14 @@ class EaseValueTaskBase extends TickTask {
             e = true;
         }
         this.enable = e;
+        return this;
+    }
+
+    setTarget(target) {
+        if (target === undefined) {
+            target = this.parent;
+        }
+        this.target = target;
         return this;
     }
 
@@ -65,34 +74,52 @@ class EaseValueTaskBase extends TickTask {
         return this;
     }
 
+    stop(toEnd) {
+        if (toEnd === undefined) {
+            toEnd = false;
+        }
+
+        super.stop();
+
+        if (toEnd) {
+            this.timer.setT(1);
+            this.updateGameObject(this.target, this.timer);
+            this.complete();
+        }
+
+        return this;
+    }
+
     update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
+        if (
+            (!this.isRunning) ||
+            (!this.enable) ||
+            (!this.parent.active)
+        ) {
             return this;
         }
 
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
+        var target = this.target,
+            timer = this.timer;
 
-        var timer = this.timer;
         timer.update(time, delta);
 
         // isDelay, isCountDown, isDone
         if (!timer.isDelay) {
-            this.updateGameObject(gameObject, timer);
+            this.updateGameObject(target, timer);
         }
 
-        this.emit('update', gameObject, this);
+        this.emit('update', target, this);
 
         if (timer.isDone) {
             this.complete();
         }
+
         return this;
     }
 
     // Override
-    updateGameObject(gameObject, timer) {
+    updateGameObject(target, timer) {
 
     }
 }
