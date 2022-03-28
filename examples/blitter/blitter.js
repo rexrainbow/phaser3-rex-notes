@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Blitter from '../../plugins/gameobjects/blitter/Blitter.js';
+import BlitterPlugin from '../../plugins/blitter-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var blitter = new Blitter(this, 400, 300, 'mushroom');
+        var blitter = this.add.rexBlitter(400, 300, 'mushroom');
         this.add.existing(blitter);
 
         blitter
@@ -71,6 +71,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexBlitter',
+            plugin: BlitterPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
