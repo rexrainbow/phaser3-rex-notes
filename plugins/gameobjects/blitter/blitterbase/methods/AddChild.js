@@ -11,6 +11,7 @@ var AddChild = function (bob) {
         this.children.add(bob);
         this.lastAppendedChildren.push(bob);
     }
+
     return this;
 }
 

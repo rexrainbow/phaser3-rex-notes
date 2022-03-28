@@ -4,6 +4,8 @@ import ModifyTextStyle from './ModifyTextStyle.js';
 import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
 import ClearContent from './ClearContent.js';
+import PopReusedBob from './PopReusedBob.js';
+import AddChild from './AddChild.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import AppendImage from './AppendImage.js';
@@ -24,6 +26,8 @@ export default {
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
+    popReusedBob: PopReusedBob,
+    addChild: AddChild,
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,

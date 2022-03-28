@@ -2,12 +2,13 @@ import { CmdTypeName } from '../bob/Types.js';
 import Command from '../bob/command/Command.js';
 
 var AppendCommand = function (name, callback, param, scope) {
-    var bob = this.poolManager.allocate(CmdTypeName);
+    var bob = this.popReusedBob(CmdTypeName);
+
     if (bob === null) {
         bob = new Command(
             this,               // parent
             name,
-            callback, param, scope, 
+            callback, param, scope,
         );
     } else {
         bob
@@ -19,9 +20,8 @@ var AppendCommand = function (name, callback, param, scope) {
 
     }
 
-    this.lastAppendedChildren.length = 0;
-    this.children.push(bob);
-    this.lastAppendedChildren.push(bob);
+    this.addChild(bob);
+
     return this;
 }
 
