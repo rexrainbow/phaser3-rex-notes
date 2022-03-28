@@ -22,7 +22,7 @@ class Blitter extends GameObject {
 
         this.children = new List();
         this.renderList = [];
-        this.displayListDirty = false;        
+        this.displayListDirty = false;
         this.lastAppendedChildren = [];
         this.poolManager = new PoolManager(config);
 
@@ -38,10 +38,6 @@ class Blitter extends GameObject {
         this.renderList.length = 0;
     }
 
-    childCanRender(child) {
-        return (child.active && child.visible && (child.alpha > 0));
-    }
-
     getRenderList() {
         if (this.displayListDirty) {
             this.renderList.length = 0;
@@ -50,7 +46,7 @@ class Blitter extends GameObject {
             var children = this.children.list;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
-                if (this.childCanRender(child)) {
+                if (ChildCanRender(child)) {
                     this.renderList.push(child);
 
                     if (!needDepthSort) {
@@ -68,6 +64,10 @@ class Blitter extends GameObject {
 
         return this.renderList;
     }
+}
+
+var ChildCanRender = function (child) {
+    return (child.active && child.visible && (child.alpha > 0));
 }
 
 var SortByDepth = function (childA, childB) {
