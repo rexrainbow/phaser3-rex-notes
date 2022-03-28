@@ -5,9 +5,6 @@ const RadToDeg = Phaser.Math.RadToDeg;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class RenderBase extends Base {
-    constructor(parent, type) {
-        super(parent, type);
-    }
 
     get visible() {
         return this._visible;
@@ -325,6 +322,8 @@ class RenderBase extends Base {
     }
 
     reset() {
+        super.reset();
+
         this
             .setVisible()
             .setAlpha(1)

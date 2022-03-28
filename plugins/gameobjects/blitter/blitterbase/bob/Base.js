@@ -2,10 +2,13 @@ import DataMethods from '../../../../utils/data/DataMethods.js'
 
 class Base {
     constructor(parent, type) {
-        this.setParent(parent);
         this.type = type;
 
-        this.reset().setActive();
+        this
+            .setParent(parent)
+            .reset()
+            .setActive();
+
     }
 
     destroy() {
@@ -50,7 +53,14 @@ class Base {
     }
 
     // Override
-    onFree() { }
+    reset() {
+        this.setActive(false);
+    }
+
+    // Override
+    onFree() {
+        this.reset().setParent();
+    }
 }
 
 Object.assign(

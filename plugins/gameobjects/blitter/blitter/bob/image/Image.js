@@ -72,12 +72,14 @@ class ImageData extends RenderBase {
     }
 
     reset() {
-        super.reset()
+        super.reset();
+
         this
             .resetFlip()
             .setColor(0xffffff)
             .setTintEffect()
             .setFrame();
+
         return this;
     }
 
