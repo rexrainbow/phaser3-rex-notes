@@ -17,9 +17,7 @@ var AddImage = function (config) {
     }
     bob.modifyPorperties(config);
 
-    this.lastAppendedChildren.length = 0;
-    this.children.add(bob);
-    this.lastAppendedChildren.push(bob);
+    this.addChild(bob);
     return this;
 }
 
