@@ -24,7 +24,9 @@ class Blitter extends GameObject {
         this.renderList = [];
         this.displayListDirty = false;
         this.lastAppendedChildren = [];
-        this.poolManager = new PoolManager(config);
+
+        var reuseBob = GetValue(config, 'reuseBob', true);
+        this.poolManager = (reuseBob) ? (new PoolManager(config)) : undefined;
 
         this.setTexture(texture, frame);
         this.setPosition(x, y);
@@ -37,6 +39,10 @@ class Blitter extends GameObject {
         this.removeChildren();
         this.children.destroy();
         this.renderList.length = 0;
+
+        if (this.poolManager) {
+            this.poolManager.destroy();
+        }
     }
 
     getRenderList() {

@@ -8,6 +8,10 @@ class PoolManager {
         this.pools = GetFastValue(config, 'pools', Pools);
     }
 
+    destroy() {
+        this.pools = undefined;
+    }
+
     free(bob) {
         if (!this.pools) {
             return this;
