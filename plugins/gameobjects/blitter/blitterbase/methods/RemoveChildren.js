@@ -1,9 +1,11 @@
 var RemoveChildren = function () {
+    var children = this.children.list;
+
     if (this.poolManager) {
-        this.poolManager.freeMultiple(this.children);
+        this.poolManager.freeMultiple(children);
     }
 
-    this.children.length = 0;
+    children.length = 0;
     this.lastAppendedChildren.length = 0;
     this.dirty = true;
     return this;
