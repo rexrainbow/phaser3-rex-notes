@@ -75,7 +75,7 @@ var RunWordWrap = function (config) {
         linesHeight: 0
     }
 
-    // Set all children to active
+    // Set all children to inactive
     var children = this.children;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         children[i].setActive(false);
