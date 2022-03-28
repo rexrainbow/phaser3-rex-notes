@@ -503,6 +503,8 @@ sizer.pushIntoBounds(bounds);
     ```javascript
     sizer.easeDataTo(key, value, duration);
     // sizer.easeDataTo(key, value, duration, ease);
+    // sizer.easeDataTo({ key, value, duration, ease });
+    // sizer.easeDataTo({ key, value, speed, ease });
     ```
     or
     ```javascript
