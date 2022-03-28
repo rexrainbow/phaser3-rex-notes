@@ -20,7 +20,7 @@ class Blitter extends GameObject {
 
         super(scene, 'rexBlitter');
 
-        this.children = new List();
+        this.children = [];
         this.renderList = [];
         this.displayListDirty = false;
         this.lastAppendedChildren = [];
@@ -37,7 +37,7 @@ class Blitter extends GameObject {
 
     preDestroy() {
         this.removeChildren();
-        this.children.destroy();
+        this.children.length = 0;
         this.renderList.length = 0;
 
         if (this.poolManager) {
@@ -50,7 +50,7 @@ class Blitter extends GameObject {
             this.renderList.length = 0;
             var needDepthSort = false;
 
-            var children = this.children.list;
+            var children = this.children;
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
                 if (ChildCanRender(child)) {
