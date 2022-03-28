@@ -1019,6 +1019,11 @@
           value = config.value;
           duration = config.duration;
           ease = config.ease;
+          var speed = config.speed;
+
+          if (duration === undefined && speed !== undefined) {
+            duration = Math.abs(value - this.parent.data.values[key]) / speed * 1000;
+          }
         }
 
         if (duration === undefined) {
@@ -1047,6 +1052,11 @@
           value = config.value;
           duration = config.duration;
           ease = config.ease;
+          var speed = config.speed;
+
+          if (duration === undefined && speed !== undefined) {
+            duration = Math.abs(value - this.parent.data.values[key]) / speed * 1000;
+          }
         }
 
         if (duration === undefined) {

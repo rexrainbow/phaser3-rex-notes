@@ -8024,6 +8024,22 @@
 <li>Start
     <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">easeTo</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 <span class="c1">// easedata.easeTo(key, value, duration, ease);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">easeTo</span><span class="p">({</span>
+    <span class="nx">key</span><span class="o">:</span><span class="nx">key</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span><span class="nx">value</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="o">:</span><span class="mf">1000</span><span class="p">,</span>
+    <span class="nx">ease</span><span class="o">:</span><span class="s1">&#39;Linear&#39;</span>
+<span class="p">});</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">easeTo</span><span class="p">({</span>
+    <span class="nx">key</span><span class="o">:</span><span class="nx">key</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span><span class="nx">value</span><span class="p">,</span>
+    <span class="nx">speed</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>    <span class="c1">// value changing rate, per second</span>
+    <span class="nx">ease</span><span class="o">:</span><span class="s1">&#39;Linear&#39;</span>
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Stop
     <div class="highlight"><pre><span></span><code><span class="nx">easedata</span><span class="p">.</span><span class="nx">stopEase</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>           <span class="c1">// Set to end value</span>

@@ -380,11 +380,31 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): this;
 
+    easeDataTo(
+        config: {
+            key: string,
+            value: number,
+            duration?: number,
+            ease?: string,
+            speed?: number
+        }
+    ): this;
+
     easeDataToPromise(
         key: string,
         value: number,
         duration?: number,
         ease?: string
+    ): Promise<any>;
+
+    easeDataToPromise(
+        config: {
+            key: string,
+            value: number,
+            duration?: number,
+            ease?: string,
+            speed?: number
+        }
     ): Promise<any>;
 
     stopEaseData(

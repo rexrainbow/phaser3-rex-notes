@@ -79,6 +79,24 @@ var easedata = scene.plugins.get('rexEaseData').add(gameObject);
     easedata.easeTo(key, value, duration);
     // easedata.easeTo(key, value, duration, ease);
     ```
+    or
+    ```javascript
+    easedata.easeTo({
+        key:key,
+        value:value,
+        duration:1000,
+        ease:'Linear'
+    });
+    ```
+    or
+    ```javascript
+    easedata.easeTo({
+        key:key,
+        value:value,
+        speed: 10,    // value changing rate, per second
+        ease:'Linear'
+    });
+    ```
 - Stop
     ```javascript
     easedata.stopEase(key);           // Set to end value

@@ -20426,12 +20426,8 @@
 
   var OnInitShake = function OnInitShake(gameObject, shake) {
     // Route 'complete' of shake to gameObject
-    shake.completeEventName = undefined;
     shake.on('complete', function () {
-      if (shake.completeEventName) {
-        gameObject.emit(shake.completeEventName, gameObject);
-        shake.completeEventName = undefined;
-      }
+      gameObject.emit('shake.complete', gameObject);
     }); // Shake effect won't change position
   };
 
@@ -20451,8 +20447,6 @@
         });
         OnInitShake(this, this._shake);
       }
-
-      this._shake.completeEventName = 'shake.complete';
 
       if (duration !== undefined) {
         this._shake.setDuration(duration);
@@ -20526,6 +20520,11 @@
           value = config.value;
           duration = config.duration;
           ease = config.ease;
+          var speed = config.speed;
+
+          if (duration === undefined && speed !== undefined) {
+            duration = Math.abs(value - this.parent.data.values[key]) / speed * 1000;
+          }
         }
 
         if (duration === undefined) {
@@ -20554,6 +20553,11 @@
           value = config.value;
           duration = config.duration;
           ease = config.ease;
+          var speed = config.speed;
+
+          if (duration === undefined && speed !== undefined) {
+            duration = Math.abs(value - this.parent.data.values[key]) / speed * 1000;
+          }
         }
 
         if (duration === undefined) {

@@ -19,7 +19,8 @@ declare class EaseData extends Phaser.Events.EventEmitter {
             key: string,
             value: number,
             duration?: number,
-            ease?: string
+            ease?: string,
+            speed?: number
         }
     ): this;
 
@@ -35,7 +36,8 @@ declare class EaseData extends Phaser.Events.EventEmitter {
             key: string,
             value: number,
             duration?: number,
-            ease?: string
+            ease?: string,
+            speed?: number
         }
     ): this;
 
