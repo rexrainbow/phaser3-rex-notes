@@ -1,4 +1,4 @@
-var Clear = function () {
+var RemoveChildren = function () {
     var children = this.children.list;
     this.poolManager.freeMultiple(children);
     children.length = 0;
@@ -7,4 +7,4 @@ var Clear = function () {
     return this;
 }
 
-export default Clear;
+export default RemoveChildren;

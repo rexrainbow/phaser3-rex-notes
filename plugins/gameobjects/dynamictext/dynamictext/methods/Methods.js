@@ -1,6 +1,7 @@
 import SetPadding from './SetPadding.js';
 import GetPadding from './GetPadding.js';
 import ModifyTextStyle from './ModifyTextStyle.js';
+import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
 import ClearContent from './ClearContent.js';
 import SetText from './SetText.js';
@@ -20,6 +21,7 @@ export default {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
     setText: SetText,

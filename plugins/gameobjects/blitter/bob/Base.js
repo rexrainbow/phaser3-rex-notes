@@ -8,6 +8,10 @@ class Base {
         this.reset().setActive();
     }
 
+    destroy() {
+        this.parent.removeChild(this);
+    }
+
     setParent(parent) {
         this.parent = parent;
         return this;
