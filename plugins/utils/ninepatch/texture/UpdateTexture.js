@@ -1,5 +1,3 @@
-import MakeChildImageGameObject from '../../../../utils/rendertexture/MakeChildImageGameObject.js';
-
 var UpdateTexture = function () {
     this.clear();
 
@@ -58,7 +56,7 @@ var UpdateTexture = function () {
 
     var frameName, col, row, colWidth, rowHeight;
     var offsetX = 0, offsetY = 0;
-    var gameObject, imageType;
+    var imageType;
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
         row = this.rows.data[j];
         rowHeight = (row.stretch === 0) ? (row.height * fixedPartScaleY) : (proportionHeight * row.stretch);
@@ -81,22 +79,12 @@ var UpdateTexture = function () {
                 }
 
                 if (imageType === 0) {
-                    gameObject = MakeChildImageGameObject(this, '_image', 'image');
-                    gameObject
-                        .setTexture(this.textureKey, frameName)
-                        .setDisplaySize(colWidth, rowHeight);
+                    this._drawImage(frameName, offsetX, offsetY, colWidth, rowHeight);
                 } else {
-                    gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite');
-                    gameObject
-                        .setTexture(this.textureKey, frameName)
-                        .setSize(colWidth, rowHeight);
+                    this._drawTileSprite(frameName, offsetX, offsetY, colWidth, rowHeight);
                 }
             }
 
-            if (gameObject) {
-                this.draw(gameObject, offsetX, offsetY);
-                gameObject = undefined;
-            }
             offsetX += colWidth;
         }
 
