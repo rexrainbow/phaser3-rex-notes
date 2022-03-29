@@ -1,5 +1,4 @@
 import Methods from './Methods.js';
-import DefaultGetFrameNameCallback from './utils/DefaultGetFrameNameCallback.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -64,14 +63,6 @@ class NinePatch extends RenderTexture {
         var maxFixedPartScaleY = GetValue(config, 'maxFixedPartScaleY', undefined);
         this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
         this.setTexture(key, baseFrame, columns, rows); // Also update render texture
-    }
-
-    setGetFrameNameCallback(callback) {
-        if (callback === undefined) {
-            callback = DefaultGetFrameNameCallback;
-        }
-        this.getFrameNameCallback = callback;
-        return this;
     }
 
     get minWidth() {
