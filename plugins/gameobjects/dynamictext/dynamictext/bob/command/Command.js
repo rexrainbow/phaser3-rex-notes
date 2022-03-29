@@ -1,4 +1,4 @@
-import Base from '../renderbase/RenderBase.js';
+import Base from '../Base.js';
 import { CmdTypeName } from '../Types.js';
 
 class Command extends Base {

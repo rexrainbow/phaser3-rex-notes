@@ -1,7 +1,7 @@
-import Base from '../renderbase/RenderBase.js';
+import RenderBase from '../renderbase/RenderBase.js';
 import { ImageTypeName } from '../Types.js';
 
-class ImageData extends Base {
+class ImageData extends RenderBase {
     constructor(
         parent,
         key, frame

@@ -1,6 +1,6 @@
-import Base from '../renderbase/RenderBase';
+import RenderBase from '../renderbase/RenderBase';
 
-export default class ImageData extends Base {
+export default class ImageData extends RenderBase {
     readonly type: 'image';
 
     setTexture(key: string, frame?: string | null): this;

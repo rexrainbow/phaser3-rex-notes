@@ -1,5 +1,5 @@
 const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-const Utils = Phaser.Renderer.WebGL.Utils;
+const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
 var FrameMatrix = new TransformMatrix();
 
@@ -46,7 +46,7 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, textureUnit, ro
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
 
-    var tint = Utils.getTintAppendFloatAlpha(this.color, this.alpha * alpha);
+    var tint = GetTint(this.color, this.alpha * alpha);
 
     pipeline.batchQuad(
         this.parent,

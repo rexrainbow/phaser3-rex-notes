@@ -77,12 +77,17 @@ class TypeWriter {
 }
 
 var SetChildVisible = function (child) {
-    child.setVisible();
+    if (child.setVisible) {
+        child.setVisible();
+    }
 }
 
 var SetChildrenInvisible = function (children) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        children[i].setVisible(false);
+        var child = children[i];
+        if (child.setVisible) {
+            child.setVisible(false);
+        }
     }
 }
 

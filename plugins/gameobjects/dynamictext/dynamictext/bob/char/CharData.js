@@ -1,8 +1,8 @@
-import Base from '../renderbase/RenderBase.js';
+import RenderBase from '../renderbase/RenderBase.js';
 import { CharTypeName } from '../Types.js';
 import TextStyle from './TextStyle.js';
 
-class CharData extends Base {
+class CharData extends RenderBase {
     constructor(
         parent,
         text,

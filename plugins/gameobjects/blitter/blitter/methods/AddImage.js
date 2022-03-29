@@ -1,5 +1,5 @@
 import { ImageTypeName } from '../bob/Types.js';
-import ImageData from '../bob/image/Image';
+import ImageData from '../bob/image/ImageData';
 
 var AddImage = function (config) {
     if (typeof (config) === 'string') {

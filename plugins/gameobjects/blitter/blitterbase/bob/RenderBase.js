@@ -38,25 +38,9 @@ class RenderBase extends Base {
         return this;
     }
 
-    get x() {
-        return this._x;
-    }
-
-    set x(value) {
-        this._x = value;
-    }
-
     setX(x) {
         this.x = x;
         return this;
-    }
-
-    get y() {
-        return this._y;
-    }
-
-    set y(value) {
-        this._y = value;
     }
 
     setY(y) {
@@ -70,21 +54,13 @@ class RenderBase extends Base {
         return this;
     }
 
-    get rotation() {
-        return this._rotation;
-    }
-
-    set rotation(value) {
-        this._rotation = value;
-    }
-
     setRotation(rotation) {
         this.rotation = rotation;
         return this;
     }
 
     get angle() {
-        return RadToDeg(this._rotation);
+        return RadToDeg(this.rotation);
     }
 
     set angle(value) {
@@ -94,14 +70,6 @@ class RenderBase extends Base {
     setAngle(angle) {
         this.angle = angle;
         return this;
-    }
-
-    get scaleX() {
-        return this._scaleX;
-    }
-
-    set scaleX(value) {
-        this._scaleX = value;
     }
 
     setScaleX(scaleX) {
@@ -130,14 +98,6 @@ class RenderBase extends Base {
         return this;
     }
 
-    get scaleY() {
-        return this._scaleY;
-    }
-
-    set scaleY(value) {
-        this._scaleY = value;
-    }
-
     setScaleY(scaleY) {
         this.scaleY = scaleY;
         return this;
@@ -152,12 +112,10 @@ class RenderBase extends Base {
         return this;
     }
 
-    // Override
     get height() {
         return this._height;
     }
 
-    // Override
     set height(value) {
         this._height = value;
         this._displayOriginY = value * this.originY;
@@ -193,8 +151,16 @@ class RenderBase extends Base {
         this._scaleX = value / this._width;
     }
 
-    setDisplayWidth(width) {
+    setDisplayWidth(width, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+            keepAspectRatio = false;
+        }
+
         this.displayWidth = width;
+
+        if (keepAspectRatio) {
+            this.scaleY = this.scaleX;
+        }
         return this;
     }
 
@@ -206,8 +172,54 @@ class RenderBase extends Base {
         this._scaleY = value / this._height;
     }
 
-    setDisplayHeight(height) {
+    setDisplayHeight(height, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+            keepAspectRatio = false;
+        }
+
         this.displayHeight = height;
+
+        if (keepAspectRatio) {
+            this.scaleX = this.scaleY;
+        }
+        return this;
+    }
+
+    setOriginX(originX) {
+        this.originX = originX;
+        this._displayOriginX = this.width * originX;
+        return this;
+    }
+
+    setOriginY(originY) {
+        this.originY = originY;
+        this._displayOriginY = this.height * originY;
+        return this;
+    }
+
+    setOrigin(originX, originY) {
+        if (originY === undefined) {
+            originY = originX;
+        }
+        this.setOriginX(originX).setOriginY(originY);
+        return this;
+    }
+
+    get depth() {
+        return this._depth;
+    }
+
+    set depth(value) {
+        this.setDisplayListDirty(this._depth != value);
+        this._depth = value;
+    }
+
+    setDepth(depth) {
+        if (depth === undefined) {
+            depth = 0;
+        }
+
+        this.depth = depth;
         return this;
     }
 
@@ -280,44 +292,6 @@ class RenderBase extends Base {
             this.setDepth(o.depth);
         }
 
-        return this;
-    }
-
-    setOriginX(originX) {
-        this.originX = originX;
-        this._displayOriginX = this.width * originX;
-        return this;
-    }
-
-    setOriginY(originY) {
-        this.originY = originY;
-        this._displayOriginY = this.height * originY;
-        return this;
-    }
-
-    setOrigin(originX, originY) {
-        if (originY === undefined) {
-            originY = originX;
-        }
-        this.setOriginX(originX).setOriginY(originY);
-        return this;
-    }
-
-    get depth() {
-        return this._depth;
-    }
-
-    set depth(value) {
-        this.setDisplayListDirty(this._depth != value);
-        this._depth = value;
-    }
-
-    setDepth(depth) {
-        if (depth === undefined) {
-            depth = 0;
-        }
-
-        this.depth = depth;
         return this;
     }
 

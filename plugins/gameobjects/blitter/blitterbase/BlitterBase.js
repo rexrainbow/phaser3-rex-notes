@@ -18,6 +18,13 @@ class Blitter extends GameObject {
             frame = GetValue(config, 'frame');
         }
 
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
+
         super(scene, 'rexBlitter');
 
         this.children = new List();
@@ -94,7 +101,6 @@ Phaser.Class.mixin(Blitter,
         Components.Pipeline,
         Components.ScrollFactor,
         Components.Texture,
-        Components.Tint,
         Components.Transform,
         Components.Visible,
         Render,
