@@ -88,11 +88,11 @@ class ImageData extends RenderBase {
             return this;
         }
 
-        super.modifyPorperties(o);
-
         if (o.hasOwnProperty('frame')) {
             this.setFrame(o.frame);
         }
+
+        super.modifyPorperties(o);
 
         if (o.hasOwnProperty('flipX')) {
             this.setFlipX(o.flipX);
