@@ -16,13 +16,27 @@ class ImageData extends RenderBase {
         return this.parent.texture;
     }
 
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+    }
+
     setFrame(frame) {
         if (arguments.length > 0 && !IsPlainObject(frame)) {
             frame = this.texture.get(frame);
         }
         this.frame = frame;
-        this.width = (frame) ? frame.width : 0;
-        this.height = (frame) ? frame.height : 0;
+        this._width = (frame) ? frame.width : 0;
+        this._height = (frame) ? frame.height : 0;
         return this;
     }
 
@@ -86,6 +100,17 @@ class ImageData extends RenderBase {
     modifyPorperties(o) {
         if (!o) {
             return this;
+        }
+
+        // Size of Image is equal to frame size,
+        // Move width, height properties to displayWidth,displayHeight
+        if (o.hasOwnProperty('width')) {
+            o.displayWidth = o.width;
+            delete o.width;
+        }
+        if (o.hasOwnProperty('height')) {
+            o.displayHeight = o.height;
+            delete o.height;
         }
 
         if (o.hasOwnProperty('frame')) {

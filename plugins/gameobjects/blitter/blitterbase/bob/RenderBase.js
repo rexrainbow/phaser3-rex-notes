@@ -83,7 +83,6 @@ class RenderBase extends Base {
 
     set width(value) {
         this._width = value;
-        this._displayOriginX = value * this.originX;
     }
 
     setWidth(width, keepAspectRatio) {
@@ -118,7 +117,6 @@ class RenderBase extends Base {
 
     set height(value) {
         this._height = value;
-        this._displayOriginY = value * this.originY;
     }
 
     setHeight(height, keepAspectRatio) {
@@ -144,11 +142,11 @@ class RenderBase extends Base {
     }
 
     get displayWidth() {
-        return this._width * this._scaleX;
+        return this._width * this.scaleX;
     }
 
     set displayWidth(value) {
-        this._scaleX = value / this._width;
+        this.scaleX = value / this._width;
     }
 
     setDisplayWidth(width, keepAspectRatio) {
@@ -165,11 +163,11 @@ class RenderBase extends Base {
     }
 
     get displayHeight() {
-        return this._height * this._scaleY;
+        return this._height * this.scaleY;
     }
 
     set displayHeight(value) {
-        this._scaleY = value / this._height;
+        this.scaleY = value / this._height;
     }
 
     setDisplayHeight(height, keepAspectRatio) {

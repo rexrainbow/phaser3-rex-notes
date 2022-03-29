@@ -6,8 +6,8 @@ var FrameMatrix = new TransformMatrix();
 var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
     var width = this._width,
         height = this._height;
-    var displayOriginX = this._displayOriginX,
-        displayOriginY = this._displayOriginY;
+    var displayOriginX = width * this.originX,
+        displayOriginY = height * this.originY;
     var x = this.x - dx,
         y = this.y - dy;
 
