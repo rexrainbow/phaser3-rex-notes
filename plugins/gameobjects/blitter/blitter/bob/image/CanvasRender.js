@@ -4,10 +4,10 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
 
     var width = this._width,
         height = this._height;
-    var displayOriginX = this._displayOriginX,
-        displayOriginY = this._displayOriginY;
-    var x = -displayOriginX,
-        y = -displayOriginY;
+    var displayOriginX = width * this.originX,
+        displayOriginY = height * this.originY;
+    var x = this.x - displayOriginX,
+        y = this.y - displayOriginY;
 
     var flipX = 1;
     var flipY = 1;
@@ -33,11 +33,10 @@ var CanvasRender = function (ctx, dx, dy, roundPixels) {
     ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
 
     var frame = this.frame;
-
     ctx.drawImage(
         frame.source.image,
-        frame.cutX, frame.cutY,
-        frame.cutWidth, frame.cutHeight,
+        frame.cutX, frame.cutY, width, height,
+        0, 0, width, height,
     );
 
     ctx.restore();

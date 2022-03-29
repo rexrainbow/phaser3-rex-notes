@@ -20,11 +20,11 @@ class Demo extends Phaser.Scene {
             .setSize(300, 300)
             .setOrigin(0.5)
             .addImage({
-                x: 0, y: 0,
+                x: 150, y: 0,
                 // angle: 180,
                 flipY: true,
                 // scale: 1.2,
-                originX: 1, originY: 1,
+                originX: 1, originY: 0,
                 depth: 0,
             })
         // .addImage({

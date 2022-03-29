@@ -96,7 +96,7 @@ var CreateTexture1 = function (scene, key) {
 }
 
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     parent: 'phaser-example',
     width: 800,
     height: 600,

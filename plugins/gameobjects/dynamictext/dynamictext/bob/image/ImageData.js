@@ -84,10 +84,12 @@ class ImageData extends RenderBase {
         var context = this.context;
         var frame = this.frameObj;
 
+        var width = this.frameWidth,
+            height = this.frameHeight;
         context.drawImage(
             frame.source.image,              // image
-            frame.cutX, frame.cutY,          // sx, sy
-            frame.cutWidth, frame.cutHeight, // sWidth, sHeight
+            frame.cutX, frame.cutY, width, height,
+            0, 0, width, height,
         );
     }
 
