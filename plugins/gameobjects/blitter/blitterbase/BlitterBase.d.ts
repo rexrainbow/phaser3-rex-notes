@@ -23,8 +23,8 @@ declare class BlitterBase extends Phaser.GameObjects.GameObject {
     texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
     frame: Phaser.Textures.Frame;
     setTexture(
-        key: string | Phaser.Textures.Texture,
-        frame?: string | number
+        key: string,
+        frame?: string | number | undefined,
     ): this;
 
     addChild(
@@ -62,6 +62,7 @@ declare class BlitterBase extends Phaser.GameObjects.GameObject {
     displayHeight: number;
     setSize(width: number, height: number): this;
     setDisplaySize(width: number, height: number): this;
+    resize(width: number, height: number): this;
 
     depth: number;
     setDepth(value: number): this;
