@@ -3,17 +3,17 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SetStretchMode = function(mode) {
     if (IsPlainObject(mode)) {
-        this.stretchMode.edge = ParseMode(GetValue(mode, 'edge', 0));
-        this.stretchMode.internal = ParseMode(GetValue(mode, 'internal', 0));
+        this.stretchMode.edge = parseMode(GetValue(mode, 'edge', 0));
+        this.stretchMode.internal = parseMode(GetValue(mode, 'internal', 0));
     } else {
-        mode = ParseMode(mode);
+        mode = parseMode(mode);
         this.stretchMode.edge = mode;
         this.stretchMode.internal = mode;
     }
     return this;
 };
 
-var ParseMode = function (mode) {
+var parseMode = function (mode) {
     if (typeof (mode) === 'string') {
         mode = EXTENDMODE[mode];
     }

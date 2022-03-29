@@ -1,4 +1,4 @@
-import DeepClone from "../../object/DeepClone.js";
+import DeepClone from "../../../../utils/object/DeepClone.js";
 
 var SetTexture = function (key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
