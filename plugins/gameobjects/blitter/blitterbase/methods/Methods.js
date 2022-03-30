@@ -6,6 +6,7 @@ import RemoveChildren from './RemoveChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetChildren from './GetChildren.js';
 import PopReusedBob from './PopReusedBob.js';
+import SetCrop from './SetCrop.js';
 
 var methods = {
     setTexture: SetTexture,
@@ -18,6 +19,7 @@ var methods = {
     getLastAppendedChildren: GetLastAppendedChildren,
     getChildren: GetChildren,
     popReusedBob: PopReusedBob,
+    setCrop: SetCrop
 }
 
 export default methods;

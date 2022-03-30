@@ -17,6 +17,12 @@ var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
 
     ctx.translate(dx, dy);
 
+    if (src.isCropped) {
+        ctx.beginPath();
+        ctx.rect(src.cropX, src.cropY, src.cropWidth, src.cropHeight);
+        ctx.clip();
+    }
+
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
         bobs[i].canvasRender(ctx, dx, dy, roundPixels);
     }
