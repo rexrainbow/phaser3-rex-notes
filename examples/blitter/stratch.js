@@ -23,11 +23,12 @@ class Demo extends Phaser.Scene {
             columns: [20, undefined, 20],
             rows: [20, undefined, 20],
         })
+            .setAngle(-45)
 
         var blitter = this.add.rexBlitter(550, 200, 'bg0')
             .setSize(250, 200)
             .setOrigin(0.5)
-        blitter
+            .setAngle(-45)
             .addImage({
                 frame: '0,0',
                 x: 0, y: 0,
