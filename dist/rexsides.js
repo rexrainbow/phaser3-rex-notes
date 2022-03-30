@@ -5350,7 +5350,13 @@
 
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
-    gameObject.rexContainer.parent.setChildVisible(gameObject, !hidden);
+    var parent = gameObject.rexContainer.parent;
+
+    if (parent) {
+      parent.setChildVisible(gameObject, !hidden);
+    } else {
+      this.setVisible(!hidden);
+    }
   };
 
   var HideMethods = {

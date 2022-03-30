@@ -153,6 +153,23 @@
     return _get(target, property, receiver || target);
   }
 
+  var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
+    if (callback === undefined) {
+      callback = DefaultGetFrameNameCallback;
+    }
+
+    this.getFrameNameCallback = callback;
+    return this;
+  };
+
+  var DefaultGetFrameNameCallback = function DefaultGetFrameNameCallback(colIndex, rowIndex, baseFrameName) {
+    if (baseFrameName === '__BASE') {
+      return "".concat(colIndex, ",").concat(rowIndex);
+    } else {
+      return "".concat(baseFrameName, "_").concat(colIndex, ",").concat(rowIndex);
+    }
+  };
+
   var DeepClone = function DeepClone(inObject) {
     var outObject;
     var value;
@@ -306,30 +323,6 @@
     return this;
   };
 
-  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
-    if (className === undefined) {
-      className = 'image';
-    }
-
-    if (!parent[key]) {
-      parent[key] = parent.scene.make[className]({
-        add: false,
-        origin: {
-          x: 0,
-          y: 0
-        }
-      });
-      parent.once('destroy', function () {
-        if (parent[key]) {
-          parent[key].destroy();
-          parent[key] = undefined;
-        }
-      });
-    }
-
-    return parent[key];
-  };
-
   var UpdateTexture = function UpdateTexture() {
     this.clear();
 
@@ -401,7 +394,7 @@
     var frameName, col, row, colWidth, rowHeight;
     var offsetX = 0,
         offsetY = 0;
-    var gameObject, imageType;
+    var imageType;
 
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
       row = this.rows.data[j];
@@ -429,17 +422,10 @@
           }
 
           if (imageType === 0) {
-            gameObject = MakeChildImageGameObject(this, '_image', 'image');
-            gameObject.setTexture(this.textureKey, frameName).setDisplaySize(colWidth, rowHeight);
+            this._drawImage(this.textureKey, frameName, offsetX, offsetY, colWidth, rowHeight);
           } else {
-            gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite');
-            gameObject.setTexture(this.textureKey, frameName).setSize(colWidth, rowHeight);
+            this._drawTileSprite(this.textureKey, frameName, offsetX, offsetY, colWidth, rowHeight);
           }
-        }
-
-        if (gameObject) {
-          this.draw(gameObject, offsetX, offsetY);
-          gameObject = undefined;
         }
 
         offsetX += colWidth;
@@ -505,7 +491,13 @@
     return this;
   };
 
-  var Methods = {
+  var NOOP = function NOOP() {//  NOOP
+  };
+
+  var Methods$1 = {
+    _drawImage: NOOP,
+    _drawTileSprite: NOOP,
+    setGetFrameNameCallback: SetGetFrameNameCallback,
     setTexture: SetTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
@@ -514,144 +506,184 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var DefaultBaseFrameName = '__BASE';
-
-  var GetFrameNameCallback = function GetFrameNameCallback(colIndex, rowIndex, baseFrameName) {
-    if (baseFrameName === DefaultBaseFrameName) {
-      return "".concat(colIndex, ",").concat(rowIndex);
-    } else {
-      return "".concat(baseFrameName, "_").concat(colIndex, ",").concat(rowIndex);
-    }
-  };
-
-  var RenderTexture = Phaser.GameObjects.RenderTexture;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
 
-  var NinePatch = /*#__PURE__*/function (_RenderTexture) {
-    _inherits(NinePatch, _RenderTexture);
+  var NinePatchBase = function NinePatchBase(GOClass, type) {
+    var NinePatch = /*#__PURE__*/function (_GOClass) {
+      _inherits(NinePatch, _GOClass);
+
+      var _super = _createSuper(NinePatch);
+
+      function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
+        var _this;
+
+        _classCallCheck(this, NinePatch);
+
+        if (IsPlainObject(x)) {
+          config = x;
+          x = GetValue(config, 'x', 0);
+          y = GetValue(config, 'y', 0);
+          width = GetValue(config, 'width', 1);
+          height = GetValue(config, 'height', 1);
+          key = GetValue(config, 'key', undefined);
+          baseFrame = GetValue(config, 'baseFrame', undefined);
+          columns = GetValue(config, 'columns', undefined);
+          rows = GetValue(config, 'rows', undefined);
+        } else if (IsPlainObject(width)) {
+          config = width;
+          width = GetValue(config, 'width', 1);
+          height = GetValue(config, 'height', 1);
+          key = GetValue(config, 'key', undefined);
+          baseFrame = GetValue(config, 'baseFrame', undefined);
+          columns = GetValue(config, 'columns', undefined);
+          rows = GetValue(config, 'rows', undefined);
+        } else if (IsPlainObject(key)) {
+          config = key;
+          key = GetValue(config, 'key', undefined);
+          baseFrame = GetValue(config, 'baseFrame', undefined);
+          columns = GetValue(config, 'columns', undefined);
+          rows = GetValue(config, 'rows', undefined);
+        } else if (IsPlainObject(baseFrame)) {
+          config = baseFrame;
+          baseFrame = GetValue(config, 'baseFrame', undefined);
+          columns = GetValue(config, 'columns', undefined);
+          rows = GetValue(config, 'rows', undefined);
+        } else if (Array.isArray(baseFrame)) {
+          config = rows;
+          rows = columns;
+          columns = baseFrame;
+          baseFrame = GetValue(config, 'baseFrame', undefined);
+        } else if (IsPlainObject(columns)) {
+          config = columns;
+          columns = GetValue(config, 'columns', undefined);
+          rows = GetValue(config, 'rows', undefined);
+        }
+
+        _this = _super.call(this, scene);
+        _this.type = type;
+
+        _this.setPosition(x, y).setSize(width, height).setOrigin(0.5, 0.5);
+
+        _this.columns = {};
+        _this.rows = {};
+        _this.stretchMode = {};
+        _this._tileSprite = undefined; // Reserved for drawing image
+
+        _this._image = undefined; // Reserved for drawing image
+
+        _this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
+
+        _this.setStretchMode(GetValue(config, 'stretchMode', 0));
+
+        _this.setPreserveRatio(GetValue(config, 'preserveRatio', true));
+
+        var maxFixedPartScale = GetValue(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue(config, 'maxFixedPartScaleY', undefined);
+
+        _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
+
+        _this.setTexture(key, baseFrame, columns, rows);
+
+        return _this;
+      }
+
+      _createClass(NinePatch, [{
+        key: "minWidth",
+        get: function get() {
+          return this.columns.minWidth;
+        }
+      }, {
+        key: "minHeight",
+        get: function get() {
+          return this.rows.minHeight;
+        }
+      }, {
+        key: "fixedPartScaleX",
+        get: function get() {
+          return this.columns.scale;
+        }
+      }, {
+        key: "fixedPartScaleY",
+        get: function get() {
+          return this.rows.scale;
+        }
+      }, {
+        key: "resize",
+        value: function resize(width, height) {
+          if (this.width === width && this.height === height) {
+            return this;
+          }
+
+          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+
+          this.updateTexture();
+          return this;
+        }
+      }]);
+
+      return NinePatch;
+    }(GOClass);
+
+    Object.assign(NinePatch.prototype, Methods$1);
+    return NinePatch;
+  };
+
+  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
+    if (className === undefined) {
+      className = 'image';
+    }
+
+    if (!parent[key]) {
+      parent[key] = parent.scene.make[className]({
+        add: false,
+        origin: {
+          x: 0,
+          y: 0
+        }
+      });
+      parent.once('destroy', function () {
+        if (parent[key]) {
+          parent[key].destroy();
+          parent[key] = undefined;
+        }
+      });
+    }
+
+    return parent[key];
+  };
+
+  var DrawImage = function DrawImage(key, frame, x, y, width, height) {
+    var gameObject = MakeChildImageGameObject(this, '_image', 'image').setTexture(key, frame).setDisplaySize(width, height);
+    this.draw(gameObject, x, y);
+  };
+
+  var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
+    var gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite').setTexture(key, frame).setSize(width, height);
+    this.draw(gameObject, x, y);
+  };
+
+  var Methods = {
+    _drawImage: DrawImage,
+    _drawTileSprite: DrawTileSprite
+  };
+
+  var RenderTexture = Phaser.GameObjects.RenderTexture;
+
+  var NinePatch = /*#__PURE__*/function (_NinePatchBase) {
+    _inherits(NinePatch, _NinePatchBase);
 
     var _super = _createSuper(NinePatch);
 
-    function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
-      var _this;
-
+    function NinePatch() {
       _classCallCheck(this, NinePatch);
 
-      if (IsPlainObject(x)) {
-        config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        width = GetValue(config, 'width', 1);
-        height = GetValue(config, 'height', 1);
-        key = GetValue(config, 'key', undefined);
-        baseFrame = GetValue(config, 'baseFrame', undefined);
-        columns = GetValue(config, 'columns', undefined);
-        rows = GetValue(config, 'rows', undefined);
-      } else if (IsPlainObject(width)) {
-        config = width;
-        width = GetValue(config, 'width', 1);
-        height = GetValue(config, 'height', 1);
-        key = GetValue(config, 'key', undefined);
-        baseFrame = GetValue(config, 'baseFrame', undefined);
-        columns = GetValue(config, 'columns', undefined);
-        rows = GetValue(config, 'rows', undefined);
-      } else if (IsPlainObject(key)) {
-        config = key;
-        key = GetValue(config, 'key', undefined);
-        baseFrame = GetValue(config, 'baseFrame', undefined);
-        columns = GetValue(config, 'columns', undefined);
-        rows = GetValue(config, 'rows', undefined);
-      } else if (IsPlainObject(baseFrame)) {
-        config = baseFrame;
-        baseFrame = GetValue(config, 'baseFrame', undefined);
-        columns = GetValue(config, 'columns', undefined);
-        rows = GetValue(config, 'rows', undefined);
-      } else if (Array.isArray(baseFrame)) {
-        config = rows;
-        rows = columns;
-        columns = baseFrame;
-        baseFrame = GetValue(config, 'baseFrame', undefined);
-      } else if (IsPlainObject(columns)) {
-        config = columns;
-        columns = GetValue(config, 'columns', undefined);
-        rows = GetValue(config, 'rows', undefined);
-      }
-
-      _this = _super.call(this, scene, x, y, width, height);
-      _this.columns = {};
-      _this.rows = {};
-      _this.stretchMode = {};
-      _this._tileSprite = undefined; // Reserved for drawing image
-
-      _this._image = undefined; // Reserved for drawing image
-
-      _this.setOrigin(0.5, 0.5);
-
-      _this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
-
-      _this.setStretchMode(GetValue(config, 'stretchMode', 0));
-
-      _this.setPreserveRatio(GetValue(config, 'preserveRatio', true));
-
-      var maxFixedPartScale = GetValue(config, 'maxFixedPartScale', 1);
-      var maxFixedPartScaleX = GetValue(config, 'maxFixedPartScaleX', maxFixedPartScale);
-      var maxFixedPartScaleY = GetValue(config, 'maxFixedPartScaleY', undefined);
-
-      _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-
-      _this.setTexture(key, baseFrame, columns, rows); // Also update render texture
-
-
-      return _this;
+      return _super.apply(this, arguments);
     }
 
-    _createClass(NinePatch, [{
-      key: "setGetFrameNameCallback",
-      value: function setGetFrameNameCallback(callback) {
-        if (callback === undefined) {
-          callback = GetFrameNameCallback;
-        }
-
-        this.getFrameNameCallback = callback;
-        return this;
-      }
-    }, {
-      key: "minWidth",
-      get: function get() {
-        return this.columns.minWidth;
-      }
-    }, {
-      key: "minHeight",
-      get: function get() {
-        return this.rows.minHeight;
-      }
-    }, {
-      key: "fixedPartScaleX",
-      get: function get() {
-        return this.columns.scale;
-      }
-    }, {
-      key: "fixedPartScaleY",
-      get: function get() {
-        return this.rows.scale;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
-        if (this.width === width && this.height === height) {
-          return this;
-        }
-
-        _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
-
-        this.updateTexture();
-        return this;
-      }
-    }]);
-
     return NinePatch;
-  }(RenderTexture);
+  }(NinePatchBase(RenderTexture, 'rexNinePatch'));
 
   Object.assign(NinePatch.prototype, Methods);
 

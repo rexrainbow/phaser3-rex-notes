@@ -19,6 +19,7 @@ module.exports = {
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
+    'ninepatch2plugin': './plugins/ninepatch2-plugin.js',
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
     'quadimageplugin': './plugins/quadimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',

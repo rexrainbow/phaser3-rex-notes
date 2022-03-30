@@ -290,6 +290,23 @@
     return ObjectFactory;
   }();
 
+  var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
+    if (callback === undefined) {
+      callback = DefaultGetFrameNameCallback;
+    }
+
+    this.getFrameNameCallback = callback;
+    return this;
+  };
+
+  var DefaultGetFrameNameCallback = function DefaultGetFrameNameCallback(colIndex, rowIndex, baseFrameName) {
+    if (baseFrameName === '__BASE') {
+      return "".concat(colIndex, ",").concat(rowIndex);
+    } else {
+      return "".concat(baseFrameName, "_").concat(colIndex, ",").concat(rowIndex);
+    }
+  };
+
   var DeepClone = function DeepClone(inObject) {
     var outObject;
     var value;
@@ -443,30 +460,6 @@
     return this;
   };
 
-  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
-    if (className === undefined) {
-      className = 'image';
-    }
-
-    if (!parent[key]) {
-      parent[key] = parent.scene.make[className]({
-        add: false,
-        origin: {
-          x: 0,
-          y: 0
-        }
-      });
-      parent.once('destroy', function () {
-        if (parent[key]) {
-          parent[key].destroy();
-          parent[key] = undefined;
-        }
-      });
-    }
-
-    return parent[key];
-  };
-
   var UpdateTexture = function UpdateTexture() {
     this.clear();
 
@@ -538,7 +531,7 @@
     var frameName, col, row, colWidth, rowHeight;
     var offsetX = 0,
         offsetY = 0;
-    var gameObject, imageType;
+    var imageType;
 
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
       row = this.rows.data[j];
@@ -566,17 +559,10 @@
           }
 
           if (imageType === 0) {
-            gameObject = MakeChildImageGameObject(this, '_image', 'image');
-            gameObject.setTexture(this.textureKey, frameName).setDisplaySize(colWidth, rowHeight);
+            this._drawImage(this.textureKey, frameName, offsetX, offsetY, colWidth, rowHeight);
           } else {
-            gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite');
-            gameObject.setTexture(this.textureKey, frameName).setSize(colWidth, rowHeight);
+            this._drawTileSprite(this.textureKey, frameName, offsetX, offsetY, colWidth, rowHeight);
           }
-        }
-
-        if (gameObject) {
-          this.draw(gameObject, offsetX, offsetY);
-          gameObject = undefined;
         }
 
         offsetX += colWidth;
@@ -642,7 +628,13 @@
     return this;
   };
 
-  var Methods$7 = {
+  var NOOP = function NOOP() {//  NOOP
+  };
+
+  var Methods$8 = {
+    _drawImage: NOOP,
+    _drawTileSprite: NOOP,
+    setGetFrameNameCallback: SetGetFrameNameCallback,
     setTexture: SetTexture$1,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
@@ -651,144 +643,184 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var DefaultBaseFrameName = '__BASE';
-
-  var GetFrameNameCallback$1 = function GetFrameNameCallback(colIndex, rowIndex, baseFrameName) {
-    if (baseFrameName === DefaultBaseFrameName) {
-      return "".concat(colIndex, ",").concat(rowIndex);
-    } else {
-      return "".concat(baseFrameName, "_").concat(colIndex, ",").concat(rowIndex);
-    }
-  };
-
-  var RenderTexture$1 = Phaser.GameObjects.RenderTexture;
   var IsPlainObject$v = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2z = Phaser.Utils.Objects.GetValue;
 
-  var NinePatch = /*#__PURE__*/function (_RenderTexture) {
-    _inherits(NinePatch, _RenderTexture);
+  var NinePatchBase = function NinePatchBase(GOClass, type) {
+    var NinePatch = /*#__PURE__*/function (_GOClass) {
+      _inherits(NinePatch, _GOClass);
+
+      var _super = _createSuper(NinePatch);
+
+      function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
+        var _this;
+
+        _classCallCheck(this, NinePatch);
+
+        if (IsPlainObject$v(x)) {
+          config = x;
+          x = GetValue$2z(config, 'x', 0);
+          y = GetValue$2z(config, 'y', 0);
+          width = GetValue$2z(config, 'width', 1);
+          height = GetValue$2z(config, 'height', 1);
+          key = GetValue$2z(config, 'key', undefined);
+          baseFrame = GetValue$2z(config, 'baseFrame', undefined);
+          columns = GetValue$2z(config, 'columns', undefined);
+          rows = GetValue$2z(config, 'rows', undefined);
+        } else if (IsPlainObject$v(width)) {
+          config = width;
+          width = GetValue$2z(config, 'width', 1);
+          height = GetValue$2z(config, 'height', 1);
+          key = GetValue$2z(config, 'key', undefined);
+          baseFrame = GetValue$2z(config, 'baseFrame', undefined);
+          columns = GetValue$2z(config, 'columns', undefined);
+          rows = GetValue$2z(config, 'rows', undefined);
+        } else if (IsPlainObject$v(key)) {
+          config = key;
+          key = GetValue$2z(config, 'key', undefined);
+          baseFrame = GetValue$2z(config, 'baseFrame', undefined);
+          columns = GetValue$2z(config, 'columns', undefined);
+          rows = GetValue$2z(config, 'rows', undefined);
+        } else if (IsPlainObject$v(baseFrame)) {
+          config = baseFrame;
+          baseFrame = GetValue$2z(config, 'baseFrame', undefined);
+          columns = GetValue$2z(config, 'columns', undefined);
+          rows = GetValue$2z(config, 'rows', undefined);
+        } else if (Array.isArray(baseFrame)) {
+          config = rows;
+          rows = columns;
+          columns = baseFrame;
+          baseFrame = GetValue$2z(config, 'baseFrame', undefined);
+        } else if (IsPlainObject$v(columns)) {
+          config = columns;
+          columns = GetValue$2z(config, 'columns', undefined);
+          rows = GetValue$2z(config, 'rows', undefined);
+        }
+
+        _this = _super.call(this, scene);
+        _this.type = type;
+
+        _this.setPosition(x, y).setSize(width, height).setOrigin(0.5, 0.5);
+
+        _this.columns = {};
+        _this.rows = {};
+        _this.stretchMode = {};
+        _this._tileSprite = undefined; // Reserved for drawing image
+
+        _this._image = undefined; // Reserved for drawing image
+
+        _this.setGetFrameNameCallback(GetValue$2z(config, 'getFrameNameCallback', undefined));
+
+        _this.setStretchMode(GetValue$2z(config, 'stretchMode', 0));
+
+        _this.setPreserveRatio(GetValue$2z(config, 'preserveRatio', true));
+
+        var maxFixedPartScale = GetValue$2z(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue$2z(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue$2z(config, 'maxFixedPartScaleY', undefined);
+
+        _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
+
+        _this.setTexture(key, baseFrame, columns, rows);
+
+        return _this;
+      }
+
+      _createClass(NinePatch, [{
+        key: "minWidth",
+        get: function get() {
+          return this.columns.minWidth;
+        }
+      }, {
+        key: "minHeight",
+        get: function get() {
+          return this.rows.minHeight;
+        }
+      }, {
+        key: "fixedPartScaleX",
+        get: function get() {
+          return this.columns.scale;
+        }
+      }, {
+        key: "fixedPartScaleY",
+        get: function get() {
+          return this.rows.scale;
+        }
+      }, {
+        key: "resize",
+        value: function resize(width, height) {
+          if (this.width === width && this.height === height) {
+            return this;
+          }
+
+          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+
+          this.updateTexture();
+          return this;
+        }
+      }]);
+
+      return NinePatch;
+    }(GOClass);
+
+    Object.assign(NinePatch.prototype, Methods$8);
+    return NinePatch;
+  };
+
+  var MakeChildImageGameObject = function MakeChildImageGameObject(parent, key, className) {
+    if (className === undefined) {
+      className = 'image';
+    }
+
+    if (!parent[key]) {
+      parent[key] = parent.scene.make[className]({
+        add: false,
+        origin: {
+          x: 0,
+          y: 0
+        }
+      });
+      parent.once('destroy', function () {
+        if (parent[key]) {
+          parent[key].destroy();
+          parent[key] = undefined;
+        }
+      });
+    }
+
+    return parent[key];
+  };
+
+  var DrawImage$1 = function DrawImage(key, frame, x, y, width, height) {
+    var gameObject = MakeChildImageGameObject(this, '_image', 'image').setTexture(key, frame).setDisplaySize(width, height);
+    this.draw(gameObject, x, y);
+  };
+
+  var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
+    var gameObject = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite').setTexture(key, frame).setSize(width, height);
+    this.draw(gameObject, x, y);
+  };
+
+  var Methods$7 = {
+    _drawImage: DrawImage$1,
+    _drawTileSprite: DrawTileSprite
+  };
+
+  var RenderTexture$1 = Phaser.GameObjects.RenderTexture;
+
+  var NinePatch = /*#__PURE__*/function (_NinePatchBase) {
+    _inherits(NinePatch, _NinePatchBase);
 
     var _super = _createSuper(NinePatch);
 
-    function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
-      var _this;
-
+    function NinePatch() {
       _classCallCheck(this, NinePatch);
 
-      if (IsPlainObject$v(x)) {
-        config = x;
-        x = GetValue$2z(config, 'x', 0);
-        y = GetValue$2z(config, 'y', 0);
-        width = GetValue$2z(config, 'width', 1);
-        height = GetValue$2z(config, 'height', 1);
-        key = GetValue$2z(config, 'key', undefined);
-        baseFrame = GetValue$2z(config, 'baseFrame', undefined);
-        columns = GetValue$2z(config, 'columns', undefined);
-        rows = GetValue$2z(config, 'rows', undefined);
-      } else if (IsPlainObject$v(width)) {
-        config = width;
-        width = GetValue$2z(config, 'width', 1);
-        height = GetValue$2z(config, 'height', 1);
-        key = GetValue$2z(config, 'key', undefined);
-        baseFrame = GetValue$2z(config, 'baseFrame', undefined);
-        columns = GetValue$2z(config, 'columns', undefined);
-        rows = GetValue$2z(config, 'rows', undefined);
-      } else if (IsPlainObject$v(key)) {
-        config = key;
-        key = GetValue$2z(config, 'key', undefined);
-        baseFrame = GetValue$2z(config, 'baseFrame', undefined);
-        columns = GetValue$2z(config, 'columns', undefined);
-        rows = GetValue$2z(config, 'rows', undefined);
-      } else if (IsPlainObject$v(baseFrame)) {
-        config = baseFrame;
-        baseFrame = GetValue$2z(config, 'baseFrame', undefined);
-        columns = GetValue$2z(config, 'columns', undefined);
-        rows = GetValue$2z(config, 'rows', undefined);
-      } else if (Array.isArray(baseFrame)) {
-        config = rows;
-        rows = columns;
-        columns = baseFrame;
-        baseFrame = GetValue$2z(config, 'baseFrame', undefined);
-      } else if (IsPlainObject$v(columns)) {
-        config = columns;
-        columns = GetValue$2z(config, 'columns', undefined);
-        rows = GetValue$2z(config, 'rows', undefined);
-      }
-
-      _this = _super.call(this, scene, x, y, width, height);
-      _this.columns = {};
-      _this.rows = {};
-      _this.stretchMode = {};
-      _this._tileSprite = undefined; // Reserved for drawing image
-
-      _this._image = undefined; // Reserved for drawing image
-
-      _this.setOrigin(0.5, 0.5);
-
-      _this.setGetFrameNameCallback(GetValue$2z(config, 'getFrameNameCallback', undefined));
-
-      _this.setStretchMode(GetValue$2z(config, 'stretchMode', 0));
-
-      _this.setPreserveRatio(GetValue$2z(config, 'preserveRatio', true));
-
-      var maxFixedPartScale = GetValue$2z(config, 'maxFixedPartScale', 1);
-      var maxFixedPartScaleX = GetValue$2z(config, 'maxFixedPartScaleX', maxFixedPartScale);
-      var maxFixedPartScaleY = GetValue$2z(config, 'maxFixedPartScaleY', undefined);
-
-      _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-
-      _this.setTexture(key, baseFrame, columns, rows); // Also update render texture
-
-
-      return _this;
+      return _super.apply(this, arguments);
     }
 
-    _createClass(NinePatch, [{
-      key: "setGetFrameNameCallback",
-      value: function setGetFrameNameCallback(callback) {
-        if (callback === undefined) {
-          callback = GetFrameNameCallback$1;
-        }
-
-        this.getFrameNameCallback = callback;
-        return this;
-      }
-    }, {
-      key: "minWidth",
-      get: function get() {
-        return this.columns.minWidth;
-      }
-    }, {
-      key: "minHeight",
-      get: function get() {
-        return this.rows.minHeight;
-      }
-    }, {
-      key: "fixedPartScaleX",
-      get: function get() {
-        return this.columns.scale;
-      }
-    }, {
-      key: "fixedPartScaleY",
-      get: function get() {
-        return this.rows.scale;
-      }
-    }, {
-      key: "resize",
-      value: function resize(width, height) {
-        if (this.width === width && this.height === height) {
-          return this;
-        }
-
-        _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
-
-        this.updateTexture();
-        return this;
-      }
-    }]);
-
     return NinePatch;
-  }(RenderTexture$1);
+  }(NinePatchBase(RenderTexture$1, 'rexNinePatch'));
 
   Object.assign(NinePatch.prototype, Methods$7);
 
@@ -3571,9 +3603,6 @@
     return out;
   };
 
-  var NOOP = function NOOP() {//  NOOP
-  };
-
   var GetFastValue$2 = Phaser.Utils.Objects.GetFastValue;
   var NO_NEWLINE$2 = CONST.NO_NEWLINE;
   var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
@@ -4862,17 +4891,18 @@
       value: function setText(value) {
         if (value == null) {
           value = '';
-        }
-
-        if (Array.isArray(value)) {
+        } else if (Array.isArray(value)) {
           value = value.join('\n');
+        } else {
+          value = value.toString();
         }
 
-        if (value !== this._text) {
-          this._text = value.toString();
-          this.updateText();
+        if (value === this._text) {
+          return this;
         }
 
+        this._text = value;
+        this.updateText();
         return this;
       }
     }, {
@@ -6858,7 +6888,7 @@
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
-  var RemoveItem$9 = Phaser.Utils.Array.Remove;
+  var RemoveItem$a = Phaser.Utils.Array.Remove;
 
   var Base$2 = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
@@ -6939,7 +6969,7 @@
       key: "remove",
       value: function remove(gameObjects, destroyChild) {
         var parent = this;
-        RemoveItem$9(this.children, gameObjects, // Callback of item removed
+        RemoveItem$a(this.children, gameObjects, // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', parent.onChildDestroy, parent);
 
@@ -7124,7 +7154,7 @@
     return this;
   };
 
-  var AddChild$1 = {
+  var AddChild$2 = {
     // Can override this method
     add: function add(gameObject) {
       if (Array.isArray(gameObject)) {
@@ -7172,7 +7202,7 @@
 
   var BaseRemove = Base$2.prototype.remove;
   var BaseClear = Base$2.prototype.clear;
-  var RemoveChild$1 = {
+  var RemoveChild$2 = {
     remove: function remove(gameObject, destroyChild) {
       if (GetParent(gameObject) !== this) {
         return this;
@@ -8010,7 +8040,7 @@
   var methods$h = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$h, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$h, Parent, AddChild$2, RemoveChild$2, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -8493,24 +8523,21 @@
     }
   };
 
-  var DegToRad$6 = Phaser.Math.DegToRad;
-  var RadToDeg$4 = Phaser.Math.RadToDeg;
-  var GetValue$2k = Phaser.Utils.Objects.GetValue;
-
   var Base$1 = /*#__PURE__*/function () {
     function Base(parent, type) {
       _classCallCheck(this, Base);
 
       this.setParent(parent);
       this.type = type;
-      this.setActive().setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
-      this.originX = 0;
-      this.offsetX = 0; // Override
-
-      this.offsetY = 0; // Override
+      this.reset().setActive();
     }
 
     _createClass(Base, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent.removeChild(this);
+      }
+    }, {
       key: "setParent",
       value: function setParent(parent) {
         this.parent = parent;
@@ -8560,6 +8587,53 @@
         return this;
       }
     }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        return this;
+      } // Override
+
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        this.reset().setParent();
+      } // Override
+
+    }, {
+      key: "reset",
+      value: function reset() {
+        return this;
+      }
+    }]);
+
+    return Base;
+  }();
+
+  Object.assign(Base$1.prototype, DataMethods$1);
+
+  var DegToRad$6 = Phaser.Math.DegToRad;
+  var RadToDeg$4 = Phaser.Math.RadToDeg;
+  var GetValue$2k = Phaser.Utils.Objects.GetValue;
+
+  var RenderBase = /*#__PURE__*/function (_Base) {
+    _inherits(RenderBase, _Base);
+
+    var _super = _createSuper(RenderBase);
+
+    function RenderBase(parent, type) {
+      var _this;
+
+      _classCallCheck(this, RenderBase);
+
+      _this = _super.call(this, parent, type);
+      _this.originX = 0;
+      _this.offsetX = 0; // Override
+
+      _this.offsetY = 0; // Override
+
+      return _this;
+    }
+
+    _createClass(RenderBase, [{
       key: "visible",
       get: function get() {
         return this._visible;
@@ -8782,6 +8856,12 @@
         return this;
       }
     }, {
+      key: "setOrigin",
+      value: function setOrigin(x) {
+        this.originX = x;
+        return this;
+      }
+    }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         if (!o) {
@@ -8818,6 +8898,8 @@
           } else {
             this.setWidth(width);
           }
+        } else if (scaleX !== undefined) {
+          this.setScaleX(scaleX);
         }
 
         if (height !== undefined) {
@@ -8826,13 +8908,7 @@
           } else {
             this.setHeight(height);
           }
-        }
-
-        if (scaleX !== undefined && width === undefined) {
-          this.setScaleX(scaleX);
-        }
-
-        if (scaleY !== undefined && height === undefined) {
+        } else if (scaleY !== undefined) {
           this.setScaleY(scaleY);
         }
 
@@ -8841,15 +8917,9 @@
         }
 
         if (o.hasOwnProperty('rightSpace')) {
-          this.setLeftSpace(o.rightSpace);
+          this.setRightSpace(o.rightSpace);
         }
 
-        return this;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(x) {
-        this.originX = x;
         return this;
       }
     }, {
@@ -8863,12 +8933,12 @@
       value: function setDrawAboveCallback(callback) {
         this.drawAboveCallback = callback;
         return this;
-      } // Override
-
+      }
     }, {
-      key: "onFree",
-      value: function onFree() {
-        this.setParent().setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
+      key: "reset",
+      value: function reset() {
+        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
+        return this;
       } // Override
 
     }, {
@@ -8907,10 +8977,8 @@
       }
     }]);
 
-    return Base;
-  }();
-
-  Object.assign(Base$1.prototype, DataMethods$1);
+    return RenderBase;
+  }(Base$1);
 
   var GetValue$2j = Phaser.Utils.Objects.GetValue;
 
@@ -9035,7 +9103,7 @@
     }]);
 
     return Background;
-  }(Base$1);
+  }(RenderBase);
 
   var GetValue$2i = Phaser.Utils.Objects.GetValue;
 
@@ -9167,7 +9235,7 @@
     }]);
 
     return InnerBounds;
-  }(Base$1);
+  }(RenderBase);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -9509,6 +9577,14 @@
     return this;
   };
 
+  var RemoveChild$1 = function RemoveChild(bob) {
+    this.poolManager.free(bob);
+    RemoveItem(this.children.list, bob);
+    this.lastAppendedChildren.length = 0;
+    this.dirty = true;
+    return this;
+  };
+
   var RemoveChildren = function RemoveChildren() {
     this.poolManager.freeMultiple(this.children);
     this.children.length = 0;
@@ -9519,6 +9595,28 @@
 
   var ClearContent = function ClearContent() {
     this.setText();
+    return this;
+  };
+
+  var PopReusedBob = function PopReusedBob(typeName) {
+    var bob = this.poolManager.allocate(typeName);
+    return bob;
+  };
+
+  var AddChild$1 = function AddChild(bob) {
+    this.lastAppendedChildren.length = 0;
+
+    if (Array.isArray(bob)) {
+      var _this$children, _this$lastAppendedChi;
+
+      (_this$children = this.children).push.apply(_this$children, _toConsumableArray(bob));
+
+      (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(bob));
+    } else {
+      this.children.push(bob);
+      this.lastAppendedChildren.push(bob);
+    }
+
     return this;
   };
 
@@ -9539,8 +9637,8 @@
     return bob.type === CmdTypeName;
   };
 
-  var CharData = /*#__PURE__*/function (_Base) {
-    _inherits(CharData, _Base);
+  var CharData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(CharData, _RenderBase);
 
     var _super = _createSuper(CharData);
 
@@ -9686,19 +9784,19 @@
     }]);
 
     return CharData;
-  }(Base$1);
+  }(RenderBase);
 
   var AppendText$1 = function AppendText(text, style) {
     if (style) {
       this.textStyle.modify(style);
     }
 
-    this.lastAppendedChildren.length = 0;
+    var bobArray = [];
 
     for (var i = 0, cnt = text.length; i < cnt; i++) {
       var _char = text.charAt(i);
 
-      var bob = this.poolManager.allocate(CharTypeName);
+      var bob = this.popReusedBob(CharTypeName);
 
       if (bob === null) {
         bob = new CharData(this, // parent
@@ -9709,10 +9807,10 @@
       } // bob.modifyPorperties(properties);  // Warning: Will modify text-style twice
 
 
-      this.children.push(bob);
-      this.lastAppendedChildren.push(bob);
+      bobArray.push(bob);
     }
 
+    this.addChild(bobArray);
     return this;
   };
 
@@ -9728,8 +9826,8 @@
     return this;
   };
 
-  var ImageData = /*#__PURE__*/function (_Base) {
-    _inherits(ImageData, _Base);
+  var ImageData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(ImageData, _RenderBase);
 
     var _super = _createSuper(ImageData);
 
@@ -9825,10 +9923,10 @@
       value: function drawContent() {
         var context = this.context;
         var frame = this.frameObj;
+        var width = this.frameWidth,
+            height = this.frameHeight;
         context.drawImage(frame.source.image, // image
-        frame.cutX, frame.cutY, // sx, sy
-        frame.cutWidth, frame.cutHeight // sWidth, sHeight
-        );
+        frame.cutX, frame.cutY, width, height, 0, 0, width, height);
       }
     }, {
       key: "draw",
@@ -9842,10 +9940,10 @@
     }]);
 
     return ImageData;
-  }(Base$1);
+  }(RenderBase);
 
   var AppendImage = function AppendImage(key, frame, properties) {
-    var bob = this.poolManager.allocate(ImageTypeName);
+    var bob = this.popReusedBob(ImageTypeName);
 
     if (bob === null) {
       bob = new ImageData(this, // parent
@@ -9855,9 +9953,7 @@
     }
 
     bob.modifyPorperties(properties);
-    this.lastAppendedChildren.length = 0;
-    this.children.push(bob);
-    this.lastAppendedChildren.push(bob);
+    this.addChild(bob);
     return this;
   };
 
@@ -9926,7 +10022,7 @@
   }(Base$1);
 
   var AppendCommand$3 = function AppendCommand(name, callback, param, scope) {
-    var bob = this.poolManager.allocate(CmdTypeName);
+    var bob = this.popReusedBob(CmdTypeName);
 
     if (bob === null) {
       bob = new Command(this, // parent
@@ -9935,9 +10031,7 @@
       bob.setParent(this).setActive().setName(name).setCallback(callback, scope).setParameter(param);
     }
 
-    this.lastAppendedChildren.length = 0;
-    this.children.push(bob);
-    this.lastAppendedChildren.push(bob);
+    this.addChild(bob);
     return this;
   };
 
@@ -10160,7 +10254,7 @@
       // Word-wrap result in lines
       maxLineWidth: 0,
       linesHeight: 0
-    }; // Set all children to active
+    }; // Set all children to inactive
 
     var children = this.children;
 
@@ -10568,7 +10662,7 @@
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
       child = this.children[i];
 
-      if (child.active) {
+      if (child.active && child.visible) {
         child.draw();
       }
     }
@@ -10596,8 +10690,11 @@
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    removeChild: RemoveChild$1,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
+    popReusedBob: PopReusedBob,
+    addChild: AddChild$1,
     setText: SetText$2,
     appendText: AppendText$1,
     appendImage: AppendImage,
@@ -13642,12 +13739,18 @@
   }();
 
   var SetChildVisible = function SetChildVisible(child) {
-    child.setVisible();
+    if (child.setVisible) {
+      child.setVisible();
+    }
   };
 
   var SetChildrenInvisible = function SetChildrenInvisible(children) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      children[i].setVisible(false);
+      var child = children[i];
+
+      if (child.setVisible) {
+        child.setVisible(false);
+      }
     }
   };
 
@@ -14267,7 +14370,7 @@
   };
 
   var GetValue$1w = Phaser.Utils.Objects.GetValue;
-  var RemoveItem$8 = Phaser.Utils.Array.Remove;
+  var RemoveItem$9 = Phaser.Utils.Array.Remove;
 
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(scene, config) {
@@ -14344,14 +14447,14 @@
             return;
           }
 
-          RemoveItem$8(this.soundEffects, soundEffect);
+          RemoveItem$9(this.soundEffects, soundEffect);
         }, this).once('destroy', function () {
           // SoundManager has been destroyed
           if (!this.scene) {
             return;
           }
 
-          RemoveItem$8(this.soundEffects, soundEffect);
+          RemoveItem$9(this.soundEffects, soundEffect);
         }, this).play();
         return this;
       }
@@ -14738,7 +14841,7 @@
   };
 
   var GetValue$1v = Phaser.Utils.Objects.GetValue;
-  var RemoveItem$7 = Phaser.Utils.Array.Remove;
+  var RemoveItem$8 = Phaser.Utils.Array.Remove;
 
   var SpriteManager = /*#__PURE__*/function () {
     function SpriteManager(scene, config) {
@@ -14846,7 +14949,7 @@
         }
 
         sprite.once('destroy', function () {
-          RemoveItem$7(this.removedSprites, sprite);
+          RemoveItem$8(this.removedSprites, sprite);
 
           if (this.isEmpty) {
             this.emit('empty');
@@ -15954,7 +16057,7 @@
   };
 
   var Shape = Phaser.GameObjects.Shape;
-  var RemoveItem$6 = Phaser.Utils.Array.Remove;
+  var RemoveItem$7 = Phaser.Utils.Array.Remove;
 
   var BaseShapes = /*#__PURE__*/function (_Shape) {
     _inherits(BaseShapes, _Shape);
@@ -16134,7 +16237,7 @@
 
         if (shape) {
           delete this.shapes[name];
-          RemoveItem$6(this.geom, shape);
+          RemoveItem$7(this.geom, shape);
         }
 
         return this;
@@ -20677,7 +20780,13 @@
 
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
-    gameObject.rexContainer.parent.setChildVisible(gameObject, !hidden);
+    var parent = gameObject.rexContainer.parent;
+
+    if (parent) {
+      parent.setChildVisible(gameObject, !hidden);
+    } else {
+      this.setVisible(!hidden);
+    }
   };
 
   var HideMethods = {
@@ -24287,12 +24396,12 @@
     add: Add$7
   };
 
-  var RemoveItem$5 = Phaser.Utils.Array.Remove;
+  var RemoveItem$6 = Phaser.Utils.Array.Remove;
   var ContainerRemove = ContainerLite.prototype.remove;
 
   var RemoveChild = function RemoveChild(gameObject, destroyChild) {
     if (this.isBackground(gameObject)) {
-      RemoveItem$5(this.backgroundChildren, gameObject);
+      RemoveItem$6(this.backgroundChildren, gameObject);
     }
 
     ContainerRemove.call(this, gameObject, destroyChild);
@@ -26818,14 +26927,14 @@
     }
   };
 
-  var RemoveItem$4 = Phaser.Utils.Array.Remove;
+  var RemoveItem$5 = Phaser.Utils.Array.Remove;
   var RemoveChildMethods$5 = {
     remove: function remove(gameObject, destroyChild) {
       if (this.getParentSizer(gameObject) !== this) {
         return this;
       }
 
-      RemoveItem$4(this.sizerChildren, gameObject);
+      RemoveItem$5(this.sizerChildren, gameObject);
       RemoveChild.call(this, gameObject, destroyChild);
       return this;
     },
@@ -28102,14 +28211,14 @@
     }
   };
 
-  var RemoveItem$3 = Phaser.Utils.Array.Remove;
+  var RemoveItem$4 = Phaser.Utils.Array.Remove;
   var RemoveChildMethods$3 = {
     remove: function remove(gameObject, destroyChild) {
       if (this.getParentSizer(gameObject) !== this) {
         return this;
       }
 
-      RemoveItem$3(this.sizerChildren, gameObject);
+      RemoveItem$4(this.sizerChildren, gameObject);
       RemoveChild.call(this, gameObject, destroyChild);
       return this;
     },
@@ -28681,7 +28790,7 @@
     }
   };
 
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var SizerRmove$2 = Sizer.prototype.remove;
   var SizerClear$2 = Sizer.prototype.clear;
 
@@ -28691,7 +28800,7 @@
     }
 
     var buttons = this.buttonGroup.buttons;
-    RemoveItem$2(buttons, gameObject);
+    RemoveItem$3(buttons, gameObject);
     SizerRmove$2.call(this, gameObject, destroyChild);
     return this;
   };
@@ -29234,7 +29343,7 @@
     }
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var SizerRmove$1 = GridSizer.prototype.remove;
   var SizerClear$1 = GridSizer.prototype.clear;
 
@@ -29246,7 +29355,7 @@
     }
 
     var buttons = this.buttonGroup.buttons;
-    RemoveItem$1(buttons, gameObject);
+    RemoveItem$2(buttons, gameObject);
     SizerRmove$1.call(this, gameObject, destroyChild);
     return this;
   };
@@ -29476,7 +29585,7 @@
     }
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var SizerRmove = FixWidthSizer.prototype.remove;
   var SizerClear = FixWidthSizer.prototype.clear;
 
@@ -29488,7 +29597,7 @@
     }
 
     var buttons = this.buttonGroup.buttons;
-    RemoveItem(buttons, gameObject);
+    RemoveItem$1(buttons, gameObject);
     SizerRmove.call(this, gameObject, destroyChild);
     return this;
   };

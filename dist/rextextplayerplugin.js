@@ -764,24 +764,21 @@
     }
   };
 
-  var DegToRad$2 = Phaser.Math.DegToRad;
-  var RadToDeg = Phaser.Math.RadToDeg;
-  var GetValue$V = Phaser.Utils.Objects.GetValue;
-
   var Base = /*#__PURE__*/function () {
     function Base(parent, type) {
       _classCallCheck(this, Base);
 
       this.setParent(parent);
       this.type = type;
-      this.setActive().setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
-      this.originX = 0;
-      this.offsetX = 0; // Override
-
-      this.offsetY = 0; // Override
+      this.reset().setActive();
     }
 
     _createClass(Base, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent.removeChild(this);
+      }
+    }, {
       key: "setParent",
       value: function setParent(parent) {
         this.parent = parent;
@@ -831,6 +828,53 @@
         return this;
       }
     }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        return this;
+      } // Override
+
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        this.reset().setParent();
+      } // Override
+
+    }, {
+      key: "reset",
+      value: function reset() {
+        return this;
+      }
+    }]);
+
+    return Base;
+  }();
+
+  Object.assign(Base.prototype, DataMethods);
+
+  var DegToRad$2 = Phaser.Math.DegToRad;
+  var RadToDeg = Phaser.Math.RadToDeg;
+  var GetValue$V = Phaser.Utils.Objects.GetValue;
+
+  var RenderBase = /*#__PURE__*/function (_Base) {
+    _inherits(RenderBase, _Base);
+
+    var _super = _createSuper(RenderBase);
+
+    function RenderBase(parent, type) {
+      var _this;
+
+      _classCallCheck(this, RenderBase);
+
+      _this = _super.call(this, parent, type);
+      _this.originX = 0;
+      _this.offsetX = 0; // Override
+
+      _this.offsetY = 0; // Override
+
+      return _this;
+    }
+
+    _createClass(RenderBase, [{
       key: "visible",
       get: function get() {
         return this._visible;
@@ -1053,6 +1097,12 @@
         return this;
       }
     }, {
+      key: "setOrigin",
+      value: function setOrigin(x) {
+        this.originX = x;
+        return this;
+      }
+    }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         if (!o) {
@@ -1089,6 +1139,8 @@
           } else {
             this.setWidth(width);
           }
+        } else if (scaleX !== undefined) {
+          this.setScaleX(scaleX);
         }
 
         if (height !== undefined) {
@@ -1097,13 +1149,7 @@
           } else {
             this.setHeight(height);
           }
-        }
-
-        if (scaleX !== undefined && width === undefined) {
-          this.setScaleX(scaleX);
-        }
-
-        if (scaleY !== undefined && height === undefined) {
+        } else if (scaleY !== undefined) {
           this.setScaleY(scaleY);
         }
 
@@ -1112,15 +1158,9 @@
         }
 
         if (o.hasOwnProperty('rightSpace')) {
-          this.setLeftSpace(o.rightSpace);
+          this.setRightSpace(o.rightSpace);
         }
 
-        return this;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(x) {
-        this.originX = x;
         return this;
       }
     }, {
@@ -1134,12 +1174,12 @@
       value: function setDrawAboveCallback(callback) {
         this.drawAboveCallback = callback;
         return this;
-      } // Override
-
+      }
     }, {
-      key: "onFree",
-      value: function onFree() {
-        this.setParent().setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
+      key: "reset",
+      value: function reset() {
+        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
+        return this;
       } // Override
 
     }, {
@@ -1178,10 +1218,8 @@
       }
     }]);
 
-    return Base;
-  }();
-
-  Object.assign(Base.prototype, DataMethods);
+    return RenderBase;
+  }(Base);
 
   var Pad = Phaser.Utils.String.Pad;
 
@@ -1673,7 +1711,7 @@
     }]);
 
     return Background;
-  }(Base);
+  }(RenderBase);
 
   var GetValue$S = Phaser.Utils.Objects.GetValue;
 
@@ -1805,7 +1843,7 @@
     }]);
 
     return InnerBounds;
-  }(Base);
+  }(RenderBase);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -2147,6 +2185,14 @@
     return this;
   };
 
+  var RemoveChild = function RemoveChild(bob) {
+    this.poolManager.free(bob);
+    RemoveItem(this.children.list, bob);
+    this.lastAppendedChildren.length = 0;
+    this.dirty = true;
+    return this;
+  };
+
   var RemoveChildren = function RemoveChildren() {
     this.poolManager.freeMultiple(this.children);
     this.children.length = 0;
@@ -2157,6 +2203,28 @@
 
   var ClearContent = function ClearContent() {
     this.setText();
+    return this;
+  };
+
+  var PopReusedBob = function PopReusedBob(typeName) {
+    var bob = this.poolManager.allocate(typeName);
+    return bob;
+  };
+
+  var AddChild = function AddChild(bob) {
+    this.lastAppendedChildren.length = 0;
+
+    if (Array.isArray(bob)) {
+      var _this$children, _this$lastAppendedChi;
+
+      (_this$children = this.children).push.apply(_this$children, _toConsumableArray(bob));
+
+      (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(bob));
+    } else {
+      this.children.push(bob);
+      this.lastAppendedChildren.push(bob);
+    }
+
     return this;
   };
 
@@ -2177,8 +2245,8 @@
     return bob.type === CmdTypeName;
   };
 
-  var CharData = /*#__PURE__*/function (_Base) {
-    _inherits(CharData, _Base);
+  var CharData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(CharData, _RenderBase);
 
     var _super = _createSuper(CharData);
 
@@ -2324,19 +2392,19 @@
     }]);
 
     return CharData;
-  }(Base);
+  }(RenderBase);
 
   var AppendText = function AppendText(text, style) {
     if (style) {
       this.textStyle.modify(style);
     }
 
-    this.lastAppendedChildren.length = 0;
+    var bobArray = [];
 
     for (var i = 0, cnt = text.length; i < cnt; i++) {
       var _char = text.charAt(i);
 
-      var bob = this.poolManager.allocate(CharTypeName);
+      var bob = this.popReusedBob(CharTypeName);
 
       if (bob === null) {
         bob = new CharData(this, // parent
@@ -2347,10 +2415,10 @@
       } // bob.modifyPorperties(properties);  // Warning: Will modify text-style twice
 
 
-      this.children.push(bob);
-      this.lastAppendedChildren.push(bob);
+      bobArray.push(bob);
     }
 
+    this.addChild(bobArray);
     return this;
   };
 
@@ -2366,8 +2434,8 @@
     return this;
   };
 
-  var ImageData = /*#__PURE__*/function (_Base) {
-    _inherits(ImageData, _Base);
+  var ImageData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(ImageData, _RenderBase);
 
     var _super = _createSuper(ImageData);
 
@@ -2463,10 +2531,10 @@
       value: function drawContent() {
         var context = this.context;
         var frame = this.frameObj;
+        var width = this.frameWidth,
+            height = this.frameHeight;
         context.drawImage(frame.source.image, // image
-        frame.cutX, frame.cutY, // sx, sy
-        frame.cutWidth, frame.cutHeight // sWidth, sHeight
-        );
+        frame.cutX, frame.cutY, width, height, 0, 0, width, height);
       }
     }, {
       key: "draw",
@@ -2480,10 +2548,10 @@
     }]);
 
     return ImageData;
-  }(Base);
+  }(RenderBase);
 
   var AppendImage = function AppendImage(key, frame, properties) {
-    var bob = this.poolManager.allocate(ImageTypeName);
+    var bob = this.popReusedBob(ImageTypeName);
 
     if (bob === null) {
       bob = new ImageData(this, // parent
@@ -2493,9 +2561,7 @@
     }
 
     bob.modifyPorperties(properties);
-    this.lastAppendedChildren.length = 0;
-    this.children.push(bob);
-    this.lastAppendedChildren.push(bob);
+    this.addChild(bob);
     return this;
   };
 
@@ -2564,7 +2630,7 @@
   }(Base);
 
   var AppendCommand$3 = function AppendCommand(name, callback, param, scope) {
-    var bob = this.poolManager.allocate(CmdTypeName);
+    var bob = this.popReusedBob(CmdTypeName);
 
     if (bob === null) {
       bob = new Command(this, // parent
@@ -2573,9 +2639,7 @@
       bob.setParent(this).setActive().setName(name).setCallback(callback, scope).setParameter(param);
     }
 
-    this.lastAppendedChildren.length = 0;
-    this.children.push(bob);
-    this.lastAppendedChildren.push(bob);
+    this.addChild(bob);
     return this;
   };
 
@@ -2798,7 +2862,7 @@
       // Word-wrap result in lines
       maxLineWidth: 0,
       linesHeight: 0
-    }; // Set all children to active
+    }; // Set all children to inactive
 
     var children = this.children;
 
@@ -3206,7 +3270,7 @@
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
       child = this.children[i];
 
-      if (child.active) {
+      if (child.active && child.visible) {
         child.draw();
       }
     }
@@ -3234,8 +3298,11 @@
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
+    popReusedBob: PopReusedBob,
+    addChild: AddChild,
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,
@@ -6315,12 +6382,18 @@
   }();
 
   var SetChildVisible = function SetChildVisible(child) {
-    child.setVisible();
+    if (child.setVisible) {
+      child.setVisible();
+    }
   };
 
   var SetChildrenInvisible = function SetChildrenInvisible(children) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      children[i].setVisible(false);
+      var child = children[i];
+
+      if (child.setVisible) {
+        child.setVisible(false);
+      }
     }
   };
 
@@ -7085,7 +7158,7 @@
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
 
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(scene, config) {
@@ -7162,14 +7235,14 @@
             return;
           }
 
-          RemoveItem$1(this.soundEffects, soundEffect);
+          RemoveItem$2(this.soundEffects, soundEffect);
         }, this).once('destroy', function () {
           // SoundManager has been destroyed
           if (!this.scene) {
             return;
           }
 
-          RemoveItem$1(this.soundEffects, soundEffect);
+          RemoveItem$2(this.soundEffects, soundEffect);
         }, this).play();
         return this;
       }
@@ -7556,7 +7629,7 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
 
   var SpriteManager = /*#__PURE__*/function () {
     function SpriteManager(scene, config) {
@@ -7664,7 +7737,7 @@
         }
 
         sprite.once('destroy', function () {
-          RemoveItem(this.removedSprites, sprite);
+          RemoveItem$1(this.removedSprites, sprite);
 
           if (this.isEmpty) {
             this.emit('empty');

@@ -3118,17 +3118,18 @@
       value: function setText(value) {
         if (value == null) {
           value = '';
-        }
-
-        if (Array.isArray(value)) {
+        } else if (Array.isArray(value)) {
           value = value.join('\n');
+        } else {
+          value = value.toString();
         }
 
-        if (value !== this._text) {
-          this._text = value.toString();
-          this.updateText();
+        if (value === this._text) {
+          return this;
         }
 
+        this._text = value;
+        this.updateText();
         return this;
       }
     }, {
