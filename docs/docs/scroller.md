@@ -183,6 +183,14 @@ Fires `valuechange` event if new value is not equal to current value.
     ```javascript
     scroller.on('overmin', function(newValue, prevValue){ /* ... */ });
     ```
+- On drag start
+    ```javascript
+    scroller.on('dragstart', function() { /* ... */ });
+    ```
+- On drag end
+    ```javascript
+    scroller.on('dragend', function() { /* ... */ });
+    ```
 
 ### Drag
 

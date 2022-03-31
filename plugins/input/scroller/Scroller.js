@@ -268,6 +268,16 @@ class Scroller extends ComponentBase {
         }
     }
 
+    // enter_DRAG
+    onDragStart() {
+        this.emit('dragstart');
+    }
+
+    // exit_DRAG
+    onDragEnd() {
+        this.emit('dragend');
+    }
+
     // everyTick_DRAG
     dragging() {
         this.value += this.dragDelta;

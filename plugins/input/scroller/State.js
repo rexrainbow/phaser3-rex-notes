@@ -67,6 +67,12 @@ class State extends FSM {
         }
         this.next();
     }
+    enter_DRAG() {
+        this.parent.onDragStart();
+    }
+    exit_DRAG() {
+        this.parent.onDragEnd();
+    }
     // DRAG    
 
     // SLIDE -> DRAG|IDLE

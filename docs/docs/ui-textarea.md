@@ -387,9 +387,21 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Event
 
-- On scroll
+- Scroll
     ```javascript
     textArea.on('scroll', function(textArea) {
+        // ...
+    })
+    ```
+- Scroller drag start
+    ```javascript
+    textArea.on('scroller.dragstart', function(panel) {
+        // ...
+    })
+    ```
+- Scroller drag end
+    ```javascript
+    textArea.on('scroller.dragend', function(panel) {
         // ...
     })
     ```

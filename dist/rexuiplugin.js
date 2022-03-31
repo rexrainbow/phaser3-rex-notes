@@ -31420,6 +31420,16 @@
         }
 
         this.next();
+      }
+    }, {
+      key: "enter_DRAG",
+      value: function enter_DRAG() {
+        this.parent.onDragStart();
+      }
+    }, {
+      key: "exit_DRAG",
+      value: function exit_DRAG() {
+        this.parent.onDragEnd();
       } // DRAG    
       // SLIDE -> DRAG|IDLE
 
@@ -32231,6 +32241,18 @@
         } else {
           return 0;
         }
+      } // enter_DRAG
+
+    }, {
+      key: "onDragStart",
+      value: function onDragStart() {
+        this.emit('dragstart');
+      } // exit_DRAG
+
+    }, {
+      key: "onDragEnd",
+      value: function onDragEnd() {
+        this.emit('dragend');
       } // everyTick_DRAG
 
     }, {
@@ -32539,6 +32561,10 @@
       scroller.on('valuechange', function (newValue) {
         parent.childOY = newValue;
         parent.emit('scroll', parent);
+      }).on('dragstart', function () {
+        parent.emit('scroller.dragstart', parent);
+      }).on('dragend', function () {
+        parent.emit('scroller.dragend', parent);
       });
     }
 

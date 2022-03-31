@@ -402,9 +402,21 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Event
 
-- On scroll
+- Scroll
     ```javascript
     panel.on('scroll', function(panel) {
+        // ...
+    })
+    ```
+- Scroller drag start
+    ```javascript
+    panel.on('scroller.dragstart', function(panel) {
+        // ...
+    })
+    ```
+- Scroller drag end
+    ```javascript
+    panel.on('scroller.dragend', function(panel) {
         // ...
     })
     ```

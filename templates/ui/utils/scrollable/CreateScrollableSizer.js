@@ -123,21 +123,30 @@ var CreateScrollableSizer = function (parent, config) {
 
     // Control
     if (slider) {
-        slider.on('valuechange', function (newValue) {
-            parent.t = newValue;
-            parent.emit('scroll', parent);
-        });
+        slider
+            .on('valuechange', function (newValue) {
+                parent.t = newValue;
+                parent.emit('scroll', parent);
+            });
     }
     if (scroller) {
-        scroller.on('valuechange', function (newValue) {
-            parent.childOY = newValue;
-            parent.emit('scroll', parent);
-        });
+        scroller
+            .on('valuechange', function (newValue) {
+                parent.childOY = newValue;
+                parent.emit('scroll', parent);
+            })
+            .on('dragstart', function () {
+                parent.emit('scroller.dragstart', parent);
+            })
+            .on('dragend', function () {
+                parent.emit('scroller.dragend', parent);
+            })
     }
     if (mouseWheelScroller) {
-        mouseWheelScroller.on('scroll', function (incValue) {
-            parent.addChildOY(-incValue, true);
-        });
+        mouseWheelScroller
+            .on('scroll', function (incValue) {
+                parent.addChildOY(-incValue, true);
+            });
     }
 
     parent.addChildrenMap('child', child);
