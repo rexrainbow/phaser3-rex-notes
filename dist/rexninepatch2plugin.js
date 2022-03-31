@@ -204,10 +204,21 @@
     var dx = src._displayOriginX;
     var dy = src._displayOriginY;
     var alpha = camera.alpha * src.alpha;
+
+    if (this.isCropped) {
+      pipeline.flush();
+      renderer.pushScissor(src.cropX * calcMatrix.scaleX + calcMatrix.tx, src.cropY * calcMatrix.scaleY + calcMatrix.ty, src.cropWidth * calcMatrix.scaleX, src.cropHeight * calcMatrix.scaleY);
+    }
+
     renderer.pipelines.preBatch(src);
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
       bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels);
+    }
+
+    if (this.isCropped) {
+      pipeline.flush();
+      renderer.popScissor();
     }
 
     renderer.pipelines.postBatch(src);
@@ -228,6 +239,12 @@
     var dx = -src._displayOriginX,
         dy = -src._displayOriginY;
     ctx.translate(dx, dy);
+
+    if (src.isCropped) {
+      ctx.beginPath();
+      ctx.rect(src.cropX, src.cropY, src.cropWidth, src.cropHeight);
+      ctx.clip();
+    }
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
       bobs[i].canvasRender(ctx, dx, dy, roundPixels);
@@ -320,6 +337,20 @@
     return bob;
   };
 
+  var SetCrop = function SetCrop(x, y, width, height) {
+    if (x === undefined) {
+      this.isCropped = false;
+    } else {
+      this.isCropped = true;
+      this.cropX = x;
+      this.cropY = y;
+      this.cropWidth = width;
+      this.cropHeight = height;
+    }
+
+    return this;
+  };
+
   var methods$2 = {
     setTexture: SetTexture$1,
     resize: Resize,
@@ -330,7 +361,8 @@
     clear: RemoveChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getChildren: GetChildren,
-    popReusedBob: PopReusedBob
+    popReusedBob: PopReusedBob,
+    setCrop: SetCrop
   };
 
   var Stack = /*#__PURE__*/function () {

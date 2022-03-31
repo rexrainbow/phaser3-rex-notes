@@ -395,13 +395,13 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
 - Scroller drag start
     ```javascript
-    textArea.on('scroller.dragstart', function(panel) {
+    textArea.getElement('scroller').on('dragstart', function(panel) {
         // ...
     })
     ```
 - Scroller drag end
     ```javascript
-    textArea.on('scroller.dragend', function(panel) {
+    textArea.getElement('scroller').on('dragend', function(panel) {
         // ...
     })
     ```

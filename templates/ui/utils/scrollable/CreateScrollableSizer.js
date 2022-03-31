@@ -135,12 +135,6 @@ var CreateScrollableSizer = function (parent, config) {
                 parent.childOY = newValue;
                 parent.emit('scroll', parent);
             })
-            .on('dragstart', function () {
-                parent.emit('scroller.dragstart', parent);
-            })
-            .on('dragend', function () {
-                parent.emit('scroller.dragend', parent);
-            })
     }
     if (mouseWheelScroller) {
         mouseWheelScroller

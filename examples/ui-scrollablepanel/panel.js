@@ -126,11 +126,11 @@ class Demo extends Phaser.Scene {
         })
         */
 
-        scrollablePanel
-            .on('scroller.dragstart', function () {
+        scrollablePanel.getElement('scroller')
+            .on('dragstart', function () {
                 console.log('scroller.dragstart')
             })
-            .on('scroller.dragend', function () {
+            .on('dragend', function () {
                 console.log('scroller.dragend')
             })
     }

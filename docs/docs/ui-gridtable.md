@@ -585,13 +585,13 @@ See [base sizer object](ui-basesizer.md).
     ```
 - Scroller drag start
     ```javascript
-    table.on('scroller.dragstart', function(panel) {
+    table.getElement('scroller').on('dragstart', function(panel) {
         // ...
     })
     ```
 - Scroller drag end
     ```javascript
-    table.on('scroller.dragend', function(panel) {
+    table.getElement('scroller').on('dragend', function(panel) {
         // ...
     })
     ```

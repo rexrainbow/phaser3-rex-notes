@@ -410,13 +410,13 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
 - Scroller drag start
     ```javascript
-    panel.on('scroller.dragstart', function(panel) {
+    panel.getElement('scroller').on('dragstart', function(panel) {
         // ...
     })
     ```
 - Scroller drag end
     ```javascript
-    panel.on('scroller.dragend', function(panel) {
+    panel.getElement('scroller').on('dragend', function(panel) {
         // ...
     })
     ```
