@@ -14,7 +14,7 @@ var CreateNinePatch = function (scene, count) {
         })
     }
     var t1 = performance.now();
-    scene.add.text(200, 250, `NinePatch: ${Math.floor(t1 - t0)}`);
+    scene.add.text(200, 250, `Text: ${Math.floor(t1 - t0)}`);
     /*
      10: 24
      100: 119
