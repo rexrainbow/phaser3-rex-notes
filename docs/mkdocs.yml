@@ -39,6 +39,7 @@ nav:
                 - Bitmap zone: bitmapzone.md
             - Tile sprite: tilesprite.md
             - Nine patch: ninepatch.md
+            - Nine patch2: ninepatch2.md
             - Line: line.md
         - Shader: shader.md        
     - Mesh:

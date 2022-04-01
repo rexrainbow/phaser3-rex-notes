@@ -937,6 +937,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ninepatch2/" class="md-nav__link">
+        Nine patch2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../line/" class="md-nav__link">
         Line
       </a>
@@ -8304,8 +8318,19 @@
 <li><a href="../ninepatch/">Nine-patch</a>: Stretchable imaage.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ninePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ninePatch2</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyNinePatch</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NinePatch</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyNinePatch</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NinePatch2</span> <span class="p">{</span>
     <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>

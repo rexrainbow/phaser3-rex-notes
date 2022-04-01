@@ -17,6 +17,7 @@ import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
 // import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
+import NinePatch2 from './ninepatch2/NinePatch';
 
 import Sizer from './sizer/Sizer';
 import GridSizer from './gridsizer/GridSizer';
@@ -98,6 +99,7 @@ export {
     CustomShapes,
     CustomProgress,
     NinePatch,
+    NinePatch2,
 
     Sizer,
     GridSizer,

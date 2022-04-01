@@ -1,6 +1,7 @@
 import ObjectFactory from './ObjectFactory.js';
 
 import NinePatchFactory from './ninepatch/Factory.js';
+import NinePatch2Factory from './ninepatch2/Factory.js';
 import RoundRectangleFactory from './roundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';

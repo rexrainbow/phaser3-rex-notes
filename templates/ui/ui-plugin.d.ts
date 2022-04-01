@@ -28,6 +28,7 @@ import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
 import NinePatchFactory from './ninepatch/Factory';
+import NinePatch2Factory from './ninepatch2/Factory';
 import NumberBarFactory from './numberbar/Factory';
 import OverlapSizerFactory from './overlapsizer/Factory';
 import PagesFactory from './pages/Factory';
@@ -97,6 +98,7 @@ declare class Factories {
     label: typeof LabelFactory;
     menu: typeof MenuFactory;
     ninePatch: typeof NinePatchFactory;
+    ninePatch2: typeof NinePatch2Factory;
     numberBar: typeof NumberBarFactory;
     overlapSizer: typeof OverlapSizerFactory;
     pages: typeof PagesFactory;
