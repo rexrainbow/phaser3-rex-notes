@@ -1,5 +1,6 @@
 import Blitter from '../../blitter/Blitter.js';
 import Methods from './methods/Methods.js';
+import CharacterDataManager from './chardatamanager/CharacterDataManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -18,6 +19,7 @@ class Text extends Blitter {
         this.type = type;
 
         this._text = '';
+        this.characterDataManager = new CharacterDataManager();
 
         this.setFont(font);
 
