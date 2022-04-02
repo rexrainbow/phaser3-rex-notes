@@ -1,5 +1,5 @@
-import { ImageTypeName } from '../bob/Types.js';
-import ImageData from '../bob/image/ImageData';
+import { ImageTypeName } from '../../blitterbase/bob/Types.js';
+import ImageData from '../../blitterbase/bob/image/ImageData.js';
 
 var AddImage = function (config) {
     if (typeof (config) === 'string') {

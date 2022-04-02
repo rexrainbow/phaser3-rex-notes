@@ -1,4 +1,4 @@
-import RenderBase from '../../../blitterbase/bob/RenderBase.js';
+import RenderBase from '../RenderBase.js';
 import { ImageTypeName } from '../Types.js';
 import WebglRender from './WebglRender.js';
 import CanvasRender from './CanvasRender.js';

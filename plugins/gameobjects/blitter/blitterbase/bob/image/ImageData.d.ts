@@ -1,4 +1,4 @@
-import RenderBase from '../../../blitterbase/bob/RenderBase';
+import RenderBase from '../RenderBase';
 
 export default ImageData;
 
