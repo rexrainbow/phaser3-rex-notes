@@ -19,4 +19,27 @@ declare class BobBase {
     ): this;
 
     reset(): this;
+
+    setData(
+        key: string,
+        value: any
+    ): this;
+    setData(
+        data: { [key: string]: any }
+    ): this;
+    getData(
+        key: string,
+        defaultValue?: any
+    ): any;
+    incData(
+        key: string,
+        inc: number,
+        defaultValue: number
+    ): this;
+    mulData(
+        key: string,
+        mul: number,
+        defaultValue: number
+    ): this;
+    clearData(): this;
 }

@@ -56,7 +56,7 @@ class Base {
 
     // Override
     reset() {
-        this.setActive(false);
+        this.setActive(false).clearData();
     }
 
     // Override
