@@ -23,8 +23,10 @@ class BaseGeom {
     }
 
     reset() {
-        this.fillStyle();
-        this.lineStyle();
+        this
+            .fillStyle()
+            .lineStyle();
+
         return this;
     }
 
