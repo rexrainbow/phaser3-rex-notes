@@ -34,7 +34,7 @@ class Curve extends PathBase {
         this.iterations = iterations;
         return this;
     }
-    
+
     updateData() {
         this.pathData.length = 0;
         var points = this.curve.getPoints(this.iterations);

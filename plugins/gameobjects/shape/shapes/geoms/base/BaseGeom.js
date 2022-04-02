@@ -39,7 +39,7 @@ class BaseGeom {
     }
 
     updateData() {
-
+        this.dirty = false;
     }
 }
 

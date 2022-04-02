@@ -164,6 +164,7 @@ class Arc extends PathBase {
             this.pathData.push(this.x, this.y);
         }
         this.pathData.push(this.pathData[0], this.pathData[1]);
+
         super.updateData();
         return this;
     }

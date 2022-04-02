@@ -66,6 +66,7 @@ class Line extends PathBase {
         this.pathData.push(this.x0, this.y0);
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x0, this.y0);
+
         super.updateData();
         return this;
     }

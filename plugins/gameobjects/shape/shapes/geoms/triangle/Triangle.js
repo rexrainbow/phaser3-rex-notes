@@ -103,6 +103,8 @@ class Triangle extends BaseGeom {
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x2, this.y2);
         this.pathData.push(this.x0, this.y0);
+
+        super.updateData();
         return this;
     }
 

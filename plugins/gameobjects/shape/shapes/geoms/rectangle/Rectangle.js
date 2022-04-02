@@ -80,6 +80,8 @@ class Rectangle extends BaseGeom {
         this.pathData.push(x1, y1);
         this.pathData.push(x0, y1);
         this.pathData.push(x0, y0);
+
+        super.updateData();
         return this;
     }
 

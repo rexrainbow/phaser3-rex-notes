@@ -17,6 +17,8 @@ class PathBase extends BaseGeom {
 
     updateData() {
         this.pathIndexes = Earcut(this.pathData);
+
+        super.updateData();
         return this;
     }
 
