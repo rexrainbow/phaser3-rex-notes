@@ -126,6 +126,14 @@ declare class ContainerLite extends Base {
         child: Phaser.GameObjects.GameObject
     ): this;
 
+    setMask(
+        mask: Phaser.Display.Masks.BitmapMask | Phaser.Display.Masks.GeometryMask
+    ): this;
+
+    clearMask(
+        destroyMask?: boolean
+    ): this;
+
     tween(
         config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): Phaser.Tweens.Tween
