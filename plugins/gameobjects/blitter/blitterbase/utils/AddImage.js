@@ -1,6 +1,5 @@
 import { ImageTypeName } from '../../blitterbase/bob/Types.js';
 import ImageData from '../../blitterbase/bob/image/ImageData.js';
-import PopReusedBob from './PopReusedBob.js';
 
 var AddImage = function (blitter, config) {
     if (typeof (config) === 'string') {
