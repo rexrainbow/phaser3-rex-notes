@@ -2,7 +2,7 @@ import ImageData from '../bob/image/ImageData.js';
 import { ImageTypeName } from '../bob/Types.js';
 
 var AppendImage = function (key, frame, properties) {
-    var bob = this.popReusedBob(ImageTypeName);
+    var bob = this.poolManager.allocate(ImageTypeName);
 
     if (bob === null) {
         bob = new ImageData(

@@ -9,7 +9,7 @@ var AppendText = function (text, style) {
     var bobArray = [];
     for (var i = 0, cnt = text.length; i < cnt; i++) {
         var char = text.charAt(i);
-        var bob = this.popReusedBob(CharTypeName);
+        var bob = this.poolManager.allocate(CharTypeName);
         if (bob === null) {
             bob = new CharData(
                 this,               // parent
