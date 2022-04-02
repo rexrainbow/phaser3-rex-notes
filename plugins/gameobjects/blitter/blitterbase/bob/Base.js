@@ -4,6 +4,8 @@ class Base {
     constructor(parent, type) {
         this.type = type;
 
+        this.data = undefined;
+
         this
             .setParent(parent)
             .reset()

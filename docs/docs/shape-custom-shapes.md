@@ -270,6 +270,24 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         shape.setData(key, value);
         ```
+        or
+        ```javascript
+        shape.setData({key:value, ...});
+        ```
+    - Inc
+        ```javascript
+        shape.incData(key, incValue);
+        // shape.incData(key, incValue, defaultValue);
+        ```
+    - Mul
+        ```javascript
+        shape.mulData(key, mulValue);
+        // shape.mulData(key, mulValue, defaultValue);
+        ```  
+    - Clear
+        ```javascript
+        shape.clearData();
+        ```      
 - Name
     - Get
         ```javascript

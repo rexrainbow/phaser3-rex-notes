@@ -52,24 +52,4 @@ export default {
         }
         return this;
     },
-
-    resetData(data) {
-        this.clearData();
-
-        if (data) {
-            this.enableData();
-            for (var key in data) {
-                this.data[key] = data[key];
-            }
-        }
-        return this;
-    },
-
-    cloneData() {
-        if (this.data) {
-            return Clone(this.data);
-        } else {
-            return {};
-        }
-    }
 };

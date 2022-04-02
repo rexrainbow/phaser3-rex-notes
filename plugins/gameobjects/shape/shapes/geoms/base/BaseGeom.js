@@ -1,5 +1,5 @@
 import StyleMethods from './StyleMethods.js';
-import DataMethods from './DataMethods.js';
+import DataMethods from '../../../../../utils/data/DataMethods.js';
 
 class BaseGeom {
     constructor() {
