@@ -1,12 +1,12 @@
-import Blitter from '../../blitter/Blitter.js';
+import Blitter from '../blitterbase/BlitterBase.js';
 import Methods from './methods/Methods.js';
 import CharacterDataManager from './chardatamanager/CharacterDataManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Text extends Blitter {
-    constructor(scene, x, y, font, text, config, type, parser) {
+class BitmapText extends Blitter {
+    constructor(scene, x, y, font, text, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
@@ -36,8 +36,8 @@ class Text extends Blitter {
 }
 
 Object.assign(
-    Text.prototype,
+    BitmapText.prototype,
     Methods
 );
 
-export default Text;
+export default BitmapText;
