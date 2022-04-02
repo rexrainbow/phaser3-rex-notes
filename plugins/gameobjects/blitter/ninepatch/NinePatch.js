@@ -1,4 +1,4 @@
-import Blitter from '../blitter/Blitter.js'
+import Blitter from '../blitterbase/BlitterBase.js'
 import NinePatchBase from '../../../utils/ninepatch/NinePatch.js';
 import Methods from './Methods.js';
 import SetTexture from '../blitterbase/methods/SetTexture.js';

@@ -1,24 +1,23 @@
 import { ImageTypeName } from '../../blitterbase/bob/Types.js';
 import ImageData from '../../blitterbase/bob/image/ImageData.js';
+import PopReusedBob from './PopReusedBob.js';
 
-var AddImage = function (config) {
+var AddImage = function (blitter, config) {
     if (typeof (config) === 'string') {
         config = {
             frame: config
         }
     }
 
-    var bob = this.popReusedBob(ImageTypeName);
+    var bob = (blitter.poolManager) ? blitter.poolManager.allocate(ImageTypeName) : null;
     if (bob === null) {
-        bob = new ImageData(this);
+        bob = new ImageData(blitter);
     } else {
-        bob.setParent(this).setActive();
+        bob.setParent(blitter).setActive();
     }
     bob.modifyPorperties(config);
 
-    this.addChild(bob);
-
-    return this;
+    blitter.addChild(bob);
 }
 
 export default AddImage;
