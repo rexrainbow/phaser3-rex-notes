@@ -17,13 +17,13 @@ class Demo extends Phaser.Scene {
             },
             undefined, 0x00ff00
         )
-            .setPosition(400, 300)            
+            .setPosition(400, 300)
+            .setSize(100, 100)
+            .setAngle(-45)
 
         jigsaw
-            .updateData()
-            .setSize(100, 100)
             .setInteractive({
-                hitArea: jigsaw.getShapes()[0].toPolygon(),
+                hitArea: jigsaw.updateData().getShapes()[0].toPolygon(),
                 hitAreaCallback: Phaser.Geom.Polygon.Contains,
                 draggable: true
             })
