@@ -227,7 +227,7 @@ See also - [dirty](ui-basesizer.md#dirty)
       ```
   - Text game object
     ```javascript
-    var icon = numberBar.getElement("text");
+    var textObject = numberBar.getElement("text");
     ```
 - Get by name
   ```javascript
