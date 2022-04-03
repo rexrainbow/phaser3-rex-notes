@@ -1,6 +1,8 @@
 var DrawContent = function () {
-    var width = (this.fixedWidth > 0)? this.fixedWidth : this.width;
-    var height = (this.fixedHeight > 0)? this.fixedHeight : this.height;
+    this.clear();
+
+    var width = (this.fixedWidth > 0) ? this.fixedWidth : this.width;
+    var height = (this.fixedHeight > 0) ? this.fixedHeight : this.height;
     this.setSize(width, height);
 
     if (this.background.active) {

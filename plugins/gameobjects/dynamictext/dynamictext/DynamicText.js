@@ -68,7 +68,6 @@ class DynamicText extends Canvas {
     }
 
     updateTexture() {
-        this.clear();
         this.drawContent();
         super.updateTexture();
         return this;
