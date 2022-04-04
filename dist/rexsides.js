@@ -8320,11 +8320,7 @@
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
 
         this.backgroundChildren = undefined;
-
-        if (this.sizerChildren) {
-          Clear(this.sizerChildren);
-        }
-
+        this.sizerChildren = Array.isArray(this.sizerChildren) ? [] : {};
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;
