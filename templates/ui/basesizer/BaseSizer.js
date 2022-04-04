@@ -1,6 +1,7 @@
 import Container from '../container/Container.js';
 import Methods from './Methods.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import Clear from '../../../plugins/utils/object/Clear.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -45,7 +46,11 @@ class Base extends Container {
         super.destroy(fromScene);
 
         this.backgroundChildren = undefined;
-        this.sizerChildren = undefined;
+
+        if (this.sizerChildren) {
+            Clear(this.sizerChildren);
+        }
+
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;

@@ -441,30 +441,107 @@
     lineStyle: LineStyle
   };
 
-  var SetData = function SetData(key, value) {
-    if (this.data === undefined) {
-      this.data = {};
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$6 = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
     }
-
-    this.data[key] = value;
-    return this;
-  };
-
-  var GetData = function GetData(key, defaultValue) {
-    if (this.data === undefined) {
-      this.data = {};
-    }
-
-    if (!this.data.hasOwnProperty(key)) {
-      this.data[key] = defaultValue;
-    }
-
-    return this.data[key];
   };
 
   var DataMethods = {
-    setData: SetData,
-    getData: GetData
+    enableData: function enableData() {
+      if (this.data === undefined) {
+        this.data = {};
+      }
+
+      return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$6(this.data, key, defaultValue);
+    },
+    setData: function setData(key, value) {
+      this.enableData();
+
+      if (arguments.length === 1) {
+        var data = key;
+
+        for (key in data) {
+          this.data[key] = data[key];
+        }
+      } else {
+        this.data[key] = value;
+      }
+
+      return this;
+    },
+    incData: function incData(key, inc, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) + inc);
+      return this;
+    },
+    mulData: function mulData(key, mul, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) * mul);
+      return this;
+    },
+    clearData: function clearData() {
+      if (this.data) {
+        Clear(this.data);
+      }
+
+      return this;
+    }
   };
 
   var BaseGeom = /*#__PURE__*/function () {
@@ -492,8 +569,7 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.fillStyle();
-        this.lineStyle();
+        this.fillStyle().lineStyle();
         return this;
       }
     }, {
@@ -504,7 +580,9 @@
       value: function canvasRender(ctx, dx, dy) {}
     }, {
       key: "updateData",
-      value: function updateData() {}
+      value: function updateData() {
+        this.dirty = false;
+      }
     }]);
 
     return BaseGeom;
@@ -627,6 +705,9 @@
       key: "updateData",
       value: function updateData() {
         this.pathIndexes = Earcut(this.pathData);
+
+        _get(_getPrototypeOf(PathBase.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
@@ -988,12 +1069,9 @@
 
   Phaser.Math.DegToRad;
 
-  Phaser.Math.Distance.Between;
-  Phaser.Math.Linear;
+  Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-  Phaser.Renderer.WebGL.Utils;
-
-  Phaser.Renderer.WebGL.Utils;
+  Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {

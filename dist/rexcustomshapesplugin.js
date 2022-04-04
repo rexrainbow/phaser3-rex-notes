@@ -441,30 +441,107 @@
     lineStyle: LineStyle
   };
 
-  var SetData = function SetData(key, value) {
-    if (this.data === undefined) {
-      this.data = {};
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$2 = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
     }
-
-    this.data[key] = value;
-    return this;
-  };
-
-  var GetData = function GetData(key, defaultValue) {
-    if (this.data === undefined) {
-      this.data = {};
-    }
-
-    if (!this.data.hasOwnProperty(key)) {
-      this.data[key] = defaultValue;
-    }
-
-    return this.data[key];
   };
 
   var DataMethods = {
-    setData: SetData,
-    getData: GetData
+    enableData: function enableData() {
+      if (this.data === undefined) {
+        this.data = {};
+      }
+
+      return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$2(this.data, key, defaultValue);
+    },
+    setData: function setData(key, value) {
+      this.enableData();
+
+      if (arguments.length === 1) {
+        var data = key;
+
+        for (key in data) {
+          this.data[key] = data[key];
+        }
+      } else {
+        this.data[key] = value;
+      }
+
+      return this;
+    },
+    incData: function incData(key, inc, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) + inc);
+      return this;
+    },
+    mulData: function mulData(key, mul, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) * mul);
+      return this;
+    },
+    clearData: function clearData() {
+      if (this.data) {
+        Clear(this.data);
+      }
+
+      return this;
+    }
   };
 
   var BaseGeom = /*#__PURE__*/function () {
@@ -492,8 +569,7 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.fillStyle();
-        this.lineStyle();
+        this.fillStyle().lineStyle();
         return this;
       }
     }, {
@@ -504,7 +580,9 @@
       value: function canvasRender(ctx, dx, dy) {}
     }, {
       key: "updateData",
-      value: function updateData() {}
+      value: function updateData() {
+        this.dirty = false;
+      }
     }]);
 
     return BaseGeom;
@@ -520,10 +598,10 @@
       pathIndexes  // Earcut(pathData)
   }
   */
-  var Utils$3 = Phaser.Renderer.WebGL.Utils;
+  var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
   var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
-    var fillTintColor = Utils$3.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+    var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
     var path = src.pathData;
     var pathIndexes = src.pathIndexes;
 
@@ -556,11 +634,11 @@
       closePath
   }
   */
-  var Utils$2 = Phaser.Renderer.WebGL.Utils;
+  var Utils = Phaser.Renderer.WebGL.Utils;
 
   var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
     var strokeTint = pipeline.strokeTint;
-    var strokeTintColor = Utils$2.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+    var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
     strokeTint.TL = strokeTintColor;
     strokeTint.TR = strokeTintColor;
     strokeTint.BL = strokeTintColor;
@@ -627,6 +705,9 @@
       key: "updateData",
       value: function updateData() {
         this.pathIndexes = Earcut(this.pathData);
+
+        _get(_getPrototypeOf(PathBase.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
@@ -1578,10 +1659,7 @@
     return Lines;
   }(PathBase);
 
-  Phaser.Math.Distance.Between;
-  Phaser.Math.Linear;
-
-  var Utils$1 = Phaser.Renderer.WebGL.Utils;
+  var GetTint$1 = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Rectangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Rectangle, _BaseGeom);
@@ -1683,6 +1761,9 @@
         this.pathData.push(x1, y1);
         this.pathData.push(x0, y1);
         this.pathData.push(x0, y0);
+
+        _get(_getPrototypeOf(Rectangle.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
@@ -1690,7 +1771,7 @@
       value: function webglRender(pipeline, calcMatrix, alpha, dx, dy) {
         if (this.isFilled) {
           var fillTint = pipeline.fillTint;
-          var fillTintColor = Utils$1.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
+          var fillTintColor = GetTint$1(this.fillColor, this.fillAlpha * alpha);
           fillTint.TL = fillTintColor;
           fillTint.TR = fillTintColor;
           fillTint.BL = fillTintColor;
@@ -1722,7 +1803,7 @@
     return Rectangle;
   }(BaseGeom);
 
-  var Utils = Phaser.Renderer.WebGL.Utils;
+  var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Triangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Triangle, _BaseGeom);
@@ -1855,13 +1936,16 @@
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x2, this.y2);
         this.pathData.push(this.x0, this.y0);
+
+        _get(_getPrototypeOf(Triangle.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
       key: "webglRender",
       value: function webglRender(pipeline, calcMatrix, alpha, dx, dy) {
         if (this.isFilled) {
-          var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
+          var fillTintColor = GetTint(this.fillColor, this.fillAlpha * alpha);
           var x0 = this.x0 - dx;
           var y0 = this.y0 - dy;
           var x1 = this.x1 - dx;

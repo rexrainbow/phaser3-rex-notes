@@ -908,6 +908,7 @@
 
     camera.addToRenderList(src);
     var pipeline = renderer.pipelines.set(src.pipeline);
+    var texture = src.frame.glTexture;
     var textureUnit = pipeline.setGameObject(src);
     var roundPixels = camera.roundPixels;
     var result = GetCalcMatrix$2(src, camera, parentMatrix);
@@ -918,7 +919,7 @@
     renderer.pipelines.preBatch(src);
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
-      bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels);
+      bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels);
     }
 
     renderer.pipelines.postBatch(src);
@@ -1026,12 +1027,7 @@
     return this.children.list;
   };
 
-  var PopReusedBob$1 = function PopReusedBob(typeName) {
-    var bob = this.poolManager ? this.poolManager.allocate(typeName) : null;
-    return bob;
-  };
-
-  var methods$o = {
+  var methods$n = {
     setTexture: SetTexture$1,
     resize: Resize$1,
     setSize: Resize$1,
@@ -1040,8 +1036,7 @@
     removeChildren: RemoveChildren$1,
     clear: RemoveChildren$1,
     getLastAppendedChildren: GetLastAppendedChildren$1,
-    getChildren: GetChildren$1,
-    popReusedBob: PopReusedBob$1
+    getChildren: GetChildren$1
   };
 
   var Stack = /*#__PURE__*/function () {
@@ -1151,7 +1146,7 @@
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
 
-  var Blitter$1 = /*#__PURE__*/function (_GameObject) {
+  var Blitter = /*#__PURE__*/function (_GameObject) {
     _inherits(Blitter, _GameObject);
 
     var _super = _createSuper(Blitter);
@@ -1250,7 +1245,7 @@
   };
 
   var Components$3 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter$1, [Components$3.Alpha, Components$3.BlendMode, Components$3.ComputedSize, Components$3.Depth, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Transform, Components$3.Visible, Render$4, methods$o]);
+  Phaser.Class.mixin(Blitter, [Components$3.Alpha, Components$3.BlendMode, Components$3.ComputedSize, Components$3.Depth, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Transform, Components$3.Visible, Render$4, methods$n]);
 
   var ImageTypeName$1 = 'image';
 
@@ -1344,7 +1339,7 @@
     return out;
   };
 
-  var DataMethods$1 = {
+  var DataMethods = {
     enableData: function enableData() {
       if (this.data === undefined) {
         this.data = {};
@@ -1395,26 +1390,6 @@
       }
 
       return this;
-    },
-    resetData: function resetData(data) {
-      this.clearData();
-
-      if (data) {
-        this.enableData();
-
-        for (var key in data) {
-          this.data[key] = data[key];
-        }
-      }
-
-      return this;
-    },
-    cloneData: function cloneData() {
-      if (this.data) {
-        return Clone(this.data);
-      } else {
-        return {};
-      }
     }
   };
 
@@ -1423,25 +1398,30 @@
       _classCallCheck(this, Base);
 
       this.type = type;
+      this.data = undefined;
       this.setParent(parent).reset().setActive();
     }
 
     _createClass(Base, [{
       key: "destroy",
       value: function destroy() {
-        this.parent.removeChild(this);
+        if (this.parent) {
+          this.parent.removeChild(this);
+        }
       }
     }, {
       key: "setParent",
       value: function setParent(parent) {
         this.parent = parent;
         return this;
-      }
-    }, {
-      key: "scene",
-      get: function get() {
-        return this.parent.scene;
-      }
+      } // get scene() {
+      //     if (this.parent) {
+      //         return this.parent.scene;
+      //     } else {
+      //         return null;
+      //     }
+      // }
+
     }, {
       key: "setDisplayListDirty",
       value: function setDisplayListDirty(displayListDirty) {
@@ -1479,7 +1459,7 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.setActive(false);
+        this.setActive(false).clearData();
       } // Override
 
     }, {
@@ -1492,7 +1472,7 @@
     return Base;
   }();
 
-  Object.assign(Base$3.prototype, DataMethods$1);
+  Object.assign(Base$3.prototype, DataMethods);
 
   var DegToRad$a = Phaser.Math.DegToRad;
   var RadToDeg$6 = Phaser.Math.RadToDeg;
@@ -1827,7 +1807,7 @@
 
     }, {
       key: "webglRender",
-      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {} // Override
+      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {} // Override
 
     }, {
       key: "canvasRender",
@@ -1838,10 +1818,10 @@
   }(Base$3);
 
   var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-  var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+  var GetTint$2 = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
   var FrameMatrix = new TransformMatrix();
 
-  var WebglRender = function WebglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
+  var WebglRender = function WebglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
     var width = this._width,
         height = this._height;
     var displayOriginX = width * this.originX,
@@ -1879,8 +1859,8 @@
     var v0 = this.frame.v0;
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
-    var tint = GetTint(this.color, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintEffect, this.frame.glTexture, textureUnit);
+    var tint = GetTint$2(this.color, this.alpha * alpha);
+    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintEffect, texture, textureUnit);
   };
 
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
@@ -1937,11 +1917,6 @@
     }
 
     _createClass(ImageData, [{
-      key: "texture",
-      get: function get() {
-        return this.parent.texture;
-      }
-    }, {
       key: "width",
       get: function get() {
         return this._width;
@@ -1957,7 +1932,7 @@
       key: "setFrame",
       value: function setFrame(frame) {
         if (arguments.length > 0 && !IsPlainObject$v(frame)) {
-          frame = this.texture.get(frame);
+          frame = this.parent.texture.get(frame);
         }
 
         this.frame = frame;
@@ -2074,54 +2049,34 @@
     return ImageData;
   }(RenderBase$1);
 
-  var methods$n = {
+  var methods$m = {
     webglRender: WebglRender,
     canvasRender: CanvasRender
   };
-  Object.assign(ImageData$1.prototype, methods$n);
+  Object.assign(ImageData$1.prototype, methods$m);
 
-  var AddImage$2 = function AddImage(config) {
+  var AddImage$2 = function AddImage(blitter, config) {
     if (typeof config === 'string') {
       config = {
         frame: config
       };
     }
 
-    var bob = this.popReusedBob(ImageTypeName$1);
+    var bob = blitter.poolManager ? blitter.poolManager.allocate(ImageTypeName$1) : null;
 
     if (bob === null) {
-      bob = new ImageData$1(this);
+      bob = new ImageData$1(blitter);
     } else {
-      bob.setParent(this).setActive();
+      bob.setParent(blitter).setActive();
     }
 
     bob.modifyPorperties(config);
-    this.addChild(bob);
-    return this;
+    blitter.addChild(bob);
+    return bob;
   };
-
-  var methods$m = {
-    addImage: AddImage$2
-  };
-
-  var Blitter = /*#__PURE__*/function (_BlitterBase) {
-    _inherits(Blitter, _BlitterBase);
-
-    var _super = _createSuper(Blitter);
-
-    function Blitter() {
-      _classCallCheck(this, Blitter);
-
-      return _super.apply(this, arguments);
-    }
-
-    return Blitter;
-  }(Blitter$1);
-
-  Object.assign(Blitter.prototype, methods$m);
 
   var DrawImage$1 = function DrawImage(key, frame, x, y, width, height) {
-    this.addImage({
+    AddImage$2(this, {
       frame: frame,
       x: x,
       y: y,
@@ -2142,7 +2097,7 @@
 
     for (var colIndex = 0; colIndex < colCount; colIndex++) {
       for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-        this.addImage({
+        AddImage$2(this, {
           frame: frame,
           x: x + colIndex * frameWidth,
           y: y + rowIndex * frameHeight
@@ -2420,10 +2375,10 @@
       pathIndexes  // Earcut(pathData)
   }
   */
-  var Utils$5 = Phaser.Renderer.WebGL.Utils;
+  var Utils$3 = Phaser.Renderer.WebGL.Utils;
 
   var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
-    var fillTintColor = Utils$5.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+    var fillTintColor = Utils$3.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
     var path = src.pathData;
     var pathIndexes = src.pathIndexes;
 
@@ -2456,11 +2411,11 @@
       closePath
   }
   */
-  var Utils$4 = Phaser.Renderer.WebGL.Utils;
+  var Utils$2 = Phaser.Renderer.WebGL.Utils;
 
   var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
     var strokeTint = pipeline.strokeTint;
-    var strokeTintColor = Utils$4.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+    var strokeTintColor = Utils$2.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
     strokeTint.TL = strokeTintColor;
     strokeTint.TR = strokeTintColor;
     strokeTint.BL = strokeTintColor;
@@ -2890,7 +2845,7 @@
   SetValue(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$1);
 
   // copy from Phaser.GameObjects.Text
-  var Utils$3 = Phaser.Renderer.WebGL.Utils;
+  var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
   var WebGLRenderer$2 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
@@ -2906,7 +2861,7 @@
     var frame = src.frame;
     var width = frame.width;
     var height = frame.height;
-    var getTint = Utils$3.getTintAppendFloatAlpha;
+    var getTint = Utils$1.getTintAppendFloatAlpha;
     var pipeline = renderer.pipelines.set(src.pipeline, src);
     var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
     renderer.pipelines.preBatch(src);
@@ -3648,7 +3603,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
-  var Utils$2 = Phaser.Renderer.WebGL.Utils;
+  var Utils = Phaser.Renderer.WebGL.Utils;
   /**
    * Renders this Game Object with the WebGL Renderer to the given Camera.
    * The object will not render if any of its renderFlags are set or it is being actively filtered out by the Camera.
@@ -3674,7 +3629,7 @@
     var frame = src.frame;
     var width = frame.width;
     var height = frame.height;
-    var getTint = Utils$2.getTintAppendFloatAlpha;
+    var getTint = Utils.getTintAppendFloatAlpha;
     var pipeline = renderer.pipelines.set(src.pipeline, src);
     var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
     renderer.pipelines.preBatch(src);
@@ -9699,7 +9654,7 @@
     return Base;
   }();
 
-  Object.assign(Base$1.prototype, DataMethods$1);
+  Object.assign(Base$1.prototype, DataMethods);
 
   var DegToRad$6 = Phaser.Math.DegToRad;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
@@ -10689,11 +10644,6 @@
     return this;
   };
 
-  var PopReusedBob = function PopReusedBob(typeName) {
-    var bob = this.poolManager.allocate(typeName);
-    return bob;
-  };
-
   var AddChild$1 = function AddChild(bob) {
     this.lastAppendedChildren.length = 0;
 
@@ -10887,7 +10837,7 @@
     for (var i = 0, cnt = text.length; i < cnt; i++) {
       var _char = text.charAt(i);
 
-      var bob = this.popReusedBob(CharTypeName);
+      var bob = this.poolManager.allocate(CharTypeName);
 
       if (bob === null) {
         bob = new CharData(this, // parent
@@ -11034,7 +10984,7 @@
   }(RenderBase);
 
   var AppendImage = function AppendImage(key, frame, properties) {
-    var bob = this.popReusedBob(ImageTypeName);
+    var bob = this.poolManager.allocate(ImageTypeName);
 
     if (bob === null) {
       bob = new ImageData(this, // parent
@@ -11113,7 +11063,7 @@
   }(Base$1);
 
   var AppendCommand$3 = function AppendCommand(name, callback, param, scope) {
-    var bob = this.popReusedBob(CmdTypeName);
+    var bob = this.poolManager.allocate(CmdTypeName);
 
     if (bob === null) {
       bob = new Command(this, // parent
@@ -11276,8 +11226,8 @@
   var RunWordWrap$1 = function RunWordWrap(config) {
     // Parse parameters
     var startIndex = GetValue$2f(config, 'start', 0);
-    var extraTopPadding = GetValue$2f(config, 'padding.top', 0);
-    var extraBottomPadding = GetValue$2f(config, 'padding.bottom', 0); // Add extra space below last line
+    var paddingTop = GetValue$2f(config, 'padding.top', 0);
+    var paddingBottom = GetValue$2f(config, 'padding.bottom', 0); // Add extra space below last line
     // Get lineHeight, maxLines
 
     var lineHeight = GetValue$2f(config, 'lineHeight', undefined);
@@ -11288,7 +11238,7 @@
       maxLines = GetValue$2f(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
-        var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+        var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
         lineHeight = innerHeight / maxLines;
       } else {
         lineHeight = 0;
@@ -11299,7 +11249,7 @@
         maxLines = GetValue$2f(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
-          var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+          var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
@@ -11329,8 +11279,8 @@
       isLastPage: false,
       // Is last page
       padding: {
-        top: extraTopPadding,
-        bottom: extraBottomPadding
+        top: paddingTop,
+        bottom: paddingBottom
       },
       lineHeight: lineHeight,
       maxLines: maxLines,
@@ -11356,7 +11306,7 @@
 
     wrapWidth += letterSpacing;
     var startX = this.padding.left,
-        startY = this.padding.top + lineHeight + extraTopPadding,
+        startY = this.padding.top + lineHeight + paddingTop,
         // Start(baseline) from 1st lineHeight, not 0
     x = startX,
         y = startY;
@@ -11447,13 +11397,13 @@
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
-    result.linesHeight = resultLines.length * lineHeight + extraTopPadding + extraBottomPadding; // Calculate size of game object
+    result.linesHeight = resultLines.length * lineHeight + paddingTop + paddingBottom; // Calculate size of game object
 
     var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + this.padding.left + this.padding.right;
     var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + this.padding.top + this.padding.bottom; // Size might be changed after wrapping
 
     var innerWidth = width - this.padding.left - this.padding.right;
-    var innerHeight = height - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+    var innerHeight = height - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
     AlignLines$1(result, innerWidth, innerHeight); // Resize
 
     this.setSize(width, height);
@@ -11740,6 +11690,7 @@
   };
 
   var DrawContent$1 = function DrawContent() {
+    this.clear();
     var width = this.fixedWidth > 0 ? this.fixedWidth : this.width;
     var height = this.fixedHeight > 0 ? this.fixedHeight : this.height;
     this.setSize(width, height);
@@ -11784,7 +11735,6 @@
     removeChild: RemoveChild$1,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
-    popReusedBob: PopReusedBob,
     addChild: AddChild$1,
     setText: SetText$2,
     appendText: AppendText$1,
@@ -11932,7 +11882,6 @@
     }, {
       key: "updateTexture",
       value: function updateTexture() {
-        this.clear();
         this.drawContent();
 
         _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);
@@ -17378,32 +17327,6 @@
     lineStyle: LineStyle
   };
 
-  var SetData = function SetData(key, value) {
-    if (this.data === undefined) {
-      this.data = {};
-    }
-
-    this.data[key] = value;
-    return this;
-  };
-
-  var GetData = function GetData(key, defaultValue) {
-    if (this.data === undefined) {
-      this.data = {};
-    }
-
-    if (!this.data.hasOwnProperty(key)) {
-      this.data[key] = defaultValue;
-    }
-
-    return this.data[key];
-  };
-
-  var DataMethods = {
-    setData: SetData,
-    getData: GetData
-  };
-
   var BaseGeom = /*#__PURE__*/function () {
     function BaseGeom() {
       _classCallCheck(this, BaseGeom);
@@ -17429,8 +17352,7 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.fillStyle();
-        this.lineStyle();
+        this.fillStyle().lineStyle();
         return this;
       }
     }, {
@@ -17441,7 +17363,9 @@
       value: function canvasRender(ctx, dx, dy) {}
     }, {
       key: "updateData",
-      value: function updateData() {}
+      value: function updateData() {
+        this.dirty = false;
+      }
     }]);
 
     return BaseGeom;
@@ -17472,6 +17396,9 @@
       key: "updateData",
       value: function updateData() {
         this.pathIndexes = Earcut(this.pathData);
+
+        _get(_getPrototypeOf(PathBase.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
@@ -18383,10 +18310,7 @@
     return Lines;
   }(PathBase);
 
-  Phaser.Math.Distance.Between;
-  Phaser.Math.Linear;
-
-  var Utils$1 = Phaser.Renderer.WebGL.Utils;
+  var GetTint$1 = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Rectangle$4 = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Rectangle, _BaseGeom);
@@ -18488,6 +18412,9 @@
         this.pathData.push(x1, y1);
         this.pathData.push(x0, y1);
         this.pathData.push(x0, y0);
+
+        _get(_getPrototypeOf(Rectangle.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
@@ -18495,7 +18422,7 @@
       value: function webglRender(pipeline, calcMatrix, alpha, dx, dy) {
         if (this.isFilled) {
           var fillTint = pipeline.fillTint;
-          var fillTintColor = Utils$1.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
+          var fillTintColor = GetTint$1(this.fillColor, this.fillAlpha * alpha);
           fillTint.TL = fillTintColor;
           fillTint.TR = fillTintColor;
           fillTint.BL = fillTintColor;
@@ -18527,7 +18454,7 @@
     return Rectangle;
   }(BaseGeom);
 
-  var Utils = Phaser.Renderer.WebGL.Utils;
+  var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Triangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Triangle, _BaseGeom);
@@ -18660,13 +18587,16 @@
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x2, this.y2);
         this.pathData.push(this.x0, this.y0);
+
+        _get(_getPrototypeOf(Triangle.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
       key: "webglRender",
       value: function webglRender(pipeline, calcMatrix, alpha, dx, dy) {
         if (this.isFilled) {
-          var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
+          var fillTintColor = GetTint(this.fillColor, this.fillAlpha * alpha);
           var x0 = this.x0 - dx;
           var y0 = this.y0 - dy;
           var x1 = this.x1 - dx;
@@ -25009,7 +24939,11 @@
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
 
         this.backgroundChildren = undefined;
-        this.sizerChildren = undefined;
+
+        if (this.sizerChildren) {
+          Clear(this.sizerChildren);
+        }
+
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;
@@ -34336,7 +34270,7 @@
 
     return Cell;
   }();
-  Object.assign(Cell.prototype, DataMethods$1);
+  Object.assign(Cell.prototype, DataMethods);
 
   var GetValue$w = Phaser.Utils.Objects.GetValue;
   var SpliceOne = Phaser.Utils.Array.SpliceOne;

@@ -659,37 +659,6 @@
     }
   };
 
-  /**
-   * Shallow Object Clone. Will not out nested objects.
-   * @param {object} obj JSON object
-   * @param {object} ret JSON object to return, set null to return a new object
-   * @returns {object} this object
-   */
-
-  var Clone = function Clone(obj, out) {
-    var objIsArray = Array.isArray(obj);
-
-    if (out === undefined) {
-      out = objIsArray ? [] : {};
-    } else {
-      Clear(out);
-    }
-
-    if (objIsArray) {
-      out.length = obj.length;
-
-      for (var i = 0, cnt = obj.length; i < cnt; i++) {
-        out[i] = obj[i];
-      }
-    } else {
-      for (var key in obj) {
-        out[key] = obj[key];
-      }
-    }
-
-    return out;
-  };
-
   var DataMethods = {
     enableData: function enableData() {
       if (this.data === undefined) {
@@ -741,26 +710,6 @@
       }
 
       return this;
-    },
-    resetData: function resetData(data) {
-      this.clearData();
-
-      if (data) {
-        this.enableData();
-
-        for (var key in data) {
-          this.data[key] = data[key];
-        }
-      }
-
-      return this;
-    },
-    cloneData: function cloneData() {
-      if (this.data) {
-        return Clone(this.data);
-      } else {
-        return {};
-      }
     }
   };
 
@@ -2206,11 +2155,6 @@
     return this;
   };
 
-  var PopReusedBob = function PopReusedBob(typeName) {
-    var bob = this.poolManager.allocate(typeName);
-    return bob;
-  };
-
   var AddChild = function AddChild(bob) {
     this.lastAppendedChildren.length = 0;
 
@@ -2404,7 +2348,7 @@
     for (var i = 0, cnt = text.length; i < cnt; i++) {
       var _char = text.charAt(i);
 
-      var bob = this.popReusedBob(CharTypeName);
+      var bob = this.poolManager.allocate(CharTypeName);
 
       if (bob === null) {
         bob = new CharData(this, // parent
@@ -2551,7 +2495,7 @@
   }(RenderBase);
 
   var AppendImage = function AppendImage(key, frame, properties) {
-    var bob = this.popReusedBob(ImageTypeName);
+    var bob = this.poolManager.allocate(ImageTypeName);
 
     if (bob === null) {
       bob = new ImageData(this, // parent
@@ -2630,7 +2574,7 @@
   }(Base);
 
   var AppendCommand$3 = function AppendCommand(name, callback, param, scope) {
-    var bob = this.popReusedBob(CmdTypeName);
+    var bob = this.poolManager.allocate(CmdTypeName);
 
     if (bob === null) {
       bob = new Command(this, // parent
@@ -2793,8 +2737,8 @@
   var RunWordWrap$1 = function RunWordWrap(config) {
     // Parse parameters
     var startIndex = GetValue$P(config, 'start', 0);
-    var extraTopPadding = GetValue$P(config, 'padding.top', 0);
-    var extraBottomPadding = GetValue$P(config, 'padding.bottom', 0); // Add extra space below last line
+    var paddingTop = GetValue$P(config, 'padding.top', 0);
+    var paddingBottom = GetValue$P(config, 'padding.bottom', 0); // Add extra space below last line
     // Get lineHeight, maxLines
 
     var lineHeight = GetValue$P(config, 'lineHeight', undefined);
@@ -2805,7 +2749,7 @@
       maxLines = GetValue$P(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
-        var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+        var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
         lineHeight = innerHeight / maxLines;
       } else {
         lineHeight = 0;
@@ -2816,7 +2760,7 @@
         maxLines = GetValue$P(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
-          var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+          var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
@@ -2846,8 +2790,8 @@
       isLastPage: false,
       // Is last page
       padding: {
-        top: extraTopPadding,
-        bottom: extraBottomPadding
+        top: paddingTop,
+        bottom: paddingBottom
       },
       lineHeight: lineHeight,
       maxLines: maxLines,
@@ -2873,7 +2817,7 @@
 
     wrapWidth += letterSpacing;
     var startX = this.padding.left,
-        startY = this.padding.top + lineHeight + extraTopPadding,
+        startY = this.padding.top + lineHeight + paddingTop,
         // Start(baseline) from 1st lineHeight, not 0
     x = startX,
         y = startY;
@@ -2964,13 +2908,13 @@
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
-    result.linesHeight = resultLines.length * lineHeight + extraTopPadding + extraBottomPadding; // Calculate size of game object
+    result.linesHeight = resultLines.length * lineHeight + paddingTop + paddingBottom; // Calculate size of game object
 
     var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + this.padding.left + this.padding.right;
     var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + this.padding.top + this.padding.bottom; // Size might be changed after wrapping
 
     var innerWidth = width - this.padding.left - this.padding.right;
-    var innerHeight = height - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+    var innerHeight = height - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
     AlignLines$1(result, innerWidth, innerHeight); // Resize
 
     this.setSize(width, height);
@@ -3257,6 +3201,7 @@
   };
 
   var DrawContent = function DrawContent() {
+    this.clear();
     var width = this.fixedWidth > 0 ? this.fixedWidth : this.width;
     var height = this.fixedHeight > 0 ? this.fixedHeight : this.height;
     this.setSize(width, height);
@@ -3301,7 +3246,6 @@
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
-    popReusedBob: PopReusedBob,
     addChild: AddChild,
     setText: SetText,
     appendText: AppendText,
@@ -3491,7 +3435,6 @@
     }, {
       key: "updateTexture",
       value: function updateTexture() {
-        this.clear();
         this.drawContent();
 
         _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);

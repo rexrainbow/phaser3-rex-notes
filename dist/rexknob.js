@@ -8308,7 +8308,11 @@
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
 
         this.backgroundChildren = undefined;
-        this.sizerChildren = undefined;
+
+        if (this.sizerChildren) {
+          Clear(this.sizerChildren);
+        }
+
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;
@@ -9240,30 +9244,58 @@
     lineStyle: LineStyle
   };
 
-  var SetData = function SetData(key, value) {
-    if (this.data === undefined) {
-      this.data = {};
-    }
-
-    this.data[key] = value;
-    return this;
-  };
-
-  var GetData = function GetData(key, defaultValue) {
-    if (this.data === undefined) {
-      this.data = {};
-    }
-
-    if (!this.data.hasOwnProperty(key)) {
-      this.data[key] = defaultValue;
-    }
-
-    return this.data[key];
-  };
-
   var DataMethods = {
-    setData: SetData,
-    getData: GetData
+    enableData: function enableData() {
+      if (this.data === undefined) {
+        this.data = {};
+      }
+
+      return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$i(this.data, key, defaultValue);
+    },
+    setData: function setData(key, value) {
+      this.enableData();
+
+      if (arguments.length === 1) {
+        var data = key;
+
+        for (key in data) {
+          this.data[key] = data[key];
+        }
+      } else {
+        this.data[key] = value;
+      }
+
+      return this;
+    },
+    incData: function incData(key, inc, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) + inc);
+      return this;
+    },
+    mulData: function mulData(key, mul, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) * mul);
+      return this;
+    },
+    clearData: function clearData() {
+      if (this.data) {
+        Clear(this.data);
+      }
+
+      return this;
+    }
   };
 
   var BaseGeom = /*#__PURE__*/function () {
@@ -9291,8 +9323,7 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.fillStyle();
-        this.lineStyle();
+        this.fillStyle().lineStyle();
         return this;
       }
     }, {
@@ -9303,7 +9334,9 @@
       value: function canvasRender(ctx, dx, dy) {}
     }, {
       key: "updateData",
-      value: function updateData() {}
+      value: function updateData() {
+        this.dirty = false;
+      }
     }]);
 
     return BaseGeom;
@@ -9426,6 +9459,9 @@
       key: "updateData",
       value: function updateData() {
         this.pathIndexes = Earcut(this.pathData);
+
+        _get(_getPrototypeOf(PathBase.prototype), "updateData", this).call(this);
+
         return this;
       }
     }, {
@@ -9787,12 +9823,9 @@
 
   Phaser.Math.DegToRad;
 
-  Phaser.Math.Distance.Between;
-  Phaser.Math.Linear;
+  Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-  Phaser.Renderer.WebGL.Utils;
-
-  Phaser.Renderer.WebGL.Utils;
+  Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Percent$2 = Phaser.Math.Percent;
 

@@ -549,37 +549,6 @@
     return array;
   };
 
-  /**
-   * Shallow Object Clone. Will not out nested objects.
-   * @param {object} obj JSON object
-   * @param {object} ret JSON object to return, set null to return a new object
-   * @returns {object} this object
-   */
-
-  var Clone = function Clone(obj, out) {
-    var objIsArray = Array.isArray(obj);
-
-    if (out === undefined) {
-      out = objIsArray ? [] : {};
-    } else {
-      Clear(out);
-    }
-
-    if (objIsArray) {
-      out.length = obj.length;
-
-      for (var i = 0, cnt = obj.length; i < cnt; i++) {
-        out[i] = obj[i];
-      }
-    } else {
-      for (var key in obj) {
-        out[key] = obj[key];
-      }
-    }
-
-    return out;
-  };
-
   var DataMethods$2 = {
     enableData: function enableData() {
       if (this.data === undefined) {
@@ -631,26 +600,6 @@
       }
 
       return this;
-    },
-    resetData: function resetData(data) {
-      this.clearData();
-
-      if (data) {
-        this.enableData();
-
-        for (var key in data) {
-          this.data[key] = data[key];
-        }
-      }
-
-      return this;
-    },
-    cloneData: function cloneData() {
-      if (this.data) {
-        return Clone(this.data);
-      } else {
-        return {};
-      }
     }
   };
 

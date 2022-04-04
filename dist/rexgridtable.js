@@ -8308,7 +8308,11 @@
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
 
         this.backgroundChildren = undefined;
-        this.sizerChildren = undefined;
+
+        if (this.sizerChildren) {
+          Clear(this.sizerChildren);
+        }
+
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;
@@ -11800,26 +11804,6 @@
       }
 
       return this;
-    },
-    resetData: function resetData(data) {
-      this.clearData();
-
-      if (data) {
-        this.enableData();
-
-        for (var key in data) {
-          this.data[key] = data[key];
-        }
-      }
-
-      return this;
-    },
-    cloneData: function cloneData() {
-      if (this.data) {
-        return Clone(this.data);
-      } else {
-        return {};
-      }
     }
   };
 

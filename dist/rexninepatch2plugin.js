@@ -197,6 +197,7 @@
 
     camera.addToRenderList(src);
     var pipeline = renderer.pipelines.set(src.pipeline);
+    var texture = src.frame.glTexture;
     var textureUnit = pipeline.setGameObject(src);
     var roundPixels = camera.roundPixels;
     var result = GetCalcMatrix(src, camera, parentMatrix);
@@ -207,7 +208,7 @@
     renderer.pipelines.preBatch(src);
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
-      bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels);
+      bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels);
     }
 
     renderer.pipelines.postBatch(src);
@@ -315,12 +316,7 @@
     return this.children.list;
   };
 
-  var PopReusedBob = function PopReusedBob(typeName) {
-    var bob = this.poolManager ? this.poolManager.allocate(typeName) : null;
-    return bob;
-  };
-
-  var methods$2 = {
+  var methods$1 = {
     setTexture: SetTexture$1,
     resize: Resize,
     setSize: Resize,
@@ -329,8 +325,7 @@
     removeChildren: RemoveChildren,
     clear: RemoveChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
-    getChildren: GetChildren,
-    popReusedBob: PopReusedBob
+    getChildren: GetChildren
   };
 
   var Stack = /*#__PURE__*/function () {
@@ -440,7 +435,7 @@
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
 
-  var Blitter$1 = /*#__PURE__*/function (_GameObject) {
+  var Blitter = /*#__PURE__*/function (_GameObject) {
     _inherits(Blitter, _GameObject);
 
     var _super = _createSuper(Blitter);
@@ -539,875 +534,7 @@
   };
 
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter$1, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Transform, Components.Visible, Render, methods$2]);
-
-  var ImageTypeName = 'image';
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
-  var GetValue$3 = function GetValue(source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
-      return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
-
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-
-      return value;
-    } else {
-      return defaultValue;
-    }
-  };
-
-  var Clear = function Clear(obj) {
-    if (Array.isArray(obj)) {
-      obj.length = 0;
-    } else {
-      for (var key in obj) {
-        delete obj[key];
-      }
-    }
-  };
-
-  /**
-   * Shallow Object Clone. Will not out nested objects.
-   * @param {object} obj JSON object
-   * @param {object} ret JSON object to return, set null to return a new object
-   * @returns {object} this object
-   */
-
-  var Clone = function Clone(obj, out) {
-    var objIsArray = Array.isArray(obj);
-
-    if (out === undefined) {
-      out = objIsArray ? [] : {};
-    } else {
-      Clear(out);
-    }
-
-    if (objIsArray) {
-      out.length = obj.length;
-
-      for (var i = 0, cnt = obj.length; i < cnt; i++) {
-        out[i] = obj[i];
-      }
-    } else {
-      for (var key in obj) {
-        out[key] = obj[key];
-      }
-    }
-
-    return out;
-  };
-
-  var DataMethods = {
-    enableData: function enableData() {
-      if (this.data === undefined) {
-        this.data = {};
-      }
-
-      return this;
-    },
-    getData: function getData(key, defaultValue) {
-      this.enableData();
-      return key === undefined ? this.data : GetValue$3(this.data, key, defaultValue);
-    },
-    setData: function setData(key, value) {
-      this.enableData();
-
-      if (arguments.length === 1) {
-        var data = key;
-
-        for (key in data) {
-          this.data[key] = data[key];
-        }
-      } else {
-        this.data[key] = value;
-      }
-
-      return this;
-    },
-    incData: function incData(key, inc, defaultValue) {
-      if (defaultValue === undefined) {
-        defaultValue = 0;
-      }
-
-      this.enableData();
-      this.setData(key, this.getData(key, defaultValue) + inc);
-      return this;
-    },
-    mulData: function mulData(key, mul, defaultValue) {
-      if (defaultValue === undefined) {
-        defaultValue = 0;
-      }
-
-      this.enableData();
-      this.setData(key, this.getData(key, defaultValue) * mul);
-      return this;
-    },
-    clearData: function clearData() {
-      if (this.data) {
-        Clear(this.data);
-      }
-
-      return this;
-    },
-    resetData: function resetData(data) {
-      this.clearData();
-
-      if (data) {
-        this.enableData();
-
-        for (var key in data) {
-          this.data[key] = data[key];
-        }
-      }
-
-      return this;
-    },
-    cloneData: function cloneData() {
-      if (this.data) {
-        return Clone(this.data);
-      } else {
-        return {};
-      }
-    }
-  };
-
-  var Base = /*#__PURE__*/function () {
-    function Base(parent, type) {
-      _classCallCheck(this, Base);
-
-      this.type = type;
-      this.setParent(parent).reset().setActive();
-    }
-
-    _createClass(Base, [{
-      key: "destroy",
-      value: function destroy() {
-        this.parent.removeChild(this);
-      }
-    }, {
-      key: "setParent",
-      value: function setParent(parent) {
-        this.parent = parent;
-        return this;
-      }
-    }, {
-      key: "scene",
-      get: function get() {
-        return this.parent.scene;
-      }
-    }, {
-      key: "setDisplayListDirty",
-      value: function setDisplayListDirty(displayListDirty) {
-        if (displayListDirty && this.parent) {
-          this.parent.displayListDirty = true;
-        }
-
-        return this;
-      }
-    }, {
-      key: "active",
-      get: function get() {
-        return this._active;
-      },
-      set: function set(value) {
-        this.setDisplayListDirty(this._active != value);
-        this._active = value;
-      }
-    }, {
-      key: "setActive",
-      value: function setActive(active) {
-        if (active === undefined) {
-          active = true;
-        }
-
-        this.active = active;
-        return this;
-      }
-    }, {
-      key: "modifyPorperties",
-      value: function modifyPorperties(o) {
-        return this;
-      } // Override
-
-    }, {
-      key: "reset",
-      value: function reset() {
-        this.setActive(false);
-      } // Override
-
-    }, {
-      key: "onFree",
-      value: function onFree() {
-        this.reset().setParent();
-      }
-    }]);
-
-    return Base;
-  }();
-
-  Object.assign(Base.prototype, DataMethods);
-
-  var DegToRad = Phaser.Math.DegToRad;
-  var RadToDeg = Phaser.Math.RadToDeg;
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
-  var RenderBase = /*#__PURE__*/function (_Base) {
-    _inherits(RenderBase, _Base);
-
-    var _super = _createSuper(RenderBase);
-
-    function RenderBase() {
-      _classCallCheck(this, RenderBase);
-
-      return _super.apply(this, arguments);
-    }
-
-    _createClass(RenderBase, [{
-      key: "visible",
-      get: function get() {
-        return this._visible;
-      },
-      set: function set(value) {
-        this.setDisplayListDirty(this._visible != value);
-        this._visible = value;
-      }
-    }, {
-      key: "setVisible",
-      value: function setVisible(visible) {
-        if (visible === undefined) {
-          visible = true;
-        }
-
-        this.visible = visible;
-        return this;
-      }
-    }, {
-      key: "alpha",
-      get: function get() {
-        return this._alpha;
-      },
-      set: function set(value) {
-        this.setDisplayListDirty(!!this._alpha !== !!value);
-        this._alpha = value;
-      }
-    }, {
-      key: "setAlpha",
-      value: function setAlpha(alpha) {
-        this.alpha = alpha;
-        return this;
-      }
-    }, {
-      key: "setX",
-      value: function setX(x) {
-        this.x = x;
-        return this;
-      }
-    }, {
-      key: "setY",
-      value: function setY(y) {
-        this.y = y;
-        return this;
-      }
-    }, {
-      key: "setPosition",
-      value: function setPosition(x, y) {
-        this.x = x;
-        this.y = y;
-        return this;
-      }
-    }, {
-      key: "setRotation",
-      value: function setRotation(rotation) {
-        this.rotation = rotation;
-        return this;
-      }
-    }, {
-      key: "angle",
-      get: function get() {
-        return RadToDeg(this.rotation);
-      },
-      set: function set(value) {
-        this.rotation = DegToRad(value);
-      }
-    }, {
-      key: "setAngle",
-      value: function setAngle(angle) {
-        this.angle = angle;
-        return this;
-      }
-    }, {
-      key: "setScaleX",
-      value: function setScaleX(scaleX) {
-        this.scaleX = scaleX;
-        return this;
-      }
-    }, {
-      key: "width",
-      get: function get() {
-        return this._width;
-      },
-      set: function set(value) {
-        this._width = value;
-      }
-    }, {
-      key: "setWidth",
-      value: function setWidth(width, keepAspectRatio) {
-        if (keepAspectRatio === undefined) {
-          keepAspectRatio = false;
-        }
-
-        this.width = width;
-
-        if (keepAspectRatio) {
-          this.scaleY = this.scaleX;
-        }
-
-        return this;
-      }
-    }, {
-      key: "setScaleY",
-      value: function setScaleY(scaleY) {
-        this.scaleY = scaleY;
-        return this;
-      }
-    }, {
-      key: "setScale",
-      value: function setScale(scaleX, scaleY) {
-        if (scaleY === undefined) {
-          scaleY = scaleX;
-        }
-
-        this.scaleX = scaleX;
-        this.scaleY = scaleY;
-        return this;
-      }
-    }, {
-      key: "height",
-      get: function get() {
-        return this._height;
-      },
-      set: function set(value) {
-        this._height = value;
-      }
-    }, {
-      key: "setHeight",
-      value: function setHeight(height, keepAspectRatio) {
-        if (keepAspectRatio === undefined) {
-          keepAspectRatio = false;
-        }
-
-        this.height = height;
-
-        if (keepAspectRatio) {
-          this.scaleX = this.scaleY;
-        }
-
-        return this;
-      }
-    }, {
-      key: "displayWidth",
-      get: function get() {
-        return this._width * this.scaleX;
-      },
-      set: function set(value) {
-        this.scaleX = value / this._width;
-      }
-    }, {
-      key: "setDisplayWidth",
-      value: function setDisplayWidth(width, keepAspectRatio) {
-        if (keepAspectRatio === undefined) {
-          keepAspectRatio = false;
-        }
-
-        this.displayWidth = width;
-
-        if (keepAspectRatio) {
-          this.scaleY = this.scaleX;
-        }
-
-        return this;
-      }
-    }, {
-      key: "displayHeight",
-      get: function get() {
-        return this._height * this.scaleY;
-      },
-      set: function set(value) {
-        this.scaleY = value / this._height;
-      }
-    }, {
-      key: "setDisplayHeight",
-      value: function setDisplayHeight(height, keepAspectRatio) {
-        if (keepAspectRatio === undefined) {
-          keepAspectRatio = false;
-        }
-
-        this.displayHeight = height;
-
-        if (keepAspectRatio) {
-          this.scaleX = this.scaleY;
-        }
-
-        return this;
-      }
-    }, {
-      key: "setOriginX",
-      value: function setOriginX(originX) {
-        this.originX = originX;
-        this._displayOriginX = this.width * originX;
-        return this;
-      }
-    }, {
-      key: "setOriginY",
-      value: function setOriginY(originY) {
-        this.originY = originY;
-        this._displayOriginY = this.height * originY;
-        return this;
-      }
-    }, {
-      key: "setOrigin",
-      value: function setOrigin(originX, originY) {
-        if (originY === undefined) {
-          originY = originX;
-        }
-
-        this.setOriginX(originX).setOriginY(originY);
-        return this;
-      }
-    }, {
-      key: "depth",
-      get: function get() {
-        return this._depth;
-      },
-      set: function set(value) {
-        this.setDisplayListDirty(this._depth != value);
-        this._depth = value;
-      }
-    }, {
-      key: "setDepth",
-      value: function setDepth(depth) {
-        if (depth === undefined) {
-          depth = 0;
-        }
-
-        this.depth = depth;
-        return this;
-      }
-    }, {
-      key: "modifyPorperties",
-      value: function modifyPorperties(o) {
-        if (!o) {
-          return this;
-        }
-
-        if (o.hasOwnProperty('x')) {
-          this.setX(o.x);
-        }
-
-        if (o.hasOwnProperty('y')) {
-          this.setY(o.y);
-        }
-
-        if (o.hasOwnProperty('rotation')) {
-          this.setRotation(o.rotation);
-        } else if (o.hasOwnProperty('angle')) {
-          this.setAngle(o.angle);
-        }
-
-        if (o.hasOwnProperty('alpha')) {
-          this.setAlpha(o.alpha);
-        } // ScaleX, ScaleY
-
-
-        var width = GetValue$2(o, 'width', undefined);
-        var height = GetValue$2(o, 'height', undefined);
-        var scale = GetValue$2(o, 'scale', undefined);
-        var scaleX = GetValue$2(o, 'scaleX', scale);
-        var scaleY = GetValue$2(o, 'scaleY', scale);
-
-        if (width !== undefined) {
-          if (height === undefined && scaleY === undefined) {
-            this.setWidth(width, true);
-          } else {
-            this.setWidth(width);
-          }
-        } else if (scaleX !== undefined) {
-          this.setScaleX(scaleX);
-        } else if (o.hasOwnProperty('displayWidth')) {
-          this.setDisplayWidth(o.displayWidth);
-        }
-
-        if (height !== undefined) {
-          if (width === undefined && scaleX === undefined) {
-            this.setHeight(height, true);
-          } else {
-            this.setHeight(height);
-          }
-        } else if (scaleY !== undefined) {
-          this.setScaleY(scaleY);
-        } else if (o.hasOwnProperty('displayHeight')) {
-          this.setDisplayHeight(o.displayHeight);
-        }
-
-        var origin = GetValue$2(o, 'origin', undefined);
-
-        if (origin !== undefined) {
-          this.setOrigin(origin);
-        } else {
-          if (o.hasOwnProperty('originX')) {
-            this.setOriginX(o.originX);
-          }
-
-          if (o.hasOwnProperty('originY')) {
-            this.setOriginY(o.originY);
-          }
-        }
-
-        if (o.hasOwnProperty('depth')) {
-          this.setDepth(o.depth);
-        }
-
-        return this;
-      }
-    }, {
-      key: "reset",
-      value: function reset() {
-        _get(_getPrototypeOf(RenderBase.prototype), "reset", this).call(this);
-
-        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setOrigin(0).setDepth(0);
-        return this;
-      } // Override
-
-    }, {
-      key: "webglRender",
-      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {} // Override
-
-    }, {
-      key: "canvasRender",
-      value: function canvasRender(ctx, dx, dy, roundPixels) {}
-    }]);
-
-    return RenderBase;
-  }(Base);
-
-  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-  var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-  var FrameMatrix = new TransformMatrix();
-
-  var WebglRender = function WebglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
-    var width = this._width,
-        height = this._height;
-    var displayOriginX = width * this.originX,
-        displayOriginY = height * this.originY;
-    var x = this.x - dx,
-        y = this.y - dy;
-    var flipX = 1;
-    var flipY = 1;
-
-    if (this.flipX) {
-      x += width - displayOriginX * 2;
-      flipX = -1;
-    }
-
-    if (this.flipY) {
-      y += height - displayOriginY * 2;
-      flipY = -1;
-    }
-
-    FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
-    calcMatrix.multiply(FrameMatrix, FrameMatrix);
-    var tx = -displayOriginX;
-    var ty = -displayOriginY;
-    var tw = tx + width;
-    var th = ty + height;
-    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
-    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
-    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
-    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
-    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
-    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
-    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
-    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
-    var u0 = this.frame.u0;
-    var v0 = this.frame.v0;
-    var u1 = this.frame.u1;
-    var v1 = this.frame.v1;
-    var tint = GetTint(this.color, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintEffect, this.frame.glTexture, textureUnit);
-  };
-
-  var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
-    ctx.save();
-    var width = this._width,
-        height = this._height;
-    var displayOriginX = width * this.originX,
-        displayOriginY = height * this.originY;
-    var x = this.x - displayOriginX,
-        y = this.y - displayOriginY;
-    var flipX = 1;
-    var flipY = 1;
-
-    if (this.flipX) {
-      x += width;
-      flipX = -1;
-    }
-
-    if (this.flipY) {
-      y += height;
-      flipY = -1;
-    }
-
-    if (roundPixels) {
-      x = Math.round(x);
-      y = Math.round(y);
-    }
-
-    ctx.translate(x, y);
-    ctx.rotate(this.rotation);
-    ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
-    var frame = this.frame;
-    ctx.drawImage(frame.source.image, frame.cutX, frame.cutY, width, height, 0, 0, width, height);
-    ctx.restore();
-  };
-
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-
-  var ImageData = /*#__PURE__*/function (_RenderBase) {
-    _inherits(ImageData, _RenderBase);
-
-    var _super = _createSuper(ImageData);
-
-    function ImageData(parent, frame) {
-      var _this;
-
-      _classCallCheck(this, ImageData);
-
-      _this = _super.call(this, parent, ImageTypeName);
-
-      _this.setFrame(frame);
-
-      return _this;
-    }
-
-    _createClass(ImageData, [{
-      key: "texture",
-      get: function get() {
-        return this.parent.texture;
-      }
-    }, {
-      key: "width",
-      get: function get() {
-        return this._width;
-      },
-      set: function set(value) {}
-    }, {
-      key: "height",
-      get: function get() {
-        return this._height;
-      },
-      set: function set(value) {}
-    }, {
-      key: "setFrame",
-      value: function setFrame(frame) {
-        if (arguments.length > 0 && !IsPlainObject$2(frame)) {
-          frame = this.texture.get(frame);
-        }
-
-        this.frame = frame;
-        this._width = frame ? frame.width : 0;
-        this._height = frame ? frame.height : 0;
-        return this;
-      }
-    }, {
-      key: "setFlipX",
-      value: function setFlipX(flipX) {
-        if (flipX === undefined) {
-          flipX = true;
-        }
-
-        this.flipX = flipX;
-        return this;
-      }
-    }, {
-      key: "setFlipY",
-      value: function setFlipY(flipY) {
-        if (flipY === undefined) {
-          flipY = true;
-        }
-
-        this.flipY = flipY;
-        return this;
-      }
-    }, {
-      key: "resetFlip",
-      value: function resetFlip() {
-        this.flipX = false;
-        this.flipY = false;
-        return this;
-      }
-    }, {
-      key: "color",
-      get: function get() {
-        return this._color;
-      },
-      set: function set(value) {
-        this._color = value;
-      }
-    }, {
-      key: "setColor",
-      value: function setColor(value) {
-        this.color = value;
-        return this;
-      }
-    }, {
-      key: "setTintEffect",
-      value: function setTintEffect(value) {
-        if (value === undefined) {
-          value = 0;
-        } // 1: Solid color + texture alpha
-        // 2: Solid color, no texture
-
-
-        this.tintEffect = value;
-        return this;
-      }
-    }, {
-      key: "reset",
-      value: function reset() {
-        _get(_getPrototypeOf(ImageData.prototype), "reset", this).call(this);
-
-        this.resetFlip().setColor(0xffffff).setTintEffect().setFrame();
-        return this;
-      }
-    }, {
-      key: "modifyPorperties",
-      value: function modifyPorperties(o) {
-        if (!o) {
-          return this;
-        } // Size of Image is equal to frame size,
-        // Move width, height properties to displayWidth,displayHeight
-
-
-        if (o.hasOwnProperty('width')) {
-          o.displayWidth = o.width;
-          delete o.width;
-        }
-
-        if (o.hasOwnProperty('height')) {
-          o.displayHeight = o.height;
-          delete o.height;
-        }
-
-        if (o.hasOwnProperty('frame')) {
-          this.setFrame(o.frame);
-        }
-
-        _get(_getPrototypeOf(ImageData.prototype), "modifyPorperties", this).call(this, o);
-
-        if (o.hasOwnProperty('flipX')) {
-          this.setFlipX(o.flipX);
-        }
-
-        if (o.hasOwnProperty('flipY')) {
-          this.setFlipY(o.flipY);
-        }
-
-        if (o.hasOwnProperty('color')) {
-          this.setColor(o.color);
-        }
-
-        if (o.hasOwnProperty('tintEffect')) {
-          this.setTintEffect(o.tintEffect);
-        }
-
-        return this;
-      }
-    }]);
-
-    return ImageData;
-  }(RenderBase);
-
-  var methods$1 = {
-    webglRender: WebglRender,
-    canvasRender: CanvasRender
-  };
-  Object.assign(ImageData.prototype, methods$1);
-
-  var AddImage = function AddImage(config) {
-    if (typeof config === 'string') {
-      config = {
-        frame: config
-      };
-    }
-
-    var bob = this.popReusedBob(ImageTypeName);
-
-    if (bob === null) {
-      bob = new ImageData(this);
-    } else {
-      bob.setParent(this).setActive();
-    }
-
-    bob.modifyPorperties(config);
-    this.addChild(bob);
-    return this;
-  };
-
-  var methods = {
-    addImage: AddImage
-  };
-
-  var Blitter = /*#__PURE__*/function (_BlitterBase) {
-    _inherits(Blitter, _BlitterBase);
-
-    var _super = _createSuper(Blitter);
-
-    function Blitter() {
-      _classCallCheck(this, Blitter);
-
-      return _super.apply(this, arguments);
-    }
-
-    return Blitter;
-  }(Blitter$1);
-
-  Object.assign(Blitter.prototype, methods);
+  Phaser.Class.mixin(Blitter, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Transform, Components.Visible, Render, methods$1]);
 
   var SetGetFrameNameCallback = function SetGetFrameNameCallback(callback) {
     if (callback === undefined) {
@@ -1691,13 +818,13 @@
     }
   };
 
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var SetStretchMode = function SetStretchMode(mode) {
-    if (IsPlainObject$1(mode)) {
-      this.stretchMode.edge = parseMode(GetValue$1(mode, 'edge', 0));
-      this.stretchMode.internal = parseMode(GetValue$1(mode, 'internal', 0));
+    if (IsPlainObject$2(mode)) {
+      this.stretchMode.edge = parseMode(GetValue$3(mode, 'edge', 0));
+      this.stretchMode.internal = parseMode(GetValue$3(mode, 'internal', 0));
     } else {
       mode = parseMode(mode);
       this.stretchMode.edge = mode;
@@ -1762,8 +889,8 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
@@ -1776,44 +903,44 @@
 
         _classCallCheck(this, NinePatch);
 
-        if (IsPlainObject(x)) {
+        if (IsPlainObject$1(x)) {
           config = x;
-          x = GetValue(config, 'x', 0);
-          y = GetValue(config, 'y', 0);
-          width = GetValue(config, 'width', 1);
-          height = GetValue(config, 'height', 1);
-          key = GetValue(config, 'key', undefined);
-          baseFrame = GetValue(config, 'baseFrame', undefined);
-          columns = GetValue(config, 'columns', undefined);
-          rows = GetValue(config, 'rows', undefined);
-        } else if (IsPlainObject(width)) {
+          x = GetValue$2(config, 'x', 0);
+          y = GetValue$2(config, 'y', 0);
+          width = GetValue$2(config, 'width', 1);
+          height = GetValue$2(config, 'height', 1);
+          key = GetValue$2(config, 'key', undefined);
+          baseFrame = GetValue$2(config, 'baseFrame', undefined);
+          columns = GetValue$2(config, 'columns', undefined);
+          rows = GetValue$2(config, 'rows', undefined);
+        } else if (IsPlainObject$1(width)) {
           config = width;
-          width = GetValue(config, 'width', 1);
-          height = GetValue(config, 'height', 1);
-          key = GetValue(config, 'key', undefined);
-          baseFrame = GetValue(config, 'baseFrame', undefined);
-          columns = GetValue(config, 'columns', undefined);
-          rows = GetValue(config, 'rows', undefined);
-        } else if (IsPlainObject(key)) {
+          width = GetValue$2(config, 'width', 1);
+          height = GetValue$2(config, 'height', 1);
+          key = GetValue$2(config, 'key', undefined);
+          baseFrame = GetValue$2(config, 'baseFrame', undefined);
+          columns = GetValue$2(config, 'columns', undefined);
+          rows = GetValue$2(config, 'rows', undefined);
+        } else if (IsPlainObject$1(key)) {
           config = key;
-          key = GetValue(config, 'key', undefined);
-          baseFrame = GetValue(config, 'baseFrame', undefined);
-          columns = GetValue(config, 'columns', undefined);
-          rows = GetValue(config, 'rows', undefined);
-        } else if (IsPlainObject(baseFrame)) {
+          key = GetValue$2(config, 'key', undefined);
+          baseFrame = GetValue$2(config, 'baseFrame', undefined);
+          columns = GetValue$2(config, 'columns', undefined);
+          rows = GetValue$2(config, 'rows', undefined);
+        } else if (IsPlainObject$1(baseFrame)) {
           config = baseFrame;
-          baseFrame = GetValue(config, 'baseFrame', undefined);
-          columns = GetValue(config, 'columns', undefined);
-          rows = GetValue(config, 'rows', undefined);
+          baseFrame = GetValue$2(config, 'baseFrame', undefined);
+          columns = GetValue$2(config, 'columns', undefined);
+          rows = GetValue$2(config, 'rows', undefined);
         } else if (Array.isArray(baseFrame)) {
           config = rows;
           rows = columns;
           columns = baseFrame;
-          baseFrame = GetValue(config, 'baseFrame', undefined);
-        } else if (IsPlainObject(columns)) {
+          baseFrame = GetValue$2(config, 'baseFrame', undefined);
+        } else if (IsPlainObject$1(columns)) {
           config = columns;
-          columns = GetValue(config, 'columns', undefined);
-          rows = GetValue(config, 'rows', undefined);
+          columns = GetValue$2(config, 'columns', undefined);
+          rows = GetValue$2(config, 'rows', undefined);
         }
 
         _this = _super.call(this, scene);
@@ -1828,15 +955,15 @@
 
         _this._image = undefined; // Reserved for drawing image
 
-        _this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
+        _this.setGetFrameNameCallback(GetValue$2(config, 'getFrameNameCallback', undefined));
 
-        _this.setStretchMode(GetValue(config, 'stretchMode', 0));
+        _this.setStretchMode(GetValue$2(config, 'stretchMode', 0));
 
-        _this.setPreserveRatio(GetValue(config, 'preserveRatio', true));
+        _this.setPreserveRatio(GetValue$2(config, 'preserveRatio', true));
 
-        var maxFixedPartScale = GetValue(config, 'maxFixedPartScale', 1);
-        var maxFixedPartScaleX = GetValue(config, 'maxFixedPartScaleX', maxFixedPartScale);
-        var maxFixedPartScaleY = GetValue(config, 'maxFixedPartScaleY', undefined);
+        var maxFixedPartScale = GetValue$2(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue$2(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue$2(config, 'maxFixedPartScaleY', undefined);
 
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
 
@@ -1886,8 +1013,805 @@
     return NinePatch;
   };
 
+  var ImageTypeName = 'image';
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$1 = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var Clear = function Clear(obj) {
+    if (Array.isArray(obj)) {
+      obj.length = 0;
+    } else {
+      for (var key in obj) {
+        delete obj[key];
+      }
+    }
+  };
+
+  var DataMethods = {
+    enableData: function enableData() {
+      if (this.data === undefined) {
+        this.data = {};
+      }
+
+      return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$1(this.data, key, defaultValue);
+    },
+    setData: function setData(key, value) {
+      this.enableData();
+
+      if (arguments.length === 1) {
+        var data = key;
+
+        for (key in data) {
+          this.data[key] = data[key];
+        }
+      } else {
+        this.data[key] = value;
+      }
+
+      return this;
+    },
+    incData: function incData(key, inc, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) + inc);
+      return this;
+    },
+    mulData: function mulData(key, mul, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) * mul);
+      return this;
+    },
+    clearData: function clearData() {
+      if (this.data) {
+        Clear(this.data);
+      }
+
+      return this;
+    }
+  };
+
+  var Base = /*#__PURE__*/function () {
+    function Base(parent, type) {
+      _classCallCheck(this, Base);
+
+      this.type = type;
+      this.data = undefined;
+      this.setParent(parent).reset().setActive();
+    }
+
+    _createClass(Base, [{
+      key: "destroy",
+      value: function destroy() {
+        if (this.parent) {
+          this.parent.removeChild(this);
+        }
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent;
+        return this;
+      } // get scene() {
+      //     if (this.parent) {
+      //         return this.parent.scene;
+      //     } else {
+      //         return null;
+      //     }
+      // }
+
+    }, {
+      key: "setDisplayListDirty",
+      value: function setDisplayListDirty(displayListDirty) {
+        if (displayListDirty && this.parent) {
+          this.parent.displayListDirty = true;
+        }
+
+        return this;
+      }
+    }, {
+      key: "active",
+      get: function get() {
+        return this._active;
+      },
+      set: function set(value) {
+        this.setDisplayListDirty(this._active != value);
+        this._active = value;
+      }
+    }, {
+      key: "setActive",
+      value: function setActive(active) {
+        if (active === undefined) {
+          active = true;
+        }
+
+        this.active = active;
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        return this;
+      } // Override
+
+    }, {
+      key: "reset",
+      value: function reset() {
+        this.setActive(false).clearData();
+      } // Override
+
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        this.reset().setParent();
+      }
+    }]);
+
+    return Base;
+  }();
+
+  Object.assign(Base.prototype, DataMethods);
+
+  var DegToRad = Phaser.Math.DegToRad;
+  var RadToDeg = Phaser.Math.RadToDeg;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+
+  var RenderBase = /*#__PURE__*/function (_Base) {
+    _inherits(RenderBase, _Base);
+
+    var _super = _createSuper(RenderBase);
+
+    function RenderBase() {
+      _classCallCheck(this, RenderBase);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(RenderBase, [{
+      key: "visible",
+      get: function get() {
+        return this._visible;
+      },
+      set: function set(value) {
+        this.setDisplayListDirty(this._visible != value);
+        this._visible = value;
+      }
+    }, {
+      key: "setVisible",
+      value: function setVisible(visible) {
+        if (visible === undefined) {
+          visible = true;
+        }
+
+        this.visible = visible;
+        return this;
+      }
+    }, {
+      key: "alpha",
+      get: function get() {
+        return this._alpha;
+      },
+      set: function set(value) {
+        this.setDisplayListDirty(!!this._alpha !== !!value);
+        this._alpha = value;
+      }
+    }, {
+      key: "setAlpha",
+      value: function setAlpha(alpha) {
+        this.alpha = alpha;
+        return this;
+      }
+    }, {
+      key: "setX",
+      value: function setX(x) {
+        this.x = x;
+        return this;
+      }
+    }, {
+      key: "setY",
+      value: function setY(y) {
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "setRotation",
+      value: function setRotation(rotation) {
+        this.rotation = rotation;
+        return this;
+      }
+    }, {
+      key: "angle",
+      get: function get() {
+        return RadToDeg(this.rotation);
+      },
+      set: function set(value) {
+        this.rotation = DegToRad(value);
+      }
+    }, {
+      key: "setAngle",
+      value: function setAngle(angle) {
+        this.angle = angle;
+        return this;
+      }
+    }, {
+      key: "setScaleX",
+      value: function setScaleX(scaleX) {
+        this.scaleX = scaleX;
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {
+        this._width = value;
+      }
+    }, {
+      key: "setWidth",
+      value: function setWidth(width, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.width = width;
+
+        if (keepAspectRatio) {
+          this.scaleY = this.scaleX;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setScaleY",
+      value: function setScaleY(scaleY) {
+        this.scaleY = scaleY;
+        return this;
+      }
+    }, {
+      key: "setScale",
+      value: function setScale(scaleX, scaleY) {
+        if (scaleY === undefined) {
+          scaleY = scaleX;
+        }
+
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        return this;
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {
+        this._height = value;
+      }
+    }, {
+      key: "setHeight",
+      value: function setHeight(height, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.height = height;
+
+        if (keepAspectRatio) {
+          this.scaleX = this.scaleY;
+        }
+
+        return this;
+      }
+    }, {
+      key: "displayWidth",
+      get: function get() {
+        return this._width * this.scaleX;
+      },
+      set: function set(value) {
+        this.scaleX = value / this._width;
+      }
+    }, {
+      key: "setDisplayWidth",
+      value: function setDisplayWidth(width, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.displayWidth = width;
+
+        if (keepAspectRatio) {
+          this.scaleY = this.scaleX;
+        }
+
+        return this;
+      }
+    }, {
+      key: "displayHeight",
+      get: function get() {
+        return this._height * this.scaleY;
+      },
+      set: function set(value) {
+        this.scaleY = value / this._height;
+      }
+    }, {
+      key: "setDisplayHeight",
+      value: function setDisplayHeight(height, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.displayHeight = height;
+
+        if (keepAspectRatio) {
+          this.scaleX = this.scaleY;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setOriginX",
+      value: function setOriginX(originX) {
+        this.originX = originX;
+        this._displayOriginX = this.width * originX;
+        return this;
+      }
+    }, {
+      key: "setOriginY",
+      value: function setOriginY(originY) {
+        this.originY = originY;
+        this._displayOriginY = this.height * originY;
+        return this;
+      }
+    }, {
+      key: "setOrigin",
+      value: function setOrigin(originX, originY) {
+        if (originY === undefined) {
+          originY = originX;
+        }
+
+        this.setOriginX(originX).setOriginY(originY);
+        return this;
+      }
+    }, {
+      key: "depth",
+      get: function get() {
+        return this._depth;
+      },
+      set: function set(value) {
+        this.setDisplayListDirty(this._depth != value);
+        this._depth = value;
+      }
+    }, {
+      key: "setDepth",
+      value: function setDepth(depth) {
+        if (depth === undefined) {
+          depth = 0;
+        }
+
+        this.depth = depth;
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        if (!o) {
+          return this;
+        }
+
+        if (o.hasOwnProperty('x')) {
+          this.setX(o.x);
+        }
+
+        if (o.hasOwnProperty('y')) {
+          this.setY(o.y);
+        }
+
+        if (o.hasOwnProperty('rotation')) {
+          this.setRotation(o.rotation);
+        } else if (o.hasOwnProperty('angle')) {
+          this.setAngle(o.angle);
+        }
+
+        if (o.hasOwnProperty('alpha')) {
+          this.setAlpha(o.alpha);
+        } // ScaleX, ScaleY
+
+
+        var width = GetValue(o, 'width', undefined);
+        var height = GetValue(o, 'height', undefined);
+        var scale = GetValue(o, 'scale', undefined);
+        var scaleX = GetValue(o, 'scaleX', scale);
+        var scaleY = GetValue(o, 'scaleY', scale);
+
+        if (width !== undefined) {
+          if (height === undefined && scaleY === undefined) {
+            this.setWidth(width, true);
+          } else {
+            this.setWidth(width);
+          }
+        } else if (scaleX !== undefined) {
+          this.setScaleX(scaleX);
+        } else if (o.hasOwnProperty('displayWidth')) {
+          this.setDisplayWidth(o.displayWidth);
+        }
+
+        if (height !== undefined) {
+          if (width === undefined && scaleX === undefined) {
+            this.setHeight(height, true);
+          } else {
+            this.setHeight(height);
+          }
+        } else if (scaleY !== undefined) {
+          this.setScaleY(scaleY);
+        } else if (o.hasOwnProperty('displayHeight')) {
+          this.setDisplayHeight(o.displayHeight);
+        }
+
+        var origin = GetValue(o, 'origin', undefined);
+
+        if (origin !== undefined) {
+          this.setOrigin(origin);
+        } else {
+          if (o.hasOwnProperty('originX')) {
+            this.setOriginX(o.originX);
+          }
+
+          if (o.hasOwnProperty('originY')) {
+            this.setOriginY(o.originY);
+          }
+        }
+
+        if (o.hasOwnProperty('depth')) {
+          this.setDepth(o.depth);
+        }
+
+        return this;
+      }
+    }, {
+      key: "reset",
+      value: function reset() {
+        _get(_getPrototypeOf(RenderBase.prototype), "reset", this).call(this);
+
+        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setOrigin(0).setDepth(0);
+        return this;
+      } // Override
+
+    }, {
+      key: "webglRender",
+      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {} // Override
+
+    }, {
+      key: "canvasRender",
+      value: function canvasRender(ctx, dx, dy, roundPixels) {}
+    }]);
+
+    return RenderBase;
+  }(Base);
+
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+  var FrameMatrix = new TransformMatrix();
+
+  var WebglRender = function WebglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
+    var width = this._width,
+        height = this._height;
+    var displayOriginX = width * this.originX,
+        displayOriginY = height * this.originY;
+    var x = this.x - dx,
+        y = this.y - dy;
+    var flipX = 1;
+    var flipY = 1;
+
+    if (this.flipX) {
+      x += width - displayOriginX * 2;
+      flipX = -1;
+    }
+
+    if (this.flipY) {
+      y += height - displayOriginY * 2;
+      flipY = -1;
+    }
+
+    FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
+    calcMatrix.multiply(FrameMatrix, FrameMatrix);
+    var tx = -displayOriginX;
+    var ty = -displayOriginY;
+    var tw = tx + width;
+    var th = ty + height;
+    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
+    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
+    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
+    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
+    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
+    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
+    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
+    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
+    var u0 = this.frame.u0;
+    var v0 = this.frame.v0;
+    var u1 = this.frame.u1;
+    var v1 = this.frame.v1;
+    var tint = GetTint(this.color, this.alpha * alpha);
+    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintEffect, texture, textureUnit);
+  };
+
+  var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
+    ctx.save();
+    var width = this._width,
+        height = this._height;
+    var displayOriginX = width * this.originX,
+        displayOriginY = height * this.originY;
+    var x = this.x - displayOriginX,
+        y = this.y - displayOriginY;
+    var flipX = 1;
+    var flipY = 1;
+
+    if (this.flipX) {
+      x += width;
+      flipX = -1;
+    }
+
+    if (this.flipY) {
+      y += height;
+      flipY = -1;
+    }
+
+    if (roundPixels) {
+      x = Math.round(x);
+      y = Math.round(y);
+    }
+
+    ctx.translate(x, y);
+    ctx.rotate(this.rotation);
+    ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
+    var frame = this.frame;
+    ctx.drawImage(frame.source.image, frame.cutX, frame.cutY, width, height, 0, 0, width, height);
+    ctx.restore();
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
+  var ImageData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(ImageData, _RenderBase);
+
+    var _super = _createSuper(ImageData);
+
+    function ImageData(parent, frame) {
+      var _this;
+
+      _classCallCheck(this, ImageData);
+
+      _this = _super.call(this, parent, ImageTypeName);
+
+      _this.setFrame(frame);
+
+      return _this;
+    }
+
+    _createClass(ImageData, [{
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {}
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {}
+    }, {
+      key: "setFrame",
+      value: function setFrame(frame) {
+        if (arguments.length > 0 && !IsPlainObject(frame)) {
+          frame = this.parent.texture.get(frame);
+        }
+
+        this.frame = frame;
+        this._width = frame ? frame.width : 0;
+        this._height = frame ? frame.height : 0;
+        return this;
+      }
+    }, {
+      key: "setFlipX",
+      value: function setFlipX(flipX) {
+        if (flipX === undefined) {
+          flipX = true;
+        }
+
+        this.flipX = flipX;
+        return this;
+      }
+    }, {
+      key: "setFlipY",
+      value: function setFlipY(flipY) {
+        if (flipY === undefined) {
+          flipY = true;
+        }
+
+        this.flipY = flipY;
+        return this;
+      }
+    }, {
+      key: "resetFlip",
+      value: function resetFlip() {
+        this.flipX = false;
+        this.flipY = false;
+        return this;
+      }
+    }, {
+      key: "color",
+      get: function get() {
+        return this._color;
+      },
+      set: function set(value) {
+        this._color = value;
+      }
+    }, {
+      key: "setColor",
+      value: function setColor(value) {
+        this.color = value;
+        return this;
+      }
+    }, {
+      key: "setTintEffect",
+      value: function setTintEffect(value) {
+        if (value === undefined) {
+          value = 0;
+        } // 1: Solid color + texture alpha
+        // 2: Solid color, no texture
+
+
+        this.tintEffect = value;
+        return this;
+      }
+    }, {
+      key: "reset",
+      value: function reset() {
+        _get(_getPrototypeOf(ImageData.prototype), "reset", this).call(this);
+
+        this.resetFlip().setColor(0xffffff).setTintEffect().setFrame();
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        if (!o) {
+          return this;
+        } // Size of Image is equal to frame size,
+        // Move width, height properties to displayWidth,displayHeight
+
+
+        if (o.hasOwnProperty('width')) {
+          o.displayWidth = o.width;
+          delete o.width;
+        }
+
+        if (o.hasOwnProperty('height')) {
+          o.displayHeight = o.height;
+          delete o.height;
+        }
+
+        if (o.hasOwnProperty('frame')) {
+          this.setFrame(o.frame);
+        }
+
+        _get(_getPrototypeOf(ImageData.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('flipX')) {
+          this.setFlipX(o.flipX);
+        }
+
+        if (o.hasOwnProperty('flipY')) {
+          this.setFlipY(o.flipY);
+        }
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color);
+        }
+
+        if (o.hasOwnProperty('tintEffect')) {
+          this.setTintEffect(o.tintEffect);
+        }
+
+        return this;
+      }
+    }]);
+
+    return ImageData;
+  }(RenderBase);
+
+  var methods = {
+    webglRender: WebglRender,
+    canvasRender: CanvasRender
+  };
+  Object.assign(ImageData.prototype, methods);
+
+  var AddImage = function AddImage(blitter, config) {
+    if (typeof config === 'string') {
+      config = {
+        frame: config
+      };
+    }
+
+    var bob = blitter.poolManager ? blitter.poolManager.allocate(ImageTypeName) : null;
+
+    if (bob === null) {
+      bob = new ImageData(blitter);
+    } else {
+      bob.setParent(blitter).setActive();
+    }
+
+    bob.modifyPorperties(config);
+    blitter.addChild(bob);
+    return bob;
+  };
+
   var DrawImage = function DrawImage(key, frame, x, y, width, height) {
-    this.addImage({
+    AddImage(this, {
       frame: frame,
       x: x,
       y: y,
@@ -1908,7 +1832,7 @@
 
     for (var colIndex = 0; colIndex < colCount; colIndex++) {
       for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-        this.addImage({
+        AddImage(this, {
           frame: frame,
           x: x + colIndex * frameWidth,
           y: y + rowIndex * frameHeight
