@@ -3,8 +3,17 @@ import RenderBase from '../RenderBase';
 export default ImageData;
 
 declare namespace ImageData {
+    interface IFrame {
+        width: number,
+        height: number,
+        u0: number,
+        v0: number,
+        u1: number,
+        v1: number,
+    }
+
     interface IModifyConfig extends RenderBase.IModifyConfig {
-        frame?: string | Object,
+        frame?: string | IFrame,
 
         flipX?: boolean, flipY?: boolean,
 
@@ -14,7 +23,7 @@ declare namespace ImageData {
 
 declare class ImageData extends RenderBase {
     setFrame(
-        frame?: string | Object
+        frame?: string | ImageData.IFrame
     ): this;
 
 

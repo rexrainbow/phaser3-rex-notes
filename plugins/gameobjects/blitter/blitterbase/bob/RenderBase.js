@@ -309,7 +309,7 @@ class RenderBase extends Base {
     }
 
     // Override
-    webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
+    webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
     }
     // Override
     canvasRender(ctx, dx, dy, roundPixels) {

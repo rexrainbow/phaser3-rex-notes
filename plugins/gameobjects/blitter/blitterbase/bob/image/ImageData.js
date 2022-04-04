@@ -12,10 +12,6 @@ class ImageData extends RenderBase {
         this.setFrame(frame);
     }
 
-    get texture() {
-        return this.parent.texture;
-    }
-
     get width() {
         return this._width;
     }
@@ -32,7 +28,7 @@ class ImageData extends RenderBase {
 
     setFrame(frame) {
         if (arguments.length > 0 && !IsPlainObject(frame)) {
-            frame = this.texture.get(frame);
+            frame = this.parent.texture.get(frame);
         }
         this.frame = frame;
         this._width = (frame) ? frame.width : 0;

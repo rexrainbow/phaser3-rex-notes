@@ -3,7 +3,7 @@ const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
 var FrameMatrix = new TransformMatrix();
 
-var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels) {
+var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
     var width = this._width,
         height = this._height;
     var displayOriginX = width * this.originX,
@@ -58,7 +58,7 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, textureUnit, ro
         u1, v1,
         tint, tint, tint, tint,
         this.tintEffect,
-        this.frame.glTexture,
+        texture,
         textureUnit
     );
 }

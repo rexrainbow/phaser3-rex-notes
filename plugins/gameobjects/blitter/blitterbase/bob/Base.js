@@ -14,7 +14,9 @@ class Base {
     }
 
     destroy() {
-        this.parent.removeChild(this);
+        if (this.parent) {
+            this.parent.removeChild(this);
+        }
     }
 
     setParent(parent) {
@@ -22,9 +24,13 @@ class Base {
         return this;
     }
 
-    get scene() {
-        return this.parent.scene;
-    }
+    // get scene() {
+    //     if (this.parent) {
+    //         return this.parent.scene;
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     setDisplayListDirty(displayListDirty) {
         if (displayListDirty && this.parent) {

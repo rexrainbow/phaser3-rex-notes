@@ -10,6 +10,8 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     var pipeline = renderer.pipelines.set(src.pipeline);
 
+    var texture = src.frame.glTexture;
+
     var textureUnit = pipeline.setGameObject(src);
 
     var roundPixels = camera.roundPixels;
@@ -26,7 +28,7 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
     renderer.pipelines.preBatch(src);
 
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
-        bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, textureUnit, roundPixels);
+        bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels);
     }
 
     renderer.pipelines.postBatch(src);

@@ -17,6 +17,8 @@ var AddImage = function (blitter, config) {
     bob.modifyPorperties(config);
 
     blitter.addChild(bob);
+
+    return bob;
 }
 
 export default AddImage;
