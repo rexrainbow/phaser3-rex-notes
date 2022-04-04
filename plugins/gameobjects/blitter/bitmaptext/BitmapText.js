@@ -1,6 +1,6 @@
 import Blitter from '../blitterbase/BlitterBase.js';
 import Methods from './methods/Methods.js';
-import CharacterDataManager from './chardatamanager/CharacterDataManager.js';
+import PenManager from './penmanager/PenManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -19,7 +19,7 @@ class BitmapText extends Blitter {
         this.type = type;
 
         this._text = '';
-        this.characterDataManager = new CharacterDataManager();
+        this.penManager = new PenManager();
 
         this.setFont(font);
 
