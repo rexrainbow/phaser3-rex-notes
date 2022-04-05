@@ -16,6 +16,7 @@ class Base {
     destroy() {
         if (this.parent) {
             this.parent.removeChild(this);
+            // Will set this.parent to undefined
         }
     }
 
@@ -62,12 +63,12 @@ class Base {
 
     // Override
     reset() {
-        this.setActive(false).clearData();
+        this.clearData();
     }
 
     // Override
     onFree() {
-        this.reset().setParent();
+        this.reset().setActive(false).setParent();
     }
 }
 

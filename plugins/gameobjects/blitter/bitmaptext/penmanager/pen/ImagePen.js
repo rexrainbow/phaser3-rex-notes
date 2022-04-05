@@ -1,11 +1,11 @@
-import AddImage from '../../blitterbase/utils/AddImage.js';
+import Base from './Base.js';
+import AddImage from '../../../blitterbase/utils/AddImage.js';
 
-class Pen {
-    constructor(blitter, frame) {
-        this.blitter = blitter;
-        this.frame = frame;
-
+class ImagePen extends Base {
+    constructor(blitter) {
+        super(blitter);
         this.bobs = {};
+
         this._x = 0;
         this._y = 0;
 
@@ -15,11 +15,7 @@ class Pen {
     destroy() {
         this.frame = undefined;
 
-        var bobs = this.bobs;
-        for (var key in bobs) {
-            bobs[key].destroy();
-            delete bobs[key];
-        }
+        super.destroy();
 
         return this;
     }
@@ -36,8 +32,10 @@ class Pen {
     }
 
     addImage(key, depth) {
-        var bob = AddImage(this.blitter, this.frame);
-        bob.setPosition(this.x, this.y).setDepth(depth);
+        var bob = AddImage(this.blitter, this.frame)
+            .setPosition(this.x, this.y)
+            .setDepth(depth);
+
         this.bobs[key] = bob;
 
         return this;
@@ -101,6 +99,7 @@ class Pen {
 
         return this;
     }
+
 }
 
-export default Pen;
+export default ImagePen;

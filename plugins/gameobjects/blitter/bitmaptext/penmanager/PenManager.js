@@ -1,4 +1,5 @@
 import Pool from '../../../../pool.js';
+import CharPen from './pen/CharPen.js';
 
 var PensPool = new Pool(); // default pens pool
 var LinesPool = new Pool(); // default lines pool
@@ -36,7 +37,15 @@ class PenManager {
         this.maxLinesWidth = undefined;
     }
 
+    addTextPen(text) {
+        for (var i = 0, cnt = text.length; i < cnt; i++) {
+            var pen = new CharPen(this.blitter)
+                .setChar(text.charAt(i))
+            this.pens.push(pen);
+        }
 
+        return this;
+    }
 
 }
 

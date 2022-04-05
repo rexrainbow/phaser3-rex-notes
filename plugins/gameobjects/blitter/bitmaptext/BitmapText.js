@@ -18,6 +18,9 @@ class BitmapText extends Blitter {
         super(scene, x, y);
         this.type = type;
 
+        this.fontData = undefined;
+        this.fromAtlas = undefined;
+        this._fontSize = 0;
         this._text = '';
         this.penManager = new PenManager();
 
