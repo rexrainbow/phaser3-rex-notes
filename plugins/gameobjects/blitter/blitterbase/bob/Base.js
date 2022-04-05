@@ -16,6 +16,7 @@ class Base {
     destroy() {
         if (this.parent) {
             this.parent.removeChild(this);
+            // Remove this bob from blitter, and free it (bob.onFree())
             // Will set this.parent to undefined
         }
     }

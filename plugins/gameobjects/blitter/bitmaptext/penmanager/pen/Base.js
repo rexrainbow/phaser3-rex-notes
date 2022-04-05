@@ -1,12 +1,29 @@
 import BobBase from '../../../blitterbase/bob/Base.js';
 
 class Base {
-    constructor(blitter) {
-        this.blitter = blitter;
+    constructor(parent, blitter) {
+        this
+            .setParent(parent)
+            .setBlitter(blitter);
+
         this.bobs = undefined;  // bob, or dictionary of bobs
     }
 
-    destroy() {
+    setParent(parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    setBlitter(blitter) {
+        this.blitter = blitter;
+        return this;
+    }
+
+    onFree() {
+        this
+            .setParent()
+            .setBlitter();
+
         if (this.bobs instanceof BobBase) {
             this.bobs.destroy();
             this.bobs = undefined;
@@ -17,6 +34,10 @@ class Base {
                 delete bobs[key];
             }
         }
+    }
+
+    destroy() {
+        this.parent.remove(this);
     }
 
 }

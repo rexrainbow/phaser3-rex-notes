@@ -12,12 +12,9 @@ class ImagePen extends Base {
         this.addImage('main', 0);
     }
 
-    destroy() {
+    onFree() {
         this.frame = undefined;
-
-        super.destroy();
-
-        return this;
+        super.onFree();
     }
 
     setFrame(frame) {

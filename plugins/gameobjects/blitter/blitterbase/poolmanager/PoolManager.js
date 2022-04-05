@@ -1,11 +1,11 @@
 import Pool from '../../../../pool.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 var Pools = {};
 class PoolManager {
     constructor(config) {
-        this.pools = GetFastValue(config, 'pools', Pools);
+        this.pools = GetValue(config, 'pools', Pools);
     }
 
     destroy() {
@@ -26,13 +26,13 @@ class PoolManager {
         return this;
     }
 
-    freeMultiple(arr) {
+    freeMultiple(bobs) {
         if (!this.pools) {
             return this;
         }
 
-        for (var i = 0, cnt = arr.length; i < cnt; i++) {
-            this.free(arr[i]);
+        for (var i = 0, cnt = bobs.length; i < cnt; i++) {
+            this.free(bobs[i]);
         }
         return this;
     }

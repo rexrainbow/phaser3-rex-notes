@@ -1,6 +1,11 @@
 import ImagePen from './ImagePen.js';
 
 class CharPen extends ImagePen {
+    onFree() {
+        this.char = undefined;
+        super.onFree();
+    }
+
     setChar(char) {
         this.char = char;
         var fontData = this.blitter.fontData;
