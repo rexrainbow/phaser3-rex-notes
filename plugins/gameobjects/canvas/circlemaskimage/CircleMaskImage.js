@@ -91,6 +91,12 @@ class CircleMaskImage extends Canvas {
         this.dirty = true;
         return this;
     }
+
+    resize(width, height) {
+        // Don't draw content again.
+        this.setDisplaySize(width, height);
+        return this;
+    }
 }
 
 const MASKTYPE = {

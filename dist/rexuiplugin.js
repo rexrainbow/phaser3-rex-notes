@@ -573,12 +573,12 @@
   };
 
   var IsPlainObject$y = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2C = Phaser.Utils.Objects.GetValue;
+  var GetValue$2D = Phaser.Utils.Objects.GetValue;
 
   var SetStretchMode = function SetStretchMode(mode) {
     if (IsPlainObject$y(mode)) {
-      this.stretchMode.edge = parseMode(GetValue$2C(mode, 'edge', 0));
-      this.stretchMode.internal = parseMode(GetValue$2C(mode, 'internal', 0));
+      this.stretchMode.edge = parseMode(GetValue$2D(mode, 'edge', 0));
+      this.stretchMode.internal = parseMode(GetValue$2D(mode, 'internal', 0));
     } else {
       mode = parseMode(mode);
       this.stretchMode.edge = mode;
@@ -644,7 +644,7 @@
   };
 
   var IsPlainObject$x = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2B = Phaser.Utils.Objects.GetValue;
+  var GetValue$2C = Phaser.Utils.Objects.GetValue;
 
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
@@ -659,42 +659,42 @@
 
         if (IsPlainObject$x(x)) {
           config = x;
-          x = GetValue$2B(config, 'x', 0);
-          y = GetValue$2B(config, 'y', 0);
-          width = GetValue$2B(config, 'width', 1);
-          height = GetValue$2B(config, 'height', 1);
-          key = GetValue$2B(config, 'key', undefined);
-          baseFrame = GetValue$2B(config, 'baseFrame', undefined);
-          columns = GetValue$2B(config, 'columns', undefined);
-          rows = GetValue$2B(config, 'rows', undefined);
+          x = GetValue$2C(config, 'x', 0);
+          y = GetValue$2C(config, 'y', 0);
+          width = GetValue$2C(config, 'width', 1);
+          height = GetValue$2C(config, 'height', 1);
+          key = GetValue$2C(config, 'key', undefined);
+          baseFrame = GetValue$2C(config, 'baseFrame', undefined);
+          columns = GetValue$2C(config, 'columns', undefined);
+          rows = GetValue$2C(config, 'rows', undefined);
         } else if (IsPlainObject$x(width)) {
           config = width;
-          width = GetValue$2B(config, 'width', 1);
-          height = GetValue$2B(config, 'height', 1);
-          key = GetValue$2B(config, 'key', undefined);
-          baseFrame = GetValue$2B(config, 'baseFrame', undefined);
-          columns = GetValue$2B(config, 'columns', undefined);
-          rows = GetValue$2B(config, 'rows', undefined);
+          width = GetValue$2C(config, 'width', 1);
+          height = GetValue$2C(config, 'height', 1);
+          key = GetValue$2C(config, 'key', undefined);
+          baseFrame = GetValue$2C(config, 'baseFrame', undefined);
+          columns = GetValue$2C(config, 'columns', undefined);
+          rows = GetValue$2C(config, 'rows', undefined);
         } else if (IsPlainObject$x(key)) {
           config = key;
-          key = GetValue$2B(config, 'key', undefined);
-          baseFrame = GetValue$2B(config, 'baseFrame', undefined);
-          columns = GetValue$2B(config, 'columns', undefined);
-          rows = GetValue$2B(config, 'rows', undefined);
+          key = GetValue$2C(config, 'key', undefined);
+          baseFrame = GetValue$2C(config, 'baseFrame', undefined);
+          columns = GetValue$2C(config, 'columns', undefined);
+          rows = GetValue$2C(config, 'rows', undefined);
         } else if (IsPlainObject$x(baseFrame)) {
           config = baseFrame;
-          baseFrame = GetValue$2B(config, 'baseFrame', undefined);
-          columns = GetValue$2B(config, 'columns', undefined);
-          rows = GetValue$2B(config, 'rows', undefined);
+          baseFrame = GetValue$2C(config, 'baseFrame', undefined);
+          columns = GetValue$2C(config, 'columns', undefined);
+          rows = GetValue$2C(config, 'rows', undefined);
         } else if (Array.isArray(baseFrame)) {
           config = rows;
           rows = columns;
           columns = baseFrame;
-          baseFrame = GetValue$2B(config, 'baseFrame', undefined);
+          baseFrame = GetValue$2C(config, 'baseFrame', undefined);
         } else if (IsPlainObject$x(columns)) {
           config = columns;
-          columns = GetValue$2B(config, 'columns', undefined);
-          rows = GetValue$2B(config, 'rows', undefined);
+          columns = GetValue$2C(config, 'columns', undefined);
+          rows = GetValue$2C(config, 'rows', undefined);
         }
 
         _this = _super.call(this, scene);
@@ -709,15 +709,15 @@
 
         _this._image = undefined; // Reserved for drawing image
 
-        _this.setGetFrameNameCallback(GetValue$2B(config, 'getFrameNameCallback', undefined));
+        _this.setGetFrameNameCallback(GetValue$2C(config, 'getFrameNameCallback', undefined));
 
-        _this.setStretchMode(GetValue$2B(config, 'stretchMode', 0));
+        _this.setStretchMode(GetValue$2C(config, 'stretchMode', 0));
 
-        _this.setPreserveRatio(GetValue$2B(config, 'preserveRatio', true));
+        _this.setPreserveRatio(GetValue$2C(config, 'preserveRatio', true));
 
-        var maxFixedPartScale = GetValue$2B(config, 'maxFixedPartScale', 1);
-        var maxFixedPartScaleX = GetValue$2B(config, 'maxFixedPartScaleX', maxFixedPartScale);
-        var maxFixedPartScaleY = GetValue$2B(config, 'maxFixedPartScaleY', undefined);
+        var maxFixedPartScale = GetValue$2C(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue$2C(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue$2C(config, 'maxFixedPartScaleY', undefined);
 
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
 
@@ -999,8 +999,10 @@
 
   var RemoveChild$3 = function RemoveChild(bob) {
     if (this.poolManager) {
+      // Free this bob (bob.onFree())
       this.poolManager.free(bob);
-    }
+    } // Remove this bob from blitter
+
 
     RemoveItem$b(this.children.list, bob);
     this.lastAppendedChildren.length = 0;
@@ -1010,8 +1012,10 @@
 
   var RemoveChildren$1 = function RemoveChildren() {
     if (this.poolManager) {
+      // Free all bobs (bob.onFree())
       this.poolManager.freeMultiple(this.children.list);
-    }
+    } // Remove all bobs from blitter
+
 
     this.children.list.length = 0;
     this.lastAppendedChildren.length = 0;
@@ -1081,14 +1085,14 @@
     return Stack;
   }();
 
-  var GetFastValue$3 = Phaser.Utils.Objects.GetFastValue;
+  var GetValue$2B = Phaser.Utils.Objects.GetValue;
   var Pools$1 = {};
 
   var PoolManager$1 = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
 
-      this.pools = GetFastValue$3(config, 'pools', Pools$1);
+      this.pools = GetValue$2B(config, 'pools', Pools$1);
     }
 
     _createClass(PoolManager, [{
@@ -1115,13 +1119,13 @@
       }
     }, {
       key: "freeMultiple",
-      value: function freeMultiple(arr) {
+      value: function freeMultiple(bobs) {
         if (!this.pools) {
           return this;
         }
 
-        for (var i = 0, cnt = arr.length; i < cnt; i++) {
-          this.free(arr[i]);
+        for (var i = 0, cnt = bobs.length; i < cnt; i++) {
+          this.free(bobs[i]);
         }
 
         return this;
@@ -1406,7 +1410,8 @@
       key: "destroy",
       value: function destroy() {
         if (this.parent) {
-          this.parent.removeChild(this);
+          this.parent.removeChild(this); // Remove this bob from blitter, and free it (bob.onFree())
+          // Will set this.parent to undefined
         }
       }
     }, {
@@ -1459,13 +1464,13 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.setActive(false).clearData();
+        this.clearData();
       } // Override
 
     }, {
       key: "onFree",
       value: function onFree() {
-        this.reset().setParent();
+        this.reset().setActive(false).setParent();
       }
     }]);
 
@@ -3072,7 +3077,7 @@
       }
 
       if (this.width !== textureFrame.cutWidth || this.height !== textureFrame.cutHeight) {
-        this.resize(textureFrame.cutWidth, textureFrame.cutHeight);
+        this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
       } else {
         this.clear();
       }
@@ -9549,6 +9554,13 @@
         }
 
         this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        // Don't draw content again.
+        this.setDisplaySize(width, height);
         return this;
       }
     }]);

@@ -288,8 +288,10 @@
 
   var RemoveChild = function RemoveChild(bob) {
     if (this.poolManager) {
+      // Free this bob (bob.onFree())
       this.poolManager.free(bob);
-    }
+    } // Remove this bob from blitter
+
 
     RemoveItem(this.children.list, bob);
     this.lastAppendedChildren.length = 0;
@@ -299,8 +301,10 @@
 
   var RemoveChildren = function RemoveChildren() {
     if (this.poolManager) {
+      // Free all bobs (bob.onFree())
       this.poolManager.freeMultiple(this.children.list);
-    }
+    } // Remove all bobs from blitter
+
 
     this.children.list.length = 0;
     this.lastAppendedChildren.length = 0;
@@ -370,14 +374,14 @@
     return Stack;
   }();
 
-  var GetFastValue = Phaser.Utils.Objects.GetFastValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Pools = {};
 
   var PoolManager = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
 
-      this.pools = GetFastValue(config, 'pools', Pools);
+      this.pools = GetValue$5(config, 'pools', Pools);
     }
 
     _createClass(PoolManager, [{
@@ -404,13 +408,13 @@
       }
     }, {
       key: "freeMultiple",
-      value: function freeMultiple(arr) {
+      value: function freeMultiple(bobs) {
         if (!this.pools) {
           return this;
         }
 
-        for (var i = 0, cnt = arr.length; i < cnt; i++) {
-          this.free(arr[i]);
+        for (var i = 0, cnt = bobs.length; i < cnt; i++) {
+          this.free(bobs[i]);
         }
 
         return this;
@@ -1141,7 +1145,8 @@
       key: "destroy",
       value: function destroy() {
         if (this.parent) {
-          this.parent.removeChild(this);
+          this.parent.removeChild(this); // Remove this bob from blitter, and free it (bob.onFree())
+          // Will set this.parent to undefined
         }
       }
     }, {
@@ -1194,13 +1199,13 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.setActive(false).clearData();
+        this.clearData();
       } // Override
 
     }, {
       key: "onFree",
       value: function onFree() {
-        this.reset().setParent();
+        this.reset().setActive(false).setParent();
       }
     }]);
 

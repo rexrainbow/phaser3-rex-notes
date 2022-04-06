@@ -381,7 +381,7 @@
       }
 
       if (this.width !== textureFrame.cutWidth || this.height !== textureFrame.cutHeight) {
-        this.resize(textureFrame.cutWidth, textureFrame.cutHeight);
+        this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
       } else {
         this.clear();
       }
