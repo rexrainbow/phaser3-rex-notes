@@ -13,10 +13,9 @@ var CreateBBCodeText = function (scene, count) {
     }
     var t1 = performance.now();
     scene.add.text(200, 250, `BBCodeText: ${Math.floor(t1 - t0)}`);
-    /*
-    10: 28
-    100: 114
-    1000: 1439
+    /*   
+    Width lines pool    : 346
+    Widthout lines pool : 10650
     */
 }
 
