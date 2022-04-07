@@ -8,8 +8,9 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 
-var PensPool = new Pool(); // default pens pool
-var LinesPool = new Pool(); // default lines pool
+// Reuse objects can increase performance
+var PensPool = new Pool(); // Default pens pool
+var LinesPool = new Pool(); // Default lines pool
 class PenManager {
     constructor(config) {
         this.pens = []; // all pens
