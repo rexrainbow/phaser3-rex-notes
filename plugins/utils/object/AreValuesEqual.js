@@ -1,4 +1,4 @@
-var ValuesEqual = function (obj1, obj2) {
+var AreValuesEqual = function (obj1, obj2) {
     if (!(IsObjectType(obj1)) || !IsObjectType(obj2)) {
         return false;
     }
@@ -18,7 +18,7 @@ var ValuesEqual = function (obj1, obj2) {
         var value1 = obj1[key];
         var value2 = obj2[key];
         if (IsObjectType(value1)) {
-            return ValuesEqual(value1, value2);
+            return AreValuesEqual(value1, value2);
         }
 
         return value1 === value2;
@@ -29,4 +29,4 @@ var IsObjectType = function (value) {
     return (typeof (value) === 'object') && (value !== null);
 }
 
-export default ValuesEqual;
+export default AreValuesEqual;
