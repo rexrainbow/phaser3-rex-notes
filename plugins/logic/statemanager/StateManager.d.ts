@@ -1,10 +1,10 @@
 import EventEmitter from "../../utils/eventemitter/EventEmitter";
 
-export default FSM;
+export default StateManager;
 
-declare namespace FSM {
+declare namespace StateManager {
 
-    interface IStateConfig {
+    interface IState {
         name?: string,
         next?: string | (() => string),
         enter?: Function,
@@ -12,35 +12,25 @@ declare namespace FSM {
     }
 
     interface IConfig {
-        start?: string,
-        states?: { [name: string]: IStateConfig },
-
-        init?: Function,
-
-        extend?: {
-            [name: string]: any,
-        },
-
-        enable?: boolean,
-
         eventEmitter?: EventEmitter | false,
     }
 
     namespace Events {
-        type StateChangeCallbackType = (state: FSM) => void;
-        type ExitStateCallbackType = (state: FSM) => void;
-        type EnterStateCallbackType = (state: FSM) => void;
+        type StateChangeCallbackType = (state: StateManager) => void;
+        type ExitStateCallbackType = (state: StateManager) => void;
+        type EnterStateCallbackType = (state: StateManager) => void;
     }
 }
 
-declare class FSM extends EventEmitter {
-    constructor(config?: FSM.IConfig);
+declare class StateManager extends EventEmitter {
+    constructor(config?: StateManager.IConfig);
 
     start(newState: string): this;
     next(): this;
     goto(nextState: string): this;
     state: string;
     readonly prevState: string;
+    readonly stateList: string[];
 
     setEnable(enable?: boolean): this;
     toggleEnable(): this;
@@ -48,15 +38,17 @@ declare class FSM extends EventEmitter {
 
     addState(
         name: string,
-        state: FSM.IStateConfig
+        state: StateManager.IState
     ): this;
-    addState(state: FSM.IStateConfig): this;
+    addState(
+        state: StateManager.IState
+    ): this;
 
     addStates(
-        states: { [name: string]: FSM.IStateConfig },
+        state: StateManager.IState[]
     ): this;
     addStates(
-        states: FSM.IStateConfig[]
+        states: { [name: string]: StateManager.IState },
     ): this;
 
     runMethod(

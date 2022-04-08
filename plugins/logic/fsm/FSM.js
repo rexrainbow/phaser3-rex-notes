@@ -90,29 +90,6 @@ class FSM {
         return this;
     }
 
-    runMethod(methodName, a1, a2, a3, a4, a5) {
-        var fn = this[methodName + '_' + this.state];
-        if (!fn) {
-            return undefined;
-        }
-        
-        // Copy from eventemitter3
-        var len = arguments.length;
-        switch (len) {
-            case 1: return fn.call(this);
-            case 2: return fn.call(this, a1);
-            case 3: return fn.call(this, a1, a2);
-            case 4: return fn.call(this, a1, a2, a3);
-            case 5: return fn.call(this, a1, a2, a3, a4);
-            case 6: return fn.call(this, a1, a2, a3, a4, a5);
-        }
-        var args = new Array(len - 1)
-        for (var i = 1; i < len; i++) {
-            args[i - 1] = arguments[i];
-        }
-        return fn.apply(this, args);
-    }
-
     set state(newState) {
         if (!this.enable || this._stateLock) {
             return;
@@ -185,18 +162,23 @@ class FSM {
         return this;
     }
 
-    addState(name, config) {
-        var getNextStateCallback = GetValue(config, 'next', undefined);
+    addState(name, state) {
+        if (typeof (name) !== 'string') {
+            state = name;
+            name = state.name;
+        }
+
+        var getNextStateCallback = state.next;;
         if (getNextStateCallback) {
             this['next_' + name] = getNextStateCallback;
         }
 
-        var exitCallback = GetValue(config, 'exit', undefined);
+        var exitCallback = state.exit;
         if (exitCallback) {
             this['exit_' + name] = exitCallback;
         }
 
-        var enterCallback = GetValue(config, 'enter', undefined);
+        var enterCallback = state.enter;
         if (enterCallback) {
             this['enter_' + name] = enterCallback;
         }
@@ -204,10 +186,39 @@ class FSM {
     }
 
     addStates(states) {
-        for (var name in states) {
-            this.addState(name, states[name]);
+        if (Array.isArray(states)) {
+            for (var i = 0, cnt = states.length; i < cnt; i++) {
+                this.addState(states[i]);
+            }
+        } else {
+            for (var name in states) {
+                this.addState(name, states[name]);
+            }
         }
         return this;
+    }
+
+    runMethod(methodName, a1, a2, a3, a4, a5) {
+        var fn = this[methodName + '_' + this.state];
+        if (!fn) {
+            return undefined;
+        }
+
+        // Copy from eventemitter3
+        var len = arguments.length;
+        switch (len) {
+            case 1: return fn.call(this);
+            case 2: return fn.call(this, a1);
+            case 3: return fn.call(this, a1, a2);
+            case 4: return fn.call(this, a1, a2, a3);
+            case 5: return fn.call(this, a1, a2, a3, a4);
+            case 6: return fn.call(this, a1, a2, a3, a4, a5);
+        }
+        var args = new Array(len - 1);
+        for (var i = 1; i < len; i++) {
+            args[i - 1] = arguments[i];
+        }
+        return fn.apply(this, args);
     }
 
     update(time, delta) {
