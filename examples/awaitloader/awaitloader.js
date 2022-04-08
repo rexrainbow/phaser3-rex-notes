@@ -6,19 +6,25 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.print;
     }
 
     preload() {
-        this.print = this.add.text(0, 0, 'Preload\n');
+        var textObject = this.add.text(0, 0, 'Preload\n');
 
         this.load.rexAwait(function (successCallback, failureCallback) {
+            textObject.text += 'Loader1\n';
             setTimeout(successCallback, 1000);
         });
+        this.load.rexAwait(function (successCallback, failureCallback) {
+            textObject.text += 'Loader2\n';
+            setTimeout(successCallback, 2000);
+        });
+
+        this.print = textObject;
     }
 
     create() {
-        this.print.setText(this.print.text + 'Create\n');
+        this.print.text += 'Create\n';
     }
 
     update() {

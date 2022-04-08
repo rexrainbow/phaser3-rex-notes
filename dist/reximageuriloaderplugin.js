@@ -108,6 +108,7 @@
   }
 
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+  var UUID = Phaser.Utils.String.UUID;
 
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits(AwaitFile, _Phaser$Loader$File);
@@ -126,7 +127,7 @@
       }
 
       if (!fileConfig.hasOwnProperty('key')) {
-        fileConfig.key = new Date().getTime().toString();
+        fileConfig.key = UUID();
       }
 
       return _super.call(this, loader, fileConfig);

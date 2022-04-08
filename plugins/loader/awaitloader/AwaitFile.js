@@ -1,4 +1,5 @@
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+const UUID = Phaser.Utils.String.UUID;
 
 class AwaitFile extends Phaser.Loader.File {
     constructor(loader, fileConfig) {
@@ -9,7 +10,7 @@ class AwaitFile extends Phaser.Loader.File {
             fileConfig.url = '';
         }
         if (!fileConfig.hasOwnProperty('key')) {
-            fileConfig.key = (new Date()).getTime().toString();
+            fileConfig.key = UUID();
         }
         super(loader, fileConfig);
     }
