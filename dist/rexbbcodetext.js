@@ -1785,10 +1785,11 @@
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var NO_NEWLINE$2 = CONST.NO_NEWLINE;
-  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
-  var PensPool = new Stack(); // default pens pool
+  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE; // Reuse objects can increase performance
 
-  var LinesPool$1 = new Stack(); // default lines pool
+  var PensPool = new Stack(); // Default pens pool
+
+  var LinesPool$1 = new Stack(); // Default lines pool
 
   var PenManager = /*#__PURE__*/function () {
     function PenManager(config) {

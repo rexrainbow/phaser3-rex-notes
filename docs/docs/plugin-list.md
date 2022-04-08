@@ -144,6 +144,7 @@
 1. [Shatter/Render texture](shatter-rendertexture.md): Shatter render texture to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
 1. [Slider](slider.md): Drag thumb on a slider bar.
+1. [State manager](statemanager.md): Another version of Finite state machine.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP/Player](tcrp-player.md): Run commands on time.
 1. [TCRP/Recorder](tcrp-recoder.md): Store commands with time.

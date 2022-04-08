@@ -19,7 +19,7 @@
     ```
 - Add FSM object
     ```javascript
-    var state = scene.plugins.get('rexfsmplugin').add(config);
+    var states = scene.plugins.get('rexfsmplugin').add(config);
     ```
 
 #### Import plugin
@@ -48,7 +48,7 @@
     ```
 - Add FSM object
     ```javascript
-    var state = scene.plugins.get('rexFSM').add(config);
+    var states = scene.plugins.get('rexFSM').add(config);
     ```
 
 #### Import class
@@ -63,7 +63,7 @@
     ```
 - Add FSM object
     ```javascript
-    var state = new FSM(config);
+    var states = new FSM(config);
     ```
 
 ### Create instance
@@ -71,7 +71,7 @@
 #### Create by config
 
 ```javascript
-var state = scene.plugins.get('rexFSM').add({
+var states = scene.plugins.get('rexFSM').add({
     start: 'A',   // default: undefined
     states: {
         A: {
@@ -128,18 +128,18 @@ var state = scene.plugins.get('rexFSM').add({
         - `exit_` + stateName: Callback when exit state.
 1. Create instance
     ```javascript
-    var state = new State();
+    var states = new State();
     ```
 
 ### Read state
 
 - Current state
     ```javascript
-    var curState = state.state;
+    var curState = states.state;
     ```
 - Previous state
     ```javascript
-    var preState = state.prevState;
+    var preState = states.prevState;
     ```
 
 ### Start at state
@@ -147,7 +147,7 @@ var state = scene.plugins.get('rexFSM').add({
 Set new state without triggering any [state-changing](fsm.md#state-changing) callbacks or events.
 
 ```javascript
-state.start(newState);
+states.start(newState);
 ```
 
 ### Next state
@@ -155,17 +155,17 @@ state.start(newState);
 ```mermaid
 graph TB
 
-next["state.next()"] --> next_A["state.next_A()<br>return 'B'"]
+next["states.next()"] --> next_A["states.next_A()<br>return 'B'"]
 
-next_A --> eventStateChange["state.emit('statechange', state)<br>state.prevState -> state.state"]
+next_A --> eventStateChange["states.emit('statechange', states)<br>states.prevState -> states.state"]
 
 subgraph State changing
 
-eventStateChange --> exit_A["state.exit_A()"]
-exit_A --> eventExitA["state.emit('exit_A', state)"]
+eventStateChange --> exit_A["states.exit_A()"]
+exit_A --> eventExitA["states.emit('exit_A', states)"]
 
-eventExitA --> enter_B["state.enter_B()"]
-enter_B --> eventEnterB["state.emit('enter_B', state)"]
+eventExitA --> enter_B["states.enter_B()"]
+enter_B --> eventEnterB["states.emit('enter_B', states)"]
 
 subgraph Exit
 exit_A
@@ -179,7 +179,7 @@ end
 
 end
 
-goto["state.goto('B')"] --> eventStateChange
+goto["states.goto('B')"] --> eventStateChange
 
 subgraph Request
 
@@ -199,12 +199,12 @@ end
 
 - Get next state by callback
     ```javascript
-    state.next();    // nextState = state.next_A()    
+    states.next();    // nextState = states.next_A()    
     ```
 - Goto state
     ```javascript
-    state.goto(nextState);
-    // state.state = nextState;
+    states.goto(nextState);
+    // states.state = nextState;
     ```
 
 #### State-changing
@@ -215,21 +215,21 @@ For example, state is changing from 'A' to 'B'.
 
 1. event `statechange`
     ```javascript
-    state.on('statechange', function(state) {
-        console.log( state.prevState + '->' + state.state );
+    states.on('statechange', function(states) {
+        console.log( states.prevState + '->' + states.state );
     });
     ```
-1. callback `state.exit_A`
+1. callback `states.exit_A`
 1. event `exit_A`
     ```javascript
-    state.on('exit_A', function(state) {
+    states.on('exit_A', function(states) {
         /*...*/
     });
     ```
-1. callback `state.enter_B`
+1. callback `states.enter_B`
 1. event `enter_B`
     ```javascript
-    state.on('enter_B', function(state) {
+    states.on('enter_B', function(states) {
         /*...*/
     });
     ```
@@ -237,22 +237,30 @@ For example, state is changing from 'A' to 'B'.
 ### Enable
 
 ```javascript
-state.setEnable();
-// state.setEnable(false); // disable
+states.setEnable();
+// states.setEnable(false); // disable
 ```
 
 or
 
 ```javascript
-state.toggleEnable();
+states.toggleEnable();
 ```
 
-`state.next()` and `state.goto()` will be ignored if disabled.
+`states.next()` and `states.goto()` will be ignored if disabled.
 
 ### Add new state
 
 ```javascript
-state.addState(name, {
+states.addState(name, {
+    next: 'B',  // function() { return 'B'; }
+    enter: function() {},
+    exit: function() {}
+})
+```
+```javascript
+states.addState({
+    name: 'A',
     next: 'B',  // function() { return 'B'; }
     enter: function() {},
     exit: function() {}
@@ -262,12 +270,23 @@ state.addState(name, {
 or
 
 ```javascript
-state.addStates({
-    'D' : {
+states.addStates({
+    'A' : {
         next: 'B',  // function() { return 'B'; }
         enter: function() {},
         exit: function() {}
     },
     // ...
 })
+```
+```javascript
+states.addStates([
+    {
+        name: 'A',
+        next: 'B',  // function() { return 'B'; }
+        enter: function() {},
+        exit: function() {}
+    },
+    // ...
+]);
 ```

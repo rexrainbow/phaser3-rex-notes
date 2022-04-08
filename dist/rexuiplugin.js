@@ -4779,10 +4779,11 @@
 
   var GetFastValue$2 = Phaser.Utils.Objects.GetFastValue;
   var NO_NEWLINE$2 = CONST.NO_NEWLINE;
-  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
-  var PensPool = new Stack(); // default pens pool
+  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE; // Reuse objects can increase performance
 
-  var LinesPool$1 = new Stack(); // default lines pool
+  var PensPool = new Stack(); // Default pens pool
+
+  var LinesPool$1 = new Stack(); // Default lines pool
 
   var PenManager = /*#__PURE__*/function () {
     function PenManager(config) {
@@ -22494,46 +22495,6 @@
         return this;
       }
     }, {
-      key: "runMethod",
-      value: function runMethod(methodName, a1, a2, a3, a4, a5) {
-        var fn = this[methodName + '_' + this.state];
-
-        if (!fn) {
-          return undefined;
-        } // Copy from eventemitter3
-
-
-        var len = arguments.length;
-
-        switch (len) {
-          case 1:
-            return fn.call(this);
-
-          case 2:
-            return fn.call(this, a1);
-
-          case 3:
-            return fn.call(this, a1, a2);
-
-          case 4:
-            return fn.call(this, a1, a2, a3);
-
-          case 5:
-            return fn.call(this, a1, a2, a3, a4);
-
-          case 6:
-            return fn.call(this, a1, a2, a3, a4, a5);
-        }
-
-        var args = new Array(len - 1);
-
-        for (var i = 1; i < len; i++) {
-          args[i - 1] = arguments[i];
-        }
-
-        return fn.apply(this, args);
-      }
-    }, {
       key: "state",
       get: function get() {
         return this._state;
@@ -22619,20 +22580,25 @@
       }
     }, {
       key: "addState",
-      value: function addState(name, config) {
-        var getNextStateCallback = GetValue$2z(config, 'next', undefined);
+      value: function addState(name, state) {
+        if (typeof name !== 'string') {
+          state = name;
+          name = state.name;
+        }
+
+        var getNextStateCallback = state.next;
 
         if (getNextStateCallback) {
           this['next_' + name] = getNextStateCallback;
         }
 
-        var exitCallback = GetValue$2z(config, 'exit', undefined);
+        var exitCallback = state.exit;
 
         if (exitCallback) {
           this['exit_' + name] = exitCallback;
         }
 
-        var enterCallback = GetValue$2z(config, 'enter', undefined);
+        var enterCallback = state.enter;
 
         if (enterCallback) {
           this['enter_' + name] = enterCallback;
@@ -22643,11 +22609,57 @@
     }, {
       key: "addStates",
       value: function addStates(states) {
-        for (var name in states) {
-          this.addState(name, states[name]);
+        if (Array.isArray(states)) {
+          for (var i = 0, cnt = states.length; i < cnt; i++) {
+            this.addState(states[i]);
+          }
+        } else {
+          for (var name in states) {
+            this.addState(name, states[name]);
+          }
         }
 
         return this;
+      }
+    }, {
+      key: "runMethod",
+      value: function runMethod(methodName, a1, a2, a3, a4, a5) {
+        var fn = this[methodName + '_' + this.state];
+
+        if (!fn) {
+          return undefined;
+        } // Copy from eventemitter3
+
+
+        var len = arguments.length;
+
+        switch (len) {
+          case 1:
+            return fn.call(this);
+
+          case 2:
+            return fn.call(this, a1);
+
+          case 3:
+            return fn.call(this, a1, a2);
+
+          case 4:
+            return fn.call(this, a1, a2, a3);
+
+          case 5:
+            return fn.call(this, a1, a2, a3, a4);
+
+          case 6:
+            return fn.call(this, a1, a2, a3, a4, a5);
+        }
+
+        var args = new Array(len - 1);
+
+        for (var i = 1; i < len; i++) {
+          args[i - 1] = arguments[i];
+        }
+
+        return fn.apply(this, args);
       }
     }, {
       key: "update",

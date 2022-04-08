@@ -1311,6 +1311,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/statemanager/</loc>
+         <lastmod>2022-04-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/structs-list/</loc>
          <lastmod>2022-04-08</lastmod>
          <changefreq>daily</changefreq>

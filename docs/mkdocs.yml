@@ -253,7 +253,9 @@ nav:
             - Recoder: arcade-tcrp-recorder.md
             - Step runner: arcade-tcrp-step-runner.md
             - Player: arcade-tcrp-player.md          
-    - FSM: fsm.md
+    - State machine:
+        - FSM: fsm.md
+        - State manager: statemanager.md
     - Conditions table:
         - CSV Conditions table: conditionstable.md
         - YAML Conditions table: ymlconditionstable.md

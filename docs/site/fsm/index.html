@@ -4906,6 +4906,34 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10_3">
+          State machine
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="State machine" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_3">
+          <span class="md-nav__icon md-icon"></span>
+          State machine
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -5074,6 +5102,27 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statemanager/" class="md-nav__link">
+        State manager
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -8109,7 +8158,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfsmplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfsmplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add FSM object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfsmplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfsmplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -8135,7 +8184,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add FSM object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -8147,12 +8196,12 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">FSM</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/fsm.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add FSM object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">FSM</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">FSM</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <h4 id="create-by-config">Create by config<a class="headerlink" href="#create-by-config" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">start</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>   <span class="c1">// default: undefined</span>
     <span class="nx">states</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">A</span><span class="o">:</span> <span class="p">{</span>
@@ -8213,36 +8262,36 @@
         - <code>enter_</code> + stateName: Callback when enter state.
         - <code>exit_</code> + stateName: Callback when exit state.</li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">State</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">State</span><span class="p">();</span>
 </code></pre></div></li>
 </ol>
 <h3 id="read-state">Read state<a class="headerlink" href="#read-state" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Current state
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curState</span> <span class="o">=</span> <span class="nx">states</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Previous state
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">preState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">preState</span> <span class="o">=</span> <span class="nx">states</span><span class="p">.</span><span class="nx">prevState</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="start-at-state">Start at state<a class="headerlink" href="#start-at-state" title="Permanent link">&para;</a></h3>
 <p>Set new state without triggering any <a href="./#state-changing">state-changing</a> callbacks or events.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="next-state">Next state<a class="headerlink" href="#next-state" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TB
 
-next["state.next()"] --&gt; next_A["state.next_A()&lt;br&gt;return 'B'"]
+next["states.next()"] --&gt; next_A["states.next_A()&lt;br&gt;return 'B'"]
 
-next_A --&gt; eventStateChange["state.emit('statechange', state)&lt;br&gt;state.prevState -&gt; state.state"]
+next_A --&gt; eventStateChange["states.emit('statechange', states)&lt;br&gt;states.prevState -&gt; states.state"]
 
 subgraph State changing
 
-eventStateChange --&gt; exit_A["state.exit_A()"]
-exit_A --&gt; eventExitA["state.emit('exit_A', state)"]
+eventStateChange --&gt; exit_A["states.exit_A()"]
+exit_A --&gt; eventExitA["states.emit('exit_A', states)"]
 
-eventExitA --&gt; enter_B["state.enter_B()"]
-enter_B --&gt; eventEnterB["state.emit('enter_B', state)"]
+eventExitA --&gt; enter_B["states.enter_B()"]
+enter_B --&gt; eventEnterB["states.emit('enter_B', states)"]
 
 subgraph Exit
 exit_A
@@ -8256,7 +8305,7 @@ end
 
 end
 
-goto["state.goto('B')"] --&gt; eventStateChange
+goto["states.goto('B')"] --&gt; eventStateChange
 
 subgraph Request
 
@@ -8273,11 +8322,11 @@ end</code></pre>
 <h4 id="request">Request<a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get next state by callback
-    <div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>    <span class="c1">// nextState = state.next_A()    </span>
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>    <span class="c1">// nextState = states.next_A()    </span>
 </code></pre></div></li>
 <li>Goto state
-    <div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">nextState</span><span class="p">);</span>
-<span class="c1">// state.state = nextState;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">nextState</span><span class="p">);</span>
+<span class="c1">// states.state = nextState;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="state-changing">State-changing<a class="headerlink" href="#state-changing" title="Permanent link">&para;</a></h4>
@@ -8285,41 +8334,48 @@ end</code></pre>
 <p>For example, state is changing from 'A' to 'B'.</p>
 <ol>
 <li>event <code>statechange</code>
-    <div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span> <span class="o">+</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">+</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span> <span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">states</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">states</span><span class="p">.</span><span class="nx">prevState</span> <span class="o">+</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">+</span> <span class="nx">states</span><span class="p">.</span><span class="nx">state</span> <span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div></li>
-<li>callback <code>state.exit_A</code></li>
+<li>callback <code>states.exit_A</code></li>
 <li>event <code>exit_A</code>
-    <div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit_A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit_A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">states</span><span class="p">)</span> <span class="p">{</span>
     <span class="cm">/*...*/</span>
 <span class="p">});</span>
 </code></pre></div></li>
-<li>callback <code>state.enter_B</code></li>
+<li>callback <code>states.enter_B</code></li>
 <li>event <code>enter_B</code>
-    <div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter_B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter_B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">states</span><span class="p">)</span> <span class="p">{</span>
     <span class="cm">/*...*/</span>
 <span class="p">});</span>
 </code></pre></div></li>
 </ol>
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
-<span class="c1">// state.setEnable(false); // disable</span>
+<div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
+<span class="c1">// states.setEnable(false); // disable</span>
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
 </code></pre></div>
-<p><code>state.next()</code> and <code>state.goto()</code> will be ignored if disabled.</p>
+<p><code>states.next()</code> and <code>states.goto()</code> will be ignored if disabled.</p>
 <h3 id="add-new-state">Add new state<a class="headerlink" href="#add-new-state" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">addState</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">addState</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
     <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
     <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
 <span class="p">})</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">addState</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+    <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
+    <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">})</span>
+</code></pre></div></p>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">addStates</span><span class="p">({</span>
-    <span class="s1">&#39;D&#39;</span> <span class="o">:</span> <span class="p">{</span>
+<p><div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">addStates</span><span class="p">({</span>
+    <span class="s1">&#39;A&#39;</span> <span class="o">:</span> <span class="p">{</span>
         <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
         <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
         <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
@@ -8327,6 +8383,16 @@ end</code></pre>
     <span class="c1">// ...</span>
 <span class="p">})</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">addStates</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+        <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
+        <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+        <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="p">},</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
+</code></pre></div></p>
 
               
             </article>
@@ -8356,13 +8422,13 @@ end</code></pre>
       
       
         
-        <a href="../conditionstable/" class="md-footer__link md-footer__link--next" aria-label="Next: CSV Conditions table" rel="next">
+        <a href="../statemanager/" class="md-footer__link md-footer__link--next" aria-label="Next: State manager" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              CSV Conditions table
+              State manager
             </div>
           </div>
           <div class="md-footer__button md-icon">
