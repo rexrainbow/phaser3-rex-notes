@@ -303,6 +303,18 @@ Change value will also change the position of slider thumb and width of slider i
         //
     }, scope);
     ```
+- On input start
+    ```javascript
+    slider.on('inputstart', function(pointer) {
+
+    }, scope);
+    ```
+- On input end
+    ```javascript
+    slider.on('inputend', function(pointer) {
+
+    }, scope);
+    ```
 
 ### Other properties
 

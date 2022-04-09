@@ -54,6 +54,14 @@ class Demo extends Phaser.Scene {
             .drawBounds(this.add.graphics(), 0xff0000)
 
         numberBar.setValue(75, 0, 100);
+
+        numberBar
+            .on('inputstart', function () {
+                console.log('inputstart')
+            })
+            .on('inputend', function () {
+                console.log('inputend')
+            })
     }
 
     update() { }

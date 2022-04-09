@@ -324,17 +324,17 @@ Change value will also change the position of slider thumb and width of slider i
 ### Text
 
 - Get text string
-  ```javascript
-  var s = numberBar.text;
-  ```
+    ```javascript
+    var s = numberBar.text;
+    ```
 - Set text string
-  ```javascript
-  numberBar.setText(s);
-  ```
-  or
-  ```javascript
-  numberBar.text = s;
-  ```
+    ```javascript
+    numberBar.setText(s);
+    ```
+    or
+    ```javascript
+    numberBar.text = s;
+    ```
 
 ### Other properties
 
@@ -343,11 +343,20 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 ### Events
 
 - On value changed
-  ```javascript
-  numberBar.on('valuechange',
-    function (newValue, oldValue, numberBar) {
-      // numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
-    },
-    scope
-  );
-  ```
+    ```javascript
+    numberBar.on('valuechange', function (newValue, oldValue, numberBar) {
+        // numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
+    }, scope);
+    ```
+- On input start
+    ```javascript
+    numberBar.on('inputstart', function(pointer) {
+
+    }, scope);
+    ```
+- On input end
+    ```javascript
+    numberBar.on('inputend', function(pointer) {
+
+    }, scope);
+    ```

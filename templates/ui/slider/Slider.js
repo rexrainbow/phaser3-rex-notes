@@ -59,13 +59,37 @@ class Slider extends Sizer {
                 if (thumb) {
                     thumb.setInteractive();
                     this.scene.input.setDraggable(thumb);
-                    thumb.on('drag', OnDragThumb, this);
+                    thumb
+                        .on('drag', OnDragThumb, this)
+                        .on('dragstart', function (pointer) {
+                            this.eventEmitter.emit('inputstart', pointer);
+                        }, this)
+                        .on('dragend', function (pointer) {
+                            this.eventEmitter.emit('inputend', pointer);
+                        }, this)
+
                 }
                 break;
             case 1: // 'click'
                 this.setInteractive()
                     .on('pointerdown', OnTouchTrack, this)
-                    .on('pointermove', OnTouchTrack, this);
+                    .on('pointermove', OnTouchTrack, this)
+                    .on('pointerdown', function (pointer) {
+                        this.eventEmitter.emit('inputstart', pointer);
+                    }, this)
+                    .on('pointerup', function (pointer) {
+                        this.eventEmitter.emit('inputend', pointer);
+                    }, this)
+                    .on('pointerover', function (pointer) {
+                        if (pointer.isDown) {
+                            this.eventEmitter.emit('inputstart', pointer);
+                        }
+                    }, this)
+                    .on('pointerout', function (pointer) {
+                        if (pointer.isDown) {
+                            this.eventEmitter.emit('inputend', pointer);
+                        }
+                    }, this)
                 break;
         }
 
