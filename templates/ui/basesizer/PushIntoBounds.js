@@ -1,8 +1,8 @@
-import GetDefaultBounds from '../../../plugins/utils/bounds/GetDefaultBounds.js';
+import GetViewPort from '../../../plugins/utils/system/GetViewport.js';
 
 var PushIntoBounds = function (bounds) {
     if (bounds === undefined) {
-        bounds = GetDefaultBounds(this.scene);
+        bounds = GetViewPort(this.scene);
     }
 
     this.left = Math.max(this.left, bounds.left);

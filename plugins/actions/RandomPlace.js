@@ -1,4 +1,4 @@
-import GetDefaultBounds from '../utils/bounds/GetDefaultBounds.js';
+import GetViewPort from '../utils/system/GetViewport.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -20,7 +20,7 @@ var RandomPlace = function (items, options) {
             } else {
                 gameObject = item0;
             }
-            area = GetDefaultBounds(gameObject.scene);
+            area = GetViewPort(gameObject.scene);
         }
         getPositionCallback = area.getRandomPoint.bind(area);
     }

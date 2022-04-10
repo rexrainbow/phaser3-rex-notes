@@ -2,7 +2,7 @@ import Buttons from '../buttons/Buttons.js';
 import Methods from './Methods.js';
 import CreateBackground from './CreateBackground.js';
 import CreateButtons from './CreateButtons.js';
-import GetDefaultBounds from '../../../plugins/utils/bounds/GetDefaultBounds.js';
+import GetViewPort from '../../../plugins/utils/system/GetViewport.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
 import GetOrientationMode from '../utils/GetOrientationMode.js';
 import GetEaseConfig from './GetEaseConfig.js';
@@ -44,12 +44,12 @@ class Menu extends Buttons {
         this.parentButton = parentButton;
 
         var isRootMenu = (this.root === this);
-         // Root menu
+        // Root menu
         if (isRootMenu) {
             // Bounds
             var bounds = config.bounds;
             if (bounds === undefined) {
-                bounds = GetDefaultBounds(scene);
+                bounds = GetViewPort(scene);
             }
             this.bounds = bounds;
 
@@ -105,7 +105,7 @@ class Menu extends Buttons {
         // Sub-menu: 
         // - scale to root's scale value
         // - align to parent button
-        if (!isRootMenu) {            
+        if (!isRootMenu) {
             this.setScale(this.root.scaleX, this.root.scaleY);
             var subMenuSide = this.root.subMenuSide[parentMenu.orientation];
             switch (subMenuSide) {

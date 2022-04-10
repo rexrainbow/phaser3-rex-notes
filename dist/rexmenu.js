@@ -1643,25 +1643,48 @@
     return childConfig.prevState;
   };
 
-  var GetDefaultBounds = function GetDefaultBounds(scene, out) {
-    if (out === undefined) {
-      if (GlobRectangle === undefined) {
-        GlobRectangle = new Phaser.Geom.Rectangle();
-      }
+  var Rectangle$1 = Phaser.Geom.Rectangle;
+  Phaser.Scale.Center;
 
-      out = GlobRectangle;
+  var GetViewport = function GetViewport(scene, out) {
+    if (out === undefined) {
+      out = new Rectangle$1();
+    } else if (out === true) {
+      out = globRect;
     }
 
-    var gameConfig = scene.game.config;
-    out.setTo(0, 0, gameConfig.width, gameConfig.height);
+    var scaleManager = scene.sys.scale;
+    var baseSize = scaleManager.baseSize;
+    var parentSize = scaleManager.parentSize;
+    var canvasBounds = scaleManager.canvasBounds;
+    var displayScale = scaleManager.displayScale;
+    var x = canvasBounds.x >= 0 ? 0 : -(canvasBounds.x * displayScale.x);
+    var y = canvasBounds.y >= 0 ? 0 : -(canvasBounds.y * displayScale.y);
+    var width;
+
+    if (parentSize.width >= canvasBounds.width) {
+      width = baseSize.width;
+    } else {
+      width = baseSize.width - (canvasBounds.width - parentSize.width) * displayScale.x;
+    }
+
+    var height;
+
+    if (parentSize.height >= canvasBounds.height) {
+      height = baseSize.height;
+    } else {
+      height = baseSize.height - (canvasBounds.height - parentSize.height) * displayScale.y;
+    }
+
+    out.setTo(x, y, width, height);
     return out;
   };
 
-  var GlobRectangle;
+  var globRect = new Rectangle$1();
 
   var PushIntoBounds = function PushIntoBounds(bounds) {
     if (bounds === undefined) {
-      bounds = GetDefaultBounds(this.scene);
+      bounds = GetViewport(this.scene);
     }
 
     this.left = Math.max(this.left, bounds.left);
@@ -2055,16 +2078,16 @@
     QuickSet(child, globZone, align);
   };
 
-  var Rectangle$1 = Phaser.Geom.Rectangle;
+  var Rectangle = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Geom.Vector2;
   var RotateAround$1 = Phaser.Math.RotateAround;
 
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
-      output = new Rectangle$1();
+      output = new Rectangle();
     } else if (output === true) {
       if (GlobRect$1 === undefined) {
-        GlobRect$1 = new Rectangle$1();
+        GlobRect$1 = new Rectangle();
       }
 
       output = GlobRect$1;
@@ -2942,45 +2965,6 @@
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
-
-  var Rectangle = Phaser.Geom.Rectangle;
-  Phaser.Scale.Center;
-
-  var GetViewport = function GetViewport(scene, out) {
-    if (out === undefined) {
-      out = new Rectangle();
-    } else if (out === true) {
-      out = globRect;
-    }
-
-    var scaleManager = scene.sys.scale;
-    var baseSize = scaleManager.baseSize;
-    var parentSize = scaleManager.parentSize;
-    var canvasBounds = scaleManager.canvasBounds;
-    var displayScale = scaleManager.displayScale;
-    var x = canvasBounds.x >= 0 ? 0 : -(canvasBounds.x * displayScale.x);
-    var y = canvasBounds.y >= 0 ? 0 : -(canvasBounds.y * displayScale.y);
-    var width;
-
-    if (parentSize.width >= canvasBounds.width) {
-      width = baseSize.width;
-    } else {
-      width = baseSize.width - (canvasBounds.width - parentSize.width) * displayScale.x;
-    }
-
-    var height;
-
-    if (parentSize.height >= canvasBounds.height) {
-      height = baseSize.height;
-    } else {
-      height = baseSize.height - (canvasBounds.height - parentSize.height) * displayScale.y;
-    }
-
-    out.setTo(x, y, width, height);
-    return out;
-  };
-
-  var globRect = new Rectangle();
 
   var Anchor = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Anchor, _ComponentBase);
@@ -10090,7 +10074,7 @@
         var bounds = config.bounds;
 
         if (bounds === undefined) {
-          bounds = GetDefaultBounds(scene);
+          bounds = GetViewport(scene);
         }
 
         _this.bounds = bounds; // Side of submenu
