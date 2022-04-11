@@ -13,6 +13,14 @@ class Base {
         return this;
     }
 
+    get blitter() {
+        if (this.parent) {
+            return this.parent.parent;
+        } else {
+            return undefined;
+        }
+    }
+
     onFree() {
         this
             .setParent();

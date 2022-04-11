@@ -29,7 +29,7 @@ class ImagePen extends Base {
     }
 
     addImage(key, depth) {
-        var bob = this.parent.addImageBob(this.frame)
+        var bob = AddImage(this.blitter, this.frame)
             .setPosition(this.x, this.y)
             .setDepth(depth);
 
