@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import HslAdjustPipelinePlugin from '../../plugins/hsladjustpipeline-plugin.js';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,25 +10,18 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
     }
 
     create() {
-        const Between = Phaser.Math.Between;
-        var postFxPlugin = this.plugins.get('rexHslAdjustPipeline');
-        for (var i = 0; i < 20; i++) {
-            let gameObject = this.add.circle(0, 0, Between(10, 30), Between(0, 0x1000000))
-                .setRandomPosition(100, 100, 600, 400)
+        var gameObject = this.add.image(400, 300, 'classroom');
+        var pipeline = this.plugins.get('rexHslAdjustPipeline').add(gameObject);
+        pipeline.setHueRotate(0.5);
 
-            let pipeline = postFxPlugin.add(gameObject);
-            this.tweens.add({
-                targets: pipeline,
-                hueRotate: 1,
-                ease: 'Linear',
-                duration: Between(500, 1000),
-                repeat: -1,
-                yoyo: false
-            })
-        }
+        var gui = new Dat.GUI();
+        gui.add(pipeline, 'hueRotate', 0, 1);
+        gui.add(pipeline, 'satAdjust', 0);
+        gui.add(pipeline, 'lumAdjust', 0, 1);
     }
 
     update() {
