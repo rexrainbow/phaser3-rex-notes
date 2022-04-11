@@ -2,8 +2,8 @@ import Base from './Base.js';
 import AddImage from '../../../blitterbase/utils/AddImage.js';
 
 class ImagePen extends Base {
-    constructor(blitter) {
-        super(blitter);
+    constructor(parent) {
+        super(parent);
         this.bobs = {};
 
         this._x = 0;
@@ -29,7 +29,7 @@ class ImagePen extends Base {
     }
 
     addImage(key, depth) {
-        var bob = AddImage(this.blitter, this.frame)
+        var bob = this.parent.addImageBob(this.frame)
             .setPosition(this.x, this.y)
             .setDepth(depth);
 

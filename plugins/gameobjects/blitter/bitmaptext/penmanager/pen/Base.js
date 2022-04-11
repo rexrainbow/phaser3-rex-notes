@@ -1,21 +1,15 @@
 import BobBase from '../../../blitterbase/bob/Base.js';
 
 class Base {
-    constructor(parent, blitter) {
+    constructor(parent) {
         this
             .setParent(parent)
-            .setBlitter(blitter);
 
         this.bobs = undefined;  // bob, or dictionary of bobs
     }
 
     setParent(parent) {
         this.parent = parent;
-        return this;
-    }
-
-    setBlitter(blitter) {
-        this.blitter = blitter;
         return this;
     }
 

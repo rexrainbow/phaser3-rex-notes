@@ -1,3 +1,4 @@
+import Methods from './methods/Methods.js';
 import Pool from '../../../../pool.js';
 import CharPen from './pen/CharPen.js';
 
@@ -7,8 +8,8 @@ var PensPool = new Pool(); // default pens pool
 var LinesPool = new Pool(); // default lines pool
 
 class PenManager {
-    constructor(blitter) {
-        this.blitter = blitter;
+    constructor(parent) {
+        this.parent = parent;  // Blitter
         this.pens = [];
         this.lines = []; // pens in lines [ [],[],[],.. ]
         this.maxLinesWidth = undefined;
@@ -48,7 +49,7 @@ class PenManager {
 
     clear() {
         // 1. Remove/recycle all children of blitter
-        this.blitter.removeChildren();
+        this.parent.removeChildren();
         // 2. Free all pens. 
         for (var i = 0, cnt = this.pens.length; i < cnt; i++) {
             this.pens[i].onFree();
@@ -71,7 +72,7 @@ class PenManager {
 
     addTextPen(text) {
         for (var i = 0, cnt = text.length; i < cnt; i++) {
-            var pen = new CharPen(this.blitter)
+            var pen = new CharPen(this.parent)
                 .setChar(text.charAt(i))
             this.pens.push(pen);
         }
@@ -80,5 +81,10 @@ class PenManager {
     }
 
 }
+
+Object.assign(
+    PenManager.prototype,
+    Methods
+);
 
 export default PenManager;
