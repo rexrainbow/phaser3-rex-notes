@@ -15,8 +15,7 @@ class Base {
 
     onFree() {
         this
-            .setParent()
-            .setBlitter();
+            .setParent();
 
         if (this.bobs instanceof BobBase) {
             this.bobs.destroy();
