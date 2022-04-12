@@ -11090,26 +11090,12 @@
   };
 
   var SetWrapConfig = function SetWrapConfig(config) {
-    this.wrapConfig = config;
-    return this;
-  };
-
-  var MergeConfig = function MergeConfig(config, defaultConfig) {
-    if (!defaultConfig) {
-      return config;
-    }
-
-    if (config == null) {
+    if (config === undefined) {
       config = {};
     }
 
-    for (var key in defaultConfig) {
-      if (!config.hasOwnProperty(key)) {
-        config[key] = defaultConfig[key];
-      }
-    }
-
-    return config;
+    this.wrapConfig = config;
+    return this;
   };
 
   var GetWord = function GetWord(children, startIndex, charMode, result) {
@@ -11154,83 +11140,73 @@
     return result;
   };
 
-  var HAlign = {
-    left: 0,
-    center: 1,
-    right: 2
-  };
-  var VAlign = {
-    top: 0,
-    center: 1,
-    bottom: 2
+  var OffsetChildren = function OffsetChildren(children, offsetX, offsetY) {
+    if (offsetX === 0 && offsetY === 0) {
+      return;
+    }
+
+    for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
+      var child = children[ci];
+
+      if (!IsTypeable(child)) {
+        continue;
+      }
+
+      child.x += offsetX;
+      child.y += offsetY;
+    }
   };
 
   var AlignLines$1 = function AlignLines(result, width, height) {
     var hAlign = result.hAlign,
         vAlign = result.vAlign;
+    var offsetX, offsetY;
+    var linesHeight = result.linesHeight;
 
-    if (typeof hAlign === 'string') {
-      hAlign = HAlign[hAlign];
-      result.hAlign = hAlign;
+    switch (vAlign) {
+      case 1: // center
+
+      case 'center':
+        offsetY = (height - linesHeight) / 2;
+        break;
+
+      case 2: // bottom
+
+      case 'bottom':
+        offsetY = height - linesHeight;
+        break;
+
+      default:
+        offsetY = 0;
+        break;
     }
 
-    if (typeof vAlign === 'string') {
-      vAlign = VAlign[vAlign];
-      result.vAlign = vAlign;
-    }
+    var lines = result.lines;
 
-    if (hAlign !== 0) {
-      // left align does not have offset
-      var lines = result.lines;
+    for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
+      var line = lines[li];
+      var lineWidth = line.width,
+          children = line.children;
 
-      for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
-        var line = lines[li];
-        var lineWidth = line.width,
-            children = line.children;
-        var xOffset;
+      switch (hAlign) {
+        case 1: // center
 
-        switch (hAlign) {
-          case 1:
-            // center
-            xOffset = (width - lineWidth) / 2;
-            break;
-
-          case 2:
-            // right
-            xOffset = width - lineWidth;
-            break;
-        }
-
-        for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-          var child = children[ci];
-          child.x += xOffset;
-        }
-      }
-    }
-
-    if (vAlign !== 0) {
-      // top align does not have offset
-      var linesHeight = result.linesHeight;
-      var yOffset;
-
-      switch (vAlign) {
-        case 1:
-          // center
-          yOffset = (height - linesHeight) / 2;
+        case 'center':
+          offsetX = (width - lineWidth) / 2;
           break;
 
-        case 2:
-          // bottom
-          yOffset = height - linesHeight;
+        case 2: // right
+
+        case 'right':
+          offsetX = width - lineWidth;
+          break;
+
+        default:
+          offsetX = 0;
           break;
       }
 
-      var children = result.children;
-
-      for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-        var child = children[ci];
-        child.y += yOffset;
-      }
+      OffsetChildren(children, offsetX, offsetY);
     }
   };
 
@@ -11380,7 +11356,7 @@
           // Exceed maxLines
           break;
         } else if (isNewLineChar) {
-          // Already add to result                
+          // Already add to result
           continue;
         }
       }
@@ -11423,82 +11399,74 @@
     return result;
   };
 
+  var Merge$1 = Phaser.Utils.Objects.Merge;
+
   var RunWordWrap = function RunWordWrap(config) {
-    config = MergeConfig(config, this.wrapConfig);
-    return RunWordWrap$1.call(this, config);
+    if (config === undefined) {
+      config = {};
+    }
+
+    return RunWordWrap$1.call(this, Merge$1(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
     var hAlign = result.hAlign,
         vAlign = result.vAlign;
-
-    if (typeof hAlign === 'string') {
-      hAlign = HAlign[hAlign];
-      result.hAlign = hAlign;
-    }
-
-    if (typeof vAlign === 'string') {
-      vAlign = VAlign[vAlign];
-      result.vAlign = vAlign;
-    }
-
+    var offsetX, offsetY;
     var rtl = result.rtl;
     var lines = result.lines,
         lineWidth = result.lineWidth,
         linesWidth = result.linesWidth;
-    var xOffset;
 
     switch (hAlign) {
-      case 0:
+      case 1: // center
+
+      case 'center':
+        offsetX = (width - linesWidth) / 2;
+        break;
+
+      case 2: // right
+
+      case 'right':
+        offsetX = width - linesWidth;
+        break;
+
+      default:
         // left
-        xOffset = 0;
-        break;
-
-      case 1:
-        // center
-        xOffset = (width - linesWidth) / 2;
-        break;
-
-      case 2:
-        // right
-        xOffset = width - linesWidth;
+        offsetX = 0;
         break;
     }
 
     if (rtl) {
-      xOffset += lineWidth;
+      offsetX += lineWidth;
     }
 
     for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
       var line = lines[rtl ? lcnt - li - 1 : li];
       var children = line.children;
       var lineHeight = line.height;
-      var yOffset;
 
       switch (vAlign) {
-        case 0:
+        case 1: // center
+
+        case 'center':
+          offsetY = (height - lineHeight) / 2;
+          break;
+
+        case 2: // bottom
+
+        case 'bottom':
+          offsetY = height - lineHeight;
+          break;
+
+        default:
           // top
-          yOffset = 0;
-          break;
-
-        case 1:
-          // center
-          yOffset = (height - lineHeight) / 2;
-          break;
-
-        case 2:
-          // bottom
-          yOffset = height - lineHeight;
+          offsetY = 0;
           break;
       }
 
-      for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-        var child = children[ci];
-        child.x += xOffset;
-        child.y += yOffset;
-      }
-
-      xOffset += lineWidth;
+      OffsetChildren(children, offsetX, offsetY);
+      offsetX += lineWidth;
     }
   };
 
@@ -11697,9 +11665,14 @@
     return result;
   };
 
+  var Merge = Phaser.Utils.Objects.Merge;
+
   var RunVerticalWrap = function RunVerticalWrap(config) {
-    config = MergeConfig(config, this.wrapConfig);
-    return RunVerticalWrap$1.call(this, config);
+    if (config === undefined) {
+      config = {};
+    }
+
+    return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
   };
 
   var DrawContent$1 = function DrawContent() {

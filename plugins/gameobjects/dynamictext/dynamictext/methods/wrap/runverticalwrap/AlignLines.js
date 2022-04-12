@@ -1,8 +1,10 @@
+import OffsetChildren from '../OffsetChildren.js';
+
 var AlignLines = function (result, width, height) {
     var hAlign = result.hAlign,
         vAlign = result.vAlign;
 
-    var xOffset, yOffset;
+    var offsetX, offsetY;
 
     var rtl = result.rtl;
     var lines = result.lines,
@@ -11,20 +13,20 @@ var AlignLines = function (result, width, height) {
     switch (hAlign) {
         case 1:  // center
         case 'center':
-            xOffset = (width - linesWidth) / 2
+            offsetX = (width - linesWidth) / 2
             break;
 
         case 2:  // right
         case 'right':
-            xOffset = width - linesWidth;
+            offsetX = width - linesWidth;
             break;
 
         default:  // left
-            xOffset = 0;
+            offsetX = 0;
             break;
     }
     if (rtl) {
-        xOffset += lineWidth;
+        offsetX += lineWidth;
     }
 
     for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
@@ -35,28 +37,22 @@ var AlignLines = function (result, width, height) {
         switch (vAlign) {
             case 1: // center
             case 'center':
-                yOffset = (height - lineHeight) / 2;
+                offsetY = (height - lineHeight) / 2;
                 break;
 
             case 2: // bottom
             case 'bottom':
-                yOffset = height - lineHeight;
+                offsetY = height - lineHeight;
                 break;
 
             default: // top
-                yOffset = 0;
+                offsetY = 0;
                 break;
         }
 
-        if ((xOffset !== 0) || (yOffset !== 0)) {
-            for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-                var child = children[ci];
-                child.x += xOffset;
-                child.y += yOffset;
-            }
-        }
+        OffsetChildren(children, offsetX, offsetY);
 
-        xOffset += lineWidth;
+        offsetX += lineWidth;
     }
 }
 

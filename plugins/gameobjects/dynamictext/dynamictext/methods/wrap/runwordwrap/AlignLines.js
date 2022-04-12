@@ -1,23 +1,25 @@
+import OffsetChildren from '../OffsetChildren.js';
+
 var AlignLines = function (result, width, height) {
     var hAlign = result.hAlign,
         vAlign = result.vAlign;
 
-    var xOffset, yOffset;
+    var offsetX, offsetY;
 
     var linesHeight = result.linesHeight;
     switch (vAlign) {
         case 1: // center
         case 'center':
-            yOffset = (height - linesHeight) / 2;
+            offsetY = (height - linesHeight) / 2;
             break;
 
         case 2: // bottom
         case 'bottom':
-            yOffset = height - linesHeight;
+            offsetY = height - linesHeight;
             break;
 
         default:
-            yOffset = 0;
+            offsetY = 0;
             break;
     }
 
@@ -30,26 +32,20 @@ var AlignLines = function (result, width, height) {
         switch (hAlign) {
             case 1:  // center
             case 'center':
-                xOffset = (width - lineWidth) / 2
+                offsetX = (width - lineWidth) / 2
                 break;
 
             case 2:  // right
             case 'right':
-                xOffset = width - lineWidth;
+                offsetX = width - lineWidth;
                 break;
 
             default:
-                xOffset = 0;
+                offsetX = 0;
                 break;
         }
 
-        if ((xOffset !== 0) || (yOffset !== 0)) {
-            for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-                var child = children[ci];
-                child.x += xOffset;
-                child.y += yOffset;
-            }
-        }
+        OffsetChildren(children, offsetX, offsetY);
 
     }
 

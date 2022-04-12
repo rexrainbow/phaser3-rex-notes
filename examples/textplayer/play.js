@@ -65,6 +65,8 @@ class Demo extends Phaser.Scene {
                 wrap: {
                     maxLines: 5,
                     padding: { bottom: 10 },
+                    hAlign: 'right',
+                    vAlign: 'bottom'
                 },
 
                 typing: {
