@@ -1,9 +1,13 @@
-import MergeConfig from './utils/MergeConfig.js';
-import RunVerticalWrapBase from './utils/runverticalwrap/RunVerticalWrap.js';
+import RunVerticalWrapBase from './wrap/runverticalwrap/RunVerticalWrap.js';
+
+const Merge = Phaser.Utils.Objects.Merge;
 
 var RunVerticalWrap = function (config) {
-    config = MergeConfig(config, this.wrapConfig);
-    return RunVerticalWrapBase.call(this, config);
+    if (config === undefined) {
+        config = {};
+    }
+
+    return RunVerticalWrapBase.call(this, Merge(config, this.wrapConfig));
 };
 
 export default RunVerticalWrap;
