@@ -38,3 +38,8 @@ Export to [JSON-TP-Hash](https://www.leshylabs.com/blog/posts/2013-12-03-Leshy_S
 1. Click export
 
 Tested with Aseprite 1.2.25
+
+## Bitmap font
+
+- [SnowB BMF](https://snowb.org/)
+- [71squared-glyphdesigner](http://www.71squared.com/glyphdesigner)

@@ -76,3 +76,9 @@ Plain object:
 
 - `var obj = {};`
 - `var obj = new Object();`
+
+### Merge configuration
+
+```javascript
+var configOut = Phaser.Utils.Objects.Merge(configIn, defaultConfig);
+```
