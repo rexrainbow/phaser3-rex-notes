@@ -8,12 +8,19 @@ class ImagePen extends Base {
 
         this._x = 0;
         this._y = 0;
+        this.leftSpace = 0;
+        this.rightSpace = 0;
 
         this.addImage('main', 0);
     }
 
     onFree() {
         this.frame = undefined;
+
+        this
+            .setLeftSpace(0)
+            .setRightSpace(0);
+
         super.onFree();
     }
 
@@ -70,6 +77,24 @@ class ImagePen extends Base {
         this.x = x;
         this.y = y;
         return this;
+    }
+
+    setLeftSpace(value) {
+        this.leftSpace = value;
+        return this;
+    }
+
+    setRightSpace(value) {
+        this.rightSpace = value;
+        return this;
+    }
+
+    get width() {
+        return this.bobs.main.width;
+    }
+
+    get outerWidth() {
+        return this.width + this.leftSpace + this.rightSpace;
     }
 
     setShadow(x, y, color, alpha) {

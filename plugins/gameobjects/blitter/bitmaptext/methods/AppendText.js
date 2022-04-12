@@ -1,4 +1,4 @@
-var SetText = function (value) {
+var AppendText = function (value) {
     if (value == null) {
         value = '';
     } else if (Array.isArray(value)) {
@@ -7,15 +7,15 @@ var SetText = function (value) {
         value = value.toString();
     }
 
-    if (value === this._text) {
+    if (value === '') {
         return this;
     }
 
-    this._text = value;
+    this._text += value;
 
-    this.penManager.setTextPens(value);
+    this.penManager.addTextPens(value);
 
     return this;
 }
 
-export default SetText;
+export default AppendText;

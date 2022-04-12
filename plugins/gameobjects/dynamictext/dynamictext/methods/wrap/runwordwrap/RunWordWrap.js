@@ -134,7 +134,7 @@ var RunWordWrap = function (config) {
 
             if (!showAllLines && (resultLines.length === maxLines)) {  // Exceed maxLines
                 break;
-            } else if (isNewLineChar) {  // Already add to result                
+            } else if (isNewLineChar) {  // Already add to result
                 continue;
             }
         }

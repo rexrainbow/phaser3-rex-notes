@@ -1,11 +1,13 @@
 import Methods from './methods/Methods.js';
 import Pool from '../../../../pool.js';
 
+const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+
 var PensPool = new Pool(); // default pens pool
 var LinesPool = new Pool(); // default lines pool
 
 class PenManager {
-    constructor(parent) {
+    constructor(parent, config) {
         this.parent = parent;  // Blitter
         this.pens = [];
         this.lines = []; // pens in lines [ [],[],[],.. ]
