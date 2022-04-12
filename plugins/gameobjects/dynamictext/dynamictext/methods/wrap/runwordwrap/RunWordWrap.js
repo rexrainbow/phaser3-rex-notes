@@ -1,6 +1,6 @@
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
-import { IsTypeable, IsNewLineChar } from '../../../bob/Types.js';
+import { CanRender, IsNewLineChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -97,7 +97,7 @@ var RunWordWrap = function (config) {
     while (childIndex < lastChildIndex) {
         // Append non-typeable child directly
         var child = children[childIndex];
-        if (!IsTypeable(child)) {
+        if (!CanRender(child)) {
             childIndex++;
             child.setActive();
             resultChildren.push(child);

@@ -1,5 +1,5 @@
 import AlignLines from './AlignLines.js';
-import { IsTypeable, IsNewLineChar } from '../../../bob/Types.js';
+import { CanRender, IsNewLineChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -111,7 +111,7 @@ var RunVerticalWrap = function (config) {
         // Append non-typeable child directly
         var char = children[childIndex];
         childIndex++;
-        if (!IsTypeable(char)) {
+        if (!CanRender(char)) {
             char.setActive();
             resultChildren.push(char);
             lastLine.push(char);

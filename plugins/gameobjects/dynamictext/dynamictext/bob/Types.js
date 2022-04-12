@@ -2,7 +2,7 @@ const CharTypeName = 'text';
 const ImageTypeName = 'image';
 const CmdTypeName = 'command';
 
-var IsTypeable = function (bob) {
+var CanRender = function (bob) {
     var bobType = bob.type;
     return (bobType === CharTypeName) || (bobType === ImageTypeName);
 }
@@ -19,7 +19,7 @@ export {
     CharTypeName,
     ImageTypeName,
     CmdTypeName,
-    IsTypeable,
+    CanRender,
     IsNewLineChar,
     IsCommand
 }

@@ -1,4 +1,4 @@
-import { IsTypeable, IsCommand } from '../../dynamictext/bob/Types.js';
+import { CanRender, IsCommand } from '../../dynamictext/bob/Types.js';
 import { TypingDelayTimerType, TypingAnimationTimerType, } from './TimerTypes.js';
 
 var Typing = function (offsetTime) {
@@ -24,7 +24,7 @@ var Typing = function (offsetTime) {
             break;  // Leave this typing loop
         }
 
-        if (IsTypeable(child)) {
+        if (CanRender(child)) {
             // Typing this char
             var animationConfig = this.animationConfig;
             if (animationConfig.duration > 0) {

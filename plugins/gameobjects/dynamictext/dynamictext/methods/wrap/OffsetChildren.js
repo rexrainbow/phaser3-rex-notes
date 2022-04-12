@@ -1,4 +1,4 @@
-import { IsTypeable } from '../../bob/Types.js';
+import { CanRender } from '../../bob/Types.js';
 
 var OffsetChildren = function (children, offsetX, offsetY) {
     if ((offsetX === 0) && (offsetY === 0)) {
@@ -7,7 +7,7 @@ var OffsetChildren = function (children, offsetX, offsetY) {
 
     for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
         var child = children[ci];
-        if (!IsTypeable(child)) {
+        if (!CanRender(child)) {
             continue;
         }
 
