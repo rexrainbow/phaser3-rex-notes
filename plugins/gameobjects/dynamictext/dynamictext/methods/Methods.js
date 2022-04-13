@@ -1,6 +1,7 @@
 import SetPadding from './SetPadding.js';
 import GetPadding from './GetPadding.js';
 import ModifyTextStyle from './ModifyTextStyle.js';
+import ResetTextStyle from './ResetTextStyle.js';
 import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
 import ClearContent from './ClearContent.js';
@@ -22,6 +23,8 @@ export default {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    resetTextStyle: ResetTextStyle,
+
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
@@ -30,6 +33,7 @@ export default {
     appendText: AppendText,
     appendImage: AppendImage,
     appendCommand: AppendCommand,
+
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,

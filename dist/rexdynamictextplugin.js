@@ -1052,6 +1052,12 @@
         return this;
       }
     }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        this.align = align;
+        return this;
+      }
+    }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         if (!o) {
@@ -1110,6 +1116,10 @@
           this.setRightSpace(o.rightSpace);
         }
 
+        if (o.hasOwnProperty('align')) {
+          this.setAlign(o.align);
+        }
+
         return this;
       }
     }, {
@@ -1127,7 +1137,7 @@
     }, {
       key: "reset",
       value: function reset() {
-        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setDrawBelowCallback().setDrawAboveCallback();
+        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setAlign().setDrawBelowCallback().setDrawAboveCallback();
         return this;
       } // Override
 
@@ -1154,13 +1164,13 @@
         context.rotate(this.rotation);
 
         if (this.drawBelowCallback) {
-          this.drawBelowCallback.call(this);
+          this.drawBelowCallback(this);
         }
 
         this.drawContent();
 
         if (this.drawAboveCallback) {
-          this.drawAboveCallback.call(this);
+          this.drawAboveCallback(this);
         }
 
         context.restore();
@@ -1827,7 +1837,8 @@
           shadowOffsetX: this.shadowOffsetX,
           shadowOffsetY: this.shadowOffsetY,
           offsetX: this.offsetX,
-          offsetY: this.offsetY
+          offsetY: this.offsetY,
+          align: this.align
         };
       }
     }, {
@@ -1841,6 +1852,8 @@
         this.setStrokeStyle(GetValue$4(o, 'stroke', null), GetValue$4(o, 'strokeThickness', 0));
         this.setShadow(GetValue$4(o, 'shadowColor', null), GetValue$4(o, 'shadowOffsetX', 0), GetValue$4(o, 'shadowOffsetY', 0), GetValue$4(o, 'shadowBlur', 0));
         this.setOffset(GetValue$4(o, 'offsetX', 0), GetValue$4(o, 'offsetY', 0));
+        this.setAlign(GetValue$4(o, 'align', undefined));
+        return this;
       }
     }, {
       key: "modify",
@@ -1889,6 +1902,27 @@
           this.setOffsetY(o.offsetY);
         }
 
+        if (o.hasOwnProperty('align')) {
+          this.setAlign(o.align);
+        }
+
+        return this;
+      }
+    }, {
+      key: "clone",
+      value: function clone() {
+        return new TextStyle(this.toJSON());
+      }
+    }, {
+      key: "copyFrom",
+      value: function copyFrom(sourceTextStyle) {
+        this.set(sourceTextStyle.toJSON());
+        return this;
+      }
+    }, {
+      key: "copyTo",
+      value: function copyTo(targetTextStyle) {
+        targetTextStyle.set(this.toJSON());
         return this;
       }
     }, {
@@ -2042,6 +2076,12 @@
         return this;
       }
     }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        this.align = align;
+        return this;
+      }
+    }, {
       key: "syncFont",
       value: function syncFont(context) {
         context.font = this.font;
@@ -2134,6 +2174,11 @@
     return this;
   };
 
+  var ResetTextStyle = function ResetTextStyle() {
+    this.textStyle.copyFrom(this.defaultTextStyle);
+    return this;
+  };
+
   var RemoveChild = function RemoveChild(bob) {
     this.poolManager.free(bob);
     RemoveItem(this.children.list, bob);
@@ -2176,7 +2221,7 @@
   var ImageTypeName = 'image';
   var CmdTypeName = 'command';
 
-  var IsTypeable = function IsTypeable(bob) {
+  var CanRender = function CanRender(bob) {
     var bobType = bob.type;
     return bobType === CharTypeName || bobType === ImageTypeName;
   };
@@ -2213,13 +2258,31 @@
       get: function get() {
         return this.style.offsetX;
       },
-      set: function set(value) {}
+      set: function set(value) {
+        if (this.style) {
+          this.style.offsetX = value;
+        }
+      }
     }, {
       key: "offsetY",
       get: function get() {
         return this.style.offsetY;
       },
-      set: function set(value) {}
+      set: function set(value) {
+        if (this.style) {
+          this.style.offsetY = value;
+        }
+      }
+    }, {
+      key: "align",
+      get: function get() {
+        return this.style.align;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.align = value;
+        }
+      }
     }, {
       key: "modifyStyle",
       value: function modifyStyle(style) {
@@ -2639,16 +2702,28 @@
       return;
     }
 
-    for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-      var child = children[ci];
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
 
-      if (!IsTypeable(child)) {
+      if (!CanRender(child)) {
         continue;
       }
 
       child.x += offsetX;
       child.y += offsetY;
     }
+  };
+
+  var GetChildrenAlign$1 = function GetChildrenAlign(children) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (child.align !== undefined) {
+        return child.align;
+      }
+    }
+
+    return undefined;
   };
 
   var AlignLines$1 = function AlignLines(result, width, height) {
@@ -2681,8 +2756,13 @@
       var line = lines[li];
       var lineWidth = line.width,
           children = line.children;
+      var lineHAlign = GetChildrenAlign$1(children);
 
-      switch (hAlign) {
+      if (lineHAlign === undefined) {
+        lineHAlign = hAlign;
+      }
+
+      switch (lineHAlign) {
         case 1: // center
 
         case 'center':
@@ -2807,7 +2887,7 @@
       // Append non-typeable child directly
       var child = children[childIndex];
 
-      if (!IsTypeable(child)) {
+      if (!CanRender(child)) {
         childIndex++;
         child.setActive();
         resultChildren.push(child);
@@ -2939,8 +3019,13 @@
       var line = lines[rtl ? lcnt - li - 1 : li];
       var children = line.children;
       var lineHeight = line.height;
+      var lineVAlign = GetChildrenAlign(children);
 
-      switch (vAlign) {
+      if (lineVAlign === undefined) {
+        lineVAlign = vAlign;
+      }
+
+      switch (lineVAlign) {
         case 1: // center
 
         case 'center':
@@ -3083,7 +3168,7 @@
       var _char = children[childIndex];
       childIndex++;
 
-      if (!IsTypeable(_char)) {
+      if (!CanRender(_char)) {
         _char.setActive();
 
         resultChildren.push(_char);
@@ -3212,6 +3297,7 @@
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    resetTextStyle: ResetTextStyle,
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
@@ -3356,7 +3442,9 @@
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
       _this.padding = {};
-      _this.textStyle = new TextStyle(GetValue(config, 'style', undefined));
+      var textStyleConfig = GetValue(config, 'style', undefined);
+      _this.defaultTextStyle = new TextStyle(textStyleConfig);
+      _this.textStyle = _this.defaultTextStyle.clone();
       _this.background = new Background(_assertThisInitialized(_this), GetValue(config, 'background', undefined));
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue(config, 'innerBounds', undefined));
       _this.children = [];

@@ -28,7 +28,11 @@ class DynamicText extends Canvas {
         this.type = 'rexDynamicText';
         this.autoRound = true;
         this.padding = {};
-        this.textStyle = new TextStyle(GetValue(config, 'style', undefined));
+
+        var textStyleConfig = GetValue(config, 'style', undefined);
+        this.defaultTextStyle = new TextStyle(textStyleConfig);
+        this.textStyle = this.defaultTextStyle.clone();
+
         this.background = new Background(this, GetValue(config, 'background', undefined));
         this.innerBounds = new InnerBounds(this, GetValue(config, 'innerBounds', undefined));
         this.children = [];

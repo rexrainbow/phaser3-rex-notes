@@ -30,8 +30,8 @@ class Demo extends Phaser.Scene {
 [bgm.pause][click][/bgm.pause][color=green]open[/color] source HTML5 game framework[r][bgm=theme1]
 
 [color=#008B8B][wait=enter|click]that offers WebGL and Canvas [wait=custom]rendering across desktop and mobile web browsers[r]
-[color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools[r]
-[color=#F8F8FF]You can use JavaScript or TypeScript for development.`
+[color=#FF7F50][speed=0][align=left]Games can be compiled to iOS, Android and native apps by using 3rd party tools[r]
+[color=#F8F8FF][align=center]You can use JavaScript or TypeScript for development.`
 
         var Cubic = Phaser.Math.Easing.Cubic.Out;
         var Linear = Phaser.Math.Linear;

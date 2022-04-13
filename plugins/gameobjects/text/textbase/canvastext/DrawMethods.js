@@ -71,7 +71,7 @@ export default {
             // Seek if there has algin tag
             for (var penIdx = 0; penIdx < penCount; penIdx++) {
                 var penAlign = pens[penIdx].prop.align
-                if (penAlign) {
+                if (penAlign !== undefined) {
                     halign = penAlign;
                     break;
                 }

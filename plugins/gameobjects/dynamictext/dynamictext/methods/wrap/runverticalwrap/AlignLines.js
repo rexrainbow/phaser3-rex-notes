@@ -34,7 +34,12 @@ var AlignLines = function (result, width, height) {
         var children = line.children;
         var lineHeight = line.height;
 
-        switch (vAlign) {
+        var lineVAlign = GetChildrenAlign(children);
+        if (lineVAlign === undefined) {
+            lineVAlign = vAlign;
+        }
+
+        switch (lineVAlign) {
             case 1: // center
             case 'center':
                 offsetY = (height - lineHeight) / 2;

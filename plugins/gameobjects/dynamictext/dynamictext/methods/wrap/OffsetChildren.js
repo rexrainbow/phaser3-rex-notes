@@ -5,8 +5,8 @@ var OffsetChildren = function (children, offsetX, offsetY) {
         return;
     }
 
-    for (var ci = 0, ccnt = children.length; ci < ccnt; ci++) {
-        var child = children[ci];
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
         if (!CanRender(child)) {
             continue;
         }

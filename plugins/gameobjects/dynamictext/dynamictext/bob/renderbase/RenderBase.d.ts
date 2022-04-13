@@ -1,7 +1,15 @@
 // import * as Phaser from 'phaser';
 import Base from '../Base';
 
-export default class RenderBase extends Base {
+export default RenderBase;
+
+declare namespace RenderBase {
+    type DrawCallbackType = (
+        bob: RenderBase
+    ) => void;
+}
+
+declare class RenderBase extends Base {
     setVisible(visible?: boolean): this;
     visible: boolean;
 
@@ -40,4 +48,13 @@ export default class RenderBase extends Base {
     originX: number;
     offsetX: number;
     offsetY: number;
+
+    setDrawBelowCallback(
+        callback?: RenderBase.DrawCallbackType
+    ): this;
+
+    setDrawAboveCallback(
+        callback?: RenderBase.DrawCallbackType
+    ): this;
+
 }

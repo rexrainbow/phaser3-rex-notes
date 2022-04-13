@@ -1,4 +1,5 @@
 import OffsetChildren from '../OffsetChildren.js';
+import GetChildrenAlign from '../GetChildrenAlign.js';
 
 var AlignLines = function (result, width, height) {
     var hAlign = result.hAlign,
@@ -29,7 +30,12 @@ var AlignLines = function (result, width, height) {
         var lineWidth = line.width,
             children = line.children;
 
-        switch (hAlign) {
+        var lineHAlign = GetChildrenAlign(children);
+        if (lineHAlign === undefined) {
+            lineHAlign = hAlign;
+        }
+
+        switch (lineHAlign) {
             case 1:  // center
             case 'center':
                 offsetX = (width - lineWidth) / 2

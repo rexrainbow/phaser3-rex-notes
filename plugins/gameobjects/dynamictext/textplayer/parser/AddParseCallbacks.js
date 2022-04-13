@@ -5,6 +5,7 @@ import ParseItalicTag from './textstyle/OnParseItalicTag.js';
 import ParseFontSizeTag from './textstyle/OnParseFontSizeTag.js';
 import ParseOffsetYTag from './textstyle/OnParseOffsetYTag.js';
 import ParseShadowColorTag from './textstyle/OnParseShadowColorTag.js';
+import ParseAlignTag from './textstyle/OnParseAlignTag.js'
 import ParseImageTag from './image/OnParseImageTag.js';
 import ParseTypingSpeedTag from './typing/OnParseTypingSpeedTag.js';
 import ParsePlaySoundEffectTag from './soundeffect/OnParsePlaySoundEffectTag.js';
@@ -39,17 +40,27 @@ import ParseContent from './content/OnParseContent.js';
 const ParseCallbacks = [
     ParseColorTag, ParseStrokeColorTag,
     ParseBoldTag, ParseItalicTag,
-    ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag, ParseImageTag,
+    ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag, ParseAlignTag,
+    ParseImageTag,
+
     ParseTypingSpeedTag,
+
     ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
     ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
+
     ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag, ParseRotateCameraTag, ParseScrollCameraTag,
+
     ParseWaitTag,
+
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag, // Add ParseSetSpritePropertyTag later    
+
     ParseCustomTag,
-    ParseNewLineTag, ParseContent
+
+    ParseNewLineTag,
+
+    ParseContent
 ];
 
 var AddParseCallbacks = function (textPlayer, parser, config) {

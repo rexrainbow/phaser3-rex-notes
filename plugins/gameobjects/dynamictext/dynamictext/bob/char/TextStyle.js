@@ -23,6 +23,7 @@ class TextStyle {
             shadowOffsetY: this.shadowOffsetY,
             offsetX: this.offsetX,
             offsetY: this.offsetY,
+            align: this.align
         }
     }
 
@@ -46,6 +47,9 @@ class TextStyle {
             GetValue(o, 'offsetX', 0),
             GetValue(o, 'offsetY', 0)
         );
+        this.setAlign(GetValue(o, 'align', undefined));
+
+        return this;
     }
 
     modify(o) {
@@ -93,6 +97,24 @@ class TextStyle {
             this.setOffsetY(o.offsetY);
         }
 
+        if (o.hasOwnProperty('align')) {
+            this.setAlign(o.align);
+        }
+
+        return this;
+    }
+
+    clone() {
+        return new TextStyle(this.toJSON());
+    }
+
+    copyFrom(sourceTextStyle) {
+        this.set(sourceTextStyle.toJSON());
+        return this;
+    }
+
+    copyTo(targetTextStyle) {
+        targetTextStyle.set(this.toJSON());
         return this;
     }
 
@@ -224,6 +246,11 @@ class TextStyle {
         this
             .setOffsetX(offsetX)
             .setOffsetY(offsetY);
+        return this;
+    }
+
+    setAlign(align) {
+        this.align = align;
         return this;
     }
 

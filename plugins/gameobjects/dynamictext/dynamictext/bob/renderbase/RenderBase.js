@@ -221,6 +221,11 @@ class RenderBase extends Base {
         return this;
     }
 
+    setAlign(align) {
+        this.align = align;
+        return this;
+    }
+
     modifyPorperties(o) {
         if (!o) {
             return this;
@@ -274,6 +279,11 @@ class RenderBase extends Base {
         if (o.hasOwnProperty('rightSpace')) {
             this.setRightSpace(o.rightSpace);
         }
+
+        if (o.hasOwnProperty('align')) {
+            this.setAlign(o.align);
+        }
+
         return this;
     }
 
@@ -296,6 +306,7 @@ class RenderBase extends Base {
             .setScale(1, 1)
             .setLeftSpace(0).setRightSpace(0)
             .setOrigin(0)
+            .setAlign()
             .setDrawBelowCallback()
             .setDrawAboveCallback()
         return this;
@@ -322,13 +333,13 @@ class RenderBase extends Base {
         context.rotate(this.rotation);
 
         if (this.drawBelowCallback) {
-            this.drawBelowCallback.call(this);
+            this.drawBelowCallback(this);
         }
 
         this.drawContent();
 
         if (this.drawAboveCallback) {
-            this.drawAboveCallback.call(this);
+            this.drawAboveCallback(this);
         }
 
         context.restore();

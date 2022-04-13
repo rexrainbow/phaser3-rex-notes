@@ -21,13 +21,31 @@ class CharData extends RenderBase {
         return this.style.offsetX;
     }
 
-    set offsetX(value) { }
+    set offsetX(value) {
+        if (this.style) {
+            this.style.offsetX = value;
+        }
+    }
 
     get offsetY() {
         return this.style.offsetY;
     }
 
-    set offsetY(value) { }
+    set offsetY(value) {
+        if (this.style) {
+            this.style.offsetY = value;
+        }
+    }
+
+    get align() {
+        return this.style.align;
+    }
+
+    set align(value) {
+        if (this.style) {
+            this.style.align = value;
+        }
+    }
 
     modifyStyle(style) {
         this.setDirty(true);

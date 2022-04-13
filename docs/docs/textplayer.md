@@ -238,6 +238,11 @@ var txt = scene.add.rexTextPlayer({
     - `style.shadowBlur` : Blur of shadow.
     - `style.offsetX` : OffsetX.
     - `style.offsetY` : OffsetY.
+    - `style.align` : Override default line-alignment setting.
+        - `0`, `'left'`, `'top'` : Align remainder lines to left/top.
+        - `1`, `'center'` : Align remainder lines to center.
+        - `2`, `'right'`, `'bottom'` : Align remainder lines to right/bottom.
+        - `undefined` : Use default line-alignment setting.
 - `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
 - `typing` :
     - `typing.speed` : Default typing speed of each character.
@@ -465,6 +470,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Shadow : `[shadow]content[/shadow]`, `[shadow=red]content[/shadow]`
     - `shadowOffsetX`, `shadowOffsetY`, `shadowBlur` are set in config
 - Character offset Y : `[y=-8]content[/y]`
+- Line-align : `[align=left]`, `[align=center]`, `[align=right]`
 
 #### New line
 

@@ -16,8 +16,8 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexDynamicText(
             {
                 x: 400, y: 300,
-                width: 400,
-                height: 500,
+                width: 300,
+                height: 300,
 
                 background: {
                     stroke: 'white',
@@ -34,55 +34,25 @@ class Demo extends Phaser.Scene {
         )
 
         var content = [
-            'Phaser is a fast, free, and fun open source HTML5 game framework\n',
-            'that offers WebGL and DynamicText rendering across desktop and mobile web browsers.\n',
-            'Games can be compiled to iOS, Android and native apps by using 3rd party tools.\n',
-            'You can use JavaScript or TypeScript for development.'
+            'LeftLeftLeftLeftLeftLeftLeft\n',
+            'CenterCenterCenterCenter\n',
+            'abc\n',
         ];
         text
-            .appendText(content[0], { color: '#FFF8DC' })
-            .appendText(content[1], { color: '#008B8B' })
-            .appendText(content[2], { color: '#FF7F50' })
-            .appendText(content[3], { color: '#F8F8FF' });
+            .appendText(content[0], { color: '#FFF8DC', align: 'left' })
+            .appendText(content[1], { color: '#008B8B', align: 'center' })
+            .appendText(content[2], { color: '#FF7F50', align: 'right' })
 
-        var result = text.runWordWrap({
+        text.runWordWrap({
             lineHeight: 30,
             letterSpacing: 4,
             maxLines: 0,       // Set maxLines to 0
             padding: { bottom: 10 },
+            charWrap: true,
 
-            hAlign: 'right',
             vAlign: 'bottom'
         });
 
-        var drawUnderline = function () {
-            var text = this.text;
-            if ((text === ' ') || (text === '\n')) {
-                return;
-            }
-
-            var context = this.context;
-
-            var savedLineCap = context.lineCap;
-            context.lineCap = 'butt';
-
-            context.strokeStyle = '#FA8072';
-            context.lineWidth = 1;
-            context.beginPath();
-            context.moveTo(0, 0);
-            context.lineTo(this.width, 0);
-            context.stroke();
-
-            context.lineCap = savedLineCap;
-        }
-
-        var children = result.children;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            children[i]
-                .setAngle(Math.random() * 30 - 15)
-                .modifyStyle({ fontSize: Phaser.Math.Between(16, 24) })
-                .setDrawBelowCallback(drawUnderline)
-        }
     }
 
     update() { }

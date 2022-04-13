@@ -8456,6 +8456,13 @@
 <li><code>style.shadowBlur</code> : Blur of shadow.</li>
 <li><code>style.offsetX</code> : OffsetX.</li>
 <li><code>style.offsetY</code> : OffsetY.</li>
+<li><code>style.align</code> : Override default line-alignment setting.<ul>
+<li><code>0</code>, <code>'left'</code>, <code>'top'</code> : Align remainder lines to left/top.</li>
+<li><code>1</code>, <code>'center'</code> : Align remainder lines to center.</li>
+<li><code>2</code>, <code>'right'</code>, <code>'bottom'</code> : Align remainder lines to right/bottom.</li>
+<li><code>undefined</code> : Use default line-alignment setting.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>text</code> : Content of text.</li>
@@ -8524,7 +8531,8 @@
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
         <span class="c1">// offsetY: 0,</span>
-        <span class="c1">// offsetY: 0</span>
+        <span class="c1">// offsetY: 0,</span>
+        <span class="c1">// align: undefined</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -8756,7 +8764,16 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setDrawBelowCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
 <span class="nx">child</span><span class="p">.</span><span class="nx">setDrawAboveCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>callback</code> :
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>                
+    <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">context</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
