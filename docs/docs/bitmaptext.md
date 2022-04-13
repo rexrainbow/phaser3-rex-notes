@@ -181,6 +181,10 @@ txt.setFont(key);
 // txt.setFont(key, size, align);
 ```
 
+### Tint
+
+See [Tint](gameobject.md#tint).
+
 ### Color of characters
 
 - By character

@@ -11,31 +11,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        polyfills();
-
-        var txt = this.add.bitmapText(100, 100, 'gothic', 'HELLO');
-        this.add.graphics({
-            lineStyle: {
-                color: 0xff0000,
-                width: 2
-            }
-        })
-            .strokeRectShape(txt.getBounds())
+        var txt = this.add.bitmapText(100, 100, 'gothic', '').setTint(0xff0000);
+        txt.setText('HELLO')
     }
 
     update(time) {
     }
-}
-
-var polyfills = function () {
-    const Components = Phaser.GameObjects.Components;
-    Phaser.Class.mixin(
-        Phaser.GameObjects.BitmapText,
-        [
-            Components.ComputedSize,
-            Components.GetBounds
-        ]
-    );
 }
 
 var config = {
