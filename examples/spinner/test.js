@@ -13,8 +13,12 @@ class Demo extends Phaser.Scene {
     create() {
         var spinner = this.rexSpinner.add.box({
             x: 400, y: 300,
-            width: 80, height: 80
+            width: 10, height: 10
         });
+
+        spinner
+            .setSize(100, 100)
+            .setColor(0x00FFFF)
     }
 
     update() { }

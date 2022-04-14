@@ -18,7 +18,7 @@ class Los extends Base {
     updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
-        var isSizeChanged = (this.prevCenterX !== centerX) || (this.prevCenterY !== centerY);
+        var isSizeChanged = this.isSizeChanged;
 
         var radius = this.radius;
         var startRadius = radius / 2;
@@ -43,9 +43,6 @@ class Los extends Base {
                     )
             }
         }
-
-        this.prevCenterX = centerX;
-        this.prevCenterY = centerY;
     }
 }
 

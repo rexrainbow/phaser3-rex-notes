@@ -27,7 +27,7 @@ class Grid extends Base {
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var isSizeChanged = (this.prevCenterX !== centerX) || (this.prevCenterY !== centerY);
+        var isSizeChanged = this.isSizeChanged;
 
         var leftBound = centerX - radius;
         var topBound = centerY - radius;
@@ -54,9 +54,6 @@ class Grid extends Base {
                     .setCenterPosition(x, y)
             }
         }
-
-        this.prevCenterX = centerX;
-        this.prevCenterY = centerY;
     }
 }
 

@@ -21,7 +21,7 @@ class Radio extends Base {
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var isSizeChanged = (this.prevCenterX !== centerX) || (this.prevCenterY !== centerY);
+        var isSizeChanged = this.isSizeChanged;
 
         var centerRadius = (radius * 2) / 6;
         var x = centerX - radius + centerRadius;
@@ -76,9 +76,6 @@ class Radio extends Base {
                     break;
             }
         }
-
-        this.prevCenterX = centerX;
-        this.prevCenterY = centerY;
     }
 }
 

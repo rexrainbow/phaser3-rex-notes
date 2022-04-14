@@ -47,7 +47,8 @@ class Base extends BaseShapes {
     }
 
     set color(value) {
-        this.dirty = this.dirty || (this._color !== value);
+        this.isColorChanged = this.isColorChanged || (this._color !== value);
+        this.dirty = this.dirty || this.isColorChanged;
         this._color = value;
         this.setShapesColor(value);
     }

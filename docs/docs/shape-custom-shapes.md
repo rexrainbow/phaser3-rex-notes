@@ -170,6 +170,7 @@ var customShapes = scene.add.rexCustomShapes({
         var shape = this.getShape(name);
         // ...
         // var isSizeChanged = this.isSizeChanged;
+        // var isColorChanged = this.isColorChanged;
 
         // var fillColor = this.fillColor;
         // var strokeColor = this.strokeColor;
@@ -178,7 +179,8 @@ var customShapes = scene.add.rexCustomShapes({
     - Shape instances : Change properties of shape instances.
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
-    - Is size changed: `this.isSizeChanged`
+    - Is size changed : `this.isSizeChanged`
+    - Is color changed : `this.isColorChanged`
     - Fill color : `this.fillColor`, `this.fillAlpha`
     - Stroke color : `this.strokeColor`, `this.strokeAlpha`, `this.lineWidth`
 
