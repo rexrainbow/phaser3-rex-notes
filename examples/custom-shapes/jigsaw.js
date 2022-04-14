@@ -14,9 +14,10 @@ class Demo extends Phaser.Scene {
         var jigsaw = CreateJigsawShape(this,
             {
                 left: 1, right: -1, top: -1, bottom: -1,
-            },
-            undefined, 0x00ff00
+            }
         )
+            .setFillStyle(undefined, 1)
+            .setStrokeStyle(2, 0x00ff00, 1)
             .setPosition(400, 300)
             .setSize(100, 100)
             .setAngle(-45)
@@ -43,7 +44,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreateJigsawShape = function (scene, convexEdges, fillColor, strokeColor) {
+var CreateJigsawShape = function (scene, convexEdges) {
     return scene.add.rexCustomShapes({
         type: 'Jigsaw',
         create: { lines: 1 },
@@ -58,8 +59,8 @@ var CreateJigsawShape = function (scene, convexEdges, fillColor, strokeColor) {
                 radiusY = height / 6;
 
             var polygon = this.getShapes()[0]
-                .lineStyle(2, strokeColor, 1)
-                .fillStyle(fillColor, 1)
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
+                .fillStyle(this.fillColor, this.fillAlpha)
                 .setIterations(8)
                 .startAt(0, 0)
 

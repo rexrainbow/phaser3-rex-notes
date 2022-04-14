@@ -13,6 +13,14 @@ export default class BaseShapes extends Phaser.GameObjects.Shape {
     width: number;
     height: number;
 
+    setFillStyle(color: number, alpha: number): this;
+    fillColor: number;
+    fillAlpha: number;
+    setStrokeStyle(lineWidth: number, color: number, alpha: number): this;
+    lineWidth: number;
+    strokeColor: number;
+    strokeAlpha: number;
+
     setDirty(dirty?: boolean): this;
     dirty: boolean;
 

@@ -170,19 +170,22 @@ var customShapes = scene.add.rexCustomShapes({
         var shape = this.getShape(name);
         // ...
         // var isSizeChanged = this.isSizeChanged;
-        // var isColorChanged = this.isColorChanged;
+        // var isStyleChanged = this.isStyleChanged;
 
         // var fillColor = this.fillColor;
+        // var fillAlpha = this.fillAlpha;
+        // var lineWidth = this.lineWidth;
         // var strokeColor = this.strokeColor;
+        // var strokeAlpha = this.strokeAlpha;
     }
     ```
     - Shape instances : Change properties of shape instances.
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
     - Is size changed : `this.isSizeChanged`
-    - Is color changed : `this.isColorChanged`
-    - Fill color : `this.fillColor`, `this.fillAlpha`
-    - Stroke color : `this.strokeColor`, `this.strokeAlpha`, `this.lineWidth`
+    - Is color changed : `this.isStyleChanged`
+    - Fill style : `this.fillColor`, `this.fillAlpha`
+    - Stroke style : `this.strokeColor`, `this.strokeAlpha`, `this.lineWidth`
 
 #### Set update shape callback
 
@@ -204,6 +207,47 @@ customShapes.setUpdateShapesCallback(callback);
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
     - Is size changed: `this.isSizeChanged`
+
+#### Size
+
+```javascript
+customShapes.setSize(width, height);
+```
+or
+```javascript
+customShapes.resize(width, height);
+```
+or
+```javascript
+customShapes.width = width;
+customShapes.height = height;
+```
+
+Will set dirty and redraw shapes
+
+#### Styles
+
+- Fill style
+    ```javascript
+    customShapes.setFillStyle(color, alpha);
+    ```
+    or
+    ```javascript
+    customShapes.fillColor = color;
+    customShapes.fillAlpha = alpha;
+    ```  
+- Stroke style
+    ```javascript
+    customShapes.setStrokeStyle(lineWidth, color, alpha);
+    ```
+    or
+    ```javascript
+    customShapes.lineWidth = lineWidth;
+    customShapes.strokeColor = color;
+    customShapes.strokeAlpha = alpha;
+    ```
+
+Will set dirty and redraw shapes. Apply styles to shapes in update callback.
 
 #### Recreate shapes
 
@@ -232,7 +276,9 @@ Redraw shapes when
 - Resize : `customShapes.resize(width, height)`
     - `customShapes.isSizeChanged` will also be `true`.
 - Set fill color : `customShapes.setFillStyle(color, alpha)`
+    - `customShapes.isStyleChanged` will also be `true`.
 - Set stroke color : `customShapes.setStrokeStyle(lineWidth, color, alpha)`
+    - `customShapes.isStyleChanged` will also be `true`.
 - Set dirty : `customShapes.setDirty()`
 - Set update shape callback : `customShapes.setUpdateShapesCallback(callback)`
 

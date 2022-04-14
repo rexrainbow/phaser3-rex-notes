@@ -12,8 +12,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var speechBubble = CreateSpeechBubbleShape(this)
-            .setData('strokeColor', 0xffffff)
-            .setData('fillColor', 0x008800)
+            .setFillStyle(0x008800, 1)
+            .setStrokeStyle(2, 0xffffff, 1)
             .setPosition(400, 300)
             .setSize(200, 100)
 
@@ -36,14 +36,12 @@ var CreateSpeechBubbleShape = function (scene) {
         update: function () {
             var radius = 20;
             var indent = 15;
-            var strokeColor = this.getData('strokeColor');
-            var fillColor = this.getData('fillColor');
 
             var left = 0, right = this.width,
                 top = 0, bottom = this.height, boxBottom = bottom - indent;
             this.getShapes()[0]
-                .lineStyle(2, strokeColor, 1)
-                .fillStyle(fillColor, 1)
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
+                .fillStyle(this.fillColor, this.fillAlpha)
                 .setIterations(8)
                 // top line, right arc
                 .startAt(left + radius, top).lineTo(right - radius, top).arc(right - radius, top + radius, radius, 270, 360)

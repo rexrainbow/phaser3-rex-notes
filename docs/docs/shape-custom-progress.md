@@ -186,11 +186,24 @@ var customProgress = scene.add.rexCustomProgress({
         var shapes = this.getShapes();
         var shape = this.getShape(name);
         // ...
+        // var isSizeChanged = this.isSizeChanged;
+        // var isStyleChanged = this.isStyleChanged;
+
+        // var fillColor = this.fillColor;
+        // var fillAlpha = this.fillAlpha;
+        // var lineWidth = this.lineWidth;
+        // var strokeColor = this.strokeColor;
+        // var strokeAlpha = this.strokeAlpha;
+        // ...
     }
     ```
     - Shape instances : Change properties of shape instances.
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
+    - Is size changed : `this.isSizeChanged`
+    - Is color changed : `this.isStyleChanged`
+    - Fill style : `this.fillColor`, `this.fillAlpha`
+    - Stroke style : `this.strokeColor`, `this.strokeAlpha`, `this.lineWidth`
 - `value` : `0` ~ `1`, progress value. Default is `0`.
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
@@ -204,6 +217,14 @@ var customProgress = scene.add.rexCustomProgress({
 #### Set update shape callback
 
 See [Shape class](shape-custom-shapes.md#set-update-shape-callback)
+
+#### Size
+
+See [Size](shape-custom-shapes.md#size)
+
+#### Styles
+
+See [Styles](shape-custom-shapes.md#styles)
 
 #### Recreate shapes
 
