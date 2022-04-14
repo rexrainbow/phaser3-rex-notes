@@ -187,7 +187,6 @@ var customProgress = scene.add.rexCustomProgress({
         var shape = this.getShape(name);
         // ...
         // var isSizeChanged = this.isSizeChanged;
-        // var isStyleChanged = this.isStyleChanged;
 
         // var fillColor = this.fillColor;
         // var fillAlpha = this.fillAlpha;
@@ -201,7 +200,6 @@ var customProgress = scene.add.rexCustomProgress({
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
     - Is size changed : `this.isSizeChanged`
-    - Is color changed : `this.isStyleChanged`
     - Fill style : `this.fillColor`, `this.fillAlpha`
     - Stroke style : `this.strokeColor`, `this.strokeAlpha`, `this.lineWidth`
 - `value` : `0` ~ `1`, progress value. Default is `0`.

@@ -25,7 +25,6 @@ class BaseShapes extends Shape {
         this._height = -1;
         this.dirty = true;
         this.isSizeChanged = true;
-        this.isStyleChanged = true;
         this.shapes = {};
 
         this.setPosition(x, y);
@@ -98,9 +97,9 @@ class BaseShapes extends Shape {
             alpha = 1;
         }
 
-        this.isStyleChanged = this.isStyleChanged ||
-            (this.fillColor !== color) || (this.fillAlpha !== alpha);
-        this.dirty = this.dirty || this.isStyleChanged;
+        this.dirty = this.dirty ||
+            (this.fillColor !== color) ||
+            (this.fillAlpha !== alpha);
 
         this._fillColor = color;
         this._fillAlpha = alpha;
@@ -136,11 +135,11 @@ class BaseShapes extends Shape {
         if (alpha === undefined) {
             alpha = 1;
         }
-        this.isStyleChanged = this.isStyleChanged ||
+
+        this.dirty = this.dirty ||
             (this.lineWidth !== lineWidth) ||
             (this.strokeColor !== color) ||
             (this.strokeAlpha !== alpha);
-        this.dirty = this.dirty || this.isStyleChanged;
 
         this._lineWidth = lineWidth;
         this._strokeColor = color;
@@ -168,7 +167,6 @@ class BaseShapes extends Shape {
         }
 
         this.isSizeChanged = false;
-        this.isStyleChanged = false;
         this.dirty = false;
 
 
