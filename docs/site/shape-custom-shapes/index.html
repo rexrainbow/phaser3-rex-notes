@@ -1976,6 +1976,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#styles" class="md-nav__link">
+    Styles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#recreate-shapes" class="md-nav__link">
     Recreate shapes
   </a>
@@ -8111,6 +8125,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#styles" class="md-nav__link">
+    Styles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#recreate-shapes" class="md-nav__link">
     Recreate shapes
   </a>
@@ -8407,7 +8435,10 @@
     <span class="c1">// var isSizeChanged = this.isSizeChanged;</span>
 
     <span class="c1">// var fillColor = this.fillColor;</span>
+    <span class="c1">// var fillAlpha = this.fillAlpha;</span>
+    <span class="c1">// var lineWidth = this.lineWidth;</span>
     <span class="c1">// var strokeColor = this.strokeColor;</span>
+    <span class="c1">// var strokeAlpha = this.strokeAlpha;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li>Shape instances : Change properties of shape instances.<ul>
@@ -8415,9 +8446,9 @@
 <li><code>this.getShape(name)</code> : Return a shape by the unique string name.</li>
 </ul>
 </li>
-<li>Is size changed: <code>this.isSizeChanged</code></li>
-<li>Fill color : <code>this.fillColor</code>, <code>this.fillAlpha</code></li>
-<li>Stroke color : <code>this.strokeColor</code>, <code>this.strokeAlpha</code>, <code>this.lineWidth</code></li>
+<li>Is size changed : <code>this.isSizeChanged</code></li>
+<li>Fill style : <code>this.fillColor</code>, <code>this.fillAlpha</code></li>
+<li>Stroke style : <code>this.strokeColor</code>, <code>this.strokeAlpha</code>, <code>this.lineWidth</code></li>
 </ul>
 </li>
 </ul>
@@ -8443,6 +8474,36 @@
 </ul>
 </li>
 </ul>
+<h4 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+or
+<div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+or
+<div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">customShapes</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Will set dirty and redraw shapes</p>
+<h4 id="styles">Styles<a class="headerlink" href="#styles" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Fill style
+    <div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<span class="nx">customShapes</span><span class="p">.</span><span class="nx">fillAlpha</span> <span class="o">=</span> <span class="nx">alpha</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Stroke style
+    <div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">lineWidth</span><span class="p">;</span>
+<span class="nx">customShapes</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<span class="nx">customShapes</span><span class="p">.</span><span class="nx">strokeAlpha</span> <span class="o">=</span> <span class="nx">alpha</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<p>Will set dirty and redraw shapes. Apply styles to shapes in update callback.</p>
 <h4 id="recreate-shapes">Recreate shapes<a class="headerlink" href="#recreate-shapes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Clear all shapes
