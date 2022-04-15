@@ -43,3 +43,4 @@ Tested with Aseprite 1.2.25
 
 - [SnowB BMF](https://snowb.org/)
 - [71squared-glyphdesigner](http://www.71squared.com/glyphdesigner)
+- [Bitmap Font Generator](https://www.angelcode.com/products/bmfont/)
