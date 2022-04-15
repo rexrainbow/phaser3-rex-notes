@@ -46,6 +46,12 @@ declare class BlitterBase extends Phaser.GameObjects.GameObject {
     ): BobBase[];
 
 
+    setTint(tint: number): this;
+    setTintFill(tint: number): this;
+    clearTint(): this;
+    tint: number;
+    tintFill: boolean;
+
     // Components    
     clearAlpha(): this;
     setAlpha(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;

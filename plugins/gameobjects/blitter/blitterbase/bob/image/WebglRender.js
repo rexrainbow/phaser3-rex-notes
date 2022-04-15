@@ -46,7 +46,7 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textur
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
 
-    var tint = GetTint(this.color, this.alpha * alpha);
+    var tint = GetTint(this.tint, this.alpha * alpha);
 
     pipeline.batchQuad(
         this.parent,
@@ -57,7 +57,7 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textur
         u0, v0,
         u1, v1,
         tint, tint, tint, tint,
-        this.tintEffect,
+        this.tintFill,
         texture,
         textureUnit
     );

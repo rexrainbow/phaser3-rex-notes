@@ -468,8 +468,8 @@
   };
 
   var Clear = function Clear(obj) {
-    if (obj == null) {
-      return;
+    if (_typeof(obj) !== 'object' || obj === null) {
+      return obj;
     }
 
     if (Array.isArray(obj)) {
@@ -479,6 +479,8 @@
         delete obj[key];
       }
     }
+
+    return obj;
   };
 
   /**

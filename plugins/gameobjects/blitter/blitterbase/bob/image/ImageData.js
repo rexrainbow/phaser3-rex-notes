@@ -58,27 +58,52 @@ class ImageData extends RenderBase {
         return this;
     }
 
-    get color() {
-        return this._color;
-    }
-
-    set color(value) {
-        this._color = value
-    }
-
-    setColor(value) {
-        this.color = value;
-        return this;
-    }
-
-    setTintEffect(value) {
-        if (value === undefined) {
-            value = 0;
+    get tint() {
+        if (this._tint === undefined) {
+            return this.parent.tint;
+        } else {
+            return this._tint;
         }
-        // 1: Solid color + texture alpha
-        // 2: Solid color, no texture
-        this.tintEffect = value;
+    }
+
+    set tint(value) {
+        this._tint = value;
+    }
+
+
+    setTint(value) {
+        this.tint = value;
+        this.tintFill = false;
         return this;
+    }
+
+    setTintFill(value) {
+        this.tint = value;
+        this.tintFill = true;
+        return this;
+    }
+
+    clearTint() {
+        this.setTint(0xffffff);
+        return this;
+    }
+
+    resetTint() {
+        this.tint = undefined;
+        this.tintFill = undefined;
+        return this;
+    }
+
+    get tintFill() {
+        if (this._tintFill === undefined) {
+            return this.parent.tintFill;
+        } else {
+            return this._tintFill;
+        }
+    }
+
+    set tintFill(value) {
+        this._tintFill = value;
     }
 
     reset() {
@@ -86,8 +111,7 @@ class ImageData extends RenderBase {
 
         this
             .resetFlip()
-            .setColor(0xffffff)
-            .setTintEffect()
+            .resetTint()
             .setFrame();
 
         return this;
@@ -122,12 +146,12 @@ class ImageData extends RenderBase {
             this.setFlipY(o.flipY);
         }
 
-        if (o.hasOwnProperty('color')) {
-            this.setColor(o.color);
+        if (o.hasOwnProperty('tint')) {
+            this.setTint(o.tint);
         }
 
-        if (o.hasOwnProperty('tintEffect')) {
-            this.setTintEffect(o.tintEffect);
+        if (o.hasOwnProperty('tintFill')) {
+            this.setTintFill(o.tintFill);
         }
 
         return this;

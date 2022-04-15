@@ -320,6 +320,25 @@
     return this.children.list;
   };
 
+  var TintMethods = {
+    setTint: function setTint(tint) {
+      // 0: Solid tint + texture alpha
+      this.tint = tint;
+      this.tintFill = false;
+      return this;
+    },
+    setTintFill: function setTintFill(tint) {
+      // 1: Solid tint, no texture
+      this.tint = tint;
+      this.tintFill = true;
+      return this;
+    },
+    clearTint: function clearTint() {
+      this.setTint(0xffffff);
+      return this;
+    }
+  };
+
   var methods$1 = {
     setTexture: SetTexture$1,
     resize: Resize,
@@ -331,6 +350,7 @@
     getLastAppendedChildren: GetLastAppendedChildren,
     getChildren: GetChildren
   };
+  Object.assign(methods$1, TintMethods);
 
   var Stack = /*#__PURE__*/function () {
     function Stack() {
@@ -473,13 +493,7 @@
       var reuseBob = GetValue$4(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager(config) : undefined;
 
-      _this.setTexture(texture, frame);
-
-      _this.setPosition(x, y);
-
-      _this.setOrigin(0, 0);
-
-      _this.initPipeline();
+      _this.setTexture(texture, frame).setPosition(x, y).setOrigin(0, 0).clearTint().initPipeline();
 
       return _this;
     }
@@ -1069,8 +1083,8 @@
   };
 
   var Clear = function Clear(obj) {
-    if (obj == null) {
-      return;
+    if (_typeof(obj) !== 'object' || obj === null) {
+      return obj;
     }
 
     if (Array.isArray(obj)) {
@@ -1080,6 +1094,8 @@
         delete obj[key];
       }
     }
+
+    return obj;
   };
 
   var DataMethods = {
@@ -1603,8 +1619,8 @@
     var v0 = this.frame.v0;
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
-    var tint = GetTint(this.color, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintEffect, texture, textureUnit);
+    var tint = GetTint(this.tint, this.alpha * alpha);
+    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
   };
 
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
@@ -1712,37 +1728,62 @@
         return this;
       }
     }, {
-      key: "color",
+      key: "tint",
       get: function get() {
-        return this._color;
+        if (this._tint === undefined) {
+          return this.parent.tint;
+        } else {
+          return this._tint;
+        }
       },
       set: function set(value) {
-        this._color = value;
+        this._tint = value;
       }
     }, {
-      key: "setColor",
-      value: function setColor(value) {
-        this.color = value;
+      key: "setTint",
+      value: function setTint(value) {
+        this.tint = value;
+        this.tintFill = false;
         return this;
       }
     }, {
-      key: "setTintEffect",
-      value: function setTintEffect(value) {
-        if (value === undefined) {
-          value = 0;
-        } // 1: Solid color + texture alpha
-        // 2: Solid color, no texture
-
-
-        this.tintEffect = value;
+      key: "setTintFill",
+      value: function setTintFill(value) {
+        this.tint = value;
+        this.tintFill = true;
         return this;
+      }
+    }, {
+      key: "clearTint",
+      value: function clearTint() {
+        this.setTint(0xffffff);
+        return this;
+      }
+    }, {
+      key: "resetTint",
+      value: function resetTint() {
+        this.tint = undefined;
+        this.tintFill = undefined;
+        return this;
+      }
+    }, {
+      key: "tintFill",
+      get: function get() {
+        if (this._tintFill === undefined) {
+          return this.parent.tintFill;
+        } else {
+          return this._tintFill;
+        }
+      },
+      set: function set(value) {
+        this._tintFill = value;
       }
     }, {
       key: "reset",
       value: function reset() {
         _get(_getPrototypeOf(ImageData.prototype), "reset", this).call(this);
 
-        this.resetFlip().setColor(0xffffff).setTintEffect().setFrame();
+        this.resetFlip().resetTint().setFrame();
         return this;
       }
     }, {
@@ -1778,12 +1819,12 @@
           this.setFlipY(o.flipY);
         }
 
-        if (o.hasOwnProperty('color')) {
-          this.setColor(o.color);
+        if (o.hasOwnProperty('tint')) {
+          this.setTint(o.tint);
         }
 
-        if (o.hasOwnProperty('tintEffect')) {
-          this.setTintEffect(o.tintEffect);
+        if (o.hasOwnProperty('tintFill')) {
+          this.setTintFill(o.tintFill);
         }
 
         return this;

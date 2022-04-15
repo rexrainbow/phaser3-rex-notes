@@ -22,6 +22,7 @@ class Demo extends Phaser.Scene {
             columns: [20, undefined, 20],
             rows: [20, undefined, 20],
         })
+            .setTint(0xff0000)
 
         CreateTexture1(this, 'bg1');
         this.add.image(400, 0, 'bg1').setOrigin(0);
@@ -59,9 +60,9 @@ class Demo extends Phaser.Scene {
     }
 }
 
-const COLOR_PRIMARY = 0x9575cd;
-const COLOR_LIGHT = 0xc7a4ff;
-const COLOR_DARK = 0x65499c;
+const COLOR_PRIMARY = 0xbdbdbd;
+const COLOR_LIGHT = 0xefefef;
+const COLOR_DARK = 0x8d8d8d;
 var CreateTexture0 = function (scene, key) {
     // width: 20-10-20
     // height: 20-10-20
@@ -96,7 +97,7 @@ var CreateTexture1 = function (scene, key) {
 }
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,

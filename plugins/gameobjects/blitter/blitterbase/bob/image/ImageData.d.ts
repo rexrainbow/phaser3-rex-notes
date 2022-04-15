@@ -17,7 +17,7 @@ declare namespace ImageData {
 
         flipX?: boolean, flipY?: boolean,
 
-        color?: number, tintEffect?: number
+        tint?: number, tintFill?: number
     }
 }
 
@@ -33,11 +33,12 @@ declare class ImageData extends RenderBase {
     setFlipY(flipY?: boolean): this;
     resetFlip(): this;
 
-    color: number;
-    setColor(value: number): this;
-
-    tintEffect: number;
-    setTintEffect(value: number): this;
+    tint: number;
+    tintFill: boolean;
+    setTint(value: number): this;
+    setTintFill(value: number): this;
+    clearTint(): this;
+    resetTint(): this;
 
     modifyPorperties(
         o?: ImageData.IModifyConfig

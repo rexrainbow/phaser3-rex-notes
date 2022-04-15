@@ -35,10 +35,12 @@ class Blitter extends GameObject {
         var reuseBob = GetValue(config, 'reuseBob', true);
         this.poolManager = (reuseBob) ? (new PoolManager(config)) : undefined;
 
-        this.setTexture(texture, frame);
-        this.setPosition(x, y);
-        this.setOrigin(0, 0);
-        this.initPipeline();
+        this
+            .setTexture(texture, frame)
+            .setPosition(x, y)
+            .setOrigin(0, 0)
+            .clearTint()
+            .initPipeline()
 
     }
 

@@ -5,6 +5,7 @@ import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetChildren from './GetChildren.js';
+import TintMethods from './TintMethods.js';
 
 var methods = {
     setTexture: SetTexture,
@@ -17,5 +18,10 @@ var methods = {
     getLastAppendedChildren: GetLastAppendedChildren,
     getChildren: GetChildren,
 }
+
+Object.assign(
+    methods,
+    TintMethods
+)
 
 export default methods;

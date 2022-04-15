@@ -229,6 +229,29 @@ ninePatch.resize(width, height);
 
 Will [update texture](ninepatch.md#update-texture)
 
+### Tint
+
+- Set tint
+    ```javascript
+    ninePatch.setTint(tint);
+    ```
+- Clear tint
+    ```javascript
+    ninePatch.clearTint();
+    ```
+- Set tint fill
+    ```javascript
+    ninePatch.setTintFill(tint);
+    ```
+- Get tint
+    ```javascript
+    var tint = ninePatch.tint;
+    var tintFill = ninePatch.tintFill;
+    ```
+    - `tintFill` :
+        - `false` : Solid tint + texture alpha
+        - `true` : Solid tint, no texture
+
 ### Set texture of source image
 
 ```javascript
