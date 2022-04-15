@@ -45,8 +45,8 @@ class Base extends Container {
 
         super.destroy(fromScene);
 
-        this.backgroundChildren = undefined;
-        this.sizerChildren = (Array.isArray(this.sizerChildren)) ? [] : {};
+        Clear(this.backgroundChildren);
+        Clear(this.sizerChildren);
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;

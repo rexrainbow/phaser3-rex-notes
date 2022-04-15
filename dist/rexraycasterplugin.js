@@ -431,6 +431,10 @@
   var tempIntersect = new Phaser.Math.Vector3();
 
   var Clear = function Clear(obj) {
+    if (obj == null) {
+      return;
+    }
+
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {

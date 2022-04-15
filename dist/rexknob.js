@@ -7558,6 +7558,10 @@
   var RECOGNIZED$1 = 'RECOGNIZED';
 
   var Clear = function Clear(obj) {
+    if (obj == null) {
+      return;
+    }
+
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -8302,8 +8306,8 @@
 
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
 
-        this.backgroundChildren = undefined;
-        this.sizerChildren = Array.isArray(this.sizerChildren) ? [] : {};
+        Clear(this.backgroundChildren);
+        Clear(this.sizerChildren);
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;
@@ -9099,6 +9103,22 @@
         return this;
       }
     }, {
+      key: "fillColor",
+      get: function get() {
+        return this._fillColor;
+      },
+      set: function set(value) {
+        this.setFillStyle(value, this._fillAlpha);
+      }
+    }, {
+      key: "fillAlpha",
+      get: function get() {
+        return this._fillAlpha;
+      },
+      set: function set(value) {
+        this.setFillStyle(this._fillColor, value);
+      }
+    }, {
       key: "setFillStyle",
       value: function setFillStyle(color, alpha) {
         if (alpha === undefined) {
@@ -9106,9 +9126,33 @@
         }
 
         this.dirty = this.dirty || this.fillColor !== color || this.fillAlpha !== alpha;
-        this.fillColor = color;
-        this.fillAlpha = alpha;
+        this._fillColor = color;
+        this._fillAlpha = alpha;
         return this;
+      }
+    }, {
+      key: "lineWidth",
+      get: function get() {
+        return this._lineWidth;
+      },
+      set: function set(value) {
+        this.setStrokeStyle(value, this._strokeColor, this._strokeAlpha);
+      }
+    }, {
+      key: "strokeColor",
+      get: function get() {
+        return this._strokeColor;
+      },
+      set: function set(value) {
+        this.setStrokeStyle(this._lineWidth, value, this._strokeAlpha);
+      }
+    }, {
+      key: "strokeAlpha",
+      get: function get() {
+        return this._strokeAlpha;
+      },
+      set: function set(value) {
+        this.setStrokeStyle(this._lineWidth, this._strokeColor, value);
       }
     }, {
       key: "setStrokeStyle",
@@ -9118,9 +9162,9 @@
         }
 
         this.dirty = this.dirty || this.lineWidth !== lineWidth || this.strokeColor !== color || this.strokeAlpha !== alpha;
-        this.lineWidth = lineWidth;
-        this.strokeColor = color;
-        this.strokeAlpha = alpha;
+        this._lineWidth = lineWidth;
+        this._strokeColor = color;
+        this._strokeAlpha = alpha;
         return this;
       }
     }, {
@@ -9144,8 +9188,8 @@
           }
         }
 
-        this.dirty = false;
         this.isSizeChanged = false;
+        this.dirty = false;
         return this;
       }
     }, {

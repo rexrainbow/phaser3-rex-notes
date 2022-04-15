@@ -228,6 +228,10 @@
   };
 
   var Clear = function Clear(obj) {
+    if (obj == null) {
+      return;
+    }
+
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -332,6 +336,22 @@
         return this;
       }
     }, {
+      key: "fillColor",
+      get: function get() {
+        return this._fillColor;
+      },
+      set: function set(value) {
+        this.setFillStyle(value, this._fillAlpha);
+      }
+    }, {
+      key: "fillAlpha",
+      get: function get() {
+        return this._fillAlpha;
+      },
+      set: function set(value) {
+        this.setFillStyle(this._fillColor, value);
+      }
+    }, {
       key: "setFillStyle",
       value: function setFillStyle(color, alpha) {
         if (alpha === undefined) {
@@ -339,9 +359,33 @@
         }
 
         this.dirty = this.dirty || this.fillColor !== color || this.fillAlpha !== alpha;
-        this.fillColor = color;
-        this.fillAlpha = alpha;
+        this._fillColor = color;
+        this._fillAlpha = alpha;
         return this;
+      }
+    }, {
+      key: "lineWidth",
+      get: function get() {
+        return this._lineWidth;
+      },
+      set: function set(value) {
+        this.setStrokeStyle(value, this._strokeColor, this._strokeAlpha);
+      }
+    }, {
+      key: "strokeColor",
+      get: function get() {
+        return this._strokeColor;
+      },
+      set: function set(value) {
+        this.setStrokeStyle(this._lineWidth, value, this._strokeAlpha);
+      }
+    }, {
+      key: "strokeAlpha",
+      get: function get() {
+        return this._strokeAlpha;
+      },
+      set: function set(value) {
+        this.setStrokeStyle(this._lineWidth, this._strokeColor, value);
       }
     }, {
       key: "setStrokeStyle",
@@ -351,9 +395,9 @@
         }
 
         this.dirty = this.dirty || this.lineWidth !== lineWidth || this.strokeColor !== color || this.strokeAlpha !== alpha;
-        this.lineWidth = lineWidth;
-        this.strokeColor = color;
-        this.strokeAlpha = alpha;
+        this._lineWidth = lineWidth;
+        this._strokeColor = color;
+        this._strokeAlpha = alpha;
         return this;
       }
     }, {
@@ -377,8 +421,8 @@
           }
         }
 
-        this.dirty = false;
         this.isSizeChanged = false;
+        this.dirty = false;
         return this;
       }
     }, {
@@ -852,7 +896,8 @@
         return this._color;
       },
       set: function set(value) {
-        this.dirty = this.dirty || this._color !== value;
+        this.isColorChanged = this.isColorChanged || this._color !== value;
+        this.dirty = this.dirty || this.isColorChanged;
         this._color = value;
         this.setShapesColor(value);
       }
@@ -3241,7 +3286,7 @@
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var isSizeChanged = this.prevCenterX !== centerX || this.prevCenterY !== centerY;
+        var isSizeChanged = this.isSizeChanged;
         var leftBound = centerX - radius;
         var topBound = centerY - radius;
         var cellWidth = radius * 2 / ColNum;
@@ -3263,9 +3308,6 @@
             dot.setRadius(maxDotRadius).setCenterPosition(x, y);
           }
         }
-
-        this.prevCenterX = centerX;
-        this.prevCenterY = centerY;
       }
     }]);
 
@@ -3308,7 +3350,7 @@
       value: function updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
-        var isSizeChanged = this.prevCenterX !== centerX || this.prevCenterY !== centerY;
+        var isSizeChanged = this.isSizeChanged;
         var radius = this.radius;
         var startRadius = radius / 2;
         var lineWidth = Math.ceil(radius / 20);
@@ -3325,9 +3367,6 @@
             line.setP0(centerX + Math.cos(angle) * startRadius, centerY + Math.sin(angle) * startRadius).setP1(centerX + Math.cos(angle) * radius, centerY + Math.sin(angle) * radius);
           }
         }
-
-        this.prevCenterX = centerX;
-        this.prevCenterY = centerY;
       }
     }]);
 
@@ -3581,7 +3620,7 @@
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var isSizeChanged = this.prevCenterX !== centerX || this.prevCenterY !== centerY;
+        var isSizeChanged = this.isSizeChanged;
         var centerRadius = radius * 2 / 6;
         var x = centerX - radius + centerRadius;
         var y = centerY + radius - centerRadius;
@@ -3625,9 +3664,6 @@
               break;
           }
         }
-
-        this.prevCenterX = centerX;
-        this.prevCenterY = centerY;
       }
     }]);
 

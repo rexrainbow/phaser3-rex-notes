@@ -141,6 +141,10 @@
   }
 
   var Clear = function Clear(obj) {
+    if (obj == null) {
+      return;
+    }
+
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {

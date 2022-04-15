@@ -7558,6 +7558,10 @@
   var RECOGNIZED$1 = 'RECOGNIZED';
 
   var Clear = function Clear(obj) {
+    if (obj == null) {
+      return;
+    }
+
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -8302,8 +8306,8 @@
 
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
 
-        this.backgroundChildren = undefined;
-        this.sizerChildren = Array.isArray(this.sizerChildren) ? [] : {};
+        Clear(this.backgroundChildren);
+        Clear(this.sizerChildren);
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;

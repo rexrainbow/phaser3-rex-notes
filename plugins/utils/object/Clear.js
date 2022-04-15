@@ -1,4 +1,8 @@
 var Clear = function (obj) {
+    if (obj == null) {
+        return;
+    }
+
     if (Array.isArray(obj)) {
         obj.length = 0;
     } else {
@@ -7,4 +11,5 @@ var Clear = function (obj) {
         }
     }
 }
+
 export default Clear;

@@ -5002,6 +5002,10 @@
   }, _defineProperty(_getChessData$getChes, "getGridPoints", GetGridPoints$2), _defineProperty(_getChessData$getChes, "chessToBoard", GetBoard), _getChessData$getChes);
 
   var Clear = function Clear(obj) {
+    if (obj == null) {
+      return;
+    }
+
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
