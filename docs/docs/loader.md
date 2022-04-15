@@ -27,7 +27,7 @@ scene.load.start();                     // start loading
 ### Set path
 
 ```javascript
-scene.loader.setPath(path)
+scene.load.setPath(path)
 ```
 
 ### Events
