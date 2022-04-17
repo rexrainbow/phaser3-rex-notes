@@ -24,6 +24,11 @@ class BitmapText extends Blitter {
         this._text = '';
         this.penManager = new PenManager(this, config);
 
+        this.setFixedSize(GetValue(config, 'fixedWidth', 0), GetValue(config, 'fixedHeight', 0));
+        this.setPadding(GetValue(config, 'padding', 0));
+        this.setLetterSpacing(GetValue(config, 'letterSpacing', 0));
+
+
         this.setFont(font);
 
         this.setText(text);

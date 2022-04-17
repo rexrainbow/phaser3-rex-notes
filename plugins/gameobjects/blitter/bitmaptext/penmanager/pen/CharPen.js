@@ -8,7 +8,7 @@ class CharPen extends ImagePen {
 
     setChar(char) {
         this.char = char;
-        var fontData = this.blitter.fontData;
+        var fontData = this.bitmapText.fontData;
         if (!fontData) {
             return this;
         }

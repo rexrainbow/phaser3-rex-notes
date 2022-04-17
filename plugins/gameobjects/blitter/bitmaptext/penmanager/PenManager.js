@@ -7,8 +7,8 @@ var PensPool = new Pool(); // default pens pool
 var LinesPool = new Pool(); // default lines pool
 
 class PenManager {
-    constructor(parent, config) {
-        this.parent = parent;  // Blitter
+    constructor(bitmapText, config) {
+        this.bitmapText = bitmapText;
         this.pens = [];
         this.lines = []; // pens in lines [ [],[],[],.. ]
         this.maxLinesWidth = undefined;

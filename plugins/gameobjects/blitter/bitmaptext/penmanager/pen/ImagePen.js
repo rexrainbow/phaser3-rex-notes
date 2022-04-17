@@ -36,7 +36,7 @@ class ImagePen extends Base {
     }
 
     addImage(key, depth) {
-        var bob = AddImage(this.blitter, this.frame)
+        var bob = AddImage(this.bitmapText, this.frame)
             .setPosition(this.x, this.y)
             .setDepth(depth);
 

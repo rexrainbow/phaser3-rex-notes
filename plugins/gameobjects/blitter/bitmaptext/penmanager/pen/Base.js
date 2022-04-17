@@ -13,9 +13,9 @@ class Base {
         return this;
     }
 
-    get blitter() {
+    get bitmapText() {
         if (this.parent) {
-            return this.parent.parent;
+            return this.parent.bitmapText;
         } else {
             return undefined;
         }
