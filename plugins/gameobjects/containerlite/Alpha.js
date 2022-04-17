@@ -3,9 +3,11 @@ import GetScale from './utils/GetScale.js';
 
 export default {
     updateChildAlpha(child) {
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
-        child.alpha = parent.alpha * localState.alpha;
+        var state = GetLocalState(child);
+        var parent = state.parent;
+        if (state.syncAlpha) {
+            child.alpha = parent.alpha * state.alpha;
+        }
         return this;
     },
 
@@ -17,9 +19,9 @@ export default {
     },
 
     resetChildAlphaState(child) {
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
-        localState.alpha = GetScale(child.alpha, parent.alpha);
+        var state = GetLocalState(child);
+        var parent = state.parent;
+        state.alpha = GetScale(child.alpha, parent.alpha);
         return this;
     },
 
@@ -30,8 +32,8 @@ export default {
     },
 
     setChildLocalAlpha(child, alpha) {
-        var localState = GetLocalState(child);
-        localState.alpha = alpha;
+        var state = GetLocalState(child);
+        state.alpha = alpha;
         this.updateChildAlpha(child);
         return this;
     },

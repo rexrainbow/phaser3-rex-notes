@@ -151,7 +151,9 @@ Add(pin) a game obejct to container
 ```javascript
 container.add(child, {
     // syncPosition: true,
-    // syncRotation: true
+    // syncRotation: true,
+    // syncScale : true,
+    // syncAlpha: true,
 });  // child: a game object
 // container.pin(child, config);
 ```
@@ -162,6 +164,12 @@ container.add(child, {
 - `syncRotation` : 
     - `true` : Sync angle of child, default behavior.
     - `false` : Don't sync angle of child.
+- `syncScale` : 
+    - `true` : Sync scale of child, default behavior.
+    - `false` : Don't sync angle of child.    
+- `syncAlpha` : 
+    - `true` : Sync alpha of child, default behavior.
+    - `false` : Don't sync alpha of child. 
 
 
 Or add(pin) children

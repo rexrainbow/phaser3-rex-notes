@@ -2,9 +2,11 @@ import GetLocalState from './utils/GetLocalState.js';
 
 export default {
     updateChildRotation(child) {
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
-        child.rotation = parent.rotation + localState.rotation;
+        var state = GetLocalState(child);
+        var parent = state.parent;
+        if (state.syncRotation) {
+            child.rotation = parent.rotation + state.rotation;
+        }
         return this;
     },
 
@@ -16,9 +18,9 @@ export default {
     },
 
     resetChildRotationState(child) {
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
-        localState.rotation = child.rotation - parent.rotation;
+        var state = GetLocalState(child);
+        var parent = state.parent;
+        state.rotation = child.rotation - parent.rotation;
         return this;
     },
 
@@ -35,8 +37,8 @@ export default {
     },
 
     setChildLocalRotation(child, rotation) {
-        var localState = GetLocalState(child);
-        localState.rotation = rotation;
+        var state = GetLocalState(child);
+        state.rotation = rotation;
         this.updateChildRotation(child);
         return this;
     },

@@ -3,10 +3,12 @@ import GetScale from './utils/GetScale.js';
 
 export default {
     updateChildScale(child) {
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
-        child.scaleX = parent.scaleX * localState.scaleX;
-        child.scaleY = parent.scaleY * localState.scaleY;
+        var state = GetLocalState(child);
+        var parent = state.parent;
+        if (state.syncScale) {
+            child.scaleX = parent.scaleX * state.scaleX;
+            child.scaleY = parent.scaleY * state.scaleY;
+        }
         return this;
     },
 
@@ -18,10 +20,10 @@ export default {
     },
 
     resetChildScaleState(child) {
-        var localState = GetLocalState(child);
-        var parent = localState.parent;
-        localState.scaleX = GetScale(child.scaleX, parent.scaleX);
-        localState.scaleY = GetScale(child.scaleY, parent.scaleY);
+        var state = GetLocalState(child);
+        var parent = state.parent;
+        state.scaleX = GetScale(child.scaleX, parent.scaleX);
+        state.scaleY = GetScale(child.scaleY, parent.scaleY);
         return this;
     },
 
@@ -39,9 +41,9 @@ export default {
         if (scaleY === undefined) {
             scaleY = scaleX;
         }
-        var localState = GetLocalState(child);
-        localState.scaleX = scaleX;
-        localState.scaleY = scaleY;
+        var state = GetLocalState(child);
+        state.scaleX = scaleX;
+        state.scaleY = scaleY;
         this.updateChildScale(child);
         return this;
     },

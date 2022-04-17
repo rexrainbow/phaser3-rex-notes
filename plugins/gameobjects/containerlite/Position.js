@@ -19,8 +19,10 @@ export default {
             child.rotation = state.rotation + parent.rotation;
         }
 
-        child.scaleX = state.scaleX * parent.scaleX;
-        child.scaleY = state.scaleY * parent.scaleY;
+        if (state.syncScale) {
+            child.scaleX = state.scaleX * parent.scaleX;
+            child.scaleY = state.scaleY * parent.scaleY;
+        }
 
         if (child.isRexContainerLite) {
             child.syncChildrenEnable = true;

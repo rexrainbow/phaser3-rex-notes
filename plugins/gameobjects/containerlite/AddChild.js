@@ -8,8 +8,7 @@ var Add = function (gameObject, config) {
     this.setParent(gameObject);
 
     var state = GetLocalState(gameObject);
-    state.syncPosition = GetValue(config, 'syncPosition', true);
-    state.syncRotation = GetValue(config, 'syncRotation', true);
+    SetupSyncFlags(state, config);
 
     this
         .resetChildState(gameObject)           // Reset local state of child
@@ -27,8 +26,7 @@ var AddLocal = function (gameObject) {
 
     // Set local state from child directly
     var state = GetLocalState(gameObject);
-    state.syncPosition = GetValue(config, 'syncPosition', true);
-    state.syncRotation = GetValue(config, 'syncRotation', true);
+    SetupSyncFlags(state, config);
     // Position
     state.x = gameObject.x;
     state.y = gameObject.y;
@@ -52,6 +50,13 @@ var AddLocal = function (gameObject) {
 
     BaseAdd.call(this, gameObject);
     return this;
+}
+
+var SetupSyncFlags = function (state, config) {
+    state.syncPosition = GetValue(config, 'syncPosition', true);
+    state.syncRotation = GetValue(config, 'syncRotation', true);
+    state.syncScale = GetValue(config, 'syncScale', true);
+    state.syncAlpha = GetValue(config, 'syncAlpha', true);
 }
 
 export default {

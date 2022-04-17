@@ -7,8 +7,8 @@ var GetLocalState = function (gameObject) {
             parent: null, self: null,
             x: 0, y: 0, syncPosition: true,
             rotation: 0, syncRotation: true,
-            scaleX: 0, scaleY: 0,
-            alpha: 0,
+            scaleX: 0, scaleY: 0, syncScale: true,
+            alpha: 0, syncAlpha: true,
             visible: true,
             active: true,
         };

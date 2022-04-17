@@ -8560,7 +8560,9 @@
 <p>Add(pin) a game obejct to container</p>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// syncPosition: true,</span>
-    <span class="c1">// syncRotation: true</span>
+    <span class="c1">// syncRotation: true,</span>
+    <span class="c1">// syncScale : true,</span>
+    <span class="c1">// syncAlpha: true,</span>
 <span class="p">});</span>  <span class="c1">// child: a game object</span>
 <span class="c1">// container.pin(child, config);</span>
 </code></pre></div>
@@ -8573,6 +8575,16 @@
 <li><code>syncRotation</code> : <ul>
 <li><code>true</code> : Sync angle of child, default behavior.</li>
 <li><code>false</code> : Don't sync angle of child.</li>
+</ul>
+</li>
+<li><code>syncScale</code> : <ul>
+<li><code>true</code> : Sync scale of child, default behavior.</li>
+<li><code>false</code> : Don't sync angle of child.    </li>
+</ul>
+</li>
+<li><code>syncAlpha</code> : <ul>
+<li><code>true</code> : Sync alpha of child, default behavior.</li>
+<li><code>false</code> : Don't sync alpha of child. </li>
 </ul>
 </li>
 </ul>
