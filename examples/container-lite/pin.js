@@ -13,7 +13,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        ;
         this.containerLite = this.add.rexContainerLite(100, 300, 100, 100)
             .add(
                 this.add.rexContainerLite(50, 200)

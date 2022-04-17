@@ -8558,12 +8558,27 @@
 <h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
 <h4 id="pin">Pin<a class="headerlink" href="#pin" title="Permanent link">&para;</a></h4>
 <p>Add(pin) a game obejct to container</p>
-<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object</span>
-<span class="c1">// container.pin(child);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// syncPosition: true,</span>
+    <span class="c1">// syncRotation: true</span>
+<span class="p">});</span>  <span class="c1">// child: a game object</span>
+<span class="c1">// container.pin(child, config);</span>
 </code></pre></div>
+<ul>
+<li><code>syncPosition</code> : <ul>
+<li><code>true</code> : Sync position of child, default behavior.</li>
+<li><code>false</code> : Don't sync position of child.</li>
+</ul>
+</li>
+<li><code>syncRotation</code> : <ul>
+<li><code>true</code> : Sync angle of child, default behavior.</li>
+<li><code>false</code> : Don't sync angle of child.</li>
+</ul>
+</li>
+</ul>
 <p>Or add(pin) children</p>
-<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">children</span><span class="p">);</span>  <span class="c1">// children: an array of game objects</span>
-<span class="c1">// container.add(children);  // children: an array of game objects</span>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">children</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>  <span class="c1">// children: an array of game objects</span>
+<span class="c1">// container.add(children, config);  // children: an array of game objects</span>
 </code></pre></div>
 <p>These world properties of children will be changed with container.</p>
 <ul>
