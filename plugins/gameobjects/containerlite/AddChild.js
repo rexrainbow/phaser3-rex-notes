@@ -1,10 +1,16 @@
 import Base from './Base.js';
 import GetLocalState from './utils/GetLocalState.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 const BaseAdd = Base.prototype.add;
 
-var Add = function (gameObject) {
+var Add = function (gameObject, config) {
     this.setParent(gameObject);
+
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue(config, 'syncPosition', true);
+    state.syncRotation = GetValue(config, 'syncRotation', true);
+
     this
         .resetChildState(gameObject)           // Reset local state of child
         .updateChildVisible(gameObject)        // Apply parent's visible to child
@@ -21,6 +27,8 @@ var AddLocal = function (gameObject) {
 
     // Set local state from child directly
     var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue(config, 'syncPosition', true);
+    state.syncRotation = GetValue(config, 'syncRotation', true);
     // Position
     state.x = gameObject.x;
     state.y = gameObject.y;
@@ -48,44 +56,44 @@ var AddLocal = function (gameObject) {
 
 export default {
     // Can override this method
-    add(gameObject) {
+    add(gameObject, config) {
         if (Array.isArray(gameObject)) {
             this.addMultiple(gameObject);
         } else {
-            Add.call(this, gameObject);
+            Add.call(this, gameObject, config);
         }
         return this;
     },
 
     // Don't override this method
-    pin(gameObject) {
+    pin(gameObject, config) {
         if (Array.isArray(gameObject)) {
-            this.addMultiple(gameObject);
+            this.addMultiple(gameObject, config);
         } else {
-            Add.call(this, gameObject);
+            Add.call(this, gameObject, config);
         }
         return this;
     },
 
-    addMultiple(gameObjects) {
+    addMultiple(gameObjects, config) {
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            Add.call(this, gameObjects[i]);
+            Add.call(this, gameObjects[i], config);
         }
         return this;
     },
 
-    addLocal(gameObject) {
+    addLocal(gameObject, config) {
         if (Array.isArray(gameObject)) {
-            this.addMultiple(gameObject);
+            this.addMultiple(gameObject, config);
         } else {
-            AddLocal.call(this, gameObject);
+            AddLocal.call(this, gameObject, config);
         }
         return this;
     },
 
-    addLocalMultiple(gameObjects) {
+    addLocalMultiple(gameObjects, config) {
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            AddLocal.call(this, gameObjects[i]);
+            AddLocal.call(this, gameObjects[i], config);
         }
         return this;
     }

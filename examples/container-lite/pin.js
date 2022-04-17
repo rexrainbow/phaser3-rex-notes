@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         this.containerLite = this.add.rexContainerLite(100, 300, 100, 100)
             .add(
                 this.add.rexContainerLite(50, 200)
-                    .add(this.add.image(100, 200, 'mushroom'))
+                    .add(this.add.image(100, 200, 'mushroom'), { syncRotation: false })
             )
             .add(
                 this.add.rexContainerLite(150, 300)

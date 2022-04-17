@@ -5,8 +5,8 @@ var GetLocalState = function (gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
         var rexContainer = {
             parent: null, self: null,
-            x: 0, y: 0,
-            rotation: 0,
+            x: 0, y: 0, syncPosition: true,
+            rotation: 0, syncRotation: true,
             scaleX: 0, scaleY: 0,
             alpha: 0,
             visible: true,

@@ -667,7 +667,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$7 = function GetValue(source, key, defaultValue) {
+  var GetValue$8 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -699,10 +699,10 @@
     function Bank(config) {
       _classCallCheck(this, Bank);
 
-      this.nextId = GetValue$7(config, 'start', 1); // start index
+      this.nextId = GetValue$8(config, 'start', 1); // start index
 
-      this.uidKey = GetValue$7(config, 'uidKey', '$uid');
-      this.autoRemove = GetValue$7(config, 'remove', true);
+      this.uidKey = GetValue$8(config, 'uidKey', '$uid');
+      this.autoRemove = GetValue$8(config, 'remove', true);
       this.refs = {};
       this.count = 0;
     }
@@ -934,7 +934,7 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -945,7 +945,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$7(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -4626,9 +4626,9 @@
       if (isNumberDirection) {
         // directions is a number, distance is an object or list
         if (IsPlainObject(distance)) {
-          var endIdx = GetValue$7(distance, 'end', 1);
-          var startIdx = GetValue$7(distance, 'start', endIdx > 0 ? 1 : -1);
-          var step = GetValue$7(distance, 'step', endIdx >= startIdx ? 1 : -1);
+          var endIdx = GetValue$8(distance, 'end', 1);
+          var startIdx = GetValue$8(distance, 'start', endIdx > 0 ? 1 : -1);
+          var step = GetValue$8(distance, 'step', endIdx >= startIdx ? 1 : -1);
 
           if (startIdx === endIdx) {
             resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, endIdx); // return a single tileXY
@@ -5334,10 +5334,10 @@
     _createClass(Quad, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setType(GetValue$7(o, 'type', 0));
-        this.setDirectionMode(GetValue$7(o, 'dir', 4));
-        this.setOriginPosition(GetValue$7(o, 'x', 0), GetValue$7(o, 'y', 0));
-        this.setCellSize(GetValue$7(o, 'cellWidth', 0), GetValue$7(o, 'cellHeight', 0));
+        this.setType(GetValue$8(o, 'type', 0));
+        this.setDirectionMode(GetValue$8(o, 'dir', 4));
+        this.setOriginPosition(GetValue$8(o, 'x', 0), GetValue$8(o, 'y', 0));
+        this.setCellSize(GetValue$8(o, 'cellWidth', 0), GetValue$8(o, 'cellHeight', 0));
       }
     }, {
       key: "setType",
@@ -6187,15 +6187,15 @@
     _createClass(Hexagon, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setType(GetValue$7(o, 'staggeraxis', 1), GetValue$7(o, 'staggerindex', 1));
+        this.setType(GetValue$8(o, 'staggeraxis', 1), GetValue$8(o, 'staggerindex', 1));
         this.setDirectionMode();
-        this.setOriginPosition(GetValue$7(o, 'x', 0), GetValue$7(o, 'y', 0));
-        var size = GetValue$7(o, 'size', undefined);
+        this.setOriginPosition(GetValue$8(o, 'x', 0), GetValue$8(o, 'y', 0));
+        var size = GetValue$8(o, 'size', undefined);
 
         if (size !== undefined) {
           this.setCellRadius(size);
         } else {
-          this.setCellSize(GetValue$7(o, 'cellWidth', 0), GetValue$7(o, 'cellHeight', 0));
+          this.setCellSize(GetValue$8(o, 'cellWidth', 0), GetValue$8(o, 'cellHeight', 0));
         }
       }
     }, {
@@ -6940,13 +6940,13 @@
     _createClass(Board, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isBoard = GetValue$7(o, 'isBoard', true); // false: in Miniboard
+        this.isBoard = GetValue$8(o, 'isBoard', true); // false: in Miniboard
 
-        this.setGrid(GetValue$7(o, 'grid', undefined));
-        this.setWrapMode(GetValue$7(o, 'wrap', false));
-        this.setInfinityMode(GetValue$7(o, 'infinity', false));
-        this.setBoardWidth(GetValue$7(o, 'width', 0));
-        this.setBoardHeight(GetValue$7(o, 'height', 0));
+        this.setGrid(GetValue$8(o, 'grid', undefined));
+        this.setWrapMode(GetValue$8(o, 'wrap', false));
+        this.setInfinityMode(GetValue$8(o, 'infinity', false));
+        this.setBoardWidth(GetValue$8(o, 'width', 0));
+        this.setBoardHeight(GetValue$8(o, 'height', 0));
         return this;
       }
     }, {
@@ -6994,7 +6994,7 @@
       value: function setGrid(grid) {
         if (IsPlainObject(grid)) {
           var config = grid;
-          var gridType = GetValue$7(config, 'gridType', 'quadGrid');
+          var gridType = GetValue$8(config, 'gridType', 'quadGrid');
           var grid = new DefaultGrids[gridType](config);
         }
 
@@ -7297,7 +7297,7 @@
     EmitChessEvent(boardEventCallback, chessEventCallback, board, tileX, tileY, pointer);
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -7314,7 +7314,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$6(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -7439,7 +7439,7 @@
     'always': 2
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
     _inherits(OnePointerTracer, _TickTask);
@@ -7461,7 +7461,7 @@
       _this.gameObject = gameObject;
 
       if (gameObject) {
-        gameObject.setInteractive(GetValue$4(config, "inputConfig", undefined));
+        gameObject.setInteractive(GetValue$5(config, "inputConfig", undefined));
       }
 
       _this._enable = undefined;
@@ -7476,11 +7476,11 @@
     _createClass(OnePointerTracer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$4(o, 'enable', true));
+        this.setEnable(GetValue$5(o, 'enable', true));
         this.setDetectBounds();
 
         if (this.gameObject === undefined) {
-          this.setDetectBounds(GetValue$4(o, 'bounds', undefined));
+          this.setDetectBounds(GetValue$5(o, 'bounds', undefined));
         } else {
           this.setDetectBounds();
         }
@@ -7758,14 +7758,14 @@
       _classCallCheck(this, FSM);
 
       // Attach get-next-state function
-      var states = GetValue$7(config, 'states', undefined);
+      var states = GetValue$8(config, 'states', undefined);
 
       if (states) {
         this.addStates(states);
       } // Attach extend members
 
 
-      var extend = GetValue$7(config, 'extend', undefined);
+      var extend = GetValue$8(config, 'extend', undefined);
 
       if (extend) {
         for (var name in extend) {
@@ -7776,8 +7776,8 @@
       } // Event emitter
 
 
-      var eventEmitter = GetValue$7(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$7(config, 'EventEmitterClass', undefined);
+      var eventEmitter = GetValue$8(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$8(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
@@ -7796,9 +7796,9 @@
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$7(o, 'enable', true));
-        this.start(GetValue$7(o, 'start', undefined));
-        var init = GetValue$7(o, 'init', undefined);
+        this.setEnable(GetValue$8(o, 'enable', true));
+        this.start(GetValue$8(o, 'start', undefined));
+        var init = GetValue$8(o, 'init', undefined);
 
         if (init) {
           init.call(this);
@@ -8021,7 +8021,7 @@
 
   Object.assign(FSM.prototype, EventEmitterMethods);
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var DistanceBetween$2 = Phaser.Math.Distance.Between;
 
   var Tap = /*#__PURE__*/function (_OnePointerTracer) {
@@ -8088,18 +8088,18 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Tap.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setHoldTime(GetValue$3(o, 'time', 250)); // min-hold-time of Press is 251
+        this.setHoldTime(GetValue$4(o, 'time', 250)); // min-hold-time of Press is 251
 
-        this.setTapInterval(GetValue$3(o, 'tapInterval', 200));
-        this.setDragThreshold(GetValue$3(o, 'threshold', 9));
-        this.setTapOffset(GetValue$3(o, 'tapOffset', 10));
-        var taps = GetValue$3(o, 'taps', undefined);
+        this.setTapInterval(GetValue$4(o, 'tapInterval', 200));
+        this.setDragThreshold(GetValue$4(o, 'threshold', 9));
+        this.setTapOffset(GetValue$4(o, 'tapOffset', 10));
+        var taps = GetValue$4(o, 'taps', undefined);
 
         if (taps !== undefined) {
           this.setTaps(taps);
         } else {
-          this.setMaxTaps(GetValue$3(o, 'maxTaps', undefined));
-          this.setMinTaps(GetValue$3(o, 'minTaps', undefined));
+          this.setMaxTaps(GetValue$4(o, 'maxTaps', undefined));
+          this.setMinTaps(GetValue$4(o, 'minTaps', undefined));
         }
 
         return this;
@@ -8293,7 +8293,7 @@
     EmitChessEvent(boardEventCallback, chessEventCallback, board, tileX, tileY, tap);
   };
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var Press = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Press, _OnePointerTracer);
@@ -8359,8 +8359,8 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Press.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setDragThreshold(GetValue$2(o, 'threshold', 9));
-        this.setHoldTime(GetValue$2(o, 'time', 251));
+        this.setDragThreshold(GetValue$3(o, 'threshold', 9));
+        this.setHoldTime(GetValue$3(o, 'time', 251));
         return this;
       }
     }, {
@@ -8591,7 +8591,7 @@
 
   var globOut = {};
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var RadToDeg$1 = Phaser.Math.RadToDeg;
 
   var Swipe = /*#__PURE__*/function (_OnePointerTracer) {
@@ -8660,9 +8660,9 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Swipe.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setDragThreshold(GetValue$1(o, 'threshold', 10));
-        this.setVelocityThreshold(GetValue$1(o, 'velocityThreshold', 1000));
-        this.setDirectionMode(GetValue$1(o, 'dir', '8dir'));
+        this.setDragThreshold(GetValue$2(o, 'threshold', 10));
+        this.setVelocityThreshold(GetValue$2(o, 'velocityThreshold', 1000));
+        this.setDirectionMode(GetValue$2(o, 'dir', '8dir'));
         return this;
       }
     }, {
@@ -8804,8 +8804,8 @@
     function Input(board, config) {
       _classCallCheck(this, Input);
 
-      var enable = GetValue$7(config, 'enable', true);
-      var useTouchZone = GetValue$7(config, 'useTouchZone', true);
+      var enable = GetValue$8(config, 'enable', true);
+      var useTouchZone = GetValue$8(config, 'useTouchZone', true);
       var scene = board.scene;
       this.board = board;
       this.touchZone = undefined;
@@ -9263,9 +9263,9 @@
 
     if (tileX != null && typeof tileX !== 'number') {
       var config = tileX;
-      tileX = GetValue$7(config, 'x', undefined);
-      tileY = GetValue$7(config, 'y', undefined);
-      direction = GetValue$7(config, 'direction', undefined);
+      tileX = GetValue$8(config, 'x', undefined);
+      tileY = GetValue$8(config, 'y', undefined);
+      direction = GetValue$8(config, 'direction', undefined);
     }
 
     var myTileXYZ = this.chessData.tileXYZ;
@@ -9615,7 +9615,7 @@
     moveCloser: MoveCloser
   };
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Lerp = Phaser.Math.Linear;
   var AngleBetween = Phaser.Math.Angle.Between;
@@ -9642,13 +9642,13 @@
     _createClass(MoveTo, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue(o, 'isRunning', false);
-        this.setEnable(GetValue(o, 'enable', true));
-        this.timeScale = GetValue(o, 'timeScale', 1);
-        this.setSpeed(GetValue(o, 'speed', 400));
-        this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
-        this.targetX = GetValue(o, 'targetX', 0);
-        this.targetY = GetValue(o, 'targetY', 0);
+        this.isRunning = GetValue$1(o, 'isRunning', false);
+        this.setEnable(GetValue$1(o, 'enable', true));
+        this.timeScale = GetValue$1(o, 'timeScale', 1);
+        this.setSpeed(GetValue$1(o, 'speed', 400));
+        this.setRotateToTarget(GetValue$1(o, 'rotateToTarget', false));
+        this.targetX = GetValue$1(o, 'targetX', 0);
+        this.targetY = GetValue$1(o, 'targetY', 0);
         return this;
       }
     }, {
@@ -9810,20 +9810,20 @@
     _createClass(MoveTo, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue$7(o, 'isRunning', false);
-        this.setEnable(GetValue$7(o, 'enable', true));
-        this.timeScale = GetValue$7(o, 'timeScale', 1);
-        this.setSpeed(GetValue$7(o, 'speed', 400));
-        this.setRotateToTarget(GetValue$7(o, 'rotateToTarget', false));
-        this.setOccupiedTest(GetValue$7(o, 'occupiedTest', false));
-        this.setBlockerTest(GetValue$7(o, 'blockerTest', false));
-        this.setEdgeBlockerTest(GetValue$7(o, 'edgeBlockerTest', false));
-        this.setMoveableTestCallback(GetValue$7(o, 'moveableTest', undefined), GetValue$7(o, 'moveableTestScope', undefined));
-        this.setSneakEnable(GetValue$7(o, 'sneak', false));
-        this.destinationTileX = GetValue$7(o, 'destinationTileX', null);
-        this.destinationTileY = GetValue$7(o, 'destinationTileY', null);
-        this.destinationDirection = GetValue$7(o, 'destinationDirection', null);
-        this.lastMoveResult = GetValue$7(o, 'lastMoveResult', undefined);
+        this.isRunning = GetValue$8(o, 'isRunning', false);
+        this.setEnable(GetValue$8(o, 'enable', true));
+        this.timeScale = GetValue$8(o, 'timeScale', 1);
+        this.setSpeed(GetValue$8(o, 'speed', 400));
+        this.setRotateToTarget(GetValue$8(o, 'rotateToTarget', false));
+        this.setOccupiedTest(GetValue$8(o, 'occupiedTest', false));
+        this.setBlockerTest(GetValue$8(o, 'blockerTest', false));
+        this.setEdgeBlockerTest(GetValue$8(o, 'edgeBlockerTest', false));
+        this.setMoveableTestCallback(GetValue$8(o, 'moveableTest', undefined), GetValue$8(o, 'moveableTestScope', undefined));
+        this.setSneakEnable(GetValue$8(o, 'sneak', false));
+        this.destinationTileX = GetValue$8(o, 'destinationTileX', null);
+        this.destinationTileY = GetValue$8(o, 'destinationTileY', null);
+        this.destinationDirection = GetValue$8(o, 'destinationDirection', null);
+        this.lastMoveResult = GetValue$8(o, 'lastMoveResult', undefined);
         return this;
       }
     }, {
@@ -10097,9 +10097,9 @@
 
     if (tileX != null && typeof tileX !== 'number') {
       var config = tileX;
-      tileX = GetValue$7(config, 'x', undefined);
-      tileY = GetValue$7(config, 'y', undefined);
-      direction = GetValue$7(config, 'direction', undefined);
+      tileX = GetValue$8(config, 'x', undefined);
+      tileY = GetValue$8(config, 'y', undefined);
+      direction = GetValue$8(config, 'direction', undefined);
     }
 
     myTileXY.x = miniBoard.tileX;
@@ -10211,14 +10211,14 @@
     _createClass(MoveTo, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue$7(o, 'isRunning', false);
-        this.setEnable(GetValue$7(o, 'enable', true));
-        this.timeScale = GetValue$7(o, 'timeScale', 1);
-        this.setSpeed(GetValue$7(o, 'speed', 400));
-        this.destinationTileX = GetValue$7(o, 'destinationTileX', null);
-        this.destinationTileY = GetValue$7(o, 'destinationTileY', null);
-        this.destinationDirection = GetValue$7(o, 'destinationDirection', null);
-        this.lastMoveResult = GetValue$7(o, 'lastMoveResult', undefined);
+        this.isRunning = GetValue$8(o, 'isRunning', false);
+        this.setEnable(GetValue$8(o, 'enable', true));
+        this.timeScale = GetValue$8(o, 'timeScale', 1);
+        this.setSpeed(GetValue$8(o, 'speed', 400));
+        this.destinationTileX = GetValue$8(o, 'destinationTileX', null);
+        this.destinationTileY = GetValue$8(o, 'destinationTileY', null);
+        this.destinationDirection = GetValue$8(o, 'destinationDirection', null);
+        this.lastMoveResult = GetValue$8(o, 'lastMoveResult', undefined);
         return this;
       }
     }, {
@@ -10585,9 +10585,9 @@
     _createClass(Match, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setBoard(GetValue$7(o, 'board', undefined));
-        this.setWildcard(GetValue$7(o, 'wildcard', undefined));
-        var dirMask = GetValue$7(o, 'dirMask', undefined);
+        this.setBoard(GetValue$8(o, 'board', undefined));
+        this.setWildcard(GetValue$8(o, 'wildcard', undefined));
+        var dirMask = GetValue$8(o, 'dirMask', undefined);
 
         if (dirMask !== undefined) {
           this.setDirMask(dirMask);
@@ -11660,21 +11660,21 @@
     _createClass(PathFinder, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var costCallback = GetValue$7(o, 'costCallback', undefined);
-        var costCallbackScope = GetValue$7(o, 'costCallbackScope', undefined);
+        var costCallback = GetValue$8(o, 'costCallback', undefined);
+        var costCallbackScope = GetValue$8(o, 'costCallbackScope', undefined);
 
         if (costCallback === undefined) {
-          costCallback = GetValue$7(o, 'cost', 1);
+          costCallback = GetValue$8(o, 'cost', 1);
         }
 
-        this.setOccupiedTest(GetValue$7(o, 'occupiedTest', false));
-        this.setBlockerTest(GetValue$7(o, 'blockerTest', false));
-        this.setEdgeBlockerTest(GetValue$7(o, 'edgeBlockerTest', false));
+        this.setOccupiedTest(GetValue$8(o, 'occupiedTest', false));
+        this.setBlockerTest(GetValue$8(o, 'blockerTest', false));
+        this.setEdgeBlockerTest(GetValue$8(o, 'edgeBlockerTest', false));
         this.setCostFunction(costCallback, costCallbackScope);
-        this.setPathMode(GetValue$7(o, 'pathMode', 0));
-        this.setCacheCostMode(GetValue$7(o, 'cacheCost', true));
-        this.setWeight(GetValue$7(o, 'weight', 10));
-        this.setShuffleNeighborsMode(GetValue$7(o, 'shuffleNeighbors', false));
+        this.setPathMode(GetValue$8(o, 'pathMode', 0));
+        this.setCacheCostMode(GetValue$8(o, 'cacheCost', true));
+        this.setWeight(GetValue$8(o, 'weight', 10));
+        this.setShuffleNeighborsMode(GetValue$8(o, 'shuffleNeighbors', false));
         return this;
       }
     }, {
@@ -12176,31 +12176,31 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         // Pre-test
-        var occupiedTest = GetValue$7(o, 'occupiedTest', false);
-        var blockerTest = GetValue$7(o, 'blockerTest', false);
-        var edgeBlockerTest = GetValue$7(o, 'edgeBlockerTest', false); // Unsupport now
+        var occupiedTest = GetValue$8(o, 'occupiedTest', false);
+        var blockerTest = GetValue$8(o, 'blockerTest', false);
+        var edgeBlockerTest = GetValue$8(o, 'edgeBlockerTest', false); // Unsupport now
 
-        var preTestCallback = GetValue$7(o, 'preTestCallback', undefined);
-        var preTestCallbackScope = GetValue$7(o, 'preTestCallbackScope', undefined); // Cost of each tile
+        var preTestCallback = GetValue$8(o, 'preTestCallback', undefined);
+        var preTestCallbackScope = GetValue$8(o, 'preTestCallbackScope', undefined); // Cost of each tile
 
-        var costCallback = GetValue$7(o, 'costCallback', undefined);
-        var costCallbackScope = GetValue$7(o, 'costCallbackScope', undefined);
+        var costCallback = GetValue$8(o, 'costCallback', undefined);
+        var costCallbackScope = GetValue$8(o, 'costCallbackScope', undefined);
 
         if (costCallback === undefined) {
-          costCallback = GetValue$7(o, 'cost', undefined);
+          costCallback = GetValue$8(o, 'cost', undefined);
         }
 
-        this.setFace(GetValue$7(o, 'face', 0));
-        this.setConeMode(GetValue$7(o, 'coneMode', 0));
-        this.setCone(GetValue$7(o, 'cone', undefined));
+        this.setFace(GetValue$8(o, 'face', 0));
+        this.setConeMode(GetValue$8(o, 'coneMode', 0));
+        this.setCone(GetValue$8(o, 'cone', undefined));
         this.setOccupiedTest(occupiedTest);
         this.setBlockerTest(blockerTest);
         this.setEdgeBlockerTest(edgeBlockerTest);
         this.setPreTestFunction(preTestCallback, preTestCallbackScope);
         this.setCostFunction(costCallback, costCallbackScope);
-        this.setDebugGraphics(GetValue$7(o, 'debug.graphics', undefined));
-        this.setDebugLineColor(GetValue$7(o, 'debug.visibleLineColor', 0x00ff00), GetValue$7(o, 'debug.invisibleLineColor', 0xff0000));
-        this.setDebugLog(GetValue$7(o, 'debug.log', false));
+        this.setDebugGraphics(GetValue$8(o, 'debug.graphics', undefined));
+        this.setDebugLineColor(GetValue$8(o, 'debug.visibleLineColor', 0x00ff00), GetValue$8(o, 'debug.invisibleLineColor', 0xff0000));
+        this.setDebugLog(GetValue$8(o, 'debug.log', false));
         return this;
       }
     }, {
@@ -12561,17 +12561,17 @@
     _createClass(Monopoly, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.preTileXY = GetValue$7(o, 'preTileXY', undefined);
-        var costCallback = GetValue$7(o, 'costCallback', undefined);
-        var costCallbackScope = GetValue$7(o, 'costCallbackScope', undefined);
+        this.preTileXY = GetValue$8(o, 'preTileXY', undefined);
+        var costCallback = GetValue$8(o, 'costCallback', undefined);
+        var costCallbackScope = GetValue$8(o, 'costCallbackScope', undefined);
 
         if (costCallback === undefined) {
-          costCallback = GetValue$7(o, 'cost', 1);
+          costCallback = GetValue$8(o, 'cost', 1);
         }
 
-        this.setFace(GetValue$7(o, 'face', 0));
-        this.setPathMode(GetValue$7(o, 'pathMode', 0));
-        this.setPathTileZ(GetValue$7(o, 'pathTileZ', 0));
+        this.setFace(GetValue$8(o, 'face', 0));
+        this.setPathMode(GetValue$8(o, 'pathMode', 0));
+        this.setPathTileZ(GetValue$8(o, 'pathTileZ', 0));
         this.setCostFunction(costCallback, costCallbackScope);
         return this;
       }
@@ -12808,7 +12808,9 @@
         self: null,
         x: 0,
         y: 0,
+        syncPosition: true,
         rotation: 0,
+        syncRotation: true,
         scaleX: 0,
         scaleY: 0,
         alpha: 0,
@@ -12881,10 +12883,14 @@
     }
   };
 
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
 
-  var Add = function Add(gameObject) {
+  var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue(config, 'syncPosition', true);
+    state.syncRotation = GetValue(config, 'syncRotation', true);
     this.resetChildState(gameObject) // Reset local state of child
     .updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
@@ -12898,7 +12904,9 @@
   var AddLocal = function AddLocal(gameObject) {
     this.setParent(gameObject); // Set local state from child directly
 
-    var state = GetLocalState(gameObject); // Position
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue(config, 'syncPosition', true);
+    state.syncRotation = GetValue(config, 'syncRotation', true); // Position
 
     state.x = gameObject.x;
     state.y = gameObject.y;
@@ -12922,44 +12930,44 @@
 
   var AddChild = {
     // Can override this method
-    add: function add(gameObject) {
+    add: function add(gameObject, config) {
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add.call(this, gameObject);
+        Add.call(this, gameObject, config);
       }
 
       return this;
     },
     // Don't override this method
-    pin: function pin(gameObject) {
+    pin: function pin(gameObject, config) {
       if (Array.isArray(gameObject)) {
-        this.addMultiple(gameObject);
+        this.addMultiple(gameObject, config);
       } else {
-        Add.call(this, gameObject);
+        Add.call(this, gameObject, config);
       }
 
       return this;
     },
-    addMultiple: function addMultiple(gameObjects) {
+    addMultiple: function addMultiple(gameObjects, config) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add.call(this, gameObjects[i]);
+        Add.call(this, gameObjects[i], config);
       }
 
       return this;
     },
-    addLocal: function addLocal(gameObject) {
+    addLocal: function addLocal(gameObject, config) {
       if (Array.isArray(gameObject)) {
-        this.addMultiple(gameObject);
+        this.addMultiple(gameObject, config);
       } else {
-        AddLocal.call(this, gameObject);
+        AddLocal.call(this, gameObject, config);
       }
 
       return this;
     },
-    addLocalMultiple: function addLocalMultiple(gameObjects) {
+    addLocalMultiple: function addLocalMultiple(gameObjects, config) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        AddLocal.call(this, gameObjects[i]);
+        AddLocal.call(this, gameObjects[i], config);
       }
 
       return this;
@@ -13051,12 +13059,19 @@
 
       var state = GetLocalState(child);
       var parent = state.parent;
-      child.x = state.x;
-      child.y = state.y;
-      parent.localToWorld(child);
+
+      if (state.syncPosition) {
+        child.x = state.x;
+        child.y = state.y;
+        parent.localToWorld(child);
+      }
+
+      if (state.syncRotation) {
+        child.rotation = state.rotation + parent.rotation;
+      }
+
       child.scaleX = state.scaleX * parent.scaleX;
       child.scaleY = state.scaleY * parent.scaleY;
-      child.rotation = state.rotation + parent.rotation;
 
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;
@@ -14832,7 +14847,7 @@
       _this.type = 'rexMiniBoard';
       var boardConfig = {
         isBoard: false,
-        grid: GetValue$7(config, 'grid', undefined),
+        grid: GetValue$8(config, 'grid', undefined),
         infinity: true,
         wrap: false
       };
@@ -14848,15 +14863,15 @@
     _createClass(MiniBoard, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setFace(GetValue$7(o, 'face', 0));
-        var dragEnable = GetValue$7(o, 'draggable', undefined);
+        this.setFace(GetValue$8(o, 'face', 0));
+        var dragEnable = GetValue$8(o, 'draggable', undefined);
 
         if (dragEnable !== undefined) {
           this.setDraggable(dragEnable);
         }
 
-        this.setPutTestCallback(GetValue$7(o, 'putTestCallback', undefined), GetValue$7(o, 'putTestCallbackScpe', undefined));
-        this.lastTransferResult = GetValue$7(o, 'lastTransferResult', undefined);
+        this.setPutTestCallback(GetValue$8(o, 'putTestCallback', undefined), GetValue$8(o, 'putTestCallbackScpe', undefined));
+        this.lastTransferResult = GetValue$8(o, 'lastTransferResult', undefined);
         return this;
       }
     }, {

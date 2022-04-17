@@ -407,7 +407,9 @@
         self: null,
         x: 0,
         y: 0,
+        syncPosition: true,
         rotation: 0,
+        syncRotation: true,
         scaleX: 0,
         scaleY: 0,
         alpha: 0,
@@ -480,10 +482,14 @@
     }
   };
 
+  var GetValue$x = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base$1.prototype.add;
 
-  var Add$2 = function Add(gameObject) {
+  var Add$2 = function Add(gameObject, config) {
     this.setParent(gameObject);
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue$x(config, 'syncPosition', true);
+    state.syncRotation = GetValue$x(config, 'syncRotation', true);
     this.resetChildState(gameObject) // Reset local state of child
     .updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
@@ -497,7 +503,9 @@
   var AddLocal = function AddLocal(gameObject) {
     this.setParent(gameObject); // Set local state from child directly
 
-    var state = GetLocalState(gameObject); // Position
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue$x(config, 'syncPosition', true);
+    state.syncRotation = GetValue$x(config, 'syncRotation', true); // Position
 
     state.x = gameObject.x;
     state.y = gameObject.y;
@@ -521,44 +529,44 @@
 
   var AddChild$1 = {
     // Can override this method
-    add: function add(gameObject) {
+    add: function add(gameObject, config) {
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add$2.call(this, gameObject);
+        Add$2.call(this, gameObject, config);
       }
 
       return this;
     },
     // Don't override this method
-    pin: function pin(gameObject) {
+    pin: function pin(gameObject, config) {
       if (Array.isArray(gameObject)) {
-        this.addMultiple(gameObject);
+        this.addMultiple(gameObject, config);
       } else {
-        Add$2.call(this, gameObject);
+        Add$2.call(this, gameObject, config);
       }
 
       return this;
     },
-    addMultiple: function addMultiple(gameObjects) {
+    addMultiple: function addMultiple(gameObjects, config) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add$2.call(this, gameObjects[i]);
+        Add$2.call(this, gameObjects[i], config);
       }
 
       return this;
     },
-    addLocal: function addLocal(gameObject) {
+    addLocal: function addLocal(gameObject, config) {
       if (Array.isArray(gameObject)) {
-        this.addMultiple(gameObject);
+        this.addMultiple(gameObject, config);
       } else {
-        AddLocal.call(this, gameObject);
+        AddLocal.call(this, gameObject, config);
       }
 
       return this;
     },
-    addLocalMultiple: function addLocalMultiple(gameObjects) {
+    addLocalMultiple: function addLocalMultiple(gameObjects, config) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        AddLocal.call(this, gameObjects[i]);
+        AddLocal.call(this, gameObjects[i], config);
       }
 
       return this;
@@ -650,12 +658,19 @@
 
       var state = GetLocalState(child);
       var parent = state.parent;
-      child.x = state.x;
-      child.y = state.y;
-      parent.localToWorld(child);
+
+      if (state.syncPosition) {
+        child.x = state.x;
+        child.y = state.y;
+        parent.localToWorld(child);
+      }
+
+      if (state.syncRotation) {
+        child.rotation = state.rotation + parent.rotation;
+      }
+
       child.scaleX = state.scaleX * parent.scaleX;
       child.scaleY = state.scaleY * parent.scaleY;
-      child.rotation = state.rotation + parent.rotation;
 
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;

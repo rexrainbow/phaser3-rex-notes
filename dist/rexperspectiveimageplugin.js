@@ -293,7 +293,7 @@
 
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
   var DegToRad$5 = Phaser.Math.DegToRad;
@@ -312,10 +312,10 @@
 
       if (IsPlainObject$6(x)) {
         config = x;
-        x = GetValue$d(config, 'x', 0);
-        y = GetValue$d(config, 'y', 0);
-        key = GetValue$d(config, 'key', null);
-        frame = GetValue$d(config, 'frame', null);
+        x = GetValue$e(config, 'x', 0);
+        y = GetValue$e(config, 'y', 0);
+        key = GetValue$e(config, 'key', null);
+        frame = GetValue$e(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
@@ -327,9 +327,9 @@
 
       _this.panZ(PanZ);
 
-      _this.hideCCW = GetValue$d(config, 'hideCCW', true);
-      var gridWidth = GetValue$d(config, 'gridWidth', 32);
-      var gridHeight = GetValue$d(config, 'gridHeight', gridWidth);
+      _this.hideCCW = GetValue$e(config, 'hideCCW', true);
+      var gridWidth = GetValue$e(config, 'gridWidth', 32);
+      var gridHeight = GetValue$e(config, 'gridHeight', gridWidth);
 
       _this.resetVerts(gridWidth, gridHeight);
 
@@ -500,7 +500,7 @@
 
   var RT = Phaser.GameObjects.RenderTexture;
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
 
   var RenderTexture = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
@@ -514,10 +514,10 @@
 
       if (IsPlainObject$5(x)) {
         config = x;
-        x = GetValue$c(config, 'x', 0);
-        y = GetValue$c(config, 'y', 0);
-        width = GetValue$c(config, 'width', 32);
-        height = GetValue$c(config, 'height', 32);
+        x = GetValue$d(config, 'x', 0);
+        y = GetValue$d(config, 'y', 0);
+        width = GetValue$d(config, 'width', 32);
+        height = GetValue$d(config, 'height', 32);
       } // render-texture -> perspective-image
 
 
@@ -569,7 +569,7 @@
 
   var AnimationState = Phaser.Animations.AnimationState;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
 
   var Sprite = /*#__PURE__*/function (_PerspectiveImage) {
     _inherits(Sprite, _PerspectiveImage);
@@ -583,10 +583,10 @@
 
       if (IsPlainObject$4(x)) {
         config = x;
-        x = GetValue$b(config, 'x', 0);
-        y = GetValue$b(config, 'y', 0);
-        key = GetValue$b(config, 'key', null);
-        frame = GetValue$b(config, 'frame', null);
+        x = GetValue$c(config, 'x', 0);
+        y = GetValue$c(config, 'y', 0);
+        key = GetValue$c(config, 'key', null);
+        frame = GetValue$c(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame, config);
@@ -845,7 +845,9 @@
         self: null,
         x: 0,
         y: 0,
+        syncPosition: true,
         rotation: 0,
+        syncRotation: true,
         scaleX: 0,
         scaleY: 0,
         alpha: 0,
@@ -918,10 +920,14 @@
     }
   };
 
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
 
-  var Add = function Add(gameObject) {
+  var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue$b(config, 'syncPosition', true);
+    state.syncRotation = GetValue$b(config, 'syncRotation', true);
     this.resetChildState(gameObject) // Reset local state of child
     .updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
@@ -935,7 +941,9 @@
   var AddLocal = function AddLocal(gameObject) {
     this.setParent(gameObject); // Set local state from child directly
 
-    var state = GetLocalState(gameObject); // Position
+    var state = GetLocalState(gameObject);
+    state.syncPosition = GetValue$b(config, 'syncPosition', true);
+    state.syncRotation = GetValue$b(config, 'syncRotation', true); // Position
 
     state.x = gameObject.x;
     state.y = gameObject.y;
@@ -959,44 +967,44 @@
 
   var AddChild = {
     // Can override this method
-    add: function add(gameObject) {
+    add: function add(gameObject, config) {
       if (Array.isArray(gameObject)) {
         this.addMultiple(gameObject);
       } else {
-        Add.call(this, gameObject);
+        Add.call(this, gameObject, config);
       }
 
       return this;
     },
     // Don't override this method
-    pin: function pin(gameObject) {
+    pin: function pin(gameObject, config) {
       if (Array.isArray(gameObject)) {
-        this.addMultiple(gameObject);
+        this.addMultiple(gameObject, config);
       } else {
-        Add.call(this, gameObject);
+        Add.call(this, gameObject, config);
       }
 
       return this;
     },
-    addMultiple: function addMultiple(gameObjects) {
+    addMultiple: function addMultiple(gameObjects, config) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        Add.call(this, gameObjects[i]);
+        Add.call(this, gameObjects[i], config);
       }
 
       return this;
     },
-    addLocal: function addLocal(gameObject) {
+    addLocal: function addLocal(gameObject, config) {
       if (Array.isArray(gameObject)) {
-        this.addMultiple(gameObject);
+        this.addMultiple(gameObject, config);
       } else {
-        AddLocal.call(this, gameObject);
+        AddLocal.call(this, gameObject, config);
       }
 
       return this;
     },
-    addLocalMultiple: function addLocalMultiple(gameObjects) {
+    addLocalMultiple: function addLocalMultiple(gameObjects, config) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        AddLocal.call(this, gameObjects[i]);
+        AddLocal.call(this, gameObjects[i], config);
       }
 
       return this;
@@ -1088,12 +1096,19 @@
 
       var state = GetLocalState(child);
       var parent = state.parent;
-      child.x = state.x;
-      child.y = state.y;
-      parent.localToWorld(child);
+
+      if (state.syncPosition) {
+        child.x = state.x;
+        child.y = state.y;
+        parent.localToWorld(child);
+      }
+
+      if (state.syncRotation) {
+        child.rotation = state.rotation + parent.rotation;
+      }
+
       child.scaleX = state.scaleX * parent.scaleX;
       child.scaleY = state.scaleY * parent.scaleY;
-      child.rotation = state.rotation + parent.rotation;
 
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;
