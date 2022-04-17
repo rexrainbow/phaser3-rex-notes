@@ -103,6 +103,20 @@ class ContainerLite extends Base {
     }
 
     // Override
+    get scale() {
+        return super.scale;
+    }
+
+    set scale(value) {
+        if (this.scale === value) {
+            return;
+        }
+        super.scale = value;
+
+        this.syncPosition();
+    }
+
+    // Override
     get visible() {
         return super.visible;
     }

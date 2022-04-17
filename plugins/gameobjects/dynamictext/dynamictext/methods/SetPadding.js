@@ -7,13 +7,13 @@ var SetPadding = function (key, value) {
         paddingTop = padding.top,
         paddingBottom = padding.bottom;
 
-    SetPaddingBase(this.padding, key, value);
+    SetPaddingBase(padding, key, value);
 
     this.dirty = this.dirty ||
-        (paddingLeft != this.padding.left) ||
-        (paddingRight != this.padding.right) ||
-        (paddingTop != this.padding.top) ||
-        (paddingBottom != this.padding.bottom)
+        (paddingLeft != padding.left) ||
+        (paddingRight != padding.right) ||
+        (paddingTop != padding.top) ||
+        (paddingBottom != padding.bottom)
         ;
     return this;
 };

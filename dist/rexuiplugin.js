@@ -9379,6 +9379,21 @@
       } // Override
 
     }, {
+      key: "scale",
+      get: function get() {
+        return _get(_getPrototypeOf(ContainerLite.prototype), "scale", this);
+      },
+      set: function set(value) {
+        if (this.scale === value) {
+          return;
+        }
+
+        _set(_getPrototypeOf(ContainerLite.prototype), "scale", value, this, true);
+
+        this.syncPosition();
+      } // Override
+
+    }, {
       key: "visible",
       get: function get() {
         return _get(_getPrototypeOf(ContainerLite.prototype), "visible", this);
@@ -10673,6 +10688,28 @@
     return TextStyle;
   }();
 
+  var SetFixedSize = function SetFixedSize(width, height) {
+    if (width === undefined) {
+      width = 0;
+    }
+
+    if (height === undefined) {
+      height = 0;
+    }
+
+    if (width > 0 && height > 0) {
+      if (this.fixedWidth !== width || this.fixedHeight !== height) {
+        this.dirty = true;
+      }
+    } else {
+      this.dirty = true;
+    }
+
+    this.fixedWidth = width;
+    this.fixedHeight = height;
+    return this;
+  };
+
   var GetValue$2h = Phaser.Utils.Objects.GetValue;
 
   var GetPadding$1 = function GetPadding(padding, key) {
@@ -10707,8 +10744,8 @@
         paddingRight = padding.right,
         paddingTop = padding.top,
         paddingBottom = padding.bottom;
-    SetPadding$1(this.padding, key, value);
-    this.dirty = this.dirty || paddingLeft != this.padding.left || paddingRight != this.padding.right || paddingTop != this.padding.top || paddingBottom != this.padding.bottom;
+    SetPadding$1(padding, key, value);
+    this.dirty = this.dirty || paddingLeft != padding.left || paddingRight != padding.right || paddingTop != padding.top || paddingBottom != padding.bottom;
     return this;
   };
 
@@ -11845,6 +11882,7 @@
   };
 
   var Methods$6 = {
+    setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
@@ -11976,29 +12014,6 @@
     }
 
     _createClass(DynamicText, [{
-      key: "setFixedSize",
-      value: function setFixedSize(width, height) {
-        if (width === undefined) {
-          width = 0;
-        }
-
-        if (height === undefined) {
-          height = 0;
-        }
-
-        if (width > 0 && height > 0) {
-          if (this.fixedWidth !== width || this.fixedHeight !== height) {
-            this.dirty = true;
-          }
-        } else {
-          this.dirty = true;
-        }
-
-        this.fixedWidth = width;
-        this.fixedHeight = height;
-        return this;
-      }
-    }, {
       key: "updateTexture",
       value: function updateTexture() {
         this.drawContent();

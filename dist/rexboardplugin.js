@@ -13921,6 +13921,21 @@
       } // Override
 
     }, {
+      key: "scale",
+      get: function get() {
+        return _get(_getPrototypeOf(ContainerLite.prototype), "scale", this);
+      },
+      set: function set(value) {
+        if (this.scale === value) {
+          return;
+        }
+
+        _set(_getPrototypeOf(ContainerLite.prototype), "scale", value, this, true);
+
+        this.syncPosition();
+      } // Override
+
+    }, {
       key: "visible",
       get: function get() {
         return _get(_getPrototypeOf(ContainerLite.prototype), "visible", this);

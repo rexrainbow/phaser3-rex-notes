@@ -2132,6 +2132,28 @@
     return TextStyle;
   }();
 
+  var SetFixedSize = function SetFixedSize(width, height) {
+    if (width === undefined) {
+      width = 0;
+    }
+
+    if (height === undefined) {
+      height = 0;
+    }
+
+    if (width > 0 && height > 0) {
+      if (this.fixedWidth !== width || this.fixedHeight !== height) {
+        this.dirty = true;
+      }
+    } else {
+      this.dirty = true;
+    }
+
+    this.fixedWidth = width;
+    this.fixedHeight = height;
+    return this;
+  };
+
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var GetPadding$1 = function GetPadding(padding, key) {
@@ -2166,8 +2188,8 @@
         paddingRight = padding.right,
         paddingTop = padding.top,
         paddingBottom = padding.bottom;
-    SetPadding$1(this.padding, key, value);
-    this.dirty = this.dirty || paddingLeft != this.padding.left || paddingRight != this.padding.right || paddingTop != this.padding.top || paddingBottom != this.padding.bottom;
+    SetPadding$1(padding, key, value);
+    this.dirty = this.dirty || paddingLeft != padding.left || paddingRight != padding.right || paddingTop != padding.top || paddingBottom != padding.bottom;
     return this;
   };
 
@@ -3300,6 +3322,7 @@
   };
 
   var Methods = {
+    setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
@@ -3473,29 +3496,6 @@
     }
 
     _createClass(DynamicText, [{
-      key: "setFixedSize",
-      value: function setFixedSize(width, height) {
-        if (width === undefined) {
-          width = 0;
-        }
-
-        if (height === undefined) {
-          height = 0;
-        }
-
-        if (width > 0 && height > 0) {
-          if (this.fixedWidth !== width || this.fixedHeight !== height) {
-            this.dirty = true;
-          }
-        } else {
-          this.dirty = true;
-        }
-
-        this.fixedWidth = width;
-        this.fixedHeight = height;
-        return this;
-      }
-    }, {
       key: "updateTexture",
       value: function updateTexture() {
         this.drawContent();

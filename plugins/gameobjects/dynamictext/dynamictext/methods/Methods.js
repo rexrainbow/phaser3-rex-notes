@@ -1,3 +1,4 @@
+import SetFixedSize from './SetFixedSize.js';
 import SetPadding from './SetPadding.js';
 import GetPadding from './GetPadding.js';
 import ModifyTextStyle from './ModifyTextStyle.js';
@@ -20,6 +21,7 @@ import GetActiveChildren from './GetActiveChildren.js';
 
 
 export default {
+    setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
