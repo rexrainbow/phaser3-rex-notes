@@ -4,6 +4,9 @@ Post fx pipelines for game objects or camera.
 
 - Author: Richard Davey
 
+!!! warning "WebGL only"
+    All kinds of post fx pipelines only work in WebGL render mode.
+
 ## Usage
 
 ### Post fx pipeline class

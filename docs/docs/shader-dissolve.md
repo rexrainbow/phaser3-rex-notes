@@ -3,7 +3,7 @@
 Dissolve transition post processing filter. ([Reference](https://github.com/ykob/glsl-dissolve/))
 
 - Author: Rex
-- A post-fx shader effect
+- A post-fx shader effect, only works in WEBGL render mode.
 
 ## Live demos
 

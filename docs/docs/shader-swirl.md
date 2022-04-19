@@ -3,7 +3,7 @@
 Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/)
 
 - Author: Rex
-- A post-fx shader effect
+- A post-fx shader effect, only works in WEBGL render mode.
 
 ## Live demos
 

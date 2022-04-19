@@ -3,7 +3,7 @@
 Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filters/blob/master/filters/outline/src/outline.frag)
 
 - Author: Rex
-- A post-fx shader effect
+- A post-fx shader effect, only works in WEBGL render mode.
 
 ## Live demos
 

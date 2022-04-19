@@ -3,7 +3,7 @@
 Warp transition post processing filter.
 
 - Author: Richard Davey
-- A post-fx shader effect
+- A post-fx shader effect, only works in WEBGL render mode.
 
 ## Usage
 
