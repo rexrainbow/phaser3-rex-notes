@@ -3,6 +3,7 @@ import ContainerLite from '../../../plugins/containerlite.js';
 import Anchor from '../anchor/Anchor';
 import Click from '../click/Click';
 import InTouching from '../intouching/InTouching';
+import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive';
 
 export default BaseSizer;
 
@@ -461,6 +462,10 @@ declare class BaseSizer extends ContainerLite {
         scope?: object
     ): this;
 
+    setChildrenInteractive(
+        config: SetChildrenInteractive.IConfig
+    ): this;
+
     show(
         gameObject: Phaser.GameObjects.GameObject
     ): this;
@@ -472,6 +477,11 @@ declare class BaseSizer extends ContainerLite {
     isShow(
         gameObject: Phaser.GameObjects.GameObject
     ): boolean;
+
+    broadcastEvent(
+        event: string,
+        ...args: any[]
+    ): this;
 
     getShownChildren(
         out?: Phaser.GameObjects.GameObject[]

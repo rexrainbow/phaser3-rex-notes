@@ -4,21 +4,24 @@ import Tap from '../../../../plugins/input/gestures/tap/Tap';
 import Press from '../../../../plugins/input/gestures/press/Press';
 import Swipe from '../../../../plugins/input/gestures/swipe/Swipe';
 
+export default SetChildrenInteractive;
 
-export interface IConfig {
-    targets?: Phaser.GameObjects.GameObject[],
+declare namespace SetChildrenInteractive {
+    interface IConfig {
+        targets?: Phaser.GameObjects.GameObject[],
 
-    click?: Button.IConfig | boolean,
-    over?: {} | boolean,
-    tap?: Tap.IConfig | boolean,
-    press?: Press.IConfig | boolean,
-    swipe?: Swipe.IConfig | boolean,
+        click?: Button.IConfig | boolean,
+        over?: {} | boolean,
+        tap?: Tap.IConfig | boolean,
+        press?: Press.IConfig | boolean,
+        swipe?: Swipe.IConfig | boolean,
 
-    inputEventPrefix?: string,
-    eventEmitter?: Phaser.Events.EventEmitter,
+        inputEventPrefix?: string,
+        eventEmitter?: Phaser.Events.EventEmitter,
+    }
 }
 
-export default function SetChildrenInteractive(
+declare function SetChildrenInteractive(
     gameObject: Phaser.GameObjects.GameObject,
-    config?: IConfig
+    config?: SetChildrenInteractive.IConfig
 ): Phaser.GameObjects.GameObject;
