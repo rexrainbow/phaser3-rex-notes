@@ -3,7 +3,10 @@
 Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/032c325ef8577c6d0188)
 
 - Author: Rex
-- A post-fx shader effect, only works in WEBGL render mode.
+- A post-fx shader effect
+
+!!! warning "WebGL only"
+    Only work in WebGL render mode.
 
 ## Live demos
 

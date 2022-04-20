@@ -3,7 +3,10 @@
 Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-shader-library-fish-eye-and-dome-and-barrel-distortion-post-processing-filters/)
 
 - Author: Rex
-- A post-fx shader effect, only works in WEBGL render mode.
+- A post-fx shader effect
+
+!!! warning "WebGL only"
+    Only work in WebGL render mode.
 
 ## Live demos
 

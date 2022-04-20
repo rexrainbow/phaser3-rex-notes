@@ -3,7 +3,10 @@
 Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/glsl-shader-library-fish-eye-and-dome-and-barrel-distortion-post-processing-filters/6/)
 
 - Author: Rex
-- A post-fx shader effect, only works in WEBGL render mode.
+- A post-fx shader effect
+
+!!! warning "WebGL only"
+    Only work in WebGL render mode.
 
 ## Live demos
 

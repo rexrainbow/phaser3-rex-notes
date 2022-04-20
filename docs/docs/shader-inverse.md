@@ -3,7 +3,10 @@
 Inverse color post processing filter.
 
 - Author: Rex
-- A post-fx shader effect, only works in WEBGL render mode.
+- A post-fx shader effect
+
+!!! warning "WebGL only"
+    Only work in WebGL render mode.
 
 ## Usage
 

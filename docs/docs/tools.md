@@ -39,8 +39,13 @@ Export to [JSON-TP-Hash](https://www.leshylabs.com/blog/posts/2013-12-03-Leshy_S
 
 Tested with Aseprite 1.2.25
 
+### Atlas-packer
+
+[Atlas-packer](https://gammafp.com/tool/atlas-packer/)
+
 ## Bitmap font
 
 - [SnowB BMF](https://snowb.org/)
 - [71squared-glyphdesigner](http://www.71squared.com/glyphdesigner)
 - [Bitmap Font Generator](https://www.angelcode.com/products/bmfont/)
+- [TTF to PNG](https://ttf2png.ga)
