@@ -10,6 +10,9 @@ export default class GlowFilterPostFxPipeline extends Phaser.Renderer.WebGL.Pipe
     setGlowColor(value: number | Phaser.Types.Display.ColorObject): this;
     glowColor: Phaser.Display.Color;
 
+    setKnockout(value: boolean): this;
+    knockout: boolean;
+
     static setQuality(quality: number): void;
     static getQuality(): number;
 
