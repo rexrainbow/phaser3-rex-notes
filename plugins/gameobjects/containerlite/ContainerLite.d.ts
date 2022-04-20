@@ -238,7 +238,12 @@ declare class ContainerLite extends Base {
     ): this;
 
     getParent(
-        gameObject?: Phaser.GameObjects.GameObject
+        name?: string
+    ): ContainerLite;
+
+    getParent(
+        gameObject?: Phaser.GameObjects.GameObject,
+        name?: string
     ): ContainerLite;
 
     getTopmostParent(

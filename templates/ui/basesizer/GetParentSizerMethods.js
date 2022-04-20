@@ -1,6 +1,6 @@
 export default {
-    getParentSizer(gameObject) {
-        return this.getParent(gameObject);
+    getParentSizer(gameObject, name) {
+        return this.getParent(gameObject, name);
     },
 
     getTopmostSizer(gameObject) {

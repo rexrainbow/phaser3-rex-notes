@@ -527,6 +527,12 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     var parentSizer = scene.rexUI.getParentSizer(gameObject);
     ```
     - `gameObject` : Any game object added to sizer.
+- Get ancestor sizer matched given name
+    ```javascript
+    var parentSizer = scene.rexUI.getParentSizer(gameObject, name);
+    ```
+    - `gameObject` : Any game object added to sizer.
+    - `name` : Name string.
 - Get topmost sizer
     ```javascript
     var topmostSizer = scene.rexUI.getTopmostSizer(gameObject);

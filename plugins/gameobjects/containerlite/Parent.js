@@ -17,11 +17,15 @@ export default {
         return this;
     },
 
-    getParent(gameObject) {
+    getParent(gameObject, name) {
+        if (typeof (gameObject) === 'string') {
+            name = gameObject;
+            gameObject = undefined;
+        }
         if (gameObject === undefined) {
             gameObject = this;
         }
-        return GetParent(gameObject);
+        return GetParent(gameObject, name);
     },
 
     getTopmostParent(gameObject) {

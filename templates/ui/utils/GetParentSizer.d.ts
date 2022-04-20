@@ -2,7 +2,8 @@
 import BaseSizer from '../basesizer/BaseSizer';
 
 export function GetParentSizer(
-    gameObject: Phaser.GameObjects.GameObject
+    gameObject: Phaser.GameObjects.GameObject,
+    name?: string
 ): BaseSizer;
 
 export function GetTopmostSizer(

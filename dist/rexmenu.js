@@ -376,11 +376,23 @@
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base$1, [Components.Alpha, Components.Flip]);
 
-  var GetParent = function GetParent(gameObject) {
+  var GetParent = function GetParent(gameObject, name) {
     var parent;
 
-    if (gameObject.hasOwnProperty('rexContainer')) {
-      parent = gameObject.rexContainer.parent;
+    if (name === undefined) {
+      if (gameObject.hasOwnProperty('rexContainer')) {
+        parent = gameObject.rexContainer.parent;
+      }
+    } else {
+      parent = GetParent(gameObject);
+
+      while (parent) {
+        if (parent.name === name) {
+          break;
+        }
+
+        parent = GetParent(parent);
+      }
     }
 
     return parent;
@@ -468,12 +480,17 @@
 
       return this;
     },
-    getParent: function getParent(gameObject) {
+    getParent: function getParent(gameObject, name) {
+      if (typeof gameObject === 'string') {
+        name = gameObject;
+        gameObject = undefined;
+      }
+
       if (gameObject === undefined) {
         gameObject = this;
       }
 
-      return GetParent(gameObject);
+      return GetParent(gameObject, name);
     },
     getTopmostParent: function getTopmostParent(gameObject) {
       if (gameObject === undefined) {
@@ -5532,8 +5549,8 @@
   };
 
   var GetParentSizerMethods = {
-    getParentSizer: function getParentSizer(gameObject) {
-      return this.getParent(gameObject);
+    getParentSizer: function getParentSizer(gameObject, name) {
+      return this.getParent(gameObject, name);
     },
     getTopmostSizer: function getTopmostSizer(gameObject) {
       return this.getTopmostParent(gameObject);

@@ -914,6 +914,10 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
     ```javascript
     var parentSizer = sizer.getParentSizer();
     ```
+- Get ancestor sizer matched given name
+    ```javascript
+    var parentSizer = sizer.getParentSizer(name);
+    ```
 - Get topmost sizer
     ```javascript
     var topmostSizer = sizer.getTopmostSizer();

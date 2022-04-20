@@ -1,7 +1,17 @@
-var GetParent = function (gameObject) {
+var GetParent = function (gameObject, name) {
     var parent;
-    if (gameObject.hasOwnProperty('rexContainer')) {
-        parent = gameObject.rexContainer.parent;
+    if (name === undefined) {
+        if (gameObject.hasOwnProperty('rexContainer')) {
+            parent = gameObject.rexContainer.parent;
+        }
+    } else {
+        parent = GetParent(gameObject);
+        while (parent) {
+            if (parent.name === name) {
+                break;
+            }
+            parent = GetParent(parent);
+        }
     }
     return parent;
 }
