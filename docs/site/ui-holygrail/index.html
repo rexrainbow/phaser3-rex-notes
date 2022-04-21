@@ -8221,11 +8221,24 @@
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of holyGrail.</li>
-<li><code>header</code> : Game object of header, optional.</li>
-<li><code>leftSide</code> : Game object of leftSide, optional.</li>
-<li><code>content</code> : Game object of content, optional.</li>
-<li><code>rightSide</code> : Game object of rightSide, optional.</li>
-<li><code>footer</code> : Game object of footer, optional.</li>
+<li><code>header</code> : Game object of header, optional.<ul>
+<li>Will fixed height (<code>proportion=0</code>) and expand width (<code>expand=true</code>) width default setting.</li>
+</ul>
+</li>
+<li><code>leftSide</code> : Game object of leftSide, optional.<ul>
+<li>Will fixed width (<code>proportion=0</code>) and expand height (<code>expand=true</code>) width default setting.</li>
+</ul>
+</li>
+<li><code>content</code> : Game object of content, optional.<ul>
+<li>Will expand width (<code>proportion=1</code>) and expand height (<code>expand=true</code>) width default setting. </li>
+</ul>
+</li>
+<li><code>rightSide</code> : Game object of rightSide, optional.<ul>
+<li>Will fixed width (<code>proportion=0</code>) and expand height (<code>expand=true</code>) width default setting.</li>
+</ul>
+</li>
+<li><code>footer</code> : Game object of footer, optional.
+    -- Will fixed height (<code>proportion=0</code>) and expand width (<code>expand=true</code>) width default setting.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.header</code> : <ul>

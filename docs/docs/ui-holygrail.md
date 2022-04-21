@@ -151,10 +151,15 @@ var holyGrail = scene.rexUI.add.holyGrail({
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of holyGrail.
 - `header` : Game object of header, optional.
+    - Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
 - `leftSide` : Game object of leftSide, optional.
+    - Will fixed width (`proportion=0`) and expand height (`expand=true`) width default setting.
 - `content` : Game object of content, optional.
+    - Will expand width (`proportion=1`) and expand height (`expand=true`) width default setting. 
 - `rightSide` : Game object of rightSide, optional.
+    - Will fixed width (`proportion=0`) and expand height (`expand=true`) width default setting.
 - `footer` : Game object of footer, optional.
+    -- Will fixed height (`proportion=0`) and expand width (`expand=true`) width default setting.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.header` : 
