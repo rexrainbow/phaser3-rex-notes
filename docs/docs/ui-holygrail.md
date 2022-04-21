@@ -107,29 +107,29 @@ var holyGrail = scene.rexUI.add.holyGrail({
         rightSide: 0, // {left, right, top, bottom}
     },
 
-    proportion: {
-        header: 0,
-        footer: 0,
-        leftSide: 0,
-        rightSide: 0,
-        content: 1,
-    },
+    // proportion: {
+    //     header: 0,
+    //     footer: 0,
+    //     leftSide: 0,
+    //     rightSide: 0,
+    //     content: 1,
+    // },
 
-    expand: {
-        header: true,
-        footer: true,
-        leftSide: true,
-        rightSide: true,
-        content: false,
-    },
+    // expand: {
+    //     header: true,
+    //     footer: true,
+    //     leftSide: true,
+    //     rightSide: true,
+    //     content: false,
+    // },
 
-    align: {
-        header: 'center',
-        footer: 'center',
-        leftSide: 'center',
-        rightSide: 'center',
-        content: 'center',
-    },
+    // align: {
+    //     header: 'center',
+    //     footer: 'center',
+    //     leftSide: 'center',
+    //     rightSide: 'center',
+    //     content: 'center',
+    // },
 
     // name: '',
     // draggable: false,
