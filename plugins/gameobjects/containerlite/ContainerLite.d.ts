@@ -33,8 +33,7 @@ declare class ContainerLite extends Base {
     );
 
     add(
-        gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
     pin(
@@ -43,18 +42,15 @@ declare class ContainerLite extends Base {
     ): this;
 
     addMultiple(
-        children: Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        children: Phaser.GameObjects.GameObject[]
     ): this;
 
     addLocal(
-        child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
     addLocalMultiple(
-        children: Phaser.GameObjects.GameObject[],
-        config?: ContainerLite.IAddChildConfig
+        children: Phaser.GameObjects.GameObject[]
     ): this;
 
     setChildPosition(

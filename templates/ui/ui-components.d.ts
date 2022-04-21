@@ -30,6 +30,7 @@ import Buttons from './buttons/Buttons';
 import GridButtons from './gridbuttons/GridButtons';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons';
 import Dialog from './dialog/Dialog';
+import HolyGrail from './holygrail/HolyGrail';
 import Tabs from './tabs/Tabs';
 import Slider from './slider/Slider';
 import GridTable from './gridtable/GridTable';
@@ -112,6 +113,7 @@ export {
     GridButtons,
     FixWidthButtons,
     Dialog,
+    HolyGrail,
     Tabs,
     Slider,
     GridTable,

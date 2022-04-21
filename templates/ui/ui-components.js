@@ -32,6 +32,7 @@ import Buttons from './buttons/Buttons.js';
 import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
 import Dialog from './dialog/Dialog.js';
+import HolyGrail from './holygrail/HolyGrail.js';
 import Tabs from './tabs/Tabs.js';
 import Slider from './slider/Slider.js';
 import GridTable from './gridtable/GridTable.js';
@@ -114,6 +115,7 @@ export {
     GridButtons,
     FixWidthButtons,
     Dialog,
+    HolyGrail,
     Tabs,
     Slider,
     GridTable,

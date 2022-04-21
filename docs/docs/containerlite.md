@@ -149,15 +149,24 @@ This container game object inherits from [Zone](zone.md).
 Add(pin) a game obejct to container
 
 ```javascript
-container.add(child, {
+container.add(child);  // child: a game object
+// container.pin(child);
+```
+
+- `child` : A game object
+
+or
+
+```javascript
+container.pin(child, {
     // syncPosition: true,
     // syncRotation: true,
     // syncScale : true,
     // syncAlpha: true,
-});  // child: a game object
-// container.pin(child, config);
+});
 ```
 
+- `child` : A game object
 - `syncPosition` : 
     - `true` : Sync position of child, default behavior.
     - `false` : Don't sync position of child.
@@ -175,9 +184,11 @@ container.add(child, {
 Or add(pin) children
 
 ```javascript
-container.addMultiple(children, config);  // children: an array of game objects
-// container.add(children, config);  // children: an array of game objects
+container.addMultiple(children);
+// container.add(children);
 ```
+
+- `children` : An array of game objects
 
 These world properties of children will be changed with container.
 
