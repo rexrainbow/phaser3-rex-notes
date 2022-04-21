@@ -8,6 +8,7 @@ Layout elements in [Holy grail](https://en.wikipedia.org/wiki/Holy_grail_(web_de
 ## Live demos
 
 - [Simple](https://codepen.io/rexrainbow/pen/abEMByR)
+- [Align](https://codepen.io/rexrainbow/pen/GRyeboN)
 
 ## Usage
 

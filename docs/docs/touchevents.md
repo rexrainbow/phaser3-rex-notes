@@ -126,6 +126,7 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     gameObject.setInteractive({
         hitArea: shape,
         hitAreaCallback: callback,
+        hitAreaDebug: shape,
         draggable: false,
         dropZone: false,
         useHandCursor: false,
@@ -149,6 +150,7 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
                 - `shape` : Hit area object
                 - `x`, `y` : Local position of texture.
                 - `gameObject` : Game object.
+        - `hitAreaDebug` : Debug shape.
     - [Dragging](touchevents.md#dragging)
         - `draggable` : `true`
     - [Drop zone](touchevents.md#drop-zone)
