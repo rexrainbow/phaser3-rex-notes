@@ -7381,6 +7381,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-holygrail/" class="md-nav__link">
+        Holy grail
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-chart/" class="md-nav__link">
         Chart
       </a>
@@ -8558,15 +8572,22 @@
 <h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
 <h4 id="pin">Pin<a class="headerlink" href="#pin" title="Permanent link">&para;</a></h4>
 <p>Add(pin) a game obejct to container</p>
-<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object</span>
+<span class="c1">// container.pin(child);</span>
+</code></pre></div>
+<ul>
+<li><code>child</code> : A game object</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// syncPosition: true,</span>
     <span class="c1">// syncRotation: true,</span>
     <span class="c1">// syncScale : true,</span>
     <span class="c1">// syncAlpha: true,</span>
-<span class="p">});</span>  <span class="c1">// child: a game object</span>
-<span class="c1">// container.pin(child, config);</span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
+<li><code>child</code> : A game object</li>
 <li><code>syncPosition</code> : <ul>
 <li><code>true</code> : Sync position of child, default behavior.</li>
 <li><code>false</code> : Don't sync position of child.</li>
@@ -8589,9 +8610,12 @@
 </li>
 </ul>
 <p>Or add(pin) children</p>
-<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">children</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>  <span class="c1">// children: an array of game objects</span>
-<span class="c1">// container.add(children, config);  // children: an array of game objects</span>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">children</span><span class="p">);</span>
+<span class="c1">// container.add(children);</span>
 </code></pre></div>
+<ul>
+<li><code>children</code> : An array of game objects</li>
+</ul>
 <p>These world properties of children will be changed with container.</p>
 <ul>
 <li>Position/Angle/Scale</li>
@@ -8618,6 +8642,14 @@
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addLocalMultiple</span><span class="p">(</span><span class="nx">children</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">pinLocal</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// syncPosition: true,</span>
+    <span class="c1">// syncRotation: true,</span>
+    <span class="c1">// syncScale : true,</span>
+    <span class="c1">// syncAlpha: true,</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>Add child to container with related properties, like official container.<br />
 For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</strong>, then child will be placed at (110, 110) after adding to container-lite.</p>

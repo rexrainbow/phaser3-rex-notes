@@ -216,6 +216,17 @@ or
 container.addLocalMultiple(children);
 ```
 
+or
+
+```javascript
+container.pinLocal(child, {
+    // syncPosition: true,
+    // syncRotation: true,
+    // syncScale : true,
+    // syncAlpha: true,
+});
+```
+
 Add child to container with related properties, like official container.  
 For example, container-lite is at (100, 100), and child is at **(10, 10)**, then child will be placed at (110, 110) after adding to container-lite.
 

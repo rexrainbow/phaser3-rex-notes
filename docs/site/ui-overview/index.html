@@ -7272,6 +7272,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../ui-holygrail/" class="md-nav__link">
+        Holy grail
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ui-chart/" class="md-nav__link">
         Chart
       </a>
@@ -8308,6 +8322,7 @@
 <li><a href="../ui-gridbuttons/">Grid-buttons</a>: A container with a group of buttons in grids.</li>
 <li><a href="../ui-gridsizer/">Grid-sizer</a>: Layout children game objects in grids.</li>
 <li><a href="../ui-gridtable/">Grid-table</a>: A container with a <a href="../gridtable/">grid table</a>, slider, and scroller.</li>
+<li><a href="../ui-holygrail/">Holy grail</a>: Layout elements in <a href="https://en.wikipedia.org/wiki/Holy_grail_(web_design)">Holy grail</a> style.</li>
 <li><a href="../ui-knob/">Knob</a>: A knob button based on circular progress.</li>
 <li><a href="../ui-label/">Label</a>: A container with an icon, text, and background.</li>
 <li><a href="../ui-menu/">Menu</a>: A container with buttons and sub-menu.</li>
@@ -8691,6 +8706,13 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parentSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>gameObject</code> : Any game object added to sizer.</li>
+</ul>
+</li>
+<li>Get ancestor sizer matched given name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parentSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>gameObject</code> : Any game object added to sizer.</li>
+<li><code>name</code> : Name string.</li>
 </ul>
 </li>
 <li>Get topmost sizer

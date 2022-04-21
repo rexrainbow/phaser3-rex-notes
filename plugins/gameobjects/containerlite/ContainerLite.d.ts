@@ -49,6 +49,11 @@ declare class ContainerLite extends Base {
         child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
 
+    pinLocal(
+        child: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[],
+        config?: ContainerLite.IAddChildConfig
+    ): this;
+
     addLocalMultiple(
         children: Phaser.GameObjects.GameObject[]
     ): this;

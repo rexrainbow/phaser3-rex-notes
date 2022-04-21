@@ -21,7 +21,7 @@ var Add = function (gameObject, config) {
     return this;
 }
 
-var AddLocal = function (gameObject) {
+var AddLocal = function (gameObject, config) {
     this.setParent(gameObject);
 
     // Set local state from child directly
@@ -61,11 +61,11 @@ var SetupSyncFlags = function (state, config) {
 
 export default {
     // Can override this method
-    add(gameObject, config) {
+    add(gameObject) {
         if (Array.isArray(gameObject)) {
             this.addMultiple(gameObject);
         } else {
-            Add.call(this, gameObject, config);
+            Add.call(this, gameObject);
         }
         return this;
     },
@@ -80,14 +80,24 @@ export default {
         return this;
     },
 
-    addMultiple(gameObjects, config) {
+    addMultiple(gameObjects) {
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            Add.call(this, gameObjects[i], config);
+            Add.call(this, gameObjects[i]);
         }
         return this;
     },
 
-    addLocal(gameObject, config) {
+    addLocal(gameObject) {
+        if (Array.isArray(gameObject)) {
+            this.addMultiple(gameObject);
+        } else {
+            AddLocal.call(this, gameObject);
+        }
+        return this;
+    },
+
+    // Don't override this method
+    pinLocal(gameObject, config) {
         if (Array.isArray(gameObject)) {
             this.addMultiple(gameObject, config);
         } else {
@@ -96,9 +106,9 @@ export default {
         return this;
     },
 
-    addLocalMultiple(gameObjects, config) {
+    addLocalMultiple(gameObjects) {
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            AddLocal.call(this, gameObjects[i], config);
+            AddLocal.call(this, gameObjects[i]);
         }
         return this;
     }

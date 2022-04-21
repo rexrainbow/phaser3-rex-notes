@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         this.containerLite = this.add.rexContainerLite(100, 300, 100, 100)
             .add(
                 this.add.rexContainerLite(50, 200)
-                    .add(
+                    .pin(
                         this.add.image(100, 200, 'mushroom'),
                         { syncRotation: false, syncScale: false, syncAlpha: false }
                     )

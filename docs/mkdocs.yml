@@ -368,11 +368,12 @@ nav:
         - Number bar: ui-numberbar.md
         - Knob: ui-knob.md
     - Dialog: ui-dialog.md
-    - Menu: ui-menu.md    
+    - Menu: ui-menu.md
     - Text box: ui-textbox.md   
     - Toast: ui-toast.md    
     - Tabs: ui-tabs.md    
     - Pages: ui-pages.md
+    - Holy grail: ui-holygrail.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md
