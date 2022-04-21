@@ -6,6 +6,9 @@ export default GlowFilterPipelinePlugin;
 declare namespace GlowFilterPipelinePlugin {
 
     interface IConfig {
+        quality?: number,
+        distance?: number,
+
         outerStrength?: number,
         innerStrength?: number,
         glowColor?: number,
