@@ -1,4 +1,4 @@
-import ParseYaml from '../../../../utils/yaml/ParseYaml.js';
+import yaml from 'js-yaml';
 import CreateNode from './CreateNode.js';
 
 var LoadYaml = function (yamlString, customNodeHandlers) {
@@ -6,7 +6,13 @@ var LoadYaml = function (yamlString, customNodeHandlers) {
         customNodeHandlers = {};
     }
 
-    var obj = ParseYaml(yamlString);
+    var obj;
+    try {
+        obj = yaml.load(yamlString);
+    } catch (e) {
+        console.log(e);
+    }
+
     for (var key in obj) {
         var data = obj[key];
         data.__handlerName__ = key;
