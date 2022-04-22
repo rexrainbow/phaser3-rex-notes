@@ -1,7 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import ParseCSV from './ParseCSV.js';
-import ParseYaml from './ParseYaml.js';
+import ParseInputData from './parse/ParseInputData.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 import Clear from '../../../utils/object/Clear.js';
 import AddQuestion from './AddQuestion.js';
@@ -40,23 +39,7 @@ class QuestionManager {
     }
 
     add(question, config) {
-        if (typeof (config) === 'string') {
-            config = { format: config };
-        }
-
-        var inputType;
-        if (typeof (question) === 'string') {
-            inputType = GetValue(config, 'format', 'csv');
-        }
-
-        switch (inputType) {
-            case 'csv':
-                question = ParseCSV(question, config);
-                break;
-            case 'yaml':
-                question = ParseYaml(question, config);
-                break;
-        }
+        question = ParseInputData(question, config);
 
         if (Array.isArray(question)) {
             var questions = question;
