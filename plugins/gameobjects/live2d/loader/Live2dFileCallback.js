@@ -3,10 +3,12 @@ import Live2dFile from './Live2dFile.js';
 var Live2dFileCallback = function (key, url) {
     if (Array.isArray(key)) {
         for (var i = 0; i < key.length; i++) {
-            this.addFile(new Live2dFile(this, key[i]));
+            var multifile = new Live2dFile(this, key[i]);
+            this.addFile(multifile.files);
         }
     } else {
-        this.addFile(new Live2dFile(this, key, url));
+        var multifile = new Live2dFile(this, key, url);
+        this.addFile(multifile.files);
     }
 
     return this;

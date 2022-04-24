@@ -1,78 +1,64 @@
-import Live2dBaseFile from './Live2dFileBase.js';
-import LoadChildFile from './LoadChildFile.js';
+import CreateFile from './CreateFile.js';
 import { CubismModelSettingJson } from '../framework/src/cubismmodelsettingjson';
+import LoadChildrenFiles from './LoadChildrenFiles.js';
+import SetValue from '../../../utils/object/SetValue.js';
 
-class Live2dFile extends Live2dBaseFile {
+const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
+class Live2dFile extends Phaser.Loader.MultiFile {
     constructor(loader, key, url, xhrSettings) {
-        // 1. Load setting
-        super(loader, key, url, xhrSettings);
+        if (IsPlainObject(key)) {
+            var config = key;
 
+            key = GetFastValue(config, 'key');
+            url = GetFastValue(config, 'url');
+            xhrSettings = GetFastValue(config, 'xhrSettings');
+        }
+
+        var cache = loader.cacheManager.custom.live2d;
+
+        // Load setting
+        var settingFile = CreateFile(loader, key, url, xhrSettings, 'setting');        
+        super(loader, 'live2d', key, [settingFile]);
+
+        this.cache = cache;
         this.homeDir = url.substring(0, url.lastIndexOf('/') + 1);
     }
 
-    loadChildrenFiles(setting) {
-        // Load CubismModel
-        var modelFileName = setting.getModelFileName();
-        if (modelFileName !== '') {
-            LoadChildFile(this, modelFileName, 'model')
-        } else {
-            // Error
+    onFileComplete(file) {
+        var index = this.files.indexOf(file);
+        if (index === -1) {
             return;
         }
 
-        // Load CubismExpression
-        var cnt = setting.getExpressionCount();
-        for (var i = 0; i < cnt; i++) {
-            var expressionFileName = setting.getExpressionFileName(i);
-            var expressionName = setting.getExpressionName(i);
-            LoadChildFile(this, expressionFileName, `expression.${expressionName}`);
-        }
+        console.log(`Load file '${file.key}' at '${file.url}'`)
 
-        // Load CubismPhysics
-        var physicsFileName = setting.getPhysicsFileName();
-        if (physicsFileName !== '') {
-            LoadChildFile(this, physicsFileName, 'physics');
-        }
+        this.pending--;
 
-        // Load CubismPose
-        var poseFileName = setting.getPoseFileName();
-        if (poseFileName !== '') {
-            LoadChildFile(this, poseFileName, 'pose');
-        }
+        if (index === 0) {
+            var arrayBuffer = file.data;
+            var setting = new CubismModelSettingJson(arrayBuffer, arrayBuffer.byteLength);
+            file.data = setting;
 
-        // Load UserData
-        var userDataFileName = setting.getUserDataFile();
-        if (userDataFileName !== '') {
-            LoadChildFile(this, userDataFileName, 'userData');
+            // Load remainder files by setting
+            LoadChildrenFiles(this, setting);
         }
+    }
 
-        // Load CubismMotion
-        var groupCnt = setting.getMotionGroupCount();
-        for (var gi = 0; gi < groupCnt; gi++) {
-            var groupName = setting.getMotionGroupName(gi);
-            var cnt = setting.getMotionCount(groupName);
-            for (var i = 0; i < cnt; i++) {
-                var motionFileName = setting.getMotionFileName(groupName, i);
-                LoadChildFile(this, motionFileName, `motion.${groupName}.${i}`);
+    addToCache() {
+        if (this.isReadyToProcess()) {
+            var data = {};
+            for (var i = 0, cnt = this.files.length; i < cnt; i++) {
+                var file = this.files[i];
+                SetValue(data, file.dataKey, file.data);
             }
 
+            this.cache.add(this.key, data);            
+
+            this.complete = true;
         }
-
     }
-
-    onProcess() {
-        var arrayBuffer = this.xhrLoader.response; // Array buffer 
-        var setting = new CubismModelSettingJson(arrayBuffer, arrayBuffer.byteLength);
-        this.data = {
-            setting: setting
-        };
-
-        this.loadChildrenFiles(setting);
-
-        this.state = Phaser.Loader.FILE_PROCESSING;
-        this.onProcessComplete();
-    }
-
 }
 
 export default Live2dFile;
