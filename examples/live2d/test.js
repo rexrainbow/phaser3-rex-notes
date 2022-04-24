@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Live2dPlugin from '../../plugins/live2d-plugin.js'
+import Live2dPlugin from '../../plugins/live2d-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,12 +9,16 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.script('live2d', 'assets/live2d/core/live2dcubismcore.js');
         this.load.rexLive2d('Haru', 'assets/live2d/Haru/Haru.model3.json');
     }
 
     create() {
-        console.log('Create stage')
+        console.log('Create stage');
 
+        this.plugins.get('rexLive2d').initializeCubism();
+
+        this.add.rexLive2d(400, 300, 'Haru');
     }
 
     update() {
@@ -32,11 +36,13 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexLive2d',
-            plugin: Live2dPlugin,
-            start: true
-        }]
+        global: [
+            {
+                key: 'rexLive2d',
+                plugin: Live2dPlugin,
+                start: true
+            }
+        ]
     }
 };
 

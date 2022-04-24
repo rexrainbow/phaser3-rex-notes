@@ -19,7 +19,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
         var cache = loader.cacheManager.custom.live2d;
 
         // Load setting
-        var settingFile = CreateFile(loader, key, url, xhrSettings, 'setting');        
+        var settingFile = CreateFile(loader, key, url, xhrSettings, 'setting');
         super(loader, 'live2d', key, [settingFile]);
 
         this.cache = cache;
@@ -54,9 +54,9 @@ class Live2dFile extends Phaser.Loader.MultiFile {
                 SetValue(data, file.dataKey, file.data);
             }
 
-            this.cache.add(this.key, data);            
+            this.cache.add(this.key, data);
 
-            this.complete = true;
+            this.complete = true;            
         }
     }
 }

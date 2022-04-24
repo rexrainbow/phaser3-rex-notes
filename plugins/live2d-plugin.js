@@ -1,7 +1,8 @@
-// import Factory from './gameobjects/canvas/canvas/Factory.js';
-// import Creator from './gameobjects/canvas/canvas/Creator.js';
-// import Canvas from './gameobjects/canvas/canvas/Canvas.js';
+import Factory from './gameobjects/live2d/gameobject/Factory.js';
+import Creator from './gameobjects/live2d/gameobject/Creator.js';
+import Live2dGameObject from './gameobjects/live2d/gameobject/Live2dGameObject.js';
 import Live2dFileCallback from './gameobjects/live2d/loader/Live2dFileCallback.js';
+import InitializeCubism from './gameobjects/live2d/utils/InitializeCubism.js';
 import SetValue from './utils/object/SetValue.js';
 
 class Live2dPlugin extends Phaser.Plugins.BasePlugin {
@@ -17,7 +18,7 @@ class Live2dPlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerFileType('rexLive2d', Live2dFileCallback);
 
         //  Register our new Game Object type
-        // pluginManager.registerGameObject('rexCanvas', Factory, Creator);
+        pluginManager.registerGameObject('rexLive2d', Factory, Creator);
     }
 
     start() {
@@ -26,6 +27,15 @@ class Live2dPlugin extends Phaser.Plugins.BasePlugin {
     }
 }
 
-// SetValue(window, 'RexPlugins.GameObjects.Live2d', Canvas);
+var Methods = {
+    initializeCubism: InitializeCubism,
+}
+
+Object.assign(
+    Live2dPlugin.prototype,
+    Methods
+);
+
+SetValue(window, 'RexPlugins.GameObjects.Live2d', Live2dGameObject);
 
 export default Live2dPlugin;

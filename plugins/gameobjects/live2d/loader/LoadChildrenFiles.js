@@ -38,7 +38,7 @@ var LoadChildrenFiles = function (parent, setting) {
             `${key}!${expressionFileName}`,
             `${homeDir}${expressionFileName}`,
             xhrSettings,
-            `expression.${expressionName}`
+            `expressions.${expressionName}`
         );
 
         parent.addToMultiFile(expressionFile);
@@ -102,7 +102,7 @@ var LoadChildrenFiles = function (parent, setting) {
                 `${key}!${motionFileName}`,
                 `${homeDir}${motionFileName}`,
                 xhrSettings,
-                `motion.${groupName}_${i}`
+                `motions.${groupName}.${i}`
             );
 
             parent.addToMultiFile(motionFile);
