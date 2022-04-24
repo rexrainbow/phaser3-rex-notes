@@ -123,6 +123,8 @@ var LoadAssets = function (model, data) {
 
     }
 
+    // TODO: Load texture
+
     model._motionManager.stopAllMotions();
 
 }

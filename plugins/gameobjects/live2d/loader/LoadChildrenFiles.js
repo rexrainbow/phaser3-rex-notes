@@ -111,6 +111,20 @@ var LoadChildrenFiles = function (parent, setting) {
 
     }
 
+    // Load texture
+    var textureCnt = setting.getTextureCount();
+    for (var i = 0; i < textureCnt; i++) {
+        var textureFileName = setting.getTextureFileName(i);
+        if (textureFileName === '') {
+            // Error
+            continue;
+        }
+
+        console.log(textureFileName);
+        // TODO: load texture to texture cache?
+
+    }
+
 }
 
 export default LoadChildrenFiles;
