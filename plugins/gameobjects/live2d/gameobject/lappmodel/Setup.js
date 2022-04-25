@@ -16,6 +16,8 @@ var Setup = function (model, data) {
     model.loadModel(arrayBuffer, arrayBuffer.byteLength);
     // - Re-create render for current model._model
     model.createRenderer();
+    // - Set gl to current renderer
+    model.getRenderer().startUp(data.gl);
 
     // Load CubismExpression
     var expressions = data.expressions;
@@ -135,9 +137,6 @@ var Setup = function (model, data) {
 
     // Stop all motions
     model._motionManager.stopAllMotions();
-
-    // TODO: Set gl in render stage?
-    // this.getRenderer().startUp(gl);
 
 }
 

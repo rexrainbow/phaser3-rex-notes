@@ -4,6 +4,7 @@ import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
 
 import Setup from './Setup.js';
 import Update from './Update.js';
+import Draw from './Draw.js';
 
 class LAppModel extends CubismUserModel {
     constructor() {
@@ -26,6 +27,7 @@ class LAppModel extends CubismUserModel {
 
 var Methods = {
     update: Update,
+    draw: Draw,
 }
 
 Object.assign(

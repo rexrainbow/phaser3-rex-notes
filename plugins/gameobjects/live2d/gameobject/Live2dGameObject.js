@@ -1,15 +1,21 @@
 import Render from './render/Render.js';
 import LAppModel from './lappmodel/LAppModel.js';
 
-const GameObject = Phaser.GameObjects.GameObject;
+const Extern = Phaser.GameObjects.Extern;
 
-class Live2dGameObject extends GameObject {
+class Live2dGameObject extends Extern {
     constructor(scene, x, y, key) {
         super(scene, 'rexLive2d');
-
+       
         this.model = new LAppModel();
+        // TODO: Better way to create frameBuffer and assign it to model
+        this.model.frameBuffer = this.gl.getParameter(this.gl.FRAMEBUFFER_BINDING);
 
         this.setKey(key);
+    }
+
+    get gl() {
+        return this.scene.sys.renderer.gl;
     }
 
     setKey(key) {
@@ -19,7 +25,13 @@ class Live2dGameObject extends GameObject {
             console.error(`Live2d: can't load ${key}'s assets`);
             return;
         }
+
+        data.gl = this.gl;  // Add 'gl' property
+
         this.model.setup(data);
+
+        delete data.gl;  // Remove 'gl' property
+
         return this;
     }
 
@@ -28,23 +40,9 @@ class Live2dGameObject extends GameObject {
     }
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Live2dGameObject,
-    [
-        // Components.Alpha,
-        Components.BlendMode,
-        Components.Depth,
-        // Components.Flip,
-        // Components.GetBounds,
-        // Components.Mask,
-        // Components.Origin,
-        // Components.Pipeline,
-        Components.ScrollFactor,
-        // Components.Tint,
-        Components.Transform,
-        Components.Visible,
-        Render,
-    ]
-);
+Object.assign(
+    Live2dGameObject.prototype,
+    Render
+)
 
 export default Live2dGameObject;

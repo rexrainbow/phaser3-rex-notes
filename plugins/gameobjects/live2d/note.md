@@ -2,6 +2,108 @@
 
 ## Load assets
 
+1. Load setting (index) file. In `LAppModel.loadAssets`
+    ```ts
+    fetch(`${modelHomePath}${jsonFileName}`)
+    ```
+    - `modelHomePath` : `\Samples\Resources\Haru\`
+    - `jsonFileName` : `Haru.model3.json`
+1. Load CubismModel
+    ```ts
+    fetch(`${modelHomePath}${modelFileName}`);
+    ```
+    - `modelFileName` : `modelSetting.getModelFileName()`
+    - Result : 
+        ```ts
+        CubismUserModel.loadModel(arrayBuffer)
+        ```
+1. Load CubismExpression
+    ```ts
+    const count: number = modelSetting.getExpressionCount();
+    for (let i = 0; i < count; i++) {
+        const expressionFileName = modelSetting.getExpressionFileName(i);
+        fetch(`${modelHomePath}${expressionFileName}`);
+    }
+    ```
+    - Result : 
+        ```ts
+        const motion: ACubismMotion = this.loadExpression(
+            arrayBuffer,
+            arrayBuffer.byteLength,
+            expressionName
+        );
+        // More : update expressions
+        ```
+1. Load CubismPhysics
+    ```ts
+    fetch(`${modelHomePath}${physicsFileName}`);
+    ```
+    - `physicsFileName` : `modelSetting.getPhysicsFileName()`
+    - Result : 
+        ```ts
+        CubismUserModel.loadPhysics(arrayBuffer)
+        ```
+1. Load CubismPose
+    ```ts
+    fetch(`${modelHomePath}${poseFileName}`);
+    ```
+    - `poseFileName` : `modelSetting.getPoseFileName()`
+    - Result : 
+        ```ts
+        CubismUserModel.loadPose(arrayBuffer)
+        ```
+1. Setup EyeBlink
+1. Setup Breath
+1. Load UserData
+    ```ts
+    fetch(`${modelHomePath}${userDataFileName}`);
+    ```
+    - `userDataFileName` : `modelSetting.getUserDataFile()`
+    - Result : 
+        ```ts
+        CubismUserModel.loadUserData(arrayBuffer)
+        ```
+1. Setup EyeBlinkIds
+1. Setup LipSyncIds
+1. Setup Layout
+1. Load CubismMotion
+    ```ts    
+    const motionGroupCount: number = this._modelSetting.getMotionGroupCount();
+    const group: string[] = [];
+    for (let i = 0; i < motionGroupCount; i++) {
+         group[i] = modelSetting.getMotionGroupName(i);
+        fetch(`${modelHomePath}${expressionFileName}`);
+    }
+    ```
+    - Result : 
+        ```ts
+        const motion: ACubismMotion = this.loadExpression(
+            arrayBuffer,
+            arrayBuffer.byteLength,
+            expressionName
+        );
+        // More : update expressions
+        ```
+1. Load texture
+    ```ts
+    const textureCount: number = this._modelSetting.getTextureCount();
+    for (
+        let modelTextureNumber = 0;
+        modelTextureNumber < textureCount;
+        modelTextureNumber++
+      ) {
+        if (this._modelSetting.getTextureFileName(modelTextureNumber) == '') {
+          console.log('getTextureFileName null');
+          continue;
+        }
+
+        let texturePath =
+          this._modelSetting.getTextureFileName(modelTextureNumber);
+        texturePath = this._modelHomeDir + texturePath;
+        
+    }
+    ```
+
 ## Update
 
 1. `LAppDelegate.run()`
@@ -28,9 +130,34 @@
 
 ## Render
 
+1. `LAppLive2DManager.onUpdate()`
+    - `projection` matrix :
+        ```ts
+        const projection: CubismMatrix44 = new CubismMatrix44();
+        if(width < height) {
+            projection.scale(1.0, width / height);
+        } else {
+            projection.scale(height / width, 1.0);
+        }
+
+        if (this._viewMatrix != null) {
+          projection.multiplyByMatrix(this._viewMatrix);
+        }
+        ```
+    - `_viewMatrix` matrix :
+        ```ts
+        this._viewMatrix = new CubismMatrix44();
+
+        public setViewMatrix(m: CubismMatrix44) {
+            for (let i = 0; i < 16; i++) {
+                this._viewMatrix.getArray()[i] = m.getArray()[i];
+            }
+        }
+        ```
 1. `LAppModel.draw(projection)`
     ```ts
     matrix.multiplyByMatrix(this._modelMatrix);
-    this.getRenderer().setMvpMatrix(matrix);
+    this.getRenderer().setMvpMatrix(projection);
     this.doDraw();
-    ```  
+    ```
+    - `_modelMatrix` : Member of LAppModel/CubismUserModel
