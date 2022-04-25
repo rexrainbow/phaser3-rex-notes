@@ -128,7 +128,7 @@ var LoadChildrenFiles = function (parent, setting) {
             `${homeDir}${textureFileName}`,
             xhrSettings
         );
-        imageFile.dataKey = `textures&&${textureFileName}`;
+        imageFile.dataKey = `textures&&${i}`;
 
         parent.addToMultiFile(imageFile);
         loader.addFile(imageFile);
