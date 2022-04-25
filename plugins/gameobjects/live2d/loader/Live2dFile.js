@@ -48,15 +48,33 @@ class Live2dFile extends Phaser.Loader.MultiFile {
 
     addToCache() {
         if (this.isReadyToProcess()) {
-            var data = {};
+            var textureManager = this.loader.textureManager;
+            var data = { key: this.key };
             for (var i = 0, cnt = this.files.length; i < cnt; i++) {
                 var file = this.files[i];
-                SetValue(data, file.dataKey, file.data, '&&');
+
+                var fileData = file.data;
+                if (file.dataKey.startsWith('textures')) {
+                    var key = file.key.replace(`${this.key}!`, '');
+                    var texture;
+                    // Add image to textureManager manually
+                    if (!textureManager.exists(key)) {
+                        texture = textureManager.addImage(key, file.data);
+                    } else {
+                        texture = textureManager.get(key);
+                    }
+
+                    // store glTexture to live2d data cache
+                    fileData = texture.source[0].glTexture;
+                }
+
+                SetValue(data, file.dataKey, fileData, '&&');
+
             }
 
             this.cache.add(this.key, data);
 
-            this.complete = true;            
+            this.complete = true;
         }
     }
 }

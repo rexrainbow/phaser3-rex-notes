@@ -13,8 +13,17 @@ class Live2dGameObject extends GameObject {
 
     setKey(key) {
         this.key = key;
-        this.model.setup(this.scene, key);
+        var data = this.scene.cache.custom.live2d.get(key);
+        if (!data || !data.model) {
+            console.error(`Live2d: can't load ${key}'s assets`);
+            return;
+        }
+        this.model.setup(data);
         return this;
+    }
+
+    preUpdate(time, delta) {
+        this.model.update(time, delta);
     }
 }
 

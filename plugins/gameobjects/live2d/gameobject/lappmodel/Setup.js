@@ -12,7 +12,7 @@ var Setup = function (model, data) {
 
     // Load CubismModel
     var arrayBuffer = data.model;
-    model.loadModel(arrayBuffer, arrayBuffer.byteLength);
+    model.loadModel(arrayBuffer, arrayBuffer.byteLength);  // Create model._model
 
     // Load CubismExpression
     var expressions = data.expressions;
@@ -93,6 +93,7 @@ var Setup = function (model, data) {
     model._modelMatrix.setupFromLayout(layout);
 
     // Load CubismMotion
+    model._model.saveParameters();
     var motionGroups = data.motions;
     for (var groupName in motionGroups) {
         var motionGroup = motionGroups[groupName];
@@ -124,8 +125,20 @@ var Setup = function (model, data) {
     }
 
     // TODO: Load texture
+    var textures = data.textures;
+    for (var textureName in textures) {
+    }
+
 
     model._motionManager.stopAllMotions();
+
+    // Create render for current model._model
+    model.createRenderer();
+
+    // TODO: Set gl in render stage?
+    // this.getRenderer().startUp(gl);
+    // TODO: Bind texture in render stage?
+    // this.getRenderer().bindTexture(modelTextureNumber, textureInfo.id)
 
 }
 

@@ -121,7 +121,7 @@ var LoadChildrenFiles = function (parent, setting) {
             continue;
         }
 
-        // TODO: load texture to texture cache?
+        // TODO: store texture into live2d cache?
         var imageFile = new ImageFile(
             loader,
             `${key}!${textureFileName}`,

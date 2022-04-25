@@ -3,6 +3,7 @@ import { csmVector } from '../../framework/src/type/csmvector';
 import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
 
 import Setup from './Setup.js';
+import Update from './Update.js';
 
 class LAppModel extends CubismUserModel {
     constructor() {
@@ -13,17 +14,23 @@ class LAppModel extends CubismUserModel {
 
         this._motions = new csmMap();
         this._expressions = new csmMap();
+
+        // this._wavFileHandler = new LAppWavFileHandler();
     }
 
-    setup(scene, key) {
-        var data = scene.cache.custom.live2d.get(key);
-        if (!data || !data.model) {
-            console.error(`Live2d: can't load ${key}'s assets`);
-            return;
-        }
-
+    setup(data) {
         Setup(this, data);
+        return this;
     }
 }
+
+var Methods = {
+    update: Update,
+}
+
+Object.assign(
+    LAppModel.prototype,
+    Methods
+)
 
 export default LAppModel;

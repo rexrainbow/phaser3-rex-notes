@@ -12,6 +12,13 @@ class Live2dPlugin extends Phaser.Plugins.BasePlugin {
 
         var game = pluginManager.game;
 
+        var isWebGL = (game.config.renderType === 2);
+
+        if (!isWebGL) {
+            console.error('Live2d can\'t run in CANVAS render mode.')
+            return;
+        }
+
         game.cache.addCustom('live2d');
 
         // Register new file type to loader
