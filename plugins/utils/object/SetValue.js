@@ -36,7 +36,11 @@ var GetEntry = function (target, keys, defaultEntry) {
     return entry;
 };
 
-var SetValue = function (target, keys, value) {
+var SetValue = function (target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+        delimiter = '.';
+    }
+
     // no object
     if (typeof (target) !== 'object') {
         return;
@@ -54,7 +58,7 @@ var SetValue = function (target, keys, value) {
         }
     } else {
         if (typeof (keys) === 'string') {
-            keys = keys.split('.');
+            keys = keys.split(delimiter);
         }
 
         var lastKey = keys.pop();

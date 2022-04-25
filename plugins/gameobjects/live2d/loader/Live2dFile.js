@@ -51,7 +51,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
             var data = {};
             for (var i = 0, cnt = this.files.length; i < cnt; i++) {
                 var file = this.files[i];
-                SetValue(data, file.dataKey, file.data);
+                SetValue(data, file.dataKey, file.data, '&&');
             }
 
             this.cache.add(this.key, data);
