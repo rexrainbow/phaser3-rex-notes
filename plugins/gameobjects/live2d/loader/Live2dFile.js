@@ -1,4 +1,4 @@
-import CreateFile from './CreateFile.js';
+import CreateBinaryFile from './CreateBinaryFile.js';
 import { CubismModelSettingJson } from '../framework/src/cubismmodelsettingjson';
 import LoadChildrenFiles from './LoadChildrenFiles.js';
 import SetValue from '../../../utils/object/SetValue.js';
@@ -19,7 +19,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
         var cache = loader.cacheManager.custom.live2d;
 
         // Load setting
-        var settingFile = CreateFile(loader, key, url, xhrSettings, 'setting');
+        var settingFile = CreateBinaryFile(loader, key, url, xhrSettings, 'setting');
         super(loader, 'live2d', key, [settingFile]);
 
         this.cache = cache;

@@ -1,6 +1,7 @@
-import CreateFile from './CreateFile.js';
+import CreateBinaryFile from './CreateBinaryFile.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const ImageFile = Phaser.Loader.FileTypes.ImageFile;
 
 var LoadChildrenFiles = function (parent, setting) {
     var loader = parent.loader;
@@ -11,7 +12,7 @@ var LoadChildrenFiles = function (parent, setting) {
     // Load CubismModel
     var modelFileName = setting.getModelFileName();
     if (modelFileName !== '') {
-        var modelFile = CreateFile(
+        var modelFile = CreateBinaryFile(
             loader,
             `${key}!${modelFileName}`,
             `${homeDir}${modelFileName}`,
@@ -33,7 +34,7 @@ var LoadChildrenFiles = function (parent, setting) {
         var expressionFileName = setting.getExpressionFileName(i);
         var expressionName = setting.getExpressionName(i);
 
-        var expressionFile = CreateFile(
+        var expressionFile = CreateBinaryFile(
             loader,
             `${key}!${expressionFileName}`,
             `${homeDir}${expressionFileName}`,
@@ -48,7 +49,7 @@ var LoadChildrenFiles = function (parent, setting) {
     // Load CubismPhysics
     var physicsFileName = setting.getPhysicsFileName();
     if (physicsFileName !== '') {
-        var physicsFile = CreateFile(
+        var physicsFile = CreateBinaryFile(
             loader,
             `${key}!${physicsFileName}`,
             `${homeDir}${physicsFileName}`,
@@ -63,7 +64,7 @@ var LoadChildrenFiles = function (parent, setting) {
     // Load CubismPose
     var poseFileName = setting.getPoseFileName();
     if (poseFileName !== '') {
-        var poseFile = CreateFile(
+        var poseFile = CreateBinaryFile(
             loader,
             `${key}!${poseFileName}`,
             `${homeDir}${poseFileName}`,
@@ -78,7 +79,7 @@ var LoadChildrenFiles = function (parent, setting) {
     // Load UserData
     var userDataFileName = setting.getUserDataFile();
     if (userDataFileName !== '') {
-        var userDataFile = CreateFile(
+        var userDataFile = CreateBinaryFile(
             loader,
             `${key}!${userDataFileName}`,
             `${homeDir}${userDataFileName}`,
@@ -97,7 +98,7 @@ var LoadChildrenFiles = function (parent, setting) {
         var cnt = setting.getMotionCount(groupName);
         for (var i = 0; i < cnt; i++) {
             var motionFileName = setting.getMotionFileName(groupName, i);
-            var motionFile = CreateFile(
+            var motionFile = CreateBinaryFile(
                 loader,
                 `${key}!${motionFileName}`,
                 `${homeDir}${motionFileName}`,
@@ -120,9 +121,17 @@ var LoadChildrenFiles = function (parent, setting) {
             continue;
         }
 
-        console.log(textureFileName);
         // TODO: load texture to texture cache?
+        var imageFile = new ImageFile(
+            loader,
+            `${key}!${textureFileName}`,
+            `${homeDir}${textureFileName}`,
+            xhrSettings
+        );
+        imageFile.dataKey = `textures.${textureFileName}`;
 
+        parent.addToMultiFile(imageFile);
+        loader.addFile(imageFile);
     }
 
 }

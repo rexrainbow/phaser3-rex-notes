@@ -2,7 +2,7 @@ import { csmMap } from '../../framework/src/type/csmmap';
 import { csmVector } from '../../framework/src/type/csmvector';
 import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
 
-import LoadAssets from './LoadAssets.js';
+import Setup from './Setup.js';
 
 class LAppModel extends CubismUserModel {
     constructor() {
@@ -15,14 +15,14 @@ class LAppModel extends CubismUserModel {
         this._expressions = new csmMap();
     }
 
-    loadAssets(scene, key) {
+    setup(scene, key) {
         var data = scene.cache.custom.live2d.get(key);
         if (!data || !data.model) {
             console.error(`Live2d: can't load ${key}'s assets`);
             return;
         }
 
-        LoadAssets(this, data);
+        Setup(this, data);
     }
 }
 

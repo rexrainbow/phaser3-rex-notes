@@ -7,7 +7,14 @@ class Live2dGameObject extends GameObject {
         super(scene, 'rexLive2d');
 
         this.model = new LAppModel();
-        this.model.loadAssets(scene, key);
+
+        this.setKey(key);
+    }
+
+    setKey(key) {
+        this.key = key;
+        this.model.setup(this.scene, key);
+        return this;
     }
 }
 

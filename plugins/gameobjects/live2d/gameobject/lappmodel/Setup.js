@@ -6,7 +6,7 @@ import { BreathParameterData, CubismBreath } from '../../framework/src/effect/cu
 import { csmVector } from '../../framework/src/type/csmvector';
 import { csmMap } from '../../framework/src/type/csmmap';
 
-var LoadAssets = function (model, data) {
+var Setup = function (model, data) {
     // Load setting
     model._modelSetting = data.setting;
 
@@ -129,4 +129,4 @@ var LoadAssets = function (model, data) {
 
 }
 
-export default LoadAssets;
+export default Setup;
