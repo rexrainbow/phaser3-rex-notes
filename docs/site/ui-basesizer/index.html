@@ -6812,6 +6812,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dragging" class="md-nav__link">
+    Dragging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -8318,6 +8325,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dragging" class="md-nav__link">
+    Dragging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -9301,6 +9315,24 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 <p><code>container.add(sizer)</code>, or <code>layer.add(sizer)</code> won't add children of sizer.</p>
 </div>
 <h3 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h3>
+<h4 id="dragging">Dragging<a class="headerlink" href="#dragging" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Fire <code>'sizer.drag'</code> on top-most sizer when <a href="./#drag-top-most-sizer">dragging</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">topmostSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Fire <code>'sizer.dragstart'</code> on top-most sizer when <a href="./#drag-top-most-sizer">dragging</a> start.
+    <div class="highlight"><pre><span></span><code><span class="nx">topmostSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Fire <code>'sizer.dragend'</code> on top-most sizer when <a href="./#drag-top-most-sizer">dragging</a> dragend.
+    <div class="highlight"><pre><span></span><code><span class="nx">topmostSizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
 <h4 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

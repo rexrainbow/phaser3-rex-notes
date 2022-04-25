@@ -953,6 +953,27 @@ var isTouching = sizer.isInTouching();
 
 ### Events
 
+#### Dragging
+
+- Fire `'sizer.drag'` on top-most sizer when [dragging](ui-basesizer.md#drag-top-most-sizer)
+    ```javascript
+    topmostSizer.on('sizer.drag', function(pointer, dragX, dragY) {
+
+    })
+    ```
+- Fire `'sizer.dragstart'` on top-most sizer when [dragging](ui-basesizer.md#drag-top-most-sizer) start.
+    ```javascript
+    topmostSizer.on('sizer.dragstart', function(pointer, dragX, dragY) {
+
+    })
+    ```
+- Fire `'sizer.dragend'` on top-most sizer when [dragging](ui-basesizer.md#drag-top-most-sizer) dragend.
+    ```javascript
+    topmostSizer.on('sizer.dragend', function(pointer, dragX, dragY, dropped) {
+
+    })
+    ```
+
 #### Layout children
 
 !!! note

@@ -17,11 +17,21 @@ var SetDraggable = function (senser, draggable) {
         // Register draggable
         senser.setInteractive();
         senser.scene.input.setDraggable(senser);
-        senser.on('drag', function (pointer, dragX, dragY) {
-            var topmostParent = this.getTopmostSizer();
-            topmostParent.x += (dragX - senser.x);
-            topmostParent.y += (dragY - senser.y);
-        }, this);
+        senser
+            .on('drag', function (pointer, dragX, dragY) {
+                var topmostParent = this.getTopmostSizer();
+                topmostParent.x += (dragX - senser.x);
+                topmostParent.y += (dragY - senser.y);
+                topmostParent.emit('sizer.drag', pointer, dragX, dragY);
+            }, this)
+            .on('dragstart', function (pointer, dragX, dragY) {
+                var topmostParent = this.getTopmostSizer();
+                topmostParent.emit('sizer.dragstart', pointer, dragX, dragY);
+            }, this)
+            .on('dragend', function (pointer, dragX, dragY, dropped) {
+                var topmostParent = this.getTopmostSizer();
+                topmostParent.emit('sizer.dragend', pointer, dragX, dragY, dropped);
+            }, this)
     } else {
         // Not draggable and draggable is not registered yet, do nothing
     }
