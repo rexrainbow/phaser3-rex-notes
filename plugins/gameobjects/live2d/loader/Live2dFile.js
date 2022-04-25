@@ -64,12 +64,13 @@ class Live2dFile extends Phaser.Loader.MultiFile {
                         texture = textureManager.get(key);
                     }
 
-                    // store glTexture to live2d data cache
+                    // Store glTexture to live2d data cache
                     fileData = texture.source[0].glTexture;
                 }
 
                 SetValue(data, file.dataKey, fileData, '&&');
 
+                file.pendingDestroy();
             }
 
             this.cache.add(this.key, data);
