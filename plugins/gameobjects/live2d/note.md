@@ -156,8 +156,60 @@
         ```
 1. `LAppModel.draw(projection)`
     ```ts
-    matrix.multiplyByMatrix(this._modelMatrix);
+    projection.multiplyByMatrix(this._modelMatrix);
     this.getRenderer().setMvpMatrix(projection);
     this.doDraw();
     ```
     - `_modelMatrix` : Member of LAppModel/CubismUserModel
+
+### CubismMatrix44
+
+- `matrix.loadIdentity()` : Reset
+- `matrix.setMatrix(tr)` : Copy from
+- `var arr = matrix.getArray()` : 1d array of 16 units
+- Translate
+    - `var translateX = matrix.getTranslateX()` : TranslateX, `tr[12]`
+    - `var translateY = matrix.getTranslateY()` : TranslateX, `tr[13]`
+    - `matrix.translate(x, y)`
+    - `matrix.translateX(x)`
+    - `matrix.translateY(y)`
+    - `matrix.translateRelative(x, y)`
+- Scale
+    - `var scaleX = matrix.getScaleX()` : ScaleX, `tr[0]`
+    - `var scaleY = matrix.getScaleY()` : ScaleY, `tr[5]`
+    - `matrix.scale(scaleX, scaleY)`
+    - `matrix.scaleRelative(scaleX, scaleY)`
+- Transform
+    - `var positionX = matrix.transformX(localX)`
+    - `var positionY = matrix.transformY(localY)`
+    - `var localX = matrix.invertTransformX(positionX)`
+    - `var localY = matrix.invertTransformY(positionY)`
+- Multiply
+    - `matrix.multiply(a, b, dst)`
+    - `matrix.multiplyByMatrix(m)`
+- `matrix.clone()`
+
+### Model display matrix
+
+- Get model display matrix
+    ```ts
+    var modelMatrix = model.getModelMatrix()
+    ```
+- Change size = set scale
+    ```ts
+    modelMatrix.setWidth(width);
+    modelMatrix.setHeight(width);
+    ```
+- Set position
+    ```ts
+    modelMatrix.setPosition(x, y);
+    modelMatrix.setX(x);
+    modelMatrix.setY(y);
+    modelMatrix.setCenterPosition(x, y);
+    modelMatrix.top(y);     // = setY
+    modelMatrix.bottom(y);
+    modelMatrix.left(y);    // = setX
+    modelMatrix.right(y);
+    modelMatrix.centerX(y);
+    modelMatrix.centerY(y);
+    ```

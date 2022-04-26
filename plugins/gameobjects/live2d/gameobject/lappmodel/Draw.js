@@ -6,7 +6,7 @@ var Draw = function (calcMatrix) {
     }
 
     // TODO: Adjust matrix by calcMatrix
-    var matrix = new CubismMatrix44();
+    var matrix = this._viewportMatrix.clone();    
     matrix.multiplyByMatrix(this._modelMatrix);
     this.getRenderer().setMvpMatrix(matrix);
     this.getRenderer().setRenderState(this._frameBuffer, this._viewport);
