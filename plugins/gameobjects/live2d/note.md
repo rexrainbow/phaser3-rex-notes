@@ -145,15 +145,20 @@
         }
         ```
     - `_viewMatrix` matrix :
-        ```ts
-        this._viewMatrix = new CubismMatrix44();
-
-        public setViewMatrix(m: CubismMatrix44) {
-            for (let i = 0; i < 16; i++) {
-                this._viewMatrix.getArray()[i] = m.getArray()[i];
+        - In LAppView
+        - Copy to LAppLive2DManager
+            ```ts
+            live2DManager.setViewMatrix(this._viewMatrix)
+            ```
+            ```ts
+            this._viewMatrix = new CubismMatrix44();
+            
+            public setViewMatrix(m: CubismMatrix44) {
+                for (let i = 0; i < 16; i++) {
+                    this._viewMatrix.getArray()[i] = m.getArray()[i];
+                }
             }
-        }
-        ```
+            ```
 1. `LAppModel.draw(projection)`
     ```ts
     projection.multiplyByMatrix(this._modelMatrix);
