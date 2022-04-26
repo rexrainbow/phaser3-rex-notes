@@ -32,7 +32,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
             return;
         }
 
-        console.log(`Load file '${file.key}' at '${file.url}'`)
+        // console.log(`Load file '${file.key}' at '${file.url}'`)
 
         this.pending--;
 

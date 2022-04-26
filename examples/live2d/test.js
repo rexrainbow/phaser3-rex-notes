@@ -16,8 +16,6 @@ class Demo extends Phaser.Scene {
     create() {
         console.log('Create stage');
 
-        this.plugins.get('rexLive2d').initializeCubism();
-
         this.add.rexLive2d(400, 300, 'Haru');
     }
 

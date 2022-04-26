@@ -1,6 +1,6 @@
 import Render from './render/Render.js';
 import GlobalData from './GlobalData.js';
-import LAppModel from './lappmodel/LAppModel.js';
+import CreateModel from './CreateModel.js';
 
 const Extern = Phaser.GameObjects.Extern;
 
@@ -10,10 +10,7 @@ class Live2dGameObject extends Extern {
 
         this.globalData = GlobalData.getInstance(this);
 
-        var model = new LAppModel();
-        model._frameBuffer = this.globalData.frameBuffer;
-        model._viewport = this.globalData.viewport;
-        this.model = model;
+        this.model = CreateModel(this.globalData);
 
         this.setKey(key);
     }
