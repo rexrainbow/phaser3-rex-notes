@@ -1,4 +1,5 @@
 import Render from './render/Render.js';
+import GlobalData from './GlobalData.js';
 import LAppModel from './lappmodel/LAppModel.js';
 
 const Extern = Phaser.GameObjects.Extern;
@@ -6,16 +7,12 @@ const Extern = Phaser.GameObjects.Extern;
 class Live2dGameObject extends Extern {
     constructor(scene, x, y, key) {
         super(scene, 'rexLive2d');
-       
+
+        this.globalData = GlobalData.getInstance(this);
         this.model = new LAppModel();
-        // TODO: Better way to create frameBuffer and assign it to model
-        this.model.frameBuffer = this.gl.getParameter(this.gl.FRAMEBUFFER_BINDING);
+        this.model._frameBuffer = this.globalData.frameBuffer;
 
         this.setKey(key);
-    }
-
-    get gl() {
-        return this.scene.sys.renderer.gl;
     }
 
     setKey(key) {
@@ -26,7 +23,7 @@ class Live2dGameObject extends Extern {
             return;
         }
 
-        data.gl = this.gl;  // Add 'gl' property
+        data.gl = this.globalData.gl;  // Add 'gl' property
 
         this.model.setup(data);
 
@@ -37,6 +34,13 @@ class Live2dGameObject extends Extern {
 
     preUpdate(time, delta) {
         this.model.update(time, delta);
+    }
+
+    preDestroy() {
+        this.globalData = undefined;
+
+        this.model.release();
+        this.model = undefined;
     }
 }
 

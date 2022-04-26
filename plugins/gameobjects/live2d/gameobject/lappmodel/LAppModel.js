@@ -18,14 +18,10 @@ class LAppModel extends CubismUserModel {
 
         // this._wavFileHandler = new LAppWavFileHandler();
     }
-
-    setup(data) {
-        Setup(this, data);
-        return this;
-    }
 }
 
 var Methods = {
+    setup: Setup,
     update: Update,
     draw: Draw,
 }

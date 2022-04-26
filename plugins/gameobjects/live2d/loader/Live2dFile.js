@@ -54,6 +54,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
                 var file = this.files[i];
 
                 var fileData = file.data;
+                // Process textures
                 if (file.dataKey.startsWith('textures')) {
                     var key = file.key.replace(`${this.key}!`, '');
                     var texture;
@@ -68,7 +69,7 @@ class Live2dFile extends Phaser.Loader.MultiFile {
                     fileData = texture.source[0].glTexture;
                 }
 
-                SetValue(data, file.dataKey, fileData, '&&');
+                SetValue(data, file.dataKey, fileData, '!!!');
 
                 file.pendingDestroy();
             }

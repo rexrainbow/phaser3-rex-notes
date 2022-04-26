@@ -33,6 +33,8 @@ var Update = function (time, delta) {
     }
 
     this._model.update();
+
+    return this;
 }
 
 export default Update;

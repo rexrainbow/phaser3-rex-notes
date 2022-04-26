@@ -39,7 +39,7 @@ var LoadChildrenFiles = function (parent, setting) {
             `${key}!${expressionFileName}`,
             `${homeDir}${expressionFileName}`,
             xhrSettings,
-            `expressions&&${expressionName}`
+            `expressions!!!${expressionName}`
         );
 
         parent.addToMultiFile(expressionFile);
@@ -103,7 +103,7 @@ var LoadChildrenFiles = function (parent, setting) {
                 `${key}!${motionFileName}`,
                 `${homeDir}${motionFileName}`,
                 xhrSettings,
-                `motions&&${groupName}&&${i}`
+                `motions!!!${groupName}!!!${i}`
             );
 
             parent.addToMultiFile(motionFile);
@@ -128,7 +128,7 @@ var LoadChildrenFiles = function (parent, setting) {
             `${homeDir}${textureFileName}`,
             xhrSettings
         );
-        imageFile.dataKey = `textures&&${i}`;
+        imageFile.dataKey = `textures!!!${i}`;
 
         parent.addToMultiFile(imageFile);
         loader.addFile(imageFile);
