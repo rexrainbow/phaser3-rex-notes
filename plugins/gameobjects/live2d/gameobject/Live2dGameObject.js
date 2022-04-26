@@ -22,11 +22,7 @@ class Live2dGameObject extends Extern {
             return;
         }
 
-        data.gl = this.globalData.gl;  // Add 'gl' property
-
         this.model.setup(data);
-
-        delete data.gl;  // Remove 'gl' property
 
         return this;
     }

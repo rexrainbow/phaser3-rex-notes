@@ -19,8 +19,17 @@ class LAppModel extends CubismUserModel {
         // this._wavFileHandler = new LAppWavFileHandler();
 
         // Get shared resources
+        this._gl = globalData.gl;
         this._frameBuffer = globalData.frameBuffer;
         this._viewport = globalData.viewport;
+    }
+
+    release() {
+        super.release();
+
+        this._gl = undefined;
+        this._frameBuffer = undefined;
+        this._viewport = undefined;
     }
 }
 
