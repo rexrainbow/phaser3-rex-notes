@@ -9,8 +9,11 @@ class Live2dGameObject extends Extern {
         super(scene, 'rexLive2d');
 
         this.globalData = GlobalData.getInstance(this);
-        this.model = new LAppModel();
-        this.model._frameBuffer = this.globalData.frameBuffer;
+
+        var model = new LAppModel();
+        model._frameBuffer = this.globalData.frameBuffer;
+        model._viewport = this.globalData.viewport;
+        this.model = model;
 
         this.setKey(key);
     }

@@ -9,9 +9,7 @@ var Draw = function (calcMatrix) {
     var matrix = new CubismMatrix44();
     matrix.multiplyByMatrix(this._modelMatrix);
     this.getRenderer().setMvpMatrix(matrix);
-
-    var viewport = [0, 0, 800, 600]; // TODO
-    this.getRenderer().setRenderState(this._frameBuffer, viewport);
+    this.getRenderer().setRenderState(this._frameBuffer, this._viewport);
     this.getRenderer().drawModel();
 
     return this;
