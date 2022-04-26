@@ -1,14 +1,17 @@
 import { csmMap } from '../../framework/src/type/csmmap';
 import { csmVector } from '../../framework/src/type/csmvector';
 import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
+import GlobalData from './GlobalData';
 
 import Setup from './Setup.js';
 import Update from './Update.js';
 import Draw from './Draw.js';
 
 class LAppModel extends CubismUserModel {
-    constructor(data) {
+    constructor(parent) {
         super();
+
+        this.parent = parent;  // Live2dGameObject
 
         this._eyeBlinkIds = new csmVector();
         this._lipSyncIds = new csmVector();
@@ -19,6 +22,7 @@ class LAppModel extends CubismUserModel {
         // this._wavFileHandler = new LAppWavFileHandler();
 
         // Get shared resources
+        var data = GlobalData.getInstance(parent)
         this._gl = data.gl;
         this._frameBuffer = data.frameBuffer;
         this._viewport = data.viewport;

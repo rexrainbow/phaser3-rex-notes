@@ -1,6 +1,6 @@
-import GetGame from '../../../utils/system/GetGame.js';
-import { CubismMatrix44 } from '../framework/src/math/cubismmatrix44';
-import InitializeCubism from '../utils/InitializeCubism.js';
+import GetGame from '../../../../utils/system/GetGame.js';
+import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
+import InitializeCubism from '../../utils/InitializeCubism.js';
 
 var GlobalDataInstance = undefined;
 
