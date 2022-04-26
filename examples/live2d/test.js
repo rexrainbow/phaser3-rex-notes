@@ -16,7 +16,11 @@ class Demo extends Phaser.Scene {
     create() {
         console.log('Create stage');
 
+        this.add.text(0, 0, 'Text0')
+
         this.add.rexLive2d(400, 300, 'Haru');
+
+        this.add.text(0, 580, 'Text1')
     }
 
     update() {

@@ -1,11 +1,10 @@
 import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
 
-var Draw = function (calcMatrix) {
+var Draw = function () {
     if (!this._model) {
         return;
     }
 
-    // TODO: Adjust matrix by calcMatrix
     var matrix = this._viewportMatrix.clone();    
     matrix.multiplyByMatrix(this._modelMatrix);
     this.getRenderer().setMvpMatrix(matrix);
