@@ -1,6 +1,6 @@
 import Render from './render/Render.js';
 import GlobalData from './GlobalData.js';
-import CreateModel from './CreateModel.js';
+import LAppModel from './lappmodel/LAppModel.js';
 
 const Extern = Phaser.GameObjects.Extern;
 
@@ -9,8 +9,7 @@ class Live2dGameObject extends Extern {
         super(scene, 'rexLive2d');
 
         this.globalData = GlobalData.getInstance(this);
-
-        this.model = CreateModel(this.globalData);
+        this.model = new LAppModel(this.globalData);
 
         this.setKey(key);
     }

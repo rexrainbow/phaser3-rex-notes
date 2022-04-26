@@ -7,7 +7,7 @@ import Update from './Update.js';
 import Draw from './Draw.js';
 
 class LAppModel extends CubismUserModel {
-    constructor() {
+    constructor(globalData) {
         super();
 
         this._eyeBlinkIds = new csmVector();
@@ -17,6 +17,10 @@ class LAppModel extends CubismUserModel {
         this._expressions = new csmMap();
 
         // this._wavFileHandler = new LAppWavFileHandler();
+
+        // Get shared resources
+        this._frameBuffer = globalData.frameBuffer;
+        this._viewport = globalData.viewport;
     }
 }
 

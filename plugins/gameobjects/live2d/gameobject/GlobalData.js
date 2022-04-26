@@ -3,30 +3,32 @@ import InitializeCubism from '../utils/InitializeCubism.js';
 
 var GlobalDataInstance = undefined;
 
+// Global data shared for all Live2dGameObjects
 class GlobalData {
-    static getInstance(game) {
+    static getInstance(gameObject) {
         if (!GlobalDataInstance) {
-            GlobalDataInstance = new GlobalData(game);
+            GlobalDataInstance = new GlobalData(gameObject);
         }
         return GlobalDataInstance;
     }
 
-    constructor(game) {
-        game = GetGame(game);
+    constructor(gameObject) {
+        var game = GetGame(gameObject);
         var gl = game.renderer.gl;
+        var scale = game.scale;
 
         this.game = game;
         this.gl = gl;
-        this.scale = this.game.scale;
+        this.scale = scale;
 
         // A frame buffer for all live2d game object
         this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
-        this.viewport = [0, 0, this.scale.width, this.scale.height];
+        this.viewport = [0, 0, scale.width, scale.height];
 
-        this.scale.on('resize', this.onResize, this);
+        scale.on('resize', this.onResize, this);
         game.events.once('destroy', this.destroy, this);
 
-        // Run this method once
+        // Run this method once, before creating CubismModel
         InitializeCubism();
     }
 
