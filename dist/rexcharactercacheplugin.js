@@ -2,7 +2,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcharactercacheplugin = factory());
-}(this, (function () { 'use strict';
+})(this, (function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -23,6 +23,9 @@
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
     return Constructor;
   }
 
@@ -37,6 +40,9 @@
         writable: true,
         configurable: true
       }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
@@ -738,10 +744,6 @@
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
-  function getCjsExportFromNamespace (n) {
-  	return n && n['default'] || n;
-  }
-
   var lokiIndexedAdapter = createCommonjsModule(function (module, exports) {
   /*
     Loki IndexedDb Adapter (need to include this script to use it)
@@ -1371,14 +1373,7 @@
   }));
   });
 
-  var empty = {};
-
-  var empty$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    'default': empty
-  });
-
-  var require$$1 = getCjsExportFromNamespace(empty$1);
+  var require$$1 = {};
 
   var lokijs = createCommonjsModule(function (module, exports) {
   /**
@@ -9316,4 +9311,4 @@
 
   return CharacterCachePlugin;
 
-})));
+}));
