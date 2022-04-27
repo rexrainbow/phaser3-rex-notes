@@ -94,6 +94,7 @@ var quest = new DialogQuest({
     dialog: dialog,
 
     questions: undefined,
+    // format: undefined,
     // delimiter: ',',
     // types: {
     //     question: 'q',

@@ -1,6 +1,6 @@
-import GetValue from '../../../utils/object/GetValue.js';
+import GetValue from '../../../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.min.js';
-import DefaultConvertFn from '../../../utils/string/TypeConvert.js';
+import DefaultConvertFn from '../../../../utils/string/TypeConvert.js';
 
 var ParseCSV = function (csvString, config) {
     var delimiter = GetValue(config, 'delimiter', ',');

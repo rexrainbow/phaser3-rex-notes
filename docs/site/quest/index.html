@@ -8397,7 +8397,8 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/wLoWyE">Branch</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/wLoWyE">(CSV) Branch</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/OJzGRxa">(YAML) Branch</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NZreRG">Shuffle</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -8454,6 +8455,7 @@
 <h4 id="create-question-manager-instance">Create question manager instance<a class="headerlink" href="#create-question-manager-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">questionManager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexQuest&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">questions</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// format: undefined,</span>
     <span class="c1">// delimiter: &#39;,&#39;,</span>
     <span class="c1">// types: {</span>
     <span class="c1">//     question: &#39;q&#39;,</span>
@@ -8469,8 +8471,15 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>questions</code> : An array of question objects, or a csv string.<ul>
-<li>An array : Question items array.
+<li><code>format</code> : Input data (parameter <code>question</code>) format.<ul>
+<li><code>'csv'</code> : Input data is a csv string</li>
+<li><code>'yaml'</code> : Input data is a yaml string represented multiple documents, or an array of yaml string for each document.</li>
+<li><code>'json'</code> : Input data is a json string.</li>
+<li><code>undefined</code> : Input data is a plain array of questions, don' parse it.</li>
+</ul>
+</li>
+<li><code>questions</code> : Input data of questions.<ul>
+<li>A plain array of questions. Parsing result of other input formats.
     <div class="highlight"><pre><span></span><code><span class="p">[</span>
     <span class="p">{</span>
         <span class="nx">key</span><span class="o">:</span> <span class="nx">q0</span><span class="p">,</span>
@@ -8527,7 +8536,31 @@
 </li>
 </ul>
 </li>
-<li>A csv string :
+<li>A yaml string represented multiple documents, will parse it to array of questions.
+    <div class="highlight"><pre><span></span><code><span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">q0</span>
+<span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+<span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+<span class="nt">options</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o0</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o1</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+<span class="nn">---</span>
+<span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">q1</span>
+<span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+<span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+<span class="nt">options</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o0</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o1</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+</code></pre></div></li>
+<li>An array of yaml strings for each document, will parse them to array of questions.   </li>
+<li>A csv string, will parse it to array of questions.
     <div class="highlight"><pre><span></span><code>type,key,param0,param1,...
 q,q0,value0,value1,...
 ,o0,value0,value1,...
@@ -8546,6 +8579,7 @@ q,q1,value0,value1,...
 </li>
 </ul>
 </li>
+<li>A json string, will parse it to array of questions.</li>
 </ul>
 </li>
 <li><code>delimiter</code> : Delimiter of csv string. Default value is <code>','</code></li>

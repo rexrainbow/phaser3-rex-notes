@@ -1,8 +1,9 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import ParseCSV from './ParseCSV.js';
+import ParseInputData from './parse/ParseInputData.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 import Clear from '../../../utils/object/Clear.js';
+import AddQuestion from './AddQuestion.js';
 import QuestMethods from './QuestMethods.js';
 import DataMethods from './DataMethods.js';
 
@@ -20,7 +21,7 @@ class QuestionManager {
             this.add(questions, config);
         }
         var questConfig = GetValue(config, 'quest', undefined);
-        if (questConfig) {           
+        if (questConfig) {
             this.startQuest(questConfig)
         }
     }
@@ -30,7 +31,7 @@ class QuestionManager {
         if (this._quest) {
             this._quest.destroy();
             this._quest = undefined;
-        }        
+        }
     }
 
     destroy() {
@@ -38,43 +39,18 @@ class QuestionManager {
     }
 
     add(question, config) {
-        if (typeof (question) === 'string') {
-            question = ParseCSV(question, config);
-        }
+        question = ParseInputData(question, config);
 
         if (Array.isArray(question)) {
             var questions = question;
             for (var i = 0, cnt = questions.length; i < cnt; i++) {
-                this._add(questions[i]);
+                AddQuestion.call(this, questions[i]);
             }
         } else {
-            this._add(itme);
+            AddQuestion.call(this, question);
         }
-        return this;
-    }
 
-    _add(question) {
-        var options = question.options;
-        if (options) {
-            // Apply key via serial number
-            var option;
-            for (var i = 0, cnt = options.length; i < cnt; i++) {
-                option = options[i];
-                if (!option.hasOwnProperty('key')) {
-                    option.key = `_${i}`;
-                }
-            }
-        }
-        if (!question.hasOwnProperty('key')) {
-            // Apply key via serial numbers
-            question.key = `_${this.questions.length}`;
-        }
-        var key = question.key;
-        if (this.questionMap.hasOwnProperty(key)) {
-            this.remove(key);
-        }
-        this.questions.push(question);
-        this.questionMap[key] = question;
+        return this;
     }
 
     remove(key) {

@@ -7,7 +7,8 @@ Question manager.
 
 ## Live demos
 
-- [Branch](https://codepen.io/rexrainbow/pen/wLoWyE)
+- [(CSV) Branch](https://codepen.io/rexrainbow/pen/wLoWyE)
+- [(YAML) Branch](https://codepen.io/rexrainbow/pen/OJzGRxa)
 - [Shuffle](https://codepen.io/rexrainbow/pen/NZreRG)
 
 ## Usage
@@ -78,6 +79,7 @@ Question manager.
 ```javascript
 var questionManager = scene.plugins.get('rexQuest').add({
     questions: undefined,
+    // format: undefined,
     // delimiter: ',',
     // types: {
     //     question: 'q',
@@ -93,8 +95,13 @@ var questionManager = scene.plugins.get('rexQuest').add({
 });
 ```
 
-- `questions` : An array of question objects, or a csv string.
-    - An array : Question items array.
+- `format` : Input data (parameter `question`) format.
+    - `'csv'` : Input data is a csv string
+    - `'yaml'` : Input data is a yaml string represented multiple documents, or an array of yaml string for each document.
+    - `'json'` : Input data is a json string.
+    - `undefined` : Input data is a plain array of questions, don' parse it.
+- `questions` : Input data of questions.
+    - A plain array of questions. Parsing result of other input formats.
         ```javascript
         [
             {
@@ -146,7 +153,32 @@ var questionManager = scene.plugins.get('rexQuest').add({
         - Option object : `{key, param, ...}`
             - `key` : An unique key string. Create a key string `'_' + serialNumber` if not given.
             - Other key-value parameters.
-    - A csv string :
+    - A yaml string represented multiple documents, will parse it to array of questions.
+        ```yaml
+        key: q0
+        param0: value0
+        param1: value1
+        options:
+            - key: o0
+              param0: value0
+              param1: value1
+            - key: o1
+              param0: value0
+              param1: value1
+        ---
+        key: q1
+        param0: value0
+        param1: value1
+        options:
+            - key: o0
+              param0: value0
+              param1: value1
+            - key: o1
+              param0: value0
+              param1: value1
+        ```
+    - An array of yaml strings for each document, will parse them to array of questions.   
+    - A csv string, will parse it to array of questions.
         ```raw
         type,key,param0,param1,...
         q,q0,value0,value1,...
@@ -162,6 +194,7 @@ var questionManager = scene.plugins.get('rexQuest').add({
                - Empty string : A row of option object belong a question object.
             - `key` : Unique key string. Create a key string `'_' + serialNumber` if this field does not exist.
             - Other fields.
+    - A json string, will parse it to array of questions.
 - `delimiter` : Delimiter of csv string. Default value is `','`
 - `types` : Define value of row type.
     - `types.question` : Define value of question row. Default value is `q`.
