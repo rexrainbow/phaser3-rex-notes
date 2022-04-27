@@ -3,7 +3,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
 import babel from 'rollup-plugin-babel';
-// import typescript from '@rollup/plugin-typescript';
+import typescript from '@rollup/plugin-typescript';
 import { uglify } from "rollup-plugin-uglify";
 // import { terser } from 'rollup-plugin-terser'; // Uglify for ES6
 
@@ -52,9 +52,9 @@ for (var key in pluginList) {
 
             builtins(),
 
-            // (useTypescript) ? typescript({
-            //     target: 'es5',
-            // }) : undefined,
+            (useTypescript) ? typescript({
+                target: 'es5',
+            }) : undefined,
 
             babel({
                 exclude: 'node_modules/**'

@@ -1,10 +1,10 @@
-import { CubismFramework } from '../../framework/live2dcubismframework.js';
-import { CubismDefaultParameterId } from '../../framework/cubismdefaultparameterid.js';
-import { ACubismMotion } from '../../framework/motion/acubismmotion.js';
-import { CubismEyeBlink } from '../../framework/effect/cubismeyeblink.js';
-import { BreathParameterData, CubismBreath } from '../../framework/effect/cubismbreath.js';
-import { csmVector } from '../../framework/type/csmvector.js';
-import { csmMap } from '../../framework/type/csmmap.js';
+import { CubismFramework } from '../../framework/src/live2dcubismframework';
+import { CubismDefaultParameterId } from '../../framework/src/cubismdefaultparameterid';
+import { ACubismMotion } from '../../framework/src/motion/acubismmotion';
+import { CubismEyeBlink } from '../../framework/src/effect/cubismeyeblink';
+import { BreathParameterData, CubismBreath } from '../../framework/src/effect/cubismbreath';
+import { csmVector } from '../../framework/src/type/csmvector';
+import { csmMap } from '../../framework/src/type/csmmap';
 
 var Setup = function (data) {
     // Load setting
