@@ -1,5 +1,5 @@
 import CreateBinaryFile from './CreateBinaryFile.js';
-import { CubismModelSettingJson } from '../framework/src/cubismmodelsettingjson';
+import { CubismModelSettingJson } from '../framework/cubismmodelsettingjson.js';
 import LoadChildrenFiles from './LoadChildrenFiles.js';
 import SetValue from '../../../utils/object/SetValue.js';
 

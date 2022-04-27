@@ -20,7 +20,10 @@ class Demo extends Phaser.Scene {
 
         this.add.rexLive2d(400, 300, 'Haru');
 
-        this.add.text(0, 580, 'Text1')
+        this.add.text(0, 580, 'Text1');
+
+        // BUG: live2d game object does not scale by camera
+        this.cameras.main.setZoom(0.5);
     }
 
     update() {

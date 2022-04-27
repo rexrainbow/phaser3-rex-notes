@@ -26,7 +26,7 @@ module.exports = {
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     'coverplugin': './plugins/cover-plugin.js',
-    'live2dplugin': ['./plugins/live2d-plugin.js', true],
+    'live2dplugin': './plugins/live2d-plugin.js',
     // texture
     'canvasframemanagerplugin': './plugins/canvasframemanager-plugin.js',
     'charactercacheplugin': './plugins/charactercache-plugin.js',

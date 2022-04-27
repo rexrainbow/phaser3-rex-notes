@@ -1,5 +1,5 @@
 import GetGame from '../../../../utils/system/GetGame.js';
-import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
+import { CubismMatrix44 } from '../../framework/math/cubismmatrix44.js';
 import InitializeCubism from '../../utils/InitializeCubism.js';
 
 var GlobalDataInstance = undefined;
@@ -25,7 +25,7 @@ class GlobalData {
         // A frame buffer for all live2d game object
         this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
 
-        this.viewport = [0, 0, 0, 0];
+        this.viewportRect = [0, 0, 0, 0];
         this.viewportMatrix = new CubismMatrix44();
         this.onResize();
 
@@ -44,7 +44,7 @@ class GlobalData {
         this.scale = undefined;
 
         this.frameBuffer = undefined;
-        this.viewport = undefined;
+        this.viewportRect = undefined;
         this.viewportMatrix = undefined;
 
         GlobalDataInstance = undefined;
@@ -55,8 +55,8 @@ class GlobalData {
         var height = this.scale.height;
 
         // Set view port
-        this.viewport[2] = width;
-        this.viewport[3] = height;
+        this.viewportRect[2] = width;
+        this.viewportRect[3] = height;
 
         // Set viewportMatrix
         if (width < height) {

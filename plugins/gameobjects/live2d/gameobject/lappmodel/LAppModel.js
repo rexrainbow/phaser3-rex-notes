@@ -1,6 +1,6 @@
-import { csmMap } from '../../framework/src/type/csmmap';
-import { csmVector } from '../../framework/src/type/csmvector';
-import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
+import { csmMap } from '../../framework/type/csmmap.js';
+import { csmVector } from '../../framework/type/csmvector.js';
+import { CubismUserModel } from '../../framework/model/cubismusermodel.js';
 import GlobalData from './GlobalData';
 
 import Setup from './Setup.js';
@@ -25,7 +25,7 @@ class LAppModel extends CubismUserModel {
         var data = GlobalData.getInstance(parent)
         this._gl = data.gl;
         this._frameBuffer = data.frameBuffer;
-        this._viewport = data.viewport;
+        this._viewportRect = data.viewportRect;
         this._viewportMatrix = data.viewportMatrix;
     }
 
@@ -34,7 +34,7 @@ class LAppModel extends CubismUserModel {
 
         this._gl = undefined;
         this._frameBuffer = undefined;
-        this._viewport = undefined;
+        this._viewportRect = undefined;
         this._viewportMatrix = undefined;
     }
 }

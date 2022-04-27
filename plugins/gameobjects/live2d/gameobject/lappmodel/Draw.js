@@ -1,4 +1,4 @@
-import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
+import { CubismMatrix44 } from '../../framework/math/cubismmatrix44.js';
 
 var Draw = function () {
     if (!this._model) {
@@ -8,7 +8,7 @@ var Draw = function () {
     var matrix = this._viewportMatrix.clone();    
     matrix.multiplyByMatrix(this._modelMatrix);
     this.getRenderer().setMvpMatrix(matrix);
-    this.getRenderer().setRenderState(this._frameBuffer, this._viewport);
+    this.getRenderer().setRenderState(this._frameBuffer, this._viewportRect);
     this.getRenderer().drawModel();
 
     return this;

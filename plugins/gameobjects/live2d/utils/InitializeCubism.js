@@ -1,4 +1,4 @@
-import { CubismFramework, Option } from '../framework/src/live2dcubismframework';
+import { CubismFramework, Option } from '../framework/live2dcubismframework.js';
 
 var InitializeCubism = function (config) {
     // Setup cubism
