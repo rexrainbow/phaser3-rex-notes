@@ -25,8 +25,8 @@ class GlobalData {
         // A frame buffer for all live2d game object
         this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
 
-        this.viewport = [0, 0, 0, 0];
-        this.viewportMatrix = new CubismMatrix44();
+        this.viewportRect = [0, 0, 0, 0];
+        this.projectionMatrix = new CubismMatrix44();
         this.onResize();
 
         scale.on('resize', this.onResize, this);
@@ -44,8 +44,8 @@ class GlobalData {
         this.scale = undefined;
 
         this.frameBuffer = undefined;
-        this.viewport = undefined;
-        this.viewportMatrix = undefined;
+        this.viewportRect = undefined;
+        this.projectionMatrix = undefined;
 
         GlobalDataInstance = undefined;
     }
@@ -55,14 +55,14 @@ class GlobalData {
         var height = this.scale.height;
 
         // Set view port
-        this.viewport[2] = width;
-        this.viewport[3] = height;
+        this.viewportRect[2] = width;
+        this.viewportRect[3] = height;
 
-        // Set viewportMatrix
+        // Set projectionMatrix
         if (width < height) {
-            this.viewportMatrix.scale(1.0, width / height);
+            this.projectionMatrix.scale(1.0, width / height);
         } else {
-            this.viewportMatrix.scale(height / width, 1.0);
+            this.projectionMatrix.scale(height / width, 1.0);
         }
     }
 }

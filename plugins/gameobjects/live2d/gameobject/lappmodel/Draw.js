@@ -5,10 +5,10 @@ var Draw = function () {
         return;
     }
 
-    var matrix = this._viewportMatrix.clone();    
+    var matrix = this._projectionMatrix.clone();    
     matrix.multiplyByMatrix(this._modelMatrix);
     this.getRenderer().setMvpMatrix(matrix);
-    this.getRenderer().setRenderState(this._frameBuffer, this._viewport);
+    this.getRenderer().setRenderState(this._frameBuffer, this._viewportRect);
     this.getRenderer().drawModel();
 
     return this;

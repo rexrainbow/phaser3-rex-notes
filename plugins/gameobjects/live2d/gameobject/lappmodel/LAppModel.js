@@ -25,8 +25,8 @@ class LAppModel extends CubismUserModel {
         var data = GlobalData.getInstance(parent)
         this._gl = data.gl;
         this._frameBuffer = data.frameBuffer;
-        this._viewport = data.viewport;
-        this._viewportMatrix = data.viewportMatrix;
+        this._viewportRect = data.viewportRect;
+        this._projectionMatrix = data.projectionMatrix;
     }
 
     release() {
@@ -34,8 +34,8 @@ class LAppModel extends CubismUserModel {
 
         this._gl = undefined;
         this._frameBuffer = undefined;
-        this._viewport = undefined;
-        this._viewportMatrix = undefined;
+        this._viewportRect = undefined;
+        this._projectionMatrix = undefined;
     }
 }
 

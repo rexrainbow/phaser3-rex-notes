@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
 
         this.add.rexLive2d(400, 300, 'Haru');
 
-        this.add.text(0, 580, 'Text1')
+        this.add.text(0, 1270, 'Text1')
     }
 
     update() {
@@ -30,10 +30,10 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1280,
     scale: {
-        mode: Phaser.Scale.RESIZE,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
