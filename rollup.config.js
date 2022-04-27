@@ -17,13 +17,13 @@ let outputs = [];
 // Export no-uglify files
 for (var key in pluginList) {
     let inputConfig = pluginList[key];
-    let inputFile, isTypescript;
+    let inputFile, useTypescript;
     if (typeof (inputConfig) === 'string') {
         inputFile = inputConfig;
-        isTypescript = false;
+        useTypescript = false;
     } else {
         inputFile = inputConfig[0];
-        isTypescript = inputConfig[1];
+        useTypescript = inputConfig[1];
     }
 
     let outFile = `./dist/rex${key}.js`;
@@ -52,7 +52,7 @@ for (var key in pluginList) {
 
             builtins(),
 
-            (isTypescript) ? typescript({
+            (useTypescript) ? typescript({
                 target: 'es5',
             }) : undefined,
 
@@ -68,8 +68,8 @@ for (var key in pluginList) {
         input: inputFile2,
         output: {
             file: outFile2,
-            name: libName,
-            format: 'umd',
+            // name: libName,
+            // format: 'umd',
         },
         external: ['phaser'],
         plugins: [
