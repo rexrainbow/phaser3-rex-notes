@@ -1,13 +1,13 @@
 import { csmMap } from '../../framework/src/type/csmmap';
 import { csmVector } from '../../framework/src/type/csmvector';
 import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
-import GlobalData from './GlobalData';
+import GlobalData from '../globaldata/GlobalData.js';
 
 import Setup from './Setup.js';
 import Update from './Update.js';
 import Draw from './Draw.js';
 
-class LAppModel extends CubismUserModel {
+class Model extends CubismUserModel {
     constructor(parent) {
         super();
 
@@ -70,8 +70,8 @@ var Methods = {
 }
 
 Object.assign(
-    LAppModel.prototype,
+    Model.prototype,
     Methods
 )
 
-export default LAppModel;
+export default Model;

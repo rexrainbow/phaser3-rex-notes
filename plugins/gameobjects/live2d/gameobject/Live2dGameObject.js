@@ -1,5 +1,5 @@
 import Render from './render/Render.js';
-import LAppModel from './lappmodel/LAppModel.js';
+import Model from './model/Model.js';
 
 const Base = Phaser.GameObjects.GameObject;
 
@@ -7,7 +7,7 @@ class Live2dGameObject extends Base {
     constructor(scene, x, y, key) {
         super(scene, 'rexLive2d');
 
-        this.model = new LAppModel(this);
+        this.model = new Model(this);
 
         this.setKey(key);
 
