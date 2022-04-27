@@ -5,8 +5,15 @@ var Draw = function () {
         return;
     }
 
-    var matrix = this._projectionMatrix.clone();    
+    // Scale model via scale of Live2dGameObject(parent)
+    this._modelMatrix.scale(this.parent.scaleX, this.parent.scaleY);
+
+    // Copy projection matrix
+    var matrix = this._projectionMatrix.clone();
+
+    // Apply model matrix
     matrix.multiplyByMatrix(this._modelMatrix);
+
     this.getRenderer().setMvpMatrix(matrix);
     this.getRenderer().setRenderState(this._frameBuffer, this._viewportRect);
     this.getRenderer().drawModel();

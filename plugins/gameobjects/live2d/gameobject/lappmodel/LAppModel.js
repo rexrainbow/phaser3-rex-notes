@@ -22,7 +22,7 @@ class LAppModel extends CubismUserModel {
         // this._wavFileHandler = new LAppWavFileHandler();
 
         // Get shared resources
-        var data = GlobalData.getInstance(parent)
+        var data = GlobalData.getInstance(parent);
         this._gl = data.gl;
         this._frameBuffer = data.frameBuffer;
         this._viewportRect = data.viewportRect;
@@ -36,6 +36,22 @@ class LAppModel extends CubismUserModel {
         this._frameBuffer = undefined;
         this._viewportRect = undefined;
         this._projectionMatrix = undefined;
+    }
+
+    get _modelWidth() {
+        if (this._model) {
+            return this._model._model.canvasinfo.CanvasWidth;
+        } else {
+            return 0;
+        }
+    }
+
+    get _modelHeight() {
+        if (this._model) {
+            return this._model._model.canvasinfo.CanvasHeight;
+        } else {
+            return 0;
+        }
     }
 }
 

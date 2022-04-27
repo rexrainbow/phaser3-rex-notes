@@ -50,20 +50,24 @@ class GlobalData {
         GlobalDataInstance = undefined;
     }
 
+    get canvasWidth() {
+        return this.scale.width;
+    }
+
+    get canvasHeight() {
+        return this.scale.height;
+    }
+
     onResize() {
-        var width = this.scale.width;
-        var height = this.scale.height;
+        var width = this.canvasWidth;
+        var height = this.canvasHeight;
 
         // Set view port
         this.viewportRect[2] = width;
         this.viewportRect[3] = height;
 
         // Set projectionMatrix
-        if (width < height) {
-            this.projectionMatrix.scale(1.0, width / height);
-        } else {
-            this.projectionMatrix.scale(height / width, 1.0);
-        }
+        this.projectionMatrix.scale(1.0, width / height);
     }
 }
 

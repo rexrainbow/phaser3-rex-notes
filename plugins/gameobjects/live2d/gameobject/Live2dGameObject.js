@@ -10,6 +10,8 @@ class Live2dGameObject extends Extern {
         this.model = new LAppModel(this);
 
         this.setKey(key);
+
+        this.setSize(this.model._modelWidth, this.model._modelHeight);
     }
 
     setKey(key) {
