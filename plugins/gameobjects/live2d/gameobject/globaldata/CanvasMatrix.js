@@ -13,10 +13,6 @@ class CanvasMatrix extends CubismMatrix44 {
         var ratio = (height === 0) ? 0 : width / height;
         this.width = width;
         this.height = height;
-        this.left = -ratio;
-        this.right = ratio;
-        this.bottom = -1;
-        this.top = 1;
 
         this.scale(1, ratio);
 
@@ -25,12 +21,12 @@ class CanvasMatrix extends CubismMatrix44 {
 
     toLocalX(x) {
         var t = (this.width === 0) ? 0 : (x / this.width);
-        return Linear(this.left, this.right, t);
+        return (2 * t) - 1;
     }
 
     toLocalY(y) {
         var t = (this.height === 0) ? 0 : (y / this.height);
-        return Linear(this.top, this.bottom, t);
+        return 1 - (2 * t);
     }
 }
 

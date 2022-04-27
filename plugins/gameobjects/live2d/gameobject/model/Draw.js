@@ -6,27 +6,34 @@ var Draw = function (calcMatrix) {
     }
 
     var gameObject = this.parent;
+    var globalData = this._globalData;
+    var canvasMatrix = globalData.canvasMatrix;
 
     // Copy projection matrix
-    var matrix = this._canvasMatrix.clone();
+    var matrix = canvasMatrix.clone();
     matrix.translate(
-        this.toLocalX(calcMatrix.getX(0, 0)),
-        this.toLocalY(calcMatrix.getY(0, 0))
+        canvasMatrix.toLocalX(calcMatrix.getX(0, 0)),
+        canvasMatrix.toLocalY(calcMatrix.getY(0, 0))
     );
+    matrix.scaleRelative(
+        calcMatrix.scaleX,
+        calcMatrix.scaleY
+    )
 
-    // Scale model via scale of Live2dGameObject
     var modelMatrix = this._modelMatrix;
-    modelMatrix.scale(gameObject.scaleX, gameObject.scaleY);
-    // Translate model via origin of Live2dGameObject
-    modelMatrix.translate(0.5 - gameObject.originX, gameObject.originY - 0.5);
+    modelMatrix.translate(
+        0.5 - gameObject.originX,
+        gameObject.originY - 0.5
+    );
     // TODO: Rotate model (SDK does not support)
+    
 
     // Apply model matrix
     matrix.multiplyByMatrix(modelMatrix);
 
     var renderer = this.getRenderer();
     renderer.setMvpMatrix(matrix);
-    renderer.setRenderState(this._frameBuffer, this._viewportRect);
+    renderer.setRenderState(globalData.frameBuffer, globalData.viewportRect);
     renderer.drawModel();
 
     return this;

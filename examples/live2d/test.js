@@ -16,13 +16,28 @@ class Demo extends Phaser.Scene {
     create() {
         console.log('Create stage');
 
-        this.add.text(0, 0, 'Text0')
+        this.add.text(0, 0, 'Text0');
 
-        this.add.rexLive2d(1920 / 2, 0, 'Haru')
-            .setScale(0.5)
-            .setOrigin(0.5, 0)
+        var x = 500;
+        var y = 500;
 
-        this.add.text(0, 1270, 'Text1')
+        var obj = this.add.rexLive2d(x, y, 'Haru')
+            .setScale(0.3)
+            .setOrigin(0)
+
+        this.add.text(0, 1060, 'Text1')
+
+        this.add.circle(x, y, 10, 0xff0000);
+
+        this.add.graphics({
+            lineStyle: {
+                color: 0xff0000,
+                width: 10
+            }
+        })
+            .strokeRectShape(obj.getBounds())
+
+        //this.cameras.main.setZoom(0.3)
     }
 
     update() {
@@ -33,7 +48,7 @@ var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 1920,
-    height: 1280,
+    height: 1080,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

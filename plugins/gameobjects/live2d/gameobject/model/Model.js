@@ -22,20 +22,13 @@ class Model extends CubismUserModel {
         // this._wavFileHandler = new LAppWavFileHandler();
 
         // Get shared resources
-        var data = GlobalData.getInstance(parent);
-        this._gl = data.gl;
-        this._frameBuffer = data.frameBuffer;
-        this._viewportRect = data.viewportRect;
-        this._canvasMatrix = data.canvasMatrix;
+        this._globalData = GlobalData.getInstance(parent);
     }
 
     release() {
         super.release();
 
-        this._gl = undefined;
-        this._frameBuffer = undefined;
-        this._viewportRect = undefined;
-        this._canvasMatrix = undefined;
+        this._globalData = undefined;
     }
 
     get _modelWidth() {
@@ -55,11 +48,11 @@ class Model extends CubismUserModel {
     }
 
     toLocalX(x) {
-        return this._canvasMatrix.toLocalX(x);
+        return this._globalData.canvasMatrix.toLocalX(x);
     }
 
     toLocalY(y) {
-        return this._canvasMatrix.toLocalY(y);
+        return this._globalData.canvasMatrix.toLocalY(y);
     }
 }
 

@@ -9905,7 +9905,7 @@
     }
   };
 
-  var Linear = Phaser.Math.Linear;
+  Phaser.Math.Linear;
 
   var CanvasMatrix = /*#__PURE__*/function (_CubismMatrix) {
     _inherits(CanvasMatrix, _CubismMatrix);
@@ -9930,10 +9930,6 @@
         var ratio = height === 0 ? 0 : width / height;
         this.width = width;
         this.height = height;
-        this.left = -ratio;
-        this.right = ratio;
-        this.bottom = -1;
-        this.top = 1;
         this.scale(1, ratio);
         return this;
       }
@@ -9941,13 +9937,13 @@
       key: "toLocalX",
       value: function toLocalX(x) {
         var t = this.width === 0 ? 0 : x / this.width;
-        return Linear(this.left, this.right, t);
+        return 2 * t - 1;
       }
     }, {
       key: "toLocalY",
       value: function toLocalY(y) {
         var t = this.height === 0 ? 0 : y / this.height;
-        return Linear(this.top, this.bottom, t);
+        return 1 - 2 * t;
       }
     }]);
 
@@ -10160,7 +10156,7 @@
 
     this.createRenderer(); // - Set gl to current renderer
 
-    this.getRenderer().startUp(this._gl); // Load CubismExpression
+    this.getRenderer().startUp(this._globalData.gl); // Load CubismExpression
 
     var expressions = data.expressions;
 
@@ -10315,35 +10311,34 @@
       return;
     }
 
-    var gameObject = this.parent; // Copy projection matrix
+    var gameObject = this.parent;
+    var globalData = this._globalData;
+    var canvasMatrix = globalData.canvasMatrix; // Copy projection matrix
 
-    var matrix = this._canvasMatrix.clone();
-
-    matrix.translate(this.toLocalX(calcMatrix.getX(0, 0)), this.toLocalY(calcMatrix.getY(0, 0))); // Scale model via scale of Live2dGameObject
-
+    var matrix = canvasMatrix.clone();
+    matrix.translate(canvasMatrix.toLocalX(calcMatrix.getX(0, 0)), canvasMatrix.toLocalY(calcMatrix.getY(0, 0)));
+    matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
     var modelMatrix = this._modelMatrix;
-    modelMatrix.scale(gameObject.scaleX, gameObject.scaleY); // Translate model via origin of Live2dGameObject
-
     modelMatrix.translate(0.5 - gameObject.originX, gameObject.originY - 0.5); // TODO: Rotate model (SDK does not support)
     // Apply model matrix
 
     matrix.multiplyByMatrix(modelMatrix);
     var renderer = this.getRenderer();
     renderer.setMvpMatrix(matrix);
-    renderer.setRenderState(this._frameBuffer, this._viewportRect);
+    renderer.setRenderState(globalData.frameBuffer, globalData.viewportRect);
     renderer.drawModel();
     return this;
   };
 
-  var LAppModel = /*#__PURE__*/function (_CubismUserModel) {
-    _inherits(LAppModel, _CubismUserModel);
+  var Model = /*#__PURE__*/function (_CubismUserModel) {
+    _inherits(Model, _CubismUserModel);
 
-    var _super = _createSuper(LAppModel);
+    var _super = _createSuper(Model);
 
-    function LAppModel(parent) {
+    function Model(parent) {
       var _this;
 
-      _classCallCheck(this, LAppModel);
+      _classCallCheck(this, Model);
 
       _this = _super.call(this);
       _this.parent = parent; // Live2dGameObject
@@ -10354,23 +10349,16 @@
       _this._expressions = new csmMap(); // this._wavFileHandler = new LAppWavFileHandler();
       // Get shared resources
 
-      var data = GlobalData.getInstance(parent);
-      _this._gl = data.gl;
-      _this._frameBuffer = data.frameBuffer;
-      _this._viewportRect = data.viewportRect;
-      _this._canvasMatrix = data.canvasMatrix;
+      _this._globalData = GlobalData.getInstance(parent);
       return _this;
     }
 
-    _createClass(LAppModel, [{
+    _createClass(Model, [{
       key: "release",
       value: function release() {
-        _get(_getPrototypeOf(LAppModel.prototype), "release", this).call(this);
+        _get(_getPrototypeOf(Model.prototype), "release", this).call(this);
 
-        this._gl = undefined;
-        this._frameBuffer = undefined;
-        this._viewportRect = undefined;
-        this._canvasMatrix = undefined;
+        this._globalData = undefined;
       }
     }, {
       key: "_modelWidth",
@@ -10393,16 +10381,16 @@
     }, {
       key: "toLocalX",
       value: function toLocalX(x) {
-        return this._canvasMatrix.toLocalX(x);
+        return this._globalData.canvasMatrix.toLocalX(x);
       }
     }, {
       key: "toLocalY",
       value: function toLocalY(y) {
-        return this._canvasMatrix.toLocalY(y);
+        return this._globalData.canvasMatrix.toLocalY(y);
       }
     }]);
 
-    return LAppModel;
+    return Model;
   }(CubismUserModel);
 
   var Methods = {
@@ -10410,7 +10398,7 @@
     update: Update,
     draw: Draw
   };
-  Object.assign(LAppModel.prototype, Methods);
+  Object.assign(Model.prototype, Methods);
 
   var Base = Phaser.GameObjects.GameObject;
 
@@ -10425,7 +10413,7 @@
       _classCallCheck(this, Live2dGameObject);
 
       _this = _super.call(this, scene, 'rexLive2d');
-      _this.model = new LAppModel(_assertThisInitialized(_this));
+      _this.model = new Model(_assertThisInitialized(_this));
 
       _this.setKey(key);
 
@@ -10469,7 +10457,7 @@
   }(Base);
 
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Live2dGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render]);
+  Phaser.Class.mixin(Live2dGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render]);
 
   function Factory (x, y, key) {
     var gameObject = new Live2dGameObject(this.scene, x, y, key);

@@ -18,7 +18,7 @@ var Setup = function (data) {
     // - Re-create render for current this._model
     this.createRenderer();
     // - Set gl to current renderer
-    this.getRenderer().startUp(this._gl);
+    this.getRenderer().startUp(this._globalData.gl);
 
     // Load CubismExpression
     var expressions = data.expressions;
