@@ -18,7 +18,9 @@ class Demo extends Phaser.Scene {
 
         this.add.text(0, 0, 'Text0')
 
-        this.add.rexLive2d(400, 300, 'Haru').setScale(0.5);
+        this.add.rexLive2d(1920 / 2, 0, 'Haru')
+            .setScale(0.5)
+            .setOrigin(0.5, 0)
 
         this.add.text(0, 1270, 'Text1')
     }

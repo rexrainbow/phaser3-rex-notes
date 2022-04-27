@@ -26,7 +26,7 @@ class LAppModel extends CubismUserModel {
         this._gl = data.gl;
         this._frameBuffer = data.frameBuffer;
         this._viewportRect = data.viewportRect;
-        this._projectionMatrix = data.projectionMatrix;
+        this._canvasMatrix = data.canvasMatrix;
     }
 
     release() {
@@ -35,7 +35,7 @@ class LAppModel extends CubismUserModel {
         this._gl = undefined;
         this._frameBuffer = undefined;
         this._viewportRect = undefined;
-        this._projectionMatrix = undefined;
+        this._canvasMatrix = undefined;
     }
 
     get _modelWidth() {
@@ -52,6 +52,14 @@ class LAppModel extends CubismUserModel {
         } else {
             return 0;
         }
+    }
+
+    toLocalX(x) {
+        return this._canvasMatrix.toLocalX(x);
+    }
+
+    toLocalY(y) {
+        return this._canvasMatrix.toLocalY(y);
     }
 }
 

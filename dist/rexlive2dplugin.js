@@ -158,8 +158,8 @@
 
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     renderer.pipelines.clear();
-    GetCalcMatrix(src, camera, parentMatrix).calc;
-    src.model.draw();
+    var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
+    src.model.draw(calcMatrix);
     renderer.pipelines.rebind();
   };
 
@@ -9905,6 +9905,55 @@
     }
   };
 
+  var Linear = Phaser.Math.Linear;
+
+  var CanvasMatrix = /*#__PURE__*/function (_CubismMatrix) {
+    _inherits(CanvasMatrix, _CubismMatrix);
+
+    var _super = _createSuper(CanvasMatrix);
+
+    function CanvasMatrix() {
+      var _this;
+
+      _classCallCheck(this, CanvasMatrix);
+
+      _this = _super.call(this);
+
+      _this.setSize(0, 0);
+
+      return _this;
+    }
+
+    _createClass(CanvasMatrix, [{
+      key: "setSize",
+      value: function setSize(width, height) {
+        var ratio = height === 0 ? 0 : width / height;
+        this.width = width;
+        this.height = height;
+        this.left = -ratio;
+        this.right = ratio;
+        this.bottom = -1;
+        this.top = 1;
+        this.scale(1, ratio);
+        return this;
+      }
+    }, {
+      key: "toLocalX",
+      value: function toLocalX(x) {
+        var t = this.width === 0 ? 0 : x / this.width;
+        return Linear(this.left, this.right, t);
+      }
+    }, {
+      key: "toLocalY",
+      value: function toLocalY(y) {
+        var t = this.height === 0 ? 0 : y / this.height;
+        return Linear(this.top, this.bottom, t);
+      }
+    }]);
+
+    return CanvasMatrix;
+  }(CubismMatrix44);
+
   var InitializeCubism = function InitializeCubism(config) {
     // Setup cubism
     var option = new Option(); // TODO: option.logFunction, option.loggingLevel
@@ -9928,8 +9977,8 @@
       this.scale = scale; // A frame buffer for all live2d game object
 
       this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
-      this.viewport = [0, 0, 0, 0];
-      this.viewportMatrix = new CubismMatrix44();
+      this.viewportRect = [0, 0, 0, 0];
+      this.canvasMatrix = new CanvasMatrix();
       this.onResize();
       scale.on('resize', this.onResize, this);
       game.events.once('destroy', this.destroy, this); // Run this method once, before creating CubismModel
@@ -9945,24 +9994,30 @@
         this.gl = undefined;
         this.scale = undefined;
         this.frameBuffer = undefined;
-        this.viewport = undefined;
-        this.viewportMatrix = undefined;
+        this.viewportRect = undefined;
+        this.canvasMatrix = undefined;
         GlobalDataInstance = undefined;
+      }
+    }, {
+      key: "canvasWidth",
+      get: function get() {
+        return this.scale.width;
+      }
+    }, {
+      key: "canvasHeight",
+      get: function get() {
+        return this.scale.height;
       }
     }, {
       key: "onResize",
       value: function onResize() {
-        var width = this.scale.width;
-        var height = this.scale.height; // Set view port
+        var width = this.canvasWidth;
+        var height = this.canvasHeight; // Set view port
 
-        this.viewport[2] = width;
-        this.viewport[3] = height; // Set viewportMatrix
+        this.viewportRect[2] = width;
+        this.viewportRect[3] = height; // Set canvasMatrix
 
-        if (width < height) {
-          this.viewportMatrix.scale(1.0, width / height);
-        } else {
-          this.viewportMatrix.scale(height / width, 1.0);
-        }
+        this.canvasMatrix.setSize(width, height);
       }
     }], [{
       key: "getInstance",
@@ -10254,17 +10309,29 @@
     return this;
   };
 
-  var Draw = function Draw() {
+  // import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
+  var Draw = function Draw(calcMatrix) {
     if (!this._model) {
       return;
     }
 
-    var matrix = this._viewportMatrix.clone();
+    var gameObject = this.parent; // Copy projection matrix
 
-    matrix.multiplyByMatrix(this._modelMatrix);
-    this.getRenderer().setMvpMatrix(matrix);
-    this.getRenderer().setRenderState(this._frameBuffer, this._viewport);
-    this.getRenderer().drawModel();
+    var matrix = this._canvasMatrix.clone();
+
+    matrix.translate(this.toLocalX(calcMatrix.getX(0, 0)), this.toLocalY(calcMatrix.getY(0, 0))); // Scale model via scale of Live2dGameObject
+
+    var modelMatrix = this._modelMatrix;
+    modelMatrix.scale(gameObject.scaleX, gameObject.scaleY); // Translate model via origin of Live2dGameObject
+
+    modelMatrix.translate(0.5 - gameObject.originX, gameObject.originY - 0.5); // TODO: Rotate model (SDK does not support)
+    // Apply model matrix
+
+    matrix.multiplyByMatrix(modelMatrix);
+    var renderer = this.getRenderer();
+    renderer.setMvpMatrix(matrix);
+    renderer.setRenderState(this._frameBuffer, this._viewportRect);
+    renderer.drawModel();
     return this;
   };
 
@@ -10290,8 +10357,8 @@
       var data = GlobalData.getInstance(parent);
       _this._gl = data.gl;
       _this._frameBuffer = data.frameBuffer;
-      _this._viewport = data.viewport;
-      _this._viewportMatrix = data.viewportMatrix;
+      _this._viewportRect = data.viewportRect;
+      _this._canvasMatrix = data.canvasMatrix;
       return _this;
     }
 
@@ -10302,8 +10369,36 @@
 
         this._gl = undefined;
         this._frameBuffer = undefined;
-        this._viewport = undefined;
-        this._viewportMatrix = undefined;
+        this._viewportRect = undefined;
+        this._canvasMatrix = undefined;
+      }
+    }, {
+      key: "_modelWidth",
+      get: function get() {
+        if (this._model) {
+          return this._model._model.canvasinfo.CanvasWidth;
+        } else {
+          return 0;
+        }
+      }
+    }, {
+      key: "_modelHeight",
+      get: function get() {
+        if (this._model) {
+          return this._model._model.canvasinfo.CanvasHeight;
+        } else {
+          return 0;
+        }
+      }
+    }, {
+      key: "toLocalX",
+      value: function toLocalX(x) {
+        return this._canvasMatrix.toLocalX(x);
+      }
+    }, {
+      key: "toLocalY",
+      value: function toLocalY(y) {
+        return this._canvasMatrix.toLocalY(y);
       }
     }]);
 
@@ -10317,10 +10412,10 @@
   };
   Object.assign(LAppModel.prototype, Methods);
 
-  var Extern = Phaser.GameObjects.Extern;
+  var Base = Phaser.GameObjects.GameObject;
 
-  var Live2dGameObject = /*#__PURE__*/function (_Extern) {
-    _inherits(Live2dGameObject, _Extern);
+  var Live2dGameObject = /*#__PURE__*/function (_Base) {
+    _inherits(Live2dGameObject, _Base);
 
     var _super = _createSuper(Live2dGameObject);
 
@@ -10333,6 +10428,12 @@
       _this.model = new LAppModel(_assertThisInitialized(_this));
 
       _this.setKey(key);
+
+      _this.setPosition(x, y);
+
+      _this.setSize(_this.model._modelWidth, _this.model._modelHeight);
+
+      _this.setOrigin(0.5);
 
       return _this;
     }
@@ -10365,9 +10466,10 @@
     }]);
 
     return Live2dGameObject;
-  }(Extern);
+  }(Base);
 
-  Object.assign(Live2dGameObject.prototype, Render);
+  var Components = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(Live2dGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render]);
 
   function Factory (x, y, key) {
     var gameObject = new Live2dGameObject(this.scene, x, y, key);

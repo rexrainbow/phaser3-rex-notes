@@ -6,7 +6,7 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
     
-    src.model.draw();
+    src.model.draw(calcMatrix);
 
     renderer.pipelines.rebind();
 };

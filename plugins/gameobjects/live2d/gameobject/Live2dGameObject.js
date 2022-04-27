@@ -1,9 +1,9 @@
 import Render from './render/Render.js';
 import LAppModel from './lappmodel/LAppModel.js';
 
-const Extern = Phaser.GameObjects.Extern;
+const Base = Phaser.GameObjects.GameObject;
 
-class Live2dGameObject extends Extern {
+class Live2dGameObject extends Base {
     constructor(scene, x, y, key) {
         super(scene, 'rexLive2d');
 
@@ -11,7 +11,9 @@ class Live2dGameObject extends Extern {
 
         this.setKey(key);
 
+        this.setPosition(x, y);
         this.setSize(this.model._modelWidth, this.model._modelHeight);
+        this.setOrigin(0.5);
     }
 
     setKey(key) {
@@ -37,9 +39,21 @@ class Live2dGameObject extends Extern {
     }
 }
 
-Object.assign(
-    Live2dGameObject.prototype,
-    Render
-)
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(Live2dGameObject,
+    [
+        Components.Alpha,
+        Components.BlendMode,
+        Components.ComputedSize,
+        Components.Depth,
+        Components.Flip,
+        Components.Origin,
+        Components.ScrollFactor,
+        Components.Tint,
+        Components.Transform,
+        Components.Visible,
+        Render,
+    ]
+);
 
 export default Live2dGameObject;
