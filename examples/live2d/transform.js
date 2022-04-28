@@ -27,8 +27,6 @@ class Demo extends Phaser.Scene {
 
         this.add.text(0, 1060, 'Text1')
 
-        this.add.circle(x, y, 10, 0xff0000);
-
         this.add.graphics({
             lineStyle: {
                 color: 0xff0000,
@@ -36,6 +34,8 @@ class Demo extends Phaser.Scene {
             }
         })
             .strokeRectShape(obj.getBounds())
+
+        this.add.circle(x, y, 10, 0xffffff);
 
         //this.cameras.main.setZoom(0.3)
     }

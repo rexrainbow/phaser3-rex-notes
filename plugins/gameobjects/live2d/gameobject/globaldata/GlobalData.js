@@ -26,7 +26,7 @@ class GlobalData {
         this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
 
         this.viewportRect = [0, 0, 0, 0];
-        this.canvasMatrix = new CanvasMatrix();
+        this.projectionMatrix = new CanvasMatrix();
         this.onResize();
 
         scale.on('resize', this.onResize, this);
@@ -45,7 +45,7 @@ class GlobalData {
 
         this.frameBuffer = undefined;
         this.viewportRect = undefined;
-        this.canvasMatrix = undefined;
+        this.projectionMatrix = undefined;
 
         GlobalDataInstance = undefined;
     }
@@ -66,8 +66,8 @@ class GlobalData {
         this.viewportRect[2] = width;
         this.viewportRect[3] = height;
 
-        // Set canvasMatrix
-        this.canvasMatrix.setSize(width, height);
+        // Set projectionMatrix
+        this.projectionMatrix.setSize(width, height);
     }
 }
 

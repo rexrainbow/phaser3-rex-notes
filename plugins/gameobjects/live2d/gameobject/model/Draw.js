@@ -7,13 +7,13 @@ var Draw = function (calcMatrix) {
 
     var gameObject = this.parent;
     var globalData = this._globalData;
-    var canvasMatrix = globalData.canvasMatrix;
+    var projectionMatrix = globalData.projectionMatrix;
 
-    // Copy projection matrix
-    var matrix = canvasMatrix.clone();
+    // Clone projection matrix
+    var matrix = projectionMatrix.clone();
     matrix.translate(
-        canvasMatrix.toLocalX(calcMatrix.getX(0, 0)),
-        canvasMatrix.toLocalY(calcMatrix.getY(0, 0))
+        projectionMatrix.toLocalX(calcMatrix.getX(0, 0)),
+        projectionMatrix.toLocalY(calcMatrix.getY(0, 0))
     );
     matrix.scaleRelative(
         calcMatrix.scaleX,
