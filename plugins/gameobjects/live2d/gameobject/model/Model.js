@@ -2,10 +2,7 @@ import { csmMap } from '../../framework/src/type/csmmap';
 import { csmVector } from '../../framework/src/type/csmvector';
 import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
 import GlobalData from '../globaldata/GlobalData.js';
-
-import Setup from './Setup.js';
-import Update from './Update.js';
-import Draw from './Draw.js';
+import Methods from './Methods.js';
 
 class Model extends CubismUserModel {
     constructor(parent) {
@@ -18,6 +15,7 @@ class Model extends CubismUserModel {
 
         this._motions = new csmMap();
         this._expressions = new csmMap();
+        this._currentExpressionName = undefined;
 
         // this._wavFileHandler = new LAppWavFileHandler();
 
@@ -54,12 +52,6 @@ class Model extends CubismUserModel {
     toLocalY(y) {
         return this._globalData.projectionMatrix.toLocalY(y);
     }
-}
-
-var Methods = {
-    setup: Setup,
-    update: Update,
-    draw: Draw,
 }
 
 Object.assign(

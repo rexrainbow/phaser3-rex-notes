@@ -10306,8 +10306,6 @@
   };
 
   // import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
-  var Linear = Phaser.Math.Linear;
-
   var Draw = function Draw(calcMatrix) {
     if (!this._model) {
       return;
@@ -10322,11 +10320,7 @@
     matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
     var modelMatrix = this._modelMatrix; // Offset for origin
 
-    var left = -modelMatrix._width / 2,
-        right = -left,
-        top = modelMatrix._height / 2,
-        bottom = -top;
-    modelMatrix.translate(Linear(right, left, gameObject.originX), Linear(bottom, top, gameObject.originY)); // TODO: Rotate model (SDK does not support)
+    modelMatrix.translate(modelMatrix._width * (0.5 - gameObject.originX), modelMatrix._height * (gameObject.originY - 0.5)); // TODO: Rotate model (SDK does not support)
     // Apply model matrix
 
     matrix.multiplyByMatrix(modelMatrix);
@@ -10335,6 +10329,71 @@
     renderer.setRenderState(globalData.frameBuffer, globalData.viewportRect);
     renderer.drawModel();
     return this;
+  };
+
+  var PriorityForce = 3;
+
+  var SetExpression = function SetExpression(expressionName) {
+    if (expressionName === undefined) {
+      expressionName = 0;
+    }
+
+    var motion;
+
+    var expressionNameType = _typeof(expressionName);
+
+    if (expressionNameType === 'string') {
+      motion = this._expressions.getValue(expressionName);
+    } else if (expressionNameType === 'number') {
+      var keyValue = this._expressions._keyValues[expressionName];
+      motion = keyValue ? keyValue.second : null;
+      expressionName = keyValue ? keyValue.first : undefined;
+    }
+
+    if (!motion) {
+      // Error
+      return this;
+    }
+
+    this._expressionManager.startMotionPriority(motion, false, PriorityForce);
+
+    this._currentExpressionName = expressionName;
+    return this;
+  };
+
+  var SetRandomExpression = function SetRandomExpression() {
+    var count = this._expressions.getSize();
+
+    if (count === 0) {
+      return this;
+    }
+
+    var index = Math.floor(Math.random() * count);
+    this.setExpression(index);
+    return this;
+  };
+
+  var GetExpressionNames = function GetExpressionNames() {
+    var names = [];
+
+    var count = this._expressions.getSize();
+
+    var keyValuse = this._expressions._keyValues;
+
+    for (var i = 0; i < count; i++) {
+      names.push(keyValuse[i].first);
+    }
+
+    return names;
+  };
+
+  var Methods = {
+    setup: Setup,
+    update: Update,
+    draw: Draw,
+    setExpression: SetExpression,
+    setRandomExpression: SetRandomExpression,
+    getExpressionNames: GetExpressionNames
   };
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
@@ -10353,7 +10412,8 @@
       _this._eyeBlinkIds = new csmVector();
       _this._lipSyncIds = new csmVector();
       _this._motions = new csmMap();
-      _this._expressions = new csmMap(); // this._wavFileHandler = new LAppWavFileHandler();
+      _this._expressions = new csmMap();
+      _this._currentExpressionName = undefined; // this._wavFileHandler = new LAppWavFileHandler();
       // Get shared resources
 
       _this._globalData = GlobalData.getInstance(parent);
@@ -10400,11 +10460,6 @@
     return Model;
   }(CubismUserModel);
 
-  var Methods = {
-    setup: Setup,
-    update: Update,
-    draw: Draw
-  };
   Object.assign(Model.prototype, Methods);
 
   var Base = Phaser.GameObjects.GameObject;
@@ -10457,6 +10512,31 @@
       value: function preDestroy() {
         this.model.release();
         this.model = undefined;
+      }
+    }, {
+      key: "setExpression",
+      value: function setExpression(expressionName) {
+        this.model.setExpression(expressionName);
+        return this;
+      }
+    }, {
+      key: "setRandomExpression",
+      value: function setRandomExpression() {
+        this.model.setRandomExpression();
+        return this;
+      }
+    }, {
+      key: "getExpressionNames",
+      value: function getExpressionNames() {
+        return this.model.getExpressionNames();
+      }
+    }, {
+      key: "expressionName",
+      get: function get() {
+        return this.model._currentExpressionName;
+      },
+      set: function set(expressionName) {
+        this.setExpression(expressionName);
       }
     }]);
 

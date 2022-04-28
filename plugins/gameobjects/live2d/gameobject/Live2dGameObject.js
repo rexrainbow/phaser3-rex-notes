@@ -37,6 +37,28 @@ class Live2dGameObject extends Base {
         this.model.release();
         this.model = undefined;
     }
+
+    setExpression(expressionName) {
+        this.model.setExpression(expressionName);
+        return this;
+    }
+
+    setRandomExpression() {
+        this.model.setRandomExpression();
+        return this;
+    }
+
+    getExpressionNames() {
+        return this.model.getExpressionNames();
+    }
+
+    get expressionName() {
+        return this.model._currentExpressionName;
+    }
+
+    set expressionName(expressionName) {
+        this.setExpression(expressionName);
+    }
 }
 
 const Components = Phaser.GameObjects.Components;
