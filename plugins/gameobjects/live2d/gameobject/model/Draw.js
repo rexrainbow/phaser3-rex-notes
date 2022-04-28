@@ -1,5 +1,7 @@
 // import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
 
+const Linear = Phaser.Math.Linear;
+
 var Draw = function (calcMatrix) {
     if (!this._model) {
         return;
@@ -21,12 +23,15 @@ var Draw = function (calcMatrix) {
     )
 
     var modelMatrix = this._modelMatrix;
+    // Offset for origin
+    var left = -modelMatrix._width / 2, right = -left,
+        top = modelMatrix._height / 2, bottom = -top;
     modelMatrix.translate(
-        0.5 - gameObject.originX,
-        gameObject.originY - 0.5
+        Linear(right, left, gameObject.originX),
+        Linear(bottom, top, gameObject.originY)
     );
     // TODO: Rotate model (SDK does not support)
-    
+
 
     // Apply model matrix
     matrix.multiplyByMatrix(modelMatrix);

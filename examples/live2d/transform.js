@@ -22,20 +22,20 @@ class Demo extends Phaser.Scene {
         var y = 500;
 
         var obj = this.add.rexLive2d(x, y, 'Haru')
-            .setScale(0.3)
-            .setOrigin(0)
+            .setScale(0.2)
+            .setOrigin(0.5)
 
         this.add.text(0, 1060, 'Text1')
 
         this.add.graphics({
             lineStyle: {
-                color: 0xff0000,
+                color: 0xffff00,
                 width: 10
             }
         })
             .strokeRectShape(obj.getBounds())
 
-        this.add.circle(x, y, 10, 0xffffff);
+        this.add.circle(x, y, 10, 0xff0000);
 
         //this.cameras.main.setZoom(0.3)
     }
