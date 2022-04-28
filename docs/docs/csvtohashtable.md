@@ -279,3 +279,14 @@ var callback = function(table, rowKey, colKey, value) {
     // ...
 };
 ```
+
+### JSON
+
+- Table to json
+    ```javascript
+    var jsonData = table.toJSON();
+    ```
+- Reset table by JSON
+    ```javascript
+    table.resetFromJSON(jsonData);
+    ```

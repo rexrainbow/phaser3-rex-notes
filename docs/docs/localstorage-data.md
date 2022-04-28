@@ -104,7 +104,7 @@ var data = scene.plugins.get('rexLocalStorageData').add({
 - `default` : Define valid keys and default values of loaded data.
     - `undefined` : Load all keys from local storage.
 - `reset` : 
-    - `true` : Rest all data to default values (`default`). 
+    - `true` : Reset all data to default values (`default`). 
 - `parent` : The object (a scene, or a game object) that this DataManager belongs to.
 - `eventEmitter` : The DataManager's [event emitter](eventemitter3.md).
 

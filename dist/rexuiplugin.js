@@ -2,22 +2,16 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexuiplugin = factory());
-}(this, (function () { 'use strict';
+})(this, (function () { 'use strict';
 
   function _typeof(obj) {
     "@babel/helpers - typeof";
 
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -39,6 +33,9 @@
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
     return Constructor;
   }
 
@@ -68,6 +65,9 @@
         writable: true,
         configurable: true
       }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
@@ -147,7 +147,7 @@
     return object;
   }
 
-  function _get(target, property, receiver) {
+  function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get;
     } else {
@@ -158,14 +158,14 @@
         var desc = Object.getOwnPropertyDescriptor(base, property);
 
         if (desc.get) {
-          return desc.get.call(receiver);
+          return desc.get.call(arguments.length < 3 ? target : receiver);
         }
 
         return desc.value;
       };
     }
 
-    return _get(target, property, receiver || target);
+    return _get.apply(this, arguments);
   }
 
   function set(target, property, value, receiver) {
@@ -819,7 +819,7 @@
       return _super.apply(this, arguments);
     }
 
-    return NinePatch;
+    return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$1, 'rexNinePatch'));
 
   Object.assign(NinePatch$1.prototype, Methods$8);
@@ -4676,7 +4676,8 @@
 
       if (pen.hasAreaMarker && pen.width > 0) {
         this.hitAreaManager.add(pen.prop.area, // key
-        offsetX, offsetY - this.startYOffset, // y
+        offsetX, // x
+        offsetY - this.startYOffset, // y
         pen.width, // width
         this.defaultStyle.lineHeight // height
         );
@@ -7039,7 +7040,7 @@
       return _super.call(this, scene, x, y, text, style, 'rexBBCodeText', parser);
     }
 
-    return BBCodeText;
+    return _createClass(BBCodeText);
   }(Text);
 
   ObjectFactory.register('BBCodeText', function (x, y, text, style) {
@@ -17961,7 +17962,7 @@
       return _super.call(this, x, y, radius, radius, 0, 360);
     }
 
-    return Circle;
+    return _createClass(Circle);
   }(Arc);
 
   var Curve = /*#__PURE__*/function (_PathBase) {
@@ -18045,7 +18046,7 @@
       return _super.call(this, x, y, radiusX, radiusY, 0, 360);
     }
 
-    return Ellipse;
+    return _createClass(Ellipse);
   }(Arc);
 
   var Line = /*#__PURE__*/function (_PathBase) {
@@ -26329,7 +26330,7 @@
       return _this;
     }
 
-    return CustomShapes;
+    return _createClass(CustomShapes);
   }(BaseShapes);
 
   Object.assign(CustomShapes.prototype, ShapesUpdateMethods);
@@ -27443,7 +27444,7 @@
       return _this;
     }
 
-    return Cover;
+    return _createClass(Cover);
   }(FullWindowRectangle);
 
   ObjectFactory.register('cover', function (config) {
@@ -28009,7 +28010,7 @@
       return _this;
     }
 
-    return Space;
+    return _createClass(Space);
   }(Zone);
 
   var GetNearestChildIndex$1 = function GetNearestChildIndex(x, y) {
@@ -31505,7 +31506,7 @@
       return _this;
     }
 
-    return Dialog;
+    return _createClass(Dialog);
   }(Sizer);
 
   Object.assign(Dialog.prototype, ButtonMethods$1);
@@ -31682,7 +31683,7 @@
       return _this;
     }
 
-    return HolyGrail;
+    return _createClass(HolyGrail);
   }(Sizer);
 
   ObjectFactory.register('holyGrail', function (config) {
@@ -32073,7 +32074,7 @@
       return _this;
     }
 
-    return Tabs;
+    return _createClass(Tabs);
   }(GridSizer);
 
   Object.assign(Tabs.prototype, ButtonMethods);
@@ -32786,7 +32787,7 @@
       return _this;
     }
 
-    return Slider;
+    return _createClass(Slider);
   }(ScrollBar);
 
   var State$1 = /*#__PURE__*/function (_FSM) {
@@ -35366,7 +35367,9 @@
       return this;
     },
     maskChildren: function maskChildren() {
-      if (!this.childrenMask || !this.maskChildrenFlag || this.alpha === 0 || !this.visible // Parent is not visible
+      if (!this.childrenMask || // No childrenMask
+      !this.maskChildrenFlag || // No maskChildrenFlag set
+      this.alpha === 0 || !this.visible // Parent is not visible
       ) {
         return this;
       }
@@ -38147,7 +38150,7 @@
       return _this;
     }
 
-    return Badge;
+    return _createClass(Badge);
   }(OverlapSizer);
 
   ObjectFactory.register('badgeLabel', function (config) {
@@ -42349,4 +42352,4 @@
 
   return UIPlugin;
 
-})));
+}));
