@@ -9974,7 +9974,7 @@
 
       this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
       this.viewportRect = [0, 0, 0, 0];
-      this.canvasMatrix = new CanvasMatrix();
+      this.projectionMatrix = new CanvasMatrix();
       this.onResize();
       scale.on('resize', this.onResize, this);
       game.events.once('destroy', this.destroy, this); // Run this method once, before creating CubismModel
@@ -9991,7 +9991,7 @@
         this.scale = undefined;
         this.frameBuffer = undefined;
         this.viewportRect = undefined;
-        this.canvasMatrix = undefined;
+        this.projectionMatrix = undefined;
         GlobalDataInstance = undefined;
       }
     }, {
@@ -10011,9 +10011,9 @@
         var height = this.canvasHeight; // Set view port
 
         this.viewportRect[2] = width;
-        this.viewportRect[3] = height; // Set canvasMatrix
+        this.viewportRect[3] = height; // Set projectionMatrix
 
-        this.canvasMatrix.setSize(width, height);
+        this.projectionMatrix.setSize(width, height);
       }
     }], [{
       key: "getInstance",
@@ -10306,6 +10306,8 @@
   };
 
   // import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
+  var Linear = Phaser.Math.Linear;
+
   var Draw = function Draw(calcMatrix) {
     if (!this._model) {
       return;
@@ -10313,13 +10315,18 @@
 
     var gameObject = this.parent;
     var globalData = this._globalData;
-    var canvasMatrix = globalData.canvasMatrix; // Copy projection matrix
+    var projectionMatrix = globalData.projectionMatrix; // Clone projection matrix
 
-    var matrix = canvasMatrix.clone();
-    matrix.translate(canvasMatrix.toLocalX(calcMatrix.getX(0, 0)), canvasMatrix.toLocalY(calcMatrix.getY(0, 0)));
+    var matrix = projectionMatrix.clone();
+    matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0)));
     matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
-    var modelMatrix = this._modelMatrix;
-    modelMatrix.translate(0.5 - gameObject.originX, gameObject.originY - 0.5); // TODO: Rotate model (SDK does not support)
+    var modelMatrix = this._modelMatrix; // Offset for origin
+
+    var left = -modelMatrix._width / 2,
+        right = -left,
+        top = modelMatrix._height / 2,
+        bottom = -top;
+    modelMatrix.translate(Linear(right, left, gameObject.originX), Linear(bottom, top, gameObject.originY)); // TODO: Rotate model (SDK does not support)
     // Apply model matrix
 
     matrix.multiplyByMatrix(modelMatrix);
@@ -10381,12 +10388,12 @@
     }, {
       key: "toLocalX",
       value: function toLocalX(x) {
-        return this._globalData.canvasMatrix.toLocalX(x);
+        return this._globalData.projectionMatrix.toLocalX(x);
       }
     }, {
       key: "toLocalY",
       value: function toLocalY(y) {
-        return this._globalData.canvasMatrix.toLocalY(y);
+        return this._globalData.projectionMatrix.toLocalY(y);
       }
     }]);
 
