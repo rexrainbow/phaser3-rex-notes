@@ -49,29 +49,41 @@ class CsvToHashTable {
             convertScope = undefined;
         }
 
-        this.clear();
         var arr = CSVParser.parse(csvString, {
             delimiter: delimiter
         }).data;
 
-        this.colKeys = ArrayCopy(this.colKeys, arr[0]);
-        this.rowKeys.length = arr.length - 1;
-        for (var i = 0, len = this.rowKeys.length; i < len; i++) {
-            this.rowKeys[i] = arr[i + 1][0]; // skip 1st row
+        var inColKeys = arr[0];
+        for (var i = 0, cnt = inColKeys.length; i < cnt; i++) {
+            var colKey = inColKeys[i];
+            if (this.colKeys.indexOf(colKey) !== -1) {
+                continue;
+            }
+            this.colKeys.push(colKey);
         }
 
-        var colKeys = this.colKeys,
-            rowKeys = this.rowKeys;
+        var inRowKeys = arr.map(function (row) { return row[0] });
+        inRowKeys.shift();  // skip 1st row
+        for (var i = 0, cnt = inRowKeys.length; i < cnt; i++) {
+            var rowKey = inRowKeys[i];
+            if (this.rowKeys.indexOf(rowKey) !== -1) {
+                continue;
+            }
+            this.rowKeys.push(rowKey);
+        }
+
         var table = this.table;
         var colKey, rowKey, row, value;
 
-        for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
-            rowKey = rowKeys[r];
-            row = {};
-            table[rowKey] = row;
-            for (var c = 0, clen = colKeys.length; c < clen; c++) {
+        for (var r = 0, rcnt = inRowKeys.length; r < rcnt; r++) {
+            rowKey = inRowKeys[r];
+            if (!table.hasOwnProperty(rowKey)) {
+                table[rowKey] = {};
+            }
+            row = table[rowKey];
+            for (var c = 0, ccnt = inColKeys.length; c < ccnt; c++) {
                 value = arr[r + 1][c];
-                colKey = colKeys[c];
+                colKey = inColKeys[c];
 
                 if (convert) {
                     if (convertScope) {
@@ -329,7 +341,7 @@ class CsvToHashTable {
             row;
         var rowKey, rowKeys = this.rowKeys,
             value;
-        for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
+        for (var r = 0, rcnt = rowKeys.length; r < rcnt; r++) {
             rowKey = rowKeys[r];
             row = table[rowKey];
             value = row[colKey];
@@ -359,7 +371,7 @@ class CsvToHashTable {
         var row = this.table[rowKey];
         var colKey, colKeys = this.colKeys,
             value;
-        for (var c = 0, clen = colKeys.length; c < clen; c++) {
+        for (var c = 0, ccnt = colKeys.length; c < ccnt; c++) {
             colKey = colKeys[r];
             value = row[colKey];
             if (scope) {

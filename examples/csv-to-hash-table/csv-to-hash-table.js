@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var csvString = `name,hp,mp
@@ -16,11 +16,19 @@ Rex,100,20
 Alice,300,40`;
         var table = this.plugins.get('rexHashTable').add();
         table.loadCSV(csvString);
-        console.log(table.table);
+        console.log(JSON.stringify(table.table));
         console.log(table.get('Rex', 'mp'));
+
+        var csvString = `name,hp,mp
+Rex,30,50
+Ken,20,40`;
+        table.loadCSV(csvString);
+        console.log(JSON.stringify(table.table));
+        console.log(table.get('Ken', 'mp'));
+
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
