@@ -7,8 +7,10 @@ import SetExpression from './SetExpression.js';
 import SetRandomExpression from './SetRandomExpression.js';
 
 import GetMotionNames from './GetMotionNames.js';
+import GetMotionGroupNames from './GetMotionGroupNames.js';
 import StartMotion from './StartMotion.js';
-
+import StopAllMotions from './StopAllMotions.js';
+import IsAnyMotionPlaying from './IsMotionPlaying.js';
 
 
 var Methods = {
@@ -21,7 +23,10 @@ var Methods = {
     setRandomExpression: SetRandomExpression,
 
     getMotionNames: GetMotionNames,
+    getMotionGroupNames: GetMotionGroupNames,
     startMotion: StartMotion,
+    stopAllMotions: StopAllMotions,
+    isAnyMotionPlaying: IsAnyMotionPlaying,
 }
 
 export default Methods;

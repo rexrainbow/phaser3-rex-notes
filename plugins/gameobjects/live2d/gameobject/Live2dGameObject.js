@@ -66,6 +66,9 @@ class Live2dGameObject extends Base {
         return this.model.getMotionNames(groupName);
     }
 
+    getMotionGroupNames() {
+        return this.model.getMotionGroupNames();
+    }
 
     startMotion(group, no, priority) {
         if (priority === undefined) {
@@ -91,6 +94,15 @@ class Live2dGameObject extends Base {
         self.emit('motion.start', group, no);
 
         return this;
+    }
+
+    stopAllMotions() {
+        this.model.stopAllMotions();
+        return this;
+    }
+
+    isAnyMotionPlaying() {
+        return this.model.isAnyMotionPlaying();
     }
 
 }

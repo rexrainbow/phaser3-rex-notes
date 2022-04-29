@@ -20,24 +20,32 @@ class Demo extends Phaser.Scene {
         var obj = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.6)
             .setRandomExpression()
-            .startMotion('Idle', undefined, 'idle')
-            .on('motion.complete', function(group, no){
+            //.startMotion('Idle', undefined, 'idle')
+            .on('motion.complete', function (group, no) {
                 console.log(`motion.complete: ${group}_${no}`)
             })
 
         console.log('Expressions:', obj.getExpressionNames());
         console.log('Motions:', obj.getMotionNames());
+        console.log('Motion groups:', obj.getMotionGroupNames());
+        console.log('Is any motion playing?', obj.isAnyMotionPlaying());
 
-        var print = this.add.text(0, 0, '', { fontSize: 36 });
-        print.text = obj.expressionName;
+        var expressionNameTxt = this.add.text(0, 0, '', { fontSize: 36 });
+        expressionNameTxt.text = obj.expressionName;
 
         AddButton(this, 0, 50, 'Random expression', function () {
             obj.setRandomExpression();
-            print.text = obj.expressionName;
+            expressionNameTxt.text = obj.expressionName;
         })
 
         AddButton(this, 0, 250, 'Random motion', function () {
-            obj.startMotion('TapBody', undefined, 'normal');
+            obj.startMotion('TapBody', undefined, 'force');
+            console.log('Is any motion playing?', obj.isAnyMotionPlaying());
+        })
+
+        AddButton(this, 0, 350, 'Stop all motions', function () {
+            obj.stopAllMotions();
+            console.log('Is any motion playing?', obj.isAnyMotionPlaying());
         })
     }
 
