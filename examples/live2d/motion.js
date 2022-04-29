@@ -20,6 +20,10 @@ class Demo extends Phaser.Scene {
         var obj = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.6)
             .setRandomExpression()
+            .startMotion('Idle', undefined, 'idle')
+            .on('motion.complete', function(group, no){
+                console.log(`motion.complete: ${group}_${no}`)
+            })
 
         console.log('Expressions:', obj.getExpressionNames());
         console.log('Motions:', obj.getMotionNames());
@@ -33,7 +37,7 @@ class Demo extends Phaser.Scene {
         })
 
         AddButton(this, 0, 250, 'Random motion', function () {
-            obj.startMotion('TapBody');
+            obj.startMotion('TapBody', undefined, 'normal');
         })
     }
 

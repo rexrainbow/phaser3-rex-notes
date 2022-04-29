@@ -10,7 +10,10 @@ var StartMotion = function (group, no, priority, onComplete) {
 
     var name = `${group}_${no}`;
     var motion = this._motions.getValue(name);
-    motion.setFinishedMotionHandler(onComplete);
+
+    if (onComplete) {
+        motion.setFinishedMotionHandler(onComplete);
+    }
 
     this._motionManager.startMotionPriority(
         motion,
