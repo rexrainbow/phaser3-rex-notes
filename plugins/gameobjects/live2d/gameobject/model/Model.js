@@ -14,6 +14,7 @@ class Model extends CubismUserModel {
         this._lipSyncIds = new csmVector();
 
         this._motions = new csmMap();
+
         this._expressions = new csmMap();
         this._currentExpressionName = undefined;
 
@@ -26,6 +27,8 @@ class Model extends CubismUserModel {
     release() {
         super.release();
 
+        this._motions.clear();
+        this._expressions.clear();
         this._globalData = undefined;
     }
 

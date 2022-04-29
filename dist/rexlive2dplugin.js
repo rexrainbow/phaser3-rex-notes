@@ -10331,6 +10331,23 @@
     return this;
   };
 
+  var GetExpressionNames = function GetExpressionNames() {
+    var names = [];
+
+    var count = this._expressions.getSize();
+
+    var keyValuse = this._expressions._keyValues;
+
+    for (var i = 0; i < count; i++) {
+      names.push(keyValuse[i].first);
+    }
+
+    return names;
+  };
+
+  var PriorityNone = 0;
+  var PriorityIdle = 1;
+  var PriorityNormal = 2;
   var PriorityForce = 3;
 
   var SetExpression = function SetExpression(expressionName) {
@@ -10373,27 +10390,54 @@
     return this;
   };
 
-  var GetExpressionNames = function GetExpressionNames() {
+  var GetMotionNames = function GetMotionNames(groupName) {
     var names = [];
 
-    var count = this._expressions.getSize();
+    var count = this._motions.getSize();
 
-    var keyValuse = this._expressions._keyValues;
+    var keyValuse = this._motions._keyValues;
 
     for (var i = 0; i < count; i++) {
-      names.push(keyValuse[i].first);
+      var name = keyValuse[i].first;
+
+      if (groupName & !name.startsWith(groupName)) {
+        continue;
+      }
+
+      names.push(name);
     }
 
     return names;
+  };
+
+  var StartMotion = function StartMotion(group, no, priority, onComplete) {
+    if (priority === PriorityForce) {
+      this._motionManager.setReservePriority(priority);
+    } else if (!this._motionManager.reserveMotion(priority)) {
+      // Error
+      return this;
+    }
+
+    var name = "".concat(group, "_").concat(no);
+
+    var motion = this._motions.getValue(name);
+
+    motion.setFinishedMotionHandler(onComplete);
+
+    this._motionManager.startMotionPriority(motion, false, priority);
+
+    return this;
   };
 
   var Methods = {
     setup: Setup,
     update: Update,
     draw: Draw,
+    getExpressionNames: GetExpressionNames,
     setExpression: SetExpression,
     setRandomExpression: SetRandomExpression,
-    getExpressionNames: GetExpressionNames
+    getMotionNames: GetMotionNames,
+    startMotion: StartMotion
   };
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
@@ -10424,6 +10468,10 @@
       key: "release",
       value: function release() {
         _get(_getPrototypeOf(Model.prototype), "release", this).call(this);
+
+        this._motions.clear();
+
+        this._expressions.clear();
 
         this._globalData = undefined;
       }
@@ -10463,6 +10511,7 @@
   Object.assign(Model.prototype, Methods);
 
   var Base = Phaser.GameObjects.GameObject;
+  var GetRandom = Phaser.Utils.Array.GetRandom;
 
   var Live2dGameObject = /*#__PURE__*/function (_Base) {
     _inherits(Live2dGameObject, _Base);
@@ -10514,18 +10563,6 @@
         this.model = undefined;
       }
     }, {
-      key: "setExpression",
-      value: function setExpression(expressionName) {
-        this.model.setExpression(expressionName);
-        return this;
-      }
-    }, {
-      key: "setRandomExpression",
-      value: function setRandomExpression() {
-        this.model.setRandomExpression();
-        return this;
-      }
-    }, {
       key: "getExpressionNames",
       value: function getExpressionNames() {
         return this.model.getExpressionNames();
@@ -10536,13 +10573,62 @@
         return this.model._currentExpressionName;
       },
       set: function set(expressionName) {
-        this.setExpression(expressionName);
+        this.model.setExpression(expressionName);
+      }
+    }, {
+      key: "setExpression",
+      value: function setExpression(expressionName) {
+        this.expressionName = expressionName;
+        return this;
+      }
+    }, {
+      key: "setRandomExpression",
+      value: function setRandomExpression() {
+        this.model.setRandomExpression();
+        return this;
+      }
+    }, {
+      key: "getMotionNames",
+      value: function getMotionNames(groupName) {
+        return this.model.getMotionNames(groupName);
+      }
+    }, {
+      key: "startMotion",
+      value: function startMotion(group, no, priority) {
+        if (priority === undefined) {
+          priority = PriorityNormal;
+        }
+
+        if (typeof priority === 'string') {
+          priority = PriorityModes[priority];
+        }
+
+        if (no === undefined) {
+          var motionNames = this.getMotionNames(group);
+          var name = GetRandom(motionNames);
+          no = parseInt(name.substring(name.lastIndexOf('_') + 1));
+        }
+
+        var self = this;
+        this.model.startMotion(group, no, priority, function () {
+          self.emit("motion.complete-".concat(group), no);
+          self.emit('motion.complete', group, no);
+        });
+        self.emit("motion.start-".concat(group), no);
+        self.emit('motion.start', group, no);
+        return this;
       }
     }]);
 
     return Live2dGameObject;
   }(Base);
 
+  var PriorityModes = {
+    none: PriorityNone,
+    idle: PriorityIdle,
+    normal: PriorityNormal,
+    force: PriorityForce
+  };
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Live2dGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render]);
 

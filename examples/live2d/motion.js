@@ -19,21 +19,40 @@ class Demo extends Phaser.Scene {
 
         var obj = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.6)
-            .setRandomExpression();
+            .setRandomExpression()
 
-        console.log(obj.getExpressionNames());
+        console.log('Expressions:', obj.getExpressionNames());
+        console.log('Motions:', obj.getMotionNames());
 
-        var print = this.add.text(0, 0, '', { fontSize: 48 });
+        var print = this.add.text(0, 0, '', { fontSize: 36 });
         print.text = obj.expressionName;
 
-        this.input.on('pointerdown', function () {
+        AddButton(this, 0, 50, 'Random expression', function () {
             obj.setRandomExpression();
             print.text = obj.expressionName;
+        })
+
+        AddButton(this, 0, 250, 'Random motion', function () {
+            obj.startMotion('TapBody');
         })
     }
 
     update() {
     }
+}
+
+var AddButton = function (scene, x, y, text, onClick) {
+    return scene.add.text(x, y, text, {
+        fontSize: 36, backgroundColor: 'gray', padding: { left: 20, right: 20, top: 20, bottom: 20 }
+    })
+        .setInteractive()
+        .on('pointerdown', onClick)
+        .on('pointerover', function () {
+            this.setColor('red')
+        })
+        .on('pointerout', function () {
+            this.setColor('white')
+        })
 }
 
 var config = {
