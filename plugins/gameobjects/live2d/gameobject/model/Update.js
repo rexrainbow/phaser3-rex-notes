@@ -14,9 +14,24 @@ var Update = function (time, delta) {
     }
     this._model.saveParameters();
 
+    // Add parameter values
     for (var name in this._addParamValues) {
-        var propertyName = `_idParam${Capitalize(name)}`;
         var addValue = this._addParamValues[name];
+        if (addValue === 0) {
+            continue;
+        }
+
+        var propertyName = `_idParam${Capitalize(name)}`;
+        if (!this.hasOwnProperty(propertyName)) {
+            this.registerParameter(name);
+
+            // Can't register this parameter
+            if (!this.hasOwnProperty(propertyName)) {
+                // Error
+                return this;
+            }
+        }
+
         this._model.addParameterValueById(this[propertyName], addValue);
     }
 

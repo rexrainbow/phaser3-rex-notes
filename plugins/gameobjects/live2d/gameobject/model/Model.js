@@ -25,9 +25,6 @@ class Model extends CubismUserModel {
 
         this._addParamValues = {};
 
-        this.registerParameter('eyeBallX');
-        this.registerParameter('eyeBallX');
-
         // this._wavFileHandler = new LAppWavFileHandler();
     }
 

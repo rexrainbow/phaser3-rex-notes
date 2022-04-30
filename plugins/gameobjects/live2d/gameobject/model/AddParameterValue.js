@@ -7,6 +7,7 @@ var AddParameterValue = function (name, value) {
 
         // Can't register this parameter
         if (!this.hasOwnProperty(propertyName)) {
+            // Error
             return this;
         }
     }

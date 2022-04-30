@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
             targets: this.character.params,
             bodyAngleX: { start: -10, to: 10 },
             eyeBallX: { start: -1, to: 1 },
+            // angleZ: { start: -30, to: 30 },
             ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 100,
             repeat: -1,            // -1: infinity
