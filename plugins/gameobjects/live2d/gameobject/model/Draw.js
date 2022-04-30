@@ -31,8 +31,6 @@ var Draw = function (calcMatrix) {
         modelMatrix._width * (0.5 - gameObject.originX),
         modelMatrix._height * (gameObject.originY - 0.5)
     );
-    // TODO: Rotate model (SDK does not support)
-
 
     // Apply model matrix
     matrix.multiplyByMatrix(modelMatrix);

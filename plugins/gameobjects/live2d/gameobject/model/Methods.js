@@ -13,6 +13,9 @@ import StopAllMotions from './StopAllMotions.js';
 import IsAnyMotionPlaying from './IsMotionPlaying.js';
 import GetPlayinigMotionNames from './GetPlayinigMotionNames.js';
 
+import RegisterParameter from './RegisterParameter.js';
+import AddParameterValue from './AddParameterValue.js';
+import ResetParameterValue from './ResetParameterValue.js';
 
 var Methods = {
     setup: Setup,
@@ -29,6 +32,10 @@ var Methods = {
     stopAllMotions: StopAllMotions,
     isAnyMotionPlaying: IsAnyMotionPlaying,
     getPlayinigMotionNames: GetPlayinigMotionNames,
+
+    registerParameter: RegisterParameter,
+    addParameterValue: AddParameterValue,
+    resetParameterValue: ResetParameterValue,
 }
 
 export default Methods;

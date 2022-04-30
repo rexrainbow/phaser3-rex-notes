@@ -9,6 +9,9 @@ class Model extends CubismUserModel {
     constructor(parent) {
         super();
 
+        // Initialize Live2d framework, and get shared resources
+        this._globalData = GlobalData.getInstance(parent);
+
         this.parent = parent;  // Live2dGameObject
         this.viewMatrix = new ViewMatrix();
 
@@ -20,10 +23,12 @@ class Model extends CubismUserModel {
         this._expressions = new csmMap();
         this._currentExpressionName = undefined;
 
-        // this._wavFileHandler = new LAppWavFileHandler();
+        this._addParamValues = {};
 
-        // Get shared resources
-        this._globalData = GlobalData.getInstance(parent);
+        this.registerParameter('eyeBallX');
+        this.registerParameter('eyeBallX');
+
+        // this._wavFileHandler = new LAppWavFileHandler();
     }
 
     release() {

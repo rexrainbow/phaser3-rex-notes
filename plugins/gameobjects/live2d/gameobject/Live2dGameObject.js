@@ -3,7 +3,6 @@ import Model from './model/Model.js';
 import * as Const from './model/Const.js';
 
 const Base = Phaser.GameObjects.GameObject;
-const GetRandom = Phaser.Utils.Array.GetRandom;
 
 class Live2dGameObject extends Base {
     constructor(scene, x, y, key) {
@@ -91,6 +90,25 @@ class Live2dGameObject extends Base {
 
     getPlayinigMotionNames() {
         return this.model.getPlayinigMotionNames();
+    }
+
+    registerParameter(name) {
+        this.model.registerParameter(name);
+        return this;
+    }
+
+    addParameterValue(name, value) {
+        this.model.addParameterValue(name, value);
+        return this;
+    }
+
+    resetParameterValue(name) {
+        this.model.resetParameterValue(name);
+        return this;
+    }
+
+    get params() {
+        return this.model._addParamValues;
     }
 
 }

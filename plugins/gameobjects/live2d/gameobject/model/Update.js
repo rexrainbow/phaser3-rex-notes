@@ -1,3 +1,7 @@
+import OnAllMotionsFinish from '../events/OnAllMotionsFinish.js';
+
+const Capitalize = Phaser.Utils.String.UppercaseFirst;
+
 var Update = function (time, delta) {
     var deltaTimeSeconds = delta / 1000;
 
@@ -5,8 +9,16 @@ var Update = function (time, delta) {
     this._model.loadParameters();
     if (!this._motionManager.isFinished()) {
         motionUpdated = this._motionManager.updateMotion(this._model, deltaTimeSeconds);
+    } else {
+        OnAllMotionsFinish(this.parent);
     }
     this._model.saveParameters();
+
+    for (var name in this._addParamValues) {
+        var propertyName = `_idParam${Capitalize(name)}`;
+        var addValue = this._addParamValues[name];
+        this._model.addParameterValueById(this[propertyName], addValue);
+    }
 
     if (!motionUpdated && this._eyeBlink) {
         this._eyeBlink.updateParameters(this._model, deltaTimeSeconds);
@@ -27,6 +39,9 @@ var Update = function (time, delta) {
     // TODO: drag actions
 
     // TODO: lipsync by wav
+    if (this._lipsync) {
+
+    }
 
     if (this._pose != null) {
         this._pose.updateParameters(this._model, deltaTimeSeconds);

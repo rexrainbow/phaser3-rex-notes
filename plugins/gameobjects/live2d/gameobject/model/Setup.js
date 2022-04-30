@@ -1,5 +1,3 @@
-import { CubismFramework } from '../../framework/src/live2dcubismframework';
-import { CubismDefaultParameterId } from '../../framework/src/cubismdefaultparameterid';
 import { ACubismMotion } from '../../framework/src/motion/acubismmotion';
 import { CubismEyeBlink } from '../../framework/src/effect/cubismeyeblink';
 import { BreathParameterData, CubismBreath } from '../../framework/src/effect/cubismbreath';
@@ -50,6 +48,12 @@ var Setup = function (data) {
     // Setup Breath
     this._breath = CubismBreath.create();
 
+    this.registerParameter('angleX');
+    this.registerParameter('angleY');
+    this.registerParameter('angleZ');
+    this.registerParameter('bodyAngleX');
+    this.registerParameter('breath');
+
     var breathParameters = new csmVector();
     breathParameters.pushBack(
         new BreathParameterData(this._idParamAngleX, 0.0, 15.0, 6.5345, 0.5)
@@ -64,15 +68,7 @@ var Setup = function (data) {
         new BreathParameterData(this._idParamBodyAngleX, 0.0, 4.0, 15.5345, 0.5)
     );
     breathParameters.pushBack(
-        new BreathParameterData(
-            CubismFramework.getIdManager().getId(
-                CubismDefaultParameterId.ParamBreath
-            ),
-            0.5,
-            0.5,
-            3.2345,
-            1
-        )
+        new BreathParameterData(this._idParamBreath, 0.5, 0.5, 3.2345, 1)
     );
 
     this._breath.setParameters(breathParameters);
