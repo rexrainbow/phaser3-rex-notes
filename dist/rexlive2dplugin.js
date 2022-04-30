@@ -9882,6 +9882,42 @@
       Live2DCubismFramework.CubismUserModel = CubismUserModel;
   })(Live2DCubismFramework$3 || (Live2DCubismFramework$3 = {}));
 
+  var ViewMatrix = /*#__PURE__*/function (_CubismMatrix) {
+    _inherits(ViewMatrix, _CubismMatrix);
+
+    var _super = _createSuper(ViewMatrix);
+
+    function ViewMatrix() {
+      _classCallCheck(this, ViewMatrix);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(ViewMatrix, [{
+      key: "copyFrom",
+      value: function copyFrom(matrix) {
+        this.setMatrix(matrix.getArray());
+        return this;
+      }
+    }, {
+      key: "rotate",
+      value: function rotate(angle) {
+        // Do nothing if angle = 0
+        if (angle === 0) {
+          return;
+        } // angle = AngleWrap(angle);
+
+
+        var cosR = Math.cos(angle);
+        var sinR = Math.sin(angle);
+        var tr1 = new Float32Array([cosR, sinR, 0.0, 0.0, -sinR, cosR, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]);
+        CubismMatrix44.multiply(tr1, this._tr, this._tr);
+      }
+    }]);
+
+    return ViewMatrix;
+  }(CubismMatrix44);
+
   var GameClass = Phaser.Game;
 
   var IsGame = function IsGame(object) {
@@ -9904,8 +9940,6 @@
       return object.scene.game;
     }
   };
-
-  Phaser.Math.Linear;
 
   var CanvasMatrix = /*#__PURE__*/function (_CubismMatrix) {
     _inherits(CanvasMatrix, _CubismMatrix);
@@ -10313,10 +10347,15 @@
 
     var gameObject = this.parent;
     var globalData = this._globalData;
-    var projectionMatrix = globalData.projectionMatrix; // Clone projection matrix
+    var projectionMatrix = globalData.projectionMatrix; // Copy from projection matrix
 
-    var matrix = projectionMatrix.clone();
-    matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0)));
+    var matrix = this.viewMatrix;
+    matrix.copyFrom(projectionMatrix); // Apply rotate
+
+    matrix.rotate(calcMatrix.rotation); // Apply translate
+
+    matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0))); // Apply scale
+
     matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
     var modelMatrix = this._modelMatrix; // Offset for origin
 
@@ -10350,21 +10389,26 @@
   var PriorityNormal = 2;
   var PriorityForce = 3;
 
-  var SetExpression = function SetExpression(expressionName) {
-    if (expressionName === undefined) {
-      expressionName = 0;
+  var OnExpressionStart = function OnExpressionStart(gameObject, name) {
+    gameObject.emit("expression.start-".concat(name));
+    gameObject.emit('expression.start', name);
+  };
+
+  var SetExpression = function SetExpression(name) {
+    if (name === undefined) {
+      name = 0;
     }
 
     var motion;
 
-    var expressionNameType = _typeof(expressionName);
+    var nameType = _typeof(name);
 
-    if (expressionNameType === 'string') {
-      motion = this._expressions.getValue(expressionName);
-    } else if (expressionNameType === 'number') {
-      var keyValue = this._expressions._keyValues[expressionName];
+    if (nameType === 'string') {
+      motion = this._expressions.getValue(name);
+    } else if (nameType === 'number') {
+      var keyValue = this._expressions._keyValues[name];
       motion = keyValue ? keyValue.second : null;
-      expressionName = keyValue ? keyValue.first : undefined;
+      name = keyValue ? keyValue.first : undefined;
     }
 
     if (!motion) {
@@ -10372,9 +10416,12 @@
       return this;
     }
 
+    motion._name = name;
+
     this._expressionManager.startMotionPriority(motion, false, PriorityForce);
 
-    this._currentExpressionName = expressionName;
+    this._currentExpressionName = name;
+    OnExpressionStart(this.parent, name);
     return this;
   };
 
@@ -10410,7 +10457,42 @@
     return names;
   };
 
-  var StartMotion = function StartMotion(group, no, priority, onComplete) {
+  var GetMotionGroupNames = function GetMotionGroupNames() {
+    var names = [];
+
+    var count = this._motions.getSize();
+
+    var keyValuse = this._motions._keyValues;
+
+    for (var i = 0; i < count; i++) {
+      var name = keyValuse[i].first;
+      var groupName = name.split('_')[0];
+
+      if (names.indexOf(groupName) !== -1) {
+        continue;
+      }
+
+      names.push(groupName);
+    }
+
+    return names;
+  };
+
+  var OnMotionStart = function OnMotionStart(gameObject, group, no) {
+    gameObject.emit("motion.start-".concat(group), no);
+    gameObject.emit('motion.start', group, no);
+  };
+
+  var OnMotionComplete = function OnMotionComplete(gameObject, group, no) {
+    gameObject.emit("motion.complete-".concat(group), no);
+    gameObject.emit('motion.complete', group, no);
+  };
+
+  var StartMotion = function StartMotion(group, no, priority) {
+    if (priority === undefined) {
+      priority = PriorityForce;
+    }
+
     if (priority === PriorityForce) {
       this._motionManager.setReservePriority(priority);
     } else if (!this._motionManager.reserveMotion(priority)) {
@@ -10418,17 +10500,57 @@
       return this;
     }
 
+    if (no === undefined) {
+      no = Math.floor(Math.random() * this._modelSetting.getMotionCount(group));
+    }
+
     var name = "".concat(group, "_").concat(no);
 
     var motion = this._motions.getValue(name);
 
-    if (onComplete) {
-      motion.setFinishedMotionHandler(onComplete);
+    if (!motion) {
+      // Error
+      return this;
     }
+
+    motion._name = name;
+    var gameObject = this.parent;
+    motion.setFinishedMotionHandler(function () {
+      OnMotionComplete(gameObject, group, no);
+    });
 
     this._motionManager.startMotionPriority(motion, false, priority);
 
+    OnMotionStart(gameObject, group, no);
     return this;
+  };
+
+  var StopAllMotions = function StopAllMotions() {
+    this._motionManager.stopAllMotions();
+
+    return this;
+  };
+
+  var IsAnyMotionPlaying = function IsAnyMotionPlaying() {
+    return !this._motionManager.isFinished();
+  };
+
+  var GetPlayinigMotionNames = function GetPlayinigMotionNames() {
+    var names = [];
+    var motionManager = this._motionManager;
+    var motions = motionManager._motions;
+
+    for (var i = 0, cnt = motions.getSize(); i < cnt; i++) {
+      var motionQueueEntry = motions.at(i);
+
+      if (motionQueueEntry._finished) {
+        continue;
+      }
+
+      names.push(motionQueueEntry._motion._name);
+    }
+
+    return names;
   };
 
   var Methods = {
@@ -10439,7 +10561,11 @@
     setExpression: SetExpression,
     setRandomExpression: SetRandomExpression,
     getMotionNames: GetMotionNames,
-    startMotion: StartMotion
+    getMotionGroupNames: GetMotionGroupNames,
+    startMotion: StartMotion,
+    stopAllMotions: StopAllMotions,
+    isAnyMotionPlaying: IsAnyMotionPlaying,
+    getPlayinigMotionNames: GetPlayinigMotionNames
   };
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
@@ -10455,6 +10581,7 @@
       _this = _super.call(this);
       _this.parent = parent; // Live2dGameObject
 
+      _this.viewMatrix = new ViewMatrix();
       _this._eyeBlinkIds = new csmVector();
       _this._lipSyncIds = new csmVector();
       _this._motions = new csmMap();
@@ -10513,7 +10640,7 @@
   Object.assign(Model.prototype, Methods);
 
   var Base = Phaser.GameObjects.GameObject;
-  var GetRandom = Phaser.Utils.Array.GetRandom;
+  Phaser.Utils.Array.GetRandom;
 
   var Live2dGameObject = /*#__PURE__*/function (_Base) {
     _inherits(Live2dGameObject, _Base);
@@ -10595,30 +10722,35 @@
         return this.model.getMotionNames(groupName);
       }
     }, {
+      key: "getMotionGroupNames",
+      value: function getMotionGroupNames() {
+        return this.model.getMotionGroupNames();
+      }
+    }, {
       key: "startMotion",
       value: function startMotion(group, no, priority) {
-        if (priority === undefined) {
-          priority = PriorityNormal;
-        }
-
         if (typeof priority === 'string') {
           priority = PriorityModes[priority];
         }
 
-        if (no === undefined) {
-          var motionNames = this.getMotionNames(group);
-          var name = GetRandom(motionNames);
-          no = parseInt(name.substring(name.lastIndexOf('_') + 1));
-        }
-
-        var self = this;
-        this.model.startMotion(group, no, priority, function () {
-          self.emit("motion.complete-".concat(group), no);
-          self.emit('motion.complete', group, no);
-        });
-        self.emit("motion.start-".concat(group), no);
-        self.emit('motion.start', group, no);
+        this.model.startMotion(group, no, priority);
         return this;
+      }
+    }, {
+      key: "stopAllMotions",
+      value: function stopAllMotions() {
+        this.model.stopAllMotions();
+        return this;
+      }
+    }, {
+      key: "isAnyMotionPlaying",
+      value: function isAnyMotionPlaying() {
+        return this.model.isAnyMotionPlaying();
+      }
+    }, {
+      key: "getPlayinigMotionNames",
+      value: function getPlayinigMotionNames() {
+        return this.model.getPlayinigMotionNames();
       }
     }]);
 

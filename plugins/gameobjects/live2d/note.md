@@ -192,6 +192,8 @@
 - Multiply
     - `matrix.multiply(a, b, dst)`
     - `matrix.multiplyByMatrix(m)`
+- Rotate
+    - See [this article](https://learnopengl.com/Getting-started/Transformations), **Rotation** section.
 - `matrix.clone()`
 
 ### Model display matrix
@@ -219,8 +221,4 @@
     modelMatrix.centerY(y);
     ```
 
-## TODO
-
-- Fix viewport matrix for camera zoom/scroll
-- Compile framework/*.ts files. So that rollup does not need add typescript compile plugin.
 

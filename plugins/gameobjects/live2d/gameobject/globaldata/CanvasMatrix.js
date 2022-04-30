@@ -1,7 +1,5 @@
 import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
 
-const Linear = Phaser.Math.Linear;
-
 class CanvasMatrix extends CubismMatrix44 {
     constructor() {
         super();

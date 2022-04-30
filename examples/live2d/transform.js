@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import Live2dPlugin from '../../plugins/live2d-plugin.js';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,33 +15,33 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        console.log('Create stage');
+        var x = 1920 / 2;
+        var y = 1080 / 2;
 
-        this.add.text(0, 0, 'Text0');
+        this.character = this.add.rexLive2d(x, y, 'Haru')
+            .setScale(0.5)
 
-        var x = 600;
-        var y = 600;
+        var gui = new Dat.GUI();
+        gui.add(this.character, 'x', 0, 1920);
+        gui.add(this.character, 'y', 0, 1080);
+        gui.add(this.character, 'scale', 0.1, 1);
+        gui.add(this.character, 'angle', -180, 180);
+        gui.add(this.character, 'originX', 0, 1);
+        gui.add(this.character, 'originY', 0, 1);
 
-        var obj = this.add.rexLive2d(x, y, 'Haru')
-            .setScale(0.3)
-            .setOrigin(1)
+        // this.boundsGraphics = this.add.graphics({
+        //     lineStyle: {
+        //         color: 0xffff00,
+        //         width: 3
+        //     }
+        // })
 
-        this.add.text(0, 1060, 'Text1')
-
-        this.add.graphics({
-            lineStyle: {
-                color: 0xffff00,
-                width: 10
-            }
-        })
-            .strokeRectShape(obj.getBounds())
-
-        this.add.circle(x, y, 10, 0xff0000);
-
-        //this.cameras.main.setZoom(0.3)
     }
 
     update() {
+        // this.boundsGraphics
+        //     .clear()
+        //     .strokeRectShape(this.character.getBounds())
     }
 }
 

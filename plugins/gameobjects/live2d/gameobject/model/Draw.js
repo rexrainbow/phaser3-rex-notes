@@ -9,12 +9,17 @@ var Draw = function (calcMatrix) {
     var globalData = this._globalData;
     var projectionMatrix = globalData.projectionMatrix;
 
-    // Clone projection matrix
-    var matrix = projectionMatrix.clone();
+    // Copy from projection matrix
+    var matrix = this.viewMatrix;
+    matrix.copyFrom(projectionMatrix);
+    // Apply rotate
+    matrix.rotate(calcMatrix.rotation);
+    // Apply translate
     matrix.translate(
         projectionMatrix.toLocalX(calcMatrix.getX(0, 0)),
         projectionMatrix.toLocalY(calcMatrix.getY(0, 0))
     );
+    // Apply scale
     matrix.scaleRelative(
         calcMatrix.scaleX,
         calcMatrix.scaleY
