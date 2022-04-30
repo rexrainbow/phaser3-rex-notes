@@ -1,18 +1,19 @@
 import * as Const from './Const.js';
+import OnExpressionStart from '../events/OnExpressionStart.js';
 
-var SetExpression = function (expressionName) {
-    if (expressionName === undefined) {
-        expressionName = 0;
+var SetExpression = function (name) {
+    if (name === undefined) {
+        name = 0;
     }
 
     var motion;
-    var expressionNameType = typeof (expressionName);
-    if (expressionNameType === 'string') {
-        motion = this._expressions.getValue(expressionName);
-    } else if (expressionNameType === 'number') {
-        var keyValue = this._expressions._keyValues[expressionName];
+    var nameType = typeof (name);
+    if (nameType === 'string') {
+        motion = this._expressions.getValue(name);
+    } else if (nameType === 'number') {
+        var keyValue = this._expressions._keyValues[name];
         motion = (keyValue) ? keyValue.second : null;
-        expressionName = (keyValue) ? keyValue.first : undefined;
+        name = (keyValue) ? keyValue.first : undefined;
     }
 
     if (!motion) {
@@ -20,12 +21,16 @@ var SetExpression = function (expressionName) {
         return this;
     }
 
+    motion._name = name;
+
     this._expressionManager.startMotionPriority(
         motion,
         false,
         Const.PriorityForce
     );
-    this._currentExpressionName = expressionName;
+    this._currentExpressionName = name;
+
+    OnExpressionStart(this.parent, name);
 
     return this;
 }

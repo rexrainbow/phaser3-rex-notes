@@ -71,27 +71,11 @@ class Live2dGameObject extends Base {
     }
 
     startMotion(group, no, priority) {
-        if (priority === undefined) {
-            priority = Const.PriorityNormal;
-        }
-
         if (typeof (priority) === 'string') {
             priority = PriorityModes[priority];
         }
 
-        if (no === undefined) {
-            var motionNames = this.getMotionNames(group);
-            var name = GetRandom(motionNames);
-            no = parseInt(name.substring(name.lastIndexOf('_') + 1));
-        }
-
-        var self = this;
-        this.model.startMotion(group, no, priority, function () {
-            self.emit(`motion.complete-${group}`, no);
-            self.emit('motion.complete', group, no);
-        })
-        self.emit(`motion.start-${group}`, no);
-        self.emit('motion.start', group, no);
+        this.model.startMotion(group, no, priority);
 
         return this;
     }
@@ -103,6 +87,10 @@ class Live2dGameObject extends Base {
 
     isAnyMotionPlaying() {
         return this.model.isAnyMotionPlaying();
+    }
+
+    getPlayinigMotionNames() {
+        return this.model.getPlayinigMotionNames();
     }
 
 }

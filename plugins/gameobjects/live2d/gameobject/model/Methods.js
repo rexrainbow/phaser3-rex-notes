@@ -11,6 +11,7 @@ import GetMotionGroupNames from './GetMotionGroupNames.js';
 import StartMotion from './StartMotion.js';
 import StopAllMotions from './StopAllMotions.js';
 import IsAnyMotionPlaying from './IsMotionPlaying.js';
+import GetPlayinigMotionNames from './GetPlayinigMotionNames.js';
 
 
 var Methods = {
@@ -27,6 +28,7 @@ var Methods = {
     startMotion: StartMotion,
     stopAllMotions: StopAllMotions,
     isAnyMotionPlaying: IsAnyMotionPlaying,
+    getPlayinigMotionNames: GetPlayinigMotionNames,
 }
 
 export default Methods;

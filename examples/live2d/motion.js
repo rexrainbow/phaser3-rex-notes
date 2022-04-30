@@ -21,6 +21,9 @@ class Demo extends Phaser.Scene {
             .setScale(0.6)
             .setRandomExpression()
             //.startMotion('Idle', undefined, 'idle')
+            .on('expression.start', function (name) {
+                console.log(`expression.start: ${name}`)
+            })
             .on('motion.complete', function (group, no) {
                 console.log(`motion.complete: ${group}_${no}`)
             })
@@ -41,6 +44,7 @@ class Demo extends Phaser.Scene {
         AddButton(this, 0, 250, 'Random motion', function () {
             obj.startMotion('TapBody', undefined, 'force');
             console.log('Is any motion playing?', obj.isAnyMotionPlaying());
+            console.log('Playing motions', obj.getPlayinigMotionNames());
         })
 
         AddButton(this, 0, 350, 'Stop all motions', function () {
