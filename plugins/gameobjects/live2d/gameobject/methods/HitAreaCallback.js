@@ -4,8 +4,13 @@ var HitAreaCallback = function (shape, localX, localY, gameObject) {
         return false;
     }
 
-    var x = (localX / model._modelWidth) - 0.5;
-    var y = (0.5 - (localY / model._modelHeight)) * 2;
+    if ((localX) < 0 || (localX > model._modelWidth) ||
+        (localY < 0) || (localY > model._modelHeight)) {
+        return false;
+    }
+
+    var x = model.localXToModelMatrixX(localX);
+    var y = model.localYToModelMatrixY(localY);
     var modelSetting = model._modelSetting;
     var hitTestResult = model._hitTestResult;
     var count = modelSetting.getHitAreasCount();

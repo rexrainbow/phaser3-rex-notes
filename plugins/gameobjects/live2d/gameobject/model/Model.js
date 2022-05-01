@@ -40,12 +40,12 @@ class Model extends CubismUserModel {
         this._globalData = undefined;
     }
 
-    toLocalX(x) {
-        return this._globalData.projectionMatrix.toLocalX(x);
+    localXToModelMatrixX(localX) {
+        return (localX / this._modelWidth) - 0.5;
     }
 
-    toLocalY(y) {
-        return this._globalData.projectionMatrix.toLocalY(y);
+    localYToModelMatrixY(localY) {
+        return (0.5 - (localY / this._modelHeight)) * 2;
     }
 }
 

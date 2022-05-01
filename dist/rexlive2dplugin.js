@@ -242,8 +242,12 @@
       return false;
     }
 
-    var x = localX / model._modelWidth - 0.5;
-    var y = (0.5 - localY / model._modelHeight) * 2;
+    if (localX < 0 || localX > model._modelWidth || localY < 0 || localY > model._modelHeight) {
+      return false;
+    }
+
+    var x = model.localXToModelMatrixX(localX);
+    var y = model.localYToModelMatrixY(localY);
     var modelSetting = model._modelSetting;
     var hitTestResult = model._hitTestResult;
     var count = modelSetting.getHitAreasCount();
@@ -10868,14 +10872,14 @@
         this._globalData = undefined;
       }
     }, {
-      key: "toLocalX",
-      value: function toLocalX(x) {
-        return this._globalData.projectionMatrix.toLocalX(x);
+      key: "localXToModelMatrixX",
+      value: function localXToModelMatrixX(localX) {
+        return localX / this._modelWidth - 0.5;
       }
     }, {
-      key: "toLocalY",
-      value: function toLocalY(y) {
-        return this._globalData.projectionMatrix.toLocalY(y);
+      key: "localYToModelMatrixY",
+      value: function localYToModelMatrixY(localY) {
+        return (0.5 - localY / this._modelHeight) * 2;
       }
     }]);
 

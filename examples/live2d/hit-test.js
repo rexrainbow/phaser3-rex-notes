@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 0, '', { fontSize: 24 });
         this.character = this.add.rexLive2d(x, y, 'Haru')
-            .setScale(0.3)
+            .setScale(0.5)
             .startMotion('TapBody', undefined, 'force')
             .on('motions.complete', function () {
                 this.startMotion('TapBody', undefined, 'force')
