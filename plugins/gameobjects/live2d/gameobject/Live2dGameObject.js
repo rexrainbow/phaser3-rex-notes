@@ -141,6 +141,18 @@ class Live2dGameObject extends BaseGameObject {
         return this.model._addParamValues;
     }
 
+    getParameters() {
+        return this.params;
+    }
+
+    get hitTestResult() {
+        return this.model._hitTestResult;
+    }
+
+    getHitTestResult() {
+        return this.hitTestResult;
+    }
+
 }
 
 Object.assign(

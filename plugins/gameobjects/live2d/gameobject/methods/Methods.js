@@ -1,7 +1,7 @@
 import SetInteractive from './SetInteractive.js';
 
 var Methods = {
-    // setInteractive: SetInteractive,
+    setInteractive: SetInteractive,
 }
 
 export default Methods;

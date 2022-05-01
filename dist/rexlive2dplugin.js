@@ -39,6 +39,21 @@
     return Constructor;
   }
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -153,6 +168,56 @@
     return _get.apply(this, arguments);
   }
 
+  function set(target, property, value, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.set) {
+      set = Reflect.set;
+    } else {
+      set = function set(target, property, value, receiver) {
+        var base = _superPropBase(target, property);
+
+        var desc;
+
+        if (base) {
+          desc = Object.getOwnPropertyDescriptor(base, property);
+
+          if (desc.set) {
+            desc.set.call(receiver, value);
+            return true;
+          } else if (!desc.writable) {
+            return false;
+          }
+        }
+
+        desc = Object.getOwnPropertyDescriptor(receiver, property);
+
+        if (desc) {
+          if (!desc.writable) {
+            return false;
+          }
+
+          desc.value = value;
+          Object.defineProperty(receiver, property, desc);
+        } else {
+          _defineProperty(receiver, property, value);
+        }
+
+        return true;
+      };
+    }
+
+    return set(target, property, value, receiver);
+  }
+
+  function _set(target, property, value, receiver, isStrict) {
+    var s = set(target, property, value, receiver || target);
+
+    if (!s && isStrict) {
+      throw new Error('failed to set property');
+    }
+
+    return value;
+  }
+
   // const Utils = Phaser.Renderer.WebGL.Utils;
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
@@ -168,6 +233,51 @@
   var Render = {
     renderWebGL: WebGLRenderer,
     renderCanvas: CanvasRenderer
+  };
+
+  var HitAreaCallback = function HitAreaCallback(shape, localX, localY, gameObject) {
+    var model = gameObject.model;
+
+    if (!model) {
+      return false;
+    }
+
+    var x = localX / model._modelWidth - 0.5;
+    var y = (0.5 - localY / model._modelHeight) * 2;
+    var modelSetting = model._modelSetting;
+    var hitTestResult = model._hitTestResult;
+    var count = modelSetting.getHitAreasCount();
+    var anyHit = false;
+
+    for (var i = 0; i < count; i++) {
+      var hitTestName = modelSetting.getHitAreaName(i);
+      var drawId = modelSetting.getHitAreaId(i);
+      var isHit = model.isHit(drawId, x, y);
+      hitTestResult[hitTestName] = isHit;
+      anyHit = anyHit || isHit;
+    }
+
+    return anyHit;
+  };
+
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GameObject = Phaser.GameObjects.GameObject;
+
+  var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
+    if (IsPlainObject$1(hitArea)) {
+      hitArea.hitArea = HitAreaCallback;
+      hitArea.hitAreaCallback = HitAreaCallback;
+    } else {
+      hitArea = HitAreaCallback;
+      hitAreaCallback = HitAreaCallback;
+    }
+
+    GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+    return this;
+  };
+
+  var Methods$1 = {
+    setInteractive: SetInteractive
   };
 
   /**
@@ -10184,7 +10294,19 @@
     } // Stop all motions
 
 
-    this._motionManager.stopAllMotions();
+    this._motionManager.stopAllMotions(); // Model size
+
+
+    this._modelWidth = this._model._model.canvasinfo.CanvasWidth / 2;
+    this._modelHeight = this._model._model.canvasinfo.CanvasHeight / 2; // Hit test result
+
+    var count = this._modelSetting.getHitAreasCount();
+
+    for (var i = 0; i < count; i++) {
+      var hitAreaName = this._modelSetting.getHitAreaName(i);
+
+      this._hitTestResult[hitAreaName] = false;
+    }
 
     return this;
   };
@@ -10207,11 +10329,26 @@
       OnAllMotionsFinish(this.parent);
     }
 
-    this._model.saveParameters();
+    this._model.saveParameters(); // Add parameter values
+
 
     for (var name in this._addParamValues) {
-      var propertyName = "_idParam".concat(Capitalize$3(name));
       var addValue = this._addParamValues[name];
+
+      if (addValue === 0) {
+        continue;
+      }
+
+      var propertyName = "_idParam".concat(Capitalize$3(name));
+
+      if (!this.hasOwnProperty(propertyName)) {
+        this.registerParameter(name); // Can't register this parameter
+
+        if (!this.hasOwnProperty(propertyName)) {
+          // Error
+          return this;
+        }
+      }
 
       this._model.addParameterValueById(this[propertyName], addValue);
     }
@@ -10245,17 +10382,11 @@
     return this;
   };
 
-  // import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
-  var Draw = function Draw(calcMatrix) {
-    if (!this._model) {
-      return;
-    }
+  var UpdateViewMatrix = function UpdateViewMatrix(model, calcMatrix) {
+    var gameObject = model.parent;
+    var projectionMatrix = model._globalData.projectionMatrix; // Copy from projection matrix
 
-    var gameObject = this.parent;
-    var globalData = this._globalData;
-    var projectionMatrix = globalData.projectionMatrix; // Copy from projection matrix
-
-    var matrix = this.viewMatrix;
+    var matrix = model.viewMatrix;
     matrix.copyFrom(projectionMatrix); // Apply rotate
 
     matrix.rotate(calcMatrix.rotation); // Apply translate
@@ -10263,11 +10394,21 @@
     matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0))); // Apply scale
 
     matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
-    var modelMatrix = this._modelMatrix; // Offset for origin
+    var modelMatrix = model._modelMatrix; // Offset for origin
 
     modelMatrix.translate(modelMatrix._width * (0.5 - gameObject.originX), modelMatrix._height * (gameObject.originY - 0.5)); // Apply model matrix
 
     matrix.multiplyByMatrix(modelMatrix);
+    return matrix;
+  };
+
+  var Draw = function Draw(calcMatrix) {
+    if (!this._model) {
+      return;
+    }
+
+    var globalData = this._globalData;
+    var matrix = UpdateViewMatrix(this, calcMatrix);
     var renderer = this.getRenderer();
     renderer.setMvpMatrix(matrix);
     renderer.setRenderState(globalData.frameBuffer, globalData.viewportRect);
@@ -10604,6 +10745,7 @@
       this.registerParameter(name); // Can't register this parameter
 
       if (!this.hasOwnProperty(propertyName)) {
+        // Error
         return this;
       }
     }
@@ -10629,6 +10771,20 @@
     return this;
   };
 
+  var HitTest = function HitTest(x, y, hitArenaName) {
+    var count = this._modelSetting.getHitAreasCount();
+
+    for (var i = 0; i < count; i++) {
+      if (this._modelSetting.getHitAreaName(i) === hitArenaName) {
+        var drawId = this._modelSetting.getHitAreaId(i);
+
+        return this.isHit(drawId, x, y);
+      }
+    }
+
+    return false;
+  };
+
   var Methods = {
     setup: Setup,
     update: Update,
@@ -10644,7 +10800,8 @@
     getPlayinigMotionNames: GetPlayinigMotionNames,
     registerParameter: RegisterParameter,
     addParameterValue: AddParameterValue,
-    resetParameterValue: ResetParameterValue
+    resetParameterValue: ResetParameterValue,
+    hitTest: HitTest
   };
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
@@ -10669,11 +10826,9 @@
       _this._expressions = new csmMap();
       _this._currentExpressionName = undefined;
       _this._addParamValues = {};
-
-      _this.registerParameter('eyeBallX');
-
-      _this.registerParameter('eyeBallX'); // this._wavFileHandler = new LAppWavFileHandler();
-
+      _this._modelWidth = 0;
+      _this._modelHeight = 0;
+      _this._hitTestResult = {}; // this._wavFileHandler = new LAppWavFileHandler();
 
       return _this;
     }
@@ -10688,24 +10843,6 @@
         this._expressions.clear();
 
         this._globalData = undefined;
-      }
-    }, {
-      key: "_modelWidth",
-      get: function get() {
-        if (this._model) {
-          return this._model._model.canvasinfo.CanvasWidth;
-        } else {
-          return 0;
-        }
-      }
-    }, {
-      key: "_modelHeight",
-      get: function get() {
-        if (this._model) {
-          return this._model._model.canvasinfo.CanvasHeight;
-        } else {
-          return 0;
-        }
       }
     }, {
       key: "toLocalX",
@@ -10724,19 +10861,34 @@
 
   Object.assign(Model.prototype, Methods);
 
-  var Base = Phaser.GameObjects.GameObject;
+  var BaseGameObject = /*#__PURE__*/function (_Phaser$GameObjects$G) {
+    _inherits(BaseGameObject, _Phaser$GameObjects$G);
 
-  var Live2dGameObject = /*#__PURE__*/function (_Base) {
-    _inherits(Live2dGameObject, _Base);
+    var _super = _createSuper(BaseGameObject);
 
-    var _super = _createSuper(Live2dGameObject);
+    function BaseGameObject() {
+      _classCallCheck(this, BaseGameObject);
+
+      return _super.apply(this, arguments);
+    }
+
+    return _createClass(BaseGameObject);
+  }(Phaser.GameObjects.GameObject);
+
+  var Components = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(BaseGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible]);
+
+  var Live2dGameObject = /*#__PURE__*/function (_BaseGameObject) {
+    _inherits(Live2dGameObject, _BaseGameObject);
+
+    var _super2 = _createSuper(Live2dGameObject);
 
     function Live2dGameObject(scene, x, y, key) {
       var _this;
 
       _classCallCheck(this, Live2dGameObject);
 
-      _this = _super.call(this, scene, 'rexLive2d');
+      _this = _super2.call(this, scene, 'rexLive2d');
       _this.model = new Model(_assertThisInitialized(_this));
 
       _this.setKey(key);
@@ -10774,6 +10926,21 @@
       value: function preDestroy() {
         this.model.release();
         this.model = undefined;
+      }
+    }, {
+      key: "alpha",
+      get: function get() {
+        return _get(_getPrototypeOf(Live2dGameObject.prototype), "alpha", this);
+      },
+      set: function set(value) {
+        if (_get(_getPrototypeOf(Live2dGameObject.prototype), "alpha", this) === value) {
+          return;
+        }
+
+        _set(_getPrototypeOf(Live2dGameObject.prototype), "alpha", value, this, true);
+
+        this.model.setOpacity(value); // But it won't change render result
+        // Only work for hitTest
       }
     }, {
       key: "getExpressionNames",
@@ -10859,19 +11026,33 @@
       get: function get() {
         return this.model._addParamValues;
       }
+    }, {
+      key: "getParameters",
+      value: function getParameters() {
+        return this.params;
+      }
+    }, {
+      key: "hitTestResult",
+      get: function get() {
+        return this.model._hitTestResult;
+      }
+    }, {
+      key: "getHitTestResult",
+      value: function getHitTestResult() {
+        return this.hitTestResult;
+      }
     }]);
 
     return Live2dGameObject;
-  }(Base);
+  }(BaseGameObject);
 
+  Object.assign(Live2dGameObject.prototype, Render, Methods$1);
   var PriorityModes = {
     none: PriorityNone,
     idle: PriorityIdle,
     normal: PriorityNormal,
     force: PriorityForce
   };
-  var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Live2dGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render]);
 
   function Factory (x, y, key) {
     var gameObject = new Live2dGameObject(this.scene, x, y, key);

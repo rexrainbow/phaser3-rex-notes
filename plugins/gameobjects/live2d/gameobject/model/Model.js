@@ -27,6 +27,7 @@ class Model extends CubismUserModel {
 
         this._modelWidth = 0;
         this._modelHeight = 0;
+        this._hitTestResult = {};
 
         // this._wavFileHandler = new LAppWavFileHandler();
     }

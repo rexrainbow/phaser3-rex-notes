@@ -247,4 +247,74 @@
     modelMatrix.centerY(y);
     ```
 
+## Hit test
+
+```ts
+const x: number = this._deviceToScreen.transformX(
+  this._touchManager.getX()
+); // 論理座標変換した座標を取得。
+const y: number = this._deviceToScreen.transformY(
+  this._touchManager.getY()
+); // 論理座標変化した座標を取得。
+```
+
+```ts
+this._deviceToScreen.loadIdentity();
+if (width > height) {
+  const screenW: number = Math.abs(right - left);
+  this._deviceToScreen.scaleRelative(screenW / width, -screenW / width);
+} else {
+  const screenH: number = Math.abs(top - bottom);
+  this._deviceToScreen.scaleRelative(screenH / height, -screenH / height);
+}
+this._deviceToScreen.translateRelative(-width * 0.5, -height * 0.5);
+```
+
+```ts
+hitTest(hitAreaName, x, y)
+```
+
+- `hitAreaName` : `'Head'`, `'Body'`
+
+```ts
+for (let i = 0; i < count; i++) {
+  if (this._modelSetting.getHitAreaName(i) == hitArenaName) {
+    const drawId: CubismIdHandle = this._modelSetting.getHitAreaId(i);
+    return this.isHit(drawId, x, y);
+  }
+}
+```
+
+```ts
+CubismUserModel.isHit(drawableId,pointX,pointY);
+```
+
+```ts
+this._modelMatrix = new CubismModelMatrix(
+  this._model.getCanvasWidth(),
+  this._model.getCanvasHeight()
+);
+```
+
+```ts
+public getCanvasWidth(): number {
+  if (this._model == null) {
+    return 0.0;
+  }
+  return (
+    this._model.canvasinfo.CanvasWidth / this._model.canvasinfo.PixelsPerUnit
+  );
+}
+```
+
+```ts
+public getCanvasHeight(): number {
+  if (this._model == null) {
+    return 0.0;
+  }
+  return (
+    this._model.canvasinfo.CanvasHeight / this._model.canvasinfo.PixelsPerUnit
+  );
+}
+```
 

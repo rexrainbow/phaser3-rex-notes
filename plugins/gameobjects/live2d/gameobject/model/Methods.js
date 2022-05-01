@@ -17,6 +17,8 @@ import RegisterParameter from './RegisterParameter.js';
 import AddParameterValue from './AddParameterValue.js';
 import ResetParameterValue from './ResetParameterValue.js';
 
+import HitTest from './HitTest.js';
+
 var Methods = {
     setup: Setup,
     update: Update,
@@ -36,6 +38,8 @@ var Methods = {
     registerParameter: RegisterParameter,
     addParameterValue: AddParameterValue,
     resetParameterValue: ResetParameterValue,
+
+    hitTest: HitTest,
 }
 
 export default Methods;

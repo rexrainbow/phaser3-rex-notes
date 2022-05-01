@@ -136,11 +136,15 @@ var Setup = function (data) {
     this._motionManager.stopAllMotions();
 
     // Model size
-    // var modelMatrix = this._modelMatrix;
-    // var scaleX = modelMatrix.getScaleX();
-    // var sceleY = modelMatrix.getScaleY();
     this._modelWidth = (this._model._model.canvasinfo.CanvasWidth / 2);
     this._modelHeight = (this._model._model.canvasinfo.CanvasHeight / 2);
+
+    // Hit test result
+    var count = this._modelSetting.getHitAreasCount();
+    for (var i = 0; i < count; i++) {
+        var hitAreaName = this._modelSetting.getHitAreaName(i);
+        this._hitTestResult[hitAreaName] = false;
+    }
 
 
     return this;
