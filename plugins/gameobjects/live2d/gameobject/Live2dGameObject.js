@@ -1,10 +1,27 @@
 import Render from './render/Render.js';
+import Methods from './methods/Methods.js';
 import Model from './model/Model.js';
 import * as Const from './model/Const.js';
 
-const Base = Phaser.GameObjects.GameObject;
+class BaseGameObject extends Phaser.GameObjects.GameObject { }
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(BaseGameObject,
+    [
+        Components.Alpha,
+        Components.BlendMode,
+        Components.ComputedSize,
+        Components.Depth,
+        Components.Flip,
+        Components.GetBounds,
+        Components.Origin,
+        Components.ScrollFactor,
+        Components.Tint,
+        Components.Transform,
+        Components.Visible,
+    ]
+);
 
-class Live2dGameObject extends Base {
+class Live2dGameObject extends BaseGameObject {
     constructor(scene, x, y, key) {
         super(scene, 'rexLive2d');
 
@@ -37,6 +54,21 @@ class Live2dGameObject extends Base {
     preDestroy() {
         this.model.release();
         this.model = undefined;
+    }
+
+    get alpha() {
+        return super.alpha;
+    }
+
+    set alpha(value) {
+        if (super.alpha === value) {
+            return;
+        }
+        super.alpha = value;
+
+        this.model.setOpacity(value);
+        // But it won't change render result
+        // Only work for hitTest
     }
 
     getExpressionNames() {
@@ -73,9 +105,7 @@ class Live2dGameObject extends Base {
         if (typeof (priority) === 'string') {
             priority = PriorityModes[priority];
         }
-
         this.model.startMotion(group, no, priority);
-
         return this;
     }
 
@@ -113,29 +143,17 @@ class Live2dGameObject extends Base {
 
 }
 
+Object.assign(
+    Live2dGameObject.prototype,
+    Render,
+    Methods,
+)
+
 const PriorityModes = {
     none: Const.PriorityNone,
     idle: Const.PriorityIdle,
     normal: Const.PriorityNormal,
     force: Const.PriorityForce
 }
-
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Live2dGameObject,
-    [
-        Components.Alpha,
-        Components.BlendMode,
-        Components.ComputedSize,
-        Components.Depth,
-        Components.Flip,
-        Components.GetBounds,
-        Components.Origin,
-        Components.ScrollFactor,
-        Components.Tint,
-        Components.Transform,
-        Components.Visible,
-        Render,
-    ]
-);
 
 export default Live2dGameObject;

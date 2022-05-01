@@ -25,6 +25,9 @@ class Model extends CubismUserModel {
 
         this._addParamValues = {};
 
+        this._modelWidth = 0;
+        this._modelHeight = 0;
+
         // this._wavFileHandler = new LAppWavFileHandler();
     }
 
@@ -34,22 +37,6 @@ class Model extends CubismUserModel {
         this._motions.clear();
         this._expressions.clear();
         this._globalData = undefined;
-    }
-
-    get _modelWidth() {
-        if (this._model) {
-            return this._model._model.canvasinfo.CanvasWidth;
-        } else {
-            return 0;
-        }
-    }
-
-    get _modelHeight() {
-        if (this._model) {
-            return this._model._model.canvasinfo.CanvasHeight;
-        } else {
-            return 0;
-        }
     }
 
     toLocalX(x) {

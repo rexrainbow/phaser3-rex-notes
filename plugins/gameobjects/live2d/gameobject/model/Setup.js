@@ -135,6 +135,13 @@ var Setup = function (data) {
     // Stop all motions
     this._motionManager.stopAllMotions();
 
+    // Model size
+    // var modelMatrix = this._modelMatrix;
+    // var scaleX = modelMatrix.getScaleX();
+    // var sceleY = modelMatrix.getScaleY();
+    this._modelWidth = (this._model._model.canvasinfo.CanvasWidth / 2);
+    this._modelHeight = (this._model._model.canvasinfo.CanvasHeight / 2);
+
 
     return this;
 }
