@@ -242,14 +242,20 @@
       return false;
     }
 
+    var hitTestResult = model._hitTestResult;
+
     if (localX < 0 || localX > model._modelWidth || localY < 0 || localY > model._modelHeight) {
+      // Set all hit test result to false
+      for (var name in hitTestResult) {
+        hitTestResult[name] = false;
+      }
+
       return false;
     }
 
     var x = model.localXToModelMatrixX(localX);
     var y = model.localYToModelMatrixY(localY);
     var modelSetting = model._modelSetting;
-    var hitTestResult = model._hitTestResult;
     var count = modelSetting.getHitAreasCount();
     var anyHit = false;
 
