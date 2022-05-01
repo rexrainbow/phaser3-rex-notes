@@ -20,6 +20,11 @@ class Demo extends Phaser.Scene {
 
         this.character = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.5)
+            .startMotion('TapBody', undefined, 'force')
+            .on('motions.complete', function () {
+                this.startMotion('TapBody', undefined, 'force')
+            })
+
 
         var gui = new Dat.GUI();
         gui.add(this.character, 'x', 0, 1920);
