@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
         var x = 1920 / 2,
             y = 1080 / 2;
 
+        var print = this.add.text(0, 0, '', { fontSize: 24 });
         this.character = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.3)
             .startMotion('TapBody', undefined, 'force')
@@ -24,15 +25,11 @@ class Demo extends Phaser.Scene {
                 this.startMotion('TapBody', undefined, 'force')
             })
             .setInteractive()
-            .on('pointerdown', function () {
-                var hitTestResult = this.hitTestResult;
-                console.log('---- Hit ----')
-                for (var name in hitTestResult) {
-                    if (hitTestResult[name]) {
-                        console.log(`Hit ${name}`);
-                    }
-                }
-                console.log('----    ----')
+            .on('pointerdown-head', function () {
+                print.text += 'Hit head\n'
+            })
+            .on('pointerdown-body', function () {
+                print.text += 'Hit body\n'
             })
     }
 
