@@ -744,10 +744,6 @@
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
-  function getCjsExportFromNamespace (n) {
-  	return n && n['default'] || n;
-  }
-
   var lokiIndexedAdapter = createCommonjsModule(function (module, exports) {
   /*
     Loki IndexedDb Adapter (need to include this script to use it)
@@ -1377,14 +1373,7 @@
   }));
   });
 
-  var empty = {};
-
-  var empty$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    'default': empty
-  });
-
-  var require$$1 = getCjsExportFromNamespace(empty$1);
+  var require$$1 = {};
 
   var lokijs = createCommonjsModule(function (module, exports) {
   /**

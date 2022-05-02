@@ -1,4 +1,5 @@
 import RotateObjectAround from '../../../utils/actions/RotateObjectAround.js';
+import ScreenXYToWorldXY from '../../../utils/position/ScreenXYToWorldXY.js';
 
 var SpinObject = function (gameObject, camera) {
     if (!this.isRotation) {
@@ -12,9 +13,9 @@ var SpinObject = function (gameObject, camera) {
     var movementX = this.movementCenterX,
         movementY = this.movementCenterY;
 
-    camera.getWorldPoint(this.centerX, this.centerY, tmpPos);
-    var centerWorldX = tmpPos.x;
-    var centerWorldY = tmpPos.y;
+    var worldXY = ScreenXYToWorldXY(this.centerX, this.centerY, camera, true);
+    var centerWorldX = worldXY.x;
+    var centerWorldY = worldXY.y;
 
     var angle = this.rotation;
     if (Array.isArray(gameObject)) {
@@ -32,7 +33,5 @@ var SpinObject = function (gameObject, camera) {
     }
     return this;
 }
-
-var tmpPos = {};
 
 export default SpinObject;

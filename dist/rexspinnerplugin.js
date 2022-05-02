@@ -2649,8 +2649,12 @@
     return entry;
   };
 
-  var SetValue = function SetValue(target, keys, value) {
-    // no object
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    } // no object
+
+
     if (_typeof(target) !== 'object') {
       return;
     } // invalid key
@@ -2664,7 +2668,7 @@
       }
     } else {
       if (typeof keys === 'string') {
-        keys = keys.split('.');
+        keys = keys.split(delimiter);
       }
 
       var lastKey = keys.pop();
