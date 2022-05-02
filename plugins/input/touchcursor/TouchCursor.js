@@ -1,5 +1,6 @@
 import VectorToCursorKeys from '../../utils/input/VectorToCursorKeys.js';
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import ScreenXYToWorldXY from '../../utils/position/ScreenXYToWorldXY.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const CircleClass = Phaser.Geom.Circle;
@@ -108,7 +109,7 @@ class TouchCursor extends VectorToCursorKeys {
         // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
         // if this camera is not main-camera
         if (camera !== this.mainCamera) {
-            camera.getWorldPoint(pointer.x, pointer.y, worldXY);
+            worldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, worldXY);
         } else {
             worldXY.x = pointer.worldX;
             worldXY.y = pointer.worldY;
