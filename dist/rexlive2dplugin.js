@@ -392,18 +392,18 @@
 
     var eyeBallXWeight = GetValue(config, 'eyeBallX', 1);
     var eyeBallYWeight = GetValue(config, 'eyeBallY', 1);
-    params.eyeBallX = modelX * eyeBallXWeight;
-    params.eyeBallY = modelY * eyeBallYWeight; // Head
+    params.EyeBallX = modelX * eyeBallXWeight;
+    params.EyeBallY = modelY * eyeBallYWeight; // Head
 
     var angleXWeight = GetValue(config, 'angleX', 30);
     var angleYWeight = GetValue(config, 'angleY', 30);
     var angleZWeight = GetValue(config, 'angleZ', 30);
-    params.angleX = modelX * angleXWeight;
-    params.angleY = modelY * angleYWeight;
-    params.angleZ = -1 * modelX * modelY * angleZWeight; // Body
+    params.AngleX = modelX * angleXWeight;
+    params.AngleY = modelY * angleYWeight;
+    params.AngleZ = -1 * modelX * modelY * angleZWeight; // Body
 
     var bodyAngleXWeight = GetValue(config, 'bodyAngleX', 10);
-    params.bodyAngleX = modelX * bodyAngleXWeight;
+    params.BodyAngleX = modelX * bodyAngleXWeight;
     return this;
   };
 
