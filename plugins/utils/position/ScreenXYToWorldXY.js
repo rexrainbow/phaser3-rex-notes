@@ -1,6 +1,6 @@
 var ScreenXYToWorldXY = function (screenX, screenY, camera, out) {
     if (out === undefined) {
-        out = { x: 0, y: 0 };
+        out = {};
     } else if (out === true) {
         out = globalOut;
     }
@@ -9,6 +9,6 @@ var ScreenXYToWorldXY = function (screenX, screenY, camera, out) {
     return out;
 }
 
-var globalOut = { x: 0, y: 0 };
+var globalOut = {};
 
 export default ScreenXYToWorldXY;
