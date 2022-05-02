@@ -2,14 +2,14 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var LookAt = function (x, y, config) {
-    var dragX, dragY;
+    var modelX, modelY;
     if (x === undefined) {
-        dragX = 0;
-        dragY = 0;
+        modelX = 0;
+        modelY = 0;
     } else {
         var modelXY = this.getModelXY(x, y);
-        dragX = modelXY.x;
-        dragY = modelXY.y;
+        modelX = modelXY.x;
+        modelY = modelXY.y;
     }
 
     var params = this.getParameters();
@@ -17,20 +17,20 @@ var LookAt = function (x, y, config) {
     // Eyes
     var eyeBallXWeight = GetValue(config, 'eyeBallX', 1);
     var eyeBallYWeight = GetValue(config, 'eyeBallY', 1);
-    params.eyeBallX = dragX * eyeBallXWeight;
-    params.eyeBallY = dragY * eyeBallYWeight;
+    params.eyeBallX = modelX * eyeBallXWeight;
+    params.eyeBallY = modelY * eyeBallYWeight;
 
     // Head
     var angleXWeight = GetValue(config, 'angleX', 30);
     var angleYWeight = GetValue(config, 'angleY', 30);
     var angleZWeight = GetValue(config, 'angleZ', 30);
-    params.angleX = dragX * angleXWeight;
-    params.angleY = dragY * angleYWeight;
-    params.angleZ = (-1) * dragX * dragY * angleZWeight;
+    params.angleX = modelX * angleXWeight;
+    params.angleY = modelY * angleYWeight;
+    params.angleZ = (-1) * modelX * modelY * angleZWeight;
 
     // Body
     var bodyAngleXWeight = GetValue(config, 'bodyAngleX', 10);
-    params.bodyAngleX = dragX * bodyAngleXWeight;
+    params.bodyAngleX = modelX * bodyAngleXWeight;
 
     return this;
 }
