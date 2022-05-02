@@ -10506,11 +10506,15 @@
 
     if (this._physics != null) {
       this._physics.evaluate(this._model, deltaTimeSeconds);
-    } // TODO: drag actions
-    // TODO: lipsync by wav
+    }
 
+    if (this._lipsync && this._lipSyncValue !== 0) {
+      var count = this._lipSyncIds.getSize();
 
-    if (this._lipsync) ;
+      for (var i = 0; i < count; ++i) {
+        this._model.addParameterValueById(this._lipSyncIds.at(i), this._lipSyncValue);
+      }
+    }
 
     if (this._pose != null) {
       this._pose.updateParameters(this._model, deltaTimeSeconds);
@@ -10961,6 +10965,7 @@
       _this.viewMatrix = new ViewMatrix();
       _this._eyeBlinkIds = new csmVector();
       _this._lipSyncIds = new csmVector();
+      _this._lipSyncValue = 0;
       _this._motions = new csmMap();
       _this._expressions = new csmMap();
       _this._currentExpressionName = undefined;
@@ -11169,6 +11174,20 @@
       key: "getParameters",
       value: function getParameters() {
         return this.params;
+      }
+    }, {
+      key: "lipSyncValue",
+      get: function get() {
+        return this.model._lipSyncValue;
+      },
+      set: function set(value) {
+        this.model._lipSyncValue = value;
+      }
+    }, {
+      key: "setLipSyncValue",
+      value: function setLipSyncValue(value) {
+        this.lipSyncValue = value;
+        return this;
       }
     }, {
       key: "hitTestResult",

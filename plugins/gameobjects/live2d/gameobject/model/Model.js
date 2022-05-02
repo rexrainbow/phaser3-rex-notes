@@ -16,7 +16,9 @@ class Model extends CubismUserModel {
         this.viewMatrix = new ViewMatrix();
 
         this._eyeBlinkIds = new csmVector();
+
         this._lipSyncIds = new csmVector();
+        this._lipSyncValue = 0;
 
         this._motions = new csmMap();
 

@@ -51,11 +51,11 @@ var Update = function (time, delta) {
         this._physics.evaluate(this._model, deltaTimeSeconds);
     }
 
-    // TODO: drag actions
-
-    // TODO: lipsync by wav
-    if (this._lipsync) {
-
+    if (this._lipsync && (this._lipSyncValue !== 0)) {
+        var count = this._lipSyncIds.getSize();
+        for (var i = 0; i < count; ++i) {
+            this._model.addParameterValueById(this._lipSyncIds.at(i), this._lipSyncValue);
+        }
     }
 
     if (this._pose != null) {

@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         var x = 1920 / 2,
             y = 1080 / 2;
 
-        var obj = this.add.rexLive2d(x, y, 'Haru')
+        var character = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.6)
             .setRandomExpression()
             //.startMotion('Idle', undefined, 'idle')
@@ -28,29 +28,39 @@ class Demo extends Phaser.Scene {
                 console.log(`motion.complete: ${group}_${no}`)
             })
 
-        console.log('Expressions:', obj.getExpressionNames());
-        console.log('Motions:', obj.getMotionNames());
-        console.log('Motion groups:', obj.getMotionGroupNames());
-        console.log('Is any motion playing?', obj.isAnyMotionPlaying());
+        console.log('Expressions:', character.getExpressionNames());
+        console.log('Motions:', character.getMotionNames());
+        console.log('Motion groups:', character.getMotionGroupNames());
+        console.log('Is any motion playing?', character.isAnyMotionPlaying());
 
         var expressionNameTxt = this.add.text(0, 0, '', { fontSize: 36 });
-        expressionNameTxt.text = obj.expressionName;
+        expressionNameTxt.text = character.expressionName;
 
         AddButton(this, 0, 50, 'Random expression', function () {
-            obj.setRandomExpression();
-            expressionNameTxt.text = obj.expressionName;
+            character.setRandomExpression();
+            expressionNameTxt.text = character.expressionName;
         })
 
         AddButton(this, 0, 250, 'Random motion', function () {
-            obj.startMotion('TapBody', undefined, 'force');
-            console.log('Is any motion playing?', obj.isAnyMotionPlaying());
-            console.log('Playing motions', obj.getPlayinigMotionNames());
+            character.startMotion('TapBody', undefined, 'force');
+            console.log('Is any motion playing?', character.isAnyMotionPlaying());
+            console.log('Playing motions', character.getPlayinigMotionNames());
         })
 
         AddButton(this, 0, 350, 'Stop all motions', function () {
-            obj.stopAllMotions();
-            console.log('Is any motion playing?', obj.isAnyMotionPlaying());
+            character.stopAllMotions();
+            console.log('Is any motion playing?', character.isAnyMotionPlaying());
         })
+
+        // Lip sync value
+        var tween = this.tweens.add({
+            targets: character,
+            lipSyncValue: 1,
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 300,
+            repeat: -1,            // -1: infinity
+            yoyo: true
+        });
     }
 
     update() {

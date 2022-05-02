@@ -145,6 +145,19 @@ class Live2dGameObject extends BaseGameObject {
         return this.params;
     }
 
+    get lipSyncValue() {
+        return this.model._lipSyncValue;
+    }
+
+    set lipSyncValue(value) {
+        this.model._lipSyncValue = value;
+    }
+
+    setLipSyncValue(value) {
+        this.lipSyncValue = value;
+        return this;
+    }
+
     get hitTestResult() {
         return this.model._hitTestResult;
     }
