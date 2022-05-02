@@ -33,24 +33,20 @@ class Demo extends Phaser.Scene {
                 print.text += 'Hit body\n'
             })
 
-            
+
         // Interactive with touch pointer
         var printDragXY = this.add.text(0, 1080 / 2, '', { fontSize: 24 });
         this.input.on('pointermove', function (pointer) {
-            var modelXY = character.getModelXY(pointer.worldX, pointer.worldY);
-            var dragX = modelXY.x,
-                dragY = modelXY.y;
+            var x = pointer.worldX, y = pointer.worldY;
+            character.lookAt(x, y);
 
-            printDragXY.text = `${dragX.toFixed(2)}, ${dragY.toFixed(2)}`
-            var params = character.getParameters();
-            params.eyeBallX = dragX;
-            params.eyeBallY = dragY;
-
-            params.bodyAngleX = dragX * 10;
-            params.angleX = dragX * 30;
-            params.angleY = dragY * 30;
-            params.angleZ = dragX * dragY * -30;
+            // Debugging
+            var modelXY = character.getModelXY(x, y);
+            var dragX = modelXY.x, dragY = modelXY.y;
+            printDragXY.text = `${dragX.toFixed(2)}, ${dragY.toFixed(2)}`;
         })
+        character.lookForward();
+
     }
 
     update() {
