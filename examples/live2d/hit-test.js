@@ -26,11 +26,11 @@ class Demo extends Phaser.Scene {
                 this.startMotion('TapBody', undefined, 'force')
             })
             .setInteractive()
-            .on('pointerdown-head', function () {
-                print.text += 'Hit head\n'
+            .on('pointerdown-Head', function () {
+                print.text += 'Hit Head\n'
             })
-            .on('pointerdown-body', function () {
-                print.text += 'Hit body\n'
+            .on('pointerdown-Body', function () {
+                print.text += 'Hit Body\n'
             })
 
 

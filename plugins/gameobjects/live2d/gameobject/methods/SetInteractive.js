@@ -36,7 +36,7 @@ var FireEvent = function (gameObject, eventPrefix, pointer, localX, localY, even
     var hitTestResult = gameObject.hitTestResult;
     for (var name in hitTestResult) {
         if (hitTestResult[name]) {
-            gameObject.emit(`${eventPrefix}-${name.toLowerCase()}`, pointer, localX, localY, event);
+            gameObject.emit(`${eventPrefix}-${name}`, pointer, localX, localY, event);
         }
     }
 }

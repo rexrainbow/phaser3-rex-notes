@@ -304,7 +304,7 @@
 
     for (var name in hitTestResult) {
       if (hitTestResult[name]) {
-        gameObject.emit("".concat(eventPrefix, "-").concat(name.toLowerCase()), pointer, localX, localY, event);
+        gameObject.emit("".concat(eventPrefix, "-").concat(name), pointer, localX, localY, event);
       }
     }
   };
