@@ -680,6 +680,19 @@
     }
   };
 
+  var ScreenXYToWorldXY = function ScreenXYToWorldXY(screenX, screenY, camera, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalOut;
+    }
+
+    camera.getWorldPoint(screenX, screenY, out);
+    return out;
+  };
+
+  var globalOut = {};
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var CircleClass = Phaser.Geom.Circle;
   var CircleContains = Phaser.Geom.Circle.Contains;
@@ -800,7 +813,7 @@
         // if this camera is not main-camera
 
         if (camera !== this.mainCamera) {
-          camera.getWorldPoint(pointer.x, pointer.y, worldXY);
+          worldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, worldXY);
         } else {
           worldXY.x = pointer.worldX;
           worldXY.y = pointer.worldY;

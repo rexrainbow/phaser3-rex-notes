@@ -1820,6 +1820,19 @@
     return gameObject;
   };
 
+  var ScreenXYToWorldXY = function ScreenXYToWorldXY(screenX, screenY, camera, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globalOut;
+    }
+
+    camera.getWorldPoint(screenX, screenY, out);
+    return out;
+  };
+
+  var globalOut = {};
+
   var SpinObject = function SpinObject(gameObject, camera) {
     if (!this.isRotation) {
       return this;
@@ -1831,9 +1844,9 @@
 
     var movementX = this.movementCenterX,
         movementY = this.movementCenterY;
-    camera.getWorldPoint(this.centerX, this.centerY, tmpPos);
-    var centerWorldX = tmpPos.x;
-    var centerWorldY = tmpPos.y;
+    var worldXY = ScreenXYToWorldXY(this.centerX, this.centerY, camera, true);
+    var centerWorldX = worldXY.x;
+    var centerWorldY = worldXY.y;
     var angle = this.rotation;
 
     if (Array.isArray(gameObject)) {
@@ -1853,8 +1866,6 @@
 
     return this;
   };
-
-  var tmpPos = {};
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
