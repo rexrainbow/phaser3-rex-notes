@@ -1,5 +1,5 @@
-var LookForward = function() {
-    this.lookAt();
+var LookForward = function(config) {
+    this.lookAt(config);
     return this;
 }
 

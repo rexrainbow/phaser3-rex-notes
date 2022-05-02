@@ -1,13 +1,21 @@
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var LookAt = function (x, y, config) {
+    if (IsPlainObject(x)) {
+        config = x;
+        x = undefined;
+        y = undefined;
+    }
+
     var modelX, modelY;
     if (x === undefined) {
         modelX = 0;
         modelY = 0;
     } else {
-        var modelXY = this.getModelXY(x, y);
+        var camera = GetValue(config, 'camera', undefined);
+        var modelXY = this.getModelXY(x, y, camera, true);
         modelX = modelXY.x;
         modelY = modelXY.y;
     }

@@ -270,13 +270,13 @@
     return anyHit;
   };
 
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var GameObject = Phaser.GameObjects.GameObject;
 
   var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
     var isInit = !this.input;
 
-    if (IsPlainObject$2(hitArea)) {
+    if (IsPlainObject$3(hitArea)) {
       hitArea.hitArea = HitAreaCallback;
       hitArea.hitAreaCallback = HitAreaCallback;
     } else {
@@ -343,10 +343,10 @@
   var tempMatrix;
   var globOut$1 = {};
 
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
 
   var WorldXYToModelXY = function WorldXYToModelXY(worldX, worldY, camera, out) {
-    if (camera === undefined || camera === true || IsPlainObject$1(camera)) {
+    if (camera === undefined || camera === true || IsPlainObject$2(camera)) {
       out = camera;
       camera = this.scene.cameras.main;
     }
@@ -366,16 +366,24 @@
 
   var globOut = {};
 
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var LookAt = function LookAt(x, y, config) {
+    if (IsPlainObject$1(x)) {
+      config = x;
+      x = undefined;
+      y = undefined;
+    }
+
     var modelX, modelY;
 
     if (x === undefined) {
       modelX = 0;
       modelY = 0;
     } else {
-      var modelXY = this.getModelXY(x, y);
+      var camera = GetValue(config, 'camera', undefined);
+      var modelXY = this.getModelXY(x, y, camera, true);
       modelX = modelXY.x;
       modelY = modelXY.y;
     }
@@ -399,8 +407,8 @@
     return this;
   };
 
-  var LookForward = function LookForward() {
-    this.lookAt();
+  var LookForward = function LookForward(config) {
+    this.lookAt(config);
     return this;
   };
 
