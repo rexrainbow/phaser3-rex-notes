@@ -4,7 +4,7 @@ import OnMotionComplete from '../events/OnMotionComplete.js';
 
 var StartMotion = function (group, no, priority) {
     if (priority === undefined) {
-        priority = Const.PriorityForce;
+        priority = Const.PriorityNormal;
     }
 
     if (priority === Const.PriorityForce) {
