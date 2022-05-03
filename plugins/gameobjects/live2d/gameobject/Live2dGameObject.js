@@ -21,20 +21,22 @@ Phaser.Class.mixin(BaseGameObject,
     ]
 );
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class Live2dGameObject extends BaseGameObject {
-    constructor(scene, x, y, key) {
+    constructor(scene, x, y, key, config) {
         super(scene, 'rexLive2d');
 
         this.model = new Model(this);
 
-        this.setModel(key);
+        this.setModel(key, config);
 
         this.setPosition(x, y);
         this.setSize(this.model._modelWidth, this.model._modelHeight);
         this.setOrigin(0.5);
     }
 
-    setModel(key) {
+    setModel(key, config) {
         if (this.key === key) {
             return this;
         }
@@ -52,6 +54,9 @@ class Live2dGameObject extends BaseGameObject {
 
         this.key = key;
         this.model.setup(data);
+
+        var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', false);
+        this.autoPlayIdleMotion(autoPlayIdleMotion);
 
         return this;
     }

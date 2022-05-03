@@ -19,12 +19,10 @@ class Demo extends Phaser.Scene {
 
         // Hit test
         var print = this.add.text(0, 0, '', { fontSize: 24 });
-        var character = this.add.rexLive2d(x, y, 'Haru')
+        var character = this.add.rexLive2d(x, y, 'Haru', {
+            autoPlayIdleMotion: 'TapBody'
+        })
             .setScale(0.5)
-            .startMotion('TapBody', undefined, 'force')
-            .on('motions.complete', function () {
-                this.startMotion('TapBody', undefined, 'force')
-            })
             .setInteractive()
             .on('pointerdown-Head', function () {
                 print.text += 'Hit Head\n'

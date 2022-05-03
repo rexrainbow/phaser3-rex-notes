@@ -367,7 +367,7 @@
   var globOut = {};
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var LookAt = function LookAt(x, y, config) {
     if (IsPlainObject$1(x)) {
@@ -382,7 +382,7 @@
       modelX = 0;
       modelY = 0;
     } else {
-      var camera = GetValue(config, 'camera', undefined);
+      var camera = GetValue$1(config, 'camera', undefined);
       var modelXY = this.getModelXY(x, y, camera, true);
       modelX = modelXY.x;
       modelY = modelXY.y;
@@ -390,19 +390,19 @@
 
     var params = this.getParameters(); // Eyes
 
-    var eyeBallXWeight = GetValue(config, 'eyeBallX', 1);
-    var eyeBallYWeight = GetValue(config, 'eyeBallY', 1);
+    var eyeBallXWeight = GetValue$1(config, 'eyeBallX', 1);
+    var eyeBallYWeight = GetValue$1(config, 'eyeBallY', 1);
     params.EyeBallX = modelX * eyeBallXWeight;
     params.EyeBallY = modelY * eyeBallYWeight; // Head
 
-    var angleXWeight = GetValue(config, 'angleX', 30);
-    var angleYWeight = GetValue(config, 'angleY', 30);
-    var angleZWeight = GetValue(config, 'angleZ', 30);
+    var angleXWeight = GetValue$1(config, 'angleX', 30);
+    var angleYWeight = GetValue$1(config, 'angleY', 30);
+    var angleZWeight = GetValue$1(config, 'angleZ', 30);
     params.AngleX = modelX * angleXWeight;
     params.AngleY = modelY * angleYWeight;
     params.AngleZ = -1 * modelX * modelY * angleZWeight; // Body
 
-    var bodyAngleXWeight = GetValue(config, 'bodyAngleX', 10);
+    var bodyAngleXWeight = GetValue$1(config, 'bodyAngleX', 10);
     params.BodyAngleX = modelX * bodyAngleXWeight;
     return this;
   };
@@ -412,11 +412,40 @@
     return this;
   };
 
+  var PriorityNone = 0;
+  var PriorityIdle = 1;
+  var PriorityNormal = 2;
+  var PriorityForce = 3;
+
+  var AutoPlayIdleMotion = function AutoPlayIdleMotion(motionName) {
+    // Not regiester 'motions.complete' event, but also disable auto-play-idle-motion
+    if (!this.autoPlayIdleMotionCallback && !motionName) {
+      return this;
+    } // Register 'motions.complete' event one time
+
+
+    if (!this.autoPlayIdleMotionCallback) {
+      this.autoPlayIdleMotionCallback = function () {
+        if (!this.idleMotionName) {
+          return;
+        }
+
+        this.startMotion(this.idleMotionName, undefined, PriorityIdle);
+      };
+
+      this.on('motions.complete', this.autoPlayIdleMotionCallback, this);
+    }
+
+    this.idleMotionName = motionName;
+    return this;
+  };
+
   var Methods$1 = {
     setInteractive: SetInteractive,
     getModelXY: WorldXYToModelXY,
     lookAt: LookAt,
-    lookForward: LookForward
+    lookForward: LookForward,
+    autoPlayIdleMotion: AutoPlayIdleMotion
   };
 
   /**
@@ -10562,11 +10591,6 @@
     return names;
   };
 
-  var PriorityNone = 0;
-  var PriorityIdle = 1;
-  var PriorityNormal = 2;
-  var PriorityForce = 3;
-
   var OnExpressionStart = function OnExpressionStart(gameObject, name) {
     gameObject.emit("expression.start-".concat(name));
     gameObject.emit('expression.start', name);
@@ -11007,13 +11031,14 @@
 
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(BaseGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible]);
+  var GetValue = Phaser.Utils.Objects.GetValue;
 
   var Live2dGameObject = /*#__PURE__*/function (_BaseGameObject) {
     _inherits(Live2dGameObject, _BaseGameObject);
 
     var _super2 = _createSuper(Live2dGameObject);
 
-    function Live2dGameObject(scene, x, y, key) {
+    function Live2dGameObject(scene, x, y, key, config) {
       var _this;
 
       _classCallCheck(this, Live2dGameObject);
@@ -11021,7 +11046,7 @@
       _this = _super2.call(this, scene, 'rexLive2d');
       _this.model = new Model(_assertThisInitialized(_this));
 
-      _this.setModel(key);
+      _this.setModel(key, config);
 
       _this.setPosition(x, y);
 
@@ -11034,7 +11059,7 @@
 
     _createClass(Live2dGameObject, [{
       key: "setModel",
-      value: function setModel(key) {
+      value: function setModel(key, config) {
         if (this.key === key) {
           return this;
         }
@@ -11055,6 +11080,8 @@
 
         this.key = key;
         this.model.setup(data);
+        var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', false);
+        this.autoPlayIdleMotion(autoPlayIdleMotion);
         return this;
       }
     }, {
@@ -11209,8 +11236,8 @@
     force: PriorityForce
   };
 
-  function Factory (x, y, key) {
-    var gameObject = new Live2dGameObject(this.scene, x, y, key);
+  function Factory (x, y, key, config) {
+    var gameObject = new Live2dGameObject(this.scene, x, y, key, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
