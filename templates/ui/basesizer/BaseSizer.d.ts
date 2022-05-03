@@ -472,11 +472,11 @@ declare class BaseSizer extends ContainerLite {
     ): this;
 
     show(
-        gameObject: Phaser.GameObjects.GameObject
+        gameObject?: Phaser.GameObjects.GameObject
     ): this;
 
     hide(
-        gameObject: Phaser.GameObjects.GameObject
+        gameObject?: Phaser.GameObjects.GameObject
     ): this;
 
     isShow(
