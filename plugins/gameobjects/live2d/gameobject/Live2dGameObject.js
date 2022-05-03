@@ -27,14 +27,14 @@ class Live2dGameObject extends BaseGameObject {
 
         this.model = new Model(this);
 
-        this.setKey(key);
+        this.setModel(key);
 
         this.setPosition(x, y);
         this.setSize(this.model._modelWidth, this.model._modelHeight);
         this.setOrigin(0.5);
     }
 
-    setKey(key) {
+    setModel(key) {
         if (this.key === key) {
             return this;
         }

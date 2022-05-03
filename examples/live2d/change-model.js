@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
         this.input.on('pointerdown', function () {
             var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
             character
-                .setKey(key)
+                .setModel(key)
                 .startMotion('TapBody', undefined, 'force')
         })
     }

@@ -11021,7 +11021,7 @@
       _this = _super2.call(this, scene, 'rexLive2d');
       _this.model = new Model(_assertThisInitialized(_this));
 
-      _this.setKey(key);
+      _this.setModel(key);
 
       _this.setPosition(x, y);
 
@@ -11033,8 +11033,8 @@
     }
 
     _createClass(Live2dGameObject, [{
-      key: "setKey",
-      value: function setKey(key) {
+      key: "setModel",
+      value: function setModel(key) {
         if (this.key === key) {
           return this;
         }
@@ -12345,9 +12345,15 @@
     var loader = this;
 
     if (IsIdle()) {
-      // Core script is not loaded
-      // Load core script from default path
-      loader.addFile(new Live2dCoreScriptFile(loader));
+      if (window.Live2DCubismCore) {
+        // Core script is loaded before
+        Initialize();
+        SetState(LOADED);
+      } else {
+        // Core script is not loaded
+        // Load core script from default path
+        loader.addFile(new Live2dCoreScriptFile(loader));
+      }
     }
 
     if (IsLoaded()) {
@@ -12356,8 +12362,8 @@
       LoadFiles(loader, key, url);
     } else {
       // Core script is loading
-      // Load model assets now
       loader.once('filecomplete-live2dcore-live2dcore', function () {
+        // Load model assets
         LoadFiles(loader, key, url);
       });
     }
