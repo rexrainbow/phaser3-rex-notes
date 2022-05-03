@@ -31,8 +31,8 @@ var Live2dFileCallback = function (key, url) {
         LoadFiles(loader, key, url);
     } else {
         // Core script is loading
-        // Load model assets now
         loader.once('filecomplete-live2dcore-live2dcore', function () {
+            // Load model assets
             LoadFiles(loader, key, url);
         })
     }

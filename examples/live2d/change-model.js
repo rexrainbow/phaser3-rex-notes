@@ -18,15 +18,19 @@ class Demo extends Phaser.Scene {
     create() {
         var x = 1920 / 2,
             y = 1080 / 2;
+
         var character = this.add.rexLive2d(x, y, 'Haru')
             .setScale(0.5)
             .startMotion('TapBody', undefined, 'force')
             .on('motions.complete', function () {
                 this.startMotion('TapBody', undefined, 'force')
             })
+
         this.input.on('pointerdown', function () {
             var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
-            character.setKey(key);
+            character
+                .setKey(key)
+                .startMotion('TapBody', undefined, 'force')
         })
     }
 
