@@ -1,4 +1,4 @@
-import OnAllMotionsFinish from '../events/OnAllMotionsFinish.js';
+import OnIdle from '../events/OnIdle.js';
 
 const Capitalize = Phaser.Utils.String.UppercaseFirst;
 
@@ -10,7 +10,7 @@ var Update = function (time, delta) {
     if (!this._motionManager.isFinished()) {
         motionUpdated = this._motionManager.updateMotion(this._model, deltaTimeSeconds);
     } else {
-        OnAllMotionsFinish(this.parent);
+        OnIdle(this.parent);
     }
     this._model.saveParameters();
 

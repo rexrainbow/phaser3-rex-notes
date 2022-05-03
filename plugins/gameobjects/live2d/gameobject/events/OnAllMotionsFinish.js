@@ -1,5 +1,5 @@
-var OnAllMotionsFinish = function (gameObject) {
-    gameObject.emit('motions.complete');
+var OnIdle = function (gameObject) {
+    gameObject.emit('idle');
 }
 
-export default OnAllMotionsFinish;
+export default OnIdle;
