@@ -2,16 +2,27 @@ import Live2dCoreScriptFile from '../core/Live2dCoreScriptFile.js';
 import Live2dFile from './Live2dFile.js';
 import {
     IsIdle as IsCoreNotLoad,
-    IsLoaded as IsCoreLoaded
+    IsLoaded as IsCoreLoaded,
+    SetState as SetCoreScriptState,
+    LOADED as CoreScriptLoaded
 } from '../core/Live2dCoreScriptState.js'
+import Initialize from '../../utils/Initialize.js';
 
 var Live2dFileCallback = function (key, url) {
     var loader = this;
 
     if (IsCoreNotLoad()) {
-        // Core script is not loaded
-        // Load core script from default path
-        loader.addFile(new Live2dCoreScriptFile(loader));
+        if (window.Live2DCubismCore) {
+            // Core script is loaded before
+            Initialize();
+            SetCoreScriptState(CoreScriptLoaded);
+
+        } else {
+            // Core script is not loaded
+            // Load core script from default path
+            loader.addFile(new Live2dCoreScriptFile(loader));
+
+        }
     }
 
     if (IsCoreLoaded()) {

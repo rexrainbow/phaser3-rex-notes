@@ -11377,7 +11377,10 @@
         });
       };
 
-      SetState(LOADING);
+      if (IsIdle) {
+        SetState(LOADING);
+      }
+
       return _super.call(this, loader, {
         type: 'live2dcore',
         key: 'live2dcore',
