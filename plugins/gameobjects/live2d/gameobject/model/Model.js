@@ -29,6 +29,7 @@ class Model extends CubismUserModel {
 
         this._modelWidth = 0;
         this._modelHeight = 0;
+
         this._hitTestResult = {};
 
         // this._wavFileHandler = new LAppWavFileHandler();
@@ -37,8 +38,7 @@ class Model extends CubismUserModel {
     release() {
         super.release();
 
-        this._motions.clear();
-        this._expressions.clear();
+        this.parent = undefined;
         this._globalData = undefined;
     }
 

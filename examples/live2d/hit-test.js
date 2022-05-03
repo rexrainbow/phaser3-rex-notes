@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.script('live2d', 'assets/live2d/core/live2dcubismcore.js');
+        this.load.rexLive2dCoreScript('assets/live2d/core/live2dcubismcore.js');
         this.load.rexLive2d('Haru', 'assets/live2d/Haru/Haru.model3.json');
     }
 

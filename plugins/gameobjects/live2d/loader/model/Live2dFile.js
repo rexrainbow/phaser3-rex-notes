@@ -1,7 +1,7 @@
 import CreateBinaryFile from './CreateBinaryFile.js';
-import { CubismModelSettingJson } from '../framework/src/cubismmodelsettingjson';
+import { CubismModelSettingJson } from '../../framework/src/cubismmodelsettingjson';
 import LoadChildrenFiles from './LoadChildrenFiles.js';
-import SetValue from '../../../utils/object/SetValue.js';
+import SetValue from '../../../../utils/object/SetValue.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

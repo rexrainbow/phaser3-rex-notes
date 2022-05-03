@@ -10233,15 +10233,6 @@
     return CanvasMatrix;
   }(CubismMatrix44);
 
-  var InitializeCubism = function InitializeCubism(config) {
-    // Setup cubism
-    var option = new Option(); // TODO: option.logFunction, option.loggingLevel
-
-    CubismFramework.startUp(option); // Initialize cubism
-
-    CubismFramework.initialize(); // TODO: More...
-  };
-
   var GlobalDataInstance = undefined; // Global data shared for all Live2dGameObjects
 
   var GlobalData = /*#__PURE__*/function () {
@@ -10260,9 +10251,7 @@
       this.projectionMatrix = new CanvasMatrix();
       this.onResize();
       scale.on('resize', this.onResize, this);
-      game.events.once('destroy', this.destroy, this); // Run this method once, before creating CubismModel
-
-      InitializeCubism();
+      game.events.once('destroy', this.destroy, this);
     }
 
     _createClass(GlobalData, [{
@@ -10982,10 +10971,7 @@
       value: function release() {
         _get(_getPrototypeOf(Model.prototype), "release", this).call(this);
 
-        this._motions.clear();
-
-        this._expressions.clear();
-
+        this.parent = undefined;
         this._globalData = undefined;
       }
     }, {
@@ -11049,7 +11035,10 @@
     _createClass(Live2dGameObject, [{
       key: "setKey",
       value: function setKey(key) {
-        this.key = key;
+        if (this.key === key) {
+          return this;
+        }
+
         var data = this.scene.cache.custom.live2d.get(key);
 
         if (!data || !data.model) {
@@ -11057,6 +11046,14 @@
           return;
         }
 
+        if (this.key !== undefined) {
+          // Change model
+          this.model.release(); // Release old model        
+
+          this.model = new Model(this); // Create new model
+        }
+
+        this.key = key;
         this.model.setup(data);
         return this;
       }
@@ -11234,6 +11231,169 @@
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
+
+  var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+  var UUID = Phaser.Utils.String.UUID;
+
+  var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
+    _inherits(AwaitFile, _Phaser$Loader$File);
+
+    var _super = _createSuper(AwaitFile);
+
+    function AwaitFile(loader, fileConfig) {
+      _classCallCheck(this, AwaitFile);
+
+      if (!fileConfig.hasOwnProperty('type')) {
+        fileConfig.type = 'await';
+      }
+
+      if (!fileConfig.hasOwnProperty('url')) {
+        fileConfig.url = '';
+      }
+
+      if (!fileConfig.hasOwnProperty('key')) {
+        fileConfig.key = UUID();
+      }
+
+      return _super.call(this, loader, fileConfig);
+    }
+
+    _createClass(AwaitFile, [{
+      key: "load",
+      value: function load() {
+        if (this.state === FILE_POPULATED) {
+          //  Can happen for example in a JSONFile if they've provided a JSON object instead of a URL
+          this.loader.nextFile(this, true);
+        } else {
+          // start loading task
+          var config = this.config;
+          var callback = config.callback;
+          var scope = config.scope;
+          var successCallback = this.onLoad.bind(this);
+          var failureCallback = this.onError.bind(this);
+
+          if (callback) {
+            if (scope) {
+              callback.call(scope, successCallback, failureCallback);
+            } else {
+              callback(successCallback, failureCallback);
+            }
+          } else {
+            this.onLoad();
+          }
+        }
+      }
+    }, {
+      key: "onLoad",
+      value: function onLoad() {
+        this.loader.nextFile(this, true);
+      }
+    }, {
+      key: "onError",
+      value: function onError() {
+        this.loader.nextFile(this, false);
+      }
+    }]);
+
+    return AwaitFile;
+  }(Phaser.Loader.File);
+
+  var LoadScript = function LoadScript(url, onload) {
+    var scripts = document.getElementsByTagName('script');
+
+    for (var i = 0, cnt = scripts.length; i < cnt; i++) {
+      if (scripts[i].src.indexOf(url) != -1) {
+        if (onload) {
+          onload();
+        }
+
+        return;
+      }
+    }
+
+    var newScriptTag = document.createElement('script');
+    newScriptTag.setAttribute('src', url);
+
+    if (onload) {
+      newScriptTag.onload = onload;
+    }
+
+    document.head.appendChild(newScriptTag);
+  };
+
+  var LoadScriptPromise = function LoadScriptPromise(url) {
+    return new Promise(function (resolve, reject) {
+      LoadScript(url, resolve);
+    });
+  };
+
+  var Initialize = function Initialize(config) {
+    if (!window.Live2DCubismCore) {
+      console.error('live2dcubismcore.js does not load');
+    } // Setup cubism
+
+
+    var option = new Option(); // TODO: option.logFunction, option.loggingLevel
+
+    CubismFramework.startUp(option); // Initialize cubism
+
+    CubismFramework.initialize(); // TODO: More...
+  };
+
+  var IDLE = 0;
+  var LOADING = 1;
+  var LOADED = 2;
+  var Live2dCoreScriptState = IDLE;
+
+  var SetState = function SetState(state) {
+    Live2dCoreScriptState = state;
+  };
+
+  var IsIdle = function IsIdle() {
+    return Live2dCoreScriptState === IDLE;
+  };
+
+  var IsLoaded = function IsLoaded() {
+    return Live2dCoreScriptState === LOADED;
+  };
+
+  var Live2dCoreScriptFile = /*#__PURE__*/function (_AwaitFile) {
+    _inherits(Live2dCoreScriptFile, _AwaitFile);
+
+    var _super = _createSuper(Live2dCoreScriptFile);
+
+    function Live2dCoreScriptFile(loader, url) {
+      _classCallCheck(this, Live2dCoreScriptFile);
+
+      if (url === undefined) {
+        url = 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js';
+      }
+
+      var callback = function callback(successCallback, failureCallback) {
+        LoadScriptPromise(url).then(function () {
+          Initialize();
+          SetState(LOADED);
+          successCallback();
+        });
+      };
+
+      SetState(LOADING);
+      return _super.call(this, loader, {
+        type: 'live2dcore',
+        key: 'live2dcore',
+        config: {
+          callback: callback
+        }
+      });
+    }
+
+    return _createClass(Live2dCoreScriptFile);
+  }(AwaitFile);
+
+  var CoreScriptFileCallback = function CoreScriptFileCallback(url) {
+    this.addFile(new Live2dCoreScriptFile(this, url));
+    return this;
+  };
 
   var BinaryFile = Phaser.Loader.FileTypes.BinaryFile;
 
@@ -12179,17 +12339,39 @@
   }(Phaser.Loader.MultiFile);
 
   var Live2dFileCallback = function Live2dFileCallback(key, url) {
-    if (Array.isArray(key)) {
-      for (var i = 0; i < key.length; i++) {
-        var multifile = new Live2dFile(this, key[i]);
-        this.addFile(multifile.files);
-      }
+    var loader = this;
+
+    if (IsIdle()) {
+      // Core script is not loaded
+      // Load core script from default path
+      loader.addFile(new Live2dCoreScriptFile(loader));
+    }
+
+    if (IsLoaded()) {
+      // Core script is loaded
+      // Can load model assets directly
+      LoadFiles(loader, key, url);
     } else {
-      var multifile = new Live2dFile(this, key, url);
-      this.addFile(multifile.files);
+      // Core script is loading
+      // Load model assets now
+      loader.once('filecomplete-live2dcore-live2dcore', function () {
+        LoadFiles(loader, key, url);
+      });
     }
 
     return this;
+  };
+
+  var LoadFiles = function LoadFiles(loader, key, url) {
+    if (Array.isArray(key)) {
+      for (var i = 0; i < key.length; i++) {
+        var multifile = new Live2dFile(loader, key[i]);
+        loader.addFile(multifile.files);
+      }
+    } else {
+      var multifile = new Live2dFile(loader, key, url);
+      loader.addFile(multifile.files);
+    }
   };
 
   var Live2dPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
@@ -12211,7 +12393,9 @@
         return _possibleConstructorReturn(_this);
       }
 
-      game.cache.addCustom('live2d'); // Register new file type to loader
+      game.cache.addCustom('live2d'); // Register new file type to loader, to load live2d core script file (live2dcubismcore.min.js)
+
+      pluginManager.registerFileType('rexLive2dCoreScript', CoreScriptFileCallback); // Register new file type to loader, to load live2d model assets
 
       pluginManager.registerFileType('rexLive2d', Live2dFileCallback); //  Register our new Game Object type
 

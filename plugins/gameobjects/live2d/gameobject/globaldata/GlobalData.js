@@ -1,6 +1,5 @@
 import GetGame from '../../../../utils/system/GetGame.js';
 import CanvasMatrix from './CanvasMatrix.js';
-import InitializeCubism from '../../utils/InitializeCubism.js';
 
 var GlobalDataInstance = undefined;
 
@@ -31,9 +30,6 @@ class GlobalData {
 
         scale.on('resize', this.onResize, this);
         game.events.once('destroy', this.destroy, this);
-
-        // Run this method once, before creating CubismModel
-        InitializeCubism();
     }
 
     destroy() {

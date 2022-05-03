@@ -35,13 +35,22 @@ class Live2dGameObject extends BaseGameObject {
     }
 
     setKey(key) {
-        this.key = key;
+        if (this.key === key) {
+            return this;
+        }
+
         var data = this.scene.cache.custom.live2d.get(key);
         if (!data || !data.model) {
             console.error(`Live2d: can't load ${key}'s assets`);
             return;
         }
 
+        if (this.key !== undefined) {      // Change model
+            this.model.release();          // Release old model        
+            this.model = new Model(this);  // Create new model
+        }
+
+        this.key = key;
         this.model.setup(data);
 
         return this;
