@@ -95,12 +95,22 @@ class ClickOutside extends ComponentBase {
 
     // internal
     onPress(pointer) {
+        // Do nothing if game object is not visible
+        if (!this.parent.willRender(pointer.camera)) {
+            return;
+        }
+
         if ((this.mode === 0) && !this.isPointerInside(pointer)) {
             this.click(pointer.downTime, pointer);
         }
     }
 
     onRelease(pointer) {
+        // Do nothing if game object is not visible
+        if (!this.parent.willRender(pointer.camera)) {
+            return;
+        }
+
         if ((this.mode === 1) && !this.isPointerInside(pointer)) {
             this.click(pointer.upTime, pointer);
         }
