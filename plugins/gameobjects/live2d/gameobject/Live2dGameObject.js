@@ -6,15 +6,12 @@ class BaseGameObject extends Phaser.GameObjects.GameObject { }
 const Components = Phaser.GameObjects.Components;
 Phaser.Class.mixin(BaseGameObject,
     [
-        Components.Alpha,
-        Components.BlendMode,
+        Components.AlphaSingle,
         Components.ComputedSize,
         Components.Depth,
-        Components.Flip,
         Components.GetBounds,
         Components.Origin,
         Components.ScrollFactor,
-        Components.Tint,
         Components.Transform,
         Components.Visible,
     ]

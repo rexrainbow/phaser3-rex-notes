@@ -1,44 +1,43 @@
 // import * as Phaser from 'phaser';
 
-export default Button;
+export default ClickOutside;
 
-declare namespace Button {
+declare namespace ClickOutside {
 
     interface IConfig {
         mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
         clickInterval?: number,
-        threshold?: number,
         enable?: boolean,
 
         eventEmitter?: boolean | Phaser.Events.EventEmitter
     }
 
     namespace Events {
-        type ClickCallbackType =
+        type ClickOutsideCallbackType =
             (
-                button: Button,
+                button: ClickOutside,
                 gameObject: Phaser.GameObjects.GameObject,
                 pointer: Phaser.Input.Pointer,
                 event: Phaser.Types.Input.EventData
             ) => void;
 
         type EnableCallbackType = (
-            button: Button,
+            button: ClickOutside,
             gameObject: Phaser.GameObjects.GameObject,
         ) => void;
 
         type DisableCallbackType = (
-            button: Button,
+            button: ClickOutside,
             gameObject: Phaser.GameObjects.GameObject,
         ) => void;
 
     }
 }
 
-declare class Button extends Phaser.Events.EventEmitter {
+declare class ClickOutside extends Phaser.Events.EventEmitter {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: Button.IConfig
+        config?: ClickOutside.IConfig
     )
 
     setEnable(enable?: boolean): this;

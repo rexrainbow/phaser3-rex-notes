@@ -51,6 +51,7 @@ module.exports = {
     'sliderplugin': './plugins/slider-plugin.js',
     'scrollerplugin': './plugins/scroller-plugin.js',
     'buttonplugin': './plugins/button-plugin.js',
+    'clickoutsideplugin': './plugins/clickoutside-plugin.js',
     'touchcursorplugin': './plugins/touchcursor-plugin.js',
     'virtualjoystickplugin': './plugins/virtualjoystick-plugin.js',
     'cursoratboundplugin': './plugins/cursoratbound-plugin.js',

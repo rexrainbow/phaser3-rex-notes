@@ -14,6 +14,8 @@ export default class CanvasGameObjectBase extends Phaser.GameObjects.GameObject 
     blendMode: Phaser.BlendModes | string;
     setBlendMode(value: string | Phaser.BlendModes): this;
 
+    width: number;
+    height: number;
     displayWidth: number;
     displayHeight: number;
     setSize(width: number, height: number): this;

@@ -235,219 +235,6 @@
     renderCanvas: CanvasRenderer
   };
 
-  var HitAreaCallback = function HitAreaCallback(shape, localX, localY, gameObject) {
-    var model = gameObject.model;
-
-    if (!model) {
-      return false;
-    }
-
-    var hitTestResult = model._hitTestResult;
-
-    if (localX < 0 || localX > model._modelWidth || localY < 0 || localY > model._modelHeight) {
-      // Set all hit test result to false
-      for (var name in hitTestResult) {
-        hitTestResult[name] = false;
-      }
-
-      return false;
-    }
-
-    var x = model.localXToModelMatrixX(localX);
-    var y = model.localYToModelMatrixY(localY);
-    var modelSetting = model._modelSetting;
-    var count = modelSetting.getHitAreasCount();
-    var anyHit = false;
-
-    for (var i = 0; i < count; i++) {
-      var hitTestName = modelSetting.getHitAreaName(i);
-      var drawId = modelSetting.getHitAreaId(i);
-      var isHit = model.isHit(drawId, x, y);
-      hitTestResult[hitTestName] = isHit;
-      anyHit = anyHit || isHit;
-    }
-
-    return anyHit;
-  };
-
-  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-  var GameObject = Phaser.GameObjects.GameObject;
-
-  var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
-    var isInit = !this.input;
-
-    if (IsPlainObject$3(hitArea)) {
-      hitArea.hitArea = HitAreaCallback;
-      hitArea.hitAreaCallback = HitAreaCallback;
-    } else {
-      hitArea = HitAreaCallback;
-      hitAreaCallback = HitAreaCallback;
-    }
-
-    GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
-
-    if (isInit) {
-      this.on('pointerdown', function (pointer, localX, localY, event) {
-        FireEvent(this, 'pointerdown', pointer, localX, localY, event);
-      }).on('pointerup', function (pointer, localX, localY, event) {
-        FireEvent(this, 'pointerup', pointer, localX, localY, event);
-      }).on('pointermove', function (pointer, localX, localY, event) {
-        FireEvent(this, 'pointermove', pointer, localX, localY, event);
-      });
-    }
-
-    return this;
-  };
-
-  var FireEvent = function FireEvent(gameObject, eventPrefix, pointer, localX, localY, event) {
-    var hitTestResult = gameObject.hitTestResult;
-
-    for (var name in hitTestResult) {
-      if (hitTestResult[name]) {
-        gameObject.emit("".concat(eventPrefix, "-").concat(name), pointer, localX, localY, event);
-      }
-    }
-  };
-
-  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-  var TransformXY = Phaser.Math.TransformXY;
-
-  var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = globOut$1;
-    }
-
-    var csx = camera.scrollX;
-    var csy = camera.scrollY;
-    var px = worldX + csx * gameObject.scrollFactorX - csx;
-    var py = worldY + csy * gameObject.scrollFactorY - csy;
-
-    if (gameObject.parentContainer) {
-      if (tempMatrix === undefined) {
-        tempMatrix = new TransformMatrix();
-      }
-
-      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
-      tempMatrix.applyInverse(px, py, out);
-    } else {
-      TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
-    }
-
-    out.x += gameObject.displayOriginX;
-    out.y += gameObject.displayOriginY;
-    return out;
-  };
-
-  var tempMatrix;
-  var globOut$1 = {};
-
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
-
-  var WorldXYToModelXY = function WorldXYToModelXY(worldX, worldY, camera, out) {
-    if (camera === undefined || camera === true || IsPlainObject$2(camera)) {
-      out = camera;
-      camera = this.scene.cameras.main;
-    }
-
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = globOut;
-    }
-
-    out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
-    var model = this.model;
-    out.x = model.localXToModelMatrixX(out.x);
-    out.y = model.localYToModelMatrixY(out.y);
-    return out;
-  };
-
-  var globOut = {};
-
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
-  var LookAt = function LookAt(x, y, config) {
-    if (IsPlainObject$1(x)) {
-      config = x;
-      x = undefined;
-      y = undefined;
-    }
-
-    var modelX, modelY;
-
-    if (x === undefined) {
-      modelX = 0;
-      modelY = 0;
-    } else {
-      var camera = GetValue$1(config, 'camera', undefined);
-      var modelXY = this.getModelXY(x, y, camera, true);
-      modelX = modelXY.x;
-      modelY = modelXY.y;
-    }
-
-    var params = this.getParameters(); // Eyes
-
-    var eyeBallXWeight = GetValue$1(config, 'eyeBallX', 1);
-    var eyeBallYWeight = GetValue$1(config, 'eyeBallY', 1);
-    params.EyeBallX = modelX * eyeBallXWeight;
-    params.EyeBallY = modelY * eyeBallYWeight; // Head
-
-    var angleXWeight = GetValue$1(config, 'angleX', 30);
-    var angleYWeight = GetValue$1(config, 'angleY', 30);
-    var angleZWeight = GetValue$1(config, 'angleZ', 30);
-    params.AngleX = modelX * angleXWeight;
-    params.AngleY = modelY * angleYWeight;
-    params.AngleZ = -1 * modelX * modelY * angleZWeight; // Body
-
-    var bodyAngleXWeight = GetValue$1(config, 'bodyAngleX', 10);
-    params.BodyAngleX = modelX * bodyAngleXWeight;
-    return this;
-  };
-
-  var LookForward = function LookForward(config) {
-    this.lookAt(config);
-    return this;
-  };
-
-  var PriorityNone = 0;
-  var PriorityIdle = 1;
-  var PriorityNormal = 2;
-  var PriorityForce = 3;
-
-  var AutoPlayIdleMotion = function AutoPlayIdleMotion(motionName) {
-    // Not regiester 'motions.complete' event, but also disable auto-play-idle-motion
-    if (!this.autoPlayIdleMotionCallback && !motionName) {
-      return this;
-    } // Register 'motions.complete' event one time
-
-
-    if (!this.autoPlayIdleMotionCallback) {
-      this.autoPlayIdleMotionCallback = function () {
-        if (!this.idleMotionName) {
-          return;
-        }
-
-        this.startMotion(this.idleMotionName, undefined, PriorityIdle);
-      };
-
-      this.on('motions.complete', this.autoPlayIdleMotionCallback, this);
-    }
-
-    this.idleMotionName = motionName;
-    return this;
-  };
-
-  var Methods$1 = {
-    setInteractive: SetInteractive,
-    getModelXY: WorldXYToModelXY,
-    lookAt: LookAt,
-    lookForward: LookForward,
-    autoPlayIdleMotion: AutoPlayIdleMotion
-  };
-
   /**
    * Copyright(c) Live2D Inc. All rights reserved.
    *
@@ -10468,8 +10255,8 @@
     return this;
   };
 
-  var OnAllMotionsFinish = function OnAllMotionsFinish(gameObject) {
-    gameObject.emit('motions.complete');
+  var OnIdle = function OnIdle(gameObject) {
+    gameObject.emit('idle');
   };
 
   var Capitalize$3 = Phaser.Utils.String.UppercaseFirst;
@@ -10483,7 +10270,7 @@
     if (!this._motionManager.isFinished()) {
       motionUpdated = this._motionManager.updateMotion(this._model, deltaTimeSeconds);
     } else {
-      OnAllMotionsFinish(this.parent);
+      OnIdle(this.parent);
     }
 
     this._model.saveParameters(); // Add parameter values
@@ -10577,7 +10364,7 @@
     return this;
   };
 
-  var GetExpressionNames = function GetExpressionNames() {
+  var GetExpressionNames$1 = function GetExpressionNames() {
     var names = [];
 
     var count = this._expressions.getSize();
@@ -10591,12 +10378,17 @@
     return names;
   };
 
+  var PriorityNone = 0;
+  var PriorityIdle = 1;
+  var PriorityNormal = 2;
+  var PriorityForce = 3;
+
   var OnExpressionStart = function OnExpressionStart(gameObject, name) {
     gameObject.emit("expression.start-".concat(name));
     gameObject.emit('expression.start', name);
   };
 
-  var SetExpression = function SetExpression(name) {
+  var SetExpression$1 = function SetExpression(name) {
     if (name === undefined) {
       name = 0;
     }
@@ -10627,7 +10419,7 @@
     return this;
   };
 
-  var SetRandomExpression = function SetRandomExpression() {
+  var SetRandomExpression$1 = function SetRandomExpression() {
     var count = this._expressions.getSize();
 
     if (count === 0) {
@@ -10639,7 +10431,7 @@
     return this;
   };
 
-  var GetMotionNames = function GetMotionNames(groupName) {
+  var GetMotionNames$1 = function GetMotionNames(groupName) {
     var names = [];
 
     var count = this._motions.getSize();
@@ -10659,7 +10451,7 @@
     return names;
   };
 
-  var GetMotionGroupNames = function GetMotionGroupNames() {
+  var GetMotionGroupNames$1 = function GetMotionGroupNames() {
     var names = [];
 
     var count = this._motions.getSize();
@@ -10690,9 +10482,9 @@
     gameObject.emit('motion.complete', group, no);
   };
 
-  var StartMotion = function StartMotion(group, no, priority) {
+  var StartMotion$1 = function StartMotion(group, no, priority) {
     if (priority === undefined) {
-      priority = PriorityForce;
+      priority = PriorityNormal;
     }
 
     if (priority === PriorityForce) {
@@ -10727,17 +10519,17 @@
     return this;
   };
 
-  var StopAllMotions = function StopAllMotions() {
+  var StopAllMotions$1 = function StopAllMotions() {
     this._motionManager.stopAllMotions();
 
     return this;
   };
 
-  var IsAnyMotionPlaying = function IsAnyMotionPlaying() {
+  var IsAnyMotionPlaying$1 = function IsAnyMotionPlaying() {
     return !this._motionManager.isFinished();
   };
 
-  var GetPlayinigMotionNames = function GetPlayinigMotionNames() {
+  var GetPlayinigMotionNames$1 = function GetPlayinigMotionNames() {
     var names = [];
     var motionManager = this._motionManager;
     var motions = motionManager._motions;
@@ -10873,7 +10665,7 @@
 
   var Capitalize$2 = Phaser.Utils.String.UppercaseFirst;
 
-  var RegisterParameter = function RegisterParameter(name) {
+  var RegisterParameter$1 = function RegisterParameter(name) {
     var capName = "Param".concat(Capitalize$2(name));
     var propertyName = "_id".concat(capName);
 
@@ -10894,7 +10686,7 @@
 
   var Capitalize$1 = Phaser.Utils.String.UppercaseFirst;
 
-  var AddParameterValue = function AddParameterValue(name, value) {
+  var AddParameterValue$1 = function AddParameterValue(name, value) {
     var propertyName = "_idParam".concat(Capitalize$1(name));
 
     if (!this.hasOwnProperty(propertyName)) {
@@ -10912,7 +10704,7 @@
 
   var Capitalize = Phaser.Utils.String.UppercaseFirst;
 
-  var ResetParameterValue = function ResetParameterValue(name) {
+  var ResetParameterValue$1 = function ResetParameterValue(name) {
     var propertyName = "_idParam".concat(Capitalize(name));
 
     if (!this.hasOwnProperty(propertyName)) {
@@ -10941,22 +10733,22 @@
     return false;
   };
 
-  var Methods = {
+  var Methods$1 = {
     setup: Setup,
     update: Update,
     draw: Draw,
-    getExpressionNames: GetExpressionNames,
-    setExpression: SetExpression,
-    setRandomExpression: SetRandomExpression,
-    getMotionNames: GetMotionNames,
-    getMotionGroupNames: GetMotionGroupNames,
-    startMotion: StartMotion,
-    stopAllMotions: StopAllMotions,
-    isAnyMotionPlaying: IsAnyMotionPlaying,
-    getPlayinigMotionNames: GetPlayinigMotionNames,
-    registerParameter: RegisterParameter,
-    addParameterValue: AddParameterValue,
-    resetParameterValue: ResetParameterValue,
+    getExpressionNames: GetExpressionNames$1,
+    setExpression: SetExpression$1,
+    setRandomExpression: SetRandomExpression$1,
+    getMotionNames: GetMotionNames$1,
+    getMotionGroupNames: GetMotionGroupNames$1,
+    startMotion: StartMotion$1,
+    stopAllMotions: StopAllMotions$1,
+    isAnyMotionPlaying: IsAnyMotionPlaying$1,
+    getPlayinigMotionNames: GetPlayinigMotionNames$1,
+    registerParameter: RegisterParameter$1,
+    addParameterValue: AddParameterValue$1,
+    resetParameterValue: ResetParameterValue$1,
     hitTest: HitTest
   };
 
@@ -11013,7 +10805,339 @@
     return Model;
   }(CubismUserModel);
 
-  Object.assign(Model.prototype, Methods);
+  Object.assign(Model.prototype, Methods$1);
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+  var SetModel = function SetModel(key, config) {
+    if (this.key === key) {
+      return this;
+    }
+
+    var data = this.scene.cache.custom.live2d.get(key);
+
+    if (!data || !data.model) {
+      console.error("Live2d: can't load ".concat(key, "'s assets"));
+      return;
+    }
+
+    if (this.key !== undefined) {
+      // Change model
+      this.model.release(); // Release old model        
+
+      this.model = new Model(this); // Create new model
+    }
+
+    this.key = key;
+    this.model.setup(data);
+    this.setSize(this.model._modelWidth, this.model._modelHeight);
+    var autoPlayIdleMotion = GetValue$1(config, 'autoPlayIdleMotion', false);
+    this.autoPlayIdleMotion(autoPlayIdleMotion);
+    return this;
+  };
+
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var TransformXY = Phaser.Math.TransformXY;
+
+  var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut$1;
+    }
+
+    var csx = camera.scrollX;
+    var csy = camera.scrollY;
+    var px = worldX + csx * gameObject.scrollFactorX - csx;
+    var py = worldY + csy * gameObject.scrollFactorY - csy;
+
+    if (gameObject.parentContainer) {
+      if (tempMatrix === undefined) {
+        tempMatrix = new TransformMatrix();
+      }
+
+      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+      tempMatrix.applyInverse(px, py, out);
+    } else {
+      TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+    }
+
+    out.x += gameObject.displayOriginX;
+    out.y += gameObject.displayOriginY;
+    return out;
+  };
+
+  var tempMatrix;
+  var globOut$1 = {};
+
+  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
+
+  var WorldXYToModelXY = function WorldXYToModelXY(worldX, worldY, camera, out) {
+    if (camera === undefined || camera === true || IsPlainObject$3(camera)) {
+      out = camera;
+      camera = this.scene.cameras.main;
+    }
+
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+
+    out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
+    var model = this.model;
+    out.x = model.localXToModelMatrixX(out.x);
+    out.y = model.localYToModelMatrixY(out.y);
+    return out;
+  };
+
+  var globOut = {};
+
+  var GetExpressionNames = function GetExpressionNames() {
+    return this.model.getExpressionNames();
+  };
+
+  var SetExpression = function SetExpression(expressionName) {
+    this.model.setExpression(expressionName);
+    return this;
+  };
+
+  var SetRandomExpression = function SetRandomExpression() {
+    this.model.setRandomExpression();
+    return this;
+  };
+
+  var GetMotionNames = function GetMotionNames(groupName) {
+    return this.model.getMotionNames(groupName);
+  };
+
+  var GetMotionGroupNames = function GetMotionGroupNames() {
+    return this.model.getMotionGroupNames();
+  };
+
+  var StartMotion = function StartMotion(group, no, priority) {
+    if (typeof priority === 'string') {
+      priority = PriorityModes[priority];
+    }
+
+    this.model.startMotion(group, no, priority);
+    return this;
+  };
+
+  var PriorityModes = {
+    none: PriorityNone,
+    idle: PriorityIdle,
+    normal: PriorityNormal,
+    force: PriorityForce
+  };
+
+  var StopAllMotions = function StopAllMotions() {
+    this.model.stopAllMotions();
+    return this;
+  };
+
+  var GetPlayinigMotionNames = function GetPlayinigMotionNames() {
+    return this.model.getPlayinigMotionNames();
+  };
+
+  var IsAnyMotionPlaying = function IsAnyMotionPlaying() {
+    return this.model.isAnyMotionPlaying();
+  };
+
+  var AutoPlayIdleMotion = function AutoPlayIdleMotion(motionName) {
+    // Not regiester 'idle' event, but also disable auto-play-idle-motion
+    if (!this.autoPlayIdleMotionCallback && !motionName) {
+      return this;
+    } // Register 'idle' event one time
+
+
+    if (!this.autoPlayIdleMotionCallback) {
+      this.autoPlayIdleMotionCallback = function () {
+        if (!this.idleMotionName) {
+          return;
+        }
+
+        this.startMotion(this.idleMotionName, undefined, PriorityIdle);
+      };
+
+      this.on('idle', this.autoPlayIdleMotionCallback, this);
+    }
+
+    this.idleMotionName = motionName;
+    return this;
+  };
+
+  var RegisterParameter = function RegisterParameter(name) {
+    this.model.registerParameter(name);
+    return this;
+  };
+
+  var AddParameterValue = function AddParameterValue(name, value) {
+    this.model.addParameterValue(name, value);
+    return this;
+  };
+
+  var ResetParameterValue = function ResetParameterValue(name) {
+    this.model.resetParameterValue(name);
+    return this;
+  };
+
+  var GetParameters = function GetParameters() {
+    return this.params;
+  };
+
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+
+  var LookAt = function LookAt(x, y, config) {
+    if (IsPlainObject$2(x)) {
+      config = x;
+      x = undefined;
+      y = undefined;
+    }
+
+    var modelX, modelY;
+
+    if (x === undefined) {
+      modelX = 0;
+      modelY = 0;
+    } else {
+      var camera = GetValue(config, 'camera', undefined);
+      var modelXY = this.getModelXY(x, y, camera, true);
+      modelX = modelXY.x;
+      modelY = modelXY.y;
+    }
+
+    var params = this.getParameters(); // Eyes
+
+    var eyeBallXWeight = GetValue(config, 'eyeBallX', 1);
+    var eyeBallYWeight = GetValue(config, 'eyeBallY', 1);
+    params.EyeBallX = modelX * eyeBallXWeight;
+    params.EyeBallY = modelY * eyeBallYWeight; // Head
+
+    var angleXWeight = GetValue(config, 'angleX', 30);
+    var angleYWeight = GetValue(config, 'angleY', 30);
+    var angleZWeight = GetValue(config, 'angleZ', 30);
+    params.AngleX = modelX * angleXWeight;
+    params.AngleY = modelY * angleYWeight;
+    params.AngleZ = -1 * modelX * modelY * angleZWeight; // Body
+
+    var bodyAngleXWeight = GetValue(config, 'bodyAngleX', 10);
+    params.BodyAngleX = modelX * bodyAngleXWeight;
+    return this;
+  };
+
+  var LookForward = function LookForward(config) {
+    this.lookAt(config);
+    return this;
+  };
+
+  var SetLipSyncValue = function SetLipSyncValue(value) {
+    this.model._lipSyncValue = value;
+    return this;
+  };
+
+  var HitAreaCallback = function HitAreaCallback(shape, localX, localY, gameObject) {
+    var model = gameObject.model;
+
+    if (!model) {
+      return false;
+    }
+
+    var hitTestResult = model._hitTestResult;
+
+    if (localX < 0 || localX > model._modelWidth || localY < 0 || localY > model._modelHeight) {
+      // Set all hit test result to false
+      for (var name in hitTestResult) {
+        hitTestResult[name] = false;
+      }
+
+      return false;
+    }
+
+    var x = model.localXToModelMatrixX(localX);
+    var y = model.localYToModelMatrixY(localY);
+    var modelSetting = model._modelSetting;
+    var count = modelSetting.getHitAreasCount();
+    var anyHit = false;
+
+    for (var i = 0; i < count; i++) {
+      var hitTestName = modelSetting.getHitAreaName(i);
+      var drawId = modelSetting.getHitAreaId(i);
+      var isHit = model.isHit(drawId, x, y);
+      hitTestResult[hitTestName] = isHit;
+      anyHit = anyHit || isHit;
+    }
+
+    return anyHit;
+  };
+
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GameObject = Phaser.GameObjects.GameObject;
+
+  var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
+    var isInit = !this.input;
+
+    if (IsPlainObject$1(hitArea)) {
+      hitArea.hitArea = HitAreaCallback;
+      hitArea.hitAreaCallback = HitAreaCallback;
+    } else {
+      hitArea = HitAreaCallback;
+      hitAreaCallback = HitAreaCallback;
+    }
+
+    GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+
+    if (isInit) {
+      this.on('pointerdown', function (pointer, localX, localY, event) {
+        FireEvent(this, 'pointerdown', pointer, localX, localY, event);
+      }).on('pointerup', function (pointer, localX, localY, event) {
+        FireEvent(this, 'pointerup', pointer, localX, localY, event);
+      }).on('pointermove', function (pointer, localX, localY, event) {
+        FireEvent(this, 'pointermove', pointer, localX, localY, event);
+      });
+    }
+
+    return this;
+  };
+
+  var FireEvent = function FireEvent(gameObject, eventPrefix, pointer, localX, localY, event) {
+    var hitTestResult = gameObject.hitTestResult;
+
+    for (var name in hitTestResult) {
+      if (hitTestResult[name]) {
+        gameObject.emit("".concat(eventPrefix, "-").concat(name), pointer, localX, localY, event);
+      }
+    }
+  };
+
+  var GetHitTestResult = function GetHitTestResult() {
+    return this.model._hitTestResult;
+  };
+
+  var Methods = {
+    setModel: SetModel,
+    getModelXY: WorldXYToModelXY,
+    getExpressionNames: GetExpressionNames,
+    setExpression: SetExpression,
+    setRandomExpression: SetRandomExpression,
+    getMotionNames: GetMotionNames,
+    getMotionGroupNames: GetMotionGroupNames,
+    startMotion: StartMotion,
+    stopAllMotions: StopAllMotions,
+    getPlayinigMotionNames: GetPlayinigMotionNames,
+    isAnyMotionPlaying: IsAnyMotionPlaying,
+    autoPlayIdleMotion: AutoPlayIdleMotion,
+    registerParameter: RegisterParameter,
+    addParameterValue: AddParameterValue,
+    resetParameterValue: ResetParameterValue,
+    getParameters: GetParameters,
+    lookAt: LookAt,
+    lookForward: LookForward,
+    setLipSyncValue: SetLipSyncValue,
+    setInteractive: SetInteractive,
+    getHitTestResult: GetHitTestResult
+  };
 
   var BaseGameObject = /*#__PURE__*/function (_Phaser$GameObjects$G) {
     _inherits(BaseGameObject, _Phaser$GameObjects$G);
@@ -11030,8 +11154,7 @@
   }(Phaser.GameObjects.GameObject);
 
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(BaseGameObject, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.Flip, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible]);
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  Phaser.Class.mixin(BaseGameObject, [Components.AlphaSingle, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Transform, Components.Visible]);
 
   var Live2dGameObject = /*#__PURE__*/function (_BaseGameObject) {
     _inherits(Live2dGameObject, _BaseGameObject);
@@ -11050,41 +11173,12 @@
 
       _this.setPosition(x, y);
 
-      _this.setSize(_this.model._modelWidth, _this.model._modelHeight);
-
       _this.setOrigin(0.5);
 
       return _this;
     }
 
     _createClass(Live2dGameObject, [{
-      key: "setModel",
-      value: function setModel(key, config) {
-        if (this.key === key) {
-          return this;
-        }
-
-        var data = this.scene.cache.custom.live2d.get(key);
-
-        if (!data || !data.model) {
-          console.error("Live2d: can't load ".concat(key, "'s assets"));
-          return;
-        }
-
-        if (this.key !== undefined) {
-          // Change model
-          this.model.release(); // Release old model        
-
-          this.model = new Model(this); // Create new model
-        }
-
-        this.key = key;
-        this.model.setup(data);
-        var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', false);
-        this.autoPlayIdleMotion(autoPlayIdleMotion);
-        return this;
-      }
-    }, {
       key: "preUpdate",
       value: function preUpdate(time, delta) {
         this.model.update(time, delta);
@@ -11111,93 +11205,17 @@
         // Only work for hitTest
       }
     }, {
-      key: "getExpressionNames",
-      value: function getExpressionNames() {
-        return this.model.getExpressionNames();
-      }
-    }, {
       key: "expressionName",
       get: function get() {
         return this.model._currentExpressionName;
       },
       set: function set(expressionName) {
-        this.model.setExpression(expressionName);
-      }
-    }, {
-      key: "setExpression",
-      value: function setExpression(expressionName) {
-        this.expressionName = expressionName;
-        return this;
-      }
-    }, {
-      key: "setRandomExpression",
-      value: function setRandomExpression() {
-        this.model.setRandomExpression();
-        return this;
-      }
-    }, {
-      key: "getMotionNames",
-      value: function getMotionNames(groupName) {
-        return this.model.getMotionNames(groupName);
-      }
-    }, {
-      key: "getMotionGroupNames",
-      value: function getMotionGroupNames() {
-        return this.model.getMotionGroupNames();
-      }
-    }, {
-      key: "startMotion",
-      value: function startMotion(group, no, priority) {
-        if (typeof priority === 'string') {
-          priority = PriorityModes[priority];
-        }
-
-        this.model.startMotion(group, no, priority);
-        return this;
-      }
-    }, {
-      key: "stopAllMotions",
-      value: function stopAllMotions() {
-        this.model.stopAllMotions();
-        return this;
-      }
-    }, {
-      key: "isAnyMotionPlaying",
-      value: function isAnyMotionPlaying() {
-        return this.model.isAnyMotionPlaying();
-      }
-    }, {
-      key: "getPlayinigMotionNames",
-      value: function getPlayinigMotionNames() {
-        return this.model.getPlayinigMotionNames();
-      }
-    }, {
-      key: "registerParameter",
-      value: function registerParameter(name) {
-        this.model.registerParameter(name);
-        return this;
-      }
-    }, {
-      key: "addParameterValue",
-      value: function addParameterValue(name, value) {
-        this.model.addParameterValue(name, value);
-        return this;
-      }
-    }, {
-      key: "resetParameterValue",
-      value: function resetParameterValue(name) {
-        this.model.resetParameterValue(name);
-        return this;
+        this.setExpression(expressionName);
       }
     }, {
       key: "params",
       get: function get() {
-        return this.model._addParamValues;
-      }
-    }, {
-      key: "getParameters",
-      value: function getParameters() {
-        return this.params;
+        return this.getParameters();
       }
     }, {
       key: "lipSyncValue",
@@ -11205,36 +11223,19 @@
         return this.model._lipSyncValue;
       },
       set: function set(value) {
-        this.model._lipSyncValue = value;
-      }
-    }, {
-      key: "setLipSyncValue",
-      value: function setLipSyncValue(value) {
-        this.lipSyncValue = value;
-        return this;
+        this.setLipSyncValue(value);
       }
     }, {
       key: "hitTestResult",
       get: function get() {
-        return this.model._hitTestResult;
-      }
-    }, {
-      key: "getHitTestResult",
-      value: function getHitTestResult() {
-        return this.hitTestResult;
+        return this.getHitTestResult();
       }
     }]);
 
     return Live2dGameObject;
   }(BaseGameObject);
 
-  Object.assign(Live2dGameObject.prototype, Render, Methods$1);
-  var PriorityModes = {
-    none: PriorityNone,
-    idle: PriorityIdle,
-    normal: PriorityNormal,
-    force: PriorityForce
-  };
+  Object.assign(Live2dGameObject.prototype, Render, Methods);
 
   function Factory (x, y, key, config) {
     var gameObject = new Live2dGameObject(this.scene, x, y, key, config);
