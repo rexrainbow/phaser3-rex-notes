@@ -1,7 +1,5 @@
 import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
 
-// const AngleWrap = Phaser.Math.Angle.Wrap;
-
 class ViewMatrix extends CubismMatrix44 {
     copyFrom(matrix) {
         this.setMatrix(matrix.getArray());
@@ -14,29 +12,20 @@ class ViewMatrix extends CubismMatrix44 {
             return;
         }
 
-        // angle = AngleWrap(angle);
-        var cosR = Math.cos(angle);
-        var sinR = Math.sin(angle);
-        const tr1 = new Float32Array([
-            cosR,
-            sinR,
-            0.0,
-            0.0,
-            -sinR,
-            cosR,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0
-        ]);
+        var sin = Math.sin(angle);
+        var cos = Math.cos(angle);
 
-        CubismMatrix44.multiply(tr1, this._tr, this._tr);
+        var matrix = this._tr;
+
+        var a = matrix[0];
+        var b = matrix[1];
+        var c = matrix[4];
+        var d = matrix[5];
+
+        matrix[0] = a * cos + c * sin;
+        matrix[1] = b * cos + d * sin;
+        matrix[4] = a * -sin + c * cos;
+        matrix[5] = b * -sin + d * cos;
     }
 }
 

@@ -9970,13 +9970,19 @@
         // Do nothing if angle = 0
         if (angle === 0) {
           return;
-        } // angle = AngleWrap(angle);
+        }
 
-
-        var cosR = Math.cos(angle);
-        var sinR = Math.sin(angle);
-        var tr1 = new Float32Array([cosR, sinR, 0.0, 0.0, -sinR, cosR, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]);
-        CubismMatrix44.multiply(tr1, this._tr, this._tr);
+        var sin = Math.sin(angle);
+        var cos = Math.cos(angle);
+        var matrix = this._tr;
+        var a = matrix[0];
+        var b = matrix[1];
+        var c = matrix[4];
+        var d = matrix[5];
+        matrix[0] = a * cos + c * sin;
+        matrix[1] = b * cos + d * sin;
+        matrix[4] = a * -sin + c * cos;
+        matrix[5] = b * -sin + d * cos;
       }
     }]);
 
@@ -10337,11 +10343,11 @@
     var matrix = model.viewMatrix;
     matrix.copyFrom(projectionMatrix); // Apply rotate
 
-    matrix.rotate(calcMatrix.rotation); // Apply translate
+    matrix.rotate(-calcMatrix.rotationNormalized); // Apply scale
 
-    matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0))); // Apply scale
+    matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY); // Apply translate
 
-    matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
+    matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0)));
     var modelMatrix = model._modelMatrix; // Offset for origin
 
     modelMatrix.translate(modelMatrix._width * (0.5 - gameObject.originX), modelMatrix._height * (gameObject.originY - 0.5)); // Apply model matrix

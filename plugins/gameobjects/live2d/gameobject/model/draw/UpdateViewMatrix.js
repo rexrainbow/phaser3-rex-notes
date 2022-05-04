@@ -1,4 +1,4 @@
-var UpdateViewMatrix = function(model, calcMatrix) {
+var UpdateViewMatrix = function (model, calcMatrix) {
     var gameObject = model.parent;
     var projectionMatrix = model._globalData.projectionMatrix;
 
@@ -6,17 +6,18 @@ var UpdateViewMatrix = function(model, calcMatrix) {
     var matrix = model.viewMatrix;
     matrix.copyFrom(projectionMatrix);
     // Apply rotate
-    matrix.rotate(calcMatrix.rotation);
-    // Apply translate
-    matrix.translate(
-        projectionMatrix.toLocalX(calcMatrix.getX(0, 0)),
-        projectionMatrix.toLocalY(calcMatrix.getY(0, 0))
-    );
+    matrix.rotate(-calcMatrix.rotationNormalized);
     // Apply scale
     matrix.scaleRelative(
         calcMatrix.scaleX,
         calcMatrix.scaleY
     )
+    // Apply translate
+    matrix.translate(
+        projectionMatrix.toLocalX(calcMatrix.getX(0, 0)),
+        projectionMatrix.toLocalY(calcMatrix.getY(0, 0))
+    );
+
 
     var modelMatrix = model._modelMatrix;
     // Offset for origin
