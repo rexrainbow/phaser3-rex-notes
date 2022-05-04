@@ -1,5 +1,5 @@
 var GetParameters = function () {
-    return this.params;
+    return this.model._addParamValues;
 }
 
 export default GetParameters;

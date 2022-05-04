@@ -10983,7 +10983,7 @@
   };
 
   var GetParameters = function GetParameters() {
-    return this.params;
+    return this.model._addParamValues;
   };
 
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
@@ -11154,7 +11154,7 @@
   }(Phaser.GameObjects.GameObject);
 
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(BaseGameObject, [Components.AlphaSingle, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Transform, Components.Visible]);
+  Phaser.Class.mixin(BaseGameObject, [Components.AlphaSingle, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Transform, Components.Visible]);
 
   var Live2dGameObject = /*#__PURE__*/function (_BaseGameObject) {
     _inherits(Live2dGameObject, _BaseGameObject);

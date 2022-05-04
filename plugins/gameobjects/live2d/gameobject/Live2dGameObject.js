@@ -7,6 +7,7 @@ const Components = Phaser.GameObjects.Components;
 Phaser.Class.mixin(BaseGameObject,
     [
         Components.AlphaSingle,
+        Components.BlendMode,
         Components.ComputedSize,
         Components.Depth,
         Components.GetBounds,
