@@ -3555,6 +3555,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../clickoutside/" class="md-nav__link">
+        Click outside
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../drag/" class="md-nav__link">
         Drag
       </a>
@@ -8537,27 +8551,27 @@
 </ul>
 </li>
 <li>A yaml string represented multiple documents, will parse it to array of questions.
-    <div class="highlight"><pre><span></span><code><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">q0</span><span class="w"></span>
-<span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span><span class="w"></span>
-<span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span><span class="w"></span>
-<span class="nt">options</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o1</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span><span class="w"></span>
-<span class="nn">---</span><span class="w"></span>
-<span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">q1</span><span class="w"></span>
-<span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span><span class="w"></span>
-<span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span><span class="w"></span>
-<span class="nt">options</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span><span class="w"></span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">o1</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value0</span><span class="w"></span>
-<span class="w">      </span><span class="nt">param1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value1</span><span class="w"></span>
+    <div class="highlight"><pre><span></span><code><span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">q0</span>
+<span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+<span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+<span class="nt">options</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o0</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o1</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+<span class="nn">---</span>
+<span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">q1</span>
+<span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+<span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+<span class="nt">options</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o0</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
+    <span class="p p-Indicator">-</span> <span class="nt">key</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">o1</span>
+      <span class="nt">param0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value0</span>
+      <span class="nt">param1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value1</span>
 </code></pre></div></li>
 <li>An array of yaml strings for each document, will parse them to array of questions.   </li>
 <li>A csv string, will parse it to array of questions.

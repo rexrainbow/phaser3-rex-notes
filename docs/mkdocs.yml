@@ -182,6 +182,7 @@ nav:
                 - Pinch: gesture-pinch.md
                 - Rotate: gesture-rotate.md
         - Button: button.md
+        - Click outside: clickoutside.md
         - Drag: drag.md
         - Slider: slider.md
         - Scroller: scroller.md
