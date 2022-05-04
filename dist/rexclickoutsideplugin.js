@@ -331,6 +331,290 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+    if (pointer) {
+      if (preTest && !preTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (!HitTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (postTest && !postTest(gameObject, pointer)) {
+        return false;
+      }
+
+      return true;
+    } else {
+      var inputManager = gameObject.scene.input.manager;
+      var pointersTotal = inputManager.pointersTotal;
+      var pointers = inputManager.pointers,
+          pointer;
+
+      for (var i = 0; i < pointersTotal; i++) {
+        pointer = pointers[i];
+
+        if (preTest && !preTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (!HitTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (postTest && !postTest(gameObject, pointer)) {
+          continue;
+        }
+
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  var HitTest = function HitTest(gameObject, pointer) {
+    var scene = gameObject.scene;
+    var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
+    var inputManager = scene.input.manager;
+    var gameObjects = [gameObject];
+    var output;
+
+    for (var i = 0, len = cameras.length; i < len; i++) {
+      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
+
+      if (output.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
+    if (gameObject.displayWidth !== undefined) {
+      return gameObject.displayWidth;
+    } else {
+      return gameObject.width;
+    }
+  };
+
+  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
+    if (gameObject.displayHeight !== undefined) {
+      return gameObject.displayHeight;
+    } else {
+      return gameObject.height;
+    }
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+  var Vector2 = Phaser.Geom.Vector2;
+  var RotateAround = Phaser.Math.RotateAround;
+
+  var GetBounds = function GetBounds(gameObject, output) {
+    if (output === undefined) {
+      output = new Rectangle();
+    } else if (output === true) {
+      if (GlobRect === undefined) {
+        GlobRect = new Rectangle();
+      }
+
+      output = GlobRect;
+    }
+
+    if (gameObject.getBounds) {
+      return gameObject.getBounds(output);
+    } //  We can use the output object to temporarily store the x/y coords in:
+
+
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy; // Instead of doing a check if parent container is
+    // defined per corner we only do it once.
+
+    if (gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      GetTopLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BRx = output.x;
+      BRy = output.y;
+    } else {
+      GetTopLeft(gameObject, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      BRx = output.x;
+      BRy = output.y;
+    }
+
+    output.x = Math.min(TLx, TRx, BLx, BRx);
+    output.y = Math.min(TLy, TRy, BLy, BRy);
+    output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+    output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+    return output;
+  };
+
+  var GlobRect = undefined;
+
+  var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getTopLeft) {
+      return gameObject.getTopLeft(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getTopRight) {
+      return gameObject.getTopRight(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getBottomLeft) {
+      return gameObject.getBottomLeft(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getBottomRight) {
+      return gameObject.getBottomRight(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GlobVector = undefined;
+
+  var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
+    if (includeParent === undefined) {
+      includeParent = false;
+    }
+
+    if (gameObject.rotation !== 0) {
+      RotateAround(output, gameObject.x, gameObject.y, gameObject.rotation);
+    }
+
+    if (includeParent && gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      parentMatrix.transformPoint(output.x, output.y, output);
+    }
+
+    return output;
+  };
+
+  var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
+    // Can't get bounds
+    if (!gameObject || !gameObject.getBounds) {
+      return false;
+    }
+
+    if (preTest && !preTest(gameObject, x, y)) {
+      return false;
+    }
+
+    var boundsRect = GetBounds(gameObject, true);
+
+    if (!boundsRect.contains(x, y)) {
+      return false;
+    }
+
+    if (postTest && !postTest(gameObject, x, y)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  var IsPointerInBounds = function IsPointerInBounds(gameObject, pointer, preTest, postTest) {
+    if (pointer) {
+      return IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest);
+    } else {
+      var inputManager = gameObject.scene.input.manager;
+      var pointersTotal = inputManager.pointersTotal;
+      var pointers = inputManager.pointers;
+
+      for (var i = 0; i < pointersTotal; i++) {
+        pointer = pointers[i];
+
+        if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var ClickOutside = /*#__PURE__*/function (_ComponentBase) {
@@ -346,7 +630,11 @@
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this._enable = undefined;
-      gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+      var inputConfig = GetValue(config, "inputConfig", undefined);
+
+      if (inputConfig) {
+        gameObject.setInteractive(inputConfig);
+      }
 
       _this.resetFromJSON(config);
 
@@ -358,7 +646,6 @@
     _createClass(ClickOutside, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isTouchingParent = false;
         this.setEnable(GetValue(o, "enable", true));
         this.setMode(GetValue(o, "mode", 1));
         this.setClickInterval(GetValue(o, "clickInterval", 100));
@@ -367,18 +654,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        var gameObject = this.parent;
-        gameObject.on('pointerdown', function () {
-          if (this.mode === 0) {
-            this.isTouchingParent = true;
-          }
-        }, this);
-        gameObject.on('pointerup', function () {
-          if (this.mode === 1) {
-            this.isTouchingParent = true;
-          }
-        }, this);
-        var scene = gameObject.scene;
+        var scene = this.parent.scene;
         scene.input.on('pointerdown', this.onPress, this);
         scene.input.on('pointerup', this.onRelease, this);
       }
@@ -404,10 +680,6 @@
       set: function set(e) {
         if (this._enable === e) {
           return;
-        }
-
-        if (!e) {
-          this.cancel();
         }
 
         this._enable = e;
@@ -446,28 +718,27 @@
         this.clickInterval = interval; // ms
 
         return this;
+      }
+    }, {
+      key: "isPointerInside",
+      value: function isPointerInside(pointer) {
+        var gameObject = this.parent;
+        var isInsideCallback = gameObject.input ? IsPointerInHitArea : IsPointerInBounds;
+        return isInsideCallback(gameObject, pointer);
       } // internal
 
     }, {
       key: "onPress",
       value: function onPress(pointer) {
-        if (this.mode === 0) {
-          if (!this.isTouchingParent) {
-            this.click(pointer.downTime, pointer);
-          }
-
-          this.isTouchingParent = false;
+        if (this.mode === 0 && !this.isPointerInside(pointer)) {
+          this.click(pointer.downTime, pointer);
         }
       }
     }, {
       key: "onRelease",
       value: function onRelease(pointer) {
-        if (this.mode === 1) {
-          if (!this.isTouchingParent) {
-            this.click(pointer.upTime, pointer);
-          }
-
-          this.isTouchingParent = false;
+        if (this.mode === 1 && !this.isPointerInside(pointer)) {
+          this.click(pointer.upTime, pointer);
         }
       }
     }, {
@@ -491,12 +762,6 @@
 
         this.lastClickTime = nowTime;
         this.emit('clickoutside', this, this.parent, pointer);
-        return this;
-      }
-    }, {
-      key: "cancel",
-      value: function cancel() {
-        this.isTouchingParent = false;
         return this;
       }
     }]);

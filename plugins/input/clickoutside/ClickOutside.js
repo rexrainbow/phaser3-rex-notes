@@ -1,4 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
+import IsPointerInBounds from '../../utils/input/IsPointerInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8,13 +10,17 @@ class ClickOutside extends ComponentBase {
         // this.parent = gameObject;
 
         this._enable = undefined;
-        gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+
+        var inputConfig = GetValue(config, "inputConfig", undefined);
+        if (inputConfig) {
+            gameObject.setInteractive(inputConfig);
+        }
+
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        this.isTouchingParent = false;
         this.setEnable(GetValue(o, "enable", true));
         this.setMode(GetValue(o, "mode", 1));
         this.setClickInterval(GetValue(o, "clickInterval", 100));
@@ -22,19 +28,7 @@ class ClickOutside extends ComponentBase {
     }
 
     boot() {
-        var gameObject = this.parent;
-        gameObject.on('pointerdown', function () {
-            if (this.mode === 0) {
-                this.isTouchingParent = true;
-            }
-        }, this);
-        gameObject.on('pointerup', function () {
-            if (this.mode === 1) {
-                this.isTouchingParent = true;
-            }
-        }, this);
-
-        var scene = gameObject.scene;
+        var scene = this.parent.scene;
         scene.input.on('pointerdown', this.onPress, this);
         scene.input.on('pointerup', this.onRelease, this);
     }
@@ -61,11 +55,7 @@ class ClickOutside extends ComponentBase {
             return;
         }
 
-        if (!e) {
-            this.cancel();
-        }
         this._enable = e;
-
         var eventName = (e) ? 'enable' : 'disable';
         this.emit(eventName, this, this.parent);
     }
@@ -97,22 +87,22 @@ class ClickOutside extends ComponentBase {
         return this;
     }
 
+    isPointerInside(pointer) {
+        var gameObject = this.parent;
+        var isInsideCallback = (gameObject.input) ? IsPointerInHitArea : IsPointerInBounds;
+        return isInsideCallback(gameObject, pointer);
+    }
+
     // internal
     onPress(pointer) {
-        if (this.mode === 0) {
-            if (!this.isTouchingParent) {
-                this.click(pointer.downTime, pointer);
-            }
-            this.isTouchingParent = false;
+        if ((this.mode === 0) && !this.isPointerInside(pointer)) {
+            this.click(pointer.downTime, pointer);
         }
     }
 
     onRelease(pointer) {
-        if (this.mode === 1) {
-            if (!this.isTouchingParent) {
-                this.click(pointer.upTime, pointer);
-            }
-            this.isTouchingParent = false;
+        if ((this.mode === 1) && !this.isPointerInside(pointer)) {
+            this.click(pointer.upTime, pointer);
         }
     }
 
@@ -135,11 +125,6 @@ class ClickOutside extends ComponentBase {
         this.lastClickTime = nowTime;
         this.emit('clickoutside', this, this.parent, pointer);
 
-        return this;
-    }
-
-    cancel() {
-        this.isTouchingParent = false;
         return this;
     }
 }
