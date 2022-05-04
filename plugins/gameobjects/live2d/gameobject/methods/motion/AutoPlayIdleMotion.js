@@ -1,4 +1,4 @@
-import * as Const from '../model/Const.js';
+import * as Const from '../../model/Const.js';
 
 var AutoPlayIdleMotion = function (motionName) {
     // Not regiester 'idle' event, but also disable auto-play-idle-motion

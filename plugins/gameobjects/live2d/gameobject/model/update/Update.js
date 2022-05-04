@@ -1,4 +1,4 @@
-import OnIdle from '../events/OnIdle.js';
+import OnIdle from '../../events/OnIdle.js';
 
 const Capitalize = Phaser.Utils.String.UppercaseFirst;
 

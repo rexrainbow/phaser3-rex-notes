@@ -1,5 +1,5 @@
-import * as Const from './Const.js';
-import OnExpressionStart from '../events/OnExpressionStart.js';
+import * as Const from '../Const.js';
+import OnExpressionStart from '../../events/OnExpressionStart.js';
 
 var SetExpression = function (name) {
     if (name === undefined) {

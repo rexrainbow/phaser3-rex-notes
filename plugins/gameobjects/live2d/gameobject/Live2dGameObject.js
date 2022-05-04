@@ -1,7 +1,6 @@
 import Render from './render/Render.js';
 import Methods from './methods/Methods.js';
 import Model from './model/Model.js';
-import * as Const from './model/Const.js';
 
 class BaseGameObject extends Phaser.GameObjects.GameObject { }
 const Components = Phaser.GameObjects.Components;
@@ -21,8 +20,6 @@ Phaser.Class.mixin(BaseGameObject,
     ]
 );
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 class Live2dGameObject extends BaseGameObject {
     constructor(scene, x, y, key, config) {
         super(scene, 'rexLive2d');
@@ -32,33 +29,7 @@ class Live2dGameObject extends BaseGameObject {
         this.setModel(key, config);
 
         this.setPosition(x, y);
-        this.setSize(this.model._modelWidth, this.model._modelHeight);
         this.setOrigin(0.5);
-    }
-
-    setModel(key, config) {
-        if (this.key === key) {
-            return this;
-        }
-
-        var data = this.scene.cache.custom.live2d.get(key);
-        if (!data || !data.model) {
-            console.error(`Live2d: can't load ${key}'s assets`);
-            return;
-        }
-
-        if (this.key !== undefined) {      // Change model
-            this.model.release();          // Release old model        
-            this.model = new Model(this);  // Create new model
-        }
-
-        this.key = key;
-        this.model.setup(data);
-
-        var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', false);
-        this.autoPlayIdleMotion(autoPlayIdleMotion);
-
-        return this;
     }
 
     preUpdate(time, delta) {
@@ -85,78 +56,16 @@ class Live2dGameObject extends BaseGameObject {
         // Only work for hitTest
     }
 
-    getExpressionNames() {
-        return this.model.getExpressionNames();
-    }
-
     get expressionName() {
         return this.model._currentExpressionName;
     }
 
     set expressionName(expressionName) {
-        this.model.setExpression(expressionName);
-    }
-
-    setExpression(expressionName) {
-        this.expressionName = expressionName;
-        return this;
-    }
-
-    setRandomExpression() {
-        this.model.setRandomExpression();
-        return this;
-    }
-
-    getMotionNames(groupName) {
-        return this.model.getMotionNames(groupName);
-    }
-
-    getMotionGroupNames() {
-        return this.model.getMotionGroupNames();
-    }
-
-    startMotion(group, no, priority) {
-        if (typeof (priority) === 'string') {
-            priority = PriorityModes[priority];
-        }
-        this.model.startMotion(group, no, priority);
-        return this;
-    }
-
-    stopAllMotions() {
-        this.model.stopAllMotions();
-        return this;
-    }
-
-    isAnyMotionPlaying() {
-        return this.model.isAnyMotionPlaying();
-    }
-
-    getPlayinigMotionNames() {
-        return this.model.getPlayinigMotionNames();
-    }
-
-    registerParameter(name) {
-        this.model.registerParameter(name);
-        return this;
-    }
-
-    addParameterValue(name, value) {
-        this.model.addParameterValue(name, value);
-        return this;
-    }
-
-    resetParameterValue(name) {
-        this.model.resetParameterValue(name);
-        return this;
+        this.setExpression(expressionName);
     }
 
     get params() {
-        return this.model._addParamValues;
-    }
-
-    getParameters() {
-        return this.params;
+        return this.getParameters();
     }
 
     get lipSyncValue() {
@@ -164,20 +73,11 @@ class Live2dGameObject extends BaseGameObject {
     }
 
     set lipSyncValue(value) {
-        this.model._lipSyncValue = value;
-    }
-
-    setLipSyncValue(value) {
-        this.lipSyncValue = value;
-        return this;
+        this.setLipSyncValue(value);
     }
 
     get hitTestResult() {
-        return this.model._hitTestResult;
-    }
-
-    getHitTestResult() {
-        return this.hitTestResult;
+        return this.getHitTestResult();
     }
 
 }
@@ -187,12 +87,5 @@ Object.assign(
     Render,
     Methods,
 )
-
-const PriorityModes = {
-    none: Const.PriorityNone,
-    idle: Const.PriorityIdle,
-    normal: Const.PriorityNormal,
-    force: Const.PriorityForce
-}
 
 export default Live2dGameObject;

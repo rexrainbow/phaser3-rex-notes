@@ -1,5 +1,5 @@
-import { CubismFramework } from '../../framework/src/live2dcubismframework';
-import { CubismDefaultParameterId } from '../../framework/src/cubismdefaultparameterid';
+import { CubismFramework } from '../../../framework/src/live2dcubismframework';
+import { CubismDefaultParameterId } from '../../../framework/src/cubismdefaultparameterid';
 
 const Capitalize = Phaser.Utils.String.UppercaseFirst;
 

@@ -1,23 +1,23 @@
-import Setup from './Setup.js';
-import Update from './Update.js';
-import Draw from './Draw.js';
+import Setup from './setup/Setup.js';
+import Update from './update/Update.js';
+import Draw from './draw/Draw.js';
 
-import GetExpressionNames from './GetExpressionNames.js';
-import SetExpression from './SetExpression.js';
-import SetRandomExpression from './SetRandomExpression.js';
+import GetExpressionNames from './expression/GetExpressionNames.js';
+import SetExpression from './expression/SetExpression.js';
+import SetRandomExpression from './expression/SetRandomExpression.js';
 
-import GetMotionNames from './GetMotionNames.js';
-import GetMotionGroupNames from './GetMotionGroupNames.js';
-import StartMotion from './StartMotion.js';
-import StopAllMotions from './StopAllMotions.js';
-import IsAnyMotionPlaying from './IsMotionPlaying.js';
-import GetPlayinigMotionNames from './GetPlayinigMotionNames.js';
+import GetMotionNames from './motion/GetMotionNames.js';
+import GetMotionGroupNames from './motion/GetMotionGroupNames.js';
+import StartMotion from './motion/StartMotion.js';
+import StopAllMotions from './motion/StopAllMotions.js';
+import IsAnyMotionPlaying from './motion/IsAnyMotionPlaying.js';
+import GetPlayinigMotionNames from './motion/GetPlayinigMotionNames.js';
 
-import RegisterParameter from './RegisterParameter.js';
-import AddParameterValue from './AddParameterValue.js';
-import ResetParameterValue from './ResetParameterValue.js';
+import RegisterParameter from './parameter/RegisterParameter.js';
+import AddParameterValue from './parameter/AddParameterValue.js';
+import ResetParameterValue from './parameter/ResetParameterValue.js';
 
-import HitTest from './HitTest.js';
+import HitTest from './hitarea/HitTest.js';
 
 var Methods = {
     setup: Setup,

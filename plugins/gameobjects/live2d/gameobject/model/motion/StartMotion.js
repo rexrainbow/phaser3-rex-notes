@@ -1,6 +1,6 @@
-import * as Const from './Const.js';
-import OnMotionStart from '../events/OnMotionStart.js';
-import OnMotionComplete from '../events/OnMotionComplete.js';
+import * as Const from '../Const.js';
+import OnMotionStart from '../../events/OnMotionStart.js';
+import OnMotionComplete from '../../events/OnMotionComplete.js';
 
 var StartMotion = function (group, no, priority) {
     if (priority === undefined) {

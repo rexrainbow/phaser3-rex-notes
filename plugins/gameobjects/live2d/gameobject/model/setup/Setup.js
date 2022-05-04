@@ -1,8 +1,8 @@
-import { ACubismMotion } from '../../framework/src/motion/acubismmotion';
-import { CubismEyeBlink } from '../../framework/src/effect/cubismeyeblink';
-import { BreathParameterData, CubismBreath } from '../../framework/src/effect/cubismbreath';
-import { csmVector } from '../../framework/src/type/csmvector';
-import { csmMap } from '../../framework/src/type/csmmap';
+import { ACubismMotion } from '../../../framework/src/motion/acubismmotion';
+import { CubismEyeBlink } from '../../../framework/src/effect/cubismeyeblink';
+import { BreathParameterData, CubismBreath } from '../../../framework/src/effect/cubismbreath';
+import { csmVector } from '../../../framework/src/type/csmvector';
+import { csmMap } from '../../../framework/src/type/csmmap';
 
 var Setup = function (data) {
     // Load setting
