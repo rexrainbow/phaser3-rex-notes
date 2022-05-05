@@ -12,7 +12,9 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 - [Rotate, alpha](https://codepen.io/rexrainbow/pen/NBgpYd)
 - [Tween child](https://codepen.io/rexrainbow/pen/KKpGzvx)
+- [Wrap tween config](https://codepen.io/rexrainbow/pen/qBxdwxo)
 - [Timeline child](https://codepen.io/rexrainbow/pen/GRQJPLV)
+- [Mix timeline](https://codepen.io/rexrainbow/pen/VwQLNyG)
 
 ## Usage
 

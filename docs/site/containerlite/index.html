@@ -2393,6 +2393,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#wrap-tween-config" class="md-nav__link">
+    Wrap tween config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#timeline-local-state" class="md-nav__link">
     Timeline local state
   </a>
@@ -8402,6 +8409,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#wrap-tween-config" class="md-nav__link">
+    Wrap tween config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#timeline-local-state" class="md-nav__link">
     Timeline local state
   </a>
@@ -8490,7 +8504,9 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/NBgpYd">Rotate, alpha</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/KKpGzvx">Tween child</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/qBxdwxo">Wrap tween config</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/GRQJPLV">Timeline child</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/VwQLNyG">Mix timeline</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/container-lite">Sample code</a></p>
@@ -8867,6 +8883,20 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <li><code>scaleX</code>, <code>scaleY</code>, <code>displayWidth</code>, <code>displayHeight</code></li>
 <li><code>alpha</code></li>
 </ul>
+<h4 id="wrap-tween-config">Wrap tween config<a class="headerlink" href="#wrap-tween-config" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tweenConfig</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getTweenChildConfig</span><span class="p">({</span>
+     <span class="nx">targets</span><span class="o">:</span> <span class="nx">child</span><span class="p">,</span>
+    <span class="c1">// x: &#39;+=100&#39;,</span>
+    <span class="c1">// y: &#39;+=100&#39;,</span>
+    <span class="c1">// repeat: -1,</span>
+    <span class="c1">// yoyo: true</span>
+<span class="p">});</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">tweenConfig</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>Input of <code>targets</code> is/are game object(s), will be mapped to local state of game object(S)</li>
+<li>Wrap <code>onUpdate</code> callback, to update properties of child according to local state.</li>
+</ul>
 <h4 id="timeline-local-state">Timeline local state<a class="headerlink" href="#timeline-local-state" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timelineObj</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">timelineChild</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">child</span><span class="p">,</span>    <span class="c1">// Can assign child here</span>
@@ -8887,13 +8917,6 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <span class="p">})</span>
 </code></pre></div>
 <p><a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween-timeline/#create-timeline-included-tween-tasks">Paramters of configuration</a> is the same as creating timeline.</p>
-<p>Supported properties :</p>
-<ul>
-<li><code>x</code>, <code>y</code>,</li>
-<li><code>angle</code>, <code>rotation</code></li>
-<li><code>scaleX</code>, <code>scaleY</code>, <code>displayWidth</code>, <code>displayHeight</code></li>
-<li><code>alpha</code></li>
-</ul>
 <h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get depth of container
