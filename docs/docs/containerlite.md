@@ -12,7 +12,7 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 - [Rotate, alpha](https://codepen.io/rexrainbow/pen/NBgpYd)
 - [Tween child](https://codepen.io/rexrainbow/pen/KKpGzvx)
-- [Wrap tween config](https://codepen.io/rexrainbow/pen/qBxdwxo)
+- [Create tween config](https://codepen.io/rexrainbow/pen/qBxdwxo)
 - [Timeline child](https://codepen.io/rexrainbow/pen/GRQJPLV)
 - [Mix timeline](https://codepen.io/rexrainbow/pen/VwQLNyG)
 
@@ -470,10 +470,10 @@ Supported properties :
 - `scaleX`, `scaleY`, `displayWidth`, `displayHeight`
 - `alpha`
 
-#### Wrap tween config
+#### Create tween config
 
 ```javascript
-var tweenConfig = container.getTweenChildConfig({
+var tweenConfig = container.createTweenChildConfig({
      targets: child,
     // x: '+=100',
     // y: '+=100',
@@ -483,7 +483,7 @@ var tweenConfig = container.getTweenChildConfig({
 scene.tweens.add(tweenConfig);
 ```
 
-- Input of `targets` is/are game object(s), will be mapped to local state of game object(S)
+- Input of `targets` is/are game object(s), will be replaced by local state of game object(S)
 - Wrap `onUpdate` callback, to update properties of child according to local state.
 
 #### Timeline local state
