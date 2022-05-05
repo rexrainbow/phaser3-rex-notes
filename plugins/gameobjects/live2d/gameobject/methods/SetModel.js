@@ -22,8 +22,10 @@ var SetModel = function (key, config) {
     this.model.setup(data);
     this.setSize(this.model._modelWidth, this.model._modelHeight);
 
-    var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', false);
-    this.autoPlayIdleMotion(autoPlayIdleMotion);
+    var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', undefined);
+    if (autoPlayIdleMotion !== undefined) {
+        this.autoPlayIdleMotion(autoPlayIdleMotion);
+    }
 
     return this;
 }

@@ -2,13 +2,17 @@
 const GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
 var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
-    renderer.pipelines.clear();
+    if (renderer.newType) {
+        renderer.pipelines.clear();
+    }
 
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
-    
+
     src.model.draw(calcMatrix);
 
-    renderer.pipelines.rebind();
+    if (!renderer.nextTypeMatch) {
+        renderer.pipelines.rebind();
+    }
 };
 
 export default WebGLRenderer;

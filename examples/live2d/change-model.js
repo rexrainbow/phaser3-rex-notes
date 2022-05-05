@@ -19,21 +19,32 @@ class Demo extends Phaser.Scene {
         var x = 1920 / 2,
             y = 1080 / 2;
 
-        var character = this.add.rexLive2d(x, y, 'Haru', {
-            autoPlayIdleMotion: 'TapBody'
-        })
-            .setScale(0.5)
+        var character0 = CreateCharacter(this, x - 500, y, 'Haru');
+        var character1 = CreateCharacter(this, x + 500, y, 'Hiyori');
 
-        this.input.on('pointerdown', function () {
-            var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
-            character
-                .setModel(key)
-                .startMotion('TapBody', undefined, 'force')
+        this.input.on('pointermove', function (pointer) {
+            var x = pointer.worldX, y = pointer.worldY;
+            character0.lookAt(x, y);
+            character1.lookAt(x, y);
         })
     }
 
     update() {
     }
+}
+
+var CreateCharacter = function (scene, x, y, key) {
+    var character = scene.add.rexLive2d(x, y, key, {
+        autoPlayIdleMotion: 'Idle'
+    })
+        .setScale(0.5)
+        .setInteractive()
+        .on('pointerdown-Body', function () {
+            var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
+            character.setModel(key)
+        })
+
+    return character;
 }
 
 var config = {

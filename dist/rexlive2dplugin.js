@@ -222,10 +222,16 @@
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
-    renderer.pipelines.clear();
+    if (renderer.newType) {
+      renderer.pipelines.clear();
+    }
+
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
     src.model.draw(calcMatrix);
-    renderer.pipelines.rebind();
+
+    if (!renderer.nextTypeMatch) {
+      renderer.pipelines.rebind();
+    }
   };
 
   var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {};
@@ -10837,8 +10843,12 @@
     this.key = key;
     this.model.setup(data);
     this.setSize(this.model._modelWidth, this.model._modelHeight);
-    var autoPlayIdleMotion = GetValue$1(config, 'autoPlayIdleMotion', false);
-    this.autoPlayIdleMotion(autoPlayIdleMotion);
+    var autoPlayIdleMotion = GetValue$1(config, 'autoPlayIdleMotion', undefined);
+
+    if (autoPlayIdleMotion !== undefined) {
+      this.autoPlayIdleMotion(autoPlayIdleMotion);
+    }
+
     return this;
   };
 
