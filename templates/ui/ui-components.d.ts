@@ -46,6 +46,7 @@ import Toast from './toast/Toast';
 // import Sides from './sides/Sides';
 
 import Click from './click/Click';
+import ClickOutside from './clickoutside/ClickOutside';
 import Tap from './tap/Tap';
 import Press from './press/Press';
 import Swipe from './swipe/Swipe';
@@ -129,6 +130,7 @@ export {
     // Sides,
 
     Click,
+    ClickOutside,
     Tap,
     Press,
     Swipe,

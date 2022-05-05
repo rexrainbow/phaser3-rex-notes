@@ -2,6 +2,7 @@
 import ContainerLite from '../../../plugins/containerlite.js';
 import Anchor from '../anchor/Anchor';
 import Click from '../click/Click';
+import ClickOutside from '../clickoutside/ClickOutside';
 import InTouching from '../intouching/InTouching';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive';
 
@@ -451,6 +452,25 @@ declare class BaseSizer extends ContainerLite {
     enableClick(enabled?: boolean): this;
 
     disableClick(): this;
+
+    onClickOutside(
+        callback: (
+            clickOutside: ClickOutside,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer
+        ) => void,
+        scope?: object,
+        config?: ClickOutside.IConfig
+    ): this;
+
+    offClickOutside(
+        callback: Function,
+        scope?: object
+    ): this;
+
+    enableClickOutside(enabled?: boolean): this;
+
+    disableClickOutside(): this;
 
     onTouching(
         callback: (
