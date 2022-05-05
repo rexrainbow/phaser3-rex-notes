@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
             loop: -1,
             duration: 300,
             tweens: [
-                container.wrapTweenChildConfig({
+                container.createTweenChildConfig({
                     targets: sprite,
                     angle: 30,
                     yoyo: true,
@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
                     yoyo: true,
                     duration: 1000
                 },
-                container.wrapTweenChildConfig({
+                container.createTweenChildConfig({
                     targets: sprite,
                     angle: -30,
                     yoyo: true,

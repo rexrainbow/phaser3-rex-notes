@@ -82,7 +82,7 @@ export default {
         return tween;
     },
 
-    wrapTweenChildConfig(tweenConfig) {
+    createTweenChildConfig(tweenConfig) {
         var targets = tweenConfig.targets;
         if (targets) {
             if (!Array.isArray(targets)) {
@@ -124,7 +124,7 @@ export default {
 
         var tweens = timelineConfig.tweens;
         for (var i = 0, cnt = tweens.length; i < cnt; i++) {
-            tweens[i] = this.wrapTweenChildConfig(tweens[i]);
+            tweens[i] = this.createTweenChildConfig(tweens[i]);
         }
 
         var timeline = this.scene.tweens.timeline(timelineConfig);

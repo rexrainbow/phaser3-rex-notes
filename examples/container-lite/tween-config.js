@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
                 duration: 3000,
                 repeat: -1
             })
-            scene.tweens.add(parent.wrapTweenChildConfig({
+            scene.tweens.add(parent.createTweenChildConfig({
                 targets: localTweenChild,
                 y: '+=200',
                 repeat: -1,

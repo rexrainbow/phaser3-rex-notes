@@ -13834,7 +13834,7 @@
       tween.on('update', UpdateChild);
       return tween;
     },
-    wrapTweenChildConfig: function wrapTweenChildConfig(tweenConfig) {
+    createTweenChildConfig: function createTweenChildConfig(tweenConfig) {
       var targets = tweenConfig.targets;
 
       if (targets) {
@@ -13881,7 +13881,7 @@
       var tweens = timelineConfig.tweens;
 
       for (var i = 0, cnt = tweens.length; i < cnt; i++) {
-        tweens[i] = this.wrapTweenChildConfig(tweens[i]);
+        tweens[i] = this.createTweenChildConfig(tweens[i]);
       }
 
       var timeline = this.scene.tweens.timeline(timelineConfig);
