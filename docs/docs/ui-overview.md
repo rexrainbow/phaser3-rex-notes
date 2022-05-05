@@ -175,7 +175,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
-2. [Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
+1. [Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
     ```javascript
     var customShapes = scene.rexUI.add.customShapes(x, y, width, height, config);
     ```
@@ -190,7 +190,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
-3. [Custom progress](shape-custom-progress.md): Custom progress on shape.
+1. [Custom progress](shape-custom-progress.md): Custom progress on shape.
     ```javascript
     var customProgress = scene.rexUI.add.customProgress(x, y, width, height, config);
     ```
@@ -205,7 +205,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }    
     ```
-4. [Canvas-round-rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
+1. [Canvas-round-rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
     ```javascript
     var shape = scene.rexUI.add.roundRectangleCanvas(x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
     ```
@@ -220,7 +220,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
-5. [Cover](shape-cover.md): [Rectangle shape covered full window](shape-cover.md), and [block all touch events](toucheventstop.md).
+1. [Cover](shape-cover.md): [Rectangle shape covered full window](shape-cover.md), and [block all touch events](toucheventstop.md).
     ```javascript
     var shape = scene.rexUI.add.cover(config);
     ```
@@ -405,6 +405,14 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     or
     ```javascript
     var click = new RexPlugins.UI.Click(gameObject, config);
+    ```
+1. [Click-Outside](clickoutside.md): Fires 'clickoutside' event when pointer-down or pointer-up outside of game object.
+    ```javascript
+    var clickOutside = scene.rexUI.add.clickOutside(gameObject, config);
+    ```
+    or
+    ```javascript
+    var clickOutside = new RexPlugins.UI.ClickOutside(gameObject, config);
     ```
 1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
     ```javascript

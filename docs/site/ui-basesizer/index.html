@@ -6728,6 +6728,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#click-outside" class="md-nav__link">
+    Click outside
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-children-interactive" class="md-nav__link">
     Set children interactive
   </a>
@@ -8241,6 +8248,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#click-outside" class="md-nav__link">
+    Click outside
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-children-interactive" class="md-nav__link">
     Set children interactive
   </a>
@@ -8955,6 +8969,37 @@
 <p>Equal to </p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">click</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">sizer</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">click</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="click-outside">Click outside<a class="headerlink" href="#click-outside" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add click-outside event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">onClickOutside</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="c1">// sizer.onClickOutside(callback, scope, config);</span>
+</code></pre></div><ul>
+<li><code>config</code> : See <a href="../clickoutside/#create-instance">ClickOutside</a></li>
+<li><code>callback</code> :
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">clickOutside</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>clickOutside</code> : <a href="../clickoutside/">ClickOutside</a> behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Turn off click-outside event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">offClickOutside</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Enable click-outside event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">enableClickOutside</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Disable click-outside event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">disableClickOutside</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<p>Equal to </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">clickOutside</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">clickOutside</span><span class="p">(</span><span class="nx">sizer</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">clickOutside</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;clickoutside&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h3>
 <p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this sizer, to detect input events of children.</p>
