@@ -1441,6 +1441,30 @@
       tween.on('update', UpdateChild);
       return tween;
     },
+    wrapTweenChildConfig: function wrapTweenChildConfig(tweenConfig) {
+      var targets = tweenConfig.targets;
+
+      if (targets) {
+        if (!Array.isArray(targets)) {
+          targets = [targets];
+        } // Map child game objects to local states
+
+
+        tweenConfig.targets = GetLocalStates(targets);
+      }
+
+      var onUpdate = tweenConfig.onUpdate;
+
+      tweenConfig.onUpdate = function (tween, target) {
+        if (onUpdate) {
+          onUpdate(tween, target);
+        }
+
+        UpdateChild(tween, undefined, target);
+      };
+
+      return tweenConfig;
+    },
     tween: function tween(tweenConfig) {
       var scene = this.scene;
 
@@ -1451,7 +1475,6 @@
       return scene.tweens.add(tweenConfig);
     },
     timelineChild: function timelineChild(timelineConfig) {
-      var scene = this.scene;
       var targets = timelineConfig.targets; // Map child game objects to local states
 
       if (targets) {
@@ -1460,44 +1483,15 @@
         }
 
         timelineConfig.targets = GetLocalStates(targets);
-
-        if (!scene) {
-          scene = GetScene(targets);
-        }
       }
 
       var tweens = timelineConfig.tweens;
 
       for (var i = 0, cnt = tweens.length; i < cnt; i++) {
-        var tweenConfig = tweens[i]; // Update child game object in onUpdate callback
-
-        var onUpdate = tweenConfig.onUpdate;
-
-        tweenConfig.onUpdate = function (tween, target) {
-          if (onUpdate) {
-            onUpdate(tween, target);
-          }
-
-          UpdateChild(tween, undefined, target);
-        }; // Map child game objects to local states
-
-
-        var targets = tweenConfig.targets;
-
-        if (targets) {
-          if (!Array.isArray(targets)) {
-            targets = [targets];
-          }
-
-          tweenConfig.targets = GetLocalStates(targets);
-
-          if (!scene) {
-            scene = GetScene(targets);
-          }
-        }
+        tweens[i] = this.wrapTweenChildConfig(tweens[i]);
       }
 
-      var timeline = scene.tweens.timeline(timelineConfig);
+      var timeline = this.scene.tweens.timeline(timelineConfig);
       return timeline;
     }
   };

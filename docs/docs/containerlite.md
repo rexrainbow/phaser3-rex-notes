@@ -468,6 +468,22 @@ Supported properties :
 - `scaleX`, `scaleY`, `displayWidth`, `displayHeight`
 - `alpha`
 
+#### Wrap tween config
+
+```javascript
+var tweenConfig = container.getTweenChildConfig({
+     targets: child,
+    // x: '+=100',
+    // y: '+=100',
+    // repeat: -1,
+    // yoyo: true
+});
+scene.tweens.add(tweenConfig);
+```
+
+- Input of `targets` is/are game object(s), will be mapped to local state of game object(S)
+- Wrap `onUpdate` callback, to update properties of child according to local state.
+
 #### Timeline local state
 
 ```javascript
@@ -491,13 +507,6 @@ var timelineObj = container.timelineChild({
 ```
 
 [Paramters of configuration](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween-timeline/#create-timeline-included-tween-tasks) is the same as creating timeline.
-
-Supported properties :
-
-- `x`, `y`,
-- `angle`, `rotation`
-- `scaleX`, `scaleY`, `displayWidth`, `displayHeight`
-- `alpha`
 
 ### Depth
 
