@@ -151,11 +151,15 @@ declare class ContainerLite extends Base {
 
     tween(
         config: Phaser.Types.Tweens.TweenBuilderConfig | object
-    ): Phaser.Tweens.Tween
+    ): Phaser.Tweens.Tween;
 
     tweenChild(
         config: Phaser.Types.Tweens.TweenBuilderConfig | object
-    ): Phaser.Tweens.Tween
+    ): Phaser.Tweens.Tween;
+
+    timelineChild(
+        config: Phaser.Types.Tweens.TimelineBuilderConfig | object
+    ): Phaser.Tweens.Timeline;
 
     getChildren(
         out?: Phaser.GameObjects.GameObject[]
