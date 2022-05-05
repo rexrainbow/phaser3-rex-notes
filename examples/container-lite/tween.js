@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
                 targets: localTweenChild,
                 y: '+=200',
                 repeat: -1,
-                yoyo: true
+                yoyo: true,              
             })
             parent.tween({
                 angle: 360,

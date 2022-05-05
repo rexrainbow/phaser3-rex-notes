@@ -38,8 +38,22 @@ Chain a series of [tween tasks](tween.md), built-in object of phaser.
 var timeline = scene.tweens.timeline({
     targets: gameObject,
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+    easeParams:
+
     duration: 1000,
+    delay: 0,
     loop: 0,
+    hold: 0,
+    repeat: 0,
+    loopDelay: 0,
+    completeDelay: 0,
+    yoyo: false,
+
+    paused: false,
+    useFrames: false,
+    flipX: false,
+    flipY: false,
+
 
     tweens: [
         {
@@ -52,6 +66,32 @@ var timeline = scene.tweens.timeline({
             // offset: '-=500',   // starts 500ms before previous tween ends
         },
         // ...
-    ]
+    ],
+
+
+    callbackScope: timeline,
+
+    onStart: function () {},
+    onStartScope: 
+    onStartParams: [],
+
+    onUpdate: function () {},
+    onUpdateScope:
+    onUpdateParams: [],
+
+    onLoop: function () {},
+    onLoopScope:
+    onLoopParams: [],
+
+    onYoyo: function () {},
+    onYoyoScope:
+    onYoyoParams: [],
+
+    onComplete: function () {},
+    onCompleteScope:
+    onCompleteParams: [],
+
+    totalDuration: 0,
+
 });
 ```

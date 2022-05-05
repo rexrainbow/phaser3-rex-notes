@@ -448,7 +448,7 @@ Reset local state of child according to current properties of children
 #### Tween local state
 
 ```javascript
-container.tweenChild({
+var tweenObj = container.tweenChild({
     targets: child,
     // x: '+=100',
     // y: '+=100',
@@ -458,6 +458,37 @@ container.tweenChild({
 ```
 
 [Paramters of configuration](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween/#create-tween-task) is the same as tween task.
+
+Supported properties :
+
+- `x`, `y`,
+- `angle`, `rotation`
+- `scaleX`, `scaleY`, `displayWidth`, `displayHeight`
+- `alpha`
+
+#### Timeline local state
+
+```javascript
+var timelineObj = container.timelineChild({
+    targets: child,    // Can assign child here
+    loop: -1,
+    duration: 100,
+    tweens: [
+        {
+            // targets: child,    // Or assign child here
+            angle: 10,
+            yoyo: true,
+        },
+        {
+            // targets: child,    // Or assign child here
+            angle: -10,
+            yoyo: true,
+        },
+    ]
+})
+```
+
+[Paramters of configuration](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween-timeline/#create-timeline-included-tween-tasks) is the same as creating timeline.
 
 Supported properties :
 
