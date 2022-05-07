@@ -24,6 +24,7 @@ import SetLipSyncValue from './lipsync/SetLipSyncValue.js';
 
 import SetInteractive from './interactive/SetInteractive.js';
 import GetHitTestResult from './interactive/GetHitTestResult.js';
+import HitTest from './interactive/HitTest.js';
 
 
 
@@ -54,6 +55,7 @@ var Methods = {
 
     setInteractive: SetInteractive,
     getHitTestResult: GetHitTestResult,
+    hitTest: HitTest,
 }
 
 export default Methods;
