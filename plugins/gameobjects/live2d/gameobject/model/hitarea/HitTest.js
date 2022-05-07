@@ -1,13 +1,19 @@
-var HitTest = function (x, y, hitArenaName) {
-    var count = this._modelSetting.getHitAreasCount();
-    for (var i = 0; i < count; i++) {
-        if (this._modelSetting.getHitAreaName(i) === hitArenaName) {
-            var drawId = this._modelSetting.getHitAreaId(i);
-            return this.isHit(drawId, x, y);
-        }
+var HitTest = function (hitAreaName, x, y) {
+    var bounds = this.getDrawableBounds(hitAreaName, true);
+    if (!bounds) {
+        return false;
+    }
+    if (typeof (x) === 'object') {
+        var xy = x;
+        x = xy.x;
+        y = xy.y;
     }
 
-    return false;
+
+    x = this._modelMatrix.invertTransformX(x);
+    y = this._modelMatrix.invertTransformY(y);
+
+    return bounds.contains(x, y);
 }
 
 export default HitTest;

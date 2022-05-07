@@ -25,7 +25,6 @@ var UpdateViewMatrix = function (model, calcMatrix) {
         modelMatrix._width * (0.5 - gameObject.originX),
         modelMatrix._height * (gameObject.originY - 0.5)
     );
-
     // Apply model matrix
     matrix.multiplyByMatrix(modelMatrix);
 

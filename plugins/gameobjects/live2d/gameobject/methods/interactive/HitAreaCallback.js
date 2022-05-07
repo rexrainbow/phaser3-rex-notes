@@ -6,7 +6,7 @@ var HitAreaCallback = function (shape, localX, localY, gameObject) {
 
     var hitTestResult = model._hitTestResult;
 
-    if ((localX) < 0 || (localX > model._modelWidth) ||
+    if ((localX < 0) || (localX > model._modelWidth) ||
         (localY < 0) || (localY > model._modelHeight)) {
         // Set all hit test result to false
         for (var name in hitTestResult) {
@@ -15,16 +15,16 @@ var HitAreaCallback = function (shape, localX, localY, gameObject) {
         return false;
     }
 
-    var x = model.localXToModelMatrixX(localX);
-    var y = model.localYToModelMatrixY(localY);
+    var matrixXY = model.localXYToMatrixXY(localX, localY, true);
+    var x = matrixXY.x
+    var y = matrixXY.y;
     var modelSetting = model._modelSetting;
     var count = modelSetting.getHitAreasCount();
     var anyHit = false;
     for (var i = 0; i < count; i++) {
-        var hitTestName = modelSetting.getHitAreaName(i);
-        var drawId = modelSetting.getHitAreaId(i);
-        var isHit = model.isHit(drawId, x, y);
-        hitTestResult[hitTestName] = isHit;
+        var hitAreaName = modelSetting.getHitAreaName(i);
+        var isHit = model.hitTest(hitAreaName, x, y);
+        hitTestResult[hitAreaName] = isHit;
         anyHit = anyHit || isHit;
     }
 

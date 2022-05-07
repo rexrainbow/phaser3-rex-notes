@@ -15,11 +15,7 @@ var WorldXYToModelXY = function (worldX, worldY, camera, out) {
 
     out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
 
-    var model = this.model;
-    out.x = model.localXToModelMatrixX(out.x);
-    out.y = model.localYToModelMatrixY(out.y);
-
-    return out;
+    return this.model.localXYToModelMatrixXY(out.x, out.y, out);
 }
 
 var globOut = {};

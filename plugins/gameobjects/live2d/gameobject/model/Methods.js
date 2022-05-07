@@ -17,6 +17,8 @@ import RegisterParameter from './parameter/RegisterParameter.js';
 import AddParameterValue from './parameter/AddParameterValue.js';
 import ResetParameterValue from './parameter/ResetParameterValue.js';
 
+import LocalXYToModelMatrixXY from './position/LocalXToModelMatrixX.js';
+import GetDrawableBounds from './hitarea/GetDrawableBounds.js';
 import HitTest from './hitarea/HitTest.js';
 
 var Methods = {
@@ -39,6 +41,8 @@ var Methods = {
     addParameterValue: AddParameterValue,
     resetParameterValue: ResetParameterValue,
 
+    localXYToModelMatrixXY: LocalXYToModelMatrixXY,
+    getDrawableBounds: GetDrawableBounds,
     hitTest: HitTest,
 }
 

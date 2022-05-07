@@ -41,14 +41,6 @@ class Model extends CubismUserModel {
         this.parent = undefined;
         this._globalData = undefined;
     }
-
-    localXToModelMatrixX(localX) {
-        return (localX / this._modelWidth) - 0.5;
-    }
-
-    localYToModelMatrixY(localY) {
-        return (0.5 - (localY / this._modelHeight)) * 2;
-    }
 }
 
 Object.assign(
