@@ -24,8 +24,7 @@ class Demo extends Phaser.Scene {
         var character = this.add.rexLive2d(x, y, 'Haru', {
             // autoPlayIdleMotion: 'TapBody'
         })
-            .setScale(0.5)
-            .setOrigin(0.5, 0.5)
+            .setScale(0.8)
             .setInteractive()
             .on('pointerdown-Head', function () {
                 print.text += 'Hit Head\n'
@@ -67,7 +66,12 @@ class Demo extends Phaser.Scene {
 
         this.debuggerGraphics
             .lineStyle(2, 0xffff00)
-            .strokeRectShape(this.character.getBounds())
+            .strokePoints([
+                this.character.getTopLeft(),
+                this.character.getTopRight(),
+                this.character.getBottomRight(),
+                this.character.getBottomLeft()
+            ], true, true)
 
         this.debuggerGraphics
             .lineStyle(2, 0xff0000)
