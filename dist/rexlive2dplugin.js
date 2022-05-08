@@ -10739,7 +10739,7 @@
     } // -0.5(left) ~ 0.5(right)
 
 
-    out.x = localX / this._modelWidth - 0.5; // 1(top) ~ -1(bottom)
+    out.x = (localX / this._modelWidth - 0.5) * 2; // 1(top) ~ -1(bottom)
 
     out.y = (0.5 - localY / this._modelHeight) * 2;
     return out;
@@ -11141,7 +11141,7 @@
       return false;
     }
 
-    var matrixXY = model.localXYToMatrixXY(localX, localY, true);
+    var matrixXY = model.localXYToModelMatrixXY(localX, localY, true);
     var x = matrixXY.x;
     var y = matrixXY.y;
     var modelSetting = model._modelSetting;

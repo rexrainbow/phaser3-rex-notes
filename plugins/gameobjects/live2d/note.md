@@ -259,6 +259,15 @@ const y: number = this._deviceToScreen.transformY(
 ```
 
 ```ts
+const { width, height } = canvas;
+const ratio: number = width / height;
+const left: number = -ratio;
+const right: number = ratio;
+const bottom: number = LAppDefine.ViewLogicalLeft;
+const top: number = LAppDefine.ViewLogicalRight;
+```
+
+```ts
 this._deviceToScreen.loadIdentity();
 if (width > height) {
   const screenW: number = Math.abs(right - left);

@@ -61,8 +61,8 @@ class Demo extends Phaser.Scene {
     update() {
         this.debuggerGraphics
             .clear()
-            // .lineStyle(2, 0xffff00)
-            // .strokeRectShape(this.character.getBounds())
+            .lineStyle(2, 0xffff00)
+            .strokeRectShape(this.character.getBounds())
             .lineStyle(2, 0xff0000)
             .lineBetween(
                 this.character.x,

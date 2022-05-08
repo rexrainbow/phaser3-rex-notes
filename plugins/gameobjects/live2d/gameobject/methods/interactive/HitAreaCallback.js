@@ -15,7 +15,7 @@ var HitAreaCallback = function (shape, localX, localY, gameObject) {
         return false;
     }
 
-    var matrixXY = model.localXYToMatrixXY(localX, localY, true);
+    var matrixXY = model.localXYToModelMatrixXY(localX, localY, true);
     var x = matrixXY.x
     var y = matrixXY.y;
     var modelSetting = model._modelSetting;
