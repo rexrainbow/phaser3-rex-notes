@@ -24,10 +24,9 @@ class Live2dGameObject extends BaseGameObject {
 
         this.model = new Model(this);
 
-        this.setModel(key, config);
-
-        this.setPosition(x, y);
         this.setOrigin(0.5);
+        this.setModel(key, config);
+        this.setPosition(x, y);
     }
 
     preUpdate(time, delta) {

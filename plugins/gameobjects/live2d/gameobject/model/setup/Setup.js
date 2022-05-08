@@ -136,8 +136,11 @@ var Setup = function (data) {
     this._motionManager.stopAllMotions();
 
     // Model size
-    this._modelWidth = (this._model._model.canvasinfo.CanvasWidth / 2);
-    this._modelHeight = (this._model._model.canvasinfo.CanvasHeight / 2);
+    var canvasinfo = this._model._model.canvasinfo,
+        width = canvasinfo.CanvasWidth,
+        height = canvasinfo.CanvasHeight;
+    this._modelWidth = (width / 2);
+    this._modelHeight = (height / 2);
 
     // Hit test result
     var count = this._modelSetting.getHitAreasCount();

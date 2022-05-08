@@ -16,8 +16,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var x = 1920 / 2,
-            y = 1080 / 2;
+        var x = this.game.config.width / 2,
+            y = this.game.config.height / 2;
 
         var character0 = CreateCharacter(this, x - 500, y, 'Haru');
         var character1 = CreateCharacter(this, x + 500, y, 'Hiyori');

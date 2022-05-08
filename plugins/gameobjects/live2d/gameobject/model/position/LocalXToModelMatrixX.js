@@ -5,7 +5,7 @@ var LocalXYToModelMatrixXY = function (localX, localY, out) {
         out = GlobMatrixXY;
     }
 
-    // -0.5(left) ~ 0.5(right)
+    // -1(left) ~ 1(right)
     out.x = ((localX / this._modelWidth) - 0.5) * 2;
 
     // 1(top) ~ -1(bottom)

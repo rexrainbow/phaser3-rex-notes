@@ -12,16 +12,17 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.rexLive2dCoreScript('assets/live2d/core/live2dcubismcore.js');
         this.load.rexLive2d('Haru', 'assets/live2d/Haru/Haru.model3.json');
+        this.load.rexLive2d('Hiyori', 'assets/live2d/Hiyori/Hiyori.model3.json');
     }
 
     create() {
-        var x = 1920 / 2,
-            y = 1080 / 2;
+        var x = this.game.config.width / 2,
+            y = this.game.config.height / 2;
 
         // Hit test
-        var print = this.add.text(0, 0, '', { fontSize: 24 });
+        var print = this.add.text(0, 0, '', { fontSize: 36 });
         var character = this.add.rexLive2d(x, y, 'Haru', {
-            autoPlayIdleMotion: 'TapBody'
+            // autoPlayIdleMotion: 'TapBody'
         })
             .setScale(0.5)
             .setOrigin(0.5, 0.5)
@@ -31,11 +32,13 @@ class Demo extends Phaser.Scene {
             })
             .on('pointerdown-Body', function () {
                 print.text += 'Hit Body\n'
+                var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
+                character.setModel(key)
             })
 
 
         // Interactive with touch pointer
-        var printDragXY = this.add.text(0, (1080 / 2) + 200, '', { fontSize: 24 });
+        var printDragXY = this.add.text(0, (1080 / 2) + 200, '', { fontSize: 36 });
         this.input.on('pointermove', function (pointer) {
             var x = pointer.worldX, y = pointer.worldY;
             character.lookAt(x, y);
@@ -61,8 +64,12 @@ class Demo extends Phaser.Scene {
     update() {
         this.debuggerGraphics
             .clear()
+
+        this.debuggerGraphics
             .lineStyle(2, 0xffff00)
             .strokeRectShape(this.character.getBounds())
+
+        this.debuggerGraphics
             .lineStyle(2, 0xff0000)
             .lineBetween(
                 this.character.x,
@@ -77,7 +84,7 @@ var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 1920,
-    height: 1080,
+    height: 1920,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
