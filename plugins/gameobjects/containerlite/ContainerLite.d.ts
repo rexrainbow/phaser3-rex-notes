@@ -80,6 +80,16 @@ declare class ContainerLite extends Base {
         angle: number
     ): this;
 
+    setChildLocalRotation(
+        child: Phaser.GameObjects.GameObject,
+        rotation: number
+    ): this;
+
+    setChildLocalAngle(
+        child: Phaser.GameObjects.GameObject,
+        angle: number
+    ): this;
+
     setChildScale(
         child: Phaser.GameObjects.GameObject,
         scaleX: number,

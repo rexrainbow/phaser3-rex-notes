@@ -6702,7 +6702,7 @@
    * @return {number} The given angle converted to radians.
    */
 
-  var DegToRad$1 = function DegToRad(degrees) {
+  var DegToRad$2 = function DegToRad(degrees) {
     return degrees * DEG_TO_RAD;
   };
 
@@ -6717,7 +6717,7 @@
 
       for (var i = 0; i < 6; i++) {
         angleDeg = 60 * i + angleOffset;
-        angleRad = DegToRad$1(angleDeg);
+        angleRad = DegToRad$2(angleDeg);
         points[i].x = x + size * Math.cos(angleRad);
         points[i].y = y + size * Math.sin(angleRad);
       }
@@ -12253,7 +12253,7 @@
         if (value !== undefined) {
           if (this.coneMode === 0) ; else {
             // Angle
-            this.coneRad = DegToRad$1(value);
+            this.coneRad = DegToRad$2(value);
           }
         }
       }
@@ -12814,7 +12814,7 @@
     return gameObject;
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
+  var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
 
   var GetLocalState = function GetLocalState(gameObject) {
@@ -12840,7 +12840,7 @@
           return RadToDeg(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad(value);
+          this.rotation = DegToRad$1(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -13162,6 +13162,7 @@
     }
   };
 
+  var DegToRad = Phaser.Math.DegToRad;
   var Rotation = {
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
@@ -13199,6 +13200,12 @@
     setChildLocalRotation: function setChildLocalRotation(child, rotation) {
       var state = GetLocalState(child);
       state.rotation = rotation;
+      this.updateChildRotation(child);
+      return this;
+    },
+    setChildLocalAngle: function setChildLocalAngle(child, angle) {
+      var state = GetLocalState(child);
+      state.rotation = DegToRad(angle);
       this.updateChildRotation(child);
       return this;
     },

@@ -409,7 +409,7 @@
     return gameObject;
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
+  var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
 
   var GetLocalState = function GetLocalState(gameObject) {
@@ -435,7 +435,7 @@
           return RadToDeg(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad(value);
+          this.rotation = DegToRad$1(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -757,6 +757,7 @@
     }
   };
 
+  var DegToRad = Phaser.Math.DegToRad;
   var Rotation = {
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
@@ -794,6 +795,12 @@
     setChildLocalRotation: function setChildLocalRotation(child, rotation) {
       var state = GetLocalState(child);
       state.rotation = rotation;
+      this.updateChildRotation(child);
+      return this;
+    },
+    setChildLocalAngle: function setChildLocalAngle(child, angle) {
+      var state = GetLocalState(child);
+      state.rotation = DegToRad(angle);
       this.updateChildRotation(child);
       return this;
     },

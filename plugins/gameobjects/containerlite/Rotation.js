@@ -1,5 +1,7 @@
 import GetLocalState from './utils/GetLocalState.js';
 
+const DegToRad = Phaser.Math.DegToRad;
+
 export default {
     updateChildRotation(child) {
         var state = GetLocalState(child);
@@ -39,6 +41,13 @@ export default {
     setChildLocalRotation(child, rotation) {
         var state = GetLocalState(child);
         state.rotation = rotation;
+        this.updateChildRotation(child);
+        return this;
+    },
+
+    setChildLocalAngle(child, angle) {
+        var state = GetLocalState(child);
+        state.rotation = DegToRad(angle);
         this.updateChildRotation(child);
         return this;
     },

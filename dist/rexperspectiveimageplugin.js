@@ -296,9 +296,9 @@
   var GetValue$e = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
-  var DegToRad$5 = Phaser.Math.DegToRad;
+  var DegToRad$6 = Phaser.Math.DegToRad;
   var FOV = 45;
-  var PanZ = 1 + 1 / Math.sin(DegToRad$5(FOV));
+  var PanZ = 1 + 1 / Math.sin(DegToRad$6(FOV));
 
   var Image = /*#__PURE__*/function (_Mesh) {
     _inherits(Image, _Mesh);
@@ -401,7 +401,7 @@
         return RadToDeg$4(this.rotationX);
       },
       set: function set(value) {
-        this.rotationX = DegToRad$5(value);
+        this.rotationX = DegToRad$6(value);
       }
     }, {
       key: "rotationY",
@@ -417,7 +417,7 @@
         return RadToDeg$4(this.rotationY);
       },
       set: function set(value) {
-        this.rotationY = DegToRad$5(value);
+        this.rotationY = DegToRad$6(value);
       }
     }, {
       key: "rotationZ",
@@ -433,7 +433,7 @@
         return RadToDeg$4(this.rotationZ);
       },
       set: function set(value) {
-        this.rotationZ = DegToRad$5(value);
+        this.rotationZ = DegToRad$6(value);
       }
     }, {
       key: "transformVerts",
@@ -847,7 +847,7 @@
     return gameObject;
   };
 
-  var DegToRad$4 = Phaser.Math.DegToRad;
+  var DegToRad$5 = Phaser.Math.DegToRad;
   var RadToDeg$3 = Phaser.Math.RadToDeg;
 
   var GetLocalState = function GetLocalState(gameObject) {
@@ -873,7 +873,7 @@
           return RadToDeg$3(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad$4(value);
+          this.rotation = DegToRad$5(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -1195,6 +1195,7 @@
     }
   };
 
+  var DegToRad$4 = Phaser.Math.DegToRad;
   var Rotation = {
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
@@ -1232,6 +1233,12 @@
     setChildLocalRotation: function setChildLocalRotation(child, rotation) {
       var state = GetLocalState(child);
       state.rotation = rotation;
+      this.updateChildRotation(child);
+      return this;
+    },
+    setChildLocalAngle: function setChildLocalAngle(child, angle) {
+      var state = GetLocalState(child);
+      state.rotation = DegToRad$4(angle);
       this.updateChildRotation(child);
       return this;
     },

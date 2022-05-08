@@ -10731,18 +10731,99 @@
     return this;
   };
 
-  var HitTest = function HitTest(x, y, hitArenaName) {
+  var LocalXYToModelMatrixXY = function LocalXYToModelMatrixXY(localX, localY, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = GlobMatrixXY;
+    } // -0.5(left) ~ 0.5(right)
+
+
+    out.x = localX / this._modelWidth - 0.5; // 1(top) ~ -1(bottom)
+
+    out.y = (0.5 - localY / this._modelHeight) * 2;
+    return out;
+  };
+
+  var GlobMatrixXY = {};
+
+  var HitAreaNameToDrawIndex = function HitAreaNameToDrawIndex(hitAreaName) {
     var count = this._modelSetting.getHitAreasCount();
 
     for (var i = 0; i < count; i++) {
-      if (this._modelSetting.getHitAreaName(i) === hitArenaName) {
+      if (this._modelSetting.getHitAreaName(i) === hitAreaName) {
         var drawId = this._modelSetting.getHitAreaId(i);
 
-        return this.isHit(drawId, x, y);
+        var drawIndex = this._model.getDrawableIndex(drawId);
+
+        return drawIndex;
       }
     }
 
-    return false;
+    return undefined;
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+
+  var GetDrawableBounds = function GetDrawableBounds(index, bounds) {
+    if (bounds === undefined) {
+      bounds = new Rectangle();
+    } else if (bounds === true) {
+      if (GlobRect === undefined) {
+        GlobRect = new Rectangle();
+      }
+
+      bounds = GlobRect;
+    }
+
+    if (typeof index === 'string') {
+      index = HitAreaNameToDrawIndex.call(this, index);
+
+      if (index === undefined) {
+        return null;
+      }
+    }
+
+    var count = this._model.getDrawableVertexCount(index) * 2;
+
+    var vertices = this._model.getDrawableVertices(index);
+
+    var left = Infinity,
+        right = -Infinity,
+        top = Infinity,
+        bottom = -Infinity;
+
+    for (var i = 0; i < count; i += 2) {
+      var x = vertices[i];
+      var y = vertices[i + 1];
+      left = Math.min(left, x);
+      right = Math.max(right, x);
+      top = Math.min(top, y);
+      bottom = Math.max(bottom, y);
+    }
+
+    bounds.setTo(left, top, right - left, bottom - top);
+    return bounds;
+  };
+
+  var GlobRect;
+
+  var HitTest$1 = function HitTest(hitAreaName, x, y) {
+    var bounds = this.getDrawableBounds(hitAreaName, true);
+
+    if (!bounds) {
+      return false;
+    }
+
+    if (_typeof(x) === 'object') {
+      var xy = x;
+      x = xy.x;
+      y = xy.y;
+    }
+
+    x = this._modelMatrix.invertTransformX(x);
+    y = this._modelMatrix.invertTransformY(y);
+    return bounds.contains(x, y);
   };
 
   var Methods$1 = {
@@ -10761,7 +10842,9 @@
     registerParameter: RegisterParameter$1,
     addParameterValue: AddParameterValue$1,
     resetParameterValue: ResetParameterValue$1,
-    hitTest: HitTest
+    localXYToModelMatrixXY: LocalXYToModelMatrixXY,
+    getDrawableBounds: GetDrawableBounds,
+    hitTest: HitTest$1
   };
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
@@ -10801,16 +10884,6 @@
 
         this.parent = undefined;
         this._globalData = undefined;
-      }
-    }, {
-      key: "localXToModelMatrixX",
-      value: function localXToModelMatrixX(localX) {
-        return localX / this._modelWidth - 0.5;
-      }
-    }, {
-      key: "localYToModelMatrixY",
-      value: function localYToModelMatrixY(localY) {
-        return (0.5 - localY / this._modelHeight) * 2;
       }
     }]);
 
@@ -10901,10 +10974,7 @@
     }
 
     out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
-    var model = this.model;
-    out.x = model.localXToModelMatrixX(out.x);
-    out.y = model.localYToModelMatrixY(out.y);
-    return out;
+    return this.model.localXYToModelMatrixXY(out.x, out.y, out);
   };
 
   var globOut = {};
@@ -11071,17 +11141,17 @@
       return false;
     }
 
-    var x = model.localXToModelMatrixX(localX);
-    var y = model.localYToModelMatrixY(localY);
+    var matrixXY = model.localXYToMatrixXY(localX, localY, true);
+    var x = matrixXY.x;
+    var y = matrixXY.y;
     var modelSetting = model._modelSetting;
     var count = modelSetting.getHitAreasCount();
     var anyHit = false;
 
     for (var i = 0; i < count; i++) {
-      var hitTestName = modelSetting.getHitAreaName(i);
-      var drawId = modelSetting.getHitAreaId(i);
-      var isHit = model.isHit(drawId, x, y);
-      hitTestResult[hitTestName] = isHit;
+      var hitAreaName = modelSetting.getHitAreaName(i);
+      var isHit = model.hitTest(hitAreaName, x, y);
+      hitTestResult[hitAreaName] = isHit;
       anyHit = anyHit || isHit;
     }
 
@@ -11131,6 +11201,11 @@
     return this.model._hitTestResult;
   };
 
+  var HitTest = function HitTest(hitAreaName, worldX, worldY, camera) {
+    var modelXY = this.getModelXY(worldX, worldY, camera, true);
+    return this.model.hitTest(hitAreaName, modelXY);
+  };
+
   var Methods = {
     setModel: SetModel,
     getModelXY: WorldXYToModelXY,
@@ -11152,7 +11227,8 @@
     lookForward: LookForward,
     setLipSyncValue: SetLipSyncValue,
     setInteractive: SetInteractive,
-    getHitTestResult: GetHitTestResult
+    getHitTestResult: GetHitTestResult,
+    hitTest: HitTest
   };
 
   var BaseGameObject = /*#__PURE__*/function (_Phaser$GameObjects$G) {
