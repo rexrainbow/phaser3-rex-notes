@@ -1,24 +1,9 @@
+import Live2dGameObjectBase from './Live2dGameObjectBase.js';
 import Render from './render/Render.js';
 import Methods from './methods/Methods.js';
 import Model from './model/Model.js';
 
-class BaseGameObject extends Phaser.GameObjects.GameObject { }
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(BaseGameObject,
-    [
-        Components.AlphaSingle,
-        Components.BlendMode,
-        Components.ComputedSize,
-        Components.Depth,
-        Components.GetBounds,
-        Components.Origin,
-        Components.ScrollFactor,
-        Components.Transform,
-        Components.Visible,
-    ]
-);
-
-class Live2dGameObject extends BaseGameObject {
+class Live2dGameObject extends Live2dGameObjectBase {
     constructor(scene, x, y, key, config) {
         super(scene, 'rexLive2d');
 

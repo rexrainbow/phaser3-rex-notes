@@ -1,4 +1,4 @@
-import WorldXYToGameObjectLocalXY from '../../../../utils/position/WorldXYToGameObjectLocalXY.js';
+import WorldXYToGameObjectLocalXY from '../../../../../utils/position/WorldXYToGameObjectLocalXY.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 

@@ -25,14 +25,29 @@ class Demo extends Phaser.Scene {
             // autoPlayIdleMotion: 'TapBody'
         })
             .setScale(0.8)
+
+        var anyHit = false;
+        character
             .setInteractive()
             .on('pointerdown-Head', function () {
-                print.text += 'Hit Head\n'
+                print.text = 'Hit Head\n';
+                anyHit = true;
             })
             .on('pointerdown-Body', function () {
-                print.text += 'Hit Body\n'
+                print.text = 'Hit Body\n'
                 var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
-                character.setModel(key)
+                character.setModel(key);
+                anyHit = true;
+            })
+
+        this.input
+            .on('pointerdown', function () {
+                if (!anyHit) {
+                    print.text = 'No hit';
+                } else {
+                    anyHit = false;
+                }
+
             })
 
 

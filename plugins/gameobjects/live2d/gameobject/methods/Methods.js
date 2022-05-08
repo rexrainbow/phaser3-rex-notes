@@ -1,5 +1,4 @@
 import SetModel from './SetModel.js';
-import GetModelXY from './WorldXYToModelXY.js';
 
 import GetExpressionNames from './expression/GetExpressionNames.js';
 import SetExpression from './expression/SetExpression.js';
@@ -26,11 +25,11 @@ import SetInteractive from './interactive/SetInteractive.js';
 import GetHitTestResult from './interactive/GetHitTestResult.js';
 import HitTest from './interactive/HitTest.js';
 
+import GetModelXY from './position/WorldXYToModelXY.js';
 
 
 var Methods = {
     setModel: SetModel,
-    getModelXY: GetModelXY,
 
     getExpressionNames: GetExpressionNames,
     setExpression: SetExpression,
@@ -56,6 +55,8 @@ var Methods = {
     setInteractive: SetInteractive,
     getHitTestResult: GetHitTestResult,
     hitTest: HitTest,
+
+    getModelXY: GetModelXY,
 }
 
 export default Methods;
