@@ -73,7 +73,22 @@ Built-in [image loader](loader.md#image) dosen't support loading local image uri
     scene.load.rexImageURI(key, uri);
     ```
 
-### Load script tag
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import ImageURILoader from 'phaser3-rex-plugins/plugins/imageuriloader.js';
+    ```
+- Start loading task
+    ```javascript
+    ImageURILoader.call(this.load, key, uri);
+    ```
+
+### Load image
 
 In preload stage:
 

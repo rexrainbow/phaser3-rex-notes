@@ -71,6 +71,21 @@ Load script tag in preload stage.
     scene.load.rexScriptTag(url);
     ```
 
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import ScriptTagLoader from 'phaser3-rex-plugins/plugins/scripttagloader.js';
+    ```
+- Start loading task
+    ```javascript
+    ScriptTagLoader.call(this.load, url);
+    ```
+
 ### Load script tag
 
 In preload stage:

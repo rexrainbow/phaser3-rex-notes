@@ -79,7 +79,24 @@ Await custom task in preload stage.
     });
     ```
 
-### Await task
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Awaitloader from 'phaser3-rex-plugins/plugins/awaitloader.js';
+    ```
+- Start loading task
+    ```javascript
+    Awaitloader.call(this.load, function(successCallback, failureCallback) {
+        // successCallback();
+    }, scope)
+    ```
+
+### Start loading task
 
 In preload stage:
 

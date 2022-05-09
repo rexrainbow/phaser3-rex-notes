@@ -1,3 +1,11 @@
-import Live2dGameObject from './gameobjects/live2d/gameobject/Live2dGameObject';
+import {
+    Live2dCoreScriptFileCallback,
+    Live2dFileCallback,
+    Live2dGameObject
+} from './gameobjects/live2d/index';
 
-export default Live2dGameObject;
+export {
+    Live2dCoreScriptFileCallback,
+    Live2dFileCallback,
+    Live2dGameObject
+};

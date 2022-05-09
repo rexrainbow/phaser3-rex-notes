@@ -75,6 +75,21 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
     scene.load.rexWebFont(config);
     ```
 
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import WebFontLoader from 'phaser3-rex-plugins/plugins/webfontloader.js';
+    ```
+- Start loading task
+    ```javascript
+    WebFontLoader.call(this.load, config);
+    ```
+
 ### Load webfont
 
 In preload stage:

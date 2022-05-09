@@ -66,35 +66,6 @@ Get time from previous closing application to now.
     var awayTime = (new AwayTime()).awayTime;
     ```
 
-### Import class
-
-```javascript
-import rexAwayTime from './plugins/awaytime.js';
-```
-
-### Install global plugin
-
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import AwayTimePlugin from './plugins/awaytime-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexAwayTime',
-            plugin: AwayTimePlugin,
-            start: true
-        },
-        // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
-
 ### Default away-timer
 
 #### Get away-time

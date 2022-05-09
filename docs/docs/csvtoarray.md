@@ -15,28 +15,34 @@ Generate array from csv string.
 import rexCSVToArray from './plugins/csvtoarray.js';
 ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import CSVToArrayPlugin from './plugins/csvtoarray-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexCSVToArray',
-            plugin: CSVToArrayPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import AwayTimePlugin from 'phaser3-rex-plugins/plugins/awaytime-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexCSVToArray',
+                plugin: CSVToArrayPlugin,
+                start: true
+            }
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Convert csv
+    ```javascript
+    var arr = scene.plugins.get('rexCSVToArray').convert(csvString, config);
+    ```
 
 ### Convert csv
 

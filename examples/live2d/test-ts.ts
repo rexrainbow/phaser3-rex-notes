@@ -1,5 +1,9 @@
 import 'phaser';
-import Live2dGameObject from '../../plugins/live2d';
+import {
+    Live2dCoreScriptFileCallback,
+    Live2dFileCallback,
+    Live2dGameObject
+} from '../../plugins/live2d';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,9 +13,9 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.rexLive2dCoreScript('assets/live2d/core/live2dcubismcore.js');
-        this.load.rexLive2d('Haru', 'assets/live2d/Haru/Haru.model3.json');
-        this.load.rexLive2d('Hiyori', 'assets/live2d/Hiyori/Hiyori.model3.json');
+        Live2dCoreScriptFileCallback.call(this.load, 'assets/live2d/core/live2dcubismcore.js');
+        Live2dFileCallback.call(this.load, 'Haru', 'assets/live2d/Haru/Haru.model3.json');
+        Live2dFileCallback.call(this.load, 'Hiyori', 'assets/live2d/Hiyori/Hiyori.model3.json');
     }
 
     create() {

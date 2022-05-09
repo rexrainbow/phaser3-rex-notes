@@ -10,7 +10,7 @@ var CreateAwiatFile = function (loader, key, uri) {
     var callback = function (successCallback, failureCallback) {
         var imageElement = new Image();
         imageElement.onload = function () {
-            var canvasTexture = loader.scene.sys.textures.createCanvas(key, imageElement.width, imageElement.height);            
+            var canvasTexture = loader.scene.sys.textures.createCanvas(key, imageElement.width, imageElement.height);
             canvasTexture.getContext().drawImage(imageElement, 0, 0);
             canvasTexture.refresh();
             successCallback();
@@ -20,7 +20,10 @@ var CreateAwiatFile = function (loader, key, uri) {
 
     return new AwaitFile(loader, {
         type: 'imageuri',
-        config: { callback: callback }
+        config: {
+            key: key,
+            callback: callback
+        }
     });
 }
 
