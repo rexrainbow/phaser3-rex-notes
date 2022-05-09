@@ -671,14 +671,21 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-script-tag" class="md-nav__link">
-    Load script tag
+  <a href="#load-image" class="md-nav__link">
+    Load image
   </a>
   
 </li>
@@ -7969,14 +7976,21 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-script-tag" class="md-nav__link">
-    Load script tag
+  <a href="#load-image" class="md-nav__link">
+    Load image
   </a>
   
 </li>
@@ -8071,7 +8085,19 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexImageURI</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">uri</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="load-script-tag">Load script tag<a class="headerlink" href="#load-script-tag" title="Permanent link">&para;</a></h3>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ImageURILoader</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/imageuriloader.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Start loading task
+    <div class="highlight"><pre><span></span><code><span class="nx">ImageURILoader</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">uri</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="load-image">Load image<a class="headerlink" href="#load-image" title="Permanent link">&para;</a></h3>
 <p>In preload stage:</p>
 <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexImageURI</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">uri</span><span class="p">);</span>
 </code></pre></div>

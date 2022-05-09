@@ -636,6 +636,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7997,6 +8004,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8116,6 +8130,18 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexWebFont</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">WebFontLoader</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/webfontloader.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Start loading task
+    <div class="highlight"><pre><span></span><code><span class="nx">WebFontLoader</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="load-webfont">Load webfont<a class="headerlink" href="#load-webfont" title="Permanent link">&para;</a></h3>
 <p>In preload stage:</p>
 <div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexWebFont</span><span class="p">({</span>
@@ -8172,28 +8198,28 @@
 <span class="p">};</span>
 </code></pre></div>
     and <code>fonts.css</code>
-    <div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">font-face</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;My Font&#39;</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">src</span><span class="o">:</span><span class="w"> </span><span class="o">...;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="p">@</span><span class="k">font-face</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;My Other Font&#39;</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-style</span><span class="o">:</span><span class="w"> </span><span class="nt">normal</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-weight</span><span class="o">:</span><span class="w"> </span><span class="nt">normal</span><span class="o">;</span><span class="w"> </span><span class="c">/* or 400 */</span><span class="w"></span>
-<span class="w">    </span><span class="nt">src</span><span class="o">:</span><span class="w"> </span><span class="o">...;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="p">@</span><span class="k">font-face</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;My Other Font&#39;</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-style</span><span class="o">:</span><span class="w"> </span><span class="nt">italic</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-weight</span><span class="o">:</span><span class="w"> </span><span class="nt">normal</span><span class="o">;</span><span class="w"> </span><span class="c">/* or 400 */</span><span class="w"></span>
-<span class="w">    </span><span class="nt">src</span><span class="o">:</span><span class="w"> </span><span class="o">...;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-<span class="p">@</span><span class="k">font-face</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-family</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;My Other Font&#39;</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-style</span><span class="o">:</span><span class="w"> </span><span class="nt">normal</span><span class="o">;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">font-weight</span><span class="o">:</span><span class="w"> </span><span class="nt">bold</span><span class="o">;</span><span class="w"> </span><span class="c">/* or 700 */</span><span class="w"></span>
-<span class="w">    </span><span class="nt">src</span><span class="o">:</span><span class="w"> </span><span class="o">...;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+    <div class="highlight"><pre><span></span><code><span class="p">@</span><span class="k">font-face</span> <span class="p">{</span>
+    <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;My Font&#39;</span><span class="o">;</span>
+    <span class="nt">src</span><span class="o">:</span> <span class="o">...;</span>
+<span class="p">}</span>
+<span class="p">@</span><span class="k">font-face</span> <span class="p">{</span>
+    <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;My Other Font&#39;</span><span class="o">;</span>
+    <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+    <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span> <span class="c">/* or 400 */</span>
+    <span class="nt">src</span><span class="o">:</span> <span class="o">...;</span>
+<span class="p">}</span>
+<span class="p">@</span><span class="k">font-face</span> <span class="p">{</span>
+    <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;My Other Font&#39;</span><span class="o">;</span>
+    <span class="nt">font-style</span><span class="o">:</span> <span class="nt">italic</span><span class="o">;</span>
+    <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span> <span class="c">/* or 400 */</span>
+    <span class="nt">src</span><span class="o">:</span> <span class="o">...;</span>
+<span class="p">}</span>
+<span class="p">@</span><span class="k">font-face</span> <span class="p">{</span>
+    <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;My Other Font&#39;</span><span class="o">;</span>
+    <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+    <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">bold</span><span class="o">;</span> <span class="c">/* or 700 */</span>
+    <span class="nt">src</span><span class="o">:</span> <span class="o">...;</span>
+<span class="p">}</span>
 </code></pre></div></li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>

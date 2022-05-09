@@ -85,7 +85,7 @@ Built-in [image loader](loader.md#image) dosen't support loading local image uri
     ```
 - Start loading task
     ```javascript
-    ImageURILoader.call(this.load, key, uri);
+    ImageURILoader.call(scene.load, key, uri);
     ```
 
 ### Load image

@@ -83,7 +83,7 @@ Load script tag in preload stage.
     ```
 - Start loading task
     ```javascript
-    ScriptTagLoader.call(this.load, url);
+    ScriptTagLoader.call(scene.load, url);
     ```
 
 ### Load script tag

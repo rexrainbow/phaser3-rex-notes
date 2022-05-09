@@ -87,7 +87,7 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
     ```
 - Start loading task
     ```javascript
-    WebFontLoader.call(this.load, config);
+    WebFontLoader.call(scene.load, config);
     ```
 
 ### Load webfont

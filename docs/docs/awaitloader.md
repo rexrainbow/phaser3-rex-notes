@@ -91,7 +91,7 @@ Await custom task in preload stage.
     ```
 - Start loading task
     ```javascript
-    Awaitloader.call(this.load, function(successCallback, failureCallback) {
+    Awaitloader.call(scene.load, function(successCallback, failureCallback) {
         // successCallback();
     }, scope)
     ```
