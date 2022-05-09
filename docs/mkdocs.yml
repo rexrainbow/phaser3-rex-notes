@@ -110,6 +110,7 @@ nav:
         - Grid table: gridtable.md
     - Zone: zone.md
     - Layer: layer.md
+    - Live2d: live2d.md
     - Light:
         - Light: light.md
         - Point light: point-light.md

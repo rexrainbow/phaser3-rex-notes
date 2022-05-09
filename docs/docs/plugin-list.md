@@ -82,6 +82,7 @@
 1. [In touching](intouching.md): Fires 'intouch' event every tick when pressing on a game object.
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [Line](line.md): Draw a line with start/end/body textures.
+1. [Live2d](live2d.md): Display [live2d](https://www.live2d.com/en/) model.
 1. [LocalForage/files](localforage-files.md): Save JSON data, using localforage.
 1. [LocalStorage/data](localstorage-data.md): Sync data from data manager to local-storage.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.

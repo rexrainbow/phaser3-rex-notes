@@ -19,13 +19,13 @@ class Demo extends Phaser.Scene {
         var x = this.game.config.width / 2,
             y = this.game.config.height / 2;
 
-        // Hit test
-        var print = this.add.text(0, 0, '', { fontSize: 36 });
         var character = this.add.rexLive2d(x, y, 'Haru', {
             // autoPlayIdleMotion: 'TapBody'
         })
             .setScale(0.5)
 
+        // Hit test
+        var print = this.add.text(0, 0, '', { fontSize: 36 });
         var anyHit = false;
         character
             .setInteractive()

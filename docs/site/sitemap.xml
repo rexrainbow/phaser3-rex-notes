@@ -756,6 +756,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/live2d/</loc>
+         <lastmod>2022-05-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/loader/</loc>
          <lastmod>2022-05-09</lastmod>
          <changefreq>daily</changefreq>

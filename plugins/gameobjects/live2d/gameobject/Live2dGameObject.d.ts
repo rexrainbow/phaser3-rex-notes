@@ -14,7 +14,6 @@ declare namespace Live2dGameObject {
 
         eyeBallX?: number, eyeBallY?: number,
         angleX?: number, angleY?: number, angleZ?: number,
-
         bodyAngleX?: number,
     }
 
