@@ -6,8 +6,8 @@ var LocalXYToModelMatrixXY = function (localX, localY, out) {
     }
 
     //debugger
-    out.x = this.pixelTransformMatrix.invertTransformX(localX);
-    out.y = -this.pixelTransformMatrix.invertTransformY(localY);
+    out.x = (localX - (this._pixelWidth / 2)) / this._pixelsPerUnit;
+    out.y = ((this._pixelHeight / 2) - localY) / this._pixelsPerUnit;
 
     return out;
 }

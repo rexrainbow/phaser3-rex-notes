@@ -2,8 +2,7 @@ import { ACubismMotion } from '../../../framework/src/motion/acubismmotion';
 import { CubismEyeBlink } from '../../../framework/src/effect/cubismeyeblink';
 import { BreathParameterData, CubismBreath } from '../../../framework/src/effect/cubismbreath';
 import { csmVector } from '../../../framework/src/type/csmvector';
-// import { csmMap } from '../../../framework/src/type/csmmap';
-import SetupModelMatrix from './SetupModelMatrix.js';
+import { csmMap } from '../../../framework/src/type/csmmap';
 
 var Setup = function (data) {
     // Load setting
@@ -90,9 +89,6 @@ var Setup = function (data) {
         this._lipSyncIds.pushBack(setting.getLipSyncParameterId(i));
     }
 
-    // Setup ModelMatrix    
-    SetupModelMatrix.call(this);
-
     // Load CubismMotion
     this._model.saveParameters();
     var motionGroups = data.motions;
@@ -133,6 +129,18 @@ var Setup = function (data) {
 
     // Stop all motions
     this._motionManager.stopAllMotions();
+
+    // Setup canvas size
+    var canvasinfo = this._model._model.canvasinfo;
+    this._pixelWidth = canvasinfo.CanvasWidth;
+    this._pixelHeight = canvasinfo.CanvasHeight;
+    this._pixelsPerUnit = canvasinfo.PixelsPerUnit;
+
+    // Setup ModelMatrix
+    var layout = new csmMap();
+    setting.getLayoutMap(layout);
+    this._modelMatrix.setupFromLayout(layout);
+
 
     // Hit test result
     var count = this._modelSetting.getHitAreasCount();

@@ -2,7 +2,6 @@ import { csmMap } from '../../framework/src/type/csmmap';
 import { csmVector } from '../../framework/src/type/csmvector';
 import { CubismUserModel } from '../../framework/src/model/cubismusermodel';
 import ViewMatrix from './ViewMatrix.js';
-import { CubismMatrix44 } from '../../framework/src/math/cubismmatrix44';
 import GlobalData from '../globaldata/GlobalData.js';
 import Methods from './Methods.js';
 
@@ -15,7 +14,6 @@ class Model extends CubismUserModel {
 
         this.parent = parent;  // Live2dGameObject
         this.viewMatrix = new ViewMatrix();
-        this.pixelTransformMatrix = new CubismMatrix44();
 
         this._eyeBlinkIds = new csmVector();
 
@@ -29,8 +27,8 @@ class Model extends CubismUserModel {
 
         this._addParamValues = {};
 
-        this.originalWidth = 0;
-        this.originalHeight = 0;
+        this._pixelWidth = 0;
+        this._pixelHeight = 0;
 
         this._hitTestResult = {};
 

@@ -20,7 +20,7 @@ var SetModel = function (key, config) {
 
     this.key = key;
     this.model.setup(data);
-    this.setSize(this.model.originalWidth, this.model.originalHeight);
+    this.setSize(this.model._pixelWidth, this.model._pixelHeight);
 
     var autoPlayIdleMotion = GetValue(config, 'autoPlayIdleMotion', undefined);
     if (autoPlayIdleMotion !== undefined) {
