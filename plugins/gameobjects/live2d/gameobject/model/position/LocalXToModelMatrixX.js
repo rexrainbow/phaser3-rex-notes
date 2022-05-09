@@ -7,7 +7,7 @@ var LocalXYToModelMatrixXY = function (localX, localY, out) {
 
     //debugger
     out.x = this.pixelTransformMatrix.invertTransformX(localX);
-    out.y = this.pixelTransformMatrix.invertTransformY(localY);
+    out.y = -this.pixelTransformMatrix.invertTransformY(localY);
 
     return out;
 }

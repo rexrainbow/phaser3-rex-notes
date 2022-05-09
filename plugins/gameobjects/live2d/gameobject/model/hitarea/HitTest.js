@@ -9,9 +9,6 @@ var HitTest = function (hitAreaName, x, y) {
         y = xy.y;
     }
 
-    x = this._modelMatrix.invertTransformX(x);
-    y = this._modelMatrix.invertTransformY(y);
-
     return bounds.contains(x, y);
 }
 

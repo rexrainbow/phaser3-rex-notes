@@ -6,6 +6,8 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
         renderer.pipelines.clear();
     }
 
+    camera.addToRenderList(src);
+
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
 
     src.model.draw(calcMatrix);

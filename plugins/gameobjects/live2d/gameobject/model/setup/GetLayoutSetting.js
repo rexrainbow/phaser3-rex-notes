@@ -1,4 +1,4 @@
-var GetLayout = function (setting, out) {
+var GetLayoutSetting = function (setting, out) {
     if (out === undefined) {
         out = {};
     }
@@ -23,4 +23,4 @@ var GetLayout = function (setting, out) {
     return out;
 }
 
-export default GetLayout;
+export default GetLayoutSetting;

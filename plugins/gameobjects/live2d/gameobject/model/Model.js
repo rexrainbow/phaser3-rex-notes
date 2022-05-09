@@ -29,8 +29,8 @@ class Model extends CubismUserModel {
 
         this._addParamValues = {};
 
-        this._modelWidth = 0;
-        this._modelHeight = 0;
+        this.originalWidth = 0;
+        this.originalHeight = 0;
 
         this._hitTestResult = {};
 
