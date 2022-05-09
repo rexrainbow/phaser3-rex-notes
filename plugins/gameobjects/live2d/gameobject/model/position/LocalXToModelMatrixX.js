@@ -5,11 +5,9 @@ var LocalXYToModelMatrixXY = function (localX, localY, out) {
         out = GlobMatrixXY;
     }
 
-    // -1(left) ~ 1(right)
-    out.x = ((localX / this._modelWidth) - 0.5) * 2;
-
-    // 1(top) ~ -1(bottom)
-    out.y = (0.5 - (localY / this._modelHeight)) * 2;
+    //debugger
+    out.x = this.pixelTransformMatrix.invertTransformX(localX);
+    out.y = this.pixelTransformMatrix.invertTransformY(localY);
 
     return out;
 }

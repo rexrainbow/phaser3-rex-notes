@@ -247,6 +247,62 @@
     modelMatrix.centerY(y);
     ```
 
+#### Compare
+
+##### Init
+
+- SDK
+    ```javascript
+    this._modelMatrix = new CubismModelMatrix(
+      this._model.getCanvasWidth(),
+      this._model.getCanvasHeight()
+    );
+    ```
+    ```javascript
+    this._modelSetting.getLayoutMap(layout);
+    this._modelMatrix.setupFromLayout(layout);    
+    ```
+- Pixi-live2d-display
+    ```javascript
+    protected getLayout(): CommonLayout {
+        // un-capitalize each key to satisfy the common layout format
+        // e.g. CenterX -> centerX
+        return mapKeys({ ...this.settings.layout }, (_, key) => key.charAt(0).toLowerCase() + key.slice(1));
+    }
+    ```
+    ```javascript
+    const layout = Object.assign(
+        {
+            width: 2,
+            height: 2,
+        },
+        this.getLayout(),
+    );
+
+    this.localTransform.scale(layout.width / 2, layout.height / 2);
+    // this calculation differs from Live2D SDK...
+    const offsetX = (layout.x !== undefined && layout.x - layout.width / 2)
+        || (layout.centerX !== undefined && layout.centerX)
+        || (layout.left !== undefined && layout.left - layout.width / 2)
+        || (layout.right !== undefined && layout.right + layout.width / 2)
+        || 0;
+    const offsetY = (layout.y !== undefined && layout.y - layout.height / 2)
+        || (layout.centerY !== undefined && layout.centerY)
+        || (layout.top !== undefined && layout.top - layout.height / 2)
+        || (layout.bottom !== undefined && layout.bottom + layout.height / 2)
+        || 0;
+    this.localTransform.translate(this.width * offsetX, -this.height * offsetY);
+    ```
+    ```javascript
+    (this as Mutable<this>).pixelsPerUnit = this.coreModel.getModel().canvasinfo.PixelsPerUnit;
+    // move the origin from top left to center
+    this.centeringTransform
+        .scale(this.pixelsPerUnit, this.pixelsPerUnit)
+        .translate(this.originalWidth / 2, this.originalHeight / 2);
+    ```
+
+
+
 ## Hit test
 
 ```ts
@@ -326,4 +382,5 @@ public getCanvasHeight(): number {
   );
 }
 ```
+
 

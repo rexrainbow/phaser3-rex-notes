@@ -21,10 +21,10 @@ var UpdateViewMatrix = function (model, calcMatrix) {
 
     var modelMatrix = model._modelMatrix;
     // Offset for origin
-    modelMatrix.translate(
-        modelMatrix._width * (0.5 - gameObject.originX),
-        modelMatrix._height * (gameObject.originY - 0.5)
-    );
+    // modelMatrix.translate(
+    //     modelMatrix._width * (0.5 - gameObject.originX),
+    //     modelMatrix._height * (gameObject.originY - 0.5)
+    // );
     // Apply model matrix
     matrix.multiplyByMatrix(modelMatrix);
 
