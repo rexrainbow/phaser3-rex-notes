@@ -22,10 +22,9 @@ class Demo extends Phaser.Scene {
         var character = this.add.rexLive2d(x, y, 'Haru', {
             // autoPlayIdleMotion: 'TapBody'
         })
-            .setScale(0.5)
 
         // Hit test
-        var print = this.add.text(0, 0, '', { fontSize: 36 });
+        var print = this.add.text(0, 0, '', { fontSize: 72 });
         var anyHit = false;
         character
             .setInteractive()
@@ -35,8 +34,8 @@ class Demo extends Phaser.Scene {
             })
             .on('pointerdown-Body', function () {
                 print.text = 'Hit Body\n'
-                var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
-                character.setModel(key);
+                // var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
+                // character.setModel(key);
                 anyHit = true;
             })
 
@@ -52,7 +51,7 @@ class Demo extends Phaser.Scene {
 
 
         // Interactive with touch pointer
-        var printDragXY = this.add.text(0, (1080 / 2) + 200, '', { fontSize: 36 });
+        var printDragXY = this.add.text(0, y + 200, '', { fontSize: 72 });
         this.input.on('pointermove', function (pointer) {
             var x = pointer.worldX, y = pointer.worldY;
             character.lookAt(x, y);
@@ -80,7 +79,7 @@ class Demo extends Phaser.Scene {
             .clear()
 
         this.debuggerGraphics
-            .lineStyle(2, 0xffff00)
+            .lineStyle(20, 0xffff00)
             .strokePoints([
                 this.character.getTopLeft(),
                 this.character.getTopRight(),
@@ -102,8 +101,8 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 1920,
-    height: 1080,
+    width: 2400,
+    height: 4500,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

@@ -8,11 +8,14 @@ class CanvasMatrix extends CubismMatrix44 {
     }
 
     setSize(width, height) {
-        var ratio = (height === 0) ? 0 : width / height;
         this.width = width;
         this.height = height;
 
-        this.scale(1, ratio);
+        if (width > height) {
+            this.scale(1.0, width / height);
+        } else {
+            this.scale(height / width, 1.0);
+        }
 
         return this;
     }
