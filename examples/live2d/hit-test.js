@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         var character = this.add.rexLive2d(x, y, 'Haru', {
             // autoPlayIdleMotion: 'TapBody'
         })
-            .setScale(0.8)
+            .setScale(0.5)
 
         var anyHit = false;
         character
@@ -103,7 +103,7 @@ var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 1920,
-    height: 1920,
+    height: 1080,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

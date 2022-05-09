@@ -16,11 +16,7 @@ class Live2dPlugin extends Phaser.Plugins.BasePlugin {
 
         if (!isWebGL) {
             console.error('Live2d can\'t run in CANVAS render mode.')
-            return;
         }
-
-        game.cache.addCustom('live2d');
-
 
         // Register new file type to loader, to load live2d core script file (live2dcubismcore.min.js)
         pluginManager.registerFileType('rexLive2dCoreScript', Live2dCoreFileCallback);

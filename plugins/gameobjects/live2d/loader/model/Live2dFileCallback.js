@@ -11,6 +11,8 @@ import Initialize from '../../utils/Initialize.js';
 var Live2dFileCallback = function (key, url) {
     var loader = this;
 
+    loader.cacheManager.addCustom('live2d');
+
     if (IsCoreNotLoad()) {
         if (window.Live2DCubismCore) {
             // Core script is loaded before
