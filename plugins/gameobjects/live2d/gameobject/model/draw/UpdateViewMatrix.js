@@ -8,10 +8,8 @@ var UpdateViewMatrix = function (model, calcMatrix) {
     // Apply rotate
     matrix.rotate(-calcMatrix.rotationNormalized);
     // Apply scale
-    matrix.scaleRelative(
-        calcMatrix.scaleX,
-        calcMatrix.scaleY
-    )
+    // TODO: Fix scale in different canvas size
+    matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY);
     // Apply translate
     matrix.translate(
         projectionMatrix.toLocalX(calcMatrix.getX(0, 0)),

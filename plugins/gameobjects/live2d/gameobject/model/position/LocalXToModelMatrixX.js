@@ -5,7 +5,6 @@ var LocalXYToModelMatrixXY = function (localX, localY, out) {
         out = GlobMatrixXY;
     }
 
-    //debugger
     out.x = (localX - (this._pixelWidth / 2)) / this._pixelsPerUnit;
     out.y = ((this._pixelHeight / 2) - localY) / this._pixelsPerUnit;
 

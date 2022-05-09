@@ -2,6 +2,8 @@ import phaser from 'phaser/src/phaser.js';
 import Live2dPlugin from '../../plugins/live2d-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
+var Scale = 0.25;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -22,9 +24,10 @@ class Demo extends Phaser.Scene {
         var character = this.add.rexLive2d(x, y, 'Haru', {
             // autoPlayIdleMotion: 'TapBody'
         })
+            .setScale(Scale)
 
         // Hit test
-        var print = this.add.text(0, 0, '', { fontSize: 72 });
+        var print = this.add.text(0, 0, '', { fontSize: 80 });
         var anyHit = false;
         character
             .setInteractive()
@@ -51,7 +54,7 @@ class Demo extends Phaser.Scene {
 
 
         // Interactive with touch pointer
-        var printDragXY = this.add.text(0, y + 200, '', { fontSize: 72 });
+        var printDragXY = this.add.text(0, y + 200, '', { fontSize: 80 });
         this.input.on('pointermove', function (pointer) {
             var x = pointer.worldX, y = pointer.worldY;
             character.lookAt(x, y);
@@ -68,10 +71,14 @@ class Demo extends Phaser.Scene {
         this.debuggerGraphics = this.add.graphics()
 
         var gui = new Dat.GUI();
-        gui.add(this.character, 'x', 0, 1920);
-        gui.add(this.character, 'y', 0, 1080);
+        gui.add(this.character, 'x', 0, x * 2);
+        gui.add(this.character, 'y', 0, y * 2);
         gui.add(this.character, 'scale', 0.1, 1);
         gui.add(this.character, 'angle', -180, 180);
+
+
+        var headBounds = character.model.getDrawableBounds('Head')
+        console.log(headBounds.bottom)
     }
 
     update() {
@@ -88,12 +95,12 @@ class Demo extends Phaser.Scene {
             ], true, true)
 
         this.debuggerGraphics
-            .lineStyle(2, 0xff0000)
+            .lineStyle(20, 0xff0000)
             .lineBetween(
                 this.character.x,
                 this.character.y,
-                this.character.x + 100 * Math.cos(this.character.rotation),
-                this.character.y + 100 * Math.sin(this.character.rotation),
+                this.character.x + 300 * Math.cos(this.character.rotation),
+                this.character.y + 300 * Math.sin(this.character.rotation),
             )
     }
 }
@@ -101,8 +108,8 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 2400,
-    height: 4500,
+    width: (2400 * Scale),
+    height: (4500 * Scale),
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
