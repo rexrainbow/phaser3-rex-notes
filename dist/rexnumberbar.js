@@ -9445,10 +9445,8 @@
         // x
         // minSize is still undefined, uses current display width
         gameObject.minWidth = minSize === undefined ? GetDisplayWidth(gameObject) : minSize;
-        gameObject.minHeight = undefined;
       } else {
-        gameObject.minWidth = undefined; // minSize is still undefined, uses current display height
-
+        // minSize is still undefined, uses current display height
         gameObject.minHeight = minSize === undefined ? GetDisplayHeight(gameObject) : minSize;
       }
     }

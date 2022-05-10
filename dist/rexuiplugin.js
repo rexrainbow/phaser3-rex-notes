@@ -25946,15 +25946,11 @@
       if (config.expandWidth) {
         // minWidth is still undefined, uses current display width
         gameObject.minWidth = minWidth === undefined ? GetDisplayWidth(gameObject) : minWidth;
-      } else {
-        gameObject.minWidth = undefined;
       }
 
       if (config.expandHeight) {
         // minHeight is still undefined, uses current display height
         gameObject.minHeight = minHeight === undefined ? GetDisplayHeight(gameObject) : minHeight;
-      } else {
-        gameObject.minHeight = undefined;
       }
     }
 
@@ -28449,10 +28445,8 @@
         // x
         // minSize is still undefined, uses current display width
         gameObject.minWidth = minSize === undefined ? GetDisplayWidth(gameObject) : minSize;
-        gameObject.minHeight = undefined;
       } else {
-        gameObject.minWidth = undefined; // minSize is still undefined, uses current display height
-
+        // minSize is still undefined, uses current display height
         gameObject.minHeight = minSize === undefined ? GetDisplayHeight(gameObject) : minSize;
       }
     }
@@ -36682,7 +36676,10 @@
       } // Inject properties for scrollable interface
 
 
-      InjectProperties$1(table); // Fill config of scrollable
+      InjectProperties$1(table); // Set minWidth/minHeight to 0 if tableWidth/tableHeight is undefined
+
+      table.minWidth = tableWidth === undefined ? 0 : undefined;
+      table.minHeight = tableHeight === undefined ? 0 : undefined; // Fill config of scrollable
 
       config.type = 'rexGridTable';
       config.child = {
