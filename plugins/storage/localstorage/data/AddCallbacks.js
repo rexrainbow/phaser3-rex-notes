@@ -10,6 +10,10 @@ var AddCallbacks = function (dataManager) {
                 return;
             }
             this.setItem(key, value);
+            if (!this.dataKeys.contains(key)) {
+                this.dataKeys.set(key);
+                this.setItem('__keys__', this.dataKeys.entries);
+            }
         }, dataManager)
 
         // Add key
@@ -19,6 +23,7 @@ var AddCallbacks = function (dataManager) {
             }
             this.setItem(key, value);
             this.dataKeys.set(key);
+            this.setItem('__keys__', this.dataKeys.entries);
         }, dataManager)
 
         // Remove key
