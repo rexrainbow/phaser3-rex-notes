@@ -2,8 +2,6 @@ import phaser from 'phaser/src/phaser.js';
 import Live2dPlugin from '../../plugins/live2d-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
-var Scale = 0.25;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -24,7 +22,7 @@ class Demo extends Phaser.Scene {
         var character = this.add.rexLive2d(x, y, 'Haru', {
             // autoPlayIdleMotion: 'TapBody'
         })
-            .setScale(Scale)
+            .setScale(0.2)
 
         // Hit test
         var print = this.add.text(0, 0, '', { fontSize: 80 });
@@ -86,7 +84,7 @@ class Demo extends Phaser.Scene {
             .clear()
 
         this.debuggerGraphics
-            .lineStyle(20, 0xffff00)
+            .lineStyle(5, 0xffff00)
             .strokePoints([
                 this.character.getTopLeft(),
                 this.character.getTopRight(),
@@ -95,12 +93,12 @@ class Demo extends Phaser.Scene {
             ], true, true)
 
         this.debuggerGraphics
-            .lineStyle(20, 0xff0000)
+            .lineStyle(5, 0xff0000)
             .lineBetween(
                 this.character.x,
                 this.character.y,
-                this.character.x + 300 * Math.cos(this.character.rotation),
-                this.character.y + 300 * Math.sin(this.character.rotation),
+                this.character.x + 100 * Math.cos(this.character.rotation),
+                this.character.y + 100 * Math.sin(this.character.rotation),
             )
     }
 }
@@ -108,8 +106,8 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: (2400 * Scale),
-    height: (4500 * Scale),
+    width: 1920,
+    height: 1080,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
