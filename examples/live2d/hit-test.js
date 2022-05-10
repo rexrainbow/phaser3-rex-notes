@@ -20,12 +20,12 @@ class Demo extends Phaser.Scene {
             y = this.game.config.height / 2;
 
         var character = this.add.rexLive2d(x, y, 'Haru', {
-            // autoPlayIdleMotion: 'TapBody'
+            autoPlayIdleMotion: 'TapBody'
         })
             .setScale(0.2)
 
         // Hit test
-        var print = this.add.text(0, 0, '', { fontSize: 80 });
+        var print = this.add.text(0, 0, '', { fontSize: 36 });
         var anyHit = false;
         character
             .setInteractive()
@@ -35,8 +35,8 @@ class Demo extends Phaser.Scene {
             })
             .on('pointerdown-Body', function () {
                 print.text = 'Hit Body\n'
-                // var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
-                // character.setModel(key);
+                var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';
+                character.setModel(key);
                 anyHit = true;
             })
 
@@ -52,7 +52,7 @@ class Demo extends Phaser.Scene {
 
 
         // Interactive with touch pointer
-        var printDragXY = this.add.text(0, y + 200, '', { fontSize: 80 });
+        var printDragXY = this.add.text(0, y + 200, '', { fontSize: 36 });
         this.input.on('pointermove', function (pointer) {
             var x = pointer.worldX, y = pointer.worldY;
             character.lookAt(x, y);

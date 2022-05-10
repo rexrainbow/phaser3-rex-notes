@@ -37,7 +37,7 @@ var CreateCharacter = function (scene, x, y, key) {
     var character = scene.add.rexLive2d(x, y, key, {
         autoPlayIdleMotion: 'Idle'
     })
-        .setScale(0.5)
+        .setScale(0.2)
         .setInteractive()
         .on('pointerdown-Body', function () {
             var key = (character.key === 'Haru') ? 'Hiyori' : 'Haru';

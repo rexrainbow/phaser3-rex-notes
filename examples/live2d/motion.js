@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             y = this.game.config.height / 2;
 
         var character = this.add.rexLive2d(x, y, 'Haru')
-            .setScale(0.6)
+            .setScale(0.25)
             .setRandomExpression()
             //.startMotion('Idle', undefined, 'idle')
             .on('expression.start', function (name) {

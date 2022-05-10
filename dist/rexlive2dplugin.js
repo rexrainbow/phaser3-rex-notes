@@ -243,6 +243,7 @@
       renderer.pipelines.clear();
     }
 
+    camera.addToRenderList(src);
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
     src.model.draw(calcMatrix);
 
@@ -10055,10 +10056,15 @@
     _createClass(CanvasMatrix, [{
       key: "setSize",
       value: function setSize(width, height) {
-        var ratio = height === 0 ? 0 : width / height;
         this.width = width;
         this.height = height;
-        this.scale(1, ratio);
+
+        if (width > height) {
+          this.scale(1.0, width / height);
+        } else {
+          this.scale(height / width, 1.0);
+        }
+
         return this;
       }
     }, {
@@ -10216,13 +10222,7 @@
 
     for (var _i = 0; _i < lipSyncIdCount; _i++) {
       this._lipSyncIds.pushBack(setting.getLipSyncParameterId(_i));
-    } // Setup Layout
-
-
-    var layout = new csmMap();
-    setting.getLayoutMap(layout);
-
-    this._modelMatrix.setupFromLayout(layout); // Load CubismMotion
+    } // Load CubismMotion
 
 
     this._model.saveParameters();
@@ -10267,14 +10267,19 @@
     } // Stop all motions
 
 
-    this._motionManager.stopAllMotions(); // Model size
+    this._motionManager.stopAllMotions(); // Setup canvas size
 
 
-    var canvasinfo = this._model._model.canvasinfo,
-        width = canvasinfo.CanvasWidth,
-        height = canvasinfo.CanvasHeight;
-    this._modelWidth = width / 2;
-    this._modelHeight = height / 2; // Hit test result
+    var canvasinfo = this._model._model.canvasinfo;
+    this._pixelWidth = canvasinfo.CanvasWidth;
+    this._pixelHeight = canvasinfo.CanvasHeight;
+    this._pixelsPerUnit = canvasinfo.PixelsPerUnit; // Setup ModelMatrix
+
+    var layout = new csmMap();
+    setting.getLayoutMap(layout);
+
+    this._modelMatrix.setupFromLayout(layout); // Hit test result
+
 
     var count = this._modelSetting.getHitAreasCount();
 
@@ -10363,7 +10368,7 @@
   };
 
   var UpdateViewMatrix = function UpdateViewMatrix(model, calcMatrix) {
-    var gameObject = model.parent;
+    model.parent;
     var projectionMatrix = model._globalData.projectionMatrix; // Copy from projection matrix
 
     var matrix = model.viewMatrix;
@@ -10371,12 +10376,25 @@
 
     matrix.rotate(-calcMatrix.rotationNormalized); // Apply scale
 
-    matrix.scaleRelative(calcMatrix.scaleX, calcMatrix.scaleY); // Apply translate
+    var canvasWidth = projectionMatrix.width,
+        canvasHeight = projectionMatrix.height;
+    var ratio;
+
+    if (canvasWidth > canvasHeight) {
+      ratio = model._pixelsPerUnit / canvasHeight;
+    } else {
+      ratio = model._pixelsPerUnit / canvasWidth;
+    }
+
+    matrix.scaleRelative(calcMatrix.scaleX * ratio, calcMatrix.scaleY * ratio); // Apply translate
 
     matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0)));
     var modelMatrix = model._modelMatrix; // Offset for origin
-
-    modelMatrix.translate(modelMatrix._width * (0.5 - gameObject.originX), modelMatrix._height * (gameObject.originY - 0.5)); // Apply model matrix
+    // modelMatrix.translate(
+    //     modelMatrix._width * (0.5 - gameObject.originX),
+    //     modelMatrix._height * (gameObject.originY - 0.5)
+    // );
+    // Apply model matrix
 
     matrix.multiplyByMatrix(modelMatrix);
     return matrix;
@@ -10756,12 +10774,10 @@
       out = {};
     } else if (out === true) {
       out = GlobMatrixXY;
-    } // -1(left) ~ 1(right)
+    }
 
-
-    out.x = (localX / this._modelWidth - 0.5) * 2; // 1(top) ~ -1(bottom)
-
-    out.y = (0.5 - localY / this._modelHeight) * 2;
+    out.x = (localX - this._pixelWidth / 2) / this._pixelsPerUnit;
+    out.y = (this._pixelHeight / 2 - localY) / this._pixelsPerUnit;
     return out;
   };
 
@@ -10841,8 +10857,6 @@
       y = xy.y;
     }
 
-    x = this._modelMatrix.invertTransformX(x);
-    y = this._modelMatrix.invertTransformY(y);
     return bounds.contains(x, y);
   };
 
@@ -10890,8 +10904,8 @@
       _this._expressions = new csmMap();
       _this._currentExpressionName = undefined;
       _this._addParamValues = {};
-      _this._modelWidth = 0;
-      _this._modelHeight = 0;
+      _this._pixelWidth = 0;
+      _this._pixelHeight = 0;
       _this._hitTestResult = {}; // this._wavFileHandler = new LAppWavFileHandler();
 
       return _this;
@@ -10935,7 +10949,7 @@
 
     this.key = key;
     this.model.setup(data);
-    this.setSize(this.model._modelWidth, this.model._modelHeight);
+    this.setSize(this.model._pixelWidth, this.model._pixelHeight);
     var autoPlayIdleMotion = GetValue$1(config, 'autoPlayIdleMotion', undefined);
 
     if (autoPlayIdleMotion !== undefined) {

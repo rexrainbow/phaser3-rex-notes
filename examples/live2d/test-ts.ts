@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
 
         var character = new Live2dGameObject(this, x, y, 'Haru', {
             autoPlayIdleMotion: 'TapBody'
-        }).setScale(0.5);
+        }).setScale(0.25);
         this.add.existing(character);
 
     }
