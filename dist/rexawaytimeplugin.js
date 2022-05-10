@@ -246,14 +246,15 @@
     _createClass(AwayTimePlugin, [{
       key: "start",
       value: function start() {
-        this._awayTime = this.add();
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
       }
     }, {
       key: "destroy",
       value: function destroy() {
-        this._awayTime.destroy();
+        if (this._defaultAwayTimer) {
+          this._defaultAwayTimer.destroy();
+        }
 
         _get(_getPrototypeOf(AwayTimePlugin.prototype), "destroy", this).call(this);
       }
@@ -263,22 +264,29 @@
         return new AwayTime(config);
       }
     }, {
+      key: "defaultAwayTimer",
+      get: function get() {
+        if (!this._defaultAwayTimer) {
+          this._defaultAwayTimer = this.add();
+        }
+
+        return this._defaultAwayTimer;
+      }
+    }, {
       key: "awayTime",
       get: function get() {
-        return this._awayTime.awayTime;
+        return this.defaultAwayTimer.awayTime;
       }
     }, {
       key: "setKey",
       value: function setKey(key) {
-        this._awayTime.setKey(key);
-
+        this.defaultAwayTimer.setKey(key);
         return this;
       }
     }, {
       key: "setPeriod",
       value: function setPeriod(time) {
-        this._awayTime.setPeriod(time);
-
+        this.defaultAwayTimer.setPeriod(time);
         return this;
       }
     }]);

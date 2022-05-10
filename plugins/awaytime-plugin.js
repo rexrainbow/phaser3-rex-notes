@@ -6,13 +6,14 @@ class AwayTimePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     start() {
-        this._awayTime = this.add();
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
     }
 
     destroy() {
-        this._awayTime.destroy();
+        if (this._defaultAwayTimer) {
+            this._defaultAwayTimer.destroy();
+        }
         super.destroy();
     }
 
@@ -20,17 +21,24 @@ class AwayTimePlugin extends Phaser.Plugins.BasePlugin {
         return new AwayTime(config);
     }
 
+    get defaultAwayTimer() {
+        if (!this._defaultAwayTimer) {
+            this._defaultAwayTimer = this.add();
+        }
+        return this._defaultAwayTimer;
+    }
+
     get awayTime() {
-        return this._awayTime.awayTime;
+        return this.defaultAwayTimer.awayTime;
     }
 
     setKey(key) {
-        this._awayTime.setKey(key);
+        this.defaultAwayTimer.setKey(key);
         return this;
     }
 
     setPeriod(time) {
-        this._awayTime.setPeriod(time);
+        this.defaultAwayTimer.setPeriod(time);
         return this;
     }
 }

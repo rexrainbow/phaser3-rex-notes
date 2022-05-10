@@ -218,6 +218,23 @@
     return value;
   }
 
+  var Live2dGameObjectBase = /*#__PURE__*/function (_Phaser$GameObjects$G) {
+    _inherits(Live2dGameObjectBase, _Phaser$GameObjects$G);
+
+    var _super = _createSuper(Live2dGameObjectBase);
+
+    function Live2dGameObjectBase() {
+      _classCallCheck(this, Live2dGameObjectBase);
+
+      return _super.apply(this, arguments);
+    }
+
+    return _createClass(Live2dGameObjectBase);
+  }(Phaser.GameObjects.GameObject);
+
+  var Components = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(Live2dGameObjectBase, [Components.AlphaSingle, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Transform, Components.Visible]);
+
   // const Utils = Phaser.Renderer.WebGL.Utils;
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
@@ -10253,8 +10270,11 @@
     this._motionManager.stopAllMotions(); // Model size
 
 
-    this._modelWidth = this._model._model.canvasinfo.CanvasWidth / 2;
-    this._modelHeight = this._model._model.canvasinfo.CanvasHeight / 2; // Hit test result
+    var canvasinfo = this._model._model.canvasinfo,
+        width = canvasinfo.CanvasWidth,
+        height = canvasinfo.CanvasHeight;
+    this._modelWidth = width / 2;
+    this._modelHeight = height / 2; // Hit test result
 
     var count = this._modelSetting.getHitAreasCount();
 
@@ -10736,7 +10756,7 @@
       out = {};
     } else if (out === true) {
       out = GlobMatrixXY;
-    } // -0.5(left) ~ 0.5(right)
+    } // -1(left) ~ 1(right)
 
 
     out.x = (localX / this._modelWidth - 0.5) * 2; // 1(top) ~ -1(bottom)
@@ -10925,60 +10945,6 @@
     return this;
   };
 
-  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
-  var TransformXY = Phaser.Math.TransformXY;
-
-  var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = globOut$1;
-    }
-
-    var csx = camera.scrollX;
-    var csy = camera.scrollY;
-    var px = worldX + csx * gameObject.scrollFactorX - csx;
-    var py = worldY + csy * gameObject.scrollFactorY - csy;
-
-    if (gameObject.parentContainer) {
-      if (tempMatrix === undefined) {
-        tempMatrix = new TransformMatrix();
-      }
-
-      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
-      tempMatrix.applyInverse(px, py, out);
-    } else {
-      TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
-    }
-
-    out.x += gameObject.displayOriginX;
-    out.y += gameObject.displayOriginY;
-    return out;
-  };
-
-  var tempMatrix;
-  var globOut$1 = {};
-
-  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
-
-  var WorldXYToModelXY = function WorldXYToModelXY(worldX, worldY, camera, out) {
-    if (camera === undefined || camera === true || IsPlainObject$3(camera)) {
-      out = camera;
-      camera = this.scene.cameras.main;
-    }
-
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      out = globOut;
-    }
-
-    out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
-    return this.model.localXYToModelMatrixXY(out.x, out.y, out);
-  };
-
-  var globOut = {};
-
   var GetExpressionNames = function GetExpressionNames() {
     return this.model.getExpressionNames();
   };
@@ -11072,11 +11038,11 @@
     return this.model._addParamValues;
   };
 
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var LookAt = function LookAt(x, y, config) {
-    if (IsPlainObject$2(x)) {
+    if (IsPlainObject$3(x)) {
       config = x;
       x = undefined;
       y = undefined;
@@ -11130,23 +11096,13 @@
       return false;
     }
 
-    var hitTestResult = model._hitTestResult;
-
-    if (localX < 0 || localX > model._modelWidth || localY < 0 || localY > model._modelHeight) {
-      // Set all hit test result to false
-      for (var name in hitTestResult) {
-        hitTestResult[name] = false;
-      }
-
-      return false;
-    }
-
     var matrixXY = model.localXYToModelMatrixXY(localX, localY, true);
     var x = matrixXY.x;
     var y = matrixXY.y;
     var modelSetting = model._modelSetting;
     var count = modelSetting.getHitAreasCount();
     var anyHit = false;
+    var hitTestResult = model._hitTestResult;
 
     for (var i = 0; i < count; i++) {
       var hitAreaName = modelSetting.getHitAreaName(i);
@@ -11158,13 +11114,13 @@
     return anyHit;
   };
 
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GameObject = Phaser.GameObjects.GameObject;
 
   var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
     var isInit = !this.input;
 
-    if (IsPlainObject$1(hitArea)) {
+    if (IsPlainObject$2(hitArea)) {
       hitArea.hitArea = HitAreaCallback;
       hitArea.hitAreaCallback = HitAreaCallback;
     } else {
@@ -11206,9 +11162,62 @@
     return this.model.hitTest(hitAreaName, modelXY);
   };
 
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var TransformXY = Phaser.Math.TransformXY;
+
+  var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut$1;
+    }
+
+    var csx = camera.scrollX;
+    var csy = camera.scrollY;
+    var px = worldX + csx * gameObject.scrollFactorX - csx;
+    var py = worldY + csy * gameObject.scrollFactorY - csy;
+
+    if (gameObject.parentContainer) {
+      if (tempMatrix === undefined) {
+        tempMatrix = new TransformMatrix();
+      }
+
+      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+      tempMatrix.applyInverse(px, py, out);
+    } else {
+      TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+    }
+
+    out.x += gameObject.displayOriginX;
+    out.y += gameObject.displayOriginY;
+    return out;
+  };
+
+  var tempMatrix;
+  var globOut$1 = {};
+
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+
+  var WorldXYToModelXY = function WorldXYToModelXY(worldX, worldY, camera, out) {
+    if (camera === undefined || camera === true || IsPlainObject$1(camera)) {
+      out = camera;
+      camera = this.scene.cameras.main;
+    }
+
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+
+    out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
+    return this.model.localXYToModelMatrixXY(out.x, out.y, out);
+  };
+
+  var globOut = {};
+
   var Methods = {
     setModel: SetModel,
-    getModelXY: WorldXYToModelXY,
     getExpressionNames: GetExpressionNames,
     setExpression: SetExpression,
     setRandomExpression: SetRandomExpression,
@@ -11228,44 +11237,28 @@
     setLipSyncValue: SetLipSyncValue,
     setInteractive: SetInteractive,
     getHitTestResult: GetHitTestResult,
-    hitTest: HitTest
+    hitTest: HitTest,
+    getModelXY: WorldXYToModelXY
   };
 
-  var BaseGameObject = /*#__PURE__*/function (_Phaser$GameObjects$G) {
-    _inherits(BaseGameObject, _Phaser$GameObjects$G);
+  var Live2dGameObject = /*#__PURE__*/function (_Live2dGameObjectBase) {
+    _inherits(Live2dGameObject, _Live2dGameObjectBase);
 
-    var _super = _createSuper(BaseGameObject);
-
-    function BaseGameObject() {
-      _classCallCheck(this, BaseGameObject);
-
-      return _super.apply(this, arguments);
-    }
-
-    return _createClass(BaseGameObject);
-  }(Phaser.GameObjects.GameObject);
-
-  var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(BaseGameObject, [Components.AlphaSingle, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Transform, Components.Visible]);
-
-  var Live2dGameObject = /*#__PURE__*/function (_BaseGameObject) {
-    _inherits(Live2dGameObject, _BaseGameObject);
-
-    var _super2 = _createSuper(Live2dGameObject);
+    var _super = _createSuper(Live2dGameObject);
 
     function Live2dGameObject(scene, x, y, key, config) {
       var _this;
 
       _classCallCheck(this, Live2dGameObject);
 
-      _this = _super2.call(this, scene, 'rexLive2d');
+      _this = _super.call(this, scene, 'rexLive2d');
       _this.model = new Model(_assertThisInitialized(_this));
 
       _this.setModel(key, config);
 
-      _this.setPosition(x, y);
-
       _this.setOrigin(0.5);
+
+      _this.setPosition(x, y);
 
       return _this;
     }
@@ -11325,7 +11318,7 @@
     }]);
 
     return Live2dGameObject;
-  }(BaseGameObject);
+  }(Live2dGameObjectBase);
 
   Object.assign(Live2dGameObject.prototype, Render, Methods);
 
@@ -12463,6 +12456,7 @@
 
   var Live2dFileCallback = function Live2dFileCallback(key, url) {
     var loader = this;
+    loader.cacheManager.addCustom('live2d');
 
     if (IsIdle()) {
       if (window.Live2DCubismCore) {
@@ -12519,10 +12513,8 @@
 
       if (!isWebGL) {
         console.error('Live2d can\'t run in CANVAS render mode.');
-        return _possibleConstructorReturn(_this);
-      }
+      } // Register new file type to loader, to load live2d core script file (live2dcubismcore.min.js)
 
-      game.cache.addCustom('live2d'); // Register new file type to loader, to load live2d core script file (live2dcubismcore.min.js)
 
       pluginManager.registerFileType('rexLive2dCoreScript', CoreScriptFileCallback); // Register new file type to loader, to load live2d model assets
 

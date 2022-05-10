@@ -201,6 +201,7 @@
     return new AwaitFile(loader, {
       type: 'imageuri',
       config: {
+        key: key,
         callback: callback
       }
     });
