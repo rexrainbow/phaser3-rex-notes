@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
             print.text += 'Pause, '
         });
 
-        this.game.events.on('pause', function() {
+        this.game.events.on('resume', function() {
             print.text += `Resume, awayTime = ${awaytimer.awayTime / 1000} seconds\n`
         });
     }
