@@ -97,3 +97,26 @@ scene.plugins.get('rexAwayTime').setPeriod(time);
 ```
 
 - `time` : Period of saving current time-stamp.
+
+### Add away timer object
+
+```javascript
+var awayTimer = scene.plugins.get('rexAwayTime').add({
+    key: 'away',
+    period: 1000
+})
+```
+
+#### Get away-time
+
+```javascript
+var awayTime = awayTimer.awayTime;
+```
+
+Will also start timer.
+
+#### Stop timer
+
+```javascript
+awayTimer.stop();
+```

@@ -6656,6 +6656,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-away-timer-object" class="md-nav__link">
+    Add away timer object
+  </a>
+  
+    <nav class="md-nav" aria-label="Add away timer object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-away-time_1" class="md-nav__link">
+    Get away-time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-timer" class="md-nav__link">
+    Stop timer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8063,6 +8090,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-away-timer-object" class="md-nav__link">
+    Add away timer object
+  </a>
+  
+    <nav class="md-nav" aria-label="Add away timer object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-away-time_1" class="md-nav__link">
+    Get away-time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-timer" class="md-nav__link">
+    Stop timer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8169,6 +8223,19 @@
 <ul>
 <li><code>time</code> : Period of saving current time-stamp.</li>
 </ul>
+<h3 id="add-away-timer-object">Add away timer object<a class="headerlink" href="#add-away-timer-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">awayTimer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexAwayTime&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;away&#39;</span><span class="p">,</span>
+    <span class="nx">period</span><span class="o">:</span> <span class="mf">1000</span>
+<span class="p">})</span>
+</code></pre></div>
+<h4 id="get-away-time_1">Get away-time<a class="headerlink" href="#get-away-time_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">awayTime</span> <span class="o">=</span> <span class="nx">awayTimer</span><span class="p">.</span><span class="nx">awayTime</span><span class="p">;</span>
+</code></pre></div>
+<p>Will also start timer.</p>
+<h4 id="stop-timer">Stop timer<a class="headerlink" href="#stop-timer" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">awayTimer</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</code></pre></div>
 
               
             </article>
