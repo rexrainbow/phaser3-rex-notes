@@ -79,14 +79,10 @@ var Add = function (gameObject, childKey, align, padding, expand, minWidth, minH
         if (config.expandWidth) {
             // minWidth is still undefined, uses current display width
             gameObject.minWidth = (minWidth === undefined) ? GetDisplayWidth(gameObject) : minWidth;
-        } else {
-            gameObject.minWidth = undefined;
         }
         if (config.expandHeight) {
             // minHeight is still undefined, uses current display height
             gameObject.minHeight = (minHeight === undefined) ? GetDisplayHeight(gameObject) : minHeight;
-        } else {
-            gameObject.minHeight = undefined;
         }
     }
 
