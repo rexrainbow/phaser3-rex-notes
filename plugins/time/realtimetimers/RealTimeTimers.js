@@ -120,6 +120,9 @@ class RealTimeTimers extends EventEmitter {
         if (typeof (timers) === 'string') {
             timers = this.getTimers(timers);
         }
+        if (!Array.isArray(timers)) {
+            timers = [timers];
+        }
         this._remove(result);
         return result;
     }
