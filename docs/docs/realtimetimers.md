@@ -3,7 +3,7 @@
 Start and counting timer by real-time timestamp.
 
 !!! attention
-    Timers here do not support pause, or timescale features.
+    So not support pause, or timescale features.
 
 - Author: Rex
 - Member of scene, or game object
