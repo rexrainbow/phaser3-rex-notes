@@ -6595,6 +6595,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -8017,6 +8024,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -8133,13 +8147,17 @@
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Start and counting timer by real-time timestamp.</p>
-<div class="admonition attention">
-<p class="admonition-title">Attention</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>So not support pause, or timescale features.</p>
 </div>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene, or game object</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/BaYzMyq">Progress</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/realtimetimers">Sample code</a></p>
@@ -8212,6 +8230,23 @@
 <li><code>name</code> : Any name string of this timer. </li>
 <li><code>period</code> : Will expire after period time, in millisecond.</li>
 <li><code>currentTimestamp</code> : Start this time in current time, optional. Will get current timestamp by default.</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">addTimer</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">day</span><span class="o">:</span> <span class="nx">dayCount</span><span class="p">,</span>        <span class="c1">// d: dayCount,</span>
+    <span class="nx">hour</span><span class="o">:</span> <span class="nx">hourCount</span><span class="p">,</span>      <span class="c1">// h: hourCount,</span>
+    <span class="nx">minute</span><span class="o">:</span> <span class="nx">minuteCount</span><span class="p">,</span>  <span class="c1">// m: minuteCount,</span>
+    <span class="nx">second</span><span class="o">:</span> <span class="nx">secondCount</span><span class="p">,</span>  <span class="c1">// s: secondCount,</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li>Sum period by <ul>
+<li><code>day</code>, or <code>d</code> : Day count</li>
+<li><code>hour</code>, or <code>h</code> : Hour count</li>
+<li><code>minute</code>, or <code>m</code> : Minute count</li>
+<li><code>second</code>, or <code>s</code> : Second count</li>
+</ul>
+</li>
 </ul>
 <h3 id="expire-timers">Expire timers<a class="headerlink" href="#expire-timers" title="Permanent link">&para;</a></h3>
 <ul>

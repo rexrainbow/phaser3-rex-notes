@@ -2,11 +2,15 @@
 
 Start and counting timer by real-time timestamp.
 
-!!! attention
+!!! note
     So not support pause, or timescale features.
 
 - Author: Rex
 - Member of scene, or game object
+
+## Live demos
+
+- [Progress](https://codepen.io/rexrainbow/pen/BaYzMyq)
 
 ## Usage
 
@@ -92,6 +96,23 @@ realTimeTimers.addTimer(name, period);
 - `name` : Any name string of this timer. 
 - `period` : Will expire after period time, in millisecond.
 - `currentTimestamp` : Start this time in current time, optional. Will get current timestamp by default.
+
+or
+
+```javascript
+realTimeTimers.addTimer(name, {
+    day: dayCount,        // d: dayCount,
+    hour: hourCount,      // h: hourCount,
+    minute: minuteCount,  // m: minuteCount,
+    second: secondCount,  // s: secondCount,
+});
+```
+
+- Sum period by 
+    - `day`, or `d` : Day count
+    - `hour`, or `h` : Hour count
+    - `minute`, or `m` : Minute count
+    - `second`, or `s` : Second count
 
 ### Expire timers
 
