@@ -636,7 +636,6 @@
       _classCallCheck(this, RealTimeTimers);
 
       _this = _super.call(this);
-      _this.timers = [];
       var getTimestampCallback = GetValue(config, 'getTimestampCallback');
 
       if (!getTimestampCallback) {
@@ -655,11 +654,7 @@
     _createClass(RealTimeTimers, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var timers = GetValue(o, 'timers', undefined);
-
-        if (timers) {
-          this.timers = timers;
-        }
+        this.timers = GetValue(o, 'timers', []);
       }
     }, {
       key: "toJSON",

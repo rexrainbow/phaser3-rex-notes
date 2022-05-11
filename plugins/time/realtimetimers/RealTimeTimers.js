@@ -7,8 +7,6 @@ class RealTimeTimers extends EventEmitter {
     constructor(config) {
         super();
 
-        this.timers = [];
-
         var getTimestampCallback = GetValue(config, 'getTimestampCallback');
         if (!getTimestampCallback) {
             this.setStartTimestamp(GetValue(config, 'startTimestamp'));
@@ -20,10 +18,7 @@ class RealTimeTimers extends EventEmitter {
     }
 
     resetFromJSON(o) {
-        var timers = GetValue(o, 'timers', undefined);
-        if (timers) {
-            this.timers = timers;
-        }
+        this.timers = GetValue(o, 'timers', []);
     }
 
     toJSON() {
