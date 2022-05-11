@@ -746,10 +746,14 @@
 
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
           var timer = this.timers[i];
-          var progress = (currentTimestamp - timer.start) / timer.period;
-          progress = Math.min(progress, 1);
+          var elapsed = currentTimestamp - timer.start;
+          var period = timer.period;
+          elapsed = Math.min(elapsed, period);
+          var progress = elapsed / period;
           result.push({
             name: timer.name,
+            period: period,
+            elapsed: elapsed,
             progress: progress
           });
         }
