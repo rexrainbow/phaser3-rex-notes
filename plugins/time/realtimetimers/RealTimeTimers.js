@@ -102,6 +102,9 @@ class RealTimeTimers extends EventEmitter {
     }
 
     getTimers(name) {
+        if (name === undefined) {
+            return this.timers.slice();
+        }
         var result = [];
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
             var timer = this.timers[i];
@@ -123,6 +126,12 @@ class RealTimeTimers extends EventEmitter {
         return this;
     }
 
+    clearTimers() {
+        var timers = this.getTimers();
+        timers.reverse();
+        this.removeTimers(timers);
+        return this;
+    }
 
     // Internal
     _add(timer) {

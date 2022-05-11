@@ -754,6 +754,10 @@
     }, {
       key: "getTimers",
       value: function getTimers(name) {
+        if (name === undefined) {
+          return this.timers.slice();
+        }
+
         var result = [];
 
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
@@ -779,6 +783,14 @@
 
         this._remove(result);
 
+        return this;
+      }
+    }, {
+      key: "clearTimers",
+      value: function clearTimers() {
+        var timers = this.getTimers();
+        timers.reverse();
+        this.removeTimers(timers);
         return this;
       } // Internal
 

@@ -345,6 +345,7 @@ nav:
     - Clock: clock.md
     - Life time: lifetime.md
     - Away time: awaytime.md
+    - Real time timers: realtimetimers.md
 - UI:
     - Overview: ui-overview.md
     - Base sizer: ui-basesizer.md

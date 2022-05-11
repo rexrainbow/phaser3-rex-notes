@@ -58,10 +58,11 @@ declare class RealTimeTimers extends EventEmitter {
     popExpiredTimers(currentTimestamp?: number): RealTimeTimers.ITimer[];
     getTimersProgress(currentTimestamp?: number): RealTimeTimers.IProgress[];
 
-    getTimers(name: string): RealTimeTimers.ITimer[];
+    getTimers(name?: string): RealTimeTimers.ITimer[];
 
     removeTimers(name: string): this;
     removeTimers(timer: RealTimeTimers.ITimer): this;
     removeTimers(timers: RealTimeTimers.ITimer[]): this;
 
+    clearTimers(): this;
 }
