@@ -11,7 +11,9 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.RTTimers = this.plugins.get('rexRealTimeTimers').add()
+        this.RTTimers = this.plugins.get('rexRealTimeTimers').add({
+            // startTimestamp: new Date().getTime(), // Or get startTimestamp from server
+        })
             .on('update', function () {                
                 console.log(JSON.stringify(this));
                 // Save to localstorage or server here
@@ -28,7 +30,7 @@ class Demo extends Phaser.Scene {
         var s = '';
         for (var i = 0, cnt = result.length; i < cnt; i++) {
             var timer = result[i];
-            s += `${timer.name} : ${(timer.progress * 100).toFixed(1)}%\n`
+            s += `${timer.name} : ${(timer.progress * 100).toFixed(1)}%\n`;
         }
         this.print.text = s;
     }

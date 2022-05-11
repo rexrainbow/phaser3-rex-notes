@@ -9,7 +9,17 @@ class RealTimeTimer extends EventEmitter {
 
         this.timers = [];
 
-        this.setGetTimestampCallback(GetValue(config, 'getTimestampCallback'));
+        var getTimestampCallback = GetValue(config, 'getTimestampCallback');
+        if (!getTimestampCallback) {
+            var startTimestamp = GetValue(config, 'startTimestamp', undefined);
+            if (startTimestamp === undefined) {
+                startTimestamp = new Date().getTime();
+            }
+            this.setStartTimestamp(startTimestamp);
+            getTimestampCallback = GetCurrentTimestampFromStartCallback.bind(this);
+        }
+        this.setGetTimestampCallback(getTimestampCallback);
+
         this.resetFromJSON(config);
     }
 
@@ -24,6 +34,11 @@ class RealTimeTimer extends EventEmitter {
         return {
             timers: this.timers
         }
+    }
+
+    setStartTimestamp(timestamp) {
+        this.startTimestamp = timestamp - window.performance.now();
+        return this;
     }
 
     setGetTimestampCallback(callback) {
@@ -127,8 +142,8 @@ class RealTimeTimer extends EventEmitter {
 
 }
 
-var DefaultGetCurrentTimestampCallback = function () {
-    return new Date().getTime();
+var GetCurrentTimestampFromStartCallback = function () {
+    return this.startTimestamp + window.performance.now();
 }
 
 export default RealTimeTimer;
