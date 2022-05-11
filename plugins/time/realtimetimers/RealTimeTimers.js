@@ -3,7 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import GetPeriodMS from '../../utils/time/GetPeriodMS.js';
 import RemoveItems from '../../utils/array/Remove.js';
 
-class RealTimeTimer extends EventEmitter {
+class RealTimeTimers extends EventEmitter {
     constructor(config) {
         super();
 
@@ -11,11 +11,7 @@ class RealTimeTimer extends EventEmitter {
 
         var getTimestampCallback = GetValue(config, 'getTimestampCallback');
         if (!getTimestampCallback) {
-            var startTimestamp = GetValue(config, 'startTimestamp', undefined);
-            if (startTimestamp === undefined) {
-                startTimestamp = new Date().getTime();
-            }
-            this.setStartTimestamp(startTimestamp);
+            this.setStartTimestamp(GetValue(config, 'startTimestamp'));
             getTimestampCallback = GetCurrentTimestampFromStartCallback.bind(this);
         }
         this.setGetTimestampCallback(getTimestampCallback);
@@ -37,6 +33,9 @@ class RealTimeTimer extends EventEmitter {
     }
 
     setStartTimestamp(timestamp) {
+        if (timestamp === undefined) {
+            timestamp = new Date().getTime();
+        }
         this.startTimestamp = timestamp - window.performance.now();
         return this;
     }
@@ -49,7 +48,7 @@ class RealTimeTimer extends EventEmitter {
         return this;
     }
 
-    add(name, period, currentTimestamp) {
+    addTimer(name, period, currentTimestamp) {
         if (currentTimestamp === undefined) {
             currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -67,7 +66,7 @@ class RealTimeTimer extends EventEmitter {
         return this;
     }
 
-    getExpired(currentTimestamp) {
+    getExpiredTimers(currentTimestamp) {
         if (currentTimestamp === undefined) {
             currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -82,13 +81,13 @@ class RealTimeTimer extends EventEmitter {
         return result;
     }
 
-    popExpired(currentTimestamp) {
+    popExpiredTimers(currentTimestamp) {
         var result = this.getExpiredTimers(currentTimestamp);
         this._pop(result);
         return result;
     }
 
-    getProgress(currentTimestamp) {
+    getTimersProgress(currentTimestamp) {
         if (currentTimestamp === undefined) {
             currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -106,7 +105,7 @@ class RealTimeTimer extends EventEmitter {
         return result;
     }
 
-    get(name) {
+    getTimer(name) {
         var result = [];
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
             var timer = this.timers[i];
@@ -117,7 +116,7 @@ class RealTimeTimer extends EventEmitter {
         return result;
     }
 
-    remove(name) {
+    removeTimer(name) {
         var result = this.get(name);
         this._pop(result);
         return result;
@@ -146,4 +145,4 @@ var GetCurrentTimestampFromStartCallback = function () {
     return this.startTimestamp + window.performance.now();
 }
 
-export default RealTimeTimer;
+export default RealTimeTimers;

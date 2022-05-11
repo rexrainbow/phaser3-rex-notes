@@ -625,27 +625,34 @@
     return item;
   };
 
-  var RealTimeTimer = /*#__PURE__*/function (_EventEmitter) {
-    _inherits(RealTimeTimer, _EventEmitter);
+  var RealTimeTimers = /*#__PURE__*/function (_EventEmitter) {
+    _inherits(RealTimeTimers, _EventEmitter);
 
-    var _super = _createSuper(RealTimeTimer);
+    var _super = _createSuper(RealTimeTimers);
 
-    function RealTimeTimer(config) {
+    function RealTimeTimers(config) {
       var _this;
 
-      _classCallCheck(this, RealTimeTimer);
+      _classCallCheck(this, RealTimeTimers);
 
       _this = _super.call(this);
       _this.timers = [];
+      var getTimestampCallback = GetValue(config, 'getTimestampCallback');
 
-      _this.setGetTimestampCallback(GetValue(config, 'getTimestampCallback'));
+      if (!getTimestampCallback) {
+        _this.setStartTimestamp(GetValue(config, 'startTimestamp'));
+
+        getTimestampCallback = GetCurrentTimestampFromStartCallback.bind(_assertThisInitialized(_this));
+      }
+
+      _this.setGetTimestampCallback(getTimestampCallback);
 
       _this.resetFromJSON(config);
 
       return _this;
     }
 
-    _createClass(RealTimeTimer, [{
+    _createClass(RealTimeTimers, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         var timers = GetValue(o, 'timers', undefined);
@@ -662,6 +669,16 @@
         };
       }
     }, {
+      key: "setStartTimestamp",
+      value: function setStartTimestamp(timestamp) {
+        if (timestamp === undefined) {
+          timestamp = new Date().getTime();
+        }
+
+        this.startTimestamp = timestamp - window.performance.now();
+        return this;
+      }
+    }, {
       key: "setGetTimestampCallback",
       value: function setGetTimestampCallback(callback) {
         if (callback === undefined) {
@@ -672,8 +689,8 @@
         return this;
       }
     }, {
-      key: "add",
-      value: function add(name, period, currentTimestamp) {
+      key: "addTimer",
+      value: function addTimer(name, period, currentTimestamp) {
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -691,8 +708,8 @@
         return this;
       }
     }, {
-      key: "getExpired",
-      value: function getExpired(currentTimestamp) {
+      key: "getExpiredTimers",
+      value: function getExpiredTimers(currentTimestamp) {
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -710,8 +727,8 @@
         return result;
       }
     }, {
-      key: "popExpired",
-      value: function popExpired(currentTimestamp) {
+      key: "popExpiredTimers",
+      value: function popExpiredTimers(currentTimestamp) {
         var result = this.getExpiredTimers(currentTimestamp);
 
         this._pop(result);
@@ -719,8 +736,8 @@
         return result;
       }
     }, {
-      key: "getProgress",
-      value: function getProgress(currentTimestamp) {
+      key: "getTimersProgress",
+      value: function getTimersProgress(currentTimestamp) {
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -740,8 +757,8 @@
         return result;
       }
     }, {
-      key: "get",
-      value: function get(name) {
+      key: "getTimer",
+      value: function getTimer(name) {
         var result = [];
 
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
@@ -755,8 +772,8 @@
         return result;
       }
     }, {
-      key: "remove",
-      value: function remove(name) {
+      key: "removeTimer",
+      value: function removeTimer(name) {
         var result = this.get(name);
 
         this._pop(result);
@@ -782,11 +799,11 @@
       }
     }]);
 
-    return RealTimeTimer;
+    return RealTimeTimers;
   }(eventemitter3);
 
-  var DefaultGetCurrentTimestampCallback = function DefaultGetCurrentTimestampCallback() {
-    return new Date().getTime();
+  var GetCurrentTimestampFromStartCallback = function GetCurrentTimestampFromStartCallback() {
+    return this.startTimestamp + window.performance.now();
   };
 
   var RealTimeTimersPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
@@ -809,7 +826,7 @@
     }, {
       key: "add",
       value: function add(config) {
-        return new RealTimeTimer(config);
+        return new RealTimeTimers(config);
       }
     }]);
 

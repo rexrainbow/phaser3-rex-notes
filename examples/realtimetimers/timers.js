@@ -18,15 +18,15 @@ class Demo extends Phaser.Scene {
                 console.log(JSON.stringify(this));
                 // Save to localstorage or server here
             })
-            .add('name0', { s: 40 })
-            .add('name1', { m: 2 })
+            .addTimer('name0', { s: 40 })
+            .addTimer('name1', { m: 2 })
 
 
         this.print = this.add.text(0, 0, '');
     }
 
     update() {
-        var result = this.RTTimers.getProgress();
+        var result = this.RTTimers.getTimersProgress();
         var s = '';
         for (var i = 0, cnt = result.length; i < cnt; i++) {
             var timer = result[i];
