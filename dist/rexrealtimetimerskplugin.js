@@ -703,7 +703,7 @@
           expire: currentTimestamp + period
         };
 
-        this._push(timer);
+        this._add(timer);
 
         return this;
       }
@@ -731,7 +731,7 @@
       value: function popExpiredTimers(currentTimestamp) {
         var result = this.getExpiredTimers(currentTimestamp);
 
-        this._pop(result);
+        this._remove(result);
 
         return result;
       }
@@ -757,8 +757,8 @@
         return result;
       }
     }, {
-      key: "getTimer",
-      value: function getTimer(name) {
+      key: "getTimers",
+      value: function getTimers(name) {
         var result = [];
 
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
@@ -772,26 +772,28 @@
         return result;
       }
     }, {
-      key: "removeTimer",
-      value: function removeTimer(name) {
-        var result = this.get(name);
+      key: "removeTimers",
+      value: function removeTimers(timers) {
+        if (typeof timers === 'string') {
+          timers = this.getTimers(timers);
+        }
 
-        this._pop(result);
+        this._remove(result);
 
         return result;
       } // Internal
 
     }, {
-      key: "_push",
-      value: function _push(timer) {
+      key: "_add",
+      value: function _add(timer) {
         this.timers.push(timer);
         this.emit('add', timer, this.timers);
         this.emit('update', this.timers);
       } // Internal
 
     }, {
-      key: "_pop",
-      value: function _pop(timers) {
+      key: "_remove",
+      value: function _remove(timers) {
         Remove(this.timers, timers, function (timer) {
           this.emit('remove', timer, this.timers);
         }, this);

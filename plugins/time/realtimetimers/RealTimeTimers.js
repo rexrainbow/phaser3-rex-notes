@@ -61,7 +61,7 @@ class RealTimeTimers extends EventEmitter {
             period: period,
             expire: currentTimestamp + period
         }
-        this._push(timer);
+        this._add(timer);
 
         return this;
     }
@@ -83,7 +83,7 @@ class RealTimeTimers extends EventEmitter {
 
     popExpiredTimers(currentTimestamp) {
         var result = this.getExpiredTimers(currentTimestamp);
-        this._pop(result);
+        this._remove(result);
         return result;
     }
 
@@ -105,7 +105,7 @@ class RealTimeTimers extends EventEmitter {
         return result;
     }
 
-    getTimer(name) {
+    getTimers(name) {
         var result = [];
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
             var timer = this.timers[i];
@@ -116,15 +116,17 @@ class RealTimeTimers extends EventEmitter {
         return result;
     }
 
-    removeTimer(name) {
-        var result = this.get(name);
-        this._pop(result);
+    removeTimers(timers) {
+        if (typeof (timers) === 'string') {
+            timers = this.getTimers(timers);
+        }
+        this._remove(result);
         return result;
     }
 
 
     // Internal
-    _push(timer) {
+    _add(timer) {
         this.timers.push(timer);
 
         this.emit('add', timer, this.timers);
@@ -132,7 +134,7 @@ class RealTimeTimers extends EventEmitter {
     }
 
     // Internal
-    _pop(timers) {
+    _remove(timers) {
         RemoveItems(this.timers, timers, function (timer) {
             this.emit('remove', timer, this.timers);
         }, this);
