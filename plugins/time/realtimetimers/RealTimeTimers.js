@@ -19,6 +19,7 @@ class RealTimeTimers extends EventEmitter {
 
     resetFromJSON(o) {
         this.timers = GetValue(o, 'timers', []);
+        return this;
     }
 
     toJSON() {
@@ -35,10 +36,7 @@ class RealTimeTimers extends EventEmitter {
         return this;
     }
 
-    setGetTimestampCallback(callback) {
-        if (callback === undefined) {
-            callback = DefaultGetCurrentTimestampCallback;
-        }
+    setGetTimestampCallback(callback) {        
         this.getCurrentTimestampCallback = callback;
         return this;
     }
@@ -53,8 +51,7 @@ class RealTimeTimers extends EventEmitter {
         var timer = {
             name: name,
             start: currentTimestamp,
-            period: period,
-            expire: currentTimestamp + period
+            period: period
         }
         this._add(timer);
 
@@ -69,7 +66,7 @@ class RealTimeTimers extends EventEmitter {
         var result = [];
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
             var timer = this.timers[i];
-            if (currentTimestamp >= timer.expire) {
+            if (currentTimestamp >= (timer.start + timer.period)) {
                 result.push(timer);
             }
         }
@@ -123,7 +120,7 @@ class RealTimeTimers extends EventEmitter {
             timers = [timers];
         }
         this._remove(result);
-        return result;
+        return this;
     }
 
 
