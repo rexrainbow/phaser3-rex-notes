@@ -130,6 +130,7 @@ module.exports = {
     'clockplugin': './plugins/clock-plugin.js',
     'lifetimeplugin': './plugins/lifetime-plugin.js',
     'awaytimeplugin': './plugins/awaytime-plugin.js',
+    'realtimetimerskplugin': './plugins/realtimetimers-plugin.js',
 
     // data structure
     'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
