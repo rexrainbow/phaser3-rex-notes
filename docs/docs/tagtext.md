@@ -82,8 +82,8 @@ var tags = {
       color: 'blue'
     }
 };
-var txt = scene.add.rexTagText(x, y, '<style="tag0">h</style>ello', {tags:tags});
-// var txt = scene.add.rexTagText(x, y, '<style="tag0">h</style>ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00', tags:tags });
+var txt = scene.add.rexTagText(x, y, '<class="tag0">h</class>ello', {tags:tags});
+// var txt = scene.add.rexTagText(x, y, '<class="tag0">h</class>ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00', tags:tags });
 ```
 
 - `tags` : `{tagName:tag}`, see [Properties of tag](tagtext.md#properties-of-tag).
@@ -262,7 +262,7 @@ var txt = scene.make.rexTagText({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var txt = new MyText(scene, x, y, '<style="tag0">h</style>ello', {tags:tags});
+    var txt = new MyText(scene, x, y, '<class="tag0">h</class>ello', {tags:tags});
     ```
 
 ### Add tag
@@ -334,8 +334,8 @@ var txt = scene.make.rexTagText({
     ```
 - Set
     ```javascript
-    txt.setText('<style="name1">wor</style>ld');
-    // txt.text = '<style="name1">wor</style>ld';
+    txt.setText('<class="name1">wor</class>ld');
+    // txt.text = '<class="name1">wor</class>ld';
     ```
 
 ### Set style

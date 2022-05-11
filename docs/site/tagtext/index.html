@@ -8439,8 +8439,8 @@
       <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span>
     <span class="p">}</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
-<span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
+<span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;class=&quot;tag0&quot;&gt;h&lt;/class&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+<span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;class=&quot;tag0&quot;&gt;h&lt;/class&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
 </code></pre></div>
 <ul>
 <li><code>tags</code> : <code>{tagName:tag}</code>, see <a href="./#properties-of-tag">Properties of tag</a>.</li>
@@ -8615,7 +8615,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;class=&quot;tag0&quot;&gt;h&lt;/class&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-tag">Add tag<a class="headerlink" href="#add-tag" title="Permanent link">&para;</a></h3>
@@ -8685,8 +8685,8 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">plainText</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getPlainText</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;&lt;style=&quot;name1&quot;&gt;wor&lt;/style&gt;ld&#39;</span><span class="p">);</span>
-<span class="c1">// txt.text = &#39;&lt;style=&quot;name1&quot;&gt;wor&lt;/style&gt;ld&#39;;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;&lt;class=&quot;name1&quot;&gt;wor&lt;/class&gt;ld&#39;</span><span class="p">);</span>
+<span class="c1">// txt.text = &#39;&lt;class=&quot;name1&quot;&gt;wor&lt;/class&gt;ld&#39;;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="set-style">Set style<a class="headerlink" href="#set-style" title="Permanent link">&para;</a></h3>
