@@ -36,7 +36,7 @@ class RealTimeTimers extends EventEmitter {
         return this;
     }
 
-    setGetTimestampCallback(callback) {        
+    setGetTimestampCallback(callback) {
         this.getCurrentTimestampCallback = callback;
         return this;
     }
@@ -132,6 +132,14 @@ class RealTimeTimers extends EventEmitter {
         timers.reverse();
         this.removeTimers(timers);
         return this;
+    }
+
+    get length() {
+        return this.timers.length;
+    }
+
+    get lastTimer() {
+        return this.timers[this.timers.length - 1];
     }
 
     // Internal

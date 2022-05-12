@@ -156,6 +156,10 @@ realTimeTimers.addTimer(name, {
 
 ### Get timers
 
+- Get last added timer
+    ```javascript
+    var timer = realtimetimers.lastTimer;
+    ```
 - Get all timers
     ```javascript
     var timers = realtimetimers.getTimers();
@@ -163,6 +167,10 @@ realTimeTimers.addTimer(name, {
 - Get timers by name.
     ```javascript
     var timers = realtimetimers.getTimers(name);
+    ```
+- Amount of total timers
+    ```javascript
+    var amount = realtimetimers.length;
     ```
 
 ### Remove timers
