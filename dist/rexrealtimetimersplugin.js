@@ -781,7 +781,7 @@
           timers = [timers];
         }
 
-        this._remove(result);
+        this._remove(timers);
 
         return this;
       }

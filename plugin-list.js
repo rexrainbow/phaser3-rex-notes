@@ -77,6 +77,7 @@ module.exports = {
     'rotatetoplugin': './plugins/rotateto-plugin.js',
     'flashplugin': './plugins/flash-plugin.js',
     'tintrgbplugin': './plugins/tintrgb-plugin.js',
+    'polarcoordinateplugin': './plugins/polarcoordinate-plugin.js',
     'shakepositionplugin': './plugins/shakeposition-plugin.js',
     'interceptionplugin': './plugins/interception-plugin.js',
     'anchorplugin': './plugins/anchor-plugin.js',

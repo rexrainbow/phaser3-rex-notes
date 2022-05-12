@@ -102,6 +102,7 @@
 1. [Perspective/ImageCarousel](perspective-imagecarousel.md): Display list of images.
 1. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
 1. [Perspective/Sprite](perspective-sprite.md): Play animation on perspective-image..
+1. [polar-coordinate](polar-coordinate.md): Attach `polarOX`, `polarOY`, `polarRotation`, `polarAngle`, and `polarRadius` properties to a game object.
 1. [Pop up](popup.md): Scale up game object.
 1. [Quad/Image](quad-image.md): Image with 4 or 9 vertex control points.
 1. [Quad/Render texture](quad-rendertexture.md): Render texture with 4 or 9 vertex control points.

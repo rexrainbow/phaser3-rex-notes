@@ -1,90 +1,90 @@
 import { GetR, GetG, GetB } from '../../utils/color/GetRGB.js';
 import { SetR, SetG, SetB, SetRGB } from '../../utils/color/SetColor.js';
 
-var AddTintRGBProperties = function (gameObject, colorRGB) {
+var AddTintRGBProperties = function (gameObject, tintRGB) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('tintR')) {
         return gameObject;
     }
 
-    if (colorRGB === undefined) {
-        colorRGB = 0xffffff;
+    if (tintRGB === undefined) {
+        tintRGB = 0xffffff;
     }
+
+    var tintR = GetR(tintRGB);
+    var tintG = GetG(tintRGB);
+    var tintB = GetB(tintRGB);
 
     // Override tint property
     Object.defineProperty(gameObject, 'tint', {
         get: function () {
-            return gameObject._tintRGB;
+            return tintRGB;
         },
         set: function (value) {
             value = Math.floor(value) & 0xffffff;
             gameObject.setTint(value);
-            if (gameObject._tintRGB !== value) {
-                gameObject._tintRGB = value;
-                gameObject._tintR = GetR(value);
-                gameObject._tintG = GetG(value);
-                gameObject._tintB = GetB(value);
-                // gameObject.emit('_tintchange', value, gameObject._tintR, gameObject._tintG, gameObject._tintB);
+            if (tintRGB !== value) {
+                tintRGB = value;
+                tintR = GetR(tintRGB);
+                tintG = GetG(tintRGB);
+                tintB = GetB(tintRGB);
+                // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
             }
         }
     });
 
     Object.defineProperty(gameObject, 'tintR', {
         get: function () {
-            return gameObject._tintR;
+            return tintR;
         },
         set: function (value) {
             value = Math.floor(value) & 0xff;
-            if (gameObject._tintR !== value) {
-                gameObject._tintR = value;
-                gameObject._tintRGB = SetR(gameObject._tintRGB, value);
-                gameObject.tint = gameObject._tintRGB;
+            if (tintR !== value) {
+                tintR = value;
+                gameObject.tint = SetR(tintRGB, value);
             }
         },
     })
     Object.defineProperty(gameObject, 'tintG', {
         get: function () {
-            return gameObject._tintG;
+            return tintG;
         },
         set: function (value) {
             value = Math.floor(value) & 0xff;
-            if (gameObject._tintG !== value) {
-                gameObject._tintG = value;
-                gameObject._tintRGB = SetG(gameObject._tintRGB, value);
-                gameObject.tint = gameObject._tintRGB;
+            if (tintG !== value) {
+                tintG = value;
+                gameObject.tint = SetG(tintRGB, value);
             }
         },
     })
     Object.defineProperty(gameObject, 'tintB', {
         get: function () {
-            return gameObject._tintB;
+            return tintB;
         },
         set: function (value) {
             value = Math.floor(value) & 0xff;
-            if (gameObject._tintB !== value) {
-                gameObject._tintB = value;
-                gameObject._tintRGB = SetB(gameObject._tintRGB, value);
-                gameObject.tint = gameObject._tintRGB;
+            if (tintB !== value) {
+                tintB = value;
+                gameObject.tint = SetB(tintRGB, value);
             }
         },
     })
     Object.defineProperty(gameObject, 'tintGray', {
         get: function () {
-            return Math.floor((gameObject._tintR + gameObject._tintG + gameObject._tintB) / 3);
+            return Math.floor((tintR + tintG + tintB) / 3);
         },
         set: function (value) {
             value = Math.floor(value) & 0xff;
-            if ((gameObject._tintR !== value) || (gameObject._tintG !== value) || (gameObject._tintB !== value)) {
-                gameObject._tintR = value;
-                gameObject._tintG = value;
-                gameObject._tintB = value;
-                gameObject._tintRGB = SetRGB(gameObject._tintRGB, value, value, value);
-                gameObject.tint = gameObject._tintRGB;
+            if ((tintR !== value) || (tintG !== value) || (tintB !== value)) {
+                tintR = value;
+                tintG = value;
+                tintB = value;
+                gameObject.tint = SetRGB(tintRGB, value, value, value);
             }
         },
     })
 
-    gameObject.tint = colorRGB;
+    gameObject.tint = tintRGB;
 
     return gameObject;
 }
