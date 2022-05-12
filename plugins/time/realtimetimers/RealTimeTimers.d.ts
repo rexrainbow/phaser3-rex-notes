@@ -31,7 +31,8 @@ declare namespace RealTimeTimers {
         name: string,
         period: number,
         elapsed: number,
-        progress: number
+        progress: number,
+        timer: ITimer
     }
 }
 

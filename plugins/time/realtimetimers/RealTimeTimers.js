@@ -96,6 +96,7 @@ class RealTimeTimers extends EventEmitter {
                 period: period,
                 elapsed: elapsed,
                 progress: progress,
+                timer: timer
             })
         }
         return result;

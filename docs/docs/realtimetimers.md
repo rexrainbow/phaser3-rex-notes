@@ -146,8 +146,13 @@ realTimeTimers.addTimer(name, {
             period: time,
             elapsed: time,
             progress: t    // elapsed/period
+            timer: timerObject
         }
         ```
+        - `timer` : Timer object, can remove this timer object by 
+            ```javascript
+            realTimeTimers.removeTimers(timer);
+            ```
 
 ### Get timers
 
