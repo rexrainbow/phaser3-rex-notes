@@ -4,7 +4,7 @@ export default RealTimeTimers;
 
 declare namespace RealTimeTimers {
     interface ITimer {
-        name: string,
+        name: string | number,
         start: number,
         period: number,
         data?: any
@@ -29,7 +29,7 @@ declare namespace RealTimeTimers {
     }
 
     interface IProgress {
-        name: string,
+        name: string | number,
         period: number,
         elapsed: number,
         progress: number,
@@ -51,7 +51,7 @@ declare class RealTimeTimers extends EventEmitter {
     setGetTimestampCallback(callback?: RealTimeTimers.GetTimestampCallbackType): this;
 
     addTimer(
-        name: string,
+        name: string | number,
         period: number | RealTimeTimers.IPeriod,
         data?: any,
         currentTimestamp?: number
@@ -61,11 +61,12 @@ declare class RealTimeTimers extends EventEmitter {
     popExpiredTimers(currentTimestamp?: number): RealTimeTimers.ITimer[];
     getTimersProgress(currentTimestamp?: number): RealTimeTimers.IProgress[];
 
-    getTimers(name?: string): RealTimeTimers.ITimer[];
+    getTimers(): RealTimeTimers.ITimer[];
+    getTimers(name: string | number): RealTimeTimers.ITimer[];
     readonly lastTimer: RealTimeTimers.ITimer;
     readonly length: number;
 
-    removeTimers(name: string): this;
+    removeTimers(name: string | number,): this;
     removeTimers(timer: RealTimeTimers.ITimer): this;
     removeTimers(timers: RealTimeTimers.ITimer[]): this;
 

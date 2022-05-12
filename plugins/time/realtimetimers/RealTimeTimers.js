@@ -108,8 +108,10 @@ class RealTimeTimers extends EventEmitter {
 
     getTimers(name) {
         if (name === undefined) {
+            // Get all timers
             return this.timers.slice();
         }
+
         var result = [];
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
             var timer = this.timers[i];
@@ -121,7 +123,7 @@ class RealTimeTimers extends EventEmitter {
     }
 
     removeTimers(timers) {
-        if (typeof (timers) === 'string') {
+        if (typeof (timers) !== 'object') { // string or number
             timers = this.getTimers(timers);
         }
         if (!Array.isArray(timers)) {
