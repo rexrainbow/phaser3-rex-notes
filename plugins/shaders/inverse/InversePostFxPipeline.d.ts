@@ -1,6 +1,15 @@
 // import * as Phaser from 'phaser';
+export default InversePostFxPipeline;
 
-export default class InversePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+declare namespace InversePostFxPipeline {
+    interface IConfig {
+        intensity?: number,
+    }
+}
+
+declare class InversePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    resetFromJSON(o?: InversePostFxPipeline.IConfig): this;
+
     setIntensity(value: number): this;
     intensity: number;
 }

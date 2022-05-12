@@ -1,6 +1,19 @@
 // import * as Phaser from 'phaser';
 
-export default class KawaseBlurFilterPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+export default KawaseBlurFilterPostFxPipeline;
+
+declare namespace KawaseBlurFilterPostFxPipeline {
+    interface IConfig {
+        blur?: number,
+        quality?: number,
+        pixelWidth?: number,
+        pixelHeight?: number
+    }
+}
+
+declare class KawaseBlurFilterPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    resetFromJSON(o?: KawaseBlurFilterPostFxPipeline.IConfig): this;
+
     setBlur(value: number): this;
     blur: number;
 

@@ -1,6 +1,19 @@
 // import * as Phaser from 'phaser';
 
-export default class GlowFilterPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+export default GlowFilterPostFxPipeline;
+
+declare namespace GlowFilterPostFxPipeline {
+    interface IConfig {
+        outerStrength?: number,
+        innerStrength?: number,
+        glowColor?: number,
+        knockout?: boolean,
+    }
+}
+
+declare class GlowFilterPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    resetFromJSON(o?: GlowFilterPostFxPipeline.IConfig): this;
+
     setOuterStrength(value: number): this;
     outerStrength: number;
 

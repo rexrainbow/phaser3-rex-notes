@@ -5,14 +5,9 @@ export default GlowFilterPipelinePlugin;
 
 declare namespace GlowFilterPipelinePlugin {
 
-    interface IConfig {
+    interface IConfig extends GlowFilterPostFxPipeline.IConfig {
         quality?: number,
         distance?: number,
-
-        outerStrength?: number,
-        innerStrength?: number,
-        glowColor?: number,
-        knockout?: boolean,
 
         name?: string,
     }

@@ -5,19 +5,7 @@ export default BarrelPipelinePlugin;
 
 declare namespace BarrelPipelinePlugin {
 
-    interface IConfig {
-        shrink?: boolean,
-
-        center?: {
-            x?: number, y?: number
-        },
-
-        radius?: number,
-
-        power?: number,
-
-        intensity?: number,
-
+    interface IConfig extends BarrelPostFxPipeline.IConfig {
         name?: string
     }
 

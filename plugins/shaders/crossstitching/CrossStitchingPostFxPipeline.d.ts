@@ -1,6 +1,17 @@
 // import * as Phaser from 'phaser';
+export default CrossStitchingPostFxPipeline;
 
-export default class CrossStitchingPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+declare namespace CrossStitchingPostFxPipeline {
+    interface IConfig {
+        stitchingWidth?: number,
+        stitchingHeight?: number,
+        brightness?: number,
+    }
+}
+
+declare class CrossStitchingPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    resetFromJSON(o?: CrossStitchingPostFxPipeline.IConfig): this;
+
     setStitchingWidth(value: number): this;
     stitchingWidth: number;
     setStitchingHeight(value: number): this;

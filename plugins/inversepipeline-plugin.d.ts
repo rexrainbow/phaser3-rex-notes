@@ -6,9 +6,7 @@ export default InversePipelinePlugin;
 
 declare namespace InversePipelinePlugin {
 
-    interface IConfig {
-        intensity?: number,
-
+    interface IConfig extends InversePostFxPipeline.IConfig {
         name?: string,
     }
 

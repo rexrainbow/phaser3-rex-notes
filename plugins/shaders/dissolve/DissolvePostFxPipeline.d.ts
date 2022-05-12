@@ -3,12 +3,29 @@
 export default DissolvePostFxPipeline;
 
 declare namespace DissolvePostFxPipeline {
+    interface IConfig {
+        toTexture?: string,
+        toFrame?: string,
+        resizeMode?: DissolvePostFxPipeline.ResizeModeType
+
+        noiseX?: number,
+        noiseY?: number,
+        noiseZ?: number,
+        fromEdgeStart?: number,
+        fromEdgeWidth?: number,
+        toEdgeStart?: number,
+        toEdgeWidth?: number,
+
+        progress?: number,
+    }
 
     type ResizeModeType = 0 | 1 | 2 | 'stretch' | 'contain' | 'cover';
 
 }
 
 declare class DissolvePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    resetFromJSON(o?: DissolvePostFxPipeline.IConfig): this;
+
     setProgress(value: number): this;
     progress: number;
 

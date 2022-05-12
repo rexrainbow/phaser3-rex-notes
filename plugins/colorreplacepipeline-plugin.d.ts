@@ -6,11 +6,7 @@ export default ColorReplacePipelinePlugin;
 
 declare namespace ColorReplacePipelinePlugin {
 
-    interface IConfig {
-        originalColor?: number,
-        newColor?: number,
-        epsilon?: number,
-
+    interface IConfig extends ColorReplacePostFxPipeline.IConfig {
         name?: string,
     }
 

@@ -5,21 +5,7 @@ export default DissolvePipelinePlugin;
 
 declare namespace DissolvePipelinePlugin {
 
-    interface IConfig {
-        toTexture?: string,
-        toFrame?: string,
-        resizeMode?: DissolvePostFxPipeline.ResizeModeType
-
-        noiseX?: number,
-        noiseY?: number,
-        noiseZ?: number,
-        fromEdgeStart?: number,
-        fromEdgeWidth?: number,
-        toEdgeStart?: number,
-        toEdgeWidth?: number,
-
-        progress?: number,
-
+    interface IConfig extends DissolvePostFxPipeline.IConfig {
         name?: string,
     }
 

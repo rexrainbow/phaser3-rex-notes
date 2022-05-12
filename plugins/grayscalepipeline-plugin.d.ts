@@ -5,9 +5,7 @@ export default GrayScalePipelinePlugin;
 
 declare namespace GrayScalePipelinePlugin {
 
-    interface IConfig {
-        intensity?: number,
-
+    interface IConfig extends GrayScalePostFxPipeline.IConfig {
         name?: string,
     }
 

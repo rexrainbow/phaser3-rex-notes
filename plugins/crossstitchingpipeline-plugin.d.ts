@@ -6,11 +6,7 @@ export default CrossStitchingPipelinePlugin;
 
 declare namespace CrossStitchingPipelinePlugin {
 
-    interface IConfig {
-        stitchingWidth?: number,
-        stitchingHeight?: number,
-        brightness?: number,
-
+    interface IConfig extends CrossStitchingPostFxPipeline.IConfig {
         name?: string,
     }
 

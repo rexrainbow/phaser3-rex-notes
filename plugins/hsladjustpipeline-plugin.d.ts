@@ -6,9 +6,7 @@ export default HslAdjustPipelinePlugin;
 
 declare namespace HslAdjustPipelinePlugin {
 
-    interface IConfig {
-        intensity?: number,
-
+    interface IConfig extends HslAdjustPostFxPipeline.IConfig {
         name?: string,
     }
 

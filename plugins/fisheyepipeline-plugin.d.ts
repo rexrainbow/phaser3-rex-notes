@@ -5,17 +5,7 @@ export default FishEyePipelinePlugin;
 
 declare namespace FishEyePipelinePlugin {
 
-    interface IConfig {
-        mode?: 0 | 1 | 'asin' | 'sin',
-
-        center?: {
-            x?: number, y?: number
-        },
-
-        radius?: number,
-
-        intensity?: number,
-
+    interface IConfig extends FishEyePostFxPipeline.IConfig {
         name?: string
     }
 
