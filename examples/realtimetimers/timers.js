@@ -14,12 +14,15 @@ class Demo extends Phaser.Scene {
         this.RTTimers = this.plugins.get('rexRealTimeTimers').add({
             // startTimestamp: new Date().getTime(), // Or get startTimestamp from server
         })
-            .on('update', function () {                
+            .on('update', function () {
                 console.log(JSON.stringify(this));
                 // Save to localstorage or server here
             })
             .addTimer('name0', { s: 40 })
             .addTimer('name1', { m: 2 })
+            .addTimer('name3', { d: 1 })
+
+        this.RTTimers.removeTimers('name3');
 
 
         this.print = this.add.text(0, 0, '');
