@@ -60,6 +60,8 @@ declare class RealTimeTimers extends EventEmitter {
     getTimersProgress(currentTimestamp?: number): RealTimeTimers.IProgress[];
 
     getTimers(name?: string): RealTimeTimers.ITimer[];
+    readonly lastTimer: RealTimeTimers.ITimer;
+    readonly length: number;
 
     removeTimers(name: string): this;
     removeTimers(timer: RealTimeTimers.ITimer): this;
