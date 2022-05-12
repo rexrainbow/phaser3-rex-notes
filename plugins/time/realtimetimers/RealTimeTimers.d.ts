@@ -68,4 +68,6 @@ declare class RealTimeTimers extends EventEmitter {
     removeTimers(timers: RealTimeTimers.ITimer[]): this;
 
     clearTimers(): this;
+
+    emitUpdateEvent(): this;
 }

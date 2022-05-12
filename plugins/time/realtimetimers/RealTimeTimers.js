@@ -142,12 +142,17 @@ class RealTimeTimers extends EventEmitter {
         return this.timers[this.timers.length - 1];
     }
 
+    emitUpdateEvent() {
+        this.emit('update', this.timers);
+        return this;
+    }
+
     // Internal
     _add(timer) {
         this.timers.push(timer);
 
         this.emit('add', timer, this.timers);
-        this.emit('update', this.timers);
+        this.emitUpdateEvent();
     }
 
     // Internal
@@ -155,7 +160,7 @@ class RealTimeTimers extends EventEmitter {
         RemoveItems(this.timers, timers, function (timer) {
             this.emit('remove', timer, this.timers);
         }, this);
-        this.emit('update', this.timers);
+        this.emitUpdateEvent();
     }
 
 }
