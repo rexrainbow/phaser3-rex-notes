@@ -17,7 +17,14 @@ class Demo extends Phaser.Scene {
         })
 
         var print = this.add.text(0, 0, '');
-        print.text = `a=${data.get('a')}`;
+        print.text = `\
+a=${data.get('a')}
+c=${data.get('c')}
+`;
+        // data.get('c') = undefined at first run
+        // data.get('c') = 30        after first run
+
+        data.set('c', 30);
 
         data.events
             .on('changedata-a', function (parent, value, previousValue) {
