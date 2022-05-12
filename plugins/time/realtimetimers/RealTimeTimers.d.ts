@@ -7,7 +7,7 @@ declare namespace RealTimeTimers {
         name: string,
         start: number,
         period: number,
-        data: any
+        data?: any
     }
 
     interface IState {

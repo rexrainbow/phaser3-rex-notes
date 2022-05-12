@@ -54,6 +54,9 @@ class RealTimeTimers extends EventEmitter {
             period: period,
             data: data
         }
+        if (data !== undefined) {
+            timer.data = data;
+        }
         this._add(timer);
 
         return this;
