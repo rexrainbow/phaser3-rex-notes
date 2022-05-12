@@ -90,11 +90,13 @@ var realTimeTimers = scene.plugins.get('rexRealTimeTimers').add({
 
 ```javascript
 realTimeTimers.addTimer(name, period);
-// realTimeTimers.addTimer(name, period, currentTimestamp);
+// realTimeTimers.addTimer(name, period, data);
+// realTimeTimers.addTimer(name, period, data, currentTimestamp);
 ```
 
 - `name` : Any name string of this timer. 
 - `period` : Will expire after period time, in millisecond.
+- `data` : Any kind of custom data.
 - `currentTimestamp` : Start this time in current time, optional. Will get current timestamp by default.
 
 or
@@ -105,7 +107,7 @@ realTimeTimers.addTimer(name, {
     hour: hourCount,      // h: hourCount,
     minute: minuteCount,  // m: minuteCount,
     second: secondCount,  // s: secondCount,
-});
+}, data, currentTimestamp);
 ```
 
 - Sum period by 

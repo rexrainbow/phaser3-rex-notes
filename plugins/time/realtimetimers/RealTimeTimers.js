@@ -41,7 +41,7 @@ class RealTimeTimers extends EventEmitter {
         return this;
     }
 
-    addTimer(name, period, currentTimestamp) {
+    addTimer(name, period, data, currentTimestamp) {
         if (currentTimestamp === undefined) {
             currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -51,7 +51,8 @@ class RealTimeTimers extends EventEmitter {
         var timer = {
             name: name,
             start: currentTimestamp,
-            period: period
+            period: period,
+            data: data
         }
         this._add(timer);
 

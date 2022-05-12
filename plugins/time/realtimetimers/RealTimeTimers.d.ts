@@ -6,7 +6,8 @@ declare namespace RealTimeTimers {
     interface ITimer {
         name: string,
         start: number,
-        period: number
+        period: number,
+        data: any
     }
 
     interface IState {
@@ -52,6 +53,7 @@ declare class RealTimeTimers extends EventEmitter {
     addTimer(
         name: string,
         period: number | RealTimeTimers.IPeriod,
+        data?: any,
         currentTimestamp?: number
     ): this;
 
