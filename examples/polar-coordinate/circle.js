@@ -17,7 +17,6 @@ class Demo extends Phaser.Scene {
         this.tweens.add({
             targets: sprite,
             polarAngle: 360,
-            polarRadius: 250,
             duration: 3000,
             repeat: -1
         })
