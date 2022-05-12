@@ -7,8 +7,8 @@ Attach `polarOX`, `polarOY`, `polarRotation`, `polarAngle`, and `polarRadius` pr
 
 ## Live demos
 
-- [Fade](https://codepen.io/rexrainbow/pen/OJpRvwQ)
-- [Yellow to green](https://codepen.io/rexrainbow/pen/abJGNOp)
+- [Circle](https://codepen.io/rexrainbow/pen/yLvaNVL)
+- [Spiral](https://codepen.io/rexrainbow/pen/KKQgpNO?)
 
 ## Usage
 

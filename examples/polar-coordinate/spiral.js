@@ -1,8 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import PolarCoordinatePlugin from '../../plugins/polarcoordinate-plugin';
 
-const Between = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -21,7 +19,7 @@ class Demo extends Phaser.Scene {
             polarAngle: 360 * 3,
             polarRadius: 250,
             duration: 3000
-        })        
+        })
     }
 }
 
