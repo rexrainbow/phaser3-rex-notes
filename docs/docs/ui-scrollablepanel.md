@@ -72,7 +72,7 @@ A container with a panel, slider, and scroller.
 - Add scrollable-panel object
     ```javascript    
     var panel = new ScrollablePanel(scene, config);
-    sscene.add.existing(panel);
+    scene.add.existing(panel);
     ```
 
 ### Add scroll-able panel object

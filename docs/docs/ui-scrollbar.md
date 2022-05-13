@@ -74,7 +74,7 @@ A container with slider, two buttons, and background.
 - Add scroll bar object
   ```javascript
   var sizer = new ScrollBar(scene, config);
-  sscene.add.existing(sizer);
+  scene.add.existing(sizer);
   ```
 
 ### Add scroll bar object

@@ -68,7 +68,7 @@ A container with a group of fix-width buttons.
 - Add fix-Width buttons object
     ```javascript
     var buttons = new FixWidthButtons(scene, config);
-    sscene.add.existing(buttons);
+    scene.add.existing(buttons);
     ```
 
 ### Add Buttons object

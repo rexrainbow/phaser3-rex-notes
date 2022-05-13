@@ -73,7 +73,7 @@ Stretchable image.
 - Add nine-patch object
     ```javascript    
     var ninePatch = new NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config);
-    sscene.add.existing(ninePatch);
+    scene.add.existing(ninePatch);
     ```
 
 ### Create instance

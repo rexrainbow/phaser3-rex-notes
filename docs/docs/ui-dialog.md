@@ -76,7 +76,7 @@ A container with a title, content, buttons and background.
 - Add dialog object
     ```javascript    
     var dialog = new Dialog(scene, config);
-    sscene.add.existing(dialog);
+    scene.add.existing(dialog);
     ```
 
 ### Add dialog object

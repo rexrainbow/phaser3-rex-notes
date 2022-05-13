@@ -77,7 +77,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.
 - Add chart object
     ```javascript    
     var chart = new Chart(scene, config);
-    sscene.add.existing(chart);
+    scene.add.existing(chart);
     ```
 
 ### Add chart object

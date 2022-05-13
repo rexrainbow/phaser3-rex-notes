@@ -99,7 +99,7 @@ The example Live2D models, Haru and Hiyori, are redistributed under Live2D's [Fr
 - Add live2d object
     ```javascript
     var live2dGameObject = new Live2dGameObject(scene, x, y, key, config);
-    sscene.add.existing(live2dGameObject);
+    scene.add.existing(live2dGameObject);
     ```
 
 ### Create instance

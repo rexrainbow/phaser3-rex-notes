@@ -71,7 +71,7 @@ Render texture with perspective rotation.
 - Add render texture object
     ```javascript
     var image = new PerspectiveRenderTexture(scene, x, y, width, height, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

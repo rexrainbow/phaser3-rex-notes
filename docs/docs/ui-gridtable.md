@@ -74,7 +74,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - Add table object
     ```javascript    
     var table = new GridTable(scene, config);
-    sscene.add.existing(table);
+    scene.add.existing(table);
     ```
 
 ### Add table object

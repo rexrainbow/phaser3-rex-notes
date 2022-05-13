@@ -75,7 +75,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Add text object
     ```javascript    
     var txt = new BBCodeText(scene, x, y, content, config);
-    sscene.add.existing(txt);
+    scene.add.existing(txt);
     ```
 
 ### BBCode

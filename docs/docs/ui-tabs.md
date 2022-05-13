@@ -68,7 +68,7 @@ A container with 4 groups of buttons around a center panel.
 - Add tabs object
     ```javascript    
     var tabs = new Tabs(scene, config);
-    sscene.add.existing(tabs);
+    scene.add.existing(tabs);
     ```
 
 ### Add Tabs object

@@ -71,7 +71,7 @@ Layout children game objects in grids.
 - Add sizer object
     ```javascript    
     var sizer = new GridSizer(scene, config);
-    sscene.add.existing(sizer);
+    scene.add.existing(sizer);
     ```
 
 ### Add grid sizer object

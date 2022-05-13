@@ -110,7 +110,7 @@ Loading animations on shape.
 - Add spinner object
   ```javascript
   var spinner = new Audio(scene, config);
-  sscene.add.existing(spinner);
+  scene.add.existing(spinner);
   ```
 
 ### Add spinner object

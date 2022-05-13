@@ -69,7 +69,7 @@ Stretchable image. Has better performance than [nine-patch](ninepatch.md).
 - Add nine-patch object
     ```javascript    
     var ninePatch = new NinePatch2(scene, x, y, width, height, key, baseFrame, columns, rows, config);
-    sscene.add.existing(ninePatch);
+    scene.add.existing(ninePatch);
     ```
 
 ### Create instance

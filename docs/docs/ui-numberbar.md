@@ -76,7 +76,7 @@ A container with an icon, slider, text, and background.
 - Add number bar object
   ```javascript
   var sizer = new NumberBar(scene, config);
-  sscene.add.existing(sizer);
+  scene.add.existing(sizer);
   ```
 
 ### Add number bar object

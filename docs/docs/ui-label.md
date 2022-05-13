@@ -69,7 +69,7 @@ A container with an icon, text, and background.
 - Add label object
     ```javascript    
     var label = new Label(scene, config);
-    sscene.add.existing(label);
+    scene.add.existing(label);
     ```
 
 ### Add label object

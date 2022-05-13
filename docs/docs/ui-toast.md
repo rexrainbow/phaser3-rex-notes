@@ -68,7 +68,7 @@ Show text message for a short while.
 - Add toast object
     ```javascript    
     var toast = new Toast(scene, config);
-    sscene.add.existing(toast);
+    scene.add.existing(toast);
     ```
 
 ### Add toast object

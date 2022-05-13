@@ -68,7 +68,7 @@ Draw a line with start/end/body textures.
 - Add line object
     ```javascript
     var line = new Line(scene, config);
-    sscene.add.existing(line);
+    scene.add.existing(line);
     ```
 
 ### Create instance

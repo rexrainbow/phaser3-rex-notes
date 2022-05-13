@@ -71,9 +71,9 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 - Add text object
     ```javascript    
     var video = new VideoCanvas(scene, x, y, width, height, config);
-    sscene.add.existing(video);
+    scene.add.existing(video);
     // var video = new VideoDOM(scene, x, y, width, height, config);
-    // sscene.add.existing(video);
+    // scene.add.existing(video);
     ```
 
 ### Add video object

@@ -68,7 +68,7 @@ Circular progress bar shape.
 - Add circular-progress object
     ```javascript
     var circularProgress = new CircularProgress(scene, x, y, radius, color, value, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Install plugin

@@ -69,7 +69,7 @@ A container with a group of buttons in grids.
 - Add buttons object
     ```javascript    
     var buttons = new GridButtons(scene, config);
-    sscene.add.existing(sizer);
+    scene.add.existing(sizer);
     ```
 
 ### Add grid sizer object

@@ -68,7 +68,7 @@ A knob button based on [circular progress shape](shape-circularprogress.md).
 - Add knob object
     ```javascript    
     var knob = new Knob(scene, config);
-    sscene.add.existing(knob);
+    scene.add.existing(knob);
     ```
 
 ### Add knob object

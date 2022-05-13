@@ -72,7 +72,7 @@ A container with a group of buttons.
 - Add buttons object
     ```javascript    
     var buttons = new Buttons(scene, config);
-    sscene.add.existing(buttons);
+    scene.add.existing(buttons);
     ```
 
 ### Add Buttons object

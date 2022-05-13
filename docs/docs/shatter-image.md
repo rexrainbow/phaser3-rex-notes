@@ -73,7 +73,7 @@ Reference: [Delaunay Triangulation](https://github.com/darkskyapp/delaunay-fast)
 - Add image object
     ```javascript    
     var image = new ShatterImage(scene, x, y, texture, frame, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

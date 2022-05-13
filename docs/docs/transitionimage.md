@@ -79,7 +79,7 @@ Transit texture to another one. A [containerLite game object](containerlite.md) 
 - Add image object
     ```javascript    
     var image = new TransitionImage(scene, x, y, texture, frame, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

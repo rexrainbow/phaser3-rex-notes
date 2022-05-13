@@ -72,7 +72,7 @@ A [container](containerlite.md) with [cards](perspective-carousel.md).
 - Add carousel object
     ```javascript    
     var carousel = new PerspectiveCarousel(scene, config);
-    sscene.add.existing(carousel);
+    scene.add.existing(carousel);
     ```
 
 ### Create instance

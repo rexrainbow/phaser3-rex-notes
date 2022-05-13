@@ -68,7 +68,7 @@ A container with badges above a main item.
 - Add badge-label object
     ```javascript    
     var badgeLabel = new BadgeLabel(scene, config);
-    sscene.add.existing(badgeLabel);
+    scene.add.existing(badgeLabel);
     ```
 
 ### Add badgeLabel object

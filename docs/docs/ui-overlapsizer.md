@@ -69,7 +69,7 @@ Layout children game objects overlapped.
 - Add sizer object
     ```javascript
     var sizer = new OverlapSizer(scene, config);
-    sscene.add.existing(sizer);
+    scene.add.existing(sizer);
     ```
 
 ### Add sizer object

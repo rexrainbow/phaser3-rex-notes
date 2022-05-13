@@ -75,7 +75,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 - Add sizer object
     ```javascript
     var sizer = new Sizer(scene, config);
-    sscene.add.existing(sizer);
+    scene.add.existing(sizer);
     ```
 
 ### Add sizer object

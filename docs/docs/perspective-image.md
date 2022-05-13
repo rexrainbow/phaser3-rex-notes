@@ -71,7 +71,7 @@ Image with perspective rotation.
 - Add image object
     ```javascript    
     var image = new PerspectiveImage(scene, x, y, texture, frame, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

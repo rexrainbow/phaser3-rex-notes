@@ -70,7 +70,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
 - Add dynamic-text object
     ```javascript
     var txt = new DynamicText(scene, x, y, config);
-    sscene.add.existing(txt);
+    scene.add.existing(txt);
     ```
 
 ### Create instance

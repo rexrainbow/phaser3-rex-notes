@@ -72,7 +72,7 @@ Image with 4 or 9 vertex control points.
 - Add image object
     ```javascript    
     var image = new QuadImage(scene, x, y, texture, frame, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

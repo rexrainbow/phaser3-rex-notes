@@ -69,7 +69,7 @@ A container with a track, indicator, thumb and background.
 - Add slider object
     ```javascript    
     var slider = new Slider(scene, config);
-    sscene.add.existing(slider);
+    scene.add.existing(slider);
     ```
 
 ### Add slider object

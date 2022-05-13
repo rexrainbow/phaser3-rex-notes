@@ -71,7 +71,7 @@ Layout children game objects into lines.
 - Add sizer object
     ```javascript    
     var sizer = new FixWidthSizer(scene, config);
-    sscene.add.existing(sizer);
+    scene.add.existing(sizer);
     ```
 
 ### Add sizer object

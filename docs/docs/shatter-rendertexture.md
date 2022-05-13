@@ -71,7 +71,7 @@ Shatter render texture to triangle faces.
 - Add render texture object
     ```javascript
     var image = new ShatterRenderTexture(scene, x, y, width, height, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

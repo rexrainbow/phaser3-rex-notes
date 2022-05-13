@@ -68,7 +68,7 @@ A container with pages, only current page is visible.
 - Add pages object
     ```javascript    
     var pages = new Pages(scene, config);
-    sscene.add.existing(pages);
+    scene.add.existing(pages);
     ```
 
 ### Add pages object

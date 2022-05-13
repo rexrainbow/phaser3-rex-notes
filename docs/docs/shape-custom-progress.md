@@ -69,7 +69,7 @@ Custom progress bar based on [custom-shapes](shape-custom-shapes.md).
 - Add custom shapes object
     ```javascript
     var customProgress = new CustomProgress(scene, x, y, width, height, config);
-    sscene.add.existing(customProgress);
+    scene.add.existing(customProgress);
     ```
 
 ### Add custom shapes object

@@ -75,7 +75,7 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 - Add container object
     ```javascript    
     var container = new ContainerLite(scene, x, y);
-    sscene.add.existing(container);
+    scene.add.existing(container);
     ```
 
 ### Add container object

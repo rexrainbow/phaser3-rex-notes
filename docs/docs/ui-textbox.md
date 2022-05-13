@@ -71,7 +71,7 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
 - Add text-box object
     ```javascript    
     var textBox = new TextBox(scene, config);
-    sscene.add.existing(textBox);
+    scene.add.existing(textBox);
     ```
 
 ### Add textbox object

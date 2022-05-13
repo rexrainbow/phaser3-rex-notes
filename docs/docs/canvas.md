@@ -69,7 +69,7 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 - Add canvas object
     ```javascript    
     var canvas = new Canvas(scene, x, y, width, height);
-    sscene.add.existing(canvas);
+    scene.add.existing(canvas);
     ```
 
 ### Create instance

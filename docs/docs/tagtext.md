@@ -68,7 +68,7 @@ Displays text with multi-color, font face, or font size with tags.
 - Add text object
     ```javascript    
     var txt = new TagText(scene, x, y, content, config);
-    sscene.add.existing(txt);
+    scene.add.existing(txt);
     ```
 
 ### Add text object

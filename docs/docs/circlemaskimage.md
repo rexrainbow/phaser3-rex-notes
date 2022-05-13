@@ -68,7 +68,7 @@ Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.m
 - Add circle-mask-image object
     ```javascript    
     var image = new CircleMaskImage(scene, x, y, key, frame, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Install plugin

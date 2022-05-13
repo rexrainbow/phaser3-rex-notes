@@ -68,7 +68,7 @@ Draw outline of target game objects.
 - Add outline effect layer object
     ```javascript
     var effectLayer = new OutlineEffectLayer(scene, config);
-    sscene.add.existing(effectLayer);
+    scene.add.existing(effectLayer);
     ```
 
 ### Create instance

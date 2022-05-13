@@ -71,7 +71,7 @@ Render texture with 4 or 9 vertex control points.
 - Add render texture object
     ```javascript
     var image = new QuadRenderTexture(scene, x, y, width, height, config);
-    sscene.add.existing(image);
+    scene.add.existing(image);
     ```
 
 ### Create instance

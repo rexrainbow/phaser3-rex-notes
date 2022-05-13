@@ -71,7 +71,7 @@ Play animation on [perspective-image](perspective-image.md).
 - Add sprite object
     ```javascript    
     var sprite = new PerspectiveSprite(scene, x, y, texture, frame, config);
-    sscene.add.existing(sprite);
+    scene.add.existing(sprite);
     ```
 
 ### Create instance

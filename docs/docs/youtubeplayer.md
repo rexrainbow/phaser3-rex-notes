@@ -100,7 +100,7 @@ Play youtube video on iframe.
 - Add youtube player object
     ```javascript    
     var youtubePlayer = new YoutubePlayer(scene, x, y, width, height, config);
-    sscene.add.existing(youtubePlayer);
+    scene.add.existing(youtubePlayer);
     ```
 
 ### Add youtube player object

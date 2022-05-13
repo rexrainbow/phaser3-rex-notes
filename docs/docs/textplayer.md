@@ -70,7 +70,7 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 - Add text-player object
     ```javascript
     var txt = new TextPlayer(scene, config);
-    sscene.add.existing(txt);
+    scene.add.existing(txt);
     ```
 
 ### Create instance

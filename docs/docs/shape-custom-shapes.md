@@ -69,7 +69,7 @@ Custom shapes on shape.
 - Add custom shapes object
     ```javascript    
     var customShapes = new CustomShapes(scene, x, y, width, height, config);
-    sscene.add.existing(customShapes);
+    scene.add.existing(customShapes);
     ```
 
 ### Add custom shapes object

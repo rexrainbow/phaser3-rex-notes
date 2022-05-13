@@ -71,7 +71,7 @@ A [container](containerlite.md) with two [perspective-images](perspective-image.
 - Add card object
     ```javascript    
     var card = new PerspectiveCard(scene, config);
-    sscene.add.existing(card);
+    scene.add.existing(card);
     ```
 
 ### Create instance

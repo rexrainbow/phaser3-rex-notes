@@ -70,7 +70,7 @@ A container with buttons and sub-menu.
 - Add menu object
     ```javascript
     var menu = new Menu(scene, config);
-    sscene.add.existing(menu);
+    scene.add.existing(menu);
     ```
 
 ### Add menu object
@@ -185,7 +185,7 @@ var menu = scene.rexUI.add.menu({
         constructor(scene, config) {
             super(scene, config);
             // ...
-            sscene.add.existing(this);
+            scene.add.existing(this);
         }
         // ...
     }

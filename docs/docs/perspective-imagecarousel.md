@@ -71,7 +71,7 @@ Display list of images.
 - Add carousel object
     ```javascript    
     var carousel = new PerspectiveImageCarousel(scene, config);
-    sscene.add.existing(carousel);
+    scene.add.existing(carousel);
     ```
 
 ### Create instance

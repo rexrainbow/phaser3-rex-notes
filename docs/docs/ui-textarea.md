@@ -69,7 +69,7 @@ A container with a text, slider, and scroller.
 - Add text-area object
     ```javascript
     var textArea = new TextArea(scene, config);
-    sscene.add.existing(textArea);
+    scene.add.existing(textArea);
     ```
 
 ### Add text-area object
