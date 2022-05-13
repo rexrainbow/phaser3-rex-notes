@@ -9,7 +9,7 @@ declare namespace TagText {
 
         stroke: {
             color?: string,
-            thinkness?: number,
+            thickness?: number,
         },
 
         fontSize?: string,
@@ -25,7 +25,7 @@ declare namespace TagText {
 
         underline?: {
             color?: string,
-            thinkness?: number,
+            thickness?: number,
             offset?: number,
         },
 

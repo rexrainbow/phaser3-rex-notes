@@ -116,7 +116,7 @@ Default style
     },
     underline: {
         color: '#000',
-        thinkness: 0,
+        thickness: 0,
         offset: 0
     },
     // align: 'left',  // Equal to halign
@@ -223,7 +223,7 @@ var txt = scene.make.rexTagText({
     color: 'red',            // or 'font-color'
     stroke: {
         color: 'blue',
-        thinkness: 1
+        thickness: 1
     },
     shadow: {
         color: 'black',
@@ -233,7 +233,7 @@ var txt = scene.make.rexTagText({
     },
     underline: {            // or 'u'
         color: 'blue',
-        thinkness: 3,
+        thickness: 3,
         offset: -1
     },
     y: 0,
@@ -386,9 +386,9 @@ txt.setFontStyle(style);
         ```
     - Set
         ```javascript
-        txt.setUnderline(color, thinkness, ofset);
+        txt.setUnderline(color, thickness, ofset);
         txt.setUnderlineColor(color);
-        txt.setUnderlineThinkness(thinkness);
+        txt.setUnderlineThinkness(thickness);
         txt.setUnderlineOffset(ofset);
         ```
 - Background
@@ -598,9 +598,9 @@ Define style inline text.
 - `<style='color:red'>Some text</style>`
 - `<style='size:30px'>Some text</style>`
 - `<style='y:-12;size:20px'>Some text</style>`
-- `<style='stroke:blue 1px'>Some text</style>` (color thinkness)
+- `<style='stroke:blue 1px'>Some text</style>` (color thickness)
 - `<style='shadow:blue 2px 2px 2px'>Some text</style>` (color offsetX offsetY blur)
-- `<style='underline:blue 3px -1px'>Some text</style>` (color thinkness offset)
+- `<style='underline:blue 3px -1px'>Some text</style>` (color thickness offset)
 
 Or mix them
 

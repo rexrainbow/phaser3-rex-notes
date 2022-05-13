@@ -4,6 +4,16 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexrealtimetimersplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -682,7 +692,7 @@
       }
     }, {
       key: "addTimer",
-      value: function addTimer(name, period, currentTimestamp) {
+      value: function addTimer(name, period, data, currentTimestamp) {
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
@@ -691,8 +701,13 @@
         var timer = {
           name: name,
           start: currentTimestamp,
-          period: period
+          period: period,
+          data: data
         };
+
+        if (data !== undefined) {
+          timer.data = data;
+        }
 
         this._add(timer);
 
@@ -745,7 +760,8 @@
             name: timer.name,
             period: period,
             elapsed: elapsed,
-            progress: progress
+            progress: progress,
+            timer: timer
           });
         }
 
@@ -755,6 +771,7 @@
       key: "getTimers",
       value: function getTimers(name) {
         if (name === undefined) {
+          // Get all timers
           return this.timers.slice();
         }
 
@@ -773,7 +790,8 @@
     }, {
       key: "removeTimers",
       value: function removeTimers(timers) {
-        if (typeof timers === 'string') {
+        if (_typeof(timers) !== 'object') {
+          // string or number
           timers = this.getTimers(timers);
         }
 
@@ -792,6 +810,22 @@
         timers.reverse();
         this.removeTimers(timers);
         return this;
+      }
+    }, {
+      key: "length",
+      get: function get() {
+        return this.timers.length;
+      }
+    }, {
+      key: "lastTimer",
+      get: function get() {
+        return this.timers[this.timers.length - 1];
+      }
+    }, {
+      key: "emitUpdateEvent",
+      value: function emitUpdateEvent() {
+        this.emit('update', this.timers);
+        return this;
       } // Internal
 
     }, {
@@ -799,7 +833,7 @@
       value: function _add(timer) {
         this.timers.push(timer);
         this.emit('add', timer, this.timers);
-        this.emit('update', this.timers);
+        this.emitUpdateEvent();
       } // Internal
 
     }, {
@@ -808,7 +842,7 @@
         Remove(this.timers, timers, function (timer) {
           this.emit('remove', timer, this.timers);
         }, this);
-        this.emit('update', this.timers);
+        this.emitUpdateEvent();
       }
     }]);
 

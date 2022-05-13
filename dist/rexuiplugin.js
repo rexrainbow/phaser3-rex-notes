@@ -7213,10 +7213,10 @@
           }
 
           if (prop.hasOwnProperty('stroke')) {
-            var stroke = prop.stroke; // {color, thinkness}
+            var stroke = prop.stroke; // {color, thickness}
 
             result.stroke = stroke.hasOwnProperty('color') ? stroke.color : defaultStyle.stroke;
-            result.strokeThickness = stroke.hasOwnProperty('thinkness') ? stroke.thinkness : defaultStyle.strokeThickness;
+            result.strokeThickness = stroke.hasOwnProperty('thickness') ? stroke.thickness : defaultStyle.strokeThickness;
           } else {
             result.stroke = defaultStyle.stroke;
             result.strokeThickness = defaultStyle.strokeThickness;
@@ -7244,10 +7244,10 @@
         }
 
         if (prop.hasOwnProperty('u') || prop.hasOwnProperty('underline')) {
-          var u = prop.hasOwnProperty('u') ? prop.u : prop.underline; // {color, thinkness, offset}
+          var u = prop.hasOwnProperty('u') ? prop.u : prop.underline; // {color, thickness, offset}
 
           result.underlineColor = u.hasOwnProperty('color') ? u.color : defaultStyle.underlineColor;
-          result.underlineThickness = u.hasOwnProperty('thinkness') ? u.thinkness : defaultStyle.underlineThickness;
+          result.underlineThickness = u.hasOwnProperty('thickness') ? u.thickness : defaultStyle.underlineThickness;
           result.underlineOffset = u.hasOwnProperty('offset') ? u.offset : defaultStyle.underlineOffset;
         } else {
           result.underlineColor = defaultStyle.underlineColor;
@@ -7263,9 +7263,9 @@
         var strokeThinkness;
 
         if (prop.hasOwnProperty('stroke')) {
-          var stroke = prop.stroke; // {color, thinkness}           
+          var stroke = prop.stroke; // {color, thickness}           
 
-          strokeThinkness = stroke.hasOwnProperty('thinkness') ? stroke.thinkness : defaultStyle.strokeThickness;
+          strokeThinkness = stroke.hasOwnProperty('thickness') ? stroke.thickness : defaultStyle.strokeThickness;
         } else {
           strokeThinkness = defaultStyle.strokeThickness;
         }
@@ -7340,7 +7340,7 @@
           }
 
           if (len >= 2) {
-            v.thinkness = parseInt(stroke[1].replace('px', ''));
+            v.thickness = parseInt(stroke[1].replace('px', ''));
           }
 
           break;
@@ -7381,7 +7381,7 @@
           }
 
           if (len >= 2) {
-            v.thinkness = parseInt(u[1].replace('px', ''));
+            v.thickness = parseInt(u[1].replace('px', ''));
           }
 
           if (len >= 3) {
