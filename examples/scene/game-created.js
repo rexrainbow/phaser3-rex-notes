@@ -33,6 +33,10 @@ var config = {
         width: 800,
         height: 600,
     },
+    callbacks: {
+        preBoot: function () { console.log('Game preBoot') },
+        postBoot: function () { console.log('Game postBoot') },
+    },
     scene: Demo
 };
 
@@ -41,7 +45,9 @@ console.log('Game created');
 
 /*
 1. Game created
-2. Scene init
-3. Scene preload
-4. Scene create
+2. Game preBoot
+3. Scene init
+4. Scene preload
+5. Scene create
+6. Game postBoot
 */

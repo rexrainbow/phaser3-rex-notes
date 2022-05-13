@@ -7,16 +7,10 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    init() {
-        console.log('Scene init')
-    }
-
     preload() {
-        console.log('Scene preload')
     }
 
     create() {
-        console.log('Scene create')
     }
 
     update() {
@@ -37,4 +31,3 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-console.log('Game created')
