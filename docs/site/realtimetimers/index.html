@@ -6665,6 +6665,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-start-timestamp" class="md-nav__link">
+    Set start timestamp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-a-timer" class="md-nav__link">
     Add a timer
   </a>
@@ -8094,6 +8101,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-start-timestamp" class="md-nav__link">
+    Set start timestamp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-a-timer" class="md-nav__link">
     Add a timer
   </a>
@@ -8234,8 +8248,17 @@
 <li>Default value is current timestamp <code>new Date().getTime()</code>.</li>
 </ul>
 </li>
-<li><code>getTimestampCallback</code> : Custom callback of get current timestamp, optional.</li>
+<li><code>getTimestampCallback</code> : Custom callback of get current timestamp, optional.<ul>
+<li>Default behavior is getting current timestamp from system.</li>
 </ul>
+</li>
+</ul>
+<h3 id="set-start-timestamp">Set start timestamp<a class="headerlink" href="#set-start-timestamp" title="Permanent link">&para;</a></h3>
+<p><em>Start-timestamp is set when creating this real-time timers object.</em></p>
+<p>User still can change Start-timestamp by</p>
+<div class="highlight"><pre><span></span><code><span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">setStartTimestamp</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span>
+</code></pre></div>
+<p>This changing won't affect existed timers.</p>
 <h3 id="add-a-timer">Add a timer<a class="headerlink" href="#add-a-timer" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">addTimer</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">period</span><span class="p">);</span>
 <span class="c1">// realTimeTimers.addTimer(name, period, data);</span>
@@ -8245,7 +8268,10 @@
 <li><code>name</code> : Any name string of this timer. </li>
 <li><code>period</code> : Will expire after period time, in millisecond.</li>
 <li><code>data</code> : Any kind of custom data.</li>
-<li><code>currentTimestamp</code> : Start this time in current time, optional. Will get current timestamp by default.</li>
+<li><code>currentTimestamp</code> : Start this time in current time, optional. <ul>
+<li><code>undefined</code> : Get current timestamp from <code>getTimestampCallback</code> callback.</li>
+</ul>
+</li>
 </ul>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">addTimer</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
@@ -8277,16 +8303,30 @@
     <span class="nx">period</span><span class="o">:</span> <span class="nx">time</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>currentTimestamp</code> : Start this time in current time, optional. <ul>
+<li><code>undefined</code> : Get current timestamp from <code>getTimestampCallback</code> callback.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Pop(get and remove) expired timers
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timers</span> <span class="o">=</span> <span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">popExpiredTimers</span><span class="p">();</span>
 <span class="c1">// var timers = realTimeTimers.popExpiredTimers(currentTimestamp);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>currentTimestamp</code> : Start this time in current time, optional. <ul>
+<li><code>undefined</code> : Get current timestamp from <code>getTimestampCallback</code> callback.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Get progress of timer
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">getTimersProgress</span><span class="p">()</span>
 <span class="c1">// var result = realTimeTimers.getTimersProgress(currentTimestamp);</span>
 </code></pre></div><ul>
+<li><code>currentTimestamp</code> : Start this time in current time, optional. <ul>
+<li><code>undefined</code> : Get current timestamp from <code>getTimestampCallback</code> callback.</li>
+</ul>
+</li>
 <li><code>result</code> : Array of timer's progress. Include these properties -
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>

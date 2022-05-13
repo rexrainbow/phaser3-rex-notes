@@ -85,6 +85,19 @@ var realTimeTimers = scene.plugins.get('rexRealTimeTimers').add({
 - `startTimestamp` : Start time. 
     - Default value is current timestamp `new Date().getTime()`.
 - `getTimestampCallback` : Custom callback of get current timestamp, optional.
+    - Default behavior is getting current timestamp from system.
+
+### Set start timestamp
+
+*Start-timestamp is set when creating this real-time timers object.*
+
+User still can change Start-timestamp by
+
+```javascript
+realTimeTimers.setStartTimestamp(timestamp);
+```
+
+This changing won't affect existed timers.
 
 ### Add a timer
 
@@ -97,7 +110,8 @@ realTimeTimers.addTimer(name, period);
 - `name` : Any name string of this timer. 
 - `period` : Will expire after period time, in millisecond.
 - `data` : Any kind of custom data.
-- `currentTimestamp` : Start this time in current time, optional. Will get current timestamp by default.
+- `currentTimestamp` : Start this time in current time, optional. 
+    - `undefined` : Get current timestamp from `getTimestampCallback` callback.
 
 or
 
@@ -131,16 +145,22 @@ realTimeTimers.addTimer(name, {
             period: time
         }
         ```
+    - `currentTimestamp` : Start this time in current time, optional. 
+        - `undefined` : Get current timestamp from `getTimestampCallback` callback.
 - Pop(get and remove) expired timers
     ```javascript
     var timers = realTimeTimers.popExpiredTimers();
     // var timers = realTimeTimers.popExpiredTimers(currentTimestamp);
     ```
+    - `currentTimestamp` : Start this time in current time, optional. 
+        - `undefined` : Get current timestamp from `getTimestampCallback` callback.
 - Get progress of timer
     ```javascript
     var result = realTimeTimers.getTimersProgress()
     // var result = realTimeTimers.getTimersProgress(currentTimestamp);
     ```
+    - `currentTimestamp` : Start this time in current time, optional. 
+        - `undefined` : Get current timestamp from `getTimestampCallback` callback.
     - `result` : Array of timer's progress. Include these properties -
         ```javascript
         {
