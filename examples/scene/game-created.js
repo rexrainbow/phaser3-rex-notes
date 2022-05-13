@@ -37,4 +37,11 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-console.log('Game created')
+console.log('Game created');
+
+/*
+1. Game created
+2. Scene init
+3. Scene preload
+4. Scene create
+*/

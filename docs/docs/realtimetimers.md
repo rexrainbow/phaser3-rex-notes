@@ -82,10 +82,10 @@ var realTimeTimers = scene.plugins.get('rexRealTimeTimers').add({
 });
 ```
 
-- `startTimestamp` : Start time. 
-    - Default value is current timestamp `new Date().getTime()`.
 - `getTimestampCallback` : Custom callback of get current timestamp, optional.
     - Default behavior is getting current timestamp from system.
+- `startTimestamp` : Start time, optional. Use this start-timestamp if `getTimestampCallback` is not given.
+    - Default value is current timestamp `new Date().getTime()`.
 
 ### Set start timestamp
 
