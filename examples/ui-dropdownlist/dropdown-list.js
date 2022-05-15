@@ -15,12 +15,26 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var stringOption = false;
+        var options;
+        if (stringOption) {
+            options = ['A', 'BB', 'CCC', 'DDDD'];
+        } else {
+            options = [
+                { text: 'A', value: 0 },
+                { text: 'BB', value: 10 },
+                { text: 'CCC', value: 100 },
+                { text: 'DDDD', value: 1000 },
+            ]
+        }
+
+        var print = this.add.text(0, 0, '');
         var dropDownList = this.rexUI.add.dropDownList({
             x: 400, y: 300,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
             icon: this.rexUI.add.roundRectangle(0, 0, 20, 20, 10, COLOR_LIGHT),
-            text: CreateTextObject(this, '        '),
+            text: CreateTextObject(this, '-- Select --').setFixedSize(150, 0),
 
             space: {
                 left: 10,
@@ -30,14 +44,16 @@ class Demo extends Phaser.Scene {
                 icon: 10
             },
 
-            options: ['A', 'BB', 'CCC', 'DDDD'],
+            options: options,
+
             list: {
                 createBackgroundCallback: undefined,
                 createButtonCallback: function (scene, option, index, options) {
-                    return scene.rexUI.add.label({
+                    var text = (stringOption) ? option : option.text;
+                    var button = scene.rexUI.add.label({
                         background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK),
 
-                        text: CreateTextObject(scene, option),
+                        text: CreateTextObject(scene, text),
 
                         space: {
                             left: 10,
@@ -46,16 +62,36 @@ class Demo extends Phaser.Scene {
                             bottom: 10,
                             icon: 10
                         }
-                    })
+                    });
+                    button.value = (stringOption) ? undefined : option.value;
+
+                    return button;
                 },
 
-                onButtonOver: function (button, index, pointer, event) {
+                // scope: dropDownList
+                onButtonClick: function (button, index, pointer, event) {
+                    // Set label text, and value
+                    this.text = button.text;
+                    this.value = button.value;
+                    print.text += `Select ${button.text}, value=${button.value}\n`;
+                },
+
+                // scope: dropDownList
+                onButtonOver: function (button, index, pointer, event) {                    
                     button.getElement('background').setStrokeStyle(1, 0xffffff);
                 },
-                onButtonOut: function (button, index, pointer, event) {
+
+                // scope: dropDownList
+                onButtonOut: function (button, index, pointer, event) {                    
                     button.getElement('background').setStrokeStyle();
                 },
-            }
+            },
+
+            setValueCallback: function (dropDownList, value, previousValue) {
+                console.log(value);
+            },
+            value: undefined
+
         })
             .layout();
     }

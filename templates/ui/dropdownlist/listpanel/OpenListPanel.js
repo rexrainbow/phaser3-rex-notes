@@ -25,12 +25,27 @@ var OpenListPanel = function () {
             .setPosition(x, this.top);
     }
 
-    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic')
+    var onButtonOver = this.onButtonOver;
+    if (onButtonOver) {
+        listPanel.on('button.over', onButtonOver, this);
+    }
+
+    var onButtonOut = this.onButtonOut;
+    if (onButtonOut) {
+        listPanel.on('button.out', onButtonOut, this);
+    }
+
+    listPanel
+        .popUp(this.listEaseInDuration, 'y', 'Cubic')
         .on('popup.complete', function (listPanel) {
-            listPanel.on('button.click', function () {
+            // After popping up
+            // Can click
+            var onButtonClick = this.onButtonClick;
+            if (onButtonClick) {
+                listPanel.on('button.click', onButtonClick, this)
+            }
 
-            }, this)
-
+            // Can close list panel
             scene.input.once('pointerup', this.closeListPanel, this);
         }, this);
 

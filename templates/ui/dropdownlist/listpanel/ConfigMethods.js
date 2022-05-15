@@ -14,6 +14,11 @@ var methods = {
         return this;
     },
 
+    setButtonClickCallback(callback) {
+        this.onButtonClick = callback;
+        return this;
+    },
+
     setButtonOutCallback(callback) {
         this.onButtonOut = callback;
         return this;

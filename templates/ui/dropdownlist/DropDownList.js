@@ -17,6 +17,7 @@ class DropDownList extends Label {
         var listConfig = GetValue(config, 'list');
         this.setCreateButtonCallback(GetValue(listConfig, 'createButtonCallback'));
         this.setCreateBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
+        this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
         this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
@@ -24,6 +25,12 @@ class DropDownList extends Label {
         this.setListBounds(GetValue(listConfig, 'bounds'));
         this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
         this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
+
+        this.setValueChangeCallback(
+            GetValue(config, 'setValueCallback'),
+            GetValue(config, 'setValueCallbackScope')
+        );
+        this.setValue(GetValue(config, 'value'));
 
         this.onClick(this.toggleListPanel, this);
     }
@@ -50,6 +57,40 @@ class DropDownList extends Label {
         return this;
     }
 
+    setValueChangeCallback(callback, scope) {
+        this.valueChangeCallback = callback;
+        this.valueChangeCallbackScope = scope;
+        return this;
+    }
+
+    setValue(value) {
+        this.value = value;
+        return this;
+    }
+
+    get value() {
+        return this._value;
+    }
+
+    set value(value) {
+        if (this._value === value) {
+            return;
+        }
+
+        var previousValue = this._value;
+        this._value = value;
+
+        var callback = this.valueChangeCallback,
+            scope = this.valueChangeCallbackScope;
+        if (callback) {
+            if (scope) {
+                callback.call(scope, this, value, previousValue);
+            } else {
+                callback(this, value, previousValue)
+            }
+        }
+
+    }
 
 }
 

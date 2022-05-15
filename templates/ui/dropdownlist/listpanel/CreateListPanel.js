@@ -38,16 +38,6 @@ var CreateListPanel = function (scene, parent) {
     });
     scene.add.existing(listPanel);
 
-    var onButtonOver = parent.onButtonOver;
-    if (onButtonOver) {
-        listPanel.on('button.over', onButtonOver);
-    }
-
-    var onButtonOut = parent.onButtonOut;
-    if (onButtonOut) {
-        listPanel.on('button.out', onButtonOut);
-    }
-
     return listPanel;
 }
 
