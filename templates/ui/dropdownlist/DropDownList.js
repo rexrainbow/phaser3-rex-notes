@@ -20,11 +20,11 @@ class DropDownList extends Label {
         this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
+        this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
+        this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
         this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
         this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
         this.setListBounds(GetValue(listConfig, 'bounds'));
-        this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
-        this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
 
         this.setValueChangeCallback(
             GetValue(config, 'setValueCallback'),

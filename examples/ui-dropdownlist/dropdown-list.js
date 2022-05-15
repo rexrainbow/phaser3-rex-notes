@@ -77,12 +77,12 @@ class Demo extends Phaser.Scene {
                 },
 
                 // scope: dropDownList
-                onButtonOver: function (button, index, pointer, event) {                    
+                onButtonOver: function (button, index, pointer, event) {
                     button.getElement('background').setStrokeStyle(1, 0xffffff);
                 },
 
                 // scope: dropDownList
-                onButtonOut: function (button, index, pointer, event) {                    
+                onButtonOut: function (button, index, pointer, event) {
                     button.getElement('background').setStrokeStyle();
                 },
             },

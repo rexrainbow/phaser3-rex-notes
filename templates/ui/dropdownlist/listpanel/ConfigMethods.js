@@ -4,6 +4,11 @@ var methods = {
         return this;
     },
 
+    setButtonClickCallback(callback) {
+        this.onButtonClick = callback;
+        return this;
+    },
+
     setCreateBackgroundCallback(callback) {
         this.createBackgroundCallback = callback;
         return this;
@@ -11,11 +16,6 @@ var methods = {
 
     setButtonOverCallback(callback) {
         this.onButtonOver = callback;
-        return this;
-    },
-
-    setButtonClickCallback(callback) {
-        this.onButtonClick = callback;
         return this;
     },
 
@@ -39,7 +39,7 @@ var methods = {
         return this;
     },
 
-    setListAlignmentMode(mode) {
+    setListAlignmentMode(mode) {        
         this.listAlignMode = mode;
         return this;
     },

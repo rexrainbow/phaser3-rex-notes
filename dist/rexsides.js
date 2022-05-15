@@ -6249,25 +6249,29 @@
     }, {
       key: "onPress",
       value: function onPress(pointer) {
-        // Do nothing if game object is not visible
-        if (!this.parent.willRender(pointer.camera)) {
-          return;
-        }
+        if (this.mode === 0) {
+          // Do nothing if game object is not visible
+          if (!this.parent.willRender(pointer.camera)) {
+            return;
+          }
 
-        if (this.mode === 0 && !this.isPointerInside(pointer)) {
-          this.click(pointer.downTime, pointer);
+          if (!this.isPointerInside(pointer)) {
+            this.click(pointer.downTime, pointer);
+          }
         }
       }
     }, {
       key: "onRelease",
       value: function onRelease(pointer) {
-        // Do nothing if game object is not visible
-        if (!this.parent.willRender(pointer.camera)) {
-          return;
-        }
+        if (this.mode === 1) {
+          // Do nothing if game object is not visible
+          if (!this.parent.willRender(pointer.camera)) {
+            return;
+          }
 
-        if (this.mode === 1 && !this.isPointerInside(pointer)) {
-          this.click(pointer.upTime, pointer);
+          if (!this.isPointerInside(pointer)) {
+            this.click(pointer.upTime, pointer);
+          }
         }
       }
     }, {
@@ -6315,7 +6319,7 @@
         this._clickOutside = new ClickOutside(this, config);
       }
 
-      this._clickOutside.on('click', callback, scope);
+      this._clickOutside.on('clickoutside', callback, scope);
 
       return this;
     },
@@ -6324,7 +6328,7 @@
         return this;
       }
 
-      this._clickOutside.off('click', callback, scope);
+      this._clickOutside.off('clickoutside', callback, scope);
 
       return this;
     },

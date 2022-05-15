@@ -3,8 +3,14 @@ var CloseListPanel = function () {
         return this;
     }
 
-    this.listPanel.scaleDownDestroy(this.listEaseOutDuration, 'y', 'Linear');
+    var listPanel = this.listPanel;
     this.listPanel = undefined;
+
+    listPanel
+        .scaleDownDestroy(this.listEaseOutDuration, 'y', 'Linear')
+        .once('scaledown.complete', function () {
+            this.emit('list.close', this, listPanel);
+        }, this);
 
     return this;
 }

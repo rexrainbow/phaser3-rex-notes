@@ -7,7 +7,7 @@ var OpenListPanel = function () {
     }
 
     var scene = this.scene;
-    var listPanel = CreateListPanel(scene, this)
+    var listPanel = CreateListPanel.call(this, scene)
         .setOrigin(0, 0)
         .layout();
 
@@ -37,19 +37,27 @@ var OpenListPanel = function () {
 
     listPanel
         .popUp(this.listEaseInDuration, 'y', 'Cubic')
-        .on('popup.complete', function (listPanel) {
+        .once('popup.complete', function (listPanel) {
             // After popping up
             // Can click
             var onButtonClick = this.onButtonClick;
             if (onButtonClick) {
-                listPanel.on('button.click', onButtonClick, this)
+                listPanel.on('button.click', function (button, index, pointer, event) {
+                    onButtonClick.call(this, button, index, pointer, event);
+                    this.emit('list.click', this, listPanel, button, index, pointer, event);
+                }, this);
             }
 
             // Can close list panel
             scene.input.once('pointerup', this.closeListPanel, this);
+
+            this.emit('list.open', this, listPanel);
         }, this);
 
+    this.pin(listPanel);
+
     this.listPanel = listPanel;
+
     return this;
 }
 

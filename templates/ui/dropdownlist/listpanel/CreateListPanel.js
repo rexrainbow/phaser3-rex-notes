@@ -1,33 +1,33 @@
 import Buttons from '../../buttons/Buttons.js';
 
-var CreateListPanel = function (scene, parent) {
+var CreateListPanel = function (scene) {
     var background;
-    var createBackgroundCallback = parent.createBackgroundCallback;
+    var createBackgroundCallback = this.createBackgroundCallback;
     if (createBackgroundCallback) {
-        background = createBackgroundCallback(scene);
+        background = createBackgroundCallback.call(this, scene);
         scene.add.existing(background);
     }
 
     var buttons = [];
-    var createButtonCallback = parent.createButtonCallback;
+    var createButtonCallback = this.createButtonCallback;
     if (createButtonCallback) {
-        var options = parent.options;
+        var options = this.options;
         for (var i = 0, cnt = options.length; i < cnt; i++) {
-            var button = createButtonCallback(scene, options[i], i, options);
+            var button = createButtonCallback.call(this, scene, options[i], i, options);
             scene.add.existing(button);
             buttons.push(button);
         }
     }
 
-    var width = parent.listWidth;
+    var width = this.listWidth;
     if (width === undefined) {
-        if (parent.listAlignMode === 'text') {
-            width = parent.getElement('text').width;
+        if (this.listAlignMode === 'text') {
+            width = this.getElement('text').width;
         } else {
-            width = parent.width;
+            width = this.width;
         }
     }
-    var height = parent.listHeight;
+    var height = this.listHeight;
 
     var listPanel = new Buttons(scene, {
         width: width, height: height,
