@@ -57,13 +57,10 @@ declare namespace DropDownList {
             onButtonOver?: OnButtonOverCallbackType;
             onButtonOut?: OnButtonOutCallbackType;
 
-            easeIn?: number, easeOut?: number,
-
+            wrap?: boolean;
             width?: number, height?: number;
             alignParent?: AlignParentType;
-
             bounds?: Phaser.Geom.Rectangle;
-
         },
 
         setValueCallback?: SetValueCallbackType
@@ -84,6 +81,9 @@ declare class DropDownList extends Label {
     closeListPanel(): this;
     toggleListPanel(): this;
 
+    setValue(value?: any): this;
+    value: any;
+
     setCreateButtonCallback(callback?: DropDownList.CreateBackgroundCallbackType): this;
     setCreateBackgroundCallback(callback?: DropDownList.CreateBackgroundCallbackType): this;
 
@@ -91,6 +91,7 @@ declare class DropDownList extends Label {
     setButtonOverCallback(callback?: DropDownList.OnButtonOverCallbackType): this;
     setButtonOutCallback(callback?: DropDownList.OnButtonOutCallbackType): this;
 
+    setWrapEnable(enable?: boolean): this;
     setListWidth(width?: number): this;
     setListHeight(height?: number): this;
     setListSize(
@@ -104,6 +105,4 @@ declare class DropDownList extends Label {
     setListEaseInDuration(duration?: number): this;
     setListEaseOutDuration(duration?: number): this;
 
-    setValue(value?: any): this;
-    value: any;
 }

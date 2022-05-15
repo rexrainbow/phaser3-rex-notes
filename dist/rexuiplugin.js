@@ -37143,6 +37143,14 @@
   SetValue(window, 'RexPlugins.UI.Menu', Menu);
 
   var methods$5 = {
+    setWrapEnable: function setWrapEnable(enable) {
+      if (enable === undefined) {
+        enable = true;
+      }
+
+      this.listWrapEnable = enable;
+      return this;
+    },
     setCreateButtonCallback: function setCreateButtonCallback(callback) {
       this.createButtonCallback = callback;
       return this;
@@ -37234,13 +37242,25 @@
     }
 
     var height = this.listHeight;
-    var listPanel = new Buttons$1(scene, {
-      width: width,
-      height: height,
-      orientation: 'y',
-      background: background,
-      buttons: buttons
-    });
+    var listPanel;
+
+    if (!this.listWrapEnable) {
+      listPanel = new Buttons$1(scene, {
+        width: width,
+        height: height,
+        orientation: 'y',
+        background: background,
+        buttons: buttons
+      });
+    } else {
+      listPanel = new Buttons(scene, {
+        width: width,
+        height: height,
+        background: background,
+        buttons: buttons
+      });
+    }
+
     scene.add.existing(listPanel);
     return listPanel;
   };
@@ -37347,6 +37367,8 @@
       _this.setOptions(GetValue$o(config, 'options'));
 
       var listConfig = GetValue$o(config, 'list');
+
+      _this.setWrapEnable(GetValue$o(listConfig, 'wrap', false));
 
       _this.setCreateButtonCallback(GetValue$o(listConfig, 'createButtonCallback'));
 

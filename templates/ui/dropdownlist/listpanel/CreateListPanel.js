@@ -1,4 +1,5 @@
 import Buttons from '../../buttons/Buttons.js';
+import FixWidthButtons from '../../fixwidthbuttons/FixWidthButtons.js';
 
 var CreateListPanel = function (scene) {
     var background;
@@ -29,13 +30,24 @@ var CreateListPanel = function (scene) {
     }
     var height = this.listHeight;
 
-    var listPanel = new Buttons(scene, {
-        width: width, height: height,
+    var listPanel;
+    if (!this.listWrapEnable) {
+        listPanel = new Buttons(scene, {
+            width: width, height: height,
 
-        orientation: 'y',
-        background: background,
-        buttons: buttons,
-    });
+            orientation: 'y',
+            background: background,
+            buttons: buttons,
+        });
+    } else {
+        listPanel = new FixWidthButtons(scene, {
+            width: width, height: height,
+
+            background: background,
+            buttons: buttons,
+        });
+    }
+
     scene.add.existing(listPanel);
 
     return listPanel;

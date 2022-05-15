@@ -1,4 +1,13 @@
 var methods = {
+    setWrapEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.listWrapEnable = enable;
+        return this;
+    },
+
     setCreateButtonCallback(callback) {
         this.createButtonCallback = callback;
         return this;
@@ -39,7 +48,7 @@ var methods = {
         return this;
     },
 
-    setListAlignmentMode(mode) {        
+    setListAlignmentMode(mode) {
         this.listAlignMode = mode;
         return this;
     },
@@ -64,8 +73,6 @@ var methods = {
         this.listEaseOutDuration = duration;
         return this;
     },
-
-
 
 }
 
