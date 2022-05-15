@@ -35,6 +35,7 @@ import Tabs from './tabs/Tabs';
 import Slider from './slider/Slider';
 import GridTable from './gridtable/GridTable';
 import Menu from './menu/Menu';
+import DropDownList from './dropdownlist/DropDownList';
 import TextBox from './textbox/TextBox';
 import NumberBar from './numberbar/NumberBar';
 import ScrollBar from './scrollbar/ScrollBar';
@@ -119,6 +120,7 @@ export {
     Slider,
     GridTable,
     Menu,
+    DropDownList,
     TextBox,
     NumberBar,
     ScrollBar,

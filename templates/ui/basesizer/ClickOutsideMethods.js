@@ -8,7 +8,7 @@ export default {
         if (this._clickOutside === undefined) {
             this._clickOutside = new ClickOutside(this, config);
         }
-        this._clickOutside.on('click', callback, scope);
+        this._clickOutside.on('clickoutside', callback, scope);
         return this;
     },
 
@@ -17,7 +17,7 @@ export default {
             return this;
         }
 
-        this._clickOutside.off('click', callback, scope);
+        this._clickOutside.off('clickoutside', callback, scope);
         return this;
     },
 

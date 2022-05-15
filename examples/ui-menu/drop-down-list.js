@@ -49,7 +49,7 @@ var CreateDropDownList = function (scene, x, y, options) {
     })
         .setData('value', '');
 
-    label.data.events.on('changedata-value', function (parent, value, previousValue) {
+    label.on('changedata-value', function (parent, value, previousValue) {
         label.text = value;
     })
     if (options[0]) {

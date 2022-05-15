@@ -16,6 +16,7 @@ import CustomProgressFactory from './customprogress/Factory';
 import CustomShapesFactory from './customshapes/Factory';
 import DialogFactory from './dialog/Factory';
 import DragFactory from './drag/Factory';
+import DropDownListFactory from './dropdownlist/Factory';
 import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
@@ -88,6 +89,7 @@ declare class Factories {
     customShapes: typeof CustomShapesFactory;
     dialog: typeof DialogFactory;
     drag: typeof DragFactory;
+    dropDownList: typeof DropDownListFactory;
     dynamicTextFactory: typeof DynamicTextFactory;
     flip: typeof FlipFactory;
     fixWidthButtons: typeof FixWidthButtonsFactory;
@@ -180,6 +182,7 @@ import CustomProgressClass from './customprogress/CustomProgress';
 import CustomShapesClass from './customshapes/CustomShapes';
 import DialogClass from './dialog/Dialog';
 import DragClass from './drag/Drag';
+import DropDownListClass from './dropdownlist/DropDownList';
 import DynamicTextClass from './dynamictext/DynamicText';
 import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
 import { Fade as FadeClass } from './fade/Fade.js';
@@ -238,6 +241,7 @@ declare namespace UIPlugins {
     type CustomShapes = CustomShapesClass;
     type Dialog = DialogClass;
     type Drag = DragClass;
+    type DropDownList = DropDownListClass;
     type DynamicText = DynamicTextClass;
     type EaseMove = EaseMoveClass;
     type Fade = FadeClass;
