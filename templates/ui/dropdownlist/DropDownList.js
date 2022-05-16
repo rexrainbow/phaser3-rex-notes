@@ -1,5 +1,4 @@
 import Label from '../label/Label.js';
-import Clone from '../../../plugins/utils/object/Clone.js';
 import ListPanelMethods from './listpanel/Methods.js'
 
 
@@ -9,8 +8,6 @@ class DropDownList extends Label {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexDropDownList';
-
-        this.options = [];
 
         this.setOptions(GetValue(config, 'options'));
 
@@ -56,7 +53,7 @@ class DropDownList extends Label {
         if (options === undefined) {
             options = [];
         }
-        Clone(options, this.options);
+        this.options = options;
         return this;
     }
 

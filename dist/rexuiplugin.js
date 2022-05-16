@@ -37382,7 +37382,6 @@
 
       _this = _super.call(this, scene, config);
       _this.type = 'rexDropDownList';
-      _this.options = [];
 
       _this.setOptions(GetValue$o(config, 'options'));
 
@@ -37445,7 +37444,7 @@
           options = [];
         }
 
-        Clone(options, this.options);
+        this.options = options;
         return this;
       }
     }, {

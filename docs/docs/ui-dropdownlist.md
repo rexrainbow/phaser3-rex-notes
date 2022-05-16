@@ -276,6 +276,22 @@ var dropDownList = scene.rexUI.add.dropDownList({
     var dropDownList = new MyDropDownList(scene, config);
     ```
 
+### Options
+
+- Set
+    ```javascript
+    dropDownList.setOptions(options);
+    ```
+    or
+    ```javascript
+    dropDownList.options = options;
+    ```
+    - `options` : Array of strings, or objects.
+- Get
+    ```javascript
+    var options = dropDownList.options;
+    ```
+
 ### Open/close list panel
 
 #### Open list panel
