@@ -47,11 +47,13 @@ class Demo extends Phaser.Scene {
             options: options,
 
             list: {
-                createBackgroundCallback: undefined,
+                createBackgroundCallback: function (scene) {
+                    return scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK);
+                },
                 createButtonCallback: function (scene, option, index, options) {
                     var text = (stringOption) ? option : option.text;
                     var button = scene.rexUI.add.label({
-                        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_DARK),
+                        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0),
 
                         text: CreateTextObject(scene, text),
 

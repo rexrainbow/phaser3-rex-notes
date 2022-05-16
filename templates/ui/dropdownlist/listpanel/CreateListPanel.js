@@ -38,6 +38,9 @@ var CreateListPanel = function (scene) {
             orientation: 'y',
             background: background,
             buttons: buttons,
+
+            space: this.listSpace,
+            draggable: this.listDraggable,
         });
     } else {
         listPanel = new FixWidthButtons(scene, {
@@ -45,6 +48,9 @@ var CreateListPanel = function (scene) {
 
             background: background,
             buttons: buttons,
+
+            space: this.listSpace,
+            draggable: this.listDraggable,
         });
     }
 

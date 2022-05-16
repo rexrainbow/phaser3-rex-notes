@@ -26,6 +26,8 @@ class DropDownList extends Label {
         this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
         this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
         this.setListBounds(GetValue(listConfig, 'bounds'));
+        this.setListSpace(GetValue(listConfig, 'space'));
+        this.setListDraggable(GetValue(listConfig, 'draggable', false));
 
         this.setValueChangeCallback(
             GetValue(config, 'setValueCallback'),

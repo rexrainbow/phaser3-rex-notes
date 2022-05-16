@@ -8,7 +8,7 @@ declare namespace DropDownList {
         scene: Phaser.Scene,
         option: any,
         index: number,
-        optionss: any[]
+        options: any[]
     ) => Phaser.GameObjects.GameObject;
 
     type CreateBackgroundCallbackType = (
@@ -25,6 +25,7 @@ declare namespace DropDownList {
     ) => void;
 
     type OnButtonOverCallbackType = (
+        this: DropDownList,
         button: Phaser.GameObjects.GameObject,
         index: number,
         pointer: Phaser.Input.Pointer,
@@ -32,6 +33,7 @@ declare namespace DropDownList {
     ) => void;
 
     type OnButtonOutCallbackType = (
+        this: DropDownList,
         button: Phaser.GameObjects.GameObject,
         index: number,
         pointer: Phaser.Input.Pointer,
@@ -46,6 +48,14 @@ declare namespace DropDownList {
         previousValue?: any,
     ) => void;
 
+    type ListSpaceType = {
+        left?: number, right?: number, top?: number, bottom?: number, item?: number
+    };
+
+    type WrapListSpaceType = {
+        left?: number, right?: number, top?: number, bottom?: number, item?: number, line?: number
+    }
+
 
     interface IConfig extends Label.IConfig {
         options?: any[],
@@ -57,14 +67,22 @@ declare namespace DropDownList {
             onButtonOver?: OnButtonOverCallbackType;
             onButtonOut?: OnButtonOutCallbackType;
 
+            easeIn?: number;
+            easeOut?: number;
+
             wrap?: boolean;
-            width?: number, height?: number;
+            width?: number;
+            height?: number;
             alignParent?: AlignParentType;
             bounds?: Phaser.Geom.Rectangle;
+
+            space?: ListSpaceType | WrapListSpaceType;
+
+            draggable?: boolean;
         },
 
-        setValueCallback?: SetValueCallbackType
-        setValueCallbackScope?: object,
+        setValueCallback?: SetValueCallbackType;
+        setValueCallbackScope?: object;
         value?: any;
     }
 }
@@ -91,18 +109,18 @@ declare class DropDownList extends Label {
     setButtonOverCallback(callback?: DropDownList.OnButtonOverCallbackType): this;
     setButtonOutCallback(callback?: DropDownList.OnButtonOutCallbackType): this;
 
+    setListEaseInDuration(duration?: number): this;
+    setListEaseOutDuration(duration?: number): this;
+
     setWrapEnable(enable?: boolean): this;
     setListWidth(width?: number): this;
     setListHeight(height?: number): this;
-    setListSize(
-        width?: number,
-        height?: number
-    ): this;
+    setListSize(width?: number, height?: number): this;
 
     setListAlignmentMode(mode?: DropDownList.AlignParentType): this;
     setListBounds(bounds: Phaser.Geom.Rectangle): this;
 
-    setListEaseInDuration(duration?: number): this;
-    setListEaseOutDuration(duration?: number): this;
+    setListSpace(space?: DropDownList.ListSpaceType | DropDownList.WrapListSpaceType): this;
 
+    setListDraggable(enable?: boolean): this;
 }

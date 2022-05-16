@@ -37171,6 +37171,18 @@
       this.onButtonOut = callback;
       return this;
     },
+    setListEaseOutDuration: function setListEaseOutDuration(duration) {
+      if (duration === undefined) {
+        duration = 0;
+      }
+
+      this.listEaseOutDuration = duration;
+      return this;
+    },
+    setListBounds: function setListBounds(bounds) {
+      this.listBounds = bounds;
+      return this;
+    },
     setListWidth: function setListWidth(width) {
       this.listWidth = width;
       return this;
@@ -37187,10 +37199,6 @@
       this.listAlignMode = mode;
       return this;
     },
-    setListBounds: function setListBounds(bounds) {
-      this.listBounds = bounds;
-      return this;
-    },
     setListEaseInDuration: function setListEaseInDuration(duration) {
       if (duration === undefined) {
         duration = 0;
@@ -37199,12 +37207,16 @@
       this.listEaseInDuration = duration;
       return this;
     },
-    setListEaseOutDuration: function setListEaseOutDuration(duration) {
-      if (duration === undefined) {
-        duration = 0;
+    setListSpace: function setListSpace(space) {
+      this.listSpace = space;
+      return this;
+    },
+    setListDraggable: function setListDraggable(enable) {
+      if (enable === undefined) {
+        enable = true;
       }
 
-      this.listEaseOutDuration = duration;
+      this.listDraggable = enable;
       return this;
     }
   };
@@ -37250,14 +37262,18 @@
         height: height,
         orientation: 'y',
         background: background,
-        buttons: buttons
+        buttons: buttons,
+        space: this.listSpace,
+        draggable: this.listDraggable
       });
     } else {
       listPanel = new Buttons(scene, {
         width: width,
         height: height,
         background: background,
-        buttons: buttons
+        buttons: buttons,
+        space: this.listSpace,
+        draggable: this.listDraggable
       });
     }
 
@@ -37389,6 +37405,10 @@
       _this.setListAlignmentMode(GetValue$o(listConfig, 'alignParent', 'text'));
 
       _this.setListBounds(GetValue$o(listConfig, 'bounds'));
+
+      _this.setListSpace(GetValue$o(listConfig, 'space'));
+
+      _this.setListDraggable(GetValue$o(listConfig, 'draggable', false));
 
       _this.setValueChangeCallback(GetValue$o(config, 'setValueCallback'), GetValue$o(config, 'setValueCallbackScope'));
 

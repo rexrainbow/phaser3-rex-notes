@@ -224,6 +224,7 @@ module.exports = {
     'gridtable': './templates/ui/gridtable/GridTable.js',
     'label': './templates/ui/label/Label.js',
     'menu': './templates/ui/menu/Menu.js',
+    'dropdownlist': './templates/ui/dropdownlist/DropDownList.js',
     'ninepatch': './templates/ui/ninepatch/NinePatch.js',
     'badgelabel': './templates/ui/badgelabel/BadgeLabel.js',
     'pages': './templates/ui/pages/Pages.js',

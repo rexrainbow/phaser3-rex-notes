@@ -33,6 +33,19 @@ var methods = {
         return this;
     },
 
+    setListEaseOutDuration(duration) {
+        if (duration === undefined) {
+            duration = 0;
+        }
+        this.listEaseOutDuration = duration;
+        return this;
+    },
+
+    setListBounds(bounds) {
+        this.listBounds = bounds;
+        return this;
+    },
+
     setListWidth(width) {
         this.listWidth = width;
         return this;
@@ -53,11 +66,6 @@ var methods = {
         return this;
     },
 
-    setListBounds(bounds) {
-        this.listBounds = bounds;
-        return this;
-    },
-
     setListEaseInDuration(duration) {
         if (duration === undefined) {
             duration = 0;
@@ -66,14 +74,18 @@ var methods = {
         return this;
     },
 
-    setListEaseOutDuration(duration) {
-        if (duration === undefined) {
-            duration = 0;
-        }
-        this.listEaseOutDuration = duration;
+    setListSpace(space) {
+        this.listSpace = space;
         return this;
     },
 
+    setListDraggable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.listDraggable = enable;
+        return this;
+    }
 }
 
 export default methods;
