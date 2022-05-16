@@ -37208,6 +37208,10 @@
       return this;
     },
     setListSpace: function setListSpace(space) {
+      if (space === undefined) {
+        space = {};
+      }
+
       this.listSpace = space;
       return this;
     },
