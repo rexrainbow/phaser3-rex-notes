@@ -217,6 +217,8 @@ var dropDownList = scene.rexUI.add.dropDownList({
         - `left`, `right`, `top`, `bottom`, `item` : For [sizer](ui-sizer.md) layout. (`list.wrap` is `false`)
         - `left`, `right`, `top`, `bottom`, `item`, `line` : For [fixwidth-sizer](ui-fixwidthsizer.md) layout. (`list.wrap` is `true`)
     - `list.draggable` : Set `true` to drag top-most object.
+- `value` : 
+- `setValueCallback`, `setValueCallbackScope` :
 - Properties of [Label](ui-label.md#add-label-object)
     - `x`, `y` : Position of this object, it is valid when this object is the top object.
     - `anchor` : See [anchor](anchor.md#create-instance).
@@ -290,6 +292,22 @@ var dropDownList = scene.rexUI.add.dropDownList({
 - Get
     ```javascript
     var options = dropDownList.options;
+    ```
+
+### Value
+
+- Set value under `list.onButtonClick` callback.
+    ```javascript
+    dropDownList.setValue(value);
+    ```
+    or
+    ```javascript
+    dropDownList.value = value;
+    ```
+    - Will invoke `setValueCallback` when value changed.
+- Get
+    ```javascript
+    var value = dropDownList.value;
     ```
 
 ### Open/close list panel

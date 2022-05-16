@@ -7172,6 +7172,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#openclose-list-panel" class="md-nav__link">
     Open/close list panel
   </a>
@@ -8142,6 +8149,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#openclose-list-panel" class="md-nav__link">
     Open/close list panel
   </a>
@@ -8427,6 +8441,8 @@
 <li><code>list.draggable</code> : Set <code>true</code> to drag top-most object.</li>
 </ul>
 </li>
+<li><code>value</code> : </li>
+<li><code>setValueCallback</code>, <code>setValueCallbackScope</code> :</li>
 <li>Properties of <a href="../ui-label/#add-label-object">Label</a><ul>
 <li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
 <li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
@@ -8519,6 +8535,21 @@
 </li>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="nx">dropDownList</span><span class="p">.</span><span class="nx">options</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set value under <code>list.onButtonClick</code> callback.
+    <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">dropDownList</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>Will invoke <code>setValueCallback</code> when value changed.</li>
+</ul>
+</li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">dropDownList</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="openclose-list-panel">Open/close list panel<a class="headerlink" href="#openclose-list-panel" title="Permanent link">&para;</a></h3>
