@@ -3,14 +3,14 @@ import FixWidthButtons from '../../fixwidthbuttons/FixWidthButtons.js';
 
 var CreateListPanel = function (scene) {
     var background;
-    var createBackgroundCallback = this.createBackgroundCallback;
+    var createBackgroundCallback = this.listCreateBackgroundCallback;
     if (createBackgroundCallback) {
         background = createBackgroundCallback.call(this, scene);
         scene.add.existing(background);
     }
 
     var buttons = [];
-    var createButtonCallback = this.createButtonCallback;
+    var createButtonCallback = this.listCreateButtonCallback;
     if (createButtonCallback) {
         var options = this.options;
         for (var i = 0, cnt = options.length; i < cnt; i++) {

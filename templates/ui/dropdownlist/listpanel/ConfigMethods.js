@@ -9,27 +9,27 @@ var methods = {
     },
 
     setCreateButtonCallback(callback) {
-        this.createButtonCallback = callback;
-        return this;
-    },
-
-    setButtonClickCallback(callback) {
-        this.onButtonClick = callback;
+        this.listCreateButtonCallback = callback;
         return this;
     },
 
     setCreateBackgroundCallback(callback) {
-        this.createBackgroundCallback = callback;
+        this.listCreateBackgroundCallback = callback;
+        return this;
+    },
+
+    setButtonClickCallback(callback) {
+        this.listOnButtonClick = callback;
         return this;
     },
 
     setButtonOverCallback(callback) {
-        this.onButtonOver = callback;
+        this.listOnButtonOver = callback;
         return this;
     },
 
     setButtonOutCallback(callback) {
-        this.onButtonOut = callback;
+        this.listOnButtonOut = callback;
         return this;
     },
 
@@ -88,7 +88,8 @@ var methods = {
         }
         this.listDraggable = enable;
         return this;
-    }
+    },
+
 }
 
 export default methods;

@@ -25,12 +25,12 @@ var OpenListPanel = function () {
             .setPosition(x, this.top);
     }
 
-    var onButtonOver = this.onButtonOver;
+    var onButtonOver = this.listOnButtonOver;
     if (onButtonOver) {
         listPanel.on('button.over', onButtonOver, this);
     }
 
-    var onButtonOut = this.onButtonOut;
+    var onButtonOut = this.listOnButtonOut;
     if (onButtonOut) {
         listPanel.on('button.out', onButtonOut, this);
     }
@@ -40,7 +40,7 @@ var OpenListPanel = function () {
         .once('popup.complete', function (listPanel) {
             // After popping up
             // Can click
-            var onButtonClick = this.onButtonClick;
+            var onButtonClick = this.listOnButtonClick;
             if (onButtonClick) {
                 listPanel.on('button.click', function (button, index, pointer, event) {
                     onButtonClick.call(this, button, index, pointer, event);
