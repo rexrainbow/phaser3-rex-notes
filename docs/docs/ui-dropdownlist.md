@@ -294,6 +294,21 @@ var dropDownList = scene.rexUI.add.dropDownList({
     var options = dropDownList.options;
     ```
 
+### Clicking
+
+- Enable
+    ```javascript
+    dropDownList.enableClick();
+    ```
+- Disable
+    ```javascript
+    dropDownList.disableClick();
+    ```
+- Register another clicking callback
+    ```javascript
+    dropDownList.onClick(callback, scope);
+    ```
+
 ### Value
 
 - Set value under `list.onButtonClick` callback.
