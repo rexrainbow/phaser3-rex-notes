@@ -2239,7 +2239,7 @@
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
-  var Vector2 = Phaser.Geom.Vector2;
+  var Vector2 = Phaser.Math.Vector2;
   var RotateAround$1 = Phaser.Math.RotateAround;
 
   var GetBounds = function GetBounds(gameObject, output) {

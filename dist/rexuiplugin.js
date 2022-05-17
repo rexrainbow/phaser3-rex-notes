@@ -19724,7 +19724,7 @@
   };
 
   var Rectangle$2 = Phaser.Geom.Rectangle;
-  var Vector2 = Phaser.Geom.Vector2;
+  var Vector2 = Phaser.Math.Vector2;
   var RotateAround$2 = Phaser.Math.RotateAround;
 
   var GetBounds = function GetBounds(gameObject, output) {
@@ -37152,23 +37152,23 @@
       return this;
     },
     setCreateButtonCallback: function setCreateButtonCallback(callback) {
-      this.createButtonCallback = callback;
-      return this;
-    },
-    setButtonClickCallback: function setButtonClickCallback(callback) {
-      this.onButtonClick = callback;
+      this.listCreateButtonCallback = callback;
       return this;
     },
     setCreateBackgroundCallback: function setCreateBackgroundCallback(callback) {
-      this.createBackgroundCallback = callback;
+      this.listCreateBackgroundCallback = callback;
+      return this;
+    },
+    setButtonClickCallback: function setButtonClickCallback(callback) {
+      this.listOnButtonClick = callback;
       return this;
     },
     setButtonOverCallback: function setButtonOverCallback(callback) {
-      this.onButtonOver = callback;
+      this.listOnButtonOver = callback;
       return this;
     },
     setButtonOutCallback: function setButtonOutCallback(callback) {
-      this.onButtonOut = callback;
+      this.listOnButtonOut = callback;
       return this;
     },
     setListEaseOutDuration: function setListEaseOutDuration(duration) {
@@ -37227,7 +37227,7 @@
 
   var CreateListPanel = function CreateListPanel(scene) {
     var background;
-    var createBackgroundCallback = this.createBackgroundCallback;
+    var createBackgroundCallback = this.listCreateBackgroundCallback;
 
     if (createBackgroundCallback) {
       background = createBackgroundCallback.call(this, scene);
@@ -37235,7 +37235,7 @@
     }
 
     var buttons = [];
-    var createButtonCallback = this.createButtonCallback;
+    var createButtonCallback = this.listCreateButtonCallback;
 
     if (createButtonCallback) {
       var options = this.options;
@@ -37305,13 +37305,13 @@
       listPanel.changeOrigin(0, 1).setPosition(x, this.top);
     }
 
-    var onButtonOver = this.onButtonOver;
+    var onButtonOver = this.listOnButtonOver;
 
     if (onButtonOver) {
       listPanel.on('button.over', onButtonOver, this);
     }
 
-    var onButtonOut = this.onButtonOut;
+    var onButtonOut = this.listOnButtonOut;
 
     if (onButtonOut) {
       listPanel.on('button.out', onButtonOut, this);
@@ -37320,7 +37320,7 @@
     listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic').once('popup.complete', function (listPanel) {
       // After popping up
       // Can click
-      var onButtonClick = this.onButtonClick;
+      var onButtonClick = this.listOnButtonClick;
 
       if (onButtonClick) {
         listPanel.on('button.click', function (button, index, pointer, event) {

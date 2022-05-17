@@ -4,7 +4,7 @@ import {
 } from '../size/GetDisplaySize.js';
 
 const Rectangle = Phaser.Geom.Rectangle;
-const Vector2 = Phaser.Geom.Vector2;
+const Vector2 = Phaser.Math.Vector2;
 const RotateAround = Phaser.Math.RotateAround;
 
 var GetBounds = function (gameObject, output) {
