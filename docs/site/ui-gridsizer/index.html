@@ -6804,6 +6804,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-empty-rowcolumn" class="md-nav__link">
+    Insert empty row/column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#proportion" class="md-nav__link">
     Proportion
   </a>
@@ -8166,6 +8173,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-empty-rowcolumn" class="md-nav__link">
+    Insert empty row/column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#proportion" class="md-nav__link">
     Proportion
   </a>
@@ -8508,11 +8522,26 @@
 <ul>
 <li><code>child</code> : A game object</li>
 <li><code>column</code>, <code>row</code> : Index of grid to add.<ul>
-<li><code>column</code> and <code>row</code> are numbers : Insert game object to cell (<code>column</code>, <code>row</code>). Do nothing if that cell has item already.</li>
-<li><code>column</code> and <code>row</code> are <code>undefined</code> : Search each column, each row to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
-<li><code>column</code> is <code>undefined</code>, and <code>row</code> is <code>true</code> : Search each row, each column to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
-<li><code>column</code> is a number, and <code>row</code> is <code>undefined</code> : Search each row of column <code>column</code> to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
-<li><code>column</code> is <code>undefined</code> and <code>row</code> is a number : Search each column of row <code>row</code> to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
+<li><code>column</code> and <code>row</code> are numbers : Insert game object to cell (<code>column</code>, <code>row</code>). <ul>
+<li><strong>Do nothing if that cell has item already.</strong></li>
+</ul>
+</li>
+<li><code>column</code> and <code>row</code> are <code>undefined</code> : Search each column, each row to find an empty cell for inserting. <ul>
+<li>Add an new row (<code>gridSizer.addEmptyRow()</code>) if last row was full, then find an empty cell in new row.</li>
+</ul>
+</li>
+<li><code>column</code> is <code>undefined</code>, and <code>row</code> is <code>true</code> : Search each row, each column to find an empty cell for inserting.<ul>
+<li>Add an new column (<code>gridSizer.addEmptyColumn()</code>) if last column was full, then find an empty cell in new column.</li>
+</ul>
+</li>
+<li><code>column</code> is a number, and <code>row</code> is <code>undefined</code> : Search each row of column <code>column</code> to find an empty cell for inserting.<ul>
+<li>Add an new row (<code>gridSizer.addEmptyRow()</code>) if last row was full, then find an empty cell in new row.</li>
+</ul>
+</li>
+<li><code>column</code> is <code>undefined</code> and <code>row</code> is a number : Search each column of row <code>row</code> to find an empty cell for inserting. <ul>
+<li>Add an new column (<code>gridSizer.addEmptyColumn()</code>) if last column was full, then find an empty cell in new column.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>align</code> :<ul>
@@ -8540,6 +8569,45 @@
 <li><code>undefined</code> : Don't add this child. Default value.</li>
 </ul>
 </li>
+</ul>
+<h3 id="insert-empty-rowcolumn">Insert empty row/column<a class="headerlink" href="#insert-empty-rowcolumn" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Insert an empty row
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">insertEmptyRow</span><span class="p">(</span><span class="nx">rowIndex</span><span class="p">);</span>
+<span class="c1">// gridSizer.insertEmptyRow(rowIndex, proportion, space);</span>
+</code></pre></div><ul>
+<li><code>proportion</code> : Proportion of this new row.<ul>
+<li><code>undefined</code> : Use proportion of 1<sup>st</sup> row as default value.</li>
+</ul>
+</li>
+<li><code>space</code> : Space between this new row and previous row.<ul>
+<li><code>undefined</code> : Use space of 1<sup>st</sup> row as default value.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Add an empty row
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">addEmptyRow</span><span class="p">();</span>
+<span class="c1">// gridSizer.addEmptyRow(rowIndex, proportion, space);</span>
+</code></pre></div></li>
+<li>Insert an empty column
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">insertEmptyColumn</span><span class="p">(</span><span class="nx">colIndex</span><span class="p">);</span>
+<span class="c1">// gridSizer.insertEmptyColumn(colIndex, proportion, space);</span>
+</code></pre></div><ul>
+<li><code>proportion</code> : Proportion of this new column.<ul>
+<li><code>undefined</code> : Use proportion of 1<sup>st</sup> column as default value.</li>
+</ul>
+</li>
+<li><code>space</code> : Space between this new column and previous column.<ul>
+<li><code>undefined</code> : Use space of 1<sup>st</sup> column as default value.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Add an empty row
+    <div class="highlight"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">addEmptyColumn</span><span class="p">();</span>
+<span class="c1">// gridSizer.addEmptyColumn(colIndex, proportion, space);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="proportion">Proportion<a class="headerlink" href="#proportion" title="Permanent link">&para;</a></h3>
 <p>Set proportion of each column or row via</p>

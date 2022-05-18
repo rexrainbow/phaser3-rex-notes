@@ -12,6 +12,9 @@ import RunWidthWrap from './RunWidthWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import ResetGrid from './ResetGrid.js';
+import { InseryEmptyRow, AddEmptyRow } from './InsertEmptyRow.js';
+import { InsertEmptyColumn, AddEmptyColumn } from './InsertEmptyColumn.js';
+
 
 var methods = {
     getChildrenWidth: GetChildrenWidth,
@@ -26,7 +29,11 @@ var methods = {
     resolveChildrenWidth: ResolveChildrenWidth,
     runWidthWrap: RunWidthWrap,
 
-    resetGrid: ResetGrid
+    resetGrid: ResetGrid,
+    inseryEmptyRow: InseryEmptyRow,
+    addEmptyRow: AddEmptyRow,
+    insertEmptyColumn: InsertEmptyColumn,
+    addEmptyColumn: AddEmptyColumn,
 };
 
 Object.assign(

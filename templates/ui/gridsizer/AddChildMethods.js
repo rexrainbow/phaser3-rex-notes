@@ -7,13 +7,13 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 
-var GetEmptyItemIndex = function (columnIndex, rowIndex, items, columnCount, rowCount) {
+var GetEmptyCellIndex = function (columnIndex, rowIndex, cells, columnCount, rowCount) {
     if ((typeof (columnIndex) === 'number') || (typeof (rowIndex) === 'number')) {
         if (columnIndex === undefined) {
             var idx;
             for (var i = 0; i < columnCount; i++) {
                 idx = (rowIndex * columnCount) + i;
-                if (!items[idx]) {
+                if (!cells[idx]) {
                     return idx;
                 }
             }
@@ -21,13 +21,13 @@ var GetEmptyItemIndex = function (columnIndex, rowIndex, items, columnCount, row
             var idx;
             for (var i = 0; i < rowCount; i++) {
                 idx = (i * columnCount) + columnIndex;
-                if (!items[idx]) {
+                if (!cells[idx]) {
                     return idx;
                 }
             }
         } else {
             var idx = (rowIndex * columnCount) + columnIndex;
-            if (!items[idx]) {
+            if (!cells[idx]) {
                 return idx;
             }
         }
@@ -37,14 +37,14 @@ var GetEmptyItemIndex = function (columnIndex, rowIndex, items, columnCount, row
         for (var i = 0; i < columnCount; i++) {
             for (var j = 0; j < rowCount; j++) {
                 idx = (j * columnCount) + i;
-                if (!items[idx]) {
+                if (!cells[idx]) {
                     return idx;
                 }
             }
         }
     } else {
-        for (var i = 0, cnt = items.length; i < cnt; i++) {
-            if (!items[i]) {
+        for (var i = 0, cnt = cells.length; i < cnt; i++) {
+            if (!cells[i]) {
                 return i;
             }
         }
@@ -65,9 +65,21 @@ var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, exp
     }
 
     // Get insert index
-    var itemIndex = GetEmptyItemIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
+    var itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
     if (itemIndex === null) {
-        return this;
+        // Specific index mode
+        if ((typeof (columnIndex) === 'number') && (typeof (rowIndex) === 'number')) {
+            return this;
+        }
+
+        if ((rowIndex === true) || (typeof (rowIndex) === 'number')) {
+            this.addEmptyColumn();
+        } else {            
+            this.addEmptyRow();
+        }
+
+        // Get insert index again
+        itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
     }
 
     if (typeof (align) === 'string') {

@@ -282,11 +282,16 @@ gridSizer.add(child, column, row, align, padding, expand, key);
 
 - `child` : A game object
 - `column`, `row` : Index of grid to add.
-    - `column` and `row` are numbers : Insert game object to cell (`column`, `row`). Do nothing if that cell has item already.
-    - `column` and `row` are `undefined` : Search each column, each row to find an empty cell for inserting. Do nothing if it can't find any empty cell.
-    - `column` is `undefined`, and `row` is `true` : Search each row, each column to find an empty cell for inserting. Do nothing if it can't find any empty cell.
-    - `column` is a number, and `row` is `undefined` : Search each row of column `column` to find an empty cell for inserting. Do nothing if it can't find any empty cell.
-    - `column` is `undefined` and `row` is a number : Search each column of row `row` to find an empty cell for inserting. Do nothing if it can't find any empty cell.
+    - `column` and `row` are numbers : Insert game object to cell (`column`, `row`). 
+        - **Do nothing if that cell has item already.**
+    - `column` and `row` are `undefined` : Search each column, each row to find an empty cell for inserting. 
+        - Add an new row (`gridSizer.addEmptyRow()`) if last row was full, then find an empty cell in new row.
+    - `column` is `undefined`, and `row` is `true` : Search each row, each column to find an empty cell for inserting.
+        - Add an new column (`gridSizer.addEmptyColumn()`) if last column was full, then find an empty cell in new column.
+    - `column` is a number, and `row` is `undefined` : Search each row of column `column` to find an empty cell for inserting.
+        - Add an new row (`gridSizer.addEmptyRow()`) if last row was full, then find an empty cell in new row.
+    - `column` is `undefined` and `row` is a number : Search each column of row `row` to find an empty cell for inserting. 
+        - Add an new column (`gridSizer.addEmptyColumn()`) if last column was full, then find an empty cell in new column.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
@@ -307,6 +312,37 @@ gridSizer.add(child, column, row, align, padding, expand, key);
 - `expand` : Set `true` to height and width.
 - `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
+
+### Insert empty row/column
+
+- Insert an empty row
+    ```javascript
+    gridSizer.insertEmptyRow(rowIndex);
+    // gridSizer.insertEmptyRow(rowIndex, proportion, space);
+    ```
+    - `proportion` : Proportion of this new row.
+        - `undefined` : Use proportion of 1st row as default value.
+    - `space` : Space between this new row and previous row.
+        - `undefined` : Use space of 1st row as default value.
+- Add an empty row
+    ```javascript
+    gridSizer.addEmptyRow();
+    // gridSizer.addEmptyRow(rowIndex, proportion, space);
+    ```
+- Insert an empty column
+    ```javascript
+    gridSizer.insertEmptyColumn(colIndex);
+    // gridSizer.insertEmptyColumn(colIndex, proportion, space);
+    ```
+    - `proportion` : Proportion of this new column.
+        - `undefined` : Use proportion of 1st column as default value.
+    - `space` : Space between this new column and previous column.
+        - `undefined` : Use space of 1st column as default value.
+- Add an empty row
+    ```javascript
+    gridSizer.addEmptyColumn();
+    // gridSizer.addEmptyColumn(colIndex, proportion, space);
+    ```
 
 ### Proportion
 

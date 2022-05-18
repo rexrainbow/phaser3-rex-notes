@@ -28957,7 +28957,7 @@
   var GetValue$T = Phaser.Utils.Objects.GetValue;
   var ALIGN_CENTER$1 = Phaser.Display.Align.CENTER;
 
-  var GetEmptyItemIndex = function GetEmptyItemIndex(columnIndex, rowIndex, items, columnCount, rowCount) {
+  var GetEmptyCellIndex = function GetEmptyCellIndex(columnIndex, rowIndex, cells, columnCount, rowCount) {
     if (typeof columnIndex === 'number' || typeof rowIndex === 'number') {
       if (columnIndex === undefined) {
         var idx;
@@ -28965,7 +28965,7 @@
         for (var i = 0; i < columnCount; i++) {
           idx = rowIndex * columnCount + i;
 
-          if (!items[idx]) {
+          if (!cells[idx]) {
             return idx;
           }
         }
@@ -28975,14 +28975,14 @@
         for (var i = 0; i < rowCount; i++) {
           idx = i * columnCount + columnIndex;
 
-          if (!items[idx]) {
+          if (!cells[idx]) {
             return idx;
           }
         }
       } else {
         var idx = rowIndex * columnCount + columnIndex;
 
-        if (!items[idx]) {
+        if (!cells[idx]) {
           return idx;
         }
       }
@@ -28993,14 +28993,14 @@
         for (var j = 0; j < rowCount; j++) {
           idx = j * columnCount + i;
 
-          if (!items[idx]) {
+          if (!cells[idx]) {
             return idx;
           }
         }
       }
     } else {
-      for (var i = 0, cnt = items.length; i < cnt; i++) {
-        if (!items[i]) {
+      for (var i = 0, cnt = cells.length; i < cnt; i++) {
+        if (!cells[i]) {
           return i;
         }
       }
@@ -29023,10 +29023,22 @@
     } // Get insert index
 
 
-    var itemIndex = GetEmptyItemIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
+    var itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
 
     if (itemIndex === null) {
-      return this;
+      // Specific index mode
+      if (typeof columnIndex === 'number' && typeof rowIndex === 'number') {
+        return this;
+      }
+
+      if (rowIndex === true || typeof rowIndex === 'number') {
+        this.addEmptyColumn();
+      } else {
+        this.addEmptyRow();
+      } // Get insert index again
+
+
+      itemIndex = GetEmptyCellIndex(columnIndex, rowIndex, this.sizerChildren, this.columnCount, this.rowCount);
     }
 
     if (typeof align === 'string') {
@@ -29201,6 +29213,65 @@
     return this;
   };
 
+  var InseryEmptyRow = function InseryEmptyRow(rowIndex, proportion, space) {
+    if (proportion === undefined) {
+      proportion = this.rowProportions[0] || 0;
+    }
+
+    if (space === undefined) {
+      space = this.space.row[0] || 0;
+    }
+
+    this.rowCount += 1;
+    this.gridCount += this.columnCount;
+    var args = [rowIndex * this.columnCount, 0];
+
+    for (var i = 0; i < this.columnCount; i++) {
+      args.push(null);
+    }
+
+    this.sizerChildren.splice.apply(this.sizerChildren, args);
+    this.rowProportions.push(proportion);
+    this.rowHeight.length += 1; // this.rowHeight will be recalculated when layout()    
+
+    this.space.row.splice(rowIndex, 0, space);
+    return this;
+  };
+
+  var AddEmptyRow = function AddEmptyRow(proportion, space) {
+    InseryEmptyRow.call(this, this.rowCount, proportion, space);
+    return this;
+  };
+
+  var InsertEmptyColumn = function InsertEmptyColumn(colIndex, proportion, space) {
+    if (proportion === undefined) {
+      proportion = this.columnProportions[0] || 0;
+    }
+
+    if (space === undefined) {
+      space = this.space.column[0] || 0;
+    }
+
+    this.columnCount += 1;
+    this.gridCount += this.rowCount;
+
+    for (var i = this.rowCount - 1; i >= 0; i--) {
+      var insertIndex = i * this.columnCount + colIndex;
+      this.sizerChildren.splice(insertIndex, 0, null);
+    }
+
+    this.columnProportions.push(proportion);
+    this.columnWidth.length += 1; // this.columnWidth will be recalculated when layout()    
+
+    this.space.column.splice(colIndex, 0, space);
+    return this;
+  };
+
+  var AddEmptyColumn = function AddEmptyColumn(proportion, space) {
+    InsertEmptyColumn.call(this, this.columnCount, proportion, space);
+    return this;
+  };
+
   var methods$b = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
@@ -29213,7 +29284,11 @@
     resolveHeight: ResolveHeight,
     resolveChildrenWidth: ResolveChildrenWidth,
     runWidthWrap: RunWidthWrap$1,
-    resetGrid: ResetGrid
+    resetGrid: ResetGrid,
+    inseryEmptyRow: InseryEmptyRow,
+    addEmptyRow: AddEmptyRow,
+    insertEmptyColumn: InsertEmptyColumn,
+    addEmptyColumn: AddEmptyColumn
   };
   Object.assign(methods$b, AddChildMethods$5, RemoveChildMethods$4);
 
