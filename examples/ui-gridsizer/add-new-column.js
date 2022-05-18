@@ -32,36 +32,34 @@ class Demo extends Phaser.Scene {
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 1, 1, 0, COLOR_DARK))
 
         for (var r = 0; r < gridSizer.rowCount; r++) {
-            // Each column has 2 rows
-            gridSizer
-                .add(
-                    this.add.text(0, 0, Math.floor(Math.random() * 1000).toString()),
-                    { row: true, expand: false, align: 'center' }
-                )
-                .add(
-                    this.rexUI.add.roundRectangle(0, 0, 1, 1, 5).setStrokeStyle(2, COLOR_PRIMARY),
-                    { row: true, expand: true }
-                )
+            AddColumnItems(gridSizer)
         }
         gridSizer.layout();
 
         // Add new row
         this.input.on('pointerup', function () {
             // Each column has 2 rows
-            gridSizer
-                .add(
-                    this.add.text(0, 0, Math.floor(Math.random() * 1000).toString()),
-                    { row: true, expand: false, align: 'center' }
-                )
-                .add(
-                    this.rexUI.add.roundRectangle(0, 0, 1, 1, 5).setStrokeStyle(2, COLOR_PRIMARY),
-                    { row: true, expand: true }
-                )
-                .layout()
+            AddColumnItems(gridSizer);
+            gridSizer.layout();
         }, this)
     }
 
     update() { }
+}
+
+var AddColumnItems = function (gridSizer) {
+    var scene = gridSizer.scene;
+    // Each column has 2 rows
+    gridSizer
+        .add(
+            scene.add.text(0, 0, Math.floor(Math.random() * 1000).toString()),
+            { row: true, expand: false, align: 'center' }
+        )
+        .add(
+            scene.rexUI.add.roundRectangle(0, 0, 1, 1, 5).setStrokeStyle(2, COLOR_PRIMARY),
+            { row: true, expand: true }
+        )
+    return gridSizer;
 }
 
 var config = {

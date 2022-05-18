@@ -32,36 +32,34 @@ class Demo extends Phaser.Scene {
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 1, 1, 0, COLOR_DARK))
 
         for (var r = 0; r < gridSizer.rowCount; r++) {
-            // Each row has 2 columns
-            gridSizer
-                .add(
-                    this.add.text(0, 0, Math.floor(Math.random() * 1000).toString()),
-                    { expand: false, align: 'center' }
-                )
-                .add(
-                    this.rexUI.add.roundRectangle(0, 0, 1, 1, 5).setStrokeStyle(2, COLOR_PRIMARY),
-                    { expand: true }
-                )
+            AddRowItems(gridSizer);
         }
         gridSizer.layout();
 
         // Add new row
         this.input.on('pointerup', function () {
-            // Each row has 2 columns
-            gridSizer
-                .add(
-                    this.add.text(0, 0, Math.floor(Math.random() * 1000).toString()),
-                    { expand: false, align: 'center' }
-                )
-                .add(
-                    this.rexUI.add.roundRectangle(0, 0, 1, 1, 5).setStrokeStyle(2, COLOR_PRIMARY),
-                    { expand: true }
-                )
-                .layout()
+            AddRowItems(gridSizer)
+            gridSizer.layout();
         }, this)
     }
 
     update() { }
+}
+
+var AddRowItems = function (gridSizer) {
+    var scene = gridSizer.scene;
+    // Each row has 2 columns
+    gridSizer
+        .add(
+            scene.add.text(0, 0, Math.floor(Math.random() * 1000).toString()),
+            { expand: false, align: 'center' }
+        )
+        .add(
+            scene.rexUI.add.roundRectangle(0, 0, 1, 1, 5).setStrokeStyle(2, COLOR_PRIMARY),
+            { expand: true }
+        )
+
+    return gridSizer;
 }
 
 var config = {
