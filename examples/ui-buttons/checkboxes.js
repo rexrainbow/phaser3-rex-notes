@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
                 createButton(this, 'D')
             ],
 
-            type: ((CheckboxesMode) ? 'checkboxes' : 'radio'),
+            buttonsType: ((CheckboxesMode) ? 'checkboxes' : 'radio'),
             setValueCallback: function (button, value) {
                 button.getElement('icon')
                     .setFillStyle((value) ? COLOR_LIGHT : undefined);

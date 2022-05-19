@@ -11,6 +11,7 @@ export interface IConfig {
     eventEmitter?: Phaser.GameObjects.GameObject,
 
     type?: 'checkboxes' | 'radio',
+    buttonsType?: 'checkboxes' | 'radio',
 
     setValueCallback?: (button: Phaser.GameObjects.GameObject, value: boolean, previousValue: boolean) => void,
 

@@ -9810,8 +9810,12 @@
   };
 
   var SetTypeMethods = {
-    setType: function setType(config) {
-      var type = GetValue$1(config, 'type', undefined);
+    setButtonsType: function setButtonsType(config) {
+      if (config === undefined) {
+        config = {};
+      }
+
+      var type = GetValue$1(config, 'buttonsType', config.type);
       this.buttonsType = type;
 
       switch (type) {
@@ -10133,7 +10137,7 @@
         _this.addButtons(buttons);
       }
 
-      _this.buttonGroup.setType(config);
+      _this.buttonGroup.setButtonsType(config);
 
       _this.addChildrenMap('background', background);
 

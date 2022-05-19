@@ -80,7 +80,7 @@ class GridButtons extends GridSizer {
             }
         }
 
-        this.buttonGroup.setType(config);
+        this.buttonGroup.setButtonsType(config);
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', this.buttonGroup.buttons);

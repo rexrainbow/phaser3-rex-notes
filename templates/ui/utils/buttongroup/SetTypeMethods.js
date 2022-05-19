@@ -40,8 +40,11 @@ var InitData = function (config, initialValue) {
 }
 
 export default {
-    setType(config) {
-        var type = GetValue(config, 'type', undefined);
+    setButtonsType(config) {
+        if (config === undefined) {
+            config = {};
+        }
+        var type = GetValue(config, 'buttonsType', config.type);
         this.buttonsType = type;
         switch (type) {
             case 'radio':
