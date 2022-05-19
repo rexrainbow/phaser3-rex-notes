@@ -6,9 +6,12 @@ strokeColor:
 strokeWidth:
 */
 
+import GetConfig from './GetConfig.js';
 import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
 
-var CreateRoundRectangle = function (scene, config, defaultConfig, customMakeCallbacks) {
+var CreateRoundRectangle = function (scene, config, styles, customMakeCallbacks) {
+    config = GetConfig(config, styles);
+
     var gameObjects = new RoundRectangle(scene, 0, 0, 1, 1, config.radius);
 
     if (config.color !== undefined) {

@@ -5,22 +5,16 @@ const content = `
 type: sizer
 background:
     type: roundrectangle
-    color: 0x260e04
-    radius: 10
-    strokeColor: 0x7b5e57
-    strokeWidth: 2
+    class: background
 children:
     - type: text
       text: Hello
-      fontSize: 20
       color: white
     - type: text
       text: World
-      fontSize: 20
       color: yellow
     - type: text
       text: Phaser
-      fontSize: 20
       color: red
 space:
     left: 10
@@ -28,6 +22,17 @@ space:
     top: 10
     bottom: 10
     item: 10
+`
+
+const styles = `
+text:
+    fontSize: 20
+    color: white
+.background:
+    color: 0x260e04
+    radius: 10
+    strokeColor: 0x7b5e57
+    strokeWidth: 2
 `
 
 class Demo extends Phaser.Scene {
@@ -40,7 +45,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var label = YAMLMake(this, content)
+        var sizer = YAMLMake(this, content, styles)
             .setPosition(400, 300)
             .layout();
     }

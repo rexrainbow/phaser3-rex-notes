@@ -5,9 +5,13 @@ frame:
 width:
 height:
 */
+
+import GetConfig from './GetConfig.js';
+
 const PhaserImage = Phaser.GameObjects.Image;
 
-var CreateImage = function (scene, config, defaultConfig, customMakeCallbacks) {
+var CreateImage = function (scene, config, styles, customMakeCallbacks) {
+    config = GetConfig(config, styles);
     var gameObjects = new PhaserImage(scene, 0, 0, config.key, config.frame);
 
     if (config.width !== undefined) {

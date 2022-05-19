@@ -1,6 +1,6 @@
 import MakeCallbacks from './makecallbacks/MakeCallbacks.js';
 
-var Make = function (scene, config, defaultConfig, customMakeCallbacks) {
+var Make = function (scene, config, styles, customMakeCallbacks) {
     var type = config.type;
     var callback;
     if (customMakeCallbacks) {
@@ -14,7 +14,7 @@ var Make = function (scene, config, defaultConfig, customMakeCallbacks) {
         return undefined;
     }
 
-    var gameObject = callback(scene, config, defaultConfig, customMakeCallbacks);
+    var gameObject = callback(scene, config, styles, customMakeCallbacks);
     if (config.name) {
         gameObject.setName(config.name);
     }

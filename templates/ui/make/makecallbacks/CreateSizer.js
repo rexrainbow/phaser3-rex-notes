@@ -36,10 +36,13 @@ space:
 draggable:
 */
 
+import GetConfig from './GetConfig.js';
 import Sizer from '../../sizer/Sizer.js';
 import ReplaceChildConfig from './ReplaceChildConfig.js';
 
-var CreateSizer = function (scene, config, defaultConfig, customMakeCallbacks) {
+var CreateSizer = function (scene, config, styles, customMakeCallbacks) {
+    config = GetConfig(config, styles);
+
     var backgroundConfig = config.background;
     delete config.background;
     if (backgroundConfig) {
@@ -52,7 +55,7 @@ var CreateSizer = function (scene, config, defaultConfig, customMakeCallbacks) {
                 childConfig = { child: childConfig };
                 backgroundConfig[i] = childConfig;
             }
-            ReplaceChildConfig(scene, childConfig, 'child', defaultConfig, customMakeCallbacks);
+            ReplaceChildConfig(scene, childConfig, 'child', styles, customMakeCallbacks);
         }
     }
 
@@ -65,7 +68,7 @@ var CreateSizer = function (scene, config, defaultConfig, customMakeCallbacks) {
                 childConfig = { child: childConfig };
                 childrenConfig[i] = childConfig;
             }
-            ReplaceChildConfig(scene, childConfig, 'child', defaultConfig, customMakeCallbacks);
+            ReplaceChildConfig(scene, childConfig, 'child', styles, customMakeCallbacks);
         }
     }
 
