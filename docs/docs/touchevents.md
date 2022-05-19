@@ -233,6 +233,13 @@ Trigger these events from top scene to bottom scene.
     scene.input.on('gameover', function(timeStamp, domEvent){ /* ... */ }, scope);
     ```
 
+#### Game canvas
+
+```javascript
+scene.input.on('gameout', function(timeStamp, event){ /* ... */ }, scope);
+scene.input.on('gameover', function(timeStamp, event){ /* ... */ }, scope);
+```
+
 ### Dragging
 
 #### Enable dragging

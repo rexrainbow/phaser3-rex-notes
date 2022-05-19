@@ -540,6 +540,7 @@
         }
 
         this.scene.input.on('pointerup', this.onPointerUp, this);
+        this.scene.input.on('gameout', this.dragCancel, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
         this.scene.sys.events.once('shutdown', this.destroy, this);
       }
@@ -555,6 +556,7 @@
         }
 
         this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('gameout', this.dragCancel, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.gameObject = undefined;
@@ -1595,6 +1597,7 @@
       value: function boot() {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
+        this.scene.input.on('gameout', this.dragCancel, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
         this.scene.sys.events.once('shutdown', this.destroy, this);
       }
@@ -1610,6 +1613,7 @@
         Clear(this.movedState);
         this.scene.input.off('pointerdown', this.onPointerDown, this);
         this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('gameout', this.dragCancel, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
         this.scene.sys.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
