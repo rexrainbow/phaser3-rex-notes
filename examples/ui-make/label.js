@@ -9,15 +9,23 @@ background:
     radius: 10
     strokeColor: 0x7b5e57
     strokeWidth: 2
+icon:
+    type: image
+    key: person
 text:
     type: text
     text: Hello
-    fontSize: 20
+    fontSize: 24
+action:
+    type: image
+    key: volume
 space:
     left: 10
     right: 10
     top: 10
     bottom: 10
+    icon: 10
+    text: 10
 `
 
 class Demo extends Phaser.Scene {
@@ -27,7 +35,10 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.image('person', 'assets/images/person.png');
+        this.load.image('volume', 'assets/images/volume.png');
+     }
 
     create() {
         var label = YAMLMake(this, content)
