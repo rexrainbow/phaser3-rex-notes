@@ -21,7 +21,7 @@ space:
     text:
 */
 
-import Label from '../label/Label.js';
+import Label from '../../label/Label.js';
 import ReplaceChildConfig from './ReplaceChildConfig.js';
 
 var CreateLabel = function (scene, config, defaultConfig, customMakeCallbacks) {

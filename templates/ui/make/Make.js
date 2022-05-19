@@ -1,4 +1,4 @@
-import MakeCallbacks from './MakeCallbacks.js';
+import MakeCallbacks from './makecallbacks/MakeCallbacks.js';
 
 var Make = function (scene, config, defaultConfig, customMakeCallbacks) {
     var type = config.type;

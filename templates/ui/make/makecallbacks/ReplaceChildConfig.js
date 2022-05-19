@@ -1,4 +1,4 @@
-import Make from './Make.js';
+import Make from '../Make.js';
 
 var ReplaceChildConfig = function (scene, config, childKey, defaultConfig, customMakeCallbacks) {
     var child;
