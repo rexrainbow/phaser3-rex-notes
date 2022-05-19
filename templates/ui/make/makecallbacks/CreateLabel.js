@@ -24,16 +24,16 @@ draggable:
 
 import GetConfig from './GetConfig.js';
 import Label from '../../label/Label.js';
-import ReplaceChildConfig from './ReplaceChildConfig.js';
+import CreateChild from './CreateChild.js';
 
 var CreateLabel = function (scene, config, styles, customMakeCallbacks) {
     config = GetConfig(config, styles);
 
     // Replace config by child game object
-    ReplaceChildConfig(scene, config, 'background', styles, customMakeCallbacks);
-    ReplaceChildConfig(scene, config, 'icon', styles, customMakeCallbacks);
-    ReplaceChildConfig(scene, config, 'text', styles, customMakeCallbacks);
-    ReplaceChildConfig(scene, config, 'action', styles, customMakeCallbacks);
+    CreateChild(scene, config, 'background', styles, customMakeCallbacks);
+    CreateChild(scene, config, 'icon', styles, customMakeCallbacks);
+    CreateChild(scene, config, 'text', styles, customMakeCallbacks);
+    CreateChild(scene, config, 'action', styles, customMakeCallbacks);
 
     var gameObjects = new Label(scene, config);
     scene.add.existing(gameObjects);

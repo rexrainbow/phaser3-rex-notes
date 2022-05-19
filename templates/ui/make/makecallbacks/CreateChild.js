@@ -1,6 +1,6 @@
 import Make from '../Make.js';
 
-var ReplaceChildConfig = function (scene, config, childKey, styles, customMakeCallbacks) {
+var CreateChild = function (scene, config, childKey, styles, customMakeCallbacks) {
     var child;
     var childConfig = config[childKey];
     if (childConfig) {
@@ -11,4 +11,4 @@ var ReplaceChildConfig = function (scene, config, childKey, styles, customMakeCa
     return child;
 }
 
-export default ReplaceChildConfig;
+export default CreateChild;
