@@ -19,6 +19,7 @@ space:
     bottom:
     icon:
     text:
+draggable:
 */
 
 import Label from '../../label/Label.js';

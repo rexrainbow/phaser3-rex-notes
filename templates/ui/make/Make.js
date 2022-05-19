@@ -10,6 +10,7 @@ var Make = function (scene, config, defaultConfig, customMakeCallbacks) {
         callback = MakeCallbacks[type];
     }
     if (!callback) {
+        console.warn(`rexUI.Make: Can't create ${type} game object.`)
         return undefined;
     }
 
