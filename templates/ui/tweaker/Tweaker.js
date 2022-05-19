@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9,5 +10,10 @@ class Tweaker extends Sizer {
         this.type = 'rexTweaker';
     }
 }
+
+Object.assign(
+    Tweaker.prototype,
+    Methods
+);
 
 export default Tweaker
