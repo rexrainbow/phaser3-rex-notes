@@ -11,8 +11,9 @@ export default Builders;
 declare namespace Builders {
     type BuilderTypeCommon<T> = (
         scene: Phaser.Scene,
-        config: Object | string,
-        styles: Object | string,
+        data: Object,
+        view: Object,
+        styles: Object,
         customBuilders: { [name: string]: BuilderType }
     ) => T;
 

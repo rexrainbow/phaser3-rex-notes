@@ -21,7 +21,7 @@ var Builders = {
 };
 
 /*
-function(scene, config, styles, customBuilders) {
+function(scene, data, view, styles, customBuilders) {
     return gameObject;
 }
 */

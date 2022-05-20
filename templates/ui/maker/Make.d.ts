@@ -8,7 +8,8 @@ declare namespace Make {
 
 declare function Make(
     scene: Phaser.Scene,
-    config: Object,
+    data: Object,
+    view?: Object,
     styles?: Object,
     customBuilders?: Make.CustomBuildersType
 ): Phaser.GameObjects.GameObject;

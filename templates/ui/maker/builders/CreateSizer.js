@@ -2,7 +2,7 @@
 type: sizer
 name:
 
-# Relace child config by game objct
+# Relace child data by game objct
 background:
     - child:
       padding:
@@ -38,15 +38,15 @@ space:
 draggable:
 */
 
-import GetConfig from './GetConfig.js';
+import MergeStyle from './MergeStyle.js';
 import Sizer from '../../sizer/Sizer.js';
 import CreateChild from './CreateChild.js';
 
-var CreateSizer = function (scene, config, styles, customBuilders) {
-    config = GetConfig(config, styles);
+var CreateSizer = function (scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles);
 
-    var backgroundConfig = config.background;
-    delete config.background;
+    var backgroundConfig = data.background;
+    delete data.background;
     if (backgroundConfig) {
         if (!Array.isArray(backgroundConfig)) {
             backgroundConfig = [backgroundConfig];
@@ -57,12 +57,12 @@ var CreateSizer = function (scene, config, styles, customBuilders) {
                 childConfig = { child: childConfig };
                 backgroundConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', styles, customBuilders);
+            CreateChild(scene, childConfig, 'child', view, styles, customBuilders);
         }
     }
 
-    var childrenConfig = config.children;
-    delete config.children;
+    var childrenConfig = data.children;
+    delete data.children;
     if (childrenConfig) {
         for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
             var childConfig = childrenConfig[i];
@@ -70,11 +70,11 @@ var CreateSizer = function (scene, config, styles, customBuilders) {
                 childConfig = { child: childConfig };
                 childrenConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', styles, customBuilders);
+            CreateChild(scene, childConfig, 'child', view, styles, customBuilders);
         }
     }
 
-    var gameObjects = new Sizer(scene, config);
+    var gameObjects = new Sizer(scene, data);
     scene.add.existing(gameObjects);
 
     if (backgroundConfig) {

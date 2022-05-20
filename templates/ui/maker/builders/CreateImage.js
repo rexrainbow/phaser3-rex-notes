@@ -8,19 +8,19 @@ width:
 height:
 */
 
-import GetConfig from './GetConfig.js';
+import MergeStyle from './MergeStyle.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
 
-var CreateImage = function (scene, config, styles, customBuilders) {
-    config = GetConfig(config, styles);
-    var gameObjects = new PhaserImage(scene, 0, 0, config.key, config.frame);
+var CreateImage = function (scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles);
+    var gameObjects = new PhaserImage(scene, 0, 0, data.key, data.frame);
 
-    if (config.width !== undefined) {
-        gameObjects.setDisplayWidth(config.width);
+    if (data.width !== undefined) {
+        gameObjects.setDisplayWidth(data.width);
     }
-    if (config.height !== undefined) {
-        gameObjects.setDisplayHeight(config.height);
+    if (data.height !== undefined) {
+        gameObjects.setDisplayHeight(data.height);
     }
 
     scene.add.existing(gameObjects);

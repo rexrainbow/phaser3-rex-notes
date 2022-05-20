@@ -169,7 +169,8 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     readonly viewport: Phaser.Geom.Rectangle;
 
     make(
-        config: Object | string,
+        data: Object | string,
+        view?: Object | string,
         styles?: Object | string,
         customBuilders?: Make.CustomBuildersType
     ): Phaser.GameObjects.GameObject

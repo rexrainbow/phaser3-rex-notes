@@ -27,5 +27,8 @@ declare class Maker {
     clearCustomBuilder(): this;
     customBuilders: Maker.CustomBuildersType | undefined;
 
-    make(config: Object | string): Phaser.GameObjects.GameObject;
+    make(
+        data: Object | string,
+        view?: Object | string
+    ): Phaser.GameObjects.GameObject;
 }

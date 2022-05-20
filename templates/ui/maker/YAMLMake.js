@@ -1,17 +1,19 @@
 import ParseYAML from './utils/ParseYAML.js';
 import Make from './Make.js';
 
-var YAMLMake = function (scene, config, styles, customBuilders) {
-    config = ParseYAML(config);
-    // Parsing result of YAML config might be an array, 
+var YAMLMake = function (scene, data, view, styles, customBuilders) {
+    data = ParseYAML(data);
+    // Parsing result of YAML data might be an array, 
     // Only last item will be used to create game object, others are references
-    if (Array.isArray(config)) {
-        config = config[config.length - 1];
+    if (Array.isArray(data)) {
+        data = data[data.length - 1];
     }
+
+    view = ParseYAML(view);
 
     styles = ParseYAML(styles);
 
-    var gameObject = Make(scene, config, styles, customBuilders);
+    var gameObject = Make(scene, data, view, styles, customBuilders);
 
     return gameObject;
 }

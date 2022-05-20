@@ -8,7 +8,8 @@ declare namespace YAMLMake {
 
 declare function YAMLMake(
     scene: Phaser.Scene,
-    config: Object | string,
+    data: Object | string,
+    view?: Object | string,
     styles?: Object | string,
     customBuilders?: YAMLMake.CustomBuildersType
 ): Phaser.GameObjects.GameObject;

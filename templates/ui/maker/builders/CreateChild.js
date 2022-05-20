@@ -1,11 +1,11 @@
 import Make from '../Make.js';
 
-var CreateChild = function (scene, config, childKey, styles, customBuilders) {
+var CreateChild = function (scene, data, childKey, view, styles, customBuilders) {
     var child;
-    var childConfig = config[childKey];
-    if (childConfig) {
-        child = Make(scene, childConfig, styles, customBuilders);
-        config[childKey] = child;
+    var childData = data[childKey];
+    if (childData) {
+        child = Make(scene, childData, view, styles, customBuilders);
+        data[childKey] = child;
     }
 
     return child;

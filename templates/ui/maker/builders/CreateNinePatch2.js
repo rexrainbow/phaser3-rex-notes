@@ -12,13 +12,13 @@ preserveRatio:
 maxFixedPartScale:
 */
 
-import GetConfig from './GetConfig.js';
+import MergeStyle from './MergeStyle.js';
 import NinePatch from '../../ninepatch2/NinePatch.js';
 
-var CreateNinePatch = function (scene, config, styles, customBuilders) {
-    config = GetConfig(config, styles);
+var CreateNinePatch = function (scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles);
 
-    var gameObjects = new NinePatch(scene, config);
+    var gameObjects = new NinePatch(scene, data);
 
     scene.add.existing(gameObjects);
     return gameObjects;

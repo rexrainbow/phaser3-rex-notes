@@ -2,7 +2,7 @@
 type: label
 name:
 
-# Relace child config by game objct
+# Relace child data by game objct
 background:
 icon:
 text:
@@ -27,20 +27,20 @@ space:
 draggable:
 */
 
-import GetConfig from './GetConfig.js';
+import MergeStyle from './MergeStyle.js';
 import Label from '../../label/Label.js';
 import CreateChild from './CreateChild.js';
 
-var CreateLabel = function (scene, config, styles, customBuilders) {
-    config = GetConfig(config, styles);
+var CreateLabel = function (scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles);
 
-    // Replace config by child game object
-    CreateChild(scene, config, 'background', styles, customBuilders);
-    CreateChild(scene, config, 'icon', styles, customBuilders);
-    CreateChild(scene, config, 'text', styles, customBuilders);
-    CreateChild(scene, config, 'action', styles, customBuilders);
+    // Replace data by child game object
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'icon', view, styles, customBuilders);
+    CreateChild(scene, data, 'text', view, styles, customBuilders);
+    CreateChild(scene, data, 'action', view, styles, customBuilders);
 
-    var gameObjects = new Label(scene, config);
+    var gameObjects = new Label(scene, data);
     scene.add.existing(gameObjects);
     return gameObjects;
 }

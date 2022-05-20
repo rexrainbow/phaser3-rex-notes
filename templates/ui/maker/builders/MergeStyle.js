@@ -1,26 +1,26 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
-var GetConfig = function (config, styles) {
+var MergeStyle = function (data, styles) {
     if (styles === undefined) {
-        return config;
+        return data;
     }
 
-    if (config.hasOwnProperty('name')) {
-        Merge(config, styles[`#${config.name}`]);
+    if (data.hasOwnProperty('name')) {
+        Merge(data, styles[`#${data.name}`]);
     }
 
-    if (config.hasOwnProperty('class')) {
-        var clasKeys = config.class.split(' ');
+    if (data.hasOwnProperty('class')) {
+        var clasKeys = data.class.split(' ');
         for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
-            Merge(config, styles[`.${clasKeys[i]}`]);
+            Merge(data, styles[`.${clasKeys[i]}`]);
         }
     }
 
-    if (config.hasOwnProperty('type')) {
-        Merge(config, styles[config.type]);
+    if (data.hasOwnProperty('type')) {
+        Merge(data, styles[data.type]);
     }
 
-    return config;
+    return data;
 }
 
 var Merge = function (toObj, fromObj) {
@@ -37,4 +37,4 @@ var Merge = function (toObj, fromObj) {
     return toObj;
 }
 
-export default GetConfig;
+export default MergeStyle;

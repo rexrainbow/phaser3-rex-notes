@@ -14,7 +14,7 @@ icon:
     key: person
 text:
     type: text
-    text: Hello
+    text: Hello {{name}}  # String template
     fontSize: 24
 action:
     type: image
@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        var label = maker.make(content)
+        var label = maker.make(content, { name: 'phaser' })
             .setPosition(400, 300)
             .layout();
     }

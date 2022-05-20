@@ -105,8 +105,8 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         return GetViewport(this.scene, true);
     }
 
-    make(config, styles, customBuilders) {
-        return Make(this.scene, config, styles, customBuilders);
+    make(data, view, styles, customBuilders) {
+        return Make(this.scene, data, view, styles, customBuilders);
     }
 
 }

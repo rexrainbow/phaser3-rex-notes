@@ -2,7 +2,7 @@
 type: slider
 name:
 
-# Relace child config by game objct
+# Relace child data by game objct
 background:
 track:
 indicator:
@@ -27,20 +27,20 @@ enable:
 draggable:
 */
 
-import GetConfig from './GetConfig.js';
+import MergeStyle from './MergeStyle.js';
 import Slider from '../../slider/Slider.js';
 import CreateChild from './CreateChild.js';
 
-var CreateSlider = function (scene, config, styles, customBuilders) {
-    config = GetConfig(config, styles);
+var CreateSlider = function (scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles);
 
-    // Replace config by child game object
-    CreateChild(scene, config, 'background', styles, customBuilders);
-    CreateChild(scene, config, 'track', styles, customBuilders);
-    CreateChild(scene, config, 'indicator', styles, customBuilders);
-    CreateChild(scene, config, 'thumb', styles, customBuilders);
+    // Replace data by child game object
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'track', view, styles, customBuilders);
+    CreateChild(scene, data, 'indicator', view, styles, customBuilders);
+    CreateChild(scene, data, 'thumb', view, styles, customBuilders);
 
-    var gameObjects = new Slider(scene, config);
+    var gameObjects = new Slider(scene, data);
     scene.add.existing(gameObjects);
     return gameObjects;
 };
