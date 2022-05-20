@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import YAMLMake from '../../templates/ui/make/YAMLMake.js';
+import Maker from '../../templates/ui/maker/Maker.js';
 
 const content = `
 type: label
@@ -38,10 +38,11 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('person', 'assets/images/person.png');
         this.load.image('volume', 'assets/images/volume.png');
-     }
+    }
 
     create() {
-        var label = YAMLMake(this, content)
+        var maker = new Maker(this);
+        var label = maker.make(content)
             .setPosition(400, 300)
             .layout();
     }

@@ -1,5 +1,7 @@
 /*
 type: image
+name:
+
 key: 
 frame:
 width:
@@ -10,7 +12,7 @@ import GetConfig from './GetConfig.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
 
-var CreateImage = function (scene, config, styles, customMakeCallbacks) {
+var CreateImage = function (scene, config, styles, customBuilders) {
     config = GetConfig(config, styles);
     var gameObjects = new PhaserImage(scene, 0, 0, config.key, config.frame);
 

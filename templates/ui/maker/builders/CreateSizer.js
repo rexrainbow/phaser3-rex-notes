@@ -1,6 +1,8 @@
 /*
 type: sizer
-// Relace child config by game objct
+name:
+
+# Relace child config by game objct
 background:
     - child:
       padding:
@@ -21,12 +23,12 @@ children:
       key:
       minWidth:
       minHeight:
+# ----
 
-// ----
-orientation:
-rtl:
 width:
 height:
+orientation:
+rtl:
 space:
     left:
     right:
@@ -40,7 +42,7 @@ import GetConfig from './GetConfig.js';
 import Sizer from '../../sizer/Sizer.js';
 import CreateChild from './CreateChild.js';
 
-var CreateSizer = function (scene, config, styles, customMakeCallbacks) {
+var CreateSizer = function (scene, config, styles, customBuilders) {
     config = GetConfig(config, styles);
 
     var backgroundConfig = config.background;
@@ -55,7 +57,7 @@ var CreateSizer = function (scene, config, styles, customMakeCallbacks) {
                 childConfig = { child: childConfig };
                 backgroundConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', styles, customMakeCallbacks);
+            CreateChild(scene, childConfig, 'child', styles, customBuilders);
         }
     }
 
@@ -68,7 +70,7 @@ var CreateSizer = function (scene, config, styles, customMakeCallbacks) {
                 childConfig = { child: childConfig };
                 childrenConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', styles, customMakeCallbacks);
+            CreateChild(scene, childConfig, 'child', styles, customBuilders);
         }
     }
 

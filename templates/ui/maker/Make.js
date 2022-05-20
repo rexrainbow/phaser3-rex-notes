@@ -1,20 +1,20 @@
-import MakeCallbacks from './makecallbacks/MakeCallbacks.js';
+import Builders from './builders/Builders.js';
 
-var Make = function (scene, config, styles, customMakeCallbacks) {
+var Make = function (scene, config, styles, customBuilders) {
     var type = config.type;
     var callback;
-    if (customMakeCallbacks) {
-        callback = customMakeCallbacks[type]
+    if (customBuilders) {
+        callback = customBuilders[type]
     }
     if (!callback) {
-        callback = MakeCallbacks[type];
+        callback = Builders[type];
     }
     if (!callback) {
         console.warn(`rexUI.Make: Can't create ${type} game object.`)
         return undefined;
     }
 
-    var gameObject = callback(scene, config, styles, customMakeCallbacks);
+    var gameObject = callback(scene, config, styles, customBuilders);
     if (config.name) {
         gameObject.setName(config.name);
     }

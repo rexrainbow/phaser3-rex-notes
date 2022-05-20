@@ -1,41 +1,27 @@
 import phaser from 'phaser/src/phaser.js';
-import YAMLMake from '../../templates/ui/make/YAMLMake.js';
+import Maker from '../../templates/ui/maker/Maker.js';
 
 const content = `
-# Reference of child
-- &child0
-  type: text 
-  text: Hello
-  color: white
-
-- &child1
-  type: text
-  text: World
-  color: yellow
-
-- &child2
-  type: text
-  text: Phaser
-  color: red
-
-- &space
-  left: 10
-  right: 10
-  top: 10
-  bottom: 10
-  item: 10
-
-# Last item of array is the root/return config
-- type: sizer
-  background:
-      type: roundrectangle
-      class: background
-  children:
-      - *child0
-      - *child1
-      - *child2
-  space:
-      *space
+type: sizer
+background:
+    type: roundrectangle
+    class: background
+children:
+    - type: text
+      text: Hello
+      color: white
+    - type: text
+      text: World
+      color: yellow
+    - type: text
+      text: Phaser
+      color: red
+space:
+    left: 10
+    right: 10
+    top: 10
+    bottom: 10
+    item: 10
 `
 
 const styles = `
@@ -59,7 +45,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var sizer = YAMLMake(this, content, styles)
+        var maker = new Maker(this, styles);
+        var sizer = maker.make(content)
             .setPosition(400, 300)
             .layout();
     }
