@@ -1,0 +1,2 @@
+import AddViewportCoordinateProperties from './behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
+export default AddViewportCoordinateProperties;

@@ -1,6 +1,6 @@
 import MonitorViewport from './MonitorViewport.js';
 
-var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy) {
+var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy, transformCallback) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('vp')) {
         return gameObject;
@@ -12,20 +12,23 @@ var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy) 
     if (vpy === undefined) {
         vpy = 0.5;
     }
-
-    gameObject.vp = viewport;
+    if (transformCallback === undefined) {
+        transformCallback = DefaultTransformCallback;
+    }
 
     MonitorViewport(viewport);
     var events = viewport.events;
 
+    gameObject.vp = viewport;
+
     // Set position of game object when view-port changed.
     var Transform = function () {
-        gameObject.x = viewport.x + (viewport.width * vpx);
-        gameObject.y = viewport.y + (viewport.height * vpy);
+        transformCallback(gameObject, viewport, vpx, vpy);
     }
     events.on('update', Transform);
     gameObject.once('destroy', function () {
         events.off('update', Transform);
+        gameObject.vp = undefined;
     })
 
     Object.defineProperty(gameObject, 'vpx', {
@@ -52,6 +55,12 @@ var AddViewportCoordinateProperties = function (gameObject, viewport, vpx, vpy) 
         },
     });
 
+    Transform();
+}
+
+var DefaultTransformCallback = function (gameObject, viewport, vpx, vpy) {
+    gameObject.x = viewport.x + (viewport.width * vpx);
+    gameObject.y = viewport.y + (viewport.height * vpy);
 }
 
 export default AddViewportCoordinateProperties;

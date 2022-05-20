@@ -131,6 +131,9 @@ nav:
         - Flash: flash.md
         - Color:
             - TintRGB: tintrgb.md
+        - Coordinate:
+            - Polar-coordinate: polar-coordinate.md
+            - Viewport-coordinate: viewport-coordinate.md
         - Shake position: shake-position.md
         - Fade out destroy: fadeoutdestroy.md
         - Pop up: popup.md
@@ -139,7 +142,6 @@ nav:
         - Ease-move: easemove.md
         - Ease-data: easedata.md
         - Path follower: pathfollower.md
-        - Polar-coordinate: polar-coordinate.md
         - Anchor: anchor.md
         - Interception: interception.md
         - Particles along bounds: particles-along-bounds.md

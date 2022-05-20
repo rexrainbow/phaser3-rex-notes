@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import AddViewportCoordinateProperties from '../../plugins/behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
-import GetViewport from '../../plugins/utils/system/GetViewport.js';
+import ViewportCoordinatePlugin from '../../plugins/viewportcoordinate-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,16 +13,16 @@ class Demo extends Phaser.Scene {
 
     create() {
         var viewport = new Phaser.Geom.Rectangle();
-        this.scale.on('resize', function () {
-            GetViewport(this, viewport);
+        this.scale.on('resize', function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
+            viewport.setTo(10, 10, displaySize.width - 20, displaySize.height - 20);
         }, this);
 
-        var sprite = this.add.rectangle(0, 0, 30, 30).setStrokeStyle(2, 0xff0000);
-        AddViewportCoordinateProperties(sprite, viewport);
-        sprite.vpx = 0.3;
+        var sprite0 = this.add.rectangle(0, 0, 30, 30).setStrokeStyle(2, 0xffff00);
+        this.plugins.get('rexViewportCoordinate').add(sprite0, viewport);
+        sprite0.vpx = 0.3;
 
         var tween = this.tweens.add({
-            targets: sprite,
+            targets: sprite0,
             vpx: 0.7,
             ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 2000,
@@ -31,13 +30,24 @@ class Demo extends Phaser.Scene {
             yoyo: true
         });
 
+        var sprite1 = this.add.rectangle(0, 0, 30, 30).setStrokeStyle(2, 0x00ff00);
+        this.plugins.get('rexViewportCoordinate').add(sprite1, viewport);
+        sprite1.vpx = 0.7;
 
-        this.sprite = sprite;
+
+        this.viewport = viewport;
+        this.sprite0 = sprite0;
+        this.dbgGraphics = this.add.graphics();
         this.print = this.add.text(0, 0, '');
     }
 
     update() {
-        this.print.text = `${this.sprite.x.toFixed(2)}, ${this.sprite.y.toFixed(2)}`
+        this.print.text = `${this.sprite0.x.toFixed(2)}, ${this.sprite0.y.toFixed(2)}`
+
+        this.dbgGraphics
+            .clear()
+            .lineStyle(4, 0xff0000, 0.5)
+            .strokeRectShape(this.viewport)
     }
 }
 
@@ -49,7 +59,14 @@ var config = {
     scale: {
         mode: Phaser.Scale.RESIZE
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexViewportCoordinate',
+            plugin: ViewportCoordinatePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

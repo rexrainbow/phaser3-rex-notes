@@ -9,34 +9,57 @@ var MonitorViewport = function (viewport) {
 
     var x = viewport.x;
     Object.defineProperty(viewport, 'x', {
-        get: function () { return x; },
+        get: function () {
+            return x;
+        },
+
         set: function (value) {
-            x = value;
-            events.emit('update', viewport);
+            if (x !== value) {
+                x = value;
+                events.emit('update', viewport);
+            }
         },
     });
+
     var y = viewport.y;
     Object.defineProperty(viewport, 'y', {
-        get: function () { return y; },
+        get: function () {
+            return y;
+        },
+
         set: function (value) {
-            y = value;
-            events.emit('update', viewport);
+            if (y !== value) {
+                y = value;
+                events.emit('update', viewport);
+            }
         },
     });
+
     var width = viewport.width;
     Object.defineProperty(viewport, 'width', {
-        get: function () { return width; },
+        get: function () {
+            return width;
+        },
+
         set: function (value) {
-            width = value;
-            events.emit('update', viewport);
+            if (width !== value) {
+                width = value;
+                events.emit('update', viewport);
+            }
         },
     });
+
     var height = viewport.height;
     Object.defineProperty(viewport, 'height', {
-        get: function () { return height; },
+        get: function () {
+            return height;
+        },
+
         set: function (value) {
-            height = value;
-            events.emit('update', viewport);
+            if (height !== value) {
+                height = value;
+                events.emit('update', viewport);
+            }
         },
     });
 
