@@ -7,7 +7,7 @@ Attach `vpx`, `vpy` properties to a game object, to set position according to pr
 
 ## Live demos
 
-- [Circle](https://codepen.io/rexrainbow/pen/yLvaNVL)
+- [Resize](https://codepen.io/rexrainbow/pen/rNJwGOp)
 
 ## Usage
 

@@ -13,9 +13,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         var viewport = new Phaser.Geom.Rectangle();
-        this.scale.on('resize', function (gameSize, baseSize, displaySize, previousWidth, previousHeight) {
-            viewport.setTo(10, 10, displaySize.width - 20, displaySize.height - 20);
-        }, this);
+        var UpdateViewport = (function() {
+            viewport.setTo(10, 10, this.displaySize.width - 20, this.displaySize.height - 20);
+        }).bind(this.scale);
+        this.scale.on('resize', UpdateViewport);
+        UpdateViewport();
 
         var sprite0 = this.add.rectangle(0, 0, 30, 30).setStrokeStyle(2, 0xffff00);
         this.plugins.get('rexViewportCoordinate').add(sprite0, viewport);
