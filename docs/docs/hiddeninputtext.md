@@ -218,6 +218,10 @@ Equal to `hiddenInputText.isFocused`
 
 This feature does not support.
 
+### Events
+
+See [InputText/Event](inputtext.md#events)
+
 ### Other properties
 
 See [InputText](inputtext.md), [DOM game object](domelement.md).

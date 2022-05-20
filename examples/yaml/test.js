@@ -47,11 +47,21 @@ a:
 print(s)
 
 s = `
+obj0: &ref
+    a: 10
+    b: 20
+obj1:
+    c: 30
+    d: *ref
+`
+print(s)
+
+s = `
 obj0: &obj
     a: 10
     b: 20
 obj1:
     <<: *obj
-    c: 30    
+    c: 30
 `
 print(s)

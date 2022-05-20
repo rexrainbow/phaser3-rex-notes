@@ -20,6 +20,10 @@ var YAMLMake = function (scene, config, styles, customMakeCallbacks) {
         }
     }
 
+    if (Array.isArray(config)) {
+        config = config[config.length - 1];
+    }
+
     return Make(scene, config, styles, customMakeCallbacks);
 }
 
