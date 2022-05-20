@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Maker from '../../templates/ui/maker/Maker.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
 type: sizer
@@ -45,7 +45,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var maker = new Maker(this, styles);
+        var maker = this.rexUI.add.maker(styles);
         var sizer = maker.make(content)
             .setPosition(400, 300)
             .layout();
@@ -64,6 +64,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 
 };
 

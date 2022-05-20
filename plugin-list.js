@@ -248,6 +248,7 @@ module.exports = {
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
     'sides': './templates/ui/sides/Sides.js',
+    'uimaker': './templates/ui/maker/Maker.js',
     // spinner
     'audiospinner': './templates/spinner/audio/Audio.js',
     'ballspinner': './templates/spinner/ball/Ball.js',

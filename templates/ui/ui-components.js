@@ -64,6 +64,8 @@ import Perspective from './perspective/Perspective.js';
 import Anchor from './anchor/Anchor.js';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js';
+import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
+import { Maker, YAMLMake as Make } from './maker/index.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
@@ -76,7 +78,6 @@ import { Edit } from '../../plugins/textedit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 import DelayPromise from '../../plugins/utils/promise/Delay.js'
-import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
@@ -150,6 +151,7 @@ export {
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
     Modal, ModalPromise, ModalClose,
+    Maker, Make,
 
     GetParentSizer,
     GetTopmostSizer,

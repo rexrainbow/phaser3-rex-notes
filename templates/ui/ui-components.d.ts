@@ -63,6 +63,7 @@ import Anchor from './anchor/Anchor';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
+import { Maker, YAMLMake as Make } from './maker/index';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds';
@@ -148,6 +149,7 @@ export {
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
     Modal, ModalPromise, ModalClose,
+    Maker, Make,
 
     GetParentSizer,
     GetTopmostSizer,

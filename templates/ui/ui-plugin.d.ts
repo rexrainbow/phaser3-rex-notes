@@ -29,6 +29,7 @@ import HiddenEditFactory from './hiddenedit/Factory';
 import HolyGrailFactory from './holygrail/Factory';
 import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
+import MakerFactory from './maker/Factory';
 import MenuFactory from './menu/Factory';
 import NinePatchFactory from './ninepatch/Factory';
 import NinePatch2Factory from './ninepatch2/Factory';
@@ -69,6 +70,7 @@ import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import Delay from '../../plugins/utils/promise/Delay';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
+import Make from './maker/YAMLMake';
 
 export default UIPlugins;
 
@@ -102,6 +104,7 @@ declare class Factories {
     HolyGrail: typeof HolyGrailFactory;
     knob: typeof KnobFactory;
     label: typeof LabelFactory;
+    maker: typeof MakerFactory;
     menu: typeof MenuFactory;
     ninePatch: typeof NinePatchFactory;
     ninePatch2: typeof NinePatch2Factory;
@@ -164,6 +167,12 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     ): boolean;
 
     readonly viewport: Phaser.Geom.Rectangle;
+
+    make(
+        config: Object | string,
+        styles?: Object | string,
+        customBuilders?: Make.CustomBuildersType
+    ): Phaser.GameObjects.GameObject
 }
 
 
@@ -197,6 +206,7 @@ import HiddenTextEditClass from './hiddenedit/HiddenEdit.js';
 import HolyGrailClass from './holygrail/HolyGrail';
 import KnobClass from './knob/Knob';
 import LabelClass from './label/Label';
+import MakerClass from './maker/Maker';
 import MenuClass from './menu/Menu';
 import NinePatchClass from './ninepatch/NinePatch';
 import NumberBarClass from './numberbar/NumberBar';
@@ -256,6 +266,7 @@ declare namespace UIPlugins {
     type HolyGrail = HolyGrailClass;
     type Knob = KnobClass;
     type Label = LabelClass;
+    type maker = MakerClass;
     type Menu = MenuClass;
     type NinePatch = NinePatchClass;
     type NumberBar = NumberBarClass;

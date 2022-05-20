@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import Maker from '../../templates/ui/maker/Maker.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
 type: label
@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var maker = new Maker(this);
+        var maker = this.rexUI.add.maker();
         var label = maker.make(content)
             .setPosition(400, 300)
             .layout();
@@ -60,6 +60,13 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 
 };
 

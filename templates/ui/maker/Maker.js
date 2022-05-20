@@ -1,5 +1,5 @@
-import yaml from 'js-yaml';
-import Make from './Make.js';
+import ParseYAML from './utils/ParseYAML.js';
+import YAMLMake from './YAMLMake.js';
 
 class Maker {
     constructor(scene, styles, customBuilders) {
@@ -36,11 +36,11 @@ class Maker {
         return this;
     }
 
-    addCustomBuilder(type, customBuilder) {
+    addCustomBuilder(key, customBuilder) {
         if (this.customBuilders === undefined) {
             this.customBuilders = {};
         }
-        this.customBuilders[type] = customBuilder;
+        this.customBuilders[key] = customBuilder;
         return this;
     }
 
@@ -50,28 +50,9 @@ class Maker {
     }
 
     make(config) {
-        config = ParseYAML(config);
-        // Parsing result of YAML config might be an array, 
-        // Only last item will be used to create game object, others are references
-        if (Array.isArray(config)) {
-            config = config[config.length - 1];
-        }
-
-        return Make(this.scene, config, this.styles, this.customBuilders);
+        return YAMLMake(this.scene, config, this.styles, this.customBuilders);
     }
 
-}
-
-var ParseYAML = function (s) {
-    if (typeof (s) === 'string') {
-        try {
-            return yaml.load(s);
-        } catch (e) {
-            console.log(e);
-            return undefined;
-        }
-    }
-    return s;
 }
 
 export default Maker;

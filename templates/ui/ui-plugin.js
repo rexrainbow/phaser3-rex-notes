@@ -64,6 +64,7 @@ import ShakeFactory from './shake/Factory.js';
 import TouchEventStopFactory from './toucheventstop/Factory.js';
 import PerspectiveFactory from './perspective/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
+import MakerFactory from './maker/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
@@ -78,6 +79,7 @@ import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
+import Make from './maker/YAMLMake.js';
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -101,6 +103,10 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
 
     get viewport() {
         return GetViewport(this.scene, true);
+    }
+
+    make(config, styles, customBuilders) {
+        return Make(this.scene, config, styles, customBuilders);
     }
 
 }
