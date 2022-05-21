@@ -4,17 +4,17 @@ import UIPlugin from '../../templates/ui/ui-plugin.js';
 const content = `
 # Reference of child
 - &child0
-  type: text 
+  type: Text 
   text: Hello
   color: white
 
 - &child1
-  type: text
+  type: Text
   text: World
   color: yellow
 
 - &child2
-  type: text
+  type: Text
   text: Phaser
   color: red
 
@@ -26,9 +26,9 @@ const content = `
   item: 10
 
 # Last item of array is the root/return config
-- type: sizer
+- type: Sizer
   background:
-      type: roundRectangle
+      type: RoundRectangle
       class: background
   children:
       - *child0
@@ -40,7 +40,7 @@ const content = `
 `
 
 const styles = `
-text:
+Text:
     fontSize: 20
     color: white
 .background:

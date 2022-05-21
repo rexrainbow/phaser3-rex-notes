@@ -10,16 +10,16 @@ import CreateDialog from './CreateDialog.js';
 import CreateSlider from './CreateSlider.js';
 
 var Builders = {
-    image: CreateImage,
-    text: CreateText,
-    roundRectangle: CreateRoundRectangle,
-    ninePatch: CreateNinePatch,
-    ninePatch2: CreateNinePatch2,
+    Image: CreateImage,
+    Text: CreateText,
+    RoundRectangle: CreateRoundRectangle,
+    Ninepatch: CreateNinePatch,
+    Ninepatch2: CreateNinePatch2,
 
-    sizer: CreateSizer,
-    label: CreateLabel,
-    dialog: CreateDialog,
-    slider: CreateSlider
+    Sizer: CreateSizer,
+    Label: CreateLabel,
+    Dialog: CreateDialog,
+    Slider: CreateSlider
 };
 
 /*

@@ -26491,15 +26491,15 @@
   };
 
   var Builders = {
-    image: CreateImage,
-    text: CreateText,
-    roundRectangle: CreateRoundRectangle,
-    ninePatch: CreateNinePatch$1,
-    ninePatch2: CreateNinePatch,
-    sizer: CreateSizer,
-    label: CreateLabel,
-    dialog: CreateDialog,
-    slider: CreateSlider
+    Image: CreateImage,
+    Text: CreateText,
+    RoundRectangle: CreateRoundRectangle,
+    Ninepatch: CreateNinePatch$1,
+    Ninepatch2: CreateNinePatch,
+    Sizer: CreateSizer,
+    Label: CreateLabel,
+    Dialog: CreateDialog,
+    Slider: CreateSlider
   };
 
   var Make = function Make(scene, data, view, styles, customBuilders) {

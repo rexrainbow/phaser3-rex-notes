@@ -5,20 +5,20 @@ const content = `
 type: label
 
 background:
-    type: roundRectangle
+    type: RoundRectangle
     color: 0x260e04
     radius: 10
     strokeColor: 0x7b5e57
     strokeWidth: 2
 icon:
-    type: image
+    type: Image
     key: person
 text:
-    type: text
+    type: Text
     text: Hello {{name}}  # String template
     fontSize: 24
 action:
-    type: image
+    type: Image
     key: volume
 
 space:

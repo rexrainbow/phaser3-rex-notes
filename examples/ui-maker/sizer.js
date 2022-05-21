@@ -2,19 +2,19 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
-type: sizer
+type: Sizer
 
 background:
-    type: roundRectangle
+    type: RoundRectangle
     class: background
 children:
-    - type: text
+    - type: Text
       text: Hello
       color: white
-    - type: text
+    - type: Text
       text: World
       color: yellow
-    - type: text
+    - type: Text
       text: Phaser
       color: red
 
@@ -27,7 +27,7 @@ space:
 `
 
 const styles = `
-text:
+Text:
     fontSize: 20
     color: white
 .background:
