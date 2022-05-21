@@ -1,8 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const myLabelContent = `
-type: label
+const labelStyle = `
 width: 40
 height: 40
 
@@ -12,6 +11,7 @@ background:
     radius: 20
 text:
     type: text
+    text: ''       # Override this property
     fontSize: 24
 
 space:
@@ -30,36 +30,48 @@ background:
     color: 0x1565c0
     radius: 20
 title:
-    type: mylabel
-    text: Title
+    type: label
+    class: mylabel
+    text: {text: Title}
 toolbar:
-    - type: mylabel
-      text: O
-    - type: mylabel
-      text: X
+    - type: label
+      class: mylabel
+      text: {text: O}
+    - type: label
+      class: mylabel
+      text: {text: X}
 leftToolbar:
-    - type: mylabel
-      text: A
-    - type: mylabel
-      text: B
+    - type: label
+      class: mylabel
+      text: {text: A}
+    - type: label
+      class: mylabel
+      text: {text: B}
 content:
-    type: mylabel
-    text: Content
+    type: label
+    class: mylabel
+    text: {text: Content}
 description:
-    type: mylabel
-    text: Description
+    type: label
+    class: mylabel    
+    text: {text: Description}
 choices:
-    - type: mylabel
-      text: Choice0
-    - type: mylabel
-      text: Choice1
-    - type: mylabel
-      text: Choice2     
+    - type: label
+      class: mylabel      
+      text: {text: Choice0}
+    - type: label
+      class: mylabel
+      text: {text: Choice1}
+    - type: label
+      class: mylabel
+      text: {text: Choice2}
 actions:
-    - type: mylabel
-      text: Action0
-    - type: mylabel
-      text: Action1
+    - type: label
+      class: mylabel
+      text: {text: Action0}
+    - type: label
+      class: mylabel
+      text: {text: Action1}
 
 space:
     left: 20
@@ -108,17 +120,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        var CreateMyLabel = function (scene, data, view) {
-            var gameObject = maker.make(myLabelContent);
-            // Or creating game object by traditional way: 
-            // var gameObject = scene.add.xxx()
-            // var gameObject = scene.rexUI.add.xxx()
-
-            gameObject.setText(maker.renderText(data.text));
-
-            return gameObject;
-        }
-        maker.addCustomBuilder('mylabel', CreateMyLabel);
+        maker.addStyle('.mylabel', labelStyle)
 
         var dialog = maker.make(content)
             .setPosition(400, 300)

@@ -28,10 +28,14 @@ var Merge = function (toObj, fromObj) {
         return toObj;
     }
 
-    fromObj = DeepClone(fromObj);
     for (var key in fromObj) {
         if (!toObj.hasOwnProperty(key)) {
-            toObj[key] = fromObj[key];
+            toObj[key] = DeepClone(fromObj[key]);
+        } else {
+            var value = toObj[key];
+            if (value && (typeof (value) === 'object')) {
+                Merge(value, fromObj[key]);
+            }
         }
     }
     return toObj;
