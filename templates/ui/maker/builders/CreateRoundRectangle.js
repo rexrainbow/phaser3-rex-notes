@@ -1,15 +1,3 @@
-/*
-type: roundrectangle
-name:
-
-color: 
-radius:
-strokeColor:
-strokeWidth:
-width:
-height:
-*/
-
 import MergeStyle from './MergeStyle.js';
 import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
 

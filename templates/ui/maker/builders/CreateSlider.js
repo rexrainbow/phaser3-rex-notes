@@ -1,32 +1,3 @@
-/*
-type: slider
-name:
-
-# Relace child data by game objct
-background:
-track:
-indicator:
-thumb:
-# ----
-
-width:
-height:
-input:
-orientation:
-value:
-gap:
-easeValue:
-    duration:
-    ease:
-space:
-    left:
-    right:
-    top:
-    bottom:
-enable:
-draggable:
-*/
-
 import MergeStyle from './MergeStyle.js';
 import Slider from '../../slider/Slider.js';
 import CreateChild from './CreateChild.js';

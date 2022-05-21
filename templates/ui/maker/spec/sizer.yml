@@ -1,0 +1,37 @@
+type: sizer
+name:
+
+# Relace child data by game objct
+background:
+    - child:
+      padding:
+          left:
+          right:
+          top:
+          bottom:
+children:
+    - child:
+      proportion:
+      align:
+      padding:
+          left:
+          right:
+          top:
+          bottom:
+      expand:
+      key:
+      minWidth:
+      minHeight:
+# ----
+
+width:
+height:
+orientation:
+rtl:
+space:
+    left:
+    right:
+    top:
+    bottom:
+    item:
+draggable:

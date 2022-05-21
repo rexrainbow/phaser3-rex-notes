@@ -1,13 +1,3 @@
-/*
-type: image
-name:
-
-key: 
-frame:
-width:
-height:
-*/
-
 import MergeStyle from './MergeStyle.js';
 
 const PhaserImage = Phaser.GameObjects.Image;

@@ -1,37 +1,3 @@
-/*
-type: text
-name:
-
-text: 
-fontFamily:
-fontSize:
-fontStyle:
-color:
-stroke:
-strokeThickness:
-shadow:
-    offsetX:
-    offsetY:
-    color:
-    blur:
-    stroke:
-    fill:
-align:
-padding:
-    left:
-    right:
-    top:
-    bottom:    
-fixedWidth:
-fixedHeight:
-lineSpacing:
-maxLines:
-testString:
-wordWrap:
-    width:
-    useAdvancedWrap:
-*/
-
 import MergeStyle from './MergeStyle.js';
 import Handlebars from 'handlebars';
 

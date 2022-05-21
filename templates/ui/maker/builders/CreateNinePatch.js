@@ -1,17 +1,3 @@
-/*
-type: ninepatch
-name:
-
-key: 
-columns: [20, undefined, 20]
-rows: [20, undefined, 20]
-stretchMode:
-width:
-height:
-preserveRatio:
-maxFixedPartScale:
-*/
-
 import MergeStyle from './MergeStyle.js';
 import NinePatch from '../../ninepatch/NinePatch.js';
 

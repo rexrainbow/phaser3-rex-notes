@@ -1,32 +1,3 @@
-/*
-type: label
-name:
-
-# Relace child data by game objct
-background:
-icon:
-text:
-action:
-# ----
-
-width:
-height:
-orientation:
-iconMask:
-expandTextWidth:
-expandTextHeight:
-actionMask:
-align:
-space:
-    left:
-    right:
-    top:
-    bottom:
-    icon:
-    text:
-draggable:
-*/
-
 import MergeStyle from './MergeStyle.js';
 import Label from '../../label/Label.js';
 import CreateChild from './CreateChild.js';
