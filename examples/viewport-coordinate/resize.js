@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var viewport = new Phaser.Geom.Rectangle();
         var UpdateViewport = (function() {
-            viewport.setTo(10, 10, this.displaySize.width - 20, this.displaySize.height - 20);
+            viewport.setTo(10, 10, this.gameSize.width - 20, this.gameSize.height - 20);
         }).bind(this.scale);
         this.scale.on('resize', UpdateViewport);
         UpdateViewport();

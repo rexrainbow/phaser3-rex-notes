@@ -85,6 +85,24 @@ scene.scale.setGameSize(width, height);
 
 It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. `FIT`. If you're using `NO_SCALE` and wish to change the game and canvas size directly, then please use the `resize` method instead.
 
+### Members
+
+- The un-modified game size, as requested in the game config (the raw width / height), as used for world bounds, cameras, etc
+    ```javascript
+    var gameSize = scene.scale.gameSize;
+    ```
+    - `gameSize.width`, `gameSize.height`
+- The modified game size, which is the auto-rounded gameSize, used to set the canvas width and height (but not the CSS style)
+    ```javascript
+    var baseSize = scene.scale.baseSize;
+    ```
+    - `baseSize.width`, `baseSize.height`
+- The size used for the canvas style, factoring in the scale mode, parent and other values.
+    ```javascript
+    var displaySize = scene.scale.displaySize;
+    ```
+    - `displaySize.width`, `displaySize.height`
+
 ### Events
 
 ```javascript

@@ -1,6 +1,6 @@
 ## Introduction
 
-Attach `vpx`, `vpy` properties to a game object, to set position according to proportion (`vpx`, `vpy`) of viewport (`vp`), a [rectangle](geom-rectangle.md)).
+Attach `vpx`, `vpy` properties to a game object, to set position according to proportion (`vpx`, `vpy`) of viewport, a [rectangle](geom-rectangle.md)).
 
 - Author: Rex
 - Method only

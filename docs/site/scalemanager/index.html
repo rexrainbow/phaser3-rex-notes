@@ -473,6 +473,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#members" class="md-nav__link">
+    Members
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -8104,6 +8111,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#members" class="md-nav__link">
+    Members
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -8246,6 +8260,27 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">setGameSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
 <p>It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. <code>FIT</code>. If you're using <code>NO_SCALE</code> and wish to change the game and canvas size directly, then please use the <code>resize</code> method instead.</p>
+<h3 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The un-modified game size, as requested in the game config (the raw width / height), as used for world bounds, cameras, etc
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameSize</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">gameSize</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>gameSize.width</code>, <code>gameSize.height</code></li>
+</ul>
+</li>
+<li>The modified game size, which is the auto-rounded gameSize, used to set the canvas width and height (but not the CSS style)
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">baseSize</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">baseSize</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>baseSize.width</code>, <code>baseSize.height</code></li>
+</ul>
+</li>
+<li>The size used for the canvas style, factoring in the scale mode, parent and other values.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">displaySize</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">displaySize</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>displaySize.width</code>, <code>displaySize.height</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">previousWidth</span><span class="p">,</span> <span class="nx">previousHeight</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div>
