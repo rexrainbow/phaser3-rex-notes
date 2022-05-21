@@ -34,24 +34,24 @@ var CreateSizer = function (scene, data, view, styles, customBuilders) {
         }
     }
 
-    var gameObjects = new Sizer(scene, data);
-    scene.add.existing(gameObjects);
+    var gameObject = new Sizer(scene, data);
+    scene.add.existing(gameObject);
 
     if (backgroundConfig) {
         for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
             var childConfig = backgroundConfig[i];
-            gameObjects.addBackground(childConfig.child, childConfig.padding);
+            gameObject.addBackground(childConfig.child, childConfig.padding);
         }
     }
 
     if (childrenConfig) {
         for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
             var childConfig = childrenConfig[i];
-            gameObjects.add(childConfig.child, childConfig);
+            gameObject.add(childConfig.child, childConfig);
         }
     }
 
-    return gameObjects;
+    return gameObject;
 }
 
 export default CreateSizer;

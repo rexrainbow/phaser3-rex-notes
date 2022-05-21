@@ -11,9 +11,9 @@ var CreateLabel = function (scene, data, view, styles, customBuilders) {
     CreateChild(scene, data, 'text', view, styles, customBuilders);
     CreateChild(scene, data, 'action', view, styles, customBuilders);
 
-    var gameObjects = new Label(scene, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new Label(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
 }
 
 export default CreateLabel;

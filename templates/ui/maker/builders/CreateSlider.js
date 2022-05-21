@@ -11,9 +11,9 @@ var CreateSlider = function (scene, data, view, styles, customBuilders) {
     CreateChild(scene, data, 'indicator', view, styles, customBuilders);
     CreateChild(scene, data, 'thumb', view, styles, customBuilders);
 
-    var gameObjects = new Slider(scene, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new Slider(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
 };
 
 export default CreateSlider;

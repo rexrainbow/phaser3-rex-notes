@@ -6,6 +6,7 @@ import CreateNinePatch2 from './CreateNinePatch2.js';
 
 import CreateSizer from './CreateSizer.js';
 import CreateLabel from './CreateLabel.js';
+import CreateDialog from './CreateDialog.js';
 import CreateSlider from './CreateSlider.js';
 
 var Builders = {
@@ -17,6 +18,7 @@ var Builders = {
 
     sizer: CreateSizer,
     label: CreateLabel,
+    dialog: CreateDialog,
     slider: CreateSlider
 };
 

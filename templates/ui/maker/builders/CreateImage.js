@@ -4,17 +4,17 @@ const PhaserImage = Phaser.GameObjects.Image;
 
 var CreateImage = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var gameObjects = new PhaserImage(scene, 0, 0, data.key, data.frame);
+    var gameObject = new PhaserImage(scene, 0, 0, data.key, data.frame);
 
     if (data.width !== undefined) {
-        gameObjects.setDisplayWidth(data.width);
+        gameObject.setDisplayWidth(data.width);
     }
     if (data.height !== undefined) {
-        gameObjects.setDisplayHeight(data.height);
+        gameObject.setDisplayHeight(data.height);
     }
 
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    scene.add.existing(gameObject);
+    return gameObject;
 }
 
 export default CreateImage;

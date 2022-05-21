@@ -11,9 +11,9 @@ var CreateText = function (scene, data, view, styles, customBuilders) {
         var template = Handlebars.compile(text);
         text = template(view);
     }
-    var gameObjects = new PhaserText(scene, 0, 0, text, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new PhaserText(scene, 0, 0, text, data);
+    scene.add.existing(gameObject);
+    return gameObject;
 }
 
 export default CreateText;

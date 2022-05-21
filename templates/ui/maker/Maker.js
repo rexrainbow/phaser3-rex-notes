@@ -1,5 +1,6 @@
 import ParseYAML from './utils/ParseYAML.js';
 import YAMLMake from './YAMLMake.js';
+import Handlebars from 'handlebars';
 
 class Maker {
     constructor(scene, styles, customBuilders) {
@@ -53,6 +54,14 @@ class Maker {
         return YAMLMake(this.scene, data, view, this.styles, this.customBuilders);
     }
 
+    // Helper method
+    renderText(text, view) {
+        if (text == null) {
+            return '';
+        }
+        var template = Handlebars.compile(text);
+        return template(view);
+    }
 }
 
 export default Maker;

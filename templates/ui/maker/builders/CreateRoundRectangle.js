@@ -7,21 +7,21 @@ var CreateRoundRectangle = function (scene, data, view, styles, customBuilders) 
     var width = (data.width === undefined) ? 1 : data.width;
     var height = (data.height === undefined) ? 1 : data.height;
 
-    var gameObjects = new RoundRectangle(scene, 0, 0, width, height, data.radius);
+    var gameObject = new RoundRectangle(scene, 0, 0, width, height, data.radius);
 
     if (data.color !== undefined) {
-        gameObjects.setFillStyle(data.color)
+        gameObject.setFillStyle(data.color)
     }
     if (data.strokeColor !== undefined) {
         var strokeWidth = data.strokeWidth;
         if (strokeWidth === undefined) {
             strokeWidth = 2;
         }
-        gameObjects.setStrokeStyle(strokeWidth, data.strokeColor)
+        gameObject.setStrokeStyle(strokeWidth, data.strokeColor)
     }
 
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    scene.add.existing(gameObject);
+    return gameObject;
 }
 
 export default CreateRoundRectangle;
