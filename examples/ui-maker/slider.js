@@ -9,11 +9,11 @@ orientation: x
 input: drag
 
 track:
-    type: roundrectangle
+    type: roundRectangle
     color: 0x260e04
     radius: 6
 thumb:
-    type: roundrectangle
+    type: roundRectangle
     color: 0x7b5e57
     radius: 10
 space:

@@ -495,49 +495,49 @@ Size of hit-area is word-width x line-height, or image-width x line-height.
 
 - Pointer down
     ```javascript
-    txt.on('areadown', function(key, pointer, localX, localY){
+    txt.on('areadown', function(key, pointer, localX, localY, event){
 
     }, scope)
     ```
     or
     ```javascript
-    txt.on('areadown-' + key, function(pointer, localX, localY){
+    txt.on('areadown-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```
 - Pointer up
     ```javascript
-    txt.on('areaup', function(key, pointer, localX, localY){
+    txt.on('areaup', function(key, pointer, localX, localY, event){
 
     }, scope)
     ```
     or
     ```javascript
-    txt.on('areaup-' + key, function(pointer, localX, localY){
+    txt.on('areaup-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```
 - Pointer over
     ```javascript
-    txt.on('areaover', function(key, pointer, localX, localY){
+    txt.on('areaover', function(key, pointer, localX, localY, event){
 
     }, scope)
     ```
     or
     ```javascript
-    txt.on('areaover-' + key, function(pointer, localX, localY){
+    txt.on('areaover-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```
 - Pointer out
     ```javascript
-    txt.on('areaout', function(key, pointer){
+    txt.on('areaout', function(key, pointer, localX, localY, event){
 
     }, scope)
     ```
     or
     ```javascript
-    txt.on('areaout-' + key, function(pointer){
+    txt.on('areaout-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```

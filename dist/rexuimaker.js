@@ -24356,15 +24356,16 @@
 
   Object.assign(Sizer.prototype, methods$2);
 
-  var CreateChild = function CreateChild(scene, data, childKey, view, styles, customBuilders) {
-    var child;
-    var childData = data[childKey];
+  var CreateChild = function CreateChild(scene, data, subKey, view, styles, customBuilders) {
+    var childData = data[subKey];
 
-    if (childData) {
-      child = Make(scene, childData, view, styles, customBuilders);
-      data[childKey] = child;
+    if (!childData) {
+      return undefined;
     }
 
+    var child;
+    child = Make(scene, childData, view, styles, customBuilders);
+    data[subKey] = child;
     return child;
   };
 
@@ -25958,6 +25959,26 @@
 
   Object.assign(Dialog.prototype, ButtonMethods);
 
+  var CreateChildren = function CreateChildren(scene, data, subKey, view, styles, customBuilders) {
+    var childData = data[subKey];
+
+    if (!childData) {
+      return undefined;
+    }
+
+    if (Array.isArray(childData)) {
+      for (var i = 0, cnt = childData.length; i < cnt; i++) {
+        CreateChild(scene, childData, i, view, styles, customBuilders);
+      }
+    } else {
+      for (var key in childData) {
+        CreateChild(scene, childData, key, view, styles, customBuilders);
+      }
+    }
+
+    return childData;
+  };
+
   var CreateDialog = function CreateDialog(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
@@ -25967,40 +25988,12 @@
     CreateChild(scene, data, 'choicesBackground', view, styles, customBuilders);
     CreateChild(scene, data, 'actionsBackground', view, styles, customBuilders);
     CreateChild(scene, data, 'title', view, styles, customBuilders);
-    var toolbarConfig = data.toolbar;
-
-    if (toolbarConfig) {
-      for (var i = 0, cnt = toolbarConfig.length; i < cnt; i++) {
-        CreateChild(scene, toolbarConfig, i, view, styles, customBuilders);
-      }
-    }
-
-    var leftToolbarConfig = data.leftToolbar;
-
-    if (leftToolbarConfig) {
-      for (var i = 0, cnt = leftToolbarConfig.length; i < cnt; i++) {
-        CreateChild(scene, leftToolbarConfig, i, view, styles, customBuilders);
-      }
-    }
-
+    CreateChildren(scene, data, 'toolbar', view, styles, customBuilders);
+    CreateChildren(scene, data, 'leftToolbar', view, styles, customBuilders);
     CreateChild(scene, data, 'content', view, styles, customBuilders);
     CreateChild(scene, data, 'description', view, styles, customBuilders);
-    var choicesConfig = data.choices;
-
-    if (choicesConfig) {
-      for (var i = 0, cnt = choicesConfig.length; i < cnt; i++) {
-        CreateChild(scene, choicesConfig, i, view, styles, customBuilders);
-      }
-    }
-
-    var actionsConfig = data.actions;
-
-    if (actionsConfig) {
-      for (var i = 0, cnt = actionsConfig.length; i < cnt; i++) {
-        CreateChild(scene, actionsConfig, i, view, styles, customBuilders);
-      }
-    }
-
+    CreateChildren(scene, data, 'choices', view, styles, customBuilders);
+    CreateChildren(scene, data, 'actions', view, styles, customBuilders);
     var gameObject = new Dialog(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
@@ -26500,9 +26493,9 @@
   var Builders = {
     image: CreateImage,
     text: CreateText,
-    roundrectangle: CreateRoundRectangle,
-    ninepatch: CreateNinePatch$1,
-    ninepatch2: CreateNinePatch,
+    roundRectangle: CreateRoundRectangle,
+    ninePatch: CreateNinePatch$1,
+    ninePatch2: CreateNinePatch,
     sizer: CreateSizer,
     label: CreateLabel,
     dialog: CreateDialog,

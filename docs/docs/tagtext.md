@@ -483,25 +483,25 @@ txt.setFontStyle(style);
 
 - Pointer down
     ```javascript
-    txt.on('areadown', function(key, pointer, localX, localY){
+    txt.on('areadown', function(key, pointer, localX, localY, event){
 
     }, scope)
     ```
     or
     ```javascript
-    txt.on('areadown-' + key, function(pointer, localX, localY){
+    txt.on('areadown-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```
 - Pointer up
     ```javascript
-    txt.on('areaup', function(key, pointer, localX, localY){
+    txt.on('areaup', function(key, pointer, localX, localY, event){
 
     }, scope)
     ```
     or
     ```javascript
-    txt.on('areaup-' + key, function(pointer, localX, localY){
+    txt.on('areaup-' + key, function(pointer, localX, localY, event){
 
     }, scope)
     ```

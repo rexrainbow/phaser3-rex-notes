@@ -12,9 +12,9 @@ import CreateSlider from './CreateSlider.js';
 var Builders = {
     image: CreateImage,
     text: CreateText,
-    roundrectangle: CreateRoundRectangle,
-    ninepatch: CreateNinePatch,
-    ninepatch2: CreateNinePatch2,
+    roundRectangle: CreateRoundRectangle,
+    ninePatch: CreateNinePatch,
+    ninePatch2: CreateNinePatch2,
 
     sizer: CreateSizer,
     label: CreateLabel,

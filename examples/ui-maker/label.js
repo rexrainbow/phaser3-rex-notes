@@ -5,7 +5,7 @@ const content = `
 type: label
 
 background:
-    type: roundrectangle
+    type: roundRectangle
     color: 0x260e04
     radius: 10
     strokeColor: 0x7b5e57

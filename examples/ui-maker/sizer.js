@@ -5,7 +5,7 @@ const content = `
 type: sizer
 
 background:
-    type: roundrectangle
+    type: roundRectangle
     class: background
 children:
     - type: text

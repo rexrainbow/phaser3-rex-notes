@@ -6,7 +6,7 @@ width: 40
 height: 40
 
 background:
-    type: roundrectangle
+    type: roundRectangle
     color: 0x5e92f3
     radius: 20
 text:
@@ -26,7 +26,7 @@ type: dialog
 width: 500
 
 background:
-    type: roundrectangle
+    type: roundRectangle
     color: 0x1565c0
     radius: 20
 title:

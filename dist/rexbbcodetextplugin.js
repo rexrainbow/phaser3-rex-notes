@@ -2205,7 +2205,7 @@
       return;
     }
 
-    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY);
+    FireEvent.call(this, 'areadown', area.key, pointer, localX, localY, event);
   };
 
   var OnAreaUp = function OnAreaUp(pointer, localX, localY, event) {
@@ -2215,14 +2215,14 @@
       return;
     }
 
-    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY);
+    FireEvent.call(this, 'areaup', area.key, pointer, localX, localY, event);
   };
 
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
     if (localX === null) {
       // Case of pointerout
       if (this.lastHitAreaKey !== null) {
-        FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer);
+        FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
       }
 
       this.lastHitAreaKey = null;
@@ -2237,19 +2237,19 @@
     }
 
     if (this.lastHitAreaKey !== null) {
-      FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer);
+      FireEvent.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
     }
 
     if (hitAreaKey !== null) {
-      FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY);
+      FireEvent.call(this, 'areaover', hitAreaKey, pointer, localX, localY, event);
     }
 
     this.lastHitAreaKey = hitAreaKey;
   };
 
-  var FireEvent = function FireEvent(eventName, key, pointer, localX, localY) {
-    this.parent.emit("".concat(eventName, "-").concat(key), pointer, localX, localY);
-    this.parent.emit(eventName, key, pointer, localX, localY);
+  var FireEvent = function FireEvent(eventName, key, pointer, localX, localY, event) {
+    this.parent.emit("".concat(eventName, "-").concat(key), pointer, localX, localY, event);
+    this.parent.emit(eventName, key, pointer, localX, localY, event);
   };
 
   var LinesPool = new Stack();

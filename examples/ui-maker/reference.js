@@ -28,7 +28,7 @@ const content = `
 # Last item of array is the root/return config
 - type: sizer
   background:
-      type: roundrectangle
+      type: roundRectangle
       class: background
   children:
       - *child0
