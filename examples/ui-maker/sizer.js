@@ -3,6 +3,7 @@ import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
 type: sizer
+
 background:
     type: roundrectangle
     class: background
@@ -16,6 +17,7 @@ children:
     - type: text
       text: Phaser
       color: red
+
 space:
     left: 10
     right: 10

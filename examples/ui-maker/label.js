@@ -3,6 +3,7 @@ import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
 type: label
+
 background:
     type: roundrectangle
     color: 0x260e04
@@ -19,6 +20,7 @@ text:
 action:
     type: image
     key: volume
+
 space:
     left: 10
     right: 10

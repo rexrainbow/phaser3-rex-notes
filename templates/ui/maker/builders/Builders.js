@@ -6,7 +6,7 @@ import CreateNinePatch2 from './CreateNinePatch2.js';
 
 import CreateSizer from './CreateSizer.js';
 import CreateLabel from './CreateLabel.js';
-import CreateSlider from './CreateSizer.js';
+import CreateSlider from './CreateSlider.js';
 
 var Builders = {
     image: CreateImage,

@@ -2,52 +2,23 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
-# Reference of child
-- &child0
-  type: text 
-  text: Hello
-  color: white
+type: slider
+width: 200
+height: 20
+orientation: x
+input: drag
 
-- &child1
-  type: text
-  text: World
-  color: yellow
-
-- &child2
-  type: text
-  text: Phaser
-  color: red
-
-- &space
-  left: 10
-  right: 10
-  top: 10
-  bottom: 10
-  item: 10
-
-# Last item of array is the root/return config
-- type: sizer
-  background:
-      type: roundrectangle
-      class: background
-  children:
-      - *child0
-      - *child1
-      - *child2
-
-  space:
-      *space
-`
-
-const styles = `
-text:
-    fontSize: 20
-    color: white
-.background:
+track:
+    type: roundrectangle
     color: 0x260e04
+    radius: 6
+thumb:
+    type: roundrectangle
+    color: 0x7b5e57
     radius: 10
-    strokeColor: 0x7b5e57
-    strokeWidth: 2
+space:
+    top: 4
+    bottom: 4
 `
 
 class Demo extends Phaser.Scene {
@@ -60,10 +31,17 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var maker = this.rexUI.add.maker(styles);
-        var sizer = maker.make(content)
+        var maker = this.rexUI.add.maker();
+        var slider = maker.make(content)
             .setPosition(400, 300)
             .layout();
+
+        var print = this.add.text(0, 0, '');
+        slider
+            .on('valuechange', function (newValue, oldValue, slider) {
+                print.text = newValue;
+            })
+            .setValue(0.5)
     }
 
     update() { }
