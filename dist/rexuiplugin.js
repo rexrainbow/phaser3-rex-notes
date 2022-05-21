@@ -54687,7 +54687,7 @@
   var Builders = {
     Image: CreateImage,
     Text: CreateText,
-    Roundrectangle: CreateRoundRectangle,
+    RoundRectangle: CreateRoundRectangle,
     Ninepatch: CreateNinePatch$1,
     Ninepatch2: CreateNinePatch,
     Sizer: CreateSizer,
