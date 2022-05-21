@@ -122,7 +122,20 @@ class Demo extends Phaser.Scene {
 
         var dialog = maker.make(content)
             .setPosition(400, 300)
-            .layout();
+            .layout()
+            .setDraggable('title')
+
+        var print = this.add.text(0, 0, '');
+        dialog
+            .on('button.click', function (button, groupName, index, pointer, event) {
+                print.text += groupName + '-' + index + ': ' + button.text + '\n';
+            })
+            .on('button.over', function (button, groupName, index, pointer, event) {
+                button.getElement('background').setStrokeStyle(1, 0xffffff);
+            })
+            .on('button.out', function (button, groupName, index, pointer, event) {
+                button.getElement('background').setStrokeStyle();
+            });
     }
 
     update() { }

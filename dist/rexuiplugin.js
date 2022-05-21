@@ -46229,31 +46229,22 @@
     return toObj;
   };
 
-  /*
-  type: image
-  name:
-
-  key: 
-  frame:
-  width:
-  height:
-  */
   var PhaserImage = Phaser.GameObjects.Image;
 
   var CreateImage = function CreateImage(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var gameObjects = new PhaserImage(scene, 0, 0, data.key, data.frame);
+    var gameObject = new PhaserImage(scene, 0, 0, data.key, data.frame);
 
     if (data.width !== undefined) {
-      gameObjects.setDisplayWidth(data.width);
+      gameObject.setDisplayWidth(data.width);
     }
 
     if (data.height !== undefined) {
-      gameObjects.setDisplayHeight(data.height);
+      gameObject.setDisplayHeight(data.height);
     }
 
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    scene.add.existing(gameObject);
+    return gameObject;
   };
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -54496,39 +54487,6 @@
     commonjsRequire.extensions['.hbs'] = extension;
   }
 
-  /*
-  type: text
-  name:
-
-  text: 
-  fontFamily:
-  fontSize:
-  fontStyle:
-  color:
-  stroke:
-  strokeThickness:
-  shadow:
-      offsetX:
-      offsetY:
-      color:
-      blur:
-      stroke:
-      fill:
-  align:
-  padding:
-      left:
-      right:
-      top:
-      bottom:    
-  fixedWidth:
-  fixedHeight:
-  lineSpacing:
-  maxLines:
-  testString:
-  wordWrap:
-      width:
-      useAdvancedWrap:
-  */
   var PhaserText = Phaser.GameObjects.Text;
 
   var CreateText = function CreateText(scene, data, view, styles, customBuilders) {
@@ -54540,31 +54498,19 @@
       text = template(view);
     }
 
-    var gameObjects = new PhaserText(scene, 0, 0, text, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new PhaserText(scene, 0, 0, text, data);
+    scene.add.existing(gameObject);
+    return gameObject;
   };
-
-  /*
-  type: roundrectangle
-  name:
-
-  color: 
-  radius:
-  strokeColor:
-  strokeWidth:
-  width:
-  height:
-  */
 
   var CreateRoundRectangle = function CreateRoundRectangle(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var width = data.width === undefined ? 1 : data.width;
     var height = data.height === undefined ? 1 : data.height;
-    var gameObjects = new RoundRectangle$1(scene, 0, 0, width, height, data.radius);
+    var gameObject = new RoundRectangle$1(scene, 0, 0, width, height, data.radius);
 
     if (data.color !== undefined) {
-      gameObjects.setFillStyle(data.color);
+      gameObject.setFillStyle(data.color);
     }
 
     if (data.strokeColor !== undefined) {
@@ -54574,53 +54520,25 @@
         strokeWidth = 2;
       }
 
-      gameObjects.setStrokeStyle(strokeWidth, data.strokeColor);
+      gameObject.setStrokeStyle(strokeWidth, data.strokeColor);
     }
 
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    scene.add.existing(gameObject);
+    return gameObject;
   };
-
-  /*
-  type: ninepatch
-  name:
-
-  key: 
-  columns: [20, undefined, 20]
-  rows: [20, undefined, 20]
-  stretchMode:
-  width:
-  height:
-  preserveRatio:
-  maxFixedPartScale:
-  */
 
   var CreateNinePatch$1 = function CreateNinePatch(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var gameObjects = new NinePatch$1(scene, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new NinePatch$1(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
   };
-
-  /*
-  type: ninepatch2
-  name:
-
-  key: 
-  columns: [20, undefined, 20]
-  rows: [20, undefined, 20]
-  stretchMode:
-  width:
-  height:
-  preserveRatio:
-  maxFixedPartScale:
-  */
 
   var CreateNinePatch = function CreateNinePatch(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var gameObjects = new NinePatch(scene, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new NinePatch(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
   };
 
   var CreateChild = function CreateChild(scene, data, childKey, view, styles, customBuilders) {
@@ -54634,46 +54552,6 @@
 
     return child;
   };
-
-  /*
-  type: sizer
-  name:
-
-  # Relace child data by game objct
-  background:
-      - child:
-        padding:
-            left:
-            right:
-            top:
-            bottom:
-  children:
-      - child:
-        proportion:
-        align:
-        padding:
-            left:
-            right:
-            top:
-            bottom:
-        expand:
-        key:
-        minWidth:
-        minHeight:
-  # ----
-
-  width:
-  height:
-  orientation:
-  rtl:
-  space:
-      left:
-      right:
-      top:
-      bottom:
-      item:
-  draggable:
-  */
 
   var CreateSizer = function CreateSizer(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -54717,54 +54595,25 @@
       }
     }
 
-    var gameObjects = new Sizer(scene, data);
-    scene.add.existing(gameObjects);
+    var gameObject = new Sizer(scene, data);
+    scene.add.existing(gameObject);
 
     if (backgroundConfig) {
       for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
         var childConfig = backgroundConfig[i];
-        gameObjects.addBackground(childConfig.child, childConfig.padding);
+        gameObject.addBackground(childConfig.child, childConfig.padding);
       }
     }
 
     if (childrenConfig) {
       for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
         var childConfig = childrenConfig[i];
-        gameObjects.add(childConfig.child, childConfig);
+        gameObject.add(childConfig.child, childConfig);
       }
     }
 
-    return gameObjects;
+    return gameObject;
   };
-
-  /*
-  type: label
-  name:
-
-  # Relace child data by game objct
-  background:
-  icon:
-  text:
-  action:
-  # ----
-
-  width:
-  height:
-  orientation:
-  iconMask:
-  expandTextWidth:
-  expandTextHeight:
-  actionMask:
-  align:
-  space:
-      left:
-      right:
-      top:
-      bottom:
-      icon:
-      text:
-  draggable:
-  */
 
   var CreateLabel = function CreateLabel(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
@@ -54773,9 +54622,69 @@
     CreateChild(scene, data, 'icon', view, styles, customBuilders);
     CreateChild(scene, data, 'text', view, styles, customBuilders);
     CreateChild(scene, data, 'action', view, styles, customBuilders);
-    var gameObjects = new Label(scene, data);
-    scene.add.existing(gameObjects);
-    return gameObjects;
+    var gameObject = new Label(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateDialog = function CreateDialog(scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'toolbarBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'leftToolbarBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'choicesBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'actionsBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'title', view, styles, customBuilders);
+    var toolbarConfig = data.toolbar;
+
+    if (toolbarConfig) {
+      for (var i = 0, cnt = toolbarConfig.length; i < cnt; i++) {
+        CreateChild(scene, toolbarConfig, i, view, styles, customBuilders);
+      }
+    }
+
+    var leftToolbarConfig = data.leftToolbar;
+
+    if (leftToolbarConfig) {
+      for (var i = 0, cnt = leftToolbarConfig.length; i < cnt; i++) {
+        CreateChild(scene, leftToolbarConfig, i, view, styles, customBuilders);
+      }
+    }
+
+    CreateChild(scene, data, 'content', view, styles, customBuilders);
+    CreateChild(scene, data, 'description', view, styles, customBuilders);
+    var choicesConfig = data.choices;
+
+    if (choicesConfig) {
+      for (var i = 0, cnt = choicesConfig.length; i < cnt; i++) {
+        CreateChild(scene, choicesConfig, i, view, styles, customBuilders);
+      }
+    }
+
+    var actionsConfig = data.actions;
+
+    if (actionsConfig) {
+      for (var i = 0, cnt = actionsConfig.length; i < cnt; i++) {
+        CreateChild(scene, actionsConfig, i, view, styles, customBuilders);
+      }
+    }
+
+    var gameObject = new Dialog(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateSlider = function CreateSlider(scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'track', view, styles, customBuilders);
+    CreateChild(scene, data, 'indicator', view, styles, customBuilders);
+    CreateChild(scene, data, 'thumb', view, styles, customBuilders);
+    var gameObject = new Slider$1(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
   };
 
   var Builders = {
@@ -54786,7 +54695,8 @@
     ninepatch2: CreateNinePatch,
     sizer: CreateSizer,
     label: CreateLabel,
-    slider: CreateSizer
+    dialog: CreateDialog,
+    slider: CreateSlider
   };
 
   var Make = function Make(scene, data, view, styles, customBuilders) {
@@ -54892,6 +54802,17 @@
       key: "make",
       value: function make(data, view) {
         return YAMLMake(this.scene, data, view, this.styles, this.customBuilders);
+      } // Helper method
+
+    }, {
+      key: "renderText",
+      value: function renderText(text, view) {
+        if (text == null) {
+          return '';
+        }
+
+        var template = lib.compile(text);
+        return template(view);
       }
     }]);
 
