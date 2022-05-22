@@ -1,4 +1,4 @@
-import MergeStyle from './MergeStyle.js';
+import MergeStyle from './utils/MergeStyle.js';
 import NinePatch from '../../ninepatch2/NinePatch.js';
 
 var CreateNinePatch = function (scene, data, view, styles, customBuilders) {

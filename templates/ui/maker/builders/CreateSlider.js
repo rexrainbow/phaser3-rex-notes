@@ -1,6 +1,6 @@
-import MergeStyle from './MergeStyle.js';
+import MergeStyle from './utils/MergeStyle.js';
 import Slider from '../../slider/Slider.js';
-import CreateChild from './CreateChild.js';
+import CreateChild from './utils/CreateChild.js';
 
 var CreateSlider = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);

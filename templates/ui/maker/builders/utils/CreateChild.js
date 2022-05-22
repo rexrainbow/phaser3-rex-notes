@@ -1,4 +1,4 @@
-import Make from '../Make.js';
+import Make from '../../Make.js';
 
 var CreateChild = function (scene, data, subKey, view, styles, customBuilders) {
     var childData = data[subKey];

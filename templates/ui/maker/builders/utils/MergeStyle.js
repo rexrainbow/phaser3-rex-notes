@@ -1,4 +1,4 @@
-import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
 var MergeStyle = function (data, styles) {
     if (styles === undefined) {
@@ -9,15 +9,15 @@ var MergeStyle = function (data, styles) {
         Merge(data, styles[`#${data.name}`]);
     }
 
-    if (data.hasOwnProperty('class')) {
-        var clasKeys = data.class.split(' ');
+    if (data.hasOwnProperty('$class')) {
+        var clasKeys = data.$class.split(' ');
         for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
             Merge(data, styles[`.${clasKeys[i]}`]);
         }
     }
 
-    if (data.hasOwnProperty('type')) {
-        Merge(data, styles[data.type]);
+    if (data.hasOwnProperty('$type')) {
+        Merge(data, styles[data.$type]);
     }
 
     return data;

@@ -2,18 +2,18 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
-type: Slider
+$type: Slider
 width: 200
 height: 20
 orientation: x
 input: drag
 
 track:
-    type: RoundRectangle
+    $type: RoundRectangle
     color: 0x260e04
     radius: 6
 thumb:
-    type: RoundRectangle
+    $type: RoundRectangle
     color: 0x7b5e57
     radius: 10
 space:

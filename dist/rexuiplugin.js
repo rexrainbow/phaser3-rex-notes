@@ -46198,16 +46198,16 @@
       Merge(data, styles["#".concat(data.name)]);
     }
 
-    if (data.hasOwnProperty('class')) {
-      var clasKeys = data["class"].split(' ');
+    if (data.hasOwnProperty('$class')) {
+      var clasKeys = data.$class.split(' ');
 
       for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
         Merge(data, styles[".".concat(clasKeys[i])]);
       }
     }
 
-    if (data.hasOwnProperty('type')) {
-      Merge(data, styles[data.type]);
+    if (data.hasOwnProperty('$type')) {
+      Merge(data, styles[data.$type]);
     }
 
     return data;
@@ -54620,6 +54620,68 @@
     return gameObject;
   };
 
+  var CreateFixWidthSizer = function CreateFixWidthSizer(scene, data, view, styles, customBuilders) {
+    data = MergeStyle(data, styles);
+    var backgroundConfig = data.background;
+    delete data.background;
+
+    if (backgroundConfig) {
+      if (!Array.isArray(backgroundConfig)) {
+        backgroundConfig = [backgroundConfig];
+      }
+
+      for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
+        var childConfig = backgroundConfig[i];
+
+        if (!childConfig.child) {
+          childConfig = {
+            child: childConfig
+          };
+          backgroundConfig[i] = childConfig;
+        }
+
+        CreateChild(scene, childConfig, 'child', view, styles, customBuilders);
+      }
+    }
+
+    var childrenConfig = data.children;
+    delete data.children;
+
+    if (childrenConfig) {
+      for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
+        var childConfig = childrenConfig[i];
+
+        if (!childConfig.child) {
+          childConfig = {
+            child: childConfig
+          };
+          childrenConfig[i] = childConfig;
+        }
+
+        CreateChild(scene, childConfig, 'child', view, styles, customBuilders);
+      }
+    }
+
+    var gameObject = new FixWidthSizer(scene, data);
+    scene.add.existing(gameObject);
+
+    if (backgroundConfig) {
+      for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
+        var childConfig = backgroundConfig[i];
+        gameObject.addBackground(childConfig.child, childConfig.padding);
+      }
+    }
+
+    if (childrenConfig) {
+      for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
+        var childConfig = childrenConfig[i];
+        gameObject.add(childConfig.child, childConfig);
+      }
+    }
+
+    return gameObject;
+  };
+
   var CreateLabel = function CreateLabel(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
@@ -54691,13 +54753,14 @@
     Ninepatch: CreateNinePatch$1,
     Ninepatch2: CreateNinePatch,
     Sizer: CreateSizer,
+    FixWidthSizer: CreateFixWidthSizer,
     Label: CreateLabel,
     Dialog: CreateDialog,
     Slider: CreateSlider
   };
 
   var Make = function Make(scene, data, view, styles, customBuilders) {
-    var type = data.type;
+    var type = data.$type;
     var callback;
 
     if (customBuilders) {

@@ -6,11 +6,11 @@ width: 40
 height: 40
 
 background:
-    type: RoundRectangle
+    $type: RoundRectangle
     color: 0x5e92f3
     radius: 20
 text:
-    type: Text
+    $type: Text
     text: ''       # Override this property
     fontSize: 24
 
@@ -22,55 +22,55 @@ space:
 `
 
 const content = `
-type: Dialog
+$type: Dialog
 width: 500
 
 background:
-    type: RoundRectangle
+    $type: RoundRectangle
     color: 0x1565c0
     radius: 20
 title:
-    type: Label
-    class: mylabel
+    $type: Label
+    $class: mylabel
     text: {text: Title}
 toolbar:
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: O}
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: X}
 leftToolbar:
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: A}
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: B}
 content:
-    type: Label
-    class: mylabel
+    $type: Label
+    $class: mylabel
     text: {text: Content}
 description:
-    type: Label
-    class: mylabel    
+    $type: Label
+    $class: mylabel    
     text: {text: Description}
 choices:
-    - type: Label
-      class: mylabel      
+    - $type: Label
+      $class: mylabel      
       text: {text: Choice0}
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: Choice1}
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: Choice2}
 actions:
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: Action0}
-    - type: Label
-      class: mylabel
+    - $type: Label
+      $class: mylabel
       text: {text: Action1}
 
 space:

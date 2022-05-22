@@ -1,40 +1,63 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const content = `
-$type: Sizer
+const labelStyle = `
+width: 40
+height: 40
 
 background:
     $type: RoundRectangle
-    $class: background
-children:
-    - $type: Text
-      text: Hello
-      color: white
-    - $type: Text
-      text: World
-      color: yellow
-    - $type: Text
-      text: Phaser
-      color: red
+    color: 0x4e342e
+    radius: 10
+text:
+    $type: Text
+    text: ''       # Override this property
+    fontSize: 20
 
 space:
     left: 10
     right: 10
     top: 10
     bottom: 10
-    item: 10
 `
 
-const styles = `
-Text:
-    fontSize: 20
-    color: white
-.background:
+const content = `
+$type: FixWidthSizer
+
+background:
+    $type: RoundRectangle
     color: 0x260e04
     radius: 10
     strokeColor: 0x7b5e57
     strokeWidth: 2
+children:
+    - $type: Label
+      $class: mylabel
+      text: {text: Hello}
+    - $type: Label
+      $class: mylabel
+      text: {text: World}
+    - $type: Label
+      $class: mylabel
+      text: {text: Phaser}
+    - $type: Label
+      $class: mylabel
+      text: {text: AAAA}
+    - $type: Label
+      $class: mylabel
+      text: {text: BBBBBBBBB}
+
+width: 400
+height: 300
+align: center
+
+space:
+    left: 10
+    right: 10
+    top: 10
+    bottom: 10
+    item: 5
+    line: 5
 `
 
 class Demo extends Phaser.Scene {
@@ -47,10 +70,13 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var maker = this.rexUI.add.maker(styles);
-        var sizer = maker.make(content)
+        var maker = this.rexUI.add.maker();
+        maker.addStyle('.mylabel', labelStyle);
+
+        var fixwidthSizer = maker.make(content)
             .setPosition(400, 300)
             .layout();
+
     }
 
     update() { }

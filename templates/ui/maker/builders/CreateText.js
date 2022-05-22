@@ -1,4 +1,4 @@
-import MergeStyle from './MergeStyle.js';
+import MergeStyle from './utils/MergeStyle.js';
 import Handlebars from 'handlebars';
 
 const PhaserText = Phaser.GameObjects.Text;

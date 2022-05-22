@@ -1,4 +1,4 @@
-import MergeStyle from './MergeStyle.js';
+import MergeStyle from './utils/MergeStyle.js';
 import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
 
 var CreateRoundRectangle = function (scene, data, view, styles, customBuilders) {

@@ -5,6 +5,8 @@ import CreateNinePatch from './CreateNinePatch.js';
 import CreateNinePatch2 from './CreateNinePatch2.js';
 
 import CreateSizer from './CreateSizer.js';
+import CreateFixWidthSizer from './CreateFixwidthSizer.js';
+
 import CreateLabel from './CreateLabel.js';
 import CreateDialog from './CreateDialog.js';
 import CreateSlider from './CreateSlider.js';
@@ -17,6 +19,8 @@ var Builders = {
     Ninepatch2: CreateNinePatch2,
 
     Sizer: CreateSizer,
+    FixWidthSizer: CreateFixWidthSizer,
+
     Label: CreateLabel,
     Dialog: CreateDialog,
     Slider: CreateSlider

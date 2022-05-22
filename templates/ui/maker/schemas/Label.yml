@@ -1,26 +1,26 @@
-type: Slider
+$type: Label
 name:
 
 # Relace child data by game objct
 background:
-track:
-indicator:
-thumb:
+icon:
+text:
+action:
 # ----
 
 width:
 height:
-input:
 orientation:
-value:
-gap:
-easeValue:
-    duration:
-    ease:
+iconMask:
+expandTextWidth:
+expandTextHeight:
+actionMask:
+align:
 space:
     left:
     right:
     top:
     bottom:
-enable:
+    icon:
+    text:
 draggable:

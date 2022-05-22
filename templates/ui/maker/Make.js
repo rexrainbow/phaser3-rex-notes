@@ -1,7 +1,7 @@
 import Builders from './builders/Builders.js';
 
 var Make = function (scene, data, view, styles, customBuilders) {
-    var type = data.type;
+    var type = data.$type;
     var callback;
     if (customBuilders) {
         callback = customBuilders[type]

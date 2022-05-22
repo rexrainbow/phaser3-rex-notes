@@ -1,8 +1,8 @@
 import MergeStyle from './utils/MergeStyle.js';
-import Sizer from '../../sizer/Sizer.js';
+import FixWidthSizer from '../../fixwidthsizer/FixWidthSizer.js';
 import CreateChild from './utils/CreateChild.js';
 
-var CreateSizer = function (scene, data, view, styles, customBuilders) {
+var CreateFixWidthSizer = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var backgroundConfig = data.background;
@@ -34,7 +34,7 @@ var CreateSizer = function (scene, data, view, styles, customBuilders) {
         }
     }
 
-    var gameObject = new Sizer(scene, data);
+    var gameObject = new FixWidthSizer(scene, data);
     scene.add.existing(gameObject);
 
     if (backgroundConfig) {
@@ -54,4 +54,4 @@ var CreateSizer = function (scene, data, view, styles, customBuilders) {
     return gameObject;
 }
 
-export default CreateSizer;
+export default CreateFixWidthSizer;

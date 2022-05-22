@@ -1,7 +1,7 @@
-import MergeStyle from './MergeStyle.js';
+import MergeStyle from './utils/MergeStyle.js';
 import Dialog from '../../dialog/Dialog.js';
-import CreateChild from './CreateChild.js';
-import CreateChildren from './CreateChildren.js';
+import CreateChild from './utils/CreateChild.js';
+import CreateChildren from './utils/CreateChildren.js';
 
 var CreateDialog = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);

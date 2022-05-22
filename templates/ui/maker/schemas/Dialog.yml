@@ -1,25 +1,25 @@
-type: Dialog
+$type: Dialog
 name:
 
 # Relace child data by game objct
 background:
 title:
 toolbar:
-    - type:
+    - $type:
       # ...
 toolbarBackground:
 leftToolbar:
-    - type:
+    - $type:
       # ...
 leftToolbarBackground:
 content:
 description:
 choices:
-    - type:
+    - $type:
       # ...
 choicesBackground:
 actions:
-    - type:
+    - $type:
       # ...
 actionsBackground:
 # ----

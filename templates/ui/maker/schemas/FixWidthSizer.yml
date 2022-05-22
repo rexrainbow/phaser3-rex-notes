@@ -1,0 +1,33 @@
+$type: FixWidthSizer
+name:
+
+# Relace child data by game objct
+background:
+    - child:
+      padding:
+          left:
+          right:
+          top:
+          bottom:
+children:
+    - child:
+      padding:
+          left:
+          right:
+          top:
+          bottom:
+      key:
+# ----
+
+width:
+height:
+space:
+    left:
+    right:
+    top:
+    bottom:
+    item:
+    line:
+rtl:
+align:
+draggable:

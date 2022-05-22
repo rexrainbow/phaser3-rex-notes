@@ -2,23 +2,23 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const content = `
-type: label
+$type: label
 
 background:
-    type: RoundRectangle
+    $type: RoundRectangle
     color: 0x260e04
     radius: 10
     strokeColor: 0x7b5e57
     strokeWidth: 2
 icon:
-    type: Image
+    $type: Image
     key: person
 text:
-    type: Text
+    $type: Text
     text: Hello {{name}}  # String template
     fontSize: 24
 action:
-    type: Image
+    $type: Image
     key: volume
 
 space:
