@@ -86,6 +86,7 @@ var buttons = scene.rexUI.add.buttons({
     // height: undefined,
 
     orientation: 0,
+    // rtl: false,
 
     // Elements
     // background: backgroundGameObject,

@@ -9,6 +9,7 @@ import CreateFixWidthSizer from './CreateFixwidthSizer.js';
 
 import CreateLabel from './CreateLabel.js';
 import CreateDialog from './CreateDialog.js';
+import CreateButtons from './CreateButtons.js';
 import CreateSlider from './CreateSlider.js';
 
 var Builders = {
@@ -23,6 +24,7 @@ var Builders = {
 
     Label: CreateLabel,
     Dialog: CreateDialog,
+    Buttons: CreateButtons,
     Slider: CreateSlider
 };
 
