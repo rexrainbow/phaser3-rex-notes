@@ -1,4 +1,5 @@
 import AddMethods from './AddMethods.js';
+import RemoveMethods from './RemoveMethods.js';
 import FireEvent from './FireEvent.js';
 import SetTypeMethods from './SetTypeMethods.js';
 import ButtonMethods from './ButtonMethods.js';
@@ -10,7 +11,9 @@ class ButtonGroup {
         this.groupName = config.groupName;
         this.clickConfig = config.clickConfig;
 
+        this.buttonsType = undefined;
         this.buttons = [];
+        this.buttonMap = {};
     }
 
     destroy() {
@@ -28,6 +31,7 @@ var methods = {
 Object.assign(
     ButtonGroup.prototype,
     AddMethods,
+    RemoveMethods,
     SetTypeMethods,
     ButtonMethods,
     methods

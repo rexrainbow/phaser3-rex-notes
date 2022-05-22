@@ -4,6 +4,14 @@ export default {
     add(gameObject) {
         this.buttons.push(gameObject);
 
+        if (this.buttonsType) {
+            var key = gameObject.name;
+            this.buttonMap[key] = gameObject;
+            this.dataManager
+                .set(key, undefined)
+                .set(key, false); // Trigger data event 'changedata'
+        }
+
         //Default: Fire 'click' event when touch released after pressed.
         gameObject._buttonBehavior = new Click(gameObject, this.clickConfig);
 

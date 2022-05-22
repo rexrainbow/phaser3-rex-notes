@@ -42,7 +42,8 @@ class GridButtons extends GridSizer {
             eventEmitter: GetValue(config, 'eventEmitter', this),
             groupName: GetValue(config, 'groupName', undefined),
             clickConfig: GetValue(config, 'click', undefined)
-        });
+        })
+            .setButtonsType(config);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -79,8 +80,6 @@ class GridButtons extends GridSizer {
                 }
             }
         }
-
-        this.buttonGroup.setButtonsType(config);
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', this.buttonGroup.buttons);

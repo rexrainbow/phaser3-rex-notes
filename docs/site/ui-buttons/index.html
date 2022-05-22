@@ -7070,6 +7070,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events_1" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8329,6 +8336,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events_1" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8798,16 +8812,22 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 <li><code>button</code> : Button game object.</li>
 <li><code>value</code>: <code>true</code>, or <code>false</code>.</li>
 <li><code>previousValue</code> : <code>true</code>, or <code>false</code>.</li>
+<li>Also trigger <code>'button.statechange'</code> event.</li>
 </ul>
 </li>
 <li>State of a button : Stored in <a href="../gameobject/#private-data"><code>buttons.data</code></a></li>
+<li>Get states of all buttons :
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getAllButtonsState</span><span class="p">();</span>  <span class="c1">// { key: boolean }</span>
+</code></pre></div></li>
+<li>Clear states of all button :
+    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">clearAllButtonsState</span><span class="p">();</span>
+</code></pre></div><ul>
+<li>Will trigger <em>setValueCallback</em> and <code>'button.statechange'</code> event.</li>
 </ul>
 </li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Checkboxes and radio don't support add, remove, show, or hide methods.</p>
-</div>
+</li>
+</ul>
 <h4 id="checkboxes">Checkboxes<a class="headerlink" href="#checkboxes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Read state
@@ -8849,6 +8869,17 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
     <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">key</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>On button state changed. For Checkboxes/radio
+    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div><ul>
+<li>Can be used to replace <em>setValueCallback</em>.</li>
 </ul>
 </li>
 </ul>

@@ -451,10 +451,17 @@ buttons.forEachButtton(callback, scope);
         - `button` : Button game object.
         - `value`: `true`, or `false`.
         - `previousValue` : `true`, or `false`.
+        - Also trigger `'button.statechange'` event.
     - State of a button : Stored in [`buttons.data`](gameobject.md#private-data)
-
-!!! note
-    Checkboxes and radio don't support add, remove, show, or hide methods.
+    - Get states of all buttons :
+        ```javascript
+        var states = buttons.getAllButtonsState();  // { key: boolean }
+        ```
+    - Clear states of all button :
+        ```javascript
+        buttons.clearAllButtonsState();
+        ```
+        - Will trigger *setValueCallback* and `'button.statechange'` event.
 
 #### Checkboxes
 
@@ -499,3 +506,13 @@ buttons.forEachButtton(callback, scope);
     buttons.value = key;
     ```
     - `key` : `name` property of a button game object. (i.e. `button.name`)
+
+#### Events
+
+- On button state changed. For Checkboxes/radio
+    ```javascript
+    buttons.on('button.statechange', function(button, index, value, previousValue) {
+
+    })
+    ```
+    - Can be used to replace *setValueCallback*.

@@ -10624,7 +10624,6 @@
     }
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
   var SizerRmove = Sizer.prototype.remove;
   var SizerClear = Sizer.prototype.clear;
 
@@ -10633,8 +10632,7 @@
       return this;
     }
 
-    var buttons = this.buttonGroup.buttons;
-    RemoveItem(buttons, gameObject);
+    this.buttonGroup.remove(gameObject);
     SizerRmove.call(this, gameObject, destroyChild);
     return this;
   };
@@ -10683,7 +10681,14 @@
 
   var AddMethods = {
     add: function add(gameObject) {
-      this.buttons.push(gameObject); //Default: Fire 'click' event when touch released after pressed.
+      this.buttons.push(gameObject);
+
+      if (this.buttonsType) {
+        var key = gameObject.name;
+        this.buttonMap[key] = gameObject;
+        this.dataManager.set(key, undefined).set(key, false); // Trigger data event 'changedata'
+      } //Default: Fire 'click' event when touch released after pressed.
+
 
       gameObject._buttonBehavior = new Button(gameObject, this.clickConfig);
 
@@ -10711,7 +10716,34 @@
     }
   };
 
-  var FireEvent = function FireEvent(eventName, button, pointer, event) {
+  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveMethods = {
+    remove: function remove(gameObject) {
+      RemoveItem(this.buttons, gameObject);
+
+      if (this.buttonsType) {
+        var key = gameObject.name;
+        delete this.buttonMap[key];
+        this.dataManager.remove(key);
+      }
+
+      return this;
+    },
+    clear: function clear() {
+      this.buttons.length = 0;
+
+      if (this.buttonsType) {
+        for (var key in this.buttonMap) {
+          delete this.buttonMap[key];
+          this.dataManager.remove(key);
+        }
+      }
+
+      return this;
+    }
+  };
+
+  var FireEvent = function FireEvent(eventName, button) {
     var index;
 
     if (typeof button === 'number') {
@@ -10730,25 +10762,41 @@
     } // Buttons is a child. Fire internal events.
 
 
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
+    }
+
     if (this.eventEmitter !== this.parent) {
-      this.parent.emit(eventName, button, index, pointer, event);
+      var _this$parent;
+
+      (_this$parent = this.parent).emit.apply(_this$parent, [eventName, button, index].concat(args));
     }
 
     if (this.groupName !== undefined) {
-      this.eventEmitter.emit(eventName, button, this.groupName, index, pointer, event);
+      var _this$eventEmitter;
+
+      (_this$eventEmitter = this.eventEmitter).emit.apply(_this$eventEmitter, [eventName, button, this.groupName, index].concat(args));
     } else {
-      this.eventEmitter.emit(eventName, button, index, pointer, event);
+      var _this$eventEmitter2;
+
+      (_this$eventEmitter2 = this.eventEmitter).emit.apply(_this$eventEmitter2, [eventName, button, index].concat(args));
     }
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
-  var InitData = function InitData(config, initialValue) {
-    if (initialValue === undefined) {
-      initialValue = false;
+  var Initialize = function Initialize(config) {
+    // Assign this.dataManager
+    var dataManager = GetValue$2(config, 'dataManager', undefined);
+
+    if (dataManager === undefined) {
+      var parent = this.parent;
+      parent.setDataEnabled();
+      dataManager = parent.data;
     }
 
-    var dataManager = GetValue$2(config, 'dataManager', undefined);
+    this.dataManager = dataManager; // Assign this.setValueCallback, this.setValueCallbackScope
+
     var setValueCallback, setValueCallbackScope;
     setValueCallback = GetValue$2(config, 'setValueCallback', undefined);
     setValueCallbackScope = GetValue$2(config, 'setValueCallbackScope', undefined);
@@ -10758,29 +10806,29 @@
       setValueCallbackScope = GetValue$2(config, 'setButtonStateCallbackScope', undefined);
     }
 
-    if (dataManager === undefined) {
-      var parent = this.parent;
-      parent.setDataEnabled();
-      dataManager = parent.data;
-    }
+    this.setValueCallback = setValueCallback;
+    this.setValueCallbackScope = setValueCallbackScope; // Register event callback
 
-    this.buttons.forEach(function (button) {
-      var key = button.name;
+    dataManager.events.on("changedata", function (parent, key, value, previousValue) {
+      var button = this.buttonMap[key];
 
-      if (setValueCallback) {
-        dataManager.events.on("changedata-".concat(key), function (parent, value, previousValue) {
-          if (setValueCallbackScope) {
-            setValueCallback.call(setValueCallbackScope, button, value, previousValue);
-          } else {
-            setValueCallback(button, value, previousValue);
-          }
-        });
+      if (!button) {
+        return;
       }
 
-      dataManager.set(key, undefined);
-      dataManager.set(key, initialValue); // Trigger data event 'changedata'
-    });
-    this.dataManager = dataManager;
+      var callback = this.setValueCallback;
+      var scope = this.setValueCallbackScope;
+
+      if (callback) {
+        if (scope) {
+          callback.call(scope, button, value, previousValue);
+        } else {
+          callback(button, value, previousValue);
+        }
+      }
+
+      this.fireEvent('button.statechange', button, value, previousValue);
+    }, this);
   };
 
   var SetTypeMethods = {
@@ -10789,10 +10837,10 @@
         config = {};
       }
 
-      var type = GetValue$2(config, 'buttonsType', config.type);
-      this.buttonsType = type;
+      var buttonsType = GetValue$2(config, 'buttonsType', config.type);
+      this.buttonsType = buttonsType;
 
-      switch (type) {
+      switch (buttonsType) {
         case 'radio':
           this.setRadioType(config);
           break;
@@ -10805,7 +10853,7 @@
       return this;
     },
     setRadioType: function setRadioType(config) {
-      InitData.call(this, config);
+      Initialize.call(this, config);
       var radioValue = undefined;
       var parent = this.parent,
           buttons = this.buttons,
@@ -10841,17 +10889,38 @@
       });
       parent.on('button.click', function (button) {
         parent.value = button.name;
-      });
+      }); // button.click event -> parent.value -> dataManager -> changedata event -> ...
+      // parent.value -> dataManager -> changedata event -> ...
+
       return this;
     },
     setCheckboxesType: function setCheckboxesType(config) {
-      InitData.call(this, config);
+      Initialize.call(this, config);
       var parent = this.parent,
           dataManager = this.dataManager;
       parent.on('button.click', function (button) {
         dataManager.toggle(button.name);
-      });
+      }); // button.click event -> dataManager -> changedata event -> ...
+      // dataManager.set() -> changedata event -> ...
+
       return this;
+    },
+    // Common
+    clearAllButtonsState: function clearAllButtonsState() {
+      for (var key in this.buttonMap) {
+        this.dataManager.set(key, false);
+      }
+
+      return this;
+    },
+    getAllButtonsState: function getAllButtonsState() {
+      var states = {};
+
+      for (var key in this.buttonMap) {
+        states[key] = this.dataManager.get(key);
+      }
+
+      return states;
     },
     // For radio
     setSelectedButtonName: function setSelectedButtonName(name) {
@@ -11022,7 +11091,9 @@
       this.eventEmitter = config.eventEmitter;
       this.groupName = config.groupName;
       this.clickConfig = config.clickConfig;
+      this.buttonsType = undefined;
       this.buttons = [];
+      this.buttonMap = {};
     }
 
     _createClass(ButtonGroup, [{
@@ -11041,10 +11112,18 @@
   var methods = {
     fireEvent: FireEvent
   };
-  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$1, methods);
+  Object.assign(ButtonGroup.prototype, AddMethods, RemoveMethods, SetTypeMethods, ButtonMethods$1, methods);
 
   // Include in Buttons/GridButtons/FixedWidthButtons class
   var ButtonStateMethods = {
+    // Common
+    clearAllButtonsState: function clearAllButtonsState() {
+      this.buttonGroup.clearAllButtonsState();
+      return this;
+    },
+    getAllButtonsState: function getAllButtonsState() {
+      return this.buttonGroup.getAllButtonsState();
+    },
     // For radio
     setSelectedButtonName: function setSelectedButtonName(name) {
       this.buttonGroup.setSelectedButtonName(name);
@@ -11095,7 +11174,7 @@
         eventEmitter: GetValue$1(config, 'eventEmitter', _assertThisInitialized(_this)),
         groupName: GetValue$1(config, 'groupName', undefined),
         clickConfig: GetValue$1(config, 'click', undefined)
-      }); // Add elements
+      }).setButtonsType(config); // Add elements
 
       var background = GetValue$1(config, 'background', undefined);
       var buttons = GetValue$1(config, 'buttons', undefined); // Buttons properties
@@ -11110,8 +11189,6 @@
       if (buttons) {
         _this.addButtons(buttons);
       }
-
-      _this.buttonGroup.setButtonsType(config);
 
       _this.addChildrenMap('background', background);
 

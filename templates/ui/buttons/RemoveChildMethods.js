@@ -1,7 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
-const RemoveItem = Phaser.Utils.Array.Remove;
 const SizerRmove = Sizer.prototype.remove;
 const SizerClear = Sizer.prototype.clear;
 
@@ -10,8 +9,7 @@ var Remove = function (gameObject, destroyChild) {
         return this;
     }
 
-    var buttons = this.buttonGroup.buttons;
-    RemoveItem(buttons, gameObject);
+    this.buttonGroup.remove(gameObject);
     SizerRmove.call(this, gameObject, destroyChild);
     return this;
 };

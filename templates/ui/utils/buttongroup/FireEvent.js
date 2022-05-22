@@ -1,4 +1,4 @@
-var FireEvent = function (eventName, button, pointer, event) {
+var FireEvent = function (eventName, button, ...args) {
     var index;
     if (typeof (button) === 'number') {
         index = button;
@@ -15,13 +15,13 @@ var FireEvent = function (eventName, button, pointer, event) {
 
     // Buttons is a child. Fire internal events.
     if (this.eventEmitter !== this.parent) {
-        this.parent.emit(eventName, button, index, pointer, event);
+        this.parent.emit(eventName, button, index, ...args);
     }
 
     if (this.groupName !== undefined) {
-        this.eventEmitter.emit(eventName, button, this.groupName, index, pointer, event);
+        this.eventEmitter.emit(eventName, button, this.groupName, index, ...args);
     } else {
-        this.eventEmitter.emit(eventName, button, index, pointer, event);
+        this.eventEmitter.emit(eventName, button, index, ...args);
     }
 }
 

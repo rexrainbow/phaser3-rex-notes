@@ -1,7 +1,6 @@
 import FixWidthSizer from '../fixwidthsizer/FixWidthSizer.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
-const RemoveItem = Phaser.Utils.Array.Remove;
 const SizerRmove = FixWidthSizer.prototype.remove;
 const SizerClear = FixWidthSizer.prototype.clear;
 
@@ -11,8 +10,7 @@ var Remove = function (gameObject, destroyChild) {
         return this;
     }
 
-    var buttons = this.buttonGroup.buttons;
-    RemoveItem(buttons, gameObject);
+    this.buttonGroup.remove(gameObject);    
     SizerRmove.call(this, gameObject, destroyChild);
     return this;
 };

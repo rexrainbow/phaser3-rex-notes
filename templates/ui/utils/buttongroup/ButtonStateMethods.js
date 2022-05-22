@@ -1,6 +1,16 @@
 // Include in Buttons/GridButtons/FixedWidthButtons class
 
 export default {
+    // Common
+    clearAllButtonsState() {
+        this.buttonGroup.clearAllButtonsState();
+        return this;
+    },
+
+    getAllButtonsState() {
+        return this.buttonGroup.getAllButtonsState();
+    },
+
     // For radio
     setSelectedButtonName(name) {
         this.buttonGroup.setSelectedButtonName(name);

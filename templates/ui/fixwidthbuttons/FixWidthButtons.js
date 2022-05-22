@@ -26,7 +26,8 @@ class Buttons extends FixWidthSizer {
             eventEmitter: GetValue(config, 'eventEmitter', this),
             groupName: GetValue(config, 'groupName', undefined),
             clickConfig: GetValue(config, 'click', undefined)
-        });
+        })
+            .setButtonsType(config);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -42,8 +43,6 @@ class Buttons extends FixWidthSizer {
         if (buttons) {
             this.addButtons(buttons);
         }
-
-        this.buttonGroup.setButtonsType(config);
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', this.buttonGroup.buttons);
