@@ -13,6 +13,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 - [With Text](https://codepen.io/rexrainbow/pen/WNXxEMV)
 - [With BBCodeText](https://codepen.io/rexrainbow/pen/YzEWrzR)
 - [With rexui-Label](https://codepen.io/rexrainbow/pen/MWOjJzZ)
+- [Number input](https://codepen.io/rexrainbow/pen/NWyvJmz)
 
 ## Usage
 
