@@ -6726,6 +6726,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#increase-period" class="md-nav__link">
+    Increase period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#expire-timers" class="md-nav__link">
     Expire timers
   </a>
@@ -8176,6 +8183,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#increase-period" class="md-nav__link">
+    Increase period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#expire-timers" class="md-nav__link">
     Expire timers
   </a>
@@ -8351,6 +8365,22 @@
 </ul>
 </li>
 </ul>
+<h3 id="increase-period">Increase period<a class="headerlink" href="#increase-period" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">incTimerPeriod</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">period</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : Any name string of this timer. </li>
+<li><code>period</code> : Will expire after period time, in millisecond.</li>
+</ul>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">realTimeTimers</span><span class="p">.</span><span class="nx">incTimerPeriod</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">day</span><span class="o">:</span> <span class="nx">dayCount</span><span class="p">,</span>        <span class="c1">// d: dayCount,</span>
+    <span class="nx">hour</span><span class="o">:</span> <span class="nx">hourCount</span><span class="p">,</span>      <span class="c1">// h: hourCount,</span>
+    <span class="nx">minute</span><span class="o">:</span> <span class="nx">minuteCount</span><span class="p">,</span>  <span class="c1">// m: minuteCount,</span>
+    <span class="nx">second</span><span class="o">:</span> <span class="nx">secondCount</span><span class="p">,</span>  <span class="c1">// s: secondCount,</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Will trigger <code>'update'</code> event.</p>
 <h3 id="expire-timers">Expire timers<a class="headerlink" href="#expire-timers" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get expired timers
@@ -8475,7 +8505,7 @@
 <li><code>timers</code> : Total timers after removing.</li>
 </ul>
 </li>
-<li>On timers updated (add or remove).
+<li>On timers updated (add, remove, or increas period).
     <div class="highlight"><pre><span></span><code><span class="nx">realtimetimers</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">timers</span><span class="p">){</span> 
     <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">realtimetimers</span><span class="p">);</span>
     <span class="c1">// Store current states to webstorage or server here.</span>

@@ -62,6 +62,20 @@ class RealTimeTimers extends EventEmitter {
         return this;
     }
 
+    incTimerPeriod(name, period) {
+        period = GetPeriodMS(period);
+        for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
+            var timer = this.timers[i];
+            if (timer.name === name) {
+                timer.period += period;
+            }
+        }
+
+        this.emitUpdateEvent();
+
+        return this;
+    }
+
     getExpiredTimers(currentTimestamp) {
         if (currentTimestamp === undefined) {
             currentTimestamp = this.getCurrentTimestampCallback();

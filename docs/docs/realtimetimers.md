@@ -130,6 +130,28 @@ realTimeTimers.addTimer(name, {
     - `minute`, or `m` : Minute count
     - `second`, or `s` : Second count
 
+### Increase period
+
+```javascript
+realTimeTimers.incTimerPeriod(name, period);
+```
+
+- `name` : Any name string of this timer. 
+- `period` : Will expire after period time, in millisecond.
+
+or
+
+```javascript
+realTimeTimers.incTimerPeriod(name, {
+    day: dayCount,        // d: dayCount,
+    hour: hourCount,      // h: hourCount,
+    minute: minuteCount,  // m: minuteCount,
+    second: secondCount,  // s: secondCount,
+});
+```
+
+Will trigger `'update'` event.
+
 ### Expire timers
 
 - Get expired timers
@@ -254,7 +276,7 @@ realTimeTimers.addTimer(name, {
         }
         ```
     - `timers` : Total timers after removing.
-- On timers updated (add or remove).
+- On timers updated (add, remove, or increas period).
     ```javascript
     realtimetimers.on('update', function(timers){ 
         var s = JSON.stringify(realtimetimers);

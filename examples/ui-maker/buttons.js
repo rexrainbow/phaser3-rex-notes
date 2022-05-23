@@ -30,7 +30,7 @@ background:
     radius: 20
 buttons:
     - $type: Label
-      $class: mylabel      
+      $class: mylabel
       text: {text: Choice0}
     - $type: Label
       $class: mylabel

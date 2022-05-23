@@ -57,7 +57,7 @@ description:
     text: {text: Description}
 choices:
     - $type: Label
-      $class: mylabel      
+      $class: mylabel
       text: {text: Choice0}
     - $type: Label
       $class: mylabel

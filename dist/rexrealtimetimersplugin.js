@@ -714,6 +714,22 @@
         return this;
       }
     }, {
+      key: "incTimerPeriod",
+      value: function incTimerPeriod(name, period) {
+        period = GetPeriodMS(period);
+
+        for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
+          var timer = this.timers[i];
+
+          if (timer.name === name) {
+            timer.period += period;
+          }
+        }
+
+        this.emitUpdateEvent();
+        return this;
+      }
+    }, {
       key: "getExpiredTimers",
       value: function getExpiredTimers(currentTimestamp) {
         if (currentTimestamp === undefined) {

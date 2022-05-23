@@ -16,7 +16,7 @@ text:
 
 space:
     left: 10
-    right: 10  
+    right: 10
     icon: 10
 `
 
