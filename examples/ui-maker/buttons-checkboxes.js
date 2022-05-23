@@ -1,53 +1,57 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const labelStyle = `
-width: 100
-height: 40
-
-icon:
-    $type: RoundRectangle
-    strokeColor: 0x260e04
-    radius: 10
-text:
-    $type: Text
-    text: ''       # Override this property
-    fontSize: 20
-
-space:
-    left: 10
-    right: 10
-    icon: 10
-`
-
 const content = `
-$type: Buttons
-buttonsType: checkboxes
+# Styles
+# Style of $class:mylabel
+.mylabel:
+    width: 100
+    height: 40
+    
+    icon:
+        $type: RoundRectangle
+        strokeColor: 0x260e04
+        radius: 10
+    text:
+        $type: Text
+        text: ''       # Override this property
+        fontSize: 20
+    
+    space:
+        left: 10
+        right: 10
+        icon: 10
 
-background:
-    $type: RoundRectangle
-    color: 0x4e342e
-    radius: 10
-buttons:
-    - $type: Label
-      $class: mylabel
-      name: A      
-      text: {text: A}
-    - $type: Label
-      $class: mylabel
-      name: B
-      text: {text: B}
-    - $type: Label
-      $class: mylabel
-      name: C
-      text: {text: C}
-    - $type: Label
-      $class: mylabel
-      name: D
-      text: {text: D}
 
-orientation: y
-expand: true
+# Game object
+$root:
+    $type: Buttons
+    buttonsType: checkboxes
+    
+    background:
+        $type: RoundRectangle
+        color: 0x4e342e
+        radius: 10
+    buttons:
+        - $type: Label
+          $class: mylabel
+          name: A      
+          text: {text: A}
+        - $type: Label
+          $class: mylabel
+          name: B
+          text: {text: B}
+        - $type: Label
+          $class: mylabel
+          name: C
+          text: {text: C}
+        - $type: Label
+          $class: mylabel
+          name: D
+          text: {text: D}
+    
+    orientation: y
+    expand: true
 `
 
 class Demo extends Phaser.Scene {
@@ -61,8 +65,6 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        maker.addStyle('.mylabel', labelStyle)
-
         var buttons = maker.make(content)
             .setPosition(400, 300)
             .layout()

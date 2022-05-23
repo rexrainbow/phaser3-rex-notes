@@ -1,63 +1,66 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const labelStyle = `
-width: 40
-height: 40
-
-background:
-    $type: RoundRectangle
-    color: 0x4e342e
-    radius: 10
-text:
-    $type: Text
-    text: ''       # Override this property
-    fontSize: 20
-
-space:
-    left: 10
-    right: 10
-    top: 10
-    bottom: 10
-`
-
 const content = `
-$type: FixWidthSizer
+# Styles
+# Style of $class:mylabel
+.mylabel:
+    width: 40
+    height: 40
+    
+    background:
+        $type: RoundRectangle
+        color: 0x4e342e
+        radius: 10
+    text:
+        $type: Text
+        text: ''       # Override this property
+        fontSize: 20
+    
+    space:
+        left: 10
+        right: 10
+        top: 10
+        bottom: 10
 
-background:
-    $type: RoundRectangle
-    color: 0x260e04
-    radius: 10
-    strokeColor: 0x7b5e57
-    strokeWidth: 2
-children:
-    - $type: Label
-      $class: mylabel
-      text: {text: Hello}
-    - $type: Label
-      $class: mylabel
-      text: {text: World}
-    - $type: Label
-      $class: mylabel
-      text: {text: Phaser}
-    - $type: Label
-      $class: mylabel
-      text: {text: AAAA}
-    - $type: Label
-      $class: mylabel
-      text: {text: BBBBBBBBB}
-
-width: 400
-height: 300
-align: center
-
-space:
-    left: 10
-    right: 10
-    top: 10
-    bottom: 10
-    item: 5
-    line: 5
+# Game object
+$root:
+    $type: FixWidthSizer
+    
+    background:
+        $type: RoundRectangle
+        color: 0x260e04
+        radius: 10
+        strokeColor: 0x7b5e57
+        strokeWidth: 2
+    children:
+        - $type: Label
+          $class: mylabel
+          text: {text: Hello}
+        - $type: Label
+          $class: mylabel
+          text: {text: World}
+        - $type: Label
+          $class: mylabel
+          text: {text: Phaser}
+        - $type: Label
+          $class: mylabel
+          text: {text: AAAA}
+        - $type: Label
+          $class: mylabel
+          text: {text: BBBBBBBBB}
+    
+    width: 400
+    height: 300
+    align: center
+    
+    space:
+        left: 10
+        right: 10
+        top: 10
+        bottom: 10
+        item: 5
+        line: 5
 `
 
 class Demo extends Phaser.Scene {
@@ -71,8 +74,6 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        maker.addStyle('.mylabel', labelStyle);
-
         var fixwidthSizer = maker.make(content)
             .setPosition(400, 300)
             .layout();

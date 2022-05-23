@@ -1,53 +1,57 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const labelStyle = `
-width: 40
-height: 40
-
-background:
-    $type: RoundRectangle
-    color: 0x4e342e
-    radius: 10
-text:
-    $type: Text
-    text: ''       # Override this property
-    fontSize: 20
-
-space:
-    left: 10
-    right: 10
-    top: 10
-    bottom: 10
-`
-
 const content = `
-$type: Buttons
+# Styles
+# Style of $class:mylabel
+.mylabel:
+    width: 40
+    height: 40
+    
+    background:
+        $type: RoundRectangle
+        color: 0x4e342e
+        radius: 10
+    text:
+        $type: Text
+        text: ''       # Override this property
+        fontSize: 20
+    
+    space:
+        left: 10
+        right: 10
+        top: 10
+        bottom: 10
 
-background:
-    $type: RoundRectangle
-    color: 0x260e04
-    radius: 20
-buttons:
-    - $type: Label
-      $class: mylabel
-      text: {text: Choice0}
-    - $type: Label
-      $class: mylabel
-      text: {text: Choice1}
-    - $type: Label
-      $class: mylabel
-      text: {text: Choice2}
 
-orientation: y
-space:
-    left: 10
-    right: 10
-    top: 10
-    bottom: 10
-    item: 10
-
-expand: true
+# Game object
+$root:
+    $type: Buttons
+    
+    background:
+        $type: RoundRectangle
+        color: 0x260e04
+        radius: 20
+    buttons:
+        - $type: Label
+          $class: mylabel
+          text: {text: Choice0}
+        - $type: Label
+          $class: mylabel
+          text: {text: Choice1}
+        - $type: Label
+          $class: mylabel
+          text: {text: Choice2}
+    
+    orientation: y
+    space:
+        left: 10
+        right: 10
+        top: 10
+        bottom: 10
+        item: 10
+    
+    expand: true
 `
 
 class Demo extends Phaser.Scene {
@@ -61,8 +65,6 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        maker.addStyle('.mylabel', labelStyle)
-
         var buttons = maker.make(content)
             .setPosition(400, 300)
             .layout()
