@@ -1,6 +1,6 @@
 import CreateChild from './CreateChild.js';
 
-var CreateChildren = function (scene, data, subKey, view, styles, customBuilders) {
+var CreateChildren = function (scene, data, subKey, styles, customBuilders) {
     var childData = data[subKey];
     if (!childData) {
         return undefined;
@@ -8,11 +8,11 @@ var CreateChildren = function (scene, data, subKey, view, styles, customBuilders
 
     if (Array.isArray(childData)) {
         for (var i = 0, cnt = childData.length; i < cnt; i++) {
-            CreateChild(scene, childData, i, view, styles, customBuilders);
+            CreateChild(scene, childData, i, styles, customBuilders);
         }
     } else {
         for (var key in childData) {
-            CreateChild(scene, childData, key, view, styles, customBuilders);
+            CreateChild(scene, childData, key, styles, customBuilders);
         }
     }
 

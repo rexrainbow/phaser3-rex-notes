@@ -1,8 +1,9 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Handlebars from 'handlebars';
 
 const content = `
-$type: label
+$type: Label
 
 background:
     $type: RoundRectangle
@@ -15,7 +16,7 @@ icon:
     key: person
 text:
     $type: Text
-    text: Hello {{name}}  # String template
+    text: Hello {{name}}
     fontSize: 24
 action:
     $type: Image
@@ -44,7 +45,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        var label = maker.make(content, { name: 'phaser' })
+        var data = Handlebars.compile(content)({ name: 'phaser' });
+        var label = maker.make(data)
             .setPosition(400, 300)
             .layout();
     }

@@ -1,17 +1,11 @@
 import MergeStyle from './utils/MergeStyle.js';
-import Handlebars from 'handlebars';
 
 const PhaserText = Phaser.GameObjects.Text;
 
-var CreateText = function (scene, data, view, styles, customBuilders) {
+var CreateText = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
-    var text = data.text;
-    if (view !== undefined) {
-        var template = Handlebars.compile(text);
-        text = template(view);
-    }
-    var gameObject = new PhaserText(scene, 0, 0, text, data);
+    var gameObject = new PhaserText(scene, 0, 0, data.text, data);
     scene.add.existing(gameObject);
     return gameObject;
 }

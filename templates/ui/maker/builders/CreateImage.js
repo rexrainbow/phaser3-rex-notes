@@ -2,7 +2,7 @@ import MergeStyle from './utils/MergeStyle.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
 
-var CreateImage = function (scene, data, view, styles, customBuilders) {
+var CreateImage = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new PhaserImage(scene, 0, 0, data.key, data.frame);
 

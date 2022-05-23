@@ -29,7 +29,7 @@ var Builders = {
 };
 
 /*
-function(scene, data, view, styles, customBuilders) {
+function(scene, data, styles, customBuilders) {
     return gameObject;
 }
 */

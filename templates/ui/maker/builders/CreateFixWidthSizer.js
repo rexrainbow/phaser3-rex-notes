@@ -2,7 +2,7 @@ import MergeStyle from './utils/MergeStyle.js';
 import FixWidthSizer from '../../fixwidthsizer/FixWidthSizer.js';
 import CreateChild from './utils/CreateChild.js';
 
-var CreateFixWidthSizer = function (scene, data, view, styles, customBuilders) {
+var CreateFixWidthSizer = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var backgroundConfig = data.background;
@@ -17,7 +17,7 @@ var CreateFixWidthSizer = function (scene, data, view, styles, customBuilders) {
                 childConfig = { child: childConfig };
                 backgroundConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', view, styles, customBuilders);
+            CreateChild(scene, childConfig, 'child', styles, customBuilders);
         }
     }
 
@@ -30,7 +30,7 @@ var CreateFixWidthSizer = function (scene, data, view, styles, customBuilders) {
                 childConfig = { child: childConfig };
                 childrenConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', view, styles, customBuilders);
+            CreateChild(scene, childConfig, 'child', styles, customBuilders);
         }
     }
 

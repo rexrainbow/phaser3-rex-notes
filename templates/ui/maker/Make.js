@@ -1,6 +1,6 @@
 import Builders from './builders/Builders.js';
 
-var Make = function (scene, data, view, styles, customBuilders) {
+var Make = function (scene, data, styles, customBuilders) {
     var type = data.$type;
     var callback;
     if (customBuilders) {
@@ -14,7 +14,7 @@ var Make = function (scene, data, view, styles, customBuilders) {
         return undefined;
     }
 
-    var gameObject = callback(scene, data, view, styles, customBuilders);
+    var gameObject = callback(scene, data, styles, customBuilders);
     if (data.name) {
         gameObject.setName(data.name);
     }
