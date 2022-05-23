@@ -18,11 +18,17 @@ declare namespace HiddenInputText {
             hiddenInputText: HiddenInputText,
         ) => void;
 
-        onUpdate: (
-            text: string,
-            textObject: Phaser.GameObjects.GameObject,
-            hiddenInputText: HiddenInputText,
-        ) => void | string;
+        onUpdate:
+        (
+            (
+                text: string,
+                textObject: Phaser.GameObjects.GameObject,
+                hiddenInputText: HiddenInputText,
+            )
+                => void | string
+        ) |
+        'number';
+
     }
 
     type UpdateTextCallbackType = (

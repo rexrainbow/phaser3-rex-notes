@@ -8651,9 +8651,21 @@
 </code></pre></div></li>
 </ul>
 <h3 id="cursor-position">Cursor position<a class="headerlink" href="#cursor-position" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cursorPosition</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">cursorPosition</span><span class="p">;</span>
-</code></pre></div>
-<p>Equal to <code>inputText.selectionStart</code>.</p>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cursorPosition</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">cursorPosition</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>Equal to <code>inputText.selectionStart</code>.</li>
+</ul>
+</li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">setCursorPosition</span><span class="p">(</span><span class="nx">cursorPosition</span><span class="p">);</span>
+<span class="nx">inputText</span><span class="p">.</span><span class="nx">cursorPosition</span> <span class="o">=</span> <span class="nx">cursorPosition</span><span class="p">;</span>
+</code></pre></div><ul>
+<li>Equal to <code>inputText.setSelectionRange(cursorPosition, cursorPosition)</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On text changed

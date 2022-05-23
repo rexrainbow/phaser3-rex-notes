@@ -13,25 +13,32 @@ class Demo extends Phaser.Scene {
 
     create() {
         var textObject = this.add.text(300, 200, '', {
-            fixedWidth: 100,
+            fixedWidth: 200,
             fixedHeight: 50,
             backgroundColor: '#222222',
         })
 
         this.plugins.get('rexHiddenInputText').add(textObject, {
-            type: 'number',
-            enterClose: false,
+            type: 'text',
 
-            onOpen(textObject) {
+            enterClose: true,
+
+            onOpen(textObject, hiddenInputText) {
                 textObject.setBackgroundColor('#555555')
+
+                // Clear text
+                //textObject.setText('');
+                //hiddenInputText.setText(textObject.text);
             },
 
-            onClose(textObject) {
-                textObject.setBackgroundColor('#222222')
-            }
+            onClose(textObject, hiddenInputText) {
+                textObject.setBackgroundColor('#222222');
+                console.log(parseFloat(textObject.text));
+            },
+
+            onUpdate: 'number'
         })
-        // Result: Cursor position won't work well.
-        // See this discussion: https://stackoverflow.com/questions/21177489/selectionstart-selectionend-on-input-type-number-no-longer-allowed-in-chrome
+
     }
 
     update() {

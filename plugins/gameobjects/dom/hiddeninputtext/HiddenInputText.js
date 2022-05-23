@@ -1,5 +1,6 @@
 import InputText from '../inputtext/InputText.js';
 import IsPointerInHitArea from '../../../utils/input/IsPointerInHitArea.js';
+import NumberInputUpdateCallback from './defaultcallbacks/NumberInputUpdateCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Wrap = Phaser.Math.Wrap;
@@ -26,7 +27,12 @@ class HiddenInputText extends InputText {
 
         this.onOpenCallback = GetValue(config, 'onOpen', undefined);
         this.onCloseCallback = GetValue(config, 'onClose', undefined);
-        this.onUpdateCallback = GetValue(config, 'onUpdate', undefined);
+
+        var onUpdateCallback = GetValue(config, 'onUpdate', undefined);
+        if (onUpdateCallback === 'number') {
+            onUpdateCallback = NumberInputUpdateCallback;
+        }
+        this.onUpdateCallback = onUpdateCallback;
 
         this.textObject = textObject;
         textObject
@@ -85,7 +91,7 @@ class HiddenInputText extends InputText {
 
         if (this.onUpdateCallback) {
             var newText = this.onUpdateCallback(text, this.textObject, this);
-            if (newText) {
+            if (newText != null) {
                 text = newText;
             }
         }

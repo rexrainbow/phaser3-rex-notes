@@ -7710,6 +7710,19 @@
       key: "cursorPosition",
       get: function get() {
         return this.node.selectionStart;
+      },
+      set: function set(value) {
+        this.node.setSelectionRange(value, value);
+      }
+    }, {
+      key: "setCursorPosition",
+      value: function setCursorPosition(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.cursorPosition = value;
+        return this;
       }
     }, {
       key: "tooltip",
@@ -7935,6 +7948,28 @@
     return false;
   };
 
+  var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
+    text = text.replace(' ', '');
+    var previousText = hiddenInputText.previousText;
+
+    if (text === previousText) {
+      return text;
+    }
+
+    if (isNaN(text)) {
+      // Enter a NaN character, back to previous text
+      text = previousText;
+      var cursorPosition = hiddenInputText.cursorPosition - 1;
+      hiddenInputText.setText(text);
+      hiddenInputText.setCursorPosition(cursorPosition);
+    } else {
+      // New number text, update previous texr
+      hiddenInputText.previousText = text;
+    }
+
+    return text;
+  };
+
   var GetValue$2r = Phaser.Utils.Objects.GetValue;
   var Wrap = Phaser.Math.Wrap;
 
@@ -7969,7 +8004,13 @@
 
       _this.onOpenCallback = GetValue$2r(config, 'onOpen', undefined);
       _this.onCloseCallback = GetValue$2r(config, 'onClose', undefined);
-      _this.onUpdateCallback = GetValue$2r(config, 'onUpdate', undefined);
+      var onUpdateCallback = GetValue$2r(config, 'onUpdate', undefined);
+
+      if (onUpdateCallback === 'number') {
+        onUpdateCallback = NumberInputUpdateCallback;
+      }
+
+      _this.onUpdateCallback = onUpdateCallback;
       _this.textObject = textObject;
       textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
 
@@ -8025,7 +8066,7 @@
         if (this.onUpdateCallback) {
           var newText = this.onUpdateCallback(text, this.textObject, this);
 
-          if (newText) {
+          if (newText != null) {
             text = newText;
           }
         }

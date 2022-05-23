@@ -113,7 +113,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 ```javascript
 var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, {
-    type: 'text',    // 'text'|'password'|'textarea'|'number'|'color'|...
+    type: 'text',    // 'text'|'password'|'textarea'|...
 
     cursor: '|',
     cursorFlashDuration: 1000,
@@ -125,13 +125,13 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 
     // onOpen: undefined,
     // onClose: undefined,
-    // onTextChanged: undefined,
+    // onUpdate: undefined,
 });
 ```
 
 - `textGameObject` : 
 - `type` : Type of element
-    - `'text'`, `'password'`, `'textarea'`, `'number'`, `'color'`, ...
+    - `'text'`, `'password'`, `'textarea'`, ...
 - `cursor` : Cursor character used in default update text callback.
     - `null`, or `''` : Don't insert cursor character.
 - `cursorFlashDuration` : Display cursor character or a space string to create a flash cursor.
@@ -146,12 +146,15 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
     function (textObject, hiddenInputText) {
     }
     ```
-- `onUpdate` : Invoke iin each tick of editing. Can return a new string for text game object displaying.
-    ```javascript
-    function (text, textObject, hiddenInputText) {
-        // return text;
-    }
-    ```
+- `onUpdate` : 
+    - A callback invoked in each tick of editing.
+        ```javascript
+        function (text, textObject, hiddenInputText) {
+            // return text;
+        }
+        ```
+        - Can return a new string for text game object displaying.
+    - `'number'` : Only output number string.
 
 !!! note
 

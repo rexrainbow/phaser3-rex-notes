@@ -154,7 +154,19 @@ class InputText extends DOMElement {
     }
 
     get cursorPosition() {
-        return this.node.selectionStart; 
+        return this.node.selectionStart;
+    }
+
+    set cursorPosition(value) {
+        this.node.setSelectionRange(value, value);
+    }
+
+    setCursorPosition(value) {
+        if (value === undefined) {
+            value = 0;
+        }
+        this.cursorPosition = value;
+        return this;
     }
 
     get tooltip() {

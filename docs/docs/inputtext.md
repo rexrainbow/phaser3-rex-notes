@@ -354,11 +354,17 @@ inputText.resize(width, height);
 
 ### Cursor position
 
-```javascript
-var cursorPosition = inputText.cursorPosition;
-```
-
-Equal to `inputText.selectionStart`.
+- Get
+    ```javascript
+    var cursorPosition = inputText.cursorPosition;
+    ```
+    - Equal to `inputText.selectionStart`.
+- Set
+    ```javascript
+    inputText.setCursorPosition(cursorPosition);
+    inputText.cursorPosition = cursorPosition;
+    ```
+    - Equal to `inputText.setSelectionRange(cursorPosition, cursorPosition)`
 
 ### Events
 

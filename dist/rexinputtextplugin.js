@@ -364,6 +364,19 @@
       key: "cursorPosition",
       get: function get() {
         return this.node.selectionStart;
+      },
+      set: function set(value) {
+        this.node.setSelectionRange(value, value);
+      }
+    }, {
+      key: "setCursorPosition",
+      value: function setCursorPosition(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.cursorPosition = value;
+        return this;
       }
     }, {
       key: "tooltip",

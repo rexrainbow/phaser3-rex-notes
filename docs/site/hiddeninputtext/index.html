@@ -8366,7 +8366,7 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 </div>
 <h3 id="add-input-text-object">Add input text object<a class="headerlink" href="#add-input-text-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hiddenInputText</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHiddenInputTextPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>    <span class="c1">// &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|&#39;number&#39;|&#39;color&#39;|...</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>    <span class="c1">// &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
 
     <span class="nx">cursor</span><span class="o">:</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
     <span class="nx">cursorFlashDuration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
@@ -8378,13 +8378,13 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 
     <span class="c1">// onOpen: undefined,</span>
     <span class="c1">// onClose: undefined,</span>
-    <span class="c1">// onTextChanged: undefined,</span>
+    <span class="c1">// onUpdate: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>textGameObject</code> : </li>
 <li><code>type</code> : Type of element<ul>
-<li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, <code>'number'</code>, <code>'color'</code>, ...</li>
+<li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>
 </ul>
 </li>
 <li><code>cursor</code> : Cursor character used in default update text callback.<ul>
@@ -8401,11 +8401,18 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>onUpdate</code> : Invoke iin each tick of editing. Can return a new string for text game object displaying.
+<li><code>onUpdate</code> : <ul>
+<li>A callback invoked in each tick of editing.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return text;</span>
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Can return a new string for text game object displaying.</li>
+</ul>
+</li>
+<li><code>'number'</code> : Only output number string.</li>
+</ul>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
