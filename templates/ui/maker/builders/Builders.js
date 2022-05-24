@@ -10,6 +10,7 @@ import CreateGridSizer from './CreateGridSizer.js';
 import CreateOverlapSizer from './CreateOverlapSizer.js';
 
 import CreateLabel from './CreateLabel.js';
+import CreateBadgeLabel from './CreateBadgeLabel.js'
 import CreateDialog from './CreateDialog.js';
 import CreateButtons from './CreateButtons.js';
 import CreateSlider from './CreateSlider.js';
@@ -27,6 +28,7 @@ var Builders = {
     OverlapSizer: CreateOverlapSizer,
 
     Label: CreateLabel,
+    BadgeLabel: CreateBadgeLabel,
     Dialog: CreateDialog,
     Buttons: CreateButtons,
     Slider: CreateSlider
