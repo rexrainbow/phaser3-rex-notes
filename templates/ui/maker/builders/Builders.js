@@ -9,10 +9,12 @@ import CreateFixWidthSizer from './CreateFixwidthSizer.js';
 import CreateGridSizer from './CreateGridSizer.js';
 import CreateOverlapSizer from './CreateOverlapSizer.js';
 
+import CreateButtons from './CreateButtons.js';
+import CreategGridButtons from './CreategGridButtons.js';
+
 import CreateLabel from './CreateLabel.js';
 import CreateBadgeLabel from './CreateBadgeLabel.js'
 import CreateDialog from './CreateDialog.js';
-import CreateButtons from './CreateButtons.js';
 import CreateSlider from './CreateSlider.js';
 
 var Builders = {
@@ -27,10 +29,12 @@ var Builders = {
     GridSizer: CreateGridSizer,
     OverlapSizer: CreateOverlapSizer,
 
+    Buttons: CreateButtons,
+    GridButtons: CreategGridButtons,
+
     Label: CreateLabel,
     BadgeLabel: CreateBadgeLabel,
     Dialog: CreateDialog,
-    Buttons: CreateButtons,
     Slider: CreateSlider
 };
 

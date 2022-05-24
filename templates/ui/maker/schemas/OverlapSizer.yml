@@ -1,6 +1,15 @@
 $type: OverlapSizer
 name:
 
+width:
+height:
+space:
+    left:
+    right:
+    top:
+    bottom:
+draggable:
+
 # Relace child data by game objct
 background:
     - child:
@@ -10,7 +19,9 @@ background:
           top:
           bottom:
 children:
-    - child:      
+    - child:
+          $type:
+          # ...    
       key:
       align:
       offsetX:
@@ -23,13 +34,3 @@ children:
       expand:
       minWidth:
       minHeight:
-# ----
-
-width:
-height:
-space:
-    left:
-    right:
-    top:
-    bottom:
-draggable:

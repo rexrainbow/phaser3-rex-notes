@@ -1,6 +1,9 @@
 $type: Dialog
 name:
 
+width:
+height:
+
 # Relace child data by game objct
 background:
 title:
@@ -23,9 +26,6 @@ actions:
       # ...
 actionsBackground:
 # ----
-
-width:
-height:
 
 space:
     left:

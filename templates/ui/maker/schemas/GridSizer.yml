@@ -1,28 +1,6 @@
 $type: GridSizer
 name:
 
-# Relace child data by game objct
-background:
-    - child:
-      padding:
-          left:
-          right:
-          top:
-          bottom:
-children:
-    - child:
-      column:
-      row:
-      align:
-      padding:
-          left:
-          right:
-          top:
-          bottom:
-      expand:
-      key:
-# ----
-
 width:
 height:
 column:
@@ -37,3 +15,44 @@ space:
     column:
     row:
 draggable:
+
+# Relace child data by game objct
+background:
+    - child:
+        $type:
+        # ...  
+      padding:
+          left:
+          right:
+          top:
+          bottom:
+children:
+    - child:
+        $type:
+        # ...  
+      column:
+      row:
+      align:
+      padding:
+          left:
+          right:
+          top:
+          bottom:
+      expand:
+      key:
+
+# Optional
+createCellContainerCallback:
+    child:
+        $type:
+        # ...
+    column:
+    row:
+    align:
+    padding:
+        left:
+        right:
+        top:
+        bottom:
+    expand:
+    key:

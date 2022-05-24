@@ -1,6 +1,10 @@
 $type: Buttons
 name:
 
+width:
+height:
+orientation:
+
 # Relace child data by game objct
 background:
 buttons:
@@ -8,9 +12,6 @@ buttons:
     # ...
 # ----
 
-width:
-height:
-orientation:
 rtl:
 expand:
 align:

@@ -1,6 +1,9 @@
 $type: BadgeLabel
 name:
 
+width:
+height:
+
 # Relace child data by game objct
 background:
 main:
@@ -15,8 +18,6 @@ centerBottom:
 rightBottom:
 # ----
 
-width:
-height:
 space:
     left:
     right:

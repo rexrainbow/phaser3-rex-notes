@@ -1,6 +1,10 @@
 $type: Label
 name:
 
+width:
+height:
+orientation:
+
 # Relace child data by game objct
 background:
 icon:
@@ -8,9 +12,6 @@ text:
 action:
 # ----
 
-width:
-height:
-orientation:
 iconMask:
 expandTextWidth:
 expandTextHeight:

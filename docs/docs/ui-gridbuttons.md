@@ -92,7 +92,7 @@ var buttons = scene.rexUI.add.gridButtons({
         ...
     ],
     // row: 0, 
-    // col: 0,
+    // column: 0,
     // createCellContainerCallback: function(scene, x, y) {
     //       return cellContainer;
     // },    

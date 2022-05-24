@@ -1,6 +1,10 @@
 $type: ScrollablePanel
 name:
 
+width:
+height:
+scrollMode:
+
 # Relace child data by game objct
 background:
 panel:
@@ -41,10 +45,6 @@ clamplChildOY: false
 header:
 footer:
 # ----
-
-width:
-height:
-scrollMode:
 
 space:
     left:
