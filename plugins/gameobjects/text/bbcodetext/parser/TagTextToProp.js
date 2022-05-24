@@ -4,6 +4,8 @@ import {
 
     RE_BLOD_OPEN, RE_BLOD_CLOSE,
     RE_ITALICS_OPEN, RE_ITALICS_CLOSE,
+    RE_WEIGHT_OPEN, RE_WEIGHT_CLOSE,
+
     RE_SIZE_OPEN, RE_SIZE_CLOSE,
     RE_COLOR_OPEN, RE_COLOR_CLOSE,
     RE_UNDERLINE_OPEN, RE_UNDERLINE_OPENC, RE_UNDERLINE_CLOSE,
@@ -70,6 +72,12 @@ var TagTextToProp = function (text, prevProp) {
             UpdateProp(prevProp, PROP_ADD, 'i', true);
         } else if (RE_ITALICS_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'i');
+
+        } else if (RE_WEIGHT_OPEN.test(text)) {
+            var innerMatch = text.match(RE_WEIGHT_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'weight', innerMatch[1]);
+        } else if (RE_WEIGHT_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'weight');
 
         } else if (RE_SIZE_OPEN.test(text)) {
             var innerMatch = text.match(RE_SIZE_OPEN);

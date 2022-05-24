@@ -81,6 +81,8 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 ### BBCode
 
 - Bold : `[b]text[/b]`
+- Weight : `[weight=900]text[/weight]`
+    - Valid when text does not have bold tag.
 - Italic : `[i]text[/i]`
 - Color : `[color=red]text[/color]`
 - Size : `[size=18]text[/size]`

@@ -3611,6 +3611,9 @@
   var ITALICS = 'i';
   var ITALICS_OPEN = GetOpenTagRegString(ITALICS);
   var ITALICS_CLOSE = GetCloseTagRegString(ITALICS);
+  var WEIGHT = 'weight';
+  var WEIGHT_OPEN = GetOpenTagRegString(WEIGHT, NUMBER_PARAM);
+  var WEIGHT_CLOSE = GetCloseTagRegString(WEIGHT);
   var SIZE = 'size';
   var SIZE_OPEN = GetOpenTagRegString(SIZE, NUMBER_PARAM);
   var SIZE_CLOSE = GetCloseTagRegString(SIZE);
@@ -3648,6 +3651,8 @@
   var RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
   var RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
   var RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
+  var RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
+  var RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
   var RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
   var RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
   var RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
@@ -3668,7 +3673,7 @@
   var RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
   var RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
   var RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+  var RE_SPLITTEXT = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
 
   var SplitText = function SplitText(text, mode) {
     var result = [];
@@ -3777,6 +3782,11 @@
         UpdateProp(prevProp, PROP_ADD, 'i', true);
       } else if (RE_ITALICS_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'i');
+      } else if (RE_WEIGHT_OPEN.test(text)) {
+        var innerMatch = text.match(RE_WEIGHT_OPEN);
+        UpdateProp(prevProp, PROP_ADD, 'weight', innerMatch[1]);
+      } else if (RE_WEIGHT_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 'weight');
       } else if (RE_SIZE_OPEN.test(text)) {
         var innerMatch = text.match(RE_SIZE_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'size', "".concat(innerMatch[1], "px"));
@@ -3874,7 +3884,7 @@
         result.fontSize = defaultStyle.fontSize;
       }
 
-      result.fontStyle = GetFontStyle(prop.b, prop.i);
+      result.fontStyle = GetFontStyle(prop);
 
       if (prop.hasOwnProperty('color')) {
         result.color = prop.color;
@@ -3942,13 +3952,28 @@
     return result;
   };
 
-  var GetFontStyle = function GetFontStyle(isBold, isItalic) {
-    if (isBold && isItalic) {
-      return 'bold italic';
-    } else if (isBold) {
-      return 'bold';
-    } else if (isItalic) {
-      return 'italic';
+  var GetFontStyle = function GetFontStyle(prop) {
+    var isBold = prop.b;
+    var weight = prop.weight;
+    var isItalic = prop.i;
+
+    if (isBold || weight || isItalic) {
+      if (isItalic) {
+        if (isBold) {
+          return 'bold italic';
+        } else if (weight) {
+          return "".concat(weight, " italic");
+        } else {
+          return 'italic';
+        }
+      } else {
+        // !isItalic
+        if (isBold) {
+          return 'bold';
+        } else {
+          return weight.toString();
+        }
+      }
     } else {
       return '';
     }
@@ -3982,6 +4007,7 @@
           break;
 
         case 'color':
+        case 'weight':
         case 'stroke':
         case 'y':
         case 'img':

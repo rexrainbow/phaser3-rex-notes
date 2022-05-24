@@ -29,6 +29,10 @@ const ITALICS = 'i';
 const ITALICS_OPEN = GetOpenTagRegString(ITALICS);
 const ITALICS_CLOSE = GetCloseTagRegString(ITALICS);
 
+const WEIGHT = 'weight';
+const WEIGHT_OPEN = GetOpenTagRegString(WEIGHT, NUMBER_PARAM);
+const WEIGHT_CLOSE = GetCloseTagRegString(WEIGHT);
+
 const SIZE = 'size';
 const SIZE_OPEN = GetOpenTagRegString(SIZE, NUMBER_PARAM);
 const SIZE_CLOSE = GetCloseTagRegString(SIZE);
@@ -80,6 +84,9 @@ const RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
 const RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
 const RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
 
+const RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
+const RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
+
 const RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
 const RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
 
@@ -115,6 +122,8 @@ const RE_SPLITTEXT = new RegExp([
 
     BLOD_OPEN, BLOD_CLOSE,
     ITALICS_OPEN, ITALICS_CLOSE,
+    WEIGHT_OPEN, WEIGHT_CLOSE,
+
     SIZE_OPEN, SIZE_CLOSE,
     COLOR_OPEN, COLOR_CLOSE,
     UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE,
@@ -133,6 +142,8 @@ export {
 
     RE_BLOD_OPEN, RE_BLOD_CLOSE,
     RE_ITALICS_OPEN, RE_ITALICS_CLOSE,
+    RE_WEIGHT_OPEN, RE_WEIGHT_CLOSE,
+
     RE_SIZE_OPEN, RE_SIZE_CLOSE,
     RE_COLOR_OPEN, RE_COLOR_CLOSE,
     RE_UNDERLINE_OPEN, RE_UNDERLINE_OPENC, RE_UNDERLINE_CLOSE,

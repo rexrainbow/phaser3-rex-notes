@@ -6601,6 +6601,9 @@
   var ITALICS = 'i';
   var ITALICS_OPEN = GetOpenTagRegString(ITALICS);
   var ITALICS_CLOSE = GetCloseTagRegString(ITALICS);
+  var WEIGHT = 'weight';
+  var WEIGHT_OPEN = GetOpenTagRegString(WEIGHT, NUMBER_PARAM);
+  var WEIGHT_CLOSE = GetCloseTagRegString(WEIGHT);
   var SIZE = 'size';
   var SIZE_OPEN = GetOpenTagRegString(SIZE, NUMBER_PARAM);
   var SIZE_CLOSE = GetCloseTagRegString(SIZE);
@@ -6638,6 +6641,8 @@
   var RE_BLOD_CLOSE = new RegExp(BLOD_CLOSE, 'i');
   var RE_ITALICS_OPEN = new RegExp(ITALICS_OPEN, 'i');
   var RE_ITALICS_CLOSE = new RegExp(ITALICS_CLOSE, 'i');
+  var RE_WEIGHT_OPEN = new RegExp(WEIGHT_OPEN, 'i');
+  var RE_WEIGHT_CLOSE = new RegExp(WEIGHT_CLOSE, 'i');
   var RE_SIZE_OPEN = new RegExp(SIZE_OPEN, 'i');
   var RE_SIZE_CLOSE = new RegExp(SIZE_CLOSE, 'i');
   var RE_COLOR_OPEN = new RegExp(COLOR_OPEN, 'i');
@@ -6658,7 +6663,7 @@
   var RE_AREA_CLOSE = new RegExp(AREA_CLOSE, 'i');
   var RE_ALIGN_OPEN = new RegExp(ALIGN_OPEN, 'i');
   var RE_ALIGN_CLOSE = new RegExp(ALIGN_CLOSE, 'i');
-  var RE_SPLITTEXT$1 = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
+  var RE_SPLITTEXT$1 = new RegExp([RAW_OPEN, RAW_CLOSE, ESC_OPEN, ESC_CLOSE, BLOD_OPEN, BLOD_CLOSE, ITALICS_OPEN, ITALICS_CLOSE, WEIGHT_OPEN, WEIGHT_CLOSE, SIZE_OPEN, SIZE_CLOSE, COLOR_OPEN, COLOR_CLOSE, UNDERLINE_OPEN, UNDERLINE_OPENC, UNDERLINE_CLOSE, SHADOW_OPEN, SHADOW_CLOSE, STROKE_OPEN, STROKE_OPENC, STROKE_CLOSE, OFFSETY_OPEN, OFFSETY_CLOSE, IMAGE_OPEN, IMAGE_CLOSE, AREA_OPEN, AREA_CLOSE, ALIGN_OPEN, ALIGN_CLOSE].join('|'), 'ig');
 
   var SplitText = function SplitText(text, mode) {
     var result = [];
@@ -6767,6 +6772,11 @@
         UpdateProp(prevProp, PROP_ADD, 'i', true);
       } else if (RE_ITALICS_CLOSE.test(text)) {
         UpdateProp(prevProp, PROP_REMOVE, 'i');
+      } else if (RE_WEIGHT_OPEN.test(text)) {
+        var innerMatch = text.match(RE_WEIGHT_OPEN);
+        UpdateProp(prevProp, PROP_ADD, 'weight', innerMatch[1]);
+      } else if (RE_WEIGHT_CLOSE.test(text)) {
+        UpdateProp(prevProp, PROP_REMOVE, 'weight');
       } else if (RE_SIZE_OPEN.test(text)) {
         var innerMatch = text.match(RE_SIZE_OPEN);
         UpdateProp(prevProp, PROP_ADD, 'size', "".concat(innerMatch[1], "px"));
@@ -6864,7 +6874,7 @@
         result.fontSize = defaultStyle.fontSize;
       }
 
-      result.fontStyle = GetFontStyle(prop.b, prop.i);
+      result.fontStyle = GetFontStyle(prop);
 
       if (prop.hasOwnProperty('color')) {
         result.color = prop.color;
@@ -6932,13 +6942,28 @@
     return result;
   };
 
-  var GetFontStyle = function GetFontStyle(isBold, isItalic) {
-    if (isBold && isItalic) {
-      return 'bold italic';
-    } else if (isBold) {
-      return 'bold';
-    } else if (isItalic) {
-      return 'italic';
+  var GetFontStyle = function GetFontStyle(prop) {
+    var isBold = prop.b;
+    var weight = prop.weight;
+    var isItalic = prop.i;
+
+    if (isBold || weight || isItalic) {
+      if (isItalic) {
+        if (isBold) {
+          return 'bold italic';
+        } else if (weight) {
+          return "".concat(weight, " italic");
+        } else {
+          return 'italic';
+        }
+      } else {
+        // !isItalic
+        if (isBold) {
+          return 'bold';
+        } else {
+          return weight.toString();
+        }
+      }
     } else {
       return '';
     }
@@ -6972,6 +6997,7 @@
           break;
 
         case 'color':
+        case 'weight':
         case 'stroke':
         case 'y':
         case 'img':
@@ -46344,6 +46370,7 @@
   };
 
   var PhaserImage = Phaser.GameObjects.Image;
+  var OtherProperites = ['tint', 'alpha', 'visible', 'flipX', 'flipY'];
 
   var CreateImage = function CreateImage(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -46355,6 +46382,15 @@
 
     if (data.height !== undefined) {
       gameObject.setDisplayHeight(data.height);
+    }
+
+    for (var i = 0, cnt = OtherProperites.length; i < cnt; i++) {
+      var key = OtherProperites[i];
+      var value = data[key];
+
+      if (value !== undefined) {
+        gameObject[key] = value;
+      }
     }
 
     scene.add.existing(gameObject);
@@ -46421,34 +46457,12 @@
     return child;
   };
 
-  var CreateSizer = function CreateSizer(scene, data, styles, customBuilders) {
-    data = MergeStyle(data, styles);
-    var backgroundConfig = data.background;
-    delete data.background;
-
-    if (backgroundConfig) {
-      if (!Array.isArray(backgroundConfig)) {
-        backgroundConfig = [backgroundConfig];
-      }
-
-      for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
-        var childConfig = backgroundConfig[i];
-
-        if (!childConfig.child) {
-          childConfig = {
-            child: childConfig
-          };
-          backgroundConfig[i] = childConfig;
-        }
-
-        CreateChild(scene, childConfig, 'child', styles, customBuilders);
-      }
-    }
-
-    var childrenConfig = data.children;
-    delete data.children;
-
+  var ReplaceChildrenConfig = function ReplaceChildrenConfig(scene, childrenConfig, styles, customBuilders) {
     if (childrenConfig) {
+      if (!Array.isArray(childrenConfig)) {
+        childrenConfig = [childrenConfig];
+      }
+
       for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
         var childConfig = childrenConfig[i];
 
@@ -46463,7 +46477,14 @@
       }
     }
 
-    var gameObject = new Sizer(scene, data);
+    return childrenConfig;
+  };
+
+  var CreateAnySizer = function CreateAnySizer(scene, data, styles, customBuilders, SizerClass) {
+    data = MergeStyle(data, styles);
+    var backgroundConfig = ReplaceChildrenConfig(scene, data.background, styles, customBuilders);
+    var childrenConfig = ReplaceChildrenConfig(scene, data.children, styles, customBuilders);
+    var gameObject = new SizerClass(scene, data);
     scene.add.existing(gameObject);
 
     if (backgroundConfig) {
@@ -46481,80 +46502,40 @@
     }
 
     return gameObject;
+  };
+
+  var CreateSizer = function CreateSizer(scene, data, styles, customBuilders) {
+    return CreateAnySizer(scene, data, styles, customBuilders, Sizer);
   };
 
   var CreateFixWidthSizer = function CreateFixWidthSizer(scene, data, styles, customBuilders) {
-    data = MergeStyle(data, styles);
-    var backgroundConfig = data.background;
-    delete data.background;
-
-    if (backgroundConfig) {
-      if (!Array.isArray(backgroundConfig)) {
-        backgroundConfig = [backgroundConfig];
-      }
-
-      for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
-        var childConfig = backgroundConfig[i];
-
-        if (!childConfig.child) {
-          childConfig = {
-            child: childConfig
-          };
-          backgroundConfig[i] = childConfig;
-        }
-
-        CreateChild(scene, childConfig, 'child', styles, customBuilders);
-      }
-    }
-
-    var childrenConfig = data.children;
-    delete data.children;
-
-    if (childrenConfig) {
-      for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
-        var childConfig = childrenConfig[i];
-
-        if (!childConfig.child) {
-          childConfig = {
-            child: childConfig
-          };
-          childrenConfig[i] = childConfig;
-        }
-
-        CreateChild(scene, childConfig, 'child', styles, customBuilders);
-      }
-    }
-
-    var gameObject = new FixWidthSizer(scene, data);
-    scene.add.existing(gameObject);
-
-    if (backgroundConfig) {
-      for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
-        var childConfig = backgroundConfig[i];
-        gameObject.addBackground(childConfig.child, childConfig.padding);
-      }
-    }
-
-    if (childrenConfig) {
-      for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
-        var childConfig = childrenConfig[i];
-        gameObject.add(childConfig.child, childConfig);
-      }
-    }
-
-    return gameObject;
+    return CreateAnySizer(scene, data, styles, customBuilders, FixWidthSizer);
   };
 
-  var CreateLabel = function CreateLabel(scene, data, styles, customBuilders) {
-    data = MergeStyle(data, styles); // Replace data by child game object
+  var CreateGridSizer = function CreateGridSizer(scene, data, styles, customBuilders) {
+    // Build createCellContainerCallback
+    var createCellContainerCallbackConfig = data.createCellContainerCallback;
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'icon', styles, customBuilders);
-    CreateChild(scene, data, 'text', styles, customBuilders);
-    CreateChild(scene, data, 'action', styles, customBuilders);
-    var gameObject = new Label(scene, data);
-    scene.add.existing(gameObject);
-    return gameObject;
+    if (createCellContainerCallbackConfig) {
+      var childData = createCellContainerCallbackConfig.child;
+      delete createCellContainerCallbackConfig.child;
+
+      data.createCellContainerCallback = function (scene, x, y, config) {
+        var child = Make(scene, childData, styles, customBuilders); // Copy config
+
+        for (var key in createCellContainerCallbackConfig) {
+          config[key] = createCellContainerCallbackConfig[key];
+        }
+
+        return child;
+      };
+    }
+
+    return CreateAnySizer(scene, data, styles, customBuilders, GridSizer);
+  };
+
+  var CreateOverlapSizer = function CreateOverlapSizer(scene, data, styles, customBuilders) {
+    return CreateAnySizer(scene, data, styles, customBuilders, OverlapSizer);
   };
 
   var CreateChildren = function CreateChildren(scene, data, subKey, styles, customBuilders) {
@@ -46577,6 +46558,96 @@
     return childData;
   };
 
+  var CreateButtons = function CreateButtons(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChildren(scene, data, 'buttons', styles, customBuilders);
+    var gameObject = new Buttons$1(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateFixWidthButtons = function CreateFixWidthButtons(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChildren(scene, data, 'buttons', styles, customBuilders);
+    var gameObject = new Buttons(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreategGridButtons = function CreategGridButtons(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    var buttonsConfig = data.buttons; // Game objects in 2d array
+
+    if (buttonsConfig) {
+      for (var i = 0, cnt = buttonsConfig.length; i < cnt; i++) {
+        CreateChildren(scene, buttonsConfig, i, styles, customBuilders);
+      }
+    } // Build createCellContainerCallback
+
+
+    var createCellContainerCallbackConfig = data.createCellContainerCallback;
+
+    if (createCellContainerCallbackConfig) {
+      var childData = createCellContainerCallbackConfig.child;
+      delete createCellContainerCallbackConfig.child;
+
+      data.createCellContainerCallback = function (scene, x, y, config) {
+        var child = Make(scene, childData, styles, customBuilders); // Copy config
+
+        for (var key in createCellContainerCallbackConfig) {
+          config[key] = createCellContainerCallbackConfig[key];
+        }
+
+        return child;
+      };
+    }
+
+    var gameObject = new GridButtons(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateAnyLabel = function CreateAnyLabel(scene, data, styles, customBuilders, LabelClass) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'icon', styles, customBuilders);
+    CreateChild(scene, data, 'text', styles, customBuilders);
+    CreateChild(scene, data, 'action', styles, customBuilders);
+    var gameObject = new LabelClass(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateLabel = function CreateLabel(scene, data, styles, customBuilders) {
+    return CreateAnyLabel(scene, data, styles, customBuilders, Label);
+  };
+
+  var CreateBadgeLabel = function CreateBadgeLabel(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'main', styles, customBuilders);
+    CreateChild(scene, data, 'leftTop', styles, customBuilders);
+    CreateChild(scene, data, 'centerTop', styles, customBuilders);
+    CreateChild(scene, data, 'rightTop', styles, customBuilders);
+    CreateChild(scene, data, 'leftCenter', styles, customBuilders);
+    CreateChild(scene, data, 'center', styles, customBuilders);
+    CreateChild(scene, data, 'rightCenter', styles, customBuilders);
+    CreateChild(scene, data, 'leftBottom', styles, customBuilders);
+    CreateChild(scene, data, 'centerBottom', styles, customBuilders);
+    CreateChild(scene, data, 'rightBottom', styles, customBuilders);
+    var gameObject = new Badge(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var CreateDialog = function CreateDialog(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
@@ -46597,14 +46668,8 @@
     return gameObject;
   };
 
-  var CreateButtons = function CreateButtons(scene, data, styles, customBuilders) {
-    data = MergeStyle(data, styles); // Replace data by child game object
-
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChildren(scene, data, 'buttons', styles, customBuilders);
-    var gameObject = new Buttons$1(scene, data);
-    scene.add.existing(gameObject);
-    return gameObject;
+  var CreateTextBox = function CreateTextBox(scene, data, styles, customBuilders) {
+    return CreateAnyLabel(scene, data, styles, customBuilders, TextBox);
   };
 
   var CreateSlider = function CreateSlider(scene, data, styles, customBuilders) {
@@ -46627,9 +46692,15 @@
     Ninepatch2: CreateNinePatch,
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
-    Label: CreateLabel,
-    Dialog: CreateDialog,
+    GridSizer: CreateGridSizer,
+    OverlapSizer: CreateOverlapSizer,
     Buttons: CreateButtons,
+    FixWidthButtons: CreateFixWidthButtons,
+    GridButtons: CreategGridButtons,
+    Label: CreateLabel,
+    BadgeLabel: CreateBadgeLabel,
+    Dialog: CreateDialog,
+    TextBox: CreateTextBox,
     Slider: CreateSlider
   };
 

@@ -76,6 +76,21 @@ Last line`;
             padding: 20
         })
 
+        var s3 = `\
+Hello
+[b]Hello[/b]
+[weight=100]Hello[/weight]
+[weight=600]Hello[/weight]
+[weight=900]Hello[/weight]\
+`
+        this.add.rexBBCodeText(400, 300, s3, {
+            fontFamily: 'Arial',
+            fontSize: 30,
+            backgroundColor: '#888',
+            backgroundColor2: '#222',
+            padding: 20
+        })
+
     }
 
     update() { }

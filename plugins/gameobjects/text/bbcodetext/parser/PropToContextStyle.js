@@ -20,7 +20,7 @@ var PropToContextStyle = function (defaultStyle, prop) {
         } else {
             result.fontSize = defaultStyle.fontSize;
         }
-        result.fontStyle = GetFontStyle(prop.b, prop.i);
+        result.fontStyle = GetFontStyle(prop);
 
         if (prop.hasOwnProperty('color')) {
             result.color = prop.color;
@@ -88,13 +88,27 @@ var PropToContextStyle = function (defaultStyle, prop) {
     return result;
 }
 
-var GetFontStyle = function (isBold, isItalic) {
-    if (isBold && isItalic) {
-        return 'bold italic';
-    } else if (isBold) {
-        return 'bold';
-    } else if (isItalic) {
-        return 'italic';
+var GetFontStyle = function (prop) {
+    var isBold = prop.b;
+    var weight = prop.weight;
+    var isItalic = prop.i;
+
+    if (isBold || weight || isItalic) {
+        if (isItalic) {
+            if (isBold) {
+                return 'bold italic';
+            } else if (weight) {
+                return `${weight} italic`;
+            } else {
+                return 'italic';
+            }
+        } else {  // !isItalic
+            if (isBold) {
+                return 'bold';
+            } else {
+                return weight.toString();
+            }
+        }
     } else {
         return '';
     }
