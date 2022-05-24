@@ -4,10 +4,17 @@ import NinePatch2 from '../../ninepatch2/NinePatch';
 
 import Sizer from '../../sizer/Sizer';
 import FixWidthSizer from '../../fixwidthsizer/FixWidthSizer';
+import GridSizer from '../../gridsizer/GridSizer';
+import OverlapSizer from '../../overlapsizer/OverlapSizer';
+
+import Buttons from '../../buttons/Buttons';
+import FixWidthButtons from '../../fixwidthbuttons/FixWidthButtons';
+import GridButtons from '../../gridbuttons/GridButtons';
 
 import Label from '../../label/Label';
+import BadgeLabel from '../../badgelabel/BadgeLabel';
 import Dialog from '../../dialog/Dialog';
-import Buttons from '../../buttons/Buttons';
+import TextBox from '../../textbox/TextBox';
 import Slider from '../../slider/Slider';
 
 export default Builders;
@@ -33,9 +40,16 @@ declare var Builders: {
 
     Sizer: Builders.BuilderTypeCommon<Sizer>,
     FixWidthSizer: Builders.BuilderTypeCommon<FixWidthSizer>,
+    GridSizer: Builders.BuilderTypeCommon<GridSizer>,
+    OverlapSizer: Builders.BuilderTypeCommon<OverlapSizer>,
+
+    Buttons: Builders.BuilderTypeCommon<Buttons>,
+    FixWidthButtons: Builders.BuilderTypeCommon<FixWidthButtons>,
+    GridButtons: Builders.BuilderTypeCommon<GridButtons>,
 
     Label: Builders.BuilderTypeCommon<Label>,
+    BadgeLabel: Builders.BuilderTypeCommon<BadgeLabel>,
     Dialog: Builders.BuilderTypeCommon<Dialog>,
-    Buttons: Builders.BuilderTypeCommon<Buttons>,
+    TextBox: Builders.BuilderTypeCommon<TextBox>,
     Slider: Builders.BuilderTypeCommon<Slider>,
 }

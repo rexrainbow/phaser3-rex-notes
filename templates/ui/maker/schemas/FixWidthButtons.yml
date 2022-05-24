@@ -1,17 +1,8 @@
-$type: Buttons
+$type: FixWidthButtons
 name:
 
 width:
 height:
-orientation:
-
-# Relace child data by game objct
-background:
-buttons:
-    - $type:
-      # ...
-# ----
-
 rtl:
 expand:
 align:
@@ -25,5 +16,12 @@ space:
     bottom:
     item:
 draggable:
+
+# Relace child data by game objct
+background:
+buttons:
+    - $type:
+      # ...
+# ----
 
 buttonsType:

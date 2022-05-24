@@ -89,6 +89,7 @@ var buttons = scene.rexUI.add.fixWidthButtons({
         buttonGameObject,
         // ...
     ],
+    // rtl: false,
     align: 0,
     click: {
         mode: 'pointerup',

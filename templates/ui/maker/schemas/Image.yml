@@ -5,3 +5,9 @@ key:
 frame:
 width:
 height:
+
+tint:
+alpha:
+visible:
+flipX:
+flipY:
