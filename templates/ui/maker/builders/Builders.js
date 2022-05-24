@@ -6,6 +6,7 @@ import CreateNinePatch2 from './CreateNinePatch2.js';
 
 import CreateSizer from './CreateSizer.js';
 import CreateFixWidthSizer from './CreateFixwidthSizer.js';
+import CreateGridSizer from './CreateGridSizer.js';
 import CreateOverlapSizer from './CreateOverlapSizer.js';
 
 import CreateLabel from './CreateLabel.js';
@@ -22,6 +23,7 @@ var Builders = {
 
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
+    GridSizer: CreateGridSizer,
     OverlapSizer: CreateOverlapSizer,
 
     Label: CreateLabel,
