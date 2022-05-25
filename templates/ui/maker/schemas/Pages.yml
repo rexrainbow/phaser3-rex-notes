@@ -1,23 +1,18 @@
-$type: Sizer
+$type: Pages
 name:
 
 width:
 height:
-orientation:
-rtl:
 space:
     left:
     right:
     top:
     bottom:
-    item:
 draggable:
 
 # Relace child data by game objct
 background:
     - $child:
-          $type:
-          # ...  
       padding:
           left:
           right:
@@ -26,15 +21,16 @@ background:
 children:
     - $child:
           $type:
-          # ...  
-      proportion:
+          # ...
+      key:
       align:
+      offsetX:
+      offsetY:
       padding:
           left:
           right:
           top:
           bottom:
       expand:
-      key:
       minWidth:
       minHeight:

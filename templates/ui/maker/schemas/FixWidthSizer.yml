@@ -16,7 +16,7 @@ draggable:
 
 # Relace child data by game objct
 background:
-    - child:
+    - $child:
         $type:
         # ... 
       padding:
@@ -25,7 +25,7 @@ background:
           top:
           bottom:
 children:
-    - child:
+    - $child:
         $type:
         # ... 
       padding:

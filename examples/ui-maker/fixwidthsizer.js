@@ -5,6 +5,7 @@ const content = `
 # Styles
 # Style of $class:mylabel
 .mylabel:
+    $type: Label
     width: 40
     height: 40
     
@@ -34,20 +35,15 @@ $root:
         strokeColor: 0x7b5e57
         strokeWidth: 2
     children:
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: Hello}
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: World}
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: Phaser}
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: AAAA}
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: BBBBBBBBB}
     
     width: 400

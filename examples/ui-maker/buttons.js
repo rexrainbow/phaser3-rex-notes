@@ -5,6 +5,7 @@ const content = `
 # Styles
 # Style of $class:mylabel
 .mylabel:
+    $type: Label
     width: 40
     height: 40
     
@@ -33,14 +34,11 @@ $root:
         color: 0x260e04
         radius: 20
     buttons:
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: Choice0}
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: Choice1}
-        - $type: Label
-          $class: mylabel
+        - $class: mylabel
           text: {text: Choice2}
     
     orientation: y

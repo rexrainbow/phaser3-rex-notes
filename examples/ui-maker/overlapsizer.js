@@ -13,13 +13,13 @@ width: 300
 height: 300
 
 children:
-    - child:
+    - $child:
           $type: RoundRectangle
           radius: 20
           color: {{COLOR_PRIMARY}}
       key: main
 
-    - child:
+    - $child:
           $type: RoundRectangle
           radius: 20
           width: 40
@@ -28,7 +28,7 @@ children:
       align: right
       expand: { height: true }
 
-    - child:
+    - $child:
           $type: RoundRectangle
           radius: 10
           width: 40
@@ -40,7 +40,7 @@ children:
       offsetY: -10
       expand: false
 
-    - child:
+    - $child:
           $type: Label
           background:
               $type: RoundRectangle

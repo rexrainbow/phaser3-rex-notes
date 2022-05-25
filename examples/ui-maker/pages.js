@@ -24,82 +24,13 @@ const content = `
         top: 10
         bottom: 10
 
+.mytabs:
 
 # Game object
 $root:
-    $type: Dialog
+    $type: Pages
     width: 500
-    
-    background:
-        $type: RoundRectangle
-        color: 0x1565c0
-        radius: 20
-    title:
-        $class: mylabel
-        text: {text: Title}
-    toolbar:
-        - $class: mylabel
-          text: {text: O}
-        - $class: mylabel
-          text: {text: X}
-    leftToolbar:
-        - $class: mylabel
-          text: {text: A}
-        - $class: mylabel
-          text: {text: B}
-    content:
-        $class: mylabel
-        text: {text: Content}
-    description:
-        $class: mylabel    
-        text: {text: Description}
-    choices:
-        - $class: mylabel
-          text: {text: Choice0}
-        - $class: mylabel
-          text: {text: Choice1}
-        - $class: mylabel
-          text: {text: Choice2}
-    actions:
-        - $class: mylabel
-          text: {text: Action0}
-        - $class: mylabel
-          text: {text: Action1}
-    
-    space:
-        left: 20
-        right: 20
-        top: -20
-        bottom: -20
-        title: 25
-        # titleLeft: 30
-        content: 25
-        description: 25
-        # descriptionLeft: 20
-        # descriptionRight: 20
-        choices: 25
-    
-        leftToolbarItem: 5
-        toolbarItem: 5
-        choice: 15
-        action: 15
-    
-    expand:
-        title: false
-        # content: false
-        # description: false
-        # choices: false
-        # actions: true
-    
-    align:
-        title: center
-        # content: right
-        # description: left
-        # choices: left
-        actions: right        # center|left|right
-    
-    click:
-        mode: release
+
 `
 
 class Demo extends Phaser.Scene {

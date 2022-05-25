@@ -40,12 +40,10 @@ $root:
             radius: 13
     
     header:
-        $type: Label
         $class: mylabel
         text: {text: Header}
     
     footer:
-        $type: Label
         $class: mylabel
         text: {text: Footer}
     

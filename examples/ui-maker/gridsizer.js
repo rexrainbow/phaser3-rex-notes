@@ -12,7 +12,7 @@ background:
     radius: 20
     color: 0x29434e
 children:
-    - child:
+    - $child:
         $type: RoundRectangle
         width: 200
         height: 200
@@ -21,7 +21,7 @@ children:
       column: 1
       row: 1
 
-    - child:
+    - $child:
         $type: RoundRectangle
         width: 100
         height: 100
@@ -31,7 +31,7 @@ children:
       row: 1
       expand: true
 
-    - child:
+    - $child:
         $type: RoundRectangle
         width: 100
         height: 100
@@ -41,7 +41,7 @@ children:
       row: 0
       expand: true
 
-    - child:
+    - $child:
         $type: RoundRectangle
         width: 100
         height: 100
@@ -51,7 +51,7 @@ children:
       row: 2
       expand: true
 
-    - child:
+    - $child:
         $type: RoundRectangle
         width: 100
         height: 100

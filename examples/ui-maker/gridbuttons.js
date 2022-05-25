@@ -4,7 +4,7 @@ import UIPlugin from '../../templates/ui/ui-plugin.js';
 const content = `
 # Styles
 # Style of $class:mybutton
-.mylabel:
+.mylabel:    
     $type: Label
     width: 40
     height: 40
@@ -33,44 +33,33 @@ $root:
         radius: 20
     buttons:
         - 
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '7'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '8'}
             - $type: Label
               $class: mylabel
               text: {text: '9'}
         - 
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '4'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '5'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '6'}
         - 
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '1'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '2'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '3'}
         - 
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '<'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '0'}
-            - $type: Label
-              $class: mylabel
+            - $class: mylabel
               text: {text: '.'}
 
 

@@ -20,6 +20,7 @@ import CreateDialog from './CreateDialog.js';
 import CreateTextBox from './CreateTextbox.js';
 import CreateSlider from './CreateSlider.js';
 import CreateTextArea from './CreateTextArea.js';
+import CreatePages from './CreatePages.js';
 
 var Builders = {
     Image: CreateImage,
@@ -44,6 +45,7 @@ var Builders = {
     TextBox: CreateTextBox,
     Slider: CreateSlider,
     TextArea: CreateTextArea,
+    Pages: CreatePages,
 };
 
 /*

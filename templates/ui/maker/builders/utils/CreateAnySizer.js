@@ -13,14 +13,14 @@ var CreateAnySizer = function (scene, data, styles, customBuilders, SizerClass) 
     if (backgroundConfig) {
         for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
             var childConfig = backgroundConfig[i];
-            gameObject.addBackground(childConfig.child, childConfig.padding);
+            gameObject.addBackground(childConfig.$child, childConfig.padding);
         }
     }
 
     if (childrenConfig) {
         for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
             var childConfig = childrenConfig[i];
-            gameObject.add(childConfig.child, childConfig);
+            gameObject.add(childConfig.$child, childConfig);
         }
     }
 

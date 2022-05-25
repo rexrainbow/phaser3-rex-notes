@@ -8,11 +8,11 @@ var ReplaceChildrenConfig = function (scene, childrenConfig, styles, customBuild
 
         for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
             var childConfig = childrenConfig[i];
-            if (!childConfig.child) {
-                childConfig = { child: childConfig };
+            if (!childConfig.$child) {
+                childConfig = { $child: childConfig };
                 childrenConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, 'child', styles, customBuilders);
+            CreateChild(scene, childConfig, '$child', styles, customBuilders);
         }
     }
 

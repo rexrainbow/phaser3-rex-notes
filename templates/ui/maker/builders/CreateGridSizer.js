@@ -6,8 +6,8 @@ var CreateGridSizer = function (scene, data, styles, customBuilders) {
     // Build createCellContainerCallback
     var createCellContainerCallbackConfig = data.createCellContainerCallback;
     if (createCellContainerCallbackConfig) {
-        var childData = createCellContainerCallbackConfig.child;
-        delete createCellContainerCallbackConfig.child;
+        var childData = createCellContainerCallbackConfig.$child;
+        delete createCellContainerCallbackConfig.$child;
 
         data.createCellContainerCallback = function (scene, x, y, config) {
             var child = Make(scene, childData, styles, customBuilders);

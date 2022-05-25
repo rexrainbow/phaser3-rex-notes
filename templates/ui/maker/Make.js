@@ -1,7 +1,13 @@
+import GetTypeName from './builders/utils/GetTypeName.js';
 import Builders from './builders/Builders.js';
 
 var Make = function (scene, data, styles, customBuilders) {
-    var type = data.$type;
+    var type = GetTypeName(data, styles);
+    if (!type) {
+        console.warn(`rexUI.Make: Can't get type name in ${JSON.stringify(data)}`)
+        return undefined;
+    }
+
     var callback;
     if (customBuilders) {
         callback = customBuilders[type]

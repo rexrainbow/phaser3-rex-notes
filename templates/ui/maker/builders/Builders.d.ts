@@ -18,6 +18,7 @@ import Dialog from '../../dialog/Dialog';
 import TextBox from '../../textbox/TextBox';
 import Slider from '../../slider/Slider';
 import TextArea from '../../textarea/TextArea';
+import Pages from '../../pages/Pages';
 
 export default Builders;
 
@@ -56,4 +57,5 @@ declare var Builders: {
     TextBox: Builders.BuilderTypeCommon<TextBox>,
     Slider: Builders.BuilderTypeCommon<Slider>,
     TextArea: Builders.BuilderTypeCommon<TextArea>,
+    Pages: Builders.BuilderTypeCommon<Pages>,
 }

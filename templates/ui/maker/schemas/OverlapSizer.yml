@@ -12,16 +12,16 @@ draggable:
 
 # Relace child data by game objct
 background:
-    - child:
+    - $child:
       padding:
           left:
           right:
           top:
           bottom:
 children:
-    - child:
+    - $child:
           $type:
-          # ...    
+          # ...
       key:
       align:
       offsetX:

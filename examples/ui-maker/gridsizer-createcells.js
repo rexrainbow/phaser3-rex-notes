@@ -17,7 +17,7 @@ background:
     color: 0x29434e
 
 createCellContainerCallback:
-    child:
+    $child:
         $type: RoundRectangle
         strokeColor: 0xffffff
         radius: 14        
