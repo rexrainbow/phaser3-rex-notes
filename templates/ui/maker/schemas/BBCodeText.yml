@@ -1,4 +1,4 @@
-$type: Text
+$type: BBCodeText
 name:
 
 text: 
@@ -6,6 +6,12 @@ fontFamily:
 fontSize:
 fontStyle:
 backgroundColor:
+backgroundColor2:
+backgroundHorizontalGradient:
+backgroundStrokeColor:
+backgroundStrokeLineWidth:
+backgroundCornerRadius:
+backgroundCornerIteration:
 color:
 stroke:
 strokeThickness:
@@ -16,7 +22,12 @@ shadow:
     blur:
     stroke:
     fill:
-align:
+underline:
+    color:
+    thickness:
+    offset:
+halign:
+valign:
 padding:
     left:
     right:
@@ -27,9 +38,9 @@ fixedHeight:
 lineSpacing:
 maxLines:
 testString:
-wordWrap:
+wrap:
+    mode:
     width:
-    useAdvancedWrap:
 
 tint:
 alpha:

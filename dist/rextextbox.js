@@ -10950,7 +10950,7 @@
       _this.type = 'rexTextBox';
       var text = _this.childrenMap.text;
       _this.page = new TextPage(text, GetValue(config, 'page', undefined));
-      _this.typing = new TextTyping(text, GetValue(config, 'type', undefined));
+      _this.typing = new TextTyping(text, GetValue(config, 'typing', config.type));
 
       _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this));
 

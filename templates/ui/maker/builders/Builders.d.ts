@@ -1,3 +1,4 @@
+import BBCodeText from '../../bbcodetext/BBCodeText';
 import RoundRectangle from '../../roundrectangle/RoundRectangle';
 import NinePatch from '../../ninepatch/NinePatch';
 import NinePatch2 from '../../ninepatch2/NinePatch';
@@ -16,6 +17,7 @@ import BadgeLabel from '../../badgelabel/BadgeLabel';
 import Dialog from '../../dialog/Dialog';
 import TextBox from '../../textbox/TextBox';
 import Slider from '../../slider/Slider';
+import TextArea from '../../textarea/TextArea';
 
 export default Builders;
 
@@ -34,6 +36,7 @@ declare namespace Builders {
 declare var Builders: {
     Image: Builders.BuilderTypeCommon<Phaser.GameObjects.Image>,
     Text: Builders.BuilderTypeCommon<Phaser.GameObjects.Text>,
+    BBCodeText: Builders.BuilderTypeCommon<BBCodeText>,
     RoundRectangle: Builders.BuilderTypeCommon<RoundRectangle>,
     Ninepatch: Builders.BuilderTypeCommon<NinePatch>,
     Ninepatch2: Builders.BuilderTypeCommon<NinePatch2>,
@@ -52,4 +55,5 @@ declare var Builders: {
     Dialog: Builders.BuilderTypeCommon<Dialog>,
     TextBox: Builders.BuilderTypeCommon<TextBox>,
     Slider: Builders.BuilderTypeCommon<Slider>,
+    TextArea: Builders.BuilderTypeCommon<TextArea>,
 }

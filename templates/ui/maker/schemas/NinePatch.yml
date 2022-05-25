@@ -9,3 +9,9 @@ width:
 height:
 preserveRatio:
 maxFixedPartScale:
+
+tint:
+alpha:
+visible:
+flipX:
+flipY:

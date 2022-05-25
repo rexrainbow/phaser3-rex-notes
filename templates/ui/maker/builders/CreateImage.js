@@ -1,7 +1,7 @@
 import MergeStyle from './utils/MergeStyle.js';
+import SetTextureProperties from './utils/SetTextureProperties.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
-const OtherProperites = ['tint', 'alpha', 'visible', 'flipX', 'flipY'];
 
 var CreateImage = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -14,13 +14,7 @@ var CreateImage = function (scene, data, styles, customBuilders) {
         gameObject.setDisplayHeight(data.height);
     }
 
-    for (var i = 0, cnt = OtherProperites.length; i < cnt; i++) {
-        var key = OtherProperites[i];
-        var value = data[key];
-        if (value !== undefined) {
-            gameObject[key] = value;
-        }
-    }
+    SetTextureProperties(gameObject, data);
 
     scene.add.existing(gameObject);
     return gameObject;

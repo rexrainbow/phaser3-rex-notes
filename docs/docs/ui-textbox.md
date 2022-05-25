@@ -107,7 +107,7 @@ var textBox = scene.rexUI.add.textBox({
     //    maxLines: undefined,
     //    pageBreak: '\f\n',
     // },
-    // type: { 
+    // typing: { 
     //    wrap: false,
     //    speed: 333,    
     // },
@@ -158,11 +158,11 @@ var textBox = scene.rexUI.add.textBox({
 - `page` : Configuration of [page behavior](textpage.md#create-instance)
     - `page.maxLines` : Max lines of a page.
     - `page.pageBreak` : Symbol of page-break. Default value is `'\f\n'`.
-- `type` : Configuration of [type behavior](texttyping.md#create-instance)    
-    - `type.wrap` : 
+- `typing` : Configuration of [type behavior](texttyping.md#create-instance)    
+    - `typing.wrap` : 
         - `false` : Don't insert `\n`, default behavior.
         - `true` : Insert `\n` to wrap content according to style of text, to prevent typing jittering.
-    - `type.speed` : Typing speed in ms, default value is `333`.
+    - `typing.speed` : Typing speed in ms, default value is `333`.
 
 ### Custom class
 

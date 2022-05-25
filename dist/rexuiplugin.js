@@ -38544,7 +38544,7 @@
       _this.type = 'rexTextBox';
       var text = _this.childrenMap.text;
       _this.page = new TextPage(text, GetValue$l(config, 'page', undefined));
-      _this.typing = new TextTyping(text, GetValue$l(config, 'type', undefined));
+      _this.typing = new TextTyping(text, GetValue$l(config, 'typing', config.type));
 
       _this.typing.on('complete', _this.onPageEnd, _assertThisInitialized(_this)).on('type', _this.onType, _assertThisInitialized(_this));
 
@@ -46369,8 +46369,22 @@
     return toObj;
   };
 
+  var ProperiteList = ['tint', 'alpha', 'visible', 'flipX', 'flipY'];
+
+  var SetTextureProperties = function SetTextureProperties(gameObject, data) {
+    for (var i = 0, cnt = ProperiteList.length; i < cnt; i++) {
+      var key = ProperiteList[i];
+      var value = data[key];
+
+      if (value !== undefined) {
+        gameObject[key] = value;
+      }
+    }
+
+    return gameObject;
+  };
+
   var PhaserImage = Phaser.GameObjects.Image;
-  var OtherProperites = ['tint', 'alpha', 'visible', 'flipX', 'flipY'];
 
   var CreateImage = function CreateImage(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -46384,15 +46398,7 @@
       gameObject.setDisplayHeight(data.height);
     }
 
-    for (var i = 0, cnt = OtherProperites.length; i < cnt; i++) {
-      var key = OtherProperites[i];
-      var value = data[key];
-
-      if (value !== undefined) {
-        gameObject[key] = value;
-      }
-    }
-
+    SetTextureProperties(gameObject, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -46402,6 +46408,15 @@
   var CreateText = function CreateText(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new PhaserText(scene, 0, 0, data.text, data);
+    SetTextureProperties(gameObject, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateBBCodeText = function CreateBBCodeText(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles);
+    var gameObject = new BBCodeText(scene, 0, 0, data.text, data);
+    SetTextureProperties(gameObject, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -46430,14 +46445,15 @@
     return gameObject;
   };
 
-  var CreateNinePatch$1 = function CreateNinePatch(scene, data, styles, customBuilders) {
+  var CreateNinePatch = function CreateNinePatch(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new NinePatch$1(scene, data);
+    SetTextureProperties(gameObject, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateNinePatch = function CreateNinePatch(scene, data, styles, customBuilders) {
+  var CreateNinePatch2 = function CreateNinePatch2(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new NinePatch(scene, data);
     scene.add.existing(gameObject);
@@ -46684,12 +46700,45 @@
     return gameObject;
   };
 
+  var ReplaceSliderConfig = function ReplaceSliderConfig(scene, sliderConfig, styles, customBuilders) {
+    if (sliderConfig) {
+      CreateChild(scene, sliderConfig, 'background', styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'track', styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'indicator', styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'thumb', styles, customBuilders);
+      var sliderButtonsConfig = sliderConfig.buttons;
+
+      if (sliderButtonsConfig) {
+        CreateChild(scene, sliderButtonsConfig, 'top', styles, customBuilders);
+        CreateChild(scene, sliderButtonsConfig, 'bottom', styles, customBuilders);
+        CreateChild(scene, sliderButtonsConfig, 'left', styles, customBuilders);
+        CreateChild(scene, sliderButtonsConfig, 'right', styles, customBuilders);
+      }
+    }
+
+    return sliderConfig;
+  };
+
+  var CreateTextArea = function CreateTextArea(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'text', styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+    CreateChild(scene, data, 'header', styles, customBuilders);
+    CreateChild(scene, data, 'footer', styles, customBuilders);
+    var gameObject = new TextArea(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var Builders = {
     Image: CreateImage,
     Text: CreateText,
+    BBCodeText: CreateBBCodeText,
     RoundRectangle: CreateRoundRectangle,
-    Ninepatch: CreateNinePatch$1,
-    Ninepatch2: CreateNinePatch,
+    Ninepatch: CreateNinePatch,
+    Ninepatch2: CreateNinePatch2,
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
     GridSizer: CreateGridSizer,
@@ -46701,7 +46750,8 @@
     BadgeLabel: CreateBadgeLabel,
     Dialog: CreateDialog,
     TextBox: CreateTextBox,
-    Slider: CreateSlider
+    Slider: CreateSlider,
+    TextArea: CreateTextArea
   };
 
   var Make = function Make(scene, data, styles, customBuilders) {

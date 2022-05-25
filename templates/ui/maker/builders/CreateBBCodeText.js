@@ -1,12 +1,11 @@
+import BBCodeText from '../../bbcodetext/BBCodeText.js';
 import MergeStyle from './utils/MergeStyle.js';
 import SetTextureProperties from './utils/SetTextureProperties.js';
 
-const PhaserText = Phaser.GameObjects.Text;
-
-var CreateText = function (scene, data, styles, customBuilders) {
+var CreateBBCodeText = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
-    var gameObject = new PhaserText(scene, 0, 0, data.text, data);
+    var gameObject = new BBCodeText(scene, 0, 0, data.text, data);
 
     SetTextureProperties(gameObject, data);
 
@@ -14,4 +13,4 @@ var CreateText = function (scene, data, styles, customBuilders) {
     return gameObject;
 }
 
-export default CreateText;
+export default CreateBBCodeText;

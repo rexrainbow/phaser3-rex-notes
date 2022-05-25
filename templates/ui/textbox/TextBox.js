@@ -17,7 +17,7 @@ class TextBox extends Label {
 
         var text = this.childrenMap.text;
         this.page = new TextPage(text, GetValue(config, 'page', undefined));
-        this.typing = new TextTyping(text, GetValue(config, 'type', undefined));
+        this.typing = new TextTyping(text, GetValue(config, 'typing', config.type));
         this.typing
             .on('complete', this.onPageEnd, this)
             .on('type', this.onType, this);

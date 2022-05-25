@@ -94,6 +94,7 @@ var textArea = scene.rexUI.add.textArea({
     slider: {
         // background: sliderBackgroundGameObject,
         track: trackGameObject,
+        // indicator: indicatorGameObject,
         thumb: thumbGameObject,
         // input: 'drag',
         // position: 'right',

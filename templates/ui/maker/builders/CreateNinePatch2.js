@@ -1,7 +1,7 @@
 import MergeStyle from './utils/MergeStyle.js';
 import NinePatch from '../../ninepatch2/NinePatch.js';
 
-var CreateNinePatch = function (scene, data, styles, customBuilders) {
+var CreateNinePatch2 = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var gameObject = new NinePatch(scene, data);
@@ -9,4 +9,4 @@ var CreateNinePatch = function (scene, data, styles, customBuilders) {
     scene.add.existing(gameObject);
     return gameObject;
 }
-export default CreateNinePatch;
+export default CreateNinePatch2;
