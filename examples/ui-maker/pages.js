@@ -1,7 +1,13 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Handlebars from 'handlebars';
 
-const content = `
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+const CONTENT = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
+
+const UIContent = `
 # Styles
 # Style of $class:mylabel
 .mylabel:
@@ -11,8 +17,7 @@ const content = `
     
     background:
         $type: RoundRectangle
-        color: 0x5e92f3
-        radius: 20
+        color: {{COLOR_PRIMARY}}
     text:
         $type: Text
         text: ''       # Override this property
@@ -25,11 +30,92 @@ const content = `
         bottom: 10
 
 .mytabs:
+    $type: Buttons
+    orientation: x
+    space: {left: 10, right: 10, top: 10, bottom: 0}
+
+    buttonsType: radio
+    buttons:
+        - $class: mylabel
+          name: page0
+          text: {text: Page0}
+        - $class: mylabel
+          name: page1
+          text: {text: Page1}
+        - $class: mylabel
+          name: page2
+          text: {text: Page2}
+
+.mypage:
+    $type: TextArea
+    text:
+        $type: BBCodeText
+        fontSize: 24
+
+    slider:
+        track:
+            $type: RoundRectangle
+            color: {{COLOR_PRIMARY}}
+            width: 20
+            radius: 10
+        thumb:
+            $type: RoundRectangle
+            color: {{COLOR_LIGHT}}
+            radius: 13
+
+    content: |
+        {{CONTENT}}        
+        ....
+        [color=green]{{CONTENT}}[/color]
+        ....
+        [color=cadetblue]{{CONTENT}}[/color]
+        ....
+        [color=yellow]{{CONTENT}}[/color]
+        
+    
+
+.mypages:
+    $type: Pages
+    children:
+        - $child:
+              $class: mypage
+          key: page0
+          expand: true
+        
+        - $child:
+            $class: mypage
+          key: page1
+          expand: true
+        
+        - $child:
+            $class: mypage
+          key: page2
+          expand: true
 
 # Game object
 $root:
-    $type: Pages
+    $type: Sizer
     width: 500
+    height: 400
+    orientation: y
+
+    background:
+        $type: RoundRectangle
+        color: {{COLOR_DARK}}
+        
+    children:
+        - $child:
+              $class: mytabs
+          key: tabs
+          align: left
+          padding: {bottom: 5}
+        
+        - $child:
+            $class: mypages
+          key: pages
+          proportion: 1
+          expand: true
+          padding: {left: 5, right: 5, top: 5, bottom: 5}
 
 `
 
@@ -44,22 +130,36 @@ class Demo extends Phaser.Scene {
 
     create() {
         var maker = this.rexUI.add.maker();
-        var dialog = maker.make(content)
+        var data = Handlebars.compile(UIContent)({
+            COLOR_PRIMARY: COLOR_PRIMARY,
+            COLOR_LIGHT: COLOR_LIGHT,
+            COLOR_DARK: COLOR_DARK,
+
+            CONTENT: CONTENT
+        });
+        var ui = maker.make(data)
             .setPosition(400, 300)
             .layout()
-            .setDraggable('title')
 
-        var print = this.add.text(0, 0, '');
-        dialog
-            .on('button.click', function (button, groupName, index, pointer, event) {
-                print.text += groupName + '-' + index + ': ' + button.text + '\n';
-            })
-            .on('button.over', function (button, groupName, index, pointer, event) {
-                button.getElement('background').setStrokeStyle(1, 0xffffff);
-            })
-            .on('button.out', function (button, groupName, index, pointer, event) {
-                button.getElement('background').setStrokeStyle();
-            });
+
+        ui.getElement('tabs').on('button.statechange', function (button, index, value, previousValue) {
+            // Style of button
+            var background = button.getElement('background');
+            if (value) {
+                background.setStrokeStyle(2, COLOR_LIGHT);
+            } else {
+                background.setStrokeStyle();
+            }
+
+            // Swap page
+            if (value) {
+                ui.getElement('pages').swapPage(button.name);
+            }
+        })
+            .emitButtonClick(0);
+
+
+
     }
 
     update() { }
