@@ -46325,6 +46325,34 @@
     return s;
   };
 
+  var GetTypeName = function GetTypeName(data, styles) {
+    if (data.hasOwnProperty('$type')) {
+      return data.$type;
+    } // Get $type from styles[`#${data.name}`]
+
+
+    if (data.hasOwnProperty('name')) {
+      var style = styles["#".concat(data.name)];
+
+      if (style && style.hasOwnProperty('$type')) {
+        return style.$type;
+      }
+    }
+
+    if (data.hasOwnProperty('$class')) {
+      var clasKeys = data.$class.split(' ');
+
+      for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
+        var style = styles[".".concat(clasKeys[i])];
+
+        if (style && style.hasOwnProperty('$type')) {
+          return style.$type;
+        }
+      }
+    } // return undefined
+
+  };
+
   var MergeStyle = function MergeStyle(data, styles) {
     if (styles === undefined) {
       return data;
@@ -46482,14 +46510,14 @@
       for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
         var childConfig = childrenConfig[i];
 
-        if (!childConfig.child) {
+        if (!childConfig.$child) {
           childConfig = {
-            child: childConfig
+            $child: childConfig
           };
           childrenConfig[i] = childConfig;
         }
 
-        CreateChild(scene, childConfig, 'child', styles, customBuilders);
+        CreateChild(scene, childConfig, '$child', styles, customBuilders);
       }
     }
 
@@ -46506,14 +46534,14 @@
     if (backgroundConfig) {
       for (var i = 0, cnt = backgroundConfig.length; i < cnt; i++) {
         var childConfig = backgroundConfig[i];
-        gameObject.addBackground(childConfig.child, childConfig.padding);
+        gameObject.addBackground(childConfig.$child, childConfig.padding);
       }
     }
 
     if (childrenConfig) {
       for (var i = 0, cnt = childrenConfig.length; i < cnt; i++) {
         var childConfig = childrenConfig[i];
-        gameObject.add(childConfig.child, childConfig);
+        gameObject.add(childConfig.$child, childConfig);
       }
     }
 
@@ -46533,8 +46561,8 @@
     var createCellContainerCallbackConfig = data.createCellContainerCallback;
 
     if (createCellContainerCallbackConfig) {
-      var childData = createCellContainerCallbackConfig.child;
-      delete createCellContainerCallbackConfig.child;
+      var childData = createCellContainerCallbackConfig.$child;
+      delete createCellContainerCallbackConfig.$child;
 
       data.createCellContainerCallback = function (scene, x, y, config) {
         var child = Make(scene, childData, styles, customBuilders); // Copy config
@@ -46610,8 +46638,8 @@
     var createCellContainerCallbackConfig = data.createCellContainerCallback;
 
     if (createCellContainerCallbackConfig) {
-      var childData = createCellContainerCallbackConfig.child;
-      delete createCellContainerCallbackConfig.child;
+      var childData = createCellContainerCallbackConfig.$child;
+      delete createCellContainerCallbackConfig.$child;
 
       data.createCellContainerCallback = function (scene, x, y, config) {
         var child = Make(scene, childData, styles, customBuilders); // Copy config
@@ -46732,6 +46760,10 @@
     return gameObject;
   };
 
+  var CreatePages = function CreatePages(scene, data, styles, customBuilders) {
+    return CreateAnySizer(scene, data, styles, customBuilders, Pages);
+  };
+
   var Builders = {
     Image: CreateImage,
     Text: CreateText,
@@ -46751,11 +46783,18 @@
     Dialog: CreateDialog,
     TextBox: CreateTextBox,
     Slider: CreateSlider,
-    TextArea: CreateTextArea
+    TextArea: CreateTextArea,
+    Pages: CreatePages
   };
 
   var Make = function Make(scene, data, styles, customBuilders) {
-    var type = data.$type;
+    var type = GetTypeName(data, styles);
+
+    if (!type) {
+      console.warn("rexUI.Make: Can't get type name in ".concat(JSON.stringify(data)));
+      return undefined;
+    }
+
     var callback;
 
     if (customBuilders) {

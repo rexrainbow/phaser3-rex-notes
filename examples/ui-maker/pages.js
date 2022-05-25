@@ -99,6 +99,8 @@ $root:
     height: 400
     orientation: y
 
+    space: { left: 5, right: 5, top: 5, bottom: 5, item: 10 }
+
     background:
         $type: RoundRectangle
         color: {{COLOR_DARK}}
@@ -108,14 +110,12 @@ $root:
               $class: mytabs
           key: tabs
           align: left
-          padding: {bottom: 5}
         
         - $child:
             $class: mypages
           key: pages
           proportion: 1
           expand: true
-          padding: {left: 5, right: 5, top: 5, bottom: 5}
 
 `
 
