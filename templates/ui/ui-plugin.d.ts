@@ -71,6 +71,7 @@ import Delay from '../../plugins/utils/promise/Delay';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import Make from './maker/YAMLMake';
+import MakerClass from './maker/Maker';
 
 export default UIPlugins;
 
@@ -173,7 +174,9 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
         view?: Object | string,
         styles?: Object | string,
         customBuilders?: Make.CustomBuildersType
-    ): Phaser.GameObjects.GameObject
+    ): Phaser.GameObjects.GameObject;
+
+    readonly maker: MakerClass;
 }
 
 
@@ -207,7 +210,6 @@ import HiddenTextEditClass from './hiddenedit/HiddenEdit.js';
 import HolyGrailClass from './holygrail/HolyGrail';
 import KnobClass from './knob/Knob';
 import LabelClass from './label/Label';
-import MakerClass from './maker/Maker';
 import MenuClass from './menu/Menu';
 import NinePatchClass from './ninepatch/NinePatch';
 import NumberBarClass from './numberbar/NumberBar';

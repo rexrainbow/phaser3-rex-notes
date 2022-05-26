@@ -7303,6 +7303,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#fade-in-duration" class="md-nav__link">
+    Fade in duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -8218,6 +8225,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#fade-in-duration" class="md-nav__link">
+    Fade in duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
   </a>
@@ -8333,6 +8347,7 @@
     <span class="c1">// height: undefined,</span>
     <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 },</span>
     <span class="c1">// swapMode: 0,</span>
+    <span class="c1">// fadeIn: 0,</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false,</span>
@@ -8365,8 +8380,12 @@
 </ul>
 </li>
 <li><code>swapMode</code> : Set to invisible or destroy swapped page.<ul>
-<li>0, <code>'invisible'</code> : Set swapped page to invisible.</li>
-<li>1, <code>'destroy'</code> : Destroy swapped page.</li>
+<li><code>0</code>, <code>'invisible'</code> : Set swapped page to invisible.</li>
+<li><code>1</code>, <code>'destroy'</code> : Destroy swapped page.</li>
+</ul>
+</li>
+<li><code>fadeIn</code> : Fade-in duration of current page.<ul>
+<li><code>0</code> : No fade-in effect. Default behavior.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this game object.</li>
@@ -8501,6 +8520,12 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">previousPage</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="fade-in-duration">Fade in duration<a class="headerlink" href="#fade-in-duration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">setFadeInDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>0</code> : No fade-in effect.</li>
+</ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get element<ul>
@@ -8526,7 +8551,7 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set page invisible, triggered when page is swapped out.
-    <div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pageinvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">pages</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;page.invisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">pages</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
@@ -8536,7 +8561,7 @@
 </ul>
 </li>
 <li>Set page visible, triggered when page is shown.
-    <div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pagevisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">pages</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;page.visible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">pages</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>

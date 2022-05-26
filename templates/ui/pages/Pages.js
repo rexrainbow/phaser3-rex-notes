@@ -11,7 +11,7 @@ class Pages extends OverlapSizer {
         this._previousKey = undefined;
         this._currentKey = undefined;
         this.setSwapMode(GetValue(config, 'swapMode', 0));
-        this.setFadeInDuration(GetValue(config, 'fadeDuration', 0));
+        this.setFadeInDuration(GetValue(config, 'fadeIn', 0));
     }
 
     setSwapMode(mode) {

@@ -80,6 +80,7 @@ import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
 import RequestDrag from '../../plugins/utils/input/RequestDrag.js';
 import Make from './maker/YAMLMake.js';
+import Maker from './maker/Maker.js';
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -107,6 +108,14 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
 
     make(data, view, styles, customBuilders) {
         return Make(this.scene, data, view, styles, customBuilders);
+    }
+
+    get maker() {
+        if (!this._maker) {
+            this._maker = new Maker(this.scene);
+        }
+
+        return this._maker;
     }
 
 }

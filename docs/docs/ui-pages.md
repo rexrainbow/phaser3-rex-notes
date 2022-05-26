@@ -83,7 +83,7 @@ var pages = scene.rexUI.add.pages({
     // height: undefined,
     // space: { left: 0, right:0, top:0, bottom:0 },
     // swapMode: 0,
-    // fadeDuration: 0,
+    // fadeIn: 0,
 
     // name: '',
     // draggable: false,
@@ -108,7 +108,7 @@ var pages = scene.rexUI.add.pages({
 - `swapMode` : Set to invisible or destroy swapped page.
     - `0`, `'invisible'` : Set swapped page to invisible.
     - `1`, `'destroy'` : Destroy swapped page.
-- `fadeDuration` : Fade-in duration of current page.
+- `fadeIn` : Fade-in duration of current page.
     - `0` : No fade-in effect. Default behavior.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.

@@ -28076,7 +28076,7 @@
 
       _this.setSwapMode(GetValue(config, 'swapMode', 0));
 
-      _this.setFadeInDuration(GetValue(config, 'fadeDuration', 0));
+      _this.setFadeInDuration(GetValue(config, 'fadeIn', 0));
 
       return _this;
     }

@@ -39123,7 +39123,7 @@
 
       _this.setSwapMode(GetValue$i(config, 'swapMode', 0));
 
-      _this.setFadeInDuration(GetValue$i(config, 'fadeDuration', 0));
+      _this.setFadeInDuration(GetValue$i(config, 'fadeIn', 0));
 
       return _this;
     }
@@ -47674,6 +47674,15 @@
       key: "make",
       value: function make(data, view, styles, customBuilders) {
         return YAMLMake(this.scene, data, view, styles);
+      }
+    }, {
+      key: "maker",
+      get: function get() {
+        if (!this._maker) {
+          this._maker = new Maker(this.scene);
+        }
+
+        return this._maker;
       }
     }]);
 
