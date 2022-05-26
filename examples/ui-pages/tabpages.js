@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var ui = CreateTabPage(this)
+        var ui = CreateTabPages(this)
             .setPosition(400, 300)
             .layout()
 
@@ -39,11 +39,11 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreateTabPage = function (scene) {
+var CreateTabPages = function (scene) {
     return scene.rexUI.add.sizer({
         width: 500, height: 400,
         orientation: 'y',
-        space: { left: 5, right: 5, top: 5, bottom: 5, item: 10 }
+        space: { left: 5, right: 5, top: 5, bottom: 5, item: 10 },
     })
         .addBackground(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_DARK))
         .add(
@@ -108,7 +108,9 @@ ${content}
 }
 
 var CreatePages = function (scene) {
-    return scene.rexUI.add.pages()
+    return scene.rexUI.add.pages({
+        fadeDuration: 500
+    })
         .add(
             CreatePage(scene),
             { key: 'page0', expand: true }

@@ -1,4 +1,4 @@
-import OverlapSizer from '../overlapsizer/OverlapSizer.js';
+import OverlapSizer from '../../overlapsizer/OverlapSizer.js';
 
 const OverlapSizerAdd = OverlapSizer.prototype.add;
 

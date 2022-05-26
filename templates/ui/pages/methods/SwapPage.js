@@ -1,4 +1,4 @@
-import Container from '../container/Container.js';
+import Container from '../../container/Container.js';
 
 const ContainerSetChildVisible = Container.prototype.setChildVisible;
 
@@ -23,6 +23,10 @@ var SwapPage = function (key) {
     if (currentPage) {
         ContainerSetChildVisible.call(this, currentPage, true);
         this.emit('pagevisible', currentPage, this._currentKey, this);
+
+        if (this.fadeInDuration > 0) {
+            currentPage.setAlpha(0).fadeIn(this.fadeInDuration, 1);
+        }
     }
     return this;
 }

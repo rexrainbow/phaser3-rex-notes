@@ -83,6 +83,7 @@ var pages = scene.rexUI.add.pages({
     // height: undefined,
     // space: { left: 0, right:0, top:0, bottom:0 },
     // swapMode: 0,
+    // fadeDuration: 0,
 
     // name: '',
     // draggable: false,
@@ -105,8 +106,10 @@ var pages = scene.rexUI.add.pages({
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `swapMode` : Set to invisible or destroy swapped page.
-    - 0, `'invisible'` : Set swapped page to invisible.
-    - 1, `'destroy'` : Destroy swapped page.
+    - `0`, `'invisible'` : Set swapped page to invisible.
+    - `1`, `'destroy'` : Destroy swapped page.
+- `fadeDuration` : Fade-in duration of current page.
+    - `0` : No fade-in effect. Default behavior.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
@@ -245,6 +248,14 @@ pages.swapPage(key);
     var pageObject = pages.previousPage;
     ```
 
+### Fade in duration
+
+```javascript
+pages.setFadeInDuration(duration);
+```
+
+- `0` : No fade-in effect.
+
 ### Get element
 
 - Get element
@@ -272,7 +283,7 @@ See [base sizer object](ui-basesizer.md).
 
 - Set page invisible, triggered when page is swapped out.
     ```javascript
-    pages.on('pageinvisible', function(pageObject, key, pages) {
+    pages.on('page.invisible', function(pageObject, key, pages) {
         // ...
     }, scope);
     ```
@@ -281,7 +292,7 @@ See [base sizer object](ui-basesizer.md).
     - `pages` : Pages object
 - Set page visible, triggered when page is shown.
     ```javascript
-    pages.on('pagevisible', function(pageObject, key, pages) {
+    pages.on('page.visible', function(pageObject, key, pages) {
         // ...
     }, scope);
     ```

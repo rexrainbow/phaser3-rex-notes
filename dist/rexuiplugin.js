@@ -39088,6 +39088,10 @@
     if (currentPage) {
       ContainerSetChildVisible$1.call(this, currentPage, true);
       this.emit('pagevisible', currentPage, this._currentKey, this);
+
+      if (this.fadeInDuration > 0) {
+        currentPage.setAlpha(0).fadeIn(this.fadeInDuration, 1);
+      }
     }
 
     return this;
@@ -39119,6 +39123,8 @@
 
       _this.setSwapMode(GetValue$i(config, 'swapMode', 0));
 
+      _this.setFadeInDuration(GetValue$i(config, 'fadeDuration', 0));
+
       return _this;
     }
 
@@ -39130,6 +39136,12 @@
         }
 
         this.swapMode = mode;
+        return this;
+      }
+    }, {
+      key: "setFadeInDuration",
+      value: function setFadeInDuration(duration) {
+        this.fadeInDuration = duration;
         return this;
       }
     }, {
