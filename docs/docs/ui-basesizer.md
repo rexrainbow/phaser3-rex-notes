@@ -932,10 +932,18 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
         ```javascript
         sizer.addChildrenMap(key, child);
         ```
+        - Remove children map :
+            ```javascript
+            sizer.removeChildrenMap(key);
+            ```
+            or
+            ```javascript
+            sizer.removeChildrenMap(child);
+            ```
     1. Get child
         ```javascript
         var child = sizer.getElement(key);
-        ```
+        ```    
 - Get child by name
     ```javascript
     var child = sizer.getByName(name);

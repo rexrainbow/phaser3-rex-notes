@@ -2561,6 +2561,22 @@
     return this;
   };
 
+  var RemoveChildrenMap = function RemoveChildrenMap(key) {
+    if (_typeof(key) === 'object') {
+      var gameObject = key;
+
+      for (var key in this.childrenMap) {
+        if (this.childrenMap[key] === gameObject) {
+          delete this.childrenMap[key];
+          return this;
+        }
+      }
+    }
+
+    delete this.childrenMap[key];
+    return this;
+  };
+
   var GetElement = function GetElement(mapNameList, recursive) {
     if (typeof mapNameList === 'string') {
       mapNameList = mapNameList.split('.');
@@ -8681,6 +8697,7 @@
     getChildrenHeight: GetChildrenHeight$1,
     addChildrenMap: AddChildrenMap,
     addElement: AddChildrenMap,
+    removeChildrenMap: RemoveChildrenMap,
     getElement: GetElement,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers$1,

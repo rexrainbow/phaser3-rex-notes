@@ -45,6 +45,7 @@ import NumberBarFactory from './numberbar/Factory.js';
 import ScrollBarFactory from './scrollbar/Factory.js';
 import BadgeLabelFactory from './badgelabel/Factory.js';
 import PagesFactory from './pages/Factory.js';
+import TabPagesFactory from './tabpages/Factory.js';
 import TextAreaFactory from './textarea/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';

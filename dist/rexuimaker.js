@@ -12816,6 +12816,22 @@
     return this;
   };
 
+  var RemoveChildrenMap = function RemoveChildrenMap(key) {
+    if (_typeof(key) === 'object') {
+      var gameObject = key;
+
+      for (var key in this.childrenMap) {
+        if (this.childrenMap[key] === gameObject) {
+          delete this.childrenMap[key];
+          return this;
+        }
+      }
+    }
+
+    delete this.childrenMap[key];
+    return this;
+  };
+
   var GetElement = function GetElement(mapNameList, recursive) {
     if (typeof mapNameList === 'string') {
       mapNameList = mapNameList.split('.');
@@ -18871,6 +18887,7 @@
     getChildrenHeight: GetChildrenHeight$4,
     addChildrenMap: AddChildrenMap,
     addElement: AddChildrenMap,
+    removeChildrenMap: RemoveChildrenMap,
     getElement: GetElement,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers$4,
@@ -28050,9 +28067,14 @@
     return this;
   };
 
+  var HasPage = function HasPage(key) {
+    return this.sizerChildren.hasOwnProperty(key);
+  };
+
   var methods = {
     getPage: GetPage,
-    swapPage: SwapPage
+    swapPage: SwapPage,
+    hasPage: HasPage
   };
   Object.assign(methods, AddChildMethods);
 

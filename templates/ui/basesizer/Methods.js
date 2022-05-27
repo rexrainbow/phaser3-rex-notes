@@ -5,6 +5,7 @@ import DrawBounds from './DrawBounds.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
+import RemoveChildrenMap from './RemoveChildrenMap.js';
 import GetElement from './GetElement.js';
 import PaddingMethods from './PaddingMethods.js';
 import ResolveWidth from './ResolveWidth.js';
@@ -61,6 +62,7 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     addChildrenMap: AddChildrenMap,
     addElement: AddChildrenMap,
+    removeChildrenMap: RemoveChildrenMap,
     getElement: GetElement,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,

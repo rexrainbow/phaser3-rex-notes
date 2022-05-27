@@ -58,10 +58,10 @@ declare class Page extends OverlapSizer {
 
     swapPage(key: string): this;
     currentKey: string;
-    previousKey: string;
+    readonly previousKey: string;
     keys: string[];
 
     getPage(key: string): Phaser.GameObjects.GameObject;
-    currentPage: Phaser.GameObjects.GameObject;
-    previousPage: Phaser.GameObjects.GameObject;
+    readonly currentPage: Phaser.GameObjects.GameObject;
+    readonly previousPage: Phaser.GameObjects.GameObject;
 }

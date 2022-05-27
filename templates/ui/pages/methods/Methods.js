@@ -1,10 +1,12 @@
 import AddChildMethods from './AddChildMethods.js';
 import GetPage from './GetPage.js';
 import SwapPage from './SwapPage.js';
+import HasPage from './HasPage.js';
 
 var methods = {
     getPage: GetPage,
-    swapPage: SwapPage
+    swapPage: SwapPage,
+    hasPage: HasPage,
 }
 
 Object.assign(

@@ -143,6 +143,9 @@ declare class BaseSizer extends ContainerLite {
         gameObject: Phaser.GameObjects.GameObject
     ): this;
 
+    removeChildrenMap(key: string): this;
+    removeChildrenMap(gameObject: Phaser.GameObjects.GameObject): this;
+
     getElement(
         name: string,
         recursive?: boolean
