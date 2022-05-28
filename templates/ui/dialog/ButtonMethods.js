@@ -213,7 +213,7 @@ export default {
 
     // Checkboxes
     getChoicesButtonStates() {
-        this.childrenMap.choicesSizer.getAllButtonsState();
+        return this.childrenMap.choicesSizer.getAllButtonsState();
     },
 
     getChoicesButtonState(name) {

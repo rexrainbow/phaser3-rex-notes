@@ -31722,7 +31722,7 @@
     },
     // Checkboxes
     getChoicesButtonStates: function getChoicesButtonStates() {
-      this.childrenMap.choicesSizer.getAllButtonsState();
+      return this.childrenMap.choicesSizer.getAllButtonsState();
     },
     getChoicesButtonState: function getChoicesButtonState(name) {
       if (name === undefined) {
