@@ -379,8 +379,8 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     - `textObject` : [text](text.md), [bbocodetext](bbcodetext.md), [tagtext](tagtext.md), or [label](ui-label.md).
 1. [Text edit](textedit.md): Create an [input text object](inputtext.md) above a text object to edit string content.
     ```javascript
-    scene.rexUI.add.edit(textObject, config);
-    // scene.rexUI.add.edit(textObject, config, onClose);
+    scene.rexUI.edit(textObject, config);
+    // scene.rexUI.edit(textObject, config, onClose);
     ```
 1. Wrap-expand text
     ```javascript
