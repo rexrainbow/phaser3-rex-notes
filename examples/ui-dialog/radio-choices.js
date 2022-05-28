@@ -50,15 +50,24 @@ class Demo extends Phaser.Scene {
                 }
             },
 
+            actions: [
+                createLabel(this, 'OK'),
+            ],
+
             space: {
                 title: 25,
                 content: 25,
+                choices: 25,
                 choice: 15,
 
                 left: 25,
                 right: 25,
                 top: 25,
                 bottom: 25,
+            },
+
+            align: {
+                actions: 'right'
             },
 
             expand: {
@@ -72,7 +81,12 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
         dialog
             .on('button.click', function (button, groupName, index, pointer, event) {
-                this.print.text += index + ': ' + button.text + '\n';
+                this.print.text += `${groupName}[${index}] = ${button.text}\n`;
+
+                if(groupName === 'actions') {                    
+                    this.print.text += `Select: ${dialog.getChoicesSelectButtonName()}\n`;
+                }
+                
             }, this)
     }
 

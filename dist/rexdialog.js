@@ -10602,6 +10602,27 @@
     forEachLeftToolbar: function forEachLeftToolbar(callback, scope) {
       this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
       return this;
+    },
+    getChoicesButtonState: function getChoicesButtonState(name) {
+      if (name === undefined) {
+        return this.childrenMap.choicesSizer.getAllButtonsState();
+      } else {
+        return this.childrenMap.choicesSizer.getButtonState(name);
+      }
+    },
+    getChoicessButtonStates: function getChoicessButtonStates() {
+      this.childrenMap.choicesSizer.getAllButtonsState();
+    },
+    setChoicesButtonState: function setChoicesButtonState(name, state) {
+      this.childrenMap.choicesSizer.setButtonState(name, state);
+      return this;
+    },
+    clearChoicesButtonStates: function clearChoicesButtonStates() {
+      this.childrenMap.choicesSizer.clearAllButtonsState();
+      return this;
+    },
+    getChoicesSelectButtonName: function getChoicesSelectButtonName() {
+      return this.childrenMap.choicesSizer.getSelectedButtonName();
     }
   };
 
@@ -10840,19 +10861,22 @@
       }
 
       if (choices) {
-        var align = GetValue(config, 'align.choices', 'center');
         choicesSizer = new Buttons(scene, {
           groupName: 'choices',
+          buttonsType: GetValue(config, 'choicesType', undefined),
           background: choicesBackground,
           buttons: choices,
           orientation: 1,
           // Top-Bottom
           space: {
+            left: GetValue(config, 'space.choicesBackgroundLeft', 0),
+            right: GetValue(config, 'space.choicesBackgroundRight', 0),
+            top: GetValue(config, 'space.choicesBackgroundTop', 0),
+            bottom: GetValue(config, 'space.choicesBackgroundBottom', 0),
             item: GetValue(config, 'space.choice', 0)
           },
           click: clickConfig,
           eventEmitter: _this.eventEmitter,
-          type: GetValue(config, 'choicesType', undefined),
           setValueCallback: GetValue(config, 'choicesSetValueCallback', undefined),
           setValueCallbackScope: GetValue(config, 'choicesSetValueCallbackScope', undefined)
         });
@@ -10862,6 +10886,7 @@
           right: GetValue(config, 'space.choicesRight', 0),
           bottom: actions ? choicesSpace : 0
         };
+        var align = GetValue(config, 'align.choices', 'center');
         var expand = GetValue(config, 'expand.choices', true);
 
         _this.add(choicesSizer, {

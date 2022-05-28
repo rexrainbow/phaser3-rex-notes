@@ -68,8 +68,16 @@ class TabPages extends Sizer {
 
         tabs.on('button.statechange', function (tab, index, value, previousValue) {
             var eventName = (value) ? 'tab.focus' : 'tab.blur';
-            this.emit(eventName, tab, index);
+            this.emit(eventName, tab, tab.name);
         }, this)
+
+        pages.on('pagevisible', function (pageObject, key, pages) {
+            this.emit('page.focus', pageObject, key);
+        })
+
+        pages.on('pageinvisible', function (pageObject, key, pages) {
+            this.emit('page.blur', pageObject, key);
+        })
 
     }
 

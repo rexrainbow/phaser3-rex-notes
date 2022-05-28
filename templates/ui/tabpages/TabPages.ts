@@ -1,13 +1,27 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
+import Buttons from '../buttons/Buttons';
+import Pages from '../pages/Pages';
 
 
 export default TabPages;
 
 declare namespace TabPages {
 
+    type tabPositionType = 'top' | 'bottom' | 'left' | 'right';
+
     interface IConfig extends Sizer.IConfig {
-        swapMode?: 0 | 1 | 'invisible' | 'destroy'
+        background?: Phaser.GameObjects.GameObject,
+
+        tabPosition?: tabPositionType,
+        tabs?: Buttons.IConfig,
+        pages?: Pages.IConfig,
+
+        expand?: {
+            tabs?: boolean
+        },
+
+        
     }
 
 }
@@ -17,6 +31,9 @@ declare class TabPages extends Sizer {
         scene: Phaser.Scene,
         config?: TabPages.IConfig
     );
+
+    getPageKey(index: number): string;
+    getPageIndex(key: string): number;
 
     addPage(
         key: string,
@@ -30,10 +47,15 @@ declare class TabPages extends Sizer {
         pageGameObject: Phaser.GameObjects.GameObject
     }): this;
 
-    showPageByIndex(index: string): this;
-    showFirstPage(): this;
-    showLastPage(): this;
-    showPage(key: string): this;
+    removePage(
+        key: string,
+        destroyChild?: boolean
+    ): this;
+
+    swapPage(key: string): this;
+    swapFirstPage(): this;
+    swapLastPage(): this;
+
     currentKey: string;
     readonly previousKey: string;
     keys: string[];

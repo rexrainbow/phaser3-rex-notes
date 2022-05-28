@@ -1,18 +1,17 @@
 ## Introduction
 
-A container with pages, only current page is visible.
+A container with [tabs](ui-buttons.md) and [pages](ui-pages.md), only current page is visible.
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Pages](https://codepen.io/rexrainbow/pen/vPWzBa)
-- [Tabpage](https://codepen.io/rexrainbow/pen/RwQjVNy)
+- [Tabpage](https://codepen.io/rexrainbow/pen/gOvoGVy)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-pages)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-tabpages)
 
 ### Install plugin
 
@@ -22,9 +21,9 @@ A container with pages, only current page is visible.
     ```javascript
     scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
     ```
-- Add pages object
+- Add tab-pages object
     ```javascript
-    var pages = scene.rexUI.add.pages(config);
+    var tabPages = scene.rexUI.add.tabPages(config);
     ```
 
 #### Import plugin
@@ -51,9 +50,9 @@ A container with pages, only current page is visible.
     };
     var game = new Phaser.Game(config);
     ```
-- Add pages object
+- Add tab-pages object
     ```javascript
-    var pages = scene.rexUI.add.pages(config);
+    var tabPages = scene.rexUI.add.tabPages(config);
     ```
 
 #### Import class
@@ -64,26 +63,56 @@ A container with pages, only current page is visible.
     ```
 - Import class
     ```javascript
-    import { Pages } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { TabPages } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
-- Add pages object
+- Add tab-pages object
     ```javascript    
-    var pages = new Pages(scene, config);
-    scene.add.existing(pages);
+    var tabPages = new TabPages(scene, config);
+    scene.add.existing(tabPages);
     ```
 
-### Add pages object
+### Add tab-pages object
 
 ```javascript
-var pages = scene.rexUI.add.pages({
+var tabPages = scene.rexUI.add.tabPages({
     // x: 0,
     // y: 0,
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+
+    // background: backgroundGameObject,
+
+    tabPosition: 'top',
+    tabs: {
+        // width:
+        // height:
+        // rtl:
+
+        // background: backgroundGameObject,
+        expand:
+        align:
+        click: {
+            mode: 'pointerup',
+            clickInterval: 100
+        },
+        space: { left: 0, right:0, top:0, bottom:0, item:0 }
+    },
+
+    pages: {
+        space: { left: 0, right:0, top:0, bottom:0 },
+        fadeIn: 0,
+    },
+
+    expand: {
+        tabs: false,
+    },
+
+    align: {
+        tabs: 'left',
+    },
+
     // space: { left: 0, right:0, top:0, bottom:0 },
-    // swapMode: 0,
-    // fadeIn: 0,
 
     // name: '',
     // draggable: false,
@@ -103,13 +132,37 @@ var pages = scene.rexUI.add.pages({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
-- `space` : Pads spaces.
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
-- `swapMode` : Set to invisible or destroy swapped page.
-    - `0`, `'invisible'` : Set swapped page to invisible.
-    - `1`, `'destroy'` : Destroy swapped page.
-- `fadeIn` : Fade-in duration of current page.
-    - `0` : No fade-in effect. Default behavior.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
+- `tabPosition` : Put tabs at top, bottom, left, right of pages.
+    - `'top'`, `'bottom'`, `'left'`, `'right'` : Default value is `'top'`.
+- `tabs` : Configuration of tabs, which is a [buttons game object](ui-buttons.md#add-buttons-object).
+    - `tabs.width`, `tabs.height` : Minimum width, minimum height of tabs, to preserve space if tabs is empty, optional.
+    - `tabs.rtl` : 
+        - `true` : Layout buttons from right to left.
+        - `false` : Layout buttons from left to right. Default behavior.
+    - `tabs.background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
+    - `tabs.space` : 
+        - `tabs.space.top`, `tabs.space.bottom`, `tabs.space.left`, `tabs.space.right` : Padding around bottons.
+        - `tabs.space.item` : Space between 2 button game objects.
+    - `tabs.expand` : Set `true` to expand width, or height of tabs game objects.  
+    - `tabs.click`: Configuration of [button clicking](button.md).
+        - `tabs.click.mode` :
+            - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
+            - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
+        - `tabs.click.clickInterval` : Interval between 2 'click' events, in ms.
+- `pages` : Configuration of [pages](ui-pages.md#add-pages-object)
+    - `pages.space` : Pads spaces.
+        - `pages.space.left`, `pages.space.right`, `pages.space.top`, `pages.space.bottom` : Space of bounds.
+    - `pages.fadeIn` : Fade-in duration of current page.
+        - `0` : No fade-in effect. Default behavior.
+- `expand` :
+    - `tabs` : Set `true` to expand width/height of tabs. Default value is `false`.
+- `align` :
+    - `tabs` :  
+- `space` :
+    - An object: Padding of button game objects.
+        - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
+        - `space.item` : Space between 2 button game objects.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.

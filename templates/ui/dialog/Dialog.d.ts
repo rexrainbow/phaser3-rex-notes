@@ -246,4 +246,15 @@ declare class Dialog extends Sizer {
         callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
         scop?: unknown
     ): this;
+
+    getChoicesButtonState(name: string): boolean;
+    getChoicesButtonState(): { [name: string]: boolean };
+
+    getChoicessButtonStates(): { [name: string]: boolean };
+
+    setChoicesButtonState(name: string, state?: boolean): this;
+
+    clearChoicesButtonStates(): this;
+
+    getChoicesSelectButtonName(): string;
 }

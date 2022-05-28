@@ -10,7 +10,7 @@ A container with a title, content, buttons and background.
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
 - [Yes-no dialog](https://codepen.io/rexrainbow/pen/MPZWZG)
 - [Action buttons with Space](https://codepen.io/rexrainbow/pen/MWvoErY)
-- [Single choice dialog](https://codepen.io/rexrainbow/pen/ePoRVz)
+- [Radio choice dialog](https://codepen.io/rexrainbow/pen/ePoRVz)
 - [Pop-up dialog](https://codepen.io/rexrainbow/pen/NEpjmP)
 - [Ease-in, ease-out](https://codepen.io/rexrainbow/pen/qBdQRmq)
 - [Show/hide buttons](https://codepen.io/rexrainbow/pen/MWwPabw)

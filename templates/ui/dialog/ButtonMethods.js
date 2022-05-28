@@ -209,5 +209,31 @@ export default {
     forEachLeftToolbar(callback, scope) {
         this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
         return this;
+    },
+
+    getChoicesButtonState(name) {
+        if (name === undefined) {
+            return this.childrenMap.choicesSizer.getAllButtonsState();
+        } else {
+            return this.childrenMap.choicesSizer.getButtonState(name);
+        }
+    },
+
+    getChoicessButtonStates() {
+        this.childrenMap.choicesSizer.getAllButtonsState();
+    },
+
+    setChoicesButtonState(name, state) {
+        this.childrenMap.choicesSizer.setButtonState(name, state);
+        return this;
+    },
+
+    clearChoicesButtonStates() {
+        this.childrenMap.choicesSizer.clearAllButtonsState();
+        return this;
+    },
+
+    getChoicesSelectButtonName() {
+        return this.childrenMap.choicesSizer.getSelectedButtonName();
     }
 };

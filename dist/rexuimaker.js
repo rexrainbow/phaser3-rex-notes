@@ -23564,6 +23564,27 @@
     forEachLeftToolbar: function forEachLeftToolbar(callback, scope) {
       this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
       return this;
+    },
+    getChoicesButtonState: function getChoicesButtonState(name) {
+      if (name === undefined) {
+        return this.childrenMap.choicesSizer.getAllButtonsState();
+      } else {
+        return this.childrenMap.choicesSizer.getButtonState(name);
+      }
+    },
+    getChoicessButtonStates: function getChoicessButtonStates() {
+      this.childrenMap.choicesSizer.getAllButtonsState();
+    },
+    setChoicesButtonState: function setChoicesButtonState(name, state) {
+      this.childrenMap.choicesSizer.setButtonState(name, state);
+      return this;
+    },
+    clearChoicesButtonStates: function clearChoicesButtonStates() {
+      this.childrenMap.choicesSizer.clearAllButtonsState();
+      return this;
+    },
+    getChoicesSelectButtonName: function getChoicesSelectButtonName() {
+      return this.childrenMap.choicesSizer.getSelectedButtonName();
     }
   };
 
@@ -23802,19 +23823,22 @@
       }
 
       if (choices) {
-        var align = GetValue$f(config, 'align.choices', 'center');
         choicesSizer = new Buttons$1(scene, {
           groupName: 'choices',
+          buttonsType: GetValue$f(config, 'choicesType', undefined),
           background: choicesBackground,
           buttons: choices,
           orientation: 1,
           // Top-Bottom
           space: {
+            left: GetValue$f(config, 'space.choicesBackgroundLeft', 0),
+            right: GetValue$f(config, 'space.choicesBackgroundRight', 0),
+            top: GetValue$f(config, 'space.choicesBackgroundTop', 0),
+            bottom: GetValue$f(config, 'space.choicesBackgroundBottom', 0),
             item: GetValue$f(config, 'space.choice', 0)
           },
           click: clickConfig,
           eventEmitter: _this.eventEmitter,
-          type: GetValue$f(config, 'choicesType', undefined),
           setValueCallback: GetValue$f(config, 'choicesSetValueCallback', undefined),
           setValueCallbackScope: GetValue$f(config, 'choicesSetValueCallbackScope', undefined)
         });
@@ -23824,6 +23848,7 @@
           right: GetValue$f(config, 'space.choicesRight', 0),
           bottom: actions ? choicesSpace : 0
         };
+        var align = GetValue$f(config, 'align.choices', 'center');
         var expand = GetValue$f(config, 'expand.choices', true);
 
         _this.add(choicesSizer, {

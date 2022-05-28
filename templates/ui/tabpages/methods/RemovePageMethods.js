@@ -1,9 +1,11 @@
-import GetPageKeyByIndex from './GetPageKeyByIndex.js';
-
 var RemovePage = function (key, destroyChild) {
-    var tabs = this.getElement('tabs');
+    if (typeof (key) === 'number') {
+        key = this.getPageKey(key);
+    }
+
+    var tabs = this.childrenMap.tabs;
     var tabGameObject = tabs.getByName(key);
-    var pages = this.getElement('pages');
+    var pages = this.childrenMap.pages;
     var pageGameObject = pages.getElement(key);
     if (!tabGameObject || !pageGameObject) {
         return this;
@@ -17,15 +19,6 @@ var RemovePage = function (key, destroyChild) {
     return this;
 }
 
-var RemovePageByIndex = function (index) {
-    var key = GetPageKeyByIndex.call(this, index);
-    if (key) {
-        this.removePage(key)
-    }
-    return this;
-}
-
 export default {
     removePage: RemovePage,
-    removePageByIndex: RemovePageByIndex,
 };

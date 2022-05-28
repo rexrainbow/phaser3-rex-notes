@@ -16,8 +16,8 @@ var AddPage = function (key, tabGameObject, pageGameObject) {
 
     tabGameObject.name = key;  // For ratio buttons
 
-    this.getElement('tabs').addButton(tabGameObject);
-    this.getElement('pages').addPage(pageGameObject, { key: key });
+    this.childrenMap.tabs.addButton(tabGameObject);
+    this.childrenMap.pages.addPage(pageGameObject, { key: key });
 
     return this;
 }

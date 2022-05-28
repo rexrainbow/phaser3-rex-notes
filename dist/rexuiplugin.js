@@ -31719,6 +31719,27 @@
     forEachLeftToolbar: function forEachLeftToolbar(callback, scope) {
       this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
       return this;
+    },
+    getChoicesButtonState: function getChoicesButtonState(name) {
+      if (name === undefined) {
+        return this.childrenMap.choicesSizer.getAllButtonsState();
+      } else {
+        return this.childrenMap.choicesSizer.getButtonState(name);
+      }
+    },
+    getChoicessButtonStates: function getChoicessButtonStates() {
+      this.childrenMap.choicesSizer.getAllButtonsState();
+    },
+    setChoicesButtonState: function setChoicesButtonState(name, state) {
+      this.childrenMap.choicesSizer.setButtonState(name, state);
+      return this;
+    },
+    clearChoicesButtonStates: function clearChoicesButtonStates() {
+      this.childrenMap.choicesSizer.clearAllButtonsState();
+      return this;
+    },
+    getChoicesSelectButtonName: function getChoicesSelectButtonName() {
+      return this.childrenMap.choicesSizer.getSelectedButtonName();
     }
   };
 
@@ -31957,19 +31978,22 @@
       }
 
       if (choices) {
-        var align = GetValue$L(config, 'align.choices', 'center');
         choicesSizer = new Buttons$1(scene, {
           groupName: 'choices',
+          buttonsType: GetValue$L(config, 'choicesType', undefined),
           background: choicesBackground,
           buttons: choices,
           orientation: 1,
           // Top-Bottom
           space: {
+            left: GetValue$L(config, 'space.choicesBackgroundLeft', 0),
+            right: GetValue$L(config, 'space.choicesBackgroundRight', 0),
+            top: GetValue$L(config, 'space.choicesBackgroundTop', 0),
+            bottom: GetValue$L(config, 'space.choicesBackgroundBottom', 0),
             item: GetValue$L(config, 'space.choice', 0)
           },
           click: clickConfig,
           eventEmitter: _this.eventEmitter,
-          type: GetValue$L(config, 'choicesType', undefined),
           setValueCallback: GetValue$L(config, 'choicesSetValueCallback', undefined),
           setValueCallbackScope: GetValue$L(config, 'choicesSetValueCallbackScope', undefined)
         });
@@ -31979,6 +32003,7 @@
           right: GetValue$L(config, 'space.choicesRight', 0),
           bottom: actions ? choicesSpace : 0
         };
+        var align = GetValue$L(config, 'align.choices', 'center');
         var expand = GetValue$L(config, 'expand.choices', true);
 
         _this.add(choicesSizer, {
@@ -39212,6 +39237,28 @@
   });
   SetValue(window, 'RexPlugins.UI.Pages', Pages);
 
+  var GetPageKeyByIndex = function GetPageKeyByIndex(index) {
+    var buttons = this.getElement('tabs.buttons');
+
+    if (index >= buttons.length) {
+      return undefined;
+    }
+
+    return buttons[index].name;
+  };
+
+  var GetPageIndexByKey = function GetPageIndexByKey(key) {
+    var buttons = this.getElement('tabs.buttons');
+
+    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+      if (buttons[i].name === key) {
+        return i;
+      }
+    }
+
+    return undefined;
+  };
+
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$j = Phaser.Utils.Objects.GetValue;
   var UUID = Phaser.Utils.String.UUID;
@@ -39230,66 +39277,53 @@
 
     tabGameObject.name = key; // For ratio buttons
 
-    this.getElement('tabs').addButton(tabGameObject);
-    this.getElement('pages').addPage(pageGameObject, {
+    this.childrenMap.tabs.addButton(tabGameObject);
+    this.childrenMap.pages.addPage(pageGameObject, {
       key: key
     });
     return this;
   };
 
-  var SwapPageByIndex = function SwapPageByIndex(index) {
-    this.getElement('tabs').emitButtonClick(index);
+  var SwapPage = function SwapPage(key) {
+    var index;
+
+    if (typeof key === 'number') {
+      index = key;
+    } else {
+      index = this.getPageIndex(key);
+    }
+
+    if (index != null) {
+      this.childrenMap.tabs.emitButtonClick(index);
+    }
+
     return this;
   };
 
   var SwapFirstPage = function SwapFirstPage() {
-    this.swapPageByIndex(0);
+    this.swapPage(0);
     return this;
   };
 
   var SwapLastPage = function SwapLastPage() {
-    this.swapPageByIndex(this.getElement('tabs.buttons').length - 1);
-    return this;
-  };
-
-  var SwapPage = function SwapPage(key) {
-    var buttons = this.getElement('tabs.buttons');
-
-    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-      if (buttons[i].name === key) {
-        this.swapPageByIndex(i);
-        break;
-      }
-    }
-
+    this.swapPage(this.getElement('tabs.buttons').length - 1);
     return this;
   };
 
   var SwapPageMethods = {
-    swapPageByIndex: SwapPageByIndex,
+    swapPage: SwapPage,
     swapFirstPage: SwapFirstPage,
-    swapLastPage: SwapLastPage,
-    swapPage: SwapPage
-  };
-
-  var GetPage = function GetPage(key) {
-    return this.getElement('pages').getPage(key);
-  };
-
-  var GetPageKeyByIndex = function GetPageKeyByIndex(index) {
-    var buttons = this.getElement('tabs.buttons');
-
-    if (index >= buttons.length) {
-      return undefined;
-    }
-
-    return buttons[index].name;
+    swapLastPage: SwapLastPage
   };
 
   var RemovePage = function RemovePage(key, destroyChild) {
-    var tabs = this.getElement('tabs');
+    if (typeof key === 'number') {
+      key = this.getPageKey(key);
+    }
+
+    var tabs = this.childrenMap.tabs;
     var tabGameObject = tabs.getByName(key);
-    var pages = this.getElement('pages');
+    var pages = this.childrenMap.pages;
     var pageGameObject = pages.getElement(key);
 
     if (!tabGameObject || !pageGameObject) {
@@ -39302,24 +39336,36 @@
     return this;
   };
 
-  var RemovePageByIndex = function RemovePageByIndex(index) {
-    var key = GetPageKeyByIndex.call(this, index);
-
-    if (key) {
-      this.removePage(key);
-    }
-
-    return this;
+  var RemovePageMethods = {
+    removePage: RemovePage
   };
 
-  var RemovePageMethods = {
-    removePage: RemovePage,
-    removePageByIndex: RemovePageByIndex
+  var GetPage = function GetPage(key) {
+    if (typeof key === 'number') {
+      key = this.getPageKey(key);
+    }
+
+    return this.childrenMap.pages.getPage(key);
+  };
+
+  var GetTab = function GetTab(key) {
+    var index;
+
+    if (typeof key === 'number') {
+      index = key;
+    } else {
+      index = this.getPageIndex(key);
+    }
+
+    return this.getElement('tabs.buttons')[index];
   };
 
   var methods$4 = {
+    getPageKey: GetPageKeyByIndex,
+    getPageIndex: GetPageIndexByKey,
     addPage: AddPage,
-    getPage: GetPage
+    getPage: GetPage,
+    getTab: GetTab
   };
   Object.assign(methods$4, SwapPageMethods, RemovePageMethods);
 
@@ -39412,8 +39458,14 @@
       });
       tabs.on('button.statechange', function (tab, index, value, previousValue) {
         var eventName = value ? 'tab.focus' : 'tab.blur';
-        this.emit(eventName, tab, index);
+        this.emit(eventName, tab, tab.name);
       }, _assertThisInitialized(_this));
+      pages.on('pagevisible', function (pageObject, key, pages) {
+        this.emit('page.focus', pageObject, key);
+      });
+      pages.on('pageinvisible', function (pageObject, key, pages) {
+        this.emit('page.blur', pageObject, key);
+      });
       return _this;
     }
 

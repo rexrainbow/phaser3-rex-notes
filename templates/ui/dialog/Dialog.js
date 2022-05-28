@@ -192,10 +192,10 @@ class Dialog extends Sizer {
             );
         }
 
-        if (choices) {
-            var align = GetValue(config, 'align.choices', 'center');
+        if (choices) {            
             choicesSizer = new Buttons(scene, {
                 groupName: 'choices',
+                buttonsType: GetValue(config, 'choicesType', undefined),
                 background: choicesBackground,
                 buttons: choices,
                 orientation: 1, // Top-Bottom
@@ -207,8 +207,7 @@ class Dialog extends Sizer {
                     item: GetValue(config, 'space.choice', 0) 
                 },
                 click: clickConfig,
-                eventEmitter: this.eventEmitter,
-                type: GetValue(config, 'choicesType', undefined),
+                eventEmitter: this.eventEmitter,              
                 setValueCallback: GetValue(config, 'choicesSetValueCallback', undefined),
                 setValueCallbackScope: GetValue(config, 'choicesSetValueCallbackScope', undefined)
             });
@@ -218,6 +217,7 @@ class Dialog extends Sizer {
                 right: GetValue(config, 'space.choicesRight', 0),
                 bottom: ((actions) ? choicesSpace : 0)
             }
+            var align = GetValue(config, 'align.choices', 'center');
             var expand = GetValue(config, 'expand.choices', true);
             this.add(
                 choicesSizer,

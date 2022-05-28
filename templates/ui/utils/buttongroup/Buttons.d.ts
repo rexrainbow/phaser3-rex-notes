@@ -75,6 +75,8 @@ export interface IButtons {
         name: string,
         state?: boolean
     ): this;
+    
+    clearAllButtonsState(): this;
 
     getButtonState(
         name: string

@@ -10967,6 +10967,28 @@
     destroy: 1
   };
 
+  var GetPageKeyByIndex = function GetPageKeyByIndex(index) {
+    var buttons = this.getElement('tabs.buttons');
+
+    if (index >= buttons.length) {
+      return undefined;
+    }
+
+    return buttons[index].name;
+  };
+
+  var GetPageIndexByKey = function GetPageIndexByKey(key) {
+    var buttons = this.getElement('tabs.buttons');
+
+    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+      if (buttons[i].name === key) {
+        return i;
+      }
+    }
+
+    return undefined;
+  };
+
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var UUID = Phaser.Utils.String.UUID;
@@ -10985,66 +11007,53 @@
 
     tabGameObject.name = key; // For ratio buttons
 
-    this.getElement('tabs').addButton(tabGameObject);
-    this.getElement('pages').addPage(pageGameObject, {
+    this.childrenMap.tabs.addButton(tabGameObject);
+    this.childrenMap.pages.addPage(pageGameObject, {
       key: key
     });
     return this;
   };
 
-  var SwapPageByIndex = function SwapPageByIndex(index) {
-    this.getElement('tabs').emitButtonClick(index);
+  var SwapPage = function SwapPage(key) {
+    var index;
+
+    if (typeof key === 'number') {
+      index = key;
+    } else {
+      index = this.getPageIndex(key);
+    }
+
+    if (index != null) {
+      this.childrenMap.tabs.emitButtonClick(index);
+    }
+
     return this;
   };
 
   var SwapFirstPage = function SwapFirstPage() {
-    this.swapPageByIndex(0);
+    this.swapPage(0);
     return this;
   };
 
   var SwapLastPage = function SwapLastPage() {
-    this.swapPageByIndex(this.getElement('tabs.buttons').length - 1);
-    return this;
-  };
-
-  var SwapPage = function SwapPage(key) {
-    var buttons = this.getElement('tabs.buttons');
-
-    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-      if (buttons[i].name === key) {
-        this.swapPageByIndex(i);
-        break;
-      }
-    }
-
+    this.swapPage(this.getElement('tabs.buttons').length - 1);
     return this;
   };
 
   var SwapPageMethods = {
-    swapPageByIndex: SwapPageByIndex,
+    swapPage: SwapPage,
     swapFirstPage: SwapFirstPage,
-    swapLastPage: SwapLastPage,
-    swapPage: SwapPage
-  };
-
-  var GetPage = function GetPage(key) {
-    return this.getElement('pages').getPage(key);
-  };
-
-  var GetPageKeyByIndex = function GetPageKeyByIndex(index) {
-    var buttons = this.getElement('tabs.buttons');
-
-    if (index >= buttons.length) {
-      return undefined;
-    }
-
-    return buttons[index].name;
+    swapLastPage: SwapLastPage
   };
 
   var RemovePage = function RemovePage(key, destroyChild) {
-    var tabs = this.getElement('tabs');
+    if (typeof key === 'number') {
+      key = this.getPageKey(key);
+    }
+
+    var tabs = this.childrenMap.tabs;
     var tabGameObject = tabs.getByName(key);
-    var pages = this.getElement('pages');
+    var pages = this.childrenMap.pages;
     var pageGameObject = pages.getElement(key);
 
     if (!tabGameObject || !pageGameObject) {
@@ -11057,24 +11066,36 @@
     return this;
   };
 
-  var RemovePageByIndex = function RemovePageByIndex(index) {
-    var key = GetPageKeyByIndex.call(this, index);
-
-    if (key) {
-      this.removePage(key);
-    }
-
-    return this;
+  var RemovePageMethods = {
+    removePage: RemovePage
   };
 
-  var RemovePageMethods = {
-    removePage: RemovePage,
-    removePageByIndex: RemovePageByIndex
+  var GetPage = function GetPage(key) {
+    if (typeof key === 'number') {
+      key = this.getPageKey(key);
+    }
+
+    return this.childrenMap.pages.getPage(key);
+  };
+
+  var GetTab = function GetTab(key) {
+    var index;
+
+    if (typeof key === 'number') {
+      index = key;
+    } else {
+      index = this.getPageIndex(key);
+    }
+
+    return this.getElement('tabs.buttons')[index];
   };
 
   var methods = {
+    getPageKey: GetPageKeyByIndex,
+    getPageIndex: GetPageIndexByKey,
     addPage: AddPage,
-    getPage: GetPage
+    getPage: GetPage,
+    getTab: GetTab
   };
   Object.assign(methods, SwapPageMethods, RemovePageMethods);
 
@@ -11167,8 +11188,14 @@
       });
       tabs.on('button.statechange', function (tab, index, value, previousValue) {
         var eventName = value ? 'tab.focus' : 'tab.blur';
-        this.emit(eventName, tab, index);
+        this.emit(eventName, tab, tab.name);
       }, _assertThisInitialized(_this));
+      pages.on('pagevisible', function (pageObject, key, pages) {
+        this.emit('page.focus', pageObject, key);
+      });
+      pages.on('pageinvisible', function (pageObject, key, pages) {
+        this.emit('page.blur', pageObject, key);
+      });
       return _this;
     }
 

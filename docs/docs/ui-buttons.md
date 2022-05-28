@@ -87,6 +87,7 @@ var buttons = scene.rexUI.add.buttons({
 
     orientation: 0,
     // rtl: false,
+    // buttonsType: undefined,
 
     // Elements
     // background: backgroundGameObject,
@@ -112,7 +113,6 @@ var buttons = scene.rexUI.add.buttons({
     // eventEmitter: this,
     // groupName: undefined,
 
-    // buttonsType: undefined,
     // setValueCallback: undefined,  // or setButtonStateCallback: undefined
     // setValueCallbackScope: undefined  // or setButtonStateCallbackScope: undefined
 });
@@ -133,6 +133,13 @@ var buttons = scene.rexUI.add.buttons({
 - `orientation` : Main orientation of button game objects.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange button game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top to bottom.
+- `rtl` : 
+    - `true` : Layout children from right to left.
+    - `false` : Layout children from left to right. Default behavior.
+- `buttonsType` : Type/behavior of these buttons.
+    - `undefined` : No extra behavior, default value.
+    - `'checkboxes'` : Set these buttons to checkboxes.
+    - `'radio'` : Set these buttons to radio.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `buttons` : Array of button game objects, or Space (`scene.rexUI.add.space()`).
 - `expand` : Set `true` to expand width, or height of buton game objects.
@@ -149,16 +156,12 @@ var buttons = scene.rexUI.add.buttons({
     - A number: Space between 2 button game objects.
     - An object: Padding of button game objects.
         - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
-        - `space.item` : Space between 2 button game objects.       
+        - `space.item` : Space between 2 button game objects.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `eventEmitter` : Dispatch buttons' touch events to other game object, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
-- `buttonsType` : Type/behavior of these buttons.
-    - `undefined` : No extra behavior, default value.
-    - `'checkboxes'` : Set these buttons to checkboxes.
-    - `'radio'` : Set these buttons to radio.
 - `setValueCallback`, or `setButtonStateCallback` : Callback to set value of a button.
     - `undefined` : No callback, default value.
     - A function object.

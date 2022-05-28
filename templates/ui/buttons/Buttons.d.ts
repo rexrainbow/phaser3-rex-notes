@@ -90,4 +90,6 @@ declare class Buttons extends Sizer {
     getButtonState(
         name: string
     ): boolean;
+
+    getAllButtonsState(): { [name: string]: boolean };
 }
