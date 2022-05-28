@@ -19,31 +19,31 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
-            title: createLabel(this, 'Title'),
+            title: CreateLabel(this, 'Title'),
 
             toolbar: [
-                createLabel(this, 'O'),
-                createLabel(this, 'X')
+                CreateLabel(this, 'O'),
+                CreateLabel(this, 'X')
             ],
 
             leftToolbar: [
-                createLabel(this, 'A'),
-                createLabel(this, 'B')
+                CreateLabel(this, 'A'),
+                CreateLabel(this, 'B')
             ],
 
-            content: createLabel(this, 'Content'),
+            content: CreateLabel(this, 'Content'),
 
-            description: createLabel(this, 'Description'),
+            description: CreateLabel(this, 'Description'),
 
             choices: [
-                createLabel(this, 'Choice0'),
-                createLabel(this, 'Choice1'),
-                createLabel(this, 'Choice2')
+                CreateLabel(this, 'Choice0'),
+                CreateLabel(this, 'Choice1'),
+                CreateLabel(this, 'Choice2')
             ],
 
             actions: [
-                createLabel(this, 'Action0'),
-                createLabel(this, 'Action1')
+                CreateLabel(this, 'Action0'),
+                CreateLabel(this, 'Action1')
             ],
 
             space: {
@@ -108,7 +108,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createLabel = function (scene, text) {
+var CreateLabel = function (scene, text) {
     return scene.rexUI.add.label({
         width: 40, // Minimum width of round-rectangle
         height: 40, // Minimum height of round-rectangle

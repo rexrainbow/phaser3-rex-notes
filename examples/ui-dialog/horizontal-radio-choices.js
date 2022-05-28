@@ -16,11 +16,11 @@ class Demo extends Phaser.Scene {
             x: 400,
             y: 300,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
+            background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x3e2723),
 
             title: this.rexUI.add.label({
-                background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
-                text: this.add.text(0, 0, 'Title', {
+                background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x1b0000),
+                text: this.add.text(0, 0, 'Question 10', {
                     fontSize: '24px'
                 }),
                 space: {
@@ -31,69 +31,74 @@ class Demo extends Phaser.Scene {
                 }
             }),
 
-            content: this.add.text(0, 0, 'Do you want to build a snow man?', {
+            content: this.add.text(0, 0, '1 + 1 + 1 + 1 + 1 = ', {
                 fontSize: '24px'
             }),
 
-            actions: [], // Assing an empty array instead of `undefined`
+            choicesType: 'x-radio',
+            choices: [
+                CreateLabel(this, '3', 'btn0'),
+                CreateLabel(this, '4', 'btn1'),
+                CreateLabel(this, '5', 'btn2'),
+                CreateLabel(this, '6', 'btn3')
+            ],
+            choicesSetValueCallback: function (button, value) {
+                if (value) {
+                    button.getElement('background').setStrokeStyle(1, 0xffffff);
+                } else {
+                    button.getElement('background').setStrokeStyle();
+                }
+            },
 
-            choices: [], // Assing an empty array instead of `undefined`
+            actions: [
+                CreateLabel(this, 'OK'),
+            ],
 
             space: {
                 title: 25,
                 content: 25,
-                action: 15,
+                choices: 25,
                 choice: 15,
 
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-                choices: 20,
+                left: 25,
+                right: 25,
+                top: 25,
+                bottom: 25,
             },
 
             align: {
-                actions: 'right', // 'center'|'left'|'right'
+                actions: 'right'
             },
 
             expand: {
                 content: false,  // Content is a pure text object
             }
         })
-            .addAction([
-                CreateLabel(this, 'Yes'),
-                CreateLabel(this, 'No')
-            ])
-            .addChoice([
-                CreateLabel(this, 'Choice-A'),
-                CreateLabel(this, 'Choice-B')
-            ])
             .layout()
-            // .drawBounds(this.add.graphics(), 0xff0000)
+            //.drawBounds(this.add.graphics(), 0xff0000)
             .popUp(1000);
 
         this.print = this.add.text(0, 0, '');
         dialog
             .on('button.click', function (button, groupName, index, pointer, event) {
-                this.print.text += index + ': ' + button.text + '\n';
+                this.print.text += `${groupName}[${index}] = ${button.text}\n`;
+
+                if (groupName === 'actions') {
+                    this.print.text += `Select: ${dialog.getChoicesSelectButtonName()}\n`;
+                }
+
             }, this)
-            .on('button.over', function (button, groupName, index, pointer, event) {
-                button.getElement('background').setStrokeStyle(1, 0xffffff);
-            })
-            .on('button.out', function (button, groupName, index, pointer, event) {
-                button.getElement('background').setStrokeStyle();
-            });
     }
 
     update() { }
 }
 
-var CreateLabel = function (scene, text) {
+var CreateLabel = function (scene, text, name) {
+    if (name === undefined) {
+        name = text;
+    }
     return scene.rexUI.add.label({
-        // width: 40,
-        // height: 40,
-
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x5e92f3),
+        background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x6a4f4b),
 
         text: scene.add.text(0, 0, text, {
             fontSize: '24px'
@@ -104,7 +109,9 @@ var CreateLabel = function (scene, text) {
             right: 10,
             top: 10,
             bottom: 10
-        }
+        },
+
+        name: name
     });
 }
 

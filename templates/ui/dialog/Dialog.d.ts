@@ -19,12 +19,15 @@ declare namespace Dialog {
             title?: number,
             titleLeft?: number,
             titleRight?: number,
+
             content?: number,
             contentLeft?: number,
             contentRight?: number,
+
             description?: number,
             descriptionLeft?: number,
             descriptionRight?: number,
+
             choices?: number,
             choicesLeft?: number,
             choicesRight?: number,
@@ -33,11 +36,15 @@ declare namespace Dialog {
 
             toolbarItem?: number,
             leftToolbarItem?: number,
+
             choice?: number,
+            choiceLine?: number,
+            choiceColumn?: number, choiceRow?: number,
             choicesBackgroundLeft?: number,
             choicesBackgroundRight?: number,
             choicesBackgroundTop?: number,
             choicesBackgroundBottom?: number,
+
             action?: number,
         };
 
@@ -57,6 +64,9 @@ declare namespace Dialog {
 
         description?: Phaser.GameObjects.GameObject,
 
+        choicesType?: string,
+        choicesWidth?: number,
+        choicesHeight?: number,
         choices?: Phaser.GameObjects.GameObject[],
 
         choicesBackground?: Phaser.GameObjects.GameObject,

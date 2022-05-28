@@ -8407,8 +8407,11 @@
 <li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MPZWZG">Yes-no dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MWvoErY">Action buttons with Space</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Radio choice dialog</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/WNMMvbg">Wrap-radio choice dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Radio choices dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/bGLLVXB">Horizontal-radio choices dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/WNMMvbg">Wrap-radio choices dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/KKQQpyj">Wrap-checkboxes choices dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/QWQQjJd">Grid-checkboxes choices dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NEpjmP">Pop-up dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/qBdQRmq">Ease-in, ease-out</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MWwPabw">Show/hide buttons</a></li>
@@ -8497,6 +8500,9 @@
 
     <span class="nx">description</span><span class="o">:</span> <span class="nx">descriptionGameObject</span><span class="p">,</span>
 
+    <span class="nx">choicesType</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="c1">// choicesWidth: undefined,</span>
+    <span class="c1">// choicesHeight: undefined,  // Used when choicesType is `&#39;grid&#39;`, `&#39;grid-radio&#39;`, or `&#39;grid-checkboxes&#39;`</span>
     <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="nx">buttonGameObject</span><span class="p">,</span>
@@ -8535,11 +8541,16 @@
 
         <span class="nx">toolbarItem</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">leftToolbarItem</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
         <span class="nx">choice</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="c1">// choiceLine: 0,   // Used when choicesType is `&#39;wrap&#39;`, `&#39;wrap-radio&#39;`, or `&#39;wrap-checkboxes&#39;`</span>
+        <span class="c1">// choiceColumn: 0, // Used when choicesType is `&#39;grid&#39;`, `&#39;grid-radio&#39;`, or `&#39;grid-checkboxes&#39;`</span>
+        <span class="c1">// choiceRow: 0,    // Used when choicesType is `&#39;grid&#39;`, `&#39;grid-radio&#39;`, or `&#39;grid-checkboxes&#39;`</span>
         <span class="nx">choicesBackgroundLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">choicesBackgroundRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">choicesBackgroundTop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">choicesBackgroundBottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
         <span class="nx">action</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
 
@@ -8605,17 +8616,21 @@
 <li><code>content</code> : Game object of content, optional.</li>
 <li><code>description</code> : Game object of description, optional.</li>
 <li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.<ul>
+<li>Array of Game objects, for <a href="../ui-buttons/">Buttons</a>/<a href="../ui-fixwidthbuttons/">FixWidthButtons</a> choices.<ul>
 <li><code>[]</code> : Assign an empty array if user will add button later.</li>
 </ul>
 </li>
+<li>2d Array of Game objects, for <a href="../ui-gridbuttons/">GridButtons</a> choices..</li>
+</ul>
+</li>
 <li><code>choicesBackground</code> : <a href="../ui-basesizer/#background">Game object of choices buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>choicesType</code> : Sizer type and behavior of choice buttons.<ul>
-<li><code>undefined</code>, or <code>''</code> : <a href="../ui-buttons/">Buttons</a> without any extra behavior, default behavior.</li>
-<li><code>'radio'</code> : <a href="../ui-buttons/">Buttons</a> with radio behavior.<ul>
+<li><code>choicesType</code> : Sizer type (<a href="../ui-buttons/">Buttons</a>/<a href="../ui-fixwidthbuttons/">FixWidthButtons</a>/<a href="../ui-gridbuttons/">GridButtons</a>) and behavior (<code>''</code>/<code>'radio'</code>/<code>'checkboxes'</code>) of choice buttons.<ul>
+<li><code>undefined</code>, <code>''</code>, or <code>'y'</code> : <a href="../ui-buttons/">Buttons</a> in vertical/horizontal without any extra behavior, default behavior.</li>
+<li><code>'radio'</code>, or <code>'x-radio'</code> : <a href="../ui-buttons/">Buttons</a> in vertical/horizontal, with radio behavior.<ul>
 <li>Name of selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code>.</li>
 </ul>
 </li>
-<li><code>'checkboxes'</code> : <a href="../ui-buttons/">Buttons</a> with checkboxes behavior.<ul>
+<li><code>'checkboxes'</code>, or <code>'x-checkboxes'</code> : <a href="../ui-buttons/">Buttons</a> in vertical/horizontal, with checkboxes behavior.<ul>
 <li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.</li>
 </ul>
 </li>
@@ -8628,6 +8643,19 @@
 <li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.</li>
 </ul>
 </li>
+<li><code>'grid'</code> : <a href="../ui-gridbuttons/">GridButtons</a> without any extra behavior, default behavior.</li>
+<li><code>'grid-radio'</code> : <a href="../ui-gridbuttons/">GridButtons</a> with radio behavior.<ul>
+<li>Name of Selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code></li>
+</ul>
+</li>
+<li><code>'grid-checkboxes'</code> : <a href="../ui-gridbuttons/">GridButtons</a> with checkboxes behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.        </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>choicesWidth</code>, <code>choicesHeight</code> : Minimum width, minimum height of choices.<ul>
+<li>Must assign <code>choicesHeight</code> value if using <a href="../ui-gridbuttons/">GridButtons</a> choices.</li>
 </ul>
 </li>
 <li><code>actions</code> : Array of Game objects, or Space (<code>scene.rexUI.add.space()</code>) for action-buttons group which arranged from left to right, optional.<ul>

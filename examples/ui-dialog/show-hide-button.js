@@ -71,17 +71,17 @@ var createDialog = function (scene) {
         }),
 
         choices: [
-            createLabel(scene, ' ', 0x6a4f4b),
-            createLabel(scene, ' ', 0x6a4f4b),
-            createLabel(scene, ' ', 0x6a4f4b),
-            createLabel(scene, ' ', 0x6a4f4b),
-            createLabel(scene, ' ', 0x6a4f4b)
+            CreateLabel(scene, ' ', 0x6a4f4b),
+            CreateLabel(scene, ' ', 0x6a4f4b),
+            CreateLabel(scene, ' ', 0x6a4f4b),
+            CreateLabel(scene, ' ', 0x6a4f4b),
+            CreateLabel(scene, ' ', 0x6a4f4b)
         ], // Support 5 choices
 
         actions: [
-            createLabel(scene, '', 0x1b0000),
-            createLabel(scene, '', 0x1b0000),
-            createLabel(scene, '', 0x1b0000)
+            CreateLabel(scene, '', 0x1b0000),
+            CreateLabel(scene, '', 0x1b0000),
+            CreateLabel(scene, '', 0x1b0000)
         ], // Support 3 actions
 
         space: {
@@ -102,7 +102,7 @@ var createDialog = function (scene) {
         }
     });
 }
-var createLabel = function (scene, text, backgroundColor) {
+var CreateLabel = function (scene, text, backgroundColor) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, backgroundColor),
 

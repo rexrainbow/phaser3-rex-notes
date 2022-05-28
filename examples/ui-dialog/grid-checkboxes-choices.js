@@ -31,25 +31,16 @@ class Demo extends Phaser.Scene {
                 }
             }),
 
-            content: this.add.text(0, 0, '1 + 2 + 3 + 4 + 5 = ', {
+            content: this.add.text(0, 0, 'When will you eat breakfast?', {
                 fontSize: '24px'
             }),
 
-            choicesType: 'wrap-radio',
+            choicesType: 'grid-checkboxes',
+            choicesHeight: 300,
             choices: [
-                CreateLabel(this, '3', 'btn0'),
-                CreateLabel(this, '4', 'btn1'),
-                CreateLabel(this, '5', 'btn2'),
-                CreateLabel(this, '6', 'btn3'),
-                CreateLabel(this, '7', 'btn4'),
-                CreateLabel(this, '8', 'btn5'),
-                CreateLabel(this, '9', 'btn6'),
-                CreateLabel(this, '10', 'btn7'),
-                CreateLabel(this, '11', 'btn8'),
-                CreateLabel(this, '12', 'btn9'),
-                CreateLabel(this, '13', 'btn10'),
-                CreateLabel(this, '14', 'btn11'),
-                CreateLabel(this, '15', 'btn12')
+                [CreateLabel(this, '5 AM', 'btn0'), CreateLabel(this, '6 AM', 'btn1'), CreateLabel(this, '7 AM', 'btn2')],
+                [CreateLabel(this, '8 AM', 'btn3'), CreateLabel(this, '9 AM', 'btn4'), CreateLabel(this, '10 AM', 'btn5')],
+                [CreateLabel(this, '11 AM', 'btn6'), CreateLabel(this, '12 PM', 'btn7'), CreateLabel(this, '1 PM', 'btn8')]
             ],
             choicesSetValueCallback: function (button, value) {
                 if (value) {
@@ -60,6 +51,7 @@ class Demo extends Phaser.Scene {
             },
 
             actions: [
+                CreateLabel(this, 'Clear'),
                 CreateLabel(this, 'OK'),
             ],
 
@@ -68,7 +60,7 @@ class Demo extends Phaser.Scene {
                 content: 25,
                 choices: 25,
                 choice: 15,
-                // choiceLine: 15,
+                action: 15,
 
                 left: 25,
                 right: 25,
@@ -91,10 +83,22 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
         dialog
             .on('button.click', function (button, groupName, index, pointer, event) {
-                this.print.text += `${groupName}[${index}] = ${button.text}\n`;
-
                 if (groupName === 'actions') {
-                    this.print.text += `Select: ${dialog.getChoicesSelectedButtonName()}\n`;
+                    if (index === 0) {
+                        // Clear
+                        dialog.clearChoicesButtonStates();
+                    } else {
+                        // OK
+                    }
+                    // Display button state
+                    var states = dialog.getChoicesButtonStates();
+                    var s = ''
+                    for (var name in states) {
+                        s += `${name}: ${states[name]}\n`;
+                    }
+                    this.print.text = s;
+                } else {
+                    this.print.text += `${groupName}[${index}] = ${button.text}\n`;
                 }
 
             }, this)

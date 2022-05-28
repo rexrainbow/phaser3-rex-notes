@@ -23829,30 +23829,47 @@
       }
 
       if (choices) {
-        var choicesType = GetValue$f(config, 'choicesType', '');
-        var ButtonsClass = choicesType.indexOf('wrap') !== -1 ? Buttons : Buttons$1;
-        var buttonsType = choicesType.indexOf('radio') !== -1 ? 'radio' : choicesType.indexOf('checkboxes') !== -1 ? 'checkboxes' : undefined;
+        var choicesType = GetValue$f(config, 'choicesType', '').split('-');
+        var ButtonsClass = Contains(choicesType, 'wrap') ? Buttons : Contains(choicesType, 'grid') ? GridButtons : Buttons$1;
+        var buttonsType = Contains(choicesType, 'radio') ? 'radio' : Contains(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
+        var space = {
+          left: GetValue$f(config, 'space.choicesBackgroundLeft', 0),
+          right: GetValue$f(config, 'space.choicesBackgroundRight', 0),
+          top: GetValue$f(config, 'space.choicesBackgroundTop', 0),
+          bottom: GetValue$f(config, 'space.choicesBackgroundBottom', 0)
+        };
         var itemSpace = GetValue$f(config, 'space.choice', 0);
-        choicesSizer = new ButtonsClass(scene, {
+
+        if (ButtonsClass === Buttons$1) {
+          space.item = itemSpace;
+        } else if (ButtonsClass === Buttons) {
+          space.item = itemSpace;
+          space.line = GetValue$f(config, 'space.choiceLine', itemSpace);
+        } else {
+          // GridButtons
+          space.column = GetValue$f(config, 'space.choiceColumn', itemSpace);
+          space.row = GetValue$f(config, 'space.choiceRow', itemSpace);
+        }
+
+        var choicesConfig = {
+          width: GetValue$f(config, 'choicesWidth', undefined),
+          height: GetValue$f(config, 'choicesHeight', undefined),
           groupName: 'choices',
           buttonsType: buttonsType,
           background: choicesBackground,
           buttons: choices,
-          orientation: 1,
-          // Top-Bottom
-          space: {
-            left: GetValue$f(config, 'space.choicesBackgroundLeft', 0),
-            right: GetValue$f(config, 'space.choicesBackgroundRight', 0),
-            top: GetValue$f(config, 'space.choicesBackgroundTop', 0),
-            bottom: GetValue$f(config, 'space.choicesBackgroundBottom', 0),
-            item: itemSpace,
-            line: GetValue$f(config, 'space.choiceLine', itemSpace)
-          },
+          space: space,
           click: clickConfig,
           eventEmitter: _this.eventEmitter,
           setValueCallback: GetValue$f(config, 'choicesSetValueCallback', undefined),
           setValueCallbackScope: GetValue$f(config, 'choicesSetValueCallbackScope', undefined)
-        });
+        };
+
+        if (ButtonsClass === Buttons$1) {
+          choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
+        }
+
+        choicesSizer = new ButtonsClass(scene, choicesConfig);
         var choicesSpace = GetValue$f(config, 'space.choices', 0);
         var padding = {
           left: GetValue$f(config, 'space.choicesLeft', 0),
@@ -23925,6 +23942,10 @@
 
     return _createClass(Dialog);
   }(Sizer);
+
+  var Contains = function Contains(arr, item) {
+    return arr.indexOf(item) !== -1;
+  };
 
   Object.assign(Dialog.prototype, ButtonMethods);
 

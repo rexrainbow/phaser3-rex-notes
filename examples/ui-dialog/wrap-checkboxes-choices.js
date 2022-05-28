@@ -37,14 +37,14 @@ class Demo extends Phaser.Scene {
 
             choicesType: 'wrap-checkboxes',
             choices: [
-                createLabel(this, '5 AM', 'btn0'),
-                createLabel(this, '6 AM', 'btn1'),
-                createLabel(this, '7 AM', 'btn2'),
-                createLabel(this, '8 AM', 'btn3'),
-                createLabel(this, '9 AM', 'btn4'),
-                createLabel(this, '10 AM', 'btn5'),
-                createLabel(this, '11 AM', 'btn6'),
-                createLabel(this, '12 PM', 'btn7'),
+                CreateLabel(this, '5 AM', 'btn0'),
+                CreateLabel(this, '6 AM', 'btn1'),
+                CreateLabel(this, '7 AM', 'btn2'),
+                CreateLabel(this, '8 AM', 'btn3'),
+                CreateLabel(this, '9 AM', 'btn4'),
+                CreateLabel(this, '10 AM', 'btn5'),
+                CreateLabel(this, '11 AM', 'btn6'),
+                CreateLabel(this, '12 PM', 'btn7'),
             ],
             choicesSetValueCallback: function (button, value) {
                 if (value) {
@@ -55,8 +55,8 @@ class Demo extends Phaser.Scene {
             },
 
             actions: [
-                createLabel(this, 'Clear'),
-                createLabel(this, 'OK'),
+                CreateLabel(this, 'Clear'),
+                CreateLabel(this, 'OK'),
             ],
 
             space: {
@@ -111,7 +111,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createLabel = function (scene, text, name) {
+var CreateLabel = function (scene, text, name) {
     if (name === undefined) {
         name = text;
     }

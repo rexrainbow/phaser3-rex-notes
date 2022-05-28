@@ -36,8 +36,8 @@ class Demo extends Phaser.Scene {
             }),
 
             actions: [
-                createLabel(this, 'Yes'),
-                createLabel(this, 'No')
+                CreateLabel(this, 'Yes'),
+                CreateLabel(this, 'No')
             ],
 
             space: {
@@ -79,7 +79,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createLabel = function (scene, text) {
+var CreateLabel = function (scene, text) {
     return scene.rexUI.add.label({
         // width: 40,
         // height: 40,

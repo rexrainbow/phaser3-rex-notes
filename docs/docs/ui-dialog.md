@@ -10,8 +10,11 @@ A container with a title, content, buttons and background.
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
 - [Yes-no dialog](https://codepen.io/rexrainbow/pen/MPZWZG)
 - [Action buttons with Space](https://codepen.io/rexrainbow/pen/MWvoErY)
-- [Radio choice dialog](https://codepen.io/rexrainbow/pen/ePoRVz)
-- [Wrap-radio choice dialog](https://codepen.io/rexrainbow/pen/WNMMvbg)
+- [Radio choices dialog](https://codepen.io/rexrainbow/pen/ePoRVz)
+- [Horizontal-radio choices dialog](https://codepen.io/rexrainbow/pen/bGLLVXB)
+- [Wrap-radio choices dialog](https://codepen.io/rexrainbow/pen/WNMMvbg)
+- [Wrap-checkboxes choices dialog](https://codepen.io/rexrainbow/pen/KKQQpyj)
+- [Grid-checkboxes choices dialog](https://codepen.io/rexrainbow/pen/QWQQjJd)
 - [Pop-up dialog](https://codepen.io/rexrainbow/pen/NEpjmP)
 - [Ease-in, ease-out](https://codepen.io/rexrainbow/pen/qBdQRmq)
 - [Show/hide buttons](https://codepen.io/rexrainbow/pen/MWwPabw)
@@ -113,6 +116,9 @@ var dialog = scene.rexUI.add.dialog({
 
     description: descriptionGameObject,
 
+    choicesType: '',
+    // choicesWidth: undefined,
+    // choicesHeight: undefined,  // Used when choicesType is `'grid'`, `'grid-radio'`, or `'grid-checkboxes'`
     choices: [
         buttonGameObject,
         buttonGameObject,
@@ -151,11 +157,16 @@ var dialog = scene.rexUI.add.dialog({
 
         toolbarItem: 0,
         leftToolbarItem: 0,
+
         choice: 0,
+        // choiceLine: 0,   // Used when choicesType is `'wrap'`, `'wrap-radio'`, or `'wrap-checkboxes'`
+        // choiceColumn: 0, // Used when choicesType is `'grid'`, `'grid-radio'`, or `'grid-checkboxes'`
+        // choiceRow: 0,    // Used when choicesType is `'grid'`, `'grid-radio'`, or `'grid-checkboxes'`
         choicesBackgroundLeft: 0,
         choicesBackgroundRight: 0,
         choicesBackgroundTop: 0,
         choicesBackgroundBottom: 0,
+
         action: 0,
     },
 
@@ -209,19 +220,28 @@ var dialog = scene.rexUI.add.dialog({
 - `content` : Game object of content, optional.
 - `description` : Game object of description, optional.
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
-    - `[]` : Assign an empty array if user will add button later.
+    - Array of Game objects, for [Buttons](ui-buttons.md)/[FixWidthButtons](ui-fixwidthbuttons.md) choices.
+        - `[]` : Assign an empty array if user will add button later.
+    - 2d Array of Game objects, for [GridButtons](ui-gridbuttons.md) choices..
 - `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
-- `choicesType` : Sizer type and behavior of choice buttons.
-    - `undefined`, or `''` : [Buttons](ui-buttons.md) without any extra behavior, default behavior.
-    - `'radio'` : [Buttons](ui-buttons.md) with radio behavior.
+- `choicesType` : Sizer type ([Buttons](ui-buttons.md)/[FixWidthButtons](ui-fixwidthbuttons.md)/[GridButtons](ui-gridbuttons.md)) and behavior (`''`/`'radio'`/`'checkboxes'`) of choice buttons.
+    - `undefined`, `''`, or `'y'` : [Buttons](ui-buttons.md) in vertical/horizontal without any extra behavior, default behavior.
+    - `'radio'`, or `'x-radio'` : [Buttons](ui-buttons.md) in vertical/horizontal, with radio behavior.
         - Name of selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`.
-    - `'checkboxes'` : [Buttons](ui-buttons.md) with checkboxes behavior.
+    - `'checkboxes'`, or `'x-checkboxes'` : [Buttons](ui-buttons.md) in vertical/horizontal, with checkboxes behavior.
         - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
     - `'wrap'` : [FixWidthButtons](ui-fixwidthbuttons.md) without any extra behavior, default behavior.
     - `'wrap-radio'` : [FixWidthButtons](ui-fixwidthbuttons.md) with radio behavior.
         - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
     - `'wrap-checkboxes'` : [FixWidthButtons](ui-fixwidthbuttons.md) with checkboxes behavior.
         - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
+    - `'grid'` : [GridButtons](ui-gridbuttons.md) without any extra behavior, default behavior.
+    - `'grid-radio'` : [GridButtons](ui-gridbuttons.md) with radio behavior.
+        - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
+    - `'grid-checkboxes'` : [GridButtons](ui-gridbuttons.md) with checkboxes behavior.
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.        
+- `choicesWidth`, `choicesHeight` : Minimum width, minimum height of choices.
+    - Must assign `choicesHeight` value if using [GridButtons](ui-gridbuttons.md) choices.
 - `actions` : Array of Game objects, or Space (`scene.rexUI.add.space()`) for action-buttons group which arranged from left to right, optional.
     - `[]` : Assign an empty array if user will add button later.
 - `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.

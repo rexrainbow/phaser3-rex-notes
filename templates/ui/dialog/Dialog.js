@@ -1,6 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
+import GridButtons from '../gridbuttons/GridButtons.js';
 import ButtonMethods from './ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -194,30 +195,49 @@ class Dialog extends Sizer {
         }
 
         if (choices) {
-            var choicesType = GetValue(config, 'choicesType', '');
-            var ButtonsClass = (choicesType.indexOf('wrap') !== -1) ? FixWidthButtons : Buttons;
-            var buttonsType = (choicesType.indexOf('radio') !== -1) ? 'radio' :
-                (choicesType.indexOf('checkboxes') !== -1) ? 'checkboxes' : undefined;
+            var choicesType = GetValue(config, 'choicesType', '').split('-');
+            var ButtonsClass = Contains(choicesType, 'wrap') ? FixWidthButtons :
+                Contains(choicesType, 'grid') ? GridButtons :
+                    Buttons;
+            var buttonsType = Contains(choicesType, 'radio') ? 'radio' :
+                Contains(choicesType, 'checkboxes') ? 'checkboxes' : undefined;
+
+            var space = {
+                left: GetValue(config, 'space.choicesBackgroundLeft', 0),
+                right: GetValue(config, 'space.choicesBackgroundRight', 0),
+                top: GetValue(config, 'space.choicesBackgroundTop', 0),
+                bottom: GetValue(config, 'space.choicesBackgroundBottom', 0),
+            };
             var itemSpace = GetValue(config, 'space.choice', 0);
-            choicesSizer = new ButtonsClass(scene, {
+            if (ButtonsClass === Buttons) {
+                space.item = itemSpace;
+            } else if (ButtonsClass === FixWidthButtons) {
+                space.item = itemSpace;
+                space.line = GetValue(config, 'space.choiceLine', itemSpace);
+            } else {  // GridButtons
+                space.column = GetValue(config, 'space.choiceColumn', itemSpace);
+                space.row = GetValue(config, 'space.choiceRow', itemSpace);
+            }
+
+            var choicesConfig = {
+                width: GetValue(config, 'choicesWidth', undefined),
+                height: GetValue(config, 'choicesHeight', undefined),
                 groupName: 'choices',
                 buttonsType: buttonsType,
                 background: choicesBackground,
                 buttons: choices,
-                orientation: 1, // Top-Bottom
-                space: {
-                    left: GetValue(config, 'space.choicesBackgroundLeft', 0),
-                    right: GetValue(config, 'space.choicesBackgroundRight', 0),
-                    top: GetValue(config, 'space.choicesBackgroundTop', 0),
-                    bottom: GetValue(config, 'space.choicesBackgroundBottom', 0),
-                    item: itemSpace,
-                    line: GetValue(config, 'space.choiceLine', itemSpace),
-                },
+                space: space,
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
                 setValueCallback: GetValue(config, 'choicesSetValueCallback', undefined),
                 setValueCallbackScope: GetValue(config, 'choicesSetValueCallbackScope', undefined)
-            });
+            };
+
+            if (ButtonsClass === Buttons) {
+                choicesConfig.orientation = Contains(choicesType, 'x') ? 0 : 1;
+            }
+
+            choicesSizer = new ButtonsClass(scene, choicesConfig);
             var choicesSpace = GetValue(config, 'space.choices', 0);
             var padding = {
                 left: GetValue(config, 'space.choicesLeft', 0),
@@ -267,6 +287,10 @@ class Dialog extends Sizer {
         this.addChildrenMap('toolbarSizer', toolbarSizer);
         this.addChildrenMap('leftToolbarSizer', leftToolbarSizer);
     }
+}
+
+var Contains = function (arr, item) {
+    return arr.indexOf(item) !== -1;
 }
 
 Object.assign(

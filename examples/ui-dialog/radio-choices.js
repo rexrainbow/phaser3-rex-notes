@@ -37,10 +37,10 @@ class Demo extends Phaser.Scene {
 
             choicesType: 'radio',
             choices: [
-                createLabel(this, '3', 'btn0'),
-                createLabel(this, '4', 'btn1'),
-                createLabel(this, '5', 'btn2'),
-                createLabel(this, '6', 'btn3')
+                CreateLabel(this, '3', 'btn0'),
+                CreateLabel(this, '4', 'btn1'),
+                CreateLabel(this, '5', 'btn2'),
+                CreateLabel(this, '6', 'btn3')
             ],
             choicesSetValueCallback: function (button, value) {
                 if (value) {
@@ -51,7 +51,7 @@ class Demo extends Phaser.Scene {
             },
 
             actions: [
-                createLabel(this, 'OK'),
+                CreateLabel(this, 'OK'),
             ],
 
             space: {
@@ -93,7 +93,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createLabel = function (scene, text, name) {
+var CreateLabel = function (scene, text, name) {
     if (name === undefined) {
         name = text;
     }
