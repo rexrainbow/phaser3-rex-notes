@@ -8,18 +8,20 @@ export default TabPages;
 
 declare namespace TabPages {
 
-    type tabPositionType = 'top' | 'bottom' | 'left' | 'right';
-
     interface IConfig extends Sizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
 
-        tabPosition?: tabPositionType,
+        tabPosition?: 'top' | 'bottom' | 'left' | 'right',
         tabs?: Buttons.IConfig,
         pages?: Pages.IConfig,
 
         expand?: {
             tabs?: boolean
         },
+
+        align?: {
+            tabs?: 'top' | 'bottom' | 'left' | 'right' | 'center'
+        }
 
         
     }

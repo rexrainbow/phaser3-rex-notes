@@ -8,7 +8,11 @@ var CreateChildren = function (scene, data, subKey, styles, customBuilders) {
 
     if (Array.isArray(childData)) {
         for (var i = 0, cnt = childData.length; i < cnt; i++) {
-            CreateChild(scene, childData, i, styles, customBuilders);
+            if (Array.isArray(childData[i])) { // Nested array
+                CreateChildren(scene, childData, i, styles, customBuilders);
+            } else {
+                CreateChild(scene, childData, i, styles, customBuilders);
+            }
         }
     } else {
         for (var key in childData) {

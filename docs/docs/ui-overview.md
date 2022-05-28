@@ -101,6 +101,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
 1. [Sizer](ui-sizer.md): Layout children game objects.
 1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
+1. [Tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
 1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.

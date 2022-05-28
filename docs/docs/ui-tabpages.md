@@ -112,7 +112,7 @@ var tabPages = scene.rexUI.add.tabPages({
         tabs: 'left',
     },
 
-    // space: { left: 0, right:0, top:0, bottom:0 },
+    // space: { left:0, right:0, top:0, bottom:0, item:0 },
 
     // name: '',
     // draggable: false,
@@ -156,13 +156,15 @@ var tabPages = scene.rexUI.add.tabPages({
     - `pages.fadeIn` : Fade-in duration of current page.
         - `0` : No fade-in effect. Default behavior.
 - `expand` :
-    - `tabs` : Set `true` to expand width/height of tabs. Default value is `false`.
+    - `expand.tabs` : Set `true` to expand width/height of tabs. Default value is `false`.
 - `align` :
-    - `tabs` :  
+    - `align.tabs` :  
+        - `'left'`. `'right'`, `'center'` : Align tabs to left/right/center side when `tabPosition` is `'top'` or `'bottom'`.
+        - `'top'`. `'bottom'`, `'center'` : Align tabs to top/bottom/center side when `tabPosition` is `'left'` or `'right'`.
 - `space` :
     - An object: Padding of button game objects.
         - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
-        - `space.item` : Space between 2 button game objects.
+        - `space.item` : Space between tabs and pages.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
@@ -171,7 +173,7 @@ var tabPages = scene.rexUI.add.tabPages({
 
 - Define class
     ```javascript
-    class MyPages extends RexPlugins.UI.Pages {
+    class MyTabPages extends RexPlugins.UI.TabPages {
         constructor(scene, config) {
             super(scene, config);
             // ...
@@ -182,173 +184,137 @@ var tabPages = scene.rexUI.add.tabPages({
     ```
 - Create instance
     ```javascript
-    var pages = new MyPages(scene, config);
+    var tabPages = new MyTabPages(scene, config);
     ```
-
-### Add background
-
-```javascript
-pages.addBackground(child);
-```
-
-or
-
-```javascript
-pages.addBackground(child, {left: 0, right: 0, top: 0, bottom: 0}, key);
-```
-
-- `left`, `right`, `top`, `bottom` : Extra padded space. Default is 0.
-- `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
 
 ### Add page
 
+Add a tab/page to last of tabs/pages.
+
 ```javascript
-pages.addPage(child, key, align, padding, expand);
-// pages.add(child, key, align, padding, expand);
+tabPages.addPage(key, tabGameObject, pageGameObject).layout();
 ```
 
 or 
 
 ```javascript
-pages.addPage(child, 
-    {
-        key: 0,
-        align: Phaser.Display.Align.TOP_LEFT,
-        padding: {left: 0, right: 0, top: 0, bottom: 0}, 
-        expand: true
-    }
-);
-// pages.add(child, config);
+tabPages.addPage({
+    // key: undefined,
+    tab: tabGameObject,
+    page: pageGameObject
+}).layout();
 ```
 
-- `child` : A game object.
-- `key` : Unique name of this page.
-- `align` :
-    - `'left-top'`, or `Phaser.Display.Align.TOP_LEFT` : Align game object at left-top. Default value.
-    - `'left-center'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
-    - `'left-bottom'`, or `Phaser.Display.Align.LEFT_BOTTOM` : Align game object at left-bottom.
-    - `'center-top'`, or `Phaser.Display.Align.TOP_CENTER` : Align game object at center-top.
-    - `'center-center'`, or `Phaser.Display.Align.CENTER` : Align game object at center-center.
-    - `'center-bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at center-bottom.
-    - `'right-top'`, or `Phaser.Display.Align.TOP_RIGHT` : Align game object at right-top.
-    - `'right-center'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
-    - `'right-bottom'`, or `Phaser.Display.Align.RIGHT_BOTTOM` : Align game object at right-bottom.
-- `padding` : Add space between bounds. Default is 0.
-    - A number for left/right/top/bottom bounds,
-    - Or a plain object.
-        ```javascript
-        {
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0
-        }
-        ```
-- `expand` : Expand width and height of the page.
-    - `true` : Expand width and height.
-    - `false` : Don't expand width or height.
-    - A plain object, to expand width or height
-        ```javascript
-        {
-            width: true,
-            height: true
-        }
-        ```
-        - `expand.width` : Expand width.
-        - `expand.height` : Expand height.
+- `key` : Unique string name of this page.
+    - `undefined` : Create an [UUID](uuid.md) for key.
+- `tab` : A game object, will put it into tabs.
+- `page` : A game object, will put it into pages.
+
+!!! note
+    Invoke `tabPages.layout()` after adding pages.
 
 ### Swap to page
 
-```javascript
-pages.swapPage(key);
-```
-
-- `key` : Unique name of this page.
-
-!!! note
-    This method will run `pages.layout()` to arrange position of current page.
-
-### Page name
-
-- Current page name
+- Swap to related page when clicking tab.
+- Swap to page by key/index
     ```javascript
-    var pageName = pages.currentKey;
+    tabPages.swapPage(key);
+    ```
+    ```javascript
+    tabPages.swapPage(index);
+    ```
+    - `key` : Unique string name of the page.
+    - `index` : Index number in tabs.
+- Swap to first page
+    ```javascript
+    tabPages.swapFirstPage();
+    ```
+- Swap to last page
+    ```javascript
+    tabPages.swapLastPage();
     ```
 
-- Previous page name
-    ```javascript
-    var pageName = pages.previousKey;
-    ```
-- Name of all pages
-    ```javascript
-    var names = pages.keys;
-    ```
+### Remove page
 
-### Page object
-
-- Get page object
+- Remove page
     ```javascript
-    var pageObject = pages.getPage(key);
+    tabPages.removePage(key);
     ```
-    - `pageObject` : A game object or `null`.
-- Current page object
     ```javascript
-    var pageObject = pages.currentPage;
+    tabPages.removePage(index);
     ```
-- Previous page object
+- Remove and destroy page
     ```javascript
-    var pageObject = pages.previousPage;
+    tabPages.removePage(key, true);
     ```
-
-### Fade in duration
-
-```javascript
-pages.setFadeInDuration(duration);
-```
-
-- `0` : No fade-in effect.
+    ```javascript
+    tabPages.removePage(index, true);
+    ```
 
 ### Get element
 
 - Get element
-    - All page game objects
+    - [Pages](ui-pages.md)
         ```javascript
-        var gameObjects = pages.getElement('items');
+        var gameObject = tabPages.getElement('pages');
         ```
+    - Tabs, a [buttons](ui-buttons.md)
+        ```javascript
+        var gameObject = tabPages.getElement('tabs');
+        ```
+    - Page by key/index
+        ```javascript
+        var gameObject = tabPages.getPage(key);
+        ```
+        ```javascript
+        var gameObject = tabPages.getPage(index);
+        ```
+        - `key` : Unique string name of the page.
+        - `index` : Index number in tabs.
+    - Tab by key/index
+        ```javascript
+        var gameObjects = tabPages.getTab(key);
+        ```
+        ```javascript
+        var gameObjects = tabPages.getTab(index);
+        ```
+        - `key` : Unique string name of the page.
+        - `index` : Index number in tabs.
 - Get by name
     ```javascript
-    var gameObject = pages.getElement('#' + name);
+    var gameObject = tabPages.getElement('#' + name);
     // var gameObject = pages.getElement('#' + name, recursive);
     ```
     or
     ```javascript
-    var gameObject = pages.getByName('#' + name);
-    // var gameObject = pages.getByName('#' + name, recursive);
+    var gameObject = tabPages.getByName('#' + name);
+    // var gameObject = tabPages.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 
 ### Other properties
 
-See [base sizer object](ui-basesizer.md).
+See [base sizer object](ui-basesizer.md), [Pages](ui-pages.md), [Buttons](ui-buttons.md)
 
 ### Events
 
-- Set page invisible, triggered when page is swapped out.
+- When swapping to a page by clicking tab, or `tabPages.swapPage(key)`
     ```javascript
-    pages.on('pageinvisible', function(pageObject, key, pages) {
+    pages.on('tab.focus', function(tab, key) {
+        // ...
+    }, scope);
+    pages.on('page.focus', function(page, key) {
         // ...
     }, scope);
     ```
-    - `pageObject` : Game object of page.
-    - `key` : Page name.
-    - `pages` : Pages object
-- Set page visible, triggered when page is shown.
     ```javascript
-    pages.on('pagevisible', function(pageObject, key, pages) {
+    pages.on('tab.blur', function(tab, key) {
         // ...
     }, scope);
+    pages.on('page.blur', function(page, key) {
+        // ...
+    }, scope);    
     ```
-    - `pageObject` : Game object of page.
-    - `key` : Page name.
-    - `pages` : Pages object
+    - `tab` : Game object of tab.
+    - `page` : Game object of page.
+    - `key` : Unique string name of the page.

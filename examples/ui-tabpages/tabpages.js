@@ -34,10 +34,10 @@ class Demo extends Phaser.Scene {
             space: { left: 5, right: 5, top: 5, bottom: 5, item: 10 }
 
         })
-            .on('tab.focus', function (tab, index) {
+            .on('tab.focus', function (tab, key) {
                 tab.getElement('background').setStrokeStyle(2, COLOR_LIGHT);
             })
-            .on('tab.blur', function (tab, index) {
+            .on('tab.blur', function (tab, key) {
                 tab.getElement('background').setStrokeStyle();
             })
 

@@ -179,6 +179,7 @@
 1. [UI/scroll bar](ui-scrollbar.md): A container with slider, two buttons, and background.
 1. [UI/sizer](ui-sizer.md): Layout children game objects.
 1. [UI/slider](ui-slider.md): A container with a track, indicator, thumb and background.
+1. [UI/tab-pages](ui-tabpages.md): A container with tabs and pages, only current page is visible.
 1. [UI/tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [UI/text area](ui-textarea.md): A container with a text, slider, and scroller.
 1. [UI/text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.

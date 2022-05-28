@@ -373,13 +373,15 @@ nav:
         - Scroll bar: ui-scrollbar.md
         - Number bar: ui-numberbar.md
         - Knob: ui-knob.md
+    - Page:
+        - Pages: ui-pages.md
+        - Tab pages: ui-tabpages.md
     - Dialog: ui-dialog.md
     - Menu: ui-menu.md
     - Drop down list: ui-dropdownlist.md
     - Text box: ui-textbox.md   
     - Toast: ui-toast.md    
-    - Tabs: ui-tabs.md    
-    - Pages: ui-pages.md
+    - Tabs: ui-tabs.md        
     - Holy grail: ui-holygrail.md
     - Chart: ui-chart.md    
 - Board:
