@@ -210,10 +210,17 @@ var dialog = scene.rexUI.add.dialog({
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
     - `[]` : Assign an empty array if user will add button later.
 - `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
-- `choicesType` : Type/behavior of choice buttons.
-    - `undefined` : No extra behavior, default value.
-    - `'checkboxes'` : Set these buttons to checkboxes.
-    - `'radio'` : Set these buttons to radio.
+- `choicesType` : Sizer type and behavior of choice buttons.
+    - `undefined`, or `''` : [Buttons](ui-buttons.md) without any extra behavior, default behavior.
+    - `'radio'` : [Buttons](ui-buttons.md) with radio behavior.
+        - Name of selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`.
+    - `'checkboxes'` : [Buttons](ui-buttons.md) with checkboxes behavior.
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
+    - `'wrap'` : [FixWidthButtons](ui-fixwidthbuttons.md) without any extra behavior, default behavior.
+    - `'wrap-radio'` : [FixWidthButtons](ui-fixwidthbuttons.md) with radio behavior.
+        - Name of Selected button game object (`gameObject.name`) will be returned via method `dialog.setChoicesSelectedButtonName()`
+    - `'wrap-checkboxes'` : [FixWidthButtons](ui-fixwidthbuttons.md) with checkboxes behavior.
+        - Name of selected button game object (`gameObject.name`) will be return via method `dialog.getChoicessButtonStates()`.
 - `actions` : Array of Game objects, or Space (`scene.rexUI.add.space()`) for action-buttons group which arranged from left to right, optional.
     - `[]` : Assign an empty array if user will add button later.
 - `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
@@ -556,4 +563,35 @@ dialog.forEachLeftToolbar(callback, scope);
     function(button, index, buttons) {
         // ...
     }
+    ```
+
+### State of choices buttons
+
+#### Radio
+
+- Read state
+    ```javascript
+    var value = dialog.getSelectedButtonName();
+    ```
+- Set state
+    ```javascript
+    dialog.setChoicesSelectedButtonName(name);
+    ```
+
+#### Checkboxes
+
+- Read states
+    ```javascript
+    var states = dialog.getChoicesButtonStates();
+    ```
+    - `states` : `{name: boolean}`
+- Set state
+    ```javascript
+    dialog.setChoicesButtonState(name, state);
+    ```
+    - `name` : Name of button game object
+    - `state` : Set `true` if button is selected
+- Clear all states to `false`
+    ```javascript
+    dialog.clearChoicesButtonStates();
     ```

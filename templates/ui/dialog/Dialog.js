@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
+import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import ButtonMethods from './ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -185,29 +186,35 @@ class Dialog extends Sizer {
                 right: GetValue(config, 'space.descriptionRight', 0),
                 bottom: ((choices || actions) ? descriptionSpace : 0)
             }
-            var expand = GetValue(config, 'expand.description', true);        
+            var expand = GetValue(config, 'expand.description', true);
             this.add(
                 description,
                 { align: align, padding: padding, expand: expand }
             );
         }
 
-        if (choices) {            
-            choicesSizer = new Buttons(scene, {
+        if (choices) {
+            var choicesType = GetValue(config, 'choicesType', '');
+            var ButtonsClass = (choicesType.indexOf('wrap') !== -1) ? FixWidthButtons : Buttons;
+            var buttonsType = (choicesType.indexOf('radio') !== -1) ? 'radio' :
+                (choicesType.indexOf('checkboxes') !== -1) ? 'checkboxes' : undefined;
+            var itemSpace = GetValue(config, 'space.choice', 0);
+            choicesSizer = new ButtonsClass(scene, {
                 groupName: 'choices',
-                buttonsType: GetValue(config, 'choicesType', undefined),
+                buttonsType: buttonsType,
                 background: choicesBackground,
                 buttons: choices,
                 orientation: 1, // Top-Bottom
-                space: { 
+                space: {
                     left: GetValue(config, 'space.choicesBackgroundLeft', 0),
                     right: GetValue(config, 'space.choicesBackgroundRight', 0),
                     top: GetValue(config, 'space.choicesBackgroundTop', 0),
                     bottom: GetValue(config, 'space.choicesBackgroundBottom', 0),
-                    item: GetValue(config, 'space.choice', 0) 
+                    item: itemSpace,
+                    line: GetValue(config, 'space.choiceLine', itemSpace),
                 },
                 click: clickConfig,
-                eventEmitter: this.eventEmitter,              
+                eventEmitter: this.eventEmitter,
                 setValueCallback: GetValue(config, 'choicesSetValueCallback', undefined),
                 setValueCallbackScope: GetValue(config, 'choicesSetValueCallbackScope', undefined)
             });

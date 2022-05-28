@@ -31720,15 +31720,16 @@
       this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
       return this;
     },
+    // Checkboxes
+    getChoicesButtonStates: function getChoicesButtonStates() {
+      this.childrenMap.choicesSizer.getAllButtonsState();
+    },
     getChoicesButtonState: function getChoicesButtonState(name) {
       if (name === undefined) {
         return this.childrenMap.choicesSizer.getAllButtonsState();
       } else {
         return this.childrenMap.choicesSizer.getButtonState(name);
       }
-    },
-    getChoicessButtonStates: function getChoicessButtonStates() {
-      this.childrenMap.choicesSizer.getAllButtonsState();
     },
     setChoicesButtonState: function setChoicesButtonState(name, state) {
       this.childrenMap.choicesSizer.setButtonState(name, state);
@@ -31738,8 +31739,13 @@
       this.childrenMap.choicesSizer.clearAllButtonsState();
       return this;
     },
-    getChoicesSelectButtonName: function getChoicesSelectButtonName() {
+    // Radio buttons
+    getChoicesSelectedButtonName: function getChoicesSelectedButtonName() {
       return this.childrenMap.choicesSizer.getSelectedButtonName();
+    },
+    setChoicesSelectedButtonName: function setChoicesSelectedButtonName(name) {
+      this.childrenMap.choicesSizer.setSelectedButtonName(name);
+      return this;
     }
   };
 
@@ -31978,9 +31984,13 @@
       }
 
       if (choices) {
-        choicesSizer = new Buttons$1(scene, {
+        var choicesType = GetValue$L(config, 'choicesType', '');
+        var ButtonsClass = choicesType.indexOf('wrap') !== -1 ? Buttons : Buttons$1;
+        var buttonsType = choicesType.indexOf('radio') !== -1 ? 'radio' : choicesType.indexOf('checkboxes') !== -1 ? 'checkboxes' : undefined;
+        var itemSpace = GetValue$L(config, 'space.choice', 0);
+        choicesSizer = new ButtonsClass(scene, {
           groupName: 'choices',
-          buttonsType: GetValue$L(config, 'choicesType', undefined),
+          buttonsType: buttonsType,
           background: choicesBackground,
           buttons: choices,
           orientation: 1,
@@ -31990,7 +32000,8 @@
             right: GetValue$L(config, 'space.choicesBackgroundRight', 0),
             top: GetValue$L(config, 'space.choicesBackgroundTop', 0),
             bottom: GetValue$L(config, 'space.choicesBackgroundBottom', 0),
-            item: GetValue$L(config, 'space.choice', 0)
+            item: itemSpace,
+            line: GetValue$L(config, 'space.choiceLine', itemSpace)
           },
           click: clickConfig,
           eventEmitter: _this.eventEmitter,

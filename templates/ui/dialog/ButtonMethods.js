@@ -211,16 +211,17 @@ export default {
         return this;
     },
 
+    // Checkboxes
+    getChoicesButtonStates() {
+        this.childrenMap.choicesSizer.getAllButtonsState();
+    },
+
     getChoicesButtonState(name) {
         if (name === undefined) {
             return this.childrenMap.choicesSizer.getAllButtonsState();
         } else {
             return this.childrenMap.choicesSizer.getButtonState(name);
         }
-    },
-
-    getChoicessButtonStates() {
-        this.childrenMap.choicesSizer.getAllButtonsState();
     },
 
     setChoicesButtonState(name, state) {
@@ -233,7 +234,14 @@ export default {
         return this;
     },
 
-    getChoicesSelectButtonName() {
+    // Radio buttons
+    getChoicesSelectedButtonName() {
         return this.childrenMap.choicesSizer.getSelectedButtonName();
-    }
+    },
+
+    setChoicesSelectedButtonName(name) {
+        this.childrenMap.choicesSizer.setSelectedButtonName(name);
+        return this;
+    },
+
 };

@@ -31,16 +31,25 @@ class Demo extends Phaser.Scene {
                 }
             }),
 
-            content: this.add.text(0, 0, '1 + 1 + 1 + 1 + 1 = ', {
+            content: this.add.text(0, 0, '1 + 2 + 3 + 4 + 5 = ', {
                 fontSize: '24px'
             }),
 
-            choicesType: 'radio',
+            choicesType: 'wrap-radio',
             choices: [
                 createLabel(this, '3', 'btn0'),
                 createLabel(this, '4', 'btn1'),
                 createLabel(this, '5', 'btn2'),
-                createLabel(this, '6', 'btn3')
+                createLabel(this, '6', 'btn3'),
+                createLabel(this, '7', 'btn4'),
+                createLabel(this, '8', 'btn5'),
+                createLabel(this, '9', 'btn6'),
+                createLabel(this, '10', 'btn7'),
+                createLabel(this, '11', 'btn8'),
+                createLabel(this, '12', 'btn9'),
+                createLabel(this, '13', 'btn10'),
+                createLabel(this, '14', 'btn11'),
+                createLabel(this, '15', 'btn12')
             ],
             choicesSetValueCallback: function (button, value) {
                 if (value) {
@@ -59,6 +68,7 @@ class Demo extends Phaser.Scene {
                 content: 25,
                 choices: 25,
                 choice: 15,
+                // choiceLine: 15,
 
                 left: 25,
                 right: 25,
@@ -84,7 +94,7 @@ class Demo extends Phaser.Scene {
                 this.print.text += `${groupName}[${index}] = ${button.text}\n`;
 
                 if (groupName === 'actions') {
-                    this.print.text += `Select: ${dialog.getChoicesSelectButtonName()}\n`;
+                    this.print.text += `Select: ${dialog.getChoicesSelectedButtonName()}\n`;
                 }
 
             }, this)

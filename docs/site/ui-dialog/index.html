@@ -7279,6 +7279,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#state-of-choices-buttons" class="md-nav__link">
+    State of choices buttons
+  </a>
+  
+    <nav class="md-nav" aria-label="State of choices buttons">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#radio" class="md-nav__link">
+    Radio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkboxes" class="md-nav__link">
+    Checkboxes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8318,6 +8345,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#state-of-choices-buttons" class="md-nav__link">
+    State of choices buttons
+  </a>
+  
+    <nav class="md-nav" aria-label="State of choices buttons">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#radio" class="md-nav__link">
+    Radio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkboxes" class="md-nav__link">
+    Checkboxes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8353,7 +8407,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MPZWZG">Yes-no dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MWvoErY">Action buttons with Space</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Single choice dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Radio choice dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NEpjmP">Pop-up dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/qBdQRmq">Ease-in, ease-out</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MWwPabw">Show/hide buttons</a></li>
@@ -8481,6 +8535,10 @@
         <span class="nx">toolbarItem</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">leftToolbarItem</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">choice</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundLeft</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundRight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundTop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">choicesBackgroundBottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">action</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
 
@@ -8550,10 +8608,25 @@
 </ul>
 </li>
 <li><code>choicesBackground</code> : <a href="../ui-basesizer/#background">Game object of choices buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>choicesType</code> : Type/behavior of choice buttons.<ul>
-<li><code>undefined</code> : No extra behavior, default value.</li>
-<li><code>'checkboxes'</code> : Set these buttons to checkboxes.</li>
-<li><code>'radio'</code> : Set these buttons to radio.</li>
+<li><code>choicesType</code> : Sizer type and behavior of choice buttons.<ul>
+<li><code>undefined</code>, or <code>''</code> : <a href="../ui-buttons/">Buttons</a> without any extra behavior, default behavior.</li>
+<li><code>'radio'</code> : <a href="../ui-buttons/">Buttons</a> with radio behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code>.</li>
+</ul>
+</li>
+<li><code>'checkboxes'</code> : <a href="../ui-buttons/">Buttons</a> with checkboxes behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.</li>
+</ul>
+</li>
+<li><code>'wrap'</code> : <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> without any extra behavior, default behavior.</li>
+<li><code>'wrap-radio'</code> : <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> with radio behavior.<ul>
+<li>Name of Selected button game object (<code>gameObject.name</code>) will be returned via method <code>dialog.setChoicesSelectedButtonName()</code></li>
+</ul>
+</li>
+<li><code>'wrap-checkboxes'</code> : <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> with checkboxes behavior.<ul>
+<li>Name of selected button game object (<code>gameObject.name</code>) will be return via method <code>dialog.getChoicessButtonStates()</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>actions</code> : Array of Game objects, or Space (<code>scene.rexUI.add.space()</code>) for action-buttons group which arranged from left to right, optional.<ul>
@@ -8575,6 +8648,7 @@
 <li><code>space.toolbarItem</code> : Space between each toolbar item game objects.</li>
 <li><code>space.leftToolbarItem</code> : Space between each left-toolbar item game objects.</li>
 <li><code>space.choice</code> : Space between each choice-button game objects.</li>
+<li><code>space.choicesBackgroundLeft</code>, <code>space.choicesBackgroundRight</code>, <code>space.choicesBackgroundTop</code>, <code>space.choicesBackgroundBottom</code> : Padding space around choices-background. </li>
 <li><code>space.action</code> : Space between each action-button game objects.</li>
 </ul>
 </li>
@@ -8891,6 +8965,35 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">buttons</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h3 id="state-of-choices-buttons">State of choices buttons<a class="headerlink" href="#state-of-choices-buttons" title="Permanent link">&para;</a></h3>
+<h4 id="radio">Radio<a class="headerlink" href="#radio" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Read state
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getSelectedButtonName</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Set state
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setChoicesSelectedButtonName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="checkboxes">Checkboxes<a class="headerlink" href="#checkboxes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Read states
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">states</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getChoicesButtonStates</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>states</code> : <code>{name: boolean}</code></li>
+</ul>
+</li>
+<li>Set state
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setChoicesButtonState</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">state</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>name</code> : Name of button game object</li>
+<li><code>state</code> : Set <code>true</code> if button is selected</li>
+</ul>
+</li>
+<li>Clear all states to <code>false</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">clearChoicesButtonStates</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 
