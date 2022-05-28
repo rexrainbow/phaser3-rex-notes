@@ -199,7 +199,13 @@ class Dialog extends Sizer {
                 background: choicesBackground,
                 buttons: choices,
                 orientation: 1, // Top-Bottom
-                space: { item: GetValue(config, 'space.choice', 0) },
+                space: { 
+                    left: GetValue(config, 'space.choicesBackgroundLeft', 0),
+                    right: GetValue(config, 'space.choicesBackgroundRight', 0),
+                    top: GetValue(config, 'space.choicesBackgroundTop', 0),
+                    bottom: GetValue(config, 'space.choicesBackgroundBottom', 0),
+                    item: GetValue(config, 'space.choice', 0) 
+                },
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
                 type: GetValue(config, 'choicesType', undefined),

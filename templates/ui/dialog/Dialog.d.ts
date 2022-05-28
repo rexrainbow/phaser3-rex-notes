@@ -34,6 +34,10 @@ declare namespace Dialog {
             toolbarItem?: number,
             leftToolbarItem?: number,
             choice?: number,
+            choicesBackgroundLeft?: number,
+            choicesBackgroundRight?: number,
+            choicesBackgroundTop?: number,
+            choicesBackgroundBottom?: number,
             action?: number,
         };
 
