@@ -45,17 +45,17 @@ class Demo extends Phaser.Scene {
             .addPage({
                 key: 'page0',
                 tab: CreateLabel(this, 'Page0'),
-                page: CreatePage(this)
+                page: CreatePage(this, 'Page0')
             })
             .addPage({
                 key: 'page1',
                 tab: CreateLabel(this, 'Page1'),
-                page: CreatePage(this)
+                page: CreatePage(this, 'Page1')
             })
             .addPage({
                 key: 'page2',
                 tab: CreateLabel(this, 'Page2'),
-                page: CreatePage(this)
+                page: CreatePage(this, 'Page2')
             })
             .layout()
             .swapFirstPage()
@@ -79,7 +79,7 @@ var CreateLabel = function (scene, text) {
 }
 
 const content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
-var CreatePage = function (scene) {
+var CreatePage = function (scene, text) {
     return scene.rexUI.add.textArea({
         text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: 24 }),
         slider: {
@@ -88,6 +88,8 @@ var CreatePage = function (scene) {
         },
 
         content: `\
+This is ${text}
+....
 ${content}
 ....
 [color=green]${content}[/color]

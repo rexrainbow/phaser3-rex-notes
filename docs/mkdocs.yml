@@ -373,7 +373,7 @@ nav:
         - Scroll bar: ui-scrollbar.md
         - Number bar: ui-numberbar.md
         - Knob: ui-knob.md
-    - Page:
+    - Pages:
         - Pages: ui-pages.md
         - Tab pages: ui-tabpages.md
     - Dialog: ui-dialog.md
