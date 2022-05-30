@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
+import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import Pages from '../pages/Pages.js';
 import Methods from './methods/Methods.js';
 
@@ -28,16 +29,20 @@ class TabPages extends Sizer {
         var pages = new Pages(scene, pagesConfig);
         scene.add.existing(pages);
 
+        var isHorizontalTabs = (sizerOrientation === 'y');
+        var wrapTabs = (isHorizontalTabs) ? GetValue(config, 'wrapTabs', false) : false;
+
         var tabsConfig = GetValue(config, 'tabs', undefined);
         if (tabsConfig === undefined) {
             tabsConfig = {};
         }
-        tabsConfig.orientation = (sizerOrientation === 'x') ? 'y' : 'x';
+        var ButtonsClass = (wrapTabs) ? FixWidthButtons : Buttons;
+        tabsConfig.orientation = (isHorizontalTabs) ? 'x' : 'y';
         tabsConfig.buttonsType = 'radio';
-        var tabs = new Buttons(scene, tabsConfig);
+        var tabs = new ButtonsClass(scene, tabsConfig);
         scene.add.existing(tabs);
 
-        var tabsExpand = GetValue(config, 'expand.tabs', false);
+        var tabsExpand = (wrapTabs) ? true : GetValue(config, 'expand.tabs', false);
         var tabAlign = GetValue(config, 'align.tabs', 'left');
         switch (tabsPosition) {
             case 'top':

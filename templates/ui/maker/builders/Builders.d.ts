@@ -2,6 +2,7 @@ import BBCodeText from '../../bbcodetext/BBCodeText';
 import RoundRectangle from '../../roundrectangle/RoundRectangle';
 import NinePatch from '../../ninepatch/NinePatch';
 import NinePatch2 from '../../ninepatch2/NinePatch';
+import Canvas from '../../canvas/Canvas';
 
 import Sizer from '../../sizer/Sizer';
 import FixWidthSizer from '../../fixwidthsizer/FixWidthSizer';
@@ -41,6 +42,7 @@ declare var Builders: {
     RoundRectangle: Builders.BuilderTypeCommon<RoundRectangle>,
     Ninepatch: Builders.BuilderTypeCommon<NinePatch>,
     Ninepatch2: Builders.BuilderTypeCommon<NinePatch2>,
+    Canvas: Builders.BuilderTypeCommon<Canvas>,
 
     Sizer: Builders.BuilderTypeCommon<Sizer>,
     FixWidthSizer: Builders.BuilderTypeCommon<FixWidthSizer>,

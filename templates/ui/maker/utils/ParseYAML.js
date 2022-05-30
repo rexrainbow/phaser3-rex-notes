@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import yaml from '../../yaml/yaml.js';
 
 var ParseYAML = function (s) {
     if (typeof (s) === 'string') {

@@ -622,6 +622,24 @@ scene.scale.on('resize', function() {
 });
 ```
 
+### YAML
+
+[js-yaml](https://github.com/nodeca/js-yaml)
+
+```javascript
+try {
+    const doc = scene.rexUI.yaml.load(yamlStrinig);
+} catch (e) {
+    // ...
+}
+```
+
+```javascript
+scene.rexUI.yaml.loadAll(data, function (doc) {
+    // ...
+});
+```
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)

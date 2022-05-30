@@ -1,10 +1,9 @@
-$type: image
+$type: Canvas
 name:
 
-key:
-frame:
 width:
 height:
+fill:
 
 tint:
 alpha:

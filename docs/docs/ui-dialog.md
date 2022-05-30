@@ -98,19 +98,19 @@ var dialog = scene.rexUI.add.dialog({
 
     title: titleGameObject,
 
+    toolbarBackground: toolbarBackgroundGameObject,
     toolbar: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
-    toolbarBackground: toolbarBackgroundGameObject,
-
+    
+    leftToolbarBackground: leftToolbarBackgroundGameObject,
     leftToolbar: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
-    leftToolbarBackground: leftToolbarBackgroundGameObject,
 
     content: contentGameObject,
 
@@ -119,20 +119,20 @@ var dialog = scene.rexUI.add.dialog({
     choicesType: '',
     // choicesWidth: undefined,
     // choicesHeight: undefined,  // Used when choicesType is `'grid'`, `'grid-radio'`, or `'grid-checkboxes'`
+    choicesBackground: choicesBackgroundGameObject,
     choices: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
-    choicesBackground: choicesBackgroundGameObject,
 
+    actionsBackground: actionsBackgroundGameObject,
     actions: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
-    actionsBackground: actionsBackgroundGameObject,
-
+    
     // Space
     space: {
         left: 0,

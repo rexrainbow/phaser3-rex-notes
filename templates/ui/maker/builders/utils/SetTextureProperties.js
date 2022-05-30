@@ -8,6 +8,14 @@ var SetTextureProperties = function (gameObject, data) {
             gameObject[key] = value;
         }
     }
+
+    if (data.cropResize && !gameObject.resize) {
+        gameObject.resize = function (width, height) {
+            gameObject.setCrop(0, 0, width, height);
+            return gameObject;
+        }
+    }
+
     return gameObject;
 }
 

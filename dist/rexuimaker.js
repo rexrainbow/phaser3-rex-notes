@@ -4218,6 +4218,13 @@
       }
     }
 
+    if (data.cropResize && !gameObject.resize) {
+      gameObject.resize = function (width, height) {
+        gameObject.setCrop(0, 0, width, height);
+        return gameObject;
+      };
+    }
+
     return gameObject;
   };
 
@@ -4255,7 +4262,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
-  var Utils$2 = Phaser.Renderer.WebGL.Utils;
+  var Utils$3 = Phaser.Renderer.WebGL.Utils;
   /**
    * Renders this Game Object with the WebGL Renderer to the given Camera.
    * The object will not render if any of its renderFlags are set or it is being actively filtered out by the Camera.
@@ -4272,7 +4279,7 @@
    * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
    */
 
-  var WebGLRenderer$1 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
+  var WebGLRenderer$2 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
     }
@@ -4281,7 +4288,7 @@
     var frame = src.frame;
     var width = frame.width;
     var height = frame.height;
-    var getTint = Utils$2.getTintAppendFloatAlpha;
+    var getTint = Utils$3.getTintAppendFloatAlpha;
     var pipeline = renderer.pipelines.set(src.pipeline, src);
     var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
     renderer.pipelines.preBatch(src);
@@ -4310,7 +4317,7 @@
    * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
    * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
    */
-  var CanvasRenderer$1 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
+  var CanvasRenderer$2 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.width === 0 || src.height === 0) {
       return;
     }
@@ -4319,9 +4326,9 @@
     renderer.batchSprite(src, src.frame, camera, parentMatrix);
   };
 
-  var Render$2 = {
-    renderWebGL: WebGLRenderer$1,
-    renderCanvas: CanvasRenderer$1
+  var Render$3 = {
+    renderWebGL: WebGLRenderer$2,
+    renderCanvas: CanvasRenderer$2
   };
 
   /**
@@ -4329,7 +4336,7 @@
    * @copyright    2018 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
-  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
   /**
    * Calculates the ascent, descent and fontSize of a given font style.
    *
@@ -4343,7 +4350,7 @@
 
   var MeasureText = function MeasureText(textStyle) {
     // @property {HTMLCanvasElement} canvas - The canvas element that the text is rendered.
-    var canvas = CanvasPool$2.create(this); // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
+    var canvas = CanvasPool$3.create(this); // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
 
     var context = canvas.getContext('2d');
     textStyle.syncFont(canvas, context);
@@ -4357,7 +4364,7 @@
         descent: descent,
         fontSize: ascent + descent
       };
-      CanvasPool$2.remove(canvas);
+      CanvasPool$3.remove(canvas);
       return output;
     }
 
@@ -4383,7 +4390,7 @@
       output.ascent = baseline;
       output.descent = baseline + 6;
       output.fontSize = output.ascent + output.descent;
-      CanvasPool$2.remove(canvas);
+      CanvasPool$3.remove(canvas);
       return output;
     }
 
@@ -4431,7 +4438,7 @@
 
     output.descent = i - baseline;
     output.fontSize = output.ascent + output.descent;
-    CanvasPool$2.remove(canvas);
+    CanvasPool$3.remove(canvas);
     return output;
   };
 
@@ -5140,14 +5147,14 @@
     character: CONST.CHAR_WRAP
   };
 
-  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
 
   var MeasureTextMargins = function MeasureTextMargins(textStyle, testString, out) {
     if (out === undefined) {
       out = {};
     }
 
-    var canvas = CanvasPool$1.create(this);
+    var canvas = CanvasPool$2.create(this);
     var context = canvas.getContext('2d');
     textStyle.syncFont(canvas, context);
     var metrics = context.measureText(testString);
@@ -5166,7 +5173,7 @@
     out.left = 0;
 
     if (width === 0 || height === 0 || !context.getImageData(0, 0, width, height)) {
-      CanvasPool$1.remove(canvas);
+      CanvasPool$2.remove(canvas);
       return out;
     }
 
@@ -5189,7 +5196,7 @@
       }
     }
 
-    CanvasPool$1.remove(canvas);
+    CanvasPool$2.remove(canvas);
     return out;
   };
 
@@ -7045,8 +7052,8 @@
 
   var IsPlainObject$j = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
-  var CanvasPool = Phaser.Display.Canvas.CanvasPool;
-  var GameObject$1 = Phaser.GameObjects.GameObject;
+  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
+  var GameObject$2 = Phaser.GameObjects.GameObject;
   var GetValue$13 = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP;
@@ -7087,7 +7094,7 @@
 
       _this.initPipeline();
 
-      _this.canvas = CanvasPool.create(_assertThisInitialized(_this));
+      _this.canvas = CanvasPool$1.create(_assertThisInitialized(_this));
       _this.context = _this.canvas.getContext('2d');
       _this._imageManager = undefined;
 
@@ -7184,7 +7191,7 @@
           this._imageManager = undefined;
         }
 
-        CanvasPool.remove(this.canvas);
+        CanvasPool$1.remove(this.canvas);
         this.texture.destroy();
       }
     }, {
@@ -7542,7 +7549,7 @@
     }, {
       key: "toJSON",
       value: function toJSON() {
-        var out = Components$2.ToJSON(this); //  Extra Text data is added here
+        var out = Components$3.ToJSON(this); //  Extra Text data is added here
 
         var data = {
           autoRound: this.autoRound,
@@ -7563,7 +7570,7 @@
       key: "setInteractive",
       value: function setInteractive(hitArea, hitAreaCallback, dropZone) {
         var isInteractived = !!this.input;
-        GameObject$1.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+        GameObject$2.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
 
         if (!isInteractived) {
           this.canvasText.setInteractive();
@@ -7673,10 +7680,10 @@
     }]);
 
     return Text;
-  }(GameObject$1);
+  }(GameObject$2);
 
-  var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Text, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$2]);
+  var Components$3 = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(Text, [Components$3.Alpha, Components$3.BlendMode, Components$3.ComputedSize, Components$3.Crop, Components$3.Depth, Components$3.Flip, Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Tint, Components$3.Transform, Components$3.Visible, Render$3]);
 
   var GetOpenTagRegString = function GetOpenTagRegString(tagName, param) {
     if (param === undefined) {
@@ -8233,10 +8240,10 @@
       pathIndexes  // Earcut(pathData)
   }
   */
-  var Utils$1 = Phaser.Renderer.WebGL.Utils;
+  var Utils$2 = Phaser.Renderer.WebGL.Utils;
 
   var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
-    var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+    var fillTintColor = Utils$2.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
     var path = src.pathData;
     var pathIndexes = src.pathIndexes;
 
@@ -8269,11 +8276,11 @@
       closePath
   }
   */
-  var Utils = Phaser.Renderer.WebGL.Utils;
+  var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
   var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
     var strokeTint = pipeline.strokeTint;
-    var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
+    var strokeTintColor = Utils$1.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
     strokeTint.TL = strokeTintColor;
     strokeTint.TR = strokeTintColor;
     strokeTint.BL = strokeTintColor;
@@ -8393,7 +8400,7 @@
     }
   };
 
-  var Render$1 = {
+  var Render$2 = {
     renderWebGL: PolygonWebGLRenderer,
     renderCanvas: PolygonCanvasRenderer
   };
@@ -8693,7 +8700,7 @@
     return radius.x !== 0 && radius.y !== 0;
   };
 
-  Object.assign(RoundRectangle.prototype, Render$1);
+  Object.assign(RoundRectangle.prototype, Render$2);
 
   var CreateRoundRectangle = function CreateRoundRectangle(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
@@ -9238,7 +9245,7 @@
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
-  var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
+  var WebGLRenderer$1 = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     var bobs = src.getRenderList();
 
     if (bobs.length === 0) {
@@ -9266,7 +9273,7 @@
 
   var SetTransform = Phaser.Renderer.Canvas.SetTransform;
 
-  var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
+  var CanvasRenderer$1 = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     var ctx = renderer.currentContext;
     var bobs = src.getRenderList();
 
@@ -9288,9 +9295,9 @@
     ctx.restore();
   };
 
-  var Render = {
-    renderWebGL: WebGLRenderer,
-    renderCanvas: CanvasRenderer
+  var Render$1 = {
+    renderWebGL: WebGLRenderer$1,
+    renderCanvas: CanvasRenderer$1
   };
 
   var SetTexture = function SetTexture(key, frame) {
@@ -9461,7 +9468,7 @@
     return PoolManager;
   }();
 
-  var GameObject = Phaser.GameObjects.GameObject;
+  var GameObject$1 = Phaser.GameObjects.GameObject;
   var IsPlainObject$g = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$_ = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
@@ -9549,7 +9556,7 @@
     }]);
 
     return Blitter;
-  }(GameObject);
+  }(GameObject$1);
 
   var ChildCanRender = function ChildCanRender(child) {
     return child.active && child.visible && child.alpha > 0;
@@ -9559,8 +9566,8 @@
     return childA._depth - childB._depth;
   };
 
-  var Components$1 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Blitter, [Components$1.Alpha, Components$1.BlendMode, Components$1.ComputedSize, Components$1.Depth, Components$1.GetBounds, Components$1.Mask, Components$1.Origin, Components$1.Pipeline, Components$1.ScrollFactor, Components$1.Transform, Components$1.Visible, Render, methods$c]);
+  var Components$2 = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(Blitter, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Depth, Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Transform, Components$2.Visible, Render$1, methods$c]);
 
   var ImageTypeName = 'image';
 
@@ -10445,6 +10452,388 @@
   var CreateNinePatch2 = function CreateNinePatch2(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new NinePatch(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  // copy from Phaser.GameObjects.Text
+  var Utils = Phaser.Renderer.WebGL.Utils;
+
+  var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+      src.updateTexture();
+      src.dirty = false;
+    }
+
+    if (src.width === 0 || src.height === 0) {
+      return;
+    }
+
+    camera.addToRenderList(src);
+    var frame = src.frame;
+    var width = frame.width;
+    var height = frame.height;
+    var getTint = Utils.getTintAppendFloatAlpha;
+    var pipeline = renderer.pipelines.set(src.pipeline, src);
+    var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
+    renderer.pipelines.preBatch(src);
+    pipeline.batchTexture(src, frame.glTexture, width, height, src.x, src.y, width / src.resolution, height / src.resolution, src.scaleX, src.scaleY, src.rotation, src.flipX, src.flipY, src.scrollFactorX, src.scrollFactorY, src.displayOriginX, src.displayOriginY, 0, 0, width, height, getTint(src.tintTopLeft, camera.alpha * src._alphaTL), getTint(src.tintTopRight, camera.alpha * src._alphaTR), getTint(src.tintBottomLeft, camera.alpha * src._alphaBL), getTint(src.tintBottomRight, camera.alpha * src._alphaBR), src.tintFill, 0, 0, camera, parentMatrix, false, textureUnit);
+    renderer.pipelines.postBatch(src);
+  };
+
+  // copy from Phaser.GameObjects.Text
+  var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+      src.updateTexture();
+      src.dirty = false;
+    }
+
+    if (src.width === 0 || src.height === 0) {
+      return;
+    }
+
+    camera.addToRenderList(src);
+    renderer.batchSprite(src, src.frame, camera, parentMatrix);
+  };
+
+  var Render = {
+    renderWebGL: WebGLRenderer,
+    renderCanvas: CanvasRenderer
+  };
+
+  var Color = Phaser.Display.Color;
+  var CanvasMethods = {
+    clear: function clear() {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.dirty = true;
+      return this;
+    },
+    fill: function fill(color) {
+      this.context.fillStyle = color;
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.dirty = true;
+      return this;
+    },
+    loadFromURL: function loadFromURL(url, callback) {
+      var self = this;
+      var img = new Image();
+
+      img.onload = function () {
+        if (self.width !== img.width || self.height !== img.height) {
+          self.resize(img.width, img.height);
+        } else {
+          self.clear();
+        }
+
+        self.context.drawImage(img, 0, 0);
+        self.updateTexture();
+
+        if (callback) {
+          callback();
+        }
+
+        img.onload = null;
+        img.src = '';
+        img.remove();
+      };
+
+      img.src = url;
+      return this;
+    },
+    loadFromURLPromise: function loadFromURLPromise(url) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromURL(url, resolve);
+      });
+    },
+    getDataURL: function getDataURL(type, encoderOptions) {
+      return this.canvas.toDataURL(type, encoderOptions);
+    },
+    getPixel: function getPixel(x, y, out) {
+      if (out === undefined) {
+        out = new Color();
+      }
+
+      var rgb = this.context.getImageData(x, y, 1, 1);
+      out.setTo(rgb.data[0], rgb.data[1], rgb.data[2], rgb.data[3]);
+      return out;
+    },
+    setPixel: function setPixel(x, y, r, g, b, a) {
+      if (typeof r !== 'number') {
+        var color = r;
+        r = color.red;
+        g = color.green;
+        b = color.blue;
+        a = color.alpha;
+      }
+
+      if (a === undefined) {
+        a = r !== 0 || g !== 0 || b !== 0 ? 255 : 0;
+      }
+
+      var imgData = this.context.createImageData(1, 1);
+      imgData.data[0] = r;
+      imgData.data[1] = g;
+      imgData.data[2] = b;
+      imgData.data[3] = a;
+      this.context.putImageData(imgData, x, y);
+      this.dirty = true;
+      return this;
+    }
+  };
+
+  var TextureMethods = {
+    updateTexture: function updateTexture(callback, scope) {
+      if (callback) {
+        if (scope) {
+          callback.call(scope, this.canvas, this.context);
+        } else {
+          callback(this.canvas, this.context);
+        }
+      }
+
+      if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
+        this.frame.setSize(this.canvas.width, this.canvas.height);
+      }
+
+      if (this.renderer.gl) {
+        this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+        this.frame.glTexture = this.frame.source.glTexture;
+      }
+
+      this.dirty = false;
+      var input = this.input;
+
+      if (input && !input.customHitArea) {
+        input.hitArea.width = this.width;
+        input.hitArea.height = this.height;
+      }
+
+      return this;
+    },
+    generateTexture: function generateTexture(key, x, y, width, height) {
+      var srcCanvas = this.canvas;
+
+      if (width === undefined) {
+        width = srcCanvas.width;
+      } else {
+        width *= this.resolution;
+      }
+
+      if (height === undefined) {
+        height = srcCanvas.height;
+      } else {
+        height *= this.resolution;
+      }
+
+      CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
+      return this;
+    },
+    loadTexture: function loadTexture(key, frame) {
+      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+
+      if (!textureFrame) {
+        return this;
+      }
+
+      if (this.width !== textureFrame.cutWidth || this.height !== textureFrame.cutHeight) {
+        this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
+      } else {
+        this.clear();
+      }
+
+      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, 0, 0, this.canvas.width, this.canvas.height);
+      this.dirty = true;
+      return this;
+    }
+  };
+
+  var CanvasPool = Phaser.Display.Canvas.CanvasPool;
+  var GameObject = Phaser.GameObjects.GameObject;
+
+  var Canvas = /*#__PURE__*/function (_GameObject) {
+    _inherits(Canvas, _GameObject);
+
+    var _super = _createSuper(Canvas);
+
+    function Canvas(scene, x, y, width, height) {
+      var _this;
+
+      _classCallCheck(this, Canvas);
+
+      if (x === undefined) {
+        x = 0;
+      }
+
+      if (y === undefined) {
+        y = 0;
+      }
+
+      if (width === undefined) {
+        width = 1;
+      }
+
+      if (height === undefined) {
+        height = 1;
+      }
+
+      _this = _super.call(this, scene, 'rexCanvas');
+      _this.renderer = scene.sys.game.renderer;
+      _this.resolution = 1;
+      _this._width = width;
+      _this._height = height;
+      width = Math.max(Math.ceil(width * _this.resolution), 1);
+      height = Math.max(Math.ceil(height * _this.resolution), 1);
+      _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
+      _this.context = _this.canvas.getContext('2d');
+      _this.dirty = false;
+
+      _this.setPosition(x, y);
+
+      _this.setOrigin(0.5, 0.5);
+
+      _this.initPipeline();
+
+      _this._crop = _this.resetCropObject(); //  Create a Texture for this Text object
+
+      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true); //  Get the frame
+
+      _this.frame = _this.texture.get(); //  Set the resolution
+
+      _this.frame.source.resolution = _this.resolution;
+
+      if (_this.renderer && _this.renderer.gl) {
+        //  Clear the default 1x1 glTexture, as we override it later
+        _this.renderer.deleteTexture(_this.frame.source.glTexture);
+
+        _this.frame.source.glTexture = null;
+      }
+
+      _this.dirty = true;
+      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
+      return _this;
+    }
+
+    _createClass(Canvas, [{
+      key: "onContextRestored",
+      value: function onContextRestored() {
+        this.dirty = true;
+      }
+    }, {
+      key: "preDestroy",
+      value: function preDestroy() {
+        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
+        CanvasPool.remove(this.canvas);
+        this.texture.destroy();
+        this.canvas = null;
+        this.context = null;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {
+        this.setSize(value, this._height);
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {
+        this.setSize(this._width, value);
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        if (this._width === width && this._height === height) {
+          return this;
+        }
+
+        this._width = width;
+        this._height = height;
+        this.updateDisplayOrigin();
+        width = Math.max(Math.ceil(width * this.resolution), 1);
+        height = Math.max(Math.ceil(height * this.resolution), 1);
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.frame.setSize(width, height);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "displayWidth",
+      get: function get() {
+        return this.scaleX * this._width;
+      },
+      set: function set(value) {
+        this.scaleX = value / this._width;
+      }
+    }, {
+      key: "displayHeight",
+      get: function get() {
+        return this.scaleY * this._height;
+      },
+      set: function set(value) {
+        this.scaleY = value / this._height;
+      }
+    }, {
+      key: "setDisplaySize",
+      value: function setDisplaySize(width, height) {
+        this.displayWidth = width;
+        this.displayHeight = height;
+        return this;
+      }
+    }, {
+      key: "getCanvas",
+      value: function getCanvas(readOnly) {
+        if (!readOnly) {
+          this.dirty = true;
+        }
+
+        return this.canvas;
+      }
+    }, {
+      key: "getContext",
+      value: function getContext(readOnly) {
+        if (!readOnly) {
+          this.dirty = true;
+        }
+
+        return this.context;
+      }
+    }, {
+      key: "needRedraw",
+      value: function needRedraw() {
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        this.setSize(width, height);
+        return this;
+      }
+    }]);
+
+    return Canvas;
+  }(GameObject);
+
+  var Components$1 = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(Canvas, [Components$1.Alpha, Components$1.BlendMode, Components$1.Crop, Components$1.Depth, Components$1.Flip, Components$1.GetBounds, Components$1.Mask, Components$1.Origin, Components$1.Pipeline, Components$1.ScrollFactor, Components$1.Tint, Components$1.Transform, Components$1.Visible, Render, CanvasMethods, TextureMethods]);
+
+  var CreateCanvas = function CreateCanvas(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles);
+    var width = data.width || 1;
+    var height = data.height || 1;
+    var gameObject = new Canvas(scene, 0, 0, width, height);
+
+    if (data.fill !== undefined) {
+      gameObject.fill(data.fill);
+    }
+
+    SetTextureProperties(gameObject, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -22435,7 +22824,12 @@
 
     if (Array.isArray(childData)) {
       for (var i = 0, cnt = childData.length; i < cnt; i++) {
-        CreateChild(scene, childData, i, styles, customBuilders);
+        if (Array.isArray(childData[i])) {
+          // Nested array
+          CreateChildren(scene, childData, i, styles, customBuilders);
+        } else {
+          CreateChild(scene, childData, i, styles, customBuilders);
+        }
       }
     } else {
       for (var key in childData) {
@@ -28226,6 +28620,7 @@
     RoundRectangle: CreateRoundRectangle,
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
+    Canvas: CreateCanvas,
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
     GridSizer: CreateGridSizer,

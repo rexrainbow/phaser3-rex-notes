@@ -6,21 +6,27 @@ height:
 
 # Relace child data by game objct
 background:
+
 title:
+toolbarBackground:
 toolbar:
     - $type:
       # ...
-toolbarBackground:
+leftToolbarBackground:
 leftToolbar:
     - $type:
       # ...
-leftToolbarBackground:
+
 content:
+
 description:
+
+choicesBackground:
+choicesType:
 choices:
     - $type:
       # ...
-choicesBackground:
+
 actions:
     - $type:
       # ...

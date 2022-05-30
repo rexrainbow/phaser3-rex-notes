@@ -8355,6 +8355,7 @@
     <span class="c1">// background: backgroundGameObject,</span>
 
     <span class="nx">tabPosition</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>
+    <span class="nx">wrapTabs</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">tabs</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// width:</span>
         <span class="c1">// height:</span>
@@ -8414,6 +8415,15 @@
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of label.</li>
 <li><code>tabPosition</code> : Put tabs at top, bottom, left, right of pages.<ul>
 <li><code>'top'</code>, <code>'bottom'</code>, <code>'left'</code>, <code>'right'</code> : Default value is <code>'top'</code>.</li>
+</ul>
+</li>
+<li><code>wrapTabs</code> :<ul>
+<li><code>false</code> : Uses <a href="../ui-buttons/">Buttons</a> as Tabs, default behavior.</li>
+<li><code>true</code> : <ul>
+<li>Using <a href="../ui-fixwidthbuttons/">FixWidthButtons</a> as Tabs, if <code>tabPosition</code> is <code>'top'</code> or <code>'bottom'</code>. </li>
+<li>Using <a href="../ui-buttons/">Buttons</a> as Tabs, if <code>tabPosition</code> is <code>'left'</code> or <code>'right'</code>    </li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>tabs</code> : Configuration of tabs, which is a <a href="../ui-buttons/#add-buttons-object">buttons game object</a>.<ul>

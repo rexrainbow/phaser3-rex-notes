@@ -39433,17 +39433,20 @@
       var pagesConfig = GetValue$i(config, 'pages');
       var pages = new Pages(scene, pagesConfig);
       scene.add.existing(pages);
+      var isHorizontalTabs = sizerOrientation === 'y';
+      var wrapTabs = isHorizontalTabs ? GetValue$i(config, 'wrapTabs', false) : false;
       var tabsConfig = GetValue$i(config, 'tabs', undefined);
 
       if (tabsConfig === undefined) {
         tabsConfig = {};
       }
 
-      tabsConfig.orientation = sizerOrientation === 'x' ? 'y' : 'x';
+      var ButtonsClass = wrapTabs ? Buttons : Buttons$1;
+      tabsConfig.orientation = isHorizontalTabs ? 'x' : 'y';
       tabsConfig.buttonsType = 'radio';
-      var tabs = new Buttons$1(scene, tabsConfig);
+      var tabs = new ButtonsClass(scene, tabsConfig);
       scene.add.existing(tabs);
-      var tabsExpand = GetValue$i(config, 'expand.tabs', false);
+      var tabsExpand = wrapTabs ? true : GetValue$i(config, 'expand.tabs', false);
       var tabAlign = GetValue$i(config, 'align.tabs', 'left');
 
       switch (tabsPosition) {
@@ -46769,6 +46772,13 @@
       }
     }
 
+    if (data.cropResize && !gameObject.resize) {
+      gameObject.resize = function (width, height) {
+        gameObject.setCrop(0, 0, width, height);
+        return gameObject;
+      };
+    }
+
     return gameObject;
   };
 
@@ -46844,6 +46854,21 @@
   var CreateNinePatch2 = function CreateNinePatch2(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new NinePatch(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateCanvas = function CreateCanvas(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles);
+    var width = data.width || 1;
+    var height = data.height || 1;
+    var gameObject = new Canvas(scene, 0, 0, width, height);
+
+    if (data.fill !== undefined) {
+      gameObject.fill(data.fill);
+    }
+
+    SetTextureProperties(gameObject, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -46951,7 +46976,12 @@
 
     if (Array.isArray(childData)) {
       for (var i = 0, cnt = childData.length; i < cnt; i++) {
-        CreateChild(scene, childData, i, styles, customBuilders);
+        if (Array.isArray(childData[i])) {
+          // Nested array
+          CreateChildren(scene, childData, i, styles, customBuilders);
+        } else {
+          CreateChild(scene, childData, i, styles, customBuilders);
+        }
       }
     } else {
       for (var key in childData) {
@@ -47131,6 +47161,7 @@
     RoundRectangle: CreateRoundRectangle,
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
+    Canvas: CreateCanvas,
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
     GridSizer: CreateGridSizer,
@@ -48056,7 +48087,8 @@
     modal: Modal,
     modalPromise: ModalPromise,
     modalClose: ModalClose,
-    requestDrag: RequestDrag
+    requestDrag: RequestDrag,
+    yaml: jsYaml
   };
   Object.assign(UIPlugin.prototype, methods);
 

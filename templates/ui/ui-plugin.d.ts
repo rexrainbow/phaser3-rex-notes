@@ -73,6 +73,7 @@ import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import Make from './maker/YAMLMake';
 import MakerClass from './maker/Maker';
+import yaml from './yaml/yaml';
 
 export default UIPlugins;
 
@@ -179,6 +180,8 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     ): Phaser.GameObjects.GameObject;
 
     readonly maker: MakerClass;
+
+    yaml: yaml;
 }
 
 

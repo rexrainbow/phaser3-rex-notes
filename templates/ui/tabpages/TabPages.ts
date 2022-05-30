@@ -1,18 +1,19 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import Buttons from '../buttons/Buttons';
+import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons';
 import Pages from '../pages/Pages';
 
 
 export default TabPages;
 
 declare namespace TabPages {
-
     interface IConfig extends Sizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
 
         tabPosition?: 'top' | 'bottom' | 'left' | 'right',
-        tabs?: Buttons.IConfig,
+        wrapTabs?: boolean,
+        tabs?: Buttons.IConfig | FixWidthButtons.IConfig,
         pages?: Pages.IConfig,
 
         expand?: {
@@ -23,7 +24,7 @@ declare namespace TabPages {
             tabs?: 'top' | 'bottom' | 'left' | 'right' | 'center'
         }
 
-        
+
     }
 
 }

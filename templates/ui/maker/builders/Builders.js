@@ -4,6 +4,7 @@ import CreateBBCodeText from './CreateBBCodeText.js';
 import CreateRoundRectangle from './CreateRoundRectangle.js';
 import CreateNinePatch from './CreateNinePatch.js';
 import CreateNinePatch2 from './CreateNinePatch2.js';
+import CreateCanvas from './CreateCanvas.js';
 
 import CreateSizer from './CreateSizer.js';
 import CreateFixWidthSizer from './CreateFixwidthSizer.js';
@@ -29,6 +30,7 @@ var Builders = {
     RoundRectangle: CreateRoundRectangle,
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
+    Canvas: CreateCanvas,
 
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,

@@ -84,6 +84,7 @@ var tabPages = scene.rexUI.add.tabPages({
     // background: backgroundGameObject,
 
     tabPosition: 'top',
+    wrapTabs: false,
     tabs: {
         // width:
         // height:
@@ -135,6 +136,11 @@ var tabPages = scene.rexUI.add.tabPages({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `tabPosition` : Put tabs at top, bottom, left, right of pages.
     - `'top'`, `'bottom'`, `'left'`, `'right'` : Default value is `'top'`.
+- `wrapTabs` :
+    - `false` : Uses [Buttons](ui-buttons.md) as Tabs, default behavior.
+    - `true` : 
+        - Using [FixWidthButtons](ui-fixwidthbuttons.md) as Tabs, if `tabPosition` is `'top'` or `'bottom'`. 
+        - Using [Buttons](ui-buttons.md) as Tabs, if `tabPosition` is `'left'` or `'right'`    
 - `tabs` : Configuration of tabs, which is a [buttons game object](ui-buttons.md#add-buttons-object).
     - `tabs.width`, `tabs.height` : Minimum width, minimum height of tabs, to preserve space if tabs is empty, optional.
     - `tabs.rtl` : 
