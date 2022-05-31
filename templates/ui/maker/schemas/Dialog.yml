@@ -4,6 +4,8 @@ name:
 width:
 height:
 
+choicesType:
+
 # Relace child data by game objct
 background:
 
@@ -22,15 +24,15 @@ content:
 description:
 
 choicesBackground:
-choicesType:
 choices:
     - $type:
       # ...
 
+actionsBackground:
 actions:
     - $type:
       # ...
-actionsBackground:
+
 # ----
 
 space:

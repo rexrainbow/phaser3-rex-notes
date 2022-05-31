@@ -18,8 +18,11 @@ import BadgeLabel from '../../badgelabel/BadgeLabel';
 import Dialog from '../../dialog/Dialog';
 import TextBox from '../../textbox/TextBox';
 import Slider from '../../slider/Slider';
+import NumberBar from '../../numberbar/NumberBar';
 import TextArea from '../../textarea/TextArea';
 import Pages from '../../pages/Pages';
+import Toast from '../../toast/Toast';
+import HolyGrail from '../../holygrail/HolyGrail';
 
 export default Builders;
 
@@ -58,6 +61,10 @@ declare var Builders: {
     Dialog: Builders.BuilderTypeCommon<Dialog>,
     TextBox: Builders.BuilderTypeCommon<TextBox>,
     Slider: Builders.BuilderTypeCommon<Slider>,
+    NumberBar: Builders.BuilderTypeCommon<NumberBar>,
     TextArea: Builders.BuilderTypeCommon<TextArea>,
     Pages: Builders.BuilderTypeCommon<Pages>,
+    Toast: Builders.BuilderTypeCommon<Toast>,
+    HolyGrail: Builders.BuilderTypeCommon<HolyGrail>,
+
 }

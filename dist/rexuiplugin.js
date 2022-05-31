@@ -47082,7 +47082,7 @@
     return gameObject;
   };
 
-  var CreateDialog = function CreateDialog(scene, data, styles, customBuilders) {
+  var CreateDialog$1 = function CreateDialog(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
     CreateChild(scene, data, 'background', styles, customBuilders);
@@ -47137,6 +47137,18 @@
     return sliderConfig;
   };
 
+  var CreateNumberBar = function CreateNumberBar(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'icon', styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+    CreateChild(scene, data, 'text', styles, customBuilders);
+    var gameObject = new NumberBar(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var CreateTextArea = function CreateTextArea(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
@@ -47152,6 +47164,24 @@
 
   var CreatePages = function CreatePages(scene, data, styles, customBuilders) {
     return CreateAnySizer(scene, data, styles, customBuilders, Pages);
+  };
+
+  var CreateToast = function CreateToast(scene, data, styles, customBuilders) {
+    return CreateAnyLabel(scene, data, styles, customBuilders, Toast);
+  };
+
+  var CreateDialog = function CreateDialog(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'content', styles, customBuilders);
+    CreateChild(scene, data, 'leftSide', styles, customBuilders);
+    CreateChild(scene, data, 'rightSide', styles, customBuilders);
+    CreateChild(scene, data, 'header', styles, customBuilders);
+    CreateChild(scene, data, 'footer', styles, customBuilders);
+    var gameObject = new HolyGrail(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
   };
 
   var Builders = {
@@ -47171,11 +47201,14 @@
     GridButtons: CreategGridButtons,
     Label: CreateLabel,
     BadgeLabel: CreateBadgeLabel,
-    Dialog: CreateDialog,
+    Dialog: CreateDialog$1,
     TextBox: CreateTextBox,
     Slider: CreateSlider,
+    NumberBar: CreateNumberBar,
     TextArea: CreateTextArea,
-    Pages: CreatePages
+    Pages: CreatePages,
+    Toast: CreateToast,
+    HolyGrail: CreateDialog
   };
 
   var Make = function Make(scene, data, styles, customBuilders) {

@@ -20,8 +20,11 @@ import CreateBadgeLabel from './CreateBadgeLabel.js';
 import CreateDialog from './CreateDialog.js';
 import CreateTextBox from './CreateTextbox.js';
 import CreateSlider from './CreateSlider.js';
+import CreateNumberBar from './CreateNumberBar.js';
 import CreateTextArea from './CreateTextArea.js';
 import CreatePages from './CreatePages.js';
+import CreateToast from './CreateToast.js';
+import CreateHolyGrail from './CreateHolyGrail.js';
 
 var Builders = {
     Image: CreateImage,
@@ -46,8 +49,11 @@ var Builders = {
     Dialog: CreateDialog,
     TextBox: CreateTextBox,
     Slider: CreateSlider,
+    NumberBar: CreateNumberBar,
     TextArea: CreateTextArea,
     Pages: CreatePages,
+    Toast: CreateToast,
+    HolyGrail: CreateHolyGrail,
 };
 
 /*

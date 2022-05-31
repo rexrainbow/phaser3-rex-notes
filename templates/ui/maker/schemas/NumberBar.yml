@@ -1,4 +1,4 @@
-$type: Label
+$type: NumberBar
 name:
 
 width:
@@ -8,21 +8,27 @@ orientation:
 # Relace child data by game objct
 background:
 icon:
+slider:
+    background:
+    track:
+    indicator:
+    thumb:
+    input:
+    gap:
+    easeValue:
+        duration:
+        ease:
 text:
-action:
 # ----
 
 iconMask:
-expandTextWidth:
-expandTextHeight:
-actionMask:
-align:
 space:
     left:
     right:
     top:
     bottom:
     icon:
-    text:
+    slider:
+enable:
 
 draggable:

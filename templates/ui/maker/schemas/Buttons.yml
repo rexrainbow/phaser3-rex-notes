@@ -4,6 +4,7 @@ name:
 width:
 height:
 orientation:
+buttonsType:
 
 # Relace child data by game objct
 background:
@@ -24,6 +25,5 @@ space:
     top:
     bottom:
     item:
-draggable:
 
-buttonsType:
+draggable:

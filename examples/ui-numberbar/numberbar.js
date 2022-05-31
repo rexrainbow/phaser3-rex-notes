@@ -47,8 +47,6 @@ class Demo extends Phaser.Scene {
             valuechangeCallback: function (newValue, oldValue, numberBar) {
                 numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
             },
-
-            gap: 0.2,
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)

@@ -1,9 +1,16 @@
-$type: Label
+$type: Toast
 name:
 
 width:
 height:
 orientation:
+
+duration:
+    in:
+    hold:
+    out:
+transitIn:
+transitOut:
 
 # Relace child data by game objct
 background:

@@ -3,6 +3,8 @@ name:
 
 width:
 height:
+buttonsType:
+
 rtl:
 expand:
 align:
@@ -15,6 +17,7 @@ space:
     top:
     bottom:
     item:
+
 draggable:
 
 # Relace child data by game objct
@@ -24,4 +27,3 @@ buttons:
       # ...
 # ----
 
-buttonsType:
