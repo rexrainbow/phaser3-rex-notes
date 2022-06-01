@@ -3149,8 +3149,6 @@
 
       _this.resetFromJSON(config);
 
-      _this.boot();
-
       return _this;
     }
 
@@ -3250,13 +3248,8 @@
           this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
         }
 
+        this.autoAnchor(o.enable);
         return this;
-      }
-    }, {
-      key: "boot",
-      value: function boot() {
-        this.scene.sys.scale.on('resize', this.anchor, this);
-        this.anchor();
       }
     }, {
       key: "shutdown",
@@ -3266,7 +3259,7 @@
           return;
         }
 
-        this.scene.sys.scale.off('resize', this.anchor, this);
+        this.autoAnchor(false);
         this.viewport = undefined;
         this.onUpdateViewportCallback = undefined;
         this.onUpdateViewportCallbackScope = undefined;
@@ -3274,6 +3267,29 @@
         this.onResizeCallbackScope = undefined;
 
         _get(_getPrototypeOf(Anchor.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "autoAnchor",
+      value: function autoAnchor(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        enable = !!enable;
+
+        if (this.autoAnchorEnable === enable) {
+          return this;
+        }
+
+        if (enable) {
+          this.scene.sys.scale.on('resize', this.anchor, this);
+          this.anchor();
+        } else {
+          this.scene.sys.scale.off('resize', this.anchor, this);
+        }
+
+        this.autoAnchorEnable = enable;
+        return this;
       } // Position
 
     }, {

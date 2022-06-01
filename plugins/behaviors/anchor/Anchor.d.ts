@@ -24,7 +24,9 @@ declare namespace Anchor {
         onResizeCallbackScope?: unknown,
 
         onUpdateViewportCallback?: OnUpdateViewportCallbackType,
-        onUpdateViewportCallbackScope?: unknown
+        onUpdateViewportCallbackScope?: unknown,
+
+        enable?: boolean
     }
 }
 
@@ -34,6 +36,8 @@ declare class Anchor {
         config?: Anchor.IConfig
     );
 
+    destroy(): void;
+
     resetFromJSON(config: Anchor.IConfig): this;
 
     setUpdateViewportCallback(
@@ -42,4 +46,6 @@ declare class Anchor {
     ): this;
 
     anchor(): this;
+
+    autoAnchor(enable?: boolean): this;
 }

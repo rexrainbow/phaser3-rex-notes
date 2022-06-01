@@ -2902,6 +2902,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#auto-anchor" class="md-nav__link">
+    Auto anchor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8203,6 +8210,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#auto-anchor" class="md-nav__link">
+    Auto anchor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8311,6 +8325,8 @@
 
     <span class="c1">// onUpdateViewportCallback: function(viewport, gameObject, anchor) {},</span>
     <span class="c1">// onUpdateViewportCallbackScope: undefined,</span>
+
+    <span class="c1">// enable: true</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8359,6 +8375,13 @@
 </code></pre></div></p>
 <ul>
 <li><code>viewport</code>： A <a href="../geom-rectangle/">rectangle object</a></li>
+</ul>
+</li>
+<li>
+<p><code>enable</code> :</p>
+<ul>
+<li><code>undefined</code>, or <code>true</code> : Anchor game object under <code>'resize'</code> event of <a href="../scalemanager/">scale manager</a>.</li>
+<li><code>false</code> : Won't anchor game object automatially.</li>
 </ul>
 </li>
 </ul>
@@ -8426,6 +8449,16 @@
 <h3 id="manual-anchor">Manual anchor<a class="headerlink" href="#manual-anchor" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">anchor</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="auto-anchor">Auto anchor<a class="headerlink" href="#auto-anchor" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Anchor game object under <code>'resize'</code> event of <a href="../scalemanager/">scale manager</a>.
+    <div class="highlight"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">autoAnchor</span><span class="p">();</span>
+<span class="c1">// anchor.autoAnchor(true);</span>
+</code></pre></div></li>
+<li>Disable auto-anchor
+    <div class="highlight"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">autoAnchor</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 
               
             </article>

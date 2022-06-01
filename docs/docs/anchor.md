@@ -95,6 +95,8 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
 
     // onUpdateViewportCallback: function(viewport, gameObject, anchor) {},
     // onUpdateViewportCallbackScope: undefined,
+
+    // enable: true
 });
 ```
 
@@ -138,6 +140,10 @@ For example, anchor game object's left bound to viewport's left+10, centerY to v
     }
     ```
     - `viewport`： A [rectangle object](geom-rectangle.md)
+
+- `enable` :
+    - `undefined`, or `true` : Anchor game object under `'resize'` event of [scale manager](scalemanager.md).
+    - `false` : Won't anchor game object automatially.
 
 ### Reset config
 
@@ -203,3 +209,15 @@ anchor.setUpdateViewportCallback(callback, scope);
 ```javascript
 anchor.anchor();
 ```
+
+### Auto anchor
+
+- Anchor game object under `'resize'` event of [scale manager](scalemanager.md).
+    ```javascript
+    anchor.autoAnchor();
+    // anchor.autoAnchor(true);
+    ```
+- Disable auto-anchor
+    ```javascript
+    anchor.autoAnchor(false);
+    ```

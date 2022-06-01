@@ -9,7 +9,6 @@ class Anchor extends ComponentBase {
 
         this.viewport = undefined;
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -98,12 +97,9 @@ class Anchor extends ComponentBase {
             this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
         }
 
-        return this;
-    }
+        this.autoAnchor(o.enable);
 
-    boot() {
-        this.scene.sys.scale.on('resize', this.anchor, this);
-        this.anchor();
+        return this;
     }
 
     shutdown(fromScene) {
@@ -112,7 +108,7 @@ class Anchor extends ComponentBase {
             return;
         }
 
-        this.scene.sys.scale.off('resize', this.anchor, this);
+        this.autoAnchor(false);
 
         this.viewport = undefined;
         this.onUpdateViewportCallback = undefined;
@@ -121,6 +117,28 @@ class Anchor extends ComponentBase {
         this.onResizeCallbackScope = undefined;
 
         super.shutdown(fromScene);
+    }
+
+    autoAnchor(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        enable = !!enable;
+        if (this.autoAnchorEnable === enable) {
+            return this;
+        }
+
+        if (enable) {
+            this.scene.sys.scale.on('resize', this.anchor, this);
+            this.anchor();
+        } else {
+            this.scene.sys.scale.off('resize', this.anchor, this);
+        }
+
+        this.autoAnchorEnable = enable;
+
+        return this;
     }
 
     // Position

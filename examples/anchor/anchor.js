@@ -35,13 +35,15 @@ class Demo extends Phaser.Scene {
             left: 'left+10',
             bottom: 'bottom-10'
         });
-
+ 
         var rightBottomPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
             .setStrokeStyle(4, 0x888888)
         this.plugins.get('rexAnchor').add(rightBottomPanel, {
             right: 'right-10',
-            bottom: 'bottom-10'
-        });
+            bottom: 'bottom-10',
+            enable: false         // Won't anchor automatically
+        })
+            .anchor()             // Anchor manually
 
         var leftCenterPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
             .setStrokeStyle(4, 0xff8888)
