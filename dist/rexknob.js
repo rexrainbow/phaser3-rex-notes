@@ -10853,7 +10853,7 @@
   var UpdateText = function UpdateText() {
     var textObject = this.sizerChildren.text;
 
-    if (textObject) {
+    if (textObject && this.textFormatCallback) {
       textObject.setText(GetFormatText.call(this));
 
       if (textObject.layout) {

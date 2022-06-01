@@ -26410,7 +26410,7 @@
   var UpdateText = function UpdateText() {
     var textObject = this.sizerChildren.text;
 
-    if (textObject) {
+    if (textObject && this.textFormatCallback) {
       textObject.setText(GetFormatText.call(this));
 
       if (textObject.layout) {
@@ -47186,6 +47186,16 @@
     return CreateAnyLabel(scene, data, styles, customBuilders, Toast);
   };
 
+  var CreateKnob = function CreateKnob(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'text', styles, customBuilders);
+    var gameObject = new Knob(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var CreateDialog = function CreateDialog(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
@@ -47224,6 +47234,7 @@
     TextArea: CreateTextArea,
     Pages: CreatePages,
     Toast: CreateToast,
+    Knob: CreateKnob,
     HolyGrail: CreateDialog
   };
 

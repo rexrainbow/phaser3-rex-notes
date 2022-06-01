@@ -22,6 +22,7 @@ import NumberBar from '../../numberbar/NumberBar';
 import TextArea from '../../textarea/TextArea';
 import Pages from '../../pages/Pages';
 import Toast from '../../toast/Toast';
+import Knob from '../../knob/Knob';
 import HolyGrail from '../../holygrail/HolyGrail';
 
 export default Builders;
@@ -65,6 +66,7 @@ declare var Builders: {
     TextArea: Builders.BuilderTypeCommon<TextArea>,
     Pages: Builders.BuilderTypeCommon<Pages>,
     Toast: Builders.BuilderTypeCommon<Toast>,
+    Knob: Builders.BuilderTypeCommon<Knob>,
     HolyGrail: Builders.BuilderTypeCommon<HolyGrail>,
 
 }

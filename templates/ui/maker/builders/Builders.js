@@ -24,6 +24,7 @@ import CreateNumberBar from './CreateNumberBar.js';
 import CreateTextArea from './CreateTextArea.js';
 import CreatePages from './CreatePages.js';
 import CreateToast from './CreateToast.js';
+import CreateKnob from './CreateKnob.js';
 import CreateHolyGrail from './CreateHolyGrail.js';
 
 var Builders = {
@@ -53,6 +54,7 @@ var Builders = {
     TextArea: CreateTextArea,
     Pages: CreatePages,
     Toast: CreateToast,
+    Knob: CreateKnob,
     HolyGrail: CreateHolyGrail,
 };
 
