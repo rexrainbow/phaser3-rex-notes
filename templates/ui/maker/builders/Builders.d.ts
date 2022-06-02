@@ -19,6 +19,7 @@ import Dialog from '../../dialog/Dialog';
 import TextBox from '../../textbox/TextBox';
 import Slider from '../../slider/Slider';
 import NumberBar from '../../numberbar/NumberBar';
+import ScrollBar from '../../scrollbar/ScrollBar';
 import TextArea from '../../textarea/TextArea';
 import Pages from '../../pages/Pages';
 import Toast from '../../toast/Toast';
@@ -63,6 +64,7 @@ declare var Builders: {
     TextBox: Builders.BuilderTypeCommon<TextBox>,
     Slider: Builders.BuilderTypeCommon<Slider>,
     NumberBar: Builders.BuilderTypeCommon<NumberBar>,
+    ScrollBar: Builders.BuilderTypeCommon<ScrollBar>,
     TextArea: Builders.BuilderTypeCommon<TextArea>,
     Pages: Builders.BuilderTypeCommon<Pages>,
     Toast: Builders.BuilderTypeCommon<Toast>,

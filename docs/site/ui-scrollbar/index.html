@@ -8371,6 +8371,7 @@
     <span class="c1">// anchor: undefined,</span>
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>    
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
@@ -8403,6 +8404,7 @@
         <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">item</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
 
     <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -8433,6 +8435,11 @@
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>orientation</code> : Main orientation of the sizer.<ul>
+<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right.</li>
+<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
+</ul>
+</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of scrollBar.</li>
 <li><code>slider</code> : Slider game object which composed of<ul>
 <li><code>slider.width</code> : Fixed width of slider, optional. Width of slider will be extended if this value is not set.</li>
@@ -8465,6 +8472,7 @@
 </li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
+<li><code>space.item</code> : Space between 2 children game objects.</li>
 </ul>
 </li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>

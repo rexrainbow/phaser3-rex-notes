@@ -6,14 +6,6 @@ var ReplaceSliderConfig = function (scene, sliderConfig, styles, customBuilders)
         CreateChild(scene, sliderConfig, 'track', styles, customBuilders);
         CreateChild(scene, sliderConfig, 'indicator', styles, customBuilders);
         CreateChild(scene, sliderConfig, 'thumb', styles, customBuilders);
-
-        var sliderButtonsConfig = sliderConfig.buttons;
-        if (sliderButtonsConfig) {
-            CreateChild(scene, sliderButtonsConfig, 'top', styles, customBuilders);
-            CreateChild(scene, sliderButtonsConfig, 'bottom', styles, customBuilders);
-            CreateChild(scene, sliderButtonsConfig, 'left', styles, customBuilders);
-            CreateChild(scene, sliderButtonsConfig, 'right', styles, customBuilders);
-        }
     }
 
     return sliderConfig;

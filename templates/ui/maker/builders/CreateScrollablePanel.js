@@ -14,7 +14,19 @@ var CreateScrollablePanel = function (scene, data, styles, customBuilders) {
         CreateChild(scene, panelConfig, 'child', styles, customBuilders);
     }
 
-    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+    var sliderConfig = data.slider;
+    if (sliderConfig) {
+        ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+
+        var sliderButtonsConfig = sliderConfig.buttons;
+        if (sliderButtonsConfig) {
+            CreateChild(scene, sliderButtonsConfig, 'top', styles, customBuilders);
+            CreateChild(scene, sliderButtonsConfig, 'bottom', styles, customBuilders);
+            CreateChild(scene, sliderButtonsConfig, 'left', styles, customBuilders);
+            CreateChild(scene, sliderButtonsConfig, 'right', styles, customBuilders);
+        }
+    }
+
     CreateChild(scene, data, 'header', styles, customBuilders);
     CreateChild(scene, data, 'footer', styles, customBuilders);
 

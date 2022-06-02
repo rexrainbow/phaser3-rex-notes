@@ -21,6 +21,7 @@ import CreateDialog from './CreateDialog.js';
 import CreateTextBox from './CreateTextbox.js';
 import CreateSlider from './CreateSlider.js';
 import CreateNumberBar from './CreateNumberBar.js';
+import CreateScrollBar from './CreateScrollBar.js';
 import CreateTextArea from './CreateTextArea.js';
 import CreatePages from './CreatePages.js';
 import CreateToast from './CreateToast.js';
@@ -51,6 +52,7 @@ var Builders = {
     TextBox: CreateTextBox,
     Slider: CreateSlider,
     NumberBar: CreateNumberBar,
+    ScrollBar: CreateScrollBar,
     TextArea: CreateTextArea,
     Pages: CreatePages,
     Toast: CreateToast,

@@ -86,6 +86,7 @@ var scrollBar = scene.rexUI.add.scrollBar({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    orientation: 0,
 
     background: backgroundGameObject,    
     slider: {
@@ -118,6 +119,7 @@ var scrollBar = scene.rexUI.add.scrollBar({
         right: 0,
         top: 0,
         bottom: 0,
+        item: 0
     },
     
     enable: true,
@@ -140,6 +142,9 @@ var scrollBar = scene.rexUI.add.scrollBar({
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
+- `orientation` : Main orientation of the sizer.
+    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
+    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of scrollBar.
 - `slider` : Slider game object which composed of
     - `slider.width` : Fixed width of slider, optional. Width of slider will be extended if this value is not set.
@@ -162,6 +167,7 @@ var scrollBar = scene.rexUI.add.scrollBar({
     - `buttons.step` : Scrolling step in each tick. Default value is `0.01`.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+    - `space.item` : Space between 2 children game objects.
 - `valuechangeCallback` : callback function when value changed.
 - `enable` : Set `false` to disable controlling.
 - `name` : Set name of this game object.
