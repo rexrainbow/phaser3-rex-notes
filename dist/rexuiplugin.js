@@ -37614,18 +37614,19 @@
       listPanel.changeOrigin(0, 1).setPosition(x, this.top);
     }
 
-    var onButtonOver = this.listOnButtonOver;
+    listPanel.on('button.over', function (button, index, pointer, event) {
+      if (this.listOnButtonOver) {
+        this.listOnButtonOver.call(this, button, index, pointer, event);
+      }
 
-    if (onButtonOver) {
-      listPanel.on('button.over', onButtonOver, this);
-    }
+      this.emit('button.over', this, listPanel, button, index, pointer, event);
+    }, this).on('button.out', function (button, index, pointer, event) {
+      if (this.listOnButtonOut) {
+        this.listOnButtonOut.call(this, button, index, pointer, event);
+      }
 
-    var onButtonOut = this.listOnButtonOut;
-
-    if (onButtonOut) {
-      listPanel.on('button.out', onButtonOut, this);
-    }
-
+      this.emit('button.out', this, listPanel, button, index, pointer, event);
+    }, this);
     listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic').once('popup.complete', function (listPanel) {
       // After popping up
       // Can click
@@ -37634,7 +37635,7 @@
       if (onButtonClick) {
         listPanel.on('button.click', function (button, index, pointer, event) {
           onButtonClick.call(this, button, index, pointer, event);
-          this.emit('list.click', this, listPanel, button, index, pointer, event);
+          this.emit('button.click', this, listPanel, button, index, pointer, event);
         }, this);
       } // Can close list panel
 
@@ -47028,7 +47029,7 @@
     return gameObject;
   };
 
-  var CreategGridButtons = function CreategGridButtons(scene, data, styles, customBuilders) {
+  var CreateGridButtons = function CreateGridButtons(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
     CreateChild(scene, data, 'background', styles, customBuilders);
@@ -47140,14 +47141,6 @@
       CreateChild(scene, sliderConfig, 'track', styles, customBuilders);
       CreateChild(scene, sliderConfig, 'indicator', styles, customBuilders);
       CreateChild(scene, sliderConfig, 'thumb', styles, customBuilders);
-      var sliderButtonsConfig = sliderConfig.buttons;
-
-      if (sliderButtonsConfig) {
-        CreateChild(scene, sliderButtonsConfig, 'top', styles, customBuilders);
-        CreateChild(scene, sliderButtonsConfig, 'bottom', styles, customBuilders);
-        CreateChild(scene, sliderButtonsConfig, 'left', styles, customBuilders);
-        CreateChild(scene, sliderButtonsConfig, 'right', styles, customBuilders);
-      }
     }
 
     return sliderConfig;
@@ -47161,6 +47154,25 @@
     ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
     CreateChild(scene, data, 'text', styles, customBuilders);
     var gameObject = new NumberBar(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateScrollBar = function CreateScrollBar(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+    var buttonsConfig = data.buttons;
+
+    if (buttonsConfig) {
+      CreateChild(scene, buttonsConfig, 'top', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'bottom', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'left', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'right', styles, customBuilders);
+    }
+
+    var gameObject = new ScrollBar(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -47224,13 +47236,14 @@
     OverlapSizer: CreateOverlapSizer,
     Buttons: CreateButtons,
     FixWidthButtons: CreateFixWidthButtons,
-    GridButtons: CreategGridButtons,
+    GridButtons: CreateGridButtons,
     Label: CreateLabel,
     BadgeLabel: CreateBadgeLabel,
     Dialog: CreateDialog$1,
     TextBox: CreateTextBox,
     Slider: CreateSlider,
     NumberBar: CreateNumberBar,
+    ScrollBar: CreateScrollBar,
     TextArea: CreateTextArea,
     Pages: CreatePages,
     Toast: CreateToast,

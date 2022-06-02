@@ -11775,18 +11775,19 @@
       listPanel.changeOrigin(0, 1).setPosition(x, this.top);
     }
 
-    var onButtonOver = this.listOnButtonOver;
+    listPanel.on('button.over', function (button, index, pointer, event) {
+      if (this.listOnButtonOver) {
+        this.listOnButtonOver.call(this, button, index, pointer, event);
+      }
 
-    if (onButtonOver) {
-      listPanel.on('button.over', onButtonOver, this);
-    }
+      this.emit('button.over', this, listPanel, button, index, pointer, event);
+    }, this).on('button.out', function (button, index, pointer, event) {
+      if (this.listOnButtonOut) {
+        this.listOnButtonOut.call(this, button, index, pointer, event);
+      }
 
-    var onButtonOut = this.listOnButtonOut;
-
-    if (onButtonOut) {
-      listPanel.on('button.out', onButtonOut, this);
-    }
-
+      this.emit('button.out', this, listPanel, button, index, pointer, event);
+    }, this);
     listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic').once('popup.complete', function (listPanel) {
       // After popping up
       // Can click
@@ -11795,7 +11796,7 @@
       if (onButtonClick) {
         listPanel.on('button.click', function (button, index, pointer, event) {
           onButtonClick.call(this, button, index, pointer, event);
-          this.emit('list.click', this, listPanel, button, index, pointer, event);
+          this.emit('button.click', this, listPanel, button, index, pointer, event);
         }, this);
       } // Can close list panel
 

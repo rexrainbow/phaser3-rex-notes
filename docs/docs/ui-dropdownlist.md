@@ -361,7 +361,27 @@ See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object
     ```
 - Click button
     ```javascript
-    dropDownList.on('list.click', function(dropDownList, listPanel, button, index, pointer, event) {
+    dropDownList.on('button.click', function(dropDownList, listPanel, button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Game object of triggered button on list panel.
+    - `index` : Index of triggered button.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
+- Over button
+    ```javascript
+    dropDownList.on('button.over', function(dropDownList, listPanel, button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Game object of triggered button on list panel.
+    - `index` : Index of triggered button.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
+- Out button
+    ```javascript
+    dropDownList.on('button.out', function(dropDownList, listPanel, button, index, pointer, event) {
         // ...
     }, scope);
     ```

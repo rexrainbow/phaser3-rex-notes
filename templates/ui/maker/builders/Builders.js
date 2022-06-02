@@ -13,7 +13,7 @@ import CreateOverlapSizer from './CreateOverlapSizer.js';
 
 import CreateButtons from './CreateButtons.js';
 import CreateFixWidthButtons from './CreateFixWidthButtons.js';
-import CreategGridButtons from './CreategGridButtons.js';
+import CreateGridButtons from './CreateGridButtons.js';
 
 import CreateLabel from './CreateLabel.js';
 import CreateBadgeLabel from './CreateBadgeLabel.js';
@@ -44,7 +44,7 @@ var Builders = {
 
     Buttons: CreateButtons,
     FixWidthButtons: CreateFixWidthButtons,
-    GridButtons: CreategGridButtons,
+    GridButtons: CreateGridButtons,
 
     Label: CreateLabel,
     BadgeLabel: CreateBadgeLabel,

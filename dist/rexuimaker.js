@@ -23266,7 +23266,7 @@
 
   Object.assign(GridButtons.prototype, AddChildMethods$1, RemoveChildMethods, ButtonMethods$1, ButtonStateMethods);
 
-  var CreategGridButtons = function CreategGridButtons(scene, data, styles, customBuilders) {
+  var CreateGridButtons = function CreateGridButtons(scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
     CreateChild(scene, data, 'background', styles, customBuilders);
@@ -26104,14 +26104,6 @@
       CreateChild(scene, sliderConfig, 'track', styles, customBuilders);
       CreateChild(scene, sliderConfig, 'indicator', styles, customBuilders);
       CreateChild(scene, sliderConfig, 'thumb', styles, customBuilders);
-      var sliderButtonsConfig = sliderConfig.buttons;
-
-      if (sliderButtonsConfig) {
-        CreateChild(scene, sliderButtonsConfig, 'top', styles, customBuilders);
-        CreateChild(scene, sliderButtonsConfig, 'bottom', styles, customBuilders);
-        CreateChild(scene, sliderButtonsConfig, 'left', styles, customBuilders);
-        CreateChild(scene, sliderButtonsConfig, 'right', styles, customBuilders);
-      }
     }
 
     return sliderConfig;
@@ -26129,26 +26121,7 @@
     return gameObject;
   };
 
-  var SCROLLMODE = {
-    v: 0,
-    vertical: 0,
-    h: 1,
-    horizontal: 1
-  };
-
   var GetValue$h = Phaser.Utils.Objects.GetValue;
-
-  var GetScrollMode = function GetScrollMode(config, key) {
-    var scrollMode = GetValue$h(config, 'scrollMode', 0); // Vertical
-
-    if (typeof scrollMode === 'string') {
-      scrollMode = SCROLLMODE[scrollMode];
-    }
-
-    return scrollMode;
-  };
-
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
 
   var ScrollBar = /*#__PURE__*/function (_Sizer) {
     _inherits(ScrollBar, _Sizer);
@@ -26164,12 +26137,12 @@
       _this = _super.call(this, scene, config);
       _this.type = 'rexScrollBar'; // Add elements
 
-      var background = GetValue$g(config, 'background', undefined);
-      var buttonsConfig = GetValue$g(config, 'buttons', undefined);
-      var button0 = GetValue$g(buttonsConfig, 'top', GetValue$g(buttonsConfig, 'left', undefined));
-      var button1 = GetValue$g(buttonsConfig, 'bottom', GetValue$g(buttonsConfig, 'right', undefined));
+      var background = GetValue$h(config, 'background', undefined);
+      var buttonsConfig = GetValue$h(config, 'buttons', undefined);
+      var button0 = GetValue$h(buttonsConfig, 'top', GetValue$h(buttonsConfig, 'left', undefined));
+      var button1 = GetValue$h(buttonsConfig, 'bottom', GetValue$h(buttonsConfig, 'right', undefined));
       var slider,
-          sliderConfig = GetValue$g(config, 'slider', undefined);
+          sliderConfig = GetValue$h(config, 'slider', undefined);
 
       if (background) {
         _this.addBackground(background);
@@ -26195,10 +26168,10 @@
         var proportion;
 
         if (_this.orientation === 0) {
-          var sliderWidth = GetValue$g(sliderConfig, 'width', undefined);
+          var sliderWidth = GetValue$h(sliderConfig, 'width', undefined);
           proportion = sliderWidth === undefined ? 1 : 0;
         } else {
-          var sliderHeight = GetValue$g(sliderConfig, 'height', undefined);
+          var sliderHeight = GetValue$h(sliderConfig, 'height', undefined);
           proportion = sliderHeight === undefined ? 1 : 0;
         }
 
@@ -26231,19 +26204,19 @@
 
       _this.addChildrenMap('buttons', buttons);
 
-      var callback = GetValue$g(config, 'valuechangeCallback', null);
+      var callback = GetValue$h(config, 'valuechangeCallback', null);
 
       if (callback !== null) {
-        var scope = GetValue$g(config, 'valuechangeCallbackScope', undefined);
+        var scope = GetValue$h(config, 'valuechangeCallbackScope', undefined);
 
         _this.on('valuechange', callback, scope);
       }
 
-      _this.setEnable(GetValue$g(config, 'enable', undefined));
+      _this.setEnable(GetValue$h(config, 'enable', undefined));
 
-      _this.setValue(GetValue$g(config, 'value', 0));
+      _this.setValue(GetValue$h(config, 'value', 0));
 
-      _this.setScrollStep(GetValue$g(buttonsConfig, 'step', 0.01));
+      _this.setScrollStep(GetValue$h(buttonsConfig, 'step', 0.01));
 
       return _this;
     }
@@ -26361,6 +26334,44 @@
 
     return ScrollBar;
   }(Sizer);
+
+  var CreateScrollBar = function CreateScrollBar(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles); // Replace data by child game object
+
+    CreateChild(scene, data, 'background', styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+    var buttonsConfig = data.buttons;
+
+    if (buttonsConfig) {
+      CreateChild(scene, buttonsConfig, 'top', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'bottom', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'left', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'right', styles, customBuilders);
+    }
+
+    var gameObject = new ScrollBar(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var SCROLLMODE = {
+    v: 0,
+    vertical: 0,
+    h: 1,
+    horizontal: 1
+  };
+
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
+
+  var GetScrollMode = function GetScrollMode(config, key) {
+    var scrollMode = GetValue$g(config, 'scrollMode', 0); // Vertical
+
+    if (typeof scrollMode === 'string') {
+      scrollMode = SCROLLMODE[scrollMode];
+    }
+
+    return scrollMode;
+  };
 
   var Slider = /*#__PURE__*/function (_Base) {
     _inherits(Slider, _Base);
@@ -31225,13 +31236,14 @@
     OverlapSizer: CreateOverlapSizer,
     Buttons: CreateButtons,
     FixWidthButtons: CreateFixWidthButtons,
-    GridButtons: CreategGridButtons,
+    GridButtons: CreateGridButtons,
     Label: CreateLabel,
     BadgeLabel: CreateBadgeLabel,
     Dialog: CreateDialog$1,
     TextBox: CreateTextBox,
     Slider: CreateSlider,
     NumberBar: CreateNumberBar,
+    ScrollBar: CreateScrollBar,
     TextArea: CreateTextArea,
     Pages: CreatePages,
     Toast: CreateToast,

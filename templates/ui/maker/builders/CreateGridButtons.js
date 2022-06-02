@@ -4,7 +4,7 @@ import CreateChild from './utils/CreateChild.js';
 import CreateChildren from './utils/CreateChildren.js';
 import Make from '../Make.js';
 
-var CreategGridButtons = function (scene, data, styles, customBuilders) {
+var CreateGridButtons = function (scene, data, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     // Replace data by child game object
@@ -40,4 +40,4 @@ var CreategGridButtons = function (scene, data, styles, customBuilders) {
     return gameObject;
 };
 
-export default CreategGridButtons;
+export default CreateGridButtons;

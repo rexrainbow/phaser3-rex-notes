@@ -25,15 +25,21 @@ var OpenListPanel = function () {
             .setPosition(x, this.top);
     }
 
-    var onButtonOver = this.listOnButtonOver;
-    if (onButtonOver) {
-        listPanel.on('button.over', onButtonOver, this);
-    }
+    listPanel
+        .on('button.over', function (button, index, pointer, event) {
+            if (this.listOnButtonOver) {
+                this.listOnButtonOver.call(this, button, index, pointer, event);
+            }
 
-    var onButtonOut = this.listOnButtonOut;
-    if (onButtonOut) {
-        listPanel.on('button.out', onButtonOut, this);
-    }
+            this.emit('button.over', this, listPanel, button, index, pointer, event);
+        }, this)
+        .on('button.out', function (button, index, pointer, event) {
+            if (this.listOnButtonOut) {
+                this.listOnButtonOut.call(this, button, index, pointer, event);
+            }
+
+            this.emit('button.out', this, listPanel, button, index, pointer, event);
+        }, this);
 
     listPanel
         .popUp(this.listEaseInDuration, 'y', 'Cubic')
@@ -44,7 +50,7 @@ var OpenListPanel = function () {
             if (onButtonClick) {
                 listPanel.on('button.click', function (button, index, pointer, event) {
                     onButtonClick.call(this, button, index, pointer, event);
-                    this.emit('list.click', this, listPanel, button, index, pointer, event);
+                    this.emit('button.click', this, listPanel, button, index, pointer, event);
                 }, this);
             }
 
