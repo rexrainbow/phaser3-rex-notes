@@ -8341,7 +8341,10 @@
     <span class="c1">//     orientation: undefined,</span>
     <span class="c1">//     ease: &#39;Linear&#39;</span>
     <span class="c1">// },</span>
+
     <span class="c1">// expandEvent: &#39;button.click&#39;,</span>
+
+    <span class="c1">// childrenKey: &#39;children&#39;,</span>
 
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="c1">// draggable: false,</span>
@@ -8374,7 +8377,7 @@
 </ul>
 </li>
 <li><code>items</code> : Array of item data for each button. Each item has<ul>
-<li><code>children</code> : An array of items for sub-menu, optional.</li>
+<li><code>children</code> : An array of items for sub-menu, optional. Can change by <code>childrenKey</code> parameter.</li>
 <li>Other custom properties</li>
 </ul>
 </li>
@@ -8426,6 +8429,10 @@
 <li><code>expandEvent</code> : Event name of expanding sub-menu.<ul>
 <li><code>'button.click'</code> : Default value</li>
 <li><code>'button.over'</code></li>
+</ul>
+</li>
+<li><code>childrenKey</code> : Key of sub-menu in element of <code>items</code>.<ul>
+<li><code>children</code> : Default value.</li>
 </ul>
 </li>
 <li><code>subMenuSide</code> : Side of sub-menu<ul>
