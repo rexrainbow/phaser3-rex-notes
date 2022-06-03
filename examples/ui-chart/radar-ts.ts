@@ -1,7 +1,6 @@
 import 'phaser';
 import { Sizer, RoundRectangle, Chart } from '../../templates/ui/ui-components';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import {} from 'chart.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
