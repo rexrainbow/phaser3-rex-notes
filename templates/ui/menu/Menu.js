@@ -78,6 +78,8 @@ class Menu extends Buttons {
             this.createBackgroundCallbackScope = createBackgroundCallbackScope;
             this.createButtonCallback = createButtonCallback;
             this.createButtonCallbackScope = createButtonCallbackScope;
+            // Children key
+            this.childrenKey = GetValue(config, 'childrenKey', 'children');
 
             // Event flag
             this._isPassedEvent = false;

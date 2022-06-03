@@ -1,9 +1,9 @@
 var CollapseSubMenu = function () {
-    if (this.childrenMap.subMenu === undefined) {
+    var subMenu = this.childrenMap.subMenu;
+    if (subMenu === undefined) {
         return this;
     }
-
-    var subMenu = this.childrenMap.subMenu;
+   
     this.childrenMap.subMenu = undefined;
     this.remove(subMenu);
     subMenu.collapse();

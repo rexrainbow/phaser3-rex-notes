@@ -10451,6 +10451,12 @@
   Object.assign(Buttons.prototype, AddChildMethods, RemoveChildMethods, ButtonMethods, ButtonStateMethods);
 
   var ExpandSubMenu = function ExpandSubMenu(parentButton, items) {
+    var subMenu = this.childrenMap.subMenu; // Submenu already expand
+
+    if (subMenu && subMenu.parentButton === parentButton) {
+      return this;
+    }
+
     this.collapseSubMenu();
     var orientation;
 
@@ -10497,11 +10503,12 @@
   };
 
   var CollapseSubMenu = function CollapseSubMenu() {
-    if (this.childrenMap.subMenu === undefined) {
+    var subMenu = this.childrenMap.subMenu;
+
+    if (subMenu === undefined) {
       return this;
     }
 
-    var subMenu = this.childrenMap.subMenu;
     this.childrenMap.subMenu = undefined;
     this.remove(subMenu);
     subMenu.collapse();
@@ -10563,7 +10570,8 @@
         return;
       }
 
-      var subItems = this.items[index].children;
+      var childrenKey = this.root.childrenKey;
+      var subItems = this.items[index][childrenKey];
 
       if (subItems) {
         this.expandSubMenu(button, subItems);
@@ -10673,7 +10681,9 @@
         _this.createBackgroundCallback = createBackgroundCallback;
         _this.createBackgroundCallbackScope = createBackgroundCallbackScope;
         _this.createButtonCallback = createButtonCallback;
-        _this.createButtonCallbackScope = createButtonCallbackScope; // Event flag
+        _this.createButtonCallbackScope = createButtonCallbackScope; // Children key
+
+        _this.childrenKey = GetValue(config, 'childrenKey', 'children'); // Event flag
 
         _this._isPassedEvent = false;
       }

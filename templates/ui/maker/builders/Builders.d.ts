@@ -25,6 +25,7 @@ import Pages from '../../pages/Pages';
 import Toast from '../../toast/Toast';
 import Knob from '../../knob/Knob';
 import HolyGrail from '../../holygrail/HolyGrail';
+import Menu from '../../menu/Menu';
 
 export default Builders;
 
@@ -70,5 +71,6 @@ declare var Builders: {
     Toast: Builders.BuilderTypeCommon<Toast>,
     Knob: Builders.BuilderTypeCommon<Knob>,
     HolyGrail: Builders.BuilderTypeCommon<HolyGrail>,
+    Menu: Builders.BuilderTypeCommon<Menu>,
 
 }

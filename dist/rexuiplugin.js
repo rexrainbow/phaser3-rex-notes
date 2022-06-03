@@ -37103,6 +37103,12 @@
   SetValue(window, 'RexPlugins.UI.GridTable', GridTable);
 
   var ExpandSubMenu = function ExpandSubMenu(parentButton, items) {
+    var subMenu = this.childrenMap.subMenu; // Submenu already expand
+
+    if (subMenu && subMenu.parentButton === parentButton) {
+      return this;
+    }
+
     this.collapseSubMenu();
     var orientation;
 
@@ -37149,11 +37155,12 @@
   };
 
   var CollapseSubMenu = function CollapseSubMenu() {
-    if (this.childrenMap.subMenu === undefined) {
+    var subMenu = this.childrenMap.subMenu;
+
+    if (subMenu === undefined) {
       return this;
     }
 
-    var subMenu = this.childrenMap.subMenu;
     this.childrenMap.subMenu = undefined;
     this.remove(subMenu);
     subMenu.collapse();
@@ -37215,7 +37222,8 @@
         return;
       }
 
-      var subItems = this.items[index].children;
+      var childrenKey = this.root.childrenKey;
+      var subItems = this.items[index][childrenKey];
 
       if (subItems) {
         this.expandSubMenu(button, subItems);
@@ -37325,7 +37333,9 @@
         _this.createBackgroundCallback = createBackgroundCallback;
         _this.createBackgroundCallbackScope = createBackgroundCallbackScope;
         _this.createButtonCallback = createButtonCallback;
-        _this.createButtonCallbackScope = createButtonCallbackScope; // Event flag
+        _this.createButtonCallbackScope = createButtonCallbackScope; // Children key
+
+        _this.childrenKey = GetValue$r(config, 'childrenKey', 'children'); // Event flag
 
         _this._isPassedEvent = false;
       }
@@ -47222,6 +47232,38 @@
     return gameObject;
   };
 
+  var CreateMenu = function CreateMenu(scene, data, styles, customBuilders) {
+    data = MergeStyle(data, styles);
+    var backgroundConfig = data.background;
+    delete data.background;
+
+    if (backgroundConfig) {
+      data.createBackgroundCallback = function (items) {
+        var scene = items.scene;
+        var gameObject = Make(scene, DeepClone(backgroundConfig), styles, customBuilders);
+        return gameObject;
+      };
+    }
+
+    data.createButtonCallback = function (item, index, items) {
+      // Don't deep-clone scene and $next properties
+      var scene = item.scene;
+      var $next = item.$next;
+      delete item.scene;
+      delete item.$next;
+      var gameObject = Make(scene, DeepClone(item), styles, customBuilders); // Add scene, $next properties back
+
+      item.scene = scene;
+      item.$next = $next;
+      return gameObject;
+    };
+
+    data.childrenKey = '$next';
+    var gameObject = new Menu(scene, data);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var Builders = {
     Image: CreateImage,
     Text: CreateText,
@@ -47248,7 +47290,8 @@
     Pages: CreatePages,
     Toast: CreateToast,
     Knob: CreateKnob,
-    HolyGrail: CreateDialog
+    HolyGrail: CreateDialog,
+    Menu: CreateMenu
   };
 
   var Make = function Make(scene, data, styles, customBuilders) {

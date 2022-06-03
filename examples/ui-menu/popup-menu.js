@@ -68,7 +68,7 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
         this.input.on('pointerdown', function (pointer) {
             if (menu === undefined) {
-                menu = createMenu(scene, pointer.x, pointer.y, items, function (button) {
+                menu = CreateMenu(scene, pointer.x, pointer.y, items, function (button) {
                     scene.print.text += 'Click ' + button.text + '\n';
                 });
             } else if (!menu.isInTouching(pointer)) {
@@ -82,7 +82,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createMenu = function (scene, x, y, items, onClick) {
+var CreateMenu = function (scene, x, y, items, onClick) {
     var exapndOrientation = 'y';
     var easeOrientation = 'y';
 

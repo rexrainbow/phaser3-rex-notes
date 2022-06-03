@@ -5,7 +5,8 @@ var MenuSetInteractive = function (menu) {
             if (this._isPassedEvent) {
                 return;
             }
-            var subItems = this.items[index].children;
+            var childrenKey =  this.root.childrenKey;
+            var subItems = this.items[index][childrenKey];
             if (subItems) {
                 this.expandSubMenu(button, subItems);
             } else {

@@ -114,7 +114,10 @@ var menu = scene.rexUI.add.menu({
     //     orientation: undefined,
     //     ease: 'Linear'
     // },
+
     // expandEvent: 'button.click',
+
+    // childrenKey: 'children',
 
     name: '',
     // draggable: false,
@@ -137,7 +140,7 @@ var menu = scene.rexUI.add.menu({
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange buttons from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange buttons from top to bottom.
 - `items` : Array of item data for each button. Each item has
-    - `children` : An array of items for sub-menu, optional.
+    - `children` : An array of items for sub-menu, optional. Can change by `childrenKey` parameter.
     - Other custom properties
 - `createBackgroundCallback` : Callback to return container object of menu's bckground.
     - Properties of `items` parameter
@@ -167,6 +170,8 @@ var menu = scene.rexUI.add.menu({
 - `expandEvent` : Event name of expanding sub-menu.
     - `'button.click'` : Default value
     - `'button.over'`
+- `childrenKey` : Key of sub-menu in element of `items`.
+    - `children` : Default value.
 - `subMenuSide` : Side of sub-menu
     - `undefined` : Determine side of sub-menu automatically.
     - `'right'`, or `0` : Put sub-menu at right side. Used with `orientation` is set to `y`.

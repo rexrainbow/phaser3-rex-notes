@@ -27,6 +27,7 @@ import CreatePages from './CreatePages.js';
 import CreateToast from './CreateToast.js';
 import CreateKnob from './CreateKnob.js';
 import CreateHolyGrail from './CreateHolyGrail.js';
+import CreateMenu from './CreateMenu.js';
 
 var Builders = {
     Image: CreateImage,
@@ -58,6 +59,7 @@ var Builders = {
     Toast: CreateToast,
     Knob: CreateKnob,
     HolyGrail: CreateHolyGrail,
+    Menu: CreateMenu,
 };
 
 /*

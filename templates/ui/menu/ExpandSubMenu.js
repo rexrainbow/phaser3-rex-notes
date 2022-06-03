@@ -1,4 +1,10 @@
 var ExpandSubMenu = function (parentButton, items) {
+    var subMenu = this.childrenMap.subMenu;
+    // Submenu already expand
+    if (subMenu && subMenu.parentButton === parentButton) {
+        return this;
+    }
+
     this.collapseSubMenu();
 
     var orientation
