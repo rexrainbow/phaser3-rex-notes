@@ -7,7 +7,7 @@ import UpdateChart from './UpdateChart.js';
 
 // This plugin does not contain chart.js
 // Load chart.js in preload stage -
-// scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
+// scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/Chart.min.js');
 
 class Chart extends Canvas {
     constructor(scene, x, y, width, height, config) {

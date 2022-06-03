@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js');
+        this.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js');
     }
 
     create() {
@@ -64,6 +64,7 @@ class Card extends RexPlugins.UI.Sizer {
                 labels: ['A', 'B', 'C', 'D', 'E', 'F'],
                 datasets: [
                     {
+                        label: '',
                         backgroundColor: GetRGBAString(dataColor, 0.5),
                         borderColor: GetRGBAString(dataColor, 1),
                         pointBackgroundColor: GetRGBAString(dataColor, 1),
@@ -72,24 +73,32 @@ class Card extends RexPlugins.UI.Sizer {
                 ]
             },
             options: {
-                legend: {
-                    display: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                        // v3: options.plugins.legend.display: false 
+                        // v2: options.legend.display: false 
+                    }
                 },
-                scale: {
-                    ticks: {
+
+                // compare with options.scale in v2
+                scales: {
+                    r: {
                         min: 0,
                         max: 100,
-                        fontColor: GetRGBAString(gridColor, 1),
-                        showLabelBackdrop: false,
-                    },
-                    pointLabels: {
-                        fontColor: GetRGBAString(gridColor, 1),
-                    },
-                    angleLines: {
-                        color: GetRGBAString(gridColor, 1),
-                    },
-                    gridLines: {
-                        color: GetRGBAString(gridColor, 1),
+                        ticks: {
+                            color: GetRGBAString(gridColor, 1),
+                            showLabelBackdrop: false,
+                        },
+                        pointLabels: {
+                            color: GetRGBAString(gridColor, 1),
+                        },
+                        angleLines: {
+                            color: GetRGBAString(gridColor, 1),
+                        },
+                        grid: {
+                            color: GetRGBAString(gridColor, 1),
+                        }
                     }
                 }
             }

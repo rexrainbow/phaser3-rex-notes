@@ -1,6 +1,6 @@
 ## Introduction
 
-Draw [chart v2.x](https://www.chartjs.org/docs/2.9.4/) on [canvas](canvas.md).
+Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 - Author: Rex
 - Game object
@@ -20,6 +20,10 @@ Draw [chart v2.x](https://www.chartjs.org/docs/2.9.4/) on [canvas](canvas.md).
 [Chart.js](https://www.chartjs.org/) is not included in rexUI, installs it before creating any chart.
 
 ```javascript
+scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js');
+```
+or
+```javascript
 scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js');
 ```
 
@@ -27,7 +31,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js');
+    scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/Chart.min.js');
     scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
     ```
 - Add chart object
