@@ -23,11 +23,11 @@ var _hide = function (gameObject, hidden) {
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
 
-    var parent = gameObject.rexContainer.parent;
+    var parent = gameObject.getParent();
     if (parent) {
         parent.setChildVisible(gameObject, !hidden);
     } else {
-        this.setVisible(!hidden)
+        gameObject.setVisible(!hidden)
     }
 };
 
