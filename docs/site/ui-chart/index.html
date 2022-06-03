@@ -8254,7 +8254,7 @@
   <h1>Chart</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Draw <a href="https://www.chartjs.org/">chart</a> on <a href="../canvas/">canvas</a>.</p>
+<p>Draw <a href="https://www.chartjs.org/docs/2.9.4/">chart v2.x</a> on <a href="../canvas/">canvas</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -8268,12 +8268,12 @@
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="install-chartjs">Install chart.js<a class="headerlink" href="#install-chartjs" title="Permanent link">&para;</a></h4>
 <p><a href="https://www.chartjs.org/">Chart.js</a> is not included in rexUI, installs it before creating any chart.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js&#39;</span><span class="p">);</span>
 </code></pre></div>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js&#39;</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js&#39;</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add chart object

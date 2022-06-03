@@ -5,6 +5,7 @@ import BadgeLabelFactory from './badgelabel/Factory';
 import BBCodeTextFactory from './bbcodetext/Factory';
 import ButtonsFactory from './buttons/Factory';
 import CanvasFactory from './canvas/Factory';
+import ChartFactory from './chart/Factory';
 import CircleMaskImageFactory from './circlemaskimage/Factory';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
@@ -83,6 +84,7 @@ declare class Factories {
     BBCodeText: typeof BBCodeTextFactory;
     buttons: typeof ButtonsFactory;
     canvas: typeof CanvasFactory;
+    chart: typeof ChartFactory;
     circleMaskImage: typeof CircleMaskImageFactory;
     circularProgressCanvas: typeof CircularProgressCanvasFactory;
     circularProgress: typeof CircularProgressFactory;

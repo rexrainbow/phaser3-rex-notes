@@ -698,6 +698,7 @@
     }
 
     this.chart.update();
+    return this;
   };
 
   // Load chart.js in preload stage -

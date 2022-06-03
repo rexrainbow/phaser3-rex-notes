@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
+        this.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js');
     }
 
     create() {

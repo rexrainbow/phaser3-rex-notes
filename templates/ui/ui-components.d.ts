@@ -15,7 +15,7 @@ import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
-// import Chart from './chart/Chart';
+import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 import NinePatch2 from './ninepatch2/NinePatch';
 
@@ -97,7 +97,7 @@ export {
     TextPlayer,
     FullWindowRectangle,
     Cover,
-    // Chart,
+    Chart,
     CircularProgressCanvas,
     CircularProgress,
     Knob,

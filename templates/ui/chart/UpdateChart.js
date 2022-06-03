@@ -3,5 +3,6 @@ var UpdateChart = function () {
         return this;
     }
     this.chart.update();
+    return this;
 }
 export default UpdateChart;

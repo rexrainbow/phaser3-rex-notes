@@ -1,5 +1,7 @@
-import phaser from 'phaser/src/phaser.js';
+import 'phaser';
+import { Sizer, RoundRectangle, Chart } from '../../templates/ui/ui-components';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import {} from 'chart.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -39,26 +41,35 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-class Card extends RexPlugins.UI.Sizer {
-    constructor(scene, x, y, data) {
-        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+class Card extends Sizer {
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        data
+    ) {
+
+        var background = new RoundRectangle(scene, 0, 0, 0, 0, 20, COLOR_PRIMARY);
+        scene.add.existing(background);
+
+        var icon = new RoundRectangle(scene, 0, 0, 80, 80, 20, COLOR_LIGHT);
+        scene.add.existing(icon);
 
         var nameColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
-        var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
-        var icon = scene.rexUI.add.roundRectangle(0, 0, 80, 80, 20, COLOR_LIGHT);
         var nameText = scene.add.text(0, 0, '', {
-            fontSize: 28,
+            fontSize: '28px',
             color: GetRGBAString(nameColor, 1),
         });
+
+        var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
         var titleText = scene.add.text(0, 0, '', {
-            fontSize: 18,
+            fontSize: '18px',
             fontStyle: 'italic',
             color: GetRGBAString(titleColor, 1),
         });
 
         var dataColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
         var gridColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
-        var attributesChart = scene.rexUI.add.chart(0, 0, 240, 240, {
+        var attributesChart = new Chart(scene, 0, 0, 240, 240, {
             type: 'radar',
             data: {
                 labels: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -95,15 +106,16 @@ class Card extends RexPlugins.UI.Sizer {
                 }
             }
         });
+        scene.add.existing(attributesChart);
 
-        var header = scene.rexUI.add.sizer({
+        var header = new Sizer(scene, {
             orientation: 'x'
         })
             .add(icon,
                 { align: 'center', padding: { right: 10 }, expand: false }
             )
             .add(
-                scene.rexUI.add.sizer({
+                new Sizer(scene, {
                     orientation: 'y'
                 })
                     .add(
@@ -142,10 +154,10 @@ class Card extends RexPlugins.UI.Sizer {
     }
 
     updateData(data) {
-        this.getElement('name').text = GetValue(data, 'name', 'Name');
-        this.getElement('title').text = GetValue(data, 'title', 'Title');
+        (this.getElement('name') as Phaser.GameObjects.Text).text = GetValue(data, 'name', 'Name');
+        (this.getElement('title') as Phaser.GameObjects.Text).text = GetValue(data, 'title', 'Title');
 
-        var chart = this.getElement('attributes').chart;
+        var chart = (this.getElement('attributes') as Chart).chart;
         var labels = chart.data.labels;
         var dataset = chart.data.datasets[0].data;
         for (var i = 0, cnt = labels.length; i < cnt; i++) {
@@ -156,7 +168,10 @@ class Card extends RexPlugins.UI.Sizer {
     }
 }
 
-var GetRGBAString = function (color, alpha) {
+var GetRGBAString = function (
+    color: Phaser.Display.Color,
+    alpha?: number
+) {
     if (alpha === undefined) {
         alpha = color.alphaGL;
     }
