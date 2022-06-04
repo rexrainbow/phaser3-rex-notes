@@ -27862,7 +27862,7 @@
 
   var SetChart = function SetChart(config) {
     if (!window.Chart) {
-      var msg = "Can not find chartjs! Load chartjs in preload stage.\nscene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');";
+      var msg = "Can not find chartjs! Load chartjs in preload stage.\nscene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/Chart.min.js');";
       console.error(msg);
       return this;
     }
@@ -28005,7 +28005,7 @@
   };
 
   // Load chart.js in preload stage -
-  // scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
+  // scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/Chart.min.js');
 
   var Chart$1 = /*#__PURE__*/function (_Canvas) {
     _inherits(Chart, _Canvas);

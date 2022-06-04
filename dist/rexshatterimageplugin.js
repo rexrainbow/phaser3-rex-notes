@@ -596,7 +596,7 @@
     out.y = worldY - gameObject.y;
     out.x /= gameObject.scaleX;
     out.y /= gameObject.scaleY;
-    RotateAround(out, ox, oy, -gameObject.rotation);
+    RotateAround(out, 0, 0, -gameObject.rotation);
     out.x += ox;
     out.y += oy;
     return out;
