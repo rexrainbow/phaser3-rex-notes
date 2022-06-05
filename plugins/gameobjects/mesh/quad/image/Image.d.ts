@@ -26,10 +26,15 @@ declare namespace Image {
 declare class Image extends Phaser.GameObjects.Mesh {
     constructor(
         scene: Phaser.Scene,
-        x?: number | Image.IConfig,
+        x?: number,
         y?: number,
         key?: string,
         frame?: string | null,
+        config?: Image.IConfig
+    )
+
+    constructor(
+        scene: Phaser.Scene,
         config?: Image.IConfig
     )
 

@@ -46812,7 +46812,7 @@
 
   var PhaserImage = Phaser.GameObjects.Image;
 
-  var CreateImage = function CreateImage(scene, data, styles, customBuilders) {
+  var CreateImage = function CreateImage(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new PhaserImage(scene, 0, 0, data.key, data.frame);
 
@@ -46831,7 +46831,7 @@
 
   var PhaserText = Phaser.GameObjects.Text;
 
-  var CreateText = function CreateText(scene, data, styles, customBuilders) {
+  var CreateText = function CreateText(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new PhaserText(scene, 0, 0, data.text, data);
     SetTextureProperties(gameObject, data);
@@ -46839,7 +46839,7 @@
     return gameObject;
   };
 
-  var CreateBBCodeText = function CreateBBCodeText(scene, data, styles, customBuilders) {
+  var CreateBBCodeText = function CreateBBCodeText(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new BBCodeText(scene, 0, 0, data.text, data);
     SetTextureProperties(gameObject, data);
@@ -46847,7 +46847,7 @@
     return gameObject;
   };
 
-  var CreateRoundRectangle = function CreateRoundRectangle(scene, data, styles, customBuilders) {
+  var CreateRoundRectangle = function CreateRoundRectangle(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var width = data.width === undefined ? 1 : data.width;
     var height = data.height === undefined ? 1 : data.height;
@@ -46871,7 +46871,7 @@
     return gameObject;
   };
 
-  var CreateNinePatch = function CreateNinePatch(scene, data, styles, customBuilders) {
+  var CreateNinePatch = function CreateNinePatch(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new NinePatch$1(scene, data);
     SetTextureProperties(gameObject, data);
@@ -46879,14 +46879,14 @@
     return gameObject;
   };
 
-  var CreateNinePatch2 = function CreateNinePatch2(scene, data, styles, customBuilders) {
+  var CreateNinePatch2 = function CreateNinePatch2(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new NinePatch(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateCanvas = function CreateCanvas(scene, data, styles, customBuilders) {
+  var CreateCanvas = function CreateCanvas(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var width = data.width || 1;
     var height = data.height || 1;
@@ -46901,7 +46901,7 @@
     return gameObject;
   };
 
-  var CreateChild = function CreateChild(scene, data, subKey, styles, customBuilders) {
+  var CreateChild = function CreateChild(scene, data, subKey, view, styles, customBuilders) {
     var childData = data[subKey];
 
     if (!childData) {
@@ -46909,12 +46909,12 @@
     }
 
     var child;
-    child = Make(scene, childData, styles, customBuilders);
+    child = Make(scene, childData, view, styles, customBuilders);
     data[subKey] = child;
     return child;
   };
 
-  var ReplaceChildrenConfig = function ReplaceChildrenConfig(scene, childrenConfig, styles, customBuilders) {
+  var ReplaceChildrenConfig = function ReplaceChildrenConfig(scene, childrenConfig, view, styles, customBuilders) {
     if (childrenConfig) {
       if (!Array.isArray(childrenConfig)) {
         childrenConfig = [childrenConfig];
@@ -46930,17 +46930,17 @@
           childrenConfig[i] = childConfig;
         }
 
-        CreateChild(scene, childConfig, '$child', styles, customBuilders);
+        CreateChild(scene, childConfig, '$child', view, styles, customBuilders);
       }
     }
 
     return childrenConfig;
   };
 
-  var CreateAnySizer = function CreateAnySizer(scene, data, styles, customBuilders, SizerClass) {
+  var CreateAnySizer = function CreateAnySizer(scene, data, view, styles, customBuilders, SizerClass) {
     data = MergeStyle(data, styles);
-    var backgroundConfig = ReplaceChildrenConfig(scene, data.background, styles, customBuilders);
-    var childrenConfig = ReplaceChildrenConfig(scene, data.children, styles, customBuilders);
+    var backgroundConfig = ReplaceChildrenConfig(scene, data.background, view, styles, customBuilders);
+    var childrenConfig = ReplaceChildrenConfig(scene, data.children, view, styles, customBuilders);
     var gameObject = new SizerClass(scene, data);
     scene.add.existing(gameObject);
 
@@ -46961,15 +46961,15 @@
     return gameObject;
   };
 
-  var CreateSizer = function CreateSizer(scene, data, styles, customBuilders) {
-    return CreateAnySizer(scene, data, styles, customBuilders, Sizer);
+  var CreateSizer = function CreateSizer(scene, data, view, styles, customBuilders) {
+    return CreateAnySizer(scene, data, view, styles, customBuilders, Sizer);
   };
 
-  var CreateFixWidthSizer = function CreateFixWidthSizer(scene, data, styles, customBuilders) {
-    return CreateAnySizer(scene, data, styles, customBuilders, FixWidthSizer);
+  var CreateFixWidthSizer = function CreateFixWidthSizer(scene, data, view, styles, customBuilders) {
+    return CreateAnySizer(scene, data, view, styles, customBuilders, FixWidthSizer);
   };
 
-  var CreateGridSizer = function CreateGridSizer(scene, data, styles, customBuilders) {
+  var CreateGridSizer = function CreateGridSizer(scene, data, view, styles, customBuilders) {
     // Build createCellContainerCallback
     var createCellContainerCallbackConfig = data.createCellContainerCallback;
 
@@ -46978,7 +46978,7 @@
       delete createCellContainerCallbackConfig.$child;
 
       data.createCellContainerCallback = function (scene, x, y, config) {
-        var child = Make(scene, childData, styles, customBuilders); // Copy config
+        var child = Make(scene, childData, view, styles, customBuilders); // Copy config
 
         for (var key in createCellContainerCallbackConfig) {
           config[key] = createCellContainerCallbackConfig[key];
@@ -46988,14 +46988,14 @@
       };
     }
 
-    return CreateAnySizer(scene, data, styles, customBuilders, GridSizer);
+    return CreateAnySizer(scene, data, view, styles, customBuilders, GridSizer);
   };
 
-  var CreateOverlapSizer = function CreateOverlapSizer(scene, data, styles, customBuilders) {
-    return CreateAnySizer(scene, data, styles, customBuilders, OverlapSizer);
+  var CreateOverlapSizer = function CreateOverlapSizer(scene, data, view, styles, customBuilders) {
+    return CreateAnySizer(scene, data, view, styles, customBuilders, OverlapSizer);
   };
 
-  var CreateChildren = function CreateChildren(scene, data, subKey, styles, customBuilders) {
+  var CreateChildren = function CreateChildren(scene, data, subKey, view, styles, customBuilders) {
     var childData = data[subKey];
 
     if (!childData) {
@@ -47006,49 +47006,49 @@
       for (var i = 0, cnt = childData.length; i < cnt; i++) {
         if (Array.isArray(childData[i])) {
           // Nested array
-          CreateChildren(scene, childData, i, styles, customBuilders);
+          CreateChildren(scene, childData, i, view, styles, customBuilders);
         } else {
-          CreateChild(scene, childData, i, styles, customBuilders);
+          CreateChild(scene, childData, i, view, styles, customBuilders);
         }
       }
     } else {
       for (var key in childData) {
-        CreateChild(scene, childData, key, styles, customBuilders);
+        CreateChild(scene, childData, key, view, styles, customBuilders);
       }
     }
 
     return childData;
   };
 
-  var CreateButtons = function CreateButtons(scene, data, styles, customBuilders) {
+  var CreateButtons = function CreateButtons(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChildren(scene, data, 'buttons', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChildren(scene, data, 'buttons', view, styles, customBuilders);
     var gameObject = new Buttons$1(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateFixWidthButtons = function CreateFixWidthButtons(scene, data, styles, customBuilders) {
+  var CreateFixWidthButtons = function CreateFixWidthButtons(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChildren(scene, data, 'buttons', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChildren(scene, data, 'buttons', view, styles, customBuilders);
     var gameObject = new Buttons(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateGridButtons = function CreateGridButtons(scene, data, styles, customBuilders) {
+  var CreateGridButtons = function CreateGridButtons(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
     var buttonsConfig = data.buttons; // Game objects in 2d array
 
     if (buttonsConfig) {
       for (var i = 0, cnt = buttonsConfig.length; i < cnt; i++) {
-        CreateChildren(scene, buttonsConfig, i, styles, customBuilders);
+        CreateChildren(scene, buttonsConfig, i, view, styles, customBuilders);
       }
     } // Build createCellContainerCallback
 
@@ -47060,7 +47060,7 @@
       delete createCellContainerCallbackConfig.$child;
 
       data.createCellContainerCallback = function (scene, x, y, config) {
-        var child = Make(scene, childData, styles, customBuilders); // Copy config
+        var child = Make(scene, childData, view, styles, customBuilders); // Copy config
 
         for (var key in createCellContainerCallbackConfig) {
           config[key] = createCellContainerCallbackConfig[key];
@@ -47075,112 +47075,112 @@
     return gameObject;
   };
 
-  var CreateAnyLabel = function CreateAnyLabel(scene, data, styles, customBuilders, LabelClass) {
+  var CreateAnyLabel = function CreateAnyLabel(scene, data, view, styles, customBuilders, LabelClass) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'icon', styles, customBuilders);
-    CreateChild(scene, data, 'text', styles, customBuilders);
-    CreateChild(scene, data, 'action', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'icon', view, styles, customBuilders);
+    CreateChild(scene, data, 'text', view, styles, customBuilders);
+    CreateChild(scene, data, 'action', view, styles, customBuilders);
     var gameObject = new LabelClass(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateLabel = function CreateLabel(scene, data, styles, customBuilders) {
-    return CreateAnyLabel(scene, data, styles, customBuilders, Label);
+  var CreateLabel = function CreateLabel(scene, data, view, styles, customBuilders) {
+    return CreateAnyLabel(scene, data, view, styles, customBuilders, Label);
   };
 
-  var CreateBadgeLabel = function CreateBadgeLabel(scene, data, styles, customBuilders) {
+  var CreateBadgeLabel = function CreateBadgeLabel(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'main', styles, customBuilders);
-    CreateChild(scene, data, 'leftTop', styles, customBuilders);
-    CreateChild(scene, data, 'centerTop', styles, customBuilders);
-    CreateChild(scene, data, 'rightTop', styles, customBuilders);
-    CreateChild(scene, data, 'leftCenter', styles, customBuilders);
-    CreateChild(scene, data, 'center', styles, customBuilders);
-    CreateChild(scene, data, 'rightCenter', styles, customBuilders);
-    CreateChild(scene, data, 'leftBottom', styles, customBuilders);
-    CreateChild(scene, data, 'centerBottom', styles, customBuilders);
-    CreateChild(scene, data, 'rightBottom', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'main', view, styles, customBuilders);
+    CreateChild(scene, data, 'leftTop', view, styles, customBuilders);
+    CreateChild(scene, data, 'centerTop', view, styles, customBuilders);
+    CreateChild(scene, data, 'rightTop', view, styles, customBuilders);
+    CreateChild(scene, data, 'leftCenter', view, styles, customBuilders);
+    CreateChild(scene, data, 'center', view, styles, customBuilders);
+    CreateChild(scene, data, 'rightCenter', view, styles, customBuilders);
+    CreateChild(scene, data, 'leftBottom', view, styles, customBuilders);
+    CreateChild(scene, data, 'centerBottom', view, styles, customBuilders);
+    CreateChild(scene, data, 'rightBottom', view, styles, customBuilders);
     var gameObject = new Badge(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateDialog$1 = function CreateDialog(scene, data, styles, customBuilders) {
+  var CreateDialog$1 = function CreateDialog(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'toolbarBackground', styles, customBuilders);
-    CreateChild(scene, data, 'leftToolbarBackground', styles, customBuilders);
-    CreateChild(scene, data, 'choicesBackground', styles, customBuilders);
-    CreateChild(scene, data, 'actionsBackground', styles, customBuilders);
-    CreateChild(scene, data, 'title', styles, customBuilders);
-    CreateChildren(scene, data, 'toolbar', styles, customBuilders);
-    CreateChildren(scene, data, 'leftToolbar', styles, customBuilders);
-    CreateChild(scene, data, 'content', styles, customBuilders);
-    CreateChild(scene, data, 'description', styles, customBuilders);
-    CreateChildren(scene, data, 'choices', styles, customBuilders);
-    CreateChildren(scene, data, 'actions', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'toolbarBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'leftToolbarBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'choicesBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'actionsBackground', view, styles, customBuilders);
+    CreateChild(scene, data, 'title', view, styles, customBuilders);
+    CreateChildren(scene, data, 'toolbar', view, styles, customBuilders);
+    CreateChildren(scene, data, 'leftToolbar', view, styles, customBuilders);
+    CreateChild(scene, data, 'content', view, styles, customBuilders);
+    CreateChild(scene, data, 'description', view, styles, customBuilders);
+    CreateChildren(scene, data, 'choices', view, styles, customBuilders);
+    CreateChildren(scene, data, 'actions', view, styles, customBuilders);
     var gameObject = new Dialog(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateTextBox = function CreateTextBox(scene, data, styles, customBuilders) {
-    return CreateAnyLabel(scene, data, styles, customBuilders, TextBox);
+  var CreateTextBox = function CreateTextBox(scene, data, view, styles, customBuilders) {
+    return CreateAnyLabel(scene, data, view, styles, customBuilders, TextBox);
   };
 
-  var CreateSlider = function CreateSlider(scene, data, styles, customBuilders) {
+  var CreateSlider = function CreateSlider(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'track', styles, customBuilders);
-    CreateChild(scene, data, 'indicator', styles, customBuilders);
-    CreateChild(scene, data, 'thumb', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'track', view, styles, customBuilders);
+    CreateChild(scene, data, 'indicator', view, styles, customBuilders);
+    CreateChild(scene, data, 'thumb', view, styles, customBuilders);
     var gameObject = new Slider$1(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var ReplaceSliderConfig = function ReplaceSliderConfig(scene, sliderConfig, styles, customBuilders) {
+  var ReplaceSliderConfig = function ReplaceSliderConfig(scene, sliderConfig, view, styles, customBuilders) {
     if (sliderConfig) {
-      CreateChild(scene, sliderConfig, 'background', styles, customBuilders);
-      CreateChild(scene, sliderConfig, 'track', styles, customBuilders);
-      CreateChild(scene, sliderConfig, 'indicator', styles, customBuilders);
-      CreateChild(scene, sliderConfig, 'thumb', styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'background', view, styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'track', view, styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'indicator', view, styles, customBuilders);
+      CreateChild(scene, sliderConfig, 'thumb', view, styles, customBuilders);
     }
 
     return sliderConfig;
   };
 
-  var CreateNumberBar = function CreateNumberBar(scene, data, styles, customBuilders) {
+  var CreateNumberBar = function CreateNumberBar(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'icon', styles, customBuilders);
-    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
-    CreateChild(scene, data, 'text', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'icon', view, styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, view, styles, customBuilders);
+    CreateChild(scene, data, 'text', view, styles, customBuilders);
     var gameObject = new NumberBar(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateScrollBar = function CreateScrollBar(scene, data, styles, customBuilders) {
+  var CreateScrollBar = function CreateScrollBar(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, view, styles, customBuilders);
     var buttonsConfig = data.buttons;
 
     if (buttonsConfig) {
-      CreateChild(scene, buttonsConfig, 'top', styles, customBuilders);
-      CreateChild(scene, buttonsConfig, 'bottom', styles, customBuilders);
-      CreateChild(scene, buttonsConfig, 'left', styles, customBuilders);
-      CreateChild(scene, buttonsConfig, 'right', styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'top', view, styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'bottom', view, styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'left', view, styles, customBuilders);
+      CreateChild(scene, buttonsConfig, 'right', view, styles, customBuilders);
     }
 
     var gameObject = new ScrollBar(scene, data);
@@ -47188,52 +47188,52 @@
     return gameObject;
   };
 
-  var CreateTextArea = function CreateTextArea(scene, data, styles, customBuilders) {
+  var CreateTextArea = function CreateTextArea(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'text', styles, customBuilders);
-    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
-    CreateChild(scene, data, 'header', styles, customBuilders);
-    CreateChild(scene, data, 'footer', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'text', view, styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, view, styles, customBuilders);
+    CreateChild(scene, data, 'header', view, styles, customBuilders);
+    CreateChild(scene, data, 'footer', view, styles, customBuilders);
     var gameObject = new TextArea(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreatePages = function CreatePages(scene, data, styles, customBuilders) {
-    return CreateAnySizer(scene, data, styles, customBuilders, Pages);
+  var CreatePages = function CreatePages(scene, data, view, styles, customBuilders) {
+    return CreateAnySizer(scene, data, view, styles, customBuilders, Pages);
   };
 
-  var CreateToast = function CreateToast(scene, data, styles, customBuilders) {
-    return CreateAnyLabel(scene, data, styles, customBuilders, Toast);
+  var CreateToast = function CreateToast(scene, data, view, styles, customBuilders) {
+    return CreateAnyLabel(scene, data, view, styles, customBuilders, Toast);
   };
 
-  var CreateKnob = function CreateKnob(scene, data, styles, customBuilders) {
+  var CreateKnob = function CreateKnob(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'text', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'text', view, styles, customBuilders);
     var gameObject = new Knob(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateDialog = function CreateDialog(scene, data, styles, customBuilders) {
+  var CreateDialog = function CreateDialog(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles); // Replace data by child game object
 
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'content', styles, customBuilders);
-    CreateChild(scene, data, 'leftSide', styles, customBuilders);
-    CreateChild(scene, data, 'rightSide', styles, customBuilders);
-    CreateChild(scene, data, 'header', styles, customBuilders);
-    CreateChild(scene, data, 'footer', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'content', view, styles, customBuilders);
+    CreateChild(scene, data, 'leftSide', view, styles, customBuilders);
+    CreateChild(scene, data, 'rightSide', view, styles, customBuilders);
+    CreateChild(scene, data, 'header', view, styles, customBuilders);
+    CreateChild(scene, data, 'footer', view, styles, customBuilders);
     var gameObject = new HolyGrail(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
 
-  var CreateMenu = function CreateMenu(scene, data, styles, customBuilders) {
+  var CreateMenu = function CreateMenu(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var backgroundConfig = data.background;
     delete data.background;
@@ -47241,7 +47241,7 @@
     if (backgroundConfig) {
       data.createBackgroundCallback = function (items) {
         var scene = items.scene;
-        var gameObject = Make(scene, DeepClone(backgroundConfig), styles, customBuilders);
+        var gameObject = Make(scene, DeepClone(backgroundConfig), view, styles, customBuilders);
         return gameObject;
       };
     }
@@ -47252,7 +47252,7 @@
       var $next = item.$next;
       delete item.scene;
       delete item.$next;
-      var gameObject = Make(scene, DeepClone(item), styles, customBuilders); // Add scene, $next properties back
+      var gameObject = Make(scene, DeepClone(item), view, styles, customBuilders); // Add scene, $next properties back
 
       item.scene = scene;
       item.$next = $next;
@@ -47295,7 +47295,7 @@
     Menu: CreateMenu
   };
 
-  var Make = function Make(scene, data, styles, customBuilders) {
+  var Make = function Make(scene, data, view, styles, customBuilders) {
     var type = GetTypeName(data, styles);
 
     if (!type) {
@@ -47318,7 +47318,7 @@
       return undefined;
     }
 
-    var gameObject = callback(scene, data, styles, customBuilders);
+    var gameObject = callback(scene, data, view, styles, customBuilders);
 
     if (data.name) {
       gameObject.setName(data.name);
@@ -47327,7 +47327,7 @@
     return gameObject;
   };
 
-  var YAMLMake = function YAMLMake(scene, data, styles, customBuilders) {
+  var YAMLMake = function YAMLMake(scene, data, view, styles, customBuilders) {
     data = ParseYAML(data);
 
     if (Array.isArray(data)) {
@@ -47353,7 +47353,7 @@
     }
 
     styles = ParseYAML(styles);
-    var gameObject = Make(scene, data, styles, customBuilders);
+    var gameObject = Make(scene, data, view, styles, customBuilders);
     return gameObject;
   };
 
@@ -47418,8 +47418,8 @@
       }
     }, {
       key: "make",
-      value: function make(data) {
-        return YAMLMake(this.scene, data, this.styles, this.customBuilders);
+      value: function make(data, view) {
+        return YAMLMake(this.scene, data, view, this.styles, this.customBuilders);
       }
     }]);
 
@@ -48169,7 +48169,7 @@
     }, {
       key: "make",
       value: function make(data, view, styles, customBuilders) {
-        return YAMLMake(this.scene, data, view, styles);
+        return YAMLMake(this.scene, data, view, styles, customBuilders);
       }
     }, {
       key: "maker",

@@ -234,6 +234,25 @@
         this.setLocalXY(this._localX, y);
       }
     }, {
+      key: "localXOrigin",
+      get: function get() {
+        return this._localXOrigin;
+      }
+    }, {
+      key: "localYOrigin",
+      get: function get() {
+        return this._localYOrigin;
+      }
+    }, {
+      key: "resetLocalXY",
+      value: function resetLocalXY(x, y) {
+        this._localXOrigin = x;
+        this._localYOrigin = y;
+        this._localX = x;
+        this._localY = y;
+        return this;
+      }
+    }, {
       key: "setLocalXY",
       value: function setLocalXY(x, y, ignoreUpdateVertex) {
         if (this._localX === x && this._localY === y) {
@@ -383,8 +402,8 @@
   };
 
   var Mesh = Phaser.GameObjects.Mesh;
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var Image = /*#__PURE__*/function (_Mesh) {
     _inherits(Image, _Mesh);
@@ -396,17 +415,17 @@
 
       _classCallCheck(this, Image);
 
-      if (IsPlainObject$1(x)) {
+      if (IsPlainObject$2(x)) {
         config = x;
-        x = GetValue$1(config, 'x', 0);
-        y = GetValue$1(config, 'y', 0);
-        key = GetValue$1(config, 'key', null);
-        frame = GetValue$1(config, 'frame', null);
+        x = GetValue$2(config, 'x', 0);
+        y = GetValue$2(config, 'y', 0);
+        key = GetValue$2(config, 'key', null);
+        frame = GetValue$2(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
-      _this.isNinePointMode = GetValue$1(config, 'ninePointMode', false);
+      _this.isNinePointMode = GetValue$2(config, 'ninePointMode', false);
       _this.controlPoints = [];
       InitFaces(_assertThisInitialized(_this));
       _this.hideCCW = false;
@@ -457,7 +476,7 @@
           var u = frameU0 + frameU * (px / srcWidth);
           var v = frameV0 + frameV * (py / srcHeight);
           this.vertices[vertexIndex].set(x, -y, 0).setUVs(u, v);
-          controlPoints[vertexIndex].setLocalXY(px, py, true);
+          controlPoints[vertexIndex].resetLocalXY(px, py);
         }
 
         return this;
@@ -511,8 +530,8 @@
     return gameObject;
   }
 
-  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+  var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$2 = Phaser.GameObjects.BuildGameObject;
   function QuadImageCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
@@ -522,16 +541,16 @@
       config.add = addToScene;
     }
 
-    var key = GetAdvancedValue$1(config, 'key', null);
-    var frame = GetAdvancedValue$1(config, 'frame', null);
+    var key = GetAdvancedValue$2(config, 'key', null);
+    var frame = GetAdvancedValue$2(config, 'frame', null);
     var gameObject = new Image(this.scene, 0, 0, key, frame, config);
-    BuildGameObject$1(this.scene, gameObject, config);
+    BuildGameObject$2(this.scene, gameObject, config);
     return gameObject;
   }
 
   var RT = Phaser.GameObjects.RenderTexture;
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var RenderTexture = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
@@ -543,12 +562,12 @@
 
       _classCallCheck(this, RenderTexture);
 
-      if (IsPlainObject(x)) {
+      if (IsPlainObject$1(x)) {
         config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        width = GetValue(config, 'width', 32);
-        height = GetValue(config, 'height', 32);
+        x = GetValue$1(config, 'x', 0);
+        y = GetValue$1(config, 'y', 0);
+        width = GetValue$1(config, 'width', 32);
+        height = GetValue$1(config, 'height', 32);
       } // render-texture -> quad-image
 
 
@@ -578,8 +597,8 @@
     return gameObject;
   }
 
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
   function QuadRenderTextureCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
@@ -589,11 +608,176 @@
       config.add = addToScene;
     }
 
-    var x = GetAdvancedValue(config, 'x', 0);
-    var y = GetAdvancedValue(config, 'y', 0);
-    var width = GetAdvancedValue(config, 'width', 32);
-    var height = GetAdvancedValue(config, 'height', 32);
+    var x = GetAdvancedValue$1(config, 'x', 0);
+    var y = GetAdvancedValue$1(config, 'y', 0);
+    var width = GetAdvancedValue$1(config, 'width', 32);
+    var height = GetAdvancedValue$1(config, 'height', 32);
     var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    BuildGameObject$1(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var Skew = function Skew(gameObject, xRad, yRad) {
+    if (xRad === undefined) {
+      xRad = 0;
+    }
+
+    if (yRad === undefined) {
+      yRad = 0;
+    }
+
+    var width = gameObject.width,
+        height = gameObject.height;
+    var ox = width * 0.5;
+    var oy = height * 0.5;
+    var xOffset = Math.tan(xRad) * oy;
+    var yOffset = Math.tan(yRad) * ox;
+    var controlPoints = gameObject.controlPoints;
+
+    for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
+      var controlPoint = controlPoints[i];
+      var x = controlPoint.localXOrigin;
+      var y = controlPoint.localYOrigin;
+      controlPoint.localX = x + (y > oy ? xOffset : -xOffset);
+      controlPoint.localY = y + (x > ox ? yOffset : -yOffset);
+    }
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var DegToRad = Phaser.Math.DegToRad;
+  var RadToDeg = Phaser.Math.RadToDeg;
+
+  var SkewImage = /*#__PURE__*/function (_Image) {
+    _inherits(SkewImage, _Image);
+
+    var _super = _createSuper(SkewImage);
+
+    function SkewImage(scene, x, y, key, frame) {
+      var _this;
+
+      _classCallCheck(this, SkewImage);
+
+      if (IsPlainObject(x)) {
+        var config = x;
+        x = GetValue(config, 'x', 0);
+        y = GetValue(config, 'y', 0);
+        key = GetValue(config, 'key', null);
+        frame = GetValue(config, 'frame', null);
+      }
+
+      _this = _super.call(this, scene, x, y, key, frame);
+      _this.type = 'rexSkewmage';
+      _this._skewX = 0;
+      _this._skewY = 0;
+      return _this;
+    }
+
+    _createClass(SkewImage, [{
+      key: "skewX",
+      get: function get() {
+        return this._skewX;
+      },
+      set: function set(value) {
+        this._skewX = value;
+        Skew(this, this._skewX, this._skewY);
+      }
+    }, {
+      key: "skewXDeg",
+      get: function get() {
+        return RadToDeg(this._skewX);
+      },
+      set: function set(value) {
+        this.skewX = DegToRad(value);
+      }
+    }, {
+      key: "skewY",
+      get: function get() {
+        return this._skewY;
+      },
+      set: function set(value) {
+        this._skewY = value;
+        Skew(this, this._skewX, this._skewY);
+      }
+    }, {
+      key: "skewYDeg",
+      get: function get() {
+        return RadToDeg(this._skewY);
+      },
+      set: function set(value) {
+        this.skewY = DegToRad(value);
+      }
+    }, {
+      key: "setSkewX",
+      value: function setSkewX(skewX) {
+        this.skewX = skewX;
+        return this;
+      }
+    }, {
+      key: "setSkewY",
+      value: function setSkewY(skewY) {
+        this.skewY = skewY;
+        return this;
+      }
+    }, {
+      key: "setSkew",
+      value: function setSkew(skewX, skewY) {
+        if (skewY === undefined) {
+          skewY = skewX;
+        }
+
+        this.skewX = skewX;
+        this.skewY = skewY;
+        return this;
+      }
+    }, {
+      key: "setSkewXDeg",
+      value: function setSkewXDeg(skewX) {
+        this.skewXDeg = skewX;
+        return this;
+      }
+    }, {
+      key: "setSkewYDeg",
+      value: function setSkewYDeg(skewY) {
+        this.skewYDeg = skewY;
+        return this;
+      }
+    }, {
+      key: "setSkewDeg",
+      value: function setSkewDeg(skewX, skewY) {
+        if (skewY === undefined) {
+          skewY = skewX;
+        }
+
+        this.skewXDeg = skewX;
+        this.skewYDeg = skewY;
+        return this;
+      }
+    }]);
+
+    return SkewImage;
+  }(Image);
+
+  function SkewImageFactory (x, y, texture, frame) {
+    var gameObject = new SkewImage(this.scene, x, y, texture, frame);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function SkewImageCreator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+
+    var key = GetAdvancedValue(config, 'key', null);
+    var frame = GetAdvancedValue(config, 'frame', null);
+    var gameObject = new SkewImage(this.scene, 0, 0, key, frame);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -682,6 +866,7 @@
 
       pluginManager.registerGameObject('rexQuadImage', QuadImageFactory, QuadImageCreator);
       pluginManager.registerGameObject('rexQuadRenderTexture', QuadRenderTextureFactory, QuadRenderTextureCreator);
+      pluginManager.registerGameObject('rexSkewImage', SkewImageFactory, SkewImageCreator);
       return _this;
     }
 
@@ -698,6 +883,7 @@
 
   SetValue(window, 'RexPlugins.GameObjects.QuadImage', Image);
   SetValue(window, 'RexPlugins.GameObjects.QuadRenderTexture', RenderTexture);
+  SetValue(window, 'RexPlugins.GameObjects.SkewImage', SkewImage);
 
   return QuadImagePlugin;
 
