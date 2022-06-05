@@ -1,5 +1,5 @@
-import InitFaces from './InitFaces.js';
-import GetPointPosition from './GetPointPosition.js';
+import InitFaces from './methods/InitFaces.js';
+import GetPointPosition from './methods/GetPointPosition.js';
 
 const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -69,7 +69,7 @@ class Image extends Mesh {
                 .set(x, -y, 0)
                 .setUVs(u, v)
 
-            controlPoints[vertexIndex].setLocalXY(px, py, true);
+            controlPoints[vertexIndex].resetLocalXY(px, py);
         }
 
         return this;
@@ -86,7 +86,7 @@ class Image extends Mesh {
         this.dirtyCache[10] = 1;
         return this;
     }
-        
+
     get tint() {
         if (this.vertices.length === 0) {
             return 0xffffff;

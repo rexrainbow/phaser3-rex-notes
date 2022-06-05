@@ -1,4 +1,4 @@
-import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/LocalXY.js';
+import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../../utils/LocalXY.js';
 
 class ControlPoint {
     constructor(parent, vertex) {
@@ -43,6 +43,22 @@ class ControlPoint {
 
     set localY(y) {
         this.setLocalXY(this._localX, y);
+    }
+
+    get localXOrigin() {
+        return this._localXOrigin;
+    }
+
+    get localYOrigin() {
+        return this._localYOrigin;
+    }
+
+    resetLocalXY(x, y) {
+        this._localXOrigin = x;
+        this._localYOrigin = y;
+        this._localX = x;
+        this._localY = y;
+        return this;
     }
 
     setLocalXY(x, y, ignoreUpdateVertex) {
