@@ -1,17 +1,17 @@
-var Skew = function (gameObject, xRad, yRad) {
-    if (xRad === undefined) {
-        xRad = 0;
+var Skew = function (gameObject, skewX, skewY) {
+    if (skewX === undefined) {
+        skewX = 0;
     }
-    if (yRad === undefined) {
-        yRad = 0;
+    if (skewY === undefined) {
+        skewY = 0;
     }
 
     var width = gameObject.width,
         height = gameObject.height;
     var ox = width * 0.5;
     var oy = height * 0.5;
-    var xOffset = Math.tan(xRad) * oy;
-    var yOffset = Math.tan(yRad) * ox;
+    var xOffset = Math.tan(skewX) * oy;
+    var yOffset = Math.tan(skewY) * ox;
     var controlPoints = gameObject.controlPoints;
     for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
         var controlPoint = controlPoints[i];
