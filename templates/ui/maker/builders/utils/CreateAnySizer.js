@@ -1,11 +1,11 @@
 import MergeStyle from './MergeStyle.js';
 import ReplaceChildrenConfig from './ReplaceChildrenConfig.js';
 
-var CreateAnySizer = function (scene, data, styles, customBuilders, SizerClass) {
+var CreateAnySizer = function (scene, data, view, styles, customBuilders, SizerClass) {
     data = MergeStyle(data, styles);
 
-    var backgroundConfig = ReplaceChildrenConfig(scene, data.background, styles, customBuilders);
-    var childrenConfig = ReplaceChildrenConfig(scene, data.children, styles, customBuilders);
+    var backgroundConfig = ReplaceChildrenConfig(scene, data.background, view, styles, customBuilders);
+    var childrenConfig = ReplaceChildrenConfig(scene, data.children, view, styles, customBuilders);
 
     var gameObject = new SizerClass(scene, data);
     scene.add.existing(gameObject);

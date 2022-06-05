@@ -2,7 +2,7 @@ import CreateAnySizer from './utils/CreateAnySizer.js';
 import GridSizer from '../../gridsizer/GridSizer.js';
 import Make from '../Make.js';
 
-var CreateGridSizer = function (scene, data, styles, customBuilders) {
+var CreateGridSizer = function (scene, data, view, styles, customBuilders) {
     // Build createCellContainerCallback
     var createCellContainerCallbackConfig = data.createCellContainerCallback;
     if (createCellContainerCallbackConfig) {
@@ -10,7 +10,7 @@ var CreateGridSizer = function (scene, data, styles, customBuilders) {
         delete createCellContainerCallbackConfig.$child;
 
         data.createCellContainerCallback = function (scene, x, y, config) {
-            var child = Make(scene, childData, styles, customBuilders);
+            var child = Make(scene, childData, view, styles, customBuilders);
 
             // Copy config
             for (var key in createCellContainerCallbackConfig) {
@@ -21,7 +21,7 @@ var CreateGridSizer = function (scene, data, styles, customBuilders) {
         }
     }
 
-    return CreateAnySizer(scene, data, styles, customBuilders, GridSizer);
+    return CreateAnySizer(scene, data, view, styles, customBuilders, GridSizer);
 }
 
 export default CreateGridSizer;

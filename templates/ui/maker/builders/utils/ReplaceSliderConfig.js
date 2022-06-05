@@ -1,11 +1,11 @@
 import CreateChild from './CreateChild.js';
 
-var ReplaceSliderConfig = function (scene, sliderConfig, styles, customBuilders) {
+var ReplaceSliderConfig = function (scene, sliderConfig, view, styles, customBuilders) {
     if (sliderConfig) {
-        CreateChild(scene, sliderConfig, 'background', styles, customBuilders);
-        CreateChild(scene, sliderConfig, 'track', styles, customBuilders);
-        CreateChild(scene, sliderConfig, 'indicator', styles, customBuilders);
-        CreateChild(scene, sliderConfig, 'thumb', styles, customBuilders);
+        CreateChild(scene, sliderConfig, 'background', view, styles, customBuilders);
+        CreateChild(scene, sliderConfig, 'track', view, styles, customBuilders);
+        CreateChild(scene, sliderConfig, 'indicator', view, styles, customBuilders);
+        CreateChild(scene, sliderConfig, 'thumb', view, styles, customBuilders);
     }
 
     return sliderConfig;

@@ -3,15 +3,15 @@ import TextArea from '../../textarea/TextArea.js';
 import CreateChild from './utils/CreateChild.js';
 import ReplaceSliderConfig from './utils/ReplaceSliderConfig.js';
 
-var CreateTextArea = function (scene, data, styles, customBuilders) {
+var CreateTextArea = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     // Replace data by child game object
-    CreateChild(scene, data, 'background', styles, customBuilders);
-    CreateChild(scene, data, 'text', styles, customBuilders);
-    ReplaceSliderConfig(scene, data.slider, styles, customBuilders);
-    CreateChild(scene, data, 'header', styles, customBuilders);
-    CreateChild(scene, data, 'footer', styles, customBuilders);
+    CreateChild(scene, data, 'background', view, styles, customBuilders);
+    CreateChild(scene, data, 'text', view, styles, customBuilders);
+    ReplaceSliderConfig(scene, data.slider, view, styles, customBuilders);
+    CreateChild(scene, data, 'header', view, styles, customBuilders);
+    CreateChild(scene, data, 'footer', view, styles, customBuilders);
 
     var gameObject = new TextArea(scene, data);
     scene.add.existing(gameObject);

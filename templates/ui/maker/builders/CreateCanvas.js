@@ -3,7 +3,7 @@ import Canvas from '../../canvas/Canvas.js';
 import SetTextureProperties from './utils/SetTextureProperties.js';
 
 
-var CreateCanvas = function (scene, data, styles, customBuilders) {
+var CreateCanvas = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var width = data.width || 1;

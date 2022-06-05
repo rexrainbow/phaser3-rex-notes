@@ -49,8 +49,8 @@ class Maker {
         return this;
     }
 
-    make(data) {
-        return YAMLMake(this.scene, data, this.styles, this.customBuilders);
+    make(data, view) {
+        return YAMLMake(this.scene, data, view, this.styles, this.customBuilders);
     }
 }
 

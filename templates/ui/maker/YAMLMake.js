@@ -1,7 +1,7 @@
 import ParseYAML from './utils/ParseYAML.js';
 import Make from './Make.js';
 
-var YAMLMake = function (scene, data, styles, customBuilders) {
+var YAMLMake = function (scene, data, view, styles, customBuilders) {
     data = ParseYAML(data);
     if (Array.isArray(data)) {
         // Parsing result of YAML data might be an array, 
@@ -27,7 +27,7 @@ var YAMLMake = function (scene, data, styles, customBuilders) {
 
     styles = ParseYAML(styles);
 
-    var gameObject = Make(scene, data, styles, customBuilders);
+    var gameObject = Make(scene, data, view, styles, customBuilders);
 
     return gameObject;
 }

@@ -1,6 +1,6 @@
 import CreateChild from './CreateChild.js';
 
-var ReplaceChildrenConfig = function (scene, childrenConfig, styles, customBuilders) {
+var ReplaceChildrenConfig = function (scene, childrenConfig, view, styles, customBuilders) {
     if (childrenConfig) {
         if (!Array.isArray(childrenConfig)) {
             childrenConfig = [childrenConfig];
@@ -12,7 +12,7 @@ var ReplaceChildrenConfig = function (scene, childrenConfig, styles, customBuild
                 childConfig = { $child: childConfig };
                 childrenConfig[i] = childConfig;
             }
-            CreateChild(scene, childConfig, '$child', styles, customBuilders);
+            CreateChild(scene, childConfig, '$child', view, styles, customBuilders);
         }
     }
 

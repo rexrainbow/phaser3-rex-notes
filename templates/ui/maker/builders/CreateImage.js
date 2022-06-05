@@ -3,7 +3,7 @@ import SetTextureProperties from './utils/SetTextureProperties.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
 
-var CreateImage = function (scene, data, styles, customBuilders) {
+var CreateImage = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
     var gameObject = new PhaserImage(scene, 0, 0, data.key, data.frame);
 

@@ -3,7 +3,7 @@ import SetTextureProperties from './utils/SetTextureProperties.js';
 
 const PhaserText = Phaser.GameObjects.Text;
 
-var CreateText = function (scene, data, styles, customBuilders) {
+var CreateText = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var gameObject = new PhaserText(scene, 0, 0, data.text, data);

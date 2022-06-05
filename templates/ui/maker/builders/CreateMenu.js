@@ -3,7 +3,7 @@ import Menu from '../../menu/Menu.js';
 import Make from '../Make.js';
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 
-var CreateMenu = function (scene, data, styles, customBuilders) {
+var CreateMenu = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var backgroundConfig = data.background;
@@ -11,7 +11,7 @@ var CreateMenu = function (scene, data, styles, customBuilders) {
     if (backgroundConfig) {
         data.createBackgroundCallback = function (items) {
             var scene = items.scene;
-            var gameObject = Make(scene, DeepClone(backgroundConfig), styles, customBuilders);
+            var gameObject = Make(scene, DeepClone(backgroundConfig), view, styles, customBuilders);
             return gameObject;
         }
     }
@@ -23,7 +23,7 @@ var CreateMenu = function (scene, data, styles, customBuilders) {
         delete item.scene;
         delete item.$next;
 
-        var gameObject = Make(scene, DeepClone(item), styles, customBuilders);
+        var gameObject = Make(scene, DeepClone(item), view, styles, customBuilders);
 
         // Add scene, $next properties back
         item.scene = scene;

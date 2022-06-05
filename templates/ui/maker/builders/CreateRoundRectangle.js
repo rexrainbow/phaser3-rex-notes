@@ -1,7 +1,7 @@
 import MergeStyle from './utils/MergeStyle.js';
 import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
 
-var CreateRoundRectangle = function (scene, data, styles, customBuilders) {
+var CreateRoundRectangle = function (scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
 
     var width = (data.width === undefined) ? 1 : data.width;

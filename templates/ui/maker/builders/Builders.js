@@ -63,7 +63,7 @@ var Builders = {
 };
 
 /*
-function(scene, data, styles, customBuilders) {
+function(scene, data, view, styles, customBuilders) {
     return gameObject;
 }
 */
