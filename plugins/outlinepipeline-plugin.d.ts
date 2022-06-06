@@ -7,8 +7,9 @@ export default OutlinePipelinePlugin;
 declare namespace OutlinePipelinePlugin {
 
     interface IConfig {
-        intensity?: number,
+        thickness?: number,
         outlineColor?: number,
+        quality?: number,
 
         name?: string,
     }
