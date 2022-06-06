@@ -45,6 +45,7 @@ class Demo extends Phaser.Scene {
             repeat: 0,            // -1: infinity
             yoyo: false
         });
+
     }
 
     update() {

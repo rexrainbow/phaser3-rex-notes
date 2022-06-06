@@ -20056,10 +20056,10 @@
     return out;
   };
 
-  var ContainerAdd$1 = ContainerLite.prototype.add;
+  var ContainerAdd = ContainerLite.prototype.add;
 
   var AddChild = function AddChild(gameObject) {
-    ContainerAdd$1.call(this, gameObject);
+    ContainerAdd.call(this, gameObject);
 
     if (this.sizerEventsEnable) {
       gameObject.emit('sizer.add', gameObject, this);
@@ -42639,6 +42639,34 @@
   Phaser.Utils.Objects.GetValue;
   Phaser.Math.Wrap;
 
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
+  var Init = function Init(parentContainer, rtOwner, config) {
+    rtOwner.visibleSibling = [];
+    rtOwner.isRunning = false;
+    rtOwner.useParentBounds = GetValue$4(config, 'useParentBounds', false);
+    rtOwner.setPosition(parentContainer.x, parentContainer.y).setVisible(false);
+    parentContainer.pin(rtOwner);
+  };
+
+  var Exit = function Exit(parentContainer, rtOwner) {
+    if (!parentContainer) {
+      return false;
+    }
+
+    var visibleSibling = rtOwner.visibleSibling; // Set all visible children back
+
+    for (var i = 0, cnt = visibleSibling.length; i < cnt; i++) {
+      parentContainer.setChildVisible(visibleSibling[i], true);
+    }
+
+    visibleSibling.length = 0; // Set rtOwner to be invisible
+
+    parentContainer.setChildVisible(rtOwner, false);
+    rtOwner.isRunning = false;
+    return true;
+  };
+
   var Rectangle = Phaser.Geom.Rectangle;
   var Union = Phaser.Geom.Rectangle.Union;
 
@@ -42678,7 +42706,7 @@
 
   var GlobRect;
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
     var gameObjects = config.gameObjects;
@@ -42692,12 +42720,12 @@
       return renderTexture;
     }
 
-    var x = GetValue$4(config, 'x', undefined);
-    var y = GetValue$4(config, 'y', undefined);
-    var width = GetValue$4(config, 'width', undefined);
-    var height = GetValue$4(config, 'height', undefined);
-    var originX = GetValue$4(config, 'originX', 0);
-    var originY = GetValue$4(config, 'originY', 0);
+    var x = GetValue$3(config, 'x', undefined);
+    var y = GetValue$3(config, 'y', undefined);
+    var width = GetValue$3(config, 'width', undefined);
+    var height = GetValue$3(config, 'height', undefined);
+    var originX = GetValue$3(config, 'originX', 0);
+    var originY = GetValue$3(config, 'originY', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -42746,8 +42774,42 @@
     return renderTexture;
   };
 
-  var ContainerAdd = ContainerLite.prototype.add;
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var Enter = function Enter(parentContainer, rtOwner) {
+    if (!parentContainer) {
+      return false;
+    }
+
+    Exit(parentContainer, rtOwner); // Get and paste all visible children, which dose not include this render texture
+
+    var useParentBounds = rtOwner.useParentBounds;
+    Snapshot({
+      gameObjects: parentContainer.getAllVisibleChildren(),
+      renderTexture: rtOwner.rt,
+      x: rtOwner.x,
+      y: rtOwner.y,
+      width: useParentBounds ? parentContainer.displayWidth : undefined,
+      height: useParentBounds ? parentContainer.displayHeighth : undefined,
+      originX: useParentBounds ? parentContainer.originX : undefined,
+      originY: useParentBounds ? parentContainer.originY : undefined
+    }); // Set rtOwner to be visible
+
+    parentContainer.setChildVisible(rtOwner, true); // Set visible sibling to be invisible
+
+    var visibleSibling = rtOwner.visibleSibling;
+    var children = parentContainer.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (child.visible && child !== rtOwner) {
+        parentContainer.setChildVisible(child, false);
+        visibleSibling.push(child);
+      }
+    }
+
+    rtOwner.isRunning = true;
+    return true;
+  };
 
   var ContainerPerspective = /*#__PURE__*/function (_RenderTexture) {
     _inherits(ContainerPerspective, _RenderTexture);
@@ -42760,27 +42822,13 @@
       _classCallCheck(this, ContainerPerspective);
 
       var scene = parentContainer.scene;
-      _this = _super.call(this, scene, parentContainer.x, parentContainer.y, 1, 1, config);
+      _this = _super.call(this, scene, 0, 0, 1, 1, config);
       scene.add.existing(_assertThisInitialized(_this));
-
-      _this.setVisible(false);
-
-      ContainerAdd.call(parentContainer, _assertThisInitialized(_this));
-      _this.visibleSibling = [];
-      _this.perspectiveState = false;
-      _this.useParentBounds = GetValue$3(config, 'useParentBounds', false);
-
-      _this.boot();
-
+      Init(parentContainer, _assertThisInitialized(_this), config);
       return _this;
     }
 
     _createClass(ContainerPerspective, [{
-      key: "boot",
-      value: function boot() {
-        this.rexContainer.parent.once('destroy', this.onParentDestroy, this);
-      }
-    }, {
       key: "destroy",
       value: function destroy(fromScene) {
         if (!this.scene) {
@@ -42788,57 +42836,30 @@
         }
 
         this.exit();
-        this.rexContainer.parent.off('destroy', this.onParentDestroy, this);
 
         _get(_getPrototypeOf(ContainerPerspective.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }, {
       key: "enter",
       value: function enter() {
-        this.exit();
-        var parentContainer = this.rexContainer.parent; // Get and paste all visible children, which dose not include this render texture
+        var result = Enter(this.rexContainer.parent, this);
 
-        Snapshot({
-          gameObjects: parentContainer.getAllVisibleChildren(),
-          renderTexture: this.rt,
-          x: this.x,
-          y: this.y,
-          width: this.useParentBounds ? parentContainer.displayWidth : undefined,
-          height: this.useParentBounds ? parentContainer.displayHeighth : undefined,
-          originX: this.useParentBounds ? parentContainer.originX : undefined,
-          originY: this.useParentBounds ? parentContainer.originY : undefined
-        });
-        this.syncSize(); // Set this renderTexture to be visible
+        if (result) {
+          this.syncSize();
+        }
 
-        parentContainer.setChildVisible(this, true); // Set visible sibling to be invisible
-
-        parentContainer.children.forEach(function (child) {
-          if (child !== this) {
-            parentContainer.setChildVisible(child, false);
-            this.visibleSibling.push(child);
-          }
-        }, this);
-        this.perspectiveState = true;
         return this;
       }
     }, {
       key: "exit",
       value: function exit() {
-        var parentContainer = this.rexContainer.parent; // Set all visible children to be visible back
-
-        this.visibleSibling.forEach(function (child) {
-          parentContainer.setChildVisible(child, true);
-        }, this);
-        this.visibleSibling.length = 0; // Set this renderTexture to be invisible        
-
-        parentContainer.setChildVisible(this, false);
-        this.perspectiveState = false;
+        Exit(this.rexContainer.parent, this);
         return this;
+      }
+    }, {
+      key: "perspectiveState",
+      get: function get() {
+        return this.isRunning;
       }
     }]);
 
