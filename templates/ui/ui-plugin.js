@@ -64,6 +64,7 @@ import FlipFactory from './flip/Factory.js';
 import ShakeFactory from './shake/Factory.js';
 import TouchEventStopFactory from './toucheventstop/Factory.js';
 import PerspectiveFactory from './perspective/Factory.js';
+import SkewFactory from './skew/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
 import MakerFactory from './maker/Factory.js';
 

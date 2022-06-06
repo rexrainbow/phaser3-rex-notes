@@ -60,6 +60,7 @@ import Flip from './flip/Flip';
 import Shake from './shake/Shake';
 import TouchEventStop from './toucheventstop/TouchEventStop';
 import Perspective from './perspective/Perspective';
+import Skew from './skew/Skew';
 import Anchor from './anchor/Anchor';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
@@ -147,6 +148,7 @@ export {
     Shake,
     TouchEventStop,
     Perspective,
+    Skew,
     Anchor,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,

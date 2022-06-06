@@ -4493,52 +4493,70 @@
     return true;
   };
 
-  var ContainerPerspective = /*#__PURE__*/function (_RenderTexture) {
-    _inherits(ContainerPerspective, _RenderTexture);
+  var MeshRenderTextureBase = function MeshRenderTextureBase(RenderTextureOwnerClass) {
+    return /*#__PURE__*/function (_RenderTextureOwnerCl) {
+      _inherits(Base, _RenderTextureOwnerCl);
+
+      var _super = _createSuper(Base);
+
+      function Base(parentContainer, config) {
+        var _this;
+
+        _classCallCheck(this, Base);
+
+        var scene = parentContainer.scene;
+        _this = _super.call(this, scene, 0, 0, 1, 1, config);
+        scene.add.existing(_assertThisInitialized(_this));
+        Init(parentContainer, _assertThisInitialized(_this), config);
+        return _this;
+      }
+
+      _createClass(Base, [{
+        key: "destroy",
+        value: function destroy(fromScene) {
+          if (!this.scene) {
+            return;
+          }
+
+          this.exit();
+
+          _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
+        }
+      }, {
+        key: "enter",
+        value: function enter() {
+          var result = Enter(this.rexContainer.parent, this);
+
+          if (result) {
+            this.syncSize();
+          }
+
+          return this;
+        }
+      }, {
+        key: "exit",
+        value: function exit() {
+          Exit(this.rexContainer.parent, this);
+          return this;
+        }
+      }]);
+
+      return Base;
+    }(RenderTextureOwnerClass);
+  };
+
+  var ContainerPerspective = /*#__PURE__*/function (_MeshRenderTextureBas) {
+    _inherits(ContainerPerspective, _MeshRenderTextureBas);
 
     var _super = _createSuper(ContainerPerspective);
 
-    function ContainerPerspective(parentContainer, config) {
-      var _this;
-
+    function ContainerPerspective() {
       _classCallCheck(this, ContainerPerspective);
 
-      var scene = parentContainer.scene;
-      _this = _super.call(this, scene, 0, 0, 1, 1, config);
-      scene.add.existing(_assertThisInitialized(_this));
-      Init(parentContainer, _assertThisInitialized(_this), config);
-      return _this;
+      return _super.apply(this, arguments);
     }
 
     _createClass(ContainerPerspective, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
-        if (!this.scene) {
-          return;
-        }
-
-        this.exit();
-
-        _get(_getPrototypeOf(ContainerPerspective.prototype), "destroy", this).call(this, fromScene);
-      }
-    }, {
-      key: "enter",
-      value: function enter() {
-        var result = Enter(this.rexContainer.parent, this);
-
-        if (result) {
-          this.syncSize();
-        }
-
-        return this;
-      }
-    }, {
-      key: "exit",
-      value: function exit() {
-        Exit(this.rexContainer.parent, this);
-        return this;
-      }
-    }, {
       key: "perspectiveState",
       get: function get() {
         return this.isRunning;
@@ -4546,7 +4564,7 @@
     }]);
 
     return ContainerPerspective;
-  }(RenderTexture);
+  }(MeshRenderTextureBase(RenderTexture));
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;

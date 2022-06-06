@@ -1,7 +1,7 @@
 import Container from '../container/Container';
-import Perspective from './Perspective';
+import Skew from './Skew';
 
 export default function (
     parentContainer: Container,
-    config?: Perspective.IConfig
-): Perspective;
+    config?: Skew.IConfig
+): Skew;
