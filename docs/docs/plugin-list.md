@@ -37,6 +37,7 @@
 1. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
 1. [Containerlite-perspective](containerlite-perspective.md): Snapshot children of containerlite, to a perspective render texture.
+1. [Containerlite-skew](containerlite-skew.md): Snapshot children of containerlite, to a skew render texture.
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.
@@ -147,6 +148,8 @@
 1. [Shatter/Image](shatter-image.md): Shatter image to triangle faces.
 1. [Shatter/Render texture](shatter-rendertexture.md): Shatter render texture to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
+1. [Skew/Image](skew-image.md): Skewable Image.
+1. [Skew/RenderTexture](skew-rendertexture.md): Skewable render texture.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [State manager](statemanager.md): Another version of Finite state machine.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
