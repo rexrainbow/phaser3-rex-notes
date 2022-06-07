@@ -1,18 +1,2 @@
-import Scale from './scale';
-
-export default function ScaleDownDestroy(
-    gameObject: Phaser.GameObjects.GameObject,
-    duration: number,
-    orientation?: number | string,
-    ease?: string,
-    scale?: Scale
-): Scale;
-
-export default function ScaleDownDestroy(
-    gameObject: Phaser.GameObjects.GameObject,
-    duration: number,
-    orientation?: number | string,
-    ease?: string,
-    destroyMode?: boolean,
-    scale?: Scale
-): Scale;
+import ScaleDownDestroy from './behaviors/scale/ScaleDownDestroy';
+export default ScaleDownDestroy;
