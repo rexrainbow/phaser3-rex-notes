@@ -149,4 +149,4 @@ scene.tweens.add({
 
 ### Other properties
 
-See [Perspective image](perspective-image.md) game object.
+See [Perspective rendertexture](perspective-rendertexture.md) game object.

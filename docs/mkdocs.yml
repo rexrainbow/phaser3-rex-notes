@@ -54,6 +54,9 @@ nav:
         - Quad:
             - Image: quad-image.md
             - Render texture: quad-rendertexture.md
+        - Skew:
+            - Image: skew-image.md
+            - Render texture: skew-rendertexture.md
         - Shatter:
             - Image: shatter-image.md
             - Render texture: shatter-rendertexture.md
@@ -107,6 +110,7 @@ nav:
         - Container Lite:
             - Container Lite: containerlite.md
             - Perspective: containerlite-perspective.md
+            - Skew: containerlite-skew.md
         - Grid table: gridtable.md
     - Zone: zone.md
     - Layer: layer.md
