@@ -371,6 +371,22 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): Promise<any>;
 
+    scaleYoyo(
+        duration: number,
+        peakValue?: number,
+        repeat?: number,
+        orientation?: 0 | 1 | 'x' | 'y',
+        ease?: string
+    ): this;
+
+    scaleYoyoPromise(
+        duration: number,
+        peakValue?: number,
+        repeat?: number,
+        orientation?: 0 | 1 | 'x' | 'y',
+        ease?: string
+    ): Promise<any>;
+
     shake(
         duration?: number,
         magnitude?: number,

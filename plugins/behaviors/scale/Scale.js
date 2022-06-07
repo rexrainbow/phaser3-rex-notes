@@ -71,10 +71,17 @@ class Scale extends EaseValueTaskBase {
             gameObject.scaleY = this.startY;
         }
 
+        var repeat = this.repeat;
+        if (this.mode === 2) {  // Yoyo
+            if (repeat !== -1) {
+                repeat = ((repeat + 1) * 2) - 1;
+            }
+        }
+
         this.timer
             .setDelay(this.delay)
             .setDuration(this.duration)
-            .setRepeat((this.mode === 2) ? -1 : 0);
+            .setRepeat(repeat);
 
         super.start();
         return this;

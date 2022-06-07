@@ -999,7 +999,16 @@
           gameObject.scaleY = this.startY;
         }
 
-        this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(this.mode === 2 ? -1 : 0);
+        var repeat = this.repeat;
+
+        if (this.mode === 2) {
+          // Yoyo
+          if (repeat !== -1) {
+            repeat = (repeat + 1) * 2 - 1;
+          }
+        }
+
+        this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(repeat);
 
         _get(_getPrototypeOf(Scale.prototype), "start", this).call(this);
 
@@ -1048,7 +1057,11 @@
   };
 
   var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
-    // Ease from current scale to 0
+    if (ease === undefined) {
+      ease = 'Linear';
+    } // Ease from current scale to 0
+
+
     if (destroyMode instanceof Scale) {
       scale = destroyMode;
       destroyMode = undefined;
@@ -1082,7 +1095,7 @@
     }
 
     config.duration = duration;
-    config.ease = ease === undefined ? 'Linear' : ease;
+    config.ease = ease;
 
     if (scale === undefined) {
       scale = new Scale(gameObject, config);
@@ -1095,7 +1108,11 @@
   };
 
   var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
-    // Ease scale from 0 to current scale
+    if (ease === undefined) {
+      ease = 'Cubic';
+    } // Ease scale from 0 to current scale
+
+
     var start, end;
 
     switch (orientation) {
@@ -1130,7 +1147,69 @@
       start: start,
       end: end,
       duration: duration,
-      ease: ease === undefined ? 'Cubic' : ease
+      ease: ease
+    };
+
+    if (scale === undefined) {
+      scale = new Scale(gameObject, config);
+    } else {
+      scale.resetFromJSON(config);
+    }
+
+    scale.restart();
+    return scale;
+  };
+
+  var Yoyo = function Yoyo(gameObject, duration, peakValue, repeat, orientation, ease, scale) {
+    if (peakValue === undefined) {
+      peakValue = 1.2;
+    }
+
+    if (repeat === undefined) {
+      repeat = 0;
+    }
+
+    if (ease === undefined) {
+      ease = 'Cubic';
+    } // Ease scale from 0 to current scale
+
+
+    var start, end;
+
+    switch (orientation) {
+      case 0:
+      case 'x':
+        start = {
+          x: gameObject.scaleX
+        };
+        end = {
+          x: peakValue
+        };
+        break;
+
+      case 1:
+      case 'y':
+        start = {
+          y: gameObject.scaleX
+        };
+        end = {
+          y: peakValue
+        };
+        break;
+
+      default:
+        start = gameObject.scaleX;
+        end = peakValue;
+        break;
+    }
+
+    var config = {
+      mode: 2,
+      start: start,
+      end: end,
+      duration: duration / 2,
+      ease: ease,
+      repeat: repeat
     };
 
     if (scale === undefined) {
@@ -1173,7 +1252,8 @@
 
   var methods = {
     scaleDownDestroy: ScaleDownDestroy,
-    popup: PopUp
+    popup: PopUp,
+    yoyo: Yoyo
   };
   Object.assign(ScalePlugin.prototype, methods);
 

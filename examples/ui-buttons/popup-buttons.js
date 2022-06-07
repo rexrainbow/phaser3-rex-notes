@@ -42,6 +42,11 @@ class Demo extends Phaser.Scene {
             button.popUp(1000, undefined, 'Back');
         })
 
+        buttons
+            .on('button.click', function (button, index, pointer, event) {
+                button.scaleYoyo(500, 1.1);
+            })
+
     }
 
     update() { }

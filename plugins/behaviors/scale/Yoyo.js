@@ -1,6 +1,12 @@
 import Scale from './Scale.js';
 
-var PopUp = function (gameObject, duration, orientation, ease, scale) {
+var Yoyo = function (gameObject, duration, peakValue, repeat, orientation, ease, scale) {
+    if (peakValue === undefined) {
+        peakValue = 1.2;
+    }
+    if (repeat === undefined) {
+        repeat = 0;
+    }
     if (ease === undefined) {
         ease = 'Cubic';
     }
@@ -10,26 +16,27 @@ var PopUp = function (gameObject, duration, orientation, ease, scale) {
     switch (orientation) {
         case 0:
         case 'x':
-            start = { x: 0 };
-            end = { x: gameObject.scaleX };
+            start = { x: gameObject.scaleX };
+            end = { x: peakValue };
             break;
         case 1:
         case 'y':
-            start = { y: 0 };
-            end = { y: gameObject.scaleY };
+            start = { y: gameObject.scaleX };
+            end = { y: peakValue };
             break;
         default:
-            start = 0;
-            end = gameObject.scale;
+            start = gameObject.scaleX;
+            end = peakValue;
             break;
     }
 
     var config = {
-        mode: 0,
+        mode: 2,
         start: start,
         end: end,
-        duration: duration,
-        ease: ease
+        duration: (duration / 2),
+        ease: ease,
+        repeat: repeat,
     }
 
     if (scale === undefined) {
@@ -42,4 +49,4 @@ var PopUp = function (gameObject, duration, orientation, ease, scale) {
     return scale;
 };
 
-export default PopUp;
+export default Yoyo;

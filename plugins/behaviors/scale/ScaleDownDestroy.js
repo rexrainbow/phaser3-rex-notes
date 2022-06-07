@@ -1,6 +1,10 @@
 import Scale from './Scale.js';
 
 var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destroyMode, scale) {
+    if (ease === undefined) {
+        ease = 'Linear';
+    }
+
     // Ease from current scale to 0
     if (destroyMode instanceof Scale) {
         scale = destroyMode;
@@ -31,7 +35,7 @@ var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destro
             break;
     }
     config.duration = duration;
-    config.ease = (ease === undefined) ? 'Linear' : ease;
+    config.ease = ease;
 
     if (scale === undefined) {
         scale = new Scale(gameObject, config);

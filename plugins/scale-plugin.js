@@ -1,6 +1,7 @@
 import Scale from './scale.js';
 import ScaleDownDestroy from './scale-down-destroy.js';
 import Popup from './popup.js';
+import Yoyo from './behaviors/scale/Yoyo.js';
 
 class ScalePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -22,6 +23,7 @@ class ScalePlugin extends Phaser.Plugins.BasePlugin {
 var methods = {
     scaleDownDestroy: ScaleDownDestroy,
     popup: Popup,
+    yoyo: Yoyo,
 }
 Object.assign(
     ScalePlugin.prototype,

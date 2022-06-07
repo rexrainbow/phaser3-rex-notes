@@ -1,5 +1,6 @@
 import PopUp from '../../../plugins/popup.js';
 import ScaleDownDestroy from '../../../plugins/scale-down-destroy.js';
+import Yoyo from '../../../plugins/behaviors/scale/Yoyo.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -85,7 +86,35 @@ export default {
     scaleDownPromise(duration, orientation, ease) {
         this.scaleDown(duration, orientation, ease);
         return WaitComplete(this._scale);
-    }
+    },
+
+    scaleYoyo(duration, peakValue, repeat, orientation, ease) {
+        if (IsPlainObject(duration)) {
+            var config = duration;
+            duration = config.duration;
+            peakValue = config.peakValue;
+            repeat = config.repeat;
+            orientation = config.orientation;
+            ease = config.ease;
+        }
+
+        var isInit = (this._scale === undefined);
+
+        this._scale = Yoyo(this, duration, peakValue, repeat, orientation, ease, this._scale);
+
+        if (isInit) {
+            OnInitScale(this, this._scale);
+        }
+
+        this._scale.completeEventName = 'scaleyoyo.complete';
+
+        return this;
+    },
+
+    scaleYoyoPromise(duration, peakValue, repeat, orientation, ease) {
+        this.scaleYoyo(duration, peakValue, repeat, orientation, ease);
+        return WaitComplete(this._scale);
+    },
 
 
 }
