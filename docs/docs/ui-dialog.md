@@ -616,3 +616,19 @@ dialog.forEachLeftToolbar(callback, scope);
     ```javascript
     dialog.clearChoicesButtonStates();
     ```
+
+#### Events
+
+- On button state changed. For Checkboxes/radio
+    ```javascript
+    dialog.on('button.statechange', function(button, index, value, previousValue) {
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    dialog.on('button.statechange', function(button, groupName, index, value, previousValue) {
+        // ...
+    }, scope);
+    ```
+    - Can be used to replace *setValueCallback*.

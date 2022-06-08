@@ -7437,6 +7437,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events_1" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8489,6 +8496,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events_1" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9146,6 +9160,22 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
 <li>Clear all states to <code>false</code>
     <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">clearChoicesButtonStates</span><span class="p">();</span>
 </code></pre></div></li>
+</ul>
+<h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>On button state changed. For Checkboxes/radio
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Can be used to replace <em>setValueCallback</em>.</li>
+</ul>
+</li>
 </ul>
 
               

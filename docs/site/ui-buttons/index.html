@@ -9003,8 +9003,13 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 <ul>
 <li>On button state changed. For Checkboxes/radio
     <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">})</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Can be used to replace <em>setValueCallback</em>.</li>
 </ul>

@@ -515,7 +515,13 @@ buttons.forEachButtton(callback, scope);
 - On button state changed. For Checkboxes/radio
     ```javascript
     buttons.on('button.statechange', function(button, index, value, previousValue) {
-
-    })
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    buttons.on('button.statechange', function(button, groupName, index, value, previousValue) {
+        // ...
+    }, scope);
     ```
     - Can be used to replace *setValueCallback*.
