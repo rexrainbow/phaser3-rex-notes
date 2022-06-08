@@ -224,7 +224,7 @@ sizer.pushIntoBounds(bounds);
         ```javascript
         sizer
             //.setScale(scaleX, scaleY)
-                .popUp({
+            .popUp({
                 duration: undefined,
                 orientation: undefined,
                 ease: undefined,
@@ -315,6 +315,83 @@ sizer.pushIntoBounds(bounds);
                 // ....
             })
         ```
+- Scale up/down, then scale back (yoyo)
+    - Scale up/down, then scale back width and height
+        ```javascript
+        sizer
+            //.setScale(scaleX, scaleY)
+            .scaleYoyo(duration, peakValue);
+        
+        // sizer.scaleYoyo(duration, peakValue, repeat, undefined, ease);
+        ```
+        or
+        ```javascript
+        sizer
+            //.setScale(scaleX, scaleY)
+            .scaleYoyoPromise(duration, peakValue, repeat)
+            .then(function() {
+                // ....
+            })
+        ```
+        - `peakValue` : Scale to this peak value, then scale back
+        - `repeat` : Yoyo repeat, default value is `0`.
+        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
+    - Scale up/down, then scale back width only
+        ```javascript
+        sizer
+            //.setScaleX(scaleX)
+            .scaleYoyo(duration, peakValue, 0, 'x');
+        
+        // sizer.popUp(duration, peakValue, repeat, 'x', ease);
+        ```
+        or
+        ```javascript
+        sizer
+            //.setScaleX(scaleX)
+            .scaleYoyoPromise(duration, peakValue, repeat, 'x')
+            .then(function() {
+                // ....
+            })
+        ```
+    - Scale up/down, then scale back height only
+        ```javascript
+        sizer
+            //.setScaleY(scaleY)
+            .scaleYoyo(duration, peakValue, 0, 'y');
+        
+        // sizer.popUp(duration, peakValue, repeat, 'y', ease);
+        ```
+        or
+        ```javascript
+        sizer
+            //.setScaleY(scaleY)
+            .scaleYoyoPromise(duration, peakValue, repeat, 'y')
+            .then(function() {
+                // ....
+            })
+        ```
+    - Scale up/down via config
+        ```javascript
+        sizer
+            //.setScale(scaleX, scaleY)
+            .scaleYoyo({
+                duration: undefined,
+                peakValue: 1.2,
+                repeat: 0,
+                orientation: undefined,
+                ease: undefined,
+            })
+        ```
+        or
+        ```javascript
+        sizer
+            //.setScale(scaleX, scaleY)
+            .scaleYoyoPromise(config)
+            .then(function() {
+                // ....
+            })
+        ```
+        - `orientation` : `undefined`, `x`, or `y`
 - Events
     - Pop-up complete
         ```javascript
@@ -323,6 +400,10 @@ sizer.pushIntoBounds(bounds);
     - Scale-down, scale-down destroy complete
         ```javascript
         sizer.on('scaledown.complete', function(sizer) { });
+        ```
+    - Scale up/down, then scale back (yoyo)
+        ```javascript
+        sizer.on('scaleyoyo.complete', function(sizer) { });
         ```
 
 ### Fade
