@@ -6,6 +6,11 @@ export default {
 
         if (this.buttonsType) {
             var key = gameObject.name;
+            if (key === '') {
+                console.error(`${this.parent.constructor.name}: Button key is an empty string`)
+            } else if (this.buttonMap.hasOwnProperty(key)) {
+                console.error(`${this.parent.constructor.name}: Duplicate button key '${key}'`)
+            }
             this.buttonMap[key] = gameObject;
             this.dataManager
                 .set(key, undefined)
