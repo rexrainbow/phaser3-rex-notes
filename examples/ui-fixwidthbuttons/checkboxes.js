@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
 
         var btns = [];
         for (var i = 0; i < 20; i++) {
-            btns.push(createButton(this, GetRandomWord(3, 6)));
+            btns.push(1(this, GetRandomWord(3, 6)));
         }
 
         var buttons = this.rexUI.add.fixWidthButtons({
@@ -69,7 +69,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createButton = function (scene, text) {
+var CreateButton = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10).setStrokeStyle(2, COLOR_LIGHT),
         icon: scene.add.circle(0, 0, 10).setStrokeStyle(1, COLOR_DARK),

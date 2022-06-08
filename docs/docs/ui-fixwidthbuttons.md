@@ -8,6 +8,7 @@ A container with a group of fix-width buttons.
 ## Live demos
 
 - [Checkboxes/radio](https://codepen.io/rexrainbow/pen/rNObKbP)
+- [Indent](https://codepen.io/rexrainbow/pen/dydgXGx)
 
 ## Usage
 
