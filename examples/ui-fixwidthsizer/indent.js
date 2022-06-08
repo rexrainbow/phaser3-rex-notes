@@ -16,8 +16,6 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var align = 'justify-right'  // 'left', 'right', 'center', 'justify'/'justify-left', 'justify-right', 'justify-center'
-        var rtl = true;
         var sizer = this.rexUI.add.fixWidthSizer({
             x: 400, y: 300,
             width: 250, height: undefined,
@@ -26,31 +24,26 @@ class Demo extends Phaser.Scene {
                 right: 3,
                 top: 3,
                 bottom: 3,
-                item: 8,
-                line: 8,
+                line: -5,
+                indentEven: 20,
             },
-            rtl: rtl,
-            align: align
         })
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
 
         for (var i = 0; i < 22; i++) {
             sizer.add(this.rexUI.add.label({
-                background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_LIGHT),
+                width: 40, height: 40,
+                background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
                 text: this.add.text(0, 0, `${i}`, {
                     fontSize: 18
                 }),
-                space: {
-                    left: 10,
-                    right: 10,
-                    top: 10,
-                    bottom: 10,
-                }
+
+                align: 'center'
             }));
         }
 
         sizer.layout();
-        sizer.drawBounds(this.add.graphics(), 0xff0000);
+        // sizer.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() { }

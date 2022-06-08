@@ -14,7 +14,11 @@ var RunChildrenWrap = function (lineWidth, out) {
     }
 
     var children = this.sizerChildren;
-    var child, childWidth, childHeight, remainder = 0;
+    var itemSpace = this.space.item,
+        lineSpace = this.space.line,
+        indentOdd = this.space.indentOdd,
+        indentEven = this.space.indentEven;
+    var child, childWidth, childHeight, remainder = 0, indent;
     var lines = out.lines,
         lastLine = undefined,
         newLine;
@@ -39,9 +43,9 @@ var RunChildrenWrap = function (lineWidth, out) {
         // New line
         if (newLine) {
             if (lastLine) {
-                lastLine.width = lineWidth - (remainder + this.space.item);
+                lastLine.width = lineWidth - (remainder + itemSpace);
                 out.width = Math.max(out.width, lastLine.width);
-                out.height += lastLine.height + this.space.line;
+                out.height += lastLine.height + lineSpace;
             }
 
             lastLine = {
@@ -50,10 +54,12 @@ var RunChildrenWrap = function (lineWidth, out) {
                 height: 0
             };
             lines.push(lastLine);
-            remainder = lineWidth;
+
+            var indent = (lines.length % 2) ? indentOdd : indentEven;
+            remainder = lineWidth - indent;
         }
 
-        remainder -= (childWidth + this.space.item);
+        remainder -= (childWidth + itemSpace);
         if (child) {
             lastLine.children.push(child);
             childHeight = GeChildHeight(child);
@@ -62,7 +68,7 @@ var RunChildrenWrap = function (lineWidth, out) {
     }
 
     if (lastLine) {
-        lastLine.width = lineWidth - (remainder + this.space.item);
+        lastLine.width = lineWidth - (remainder + itemSpace);
         out.width = Math.max(out.width, lastLine.width);
         out.height += lastLine.height;
     }

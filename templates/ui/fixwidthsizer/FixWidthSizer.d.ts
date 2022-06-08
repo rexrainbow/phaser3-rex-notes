@@ -25,6 +25,8 @@ declare namespace FixWidthSizer {
             left?: number, right?: number, top?: number, bottom?: number,
 
             item?: number, line?: number,
+
+            indentOdd?: number, indentEven?: number,
         },
 
         rtl?: boolean,

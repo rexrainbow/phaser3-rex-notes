@@ -97,7 +97,11 @@ var buttons = scene.rexUI.add.fixWidthButtons({
     },
 
     // space: 0,
-    // space: { left: 0, right:0, top:0, bottom:0, line:0, item:0 },
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom: 0,
+    //     item: 0, line: 0,
+    //     indentOdd: 0, indentEven: 0,
+    // },
 
     // name: '',
     // draggable: false,
@@ -140,9 +144,11 @@ var buttons = scene.rexUI.add.fixWidthButtons({
 - `space` :
     - A number: Space between 2 button game objects.
     - An object: Padding of button game objects.
-       - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
-       - `space.item` : Space betwen each child of a line.
-       - `space.line` : Space between each line.
+        - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+        - `space.item` : Space betwen each child of a line.
+        - `space.line` : Space between each line.
+        - `space.indentOdd` : Indent at each odd line.
+        - `space.indentEven` : Indent at each even line.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.

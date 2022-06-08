@@ -10487,6 +10487,13 @@
 
       if (this.buttonsType) {
         var key = gameObject.name;
+
+        if (key === '') {
+          console.error("".concat(this.parent.constructor.name, ": Button key is an empty string"));
+        } else if (this.buttonMap.hasOwnProperty(key)) {
+          console.error("".concat(this.parent.constructor.name, ": Duplicate button key '").concat(key, "'"));
+        }
+
         this.buttonMap[key] = gameObject;
         this.dataManager.set(key, undefined).set(key, false); // Trigger data event 'changedata'
       } //Default: Fire 'click' event when touch released after pressed.
@@ -11088,20 +11095,26 @@
   var LayoutChildren = function LayoutChildren() {
     var innerLineWidth = this.innerWidth;
     var justifyPercentage = this.justifyPercentage;
+    var itemSpace = this.space.item,
+        lineSpace = this.space.line,
+        indentOdd = this.space.indentOdd,
+        indentEven = this.space.indentEven;
     var child,
         childConfig,
         padding,
-        justifySpace = 0;
+        justifySpace = 0,
+        indent;
     var startX = this.innerLeft,
         startY = this.innerTop;
-    var itemX = startX,
-        itemY = startY;
     var x, y, width, height; // Align zone
 
     var lines = this.widthWrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
+    var itemX,
+        itemY = startY;
 
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
+      // Layout this line
       line = lines[i];
       lineChlidren = line.children;
 
@@ -11109,6 +11122,8 @@
         lineChlidren.reverse();
       }
 
+      indent = i % 2 ? indentEven : indentOdd;
+      itemX = startX + indent;
       remainderLineWidth = innerLineWidth - line.width;
 
       switch (this.align) {
@@ -11167,7 +11182,7 @@
         x = itemX + padding.left;
 
         if (j > 0) {
-          x += this.space.item;
+          x += itemSpace;
         }
 
         y = itemY + padding.top;
@@ -11177,8 +11192,7 @@
         LayoutChild.call(this, child, x, y, width, height, childConfig.align);
       }
 
-      itemX = startX;
-      itemY += line.height + this.space.line;
+      itemY += line.height + lineSpace;
     }
   };
 
@@ -11200,10 +11214,15 @@
     }
 
     var children = this.sizerChildren;
+    var itemSpace = this.space.item,
+        lineSpace = this.space.line,
+        indentOdd = this.space.indentOdd,
+        indentEven = this.space.indentEven;
     var child,
         childWidth,
         childHeight,
-        remainder = 0;
+        remainder = 0,
+        indent;
     var lines = out.lines,
         lastLine = undefined,
         newLine;
@@ -11231,9 +11250,9 @@
 
       if (newLine) {
         if (lastLine) {
-          lastLine.width = lineWidth - (remainder + this.space.item);
+          lastLine.width = lineWidth - (remainder + itemSpace);
           out.width = Math.max(out.width, lastLine.width);
-          out.height += lastLine.height + this.space.line;
+          out.height += lastLine.height + lineSpace;
         }
 
         lastLine = {
@@ -11242,10 +11261,11 @@
           height: 0
         };
         lines.push(lastLine);
-        remainder = lineWidth;
+        var indent = lines.length % 2 ? indentOdd : indentEven;
+        remainder = lineWidth - indent;
       }
 
-      remainder -= childWidth + this.space.item;
+      remainder -= childWidth + itemSpace;
 
       if (child) {
         lastLine.children.push(child);
@@ -11255,7 +11275,7 @@
     }
 
     if (lastLine) {
-      lastLine.width = lineWidth - (remainder + this.space.item);
+      lastLine.width = lineWidth - (remainder + itemSpace);
       out.width = Math.max(out.width, lastLine.width);
       out.height += lastLine.height;
     }
@@ -11512,6 +11532,8 @@
 
       _this.setLineSpacing(GetValue$2(config, 'space.line', 0));
 
+      _this.setIndent(GetValue$2(config, 'space.indentOdd', 0), GetValue$2(config, 'space.indentEven', 0));
+
       _this.setAlign(GetValue$2(config, 'align', 0));
 
       _this.setJustifyPercentage(GetValue$2(config, 'justifyPercentage', 0.25));
@@ -11539,6 +11561,13 @@
       key: "setLineSpacing",
       value: function setLineSpacing(space) {
         this.space.line = space;
+        return this;
+      }
+    }, {
+      key: "setIndent",
+      value: function setIndent(odd, even) {
+        this.space.indentOdd = odd;
+        this.space.indentEven = even;
         return this;
       }
     }, {

@@ -6,21 +6,30 @@ import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/G
 var LayoutChildren = function () {
     var innerLineWidth = this.innerWidth;
     var justifyPercentage = this.justifyPercentage;
-    var child, childConfig, padding, justifySpace = 0;
+    var itemSpace = this.space.item,
+        lineSpace = this.space.line,
+        indentOdd = this.space.indentOdd,
+        indentEven = this.space.indentEven;
+
+    var child, childConfig, padding, justifySpace = 0, indent;
     var startX = this.innerLeft,
         startY = this.innerTop;
-    var itemX = startX,
-        itemY = startY;
     var x, y, width, height; // Align zone
     var lines = this.widthWrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
+
+    var itemX,
+        itemY = startY;
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
+        // Layout this line
         line = lines[i];
         lineChlidren = line.children;
-
         if (this.rtl) {
             lineChlidren.reverse();
         }
+
+        indent = (i % 2) ? indentEven : indentOdd;
+        itemX = startX + indent;
 
         remainderLineWidth = (innerLineWidth - line.width);
         switch (this.align) {
@@ -65,7 +74,7 @@ var LayoutChildren = function () {
 
             x = (itemX + padding.left);
             if (j > 0) {
-                x += this.space.item;
+                x += itemSpace;
             }
 
             y = (itemY + padding.top);
@@ -76,8 +85,7 @@ var LayoutChildren = function () {
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);
         }
 
-        itemX = startX;
-        itemY += line.height + this.space.line;
+        itemY += line.height + lineSpace;
     }
 }
 
