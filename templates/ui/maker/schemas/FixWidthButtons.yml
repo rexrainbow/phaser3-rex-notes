@@ -17,6 +17,8 @@ space:
     top:
     bottom:
     item:
+    indentOdd:
+    indentEven:
 
 draggable:
 

@@ -12,8 +12,8 @@ class GridButtons extends GridSizer {
         if (config === undefined) {
             config = {};
         }
-        var row = GetValue(config, 'row', 0);
-        var col = GetValue(config, 'col', 0);
+        var rowCount = GetValue(config, 'row', 0);
+        var columnCount = GetValue(config, 'column', (config.col || 0));
         var createCellContainerCallback = GetValue(config, 'createCellContainerCallback');
         var buttons = GetValue(config, 'buttons', undefined);
         var buttonsExpand = GetValue(config, 'expand', true);
@@ -23,14 +23,14 @@ class GridButtons extends GridSizer {
             config.createCellContainerCallback = undefined;
         }
         if (buttons !== undefined) {
-            row = Math.max(row, buttons.length);
+            rowCount = Math.max(rowCount, buttons.length);
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                col = Math.max(col, buttons[i].length);
+                columnCount = Math.max(columnCount, buttons[i].length);
             }
         }
 
-        config.row = row;
-        config.column = col;
+        config.row = rowCount;
+        config.column = columnCount;
         config.columnProportions = buttonProportion;
         config.rowProportions = buttonProportion;
 
@@ -71,8 +71,8 @@ class GridButtons extends GridSizer {
                 }
             }
         } else if (createCellContainerCallback) {
-            for (var y = 0; y < row; y++) {
-                for (var x = 0; x < col; x++) {
+            for (var y = 0; y < rowCount; y++) {
+                for (var x = 0; x < columnCount; x++) {
                     var button = createCellContainerCallback(scene, x, y);
                     if (button) {
                         this.addButton(button, x, y);

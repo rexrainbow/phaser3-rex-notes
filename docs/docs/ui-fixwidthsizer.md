@@ -153,8 +153,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.
     - `space.line` : Space between each line.
-    - `space.indentOdd` : Indent at each odd line.
-    - `space.indentEven` : Indent at each even line.
+    - `space.indentOdd`, `space.indentEven` : Indent at each odd/even line.
 - `rtl` : Order of children in each line.
     - `false` : Place children from left-to-right/top-to-bottom, default value.
     - `true` : Place children from right-to-left/bottom-to-top.

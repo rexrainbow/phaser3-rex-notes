@@ -92,7 +92,7 @@ var buttons = scene.rexUI.add.gridButtons({
         ...
     ],
     // row: 0, 
-    // column: 0,
+    // column: 0,   // col: 0
     // createCellContainerCallback: function(scene, x, y) {
     //       return cellContainer;
     // },    
@@ -134,7 +134,7 @@ var buttons = scene.rexUI.add.gridButtons({
 - `width` : Minimum width. i.e. Width of this gridButtons will larger then this value.
 - `height` : Minimum height. i.e. Hieght of this gridButtons will larger then this value.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
-- `buttons` : 2d array of button game objects, or create buttons via `row`, `col`, and `createCellContainerCallback`.
+- `buttons` : 2d array of button game objects, or create buttons via `row`, `column`(or `col`), and `createCellContainerCallback`.
 - `createCellContainerCallback` : Callback to create buttons.
     ```javascript
     function(scene, x, y) {

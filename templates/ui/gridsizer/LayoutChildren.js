@@ -7,18 +7,25 @@ var LayoutChildren = function () {
     var child, childConfig, padding;
     var startX = this.innerLeft,
         startY = this.innerTop;
-    var itemX = startX,
+    var itemX,
         itemY = startY;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
     // Layout grid children
-    var columnSpace = this.space.column;
-    var rowSpace = this.space.row;
+    var columnSpace = this.space.column,
+        rowSpace = this.space.row,
+        indentLeftOdd = this.space.indentLeftOdd,
+        indentLeftEven = this.space.indentLeftEven,
+        indentTopOdd = this.space.indentTopOdd,
+        indentTopEven = this.space.indentTopEven;
+
     var colWidth, rowHeight;
+    var indentLeft, indentTop;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
         rowHeight = this.getRowHeight(rowIndex);
 
-        itemX = startX;
+        indentLeft = (rowIndex % 2) ? indentLeftEven : indentLeftOdd;
+        itemX = startX + indentLeft;
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
             colWidth = this.getColumnWidth(columnIndex);
 
@@ -41,9 +48,12 @@ var LayoutChildren = function () {
 
             childConfig = child.rexSizer;
             padding = childConfig.padding;
+
             x = (itemX + padding.left);
             width = colWidth - padding.left - padding.right;
-            y = (itemY + padding.top);
+
+            indentTop = (columnIndex % 2) ? indentTopEven : indentTopOdd;
+            y = (itemY + indentTop + padding.top);
             height = rowHeight - padding.top - padding.bottom;
 
             LayoutChild.call(this, child, x, y, width, height, childConfig.align);

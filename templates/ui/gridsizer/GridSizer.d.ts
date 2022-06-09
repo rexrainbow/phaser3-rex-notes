@@ -46,6 +46,9 @@ declare namespace GridSizer {
 
             column?: number | number[],
             row?: number | number[],
+
+            indentLeftOdd?: number, indentLeftEven?: number,
+            indentTopOdd?: number, indentTopEven?: number,
         },
 
         createCellContainerCallback?: CreateCellContainerCallbackType

@@ -5,7 +5,6 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -16,31 +15,29 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var background = this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK);
-
-        var btns = [];
-        for (var i = 0; i < 22; i++) {
-            btns.push(CreateButton(this, i));
-        }
-
-        var buttons = this.rexUI.add.fixWidthButtons({
+        var buttons = this.rexUI.add.gridButtons({
             x: 400, y: 300,
-            width: 250, height: undefined,
-
-            background: background,
-            buttons: btns,
-
+            column: 8, row: 8,
             space: {
-                left: 3,
-                right: 3,
-                top: 3,
-                bottom: 3,
-                line: -5,
-                indentEven: 20,
+                top: 10, bottom: 10, left: 10, right: 10,
+                column: -5, row: 0,
+                indentTopEven: 20,
             },
+
+            background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK),
+
+            createCellContainerCallback: function (scene, x, y) {
+                return scene.rexUI.add.label({
+                    width: 50, height: 50,
+                    background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 25, COLOR_LIGHT),
+                    text: scene.add.text(0, 0, `${x},${y}`),
+
+                    align: 'center'
+                });
+            },
+            expand: false
         })
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000);
 
         var print = this.add.text(0, 0, '');
         buttons
@@ -57,18 +54,6 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
-}
-
-var CreateButton = function (scene, text) {
-    return scene.rexUI.add.label({
-        width: 40, height: 40,
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
-        text: scene.add.text(0, 0, text, {
-            fontSize: 18
-        }),
-
-        align: 'center'
-    })
 }
 
 var config = {

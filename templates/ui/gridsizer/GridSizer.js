@@ -14,7 +14,7 @@ class GridSizer extends BaseSizer {
             y = GetValue(config, 'y', 0);
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
-            columnCount = GetValue(config, 'column', 0);
+            columnCount = GetValue(config, 'column', (config.col || 0));
             rowCount = GetValue(config, 'row', 0);
             columnProportions = GetValue(config, 'columnProportions', 0);
             rowProportions = GetValue(config, 'rowProportions', 0);
@@ -22,13 +22,13 @@ class GridSizer extends BaseSizer {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
-            columnCount = GetValue(config, 'column', 0);
+            columnCount = GetValue(config, 'column', (config.col || 0));
             rowCount = GetValue(config, 'row', 0);
             columnProportions = GetValue(config, 'columnProportions', 0);
             rowProportions = GetValue(config, 'rowProportions', 0);
         } else if (IsPlainObject(columnCount)) {
             config = columnCount;
-            columnCount = GetValue(config, 'column', 0);
+            columnCount = GetValue(config, 'column', (config.col || 0));
             rowCount = GetValue(config, 'row', 0);
             columnProportions = GetValue(config, 'columnProportions', 0);
             rowProportions = GetValue(config, 'rowProportions', 0);
@@ -44,6 +44,15 @@ class GridSizer extends BaseSizer {
             columnCount, rowCount,
             columnProportions, rowProportions,
             GetValue(config, 'space', undefined)
+        );
+
+        this.setIndentLeft(
+            GetValue(config, 'space.indentLeftOdd', 0),
+            GetValue(config, 'space.indentLeftEven', 0)
+        );
+        this.setIndentTop(
+            GetValue(config, 'space.indentTopOdd', 0),
+            GetValue(config, 'space.indentTopEven', 0)
         );
 
         this.addChildrenMap('items', this.sizerChildren);
@@ -75,6 +84,18 @@ class GridSizer extends BaseSizer {
         this.rowProportions = undefined;
         this.columnWidth = undefined;
         this.rowHeight = undefined;
+    }
+
+    setIndentLeft(odd, even) {
+        this.space.indentLeftOdd = odd;
+        this.space.indentLeftEven = even;
+        return this;
+    }
+
+    setIndentTop(odd, even) {
+        this.space.indentTopOdd = odd;
+        this.space.indentTopEven = even;
+        return this;
     }
 
     setColumnProportion(columnIndex, proportion) {

@@ -11389,7 +11389,9 @@
       this.columnWidth[i] = columnWidth;
     }
 
-    return result + Sum.apply(void 0, [this.space.left].concat(_toConsumableArray(this.space.column), [this.space.right]));
+    var space = this.space;
+    var indentLeft = Math.max(space.indentLeftOdd, space.indentLeftEven);
+    return result + Sum.apply(void 0, [space.left, indentLeft].concat(_toConsumableArray(space.column), [space.right]));
   };
 
   var GetChildrenHeight = function GetChildrenHeight() {
@@ -11431,7 +11433,9 @@
       this.rowHeight[i] = rowHeight;
     }
 
-    return result + Sum.apply(void 0, [this.space.top].concat(_toConsumableArray(this.space.row), [this.space.bottom]));
+    var space = this.space;
+    var indentTop = Math.max(space.indentTopOdd, space.indentTopEven);
+    return result + Sum.apply(void 0, [space.top, indentTop].concat(_toConsumableArray(space.row), [space.bottom]));
   };
 
   var GetExpandedChildWidth = function GetExpandedChildWidth(child, colWidth) {
@@ -11490,19 +11494,25 @@
     var child, childConfig, padding;
     var startX = this.innerLeft,
         startY = this.innerTop;
-    var itemX = startX,
+    var itemX,
         itemY = startY;
     var x, y, width, height; // Align zone
 
     var childWidth, childHeight; // Layout grid children
 
-    var columnSpace = this.space.column;
-    var rowSpace = this.space.row;
+    var columnSpace = this.space.column,
+        rowSpace = this.space.row,
+        indentLeftOdd = this.space.indentLeftOdd,
+        indentLeftEven = this.space.indentLeftEven,
+        indentTopOdd = this.space.indentTopOdd,
+        indentTopEven = this.space.indentTopEven;
     var colWidth, rowHeight;
+    var indentLeft, indentTop;
 
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
       rowHeight = this.getRowHeight(rowIndex);
-      itemX = startX;
+      indentLeft = rowIndex % 2 ? indentLeftEven : indentLeftOdd;
+      itemX = startX + indentLeft;
 
       for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
         colWidth = this.getColumnWidth(columnIndex);
@@ -11528,7 +11538,8 @@
         padding = childConfig.padding;
         x = itemX + padding.left;
         width = colWidth - padding.left - padding.right;
-        y = itemY + padding.top;
+        indentTop = columnIndex % 2 ? indentTopEven : indentTopOdd;
+        y = itemY + indentTop + padding.top;
         height = rowHeight - padding.top - padding.bottom;
         LayoutChild.call(this, child, x, y, width, height, childConfig.align);
         itemX += colWidth + columnSpace[columnIndex];
@@ -12008,7 +12019,7 @@
         y = GetValue$2(config, 'y', 0);
         minWidth = GetValue$2(config, 'width', undefined);
         minHeight = GetValue$2(config, 'height', undefined);
-        columnCount = GetValue$2(config, 'column', 0);
+        columnCount = GetValue$2(config, 'column', config.col || 0);
         rowCount = GetValue$2(config, 'row', 0);
         columnProportions = GetValue$2(config, 'columnProportions', 0);
         rowProportions = GetValue$2(config, 'rowProportions', 0);
@@ -12016,13 +12027,13 @@
         config = minWidth;
         minWidth = GetValue$2(config, 'width', undefined);
         minHeight = GetValue$2(config, 'height', undefined);
-        columnCount = GetValue$2(config, 'column', 0);
+        columnCount = GetValue$2(config, 'column', config.col || 0);
         rowCount = GetValue$2(config, 'row', 0);
         columnProportions = GetValue$2(config, 'columnProportions', 0);
         rowProportions = GetValue$2(config, 'rowProportions', 0);
       } else if (IsPlainObject(columnCount)) {
         config = columnCount;
-        columnCount = GetValue$2(config, 'column', 0);
+        columnCount = GetValue$2(config, 'column', config.col || 0);
         rowCount = GetValue$2(config, 'row', 0);
         columnProportions = GetValue$2(config, 'columnProportions', 0);
         rowProportions = GetValue$2(config, 'rowProportions', 0);
@@ -12036,6 +12047,10 @@
       _this.type = 'rexGridSizer';
 
       _this.resetGrid(columnCount, rowCount, columnProportions, rowProportions, GetValue$2(config, 'space', undefined));
+
+      _this.setIndentLeft(GetValue$2(config, 'space.indentLeftOdd', 0), GetValue$2(config, 'space.indentLeftEven', 0));
+
+      _this.setIndentTop(GetValue$2(config, 'space.indentTopOdd', 0), GetValue$2(config, 'space.indentTopEven', 0));
 
       _this.addChildrenMap('items', _this.sizerChildren);
 
@@ -12075,6 +12090,20 @@
         this.rowProportions = undefined;
         this.columnWidth = undefined;
         this.rowHeight = undefined;
+      }
+    }, {
+      key: "setIndentLeft",
+      value: function setIndentLeft(odd, even) {
+        this.space.indentLeftOdd = odd;
+        this.space.indentLeftEven = even;
+        return this;
+      }
+    }, {
+      key: "setIndentTop",
+      value: function setIndentTop(odd, even) {
+        this.space.indentTopOdd = odd;
+        this.space.indentTopEven = even;
+        return this;
       }
     }, {
       key: "setColumnProportion",
@@ -12243,8 +12272,8 @@
         config = {};
       }
 
-      var row = GetValue$1(config, 'row', 0);
-      var col = GetValue$1(config, 'col', 0);
+      var rowCount = GetValue$1(config, 'row', 0);
+      var columnCount = GetValue$1(config, 'column', config.col || 0);
       var createCellContainerCallback = GetValue$1(config, 'createCellContainerCallback');
       var buttons = GetValue$1(config, 'buttons', undefined);
       var buttonsExpand = GetValue$1(config, 'expand', true);
@@ -12255,15 +12284,15 @@
       }
 
       if (buttons !== undefined) {
-        row = Math.max(row, buttons.length);
+        rowCount = Math.max(rowCount, buttons.length);
 
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-          col = Math.max(col, buttons[i].length);
+          columnCount = Math.max(columnCount, buttons[i].length);
         }
       }
 
-      config.row = row;
-      config.column = col;
+      config.row = rowCount;
+      config.column = columnCount;
       config.columnProportions = buttonProportion;
       config.rowProportions = buttonProportion; // Create
 
@@ -12302,8 +12331,8 @@
           }
         }
       } else if (createCellContainerCallback) {
-        for (var y = 0; y < row; y++) {
-          for (var x = 0; x < col; x++) {
+        for (var y = 0; y < rowCount; y++) {
+          for (var x = 0; x < columnCount; x++) {
             var button = createCellContainerCallback(scene, x, y);
 
             if (button) {

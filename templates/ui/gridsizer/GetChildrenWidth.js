@@ -32,7 +32,10 @@ var GetChildrenWidth = function () {
         // else,(proportion > 0) : columnWidth is 0
         this.columnWidth[i] = columnWidth;
     }
-    return result + Sum(this.space.left, ...this.space.column, this.space.right);
+
+    var space = this.space;
+    var indentLeft = Math.max(space.indentLeftOdd, space.indentLeftEven);
+    return result + Sum(space.left, indentLeft, ...space.column, space.right);
 }
 
 export default GetChildrenWidth;

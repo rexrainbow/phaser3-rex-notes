@@ -49,5 +49,9 @@ space:
     bottom:
     column:
     row:
+    indentLeftOdd:
+    indentLeftEven:
+    indentTopOdd:
+    indentTopEven:
 
 draggable:

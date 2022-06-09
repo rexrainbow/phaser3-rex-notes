@@ -8502,14 +8502,16 @@
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
 
-    <span class="nx">column</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">column</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// col: 0</span>
     <span class="nx">row</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// columnProportions: undefined,</span>
     <span class="c1">// rowProportions: undefined,</span>
     <span class="c1">// space: {</span>
     <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
     <span class="c1">//     column: 0, // [0, 0, 0]</span>
-    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">//     row: 0,    // [0, 0, 0]</span>
+    <span class="c1">//     indentLeftOdd: 0, indentLeftEven: 0,</span>
+    <span class="c1">//     indentTopOdd: 0, indentTopEven: 0,</span>
     <span class="c1">// },</span>
 
     <span class="c1">// createCellContainerCallback: function(scene, x, y, config) {</span>
@@ -8523,7 +8525,7 @@
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">column</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">column</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// col: 0</span>
     <span class="nx">row</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// columnProportions: undefined,</span>
     <span class="c1">// rowProportions: undefined,</span>
@@ -8531,7 +8533,9 @@
     <span class="c1">// space: {</span>
     <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
     <span class="c1">//     column: 0, // [0, 0, 0]</span>
-    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">//     row: 0,    // [0, 0, 0]</span>
+    <span class="c1">//     indentLeftOdd: 0, indentLeftEven: 0,</span>
+    <span class="c1">//     indentTopOdd: 0, indentTopEven: 0,</span>
     <span class="c1">// },</span>
 
     <span class="c1">// createCellContainerCallback: function(scene, x, y, config) {</span>
@@ -8545,7 +8549,7 @@
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">column</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">column</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>   <span class="c1">// col: 0</span>
     <span class="nx">row</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// columnProportions: undefined,</span>
     <span class="c1">// rowProportions: undefined,</span>
@@ -8553,7 +8557,9 @@
     <span class="c1">// space: {</span>
     <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
     <span class="c1">//     column: 0, // [0, 0, 0]</span>
-    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">//     row: 0,    // [0, 0, 0]</span>
+    <span class="c1">//     indentLeftOdd: 0, indentLeftEven: 0,</span>
+    <span class="c1">//     indentTopOdd: 0, indentTopEven: 0,</span>
     <span class="c1">// },</span>
 
     <span class="c1">// createCellContainerCallback: function(scene, x, y, config) {</span>
@@ -8567,7 +8573,9 @@
     <span class="c1">// space: {</span>
     <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
     <span class="c1">//     column: 0, // [0, 0, 0]</span>
-    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">//     row: 0,    // [0, 0, 0]</span>
+    <span class="c1">//     indentLeftOdd: 0, indentLeftEven: 0,</span>
+    <span class="c1">//     indentTopOdd: 0, indentTopEven: 0,</span>
     <span class="c1">// },</span>
 
     <span class="c1">// createCellContainerCallback: function(scene, x, y, config, gridSizer) {</span>
@@ -8602,7 +8610,7 @@
 </li>
 <li><code>width</code> : Minimum width. i.e. Width of this gridSizer will larger then this value.</li>
 <li><code>height</code> : Minimum height. i.e. Hieght of this gridSizer will larger then this value.</li>
-<li><code>column</code> : Amount of column grids.</li>
+<li><code>column</code>, or <code>col</code> : Amount of column grids.</li>
 <li><code>row</code> : Amount of row grids.</li>
 <li><code>columnProportions</code>, <code>rowProportions</code> : Proportion of each column/row.<ul>
 <li>Number : Apply this number proportion to each column/row</li>
@@ -8621,6 +8629,8 @@
 <li>A number array</li>
 </ul>
 </li>
+<li><code>space.indentLeftOdd</code>, <code>space.indentLeftEven</code> : Indent at each odd/even row.</li>
+<li><code>space.indentTopOdd</code>, <code>space.indentTopEven</code> : Indent at each odd/even column.</li>
 </ul>
 </li>
 <li><code>createCellContainerCallback</code> : Callback to create container(sizer) of each cell.

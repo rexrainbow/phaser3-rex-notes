@@ -15,34 +15,30 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var sizer = this.rexUI.add.fixWidthSizer({
+        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK);
+        var sizer = this.rexUI.add.gridSizer({
             x: 400, y: 300,
-            width: 250, height: undefined,
+            column: 8, row: 8,
             space: {
-                left: 3,
-                right: 3,
-                top: 3,
-                bottom: 3,
-                line: -5,
-                indentEven: 20,
+                top: 10, bottom: 10, left: 10, right: 10,
+                column: -5, row: 0,
+                indentTopEven: 20,
             },
+
+            createCellContainerCallback: function (scene, x, y, config) {
+                return scene.rexUI.add.label({
+                    width: 50, height: 50,
+                    background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 25, COLOR_LIGHT),
+                    text: scene.add.text(0, 0, `${x},${y}`),
+
+                    align: 'center'
+                });
+            }
         })
-            .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
+            .addBackground(background)
+            .layout()
 
-        for (var i = 0; i < 22; i++) {
-            sizer.add(this.rexUI.add.label({
-                width: 40, height: 40,
-                background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
-                text: this.add.text(0, 0, `${i}`, {
-                    fontSize: 18
-                }),
-
-                align: 'center'
-            }));
-        }
-
-        sizer.layout();
-        // sizer.drawBounds(this.add.graphics(), 0xff0000);
+        // sizer.moveDepthBelow(sizer.getElement('background'));
     }
 
     update() { }

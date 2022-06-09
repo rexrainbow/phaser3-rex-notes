@@ -86,14 +86,16 @@ var gridSizer = scene.rexUI.add.gridSizer({
     // width: undefined,
     // height: undefined,
 
-    column: 0,
+    column: 0,  // col: 0
     row: 0,
     // columnProportions: undefined,
     // rowProportions: undefined,
     // space: {
     //     left: 0, right: 0, top: 0, bottom:0,
     //     column: 0, // [0, 0, 0]
-    //     row: 0     // [0, 0, 0]
+    //     row: 0,    // [0, 0, 0]
+    //     indentLeftOdd: 0, indentLeftEven: 0,
+    //     indentTopOdd: 0, indentTopEven: 0,
     // },
 
     // createCellContainerCallback: function(scene, x, y, config) {
@@ -110,7 +112,7 @@ or
 
 ```javascript
 var gridSizer = scene.rexUI.add.gridSizer(x, y, {
-    column: 0,
+    column: 0,  // col: 0
     row: 0,
     // columnProportions: undefined,
     // rowProportions: undefined,
@@ -118,7 +120,9 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, {
     // space: {
     //     left: 0, right: 0, top: 0, bottom:0,
     //     column: 0, // [0, 0, 0]
-    //     row: 0     // [0, 0, 0]
+    //     row: 0,    // [0, 0, 0]
+    //     indentLeftOdd: 0, indentLeftEven: 0,
+    //     indentTopOdd: 0, indentTopEven: 0,
     // },
 
     // createCellContainerCallback: function(scene, x, y, config) {
@@ -135,7 +139,7 @@ or
 
 ```javascript
 var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
-    column: 0,
+    column: 0,   // col: 0
     row: 0,
     // columnProportions: undefined,
     // rowProportions: undefined,
@@ -143,7 +147,9 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
     // space: {
     //     left: 0, right: 0, top: 0, bottom:0,
     //     column: 0, // [0, 0, 0]
-    //     row: 0     // [0, 0, 0]
+    //     row: 0,    // [0, 0, 0]
+    //     indentLeftOdd: 0, indentLeftEven: 0,
+    //     indentTopOdd: 0, indentTopEven: 0,
     // },
 
     // createCellContainerCallback: function(scene, x, y, config) {
@@ -160,7 +166,9 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     // space: {
     //     left: 0, right: 0, top: 0, bottom:0,
     //     column: 0, // [0, 0, 0]
-    //     row: 0     // [0, 0, 0]
+    //     row: 0,    // [0, 0, 0]
+    //     indentLeftOdd: 0, indentLeftEven: 0,
+    //     indentTopOdd: 0, indentTopEven: 0,
     // },
 
     // createCellContainerCallback: function(scene, x, y, config, gridSizer) {
@@ -187,7 +195,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width` : Minimum width. i.e. Width of this gridSizer will larger then this value.
 - `height` : Minimum height. i.e. Hieght of this gridSizer will larger then this value.
-- `column` : Amount of column grids.
+- `column`, or `col` : Amount of column grids.
 - `row` : Amount of row grids.
 - `columnProportions`, `rowProportions` : Proportion of each column/row.
     - Number : Apply this number proportion to each column/row
@@ -200,6 +208,8 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     - `space.row` : Space between 2 rows
         - A number
         - A number array
+    - `space.indentLeftOdd`, `space.indentLeftEven` : Indent at each odd/even row.
+    - `space.indentTopOdd`, `space.indentTopEven` : Indent at each odd/even column.
 - `createCellContainerCallback` : Callback to create container(sizer) of each cell.
     ```javascript
     function(scene, x, y, config) {

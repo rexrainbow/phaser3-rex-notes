@@ -41,6 +41,12 @@ sizer.addBackground(gameObject);
     var child = sizer.getElement(key);
     ```
 
+#### Depth
+
+```js
+sizer.moveDepthBelow(gameObject);
+```
+
 ### Minimum size
 
 - Get
