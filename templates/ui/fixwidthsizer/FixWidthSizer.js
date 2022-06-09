@@ -28,9 +28,13 @@ class FixWidthSizer extends BaseSizer {
         this.setOrientation(GetValue(config, 'orientation', 0));
         this.setItemSpacing(GetValue(config, 'space.item', 0));
         this.setLineSpacing(GetValue(config, 'space.line', 0));
-        this.setIndent(
-            GetValue(config, 'space.indentOdd', 0),
-            GetValue(config, 'space.indentEven', 0)
+        this.setIntentLeft(
+            GetValue(config, 'space.indentLeftOdd', 0),
+            GetValue(config, 'space.indentLeftEven', 0)
+        );
+        this.setIntentTop(
+            GetValue(config, 'space.indentTopOdd', 0),
+            GetValue(config, 'space.indentTopEven', 0)
         );
         this.setAlign(GetValue(config, 'align', 0));
         this.setJustifyPercentage(GetValue(config, 'justifyPercentage', 0.25));
@@ -54,9 +58,15 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
-    setIndent(odd, even) {
-        this.space.indentOdd = odd;
-        this.space.indentEven = even;
+    setIntentLeft(odd, even) {
+        this.space.indentLeftOdd = odd;
+        this.space.indentLeftEven = even;
+        return this;
+    }
+
+    setIntentTop(odd, even) {
+        this.space.indentTopOdd = odd;
+        this.space.indentTopEven = even;
         return this;
     }
 

@@ -16,9 +16,11 @@ var RunChildrenWrap = function (lineWidth, out) {
     var children = this.sizerChildren;
     var itemSpace = this.space.item,
         lineSpace = this.space.line,
-        indentOdd = this.space.indentOdd,
-        indentEven = this.space.indentEven;
-    var child, childWidth, childHeight, remainder = 0, indent;
+        indentLeftOdd = this.space.indentLeftOdd,
+        indentLeftEven = this.space.indentLeftEven,
+        indentTopOdd = this.space.indentTopOdd,
+        indentTopEven = this.space.indentTopEven;
+    var child, childWidth, childHeight, remainder = 0, indentLeft;
     var lines = out.lines,
         lastLine = undefined,
         newLine;
@@ -55,8 +57,8 @@ var RunChildrenWrap = function (lineWidth, out) {
             };
             lines.push(lastLine);
 
-            var indent = (lines.length % 2) ? indentOdd : indentEven;
-            remainder = lineWidth - indent;
+            var indentLeft = (lines.length % 2) ? indentLeftOdd : indentLeftEven;
+            remainder = lineWidth - indentLeft;
         }
 
         remainder -= (childWidth + itemSpace);
@@ -72,6 +74,9 @@ var RunChildrenWrap = function (lineWidth, out) {
         out.width = Math.max(out.width, lastLine.width);
         out.height += lastLine.height;
     }
+
+    out.height += Math.max(indentTopOdd, indentTopEven);
+
     return out;
 }
 

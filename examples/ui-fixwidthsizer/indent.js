@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
                 top: 3,
                 bottom: 3,
                 line: -5,
-                indentEven: 20,
+                indentLeftEven: 20,
             },
         })
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));

@@ -88,7 +88,7 @@ var sizer = scene.rexUI.add.fixWidthSizer({
     // space: {
     //     left: 0, right: 0, top: 0, bottom: 0,
     //     item: 0, line: 0, 
-    //     indentOdd: 0, indentEven: 0,
+    //     indentLeftOdd: 0, indentLeftEven: 0,
     // },
 
     // rtl: false,
@@ -109,7 +109,8 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, {
     // space: {
     //     left: 0, right: 0, top: 0, bottom: 0,
     //     item: 0, line: 0,
-    //     indentOdd: 0, indentEven: 0,
+    //     indentLeftOdd: 0, indentLeftEven: 0,
+    //     indentTopOdd: 0, indentTopEven: 0,
     // },
 
     // rtl: false,
@@ -153,7 +154,8 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.
     - `space.line` : Space between each line.
-    - `space.indentOdd`, `space.indentEven` : Indent at each odd/even line.
+    - `space.indentLeftOdd`, `space.indentLeftEven` : Indent at each odd/even line.
+    - `space.indentTopOdd`, `space.indentTopEven` : Indent at each odd/even item.
 - `rtl` : Order of children in each line.
     - `false` : Place children from left-to-right/top-to-bottom, default value.
     - `true` : Place children from right-to-left/bottom-to-top.

@@ -8,10 +8,12 @@ var LayoutChildren = function () {
     var justifyPercentage = this.justifyPercentage;
     var itemSpace = this.space.item,
         lineSpace = this.space.line,
-        indentOdd = this.space.indentOdd,
-        indentEven = this.space.indentEven;
+        indentLeftOdd = this.space.indentLeftOdd,
+        indentLeftEven = this.space.indentLeftEven,
+        indentTopOdd = this.space.indentTopOdd,
+        indentTopEven = this.space.indentTopEven;
 
-    var child, childConfig, padding, justifySpace = 0, indent;
+    var child, childConfig, padding, justifySpace = 0, indentLeft, indentTop;
     var startX = this.innerLeft,
         startY = this.innerTop;
     var x, y, width, height; // Align zone
@@ -28,8 +30,8 @@ var LayoutChildren = function () {
             lineChlidren.reverse();
         }
 
-        indent = (i % 2) ? indentEven : indentOdd;
-        itemX = startX + indent;
+        indentLeft = (i % 2) ? indentLeftEven : indentLeftOdd;
+        itemX = startX + indentLeft;
 
         remainderLineWidth = (innerLineWidth - line.width);
         switch (this.align) {
@@ -77,7 +79,9 @@ var LayoutChildren = function () {
                 x += itemSpace;
             }
 
-            y = (itemY + padding.top);
+
+            indentTop = (j % 2) ? indentTopEven : indentTopOdd;
+            y = (itemY + indentTop + padding.top);
             width = GetDisplayWidth(child);
             height = GetDisplayHeight(child);
             itemX = x + width + padding.right + justifySpace;

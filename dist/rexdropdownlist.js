@@ -11097,13 +11097,16 @@
     var justifyPercentage = this.justifyPercentage;
     var itemSpace = this.space.item,
         lineSpace = this.space.line,
-        indentOdd = this.space.indentOdd,
-        indentEven = this.space.indentEven;
+        indentLeftOdd = this.space.indentLeftOdd,
+        indentLeftEven = this.space.indentLeftEven,
+        indentTopOdd = this.space.indentTopOdd,
+        indentTopEven = this.space.indentTopEven;
     var child,
         childConfig,
         padding,
         justifySpace = 0,
-        indent;
+        indentLeft,
+        indentTop;
     var startX = this.innerLeft,
         startY = this.innerTop;
     var x, y, width, height; // Align zone
@@ -11122,8 +11125,8 @@
         lineChlidren.reverse();
       }
 
-      indent = i % 2 ? indentEven : indentOdd;
-      itemX = startX + indent;
+      indentLeft = i % 2 ? indentLeftEven : indentLeftOdd;
+      itemX = startX + indentLeft;
       remainderLineWidth = innerLineWidth - line.width;
 
       switch (this.align) {
@@ -11185,7 +11188,8 @@
           x += itemSpace;
         }
 
-        y = itemY + padding.top;
+        indentTop = j % 2 ? indentTopEven : indentTopOdd;
+        y = itemY + indentTop + padding.top;
         width = GetDisplayWidth(child);
         height = GetDisplayHeight(child);
         itemX = x + width + padding.right + justifySpace;
@@ -11216,13 +11220,15 @@
     var children = this.sizerChildren;
     var itemSpace = this.space.item,
         lineSpace = this.space.line,
-        indentOdd = this.space.indentOdd,
-        indentEven = this.space.indentEven;
+        indentLeftOdd = this.space.indentLeftOdd,
+        indentLeftEven = this.space.indentLeftEven,
+        indentTopOdd = this.space.indentTopOdd,
+        indentTopEven = this.space.indentTopEven;
     var child,
         childWidth,
         childHeight,
         remainder = 0,
-        indent;
+        indentLeft;
     var lines = out.lines,
         lastLine = undefined,
         newLine;
@@ -11261,8 +11267,8 @@
           height: 0
         };
         lines.push(lastLine);
-        var indent = lines.length % 2 ? indentOdd : indentEven;
-        remainder = lineWidth - indent;
+        var indentLeft = lines.length % 2 ? indentLeftOdd : indentLeftEven;
+        remainder = lineWidth - indentLeft;
       }
 
       remainder -= childWidth + itemSpace;
@@ -11280,6 +11286,7 @@
       out.height += lastLine.height;
     }
 
+    out.height += Math.max(indentTopOdd, indentTopEven);
     return out;
   };
 
@@ -11532,7 +11539,9 @@
 
       _this.setLineSpacing(GetValue$2(config, 'space.line', 0));
 
-      _this.setIndent(GetValue$2(config, 'space.indentOdd', 0), GetValue$2(config, 'space.indentEven', 0));
+      _this.setIntentLeft(GetValue$2(config, 'space.indentLeftOdd', 0), GetValue$2(config, 'space.indentLeftEven', 0));
+
+      _this.setIntentTop(GetValue$2(config, 'space.indentTopOdd', 0), GetValue$2(config, 'space.indentTopEven', 0));
 
       _this.setAlign(GetValue$2(config, 'align', 0));
 
@@ -11564,10 +11573,17 @@
         return this;
       }
     }, {
-      key: "setIndent",
-      value: function setIndent(odd, even) {
-        this.space.indentOdd = odd;
-        this.space.indentEven = even;
+      key: "setIntentLeft",
+      value: function setIntentLeft(odd, even) {
+        this.space.indentLeftOdd = odd;
+        this.space.indentLeftEven = even;
+        return this;
+      }
+    }, {
+      key: "setIntentTop",
+      value: function setIntentTop(odd, even) {
+        this.space.indentTopOdd = odd;
+        this.space.indentTopEven = even;
         return this;
       }
     }, {
