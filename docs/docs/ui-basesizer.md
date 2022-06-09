@@ -621,7 +621,14 @@ sizer.pushIntoBounds(bounds);
 
 ### Set properties of child
 
-See [Set properties of child](containerlite.md#set-properties-of-child).
+```javascript
+sizer.setChildPosition(child, x, y);
+sizer.setChildRotation(child, rotation);
+sizer.setChildScale(child, scaleX, scaleY);
+sizer.setChildDisplaySize(child, width, height);
+sizer.setChildVisible(child, visible);
+sizer.setChildAlpha(child, alpha);
+```
 
 ### Drag top-most sizer
 
