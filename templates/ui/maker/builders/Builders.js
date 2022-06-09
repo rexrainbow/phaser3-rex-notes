@@ -7,7 +7,7 @@ import CreateNinePatch2 from './CreateNinePatch2.js';
 import CreateCanvas from './CreateCanvas.js';
 
 import CreateSizer from './CreateSizer.js';
-import CreateFixWidthSizer from './CreateFixwidthSizer.js';
+import CreateFixWidthSizer from './CreateFixWidthSizer.js';
 import CreateGridSizer from './CreateGridSizer.js';
 import CreateOverlapSizer from './CreateOverlapSizer.js';
 
