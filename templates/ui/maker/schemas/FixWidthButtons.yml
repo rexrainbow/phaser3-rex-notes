@@ -17,8 +17,10 @@ space:
     top:
     bottom:
     item:
-    indentOdd:
-    indentEven:
+    indentLeftOdd:
+    indentLeftEven:
+    indentTopOdd:
+    indentTopEven:
 
 draggable:
 

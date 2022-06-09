@@ -10,8 +10,10 @@ space:
     bottom:
     item:
     line:
-    indentOdd:
-    indentEven:
+    indentLeftOdd:
+    indentLeftEven:
+    indentTopOdd:
+    indentTopEven:
 rtl:
 align:
 

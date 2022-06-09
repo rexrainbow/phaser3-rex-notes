@@ -619,6 +619,10 @@ sizer.pushIntoBounds(bounds);
         sizer.on('easedata.complete', function(key, sizer) { });
         ```
 
+### Set properties of child
+
+See [Set properties of child](containerlite.md#set-properties-of-child).
+
 ### Drag top-most sizer
 
 - Draggable child
