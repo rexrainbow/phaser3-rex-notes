@@ -2446,8 +2446,16 @@
     return stringTemplate.compile(content, config);
   };
 
-  var Render = function Render(text, data, config) {
-    return Compile(text, config)(data);
+  var Render = function Render(content, view, config) {
+    var f;
+
+    if (typeof content === 'string') {
+      f = Compile(content, config);
+    } else {
+      f = content;
+    }
+
+    return f(view);
   };
 
   var CreateProxyContext = function CreateProxyContext(config, baseContext) {

@@ -1,20 +1,12 @@
 import BaseExpression from './BaseExpression.js';
-import Handlebars from 'handlebars';
+import Compile from '../../../../string/stringtemplate/utils/Complile.js';
 
-const RuntimeOptions = {
-    allowProtoPropertiesByDefault: true,
-    allowProtoMethodsByDefault: true
-}
 class StringTemplateExpression extends BaseExpression {
     constructor(expression) {
         super();
 
-        var callback = Handlebars.compile(expression);
+        var callback = Compile(expression);
         this.setExpressionHandler(callback);
-    }
-
-    eval(context) {
-        return this.expressionHandler(context, RuntimeOptions);
     }
 }
 
