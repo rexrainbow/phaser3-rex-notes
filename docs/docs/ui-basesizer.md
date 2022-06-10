@@ -630,6 +630,12 @@ sizer.setChildVisible(child, visible);
 sizer.setChildAlpha(child, alpha);
 ```
 
+### Destroy
+
+```javascript
+sizer.destroy();
+```
+
 ### Drag top-most sizer
 
 - Draggable child

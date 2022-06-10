@@ -18,7 +18,7 @@ import CreateGridButtons from './CreateGridButtons.js';
 import CreateLabel from './CreateLabel.js';
 import CreateBadgeLabel from './CreateBadgeLabel.js';
 import CreateDialog from './CreateDialog.js';
-import CreateTextBox from './CreateTextbox.js';
+import CreateTextBox from './CreateTextBox.js';
 import CreateSlider from './CreateSlider.js';
 import CreateNumberBar from './CreateNumberBar.js';
 import CreateScrollBar from './CreateScrollBar.js';
