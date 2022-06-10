@@ -1,6 +1,6 @@
 import ExpressionParser from './expressionparser.js';
 import Compile from './math/expressionparser/utils/Complile.js';
-import CreateProxyContext from './math/expressionparser/utils/CreateProxyContext.js';
+import CreateProxyContext from './utils/proxy/createproxycontext/CreateProxyContext.js';
 import SetValue from './utils/object/SetValue.js';
 
 class ExpressionParserPlugin extends Phaser.Plugins.BasePlugin {

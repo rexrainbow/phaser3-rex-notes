@@ -162,6 +162,7 @@ module.exports = {
     // string
     'xorplugin': './plugins/xor-plugin.js',
     'lzstringplugin': './plugins/lzstring-plugin.js',
+    'stringtemplateplugin': './plugins/stringtemplate-plugin.js',
 
     // shader
     'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',

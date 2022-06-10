@@ -1,4 +1,4 @@
-import CreateProxyContext from '../../../math/expressionparser/utils/CreateProxyContext.js';
+import CreateProxyContext from '../../../utils/proxy/createproxycontext/CreateProxyContext.js';
 
 // Global : key
 const TreeMemory = '$tree';  // $tree.key

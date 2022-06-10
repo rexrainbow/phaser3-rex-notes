@@ -7811,7 +7811,8 @@
         }
       }
 
-      var matchStart = RE_SPLITTEXT.lastIndex - match.length;
+      var matchEnd = RE_SPLITTEXT.lastIndex;
+      var matchStart = matchEnd - match.length;
 
       if (charIdx < matchStart) {
         var content = text.substring(charIdx, matchStart);
@@ -7822,7 +7823,7 @@
         result.push(match);
       }
 
-      charIdx = RE_SPLITTEXT.lastIndex;
+      charIdx = matchEnd;
     }
 
     var totalLen = text.length;
@@ -23985,7 +23986,13 @@
 
   var ButtonMethods = {
     getChoice: function getChoice(index) {
-      return this.childrenMap.choicesSizer.getButton(index);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        return choicesSizer.getButton(index);
+      } else {
+        return undefined;
+      }
     },
     getAction: function getAction(index) {
       return this.childrenMap.actionsSizer.getButton(index);
@@ -23997,7 +24004,12 @@
       return this.childrenMap.leftToolbarSizer.getButton(index);
     },
     setChoiceEnable: function setChoiceEnable(index, enabled) {
-      this.childrenMap.choicesSizer.setButtonEnable(index, enabled);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.setButtonEnable(index, enabled);
+      }
+
       return this;
     },
     setActionEnable: function setActionEnable(index, enabled) {
@@ -24013,7 +24025,12 @@
       return this;
     },
     toggleChoiceEnable: function toggleChoiceEnable(index) {
-      this.childrenMap.choicesSizer.toggleButtonEnable(index);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.toggleButtonEnable(index);
+      }
+
       return this;
     },
     toggleActionEnable: function toggleActionEnable(index) {
@@ -24029,7 +24046,13 @@
       return this;
     },
     getChoiceEnable: function getChoiceEnable(index) {
-      return this.childrenMap.choicesSizer.getButtonEnable(index);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        return choicesSizer.getButtonEnable(index);
+      } else {
+        return false;
+      }
     },
     getActionEnable: function getActionEnable(index) {
       return this.childrenMap.actionsSizer.getButtonEnable(index);
@@ -24041,7 +24064,12 @@
       return this.childrenMap.leftToolbarSizer.getButtonEnable(index);
     },
     emitChoiceClick: function emitChoiceClick(index) {
-      this.childrenMap.choicesSizer.emitButtonClick(index);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.emitButtonClick(index);
+      }
+
       return this;
     },
     emitActionClick: function emitActionClick(index) {
@@ -24057,7 +24085,12 @@
       return this;
     },
     showChoice: function showChoice(index) {
-      this.childrenMap.choicesSizer.showButton(index);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.showButton(index);
+      }
+
       return this;
     },
     showAction: function showAction(index) {
@@ -24073,7 +24106,12 @@
       return this;
     },
     hideChoice: function hideChoice(index) {
-      this.childrenMap.choicesSizer.hideButton(index);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.hideButton(index);
+      }
+
       return this;
     },
     hideAction: function hideAction(index) {
@@ -24089,7 +24127,12 @@
       return this;
     },
     addChoice: function addChoice(gameObject) {
-      this.childrenMap.choicesSizer.addButton(gameObject);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.addButton(gameObject);
+      }
+
       return this;
     },
     addAction: function addAction(gameObject) {
@@ -24105,7 +24148,12 @@
       return this;
     },
     removeChoice: function removeChoice(index, destroyChild) {
-      this.childrenMap.choicesSizer.removeButton(index, destroyChild);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.removeButton(index, destroyChild);
+      }
+
       return this;
     },
     removeAction: function removeAction(index, destroyChild) {
@@ -24121,7 +24169,12 @@
       return this;
     },
     clearChoices: function clearChoices(destroyChild) {
-      this.childrenMap.choicesSizer.clearButtons(destroyChild);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.clearButtons(destroyChild);
+      }
+
       return this;
     },
     clearActions: function clearActions(destroyChild) {
@@ -24137,7 +24190,12 @@
       return this;
     },
     forEachChoice: function forEachChoice(callback, scope) {
-      this.childrenMap.choicesSizer.forEachButtton(callback, scope);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.forEachButtton(callback, scope);
+      }
+
       return this;
     },
     forEachAction: function forEachAction(callback, scope) {
@@ -24154,29 +24212,66 @@
     },
     // Checkboxes
     getChoicesButtonStates: function getChoicesButtonStates() {
-      return this.childrenMap.choicesSizer.getAllButtonsState();
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        return choicesSizer.getAllButtonsState();
+      } else {
+        return {};
+      }
     },
     getChoicesButtonState: function getChoicesButtonState(name) {
+      var choicesSizer = this.childrenMap.choicesSizer;
+
       if (name === undefined) {
-        return this.childrenMap.choicesSizer.getAllButtonsState();
+        if (choicesSizer) {
+          return choicesSizer.getAllButtonsState();
+        } else {
+          return {};
+        }
       } else {
-        return this.childrenMap.choicesSizer.getButtonState(name);
+        if (choicesSizer) {
+          return choicesSizer.getButtonState(name);
+        } else {
+          return false;
+        }
       }
     },
     setChoicesButtonState: function setChoicesButtonState(name, state) {
-      this.childrenMap.choicesSizer.setButtonState(name, state);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.setButtonState(name, state);
+      }
+
       return this;
     },
     clearChoicesButtonStates: function clearChoicesButtonStates() {
-      this.childrenMap.choicesSizer.clearAllButtonsState();
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.clearAllButtonsState();
+      }
+
       return this;
     },
     // Radio buttons
     getChoicesSelectedButtonName: function getChoicesSelectedButtonName() {
-      return this.childrenMap.choicesSizer.getSelectedButtonName();
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        return choicesSizer.getSelectedButtonName();
+      } else {
+        return '';
+      }
     },
     setChoicesSelectedButtonName: function setChoicesSelectedButtonName(name) {
-      this.childrenMap.choicesSizer.setSelectedButtonName(name);
+      var choicesSizer = this.childrenMap.choicesSizer;
+
+      if (choicesSizer) {
+        choicesSizer.setSelectedButtonName(name);
+      }
+
       return this;
     }
   };

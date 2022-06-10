@@ -3710,7 +3710,8 @@
         }
       }
 
-      var matchStart = RE_SPLITTEXT.lastIndex - match.length;
+      var matchEnd = RE_SPLITTEXT.lastIndex;
+      var matchStart = matchEnd - match.length;
 
       if (charIdx < matchStart) {
         var content = text.substring(charIdx, matchStart);
@@ -3721,7 +3722,7 @@
         result.push(match);
       }
 
-      charIdx = RE_SPLITTEXT.lastIndex;
+      charIdx = matchEnd;
     }
 
     var totalLen = text.length;
