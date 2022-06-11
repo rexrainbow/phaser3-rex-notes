@@ -13741,16 +13741,18 @@
         value[_key - 1] = arguments[_key];
       }
 
-      textPlayer.emit.apply(textPlayer, ["parser.".concat(startTag), parser].concat(value));
-      AppendCommand(textPlayer, startTag, value);
+      var param = value;
+      textPlayer.emit.apply(textPlayer, ["parser.".concat(startTag), parser].concat(value, [param]));
+      AppendCommand(textPlayer, startTag, param);
     }).on('-', function (tagName) {
       if (parser.skipEventFlag) {
         return;
       }
 
       var endTag = "-".concat(tagName);
-      textPlayer.emit("parser.".concat(endTag), parser);
-      AppendCommand(textPlayer, endTag);
+      var param = [];
+      textPlayer.emit("parser.".concat(endTag), parser, param);
+      AppendCommand(textPlayer, endTag, param);
     }).on('complete', function () {
       textPlayer.emit('parser.complete', parser);
     });
@@ -13788,7 +13790,12 @@
 
   var OnParseContent = function OnParseContent(textPlayer, parser, config) {
     parser.on('content', function (content) {
-      AppendText$1.call(textPlayer, content);
+      if (parser.contentOutputEnable) {
+        AppendText$1.call(textPlayer, content);
+      } else {
+        var startTag = "+".concat(parser.lastTagStart);
+        textPlayer.emit("parser.".concat(startTag, "#content"), parser, content);
+      }
     });
   };
 
@@ -13851,6 +13858,8 @@
 
       _this.setCommentLineStartSymbol(GetValue$1N(config, 'comment', '//'));
 
+      _this.setContentOutputEnable();
+
       return _this;
     }
 
@@ -13858,6 +13867,16 @@
       key: "setCommentLineStartSymbol",
       value: function setCommentLineStartSymbol(symbol) {
         this.commentLineStart = symbol;
+        return this;
+      }
+    }, {
+      key: "setContentOutputEnable",
+      value: function setContentOutputEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.contentOutputEnable = enable;
         return this;
       }
     }, {
@@ -13990,7 +14009,7 @@
     return this;
   };
 
-  var PauseTyping = function PauseTyping() {
+  var PauseTyping$1 = function PauseTyping() {
     // Already in typingPaused state
     if (this.isTypingPaused) {
       return this;
@@ -14170,7 +14189,7 @@
     }
   };
 
-  var WaitKey = function WaitKey(textPlayer, keyName, callback, args, scope) {
+  var WaitKeyDown = function WaitKeyDown(textPlayer, keyName, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'keydown');
     var eventName = "keydown-".concat(keyName.toUpperCase());
     var keyboard = textPlayer.scene.input.keyboard; // Remove all wait events
@@ -14280,7 +14299,7 @@
         var music = textPlayer.soundManager.getBackgroundMusic();
         WaitMusic(textPlayer, music, callback, args, scope);
       } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
-        WaitKey(textPlayer, name, callback, args, scope);
+        WaitKeyDown(textPlayer, name, callback, args, scope);
       } else if (IsWaitCameraEffect(name)) {
         WaitCameraEffect(textPlayer, name, callback, args, scope);
       } else if (IsWaitSprite(name)) {
@@ -14366,7 +14385,7 @@
     typing: Typing,
     pause: Pause$1,
     resume: Resume$1,
-    pauseTyping: PauseTyping,
+    pauseTyping: PauseTyping$1,
     resumeTyping: ResumeTyping,
     wait: Wait,
     setTimeScale: SetTimeScale$1,
@@ -16579,14 +16598,20 @@
   };
 
   var Pause = function Pause() {
-    // Pause typing timer and animation progresses
-    this.typeWriter.pause();
+    // Pause typing, typing timer and animation progresses
+    this.typeWriter.pauseTyping().pause();
+    return this;
+  };
+
+  var PauseTyping = function PauseTyping() {
+    // Pause typing
+    this.typeWriter.pauseTyping();
     return this;
   };
 
   var Resume = function Resume() {
-    // Resume typing timer and animation progresses
-    this.typeWriter.resume();
+    // Resume typing timer, animation progresses and typing
+    this.typeWriter.resume().resumeTyping();
     return this;
   };
 
@@ -16627,6 +16652,7 @@
     playPromise: PlayPromise,
     typingNextPage: TypingNextPage,
     pause: Pause,
+    pauseTyping: PauseTyping,
     resume: Resume,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,

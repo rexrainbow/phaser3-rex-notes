@@ -6,6 +6,7 @@ import Play from './Play.js';
 import PlayPromise from './PlayPromise.js';
 import TypingNextPage from './TypingNextPage.js';
 import Pause from './Pause.js';
+import PauseTyping from './PauseTyping.js';
 import Resume from './Resume.js';
 import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
@@ -20,6 +21,7 @@ export default {
     playPromise: PlayPromise,
     typingNextPage: TypingNextPage,
     pause: Pause,
+    pauseTyping: PauseTyping,
     resume: Resume,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,

@@ -3,7 +3,7 @@ import WaitTime from './WaitTime.js';
 import WaitClick from './WaitClick.js';
 import WaitMusic from './WaitMusic.js';
 import { IsWaitCameraEffect, WaitCameraEffect } from './WaitCameraEffect.js';
-import WaitKey from './WaitKey.js';
+import WaitKeyDown from './WaitKeyDown.js';
 import { IsWaitSprite, WaitSprite } from './WaitSprite.js'
 
 const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
@@ -36,7 +36,7 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
             WaitMusic(textPlayer, music, callback, args, scope);
 
         } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
-            WaitKey(textPlayer, name, callback, args, scope);
+            WaitKeyDown(textPlayer, name, callback, args, scope);
 
         } else if (IsWaitCameraEffect(name)) {
             WaitCameraEffect(textPlayer, name, callback, args, scope);

@@ -405,6 +405,24 @@ txt.typingNextPage();
 
 - Set `nextPageInput` to `null`, or `false` in config.
 
+#### Pause
+
+- Pause typing and typing animation
+    ```javascript
+    txt.pause();
+    ```
+- Pause typing only
+    ```javascript
+    txt.pauseTyping();
+    ```
+
+#### Resume
+
+- Resume typing and typing animation
+    ```javascript
+    txt.resume();
+    ```
+
 #### Status
 
 - Is playing : After `txt.play(content)`, before typing all pages completed
@@ -458,6 +476,17 @@ These lines will be skipped :
 - Comment line, start with `'//'`.
 
 New line symbol `'\n'` will be removed, use `[r]` to insert a new line character.
+
+##### Content output enable
+
+- Content won't output if `parser.setContentOutputEnable(false)` under [custom tag events](textplayer.md#custom-tag)
+    - Fire `'parser.+custom#content'` event if conent is ignored now
+        ```javascript
+        txt.on('parser.+custom#content', function(parser, content) {
+
+        })
+        ```
+- Invoke `parser.setContentOutputEnable()` to turn on content output back.
 
 #### Text style
 
@@ -639,28 +668,40 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 
 Assume that adding a custom tag : `[custom=10,20][/custom]`
 
-- On parse a +custom tag, will add a custom command child 
+- On parse a `+custom` tag, will add a custom command child 
     ```javascript
-    txt.on('parser.+custom', function(parser, a, b) {
+    txt.on('parser.+custom', function(parser, a, b, params) {
         // console.log('Parse +custom tag:', a, b)
     })
     ```
-- On execute a +custom command child
+    - `a`, `b`, ... : Parameters after `=`
+    - `params` : Arguments array used when executing `+custom`. Equal to `[a, b]` in this case.
+    - Disable content after this start tag
+        ```javascript
+        parser.setContentOutputEnable(false);
+        ```
+- On execute a `+custom` command child
     ```javascript
     txt.on('tag.+custom', function(a, b) {
         // console.log('Execute +custom tag:', a, b)
     })
     ```
-- On parse a -custom tag, will add a custom command child 
+    - `a`, `b`, ... : Parameters passed from `params` in `'parser.+custom'` event.
+- On parse a `-custom` tag, will add a custom command child 
     ```javascript
-    txt.on('parser.-custom', function(parser) {
+    txt.on('parser.-custom', function(parser, params) {
         // console.log('Parse -custom tag')
     })
     ```
-- On execute a -custom command child
+    - `params` : Arguments array used when executing `-custom`. Equal to `[]` in this case.
+    - Enable content after this start tag
+        ```javascript
+        parser.setContentOutputEnable(true);
+        ```
+- On execute a `-custom` command child
     ```javascript
-    txt.on('tag.-custom', function() {
+    txt.on('tag.-custom', function(...params) {
         // console.log('Execute -custom tag')
     })
     ```
-
+    - `params` : Parameters passed from `params` in `'parser.-custom'` event.

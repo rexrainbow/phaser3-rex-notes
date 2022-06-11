@@ -9,8 +9,8 @@ var OnParseFadeOutBackgroundMusicTag = function (textPlayer, parser, config) {
             AppendCommandBase.call(textPlayer,
                 'bgm.fadeout',           // name
                 FadeOutBackgroundMusic,  // callback
-                [time, isStopped],      // params
-                textPlayer,             // scope
+                [time, isStopped],       // params
+                textPlayer,              // scope
             );
             parser.skipEvent();
         })

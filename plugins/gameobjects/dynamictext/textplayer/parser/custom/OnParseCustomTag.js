@@ -11,8 +11,9 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
             }
 
             var startTag = `+${tagName}`;
-            textPlayer.emit(`parser.${startTag}`, parser, ...value);
-            AppendCommand(textPlayer, startTag, value);
+            var param = value;
+            textPlayer.emit(`parser.${startTag}`, parser, ...value, param);
+            AppendCommand(textPlayer, startTag, param);
         })
         .on('-', function (tagName) {
             if (parser.skipEventFlag) {
@@ -20,8 +21,9 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
             }
 
             var endTag = `-${tagName}`;
-            textPlayer.emit(`parser.${endTag}`, parser);
-            AppendCommand(textPlayer, endTag);
+            var param = [];
+            textPlayer.emit(`parser.${endTag}`, parser, param);
+            AppendCommand(textPlayer, endTag, param);
         })
         .on('complete', function () {
             textPlayer.emit('parser.complete', parser);

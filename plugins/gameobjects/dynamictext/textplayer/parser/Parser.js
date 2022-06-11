@@ -16,11 +16,20 @@ class Parser extends BracketParser {
 
         AddParseCallbacks(textPlayer, this, config);
 
-        this.setCommentLineStartSymbol(GetValue(config, 'comment', '//'))
+        this.setCommentLineStartSymbol(GetValue(config, 'comment', '//'));
+        this.setContentOutputEnable();
     }
 
     setCommentLineStartSymbol(symbol) {
         this.commentLineStart = symbol;
+        return this;
+    }
+
+    setContentOutputEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.contentOutputEnable = enable;
         return this;
     }
 

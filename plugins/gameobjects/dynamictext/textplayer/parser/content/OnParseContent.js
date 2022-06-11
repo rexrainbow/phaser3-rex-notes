@@ -3,7 +3,12 @@ import AppendTextBase from '../../../dynamictext/methods/AppendText.js';
 var OnParseContent = function (textPlayer, parser, config) {
     parser
         .on('content', function (content) {
-            AppendTextBase.call(textPlayer, content);
+            if (parser.contentOutputEnable) {
+                AppendTextBase.call(textPlayer, content);
+            } else {
+                var startTag = `+${parser.lastTagStart}`;
+                textPlayer.emit(`parser.${startTag}#content`, parser, content);
+            }
         })
 }
 
