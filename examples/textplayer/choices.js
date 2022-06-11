@@ -22,7 +22,7 @@ Prelogue... Prelogue... Prelogue...[r]
     [choice=a,3]Choice2[/choice]
 [/question]
 
-Postlogue...Postlogue...Postlogue...
+Postlogue... Postlogue... Postlogue...
 `
 
         var text = this.add.rexTextPlayer(
@@ -110,7 +110,7 @@ var OnParseQuestionTag = function (textPlayer) {
                 return
             }
 
-            question.content = content.trimEnd();
+            question.title = content.trimEnd();
         })
         .on('parser.-question', function (parser, param) {
             parser.setContentOutputEnable(true);
@@ -143,7 +143,7 @@ var OnParseQuestionTag = function (textPlayer) {
                 return
             }
 
-            lastChoice.content = content.trimEnd();
+            lastChoice.title = content.trimEnd();
         })
         .on('parser.-choice', function (parser) {
             if (!lastChoice) {
