@@ -66,33 +66,26 @@ Postlogue...Postlogue...Postlogue...
             }
         )
 
-        var print = this.add.text(0, 580, 'Click to start');
-        this.input.once('pointerdown', function () {
-            text.playPromise(content)
-                .then(function () {
-                    print.setText('Play complete');
-                    console.log('Play complete');
-                })
-
-            // text.showPage();  // Show all characters in this page
-        })
-
         // Parse custom tag, execute custom tag
         OnParseQuestionTag(text);
 
+        var print = this.add.text(0, 0, '');
         var scene = this;
         text.on('question', function (question) {
-            console.log(question);
+            print.text += JSON.stringify(question, null, 2) + '\n'
             // Popup dialog for this question data
 
             // Wait for input
             text.pauseTyping();
-            console.log('Pause, wait pointerdown')
+            print.text += 'Pause, wait pointerdown\n';
             scene.input.once('pointerdown', function () {
                 text.resume();
-                console.log('Resume')
+                print.text += 'Resume\n';
             });
         })
+
+
+        text.play(content);
     }
 
     update() { }

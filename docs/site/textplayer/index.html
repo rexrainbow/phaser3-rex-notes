@@ -1590,6 +1590,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#status" class="md-nav__link">
     Status
   </a>
@@ -1620,6 +1634,19 @@
   <a href="#content" class="md-nav__link">
     Content
   </a>
+  
+    <nav class="md-nav" aria-label="Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-output-enable" class="md-nav__link">
+    Content output enable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -8419,6 +8446,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#status" class="md-nav__link">
     Status
   </a>
@@ -8449,6 +8490,19 @@
   <a href="#content" class="md-nav__link">
     Content
   </a>
+  
+    <nav class="md-nav" aria-label="Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-output-enable" class="md-nav__link">
+    Content output enable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -8575,6 +8629,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/oNZbbJv">Play</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOBroeY">Sprite control</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/XWMMpjE">Show page</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/dydQjow">Choices</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textplaayer">Sample code</a></p>
@@ -9008,6 +9063,21 @@
 <ul>
 <li>Set <code>nextPageInput</code> to <code>null</code>, or <code>false</code> in config.</li>
 </ul>
+<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pause typing and typing animation
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Pause typing only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">pauseTyping</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Resume typing and typing animation
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
 <h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Is playing : After <code>txt.play(content)</code>, before typing all pages completed
@@ -9053,6 +9123,18 @@
 <li>Comment line, start with <code>'//'</code>.</li>
 </ul>
 <p>New line symbol <code>'\n'</code> will be removed, use <code>[r]</code> to insert a new line character.</p>
+<h5 id="content-output-enable">Content output enable<a class="headerlink" href="#content-output-enable" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Content won't output if <code>parser.setContentOutputEnable(false)</code> under <a href="./#custom-tag">custom tag events</a><ul>
+<li>Fire <code>'parser.+custom#content'</code> event if conent is ignored now
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.+custom#content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Invoke <code>parser.setContentOutputEnable()</code> to turn on content output back.</li>
+</ul>
 <h4 id="text-style">Text style<a class="headerlink" href="#text-style" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Font color : <code>[color=red]content[/color]</code>, <code>[color=#FF0000]content[/color]</code></li>
@@ -9266,26 +9348,45 @@
 <h4 id="custom-tag">Custom tag<a class="headerlink" href="#custom-tag" title="Permanent link">&para;</a></h4>
 <p>Assume that adding a custom tag : <code>[custom=10,20][/custom]</code></p>
 <ul>
-<li>On parse a +custom tag, will add a custom command child 
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.+custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<li>On parse a <code>+custom</code> tag, will add a custom command child 
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.+custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// console.log(&#39;Parse +custom tag:&#39;, a, b)</span>
 <span class="p">})</span>
+</code></pre></div><ul>
+<li><code>a</code>, <code>b</code>, ... : Parameters after <code>=</code></li>
+<li><code>params</code> : Arguments array used when executing <code>+custom</code>. Equal to <code>[a, b]</code> in this case.</li>
+<li>Disable content after this start tag
+    <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setContentOutputEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
-<li>On execute a +custom command child
+</ul>
+</li>
+<li>On execute a <code>+custom</code> command child
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tag.+custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// console.log(&#39;Execute +custom tag:&#39;, a, b)</span>
 <span class="p">})</span>
-</code></pre></div></li>
-<li>On parse a -custom tag, will add a custom command child 
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div><ul>
+<li><code>a</code>, <code>b</code>, ... : Parameters passed from <code>params</code> in <code>'parser.+custom'</code> event.</li>
+</ul>
+</li>
+<li>On parse a <code>-custom</code> tag, will add a custom command child 
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// console.log(&#39;Parse -custom tag&#39;)</span>
 <span class="p">})</span>
+</code></pre></div><ul>
+<li><code>params</code> : Arguments array used when executing <code>-custom</code>. Equal to <code>[]</code> in this case.</li>
+<li>Enable content after this start tag
+    <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setContentOutputEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>On execute a -custom command child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tag.-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</ul>
+</li>
+<li>On execute a <code>-custom</code> command child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tag.-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(...</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// console.log(&#39;Execute -custom tag&#39;)</span>
 <span class="p">})</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>params</code> : Parameters passed from <code>params</code> in <code>'parser.-custom'</code> event.</li>
+</ul>
+</li>
 </ul>
 
               
