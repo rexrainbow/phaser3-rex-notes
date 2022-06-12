@@ -3,6 +3,7 @@ import RoundRectangle from '../../roundrectangle/RoundRectangle';
 import NinePatch from '../../ninepatch/NinePatch';
 import NinePatch2 from '../../ninepatch2/NinePatch';
 import Canvas from '../../canvas/Canvas';
+import Space from '../../space/Space';
 
 import Sizer from '../../sizer/Sizer';
 import FixWidthSizer from '../../fixwidthsizer/FixWidthSizer';
@@ -49,6 +50,7 @@ declare var Builders: {
     Ninepatch: Builders.BuilderTypeCommon<NinePatch>,
     Ninepatch2: Builders.BuilderTypeCommon<NinePatch2>,
     Canvas: Builders.BuilderTypeCommon<Canvas>,
+    Space: Builders.BuilderTypeCommon<Space>,
 
     Sizer: Builders.BuilderTypeCommon<Sizer>,
     FixWidthSizer: Builders.BuilderTypeCommon<FixWidthSizer>,

@@ -16,6 +16,7 @@ const PROPORTIONMODE = {
 var Add = function (gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
     AddChild.call(this, gameObject);
 
+    var isRexSpace = gameObject.isRexSpace;
     var proportionType = typeof (proportion);
     if (proportion === null) {
         return this;
@@ -25,7 +26,7 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
         proportion = PROPORTIONMODE[proportion];
     } else if (IsPlainObject(proportion)) {
         var config = proportion;
-        proportion = GetValue(config, 'proportion', 0);
+        proportion = GetValue(config, 'proportion', undefined);
         align = GetValue(config, 'align', ALIGN_CENTER);
         paddingConfig = GetValue(config, 'padding', 0);
         expand = GetValue(config, 'expand', false);
@@ -47,7 +48,7 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
     }
 
     if (proportion === undefined) {
-        proportion = 0;
+        proportion = (isRexSpace) ? 1 : 0;
     }
     if (align === undefined) {
         align = ALIGN_CENTER;
@@ -58,14 +59,19 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
     if (expand === undefined) {
         expand = false;
     }
-    if (!gameObject.isRexSizer && (minSize === undefined)) {
-        // Get minSize from game object
-        if (this.orientation === 0) { // x
-            minSize = gameObject._minWidth;
-        } else {  // y
-            minSize = gameObject._minHeight;
+    if (minSize === undefined) {
+        if (isRexSpace) {
+            minSize = 0;
+        } else if (!gameObject.isRexSizer) {
+            // Get minSize from game object
+            if (this.orientation === 0) { // x
+                minSize = gameObject._minWidth;
+            } else {  // y
+                minSize = gameObject._minHeight;
+            }
         }
     }
+
 
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;

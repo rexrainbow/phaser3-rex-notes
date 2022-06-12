@@ -28606,6 +28606,7 @@
 
   var Add$6 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
     AddChild.call(this, gameObject);
+    var isRexSpace = gameObject.isRexSpace;
 
     var proportionType = _typeof(proportion);
 
@@ -28615,7 +28616,7 @@
       proportion = PROPORTIONMODE[proportion];
     } else if (IsPlainObject$e(proportion)) {
       var config = proportion;
-      proportion = GetValue$_(config, 'proportion', 0);
+      proportion = GetValue$_(config, 'proportion', undefined);
       align = GetValue$_(config, 'align', ALIGN_CENTER$2);
       paddingConfig = GetValue$_(config, 'padding', 0);
       expand = GetValue$_(config, 'expand', false);
@@ -28639,7 +28640,7 @@
     }
 
     if (proportion === undefined) {
-      proportion = 0;
+      proportion = isRexSpace ? 1 : 0;
     }
 
     if (align === undefined) {
@@ -28654,14 +28655,18 @@
       expand = false;
     }
 
-    if (!gameObject.isRexSizer && minSize === undefined) {
-      // Get minSize from game object
-      if (this.orientation === 0) {
-        // x
-        minSize = gameObject._minWidth;
-      } else {
-        // y
-        minSize = gameObject._minHeight;
+    if (minSize === undefined) {
+      if (isRexSpace) {
+        minSize = 0;
+      } else if (!gameObject.isRexSizer) {
+        // Get minSize from game object
+        if (this.orientation === 0) {
+          // x
+          minSize = gameObject._minWidth;
+        } else {
+          // y
+          minSize = gameObject._minHeight;
+        }
       }
     }
 
@@ -47823,6 +47828,13 @@
     return gameObject;
   };
 
+  var CreateSpace = function CreateSpace(scene, data, view, styles, customBuilders) {
+    var gameObject = new Space(scene); // Don't add Zone into scene
+    // this.scene.add.existing(gameObject);
+
+    return gameObject;
+  };
+
   var CreateChild = function CreateChild(scene, data, subKey, view, styles, customBuilders) {
     var childData = data[subKey];
 
@@ -48195,6 +48207,7 @@
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
     Canvas: CreateCanvas,
+    Space: CreateSpace,
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
     GridSizer: CreateGridSizer,

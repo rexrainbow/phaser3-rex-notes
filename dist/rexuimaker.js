@@ -10839,6 +10839,34 @@
     return gameObject;
   };
 
+  var Zone$1 = Phaser.GameObjects.Zone;
+
+  var Space = /*#__PURE__*/function (_Zone) {
+    _inherits(Space, _Zone);
+
+    var _super = _createSuper(Space);
+
+    function Space(scene) {
+      var _this;
+
+      _classCallCheck(this, Space);
+
+      _this = _super.call(this, scene, 0, 0, 1, 1); // Don't add Zone into scene
+
+      _this.isRexSpace = true;
+      return _this;
+    }
+
+    return _createClass(Space);
+  }(Zone$1);
+
+  var CreateSpace = function CreateSpace(scene, data, view, styles, customBuilders) {
+    var gameObject = new Space(scene); // Don't add Zone into scene
+    // this.scene.add.existing(gameObject);
+
+    return gameObject;
+  };
+
   var CreateChild = function CreateChild(scene, data, subKey, view, styles, customBuilders) {
     var childData = data[subKey];
 
@@ -10899,7 +10927,7 @@
     return gameObject;
   };
 
-  var Zone$1 = Phaser.GameObjects.Zone;
+  var Zone = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem$5 = Phaser.Utils.Array.Remove;
 
@@ -11019,7 +11047,7 @@
     }]);
 
     return Base;
-  }(Zone$1);
+  }(Zone);
 
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base$1, [Components.Alpha, Components.Flip]);
@@ -20015,27 +20043,6 @@
     return height;
   };
 
-  var Zone = Phaser.GameObjects.Zone;
-
-  var Space = /*#__PURE__*/function (_Zone) {
-    _inherits(Space, _Zone);
-
-    var _super = _createSuper(Space);
-
-    function Space(scene) {
-      var _this;
-
-      _classCallCheck(this, Space);
-
-      _this = _super.call(this, scene, 0, 0, 1, 1); // Don't add Zone into scene
-
-      _this.isRexSpace = true;
-      return _this;
-    }
-
-    return _createClass(Space);
-  }(Zone);
-
   var GetNearestChildIndex$1 = function GetNearestChildIndex(x, y) {
     var children = this.sizerChildren;
 
@@ -20092,6 +20099,7 @@
 
   var Add$7 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
     AddChild.call(this, gameObject);
+    var isRexSpace = gameObject.isRexSpace;
 
     var proportionType = _typeof(proportion);
 
@@ -20101,7 +20109,7 @@
       proportion = PROPORTIONMODE[proportion];
     } else if (IsPlainObject$9(proportion)) {
       var config = proportion;
-      proportion = GetValue$D(config, 'proportion', 0);
+      proportion = GetValue$D(config, 'proportion', undefined);
       align = GetValue$D(config, 'align', ALIGN_CENTER$3);
       paddingConfig = GetValue$D(config, 'padding', 0);
       expand = GetValue$D(config, 'expand', false);
@@ -20125,7 +20133,7 @@
     }
 
     if (proportion === undefined) {
-      proportion = 0;
+      proportion = isRexSpace ? 1 : 0;
     }
 
     if (align === undefined) {
@@ -20140,14 +20148,18 @@
       expand = false;
     }
 
-    if (!gameObject.isRexSizer && minSize === undefined) {
-      // Get minSize from game object
-      if (this.orientation === 0) {
-        // x
-        minSize = gameObject._minWidth;
-      } else {
-        // y
-        minSize = gameObject._minHeight;
+    if (minSize === undefined) {
+      if (isRexSpace) {
+        minSize = 0;
+      } else if (!gameObject.isRexSizer) {
+        // Get minSize from game object
+        if (this.orientation === 0) {
+          // x
+          minSize = gameObject._minWidth;
+        } else {
+          // y
+          minSize = gameObject._minHeight;
+        }
       }
     }
 
@@ -31886,6 +31898,7 @@
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
     Canvas: CreateCanvas,
+    Space: CreateSpace,
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
     GridSizer: CreateGridSizer,

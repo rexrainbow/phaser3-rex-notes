@@ -5,6 +5,7 @@ import CreateRoundRectangle from './CreateRoundRectangle.js';
 import CreateNinePatch from './CreateNinePatch.js';
 import CreateNinePatch2 from './CreateNinePatch2.js';
 import CreateCanvas from './CreateCanvas.js';
+import CreateSpace from './CreateSpace.js';
 
 import CreateSizer from './CreateSizer.js';
 import CreateFixWidthSizer from './CreateFixWidthSizer.js';
@@ -37,6 +38,7 @@ var Builders = {
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
     Canvas: CreateCanvas,
+    Space: CreateSpace,
 
     Sizer: CreateSizer,
     FixWidthSizer: CreateFixWidthSizer,
