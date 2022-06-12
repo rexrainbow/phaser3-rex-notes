@@ -1,23 +1,9 @@
-import MergeStyle from './utils/MergeStyle.js';
-import SetTextureProperties from './utils/SetTextureProperties.js';
+import CreateAnyImage from './utils/CreateAnyImage.js';
 
 const PhaserImage = Phaser.GameObjects.Image;
 
 var CreateImage = function (scene, data, view, styles, customBuilders) {
-    data = MergeStyle(data, styles);
-    var gameObject = new PhaserImage(scene, 0, 0, data.key, data.frame);
-
-    if (data.width !== undefined) {
-        gameObject.setDisplayWidth(data.width);
-    }
-    if (data.height !== undefined) {
-        gameObject.setDisplayHeight(data.height);
-    }
-
-    SetTextureProperties(gameObject, data);
-
-    scene.add.existing(gameObject);
-    return gameObject;
+    return CreateAnyImage(scene, data, view, styles, customBuilders, PhaserImage);
 }
 
 export default CreateImage;

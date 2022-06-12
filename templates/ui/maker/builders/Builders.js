@@ -1,10 +1,13 @@
 import CreateImage from './CreateImage.js';
+import CreateSprite from './CreateSprite.js';
+import CreateVideo from './CreateVideo.js';
 import CreateText from './CreateText.js';
 import CreateBBCodeText from './CreateBBCodeText.js';
 import CreateRoundRectangle from './CreateRoundRectangle.js';
 import CreateNinePatch from './CreateNinePatch.js';
 import CreateNinePatch2 from './CreateNinePatch2.js';
 import CreateCanvas from './CreateCanvas.js';
+import CreateCircleMaskImage from './CreateCircleMaskImage.js';
 import CreateSpace from './CreateSpace.js';
 
 import CreateSizer from './CreateSizer.js';
@@ -32,12 +35,15 @@ import CreateMenu from './CreateMenu.js';
 
 var Builders = {
     Image: CreateImage,
+    Sprite: CreateSprite,
+    Video: CreateVideo,
     Text: CreateText,
     BBCodeText: CreateBBCodeText,
     RoundRectangle: CreateRoundRectangle,
     Ninepatch: CreateNinePatch,
     Ninepatch2: CreateNinePatch2,
     Canvas: CreateCanvas,
+    CircleMaskImage: CreateCircleMaskImage,
     Space: CreateSpace,
 
     Sizer: CreateSizer,

@@ -3,6 +3,7 @@ import RoundRectangle from '../../roundrectangle/RoundRectangle';
 import NinePatch from '../../ninepatch/NinePatch';
 import NinePatch2 from '../../ninepatch2/NinePatch';
 import Canvas from '../../canvas/Canvas';
+import CircleMaskImage from '../../circlemaskimage/CircleMaskImage';
 import Space from '../../space/Space';
 
 import Sizer from '../../sizer/Sizer';
@@ -44,12 +45,15 @@ declare namespace Builders {
 
 declare var Builders: {
     Image: Builders.BuilderTypeCommon<Phaser.GameObjects.Image>,
+    Sprite: Builders.BuilderTypeCommon<Phaser.GameObjects.Sprite>,
+    Video: Builders.BuilderTypeCommon<Phaser.GameObjects.Video>,
     Text: Builders.BuilderTypeCommon<Phaser.GameObjects.Text>,
     BBCodeText: Builders.BuilderTypeCommon<BBCodeText>,
     RoundRectangle: Builders.BuilderTypeCommon<RoundRectangle>,
     Ninepatch: Builders.BuilderTypeCommon<NinePatch>,
     Ninepatch2: Builders.BuilderTypeCommon<NinePatch2>,
     Canvas: Builders.BuilderTypeCommon<Canvas>,
+    CircleMaskImage: Builders.BuilderTypeCommon<CircleMaskImage>,
     Space: Builders.BuilderTypeCommon<Space>,
 
     Sizer: Builders.BuilderTypeCommon<Sizer>,
