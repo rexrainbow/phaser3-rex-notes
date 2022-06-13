@@ -19,6 +19,7 @@ declare class Maker {
 
     setStyles(styles?: Object | string): this;
     addStyle(key: string, style: Object | string): this;
+    addStyle(styles: Object | string): this;
     clearStyles(): this;
     styles: Object | undefined;
 

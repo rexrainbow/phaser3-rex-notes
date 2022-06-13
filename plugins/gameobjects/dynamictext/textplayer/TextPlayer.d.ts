@@ -118,4 +118,6 @@ declare class TextPlayer extends DynamicText {
     readonly isPageTYyping: boolean;
 
     addImage(config: TextPlayer.IConfigImages): this;
+
+    readonly clickTarget: TextPlayer.ClickTrgetTypes;
 }

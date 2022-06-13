@@ -6,6 +6,14 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
+const Styles = `
+.InputTitle:
+  $type: Label
+  text:
+    $type: Text
+    color: yellow
+`
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -26,13 +34,7 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 300,
 
-            styles: `
-.InputTitle:
-  $type: Label
-  text:
-    $type: Text
-    color: yellow
-`
+            styles: Styles
         })
             .addInput(obj, 'a')
             .addInput(obj, 'b')
