@@ -4,10 +4,8 @@ var SetClickTarget = function (target) {
     this.clickTarget = target;
 
     if (!target) {
-        return this;
-    }
-
-    if (IsSceneObject(target)) {
+        this.clickEE = null;
+    } else if (IsSceneObject(target)) {
         this.clickEE = target.input;
     } else {  // Assume that target is a game object
         this.clickEE = target.setInteractive();
