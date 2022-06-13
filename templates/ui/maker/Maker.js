@@ -25,6 +25,10 @@ class Maker {
             this.styles = {};
         }
 
+        if ((typeof (key) === 'string') && (style === undefined)) {
+            key = ParseYAML(key);
+        }
+
         if (IsPlainObject(key)) {
             var styles = key;
             for (key in styles) {

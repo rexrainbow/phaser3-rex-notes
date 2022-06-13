@@ -1,7 +1,7 @@
 import {
     StringType, NumberType, NumberRangeType, ListType,
     BooleanType, ColorType, Pointer2dType, Pointer3dType,
-} from './Const.js';
+} from './InputTypes.js';
 
 
 var GetInputType = function (value, config) {
@@ -39,10 +39,10 @@ var GetInputType = function (value, config) {
                 return Pointer2dType;
             }
 
-        // undefined
+        default:
+            return StringType;
     }
 
-    // undefined
 }
 
 var HasProperties = function (object, ...keys) {
