@@ -424,6 +424,36 @@ txt.typingNextPage();
     txt.resume();
     ```
 
+#### Typing
+
+##### Typing speed
+
+- Get
+    ```javascript
+    var speed = txt.typingSpeed;
+    ```
+- Set
+    ```javascript
+    txt.setTypingSpeed(speed);    
+    ```
+    ```javascript
+    txt.typingSpeed = speed;
+    ```    
+
+##### Timescale
+
+- Get
+    ```javascript
+    var timeScale = txt.timeScale;
+    ```
+- Set
+    ```javascript
+    txt.setTimeScale(timeScale);    
+    ```
+    ```javascript
+    txt.timeScale = timeScale;
+    ```
+  
 #### Status
 
 - Is playing : After `txt.play(content)`, before typing all pages completed

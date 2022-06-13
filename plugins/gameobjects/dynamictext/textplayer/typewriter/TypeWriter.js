@@ -44,6 +44,14 @@ class TypeWriter {
         return this;
     }
 
+    set timeScale(value) {
+        this.timeline.timeScale = value;
+    }
+
+    get timeScale() {
+        return this.timeline.timeScale;
+    }
+
     setTypingStartCallback(callback) {
         this.onTypeStart = callback;
         return this;

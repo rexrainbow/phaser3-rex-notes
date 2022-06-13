@@ -123,6 +123,22 @@ class TextPlayer extends DynamicText {
     get isPageTyping() {
         return this.typeWriter.isPageTyping;
     }
+
+    set typingSpeed(speed) {
+        this.typeWriter.speed = speed;
+    }
+
+    get typingSpeed() {
+        return this.typeWriter.speed;
+    }
+
+    set timeScale(timeScale) {
+        this.typeWriter.timeScale = timeScale;
+    }
+
+    get timeScale() {
+        return this.typeWriter.timeScale;
+    }
 }
 
 Object.assign(

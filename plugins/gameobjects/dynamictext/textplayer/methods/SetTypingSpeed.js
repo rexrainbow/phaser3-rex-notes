@@ -1,5 +1,5 @@
 var SetTypingSpeed = function (speed) {
-    this.typeWriter.setSpeed(speed);
+    this.typingSpeed = speed;
     return this;
 }
 

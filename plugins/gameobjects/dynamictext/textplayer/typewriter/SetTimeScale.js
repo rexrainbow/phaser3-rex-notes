@@ -1,5 +1,5 @@
 var SetTimeScale = function (value) {
-    this.timeline.setTimeScale(value);
+    this.timeScale = value;
     return this;
 }
 
