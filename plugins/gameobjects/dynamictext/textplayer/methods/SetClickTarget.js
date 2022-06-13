@@ -3,6 +3,10 @@ import IsSceneObject from '../../../../utils/system/IsSceneObject.js';
 var SetClickTarget = function (target) {
     this.clickTarget = target;
 
+    if (!target) {
+        return this;
+    }
+
     if (IsSceneObject(target)) {
         this.clickEE = target.input;
     } else {  // Assume that target is a game object

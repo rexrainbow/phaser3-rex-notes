@@ -119,5 +119,6 @@ declare class TextPlayer extends DynamicText {
 
     addImage(config: TextPlayer.IConfigImages): this;
 
-    readonly clickTarget: TextPlayer.ClickTrgetTypes;
+    setClickTarget(clickTarget: TextPlayer.ClickTrgetTypes): this;
+    clickTarget: TextPlayer.ClickTrgetTypes;
 }
