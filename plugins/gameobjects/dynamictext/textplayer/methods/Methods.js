@@ -8,6 +8,7 @@ import TypingNextPage from './TypingNextPage.js';
 import Pause from './Pause.js';
 import PauseTyping from './PauseTyping.js';
 import Resume from './Resume.js';
+import SetTypingSpeed from './SetTypingSpeed.js';
 import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import ShowPage from './ShowPage.js';
@@ -23,6 +24,7 @@ export default {
     pause: Pause,
     pauseTyping: PauseTyping,
     resume: Resume,
+    setTypingSpeed: SetTypingSpeed,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     showPage: ShowPage,

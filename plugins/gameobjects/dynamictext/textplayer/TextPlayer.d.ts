@@ -114,6 +114,13 @@ declare class TextPlayer extends DynamicText {
     showPage(): this;
     typingNextPage(): this;
 
+    pause(): this;
+    pauseTyping(): this;
+    resume(): this;
+
+    setTypingSpeed(speed: number): this;
+    setTimeScale(timeScale: number): this;
+
     readonly isPlaying: boolean;
     readonly isPageTYyping: boolean;
 
