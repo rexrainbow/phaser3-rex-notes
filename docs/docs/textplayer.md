@@ -10,6 +10,7 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 - [Play](https://codepen.io/rexrainbow/pen/oNZbbJv)
 - [Sprite control](https://codepen.io/rexrainbow/pen/jOBroeY)
 - [Show page](https://codepen.io/rexrainbow/pen/XWMMpjE)
+- [Fast typing](https://codepen.io/rexrainbow/pen/eYVbKBN)
 - [Choices](https://codepen.io/rexrainbow/pen/dydQjow)
 
 ## Usage
