@@ -5363,8 +5363,13 @@
   };
 
   var WaitClick = function WaitClick(textPlayer, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'click');
-    var clickEE = textPlayer.clickEE; // Remove all wait events
+    var clickEE = textPlayer.clickEE;
+
+    if (!clickEE) {
+      return;
+    }
+
+    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'click'); // Remove all wait events
 
     textPlayer.once(RemoveWaitEvents, function () {
       clickEE.off('pointerdown', wrapCallback, textPlayer);
@@ -5595,7 +5600,7 @@
   };
 
   var SetTimeScale$1 = function SetTimeScale(value) {
-    this.timeline.setTimeScale(value);
+    this.timeScale = value;
     return this;
   };
 
@@ -6383,6 +6388,14 @@
         return this;
       }
     }, {
+      key: "timeScale",
+      get: function get() {
+        return this.timeline.timeScale;
+      },
+      set: function set(value) {
+        this.timeline.timeScale = value;
+      }
+    }, {
       key: "setTypingStartCallback",
       value: function setTypingStartCallback(callback) {
         this.onTypeStart = callback;
@@ -6391,17 +6404,10 @@
     }, {
       key: "setAnimationConfig",
       value: function setAnimationConfig(config) {
-        if (config === undefined) {
-          config = {};
-        } else if (config === false) {
+        if (!config) {
           config = {
             duration: 0
           };
-        }
-
-        if (!config.hasOwnProperty('duration')) {
-          // Apply default duration
-          config.duration = 1000;
         }
 
         if (!config.hasOwnProperty('onStart')) {
@@ -7917,7 +7923,11 @@
   Object.assign(SpriteManager.prototype, EventEmitterMethods);
 
   var SetClickTarget = function SetClickTarget(target) {
-    if (IsSceneObject(target)) {
+    this.clickTarget = target;
+
+    if (!target) {
+      this.clickEE = null;
+    } else if (IsSceneObject(target)) {
       this.clickEE = target.input;
     } else {
       // Assume that target is a game object
@@ -8002,9 +8012,11 @@
       } else {
         this.emit('page.complete');
 
-        if (this.nextPageInput) {
+        if (this.ignoreNextPageInput) {
+          TypingNextPage.call(this);
+        } else if (this.nextPageInput) {
           this.nextPageInput(TypingNextPage, [], this);
-        }
+        } else ;
       }
     }; // Remove event when typing pages has been canceled
 
@@ -8033,13 +8045,27 @@
     return this;
   };
 
-  var SetTimeScale = function SetTimeScale(value) {
-    this.typeWriter.setTimeScale(value);
+  var SetTypingSpeed = function SetTypingSpeed(speed) {
+    this.typingSpeed = speed;
+    return this;
+  };
+
+  var SetTimeScale = function SetTimeScale(timeScale) {
+    this.typeWriter.setTimeScale(timeScale);
     return this;
   };
 
   var SetIgnoreWait = function SetIgnoreWait(value) {
     this.typeWriter.setIgnoreWait(value);
+    return this;
+  };
+
+  var SetIgnoreNextPageInput = function SetIgnoreNextPageInput(enable) {
+    if (enable === undefined) {
+      enable = true;
+    }
+
+    this.ignoreNextPageInput = enable;
     return this;
   };
 
@@ -8072,8 +8098,10 @@
     pause: Pause,
     pauseTyping: PauseTyping,
     resume: Resume,
+    setTypingSpeed: SetTypingSpeed,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
+    setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
 
@@ -8135,6 +8163,8 @@
       if (spriteManagerConfig) {
         _this._spriteManager = new SpriteManager(_this.scene, spriteManagerConfig);
       }
+
+      _this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
 
       _this.setClickTarget(GetValue(config, 'clickTarget', _assertThisInitialized(_this))); // this.clickEE
 
@@ -8217,6 +8247,22 @@
       key: "isPageTyping",
       get: function get() {
         return this.typeWriter.isPageTyping;
+      }
+    }, {
+      key: "typingSpeed",
+      get: function get() {
+        return this.typeWriter.speed;
+      },
+      set: function set(speed) {
+        this.typeWriter.speed = speed;
+      }
+    }, {
+      key: "timeScale",
+      get: function get() {
+        return this.typeWriter.timeScale;
+      },
+      set: function set(timeScale) {
+        this.typeWriter.timeScale = timeScale;
       }
     }]);
 

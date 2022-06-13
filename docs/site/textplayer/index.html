@@ -1590,6 +1590,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ignore-next-page-input" class="md-nav__link">
+    Ignore next page input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pause" class="md-nav__link">
     Pause
   </a>
@@ -1600,6 +1607,33 @@
   <a href="#resume" class="md-nav__link">
     Resume
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typing" class="md-nav__link">
+    Typing
+  </a>
+  
+    <nav class="md-nav" aria-label="Typing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typing-speed" class="md-nav__link">
+    Typing speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timescale" class="md-nav__link">
+    Timescale
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1685,7 +1719,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#typing-speed" class="md-nav__link">
+  <a href="#typing-speed_1" class="md-nav__link">
     Typing speed
   </a>
   
@@ -8446,6 +8480,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ignore-next-page-input" class="md-nav__link">
+    Ignore next page input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pause" class="md-nav__link">
     Pause
   </a>
@@ -8456,6 +8497,33 @@
   <a href="#resume" class="md-nav__link">
     Resume
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typing" class="md-nav__link">
+    Typing
+  </a>
+  
+    <nav class="md-nav" aria-label="Typing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typing-speed" class="md-nav__link">
+    Typing speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#timescale" class="md-nav__link">
+    Timescale
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -8541,7 +8609,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#typing-speed" class="md-nav__link">
+  <a href="#typing-speed_1" class="md-nav__link">
     Typing speed
   </a>
   
@@ -8785,9 +8853,9 @@
         <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
     <span class="p">},</span> 
 
-    <span class="nx">clickTarget</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span>  <span class="c1">// This text player</span>
-
+    <span class="nx">clickTarget</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span>  <span class="c1">// This text player    </span>
     <span class="nx">nextPageInput</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="c1">// ignoreNextPageInput: false,</span>
 
     <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -8995,6 +9063,7 @@
 <li><code>scene</code> : Any pointer down on this scene.</li>
 </ul>
 </li>
+<li><code>ignoreNextPageInput</code> : Set <code>true</code> to continue typing next page without any waiting.</li>
 <li><code>text</code> : Content of text to play.</li>
 </ul>
 <p>or</p>
@@ -9063,6 +9132,15 @@
 <ul>
 <li>Set <code>nextPageInput</code> to <code>null</code>, or <code>false</code> in config.</li>
 </ul>
+<h4 id="ignore-next-page-input">Ignore next page input<a class="headerlink" href="#ignore-next-page-input" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ignore next page input
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setIgnoreNextPageInput</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Rollback waiting next page input
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setIgnoreNextPageInput</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pause typing and typing animation
@@ -9076,6 +9154,29 @@
 <ul>
 <li>Resume typing and typing animation
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="typing">Typing<a class="headerlink" href="#typing" title="Permanent link">&para;</a></h4>
+<h5 id="typing-speed">Typing speed<a class="headerlink" href="#typing-speed" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">typingSpeed</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTypingSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>    
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">typingSpeed</span> <span class="o">=</span> <span class="nx">speed</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h5 id="timescale">Timescale<a class="headerlink" href="#timescale" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">timeScale</span><span class="p">);</span>    
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timeScale</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
@@ -9181,7 +9282,7 @@
 </code></pre></div></li>
 <li>Use origin render size by default</li>
 </ul>
-<h4 id="typing-speed">Typing speed<a class="headerlink" href="#typing-speed" title="Permanent link">&para;</a></h4>
+<h4 id="typing-speed_1">Typing speed<a class="headerlink" href="#typing-speed_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>No typing : <code>[speed=0]</code></li>
 <li>Set speed : <code>[speed=1000]</code></li>

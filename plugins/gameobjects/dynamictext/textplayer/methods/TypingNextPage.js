@@ -23,7 +23,10 @@ var TypingNextPage = function () {
             this.emit('complete');
         } else {
             this.emit('page.complete');
-            if (this.nextPageInput) {
+
+            if (this.ignoreNextPageInput) {
+                TypingNextPage.call(this);
+            } else if (this.nextPageInput) {
                 this.nextPageInput(TypingNextPage, [], this);
             } else {
                 // Stop here, don't typing next page.

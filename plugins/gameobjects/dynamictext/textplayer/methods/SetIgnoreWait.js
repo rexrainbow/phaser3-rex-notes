@@ -1,4 +1,4 @@
-var SetIgnoreWait = function (value) {    
+var SetIgnoreWait = function (value) {
     this.typeWriter.setIgnoreWait(value);
     return this;
 }

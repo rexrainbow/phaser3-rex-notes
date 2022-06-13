@@ -58,21 +58,17 @@ class TypeWriter {
     }
 
     setAnimationConfig(config) {
-        if (config === undefined) {
-            config = {};
-        } else if (config === false) {
+        if (!config) {
             config = {
                 duration: 0
             }
         }
-        if (!config.hasOwnProperty('duration')) {
-            // Apply default duration
-            config.duration = 1000;
-        }
+
         if (!config.hasOwnProperty('onStart')) {
             // Apply default onStart callback
             config.onStart = SetChildVisible;
         }
+
         this.animationConfig = config;
         return this;
     }

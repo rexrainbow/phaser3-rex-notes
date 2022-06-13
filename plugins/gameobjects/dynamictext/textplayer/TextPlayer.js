@@ -52,8 +52,8 @@ class TextPlayer extends DynamicText {
             this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
         }
 
+        this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
-
         this.setNextPageInput(GetValue(config, 'nextPageInput', null));
 
         this.isPlaying = false;

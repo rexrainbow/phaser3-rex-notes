@@ -11,6 +11,7 @@ import Resume from './Resume.js';
 import SetTypingSpeed from './SetTypingSpeed.js';
 import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
+import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
 
 export default {
@@ -27,5 +28,6 @@ export default {
     setTypingSpeed: SetTypingSpeed,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
+    setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage,
 }

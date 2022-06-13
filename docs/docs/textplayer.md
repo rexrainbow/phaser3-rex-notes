@@ -178,10 +178,10 @@ var txt = scene.add.rexTextPlayer({
         // createCallback: 'sprite',
         fade: 500
     }, 
-
-    clickTarget: this,  // This text player
     
+    clickTarget: this,  // This text player    
     nextPageInput: null,
+    // ignoreNextPageInput: false,
 
     text: undefined
 });
@@ -321,6 +321,7 @@ var txt = scene.add.rexTextPlayer({
         ```
 - `clickTarget` : Click target, default is text player itself.
     - `scene` : Any pointer down on this scene.
+- `ignoreNextPageInput` : Set `true` to continue typing next page without any waiting.
 - `text` : Content of text to play.
 
 or
@@ -405,6 +406,17 @@ txt.typingNextPage();
 ```
 
 - Set `nextPageInput` to `null`, or `false` in config.
+
+#### Ignore next page input
+
+- Ignore next page input
+    ```javascript
+    txt.setIgnoreNextPageInput();
+    ```
+- Rollback waiting next page input
+    ```javascript
+    txt.setIgnoreNextPageInput(false);
+    ```
 
 #### Pause
 
