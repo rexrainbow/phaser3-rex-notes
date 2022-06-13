@@ -15132,9 +15132,11 @@
       key: "setAnimationConfig",
       value: function setAnimationConfig(config) {
         if (!config) {
-          config = {
-            duration: 0
-          };
+          config = {};
+        }
+
+        if (!config.hasOwnProperty('duration')) {
+          config.duration = 0;
         }
 
         if (!config.hasOwnProperty('onStart')) {
