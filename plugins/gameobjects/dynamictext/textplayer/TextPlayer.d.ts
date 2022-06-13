@@ -128,6 +128,7 @@ declare class TextPlayer extends DynamicText {
 
     addImage(config: TextPlayer.IConfigImages): this;
 
+    ignoreNextPageInput(enable?: boolean): this;
     setClickTarget(clickTarget: TextPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TextPlayer.ClickTrgetTypes;
 }
