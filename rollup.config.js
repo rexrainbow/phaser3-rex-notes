@@ -59,14 +59,6 @@ for (var key in pluginList) {
             babel({
                 exclude: 'node_modules/**'
             }),
-
-            string({
-                // Required to be specified
-                include: "**/*.yml",
-           
-                // Undefined by default
-                exclude: []
-              })
         ]
     })
 

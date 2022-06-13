@@ -1,6 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import Maker from '../maker/Maker.js';
-import DefaultStyles from './DefaultStyles.yml';
+import DefaultStyles from './DefaultStyles.js';
 import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
