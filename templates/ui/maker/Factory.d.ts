@@ -2,5 +2,5 @@ import Maker from './Maker';
 
 export default function (
     styles?: Object | string,
-    customBuilders?: Maker.CustomBuildersType
+    customBuilders?: Maker.BuildersType
 ): Maker;

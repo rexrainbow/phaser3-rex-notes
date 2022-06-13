@@ -180,7 +180,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
         data: Object | string,
         view?: Object | string,
         styles?: Object | string,
-        customBuilders?: Make.CustomBuildersType
+        customBuilders?: Make.BuildersType
     ): Phaser.GameObjects.GameObject;
 
     readonly maker: MakerClass;

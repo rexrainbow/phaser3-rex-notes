@@ -1,11 +1,13 @@
 import ParseYAML from './utils/ParseYAML.js';
 import YAMLMake from './YAMLMake.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
 class Maker {
     constructor(scene, styles, customBuilders) {
         this.setScene(scene);
         this.setStyles(styles);
-        this.setCustomBuilders(customBuilders);
+        this.setBuilders(customBuilders);
     }
 
     setScene(scene) {
@@ -22,7 +24,16 @@ class Maker {
         if (this.styles === undefined) {
             this.styles = {};
         }
-        this.styles[key] = ParseYAML(style);
+
+        if (IsPlainObject(key)) {
+            var styles = key;
+            for (key in styles) {
+                this.styles[key] = styles[key];
+            }
+        } else {
+            this.styles[key] = ParseYAML(style);
+        }
+
         return this;
     }
 
@@ -31,21 +42,29 @@ class Maker {
         return this;
     }
 
-    setCustomBuilders(customBuilders) {
+    setBuilders(customBuilders) {
         this.customBuilders = customBuilders;
         return this;
     }
 
-    addCustomBuilder(key, customBuilder) {
+    addBuilder(key, customBuilder) {
         if (this.customBuilders === undefined) {
             this.customBuilders = {};
         }
-        this.customBuilders[key] = customBuilder;
+
+        if (IsPlainObject(key)) {
+            var customBuilders = key;
+            for (key in customBuilders) {
+                this.customBuilders[key] = customBuilders[key];
+            }
+        } else {
+            this.customBuilders[key] = customBuilder;
+        }
         return this;
     }
 
-    clearCustomBuilder() {
-        this.setCustomBuilders();
+    clearBuilder() {
+        this.setBuilders();
         return this;
     }
 

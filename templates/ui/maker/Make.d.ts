@@ -3,7 +3,7 @@ export default Make;
 
 declare namespace Make {
     type BuilderType = Builders.BuilderType;
-    type CustomBuildersType = { [name: string]: BuilderType }
+    type BuildersType = { [name: string]: BuilderType }
 }
 
 declare function Make(
@@ -11,5 +11,5 @@ declare function Make(
     data: Object,
     view?: Object,
     styles?: Object,
-    customBuilders?: Make.CustomBuildersType
+    customBuilders?: Make.BuildersType
 ): Phaser.GameObjects.GameObject;

@@ -94,6 +94,10 @@ module.exports = {
             {
                 test: [/\.vert$/, /\.frag$/],
                 use: 'raw-loader'
+            },
+            {
+                test: [/\.yml$/, /\.yaml$/],
+                use: 'raw-loader'
             }
         ]
     },

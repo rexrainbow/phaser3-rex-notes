@@ -1,5 +1,12 @@
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
+/*
+Priority of styles : name, $class, $type
+  1. name    (#name)
+  2. $class  (.class)
+  3. $type   (type)    
+*/
+
 var MergeStyle = function (data, styles) {
     if (styles === undefined) {
         return data;
@@ -30,6 +37,7 @@ var Merge = function (toObj, fromObj) {
 
     for (var key in fromObj) {
         if (!toObj.hasOwnProperty(key)) {
+            // Only add nonexistent property
             toObj[key] = DeepClone(fromObj[key]);
         } else {
             var value = toObj[key];

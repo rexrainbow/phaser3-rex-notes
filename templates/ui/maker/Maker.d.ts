@@ -4,14 +4,14 @@ export default Maker;
 
 declare namespace Maker {
     type BuilderType = Make.BuilderType;
-    type CustomBuildersType = Make.CustomBuildersType;
+    type BuildersType = Make.BuildersType;
 }
 
 declare class Maker {
     constructor(
         scene: Phaser.Scene,
         styles?: Object | string,
-        customBuilders?: Maker.CustomBuildersType
+        customBuilders?: Maker.BuildersType
     );
 
     setScene(scene: Phaser.Scene): this;
@@ -22,10 +22,10 @@ declare class Maker {
     clearStyles(): this;
     styles: Object | undefined;
 
-    setCustomBuilders(customBuilders?: Maker.CustomBuildersType): this;
-    addCustomBuilder(key: string, customBuilder: Maker.BuilderType): this;
-    clearCustomBuilder(): this;
-    customBuilders: Maker.CustomBuildersType | undefined;
+    setBuilders(builders?: Maker.BuildersType): this;
+    addBuilder(key: string, builder: Maker.BuilderType): this;
+    clearBuilder(): this;
+    customBuilders: Maker.BuildersType | undefined;
 
     make(
         data: Object | string,

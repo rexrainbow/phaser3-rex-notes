@@ -3,7 +3,7 @@ export default YAMLMake;
 
 declare namespace YAMLMake {
     type BuilderType = Builders.BuilderType;
-    type CustomBuildersType = { [name: string]: BuilderType }
+    type BuildersType = { [name: string]: BuilderType }
 }
 
 declare function YAMLMake(
@@ -11,5 +11,5 @@ declare function YAMLMake(
     data: Object | string,
     view?: Object | string,
     styles?: Object | string,
-    customBuilders?: YAMLMake.CustomBuildersType
+    customBuilders?: YAMLMake.BuildersType
 ): Phaser.GameObjects.GameObject;
