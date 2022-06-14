@@ -7458,6 +7458,11 @@
         return this.spriteManager.scene;
       }
     }, {
+      key: "timeScale",
+      get: function get() {
+        return this.spriteManager.timeScale;
+      }
+    }, {
       key: "destroy",
       value: function destroy() {
         this.freeSprite().freeTweens();
@@ -7513,7 +7518,9 @@
           onCompleteScope: this
         };
         config[property] = value;
-        tweenTasks[property] = this.scene.tweens.add(config);
+        var tween = this.scene.tweens.add(config);
+        tween.timeScale = this.timeScale;
+        tweenTasks[property] = tween;
         return this;
       }
     }, {
@@ -7525,6 +7532,7 @@
     }, {
       key: "playAnimation",
       value: function playAnimation(key) {
+        this.sprite.anims.timeScale = this.timeScale;
         this.sprite.play(key);
         return this;
       }
@@ -7544,6 +7552,21 @@
       key: "pauseAnimation",
       value: function pauseAnimation() {
         this.sprite.anims.pause();
+        return this;
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        if (this.sprite.anims) {
+          this.sprite.anims.timeScale = timeScale;
+        }
+
+        var tweenTasks = this.tweens;
+
+        for (var key in tweenTasks) {
+          tweenTasks[key].timeScale = timeScale;
+        }
+
         return this;
       }
     }]);
@@ -7692,6 +7715,7 @@
       this.setSpriteFadeTime(GetValue$2(config, 'fade', 500));
       this.sprites = {};
       this.removedSprites = [];
+      this._timeScale = 1;
     }
 
     _createClass(SpriteManager, [{
@@ -7700,6 +7724,29 @@
         this.clear(!fromScene);
         this.createCallback = undefined;
         this.scene = undefined;
+      }
+    }, {
+      key: "timeScale",
+      get: function get() {
+        return this._timeScale;
+      },
+      set: function set(timeScale) {
+        if (this._timeScale === timeScale) {
+          return;
+        }
+
+        this._timeScale = timeScale;
+        var sprites = this.sprites;
+
+        for (var name in sprites) {
+          sprites[name].setTimeScale(timeScale);
+        }
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
       }
     }, {
       key: "setCreateCallback",
@@ -7759,12 +7806,14 @@
           destroyChild = true;
         }
 
-        for (var name in this.sprites) {
+        var sprites = this.sprites;
+
+        for (var name in sprites) {
           if (destroyChild) {
-            this.sprites[name].destroy();
+            sprites[name].destroy();
           }
 
-          delete this.sprites[name];
+          delete sprites[name];
         }
 
         this.removedSprites.length = 0;
@@ -7861,7 +7910,9 @@
     }, {
       key: "removeAll",
       value: function removeAll() {
-        for (var name in this.sprites) {
+        var sprites = this.sprites;
+
+        for (var name in sprites) {
           this.remove(name);
         }
 
@@ -8053,7 +8104,7 @@
   };
 
   var SetTimeScale = function SetTimeScale(timeScale) {
-    this.typeWriter.setTimeScale(timeScale);
+    this.timeScale = timeScale;
     return this;
   };
 
@@ -8265,6 +8316,10 @@
       },
       set: function set(timeScale) {
         this.typeWriter.timeScale = timeScale;
+
+        if (this._spriteManager !== undefined) {
+          this._spriteManager.setTimeScale(timeScale);
+        }
       }
     }]);
 
