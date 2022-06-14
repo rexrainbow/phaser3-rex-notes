@@ -79,7 +79,7 @@ class TextPlayer extends DynamicText {
 
     get spriteManager() {
         if (this._spriteManager === undefined) {
-            this._spriteManager = new SpriteManager(this.scene);
+            this._spriteManager = new SpriteManager(this.scene);        
         }
         return this._spriteManager;
     }
@@ -134,6 +134,10 @@ class TextPlayer extends DynamicText {
 
     set timeScale(timeScale) {
         this.typeWriter.timeScale = timeScale;
+
+        if (this._spriteManager !== undefined) {
+            this._spriteManager.setTimeScale(timeScale);
+        }
     }
 
     get timeScale() {

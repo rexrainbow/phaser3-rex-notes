@@ -1,5 +1,5 @@
 var SetTimeScale = function (timeScale) {
-    this.typeWriter.setTimeScale(timeScale);
+    this.timeScale = timeScale;
     return this;
 }
 

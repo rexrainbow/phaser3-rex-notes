@@ -437,9 +437,7 @@ txt.typingNextPage();
     txt.resume();
     ```
 
-#### Typing
-
-##### Typing speed
+#### Typing speed
 
 - Get
     ```javascript
@@ -453,7 +451,9 @@ txt.typingNextPage();
     txt.typingSpeed = speed;
     ```    
 
-##### Timescale
+#### Time scale
+
+Time scale of typing, typing animation, sprite animation and easing of sprite's properties.
 
 - Get
     ```javascript

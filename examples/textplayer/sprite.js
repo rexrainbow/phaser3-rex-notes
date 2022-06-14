@@ -114,6 +114,7 @@ class Demo extends Phaser.Scene {
 
             }
         )
+        //.setTimeScale(10)
 
         var print = this.add.text(0, 580, 'Click to start');
         this.input.once('pointerdown', function () {

@@ -10,6 +10,10 @@ class SpriteData {
         return this.spriteManager.scene;
     }
 
+    get timeScale() {
+        return this.spriteManager.timeScale;
+    }
+
     destroy() {
         this
             .freeSprite()
@@ -59,7 +63,10 @@ class SpriteData {
             onCompleteScope: this
         }
         config[property] = value;
-        tweenTasks[property] = this.scene.tweens.add(config);
+
+        var tween = this.scene.tweens.add(config);
+        tween.timeScale = this.timeScale;
+        tweenTasks[property] = tween;
         return this;
     }
 
@@ -69,6 +76,7 @@ class SpriteData {
     }
 
     playAnimation(key) {
+        this.sprite.anims.timeScale = this.timeScale;
         this.sprite.play(key);
         return this;
     }
@@ -85,6 +93,19 @@ class SpriteData {
 
     pauseAnimation() {
         this.sprite.anims.pause();
+        return this;
+    }
+
+    setTimeScale(timeScale) {
+        if (this.sprite.anims) {
+            this.sprite.anims.timeScale = timeScale;
+        }
+
+        var tweenTasks = this.tweens;
+        for (var key in tweenTasks) {
+            tweenTasks[key].timeScale = timeScale;
+        }
+
         return this;
     }
 }

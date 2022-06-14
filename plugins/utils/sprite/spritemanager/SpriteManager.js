@@ -16,12 +16,35 @@ class SpriteManager {
 
         this.sprites = {};
         this.removedSprites = [];
+        this._timeScale = 1;
     }
 
     destroy(fromScene) {
         this.clear(!fromScene);
         this.createCallback = undefined;
         this.scene = undefined;
+    }
+
+    set timeScale(timeScale) {
+        if (this._timeScale === timeScale) {
+            return;
+        }
+
+        this._timeScale = timeScale;
+
+        var sprites = this.sprites;
+        for (var name in sprites) {
+            sprites[name].setTimeScale(timeScale);
+        }
+    }
+
+    get timeScale() {
+        return this._timeScale;
+    }
+
+    setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
     }
 
     setCreateCallback(callback) {
@@ -70,11 +93,12 @@ class SpriteManager {
         if (destroyChild === undefined) {
             destroyChild = true;
         }
-        for (var name in this.sprites) {
+        var sprites = this.sprites;
+        for (var name in sprites) {
             if (destroyChild) {
-                this.sprites[name].destroy();
+                sprites[name].destroy();
             }
-            delete this.sprites[name];
+            delete sprites[name];
         }
         this.removedSprites.length = 0;
         return this;
@@ -165,7 +189,8 @@ class SpriteManager {
     }
 
     removeAll() {
-        for (var name in this.sprites) {
+        var sprites = this.sprites;
+        for (var name in sprites) {
             this.remove(name);
         }
         return this;
