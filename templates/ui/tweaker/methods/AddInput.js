@@ -1,5 +1,4 @@
 import GetInputType from '../utils/inputs/GetInputType.js';
-import CreateInputItem from '../utils/inputs/CreateInputItem.js';
 
 var AddInput = function (object, key, config) {
     if (config === undefined) {
@@ -12,8 +11,12 @@ var AddInput = function (object, key, config) {
 
     config.view = GetInputType(object[key], config);
 
+    var inputSizer = this.make('inputSizer', config);
+
+    //TODO: Add title and input
+
     this.add(
-        CreateInputItem(this.maker, config)
+        inputSizer
     )
 
     return this;
