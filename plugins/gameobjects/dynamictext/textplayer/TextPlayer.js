@@ -79,7 +79,7 @@ class TextPlayer extends DynamicText {
 
     get spriteManager() {
         if (this._spriteManager === undefined) {
-            this._spriteManager = new SpriteManager(this.scene);        
+            this._spriteManager = new SpriteManager(this.scene);
         }
         return this._spriteManager;
     }

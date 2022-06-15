@@ -10,14 +10,14 @@ var CreateRoundRectangle = function (scene, data, view, styles, customBuilders) 
     var gameObject = new RoundRectangle(scene, 0, 0, width, height, data.radius);
 
     if (data.color !== undefined) {
-        gameObject.setFillStyle(data.color)
+        gameObject.setFillStyle(data.color, data.alpha);
     }
     if (data.strokeColor !== undefined) {
         var strokeWidth = data.strokeWidth;
         if (strokeWidth === undefined) {
             strokeWidth = 2;
         }
-        gameObject.setStrokeStyle(strokeWidth, data.strokeColor)
+        gameObject.setStrokeStyle(strokeWidth, data.strokeColor, data.strokeAlpha);
     }
 
     scene.add.existing(gameObject);
