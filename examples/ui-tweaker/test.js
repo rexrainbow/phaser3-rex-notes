@@ -2,18 +2,6 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import Tweaker from '../../templates/ui/tweaker/Tweaker.js';
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
-
-const Styles = `
-.InputTitle:
-  $type: Label
-  text:
-    $type: Text
-    color: yellow
-`
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -32,12 +20,15 @@ class Demo extends Phaser.Scene {
 
         var panel = new Tweaker(this, {
             x: 400, y: 300,
-            width: 300,
+            width: 300, height: 300,
 
-            styles: Styles
+            styles: {
+                background: {
+                    radius: 20,
+                    strokeColor: 0xffffff
+                }
+            }
         })
-            .addInput(obj, 'a')
-            .addInput(obj, 'b')
             .layout();
 
         this.add.existing(panel);

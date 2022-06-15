@@ -28,7 +28,7 @@ class TweakerShell extends Sizer {
 }
 
 Object.assign(
-    Tweaker.prototype,
+    TweakerShell.prototype,
     Methods
 );
 

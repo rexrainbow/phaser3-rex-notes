@@ -9,8 +9,13 @@ class Tweaker extends TweakerShell {
             config = {};
         }
 
-        config.styles = {};  // TODO
-        config.builders = Builders;
+        if (!config.hasOwnProperty('styles')) {
+            config.styles = {};  // TODO: Default styles
+        }
+
+        if (!config.hasOwnProperty('builders')) {
+            config.builders = Builders;
+        }
 
         // Create sizer
         super(scene, config);
