@@ -26,12 +26,20 @@ class Demo extends Phaser.Scene {
                 background: {
                     radius: 20,
                     strokeColor: 0xffffff
-                }
+                },
+            },
+
+            space: {
+                left: 20, right: 20, top: 20, bottom: 20, item: 8
             }
         })
+            .addInput(obj, 'a')
+            .addInput(obj, 'b')
+
+        panel
             .layout();
 
-        this.add.existing(panel);
+        // this.add.existing(panel);
     }
 
     update() {

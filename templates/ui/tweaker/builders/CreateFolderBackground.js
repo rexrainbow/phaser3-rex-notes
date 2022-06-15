@@ -1,7 +1,8 @@
 import CreateRoundRectangle from './utils/CreateRoundRectangle.js';
 
 var CreateFolderBackground = function (scene, config, styles, gameObject) {
-    return CreateRoundRectangle(scene, config, styles.folderBackground, gameObject);
+    styles = styles.folderBackground || {};
+    return CreateRoundRectangle(scene, config, styles, gameObject);
 }
 
 export default CreateFolderBackground;
