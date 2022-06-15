@@ -73,17 +73,18 @@
   }
 
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
+
     return _setPrototypeOf(o, p);
   }
 
@@ -148,7 +149,7 @@
 
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
+      _get = Reflect.get;
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
@@ -3397,8 +3398,7 @@
               // 非表示パーツの設定
               else {
                   var opacity = model.getPartOpacityByIndex(partsIndex);
-                  var a1 = // 計算によって求められる不透明度
-                   void 0; // 計算によって求められる不透明度
+                  var a1 = void 0; // 計算によって求められる不透明度
                   if (newOpacity < phi) {
                       a1 = (newOpacity * (phi - 1)) / phi + 1.0; // (0,1),(phi,phi)を通る直線式
                   }

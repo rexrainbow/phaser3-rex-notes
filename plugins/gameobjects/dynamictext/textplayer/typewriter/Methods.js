@@ -1,3 +1,4 @@
+import TypingSpeedMethods from './TypingSpeedMethods.js';
 import Start from './Start.js';
 import Typing from './Typing.js';
 import Pause from './Pause.js';
@@ -11,7 +12,7 @@ import SetSkipTypingAnimation from './SetSkipTypingAnimation.js';
 import SetSkipSoundEffect from './SetSkipSoundEffect.js';
 import SkipCurrentTypingDelay from './SkipCurrentTypingDelay.js';
 
-export default {
+var Methods = {
     start: Start,
     typing: Typing,
     pause: Pause,
@@ -25,3 +26,10 @@ export default {
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay,
 }
+
+Object.assign(
+    Methods,
+    TypingSpeedMethods
+);
+
+export default Methods;

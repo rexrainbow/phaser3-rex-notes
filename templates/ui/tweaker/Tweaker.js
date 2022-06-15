@@ -19,6 +19,13 @@ class Tweaker extends TweakerShell {
         }
         config.builders = Merge(config.builders, Builders);
 
+        // Overwrite space parameter
+        var space = config.styles.space;
+        if (space) {
+            config.space = space;
+            delete config.styles.space;
+        }
+
         // Create sizer
         super(scene, config);
         this.type = 'rexTweaker';

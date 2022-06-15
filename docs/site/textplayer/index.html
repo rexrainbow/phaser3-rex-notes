@@ -9133,14 +9133,29 @@
 </ul>
 <h4 id="typing-speed">Typing speed<a class="headerlink" href="#typing-speed" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Get
+<li>Get<ul>
+<li>Default typing speed
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">defaultTypingSpeed</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Current typing speed
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">typingSpeed</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTypingSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>    
+</ul>
+</li>
+<li>Set<ul>
+<li>Default typing speed
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDefaultTypingSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">defaultTypingSpeed</span> <span class="o">=</span> <span class="nx">speed</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Current typing speed
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTypingSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+<span class="c1">// txt.setTypingSpeed();    // Set speed to default speed</span>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">typingSpeed</span> <span class="o">=</span> <span class="nx">speed</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="time-scale">Time scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h4>
 <p>Time scale of typing, typing animation, sprite animation and easing of sprite's properties.</p>

@@ -124,8 +124,16 @@ class TextPlayer extends DynamicText {
         return this.typeWriter.isPageTyping;
     }
 
+    set defaultTypingSpeed(speed) {
+        this.typeWriter.setDefaultTypingSpeed(speed);
+    }
+
+    get defaultTypingSpeed() {
+        return this.typeWriter.defaultTypingSpeed;
+    }
+
     set typingSpeed(speed) {
-        this.typeWriter.speed = speed;
+        this.typeWriter.setTypingSpeed(speed);
     }
 
     get typingSpeed() {

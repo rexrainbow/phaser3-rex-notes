@@ -14,14 +14,14 @@ var ShowPage = function () {
         .once('complete', function () {
             // Recover parameters
             this.typeWriter
-                .setSpeed(typingSpeedSave)
+                .setTypingSpeed(typingSpeedSave)
                 .setIgnoreWait(ignoreWaitSave)
                 .setSkipTypingAnimation(skipTypingAnimationSave)
                 .setSkipSoundEffect(skipSoundEffectSave)
 
         }, this)
 
-        .setSpeed(0)
+        .setTypingSpeed(0)
         .skipCurrentTypingDelay()
         .setIgnoreWait(true)
         .setSkipTypingAnimation(true)

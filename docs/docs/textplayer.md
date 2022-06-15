@@ -440,16 +440,30 @@ txt.typingNextPage();
 #### Typing speed
 
 - Get
-    ```javascript
-    var speed = txt.typingSpeed;
-    ```
+    - Default typing speed
+        ```javascript
+        var speed = txt.defaultTypingSpeed;
+        ```
+    - Current typing speed
+        ```javascript
+        var speed = txt.typingSpeed;
+        ```
 - Set
-    ```javascript
-    txt.setTypingSpeed(speed);    
-    ```
-    ```javascript
-    txt.typingSpeed = speed;
-    ```    
+    - Default typing speed
+        ```javascript
+        txt.setDefaultTypingSpeed(speed);
+        ```
+        ```javascript
+        txt.defaultTypingSpeed = speed;
+        ```
+    - Current typing speed
+        ```javascript
+        txt.setTypingSpeed(speed);
+        // txt.setTypingSpeed();    // Set speed to default speed
+        ```
+        ```javascript
+        txt.typingSpeed = speed;
+        ```    
 
 #### Time scale
 

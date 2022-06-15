@@ -18,7 +18,8 @@ class TypeWriter {
         this.setSkipTypingAnimation(false);
 
         this.setTypingStartCallback(GetValue(config, 'onTypingStart', SetChildrenInvisible));
-        this.setSpeed(GetValue(config, 'speed', 250));
+        this.setDefaultTypingSpeed(GetValue(config, 'speed', 250));
+        this.setTypingSpeed();
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
     }
 
@@ -37,11 +38,6 @@ class TypeWriter {
         this.onTypeStart = undefined;
 
         this.animationConfig = undefined;
-    }
-
-    setSpeed(speed) {
-        this.speed = speed;
-        return this;
     }
 
     set timeScale(value) {

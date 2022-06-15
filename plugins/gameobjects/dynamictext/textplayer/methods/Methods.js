@@ -8,13 +8,13 @@ import TypingNextPage from './TypingNextPage.js';
 import Pause from './Pause.js';
 import PauseTyping from './PauseTyping.js';
 import Resume from './Resume.js';
-import SetTypingSpeed from './SetTypingSpeed.js';
+import TypingSpeedMethods from './TypingSpeedMethods.js';
 import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
 
-export default {
+var Methods = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -25,9 +25,15 @@ export default {
     pause: Pause,
     pauseTyping: PauseTyping,
     resume: Resume,
-    setTypingSpeed: SetTypingSpeed,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage,
 }
+
+Object.assign(
+    Methods,
+    TypingSpeedMethods
+);
+
+export default Methods;

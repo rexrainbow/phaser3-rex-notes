@@ -27,11 +27,11 @@ class Demo extends Phaser.Scene {
                     radius: 20,
                     strokeColor: 0xffffff
                 },
-            },
 
-            space: {
-                left: 20, right: 20, top: 20, bottom: 20, item: 8
-            }
+                space: {
+                    left: 20, right: 20, top: 20, bottom: 20, item: 8
+                }
+            },
         })
             .addInput(obj, 'a')
             .addInput(obj, 'b')

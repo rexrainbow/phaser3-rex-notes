@@ -58,17 +58,18 @@
   }
 
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
+
     return _setPrototypeOf(o, p);
   }
 
@@ -133,7 +134,7 @@
 
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
+      _get = Reflect.get;
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
@@ -4058,27 +4059,22 @@
 
   var OnParseTypingSpeedTag = function OnParseTypingSpeedTag(textPlayer, parser, config) {
     var tagName = GetValue$E(config, 'tags.speed', 'speed');
-    var defaultSpeed;
-    parser.on('start', function () {
-      defaultSpeed = textPlayer.typeWriter.speed;
-    }).on("+".concat(tagName), function (speed) {
+    parser.on("+".concat(tagName), function (speed) {
       AppendCommand$2(textPlayer, speed);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
-      AppendCommand$2(textPlayer, defaultSpeed);
+      AppendCommand$2(textPlayer, undefined);
       parser.skipEvent();
-    }).on('complete', function () {
-      textPlayer.typeWriter.speed = defaultSpeed;
     });
   };
 
-  var SetSpeed = function SetSpeed(speed) {
-    this.typeWriter.setSpeed(speed); // this: textPlayer
+  var SetTypingSpeed = function SetTypingSpeed(speed) {
+    this.typeWriter.setTypingSpeed(speed); // this: textPlayer
   };
 
   var AppendCommand$2 = function AppendCommand(textPlayer, speed) {
     AppendCommand$3.call(textPlayer, 'speed', // name
-    SetSpeed, // callback
+    SetTypingSpeed, // callback
     speed, // params
     textPlayer // scope
     );
@@ -5163,6 +5159,21 @@
     return Parser;
   }(BracketParser);
 
+  var TypingSpeedMethods$1 = {
+    setDefaultTypingSpeed: function setDefaultTypingSpeed(speed) {
+      this.defaultSpeed = speed;
+      return this;
+    },
+    setTypingSpeed: function setTypingSpeed(speed) {
+      if (speed === undefined) {
+        speed = this.defaultSpeed;
+      }
+
+      this.speed = speed;
+      return this;
+    }
+  };
+
   var WaitEvent = function WaitEvent(eventEmitter, eventName) {
     return new Promise(function (resolve, reject) {
       eventEmitter.once(eventName, function () {
@@ -5671,6 +5682,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
+  Object.assign(Methods$1, TypingSpeedMethods$1);
 
   var SceneClass = Phaser.Scene;
 
@@ -6364,7 +6376,8 @@
       this.setIgnoreWait(false);
       this.setSkipTypingAnimation(false);
       this.setTypingStartCallback(GetValue$8(config, 'onTypingStart', SetChildrenInvisible));
-      this.setSpeed(GetValue$8(config, 'speed', 250));
+      this.setDefaultTypingSpeed(GetValue$8(config, 'speed', 250));
+      this.setTypingSpeed();
       this.setAnimationConfig(GetValue$8(config, 'animation', undefined));
     }
 
@@ -6379,12 +6392,6 @@
         this.pauseTypingTimer = undefined;
         this.onTypeStart = undefined;
         this.animationConfig = undefined;
-      }
-    }, {
-      key: "setSpeed",
-      value: function setSpeed(speed) {
-        this.speed = speed;
-        return this;
       }
     }, {
       key: "timeScale",
@@ -8097,9 +8104,15 @@
     return this;
   };
 
-  var SetTypingSpeed = function SetTypingSpeed(speed) {
-    this.typingSpeed = speed;
-    return this;
+  var TypingSpeedMethods = {
+    setDefaultTypingSpeed: function setDefaultTypingSpeed(speed) {
+      this.defaultTypingSpeed = speed;
+      return this;
+    },
+    setTypingSpeed: function setTypingSpeed(speed) {
+      this.typingSpeed = speed;
+      return this;
+    }
   };
 
   var SetTimeScale = function SetTimeScale(timeScale) {
@@ -8134,8 +8147,8 @@
     var skipSoundEffectSave = this.typeWriter.skipSoundEffect;
     this.typeWriter.once('complete', function () {
       // Recover parameters
-      this.typeWriter.setSpeed(typingSpeedSave).setIgnoreWait(ignoreWaitSave).setSkipTypingAnimation(skipTypingAnimationSave).setSkipSoundEffect(skipSoundEffectSave);
-    }, this).setSpeed(0).skipCurrentTypingDelay().setIgnoreWait(true).setSkipTypingAnimation(true).setSkipSoundEffect(true);
+      this.typeWriter.setTypingSpeed(typingSpeedSave).setIgnoreWait(ignoreWaitSave).setSkipTypingAnimation(skipTypingAnimationSave).setSkipSoundEffect(skipSoundEffectSave);
+    }, this).setTypingSpeed(0).skipCurrentTypingDelay().setIgnoreWait(true).setSkipTypingAnimation(true).setSkipSoundEffect(true);
     return this;
   };
 
@@ -8150,12 +8163,12 @@
     pause: Pause,
     pauseTyping: PauseTyping,
     resume: Resume,
-    setTypingSpeed: SetTypingSpeed,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
+  Object.assign(Methods, TypingSpeedMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -8301,12 +8314,20 @@
         return this.typeWriter.isPageTyping;
       }
     }, {
+      key: "defaultTypingSpeed",
+      get: function get() {
+        return this.typeWriter.defaultTypingSpeed;
+      },
+      set: function set(speed) {
+        this.typeWriter.setDefaultTypingSpeed(speed);
+      }
+    }, {
       key: "typingSpeed",
       get: function get() {
         return this.typeWriter.speed;
       },
       set: function set(speed) {
-        this.typeWriter.speed = speed;
+        this.typeWriter.setTypingSpeed(speed);
       }
     }, {
       key: "timeScale",

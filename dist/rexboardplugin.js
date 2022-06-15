@@ -73,17 +73,18 @@
   }
 
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
+
     return _setPrototypeOf(o, p);
   }
 
@@ -148,7 +149,7 @@
 
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
+      _get = Reflect.get;
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
@@ -14811,9 +14812,6 @@
   };
 
   var GetMinMaxTileXY = function GetMinMaxTileXY(chessTileXYZMap, out) {
-    if (chessTileXYZMap === undefined) {
-      chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
-    }
 
     if (out === undefined) {
       out = {};

@@ -8598,12 +8598,20 @@ Alice,300,40
 <h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 <span class="c1">// equal to table.set(rowKey, colKey, table.get(rowKey, colKey) + value);</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <h3 id="has-columnrow-key">Has column/row key<a class="headerlink" href="#has-columnrow-key" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasRow</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasRowKey</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>
 </code></pre></div>
@@ -8611,11 +8619,19 @@ Alice,300,40
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasCell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasKey</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <h3 id="value-in-column-or-row">Value in column or row<a class="headerlink" href="#value-in-column-or-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <h3 id="create-table">Create table<a class="headerlink" href="#create-table" title="Permanent link">&para;</a></h3>
 <h4 id="clear-table">Clear table<a class="headerlink" href="#clear-table" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
@@ -8630,6 +8646,9 @@ Alice,300,40
     <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>
+<ul>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <h4 id="append-a-row">Append a row<a class="headerlink" href="#append-a-row" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">appendRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
 <span class="c1">// table.appendRow(rowKey, callback, scope);  // get initValue from callback</span>
@@ -8640,12 +8659,21 @@ Alice,300,40
     <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+</ul>
 <h4 id="remove-a-column">Remove a column<a class="headerlink" href="#remove-a-column" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">removeCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <h4 id="remove-a-row">Remove a row<a class="headerlink" href="#remove-a-row" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">removeRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+</ul>
 <h3 id="sort-column-or-row">Sort column or row<a class="headerlink" href="#sort-column-or-row" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">sortCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
 <span class="c1">// table.sortCol(callback, scope);  // sort columns by callback</span>
@@ -8653,6 +8681,10 @@ Alice,300,40
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">sortRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
 <span class="c1">// table.sortRow(callback, scope);  // sort rows by callback</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <p>Mode:</p>
 <ul>
 <li><code>'ascending'</code>, or <code>0</code></li>
@@ -8670,6 +8702,10 @@ Alice,300,40
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">eachRow</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
+<ul>
+<li><code>rowKey</code> : Row key string, or row index number.</li>
+<li><code>colKey</code> : Column key string, or column index number.</li>
+</ul>
 <p>Callback</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
