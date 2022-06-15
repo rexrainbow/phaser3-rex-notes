@@ -19,7 +19,9 @@ var AddInput = function (object, key, config) {
     var inputSizerAddConfig = config.addConfig;
 
     // Create InputTitle, add to InputSizer
-    config.addConfig = {};
+    config.addConfig = {
+        proportion: 1,
+    };
     var inputTitle = this.make('inputTitle', config);
     var inputTitleAddConfig = config.addConfig;
     inputSizer.add(inputTitle, inputTitleAddConfig);
