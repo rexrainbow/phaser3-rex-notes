@@ -112,6 +112,13 @@ class CsvToHashTable {
     };
 
     get(rowKey, colKey) {
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
+        }
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
+
         var value = undefined;
         var table = this.table;
         if (table.hasOwnProperty(rowKey)) {
@@ -126,6 +133,13 @@ class CsvToHashTable {
     }
 
     set(rowKey, colKey, value) {
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
+        }
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
+
         var table = this.table;
         if (table.hasOwnProperty(rowKey)) {
             var row = table[rowKey];
@@ -139,6 +153,13 @@ class CsvToHashTable {
     }
 
     add(rowKey, colKey, value) {
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
+        }
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
+
         var table = this.table;
         if (table.hasOwnProperty(rowKey)) {
             var row = table[rowKey];
@@ -152,10 +173,18 @@ class CsvToHashTable {
     }
 
     hasRowKey(rowKey) {
+        if (typeof (rowKey) === 'number') {
+            return this.rowKeys.length > rowKey;
+        }
+
         return (this.rowKeys.indexOf(rowKey) !== -1);
     }
 
     hasColKey(colKey) {
+        if (typeof (colKey) === 'number') {
+            return this.colKeys.length > colKey;
+        }
+
         return (this.colKeys.indexOf(colKey) !== -1);
     }
 
@@ -166,6 +195,9 @@ class CsvToHashTable {
     isValueInRol(rowKey, value) {
         if (!this.hasRowKey(rowKey)) {
             return false;
+        }
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
         }
 
         var row = this.table[rowKey];
@@ -184,6 +216,10 @@ class CsvToHashTable {
         if (!this.hasColKey(colKey)) {
             return false;
         }
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
+
         var table = this.table;
         var rowKey, rowKeys = this.rowKeys
         for (var i = 0, len = rowKeys.length; i < len; i++) {
@@ -199,6 +235,10 @@ class CsvToHashTable {
         if (this.hasRowKey(rowKey)) {
             return this;
         }
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
+        }
+
 
         var isCallbackMode = (typeof (callback) === 'function');
         var initValue = (isCallbackMode) ? undefined : callback;
@@ -230,6 +270,9 @@ class CsvToHashTable {
         if (this.hasColKey(colKey)) {
             return this;
         }
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
 
         var isCallbackMode = (typeof (callback) === 'function');
         var initValue = (isCallbackMode) ? undefined : callback;
@@ -257,7 +300,13 @@ class CsvToHashTable {
     }
 
     removeRol(rowKey) {
-        var idx = this.rowKeys.indexOf(rowKey);
+        var idx;
+        if (typeof (rowKey) === 'number') {
+            idx = (this.rowKeys.length > rowKey) ? rowKey : -1;
+        } else {
+            idx = this.rowKeys.indexOf(rowKey);
+        }
+
         if (idx === -1) {
             return this;
         }
@@ -268,7 +317,13 @@ class CsvToHashTable {
     }
 
     removeCol(colKey) {
-        var idx = this.colKeys.indexOf(colKey);
+        var idx;
+        if (typeof (colKey) === 'number') {
+            idx = (this.colKeys.length > colKey) ? colKey : -1;
+        } else {
+            idx = this.colKeys.indexOf(colKey);
+        }
+
         if (idx === -1) {
             return this;
         }
@@ -283,6 +338,10 @@ class CsvToHashTable {
     }
 
     eachRow(colKey, callback, scope) {
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
+
         var rowKeys = this.rowKeys,
             rowKey, value;
         var isValidColKey = this.hasColKey(colKey);
@@ -303,6 +362,10 @@ class CsvToHashTable {
     }
 
     eachCol(rowKey, callback, scope) {
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
+        }
+
         var colKeys = this.colKeys,
             colKey, value;
         var isValidRowKey = this.hasRowKey(rowKey);
@@ -322,6 +385,10 @@ class CsvToHashTable {
     }
 
     convertCol(colKey, callback, scope) {
+        if (typeof (colKey) === 'number') {
+            colKey = this.colKeys[colKey];
+        }
+
         if (callback === undefined) {
             callback = TypeConvert;
         }
@@ -357,6 +424,10 @@ class CsvToHashTable {
     }
 
     convertRow(rowKey, callback, scope) {
+        if (typeof (rowKey) === 'number') {
+            rowKey = this.rowKeys[rowKey];
+        }
+
         if (callback === undefined) {
             callback = TypeConvert;
         }
@@ -449,10 +520,10 @@ class CsvToHashTable {
             }
         } else {
             var colKey = callback;
-            if (!this.hasRowKey(colKey)) {
+            if (!this.hasColKey(colKey)) {
                 return this;
             }
-            var mode = sceop;
+            var mode = scope;
             if (typeof (mode) === 'string') {
                 mode = SORTMODE[mode];
             }
@@ -496,7 +567,7 @@ class CsvToHashTable {
             if (!this.hasRowKey(rowKey)) {
                 return this;
             }
-            var mode = sceop;
+            var mode = scope;
             if (typeof (mode) === 'string') {
                 mode = SORTMODE[mode];
             }
@@ -537,10 +608,6 @@ class CsvToHashTable {
         return this;
     }
 
-}
-
-const defaultTypeConvert = function (value, rowKey, colKey, table) {
-    return TypeConvert(value);
 }
 
 const SORTMODE = {

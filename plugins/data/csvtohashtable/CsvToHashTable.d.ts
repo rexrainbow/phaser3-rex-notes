@@ -1,15 +1,15 @@
 export default CsvToHashTable;
 
 declare namespace CsvToHashTable {
-    type ConverCallbackType = (value: string, rowKey: string, colKey: string) => any;
+    type ConverCallbackType = (value: string, rowKey: string | number, colKey: string | number) => any;
 
-    type AppendDataCallbackType = (table: CsvToHashTable, rowKey: string, colKey: string) => any
+    type AppendDataCallbackType = (table: CsvToHashTable, rowKey: string | number, colKey: string | number) => any
 
     type SortModeType = 0 | 1 | 2 | 3 | 'ascending' | 'descending' | 'logical ascending' | 'logical descending';
 
     type SortCallbackType = (key0: string, key1: string) => number;
 
-    type EachCallbackType = (table: CsvToHashTable, rowKey: string, colKey: string, value: any) => void;
+    type EachCallbackType = (table: CsvToHashTable, rowKey: string | number, colKey: string | number, value: any) => void;
 
     interface ILoadConfig {
         delimiter?: string,
@@ -29,71 +29,71 @@ declare class CsvToHashTable {
     ): this;
 
     convertCol(
-        colKey: string,
+        colKey: string | number,
         convertCallback?: boolean | CsvToHashTable.ConverCallbackType,
         convertCallbackScope?: object
     ): this;
 
     convertRow(
-        rowKey: string,
+        rowKey: string | number,
         convertCallback?: boolean | CsvToHashTable.ConverCallbackType,
         convertCallbackScope?: object
     ): this;
 
     get(
-        rowKey: string, colKey: string
+        rowKey: string | number, colKey: string | number
     ): any;
 
     set(
-        rowKey: string, colKey: string,
+        rowKey: string | number, colKey: string | number,
         value: any
     ): this;
 
     add(
-        rowKey: string, colKey: string,
+        rowKey: string | number, colKey: string | number,
         value: number
     ): this;
 
-    hasRowKey(rowKey: string): boolean;
+    hasRowKey(rowKey: string | number): boolean;
 
-    hasColKey(colKey: string): boolean;
+    hasColKey(colKey: string | number): boolean;
 
-    hasKey(rowKey: string, colKey: string): boolean;
+    hasKey(rowKey: string | number, colKey: string | number): boolean;
 
-    isValueInRol(rowKey: string, data: any): boolean;
+    isValueInRol(rowKey: string | number, data: any): boolean;
 
-    isValueInCol(colKey: string, data: any): boolean;
+    isValueInCol(colKey: string | number, data: any): boolean;
 
     clear(): this;
 
     appendCol(
-        colKey: string,
+        colKey: string | number,
         initValue: any
     ): this;
 
     appendCol(
-        colKey: string,
+        colKey: string | number,
         callback: CsvToHashTable.AppendDataCallbackType,
         scope?: object
     ): this;
 
     appendRow(
-        rowKey: string,
+        rowKey: string | number,
         initValue: any
     ): this;
 
     appendRow(
-        rowKey: string,
+        rowKey: string | number,
         callback: CsvToHashTable.AppendDataCallbackType,
         scope?: object
     ): this;
 
-    removeCol(colKey: string): this;
+    removeCol(colKey: string | number): this;
 
-    removeRol(rowKey: string): this;
+    removeRol(rowKey: string | number): this;
 
     sortCol(
-        colKey: string,
+        colKey: string | number,
         mode: CsvToHashTable.SortModeType
     ): this;
 
@@ -103,7 +103,7 @@ declare class CsvToHashTable {
     ): this;
 
     sortRow(
-        rowKey: string,
+        rowKey: string | number,
         mode: CsvToHashTable.SortModeType
     ): this;
 
@@ -112,12 +112,12 @@ declare class CsvToHashTable {
         scope?: object
     ): this;
 
-    eachCol(rowKey: string,
+    eachCol(rowKey: string | number,
         callback: CsvToHashTable.EachCallbackType,
         scope?: object
     ): this;
 
-    eachRow(colKey: string,
+    eachRow(colKey: string | number,
         callback: CsvToHashTable.EachCallbackType,
         scope?: object
     ): this;

@@ -284,6 +284,14 @@
     }, {
       key: "get",
       value: function get(rowKey, colKey) {
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
+        }
+
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         var value = undefined;
         var table = this.table;
 
@@ -301,6 +309,14 @@
     }, {
       key: "set",
       value: function set(rowKey, colKey, value) {
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
+        }
+
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         var table = this.table;
 
         if (table.hasOwnProperty(rowKey)) {
@@ -317,6 +333,14 @@
     }, {
       key: "add",
       value: function add(rowKey, colKey, value) {
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
+        }
+
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         var table = this.table;
 
         if (table.hasOwnProperty(rowKey)) {
@@ -333,11 +357,19 @@
     }, {
       key: "hasRowKey",
       value: function hasRowKey(rowKey) {
+        if (typeof rowKey === 'number') {
+          return this.rowKeys.length > rowKey;
+        }
+
         return this.rowKeys.indexOf(rowKey) !== -1;
       }
     }, {
       key: "hasColKey",
       value: function hasColKey(colKey) {
+        if (typeof colKey === 'number') {
+          return this.colKeys.length > colKey;
+        }
+
         return this.colKeys.indexOf(colKey) !== -1;
       }
     }, {
@@ -350,6 +382,10 @@
       value: function isValueInRol(rowKey, value) {
         if (!this.hasRowKey(rowKey)) {
           return false;
+        }
+
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
         }
 
         var row = this.table[rowKey];
@@ -373,6 +409,10 @@
           return false;
         }
 
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         var table = this.table;
         var rowKey,
             rowKeys = this.rowKeys;
@@ -390,6 +430,10 @@
       value: function appendRow(rowKey, callback, scope) {
         if (this.hasRowKey(rowKey)) {
           return this;
+        }
+
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
         }
 
         var isCallbackMode = typeof callback === 'function';
@@ -426,6 +470,10 @@
           return this;
         }
 
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         var isCallbackMode = typeof callback === 'function';
         var initValue = isCallbackMode ? undefined : callback;
         this.colKeys.push(colKey);
@@ -455,7 +503,13 @@
     }, {
       key: "removeRol",
       value: function removeRol(rowKey) {
-        var idx = this.rowKeys.indexOf(rowKey);
+        var idx;
+
+        if (typeof rowKey === 'number') {
+          idx = this.rowKeys.length > rowKey ? rowKey : -1;
+        } else {
+          idx = this.rowKeys.indexOf(rowKey);
+        }
 
         if (idx === -1) {
           return this;
@@ -468,7 +522,13 @@
     }, {
       key: "removeCol",
       value: function removeCol(colKey) {
-        var idx = this.colKeys.indexOf(colKey);
+        var idx;
+
+        if (typeof colKey === 'number') {
+          idx = this.colKeys.length > colKey ? colKey : -1;
+        } else {
+          idx = this.colKeys.indexOf(colKey);
+        }
 
         if (idx === -1) {
           return this;
@@ -487,6 +547,10 @@
     }, {
       key: "eachRow",
       value: function eachRow(colKey, callback, scope) {
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         var rowKeys = this.rowKeys,
             rowKey,
             value;
@@ -511,6 +575,10 @@
     }, {
       key: "eachCol",
       value: function eachCol(rowKey, callback, scope) {
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
+        }
+
         var colKeys = this.colKeys,
             colKey,
             value;
@@ -535,6 +603,10 @@
     }, {
       key: "convertCol",
       value: function convertCol(colKey, callback, scope) {
+        if (typeof colKey === 'number') {
+          colKey = this.colKeys[colKey];
+        }
+
         if (callback === undefined) {
           callback = convert;
         }
@@ -576,6 +648,10 @@
     }, {
       key: "convertRow",
       value: function convertRow(rowKey, callback, scope) {
+        if (typeof rowKey === 'number') {
+          rowKey = this.rowKeys[rowKey];
+        }
+
         if (callback === undefined) {
           callback = convert;
         }
@@ -684,11 +760,11 @@
         } else {
           var colKey = callback;
 
-          if (!this.hasRowKey(colKey)) {
+          if (!this.hasColKey(colKey)) {
             return this;
           }
 
-          var mode = sceop;
+          var mode = scope;
 
           if (typeof mode === 'string') {
             mode = SORTMODE[mode];
@@ -739,7 +815,7 @@
             return this;
           }
 
-          var mode = sceop;
+          var mode = scope;
 
           if (typeof mode === 'string') {
             mode = SORTMODE[mode];

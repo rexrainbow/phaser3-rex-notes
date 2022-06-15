@@ -148,6 +148,9 @@ Or uses these metheds to convert columns or rows.
 var val = table.get(rowKey, colKey);
 ```
 
+- `rowKey` : Row key string, or row index number.
+- `colKey` : Column key string, or column index number.
+
 ### Set value
 
 ```javascript
@@ -158,6 +161,9 @@ table.set(rowKey, colKey, value);
 table.add(rowKey, colKey, value);
 // equal to table.set(rowKey, colKey, table.get(rowKey, colKey) + value);
 ```
+
+- `rowKey` : Row key string, or row index number.
+- `colKey` : Column key string, or column index number.
 
 ### Has column/row key
 
@@ -173,6 +179,9 @@ var hasCol = table.hasColKey(colKey);
 var hasCell = table.hasKey(rowKey, colKey);
 ```
 
+- `rowKey` : Row key string, or row index number.
+- `colKey` : Column key string, or column index number.
+
 ### Value in column or row
 
 ```javascript
@@ -182,6 +191,9 @@ var existed = table.isValueInRol(rowKey, value);
 ```javascript
 var existed = table.isValueInCol(colKey, value);
 ```
+
+- `rowKey` : Row key string, or row index number.
+- `colKey` : Column key string, or column index number.
 
 ### Create table
 
@@ -207,6 +219,8 @@ var callback = function (table, rowKey, colKey) {
 };
 ```
 
+- `colKey` : Column key string, or column index number.
+
 #### Append a row
 
 ```javascript
@@ -223,17 +237,23 @@ var callback = function (table, rowKey, colKey) {
 };
 ```
 
+- `rowKey` : Row key string, or row index number.
+
 #### Remove a column
 
 ```javascript
 table.removeCol(colKey);
 ```
 
+- `colKey` : Column key string, or column index number.
+
 #### Remove a row
 
 ```javascript
 table.removeRol(rowKey);
 ```
+
+- `rowKey` : Row key string, or row index number.
 
 ### Sort column or row
 
@@ -246,6 +266,9 @@ table.sortCol(colKey, mode);
 table.sortRow(rowKey, mode);
 // table.sortRow(callback, scope);  // sort rows by callback
 ```
+
+- `rowKey` : Row key string, or row index number.
+- `colKey` : Column key string, or column index number.
 
 Mode:
 
@@ -271,6 +294,9 @@ table.eachCol(rowKey, callback, scope);
 ```javascript
 table.eachRow(colKey, callback, scope);
 ```
+
+- `rowKey` : Row key string, or row index number.
+- `colKey` : Column key string, or column index number.
 
 Callback
 
