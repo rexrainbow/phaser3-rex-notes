@@ -73,18 +73,17 @@
   }
 
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
-
     return _setPrototypeOf(o, p);
   }
 
@@ -149,7 +148,7 @@
 
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get;
+      _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
@@ -7087,7 +7086,7 @@
     }
   };
 
-  var IsPlainObject$l = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$m = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
   var GameObject$2 = Phaser.GameObjects.GameObject;
@@ -7106,7 +7105,7 @@
 
       _classCallCheck(this, Text);
 
-      if (IsPlainObject$l(x)) {
+      if (IsPlainObject$m(x)) {
         var config = x;
         x = GetValue$1d(config, 'x', 0);
         y = GetValue$1d(config, 'y', 0);
@@ -8444,6 +8443,7 @@
   };
 
   var Shape$1 = Phaser.GameObjects.Shape;
+  var IsPlainObject$l = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1c = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
 
@@ -8457,12 +8457,32 @@
 
       _classCallCheck(this, RoundRectangle);
 
+      var strokeColor, strokeAlpha, strokeWidth;
+
+      if (IsPlainObject$l(x)) {
+        var config = x;
+        x = config.x;
+        y = config.y;
+        width = config.width;
+        height = config.height;
+        radiusConfig = config.radius;
+        fillColor = config.color;
+        fillAlpha = config.alpha;
+        strokeColor = config.strokeColor;
+        strokeAlpha = config.strokeAlpha;
+        strokeWidth = config.strokeWidth;
+      }
+
       if (x === undefined) {
         x = 0;
       }
 
       if (y === undefined) {
         y = 0;
+      }
+
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
       }
 
       var geom = new RoundRectangle$1(); // Configurate it later
@@ -8478,6 +8498,14 @@
 
       if (fillColor !== undefined) {
         _this.setFillStyle(fillColor, fillAlpha);
+      }
+
+      if (strokeColor !== undefined) {
+        if (strokeWidth === undefined) {
+          strokeWidth = 2;
+        }
+
+        _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
       }
 
       _this.updateDisplayOrigin();
@@ -8742,24 +8770,7 @@
 
   var CreateRoundRectangle = function CreateRoundRectangle(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var width = data.width === undefined ? 1 : data.width;
-    var height = data.height === undefined ? 1 : data.height;
-    var gameObject = new RoundRectangle(scene, 0, 0, width, height, data.radius);
-
-    if (data.color !== undefined) {
-      gameObject.setFillStyle(data.color);
-    }
-
-    if (data.strokeColor !== undefined) {
-      var strokeWidth = data.strokeWidth;
-
-      if (strokeWidth === undefined) {
-        strokeWidth = 2;
-      }
-
-      gameObject.setStrokeStyle(strokeWidth, data.strokeColor);
-    }
-
+    var gameObject = new RoundRectangle(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -25555,6 +25566,7 @@
         if (timerStartAt === undefined) {
           startAt = 0;
         } else {
+          this.speed;
           startAt = timerStartAt;
         }
 

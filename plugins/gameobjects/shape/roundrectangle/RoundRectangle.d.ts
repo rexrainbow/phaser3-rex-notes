@@ -16,10 +16,10 @@ declare namespace RoundRectangle {
 declare class RoundRectangle extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
-        x: number,
-        y: number,
-        width: number,
-        height: number,
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
         radiusConfig?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig |
             ({
                 radius?: (number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig),
@@ -28,6 +28,28 @@ declare class RoundRectangle extends Phaser.GameObjects.Shape {
         fillColor?: number,
         fillAlpha?: number
     );
+
+    constructor(
+        scene: Phaser.Scene,
+        config?: {
+            x?: number,
+            y?: number,
+            width?: number,
+            height?: number,
+            radius?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig |
+            ({
+                radius?: (number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig),
+                iteration?: number
+            }),
+
+            color?: number,
+            alpha?: number,
+
+            strokeColor?: number,
+            strokeAlpha?: number,
+            strokeWidth?: number
+        }
+    )
 
     resize(width: number, height: number): this;
 

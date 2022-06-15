@@ -4,16 +4,36 @@ import ArcTo from '../../../geom/pathdata/ArcTo.js';
 import Render from './render/Render.js';
 
 const Shape = Phaser.GameObjects.Shape;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Earcut = Phaser.Geom.Polygon.Earcut;
 
 class RoundRectangle extends Shape {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
+        var strokeColor, strokeAlpha, strokeWidth;
+        if (IsPlainObject(x)) {
+            var config = x;
+
+            x = config.x;
+            y = config.y;
+            width = config.width;
+            height = config.height;
+            radiusConfig = config.radius;
+            fillColor = config.color;
+            fillAlpha = config.alpha;
+
+            strokeColor = config.strokeColor;
+            strokeAlpha = config.strokeAlpha;
+            strokeWidth = config.strokeWidth;
+        }
         if (x === undefined) {
             x = 0;
         }
         if (y === undefined) {
             y = 0;
+        }
+        if (radiusConfig === undefined) {
+            radiusConfig = 0;
         }
 
         var geom = new GeomRoundRectangle();  // Configurate it later
@@ -28,6 +48,13 @@ class RoundRectangle extends Shape {
 
         if (fillColor !== undefined) {
             this.setFillStyle(fillColor, fillAlpha);
+        }
+
+        if (strokeColor !== undefined) {
+            if (strokeWidth === undefined) {
+                strokeWidth = 2;
+            }
+            this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
         }
 
         this.updateDisplayOrigin();

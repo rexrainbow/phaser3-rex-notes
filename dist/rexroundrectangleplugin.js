@@ -58,18 +58,17 @@
   }
 
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
-
     return _setPrototypeOf(o, p);
   }
 
@@ -515,6 +514,7 @@
   };
 
   var Shape = Phaser.GameObjects.Shape;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
 
@@ -528,12 +528,32 @@
 
       _classCallCheck(this, RoundRectangle);
 
+      var strokeColor, strokeAlpha, strokeWidth;
+
+      if (IsPlainObject(x)) {
+        var config = x;
+        x = config.x;
+        y = config.y;
+        width = config.width;
+        height = config.height;
+        radiusConfig = config.radius;
+        fillColor = config.color;
+        fillAlpha = config.alpha;
+        strokeColor = config.strokeColor;
+        strokeAlpha = config.strokeAlpha;
+        strokeWidth = config.strokeWidth;
+      }
+
       if (x === undefined) {
         x = 0;
       }
 
       if (y === undefined) {
         y = 0;
+      }
+
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
       }
 
       var geom = new RoundRectangle$1(); // Configurate it later
@@ -549,6 +569,14 @@
 
       if (fillColor !== undefined) {
         _this.setFillStyle(fillColor, fillAlpha);
+      }
+
+      if (strokeColor !== undefined) {
+        if (strokeWidth === undefined) {
+          strokeWidth = 2;
+        }
+
+        _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
       }
 
       _this.updateDisplayOrigin();

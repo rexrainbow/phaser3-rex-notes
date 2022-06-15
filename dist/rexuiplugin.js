@@ -73,18 +73,17 @@
   }
 
   function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
 
   function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
       return o;
     };
-
     return _setPrototypeOf(o, p);
   }
 
@@ -149,7 +148,7 @@
 
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get;
+      _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
@@ -572,11 +571,11 @@
     }
   };
 
-  var IsPlainObject$D = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$E = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2N = Phaser.Utils.Objects.GetValue;
 
   var SetStretchMode = function SetStretchMode(mode) {
-    if (IsPlainObject$D(mode)) {
+    if (IsPlainObject$E(mode)) {
       this.stretchMode.edge = parseMode(GetValue$2N(mode, 'edge', 0));
       this.stretchMode.internal = parseMode(GetValue$2N(mode, 'internal', 0));
     } else {
@@ -643,7 +642,7 @@
     setMaxFixedPartScale: SetMaxFixedPartScale
   };
 
-  var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$D = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2M = Phaser.Utils.Objects.GetValue;
 
   var NinePatchBase = function NinePatchBase(GOClass, type) {
@@ -657,7 +656,7 @@
 
         _classCallCheck(this, NinePatch);
 
-        if (IsPlainObject$C(x)) {
+        if (IsPlainObject$D(x)) {
           config = x;
           x = GetValue$2M(config, 'x', 0);
           y = GetValue$2M(config, 'y', 0);
@@ -667,7 +666,7 @@
           baseFrame = GetValue$2M(config, 'baseFrame', undefined);
           columns = GetValue$2M(config, 'columns', undefined);
           rows = GetValue$2M(config, 'rows', undefined);
-        } else if (IsPlainObject$C(width)) {
+        } else if (IsPlainObject$D(width)) {
           config = width;
           width = GetValue$2M(config, 'width', 1);
           height = GetValue$2M(config, 'height', 1);
@@ -675,13 +674,13 @@
           baseFrame = GetValue$2M(config, 'baseFrame', undefined);
           columns = GetValue$2M(config, 'columns', undefined);
           rows = GetValue$2M(config, 'rows', undefined);
-        } else if (IsPlainObject$C(key)) {
+        } else if (IsPlainObject$D(key)) {
           config = key;
           key = GetValue$2M(config, 'key', undefined);
           baseFrame = GetValue$2M(config, 'baseFrame', undefined);
           columns = GetValue$2M(config, 'columns', undefined);
           rows = GetValue$2M(config, 'rows', undefined);
-        } else if (IsPlainObject$C(baseFrame)) {
+        } else if (IsPlainObject$D(baseFrame)) {
           config = baseFrame;
           baseFrame = GetValue$2M(config, 'baseFrame', undefined);
           columns = GetValue$2M(config, 'columns', undefined);
@@ -691,7 +690,7 @@
           rows = columns;
           columns = baseFrame;
           baseFrame = GetValue$2M(config, 'baseFrame', undefined);
-        } else if (IsPlainObject$C(columns)) {
+        } else if (IsPlainObject$D(columns)) {
           config = columns;
           columns = GetValue$2M(config, 'columns', undefined);
           rows = GetValue$2M(config, 'rows', undefined);
@@ -1169,7 +1168,7 @@
   }();
 
   var GameObject$2 = Phaser.GameObjects.GameObject;
-  var IsPlainObject$B = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2K = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
@@ -1184,7 +1183,7 @@
 
       _classCallCheck(this, Blitter);
 
-      if (IsPlainObject$B(x)) {
+      if (IsPlainObject$C(x)) {
         config = x;
         x = GetValue$2K(config, 'x', 0);
         y = GetValue$2K(config, 'y', 0);
@@ -1926,7 +1925,7 @@
     ctx.restore();
   };
 
-  var IsPlainObject$A = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$B = Phaser.Utils.Objects.IsPlainObject;
 
   var ImageData$1 = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
@@ -1960,7 +1959,7 @@
     }, {
       key: "setFrame",
       value: function setFrame(frame) {
-        if (arguments.length > 0 && !IsPlainObject$A(frame)) {
+        if (arguments.length > 0 && !IsPlainObject$B(frame)) {
           frame = this.parent.texture.get(frame);
         }
 
@@ -2595,6 +2594,7 @@
   };
 
   var Shape$1 = Phaser.GameObjects.Shape;
+  var IsPlainObject$A = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2G = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
 
@@ -2608,12 +2608,32 @@
 
       _classCallCheck(this, RoundRectangle);
 
+      var strokeColor, strokeAlpha, strokeWidth;
+
+      if (IsPlainObject$A(x)) {
+        var config = x;
+        x = config.x;
+        y = config.y;
+        width = config.width;
+        height = config.height;
+        radiusConfig = config.radius;
+        fillColor = config.color;
+        fillAlpha = config.alpha;
+        strokeColor = config.strokeColor;
+        strokeAlpha = config.strokeAlpha;
+        strokeWidth = config.strokeWidth;
+      }
+
       if (x === undefined) {
         x = 0;
       }
 
       if (y === undefined) {
         y = 0;
+      }
+
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
       }
 
       var geom = new RoundRectangle$2(); // Configurate it later
@@ -2629,6 +2649,14 @@
 
       if (fillColor !== undefined) {
         _this.setFillStyle(fillColor, fillAlpha);
+      }
+
+      if (strokeColor !== undefined) {
+        if (strokeWidth === undefined) {
+          strokeWidth = 2;
+        }
+
+        _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
       }
 
       _this.updateDisplayOrigin();
@@ -38936,6 +38964,7 @@
         if (timerStartAt === undefined) {
           startAt = 0;
         } else {
+          this.speed;
           startAt = timerStartAt;
         }
 
@@ -47916,24 +47945,7 @@
 
   var CreateRoundRectangle = function CreateRoundRectangle(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var width = data.width === undefined ? 1 : data.width;
-    var height = data.height === undefined ? 1 : data.height;
-    var gameObject = new RoundRectangle$1(scene, 0, 0, width, height, data.radius);
-
-    if (data.color !== undefined) {
-      gameObject.setFillStyle(data.color);
-    }
-
-    if (data.strokeColor !== undefined) {
-      var strokeWidth = data.strokeWidth;
-
-      if (strokeWidth === undefined) {
-        strokeWidth = 2;
-      }
-
-      gameObject.setStrokeStyle(strokeWidth, data.strokeColor);
-    }
-
+    var gameObject = new RoundRectangle$1(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };

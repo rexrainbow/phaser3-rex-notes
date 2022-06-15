@@ -77,6 +77,25 @@ Round rectangle shape.
 var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
 ```
 
+or
+
+```javascript
+var rect = scene.add.rexRoundRectangle({
+    x: 0,
+    y: 0,
+    width: undefined,
+    height: undefined,
+    radius: 0,
+
+    color: undefined,
+    alpha: undefined,
+
+    strokeColor: undefined,
+    strokeAlpha: undefined,
+    strokeWidth: 2
+});
+```
+
 - `width`, `height` : Size of rectangle.
     - `undefined` : Set ot `undefined` to draw a circle.
 - `radius` : Radius of four corners.

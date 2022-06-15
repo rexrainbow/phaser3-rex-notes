@@ -16,6 +16,7 @@ Rex,100,20
 Alice,300,40`;
         var table = this.plugins.get('rexHashTable').add();
         table.loadCSV(csvString);
+        table.add('Rex', 'mp', 10);
         console.log(JSON.stringify(table.table));
         console.log(table.get('Rex', 'mp'));
 

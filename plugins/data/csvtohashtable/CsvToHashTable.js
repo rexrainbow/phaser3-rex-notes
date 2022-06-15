@@ -138,7 +138,7 @@ class CsvToHashTable {
         return this;
     }
 
-    add(colKey, rowKey, value) {
+    add(rowKey, colKey, value) {
         var table = this.table;
         if (table.hasOwnProperty(rowKey)) {
             var row = table[rowKey];
