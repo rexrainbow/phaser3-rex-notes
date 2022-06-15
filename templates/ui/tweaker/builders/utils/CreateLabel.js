@@ -6,13 +6,13 @@ import CreateImage from './CreateImage.js';
 
 var CreateLabel = function (scene, config, styles, gameObject) {
     if (!gameObject) {
-        var textStyle = styles.text || {};
-        var backgroundStyle = styles.background || {};
-        var imageStyle = styles.icon || {};
         gameObject = new Label(scene, {
-            background: CreateRoundRectangle(scene, undefined, backgroundStyle),
-            text: CreateText(scene, undefined, textStyle),
-            icon: CreateImage(scene, undefined, imageStyle)
+            ...styles,
+
+            // Create game objects from config
+            background: CreateRoundRectangle(scene, undefined, (styles.background || {})),
+            text: CreateText(scene, undefined, (styles.text || {})),
+            icon: CreateImage(scene, undefined, (styles.icon || {})),
         });
     }
 
@@ -23,9 +23,8 @@ var CreateLabel = function (scene, config, styles, gameObject) {
         if (config.icon === undefined) {
             gameObject.hide(iconGameObjct);
         } else {
-            gameObject
-                .show(iconGameObjct)
-                .setTexture(config.icon, config.iconFrame);
+            gameObject.show(iconGameObjct);
+            iconGameObjct.setTexture(config.icon, config.iconFrame);
         }
     }
 

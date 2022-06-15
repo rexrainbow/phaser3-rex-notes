@@ -2,6 +2,10 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import Tweaker from '../../templates/ui/tweaker/Tweaker.js';
 
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -26,6 +30,14 @@ class Demo extends Phaser.Scene {
                 background: {
                     radius: 20,
                     strokeColor: 0xffffff
+                },
+
+                inputTitle: {
+                    background: {
+                        strokeColor: COLOR_LIGHT
+                    },
+
+                    space: { left: 10, right: 10, top: 10, bottom: 10 }
                 },
 
                 space: {
