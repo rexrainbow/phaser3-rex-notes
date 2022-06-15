@@ -1,4 +1,5 @@
 import GetSizerConfig from './GetSizerConfig.js';
+import { GetParent } from '../../../plugins/gameobjects/containerlite/GetParent.js';
 
 var Show = function (gameObject) {
     _hide(gameObject, false);
@@ -23,7 +24,7 @@ var _hide = function (gameObject, hidden) {
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
 
-    var parent = gameObject.getParent();
+    var parent = GetParent(gameObject);
     if (parent) {
         parent.setChildVisible(gameObject, !hidden);
     } else {

@@ -3,7 +3,7 @@ import CreateLabel from './utils/CreateLabel.js';
 var CreateInputTitle = function (scene, config, styles, gameObject) {
     styles = styles.inputTitle || {};
     config = {
-        text: config.title || '',
+        text: config.title,
 
         icon: config.icon,
         iconFrame: config.iconFrame,

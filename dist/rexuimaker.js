@@ -16469,7 +16469,7 @@
 
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
-    var parent = gameObject.getParent();
+    var parent = GetParent(gameObject);
 
     if (parent) {
       parent.setChildVisible(gameObject, !hidden);
