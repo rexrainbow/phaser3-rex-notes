@@ -78,7 +78,8 @@ import {
 } from './utils/Hide.js';
 import { Edit } from '../../plugins/textedit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
-import FontSizeFitToWidth from '../../plugins/utils/text/FontSizeFitToWidth.js';
+import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
+import FontSizeResize from '../../plugins/utils/text/fontsizeresize/FontSizeResize.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 import DelayPromise from '../../plugins/utils/promise/Delay.js'
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
@@ -166,7 +167,8 @@ export {
     IsShown,
     Edit,
     WrapExpandText,
-    FontSizeFitToWidth,
+    FontSizeExpandText,
+    FontSizeResize,
     WaitEvent,
     WaitComplete,
     DelayPromise,

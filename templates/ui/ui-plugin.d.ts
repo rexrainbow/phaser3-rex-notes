@@ -72,7 +72,8 @@ import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenIn
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import Delay from '../../plugins/utils/promise/Delay';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
-import FontSizeFitToWidth from '../../plugins/utils/text/FontSizeFitToWidth';
+import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
+import FontSizeResize from '../../plugins/utils/text/fontsizeresize/FontSizeResize';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import Make from './maker/YAMLMake';
 import MakerClass from './maker/Maker';
@@ -166,7 +167,8 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     waitComplete: typeof WaitComplete;
     delayPromise: typeof Delay;
     wrapExpandText: typeof WrapExpandText;
-    fontSizeFitToWidth: typeof FontSizeFitToWidth;
+    fontSizeExpandText: typeof FontSizeExpandText;
+    fontSizeResize: typeof FontSizeResize;
     requestDrag: typeof RequestDrag;
 
     isInTouching(
