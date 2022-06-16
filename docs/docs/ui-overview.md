@@ -397,6 +397,10 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
                 padding: {bottom: 12}
             }
             ```
+1. Set font-size to fit width
+    ```javascript
+    var textObject = scene.rexUI.fontSizeFitToWidth(textObject, width);
+    ```
 
 ### Touch input
 

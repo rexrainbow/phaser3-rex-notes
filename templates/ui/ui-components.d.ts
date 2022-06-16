@@ -77,6 +77,7 @@ import {
 import { Edit } from '../../plugins/textedit';
 import HiddenEdit from './hiddenedit/HiddenEdit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
+import FontSizeFitToWidth from '../../plugins/utils/text/FontSizeFitToWidth';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import DelayPromise from '../../plugins/utils/promise/Delay'
 import GetViewport from '../../plugins/utils/system/GetViewport';
@@ -163,6 +164,7 @@ export {
     IsShown,
     Edit,
     WrapExpandText,
+    FontSizeFitToWidth,
     WaitEvent,
     WaitComplete,
     DelayPromise,

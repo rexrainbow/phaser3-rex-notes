@@ -72,6 +72,7 @@ import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenIn
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import Delay from '../../plugins/utils/promise/Delay';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
+import FontSizeFitToWidth from '../../plugins/utils/text/FontSizeFitToWidth';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 import Make from './maker/YAMLMake';
 import MakerClass from './maker/Maker';
@@ -118,7 +119,7 @@ declare class Factories {
     overlapSizer: typeof OverlapSizerFactory;
     pages: typeof PagesFactory;
     pan: typeof PanFactory;
-    perspective: typeof PerspectiveFactory;    
+    perspective: typeof PerspectiveFactory;
     pinch: typeof PinchFactory;
     press: typeof PressFactory;
     rotate: typeof RotateFactory;
@@ -165,6 +166,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     waitComplete: typeof WaitComplete;
     delayPromise: typeof Delay;
     wrapExpandText: typeof WrapExpandText;
+    fontSizeFitToWidth: typeof FontSizeFitToWidth;
     requestDrag: typeof RequestDrag;
 
     isInTouching(
