@@ -257,6 +257,8 @@ declare class Dialog extends Sizer {
         scop?: unknown
     ): this;
 
+    setAllButtonsEnable(enable?: boolean): this;
+
     getChoicesButtonState(name: string): boolean;
     getChoicesButtonState(): { [name: string]: boolean };
 

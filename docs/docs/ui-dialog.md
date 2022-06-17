@@ -411,6 +411,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     dialog.setLeftToolbarEnable(index);
     ```
     - `index` : A number index, or a button game object.
+- Enable all buttons
+    ```javascript
+    dialog.setAllButtonsEnable();
+    ```
 - Disable choice/action/toolbar/left-toolbar button's input
     ```javascript
     dialog.setChoiceEnable(index, false);
@@ -419,6 +423,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     dialog.setLeftToolbarEnable(index, false);
     ```
     - `index` : A number index, or a button game object.
+- Disable all buttons
+    ```javascript
+    dialog.setAllButtonsEnable(false);
+    ```
 - Toggle choice/action/toolbar/left-toolbar button's input
     ```javascript
     dialog.toggleChoiceEnable(index);

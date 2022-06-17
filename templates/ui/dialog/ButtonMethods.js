@@ -248,6 +248,20 @@ export default {
         return this;
     },
 
+    setAllButtonsEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+
+        this
+            .setToolbarEnable(enabled)
+            .setLeftToolbarEnable(enabled)
+            .setActionEnable(enabled)
+            .setChoiceEnable(enabled)
+
+        return this;
+    },
+
     // Checkboxes
     getChoicesButtonStates() {
         var choicesSizer = this.childrenMap.choicesSizer;
