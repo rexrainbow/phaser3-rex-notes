@@ -400,10 +400,12 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 1. Font-size-expand text
     ```javascript
     var textObject = scene.rexUI.fontSizeExpandText(textObject);
-    // var textObject = scene.rexUI.fontSizeExpandText(textObject, minWidth);
+    // var textObject = scene.rexUI.fontSizeExpandText(textObject, minWidth, maxHeight);
     ```
     - `textObject` :
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
+    - `maxHeight` : Max height of text. 
+        - `undefined` :　Ignore this constraint. Default value. 
 1. Set font-size to fit width
     ```javascript
     var textObject = scene.rexUI.fontSizeFitToWidth(textObject, width);

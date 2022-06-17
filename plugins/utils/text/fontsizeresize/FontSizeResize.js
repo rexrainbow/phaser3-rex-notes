@@ -1,4 +1,15 @@
-var FontSizeFitToWidth = function (textObject, width, height) {
+const MaxTestCount = 65535;
+
+var FontSizeResize = function (textObject, width, height) {
+    if (width == null) {
+        // Do nothing if invalid width input
+        return textObject;
+    }
+    if (width === 0) {
+        SetTextWidth(textObject, 0, height);
+        return textObject;
+    }
+
     var textLength = textObject.text.length;
     if (textLength === 0) {
         SetTextWidth(textObject, width, height);
@@ -9,13 +20,22 @@ var FontSizeFitToWidth = function (textObject, width, height) {
 
     var sizeData = {};
     var testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
-    while (testResult !== 0) {
-        fontSize += testResult;
-        if (fontSize < 0) {
-            fontSize = 0;
+    for (var i = 0; i <= MaxTestCount; i++) {
+        if (testResult === 0) {
             break;
+        } else {
+            fontSize += testResult;
+            if (fontSize < 0) {
+                fontSize = 0;
+                break;
+            }
         }
         testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
+        console.log(fontSize, testResult)
+    }
+
+    if (i === MaxTestCount) {
+        console.warn(`FontSizeResize: Test count exceeds ${MaxTestCount}`);
     }
 
     textObject.setFontSize(fontSize);
@@ -37,7 +57,6 @@ var GetTextSize = function (textObject, fontSize, sizeData) {
 }
 
 var TestFontSize = function (textObject, fontSize, width, height, sizeData) {
-    // console.log(fontSize);
     var textSize = GetTextSize(textObject, fontSize, sizeData);
     var textSize1 = GetTextSize(textObject, fontSize + 1, sizeData);
 
@@ -46,7 +65,7 @@ var TestFontSize = function (textObject, fontSize, width, height, sizeData) {
         if ((textSize.height <= height) && (textSize1.height > height)) {
             return 0;
 
-        } else if (textSize1.height > height) { // Reduce text size
+        } else if (textSize.height > height) { // Reduce text size
             return -1;
         }
     }
@@ -59,7 +78,7 @@ var TestFontSize = function (textObject, fontSize, width, height, sizeData) {
         return -1;
 
     } else {  // Increase text size
-        return 1;
+        return Math.floor(width - textSize.width);
     }
 }
 
@@ -77,4 +96,4 @@ var SetTextWidth = function (textObject, width, height) {
     style.update(false);
 }
 
-export default FontSizeFitToWidth;
+export default FontSizeResize;

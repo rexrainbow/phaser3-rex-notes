@@ -48840,7 +48840,19 @@
     return textObject;
   };
 
-  var FontSizeFitToWidth = function FontSizeFitToWidth(textObject, width, height) {
+  var MaxTestCount = 65535;
+
+  var FontSizeResize = function FontSizeResize(textObject, width, height) {
+    if (width == null) {
+      // Do nothing if invalid width input
+      return textObject;
+    }
+
+    if (width === 0) {
+      SetTextWidth(textObject, 0, height);
+      return textObject;
+    }
+
     var textLength = textObject.text.length;
 
     if (textLength === 0) {
@@ -48852,15 +48864,24 @@
     var sizeData = {};
     var testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
 
-    while (testResult !== 0) {
-      fontSize += testResult;
-
-      if (fontSize < 0) {
-        fontSize = 0;
+    for (var i = 0; i <= MaxTestCount; i++) {
+      if (testResult === 0) {
         break;
+      } else {
+        fontSize += testResult;
+
+        if (fontSize < 0) {
+          fontSize = 0;
+          break;
+        }
       }
 
       testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
+      console.log(fontSize, testResult);
+    }
+
+    if (i === MaxTestCount) {
+      console.warn("FontSizeResize: Test count exceeds ".concat(MaxTestCount));
     }
 
     textObject.setFontSize(fontSize);
@@ -48881,7 +48902,6 @@
   };
 
   var TestFontSize = function TestFontSize(textObject, fontSize, width, height, sizeData) {
-    // console.log(fontSize);
     var textSize = GetTextSize(textObject, fontSize, sizeData);
     var textSize1 = GetTextSize(textObject, fontSize + 1, sizeData);
 
@@ -48889,7 +48909,7 @@
       // Clamp by height
       if (textSize.height <= height && textSize1.height > height) {
         return 0;
-      } else if (textSize1.height > height) {
+      } else if (textSize.height > height) {
         // Reduce text size
         return -1;
       }
@@ -48903,7 +48923,7 @@
       return -1;
     } else {
       // Increase text size
-      return 1;
+      return Math.floor(width - textSize.width);
     }
   };
 
@@ -48927,13 +48947,17 @@
 
     textObject._minWidth = minWidth;
 
-    textObject.runWidthWrap = function (width) {
-      FontSizeFitToWidth(textObject, width);
+    textObject.runWidthWrap = function (width, maxHeight) {
+      FontSizeResize(textObject, width, maxHeight);
       return textObject;
     };
 
     textObject.resize = function (width, height) {
-      // Font size is set under runWidthWrap/FontSizeResize
+      if (textObject.width === width && textObject.height === height) {
+        return textObject;
+      } // Font size is set under runWidthWrap/FontSizeResize
+
+
       textObject.setFixedSize(width, height);
       return textObject;
     };
@@ -49446,7 +49470,7 @@
     edit: Edit,
     wrapExpandText: WrapExpandText,
     fontSizeExpandText: FontSizeExpandText,
-    fontSizeResize: FontSizeFitToWidth,
+    fontSizeResize: FontSizeResize,
     waitEvent: WaitEvent,
     waitComplete: WaitComplete,
     delayPromise: Delay,

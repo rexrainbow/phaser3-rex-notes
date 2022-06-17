@@ -7,11 +7,15 @@ var FontSizeExpandText = function (textObject, minWidth) {
 
     textObject._minWidth = minWidth;
 
-    textObject.runWidthWrap = function (width) {
-        FontSizeResize(textObject, width);
+    textObject.runWidthWrap = function (width, maxHeight) {
+        FontSizeResize(textObject, width, maxHeight);
         return textObject;
     }
-    textObject.resize = function(width, height) {
+    textObject.resize = function (width, height) {
+        if ((textObject.width === width) && (textObject.height === height)) {
+            return textObject;
+        }
+
         // Font size is set under runWidthWrap/FontSizeResize
         textObject.setFixedSize(width, height);
         return textObject;
