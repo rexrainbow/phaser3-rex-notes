@@ -223,8 +223,8 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     or
     ```javascript
-    var gameObject = knob.getByName('#' + name);
-    // var gameObject = knob.getByName('#' + name, recursive);
+    var gameObject = knob.getByName(name);
+    // var gameObject = knob.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

@@ -343,8 +343,8 @@ buttons.emitButtonClick(index);
     ```
     or
     ```javascript
-    var gameObject = buttons.getByName('#' + name);
-    // var gameObject = buttons.getByName('#' + name, recursive);
+    var gameObject = buttons.getByName(name);
+    // var gameObject = buttons.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

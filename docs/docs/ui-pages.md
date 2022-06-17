@@ -270,8 +270,8 @@ pages.setFadeInDuration(duration);
     ```
     or
     ```javascript
-    var gameObject = pages.getByName('#' + name);
-    // var gameObject = pages.getByName('#' + name, recursive);
+    var gameObject = pages.getByName(name);
+    // var gameObject = pages.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

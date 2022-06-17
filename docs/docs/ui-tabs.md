@@ -406,8 +406,8 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     ```
     or
     ```javascript
-    var gameObject = tabs.getByName('#' + name);
-    // var gameObject = tabs.getByName('#' + name, recursive);
+    var gameObject = tabs.getByName(name);
+    // var gameObject = tabs.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

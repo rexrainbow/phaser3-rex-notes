@@ -344,8 +344,8 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     or
     ```javascript
-    var gameObject = sizer.getByName('#' + name);
-    // var gameObject = sizer.getByName('#' + name, recursive);
+    var gameObject = sizer.getByName(name);
+    // var gameObject = sizer.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

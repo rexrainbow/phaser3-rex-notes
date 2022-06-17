@@ -448,7 +448,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     ```
     or
     ```javascript
-    var gameObject = textArea.getByName('#' + name);
-    // var gameObject = textArea.getByName('#' + name, recursive);
+    var gameObject = textArea.getByName(name);
+    // var gameObject = textArea.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.

@@ -211,8 +211,8 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     or
     ```javascript
-    var gameObject = slider.getByName('#' + name);
-    // var gameObject = slider.getByName('#' + name, recursive);
+    var gameObject = slider.getByName(name);
+    // var gameObject = slider.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

@@ -633,7 +633,7 @@ See [base sizer object](ui-basesizer.md).
     ```
     or
     ```javascript
-    var gameObject = table.getByName('#' + name);
-    // var gameObject = table.getByName('#' + name, recursive);
+    var gameObject = table.getByName(name);
+    // var gameObject = table.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.

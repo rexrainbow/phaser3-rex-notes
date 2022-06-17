@@ -241,7 +241,7 @@ See also - [dirty](ui-basesizer.md#dirty)
   or
   ```javascript
   var gameObject = scrollBar.getByName("#" + name);
-  // var gameObject = scrollBar.getByName('#' + name, recursive);
+  // var gameObject = scrollBar.getByName(name, recursive);
   ```
   - `recursive` : Set `true` to search all children recursively.
 

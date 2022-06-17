@@ -293,8 +293,8 @@ tabPages.addPage({
     ```
     or
     ```javascript
-    var gameObject = tabPages.getByName('#' + name);
-    // var gameObject = tabPages.getByName('#' + name, recursive);
+    var gameObject = tabPages.getByName(name);
+    // var gameObject = tabPages.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

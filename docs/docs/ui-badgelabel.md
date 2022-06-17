@@ -220,8 +220,8 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     or
     ```javascript
-    var gameObject = badgeLabel.getByName('#' + name);
-    // var gameObject = badgeLabel.getByName('#' + name, recursive);
+    var gameObject = badgeLabel.getByName(name);
+    // var gameObject = badgeLabel.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 

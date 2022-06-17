@@ -226,8 +226,8 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     or
     ```javascript
-    var gameObject = label.getByName('#' + name);
-    // var gameObject = label.getByName('#' + name, recursive);
+    var gameObject = label.getByName(name);
+    // var gameObject = label.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
 
