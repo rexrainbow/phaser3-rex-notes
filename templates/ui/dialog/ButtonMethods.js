@@ -253,11 +253,10 @@ export default {
             enabled = true;
         }
 
-        this
-            .setToolbarEnable(enabled)
-            .setLeftToolbarEnable(enabled)
-            .setActionEnable(enabled)
-            .setChoiceEnable(enabled)
+        this.setToolbarEnable(enabled);
+        this.setLeftToolbarEnable(enabled);
+        this.setActionEnable(enabled);
+        this.setChoiceEnable(enabled);
 
         return this;
     },
