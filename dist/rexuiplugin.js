@@ -48876,8 +48876,7 @@
         }
       }
 
-      testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
-      console.log(fontSize, testResult);
+      testResult = TestFontSize(textObject, fontSize, width, height, sizeData); // console.log(fontSize, testResult)
     }
 
     if (i === MaxTestCount) {

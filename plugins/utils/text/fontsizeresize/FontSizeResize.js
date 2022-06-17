@@ -31,7 +31,7 @@ var FontSizeResize = function (textObject, width, height) {
             }
         }
         testResult = TestFontSize(textObject, fontSize, width, height, sizeData);
-        console.log(fontSize, testResult)
+        // console.log(fontSize, testResult)
     }
 
     if (i === MaxTestCount) {
