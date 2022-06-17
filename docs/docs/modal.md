@@ -9,6 +9,7 @@ Pop-up modal dialog, then scale-down this dialog.
 
 - [Manual](https://codepen.io/rexrainbow/pen/KKvmzod)
 - [Timeout](https://codepen.io/rexrainbow/pen/xxLdEbv)
+- [Custom transit](https://codepen.io/rexrainbow/pen/yLvwxJX)
 
 ## Usage
 
