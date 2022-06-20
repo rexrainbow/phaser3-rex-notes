@@ -53,7 +53,7 @@ class Demo extends Phaser.Scene {
 // Comments : dude sprite
 [sprite.dude=dude]
 [sprite.dude.x=100][sprite.dude.x.to=700,5000,Cubic]
-[sprite.dude.y=300][sprite.dude.y.yoyo=100,1000]
+[sprite.dude.y=300][sprite.dude.y.yoyo=100,300,-1]
 
 // knight sprite
 [sprite.knight.play=idle,guard]

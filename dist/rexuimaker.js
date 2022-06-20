@@ -24413,6 +24413,29 @@
       this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
       return this;
     },
+    setAllButtonsEnable: function setAllButtonsEnable(enabled) {
+      if (enabled === undefined) {
+        enabled = true;
+      }
+
+      if (this.childrenMap.toolbarSizer) {
+        this.setToolbarEnable(enabled);
+      }
+
+      if (this.childrenMap.leftToolbarSizer) {
+        this.setLeftToolbarEnable(enabled);
+      }
+
+      if (this.childrenMap.actionsSizer) {
+        this.setActionEnable(enabled);
+      }
+
+      if (this.childrenMap.choicesSizer) {
+        this.setChoiceEnable(enabled);
+      }
+
+      return this;
+    },
     // Checkboxes
     getChoicesButtonStates: function getChoicesButtonStates() {
       var choicesSizer = this.childrenMap.choicesSizer;

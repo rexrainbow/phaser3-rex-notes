@@ -630,7 +630,7 @@
   var NOOP = function NOOP() {//  NOOP
   };
 
-  var Methods$a = {
+  var Methods$b = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -762,7 +762,7 @@
       return NinePatch;
     }(GOClass);
 
-    Object.assign(NinePatch.prototype, Methods$a);
+    Object.assign(NinePatch.prototype, Methods$b);
     return NinePatch;
   };
 
@@ -800,7 +800,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$9 = {
+  var Methods$a = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -821,7 +821,7 @@
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$1, 'rexNinePatch'));
 
-  Object.assign(NinePatch$1.prototype, Methods$9);
+  Object.assign(NinePatch$1.prototype, Methods$a);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -2159,7 +2159,7 @@
     }
   };
 
-  var Methods$8 = {
+  var Methods$9 = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -2193,7 +2193,7 @@
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
 
-  Object.assign(NinePatch.prototype, Methods$8);
+  Object.assign(NinePatch.prototype, Methods$9);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -12115,7 +12115,7 @@
     return GetAll(this.children, 'active', true);
   };
 
-  var Methods$7 = {
+  var Methods$8 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -12261,7 +12261,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$7);
+  Object.assign(DynamicText.prototype, Methods$8);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -13715,11 +13715,18 @@
       return;
     }
 
-    parser.on("+", function (tag, value, duration, ease) {
+    parser.on("+", function (tag, value, duration, ease, repeat) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [sprite.name.prop.to=value,duration,ease]
+      }
+
+      if (typeof ease === 'number') {
+        repeat = ease;
+        ease = undefined;
+      } // [sprite.name.prop.to=value,duration]
+      // [sprite.name.prop.to=value,duration,ease,repeat]
+      // [sprite.name.prop.to=value,duration,repeat]
 
 
       var tags = tag.split('.');
@@ -13735,7 +13742,7 @@
 
       AppendCommand$3.call(textPlayer, 'sprite.ease', // name
       EaseProperty, // callback
-      [name, property, value, duration, ease, isYoyo], // params
+      [name, property, value, duration, ease, repeat, isYoyo], // params
       textPlayer // scope
       );
       parser.skipEvent();
@@ -14423,7 +14430,7 @@
     return this;
   };
 
-  var Methods$6 = {
+  var Methods$7 = {
     start: Start,
     typing: Typing,
     pause: Pause$1,
@@ -14437,7 +14444,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$6, TypingSpeedMethods$1);
+  Object.assign(Methods$7, TypingSpeedMethods$1);
 
   var SceneClass = Phaser.Scene;
 
@@ -15210,7 +15217,7 @@
     }
   };
 
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$6);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$7);
 
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
@@ -16058,6 +16065,14 @@
     return SoundManager;
   }();
 
+  var IsEmpty = function IsEmpty(source) {
+    for (var k in source) {
+      return false;
+    }
+
+    return true;
+  };
+
   var SpriteData = /*#__PURE__*/function () {
     function SpriteData(spriteManager, sprite, name) {
       _classCallCheck(this, SpriteData);
@@ -16111,24 +16126,26 @@
       }
     }, {
       key: "easeProperty",
-      value: function easeProperty(property, value, duration, ease, isYoyo, _onComplete) {
+      value: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
         var tweenTasks = this.tweens;
 
         if (tweenTasks.hasOwnProperty(property)) {
           tweenTasks[property].remove();
         }
 
+        var sprite = this.sprite;
         var config = {
-          targets: this.sprite,
+          targets: sprite,
           duration: duration,
           ease: ease,
+          repeat: repeat,
           yoyo: isYoyo,
           onComplete: function onComplete() {
             tweenTasks[property].remove();
             delete tweenTasks[property];
 
             if (_onComplete) {
-              _onComplete();
+              _onComplete(sprite, property);
             }
           },
           onCompleteScope: this
@@ -16310,16 +16327,324 @@
     return gameObject;
   };
 
-  var IsEmpty = function IsEmpty(source) {
-    for (var k in source) {
-      return false;
+  var EventEmitter = Phaser.Events.EventEmitter;
+
+  var MonitorViewport = function MonitorViewport(viewport) {
+    if (viewport.events) {
+      return viewport;
     }
 
-    return true;
+    var events = new EventEmitter();
+    var x = viewport.x;
+    Object.defineProperty(viewport, 'x', {
+      get: function get() {
+        return x;
+      },
+      set: function set(value) {
+        if (x !== value) {
+          x = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var y = viewport.y;
+    Object.defineProperty(viewport, 'y', {
+      get: function get() {
+        return y;
+      },
+      set: function set(value) {
+        if (y !== value) {
+          y = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var width = viewport.width;
+    Object.defineProperty(viewport, 'width', {
+      get: function get() {
+        return width;
+      },
+      set: function set(value) {
+        if (width !== value) {
+          width = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    var height = viewport.height;
+    Object.defineProperty(viewport, 'height', {
+      get: function get() {
+        return height;
+      },
+      set: function set(value) {
+        if (height !== value) {
+          height = value;
+          events.emit('update', viewport);
+        }
+      }
+    });
+    viewport.events = events;
+    return viewport;
   };
 
-  var GetValue$1D = Phaser.Utils.Objects.GetValue;
+  var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('vp')) {
+      return gameObject;
+    }
+
+    if (vpx === undefined) {
+      vpx = 0.5;
+    }
+
+    if (vpy === undefined) {
+      vpy = 0.5;
+    }
+
+    if (transformCallback === undefined) {
+      transformCallback = DefaultTransformCallback;
+    }
+
+    MonitorViewport(viewport);
+    var events = viewport.events;
+    gameObject.vp = viewport; // Set position of game object when view-port changed.
+
+    var Transform = function Transform() {
+      transformCallback(gameObject, viewport, vpx, vpy);
+    };
+
+    events.on('update', Transform);
+    gameObject.once('destroy', function () {
+      events.off('update', Transform);
+      gameObject.vp = undefined;
+    });
+    Object.defineProperty(gameObject, 'vpx', {
+      get: function get() {
+        return vpx;
+      },
+      set: function set(value) {
+        if (vpx !== value) {
+          vpx = value;
+          Transform();
+        }
+      }
+    });
+    Object.defineProperty(gameObject, 'vpy', {
+      get: function get() {
+        return vpy;
+      },
+      set: function set(value) {
+        if (vpy !== value) {
+          vpy = value;
+          Transform();
+        }
+      }
+    });
+    Transform();
+  };
+
+  var DefaultTransformCallback = function DefaultTransformCallback(gameObject, viewport, vpx, vpy) {
+    gameObject.x = viewport.x + viewport.width * vpx;
+    gameObject.y = viewport.y + viewport.height * vpy;
+  };
+
   var RemoveItem$6 = Phaser.Utils.Array.Remove;
+  var AddMethods$1 = {
+    has: function has(name) {
+      return this.sprites.hasOwnProperty(name);
+    },
+    get: function get(name) {
+      return this.sprites[name];
+    },
+    getSprite: function getSprite(name) {
+      return this.get(name).sprite;
+    },
+    add: function add(name, textureKey, frameName) {
+      this.remove(name);
+      var sprite;
+
+      if (arguments.length === 3) {
+        sprite = this.createCallback(this.scene, textureKey, frameName);
+      } else {
+        var args = Array.prototype.slice.call(arguments, 1);
+        sprite = this.createCallback.apply(this, [this.scene].concat(_toConsumableArray(args)));
+      }
+
+      if (this.fadeTime > 0) {
+        AddTintRGBProperties(sprite);
+      }
+
+      if (this.viewportCoordinateEnable) {
+        AddViewportCoordinateProperties(sprite);
+      }
+
+      sprite.once('destroy', function () {
+        RemoveItem$6(this.removedSprites, sprite);
+
+        if (this.isEmpty) {
+          this.emit('empty');
+        }
+      }, this);
+      var spriteData = new SpriteData(this, sprite, name);
+      this.sprites[name] = spriteData;
+
+      if (this.fadeTime > 0) {
+        spriteData.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
+      }
+
+      return this;
+    }
+  };
+
+  var RemoveMethods$1 = {
+    remove: function remove(name) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      var spriteData = this.get(name);
+      delete this.sprites[name];
+      this.removedSprites.push(spriteData.sprite);
+
+      if (this.fadeTime > 0) {
+        spriteData.easeProperty('tintGray', // property
+        0, // to value
+        this.fadeTime, // duration
+        'Linear', // ease
+        0, // repeat
+        false, // yoyo
+        function () {
+          // onComplete
+          spriteData.destroy();
+        });
+      } else {
+        spriteData.destroy();
+      }
+
+      return this;
+    },
+    removeAll: function removeAll() {
+      var sprites = this.sprites;
+
+      for (var name in sprites) {
+        this.remove(name);
+      }
+
+      return this;
+    },
+    clear: function clear(destroyChild) {
+      if (destroyChild === undefined) {
+        destroyChild = true;
+      }
+
+      var sprites = this.sprites;
+
+      for (var name in sprites) {
+        if (destroyChild) {
+          sprites[name].destroy();
+        }
+
+        delete sprites[name];
+      }
+
+      this.removedSprites.length = 0;
+      return this;
+    }
+  };
+
+  var PropertyMethods = {
+    setProperty: function setProperty(name, property, value) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).setProperty(property, value);
+      return this;
+    },
+    easeProperty: function easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      if (duration === undefined) {
+        duration = 1000;
+      }
+
+      if (ease === undefined) {
+        ease = 'Linear';
+      }
+
+      if (repeat === undefined) {
+        repeat = 0;
+      }
+
+      if (isYoyo === undefined) {
+        isYoyo = false;
+      }
+
+      this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
+      return this;
+    },
+    getTweenTask: function getTweenTask(name, property) {
+      if (this.has(name)) {
+        var tweenTasks = this.get(name).tweens;
+
+        if (tweenTasks.hasOwnProperty(property)) {
+          return tweenTasks[property];
+        }
+      }
+
+      return null;
+    }
+  };
+
+  var AnimationMethods = {
+    playAnimation: function playAnimation(name, key) {
+      if (!this.has(name)) {
+        this.add(name);
+      }
+
+      this.get(name).playAnimation(key);
+      return this;
+    },
+    stopAnimation: function stopAnimation(name) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).stopAnimation();
+      return this;
+    },
+    chainAnimation: function chainAnimation(name, keys) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).chainAnimation(keys);
+      return this;
+    },
+    pauseAnimation: function pauseAnimation(name) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).pauseAnimation();
+      return this;
+    },
+    setTexture: function setTexture(name, textureKey, frameKey) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).setTexture(textureKey, frameKey);
+      return this;
+    }
+  };
+
+  var Methods$6 = {};
+  Object.assign(Methods$6, AddMethods$1, RemoveMethods$1, PropertyMethods, AnimationMethods);
+
+  var GetValue$1D = Phaser.Utils.Objects.GetValue;
 
   var SpriteManager = /*#__PURE__*/function () {
     function SpriteManager(scene, config) {
@@ -16329,6 +16654,7 @@
       this.setEventEmitter(GetValue$1D(config, 'eventEmitter', undefined));
       this.setCreateCallback(GetValue$1D(config, 'createCallback', 'sprite'));
       this.setSpriteFadeTime(GetValue$1D(config, 'fade', 500));
+      this.setViewportCoordinateEnable(GetValue$1D(config, 'viewportCoordinate', false));
       this.sprites = {};
       this.removedSprites = [];
       this._timeScale = 1;
@@ -16388,208 +16714,26 @@
         return this;
       }
     }, {
-      key: "has",
-      value: function has(name) {
-        return this.sprites.hasOwnProperty(name);
-      }
-    }, {
-      key: "get",
-      value: function get(name) {
-        return this.sprites[name];
-      }
-    }, {
-      key: "getTweenTask",
-      value: function getTweenTask(name, prop) {
-        if (this.has(name)) {
-          var tweenTasks = this.get(name).tweens;
-
-          if (tweenTasks.hasOwnProperty(prop)) {
-            return tweenTasks[prop];
-          }
+      key: "setViewportCoordinateEnable",
+      value: function setViewportCoordinateEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
         }
 
-        return null;
+        this.viewportCoordinateEnable = enable;
+        return this;
       }
     }, {
       key: "isEmpty",
       get: function get() {
         return IsEmpty(this.sprites) && this.removedSprites.length === 0;
       }
-    }, {
-      key: "clear",
-      value: function clear(destroyChild) {
-        if (destroyChild === undefined) {
-          destroyChild = true;
-        }
-
-        var sprites = this.sprites;
-
-        for (var name in sprites) {
-          if (destroyChild) {
-            sprites[name].destroy();
-          }
-
-          delete sprites[name];
-        }
-
-        this.removedSprites.length = 0;
-        return this;
-      }
-    }, {
-      key: "add",
-      value: function add(name, textureKey, frameName) {
-        this.remove(name);
-        var sprite;
-
-        if (arguments.length === 3) {
-          sprite = this.createCallback(this.scene, textureKey, frameName);
-        } else {
-          var args = Array.prototype.slice.call(arguments, 1);
-          sprite = this.createCallback.apply(this, [this.scene].concat(_toConsumableArray(args)));
-        }
-
-        if (this.fadeTime > 0) {
-          AddTintRGBProperties(sprite);
-        }
-
-        sprite.once('destroy', function () {
-          RemoveItem$6(this.removedSprites, sprite);
-
-          if (this.isEmpty) {
-            this.emit('empty');
-          }
-        }, this);
-        var spriteData = new SpriteData(this, sprite, name);
-        this.sprites[name] = spriteData;
-
-        if (this.fadeTime > 0) {
-          spriteData.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
-        }
-
-        return this;
-      }
-    }, {
-      key: "setProperty",
-      value: function setProperty(name, property, value) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        this.get(name).setProperty(property, value);
-        return this;
-      }
-    }, {
-      key: "easeProperty",
-      value: function easeProperty(name, property, value, duration, ease, isYoyo, onComplete) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        if (duration === undefined) {
-          duration = 1000;
-        }
-
-        if (ease === undefined) {
-          ease = 'Linear';
-        }
-
-        this.get(name).easeProperty(property, value, duration, ease, isYoyo, onComplete);
-        return this;
-      }
-    }, {
-      key: "remove",
-      value: function remove(name) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        var spriteData = this.get(name);
-        delete this.sprites[name];
-        this.removedSprites.push(spriteData.sprite);
-
-        if (this.fadeTime > 0) {
-          spriteData.easeProperty('tintGray', // property
-          0, // to value
-          this.fadeTime, // duration
-          'Linear', // ease 
-          false, // yoyo
-          function () {
-            // onComplete
-            spriteData.destroy();
-          });
-        } else {
-          spriteData.destroy();
-        }
-
-        return this;
-      }
-    }, {
-      key: "removeAll",
-      value: function removeAll() {
-        var sprites = this.sprites;
-
-        for (var name in sprites) {
-          this.remove(name);
-        }
-
-        return this;
-      }
-    }, {
-      key: "setTexture",
-      value: function setTexture(name, textureKey, frameKey) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        this.get(name).setTexture(textureKey, frameKey);
-        return this;
-      }
-    }, {
-      key: "playAnimation",
-      value: function playAnimation(name, key) {
-        if (!this.has(name)) {
-          this.add(name);
-        }
-
-        this.get(name).playAnimation(key);
-        return this;
-      }
-    }, {
-      key: "stopAnimation",
-      value: function stopAnimation(name) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        this.get(name).stopAnimation();
-        return this;
-      }
-    }, {
-      key: "chainAnimation",
-      value: function chainAnimation(name, keys) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        this.get(name).chainAnimation(keys);
-        return this;
-      }
-    }, {
-      key: "pauseAnimation",
-      value: function pauseAnimation(name) {
-        if (!this.has(name)) {
-          return this;
-        }
-
-        this.get(name).pauseAnimation();
-        return this;
-      }
     }]);
 
     return SpriteManager;
   }();
 
-  Object.assign(SpriteManager.prototype, EventEmitterMethods);
+  Object.assign(SpriteManager.prototype, EventEmitterMethods, Methods$6);
 
   var SetClickTarget = function SetClickTarget(target) {
     this.clickTarget = target;
@@ -32152,6 +32296,29 @@
     },
     forEachLeftToolbar: function forEachLeftToolbar(callback, scope) {
       this.childrenMap.leftToolbarSizer.forEachButtton(callback, scope);
+      return this;
+    },
+    setAllButtonsEnable: function setAllButtonsEnable(enabled) {
+      if (enabled === undefined) {
+        enabled = true;
+      }
+
+      if (this.childrenMap.toolbarSizer) {
+        this.setToolbarEnable(enabled);
+      }
+
+      if (this.childrenMap.leftToolbarSizer) {
+        this.setLeftToolbarEnable(enabled);
+      }
+
+      if (this.childrenMap.actionsSizer) {
+        this.setActionEnable(enabled);
+      }
+
+      if (this.childrenMap.choicesSizer) {
+        this.setChoiceEnable(enabled);
+      }
+
       return this;
     },
     // Checkboxes

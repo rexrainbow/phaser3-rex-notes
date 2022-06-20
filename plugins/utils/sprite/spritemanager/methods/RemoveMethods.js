@@ -13,7 +13,8 @@ export default {
                 'tintGray',                 // property
                 0,                          // to value
                 this.fadeTime,              // duration
-                'Linear',                   // ease 
+                'Linear',                   // ease
+                0,                          // repeat
                 false,                      // yoyo
                 function () {               // onComplete
                     spriteData.destroy();
