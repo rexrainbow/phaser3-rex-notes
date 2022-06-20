@@ -1,6 +1,6 @@
-import Factory from './gameobjects/text/bbcodetext/Factory.js';
-import Creator from './gameobjects/text/bbcodetext/Creator.js';
-import BBCodeText from './gameobjects/text/bbcodetext/BBCodeText.js';
+import Factory from './gameobjects/tagtext/bbcodetext/Factory.js';
+import Creator from './gameobjects/tagtext/bbcodetext/Creator.js';
+import BBCodeText from './gameobjects/tagtext/bbcodetext/BBCodeText.js';
 import SetValue from './utils/object/SetValue.js';
 
 class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
