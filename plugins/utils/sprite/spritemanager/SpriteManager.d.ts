@@ -11,6 +11,7 @@ declare namespace SpriteManager {
     interface IConfig {
         createCallback?: 'sprite' | 'image' | CreateCallbackType,
         fade?: number,
+        viewportCoordinate?: boolean
     }
 }
 

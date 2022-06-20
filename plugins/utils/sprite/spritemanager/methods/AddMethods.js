@@ -1,5 +1,6 @@
 import SpriteData from '../SpriteData.js';
 import AddTintRGBProperties from '../../../../behaviors/tintrgb/AddTintRGBProperties.js';
+import AddViewportCoordinateProperties from '../../../../behaviors/viewportcoordinate/AddViewportCoordinateProperties.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
 
@@ -30,6 +31,10 @@ export default {
         if (this.fadeTime > 0) {
             AddTintRGBProperties(sprite);
         }
+        if (this.viewportCoordinateEnable) {
+            AddViewportCoordinateProperties(sprite);
+        }
+
         sprite.once('destroy', function () {
             RemoveItem(this.removedSprites, sprite);
             if (this.isEmpty) {

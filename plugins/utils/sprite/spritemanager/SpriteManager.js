@@ -11,6 +11,7 @@ class SpriteManager {
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.setCreateCallback(GetValue(config, 'createCallback', 'sprite'));
         this.setSpriteFadeTime(GetValue(config, 'fade', 500));
+        this.setViewportCoordinateEnable(GetValue(config, 'viewportCoordinate', false));
 
         this.sprites = {};
         this.removedSprites = [];
@@ -62,6 +63,15 @@ class SpriteManager {
 
     setSpriteFadeTime(time) {
         this.fadeTime = time;
+        return this;
+    }
+
+    setViewportCoordinateEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.viewportCoordinateEnable = enable;
         return this;
     }
 
