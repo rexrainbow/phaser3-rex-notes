@@ -2,6 +2,7 @@ import EventEmitterMethods from '../../eventemitter/EventEmitterMethods.js';
 import SpriteData from './SpriteData.js';
 import AddTintRGBProperties from '../../../behaviors/tintrgb/AddTintRGBProperties.js';
 import IsEmpty from '../../../utils/object/IsEmpty.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveItem = Phaser.Utils.Array.Remove;
@@ -75,33 +76,8 @@ class SpriteManager {
         return this.sprites[name];
     }
 
-    getTweenTask(name, prop) {
-        if (this.has(name)) {
-            var tweenTasks = this.get(name).tweens;
-            if (tweenTasks.hasOwnProperty(prop)) {
-                return tweenTasks[prop];
-            }
-        }
-        return null;
-    }
-
     get isEmpty() {
         return IsEmpty(this.sprites) && (this.removedSprites.length === 0);
-    }
-
-    clear(destroyChild) {
-        if (destroyChild === undefined) {
-            destroyChild = true;
-        }
-        var sprites = this.sprites;
-        for (var name in sprites) {
-            if (destroyChild) {
-                sprites[name].destroy();
-            }
-            delete sprites[name];
-        }
-        this.removedSprites.length = 0;
-        return this;
     }
 
     add(name, textureKey, frameName) {
@@ -135,116 +111,12 @@ class SpriteManager {
         }
         return this;
     }
-
-    setProperty(name, property, value) {
-        if (!this.has(name)) {
-            return this;
-        }
-        this.get(name).setProperty(property, value);
-        return this;
-    }
-
-    easeProperty(name, property, value, duration, ease, isYoyo, onComplete) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        if (duration === undefined) {
-            duration = 1000;
-        }
-        if (ease === undefined) {
-            ease = 'Linear';
-        }
-
-        this.get(name).easeProperty(property, value, duration, ease, isYoyo, onComplete);
-        return this;
-    }
-
-    remove(name) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        var spriteData = this.get(name);
-        delete this.sprites[name];
-
-        this.removedSprites.push(spriteData.sprite);
-        if (this.fadeTime > 0) {
-            spriteData.easeProperty(
-                'tintGray',                 // property
-                0,                          // to value
-                this.fadeTime,              // duration
-                'Linear',                   // ease 
-                false,                      // yoyo
-                function () {               // onComplete
-                    spriteData.destroy();
-                }
-            )
-
-        } else {
-            spriteData.destroy();
-
-        }
-        return this;
-    }
-
-    removeAll() {
-        var sprites = this.sprites;
-        for (var name in sprites) {
-            this.remove(name);
-        }
-        return this;
-    }
-
-    setTexture(name, textureKey, frameKey) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        this.get(name).setTexture(textureKey, frameKey);
-        return this;
-    }
-
-    playAnimation(name, key) {
-        if (!this.has(name)) {
-            this.add(name);
-        }
-
-        this.get(name).playAnimation(key);
-        return this;
-    }
-
-    stopAnimation(name) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        this.get(name).stopAnimation();
-        return this;
-    }
-
-    chainAnimation(name, keys) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        this.get(name).chainAnimation(keys);
-        return this;
-    }
-
-    pauseAnimation(name) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        this.get(name).pauseAnimation();
-        return this;
-    }
 }
 
 Object.assign(
     SpriteManager.prototype,
-    EventEmitterMethods
+    EventEmitterMethods,
+    Methods
 );
 
 export default SpriteManager;
