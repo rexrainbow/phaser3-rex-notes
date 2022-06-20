@@ -253,10 +253,18 @@ export default {
             enabled = true;
         }
 
-        this.setToolbarEnable(enabled);
-        this.setLeftToolbarEnable(enabled);
-        this.setActionEnable(enabled);
-        this.setChoiceEnable(enabled);
+        if (this.childrenMap.toolbarSizer) {
+            this.setToolbarEnable(enabled);
+        }
+        if (this.childrenMap.leftToolbarSizer) {
+            this.setLeftToolbarEnable(enabled);
+        }
+        if (this.childrenMap.actionsSizer) {
+            this.setActionEnable(enabled);
+        }
+        if (this.childrenMap.choicesSizer) {
+            this.setChoiceEnable(enabled);
+        }
 
         return this;
     },
