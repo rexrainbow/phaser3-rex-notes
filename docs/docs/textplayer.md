@@ -642,9 +642,35 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Remove all sprites : `[/sprite]`
     - Tint-fade-out if `sprite.fade` is not `0`
 - Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
-- Ease property : `[sprite.name.x.to=value,duration,easeFunction]`, 
-    - `[sprite.name.x.to=value]` : Default duration is `1000`, default easeFunction is `Linear`.
-- Yoyo ease property : `[sprite.name.y.yoyo=value,duration,easeFunction]`
+- Ease property : 
+    ```
+    [sprite.name.x.to=value,duration]
+    ```
+    ```
+    [sprite.name.x.to=value,duration,repeat]
+    ```
+    ```
+    [sprite.name.x.to=value,duration,easeFunction,repeat]
+    ```
+    ```
+    [sprite.name.x.to=value]
+    ```
+    - `duration` : Default value is `1000`
+    - `easeFunction` : Default value is `'Linear'`
+    - `repeat` : Default value is `0`
+- Yoyo ease property : 
+    ```
+    [sprite.name.x.yoyo=value,duration]
+    ```
+    ```
+    [sprite.name.x.yoyo=value,duration,repeat]
+    ```
+    ```
+    [sprite.name.x.yoyo=value,duration,easeFunction,repeat]
+    ```
+    ```
+    [sprite.name.x.yoyo=value]
+    ```
 - Set texture : `[sprite.name.texture=textureKey,frameKey]`
 - Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
     - Can play animation without adding sprite first.

@@ -7,7 +7,7 @@ export default {
         return this;
     },
 
-    easeProperty(name, property, value, duration, ease, isYoyo, onComplete) {
+    easeProperty(name, property, value, duration, ease, repeat, isYoyo, onComplete) {
         if (!this.has(name)) {
             return this;
         }
@@ -18,16 +18,22 @@ export default {
         if (ease === undefined) {
             ease = 'Linear';
         }
+        if (repeat === undefined) {
+            repeat = 0;
+        }
+        if (isYoyo === undefined) {
+            isYoyo = false;
+        }
 
-        this.get(name).easeProperty(property, value, duration, ease, isYoyo, onComplete);
+        this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
         return this;
     },
 
-    getTweenTask(name, prop) {
+    getTweenTask(name, property) {
         if (this.has(name)) {
             var tweenTasks = this.get(name).tweens;
-            if (tweenTasks.hasOwnProperty(prop)) {
-                return tweenTasks[prop];
+            if (tweenTasks.hasOwnProperty(property)) {
+                return tweenTasks[property];
             }
         }
         return null;

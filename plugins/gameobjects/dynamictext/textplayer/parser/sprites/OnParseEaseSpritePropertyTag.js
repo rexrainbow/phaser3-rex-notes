@@ -18,12 +18,19 @@ var OnParseEaseSpritePropertyTag = function (textPlayer, parser, config) {
         return;
     }
     parser
-        .on(`+`, function (tag, value, duration, ease) {
+        .on(`+`, function (tag, value, duration, ease, repeat) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [sprite.name.prop.to=value,duration,ease]
+            if (typeof (ease) === 'number') {
+                repeat = ease;
+                ease = undefined;
+            }
+
+            // [sprite.name.prop.to=value,duration]
+            // [sprite.name.prop.to=value,duration,ease,repeat]
+            // [sprite.name.prop.to=value,duration,repeat]
             var tags = tag.split('.');
             var name, property, isYoyo;
             if (IsEasePropertyTag(tags, prefix)) {
@@ -38,7 +45,7 @@ var OnParseEaseSpritePropertyTag = function (textPlayer, parser, config) {
                 EaseProperty,                // callback
                 [
                     name, property, value,
-                    duration, ease, isYoyo
+                    duration, ease, repeat, isYoyo
                 ],                            // params
                 textPlayer,                   // scope
             );

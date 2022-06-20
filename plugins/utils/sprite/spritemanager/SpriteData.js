@@ -42,22 +42,24 @@ class SpriteData {
         return this;
     }
 
-    easeProperty(property, value, duration, ease, isYoyo, onComplete) {
+    easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete) {
         var tweenTasks = this.tweens;
         if (tweenTasks.hasOwnProperty(property)) {
             tweenTasks[property].remove();
         }
 
+        var sprite = this.sprite;
         var config = {
-            targets: this.sprite,
+            targets: sprite,
             duration: duration,
             ease: ease,
+            repeat: repeat,
             yoyo: isYoyo,
             onComplete: function () {
                 tweenTasks[property].remove();
                 delete tweenTasks[property];
                 if (onComplete) {
-                    onComplete();
+                    onComplete(sprite, property);
                 }
             },
             onCompleteScope: this
