@@ -21,6 +21,17 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
+/*
+var AddUpdateEvent = function (gameObject, callback, scope) {
+    var eventEmitter = gameObject.scene.events;
+    eventEmitter.on('update', callback, scope);
+    gameObject.on('destroy', function () {
+        eventEmitter.off('update', callback, scope);
+    })
+    return gameObject;
+}
+*/
+
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
