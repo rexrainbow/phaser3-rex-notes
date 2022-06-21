@@ -9,13 +9,6 @@ declare namespace Rotate {
         speed?: number,
         timeScale?: number
     }
-
-    namespace Events {
-        type CompleteCallbackType = (
-            gameObject: Phaser.GameObjects.GameObject,
-            rotateTo: Rotate
-        ) => void;
-    }
 }
 
 declare class Rotate extends TickTask {

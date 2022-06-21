@@ -561,7 +561,10 @@
       }
     }, {
       key: "setEnable",
-      value: function setEnable(e) {
+      value: function setEnable(enable) {
+        if (enable == undefined) {
+          enable = true;
+        }
 
         this.enable = enable;
         return this;

@@ -5,6 +5,10 @@ Rotate game object continually with a steady speed.
 - Author: Rex
 - Behavior of game object
 
+## Live demos
+
+- [Change speed](https://codepen.io/rexrainbow/pen/Yzebrop)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/rotate)

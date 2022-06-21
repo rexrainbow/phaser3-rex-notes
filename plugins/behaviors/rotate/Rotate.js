@@ -39,9 +39,9 @@ class Rotate extends TickTask {
         }
     }
 
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
+    setEnable(enable) {
+        if (enable == undefined) {
+            enable = true;
         }
         this.enable = enable;
         return this;
