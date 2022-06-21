@@ -1000,14 +1000,16 @@
         this.metrics.descent = metrics.descent;
         this.metrics.fontSize = metrics.fontSize;
 
-        if (typeof font === 'string') {
-          this.fontFamily = font;
-          this.fontSize = '';
-          this.fontStyle = '';
-        } else {
-          this.fontFamily = GetValue$5(font, 'fontFamily', this.fontFamily);
-          this.fontSize = GetValue$5(font, 'fontSize', this.fontSize);
-          this.fontStyle = GetValue$5(font, 'fontStyle', this.fontStyle);
+        if (font) {
+          if (typeof font === 'string') {
+            this.fontFamily = font;
+            this.fontSize = '';
+            this.fontStyle = '';
+          } else {
+            this.fontFamily = GetValue$5(font, 'fontFamily', this.fontFamily);
+            this.fontSize = GetValue$5(font, 'fontSize', this.fontSize);
+            this.fontStyle = GetValue$5(font, 'fontStyle', this.fontStyle);
+          }
         }
 
         return this.parent.updateText(true);

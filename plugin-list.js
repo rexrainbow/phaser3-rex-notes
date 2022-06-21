@@ -75,6 +75,7 @@ module.exports = {
     'pathfollowerplugin': './plugins/pathfollower-plugin.js',
     'movetoplugin': './plugins/moveto-plugin.js',
     'rotatetoplugin': './plugins/rotateto-plugin.js',
+    'rotateplugin': './plugins/rotate-plugin.js',
     'flashplugin': './plugins/flash-plugin.js',
     'tintrgbplugin': './plugins/tintrgb-plugin.js',
     'polarcoordinateplugin': './plugins/polarcoordinate-plugin.js',

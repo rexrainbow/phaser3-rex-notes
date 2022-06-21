@@ -132,6 +132,7 @@ nav:
             - Random place: randomplace.md
         - Move to: moveto.md
         - Rotate to: rotateto.md
+        - Rotate: rotate.md
         - Flash: flash.md
         - Color:
             - TintRGB: tintrgb.md

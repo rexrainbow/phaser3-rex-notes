@@ -7,7 +7,9 @@ declare namespace RotateTo {
     type DirectionType = 0 | 1 | 2 | 'cw' | 'ccw';
 
     interface IConfig {
-        speed?: number
+        enable?: boolean,
+        speed?: number,
+        timeScale?: number
     }
 
     namespace Events {

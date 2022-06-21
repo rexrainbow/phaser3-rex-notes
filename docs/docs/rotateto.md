@@ -70,7 +70,9 @@ Rotate game object towards target position with a steady speed.
 
 ```javascript
 var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
-    // speed: 180
+    // speed: 180,
+    // enable: true,
+    // timeScale: 1,
 });
 ```
 

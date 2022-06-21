@@ -113,6 +113,7 @@
 1. [Real-time timers](realtimetimers.md): Start and counting timer by real-time timestamp.
 1. [Restorable data](restorabledata.md): Restorable data manager.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
+1. [Rotate](rotate.md): Rotate game object continually with a steady speed.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scale-down-destroy](scaledowndestroy.md): Scale down game object then destroy it.
 1. [Scale outer](scaleouter.md): Scroll and zoom camera to make default game window fit the display area, in RESIZE scale mode.
