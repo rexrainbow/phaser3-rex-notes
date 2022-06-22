@@ -284,62 +284,62 @@ Preserve word in a scene.
   scene.events.on("start", function () {});
   ```
 - Every tick
-  - Preupdate
-    ```javascript
-    scene.events.on("preupdate", function (time, delta) {});
-    ```
-  - Update
-    ```javascript
-    scene.events.on("update", function (time, delta) {});
-    ```
-  - Postupdate
-    ```javascript
-    scene.events.on("postupdate", function (time, delta) {});
-    ```
-  - Render
-    ```javascript
-    scene.events.on("render", function () {});
-    ```
+    - Preupdate
+        ```javascript
+        scene.events.on("preupdate", function (time, delta) {});
+        ```
+    - Update
+        ```javascript
+        scene.events.on("update", function (time, delta) {});
+        ```
+    - Postupdate
+        ```javascript
+        scene.events.on("postupdate", function (time, delta) {});
+        ```
+    - Render
+        ```javascript
+        scene.events.on("render", function () {});
+        ```
 - State changed
-  - Pause (from `scene.scene.pause()`)
-    ```javascript
-    scene.events.on("pause", function () {});
-    ```
-  - Resume (from `scene.scene.resume()`)
-    ```javascript
-    scene.events.on("resume", function () {});
-    ```
-  - Sleep (from `scene.scene.sleep()`)
-    ```javascript
-    scene.events.on("sleep", function () {});
-    ```
-  - Wake (from `scene.scene.wake()`)
-    ```javascript
-    scene.events.on("wake", function () {});
-    ```
-  - Stop/shutdown (from `scene.scene.stop()`)
-    ```javascript
-    scene.events.on("shutdown", function () {});
-    ```
-    - **Free-up any resources that may be in use by this scene**
+    - Pause (from `scene.scene.pause()`)
+        ```javascript
+        scene.events.on("pause", function () {});
+        ```
+    - Resume (from `scene.scene.resume()`)
+        ```javascript
+        scene.events.on("resume", function () {});
+        ```
+    - Sleep (from `scene.scene.sleep()`)
+        ```javascript
+        scene.events.on("sleep", function () {});
+        ```
+    - Wake (from `scene.scene.wake()`)
+        ```javascript
+        scene.events.on("wake", function () {});
+        ```
+    - Stop/shutdown (from `scene.scene.stop()`)
+        ```javascript
+        scene.events.on("shutdown", function () {});
+        ```
+        - **Free-up any resources that may be in use by this scene**
 - Destroy (from `scene.scene.remove()`)
-  ```javascript
-  scene.events.on("destroy", function () {});
-  ```
+    ```javascript
+    scene.events.on("destroy", function () {});
+    ```
 - Resize
-  ```javascript
-  scene.events.on("resize", function () {});
-  ```
+    ```javascript
+    scene.events.on("resize", function () {});
+    ```
 - Boot
-  ```javascript
-  scene.events.on("boot", function () {});
-  ```
+    ```javascript
+    scene.events.on("boot", function () {});
+    ```
 - Game object added to scene
-  - Add
-    ```javascript
-    scene.events.on("addedtoscene", function (gameObject, scene) {});
-    ```
-  - Remove
-    ```javascript
-    scene.events.on("removedfromscene", function (gameObject, scene) {});
-    ```
+    - Add
+        ```javascript
+        scene.events.on("addedtoscene", function (gameObject, scene) {});
+        ```
+    - Remove
+        ```javascript
+        scene.events.on("removedfromscene", function (gameObject, scene) {});
+        ```

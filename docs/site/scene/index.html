@@ -8563,7 +8563,7 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <li>Start (Before <code>scene.init()</code>)
   <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
-<li>Every tick</li>
+<li>Every tick<ul>
 <li>Preupdate
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;preupdate&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
@@ -8576,7 +8576,9 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <li>Render
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;render&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
-<li>State changed</li>
+</ul>
+</li>
+<li>State changed<ul>
 <li>Pause (from <code>scene.scene.pause()</code>)
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;pause&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
@@ -8595,22 +8597,26 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <li><strong>Free-up any resources that may be in use by this scene</strong></li>
 </ul>
 </li>
+</ul>
+</li>
 <li>Destroy (from <code>scene.scene.remove()</code>)
-  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Resize
-  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;resize&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;resize&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Boot
-  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;boot&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;boot&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
-<li>Game object added to scene</li>
+<li>Game object added to scene<ul>
 <li>Add
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;addedtoscene&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Remove
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;removedfromscene&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 
               
