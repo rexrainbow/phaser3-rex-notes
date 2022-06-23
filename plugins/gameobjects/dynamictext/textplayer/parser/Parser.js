@@ -1,4 +1,4 @@
-import BracketParser from '../../../../logic/bracketparser/BracketParser.js';
+import BracketParser from '../../../../bracketparser.js';
 import AddParseCallbacks from './AddParseCallbacks.js';
 import PreProcessSource from './PreProcessSource.js';
 
