@@ -492,18 +492,6 @@
       this._font; //  Set to defaults + user style
 
       this.setStyle(style, false, true);
-      var metrics = GetValue$5(style, 'metrics', false); //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
-      //  Doing this is reset if you then change the font of this TextStyle after creation
-
-      if (metrics) {
-        this.metrics = {
-          ascent: GetValue$5(metrics, 'ascent', 0),
-          descent: GetValue$5(metrics, 'descent', 0),
-          fontSize: GetValue$5(metrics, 'fontSize', 0)
-        };
-      } else {
-        this.metrics = MeasureText(this);
-      }
     }
 
     _createClass(TextStyle, [{
@@ -601,8 +589,21 @@
           this.parent.addImage(imageData);
         }
 
+        var metrics = GetValue$5(style, 'metrics', false); //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
+        //  Doing this is reset if you then change the font of this TextStyle after creation
+
+        if (metrics) {
+          this.metrics = {
+            ascent: GetValue$5(metrics, 'ascent', 0),
+            descent: GetValue$5(metrics, 'descent', 0),
+            fontSize: GetValue$5(metrics, 'fontSize', 0)
+          };
+        } else if (updateText || !this.metrics) {
+          this.metrics = MeasureText(this);
+        }
+
         if (updateText) {
-          return this.update(true);
+          return this.parent.updateText();
         } else {
           return this.parent;
         }

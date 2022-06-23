@@ -35,6 +35,8 @@ import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js'
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
+import ParseContentOff from './content/OnParseContentOff.js';
+import ParseContentOn from './content/OnParseContentOn.js';
 import ParseContent from './content/OnParseContent.js';
 
 const ParseCallbacks = [
@@ -59,7 +61,7 @@ const ParseCallbacks = [
     ParseCustomTag,
 
     ParseNewLineTag,
-
+    ParseContentOff, ParseContentOn,
     ParseContent
 ];
 

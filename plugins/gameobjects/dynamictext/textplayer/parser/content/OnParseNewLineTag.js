@@ -2,7 +2,7 @@ import AppendTextBase from '../../../dynamictext/methods/AppendText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseBoldTag = function (textPlayer, parser, config) {
+var OnParseNewLineTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.r', 'r');
     parser
         .on(`+${tagName}`, function () {
@@ -14,4 +14,4 @@ var OnParseBoldTag = function (textPlayer, parser, config) {
         })
 }
 
-export default OnParseBoldTag;
+export default OnParseNewLineTag;

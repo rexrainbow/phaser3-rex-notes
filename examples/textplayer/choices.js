@@ -16,11 +16,13 @@ class Demo extends Phaser.Scene {
         var content = `
 Prelogue... Prelogue... Prelogue...[r]
 
+[content.off]
 [question=A]Question
     [choice=a,0]Choice0[/choice]
     [choice=a,10]Choice1[/choice]
     [choice=a,3]Choice2[/choice]
 [/question]
+[content.on]
 
 Postlogue... Postlogue... Postlogue...
 `
@@ -98,8 +100,6 @@ var OnParseQuestionTag = function (textPlayer) {
     textPlayer
         // Build question
         .on('parser.+question', function (parser, id) {
-            // Content between [question]...[/question] will be ignored
-            parser.setContentOutputEnable(false);
             question = {
                 id: id,
                 choices: []
@@ -112,8 +112,7 @@ var OnParseQuestionTag = function (textPlayer) {
 
             question.title = content.trimEnd();
         })
-        .on('parser.-question', function (parser, param) {
-            parser.setContentOutputEnable(true);
+        .on('parser.-question', function (parser, param) {          
             if (!question) {
                 return
             }
