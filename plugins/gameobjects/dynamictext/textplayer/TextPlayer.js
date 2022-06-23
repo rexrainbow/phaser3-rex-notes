@@ -33,22 +33,22 @@ class TextPlayer extends DynamicText {
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
 
         this._imageManager = undefined;
-        var imageData = GetValue(config, 'images', undefined);
-        if (imageData) {
+        var imageData = GetValue(config, 'images');
+        if (imageData !== false) {
             this.addImage(imageData);
         }
 
         this._soundManager = undefined;
-        var soundManagerConfig = GetValue(config, 'sounds', undefined);
-        if (soundManagerConfig) {
+        var soundManagerConfig = GetValue(config, 'sounds');
+        if (soundManagerConfig !== false) {
             this._soundManager = new SoundManager(this.scene, soundManagerConfig);
         }
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
         this._spriteManager = undefined;
-        var spriteManagerConfig = GetValue(config, 'sprites', undefined);
-        if (spriteManagerConfig) {
+        var spriteManagerConfig = GetValue(config, 'sprites');
+        if (spriteManagerConfig !== false) {
             this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
         }
 
