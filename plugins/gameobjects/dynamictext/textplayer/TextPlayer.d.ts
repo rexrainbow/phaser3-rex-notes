@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
 import DynamicText from "../dynamictext/DynamicText";
-import Parser from '../../../logic/bracketparser/BracketParser';
+import Parser from '../../../bracketparser';
 
 export default TextPlayer;
 
