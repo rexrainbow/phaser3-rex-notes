@@ -535,6 +535,11 @@ These lines will be skipped :
 
 New line symbol `'\n'` will be removed, use `[r]` to insert a new line character.
 
+#### Content output switch
+
+- Turn off content output : `[content.off]`
+- Turn on content output : `[content.on]`
+
 ##### Content output enable
 
 - Content won't output if `parser.setContentOutputEnable(false)` under [custom tag events](textplayer.md#custom-tag)
