@@ -294,9 +294,7 @@ var txt = scene.add.rexTextPlayer({
     - `sounds.bgm.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
-    - `false` : No sound manager.
 - `images` : Configuration of images.
-    - `false` : No image manager.
 - `sprite` : Configuration of sprites.
     - `sprite.createCallback` : 
         - `'sprite'` : Create sprite game object. Default behavior.
@@ -310,7 +308,6 @@ var txt = scene.add.rexTextPlayer({
     - `sprite.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
         - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
-    - `false` : No sprite manager.
 - `nextPageInput` : Wait condition to type next page
     - `null`, or `false` : Stop tying next page. Default behavior
         - Typing next manually via `txt.typingNextPage()`.
