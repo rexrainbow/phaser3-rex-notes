@@ -4,12 +4,12 @@ export default {
             return this;
         }
 
-        var spriteData = this.get(name);
-        delete this.sprites[name];
+        var bob = this.get(name);
+        delete this.bobs[name];
 
-        this.removedSprites.push(spriteData.sprite);
+        this.removedGOs.push(bob.gameObject);
         if (this.fadeTime > 0) {
-            spriteData.easeProperty(
+            bob.easeProperty(
                 'tintGray',                 // property
                 0,                          // to value
                 this.fadeTime,              // duration
@@ -17,20 +17,20 @@ export default {
                 0,                          // repeat
                 false,                      // yoyo
                 function () {               // onComplete
-                    spriteData.destroy();
+                    bob.destroy();
                 }
             )
 
         } else {
-            spriteData.destroy();
+            bob.destroy();
 
         }
         return this;
     },
 
     removeAll() {
-        var sprites = this.sprites;
-        for (var name in sprites) {
+        var bobs = this.bobs;
+        for (var name in bobs) {
             this.remove(name);
         }
         return this;
@@ -40,14 +40,14 @@ export default {
         if (destroyChild === undefined) {
             destroyChild = true;
         }
-        var sprites = this.sprites;
-        for (var name in sprites) {
+        var bobs = this.bobs;
+        for (var name in bobs) {
             if (destroyChild) {
-                sprites[name].destroy();
+                bobs[name].destroy();
             }
-            delete sprites[name];
+            delete bobs[name];
         }
-        this.removedSprites.length = 0;
+        this.removedGOs.length = 0;
         return this;
     }
 }
