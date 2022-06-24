@@ -78,9 +78,7 @@ class BracketParser {
     }
 
     setSource(source) {
-        var data = { source: source };
-        this.emit('preprocess', data);
-        this.source = data.source;
+        this.source = source;
         return this;
     }
 

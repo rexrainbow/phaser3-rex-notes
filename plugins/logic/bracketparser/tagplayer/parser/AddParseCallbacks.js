@@ -24,7 +24,6 @@ import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
 import ParseContent from './content/OnParseContent.js';
-import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 
 const ParseCallbacks = [
@@ -40,7 +39,7 @@ const ParseCallbacks = [
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
-    ParseContent, ParseNewLineTag,
+    ParseContent,
 
     ParseCustomTag,
 ];

@@ -52,8 +52,8 @@ class Demo extends Phaser.Scene {
 
 [wait=1000]
 [text]
-Hello[r]
-Phaser[r]
+Hello\\n
+Phaser\\n
 World
 
 [wait=sprite.dude.x][/sprite.dude]
@@ -78,6 +78,7 @@ World
                 if (!print) {
                     return;
                 }
+                content = content.replaceAll('\\n', '\n')
                 print.setText(content);
             })
             .on('-text', function () {
