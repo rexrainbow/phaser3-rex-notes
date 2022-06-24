@@ -56,7 +56,7 @@ const ParseCallbacks = [
 
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
-    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag, // Add ParseSetSpritePropertyTag later    
+    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
     ParseCustomTag,
 
