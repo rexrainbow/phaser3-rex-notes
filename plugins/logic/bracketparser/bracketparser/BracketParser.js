@@ -1,7 +1,7 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetValue from '../../utils/object/GetValue.js';
-import EscapeRegex from '../../utils/string/EscapeRegex.js';
-import DefaultValueConverter from '../../utils/string/TypeConvert.js';
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../../utils/object/GetValue.js';
+import EscapeRegex from '../../../utils/string/EscapeRegex.js';
+import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
 const DefaultTagExpression = `[a-z0-9-_.]+`;

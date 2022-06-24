@@ -1,2 +1,2 @@
-import BracketParser from './logic/bracketparser/BracketParser.js';
+import BracketParser from './logic/bracketparser/bracketparser/BracketParser.js';
 export default BracketParser;
