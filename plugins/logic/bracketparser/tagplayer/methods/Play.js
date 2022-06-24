@@ -1,9 +1,5 @@
 var Play = function (content) {
-    this.parser
-        .once('complete', function () {
-            this.emit('complete');
-        }, this)
-        .start(content);
+    this.parser.start(content);
     return this;
 }
 

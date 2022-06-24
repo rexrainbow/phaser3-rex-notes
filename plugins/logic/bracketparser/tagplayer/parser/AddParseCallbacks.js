@@ -49,6 +49,15 @@ var AddParseCallbacks = function (tagPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
         ParseCallbacks[i](tagPlayer, parser, config);
     }
+
+    parser
+        .on('start', function () {
+            tagPlayer.emit('start', parser);
+        })
+        .on('complete', function () {
+            tagPlayer.emit('complete', parser);
+        })
+
 }
 
 export default AddParseCallbacks;

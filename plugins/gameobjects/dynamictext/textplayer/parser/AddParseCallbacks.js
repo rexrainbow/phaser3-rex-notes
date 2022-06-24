@@ -33,11 +33,11 @@ import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
-import ParseCustomTag from './custom/OnParseCustomTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseContentOff from './content/OnParseContentOff.js';
 import ParseContentOn from './content/OnParseContentOn.js';
 import ParseContent from './content/OnParseContent.js';
+import ParseCustomTag from './custom/OnParseCustomTag.js';
 
 const ParseCallbacks = [
     ParseColorTag, ParseStrokeColorTag,
@@ -58,11 +58,11 @@ const ParseCallbacks = [
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
-    ParseCustomTag,
-
     ParseNewLineTag,
     ParseContentOff, ParseContentOn,
-    ParseContent
+    ParseContent,
+
+    ParseCustomTag,
 ];
 
 var AddParseCallbacks = function (textPlayer, parser, config) {
