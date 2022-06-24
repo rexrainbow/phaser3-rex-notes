@@ -1,4 +1,20 @@
 import ParseWaitTag from './wait/OnParseWaitTag.js';
+import ParsePlaySoundEffectTag from './soundeffect/OnParsePlaySoundEffectTag.js';
+import ParseFadeInSoundEffectTag from './soundeffect/OnParseFadeInSoundEffectTag.js';
+import ParseFadeOutSoundEffectTag from './soundeffect/OnParseFadeOutSoundEffectTag.js';
+import ParseSetSoundEffectVolumeTag from './soundeffect/OnParseSetSoundEffectVolumeTag.js';
+import ParsePlayBackgroundMusicTag from './backgroundmusic/OnParsePlayBackgroundMusicTag.js';
+import ParseFadeInBackgroundMusicTag from './backgroundmusic/OnParseFadeInBackgroundMusicTag.js';
+import ParseFadeOutBackgroundMusicTag from './backgroundmusic/OnParseFadeOutBackgroundMusicTag.js';
+import ParseCrossFadeBackgroundMusicTag from './backgroundmusic/OnParseCrossFadeBackgroundMusicTag.js';
+import ParsePauseBackgroundMusicTag from './backgroundmusic/OnParsePauseBackgroundMusicTag.js';
+import ParseFadeInCameraTag from './camera/OnParseFadeInCameraTag.js';
+import ParseFadeOutCameraTag from './camera/OnParseFadeOutCameraTag.js';
+import ParseShakeCameraTag from './camera/OnParseShakeCameraTag.js';
+import ParseFlashCameraTag from './camera/OnParseFlashCameraTag.js';
+import ParseZoomCameraTag from './camera/OnParseZoomCameraTag.js';
+import ParseRotateCameraTag from './camera/OnParseRotateCameraTag.js';
+import ParseScrollCameraTag from './camera/OnParseScrollCameraTag.js';
 import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
 import ParseRemoveAllSpriteTag from './sprites/OnParseRemoveAllSpritesTag.js';
 import ParseSetTextureTag from './sprites/OnParseSetTextureTag.js';
@@ -12,9 +28,14 @@ const ParseCallbacks = [
 
     ParseWaitTag,
 
+    ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
+    ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
+
+    ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag, ParseRotateCameraTag, ParseScrollCameraTag,
+
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
-    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,   
+    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
 ];
 
