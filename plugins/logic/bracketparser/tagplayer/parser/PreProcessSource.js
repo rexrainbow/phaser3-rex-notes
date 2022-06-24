@@ -21,7 +21,7 @@ var PreProcess = function (parser, source) {
             lines[i] = '';
         }
     }
-    // Use [r] to put \n
+
     return lines.join('');
 }
 

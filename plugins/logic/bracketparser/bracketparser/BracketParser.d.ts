@@ -37,9 +37,13 @@ declare class BracketParser extends EventEmitter {
     start(text: string): this;
     pause(): this;
     next(): this;
+    restart(): this;
 
     skipEvent(): this;
 
     readonly isRunning: boolean;
     readonly isPaused: boolean;
+
+    getTagOnRegString(tagExpression?: string, valueExpression?: string): string;
+    getTagOffRegString(tagExpression?: string): string;
 }

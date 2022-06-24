@@ -50,14 +50,44 @@ class Demo extends Phaser.Scene {
 [sprite.knight.play=idle,guard]
 [sprite.knight.x=400][sprite.knight.y=300]
 
+[wait=1000]
+[text]
+Hello[r]
+Phaser[r]
+World
+
 [wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
 
 // Wait until all sprites are fade out
 [/sprite][wait=sprite]
 
+[/text]
 `
+
+        var print;
         var tagPlayer = new TagPlayer(this);
+        tagPlayer
+            .on('+text', function () {
+                if (print) {
+                    return;
+                }
+                print = this.add.text(0, 0, '')
+            }, this)
+            .on('+text#content', function (parser, content) {
+                if (!print) {
+                    return;
+                }
+                print.setText(content);
+            })
+            .on('-text', function () {
+                if (!print) {
+                    return;
+                }
+                print.destroy();
+                print = undefined;
+            })
+
         tagPlayer
             .playPromise(content)
             .then(function () {
