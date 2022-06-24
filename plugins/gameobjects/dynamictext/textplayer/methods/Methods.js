@@ -8,6 +8,7 @@ import TypingNextPage from './TypingNextPage.js';
 import Pause from './Pause.js';
 import PauseTyping from './PauseTyping.js';
 import Resume from './Resume.js';
+import Wait from './Wait.js';
 import TypingSpeedMethods from './TypingSpeedMethods.js';
 import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
@@ -25,6 +26,7 @@ var Methods = {
     pause: Pause,
     pauseTyping: PauseTyping,
     resume: Resume,
+    wait: Wait,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setIgnoreNextPageInput: SetIgnoreNextPageInput,

@@ -1,15 +1,22 @@
 import Parser from './parser/Parser.js';
+import Timeline from '../../../time/progresses/Timeline.js';
 import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
 import SpriteManager from '../../../utils/sprite/spritemanager/SpriteManager.js';
 import Methods from './methods/Methods.js';
+import ClearEvents from './methods/utils/ClearEvents.js';
 
+const EventEmitter = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TagPlayer {
+class TagPlayer extends EventEmitter {
     constructor(scene, config) {
+        super();
+
         this.scene = scene;
 
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
+
+        this.timeline = new Timeline(this);
 
         this._soundManager = undefined;
         var soundManagerConfig = GetValue(config, 'sounds', undefined);
@@ -24,6 +31,12 @@ class TagPlayer {
         if (spriteManagerConfig) {
             this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
         }
+
+        this.setClickTarget(GetValue(config, 'clickTarget', scene));  // this.clickEE
+    }
+
+    get isPlaying() {
+        return this.parser.isRunning;
     }
 
     get soundManager() {
@@ -45,6 +58,8 @@ class TagPlayer {
         if (!this.scene) {
             return;
         }
+
+        ClearEvents(this);
 
         if (this._soundManager) {
             this._soundManager.destroy(fromScene);

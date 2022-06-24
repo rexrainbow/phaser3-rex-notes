@@ -5,7 +5,7 @@ import PreProcessSource from './PreProcessSource.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Parser extends BracketParser {
-    constructor(textPlayer, config) {
+    constructor(tagPlayer, config) {
         if (config === undefined) {
             config = {};
         }
@@ -14,7 +14,7 @@ class Parser extends BracketParser {
         }
         super(config);
 
-        AddParseCallbacks(textPlayer, this, config);
+        AddParseCallbacks(tagPlayer, this, config);
 
         this.setCommentLineStartSymbol(GetValue(config, 'comment', '//'));
     }

@@ -49,9 +49,20 @@ class Demo extends Phaser.Scene {
 // knight sprite
 [sprite.knight.play=idle,guard]
 [sprite.knight.x=400][sprite.knight.y=300]
+
+[wait=sprite.dude.x][/sprite.dude]
+[sprite.knight.stop]
+
+// Wait until all sprites are fade out
+[/sprite][wait=sprite]
+
 `
         var tagPlayer = new TagPlayer(this);
-        tagPlayer.play(content);
+        tagPlayer
+            .playPromise(content)
+            .then(function () {
+                console.log('Complete')
+            })
     }
 
     update() { }
