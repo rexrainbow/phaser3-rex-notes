@@ -11959,13 +11959,19 @@
     clearMask: function clearMask(destroyMask) {
       if (destroyMask === undefined) {
         destroyMask = false;
-      }
+      } // Clear current mask
+
+
+      this._mask = null; // Clear children mask
+
+      this.children.forEach(function (child) {
+        child.clearMask(false);
+      });
 
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
 
-      this.mask = null;
       return this;
     }
   };
@@ -16550,7 +16556,7 @@
     }
   };
 
-  var IsInTouching = function IsInTouching(pointer, gameObject) {
+  var IsInTouching$1 = function IsInTouching(pointer, gameObject) {
     if (gameObject === undefined) {
       gameObject = this;
     }
@@ -19630,7 +19636,7 @@
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
     setAnchor: SetAnchor,
-    isInTouching: IsInTouching,
+    isInTouching: IsInTouching$1,
     pointToChild: PointToChild$1,
     setDraggable: SetDraggable,
     setChildrenInteractive: SetChildrenInteractiveWrap,
@@ -29432,7 +29438,7 @@
     return CreateAnySizer(scene, data, view, styles, customBuilders, Pages);
   };
 
-  var DefaultTransitCallbacks = {
+  var DefaultTransitCallbacks$1 = {
     popUp: function popUp(gameObject, duration) {
       gameObject.popUp(duration);
     },
@@ -30045,11 +30051,11 @@
 
         switch (callback) {
           case TransitionMode.popUp:
-            callback = DefaultTransitCallbacks.popUp;
+            callback = DefaultTransitCallbacks$1.popUp;
             break;
 
           case TransitionMode.fadeIn:
-            callback = DefaultTransitCallbacks.fadeIn;
+            callback = DefaultTransitCallbacks$1.fadeIn;
             break;
         }
 
@@ -30070,11 +30076,11 @@
 
         switch (callback) {
           case TransitionMode.scaleDown:
-            callback = DefaultTransitCallbacks.scaleDown;
+            callback = DefaultTransitCallbacks$1.scaleDown;
             break;
 
           case TransitionMode.fadeOut:
-            callback = DefaultTransitCallbacks.fadeOut;
+            callback = DefaultTransitCallbacks$1.fadeOut;
             break;
         }
 
@@ -31724,6 +31730,78 @@
     return gameObject;
   };
 
+  var GetEaseConfig = function GetEaseConfig(easeConfig, menu) {
+    if (easeConfig.sameOrientation) {
+      easeConfig.orientation = menu.orientation;
+    } else {
+      easeConfig.orientation = menu.orientation === 0 ? 1 : 0;
+    }
+
+    return easeConfig;
+  };
+
+  var DefaultTransitCallbacks = {
+    popUp: function popUp(menu, duration) {
+      menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
+    },
+    scaleDownDestroy: function scaleDownDestroy(menu, duration) {
+      // Don't destroy here
+      menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
+    }
+  };
+
+  var SetTransitInCallback = function SetTransitInCallback(callback) {
+    if (callback === undefined) {
+      callback = DefaultTransitCallbacks.popUp;
+    }
+
+    this.transitInCallback = callback; // callback = function(gameObject, duration) {}
+
+    return this;
+  };
+
+  var SetTransitOutCallback = function SetTransitOutCallback(callback) {
+    if (callback === undefined) {
+      callback = DefaultTransitCallbacks.scaleDownDestroy;
+    }
+
+    this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
+
+    return this;
+  };
+
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay, // delay
+    sceneEE.once, // callback
+    [// Event name of scene
+    'postupdate', // Callback
+    function () {
+      callback.call(scope, args);
+    }], // args
+    sceneEE // scope, scene's EE
+    );
+    return timer;
+  };
+
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.timer) {
+        this.timer.remove(false);
+        this.timer = undefined;
+      }
+
+      return this;
+    }
+  };
+
   var ExpandSubMenu = function ExpandSubMenu(parentButton, items) {
     var subMenu = this.childrenMap.subMenu; // Submenu already expand
 
@@ -31759,20 +31837,15 @@
     return this;
   };
 
-  var GetEaseConfig = function GetEaseConfig(easeConfig, menu) {
-    if (easeConfig.sameOrientation) {
-      easeConfig.orientation = menu.orientation;
-    } else {
-      easeConfig.orientation = menu.orientation === 0 ? 1 : 0;
-    }
-
-    return easeConfig;
-  };
-
   var Collapse = function Collapse() {
-    this.root.emit('collapse', this, this.parentButton, this.root);
-    this.scaleDownDestroy(GetEaseConfig(this.root.easeOut, this));
-    this.collapseSubMenu();
+    var root = this.root;
+    root.emit('collapse', this, this.parentButton, root);
+    var duration = root.easeOut.duration; // Don't destroy under transitOutCallback
+
+    root.transitOutCallback(this, duration);
+    this.collapseSubMenu(); // Destroy by delayCall
+
+    this.delayCall(duration, this.destroy, this);
     return this;
   };
 
@@ -31789,11 +31862,25 @@
     return this;
   };
 
+  var IsInTouching = function IsInTouching(pointer) {
+    if (IsInTouching$1.call(this, pointer)) {
+      return true;
+    } else if (this.childrenMap.subMenu) {
+      return this.childrenMap.subMenu.isInTouching(pointer);
+    } else {
+      return false;
+    }
+  };
+
   var Methods = {
+    setTransitInCallback: SetTransitInCallback,
+    setTransitOutCallback: SetTransitOutCallback,
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
-    collapseSubMenu: CollapseSubMenu
+    collapseSubMenu: CollapseSubMenu,
+    isInTouching: IsInTouching
   };
+  Object.assign(Methods, DelayCallMethods);
 
   var CreateBackground = function CreateBackground(scene, items, callback, scope) {
     var background;
@@ -31877,6 +31964,37 @@
     }, menu);
   };
 
+  var ParseEaseConfig = function ParseEaseConfig(menu, easeConfig) {
+    if (typeof easeConfig === 'number') {
+      easeConfig = {
+        duration: easeConfig
+      };
+    }
+
+    if (easeConfig.hasOwnProperty('orientation') && easeConfig.orientation !== undefined) {
+      easeConfig.sameOrientation = GetOrientationMode(easeConfig.orientation) === menu.orientation;
+    } else {
+      easeConfig.sameOrientation = true;
+    }
+
+    easeConfig.destroy = false;
+    return easeConfig;
+  };
+
+  var Expand = function Expand() {
+    var root = this.root;
+    var duration = root.easeIn.duration; // Ease in menu
+
+    root.transitInCallback(this, duration);
+
+    if (this !== this.root) {
+      this.delayCall(duration, function () {
+        // Pass event to root menu object
+        this.root.emit('popup.complete', this);
+      }, this);
+    }
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var Menu = /*#__PURE__*/function (_Buttons) {
@@ -31918,6 +32036,7 @@
       _this.root = rootMenu === undefined ? _assertThisInitialized(_this) : rootMenu;
       _this.parentMenu = parentMenu;
       _this.parentButton = parentButton;
+      _this.timer = undefined;
 
       var isRootMenu = _this.root === _assertThisInitialized(_this); // Root menu
 
@@ -31950,7 +32069,12 @@
         _this.expandEventName = GetValue(config, 'expandEvent', 'button.click'); // Transition
 
         _this.easeIn = ParseEaseConfig(_assertThisInitialized(_this), GetValue(config, 'easeIn', 0));
-        _this.easeOut = ParseEaseConfig(_assertThisInitialized(_this), GetValue(config, 'easeOut', 0)); // Callbacks
+        _this.easeOut = ParseEaseConfig(_assertThisInitialized(_this), GetValue(config, 'easeOut', 0));
+
+        _this.setTransitInCallback(GetValue(config, 'transitIn'));
+
+        _this.setTransitOutCallback(GetValue(config, 'transitOut')); // Callbacks
+
 
         _this.createBackgroundCallback = createBackgroundCallback;
         _this.createBackgroundCallbackScope = createBackgroundCallbackScope;
@@ -32018,51 +32142,28 @@
 
       _this.pushIntoBounds(_this.root.bounds);
 
-      MenuSetInteractive(_assertThisInitialized(_this)); // Ease in menu
+      MenuSetInteractive(_assertThisInitialized(_this)); // Expand this menu
 
-      _this.popUp(GetEaseConfig(_this.root.easeIn, _assertThisInitialized(_this)));
-
-      _this.once('popup.complete', function () {
-        // Pass event to root menu object
-        if (this !== this.root) {
-          this.root.emit('popup.complete', this);
-        }
-      }, _assertThisInitialized(_this));
-
+      Expand.call(_assertThisInitialized(_this));
       return _this;
     }
 
     _createClass(Menu, [{
-      key: "isInTouching",
-      value: function isInTouching(pointer) {
-        if (_get(_getPrototypeOf(Menu.prototype), "isInTouching", this).call(this, pointer)) {
-          return true;
-        } else if (this.childrenMap.subMenu) {
-          return this.childrenMap.subMenu.isInTouching(pointer);
-        } else {
-          return false;
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
         }
+
+        _get(_getPrototypeOf(Menu.prototype), "destroy", this).call(this, fromScene);
+
+        this.removeDelayCall();
       }
     }]);
 
     return Menu;
   }(Buttons$1);
-
-  var ParseEaseConfig = function ParseEaseConfig(menu, easeConfig) {
-    if (typeof easeConfig === 'number') {
-      easeConfig = {
-        duration: easeConfig
-      };
-    }
-
-    if (easeConfig.hasOwnProperty('orientation') && easeConfig.orientation !== undefined) {
-      easeConfig.sameOrientation = GetOrientationMode(easeConfig.orientation) === menu.orientation;
-    } else {
-      easeConfig.sameOrientation = true;
-    }
-
-    return easeConfig;
-  };
 
   var SUBMENU_LEFT = 2;
   var SUBMENU_RIGHT = 0;

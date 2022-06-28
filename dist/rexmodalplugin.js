@@ -730,7 +730,7 @@
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
 
-  var Timer$1 = /*#__PURE__*/function () {
+  var Timer = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
 
@@ -935,7 +935,7 @@
       _classCallCheck(this, TimerTickTask);
 
       _this = _super.call(this, parent, config);
-      _this.timer = new Timer$1(); // boot() later 
+      _this.timer = new Timer(); // boot() later 
 
       return _this;
     } // override
@@ -2014,8 +2014,24 @@
     return State;
   }(FSM);
 
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay, // delay
+    sceneEE.once, // callback
+    [// Event name of scene
+    'postupdate', // Callback
+    function () {
+      callback.call(scope, args);
+    }], // args
+    sceneEE // scope, scene's EE
+    );
+    return timer;
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var Timer = Phaser.Time.TimerEvent;
+  Phaser.Time.TimerEvent;
 
   var Modal$1 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Modal, _ComponentBase);
@@ -2058,7 +2074,7 @@
       _this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
 
       _this.destroyParent = GetValue(config, 'destroy', true);
-      _this.timer = new Timer();
+      _this.timer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
         eventEmitter: false
       });
@@ -2156,12 +2172,7 @@
       key: "delayCall",
       value: function delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        var sceneEE = this.scene.sys.events;
-        this.timer = this.scene.time.delayedCall(delay, // delay
-        sceneEE.once, // callback
-        ['postupdate', callback, scope], // args
-        sceneEE // scope
-        );
+        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
         return this;
       }
     }, {

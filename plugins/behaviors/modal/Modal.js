@@ -40,7 +40,7 @@ class Modal extends ComponentBase {
         this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
         this.destroyParent = GetValue(config, 'destroy', true);
 
-        this.timer = new Timer();
+        this.timer = undefined;
         this._state = new State(this, { eventEmitter: false });
         this.closeEventData = undefined;
 

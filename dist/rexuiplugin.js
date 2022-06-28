@@ -9048,13 +9048,19 @@
     clearMask: function clearMask(destroyMask) {
       if (destroyMask === undefined) {
         destroyMask = false;
-      }
+      } // Clear current mask
+
+
+      this._mask = null; // Clear children mask
+
+      this.children.forEach(function (child) {
+        child.clearMask(false);
+      });
 
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
 
-      this.mask = null;
       return this;
     }
   };
@@ -14839,7 +14845,7 @@
 
   var Clamp$b = Phaser.Math.Clamp;
 
-  var Timer$2 = /*#__PURE__*/function () {
+  var Timer$1 = /*#__PURE__*/function () {
     function Timer(timeline, config) {
       _classCallCheck(this, Timer);
 
@@ -15056,7 +15062,7 @@
         var timer = this.timerPool.allocate();
 
         if (!timer) {
-          timer = new Timer$2(this, config);
+          timer = new Timer$1(this, config);
         } else {
           timer.setTimeline(this).reset(config);
         }
@@ -15281,7 +15287,7 @@
   var GetValue$1H = Phaser.Utils.Objects.GetValue;
   var Clamp$a = Phaser.Math.Clamp;
 
-  var Timer$1 = /*#__PURE__*/function () {
+  var Timer = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
 
@@ -15486,7 +15492,7 @@
       _classCallCheck(this, TimerTickTask);
 
       _this = _super.call(this, parent, config);
-      _this.timer = new Timer$1(); // boot() later 
+      _this.timer = new Timer(); // boot() later 
 
       return _this;
     } // override
@@ -22174,7 +22180,7 @@
 
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
-      _this.timer = new Timer$1();
+      _this.timer = new Timer();
 
       _this.resetFromJSON(config);
 
@@ -22736,7 +22742,7 @@
     }
   };
 
-  var IsInTouching = function IsInTouching(pointer, gameObject) {
+  var IsInTouching$1 = function IsInTouching(pointer, gameObject) {
     if (gameObject === undefined) {
       gameObject = this;
     }
@@ -25982,7 +25988,7 @@
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
     setAnchor: SetAnchor,
-    isInTouching: IsInTouching,
+    isInTouching: IsInTouching$1,
     pointToChild: PointToChild$1,
     setDraggable: SetDraggable,
     setChildrenInteractive: SetChildrenInteractiveWrap,
@@ -37747,6 +37753,78 @@
   });
   SetValue(window, 'RexPlugins.UI.GridTable', GridTable);
 
+  var GetEaseConfig = function GetEaseConfig(easeConfig, menu) {
+    if (easeConfig.sameOrientation) {
+      easeConfig.orientation = menu.orientation;
+    } else {
+      easeConfig.orientation = menu.orientation === 0 ? 1 : 0;
+    }
+
+    return easeConfig;
+  };
+
+  var DefaultTransitCallbacks$2 = {
+    popUp: function popUp(menu, duration) {
+      menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
+    },
+    scaleDownDestroy: function scaleDownDestroy(menu, duration) {
+      // Don't destroy here
+      menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
+    }
+  };
+
+  var SetTransitInCallback = function SetTransitInCallback(callback) {
+    if (callback === undefined) {
+      callback = DefaultTransitCallbacks$2.popUp;
+    }
+
+    this.transitInCallback = callback; // callback = function(gameObject, duration) {}
+
+    return this;
+  };
+
+  var SetTransitOutCallback = function SetTransitOutCallback(callback) {
+    if (callback === undefined) {
+      callback = DefaultTransitCallbacks$2.scaleDownDestroy;
+    }
+
+    this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
+
+    return this;
+  };
+
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay, // delay
+    sceneEE.once, // callback
+    [// Event name of scene
+    'postupdate', // Callback
+    function () {
+      callback.call(scope, args);
+    }], // args
+    sceneEE // scope, scene's EE
+    );
+    return timer;
+  };
+
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.timer) {
+        this.timer.remove(false);
+        this.timer = undefined;
+      }
+
+      return this;
+    }
+  };
+
   var ExpandSubMenu = function ExpandSubMenu(parentButton, items) {
     var subMenu = this.childrenMap.subMenu; // Submenu already expand
 
@@ -37782,20 +37860,15 @@
     return this;
   };
 
-  var GetEaseConfig = function GetEaseConfig(easeConfig, menu) {
-    if (easeConfig.sameOrientation) {
-      easeConfig.orientation = menu.orientation;
-    } else {
-      easeConfig.orientation = menu.orientation === 0 ? 1 : 0;
-    }
-
-    return easeConfig;
-  };
-
   var Collapse = function Collapse() {
-    this.root.emit('collapse', this, this.parentButton, this.root);
-    this.scaleDownDestroy(GetEaseConfig(this.root.easeOut, this));
-    this.collapseSubMenu();
+    var root = this.root;
+    root.emit('collapse', this, this.parentButton, root);
+    var duration = root.easeOut.duration; // Don't destroy under transitOutCallback
+
+    root.transitOutCallback(this, duration);
+    this.collapseSubMenu(); // Destroy by delayCall
+
+    this.delayCall(duration, this.destroy, this);
     return this;
   };
 
@@ -37812,11 +37885,25 @@
     return this;
   };
 
+  var IsInTouching = function IsInTouching(pointer) {
+    if (IsInTouching$1.call(this, pointer)) {
+      return true;
+    } else if (this.childrenMap.subMenu) {
+      return this.childrenMap.subMenu.isInTouching(pointer);
+    } else {
+      return false;
+    }
+  };
+
   var Methods$3 = {
+    setTransitInCallback: SetTransitInCallback,
+    setTransitOutCallback: SetTransitOutCallback,
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
-    collapseSubMenu: CollapseSubMenu
+    collapseSubMenu: CollapseSubMenu,
+    isInTouching: IsInTouching
   };
+  Object.assign(Methods$3, DelayCallMethods);
 
   var CreateBackground = function CreateBackground(scene, items, callback, scope) {
     var background;
@@ -37900,6 +37987,37 @@
     }, menu);
   };
 
+  var ParseEaseConfig = function ParseEaseConfig(menu, easeConfig) {
+    if (typeof easeConfig === 'number') {
+      easeConfig = {
+        duration: easeConfig
+      };
+    }
+
+    if (easeConfig.hasOwnProperty('orientation') && easeConfig.orientation !== undefined) {
+      easeConfig.sameOrientation = GetOrientationMode(easeConfig.orientation) === menu.orientation;
+    } else {
+      easeConfig.sameOrientation = true;
+    }
+
+    easeConfig.destroy = false;
+    return easeConfig;
+  };
+
+  var Expand = function Expand() {
+    var root = this.root;
+    var duration = root.easeIn.duration; // Ease in menu
+
+    root.transitInCallback(this, duration);
+
+    if (this !== this.root) {
+      this.delayCall(duration, function () {
+        // Pass event to root menu object
+        this.root.emit('popup.complete', this);
+      }, this);
+    }
+  };
+
   var GetValue$u = Phaser.Utils.Objects.GetValue;
 
   var Menu = /*#__PURE__*/function (_Buttons) {
@@ -37941,6 +38059,7 @@
       _this.root = rootMenu === undefined ? _assertThisInitialized(_this) : rootMenu;
       _this.parentMenu = parentMenu;
       _this.parentButton = parentButton;
+      _this.timer = undefined;
 
       var isRootMenu = _this.root === _assertThisInitialized(_this); // Root menu
 
@@ -37973,7 +38092,12 @@
         _this.expandEventName = GetValue$u(config, 'expandEvent', 'button.click'); // Transition
 
         _this.easeIn = ParseEaseConfig(_assertThisInitialized(_this), GetValue$u(config, 'easeIn', 0));
-        _this.easeOut = ParseEaseConfig(_assertThisInitialized(_this), GetValue$u(config, 'easeOut', 0)); // Callbacks
+        _this.easeOut = ParseEaseConfig(_assertThisInitialized(_this), GetValue$u(config, 'easeOut', 0));
+
+        _this.setTransitInCallback(GetValue$u(config, 'transitIn'));
+
+        _this.setTransitOutCallback(GetValue$u(config, 'transitOut')); // Callbacks
+
 
         _this.createBackgroundCallback = createBackgroundCallback;
         _this.createBackgroundCallbackScope = createBackgroundCallbackScope;
@@ -38041,51 +38165,28 @@
 
       _this.pushIntoBounds(_this.root.bounds);
 
-      MenuSetInteractive(_assertThisInitialized(_this)); // Ease in menu
+      MenuSetInteractive(_assertThisInitialized(_this)); // Expand this menu
 
-      _this.popUp(GetEaseConfig(_this.root.easeIn, _assertThisInitialized(_this)));
-
-      _this.once('popup.complete', function () {
-        // Pass event to root menu object
-        if (this !== this.root) {
-          this.root.emit('popup.complete', this);
-        }
-      }, _assertThisInitialized(_this));
-
+      Expand.call(_assertThisInitialized(_this));
       return _this;
     }
 
     _createClass(Menu, [{
-      key: "isInTouching",
-      value: function isInTouching(pointer) {
-        if (_get(_getPrototypeOf(Menu.prototype), "isInTouching", this).call(this, pointer)) {
-          return true;
-        } else if (this.childrenMap.subMenu) {
-          return this.childrenMap.subMenu.isInTouching(pointer);
-        } else {
-          return false;
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
         }
+
+        _get(_getPrototypeOf(Menu.prototype), "destroy", this).call(this, fromScene);
+
+        this.removeDelayCall();
       }
     }]);
 
     return Menu;
   }(Buttons$1);
-
-  var ParseEaseConfig = function ParseEaseConfig(menu, easeConfig) {
-    if (typeof easeConfig === 'number') {
-      easeConfig = {
-        duration: easeConfig
-      };
-    }
-
-    if (easeConfig.hasOwnProperty('orientation') && easeConfig.orientation !== undefined) {
-      easeConfig.sameOrientation = GetOrientationMode(easeConfig.orientation) === menu.orientation;
-    } else {
-      easeConfig.sameOrientation = true;
-    }
-
-    return easeConfig;
-  };
 
   var SUBMENU_LEFT = 2;
   var SUBMENU_RIGHT = 0;
@@ -49314,7 +49415,7 @@
   }(FSM);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var Timer = Phaser.Time.TimerEvent;
+  Phaser.Time.TimerEvent;
 
   var Modal$1 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Modal, _ComponentBase);
@@ -49357,7 +49458,7 @@
       _this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
 
       _this.destroyParent = GetValue(config, 'destroy', true);
-      _this.timer = new Timer();
+      _this.timer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
         eventEmitter: false
       });
@@ -49455,12 +49556,7 @@
       key: "delayCall",
       value: function delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        var sceneEE = this.scene.sys.events;
-        this.timer = this.scene.time.delayedCall(delay, // delay
-        sceneEE.once, // callback
-        ['postupdate', callback, scope], // args
-        sceneEE // scope
-        );
+        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
         return this;
       }
     }, {
