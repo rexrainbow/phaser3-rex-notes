@@ -9,7 +9,7 @@ A [label](ui-label.md) can open a drop-down list panel.
 
 - [Drop-down list](https://codepen.io/rexrainbow/pen/RwQoXqa)
 - [Drop-down wrap-list](https://codepen.io/rexrainbow/pen/PoQWobV)
-- [Custom transit](https://codepen.io/rexrainbow/pen/PoRoWww)
+- [Custom transit](https://codepen.io/rexrainbow/pen/OJvJwob)
 
 ## Usage
 

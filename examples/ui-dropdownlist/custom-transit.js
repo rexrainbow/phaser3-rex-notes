@@ -86,6 +86,8 @@ class Demo extends Phaser.Scene {
                     button.getElement('background').setStrokeStyle();
                 },
 
+                easeIn: 2000,
+                easeOut: 100,
                 transitIn: function (listPanel, duration) {
                     var scene = listPanel.scene;
         
