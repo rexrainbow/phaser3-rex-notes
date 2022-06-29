@@ -132,7 +132,7 @@ var CreateMenu = function (scene, x, y, items, onClick) {
             });
         },
         transitOut: function (menu, duration) {
-            var tween = scene.tweens.add({
+            var tween = menu.scene.tweens.add({
                 targets: menu,
                 alpha: 0,
                 duration: duration,

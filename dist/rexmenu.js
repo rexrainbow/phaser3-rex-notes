@@ -4208,7 +4208,7 @@
     yoyo: 2
   };
 
-  var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
+  var PopUp$1 = function PopUp(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Cubic';
     } // Ease scale from 0 to current scale
@@ -4417,7 +4417,7 @@
       }
 
       var isInit = this._scale === undefined;
-      this._scale = PopUp(this, duration, orientation, ease, this._scale);
+      this._scale = PopUp$1(this, duration, orientation, ease, this._scale);
 
       if (isInit) {
         OnInitScale(this, this._scale);
@@ -10580,34 +10580,34 @@
     return easeConfig;
   };
 
-  var DefaultTransitCallbacks = {
-    popUp: function popUp(menu, duration) {
-      menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
+  var PopUp = function PopUp(menu, duration) {
+    menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
+  };
+
+  var ScaleDown = function ScaleDown(menu, duration) {
+    // Don't destroy here
+    menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
+  };
+
+  var SetTransitCallbackMethods = {
+    setTransitInCallback: function setTransitInCallback(callback) {
+      if (callback === undefined) {
+        callback = PopUp;
+      }
+
+      this.transitInCallback = callback; // callback = function(gameObject, duration) {}
+
+      return this;
     },
-    scaleDownDestroy: function scaleDownDestroy(menu, duration) {
-      // Don't destroy here
-      menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
+    setTransitOutCallback: function setTransitOutCallback(callback) {
+      if (callback === undefined) {
+        callback = ScaleDown;
+      }
+
+      this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
+
+      return this;
     }
-  };
-
-  var SetTransitInCallback = function SetTransitInCallback(callback) {
-    if (callback === undefined) {
-      callback = DefaultTransitCallbacks.popUp;
-    }
-
-    this.transitInCallback = callback; // callback = function(gameObject, duration) {}
-
-    return this;
-  };
-
-  var SetTransitOutCallback = function SetTransitOutCallback(callback) {
-    if (callback === undefined) {
-      callback = DefaultTransitCallbacks.scaleDownDestroy;
-    }
-
-    this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
-
-    return this;
   };
 
   var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
@@ -10713,14 +10713,12 @@
   };
 
   var Methods = {
-    setTransitInCallback: SetTransitInCallback,
-    setTransitOutCallback: SetTransitOutCallback,
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
     collapseSubMenu: CollapseSubMenu,
     isInTouching: IsInTouching
   };
-  Object.assign(Methods, DelayCallMethods);
+  Object.assign(Methods, SetTransitCallbackMethods, DelayCallMethods);
 
   var CreateBackground = function CreateBackground(scene, items, callback, scope) {
     var background;

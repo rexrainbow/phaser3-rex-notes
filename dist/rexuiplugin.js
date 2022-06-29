@@ -21330,7 +21330,7 @@
     yoyo: 2
   };
 
-  var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
+  var PopUp$2 = function PopUp(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Cubic';
     } // Ease scale from 0 to current scale
@@ -21527,7 +21527,7 @@
       }
 
       var isInit = this._scale === undefined;
-      this._scale = PopUp(this, duration, orientation, ease, this._scale);
+      this._scale = PopUp$2(this, duration, orientation, ease, this._scale);
 
       if (isInit) {
         OnInitScale(this, this._scale);
@@ -37763,34 +37763,34 @@
     return easeConfig;
   };
 
-  var DefaultTransitCallbacks$2 = {
-    popUp: function popUp(menu, duration) {
-      menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
+  var PopUp$1 = function PopUp(menu, duration) {
+    menu.popUp(GetEaseConfig(menu.root.easeIn, menu));
+  };
+
+  var ScaleDown$1 = function ScaleDown(menu, duration) {
+    // Don't destroy here
+    menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
+  };
+
+  var SetTransitCallbackMethods = {
+    setTransitInCallback: function setTransitInCallback(callback) {
+      if (callback === undefined) {
+        callback = PopUp$1;
+      }
+
+      this.transitInCallback = callback; // callback = function(gameObject, duration) {}
+
+      return this;
     },
-    scaleDownDestroy: function scaleDownDestroy(menu, duration) {
-      // Don't destroy here
-      menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
+    setTransitOutCallback: function setTransitOutCallback(callback) {
+      if (callback === undefined) {
+        callback = ScaleDown$1;
+      }
+
+      this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
+
+      return this;
     }
-  };
-
-  var SetTransitInCallback = function SetTransitInCallback(callback) {
-    if (callback === undefined) {
-      callback = DefaultTransitCallbacks$2.popUp;
-    }
-
-    this.transitInCallback = callback; // callback = function(gameObject, duration) {}
-
-    return this;
-  };
-
-  var SetTransitOutCallback = function SetTransitOutCallback(callback) {
-    if (callback === undefined) {
-      callback = DefaultTransitCallbacks$2.scaleDownDestroy;
-    }
-
-    this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
-
-    return this;
   };
 
   var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
@@ -37809,7 +37809,7 @@
     return timer;
   };
 
-  var DelayCallMethods = {
+  var DelayCallMethods$1 = {
     delayCall: function delayCall(delay, callback, scope) {
       // Invoke callback under scene's 'postupdate' event
       this.timer = PostUpdateDelayCall(this, delay, callback, scope);
@@ -37896,14 +37896,12 @@
   };
 
   var Methods$3 = {
-    setTransitInCallback: SetTransitInCallback,
-    setTransitOutCallback: SetTransitOutCallback,
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
     collapseSubMenu: CollapseSubMenu,
     isInTouching: IsInTouching
   };
-  Object.assign(Methods$3, DelayCallMethods);
+  Object.assign(Methods$3, SetTransitCallbackMethods, DelayCallMethods$1);
 
   var CreateBackground = function CreateBackground(scene, items, callback, scope) {
     var background;
@@ -38207,6 +38205,15 @@
   });
   SetValue(window, 'RexPlugins.UI.Menu', Menu);
 
+  var PopUp = function PopUp(listPanel, duration) {
+    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic');
+  };
+
+  var ScaleDown = function ScaleDown(listPanel, duration) {
+    // Don't destroy here
+    listPanel.scaleDown(this.listEaseOutDuration, 'y', 'Linear');
+  };
+
   var methods$6 = {
     setWrapEnable: function setWrapEnable(enable) {
       if (enable === undefined) {
@@ -38236,12 +38243,38 @@
       this.listOnButtonOut = callback;
       return this;
     },
+    setListEaseInDuration: function setListEaseInDuration(duration) {
+      if (duration === undefined) {
+        duration = 0;
+      }
+
+      this.listEaseInDuration = duration;
+      return this;
+    },
     setListEaseOutDuration: function setListEaseOutDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
 
       this.listEaseOutDuration = duration;
+      return this;
+    },
+    setListTransitInCallback: function setListTransitInCallback(callback) {
+      if (callback === undefined) {
+        callback = PopUp;
+      }
+
+      this.listTransitInCallback = callback; // callback = function(gameObject, duration) {}
+
+      return this;
+    },
+    settListTTransitOutCallback: function settListTTransitOutCallback(callback) {
+      if (callback === undefined) {
+        callback = ScaleDown;
+      }
+
+      this.listTransitOutCallback = callback; // callback = function(gameObject, duration) {}
+
       return this;
     },
     setListBounds: function setListBounds(bounds) {
@@ -38262,14 +38295,6 @@
     },
     setListAlignmentMode: function setListAlignmentMode(mode) {
       this.listAlignMode = mode;
-      return this;
-    },
-    setListEaseInDuration: function setListEaseInDuration(duration) {
-      if (duration === undefined) {
-        duration = 0;
-      }
-
-      this.listEaseInDuration = duration;
       return this;
     },
     setListSpace: function setListSpace(space) {
@@ -38383,7 +38408,9 @@
 
       this.emit('button.out', this, listPanel, button, index, pointer, event);
     }, this);
-    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic').once('popup.complete', function (listPanel) {
+    var duration = this.listEaseInDuration;
+    this.listTransitInCallback(listPanel, duration);
+    this.delayCall(duration, function () {
       // After popping up
       // Can click
       var onButtonClick = this.listOnButtonClick;
@@ -38411,8 +38438,13 @@
 
     var listPanel = this.listPanel;
     this.listPanel = undefined;
-    listPanel.scaleDownDestroy(this.listEaseOutDuration, 'y', 'Linear').once('scaledown.complete', function () {
+    var duration = this.listEaseOutDuration; // Don't destroy under transitOutCallback
+
+    this.listTransitOutCallback(listPanel, duration); // Destroy by delayCall
+
+    this.delayCall(duration, function () {
       this.emit('list.close', this, listPanel);
+      listPanel.destroy();
     }, this);
     return this;
   };
@@ -38427,12 +38459,28 @@
     return this;
   };
 
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.timer) {
+        this.timer.remove(false);
+        this.timer = undefined;
+      }
+
+      return this;
+    }
+  };
+
   var Methods$2 = {
     openListPanel: OpenListPanel,
     closeListPanel: CloseListPanel,
     toggleListPanel: ToggleListPanel
   };
-  Object.assign(Methods$2, methods$6);
+  Object.assign(Methods$2, methods$6, DelayCallMethods);
 
   var GetValue$t = Phaser.Utils.Objects.GetValue;
 
@@ -38448,6 +38496,7 @@
 
       _this = _super.call(this, scene, config);
       _this.type = 'rexDropDownList';
+      _this.timer = undefined;
 
       _this.setOptions(GetValue$t(config, 'options'));
 
@@ -38468,6 +38517,10 @@
       _this.setListEaseInDuration(GetValue$t(listConfig, 'easeIn', 500));
 
       _this.setListEaseOutDuration(GetValue$t(listConfig, 'easeOut', 100));
+
+      _this.setListTransitInCallback(GetValue$t(listConfig, 'transitIn'));
+
+      _this.settListTTransitOutCallback(GetValue$t(listConfig, 'transitOut'));
 
       _this.setListSize(GetValue$t(listConfig, 'width'), GetValue$t(listConfig, 'height'));
 
@@ -38502,6 +38555,8 @@
         }
 
         _get(_getPrototypeOf(DropDownList.prototype), "destroy", this).call(this, fromScene);
+
+        this.removeDelayCall();
       }
     }, {
       key: "setOptions",
@@ -49283,7 +49338,7 @@
 
   var DefaultTransitCallbacks = {
     popUp: function popUp(gameObject, duration) {
-      PopUp(gameObject, duration);
+      PopUp$2(gameObject, duration);
     },
     scaleDown: function scaleDown(gameObject, duration) {
       // Don't destroy here

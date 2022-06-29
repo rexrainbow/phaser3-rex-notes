@@ -1,5 +1,5 @@
-import Buttons from '../../buttons/Buttons.js';
-import FixWidthButtons from '../../fixwidthbuttons/FixWidthButtons.js';
+import Buttons from '../../../buttons/Buttons.js';
+import FixWidthButtons from '../../../fixwidthbuttons/FixWidthButtons.js';
 
 var CreateListPanel = function (scene) {
     var background;

@@ -4,7 +4,7 @@ var PopUp = function (menu, duration) {
     menu.popUp(GetEaseConfig(menu.root.easeIn, menu))
 }
 
-var ScaleDownDestroy = function (menu, duration) {
+var ScaleDown = function (menu, duration) {
     // Don't destroy here
     menu.scaleDown(GetEaseConfig(menu.root.easeOut, menu));
 }
@@ -22,7 +22,7 @@ export default {
 
     setTransitOutCallback(callback) {
         if (callback === undefined) {
-            callback = ScaleDownDestroy;
+            callback = ScaleDown;
         }
 
         this.transitOutCallback = callback;

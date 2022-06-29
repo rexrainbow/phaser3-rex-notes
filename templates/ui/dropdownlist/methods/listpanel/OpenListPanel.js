@@ -1,5 +1,5 @@
 import CreateListPanel from './CreateListPanel.js';
-import GetViewPort from '../../../../plugins/utils/system/GetViewport.js';
+import GetViewPort from '../../../../../plugins/utils/system/GetViewport.js';
 
 var OpenListPanel = function () {
     if (this.listPanel) {
@@ -41,24 +41,24 @@ var OpenListPanel = function () {
             this.emit('button.out', this, listPanel, button, index, pointer, event);
         }, this);
 
-    listPanel
-        .popUp(this.listEaseInDuration, 'y', 'Cubic')
-        .once('popup.complete', function (listPanel) {
-            // After popping up
-            // Can click
-            var onButtonClick = this.listOnButtonClick;
-            if (onButtonClick) {
-                listPanel.on('button.click', function (button, index, pointer, event) {
-                    onButtonClick.call(this, button, index, pointer, event);
-                    this.emit('button.click', this, listPanel, button, index, pointer, event);
-                }, this);
-            }
+    var duration = this.listEaseInDuration;
+    this.listTransitInCallback(listPanel, duration);
+    this.delayCall(duration, function () {
+        // After popping up
+        // Can click
+        var onButtonClick = this.listOnButtonClick;
+        if (onButtonClick) {
+            listPanel.on('button.click', function (button, index, pointer, event) {
+                onButtonClick.call(this, button, index, pointer, event);
+                this.emit('button.click', this, listPanel, button, index, pointer, event);
+            }, this);
+        }
 
-            // Can close list panel
-            scene.input.once('pointerup', this.closeListPanel, this);
+        // Can close list panel
+        scene.input.once('pointerup', this.closeListPanel, this);
 
-            this.emit('list.open', this, listPanel);
-        }, this);
+        this.emit('list.open', this, listPanel);
+    }, this);
 
     this.pin(listPanel);
 
