@@ -107,7 +107,12 @@ var dropDownList = scene.rexUI.add.dropDownList({
         // },
 
         // easeIn: 500,
+        // transitIn: undefined,
+        // transitIn: function(menu, duration) {  },
+
         // easeOut: 100,
+        // transitOut: undefined,
+        // transitOut: function(menu, duration) {  },
 
         // wrap: false,
         // width: undefined, 
