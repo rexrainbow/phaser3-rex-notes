@@ -19,6 +19,7 @@ A container with a title, content, buttons and background.
 - [Ease-in, ease-out](https://codepen.io/rexrainbow/pen/qBdQRmq)
 - [Show/hide buttons](https://codepen.io/rexrainbow/pen/MWwPabw)
 - [Add button](https://codepen.io/rexrainbow/pen/gOpddxa)
+- [Wrap label](https://codepen.io/rexrainbow/pen/NWYWMOE)
 - [Modal dialog](https://codepen.io/rexrainbow/pen/VwzbqEP)
 
 ## Usage
