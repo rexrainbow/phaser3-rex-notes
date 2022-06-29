@@ -13,6 +13,7 @@ Layout children game objects in grids.
 - [Add new column](https://codepen.io/rexrainbow/pen/oNEZJjy)
 - [Full viewport](https://codepen.io/rexrainbow/pen/LYVKXJg)
 - [Set children interactive](https://codepen.io/rexrainbow/pen/GROQKme)
+- [Destroy cell](https://codepen.io/rexrainbow/pen/YzazvzY)
 
 ## Usage
 

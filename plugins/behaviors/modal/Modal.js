@@ -5,6 +5,7 @@ import NOOP from '../../utils/object/NOOP.js';
 import State from './State.js';
 import FadeIn from '../../fade-in.js';
 import FadeOutDestroy from '../../fade-out-destroy.js';
+import PostUpdateDelayCall from '../../utils/time/PostUpdateDelayCall.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Timer = Phaser.Time.TimerEvent;
@@ -39,7 +40,7 @@ class Modal extends ComponentBase {
         this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
         this.destroyParent = GetValue(config, 'destroy', true);
 
-        this.timer = new Timer();
+        this.timer = undefined;
         this._state = new State(this, { eventEmitter: false });
         this.closeEventData = undefined;
 
@@ -126,13 +127,7 @@ class Modal extends ComponentBase {
 
     delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        var sceneEE = this.scene.sys.events;
-        this.timer = this.scene.time.delayedCall(
-            delay,                            // delay
-            sceneEE.once,                     // callback
-            ['postupdate', callback, scope],  // args
-            sceneEE                           // scope
-        );
+        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
         return this;
     }
 

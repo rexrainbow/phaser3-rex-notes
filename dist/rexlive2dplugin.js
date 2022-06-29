@@ -10182,10 +10182,18 @@
 
 
     var arrayBuffer = data.physics;
-    this.loadPhysics(arrayBuffer, arrayBuffer.byteLength); // Load CubismPose
+
+    if (arrayBuffer) {
+      this.loadPhysics(arrayBuffer, arrayBuffer.byteLength);
+    } // Load CubismPose
+
 
     var arrayBuffer = data.pose;
-    this.loadPose(arrayBuffer, arrayBuffer.byteLength); // Setup EyeBlink
+
+    if (arrayBuffer) {
+      this.loadPose(arrayBuffer, arrayBuffer.byteLength);
+    } // Setup EyeBlink
+
 
     if (setting.getEyeBlinkParameterCount() > 0) {
       this._eyeBlink = CubismEyeBlink.create(setting);
@@ -10209,7 +10217,11 @@
 
 
     var arrayBuffer = data.userData;
-    this.loadUserData(arrayBuffer, arrayBuffer.byteLength); // Setup EyeBlinkIds
+
+    if (arrayBuffer) {
+      this.loadUserData(arrayBuffer, arrayBuffer.byteLength);
+    } // Setup EyeBlinkIds
+
 
     var eyeBlinkIdCount = setting.getEyeBlinkParameterCount();
 
@@ -12223,14 +12235,21 @@
     var loader = parent.loader;
     var xhrSettings = GetFastValue$1(parent.config, 'xhrSettings');
     var key = parent.key;
-    var homeDir = parent.homeDir; // Load CubismModel
+    var homeDir = parent.homeDir;
+    var requestUrls = []; // Load a file one time
+    // Load CubismModel
 
     var modelFileName = setting.getModelFileName();
 
     if (modelFileName !== '') {
-      var modelFile = CreateBinaryFile(loader, "".concat(key, "!").concat(modelFileName), "".concat(homeDir).concat(modelFileName), xhrSettings, 'model');
-      parent.addToMultiFile(modelFile);
-      loader.addFile(modelFile);
+      var requestUrl = "".concat(homeDir).concat(modelFileName);
+
+      if (requestUrls.indexOf(requestUrl) === -1) {
+        var modelFile = CreateBinaryFile(loader, "".concat(key, "!").concat(modelFileName), requestUrl, xhrSettings, 'model');
+        parent.addToMultiFile(modelFile);
+        loader.addFile(modelFile);
+        requestUrls.push(requestUrl);
+      }
     } else {
       // Error
       console.error("Live2d: can't load model ".concat(key));
@@ -12243,36 +12262,56 @@
     for (var i = 0; i < cnt; i++) {
       var expressionFileName = setting.getExpressionFileName(i);
       var expressionName = setting.getExpressionName(i);
-      var expressionFile = CreateBinaryFile(loader, "".concat(key, "!").concat(expressionFileName), "".concat(homeDir).concat(expressionFileName), xhrSettings, "expressions!!!".concat(expressionName));
-      parent.addToMultiFile(expressionFile);
-      loader.addFile(expressionFile);
+      var requestUrl = "".concat(homeDir).concat(expressionFileName);
+
+      if (requestUrls.indexOf(requestUrl) === -1) {
+        var expressionFile = CreateBinaryFile(loader, "".concat(key, "!").concat(expressionFileName), requestUrl, xhrSettings, "expressions!!!".concat(expressionName));
+        parent.addToMultiFile(expressionFile);
+        loader.addFile(expressionFile);
+        requestUrls.push(requestUrl);
+      }
     } // Load CubismPhysics
 
 
     var physicsFileName = setting.getPhysicsFileName();
 
     if (physicsFileName !== '') {
-      var physicsFile = CreateBinaryFile(loader, "".concat(key, "!").concat(physicsFileName), "".concat(homeDir).concat(physicsFileName), xhrSettings, 'physics');
-      parent.addToMultiFile(physicsFile);
-      loader.addFile(physicsFile);
+      var requestUrl = "".concat(homeDir).concat(physicsFileName);
+
+      if (requestUrls.indexOf(requestUrl) === -1) {
+        var physicsFile = CreateBinaryFile(loader, "".concat(key, "!").concat(physicsFileName), requestUrl, xhrSettings, 'physics');
+        parent.addToMultiFile(physicsFile);
+        loader.addFile(physicsFile);
+        requestUrls.push(requestUrl);
+      }
     } // Load CubismPose
 
 
     var poseFileName = setting.getPoseFileName();
 
     if (poseFileName !== '') {
-      var poseFile = CreateBinaryFile(loader, "".concat(key, "!").concat(poseFileName), "".concat(homeDir).concat(poseFileName), xhrSettings, 'pose');
-      parent.addToMultiFile(poseFile);
-      loader.addFile(poseFile);
+      var requestUrl = "".concat(homeDir).concat(poseFileName);
+
+      if (requestUrls.indexOf(requestUrl) === -1) {
+        var poseFile = CreateBinaryFile(loader, "".concat(key, "!").concat(poseFileName), requestUrl, xhrSettings, 'pose');
+        parent.addToMultiFile(poseFile);
+        loader.addFile(poseFile);
+        requestUrls.push(requestUrl);
+      }
     } // Load UserData
 
 
     var userDataFileName = setting.getUserDataFile();
 
     if (userDataFileName !== '') {
-      var userDataFile = CreateBinaryFile(loader, "".concat(key, "!").concat(userDataFileName), "".concat(homeDir).concat(userDataFileName), xhrSettings, 'userData');
-      parent.addToMultiFile(userDataFile);
-      loader.addFile(userDataFile);
+      var requestUrl = "".concat(homeDir).concat(userDataFileName);
+
+      if (requestUrls.indexOf(requestUrl) === -1) {
+        var userDataFile = CreateBinaryFile(loader, "".concat(key, "!").concat(userDataFileName), requestUrl, xhrSettings, 'userData');
+        parent.addToMultiFile(userDataFile);
+        loader.addFile(userDataFile);
+        requestUrls.push(requestUrl);
+      }
     } // Load CubismMotion
 
 
@@ -12284,9 +12323,14 @@
 
       for (var i = 0; i < cnt; i++) {
         var motionFileName = setting.getMotionFileName(groupName, i);
-        var motionFile = CreateBinaryFile(loader, "".concat(key, "!").concat(motionFileName), "".concat(homeDir).concat(motionFileName), xhrSettings, "motions!!!".concat(groupName, "!!!").concat(i));
-        parent.addToMultiFile(motionFile);
-        loader.addFile(motionFile);
+        var requestUrl = "".concat(homeDir).concat(motionFileName);
+
+        if (requestUrls.indexOf(requestUrl) === -1) {
+          var motionFile = CreateBinaryFile(loader, "".concat(key, "!").concat(motionFileName), requestUrl, xhrSettings, "motions!!!".concat(groupName, "!!!").concat(i));
+          parent.addToMultiFile(motionFile);
+          loader.addFile(motionFile);
+          requestUrls.push(requestUrl);
+        }
       }
     } // Load texture
 
@@ -12302,10 +12346,15 @@
       } // TODO: store texture into live2d cache?
 
 
-      var imageFile = new ImageFile(loader, "".concat(key, "!").concat(textureFileName), "".concat(homeDir).concat(textureFileName), xhrSettings);
-      imageFile.dataKey = "textures!!!".concat(i);
-      parent.addToMultiFile(imageFile);
-      loader.addFile(imageFile);
+      var requestUrl = "".concat(homeDir).concat(textureFileName);
+
+      if (requestUrls.indexOf(requestUrl) === -1) {
+        var imageFile = new ImageFile(loader, "".concat(key, "!").concat(textureFileName), requestUrl, xhrSettings);
+        imageFile.dataKey = "textures!!!".concat(i);
+        parent.addToMultiFile(imageFile);
+        loader.addFile(imageFile);
+        requestUrls.push(requestUrl);
+      }
     }
   };
 

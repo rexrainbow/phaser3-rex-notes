@@ -1,11 +1,12 @@
 import Buttons from '../buttons/Buttons.js';
-import Methods from './Methods.js';
-import CreateBackground from './CreateBackground.js';
-import CreateButtons from './CreateButtons.js';
+import Methods from './methods/Methods.js';
+import CreateBackground from './methods/CreateBackground.js';
+import CreateButtons from './methods/CreateButtons.js';
 import GetViewPort from '../../../plugins/utils/system/GetViewport.js';
-import MenuSetInteractive from './MenuSetInteractive.js';
-import GetOrientationMode from '../utils/GetOrientationMode.js';
-import GetEaseConfig from './GetEaseConfig.js';
+import MenuSetInteractive from './methods/MenuSetInteractive.js';
+import ParseEaseConfig from './methods/ParseEaseConfig.js';
+import GetEaseConfig from './methods/GetEaseConfig.js';
+import Expand from './methods/Expand.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -42,6 +43,7 @@ class Menu extends Buttons {
         this.root = (rootMenu === undefined) ? this : rootMenu;
         this.parentMenu = parentMenu;
         this.parentButton = parentButton;
+        this.timer = undefined;
 
         var isRootMenu = (this.root === this);
         // Root menu
@@ -73,6 +75,8 @@ class Menu extends Buttons {
             // Transition
             this.easeIn = ParseEaseConfig(this, GetValue(config, 'easeIn', 0));
             this.easeOut = ParseEaseConfig(this, GetValue(config, 'easeOut', 0));
+            this.setTransitInCallback(GetValue(config, 'transitIn'));
+            this.setTransitOutCallback(GetValue(config, 'transitOut'));
             // Callbacks
             this.createBackgroundCallback = createBackgroundCallback;
             this.createBackgroundCallbackScope = createBackgroundCallbackScope;
@@ -132,40 +136,21 @@ class Menu extends Buttons {
 
         MenuSetInteractive(this);
 
-        // Ease in menu
-        this.popUp(GetEaseConfig(this.root.easeIn, this));
-        this.once('popup.complete', function () {
-            // Pass event to root menu object
-            if (this !== this.root) {
-                this.root.emit('popup.complete', this);
-            }
-        }, this);
+        // Expand this menu
+        Expand.call(this);
     }
 
-    isInTouching(pointer) {
-        if (super.isInTouching(pointer)) {
-            return true;
-        } else if (this.childrenMap.subMenu) {
-            return this.childrenMap.subMenu.isInTouching(pointer);
-        } else {
-            return false;
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
         }
-    }
-}
 
-var ParseEaseConfig = function (menu, easeConfig) {
-    if (typeof (easeConfig) === 'number') {
-        easeConfig = {
-            duration: easeConfig
-        };
+        super.destroy(fromScene);
+        this.removeDelayCall();
     }
 
-    if (easeConfig.hasOwnProperty('orientation') && (easeConfig.orientation !== undefined)) {
-        easeConfig.sameOrientation = GetOrientationMode(easeConfig.orientation) === menu.orientation;
-    } else {
-        easeConfig.sameOrientation = true;
-    }
-    return easeConfig;
+
 }
 
 const SUBMENU_LEFT = 2;

@@ -1,3 +1,12 @@
+var PopUp = function (listPanel, duration) {
+    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic')
+}
+
+var ScaleDown = function (listPanel, duration) {
+    // Don't destroy here
+    listPanel.scaleDown(this.listEaseOutDuration, 'y', 'Linear')
+}
+
 var methods = {
     setWrapEnable(enable) {
         if (enable === undefined) {
@@ -33,11 +42,39 @@ var methods = {
         return this;
     },
 
+    setListEaseInDuration(duration) {
+        if (duration === undefined) {
+            duration = 0;
+        }
+        this.listEaseInDuration = duration;
+        return this;
+    },
+
     setListEaseOutDuration(duration) {
         if (duration === undefined) {
             duration = 0;
         }
         this.listEaseOutDuration = duration;
+        return this;
+    },
+
+    setListTransitInCallback(callback) {
+        if (callback === undefined) {
+            callback = PopUp;
+        }
+
+        this.listTransitInCallback = callback;
+        // callback = function(gameObject, duration) {}
+        return this;
+    },
+
+    settListTTransitOutCallback(callback) {
+        if (callback === undefined) {
+            callback = ScaleDown;
+        }
+
+        this.listTransitOutCallback = callback;
+        // callback = function(gameObject, duration) {}
         return this;
     },
 
@@ -63,14 +100,6 @@ var methods = {
 
     setListAlignmentMode(mode) {
         this.listAlignMode = mode;
-        return this;
-    },
-
-    setListEaseInDuration(duration) {
-        if (duration === undefined) {
-            duration = 0;
-        }
-        this.listEaseInDuration = duration;
         return this;
     },
 

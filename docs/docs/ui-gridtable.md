@@ -511,6 +511,17 @@ See also - [dirty](ui-basesizer.md#dirty)
     table.updateVisibleCell(cellIndex);
     ```
 
+### Table size
+
+- Table width
+    ```javascript
+    var tableWidth = table.getElement('table').tableWidth;
+    ```
+- Table height
+    ```javascript
+    var tableHeight = table.getElement('table').tableHeight;
+    ```
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).

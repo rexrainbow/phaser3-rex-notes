@@ -552,6 +552,10 @@ var timelineObj = container.timelineChild({
     ```javascript
     container.clearMask();
     ```
+- Remove mask object of children, and destroy mask object
+    ```javascript
+    container.clearMask(true);
+    ```
 
 ### Scroll factor
 

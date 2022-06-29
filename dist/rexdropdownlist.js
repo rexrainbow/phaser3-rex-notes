@@ -1088,13 +1088,19 @@
     clearMask: function clearMask(destroyMask) {
       if (destroyMask === undefined) {
         destroyMask = false;
-      }
+      } // Clear current mask
+
+
+      this._mask = null; // Clear children mask
+
+      this.children.forEach(function (child) {
+        child.clearMask(false);
+      });
 
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
 
-      this.mask = null;
       return this;
     }
   };
@@ -4202,7 +4208,7 @@
     yoyo: 2
   };
 
-  var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
+  var PopUp$1 = function PopUp(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Cubic';
     } // Ease scale from 0 to current scale
@@ -4411,7 +4417,7 @@
       }
 
       var isInit = this._scale === undefined;
-      this._scale = PopUp(this, duration, orientation, ease, this._scale);
+      this._scale = PopUp$1(this, duration, orientation, ease, this._scale);
 
       if (isInit) {
         OnInitScale(this, this._scale);
@@ -10262,6 +10268,15 @@
     return Label;
   }(Sizer);
 
+  var PopUp = function PopUp(listPanel, duration) {
+    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic');
+  };
+
+  var ScaleDown = function ScaleDown(listPanel, duration) {
+    // Don't destroy here
+    listPanel.scaleDown(this.listEaseOutDuration, 'y', 'Linear');
+  };
+
   var methods$2 = {
     setWrapEnable: function setWrapEnable(enable) {
       if (enable === undefined) {
@@ -10291,12 +10306,38 @@
       this.listOnButtonOut = callback;
       return this;
     },
+    setListEaseInDuration: function setListEaseInDuration(duration) {
+      if (duration === undefined) {
+        duration = 0;
+      }
+
+      this.listEaseInDuration = duration;
+      return this;
+    },
     setListEaseOutDuration: function setListEaseOutDuration(duration) {
       if (duration === undefined) {
         duration = 0;
       }
 
       this.listEaseOutDuration = duration;
+      return this;
+    },
+    setListTransitInCallback: function setListTransitInCallback(callback) {
+      if (callback === undefined) {
+        callback = PopUp;
+      }
+
+      this.listTransitInCallback = callback; // callback = function(gameObject, duration) {}
+
+      return this;
+    },
+    settListTTransitOutCallback: function settListTTransitOutCallback(callback) {
+      if (callback === undefined) {
+        callback = ScaleDown;
+      }
+
+      this.listTransitOutCallback = callback; // callback = function(gameObject, duration) {}
+
       return this;
     },
     setListBounds: function setListBounds(bounds) {
@@ -10317,14 +10358,6 @@
     },
     setListAlignmentMode: function setListAlignmentMode(mode) {
       this.listAlignMode = mode;
-      return this;
-    },
-    setListEaseInDuration: function setListEaseInDuration(duration) {
-      if (duration === undefined) {
-        duration = 0;
-      }
-
-      this.listEaseInDuration = duration;
       return this;
     },
     setListSpace: function setListSpace(space) {
@@ -11940,7 +11973,9 @@
 
       this.emit('button.out', this, listPanel, button, index, pointer, event);
     }, this);
-    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic').once('popup.complete', function (listPanel) {
+    var duration = this.listEaseInDuration;
+    this.listTransitInCallback(listPanel, duration);
+    this.delayCall(duration, function () {
       // After popping up
       // Can click
       var onButtonClick = this.listOnButtonClick;
@@ -11968,8 +12003,13 @@
 
     var listPanel = this.listPanel;
     this.listPanel = undefined;
-    listPanel.scaleDownDestroy(this.listEaseOutDuration, 'y', 'Linear').once('scaledown.complete', function () {
+    var duration = this.listEaseOutDuration; // Don't destroy under transitOutCallback
+
+    this.listTransitOutCallback(listPanel, duration); // Destroy by delayCall
+
+    this.delayCall(duration, function () {
       this.emit('list.close', this, listPanel);
+      listPanel.destroy();
     }, this);
     return this;
   };
@@ -11984,12 +12024,44 @@
     return this;
   };
 
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay, // delay
+    sceneEE.once, // callback
+    [// Event name of scene
+    'postupdate', // Callback
+    function () {
+      callback.call(scope, args);
+    }], // args
+    sceneEE // scope, scene's EE
+    );
+    return timer;
+  };
+
+  var DelayCallMethods = {
+    delayCall: function delayCall(delay, callback, scope) {
+      // Invoke callback under scene's 'postupdate' event
+      this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+      return this;
+    },
+    removeDelayCall: function removeDelayCall() {
+      if (this.timer) {
+        this.timer.remove(false);
+        this.timer = undefined;
+      }
+
+      return this;
+    }
+  };
+
   var Methods = {
     openListPanel: OpenListPanel,
     closeListPanel: CloseListPanel,
     toggleListPanel: ToggleListPanel
   };
-  Object.assign(Methods, methods$2);
+  Object.assign(Methods, methods$2, DelayCallMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -12005,6 +12077,7 @@
 
       _this = _super.call(this, scene, config);
       _this.type = 'rexDropDownList';
+      _this.timer = undefined;
 
       _this.setOptions(GetValue(config, 'options'));
 
@@ -12025,6 +12098,10 @@
       _this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
 
       _this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
+
+      _this.setListTransitInCallback(GetValue(listConfig, 'transitIn'));
+
+      _this.settListTTransitOutCallback(GetValue(listConfig, 'transitOut'));
 
       _this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
 
@@ -12059,6 +12136,8 @@
         }
 
         _get(_getPrototypeOf(DropDownList.prototype), "destroy", this).call(this, fromScene);
+
+        this.removeDelayCall();
       }
     }, {
       key: "setOptions",

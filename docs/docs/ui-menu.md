@@ -10,6 +10,7 @@ A container with buttons and sub-menu.
 - [Pop-up menu](https://codepen.io/rexrainbow/pen/PxOEBr)
 - [Drop-down list](https://codepen.io/rexrainbow/pen/JjEORZb)
 - [Expand, collapse](https://codepen.io/rexrainbow/pen/wvebLGY)
+- [Custom transit](https://codepen.io/rexrainbow/pen/PoRoWww)
 
 ## Usage
 
@@ -107,6 +108,8 @@ var menu = scene.rexUI.add.menu({
     //     orientation: undefined,
     //     ease: 'Cubic'
     // },
+    transitIn: undefined,
+    // transitIn: function(menu, duration) {  },
 
     easeOut: 0,
     // easeOut: {
@@ -114,6 +117,8 @@ var menu = scene.rexUI.add.menu({
     //     orientation: undefined,
     //     ease: 'Linear'
     // },
+    transitOut: undefined,
+    // transitOut: function(menu, duration) {  },
 
     // expandEvent: 'button.click',
 
@@ -149,7 +154,7 @@ var menu = scene.rexUI.add.menu({
     - Properties of `item` parameter
         - `item.scene` : Scene of this menu object.
         - Other custom properties
-- `easeIn` : Scale up size when extend menu.
+- `easeIn` : Duration of expanding menu.
     - A number : Duration of ease, in milliseconds.
     - An object :
         - `easeIn.duration` : Duration of ease, in milliseconds.
@@ -158,7 +163,15 @@ var menu = scene.rexUI.add.menu({
             - `undefined` : The same orientation with menu's orientation.
             -  `'h'`, `'x'`, or `0` : Pop-up menu horizontally.
             -  `'v'`, `'y'`, or `1` : Pop-up menu vertically.
-- `easeOut` : Scale down size when extend menu.
+- `transitIn` : Tween behavior of expanding menu.
+    - `undefined` : Expand menu by pop-up, default behavior.
+    - Custom callback
+        ```javascript
+        function(menu, duration) {
+
+        }
+        ```
+- `easeOut` : Duration of collapsing menu
     - A number : Duration of ease, in milliseconds.
     - An object :
         - `easeOut.duration` : Duration of ease, in milliseconds.
@@ -167,6 +180,14 @@ var menu = scene.rexUI.add.menu({
             - `undefined` : The same orientation with menu's orientation.
             -  `'h'`, `'x'`, or `0` : Scale-down menu horizontally.
             -  `'v'`, `'y'`, or `1` : Scale-down menu vertically.
+- `transitOut` : Tween behavior of collapsing menu.
+    - `undefined` : Collapse menu by scale-down, default behavior.
+    - Custom callback
+        ```javascript
+        function(menu, duration) {
+
+        }
+        ```
 - `expandEvent` : Event name of expanding sub-menu.
     - `'button.click'` : Default value
     - `'button.over'`

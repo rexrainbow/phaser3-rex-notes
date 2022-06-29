@@ -8339,6 +8339,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/PxOEBr">Pop-up menu</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/JjEORZb">Drop-down list</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/wvebLGY">Expand, collapse</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/PoRoWww">Custom transit</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-menu">Sample code</a></p>
@@ -8423,6 +8424,8 @@
     <span class="c1">//     orientation: undefined,</span>
     <span class="c1">//     ease: &#39;Cubic&#39;</span>
     <span class="c1">// },</span>
+    <span class="nx">transitIn</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// transitIn: function(menu, duration) {  },</span>
 
     <span class="nx">easeOut</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// easeOut: {</span>
@@ -8430,6 +8433,8 @@
     <span class="c1">//     orientation: undefined,</span>
     <span class="c1">//     ease: &#39;Linear&#39;</span>
     <span class="c1">// },</span>
+    <span class="nx">transitOut</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// transitOut: function(menu, duration) {  },</span>
 
     <span class="c1">// expandEvent: &#39;button.click&#39;,</span>
 
@@ -8485,7 +8490,7 @@
 </li>
 </ul>
 </li>
-<li><code>easeIn</code> : Scale up size when extend menu.<ul>
+<li><code>easeIn</code> : Duration of expanding menu.<ul>
 <li>A number : Duration of ease, in milliseconds.</li>
 <li>An object :<ul>
 <li><code>easeIn.duration</code> : Duration of ease, in milliseconds.</li>
@@ -8500,7 +8505,16 @@
 </li>
 </ul>
 </li>
-<li><code>easeOut</code> : Scale down size when extend menu.<ul>
+<li><code>transitIn</code> : Tween behavior of expanding menu.<ul>
+<li><code>undefined</code> : Expand menu by pop-up, default behavior.</li>
+<li>Custom callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">menu</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>easeOut</code> : Duration of collapsing menu<ul>
 <li>A number : Duration of ease, in milliseconds.</li>
 <li>An object :<ul>
 <li><code>easeOut.duration</code> : Duration of ease, in milliseconds.</li>
@@ -8513,6 +8527,15 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><code>transitOut</code> : Tween behavior of collapsing menu.<ul>
+<li><code>undefined</code> : Collapse menu by scale-down, default behavior.</li>
+<li>Custom callback
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">menu</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>expandEvent</code> : Event name of expanding sub-menu.<ul>

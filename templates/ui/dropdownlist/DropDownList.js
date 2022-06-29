@@ -1,5 +1,5 @@
 import Label from '../label/Label.js';
-import ListPanelMethods from './listpanel/Methods.js'
+import Methods from './methods/Methods.js'
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -8,6 +8,7 @@ class DropDownList extends Label {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexDropDownList';
+        this.timer = undefined;
 
         this.setOptions(GetValue(config, 'options'));
 
@@ -20,6 +21,8 @@ class DropDownList extends Label {
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
         this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
         this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
+        this.setListTransitInCallback(GetValue(listConfig, 'transitIn'));
+        this.settListTTransitOutCallback(GetValue(listConfig, 'transitOut'));
         this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
         this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
         this.setListBounds(GetValue(listConfig, 'bounds'));
@@ -47,6 +50,7 @@ class DropDownList extends Label {
         }
 
         super.destroy(fromScene);
+        this.removeDelayCall();
     }
 
     setOptions(options) {
@@ -96,7 +100,7 @@ class DropDownList extends Label {
 
 Object.assign(
     DropDownList.prototype,
-    ListPanelMethods,
+    Methods,
 );
 
 export default DropDownList;

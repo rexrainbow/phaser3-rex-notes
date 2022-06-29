@@ -9,6 +9,7 @@ A [label](ui-label.md) can open a drop-down list panel.
 
 - [Drop-down list](https://codepen.io/rexrainbow/pen/RwQoXqa)
 - [Drop-down wrap-list](https://codepen.io/rexrainbow/pen/PoQWobV)
+- [Custom transit](https://codepen.io/rexrainbow/pen/OJvJwob)
 
 ## Usage
 
@@ -106,7 +107,12 @@ var dropDownList = scene.rexUI.add.dropDownList({
         // },
 
         // easeIn: 500,
+        // transitIn: undefined,
+        // transitIn: function(listPanel, duration) {  },
+
         // easeOut: 100,
+        // transitOut: undefined,
+        // transitOut: function(listPanel, duration) {  },
 
         // wrap: false,
         // width: undefined, 
@@ -198,7 +204,23 @@ var dropDownList = scene.rexUI.add.dropDownList({
         }
         ```
     - `list.easeIn` : Pop-up duration in ms. Default value is `500`.
+    - `list.transitIn` : Tween behavior of opening list panel.
+        - `undefined` : Expand list panel by pop-up, default behavior.
+        - Custom callback
+            ```javascript
+            function(listPanel, duration) {
+    
+            }
+            ```
     - `list.easeOut` : Scale-down duration in ms. Default value is `100`.
+    - `list.transitOut` : Tween behavior of closing list panel.
+        - `undefined` : Closing list panel by scale-down, default behavior.
+        - Custom callback
+            ```javascript
+            function(listPanel, duration) {
+    
+            }
+            ```
     - `list.wrap` : 
         - `true` : [fixwidth-sizer](ui-fixwidthsizer.md) layout, a row within buttons.
         - `false` : [sizer](ui-sizer.md) layout, a row within a button. Default behavior.

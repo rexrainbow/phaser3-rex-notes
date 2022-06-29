@@ -34,11 +34,15 @@ var Setup = function (data) {
 
     // Load CubismPhysics
     var arrayBuffer = data.physics;
-    this.loadPhysics(arrayBuffer, arrayBuffer.byteLength);
+    if (arrayBuffer) {
+        this.loadPhysics(arrayBuffer, arrayBuffer.byteLength);
+    }
 
     // Load CubismPose
     var arrayBuffer = data.pose;
-    this.loadPose(arrayBuffer, arrayBuffer.byteLength);
+    if (arrayBuffer) {
+        this.loadPose(arrayBuffer, arrayBuffer.byteLength);
+    }
 
     // Setup EyeBlink
     if (setting.getEyeBlinkParameterCount() > 0) {
@@ -75,7 +79,9 @@ var Setup = function (data) {
 
     // Load UserData
     var arrayBuffer = data.userData;
-    this.loadUserData(arrayBuffer, arrayBuffer.byteLength);
+    if (arrayBuffer) {
+        this.loadUserData(arrayBuffer, arrayBuffer.byteLength);
+    }
 
     // Setup EyeBlinkIds
     var eyeBlinkIdCount = setting.getEyeBlinkParameterCount();

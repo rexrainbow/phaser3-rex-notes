@@ -1526,13 +1526,19 @@
     clearMask: function clearMask(destroyMask) {
       if (destroyMask === undefined) {
         destroyMask = false;
-      }
+      } // Clear current mask
+
+
+      this._mask = null; // Clear children mask
+
+      this.children.forEach(function (child) {
+        child.clearMask(false);
+      });
 
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
 
-      this.mask = null;
       return this;
     }
   };
