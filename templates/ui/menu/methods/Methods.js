@@ -1,5 +1,4 @@
-import SetTransitInCallback from './SetTransitInCallback.js';
-import SetTransitOutCallback from './SetTransitOutCallback.js';
+import SetTransitCallbackMethods from './SetTransitCallbackMethods.js';
 import DelayCallMethods from './DelayCallMethods.js';
 import ExpandSubMenu from './ExpandSubMenu.js';
 import Collapse from './Collapse.js';
@@ -7,8 +6,6 @@ import CollapseSubMenu from './CollapseSubMenu.js';
 import IsInTouching from './IsInTouching.js';
 
 var Methods = {
-    setTransitInCallback: SetTransitInCallback,
-    setTransitOutCallback: SetTransitOutCallback,
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
     collapseSubMenu: CollapseSubMenu,
@@ -17,6 +14,7 @@ var Methods = {
 
 Object.assign(
     Methods,
+    SetTransitCallbackMethods,
     DelayCallMethods
 )
 export default Methods;
