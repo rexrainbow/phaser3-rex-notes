@@ -9,7 +9,7 @@ declare namespace AwaitLoaderCallback {
 
 declare function AwaitLoaderCallback(
     this: Phaser.Loader.LoaderPlugin,
-    runTaskCallback: AwaitLoaderCallback.RunTaskCallbackType,
+    callback: AwaitLoaderCallback.RunTaskCallbackType,
     scope?: object
 ): Phaser.Loader.LoaderPlugin;
 
@@ -17,7 +17,7 @@ declare function AwaitLoaderCallback(
     this: Phaser.Loader.LoaderPlugin,
     key: string,
     config: {
-        runTaskCallback: AwaitLoaderCallback.RunTaskCallbackType,
+        callback: AwaitLoaderCallback.RunTaskCallbackType,
         scope?: object
     }
 ): Phaser.Loader.LoaderPlugin;
