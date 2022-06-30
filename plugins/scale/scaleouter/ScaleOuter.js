@@ -14,8 +14,8 @@ class ScaleOuter {
         this.scrollX = 0;
         this.scrollY = 0;
         this.zoom = 1;
-        this._innerViewport = undefined;
-        this._outerViewport = undefined;
+        this.innerViewport = undefined;
+        this.outerViewport = undefined;
 
         this.boot();
     }
@@ -39,8 +39,8 @@ class ScaleOuter {
         this.cameras.clear();
         this.cameras = undefined;
         this.scene = undefined;
-        this._innerViewport = undefined;
-        this._outerViewport = undefined;
+        this.innerViewport = undefined;
+        this.outerViewport = undefined;
     }
 
     stop() {
@@ -48,16 +48,6 @@ class ScaleOuter {
         scene.sys.scale.off('resize', this.scale, this);
         scene.sys.events.off('preupdate', this.onFirstTick, this);
         return this;
-    }
-
-    get innerViewport() {
-        this._innerViewport = GetInnerViewport(this, this._innerViewport);
-        return this._innerViewport;
-    }
-
-    get outerViewport() {
-        this._outerViewport = GetOuterViewport(this, this._outerViewport);
-        return this._outerViewport;
     }
 
     add(camera) {
@@ -83,6 +73,10 @@ class ScaleOuter {
             camera.scrollX = this.scrollX;
             camera.scrollY = this.scrollY;
         }, this);
+
+        this.innerViewport = GetInnerViewport(this, this.innerViewport);
+        this.outerViewport = GetOuterViewport(this, this.outerViewport);
+
         return this;
     }
 }
