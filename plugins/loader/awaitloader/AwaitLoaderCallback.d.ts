@@ -4,7 +4,7 @@ declare namespace AwaitLoaderCallback {
     type RunTaskCallbackType = (
         successCallback: Function,
         failureCallback: Function
-    ) => void;
+    ) => Promise<void> | void;
 }
 
 declare function AwaitLoaderCallback(
