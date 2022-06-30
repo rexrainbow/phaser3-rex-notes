@@ -8,9 +8,7 @@ import { uglify } from "rollup-plugin-uglify";
 // import { terser } from 'rollup-plugin-terser'; // Uglify for ES6
 
 
-const pluginList = {
-    'live2dplugin': ['./plugins/live2d-plugin.js', true],
-}
+const pluginList = require('./plugin-list.js');
 // {name: path}           // pure javascript
 // {name: [path, true]}   // javascript + typescript
 
