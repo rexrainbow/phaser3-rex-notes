@@ -2,30 +2,35 @@ var UpdateViewMatrix = function (model, calcMatrix) {
     var gameObject = model.parent;
     var projectionMatrix = model._globalData.projectionMatrix;
 
-    // Copy from projection matrix
     var matrix = model.viewMatrix;
-    matrix.copyFrom(projectionMatrix);
+    // Reset to identity matrix
+    matrix.loadIdentity();
+
+    // Apply scale
+    var modelWidth = gameObject.width;
+    var modelHeight = gameObject.height;
+    var canvasWidth = projectionMatrix.width;
+    var canvasHeight = projectionMatrix.height
+
+    var scaleX = (calcMatrix.scaleX * modelWidth) / canvasWidth;
+    var scaleY = (calcMatrix.scaleY * modelHeight) / canvasHeight;
+
+    if (modelWidth > modelHeight) {
+        scaleY *= modelWidth / modelHeight;
+    } else {
+        scaleX *= modelHeight / modelWidth;
+    }
+
+    matrix.scale(scaleX, scaleY);
+
     // Apply rotate
     matrix.rotate(-calcMatrix.rotationNormalized);
-    // Apply scale
-    var canvasWidth = projectionMatrix.width,
-        canvasHeight = projectionMatrix.height
-    var ratio;
-    if (canvasWidth > canvasHeight) {
-        ratio = model._pixelsPerUnit / canvasHeight;
-    } else {
-        ratio = model._pixelsPerUnit / canvasWidth;
-    }
-    matrix.scaleRelative(
-        calcMatrix.scaleX * ratio,
-        calcMatrix.scaleY * ratio
-    );
+
     // Apply translate
     matrix.translate(
         projectionMatrix.toLocalX(calcMatrix.getX(0, 0)),
         projectionMatrix.toLocalY(calcMatrix.getY(0, 0))
     );
-
 
     var modelMatrix = model._modelMatrix;
     // Offset for origin
