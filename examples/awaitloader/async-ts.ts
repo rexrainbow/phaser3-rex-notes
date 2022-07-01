@@ -14,8 +14,10 @@ class Demo extends Phaser.Scene {
         var textObject = this.add.text(0, 0, 'Preload\n');
 
         AwaitLoader.call(this.load, async function (successCallback: Function, failureCallback: Function) {
-            textObject.text += 'Loader1\n';
-            setTimeout(successCallback, 1000);
+            textObject.text += 'Async start\n';
+            await Delay(1000);
+            textObject.text += 'Async end\n';
+            successCallback();
         })
 
         this.print = textObject;
@@ -28,6 +30,12 @@ class Demo extends Phaser.Scene {
     update() {
     }
 }
+
+var Delay = function (time) {   
+    return new Promise(function (resolve, reject) {
+        setTimeout(resolve, time);
+    });
+};
 
 var config = {
     type: Phaser.AUTO,
