@@ -6,6 +6,7 @@ var OnParseFadeOutBackgroundMusicTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.bgm.fadeout', 'bgm.fadeout');
     parser
         .on(`+${tagName}`, function (time, isStopped) {
+            isStopped = (isStopped === 'stop');
             AppendCommandBase.call(textPlayer,
                 'bgm.fadeout',           // name
                 FadeOutBackgroundMusic,  // callback

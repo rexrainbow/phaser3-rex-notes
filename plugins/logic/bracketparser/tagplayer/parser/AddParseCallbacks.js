@@ -1,13 +1,4 @@
-import ParseColorTag from './textstyle/OnParseColorTag.js';
-import ParseStrokeColorTag from './textstyle/OnParseStrokeColorTag.js';
-import ParseBoldTag from './textstyle/OnParseBoldTag.js';
-import ParseItalicTag from './textstyle/OnParseItalicTag.js';
-import ParseFontSizeTag from './textstyle/OnParseFontSizeTag.js';
-import ParseOffsetYTag from './textstyle/OnParseOffsetYTag.js';
-import ParseShadowColorTag from './textstyle/OnParseShadowColorTag.js';
-import ParseAlignTag from './textstyle/OnParseAlignTag.js'
-import ParseImageTag from './image/OnParseImageTag.js';
-import ParseTypingSpeedTag from './typing/OnParseTypingSpeedTag.js';
+import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParsePlaySoundEffectTag from './soundeffect/OnParsePlaySoundEffectTag.js';
 import ParseFadeInSoundEffectTag from './soundeffect/OnParseFadeInSoundEffectTag.js';
 import ParseFadeOutSoundEffectTag from './soundeffect/OnParseFadeOutSoundEffectTag.js';
@@ -24,7 +15,6 @@ import ParseFlashCameraTag from './camera/OnParseFlashCameraTag.js';
 import ParseZoomCameraTag from './camera/OnParseZoomCameraTag.js';
 import ParseRotateCameraTag from './camera/OnParseRotateCameraTag.js';
 import ParseScrollCameraTag from './camera/OnParseScrollCameraTag.js';
-import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
 import ParseRemoveAllSpriteTag from './sprites/OnParseRemoveAllSpritesTag.js';
 import ParseSetTextureTag from './sprites/OnParseSetTextureTag.js';
@@ -33,42 +23,40 @@ import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
-import ParseNewLineTag from './content/OnParseNewLineTag.js';
-import ParseContentOff from './content/OnParseContentOff.js';
-import ParseContentOn from './content/OnParseContentOn.js';
 import ParseContent from './content/OnParseContent.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 
 const ParseCallbacks = [
-    ParseColorTag, ParseStrokeColorTag,
-    ParseBoldTag, ParseItalicTag,
-    ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag, ParseAlignTag,
-    ParseImageTag,
 
-    ParseTypingSpeedTag,
+    ParseWaitTag,
 
     ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
     ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
 
     ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag, ParseRotateCameraTag, ParseScrollCameraTag,
 
-    ParseWaitTag,
-
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
-    ParseNewLineTag,
-    ParseContentOff, ParseContentOn,
     ParseContent,
 
     ParseCustomTag,
 ];
 
-var AddParseCallbacks = function (textPlayer, parser, config) {
+var AddParseCallbacks = function (tagPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
-        ParseCallbacks[i](textPlayer, parser, config);
+        ParseCallbacks[i](tagPlayer, parser, config);
     }
+
+    parser
+        .on('start', function () {
+            tagPlayer.emit('start', parser);
+        })
+        .on('complete', function () {
+            tagPlayer.emit('complete', parser);
+        })
+
 }
 
 export default AddParseCallbacks;

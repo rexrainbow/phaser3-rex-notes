@@ -5,11 +5,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var OnParseSetBackgroundMusicVolumeTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.bgm.volume', 'bgm.volume');
     parser
-        .on(`+${tagName}`, function (name) {
+        .on(`+${tagName}`, function (volume) {
             AppendCommandBase.call(textPlayer,
                 'bgm.volume',              // name
                 SetBackgroundMusicVolume,  // callback
-                name,                      // params
+                volume,                    // params
                 textPlayer,                // scope
             );
             parser.skipEvent();
@@ -19,9 +19,9 @@ var OnParseSetBackgroundMusicVolumeTag = function (textPlayer, parser, config) {
         })
 }
 
-var SetBackgroundMusicVolume = function (name) {
+var SetBackgroundMusicVolume = function (volume) {
     // this: textPlayer
-    this.soundManager.setBackgroundMusicVolume(name);
+    this.soundManager.setBackgroundMusicVolume(volume);
 }
 
 export default OnParseSetBackgroundMusicVolumeTag;

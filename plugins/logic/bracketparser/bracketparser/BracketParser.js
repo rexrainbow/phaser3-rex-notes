@@ -1,7 +1,7 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetValue from '../../utils/object/GetValue.js';
-import EscapeRegex from '../../utils/string/EscapeRegex.js';
-import DefaultValueConverter from '../../utils/string/TypeConvert.js';
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../../utils/object/GetValue.js';
+import EscapeRegex from '../../../utils/string/EscapeRegex.js';
+import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
 const DefaultTagExpression = `[a-z0-9-_.]+`;
@@ -112,12 +112,13 @@ class BracketParser {
             this.onResume();
         }
 
-        var text = this.source,
-            lastIndex = text.length;
-
         if (this.reSplit.lastIndex === 0) {
             this.onStart();
         }
+
+        var text = this.source,
+            lastIndex = text.length;
+
         while (!this.isPaused) {
             var regexResult = this.reSplit.exec(text);
             if (!regexResult) {
@@ -208,6 +209,23 @@ class BracketParser {
     onResume() {
         this.isPaused = false;
         this.emit('resume', this);
+    }
+
+    getTagOnRegString(tagExpression, valueExpression) {
+        if (tagExpression === undefined) {
+            tagExpression = this.tagExpression;
+        }
+        if (valueExpression === undefined) {
+            valueExpression = this.valueExpression;
+        }
+        return `${EscapeRegex(this.delimiterLeft)}(${tagExpression})(=(${valueExpression}))?${EscapeRegex(this.delimiterRight)}`;
+    }
+
+    getTagOffRegString(tagExpression) {
+        if (tagExpression === undefined) {
+            tagExpression = this.tagExpression;
+        }
+        return `${EscapeRegex(this.delimiterLeft)}\/(${tagExpression})${EscapeRegex(this.delimiterRight)}`;
     }
 }
 

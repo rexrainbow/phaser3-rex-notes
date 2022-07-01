@@ -1,30 +1,30 @@
-class SpriteData {
-    constructor(spriteManager, sprite, name) {
-        this.spriteManager = spriteManager;
-        this.sprite = sprite.setName(name);
+class BobBase {
+    constructor(GOManager, gameObject, name) {
+        this.GOManager = GOManager;
+        this.gameObject = gameObject.setName(name);
         this.tweens = {};
         this.name = name;
     }
 
     get scene() {
-        return this.spriteManager.scene;
+        return this.GOManager.scene;
     }
 
     get timeScale() {
-        return this.spriteManager.timeScale;
+        return this.GOManager.timeScale;
     }
 
     destroy() {
         this
-            .freeSprite()
+            .freeGO()
             .freeTweens();
 
-        this.spriteManager = undefined;
+        this.GOManager = undefined;
     }
 
-    freeSprite() {
-        this.sprite.destroy();
-        this.sprite = undefined;
+    freeGO() {
+        this.gameObject.destroy();
+        this.gameObject = undefined;
         return this;
     }
 
@@ -38,7 +38,7 @@ class SpriteData {
     }
 
     setProperty(property, value) {
-        this.sprite[property] = value;
+        this.gameObject[property] = value;
         return this;
     }
 
@@ -48,9 +48,9 @@ class SpriteData {
             tweenTasks[property].remove();
         }
 
-        var sprite = this.sprite;
+        var gameObject = this.gameObject;
         var config = {
-            targets: sprite,
+            targets: gameObject,
             duration: duration,
             ease: ease,
             repeat: repeat,
@@ -59,7 +59,7 @@ class SpriteData {
                 tweenTasks[property].remove();
                 delete tweenTasks[property];
                 if (onComplete) {
-                    onComplete(sprite, property);
+                    onComplete(gameObject, property);
                 }
             },
             onCompleteScope: this
@@ -72,37 +72,7 @@ class SpriteData {
         return this;
     }
 
-    setTexture(textureKey, frameKey) {
-        this.sprite.setTexture(textureKey, frameKey);
-        return this;
-    }
-
-    playAnimation(key) {
-        this.sprite.anims.timeScale = this.timeScale;
-        this.sprite.play(key);
-        return this;
-    }
-
-    stopAnimation() {
-        this.sprite.stop();
-        return this;
-    }
-
-    chainAnimation(keys) {
-        this.sprite.chain(keys);
-        return this;
-    }
-
-    pauseAnimation() {
-        this.sprite.anims.pause();
-        return this;
-    }
-
     setTimeScale(timeScale) {
-        if (this.sprite.anims) {
-            this.sprite.anims.timeScale = timeScale;
-        }
-
         var tweenTasks = this.tweens;
         for (var key in tweenTasks) {
             tweenTasks[key].timeScale = timeScale;
@@ -112,4 +82,4 @@ class SpriteData {
     }
 }
 
-export default SpriteData;
+export default BobBase;
