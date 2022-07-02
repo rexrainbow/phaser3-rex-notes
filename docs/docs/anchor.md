@@ -12,6 +12,7 @@ Set size and position based on visible window.
 
 - [Anchor](https://codepen.io/rexrainbow/pen/oVxWVB)
 - [Resize](https://codepen.io/rexrainbow/pen/ZEyRVov)
+- [Camera zoom/scroll](https://codepen.io/rexrainbow/pen/yLKNbRy)
 
 ## Usage
 
