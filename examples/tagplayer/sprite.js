@@ -53,15 +53,15 @@ class Demo extends Phaser.Scene {
 [wait=1000]
 
 [text.a]
-[text.a.x=100][text.a.x.to=300,1000,Cubic]
+[text.a.x=300]
 [text.a.y=100]
-[text.a.text]
+[text.a.typing]
 Hello\\n
 Phaser\\n
 World
 
 [text.b]
-[text.b.x=300]
+[text.b.x=100][text.a.x.to=300,1000,Cubic]
 [text.b.y=500]
 [text.b.text]
 2nd text

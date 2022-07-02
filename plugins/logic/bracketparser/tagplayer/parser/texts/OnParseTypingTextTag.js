@@ -1,25 +1,25 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var IsSetTextTag = function (tags, prefix) {
-    // text.name.text
-    return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'text');
+var IsTypingTextTag = function (tags, prefix) {
+    // text.name.typing
+    return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'typing');
 }
 
-var OnParseSetTextTag = function (tagPlayer, parser, config) {
+var OnParseTypingTextTag = function (tagPlayer, parser, config) {
     var prefix = GetValue(config, 'text', 'text');
     if (!prefix) {
         return;
     }
     parser
-        .on(`+`, function (tag) {
+        .on(`+`, function (tag, speed) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [text.name.text]
+            // [text.name.typing]
             var tags = tag.split('.');
             var name;
-            if (IsSetTextTag(tags, prefix)) {
+            if (IsTypingTextTag(tags, prefix)) {
                 name = tags[1];
             } else {
                 return;
@@ -38,10 +38,10 @@ var OnParseSetTextTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [text.name.text]
+            // [text.name.typing]
             var tags = parser.lastTagStart.split('.');
             var name;
-            if (IsSetTextTag(tags, prefix)) {
+            if (IsTypingTextTag(tags, prefix)) {
                 name = tags[1];
             } else {
                 return;
@@ -49,10 +49,10 @@ var OnParseSetTextTag = function (tagPlayer, parser, config) {
 
             content = content.replaceAll('\\n', '\n');
 
-            tagPlayer.textManager.setText(name, content);
+            tagPlayer.textManager.typingText(name, content);
 
             parser.skipEvent();
         })
 }
 
-export default OnParseSetTextTag;
+export default OnParseTypingTextTag;

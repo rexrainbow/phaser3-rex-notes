@@ -298,7 +298,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$M = function GetValue(source, key, defaultValue) {
+  var GetValue$N = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -382,14 +382,14 @@
       _classCallCheck(this, BracketParser);
 
       // Event emitter
-      this.setEventEmitter(GetValue$M(config, 'eventEmitter', undefined)); // Parameters for regex
+      this.setEventEmitter(GetValue$N(config, 'eventEmitter', undefined)); // Parameters for regex
 
-      this.setTagExpression(GetValue$M(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$M(config, 'regex.value', DefaultValueExpression)); // Value convert
+      this.setTagExpression(GetValue$N(config, 'regex.tag', DefaultTagExpression));
+      this.setValueExpression(GetValue$N(config, 'regex.value', DefaultValueExpression)); // Value convert
 
-      this.setValueConverter(GetValue$M(config, 'valueConvert', true)); // Brackets and generate regex
+      this.setValueConverter(GetValue$N(config, 'valueConvert', true)); // Brackets and generate regex
 
-      var delimiters = GetValue$M(config, 'delimiters', '<>');
+      var delimiters = GetValue$N(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
       this.isPaused = false;
@@ -629,11 +629,11 @@
 
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 
-  var GetValue$L = Phaser.Utils.Objects.GetValue;
+  var GetValue$M = Phaser.Utils.Objects.GetValue;
 
   var OnParseWaitTag = function OnParseWaitTag(tagPlayer, parser, config) {
-    var tagWait = GetValue$L(config, 'tags.wait', 'wait');
-    var tagClick = GetValue$L(config, 'tags.click', 'click');
+    var tagWait = GetValue$M(config, 'tags.wait', 'wait');
+    var tagClick = GetValue$M(config, 'tags.click', 'click');
     parser.on("+".concat(tagWait), function (name) {
       tagPlayer.wait(name);
       parser.skipEvent();
@@ -649,10 +649,10 @@
     });
   };
 
-  var GetValue$K = Phaser.Utils.Objects.GetValue;
+  var GetValue$L = Phaser.Utils.Objects.GetValue;
 
   var OnParsePlaySoundEffectTag = function OnParsePlaySoundEffectTag(tagPlayer, parser, config) {
-    var tagName = GetValue$K(config, 'tags.se', 'se');
+    var tagName = GetValue$L(config, 'tags.se', 'se');
     parser.on("+".concat(tagName), function (name, fadeInTime) {
       if (this.skipSoundEffect) {
         return;
@@ -670,10 +670,10 @@
     });
   };
 
-  var GetValue$J = Phaser.Utils.Objects.GetValue;
+  var GetValue$K = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(tagPlayer, parser, config) {
-    var tagName = GetValue$J(config, 'tags.se.fadein', 'se.fadein');
+    var tagName = GetValue$K(config, 'tags.se.fadein', 'se.fadein');
     parser.on("+".concat(tagName), function (time) {
       tagPlayer.soundManager.fadeInSoundEffect(time);
       parser.skipEvent();
@@ -682,10 +682,10 @@
     });
   };
 
-  var GetValue$I = Phaser.Utils.Objects.GetValue;
+  var GetValue$J = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeOutSoundEffectTag = function OnParseFadeOutSoundEffectTag(tagPlayer, parser, config) {
-    var tagName = GetValue$I(config, 'tags.se.fadeout', 'se.fadeout');
+    var tagName = GetValue$J(config, 'tags.se.fadeout', 'se.fadeout');
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
       tagPlayer.soundManager.fadeOutSoundEffect(time, isStopped);
@@ -695,10 +695,10 @@
     });
   };
 
-  var GetValue$H = Phaser.Utils.Objects.GetValue;
+  var GetValue$I = Phaser.Utils.Objects.GetValue;
 
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(tagPlayer, parser, config) {
-    var tagName = GetValue$H(config, 'tags.se.volume', 'se.volume');
+    var tagName = GetValue$I(config, 'tags.se.volume', 'se.volume');
     parser.on("+".concat(tagName), function (volume) {
       tagPlayer.soundManager.setSoundEffectVolume(volume);
       parser.skipEvent();
@@ -707,10 +707,10 @@
     });
   };
 
-  var GetValue$G = Phaser.Utils.Objects.GetValue;
+  var GetValue$H = Phaser.Utils.Objects.GetValue;
 
   var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$G(config, 'tags.bgm', 'bgm');
+    var tagName = GetValue$H(config, 'tags.bgm', 'bgm');
     parser.on("+".concat(tagName), function (name, fadeInTime) {
       tagPlayer.soundManager.playBackgroundMusic(name);
 
@@ -725,10 +725,10 @@
     });
   };
 
-  var GetValue$F = Phaser.Utils.Objects.GetValue;
+  var GetValue$G = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$F(config, 'tags.bgm.fadein', 'bgm.fadein');
+    var tagName = GetValue$G(config, 'tags.bgm.fadein', 'bgm.fadein');
     parser.on("+".concat(tagName), function (time) {
       tagPlayer.soundManager.fadeInBackgroundMusic(time);
       parser.skipEvent();
@@ -737,10 +737,10 @@
     });
   };
 
-  var GetValue$E = Phaser.Utils.Objects.GetValue;
+  var GetValue$F = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$E(config, 'tags.bgm.fadeout', 'bgm.fadeout');
+    var tagName = GetValue$F(config, 'tags.bgm.fadeout', 'bgm.fadeout');
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
       tagPlayer.soundManager.fadeOutBackgroundMusic(time, isStopped);
@@ -750,10 +750,10 @@
     });
   };
 
-  var GetValue$D = Phaser.Utils.Objects.GetValue;
+  var GetValue$E = Phaser.Utils.Objects.GetValue;
 
   var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$D(config, 'tags.bgm.cross', 'bgm.cross');
+    var tagName = GetValue$E(config, 'tags.bgm.cross', 'bgm.cross');
     parser.on("+".concat(tagName), function (name, fadeTime) {
       tagPlayer.soundManager.crossFadeBackgroundMusic(name, fadeTime);
       parser.skipEvent();
@@ -762,10 +762,10 @@
     });
   };
 
-  var GetValue$C = Phaser.Utils.Objects.GetValue;
+  var GetValue$D = Phaser.Utils.Objects.GetValue;
 
   var OnParsePauseBackgroundMusicTag = function OnParsePauseBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$C(config, 'tags.bgm.pause', 'bgm.pause');
+    var tagName = GetValue$D(config, 'tags.bgm.pause', 'bgm.pause');
     parser.on("+".concat(tagName), function () {
       tagPlayer.soundManager.pauseBackgroundMusic();
       parser.skipEvent();
@@ -775,50 +775,50 @@
     });
   };
 
-  var GetValue$B = Phaser.Utils.Objects.GetValue;
+  var GetValue$C = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$B(config, 'tags.camera.fadein', 'camera.fadein');
+    var tagName = GetValue$C(config, 'tags.camera.fadein', 'camera.fadein');
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       tagPlayer.camera.fadeIn(duration, red, green, blue);
       parser.skipEvent();
     });
   };
 
-  var GetValue$A = Phaser.Utils.Objects.GetValue;
+  var GetValue$B = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$A(config, 'tags.camera.fadeout', 'camera.fadeout');
+    var tagName = GetValue$B(config, 'tags.camera.fadeout', 'camera.fadeout');
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       tagPlayer.camera.fadeOut(duration, red, green, blue);
       parser.skipEvent();
     });
   };
 
-  var GetValue$z = Phaser.Utils.Objects.GetValue;
+  var GetValue$A = Phaser.Utils.Objects.GetValue;
 
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$z(config, 'tags.camera.shake', 'camera.shake');
+    var tagName = GetValue$A(config, 'tags.camera.shake', 'camera.shake');
     parser.on("+".concat(tagName), function (duration, intensity) {
       tagPlayer.camera.shake(duration, intensity);
       parser.skipEvent();
     });
   };
 
-  var GetValue$y = Phaser.Utils.Objects.GetValue;
+  var GetValue$z = Phaser.Utils.Objects.GetValue;
 
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$y(config, 'tags.camera.flash', 'camera.flash');
+    var tagName = GetValue$z(config, 'tags.camera.flash', 'camera.flash');
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       tagPlayer.camera.flash(duration, red, green, blue);
       parser.skipEvent();
     });
   };
 
-  var GetValue$x = Phaser.Utils.Objects.GetValue;
+  var GetValue$y = Phaser.Utils.Objects.GetValue;
 
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$x(config, 'tags.camera.zoom', 'camera.zoom');
+    var tagName = GetValue$y(config, 'tags.camera.zoom', 'camera.zoom');
     parser.on("+".concat(tagName), function (value) {
       tagPlayer.camera.setZoom(value);
       parser.skipEvent();
@@ -828,11 +828,11 @@
     });
   };
 
-  var GetValue$w = Phaser.Utils.Objects.GetValue;
+  var GetValue$x = Phaser.Utils.Objects.GetValue;
   var DegToRad$1 = Phaser.Math.DegToRad;
 
   var OnParseRotateCameraTag = function OnParseRotateCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$w(config, 'tags.camera.rotate', 'camera.rotate');
+    var tagName = GetValue$x(config, 'tags.camera.rotate', 'camera.rotate');
     parser.on("+".concat(tagName), function (value) {
       tagPlayer.camera.setRotation(DegToRad$1(value));
       parser.skipEvent();
@@ -843,10 +843,10 @@
     });
   };
 
-  var GetValue$v = Phaser.Utils.Objects.GetValue;
+  var GetValue$w = Phaser.Utils.Objects.GetValue;
 
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$v(config, 'tags.camera.scroll', 'camera.scroll');
+    var tagName = GetValue$w(config, 'tags.camera.scroll', 'camera.scroll');
     parser.on("+".concat(tagName), function (x, y) {
       tagPlayer.camera.setScroll(x, y);
       parser.skipEvent();
@@ -865,7 +865,7 @@
     });
   };
 
-  var GetValue$u = Phaser.Utils.Objects.GetValue;
+  var GetValue$v = Phaser.Utils.Objects.GetValue;
 
   var IsAddSpriteTag = function IsAddSpriteTag(tags, prefix) {
     // sprite.name
@@ -873,7 +873,7 @@
   };
 
   var OnParseAddSpriteTag = function OnParseAddSpriteTag(tagPlayer, parser, config) {
-    var prefix = GetValue$u(config, 'sprite', 'sprite');
+    var prefix = GetValue$v(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -925,10 +925,10 @@
     });
   };
 
-  var GetValue$t = Phaser.Utils.Objects.GetValue;
+  var GetValue$u = Phaser.Utils.Objects.GetValue;
 
   var OnParseRemoveAllSpritesTag = function OnParseRemoveAllSpritesTag(tagPlayer, parser, config) {
-    var prefix = GetValue$t(config, 'sprite', 'sprite');
+    var prefix = GetValue$u(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -950,7 +950,7 @@
     });
   };
 
-  var GetValue$s = Phaser.Utils.Objects.GetValue;
+  var GetValue$t = Phaser.Utils.Objects.GetValue;
 
   var IsSetTextureTag = function IsSetTextureTag(tags, prefix) {
     // sprite.name.texture
@@ -958,7 +958,7 @@
   };
 
   var OnParseSetTextureTag = function OnParseSetTextureTag(tagPlayer, parser, config) {
-    var prefix = GetValue$s(config, 'sprite', 'sprite');
+    var prefix = GetValue$t(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -985,7 +985,7 @@
     });
   };
 
-  var GetValue$r = Phaser.Utils.Objects.GetValue;
+  var GetValue$s = Phaser.Utils.Objects.GetValue;
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
     // sprite.name.play
@@ -998,7 +998,7 @@
   };
 
   var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(tagPlayer, parser, config) {
-    var prefix = GetValue$r(config, 'sprite', 'sprite');
+    var prefix = GetValue$s(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1068,7 +1068,7 @@
     });
   };
 
-  var GetValue$q = Phaser.Utils.Objects.GetValue;
+  var GetValue$r = Phaser.Utils.Objects.GetValue;
 
   var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
     // sprite.name.chain 
@@ -1076,7 +1076,7 @@
   };
 
   var OnParseChainAnimationTag = function OnParseChainAnimationTag(tagPlayer, parser, config) {
-    var prefix = GetValue$q(config, 'sprite', 'sprite');
+    var prefix = GetValue$r(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1104,7 +1104,7 @@
     });
   };
 
-  var GetValue$p = Phaser.Utils.Objects.GetValue;
+  var GetValue$q = Phaser.Utils.Objects.GetValue;
 
   var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
     // sprite.name.pause 
@@ -1112,7 +1112,7 @@
   };
 
   var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(tagPlayer, parser, config) {
-    var prefix = GetValue$p(config, 'sprite', 'sprite');
+    var prefix = GetValue$q(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1139,7 +1139,7 @@
     });
   };
 
-  var GetValue$o = Phaser.Utils.Objects.GetValue;
+  var GetValue$p = Phaser.Utils.Objects.GetValue;
 
   var IsSetPropertyTag$1 = function IsSetPropertyTag(tags, prefix) {
     // sprite.name.prop
@@ -1147,7 +1147,7 @@
   };
 
   var OnParseSetSpritePropertyTag = function OnParseSetSpritePropertyTag(tagPlayer, parser, config) {
-    var prefix = GetValue$o(config, 'sprite', 'sprite');
+    var prefix = GetValue$p(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1175,7 +1175,7 @@
     });
   };
 
-  var GetValue$n = Phaser.Utils.Objects.GetValue;
+  var GetValue$o = Phaser.Utils.Objects.GetValue;
   var EaseMode$1 = {
     to: true,
     yoyo: true
@@ -1187,7 +1187,7 @@
   };
 
   var OnParseEaseSpritePropertyTag = function OnParseEaseSpritePropertyTag(tagPlayer, parser, config) {
-    var prefix = GetValue$n(config, 'sprite', 'sprite');
+    var prefix = GetValue$o(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1223,7 +1223,7 @@
     });
   };
 
-  var GetValue$m = Phaser.Utils.Objects.GetValue;
+  var GetValue$n = Phaser.Utils.Objects.GetValue;
 
   var IsAddTextTag = function IsAddTextTag(tags, prefix) {
     // text.name
@@ -1231,7 +1231,7 @@
   };
 
   var OnParseAddTextTag = function OnParseAddTextTag(tagPlayer, parser, config) {
-    var prefix = GetValue$m(config, 'text', 'text');
+    var prefix = GetValue$n(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1276,10 +1276,10 @@
     });
   };
 
-  var GetValue$l = Phaser.Utils.Objects.GetValue;
+  var GetValue$m = Phaser.Utils.Objects.GetValue;
 
   var OnParseRemoveAllTextsTag = function OnParseRemoveAllTextsTag(tagPlayer, parser, config) {
-    var prefix = GetValue$l(config, 'text', 'text');
+    var prefix = GetValue$m(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1301,7 +1301,7 @@
     });
   };
 
-  var GetValue$k = Phaser.Utils.Objects.GetValue;
+  var GetValue$l = Phaser.Utils.Objects.GetValue;
 
   var IsSetTextTag = function IsSetTextTag(tags, prefix) {
     // text.name.text
@@ -1309,13 +1309,13 @@
   };
 
   var OnParseSetTextTag = function OnParseSetTextTag(tagPlayer, parser, config) {
-    var prefix = GetValue$k(config, 'text', 'text');
+    var prefix = GetValue$l(config, 'text', 'text');
 
     if (!prefix) {
       return;
     }
 
-    parser.on("+", function (tag, value) {
+    parser.on("+", function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
@@ -1354,6 +1354,63 @@
 
       content = content.replaceAll('\\n', '\n');
       tagPlayer.textManager.setText(name, content);
+      parser.skipEvent();
+    });
+  };
+
+  var GetValue$k = Phaser.Utils.Objects.GetValue;
+
+  var IsTypingTextTag = function IsTypingTextTag(tags, prefix) {
+    // text.name.typing
+    return tags.length === 3 && tags[0] === prefix && tags[2] === 'typing';
+  };
+
+  var OnParseTypingTextTag = function OnParseTypingTextTag(tagPlayer, parser, config) {
+    var prefix = GetValue$k(config, 'text', 'text');
+
+    if (!prefix) {
+      return;
+    }
+
+    parser.on("+", function (tag, speed) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [text.name.typing]
+
+
+      var tags = tag.split('.');
+
+      if (IsTypingTextTag(tags, prefix)) {
+        tags[1];
+      } else {
+        return;
+      } // Set text in content section
+
+
+      parser.skipEvent();
+    }).on('content', function (content) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      }
+
+      if (content === '\n') {
+        return;
+      } // [text.name.typing]
+
+
+      var tags = parser.lastTagStart.split('.');
+      var name;
+
+      if (IsTypingTextTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      content = content.replaceAll('\\n', '\n');
+      tagPlayer.textManager.typingText(name, content);
       parser.skipEvent();
     });
   };
@@ -1482,7 +1539,7 @@
     });
   };
 
-  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseAddTextTag, OnParseRemoveAllTextsTag, OnParseSetTextTag, OnParseSetTextPropertyTag, OnParseEaseTextPropertyTag, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseAddTextTag, OnParseRemoveAllTextsTag, OnParseSetTextTag, OnParseTypingTextTag, OnParseSetTextPropertyTag, OnParseEaseTextPropertyTag, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(tagPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
@@ -4334,6 +4391,15 @@
       value: function setText(text) {
         this.gameObject.setText(text);
         return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
+        var gameObject = this.gameObject;
+
+        if (!gameObject._typing) {
+          gameObject._typing = new TextTyping(gameObject);
+        }
       }
     }, {
       key: "typing",
@@ -8251,12 +8317,16 @@
       this.get(name).setText(text);
       return this;
     },
-    typing: function typing(name, text) {
+    typingText: function typingText(name, text) {
       if (!this.has(name)) {
         this.add(name);
       }
 
       this.get(name).typing(text);
+      return this;
+    },
+    setTypingSpeed: function setTypingSpeed(speed) {
+      this.typingSpeed = speed;
       return this;
     }
   };

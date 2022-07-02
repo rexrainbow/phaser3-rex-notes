@@ -32042,7 +32042,9 @@
 
       var rootMenu = config._rootMenu;
       var parentMenu = config._parentMenu;
-      var parentButton = config._parentButton; // Items
+      var parentButton = config._parentButton; // Popup
+
+      var popUp = GetValue(config, 'popup', true); // Items
 
       var items = GetValue(config, 'items', undefined); // Background
 
@@ -32126,7 +32128,9 @@
         }
       }
 
-      _this.setOrigin(originX, originY).layout(); // Sub-menu: 
+      if (popUp) {
+        _this.setOrigin(originX, originY).layout();
+      } // Sub-menu: 
       // - scale to root's scale value
       // - align to parent button
 
@@ -32163,11 +32167,15 @@
         }
       }
 
-      _this.pushIntoBounds(_this.root.bounds);
+      MenuSetInteractive(_assertThisInitialized(_this));
 
-      MenuSetInteractive(_assertThisInitialized(_this)); // Expand this menu
+      if (popUp) {
+        _this.pushIntoBounds(_this.root.bounds); // Expand this menu
 
-      Expand.call(_assertThisInitialized(_this));
+
+        Expand.call(_assertThisInitialized(_this));
+      }
+
       return _this;
     }
 

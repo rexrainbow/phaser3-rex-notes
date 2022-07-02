@@ -25,6 +25,8 @@ class Menu extends Buttons {
         var rootMenu = config._rootMenu;
         var parentMenu = config._parentMenu;
         var parentButton = config._parentButton;
+        // Popup
+        var popUp = GetValue(config, 'popup', true);
         // Items
         var items = GetValue(config, 'items', undefined);
         // Background
@@ -104,9 +106,9 @@ class Menu extends Buttons {
             }
         }
 
-        this
-            .setOrigin(originX, originY)
-            .layout();
+        if (popUp) {
+            this.setOrigin(originX, originY).layout();
+        }
 
         // Sub-menu: 
         // - scale to root's scale value
@@ -132,12 +134,16 @@ class Menu extends Buttons {
                     break;
             }
         }
-        this.pushIntoBounds(this.root.bounds);
 
         MenuSetInteractive(this);
 
-        // Expand this menu
-        Expand.call(this);
+        if (popUp) {
+            this.pushIntoBounds(this.root.bounds);
+
+            // Expand this menu
+            Expand.call(this);
+        }
+
     }
 
     destroy(fromScene) {

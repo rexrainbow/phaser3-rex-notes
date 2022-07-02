@@ -82,6 +82,7 @@ var menu = scene.rexUI.add.menu({
     // y: 0,
     // anchor: undefined,
 
+    // popup: true,
     // orientation: 1,
     // subMenuSide: undefined,
     items: [],
@@ -141,6 +142,9 @@ var menu = scene.rexUI.add.menu({
         - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
         - Padding : `'+n'`, or `'-n'`.
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
+- `popup` : 
+    - `true` : Pop-up menu, will layout automatically, push inside viewport. Default behavior.
+    - `false` : Static menu, can put into another sizer, won't layout automatically.
 - `orientation` : Main orientation of the menu, default is `1` (top to bottom)
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange buttons from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange buttons from top to bottom.

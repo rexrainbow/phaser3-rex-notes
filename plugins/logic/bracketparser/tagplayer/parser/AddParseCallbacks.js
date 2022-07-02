@@ -26,6 +26,7 @@ import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.j
 import ParseAddTextTag from './texts/OnParseAddTextTag.js';
 import ParseRemoveTextTag from './texts/OnParseRemoveAllTextsTag.js';
 import ParseSetTextTag from './texts/OnParseSetTextTag.js';
+import ParseTypingTextTag from './texts/OnParseTypingTextTag.js';
 import ParseSetTextPropertyTag from './texts/OnParseSetTextPropertyTag.js';
 import ParseEaseTextPropertyTag from './texts/OnParseEaseTextPropertyTag.js'
 import ParseContent from './content/OnParseContent.js';
@@ -44,7 +45,8 @@ const ParseCallbacks = [
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
-    ParseAddTextTag, ParseRemoveTextTag, ParseSetTextTag,
+    ParseAddTextTag, ParseRemoveTextTag,
+    ParseSetTextTag, ParseTypingTextTag,
     ParseSetTextPropertyTag, ParseEaseTextPropertyTag,
 
     ParseContent,

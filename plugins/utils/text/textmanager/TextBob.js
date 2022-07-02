@@ -7,6 +7,13 @@ class TextBob extends BobBase {
         return this;
     }
 
+    setTypingSpeed(speed) {
+        var gameObject = this.gameObject;
+        if (!gameObject._typing) {
+            gameObject._typing = new TextTyping(gameObject);
+        }
+    }
+
     typing(text, speed) {
         var gameObject = this.gameObject;
         if (!gameObject._typing) {

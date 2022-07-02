@@ -8,12 +8,17 @@ export default {
         return this;
     },
 
-    typing(name, text) {
+    typingText(name, text) {
         if (!this.has(name)) {
             this.add(name);
         }
 
         this.get(name).typing(text);
+        return this;
+    },
+
+    setTypingSpeed(speed) {
+        this.typingSpeed = speed;
         return this;
     }
 }
