@@ -2,7 +2,7 @@ import IsPointInBounds from '../bounds/IsPointInBounds.js';
 
 var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
     if (pointer) {
-        return IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest);
+        return IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest);
 
     } else {
         var inputManager = gameObject.scene.input.manager;
