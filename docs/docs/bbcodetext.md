@@ -15,6 +15,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [Wrap](https://codepen.io/rexrainbow/pen/BaZEGOB)
 - [Measure margin of text](https://codepen.io/rexrainbow/pen/eYEOYzX)
 - [Generate texture](https://codepen.io/rexrainbow/pen/vYJQrrX)
+- [Image height](https://codepen.io/rexrainbow/pen/yLKNVaW)
 
 ## Usage
 
