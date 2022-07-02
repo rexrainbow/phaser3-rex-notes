@@ -450,12 +450,12 @@
           this.onResume();
         }
 
-        var text = this.source,
-            lastIndex = text.length;
-
         if (this.reSplit.lastIndex === 0) {
           this.onStart();
         }
+
+        var text = this.source,
+            lastIndex = text.length;
 
         while (!this.isPaused) {
           var regexResult = this.reSplit.exec(text);
@@ -558,6 +558,28 @@
       value: function onResume() {
         this.isPaused = false;
         this.emit('resume', this);
+      }
+    }, {
+      key: "getTagOnRegString",
+      value: function getTagOnRegString(tagExpression, valueExpression) {
+        if (tagExpression === undefined) {
+          tagExpression = this.tagExpression;
+        }
+
+        if (valueExpression === undefined) {
+          valueExpression = this.valueExpression;
+        }
+
+        return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
+      }
+    }, {
+      key: "getTagOffRegString",
+      value: function getTagOffRegString(tagExpression) {
+        if (tagExpression === undefined) {
+          tagExpression = this.tagExpression;
+        }
+
+        return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
       }
     }]);
 

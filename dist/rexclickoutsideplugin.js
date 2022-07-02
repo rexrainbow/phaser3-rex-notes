@@ -605,7 +605,7 @@
       for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
 
-        if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+        if (IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest)) {
           return true;
         }
       }

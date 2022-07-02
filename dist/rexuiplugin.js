@@ -630,7 +630,7 @@
   var NOOP = function NOOP() {//  NOOP
   };
 
-  var Methods$b = {
+  var Methods$c = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -762,7 +762,7 @@
       return NinePatch;
     }(GOClass);
 
-    Object.assign(NinePatch.prototype, Methods$b);
+    Object.assign(NinePatch.prototype, Methods$c);
     return NinePatch;
   };
 
@@ -800,7 +800,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$a = {
+  var Methods$b = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -821,7 +821,7 @@
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$1, 'rexNinePatch'));
 
-  Object.assign(NinePatch$1.prototype, Methods$a);
+  Object.assign(NinePatch$1.prototype, Methods$b);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -2159,7 +2159,7 @@
     }
   };
 
-  var Methods$9 = {
+  var Methods$a = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -2193,7 +2193,7 @@
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
 
-  Object.assign(NinePatch.prototype, Methods$9);
+  Object.assign(NinePatch.prototype, Methods$a);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -12124,7 +12124,7 @@
     return GetAll(this.children, 'active', true);
   };
 
-  var Methods$8 = {
+  var Methods$9 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -12270,7 +12270,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$8);
+  Object.assign(DynamicText.prototype, Methods$9);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -12535,12 +12535,12 @@
           this.onResume();
         }
 
-        var text = this.source,
-            lastIndex = text.length;
-
         if (this.reSplit.lastIndex === 0) {
           this.onStart();
         }
+
+        var text = this.source,
+            lastIndex = text.length;
 
         while (!this.isPaused) {
           var regexResult = this.reSplit.exec(text);
@@ -12643,6 +12643,28 @@
       value: function onResume() {
         this.isPaused = false;
         this.emit('resume', this);
+      }
+    }, {
+      key: "getTagOnRegString",
+      value: function getTagOnRegString(tagExpression, valueExpression) {
+        if (tagExpression === undefined) {
+          tagExpression = this.tagExpression;
+        }
+
+        if (valueExpression === undefined) {
+          valueExpression = this.valueExpression;
+        }
+
+        return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
+      }
+    }, {
+      key: "getTagOffRegString",
+      value: function getTagOffRegString(tagExpression) {
+        if (tagExpression === undefined) {
+          tagExpression = this.tagExpression;
+        }
+
+        return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
       }
     }]);
 
@@ -12923,10 +12945,10 @@
 
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(textPlayer, parser, config) {
     var tagName = GetValue$2a(config, 'tags.se.volume', 'se.volume');
-    parser.on("+".concat(tagName), function (name) {
+    parser.on("+".concat(tagName), function (volume) {
       AppendCommand$3.call(textPlayer, 'se.volume', // name
       SetSoundEffectVolume, // callback
-      name, // params
+      volume, // params
       textPlayer // scope
       );
       parser.skipEvent();
@@ -12935,9 +12957,9 @@
     });
   };
 
-  var SetSoundEffectVolume = function SetSoundEffectVolume(name) {
+  var SetSoundEffectVolume = function SetSoundEffectVolume(volume) {
     // this: textPlayer
-    this.soundManager.setSoundEffectVolume(name);
+    this.soundManager.setSoundEffectVolume(volume);
   };
 
   var GetValue$29 = Phaser.Utils.Objects.GetValue;
@@ -13003,6 +13025,7 @@
   var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(textPlayer, parser, config) {
     var tagName = GetValue$27(config, 'tags.bgm.fadeout', 'bgm.fadeout');
     parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
       AppendCommand$3.call(textPlayer, 'bgm.fadeout', // name
       FadeOutBackgroundMusic, // callback
       [time, isStopped], // params
@@ -13294,13 +13317,13 @@
     });
   };
 
-  var Wait$1 = function Wait(name) {
+  var Wait$2 = function Wait(name) {
     this.typeWriter.wait(name); // this: textPlayer
   };
 
   var AppendCommand$1 = function AppendCommand(textPlayer, name) {
     AppendCommand$3.call(textPlayer, 'wait', // name
-    Wait$1, // callback
+    Wait$2, // callback
     name, // params
     textPlayer // scope
     );
@@ -13765,6 +13788,49 @@
     (_this$spriteManager = this.spriteManager).easeProperty.apply(_this$spriteManager, _toConsumableArray(params));
   };
 
+  var GetValue$1Q = Phaser.Utils.Objects.GetValue;
+
+  var OnParseNewLineTag = function OnParseNewLineTag(textPlayer, parser, config) {
+    var tagName = GetValue$1Q(config, 'tags.r', 'r');
+    parser.on("+".concat(tagName), function () {
+      AppendText$1.call(textPlayer, '\n');
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var GetValue$1P = Phaser.Utils.Objects.GetValue;
+
+  var OnParseContentOff = function OnParseContentOff(textPlayer, parser, config) {
+    var tagName = GetValue$1P(config, 'tags.content.off', 'content.off');
+    parser.on("+".concat(tagName), function () {
+      parser.setContentOutputEnable(false);
+      parser.skipEvent();
+    });
+  };
+
+  var GetValue$1O = Phaser.Utils.Objects.GetValue;
+
+  var OnParseContentOn = function OnParseContentOn(textPlayer, parser, config) {
+    var tagName = GetValue$1O(config, 'tags.content.on', 'content.on');
+    parser.on("+".concat(tagName), function () {
+      parser.setContentOutputEnable();
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseContent = function OnParseContent(textPlayer, parser, config) {
+    parser.on('content', function (content) {
+      if (parser.contentOutputEnable) {
+        AppendText$1.call(textPlayer, content);
+      } else {
+        var startTag = "+".concat(parser.lastTagStart);
+        textPlayer.emit("parser.".concat(startTag, "#content"), parser, content);
+      }
+    });
+  };
+
   var OnParseCustomTag = function OnParseCustomTag(textPlayer, parser, config) {
     parser.on('start', function () {
       textPlayer.emit('parser.start', parser);
@@ -13815,51 +13881,7 @@
     );
   };
 
-  var GetValue$1Q = Phaser.Utils.Objects.GetValue;
-
-  var OnParseNewLineTag = function OnParseNewLineTag(textPlayer, parser, config) {
-    var tagName = GetValue$1Q(config, 'tags.r', 'r');
-    parser.on("+".concat(tagName), function () {
-      AppendText$1.call(textPlayer, '\n');
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var GetValue$1P = Phaser.Utils.Objects.GetValue;
-
-  var OnParseContentOff = function OnParseContentOff(textPlayer, parser, config) {
-    var tagName = GetValue$1P(config, 'tags.content.off', 'content.off');
-    parser.on("+".concat(tagName), function () {
-      parser.setContentOutputEnable(false);
-      parser.skipEvent();
-    });
-  };
-
-  var GetValue$1O = Phaser.Utils.Objects.GetValue;
-
-  var OnParseContentOn = function OnParseContentOn(textPlayer, parser, config) {
-    var tagName = GetValue$1O(config, 'tags.content.on', 'content.on');
-    parser.on("+".concat(tagName), function () {
-      parser.setContentOutputEnable();
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseContent = function OnParseContent(textPlayer, parser, config) {
-    parser.on('content', function (content) {
-      if (parser.contentOutputEnable) {
-        AppendText$1.call(textPlayer, content);
-      } else {
-        var startTag = "+".concat(parser.lastTagStart);
-        textPlayer.emit("parser.".concat(startTag, "#content"), parser, content);
-      }
-    });
-  };
-
-  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseOffsetYTag, OnParseShadowColorTag, OnParseAlignTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, // Add ParseSetSpritePropertyTag later    
-  OnParseCustomTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent];
+  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseOffsetYTag, OnParseShadowColorTag, OnParseAlignTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
@@ -14389,7 +14411,7 @@
     }
   };
 
-  var Wait = function Wait(name) {
+  var Wait$1 = function Wait(name) {
     // Already in typingPaused state, or ignore any wait
     if (this.ignoreWait) {
       return this;
@@ -14459,21 +14481,21 @@
     return this;
   };
 
-  var Methods$7 = {
+  var Methods$8 = {
     start: Start,
     typing: Typing,
     pause: Pause$1,
     resume: Resume$1,
     pauseTyping: PauseTyping$1,
     resumeTyping: ResumeTyping,
-    wait: Wait,
+    wait: Wait$1,
     setTimeScale: SetTimeScale$1,
     setIgnoreWait: SetIgnoreWait$1,
     setSkipTypingAnimation: SetSkipTypingAnimation,
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$7, TypingSpeedMethods$1);
+  Object.assign(Methods$8, TypingSpeedMethods$1);
 
   var SceneClass = Phaser.Scene;
 
@@ -15246,7 +15268,7 @@
     }
   };
 
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$7);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$8);
 
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
@@ -16094,45 +16116,37 @@
     return SoundManager;
   }();
 
-  var IsEmpty = function IsEmpty(source) {
-    for (var k in source) {
-      return false;
-    }
+  var BobBase = /*#__PURE__*/function () {
+    function BobBase(GOManager, gameObject, name) {
+      _classCallCheck(this, BobBase);
 
-    return true;
-  };
-
-  var SpriteData = /*#__PURE__*/function () {
-    function SpriteData(spriteManager, sprite, name) {
-      _classCallCheck(this, SpriteData);
-
-      this.spriteManager = spriteManager;
-      this.sprite = sprite.setName(name);
+      this.GOManager = GOManager;
+      this.gameObject = gameObject.setName(name);
       this.tweens = {};
       this.name = name;
     }
 
-    _createClass(SpriteData, [{
+    _createClass(BobBase, [{
       key: "scene",
       get: function get() {
-        return this.spriteManager.scene;
+        return this.GOManager.scene;
       }
     }, {
       key: "timeScale",
       get: function get() {
-        return this.spriteManager.timeScale;
+        return this.GOManager.timeScale;
       }
     }, {
       key: "destroy",
       value: function destroy() {
-        this.freeSprite().freeTweens();
-        this.spriteManager = undefined;
+        this.freeGO().freeTweens();
+        this.GOManager = undefined;
       }
     }, {
-      key: "freeSprite",
-      value: function freeSprite() {
-        this.sprite.destroy();
-        this.sprite = undefined;
+      key: "freeGO",
+      value: function freeGO() {
+        this.gameObject.destroy();
+        this.gameObject = undefined;
         return this;
       }
     }, {
@@ -16150,7 +16164,7 @@
     }, {
       key: "setProperty",
       value: function setProperty(property, value) {
-        this.sprite[property] = value;
+        this.gameObject[property] = value;
         return this;
       }
     }, {
@@ -16162,9 +16176,9 @@
           tweenTasks[property].remove();
         }
 
-        var sprite = this.sprite;
+        var gameObject = this.gameObject;
         var config = {
-          targets: sprite,
+          targets: gameObject,
           duration: duration,
           ease: ease,
           repeat: repeat,
@@ -16174,7 +16188,7 @@
             delete tweenTasks[property];
 
             if (_onComplete) {
-              _onComplete(sprite, property);
+              _onComplete(gameObject, property);
             }
           },
           onCompleteScope: this
@@ -16186,43 +16200,8 @@
         return this;
       }
     }, {
-      key: "setTexture",
-      value: function setTexture(textureKey, frameKey) {
-        this.sprite.setTexture(textureKey, frameKey);
-        return this;
-      }
-    }, {
-      key: "playAnimation",
-      value: function playAnimation(key) {
-        this.sprite.anims.timeScale = this.timeScale;
-        this.sprite.play(key);
-        return this;
-      }
-    }, {
-      key: "stopAnimation",
-      value: function stopAnimation() {
-        this.sprite.stop();
-        return this;
-      }
-    }, {
-      key: "chainAnimation",
-      value: function chainAnimation(keys) {
-        this.sprite.chain(keys);
-        return this;
-      }
-    }, {
-      key: "pauseAnimation",
-      value: function pauseAnimation() {
-        this.sprite.anims.pause();
-        return this;
-      }
-    }, {
       key: "setTimeScale",
       value: function setTimeScale(timeScale) {
-        if (this.sprite.anims) {
-          this.sprite.anims.timeScale = timeScale;
-        }
-
         var tweenTasks = this.tweens;
 
         for (var key in tweenTasks) {
@@ -16233,8 +16212,16 @@
       }
     }]);
 
-    return SpriteData;
+    return BobBase;
   }();
+
+  var IsEmpty = function IsEmpty(source) {
+    for (var k in source) {
+      return false;
+    }
+
+    return true;
+  };
 
   var GetR = function GetR(colorInt) {
     return colorInt >> 16 & 0xff;
@@ -16480,45 +16467,43 @@
   var RemoveItem$6 = Phaser.Utils.Array.Remove;
   var AddMethods$1 = {
     has: function has(name) {
-      return this.sprites.hasOwnProperty(name);
+      return this.bobs.hasOwnProperty(name);
     },
     get: function get(name) {
-      return this.sprites[name];
+      return this.bobs[name];
     },
-    getSprite: function getSprite(name) {
-      return this.get(name).sprite;
+    getGO: function getGO(name) {
+      return this.get(name).gameObject;
     },
-    add: function add(name, textureKey, frameName) {
+    add: function add(name) {
       this.remove(name);
-      var sprite;
 
-      if (arguments.length === 3) {
-        sprite = this.createCallback(this.scene, textureKey, frameName);
-      } else {
-        var args = Array.prototype.slice.call(arguments, 1);
-        sprite = this.createCallback.apply(this, [this.scene].concat(_toConsumableArray(args)));
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
       }
 
+      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
+
       if (this.fadeTime > 0) {
-        AddTintRGBProperties(sprite);
+        AddTintRGBProperties(gameObject);
       }
 
       if (this.viewportCoordinateEnable) {
-        AddViewportCoordinateProperties(sprite);
+        AddViewportCoordinateProperties(gameObject);
       }
 
-      sprite.once('destroy', function () {
-        RemoveItem$6(this.removedSprites, sprite);
+      gameObject.once('destroy', function () {
+        RemoveItem$6(this.removedGOs, gameObject);
 
         if (this.isEmpty) {
           this.emit('empty');
         }
       }, this);
-      var spriteData = new SpriteData(this, sprite, name);
-      this.sprites[name] = spriteData;
+      var bob = new this.BobClass(this, gameObject, name);
+      this.bobs[name] = bob;
 
       if (this.fadeTime > 0) {
-        spriteData.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
+        bob.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
       }
 
       return this;
@@ -16531,12 +16516,12 @@
         return this;
       }
 
-      var spriteData = this.get(name);
-      delete this.sprites[name];
-      this.removedSprites.push(spriteData.sprite);
+      var bob = this.get(name);
+      delete this.bobs[name];
+      this.removedGOs.push(bob.gameObject);
 
       if (this.fadeTime > 0) {
-        spriteData.easeProperty('tintGray', // property
+        bob.easeProperty('tintGray', // property
         0, // to value
         this.fadeTime, // duration
         'Linear', // ease
@@ -16544,18 +16529,18 @@
         false, // yoyo
         function () {
           // onComplete
-          spriteData.destroy();
+          bob.destroy();
         });
       } else {
-        spriteData.destroy();
+        bob.destroy();
       }
 
       return this;
     },
     removeAll: function removeAll() {
-      var sprites = this.sprites;
+      var bobs = this.bobs;
 
-      for (var name in sprites) {
+      for (var name in bobs) {
         this.remove(name);
       }
 
@@ -16566,17 +16551,17 @@
         destroyChild = true;
       }
 
-      var sprites = this.sprites;
+      var bobs = this.bobs;
 
-      for (var name in sprites) {
+      for (var name in bobs) {
         if (destroyChild) {
-          sprites[name].destroy();
+          bobs[name].destroy();
         }
 
-        delete sprites[name];
+        delete bobs[name];
       }
 
-      this.removedSprites.length = 0;
+      this.removedGOs.length = 0;
       return this;
     }
   };
@@ -16627,6 +16612,155 @@
     }
   };
 
+  var Methods$7 = {};
+  Object.assign(Methods$7, AddMethods$1, RemoveMethods$1, PropertyMethods);
+
+  var GetValue$1D = Phaser.Utils.Objects.GetValue;
+
+  var GOManager = /*#__PURE__*/function () {
+    function GOManager(scene, config) {
+      _classCallCheck(this, GOManager);
+
+      this.scene = scene;
+      this.BobClass = GetValue$1D(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$1D(config, 'createGameObject'));
+      this.setEventEmitter(GetValue$1D(config, 'eventEmitter', undefined));
+      this.setGOFadeTime(GetValue$1D(config, 'fade', 500));
+      this.setViewportCoordinateEnable(GetValue$1D(config, 'viewportCoordinate', false));
+      this.bobs = {};
+      this.removedGOs = [];
+      this._timeScale = 1;
+    }
+
+    _createClass(GOManager, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.clear(!fromScene);
+        this.createGameObjectCallback = undefined;
+        this.scene = undefined;
+      }
+    }, {
+      key: "timeScale",
+      get: function get() {
+        return this._timeScale;
+      },
+      set: function set(timeScale) {
+        if (this._timeScale === timeScale) {
+          return;
+        }
+
+        this._timeScale = timeScale;
+        var bobs = this.bobs;
+
+        for (var name in bobs) {
+          bobs[name].setTimeScale(timeScale);
+        }
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
+      }
+    }, {
+      key: "setCreateGameObjectCallback",
+      value: function setCreateGameObjectCallback(callback) {
+        if (!callback) {
+          this.createGameObjectCallback = function (scene, textureKey, frameName) {
+            return scene.add.sprite(0, 0, textureKey, frameName);
+          };
+        } else {
+          this.createGameObjectCallback = callback;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setGOFadeTime",
+      value: function setGOFadeTime(time) {
+        this.fadeTime = time;
+        return this;
+      }
+    }, {
+      key: "setViewportCoordinateEnable",
+      value: function setViewportCoordinateEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.viewportCoordinateEnable = enable;
+        return this;
+      }
+    }, {
+      key: "isEmpty",
+      get: function get() {
+        return IsEmpty(this.bobs) && this.removedGOs.length === 0;
+      }
+    }]);
+
+    return GOManager;
+  }();
+
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$7);
+
+  var SpriteBob = /*#__PURE__*/function (_BobBase) {
+    _inherits(SpriteBob, _BobBase);
+
+    var _super = _createSuper(SpriteBob);
+
+    function SpriteBob() {
+      _classCallCheck(this, SpriteBob);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(SpriteBob, [{
+      key: "setTexture",
+      value: function setTexture(textureKey, frameKey) {
+        this.gameObject.setTexture(textureKey, frameKey);
+        return this;
+      }
+    }, {
+      key: "playAnimation",
+      value: function playAnimation(key) {
+        this.gameObject.anims.timeScale = this.timeScale;
+        this.gameObject.play(key);
+        return this;
+      }
+    }, {
+      key: "stopAnimation",
+      value: function stopAnimation() {
+        this.gameObject.stop();
+        return this;
+      }
+    }, {
+      key: "chainAnimation",
+      value: function chainAnimation(keys) {
+        this.gameObject.chain(keys);
+        return this;
+      }
+    }, {
+      key: "pauseAnimation",
+      value: function pauseAnimation() {
+        this.gameObject.anims.pause();
+        return this;
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        _get(_getPrototypeOf(SpriteBob.prototype), "setTimeScale", this).call(this, timeScale);
+
+        if (this.gameObject.anims) {
+          this.gameObject.anims.timeScale = timeScale;
+        }
+
+        return this;
+      }
+    }]);
+
+    return SpriteBob;
+  }(BobBase);
+
   var AnimationMethods = {
     playAnimation: function playAnimation(name, key) {
       if (!this.has(name)) {
@@ -16671,98 +16805,47 @@
   };
 
   var Methods$6 = {};
-  Object.assign(Methods$6, AddMethods$1, RemoveMethods$1, PropertyMethods, AnimationMethods);
+  Object.assign(Methods$6, AnimationMethods);
 
-  var GetValue$1D = Phaser.Utils.Objects.GetValue;
+  var SpriteManager = /*#__PURE__*/function (_GOManager) {
+    _inherits(SpriteManager, _GOManager);
 
-  var SpriteManager = /*#__PURE__*/function () {
+    var _super = _createSuper(SpriteManager);
+
     function SpriteManager(scene, config) {
       _classCallCheck(this, SpriteManager);
 
-      this.scene = scene;
-      this.setEventEmitter(GetValue$1D(config, 'eventEmitter', undefined));
-      this.setCreateCallback(GetValue$1D(config, 'createCallback', 'sprite'));
-      this.setSpriteFadeTime(GetValue$1D(config, 'fade', 500));
-      this.setViewportCoordinateEnable(GetValue$1D(config, 'viewportCoordinate', false));
-      this.sprites = {};
-      this.removedSprites = [];
-      this._timeScale = 1;
+      if (config === undefined) {
+        config = {};
+      }
+
+      config.BobClass = SpriteBob;
+      return _super.call(this, scene, config);
     }
 
     _createClass(SpriteManager, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.clear(!fromScene);
-        this.createCallback = undefined;
-        this.scene = undefined;
-      }
-    }, {
-      key: "timeScale",
-      get: function get() {
-        return this._timeScale;
-      },
-      set: function set(timeScale) {
-        if (this._timeScale === timeScale) {
-          return;
-        }
-
-        this._timeScale = timeScale;
-        var sprites = this.sprites;
-
-        for (var name in sprites) {
-          sprites[name].setTimeScale(timeScale);
-        }
-      }
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(timeScale) {
-        this.timeScale = timeScale;
-        return this;
-      }
-    }, {
-      key: "setCreateCallback",
-      value: function setCreateCallback(callback) {
-        if (callback === 'sprite') {
-          this.createCallback = function (scene, textureKey, frameName) {
+      key: "setCreateGameObjectCallback",
+      value: function setCreateGameObjectCallback(callback) {
+        if (!callback || callback === 'sprite') {
+          this.createGameObjectCallback = function (scene, textureKey, frameName) {
             return scene.add.sprite(0, 0, textureKey, frameName);
           };
         } else if (callback === 'image') {
-          this.createCallback = function (scene, textureKey, frameName) {
+          this.createGameObjectCallback = function (scene, textureKey, frameName) {
             return scene.add.image(0, 0, textureKey, frameName);
           };
         } else {
-          this.createCallback = callback;
+          this.createGameObjectCallback = callback;
         }
 
         return this;
-      }
-    }, {
-      key: "setSpriteFadeTime",
-      value: function setSpriteFadeTime(time) {
-        this.fadeTime = time;
-        return this;
-      }
-    }, {
-      key: "setViewportCoordinateEnable",
-      value: function setViewportCoordinateEnable(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-
-        this.viewportCoordinateEnable = enable;
-        return this;
-      }
-    }, {
-      key: "isEmpty",
-      get: function get() {
-        return IsEmpty(this.sprites) && this.removedSprites.length === 0;
       }
     }]);
 
     return SpriteManager;
-  }();
+  }(GOManager);
 
-  Object.assign(SpriteManager.prototype, EventEmitterMethods, Methods$6);
+  Object.assign(SpriteManager.prototype, Methods$6);
 
   var SetClickTarget = function SetClickTarget(target) {
     this.clickTarget = target;
@@ -16772,7 +16855,7 @@
     } else if (IsSceneObject(target)) {
       this.clickEE = target.input;
     } else {
-      // Assume that target is a game object
+      // Assume that target is a gameObject
       this.clickEE = target.setInteractive();
     }
 
@@ -16887,6 +16970,11 @@
     return this;
   };
 
+  var Wait = function Wait(name) {
+    this.typeWriter.wait(name);
+    return this;
+  };
+
   var TypingSpeedMethods = {
     setDefaultTypingSpeed: function setDefaultTypingSpeed(speed) {
       this.defaultTypingSpeed = speed;
@@ -16946,6 +17034,7 @@
     pause: Pause,
     pauseTyping: PauseTyping,
     resume: Resume,
+    wait: Wait,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
@@ -22733,7 +22822,7 @@
       for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
 
-        if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+        if (IsPointInBounds(gameObject, pointer.worldX, pointer.worldY, preTest, postTest)) {
           return true;
         }
       }

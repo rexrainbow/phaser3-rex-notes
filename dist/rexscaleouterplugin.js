@@ -227,6 +227,8 @@
       this.scrollX = 0;
       this.scrollY = 0;
       this.zoom = 1;
+      this._innerViewport = undefined;
+      this._outerViewport = undefined;
       this.boot();
     }
 
@@ -252,6 +254,8 @@
         this.cameras.clear();
         this.cameras = undefined;
         this.scene = undefined;
+        this._innerViewport = undefined;
+        this._outerViewport = undefined;
       }
     }, {
       key: "stop",
@@ -262,21 +266,21 @@
         return this;
       }
     }, {
-      key: "innerViewport",
-      get: function get() {
-        return GetInnerViewport(this);
-      }
-    }, {
-      key: "outerViewport",
-      get: function get() {
-        return GetOuterViewport(this);
-      }
-    }, {
       key: "add",
       value: function add(camera) {
         this.cameras.set(camera);
         this.scale();
         return this;
+      }
+    }, {
+      key: "innerViewport",
+      get: function get() {
+        return this._innerViewport;
+      }
+    }, {
+      key: "outerViewport",
+      get: function get() {
+        return this._outerViewport;
       } // Internal methods
 
     }, {
@@ -299,6 +303,8 @@
           camera.scrollX = this.scrollX;
           camera.scrollY = this.scrollY;
         }, this);
+        this._innerViewport = GetInnerViewport(this, this._innerViewport);
+        this._outerViewport = GetOuterViewport(this, this._outerViewport);
         return this;
       }
     }]);
