@@ -8337,6 +8337,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/PxOEBr">Pop-up menu</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/KKopywp">Static menu</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/JjEORZb">Drop-down list</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/wvebLGY">Expand, collapse</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/PoRoWww">Custom transit</a></li>
@@ -8398,6 +8399,7 @@
     <span class="c1">// y: 0,</span>
     <span class="c1">// anchor: undefined,</span>
 
+    <span class="c1">// popup: true,</span>
     <span class="c1">// orientation: 1,</span>
     <span class="c1">// subMenuSide: undefined,</span>
     <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
@@ -8463,6 +8465,11 @@
 </ul>
 </li>
 <li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly. </li>
+</ul>
+</li>
+<li><code>popup</code> : <ul>
+<li><code>true</code> : Pop-up menu, will layout automatically, push inside viewport. Default behavior.</li>
+<li><code>false</code> : Static menu, can put into another sizer, won't layout automatically.</li>
 </ul>
 </li>
 <li><code>orientation</code> : Main orientation of the menu, default is <code>1</code> (top to bottom)<ul>

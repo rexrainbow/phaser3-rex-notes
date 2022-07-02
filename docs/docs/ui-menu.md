@@ -8,6 +8,7 @@ A container with buttons and sub-menu.
 ## Live demos
 
 - [Pop-up menu](https://codepen.io/rexrainbow/pen/PxOEBr)
+- [Static menu](https://codepen.io/rexrainbow/pen/KKopywp)
 - [Drop-down list](https://codepen.io/rexrainbow/pen/JjEORZb)
 - [Expand, collapse](https://codepen.io/rexrainbow/pen/wvebLGY)
 - [Custom transit](https://codepen.io/rexrainbow/pen/PoRoWww)
