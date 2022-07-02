@@ -11,20 +11,20 @@ var OnParseAddTextTag = function (tagPlayer, parser, config) {
         return;
     }
     parser
-        .on('+', function (tag) {
+        .on('+', function (tag, textObjectType) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [text.name]
+            // [text.name], or [text.name=bbcodetext]
             var tags = tag.split('.');
             var name;
             if (IsAddTextTag(tags, prefix)) {
-                name = tags[1];                
+                name = tags[1];
             } else {
                 return;
             }
-            tagPlayer.textManager.add(name);
+            tagPlayer.textManager.add(name, textObjectType);
 
             parser.skipEvent();
         })
@@ -37,7 +37,7 @@ var OnParseAddTextTag = function (tagPlayer, parser, config) {
             var tags = tag.split('.');
             var name;
             if (IsAddTextTag(tags, prefix)) {
-                name = tags[1];                
+                name = tags[1];
             } else {
                 return;
             }

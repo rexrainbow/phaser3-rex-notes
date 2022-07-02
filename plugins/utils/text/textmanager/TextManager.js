@@ -1,7 +1,6 @@
 import GOManager from '../../gameobject/gomanager/GOManager.js';
 import TextBob from './TextBob.js';
 import BBCodeText from '../../../gameobjects/tagtext/bbcodetext/BBCodeText.js';
-import TagText from '../../../gameobjects/tagtext/tagtext/TagText.js';
 import Methods from './methods/Methods.js';
 
 class TextManager extends GOManager {
@@ -16,28 +15,33 @@ class TextManager extends GOManager {
     }
 
     setCreateGameObjectCallback(callback) {
-        if (!callback || (callback === 'text')) {
-            this.createGameObjectCallback = function (scene) {
-                return scene.add.text(0, 0, '');
+        if (!callback) {
+            this.createGameObjectCallback = function (scene, textObjectType) {
+                switch (textObjectType) {
+                    case 'bbcodetext': return CreateBBCodeTextObject(scene);
+                    default: return CreateTextObject(scene);
+                }
             }
+        } else if (callback === 'text') {
+            this.createGameObjectCallback = CreateTextObject;
         } else if (callback === 'bbcodetext') {
-            this.createGameObjectCallback = function (scene) {
-                var gameObject = new BBCodeText(scene, 0, 0, '');
-                scene.add.existing(gameObject);
-                return gameObject;
-            }
-        } else if (callback === 'tag') {
-            this.createGameObjectCallback = function (scene) {
-                var gameObject = new TagText(scene, 0, 0, '');
-                scene.add.existing(gameObject);
-                return gameObject;
-            }
+            this.createGameObjectCallback = CreateBBCodeTextObject;
         } else {
             this.createGameObjectCallback = callback;
         }
         return this;
     }
 
+}
+
+var CreateTextObject = function (scene) {
+    return scene.add.text(0, 0, '');
+}
+
+var CreateBBCodeTextObject = function (scene) {
+    var gameObject = new BBCodeText(scene, 0, 0, '');
+    scene.add.existing(gameObject);
+    return gameObject;
 }
 
 Object.assign(

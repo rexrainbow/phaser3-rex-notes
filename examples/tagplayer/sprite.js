@@ -70,10 +70,10 @@ World
 [wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
 
+[/text]
+
 // Wait until all sprites are fade out
 [/sprite][wait=sprite]
-
-[/text]
 `
 
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this)
