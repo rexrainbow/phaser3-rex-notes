@@ -25,7 +25,7 @@ class Menu extends Buttons {
         var rootMenu = config._rootMenu;
         var parentMenu = config._parentMenu;
         var parentButton = config._parentButton;
-        // Popup
+        // Popup, root menu can be static, sub-menus are always popup.
         var popUp = GetValue(config, 'popup', true);
         // Items
         var items = GetValue(config, 'items', undefined);
@@ -43,13 +43,14 @@ class Menu extends Buttons {
 
         this.items = items;
         this.root = (rootMenu === undefined) ? this : rootMenu;
+        this.isRoot = (this.root === this);
         this.parentMenu = parentMenu;
         this.parentButton = parentButton;
         this.timer = undefined;
 
-        var isRootMenu = (this.root === this);
         // Root menu
-        if (isRootMenu) {
+        if (this.isRoot) {
+            this.isPopUpMode = popUp;
             // Bounds
             var bounds = config.bounds;
             if (bounds === undefined) {
@@ -86,9 +87,15 @@ class Menu extends Buttons {
             this.createButtonCallbackScope = createButtonCallbackScope;
             // Children key
             this.childrenKey = GetValue(config, 'childrenKey', 'children');
-
             // Event flag
             this._isPassedEvent = false;
+
+            // pointerdown-outside-collapse
+            this.pointerDownOutsideCollapsing = GetValue(config, 'pointerDownOutsideCollapsing', false);
+            if (this.pointerDownOutsideCollapsing) {
+                scene.input.on('pointerdown', this.onPointerDownOutside, this);
+            }
+
         } else {  // Sub-menu
 
         }
@@ -113,7 +120,7 @@ class Menu extends Buttons {
         // Sub-menu: 
         // - scale to root's scale value
         // - align to parent button
-        if (!isRootMenu) {
+        if (!this.isRoot) {
             this.setScale(this.root.scaleX, this.root.scaleY);
             var subMenuSide = this.root.subMenuSide[parentMenu.orientation];
             switch (subMenuSide) {
@@ -152,8 +159,24 @@ class Menu extends Buttons {
             return;
         }
 
+        if (this.isRoot && this.pointerDownOutsideCollapsing) {
+            this.scene.input.off('pointerdown', this.onPointerDownOutside, this);
+        }
+
         super.destroy(fromScene);
         this.removeDelayCall();
+    }
+
+    onPointerDownOutside(pointer) {
+        if (this.isInTouching(pointer)) {
+            return;
+        }
+
+        if (this.isPopUpMode) {
+            this.collapse();
+        } else {
+            this.collapseSubMenu();
+        }
     }
 
 

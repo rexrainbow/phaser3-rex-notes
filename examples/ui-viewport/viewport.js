@@ -13,10 +13,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.graphics()
-            .clear()
-            .lineStyle(10, 0xff0000)
-            .strokeRectShape(this.rexUI.viewport)
+        this.cameras.main.setZoom(0.5).setScroll(-100, -100);
+
+        var graphics = this.add.graphics();
+        var drawViewport = function () {
+            graphics
+                .clear()
+                .lineStyle(10, 0xff0000)
+                .strokeRectShape(graphics.scene.rexUI.viewport)
+        }
+        this.scale.on('resize', drawViewport);
+        drawViewport();
     }
 
     update() { }
@@ -28,7 +35,7 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.RESIZE,
+        mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,

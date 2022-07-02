@@ -38155,7 +38155,7 @@
 
       var rootMenu = config._rootMenu;
       var parentMenu = config._parentMenu;
-      var parentButton = config._parentButton; // Popup
+      var parentButton = config._parentButton; // Popup, root menu can be static, sub-menus are always popup.
 
       var popUp = GetValue$u(config, 'popup', true); // Items
 
@@ -38172,15 +38172,14 @@
       _this.type = 'rexMenu';
       _this.items = items;
       _this.root = rootMenu === undefined ? _assertThisInitialized(_this) : rootMenu;
+      _this.isRoot = _this.root === _assertThisInitialized(_this);
       _this.parentMenu = parentMenu;
       _this.parentButton = parentButton;
-      _this.timer = undefined;
+      _this.timer = undefined; // Root menu
 
-      var isRootMenu = _this.root === _assertThisInitialized(_this); // Root menu
+      if (_this.isRoot) {
+        _this.isPopUpMode = popUp; // Bounds
 
-
-      if (isRootMenu) {
-        // Bounds
         var bounds = config.bounds;
 
         if (bounds === undefined) {
@@ -38221,7 +38220,13 @@
 
         _this.childrenKey = GetValue$u(config, 'childrenKey', 'children'); // Event flag
 
-        _this._isPassedEvent = false;
+        _this._isPassedEvent = false; // pointerdown-outside-collapse
+
+        _this.pointerDownOutsideCollapsing = GetValue$u(config, 'pointerDownOutsideCollapsing', false);
+
+        if (_this.pointerDownOutsideCollapsing) {
+          scene.input.on('pointerdown', _this.onPointerDownOutside, _assertThisInitialized(_this));
+        }
       }
 
       var originX = 0,
@@ -38248,7 +38253,7 @@
       // - align to parent button
 
 
-      if (!isRootMenu) {
+      if (!_this.isRoot) {
         _this.setScale(_this.root.scaleX, _this.root.scaleY);
 
         var subMenuSide = _this.root.subMenuSide[parentMenu.orientation];
@@ -38300,9 +38305,26 @@
           return;
         }
 
+        if (this.isRoot && this.pointerDownOutsideCollapsing) {
+          this.scene.input.off('pointerdown', this.onPointerDownOutside, this);
+        }
+
         _get(_getPrototypeOf(Menu.prototype), "destroy", this).call(this, fromScene);
 
         this.removeDelayCall();
+      }
+    }, {
+      key: "onPointerDownOutside",
+      value: function onPointerDownOutside(pointer) {
+        if (this.isInTouching(pointer)) {
+          return;
+        }
+
+        if (this.isPopUpMode) {
+          this.collapse();
+        } else {
+          this.collapseSubMenu();
+        }
       }
     }]);
 
@@ -49903,7 +49925,7 @@
     }, {
       key: "viewport",
       get: function get() {
-        return GetViewport(this.scene, true);
+        return GetViewport(this.scene, this.scene.cameras.main, true);
       }
     }, {
       key: "make",
