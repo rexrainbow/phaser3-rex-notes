@@ -260,10 +260,20 @@
     location: 0
   };
 
-  var Rectangle = Phaser.Geom.Rectangle;
-  Phaser.Scale.Center;
+  var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
 
-  var GetViewport = function GetViewport(scene, out) {
+  var IsCameraObject = function IsCameraObject(object) {
+    return object instanceof CameraClass;
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+
+  var GetViewport = function GetViewport(scene, camera, out) {
+    if (!IsCameraObject(camera)) {
+      out = camera;
+      camera = undefined;
+    }
+
     if (out === undefined) {
       out = new Rectangle();
     } else if (out === true) {
@@ -294,6 +304,18 @@
     }
 
     out.setTo(x, y, width, height);
+
+    if (camera) {
+      var offsetX = camera.scrollX;
+      var offsetY = camera.scrollY;
+      var scaleX = 1 / camera.zoomX;
+      var scaleY = 1 / camera.zoomY;
+      out.width *= scaleX;
+      out.height *= scaleY;
+      out.centerX = camera.centerX + offsetX;
+      out.centerY = camera.centerY + offsetY;
+    }
+
     return out;
   };
 

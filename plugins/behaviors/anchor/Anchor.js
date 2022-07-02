@@ -257,18 +257,17 @@ class Anchor extends ComponentBase {
     }
 
     updateViewport() {
-        this.viewport = GetViewport(
-            this.scene,
-            (this.viewport) ? this.viewport : true
-        );
+        var camera = this.parent.scene.cameras.main;
+        this.viewport = GetViewport(this.scene, camera, this.viewport);
 
+        var viewport = this.viewport;
         var callback = this.onUpdateViewportCallback,
             scope = this.onUpdateViewportCallbackScope;
         if (callback) {
             if (scope) {
-                callback.call(scope, this.viewport, this.parent, this);
+                callback.call(scope, viewport, this.parent, this);
             } else {
-                callback(this.viewport, this.parent, this);
+                callback(viewport, this.parent, this);
             }
         }
     }

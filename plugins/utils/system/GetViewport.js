@@ -1,7 +1,12 @@
+import IsCameraObject from './IsCameraObject.js';
 const Rectangle = Phaser.Geom.Rectangle;
-const Center = Phaser.Scale.Center;
 
-var GetViewport = function (scene, out) {
+var GetViewport = function (scene, camera, out) {
+    if (!IsCameraObject(camera)) {
+        out = camera;
+        camera = undefined;
+    }
+
     if (out === undefined) {
         out = new Rectangle();
     } else if (out === true) {
@@ -33,6 +38,18 @@ var GetViewport = function (scene, out) {
     }
 
     out.setTo(x, y, width, height);
+
+    if (camera) {
+        var offsetX = camera.scrollX;
+        var offsetY = camera.scrollY;
+        var scaleX = 1 / camera.zoomX;
+        var scaleY = 1 / camera.zoomY;
+
+        out.width *= scaleX;
+        out.height *= scaleY;
+        out.centerX = camera.centerX + offsetX;
+        out.centerY = camera.centerY + offsetY;
+    }
 
     return out;
 }
