@@ -6,12 +6,12 @@ var EaseMode = {
 }
 
 var IsEasePropertyTag = function (tags, prefix) {
-    // sprite.name.prop.to, or sprite.name.prop.yoyo
+    // text.name.prop.to, or text.name.prop.yoyo
     return (tags.length === 4) && (tags[0] === prefix) && EaseMode[tags[3]];
 }
 
-var OnParseEaseSpritePropertyTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+var OnParseEaseTextPropertyTag = function (tagPlayer, parser, config) {
+    var prefix = GetValue(config, 'text', 'text');
     if (!prefix) {
         return;
     }
@@ -21,9 +21,9 @@ var OnParseEaseSpritePropertyTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [sprite.name.prop.to=value,duration]
-            // [sprite.name.prop.to=value,duration,ease,repeat]
-            // [sprite.name.prop.to=value,duration,repeat]
+            // [text.name.prop.to=value,duration]
+            // [text.name.prop.to=value,duration,ease,repeat]
+            // [text.name.prop.to=value,duration,repeat]
             var tags = tag.split('.');
             var name, property, isYoyo;
             if (IsEasePropertyTag(tags, prefix)) {
@@ -39,7 +39,7 @@ var OnParseEaseSpritePropertyTag = function (tagPlayer, parser, config) {
                 ease = undefined;
             }
 
-            tagPlayer.spriteManager.easeProperty(
+            tagPlayer.textManager.easeProperty(
                 name, property, value,
                 duration, ease, repeat, isYoyo
             );
@@ -48,4 +48,4 @@ var OnParseEaseSpritePropertyTag = function (tagPlayer, parser, config) {
         })
 }
 
-export default OnParseEaseSpritePropertyTag;
+export default OnParseEaseTextPropertyTag;

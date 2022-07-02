@@ -1,12 +1,12 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var IsSetPropertyTag = function (tags, prefix) {
-    // sprite.name.prop
+    // text.name.prop
     return (tags.length === 3) && (tags[0] === prefix);
 }
 
-var OnParseSetSpritePropertyTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+var OnParseSetTextPropertyTag = function (tagPlayer, parser, config) {
+    var prefix = GetValue(config, 'text', 'text');
     if (!prefix) {
         return;
     }
@@ -16,7 +16,7 @@ var OnParseSetSpritePropertyTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [sprite.name.prop=value]
+            // [text.name.prop=value]
             var tags = tag.split('.');
             var name, property;
             if (IsSetPropertyTag(tags, prefix)) {
@@ -25,10 +25,10 @@ var OnParseSetSpritePropertyTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            tagPlayer.spriteManager.setProperty(name, property, value);
+            tagPlayer.textManager.setProperty(name, property, value);
 
             parser.skipEvent();
         })
 }
 
-export default OnParseSetSpritePropertyTag;
+export default OnParseSetTextPropertyTag;

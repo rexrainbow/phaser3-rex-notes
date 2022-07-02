@@ -12588,6 +12588,7 @@
     }, {
       key: "onContent",
       value: function onContent(content) {
+        this.skipEventFlag = false;
         this.emit('content', content);
         this.lastContent = content;
       }
@@ -13751,11 +13752,6 @@
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      }
-
-      if (typeof ease === 'number') {
-        repeat = ease;
-        ease = undefined;
       } // [sprite.name.prop.to=value,duration]
       // [sprite.name.prop.to=value,duration,ease,repeat]
       // [sprite.name.prop.to=value,duration,repeat]
@@ -13770,6 +13766,11 @@
         isYoyo = tags[3] === 'yoyo';
       } else {
         return;
+      }
+
+      if (typeof ease === 'number') {
+        repeat = ease;
+        ease = undefined;
       }
 
       AppendCommand$3.call(textPlayer, 'sprite.ease', // name

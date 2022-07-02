@@ -128,6 +128,7 @@ module.exports = {
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
     'bracketparserplugin': './plugins/bracketparser-plugin.js',
+    'tagplayerplugin': './plugins/tagplayer-plugin.js',
 
     // time
     'clockplugin': './plugins/clock-plugin.js',

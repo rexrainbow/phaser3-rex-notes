@@ -23,11 +23,6 @@ var OnParseEaseSpritePropertyTag = function (textPlayer, parser, config) {
                 return;
             }
 
-            if (typeof (ease) === 'number') {
-                repeat = ease;
-                ease = undefined;
-            }
-
             // [sprite.name.prop.to=value,duration]
             // [sprite.name.prop.to=value,duration,ease,repeat]
             // [sprite.name.prop.to=value,duration,repeat]
@@ -40,6 +35,12 @@ var OnParseEaseSpritePropertyTag = function (textPlayer, parser, config) {
             } else {
                 return;
             }
+
+            if (typeof (ease) === 'number') {
+                repeat = ease;
+                ease = undefined;
+            }
+
             AppendCommandBase.call(textPlayer,
                 'sprite.ease',               // name
                 EaseProperty,                // callback

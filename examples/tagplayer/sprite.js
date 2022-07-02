@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import TagPlayer from '../../plugins/logic/bracketparser/tagplayer/TagPlayer.js';
+import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -51,10 +51,21 @@ class Demo extends Phaser.Scene {
 [sprite.knight.x=400][sprite.knight.y=300]
 
 [wait=1000]
-[text]
+
+[text.a]
+[text.a.x=100][text.a.x.to=300,1000,Cubic]
+[text.a.y=100]
+[text.a.text]
 Hello\\n
 Phaser\\n
 World
+
+[text.b]
+[text.b.x=300]
+[text.b.y=500]
+[text.b.text]
+2nd text
+
 
 [wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
@@ -65,31 +76,7 @@ World
 [/text]
 `
 
-        var print;
-        var tagPlayer = new TagPlayer(this);
-        tagPlayer
-            .on('+text', function () {
-                if (print) {
-                    return;
-                }
-                print = this.add.text(0, 0, '')
-            }, this)
-            .on('+text#content', function (parser, content) {
-                if (!print) {
-                    return;
-                }
-                content = content.replaceAll('\\n', '\n')
-                print.setText(content);
-            })
-            .on('-text', function () {
-                if (!print) {
-                    return;
-                }
-                print.destroy();
-                print = undefined;
-            })
-
-        tagPlayer
+        var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this)
             .playPromise(content)
             .then(function () {
                 console.log('Complete')
@@ -108,7 +95,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexTagPlayerPlugin',
+            plugin: TagPlayerPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

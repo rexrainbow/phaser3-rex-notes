@@ -160,6 +160,7 @@ class BracketParser {
     }
 
     onContent(content) {
+        this.skipEventFlag = false;
         this.emit('content', content);
         this.lastContent = content;
     }

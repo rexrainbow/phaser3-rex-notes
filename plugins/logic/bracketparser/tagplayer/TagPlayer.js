@@ -2,6 +2,7 @@ import Parser from './parser/Parser.js';
 import Timeline from '../../../time/progresses/Timeline.js';
 import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
 import SpriteManager from '../../../utils/sprite/spritemanager/SpriteManager.js';
+import TextManager from '../../../utils/text/textmanager/TextManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 
@@ -32,6 +33,12 @@ class TagPlayer extends EventEmitter {
             this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
         }
 
+        this._textManager = undefined;
+        var textManagerConfig = GetValue(config, 'texts', undefined);
+        if (textManagerConfig) {
+            this._textManager = new TextManager(this.scene, textManagerConfig);
+        }
+
         this.setClickTarget(GetValue(config, 'clickTarget', scene));  // this.clickEE
     }
 
@@ -51,6 +58,13 @@ class TagPlayer extends EventEmitter {
             this._spriteManager = new SpriteManager(this.scene);
         }
         return this._spriteManager;
+    }
+
+    get textManager() {
+        if (this._textManager === undefined) {
+            this._textManager = new TextManager(this.scene);
+        }
+        return this._textManager;
     }
 
     destroy(fromScene) {

@@ -1,30 +1,30 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var IsAddSpriteTag = function (tags, prefix) {
-    // sprite.name
+var IsAddTextTag = function (tags, prefix) {
+    // text.name
     return (tags.length === 2) && (tags[0] === prefix)
 }
 
-var OnParseAddSpriteTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+var OnParseAddTextTag = function (tagPlayer, parser, config) {
+    var prefix = GetValue(config, 'text', 'text');
     if (!prefix) {
         return;
     }
     parser
-        .on('+', function (tag, ...args) {
+        .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [sprite.name=key,frame], or [sprite.name]
+            // [text.name]
             var tags = tag.split('.');
             var name;
-            if (IsAddSpriteTag(tags, prefix)) {
+            if (IsAddTextTag(tags, prefix)) {
                 name = tags[1];                
             } else {
                 return;
             }
-            tagPlayer.spriteManager.add(name, ...args);
+            tagPlayer.textManager.add(name);
 
             parser.skipEvent();
         })
@@ -33,18 +33,18 @@ var OnParseAddSpriteTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [/sprite.name]
+            // [/text.name]
             var tags = tag.split('.');
             var name;
-            if (IsAddSpriteTag(tags, prefix)) {
+            if (IsAddTextTag(tags, prefix)) {
                 name = tags[1];                
             } else {
                 return;
             }
-            tagPlayer.spriteManager.remove(name);
+            tagPlayer.textManager.remove(name);
 
             parser.skipEvent();
         })
 }
 
-export default OnParseAddSpriteTag;
+export default OnParseAddTextTag;
