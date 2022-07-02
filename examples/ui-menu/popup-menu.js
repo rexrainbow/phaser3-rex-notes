@@ -93,9 +93,14 @@ var CreateMenu = function (scene, x, y, items, onClick) {
         // subMenuSide: 'right',
 
         items: items,
+        createBackgroundCallback: function (items) {
+            var scene = items.scene;
+            return scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY);
+        },
+
         createButtonCallback: function (item, i, items) {
             return scene.rexUI.add.label({
-                background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
+                background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0),
                 text: scene.add.text(0, 0, item.name, {
                     fontSize: '20px'
                 }),
@@ -120,9 +125,11 @@ var CreateMenu = function (scene, x, y, items, onClick) {
         easeOut: {
             duration: 100,
             orientation: easeOrientation
-        }
+        },
 
-        // expandEvent: 'button.over'
+        // expandEvent: 'button.over',
+
+        // space: { item: 10 }
     });
 
     menu

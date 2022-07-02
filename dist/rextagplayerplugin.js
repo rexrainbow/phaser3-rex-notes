@@ -298,7 +298,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$L = function GetValue(source, key, defaultValue) {
+  var GetValue$M = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -382,14 +382,14 @@
       _classCallCheck(this, BracketParser);
 
       // Event emitter
-      this.setEventEmitter(GetValue$L(config, 'eventEmitter', undefined)); // Parameters for regex
+      this.setEventEmitter(GetValue$M(config, 'eventEmitter', undefined)); // Parameters for regex
 
-      this.setTagExpression(GetValue$L(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$L(config, 'regex.value', DefaultValueExpression)); // Value convert
+      this.setTagExpression(GetValue$M(config, 'regex.tag', DefaultTagExpression));
+      this.setValueExpression(GetValue$M(config, 'regex.value', DefaultValueExpression)); // Value convert
 
-      this.setValueConverter(GetValue$L(config, 'valueConvert', true)); // Brackets and generate regex
+      this.setValueConverter(GetValue$M(config, 'valueConvert', true)); // Brackets and generate regex
 
-      var delimiters = GetValue$L(config, 'delimiters', '<>');
+      var delimiters = GetValue$M(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
       this.isPaused = false;
@@ -629,11 +629,11 @@
 
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 
-  var GetValue$K = Phaser.Utils.Objects.GetValue;
+  var GetValue$L = Phaser.Utils.Objects.GetValue;
 
   var OnParseWaitTag = function OnParseWaitTag(tagPlayer, parser, config) {
-    var tagWait = GetValue$K(config, 'tags.wait', 'wait');
-    var tagClick = GetValue$K(config, 'tags.click', 'click');
+    var tagWait = GetValue$L(config, 'tags.wait', 'wait');
+    var tagClick = GetValue$L(config, 'tags.click', 'click');
     parser.on("+".concat(tagWait), function (name) {
       tagPlayer.wait(name);
       parser.skipEvent();
@@ -649,10 +649,10 @@
     });
   };
 
-  var GetValue$J = Phaser.Utils.Objects.GetValue;
+  var GetValue$K = Phaser.Utils.Objects.GetValue;
 
   var OnParsePlaySoundEffectTag = function OnParsePlaySoundEffectTag(tagPlayer, parser, config) {
-    var tagName = GetValue$J(config, 'tags.se', 'se');
+    var tagName = GetValue$K(config, 'tags.se', 'se');
     parser.on("+".concat(tagName), function (name, fadeInTime) {
       if (this.skipSoundEffect) {
         return;
@@ -670,10 +670,10 @@
     });
   };
 
-  var GetValue$I = Phaser.Utils.Objects.GetValue;
+  var GetValue$J = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(tagPlayer, parser, config) {
-    var tagName = GetValue$I(config, 'tags.se.fadein', 'se.fadein');
+    var tagName = GetValue$J(config, 'tags.se.fadein', 'se.fadein');
     parser.on("+".concat(tagName), function (time) {
       tagPlayer.soundManager.fadeInSoundEffect(time);
       parser.skipEvent();
@@ -682,10 +682,10 @@
     });
   };
 
-  var GetValue$H = Phaser.Utils.Objects.GetValue;
+  var GetValue$I = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeOutSoundEffectTag = function OnParseFadeOutSoundEffectTag(tagPlayer, parser, config) {
-    var tagName = GetValue$H(config, 'tags.se.fadeout', 'se.fadeout');
+    var tagName = GetValue$I(config, 'tags.se.fadeout', 'se.fadeout');
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
       tagPlayer.soundManager.fadeOutSoundEffect(time, isStopped);
@@ -695,10 +695,10 @@
     });
   };
 
-  var GetValue$G = Phaser.Utils.Objects.GetValue;
+  var GetValue$H = Phaser.Utils.Objects.GetValue;
 
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(tagPlayer, parser, config) {
-    var tagName = GetValue$G(config, 'tags.se.volume', 'se.volume');
+    var tagName = GetValue$H(config, 'tags.se.volume', 'se.volume');
     parser.on("+".concat(tagName), function (volume) {
       tagPlayer.soundManager.setSoundEffectVolume(volume);
       parser.skipEvent();
@@ -707,10 +707,10 @@
     });
   };
 
-  var GetValue$F = Phaser.Utils.Objects.GetValue;
+  var GetValue$G = Phaser.Utils.Objects.GetValue;
 
   var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$F(config, 'tags.bgm', 'bgm');
+    var tagName = GetValue$G(config, 'tags.bgm', 'bgm');
     parser.on("+".concat(tagName), function (name, fadeInTime) {
       tagPlayer.soundManager.playBackgroundMusic(name);
 
@@ -725,10 +725,10 @@
     });
   };
 
-  var GetValue$E = Phaser.Utils.Objects.GetValue;
+  var GetValue$F = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$E(config, 'tags.bgm.fadein', 'bgm.fadein');
+    var tagName = GetValue$F(config, 'tags.bgm.fadein', 'bgm.fadein');
     parser.on("+".concat(tagName), function (time) {
       tagPlayer.soundManager.fadeInBackgroundMusic(time);
       parser.skipEvent();
@@ -737,10 +737,10 @@
     });
   };
 
-  var GetValue$D = Phaser.Utils.Objects.GetValue;
+  var GetValue$E = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$D(config, 'tags.bgm.fadeout', 'bgm.fadeout');
+    var tagName = GetValue$E(config, 'tags.bgm.fadeout', 'bgm.fadeout');
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
       tagPlayer.soundManager.fadeOutBackgroundMusic(time, isStopped);
@@ -750,10 +750,10 @@
     });
   };
 
-  var GetValue$C = Phaser.Utils.Objects.GetValue;
+  var GetValue$D = Phaser.Utils.Objects.GetValue;
 
   var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$C(config, 'tags.bgm.cross', 'bgm.cross');
+    var tagName = GetValue$D(config, 'tags.bgm.cross', 'bgm.cross');
     parser.on("+".concat(tagName), function (name, fadeTime) {
       tagPlayer.soundManager.crossFadeBackgroundMusic(name, fadeTime);
       parser.skipEvent();
@@ -762,10 +762,10 @@
     });
   };
 
-  var GetValue$B = Phaser.Utils.Objects.GetValue;
+  var GetValue$C = Phaser.Utils.Objects.GetValue;
 
   var OnParsePauseBackgroundMusicTag = function OnParsePauseBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = GetValue$B(config, 'tags.bgm.pause', 'bgm.pause');
+    var tagName = GetValue$C(config, 'tags.bgm.pause', 'bgm.pause');
     parser.on("+".concat(tagName), function () {
       tagPlayer.soundManager.pauseBackgroundMusic();
       parser.skipEvent();
@@ -775,50 +775,50 @@
     });
   };
 
-  var GetValue$A = Phaser.Utils.Objects.GetValue;
+  var GetValue$B = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$A(config, 'tags.camera.fadein', 'camera.fadein');
+    var tagName = GetValue$B(config, 'tags.camera.fadein', 'camera.fadein');
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       tagPlayer.camera.fadeIn(duration, red, green, blue);
       parser.skipEvent();
     });
   };
 
-  var GetValue$z = Phaser.Utils.Objects.GetValue;
+  var GetValue$A = Phaser.Utils.Objects.GetValue;
 
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$z(config, 'tags.camera.fadeout', 'camera.fadeout');
+    var tagName = GetValue$A(config, 'tags.camera.fadeout', 'camera.fadeout');
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       tagPlayer.camera.fadeOut(duration, red, green, blue);
       parser.skipEvent();
     });
   };
 
-  var GetValue$y = Phaser.Utils.Objects.GetValue;
+  var GetValue$z = Phaser.Utils.Objects.GetValue;
 
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$y(config, 'tags.camera.shake', 'camera.shake');
+    var tagName = GetValue$z(config, 'tags.camera.shake', 'camera.shake');
     parser.on("+".concat(tagName), function (duration, intensity) {
       tagPlayer.camera.shake(duration, intensity);
       parser.skipEvent();
     });
   };
 
-  var GetValue$x = Phaser.Utils.Objects.GetValue;
+  var GetValue$y = Phaser.Utils.Objects.GetValue;
 
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$x(config, 'tags.camera.flash', 'camera.flash');
+    var tagName = GetValue$y(config, 'tags.camera.flash', 'camera.flash');
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       tagPlayer.camera.flash(duration, red, green, blue);
       parser.skipEvent();
     });
   };
 
-  var GetValue$w = Phaser.Utils.Objects.GetValue;
+  var GetValue$x = Phaser.Utils.Objects.GetValue;
 
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$w(config, 'tags.camera.zoom', 'camera.zoom');
+    var tagName = GetValue$x(config, 'tags.camera.zoom', 'camera.zoom');
     parser.on("+".concat(tagName), function (value) {
       tagPlayer.camera.setZoom(value);
       parser.skipEvent();
@@ -828,11 +828,11 @@
     });
   };
 
-  var GetValue$v = Phaser.Utils.Objects.GetValue;
+  var GetValue$w = Phaser.Utils.Objects.GetValue;
   var DegToRad$1 = Phaser.Math.DegToRad;
 
   var OnParseRotateCameraTag = function OnParseRotateCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$v(config, 'tags.camera.rotate', 'camera.rotate');
+    var tagName = GetValue$w(config, 'tags.camera.rotate', 'camera.rotate');
     parser.on("+".concat(tagName), function (value) {
       tagPlayer.camera.setRotation(DegToRad$1(value));
       parser.skipEvent();
@@ -843,10 +843,10 @@
     });
   };
 
-  var GetValue$u = Phaser.Utils.Objects.GetValue;
+  var GetValue$v = Phaser.Utils.Objects.GetValue;
 
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(tagPlayer, parser, config) {
-    var tagName = GetValue$u(config, 'tags.camera.scroll', 'camera.scroll');
+    var tagName = GetValue$v(config, 'tags.camera.scroll', 'camera.scroll');
     parser.on("+".concat(tagName), function (x, y) {
       tagPlayer.camera.setScroll(x, y);
       parser.skipEvent();
@@ -865,7 +865,7 @@
     });
   };
 
-  var GetValue$t = Phaser.Utils.Objects.GetValue;
+  var GetValue$u = Phaser.Utils.Objects.GetValue;
 
   var IsAddSpriteTag = function IsAddSpriteTag(tags, prefix) {
     // sprite.name
@@ -873,7 +873,7 @@
   };
 
   var OnParseAddSpriteTag = function OnParseAddSpriteTag(tagPlayer, parser, config) {
-    var prefix = GetValue$t(config, 'sprite', 'sprite');
+    var prefix = GetValue$u(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -925,10 +925,10 @@
     });
   };
 
-  var GetValue$s = Phaser.Utils.Objects.GetValue;
+  var GetValue$t = Phaser.Utils.Objects.GetValue;
 
   var OnParseRemoveAllSpritesTag = function OnParseRemoveAllSpritesTag(tagPlayer, parser, config) {
-    var prefix = GetValue$s(config, 'sprite', 'sprite');
+    var prefix = GetValue$t(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -950,7 +950,7 @@
     });
   };
 
-  var GetValue$r = Phaser.Utils.Objects.GetValue;
+  var GetValue$s = Phaser.Utils.Objects.GetValue;
 
   var IsSetTextureTag = function IsSetTextureTag(tags, prefix) {
     // sprite.name.texture
@@ -958,7 +958,7 @@
   };
 
   var OnParseSetTextureTag = function OnParseSetTextureTag(tagPlayer, parser, config) {
-    var prefix = GetValue$r(config, 'sprite', 'sprite');
+    var prefix = GetValue$s(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -985,7 +985,7 @@
     });
   };
 
-  var GetValue$q = Phaser.Utils.Objects.GetValue;
+  var GetValue$r = Phaser.Utils.Objects.GetValue;
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
     // sprite.name.play
@@ -998,7 +998,7 @@
   };
 
   var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(tagPlayer, parser, config) {
-    var prefix = GetValue$q(config, 'sprite', 'sprite');
+    var prefix = GetValue$r(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1068,7 +1068,7 @@
     });
   };
 
-  var GetValue$p = Phaser.Utils.Objects.GetValue;
+  var GetValue$q = Phaser.Utils.Objects.GetValue;
 
   var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
     // sprite.name.chain 
@@ -1076,7 +1076,7 @@
   };
 
   var OnParseChainAnimationTag = function OnParseChainAnimationTag(tagPlayer, parser, config) {
-    var prefix = GetValue$p(config, 'sprite', 'sprite');
+    var prefix = GetValue$q(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1104,7 +1104,7 @@
     });
   };
 
-  var GetValue$o = Phaser.Utils.Objects.GetValue;
+  var GetValue$p = Phaser.Utils.Objects.GetValue;
 
   var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
     // sprite.name.pause 
@@ -1112,7 +1112,7 @@
   };
 
   var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(tagPlayer, parser, config) {
-    var prefix = GetValue$o(config, 'sprite', 'sprite');
+    var prefix = GetValue$p(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1139,7 +1139,7 @@
     });
   };
 
-  var GetValue$n = Phaser.Utils.Objects.GetValue;
+  var GetValue$o = Phaser.Utils.Objects.GetValue;
 
   var IsSetPropertyTag$1 = function IsSetPropertyTag(tags, prefix) {
     // sprite.name.prop
@@ -1147,7 +1147,7 @@
   };
 
   var OnParseSetSpritePropertyTag = function OnParseSetSpritePropertyTag(tagPlayer, parser, config) {
-    var prefix = GetValue$n(config, 'sprite', 'sprite');
+    var prefix = GetValue$o(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1175,7 +1175,7 @@
     });
   };
 
-  var GetValue$m = Phaser.Utils.Objects.GetValue;
+  var GetValue$n = Phaser.Utils.Objects.GetValue;
   var EaseMode$1 = {
     to: true,
     yoyo: true
@@ -1187,7 +1187,7 @@
   };
 
   var OnParseEaseSpritePropertyTag = function OnParseEaseSpritePropertyTag(tagPlayer, parser, config) {
-    var prefix = GetValue$m(config, 'sprite', 'sprite');
+    var prefix = GetValue$n(config, 'sprite', 'sprite');
 
     if (!prefix) {
       return;
@@ -1223,7 +1223,7 @@
     });
   };
 
-  var GetValue$l = Phaser.Utils.Objects.GetValue;
+  var GetValue$m = Phaser.Utils.Objects.GetValue;
 
   var IsAddTextTag = function IsAddTextTag(tags, prefix) {
     // text.name
@@ -1231,7 +1231,7 @@
   };
 
   var OnParseAddTextTag = function OnParseAddTextTag(tagPlayer, parser, config) {
-    var prefix = GetValue$l(config, 'text', 'text');
+    var prefix = GetValue$m(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1276,10 +1276,10 @@
     });
   };
 
-  var GetValue$k = Phaser.Utils.Objects.GetValue;
+  var GetValue$l = Phaser.Utils.Objects.GetValue;
 
   var OnParseRemoveAllTextsTag = function OnParseRemoveAllTextsTag(tagPlayer, parser, config) {
-    var prefix = GetValue$k(config, 'text', 'text');
+    var prefix = GetValue$l(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1301,7 +1301,7 @@
     });
   };
 
-  var GetValue$j = Phaser.Utils.Objects.GetValue;
+  var GetValue$k = Phaser.Utils.Objects.GetValue;
 
   var IsSetTextTag = function IsSetTextTag(tags, prefix) {
     // text.name.text
@@ -1309,7 +1309,7 @@
   };
 
   var OnParseSetTextTag = function OnParseSetTextTag(tagPlayer, parser, config) {
-    var prefix = GetValue$j(config, 'text', 'text');
+    var prefix = GetValue$k(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1358,7 +1358,7 @@
     });
   };
 
-  var GetValue$i = Phaser.Utils.Objects.GetValue;
+  var GetValue$j = Phaser.Utils.Objects.GetValue;
 
   var IsSetPropertyTag = function IsSetPropertyTag(tags, prefix) {
     // text.name.prop
@@ -1366,7 +1366,7 @@
   };
 
   var OnParseSetTextPropertyTag = function OnParseSetTextPropertyTag(tagPlayer, parser, config) {
-    var prefix = GetValue$i(config, 'text', 'text');
+    var prefix = GetValue$j(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1394,7 +1394,7 @@
     });
   };
 
-  var GetValue$h = Phaser.Utils.Objects.GetValue;
+  var GetValue$i = Phaser.Utils.Objects.GetValue;
   var EaseMode = {
     to: true,
     yoyo: true
@@ -1406,7 +1406,7 @@
   };
 
   var OnParseEaseTextPropertyTag = function OnParseEaseTextPropertyTag(tagPlayer, parser, config) {
-    var prefix = GetValue$h(config, 'text', 'text');
+    var prefix = GetValue$i(config, 'text', 'text');
 
     if (!prefix) {
       return;
@@ -1520,7 +1520,7 @@
     return lines.join('');
   };
 
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
+  var GetValue$h = Phaser.Utils.Objects.GetValue;
 
   var Parser$1 = /*#__PURE__*/function (_BracketParser) {
     _inherits(Parser, _BracketParser);
@@ -1543,7 +1543,7 @@
       _this = _super.call(this, config);
       AddParseCallbacks(tagPlayer, _assertThisInitialized(_this), config);
 
-      _this.setCommentLineStartSymbol(GetValue$g(config, 'comment', '//'));
+      _this.setCommentLineStartSymbol(GetValue$h(config, 'comment', '//'));
 
       return _this;
     }
@@ -1587,7 +1587,7 @@
     }
   };
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -1598,7 +1598,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$f(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$g(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -1652,7 +1652,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -1669,7 +1669,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$e(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$f(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -1794,7 +1794,7 @@
     'always': 2
   };
 
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
 
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
@@ -1818,9 +1818,9 @@
     _createClass(BaseClock, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue$d(o, 'isRunning', false);
-        this.timeScale = GetValue$d(o, 'timeScale', 1);
-        this.now = GetValue$d(o, 'now', 0);
+        this.isRunning = GetValue$e(o, 'isRunning', false);
+        this.timeScale = GetValue$e(o, 'timeScale', 1);
+        this.now = GetValue$e(o, 'now', 0);
         return this;
       }
     }, {
@@ -2154,7 +2154,7 @@
     return TimerPool;
   }(Stack);
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var TimerPool = new TimerPool$1();
 
   var Timeline = /*#__PURE__*/function (_Clock) {
@@ -2170,7 +2170,7 @@
       _this = _super.call(this, parent, config);
       _this.addedTimers = [];
       _this.timers = [];
-      _this.timerPool = GetValue$c(config, 'pool', TimerPool);
+      _this.timerPool = GetValue$d(config, 'pool', TimerPool);
       return _this;
     }
 
@@ -2315,7 +2315,7 @@
     return SceneUpdateTickTask;
   }(TickTask);
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
 
   var Timer = /*#__PURE__*/function () {
@@ -2328,14 +2328,14 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$b(o, 'state', IDLE);
-        this.timeScale = GetValue$b(o, 'timeScale', 1);
-        this.delay = GetValue$b(o, 'delay', 0);
-        this.repeat = GetValue$b(o, 'repeat', 0);
-        this.repeatCounter = GetValue$b(o, 'repeatCounter', 0);
-        this.duration = GetValue$b(o, 'duration', 0);
-        this.nowTime = GetValue$b(o, 'nowTime', 0);
-        this.justRestart = GetValue$b(o, 'justRestart', false);
+        this.state = GetValue$c(o, 'state', IDLE);
+        this.timeScale = GetValue$c(o, 'timeScale', 1);
+        this.delay = GetValue$c(o, 'delay', 0);
+        this.repeat = GetValue$c(o, 'repeat', 0);
+        this.repeatCounter = GetValue$c(o, 'repeatCounter', 0);
+        this.duration = GetValue$c(o, 'duration', 0);
+        this.nowTime = GetValue$c(o, 'nowTime', 0);
+        this.justRestart = GetValue$c(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -2574,7 +2574,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
@@ -2592,13 +2592,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$a(o, 'timer'));
-        this.setEnable(GetValue$a(o, 'enable', true));
-        this.setTarget(GetValue$a(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$b(o, 'timer'));
+        this.setEnable(GetValue$b(o, 'enable', true));
+        this.setTarget(GetValue$b(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$2(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$2(o, 'duration', 1000));
-        this.setEase(GetValue$a(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$a(o, 'repeat', 0));
+        this.setEase(GetValue$b(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$b(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -2719,7 +2719,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
 
@@ -2750,8 +2750,8 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setMode(GetValue$9(o, 'mode', 0));
-        this.setEnable(GetValue$9(o, 'enable', true));
+        this.setMode(GetValue$a(o, 'mode', 0));
+        this.setEnable(GetValue$a(o, 'enable', true));
         this.setVolumeRange(GetAdvancedValue$1(o, 'volume.start', this.parent.volume), GetAdvancedValue$1(o, 'volume.end', 0));
         return this;
       }
@@ -2892,7 +2892,7 @@
     return sound;
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
 
   var SoundManager = /*#__PURE__*/function () {
@@ -2904,9 +2904,9 @@
       this.soundEffects = []; // Background music will be (fade out)destroyed when play next one.
 
       this.backgroundMusic = undefined;
-      this.setBackgroundMusicLoopValue(GetValue$8(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$8(config, 'bgm.fade', 500));
-      var initialBackgroundMusic = GetValue$8(config, 'bgm.initial', undefined);
+      this.setBackgroundMusicLoopValue(GetValue$9(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$9(config, 'bgm.fade', 500));
+      var initialBackgroundMusic = GetValue$9(config, 'bgm.initial', undefined);
 
       if (initialBackgroundMusic) {
         this.setCurrentBackgroundMusic(initialBackgroundMusic);
@@ -3624,18 +3624,18 @@
   var Methods$3 = {};
   Object.assign(Methods$3, AddMethods, RemoveMethods, PropertyMethods);
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
 
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
 
       this.scene = scene;
-      this.BobClass = GetValue$7(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$7(config, 'createGameObject'));
-      this.setEventEmitter(GetValue$7(config, 'eventEmitter', undefined));
-      this.setGOFadeTime(GetValue$7(config, 'fade', 500));
-      this.setViewportCoordinateEnable(GetValue$7(config, 'viewportCoordinate', false));
+      this.BobClass = GetValue$8(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$8(config, 'createGameObject'));
+      this.setEventEmitter(GetValue$8(config, 'eventEmitter', undefined));
+      this.setGOFadeTime(GetValue$8(config, 'fade', 500));
+      this.setViewportCoordinateEnable(GetValue$8(config, 'viewportCoordinate', false));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -3856,6 +3856,468 @@
 
   Object.assign(SpriteManager.prototype, Methods$2);
 
+  var TextKlass = Phaser.GameObjects.Text;
+
+  var IsTextGameObject = function IsTextGameObject(gameObject) {
+    return gameObject instanceof TextKlass;
+  };
+
+  var BitmapTextKlass = Phaser.GameObjects.BitmapText;
+
+  var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
+    return gameObject instanceof BitmapTextKlass;
+  };
+
+  var TextType = 0;
+  var TagTextType = 1;
+  var BitmapTextType = 2;
+
+  var GetTextObjectType = function GetTextObjectType(textObject) {
+    var textObjectType;
+
+    if (IsBitmapTextGameObject(textObject)) {
+      textObjectType = BitmapTextType;
+    } else if (IsTextGameObject(textObject)) {
+      textObjectType = TextType;
+    } else {
+      textObjectType = TagTextType;
+    }
+
+    return textObjectType;
+  };
+
+  var GetWrapText = function GetWrapText(textObject, text) {
+    var textObjectType = GetTextObjectType(textObject);
+
+    switch (textObjectType) {
+      case TextType:
+        textObject.style.syncFont(textObject.canvas, textObject.context);
+        text = textObject.runWordWrap(text);
+        break;
+
+      case TagTextType:
+        text = textObject.getText(text, undefined, undefined, true);
+        break;
+
+      case BitmapTextType:
+        text = textObject.setText(text).getTextBounds().wrappedText;
+        break;
+    }
+
+    return text;
+  };
+
+  var SetNoWrapText = function SetNoWrapText(textObject, text) {
+    var textObjectType = GetTextObjectType(textObject);
+
+    switch (textObjectType) {
+      case TextType:
+        // Store wrap properties
+        var style = textObject.style;
+        var wordWrapWidth = style.wordWrapWidth;
+        var wordWrapCallback = style.wordWrapCallback; // Disable wrap
+
+        style.wordWrapWidth = 0;
+        style.wordWrapCallback = undefined; // Set text
+
+        textObject.setText(text); // Restore wrap
+
+        style.wordWrapWidth = wordWrapWidth;
+        style.wordWrapCallback = wordWrapCallback;
+        break;
+
+      case TagTextType:
+        // Store wrap properties
+        var style = textObject.style;
+        var wrapMode = style.wrapMode; // Disable wrap
+
+        style.wrapMode = 0; // Set text
+
+        textObject.setText(text); // Restore wrap
+
+        style.wrapMode = wrapMode;
+        break;
+
+      case BitmapTextType:
+        // Store wrap properties
+        var maxWidth = textObject._maxWidth; // Disable wrap
+
+        textObject._maxWidth = 0; // Set text
+
+        textObject.setText(text); // Restore wrap
+
+        textObject._maxWidth = maxWidth;
+        break;
+    }
+  };
+
+  var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+
+  var TextTyping = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(TextTyping, _ComponentBase);
+
+    var _super = _createSuper(TextTyping);
+
+    function TextTyping(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, TextTyping);
+
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+
+      _this.timer = null;
+
+      _this.resetFromJSON(config);
+
+      return _this;
+    }
+
+    _createClass(TextTyping, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setTextWrapEnable(GetValue$7(o, 'wrap', false));
+        this.setTypeMode(GetValue$7(o, 'typeMode', 0));
+        this.setTypeSpeed(GetValue$7(o, 'speed', 333));
+        this.setTextCallback = GetFastValue$1(o, 'setTextCallback', null);
+        this.setTextCallbackScope = GetFastValue$1(o, 'setTextCallbackScope', null);
+        this.setTypingContent(GetFastValue$1(o, 'text', ''));
+        this.typingIdx = GetFastValue$1(o, 'typingIdx', 0);
+        this.insertIdx = GetFastValue$1(o, 'insertIdx', null);
+        var elapsed = GetFastValue$1(o, 'elapsed', null);
+
+        if (elapsed !== null) {
+          this.start(undefined, undefined, this.typingIdx, elapsed);
+        }
+
+        return this;
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        this.freeTimer();
+
+        _get(_getPrototypeOf(TextTyping.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "setTypeMode",
+      value: function setTypeMode(m) {
+        if (typeof m === 'string') {
+          m = TYPEMODE[m];
+        }
+
+        this.typeMode = m;
+        return this;
+      }
+    }, {
+      key: "setTypeSpeed",
+      value: function setTypeSpeed(speed) {
+        this.speed = speed;
+        return this;
+      }
+    }, {
+      key: "setTextWrapEnable",
+      value: function setTextWrapEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.textWrapEnable = enable;
+        return this;
+      }
+    }, {
+      key: "text",
+      get: function get() {
+        return this._text;
+      },
+      set: function set(value) {
+        var text = TransferText(value);
+
+        if (this.textWrapEnable) {
+          text = GetWrapText(this.parent, text);
+        }
+
+        this._text = text;
+      }
+    }, {
+      key: "isTyping",
+      get: function get() {
+        return this.getTimer() !== null;
+      }
+    }, {
+      key: "isLastChar",
+      get: function get() {
+        return this.typingIdx === this.textLen;
+      }
+    }, {
+      key: "start",
+      value: function start(text, speed, startIdx, timerStartAt) {
+        if (text !== undefined) {
+          this.setTypingContent(text);
+        }
+
+        if (speed !== undefined) {
+          this.speed = speed;
+        }
+
+        if (startIdx === undefined) {
+          startIdx = 0;
+        }
+
+        this.typingIdx = startIdx + 1;
+
+        if (this.speed === 0) {
+          this.stop(true);
+        } else {
+          this.setText('');
+          this.startTimer(timerStartAt);
+        }
+
+        return this;
+      }
+    }, {
+      key: "appendText",
+      value: function appendText(text) {
+        var newText = this.text.concat(TransferText(text));
+
+        if (this.isTyping) {
+          this.setTypingContent(newText);
+        } else {
+          this.start(newText, undefined, this.textLen);
+        }
+
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop(showAllText) {
+        var timer = this.getTimer();
+
+        if (timer) {
+          this.freeTimer();
+        }
+
+        if (showAllText) {
+          this.typingIdx = this.textLen;
+          this.setText(this.text);
+          this.emit('type');
+          this.emit('complete', this, this.parent);
+        }
+
+        return this;
+      }
+    }, {
+      key: "pause",
+      value: function pause() {
+        var timer = this.getTimer();
+
+        if (timer) {
+          timer.paused = true;
+        }
+
+        return this;
+      }
+    }, {
+      key: "resume",
+      value: function resume() {
+        var timer = this.getTimer();
+
+        if (timer) {
+          timer.paused = false;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setTypingContent",
+      value: function setTypingContent(text) {
+        this.text = text;
+        this.textLen = this.getTextLength(this.text);
+        return this;
+      }
+    }, {
+      key: "onTyping",
+      value: function onTyping() {
+        var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
+        this.setText(newText);
+        this.emit('type');
+
+        if (this.isLastChar) {
+          this.freeTimer();
+          this.emit('complete', this, this.parent);
+        } else {
+          this.timer.delay = this.speed; // delay of next typing            
+
+          this.typingIdx++;
+        }
+      }
+    }, {
+      key: "getTypingString",
+      value: function getTypingString(text, typeIdx, textLen, typeMode) {
+        var result;
+
+        if (typeMode === 0) {
+          //left-to-right
+          var startIdx = 0;
+          var endIdx = typeIdx;
+          this.insertIdx = endIdx;
+          result = this.getSubString(text, startIdx, endIdx);
+        } else if (typeMode === 1) {
+          //right-to-left
+          var endIdx = textLen;
+          var startIdx = endIdx - typeIdx;
+          this.insertIdx = 0;
+          result = this.getSubString(text, startIdx, endIdx);
+        } else if (typeMode === 2) {
+          //middle-to-sides
+          var midIdx = textLen / 2;
+          var startIdx = Math.floor(midIdx - typeIdx / 2);
+          var endIdx = startIdx + typeIdx;
+          this.insertIdx = typeIdx % 2 ? typeIdx : 0;
+          result = this.getSubString(text, startIdx, endIdx);
+        } else if (typeMode === 3) {
+          //sides-to-middle
+          var lowerLen = Math.floor(typeIdx / 2);
+          var lowerResult;
+
+          if (lowerLen > 0) {
+            var endIdx = textLen;
+            var startIdx = endIdx - lowerLen;
+            lowerResult = this.getSubString(text, startIdx, endIdx);
+          } else {
+            lowerResult = "";
+          }
+
+          var upperLen = typeIdx - lowerLen;
+          var upperResult;
+
+          if (upperLen > 0) {
+            var startIdx = 0;
+            var endIdx = startIdx + upperLen;
+            this.insertIdx = endIdx;
+            upperResult = this.getSubString(text, startIdx, endIdx);
+          } else {
+            upperResult = "";
+            this.insertIdx = 0;
+          }
+
+          result = upperResult + lowerResult;
+        }
+
+        return result;
+      }
+    }, {
+      key: "startTimer",
+      value: function startTimer(timerStartAt) {
+        if (this.timer) {
+          this.freeTimer();
+        }
+
+        var startAt;
+
+        if (timerStartAt === undefined) {
+          startAt = 0;
+        } else {
+          this.speed;
+          startAt = timerStartAt;
+        }
+
+        this.timer = this.scene.time.addEvent({
+          delay: 0,
+          startAt: startAt,
+          loop: true,
+          callback: this.onTyping,
+          callbackScope: this
+        });
+        return this;
+      }
+    }, {
+      key: "getTimer",
+      value: function getTimer() {
+        return this.timer;
+      }
+    }, {
+      key: "freeTimer",
+      value: function freeTimer() {
+        if (this.timer) {
+          this.timer.remove();
+          this.timer = null;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setText",
+      value: function setText(text) {
+        if (this.setTextCallback) {
+          if (this.setTextCallbackScope) {
+            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+          } else {
+            text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+          }
+        }
+
+        if (this.textWrapEnable) {
+          SetNoWrapText(this.parent, text);
+        } else {
+          this.parent.setText(text);
+        }
+      }
+    }, {
+      key: "getTextLength",
+      value: function getTextLength(text) {
+        var gameObject = this.parent;
+        var len;
+
+        if (gameObject.getPlainText) {
+          len = gameObject.getPlainText(text).length;
+        } else {
+          len = text.length;
+        }
+
+        return len;
+      }
+    }, {
+      key: "getSubString",
+      value: function getSubString(text, startIdx, endIdx) {
+        var gameObject = this.parent;
+        var result;
+
+        if (gameObject.getSubString) {
+          result = gameObject.getSubString(text, startIdx, endIdx);
+        } else {
+          result = text.slice(startIdx, endIdx);
+        }
+
+        return result;
+      }
+    }]);
+
+    return TextTyping;
+  }(ComponentBase);
+
+  var TransferText = function TransferText(text) {
+    if (Array.isArray(text)) {
+      text = text.join('\n');
+    } else if (typeof text === 'number') {
+      text = text.toString();
+    }
+
+    return text;
+  };
+
+  var TYPEMODE = {
+    'left-to-right': 0,
+    'right-to-left': 1,
+    'middle-to-sides': 2,
+    'sides-to-middle': 3
+  };
+
   var TextBob = /*#__PURE__*/function (_BobBase) {
     _inherits(TextBob, _BobBase);
 
@@ -3871,6 +4333,19 @@
       key: "setText",
       value: function setText(text) {
         this.gameObject.setText(text);
+        return this;
+      }
+    }, {
+      key: "typing",
+      value: function typing(text, speed) {
+        var gameObject = this.gameObject;
+
+        if (!gameObject._typing) {
+          gameObject._typing = new TextTyping(gameObject);
+        }
+
+        gameObject._typing.start(text, speed);
+
         return this;
       }
     }]);
@@ -7774,6 +8249,14 @@
       }
 
       this.get(name).setText(text);
+      return this;
+    },
+    typing: function typing(name, text) {
+      if (!this.has(name)) {
+        this.add(name);
+      }
+
+      this.get(name).typing(text);
       return this;
     }
   };

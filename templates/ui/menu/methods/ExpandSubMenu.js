@@ -17,6 +17,7 @@ var ExpandSubMenu = function (parentButton, items) {
     var subMenu = new this.constructor(this.scene, {
         items: items,
         orientation: orientation,
+        space: this.space,
 
         createBackgroundCallback: this.root.createBackgroundCallback,
         createBackgroundCallbackScope: this.root.createBackgroundCallbackScope,
