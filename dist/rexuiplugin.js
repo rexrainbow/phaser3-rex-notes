@@ -16484,8 +16484,9 @@
       }
 
       var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
+      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
 
-      if (this.fadeTime > 0 && this.setTint) {
+      if (hasTintChange) {
         AddTintRGBProperties(gameObject);
       }
 
@@ -16503,7 +16504,7 @@
       var bob = new this.BobClass(this, gameObject, name);
       this.bobs[name] = bob;
 
-      if (this.fadeTime > 0) {
+      if (hasTintChange) {
         bob.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
       }
 
@@ -16520,8 +16521,9 @@
       var bob = this.get(name);
       delete this.bobs[name];
       this.removedGOs.push(bob.gameObject);
+      var hasTintChange = !!bob.gameObject.setTint && this.fadeTime > 0;
 
-      if (this.fadeTime > 0) {
+      if (hasTintChange) {
         bob.easeProperty('tintGray', // property
         0, // to value
         this.fadeTime, // duration

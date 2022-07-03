@@ -20,8 +20,9 @@ export default {
         this.remove(name);
 
         var gameObject = this.createGameObjectCallback(this.scene, ...args);
+        var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
 
-        if ((this.fadeTime > 0) && (this.setTint)) {
+        if (hasTintChange) {
             AddTintRGBProperties(gameObject);
         }
         if (this.viewportCoordinateEnable) {
@@ -38,7 +39,7 @@ export default {
         var bob = new this.BobClass(this, gameObject, name);
         this.bobs[name] = bob;
 
-        if (this.fadeTime > 0) {
+        if (hasTintChange) {
             bob
                 .setProperty('tintGray', 0)
                 .easeProperty('tintGray', 255, this.fadeTime)

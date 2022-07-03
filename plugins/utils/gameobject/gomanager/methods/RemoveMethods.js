@@ -8,7 +8,8 @@ export default {
         delete this.bobs[name];
 
         this.removedGOs.push(bob.gameObject);
-        if (this.fadeTime > 0) {
+        var hasTintChange = (!!bob.gameObject.setTint) && (this.fadeTime > 0);
+        if (hasTintChange) {
             bob.easeProperty(
                 'tintGray',                 // property
                 0,                          // to value

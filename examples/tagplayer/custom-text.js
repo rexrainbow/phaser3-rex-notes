@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('nextPage', 'assets/images/arrow-down-left.png');
     }
 
     create() {
