@@ -19,10 +19,12 @@ class Demo extends Phaser.Scene {
 [text.a]
 [text.a.x=200]
 [text.a.y=300]
-[text.a.typing=50]
+[text.a.typing=100]
 Hello\\n
 Phaser\\n
 World
+
+[wait=text.a.typing]
 `
 
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {

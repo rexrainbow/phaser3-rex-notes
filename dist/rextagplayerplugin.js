@@ -4427,6 +4427,18 @@
         gameObject.typing.start(text, speed);
         return this;
       }
+    }, {
+      key: "getTypingTask",
+      value: function getTypingTask() {
+        var gameObject = this.gameObject;
+        var typing = gameObject.typing;
+
+        if (typing && typing.isTyping) {
+          return typing;
+        }
+
+        return null;
+      }
     }]);
 
     return TextBob;
@@ -4452,6 +4464,13 @@
     setTypingSpeed: function setTypingSpeed(name, speed) {
       this.get(name).setTypingSpeed(speed);
       return this;
+    },
+    getTypingTask: function getTypingTask(name) {
+      if (this.has(name)) {
+        return this.get(name).getTypingTask();
+      }
+
+      return null;
     }
   };
 
@@ -4791,6 +4810,86 @@
     }
   };
 
+  var IsWaitText = function IsWaitText(name) {
+    // text, text.name, text.name.prop, text.name.typing
+    var names = name.split('.');
+    return names[0] === 'text' && names.length <= 3;
+  };
+
+  var WaitText = function WaitText(tagPlayer, tag, callback, args, scope) {
+    var wrapCallback = GetWrapCallback(tagPlayer, callback, args, scope);
+    var tags = tag.split('.');
+    var textManager = tagPlayer.textManager;
+
+    switch (tags.length) {
+      case 1:
+        // text: wait all texts has beeen destroyed
+        if (textManager.isEmpty) {
+          tagPlayer.emit('wait.text');
+          wrapCallback();
+        } else {
+          // Remove all wait events
+          tagPlayer.once(RemoveWaitEvents, function (removeFrom) {
+            textManager.off('empty', wrapCallback, tagPlayer);
+          });
+          textManager.once('empty', wrapCallback, tagPlayer);
+          tagPlayer.emit('wait.text');
+        }
+
+        break;
+
+      case 2:
+        // text.name: wait text.name has been destroyed
+        var name = tags[1];
+
+        if (textManager.has(name)) {
+          var textData = tagPlayer.textManager.get(name);
+          var text = textData.text; // Remove all wait events
+
+          tagPlayer.once(RemoveWaitEvents, function () {
+            text.off('destroy', wrapCallback, tagPlayer);
+          });
+          text.once('destroy', wrapCallback, tagPlayer);
+          tagPlayer.emit('wait.text', name);
+        } else {
+          tagPlayer.emit('wait.text', name);
+          wrapCallback();
+        }
+
+        break;
+
+      case 3:
+        // text.name.prop: wait ease text.name.prop has been completed
+        var name = tags[1];
+        var prop = tags[2];
+        var task;
+
+        switch (prop) {
+          case 'typing':
+            task = tagPlayer.textManager.getTypingTask(name);
+            break;
+
+          default:
+            task = tagPlayer.textManager.getTweenTask(name, prop);
+            break;
+        }
+
+        if (task) {
+          // Remove all wait events
+          tagPlayer.once(RemoveWaitEvents, function () {
+            task.off('complete', wrapCallback, tagPlayer);
+          });
+          task.once('complete', wrapCallback, tagPlayer);
+          tagPlayer.emit('wait.text', name, prop);
+        } else {
+          tagPlayer.emit('wait.text', name, prop);
+          wrapCallback();
+        }
+
+        break;
+    }
+  };
+
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 
   var WaitMultiple = function WaitMultiple(tagPlayer, names, callback, args, scope) {
@@ -4824,6 +4923,8 @@
         WaitCameraEffect(tagPlayer, name, callback, args, scope);
       } else if (IsWaitSprite(name)) {
         WaitSprite(tagPlayer, name, callback, args, scope);
+      } else if (IsWaitText(name)) {
+        WaitText(tagPlayer, name, callback, args, scope);
       } else {
         WaitCallback(tagPlayer, name, callback, args, scope);
       }

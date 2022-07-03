@@ -25,6 +25,14 @@ class TextBob extends BobBase {
         gameObject.typing.start(text, speed)
         return this;
     }
+
+    getTypingTask() {
+        var typing = this.gameObject.typing;
+        if (typing && typing.isTyping) {
+            return typing;
+        }
+        return null;
+    }
 }
 
 export default TextBob;
