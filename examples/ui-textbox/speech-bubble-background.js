@@ -45,7 +45,9 @@ var createTextBox = function (scene, x, y, config) {
         x: x,
         y: y,
 
-        background: CreateSpeechBubbleShape(scene, COLOR_PRIMARY, COLOR_LIGHT),
+        background: CreateSpeechBubbleShape(scene)
+            .setFillStyle(COLOR_PRIMARY, 1)
+            .setStrokeStyle(2, COLOR_LIGHT, 1),
 
         icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
 
@@ -122,7 +124,7 @@ var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
     })
 }
 
-var CreateSpeechBubbleShape = function (scene, fillColor, strokeColor) {
+var CreateSpeechBubbleShape = function (scene) {
     return scene.rexUI.add.customShapes({
         create: { lines: 1 },
         update: function () {
@@ -132,8 +134,8 @@ var CreateSpeechBubbleShape = function (scene, fillColor, strokeColor) {
             var left = 0, right = this.width,
                 top = 0, bottom = this.height, boxBottom = bottom - indent;
             this.getShapes()[0]
-                .lineStyle(2, strokeColor, 1)
-                .fillStyle(fillColor, 1)
+                .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
+                .fillStyle(this.fillColor, this.fillAlpha)
                 // top line, right arc
                 .startAt(left + radius, top).lineTo(right - radius, top).arc(right - radius, top + radius, radius, 270, 360)
                 // right line, bottom arc
