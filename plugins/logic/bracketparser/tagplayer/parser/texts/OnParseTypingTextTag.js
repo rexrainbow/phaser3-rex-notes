@@ -26,6 +26,9 @@ var OnParseTypingTextTag = function (tagPlayer, parser, config) {
             }
 
             // Set text in content section
+            if(speed !== undefined) {
+                tagPlayer.textManager.setTypingSpeed(name, speed);
+            }
 
             parser.skipEvent();
         })

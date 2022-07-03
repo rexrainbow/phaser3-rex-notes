@@ -15,19 +15,22 @@ class SpriteManager extends GOManager {
 
     setCreateGameObjectCallback(callback) {
         if (!callback || (callback === 'sprite')) {
-            this.createGameObjectCallback = function (scene, textureKey, frameName) {
-                return scene.add.sprite(0, 0, textureKey, frameName);
-            }
+            callback = CreateSprite;
         } else if (callback === 'image') {
-            this.createGameObjectCallback = function (scene, textureKey, frameName) {
-                return scene.add.image(0, 0, textureKey, frameName);
-            }
-        } else {
-            this.createGameObjectCallback = callback;
+            callback = CreateImage;
         }
+        super.setCreateGameObjectCallback(callback);
         return this;
     }
 
+}
+
+var CreateSprite = function (scene, textureKey, frameName) {
+    return scene.add.sprite(0, 0, textureKey, frameName);
+}
+
+var CreateImage = function (scene, textureKey, frameName) {
+    return scene.add.image(0, 0, textureKey, frameName);
 }
 
 Object.assign(

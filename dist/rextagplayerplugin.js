@@ -1237,7 +1237,9 @@
       return;
     }
 
-    parser.on('+', function (tag, textObjectType) {
+    parser.on('+', function (tag) {
+      var _tagPlayer$textManage;
+
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
@@ -1253,7 +1255,12 @@
         return;
       }
 
-      tagPlayer.textManager.add(name, textObjectType);
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      (_tagPlayer$textManage = tagPlayer.textManager).add.apply(_tagPlayer$textManage, [name].concat(args));
+
       parser.skipEvent();
     }).on('-', function (tag) {
       if (parser.skipEventFlag) {
@@ -1380,13 +1387,18 @@
 
 
       var tags = tag.split('.');
+      var name;
 
       if (IsTypingTextTag(tags, prefix)) {
-        tags[1];
+        name = tags[1];
       } else {
         return;
       } // Set text in content section
 
+
+      if (speed !== undefined) {
+        tagPlayer.textManager.setTypingSpeed(name, speed);
+      }
 
       parser.skipEvent();
     }).on('content', function (content) {
@@ -3550,7 +3562,7 @@
 
       var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
 
-      if (this.fadeTime > 0) {
+      if (this.fadeTime > 0 && this.setTint) {
         AddTintRGBProperties(gameObject);
       }
 
@@ -3731,14 +3743,7 @@
     }, {
       key: "setCreateGameObjectCallback",
       value: function setCreateGameObjectCallback(callback) {
-        if (!callback) {
-          this.createGameObjectCallback = function (scene, textureKey, frameName) {
-            return scene.add.sprite(0, 0, textureKey, frameName);
-          };
-        } else {
-          this.createGameObjectCallback = callback;
-        }
-
+        this.createGameObjectCallback = callback;
         return this;
       }
     }, {
@@ -3893,16 +3898,12 @@
       key: "setCreateGameObjectCallback",
       value: function setCreateGameObjectCallback(callback) {
         if (!callback || callback === 'sprite') {
-          this.createGameObjectCallback = function (scene, textureKey, frameName) {
-            return scene.add.sprite(0, 0, textureKey, frameName);
-          };
+          callback = CreateSprite;
         } else if (callback === 'image') {
-          this.createGameObjectCallback = function (scene, textureKey, frameName) {
-            return scene.add.image(0, 0, textureKey, frameName);
-          };
-        } else {
-          this.createGameObjectCallback = callback;
+          callback = CreateImage;
         }
+
+        _get(_getPrototypeOf(SpriteManager.prototype), "setCreateGameObjectCallback", this).call(this, callback);
 
         return this;
       }
@@ -3910,6 +3911,14 @@
 
     return SpriteManager;
   }(GOManager);
+
+  var CreateSprite = function CreateSprite(scene, textureKey, frameName) {
+    return scene.add.sprite(0, 0, textureKey, frameName);
+  };
+
+  var CreateImage = function CreateImage(scene, textureKey, frameName) {
+    return scene.add.image(0, 0, textureKey, frameName);
+  };
 
   Object.assign(SpriteManager.prototype, Methods$2);
 
@@ -4397,21 +4406,23 @@
       value: function setTypingSpeed(speed) {
         var gameObject = this.gameObject;
 
-        if (!gameObject._typing) {
-          gameObject._typing = new TextTyping(gameObject);
+        if (!gameObject.typing) {
+          gameObject.typing = new TextTyping(gameObject);
         }
+
+        gameObject.typing.setTypeSpeed(speed);
+        return this;
       }
     }, {
       key: "typing",
       value: function typing(text, speed) {
         var gameObject = this.gameObject;
 
-        if (!gameObject._typing) {
-          gameObject._typing = new TextTyping(gameObject);
+        if (!gameObject.typing) {
+          gameObject.typing = new TextTyping(gameObject);
         }
 
-        gameObject._typing.start(text, speed);
-
+        gameObject.typing.start(text, speed);
         return this;
       }
     }]);
@@ -8325,8 +8336,8 @@
       this.get(name).typing(text);
       return this;
     },
-    setTypingSpeed: function setTypingSpeed(speed) {
-      this.typingSpeed = speed;
+    setTypingSpeed: function setTypingSpeed(name, speed) {
+      this.get(name).setTypingSpeed(speed);
       return this;
     }
   };
@@ -8354,7 +8365,7 @@
       key: "setCreateGameObjectCallback",
       value: function setCreateGameObjectCallback(callback) {
         if (!callback) {
-          this.createGameObjectCallback = function (scene, textObjectType) {
+          callback = function callback(scene, textObjectType) {
             switch (textObjectType) {
               case 'bbcodetext':
                 return CreateBBCodeTextObject(scene);
@@ -8364,12 +8375,12 @@
             }
           };
         } else if (callback === 'text') {
-          this.createGameObjectCallback = CreateTextObject;
+          callback = CreateTextObject;
         } else if (callback === 'bbcodetext') {
-          this.createGameObjectCallback = CreateBBCodeTextObject;
-        } else {
-          this.createGameObjectCallback = callback;
+          callback = CreateBBCodeTextObject;
         }
+
+        _get(_getPrototypeOf(TextManager.prototype), "setCreateGameObjectCallback", this).call(this, callback);
 
         return this;
       }

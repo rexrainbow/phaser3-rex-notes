@@ -16485,7 +16485,7 @@
 
       var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
 
-      if (this.fadeTime > 0) {
+      if (this.fadeTime > 0 && this.setTint) {
         AddTintRGBProperties(gameObject);
       }
 
@@ -16666,14 +16666,7 @@
     }, {
       key: "setCreateGameObjectCallback",
       value: function setCreateGameObjectCallback(callback) {
-        if (!callback) {
-          this.createGameObjectCallback = function (scene, textureKey, frameName) {
-            return scene.add.sprite(0, 0, textureKey, frameName);
-          };
-        } else {
-          this.createGameObjectCallback = callback;
-        }
-
+        this.createGameObjectCallback = callback;
         return this;
       }
     }, {
@@ -16828,16 +16821,12 @@
       key: "setCreateGameObjectCallback",
       value: function setCreateGameObjectCallback(callback) {
         if (!callback || callback === 'sprite') {
-          this.createGameObjectCallback = function (scene, textureKey, frameName) {
-            return scene.add.sprite(0, 0, textureKey, frameName);
-          };
+          callback = CreateSprite$1;
         } else if (callback === 'image') {
-          this.createGameObjectCallback = function (scene, textureKey, frameName) {
-            return scene.add.image(0, 0, textureKey, frameName);
-          };
-        } else {
-          this.createGameObjectCallback = callback;
+          callback = CreateImage$1;
         }
+
+        _get(_getPrototypeOf(SpriteManager.prototype), "setCreateGameObjectCallback", this).call(this, callback);
 
         return this;
       }
@@ -16845,6 +16834,14 @@
 
     return SpriteManager;
   }(GOManager);
+
+  var CreateSprite$1 = function CreateSprite(scene, textureKey, frameName) {
+    return scene.add.sprite(0, 0, textureKey, frameName);
+  };
+
+  var CreateImage$1 = function CreateImage(scene, textureKey, frameName) {
+    return scene.add.image(0, 0, textureKey, frameName);
+  };
 
   Object.assign(SpriteManager.prototype, Methods$6);
 

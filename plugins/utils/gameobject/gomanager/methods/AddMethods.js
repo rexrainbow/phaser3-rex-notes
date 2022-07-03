@@ -21,7 +21,7 @@ export default {
 
         var gameObject = this.createGameObjectCallback(this.scene, ...args);
 
-        if (this.fadeTime > 0) {
+        if ((this.fadeTime > 0) && (this.setTint)) {
             AddTintRGBProperties(gameObject);
         }
         if (this.viewportCoordinateEnable) {

@@ -49,13 +49,7 @@ class GOManager {
     }
 
     setCreateGameObjectCallback(callback) {
-        if (!callback) {
-            this.createGameObjectCallback = function (scene, textureKey, frameName) {
-                return scene.add.sprite(0, 0, textureKey, frameName);
-            }
-        } else {
-            this.createGameObjectCallback = callback;
-        }
+        this.createGameObjectCallback = callback;
         return this;
     }
 

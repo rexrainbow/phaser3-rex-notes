@@ -17,8 +17,8 @@ export default {
         return this;
     },
 
-    setTypingSpeed(speed) {
-        this.typingSpeed = speed;
+    setTypingSpeed(name, speed) {
+        this.get(name).setTypingSpeed(speed);
         return this;
     }
 }

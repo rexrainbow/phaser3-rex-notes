@@ -16,19 +16,18 @@ class TextManager extends GOManager {
 
     setCreateGameObjectCallback(callback) {
         if (!callback) {
-            this.createGameObjectCallback = function (scene, textObjectType) {
+            callback = function (scene, textObjectType) {
                 switch (textObjectType) {
                     case 'bbcodetext': return CreateBBCodeTextObject(scene);
                     default: return CreateTextObject(scene);
                 }
             }
         } else if (callback === 'text') {
-            this.createGameObjectCallback = CreateTextObject;
+            callback = CreateTextObject;
         } else if (callback === 'bbcodetext') {
-            this.createGameObjectCallback = CreateBBCodeTextObject;
-        } else {
-            this.createGameObjectCallback = callback;
+            callback = CreateBBCodeTextObject;
         }
+        super.setCreateGameObjectCallback(callback);
         return this;
     }
 

@@ -11,7 +11,7 @@ var OnParseAddTextTag = function (tagPlayer, parser, config) {
         return;
     }
     parser
-        .on('+', function (tag, textObjectType) {
+        .on('+', function (tag, ...args) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
@@ -24,7 +24,7 @@ var OnParseAddTextTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            tagPlayer.textManager.add(name, textObjectType);
+            tagPlayer.textManager.add(name, ...args);
 
             parser.skipEvent();
         })
