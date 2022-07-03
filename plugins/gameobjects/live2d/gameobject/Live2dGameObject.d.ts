@@ -40,7 +40,6 @@ declare class Live2dGameObject extends Live2dGameObjectBase {
 
     expressionName: string;
 
-
     // Motion
     getMotionNames(groupName?: string): string[];
 
@@ -59,6 +58,10 @@ declare class Live2dGameObject extends Live2dGameObjectBase {
     isAnyMotionPlaying(): boolean;
 
     autoPlayIdleMotion(motionName: string): this;
+
+    // Time-scale
+    setTimeScale(timeScale: number): this;
+    timeScale: number;
 
     // Parameter
     registerParameter(name: string): this;
