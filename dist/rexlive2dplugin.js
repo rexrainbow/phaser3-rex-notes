@@ -11245,6 +11245,11 @@
 
   var globOut = {};
 
+  var SetTimeScale = function SetTimeScale(timeScale) {
+    this.timeScale = timeScale;
+    return this;
+  };
+
   var Methods = {
     setModel: SetModel,
     getExpressionNames: GetExpressionNames,
@@ -11267,7 +11272,8 @@
     setInteractive: SetInteractive,
     getHitTestResult: GetHitTestResult,
     hitTest: HitTest,
-    getModelXY: WorldXYToModelXY
+    getModelXY: WorldXYToModelXY,
+    setTimeScale: SetTimeScale
   };
 
   var Live2dGameObject = /*#__PURE__*/function (_Live2dGameObjectBase) {
@@ -11289,12 +11295,15 @@
 
       _this.setPosition(x, y);
 
+      _this.setTimeScale(1);
+
       return _this;
     }
 
     _createClass(Live2dGameObject, [{
       key: "preUpdate",
       value: function preUpdate(time, delta) {
+        delta *= this.timeScale;
         this.model.update(time, delta);
       }
     }, {

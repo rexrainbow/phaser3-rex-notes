@@ -4430,8 +4430,7 @@
     }, {
       key: "getTypingTask",
       value: function getTypingTask() {
-        var gameObject = this.gameObject;
-        var typing = gameObject.typing;
+        var typing = this.gameObject.typing;
 
         if (typing && typing.isTyping) {
           return typing;

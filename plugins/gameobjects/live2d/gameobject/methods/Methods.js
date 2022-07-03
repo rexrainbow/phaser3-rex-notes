@@ -27,6 +27,8 @@ import HitTest from './interactive/HitTest.js';
 
 import GetModelXY from './position/WorldXYToModelXY.js';
 
+import SetTimeScale from './SetTimeScale.js';
+
 
 var Methods = {
     setModel: SetModel,
@@ -57,6 +59,10 @@ var Methods = {
     hitTest: HitTest,
 
     getModelXY: GetModelXY,
+
+    setTimeScale: SetTimeScale,
 }
+
+
 
 export default Methods;

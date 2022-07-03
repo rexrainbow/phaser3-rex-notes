@@ -222,6 +222,15 @@ live2dGameObject.setModel(key, {
     live2dGameObject.autoPlayIdleMotion(group);
     ```
     - `group` : Group name of motion
+- Set time-scale
+    ```javascript
+    live2dGameObject.setTimeScale(timeScale);
+    ```
+    or
+    ```javascript
+    live2dGameObject.timeScale = timeScale;
+    ```
+
 
 ### Look at
 
