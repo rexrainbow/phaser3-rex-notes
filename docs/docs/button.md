@@ -35,7 +35,7 @@ Fires 'click' event when touch releasd after pressed.
         // ...
         plugins: {
             global: [{
-                key: 'rexButtonn',
+                key: 'rexButton',
                 plugin: ButtonPlugin,
                 start: true
             },
