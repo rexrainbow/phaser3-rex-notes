@@ -8,6 +8,7 @@ Fires 'intouch' event every tick when pressing on a game object.
 ## Live demos
 
 - [Cooldown](https://codepen.io/rexrainbow/pen/zYpvPwj)
+- [Is in touched](https://codepen.io/rexrainbow/pen/KKopOeo)
 
 ## Usage
 
@@ -91,6 +92,12 @@ var intouching = scene.plugins.get('rexInTouching').add(gameObject, {
         // ...
     }, scope);
     ```
+
+### Is in touched
+
+```javascript
+var isInTouched = intouching.isInTouched;
+```
 
 ### Enable
 

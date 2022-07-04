@@ -11,7 +11,6 @@ var IsPointInBounds = function (gameObject, x, y, preTest, postTest) {
     }
 
     var boundsRect = GetBounds(gameObject, true);
-
     if (!boundsRect.contains(x, y)) {
         return false;
     }
