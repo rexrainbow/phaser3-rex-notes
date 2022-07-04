@@ -51,6 +51,7 @@ import Sides from './sides/Sides.js';
 
 import Click from './click/Click.js';
 import ClickOutside from './clickoutside/ClickOutside.js';
+import InTouching from './intouching/InTouching.js';
 import Tap from './tap/Tap.js';
 import Press from './press/Press.js';
 import Swipe from './swipe/Swipe.js';
@@ -141,6 +142,7 @@ export {
 
     Click,
     ClickOutside,
+    InTouching,
     Tap,
     Press,
     Swipe,

@@ -738,6 +738,43 @@ var clickOutside = scene.rexUI.add.clickOutside(sizer, config);
 clickOutside.on('clickoutside', callback, scope);
 ```
 
+### In touching
+
+Invoke callbeack if pointer is inside hitarea every tick.
+
+- Add in-touching event
+    ```javascript
+    sizer.onTouching(callback, scope);
+    // sizer.onClick(callback, scope, config);
+    ```
+    - `config` : See [In-touching](intouching.md#create-instance)
+    - `callback` :
+        ```javascript
+        function(intouching, gameObject, pointer) {
+
+        }
+        ```
+        - `intouching` : [In-touching](intouching.md) behavior.
+- Turn off in-touching event
+    ```javascript
+    sizer.offTouching(callback, scope);
+    ```
+- Enable in-touching event
+    ```javascript
+    sizer.enableTouching();
+    ```
+- Disable in-touching event
+    ```javascript
+    sizer.disableTouching();
+    ```
+
+Equal to 
+
+```javascript
+var inTouching = scene.rexUI.add.inTouching(sizer, config);
+inTouching.on('intouch', callback, scope);
+```
+
 ### Set children interactive
 
 Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaviors on this sizer, to detect input events of children.

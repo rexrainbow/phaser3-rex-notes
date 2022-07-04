@@ -53,6 +53,7 @@ import SidesFactory from './sides/Factory.js';
 
 import ClickFactory from './click/Factory.js';
 import ClickOutsideFactory from './clickoutside/Factory.js';
+import InTouchingFactory from './intouching/Factory.js';
 import TapFactory from './tap/Factory.js';
 import PressFactory from './press/Factory.js';
 import SwipeFactory from './swipe/Factory.js';

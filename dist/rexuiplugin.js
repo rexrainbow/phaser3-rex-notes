@@ -24112,11 +24112,29 @@
       return this;
     },
     offTouching: function offTouching(callback, scope) {
-      if (this._click === undefined) {
+      if (this._inTouching === undefined) {
         return this;
       }
 
       this._inTouching.off('intouch', callback, scope);
+
+      return this;
+    },
+    enableTouching: function enableTouching(enabled) {
+      if (this._inTouching === undefined) {
+        return this;
+      }
+
+      this._inTouching.setEnable(enabled);
+
+      return this;
+    },
+    disableTouching: function disableTouching() {
+      if (this._inTouching === undefined) {
+        return this;
+      }
+
+      this._inTouching.setEnable(false);
 
       return this;
     }
@@ -42771,6 +42789,11 @@
     return new ClickOutside(gameObject, config);
   });
   SetValue(window, 'RexPlugins.UI.ClickOutside', ClickOutside);
+
+  ObjectFactory.register('inTouching', function (gameObject, config) {
+    return new InTouching(gameObject, config);
+  });
+  SetValue(window, 'RexPlugins.UI.InTouching', InTouching);
 
   var GameObjectClass = Phaser.GameObjects.GameObject;
 

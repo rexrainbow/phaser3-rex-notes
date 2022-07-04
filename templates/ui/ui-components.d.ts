@@ -49,6 +49,7 @@ import Toast from './toast/Toast';
 
 import Click from './click/Click';
 import ClickOutside from './clickoutside/ClickOutside';
+import InTouching from './intouching/InTouching';
 import Tap from './tap/Tap';
 import Press from './press/Press';
 import Swipe from './swipe/Swipe';
@@ -139,6 +140,7 @@ export {
 
     Click,
     ClickOutside,
+    InTouching,
     Tap,
     Press,
     Swipe,

@@ -7079,11 +7079,29 @@
       return this;
     },
     offTouching: function offTouching(callback, scope) {
-      if (this._click === undefined) {
+      if (this._inTouching === undefined) {
         return this;
       }
 
       this._inTouching.off('intouch', callback, scope);
+
+      return this;
+    },
+    enableTouching: function enableTouching(enabled) {
+      if (this._inTouching === undefined) {
+        return this;
+      }
+
+      this._inTouching.setEnable(enabled);
+
+      return this;
+    },
+    disableTouching: function disableTouching() {
+      if (this._inTouching === undefined) {
+        return this;
+      }
+
+      this._inTouching.setEnable(false);
 
       return this;
     }
