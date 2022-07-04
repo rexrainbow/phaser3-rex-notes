@@ -431,6 +431,14 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```javascript
     var clickOutside = new RexPlugins.UI.ClickOutside(gameObject, config);
     ```
+1. [In touching](intouching.md): Fires 'intouch' event every tick when pressing on a game object.
+    ```javascript
+    var inTouching = scene.rexUI.add.inTouching(gameObject, config);
+    ```
+    or
+    ```javascript
+    var inTouching = new RexPlugins.UI.inTouching(gameObject, config);
+    ```
 1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
     ```javascript
     var tap = scene.rexUI.add.tap(gameObject, config);
