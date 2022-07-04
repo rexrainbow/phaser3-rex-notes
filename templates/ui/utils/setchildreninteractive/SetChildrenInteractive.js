@@ -1,5 +1,7 @@
-import ClickChild from './ClickChild.js';
+import DownChild from './DownChild.js';
+import UpChild from './UpChild.js';
 import OverChild from './OverChild.js';
+import ClickChild from './ClickChild.js';
 import TapChild from './TapChild.js';
 import PressChild from './PressChild.js';
 import SwipeChild from './SwipeChild.js';
@@ -15,8 +17,10 @@ var SetChildrenInteractive = function (gameObject, config) {
         eventNamePrefix: GetValue(config, 'inputEventPrefix', 'child.')
     }
 
-    ClickChild.call(gameObject, config);
+    DownChild.call(gameObject, config);
+    UpChild.call(gameObject, config);
     OverChild.call(gameObject, config);
+    ClickChild.call(gameObject, config);
     TapChild.call(gameObject, config);
     PressChild.call(gameObject, config);
     SwipeChild.call(gameObject, config);

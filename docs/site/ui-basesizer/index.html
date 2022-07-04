@@ -9435,9 +9435,11 @@
 <h3 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h3>
 <p>Applies <a href="../button/">click</a>, <a href="../gesture-tap/">tap</a>, <a href="../gesture-press/">press</a>, <a href="../gesture-swipe/">swipe</a> behaviors on this sizer, to detect input events of children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildrenInteractive</span><span class="p">({</span>
-    <span class="c1">// click: {mode: &#39;release&#39;, clickInterval: 100},</span>
-
+    <span class="c1">// down: undefined,</span>
+    <span class="c1">// up: undefined,</span>
     <span class="c1">// over: undefined,</span>
+
+    <span class="c1">// click: {mode: &#39;release&#39;, clickInterval: 100},</span>
 
     <span class="c1">// press: {time: 251, threshold: 9},</span>
 
@@ -9450,12 +9452,20 @@
 <span class="p">})</span>
 </code></pre></div>
 <ul>
-<li><code>click</code> : <a href="../button/#create-instance">Configuration</a> of Button behavior.<ul>
-<li><code>false</code> : Don't install Button behavior.</li>
+<li><code>down</code> :<ul>
+<li><code>false</code> : Don't fire (pointer-) down events</li>
+</ul>
+</li>
+<li><code>up</code> :<ul>
+<li><code>false</code> : Don't fire (pointer-) up events</li>
 </ul>
 </li>
 <li><code>over</code> :<ul>
-<li><code>false</code> : Don't fire over/out events</li>
+<li><code>false</code> : Don't fire (pointer-) over/out events</li>
+</ul>
+</li>
+<li><code>click</code> : <a href="../button/#create-instance">Configuration</a> of Button behavior.<ul>
+<li><code>false</code> : Don't install Button behavior.</li>
 </ul>
 </li>
 <li><code>press</code> : <a href="../gesture-press/#create-instance">Configuration</a> of Press behavior.<ul>
@@ -9479,15 +9489,16 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 </div>
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Click
-    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+<li>Pointer-down
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.down&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>child</code> : Triggered child game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.    </li>
-</ul>
-</li>
+</code></pre></div></li>
+<li>Pointer-up
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.up&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Pointer-over
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -9498,6 +9509,15 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Click
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>child</code> : Triggered child game object.</li>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.    </li>
+</ul>
+</li>
 <li>Press
     <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>

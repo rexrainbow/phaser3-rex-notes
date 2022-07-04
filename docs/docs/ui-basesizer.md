@@ -781,10 +781,12 @@ Applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [s
 
 ```javascript
 sizer.setChildrenInteractive({
-    // click: {mode: 'release', clickInterval: 100},
-
+    // down: undefined,
+    // up: undefined,
     // over: undefined,
     
+    // click: {mode: 'release', clickInterval: 100},
+
     // press: {time: 251, threshold: 9},
 
     // tap: {time: 250, tapInterval: 200, threshold: 9, tapOffset: 10, 
@@ -796,10 +798,14 @@ sizer.setChildrenInteractive({
 })
 ```
 
+- `down` :
+    - `false` : Don't fire (pointer-) down events
+- `up` :
+    - `false` : Don't fire (pointer-) up events
+- `over` :
+    - `false` : Don't fire (pointer-) over/out events
 - `click` : [Configuration](button.md#create-instance) of Button behavior.
     - `false` : Don't install Button behavior.
-- `over` :
-    - `false` : Don't fire over/out events
 - `press` : [Configuration](gesture-press.md#create-instance) of Press behavior.
     - `false` : Don't install Press behavior.
 - `tap` : [Configuration](gesture-tap.md#create-instance) of Tap behavior.
@@ -814,14 +820,18 @@ sizer.setChildrenInteractive({
 
 #### Events
 
-- Click
+- Pointer-down
     ```javascript
-    sizer.on('child.click', function(child, pointer, event) {
+    sizer.on('child.down', function(child, pointer, event) {
         // ...
     }, scope);
     ```
-    - `child` : Triggered child game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
+- Pointer-up
+    ```javascript
+    sizer.on('child.up', function(child, pointer, event) {
+        // ...
+    }, scope);
+    ```
 - Pointer-over
     ```javascript
     sizer.on('child.over', function(child, pointer, event) {
@@ -834,6 +844,14 @@ sizer.setChildrenInteractive({
         // ...
     }, scope);
     ```
+- Click
+    ```javascript
+    sizer.on('child.click', function(child, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `child` : Triggered child game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
 - Press
     ```javascript
     sizer.on('child.pressstart', function(child, pointer) { 
