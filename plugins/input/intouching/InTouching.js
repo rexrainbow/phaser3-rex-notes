@@ -17,7 +17,7 @@ class InTouching extends ComponentBase {
 
     resetFromJSON(o) {
         this.pointer = undefined;
-        this.isInTouched = false;
+        this.isInTouching = false;
         this.setEnable(GetValue(o, 'enable', true));
         this.setCooldown(GetValue(o, 'cooldown', undefined));
         return this;
@@ -59,7 +59,7 @@ class InTouching extends ComponentBase {
         }
 
         if (!e) {
-            this.isInTouched = false;
+            this.isInTouching = false;
             this.pointer = undefined;
         }
         this._enable = e;
@@ -101,7 +101,7 @@ class InTouching extends ComponentBase {
             return;
         }
         this.pointer = pointer;
-        this.isInTouched = true;
+        this.isInTouching = true;
     }
 
     onPointOut(pointer) {
@@ -110,12 +110,12 @@ class InTouching extends ComponentBase {
             return;
         }
         this.pointer = undefined;
-        this.isInTouched = false;
+        this.isInTouching = false;
     }
 
     preupdate(time, delta) {
         this.cooldown.update(time, delta);
-        if (this.isInTouched && this.cooldown.request()) {
+        if (this.isInTouching && this.cooldown.request()) {
             this.emit('intouch', this, this.parent, this.pointer);
         }
     }

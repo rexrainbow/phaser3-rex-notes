@@ -23981,7 +23981,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.pointer = undefined;
-        this.isInTouched = false;
+        this.isInTouching = false;
         this.setEnable(GetValue$1p(o, 'enable', true));
         this.setCooldown(GetValue$1p(o, 'cooldown', undefined));
         return this;
@@ -24025,7 +24025,7 @@
         }
 
         if (!e) {
-          this.isInTouched = false;
+          this.isInTouching = false;
           this.pointer = undefined;
         }
 
@@ -24071,7 +24071,7 @@
         }
 
         this.pointer = pointer;
-        this.isInTouched = true;
+        this.isInTouching = true;
       }
     }, {
       key: "onPointOut",
@@ -24081,14 +24081,14 @@
         }
 
         this.pointer = undefined;
-        this.isInTouched = false;
+        this.isInTouching = false;
       }
     }, {
       key: "preupdate",
       value: function preupdate(time, delta) {
         this.cooldown.update(time, delta);
 
-        if (this.isInTouched && this.cooldown.request()) {
+        if (this.isInTouching && this.cooldown.request()) {
           this.emit('intouch', this, this.parent, this.pointer);
         }
       }

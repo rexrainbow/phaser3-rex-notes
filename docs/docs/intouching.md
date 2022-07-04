@@ -93,10 +93,10 @@ var intouching = scene.plugins.get('rexInTouching').add(gameObject, {
     }, scope);
     ```
 
-### Is in touched
+### In touching
 
 ```javascript
-var isInTouched = intouching.isInTouched;
+var isInTouching = intouching.isInTouching;
 ```
 
 ### Enable

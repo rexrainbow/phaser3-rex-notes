@@ -14,6 +14,8 @@ declare class InTouching extends Phaser.Events.EventEmitter {
         config?: InTouching.IConfig
     )
 
+    isInTouching: boolean;
+
     setEnable(enable?: boolean): this;
     toggleEnable(): this;
     enable: boolean;

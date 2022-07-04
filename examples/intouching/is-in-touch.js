@@ -38,7 +38,7 @@ class Demo extends Phaser.Scene {
         this.input.on('pointerdown', function () {
             var s = ''
             btns.forEach(function (btn) {
-                if (btn.inTouching.isInTouched) {
+                if (btn.inTouching.isInTouching) {
                     s += `Click ${btn.name}\n`;
                 }
             })
