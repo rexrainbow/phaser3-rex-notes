@@ -13,12 +13,11 @@ class Demo extends Phaser.Scene {
     create() {
         this.cameras.main.centerOn(0, 0).setZoom(0.5);
 
-        this.add.grid(0, 0, 400, 300, 100, 100).setOrigin(0, 0).setAlpha(0.2);
-
         this.joyStick = this.plugins.get('rexVirtualJoyStick').add(this, {
             x: 300,
             y: 500,
             radius: 100,
+            fixed: false,  // Won't setScrollFactor to 0
             // base: this.add.circle(0, 0, 100, 0x888888),
             // thumb: this.add.circle(0, 0, 50, 0xcccccc),
             // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
@@ -29,6 +28,11 @@ class Demo extends Phaser.Scene {
 
         this.text = this.add.text(0, 0, '', { fontSize: '20pt' });
         this.dumpJoyStickState();
+
+        this.input.on('pointerup', function (pointer) {
+            this.joyStick.setPosition(pointer.worldX, pointer.worldY)
+            this.dumpJoyStickState()
+        }, this)
     }
 
     dumpJoyStickState() {
@@ -43,6 +47,10 @@ class Demo extends Phaser.Scene {
         s += ('Force: ' + Math.floor(this.joyStick.force * 100) / 100 + '\n');
         s += ('Angle: ' + Math.floor(this.joyStick.angle * 100) / 100 + '\n');
         this.text.setText(s);
+    }
+
+    update() {
+
     }
 }
 

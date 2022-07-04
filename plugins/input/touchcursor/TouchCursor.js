@@ -115,12 +115,16 @@ class TouchCursor extends VectorToCursorKeys {
             worldXY.y = pointer.worldY;
         }
 
-        this.setVector(
-            (gameObject.x + camera.scrollX),
-            (gameObject.y + camera.scrollY),
-            worldXY.x,
-            worldXY.y
-        );
+        var startX = gameObject.x;
+        var startY = gameObject.y
+        if (gameObject.scrollFactorX === 0) {
+            startX += camera.scrollX;
+        }
+        if (gameObject.scrollFactorY === 0) {
+            startY += camera.scrollY;
+        }
+
+        this.setVector(startX, startY, worldXY.x, worldXY.y);
 
         this.emit('update');
     }
