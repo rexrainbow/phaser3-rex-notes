@@ -8,7 +8,7 @@ Fires 'intouch' event every tick when pressing on a game object.
 ## Live demos
 
 - [Cooldown](https://codepen.io/rexrainbow/pen/zYpvPwj)
-- [Is in touched](https://codepen.io/rexrainbow/pen/KKopOeo)
+- [Is in touching](https://codepen.io/rexrainbow/pen/KKopOeo)
 
 ## Usage
 
