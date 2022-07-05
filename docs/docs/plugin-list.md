@@ -9,7 +9,7 @@
 1. [Arcade-TCRP/Recorder](arcade-tcrp-recorder.md): Store commands with step of Arcade.
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
 1. [Away time](awaytime.md): Get time from previous closing application to now.
-1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
+1. [BBCode-text](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Board](board.md): Core object of Board system.
 1. [Board/Field of view](board-fieldofview.md): Visible testing, to find field of view.
 1. [Board/Hexagon map](board-hexagonmap.md): Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid.
@@ -153,7 +153,8 @@
 1. [Skew/RenderTexture](skew-rendertexture.md): Skewable render texture.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [State manager](statemanager.md): Another version of Finite state machine.
-1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
+1. [Tag-player](tagplayer.md): Text commands to control sprites, texts, sound effect or backgroun music.
+1. [Tag-text](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP/Player](tcrp-player.md): Run commands on time.
 1. [TCRP/Recorder](tcrp-recoder.md): Store commands with time.
 1. [Text/edit](textedit.md): Create an input text object above a text object to edit string content.

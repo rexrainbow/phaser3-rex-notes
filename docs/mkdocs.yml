@@ -276,7 +276,9 @@ nav:
     - Quest: 
         - Quest: quest.md
         - Dialog-quest: dialog-quest.md
-    - Bracket parser: bracketparser.md
+    - Bracket parser: 
+        - Bracket parser: bracketparser.md
+        - Tag player: tagplayer.md
 - Data:
     - Data manager: 
         - Built-in data: datamanager.md

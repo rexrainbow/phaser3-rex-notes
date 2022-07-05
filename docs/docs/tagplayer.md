@@ -98,7 +98,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
         }
     },
 
-    clickTarget: this,  // This text player
+    clickTarget: scene,
 });
 ```
 
@@ -142,6 +142,8 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     - `sounds.bgm.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
+- `clickTarget` : Click target.
+    - `scene` : Any pointer down on this scene. Default target.
 
 ### Custom class
 
