@@ -87,6 +87,11 @@ var touchState = scene.plugins.get('rexTouchState').add(gameObject, {
     ```javascript
     var isInTouching = touchState.isInTouching;
     ```
+- Pointer in local position
+    ```javascript
+    var localX = touchState.localX;
+    var localY = touchState.localY;
+    ```
 - Drag speed
     ```javascript
     var speed = touchState.speed;

@@ -495,6 +495,8 @@
         this.preY = pointer.y;
         this.x = pointer.x;
         this.y = pointer.y;
+        this.localX = localX;
+        this.localY = localY;
         this.emit('touchstart', this, this.parent, pointer, localX, localY, event);
       }
     }, {
@@ -519,6 +521,8 @@
         this.preY = this.y;
         this.x = pointer.x;
         this.y = pointer.y;
+        this.localX = localX;
+        this.localY = localY;
         this.justMoved = true;
         this.emit('touchmove', this, this.parent, pointer, localX, localY, event);
       }
