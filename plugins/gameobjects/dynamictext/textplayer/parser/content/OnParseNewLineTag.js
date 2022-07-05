@@ -1,9 +1,7 @@
 import AppendTextBase from '../../../dynamictext/methods/AppendText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseNewLineTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.r', 'r');
+    var tagName = 'r';
     parser
         .on(`+${tagName}`, function () {
             AppendTextBase.call(textPlayer, '\n');

@@ -1,9 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParsePlaySoundEffectTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.se', 'se');
+    var tagName = 'se';
     parser
         .on(`+${tagName}`, function (name, fadeInTime) {
             AppendCommandBase.call(textPlayer,

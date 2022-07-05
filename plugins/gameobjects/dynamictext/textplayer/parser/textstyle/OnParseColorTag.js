@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseColorTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.color', 'color');
+    var tagName = 'color';
     var defaultColor;
     parser
         .on('start', function () {

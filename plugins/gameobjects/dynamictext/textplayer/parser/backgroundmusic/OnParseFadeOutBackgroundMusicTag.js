@@ -1,9 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseFadeOutBackgroundMusicTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.bgm.fadeout', 'bgm.fadeout');
+    var tagName = 'bgm.fadeout';
     parser
         .on(`+${tagName}`, function (time, isStopped) {
             isStopped = (isStopped === 'stop');

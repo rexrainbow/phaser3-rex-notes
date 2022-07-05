@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseStrokeColorTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.stroke', 'stroke');
+    var tagName = 'stroke';
     var defaultStroke;
     parser
         .on('start', function () {

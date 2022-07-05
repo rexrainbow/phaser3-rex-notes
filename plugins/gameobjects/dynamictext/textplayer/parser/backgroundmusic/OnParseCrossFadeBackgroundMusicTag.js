@@ -1,9 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseCrossFadeBackgroundMusicTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.bgm.cross', 'bgm.cross');
+    var tagName = 'bgm.cross';
     parser
         .on(`+${tagName}`, function (name, fadeTime) {
             AppendCommandBase.call(textPlayer,

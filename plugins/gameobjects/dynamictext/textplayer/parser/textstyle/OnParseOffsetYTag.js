@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseOffsetYTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.y', 'y');
+    var tagName = 'y';
     var defaultOffsetY;
     parser
         .on('start', function () {

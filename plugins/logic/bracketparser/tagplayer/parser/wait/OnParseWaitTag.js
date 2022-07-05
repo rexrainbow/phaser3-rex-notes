@@ -1,8 +1,6 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseWaitTag = function (tagPlayer, parser, config) {
-    var tagWait = GetValue(config, 'tags.wait', 'wait');
-    var tagClick = GetValue(config, 'tags.click', 'click');
+    var tagWait = 'wait';
+    var tagClick = 'click';
     parser
         .on(`+${tagWait}`, function (name) {
             tagPlayer.wait(name);

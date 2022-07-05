@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseScrollCameraTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.camera.scroll', 'camera.scroll');
+    var tagName = 'camera.scroll';
     parser
         .on(`+${tagName}`, function (x, y) {
             tagPlayer.camera.setScroll(x, y);

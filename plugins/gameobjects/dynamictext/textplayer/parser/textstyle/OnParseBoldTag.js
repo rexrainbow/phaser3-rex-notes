@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseBoldTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.b', 'b');
+    var tagName = 'b';
     parser
         .on('start', function () {
             textPlayer.textStyle.setBold(false);

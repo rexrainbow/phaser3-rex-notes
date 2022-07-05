@@ -1,5 +1,3 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var EaseMode = {
     to: true,
     yoyo: true
@@ -11,7 +9,7 @@ var IsEasePropertyTag = function (tags, prefix) {
 }
 
 var OnParseEaseTextPropertyTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'text', 'text');
+    var prefix = 'text';
     if (!prefix) {
         return;
     }

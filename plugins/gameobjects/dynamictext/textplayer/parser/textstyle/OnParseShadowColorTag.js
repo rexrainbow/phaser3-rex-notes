@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseShadowColorTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.shadow', 'shadow');
+    var tagName = 'shadow';
     var defaultShadowColor;
     parser
         .on('start', function () {

@@ -1,12 +1,10 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var IsTypingTextTag = function (tags, prefix) {
     // text.name.typing
     return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'typing');
 }
 
 var OnParseTypingTextTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'text', 'text');
+    var prefix = 'text';
     if (!prefix) {
         return;
     }
@@ -26,7 +24,7 @@ var OnParseTypingTextTag = function (tagPlayer, parser, config) {
             }
 
             // Set text in content section
-            if(speed !== undefined) {
+            if (speed !== undefined) {
                 tagPlayer.textManager.setTypingSpeed(name, speed);
             }
 

@@ -1,9 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseFadeInBackgroundMusicTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.bgm.fadein', 'bgm.fadein');
+    var tagName = 'bgm.fadein';
     parser
         .on(`+${tagName}`, function (time) {
             AppendCommandBase.call(textPlayer,

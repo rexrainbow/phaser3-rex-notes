@@ -1,10 +1,8 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseWaitTag = function (textPlayer, parser, config) {
-    var tagWait = GetValue(config, 'tags.wait', 'wait');
-    var tagClick = GetValue(config, 'tags.click', 'click');
+    var tagWait = 'wait';
+    var tagClick = 'click';
     parser
         .on(`+${tagWait}`, function (name) {
             AppendCommand(textPlayer, name);

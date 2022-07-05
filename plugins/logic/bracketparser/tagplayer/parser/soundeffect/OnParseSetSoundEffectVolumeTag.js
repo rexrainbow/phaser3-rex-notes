@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseSetSoundEffectVolumeTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.se.volume', 'se.volume');
+    var tagName = 'se.volume';
     parser
         .on(`+${tagName}`, function (volume) {
             tagPlayer.soundManager.setSoundEffectVolume(volume);

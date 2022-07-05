@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseRemoveAllTextsTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'text', 'text');
+    var prefix = 'text';
     if (!prefix) {
         return;
     }

@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseZoomCameraTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.camera.zoom', 'camera.zoom');
+    var tagName = 'camera.zoom';
     parser
         .on(`+${tagName}`, function (value) {
             tagPlayer.camera.setZoom(value);

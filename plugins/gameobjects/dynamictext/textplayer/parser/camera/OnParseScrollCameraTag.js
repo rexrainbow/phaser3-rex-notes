@@ -1,9 +1,7 @@
 import AppendCommand from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseScrollCameraTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.camera.scroll', 'camera.scroll');
+    var tagName = 'camera.scroll';
     parser
         .on(`+${tagName}`, function (x, y) {
             AppendCommand.call(textPlayer,

@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParsePlayBackgroundMusicTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.bgm', 'bgm');
+    var tagName = 'bgm';
     parser
         .on(`+${tagName}`, function (name, fadeInTime) {
             tagPlayer.soundManager.playBackgroundMusic(name);

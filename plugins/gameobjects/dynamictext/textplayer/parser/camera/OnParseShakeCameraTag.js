@@ -1,9 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseShakeCameraTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.camera.shake', 'camera.shake');
+    var tagName = 'camera.shake';
     parser
         .on(`+${tagName}`, function (duration, intensity) {
             AppendCommandBase.call(textPlayer,

@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseFontSizeTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.size', 'size');
+    var tagName = 'size';
     var defaultFontSize;
     parser
         .on('start', function () {

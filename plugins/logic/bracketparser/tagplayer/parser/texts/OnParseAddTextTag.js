@@ -1,12 +1,10 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var IsAddTextTag = function (tags, prefix) {
     // text.name
     return (tags.length === 2) && (tags[0] === prefix)
 }
 
 var OnParseAddTextTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'text', 'text');
+    var prefix = 'text';
     if (!prefix) {
         return;
     }

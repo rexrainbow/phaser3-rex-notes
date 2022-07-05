@@ -1,14 +1,12 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var IsPauseAnimationTag = function (tags, prefix) {
     // sprite.name.pause 
     return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'pause');
 }
 
 var OnParsePauseAnimationTag = function (textPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+    var prefix = 'sprite';
     if (!prefix) {
         return;
     }

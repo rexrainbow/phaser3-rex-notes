@@ -1,9 +1,7 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseTypingSpeedTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.speed', 'speed');
+    var tagName = 'speed';
     parser
         .on(`+${tagName}`, function (speed) {
             AppendCommand(textPlayer, speed);

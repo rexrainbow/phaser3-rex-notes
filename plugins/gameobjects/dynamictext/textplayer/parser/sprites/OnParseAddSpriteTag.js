@@ -1,14 +1,12 @@
 import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var IsAddSpriteTag = function (tags, prefix) {
     // sprite.name
     return (tags.length === 2) && (tags[0] === prefix)
 }
 
 var OnParseAddSpriteTag = function (textPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+    var prefix = 'sprite';
     if (!prefix) {
         return;
     }

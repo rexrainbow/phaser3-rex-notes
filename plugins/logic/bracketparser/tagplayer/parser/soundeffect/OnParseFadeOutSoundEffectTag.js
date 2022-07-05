@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseFadeOutSoundEffectTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.se.fadeout', 'se.fadeout');
+    var tagName = 'se.fadeout';
     parser
         .on(`+${tagName}`, function (time, isStopped) {
             isStopped = (isStopped === 'stop');

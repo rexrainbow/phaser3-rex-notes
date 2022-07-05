@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseAlignTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.align', 'align');
+    var tagName = 'align';
     parser
         .on(`+${tagName}`, function (align) {
             textPlayer.textStyle.setAlign(align);

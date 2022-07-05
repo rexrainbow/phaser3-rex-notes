@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseRemoveAllSpritesTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+    var prefix = 'sprite';
     if (!prefix) {
         return;
     }

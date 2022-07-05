@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseFlashCameraTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.camera.flash', 'camera.flash');
+    var tagName = 'camera.flash';
     parser
         .on(`+${tagName}`, function (duration, red, green, blue) {
             tagPlayer.camera.flash(duration, red, green, blue);

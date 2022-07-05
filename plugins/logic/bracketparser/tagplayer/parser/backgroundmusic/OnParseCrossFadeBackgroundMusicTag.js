@@ -1,7 +1,5 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseCrossFadeBackgroundMusicTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.bgm.cross', 'bgm.cross');
+    var tagName = 'bgm.cross';
     parser
         .on(`+${tagName}`, function (name, fadeTime) {
             tagPlayer.soundManager.crossFadeBackgroundMusic(name, fadeTime);

@@ -1,9 +1,7 @@
 import AppendImageBase from '../../../dynamictext/methods/AppendImage.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var OnParseImageTag = function (textPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.img', 'img');
+    var tagName = 'img';
     parser
         .on(`+${tagName}`, function (name) {
             var imgData = textPlayer.imageManager.get(name);

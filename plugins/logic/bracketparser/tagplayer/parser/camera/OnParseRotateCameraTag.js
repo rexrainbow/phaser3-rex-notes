@@ -1,8 +1,7 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
 
 var OnParseRotateCameraTag = function (tagPlayer, parser, config) {
-    var tagName = GetValue(config, 'tags.camera.rotate', 'camera.rotate');
+    var tagName = 'camera.rotate';
     parser
         .on(`+${tagName}`, function (value) {
             tagPlayer.camera.setRotation(DegToRad(value));

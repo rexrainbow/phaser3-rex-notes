@@ -1,5 +1,3 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var IsPlayAnimationTag = function (tags, prefix) {
     // sprite.name.play
     return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'play');
@@ -11,7 +9,7 @@ var IsStopAnimationTag = function (tags, prefix) {
 }
 
 var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
-    var prefix = GetValue(config, 'sprite', 'sprite');
+    var prefix = 'sprite';
     if (!prefix) {
         return;
     }
