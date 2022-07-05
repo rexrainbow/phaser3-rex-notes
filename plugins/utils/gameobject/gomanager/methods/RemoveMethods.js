@@ -9,9 +9,23 @@ export default {
 
         this.removedGOs.push(bob.gameObject);
         var hasTintChange = (!!bob.gameObject.setTint) && (this.fadeTime > 0);
+        var hasAlphaChange = (!!gameObject.setAlpha) && (this.fadeTime > 0);
+
         if (hasTintChange) {
             bob.easeProperty(
                 'tintGray',                 // property
+                0,                          // to value
+                this.fadeTime,              // duration
+                'Linear',                   // ease
+                0,                          // repeat
+                false,                      // yoyo
+                function () {               // onComplete
+                    bob.destroy();
+                }
+            )
+        } else if (hasAlphaChange) {
+            bob.easeProperty(
+                'alpha',                    // property
                 0,                          // to value
                 this.fadeTime,              // duration
                 'Linear',                   // ease

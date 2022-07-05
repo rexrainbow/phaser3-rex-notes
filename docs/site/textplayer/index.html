@@ -1720,6 +1720,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sprite" class="md-nav__link">
+    Sprite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sound-effect" class="md-nav__link">
     Sound effect
   </a>
@@ -1736,13 +1743,6 @@
           <li class="md-nav__item">
   <a href="#camera" class="md-nav__link">
     Camera
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite" class="md-nav__link">
-    Sprite
   </a>
   
 </li>
@@ -4143,6 +4143,20 @@
     <li class="md-nav__item">
       <a href="../intouching/" class="md-nav__link">
         In touching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../touchstate/" class="md-nav__link">
+        Touch state
       </a>
     </li>
   
@@ -8618,6 +8632,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#sprite" class="md-nav__link">
+    Sprite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sound-effect" class="md-nav__link">
     Sound effect
   </a>
@@ -8634,13 +8655,6 @@
           <li class="md-nav__item">
   <a href="#camera" class="md-nav__link">
     Camera
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite" class="md-nav__link">
-    Sprite
   </a>
   
 </li>
@@ -8843,6 +8857,11 @@
         <span class="c1">// key: {key, frame, width, height}</span>
     <span class="p">},</span>
 
+    <span class="nx">sprites</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// createCallback: &#39;sprite&#39;,</span>
+        <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
+    <span class="p">},</span> 
+
     <span class="nx">sounds</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">bgm</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">initial</span><span class="o">:</span> <span class="nx">undefinied</span><span class="p">,</span>
@@ -8850,11 +8869,6 @@
             <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
         <span class="p">}</span>
     <span class="p">},</span>
-
-    <span class="nx">sprite</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// createCallback: &#39;sprite&#39;,</span>
-        <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
-    <span class="p">},</span> 
 
     <span class="nx">clickTarget</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span>  <span class="c1">// This text player    </span>
     <span class="nx">nextPageInput</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -9011,6 +9025,25 @@
 </li>
 </ul>
 </li>
+<li><code>images</code> : Configuration of images.</li>
+<li><code>sprites</code> : Configuration of sprites.<ul>
+<li><code>sprites.createCallback</code> : <ul>
+<li><code>'sprite'</code> : Create sprite game object. Default behavior.</li>
+<li><code>'image'</code> : Create image game object.</li>
+<li>Callback to return a game object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return scene.add.sprite(0, 0, textureKey, frameName);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>sprites.fade</code> :<ul>
+<li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
+<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>sounds</code> : Configuration of sound effect, or background music.<ul>
 <li><code>sounds.bgm.initial</code> : Initial music instance created by <code>scene.sound.add(key)</code> before starting playing content.<ul>
 <li><code>undefined</code> : No initial music instance, default value.</li>
@@ -9024,25 +9057,6 @@
 <li><code>sounds.bgm.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when starting or stopping a background music.</li>
 <li>A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is <code>500</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>images</code> : Configuration of images.</li>
-<li><code>sprite</code> : Configuration of sprites.<ul>
-<li><code>sprite.createCallback</code> : <ul>
-<li><code>'sprite'</code> : Create sprite game object. Default behavior.</li>
-<li><code>'image'</code> : Create image game object.</li>
-<li>Callback to return a game object
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return scene.add.sprite(0, 0, textureKey, frameName);</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li><code>sprite.fade</code> :<ul>
-<li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
-<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
 </ul>
 </li>
 </ul>
@@ -9311,6 +9325,52 @@
 <li>Set speed : <code>[speed=1000]</code></li>
 <li>Back to default speed : <code>[/speed]</code></li>
 </ul>
+<h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add sprite : <code>[sprite.name=textureKey,frameKey]</code><ul>
+<li>Tint-fade-in if <code>sprite.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove sprite : <code>[/sprite.name]</code><ul>
+<li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove all sprites : <code>[/sprite]</code><ul>
+<li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Set property : <code>[sprite.name.x=value]</code>, <code>[sprite.name.alpha=value]</code>, ....</li>
+<li>Ease property : 
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration,easeFunction,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value]
+</code></pre></div><ul>
+<li><code>duration</code> : Default value is <code>1000</code></li>
+<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
+<li><code>repeat</code> : Default value is <code>0</code></li>
+</ul>
+</li>
+<li>Yoyo ease property : 
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration,easeFunction,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value]
+</code></pre></div></li>
+<li>Set texture : <code>[sprite.name.texture=textureKey,frameKey]</code></li>
+<li>Play animation : <code>[sprite.name.play=animationKey]</code>, or <code>[sprite.name.play=animationKey0,animationKey1,...]</code><ul>
+<li>Can play animation without adding sprite first.</li>
+</ul>
+</li>
+<li>Stop animation : <code>[/sprite.name.play]</code>, or <code>[sprite.name.stop]</code></li>
+<li>Pause animation : <code>[sprite.name.pause]</code></li>
+</ul>
 <h4 id="sound-effect">Sound effect<a class="headerlink" href="#sound-effect" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Play : <code>[se=key]</code><ul>
@@ -9359,52 +9419,6 @@
 <li>Scroll x,y to : <code>[camera.scroll.to=0,200,1000]</code>, or <code>[camera.rotate.to=x,y,duration,Cubic]</code></li>
 </ul>
 </li>
-</ul>
-<h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Add sprite : <code>[sprite.name=textureKey,frameKey]</code><ul>
-<li>Tint-fade-in if <code>sprite.fade</code> is not <code>0</code></li>
-</ul>
-</li>
-<li>Remove sprite : <code>[/sprite.name]</code><ul>
-<li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
-</ul>
-</li>
-<li>Remove all sprites : <code>[/sprite]</code><ul>
-<li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
-</ul>
-</li>
-<li>Set property : <code>[sprite.name.x=value]</code>, <code>[sprite.name.alpha=value]</code>, ....</li>
-<li>Ease property : 
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration,easeFunction,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value]
-</code></pre></div><ul>
-<li><code>duration</code> : Default value is <code>1000</code></li>
-<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
-<li><code>repeat</code> : Default value is <code>0</code></li>
-</ul>
-</li>
-<li>Yoyo ease property : 
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration,easeFunction,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value]
-</code></pre></div></li>
-<li>Set texture : <code>[sprite.name.texture=textureKey,frameKey]</code></li>
-<li>Play animation : <code>[sprite.name.play=animationKey]</code>, or <code>[sprite.name.play=animationKey0,animationKey1,...]</code><ul>
-<li>Can play animation without adding sprite first.</li>
-</ul>
-</li>
-<li>Stop animation : <code>[/sprite.name.play]</code>, or <code>[sprite.name.stop]</code></li>
-<li>Pause animation : <code>[sprite.name.pause]</code></li>
 </ul>
 <h4 id="wait-conditions">Wait conditions<a class="headerlink" href="#wait-conditions" title="Permanent link">&para;</a></h4>
 <ul>

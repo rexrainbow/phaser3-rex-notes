@@ -167,6 +167,11 @@ var txt = scene.add.rexTextPlayer({
         // key: {key, frame, width, height}
     },
 
+    sprites: {
+        // createCallback: 'sprite',
+        fade: 500
+    }, 
+    
     sounds: {
         bgm: {
             initial: undefinied,
@@ -175,11 +180,6 @@ var txt = scene.add.rexTextPlayer({
         }
     },
 
-    sprite: {
-        // createCallback: 'sprite',
-        fade: 500
-    }, 
-    
     clickTarget: this,  // This text player    
     nextPageInput: null,
     // ignoreNextPageInput: false,
@@ -285,6 +285,20 @@ var txt = scene.add.rexTextPlayer({
     - `parser.delimiters` : Delimiters of tag. Default value is `'[]'`.
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.
         - `null`, or `false` : No comment line.
+- `images` : Configuration of images.
+- `sprites` : Configuration of sprites.
+    - `sprites.createCallback` : 
+        - `'sprite'` : Create sprite game object. Default behavior.
+        - `'image'` : Create image game object.
+        - Callback to return a game object
+            ```javascript
+            function(scene, textureKey, frameName) {
+                // return scene.add.sprite(0, 0, textureKey, frameName);
+            }
+            ```
+    - `sprites.fade` :
+        - `0` : No fade-in or fade-out when adding or removing a sprite.
+        - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
@@ -294,20 +308,6 @@ var txt = scene.add.rexTextPlayer({
     - `sounds.bgm.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
-- `images` : Configuration of images.
-- `sprite` : Configuration of sprites.
-    - `sprite.createCallback` : 
-        - `'sprite'` : Create sprite game object. Default behavior.
-        - `'image'` : Create image game object.
-        - Callback to return a game object
-            ```javascript
-            function(scene, textureKey, frameName) {
-                // return scene.add.sprite(0, 0, textureKey, frameName);
-            }
-            ```
-    - `sprite.fade` :
-        - `0` : No fade-in or fade-out when adding or removing a sprite.
-        - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
 - `nextPageInput` : Wait condition to type next page
     - `null`, or `false` : Stop tying next page. Default behavior
         - Typing next manually via `txt.typingNextPage()`.
@@ -599,45 +599,6 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Set speed : `[speed=1000]`
 - Back to default speed : `[/speed]`
 
-#### Sound effect
-
-- Play : `[se=key]`
-    - Sound effect will be destroyed when complete
-- Play with fade in volume : `[se=key,1000]`
-- Fade in volume : `[se.fadein=1000]`
-- Fade out volume : `[se.fadeout=1000]`
-- Fade out volume then stop : `[se.fadeout=1000,stop]`
-- Set volume : `[se.volume=1]`
-
-#### Background music
-
-- Play, stop : `[bgm=key]`, `[/bgm]`
-    - Previous background music will be stopped and destroyed.
-    - Cross fade to next background music if `sounds.bgm.fade` is not `0`
-- Play with fade in volume : `[bgm=key,1000]`
-- Pause, resume : `[bgm.pause]`, `[/bgm.pause]`
-- Fade in volume : `[bgm.fadein=1000]`
-- Fade out volume : `[bgm.fadeout=1000]`
-- Fade out volume then stop : `[bgm.fadeout=1000,stop]`
-- Cross fade to another background music : `[bgm.cross=key,10000]`
-- Set volume : `[bgm.volume=1]`
-
-#### Camera
-
-- Fade-in effect : `[camera.fadein]`, `[camera.fadein=1000]`, or `[camera.fadein=duration,red,green,blue]`
-- Fade-out effect : `[camera.fadeout]`, `[camera.fadeout=1000]`, or `[camera.fadeout=duration,red,green,blue]`
-- Flash effect : `[camera.flash]`, `[camera.flash=1000]`, or `[camera.flash=duration,red,green,blue]`
-- Shake effect : `[camera.shake]`, `[camera.shake=1000]`, or `[camera.shake=duration,intensity]`
-- Zoom
-    - Set zoom : `[camera.zoom=2]`
-    - Zoom to : `[camera.zoom.to=1,1000]`, or `[camera.zoom.to=zoomValue,duration,Cubic]`
-- Rotate
-    - Set angle : `[camera.rotate=90]`, angle in degrees
-    - Rotate to : `[camera.rotate.to=0,1000]`, or `[camera.rotate.to=deg,duration,Cubic]`, angle in degrees
-- Scroll
-    - Scroll x,y : `[camera.scroll=0,200]`
-    - Scroll x,y to : `[camera.scroll.to=0,200,1000]`, or `[camera.rotate.to=x,y,duration,Cubic]`
-
 #### Sprite
 
 - Add sprite : `[sprite.name=textureKey,frameKey]`
@@ -681,6 +642,45 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     - Can play animation without adding sprite first.
 - Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`
 - Pause animation : `[sprite.name.pause]`
+
+#### Sound effect
+
+- Play : `[se=key]`
+    - Sound effect will be destroyed when complete
+- Play with fade in volume : `[se=key,1000]`
+- Fade in volume : `[se.fadein=1000]`
+- Fade out volume : `[se.fadeout=1000]`
+- Fade out volume then stop : `[se.fadeout=1000,stop]`
+- Set volume : `[se.volume=1]`
+
+#### Background music
+
+- Play, stop : `[bgm=key]`, `[/bgm]`
+    - Previous background music will be stopped and destroyed.
+    - Cross fade to next background music if `sounds.bgm.fade` is not `0`
+- Play with fade in volume : `[bgm=key,1000]`
+- Pause, resume : `[bgm.pause]`, `[/bgm.pause]`
+- Fade in volume : `[bgm.fadein=1000]`
+- Fade out volume : `[bgm.fadeout=1000]`
+- Fade out volume then stop : `[bgm.fadeout=1000,stop]`
+- Cross fade to another background music : `[bgm.cross=key,10000]`
+- Set volume : `[bgm.volume=1]`
+
+#### Camera
+
+- Fade-in effect : `[camera.fadein]`, `[camera.fadein=1000]`, or `[camera.fadein=duration,red,green,blue]`
+- Fade-out effect : `[camera.fadeout]`, `[camera.fadeout=1000]`, or `[camera.fadeout=duration,red,green,blue]`
+- Flash effect : `[camera.flash]`, `[camera.flash=1000]`, or `[camera.flash=duration,red,green,blue]`
+- Shake effect : `[camera.shake]`, `[camera.shake=1000]`, or `[camera.shake=duration,intensity]`
+- Zoom
+    - Set zoom : `[camera.zoom=2]`
+    - Zoom to : `[camera.zoom.to=1,1000]`, or `[camera.zoom.to=zoomValue,duration,Cubic]`
+- Rotate
+    - Set angle : `[camera.rotate=90]`, angle in degrees
+    - Rotate to : `[camera.rotate.to=0,1000]`, or `[camera.rotate.to=deg,duration,Cubic]`, angle in degrees
+- Scroll
+    - Scroll x,y : `[camera.scroll=0,200]`
+    - Scroll x,y to : `[camera.scroll.to=0,200,1000]`, or `[camera.rotate.to=x,y,duration,Cubic]`
 
 #### Wait conditions
 

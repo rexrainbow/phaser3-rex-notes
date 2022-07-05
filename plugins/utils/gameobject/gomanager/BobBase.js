@@ -1,9 +1,8 @@
 class BobBase {
     constructor(GOManager, gameObject, name) {
         this.GOManager = GOManager;
-        this.gameObject = gameObject.setName(name);
         this.tweens = {};
-        this.name = name;
+        this.setGO(gameObject, name);
     }
 
     get scene() {
@@ -15,17 +14,8 @@ class BobBase {
     }
 
     destroy() {
-        this
-            .freeGO()
-            .freeTweens();
-
+        this.freeGO();
         this.GOManager = undefined;
-    }
-
-    freeGO() {
-        this.gameObject.destroy();
-        this.gameObject = undefined;
-        return this;
     }
 
     freeTweens() {
@@ -34,6 +24,20 @@ class BobBase {
             tweenTasks[propName].remove();
             delete tweenTasks[propName];
         }
+        return this;
+    }
+
+    freeGO() {
+        this.freeTweens();
+        this.gameObject.destroy();
+        this.gameObject = undefined;
+        return this;
+    }
+
+    setGO(gameObject, name) {
+        this.gameObject = gameObject.setName(name);
+        this.name = name;
+        this.freeTweens();
         return this;
     }
 

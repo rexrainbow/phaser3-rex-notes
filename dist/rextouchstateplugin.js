@@ -360,7 +360,7 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.pointer = undefined;
-        this.isInTouched = false;
+        this.isInTouching = false;
         this.x = undefined;
         this.y = undefined;
         this.preX = undefined;
@@ -410,7 +410,7 @@
         }
 
         if (!e) {
-          this.isInTouched = false;
+          this.isInTouching = false;
           this.pointer = undefined;
         }
 
@@ -484,18 +484,18 @@
 
     }, {
       key: "onPointIn",
-      value: function onPointIn(pointer, localX, localY) {
+      value: function onPointIn(pointer, localX, localY, event) {
         if (!this.enable || !pointer.isDown || this.pointer !== undefined) {
           return;
         }
 
         this.pointer = pointer;
-        this.isInTouched = true;
+        this.isInTouching = true;
         this.preX = pointer.x;
         this.preY = pointer.y;
         this.x = pointer.x;
         this.y = pointer.y;
-        this.emit('touchstart', pointer, localX, localY);
+        this.emit('touchstart', this, this.parent, pointer, localX, localY, event);
       }
     }, {
       key: "onPointOut",
@@ -505,12 +505,12 @@
         }
 
         this.pointer = undefined;
-        this.isInTouched = false;
-        this.emit('touchend', pointer);
+        this.isInTouching = false;
+        this.emit('touchend', this, this.parent, pointer);
       }
     }, {
       key: "onPointerMove",
-      value: function onPointerMove(pointer, localX, localY) {
+      value: function onPointerMove(pointer, localX, localY, event) {
         if (!this.enable || !pointer.isDown || this.pointer !== pointer) {
           return;
         }
@@ -520,7 +520,7 @@
         this.x = pointer.x;
         this.y = pointer.y;
         this.justMoved = true;
-        this.emit('touchmove', pointer, localX, localY);
+        this.emit('touchmove', this, this.parent, pointer, localX, localY, event);
       }
     }, {
       key: "postupdate",

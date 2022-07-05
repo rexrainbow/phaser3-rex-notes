@@ -161,6 +161,7 @@
 1. [Text/page](textpage.md): Display text page by page on text object.
 1. [Text player](textplayer.md): Typing characters on dynamic text, waiting click or key enter, play sound effect or backgroun music.
 1. [Touch event stop](toucheventstop.md): Stop touch events propagation.
+1. [Touch state](touchstate.md): Store current touch input properties.
 1. [Transition image](transitionimage.md): Transit texture to another one.
 1. [UI/badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [UI/buttons](ui-buttons.md): A container with a group of buttons.

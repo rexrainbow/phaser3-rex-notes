@@ -80,7 +80,7 @@ var intouching = scene.plugins.get('rexInTouching').add(gameObject, {
 });
 ```
 
-- `enable` : Clickable.
+- `enable` : Can touch.
 - `cooldown` : Fire 'intouch' event every tick, or periodically.
     - `undefined` : Fire 'intouch' event every tick.
 

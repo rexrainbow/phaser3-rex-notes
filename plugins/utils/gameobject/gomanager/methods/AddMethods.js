@@ -21,6 +21,7 @@ export default {
 
         var gameObject = this.createGameObjectCallback(this.scene, ...args);
         var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
+        var hasAlphaChange = (!!gameObject.setAlpha) && (this.fadeTime > 0);
 
         if (hasTintChange) {
             AddTintRGBProperties(gameObject);
@@ -43,6 +44,10 @@ export default {
             bob
                 .setProperty('tintGray', 0)
                 .easeProperty('tintGray', 255, this.fadeTime)
+        } else if (hasAlphaChange) {
+            bob
+                .setProperty('alpha', 0)
+                .easeProperty('alpha', 1, this.fadeTime)
         }
         return this;
     }

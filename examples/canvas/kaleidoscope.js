@@ -49,7 +49,7 @@ class Demo extends Phaser.Scene {
 
     update() {
         var touchState = this.canvas.touchState;
-        if (touchState.isInTouched) {
+        if (touchState.isInTouching) {
             this.drawCanvas(touchState.localX, touchState.localY);
         }
     }

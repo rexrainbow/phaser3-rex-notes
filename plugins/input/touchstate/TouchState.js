@@ -16,7 +16,7 @@ class TouchState extends ComponentBase {
 
     resetFromJSON(o) {
         this.pointer = undefined;
-        this.isInTouched = false;
+        this.isInTouching = false;
         this.x = undefined;
         this.y = undefined;
         this.preX = undefined;
@@ -64,7 +64,7 @@ class TouchState extends ComponentBase {
         }
 
         if (!e) {
-            this.isInTouched = false;
+            this.isInTouching = false;
             this.pointer = undefined;
         }
         this._enable = e;
@@ -125,19 +125,19 @@ class TouchState extends ComponentBase {
     }
 
     // internal
-    onPointIn(pointer, localX, localY) {
+    onPointIn(pointer, localX, localY, event) {
         if ((!this.enable) ||
             (!pointer.isDown) ||
             (this.pointer !== undefined)) {
             return;
         }
         this.pointer = pointer;
-        this.isInTouched = true;
+        this.isInTouching = true;
         this.preX = pointer.x;
         this.preY = pointer.y;
         this.x = pointer.x;
         this.y = pointer.y;
-        this.emit('touchstart', pointer, localX, localY);
+        this.emit('touchstart', this, this.parent, pointer, localX, localY, event);
     }
 
     onPointOut(pointer) {
@@ -146,11 +146,11 @@ class TouchState extends ComponentBase {
             return;
         }
         this.pointer = undefined;
-        this.isInTouched = false;
-        this.emit('touchend', pointer);
+        this.isInTouching = false;
+        this.emit('touchend', this, this.parent, pointer);
     }
 
-    onPointerMove(pointer, localX, localY) {
+    onPointerMove(pointer, localX, localY, event) {
         if ((!this.enable) ||
             (!pointer.isDown) ||
             (this.pointer !== pointer)) {
@@ -161,7 +161,7 @@ class TouchState extends ComponentBase {
         this.x = pointer.x;
         this.y = pointer.y;
         this.justMoved = true;
-        this.emit('touchmove', pointer, localX, localY);
+        this.emit('touchmove', this, this.parent, pointer, localX, localY, event);
     }
 
     postupdate(time, delta) {

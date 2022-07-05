@@ -14,7 +14,7 @@ class TextManager extends GOManager {
     }
 
     setCreateGameObjectCallback(callback) {
-        if (!callback) {
+        if ((!callback) || (callback === 'text')) {
             callback = CreateTextObject;
         }
         super.setCreateGameObjectCallback(callback);

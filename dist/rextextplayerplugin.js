@@ -620,7 +620,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$Z = function GetValue(source, key, defaultValue) {
+  var GetValue$n = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -674,7 +674,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$Z(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$n(this.data, key, defaultValue);
     },
     setData: function setData(key, value) {
       this.enableData();
@@ -807,7 +807,7 @@
 
   var DegToRad$2 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
-  var GetValue$Y = Phaser.Utils.Objects.GetValue;
+  var GetValue$m = Phaser.Utils.Objects.GetValue;
 
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
@@ -1088,10 +1088,10 @@
         } // ScaleX, ScaleY
 
 
-        var width = GetValue$Y(o, 'width', undefined);
-        var height = GetValue$Y(o, 'height', undefined);
-        var scaleX = GetValue$Y(o, 'scaleX', undefined);
-        var scaleY = GetValue$Y(o, 'scaleY', undefined);
+        var width = GetValue$m(o, 'width', undefined);
+        var height = GetValue$m(o, 'height', undefined);
+        var scaleX = GetValue$m(o, 'scaleX', undefined);
+        var scaleY = GetValue$m(o, 'scaleY', undefined);
 
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
@@ -1228,7 +1228,7 @@
     }
   };
 
-  var GetValue$X = Phaser.Utils.Objects.GetValue;
+  var GetValue$l = Phaser.Utils.Objects.GetValue;
 
   var RoundRectangle = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
@@ -1329,15 +1329,15 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$X(value, 'x', 0);
-          defaultRadiusY = GetValue$X(value, 'y', 0);
+          defaultRadiusX = GetValue$l(value, 'x', 0);
+          defaultRadiusY = GetValue$l(value, 'y', 0);
         }
 
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$X(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$X(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$X(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$X(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$l(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$l(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$l(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$l(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -1401,8 +1401,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$X(value, 'x', 0);
-      radius.y = GetValue$X(value, 'y', 0);
+      radius.x = GetValue$l(value, 'x', 0);
+      radius.y = GetValue$l(value, 'y', 0);
     }
   };
 
@@ -1552,7 +1552,7 @@
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
-  var GetValue$W = Phaser.Utils.Objects.GetValue;
+  var GetValue$k = Phaser.Utils.Objects.GetValue;
 
   var Background = /*#__PURE__*/function (_Base) {
     _inherits(Background, _Base);
@@ -1566,11 +1566,11 @@
 
       _this = _super.call(this, parent, 'background');
 
-      _this.setColor(GetValue$W(config, 'color', null), GetValue$W(config, 'color2', null), GetValue$W(config, 'horizontalGradient', true));
+      _this.setColor(GetValue$k(config, 'color', null), GetValue$k(config, 'color2', null), GetValue$k(config, 'horizontalGradient', true));
 
-      _this.setStroke(GetValue$W(config, 'stroke', null), GetValue$W(config, 'strokeThickness', 2));
+      _this.setStroke(GetValue$k(config, 'stroke', null), GetValue$k(config, 'strokeThickness', 2));
 
-      _this.setCornerRadius(GetValue$W(config, 'cornerRadius', 0), GetValue$W(config, 'cornerIteration', null));
+      _this.setCornerRadius(GetValue$k(config, 'cornerRadius', 0), GetValue$k(config, 'cornerIteration', null));
 
       return _this;
     }
@@ -1677,7 +1677,7 @@
     return Background;
   }(RenderBase);
 
-  var GetValue$V = Phaser.Utils.Objects.GetValue;
+  var GetValue$j = Phaser.Utils.Objects.GetValue;
 
   var InnerBounds = /*#__PURE__*/function (_Base) {
     _inherits(InnerBounds, _Base);
@@ -1691,9 +1691,9 @@
 
       _this = _super.call(this, parent, 'background');
 
-      _this.setColor(GetValue$V(config, 'color', null), GetValue$V(config, 'color2', null), GetValue$V(config, 'horizontalGradient', true));
+      _this.setColor(GetValue$j(config, 'color', null), GetValue$j(config, 'color2', null), GetValue$j(config, 'horizontalGradient', true));
 
-      _this.setStroke(GetValue$V(config, 'stroke', null), GetValue$V(config, 'strokeThickness', 2));
+      _this.setStroke(GetValue$j(config, 'stroke', null), GetValue$j(config, 'strokeThickness', 2));
 
       return _this;
     }
@@ -1817,7 +1817,7 @@
     }
   };
 
-  var GetValue$U = Phaser.Utils.Objects.GetValue;
+  var GetValue$i = Phaser.Utils.Objects.GetValue;
 
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(config) {
@@ -1849,15 +1849,15 @@
     }, {
       key: "set",
       value: function set(o) {
-        this.setBold(GetValue$U(o, 'bold', false));
-        this.setItalic(GetValue$U(o, 'italic', false));
-        this.setFontSize(GetValue$U(o, 'fontSize', '16px'));
-        this.setFontFamily(GetValue$U(o, 'fontFamily', 'Courier'));
-        this.setColor(GetValue$U(o, 'color', '#fff'));
-        this.setStrokeStyle(GetValue$U(o, 'stroke', null), GetValue$U(o, 'strokeThickness', 0));
-        this.setShadow(GetValue$U(o, 'shadowColor', null), GetValue$U(o, 'shadowOffsetX', 0), GetValue$U(o, 'shadowOffsetY', 0), GetValue$U(o, 'shadowBlur', 0));
-        this.setOffset(GetValue$U(o, 'offsetX', 0), GetValue$U(o, 'offsetY', 0));
-        this.setAlign(GetValue$U(o, 'align', undefined));
+        this.setBold(GetValue$i(o, 'bold', false));
+        this.setItalic(GetValue$i(o, 'italic', false));
+        this.setFontSize(GetValue$i(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$i(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$i(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue$i(o, 'stroke', null), GetValue$i(o, 'strokeThickness', 0));
+        this.setShadow(GetValue$i(o, 'shadowColor', null), GetValue$i(o, 'shadowOffsetX', 0), GetValue$i(o, 'shadowOffsetY', 0), GetValue$i(o, 'shadowBlur', 0));
+        this.setOffset(GetValue$i(o, 'offsetX', 0), GetValue$i(o, 'offsetY', 0));
+        this.setAlign(GetValue$i(o, 'align', undefined));
         return this;
       }
     }, {
@@ -2153,7 +2153,7 @@
     return this;
   };
 
-  var GetValue$T = Phaser.Utils.Objects.GetValue;
+  var GetValue$h = Phaser.Utils.Objects.GetValue;
 
   var GetPadding$1 = function GetPadding(padding, key) {
     if (key === undefined) {
@@ -2174,10 +2174,10 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$T(key, 'left', 0);
-      padding.right = GetValue$T(key, 'right', 0);
-      padding.top = GetValue$T(key, 'top', 0);
-      padding.bottom = GetValue$T(key, 'bottom', 0);
+      padding.left = GetValue$h(key, 'left', 0);
+      padding.right = GetValue$h(key, 'right', 0);
+      padding.top = GetValue$h(key, 'top', 0);
+      padding.bottom = GetValue$h(key, 'bottom', 0);
     }
   };
 
@@ -2815,21 +2815,21 @@
     }
   };
 
-  var GetValue$S = Phaser.Utils.Objects.GetValue;
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
 
   var RunWordWrap$1 = function RunWordWrap(config) {
     // Parse parameters
-    var startIndex = GetValue$S(config, 'start', 0);
-    var paddingTop = GetValue$S(config, 'padding.top', 0);
-    var paddingBottom = GetValue$S(config, 'padding.bottom', 0); // Add extra space below last line
+    var startIndex = GetValue$g(config, 'start', 0);
+    var paddingTop = GetValue$g(config, 'padding.top', 0);
+    var paddingBottom = GetValue$g(config, 'padding.bottom', 0); // Add extra space below last line
     // Get lineHeight, maxLines
 
-    var lineHeight = GetValue$S(config, 'lineHeight', undefined);
+    var lineHeight = GetValue$g(config, 'lineHeight', undefined);
     var maxLines;
 
     if (lineHeight === undefined) {
       // Calculate lineHeight via maxLines, in fixedHeight mode
-      maxLines = GetValue$S(config, 'maxLines', 0);
+      maxLines = GetValue$g(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
         var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
@@ -2840,20 +2840,20 @@
     } else {
       if (this.fixedHeight > 0) {
         // Calculate maxLines via lineHeight, in fixedHeight mode
-        maxLines = GetValue$S(config, 'maxLines', undefined);
+        maxLines = GetValue$g(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
           var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
-        maxLines = GetValue$S(config, 'maxLines', 0); // Default is show all lines
+        maxLines = GetValue$g(config, 'maxLines', 0); // Default is show all lines
       }
     }
 
     var showAllLines = maxLines === 0; // Get wrapWidth
 
-    var wrapWidth = GetValue$S(config, 'wrapWidth', undefined);
+    var wrapWidth = GetValue$g(config, 'wrapWidth', undefined);
 
     if (wrapWidth === undefined) {
       if (this.fixedWidth > 0) {
@@ -2863,10 +2863,10 @@
       }
     }
 
-    var letterSpacing = GetValue$S(config, 'letterSpacing', 0);
-    var hAlign = GetValue$S(config, 'hAlign', 0);
-    var vAlign = GetValue$S(config, 'vAlign', 0);
-    var charWrap = GetValue$S(config, 'charWrap', false);
+    var letterSpacing = GetValue$g(config, 'letterSpacing', 0);
+    var hAlign = GetValue$g(config, 'hAlign', 0);
+    var vAlign = GetValue$g(config, 'vAlign', 0);
+    var charWrap = GetValue$g(config, 'charWrap', false);
     var result = {
       start: startIndex,
       // Next start index
@@ -3080,22 +3080,22 @@
     }
   };
 
-  var GetValue$R = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
 
   var RunVerticalWrap$1 = function RunVerticalWrap(config) {
     // Parse parameters
-    var startIndex = GetValue$R(config, 'start', 0);
-    var extraTopPadding = GetValue$R(config, 'padding.top', 0);
-    var extraBottomPadding = GetValue$R(config, 'padding.bottom', 0); // Add extra space below last character
+    var startIndex = GetValue$f(config, 'start', 0);
+    var extraTopPadding = GetValue$f(config, 'padding.top', 0);
+    var extraBottomPadding = GetValue$f(config, 'padding.bottom', 0); // Add extra space below last character
 
-    var extraLeftPadding = GetValue$R(config, 'padding.left', 0);
-    var extraRightPadding = GetValue$R(config, 'padding.right', 0);
-    var lineWidth = GetValue$R(config, 'lineWidth', undefined);
+    var extraLeftPadding = GetValue$f(config, 'padding.left', 0);
+    var extraRightPadding = GetValue$f(config, 'padding.right', 0);
+    var lineWidth = GetValue$f(config, 'lineWidth', undefined);
     var maxLines;
 
     if (lineWidth === undefined) {
       // Calculate lineWidth via maxLines, in fixedWidth mode
-      maxLines = GetValue$R(config, 'maxLines', 0);
+      maxLines = GetValue$f(config, 'maxLines', 0);
 
       if (this.fixedWidth > 0) {
         var innerWidth = this.fixedWidth - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
@@ -3106,23 +3106,23 @@
     } else {
       if (this.fixedWidth > 0) {
         // Calculate maxLines via lineWidth, in fixedWidth mode
-        maxLines = GetValue$R(config, 'maxLines', undefined);
+        maxLines = GetValue$f(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
           var innerWidth = this.fixedWidth - this.padding.left - this.padding.right;
           maxLines = Math.floor(innerWidth / lineWidth);
         }
       } else {
-        maxLines = GetValue$R(config, 'maxLines', 0); // Default is show all lines
+        maxLines = GetValue$f(config, 'maxLines', 0); // Default is show all lines
       }
     }
 
     var showAllLines = maxLines === 0; // Get fixedChildHeight
 
-    var fixedChildHeight = GetValue$R(config, 'fixedChildHeight', undefined);
+    var fixedChildHeight = GetValue$f(config, 'fixedChildHeight', undefined);
 
     if (fixedChildHeight === undefined) {
-      var charPerLine = GetValue$R(config, 'charPerLine', undefined);
+      var charPerLine = GetValue$f(config, 'charPerLine', undefined);
 
       if (charPerLine !== undefined) {
         var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
@@ -3131,7 +3131,7 @@
     } // Get wrapHeight
 
 
-    var wrapHeight = GetValue$R(config, 'wrapHeight', undefined);
+    var wrapHeight = GetValue$f(config, 'wrapHeight', undefined);
 
     if (wrapHeight === undefined) {
       if (this.fixedHeight > 0) {
@@ -3141,10 +3141,10 @@
       }
     }
 
-    var letterSpacing = GetValue$R(config, 'letterSpacing', 0);
-    var rtl = GetValue$R(config, 'rtl', true);
-    var hAlign = GetValue$R(config, 'hAlign', rtl ? 2 : 0);
-    var vAlign = GetValue$R(config, 'vAlign', 0);
+    var letterSpacing = GetValue$f(config, 'letterSpacing', 0);
+    var rtl = GetValue$f(config, 'rtl', true);
+    var hAlign = GetValue$f(config, 'hAlign', rtl ? 2 : 0);
+    var vAlign = GetValue$f(config, 'vAlign', 0);
     var result = {
       start: startIndex,
       // Next start index
@@ -3444,7 +3444,7 @@
   }();
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$Q = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
 
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
@@ -3458,14 +3458,14 @@
 
       if (IsPlainObject$1(x)) {
         config = x;
-        x = GetValue$Q(config, 'x', 0);
-        y = GetValue$Q(config, 'y', 0);
-        fixedWidth = GetValue$Q(config, 'width', 0);
-        fixedHeight = GetValue$Q(config, 'height', 0);
+        x = GetValue$e(config, 'x', 0);
+        y = GetValue$e(config, 'y', 0);
+        fixedWidth = GetValue$e(config, 'width', 0);
+        fixedHeight = GetValue$e(config, 'height', 0);
       } else if (IsPlainObject$1(fixedWidth)) {
         config = fixedWidth;
-        fixedWidth = GetValue$Q(config, 'width', 0);
-        fixedHeight = GetValue$Q(config, 'height', 0);
+        fixedWidth = GetValue$e(config, 'width', 0);
+        fixedHeight = GetValue$e(config, 'height', 0);
       }
 
       var width = fixedWidth === 0 ? 1 : fixedWidth;
@@ -3474,22 +3474,22 @@
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
       _this.padding = {};
-      var textStyleConfig = GetValue$Q(config, 'style', undefined);
+      var textStyleConfig = GetValue$e(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
-      _this.background = new Background(_assertThisInitialized(_this), GetValue$Q(config, 'background', undefined));
-      _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$Q(config, 'innerBounds', undefined));
+      _this.background = new Background(_assertThisInitialized(_this), GetValue$e(config, 'background', undefined));
+      _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$e(config, 'innerBounds', undefined));
       _this.children = [];
       _this.lastAppendedChildren = [];
       _this.poolManager = new PoolManager(config);
 
       _this.setFixedSize(fixedWidth, fixedHeight);
 
-      _this.setPadding(GetValue$Q(config, 'padding', 0));
+      _this.setPadding(GetValue$e(config, 'padding', 0));
 
-      _this.setWrapConfig(GetValue$Q(config, 'wrap', undefined));
+      _this.setWrapConfig(GetValue$e(config, 'wrap', undefined));
 
-      var text = GetValue$Q(config, 'text', undefined);
+      var text = GetValue$e(config, 'text', undefined);
 
       if (text) {
         _this.setText(text);
@@ -3662,14 +3662,14 @@
       _classCallCheck(this, BracketParser);
 
       // Event emitter
-      this.setEventEmitter(GetValue$Z(config, 'eventEmitter', undefined)); // Parameters for regex
+      this.setEventEmitter(GetValue$n(config, 'eventEmitter', undefined)); // Parameters for regex
 
-      this.setTagExpression(GetValue$Z(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$Z(config, 'regex.value', DefaultValueExpression)); // Value convert
+      this.setTagExpression(GetValue$n(config, 'regex.tag', DefaultTagExpression));
+      this.setValueExpression(GetValue$n(config, 'regex.value', DefaultValueExpression)); // Value convert
 
-      this.setValueConverter(GetValue$Z(config, 'valueConvert', true)); // Brackets and generate regex
+      this.setValueConverter(GetValue$n(config, 'valueConvert', true)); // Brackets and generate regex
 
-      var delimiters = GetValue$Z(config, 'delimiters', '<>');
+      var delimiters = GetValue$n(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
       this.isPaused = false;
@@ -3909,10 +3909,8 @@
 
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 
-  var GetValue$P = Phaser.Utils.Objects.GetValue;
-
   var OnParseColorTag = function OnParseColorTag(textPlayer, parser, config) {
-    var tagName = GetValue$P(config, 'tags.color', 'color');
+    var tagName = 'color';
     var defaultColor;
     parser.on('start', function () {
       defaultColor = textPlayer.textStyle.color;
@@ -3927,10 +3925,8 @@
     });
   };
 
-  var GetValue$O = Phaser.Utils.Objects.GetValue;
-
   var OnParseStrokeColorTag = function OnParseStrokeColorTag(textPlayer, parser, config) {
-    var tagName = GetValue$O(config, 'tags.stroke', 'stroke');
+    var tagName = 'stroke';
     var defaultStroke;
     parser.on('start', function () {
       defaultStroke = textPlayer.textStyle.stroke;
@@ -3950,10 +3946,8 @@
     });
   };
 
-  var GetValue$N = Phaser.Utils.Objects.GetValue;
-
   var OnParseBoldTag = function OnParseBoldTag(textPlayer, parser, config) {
-    var tagName = GetValue$N(config, 'tags.b', 'b');
+    var tagName = 'b';
     parser.on('start', function () {
       textPlayer.textStyle.setBold(false);
     }).on("+".concat(tagName), function () {
@@ -3965,10 +3959,8 @@
     });
   };
 
-  var GetValue$M = Phaser.Utils.Objects.GetValue;
-
   var OnParseItalicTag = function OnParseItalicTag(textPlayer, parser, config) {
-    var tagName = GetValue$M(config, 'tags.i', 'i');
+    var tagName = 'i';
     parser.on('start', function () {
       textPlayer.textStyle.setItalic(false);
     }).on("+".concat(tagName), function () {
@@ -3980,10 +3972,8 @@
     });
   };
 
-  var GetValue$L = Phaser.Utils.Objects.GetValue;
-
   var OnParseFontSizeTag = function OnParseFontSizeTag(textPlayer, parser, config) {
-    var tagName = GetValue$L(config, 'tags.size', 'size');
+    var tagName = 'size';
     var defaultFontSize;
     parser.on('start', function () {
       defaultFontSize = textPlayer.textStyle.fontSize;
@@ -3998,10 +3988,8 @@
     });
   };
 
-  var GetValue$K = Phaser.Utils.Objects.GetValue;
-
   var OnParseOffsetYTag = function OnParseOffsetYTag(textPlayer, parser, config) {
-    var tagName = GetValue$K(config, 'tags.y', 'y');
+    var tagName = 'y';
     var defaultOffsetY;
     parser.on('start', function () {
       defaultOffsetY = textPlayer.textStyle.offsetY;
@@ -4021,10 +4009,8 @@
     });
   };
 
-  var GetValue$J = Phaser.Utils.Objects.GetValue;
-
   var OnParseShadowColorTag = function OnParseShadowColorTag(textPlayer, parser, config) {
-    var tagName = GetValue$J(config, 'tags.shadow', 'shadow');
+    var tagName = 'shadow';
     var defaultShadowColor;
     parser.on('start', function () {
       defaultShadowColor = textPlayer.textStyle.shadowColor;
@@ -4044,10 +4030,8 @@
     });
   };
 
-  var GetValue$I = Phaser.Utils.Objects.GetValue;
-
   var OnParseAlignTag = function OnParseAlignTag(textPlayer, parser, config) {
-    var tagName = GetValue$I(config, 'tags.align', 'align');
+    var tagName = 'align';
     parser.on("+".concat(tagName), function (align) {
       textPlayer.textStyle.setAlign(align);
       parser.skipEvent();
@@ -4059,10 +4043,8 @@
     });
   };
 
-  var GetValue$H = Phaser.Utils.Objects.GetValue;
-
   var OnParseImageTag = function OnParseImageTag(textPlayer, parser, config) {
-    var tagName = GetValue$H(config, 'tags.img', 'img');
+    var tagName = 'img';
     parser.on("+".concat(tagName), function (name) {
       var imgData = textPlayer.imageManager.get(name);
       AppendImage.call(textPlayer, imgData.key, imgData.frame, {
@@ -4077,10 +4059,8 @@
     });
   };
 
-  var GetValue$G = Phaser.Utils.Objects.GetValue;
-
   var OnParseTypingSpeedTag = function OnParseTypingSpeedTag(textPlayer, parser, config) {
-    var tagName = GetValue$G(config, 'tags.speed', 'speed');
+    var tagName = 'speed';
     parser.on("+".concat(tagName), function (speed) {
       AppendCommand$2(textPlayer, speed);
       parser.skipEvent();
@@ -4102,10 +4082,8 @@
     );
   };
 
-  var GetValue$F = Phaser.Utils.Objects.GetValue;
-
   var OnParsePlaySoundEffectTag = function OnParsePlaySoundEffectTag(textPlayer, parser, config) {
-    var tagName = GetValue$F(config, 'tags.se', 'se');
+    var tagName = 'se';
     parser.on("+".concat(tagName), function (name, fadeInTime) {
       AppendCommand$3.call(textPlayer, 'se', // name
       PlaySoundEffect, // callback
@@ -4132,10 +4110,8 @@
     }
   };
 
-  var GetValue$E = Phaser.Utils.Objects.GetValue;
-
   var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(textPlayer, parser, config) {
-    var tagName = GetValue$E(config, 'tags.se.fadein', 'se.fadein');
+    var tagName = 'se.fadein';
     parser.on("+".concat(tagName), function (time) {
       AppendCommand$3.call(textPlayer, 'se.fadein', // name
       FadeInSoundEffect, // callback
@@ -4153,10 +4129,8 @@
     this.soundManager.fadeInSoundEffect(time);
   };
 
-  var GetValue$D = Phaser.Utils.Objects.GetValue;
-
   var OnParseFadeOutSoundEffectTag = function OnParseFadeOutSoundEffectTag(textPlayer, parser, config) {
-    var tagName = GetValue$D(config, 'tags.se.fadeout', 'se.fadeout');
+    var tagName = 'se.fadeout';
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
       AppendCommand$3.call(textPlayer, 'se.fadeout', // name
@@ -4177,10 +4151,8 @@
     (_this$soundManager = this.soundManager).fadeOutSoundEffect.apply(_this$soundManager, _toConsumableArray(params));
   };
 
-  var GetValue$C = Phaser.Utils.Objects.GetValue;
-
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(textPlayer, parser, config) {
-    var tagName = GetValue$C(config, 'tags.se.volume', 'se.volume');
+    var tagName = 'se.volume';
     parser.on("+".concat(tagName), function (volume) {
       AppendCommand$3.call(textPlayer, 'se.volume', // name
       SetSoundEffectVolume, // callback
@@ -4198,10 +4170,8 @@
     this.soundManager.setSoundEffectVolume(volume);
   };
 
-  var GetValue$B = Phaser.Utils.Objects.GetValue;
-
   var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(textPlayer, parser, config) {
-    var tagName = GetValue$B(config, 'tags.bgm', 'bgm');
+    var tagName = 'bgm';
     parser.on("+".concat(tagName), function (name, fadeInTime) {
       AppendCommand$3.call(textPlayer, 'bgm', // name
       PlayBackgroundMusic, // callback
@@ -4235,10 +4205,8 @@
     this.soundManager.stopBackgroundMusic();
   };
 
-  var GetValue$A = Phaser.Utils.Objects.GetValue;
-
   var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(textPlayer, parser, config) {
-    var tagName = GetValue$A(config, 'tags.bgm.fadein', 'bgm.fadein');
+    var tagName = 'bgm.fadein';
     parser.on("+".concat(tagName), function (time) {
       AppendCommand$3.call(textPlayer, 'bgm.fadein', // name
       FadeInBackgroundMusic, // callback
@@ -4256,10 +4224,8 @@
     this.soundManager.fadeInBackgroundMusic(time);
   };
 
-  var GetValue$z = Phaser.Utils.Objects.GetValue;
-
   var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(textPlayer, parser, config) {
-    var tagName = GetValue$z(config, 'tags.bgm.fadeout', 'bgm.fadeout');
+    var tagName = 'bgm.fadeout';
     parser.on("+".concat(tagName), function (time, isStopped) {
       isStopped = isStopped === 'stop';
       AppendCommand$3.call(textPlayer, 'bgm.fadeout', // name
@@ -4280,10 +4246,8 @@
     (_this$soundManager = this.soundManager).fadeOutBackgroundMusic.apply(_this$soundManager, _toConsumableArray(params));
   };
 
-  var GetValue$y = Phaser.Utils.Objects.GetValue;
-
   var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(textPlayer, parser, config) {
-    var tagName = GetValue$y(config, 'tags.bgm.cross', 'bgm.cross');
+    var tagName = 'bgm.cross';
     parser.on("+".concat(tagName), function (name, fadeTime) {
       AppendCommand$3.call(textPlayer, 'bgm.cross', // name
       CrossFadeBackgroundMusic, // callback
@@ -4303,10 +4267,10 @@
     (_this$soundManager = this.soundManager).crossFadeBackgroundMusic.apply(_this$soundManager, _toConsumableArray(params));
   };
 
-  var GetValue$x = Phaser.Utils.Objects.GetValue;
+  Phaser.Utils.Objects.GetValue;
 
   var OnParsePauseBackgroundMusicTag = function OnParsePauseBackgroundMusicTag(textPlayer, parser, config) {
-    var tagName = GetValue$x(config, 'tags.bgm.pause', 'bgm.pause');
+    var tagName = 'bgm.pause';
     parser.on("+".concat(tagName), function () {
       AppendCommand$3.call(textPlayer, 'bgm.pause', // name
       PauseBackgroundMusic, // callback
@@ -4334,10 +4298,8 @@
     this.soundManager.resumeBackgroundMusic();
   };
 
-  var GetValue$w = Phaser.Utils.Objects.GetValue;
-
   var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$w(config, 'tags.camera.fadein', 'camera.fadein');
+    var tagName = 'camera.fadein';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       AppendCommand$3.call(textPlayer, 'camera.fadein', // name
       PlayFadeInEffect, // callback
@@ -4355,10 +4317,8 @@
     (_this$camera = this.camera).fadeIn.apply(_this$camera, _toConsumableArray(params));
   };
 
-  var GetValue$v = Phaser.Utils.Objects.GetValue;
-
   var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$v(config, 'tags.camera.fadeout', 'camera.fadeout');
+    var tagName = 'camera.fadeout';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       AppendCommand$3.call(textPlayer, 'camera.fadeout', // name
       PlayFadeOutEffect, // callback
@@ -4376,10 +4336,8 @@
     (_this$camera = this.camera).fadeOut.apply(_this$camera, _toConsumableArray(params));
   };
 
-  var GetValue$u = Phaser.Utils.Objects.GetValue;
-
   var OnParseShakeCameraTag = function OnParseShakeCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$u(config, 'tags.camera.shake', 'camera.shake');
+    var tagName = 'camera.shake';
     parser.on("+".concat(tagName), function (duration, intensity) {
       AppendCommand$3.call(textPlayer, 'camera.shake', // name
       PlayShakeEffect, // callback
@@ -4397,10 +4355,8 @@
     (_this$camera = this.camera).shake.apply(_this$camera, _toConsumableArray(params));
   };
 
-  var GetValue$t = Phaser.Utils.Objects.GetValue;
-
   var OnParseFlashCameraTag = function OnParseFlashCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$t(config, 'tags.camera.flash', 'camera.flash');
+    var tagName = 'camera.flash';
     parser.on("+".concat(tagName), function (duration, red, green, blue) {
       AppendCommand$3.call(textPlayer, 'camera.flash', // name
       PlayFlashEffect, // callback
@@ -4418,10 +4374,8 @@
     (_this$camera = this.camera).flash.apply(_this$camera, _toConsumableArray(params));
   };
 
-  var GetValue$s = Phaser.Utils.Objects.GetValue;
-
   var OnParseZoomCameraTag = function OnParseZoomCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$s(config, 'tags.camera.zoom', 'camera.zoom');
+    var tagName = 'camera.zoom';
     parser.on("+".concat(tagName), function (value) {
       AppendCommand$3.call(textPlayer, 'camera.zoom', // name
       Zoom, // callback
@@ -4451,11 +4405,10 @@
     (_this$camera = this.camera).zoomTo.apply(_this$camera, _toConsumableArray(params));
   };
 
-  var GetValue$r = Phaser.Utils.Objects.GetValue;
   var DegToRad = Phaser.Math.DegToRad;
 
   var OnParseRotateCameraTag = function OnParseRotateCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$r(config, 'tags.camera.rotate', 'camera.rotate');
+    var tagName = 'camera.rotate';
     parser.on("+".concat(tagName), function (value) {
       value = DegToRad(value);
       AppendCommand$3.call(textPlayer, 'camera.rotate', // name
@@ -4488,10 +4441,8 @@
     this.camera.rotateTo(value, false, duration, ease);
   };
 
-  var GetValue$q = Phaser.Utils.Objects.GetValue;
-
   var OnParseScrollCameraTag = function OnParseScrollCameraTag(textPlayer, parser, config) {
-    var tagName = GetValue$q(config, 'tags.camera.scroll', 'camera.scroll');
+    var tagName = 'camera.scroll';
     parser.on("+".concat(tagName), function (x, y) {
       AppendCommand$3.call(textPlayer, 'camera.scroll', // name
       Scroll, // callback
@@ -4533,11 +4484,9 @@
     camera.pan(x, y, duration, ease);
   };
 
-  var GetValue$p = Phaser.Utils.Objects.GetValue;
-
   var OnParseWaitTag = function OnParseWaitTag(textPlayer, parser, config) {
-    var tagWait = GetValue$p(config, 'tags.wait', 'wait');
-    var tagClick = GetValue$p(config, 'tags.click', 'click');
+    var tagWait = 'wait';
+    var tagClick = 'click';
     parser.on("+".concat(tagWait), function (name) {
       AppendCommand$1(textPlayer, name);
       parser.skipEvent();
@@ -4565,19 +4514,13 @@
     );
   };
 
-  var GetValue$o = Phaser.Utils.Objects.GetValue;
-
   var IsAddSpriteTag = function IsAddSpriteTag(tags, prefix) {
     // sprite.name
     return tags.length === 2 && tags[0] === prefix;
   };
 
   var OnParseAddSpriteTag = function OnParseAddSpriteTag(textPlayer, parser, config) {
-    var prefix = GetValue$o(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
@@ -4641,14 +4584,8 @@
     this.spriteManager.remove(name);
   };
 
-  var GetValue$n = Phaser.Utils.Objects.GetValue;
-
   var OnParseRemoveAllSpritesTag = function OnParseRemoveAllSpritesTag(textPlayer, parser, config) {
-    var prefix = GetValue$n(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on('-', function (tag) {
       if (parser.skipEventFlag) {
@@ -4676,19 +4613,13 @@
     this.spriteManager.removeAll();
   };
 
-  var GetValue$m = Phaser.Utils.Objects.GetValue;
-
   var IsSetTextureTag = function IsSetTextureTag(tags, prefix) {
     // sprite.name.texture
     return tags.length === 3 && tags[0] === prefix && tags[2] === 'texture';
   };
 
   var OnParseSetTextureTag = function OnParseSetTextureTag(textPlayer, parser, config) {
-    var prefix = GetValue$m(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on('+', function (tag, textureKey, frameKey) {
       if (parser.skipEventFlag) {
@@ -4721,8 +4652,6 @@
     (_this$spriteManager = this.spriteManager).setTexture.apply(_this$spriteManager, _toConsumableArray(params));
   };
 
-  var GetValue$l = Phaser.Utils.Objects.GetValue;
-
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
     // sprite.name.play 
     return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
@@ -4734,11 +4663,7 @@
   };
 
   var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(textPlayer, parser, config) {
-    var prefix = GetValue$l(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
@@ -4827,19 +4752,13 @@
     this.spriteManager.stopAnimation(name);
   };
 
-  var GetValue$k = Phaser.Utils.Objects.GetValue;
-
   var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
     // sprite.name.chain 
     return tags.length === 3 && tags[0] === prefix && tags[2] === 'chain';
   };
 
   var OnParseChainAnimationTag = function OnParseChainAnimationTag(textPlayer, parser, config) {
-    var prefix = GetValue$k(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
@@ -4874,19 +4793,13 @@
     (_this$spriteManager = this.spriteManager).chainAnimation.apply(_this$spriteManager, _toConsumableArray(params));
   };
 
-  var GetValue$j = Phaser.Utils.Objects.GetValue;
-
   var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
     // sprite.name.pause 
     return tags.length === 3 && tags[0] === prefix && tags[2] === 'pause';
   };
 
   var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(textPlayer, parser, config) {
-    var prefix = GetValue$j(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
@@ -4918,19 +4831,13 @@
     this.spriteManager.pauseAnimation(name);
   };
 
-  var GetValue$i = Phaser.Utils.Objects.GetValue;
-
   var IsSetPropertyTag = function IsSetPropertyTag(tags, prefix) {
     // sprite.name.prop
     return tags.length === 3 && tags[0] === prefix;
   };
 
   var OnParseSetSpritePropertyTag = function OnParseSetSpritePropertyTag(textPlayer, parser, config) {
-    var prefix = GetValue$i(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on("+", function (tag, value) {
       if (parser.skipEventFlag) {
@@ -4965,7 +4872,6 @@
     (_this$spriteManager = this.spriteManager).setProperty.apply(_this$spriteManager, _toConsumableArray(params));
   };
 
-  var GetValue$h = Phaser.Utils.Objects.GetValue;
   var EaseMode = {
     to: true,
     yoyo: true
@@ -4977,11 +4883,7 @@
   };
 
   var OnParseEaseSpritePropertyTag = function OnParseEaseSpritePropertyTag(textPlayer, parser, config) {
-    var prefix = GetValue$h(config, 'sprite', 'sprite');
-
-    if (!prefix) {
-      return;
-    }
+    var prefix = 'sprite';
 
     parser.on("+", function (tag, value, duration, ease, repeat) {
       if (parser.skipEventFlag) {
@@ -5024,10 +4926,8 @@
     (_this$spriteManager = this.spriteManager).easeProperty.apply(_this$spriteManager, _toConsumableArray(params));
   };
 
-  var GetValue$g = Phaser.Utils.Objects.GetValue;
-
   var OnParseNewLineTag = function OnParseNewLineTag(textPlayer, parser, config) {
-    var tagName = GetValue$g(config, 'tags.r', 'r');
+    var tagName = 'r';
     parser.on("+".concat(tagName), function () {
       AppendText.call(textPlayer, '\n');
       parser.skipEvent();
@@ -5036,20 +4936,16 @@
     });
   };
 
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
-
   var OnParseContentOff = function OnParseContentOff(textPlayer, parser, config) {
-    var tagName = GetValue$f(config, 'tags.content.off', 'content.off');
+    var tagName = 'content.off';
     parser.on("+".concat(tagName), function () {
       parser.setContentOutputEnable(false);
       parser.skipEvent();
     });
   };
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
-
   var OnParseContentOn = function OnParseContentOn(textPlayer, parser, config) {
-    var tagName = GetValue$e(config, 'tags.content.on', 'content.on');
+    var tagName = 'content.on';
     parser.on("+".concat(tagName), function () {
       parser.setContentOutputEnable();
       parser.skipEvent();
@@ -7502,9 +7398,8 @@
       _classCallCheck(this, BobBase);
 
       this.GOManager = GOManager;
-      this.gameObject = gameObject.setName(name);
       this.tweens = {};
-      this.name = name;
+      this.setGO(gameObject, name);
     }
 
     _createClass(BobBase, [{
@@ -7520,15 +7415,8 @@
     }, {
       key: "destroy",
       value: function destroy() {
-        this.freeGO().freeTweens();
+        this.freeGO();
         this.GOManager = undefined;
-      }
-    }, {
-      key: "freeGO",
-      value: function freeGO() {
-        this.gameObject.destroy();
-        this.gameObject = undefined;
-        return this;
       }
     }, {
       key: "freeTweens",
@@ -7540,6 +7428,22 @@
           delete tweenTasks[propName];
         }
 
+        return this;
+      }
+    }, {
+      key: "freeGO",
+      value: function freeGO() {
+        this.freeTweens();
+        this.gameObject.destroy();
+        this.gameObject = undefined;
+        return this;
+      }
+    }, {
+      key: "setGO",
+      value: function setGO(gameObject, name) {
+        this.gameObject = gameObject.setName(name);
+        this.name = name;
+        this.freeTweens();
         return this;
       }
     }, {
@@ -7865,6 +7769,7 @@
 
       var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
       var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
+      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
         AddTintRGBProperties(gameObject);
@@ -7886,6 +7791,8 @@
 
       if (hasTintChange) {
         bob.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
+      } else if (hasAlphaChange) {
+        bob.setProperty('alpha', 0).easeProperty('alpha', 1, this.fadeTime);
       }
 
       return this;
@@ -7902,9 +7809,21 @@
       delete this.bobs[name];
       this.removedGOs.push(bob.gameObject);
       var hasTintChange = !!bob.gameObject.setTint && this.fadeTime > 0;
+      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
         bob.easeProperty('tintGray', // property
+        0, // to value
+        this.fadeTime, // duration
+        'Linear', // ease
+        0, // repeat
+        false, // yoyo
+        function () {
+          // onComplete
+          bob.destroy();
+        });
+      } else if (hasAlphaChange) {
+        bob.easeProperty('alpha', // property
         0, // to value
         this.fadeTime, // duration
         'Linear', // ease
