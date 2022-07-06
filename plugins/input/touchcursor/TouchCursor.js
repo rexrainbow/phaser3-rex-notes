@@ -116,7 +116,7 @@ class TouchCursor extends VectorToCursorKeys {
         }
 
         var startX = gameObject.x;
-        var startY = gameObject.y
+        var startY = gameObject.y;
         if (gameObject.scrollFactorX === 0) {
             startX += camera.scrollX;
         }

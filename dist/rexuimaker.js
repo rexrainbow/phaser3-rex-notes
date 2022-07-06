@@ -28113,9 +28113,11 @@
       orientation: scrollMode
     }); // A child which not put into scene
 
-    var child = GetValue$c(config, 'child.gameObject', undefined);
+    var child = GetValue$c(config, 'child.gameObject', undefined),
+        childPadding = 0;
     var sliderConfig = GetValue$c(config, 'slider', undefined),
-        slider;
+        slider,
+        sliderPadding = 0;
     var sliderPosition = GetValue$c(sliderConfig, 'position', 0);
 
     if (typeof sliderPosition === 'string') {
@@ -28131,20 +28133,23 @@
 
     if (child) {
       var childSpace = GetValue$c(config, 'space.child', 0);
-      var childPadding = {};
       parent.childMargin = {};
 
       if (typeof childSpace !== 'number') {
         var paddingConfig = childSpace;
 
         if (scrollMode === 0) {
-          childPadding.left = GetValue$c(paddingConfig, 'left', 0);
-          childPadding.right = GetValue$c(paddingConfig, 'right', 0);
+          childPadding = {
+            left: GetValue$c(paddingConfig, 'left', 0),
+            right: GetValue$c(paddingConfig, 'right', 0)
+          };
           parent.childMargin.top = GetValue$c(paddingConfig, 'top', 0);
           parent.childMargin.bottom = GetValue$c(paddingConfig, 'bottom', 0);
         } else {
-          childPadding.top = GetValue$c(paddingConfig, 'top', 0);
-          childPadding.bottom = GetValue$c(paddingConfig, 'bottom', 0);
+          childPadding = {
+            top: GetValue$c(paddingConfig, 'top', 0),
+            bottom: GetValue$c(paddingConfig, 'bottom', 0)
+          };
           parent.childMargin.top = GetValue$c(paddingConfig, 'left', 0);
           parent.childMargin.bottom = GetValue$c(paddingConfig, 'right', 0);
         }
@@ -28179,6 +28184,7 @@
 
         sliderConfig.orientation = scrollableSizer.orientation === 0 ? 1 : 0;
         slider = new Slider(scene, sliderConfig);
+        sliderPadding = GetValue$c(config, 'space.slider', 0);
         parent.adaptThumbSizeMode = GetValue$c(sliderConfig, 'adaptThumbSize', false);
         parent.minThumbSize = GetValue$c(sliderConfig, 'minThumbSize', undefined);
       } else {
@@ -28204,6 +28210,7 @@
         scrollableSizer.add(slider, {
           proportion: 0,
           align: 'center',
+          padding: sliderPadding,
           expand: true
         });
       } // Add child to parent sizer
@@ -28222,6 +28229,7 @@
         scrollableSizer.add(slider, {
           proportion: 0,
           align: 'center',
+          padding: sliderPadding,
           expand: true
         });
       }

@@ -148,6 +148,15 @@ var panel = scene.rexUI.add.scrollablePanel({
         //    left: 0,
         //    right: 0,
         //},
+
+        slider: 0,
+        // slider: {
+        //     top: 0,
+        //     bottom: 0,
+        //     left: 0,
+        //     right: 0,
+        // },
+
         header: 0,
         footer: 0,
     },
@@ -245,6 +254,9 @@ var panel = scene.rexUI.add.scrollablePanel({
             - If `scrollMode` is `1` (horizontal) :
                 - `space.panel.left`, `space.panel.right` : Left, right padding space of panel object.
                 - `space.panel.bottom` : Space between panel object and slider object.
+    - `space.slider` :
+        - `0` : No space around slider.
+        - `space.slider.left`, `space.slider.right`, `space.slider.top`, `space.slider.bottom` : Space around slider.
     - `space.header` : Space between header and panel.
     - `space.footer` : Space between footer and panel.
 - `expand` : Expand width or height of element

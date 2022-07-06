@@ -82,6 +82,7 @@ class Demo extends Phaser.Scene {
                 bottom: 10,
 
                 panel: 10,
+                slider: { left: 30, right: 30 },
             }
         })
             .layout()

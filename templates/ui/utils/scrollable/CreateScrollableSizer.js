@@ -12,9 +12,11 @@ var CreateScrollableSizer = function (parent, config) {
     var scrollableSizer = new Sizer(scene, { orientation: scrollMode });
     // A child which not put into scene
 
-    var child = GetValue(config, 'child.gameObject', undefined);
+    var child = GetValue(config, 'child.gameObject', undefined),
+        childPadding = 0;
     var sliderConfig = GetValue(config, 'slider', undefined),
-        slider;
+        slider,
+        sliderPadding = 0;
     var sliderPosition = GetValue(sliderConfig, 'position', 0);
     if (typeof (sliderPosition) === 'string') {
         sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
@@ -29,18 +31,21 @@ var CreateScrollableSizer = function (parent, config) {
     // Child, slider, scroller, mouseWheelScroller
     if (child) {
         var childSpace = GetValue(config, 'space.child', 0);
-        var childPadding = {};
         parent.childMargin = {};
         if (typeof (childSpace) !== 'number') {
             var paddingConfig = childSpace;
             if (scrollMode === 0) {
-                childPadding.left = GetValue(paddingConfig, 'left', 0);
-                childPadding.right = GetValue(paddingConfig, 'right', 0);
+                childPadding = {
+                    left: GetValue(paddingConfig, 'left', 0),
+                    right: GetValue(paddingConfig, 'right', 0),
+                }
                 parent.childMargin.top = GetValue(paddingConfig, 'top', 0);
                 parent.childMargin.bottom = GetValue(paddingConfig, 'bottom', 0);
             } else {
-                childPadding.top = GetValue(paddingConfig, 'top', 0);
-                childPadding.bottom = GetValue(paddingConfig, 'bottom', 0);
+                childPadding = {
+                    top: GetValue(paddingConfig, 'top', 0),
+                    bottom: GetValue(paddingConfig, 'bottom', 0),
+                }
                 parent.childMargin.top = GetValue(paddingConfig, 'left', 0);
                 parent.childMargin.bottom = GetValue(paddingConfig, 'right', 0);
             }
@@ -65,7 +70,7 @@ var CreateScrollableSizer = function (parent, config) {
             // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
             sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
             slider = new Slider(scene, sliderConfig);
-
+            sliderPadding = GetValue(config, 'space.slider', 0);
             parent.adaptThumbSizeMode = GetValue(sliderConfig, 'adaptThumbSize', false);
             parent.minThumbSize = GetValue(sliderConfig, 'minThumbSize', undefined);
         } else {
@@ -91,6 +96,7 @@ var CreateScrollableSizer = function (parent, config) {
                 {
                     proportion: 0,
                     align: 'center',
+                    padding: sliderPadding,
                     expand: true
                 }
             );
@@ -114,6 +120,7 @@ var CreateScrollableSizer = function (parent, config) {
                 {
                     proportion: 0,
                     align: 'center',
+                    padding: sliderPadding,
                     expand: true
                 }
             );

@@ -160,6 +160,15 @@ var table = scene.rexUI.add.gridTable({
         //    left: 0,
         //    right: 0,
         //},
+        
+        slider: 0,
+        // slider: {
+        //     top: 0,
+        //     bottom: 0,
+        //     left: 0,
+        //     right: 0,
+        // },
+
         header: 0,
         footer: 0,
     },
@@ -307,6 +316,9 @@ var table = scene.rexUI.add.gridTable({
             - If `scrollMode` is `1` (horizontal) :
                 - `space.table.left`, `space.table.right` : Left, right padding space of table object.
                 - `space.table.bottom` : Space between table object and slider object.
+    - `space.slider` :
+        - `0` : No space around slider.
+        - `space.slider.left`, `space.slider.right`, `space.slider.top`, `space.slider.bottom` : Space around slider.
     - `space.header` : Space between header and table.
     - `space.footer` : Space between footer and table.
 - `expand` : Expand width or height of element
