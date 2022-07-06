@@ -554,6 +554,11 @@ sizer.pushIntoBounds(bounds);
             // ...
         })    
     ```
+- Move-stop
+    ```javascript
+    sizer.moveStop();
+    // sizer.moveStop(true);  // Set to end position
+    ```
 - Events
     - Move-from complete
         ```javascript

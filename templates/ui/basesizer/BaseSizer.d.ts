@@ -309,6 +309,8 @@ declare class BaseSizer extends ContainerLite {
         }
     ): Promise<any>;
 
+    moveStop(toEnd?: boolean): this;
+
     fadeIn(
         duration: number,
         alpha?: number

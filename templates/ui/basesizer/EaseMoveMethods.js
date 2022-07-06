@@ -106,5 +106,14 @@ export default {
     moveToDestroyPromise(duration, x, y, ease) {
         this.moveToDestroy(duration, x, y, ease, true);
         return WaitComplete(this._easeMove);
+    },
+
+    moveStop(toEnd) {
+        if (!this._easeMove) {
+            return this;
+        }
+
+        this._easeMove.stop(toEnd);
+        return this;
     }
 }
