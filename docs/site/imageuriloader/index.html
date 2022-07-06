@@ -695,6 +695,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#load-sprite-sheet" class="md-nav__link">
+    Load sprite sheet
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8300,6 +8307,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#load-sprite-sheet" class="md-nav__link">
+    Load sprite sheet
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8404,6 +8418,23 @@
 <ul>
 <li><code>key</code> : Texture key.</li>
 <li><code>uri</code> : URI, a base64 string.</li>
+</ul>
+<h2 id="load-sprite-sheet">Load sprite sheet<a class="headerlink" href="#load-sprite-sheet" title="Permanent link">&para;</a></h2>
+<p>In preload stage:</p>
+<div class="highlight"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexImageURI</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">uri</span><span class="p">,</span> <span class="nx">frameConfig</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>key</code> : Texture key.</li>
+<li><code>uri</code> : URI, a base64 string.</li>
+<li><code>frameConfig</code> : <ul>
+<li><code>frameWidth</code> : The width of the frame in pixels.</li>
+<li><code>frameHeight</code> : The height of the frame in pixels. Uses the <code>frameWidth</code> value if not provided.</li>
+<li><code>startFrame</code> : The first frame to start parsing from.</li>
+<li><code>endFrame</code> : The frame to stop parsing at. If not provided it will calculate the value based on the image and frame dimensions.</li>
+<li><code>margin</code> : The margin in the image. This is the space around the edge of the frames. </li>
+<li><code>spacing</code> : The spacing between each frame in the image.</li>
+</ul>
+</li>
 </ul>
 
               

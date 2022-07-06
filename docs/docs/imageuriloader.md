@@ -98,3 +98,21 @@ this.load.rexImageURI(key, uri);
 
 - `key` : Texture key.
 - `uri` : URI, a base64 string.
+
+## Load sprite sheet
+
+In preload stage:
+
+```javascript
+this.load.rexImageURI(key, uri, frameConfig);
+```
+
+- `key` : Texture key.
+- `uri` : URI, a base64 string.
+- `frameConfig` : 
+    - `frameWidth` : The width of the frame in pixels.
+    - `frameHeight` : The height of the frame in pixels. Uses the `frameWidth` value if not provided.
+    - `startFrame` : The first frame to start parsing from.
+    - `endFrame` : The frame to stop parsing at. If not provided it will calculate the value based on the image and frame dimensions.
+    - `margin` : The margin in the image. This is the space around the edge of the frames. 
+    - `spacing` : The spacing between each frame in the image.

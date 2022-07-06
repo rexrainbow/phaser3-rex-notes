@@ -178,19 +178,22 @@
     return AwaitFile;
   }(Phaser.Loader.File);
 
-  var loaderCallback = function loaderCallback(key, uri) {
-    this.addFile(CreateAwiatFile(this, key, uri));
+  var LoaderCallback = function LoaderCallback(key, uri, frameConfig) {
+    this.addFile(CreateAwiatFile(this, key, uri, frameConfig));
     return this;
   };
 
-  var CreateAwiatFile = function CreateAwiatFile(loader, key, uri) {
+  var CreateAwiatFile = function CreateAwiatFile(loader, key, uri, frameConfig) {
     var callback = function callback(successCallback, failureCallback) {
       var imageElement = new Image();
 
       imageElement.onload = function () {
-        var canvasTexture = loader.scene.sys.textures.createCanvas(key, imageElement.width, imageElement.height);
-        canvasTexture.getContext().drawImage(imageElement, 0, 0);
-        canvasTexture.refresh();
+        if (frameConfig === undefined) {
+          loader.textureManager.addImage(key, imageElement);
+        } else {
+          loader.textureManager.addSpriteSheet(key, imageElement, frameConfig);
+        }
+
         successCallback();
       };
 
@@ -217,14 +220,14 @@
       _classCallCheck(this, ImageURILoaderPlugin);
 
       _this = _super.call(this, pluginManager);
-      pluginManager.registerFileType('rexImageURI', loaderCallback);
+      pluginManager.registerFileType('rexImageURI', LoaderCallback);
       return _this;
     }
 
     _createClass(ImageURILoaderPlugin, [{
       key: "addToScene",
       value: function addToScene(scene) {
-        scene.sys.load['rexImageURI'] = loaderCallback;
+        scene.sys.load['rexImageURI'] = LoaderCallback;
       }
     }]);
 
