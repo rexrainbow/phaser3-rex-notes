@@ -99,7 +99,7 @@ this.load.rexImageURI(key, uri);
 - `key` : Texture key.
 - `uri` : URI, a base64 string.
 
-## Load sprite sheet
+### Load sprite sheet
 
 In preload stage:
 
