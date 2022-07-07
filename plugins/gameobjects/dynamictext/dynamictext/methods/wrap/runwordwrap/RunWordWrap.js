@@ -94,17 +94,7 @@ var RunWordWrap = function (config) {
     var resultLines = result.lines,
         lastLine = [], lastLineWidth = 0, maxLineWidth = 0;
     var wordResult;
-    while (childIndex < lastChildIndex) {
-        // Append non-typeable child directly
-        var child = children[childIndex];
-        if (!CanRender(child)) {
-            childIndex++;
-            child.setActive();
-            resultChildren.push(child);
-            lastLine.push(child);
-            continue;
-        }
-
+    while (childIndex < lastChildIndex) {        
         wordResult = GetWord(children, childIndex, charWrap, wordResult);
         var word = wordResult.word;
         var charCnt = word.length;
@@ -142,11 +132,15 @@ var RunWordWrap = function (config) {
         lastLineWidth += wordWidth;
 
         for (var i = 0, cnt = word.length; i < cnt; i++) {
-            var char = word[i];
-            char.setActive().setPosition(x, y);
-            resultChildren.push(char);
-            lastLine.push(char);
-            x += (char.outerWidth + letterSpacing);
+            var child = word[i];
+            child.setActive();
+            resultChildren.push(child);
+            lastLine.push(child);
+
+            if (CanRender(child)) {
+                child.setPosition(x, y);
+                x += (child.outerWidth + letterSpacing);
+            }
         }
     }
 

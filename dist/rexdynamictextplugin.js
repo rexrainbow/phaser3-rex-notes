@@ -39,6 +39,21 @@
     return Constructor;
   }
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -150,6 +165,56 @@
     }
 
     return _get.apply(this, arguments);
+  }
+
+  function set(target, property, value, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.set) {
+      set = Reflect.set;
+    } else {
+      set = function set(target, property, value, receiver) {
+        var base = _superPropBase(target, property);
+
+        var desc;
+
+        if (base) {
+          desc = Object.getOwnPropertyDescriptor(base, property);
+
+          if (desc.set) {
+            desc.set.call(receiver, value);
+            return true;
+          } else if (!desc.writable) {
+            return false;
+          }
+        }
+
+        desc = Object.getOwnPropertyDescriptor(receiver, property);
+
+        if (desc) {
+          if (!desc.writable) {
+            return false;
+          }
+
+          desc.value = value;
+          Object.defineProperty(receiver, property, desc);
+        } else {
+          _defineProperty(receiver, property, value);
+        }
+
+        return true;
+      };
+    }
+
+    return set(target, property, value, receiver);
+  }
+
+  function _set(target, property, value, receiver, isStrict) {
+    var s = set(target, property, value, receiver || target);
+
+    if (!s && isStrict) {
+      throw new Error('failed to set property');
+    }
+
+    return value;
   }
 
   function _toConsumableArray(arr) {
@@ -1843,6 +1908,8 @@
           shadowOffsetY: this.shadowOffsetY,
           offsetX: this.offsetX,
           offsetY: this.offsetY,
+          leftSpace: this.leftSpace,
+          rightSpace: this.rightSpace,
           align: this.align
         };
       }
@@ -1857,6 +1924,7 @@
         this.setStrokeStyle(GetValue$4(o, 'stroke', null), GetValue$4(o, 'strokeThickness', 0));
         this.setShadow(GetValue$4(o, 'shadowColor', null), GetValue$4(o, 'shadowOffsetX', 0), GetValue$4(o, 'shadowOffsetY', 0), GetValue$4(o, 'shadowBlur', 0));
         this.setOffset(GetValue$4(o, 'offsetX', 0), GetValue$4(o, 'offsetY', 0));
+        this.setSpace(GetValue$4(o, 'leftSpace', 0), GetValue$4(o, 'rightSpace', 0));
         this.setAlign(GetValue$4(o, 'align', undefined));
         return this;
       }
@@ -1905,6 +1973,14 @@
 
         if (o.hasOwnProperty('offsetY')) {
           this.setOffsetY(o.offsetY);
+        }
+
+        if (o.hasOwnProperty('leftSpace')) {
+          this.setLeftSpace(o.leftSpace);
+        }
+
+        if (o.hasOwnProperty('rightSpace')) {
+          this.setRightSpace(o.rightSpace);
         }
 
         if (o.hasOwnProperty('align')) {
@@ -2078,6 +2154,32 @@
       key: "setOffset",
       value: function setOffset(offsetX, offsetY) {
         this.setOffsetX(offsetX).setOffsetY(offsetY);
+        return this;
+      }
+    }, {
+      key: "setLeftSpace",
+      value: function setLeftSpace(space) {
+        if (space === undefined) {
+          space = 0;
+        }
+
+        this.leftSpace = space;
+        return this;
+      }
+    }, {
+      key: "setRightSpace",
+      value: function setRightSpace(space) {
+        if (space === undefined) {
+          space = 0;
+        }
+
+        this.rightSpace = space;
+        return this;
+      }
+    }, {
+      key: "setSpace",
+      value: function setSpace(leftSpace, rightSpace) {
+        this.setLeftSpace(leftSpace).setRightSpace(rightSpace);
         return this;
       }
     }, {
@@ -2299,6 +2401,30 @@
         if (this.style) {
           this.style.offsetY = value;
         }
+      }
+    }, {
+      key: "leftSpace",
+      get: function get() {
+        return this.style.leftSpace * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.leftSpace = value;
+        }
+
+        _set(_getPrototypeOf(CharData.prototype), "leftSpace", value, this, true);
+      }
+    }, {
+      key: "rightSpace",
+      get: function get() {
+        return this.style.rightSpace * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.rightSpace = value;
+        }
+
+        _set(_getPrototypeOf(CharData.prototype), "rightSpace", value, this, true);
       }
     }, {
       key: "align",
@@ -2697,14 +2823,20 @@
         wordWidth = 0;
 
     while (currentIndex < endIndex) {
-      var child = children[currentIndex];
+      var child = children[currentIndex]; // Can't render (command child), put into output directly
+
+      if (!CanRender(child)) {
+        word.push(child);
+        currentIndex++;
+        continue;
+      }
 
       if (child.type === CharTypeName && child.text !== ' ' && child.text !== '\n') {
         word.push(child);
         wordWidth += child.outerWidth;
         currentIndex++; // Continue
       } else {
-        // Get non-text child, a space, or a new-line
+        // Get image child, a space, or a new-line
         if (currentIndex === startIndex) {
           // Single child
           word.push(child);
@@ -2911,17 +3043,6 @@
     var wordResult;
 
     while (childIndex < lastChildIndex) {
-      // Append non-typeable child directly
-      var child = children[childIndex];
-
-      if (!CanRender(child)) {
-        childIndex++;
-        child.setActive();
-        resultChildren.push(child);
-        lastLine.push(child);
-        continue;
-      }
-
       wordResult = GetWord(children, childIndex, charWrap, wordResult);
       var word = wordResult.word;
       var charCnt = word.length;
@@ -2966,13 +3087,15 @@
       lastLineWidth += wordWidth;
 
       for (var i = 0, cnt = word.length; i < cnt; i++) {
-        var _char = word[i];
+        var child = word[i];
+        child.setActive();
+        resultChildren.push(child);
+        lastLine.push(child);
 
-        _char.setActive().setPosition(x, y);
-
-        resultChildren.push(_char);
-        lastLine.push(_char);
-        x += _char.outerWidth + letterSpacing;
+        if (CanRender(child)) {
+          child.setPosition(x, y);
+          x += child.outerWidth + letterSpacing;
+        }
       }
     }
 

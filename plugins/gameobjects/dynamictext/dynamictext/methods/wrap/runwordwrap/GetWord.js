@@ -1,4 +1,4 @@
-import { CharTypeName } from '../../../bob/Types.js';
+import { CanRender, CharTypeName } from '../../../bob/Types.js';
 
 var GetWord = function (children, startIndex, charMode, result) {
     if (result === undefined) {
@@ -12,12 +12,19 @@ var GetWord = function (children, startIndex, charMode, result) {
     var word = result.word, wordWidth = 0;
     while (currentIndex < endIndex) {
         var child = children[currentIndex];
+        // Can't render (command child), put into output directly
+        if (!CanRender(child)) {
+            word.push(child);
+            currentIndex++;
+            continue;
+        }
+
         if ((child.type === CharTypeName) && (child.text !== ' ') && (child.text !== '\n')) {
             word.push(child);
             wordWidth += child.outerWidth;
             currentIndex++;
             // Continue
-        } else {  // Get non-text child, a space, or a new-line
+        } else {  // Get image child, a space, or a new-line
             if (currentIndex === startIndex) { // Single child
                 word.push(child);
                 wordWidth += child.outerWidth;

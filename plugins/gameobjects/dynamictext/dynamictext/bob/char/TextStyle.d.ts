@@ -12,6 +12,8 @@ export interface IConfigTextStyle {
     shadowBlur?: number,
     offsetX?: number,
     offsetY?: number,
+    leftSpace?: number,
+    rightSpace?: number,
 }
 
 export default class TextStyle {
@@ -59,5 +61,11 @@ export default class TextStyle {
     setOffsetY(offsetY?: number): this;
     offsetY: number;
     setOffset(offsetX?: number, offsetY?: number): this;
+
+    setLeftSpace(space?: number): this;
+    leftSpace: number;
+    setRightSpace(space?: number): this;
+    rightSpace: number;
+    setSpace(leftSpace?: number, rightSpace?: number): this;
 
 }

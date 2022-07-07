@@ -23,6 +23,8 @@ class TextStyle {
             shadowOffsetY: this.shadowOffsetY,
             offsetX: this.offsetX,
             offsetY: this.offsetY,
+            leftSpace: this.leftSpace,
+            rightSpace: this.rightSpace,
             align: this.align
         }
     }
@@ -46,6 +48,10 @@ class TextStyle {
         this.setOffset(
             GetValue(o, 'offsetX', 0),
             GetValue(o, 'offsetY', 0)
+        );
+        this.setSpace(
+            GetValue(o, 'leftSpace', 0),
+            GetValue(o, 'rightSpace', 0)
         );
         this.setAlign(GetValue(o, 'align', undefined));
 
@@ -95,6 +101,13 @@ class TextStyle {
         }
         if (o.hasOwnProperty('offsetY')) {
             this.setOffsetY(o.offsetY);
+        }
+
+        if (o.hasOwnProperty('leftSpace')) {
+            this.setLeftSpace(o.leftSpace);
+        }
+        if (o.hasOwnProperty('rightSpace')) {
+            this.setRightSpace(o.rightSpace);
         }
 
         if (o.hasOwnProperty('align')) {
@@ -249,6 +262,30 @@ class TextStyle {
         return this;
     }
 
+    setLeftSpace(space) {
+        if (space === undefined) {
+            space = 0
+        }
+
+        this.leftSpace = space;
+        return this;
+    }
+
+    setRightSpace(space) {
+        if (space === undefined) {
+            space = 0
+        }
+
+        this.rightSpace = space;
+        return this;
+    }
+
+    setSpace(leftSpace, rightSpace) {
+        this
+            .setLeftSpace(leftSpace)
+            .setRightSpace(rightSpace);
+        return this;
+    }
     setAlign(align) {
         this.align = align;
         return this;

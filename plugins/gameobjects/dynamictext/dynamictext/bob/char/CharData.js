@@ -37,6 +37,28 @@ class CharData extends RenderBase {
         }
     }
 
+    get leftSpace() {
+        return this.style.leftSpace * this.scaleX;
+    }
+
+    set leftSpace(value) {
+        if (this.style) {
+            this.style.leftSpace = value;
+        }
+        super.leftSpace = value;
+    }
+
+    get rightSpace() {
+        return this.style.rightSpace * this.scaleX;
+    }
+
+    set rightSpace(value) {
+        if (this.style) {
+            this.style.rightSpace = value;
+        }
+        super.rightSpace = value;
+    }
+
     get align() {
         return this.style.align;
     }

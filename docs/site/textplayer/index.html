@@ -8857,7 +8857,9 @@
         <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">leftSpace</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">rightSpace</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">parser</span><span class="o">:</span> <span class="p">{</span>
@@ -9009,6 +9011,8 @@
 <li><code>style.shadowBlur</code> : Blur of shadow.</li>
 <li><code>style.offsetX</code> : OffsetX.</li>
 <li><code>style.offsetY</code> : OffsetY.</li>
+<li><code>style.leftSpace</code> : Extra space between this character and previous character.</li>
+<li><code>style.rightSpace</code> : Extra space between this character and next character.</li>
 <li><code>style.align</code> : Override default line-alignment setting.<ul>
 <li><code>0</code>, <code>'left'</code>, <code>'top'</code> : Align remainder lines to left/top.</li>
 <li><code>1</code>, <code>'center'</code> : Align remainder lines to center.</li>
@@ -9335,6 +9339,9 @@
 </ul>
 </li>
 <li>Character offset Y : <code>[y=-8]content[/y]</code></li>
+<li>Character offset X : <code>[x=10]content[/y]</code></li>
+<li>Left space : <code>[left=10]c[/left]ontent</code></li>
+<li>Right space : <code>conten[right=10]t[/right]</code></li>
 <li>Line-align : <code>[align=left]</code>, <code>[align=center]</code>, <code>[align=right]</code></li>
 </ul>
 <h4 id="new-line">New line<a class="headerlink" href="#new-line" title="Permanent link">&para;</a></h4>
