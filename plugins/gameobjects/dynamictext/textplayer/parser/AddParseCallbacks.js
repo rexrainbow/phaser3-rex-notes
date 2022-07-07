@@ -4,6 +4,7 @@ import ParseBoldTag from './textstyle/OnParseBoldTag.js';
 import ParseItalicTag from './textstyle/OnParseItalicTag.js';
 import ParseFontSizeTag from './textstyle/OnParseFontSizeTag.js';
 import ParseOffsetYTag from './textstyle/OnParseOffsetYTag.js';
+import ParseOffsetXTag from './textstyle/OnParseOffsetXTag.js';
 import ParseShadowColorTag from './textstyle/OnParseShadowColorTag.js';
 import ParseAlignTag from './textstyle/OnParseAlignTag.js'
 import ParseImageTag from './image/OnParseImageTag.js';
@@ -42,7 +43,8 @@ import ParseCustomTag from './custom/OnParseCustomTag.js';
 const ParseCallbacks = [
     ParseColorTag, ParseStrokeColorTag,
     ParseBoldTag, ParseItalicTag,
-    ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag, ParseAlignTag,
+    ParseFontSizeTag, ParseShadowColorTag, ParseAlignTag,
+    ParseOffsetYTag, ParseOffsetXTag,
     ParseImageTag,
 
     ParseTypingSpeedTag,
