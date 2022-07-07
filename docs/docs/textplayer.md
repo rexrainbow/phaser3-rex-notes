@@ -565,8 +565,8 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     - `strokeThickness` is set in config
 - Shadow : `[shadow]content[/shadow]`, `[shadow=red]content[/shadow]`
     - `shadowOffsetX`, `shadowOffsetY`, `shadowBlur` are set in config
-- Character offset Y : `[y=-8]content[/y]`
-- Character offset X : `[x=10]content[/y]`
+- Character offset Y : `[y=-8]c[/y]ontent`
+- Character offset X : `[x=10]c[/x]ontent`
 - Left space : `[left=10]c[/left]ontent`
 - Right space : `conten[right=10]t[/right]`
 - Line-align : `[align=left]`, `[align=center]`, `[align=right]`
