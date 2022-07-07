@@ -352,24 +352,6 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     }
     ```
 
-#### Transition image
-
-1. [Transition image](transitionimage.md): Transit texture to another one.
-    ```javascript
-    var image = scene.rexUI.add.transitionImage(x, y, texture, frame, config);
-    ```
-    or
-    ```javascript
-    class MyTransitionImage extends RexPlugins.UI.TransitionImage {
-        constructor(scene, x, y, texture, frame, config) {
-            super(scene, x, y, texture, frame, config);
-            // ...
-            scene.add.existing(this);
-        }
-        // ...
-    }
-    ```
-
 #### Behaviors of text
 
 1. [Hidden text edit](hiddeninputtext.md): Create an invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp) to edit string content.
@@ -412,6 +394,25 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
     - `textObject` :
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)
+
+
+### Transition image
+
+1. [Transition image](transitionimage.md): Transit texture to another one.
+    ```javascript
+    var image = scene.rexUI.add.transitionImage(x, y, texture, frame, config);
+    ```
+    or
+    ```javascript
+    class MyTransitionImage extends RexPlugins.UI.TransitionImage {
+        constructor(scene, x, y, texture, frame, config) {
+            super(scene, x, y, texture, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Touch input
 

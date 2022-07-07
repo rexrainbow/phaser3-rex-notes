@@ -72,11 +72,23 @@ var CreateDropDownList = function (scene, x, y, menuHeight, options) {
                     menu.scaleDownDestroy(100, 'y');
                     menu = undefined;
                 });
+
+                // Any pointerup to close menu
+                scene.time.delayedCall(0, function () {
+                    scene.input.once('pointerup', function () {
+                        if (menu) {
+                            menu.scaleDownDestroy(100, 'y');
+                            menu = undefined;
+                        }
+                    })
+                });
+
             } else {
                 menu.scaleDownDestroy(100, 'y');
                 menu = undefined;
             }
         })
+
     return label;
 }
 
