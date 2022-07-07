@@ -109,6 +109,7 @@ camera.pan(x, y, duration);   // duration in ms
 // camera.pan(x, y, duration, ease, force, callback, context);
 ```
 
+- `x`, `y` : The destination x/y coordinate to scroll the center of the Camera viewport to.
 - `callback` , `context` : It will be invoked every frame for the duration of the effect.
     ```javascript
     function(camera, progress, x, y) {}
