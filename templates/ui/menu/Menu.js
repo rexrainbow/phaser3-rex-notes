@@ -91,7 +91,7 @@ class Menu extends Buttons {
             this._isPassedEvent = false;
 
             // pointerdown-outside-collapse
-            this.pointerDownOutsideCollapsing = GetValue(config, 'pointerDownOutsideCollapsing', false);
+            this.pointerDownOutsideCollapsing = GetValue(config, 'pointerDownOutsideCollapsing', true);
             if (this.pointerDownOutsideCollapsing) {
                 scene.input.on('pointerdown', this.onPointerDownOutside, this);
             }
@@ -165,6 +165,16 @@ class Menu extends Buttons {
 
         super.destroy(fromScene);
         this.removeDelayCall();
+    }
+
+    isInTouching(pointer) {
+        if (super.isInTouching(pointer)) {
+            return true;
+        } else if (this.childrenMap.subMenu) {
+            return this.childrenMap.subMenu.isInTouching(pointer);
+        } else {
+            return false;
+        }
     }
 
     onPointerDownOutside(pointer) {

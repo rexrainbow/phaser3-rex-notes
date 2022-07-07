@@ -4238,6 +4238,19 @@
     Rotation
   </a>
   
+    <nav class="md-nav" aria-label="Rotation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#origin" class="md-nav__link">
+    Origin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8452,6 +8465,19 @@
     Rotation
   </a>
   
+    <nav class="md-nav" aria-label="Rotation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#origin" class="md-nav__link">
+    Origin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8727,6 +8753,18 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>  <span class="c1">// angle in radians</span>
 </code></pre></div></li>
 </ul>
+<h4 id="origin">Origin<a class="headerlink" href="#origin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// camera.originX = 0.5;</span>
+<span class="c1">// camera.originY = 0.5;</span>
+</code></pre></div></li>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">originX</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">originX</span>
+<span class="kd">var</span> <span class="nx">originY</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">originY</span>
+</code></pre></div></li>
+</ul>
 <h3 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h3>
 <p>A visible camera will render and perform input tests.
 An invisible camera will not render anything and will skip input tests.</p>
@@ -8763,6 +8801,12 @@ An invisible camera will not render anything and will skip input tests.</p>
 <span class="c1">// camera.startFollow(gameObject, roundPx, lerpX, lerpY, offsetX, offsetY);  // </span>
 </code></pre></div><ul>
 <li><code>roundPx</code> : set true to round the camera position to integers</li>
+<li><code>lerpX</code>, <code>lerpY</code> : A value between 0 and 1. <ul>
+<li><code>1</code> : Camera will instantly snap to the target coordinates.</li>
+<li><code>0.1</code> : Camera will more slowly track the target, giving a smooth transition.</li>
+</ul>
+</li>
+<li><code>offsetX</code>, <code>offsetY</code> : The horizontal/vertical offset from the camera follow target.x position.</li>
 </ul>
 </li>
 <li>Stop following

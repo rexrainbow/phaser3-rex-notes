@@ -81,7 +81,7 @@ class Demo extends Phaser.Scene {
 
         this.input.on('pointerdown', function (pointer) {
             if (!menu.isInTouching(pointer)) {
-                menu.collapseSubMenu();  // Auto collapsing if `pointerDownOutsideCollapsing: true`
+                // menu.collapseSubMenu();  // Auto collapsing if `pointerDownOutsideCollapsing: true`
                 scene.print.text = '';
             }
         }, this);
@@ -136,7 +136,7 @@ var CreateMenu = function (scene, items, onClick) {
 
         // expandEvent: 'button.over',
 
-        // pointerDownOutsideCollapsing: true,
+        // pointerDownOutsideCollapsing: false,
 
         // space: { item: 10 }
     });

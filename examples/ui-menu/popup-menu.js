@@ -72,7 +72,7 @@ class Demo extends Phaser.Scene {
                     scene.print.text += 'Click ' + button.text + '\n';
                 });
             } else if (!menu.isInTouching(pointer)) {
-                menu.collapse(); // Auto collapsing if `pointerDownOutsideCollapsing: true`
+                // menu.collapse(); // Auto collapsing if `pointerDownOutsideCollapsing: true`
                 menu = undefined;
                 scene.print.text = '';
             }
@@ -129,7 +129,7 @@ var CreateMenu = function (scene, x, y, items, onClick) {
 
         // expandEvent: 'button.over',
 
-        // pointerDownOutsideCollapsing: true,
+        // pointerDownOutsideCollapsing: false,
 
         // space: { item: 10 }
     });

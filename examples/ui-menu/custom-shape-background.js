@@ -74,7 +74,7 @@ class Demo extends Phaser.Scene {
                     scene.print.text += 'Click ' + button.text + '\n';
                 });
             } else if (!menu.isInTouching(pointer)) {
-                menu.collapse();
+                // menu.collapse();
                 menu = undefined;
                 scene.print.text = '';
             }

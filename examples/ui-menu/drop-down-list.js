@@ -68,7 +68,7 @@ var CreateDropDownList = function (scene, x, y, options) {
                     menu = undefined;
                 });
             } else {
-                menu.collapse();
+                // menu.collapse();
                 menu = undefined;
             }
         })

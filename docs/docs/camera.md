@@ -126,6 +126,20 @@ camera.destroy();
     var angle = camera.rotation;  // angle in radians
     ```
 
+#### Origin
+
+- Set
+    ```javascript
+    camera.setOrigin(x, y);
+    // camera.originX = 0.5;
+    // camera.originY = 0.5;
+    ```
+- Get
+    ```javascript
+    var originX = camera.originX
+    var originY = camera.originY
+    ```
+
 ### Visible
 
 A visible camera will render and perform input tests.
@@ -187,6 +201,10 @@ camera.centerToSize();
     // camera.startFollow(gameObject, roundPx, lerpX, lerpY, offsetX, offsetY);  // 
     ```
     - `roundPx` : set true to round the camera position to integers
+    - `lerpX`, `lerpY` : A value between 0 and 1. 
+        - `1` : Camera will instantly snap to the target coordinates.
+        - `0.1` : Camera will more slowly track the target, giving a smooth transition.
+    - `offsetX`, `offsetY` : The horizontal/vertical offset from the camera follow target.x position.
 - Stop following
     ```javascript
     camera.stopFollow();

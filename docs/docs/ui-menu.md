@@ -124,7 +124,7 @@ var menu = scene.rexUI.add.menu({
 
     // expandEvent: 'button.click',
 
-    // pointerDownOutsideCollapsing: false,
+    // pointerDownOutsideCollapsing: true,
 
     // childrenKey: 'children',
 
@@ -199,8 +199,8 @@ var menu = scene.rexUI.add.menu({
     - `'button.click'` : Default value
     - `'button.over'`
 - `pointerDownOutsideCollapsing` :
-    - `true` : Collapse all menus (`popup:true`), or sub-menus (`popup:false`) when pointer-down outside of all menus.
-    - `false` : Ignore pointer-down outside detection. Default behavior.
+    - `true` : Collapse all menus (`popup:true`), or sub-menus (`popup:false`) when pointer-down outside of all menus. Default behavior.
+    - `false` : Ignore pointer-down outside detection.
 - `childrenKey` : Key of sub-menu in element of `items`.
     - `children` : Default value.
 - `subMenuSide` : Side of sub-menu

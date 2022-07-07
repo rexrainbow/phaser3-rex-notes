@@ -22783,7 +22783,7 @@
     }
   };
 
-  var IsInTouching$1 = function IsInTouching(pointer, gameObject) {
+  var IsInTouching = function IsInTouching(pointer, gameObject) {
     if (gameObject === undefined) {
       gameObject = this;
     }
@@ -26083,7 +26083,7 @@
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
     setAnchor: SetAnchor,
-    isInTouching: IsInTouching$1,
+    isInTouching: IsInTouching,
     pointToChild: PointToChild$1,
     setDraggable: SetDraggable,
     setChildrenInteractive: SetChildrenInteractiveWrap,
@@ -37989,21 +37989,10 @@
     return this;
   };
 
-  var IsInTouching = function IsInTouching(pointer) {
-    if (IsInTouching$1.call(this, pointer)) {
-      return true;
-    } else if (this.childrenMap.subMenu) {
-      return this.childrenMap.subMenu.isInTouching(pointer);
-    } else {
-      return false;
-    }
-  };
-
   var Methods$3 = {
     expandSubMenu: ExpandSubMenu,
     collapse: Collapse,
-    collapseSubMenu: CollapseSubMenu,
-    isInTouching: IsInTouching
+    collapseSubMenu: CollapseSubMenu
   };
   Object.assign(Methods$3, SetTransitCallbackMethods, DelayCallMethods$1);
 
@@ -38211,7 +38200,7 @@
 
         _this._isPassedEvent = false; // pointerdown-outside-collapse
 
-        _this.pointerDownOutsideCollapsing = GetValue$u(config, 'pointerDownOutsideCollapsing', false);
+        _this.pointerDownOutsideCollapsing = GetValue$u(config, 'pointerDownOutsideCollapsing', true);
 
         if (_this.pointerDownOutsideCollapsing) {
           scene.input.on('pointerdown', _this.onPointerDownOutside, _assertThisInitialized(_this));
@@ -38301,6 +38290,17 @@
         _get(_getPrototypeOf(Menu.prototype), "destroy", this).call(this, fromScene);
 
         this.removeDelayCall();
+      }
+    }, {
+      key: "isInTouching",
+      value: function isInTouching(pointer) {
+        if (_get(_getPrototypeOf(Menu.prototype), "isInTouching", this).call(this, pointer)) {
+          return true;
+        } else if (this.childrenMap.subMenu) {
+          return this.childrenMap.subMenu.isInTouching(pointer);
+        } else {
+          return false;
+        }
       }
     }, {
       key: "onPointerDownOutside",

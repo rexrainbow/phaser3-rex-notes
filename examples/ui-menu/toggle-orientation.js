@@ -75,7 +75,7 @@ class Demo extends Phaser.Scene {
 
         this.input.on('pointerdown', function (pointer) {
             if (!menu.isInTouching(pointer)) {
-                menu.collapseSubMenu();
+                // menu.collapseSubMenu();
             }
         });
     }
