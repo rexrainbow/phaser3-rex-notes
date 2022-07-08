@@ -83,6 +83,7 @@ module.exports = {
     'shakepositionplugin': './plugins/shakeposition-plugin.js',
     'interceptionplugin': './plugins/interception-plugin.js',
     'anchorplugin': './plugins/anchor-plugin.js',
+    'boundsplugin': './plugins/bounds-plugin.js',
     'modalplugin': './plugins/modal-plugin.js',
     'particlesalongboundsplugin': './plugins/particlesalongbounds-plugin.js',
     'loadingprogressplugin': './plugins/loadingprogress-plugin.js',
