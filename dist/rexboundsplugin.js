@@ -704,7 +704,10 @@
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this.bounds = new Rectangle();
+      _this.boundsTarget = undefined;
       _this.boundsEnable = {};
+
+      _this.clearHitResult();
 
       _this.resetFromJSON(config);
 
@@ -714,7 +717,15 @@
     _createClass(Bounds, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setBounds(GetValue(o, 'bounds'));
+        var target = GetValue(o, 'target');
+
+        if (target) {
+          this.setBoundsTarget(target);
+        } else {
+          this.setBoundsTarget();
+          this.setBounds(GetValue(o, 'bounds'));
+        }
+
         this.setBoundsEnable(GetValue(o, 'enable', true));
         this.setAlignMode(GetValue(o, 'alignMode', 0));
         return this;
@@ -751,6 +762,12 @@
           bounds.y = GetValue(boundsConfig, 'y', 0);
         }
 
+        return this;
+      }
+    }, {
+      key: "setBoundsTarget",
+      value: function setBoundsTarget(gameObject) {
+        this.boundsTarget = gameObject;
         return this;
       }
     }, {
@@ -800,13 +817,20 @@
       key: "update",
       value: function update(time, delta) {
         var gameObject = this.parent;
+        this.clearHitResult();
 
         if (!this.enable) {
           return this;
         }
 
-        var boundsEnable = this.boundsEnable;
+        var target = this.boundsTarget;
+
+        if (target) {
+          GetBounds(target, this.bounds);
+        }
+
         var bounds = this.bounds;
+        var boundsEnable = this.boundsEnable;
         var alignToGOBound = this.alignMode === 0;
         var gameObjectBounds = alignToGOBound ? GetBounds(gameObject, true) : undefined;
 
@@ -816,6 +840,9 @@
 
           if (dx > 0) {
             gameObject.x += dx;
+            this.isHitAny = true;
+            this.isHitLeft = true;
+            this.emit('hitleft', this.parent, this);
           }
         }
 
@@ -825,6 +852,9 @@
 
           if (dx < 0) {
             gameObject.x += dx;
+            this.isHitAny = true;
+            this.isHitRight = true;
+            this.emit('hitright', this.parent, this);
           }
         }
 
@@ -834,6 +864,9 @@
 
           if (dy > 0) {
             gameObject.y += dy;
+            this.isHitAny = true;
+            this.isHitTop = true;
+            this.emit('hittop', this.parent, this);
           }
         }
 
@@ -843,8 +876,25 @@
 
           if (dy < 0) {
             gameObject.y += dy;
+            this.isHitAny = true;
+            this.isHitBottom = true;
+            this.emit('hitbottom', this.parent, this);
           }
         }
+
+        if (this.isHitAny) {
+          this.emit('hitany', this.parent, this);
+        }
+      }
+    }, {
+      key: "clearHitResult",
+      value: function clearHitResult() {
+        this.isHitAny = false;
+        this.isHitLeft = false;
+        this.isHitRight = false;
+        this.isHitTop = false;
+        this.isHitBottom = false;
+        return this;
       }
     }]);
 
