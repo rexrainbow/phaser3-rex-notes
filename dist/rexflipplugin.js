@@ -265,7 +265,7 @@
     }
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -276,7 +276,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$5(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -330,7 +330,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -347,7 +347,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$4(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -472,15 +472,21 @@
     'always': 2
   };
 
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$4(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -488,7 +494,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -497,7 +503,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     

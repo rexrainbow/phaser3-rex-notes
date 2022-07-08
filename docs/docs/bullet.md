@@ -130,7 +130,7 @@ var bullet = scene.plugins.get('rexBullet').add(gameObject, {
 ### Set wrap mode
 
 ```javascript
-ship.setWrapMode(wrap, padding);
+bullet.setWrapMode(wrap, padding);
 ```
 
 - `wrap` : Set `true` to enable wrap mode.

@@ -265,7 +265,7 @@
     }
   };
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -276,7 +276,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$2(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$3(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -330,7 +330,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -347,7 +347,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$1(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$2(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -472,15 +472,21 @@
     'always': 2
   };
 
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$1(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -488,7 +494,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -497,7 +503,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     
@@ -701,6 +707,11 @@
 
       _classCallCheck(this, Bounds);
 
+      if (config === undefined) {
+        config = {};
+      }
+
+      config.tickEventName = 'postupdate';
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this.bounds = new Rectangle();
@@ -726,7 +737,7 @@
           this.setBounds(GetValue(o, 'bounds'));
         }
 
-        this.setBoundsEnable(GetValue(o, 'enable', true));
+        this.setEnable(GetValue(o, 'enable', true));
         this.setAlignMode(GetValue(o, 'alignMode', 0));
         return this;
       }
@@ -739,6 +750,12 @@
         }
 
         _get(_getPrototypeOf(Bounds.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "setBoundsTarget",
+      value: function setBoundsTarget(gameObject) {
+        this.boundsTarget = gameObject;
+        return this;
       }
     }, {
       key: "setBounds",
@@ -765,14 +782,8 @@
         return this;
       }
     }, {
-      key: "setBoundsTarget",
-      value: function setBoundsTarget(gameObject) {
-        this.boundsTarget = gameObject;
-        return this;
-      }
-    }, {
-      key: "setBoundsEnable",
-      value: function setBoundsEnable(enable) {
+      key: "setEnable",
+      value: function setEnable(enable) {
         if (enable === undefined) {
           enable = true;
         }
@@ -811,7 +822,7 @@
         return boundsEnable.left || boundsEnable.right || boundsEnable.top || boundsEnable.bottom;
       },
       set: function set(value) {
-        this.setBoundsEnable(value);
+        this.setEnable(value);
       }
     }, {
       key: "update",

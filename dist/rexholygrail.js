@@ -500,7 +500,7 @@
     }
   };
 
-  var GetValue$y = Phaser.Utils.Objects.GetValue;
+  var GetValue$z = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base$1.prototype.add;
 
   var Add$1 = function Add(gameObject, config) {
@@ -544,10 +544,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$y(config, 'syncPosition', true);
-    state.syncRotation = GetValue$y(config, 'syncRotation', true);
-    state.syncScale = GetValue$y(config, 'syncScale', true);
-    state.syncAlpha = GetValue$y(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$z(config, 'syncPosition', true);
+    state.syncRotation = GetValue$z(config, 'syncRotation', true);
+    state.syncScale = GetValue$z(config, 'syncScale', true);
+    state.syncAlpha = GetValue$z(config, 'syncAlpha', true);
   };
 
   var AddChild$1 = {
@@ -2417,7 +2417,7 @@
     return output;
   };
 
-  var GetValue$x = Phaser.Utils.Objects.GetValue;
+  var GetValue$y = Phaser.Utils.Objects.GetValue;
   var Group = Phaser.GameObjects.Group;
 
   var DrawBounds = function DrawBounds(graphics, config) {
@@ -2428,13 +2428,13 @@
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$x(config, 'color', 0xffffff);
-      var nameTextConfig = GetValue$x(config, 'name', false);
+      color = GetValue$y(config, 'color', 0xffffff);
+      var nameTextConfig = GetValue$y(config, 'name', false);
 
       if (nameTextConfig) {
-        createTextCallback = GetValue$x(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
-        createTextCallbackScope = GetValue$x(nameTextConfig, 'createTextCallbackScope', undefined);
-        textAlign = GetValue$x(nameTextConfig, 'align', 'left-top');
+        createTextCallback = GetValue$y(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
+        createTextCallbackScope = GetValue$y(nameTextConfig, 'createTextCallbackScope', undefined);
+        textAlign = GetValue$y(nameTextConfig, 'align', 'left-top');
 
         if (typeof textAlign === 'string') {
           textAlign = ALIGNMODE[textAlign];
@@ -2497,7 +2497,7 @@
 
   var GlobRect = undefined;
 
-  var GetValue$w = Phaser.Utils.Objects.GetValue;
+  var GetValue$x = Phaser.Utils.Objects.GetValue;
 
   var GetBoundsConfig = function GetBoundsConfig(config, out) {
     if (out === undefined) {
@@ -2510,10 +2510,10 @@
       out.top = config;
       out.bottom = config;
     } else {
-      out.left = GetValue$w(config, 'left', 0);
-      out.right = GetValue$w(config, 'right', 0);
-      out.top = GetValue$w(config, 'top', 0);
-      out.bottom = GetValue$w(config, 'bottom', 0);
+      out.left = GetValue$x(config, 'left', 0);
+      out.right = GetValue$x(config, 'right', 0);
+      out.top = GetValue$x(config, 'top', 0);
+      out.bottom = GetValue$x(config, 'bottom', 0);
     }
 
     return out;
@@ -2651,7 +2651,7 @@
 
   var RE_OBJ = /(\S+)\[(\d+)\]/i;
 
-  var GetValue$v = Phaser.Utils.Objects.GetValue;
+  var GetValue$w = Phaser.Utils.Objects.GetValue;
 
   var GetPadding = function GetPadding(padding, key) {
     if (key === undefined) {
@@ -2672,10 +2672,10 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$v(key, 'left', 0);
-      padding.right = GetValue$v(key, 'right', 0);
-      padding.top = GetValue$v(key, 'top', 0);
-      padding.bottom = GetValue$v(key, 'bottom', 0);
+      padding.left = GetValue$w(key, 'left', 0);
+      padding.right = GetValue$w(key, 'right', 0);
+      padding.top = GetValue$w(key, 'top', 0);
+      padding.bottom = GetValue$w(key, 'bottom', 0);
     }
   };
 
@@ -3092,7 +3092,7 @@
     }
   };
 
-  var GetValue$u = Phaser.Utils.Objects.GetValue;
+  var GetValue$v = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -3103,7 +3103,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$u(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$v(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -3507,7 +3507,7 @@
     return this;
   };
 
-  var GetValue$t = Phaser.Utils.Objects.GetValue;
+  var GetValue$u = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -3524,7 +3524,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$t(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$u(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -3649,15 +3649,21 @@
     'always': 2
   };
 
+  var GetValue$t = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$t(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -3665,7 +3671,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -3674,7 +3680,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     

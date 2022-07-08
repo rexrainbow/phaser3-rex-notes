@@ -265,7 +265,7 @@
     }
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -276,7 +276,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$a(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -351,7 +351,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$9 = function GetValue(source, key, defaultValue) {
+  var GetValue$a = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -405,14 +405,14 @@
       _classCallCheck(this, FSM);
 
       // Attach get-next-state function
-      var states = GetValue$9(config, 'states', undefined);
+      var states = GetValue$a(config, 'states', undefined);
 
       if (states) {
         this.addStates(states);
       } // Attach extend members
 
 
-      var extend = GetValue$9(config, 'extend', undefined);
+      var extend = GetValue$a(config, 'extend', undefined);
 
       if (extend) {
         for (var name in extend) {
@@ -423,8 +423,8 @@
       } // Event emitter
 
 
-      var eventEmitter = GetValue$9(config, 'eventEmitter', undefined);
-      var EventEmitterClass = GetValue$9(config, 'EventEmitterClass', undefined);
+      var eventEmitter = GetValue$a(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$a(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
@@ -443,9 +443,9 @@
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setEnable(GetValue$9(o, 'enable', true));
-        this.start(GetValue$9(o, 'start', undefined));
-        var init = GetValue$9(o, 'init', undefined);
+        this.setEnable(GetValue$a(o, 'enable', true));
+        this.start(GetValue$a(o, 'start', undefined));
+        var init = GetValue$a(o, 'init', undefined);
 
         if (init) {
           init.call(this);
@@ -720,7 +720,7 @@
     return BaseState;
   }(FSM);
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -737,7 +737,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$8(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$9(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -862,15 +862,21 @@
     'always': 2
   };
 
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$8(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -878,7 +884,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -887,7 +893,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     

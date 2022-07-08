@@ -298,7 +298,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$c = function GetValue(source, key, defaultValue) {
+  var GetValue$d = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -382,14 +382,14 @@
       _classCallCheck(this, BracketParser);
 
       // Event emitter
-      this.setEventEmitter(GetValue$c(config, 'eventEmitter', undefined)); // Parameters for regex
+      this.setEventEmitter(GetValue$d(config, 'eventEmitter', undefined)); // Parameters for regex
 
-      this.setTagExpression(GetValue$c(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$c(config, 'regex.value', DefaultValueExpression)); // Value convert
+      this.setTagExpression(GetValue$d(config, 'regex.tag', DefaultTagExpression));
+      this.setValueExpression(GetValue$d(config, 'regex.value', DefaultValueExpression)); // Value convert
 
-      this.setValueConverter(GetValue$c(config, 'valueConvert', true)); // Brackets and generate regex
+      this.setValueConverter(GetValue$d(config, 'valueConvert', true)); // Brackets and generate regex
 
-      var delimiters = GetValue$c(config, 'delimiters', '<>');
+      var delimiters = GetValue$d(config, 'delimiters', '<>');
       this.setDelimiters(delimiters[0], delimiters[1]);
       this.isRunning = false;
       this.isPaused = false;
@@ -1474,7 +1474,7 @@
     return lines.join('');
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
 
   var Parser = /*#__PURE__*/function (_BracketParser) {
     _inherits(Parser, _BracketParser);
@@ -1497,7 +1497,7 @@
       _this = _super.call(this, config);
       AddParseCallbacks(tagPlayer, _assertThisInitialized(_this), config);
 
-      _this.setCommentLineStartSymbol(GetValue$b(config, 'comment', '//'));
+      _this.setCommentLineStartSymbol(GetValue$c(config, 'comment', '//'));
 
       return _this;
     }
@@ -1541,7 +1541,7 @@
     }
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -1552,7 +1552,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$a(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -1606,7 +1606,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -1623,7 +1623,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$9(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -1748,7 +1748,7 @@
     'always': 2
   };
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
 
   var BaseClock = /*#__PURE__*/function (_TickTask) {
     _inherits(BaseClock, _TickTask);
@@ -1772,9 +1772,9 @@
     _createClass(BaseClock, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.isRunning = GetValue$8(o, 'isRunning', false);
-        this.timeScale = GetValue$8(o, 'timeScale', 1);
-        this.now = GetValue$8(o, 'now', 0);
+        this.isRunning = GetValue$9(o, 'isRunning', false);
+        this.timeScale = GetValue$9(o, 'timeScale', 1);
+        this.now = GetValue$9(o, 'now', 0);
         return this;
       }
     }, {
@@ -2108,7 +2108,7 @@
     return TimerPool;
   }(Stack);
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var TimerPool = new TimerPool$1();
 
   var Timeline = /*#__PURE__*/function (_Clock) {
@@ -2124,7 +2124,7 @@
       _this = _super.call(this, parent, config);
       _this.addedTimers = [];
       _this.timers = [];
-      _this.timerPool = GetValue$7(config, 'pool', TimerPool);
+      _this.timerPool = GetValue$8(config, 'pool', TimerPool);
       return _this;
     }
 
@@ -2233,15 +2233,21 @@
     return Timeline;
   }(Clock);
 
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$7(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -2249,7 +2255,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -2258,7 +2264,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     

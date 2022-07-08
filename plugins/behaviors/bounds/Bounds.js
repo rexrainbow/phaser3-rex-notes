@@ -6,6 +6,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Bounds extends TickTask {
     constructor(gameObject, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.tickEventName = 'postupdate';
         super(gameObject, config);
         // this.parent = gameObject;
 
@@ -24,7 +28,7 @@ class Bounds extends TickTask {
             this.setBoundsTarget();
             this.setBounds(GetValue(o, 'bounds'));
         }
-        this.setBoundsEnable(GetValue(o, 'enable', true));
+        this.setEnable(GetValue(o, 'enable', true));
         this.setAlignMode(GetValue(o, 'alignMode', 0));
 
         return this;
@@ -37,6 +41,11 @@ class Bounds extends TickTask {
         }
 
         super.shutdown(fromScene);
+    }
+
+    setBoundsTarget(gameObject) {
+        this.boundsTarget = gameObject;
+        return this;
     }
 
     setBounds(boundsConfig) {
@@ -64,12 +73,7 @@ class Bounds extends TickTask {
         return this;
     }
 
-    setBoundsTarget(gameObject) {
-        this.boundsTarget = gameObject;
-        return this;
-    }
-
-    setBoundsEnable(enable) {
+    setEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
@@ -106,7 +110,7 @@ class Bounds extends TickTask {
     }
 
     set enable(value) {
-        this.setBoundsEnable(value);
+        this.setEnable(value);
     }
 
     update(time, delta) {

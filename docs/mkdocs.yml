@@ -149,6 +149,7 @@ nav:
         - Path follower: pathfollower.md
         - Anchor: anchor.md
         - Interception: interception.md
+        - Bounds : bounds.md
         - Particles along bounds: particles-along-bounds.md
         - Modal:
             - Modal behavior: modal.md

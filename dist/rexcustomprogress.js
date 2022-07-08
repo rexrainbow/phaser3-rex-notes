@@ -507,7 +507,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$8 = function GetValue(source, key, defaultValue) {
+  var GetValue$9 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -545,7 +545,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$8(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$9(this.data, key, defaultValue);
     },
     setData: function setData(key, value) {
       this.enableData();
@@ -2050,7 +2050,7 @@
     rectangle: Rectangle,
     triangle: Triangle
   };
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
 
   var ClearAll = function ClearAll() {
@@ -2073,7 +2073,7 @@
       return shape;
     },
     buildShapes: function buildShapes(config) {
-      var createCallback = GetValue$7(config, 'create', undefined);
+      var createCallback = GetValue$8(config, 'create', undefined);
 
       if (IsPlainObject$2(createCallback)) {
         var shapes = createCallback;
@@ -2115,7 +2115,7 @@
         createCallback.call(this);
       }
 
-      this.setUpdateShapesCallback(GetValue$7(config, 'update'));
+      this.setUpdateShapesCallback(GetValue$8(config, 'update'));
     },
     setUpdateShapesCallback: function setUpdateShapesCallback(callback) {
       if (callback === undefined) {
@@ -2131,7 +2131,7 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
 
   var CustomShapes = /*#__PURE__*/function (_BaseShapes) {
@@ -2146,14 +2146,14 @@
 
       if (IsPlainObject$1(x)) {
         config = x;
-        x = GetValue$6(config, 'x', 0);
-        y = GetValue$6(config, 'y', 0);
-        width = GetValue$6(config, 'width', 2);
-        height = GetValue$6(config, 'height', 2);
+        x = GetValue$7(config, 'x', 0);
+        y = GetValue$7(config, 'y', 0);
+        width = GetValue$7(config, 'width', 2);
+        height = GetValue$7(config, 'height', 2);
       }
 
       _this = _super.call(this, scene, x, y, width, height);
-      _this.type = GetValue$6(config, 'type', 'rexCustomShapes');
+      _this.type = GetValue$7(config, 'type', 'rexCustomShapes');
 
       _this.buildShapes(config);
 
@@ -2278,7 +2278,7 @@
     }
   };
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -2289,7 +2289,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$5(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -2343,7 +2343,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -2360,7 +2360,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$4(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -2485,15 +2485,21 @@
     'always': 2
   };
 
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$4(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -2501,7 +2507,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -2510,7 +2516,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     

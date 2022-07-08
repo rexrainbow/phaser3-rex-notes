@@ -292,7 +292,7 @@
 
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
   var DegToRad$6 = Phaser.Math.DegToRad;
@@ -311,10 +311,10 @@
 
       if (IsPlainObject$6(x)) {
         config = x;
-        x = GetValue$e(config, 'x', 0);
-        y = GetValue$e(config, 'y', 0);
-        key = GetValue$e(config, 'key', null);
-        frame = GetValue$e(config, 'frame', null);
+        x = GetValue$f(config, 'x', 0);
+        y = GetValue$f(config, 'y', 0);
+        key = GetValue$f(config, 'key', null);
+        frame = GetValue$f(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
@@ -326,9 +326,9 @@
 
       _this.panZ(PanZ);
 
-      _this.hideCCW = GetValue$e(config, 'hideCCW', true);
-      var gridWidth = GetValue$e(config, 'gridWidth', 32);
-      var gridHeight = GetValue$e(config, 'gridHeight', gridWidth);
+      _this.hideCCW = GetValue$f(config, 'hideCCW', true);
+      var gridWidth = GetValue$f(config, 'gridWidth', 32);
+      var gridHeight = GetValue$f(config, 'gridHeight', gridWidth);
 
       _this.resetVerts(gridWidth, gridHeight);
 
@@ -499,7 +499,7 @@
 
   var RT = Phaser.GameObjects.RenderTexture;
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
 
   var RenderTexture = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
@@ -513,10 +513,10 @@
 
       if (IsPlainObject$5(x)) {
         config = x;
-        x = GetValue$d(config, 'x', 0);
-        y = GetValue$d(config, 'y', 0);
-        width = GetValue$d(config, 'width', 32);
-        height = GetValue$d(config, 'height', 32);
+        x = GetValue$e(config, 'x', 0);
+        y = GetValue$e(config, 'y', 0);
+        width = GetValue$e(config, 'width', 32);
+        height = GetValue$e(config, 'height', 32);
       } // render-texture -> perspective-image
 
 
@@ -568,7 +568,7 @@
 
   var AnimationState = Phaser.Animations.AnimationState;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
 
   var Sprite = /*#__PURE__*/function (_PerspectiveImage) {
     _inherits(Sprite, _PerspectiveImage);
@@ -582,10 +582,10 @@
 
       if (IsPlainObject$4(x)) {
         config = x;
-        x = GetValue$c(config, 'x', 0);
-        y = GetValue$c(config, 'y', 0);
-        key = GetValue$c(config, 'key', null);
-        frame = GetValue$c(config, 'frame', null);
+        x = GetValue$d(config, 'x', 0);
+        y = GetValue$d(config, 'y', 0);
+        key = GetValue$d(config, 'key', null);
+        frame = GetValue$d(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame, config);
@@ -938,7 +938,7 @@
     }
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
 
   var Add = function Add(gameObject, config) {
@@ -982,10 +982,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$b(config, 'syncPosition', true);
-    state.syncRotation = GetValue$b(config, 'syncRotation', true);
-    state.syncScale = GetValue$b(config, 'syncScale', true);
-    state.syncAlpha = GetValue$b(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$c(config, 'syncPosition', true);
+    state.syncRotation = GetValue$c(config, 'syncRotation', true);
+    state.syncScale = GetValue$c(config, 'syncScale', true);
+    state.syncAlpha = GetValue$c(config, 'syncAlpha', true);
   };
 
   var AddChild = {
@@ -2589,7 +2589,7 @@
     }
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -2600,7 +2600,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$a(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -2654,7 +2654,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -2671,7 +2671,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$9(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -2796,15 +2796,21 @@
     'always': 2
   };
 
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
 
     var _super = _createSuper(SceneUpdateTickTask);
 
-    function SceneUpdateTickTask() {
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
       _classCallCheck(this, SceneUpdateTickTask);
 
-      return _super.apply(this, arguments);
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$9(config, 'tickEventName', 'update');
+      return _this;
     }
 
     _createClass(SceneUpdateTickTask, [{
@@ -2812,7 +2818,7 @@
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
 
-        this.scene.sys.events.on('update', this.update, this);
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
@@ -2821,7 +2827,7 @@
 
         if (this.scene) {
           // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
       } // update(time, delta) {
       //     
