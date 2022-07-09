@@ -1,6 +1,11 @@
 export default Modal;
 
 declare namespace Modal {
+    type TransitCallbackType = (
+        gameObject: Phaser.GameObjects.GameObject,
+        duration: number
+    ) => void;
+
     interface IConfig {
         cover?: {
             color?: number,
@@ -17,11 +22,9 @@ declare namespace Modal {
             out?: number,
         },
 
-        transitIn?: 0 | 1 | 'popUp' | 'fadeIn' |
-        ((gameObject: Phaser.GameObjects.GameObject, duration: number) => void),
+        transitIn?: 0 | 1 | 'popUp' | 'fadeIn' | TransitCallbackType,
 
-        transitOut?: 0 | 1 | 'scaleDown' | 'fadeOut' |
-        ((gameObject: Phaser.GameObjects.GameObject, duration: number) => void),
+        transitOut?: 0 | 1 | 'scaleDown' | 'fadeOut' | TransitCallbackType,
 
         destroy?: boolean,
     }

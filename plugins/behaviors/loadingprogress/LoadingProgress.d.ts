@@ -1,23 +1,33 @@
 export default LoadingProgress;
 
 declare namespace LoadingProgress {
+    type ProgressCallbackType = (
+        gameObject: Phaser.GameObjects.GameObject,
+        progress: number
+    ) => void;
+
+    type TransitCallbackType = (
+        gameObject: Phaser.GameObjects.GameObject,
+        duration: number
+    ) => void;
+
     interface IConfig {
-        transitIn?: (
-            gameObject: Phaser.GameObjects.GameObject
-        ) => Promise<any>
+        duration?: {
+            in?: number,
+            out?: number,
+        },
 
-        progress?: (
-            gameObject: Phaser.GameObjects.GameObject,
-            progress: number,
-        ) => void
+        progress?: ProgressCallbackType,
 
-        transitionOut?: (
-            gameObject: Phaser.GameObjects.GameObject
-        ) => Promise<any>
+        transitIn?: TransitCallbackType,
+
+        transitOut?: TransitCallbackType,
     }
 }
 
-declare function LoadingProgress(
-    gameObject: Phaser.GameObjects.GameObject,
-    config?: LoadingProgress.IConfig
-): void;
+declare class LoadingProgress extends Phaser.Events.EventEmitter {
+    constructor(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: LoadingProgress.IConfig
+    );
+}

@@ -4,385 +4,14 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexloadingprogressplugin = factory());
 })(this, (function () { 'use strict';
 
-  function _regeneratorRuntime() {
-    /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
 
-    _regeneratorRuntime = function () {
-      return exports;
-    };
-
-    var exports = {},
-        Op = Object.prototype,
-        hasOwn = Op.hasOwnProperty,
-        $Symbol = "function" == typeof Symbol ? Symbol : {},
-        iteratorSymbol = $Symbol.iterator || "@@iterator",
-        asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
-        toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-    function define(obj, key, value) {
-      return Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: !0,
-        configurable: !0,
-        writable: !0
-      }), obj[key];
-    }
-
-    try {
-      define({}, "");
-    } catch (err) {
-      define = function (obj, key, value) {
-        return obj[key] = value;
-      };
-    }
-
-    function wrap(innerFn, outerFn, self, tryLocsList) {
-      var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
-          generator = Object.create(protoGenerator.prototype),
-          context = new Context(tryLocsList || []);
-      return generator._invoke = function (innerFn, self, context) {
-        var state = "suspendedStart";
-        return function (method, arg) {
-          if ("executing" === state) throw new Error("Generator is already running");
-
-          if ("completed" === state) {
-            if ("throw" === method) throw arg;
-            return doneResult();
-          }
-
-          for (context.method = method, context.arg = arg;;) {
-            var delegate = context.delegate;
-
-            if (delegate) {
-              var delegateResult = maybeInvokeDelegate(delegate, context);
-
-              if (delegateResult) {
-                if (delegateResult === ContinueSentinel) continue;
-                return delegateResult;
-              }
-            }
-
-            if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
-              if ("suspendedStart" === state) throw state = "completed", context.arg;
-              context.dispatchException(context.arg);
-            } else "return" === context.method && context.abrupt("return", context.arg);
-            state = "executing";
-            var record = tryCatch(innerFn, self, context);
-
-            if ("normal" === record.type) {
-              if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
-              return {
-                value: record.arg,
-                done: context.done
-              };
-            }
-
-            "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
-          }
-        };
-      }(innerFn, self, context), generator;
-    }
-
-    function tryCatch(fn, obj, arg) {
-      try {
-        return {
-          type: "normal",
-          arg: fn.call(obj, arg)
-        };
-      } catch (err) {
-        return {
-          type: "throw",
-          arg: err
-        };
-      }
-    }
-
-    exports.wrap = wrap;
-    var ContinueSentinel = {};
-
-    function Generator() {}
-
-    function GeneratorFunction() {}
-
-    function GeneratorFunctionPrototype() {}
-
-    var IteratorPrototype = {};
-    define(IteratorPrototype, iteratorSymbol, function () {
-      return this;
-    });
-    var getProto = Object.getPrototypeOf,
-        NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-    NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
-    var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
-
-    function defineIteratorMethods(prototype) {
-      ["next", "throw", "return"].forEach(function (method) {
-        define(prototype, method, function (arg) {
-          return this._invoke(method, arg);
-        });
-      });
-    }
-
-    function AsyncIterator(generator, PromiseImpl) {
-      function invoke(method, arg, resolve, reject) {
-        var record = tryCatch(generator[method], generator, arg);
-
-        if ("throw" !== record.type) {
-          var result = record.arg,
-              value = result.value;
-          return value && "object" == typeof value && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
-            invoke("next", value, resolve, reject);
-          }, function (err) {
-            invoke("throw", err, resolve, reject);
-          }) : PromiseImpl.resolve(value).then(function (unwrapped) {
-            result.value = unwrapped, resolve(result);
-          }, function (error) {
-            return invoke("throw", error, resolve, reject);
-          });
-        }
-
-        reject(record.arg);
-      }
-
-      var previousPromise;
-
-      this._invoke = function (method, arg) {
-        function callInvokeWithMethodAndArg() {
-          return new PromiseImpl(function (resolve, reject) {
-            invoke(method, arg, resolve, reject);
-          });
-        }
-
-        return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
-      };
-    }
-
-    function maybeInvokeDelegate(delegate, context) {
-      var method = delegate.iterator[context.method];
-
-      if (undefined === method) {
-        if (context.delegate = null, "throw" === context.method) {
-          if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
-          context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
-        }
-
-        return ContinueSentinel;
-      }
-
-      var record = tryCatch(method, delegate.iterator, context.arg);
-      if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
-      var info = record.arg;
-      return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
-    }
-
-    function pushTryEntry(locs) {
-      var entry = {
-        tryLoc: locs[0]
-      };
-      1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
-    }
-
-    function resetTryEntry(entry) {
-      var record = entry.completion || {};
-      record.type = "normal", delete record.arg, entry.completion = record;
-    }
-
-    function Context(tryLocsList) {
-      this.tryEntries = [{
-        tryLoc: "root"
-      }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
-    }
-
-    function values(iterable) {
-      if (iterable) {
-        var iteratorMethod = iterable[iteratorSymbol];
-        if (iteratorMethod) return iteratorMethod.call(iterable);
-        if ("function" == typeof iterable.next) return iterable;
-
-        if (!isNaN(iterable.length)) {
-          var i = -1,
-              next = function next() {
-            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-
-            return next.value = undefined, next.done = !0, next;
-          };
-
-          return next.next = next;
-        }
-      }
-
-      return {
-        next: doneResult
-      };
-    }
-
-    function doneResult() {
-      return {
-        value: undefined,
-        done: !0
-      };
-    }
-
-    return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
-      var ctor = "function" == typeof genFun && genFun.constructor;
-      return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
-    }, exports.mark = function (genFun) {
-      return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
-    }, exports.awrap = function (arg) {
-      return {
-        __await: arg
-      };
-    }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-      return this;
-    }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-      void 0 === PromiseImpl && (PromiseImpl = Promise);
-      var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
-      return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
-        return result.done ? result.value : iter.next();
-      });
-    }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
-      return this;
-    }), define(Gp, "toString", function () {
-      return "[object Generator]";
-    }), exports.keys = function (object) {
-      var keys = [];
-
-      for (var key in object) keys.push(key);
-
-      return keys.reverse(), function next() {
-        for (; keys.length;) {
-          var key = keys.pop();
-          if (key in object) return next.value = key, next.done = !1, next;
-        }
-
-        return next.done = !0, next;
-      };
-    }, exports.values = values, Context.prototype = {
-      constructor: Context,
-      reset: function (skipTempReset) {
-        if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-      },
-      stop: function () {
-        this.done = !0;
-        var rootRecord = this.tryEntries[0].completion;
-        if ("throw" === rootRecord.type) throw rootRecord.arg;
-        return this.rval;
-      },
-      dispatchException: function (exception) {
-        if (this.done) throw exception;
-        var context = this;
-
-        function handle(loc, caught) {
-          return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
-        }
-
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i],
-              record = entry.completion;
-          if ("root" === entry.tryLoc) return handle("end");
-
-          if (entry.tryLoc <= this.prev) {
-            var hasCatch = hasOwn.call(entry, "catchLoc"),
-                hasFinally = hasOwn.call(entry, "finallyLoc");
-
-            if (hasCatch && hasFinally) {
-              if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-              if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-            } else if (hasCatch) {
-              if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-            } else {
-              if (!hasFinally) throw new Error("try statement without catch or finally");
-              if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-            }
-          }
-        }
-      },
-      abrupt: function (type, arg) {
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i];
-
-          if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
-            var finallyEntry = entry;
-            break;
-          }
-        }
-
-        finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
-        var record = finallyEntry ? finallyEntry.completion : {};
-        return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
-      },
-      complete: function (record, afterLoc) {
-        if ("throw" === record.type) throw record.arg;
-        return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
-      },
-      finish: function (finallyLoc) {
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i];
-          if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
-        }
-      },
-      catch: function (tryLoc) {
-        for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-          var entry = this.tryEntries[i];
-
-          if (entry.tryLoc === tryLoc) {
-            var record = entry.completion;
-
-            if ("throw" === record.type) {
-              var thrown = record.arg;
-              resetTryEntry(entry);
-            }
-
-            return thrown;
-          }
-        }
-
-        throw new Error("illegal catch attempt");
-      },
-      delegateYield: function (iterable, resultName, nextLoc) {
-        return this.delegate = {
-          iterator: values(iterable),
-          resultName: resultName,
-          nextLoc: nextLoc
-        }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
-      }
-    }, exports;
-  }
-
-  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-    try {
-      var info = gen[key](arg);
-      var value = info.value;
-    } catch (error) {
-      reject(error);
-      return;
-    }
-
-    if (info.done) {
-      resolve(value);
-    } else {
-      Promise.resolve(value).then(_next, _throw);
-    }
-  }
-
-  function _asyncToGenerator(fn) {
-    return function () {
-      var self = this,
-          args = arguments;
-      return new Promise(function (resolve, reject) {
-        var gen = fn.apply(self, args);
-
-        function _next(value) {
-          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-        }
-
-        function _throw(err) {
-          asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-        }
-
-        _next(undefined);
-      });
-    };
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
   }
 
   function _classCallCheck(instance, Constructor) {
@@ -493,6 +122,1666 @@
     };
   }
 
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get.apply(this, arguments);
+  }
+
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
+
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    }
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    }
+  };
+
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+
+      this.parent = parent; // gameObject or scene
+
+      this.scene = GetSceneObject(parent);
+      this.isShutdown = false; // Event emitter, default is private event emitter
+
+      this.setEventEmitter(GetValue$8(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+
+      if (this.parent && this.parent === this.scene) {
+        // parent is a scene
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
+      } else if (this.parent && this.parent.once) {
+        // bob object does not have event emitter
+        this.parent.once('destroy', this.onParentDestroy, this);
+      }
+    }
+
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        } // parent might not be shutdown yet
+
+
+        if (this.parent && this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
+        } else if (this.parent && this.parent.once) {
+          // bob object does not have event emitter
+          this.parent.off('destroy', this.onParentDestroy, this);
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onSceneDestroy",
+      value: function onSceneDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }]);
+
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
+  var NOOP = function NOOP() {//  NOOP
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$7 = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var FSM = /*#__PURE__*/function () {
+    /*
+    var config = {
+        start: 'A',   // default: undefined
+        states: {
+            A: {
+                next: 'B',  // function() { return 'B'; }
+                enter: function() {},
+                exit: function() {}
+            },
+            // ...
+        },        
+        extend: {
+            i: 0,
+            name: 'abc'
+            // ...
+        },
+        init: function() {},
+        enable: true,
+        eventEmitter: true,
+    };
+    */
+    function FSM(config) {
+      _classCallCheck(this, FSM);
+
+      // Attach get-next-state function
+      var states = GetValue$7(config, 'states', undefined);
+
+      if (states) {
+        this.addStates(states);
+      } // Attach extend members
+
+
+      var extend = GetValue$7(config, 'extend', undefined);
+
+      if (extend) {
+        for (var name in extend) {
+          if (!this.hasOwnProperty(name) || this[name] === undefined) {
+            this[name] = extend[name];
+          }
+        }
+      } // Event emitter
+
+
+      var eventEmitter = GetValue$7(config, 'eventEmitter', undefined);
+      var EventEmitterClass = GetValue$7(config, 'EventEmitterClass', undefined);
+      this.setEventEmitter(eventEmitter, EventEmitterClass);
+      this._stateLock = false;
+      this.resetFromJSON(config);
+    }
+
+    _createClass(FSM, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.destroyEventEmitter();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.shutdown();
+      }
+    }, {
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.setEnable(GetValue$7(o, 'enable', true));
+        this.start(GetValue$7(o, 'start', undefined));
+        var init = GetValue$7(o, 'init', undefined);
+
+        if (init) {
+          init.call(this);
+        }
+
+        return this;
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          curState: this.state,
+          prevState: this.prevState,
+          enable: this.enable,
+          start: this._start
+        };
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this._state;
+      },
+      set: function set(newState) {
+        if (!this.enable || this._stateLock) {
+          return;
+        }
+
+        if (this._state === newState) {
+          return;
+        }
+
+        this._prevState = this._state;
+        this._state = newState;
+        this._stateLock = true; // lock state
+
+        this.emit('statechange', this);
+
+        if (this._prevState != null) {
+          var exitEventName = 'exit_' + this._prevState;
+          var exitCallback = this[exitEventName];
+
+          if (exitCallback) {
+            exitCallback.call(this);
+          }
+
+          this.emit(exitEventName, this);
+        }
+
+        this._stateLock = false;
+
+        if (this._state != null) {
+          var enterEventName = 'enter_' + this._state;
+          var enterCallback = this[enterEventName];
+
+          if (enterCallback) {
+            enterCallback.call(this);
+          }
+
+          this.emit(enterEventName, this);
+        }
+      }
+    }, {
+      key: "prevState",
+      get: function get() {
+        return this._prevState;
+      }
+    }, {
+      key: "start",
+      value: function start(state) {
+        this._start = state;
+        this._prevState = undefined;
+        this._state = state; // Won't fire statechange events
+
+        return this;
+      }
+    }, {
+      key: "goto",
+      value: function goto(nextState) {
+        if (nextState != null) {
+          this.state = nextState;
+        }
+
+        return this;
+      }
+    }, {
+      key: "next",
+      value: function next() {
+        var nextState;
+        var getNextState = this['next_' + this.state];
+
+        if (getNextState) {
+          if (typeof getNextState === 'string') {
+            nextState = getNextState;
+          } else {
+            nextState = getNextState.call(this);
+          }
+        }
+
+        this["goto"](nextState);
+        return this;
+      }
+    }, {
+      key: "addState",
+      value: function addState(name, state) {
+        if (typeof name !== 'string') {
+          state = name;
+          name = state.name;
+        }
+
+        var getNextStateCallback = state.next;
+
+        if (getNextStateCallback) {
+          this['next_' + name] = getNextStateCallback;
+        }
+
+        var exitCallback = state.exit;
+
+        if (exitCallback) {
+          this['exit_' + name] = exitCallback;
+        }
+
+        var enterCallback = state.enter;
+
+        if (enterCallback) {
+          this['enter_' + name] = enterCallback;
+        }
+
+        return this;
+      }
+    }, {
+      key: "addStates",
+      value: function addStates(states) {
+        if (Array.isArray(states)) {
+          for (var i = 0, cnt = states.length; i < cnt; i++) {
+            this.addState(states[i]);
+          }
+        } else {
+          for (var name in states) {
+            this.addState(name, states[name]);
+          }
+        }
+
+        return this;
+      }
+    }, {
+      key: "runMethod",
+      value: function runMethod(methodName, a1, a2, a3, a4, a5) {
+        var fn = this[methodName + '_' + this.state];
+
+        if (!fn) {
+          return undefined;
+        } // Copy from eventemitter3
+
+
+        var len = arguments.length;
+
+        switch (len) {
+          case 1:
+            return fn.call(this);
+
+          case 2:
+            return fn.call(this, a1);
+
+          case 3:
+            return fn.call(this, a1, a2);
+
+          case 4:
+            return fn.call(this, a1, a2, a3);
+
+          case 5:
+            return fn.call(this, a1, a2, a3, a4);
+
+          case 6:
+            return fn.call(this, a1, a2, a3, a4, a5);
+        }
+
+        var args = new Array(len - 1);
+
+        for (var i = 1; i < len; i++) {
+          args[i - 1] = arguments[i];
+        }
+
+        return fn.apply(this, args);
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        this.runMethod('update', time, delta);
+      }
+    }, {
+      key: "preupdate",
+      value: function preupdate(time, delta) {
+        this.runMethod('preupdate', time, delta);
+      }
+    }, {
+      key: "postupdate",
+      value: function postupdate(time, delta) {
+        this.runMethod('postupdate', time, delta);
+      }
+    }]);
+
+    return FSM;
+  }();
+
+  Object.assign(FSM.prototype, EventEmitterMethods);
+
+  var State = /*#__PURE__*/function (_FSM) {
+    _inherits(State, _FSM);
+
+    var _super = _createSuper(State);
+
+    function State(parent, config) {
+      var _this;
+
+      _classCallCheck(this, State);
+
+      _this = _super.call(this, config);
+      _this.parent = parent;
+
+      _this.init();
+
+      return _this;
+    }
+
+    _createClass(State, [{
+      key: "init",
+      value: function init() {
+        this.start('IDLE');
+      } // IDLE -> TRANS_OPNE
+
+    }, {
+      key: "next_IDLE",
+      value: function next_IDLE() {
+        return 'TRANS_OPNE';
+      } // IDLE
+      // TRANS_OPNE -> OPEN
+
+    }, {
+      key: "next_TRANS_OPNE",
+      value: function next_TRANS_OPNE() {
+        return 'OPEN';
+      }
+    }, {
+      key: "enter_TRANS_OPNE",
+      value: function enter_TRANS_OPNE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.transitionIn();
+        transitionBehavior.delayCall(transitionBehavior.transitInTime, this.next, this);
+      }
+    }, {
+      key: "exit_TRANS_OPNE",
+      value: function exit_TRANS_OPNE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      } // TRANS_OPNE
+      // OPEN -> TRANS_CLOSE    
+
+    }, {
+      key: "next_OPEN",
+      value: function next_OPEN() {
+        return 'TRANS_CLOSE';
+      }
+    }, {
+      key: "enter_OPEN",
+      value: function enter_OPEN() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.onOpen();
+      }
+    }, {
+      key: "exit_OPEN",
+      value: function exit_OPEN() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      } // OPEN
+      // TRANS_CLOSE -> CLOSE
+
+    }, {
+      key: "next_TRANS_CLOSE",
+      value: function next_TRANS_CLOSE() {
+        return 'CLOSE';
+      }
+    }, {
+      key: "enter_TRANS_CLOSE",
+      value: function enter_TRANS_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.transitionOut();
+        transitionBehavior.delayCall(transitionBehavior.transitOutTime, this.next, this);
+      }
+    }, {
+      key: "exit_TRANS_CLOSE",
+      value: function exit_TRANS_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      } // TRANS_CLOSE
+      // CLOSE
+
+    }, {
+      key: "next_CLOSE",
+      value: function next_CLOSE() {}
+    }, {
+      key: "enter_CLOSE",
+      value: function enter_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.onClose();
+      }
+    }, {
+      key: "exit_CLOSE",
+      value: function exit_CLOSE() {} // CLOSE
+
+    }]);
+
+    return State;
+  }(FSM);
+
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay, // delay
+    sceneEE.once, // callback
+    [// Event name of scene
+    'postupdate', // Callback
+    function () {
+      callback.call(scope, args);
+    }], // args
+    sceneEE // scope, scene's EE
+    );
+    return timer;
+  };
+
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+
+  var Modal = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Modal, _ComponentBase);
+
+    var _super = _createSuper(Modal);
+
+    function Modal(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, Modal);
+
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      // this.scene
+
+      _this.setTransitInTime(GetValue$6(config, 'duration.in', 200));
+
+      _this.setTransitOutTime(GetValue$6(config, 'duration.out', 200));
+
+      _this.setTransitInCallback(GetValue$6(config, 'transitIn'));
+
+      _this.setTransitOutCallback(GetValue$6(config, 'transitOut'));
+
+      _this.destroyParent = GetValue$6(config, 'destroy', true);
+      _this.timer = undefined;
+      _this._state = new State(_assertThisInitialized(_this), {
+        eventEmitter: false
+      });
+      _this.closeEventData = undefined;
+      return _this;
+    }
+
+    _createClass(Modal, [{
+      key: "start",
+      value: function start() {
+        this._state.next();
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this._state.state;
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        this.transitInCallback = undefined;
+        this.transitOutCallback = undefined;
+        this.closeEventData = undefined;
+        this.removeDelayCall();
+
+        _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "transitionIn",
+      value: function transitionIn() {
+        var duration = this.transitInTime;
+        this.transitInCallback(this.parent, duration);
+        return this;
+      }
+    }, {
+      key: "transitionOut",
+      value: function transitionOut() {
+        var duration = this.transitOutTime;
+        this.transitOutCallback(this.parent, duration);
+        return this;
+      }
+    }, {
+      key: "onOpen",
+      value: function onOpen() {}
+    }, {
+      key: "onClose",
+      value: function onClose() {
+        if (this.destroyParent) {
+          this.parent.destroy(); // Will invoke `this.destroy()`
+        } else {
+          this.destroy();
+        }
+      }
+    }, {
+      key: "delayCall",
+      value: function delayCall(delay, callback, scope) {
+        // Invoke callback under scene's 'postupdate' event
+        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+        return this;
+      }
+    }, {
+      key: "removeDelayCall",
+      value: function removeDelayCall() {
+        if (this.timer) {
+          this.timer.remove(false);
+          this.timer = undefined;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setTransitInTime",
+      value: function setTransitInTime(time) {
+        this.transitInTime = time;
+        return this;
+      }
+    }, {
+      key: "setTransitOutTime",
+      value: function setTransitOutTime(time) {
+        this.transitOutTime = time;
+        return this;
+      }
+    }, {
+      key: "setTransitInCallback",
+      value: function setTransitInCallback(callback) {
+        if (!callback) {
+          callback = NOOP;
+        }
+
+        this.transitInCallback = callback; // callback = function(gameObject, duration) {}
+
+        return this;
+      }
+    }, {
+      key: "setTransitOutCallback",
+      value: function setTransitOutCallback(callback) {
+        if (callback == null) {
+          callback = NOOP;
+        }
+
+        this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
+
+        return this;
+      }
+    }, {
+      key: "requestClose",
+      value: function requestClose(closeEventData) {
+        // Only can close modal in OPEN state
+        if (this._state.state === 'OPEN') {
+          this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
+
+          this._state.next(); // OPEN -> TRANS_CLOSE 
+
+        }
+
+        return this;
+      }
+    }]);
+
+    return Modal;
+  }(ComponentBase);
+
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+
+  var TickTask = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(TickTask, _ComponentBase);
+
+    var _super = _createSuper(TickTask);
+
+    function TickTask(parent, config) {
+      var _this;
+
+      _classCallCheck(this, TickTask);
+
+      _this = _super.call(this, parent, config);
+      _this._isRunning = false;
+      _this.isPaused = false;
+      _this.tickingState = false;
+
+      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1)); // boot() later
+
+
+      return _this;
+    } // override
+
+
+    _createClass(TickTask, [{
+      key: "boot",
+      value: function boot() {
+        if (this.tickingMode === 2 && !this.tickingState) {
+          this.startTicking();
+        }
+      } // override
+
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        this.stop();
+
+        if (this.tickingState) {
+          this.stopTicking();
+        }
+
+        _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "setTickingMode",
+      value: function setTickingMode(mode) {
+        if (typeof mode === 'string') {
+          mode = TICKINGMODE[mode];
+        }
+
+        this.tickingMode = mode;
+      } // override
+
+    }, {
+      key: "startTicking",
+      value: function startTicking() {
+        this.tickingState = true;
+      } // override
+
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        this.tickingState = false;
+      }
+    }, {
+      key: "isRunning",
+      get: function get() {
+        return this._isRunning;
+      },
+      set: function set(value) {
+        if (this._isRunning === value) {
+          return;
+        }
+
+        this._isRunning = value;
+
+        if (this.tickingMode === 1 && value != this.tickingState) {
+          if (value) {
+            this.startTicking();
+          } else {
+            this.stopTicking();
+          }
+        }
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.isPaused = false;
+        this.isRunning = true;
+        return this;
+      }
+    }, {
+      key: "pause",
+      value: function pause() {
+        // Only can ba paused in running state
+        if (this.isRunning) {
+          this.isPaused = true;
+          this.isRunning = false;
+        }
+
+        return this;
+      }
+    }, {
+      key: "resume",
+      value: function resume() {
+        // Only can ba resumed in paused state (paused from running state)
+        if (this.isPaused) {
+          this.isRunning = true;
+        }
+
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.isPaused = false;
+        this.isRunning = false;
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.isPaused = false;
+        this.isRunning = false;
+        this.emit('complete', this.parent, this);
+      }
+    }]);
+
+    return TickTask;
+  }(ComponentBase);
+
+  var TICKINGMODE = {
+    'no': 0,
+    'lazy': 1,
+    'always': 2
+  };
+
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
+  var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
+    _inherits(SceneUpdateTickTask, _TickTask);
+
+    var _super = _createSuper(SceneUpdateTickTask);
+
+    function SceneUpdateTickTask(parent, config) {
+      var _this;
+
+      _classCallCheck(this, SceneUpdateTickTask);
+
+      _this = _super.call(this, parent, config);
+      _this.tickEventName = GetValue$4(config, 'tickEventName', 'update');
+      return _this;
+    }
+
+    _createClass(SceneUpdateTickTask, [{
+      key: "startTicking",
+      value: function startTicking() {
+        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
+
+        this.scene.sys.events.on(this.tickEventName, this.update, this);
+      }
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
+
+        if (this.scene) {
+          // Scene might be destoryed
+          this.scene.sys.events.off(this.tickEventName, this.update, this);
+        }
+      } // update(time, delta) {
+      //     
+      // }
+
+    }]);
+
+    return SceneUpdateTickTask;
+  }(TickTask);
+
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var Clamp = Phaser.Math.Clamp;
+
+  var Timer = /*#__PURE__*/function () {
+    function Timer(config) {
+      _classCallCheck(this, Timer);
+
+      this.resetFromJSON(config);
+    }
+
+    _createClass(Timer, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.state = GetValue$3(o, 'state', IDLE);
+        this.timeScale = GetValue$3(o, 'timeScale', 1);
+        this.delay = GetValue$3(o, 'delay', 0);
+        this.repeat = GetValue$3(o, 'repeat', 0);
+        this.repeatCounter = GetValue$3(o, 'repeatCounter', 0);
+        this.duration = GetValue$3(o, 'duration', 0);
+        this.nowTime = GetValue$3(o, 'nowTime', 0);
+        this.justRestart = GetValue$3(o, 'justRestart', false);
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          state: this.state,
+          timeScale: this.timeScale,
+          delay: this.delay,
+          repeat: this.repeat,
+          repeatCounter: this.repeatCounter,
+          duration: this.duration,
+          nowTime: this.nowTime,
+          justRestart: this.justRestart
+        };
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {}
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
+      }
+    }, {
+      key: "setDelay",
+      value: function setDelay(delay) {
+        if (delay === undefined) {
+          delay = 0;
+        }
+
+        this.delay = delay;
+        return this;
+      }
+    }, {
+      key: "setDuration",
+      value: function setDuration(duration) {
+        this.duration = duration;
+        return this;
+      }
+    }, {
+      key: "setRepeat",
+      value: function setRepeat(repeat) {
+        this.repeat = repeat;
+        return this;
+      }
+    }, {
+      key: "setRepeatInfinity",
+      value: function setRepeatInfinity() {
+        this.repeat = -1;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.nowTime = this.delay > 0 ? -this.delay : 0;
+        this.state = this.nowTime >= 0 ? COUNTDOWN : DELAY;
+        this.repeatCounter = 0;
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.state = IDLE;
+        return this;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (this.state === IDLE || this.state === DONE || delta === 0 || this.timeScale === 0) {
+          return;
+        }
+
+        this.nowTime += delta * this.timeScale;
+        this.state = this.nowTime >= 0 ? COUNTDOWN : DELAY;
+        this.justRestart = false;
+
+        if (this.nowTime >= this.duration) {
+          if (this.repeat === -1 || this.repeatCounter < this.repeat) {
+            this.repeatCounter++;
+            this.justRestart = true;
+            this.nowTime -= this.duration;
+          } else {
+            this.nowTime = this.duration;
+            this.state = DONE;
+          }
+        }
+      }
+    }, {
+      key: "t",
+      get: function get() {
+        var t;
+
+        switch (this.state) {
+          case IDLE:
+          case DELAY:
+            t = 0;
+            break;
+
+          case COUNTDOWN:
+            t = this.nowTime / this.duration;
+            break;
+
+          case DONE:
+            t = 1;
+            break;
+        }
+
+        return Clamp(t, 0, 1);
+      },
+      set: function set(value) {
+        value = Clamp(value, -1, 1);
+
+        if (value < 0) {
+          this.state = DELAY;
+          this.nowTime = -this.delay * value;
+        } else {
+          this.state = COUNTDOWN;
+          this.nowTime = this.duration * value;
+
+          if (value === 1 && this.repeat !== 0) {
+            this.repeatCounter++;
+          }
+        }
+      }
+    }, {
+      key: "setT",
+      value: function setT(t) {
+        this.t = t;
+        return this;
+      }
+    }, {
+      key: "isIdle",
+      get: function get() {
+        return this.state === IDLE;
+      }
+    }, {
+      key: "isDelay",
+      get: function get() {
+        return this.state === DELAY;
+      }
+    }, {
+      key: "isCountDown",
+      get: function get() {
+        return this.state === COUNTDOWN;
+      }
+    }, {
+      key: "isRunning",
+      get: function get() {
+        return this.state === DELAY || this.state === COUNTDOWN;
+      }
+    }, {
+      key: "isDone",
+      get: function get() {
+        return this.state === DONE;
+      }
+    }, {
+      key: "isOddIteration",
+      get: function get() {
+        return (this.repeatCounter & 1) === 1;
+      }
+    }, {
+      key: "isEvenIteration",
+      get: function get() {
+        return (this.repeatCounter & 1) === 0;
+      }
+    }]);
+
+    return Timer;
+  }();
+
+  var IDLE = 0;
+  var DELAY = 1;
+  var COUNTDOWN = 2;
+  var DONE = -1;
+
+  var TimerTickTask = /*#__PURE__*/function (_TickTask) {
+    _inherits(TimerTickTask, _TickTask);
+
+    var _super = _createSuper(TimerTickTask);
+
+    function TimerTickTask(parent, config) {
+      var _this;
+
+      _classCallCheck(this, TimerTickTask);
+
+      _this = _super.call(this, parent, config);
+      _this.timer = new Timer(); // boot() later 
+
+      return _this;
+    } // override
+
+
+    _createClass(TimerTickTask, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        _get(_getPrototypeOf(TimerTickTask.prototype), "shutdown", this).call(this, fromScene);
+
+        this.timer.destroy();
+        this.timer = undefined;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.timer.start();
+
+        _get(_getPrototypeOf(TimerTickTask.prototype), "start", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.timer.stop();
+
+        _get(_getPrototypeOf(TimerTickTask.prototype), "stop", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        this.timer.stop();
+
+        _get(_getPrototypeOf(TimerTickTask.prototype), "complete", this).call(this);
+
+        return this;
+      }
+    }]);
+
+    return TimerTickTask;
+  }(SceneUpdateTickTask);
+
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+
+  var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
+    _inherits(EaseValueTaskBase, _TickTask);
+
+    var _super = _createSuper(EaseValueTaskBase);
+
+    function EaseValueTaskBase() {
+      _classCallCheck(this, EaseValueTaskBase);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(EaseValueTaskBase, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.timer.resetFromJSON(GetValue$2(o, 'timer'));
+        this.setEnable(GetValue$2(o, 'enable', true));
+        this.setTarget(GetValue$2(o, 'target', this.parent));
+        this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
+        this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
+        this.setEase(GetValue$2(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$2(o, 'repeat', 0));
+        return this;
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e == undefined) {
+          e = true;
+        }
+
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setTarget",
+      value: function setTarget(target) {
+        if (target === undefined) {
+          target = this.parent;
+        }
+
+        this.target = target;
+        return this;
+      }
+    }, {
+      key: "setDelay",
+      value: function setDelay(time) {
+        this.delay = time;
+        return this;
+      }
+    }, {
+      key: "setDuration",
+      value: function setDuration(time) {
+        this.duration = time;
+        return this;
+      }
+    }, {
+      key: "setEase",
+      value: function setEase(ease) {
+        if (ease === undefined) {
+          ease = 'Linear';
+        }
+
+        this.ease = ease;
+        this.easeFn = GetEaseFunction(ease);
+        return this;
+      }
+    }, {
+      key: "setRepeat",
+      value: function setRepeat(repeat) {
+        this.repeat = repeat;
+        return this;
+      } // Override
+
+    }, {
+      key: "start",
+      value: function start() {
+        // Ignore start if timer is running, i.e. in DELAY, o RUN state
+        if (this.timer.isRunning) {
+          return this;
+        }
+
+        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "start", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "restart",
+      value: function restart() {
+        this.timer.stop();
+        this.start.apply(this, arguments);
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop(toEnd) {
+        if (toEnd === undefined) {
+          toEnd = false;
+        }
+
+        _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
+
+        if (toEnd) {
+          this.timer.setT(1);
+          this.updateGameObject(this.target, this.timer);
+          this.complete();
+        }
+
+        return this;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (!this.isRunning || !this.enable || !this.parent.active) {
+          return this;
+        }
+
+        var target = this.target,
+            timer = this.timer;
+        timer.update(time, delta); // isDelay, isCountDown, isDone
+
+        if (!timer.isDelay) {
+          this.updateGameObject(target, timer);
+        }
+
+        this.emit('update', target, this);
+
+        if (timer.isDone) {
+          this.complete();
+        }
+
+        return this;
+      } // Override
+
+    }, {
+      key: "updateGameObject",
+      value: function updateGameObject(target, timer) {}
+    }]);
+
+    return EaseValueTaskBase;
+  }(TimerTickTask);
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var Linear = Phaser.Math.Linear;
+
+  var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
+    _inherits(Scale, _EaseValueTaskBase);
+
+    var _super = _createSuper(Scale);
+
+    function Scale(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, Scale);
+
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      // this.timer
+
+      _this.scaleStart = {};
+      _this.scaleEnd = {};
+
+      _this.resetFromJSON(config);
+
+      _this.boot();
+
+      return _this;
+    }
+
+    _createClass(Scale, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Scale.prototype), "resetFromJSON", this).call(this, o);
+
+        this.setMode(GetValue$1(o, 'mode', 0));
+        this.setScaleRange(GetAdvancedValue(o, 'start', undefined), GetAdvancedValue(o, 'end', 0));
+        return this;
+      }
+    }, {
+      key: "setMode",
+      value: function setMode(m) {
+        if (typeof m === 'string') {
+          m = MODE[m];
+        }
+
+        this.mode = m;
+        return this;
+      }
+    }, {
+      key: "setScaleRange",
+      value: function setScaleRange(start, end) {
+        if (typeof start === 'number') {
+          this.startX = start;
+          this.startY = start;
+        } else {
+          this.startX = GetAdvancedValue(start, 'x', this.parent.scaleX);
+          this.startY = GetAdvancedValue(start, 'y', this.parent.scaleY);
+        }
+
+        if (typeof end === 'number') {
+          this.endX = end;
+          this.endY = end;
+        } else {
+          this.endX = GetAdvancedValue(end, 'x', undefined);
+          this.endY = GetAdvancedValue(end, 'y', undefined);
+        }
+
+        this.hasScaleX = this.startX !== undefined && this.endX !== undefined;
+        this.hasScaleY = this.startY !== undefined && this.endY !== undefined;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        if (this.timer.isRunning) {
+          return this;
+        }
+
+        var gameObject = this.parent;
+
+        if (this.hasScaleX) {
+          gameObject.scaleX = this.startX;
+        }
+
+        if (this.hasScaleY) {
+          gameObject.scaleY = this.startY;
+        }
+
+        var repeat = this.repeat;
+
+        if (this.mode === 2) {
+          // Yoyo
+          if (repeat !== -1) {
+            repeat = (repeat + 1) * 2 - 1;
+          }
+        }
+
+        this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(repeat);
+
+        _get(_getPrototypeOf(Scale.prototype), "start", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "updateGameObject",
+      value: function updateGameObject(gameObject, timer) {
+        var t = timer.t;
+
+        if (timer.isOddIteration) {
+          // Yoyo
+          t = 1 - t;
+        }
+
+        t = this.easeFn(t);
+
+        if (this.hasScaleX) {
+          gameObject.scaleX = Linear(this.startX, this.endX, t);
+        }
+
+        if (this.hasScaleY) {
+          gameObject.scaleY = Linear(this.startY, this.endY, t);
+        }
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        _get(_getPrototypeOf(Scale.prototype), "complete", this).call(this);
+
+        if (this.mode === 1) {
+          this.parent.destroy(); // Will also destroy this behavior
+        }
+
+        return this;
+      }
+    }]);
+
+    return Scale;
+  }(EaseValueTaskBase);
+
+  var MODE = {
+    stop: 0,
+    destroy: 1,
+    yoyo: 2
+  };
+
+  var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
+    if (ease === undefined) {
+      ease = 'Cubic';
+    } // Ease scale from 0 to current scale
+
+
+    var start, end;
+
+    switch (orientation) {
+      case 0:
+      case 'x':
+        start = {
+          x: 0
+        };
+        end = {
+          x: gameObject.scaleX
+        };
+        break;
+
+      case 1:
+      case 'y':
+        start = {
+          y: 0
+        };
+        end = {
+          y: gameObject.scaleY
+        };
+        break;
+
+      default:
+        start = 0;
+        end = gameObject.scale;
+        break;
+    }
+
+    var config = {
+      mode: 0,
+      start: start,
+      end: end,
+      duration: duration,
+      ease: ease
+    };
+
+    if (scale === undefined) {
+      scale = new Scale(gameObject, config);
+    } else {
+      scale.resetFromJSON(config);
+    }
+
+    scale.restart();
+    return scale;
+  };
+
+  var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
+    if (ease === undefined) {
+      ease = 'Linear';
+    } // Ease from current scale to 0
+
+
+    if (destroyMode instanceof Scale) {
+      scale = destroyMode;
+      destroyMode = undefined;
+    }
+
+    if (destroyMode === undefined) {
+      destroyMode = true;
+    }
+
+    var config = {};
+    config.mode = destroyMode ? 1 : 0;
+
+    switch (orientation) {
+      case 0:
+      case 'x':
+        config.end = {
+          x: 0
+        };
+        break;
+
+      case 1:
+      case 'y':
+        config.end = {
+          y: 0
+        };
+        break;
+
+      default:
+        config.end = 0;
+        break;
+    }
+
+    config.duration = duration;
+    config.ease = ease;
+
+    if (scale === undefined) {
+      scale = new Scale(gameObject, config);
+    } else {
+      scale.resetFromJSON(config);
+    }
+
+    scale.restart();
+    return scale;
+  };
+
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var UUID = Phaser.Utils.String.UUID;
 
@@ -594,94 +1883,7 @@
     return this;
   };
 
-  var WaitEvent = function WaitEvent(eventEmitter, eventName) {
-    return new Promise(function (resolve, reject) {
-      eventEmitter.once(eventName, function () {
-        resolve();
-      });
-    });
-  };
-
-  var NOOP = function NOOP() {//  NOOP
-  };
-
-  var GetValue = Phaser.Utils.Objects.GetValue;
-
-  var LoadingProgress = function LoadingProgress(gameObject, config) {
-    var TransitionInCallback = GetValue(config, 'transitIn', NOOP);
-    var ProgressCallback = GetValue(config, 'progress', NOOP);
-    var TransitionOutCallback = GetValue(config, 'transitionOut', NOOP);
-    var scene = gameObject.scene; // Register AwaitLoader
-
-    if (!scene.sys.load.rexAwait) {
-      Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
-      scene.sys.load.rexAwait = loaderCallback;
-    } // Add await-task
-
-
-    scene.load.rexAwait( /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(successCallback, failureCallback) {
-        var progress;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return TransitionInCallback(gameObject);
-
-              case 2:
-                progress = GetProgress(scene);
-
-                if (!(progress < 1)) {
-                  _context.next = 13;
-                  break;
-                }
-
-              case 4:
-                if (!(progress < 1)) {
-                  _context.next = 11;
-                  break;
-                }
-
-                _context.next = 7;
-                return WaitEvent(scene.load, 'progress');
-
-              case 7:
-                progress = GetProgress(scene);
-                ProgressCallback(gameObject, progress);
-                _context.next = 4;
-                break;
-
-              case 11:
-                _context.next = 14;
-                break;
-
-              case 13:
-                // Progress is 1 already
-                ProgressCallback(gameObject, progress);
-
-              case 14:
-                _context.next = 16;
-                return TransitionOutCallback(gameObject);
-
-              case 16:
-                gameObject.destroy(); // Finish this loading task, goto create stage
-
-                successCallback();
-
-              case 18:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function (_x, _x2) {
-        return _ref.apply(this, arguments);
-      };
-    }());
-  };
+  Phaser.Loader.FileTypesManager.register('rexAwait', loaderCallback);
 
   var GetProgress = function GetProgress(scene) {
     var loader = scene.load;
@@ -691,16 +1893,102 @@
     return progress;
   };
 
-  var Delay = function Delay(time, result) {
-    if (time === undefined) {
-      time = 0;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+
+  var LoadingProgress = /*#__PURE__*/function (_Transition) {
+    _inherits(LoadingProgress, _Transition);
+
+    var _super = _createSuper(LoadingProgress);
+
+    function LoadingProgress(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, LoadingProgress);
+
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (!config.hasOwnProperty('transitIn')) {
+        config.transitIn = PopUp;
+      }
+
+      if (!config.hasOwnProperty('transitOut')) {
+        config.transitOut = ScaleDown;
+      }
+
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      // this.scene
+
+      _this.setProgressCallback(GetValue(config, 'progress'));
+
+      _this.start();
+
+      return _this;
     }
 
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        resolve(result);
-      }, time);
-    });
+    _createClass(LoadingProgress, [{
+      key: "setProgressCallback",
+      value: function setProgressCallback(callback) {
+        if (!callback) {
+          callback = NOOP;
+        }
+
+        this.progressCallback = callback;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        var self = this;
+        loaderCallback.call(this.scene.load, function (successCallback, failureCallback) {
+          self.once('complete', successCallback);
+        });
+
+        _get(_getPrototypeOf(LoadingProgress.prototype), "start", this).call(this);
+      }
+    }, {
+      key: "onOpen",
+      value: function onOpen() {
+        this.scene.load.on('progress', this.onProgress, this);
+
+        _get(_getPrototypeOf(LoadingProgress.prototype), "onOpen", this).call(this);
+
+        this.onProgress(); // Might requestClose if progress === 1
+      }
+    }, {
+      key: "onClose",
+      value: function onClose() {
+        this.scene.load.off('progress', this.onProgress, this);
+        this.emit('complete');
+
+        _get(_getPrototypeOf(LoadingProgress.prototype), "onClose", this).call(this);
+      }
+    }, {
+      key: "onProgress",
+      value: function onProgress() {
+        var progress = GetProgress(this.scene);
+        this.progressCallback(this.parent, progress);
+
+        if (progress === 1) {
+          this.requestClose();
+        }
+      }
+    }, {
+      key: "requestClose",
+      value: function requestClose(closeEventData) {
+        _get(_getPrototypeOf(LoadingProgress.prototype), "requestClose", this).call(this, closeEventData);
+
+        return this;
+      }
+    }]);
+
+    return LoadingProgress;
+  }(Modal);
+
+  var ScaleDown = function ScaleDown(gameObject, duration) {
+    // Don't destroy here
+    ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
   };
 
   var LoadingProgressPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
@@ -717,12 +2005,7 @@
     _createClass(LoadingProgressPlugin, [{
       key: "add",
       value: function add(gameObject, config) {
-        LoadingProgress(gameObject, config);
-      }
-    }, {
-      key: "addDelayPromise",
-      value: function addDelayPromise(time) {
-        return Delay(time);
+        return new LoadingProgress(gameObject, config);
       }
     }]);
 

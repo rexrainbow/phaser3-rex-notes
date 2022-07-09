@@ -18,10 +18,28 @@ class Demo extends Phaser.Scene {
                 out: 300,
             },
 
-            progress: function (gameObject, progress) {
+            progress(gameObject, progress) {
                 // Present progress changing
                 gameObject.setValue(progress);
-            }
+            },
+
+            transitIn(gameObject, duration) {
+                var scene = gameObject.scene;
+                scene.tweens.add({
+                    targets: gameObject,
+                    duration: duration,
+                    y: { start: -100, to: gameObject.y }
+                })
+            },
+
+            transitOut(gameObject, duration) {
+                var scene = gameObject.scene;
+                scene.tweens.add({
+                    targets: gameObject,
+                    duration: duration,
+                    y: { start: gameObject.y, to: 700 },
+                })
+            },
         });
         // ui will be destroyed after loading completed
 

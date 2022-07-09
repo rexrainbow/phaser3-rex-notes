@@ -43,10 +43,6 @@ class Modal extends Transition {
         this.start();
     }
 
-    get state() {
-        return this._state.state;
-    }
-
     shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {

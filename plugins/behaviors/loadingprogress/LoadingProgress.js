@@ -1,58 +1,81 @@
-import LoaderCallback from '../../loader/awaitloader/AwaitLoaderCallback.js';
-import { WaitEvent } from '../../utils/promise/WaitEvent.js';
+import Transition from '../transition/Transition.js';
+import PopUp from '../../popup.js';
+import ScaleDownDestroy from '../../scale-down-destroy.js';
 import NOOP from '../../utils/object/NOOP.js';
+import AwaitLoader from '../../awaitloader.js';
+import GetProgress from './GetProgress.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var LoadingProgress = function (gameObject, config) {
-    var TransitionInCallback = GetValue(config, 'transitIn', NOOP);
-    var ProgressCallback = GetValue(config, 'progress', NOOP);
-    var TransitionOutCallback = GetValue(config, 'transitionOut', NOOP);
-
-    var scene = gameObject.scene;
-
-    // Register AwaitLoader
-    if (!scene.sys.load.rexAwait) {
-        Phaser.Loader.FileTypesManager.register('rexAwait', LoaderCallback);
-        scene.sys.load.rexAwait = LoaderCallback;
-    }
-
-    // Add await-task
-    scene.load.rexAwait(async function (successCallback, failureCallback) {
-        // Transition-in
-        await TransitionInCallback(gameObject);
-
-        var progress = GetProgress(scene);
-        if (progress < 1) {
-            // Present loading progress
-            while (progress < 1) {
-                await WaitEvent(scene.load, 'progress');
-
-                progress = GetProgress(scene);
-                ProgressCallback(gameObject, progress);
-            }
-        } else {
-            // Progress is 1 already
-            ProgressCallback(gameObject, progress);
+class LoadingProgress extends Transition {
+    constructor(gameObject, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        if (!config.hasOwnProperty('transitIn')) {
+            config.transitIn = PopUp;
+        }
+        if (!config.hasOwnProperty('transitOut')) {
+            config.transitOut = ScaleDown;
         }
 
-        // Transition-out
-        await TransitionOutCallback(gameObject);
+        super(gameObject, config);
+        // this.parent = gameObject;
+        // this.scene
 
-        gameObject.destroy();
+        this.setProgressCallback(GetValue(config, 'progress'));
 
-        // Finish this loading task, goto create stage
-        successCallback();
-    });
+        this.start();
+    }
+
+    setProgressCallback(callback) {
+        if (!callback) {
+            callback = NOOP;
+        }
+
+        this.progressCallback = callback;
+        return this;
+    }
+
+    start() {
+        var self = this;
+        AwaitLoader.call(this.scene.load, function (successCallback, failureCallback) {
+            self.once('complete', successCallback);
+        })
+
+        super.start();
+    }
+
+    onOpen() {
+        this.scene.load.on('progress', this.onProgress, this);
+        super.onOpen();
+        this.onProgress(); // Might requestClose if progress === 1
+    }
+
+    onClose() {
+        this.scene.load.off('progress', this.onProgress, this);
+        this.emit('complete');
+        super.onClose();
+    }
+
+    onProgress() {
+        var progress = GetProgress(this.scene);
+        this.progressCallback(this.parent, progress);
+        if (progress === 1) {
+            this.requestClose();
+        }
+    }
+
+    requestClose(closeEventData) {
+
+        super.requestClose(closeEventData);
+        return this;
+    }
 }
 
-var GetProgress = function (scene) {
-    var loader = scene.load;
-    var total = loader.totalToLoad - 1;
-    var remainder = loader.list.size + loader.inflight.size - 1;
-    var progress = 1 - (remainder / total);
-    return progress;
+var ScaleDown = function (gameObject, duration) {
+    // Don't destroy here
+    ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
 }
-
 
 export default LoadingProgress;
