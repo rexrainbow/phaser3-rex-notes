@@ -40,7 +40,7 @@ class LoadingProgress extends Transition {
     start() {
         var self = this;
         AwaitLoader.call(this.scene.load, function (successCallback, failureCallback) {
-            self.once('complete', successCallback);
+            self.once('close', successCallback);
         })
 
         super.start();
@@ -48,28 +48,24 @@ class LoadingProgress extends Transition {
 
     onOpen() {
         this.scene.load.on('progress', this.onProgress, this);
+        this.emit('open', this.parent, this);
         super.onOpen();
         this.onProgress(); // Might requestClose if progress === 1
     }
 
     onClose() {
         this.scene.load.off('progress', this.onProgress, this);
-        this.emit('complete');
+        this.emit('close', this.closeEventData);
         super.onClose();
     }
 
     onProgress() {
         var progress = GetProgress(this.scene);
         this.progressCallback(this.parent, progress);
+        this.emit('progress', progress);
         if (progress === 1) {
             this.requestClose();
         }
-    }
-
-    requestClose(closeEventData) {
-
-        super.requestClose(closeEventData);
-        return this;
     }
 }
 

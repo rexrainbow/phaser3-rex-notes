@@ -1942,7 +1942,7 @@
       value: function start() {
         var self = this;
         loaderCallback.call(this.scene.load, function (successCallback, failureCallback) {
-          self.once('complete', successCallback);
+          self.once('close', successCallback);
         });
 
         _get(_getPrototypeOf(LoadingProgress.prototype), "start", this).call(this);
@@ -1951,6 +1951,7 @@
       key: "onOpen",
       value: function onOpen() {
         this.scene.load.on('progress', this.onProgress, this);
+        this.emit('open', this.parent, this);
 
         _get(_getPrototypeOf(LoadingProgress.prototype), "onOpen", this).call(this);
 
@@ -1960,7 +1961,7 @@
       key: "onClose",
       value: function onClose() {
         this.scene.load.off('progress', this.onProgress, this);
-        this.emit('complete');
+        this.emit('close', this.closeEventData);
 
         _get(_getPrototypeOf(LoadingProgress.prototype), "onClose", this).call(this);
       }
@@ -1969,17 +1970,11 @@
       value: function onProgress() {
         var progress = GetProgress(this.scene);
         this.progressCallback(this.parent, progress);
+        this.emit('progress', progress);
 
         if (progress === 1) {
           this.requestClose();
         }
-      }
-    }, {
-      key: "requestClose",
-      value: function requestClose(closeEventData) {
-        _get(_getPrototypeOf(LoadingProgress.prototype), "requestClose", this).call(this, closeEventData);
-
-        return this;
       }
     }]);
 
