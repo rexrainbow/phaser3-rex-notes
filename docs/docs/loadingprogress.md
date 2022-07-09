@@ -62,9 +62,9 @@ var loadingProgress = scene.plugins.get('rexLoadingProgress').add(gameObject, {
     //     out: 200
     // }
 
-    // progress: undefined,
-    // transitIn: undefined,
-    // transitOut: undefined,
+    // progress: function(gameObject, progress) {},
+    // transitIn: function(gameObject, duration) {},
+    // transitOut: function(gameObject, duration) {},
 });
 ```
 
