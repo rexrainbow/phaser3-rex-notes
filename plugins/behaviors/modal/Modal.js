@@ -1,17 +1,23 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import Transition from '../transition/Transition.js';
 import CreateCover from './CreateCover.js';
-import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
-import NOOP from '../../utils/object/NOOP.js';
-import State from './State.js';
 import FadeIn from '../../fade-in.js';
 import FadeOutDestroy from '../../fade-out-destroy.js';
-import PostUpdateDelayCall from '../../utils/time/PostUpdateDelayCall.js';
+import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Timer = Phaser.Time.TimerEvent;
 
-class Modal extends ComponentBase {
+class Modal extends Transition {
     constructor(gameObject, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        if (!config.hasOwnProperty('transitIn')) {
+            config.transitIn = TransitionMode.popUp;
+        }
+        if (!config.hasOwnProperty('transitOut')) {
+            config.transitOut = TransitionMode.scaleDown;
+        }
+
         super(gameObject, config);
         // this.parent = gameObject;
         // this.scene
@@ -34,18 +40,7 @@ class Modal extends ComponentBase {
             this.setDisplayTime(-1);
         }
 
-        this.setTransitInTime(GetValue(config, 'duration.in', 200));
-        this.setTransitOutTime(GetValue(config, 'duration.out', 200));
-        this.setTransitInCallback(GetValue(config, 'transitIn', TransitionMode.popUp));
-        this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
-        this.destroyParent = GetValue(config, 'destroy', true);
-
-        this.timer = undefined;
-        this._state = new State(this, { eventEmitter: false });
-        this.closeEventData = undefined;
-
-        // Start
-        this._state.next();
+        this.start();
     }
 
     get state() {
@@ -68,12 +63,6 @@ class Modal extends ComponentBase {
             this.cover = undefined;
         }
 
-        this.transitInCallback = undefined;
-        this.transitOutCallback = undefined;
-        this.closeEventData = undefined;
-
-        this.removeDelayCall();
-
         super.shutdown(fromScene);
     }
 
@@ -87,9 +76,9 @@ class Modal extends ComponentBase {
     }
 
     transitionIn() {
-        var duration = this.transitInTime;
-        this.transitInCallback(this.parent, duration);
+        super.transitionIn();
 
+        var duration = this.transitInTime;
         var cover = this.cover;
         if (cover) {
             FadeIn(cover, duration, cover.alpha);
@@ -99,9 +88,9 @@ class Modal extends ComponentBase {
     }
 
     transitionOut() {
-        var duration = this.transitOutTime;
-        this.transitOutCallback(this.parent, duration);
+        super.transitionOut();
 
+        var duration = this.transitOutTime;
         var cover = this.cover;
         if (cover) {
             FadeOutDestroy(cover, duration, false);
@@ -111,46 +100,28 @@ class Modal extends ComponentBase {
     }
 
     onOpen() {
+        var duration = this.displayTime;
+        if (duration >= 0) {
+            this.delayCall(
+                duration,
+                this.requestClose, // callback
+                this               // scope
+            );
+        }
+
         this.emit('open', this.parent, this);
+
+        super.onOpen();
     }
 
     onClose() {
         this.emit('close', this.closeEventData);
 
-        if (this.destroyParent) {
-            this.parent.destroy();
-            // Will invoke `this.destroy()`
-        } else {
-            this.destroy();
-        }
-    }
-
-    delayCall(delay, callback, scope) {
-        // Invoke callback under scene's 'postupdate' event
-        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
-        return this;
-    }
-
-    removeDelayCall() {
-        if (this.timer) {
-            this.timer.remove(false);
-            this.timer = undefined;
-        }
-        return this;
-    }
-
-    setTransitInTime(time) {
-        this.transitInTime = time;
-        return this;
+        super.onClose();
     }
 
     setDisplayTime(time) {
         this.displayTime = time;
-        return this;
-    }
-
-    setTransitOutTime(time) {
-        this.transitOutTime = time;
         return this;
     }
 
@@ -168,11 +139,7 @@ class Modal extends ComponentBase {
                 break;
         }
 
-        if (!callback) {
-            callback = NOOP;
-        }
-
-        this.transitInCallback = callback;
+        super.setTransitInCallback(callback);
         // callback = function(gameObject, duration) {}
         return this;
     }
@@ -191,23 +158,11 @@ class Modal extends ComponentBase {
                 break;
         }
 
-        if (callback == null) {
-            callback = NOOP;
-        }
-
-        this.transitOutCallback = callback;
+        super.setTransitOutCallback(callback);
         // callback = function(gameObject, duration) {}
         return this;
     }
 
-    requestClose(closeEventData) {
-        // Only can close modal in OPEN state
-        if (this._state.state === 'OPEN') {
-            this.closeEventData = (arguments.length > 0) ? closeEventData : this.parent;
-            this._state.next(); // OPEN -> TRANS_CLOSE 
-        }
-        return this;
-    }
 }
 
 const TransitionMode = {
