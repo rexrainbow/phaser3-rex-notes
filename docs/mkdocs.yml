@@ -130,7 +130,10 @@ nav:
             - Group actions: groupactions.md
             - Quad/Hexagon grid align: gridalign.md
             - Random place: randomplace.md
-        - Move to: moveto.md
+        - Position:
+            - Move to: moveto.md
+            - Ease-move: easemove.md
+            - Shake position: shake-position.md
         - Rotate to: rotateto.md
         - Rotate: rotate.md
         - Flash: flash.md
@@ -139,12 +142,11 @@ nav:
         - Coordinate:
             - Polar-coordinate: polar-coordinate.md
             - Viewport-coordinate: viewport-coordinate.md
-        - Shake position: shake-position.md
         - Fade out destroy: fadeoutdestroy.md
-        - Pop up: popup.md
-        - Scale down destroy: scaledowndestroy.md
+        - Scale:
+            - Pop up: popup.md
+            - Scale down destroy: scaledowndestroy.md
         - Flip: flip.md
-        - Ease-move: easemove.md
         - Ease-data: easedata.md
         - Path follower: pathfollower.md
         - Anchor: anchor.md
@@ -154,6 +156,7 @@ nav:
         - Modal:
             - Modal behavior: modal.md
             - Modal promise: modal-promise.md
+        - Loading progress: loadingprogress.md
         - Arcade:
             - Engine:
                 - World: arcade-world.md
