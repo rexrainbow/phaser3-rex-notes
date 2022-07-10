@@ -293,9 +293,8 @@ class CSVScenario {
             return;
         }
 
-        var threadId = this.threadId;
         var instMem = this.instMem;
-        var inst, cmdHandler;
+        var inst;
         this._inRunCmdLoop = true;
         while (
             this.isRunning &&

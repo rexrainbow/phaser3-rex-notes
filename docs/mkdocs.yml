@@ -22,6 +22,7 @@ nav:
     - Await loader: awaitloader.md
     - Script tag loader: scripttagloader.md
     - Image URI loader: imageuriloader.md
+    - Loading progress: loadingprogress.md
 - Game object:
     - Game object: gameobject.md
     - Sprite:
@@ -155,8 +156,7 @@ nav:
         - Particles along bounds: particles-along-bounds.md
         - Modal:
             - Modal behavior: modal.md
-            - Modal promise: modal-promise.md
-        - Loading progress: loadingprogress.md
+            - Modal promise: modal-promise.md        
         - Arcade:
             - Engine:
                 - World: arcade-world.md
