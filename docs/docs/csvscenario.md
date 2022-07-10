@@ -186,6 +186,12 @@ eventName,fnName,param0,param1,...
 - Execution will be hang until `scenario.continue(eventName)` is called
 - Parameters will be converted to number, boolean, null, or string by default.
 
+##### Skip waiting
+
+```javascript
+scenario.continue(true);
+```
+
 ##### Task
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/task.js)
@@ -315,12 +321,6 @@ Example:
     ```javascript
     scenario.continue('click');
     ```
-
-##### Skip waiting
-
-```javascript
-scenario.continue(true);
-```
 
 ### Pause
 

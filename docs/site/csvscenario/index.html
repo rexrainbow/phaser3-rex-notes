@@ -5193,6 +5193,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#skip-waiting" class="md-nav__link">
+    Skip waiting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#task" class="md-nav__link">
     Task
   </a>
@@ -5236,19 +5243,6 @@
   <a href="#wait" class="md-nav__link">
     Wait
   </a>
-  
-    <nav class="md-nav" aria-label="Wait">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#skip-waiting" class="md-nav__link">
-    Skip waiting
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -8634,6 +8628,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#skip-waiting" class="md-nav__link">
+    Skip waiting
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#task" class="md-nav__link">
     Task
   </a>
@@ -8677,19 +8678,6 @@
   <a href="#wait" class="md-nav__link">
     Wait
   </a>
-  
-    <nav class="md-nav" aria-label="Wait">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#skip-waiting" class="md-nav__link">
-    Skip waiting
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -8905,6 +8893,9 @@
 <li>Execution will be hang until <code>scenario.continue(eventName)</code> is called</li>
 <li>Parameters will be converted to number, boolean, null, or string by default.</li>
 </ul>
+<h5 id="skip-waiting">Skip waiting<a class="headerlink" href="#skip-waiting" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
 <h5 id="task">Task<a class="headerlink" href="#task" title="Permanent link">&para;</a></h5>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/task.js">Sample code</a></p>
 <p>Scenario will be paused if custom function return an <a href="../eventemitter3/">event emitter</a>, resumed when that evnt emitter fires <code>complete</code> event.</p>
@@ -9001,9 +8992,6 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h5 id="skip-waiting">Skip waiting<a class="headerlink" href="#skip-waiting" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</code></pre></div>
 <h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
