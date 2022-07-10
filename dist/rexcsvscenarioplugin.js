@@ -999,6 +999,7 @@
       this.setEventEmitter(GetValue$4(config, 'eventEmitter', undefined));
       this.scene = scene;
       this.timer = undefined;
+      this._timeScale = 1;
       this.instMem = new InstMem(this);
       this.cmdHandlers = new CmdHandlers(this);
       this.resetFromJSON(config);
@@ -1142,6 +1143,24 @@
         return true;
       }
     }, {
+      key: "timeScale",
+      get: function get() {
+        return this._timeScale;
+      },
+      set: function set(value) {
+        this._timeScale = value;
+
+        if (this.timer) {
+          this.timer.timeScale = value;
+        }
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
+      }
+    }, {
       key: "wait",
       value: function wait(eventName) {
         this.waitEvent = eventName;
@@ -1154,6 +1173,7 @@
           }
 
           this.timer = this.scene.time.delayedCall(delay, this["continue"], [eventName], this);
+          this.timer.timeScale = this._timeScale;
         }
 
         return this;
@@ -1238,9 +1258,14 @@
           return this;
         }
 
-        if (eventName === this.waitEvent) {
-          this.timer = undefined;
+        if (eventName === true || eventName === this.waitEvent) {
           this.waitEvent = undefined;
+
+          if (this.timer) {
+            this.timer.remove();
+            this.timer = undefined;
+          }
+
           this.runNextCmd();
         }
 
@@ -1331,7 +1356,6 @@
           return;
         }
 
-        this.threadId;
         var instMem = this.instMem;
         var inst;
         this._inRunCmdLoop = true;

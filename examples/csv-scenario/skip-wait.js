@@ -3,7 +3,7 @@ import CSVScenarioPlugin from '../../plugins/csvscenario-plugin.js';
 
 var csvString =
     `0,print,hello
-2,print,world
+200,print,world
 click,print,scenario`;
 
 class ActionKlass extends Phaser.Events.EventEmitter {
@@ -47,7 +47,7 @@ class Demo extends Phaser.Scene {
             })
             .start();
 
-        // scenario.setTimeScale(0.5);
+        scenario.continue(true);
     }
 
     update() { }

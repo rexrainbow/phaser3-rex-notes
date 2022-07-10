@@ -316,6 +316,12 @@ Example:
     scenario.continue('click');
     ```
 
+##### Skip waiting
+
+```javascript
+scenario.continue(true);
+```
+
 ### Pause
 
 ```javascript
@@ -327,6 +333,18 @@ scenario.pause();
 ```javascript
 scenario.resume();
 ```
+
+### Time-scale
+
+- Get
+    ```javascript
+    var timeScale = scenario.timeScale;
+    ```
+- Set
+    ```javascript
+    scenario.setTimeScale(timeScale);
+    // scenario.timeScale = timeScale;
+    ```
 
 ### Clear
 

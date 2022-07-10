@@ -12,6 +12,7 @@ class CSVScenario {
 
         this.scene = scene;
         this.timer = undefined;
+        this._timeScale = 1;
         this.instMem = new InstMem(this);
         this.cmdHandlers = new CmdHandlers(this);
         this.resetFromJSON(config);
@@ -135,6 +136,22 @@ class CSVScenario {
         return true;
     }
 
+    get timeScale() {
+        return this._timeScale;
+    }
+
+    set timeScale(value) {
+        this._timeScale = value;
+        if (this.timer) {
+            this.timer.timeScale = value;
+        }
+    }
+
+    setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
+    }
+
     wait(eventName) {
         this.waitEvent = eventName;
         if (typeof (eventName) === 'number') {
@@ -143,6 +160,7 @@ class CSVScenario {
                 delay *= 1000;
             }
             this.timer = this.scene.time.delayedCall(delay, this.continue, [eventName], this);
+            this.timer.timeScale = this._timeScale;
         }
         return this;
     }
@@ -216,9 +234,12 @@ class CSVScenario {
             return this;
         }
 
-        if (eventName === this.waitEvent) {
-            this.timer = undefined;
+        if ((eventName === true) || (eventName === this.waitEvent)) {
             this.waitEvent = undefined;
+            if (this.timer) {
+                this.timer.remove();
+                this.timer = undefined;
+            }
             this.runNextCmd();
         }
         return this;

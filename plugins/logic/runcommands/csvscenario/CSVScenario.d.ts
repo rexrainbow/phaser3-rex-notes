@@ -60,6 +60,7 @@ declare class CSVScenario extends Phaser.Events.EventEmitter {
     ): this;
 
     continue(eventName: string): this;
+    continue(force: true): this;
 
     pause(): this;
 
@@ -71,4 +72,7 @@ declare class CSVScenario extends Phaser.Events.EventEmitter {
     readonly isPaused: boolean;
     readonly lastLabel: string;
     readonly previousLabel: string;
+
+    setTimeScale(timeScale: number): this;
+    timeScale: number;
 }
