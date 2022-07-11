@@ -135,6 +135,11 @@ class Player extends ComponentBase {
         return this;
     }
 
+    skipWaiting() {
+        this.seek(this.nextTime);
+        return this;
+    }
+
     get isPlaying() {
         return this.clock.isRunning;
     }

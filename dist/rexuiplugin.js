@@ -41962,6 +41962,12 @@
         return this;
       }
     }, {
+      key: "skipWaiting",
+      value: function skipWaiting() {
+        this.seek(this.nextTime);
+        return this;
+      }
+    }, {
       key: "isPlaying",
       get: function get() {
         return this.clock.isRunning;
