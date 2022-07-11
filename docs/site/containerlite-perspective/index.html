@@ -8618,13 +8618,19 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspective</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPerspectiveImagePlugin&#39;</span><span class="p">).</span><span class="nx">addContainerPerspective</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">useParentBounds</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="nx">useParentBounds</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// hideCCW: true,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>useParentBounds</code> :<ul>
 <li><code>true</code> : Use bounds of parent container</li>
 <li><code>false</code> : Union all visible children's bounds</li>
+</ul>
+</li>
+<li><code>hideCCW</code> :<ul>
+<li><code>true</code> : Hide backward facing Faces. Default behavior.</li>
+<li><code>false</code> : Show backward facing Faces</li>
 </ul>
 </li>
 </ul>

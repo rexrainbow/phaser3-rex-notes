@@ -8650,6 +8650,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/pobEQLN">Flip card</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/KKoMqLO">Label front face</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-card">Sample code</a></p>
@@ -8703,7 +8704,7 @@
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">card</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">card</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveCard</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="nx">back</span><span class="o">:</span> <span class="p">{</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">},</span>
@@ -8730,7 +8731,7 @@
 <li><code>{key, frame}</code> : Texture key and frame name, to create <a href="perspective-image">perspective image</a></li>
 <li><code>{width, height}</code> : Width and height, to create <a href="../perspective-rendertexture/">perspective render texture</a>.</li>
 <li><a href="perspective-image">Perspective image</a></li>
-<li><a href="../perspective-rendertexture/">Perspective render texture</a>.</li>
+<li><a href="../perspective-rendertexture/">Perspective render texture</a></li>
 </ul>
 </li>
 <li><code>face</code> : Show front or back face.<ul>
@@ -8760,8 +8761,8 @@
 </ul>
 </li>
 </ul>
-<p>Add perspectiveimage from JSON</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspectiveimage</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+<p>Add card from JSON</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">card</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexPerspectiveCard</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
