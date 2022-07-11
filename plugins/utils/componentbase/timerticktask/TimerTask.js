@@ -1,4 +1,4 @@
-import TickTask from "../SceneUpdateTickTask";
+import TickTask from '../SceneUpdateTickTask.js';
 import Timer from './Timer.js';
 
 class TimerTickTask extends TickTask {

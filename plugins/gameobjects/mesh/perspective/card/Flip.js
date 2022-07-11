@@ -68,6 +68,7 @@ class Flip extends EaseValueTaskBase {
             this.setDuration(duration);
         }
         this.start();
+        this.emit('start', this.parent, this);
 
         // Set face index
         var faceIndex = this.parent.currentFaceIndex;
