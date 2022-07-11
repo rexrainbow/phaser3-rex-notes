@@ -15,7 +15,6 @@ class Demo extends Phaser.Scene {
 
     create() {
         var card0 = CreateCard(this, 200, 300);
-        var card1 = CreateCard(this, 400, 300);
         var card2 = CreateCard(this, 600, 300);
     }
 
@@ -41,7 +40,6 @@ var CreateCard = function (scene, x, y) {
             ease: 'Cubic'
         }
     })
-        .setScale(0.5)
         .setInteractive()
         .on('pointerdown', function (pointer, localX, localY) {
             if (localX <= (this.width / 2)) {
