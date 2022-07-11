@@ -77,7 +77,7 @@ A [container](containerlite.md) with two [perspective-images](perspective-image.
 ### Create instance
 
 ```javascript
-var card = scene.add.rexPerspectiveImage({
+var card = scene.add.rexPerspectiveCard({
     x: 0, y: 0,
 
     back: {key, frame},
@@ -104,7 +104,7 @@ var card = scene.add.rexPerspectiveImage({
     - `{key, frame}` : Texture key and frame name, to create [perspective image](perspective-image)
     - `{width, height}` : Width and height, to create [perspective render texture](perspective-rendertexture.md).
     - [Perspective image](perspective-image)
-    - [Perspective render texture](perspective-rendertexture.md).
+    - [Perspective render texture](perspective-rendertexture.md)
 - `face` : Show front or back face.
     - `'front'`, or `0` : Show front face.
     - `'back'`, or `1` : Show back face.
@@ -123,10 +123,10 @@ var card = scene.add.rexPerspectiveImage({
     - `false` : Don't add flipping behavior.
 
 
-Add perspectiveimage from JSON
+Add card from JSON
 
 ```javascript
-var perspectiveimage = scene.make.rexPerspectiveImage({
+var card = scene.make.rexPerspectiveCard({
     x: 0,
     y: 0,
 

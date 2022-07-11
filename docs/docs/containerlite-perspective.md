@@ -77,13 +77,17 @@ Snapshot children of [containerlite](containerlite.md), to a [perspective render
 
 ```javascript
 var perspective = scene.plugins.get('rexPerspectiveImagePlugin').addContainerPerspective(container, {
-    useParentBounds: false
+    useParentBounds: false,
+    // hideCCW: true,
 });
 ```
 
 - `useParentBounds` :
     - `true` : Use bounds of parent container
     - `false` : Union all visible children's bounds
+- `hideCCW` :
+    - `true` : Hide backward facing Faces. Default behavior.
+    - `false` : Show backward facing Faces
 
 ### Perspective mode
 
