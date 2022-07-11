@@ -43625,115 +43625,6 @@
     return Image;
   }(Mesh$1);
 
-  var RT$1 = Phaser.GameObjects.RenderTexture;
-  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
-
-  var RenderTexture = /*#__PURE__*/function (_Image) {
-    _inherits(RenderTexture, _Image);
-
-    var _super = _createSuper(RenderTexture);
-
-    function RenderTexture(scene, x, y, width, height, config) {
-      var _this;
-
-      _classCallCheck(this, RenderTexture);
-
-      if (IsPlainObject$4(x)) {
-        config = x;
-        x = GetValue$9(config, 'x', 0);
-        y = GetValue$9(config, 'y', 0);
-        width = GetValue$9(config, 'width', 32);
-        height = GetValue$9(config, 'height', 32);
-      } // render-texture -> perspective-image
-
-
-      var rt = new RT$1(scene, x, y, width, height).setOrigin(0.5);
-      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
-      _this.type = 'rexPerspectiveRenderTexture';
-      _this.rt = rt;
-      return _this;
-    }
-
-    _createClass(RenderTexture, [{
-      key: "destroy",
-      value: function destroy(fromScene) {
-        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-
-        this.rt.destroy();
-        this.rt = null;
-      }
-    }]);
-
-    return RenderTexture;
-  }(Image$2);
-
-  Phaser.Animations.AnimationState;
-  Phaser.Utils.Objects.IsPlainObject;
-  Phaser.Utils.Objects.GetValue;
-
-  Phaser.Math.RadToDeg;
-  Phaser.Math.DegToRad;
-
-  Phaser.Utils.Objects.IsPlainObject;
-
-  var DegToRad$1 = Phaser.Math.DegToRad;
-  DegToRad$1(180);
-
-  Phaser.Utils.Objects.GetValue;
-  Phaser.Math.Linear;
-
-  Phaser.Utils.Objects.IsPlainObject;
-  Phaser.Utils.Objects.GetValue;
-
-  Phaser.Utils.Objects.GetValue;
-  Phaser.Math.RadToDeg;
-  Phaser.Math.DegToRad;
-  Phaser.Math.Angle.WrapDegrees;
-  Phaser.Math.Angle.ShortestBetween;
-  Phaser.Math.Wrap;
-  Phaser.Math.Linear;
-
-  Phaser.Utils.Objects.IsPlainObject;
-  Phaser.Utils.Objects.GetValue;
-  Phaser.Math.DegToRad;
-  Phaser.Math.RadToDeg;
-  Phaser.Math.Angle.WrapDegrees;
-  Phaser.Math.Linear;
-  Phaser.Math.Wrap;
-
-  Phaser.Utils.Objects.IsPlainObject;
-  Phaser.Utils.Objects.GetValue;
-  Phaser.Math.Wrap;
-
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
-
-  var Init = function Init(parentContainer, rtOwner, config) {
-    rtOwner.visibleSibling = [];
-    rtOwner.isRunning = false;
-    rtOwner.useParentBounds = GetValue$8(config, 'useParentBounds', false);
-    rtOwner.setPosition(parentContainer.x, parentContainer.y).setVisible(false);
-    parentContainer.pin(rtOwner);
-  };
-
-  var Exit = function Exit(parentContainer, rtOwner) {
-    if (!parentContainer) {
-      return false;
-    }
-
-    var visibleSibling = rtOwner.visibleSibling; // Set all visible children back
-
-    for (var i = 0, cnt = visibleSibling.length; i < cnt; i++) {
-      parentContainer.setChildVisible(visibleSibling[i], true);
-    }
-
-    visibleSibling.length = 0; // Set rtOwner to be invisible
-
-    parentContainer.setChildVisible(rtOwner, false);
-    rtOwner.isRunning = false;
-    return true;
-  };
-
   var Rectangle = Phaser.Geom.Rectangle;
   var Union = Phaser.Geom.Rectangle.Union;
 
@@ -43773,7 +43664,7 @@
 
   var GlobRect;
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
     var gameObjects = config.gameObjects;
@@ -43787,12 +43678,12 @@
       return renderTexture;
     }
 
-    var x = GetValue$7(config, 'x', undefined);
-    var y = GetValue$7(config, 'y', undefined);
-    var width = GetValue$7(config, 'width', undefined);
-    var height = GetValue$7(config, 'height', undefined);
-    var originX = GetValue$7(config, 'originX', 0);
-    var originY = GetValue$7(config, 'originY', 0);
+    var x = GetValue$9(config, 'x', undefined);
+    var y = GetValue$9(config, 'y', undefined);
+    var width = GetValue$9(config, 'width', undefined);
+    var height = GetValue$9(config, 'height', undefined);
+    var originX = GetValue$9(config, 'originX', 0);
+    var originY = GetValue$9(config, 'originY', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -43839,6 +43730,128 @@
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
     renderTexture.draw(gameObjects);
     return renderTexture;
+  };
+
+  var RT$1 = Phaser.GameObjects.RenderTexture;
+  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+
+  var RenderTexture = /*#__PURE__*/function (_Image) {
+    _inherits(RenderTexture, _Image);
+
+    var _super = _createSuper(RenderTexture);
+
+    function RenderTexture(scene, x, y, width, height, config) {
+      var _this;
+
+      _classCallCheck(this, RenderTexture);
+
+      if (IsPlainObject$4(x)) {
+        config = x;
+        x = GetValue$8(config, 'x', 0);
+        y = GetValue$8(config, 'y', 0);
+        width = GetValue$8(config, 'width', 32);
+        height = GetValue$8(config, 'height', 32);
+      } // render-texture -> perspective-image
+
+
+      var rt = new RT$1(scene, x, y, width, height).setOrigin(0.5);
+      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
+      _this.type = 'rexPerspectiveRenderTexture';
+      _this.rt = rt;
+      return _this;
+    }
+
+    _createClass(RenderTexture, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
+
+        this.rt.destroy();
+        this.rt = null;
+      }
+    }, {
+      key: "snapshot",
+      value: function snapshot(gameObjects) {
+        var xSave = this.rt.x,
+            ySave = this.rt.y;
+        Snapshot({
+          gameObjects: gameObjects,
+          renderTexture: this.rt
+        });
+        this.rt.setPosition(xSave, ySave);
+        this.syncSize();
+        return this;
+      }
+    }]);
+
+    return RenderTexture;
+  }(Image$2);
+
+  Phaser.Animations.AnimationState;
+  Phaser.Utils.Objects.IsPlainObject;
+  Phaser.Utils.Objects.GetValue;
+
+  Phaser.Math.RadToDeg;
+  Phaser.Math.DegToRad;
+
+  Phaser.Utils.Objects.IsPlainObject;
+
+  var DegToRad$1 = Phaser.Math.DegToRad;
+  DegToRad$1(180);
+
+  Phaser.Utils.Objects.GetValue;
+  Phaser.Math.Linear;
+
+  Phaser.Utils.Objects.IsPlainObject;
+  Phaser.Utils.Objects.GetValue;
+
+  Phaser.Utils.Objects.GetValue;
+  Phaser.Math.RadToDeg;
+  Phaser.Math.DegToRad;
+  Phaser.Math.Angle.WrapDegrees;
+  Phaser.Math.Angle.ShortestBetween;
+  Phaser.Math.Wrap;
+  Phaser.Math.Linear;
+
+  Phaser.Utils.Objects.IsPlainObject;
+  Phaser.Utils.Objects.GetValue;
+  Phaser.Math.DegToRad;
+  Phaser.Math.RadToDeg;
+  Phaser.Math.Angle.WrapDegrees;
+  Phaser.Math.Linear;
+  Phaser.Math.Wrap;
+
+  Phaser.Utils.Objects.IsPlainObject;
+  Phaser.Utils.Objects.GetValue;
+  Phaser.Math.Wrap;
+
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+
+  var Init = function Init(parentContainer, rtOwner, config) {
+    rtOwner.visibleSibling = [];
+    rtOwner.isRunning = false;
+    rtOwner.useParentBounds = GetValue$7(config, 'useParentBounds', false);
+    rtOwner.setPosition(parentContainer.x, parentContainer.y).setVisible(false);
+    parentContainer.pin(rtOwner);
+  };
+
+  var Exit = function Exit(parentContainer, rtOwner) {
+    if (!parentContainer) {
+      return false;
+    }
+
+    var visibleSibling = rtOwner.visibleSibling; // Set all visible children back
+
+    for (var i = 0, cnt = visibleSibling.length; i < cnt; i++) {
+      parentContainer.setChildVisible(visibleSibling[i], true);
+    }
+
+    visibleSibling.length = 0; // Set rtOwner to be invisible
+
+    parentContainer.setChildVisible(rtOwner, false);
+    rtOwner.isRunning = false;
+    return true;
   };
 
   var Enter = function Enter(parentContainer, rtOwner) {
