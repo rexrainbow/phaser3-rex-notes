@@ -50,6 +50,7 @@ declare class Player extends EventEmitter {
     stop(): this;
 
     seek(time: number): this;
+    seekToNext(): this;
 
     readonly isPlaying: boolean;
     readonly completed: boolean;

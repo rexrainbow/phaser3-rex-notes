@@ -172,10 +172,10 @@ player.stop();
 player.seek(time);   // Elapsed time in ms
 ```
 
-### Skip waiting
+### Seek to next command
 
 ```javascript
-player.skipWaiting();
+player.seekToNext();
 ```
 
 Seek to time of next command.

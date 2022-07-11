@@ -135,7 +135,7 @@ class Player extends ComponentBase {
         return this;
     }
 
-    skipWaiting() {
+    seekToNext() {
         this.seek(this.nextTime);
         return this;
     }

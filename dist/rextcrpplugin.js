@@ -1067,8 +1067,8 @@
         return this;
       }
     }, {
-      key: "skipWaiting",
-      value: function skipWaiting() {
+      key: "seekToNext",
+      value: function seekToNext() {
         this.seek(this.nextTime);
         return this;
       }
