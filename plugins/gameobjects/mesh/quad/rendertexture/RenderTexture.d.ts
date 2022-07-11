@@ -22,4 +22,6 @@ declare class RenderTexture extends Image {
     )
 
     readonly rt: Phaser.GameObjects.RenderTexture;
+
+    snapshot(gameObjects: Phaser.GameObjects.GameObject[]): this;
 }

@@ -1,4 +1,5 @@
 import Image from '../image/Image.js';
+import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
 
 const RT = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -28,6 +29,22 @@ class RenderTexture extends Image {
 
         this.rt.destroy();
         this.rt = null;
+    }
+
+    snapshot(gameObjects) {
+        var xSave = this.rt.x,
+            ySave = this.rt.y;
+
+        Snapshot({
+            gameObjects: gameObjects,
+            renderTexture: this.rt,
+        })
+
+        this.rt.setPosition(xSave, ySave);
+
+        this.syncSize();
+
+        return this;
     }
 }
 

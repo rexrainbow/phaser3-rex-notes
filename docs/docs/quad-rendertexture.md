@@ -178,6 +178,11 @@ var rt = image.rt;
     // image.rt.drawFrame(key, frame, x, y, alpha, tint);
     ```
     - `key` : The key of the texture to be used, as stored in the Texture Manager.
+- Snapshop game objects
+    ```javascript
+    image.snapshot(gameObjects);
+    ```
+    - `gameObjects` : Array of game objects.
 
 #### Erase
 
