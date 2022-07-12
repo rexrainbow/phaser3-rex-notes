@@ -306,6 +306,33 @@ card.flip.setEase(ease);
     var isRunning = card.flip.isRunning;
     ```
 
+### Rotation
+
+- Get rotation angle
+    ```javascript
+    var angleX = card.angleX; // Angle in degrees
+    var angleY = card.angleY; // Angle in degrees
+    var angleZ = card.angleZ; // Angle in degrees
+    ```
+    or
+    ```javascript
+    var rotationX = card.rotationX; // Angle in radians
+    var rotationY = card.rotationY; // Angle in radians
+    var rotationZ = card.rotationZ; // Angle in radians
+    ```
+- Set rotation angle
+    ```javascript
+    card.angleX = angleX; // Angle in degrees
+    card.angleY = angleY; // Angle in degrees
+    card.angleZ = angleZ; // Angle in degrees
+    ```
+    or
+    ```javascript
+    card.rotationX = rotationX; // Angle in radians
+    card.rotationY = rotationY; // Angle in radians
+    card.rotationZ = rotationZ; // Angle in radians
+    ```
+
 ### Other properties
 
 See [overlapSizer](ui-overlapsizer.md).

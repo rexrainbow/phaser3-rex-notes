@@ -10881,6 +10881,15 @@
         this.perspectiveCard.rotationX = value;
       }
     }, {
+      key: "angleX",
+      get: function get() {
+        return this.perspectiveCard.angleX;
+      },
+      set: function set(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.angleX = value;
+      }
+    }, {
       key: "rotationY",
       get: function get() {
         return this.perspectiveCard.rotationY;
@@ -10890,6 +10899,15 @@
         this.perspectiveCard.rotationY = value;
       }
     }, {
+      key: "angleY",
+      get: function get() {
+        return this.perspectiveCard.angleY;
+      },
+      set: function set(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.angleY = value;
+      }
+    }, {
       key: "rotationZ",
       get: function get() {
         return this.perspectiveCard.rotationZ;
@@ -10897,6 +10915,50 @@
       set: function set(value) {
         this.enterPerspectiveMode();
         this.perspectiveCard.rotationZ = value;
+      }
+    }, {
+      key: "angleZ",
+      get: function get() {
+        return this.perspectiveCard.angleZ;
+      },
+      set: function set(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.angleZ = value;
+      }
+    }, {
+      key: "panX",
+      value: function panX(v) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.panX(v);
+        return this;
+      }
+    }, {
+      key: "panY",
+      value: function panY(v) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.panY(v);
+        return this;
+      }
+    }, {
+      key: "panZ",
+      value: function panZ(v) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.panZ(v);
+        return this;
+      }
+    }, {
+      key: "transformVerts",
+      value: function transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
+        return this;
+      }
+    }, {
+      key: "forEachFace",
+      value: function forEachFace(callback, scope, ignoreInvalid) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.forEachFace(callback, scope, ignoreInvalid);
+        return this;
       }
     }]);
 

@@ -79,9 +79,7 @@ var CreatePerspectiveCard = function (scene) {
             ease: 'Cubic'
         }
     })
-        .layout()
-        .enterPerspectiveMode()
-        .perspectiveCard;
+        .layout();
 
 }
 

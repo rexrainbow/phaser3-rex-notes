@@ -77,6 +77,15 @@ class PerspectiveCard extends OverlapSizer {
         this.perspectiveCard.rotationX = value;
     }
 
+    get angleX() {
+        return this.perspectiveCard.angleX;
+    }
+
+    set angleX(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.angleX = value;
+    }
+
     get rotationY() {
         return this.perspectiveCard.rotationY;
     }
@@ -84,6 +93,15 @@ class PerspectiveCard extends OverlapSizer {
     set rotationY(value) {
         this.enterPerspectiveMode();
         this.perspectiveCard.rotationY = value;
+    }
+
+    get angleY() {
+        return this.perspectiveCard.angleY;
+    }
+
+    set angleY(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.angleY = value;
     }
 
     get rotationZ() {
@@ -95,6 +113,44 @@ class PerspectiveCard extends OverlapSizer {
         this.perspectiveCard.rotationZ = value;
     }
 
+    get angleZ() {
+        return this.perspectiveCard.angleZ;
+    }
+
+    set angleZ(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.angleZ = value;
+    }
+
+    panX(v) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.panX(v);
+        return this;
+    }
+
+    panY(v) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.panY(v);
+        return this;
+    }
+
+    panZ(v) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.panZ(v);
+        return this;
+    }
+
+    transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
+        return this;
+    }
+
+    forEachFace(callback, scope, ignoreInvalid) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.forEachFace(callback, scope, ignoreInvalid);
+        return this;
+    }
 }
 
 Object.assign(
