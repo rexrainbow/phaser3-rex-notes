@@ -24,7 +24,7 @@ class PerspectiveCard extends OverlapSizer {
         );
 
         // Add PerspectiveCardMesh
-        this.cardMesh = CreatePerspectiveCardMesh(this, config);
+        this.card = CreatePerspectiveCardMesh(this, config);
 
         var isFrontFace = (this.face === 0);
         this.setChildVisible(frontFace, isFrontFace);
@@ -32,11 +32,11 @@ class PerspectiveCard extends OverlapSizer {
     }
 
     get flip() {
-        return this.cardMesh.flip;
+        return this.card.flip;
     }
 
     get face() {
-        return this.cardMesh.face;
+        return this.card.face;
     }
 
     set face(index) {
@@ -44,7 +44,7 @@ class PerspectiveCard extends OverlapSizer {
         if (this.flip.isRunning) {
             return;
         }
-        this.cardMesh.face = index;
+        this.card.face = index;
 
         var isFrontFace = (index === 0);
         var frontFace = this.childrenMap.front;
