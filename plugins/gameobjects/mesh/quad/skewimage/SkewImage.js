@@ -1,5 +1,5 @@
 import Image from '../image/Image.js';
-import Skew from '../../utils/Skew.js';
+import Skew from './Skew.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
