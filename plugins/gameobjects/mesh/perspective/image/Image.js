@@ -68,6 +68,15 @@ class Image extends Mesh {
             flipY: this.frame.source.isRenderTexture
         });
 
+        // Recover vertices transform
+        var transformInfo = this.transformInfo;
+        if (transformInfo) {
+            this.transformVerts(
+                transformInfo.x, transformInfo.y, transformInfo.z,
+                transformInfo.rotateX, transformInfo.rotateY, transformInfo.rotateZ
+            );
+        }
+
         return this;
     }
 
@@ -132,6 +141,23 @@ class Image extends Mesh {
     }
 
     transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (z === undefined) { z = 0; }
+        if (rotateX === undefined) { rotateX = 0; }
+        if (rotateY === undefined) { rotateY = 0; }
+        if (rotateZ === undefined) { rotateZ = 0; }
+
+        if (!this.transformInfo) {
+            this.transformInfo = {};
+        }
+
+        this.transformInfo.x = x;
+        this.transformInfo.y = y;
+        this.transformInfo.rotateX = rotateX;
+        this.transformInfo.rotateY = rotateY;
+        this.transformInfo.rotateZ = rotateZ;
+
         TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
         return this;
     }

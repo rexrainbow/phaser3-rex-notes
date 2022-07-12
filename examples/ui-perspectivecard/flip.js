@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
             }
         })
             .setInteractive()
+            // .setFace(0)
             .on('pointerdown', function (pointer, localX, localY) {
                 if (localX <= (this.width / 2)) {
                     this.flip.flipLeft();

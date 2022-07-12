@@ -37,17 +37,22 @@ class PerspectiveCard extends OverlapSizer {
         return this.cardMesh.flip;
     }
 
-    setOrientation(orientation) {
-        this.cardMesh.setOrientation(orientation);
-        return this;
-    }
-
     get face() {
         return this.cardMesh.face;
     }
 
     set face(index) {
+        // Can't set face during flipping
+        if (this.flip.isRunning) {
+            return;
+        }
         this.cardMesh.face = index;
+
+        var isFrontFace = (index === 0);
+        var frontFace = this.childrenMap.front;
+        var backFace = this.childrenMap.back;
+        this.setChildVisible(frontFace, isFrontFace);
+        this.setChildVisible(backFace, !isFrontFace);
     }
 
     setFace(face) {

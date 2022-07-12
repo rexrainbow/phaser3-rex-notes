@@ -948,13 +948,10 @@
     }, {
       key: "snapshot",
       value: function snapshot(gameObjects) {
-        var xSave = this.rt.x,
-            ySave = this.rt.y;
         Snapshot({
           gameObjects: gameObjects,
           renderTexture: this.rt
         });
-        this.rt.setPosition(xSave, ySave);
         this.syncSize();
         return this;
       }

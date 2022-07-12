@@ -2,9 +2,9 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer';
 
 
-export default Page;
+export default Pages;
 
-declare namespace Page {
+declare namespace Pages {
 
     type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
         'left-top' | 'left-center' | 'left-bottom' |
@@ -25,10 +25,10 @@ declare namespace Page {
 
 }
 
-declare class Page extends OverlapSizer {
+declare class Pages extends OverlapSizer {
     constructor(
         scene: Phaser.Scene,
-        config?: Page.IConfig
+        config?: Pages.IConfig
     );
 
     setSwapMode(
@@ -40,9 +40,9 @@ declare class Page extends OverlapSizer {
         config?: {
             key?: string,
 
-            align?: Page.AlignTypes,
+            align?: Pages.AlignTypes,
 
-            padding?: Page.PaddingTypes,
+            padding?: Pages.PaddingTypes,
 
             expand: boolean |
             {

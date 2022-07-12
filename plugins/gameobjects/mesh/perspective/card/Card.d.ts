@@ -44,6 +44,21 @@ declare namespace Card {
         type FlipCompleteCallbackType = () => void;
     }
 
+    class Flip extends Phaser.Events.EventEmitter {
+        flip(duration?: number): this;
+        flipRight(duration?: number): this;
+        flipLeft(duration?: number): this;
+        stop(): this;
+
+        setDuration(duration: number): this;
+        duration: number;
+
+        setEase(ease: string): this;
+        ease: string;
+
+        readonly isRunning: boolean;
+    }
+
 }
 
 declare class Card extends FaceContainer {
@@ -63,20 +78,5 @@ declare class Card extends FaceContainer {
         back: Image | RenderTexture,
     };
 
-    flip: Flip | undefined;
-}
-
-declare class Flip extends Phaser.Events.EventEmitter {
-    flip(duration?: number): this;
-    flipRight(duration?: number): this;
-    flipLeft(duration?: number): this;
-    stop(): this;
-
-    setDuration(duration: number): this;
-    duration: number;
-
-    setEase(ease: string): this;
-    ease: string;
-
-    readonly isRunning: boolean;
+    flip: Card.Flip | undefined;
 }

@@ -41,6 +41,7 @@ import NumberBar from './numberbar/NumberBar';
 import ScrollBar from './scrollbar/ScrollBar';
 import BadgeLabel from './badgelabel/BadgeLabel';
 import Pages from './pages/Pages';
+import PerspectiveCard from './perspectivecard/PerspectiveCard';
 import TabPages from './tabpages/TabPages';
 import TextArea from './textarea/TextArea';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
@@ -132,6 +133,7 @@ export {
     ScrollBar,
     BadgeLabel,
     Pages,
+    PerspectiveCard,
     TabPages,
     TextArea,
     ScrollablePanel,

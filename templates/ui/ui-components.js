@@ -42,6 +42,7 @@ import TextBox from './textbox/TextBox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import BadgeLabel from './badgelabel/BadgeLabel.js';
 import Pages from './pages/Pages.js';
+import PerspectiveCard from './perspectivecard/PerspectiveCard.js';
 import TabPages from './tabpages/TabPages.js';
 import TextArea from './textarea/TextArea.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
@@ -133,6 +134,7 @@ export {
     NumberBar,
     BadgeLabel,
     Pages,
+    PerspectiveCard,
     TabPages,
     TextArea,
     ScrollablePanel,

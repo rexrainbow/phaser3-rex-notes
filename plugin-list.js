@@ -233,6 +233,7 @@ module.exports = {
     'ninepatch': './templates/ui/ninepatch/NinePatch.js',
     'badgelabel': './templates/ui/badgelabel/BadgeLabel.js',
     'pages': './templates/ui/pages/Pages.js',
+    'perspectivecard': './templates/ui/perspectivecard/PerspectiveCard.js',
     'tabpages': './templates/ui/tabpages/TabPages.js',
     'holygrail': './templates/ui/holygrail/HolyGrail.js',
     'pan': './templates/ui/pan/Pan.js',
