@@ -1,6 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import CreatePerspectiveCardMesh from './CreatePerspectiveCardMesh.js';
-import PerspectiveModeMethods from './PerspectiveModeMethods.js';
+import PerspectiveMethods from './PerspectiveMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -155,7 +155,7 @@ class PerspectiveCard extends OverlapSizer {
 
 Object.assign(
     PerspectiveCard.prototype,
-    PerspectiveModeMethods
+    PerspectiveMethods
 )
 
 export default PerspectiveCard;
