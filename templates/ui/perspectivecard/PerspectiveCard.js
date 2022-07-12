@@ -1,6 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import CreatePerspectiveCardMesh from './CreatePerspectiveCardMesh.js';
-import CardMeshMethods from './CardMeshMethods.js';
+import PerspectiveModeMethods from './PerspectiveModeMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -25,18 +25,18 @@ class PerspectiveCard extends OverlapSizer {
         );
 
         // Add PerspectiveCardMesh
-        this.cardMesh = CreatePerspectiveCardMesh(this, config);
-        this.pin(this.cardMesh);
+        this.perspectiveCard = CreatePerspectiveCardMesh(this, config);
+        this.pin(this.perspectiveCard);
 
-        this.exitCardMeshMode(false);
+        this.exitPerspectiveMode(false);
     }
 
     get flip() {
-        return this.cardMesh.flip;
+        return this.perspectiveCard.flip;
     }
 
     get face() {
-        return this.cardMesh.face;
+        return this.perspectiveCard.face;
     }
 
     set face(index) {
@@ -44,7 +44,7 @@ class PerspectiveCard extends OverlapSizer {
         if (this.flip.isRunning) {
             return;
         }
-        this.cardMesh.face = index;
+        this.perspectiveCard.face = index;
 
         var isFrontFace = (index === 0);
         var frontFace = this.childrenMap.front;
@@ -63,11 +63,43 @@ class PerspectiveCard extends OverlapSizer {
         this.setFace(newFace);
         return this;
     }
+
+    get isInPerspectiveMode() {
+        return this.perspectiveCard.visible;
+    }
+
+    get rotationX() {
+        return this.perspectiveCard.rotationX;
+    }
+
+    set rotationX(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.rotationX = value;
+    }
+
+    get rotationY() {
+        return this.perspectiveCard.rotationY;
+    }
+
+    set rotationY(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.rotationY = value;
+    }
+
+    get rotationZ() {
+        return this.perspectiveCard.rotationZ;
+    }
+
+    set rotationZ(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.rotationZ = value;
+    }
+
 }
 
 Object.assign(
     PerspectiveCard.prototype,
-    CardMeshMethods
+    PerspectiveModeMethods
 )
 
 export default PerspectiveCard;

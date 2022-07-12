@@ -10,20 +10,24 @@ var SnapshotFace = function (rt, face) {
 }
 
 export default {
-    enterCardMeshMode() {
-        var cardMesh = this.cardMesh;
+    enterPerspectiveMode() {
+        if (this.isInPerspectiveMode) {
+            return this;
+        }
+
+        var perspectiveCard = this.perspectiveCard;
         // Set card's visible to true
-        this.setChildVisible(cardMesh, true);
+        this.setChildVisible(perspectiveCard, true);
         // Snapshot front and back children to card's faces
         var frontFace = this.childrenMap.front;
         var backFace = this.childrenMap.back;
-        SnapshotFace(cardMesh.frontFace, frontFace);
-        SnapshotFace(cardMesh.backFace, backFace);
+        SnapshotFace(perspectiveCard.frontFace, frontFace);
+        SnapshotFace(perspectiveCard.backFace, backFace);
         // Set front and back children's visible to false
         this.setChildVisible(frontFace, false);
         this.setChildVisible(backFace, false);
         // Reset size of card
-        this.cardMesh.setSize(
+        this.perspectiveCard.setSize(
             Math.max(frontFace.width, backFace.width),
             Math.max(frontFace.height, backFace.height)
         );
@@ -31,14 +35,18 @@ export default {
         return this;
     },
 
-    exitCardMeshMode() {
-        var cardMesh = this.cardMesh;
+    exitPerspectiveMode() {
+        if (!this.isInPerspectiveMode) {
+            return this;
+        }
+
+        var perspectiveCard = this.perspectiveCard;
         // Set card's visible to false
-        this.setChildVisible(cardMesh, false);
+        this.setChildVisible(perspectiveCard, false);
         // Set front or back children's visible to true, according to card's face            
         var frontFace = this.childrenMap.front;
         var backFace = this.childrenMap.back;
-        var isFrontFace = (cardMesh.face === 0);
+        var isFrontFace = (perspectiveCard.face === 0);
         this.setChildVisible(frontFace, isFrontFace);
         this.setChildVisible(backFace, !isFrontFace);
 
