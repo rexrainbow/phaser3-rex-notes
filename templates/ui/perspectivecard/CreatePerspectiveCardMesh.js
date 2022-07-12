@@ -1,8 +1,12 @@
 import { PerspectiveCard } from '../../../plugins/perspectiveimage.js';
 import Clone from '../../../plugins/utils/object/Clone.js';
 
-var CreatePerspectiveCardMesh = function (parent, config) {
-    var scene = parent.scene;
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var CreatePerspectiveCardMesh = function (config) {
+    var scene = this.scene;
+
+    this.setSnapshotPadding(GetValue(config, 'snapshotPadding', 0));
 
     config = Clone(config);
     // Remove size config
@@ -15,6 +19,7 @@ var CreatePerspectiveCardMesh = function (parent, config) {
     var card = new PerspectiveCard(scene, config);
     scene.add.existing(card);
 
+    var parent = this;
     card.flip
         .on('start', function () {
             // Before flipping

@@ -88,6 +88,8 @@ var sizer = scene.rexUI.add.perspectiveCard({
     front: frontGameObject,
     // face: 0,
     // orientation: 0,
+    // snapshotPadding: 0,
+
     // flip : {
     //     frontToBack: 0,
     //     backToFront: 1,
@@ -123,6 +125,7 @@ var sizer = scene.rexUI.add.perspectiveCard({
 - `orientation` : Flipping orientation.
     - `'horizontal'`,`'h'`, `'x'`, or `0` : Flipping left-to-right, or right-to-left.
     - `'vertical'`,`'v'`, `'y'`, or `1` : Flipping top-to-bottom, or bottom-to-top.
+- `snapshotPadding` : Padding around face when taking a snapshot of a face.
 - `flip` : Configuration of flipping behavior.
     - `flip.frontToBack`, `flip.backToFront` : Flipping direction.
         - `'right'`, `'left-to-right'`, or `0` : Flipping from right to left.

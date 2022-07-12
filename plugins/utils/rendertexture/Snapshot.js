@@ -5,6 +5,10 @@ import SortGameObjectsByDepth from '../system/SortGameObjectsByDepth.js';
 var GetValue = Phaser.Utils.Objects.GetValue;
 
 var Snapshot = function (config) {
+    if (!config) {
+        return;
+    }
+
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
     if (gameObjects.length === 0) {
@@ -20,6 +24,7 @@ var Snapshot = function (config) {
     var height = GetValue(config, 'height', undefined);
     var originX = GetValue(config, 'originX', 0);
     var originY = GetValue(config, 'originY', 0);
+    var padding = GetValue(config, 'padding', 0);
     var scrollX, scrollY;
     if ((width === undefined) || (height === undefined) || (x === undefined) || (y === undefined)) {
         // Union bounds of gameObjects
@@ -45,6 +50,11 @@ var Snapshot = function (config) {
         scrollY = y + ((0 - originY) * height);
     }
 
+    scrollX -= padding;
+    scrollY -= padding;
+    width += (padding * 2);
+    height += (padding * 2);
+
     // Configurate render texture
     if (!renderTexture) {
         var scene = gameObjects[0].scene;
@@ -64,5 +74,7 @@ var Snapshot = function (config) {
 
     return renderTexture;
 }
+
+var GlobPadding = {};
 
 export default Snapshot;

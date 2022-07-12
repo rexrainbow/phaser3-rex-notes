@@ -35,6 +35,11 @@ export default {
         return this;
     },
 
+    setSnapshotPadding(padding) {
+        this.snapshotPadding = padding;
+        return this;
+    },
+
     snapshotFace(face) {
         if (typeof (face) === 'number') {
             face = FaceIndexMap[face];
@@ -48,9 +53,9 @@ export default {
         var faceChildVisibleSave = faceChild.visible;
         faceChild.visible = true;
         if (faceChild.isRexContainerLite) {
-            cardFace.snapshot(faceChild.getAllVisibleChildren());
+            cardFace.snapshot(faceChild.getAllVisibleChildren(), this.snapshotPadding);
         } else {
-            cardFace.snapshot(faceChild);
+            cardFace.snapshot(faceChild, this.snapshotPadding);
         }
         faceChild.visible = faceChildVisibleSave;
 

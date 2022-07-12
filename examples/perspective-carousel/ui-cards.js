@@ -70,6 +70,7 @@ var CreatePerspectiveCard = function (scene) {
         front: CreateFrontFace(scene),
         back: CreateBackFace(scene),
         face: 'back',
+        snapshotPadding: 3,
 
         flip: {
             frontToBack: 'right',

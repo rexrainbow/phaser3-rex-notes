@@ -842,6 +842,10 @@
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
+    if (!config) {
+      return;
+    }
+
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
 
@@ -859,6 +863,7 @@
     var height = GetValue$4(config, 'height', undefined);
     var originX = GetValue$4(config, 'originX', 0);
     var originY = GetValue$4(config, 'originY', 0);
+    var padding = GetValue$4(config, 'padding', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -885,8 +890,12 @@
     } else {
       scrollX = x + (0 - originX) * width;
       scrollY = y + (0 - originY) * height;
-    } // Configurate render texture
+    }
 
+    scrollX -= padding;
+    scrollY -= padding;
+    width += padding * 2;
+    height += padding * 2; // Configurate render texture
 
     if (!renderTexture) {
       var scene = gameObjects[0].scene;
@@ -947,10 +956,15 @@
       }
     }, {
       key: "snapshot",
-      value: function snapshot(gameObjects) {
+      value: function snapshot(gameObjects, padding) {
+        if (padding === undefined) {
+          padding = 0;
+        }
+
         Snapshot({
           gameObjects: gameObjects,
-          renderTexture: this.rt
+          renderTexture: this.rt,
+          padding: padding
         });
 
         if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {

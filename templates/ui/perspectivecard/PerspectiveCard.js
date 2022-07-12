@@ -25,7 +25,7 @@ class PerspectiveCard extends OverlapSizer {
         );
 
         // Add PerspectiveCardMesh
-        this.perspectiveCard = CreatePerspectiveCardMesh(this, config);
+        this.perspectiveCard = CreatePerspectiveCardMesh.call(this, config);
         this.pin(this.perspectiveCard);
 
         this.exitPerspectiveMode(false);
