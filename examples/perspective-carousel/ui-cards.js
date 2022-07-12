@@ -9,8 +9,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.atlas('poker', 'assets/images/poker2/poker.png', 'assets/images/poker2/poker.json');
+    preload() {       
     }
 
     create() {
