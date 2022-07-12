@@ -952,7 +952,11 @@
           gameObjects: gameObjects,
           renderTexture: this.rt
         });
-        this.syncSize();
+
+        if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {
+          this.syncSize();
+        }
+
         return this;
       }
     }]);

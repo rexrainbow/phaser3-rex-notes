@@ -81,11 +81,6 @@ class Image extends Mesh {
     }
 
     syncSize() {
-        var frame = this.frame;
-        if ((this.width === frame.realWidth) && (this.height === frame.realHeight)) {
-            return this;
-        }
-
         this.setSizeToFrame();  // Reset size
         this.resetPerspective();  // Reset perspective
         this.resetVerts();  // Reset verts

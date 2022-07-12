@@ -385,12 +385,6 @@
     }, {
       key: "syncSize",
       value: function syncSize() {
-        var frame = this.frame;
-
-        if (this.width === frame.realWidth && this.height === frame.realHeight) {
-          return this;
-        }
-
         this.setSizeToFrame(); // Reset size
 
         this.resetPerspective(); // Reset perspective
@@ -948,7 +942,11 @@
           gameObjects: gameObjects,
           renderTexture: this.rt
         });
-        this.syncSize();
+
+        if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {
+          this.syncSize();
+        }
+
         return this;
       }
     }]);

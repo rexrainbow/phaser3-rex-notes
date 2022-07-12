@@ -40494,12 +40494,6 @@
     }, {
       key: "syncSize",
       value: function syncSize() {
-        var frame = this.frame;
-
-        if (this.width === frame.realWidth && this.height === frame.realHeight) {
-          return this;
-        }
-
         this.setSizeToFrame(); // Reset size
 
         this.resetPerspective(); // Reset perspective
@@ -40780,7 +40774,11 @@
           gameObjects: gameObjects,
           renderTexture: this.rt
         });
-        this.syncSize();
+
+        if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {
+          this.syncSize();
+        }
+
         return this;
       }
     }]);
@@ -41615,12 +41613,10 @@
       _this.add(frontFace, {
         key: 'front',
         expand: frontFaceExpand
-      });
-
-      _this.layout(); // Add PerspectiveCardMesh
+      }); // Add PerspectiveCardMesh
 
 
-      _this.cardMesh = CreatePerspectiveCardMesh(_assertThisInitialized(_this), config);
+      _this.card = CreatePerspectiveCardMesh(_assertThisInitialized(_this), config);
       var isFrontFace = _this.face === 0;
 
       _this.setChildVisible(frontFace, isFrontFace);
@@ -41633,12 +41629,12 @@
     _createClass(PerspectiveCard, [{
       key: "flip",
       get: function get() {
-        return this.cardMesh.flip;
+        return this.card.flip;
       }
     }, {
       key: "face",
       get: function get() {
-        return this.cardMesh.face;
+        return this.card.face;
       },
       set: function set(index) {
         // Can't set face during flipping
@@ -41646,7 +41642,7 @@
           return;
         }
 
-        this.cardMesh.face = index;
+        this.card.face = index;
         var isFrontFace = index === 0;
         var frontFace = this.childrenMap.front;
         var backFace = this.childrenMap.back;
