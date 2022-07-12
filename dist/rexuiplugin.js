@@ -41549,46 +41549,12 @@
     scene.add.existing(card);
     card.flip.on('start', function () {
       // Before flipping
-      parent.setCardMeshVisible(true);
+      parent.enterPerspectiveMode();
     }).on('complete', function () {
       // After flipping
-      parent.setCardMeshVisible(false);
+      parent.exitPerspectiveMode();
     });
     return card;
-  };
-
-  var SetCardMeshVisible = function SetCardMeshVisible(visible) {
-    if (visible === undefined) {
-      visible = true;
-    }
-
-    var cardMesh = this.cardMesh;
-
-    if (visible) {
-      // Set card's visible to true
-      this.setChildVisible(cardMesh, true); // Snapshot front and back children to card's faces
-
-      var frontFace = this.childrenMap.front;
-      var backFace = this.childrenMap.back;
-      SnapshotFace(cardMesh.frontFace, frontFace);
-      SnapshotFace(cardMesh.backFace, backFace); // Set front and back children's visible to false
-
-      this.setChildVisible(frontFace, false);
-      this.setChildVisible(backFace, false); // Reset size of card
-
-      this.cardMesh.setSize(Math.max(frontFace.width, backFace.width), Math.max(frontFace.height, backFace.height));
-    } else {
-      // Set card's visible to false
-      this.setChildVisible(cardMesh, false); // Set front or back children's visible to true, according to card's face            
-
-      var frontFace = this.childrenMap.front;
-      var backFace = this.childrenMap.back;
-      var isFrontFace = cardMesh.face === 0;
-      this.setChildVisible(frontFace, isFrontFace);
-      this.setChildVisible(backFace, !isFrontFace);
-    }
-
-    return this;
   };
 
   var SnapshotFace = function SnapshotFace(rt, face) {
@@ -41599,6 +41565,45 @@
       rt.snapshot(face.getAllVisibleChildren());
     } else {
       rt.snapshot(face);
+    }
+  };
+
+  var PerspectiveModeMethods = {
+    enterPerspectiveMode: function enterPerspectiveMode() {
+      if (this.isInPerspectiveMode) {
+        return this;
+      }
+
+      var perspectiveCard = this.perspectiveCard; // Set card's visible to true
+
+      this.setChildVisible(perspectiveCard, true); // Snapshot front and back children to card's faces
+
+      var frontFace = this.childrenMap.front;
+      var backFace = this.childrenMap.back;
+      SnapshotFace(perspectiveCard.frontFace, frontFace);
+      SnapshotFace(perspectiveCard.backFace, backFace); // Set front and back children's visible to false
+
+      this.setChildVisible(frontFace, false);
+      this.setChildVisible(backFace, false); // Reset size of card
+
+      this.perspectiveCard.setSize(Math.max(frontFace.width, backFace.width), Math.max(frontFace.height, backFace.height));
+      return this;
+    },
+    exitPerspectiveMode: function exitPerspectiveMode() {
+      if (!this.isInPerspectiveMode) {
+        return this;
+      }
+
+      var perspectiveCard = this.perspectiveCard; // Set card's visible to false
+
+      this.setChildVisible(perspectiveCard, false); // Set front or back children's visible to true, according to card's face            
+
+      var frontFace = this.childrenMap.front;
+      var backFace = this.childrenMap.back;
+      var isFrontFace = perspectiveCard.face === 0;
+      this.setChildVisible(frontFace, isFrontFace);
+      this.setChildVisible(backFace, !isFrontFace);
+      return this;
     }
   };
 
@@ -41634,11 +41639,11 @@
       }); // Add PerspectiveCardMesh
 
 
-      _this.cardMesh = CreatePerspectiveCardMesh(_assertThisInitialized(_this), config);
+      _this.perspectiveCard = CreatePerspectiveCardMesh(_assertThisInitialized(_this), config);
 
-      _this.pin(_this.cardMesh);
+      _this.pin(_this.perspectiveCard);
 
-      _this.setCardMeshVisible(false);
+      _this.exitPerspectiveMode(false);
 
       return _this;
     }
@@ -41646,12 +41651,12 @@
     _createClass(PerspectiveCard, [{
       key: "flip",
       get: function get() {
-        return this.cardMesh.flip;
+        return this.perspectiveCard.flip;
       }
     }, {
       key: "face",
       get: function get() {
-        return this.cardMesh.face;
+        return this.perspectiveCard.face;
       },
       set: function set(index) {
         // Can't set face during flipping
@@ -41659,7 +41664,7 @@
           return;
         }
 
-        this.cardMesh.face = index;
+        this.perspectiveCard.face = index;
         var isFrontFace = index === 0;
         var frontFace = this.childrenMap.front;
         var backFace = this.childrenMap.back;
@@ -41679,15 +41684,44 @@
         this.setFace(newFace);
         return this;
       }
+    }, {
+      key: "isInPerspectiveMode",
+      get: function get() {
+        return this.perspectiveCard.visible;
+      }
+    }, {
+      key: "rotationX",
+      get: function get() {
+        return this.perspectiveCard.rotationX;
+      },
+      set: function set(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.rotationX = value;
+      }
+    }, {
+      key: "rotationY",
+      get: function get() {
+        return this.perspectiveCard.rotationY;
+      },
+      set: function set(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.rotationY = value;
+      }
+    }, {
+      key: "rotationZ",
+      get: function get() {
+        return this.perspectiveCard.rotationZ;
+      },
+      set: function set(value) {
+        this.enterPerspectiveMode();
+        this.perspectiveCard.rotationZ = value;
+      }
     }]);
 
     return PerspectiveCard;
   }(OverlapSizer);
 
-  var Method = {
-    setCardMeshVisible: SetCardMeshVisible
-  };
-  Object.assign(PerspectiveCard.prototype, Method);
+  Object.assign(PerspectiveCard.prototype, PerspectiveModeMethods);
 
   ObjectFactory.register('perspectiveCard', function (config) {
     var gameObject = new PerspectiveCard(this.scene, config);
