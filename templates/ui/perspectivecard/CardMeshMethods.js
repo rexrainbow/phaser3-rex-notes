@@ -1,10 +1,17 @@
-var SetCardMeshVisible = function (visible) {
-    if (visible === undefined) {
-        visible = true;
-    }
+var SnapshotFace = function (rt, face) {
+    rt.rt.clear();
 
-    var cardMesh = this.cardMesh;
-    if (visible) {
+    face.visible = true;
+    if (face.isRexContainerLite) {
+        rt.snapshot(face.getAllVisibleChildren());
+    } else {
+        rt.snapshot(face);
+    }
+}
+
+export default {
+    enterCardMeshMode() {
+        var cardMesh = this.cardMesh;
         // Set card's visible to true
         this.setChildVisible(cardMesh, true);
         // Snapshot front and back children to card's faces
@@ -20,7 +27,12 @@ var SetCardMeshVisible = function (visible) {
             Math.max(frontFace.width, backFace.width),
             Math.max(frontFace.height, backFace.height)
         );
-    } else {
+
+        return this;
+    },
+
+    exitCardMeshMode() {
+        var cardMesh = this.cardMesh;
         // Set card's visible to false
         this.setChildVisible(cardMesh, false);
         // Set front or back children's visible to true, according to card's face            
@@ -29,20 +41,8 @@ var SetCardMeshVisible = function (visible) {
         var isFrontFace = (cardMesh.face === 0);
         this.setChildVisible(frontFace, isFrontFace);
         this.setChildVisible(backFace, !isFrontFace);
+
+        return this;
     }
 
-    return this;
 }
-
-var SnapshotFace = function (rt, face) {
-    rt.rt.clear();
-
-    face.visible = true;
-    if (face.isRexContainerLite) {
-        rt.snapshot(face.getAllVisibleChildren());
-    } else {
-        rt.snapshot(face);
-    }
-}
-
-export default SetCardMeshVisible;

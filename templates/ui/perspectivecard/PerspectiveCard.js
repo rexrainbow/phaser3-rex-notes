@@ -1,6 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import CreatePerspectiveCardMesh from './CreatePerspectiveCardMesh.js';
-import SetCardMeshVisible from './SetCardMeshVisible.js';
+import CardMeshMethods from './CardMeshMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -28,7 +28,7 @@ class PerspectiveCard extends OverlapSizer {
         this.cardMesh = CreatePerspectiveCardMesh(this, config);
         this.pin(this.cardMesh);
 
-        this.setCardMeshVisible(false);
+        this.exitCardMeshMode(false);
     }
 
     get flip() {
@@ -65,12 +65,9 @@ class PerspectiveCard extends OverlapSizer {
     }
 }
 
-var Method = {
-    setCardMeshVisible: SetCardMeshVisible,
-}
 Object.assign(
     PerspectiveCard.prototype,
-    Method
+    CardMeshMethods
 )
 
 export default PerspectiveCard;

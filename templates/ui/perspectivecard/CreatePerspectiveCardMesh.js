@@ -18,11 +18,11 @@ var CreatePerspectiveCardMesh = function (parent, config) {
     card.flip
         .on('start', function () {
             // Before flipping
-            parent.setCardMeshVisible(true);
+            parent.enterCardMeshMode();
         })
         .on('complete', function () {
             // After flipping
-            parent.setCardMeshVisible(false);
+            parent.exitCardMeshMode();
         })
 
     return card;
