@@ -210,20 +210,24 @@ var card = scene.make.rexPerspectiveCard({
 #### Start flipping
 
 ```javascript
-card.flip.flip(duration);
+card.flip.flip();
+// card.flip.flip(duration, repeat);
 ```
 
 - `duration` : Overwrite default duration value.
+- `repeat` : Number of flipping time (`repeat + 1`) during `duration`. Default value is `0`.
 
 or
 
 - Flip-right
     ```javascript
-    card.flip.flipRight(duration);
+    card.flip.flipRight();
+    // card.flip.flipRight(duration, repeat);
     ```
 - Flip-left
     ```javascript
-    card.flip.flipLeft(duration);
+    card.flip.flipLeft();
+    // card.flip.flipLeft(duration, repeat);
     ```
 
 #### Stop flipping

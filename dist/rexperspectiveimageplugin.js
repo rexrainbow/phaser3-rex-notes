@@ -3685,21 +3685,22 @@
       }
     }, {
       key: "start",
-      value: function start() {
+      value: function start(duration, repeat) {
         if (this.timer.isRunning) {
           return this;
         }
 
-        this.timer.setDelay(this.delay).setDuration(this.duration);
+        this.timer.setDelay(this.delay).setDuration(duration);
+        var loop = repeat + 1;
         var gameObject = this.parent;
 
         if (gameObject.face === 0) {
           // isFrontToBack
           this.startAngle = 0;
-          this.endAngle = this.endAngleFB;
+          this.endAngle = this.endAngleFB * loop;
         } else {
           this.startAngle = this.endAngleBF;
-          this.endAngle = 0;
+          this.endAngle = this.startAngle - this.endAngleBF * loop;
         }
 
         _get(_getPrototypeOf(Flip.prototype), "start", this).call(this);
@@ -3708,25 +3709,28 @@
       }
     }, {
       key: "flip",
-      value: function flip(duration) {
+      value: function flip(duration, repeat) {
         if (this.isRunning) {
           return this;
         }
 
-        if (duration !== undefined) {
-          this.setDuration(duration);
+        if (duration === undefined) {
+          duration = this.duration;
         }
 
-        this.start();
+        if (repeat === undefined) {
+          repeat = 0;
+        }
+
+        this.start(duration, repeat);
         this.emit('start', this.parent, this); // Set face index
 
-        var faceIndex = this.parent.currentFaceIndex;
-        this.parent.currentFaceIndex = faceIndex === 0 ? 1 : 0;
+        this.parent.currentFaceIndex = (this.parent.currentFaceIndex + repeat + 1) % 2;
         return this;
       }
     }, {
       key: "flipRight",
-      value: function flipRight(duration) {
+      value: function flipRight(duration, repeat) {
         if (this.parent.currentFaceIndex === 0) {
           // Front to back
           this.setFrontToBackDirection(0);
@@ -3735,12 +3739,12 @@
           this.setBackToFrontDirection(0);
         }
 
-        this.flip(duration);
+        this.flip(duration, repeat);
         return this;
       }
     }, {
       key: "flipLeft",
-      value: function flipLeft(duration) {
+      value: function flipLeft(duration, repeat) {
         if (this.parent.currentFaceIndex === 0) {
           // Front to back
           this.setFrontToBackDirection(1);
@@ -3749,7 +3753,7 @@
           this.setBackToFrontDirection(1);
         }
 
-        this.flip(duration);
+        this.flip(duration, repeat);
         return this;
       }
     }, {

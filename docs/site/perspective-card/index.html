@@ -8860,18 +8860,22 @@
 </ul>
 <h3 id="flip-behavior">Flip behavior<a class="headerlink" href="#flip-behavior" title="Permanent link">&para;</a></h3>
 <h4 id="start-flipping">Start flipping<a class="headerlink" href="#start-flipping" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">flip</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">flip</span><span class="p">();</span>
+<span class="c1">// card.flip.flip(duration, repeat);</span>
 </code></pre></div>
 <ul>
 <li><code>duration</code> : Overwrite default duration value.</li>
+<li><code>repeat</code> : Number of flipping time (<code>repeat + 1</code>) during <code>duration</code>. Default value is <code>0</code>.</li>
 </ul>
 <p>or</p>
 <ul>
 <li>Flip-right
-    <div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">flipRight</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">flipRight</span><span class="p">();</span>
+<span class="c1">// card.flip.flipRight(duration, repeat);</span>
 </code></pre></div></li>
 <li>Flip-left
-    <div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">flipLeft</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">flipLeft</span><span class="p">();</span>
+<span class="c1">// card.flip.flipLeft(duration, repeat);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="stop-flipping">Stop flipping<a class="headerlink" href="#stop-flipping" title="Permanent link">&para;</a></h4>

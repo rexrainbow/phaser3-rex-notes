@@ -45,9 +45,21 @@ declare namespace Card {
     }
 
     class Flip extends Phaser.Events.EventEmitter {
-        flip(duration?: number): this;
-        flipRight(duration?: number): this;
-        flipLeft(duration?: number): this;
+        flip(
+            duration?: number,
+            repeat?: number
+        ): this;
+
+        flipRight(
+            duration?: number,
+            repeat?: number
+        ): this;
+
+        flipLeft(
+            duration?: number,
+            repeat?: number
+        ): this;
+
         stop(): this;
 
         setDuration(duration: number): this;

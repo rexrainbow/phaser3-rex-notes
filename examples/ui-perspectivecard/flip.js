@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCard = function (scene) {
-    return scene.rexUI.add.perspectiveCard({    
+    return scene.rexUI.add.perspectiveCard({
         front: CreateFrontFace(scene),
         back: CreateBackFace(scene),
         face: 'back',
@@ -46,7 +46,7 @@ var CreateCard = function (scene) {
             if (localX <= (this.width / 2)) {
                 this.flip.flipLeft();
             } else {
-                this.flip.flipRight();
+                this.flip.flipRight(1000, 2);
             }
             // this.flip.flip();
         })
