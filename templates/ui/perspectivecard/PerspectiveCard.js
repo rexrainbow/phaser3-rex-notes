@@ -23,8 +23,6 @@ class PerspectiveCard extends OverlapSizer {
             { key: 'front', expand: frontFaceExpand }
         );
 
-        this.layout();
-
         // Add PerspectiveCardMesh
         this.cardMesh = CreatePerspectiveCardMesh(this, config);
 

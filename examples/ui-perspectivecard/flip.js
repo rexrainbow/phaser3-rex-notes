@@ -12,35 +12,44 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var card = this.rexUI.add.perspectiveCard({
+        this.rexUI.add.sizer({
             x: 400, y: 300,
-            width: 300, height: 400,
 
-            front: CreateFrontFace(this),
-            back: CreateBackFace(this),
-            face: 'back',
-
-            flip: {
-                frontToBack: 'right',
-                backToFront: 'left',
-                duration: 1000,
-                ease: 'Cubic'
-            }
+            orientation: 'x',
+            space: { item: 20 }
         })
-            .setInteractive()
-            // .setFace(0)
-            .on('pointerdown', function (pointer, localX, localY) {
-                if (localX <= (this.width / 2)) {
-                    this.flip.flipLeft();
-                } else {
-                    this.flip.flipRight();
-                }
-                // this.flip.flip();
-            })
+            .add(CreateCard(this))
+            .add(CreateCard(this))
+            .layout();
     }
 
     update() {
     }
+}
+
+var CreateCard = function (scene) {
+    return scene.rexUI.add.perspectiveCard({    
+        front: CreateFrontFace(scene),
+        back: CreateBackFace(scene),
+        face: 'back',
+
+        flip: {
+            frontToBack: 'right',
+            backToFront: 'left',
+            duration: 1000,
+            ease: 'Cubic'
+        }
+    })
+        .setInteractive()
+        // .setFace(0)
+        .on('pointerdown', function (pointer, localX, localY) {
+            if (localX <= (this.width / 2)) {
+                this.flip.flipLeft();
+            } else {
+                this.flip.flipRight();
+            }
+            // this.flip.flip();
+        })
 }
 
 const COLOR_PRIMARY = 0x4e342e;

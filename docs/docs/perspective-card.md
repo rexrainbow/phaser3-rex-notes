@@ -248,9 +248,15 @@ card.flip.setEase(ease);
 
 #### Events
 
+- On flipping start
+    ```javascript
+    card.flip.on('start', function(flip, card){
+        // ...
+    });
+    ```
 - On flipping complete
     ```javascript
-    card.flip.on('complete', function(){
+    card.flip.on('complete', function(flip, card){
         // ...
     });
     ```

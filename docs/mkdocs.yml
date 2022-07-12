@@ -388,6 +388,7 @@ nav:
     - Pages:
         - Pages: ui-pages.md
         - Tab pages: ui-tabpages.md
+        - Perspective card: ui-perspectivecard.md
     - Dialog: ui-dialog.md
     - Menu: ui-menu.md
     - Drop down list: ui-dropdownlist.md
