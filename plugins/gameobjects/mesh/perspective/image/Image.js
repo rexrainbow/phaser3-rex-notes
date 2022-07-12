@@ -72,6 +72,11 @@ class Image extends Mesh {
     }
 
     syncSize() {
+        var frame = this.frame;
+        if ((this.width === frame.realWidth) && (this.height === frame.realHeight)) {
+            return this;
+        }
+
         this.setSizeToFrame();  // Reset size
         this.resetPerspective();  // Reset perspective
         this.resetVerts();  // Reset verts
@@ -135,7 +140,7 @@ class Image extends Mesh {
         this.dirtyCache[10] = 1;
         return this;
     }
-    
+
     get tint() {
         if (this.vertices.length === 0) {
             return 0xffffff;

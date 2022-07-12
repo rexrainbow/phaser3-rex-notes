@@ -61,7 +61,7 @@ var CreateBackFace = function (scene) {
     return scene.rexUI.add.label({
         orientation: 1,
         background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT),
-        icon: scene.rexUI.add.roundRectangle(0, 0, 200, 200, 20, COLOR_DARK),
+        icon: scene.rexUI.add.roundRectangle(0, 0, 240, 240, 20, COLOR_DARK),
         space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, }
     });
 }
