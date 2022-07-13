@@ -261,8 +261,14 @@ sizer.add(child, proportion, align, padding, expand, key, index);
     - `undefined` : Don't add this child. Default value.
 - `index` : Insert child to.
     - `undefined` : Insert child at last.
-- `minWidth` : Minimum width of normal (non-sizer) game object, used when `orientation` is `x`, and `proportion` is not `0`. Default value is current display width.
-- `minHeight` : Minimum height of normal (non-sizer) game object, used when `orientation` is `y`, and `proportion` is not `0`. Default value is current display height.
+- `minWidth` : Minimum width of normal (non-sizer) game object, used when 
+    `orientation` is `x`, and `proportion` is not `0`, or 
+    `orientation` is `y`, and `expand` is `true`
+    - Default value is current display width.
+- `minHeight` : Minimum height of normal (non-sizer) game object, used when 
+    `orientation` is `y`, and `proportion` is not `0`, or
+    `orientation` is `x`, and `expand` is `true`
+    - Default value is current display height.
 
 ### Insert child
 

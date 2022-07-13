@@ -41289,6 +41289,9 @@
 
       _this.setFace(GetValue$n(config, 'face', 0));
 
+      _this.rotationX = 0;
+      _this.rotationY = 0;
+      _this.rotationZ = 0;
       return _this;
     }
 

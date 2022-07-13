@@ -8845,8 +8845,18 @@
 <li><code>undefined</code> : Insert child at last.</li>
 </ul>
 </li>
-<li><code>minWidth</code> : Minimum width of normal (non-sizer) game object, used when <code>orientation</code> is <code>x</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display width.</li>
-<li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when <code>orientation</code> is <code>y</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display height.</li>
+<li><code>minWidth</code> : Minimum width of normal (non-sizer) game object, used when 
+    <code>orientation</code> is <code>x</code>, and <code>proportion</code> is not <code>0</code>, or 
+    <code>orientation</code> is <code>y</code>, and <code>expand</code> is <code>true</code><ul>
+<li>Default value is current display width.</li>
+</ul>
+</li>
+<li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when 
+    <code>orientation</code> is <code>y</code>, and <code>proportion</code> is not <code>0</code>, or
+    <code>orientation</code> is <code>x</code>, and <code>expand</code> is <code>true</code><ul>
+<li>Default value is current display height.</li>
+</ul>
+</li>
 </ul>
 <h3 id="insert-child">Insert child<a class="headerlink" href="#insert-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> 

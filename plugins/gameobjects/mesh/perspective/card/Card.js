@@ -57,6 +57,10 @@ class Card extends FaceContainer {
         LayoutFaces(this, faces);
 
         this.setFace(GetValue(config, 'face', 0));
+
+        this.rotationX = 0;
+        this.rotationY = 0;
+        this.rotationZ = 0;
     }
 
     get rotationX() {
