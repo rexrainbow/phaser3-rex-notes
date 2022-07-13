@@ -83,7 +83,7 @@ var rt = scene.make.renderTexture({
     rt.draw(group, x, y);
     // rt.draw(group, x, y, alpha, tint);
     ```
-- Paste game objects in a scene
+- Paste game objects in a scene's display list
     ```javascript
     rt.draw(scene.children, x, y);
     // rt.draw(scene.children, x, y, alpha, tint);

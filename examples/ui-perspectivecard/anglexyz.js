@@ -27,13 +27,13 @@ class Demo extends Phaser.Scene {
 
         var gui = new Dat.GUI();
         var card0Ctrl = gui.addFolder('Card0');
-        card0Ctrl.add(card0, 'angleX', 0, 360);
-        card0Ctrl.add(card0, 'angleY', 0, 360);
-        card0Ctrl.add(card0, 'angleZ', 0, 360);
+        card0Ctrl.add(card0, 'angleX', -180, 180);
+        card0Ctrl.add(card0, 'angleY', -180, 180);
+        card0Ctrl.add(card0, 'angleZ', -180, 180);
         var card1Ctrl = gui.addFolder('Card1');
-        card1Ctrl.add(card1, 'angleX', 0, 360);
-        card1Ctrl.add(card1, 'angleY', 0, 360);
-        card1Ctrl.add(card1, 'angleZ', 0, 360);
+        card1Ctrl.add(card1, 'angleX', -180, 180);
+        card1Ctrl.add(card1, 'angleY', -180, 180);
+        card1Ctrl.add(card1, 'angleZ', -180, 180);
 
     }
 
