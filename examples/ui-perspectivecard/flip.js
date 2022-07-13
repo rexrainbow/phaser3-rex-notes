@@ -18,8 +18,8 @@ class Demo extends Phaser.Scene {
             orientation: 'x',
             space: { item: 20 }
         })
-            .add(CreateCard(this))
-            .add(CreateCard(this))
+            .add(CreateCard(this, 0))
+            .add(CreateCard(this, 1))
             .layout();
     }
 
@@ -27,11 +27,12 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateCard = function (scene) {
+var CreateCard = function (scene, orientation) {
     return scene.rexUI.add.perspectiveCard({
         front: CreateFrontFace(scene),
         back: CreateBackFace(scene),
         face: 'back',
+        orientation: orientation,
         snapshotPadding: 3,
 
         flip: {
