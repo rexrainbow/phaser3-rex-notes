@@ -11,6 +11,7 @@ A container with front and back faces.
 ## Live demos
 
 - [Flip](https://codepen.io/rexrainbow/pen/eYMzwGa)
+- [Rotation](https://codepen.io/rexrainbow/pen/wvmzmbX)
 
 ## Usage
 
@@ -335,6 +336,9 @@ card.flip.setEase(ease);
     card.rotationY = rotationY; // Angle in radians
     card.rotationZ = rotationZ; // Angle in radians
     ```
+
+!!! warning
+    Can't be used with [flipping mode](ui-perspectivecard.md#flip-behavior).
 
 ### Other properties
 
