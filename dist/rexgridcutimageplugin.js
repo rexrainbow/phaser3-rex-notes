@@ -146,9 +146,13 @@
     }
 
     var texture = scene.sys.textures.get(key);
+    var isRenderTexture = texture.source[0].isRenderTexture;
     var baseFrame = texture.frames[frame];
-    var cellWidth = baseFrame.width / columns,
-        cellHeight = baseFrame.height / rows;
+    var baseWidth = baseFrame.width,
+        baseHeight = baseFrame.height;
+    var cellX, cellY;
+    var cellWidth = baseWidth / columns,
+        cellHeight = baseHeight / rows;
     var offsetX = 0,
         offsetY = 0;
     var frameName;
@@ -158,7 +162,15 @@
 
       for (var x = 0; x < columns; x++) {
         frameName = getFrameNameCallback(x, y);
-        texture.add(frameName, 0, offsetX + baseFrame.cutX, offsetY + baseFrame.cutY, cellWidth, cellHeight);
+        cellX = offsetX + baseFrame.cutX;
+
+        if (!isRenderTexture) {
+          cellY = offsetY + baseFrame.cutY;
+        } else {
+          cellY = baseHeight - offsetY - cellHeight + baseFrame.cutY;
+        }
+
+        texture.add(frameName, 0, cellX, cellY, cellWidth, cellHeight);
         offsetX += cellWidth;
       }
 
@@ -239,18 +251,18 @@
     return cellGameObjects;
   };
 
-  var RandomPlacePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(RandomPlacePlugin, _Phaser$Plugins$BaseP);
+  var GridCutImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(GridCutImagePlugin, _Phaser$Plugins$BaseP);
 
-    var _super = _createSuper(RandomPlacePlugin);
+    var _super = _createSuper(GridCutImagePlugin);
 
-    function RandomPlacePlugin(pluginManager) {
-      _classCallCheck(this, RandomPlacePlugin);
+    function GridCutImagePlugin(pluginManager) {
+      _classCallCheck(this, GridCutImagePlugin);
 
       return _super.call(this, pluginManager);
     }
 
-    _createClass(RandomPlacePlugin, [{
+    _createClass(GridCutImagePlugin, [{
       key: "start",
       value: function start() {
         var eventEmitter = this.game.events;
@@ -263,9 +275,9 @@
       }
     }]);
 
-    return RandomPlacePlugin;
+    return GridCutImagePlugin;
   }(Phaser.Plugins.BasePlugin);
 
-  return RandomPlacePlugin;
+  return GridCutImagePlugin;
 
 }));

@@ -1,6 +1,6 @@
 import GridCutImage from './gridcutimage';
 
-class RandomPlacePlugin extends Phaser.Plugins.BasePlugin {
+class GridCutImagePlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -16,4 +16,4 @@ class RandomPlacePlugin extends Phaser.Plugins.BasePlugin {
     }
 }
 
-export default RandomPlacePlugin;
+export default GridCutImagePlugin;
