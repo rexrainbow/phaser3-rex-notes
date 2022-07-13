@@ -15,8 +15,9 @@ var TextRunWidthWrap = function (textObject) {
             style.wrapWidth = wrapWidth;
             style.maxLines = 0;
         }
-
         textObject.setFixedSize(width, 0);  // Redraw text
+
+        textObject.minHeight = textObject.height;
         return textObject;
     }
     return RunWidthWrap;

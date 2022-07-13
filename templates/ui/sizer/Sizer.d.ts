@@ -93,7 +93,8 @@ declare class Sizer extends BaseSizer {
         expand?: boolean,
         childKey?: string,
         index?: number,
-        minSize?: number
+        minWidth?: number,
+        minHeight?: number
     ): this;
 
     insert(

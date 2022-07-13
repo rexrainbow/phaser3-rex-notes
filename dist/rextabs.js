@@ -10502,7 +10502,7 @@
     full: -1
   };
 
-  var Add$1 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
+  var Add$1 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight) {
     AddChild.call(this, gameObject);
     var isRexSpace = gameObject.isRexSpace;
 
@@ -10522,14 +10522,8 @@
       index = GetValue$4(config, 'index', undefined);
 
       if (!gameObject.isRexSizer) {
-        // Get minSize from config
-        if (this.orientation === 0) {
-          // x
-          minSize = GetValue$4(config, 'minWidth', undefined);
-        } else {
-          // y
-          minSize = GetValue$4(config, 'minHeight', undefined);
-        }
+        minWidth = GetValue$4(config, 'minWidth', undefined);
+        minHeight = GetValue$4(config, 'minHeight', undefined);
       }
     }
 
@@ -10553,18 +10547,19 @@
       expand = false;
     }
 
-    if (minSize === undefined) {
+    if (minWidth === undefined) {
       if (isRexSpace) {
-        minSize = 0;
+        minWidth = 0;
       } else if (!gameObject.isRexSizer) {
-        // Get minSize from game object
-        if (this.orientation === 0) {
-          // x
-          minSize = gameObject._minWidth;
-        } else {
-          // y
-          minSize = gameObject._minHeight;
-        }
+        minWidth = gameObject._minWidth;
+      }
+    }
+
+    if (minHeight === undefined) {
+      if (isRexSpace) {
+        minHeight = 0;
+      } else if (!gameObject.isRexSizer) {
+        minHeight = gameObject._minHeight;
       }
     }
 
@@ -10580,15 +10575,28 @@
       this.sizerChildren.splice(index, 0, gameObject);
     }
 
-    if (!gameObject.isRexSizer && proportion > 0) {
+    if (!gameObject.isRexSizer) {
       // Expand normal game object
-      if (this.orientation === 0) {
-        // x
-        // minSize is still undefined, uses current display width
-        gameObject.minWidth = minSize === undefined ? GetDisplayWidth(gameObject) : minSize;
-      } else {
-        // minSize is still undefined, uses current display height
-        gameObject.minHeight = minSize === undefined ? GetDisplayHeight(gameObject) : minSize;
+      if (proportion > 0) {
+        if (this.orientation === 0) {
+          // x
+          // minWidth is still undefined, uses current display width
+          gameObject.minWidth = minWidth === undefined ? GetDisplayWidth(gameObject) : minWidth;
+        } else {
+          // minHeight is still undefined, uses current display height
+          gameObject.minHeight = minHeight === undefined ? GetDisplayHeight(gameObject) : minHeight;
+        }
+      }
+
+      if (expand) {
+        if (this.orientation === 0) {
+          // x
+          // Might have minHeight value, or still undefined
+          gameObject.minHeight = minHeight;
+        } else {
+          // Might have minWidth value, or still undefined
+          gameObject.minWidth = minWidth;
+        }
       }
     }
 

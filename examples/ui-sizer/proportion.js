@@ -15,7 +15,6 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var leftProportion = 1, rightProportion = 3;
         this.rexUI.add.sizer({
             x: 400, y: 300,
             width: 400, height: 40,
@@ -26,18 +25,14 @@ class Demo extends Phaser.Scene {
             )
             .add(
                 this.add.zone(),             // child
-                leftProportion,              // proportion, fixed width
-                'center'                     // align vertically
+                { proportion: 1 }
             )
             .add(
-                this.add.text(0, 0, 'A'),// child
-                0,                           // proportion, fixed width
-                'center'                     // align vertically
+                this.add.text(0, 0, 'A'),    // child
             )
             .add(
                 this.add.zone(),             // child
-                rightProportion,             // proportion, fixed width
-                'center'                     // align vertically
+                { proportion: 3 }
             )
             .layout()
     }

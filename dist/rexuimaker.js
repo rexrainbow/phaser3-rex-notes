@@ -20390,7 +20390,7 @@
     full: -1
   };
 
-  var Add$7 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
+  var Add$7 = function Add(gameObject, proportion, align, paddingConfig, expand, childKey, index, minWidth, minHeight) {
     AddChild.call(this, gameObject);
     var isRexSpace = gameObject.isRexSpace;
 
@@ -20410,14 +20410,8 @@
       index = GetValue$D(config, 'index', undefined);
 
       if (!gameObject.isRexSizer) {
-        // Get minSize from config
-        if (this.orientation === 0) {
-          // x
-          minSize = GetValue$D(config, 'minWidth', undefined);
-        } else {
-          // y
-          minSize = GetValue$D(config, 'minHeight', undefined);
-        }
+        minWidth = GetValue$D(config, 'minWidth', undefined);
+        minHeight = GetValue$D(config, 'minHeight', undefined);
       }
     }
 
@@ -20441,18 +20435,19 @@
       expand = false;
     }
 
-    if (minSize === undefined) {
+    if (minWidth === undefined) {
       if (isRexSpace) {
-        minSize = 0;
+        minWidth = 0;
       } else if (!gameObject.isRexSizer) {
-        // Get minSize from game object
-        if (this.orientation === 0) {
-          // x
-          minSize = gameObject._minWidth;
-        } else {
-          // y
-          minSize = gameObject._minHeight;
-        }
+        minWidth = gameObject._minWidth;
+      }
+    }
+
+    if (minHeight === undefined) {
+      if (isRexSpace) {
+        minHeight = 0;
+      } else if (!gameObject.isRexSizer) {
+        minHeight = gameObject._minHeight;
       }
     }
 
@@ -20468,15 +20463,28 @@
       this.sizerChildren.splice(index, 0, gameObject);
     }
 
-    if (!gameObject.isRexSizer && proportion > 0) {
+    if (!gameObject.isRexSizer) {
       // Expand normal game object
-      if (this.orientation === 0) {
-        // x
-        // minSize is still undefined, uses current display width
-        gameObject.minWidth = minSize === undefined ? GetDisplayWidth(gameObject) : minSize;
-      } else {
-        // minSize is still undefined, uses current display height
-        gameObject.minHeight = minSize === undefined ? GetDisplayHeight(gameObject) : minSize;
+      if (proportion > 0) {
+        if (this.orientation === 0) {
+          // x
+          // minWidth is still undefined, uses current display width
+          gameObject.minWidth = minWidth === undefined ? GetDisplayWidth(gameObject) : minWidth;
+        } else {
+          // minHeight is still undefined, uses current display height
+          gameObject.minHeight = minHeight === undefined ? GetDisplayHeight(gameObject) : minHeight;
+        }
+      }
+
+      if (expand) {
+        if (this.orientation === 0) {
+          // x
+          // Might have minHeight value, or still undefined
+          gameObject.minHeight = minHeight;
+        } else {
+          // Might have minWidth value, or still undefined
+          gameObject.minWidth = minWidth;
+        }
       }
     }
 
@@ -24011,7 +24019,10 @@
           }
         }
 
-        _this.add(icon, 0, 'center', padding);
+        _this.add(icon, {
+          proportion: 0,
+          padding: padding
+        });
 
         if (iconMask) {
           iconMask = AddChildMask.call(_assertThisInitialized(_this), icon, icon, 1); // Circle mask
@@ -24045,7 +24056,11 @@
           expand = expandTextWidth;
         }
 
-        _this.add(text, proportion, 'center', padding, expand);
+        _this.add(text, {
+          proportion: proportion,
+          expand: expand,
+          padding: padding
+        });
       }
 
       if (action) {
@@ -26221,8 +26236,8 @@
         _this.add(track, {
           proportion: 1,
           expand: true,
-          minWidth: 0,
-          minHeight: 0
+          minWidth: _this.orientation === 0 ? 0 : undefined,
+          minHeight: _this.orientation === 1 ? 0 : undefined
         });
       }
 

@@ -47,7 +47,10 @@ class Label extends Sizer {
                 }
             }
 
-            this.add(icon, 0, 'center', padding);
+            this.add(
+                icon,
+                { proportion: 0, padding: padding, }
+            );
 
             if (iconMask) {
                 iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
@@ -71,7 +74,11 @@ class Label extends Sizer {
                 }
                 expand = expandTextWidth;
             }
-            this.add(text, proportion, 'center', padding, expand);
+
+            this.add(
+                text,
+                { proportion: proportion, expand: expand, padding: padding, }
+            );
         }
 
         if (action) {

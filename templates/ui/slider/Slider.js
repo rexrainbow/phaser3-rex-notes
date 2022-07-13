@@ -35,9 +35,10 @@ class Slider extends Sizer {
                 {
                     proportion: 1,
                     expand: true,
-                    minWidth: 0,
-                    minHeight: 0
-                })
+                    minWidth: ((this.orientation === 0) ? 0 : undefined),
+                    minHeight: ((this.orientation === 1) ? 0 : undefined)
+                }
+            )
         }
 
         if (indicator) {

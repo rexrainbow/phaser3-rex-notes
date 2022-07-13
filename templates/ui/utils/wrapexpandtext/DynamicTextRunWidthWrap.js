@@ -3,6 +3,8 @@ var DynamicTextRunWidthWrap = function (textObject) {
         textObject
             .setFixedSize(width, 0)
             .runWordWrap();
+
+        textObject.minHeight = textObject.height;
         return textObject;
     }
     return RunWidthWrap;
