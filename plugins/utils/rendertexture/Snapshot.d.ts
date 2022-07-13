@@ -7,6 +7,7 @@ declare namespace Snapshot {
 
         x?: number, y?: number,
         width?: number, height?: number,
+        padding?: number,
         originX?: number, originY?: number,
     }
 }

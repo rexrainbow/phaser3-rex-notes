@@ -40,9 +40,9 @@ class Card extends FaceContainer {
         super(scene, x, y, width, height, faces);
         this.type = 'rexPerspectiveCard';
 
-        this.frontFaceRotationX = undefined;
-        this.frontFaceRotationY = undefined;
-        this.frontFaceRotationZ = undefined;
+        this.frontFaceRotationX = 0;
+        this.frontFaceRotationY = 0;
+        this.frontFaceRotationZ = 0;
 
         ForEachFace(faces, function (face, name) {
             this[`${name}Face`] = face;
@@ -57,10 +57,6 @@ class Card extends FaceContainer {
         LayoutFaces(this, faces);
 
         this.setFace(GetValue(config, 'face', 0));
-
-        this.rotationX = 0;
-        this.rotationY = 0;
-        this.rotationZ = 0;
     }
 
     get rotationX() {

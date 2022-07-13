@@ -31,16 +31,14 @@ class RenderTexture extends Image {
         this.rt = null;
     }
 
-    snapshot(gameObjects, padding) {
-        if (padding === undefined) {
-            padding = 0;
+    snapshot(gameObjects, config) {
+        if (config === undefined) {
+            config = {};
         }
+        config.gameObjects = gameObjects;
+        config.renderTexture = this.rt;
 
-        Snapshot({
-            gameObjects: gameObjects,
-            renderTexture: this.rt,
-            padding: padding,
-        })
+        Snapshot(config);
 
         if ((this.width !== this.frame.realWidth) || (this.height !== this.frame.realHeight)) {
             this.syncSize();

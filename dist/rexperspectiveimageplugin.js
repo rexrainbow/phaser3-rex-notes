@@ -946,16 +946,14 @@
       }
     }, {
       key: "snapshot",
-      value: function snapshot(gameObjects, padding) {
-        if (padding === undefined) {
-          padding = 0;
+      value: function snapshot(gameObjects, config) {
+        if (config === undefined) {
+          config = {};
         }
 
-        Snapshot({
-          gameObjects: gameObjects,
-          renderTexture: this.rt,
-          padding: padding
-        });
+        config.gameObjects = gameObjects;
+        config.renderTexture = this.rt;
+        Snapshot(config);
 
         if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {
           this.syncSize();
@@ -3836,9 +3834,9 @@
 
       _this = _super.call(this, scene, x, y, width, height, faces);
       _this.type = 'rexPerspectiveCard';
-      _this.frontFaceRotationX = undefined;
-      _this.frontFaceRotationY = undefined;
-      _this.frontFaceRotationZ = undefined;
+      _this.frontFaceRotationX = 0;
+      _this.frontFaceRotationY = 0;
+      _this.frontFaceRotationZ = 0;
       ForEachFace(faces, function (face, name) {
         this["".concat(name, "Face")] = face;
       }, _assertThisInitialized(_this));
@@ -3854,9 +3852,6 @@
 
       _this.setFace(GetValue$4(config, 'face', 0));
 
-      _this.rotationX = 0;
-      _this.rotationY = 0;
-      _this.rotationZ = 0;
       return _this;
     }
 

@@ -956,16 +956,14 @@
       }
     }, {
       key: "snapshot",
-      value: function snapshot(gameObjects, padding) {
-        if (padding === undefined) {
-          padding = 0;
+      value: function snapshot(gameObjects, config) {
+        if (config === undefined) {
+          config = {};
         }
 
-        Snapshot({
-          gameObjects: gameObjects,
-          renderTexture: this.rt,
-          padding: padding
-        });
+        config.gameObjects = gameObjects;
+        config.renderTexture = this.rt;
+        Snapshot(config);
 
         if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {
           this.syncSize();

@@ -52,11 +52,13 @@ export default {
 
         var faceChildVisibleSave = faceChild.visible;
         faceChild.visible = true;
-        if (faceChild.isRexContainerLite) {
-            cardFace.snapshot(faceChild.getAllVisibleChildren(), this.snapshotPadding);
-        } else {
-            cardFace.snapshot(faceChild, this.snapshotPadding);
-        }
+
+        var gameObjects = (faceChild.isRexContainerLite) ? faceChild.getAllVisibleChildren() : faceChild;
+        cardFace.snapshot(
+            gameObjects,
+            { padding: this.snapshotPadding }
+        );
+
         faceChild.visible = faceChildVisibleSave;
 
         return this;
