@@ -19,16 +19,19 @@ var CreatePerspectiveCardMesh = function (config) {
     var card = new PerspectiveCard(scene, config);
     scene.add.existing(card);
 
-    var parent = this;
-    card.flip
-        .on('start', function () {
-            // Before flipping
-            parent.enterPerspectiveMode();
-        })
-        .on('complete', function () {
-            // After flipping
-            parent.exitPerspectiveMode();
-        })
+    var flip = card.flip;
+    if (flip) {
+        var parent = this;
+        flip
+            .on('start', function () {
+                // Before flipping
+                parent.enterPerspectiveMode();
+            })
+            .on('complete', function () {
+                // After flipping
+                parent.exitPerspectiveMode();
+            })
+    }
 
     return card;
 }

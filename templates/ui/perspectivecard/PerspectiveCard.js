@@ -41,7 +41,7 @@ class PerspectiveCard extends OverlapSizer {
 
     set face(index) {
         // Can't set face during flipping
-        if (this.flip.isRunning) {
+        if (this.flip && this.flip.isRunning) {
             return;
         }
         this.perspectiveCard.face = index;

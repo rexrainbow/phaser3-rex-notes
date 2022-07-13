@@ -21,7 +21,7 @@ declare class PerspectiveCard extends OverlapSizer {
         config?: PerspectiveCard.IConfig
     );
 
-    flip: Card.Flip;
+    flip: Card.Flip | undefined;
 
     setFace(face: Card.FaceTypes): this;
     toggleFace(): this;

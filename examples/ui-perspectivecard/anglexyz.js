@@ -48,12 +48,7 @@ var CreateCard = function (scene, orientation) {
         orientation: orientation,
         snapshotPadding: 3,
 
-        flip: {
-            frontToBack: 'right',
-            backToFront: 'left',
-            duration: 1000,
-            ease: 'Cubic'
-        }
+        flip: false
     })
 }
 
