@@ -7573,6 +7573,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotation" class="md-nav__link">
+    Rotation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8619,6 +8626,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotation" class="md-nav__link">
+    Rotation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8726,6 +8740,8 @@
     <span class="nx">front</span><span class="o">:</span> <span class="nx">frontGameObject</span><span class="p">,</span>
     <span class="c1">// face: 0,</span>
     <span class="c1">// orientation: 0,</span>
+    <span class="c1">// snapshotPadding: 0,</span>
+
     <span class="c1">// flip : {</span>
     <span class="c1">//     frontToBack: 0,</span>
     <span class="c1">//     backToFront: 1,</span>
@@ -8773,6 +8789,7 @@
 <li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Flipping top-to-bottom, or bottom-to-top.</li>
 </ul>
 </li>
+<li><code>snapshotPadding</code> : Padding around face when taking a snapshot of a face.</li>
 <li><code>flip</code> : Configuration of flipping behavior.<ul>
 <li><code>flip.frontToBack</code>, <code>flip.backToFront</code> : Flipping direction.<ul>
 <li><code>'right'</code>, <code>'left-to-right'</code>, or <code>0</code> : Flipping from right to left.</li>
@@ -8949,6 +8966,29 @@
 <ul>
 <li>Is flipping
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">flip</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="rotation">Rotation<a class="headerlink" href="#rotation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get rotation angle
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">angleX</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">angleX</span><span class="p">;</span> <span class="c1">// Angle in degrees</span>
+<span class="kd">var</span> <span class="nx">angleY</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">angleY</span><span class="p">;</span> <span class="c1">// Angle in degrees</span>
+<span class="kd">var</span> <span class="nx">angleZ</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">angleZ</span><span class="p">;</span> <span class="c1">// Angle in degrees</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rotationX</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">rotationX</span><span class="p">;</span> <span class="c1">// Angle in radians</span>
+<span class="kd">var</span> <span class="nx">rotationY</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">rotationY</span><span class="p">;</span> <span class="c1">// Angle in radians</span>
+<span class="kd">var</span> <span class="nx">rotationZ</span> <span class="o">=</span> <span class="nx">card</span><span class="p">.</span><span class="nx">rotationZ</span><span class="p">;</span> <span class="c1">// Angle in radians</span>
+</code></pre></div></li>
+<li>Set rotation angle
+    <div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">angleX</span> <span class="o">=</span> <span class="nx">angleX</span><span class="p">;</span> <span class="c1">// Angle in degrees</span>
+<span class="nx">card</span><span class="p">.</span><span class="nx">angleY</span> <span class="o">=</span> <span class="nx">angleY</span><span class="p">;</span> <span class="c1">// Angle in degrees</span>
+<span class="nx">card</span><span class="p">.</span><span class="nx">angleZ</span> <span class="o">=</span> <span class="nx">angleZ</span><span class="p">;</span> <span class="c1">// Angle in degrees</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">card</span><span class="p">.</span><span class="nx">rotationX</span> <span class="o">=</span> <span class="nx">rotationX</span><span class="p">;</span> <span class="c1">// Angle in radians</span>
+<span class="nx">card</span><span class="p">.</span><span class="nx">rotationY</span> <span class="o">=</span> <span class="nx">rotationY</span><span class="p">;</span> <span class="c1">// Angle in radians</span>
+<span class="nx">card</span><span class="p">.</span><span class="nx">rotationZ</span> <span class="o">=</span> <span class="nx">rotationZ</span><span class="p">;</span> <span class="c1">// Angle in radians</span>
 </code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
