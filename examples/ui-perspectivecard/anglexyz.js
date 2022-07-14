@@ -30,10 +30,12 @@ class Demo extends Phaser.Scene {
         card0Ctrl.add(card0, 'angleX', -180, 180);
         card0Ctrl.add(card0, 'angleY', -180, 180);
         card0Ctrl.add(card0, 'angleZ', -180, 180);
+        card0Ctrl.add(card0, 'scale', 0, 2);
         var card1Ctrl = gui.addFolder('Card1');
         card1Ctrl.add(card1, 'angleX', -180, 180);
         card1Ctrl.add(card1, 'angleY', -180, 180);
         card1Ctrl.add(card1, 'angleZ', -180, 180);
+        card1Ctrl.add(card1, 'scale', 0, 2);
 
     }
 
