@@ -7,6 +7,7 @@ Create image game objects in grids, to assemble target texture.
 
 ## Live demos
 
+- [Cut image](https://codepen.io/rexrainbow/pen/YzapXLM)
 - [Cut rendertexture](https://codepen.io/rexrainbow/pen/xxWEeNX)
 
 ## Usage
