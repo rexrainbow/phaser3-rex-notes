@@ -23,13 +23,22 @@ class Demo extends Phaser.Scene {
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT),
             text: this.rexUI.wrapExpandText(this.add.text(0, 0, content)),
             expandTextWidth: true,
-            expandTextHeight: true,
             icon: this.rexUI.add.roundRectangle(0, 0, 160, 160, 20, COLOR_DARK),
             space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, }
         })
-            .layout()
 
-        // label.setText('Hello world').layout();
+        var topUI = this.rexUI.add.overlapSizer({
+            x: 400, y: 300,
+            width: 800, height: 600
+        })
+            .add(
+                label,
+                {
+                    align: 'center',
+                    expand: true     // or false
+                },
+            )
+            .layout()
 
     }
 
