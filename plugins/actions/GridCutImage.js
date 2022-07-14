@@ -11,7 +11,15 @@ var GridCutImage = function (gameObject, columns, rows, config) {
         columns = GetValue(config, 'columns', 1);
         rows = GetValue(config, 'rows', 1);
     }
-    var ImageClass = GetValue(config, 'ImageClass', DefaultImageClass);
+
+    var createImageCallback = GetValue(config, 'onCreateImage');
+    if (!createImageCallback) {
+        var ImageClass = GetValue(config, 'ImageClass', DefaultImageClass);
+        createImageCallback = function (scene, key, frame) {
+            return new ImageClass(scene, 0, 0, key, frame);
+        }
+    }
+
     var originX = GetValue(config, 'originX', 0.5);
     var originY = GetValue(config, 'originY', 0.5);
     var addToScene = GetValue(config, 'add', true);
@@ -19,10 +27,10 @@ var GridCutImage = function (gameObject, columns, rows, config) {
     var imageObjectPool = GetValue(config, 'objectPool', undefined);
 
     var scene = gameObject.scene;
-    var key = gameObject.texture.key;
-    var frame = gameObject.frame.name;
+    var texture = gameObject.texture;
+    var frame = gameObject.frame;
 
-    var result = GridCut(scene, key, frame, columns, rows);
+    var result = GridCut(scene, texture, frame, columns, rows);
     var getFrameNameCallback = result.getFrameNameCallback;
     var scaleX = gameObject.scaleX,
         scaleY = gameObject.scaleY;
@@ -40,9 +48,9 @@ var GridCutImage = function (gameObject, columns, rows, config) {
 
             var frameName = getFrameNameCallback(x, y);
             if (imageObjectPool && (imageObjectPool.length > 0)) {
-                cellGameObject = (imageObjectPool.pop()).setTexture(key, frameName);
+                cellGameObject = (imageObjectPool.pop()).setTexture(texture, frameName);
             } else {
-                cellGameObject = new ImageClass(scene, 0, 0, key, frameName);
+                cellGameObject = createImageCallback(scene, texture, frameName);
             }
 
             if (addToScene) {

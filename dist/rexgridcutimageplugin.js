@@ -4,6 +4,16 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexgridcutimageplugin = factory());
 })(this, (function () { 'use strict';
 
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -132,36 +142,31 @@
     return callback;
   };
 
-  var IsFunction = function IsFunction(obj) {
-    return obj && typeof obj === 'function';
-  };
-
   var GridCut = function GridCut(scene, key, frame, columns, rows, getFrameNameCallback) {
     if (frame == null) {
       frame = '__BASE';
     }
 
-    if (!IsFunction(getFrameNameCallback)) {
+    if (!getFrameNameCallback) {
       getFrameNameCallback = GetFrameNameCallback(frame, getFrameNameCallback);
     }
 
     var texture = scene.sys.textures.get(key);
     var isRenderTexture = texture.source[0].isRenderTexture;
-    var baseFrame = texture.frames[frame];
+    var baseFrame = _typeof(frame) === 'object' ? frame : texture.get(frame);
     var baseWidth = baseFrame.width,
         baseHeight = baseFrame.height;
-    var cellX, cellY;
+    var cellX, cellY, cellName;
     var cellWidth = baseWidth / columns,
         cellHeight = baseHeight / rows;
     var offsetX = 0,
         offsetY = 0;
-    var frameName;
 
     for (var y = 0; y < rows; y++) {
       offsetX = 0;
 
       for (var x = 0; x < columns; x++) {
-        frameName = getFrameNameCallback(x, y);
+        cellName = getFrameNameCallback(x, y);
         cellX = offsetX + baseFrame.cutX;
 
         if (!isRenderTexture) {
@@ -170,7 +175,7 @@
           cellY = baseHeight - offsetY - cellHeight + baseFrame.cutY;
         }
 
-        texture.add(frameName, 0, cellX, cellY, cellWidth, cellHeight);
+        texture.add(cellName, 0, cellX, cellY, cellWidth, cellHeight);
         offsetX += cellWidth;
       }
 
@@ -198,16 +203,25 @@
       rows = GetValue(config, 'rows', 1);
     }
 
-    var ImageClass = GetValue(config, 'ImageClass', DefaultImageClass);
+    var createImageCallback = GetValue(config, 'onCreateImage');
+
+    if (!createImageCallback) {
+      var ImageClass = GetValue(config, 'ImageClass', DefaultImageClass);
+
+      createImageCallback = function createImageCallback(scene, key, frame) {
+        return new ImageClass(scene, 0, 0, key, frame);
+      };
+    }
+
     var originX = GetValue(config, 'originX', 0.5);
     var originY = GetValue(config, 'originY', 0.5);
     var addToScene = GetValue(config, 'add', true);
     var align = GetValue(config, 'align', addToScene);
     var imageObjectPool = GetValue(config, 'objectPool', undefined);
     var scene = gameObject.scene;
-    var key = gameObject.texture.key;
-    var frame = gameObject.frame.name;
-    var result = GridCut(scene, key, frame, columns, rows);
+    var texture = gameObject.texture;
+    var frame = gameObject.frame;
+    var result = GridCut(scene, texture, frame, columns, rows);
     var getFrameNameCallback = result.getFrameNameCallback;
     var scaleX = gameObject.scaleX,
         scaleY = gameObject.scaleY;
@@ -225,9 +239,9 @@
         var frameName = getFrameNameCallback(x, y);
 
         if (imageObjectPool && imageObjectPool.length > 0) {
-          cellGameObject = imageObjectPool.pop().setTexture(key, frameName);
+          cellGameObject = imageObjectPool.pop().setTexture(texture, frameName);
         } else {
-          cellGameObject = new ImageClass(scene, 0, 0, key, frameName);
+          cellGameObject = createImageCallback(scene, texture, frameName);
         }
 
         if (addToScene) {

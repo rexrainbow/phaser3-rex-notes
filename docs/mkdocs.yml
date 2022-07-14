@@ -131,6 +131,7 @@ nav:
             - Group actions: groupactions.md
             - Quad/Hexagon grid align: gridalign.md
             - Random place: randomplace.md
+            - Grid cut image: gridcutimage.md
         - Position:
             - Move to: moveto.md
             - Ease-move: easemove.md
