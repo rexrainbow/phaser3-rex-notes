@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
 var RadToDeg = Phaser.Math.RadToDeg;
 var CreateRoundRectangleProgressBar = function (scene) {
     return scene.add.rexCustomProgress({
-        type: 'ReactCircularProgress',
+        type: 'RoundRectangleProgress',
         create: [
             { name: 'bar', type: 'lines' },   // Draw bar first before track
             { name: 'track', type: 'lines' },
@@ -109,7 +109,7 @@ var CreateRoundRectangleProgressBar = function (scene) {
                     .arc(px, py0, radius, 180, 360, false)
                     .horizontalLineTo(py1)
                     .arc(px, py1, radius, 0, 180, false)
-                    .horizontalLineTo(px)
+                    .horizontalLineTo(py0)
                     .end();
 
                 var barValue = this.value * height;
@@ -132,7 +132,7 @@ var CreateRoundRectangleProgressBar = function (scene) {
                         .horizontalLineTo(py1)
                         .arc(px, py1, radius, 0, 90 - theta, false)
                         .arc(px, py1, radius, 90 + theta, 180, false)
-                        .horizontalLineTo(px)
+                        .horizontalLineTo(py0)
 
                 } else {
                     bar
