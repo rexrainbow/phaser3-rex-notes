@@ -26824,7 +26824,8 @@
             return;
           }
 
-          this.value -= this.scrollStep;
+          var step = !slider.reverseAxis ? -this.scrollStep : this.scrollStep;
+          this.value += step;
         }, _assertThisInitialized(_this));
       }
 
@@ -26859,7 +26860,8 @@
             return;
           }
 
-          this.value += this.scrollStep;
+          var step = !slider.reverseAxis ? this.scrollStep : -this.scrollStep;
+          this.value += step;
         }, _assertThisInitialized(_this));
       }
 

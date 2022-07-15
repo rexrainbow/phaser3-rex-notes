@@ -33,7 +33,8 @@ class ScrollBar extends Sizer {
                     if (!this.enable) {
                         return;
                     }
-                    this.value -= this.scrollStep;
+                    var step = (!slider.reverseAxis) ? -this.scrollStep : this.scrollStep;
+                    this.value += step;
                 }, this)
         }
 
@@ -70,7 +71,8 @@ class ScrollBar extends Sizer {
                     if (!this.enable) {
                         return;
                     }
-                    this.value += this.scrollStep;
+                    var step = (!slider.reverseAxis) ? this.scrollStep : -this.scrollStep;
+                    this.value += step;
                 }, this)
         }
 
