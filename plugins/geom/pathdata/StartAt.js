@@ -1,6 +1,10 @@
 var StartAt = function (x, y, pathData) {
     pathData.length = 0;
-    pathData.push(x, y);
+
+    if (x != null) {
+        pathData.push(x, y);
+    }
+
     return pathData;
 }
 

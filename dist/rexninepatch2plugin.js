@@ -630,7 +630,7 @@
     } // Get remainder width/height for unknown width/height
 
 
-    var baseFrame = texture.frames[baseFrameName];
+    var baseFrame = texture.get(baseFrameName);
     var remainderTextureWidth = baseFrame.width;
     var unknownColumnWidthCount = 0;
 

@@ -363,7 +363,11 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
 
 ##### Lines
 
-- Start position
+- Start, clear points data
+    ```javascript
+    lines.start();
+    ```
+- Start at position, clear points data
     ```javascript
     lines.startAt(x, y);
     ```

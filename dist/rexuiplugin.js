@@ -366,7 +366,7 @@
     } // Get remainder width/height for unknown width/height
 
 
-    var baseFrame = texture.frames[baseFrameName];
+    var baseFrame = texture.get(baseFrameName);
     var remainderTextureWidth = baseFrame.width;
     var unknownColumnWidthCount = 0;
 
@@ -18779,7 +18779,11 @@
 
   var StartAt = function StartAt(x, y, pathData) {
     pathData.length = 0;
-    pathData.push(x, y);
+
+    if (x != null) {
+      pathData.push(x, y);
+    }
+
     return pathData;
   };
 
@@ -18873,6 +18877,12 @@
       key: "setIterations",
       value: function setIterations(iterations) {
         this.iterations = iterations;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.startAt();
         return this;
       }
     }, {
@@ -19079,6 +19089,13 @@
       key: "lastPointY",
       get: function get() {
         return this.builder.lastPointY;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        this.builder.start();
+        this.dirty = true;
+        return this;
       }
     }, {
       key: "startAt",

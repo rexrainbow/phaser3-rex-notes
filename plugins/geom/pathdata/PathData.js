@@ -29,6 +29,11 @@ class PathData {
         return this;
     }
 
+    start() {
+        this.startAt();
+        return this;
+    }
+
     startAt(x, y) {
         StartAt(x, y, this.pathData);
         this.lastPointX = x;

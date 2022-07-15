@@ -29,6 +29,13 @@ class Lines extends PathBase {
         return this.builder.lastPointY;
     }
 
+    start() {
+        this.builder.start();
+
+        this.dirty = true;
+        return this;
+    }
+
     startAt(x, y) {
         this.builder.startAt(x, y);
 
