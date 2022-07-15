@@ -143,6 +143,8 @@ var CreateRoundRectangleProgressBar = function (scene) {
                 }
 
                 bar.close();
+
+                bar.rotateAround(width / 2, height / 2, 180);
             }
 
         },
