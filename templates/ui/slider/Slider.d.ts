@@ -9,6 +9,7 @@ declare namespace Slider {
     type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
 
     interface IConfig extends Sizer.IConfig {
+        reverseAxis?: boolean,
         background?: Phaser.GameObjects.GameObject,
         track?: Phaser.GameObjects.GameObject,
         indicator?: Phaser.GameObjects.GameObject,

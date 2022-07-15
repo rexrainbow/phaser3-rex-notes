@@ -9,7 +9,16 @@ var UpdateThumb = function (t) {
     if (t === undefined) {
         t = this.value;
     }
-    PercentToPosition(t, this.getStartPoint(), this.getEndPoint(), thumb);
+
+    var startPoint, endPoint;
+    if (!this.reverseAxis) {
+        startPoint = this.getStartPoint();
+        endPoint = this.getEndPoint();
+    } else {
+        startPoint = this.getEndPoint();
+        endPoint = this.getStartPoint();
+    }
+    PercentToPosition(t, startPoint, endPoint, thumb);
     this.resetChildPositionState(thumb);
     return this;
 }

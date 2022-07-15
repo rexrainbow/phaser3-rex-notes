@@ -6,7 +6,16 @@ var OnDragThumb = function (pointer, dragX, dragY) {
     }
     tmpPoint.x = dragX;
     tmpPoint.y = dragY;
-    this.value = PositionToPercent(this.getStartPoint(), this.getEndPoint(), tmpPoint);
+
+    var startPoint, endPoint;
+    if (!this.reverseAxis) {
+        startPoint = this.getStartPoint();
+        endPoint = this.getEndPoint();
+    } else {
+        startPoint = this.getEndPoint();
+        endPoint = this.getStartPoint();
+    }
+    this.value = PositionToPercent(startPoint, endPoint, tmpPoint);
 }
 var tmpPoint = {};
 

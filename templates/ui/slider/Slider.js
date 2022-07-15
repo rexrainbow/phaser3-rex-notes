@@ -20,6 +20,8 @@ class Slider extends Sizer {
         this.type = 'rexSlider';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
+        this.reverseAxis = GetValue(config, 'reverseAxis', false);
+
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var track = GetValue(config, 'track', undefined);

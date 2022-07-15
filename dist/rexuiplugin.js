@@ -33623,16 +33623,12 @@
   var Percent$1 = Phaser.Math.Percent;
 
   var PositionToPercent = function PositionToPercent(startPoint, endPoint, currentPoint) {
-    var min, max, value;
+    var value;
 
     if (startPoint.y === endPoint.y) {
-      min = Math.min(startPoint.x, endPoint.x);
-      max = Math.max(startPoint.x, endPoint.x);
-      value = Percent$1(currentPoint.x, min, max);
+      value = Percent$1(currentPoint.x, startPoint.x, endPoint.x);
     } else if (startPoint.x === endPoint.x) {
-      min = Math.min(startPoint.y, endPoint.y);
-      max = Math.max(startPoint.y, endPoint.y);
-      value = Percent$1(currentPoint.y, min, max);
+      value = Percent$1(currentPoint.y, startPoint.y, endPoint.y);
     }
 
     return value;
@@ -33645,7 +33641,17 @@
 
     tmpPoint$4.x = dragX;
     tmpPoint$4.y = dragY;
-    this.value = PositionToPercent(this.getStartPoint(), this.getEndPoint(), tmpPoint$4);
+    var startPoint, endPoint;
+
+    if (!this.reverseAxis) {
+      startPoint = this.getStartPoint();
+      endPoint = this.getEndPoint();
+    } else {
+      startPoint = this.getEndPoint();
+      endPoint = this.getStartPoint();
+    }
+
+    this.value = PositionToPercent(startPoint, endPoint, tmpPoint$4);
   };
 
   var tmpPoint$4 = {};
@@ -33661,7 +33667,17 @@
 
     tmpPoint$3.x = pointer.worldX;
     tmpPoint$3.y = pointer.worldY;
-    var value = PositionToPercent(this.getStartPoint(), this.getEndPoint(), tmpPoint$3);
+    var startPoint, endPoint;
+
+    if (!this.reverseAxis) {
+      startPoint = this.getStartPoint();
+      endPoint = this.getEndPoint();
+    } else {
+      startPoint = this.getEndPoint();
+      endPoint = this.getStartPoint();
+    }
+
+    var value = PositionToPercent(startPoint, endPoint, tmpPoint$3);
     this.stopEaseValue();
 
     if (this.easeValueDuration === 0 || Math.abs(this.value - value) < 0.1) {
@@ -33718,8 +33734,8 @@
 
   var tmpPoint$1 = {};
 
-  var AlignRight = Phaser.Display.Align.RIGHT_CENTER;
-  var AlignBottom = Phaser.Display.Align.BOTTOM_CENTER;
+  var AlignRight$1 = Phaser.Display.Align.RIGHT_CENTER;
+  var AlignBottom$1 = Phaser.Display.Align.BOTTOM_CENTER;
 
   var GetEndoint = function GetEndoint(out) {
     if (out === undefined) {
@@ -33727,7 +33743,7 @@
     }
 
     if (this.childrenMap.thumb) {
-      var align = this.orientation === 0 ? AlignRight : AlignBottom;
+      var align = this.orientation === 0 ? AlignRight$1 : AlignBottom$1;
       GetThumbAlignPoint.call(this, align, out);
     } else {
       if (this.orientation === 0) {
@@ -33770,13 +33786,25 @@
       t = this.value;
     }
 
-    PercentToPosition(t, this.getStartPoint(), this.getEndPoint(), thumb);
+    var startPoint, endPoint;
+
+    if (!this.reverseAxis) {
+      startPoint = this.getStartPoint();
+      endPoint = this.getEndPoint();
+    } else {
+      startPoint = this.getEndPoint();
+      endPoint = this.getStartPoint();
+    }
+
+    PercentToPosition(t, startPoint, endPoint, thumb);
     this.resetChildPositionState(thumb);
     return this;
   };
 
   var AlignLeft = Phaser.Display.Align.LEFT_CENTER;
   var AlignTop = Phaser.Display.Align.TOP_CENTER;
+  var AlignRight = Phaser.Display.Align.RIGHT_CENTER;
+  var AlignBottom = Phaser.Display.Align.BOTTOM_CENTER;
 
   var UpdateIndicator = function UpdateIndicator(t) {
     var indicator = this.childrenMap.indicator;
@@ -33789,6 +33817,7 @@
       t = this.value;
     }
 
+    var reverseAxis = this.reverseAxis;
     var newWidth, newHeight;
     var thumb = this.childrenMap.thumb;
 
@@ -33796,13 +33825,27 @@
       if (this.orientation === 0) {
         // x, extend width
         var thumbWidth = GetDisplayWidth(thumb);
-        var thumbRight = thumb.x - thumbWidth * thumb.originX + thumbWidth;
-        newWidth = thumbRight - this.left;
+
+        if (!reverseAxis) {
+          var thumbLeft = thumb.x - thumbWidth * thumb.originX;
+          var thumbRight = thumbLeft + thumbWidth;
+          newWidth = thumbRight - this.left;
+        } else {
+          var thumbLeft = thumb.x - thumbWidth * thumb.originX;
+          newWidth = this.right - thumbLeft;
+        }
       } else {
         // y, extend height
         var thumbHeight = GetDisplayHeight(thumb);
-        var thumbBottom = thumb.y - thumbHeight * thumb.originY + thumbHeight;
-        newHeight = thumbBottom - this.top;
+
+        if (!reverseAxis) {
+          var thumbTop = thumb.y - thumbHeight * thumb.originY;
+          var thumbBottom = thumbTop + thumbHeight;
+          newHeight = thumbBottom - this.top;
+        } else {
+          var thumbTop = thumb.y - thumbHeight * thumb.originY;
+          newHeight = this.bottom - thumbTop;
+        }
       }
     } else {
       if (this.orientation === 0) {
@@ -33815,7 +33858,14 @@
     }
 
     ResizeGameObject(indicator, newWidth, newHeight);
-    var align = this.orientation === 0 ? AlignLeft : AlignTop;
+    var align;
+
+    if (!reverseAxis) {
+      align = this.orientation === 0 ? AlignLeft : AlignTop;
+    } else {
+      align = this.orientation === 0 ? AlignRight : AlignBottom;
+    }
+
     QuickSet(indicator, this, align);
     this.resetChildPositionState(indicator);
   };
@@ -33839,7 +33889,8 @@
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexSlider';
-      _this.eventEmitter = GetValue$Q(config, 'eventEmitter', _assertThisInitialized(_this)); // Add elements
+      _this.eventEmitter = GetValue$Q(config, 'eventEmitter', _assertThisInitialized(_this));
+      _this.reverseAxis = GetValue$Q(config, 'reverseAxis', false); // Add elements
 
       var background = GetValue$Q(config, 'background', undefined);
       var track = GetValue$Q(config, 'track', undefined);

@@ -8641,6 +8641,7 @@
     <span class="c1">// height: undefined,</span>
 
     <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">reverseAxis</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
     <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
@@ -8696,6 +8697,11 @@
 <li><code>orientation</code> :<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Horizontal slider.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Vertical slider.</li>
+</ul>
+</li>
+<li><code>reverseAxis</code> : <ul>
+<li><code>false</code> : Map left/top to <code>0</code>, and right/bottom to <code>1</code>. Default behavior.</li>
+<li><code>true</code> : Map left/top to <code>1</code>, and right/bottom to <code>0</code>.</li>
 </ul>
 </li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of slider.</li>
