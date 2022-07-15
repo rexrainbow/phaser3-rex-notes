@@ -28,15 +28,13 @@ class GameScene extends Phaser.Scene {
     }
 }
 
+var RandomXY = Phaser.Math.RandomXY;
 var CreateBall = function (scene, color) {
     var ball = scene.add.circle(400, 300, 10, color);
     scene.physics.add.existing(ball, 0);
 
     var body = ball.body;
-    body.velocity.setToPolar(
-        Phaser.Math.DegToRad(Math.random() * 360),
-        400
-    )
+    RandomXY(body.velocity, 400);
     body.setBounce(1).setCollideWorldBounds();
     return ball
 }
