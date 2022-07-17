@@ -6,8 +6,6 @@ import GetStyle from '../../../canvas/GetStyle.js';
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-//  Key: [ Object Key, Default Value, postCallback ]
-
 class TextStyle {
     constructor(text, style, propertyMap) {
         this.parent = text;

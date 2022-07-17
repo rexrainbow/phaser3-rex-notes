@@ -1,5 +1,7 @@
 import GetStyle from '../../../canvas/GetStyle.js';
 
+//  Key: [ Object Key, Default Value, postCallback ]
+
 var PropertyMap = {
     // background
     backgroundColor: ['backgroundColor', null, GetStyle],
