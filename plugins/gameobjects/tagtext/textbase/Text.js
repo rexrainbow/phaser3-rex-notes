@@ -1,10 +1,10 @@
-import TextBase from '../../../utils/text/textbase/TextBase.js';
+import TextBase from '../../textbase/TextBase.js';
 import Render from './render/Render.js';
-import TextStyle from './textstyle/TextStyle.js'; // extended
-import MeasureTextMargins from '../../../utils/text/textbase/textstyle/MeasureTextMargins.js';
+import TextStyle from '../../textbase/textstyle/TextStyle.js';
+import MeasureTextMargins from '../../textbase/textstyle/MeasureTextMargins.js';
 import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
-import CONST from '../../../utils/text/textbase/const.js';
+import CONST from '../../textbase/const.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
 

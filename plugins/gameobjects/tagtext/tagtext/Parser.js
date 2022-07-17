@@ -1,4 +1,4 @@
-import TextStyle from '../textbase/textstyle/TextStyle.js';
+import TextStyle from '../../textbase/textstyle/TextStyle.js';
 
 var GETPROP_RESULT = {
     plainText: null,

@@ -1,4 +1,4 @@
-import GetStyle from '../../../canvas/GetStyle.js';
+import GetStyle from '../../../utils/canvas/GetStyle.js';
 
 //  Key: [ Object Key, Default Value, postCallback ]
 

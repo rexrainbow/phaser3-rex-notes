@@ -1,7 +1,7 @@
 import DefaultPropertyMap from './PropertyMap.js';
 import MeasureText from './MeasureText.js';
 import CONST from '../const.js';
-import GetStyle from '../../../canvas/GetStyle.js';
+import GetStyle from '../../../utils/canvas/GetStyle.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;

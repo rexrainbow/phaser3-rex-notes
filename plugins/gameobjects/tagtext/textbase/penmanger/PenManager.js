@@ -1,6 +1,6 @@
 import Pool from '../../../../pool.js';
 import Pen from './Pen.js';
-import CONST from '../../../../utils/text/textbase/const.js';
+import CONST from '../../../textbase/const.js';
 import Clone from '../../../../utils/object/Clone.js';
 import NOOP from '../../../../utils/object/NOOP.js';
 
