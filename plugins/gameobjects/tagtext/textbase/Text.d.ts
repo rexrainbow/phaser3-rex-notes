@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
 import CanvasGameObjectBase from '../../../utils/types/CanvasGameObjectBase';
-import TextStyle from '../../textbase/textstyle/TextStyle';
+import TextStyleBase from '../../textbase/textstyle/TextStyleInterface';
 
 export default Text;
 
@@ -23,7 +23,7 @@ declare namespace Text {
         left?: number
     };
 
-    interface TextStyle extends TextStyle.TextStyle {
+    interface TextStyle extends TextStyleBase {
     }
 
     namespace Events {
