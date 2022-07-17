@@ -2,7 +2,7 @@ import DrawMethods from './DrawMethods.js';
 import PenManager from '../penmanger/PenManager.js';
 import HitAreaManager from '../hitareamanager/HitAreaManager.js';
 import SetInteractive from './SetInteractive.js';
-import CONST from '../const.js';
+import CONST from '../../../../utils/text/textbase/const.js';
 import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
 import { FreeLines, GetLine } from '../wraptext/LinePool.js';

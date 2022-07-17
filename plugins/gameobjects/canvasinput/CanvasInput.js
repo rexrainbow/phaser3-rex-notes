@@ -1,4 +1,4 @@
-import TextBase from '../../utils/text/TextBase.js';
+import TextBase from '../../utils/text/textbase/TextBase.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;

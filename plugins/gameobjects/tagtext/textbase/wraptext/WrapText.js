@@ -1,5 +1,5 @@
 import { FreeLine, GetLine } from './LinePool.js';
-import CONST from '../const.js';
+import CONST from '../../../../utils/text/textbase/const.js';
 
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;

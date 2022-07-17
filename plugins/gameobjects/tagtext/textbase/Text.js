@@ -1,10 +1,10 @@
-import TextBase from '../../../utils/text/TextBase.js';
+import TextBase from '../../../utils/text/textbase/TextBase.js';
 import Render from './render/Render.js';
 import TextStyle from './textstyle/TextStyle.js'; // extended
-import MeasureTextMargins from './textstyle/MeasureTextMargins.js';
+import MeasureTextMargins from '../../../utils/text/textbase/textstyle/MeasureTextMargins.js';
 import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
-import CONST from './const.js';
+import CONST from '../../../utils/text/textbase/const.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
 
@@ -61,6 +61,12 @@ class Text extends TextBase {
             }
         }
         this.style = new TextStyle(this, style);
+
+        var imageData = GetValue(style, 'images', undefined);
+        if (imageData) {
+            this.addImage(imageData);
+        }
+
 
         this.autoRound = true;
 
