@@ -1,3 +1,5 @@
+import TextBase from '../../utils/text/TextBase.js';
+
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
@@ -5,7 +7,7 @@ const GameObject = Phaser.GameObjects.GameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 
-class CanvasInput extends GameObject {
+class CanvasInput extends TextBase {
     constructor(scene, x, y, config) {
         if (IsPlainObject(x)) {
             var config = x;
@@ -14,7 +16,7 @@ class CanvasInput extends GameObject {
         }
 
         super(scene, 'rexCanvasInput');
-        
+
         this.renderer = scene.sys.game.renderer;
 
         this.setPosition(x, y);
@@ -26,9 +28,9 @@ class CanvasInput extends GameObject {
         this.context = this.canvas.getContext('2d');
 
         this.style = new TextStyle(this, config);
-        
+
         this.autoRound = true;
-        
+
         this.width = 1;
 
         this.height = 1;
@@ -63,7 +65,7 @@ class CanvasInput extends GameObject {
 
         scene.sys.game.events.on('contextrestored', this.onContextRestored, this);
     }
-    
+
     onContextRestored() {
         this.dirty = true;
     }
@@ -106,25 +108,9 @@ class CanvasInput extends GameObject {
 
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Text,
-    [
-        Components.Alpha,
-        Components.BlendMode,
-        Components.ComputedSize,
-        Components.Crop,
-        Components.Depth,
-        Components.Flip,
-        Components.GetBounds,
-        Components.Mask,
-        Components.Origin,
-        Components.Pipeline,
-        Components.ScrollFactor,
-        Components.Tint,
-        Components.Transform,
-        Components.Visible,
-        Render
-    ]
-);
+Object.assign(
+    CanvasInput.prototype,
+    Render
+)
 
 export default CanvasInput;
