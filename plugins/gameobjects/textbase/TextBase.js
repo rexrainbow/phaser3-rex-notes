@@ -1,3 +1,5 @@
+import Render from './render/Render.js';
+
 const GameObject = Phaser.GameObjects.GameObject;
 
 class TextBase extends GameObject {
@@ -20,6 +22,7 @@ Phaser.Class.mixin(TextBase,
         Components.Tint,
         Components.Transform,
         Components.Visible,
+        Render
     ]
 );
 export default TextBase;

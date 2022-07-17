@@ -1,5 +1,4 @@
 import TextBase from '../../textbase/TextBase.js';
-import Render from './render/Render.js';
 import TextStyle from '../../textbase/textstyle/TextStyle.js';
 import MeasureTextMargins from '../../textbase/textstyle/MeasureTextMargins.js';
 import CanvasText from './canvastext/CanvasText.js';
@@ -603,10 +602,5 @@ class Text extends TextBase {
         return this;
     }
 }
-
-Object.assign(
-    Text.prototype,
-    Render
-)
 
 export default Text;
