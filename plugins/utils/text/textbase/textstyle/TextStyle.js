@@ -69,14 +69,6 @@ class TextStyle {
         this.setStyle(style, false, true);
     }
 
-    // Override
-    get canvas() {
-    }
-
-    // Override
-    get context() {
-    }
-
     get isWrapFitMode() {
         return (this.fixedWidth > 0) && (this.wrapMode !== CONST.NO_WRAP) && (this.wrapWidth === 0);
     }
@@ -299,15 +291,15 @@ class TextStyle {
             isHorizontalGradient = true;
         }
 
-        this.backgroundColor = GetStyle(color, this.canvas, this.context);
-        this.backgroundColor2 = GetStyle(color2, this.canvas, this.context);
+        this.backgroundColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        this.backgroundColor2 = GetStyle(color2, this.parent.canvas, this.parent.context);
         this.backgroundHorizontalGradient = isHorizontalGradient;
 
         return this.update(false);
     }
 
     setBackgroundStrokeColor(color, lineWidth) {
-        this.backgroundStrokeColor = GetStyle(color, this.canvas, this.context);
+        this.backgroundStrokeColor = GetStyle(color, this.parent.canvas, this.parent.context);
         this.backgroundStrokeLineWidth = lineWidth;
 
         return this.update(false);
@@ -321,13 +313,13 @@ class TextStyle {
     }
 
     setFill(color) {
-        this.color = GetStyle(color, this.canvas, this.context);
+        this.color = GetStyle(color, this.parent.canvas, this.parent.context);
 
         return this.update(false);
     }
 
     setColor(color) {
-        this.color = GetStyle(color, this.canvas, this.context);
+        this.color = GetStyle(color, this.parent.canvas, this.parent.context);
 
         return this.update(false);
     }
@@ -341,7 +333,7 @@ class TextStyle {
                 thickness = this.strokeThickness;
             }
 
-            this.stroke = GetStyle(color, this.canvas, this.context);
+            this.stroke = GetStyle(color, this.parent.canvas, this.parent.context);
             this.strokeThickness = thickness;
         }
 
@@ -370,7 +362,7 @@ class TextStyle {
 
         this.shadowOffsetX = x;
         this.shadowOffsetY = y;
-        this.shadowColor = GetStyle(color, this.canvas, this.context);
+        this.shadowColor = GetStyle(color, this.parent.canvas, this.parent.context);
         this.shadowBlur = blur;
         this.shadowStroke = shadowStroke;
         this.shadowFill = shadowFill;
@@ -397,7 +389,7 @@ class TextStyle {
             color = '#000';
         }
 
-        this.shadowColor = GetStyle(color, this.canvas, this.context);
+        this.shadowColor = GetStyle(color, this.parent.canvas, this.parent.context);
 
         return this.update(false);
     }
@@ -435,7 +427,7 @@ class TextStyle {
             offset = 0;
         }
 
-        this.underlineColor = GetStyle(color, this.canvas, this.context);
+        this.underlineColor = GetStyle(color, this.parent.canvas, this.parent.context);
         this.underlineThickness = thickness;
         this.underlineOffset = offset;
 
@@ -447,7 +439,7 @@ class TextStyle {
             color = '#000';
         }
 
-        this.underlineColor = GetStyle(color, this.canvas, this.context);
+        this.underlineColor = GetStyle(color, this.parent.canvas, this.parent.context);
         return this.update(false);
     }
 
