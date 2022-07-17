@@ -1,3 +1,4 @@
+import TextBase from '../../../utils/text/TextBase.js';
 import Render from './render/Render.js';
 import TextStyle from './textstyle/TextStyle.js'; // extended
 import MeasureTextMargins from './textstyle/MeasureTextMargins.js';
@@ -17,7 +18,7 @@ const SPLITREGEXP = CONST.SPLITREGEXP;
 
 var PensPools = {};
 
-class Text extends GameObject {
+class Text extends TextBase {
     constructor(scene, x, y, text, style, type, parser) {
         if (IsPlainObject(x)) {
             var config = x;
@@ -597,25 +598,9 @@ class Text extends GameObject {
     }
 }
 
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Text,
-    [
-        Components.Alpha,
-        Components.BlendMode,
-        Components.ComputedSize,
-        Components.Crop,
-        Components.Depth,
-        Components.Flip,
-        Components.GetBounds,
-        Components.Mask,
-        Components.Origin,
-        Components.Pipeline,
-        Components.ScrollFactor,
-        Components.Tint,
-        Components.Transform,
-        Components.Visible,
-        Render
-    ]
-);
+Object.assign(
+    Text.prototype,
+    Render
+)
 
 export default Text;
