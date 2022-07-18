@@ -1,6 +1,5 @@
 import TextBase from '../../textbase/TextBase.js';
 import TextStyle from '../../textbase/textstyle/TextStyle.js';
-import MeasureTextMargins from '../../textbase/textstyle/MeasureTextMargins.js';
 import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
 import CONST from '../../textbase/const.js';
@@ -112,7 +111,7 @@ class Text extends TextBase {
             PensPools = {};
 
             // Remove cached data
-            this.scene.game.events.on('destroy', function () {
+            this.scene.game.events.once('destroy', function () {
                 PensPools = null;
             });
         }
@@ -226,114 +225,6 @@ class Text extends TextBase {
         return this;
     }
 
-    setStyle(style) {
-        return this.style.setStyle(style);
-    }
-
-    setFont(font) {
-        return this.style.setFont(font);
-    }
-
-    setFontFamily(family) {
-        return this.style.setFontFamily(family);
-    }
-
-    setFontSize(size) {
-        return this.style.setFontSize(size);
-    }
-
-    setFontStyle(style) {
-        return this.style.setFontStyle(style);
-    }
-
-    setTestString(string) {
-        return this.style.setTestString(string);
-    }
-
-    setFixedSize(width, height) {
-        return this.style.setFixedSize(width, height);
-    }
-
-    setBackgroundColor(color, color2, isHorizontalGradient) {
-        return this.style.setBackgroundColor(color, color2, isHorizontalGradient);
-    }
-
-    setBackgroundStrokeColor(color, lineWidth) {
-        return this.style.setBackgroundStrokeColor(color, lineWidth);
-    }
-
-    setBackgroundCornerRadius(radius, iteration) {
-        return this.style.setBackgroundCornerRadius(radius, iteration);
-    }
-
-    setFill(color) {
-        return this.style.setFill(color);
-    }
-
-    setColor(color) {
-        return this.style.setColor(color);
-    }
-
-    setStroke(color, thickness) {
-        return this.style.setStroke(color, thickness);
-    }
-
-    setShadow(x, y, color, blur, shadowStroke, shadowFill) {
-        return this.style.setShadow(x, y, color, blur, shadowStroke, shadowFill);
-    }
-
-    setShadowOffset(x, y) {
-        return this.style.setShadowOffset(x, y);
-    }
-
-    setShadowColor(color) {
-        return this.style.setShadowColor(color);
-    }
-
-    setShadowBlur(blur) {
-        return this.style.setShadowBlur(blur);
-    }
-
-    setShadowStroke(enabled) {
-        return this.style.setShadowStroke(enabled);
-    }
-
-    setShadowFill(enabled) {
-        return this.style.setShadowFill(enabled);
-    }
-
-    setWrapMode(mode) {
-        return this.style.setWrapMode(mode);
-    }
-
-    setWrapWidth(width) {
-        return this.style.setWrapWidth(width);
-    }
-
-    // Align with built-in text game object
-    setWordWrapWidth(width) {
-        return this.style.setWrapWidth(width);
-    }
-
-    setAlign(align) {
-        return this.style.setHAlign(align);
-    }
-    setHAlign(align) {
-        return this.style.setHAlign(align);
-    }
-    setVAlign(align) {
-        return this.style.setVAlign(align);
-    }
-
-    setLineSpacing(value) {
-        return this.style.setLineSpacing(value);
-    }
-
-    setXOffset(value) {
-        return this.style.setXOffset(value);
-    }
-
-
     setPadding(left, top, right, bottom) {
         if (typeof left === 'object') {
             var config = left;
@@ -379,14 +270,6 @@ class Text extends TextBase {
         this.padding.bottom = bottom;
 
         return this.updateText(false);
-    }
-
-    setMaxLines(max) {
-        return this.style.setMaxLines(max);
-    }
-
-    setResolution(value) {
-        return this.style.setResolution(value);
     }
 
     updateText(runWrap) {
@@ -487,14 +370,6 @@ class Text extends TextBase {
         return this;
     }
 
-    getTextMetrics() {
-        return this.style.getTextMetrics();
-    }
-
-    setTextMetrics(metrics, font) {
-        return this.style.setTextMetrics(metrics, font);
-    }
-
     toJSON() {
         var out = Components.ToJSON(this);
 
@@ -566,13 +441,6 @@ class Text extends TextBase {
         return this.setFixedSize(width, height);
     }
 
-    set lineSpacing(value) {
-        this.setLineSpacing(value);
-    }
-    get lineSpacing() {
-        return this.style.lineSpacing;
-    }
-
     get imageManager() {
         if (!this._imageManager) {
             this._imageManager = new ImageManager(this.scene);
@@ -588,10 +456,6 @@ class Text extends TextBase {
     drawAreaBounds(graphics, color) {
         this.canvasText.hitAreaManager.drawBounds(graphics, color, this);
         return this;
-    }
-
-    measureTextMargins(testString, out) {
-        return MeasureTextMargins(this.style, testString, out);
     }
 
     generateTexture(key, x, y, width, height) {
