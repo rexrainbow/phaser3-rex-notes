@@ -229,12 +229,345 @@
     renderCanvas: CanvasRenderer
   };
 
+  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
+
+  var MeasureTextMargins = function MeasureTextMargins(textStyle, testString, out) {
+    if (out === undefined) {
+      out = {};
+    }
+
+    var canvas = CanvasPool$2.create(this);
+    var context = canvas.getContext('2d');
+    textStyle.syncFont(canvas, context);
+    var metrics = context.measureText(testString);
+    var width = Math.ceil(metrics.width * textStyle.baselineX);
+    var baseline = width;
+    var height = 2 * baseline;
+    baseline = baseline * textStyle.baselineY | 0;
+    canvas.width = width;
+    canvas.height = height;
+    context.fillStyle = '#f00';
+    context.fillRect(0, 0, width, height);
+    context.font = textStyle._font;
+    context.textBaseline = 'alphabetic';
+    context.fillStyle = '#000';
+    context.fillText(textStyle.testString, 0, baseline);
+    out.left = 0;
+
+    if (width === 0 || height === 0 || !context.getImageData(0, 0, width, height)) {
+      CanvasPool$2.remove(canvas);
+      return out;
+    }
+
+    var imagedata = context.getImageData(0, 0, width, height).data;
+    var stop = false;
+
+    for (var x = 0; x < width; x++) {
+      for (var y = 0; y < height; y++) {
+        var idx = (y * width + x) * 4;
+
+        if (imagedata[idx] !== 255) {
+          out.left = x;
+          stop = true;
+          break;
+        }
+      }
+
+      if (stop) {
+        break;
+      }
+    }
+
+    CanvasPool$2.remove(canvas);
+    return out;
+  };
+
+  var GameObject$1 = Phaser.GameObjects.GameObject;
+
+  var TextBase = /*#__PURE__*/function (_GameObject) {
+    _inherits(TextBase, _GameObject);
+
+    var _super = _createSuper(TextBase);
+
+    function TextBase() {
+      _classCallCheck(this, TextBase);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(TextBase, [{
+      key: "setStyle",
+      value: function setStyle(style) {
+        return this.style.setStyle(style);
+      }
+    }, {
+      key: "setFont",
+      value: function setFont(font) {
+        return this.style.setFont(font);
+      }
+    }, {
+      key: "setFontFamily",
+      value: function setFontFamily(family) {
+        return this.style.setFontFamily(family);
+      }
+    }, {
+      key: "setFontSize",
+      value: function setFontSize(size) {
+        return this.style.setFontSize(size);
+      }
+    }, {
+      key: "setFontStyle",
+      value: function setFontStyle(style) {
+        return this.style.setFontStyle(style);
+      }
+    }, {
+      key: "setTestString",
+      value: function setTestString(string) {
+        return this.style.setTestString(string);
+      }
+    }, {
+      key: "setFixedSize",
+      value: function setFixedSize(width, height) {
+        return this.style.setFixedSize(width, height);
+      }
+    }, {
+      key: "setBackgroundColor",
+      value: function setBackgroundColor(color, color2, isHorizontalGradient) {
+        return this.style.setBackgroundColor(color, color2, isHorizontalGradient);
+      }
+    }, {
+      key: "setBackgroundStrokeColor",
+      value: function setBackgroundStrokeColor(color, lineWidth) {
+        return this.style.setBackgroundStrokeColor(color, lineWidth);
+      }
+    }, {
+      key: "setBackgroundCornerRadius",
+      value: function setBackgroundCornerRadius(radius, iteration) {
+        return this.style.setBackgroundCornerRadius(radius, iteration);
+      }
+    }, {
+      key: "setFill",
+      value: function setFill(color) {
+        return this.style.setFill(color);
+      }
+    }, {
+      key: "setColor",
+      value: function setColor(color) {
+        return this.style.setColor(color);
+      }
+    }, {
+      key: "setStroke",
+      value: function setStroke(color, thickness) {
+        return this.style.setStroke(color, thickness);
+      }
+    }, {
+      key: "setShadow",
+      value: function setShadow(x, y, color, blur, shadowStroke, shadowFill) {
+        return this.style.setShadow(x, y, color, blur, shadowStroke, shadowFill);
+      }
+    }, {
+      key: "setShadowOffset",
+      value: function setShadowOffset(x, y) {
+        return this.style.setShadowOffset(x, y);
+      }
+    }, {
+      key: "setShadowColor",
+      value: function setShadowColor(color) {
+        return this.style.setShadowColor(color);
+      }
+    }, {
+      key: "setShadowBlur",
+      value: function setShadowBlur(blur) {
+        return this.style.setShadowBlur(blur);
+      }
+    }, {
+      key: "setShadowStroke",
+      value: function setShadowStroke(enabled) {
+        return this.style.setShadowStroke(enabled);
+      }
+    }, {
+      key: "setShadowFill",
+      value: function setShadowFill(enabled) {
+        return this.style.setShadowFill(enabled);
+      }
+    }, {
+      key: "setWrapMode",
+      value: function setWrapMode(mode) {
+        return this.style.setWrapMode(mode);
+      }
+    }, {
+      key: "setWrapWidth",
+      value: function setWrapWidth(width) {
+        return this.style.setWrapWidth(width);
+      } // Align with built-in text game object
+
+    }, {
+      key: "setWordWrapWidth",
+      value: function setWordWrapWidth(width) {
+        return this.style.setWrapWidth(width);
+      }
+    }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        return this.style.setHAlign(align);
+      }
+    }, {
+      key: "setHAlign",
+      value: function setHAlign(align) {
+        return this.style.setHAlign(align);
+      }
+    }, {
+      key: "setVAlign",
+      value: function setVAlign(align) {
+        return this.style.setVAlign(align);
+      }
+    }, {
+      key: "setLineSpacing",
+      value: function setLineSpacing(value) {
+        return this.style.setLineSpacing(value);
+      }
+    }, {
+      key: "lineSpacing",
+      get: function get() {
+        return this.style.lineSpacing;
+      },
+      set: function set(value) {
+        this.setLineSpacing(value);
+      }
+    }, {
+      key: "setXOffset",
+      value: function setXOffset(value) {
+        return this.style.setXOffset(value);
+      }
+    }, {
+      key: "setMaxLines",
+      value: function setMaxLines(max) {
+        return this.style.setMaxLines(max);
+      }
+    }, {
+      key: "setResolution",
+      value: function setResolution(value) {
+        return this.style.setResolution(value);
+      }
+    }, {
+      key: "getTextMetrics",
+      value: function getTextMetrics() {
+        return this.style.getTextMetrics();
+      }
+    }, {
+      key: "setTextMetrics",
+      value: function setTextMetrics(metrics, font) {
+        return this.style.setTextMetrics(metrics, font);
+      }
+    }, {
+      key: "measureTextMargins",
+      value: function measureTextMargins(testString, out) {
+        return MeasureTextMargins(this.style, testString, out);
+      }
+    }]);
+
+    return TextBase;
+  }(GameObject$1);
+
+  var Components$1 = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(TextBase, [Components$1.Alpha, Components$1.BlendMode, Components$1.ComputedSize, Components$1.Crop, Components$1.Depth, Components$1.Flip, Components$1.GetBounds, Components$1.Mask, Components$1.Origin, Components$1.Pipeline, Components$1.ScrollFactor, Components$1.Tint, Components$1.Transform, Components$1.Visible, Render]);
+
+  var Pad = Phaser.Utils.String.Pad;
+
+  var GetStyle = function GetStyle(style, canvas, context) {
+    if (style == null) {
+      return style;
+    }
+
+    switch (_typeof(style)) {
+      case 'string':
+        return style;
+
+      case 'number':
+        return "#".concat(Pad(Math.floor(style).toString(16), 6, '0', 1));
+
+      case 'function':
+        return style(canvas, context);
+
+      case 'object':
+        if (style.hasOwnProperty('r')) {
+          if (style.hasOwnProperty('a')) {
+            // rgba
+            return "rgba(".concat(style.r, ",").concat(style.g, ",").concat(style.b, ",").concat(style.a, ")");
+          } else {
+            // rgb
+            return "rgb(".concat(style.r, ",").concat(style.g, ",").concat(style.b, ")");
+          }
+        } else if (style.hasOwnProperty('h')) {
+          if (style.hasOwnProperty('a')) {
+            // hsla
+            return "hsla(".concat(style.h, ",").concat(style.s, ",").concat(style.l, ",").concat(style.a, ")");
+          } else {
+            // hsl
+            return "hsl(".concat(style.h, ",").concat(style.s, ",").concat(style.l, ")");
+          }
+        } else {
+          return style; // Not a valid input
+        }
+
+      default:
+        return style;
+    }
+  };
+
+  var PropertyMap = {
+    // background
+    backgroundColor: ['backgroundColor', null, GetStyle],
+    backgroundColor2: ['backgroundColor2', null, GetStyle],
+    backgroundHorizontalGradient: ['backgroundHorizontalGradient', true, null],
+    backgroundStrokeColor: ['backgroundStrokeColor', null, GetStyle],
+    backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2, null],
+    backgroundCornerRadius: ['backgroundCornerRadius', 0, null],
+    backgroundCornerIteration: ['backgroundCornerIteration', null, null],
+    // font
+    fontFamily: ['fontFamily', 'Courier', null],
+    fontSize: ['fontSize', '16px', null],
+    fontStyle: ['fontStyle', '', null],
+    color: ['color', '#fff', GetStyle],
+    stroke: ['stroke', '#fff', GetStyle],
+    strokeThickness: ['strokeThickness', 0, null],
+    shadowOffsetX: ['shadow.offsetX', 0, null],
+    shadowOffsetY: ['shadow.offsetY', 0, null],
+    shadowColor: ['shadow.color', '#000', GetStyle],
+    shadowBlur: ['shadow.blur', 0, null],
+    shadowStroke: ['shadow.stroke', false, null],
+    shadowFill: ['shadow.fill', false, null],
+    // underline
+    underlineColor: ['underline.color', '#000', GetStyle],
+    underlineThickness: ['underline.thickness', 0, null],
+    underlineOffset: ['underline.offset', 0, null],
+    // align
+    halign: ['halign', 'left', null],
+    valign: ['valign', 'top', null],
+    // size
+    maxLines: ['maxLines', 0, null],
+    fixedWidth: ['fixedWidth', 0, null],
+    fixedHeight: ['fixedHeight', 0, null],
+    resolution: ['resolution', 0, null],
+    lineSpacing: ['lineSpacing', 0, null],
+    xOffset: ['xOffset', 0, null],
+    rtl: ['rtl', false, null],
+    testString: ['testString', '|MÃ‰qgy', null],
+    baselineX: ['baselineX', 1.2, null],
+    baselineY: ['baselineY', 1.4, null],
+    // wrap
+    wrapMode: ['wrap.mode', 0, null],
+    wrapWidth: ['wrap.width', 0, null],
+    wrapCallback: ['wrap.callback', null],
+    wrapCallbackScope: ['wrap.callbackScope', null]
+  };
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2018 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
-  var CanvasPool$2 = Phaser.Display.Canvas.CanvasPool;
+  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
   /**
    * Calculates the ascent, descent and fontSize of a given font style.
    *
@@ -248,7 +581,7 @@
 
   var MeasureText = function MeasureText(textStyle) {
     // @property {HTMLCanvasElement} canvas - The canvas element that the text is rendered.
-    var canvas = CanvasPool$2.create(this); // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
+    var canvas = CanvasPool$1.create(this); // @property {HTMLCanvasElement} context - The context of the canvas element that the text is rendered to.
 
     var context = canvas.getContext('2d');
     textStyle.syncFont(canvas, context);
@@ -262,7 +595,7 @@
         descent: descent,
         fontSize: ascent + descent
       };
-      CanvasPool$2.remove(canvas);
+      CanvasPool$1.remove(canvas);
       return output;
     }
 
@@ -288,7 +621,7 @@
       output.ascent = baseline;
       output.descent = baseline + 6;
       output.fontSize = output.ascent + output.descent;
-      CanvasPool$2.remove(canvas);
+      CanvasPool$1.remove(canvas);
       return output;
     }
 
@@ -336,7 +669,7 @@
 
     output.descent = i - baseline;
     output.fontSize = output.ascent + output.descent;
-    CanvasPool$2.remove(canvas);
+    CanvasPool$1.remove(canvas);
     return output;
   };
 
@@ -353,104 +686,21 @@
     SPLITREGEXP: /(?:\r\n|\r|\n)/
   };
 
-  var Pad = Phaser.Utils.String.Pad;
-
-  var GetStyle = function GetStyle(style, canvas, context) {
-    if (style == null) {
-      return style;
-    }
-
-    switch (_typeof(style)) {
-      case 'string':
-        return style;
-
-      case 'number':
-        return "#".concat(Pad(Math.floor(style).toString(16), 6, '0', 1));
-
-      case 'function':
-        return style(canvas, context);
-
-      case 'object':
-        if (style.hasOwnProperty('r')) {
-          if (style.hasOwnProperty('a')) {
-            // rgba
-            return "rgba(".concat(style.r, ",").concat(style.g, ",").concat(style.b, ",").concat(style.a, ")");
-          } else {
-            // rgb
-            return "rgb(".concat(style.r, ",").concat(style.g, ",").concat(style.b, ")");
-          }
-        } else if (style.hasOwnProperty('h')) {
-          if (style.hasOwnProperty('a')) {
-            // hsla
-            return "hsla(".concat(style.h, ",").concat(style.s, ",").concat(style.l, ",").concat(style.a, ")");
-          } else {
-            // hsl
-            return "hsl(".concat(style.h, ",").concat(style.s, ",").concat(style.l, ")");
-          }
-        } else {
-          return style; // Not a valid input
-        }
-
-      default:
-        return style;
-    }
-  };
-
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var GetValue$5 = Phaser.Utils.Objects.GetValue; //  Key: [ Object Key, Default Value, postCallback ]
-
-  var propertyMap = {
-    // background
-    backgroundColor: ['backgroundColor', null, GetStyle],
-    backgroundColor2: ['backgroundColor2', null, GetStyle],
-    backgroundHorizontalGradient: ['backgroundHorizontalGradient', true, null],
-    backgroundStrokeColor: ['backgroundStrokeColor', null, GetStyle],
-    backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2, null],
-    backgroundCornerRadius: ['backgroundCornerRadius', 0, null],
-    backgroundCornerIteration: ['backgroundCornerIteration', null, null],
-    // font
-    fontFamily: ['fontFamily', 'Courier', null],
-    fontSize: ['fontSize', '16px', null],
-    fontStyle: ['fontStyle', '', null],
-    color: ['color', '#fff', GetStyle],
-    stroke: ['stroke', '#fff', GetStyle],
-    strokeThickness: ['strokeThickness', 0, null],
-    shadowOffsetX: ['shadow.offsetX', 0, null],
-    shadowOffsetY: ['shadow.offsetY', 0, null],
-    shadowColor: ['shadow.color', '#000', GetStyle],
-    shadowBlur: ['shadow.blur', 0, null],
-    shadowStroke: ['shadow.stroke', false, null],
-    shadowFill: ['shadow.fill', false, null],
-    // underline
-    underlineColor: ['underline.color', '#000', GetStyle],
-    underlineThickness: ['underline.thickness', 0, null],
-    underlineOffset: ['underline.offset', 0, null],
-    // align
-    halign: ['halign', 'left', null],
-    valign: ['valign', 'top', null],
-    // size
-    maxLines: ['maxLines', 0, null],
-    fixedWidth: ['fixedWidth', 0, null],
-    fixedHeight: ['fixedHeight', 0, null],
-    resolution: ['resolution', 0, null],
-    lineSpacing: ['lineSpacing', 0, null],
-    xOffset: ['xOffset', 0, null],
-    rtl: ['rtl', false, null],
-    testString: ['testString', '|MÃ‰qgy', null],
-    baselineX: ['baselineX', 1.2, null],
-    baselineY: ['baselineY', 1.4, null],
-    // wrap
-    wrapMode: ['wrap.mode', 0, null],
-    wrapWidth: ['wrap.width', 0, null],
-    wrapCallback: ['wrap.callback', null],
-    wrapCallbackScope: ['wrap.callbackScope', null]
-  };
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var TextStyle = /*#__PURE__*/function () {
-    function TextStyle(text, style) {
+    function TextStyle(text, style, propertyMap) {
       _classCallCheck(this, TextStyle);
 
-      this.parent = text;
+      this.parent = text; // parent.updateText()
+      // parent.width, parent.height
+
+      if (propertyMap === undefined) {
+        propertyMap = PropertyMap;
+      }
+
+      this.propertyMap = propertyMap;
       this.backgroundColor;
       this.backgroundColor2;
       this.backgroundHorizontalGradient;
@@ -495,16 +745,6 @@
     }
 
     _createClass(TextStyle, [{
-      key: "canvas",
-      get: function get() {
-        return this.parent.canvasText.canvas;
-      }
-    }, {
-      key: "context",
-      get: function get() {
-        return this.parent.canvasText.context;
-      }
-    }, {
       key: "isWrapFitMode",
       get: function get() {
         return this.fixedWidth > 0 && this.wrapMode !== CONST.NO_WRAP && this.wrapWidth === 0;
@@ -546,6 +786,8 @@
           style.fontSize = style.fontSize.toString() + 'px';
         }
 
+        var propertyMap = this.propertyMap;
+
         for (var key in propertyMap) {
           var prop = propertyMap[key]; // [ Object Key, Default Value, preCallback ]
 
@@ -581,12 +823,6 @@
 
         if (fill !== null) {
           this.color = GetStyle(fill);
-        }
-
-        var imageData = GetValue$5(style, 'images', undefined);
-
-        if (imageData) {
-          this.parent.addImage(imageData);
         }
 
         var metrics = GetValue$5(style, 'metrics', false); //  Provide optional TextMetrics in the style object to avoid the canvas look-up / scanning
@@ -743,15 +979,15 @@
           isHorizontalGradient = true;
         }
 
-        this.backgroundColor = GetStyle(color, this.canvas, this.context);
-        this.backgroundColor2 = GetStyle(color2, this.canvas, this.context);
+        this.backgroundColor = GetStyle(color, this.parent.canvas, this.parent.context);
+        this.backgroundColor2 = GetStyle(color2, this.parent.canvas, this.parent.context);
         this.backgroundHorizontalGradient = isHorizontalGradient;
         return this.update(false);
       }
     }, {
       key: "setBackgroundStrokeColor",
       value: function setBackgroundStrokeColor(color, lineWidth) {
-        this.backgroundStrokeColor = GetStyle(color, this.canvas, this.context);
+        this.backgroundStrokeColor = GetStyle(color, this.parent.canvas, this.parent.context);
         this.backgroundStrokeLineWidth = lineWidth;
         return this.update(false);
       }
@@ -765,13 +1001,13 @@
     }, {
       key: "setFill",
       value: function setFill(color) {
-        this.color = GetStyle(color, this.canvas, this.context);
+        this.color = GetStyle(color, this.parent.canvas, this.parent.context);
         return this.update(false);
       }
     }, {
       key: "setColor",
       value: function setColor(color) {
-        this.color = GetStyle(color, this.canvas, this.context);
+        this.color = GetStyle(color, this.parent.canvas, this.parent.context);
         return this.update(false);
       }
     }, {
@@ -785,7 +1021,7 @@
             thickness = this.strokeThickness;
           }
 
-          this.stroke = GetStyle(color, this.canvas, this.context);
+          this.stroke = GetStyle(color, this.parent.canvas, this.parent.context);
           this.strokeThickness = thickness;
         }
 
@@ -820,7 +1056,7 @@
 
         this.shadowOffsetX = x;
         this.shadowOffsetY = y;
-        this.shadowColor = GetStyle(color, this.canvas, this.context);
+        this.shadowColor = GetStyle(color, this.parent.canvas, this.parent.context);
         this.shadowBlur = blur;
         this.shadowStroke = shadowStroke;
         this.shadowFill = shadowFill;
@@ -848,7 +1084,7 @@
           color = '#000';
         }
 
-        this.shadowColor = GetStyle(color, this.canvas, this.context);
+        this.shadowColor = GetStyle(color, this.parent.canvas, this.parent.context);
         return this.update(false);
       }
     }, {
@@ -888,7 +1124,7 @@
           offset = 0;
         }
 
-        this.underlineColor = GetStyle(color, this.canvas, this.context);
+        this.underlineColor = GetStyle(color, this.parent.canvas, this.parent.context);
         this.underlineThickness = thickness;
         this.underlineOffset = offset;
         return this.update(false);
@@ -900,7 +1136,7 @@
           color = '#000';
         }
 
-        this.underlineColor = GetStyle(color, this.canvas, this.context);
+        this.underlineColor = GetStyle(color, this.parent.canvas, this.parent.context);
         return this.update(false);
       }
     }, {
@@ -1024,6 +1260,7 @@
       key: "toJSON",
       value: function toJSON() {
         var output = {};
+        var propertyMap = this.propertyMap;
 
         for (var key in propertyMap) {
           output[key] = this[key];
@@ -1041,64 +1278,12 @@
 
     return TextStyle;
   }();
+
   var WRAPMODE = {
     none: CONST.NO_WRAP,
     word: CONST.WORD_WRAP,
     "char": CONST.CHAR_WRAP,
     character: CONST.CHAR_WRAP
-  };
-
-  var CanvasPool$1 = Phaser.Display.Canvas.CanvasPool;
-
-  var MeasureTextMargins = function MeasureTextMargins(textStyle, testString, out) {
-    if (out === undefined) {
-      out = {};
-    }
-
-    var canvas = CanvasPool$1.create(this);
-    var context = canvas.getContext('2d');
-    textStyle.syncFont(canvas, context);
-    var metrics = context.measureText(testString);
-    var width = Math.ceil(metrics.width * textStyle.baselineX);
-    var baseline = width;
-    var height = 2 * baseline;
-    baseline = baseline * textStyle.baselineY | 0;
-    canvas.width = width;
-    canvas.height = height;
-    context.fillStyle = '#f00';
-    context.fillRect(0, 0, width, height);
-    context.font = textStyle._font;
-    context.textBaseline = 'alphabetic';
-    context.fillStyle = '#000';
-    context.fillText(textStyle.testString, 0, baseline);
-    out.left = 0;
-
-    if (width === 0 || height === 0 || !context.getImageData(0, 0, width, height)) {
-      CanvasPool$1.remove(canvas);
-      return out;
-    }
-
-    var imagedata = context.getImageData(0, 0, width, height).data;
-    var stop = false;
-
-    for (var x = 0; x < width; x++) {
-      for (var y = 0; y < height; y++) {
-        var idx = (y * width + x) * 4;
-
-        if (imagedata[idx] !== 255) {
-          out.left = x;
-          stop = true;
-          break;
-        }
-      }
-
-      if (stop) {
-        break;
-      }
-    }
-
-    CanvasPool$1.remove(canvas);
-    return out;
   };
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
@@ -1607,48 +1792,6 @@
     }
   };
 
-  var Stack = /*#__PURE__*/function () {
-    function Stack() {
-      _classCallCheck(this, Stack);
-
-      this.items = [];
-    }
-
-    _createClass(Stack, [{
-      key: "destroy",
-      value: function destroy() {
-        this.clear();
-        this.items = undefined;
-      }
-    }, {
-      key: "pop",
-      value: function pop() {
-        return this.items.length > 0 ? this.items.pop() : null;
-      }
-    }, {
-      key: "push",
-      value: function push(l) {
-        this.items.push(l);
-        return this;
-      }
-    }, {
-      key: "pushMultiple",
-      value: function pushMultiple(arr) {
-        this.items.push.apply(this.items, arr);
-        arr.length = 0;
-        return this;
-      }
-    }, {
-      key: "clear",
-      value: function clear() {
-        this.items.length = 0;
-        return this;
-      }
-    }]);
-
-    return Stack;
-  }();
-
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var NO_NEWLINE$3 = CONST.NO_NEWLINE;
   var RAW_NEWLINE$1 = CONST.RAW_NEWLINE;
@@ -1794,11 +1937,7 @@
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var NO_NEWLINE$2 = CONST.NO_NEWLINE;
-  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE; // Reuse objects can increase performance
-
-  var PensPool = new Stack(); // Default pens pool
-
-  var LinesPool$1 = new Stack(); // Default lines pool
+  var WRAPPED_NEWLINE$1 = CONST.WRAPPED_NEWLINE;
 
   var PenManager = /*#__PURE__*/function () {
     function PenManager(config) {
@@ -1809,8 +1948,10 @@
       this.lines = []; // pens in lines [ [],[],[],.. ]
 
       this.maxLinesWidth = undefined;
-      this.PensPool = GetFastValue(config, 'pensPool', PensPool);
-      this.LinesPool = GetFastValue(config, 'linesPool', LinesPool$1);
+      this.pensPool = config.pensPool; // Required
+
+      this.linesPool = config.linesPool; // Required
+
       this.tagToText = GetFastValue(config, 'tagToText', NOOP);
       this.tagToTextScope = GetFastValue(config, 'tagToTextScope', undefined);
     }
@@ -1829,14 +1970,14 @@
           this.lines[i].length = 0;
         }
 
-        this.PensPool.pushMultiple(this.pens);
-        this.LinesPool.pushMultiple(this.lines);
+        this.pensPool.pushMultiple(this.pens);
+        this.linesPool.pushMultiple(this.lines);
         this.maxLinesWidth = undefined;
       }
     }, {
       key: "addTextPen",
       value: function addTextPen(text, x, y, width, prop, newLineMode) {
-        var pen = this.PensPool.pop();
+        var pen = this.pensPool.pop();
 
         if (pen == null) {
           pen = new Pen();
@@ -1884,14 +2025,14 @@
         var line = this.lastLine;
 
         if (line == null) {
-          line = this.LinesPool.pop() || [];
+          line = this.linesPool.pop() || [];
           this.lines.push(line);
         }
 
         line.push(pen); // new line, add an empty line
 
         if (pen.newLineMode !== NO_NEWLINE$2) {
-          line = this.LinesPool.pop() || [];
+          line = this.linesPool.pop() || [];
           this.lines.push(line);
         }
 
@@ -2118,6 +2259,48 @@
   }();
   var PEN_CONFIG = {};
 
+  var Stack = /*#__PURE__*/function () {
+    function Stack() {
+      _classCallCheck(this, Stack);
+
+      this.items = [];
+    }
+
+    _createClass(Stack, [{
+      key: "destroy",
+      value: function destroy() {
+        this.clear();
+        this.items = undefined;
+      }
+    }, {
+      key: "pop",
+      value: function pop() {
+        return this.items.length > 0 ? this.items.pop() : null;
+      }
+    }, {
+      key: "push",
+      value: function push(l) {
+        this.items.push(l);
+        return this;
+      }
+    }, {
+      key: "pushMultiple",
+      value: function pushMultiple(arr) {
+        this.items.push.apply(this.items, arr);
+        arr.length = 0;
+        return this;
+      }
+    }, {
+      key: "clear",
+      value: function clear() {
+        this.items.length = 0;
+        return this;
+      }
+    }]);
+
+    return Stack;
+  }();
+
   var Rectangle = Phaser.Geom.Rectangle;
   var RectanglePool = new Stack();
 
@@ -2254,37 +2437,6 @@
     this.parent.emit(eventName, key, pointer, localX, localY, event);
   };
 
-  var LinesPool = new Stack();
-
-  var FreeLine = function FreeLine(line) {
-    if (!line) {
-      return;
-    }
-
-    LinesPool.push(line);
-  };
-
-  var FreeLines = function FreeLines(lines) {
-    if (!lines) {
-      return;
-    }
-
-    LinesPool.pushMultiple(lines);
-  };
-
-  var GetLine = function GetLine(text, width, newLineMode) {
-    var l = LinesPool.pop();
-
-    if (l === null) {
-      l = {};
-    }
-
-    l.text = text;
-    l.width = width;
-    l.newLineMode = newLineMode;
-    return l;
-  };
-
   var NO_NEWLINE$1 = CONST.NO_NEWLINE;
   var RAW_NEWLINE = CONST.RAW_NEWLINE;
   var WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
@@ -2293,7 +2445,7 @@
   var CHAR_WRAP = CONST.CHAR_WRAP;
   var splitRegExp = CONST.SPLITREGEXP;
 
-  var WrapText = function WrapText(text, getTextWidth, wrapMode, wrapWidth, offset) {
+  var WrapText = function WrapText(text, getTextWidth, wrapMode, wrapWidth, offset, wrapTextLinesPool) {
     if (wrapWidth <= 0) {
       wrapMode = NO_WRAP$1;
     }
@@ -2317,7 +2469,7 @@
 
       if (isNoWrap) {
         var textWidth = getTextWidth(line);
-        retLines.push(GetLine(line, textWidth, newLineMode));
+        retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
         continue;
       }
 
@@ -2327,7 +2479,7 @@
         var textWidth = getTextWidth(line);
 
         if (textWidth <= remainWidth) {
-          retLines.push(GetLine(line, textWidth, newLineMode));
+          retLines.push(wrapTextLinesPool.getLine(line, textWidth, newLineMode));
           continue;
         }
       }
@@ -2366,20 +2518,20 @@
         if (isWordWrap && tokenWidth > wrapWidth) {
           if (lineText !== '') {
             // Has pending lineText, flush it out
-            retLines.push(GetLine(lineText, lineWidth, WRAPPED_NEWLINE));
+            retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
           } else if (j === 0 && offset > 0) {
             // No pending lineText, but has previous text. Append a newline
-            retLines.push(GetLine('', 0, WRAPPED_NEWLINE));
+            retLines.push(wrapTextLinesPool.getLine('', 0, WRAPPED_NEWLINE));
           } // Word break
 
 
-          retLines.push.apply(retLines, _toConsumableArray(WrapText(token, getTextWidth, CHAR_WRAP, wrapWidth, 0))); // Continue at last-wordBreak-line
+          retLines.push.apply(retLines, _toConsumableArray(WrapText(token, getTextWidth, CHAR_WRAP, wrapWidth, 0, wrapTextLinesPool))); // Continue at last-wordBreak-line
 
           var lastwordBreakLine = retLines.pop();
           lineText = lastwordBreakLine.text;
           lineWidth = lastwordBreakLine.width; // Free this line
 
-          FreeLine(lastwordBreakLine); // Special case : Start at a space character, discard it
+          wrapTextLinesPool.freeLine(lastwordBreakLine); // Special case : Start at a space character, discard it
 
           if (lineText === ' ') {
             lineText = '';
@@ -2393,7 +2545,7 @@
 
         if (currLineWidth > remainWidth) {
           // New line
-          retLines.push(GetLine(lineText, lineWidth, WRAPPED_NEWLINE));
+          retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, WRAPPED_NEWLINE));
           lineText = token;
           lineWidth = tokenWidth;
           remainWidth = wrapWidth;
@@ -2405,7 +2557,7 @@
 
         if (isLastToken) {
           // Flush remain text
-          retLines.push(GetLine(lineText, lineWidth, newLineMode));
+          retLines.push(wrapTextLinesPool.getLine(lineText, lineWidth, newLineMode));
         }
       } // for token in tokenArray
 
@@ -2429,7 +2581,12 @@
       this.parser = GetValue$2(config, 'parser', null);
       this.defaultStyle = GetValue$2(config, 'style', null);
       this.autoRound = true;
-      this.pensPool = GetValue$2(config, 'pensPool', null);
+      this.pensPool = config.pensPool; // Required
+
+      this.linesPool = config.linesPool; // Required
+
+      this.wrapTextLinesPool = config.wrapTextLinesPool; // Required
+
       this.penManager = this.newPenManager();
       this._tmpPenManager = null;
       this.hitAreaManager = new HitAreaManager();
@@ -2500,7 +2657,8 @@
         var plainText, curProp, curStyle;
         var match = this.parser.splitText(text),
             result,
-            wrapLines;
+            wrapLines,
+            wrapTextLinesPool = this.wrapTextLinesPool;
 
         for (var i = 0, len = match.length; i < len; i++) {
           result = this.parser.tagTextToProp(match[i], curProp);
@@ -2532,7 +2690,7 @@
             curStyle.syncStyle(canvas, context);
 
             if (!customTextWrapCallback) {
-              wrapLines = WrapText(plainText, MeasureText, wrapMode, wrapWidth, cursorX);
+              wrapLines = WrapText(plainText, MeasureText, wrapMode, wrapWidth, cursorX, wrapTextLinesPool);
             } else {
               // customTextWrapCallback
               wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope, plainText, MeasureText, wrapWidth, cursorX);
@@ -2547,7 +2705,7 @@
                 n = wrapLines[j];
 
                 if (typeof n === 'string') {
-                  wrapLines[j] = GetLine(n, MeasureText(n), j < jLen - 1 ? 2 : 0);
+                  wrapLines[j] = wrapTextLinesPool.getLine(n, MeasureText(n), j < jLen - 1 ? 2 : 0);
                 } else {
                   reuseLines = false;
                 }
@@ -2571,7 +2729,7 @@
             }
 
             if (reuseLines) {
-              FreeLines(wrapLines);
+              wrapTextLinesPool.freeLines(wrapLines);
             }
 
             wrapLines = null;
@@ -2652,6 +2810,7 @@
       value: function newPenManager() {
         return new PenManager({
           pensPool: this.pensPool,
+          linesPool: this.linesPool,
           tagToText: this.parser.propToTagText,
           tagToTextScope: this.parser
         });
@@ -2758,6 +2917,56 @@
     setInteractive: SetInteractive
   };
   Object.assign(CanvasText.prototype, DrawMethods, methods$2);
+
+  var WrapTextLinesPool$1 = /*#__PURE__*/function (_Pool) {
+    _inherits(WrapTextLinesPool, _Pool);
+
+    var _super = _createSuper(WrapTextLinesPool);
+
+    function WrapTextLinesPool() {
+      _classCallCheck(this, WrapTextLinesPool);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(WrapTextLinesPool, [{
+      key: "freeLine",
+      value: function freeLine(line) {
+        if (!line) {
+          return;
+        }
+
+        this.push(line);
+        return this;
+      }
+    }, {
+      key: "freeLines",
+      value: function freeLines(lines) {
+        if (!lines) {
+          return;
+        }
+
+        this.pushMultiple(lines);
+        return this;
+      }
+    }, {
+      key: "getLine",
+      value: function getLine(text, width, newLineMode) {
+        var l = this.pop();
+
+        if (l === null) {
+          l = {};
+        }
+
+        l.text = text;
+        l.width = width;
+        l.newLineMode = newLineMode;
+        return l;
+      }
+    }]);
+
+    return WrapTextLinesPool;
+  }(Stack);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
@@ -2957,11 +3166,14 @@
   var GameObject = Phaser.GameObjects.GameObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
-  var SPLITREGEXP = CONST.SPLITREGEXP;
-  var PensPools = {};
+  var SPLITREGEXP = CONST.SPLITREGEXP; // Reuse objects can increase performance
 
-  var Text = /*#__PURE__*/function (_GameObject) {
-    _inherits(Text, _GameObject);
+  var PensPools = null;
+  var LinesPool = null;
+  var WrapTextLinesPool = null;
+
+  var Text = /*#__PURE__*/function (_TextBase) {
+    _inherits(Text, _TextBase);
 
     var _super = _createSuper(Text);
 
@@ -3014,6 +3226,12 @@
       }
 
       _this.style = new TextStyle(_assertThisInitialized(_this), style);
+      var imageData = GetValue(style, 'images', undefined);
+
+      if (imageData) {
+        _this.addImage(imageData);
+      }
+
       _this.autoRound = true;
       _this._text = undefined;
       _this.padding = {
@@ -3043,6 +3261,19 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
 
         _this.frame.source.glTexture = null;
+      } // Use pools first time
+
+
+      if (!PensPools) {
+        PensPools = {};
+        LinesPool = new Stack();
+        WrapTextLinesPool = new WrapTextLinesPool$1(); // Remove cached data
+
+        _this.scene.game.events.once('destroy', function () {
+          PensPools = null;
+          LinesPool = null;
+          WrapTextLinesPool = null;
+        });
       }
 
       if (!PensPools.hasOwnProperty(type)) {
@@ -3054,7 +3285,9 @@
         context: _this.context,
         parser: parser,
         style: _this.style,
-        pensPool: PensPools[type]
+        pensPool: PensPools[type],
+        linesPool: LinesPool,
+        wrapTextLinesPool: WrapTextLinesPool
       });
       _this.parser = parser;
 
@@ -3157,142 +3390,6 @@
         return this;
       }
     }, {
-      key: "setStyle",
-      value: function setStyle(style) {
-        return this.style.setStyle(style);
-      }
-    }, {
-      key: "setFont",
-      value: function setFont(font) {
-        return this.style.setFont(font);
-      }
-    }, {
-      key: "setFontFamily",
-      value: function setFontFamily(family) {
-        return this.style.setFontFamily(family);
-      }
-    }, {
-      key: "setFontSize",
-      value: function setFontSize(size) {
-        return this.style.setFontSize(size);
-      }
-    }, {
-      key: "setFontStyle",
-      value: function setFontStyle(style) {
-        return this.style.setFontStyle(style);
-      }
-    }, {
-      key: "setTestString",
-      value: function setTestString(string) {
-        return this.style.setTestString(string);
-      }
-    }, {
-      key: "setFixedSize",
-      value: function setFixedSize(width, height) {
-        return this.style.setFixedSize(width, height);
-      }
-    }, {
-      key: "setBackgroundColor",
-      value: function setBackgroundColor(color, color2, isHorizontalGradient) {
-        return this.style.setBackgroundColor(color, color2, isHorizontalGradient);
-      }
-    }, {
-      key: "setBackgroundStrokeColor",
-      value: function setBackgroundStrokeColor(color, lineWidth) {
-        return this.style.setBackgroundStrokeColor(color, lineWidth);
-      }
-    }, {
-      key: "setBackgroundCornerRadius",
-      value: function setBackgroundCornerRadius(radius, iteration) {
-        return this.style.setBackgroundCornerRadius(radius, iteration);
-      }
-    }, {
-      key: "setFill",
-      value: function setFill(color) {
-        return this.style.setFill(color);
-      }
-    }, {
-      key: "setColor",
-      value: function setColor(color) {
-        return this.style.setColor(color);
-      }
-    }, {
-      key: "setStroke",
-      value: function setStroke(color, thickness) {
-        return this.style.setStroke(color, thickness);
-      }
-    }, {
-      key: "setShadow",
-      value: function setShadow(x, y, color, blur, shadowStroke, shadowFill) {
-        return this.style.setShadow(x, y, color, blur, shadowStroke, shadowFill);
-      }
-    }, {
-      key: "setShadowOffset",
-      value: function setShadowOffset(x, y) {
-        return this.style.setShadowOffset(x, y);
-      }
-    }, {
-      key: "setShadowColor",
-      value: function setShadowColor(color) {
-        return this.style.setShadowColor(color);
-      }
-    }, {
-      key: "setShadowBlur",
-      value: function setShadowBlur(blur) {
-        return this.style.setShadowBlur(blur);
-      }
-    }, {
-      key: "setShadowStroke",
-      value: function setShadowStroke(enabled) {
-        return this.style.setShadowStroke(enabled);
-      }
-    }, {
-      key: "setShadowFill",
-      value: function setShadowFill(enabled) {
-        return this.style.setShadowFill(enabled);
-      }
-    }, {
-      key: "setWrapMode",
-      value: function setWrapMode(mode) {
-        return this.style.setWrapMode(mode);
-      }
-    }, {
-      key: "setWrapWidth",
-      value: function setWrapWidth(width) {
-        return this.style.setWrapWidth(width);
-      } // Align with built-in text game object
-
-    }, {
-      key: "setWordWrapWidth",
-      value: function setWordWrapWidth(width) {
-        return this.style.setWrapWidth(width);
-      }
-    }, {
-      key: "setAlign",
-      value: function setAlign(align) {
-        return this.style.setHAlign(align);
-      }
-    }, {
-      key: "setHAlign",
-      value: function setHAlign(align) {
-        return this.style.setHAlign(align);
-      }
-    }, {
-      key: "setVAlign",
-      value: function setVAlign(align) {
-        return this.style.setVAlign(align);
-      }
-    }, {
-      key: "setLineSpacing",
-      value: function setLineSpacing(value) {
-        return this.style.setLineSpacing(value);
-      }
-    }, {
-      key: "setXOffset",
-      value: function setXOffset(value) {
-        return this.style.setXOffset(value);
-      }
-    }, {
       key: "setPadding",
       value: function setPadding(left, top, right, bottom) {
         if (_typeof(left) === 'object') {
@@ -3340,16 +3437,6 @@
         this.padding.right = right;
         this.padding.bottom = bottom;
         return this.updateText(false);
-      }
-    }, {
-      key: "setMaxLines",
-      value: function setMaxLines(max) {
-        return this.style.setMaxLines(max);
-      }
-    }, {
-      key: "setResolution",
-      value: function setResolution(value) {
-        return this.style.setResolution(value);
       }
     }, {
       key: "updateText",
@@ -3438,16 +3525,6 @@
         return this;
       }
     }, {
-      key: "getTextMetrics",
-      value: function getTextMetrics() {
-        return this.style.getTextMetrics();
-      }
-    }, {
-      key: "setTextMetrics",
-      value: function setTextMetrics(metrics, font) {
-        return this.style.setTextMetrics(metrics, font);
-      }
-    }, {
       key: "toJSON",
       value: function toJSON() {
         var out = Components.ToJSON(this); //  Extra Text data is added here
@@ -3525,14 +3602,6 @@
         return this.setFixedSize(width, height);
       }
     }, {
-      key: "lineSpacing",
-      get: function get() {
-        return this.style.lineSpacing;
-      },
-      set: function set(value) {
-        this.setLineSpacing(value);
-      }
-    }, {
       key: "imageManager",
       get: function get() {
         if (!this._imageManager) {
@@ -3552,11 +3621,6 @@
       value: function drawAreaBounds(graphics, color) {
         this.canvasText.hitAreaManager.drawBounds(graphics, color, this);
         return this;
-      }
-    }, {
-      key: "measureTextMargins",
-      value: function measureTextMargins(testString, out) {
-        return MeasureTextMargins(this.style, testString, out);
       }
     }, {
       key: "generateTexture",
@@ -3581,10 +3645,7 @@
     }]);
 
     return Text;
-  }(GameObject);
-
-  var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Text, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Crop, Components.Depth, Components.Flip, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render]);
+  }(TextBase);
 
   var GetOpenTagRegString = function GetOpenTagRegString(tagName, param) {
     if (param === undefined) {
