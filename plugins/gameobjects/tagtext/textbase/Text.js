@@ -15,7 +15,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
 
-var PensPools = {};
+var PensPools = null;
 
 class Text extends TextBase {
     constructor(scene, x, y, text, style, type, parser) {
@@ -66,7 +66,6 @@ class Text extends TextBase {
             this.addImage(imageData);
         }
 
-
         this.autoRound = true;
 
         this._text = undefined;
@@ -108,9 +107,19 @@ class Text extends TextBase {
             this.frame.source.glTexture = null;
         }
 
+        // Use PensPools first time
+        if (!PensPools) {
+            PensPools = {};
+
+            // Remove cached data
+            this.scene.game.events.on('destroy', function () {
+                PensPools = null;
+            });
+        }
         if (!PensPools.hasOwnProperty(type)) {
             PensPools[type] = new Pool();
         }
+
         this.canvasText = new CanvasText({
             parent: this,
             context: this.context,
