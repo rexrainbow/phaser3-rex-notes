@@ -1,4 +1,3 @@
-import Pool from '../../../../pool.js';
 import Pen from './Pen.js';
 import CONST from '../../../textbase/const.js';
 import Clone from '../../../../utils/object/Clone.js';
@@ -8,17 +7,14 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 
-// Reuse objects can increase performance
-var PensPool = new Pool(); // Default pens pool
-var LinesPool = new Pool(); // Default lines pool
 class PenManager {
     constructor(config) {
         this.pens = []; // all pens
         this.lines = []; // pens in lines [ [],[],[],.. ]
         this.maxLinesWidth = undefined;
 
-        this.PensPool = GetFastValue(config, 'pensPool', PensPool);
-        this.LinesPool = GetFastValue(config, 'linesPool', LinesPool);
+        this.pensPool = config.pensPool;    // Required
+        this.linesPool = config.linesPool;  // Required
         this.tagToText = GetFastValue(config, 'tagToText', NOOP);
         this.tagToTextScope = GetFastValue(config, 'tagToTextScope', undefined);
     }
@@ -34,13 +30,13 @@ class PenManager {
             this.lines[i].length = 0;
         }
 
-        this.PensPool.pushMultiple(this.pens);
-        this.LinesPool.pushMultiple(this.lines);
+        this.pensPool.pushMultiple(this.pens);
+        this.linesPool.pushMultiple(this.lines);
         this.maxLinesWidth = undefined;
     }
 
     addTextPen(text, x, y, width, prop, newLineMode) {
-        var pen = this.PensPool.pop();
+        var pen = this.pensPool.pop();
         if (pen == null) {
             pen = new Pen();
         }
@@ -81,14 +77,14 @@ class PenManager {
         // maintan lines
         var line = this.lastLine;
         if (line == null) {
-            line = this.LinesPool.pop() || [];
+            line = this.linesPool.pop() || [];
             this.lines.push(line);
         }
         line.push(pen);
 
         // new line, add an empty line
         if (pen.newLineMode !== NO_NEWLINE) {
-            line = this.LinesPool.pop() || [];
+            line = this.linesPool.pop() || [];
             this.lines.push(line);
         }
         this.maxLinesWidth = undefined;

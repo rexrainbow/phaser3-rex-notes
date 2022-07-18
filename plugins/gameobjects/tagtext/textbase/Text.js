@@ -14,7 +14,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
 
+// Reuse objects can increase performance
 var PensPools = null;
+var LinesPool = null;
 
 class Text extends TextBase {
     constructor(scene, x, y, text, style, type, parser) {
@@ -119,12 +121,21 @@ class Text extends TextBase {
             PensPools[type] = new Pool();
         }
 
+        if (!LinesPool) {
+            LinesPool = new Pool();
+            // Remove cached data
+            this.scene.game.events.once('destroy', function () {
+                LinesPool = null;
+            });
+        }
+
         this.canvasText = new CanvasText({
             parent: this,
             context: this.context,
             parser: parser,
             style: this.style,
-            pensPool: PensPools[type]
+            pensPool: PensPools[type],
+            linesPool: LinesPool,
         });
         this.parser = parser;
 

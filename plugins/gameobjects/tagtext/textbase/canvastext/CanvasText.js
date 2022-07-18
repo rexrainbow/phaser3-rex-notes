@@ -20,7 +20,8 @@ class CanvasText {
         this.defaultStyle = GetValue(config, 'style', null);
         this.autoRound = true;
 
-        this.pensPool = GetValue(config, 'pensPool', null);
+        this.pensPool = config.pensPool;    // Required
+        this.linesPool = config.linesPool;  // Required
         this.penManager = this.newPenManager();
         this._tmpPenManager = null;
 
@@ -224,6 +225,7 @@ class CanvasText {
     newPenManager() {
         return new PenManager({
             pensPool: this.pensPool,
+            linesPool: this.linesPool,
             tagToText: this.parser.propToTagText,
             tagToTextScope: this.parser
         });
