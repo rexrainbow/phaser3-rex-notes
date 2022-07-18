@@ -5,7 +5,6 @@ import SetInteractive from './SetInteractive.js';
 import CONST from '../../../textbase/const.js';
 import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
-import { FreeLines, GetLine } from '../wraptext/LinePool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
@@ -20,8 +19,10 @@ class CanvasText {
         this.defaultStyle = GetValue(config, 'style', null);
         this.autoRound = true;
 
-        this.pensPool = config.pensPool;    // Required
-        this.linesPool = config.linesPool;  // Required
+        this.pensPool = config.pensPool;                     // Required
+        this.linesPool = config.linesPool;                   // Required
+        this.wrapTextLinesPool = config.wrapTextLinesPool;   // Required
+
         this.penManager = this.newPenManager();
         this._tmpPenManager = null;
 
@@ -85,7 +86,8 @@ class CanvasText {
 
         var plainText, curProp, curStyle;
         var match = this.parser.splitText(text),
-            result, wrapLines;
+            result, wrapLines,
+            wrapTextLinesPool = this.wrapTextLinesPool;
         for (var i = 0, len = match.length; i < len; i++) {
             result = this.parser.tagTextToProp(match[i], curProp);
             plainText = result.plainText;
@@ -117,7 +119,8 @@ class CanvasText {
                         plainText,
                         MeasureText,
                         wrapMode, wrapWidth,
-                        cursorX
+                        cursorX,
+                        wrapTextLinesPool
                     );
                 } else { // customTextWrapCallback
                     wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
@@ -133,7 +136,11 @@ class CanvasText {
                     for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
                         n = wrapLines[j];
                         if (typeof (n) === 'string') {
-                            wrapLines[j] = GetLine(n, MeasureText(n), (j < (jLen - 1)) ? 2 : 0);
+                            wrapLines[j] = wrapTextLinesPool.getLine(
+                                n,
+                                MeasureText(n),
+                                (j < (jLen - 1)) ? 2 : 0
+                            );
                         } else {
                             reuseLines = false;
                         }
@@ -156,7 +163,7 @@ class CanvasText {
                 }
 
                 if (reuseLines) {
-                    FreeLines(wrapLines);
+                    wrapTextLinesPool.freeLines(wrapLines);
                 }
                 wrapLines = null;
 

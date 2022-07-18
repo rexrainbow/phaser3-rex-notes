@@ -2,6 +2,7 @@ import TextBase from '../../textbase/TextBase.js';
 import TextStyle from '../../textbase/textstyle/TextStyle.js';
 import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
+import WrapTextLinesPoolClass from './wraptext/WrapTextLinesPool.js';
 import CONST from '../../textbase/const.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
@@ -17,6 +18,7 @@ const SPLITREGEXP = CONST.SPLITREGEXP;
 // Reuse objects can increase performance
 var PensPools = null;
 var LinesPool = null;
+var WrapTextLinesPool = null;
 
 class Text extends TextBase {
     constructor(scene, x, y, text, style, type, parser) {
@@ -108,25 +110,21 @@ class Text extends TextBase {
             this.frame.source.glTexture = null;
         }
 
-        // Use PensPools first time
+        // Use pools first time
         if (!PensPools) {
             PensPools = {};
+            LinesPool = new Pool();
+            WrapTextLinesPool = new WrapTextLinesPoolClass();
 
             // Remove cached data
             this.scene.game.events.once('destroy', function () {
                 PensPools = null;
+                LinesPool = null;
+                WrapTextLinesPool = null;
             });
         }
         if (!PensPools.hasOwnProperty(type)) {
             PensPools[type] = new Pool();
-        }
-
-        if (!LinesPool) {
-            LinesPool = new Pool();
-            // Remove cached data
-            this.scene.game.events.once('destroy', function () {
-                LinesPool = null;
-            });
         }
 
         this.canvasText = new CanvasText({
@@ -136,6 +134,7 @@ class Text extends TextBase {
             style: this.style,
             pensPool: PensPools[type],
             linesPool: LinesPool,
+            wrapTextLinesPool: WrapTextLinesPool,
         });
         this.parser = parser;
 
