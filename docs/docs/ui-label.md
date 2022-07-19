@@ -9,6 +9,8 @@ A container with an icon, text, and background.
 
 - [Align](https://codepen.io/rexrainbow/pen/WNvpoWw)
 - [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
+- [Text wrap in horizontal label](https://codepen.io/rexrainbow/pen/rNdyveo)
+- [Text wrap in vertical label](https://codepen.io/rexrainbow/pen/vYRymQq)
 
 ## Usage
 
@@ -134,7 +136,10 @@ var label = scene.rexUI.add.label({
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
 - `text` : Game object of text, optional.
-- `expandTextWidth` : Set `true` to expand width of text object.
+- `expandTextWidth` : 
+    - `false` : Keep width of text to original size. Default behavior.
+    - `true` : Expand width of text object. Will set display width by default.
+        - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.
 - `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
