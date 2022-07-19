@@ -8577,6 +8577,8 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/WNvpoWw">Align</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/oNZKmKZ">Add to layer</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/rNdyveo">Text wrap in horizontal label</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/vYRymQq">Text wrap in vertical label</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-label">Sample code</a></p>
@@ -8703,7 +8705,14 @@
 </ul>
 </li>
 <li><code>text</code> : Game object of text, optional.</li>
-<li><code>expandTextWidth</code> : Set <code>true</code> to expand width of text object.</li>
+<li><code>expandTextWidth</code> : <ul>
+<li><code>false</code> : Keep width of text to original size. Default behavior.</li>
+<li><code>true</code> : Expand width of text object. Will set display width by default.<ul>
+<li>Must set to <code>true</code> if using <a href="../ui-overview/#behaviors-of-text"><code>scene.rexUI.wrapExpandText</code> method</a> with any text game object.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>expandTextHeight</code> : Set <code>true</code> to expand height of text object.</li>
 <li><code>action</code> : Game object of action icon, optional.</li>
 <li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
