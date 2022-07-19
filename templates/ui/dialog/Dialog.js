@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import Buttons from '../buttons/Buttons.js';
 import FixWidthButtons from '../fixwidthbuttons/FixWidthButtons.js';
 import GridButtons from '../gridbuttons/GridButtons.js';
@@ -64,94 +65,69 @@ class Dialog extends Sizer {
             });
         }
 
-        // title only
-        if (title && !toolbar && !leftToolbar) {
-            var align = GetValue(config, 'align.title', 'center');
-            var titleSpace = GetValue(config, 'space.title', 0);
-            var padding;
-            if (content || description || choices || actions) {
-                padding = { bottom: titleSpace };
-            }
-            var expand = GetValue(config, 'expand.title', true);
-            this.add(
-                title,
-                { align: align, padding: padding, expand: expand }
-            );
-        }
+        // title or toolbar or leftToolbar
+        if (title || toolbar || leftToolbar) {
+            var titleExpandWidth = !!title && GetValue(config, 'expand.title', true);
+            var titleAlign = GetValue(config, 'align.title', 'center');
+            var useOverlapSizer =
+                // Has title, title is not exapnd-width, title align to center
+                (title && !titleExpandWidth && (titleAlign === 'center')) ||
+                // No title
+                (!title && (toolbar || leftToolbar));
+            var useSizer = !useOverlapSizer;
 
-        // toolbar only
-        if (toolbar && !title && !leftToolbar) {
-            var titleSpace = GetValue(config, 'space.title', 0);
-            var padding;
-            if (content || description || choices || actions) {
-                padding = { bottom: titleSpace };
+            var titleSizer;
+            if (useSizer) {
+                titleSizer = new Sizer(scene, { orientation: 0 });
+            } else {
+                titleSizer = new OverlapSizer(scene);
             }
-            var expand = GetValue(config, 'expand.toolbar', true);
-            this.add(
-                toolbarSizer,
-                { align: 'right', padding: padding, expand: expand }
-            );
-        }
 
-        // leftToolbar only
-        if (leftToolbar && !title && !toolbar) {
-            var titleSpace = GetValue(config, 'space.title', 0);
-            var padding;
-            if (content || description || choices || actions) {
-                padding = { bottom: titleSpace };
-            }
-            var expand = GetValue(config, 'expand.leftToolbar', true);
-            this.add(
-                leftToolbarSizer,
-                { align: 'left', padding: padding, expand: expand }
-            );
-        }
+            var titleChildExpand = (useSizer) ? true : { height: true };
 
-        // tilte and (toolbar or leftToolbar)
-        if (title && (toolbar || leftToolbar)) {
-            var titleSizer = new Sizer(scene, {
-                orientation: 0
-            });
             // Add leftToolbar
             if (leftToolbarSizer) {
                 titleSizer.add(
                     leftToolbarSizer,
-                    { align: 'right', expand: false }
+                    { align: 'left', expand: titleChildExpand }
                 );
             }
+
             // Add title
-            var align = GetValue(config, 'align.title', 'left');
-            var expand = GetValue(config, 'expand.title', true);
-            // Add space if not expand
-            if (
-                !expand &&
-                ((align === 'right') || (align === 'center'))
-            ) {
-                titleSizer.addSpace();
+            if (title) {
+                // Add space if not expand, align to right
+                if (useSizer && !titleExpandWidth && (titleAlign === 'right')) {
+                    titleSizer.addSpace();
+                }
+
+                var padding = {
+                    left: GetValue(config, 'space.titleLeft', 0),
+                    right: GetValue(config, 'space.titleRight', 0)
+                }
+                var proportion = (titleExpandWidth) ? 1 : 0;
+                titleSizer.add(
+                    title,
+                    { align: titleAlign, proportion: proportion, expand: titleChildExpand, padding: padding }
+                );
+
+                // Add space if not expand, align to left
+                if (useSizer && !titleExpandWidth && (titleAlign === 'left')) {
+                    titleSizer.addSpace();
+                }
             }
-            var padding = {
-                left: GetValue(config, 'space.titleLeft', 0),
-                right: GetValue(config, 'space.titleRight', 0)
-            }
-            var proportion = (expand) ? 1 : 0;
-            titleSizer.add(
-                title,
-                { proportion: proportion, align: 'center', padding: padding, expand: expand }
-            );
-            // Add space if not expand
-            if (
-                !expand &&
-                ((align === 'left') || (align === 'center'))
-            ) {
-                titleSizer.addSpace();
-            }
+
             // Add toolbar
             if (toolbarSizer) {
+                // Add space if not title
+                if (useSizer && !title) {
+                    titleSizer.addSpace();
+                }
                 titleSizer.add(
                     toolbarSizer,
-                    { align: 'right', expand: false }
+                    { align: 'right', expand: titleChildExpand }
                 );
             }
+
             // Add sizer to dialog
             var titleSpace = GetValue(config, 'space.title', 0);
             var padding;
@@ -160,7 +136,7 @@ class Dialog extends Sizer {
             }
             this.add(
                 titleSizer,
-                { align: 'center', padding: padding, expand: true }
+                { padding: padding, expand: true }
             );
         }
 
