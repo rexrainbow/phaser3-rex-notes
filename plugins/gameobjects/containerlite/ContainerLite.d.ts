@@ -7,6 +7,7 @@ declare namespace ContainerLite {
     interface ILocalState {
         parent: ContainerLite,
         self: Phaser.GameObjects.GameObject,
+        layer: Phaser.GameObjects.Layer | null,
 
         x: number, y: number,
         rotation: number, angle: number,

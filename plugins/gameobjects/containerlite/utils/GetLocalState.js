@@ -4,7 +4,7 @@ const RadToDeg = Phaser.Math.RadToDeg;
 var GetLocalState = function (gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
         var rexContainer = {
-            parent: null, self: null,
+            parent: null, self: null, layer: null,
             x: 0, y: 0, syncPosition: true,
             rotation: 0, syncRotation: true,
             scaleX: 0, scaleY: 0, syncScale: true,

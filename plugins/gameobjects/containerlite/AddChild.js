@@ -22,6 +22,7 @@ var Add = function (gameObject, config) {
     var layer = this.getRenderLayer();
     if (layer) {
         layer.add(gameObject);
+        state.layer = layer;
     }
 
     return this;
