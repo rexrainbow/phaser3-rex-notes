@@ -31,6 +31,11 @@ class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
         return this;
     }
 
+    stop() {
+        this.scaleOuter.stop();
+        return this;
+    }
+
     get scrollX() {
         return this.scaleOuter.scrollX;
     }

@@ -25,6 +25,8 @@ class Game extends Phaser.Scene {
                 .strokeRectShape(outerViewport)
         }, this);
 
+        // Manual scale
+        // this.rexScaleOuter.stop().scale();
     }
 
     update() {

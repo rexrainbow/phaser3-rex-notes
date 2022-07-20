@@ -24,7 +24,7 @@ class ScaleOuter {
         var scene = this.scene;
         if (CheckScaleMode(scene)) {
             scene.sys.scale.on('resize', this.scale, this);
-            scene.sys.events.once('preupdate', this.onFirstTick, this);
+            scene.sys.events.once('preupdate', this.start, this);
         }
 
         scene.sys.events.on('shutdown', function () {
@@ -43,10 +43,21 @@ class ScaleOuter {
         this._outerViewport = undefined;
     }
 
+    start() {
+        if (this.cameras.size === 0) {
+            // Add default camera
+            this.add(this.scene.sys.cameras.main);
+        }
+
+        this.scale();
+
+        return this;
+    }
+
     stop() {
         var scene = this.scene;
         scene.sys.scale.off('resize', this.scale, this);
-        scene.sys.events.off('preupdate', this.onFirstTick, this);
+        scene.sys.events.off('preupdate', this.start, this);
         return this;
     }
 

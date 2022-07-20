@@ -239,7 +239,7 @@
 
         if (CheckScaleMode(scene)) {
           scene.sys.scale.on('resize', this.scale, this);
-          scene.sys.events.once('preupdate', this.onFirstTick, this);
+          scene.sys.events.once('preupdate', this.start, this);
         }
 
         scene.sys.events.on('shutdown', function () {
@@ -258,11 +258,22 @@
         this._outerViewport = undefined;
       }
     }, {
+      key: "start",
+      value: function start() {
+        if (this.cameras.size === 0) {
+          // Add default camera
+          this.add(this.scene.sys.cameras.main);
+        }
+
+        this.scale();
+        return this;
+      }
+    }, {
       key: "stop",
       value: function stop() {
         var scene = this.scene;
         scene.sys.scale.off('resize', this.scale, this);
-        scene.sys.events.off('preupdate', this.onFirstTick, this);
+        scene.sys.events.off('preupdate', this.start, this);
         return this;
       }
     }, {
@@ -356,6 +367,12 @@
         }
 
         this.scaleOuter.scale();
+        return this;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        this.scaleOuter.stop();
         return this;
       }
     }, {
