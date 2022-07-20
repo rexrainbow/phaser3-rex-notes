@@ -104,7 +104,7 @@ class Modal extends ComponentBase {
     }
 
     setTransitOutCallback(callback) {
-        if (callback == null) {
+        if (!callback) {
             callback = NOOP;
         }
 
