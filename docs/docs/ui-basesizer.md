@@ -1151,7 +1151,7 @@ var isTouching = sizer.isInTouching();
     - `container` : [Container](container.md) game object.
 - Add to [Layer](layer.md)
     ```javascript
-    container.addToLayer(layer);
+    sizer.addToLayer(layer);
     ```
     - `layer` : [Layer](layer.md) game object.
 
