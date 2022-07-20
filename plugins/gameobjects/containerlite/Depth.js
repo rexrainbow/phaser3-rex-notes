@@ -32,7 +32,12 @@ export default {
     },
 
     moveDepthBelow(gameObject) {
-        var displayList = gameObject.scene.children;
+        var displayList = this.displayList;
+        if (gameObject.displayList !== displayList) {
+            // Do nothing if not at the same display list
+            return this;
+        }
+
         var children = this.getAllChildren([this]);
         SortGameObjectsByDepth(children);
         for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -46,7 +51,12 @@ export default {
     },
 
     moveDepthAbove(gameObject) {
-        var displayList = gameObject.scene.children;
+        var displayList = this.displayList;
+        if (gameObject.displayList !== displayList) {
+            // Do nothing if not at the same display list
+            return this;
+        }
+
         var children = this.getAllChildren([this]);
         SortGameObjectsByDepth(children, true);
         for (var i = 0, cnt = children.length; i < cnt; i++) {
