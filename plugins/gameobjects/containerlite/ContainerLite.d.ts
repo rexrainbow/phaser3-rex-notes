@@ -281,6 +281,10 @@ declare class ContainerLite extends Base {
         container: Phaser.GameObjects.Container
     ): this;
 
+    enableLayer(): this;
+
+    getLayer(): Phaser.GameObjects.Layer;
+
     changeOrigin(
         originX: number,
         originY: number
