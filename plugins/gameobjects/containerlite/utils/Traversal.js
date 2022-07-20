@@ -9,7 +9,7 @@ var DepthFirstSearch = function (root, callback) {
 }
 
 var BreadthFirstSearch = function (root, callback) {
-    var queue = [root];    
+    var queue = [root];
     while (queue.length > 0) {
         var current = queue.shift();
         var skip = callback(current);

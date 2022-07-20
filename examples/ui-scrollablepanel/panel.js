@@ -57,7 +57,6 @@ class Demo extends Phaser.Scene {
 
                 mask: {
                     padding: 1,
-                    // layer: this.add.layer()
                 },
             },
 
@@ -144,6 +143,7 @@ var createPanel = function (scene, data) {
         orientation: 'x',
         space: { item: 10 }
     })
+        // .enableLayer()
         .add(
             createHeader(scene, data), // child
             { expand: true }
@@ -156,6 +156,7 @@ var createPanel = function (scene, data) {
             createTable(scene, data, 'items', 2), // child
             { expand: true }
         )
+
     return sizer;
 }
 

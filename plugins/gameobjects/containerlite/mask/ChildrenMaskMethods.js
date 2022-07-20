@@ -82,7 +82,9 @@ export default {
             return this;
         }
 
-        if (this.maskLayer) {
+        if (this.layer) {
+            this.layer.setMask(this.childrenMask);
+        } else if (this.maskLayer) {
             // 1. Add parent and children into layer
             this.addToLayer(this.maskLayer);
             // 2. Mask this layer

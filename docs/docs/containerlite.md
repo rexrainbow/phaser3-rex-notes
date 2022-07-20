@@ -542,6 +542,20 @@ var timelineObj = container.timelineChild({
     container.moveDepthAbove(gameObject);
     ```
 
+### Layer
+
+A containerLite can have a [layer](layer.md). 
+Current children and new children will draw on this layer, instead of display list of scene.
+
+- Enable layer. Do nothing if layer is existed.
+    ```javascript
+    container.enableLayer();
+    ```
+- Get layer game object. Will enable layer if layer is not existed.
+    ```javascript
+    var layer = container.getLayer();
+    ```
+
 ### Mask
 
 - Assign [mask object](mask.md) to children
@@ -556,6 +570,10 @@ var timelineObj = container.timelineChild({
     ```javascript
     container.clearMask(true);
     ```
+
+### Shader effects
+
+Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
 
 ### Scroll factor
 

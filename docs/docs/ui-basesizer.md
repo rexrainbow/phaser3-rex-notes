@@ -1158,6 +1158,24 @@ var isTouching = sizer.isInTouching();
 !!! note
     `container.add(sizer)`, or `layer.add(sizer)` won't add children of sizer.
 
+### Layer
+
+A sizer can have a [layer](layer.md). 
+Current children and new children will draw on this layer, instead of display list of scene.
+
+- Enable layer. Do nothing if layer is existed.
+    ```javascript
+    sizer.enableLayer();
+    ```
+- Get layer game object. Will enable layer if layer is not existed.
+    ```javascript
+    var layer = sizer.getLayer();
+    ```
+
+### Shader effects
+
+Apply post-fx pipeline on [layer of sizer](ui-basesizer.md#layer).
+
 ### Events
 
 #### Dragging

@@ -13,25 +13,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var card0 = CreateCard(this, 0);
-
-        // Put sizer into layer, then apply shader on this layer
-        card0._layer = this.add.layer();
-        card0.addToLayer(card0._layer);
-
-        var card1 = CreateCard(this, 1);
         var ui = this.rexUI.add.sizer({
             x: 400, y: 300,
 
             orientation: 'x',
             space: { item: 20 }
         })
-            .add(card0)
-            .add(card1)
+            .add(CreateCard(this, 0))
+            .add(CreateCard(this, 1))
             .layout();
 
-        var postFxPlugin = this.plugins.get('rexGrayScalePipeline');
-        postFxPlugin.add(card0._layer);
     }
 
     update() {
@@ -39,6 +30,7 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCard = function (scene, orientation) {
+    var postFxPlugin = scene.plugins.get('rexGrayScalePipeline');
     return scene.rexUI.add.perspectiveCard({
         front: CreateFrontFace(scene),
         back: CreateBackFace(scene),
@@ -62,6 +54,14 @@ var CreateCard = function (scene, orientation) {
                 this.flip.flipRight(1000, 2);
             }
             // this.flip.flip();
+        })
+        .on('pointerover', function () {
+            // Add postfx pipeline
+            postFxPlugin.add(this.getLayer());
+        })
+        .on('pointerout', function () {
+            // Remove postfx pipeline
+            postFxPlugin.remove(this.getLayer());
         })
 }
 

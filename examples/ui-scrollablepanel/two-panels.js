@@ -69,7 +69,6 @@ var createScrollablePanel = function (scene, data) {
 
             mask: {
                 padding: 1,
-                // layer: this.add.layer()
             },
         },
 

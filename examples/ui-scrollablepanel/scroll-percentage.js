@@ -57,7 +57,6 @@ class Demo extends Phaser.Scene {
 
                 mask: {
                     padding: 1,
-                    // layer: this.add.layer()
                 },
             },
 

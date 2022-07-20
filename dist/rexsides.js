@@ -526,6 +526,12 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+    var layer = this.getRenderLayer();
+
+    if (layer) {
+      layer.add(gameObject);
+    }
+
     return this;
   };
 
@@ -1178,7 +1184,13 @@
       return this;
     },
     moveDepthBelow: function moveDepthBelow(gameObject) {
-      var displayList = gameObject.scene.children;
+      var displayList = this.displayList;
+
+      if (gameObject.displayList !== displayList) {
+        // Do nothing if not at the same display list
+        return this;
+      }
+
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children);
 
@@ -1194,7 +1206,13 @@
       return this;
     },
     moveDepthAbove: function moveDepthAbove(gameObject) {
-      var displayList = gameObject.scene.children;
+      var displayList = this.displayList;
+
+      if (gameObject.displayList !== displayList) {
+        // Do nothing if not at the same display list
+        return this;
+      }
+
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, true);
 
@@ -1520,6 +1538,51 @@
     addToContainer: AddToLayer
   };
 
+  var Layer = {
+    enableLayer: function enableLayer() {
+      if (this.layer) {
+        return this;
+      }
+
+      var layer = this.scene.add.layer();
+      this.moveDepthBelow(layer);
+      this.once('destroy', function () {
+        layer.removeAll().destroy();
+      });
+      this.addToLayer(layer);
+      this.layer = layer;
+      return this;
+    },
+    getLayer: function getLayer() {
+      if (!this.layer) {
+        this.enableLayer();
+      }
+
+      return this.layer;
+    },
+    getRenderLayer: function getRenderLayer() {
+      // This containerLite has a layer
+      if (this.layer) {
+        return this.layer;
+      } // One of parent container has a layer
+
+
+      var parent = this.getParent();
+
+      while (parent) {
+        var layer = parent.layer;
+
+        if (layer) {
+          return layer;
+        }
+
+        parent = parent.getParent();
+      }
+
+      return null;
+    }
+  };
+
   var RotateAround$2 = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
@@ -1555,7 +1618,7 @@
   var methods$4 = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$4, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer);
+  Object.assign(methods$4, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible$1, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);

@@ -921,7 +921,7 @@
     }, {
       key: "setTransitOutCallback",
       value: function setTransitOutCallback(callback) {
-        if (callback == null) {
+        if (!callback) {
           callback = NOOP;
         }
 

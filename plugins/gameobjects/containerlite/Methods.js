@@ -15,6 +15,7 @@ import Depth from './Depth.js';
 import Children from './Children.js';
 import Tween from './Tween.js';
 import AddToContainer from './AddToContainer.js';
+import Layer from './Layer.js';
 
 import ChangeOrigin from './ChangeOrigin.js';
 
@@ -40,7 +41,8 @@ Object.assign(
     Depth,
     Children,
     Tween,
-    AddToContainer
+    AddToContainer,
+    Layer,
 );
 
 export default methods;

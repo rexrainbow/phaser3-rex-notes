@@ -18,6 +18,12 @@ var Add = function (gameObject, config) {
         .updateChildMask(gameObject);          // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+
+    var layer = this.getRenderLayer();
+    if (layer) {
+        layer.add(gameObject);
+    }
+
     return this;
 }
 

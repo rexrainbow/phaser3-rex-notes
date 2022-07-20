@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
             card
                 .setInteractive()
                 .on('pointerdown', function () {
-                    this.children.bringToTop(card.getData('layer'));
+                    this.children.bringToTop(card.getLayer());
                 }, this)
         }
     }
@@ -37,7 +37,6 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCard = function (scene, x, y, name) {
-    var layer = scene.add.layer().setName(name);
     return scene.rexUI.add.label({
         x: x, y: y,
         width: 200, height: 300,
@@ -53,8 +52,7 @@ var CreateCard = function (scene, x, y, name) {
         },
         name: name
     })
-        .setData('layer', layer)
-        .addToLayer(layer)
+        .enableLayer()
         .layout();
 }
 
