@@ -2373,7 +2373,9 @@
       var layer = this.scene.add.layer();
       this.moveDepthBelow(layer);
       this.once('destroy', function () {
-        layer.removeAll().destroy();
+        layer.list.length = 0; // Remove all children without trigger callback
+
+        layer.destroy();
       });
       this.addToLayer(layer);
       this.layer = layer;
