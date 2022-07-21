@@ -8680,6 +8680,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// rtl: false,</span>
+    <span class="c1">// startChildIndex: 0,</span>
 
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
@@ -8697,6 +8698,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// rtl: false,</span>
+    <span class="c1">// startChildIndex: 0,</span>
 
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
@@ -8712,6 +8714,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// rtl: false,</span>
+    <span class="c1">// startChildIndex: 0,</span>
     <span class="c1">// anchor: undefined,</span>
     <span class="c1">// space: { left: 0, right:0, top:0, bottom:0, item:0 },</span>
 
@@ -8723,6 +8726,7 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// rtl: false,</span>
+    <span class="c1">// startChildIndex: 0,</span>
     <span class="c1">// anchor: undefined,</span>
     <span class="c1">// space: { left: 0, right:0, top:0, bottom:0, item:0 }</span>
 <span class="p">});</span>
@@ -8753,11 +8757,12 @@
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
 </ul>
 </li>
-<li><code>rtl</code> : <ul>
-<li><code>true</code> : Layout children from right to left.</li>
+<li><code>rtl</code> :     <ul>
 <li><code>false</code> : Layout children from left to right. Default behavior.</li>
+<li><code>true</code> : Layout children from right to left.</li>
 </ul>
 </li>
+<li><code>startChildIndex</code> : A number, start index of first layout child. Default value is <code>0</code>.</li>
 <li><code>space</code> : Pads spaces.<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.item</code> : Space between 2 children game objects.</li>

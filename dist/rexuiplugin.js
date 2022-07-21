@@ -8090,7 +8090,7 @@
   };
 
   var GetValue$24 = Phaser.Utils.Objects.GetValue;
-  var Wrap = Phaser.Math.Wrap;
+  var Wrap$1 = Phaser.Math.Wrap;
 
   var HiddenInputText = /*#__PURE__*/function (_InputText) {
     _inherits(HiddenInputText, _InputText);
@@ -8229,7 +8229,7 @@
         }
 
         var timerValue = this.cursorFlashTimer + this.scene.game.loop.delta;
-        this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
+        this.cursorFlashTimer = Wrap$1(timerValue, 0, this.cursorFlashDuration);
         return cursor;
       }
     }, {
@@ -29156,6 +29156,8 @@
     return this;
   };
 
+  var Wrap = Phaser.Math.Wrap;
+
   var LayoutChildren$4 = function LayoutChildren() {
     var children = this.sizerChildren;
     var child, childConfig, padding;
@@ -29168,9 +29170,21 @@
     var x, y, width, height; // Align zone
 
     var childWidth, childHeight;
+    var childIndex,
+        startChildIndex = this.startChildIndex;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      child = !this.rtl ? children[i] : children[cnt - i - 1];
+      if (startChildIndex === 0) {
+        childIndex = i;
+      } else {
+        childIndex = Wrap(i + startChildIndex, 0, cnt);
+      }
+
+      if (this.rtl) {
+        childIndex = cnt - childIndex - 1;
+      }
+
+      child = children[childIndex];
 
       if (child.rexSizer.hidden) {
         continue;
@@ -29618,6 +29632,8 @@
 
       _this.setItemSpacing(GetValue$12(config, 'space.item', 0));
 
+      _this.setStartChildIndex(GetValue$12(config, 'startChildIndex', 0));
+
       _this.setRTL(GetValue$12(config, 'rtl', false));
 
       _this.addChildrenMap('items', _this.sizerChildren);
@@ -29635,6 +29651,12 @@
       key: "setItemSpacing",
       value: function setItemSpacing(space) {
         this.space.item = space;
+        return this;
+      }
+    }, {
+      key: "setStartChildIndex",
+      value: function setStartChildIndex(index) {
+        this.startChildIndex = index;
         return this;
       }
     }, {

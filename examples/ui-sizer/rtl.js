@@ -18,7 +18,8 @@ class Demo extends Phaser.Scene {
         this.rexUI.add.sizer({
             x: 400, y: 300,
             orientation: 'x',
-            rtl: true
+            rtl: true,
+            // startChildIndex: 1,
         })
             .add(this.add.text(0, 0, 'A', { fontSize: 48 }))
             .add(this.add.text(0, 0, 'B', { fontSize: 48 }))

@@ -4,6 +4,8 @@ import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 import CheckSize from '../basesizer/utils/CheckSize.js';
 
+const Wrap = Phaser.Math.Wrap;
+
 var LayoutChildren = function () {
     var children = this.sizerChildren;
     var child, childConfig, padding;
@@ -15,8 +17,19 @@ var LayoutChildren = function () {
         itemY = startY;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
+    var childIndex, startChildIndex = this.startChildIndex;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = (!this.rtl) ? children[i] : children[cnt - i - 1];
+        if (startChildIndex === 0) {
+            childIndex = i;
+        } else {
+            childIndex = Wrap((i + startChildIndex), 0, cnt);
+        }
+
+        if (this.rtl) {
+            childIndex = cnt - childIndex - 1;
+        }
+
+        child = children[childIndex];
         if (child.rexSizer.hidden) {
             continue;
         }

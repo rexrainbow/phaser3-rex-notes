@@ -10410,6 +10410,8 @@
     return this;
   };
 
+  var Wrap = Phaser.Math.Wrap;
+
   var LayoutChildren = function LayoutChildren() {
     var children = this.sizerChildren;
     var child, childConfig, padding;
@@ -10422,9 +10424,21 @@
     var x, y, width, height; // Align zone
 
     var childWidth, childHeight;
+    var childIndex,
+        startChildIndex = this.startChildIndex;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      child = !this.rtl ? children[i] : children[cnt - i - 1];
+      if (startChildIndex === 0) {
+        childIndex = i;
+      } else {
+        childIndex = Wrap(i + startChildIndex, 0, cnt);
+      }
+
+      if (this.rtl) {
+        childIndex = cnt - childIndex - 1;
+      }
+
+      child = children[childIndex];
 
       if (child.rexSizer.hidden) {
         continue;
@@ -10872,6 +10886,8 @@
 
       _this.setItemSpacing(GetValue$3(config, 'space.item', 0));
 
+      _this.setStartChildIndex(GetValue$3(config, 'startChildIndex', 0));
+
       _this.setRTL(GetValue$3(config, 'rtl', false));
 
       _this.addChildrenMap('items', _this.sizerChildren);
@@ -10889,6 +10905,12 @@
       key: "setItemSpacing",
       value: function setItemSpacing(space) {
         this.space.item = space;
+        return this;
+      }
+    }, {
+      key: "setStartChildIndex",
+      value: function setStartChildIndex(index) {
+        this.startChildIndex = index;
         return this;
       }
     }, {
