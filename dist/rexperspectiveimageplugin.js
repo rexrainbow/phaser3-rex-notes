@@ -1379,13 +1379,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
-    var layer = this.getRenderLayer();
-
-    if (layer) {
-      layer.add(gameObject);
-      state.layer = layer;
-    }
-
+    this.addToRenderLayer(gameObject);
     return this;
   };
 
@@ -1412,6 +1406,7 @@
     .updateChildMask(gameObject); // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+    this.addToRenderLayer(gameObject);
     return this;
   };
 
@@ -1489,14 +1484,7 @@
       this.setParent(gameObject, null);
 
       if (!destroyChild) {
-        // Move gameObject from layer to scene
-        var state = GetLocalState(gameObject);
-        var layer = state.layer;
-
-        if (layer) {
-          layer.remove(gameObject);
-          state.layer = null;
-        }
+        this.removeFromRenderLayer(gameObject);
       }
 
       BaseRemove.call(this, gameObject, destroyChild);
@@ -1510,13 +1498,7 @@
         this.setParent(child, null);
 
         if (!destroyChild) {
-          var state = GetLocalState(child);
-          var layer = state.layer;
-
-          if (layer) {
-            layer.remove(child);
-            state.layer = null;
-          }
+          this.removeFromRenderLayer(child);
         }
       }
 
@@ -2435,6 +2417,34 @@
       }
 
       return null;
+    },
+    // Internal method for adding child
+    addToRenderLayer: function addToRenderLayer(gameObject) {
+      // Move gameObject from scene to layer
+      var layer = this.getRenderLayer();
+
+      if (!layer) {
+        return this;
+      }
+
+      layer.add(gameObject);
+      var state = GetLocalState(gameObject);
+      state.layer = layer;
+      return this;
+    },
+    // Internal method for removing child
+    removeFromRenderLayer: function removeFromRenderLayer(gameObject) {
+      // Move gameObject from layer to scene
+      var state = GetLocalState(gameObject);
+      var layer = state.layer;
+
+      if (!layer) {
+        return this;
+      }
+
+      layer.remove(gameObject);
+      state.layer = null;
+      return this;
     }
   };
 

@@ -52,6 +52,9 @@ var AddLocal = function (gameObject, config) {
         .updateChildMask(gameObject);          // Apply parent's mask to child
 
     BaseAdd.call(this, gameObject);
+
+    this.addToRenderLayer(gameObject);
+
     return this;
 }
 
