@@ -542,8 +542,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scale-in-create-stage" class="md-nav__link">
-    Scale in create stage
+  <a href="#manual-scale" class="md-nav__link">
+    Manual scale
   </a>
   
 </li>
@@ -8499,8 +8499,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scale-in-create-stage" class="md-nav__link">
-    Scale in create stage
+  <a href="#manual-scale" class="md-nav__link">
+    Manual scale
   </a>
   
 </li>
@@ -8623,13 +8623,15 @@ for each scene. It does not have to create other scale outer instance.</p>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">outerViewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">outerViewport</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-<h3 id="scale-in-create-stage">Scale in create stage<a class="headerlink" href="#scale-in-create-stage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">scale</span><span class="p">();</span>
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><code>'resize'</code> event of scale manager won't be fired in create stage</p>
-</div>
+<h3 id="manual-scale">Manual scale<a class="headerlink" href="#manual-scale" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Stop resize callback
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">stop</span><span class="p">()</span>
+</code></pre></div></li>
+<li>Manual scale
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">scale</span><span class="p">();</span>
+</code></pre></div></li>
+</ol>
 
               
             </article>
