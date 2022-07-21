@@ -19,11 +19,7 @@ var Add = function (gameObject, config) {
 
     BaseAdd.call(this, gameObject);
 
-    var layer = this.getRenderLayer();
-    if (layer) {
-        layer.add(gameObject);
-        state.layer = layer;
-    }
+    this.addToRenderLayer(gameObject);
 
     return this;
 }

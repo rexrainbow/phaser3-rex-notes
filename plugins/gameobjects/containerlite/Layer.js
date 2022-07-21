@@ -1,3 +1,5 @@
+import GetLocalState from './utils/GetLocalState.js';
+
 export default {
     enableLayer() {
         if (this.layer) {
@@ -45,5 +47,36 @@ export default {
         }
 
         return null;
-    }
+    },
+
+    // Internal method for adding child
+    addToRenderLayer(gameObject) {
+        // Move gameObject from scene to layer
+        var layer = this.getRenderLayer();
+        if (!layer) {
+            return this;
+        }
+
+        layer.add(gameObject);
+
+        var state = GetLocalState(gameObject);
+        state.layer = layer;
+
+        return this;
+    },
+
+    // Internal method for removing child
+    removeFromRenderLayer(gameObject) {
+        // Move gameObject from layer to scene
+        var state = GetLocalState(gameObject);
+        var layer = state.layer;
+        if (!layer) {
+            return this;
+        }
+
+        layer.remove(gameObject);
+        state.layer = null;
+
+        return this;
+    },
 }

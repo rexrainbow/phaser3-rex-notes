@@ -13,13 +13,7 @@ export default {
         this.setParent(gameObject, null);
 
         if (!destroyChild) {
-            // Move gameObject from layer to scene
-            var state = GetLocalState(gameObject);
-            var layer = state.layer;
-            if (layer) {
-                layer.remove(gameObject);
-                state.layer = null;
-            }
+            this.removeFromRenderLayer(gameObject);
         }
 
         BaseRemove.call(this, gameObject, destroyChild);
@@ -33,12 +27,7 @@ export default {
             this.setParent(child, null);
 
             if (!destroyChild) {
-                var state = GetLocalState(child);
-                var layer = state.layer;
-                if (layer) {
-                    layer.remove(child);
-                    state.layer = null;
-                }
+                this.removeFromRenderLayer(child);
             }
         }
         BaseClear.call(this, destroyChild);
