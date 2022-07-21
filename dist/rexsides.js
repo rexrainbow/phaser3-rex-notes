@@ -638,10 +638,12 @@
 
       if (!destroyChild) {
         // Move gameObject from layer to scene
-        var layer = GetLocalState(gameObject).layer;
+        var state = GetLocalState(gameObject);
+        var layer = state.layer;
 
         if (layer) {
           layer.remove(gameObject);
+          state.layer = null;
         }
       }
 
@@ -656,10 +658,12 @@
         this.setParent(child, null);
 
         if (!destroyChild) {
-          var layer = GetLocalState(child).layer;
+          var state = GetLocalState(child);
+          var layer = state.layer;
 
           if (layer) {
             layer.remove(child);
+            state.layer = null;
           }
         }
       }
