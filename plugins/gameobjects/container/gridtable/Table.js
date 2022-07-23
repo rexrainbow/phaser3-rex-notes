@@ -1,5 +1,5 @@
 import Cell from './Cell.js';
-import Pool from '../../pool.js';
+import Pool from '../../../pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;

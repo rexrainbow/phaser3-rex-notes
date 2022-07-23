@@ -1,6 +1,5 @@
 import GetValue from '../object/GetValue.js';
 import Clear from '../object/Clear.js';
-import Clone from '../object/Clone.js';
 
 export default {
     enableData() {

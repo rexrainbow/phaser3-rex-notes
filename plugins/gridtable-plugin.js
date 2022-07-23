@@ -1,6 +1,6 @@
-import Factory from './gameobjects/gridtable/Factory.js';
-import Creator from './gameobjects/gridtable/Creator.js';
-import GridTable from './gameobjects/gridtable/GridTable.js';
+import Factory from './gameobjects/container/gridtable/Factory.js';
+import Creator from './gameobjects/container/gridtable/Creator.js';
+import GridTable from './gameobjects/container/gridtable/GridTable.js';
 import SetValue from './utils/object/SetValue.js';
 
 class GridTablePlugin extends Phaser.Plugins.BasePlugin {

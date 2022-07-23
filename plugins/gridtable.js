@@ -1,2 +1,2 @@
-import GridTable from './gameobjects/gridtable/GridTable.js';
+import GridTable from './gameobjects/container/gridtable/GridTable.js';
 export default GridTable;

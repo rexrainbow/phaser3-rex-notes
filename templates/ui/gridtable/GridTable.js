@@ -1,6 +1,6 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
-import GridTableCore from '../../../plugins/gameobjects/gridtable/GridTable.js';
+import GridTableCore from '../../../plugins/gridtable.js';
 import InjectProperties from './InjectProperties.js';
 import TableOnCellVisible from './TableOnCellVisible.js';
 import TableSetInteractive from './input/TableSetInteractive.js';

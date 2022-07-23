@@ -1,4 +1,4 @@
-import ContainerLite from '../container/containerlite/ContainerLite';
+import ContainerLite from '../../container/containerlite/ContainerLite';
 
 export default GridTable;
 
