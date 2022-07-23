@@ -1,4 +1,4 @@
-import DefaultMaskGraphics from '../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import DefaultMaskGraphics from '../../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 
 export default {
     setMaskGameObject(gameObject) {

@@ -1,4 +1,4 @@
-import GridCutImage from '../../../actions/GridCutImage.js'
+import GridCutImage from '../../../../actions/GridCutImage.js'
 
 export default {
     gridCutImage(gameObject, columns, rows, config) {

@@ -1,4 +1,4 @@
-import ContainerLite from "../container/containerlite/ContainerLite";
+import ContainerLite from "../containerlite/ContainerLite";
 
 export default TransitionImage;
 

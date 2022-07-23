@@ -13,6 +13,7 @@ import CircularProgress from './circularprogress/CircularProgress';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
+import TransitionImage from './transitionimage/TransitionImage';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
 import Chart from './chart/Chart';
@@ -108,6 +109,7 @@ export {
     Knob,
     CustomShapes,
     CustomProgress,
+    TransitionImage,
     NinePatch,
     NinePatch2,
 
