@@ -9,12 +9,13 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var obj = this.add.line(400, 300, 30, 0, 0, 0, 0x00cccc).setLineWidth(4, 15);
         obj.bullet = this.plugins.get('rexBullet').add(obj, {
-            speed: 100
+            speed: 100,
+            // angle: 45
         });
         obj.body.setSize(30, 30);
 

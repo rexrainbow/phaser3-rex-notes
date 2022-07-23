@@ -6,7 +6,12 @@ declare namespace Bullet {
 
     interface IConfig {
         speed?: number,
-        enable?: boolean
+        enable?: boolean,
+        wrap?: boolean,
+        padding?: number,
+
+        angle?: number,
+        rotation?: number,
     }
 }
 
@@ -21,4 +26,10 @@ declare class Bullet extends TickTask {
 
     setSpeed(speed: number): this;
     speed: number;
+
+    setAngle(angle?: number): this;
+    angle: number | undefined;
+
+    setRotation(rotation?: number): this;
+    rotation: number | undefined;
 }

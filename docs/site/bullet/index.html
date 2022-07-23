@@ -3319,6 +3319,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#angle" class="md-nav__link">
+    Angle
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8449,6 +8456,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#angle" class="md-nav__link">
+    Angle
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8564,7 +8578,10 @@
     <span class="nx">speed</span><span class="o">:</span> <span class="mf">200</span><span class="p">,</span>
     <span class="c1">// wrap: false,</span>
     <span class="c1">// padding: 0,</span>
-    <span class="c1">// enable: true</span>
+    <span class="c1">// enable: true,</span>
+
+    <span class="c1">// angle: undefined,</span>
+    <span class="c1">// rotation: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8575,6 +8592,11 @@
 </ul>
 </li>
 <li><code>enable</code> : set <code>false</code> to disable moving.</li>
+<li><code>angle</code>, <code>rotation</code> : <ul>
+<li><code>undefined</code> : Use angle of game object as angle of bullet. Default value.</li>
+<li>A number : Angle of bullet, in degrees or radians.</li>
+</ul>
+</li>
 </ul>
 <h3 id="speed">Speed<a class="headerlink" href="#speed" title="Permanent link">&para;</a></h3>
 <ul>
@@ -8591,6 +8613,21 @@
 </code></pre></div>
 <ul>
 <li><code>wrap</code> : Set <code>true</code> to enable wrap mode.</li>
+</ul>
+<h3 id="angle">Angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set angle
+    <div class="highlight"><pre><span></span><code><span class="nx">bullet</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">degrees</span><span class="p">);</span>
+<span class="c1">// bullet.angle = degrees;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">bullet</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
+<span class="c1">// bullet.rotation  = radians;</span>
+</code></pre></div></li>
+<li>Use angle of game object
+    <div class="highlight"><pre><span></span><code><span class="nx">bullet</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">();</span>
+<span class="c1">// bullet.setRotation();</span>
+</code></pre></div></li>
 </ul>
 
               

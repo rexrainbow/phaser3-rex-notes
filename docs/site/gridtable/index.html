@@ -8861,7 +8861,8 @@
         <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="c1">// updateMode: 0,</span>
         <span class="c1">// layer: undefined,</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="c1">// enableLayer: false</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
@@ -8914,6 +8915,11 @@
 </ul>
 </li>
 <li><code>false</code> : No mask.</li>
+</ul>
+</li>
+<li><code>enableLayer</code> : <ul>
+<li><code>false</code> : Add cell game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add cell game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
 </ul>
 </li>
 </ul>

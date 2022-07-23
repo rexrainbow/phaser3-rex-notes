@@ -105,7 +105,10 @@ var bullet = scene.plugins.get('rexBullet').add(gameObject, {
     speed: 200,
     // wrap: false,
     // padding: 0,
-    // enable: true
+    // enable: true,
+
+    // angle: undefined,
+    // rotation: undefined
 });
 ```
 
@@ -114,6 +117,10 @@ var bullet = scene.plugins.get('rexBullet').add(gameObject, {
     - `wrap` : Set `true` to enable wrap mode. Default value is `false`.
     - `padding`
 - `enable` : set `false` to disable moving.
+- `angle`, `rotation` : 
+    - `undefined` : Use angle of game object as angle of bullet. Default value.
+    - A number : Angle of bullet, in degrees or radians.
+
 
 ### Speed
 
@@ -134,3 +141,21 @@ bullet.setWrapMode(wrap, padding);
 ```
 
 - `wrap` : Set `true` to enable wrap mode.
+
+### Angle
+
+- Set angle
+    ```javascript
+    bullet.setAngle(degrees);
+    // bullet.angle = degrees;
+    ```
+    or
+    ```javascript
+    bullet.setRotation(radians);
+    // bullet.rotation  = radians;
+    ```
+- Use angle of game object
+    ```javascript
+    bullet.setAngle();
+    // bullet.setRotation();
+    ```

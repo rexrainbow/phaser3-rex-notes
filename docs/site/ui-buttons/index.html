@@ -8789,6 +8789,7 @@
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false,</span>
     <span class="c1">// sizerEvents: false,</span>
+    <span class="c1">// enableLayer: false,</span>
     <span class="c1">// eventEmitter: this,</span>
     <span class="c1">// groupName: undefined,</span>
 
@@ -8863,6 +8864,11 @@
 <li><code>name</code> : Set name of this game object.</li>
 <li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+<li><code>enableLayer</code> : <ul>
+<li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
+</ul>
+</li>
 <li><code>eventEmitter</code> : Dispatch buttons' touch events to other game object, default is this buttons game object.</li>
 <li><code>groupName</code> : Optional group name for argument of touch events.</li>
 <li><code>setValueCallback</code>, or <code>setButtonStateCallback</code> : Callback to set value of a button.<ul>

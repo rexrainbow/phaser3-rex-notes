@@ -8761,6 +8761,7 @@
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false,</span>
     <span class="c1">// sizerEvents: false,</span>
+    <span class="c1">// enableLayer: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8904,9 +8905,14 @@
 <li><code>space.text</code> : Space between text game object and action icon game object.</li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>name</code> : Set name of this game object.</li>
 <li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
 <li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+<li><code>enableLayer</code> : <ul>
+<li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
 </ul>
 </li>
 </ul>
