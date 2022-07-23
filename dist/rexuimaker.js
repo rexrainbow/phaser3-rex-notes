@@ -19946,6 +19946,12 @@
 
       _this.setDirty(true);
 
+      var enableLayer = GetValue$E(config, 'enableLayer', false);
+
+      if (enableLayer) {
+        _this.enableLayer();
+      }
+
       return _this;
     }
 

@@ -9082,6 +9082,12 @@
 
       _this.setDirty(true);
 
+      var enableLayer = GetValue$4(config, 'enableLayer', false);
+
+      if (enableLayer) {
+        _this.enableLayer();
+      }
+
       return _this;
     }
 

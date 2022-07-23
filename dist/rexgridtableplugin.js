@@ -3523,6 +3523,11 @@
       }
 
       _this.table = new Table(_assertThisInitialized(_this), config);
+      var enableLayer = GetValue$1(config, 'enableLayer', false);
+
+      if (enableLayer) {
+        _this.enableLayer();
+      }
 
       _this.updateTable();
 

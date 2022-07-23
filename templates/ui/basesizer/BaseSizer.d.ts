@@ -29,7 +29,9 @@ declare namespace BaseSizer {
 
         anchor?: Anchor.IConfig,
 
-        name?: string
+        name?: string,
+
+        enableLayer?: boolean,
 
         draggable?: boolean | string | Phaser.GameObjects.GameObject,
 

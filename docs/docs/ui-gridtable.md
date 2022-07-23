@@ -102,8 +102,8 @@ var table = scene.rexUI.add.gridTable({
         mask: {
             padding: 0,
             // updateMode: 0,
-            // layer: undefined,
         },
+        // enableLayer : false,
         interactive: true,
         reuseCellContainer: false,
 
@@ -238,11 +238,11 @@ var table = scene.rexUI.add.gridTable({
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `table.mask.updateMode` : When to update cells mask
             - `0`, or `update` : Apply mask to cell container only when `table.updateTable()` is invoked. Default behavior.
-            - `1`, or `everyTick` : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after `table.updateTable()` and still been masked.
-        - `table.mask.layer` :
-            - `undefined`, `false`, `null` : Disable this feature, default behavior
-            - [Layer game object](layer.md) : Draw children game object of panel on this layer game object, then apply mask on this layer game object.          
+            - `1`, or `everyTick` : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after `table.updateTable()` and still been masked.       
         - `false` : No mask.
+    - `table.enableLayer` : 
+        - `false` : Add cell game objects into scene's display list. Default behavior.
+        - `true` : Add cell game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
     - `table.reuseCellContainer` : 
         - `true` : Reuse cell container when creating new cell container. 
         - `false` : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.

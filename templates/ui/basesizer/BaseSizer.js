@@ -27,6 +27,11 @@ class Base extends Container {
         this.setDraggable(GetValue(config, 'draggable', false));
         this.setSizerEventsEnable(GetValue(config, 'sizerEvents', false));
         this.setDirty(true);
+
+        var enableLayer = GetValue(config, 'enableLayer', false);
+        if (enableLayer) {
+            this.enableLayer();
+        }
     }
 
     destroy(fromScene) {

@@ -59,7 +59,8 @@ declare namespace GridTable {
 
         clamplTableOXY?: boolean,
         scrollMode?: ScrollModeType,
-        mask?: MaskConfig
+        mask?: MaskConfig,
+        enableLayer?: boolean,
     }
 
     namespace Events {
@@ -71,17 +72,17 @@ declare namespace GridTable {
 
         type CellInvisibleCallbackType = (cell: CellData) => void;
 
-        type CellHeightchange= (
+        type CellHeightchange = (
             cell: CellData,
             cellContainer: Phaser.GameObjects.GameObject | null,
             table: GridTable
         ) => void;
 
-        type CellWidthchange= (
+        type CellWidthchange = (
             cell: CellData,
             cellContainer: Phaser.GameObjects.GameObject | null,
             table: GridTable
-        ) => void;  
+        ) => void;
     }
 }
 

@@ -50,9 +50,9 @@ var CreateCard = function (scene, x, y, name) {
             left: 20, right: 20, top: 20, bottom: 20,
             icon: 10, text: 10,
         },
+        enableLayer: true,
         name: name
     })
-        .enableLayer()
         .layout();
 }
 

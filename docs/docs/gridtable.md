@@ -100,7 +100,8 @@ var config = {
         padding: 0,
         // updateMode: 0,
         // layer: undefined,
-    }
+    },
+    // enableLayer: false
 }
 var table = scene.add.rexGridTable(x, y, width, height, config);
 ```
@@ -143,6 +144,9 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
         - `undefined`, `false`, `null` : Disable this feature, default behavior
         - [Layer game object](layer.md) : Draw children game object of panel on this layer game object, then apply mask on this layer game object.     
     - `false` : No mask.
+- `enableLayer` : 
+    - `false` : Add cell game objects into scene's display list. Default behavior.
+    - `true` : Add cell game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
 
 Add grid table from JSON
 

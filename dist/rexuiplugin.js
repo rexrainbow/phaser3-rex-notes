@@ -26444,6 +26444,12 @@
 
       _this.setDirty(true);
 
+      var enableLayer = GetValue$1f(config, 'enableLayer', false);
+
+      if (enableLayer) {
+        _this.enableLayer();
+      }
+
       return _this;
     }
 
@@ -37569,6 +37575,11 @@
       }
 
       _this.table = new Table(_assertThisInitialized(_this), config);
+      var enableLayer = GetValue$F(config, 'enableLayer', false);
+
+      if (enableLayer) {
+        _this.enableLayer();
+      }
 
       _this.updateTable();
 

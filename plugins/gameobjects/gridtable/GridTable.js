@@ -61,6 +61,11 @@ class GridTable extends ContainerLite {
         }
         this.table = new Table(this, config);
 
+        var enableLayer = GetValue(config, 'enableLayer', false);
+        if (enableLayer) {
+            this.enableLayer();
+        }
+
         this.updateTable();
     }
 
