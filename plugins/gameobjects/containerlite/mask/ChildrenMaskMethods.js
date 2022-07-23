@@ -90,7 +90,7 @@ export default {
             // 2. Mask this layer
             this.maskLayer.setMask(this.childrenMask);
         } else {
-            MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
+            MaskChildren(this, this.childrenMask);
         }
 
         if (this.maskUpdateMode === 0) {

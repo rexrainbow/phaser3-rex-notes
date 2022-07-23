@@ -31,10 +31,11 @@ class Demo extends Phaser.Scene {
                 cell.setContainer(container);
                 //console.log('Cell ' + cell.index + ' visible');
             },
+            // reuseCellContainer: true,
             mask: {
                 padding: 2,
             },
-            // enableLayer: true
+            // enableLayer: true,
         });
 
         // draw bound

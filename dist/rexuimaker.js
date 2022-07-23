@@ -12514,14 +12514,26 @@
     },
     // Internal method for adding child
     addToRenderLayer: function addToRenderLayer(gameObject) {
-      // Move gameObject from scene to layer
+      // Don't add to layer if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      } // Move gameObject from scene to layer
+
+
       var layer = this.getRenderLayer();
 
       if (!layer) {
         return this;
       }
 
-      layer.add(gameObject);
+      if (gameObject.isRexContainerLite) {
+        // Add containerLite and its children
+        gameObject.addToLayer(layer);
+      } else {
+        // Add gameObject directly
+        layer.add(gameObject);
+      }
+
       var state = GetLocalState(gameObject);
       state.layer = layer;
       return this;
@@ -19946,9 +19958,7 @@
 
       _this.setDirty(true);
 
-      var enableLayer = GetValue$E(config, 'enableLayer', false);
-
-      if (enableLayer) {
+      if (GetValue$E(config, 'enableLayer', false)) {
         _this.enableLayer();
       }
 

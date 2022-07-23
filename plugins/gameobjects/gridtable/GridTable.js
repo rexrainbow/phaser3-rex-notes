@@ -38,6 +38,10 @@ class GridTable extends ContainerLite {
             this.on('cellinvisible', callback, scope);
         }
 
+        if (GetValue(config, 'enableLayer', false)) {
+            this.enableLayer();
+        }
+
         this.setupChildrenMask(GetValue(config, 'mask', undefined));
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
@@ -60,11 +64,6 @@ class GridTable extends ContainerLite {
             config.cellHeight = cellHeight;
         }
         this.table = new Table(this, config);
-
-        var enableLayer = GetValue(config, 'enableLayer', false);
-        if (enableLayer) {
-            this.enableLayer();
-        }
 
         this.updateTable();
     }

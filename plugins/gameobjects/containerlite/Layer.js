@@ -51,13 +51,24 @@ export default {
 
     // Internal method for adding child
     addToRenderLayer(gameObject) {
+        // Don't add to layer if gameObject is not in any displayList
+        if (!gameObject.displayList) {
+            return this;
+        }
+
         // Move gameObject from scene to layer
         var layer = this.getRenderLayer();
         if (!layer) {
             return this;
         }
 
-        layer.add(gameObject);
+        if (gameObject.isRexContainerLite) {
+            // Add containerLite and its children
+            gameObject.addToLayer(layer);
+        } else {
+            // Add gameObject directly
+            layer.add(gameObject);
+        }
 
         var state = GetLocalState(gameObject);
         state.layer = layer;

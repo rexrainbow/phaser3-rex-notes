@@ -54,6 +54,10 @@ var MaskChildren = function (parent, mask, children) {
 }
 
 var IsVisible = function (gameObject) {
+    if (!gameObject.displayList) {
+        return false;
+    }
+
     while (1) {
         var localState = gameObject.rexContainer;
         if (!localState) { // Top game object

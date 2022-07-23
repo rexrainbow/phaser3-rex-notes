@@ -1582,14 +1582,26 @@
     },
     // Internal method for adding child
     addToRenderLayer: function addToRenderLayer(gameObject) {
-      // Move gameObject from scene to layer
+      // Don't add to layer if gameObject is not in any displayList
+      if (!gameObject.displayList) {
+        return this;
+      } // Move gameObject from scene to layer
+
+
       var layer = this.getRenderLayer();
 
       if (!layer) {
         return this;
       }
 
-      layer.add(gameObject);
+      if (gameObject.isRexContainerLite) {
+        // Add containerLite and its children
+        gameObject.addToLayer(layer);
+      } else {
+        // Add gameObject directly
+        layer.add(gameObject);
+      }
+
       var state = GetLocalState(gameObject);
       state.layer = layer;
       return this;
@@ -9082,9 +9094,7 @@
 
       _this.setDirty(true);
 
-      var enableLayer = GetValue$j(config, 'enableLayer', false);
-
-      if (enableLayer) {
+      if (GetValue$j(config, 'enableLayer', false)) {
         _this.enableLayer();
       }
 
@@ -13501,6 +13511,10 @@
   };
 
   var IsVisible = function IsVisible(gameObject) {
+    if (!gameObject.displayList) {
+      return false;
+    }
+
     while (1) {
       var localState = gameObject.rexContainer;
 
@@ -13799,7 +13813,7 @@
 
         this.maskLayer.setMask(this.childrenMask);
       } else {
-        MaskChildren(this, this.childrenMask, this.getAllChildren(), this.maskLayer);
+        MaskChildren(this, this.childrenMask);
       }
 
       if (this.maskUpdateMode === 0) {
@@ -14213,6 +14227,10 @@
         _this.on('cellinvisible', callback, scope);
       }
 
+      if (GetValue$5(config, 'enableLayer', false)) {
+        _this.enableLayer();
+      }
+
       _this.setupChildrenMask(GetValue$5(config, 'mask', undefined));
 
       _this.setScrollMode(GetValue$5(config, 'scrollMode', 0));
@@ -14240,11 +14258,6 @@
       }
 
       _this.table = new Table(_assertThisInitialized(_this), config);
-      var enableLayer = GetValue$5(config, 'enableLayer', false);
-
-      if (enableLayer) {
-        _this.enableLayer();
-      }
 
       _this.updateTable();
 
