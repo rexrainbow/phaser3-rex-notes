@@ -130,7 +130,7 @@ var menu = scene.rexUI.add.menu({
 
     name: '',
     // draggable: false,
-    // sizerEvents: false,
+    // enableLayer: false,
 });
 ```
 

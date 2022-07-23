@@ -172,7 +172,7 @@ var panel = scene.rexUI.add.scrollablePanel({
 
     // name: '',
     // draggable: false,
-    // sizerEvents: false,
+    // enableLayer: false,
 });
 ```
 

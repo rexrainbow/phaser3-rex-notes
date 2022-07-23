@@ -166,6 +166,7 @@ var dropDownList = scene.rexUI.add.dropDownList({
     // name: '',
     // draggable: false,
     // sizerEvents: false,
+    // enableLayer: false,
 });
 ```
 
@@ -278,9 +279,12 @@ var dropDownList = scene.rexUI.add.dropDownList({
         - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
         - `space.icon` : Space between icon game object and text game object.
         - `space.text` : Space between text game object and action icon game object.
-    - `name` : Set name of this game object.
-    - `draggable` : Set `true` to drag top-most object.
-    - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
+- `enableLayer` : 
+    - `false` : Add child game objects into scene's display list. Default behavior.
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
 
 ### Custom class
 

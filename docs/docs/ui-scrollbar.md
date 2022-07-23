@@ -127,6 +127,7 @@ var scrollBar = scene.rexUI.add.scrollBar({
     // name: '',
     // draggable: false,
     // sizerEvents: false,
+    // enableLayer: false,
 });
 ```
 

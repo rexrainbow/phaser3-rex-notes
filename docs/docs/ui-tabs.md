@@ -135,6 +135,7 @@ var tabs = scene.rexUI.add.tabs({
     // name: '',
     // draggable: false,
     // sizerEvents: false,
+    // enableLayer: false,
 });
 ```
 
@@ -168,6 +169,9 @@ var tabs = scene.rexUI.add.tabs({
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
+- `enableLayer` : 
+    - `false` : Add child game objects into scene's display list. Default behavior.
+    - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
 
 ### Custom class
 
