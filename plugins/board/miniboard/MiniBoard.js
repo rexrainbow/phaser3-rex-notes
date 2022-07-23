@@ -1,4 +1,4 @@
-import Container from '../../gameobjects/containerlite/ContainerLite.js';
+import Container from '../../gameobjects/container/containerlite/ContainerLite.js';
 import Methods from './Methods.js';
 import Board from '../board/LogicBoard.js';
 import MainBoardReference from './mainboard/MainBoardReference.js';

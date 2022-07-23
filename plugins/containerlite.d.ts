@@ -1,2 +1,2 @@
-import ContainerLite from './gameobjects/containerlite/ContainerLite';
+import ContainerLite from './gameobjects/container/containerlite/ContainerLite';
 export default ContainerLite;

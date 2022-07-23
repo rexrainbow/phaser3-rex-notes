@@ -1,4 +1,4 @@
-import SortGameObjectsByDepth from '../../utils/system/SortGameObjectsByDepth.js';
+import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
 
 var AddToLayer = function (layer) {
     var gameObjects = this.getAllChildren([this]);

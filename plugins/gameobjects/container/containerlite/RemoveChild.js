@@ -1,6 +1,5 @@
 import Base from './Base.js';
 import { GetParent } from './GetParent.js';
-import GetLocalState from './utils/GetLocalState.js';
 
 const BaseRemove = Base.prototype.remove;
 const BaseClear = Base.prototype.clear;

@@ -1,5 +1,5 @@
 import Exit from './Exit.js';
-import Snapshot from '../../../utils/rendertexture/Snapshot.js';
+import Snapshot from '../../../../utils/rendertexture/Snapshot.js';
 
 var Enter = function (parentContainer, rtOwner) {
     if (!parentContainer) {

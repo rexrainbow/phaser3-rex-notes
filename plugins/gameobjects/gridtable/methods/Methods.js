@@ -1,6 +1,6 @@
 import SetTableOY from './SetTableOY.js';
 import SetTableOX from './SetTableOX.js';
-import ChildrenMaskMethods from '../../containerlite/mask/ChildrenMaskMethods.js';
+import ChildrenMaskMethods from '../../container/containerlite/mask/ChildrenMaskMethods.js';
 import UpdateTable from './updatetable/UpdateTable.js';
 import IsCellVisible from './IsCellVisible.js';
 import { PointToCellIndex, PointToCellContainer } from './PointToCell.js';

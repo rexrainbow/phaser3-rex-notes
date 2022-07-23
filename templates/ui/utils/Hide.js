@@ -1,5 +1,5 @@
 import GetSizerConfig from './GetSizerConfig.js';
-import { GetParent } from '../../../plugins/gameobjects/containerlite/GetParent.js';
+import { GetParent } from '../../../plugins/gameobjects/container/containerlite/GetParent.js';
 
 var Show = function (gameObject) {
     _hide(gameObject, false);

@@ -1,6 +1,6 @@
 import MaskChildren from './MaskChildren.js';
 import AddChildMask from './AddChildMask.js';
-import MaskToGameObject from '../../../utils/mask/MaskToGameObject.js'
+import MaskToGameObject from '../../../../utils/mask/MaskToGameObject.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

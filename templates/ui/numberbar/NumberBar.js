@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
-import AddChildMask from '../../../plugins/gameobjects/containerlite/mask/AddChildMask.js';
+import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 import Slider from '../slider/Slider.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,4 +1,4 @@
-import MeshRenderTextureBase from '../../gameobjects/containerlite/rendertexture/MeshRenderTextureBase.js';
+import MeshRenderTextureBase from '../../gameobjects/container/containerlite/rendertexture/MeshRenderTextureBase.js';
 import RenderTexture from '../../gameobjects/mesh/perspective/rendertexture/RenderTexture.js';
 
 class ContainerPerspective extends MeshRenderTextureBase(RenderTexture) {

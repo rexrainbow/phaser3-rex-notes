@@ -1,4 +1,4 @@
-import SortGameObjectsByDepth from '../../utils/system/SortGameObjectsByDepth.js';
+import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
 
 export default {
     setDepth(value, containerOnly) {

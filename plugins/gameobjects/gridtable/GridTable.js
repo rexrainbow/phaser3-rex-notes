@@ -1,4 +1,4 @@
-import ContainerLite from '../containerlite/ContainerLite.js';
+import ContainerLite from '../container/containerlite/ContainerLite.js';
 import Table from './Table.js';
 import Methods from './methods/Methods.js';
 

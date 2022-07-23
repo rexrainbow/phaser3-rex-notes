@@ -1,4 +1,4 @@
-import Container from '../../gameobjects/containerlite/ContainerLite';
+import Container from '../../gameobjects/container/containerlite/ContainerLite';
 import Quad from '../grid/quad/Quad';
 import Hexagon from '../grid/hexagon/Hexagon';
 import { TileXYZType } from '../types/Position';

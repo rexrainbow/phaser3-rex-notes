@@ -1,6 +1,6 @@
-import Factory from './gameobjects/containerlite/Factory.js';
-import Creator from './gameobjects/containerlite/Creator.js';
-import ContainerLite from './gameobjects/containerlite/ContainerLite.js';
+import Factory from './gameobjects/container/containerlite/Factory.js';
+import Creator from './gameobjects/container/containerlite/Creator.js';
+import ContainerLite from './gameobjects/container/containerlite/ContainerLite.js';
 import SetValue from './utils/object/SetValue.js';
 
 class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {

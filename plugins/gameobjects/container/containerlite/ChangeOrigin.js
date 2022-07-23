@@ -1,4 +1,4 @@
-import ChangeOriginBase from '../../utils/origin/ChangeOrigin.js';
+import ChangeOriginBase from '../../../utils/origin/ChangeOrigin.js';
 
 var ChangeOrigin = function (originX, originY) {
     this.syncChildrenEnable = false;
