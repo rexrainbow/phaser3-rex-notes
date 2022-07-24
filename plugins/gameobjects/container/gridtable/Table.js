@@ -150,8 +150,9 @@ class Table {
                     rowIdx += 1;
                     isValidIdx = (rowIdx >= 0) && (rowIdx < rowCount);
 
-                    if (!isValidIdx)
+                    if (!isValidIdx) {
                         rowIdx = preRowIdx;
+                    }
                 }
 
                 return rowIdx;
