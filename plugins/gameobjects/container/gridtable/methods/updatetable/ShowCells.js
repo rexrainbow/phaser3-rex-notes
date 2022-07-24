@@ -1,5 +1,3 @@
-import ShowCell from './ShowCell.js';
-
 var ShowCells = function () {
     if (this.cellsCount === 0) {
         return;
@@ -32,7 +30,7 @@ var ShowCells = function () {
             var cell = table.getCell(cellIdx, true);
             this.visibleCells.set(cell);
             if (!this.preVisibleCells.contains(cell)) {
-                ShowCell.call(this, cell);
+                this.showCell(cell);
             }
             if (this.scrollMode === 0) {
                 cell.setXY(cellTLX, cellTLY);

@@ -1,17 +1,14 @@
-import HideCells from './HideCells.js';
-import ShowCells from './ShowCells.js';
-
 var UpdateTable = function (refresh) {
     if (refresh === undefined) {
         refresh = false;
     }
     if (refresh) {
         ClearVisibleCellIndexes.call(this);
-        HideCells.call(this);
+        this.hideCells();
     }
     ClearVisibleCellIndexes.call(this);
-    ShowCells.call(this);
-    HideCells.call(this);
+    this.showCells();
+    this.hideCells();
 
     this.setMaskChildrenFlag();
     return this;
