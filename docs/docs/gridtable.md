@@ -80,8 +80,10 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 ```javascript
 var config = {
+    scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
     cellsCount: 0,
     columns: 1,
+    // rows: 1,
     cellHeight: 30,
     cellWidth: 30,
 
@@ -93,9 +95,8 @@ var config = {
     cellInvisibleCallback: null,
     // cellInvisibleCallback: function(cell) {},
     cellInvisibleCallbackScope: undefined,
-
     clamplTableOXY: true,
-    scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
+    
     mask: {
         padding: 0,
         // updateMode: 0,
@@ -106,8 +107,12 @@ var config = {
 var table = scene.add.rexGridTable(x, y, width, height, config);
 ```
 
+- `scrollMode` :
+    - `0`, or `'v'`, or `'vertical'` : Scroll table vertically.
+    - `1`, or `'h'`, or `'horizontal'` : Scroll table horizontally.
 - `cellsCount` : Total cells count.
-- `columns` : Columns count of each row.
+- `columns` : Columns count of each row. Can be used in *vertical* or *horizontal* scroll mode.
+- `rows` : Rows count of each column. Can be used in *horizontal* scroll mode.
 - `cellHeight` : Default height of each cell.
     - Expand cell height to fit table height : set `cellHeight` to `undefined`, and `scrollMode` is `'horizontal'`.
 - `cellWidth` : Width of each cell.
@@ -132,9 +137,6 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
     ```
 - `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
     - Set `false` when dragging by [scroller](scroller.md)
-- `scrollMode` :
-    - `0`, or `'v'`, or `'vertical'` : Scroll table vertically.
-    - `1`, or `'h'`, or `'horizontal'` : Scroll table horizontally.
 - `mask` : A rectangle mask of cells
     - `mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
     - `mask.updateMode` : When to update cells mask

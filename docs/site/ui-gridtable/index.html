@@ -8739,7 +8739,8 @@
 
         <span class="nx">cellWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">cellHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">columns</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+        <span class="nx">columns</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+        <span class="c1">// rows: 1,</span>
         <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
             <span class="c1">// updateMode: 0,</span>
@@ -8894,7 +8895,8 @@
 <li><code>undefined</code> : Expand cell width to fit table width, in <em>vertical</em> scrollMode.</li>
 </ul>
 </li>
-<li><code>table.columns</code> : Columns count of each row.</li>
+<li><code>table.columns</code> : Columns count of each row. Can be used in <em>vertical</em> or <em>horizontal</em> scroll mode.</li>
+<li><code>table.rows</code> : Rows count of each column. Can be used in <em>horizontal</em> scroll mode.</li>
 <li><code>table.mask</code> : A rectangle mask of cells<ul>
 <li><code>table.mask.padding</code> : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
 <li><code>table.mask.updateMode</code> : When to update cells mask<ul>

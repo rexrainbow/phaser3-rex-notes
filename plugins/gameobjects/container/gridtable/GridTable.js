@@ -48,21 +48,26 @@ class GridTable extends ContainerLite {
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
 
         // Pre-process cell size
-        if (this.scrollMode === 0) { // scroll y
-            var cellWidth = GetValue(config, 'cellWidth', undefined);
-            this.expandCellSize = (cellWidth === undefined);
-            if (cellWidth === undefined) {
-                var columns = GetValue(config, 'columns', 1);
-                config.cellWidth = this.width / columns;
-            }
-        } else { // scroll x
-            // Swap cell width and cell height
-            var cellWidth = GetValue(config, 'cellHeight', undefined);
-            var cellHeight = GetValue(config, 'cellWidth', undefined);
-            this.expandCellSize = (cellWidth === undefined);
-            config.cellWidth = cellWidth;
-            config.cellHeight = cellHeight;
+        var cellWidth, cellHeight, columns;
+        var scrollY = (this.scrollMode === 0);
+        if (scrollY) {  // scroll y
+            cellWidth = config.cellWidth;
+            cellHeight = config.cellHeight;
+            columns = config.columns;
+        } else {  // scroll x
+            cellWidth = config.cellHeight;
+            cellHeight = config.cellWidth;
+            columns = GetValue(config, 'rows', config.columns);
         }
+        this.expandCellSize = (cellWidth === undefined);
+        if (this.expandCellSize) {
+            var width = (scrollY) ? this.width : this.height;
+            cellWidth = width / columns;
+        }
+        config.cellWidth = cellWidth;
+        config.cellHeight = cellHeight;
+        config.columns = columns;
+
         this.table = new Table(this, config);
 
         this.updateTable();

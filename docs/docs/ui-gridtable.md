@@ -98,7 +98,8 @@ var table = scene.rexUI.add.gridTable({
 
         cellWidth: undefined,
         cellHeight: undefined,
-        columns: 2,
+        columns: 1,
+        // rows: 1,
         mask: {
             padding: 0,
             // updateMode: 0,
@@ -233,7 +234,8 @@ var table = scene.rexUI.add.gridTable({
     - `table.cellWidth` : Width of each cell.
         - Necessary field in *horizontal* scrollMode.
         - `undefined` : Expand cell width to fit table width, in *vertical* scrollMode.
-    - `table.columns` : Columns count of each row.
+    - `table.columns` : Columns count of each row. Can be used in *vertical* or *horizontal* scroll mode.
+    - `table.rows` : Rows count of each column. Can be used in *horizontal* scroll mode.
     - `table.mask` : A rectangle mask of cells
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `table.mask.updateMode` : When to update cells mask

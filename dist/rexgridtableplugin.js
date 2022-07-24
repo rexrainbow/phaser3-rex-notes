@@ -2443,7 +2443,10 @@
               var preRowIdx = rowIdx;
               rowIdx += 1;
               isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
-              if (!isValidIdx) rowIdx = preRowIdx;
+
+              if (!isValidIdx) {
+                rowIdx = preRowIdx;
+              }
             }
 
             return rowIdx;
@@ -3119,29 +3122,63 @@
     }
   };
 
-  var HideCell = function HideCell(cell) {
-    // Option: pop container of cell by cell.popContainer() under this event 
-    this.emit('cellinvisible', cell);
-
-    if (this.cellContainersPool) {
-      var cellContainer = cell.popContainer(); // null if already been removed
-
-      if (cellContainer) {
-        this.cellContainersPool.killAndHide(cellContainer);
-      }
+  var ShowCells = function ShowCells() {
+    if (this.cellsCount === 0) {
+      return;
     }
 
-    cell.destroyContainer(); // Destroy container of cell
-  };
+    var table = this.table;
+    var startRowIdx = table.heightToRowIndex(-this.tableOY);
 
-  var HideCells = function HideCells() {
-    var preList = this.preVisibleCells;
-    var curList = this.visibleCells;
-    preList.iterate(function (cell) {
-      if (!curList.contains(cell)) {
-        HideCell.call(this, cell);
+    if (startRowIdx <= 0) {
+      startRowIdx = 0; //Turn -0 to 0
+    }
+
+    var rowIdx = startRowIdx;
+    var startColIdx = table.widthToColIndex(-this.tableOX);
+
+    if (startColIdx <= 0) {
+      startColIdx = 0; //Turn -0 to 0
+    }
+
+    var colIdx = startColIdx;
+    var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+    var bottomBound = this.bottomBound;
+    var rightBound = this.rightBound;
+    var lastIdx = table.cellsCount - 1;
+    var lastColIdx = table.colCount - 1;
+    var startCellTLX = this.getCellTLX(colIdx),
+        cellTLX = startCellTLX;
+    var cellTLY = this.getCellTLY(rowIdx);
+
+    while (cellTLY < bottomBound && cellIdx <= lastIdx) {
+      if (this.table.isValidCellIdx(cellIdx)) {
+        var cell = table.getCell(cellIdx, true);
+        this.visibleCells.set(cell);
+
+        if (!this.preVisibleCells.contains(cell)) {
+          this.showCell(cell);
+        }
+
+        if (this.scrollMode === 0) {
+          cell.setXY(cellTLX, cellTLY);
+        } else {
+          cell.setXY(cellTLY, cellTLX);
+        }
       }
-    }, this);
+
+      if (cellTLX < rightBound && colIdx < lastColIdx) {
+        cellTLX += table.getColWidth(colIdx);
+        colIdx += 1;
+      } else {
+        cellTLX = startCellTLX;
+        cellTLY += table.getRowHeight(rowIdx);
+        colIdx = startColIdx;
+        rowIdx += 1;
+      }
+
+      cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+    }
   };
 
   var ShowCell = function ShowCell(cell) {
@@ -3184,65 +3221,6 @@
     }
   };
 
-  var ShowCells = function ShowCells() {
-    if (this.cellsCount === 0) {
-      return;
-    }
-
-    var table = this.table;
-    var startRowIdx = table.heightToRowIndex(-this.tableOY);
-
-    if (startRowIdx <= 0) {
-      startRowIdx = 0; //Turn -0 to 0
-    }
-
-    var rowIdx = startRowIdx;
-    var startColIdx = table.widthToColIndex(-this.tableOX);
-
-    if (startColIdx <= 0) {
-      startColIdx = 0; //Turn -0 to 0
-    }
-
-    var colIdx = startColIdx;
-    var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
-    var bottomBound = this.bottomBound;
-    var rightBound = this.rightBound;
-    var lastIdx = table.cellsCount - 1;
-    var lastColIdx = table.colCount - 1;
-    var startCellTLX = GetCellTLX.call(this, colIdx),
-        cellTLX = startCellTLX;
-    var cellTLY = GetCellTLY.call(this, rowIdx);
-
-    while (cellTLY < bottomBound && cellIdx <= lastIdx) {
-      if (this.table.isValidCellIdx(cellIdx)) {
-        var cell = table.getCell(cellIdx, true);
-        this.visibleCells.set(cell);
-
-        if (!this.preVisibleCells.contains(cell)) {
-          ShowCell.call(this, cell);
-        }
-
-        if (this.scrollMode === 0) {
-          cell.setXY(cellTLX, cellTLY);
-        } else {
-          cell.setXY(cellTLY, cellTLX);
-        }
-      }
-
-      if (cellTLX < rightBound && colIdx < lastColIdx) {
-        cellTLX += table.getColWidth(colIdx);
-        colIdx += 1;
-      } else {
-        cellTLX = startCellTLX;
-        cellTLY += table.getRowHeight(rowIdx);
-        colIdx = startColIdx;
-        rowIdx += 1;
-      }
-
-      cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
-    }
-  };
-
   var GetCellTLX = function GetCellTLX(colIdx) {
     var ox = this.scrollMode === 0 ? this.topLeftX : this.topLeftY;
     var x = this.tableOX + this.table.colIndexToWidth(0, colIdx - 1) + ox;
@@ -3255,6 +3233,31 @@
     return y;
   };
 
+  var HideCells = function HideCells() {
+    var preList = this.preVisibleCells;
+    var curList = this.visibleCells;
+    preList.iterate(function (cell) {
+      if (!curList.contains(cell)) {
+        this.hideCell(cell);
+      }
+    }, this);
+  };
+
+  var HideCell = function HideCell(cell) {
+    // Option: pop container of cell by cell.popContainer() under this event 
+    this.emit('cellinvisible', cell);
+
+    if (this.cellContainersPool) {
+      var cellContainer = cell.popContainer(); // null if already been removed
+
+      if (cellContainer) {
+        this.cellContainersPool.killAndHide(cellContainer);
+      }
+    }
+
+    cell.destroyContainer(); // Destroy container of cell
+  };
+
   var UpdateTable = function UpdateTable(refresh) {
     if (refresh === undefined) {
       refresh = false;
@@ -3262,12 +3265,12 @@
 
     if (refresh) {
       ClearVisibleCellIndexes.call(this);
-      HideCells.call(this);
+      this.hideCells();
     }
 
     ClearVisibleCellIndexes.call(this);
-    ShowCells.call(this);
-    HideCells.call(this);
+    this.showCells();
+    this.hideCells();
     this.setMaskChildrenFlag();
     return this;
   };
@@ -3445,6 +3448,12 @@
   var methods = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
+    showCells: ShowCells,
+    showCell: ShowCell,
+    getCellTLX: GetCellTLX,
+    getCellTLY: GetCellTLY,
+    hideCells: HideCells,
+    hideCell: HideCell,
     updateTable: UpdateTable,
     isCellVisible: IsCellVisible,
     pointToCellIndex: PointToCellIndex,
@@ -3523,25 +3532,31 @@
       _this.setClampMode(GetValue$1(config, 'clamplTableOXY', true)); // Pre-process cell size
 
 
-      if (_this.scrollMode === 0) {
-        // scroll y
-        var cellWidth = GetValue$1(config, 'cellWidth', undefined);
-        _this.expandCellSize = cellWidth === undefined;
+      var cellWidth, cellHeight, columns;
+      var scrollY = _this.scrollMode === 0;
 
-        if (cellWidth === undefined) {
-          var columns = GetValue$1(config, 'columns', 1);
-          config.cellWidth = _this.width / columns;
-        }
+      if (scrollY) {
+        // scroll y
+        cellWidth = config.cellWidth;
+        cellHeight = config.cellHeight;
+        columns = config.columns;
       } else {
         // scroll x
-        // Swap cell width and cell height
-        var cellWidth = GetValue$1(config, 'cellHeight', undefined);
-        var cellHeight = GetValue$1(config, 'cellWidth', undefined);
-        _this.expandCellSize = cellWidth === undefined;
-        config.cellWidth = cellWidth;
-        config.cellHeight = cellHeight;
+        cellWidth = config.cellHeight;
+        cellHeight = config.cellWidth;
+        columns = GetValue$1(config, 'rows', config.columns);
       }
 
+      _this.expandCellSize = cellWidth === undefined;
+
+      if (_this.expandCellSize) {
+        var width = scrollY ? _this.width : _this.height;
+        cellWidth = width / columns;
+      }
+
+      config.cellWidth = cellWidth;
+      config.cellHeight = cellHeight;
+      config.columns = columns;
       _this.table = new Table(_assertThisInitialized(_this), config);
 
       _this.updateTable();

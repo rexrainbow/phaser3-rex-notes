@@ -8841,8 +8841,10 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">scrollMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>        <span class="c1">// 0|&#39;v&#39;|&#39;vertical&#39;|1|&#39;h&#39;|&#39;horizontal&#39;</span>
     <span class="nx">cellsCount</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">columns</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="c1">// rows: 1,</span>
     <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">30</span><span class="p">,</span>
     <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">30</span><span class="p">,</span>
 
@@ -8854,9 +8856,8 @@
     <span class="nx">cellInvisibleCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="c1">// cellInvisibleCallback: function(cell) {},</span>
     <span class="nx">cellInvisibleCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
     <span class="nx">clamplTableOXY</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">scrollMode</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>        <span class="c1">// 0|&#39;v&#39;|&#39;vertical&#39;|1|&#39;h&#39;|&#39;horizontal&#39;</span>
+
     <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="c1">// updateMode: 0,</span>
@@ -8867,8 +8868,14 @@
 <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 <ul>
+<li><code>scrollMode</code> :<ul>
+<li><code>0</code>, or <code>'v'</code>, or <code>'vertical'</code> : Scroll table vertically.</li>
+<li><code>1</code>, or <code>'h'</code>, or <code>'horizontal'</code> : Scroll table horizontally.</li>
+</ul>
+</li>
 <li><code>cellsCount</code> : Total cells count.</li>
-<li><code>columns</code> : Columns count of each row.</li>
+<li><code>columns</code> : Columns count of each row. Can be used in <em>vertical</em> or <em>horizontal</em> scroll mode.</li>
+<li><code>rows</code> : Rows count of each column. Can be used in <em>horizontal</em> scroll mode.</li>
 <li><code>cellHeight</code> : Default height of each cell.<ul>
 <li>Expand cell height to fit table height : set <code>cellHeight</code> to <code>undefined</code>, and <code>scrollMode</code> is <code>'horizontal'</code>.</li>
 </ul>
@@ -8895,11 +8902,6 @@
 </code></pre></div></li>
 <li><code>clamplTableOXY</code> : Set <code>true</code> to clamp <code>tableOX</code>, <code>tableOY</code> when out-of-bound,<ul>
 <li>Set <code>false</code> when dragging by <a href="../scroller/">scroller</a></li>
-</ul>
-</li>
-<li><code>scrollMode</code> :<ul>
-<li><code>0</code>, or <code>'v'</code>, or <code>'vertical'</code> : Scroll table vertically.</li>
-<li><code>1</code>, or <code>'h'</code>, or <code>'horizontal'</code> : Scroll table horizontally.</li>
 </ul>
 </li>
 <li><code>mask</code> : A rectangle mask of cells<ul>
