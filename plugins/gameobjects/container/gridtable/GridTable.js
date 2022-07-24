@@ -1,5 +1,5 @@
 import ContainerLite from '../../container/containerlite/ContainerLite.js';
-import Table from './Table.js';
+import Table from './table/Table.js';
 import Methods from './methods/Methods.js';
 
 const Group = Phaser.GameObjects.Group;
