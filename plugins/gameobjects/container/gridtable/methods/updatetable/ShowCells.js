@@ -22,9 +22,9 @@ var ShowCells = function () {
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
 
-    var startCellTLX = GetCellTLX.call(this, colIdx),
+    var startCellTLX = this.getCellTLX(colIdx),
         cellTLX = startCellTLX;
-    var cellTLY = GetCellTLY.call(this, rowIdx);
+    var cellTLY = this.getCellTLY(rowIdx);
     while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
         if (this.table.isValidCellIdx(cellIdx)) {
             var cell = table.getCell(cellIdx, true);
@@ -52,18 +52,6 @@ var ShowCells = function () {
 
         cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     }
-}
-
-var GetCellTLX = function (colIdx) {
-    var ox = (this.scrollMode === 0) ? this.topLeftX : this.topLeftY;
-    var x = this.tableOX + this.table.colIndexToWidth(0, colIdx - 1) + ox;
-    return x;
-}
-
-var GetCellTLY = function (rowIdx) {
-    var oy = (this.scrollMode === 0) ? this.topLeftY : this.topLeftX;
-    var y = this.tableOY + this.table.rowIndexToHeight(0, rowIdx - 1) + oy;
-    return y;
 }
 
 export default ShowCells;

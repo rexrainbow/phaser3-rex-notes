@@ -2,10 +2,12 @@ import SetTableOY from './SetTableOY.js';
 import SetTableOX from './SetTableOX.js';
 import ChildrenMaskMethods from '../../../container/containerlite/mask/ChildrenMaskMethods.js';
 
-import ShowCell from './updatetable/ShowCell.js';
 import ShowCells from './updatetable/ShowCells.js';
-import HideCell from './updatetable/HideCell.js';
+import ShowCell from './updatetable/ShowCell.js';
+import GetCellTLX from './updatetable/GetCellTLX.js';
+import GetCellTLY from './updatetable/GetCellTLY.js';
 import HideCells from './updatetable/HideCells.js';
+import HideCell from './updatetable/HideCell.js';
 import UpdateTable from './updatetable/UpdateTable.js';
 
 import IsCellVisible from './IsCellVisible.js';
@@ -23,10 +25,12 @@ var methods = {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
 
-    showCell: ShowCell,
     showCells: ShowCells,
-    hideCell: HideCell,
+    showCell: ShowCell,
+    getCellTLX: GetCellTLX,
+    getCellTLY: GetCellTLY,
     hideCells: HideCells,
+    hideCell: HideCell,
     updateTable: UpdateTable,
 
     isCellVisible: IsCellVisible,
