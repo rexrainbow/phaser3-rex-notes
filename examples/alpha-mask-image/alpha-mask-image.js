@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     create() {
         this.add.rexAlphaMaskImage(400, 300, 'classroom', {
             mask: 'volume',
-            backgroundColor: 'aliceblue'
+            // backgroundColor: 'aliceblue'
         })
             .setScale(0.75);
 
