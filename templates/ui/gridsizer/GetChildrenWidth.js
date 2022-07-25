@@ -1,8 +1,12 @@
 import Sum from '../../../plugins/utils/math/Sum.js';
 
-var GetChildrenWidth = function () {
+var GetChildrenWidth = function (minimumMode) {
     if (this.rexSizer.hidden) {
         return 0;
+    }
+
+    if (minimumMode === undefined) {
+        minimumMode = true;
     }
 
     var result = 0,
@@ -13,7 +17,7 @@ var GetChildrenWidth = function () {
     for (var i = 0; i < this.columnCount; i++) {
         proportion = this.columnProportions[i];
         columnWidth = 0;
-        if (proportion === 0) {
+        if ((proportion === 0) || minimumMode) {
             for (var j = 0; j < this.rowCount; j++) {
                 child = children[(j * this.columnCount) + i];
                 if (!child) {

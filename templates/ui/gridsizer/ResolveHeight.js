@@ -7,7 +7,7 @@ var ResolveHeight = function (parent, height) {
     if (this.proportionHeightLength === undefined) {
         var totalRowProportions = this.totalRowProportions;
         if (totalRowProportions > 0) {
-            var remainder = height - this.childrenHeight;
+            var remainder = height - this.getChildrenHeight(false);
             if (remainder >= 0) {
                 this.proportionHeightLength = remainder / totalRowProportions;
             } else {

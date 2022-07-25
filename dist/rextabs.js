@@ -9346,9 +9346,13 @@
     return a + b;
   };
 
-  var GetChildrenWidth$1 = function GetChildrenWidth() {
+  var GetChildrenWidth$1 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
       return 0;
+    }
+
+    if (minimumMode === undefined) {
+      minimumMode = true;
     }
 
     var result = 0,
@@ -9360,7 +9364,7 @@
       proportion = this.columnProportions[i];
       columnWidth = 0;
 
-      if (proportion === 0) {
+      if (proportion === 0 || minimumMode) {
         for (var j = 0; j < this.rowCount; j++) {
           child = children[j * this.columnCount + i];
 
@@ -9389,9 +9393,13 @@
     return result + Sum.apply(void 0, [space.left, indentLeft].concat(_toConsumableArray(space.column), [space.right]));
   };
 
-  var GetChildrenHeight$1 = function GetChildrenHeight() {
+  var GetChildrenHeight$1 = function GetChildrenHeight(minimumMode) {
     if (this.rexSizer.hidden) {
       return 0;
+    }
+
+    if (minimumMode === undefined) {
+      minimumMode = true;
     }
 
     var result = 0,
@@ -9403,7 +9411,7 @@
       proportion = this.rowProportions[i];
       rowHeight = 0;
 
-      if (proportion === 0) {
+      if (proportion === 0 || minimumMode) {
         for (var j = 0; j < this.columnCount; j++) {
           child = children[i * this.columnCount + j];
 
@@ -9563,7 +9571,7 @@
       var totalColumnProportions = this.totalColumnProportions;
 
       if (totalColumnProportions > 0) {
-        var remainder = width - this.childrenWidth;
+        var remainder = width - this.getChildrenWidth(false);
 
         if (remainder >= 0) {
           this.proportionWidthLength = remainder / totalColumnProportions;
@@ -9583,7 +9591,7 @@
       var totalRowProportions = this.totalRowProportions;
 
       if (totalRowProportions > 0) {
-        var remainder = height - this.childrenHeight;
+        var remainder = height - this.getChildrenHeight(false);
 
         if (remainder >= 0) {
           this.proportionHeightLength = remainder / totalRowProportions;
@@ -10267,7 +10275,7 @@
           continue;
         }
 
-        if (child.rexSizer.proportion === 0 || minimumMode && child.rexSizer.proportion > 0) {
+        if (child.rexSizer.proportion === 0 || minimumMode) {
           childWidth = this.getChildWidth(child);
         } else {
           childWidth = 0;
@@ -10344,14 +10352,13 @@
           continue;
         }
 
-        padding = child.rexSizer.padding;
-
-        if (child.rexSizer.proportion === 0 || minimumMode && child.rexSizer.proportion > 0) {
+        if (child.rexSizer.proportion === 0 || minimumMode) {
           childHeight = this.getChildHeight(child);
         } else {
           childHeight = 0;
         }
 
+        padding = child.rexSizer.padding;
         childHeight += padding.top + padding.bottom;
 
         if (i > 0) {

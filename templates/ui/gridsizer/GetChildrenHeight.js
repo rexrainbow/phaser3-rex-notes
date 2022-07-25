@@ -1,9 +1,13 @@
 import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 import Sum from '../../../plugins/utils/math/Sum.js';
 
-var GetChildrenHeight = function () {
+var GetChildrenHeight = function (minimumMode) {
     if (this.rexSizer.hidden) {
         return 0;
+    }
+
+    if (minimumMode === undefined) {
+        minimumMode = true;
     }
 
     var result = 0,
@@ -14,7 +18,7 @@ var GetChildrenHeight = function () {
     for (var i = 0; i < this.rowCount; i++) {
         proportion = this.rowProportions[i];
         rowHeight = 0;
-        if (proportion === 0) {
+        if ((proportion === 0) || minimumMode) {
             for (var j = 0; j < this.columnCount; j++) {
                 child = children[(i * this.columnCount) + j];
                 if (!child) {

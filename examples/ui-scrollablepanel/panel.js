@@ -199,7 +199,6 @@ var createTable = function (scene, data, key, rows) {
     var items = data[key];
     var columns = Math.ceil(items.length / rows);
     var table = scene.rexUI.add.gridSizer({
-        height: 140,     // Bigger enought to show all rows
         column: columns,
         row: rows,
 
