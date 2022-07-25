@@ -16,7 +16,6 @@ class Demo extends Phaser.Scene {
         var rt = Snapshot({
             gameObjects: label.getAllChildren(),
         })
-
         label.destroy();
     }
 
@@ -33,6 +32,7 @@ var CreateLabel = function (scene) {
             fontSize: '24px'
         }),
         icon: scene.add.rectangle(0, 0, 40, 40, COLOR_DARK),
+        // iconMask: true,  // Can't apply mask before pasting to rendertexture
         action: scene.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
         space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, text: 10, }
     });
