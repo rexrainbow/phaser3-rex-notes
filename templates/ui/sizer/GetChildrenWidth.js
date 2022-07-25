@@ -18,10 +18,7 @@ var GetChildrenWidth = function (minimumMode) {
                 continue;
             }
 
-            if (
-                (child.rexSizer.proportion === 0) ||
-                (minimumMode && (child.rexSizer.proportion > 0))
-            ) {
+            if (minimumMode || (child.rexSizer.proportion === 0)) {
                 childWidth = this.getChildWidth(child);
             } else {
                 childWidth = 0;
