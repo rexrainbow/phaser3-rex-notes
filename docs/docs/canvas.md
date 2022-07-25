@@ -219,6 +219,12 @@ var canvas = scene.make.rexCanvas({
     - `r`, `g`, `b`, `a` : Integer number between 0 ~ 255.
     - `color` : [Color object](color.md)
 
+### Resize
+
+```javascript
+canvas.resize(width, height);
+```
+
 ## Compare with [Graphics object](graphics.md)
 
  - Drawing method
