@@ -26,16 +26,24 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 var CreateLabel = function (scene) {
-    return scene.rexUI.add.label({
+    var icon = scene.add.rectangle(0, 0, 40, 40, COLOR_DARK);
+    var label = scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
         text: scene.add.text(0, 0, 'AAAAA', {
             fontSize: '24px'
         }),
-        icon: scene.add.rectangle(0, 0, 40, 40, COLOR_DARK),
-        // iconMask: true,  // Can't apply mask before pasting to rendertexture
+        icon: scene.add.container(0, 0).add(icon).setSize(icon.width, icon.height),
+        iconMask: true,
         action: scene.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
         space: { left: 20, right: 20, top: 20, bottom: 20, icon: 10, text: 10, }
     });
+
+    var iconContainer = label.getElement('icon');
+    var mask = iconContainer.mask;
+    iconContainer.clearMask();
+    icon.setMask(mask);
+
+    return label;
 }
 
 var config = {
