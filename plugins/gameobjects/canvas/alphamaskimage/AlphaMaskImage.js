@@ -7,18 +7,8 @@ class AlphaMaskImage extends Canvas {
         super(scene, x, y);
 
         this.type = 'rexAlphaMaskImage';
-
-        this.setMaskTexture();
+        this.maskFrame = null;
         this.setTexture(key, frame, config);
-    }
-
-    setMaskTexture(key, frame) {
-        this._maskKey = key;
-        this._maskFrame = frame;
-
-        var texture = (key) ? this.scene.sys.textures.get(key) : null;
-        this.maskFrame = (texture) ? texture.get(frame) : null;
-        return this;
     }
 
     setTexture(key, frame, config) {
@@ -27,19 +17,28 @@ class AlphaMaskImage extends Canvas {
             frame = undefined;
         }
 
-        var maskKey, maskFrame, backgroundColor;
+        var maskKey, maskFrame, invertMaskAlpha, maskScale, backgroundColor;
         if (typeof (config) === 'string') {
             maskKey = config;
             maskFrame = undefined;
+            invertMaskAlpha = false;
+            maskScale = undefined;
             backgroundColor = undefined;
         } else {
             maskKey = GetValue(config, 'mask');
             maskFrame = GetValue(config, 'maskFrame');
+            invertMaskAlpha = GetValue(config, 'invertMaskAlpha', false);
+            maskScale = GetValue(config, 'maskScale');
             backgroundColor = GetValue(config, 'backgroundColor');
         }
 
         if (maskKey) {
-            this.setMaskTexture(maskKey, maskFrame);
+            this._maskKey = maskKey;
+            this._maskFrame = maskFrame;
+            this._maskScale = maskScale;
+
+            var texture = (maskKey) ? this.scene.sys.textures.get(maskKey) : null;
+            this.maskFrame = (texture) ? texture.get(maskFrame) : null;
         }
 
         this._textureKey = key;
@@ -62,11 +61,22 @@ class AlphaMaskImage extends Canvas {
             height = canvas.height;
 
         ctx.save();
-        ctx.globalCompositeOperation = 'destination-atop';
+        ctx.globalCompositeOperation = (invertMaskAlpha) ? 'destination-out' : 'destination-in';
+
+        var maskWidth, maskHeight;
+        if (this._maskScale != null) {
+            maskWidth = maskTextureFrame.cutWidth * this._maskScale;
+            maskHeight = maskTextureFrame.cutHeight * this._maskScale;
+        } else {
+            maskWidth = width;
+            maskHeight = height;
+        }
+        var maskX = (width - maskWidth) / 2;
+        var maskY = (height - maskHeight) / 2;
 
         ctx.drawImage(maskTextureFrame.source.image,
             maskTextureFrame.cutX, maskTextureFrame.cutY, maskTextureFrame.cutWidth, maskTextureFrame.cutHeight,
-            0, 0, width, height);
+            maskX, maskY, maskWidth, maskHeight);
 
         ctx.restore();
 
@@ -77,7 +87,6 @@ class AlphaMaskImage extends Canvas {
             ctx.fillRect(0, 0, width, height);
             ctx.restore();
         }
-
 
         this.dirty = true;
         return this;

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexalphamaskimageplugin = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexalphamaskimage = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -646,129 +646,6 @@
     return AlphaMaskImage;
   }(Canvas);
 
-  function Factory (x, y, key, frame, config) {
-    var gameObject = new AlphaMaskImage(this.scene, x, y, key, frame, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  }
-
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function Creator (config, addToScene) {
-    if (config === undefined) {
-      config = {};
-    }
-
-    if (addToScene !== undefined) {
-      config.add = addToScene;
-    }
-
-    var key = GetAdvancedValue(config, 'key', undefined);
-    var frame = GetAdvancedValue(config, 'frame', undefined);
-    var gameObject = new AlphaMaskImage(this.scene, 0, 0, key, frame, config);
-    BuildGameObject(this.scene, gameObject, config);
-    return gameObject;
-  }
-
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
-      }
-
-      var key;
-
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
-            }
-          } else {
-            newEntry = {};
-          }
-
-          entry[key] = newEntry;
-        }
-
-        entry = entry[key];
-      }
-    }
-
-    return entry;
-  };
-
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    } // no object
-
-
-    if (_typeof(target) !== 'object') {
-      return;
-    } // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      } // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-
-    return target;
-  };
-
-  var AlphaMaskImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
-    _inherits(AlphaMaskImagePlugin, _Phaser$Plugins$BaseP);
-
-    var _super = _createSuper(AlphaMaskImagePlugin);
-
-    function AlphaMaskImagePlugin(pluginManager) {
-      var _this;
-
-      _classCallCheck(this, AlphaMaskImagePlugin);
-
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
-      pluginManager.registerGameObject('rexAlphaMaskImage', Factory, Creator);
-      return _this;
-    }
-
-    _createClass(AlphaMaskImagePlugin, [{
-      key: "start",
-      value: function start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-      }
-    }]);
-
-    return AlphaMaskImagePlugin;
-  }(Phaser.Plugins.BasePlugin);
-
-  SetValue(window, 'RexPlugins.GameObjects.AlphaMaskImage', AlphaMaskImage);
-
-  return AlphaMaskImagePlugin;
+  return AlphaMaskImage;
 
 }));

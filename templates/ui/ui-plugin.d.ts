@@ -1,6 +1,7 @@
 // import * as Phaser from 'phaser';
 
-import AnchorFactory from './anchor/Factory.js';
+import AlphaMaskImageFactory from './alphamaskimage/Factory';
+import AnchorFactory from './anchor/Factory';
 import BadgeLabelFactory from './badgelabel/Factory';
 import BBCodeTextFactory from './bbcodetext/Factory';
 import ButtonsFactory from './buttons/Factory';
@@ -84,6 +85,7 @@ import yaml from './yaml/yaml';
 export default UIPlugins;
 
 declare class Factories {
+    alphaMaskImage: typeof AlphaMaskImageFactory;
     anchor: typeof AnchorFactory;
     badgeLabel: typeof BadgeLabelFactory;
     BBCodeText: typeof BBCodeTextFactory;
@@ -197,6 +199,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
 }
 
 
+import AlphaMaskImageClass from './alphamaskimage/AlphaMaskImage';
 import BadgeLabelClass from './badgelabel/BadgeLabel';
 import BBCodeTextClass from './bbcodetext/BBCodeText';
 import ButtonsClass from './buttons/Buttons';
@@ -260,6 +263,7 @@ import ToastClass from './toast/Toast';
 import TouchEventStopClass from './toucheventstop/TouchEventStop';
 
 declare namespace UIPlugins {
+    type AlphaMaskImage = AlphaMaskImageClass;
     type BadgeLabel = BadgeLabelClass;
     type BBCodeText = BBCodeTextClass;
     type Buttons = ButtonsClass;

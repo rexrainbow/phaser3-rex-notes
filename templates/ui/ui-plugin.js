@@ -11,6 +11,7 @@ import HiddenEditFactory from './hiddenedit/Factory.js';
 import ContainerFactory from './container/Factory.js';
 import CanvasFactory from './canvas/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
+import AlphaMaskImageFactory from './alphamaskimage/Factory.js';
 import DynamicTextFactory from './dynamictext/Factory.js';
 import TextPlayerFactory from './textplayer/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';

@@ -214,7 +214,7 @@ module.exports = {
     'fixwidthbuttons': './templates/ui/fixwidthbuttons/FixWidthButtons.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
-    // 'alphamaskimage': './templates/ui/alphamaskimage/AlphaMaskImage.js',
+    'alphamaskimage': './templates/ui/alphamaskimage/AlphaMaskImage.js',
     'dynamictext': './templates/ui/dynamictext/DynamicText.js',
     'textplayer': './templates/ui/textplayer/TextPlayer.js',
     'circularprogresscanvas': './templates/ui/circularprogresscanvas/CircularProgressCanvas.js',

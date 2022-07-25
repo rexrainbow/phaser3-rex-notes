@@ -9,6 +9,7 @@ import HiddenEdit from './hiddenedit/HiddenEdit.js';
 import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
+import AlphaMaskImage from './alphamaskimage/AlphaMaskImage.js';
 import DynamicText from './dynamictext/DynamicText.js';
 import TextPlayer from './textplayer/TextPlayer.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
@@ -101,6 +102,7 @@ export {
     Container,
     Canvas,
     CircleMaskImage,
+    AlphaMaskImage,
     DynamicText,
     TextPlayer,
     FullWindowRectangle,

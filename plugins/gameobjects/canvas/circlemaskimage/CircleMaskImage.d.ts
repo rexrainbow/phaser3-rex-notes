@@ -13,7 +13,9 @@ declare namespace CircleMaskImage {
             tr?: number | { x?: number, y?: number },
             bl?: number | { x?: number, y?: number },
             br?: number | { x?: number, y?: number }
-        }
+        },
+
+        backgroundColor?: string,
     }
 }
 

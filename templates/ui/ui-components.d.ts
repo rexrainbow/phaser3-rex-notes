@@ -6,6 +6,7 @@ import TagText from './tagtext/TagText';
 import Container from './container/Container';
 import Canvas from './canvas/Canvas';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage';
+import AlphaMaskImage from './alphamaskimage/AlphaMaskImage';
 import DynamicText from './dynamictext/DynamicText';
 import TextPlayer from './textplayer/TextPlayer';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas';
@@ -99,6 +100,7 @@ export {
     Container,
     Canvas,
     CircleMaskImage,
+    AlphaMaskImage,
     DynamicText,
     TextPlayer,
     FullWindowRectangle,
