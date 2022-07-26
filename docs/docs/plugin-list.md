@@ -3,8 +3,8 @@
 !!! note "Version of phaser3"
     Please upgrade your phaser3 to version >= **3.55.2**.
 
-1. [Alpha mask image](alphamaskimage.md): Load a texture, then apply an alpha mask from another texture.
 1. [Achievements](achievements.md): Achievements in a csv table.
+1. [Alpha mask image](alphamaskimage.md): Load a texture, then apply an alpha mask from another texture.
 1. [Anchor](anchor.md): Set size and position based on visible window.
 1. [Arcade-TCRP/Player](arcade-tcrp-player.md): Run commands on step of Arcade.
 1. [Arcade-TCRP/Recorder](arcade-tcrp-recorder.md): Store commands with step of Arcade.

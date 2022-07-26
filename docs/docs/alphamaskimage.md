@@ -96,10 +96,13 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var image = scene.add.rexAlphaMaskImage(x, y, key, frame, {
-    mask: textureKey,
-    // maskFrame: frameName,
-    // invertMaskAlpha: false,
-    // maskScale: undefined,
+    mask: {
+        key: textureKey,
+        // frame: frameName,
+        // invertAlpha: false,
+        // scale: undefined,
+    }
+   
     // backgroundColor: undefined,
 });
 ```
@@ -108,20 +111,23 @@ or
 
 ```javascript
 var image = scene.add.rexAlphaMaskImage(x, y, key, {
-    mask: textureKey,
-    // maskFrame: frameName,
-    // invertMaskAlpha: false,
-    // maskScale: undefined,
+    mask: {
+        key: textureKey,
+        // frame: frameName,
+        // invertAlpha: false,
+        // scale: undefined,
+    }
+   
     // backgroundColor: undefined,
 });
 ```
 
 - `key`, `frame` : Texture key, frame name of target texture.
-- `mask`, `maskFrame` : Texture key, frame name of the mask texture.
-- `invertMaskAlpha` :
+- `mask.key`, `mask.frame` : Texture key, frame name of the mask texture.
+- `mask.invertAlpha` :
     - `false` : Mask non-alpha (alpha === 0) area. Default behavior.
     - `true` : Mask alpha (alpha > 0) area.
-- `maskScale` :
+- `mask.scale` :
     - `undefined` : Expand mask texture size to fit target texture.
     - A number : Scale mask texture size.
 - `backgroundColor` : Background color filled with masked area.
@@ -136,10 +142,13 @@ var image = scene.make.rexAlphaMaskImage({
     y: 0,
     key: key,
     frame: name,
-    mask: textureKey,
-    // maskFrame: frameName,
-    // invertMaskAlpha: false,
-    // maskScale: undefined,
+    mask: {
+        key: textureKey,
+        // frame: frameName,
+        // invertAlpha: false,
+        // scale: undefined,
+    }
+   
     // backgroundColor: undefined,
     
     add: true
@@ -180,19 +189,22 @@ or
 
 ```javascript
 image.setTexture(key, frame, {
-    mask: textureKey,
-    // maskFrame: frameName,
-    // invertMaskAlpha: false,
-    // maskScale: undefined,
+    mask: {
+        key: textureKey,
+        // frame: frameName,
+        // invertAlpha: false,
+        // scale: undefined,
+    }
+   
     // backgroundColor: undefined,
 });
 ```
 
-- `mask`, `maskFrame` : Texture key, frame name of the mask texture.
-- `invertMaskAlpha` :
+- `mask.key`, `mask.frame` : Texture key, frame name of the mask texture.
+- `mask.invertAlpha` :
     - `false` : Mask non-alpha (alpha === 0) area. Default behavior.
     - `true` : Mask alpha (alpha > 0) area.
-- `maskScale` :
+- `mask.scale` :
     - `undefined` : Expand mask texture size to fit target texture.
     - A number : Scale mask texture size.
 - `backgroundColor` : Background color filled with masked area.

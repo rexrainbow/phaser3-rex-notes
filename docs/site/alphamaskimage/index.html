@@ -8595,31 +8595,37 @@
 </code></pre></div>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexAlphaMaskImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">mask</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
-    <span class="c1">// maskFrame: frameName,</span>
-    <span class="c1">// invertMaskAlpha: false,</span>
-    <span class="c1">// maskScale: undefined,</span>
+    <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+        <span class="c1">// frame: frameName,</span>
+        <span class="c1">// invertAlpha: false,</span>
+        <span class="c1">// scale: undefined,</span>
+    <span class="p">}</span>
+
     <span class="c1">// backgroundColor: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or </p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexAlphaMaskImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">mask</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
-    <span class="c1">// maskFrame: frameName,</span>
-    <span class="c1">// invertMaskAlpha: false,</span>
-    <span class="c1">// maskScale: undefined,</span>
+    <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+        <span class="c1">// frame: frameName,</span>
+        <span class="c1">// invertAlpha: false,</span>
+        <span class="c1">// scale: undefined,</span>
+    <span class="p">}</span>
+
     <span class="c1">// backgroundColor: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>key</code>, <code>frame</code> : Texture key, frame name of target texture.</li>
-<li><code>mask</code>, <code>maskFrame</code> : Texture key, frame name of the mask texture.</li>
-<li><code>invertMaskAlpha</code> :<ul>
+<li><code>mask.key</code>, <code>mask.frame</code> : Texture key, frame name of the mask texture.</li>
+<li><code>mask.invertAlpha</code> :<ul>
 <li><code>false</code> : Mask non-alpha (alpha === 0) area. Default behavior.</li>
 <li><code>true</code> : Mask alpha (alpha &gt; 0) area.</li>
 </ul>
 </li>
-<li><code>maskScale</code> :<ul>
+<li><code>mask.scale</code> :<ul>
 <li><code>undefined</code> : Expand mask texture size to fit target texture.</li>
 <li>A number : Scale mask texture size.</li>
 </ul>
@@ -8635,10 +8641,13 @@
     <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">key</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
     <span class="nx">frame</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-    <span class="nx">mask</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
-    <span class="c1">// maskFrame: frameName,</span>
-    <span class="c1">// invertMaskAlpha: false,</span>
-    <span class="c1">// maskScale: undefined,</span>
+    <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+        <span class="c1">// frame: frameName,</span>
+        <span class="c1">// invertAlpha: false,</span>
+        <span class="c1">// scale: undefined,</span>
+    <span class="p">}</span>
+
     <span class="c1">// backgroundColor: undefined,</span>
 
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
@@ -8675,21 +8684,24 @@
 </code></pre></div>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">mask</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
-    <span class="c1">// maskFrame: frameName,</span>
-    <span class="c1">// invertMaskAlpha: false,</span>
-    <span class="c1">// maskScale: undefined,</span>
+    <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+        <span class="c1">// frame: frameName,</span>
+        <span class="c1">// invertAlpha: false,</span>
+        <span class="c1">// scale: undefined,</span>
+    <span class="p">}</span>
+
     <span class="c1">// backgroundColor: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>mask</code>, <code>maskFrame</code> : Texture key, frame name of the mask texture.</li>
-<li><code>invertMaskAlpha</code> :<ul>
+<li><code>mask.key</code>, <code>mask.frame</code> : Texture key, frame name of the mask texture.</li>
+<li><code>mask.invertAlpha</code> :<ul>
 <li><code>false</code> : Mask non-alpha (alpha === 0) area. Default behavior.</li>
 <li><code>true</code> : Mask alpha (alpha &gt; 0) area.</li>
 </ul>
 </li>
-<li><code>maskScale</code> :<ul>
+<li><code>mask.scale</code> :<ul>
 <li><code>undefined</code> : Expand mask texture size to fit target texture.</li>
 <li>A number : Scale mask texture size.</li>
 </ul>

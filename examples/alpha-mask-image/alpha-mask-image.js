@@ -15,12 +15,14 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.rexAlphaMaskImage(400, 300, 'classroom', {
-            mask: 'volume',
-            // invertMaskAlpha: true,
-            // maskScale: 4,
+            mask: {
+                key: 'volume',
+                // invertAlpha: true,
+                // scale: 4,
+            }
+
             // backgroundColor: 'aliceblue'
         })
-            .setScale(0.75);
 
         this.add.image(0, 0, 'volume').setOrigin(0);
     }

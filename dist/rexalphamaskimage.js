@@ -565,21 +565,19 @@
           frame = undefined;
         }
 
-        var maskKey, maskFrame, invertMaskAlpha, maskScale, backgroundColor;
-
         if (typeof config === 'string') {
-          maskKey = config;
-          maskFrame = undefined;
-          invertMaskAlpha = false;
-          maskScale = undefined;
-          backgroundColor = undefined;
-        } else {
-          maskKey = GetValue(config, 'mask');
-          maskFrame = GetValue(config, 'maskFrame');
-          invertMaskAlpha = GetValue(config, 'invertMaskAlpha', false);
-          maskScale = GetValue(config, 'maskScale');
-          backgroundColor = GetValue(config, 'backgroundColor');
+          config = {
+            mask: {
+              key: config
+            }
+          };
         }
+
+        var maskKey = GetValue(config, 'mask.key');
+        var maskFrame = GetValue(config, 'mask.frame');
+        var invertMaskAlpha = GetValue(config, 'mask.invertAlpha', false);
+        var maskScale = GetValue(config, 'mask.scale');
+        var backgroundColor = GetValue(config, 'backgroundColor');
 
         if (maskKey) {
           this._maskKey = maskKey;

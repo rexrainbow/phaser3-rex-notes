@@ -9955,15 +9955,14 @@
           frame = undefined;
         }
 
-        var maskType, backgroundColor;
-
         if (typeof config === 'string') {
-          maskType = config;
-          backgroundColor = undefined;
-        } else {
-          maskType = GetValue$23(config, 'maskType', 0);
-          backgroundColor = GetValue$23(config, 'backgroundColor', undefined);
+          config = {
+            maskType: config
+          };
         }
+
+        var maskType = GetValue$23(config, 'maskType', 0);
+        var backgroundColor = GetValue$23(config, 'backgroundColor', undefined);
 
         if (maskType === undefined) {
           maskType = 0;
@@ -10089,21 +10088,19 @@
           frame = undefined;
         }
 
-        var maskKey, maskFrame, invertMaskAlpha, maskScale, backgroundColor;
-
         if (typeof config === 'string') {
-          maskKey = config;
-          maskFrame = undefined;
-          invertMaskAlpha = false;
-          maskScale = undefined;
-          backgroundColor = undefined;
-        } else {
-          maskKey = GetValue$22(config, 'mask');
-          maskFrame = GetValue$22(config, 'maskFrame');
-          invertMaskAlpha = GetValue$22(config, 'invertMaskAlpha', false);
-          maskScale = GetValue$22(config, 'maskScale');
-          backgroundColor = GetValue$22(config, 'backgroundColor');
+          config = {
+            mask: {
+              key: config
+            }
+          };
         }
+
+        var maskKey = GetValue$22(config, 'mask.key');
+        var maskFrame = GetValue$22(config, 'mask.frame');
+        var invertMaskAlpha = GetValue$22(config, 'mask.invertAlpha', false);
+        var maskScale = GetValue$22(config, 'mask.scale');
+        var backgroundColor = GetValue$22(config, 'backgroundColor');
 
         if (maskKey) {
           this._maskKey = maskKey;

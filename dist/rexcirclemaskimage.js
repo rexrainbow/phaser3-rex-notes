@@ -841,15 +841,14 @@
           frame = undefined;
         }
 
-        var maskType, backgroundColor;
-
         if (typeof config === 'string') {
-          maskType = config;
-          backgroundColor = undefined;
-        } else {
-          maskType = GetValue(config, 'maskType', 0);
-          backgroundColor = GetValue(config, 'backgroundColor', undefined);
+          config = {
+            maskType: config
+          };
         }
+
+        var maskType = GetValue(config, 'maskType', 0);
+        var backgroundColor = GetValue(config, 'backgroundColor', undefined);
 
         if (maskType === undefined) {
           maskType = 0;

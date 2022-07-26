@@ -5,10 +5,13 @@ export default AlphaMaskImage;
 declare namespace AlphaMaskImage {
 
     interface IConfig {
-        mask?: string,
-        maskFrame?: string,
-        invertMaskAlpha?: boolean,
-        maskScale?: number,
+        mask: {
+            key: string,
+            frame?: string,
+            invertAlpha?: boolean,
+            scale?: number,
+        },
+
         backgroundColor?: string,
     }
 }
