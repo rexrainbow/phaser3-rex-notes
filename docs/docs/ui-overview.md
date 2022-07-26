@@ -259,12 +259,26 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     ```
 1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
     ```javascript
-    var image = scene.rexUI.add.circleMaskImage(x, y, key, frame);
-    // var image = scene.rexUI.add.circleMaskImage(x, y, key, frame, config);
+    var image = scene.rexUI.add.circleMaskImage(x, y, key, frame, config);
     ```
     or
     ```javascript
     class MyImage extends RexPlugins.UI.CircleMaskImage {
+        constructor(scene, x, y, key, frame, config) {
+            super(scene, x, y, key, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [Alpha mask image](alphamaskimage.md): Load a texture, then apply an alpha mask from another texture.
+    ```javascript
+    var image = scene.rexUI.add.alphaMaskImage(x, y, key, frame, config);
+    ```
+    or
+    ```javascript
+    class MyImage extends RexPlugins.UI.AlphaMaskImage {
         constructor(scene, x, y, key, frame, config) {
             super(scene, x, y, key, frame, config);
             // ...

@@ -11,7 +11,7 @@ Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.m
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circlemaskimage)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circle-mask-image)
 
 ### Install plugin
 
