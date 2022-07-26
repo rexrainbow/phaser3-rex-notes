@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var image = this.add.image(0, 0, 'classroom')
             .setScale(0.5)
-        var maskGameObject = this.make.graphics();
+        var maskGameObject = this.make.graphics().setVisible(false);
         var mask = maskGameObject.createGeometryMask();
 
         maskGameObject
