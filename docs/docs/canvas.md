@@ -171,8 +171,18 @@ var canvas = scene.make.rexCanvas({
     ```
 - Copy canvas from texture
     ```javascript
-    canvas.loadTexture(key, resize);
+    canvas.loadTexture(key, frame);
     ```
+
+### Paste frame
+
+```javascript
+canvas.drawFrame(key, frame);
+// canvas.drawFrame(key, frame, x, y, width, height);
+```
+
+- `x`, `y` : Top-left position of pasted frame. Default value is `0`, `0`
+- `width`, `height` : Size of pasted frame. Default value is origin size of frame.
 
 ### Data URL
 

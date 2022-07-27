@@ -45,6 +45,36 @@ export default {
         });
     },
 
+    drawFrame(key, frame, x, y, width, height) {
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+        if (!textureFrame) {
+            return this;
+        }
+
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
+        if (width === undefined) {
+            width = textureFrame.cutWidth;
+        }
+        if (height === undefined) {
+            height = textureFrame.cutHeight;
+        }
+
+        this.context.drawImage(
+            textureFrame.source.image,
+            textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight,
+            x, y, width, height
+        );
+
+        this.dirty = true;
+
+        return this;
+    },
+
     getDataURL(type, encoderOptions) {
         return this.canvas.toDataURL(type, encoderOptions);
     },

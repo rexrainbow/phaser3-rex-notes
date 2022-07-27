@@ -35,7 +35,7 @@ export default class Canvas extends CanvasGameObjectBase {
 
     loadTexture(
         key: string,
-        resize?: boolean
+        frame?: string,
     ): this;
 
     loadFromURL(
@@ -46,6 +46,13 @@ export default class Canvas extends CanvasGameObjectBase {
     loadFromURLPromise(
         url: string
     ): Promise<any>;
+
+    drawFrame(
+        key: string,
+        frame?: string,
+        x?: number, y?: number,
+        width?: number, height?: number,
+    ): this;
 
     getDataURL(
         type?: string,

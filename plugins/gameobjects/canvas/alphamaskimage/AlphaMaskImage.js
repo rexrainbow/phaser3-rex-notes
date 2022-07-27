@@ -73,9 +73,10 @@ class AlphaMaskImage extends Canvas {
         var maskX = (width - maskWidth) / 2;
         var maskY = (height - maskHeight) / 2;
 
-        ctx.drawImage(maskTextureFrame.source.image,
-            maskTextureFrame.cutX, maskTextureFrame.cutY, maskTextureFrame.cutWidth, maskTextureFrame.cutHeight,
-            maskX, maskY, maskWidth, maskHeight);
+        this.drawFrame(
+            this._maskKey, this._maskFrame,
+            maskX, maskY, maskWidth, maskHeight
+        );
 
         ctx.restore();
 

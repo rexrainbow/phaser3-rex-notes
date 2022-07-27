@@ -56,9 +56,8 @@ export default {
         } else {
             this.clear();
         }
-        this.context.drawImage(textureFrame.source.image,
-            textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight,
-            0, 0, this.canvas.width, this.canvas.height);
+
+        this.drawFrame(key, frame);
         this.dirty = true;
         return this;
     }

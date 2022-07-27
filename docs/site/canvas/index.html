@@ -2181,6 +2181,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#paste-frame" class="md-nav__link">
+    Paste frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#data-url" class="md-nav__link">
     Data URL
   </a>
@@ -8548,6 +8555,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#paste-frame" class="md-nav__link">
+    Paste frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#data-url" class="md-nav__link">
     Data URL
   </a>
@@ -8746,8 +8760,16 @@
 <span class="c1">// canvas.generateTexture(key, x, y, width, height);</span>
 </code></pre></div></li>
 <li>Copy canvas from texture
-    <div class="highlight"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">resize</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="paste-frame">Paste frame<a class="headerlink" href="#paste-frame" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+<span class="c1">// canvas.drawFrame(key, frame, x, y, width, height);</span>
+</code></pre></div>
+<ul>
+<li><code>x</code>, <code>y</code> : Top-left position of pasted frame. Default value is <code>0</code>, <code>0</code></li>
+<li><code>width</code>, <code>height</code> : Size of pasted frame. Default value is origin size of frame.</li>
 </ul>
 <h3 id="data-url">Data URL<a class="headerlink" href="#data-url" title="Permanent link">&para;</a></h3>
 <ul>
