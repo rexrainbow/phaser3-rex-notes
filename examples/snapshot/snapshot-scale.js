@@ -17,19 +17,26 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var baseImage = this.add.image(0, 0, 'classroom').setOrigin(0).setScale(0.5);
+        this.baseImage = this.add.image(0, 0, 'classroom').setOrigin(0).setScale(0.5);
+        this.cameras.main
+            .setZoom(0.75)
+            // .setScroll(-100, -100)
 
-        var scene = this;
-        scene.game.renderer.snapshotArea(0, 0, 200, 200, function (image) {
-            scene.textures.addImage('area', image);
-
-            baseImage.setAlpha(0.5);
-            scene.add.image(0, 0, 'area').setOrigin(0);
-        });
+        this.time.delayedCall(100, function (scene) {
+            Snapshot(scene)
+        }, [this]);
     }
 
     update() {
     }
+}
+
+var Snapshot = function (scene) {
+    scene.game.renderer.snapshotArea(0, 0, 200, 200, function (image) {
+        scene.textures.addImage('area', image);
+        scene.baseImage.setAlpha(0.5);
+        scene.add.image(0, 0, 'area').setOrigin(0);
+    });
 }
 
 var config = {
