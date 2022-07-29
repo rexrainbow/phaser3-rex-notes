@@ -36,6 +36,10 @@ class Board {
         if (GetValue(config, 'mask', false)) {
             this.resetBoardMask();
         }
+
+        if (GetValue(config, 'layer', false)) {
+            this.enableBoardLayer();
+        }
     }
 
     shutdown() {
@@ -83,11 +87,19 @@ class Board {
         return this;
     }
 
+    enableBoardLayer() {
+        if (!this.layer) {
+            this.layer = this.scene.add.layer();
+        }
+        return this;
+    }
+
     resetBoardMask() {
         if (!this.rowMaskGameObject) {
             this.rowMaskGameObject = this.scene.make.graphics().setVisible(false);
             this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
-            this.layer = this.scene.add.layer().setMask(this.rowMask);
+            this.enableBoardLayer();
+            this.layer.setMask(this.rowMask);
         }
 
         // Rectangle of upper rows
