@@ -1,4 +1,4 @@
-import MakeChildImageGameObject from "../../../../utils/rendertexture/MakeChildImageGameObject";
+import MakeChildImageGameObject from '../../utils/MakeChildImageGameObject.js';
 
 var DrawImage = function (key, frame, x, y, width, height) {
     var gameObject = MakeChildImageGameObject(this, '_image', 'image')
