@@ -2029,6 +2029,11 @@
     board.addChess(gameObject, tileX, tileY, this.chessTileZ, true); // behaviors
 
     gameObject.rexMoveTo = this.rexBoard.add.moveTo(gameObject, this.chessMoveTo);
+
+    if (this.layer) {
+      // Move chess gameObject from scene to layer
+      this.layer.add(gameObject);
+    }
   };
 
   /*
@@ -2237,7 +2242,35 @@
       this.chessCallbackScope = GetValue$2(config, 'chess.scope', undefined);
       this.chessCreateCallback = GetValue$2(config, 'chess.create', undefined);
       this.chessMoveTo = GetValue$2(config, 'chess.moveTo', {});
-      this.chessMoveTo.occupiedTest = true;
+      this.chessMoveTo.occupiedTest = true; // Mask & layer
+
+      this.rowMaskGameObject = undefined;
+      this.rowMask = undefined;
+      this.layer = undefined;
+      var maskEnable = GetValue$2(config, 'mask', false);
+
+      if (maskEnable) {
+        // Rectangle of upper rows
+        var board = this.board;
+        var grid = board.grid;
+        var x = grid.x - grid.width / 2;
+        var y = grid.y - grid.height / 2;
+        var width = board.width * grid.width;
+        var height = board.height / 2 * grid.height;
+        this.rowMaskGameObject = scene.make.graphics();
+        this.rowMaskGameObject.fillRect(x, y, width, height);
+        this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
+      }
+
+      var enableLayer = maskEnable || GetValue$2(config, 'layerEnable', false);
+
+      if (enableLayer) {
+        this.layer = scene.add.layer();
+
+        if (maskEnable) {
+          this.layer.setMask(this.rowMask);
+        }
+      }
     }
 
     _createClass(Board, [{
@@ -2245,6 +2278,17 @@
       value: function shutdown() {
         this.match.destroy();
         this.board.destroy();
+
+        if (this.rowMaskGameObject) {
+          this.layer.setMask();
+          this.rowMaskGameObject.destroy();
+          this.rowMask.destroy();
+        }
+
+        if (this.layer) {
+          this.layer.destroy();
+        }
+
         this.board = undefined;
         this.match = undefined;
         this.initSymbolsMap = undefined;

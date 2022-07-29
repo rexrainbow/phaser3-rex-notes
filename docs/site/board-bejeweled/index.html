@@ -9028,6 +9028,7 @@
         <span class="p">},</span>
         <span class="c1">// tileZ: 1,</span>
     <span class="p">},</span>
+    <span class="c1">// mask: false,</span>
 
     <span class="nx">select1Action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">select2Action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -9066,6 +9067,18 @@
 </li>
 <li>Touch input<ul>
 <li><code>input</code> : Set <code>true</code> to register default touch input logic.</li>
+</ul>
+</li>
+<li>Mask<ul>
+<li><code>mask</code> :<ul>
+<li><code>false</code> : No mask. Default behavior.</li>
+<li><code>true</code> : Mask <em>invisible</em> upper rows.<ol>
+<li>Create an internal layer</li>
+<li>Mask this internal layer.</li>
+</ol>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

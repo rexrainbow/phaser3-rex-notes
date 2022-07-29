@@ -110,6 +110,7 @@ var bejeweled = new Bejeweled(scene, {
         },
         // tileZ: 1,
     },
+    // mask: false,
 
     select1Action: undefined,
     select2Action: undefined,
@@ -143,6 +144,13 @@ Configurations
     - `fallingAction` : [Custon falling action](board-bejeweled.md#custom-falling-action)
 - Touch input
     - `input` : Set `true` to register default touch input logic.
+- Mask
+    - `mask` :
+        - `false` : No mask. Default behavior.
+        - `true` : Mask *invisible* upper rows.
+            1. Create an internal layer
+            1. Mask this internal layer.
+
 
 #### Board height
 

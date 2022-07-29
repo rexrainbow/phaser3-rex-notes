@@ -8,11 +8,13 @@ import PreTest from './PreTest.js';
 import GetAllMatch from './match/GetAllMatch.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+
 class Board {
     constructor(bejeweled, config) {
         var scene = bejeweled.scene;
         this.scene = scene;
         this.rexBoard = bejeweled.rexBoard;
+
         this.board = this.rexBoard.add.board(GetValue(config, 'board', undefined));
         this.match = this.rexBoard.add.match(GetValue(config, 'match', undefined));
         this.match.setBoard(this.board);
@@ -25,11 +27,49 @@ class Board {
         this.chessCreateCallback = GetValue(config, 'chess.create', undefined);
         this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
         this.chessMoveTo.occupiedTest = true;
+
+        // Mask & layer
+        this.rowMaskGameObject = undefined;
+        this.rowMask = undefined;
+        this.layer = undefined;
+
+        var maskEnable = GetValue(config, 'mask', false);
+        if (maskEnable) {
+            // Rectangle of upper rows
+            var board = this.board;
+            var grid = board.grid;
+            var x = grid.x - (grid.width / 2);
+            var y = grid.y - (grid.height / 2);
+            var width = board.width * grid.width;
+            var height = (board.height / 2) * grid.height;
+            this.rowMaskGameObject = scene.make.graphics();
+            this.rowMaskGameObject.fillRect(x, y, width, height);
+
+            this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
+        }
+
+        var enableLayer = maskEnable || GetValue(config, 'layerEnable', false);
+        if (enableLayer) {
+            this.layer = scene.add.layer();
+            if (maskEnable) {
+                this.layer.setMask(this.rowMask);
+            }
+        }
+
     }
 
     shutdown() {
         this.match.destroy();
         this.board.destroy();
+
+        if (this.rowMaskGameObject) {
+            this.layer.setMask();
+            this.rowMaskGameObject.destroy();
+            this.rowMask.destroy();
+        }
+        if (this.layer) {
+            this.layer.destroy();
+        }
 
         this.board = undefined;
         this.match = undefined;
