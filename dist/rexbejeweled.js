@@ -2257,7 +2257,7 @@
         var y = grid.y - grid.height / 2;
         var width = board.width * grid.width;
         var height = board.height / 2 * grid.height;
-        this.rowMaskGameObject = scene.make.graphics();
+        this.rowMaskGameObject = scene.make.graphics().setVisible(false);
         this.rowMaskGameObject.fillRect(x, y, width, height);
         this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
       }
