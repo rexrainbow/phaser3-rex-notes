@@ -65,7 +65,9 @@ declare namespace Bejeweled {
 
         input?: boolean,
 
-        debug?: boolean
+        mask?: boolean,
+
+        debug?: boolean,
 
     }
 

@@ -9,6 +9,7 @@ Match3-like gameplay template.
 
 - [Events](https://codepen.io/rexrainbow/pen/wEVYoY)
 - [Custom input](https://codepen.io/rexrainbow/pen/XWWyELV)
+- [Mask](https://codepen.io/rexrainbow/pen/rNdYYGB)
 
 ## Usage
 
@@ -72,7 +73,6 @@ var bejeweled = new Bejeweled(scene, {
             y: 30 - 600,
             cellWidth: 60,
             cellHeight: 60,
-            type: 'orthogonal' // 'orthogonal'|'isometric'
         },
         width: 10,
         height: 20 // Prepared rows: upper 10 rows

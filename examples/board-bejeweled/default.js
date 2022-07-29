@@ -15,12 +15,10 @@ class Demo extends Phaser.Scene {
         this.bejeweled = new Bejeweled(this, {
             board: {
                 grid: {
-                    gridType: 'quadGrid',
                     x: 30,
                     y: 30 - 600,
                     cellWidth: 60,
                     cellHeight: 60,
-                    type: 'orthogonal' // 'orthogonal'|'isometric'
                 },
                 width: 10,
                 height: 20 // Prepared rows: upper 10 rows

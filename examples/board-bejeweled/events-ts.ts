@@ -22,7 +22,6 @@ class Demo extends Phaser.Scene {
                     y: 30 - 600,
                     cellWidth: 60,
                     cellHeight: 60,
-                    type: 'orthogonal' // 'orthogonal'|'isometric'|'staggered'
                 },
                 width: 10,
                 height: 20 // Prepared rows: upper 10 rows
