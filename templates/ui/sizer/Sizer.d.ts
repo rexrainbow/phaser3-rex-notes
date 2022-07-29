@@ -78,7 +78,7 @@ declare class Sizer extends BaseSizer {
             align?: Sizer.AlignTypes,
             padding?: Sizer.PaddingTypes,
             expand?: boolean,
-            childKey?: string,
+            key?: string,
             index?: number,
             minWidth?: number,
             minHeight?: number
@@ -91,7 +91,7 @@ declare class Sizer extends BaseSizer {
         align?: Sizer.AlignTypes,
         padding?: Sizer.PaddingTypes,
         expand?: boolean,
-        childKey?: string,
+        key?: string,
         index?: number,
         minWidth?: number,
         minHeight?: number
@@ -105,7 +105,7 @@ declare class Sizer extends BaseSizer {
             align?: Sizer.AlignTypes,
             padding?: Sizer.PaddingTypes,
             expand?: boolean,
-            childKey?: string,
+            key?: string,
             minWidth?: number,
             minHeight?: number
         }
@@ -118,7 +118,7 @@ declare class Sizer extends BaseSizer {
         align?: Sizer.AlignTypes,
         padding?: Sizer.PaddingTypes,
         expand?: boolean,
-        childKey?: string
+        key?: string
     ): this;
 
     insertAtPosition(
@@ -130,7 +130,7 @@ declare class Sizer extends BaseSizer {
             align?: Sizer.AlignTypes,
             padding?: Sizer.PaddingTypes,
             expand?: boolean,
-            childKey?: string,
+            key?: string,
             minWidth?: number,
             minHeight?: number
         }
@@ -144,7 +144,7 @@ declare class Sizer extends BaseSizer {
         align?: Sizer.AlignTypes,
         padding?: Sizer.PaddingTypes,
         expand?: boolean,
-        childKey?: string
+        key?: string
     ): this;
 
     addSpace(
