@@ -1176,6 +1176,23 @@ Current children and new children will draw on this layer, instead of display li
 
 Apply post-fx pipeline on [layer of sizer](ui-basesizer.md#layer).
 
+### Snapshot
+
+Draw all visible children on a render-texture.
+
+```javascript
+var renderTexture = container.snapshot({
+    renderTexture: undefined,
+    padding: 0
+});
+```
+
+- `renderTexture` : Draw on this render-texture
+    - `undefined` : Create a new render-texture.
+- `padding` : 
+    - `0` : No extra padding space. Default value.
+    - A number : Add extra padding space around this render-texture.
+
 ### Events
 
 #### Dragging

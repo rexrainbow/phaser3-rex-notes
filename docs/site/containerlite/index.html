@@ -2529,6 +2529,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-factor" class="md-nav__link">
     Scroll factor
   </a>
@@ -8906,6 +8913,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-factor" class="md-nav__link">
     Scroll factor
   </a>
@@ -8971,6 +8985,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/qBxdwxo">Create tween config</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/GRQJPLV">Timeline child</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/VwQLNyG">Mix timeline</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/XWEVWrO">Snapshot</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/container-lite">Sample code</a></p>
@@ -9431,6 +9446,24 @@ Current children and new children will draw on this layer, instead of display li
 </ul>
 <h3 id="shader-effects">Shader effects<a class="headerlink" href="#shader-effects" title="Permanent link">&para;</a></h3>
 <p>Apply post-fx pipeline on <a href="./#layer">layer of containerLite</a>.</p>
+<h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
+<p>Draw all visible children on a render-texture.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">renderTexture</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">({</span>
+    <span class="nx">renderTexture</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>renderTexture</code> : Draw on this render-texture<ul>
+<li><code>undefined</code> : Create a new render-texture.</li>
+</ul>
+</li>
+<li><code>padding</code> : <ul>
+<li><code>0</code> : No extra padding space. Default value.</li>
+<li>A number : Add extra padding space around this render-texture.</li>
+</ul>
+</li>
+</ul>
 <h3 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set scroll factor to children
