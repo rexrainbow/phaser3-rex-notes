@@ -2247,29 +2247,13 @@
       this.rowMaskGameObject = undefined;
       this.rowMask = undefined;
       this.layer = undefined;
-      var maskEnable = GetValue$2(config, 'mask', false);
 
-      if (maskEnable) {
-        // Rectangle of upper rows
-        var board = this.board;
-        var grid = board.grid;
-        var x = grid.x - grid.width / 2;
-        var y = grid.y - grid.height / 2;
-        var width = board.width * grid.width;
-        var height = board.height / 2 * grid.height;
-        this.rowMaskGameObject = scene.make.graphics().setVisible(false);
-        this.rowMaskGameObject.fillRect(x, y, width, height);
-        this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
+      if (GetValue$2(config, 'mask', false)) {
+        this.resetBoardMask();
       }
 
-      var enableLayer = maskEnable || GetValue$2(config, 'layerEnable', false);
-
-      if (enableLayer) {
-        this.layer = scene.add.layer();
-
-        if (maskEnable) {
-          this.layer.setMask(this.rowMask);
-        }
+      if (GetValue$2(config, 'layer', false)) {
+        this.enableBoardLayer();
       }
     }
 
@@ -2321,6 +2305,35 @@
       value: function setInitSymbolsMap(map) {
         this.initSymbolsMap = map; // 2d array
 
+        return this;
+      }
+    }, {
+      key: "enableBoardLayer",
+      value: function enableBoardLayer() {
+        if (!this.layer) {
+          this.layer = this.scene.add.layer();
+        }
+
+        return this;
+      }
+    }, {
+      key: "resetBoardMask",
+      value: function resetBoardMask() {
+        if (!this.rowMaskGameObject) {
+          this.rowMaskGameObject = this.scene.make.graphics().setVisible(false);
+          this.rowMask = this.rowMaskGameObject.createGeometryMask().setInvertAlpha();
+          this.enableBoardLayer();
+          this.layer.setMask(this.rowMask);
+        } // Rectangle of upper rows
+
+
+        var board = this.board;
+        var grid = board.grid;
+        var x = grid.x - grid.width / 2;
+        var y = grid.y - grid.height / 2;
+        var width = board.width * grid.width;
+        var height = board.height / 2 * grid.height;
+        this.rowMaskGameObject.fillRect(x, y, width, height);
         return this;
       }
     }, {

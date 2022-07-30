@@ -910,7 +910,7 @@
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$d = Phaser.Utils.Objects.GetValue;
 
-  var RenderTexture = /*#__PURE__*/function (_Image) {
+  var RenderTexture$1 = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
 
     var _super = _createSuper(RenderTexture);
@@ -967,7 +967,7 @@
   }(Image);
 
   function PerspectiveRenderTextureFactory (x, y, width, height, config) {
-    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    var gameObject = new RenderTexture$1(this.scene, x, y, width, height, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
@@ -987,7 +987,7 @@
     var y = GetAdvancedValue$2(config, 'y', 0);
     var width = GetAdvancedValue$2(config, 'width', 32);
     var height = GetAdvancedValue$2(config, 'height', 32);
-    var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    var gameObject = new RenderTexture$1(this.scene, x, y, width, height, config);
     BuildGameObject$4(this.scene, gameObject, config);
     return gameObject;
   }
@@ -2460,6 +2460,21 @@
     }
   };
 
+  var RenderTexture = {
+    snapshot: function snapshot(config) {
+      if (config === undefined) {
+        config = {};
+      }
+
+      config.gameObjects = this.getAllVisibleChildren();
+      config.x = this.x;
+      config.y = this.y;
+      config.originX = this.originX;
+      config.originY = this.originY;
+      return Snapshot(config);
+    }
+  };
+
   var RotateAround = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
@@ -2495,7 +2510,7 @@
   var methods = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer);
+  Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2905,7 +2920,7 @@
   };
   var ClassMap = {
     image: Image,
-    rendertexture: RenderTexture
+    rendertexture: RenderTexture$1
   };
 
   var CreatePerspectiveObject = function CreatePerspectiveObject(scene, config) {
@@ -4551,7 +4566,7 @@
           faces = [];
 
       for (var i = 0; i < faceCount; i++) {
-        face = new RenderTexture(scene, 0, 0, faceWidth, faceHeight, config);
+        face = new RenderTexture$1(scene, 0, 0, faceWidth, faceHeight, config);
         scene.add.existing(face);
         faces.push(face);
       }
@@ -4760,7 +4775,7 @@
     }]);
 
     return ContainerPerspective;
-  }(MeshRenderTextureBase(RenderTexture));
+  }(MeshRenderTextureBase(RenderTexture$1));
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -4870,7 +4885,7 @@
   }(Phaser.Plugins.BasePlugin);
 
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', Image);
-  SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', RenderTexture);
+  SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', RenderTexture$1);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveSprite', Sprite);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', Card);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', Carousel);

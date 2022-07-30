@@ -75,6 +75,4 @@ var Snapshot = function (config) {
     return renderTexture;
 }
 
-var GlobPadding = {};
-
 export default Snapshot;

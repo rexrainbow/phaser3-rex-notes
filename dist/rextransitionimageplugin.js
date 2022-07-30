@@ -501,7 +501,7 @@
     }
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
 
   var Add = function Add(gameObject, config) {
@@ -547,10 +547,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$9(config, 'syncPosition', true);
-    state.syncRotation = GetValue$9(config, 'syncRotation', true);
-    state.syncScale = GetValue$9(config, 'syncScale', true);
-    state.syncAlpha = GetValue$9(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$a(config, 'syncPosition', true);
+    state.syncRotation = GetValue$a(config, 'syncRotation', true);
+    state.syncScale = GetValue$a(config, 'syncScale', true);
+    state.syncAlpha = GetValue$a(config, 'syncAlpha', true);
   };
 
   var AddChild = {
@@ -664,14 +664,14 @@
     }
   };
 
-  var RotateAround$2 = Phaser.Math.RotateAround;
+  var RotateAround$3 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y; // Rotate
 
-      RotateAround$2(point, 0, 0, -this.rotation); // Scale
+      RotateAround$3(point, 0, 0, -this.rotation); // Scale
 
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -682,7 +682,7 @@
       point.x *= this.scaleX;
       point.y *= this.scaleY; // Rotate
 
-      RotateAround$2(point, 0, 0, this.rotation); // Transform
+      RotateAround$3(point, 0, 0, this.rotation); // Transform
 
       point.x += this.x;
       point.y += this.y;
@@ -1622,6 +1622,364 @@
     }
   };
 
+  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
+    if (gameObject.displayWidth !== undefined) {
+      return gameObject.displayWidth;
+    } else {
+      return gameObject.width;
+    }
+  };
+
+  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
+    if (gameObject.displayHeight !== undefined) {
+      return gameObject.displayHeight;
+    } else {
+      return gameObject.height;
+    }
+  };
+
+  var Rectangle$1 = Phaser.Geom.Rectangle;
+  var Vector2 = Phaser.Math.Vector2;
+  var RotateAround$2 = Phaser.Math.RotateAround;
+
+  var GetBounds = function GetBounds(gameObject, output) {
+    if (output === undefined) {
+      output = new Rectangle$1();
+    } else if (output === true) {
+      if (GlobRect$1 === undefined) {
+        GlobRect$1 = new Rectangle$1();
+      }
+
+      output = GlobRect$1;
+    }
+
+    if (gameObject.getBounds) {
+      return gameObject.getBounds(output);
+    } //  We can use the output object to temporarily store the x/y coords in:
+
+
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy; // Instead of doing a check if parent container is
+    // defined per corner we only do it once.
+
+    if (gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      GetTopLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BRx = output.x;
+      BRy = output.y;
+    } else {
+      GetTopLeft(gameObject, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      BRx = output.x;
+      BRy = output.y;
+    }
+
+    output.x = Math.min(TLx, TRx, BLx, BRx);
+    output.y = Math.min(TLy, TRy, BLy, BRy);
+    output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+    output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+    return output;
+  };
+
+  var GlobRect$1 = undefined;
+
+  var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getTopLeft) {
+      return gameObject.getTopLeft(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getTopRight) {
+      return gameObject.getTopRight(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getBottomLeft) {
+      return gameObject.getBottomLeft(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+
+      output = GlobVector;
+    }
+
+    if (gameObject.getBottomRight) {
+      return gameObject.getBottomRight(output);
+    }
+
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+
+  var GlobVector = undefined;
+
+  var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
+    if (includeParent === undefined) {
+      includeParent = false;
+    }
+
+    if (gameObject.rotation !== 0) {
+      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+    }
+
+    if (includeParent && gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      parentMatrix.transformPoint(output.x, output.y, output);
+    }
+
+    return output;
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+  var Union = Phaser.Geom.Rectangle.Union;
+
+  var GetBoundsOfGameObjects = function GetBoundsOfGameObjects(gameObjects, out) {
+    if (out === undefined) {
+      out = new Rectangle();
+    } else if (out === true) {
+      if (GlobRect === undefined) {
+        GlobRect = new Rectangle();
+      }
+
+      out = GlobRect;
+    }
+
+    var gameObject;
+    var firstClone = true;
+
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+      gameObject = gameObjects[i];
+
+      if (!gameObject.getBounds) {
+        continue;
+      }
+
+      var boundsRect = GetBounds(gameObject, true);
+
+      if (firstClone) {
+        out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
+        firstClone = false;
+      } else {
+        Union(boundsRect, out, out);
+      }
+    }
+
+    return out;
+  };
+
+  var GlobRect;
+
+  var Clear = function Clear(obj) {
+    if (_typeof(obj) !== 'object' || obj === null) {
+      return obj;
+    }
+
+    if (Array.isArray(obj)) {
+      obj.length = 0;
+    } else {
+      for (var key in obj) {
+        delete obj[key];
+      }
+    }
+
+    return obj;
+  };
+
+  /**
+   * Shallow Object Clone. Will not out nested objects.
+   * @param {object} obj JSON object
+   * @param {object} ret JSON object to return, set null to return a new object
+   * @returns {object} this object
+   */
+
+  var Clone = function Clone(obj, out) {
+    var objIsArray = Array.isArray(obj);
+
+    if (out === undefined) {
+      out = objIsArray ? [] : {};
+    } else {
+      Clear(out);
+    }
+
+    if (objIsArray) {
+      out.length = obj.length;
+
+      for (var i = 0, cnt = obj.length; i < cnt; i++) {
+        out[i] = obj[i];
+      }
+    } else {
+      for (var key in obj) {
+        out[key] = obj[key];
+      }
+    }
+
+    return out;
+  };
+
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+
+  var Snapshot = function Snapshot(config) {
+    if (!config) {
+      return;
+    }
+
+    var gameObjects = config.gameObjects;
+    var renderTexture = config.renderTexture;
+
+    if (gameObjects.length === 0) {
+      if (renderTexture) {
+        renderTexture.setSize(1, 1).clear();
+      }
+
+      return renderTexture;
+    }
+
+    var x = GetValue$9(config, 'x', undefined);
+    var y = GetValue$9(config, 'y', undefined);
+    var width = GetValue$9(config, 'width', undefined);
+    var height = GetValue$9(config, 'height', undefined);
+    var originX = GetValue$9(config, 'originX', 0);
+    var originY = GetValue$9(config, 'originY', 0);
+    var padding = GetValue$9(config, 'padding', 0);
+    var scrollX, scrollY;
+
+    if (width === undefined || height === undefined || x === undefined || y === undefined) {
+      // Union bounds of gameObjects
+      var bounds = GetBoundsOfGameObjects(gameObjects, true);
+      var isCenterOrigin = x !== undefined && y !== undefined;
+
+      if (isCenterOrigin) {
+        width = Math.max(x - bounds.left, bounds.right - x) * 2;
+        height = Math.max(y - bounds.top, bounds.bottom - y) * 2;
+        originX = 0.5;
+        originY = 0.5;
+      } else {
+        x = bounds.x;
+        y = bounds.y;
+        width = bounds.width;
+        height = bounds.height;
+        originX = 0;
+        originY = 0;
+      }
+
+      scrollX = bounds.x;
+      scrollY = bounds.y;
+    } else {
+      scrollX = x + (0 - originX) * width;
+      scrollY = y + (0 - originY) * height;
+    }
+
+    scrollX -= padding;
+    scrollY -= padding;
+    width += padding * 2;
+    height += padding * 2; // Configurate render texture
+
+    if (!renderTexture) {
+      var scene = gameObjects[0].scene;
+      renderTexture = scene.add.renderTexture(x, y, width, height);
+    } else {
+      renderTexture.setPosition(x, y);
+
+      if (renderTexture.width !== width || renderTexture.height !== height) {
+        renderTexture.setSize(width, height);
+      }
+    }
+
+    renderTexture.setOrigin(originX, originY);
+    renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
+
+    gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
+    renderTexture.draw(gameObjects);
+    return renderTexture;
+  };
+
+  var RenderTexture = {
+    snapshot: function snapshot(config) {
+      if (config === undefined) {
+        config = {};
+      }
+
+      config.gameObjects = this.getAllVisibleChildren();
+      config.x = this.x;
+      config.y = this.y;
+      config.originX = this.originX;
+      config.originY = this.originY;
+      return Snapshot(config);
+    }
+  };
+
   var RotateAround$1 = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
@@ -1657,7 +2015,7 @@
   var methods$1 = {
     changeOrigin: ChangeOrigin
   };
-  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);

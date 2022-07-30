@@ -16,6 +16,7 @@ import Children from './Children.js';
 import Tween from './Tween.js';
 import AddToContainer from './AddToContainer.js';
 import Layer from './Layer.js';
+import RenderTexture from './RenderTexture.js';
 
 import ChangeOrigin from './ChangeOrigin.js';
 
@@ -43,6 +44,7 @@ Object.assign(
     Tween,
     AddToContainer,
     Layer,
+    RenderTexture,
 );
 
 export default methods;
