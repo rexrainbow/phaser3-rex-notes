@@ -21,11 +21,6 @@ declare namespace ContainerLite {
         syncPosition?: boolean
         syncRotation?: boolean
     }
-
-    interface ISnapshotConfig {
-        renderTexture?: Phaser.GameObjects.RenderTexture,
-        padding?: number,
-    }
 }
 
 declare class ContainerLite extends Base {
@@ -292,8 +287,18 @@ declare class ContainerLite extends Base {
     getLayer(): Phaser.GameObjects.Layer;
 
     snapshot(
-        config?: ContainerLite.ISnapshotConfig
+        config?: {
+            renderTexture?: Phaser.GameObjects.RenderTexture,
+            padding?: number,
+        }
     ): Phaser.GameObjects.RenderTexture;
+
+    snapshot(
+        config?: {
+            padding?: number,
+            saveTexture: string,
+        }
+    ): this;
 
     changeOrigin(
         originX: number,
