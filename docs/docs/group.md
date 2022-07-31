@@ -203,7 +203,7 @@ group.clear();
 
 #### Blend mode
 
-- Set [blend mode](gameobject.md#blend-mode)
+- Set [blend mode](blendmode.md)
     ```javascript
     group.setBlendMode(value);
     ```

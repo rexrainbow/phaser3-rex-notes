@@ -3822,6 +3822,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blendmode/" class="md-nav__link">
+        Blend mode
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9092,130 +9106,11 @@ or
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">blendMode</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setBlendMode</span><span class="p">(</span><span class="nx">blendMode</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Under WebGL only the following Blend Modes are available<ul>
-<li><code>'NORMAL'</code>, or <code>Phaser.BlendModes.NORMAL</code>, or <code>0</code> <ul>
-<li>Default setting and draws new shapes on top of the existing canvas content.</li>
-</ul>
-</li>
-<li><code>'ADD'</code>, or <code>Phaser.BlendModes.ADD</code>, or <code>1</code><ul>
-<li>Where both shapes overlap the color is determined by adding color values.</li>
-</ul>
-</li>
-<li><code>'MULTIPLY'</code>, or <code>Phaser.BlendModes.MULTIPLY</code>, or <code>2</code><ul>
-<li>The pixels are of the top layer are multiplied with the corresponding pixel of the bottom layer. A darker picture is the result.</li>
-</ul>
-</li>
-<li><code>'SCREEN'</code>, or <code>Phaser.BlendModes.SCREEN</code>, or <code>3</code><ul>
-<li>The pixels are inverted, multiplied, and inverted again. A lighter picture is the result (opposite of multiply)</li>
-</ul>
-</li>
-<li><code>'ERASE'</code>, or <code>Phaser.BlendModes.ERASE</code>, or <code>17</code><ul>
-<li>Alpha erase blend mode. Only works when rendering to a framebuffer, like a <em>Render Texture</em></li>
+</code></pre></div><ul>
+<li><code>blendMode</code> : <a href="../blendmode/">Blend mode</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Canvas has more available depending on browser support.<ul>
-<li><code>'OVERLAY'</code>, or <code>Phaser.BlendModes.OVERLAY</code>, or <code>4</code><ul>
-<li>A combination of multiply and screen. Dark parts on the base layer become darker, and light parts become lighter.</li>
-</ul>
-</li>
-<li><code>'DARKEN'</code>, or <code>Phaser.BlendModes.DARKEN</code>, or <code>5</code><ul>
-<li>Retains the darkest pixels of both layers.</li>
-</ul>
-</li>
-<li><code>'LIGHTEN'</code>, or <code>Phaser.BlendModes.LIGHTEN</code>, or <code>6</code><ul>
-<li>Retains the lightest pixels of both layers.</li>
-</ul>
-</li>
-<li><code>'COLOR_DODGE'</code>, or <code>Phaser.BlendModes.COLOR_DODGE</code>, or <code>7</code><ul>
-<li>Divides the bottom layer by the inverted top layer.</li>
-</ul>
-</li>
-<li><code>'COLOR_BURN'</code>, or <code>Phaser.BlendModes.COLOR_BURN</code>, or <code>8</code><ul>
-<li>Divides the inverted bottom layer by the top layer, and then inverts the result.</li>
-</ul>
-</li>
-<li><code>'HARD_LIGHT'</code>, or <code>Phaser.BlendModes.HARD_LIGHT</code>, or <code>9</code><ul>
-<li>A combination of multiply and screen like overlay, but with top and bottom layer swapped.</li>
-</ul>
-</li>
-<li><code>'SOFT_LIGHT'</code>, or <code>Phaser.BlendModes.SOFT_LIGHT</code>, or <code>10</code><ul>
-<li>A softer version of hard-light. Pure black or white does not result in pure black or white.</li>
-</ul>
-</li>
-<li><code>'DIFFERENCE'</code>, or <code>Phaser.BlendModes.DIFFERENCE</code>, or <code>11</code><ul>
-<li>Subtracts the bottom layer from the top layer or the other way round to always get a positive value.</li>
-</ul>
-</li>
-<li><code>'EXCLUSION'</code>, or <code>Phaser.BlendModes.EXCLUSION</code>, or <code>12</code><ul>
-<li>Like difference, but with lower contrast.</li>
-</ul>
-</li>
-<li><code>'HUE'</code>, or <code>Phaser.BlendModes.HUE</code>, or <code>13</code><ul>
-<li>Preserves the luma and chroma of the bottom layer, while adopting the hue of the top layer.</li>
-</ul>
-</li>
-<li><code>'SATURATION'</code>, or <code>Phaser.BlendModes.SATURATION</code>, or <code>14</code><ul>
-<li>Preserves the luma and hue of the bottom layer, while adopting the chroma of the top layer.</li>
-</ul>
-</li>
-<li><code>'COLOR'</code>, or <code>Phaser.BlendModes.COLOR</code>, or <code>15</code><ul>
-<li>Preserves the luma of the bottom layer, while adopting the hue and chroma of the top layer.</li>
-</ul>
-</li>
-<li><code>'LUMINOSITY'</code>, or <code>Phaser.BlendModes.LUMINOSITY</code>, or <code>16</code><ul>
-<li>Preserves the hue and chroma of the bottom layer, while adopting the luma of the top layer.</li>
-</ul>
-</li>
-<li><code>'SOURCE_IN'</code>, or <code>Phaser.BlendModes.SOURCE_IN</code>, or <code>18</code><ul>
-<li>The new shape is drawn only where both the new shape and the destination canvas overlap. Everything else is made transparent.</li>
-</ul>
-</li>
-<li><code>'SOURCE_OUT'</code>, or <code>Phaser.BlendModes.SOURCE_OUT</code>, or <code>19</code><ul>
-<li>The new shape is drawn where it doesn't overlap the existing canvas content.</li>
-</ul>
-</li>
-<li><code>'SOURCE_ATOP'</code>, or <code>Phaser.BlendModes.SOURCE_ATOP</code>, or <code>20</code><ul>
-<li>The new shape is only drawn where it overlaps the existing canvas content.</li>
-</ul>
-</li>
-<li><code>'DESTINATION_OVER'</code>, or <code>Phaser.BlendModes.DESTINATION_OVER</code>, or <code>21</code><ul>
-<li>New shapes are drawn behind the existing canvas content.</li>
-</ul>
-</li>
-<li><code>'DESTINATION_IN'</code>, or <code>Phaser.BlendModes.DESTINATION_IN</code>, or <code>22</code><ul>
-<li>The existing canvas content is kept where both the new shape and existing canvas content overlap. Everything else is made transparent.</li>
-</ul>
-</li>
-<li><code>'DESTINATION_OUT'</code>, or <code>Phaser.BlendModes.DESTINATION_OUT</code>, or <code>23</code><ul>
-<li>The existing content is kept where it doesn't overlap the new shape.</li>
-</ul>
-</li>
-<li><code>'DESTINATION_ATOP'</code>, or <code>Phaser.BlendModes.DESTINATION_ATOP</code>, or <code>24</code><ul>
-<li>The existing canvas is only kept where it overlaps the new shape. The new shape is drawn behind the canvas content.</li>
-</ul>
-</li>
-<li><code>'LIGHTER'</code>, or <code>Phaser.BlendModes.LIGHTER</code>, or <code>25</code><ul>
-<li>Where both shapes overlap the color is determined by adding color values.</li>
-</ul>
-</li>
-<li><code>'COPY'</code>, or <code>Phaser.BlendModes.COPY</code>, or <code>26</code><ul>
-<li>Only the new shape is shown.</li>
-</ul>
-</li>
-<li><code>'XOR'</code>, or <code>Phaser.BlendModes.XOR</code>, or <code>27</code><ul>
-<li>Shapes are made transparent where both overlap and drawn normal everywhere else.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
-on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
-reasons try to be careful about the construction of your Scene and the frequency in which blend modes
-are used.</p>
 <h3 id="mask">Mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>
 <p>See <a href="../mask/">Mask</a>.</p>
 <h3 id="post-fx-pipeline">Post-fx pipeline<a class="headerlink" href="#post-fx-pipeline" title="Permanent link">&para;</a></h3>

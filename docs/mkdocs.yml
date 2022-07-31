@@ -181,6 +181,7 @@ nav:
         - Character cache: charactercache.md
     - Display:
         - Mask: mask.md
+        - Blend mode: blendmode.md
 - Input:
     - Input: input.md
     - Touch:

@@ -292,7 +292,7 @@ Phaser.Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);
 Phaser.Actions.SetBlendMode(gameObjects, blendMode, index, direction);
 ```
 
-- `blendMode` : [Blend mode](gameobject.md#blend-mode)
+- `blendMode` : [Blend mode](blendmode.md)
 
 ### Play animation
 

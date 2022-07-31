@@ -460,7 +460,7 @@ emitter.fromJSON(config);
    ```javascript
    emitter.setVisible(visible);  // visible: true/false
    ```
-- [Blend mode](gameobject.md#blend-mode)
+- [Blend mode](blendmode.md)
    ```javascript
    emitter.setBlendMode(mode);
    ```
