@@ -104,7 +104,7 @@ var card = scene.add.rexPerspectiveCard({
 - `front`, `back` : [Perspective image](perspective-image) game object for front and back face.
     - `{key, frame}` : Texture key and frame name, to create [perspective image](perspective-image)
     - `{width, height}` : Width and height, to create [perspective render texture](perspective-rendertexture.md).
-    - [Perspective image](perspective-image)
+    - [Perspective image](perspective-image.md)
     - [Perspective render texture](perspective-rendertexture.md)
 - `face` : Show front or back face.
     - `'front'`, or `0` : Show front face.
