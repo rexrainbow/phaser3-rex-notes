@@ -1984,6 +1984,16 @@
 
   var RenderTexture = {
     snapshot: function snapshot(config) {
+      // Save scale
+      var scaleXSave = this.scaleX;
+      var scaleYSave = this.scaleY;
+      var scale1 = scaleXSave === 1 && scaleYSave === 1;
+
+      if (!scale1) {
+        this.setScale(1);
+      } // Snapshot with scale = 1
+
+
       if (config === undefined) {
         config = {};
       }
@@ -1994,8 +2004,17 @@
       config.originX = this.originX;
       config.originY = this.originY;
       var rt = Snapshot(config);
-      var saveTextureOnlyMode = config.saveTexture && !config.renderTexture;
-      return saveTextureOnlyMode ? this : rt;
+      var isValidRT = !!rt.scene; // Restore scale
+
+      if (!scale1) {
+        this.setScale(scaleXSave, scaleYSave);
+
+        if (isValidRT) {
+          rt.setScale(scaleXSave, scaleYSave);
+        }
+      }
+
+      return isValidRT ? rt : this;
     }
   };
 
