@@ -460,9 +460,9 @@ emitter.fromJSON(config);
    ```javascript
    emitter.setVisible(visible);  // visible: true/false
    ```
-- Blend mode
+- [Blend mode](gameobject.md#blend-mode)
    ```javascript
-   emitter.setBlendMode(mode);  // Phaser.BlendModes
+   emitter.setBlendMode(mode);
    ```
 
 #### Physics

@@ -292,25 +292,7 @@ Phaser.Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);
 Phaser.Actions.SetBlendMode(gameObjects, blendMode, index, direction);
 ```
 
-- `blendMode` :
-    - `Phaser.BlendModes.SKIP_CHECK`
-    - `Phaser.BlendModes.NORMAL`
-    - `Phaser.BlendModes.ADD`
-    - `Phaser.BlendModes.MULTIPLY`
-    - `Phaser.BlendModes.SCREEN`
-    - `Phaser.BlendModes.OVERLAY`
-    - `Phaser.BlendModes.DARKEN`
-    - `Phaser.BlendModes.LIGHTEN`
-    - `Phaser.BlendModes.COLOR_DODGE`
-    - `Phaser.BlendModes.COLOR_BURN`
-    - `Phaser.BlendModes.HARD_LIGHT`
-    - `Phaser.BlendModes.SOFT_LIGHT`
-    - `Phaser.BlendModes.DIFFERENCE`
-    - `Phaser.BlendModes.EXCLUSION`
-    - `Phaser.BlendModes.HUE`
-    - `Phaser.BlendModes.SATURATION`
-    - `Phaser.BlendModes.COLOR`
-    - `Phaser.BlendModes.LUMINOSITY`
+- `blendMode` : [Blend mode](gameobject.md#blend-mode)
 
 ### Play animation
 

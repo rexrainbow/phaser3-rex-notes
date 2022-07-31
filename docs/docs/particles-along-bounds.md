@@ -117,7 +117,7 @@ var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObj
             quantity: 1
         }
         ```
-- `blendMode` : Blend mode (Phaser.BlendModes) of particles. Default value is `ADD`.
+- `blendMode` : [Blend mode](gameobject.md#blend-mode) of particles. Default value is `ADD`.
 - `lifespan` : Lifespan of particle.
 - `stepRate` : Step length between each particle's initial position along bounds of game object.
 - `spread` : Moving speed of particle.
