@@ -13,6 +13,8 @@ var GetBoundsOfGameObjects = function (gameObjects, out) {
         out = GlobRect;
     }
 
+    out.setTo(0, 0, 0, 0);
+
     var gameObject;
     var firstClone = true;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {

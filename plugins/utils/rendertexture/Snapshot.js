@@ -11,13 +11,6 @@ var Snapshot = function (config) {
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-    if (gameObjects.length === 0) {
-        if (renderTexture) {
-            renderTexture.setSize(1, 1).clear();
-        }
-        return renderTexture;
-    }
-
     var x = GetValue(config, 'x', undefined);
     var y = GetValue(config, 'y', undefined);
     var width = GetValue(config, 'width', undefined);
@@ -55,15 +48,16 @@ var Snapshot = function (config) {
     width += (padding * 2);
     height += (padding * 2);
 
+    var tempRT = !renderTexture;
     // Configurate render texture
-    if (!renderTexture) {
+    if (tempRT) {
         var scene = gameObjects[0].scene;
-        renderTexture = scene.add.renderTexture(x, y, width, height);
-    } else {
-        renderTexture.setPosition(x, y)
-        if ((renderTexture.width !== width) || (renderTexture.height !== height)) {
-            renderTexture.setSize(width, height);
-        }
+        renderTexture = scene.add.renderTexture(0, 0, width, height);
+    }
+
+    renderTexture.setPosition(x, y);
+    if ((renderTexture.width !== width) || (renderTexture.height !== height)) {
+        renderTexture.setSize(width, height);
     }
     renderTexture.setOrigin(originX, originY);
     renderTexture.camera.setScroll(scrollX, scrollY);
@@ -71,6 +65,16 @@ var Snapshot = function (config) {
     // Draw gameObjects
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
     renderTexture.draw(gameObjects);
+
+    // Save render result to texture    
+    var saveTexture = config.saveTexture;
+    if (saveTexture) {
+        renderTexture.saveTexture(saveTexture);
+    }
+    // Destroy render texture if tempRT and saveTexture
+    if (tempRT && saveTexture) {
+        renderTexture.destroy();
+    }
 
     return renderTexture;
 }

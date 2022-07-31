@@ -741,6 +741,7 @@
       out = GlobRect;
     }
 
+    out.setTo(0, 0, 0, 0);
     var gameObject;
     var firstClone = true;
 
@@ -848,15 +849,6 @@
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-
-    if (gameObjects.length === 0) {
-      if (renderTexture) {
-        renderTexture.setSize(1, 1).clear();
-      }
-
-      return renderTexture;
-    }
-
     var x = GetValue$4(config, 'x', undefined);
     var y = GetValue$4(config, 'y', undefined);
     var width = GetValue$4(config, 'width', undefined);
@@ -895,24 +887,37 @@
     scrollX -= padding;
     scrollY -= padding;
     width += padding * 2;
-    height += padding * 2; // Configurate render texture
+    height += padding * 2;
+    var tempRT = !renderTexture; // Configurate render texture
 
-    if (!renderTexture) {
+    if (tempRT) {
       var scene = gameObjects[0].scene;
-      renderTexture = scene.add.renderTexture(x, y, width, height);
-    } else {
-      renderTexture.setPosition(x, y);
+      renderTexture = scene.add.renderTexture(0, 0, width, height);
+    }
 
-      if (renderTexture.width !== width || renderTexture.height !== height) {
-        renderTexture.setSize(width, height);
-      }
+    renderTexture.setPosition(x, y);
+
+    if (renderTexture.width !== width || renderTexture.height !== height) {
+      renderTexture.setSize(width, height);
     }
 
     renderTexture.setOrigin(originX, originY);
     renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
 
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-    renderTexture.draw(gameObjects);
+    renderTexture.draw(gameObjects); // Save render result to texture    
+
+    var saveTexture = config.saveTexture;
+
+    if (saveTexture) {
+      renderTexture.saveTexture(saveTexture);
+    } // Destroy render texture if tempRT and saveTexture
+
+
+    if (tempRT && saveTexture) {
+      renderTexture.destroy();
+    }
+
     return renderTexture;
   };
 

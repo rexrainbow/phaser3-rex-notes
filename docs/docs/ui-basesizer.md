@@ -1178,20 +1178,26 @@ Apply post-fx pipeline on [layer of sizer](ui-basesizer.md#layer).
 
 ### Snapshot
 
-Draw all visible children on a [render-texture](rendertexture.md).
-
-```javascript
-var renderTexture = container.snapshot({
-    renderTexture: undefined,
-    padding: 0
-});
-```
-
-- `renderTexture` : Draw on this [render-texture](rendertexture.md)
-    - `undefined` : Create a new [render-texture](rendertexture.md)
-- `padding` : 
-    - `0` : No extra padding space. Default value.
-    - A number : Add extra padding space around this render-texture.
+- Draw all visible children on a [render-texture](rendertexture.md).
+    ```javascript
+    var renderTexture = container.snapshot({
+        renderTexture: undefined,
+        padding: 0
+    });
+    ```
+    - `renderTexture` : Draw on this [render-texture](rendertexture.md)
+        - `undefined` : Create a new [render-texture](rendertexture.md)
+    - `padding` : 
+        - `0` : No extra padding space. Default value.
+        - A number : Add extra padding space around this render-texture.
+- Draw all visible children on a texture
+    ```javascript
+    container.snapshot({
+        padding: 0,
+        saveTexture: textureKey
+    });
+    ```
+    - `saveTexture` : [Save render result to texture manager](rendertexture.md#save-texture).
 
 ### Events
 

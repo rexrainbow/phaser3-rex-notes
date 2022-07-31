@@ -11,7 +11,9 @@ export default {
         config.y = this.y;
         config.originX = this.originX;
         config.originY = this.originY;
+        var rt = Snapshot(config);
 
-        return Snapshot(config);
+        var saveTextureOnlyMode = config.saveTexture && !config.renderTexture;
+        return (saveTextureOnlyMode) ? this : rt;
     }
 }
