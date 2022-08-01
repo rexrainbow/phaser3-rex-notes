@@ -23,7 +23,11 @@ class Demo extends Phaser.Scene {
         var maskSource = this.add.image(400, 300, 'dot').setDisplaySize(400, 200).setVisible(false);
         var mask = maskSource.createBitmapMask();
         layer.setMask(mask);
-
+        
+        this.time.delayedCall(1000, function(){
+            // obj1.setFillStyle(0xffffff, 0.1);
+            obj1.alpha = 0.1
+        });
     }
 
     update() { }
