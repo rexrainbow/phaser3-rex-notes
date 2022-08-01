@@ -46,7 +46,6 @@ var CreateLabel = function (scene) {
     return label;
 }
 
-var Cubic = Phaser.Math.Easing.Cubic.Out;
 var Linear = Phaser.Math.Linear;
 var Clamp = Phaser.Math.Clamp;
 var CreateSlash = function (scene, slashLineWidth, slashSlope) {
@@ -64,7 +63,7 @@ var CreateSlash = function (scene, slashLineWidth, slashSlope) {
                 return;
             }
 
-            var alphaRatio = Cubic(1 - this.value)
+            var alphaRatio = 1 - this.value;
             var strokeAlpha = this.strokeAlpha * alphaRatio;
             var fillAlpha = this.fillAlpha * alphaRatio;
             slash
