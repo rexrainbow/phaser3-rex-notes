@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import GrayScalePipelinePlugin from '../../plugins/grayscalepipeline-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -66,7 +65,7 @@ var CreateSlash = function (scene, slashLineWidth, slashSlope) {
             }
 
             var alphaRatio = Cubic(1 - this.value)
-            var strokeAlpha = this.strokeAlpha * alphaRatio
+            var strokeAlpha = this.strokeAlpha * alphaRatio;
             var fillAlpha = this.fillAlpha * alphaRatio;
             slash
                 .lineStyle(this.lineWidth, this.strokeColor, strokeAlpha)
@@ -112,11 +111,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexGrayScalePipeline',
-            plugin: GrayScalePipelinePlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,
