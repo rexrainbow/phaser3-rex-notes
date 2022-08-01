@@ -1368,6 +1368,7 @@
         this.delay = GetValue$4(o, 'delay', 0);
         this.repeat = GetValue$4(o, 'repeat', 0);
         this.repeatCounter = GetValue$4(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$4(o, 'repeatDelay', 0);
         this.duration = GetValue$4(o, 'duration', 0);
         this.nowTime = GetValue$4(o, 'nowTime', 0);
         this.justRestart = GetValue$4(o, 'justRestart', false);
@@ -1381,6 +1382,7 @@
           delay: this.delay,
           repeat: this.repeat,
           repeatCounter: this.repeatCounter,
+          repeatDelay: this.repeatDelay,
           duration: this.duration,
           nowTime: this.nowTime,
           justRestart: this.justRestart
@@ -1424,6 +1426,12 @@
         return this;
       }
     }, {
+      key: "setRepeatDelay",
+      value: function setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay;
+        return this;
+      }
+    }, {
       key: "start",
       value: function start() {
         this.nowTime = this.delay > 0 ? -this.delay : 0;
@@ -1445,7 +1453,6 @@
         }
 
         this.nowTime += delta * this.timeScale;
-        this.state = this.nowTime >= 0 ? COUNTDOWN : DELAY;
         this.justRestart = false;
 
         if (this.nowTime >= this.duration) {
@@ -1453,10 +1460,17 @@
             this.repeatCounter++;
             this.justRestart = true;
             this.nowTime -= this.duration;
+
+            if (this.repeatDelay > 0) {
+              this.nowTime -= this.repeatDelay;
+              this.state = REPEATDELAY;
+            }
           } else {
             this.nowTime = this.duration;
             this.state = DONE;
           }
+        } else if (this.nowTime >= 0) {
+          this.state = COUNTDOWN;
         }
       }
     }, {
@@ -1467,6 +1481,7 @@
         switch (this.state) {
           case IDLE:
           case DELAY:
+          case REPEATDELAY:
             t = 0;
             break;
 
@@ -1545,6 +1560,7 @@
   var IDLE = 0;
   var DELAY = 1;
   var COUNTDOWN = 2;
+  var REPEATDELAY = 3;
   var DONE = -1;
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
@@ -1659,13 +1675,28 @@
     }, {
       key: "setDelay",
       value: function setDelay(time) {
-        this.delay = time;
+        this.delay = time; // Assign `this.timer.setRepeat(repeat)` manually
+
         return this;
       }
     }, {
       key: "setDuration",
       value: function setDuration(time) {
         this.duration = time;
+        return this;
+      }
+    }, {
+      key: "setRepeat",
+      value: function setRepeat(repeat) {
+        this.repeat = repeat; // Assign `this.timer.setRepeat(repeat)` manually
+
+        return this;
+      }
+    }, {
+      key: "setRepeatDelay",
+      value: function setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay; // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
+
         return this;
       }
     }, {
@@ -1677,12 +1708,6 @@
 
         this.ease = ease;
         this.easeFn = GetEaseFunction(ease);
-        return this;
-      }
-    }, {
-      key: "setRepeat",
-      value: function setRepeat(repeat) {
-        this.repeat = repeat;
         return this;
       } // Override
 

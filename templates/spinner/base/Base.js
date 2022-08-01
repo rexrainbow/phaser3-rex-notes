@@ -14,6 +14,8 @@ class Base extends BaseShapes {
 
         this.setDuration(GetValue(config, 'duration', 1000));
         this.setEase(GetValue(config, 'ease', 'Linear'));
+        this.setDelay(GetValue(config, 'delay', 0));
+        this.setRepeatDelay(GetValue(config, 'repeatDelay', 0));
         var color = GetValue(config, 'color', 0xffffff);
         var start = GetValue(config, 'start', true);
 
@@ -79,6 +81,16 @@ class Base extends BaseShapes {
 
     setDuration(duration) {
         this.duration = duration;
+        return this;
+    }
+
+    setDelay(delay) {
+        this.delay = delay;
+        return this;
+    }
+
+    setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay;
         return this;
     }
 

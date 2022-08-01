@@ -44,18 +44,24 @@ class EaseValueTaskBase extends TickTask {
         return this;
     }
 
+    setRepeat(repeat) {
+        this.repeat = repeat;
+        // Assign `this.timer.setRepeat(repeat)` manually
+        return this;
+    }
+
+    setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay;
+        // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
+        return this;
+    }
+
     setEase(ease) {
         if (ease === undefined) {
             ease = 'Linear';
         }
         this.ease = ease;
         this.easeFn = GetEaseFunction(ease);
-        return this;
-    }
-
-    setRepeat(repeat) {
-        this.repeat = repeat;
-        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
     }
 

@@ -124,7 +124,9 @@ var spinner = scene.rexSpinner.add.audio({
   // color: 0xffffff,
 
   // duration: 1000,
-  // start: true
+  // start: true,
+  // delay: 0,
+  // repeatDelay: 0,
 });
 ```
 
@@ -134,6 +136,8 @@ var spinner = scene.rexSpinner.add.audio({
 - `duration` : Duration of animation.
 - `start` : Start animation when object created.
    - `false` : Don't play animation at beginning.
+- `delay` : Delay time in ms before running.
+- `repeatDelay` : Delay time between 2 periods.
 
 ### Play animation
 

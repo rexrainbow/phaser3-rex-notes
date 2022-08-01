@@ -12,6 +12,7 @@ class Timer {
         this.delay = GetValue(o, 'delay', 0);
         this.repeat = GetValue(o, 'repeat', 0);
         this.repeatCounter = GetValue(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue(o, 'repeatDelay', 0);
         this.duration = GetValue(o, 'duration', 0);
         this.nowTime = GetValue(o, 'nowTime', 0);
         this.justRestart = GetValue(o, 'justRestart', false);
@@ -24,6 +25,7 @@ class Timer {
             delay: this.delay,
             repeat: this.repeat,
             repeatCounter: this.repeatCounter,
+            repeatDelay: this.repeatDelay,
             duration: this.duration,
             nowTime: this.nowTime,
             justRestart: this.justRestart,
@@ -62,6 +64,11 @@ class Timer {
         return this;
     }
 
+    setRepeatDelay(repeatDelay) {
+        this.repeatDelay = repeatDelay;
+        return this;
+    }
+
     start() {
         this.nowTime = (this.delay > 0) ? -this.delay : 0;
         this.state = (this.nowTime >= 0) ? COUNTDOWN : DELAY;
@@ -82,18 +89,22 @@ class Timer {
         }
 
         this.nowTime += (delta * this.timeScale);
-        this.state = (this.nowTime >= 0) ? COUNTDOWN : DELAY;
-
         this.justRestart = false;
         if (this.nowTime >= this.duration) {
             if ((this.repeat === -1) || (this.repeatCounter < this.repeat)) {
                 this.repeatCounter++;
                 this.justRestart = true;
                 this.nowTime -= this.duration;
+                if (this.repeatDelay > 0) {
+                    this.nowTime -= this.repeatDelay;
+                    this.state = REPEATDELAY;
+                }
             } else {
                 this.nowTime = this.duration;
                 this.state = DONE;
             }
+        } else if (this.nowTime >= 0) {
+            this.state = COUNTDOWN;
         }
     }
 
@@ -102,6 +113,7 @@ class Timer {
         switch (this.state) {
             case IDLE:
             case DELAY:
+            case REPEATDELAY:
                 t = 0;
                 break;
 
@@ -169,6 +181,7 @@ class Timer {
 const IDLE = 0;
 const DELAY = 1;
 const COUNTDOWN = 2;
+const REPEATDELAY = 3;
 const DONE = -1;
 
 export default Timer;

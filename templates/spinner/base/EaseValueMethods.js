@@ -22,6 +22,9 @@ var Start = function (duration) {
         duration: this.duration,
         ease: this.ease,
         repeat: -1,  // -1: infinity
+
+        delay: this.delay,
+        repeatDelay: this.repeatDelay
     });
 
     this.setDirty();
