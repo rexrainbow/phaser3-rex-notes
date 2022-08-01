@@ -196,6 +196,7 @@ var customProgress = scene.add.rexCustomProgress({
         // var strokeColor = this.strokeColor;
         // var strokeAlpha = this.strokeAlpha;
         // ...
+        // var value = this.value;
     }
     ```
     - Shape instances : Change properties of shape instances.
@@ -204,6 +205,7 @@ var customProgress = scene.add.rexCustomProgress({
     - Is size changed : `this.isSizeChanged`
     - Fill style : `this.fillColor`, `this.fillAlpha`
     - Stroke style : `this.strokeColor`, `this.strokeAlpha`, `this.lineWidth`
+    - Current progress value : `this.value`
 - `value` : `0` ~ `1`, progress value. Default is `0`.
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
