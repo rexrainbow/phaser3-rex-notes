@@ -26,8 +26,13 @@ class EaseValueTask extends EaseValueTaskBase {
 
         this.setEase(GetValue(config, 'ease', this.ease));
         this.setDuration(GetValue(config, 'duration', this.duration));
+        this.setRepeat(GetValue(config, 'repeat', 0));
+        this.setDelay(GetValue(config, 'delay', 0));
 
-        this.timer.setDuration(this.duration);
+        this.timer
+            .setDuration(this.duration)
+            .setRepeat(this.repeat)
+            .setDelay(this.delay)
 
         target[this.propertyKey] = this.fromValue;
 

@@ -1,5 +1,5 @@
 import BaseShapes from '../../../plugins/gameobjects/shape/shapes/BaseShapes.js';
-import TweenMethods from './TweenMethods.js';
+import EaseValueMethods from './EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -94,7 +94,7 @@ class Base extends BaseShapes {
 
 Object.assign(
     Base.prototype,
-    TweenMethods
+    EaseValueMethods
 );
 
 export default Base;

@@ -35,6 +35,7 @@ class EaseValueTaskBase extends TickTask {
 
     setDelay(time) {
         this.delay = time;
+        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
     }
 
@@ -54,6 +55,7 @@ class EaseValueTaskBase extends TickTask {
 
     setRepeat(repeat) {
         this.repeat = repeat;
+        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
     }
 
