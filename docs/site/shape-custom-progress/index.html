@@ -8663,6 +8663,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/yLKVEjM">Round rectangle</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/RwModwb">Orb</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/BaZKBpj">Trapezoid Mask</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/QWmaozV">Slash effect with rexUI</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/custom-progress">Sample code</a></p>
@@ -8904,15 +8905,6 @@
 </ul>
 <h3 id="ease-progress-value">Ease progress value<a class="headerlink" href="#ease-progress-value" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Ease value to
-    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// value: min ~ max</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
-</code></pre></div></li>
-<li>Stop ease
-    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">stopEaseValue</span><span class="p">();</span>
-</code></pre></div></li>
 <li>Set ease duration
     <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 </code></pre></div></li>
@@ -8922,6 +8914,19 @@
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
 </ul>
 </li>
+<li>Ease value to
+    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Ease value repeat
+    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>  <span class="c1">// from, to: 0 ~ 1</span>
+<span class="c1">// customProgress.easeValueTo(from, to, repeat, repeatDelay);</span>
+</code></pre></div></li>
+<li>Stop ease
+    <div class="highlight"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">stopEaseValue</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h4 id="refresh">Refresh<a class="headerlink" href="#refresh" title="Permanent link">&para;</a></h4>
 <p>Redraw shapes when</p>
