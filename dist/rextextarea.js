@@ -10653,12 +10653,40 @@
     return this;
   };
 
+  var EaseValueRepeat = function EaseValueRepeat(from, to, repeat, repeatDelay) {
+    if (repeat === undefined) {
+      repeat = -1;
+    }
+
+    if (repeatDelay === undefined) {
+      repeatDelay = 0;
+    }
+
+    if (this.easeValueTask === undefined) {
+      this.easeValueTask = new EaseValueTask(this, {
+        eventEmitter: null
+      });
+    }
+
+    this.easeValueTask.restart({
+      key: this.easeValuePropName,
+      from: from,
+      to: to,
+      duration: this.easeValueDuration,
+      ease: this.easeFunction,
+      repeat: repeat,
+      repeatDelay: repeatDelay
+    });
+    return this;
+  };
+
   var EaseValueMethods = {
     setEaseValuePropName: SetEaseValuePropName,
     setEaseValueDuration: SetEaseValueDuration,
     setEaseValueFunction: SetEaseValueFunction,
     stopEaseValue: StopEaseValue,
-    easeValueTo: EaseValueTo
+    easeValueTo: EaseValueTo,
+    easeValueRepeat: EaseValueRepeat
   };
 
   var GetValue$9 = Phaser.Utils.Objects.GetValue;

@@ -273,18 +273,6 @@ See [Shape class](shape-custom-shapes.md#recreate-shapes)
 
 ### Ease progress value
 
-- Ease value to
-    ```javascript
-    customProgress.easeValueTo(value, min, max);  // value: min ~ max
-    ```
-    or
-    ```javascript
-    customProgress.easeValueTo(value);  // value: 0 ~ 1
-    ```
-- Stop ease
-    ```javascript
-    customProgress.stopEaseValue();
-    ```
 - Set ease duration
     ```javascript
     customProgress.setEaseValueDuration(duration);
@@ -294,6 +282,23 @@ See [Shape class](shape-custom-shapes.md#recreate-shapes)
     customProgress.setEaseValueFunction(ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
+- Ease value to
+    ```javascript
+    customProgress.easeValueTo(value, min, max);  // value: min ~ max
+    ```
+    or
+    ```javascript
+    customProgress.easeValueTo(value);  // value: 0 ~ 1
+    ```
+- Ease value repeat
+    ```javascript
+    customProgress.easeValueTo(from, to);  // from, to: 0 ~ 1
+    // customProgress.easeValueTo(from, to, repeat, repeatDelay);
+    ```
+- Stop ease
+    ```javascript
+    customProgress.stopEaseValue();
+    ```
 
 #### Refresh
 
