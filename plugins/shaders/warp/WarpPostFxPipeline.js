@@ -13,31 +13,27 @@ class WarpPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this.pixelWidth = 20;  // width of pixel wo resolution
-        this.pixelHeight = 20; // height of pixel wo resolution
+        this.frequenceX = 10;
+        this.frequenceY = 10;
         this.amplitudeX = 10;
         this.amplitudeY = 10;
-        this.frequenceX = 1;
-        this.frequenceY = 1;
         this.progress = 0;
         this.progressFactorX = 1;
         this.progressFactorY = 1;
     }
 
     resetFromJSON(o) {
-        this.setPixelSize(GetValue(o, 'pixelWidth', 20), GetValue(o, 'pixelHeight', 20));
-        this.setAmplitude(GetValue(o, 'amplitudeX', 10), GetValue(o, 'amplitudeY', 10));
-        this.setFrequence(GetValue(o, 'frequenceX', 1), GetValue(o, 'frequenceY', 1));
+        this.setFrequence(GetValue(o, 'frequenceX', 10), GetValue(o, 'frequenceY', 10));
+        this.setAmplitude(GetValue(o, 'amplitudeX', 10), GetValue(o, 'amplitudeY', 10));        
         this.setProgress(GetValue(o, 'progress', 0));
         this.setProgressFactor(GetValue(o, 'progressFactorX', 1), GetValue(o, 'progressFactorY', 1));
         return this;
     }
 
     onPreRender() {
-        this.set2f('pixelSize', this.pixelWidth, this.pixelHeight);
-        this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
         this.set2f('frequence', this.frequenceX, this.frequenceY);
-
+        this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
+        
         var progress = this.progress * PI2;
         var progressX = progress * this.progressFactorX;
         var progressY = progress * this.progressFactorY;
@@ -46,24 +42,24 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
-    // pixelWidth
-    setPixelWidth(value) {
-        this.pixelWidth = value;
+    // frequenceX
+    setFrequenceX(value) {
+        this.frequenceX = value;
         return this;
     }
 
-    // pixelHeight
-    setPixelHeight(value) {
-        this.pixelHeight = value;
+    // frequenceY
+    setFrequenceY(value) {
+        this.frequenceY = value;
         return this;
     }
 
-    setPixelSize(width, height) {
-        if (height === undefined) {
-            height = width;
+    setFrequence(x, y) {
+        if (y === undefined) {
+            y = x;
         }
-        this.pixelWidth = width;
-        this.pixelHeight = height;
+        this.frequenceX = x;
+        this.frequenceY = y;
         return this;
     }
 
@@ -85,27 +81,6 @@ class WarpPostFxPipeline extends PostFXPipeline {
         }
         this.amplitudeX = x;
         this.amplitudeY = y;
-        return this;
-    }
-
-    // frequenceX
-    setFrequenceX(value) {
-        this.frequenceX = value;
-        return this;
-    }
-
-    // frequenceY
-    setFrequenceY(value) {
-        this.frequenceY = value;
-        return this;
-    }
-
-    setFrequence(x, y) {
-        if (y === undefined) {
-            y = x;
-        }
-        this.frequenceX = x;
-        this.frequenceY = y;
         return this;
     }
 
