@@ -293,8 +293,8 @@ See [Shape class](shape-custom-shapes.md#recreate-shapes)
     ```
 - Ease value repeat
     ```javascript
-    customProgress.easeValueTo(from, to);  // from, to: 0 ~ 1
-    // customProgress.easeValueTo(from, to, repeat, repeatDelay);
+    customProgress.easeValueRepeat(from, to);  // from, to: 0 ~ 1
+    // customProgress.easeValueRepeat(from, to, repeat, repeatDelay);
     ```
 - Stop ease
     ```javascript
