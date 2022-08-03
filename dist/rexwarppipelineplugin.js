@@ -123,7 +123,7 @@
   }
 
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequence;\nuniform vec2 progress;\n\n\nvoid main (void) {\n  vec2 amp = amplitude/texSize;  \n  vec2 angle = (outTexCoord * frequence) + progress;\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * amp) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 radius;\nuniform vec2 pixelSize;\nuniform vec2 progress;\n\n\nvoid main (void) {\n  vec2 dxy = pixelSize/texSize;\n  vec2 r = radius/texSize;\n  vec2 angle = (outTexCoord / dxy) + progress;\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
 
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -145,10 +145,10 @@
         renderTarget: true,
         fragShader: frag
       });
-      _this.frequenceX = 10;
-      _this.frequenceY = 10;
-      _this.amplitudeX = 10;
-      _this.amplitudeY = 10;
+      _this.pixelWidth = 10;
+      _this.pixelHeight = 10;
+      _this.radiusX = 10;
+      _this.radiusY = 10;
       _this.progress = 0;
       _this.progressFactorX = 1;
       _this.progressFactorY = 1;
@@ -158,8 +158,8 @@
     _createClass(WarpPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setFrequence(GetValue(o, 'frequenceX', 10), GetValue(o, 'frequenceY', 10));
-        this.setAmplitude(GetValue(o, 'amplitudeX', 10), GetValue(o, 'amplitudeY', 10));
+        this.setPixelSize(GetValue(o, 'pixelWidth', 10), GetValue(o, 'pixelHeight', 10));
+        this.setRadius(GetValue(o, 'radiusX', 10), GetValue(o, 'radiusY', 10));
         this.setProgress(GetValue(o, 'progress', 0));
         this.setProgressFactor(GetValue(o, 'progressFactorX', 1), GetValue(o, 'progressFactorY', 1));
         return this;
@@ -167,62 +167,62 @@
     }, {
       key: "onPreRender",
       value: function onPreRender() {
-        this.set2f('frequence', this.frequenceX, this.frequenceY);
-        this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
+        this.set2f('pixelSize', this.pixelWidth, this.pixelHeight);
+        this.set2f('radius', this.radiusX, this.radiusY);
         var progress = this.progress * PI2;
         var progressX = progress * this.progressFactorX;
         var progressY = progress * this.progressFactorY;
         this.set2f('progress', progressX, progressY);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
-      } // frequenceX
+      } // pixelWidth
 
     }, {
-      key: "setFrequenceX",
-      value: function setFrequenceX(value) {
-        this.frequenceX = value;
+      key: "setPixelWidth",
+      value: function setPixelWidth(value) {
+        this.pixelWidth = value;
         return this;
-      } // frequenceY
+      } // pixelHeight
 
     }, {
-      key: "setFrequenceY",
-      value: function setFrequenceY(value) {
-        this.frequenceY = value;
+      key: "setPixelHeight",
+      value: function setPixelHeight(value) {
+        this.pixelHeight = value;
         return this;
       }
     }, {
-      key: "setFrequence",
-      value: function setFrequence(x, y) {
+      key: "setPixelSize",
+      value: function setPixelSize(width, height) {
+        if (height === undefined) {
+          height = width;
+        }
+
+        this.pixelWidth = width;
+        this.pixelHeight = height;
+        return this;
+      } // radiusX
+
+    }, {
+      key: "setRadiusX",
+      value: function setRadiusX(value) {
+        this.radiusX = value;
+        return this;
+      } // radiusY
+
+    }, {
+      key: "setRadiusY",
+      value: function setRadiusY(value) {
+        this.radiusY = value;
+        return this;
+      }
+    }, {
+      key: "setRadius",
+      value: function setRadius(x, y) {
         if (y === undefined) {
           y = x;
         }
 
-        this.frequenceX = x;
-        this.frequenceY = y;
-        return this;
-      } // amplitudeX
-
-    }, {
-      key: "setAmplitudeX",
-      value: function setAmplitudeX(value) {
-        this.amplitudeX = value;
-        return this;
-      } // amplitudeY
-
-    }, {
-      key: "setAmplitudeY",
-      value: function setAmplitudeY(value) {
-        this.amplitudeY = value;
-        return this;
-      }
-    }, {
-      key: "setAmplitude",
-      value: function setAmplitude(x, y) {
-        if (y === undefined) {
-          y = x;
-        }
-
-        this.amplitudeX = x;
-        this.amplitudeY = y;
+        this.radiusX = x;
+        this.radiusY = y;
         return this;
       } // progress
 

@@ -13,26 +13,26 @@ class WarpPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this.frequenceX = 10;
-        this.frequenceY = 10;
-        this.amplitudeX = 10;
-        this.amplitudeY = 10;
+        this.pixelWidth = 10;
+        this.pixelHeight = 10;
+        this.radiusX = 10;
+        this.radiusY = 10;
         this.progress = 0;
         this.progressFactorX = 1;
         this.progressFactorY = 1;
     }
 
     resetFromJSON(o) {
-        this.setFrequence(GetValue(o, 'frequenceX', 10), GetValue(o, 'frequenceY', 10));
-        this.setAmplitude(GetValue(o, 'amplitudeX', 10), GetValue(o, 'amplitudeY', 10));        
+        this.setPixelSize(GetValue(o, 'pixelWidth', 10), GetValue(o, 'pixelHeight', 10));
+        this.setRadius(GetValue(o, 'radiusX', 10), GetValue(o, 'radiusY', 10));        
         this.setProgress(GetValue(o, 'progress', 0));
         this.setProgressFactor(GetValue(o, 'progressFactorX', 1), GetValue(o, 'progressFactorY', 1));
         return this;
     }
 
     onPreRender() {
-        this.set2f('frequence', this.frequenceX, this.frequenceY);
-        this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
+        this.set2f('pixelSize', this.pixelWidth, this.pixelHeight);
+        this.set2f('radius', this.radiusX, this.radiusY);
         
         var progress = this.progress * PI2;
         var progressX = progress * this.progressFactorX;
@@ -42,45 +42,45 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
-    // frequenceX
-    setFrequenceX(value) {
-        this.frequenceX = value;
+    // pixelWidth
+    setPixelWidth(value) {
+        this.pixelWidth = value;
         return this;
     }
 
-    // frequenceY
-    setFrequenceY(value) {
-        this.frequenceY = value;
+    // pixelHeight
+    setPixelHeight(value) {
+        this.pixelHeight = value;
         return this;
     }
 
-    setFrequence(x, y) {
+    setPixelSize(width, height) {
+        if (height === undefined) {
+            height = width;
+        }
+        this.pixelWidth = width;
+        this.pixelHeight = height;
+        return this;
+    }
+    
+    // radiusX
+    setRadiusX(value) {
+        this.radiusX = value;
+        return this;
+    }
+
+    // radiusY
+    setRadiusY(value) {
+        this.radiusY = value;
+        return this;
+    }
+
+    setRadius(x, y) {
         if (y === undefined) {
             y = x;
         }
-        this.frequenceX = x;
-        this.frequenceY = y;
-        return this;
-    }
-
-    // amplitudeX
-    setAmplitudeX(value) {
-        this.amplitudeX = value;
-        return this;
-    }
-
-    // amplitudeY
-    setAmplitudeY(value) {
-        this.amplitudeY = value;
-        return this;
-    }
-
-    setAmplitude(x, y) {
-        if (y === undefined) {
-            y = x;
-        }
-        this.amplitudeX = x;
-        this.amplitudeY = y;
+        this.radiusX = x;
+        this.radiusY = y;
         return this;
     }
 
