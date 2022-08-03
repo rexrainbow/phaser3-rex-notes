@@ -366,6 +366,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Text player](textplayer.md): Typing characters on [dynamic text](textplayer.md), waiting click or key enter, play sound effect or backgroun music.
+    ```javascript
+    var txt = scene.rexUI.add.textPlayer(config);
+    ```
+    or
+    ```javascript
+    class MyText extends RexPlugins.UI.TextPlayer {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 #### Behaviors of text
 
