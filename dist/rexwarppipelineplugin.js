@@ -123,7 +123,7 @@
   }
 
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequence;\nuniform vec2 progress;\n\n\nvoid main (void) {\n  vec2 amp = amplitude/texSize;  \n  vec2 tc = vec2(\n    cos((outTexCoord.x * frequence.x ) + progress.x) * amp.x,\n    sin((outTexCoord.y * frequence.y ) + progress.y) * amp.y\n  ) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequence;\nuniform vec2 progress;\n\n\nvoid main (void) {\n  vec2 amp = amplitude/texSize;  \n  vec2 angle = (outTexCoord * frequence) + progress;\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * amp) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
 
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;

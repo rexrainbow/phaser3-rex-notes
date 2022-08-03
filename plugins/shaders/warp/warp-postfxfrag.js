@@ -21,10 +21,8 @@ uniform vec2 progress;
 
 void main (void) {
   vec2 amp = amplitude/texSize;  
-  vec2 tc = vec2(
-    cos((outTexCoord.x * frequence.x ) + progress.x) * amp.x,
-    sin((outTexCoord.y * frequence.y ) + progress.y) * amp.y
-  ) + outTexCoord;
+  vec2 angle = (outTexCoord * frequence) + progress;
+  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * amp) + outTexCoord;
   gl_FragColor = texture2D(uMainSampler, tc);
 }
 `;
