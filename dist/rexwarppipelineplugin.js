@@ -149,19 +149,20 @@
       _this.pixelHeight = 10;
       _this.radiusX = 10;
       _this.radiusY = 10;
-      _this.progress = 0;
-      _this.progressFactorX = 1;
-      _this.progressFactorY = 1;
+      _this.progressX = 0;
+      _this.progressY = 0;
       return _this;
     }
 
     _createClass(WarpPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.setPixelSize(GetValue(o, 'pixelWidth', 10), GetValue(o, 'pixelHeight', 10));
-        this.setRadius(GetValue(o, 'radiusX', 10), GetValue(o, 'radiusY', 10));
-        this.setProgress(GetValue(o, 'progress', 0));
-        this.setProgressFactor(GetValue(o, 'progressFactorX', 1), GetValue(o, 'progressFactorY', 1));
+        var pixelSize = GetValue(o, 'pixelSize', 10);
+        this.setPixelSize(GetValue(o, 'pixelWidth', pixelSize), GetValue(o, 'pixelHeight', pixelSize));
+        var radius = GetValue(o, 'radius', 10);
+        this.setRadius(GetValue(o, 'radiusX', radius), GetValue(o, 'radiusY', radius));
+        var progress = GetValue(o, 'progress', 0);
+        this.setProgress(GetValue(o, 'progressX', progress), GetValue(o, 'progressY', progress));
         return this;
       }
     }, {
@@ -169,10 +170,7 @@
       value: function onPreRender() {
         this.set2f('pixelSize', this.pixelWidth, this.pixelHeight);
         this.set2f('radius', this.radiusX, this.radiusY);
-        var progress = this.progress * PI2;
-        var progressX = progress * this.progressFactorX;
-        var progressY = progress * this.progressFactorY;
-        this.set2f('progress', progressX, progressY);
+        this.set2f('progress', this.progressX * PI2, this.progressY * PI2);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
       } // pixelWidth
 
@@ -199,6 +197,15 @@
         this.pixelWidth = width;
         this.pixelHeight = height;
         return this;
+      }
+    }, {
+      key: "pixelSize",
+      get: function get() {
+        return (this.pixelWidth + this.pixelHeight) / 2;
+      },
+      set: function set(value) {
+        this.pixelWidth = value;
+        this.pixelHeight = value;
       } // radiusX
 
     }, {
@@ -224,38 +231,48 @@
         this.radiusX = x;
         this.radiusY = y;
         return this;
+      }
+    }, {
+      key: "radius",
+      get: function get() {
+        return (this.radiusX + this.radiusY) / 2;
+      },
+      set: function set(value) {
+        this.radiusX = value;
+        this.radiusY = value;
       } // progress
 
     }, {
-      key: "setProgress",
-      value: function setProgress(value) {
-        this.progress = value;
-        return this;
-      } // progressFactorX
-
-    }, {
-      key: "setProgressFactorX",
-      value: function setProgressFactorX(value) {
-        this.progressFactorX = value;
-        return this;
-      } // progressFactorY
-
-    }, {
-      key: "setProgressFactorY",
-      value: function setProgressFactorY(value) {
-        this.progressFactorY = value;
+      key: "setProgressX",
+      value: function setProgressX(value) {
+        this.progressX = value;
         return this;
       }
     }, {
-      key: "setProgressFactor",
-      value: function setProgressFactor(x, y) {
+      key: "setProgressY",
+      value: function setProgressY(value) {
+        this.progressY = value;
+        return this;
+      }
+    }, {
+      key: "setProgress",
+      value: function setProgress(x, y) {
         if (y === undefined) {
           y = x;
         }
 
-        this.progressFactorX = x;
-        this.progressFactorY = y;
+        this.progressX = x;
+        this.progressY = y;
         return this;
+      }
+    }, {
+      key: "progress",
+      get: function get() {
+        return (this.progressX + this.progressY) / 2;
+      },
+      set: function set(value) {
+        this.progressX = value;
+        this.progressY = value;
       }
     }]);
 

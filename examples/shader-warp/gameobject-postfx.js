@@ -25,8 +25,6 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'radiusX', 0, 100);
         gui.add(postFxPipeline, 'radiusY', 0, 100);
         gui.add(postFxPipeline, 'progress', 0, 1);
-        gui.add(postFxPipeline, 'progressFactorX', 0, 1);
-        gui.add(postFxPipeline, 'progressFactorY', 0, 1);
     }
 
     update() {

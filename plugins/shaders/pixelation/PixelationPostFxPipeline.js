@@ -18,7 +18,8 @@ class PixelationPostFxPipeline extends PostFXPipeline {
     }
 
     resetFromJSON(o) {
-        this.setPixelSize(GetValue(o, 'pixelWidth', 4), GetValue(o, 'pixelHeight', 4));
+        var pixelSize = GetValue(o, 'pixelSize', 4);
+        this.setPixelSize(GetValue(o, 'pixelWidth', pixelSize), GetValue(o, 'pixelHeight', pixelSize));
         return this;
     }
 
@@ -47,6 +48,16 @@ class PixelationPostFxPipeline extends PostFXPipeline {
         this.pixelHeight = height;
         return this;
     }
+    
+    get pixelSize() {
+        return (this.pixelWidth + this.pixelHeight) / 2;
+    }
+
+    set pixelSize(value) {
+        this.pixelWidth = value;
+        this.pixelHeight = value;
+    }
+
 }
 
 export default PixelationPostFxPipeline;

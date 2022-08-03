@@ -17,28 +17,26 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.pixelHeight = 10;
         this.radiusX = 10;
         this.radiusY = 10;
-        this.progress = 0;
-        this.progressFactorX = 1;
-        this.progressFactorY = 1;
+        this.progressX = 0;
+        this.progressY = 0;
     }
 
     resetFromJSON(o) {
-        this.setPixelSize(GetValue(o, 'pixelWidth', 10), GetValue(o, 'pixelHeight', 10));
-        this.setRadius(GetValue(o, 'radiusX', 10), GetValue(o, 'radiusY', 10));        
-        this.setProgress(GetValue(o, 'progress', 0));
-        this.setProgressFactor(GetValue(o, 'progressFactorX', 1), GetValue(o, 'progressFactorY', 1));
+        var pixelSize = GetValue(o, 'pixelSize', 10);
+        this.setPixelSize(GetValue(o, 'pixelWidth', pixelSize), GetValue(o, 'pixelHeight', pixelSize));
+
+        var radius = GetValue(o, 'radius', 10);
+        this.setRadius(GetValue(o, 'radiusX', radius), GetValue(o, 'radiusY', radius));
+
+        var progress = GetValue(o, 'progress', 0);
+        this.setProgress(GetValue(o, 'progressX', progress), GetValue(o, 'progressY', progress));
         return this;
     }
 
     onPreRender() {
         this.set2f('pixelSize', this.pixelWidth, this.pixelHeight);
         this.set2f('radius', this.radiusX, this.radiusY);
-        
-        var progress = this.progress * PI2;
-        var progressX = progress * this.progressFactorX;
-        var progressY = progress * this.progressFactorY;
-        this.set2f('progress', progressX, progressY);
-
+        this.set2f('progress', this.progressX * PI2, this.progressY * PI2);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
@@ -62,7 +60,16 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.pixelHeight = height;
         return this;
     }
-    
+
+    get pixelSize() {
+        return (this.pixelWidth + this.pixelHeight) / 2;
+    }
+
+    set pixelSize(value) {
+        this.pixelWidth = value;
+        this.pixelHeight = value;
+    }
+
     // radiusX
     setRadiusX(value) {
         this.radiusX = value;
@@ -84,31 +91,41 @@ class WarpPostFxPipeline extends PostFXPipeline {
         return this;
     }
 
+    get radius() {
+        return (this.radiusX + this.radiusY) / 2;
+    }
+
+    set radius(value) {
+        this.radiusX = value;
+        this.radiusY = value;
+    }
+
     // progress
-    setProgress(value) {
-        this.progress = value;
+    setProgressX(value) {
+        this.progressX = value;
+        return this;
+    }
+    setProgressY(value) {
+        this.progressY = value;
         return this;
     }
 
-    // progressFactorX
-    setProgressFactorX(value) {
-        this.progressFactorX = value;
-        return this;
-    }
-
-    // progressFactorY
-    setProgressFactorY(value) {
-        this.progressFactorY = value;
-        return this;
-    }
-
-    setProgressFactor(x, y) {
+    setProgress(x, y) {
         if (y === undefined) {
             y = x;
         }
-        this.progressFactorX = x;
-        this.progressFactorY = y;
+        this.progressX = x;
+        this.progressY = y;
         return this;
+    }
+
+    get progress() {
+        return (this.progressX + this.progressY) / 2;
+    }
+
+    set progress(value) {
+        this.progressX = value;
+        this.progressY = value;
     }
 }
 

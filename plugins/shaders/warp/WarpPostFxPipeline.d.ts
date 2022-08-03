@@ -6,19 +6,19 @@ export default class WarpPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.
     setPixelHeight(value: number): this;
     pixelWidth: number;
     pixelHeight: number;
+    pixelSize: number;
 
     setRadius(x: number, y?: number): this;
     setRadiusX(value: number): this;
     setRadiusY(value: number): this;
     radiusX: number;
     radiusY: number;
+    radius: number;
 
-    setProgress(value: number): this;
+    setProgressX(value: number): this;
+    setProgressY(value: number): this;
+    setProgress(x: number, y?: number): this;
+    progressX: number;
+    progressY: number;
     progress: number;
-
-    setProgressFactor(x: number, y?: number): this;
-    setProgressFactorX(value: number): this;
-    setProgressFactorY(value: number): this;
-    progressFactorX: number;
-    progressFactorY: number;
 }

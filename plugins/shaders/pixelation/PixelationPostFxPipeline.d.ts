@@ -6,4 +6,5 @@ export default class PixelationPostFxPipeline extends Phaser.Renderer.WebGL.Pipe
     setPixelHeight(value: number): this;
     pixelWidth: number;
     pixelHeight: number;
+    pixelSize: number;
 }
