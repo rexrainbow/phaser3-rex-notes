@@ -1,19 +1,19 @@
 // import * as Phaser from 'phaser';
 
 export default class WarpPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
-    setPixelSize(width: number, height?: number): this;
-    setPixelWidth(value: number): this;
-    setPixelHeight(value: number): this;
-    pixelWidth: number;
-    pixelHeight: number;
-    pixelSize: number;
+    setFrequency(width: number, height?: number): this;
+    setFrequencyX(value: number): this;
+    setFrequencyY(value: number): this;
+    frequencyX: number;
+    frequencyY: number;
+    frequency: number;
 
-    setRadius(x: number, y?: number): this;
-    setRadiusX(value: number): this;
-    setRadiusY(value: number): this;
-    radiusX: number;
-    radiusY: number;
-    radius: number;
+    setAmplitude(x: number, y?: number): this;
+    setAmplitudeX(value: number): this;
+    setAmplitudeY(value: number): this;
+    amplitudeX: number;
+    amplitudeY: number;
+    amplitude: number;
 
     setProgressX(value: number): this;
     setProgressY(value: number): this;

@@ -14,14 +14,14 @@ varying vec2 outTexCoord;
 
 // Effect parameters
 uniform vec2 texSize;
-uniform vec2 radius;
-uniform vec2 pixelSize;
+uniform vec2 amplitude;
+uniform vec2 frequency;
 uniform vec2 progress;
 
 
 void main (void) {
-  vec2 dxy = pixelSize/texSize;
-  vec2 r = radius/texSize;
+  vec2 dxy = frequency/texSize;
+  vec2 r = amplitude/texSize;
   vec2 angle = (outTexCoord / dxy) + progress;
   vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;
   gl_FragColor = texture2D(uMainSampler, tc);

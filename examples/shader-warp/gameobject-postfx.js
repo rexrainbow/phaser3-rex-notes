@@ -20,10 +20,10 @@ class Demo extends Phaser.Scene {
         });
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'pixelWidth', 0, 100);
-        gui.add(postFxPipeline, 'pixelHeight', 0, 100);
-        gui.add(postFxPipeline, 'radiusX', 0, 100);
-        gui.add(postFxPipeline, 'radiusY', 0, 100);
+        gui.add(postFxPipeline, 'frequencyX', 0, 100);
+        gui.add(postFxPipeline, 'frequencyY', 0, 100);
+        gui.add(postFxPipeline, 'amplitudeX', 0, 100);
+        gui.add(postFxPipeline, 'amplitudeY', 0, 100);
         gui.add(postFxPipeline, 'progress', 0, 1);
     }
 
