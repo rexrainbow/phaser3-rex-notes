@@ -229,3 +229,7 @@ Text editor will be closed when
 ```javascript
 var inputText = editor.inputText.node;
 ```
+
+### Bypass key input
+
+See [InputText/Bypass key input](inputtext.md#bypass-key-input)

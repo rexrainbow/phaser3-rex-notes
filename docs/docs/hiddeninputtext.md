@@ -226,6 +226,10 @@ This feature does not support.
 
 See [InputText/Event](inputtext.md#events)
 
+### Bypass key input
+
+See [InputText/Bypass key input](inputtext.md#bypass-key-input)
+
 ### Other properties
 
 See [InputText](inputtext.md), [DOM game object](domelement.md).
