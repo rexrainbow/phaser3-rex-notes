@@ -15,7 +15,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
-        var postFxPipeline = new WarpPipelineController(gameObject);
+        var controller = new WarpPipelineController(gameObject);
+        var postFxPipeline = controller.getPipeline();
 
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'frequencyX', 0, 100);

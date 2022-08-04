@@ -152,10 +152,96 @@
     return _get.apply(this, arguments);
   }
 
-  var GameClass = Phaser.Game;
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
 
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
+      return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    }
   };
 
   var SceneClass = Phaser.Scene;
@@ -164,89 +250,165 @@
     return object instanceof SceneClass;
   };
 
-  var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
-      return object;
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
     } else if (IsSceneObject(object)) {
-      return object.game;
+      // object = scene
+      return object;
     } else if (object.scene && IsSceneObject(object.scene)) {
       // object = game object
-      return object.scene.game;
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
     }
   };
 
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+
+      this.parent = parent; // gameObject or scene
+
+      this.scene = GetSceneObject(parent);
+      this.isShutdown = false; // Event emitter, default is private event emitter
+
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+
+      if (this.parent && this.parent === this.scene) {
+        // parent is a scene
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
+      } else if (this.parent && this.parent.once) {
+        // bob object does not have event emitter
+        this.parent.once('destroy', this.onParentDestroy, this);
+      }
+    }
+
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        } // parent might not be shutdown yet
+
+
+        if (this.parent && this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
+        } else if (this.parent && this.parent.once) {
+          // bob object does not have event emitter
+          this.parent.off('destroy', this.onParentDestroy, this);
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onSceneDestroy",
+      value: function onSceneDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }]);
+
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
   var RemoveIte = Phaser.Utils.Array.Remove;
 
-  var PostFxPipelineControllerBase = function PostFxPipelineControllerBase(PostFxPipelineClass) {
-    return /*#__PURE__*/function (_PostFxPipelineClass) {
-      _inherits(Base, _PostFxPipelineClass);
+  var PostFxPipelineControllerBase = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(PostFxPipelineControllerBase, _ComponentBase);
 
-      var _super = _createSuper(Base);
+    var _super = _createSuper(PostFxPipelineControllerBase);
 
-      function Base(gameObject, config) {
-        var _this;
+    function PostFxPipelineControllerBase(gameObject, config) {
+      var _this;
 
-        _classCallCheck(this, Base);
+      _classCallCheck(this, PostFxPipelineControllerBase);
 
-        _this = _super.call(this, GetGame(gameObject));
-        _this.gameObject = gameObject;
+      _this = _super.call(this, gameObject, {
+        eventEmitter: false
+      }); // No event emitter
+      // this.parent = gameObject;
+      // this.scene
 
-        _this.resetFromJSON(config);
-
-        return _this;
+      if (config !== false) {
+        _this.getPipeline(config);
       }
 
-      _createClass(Base, [{
-        key: "resetFromJSON",
-        value: function resetFromJSON(o) {
-          if (o === undefined) {
-            o = {};
-          }
+      return _this;
+    }
 
-          _get(_getPrototypeOf(Base.prototype), "resetFromJSON", this).call(this, o);
-
-          this.setEnable(o.enable);
-          return this;
+    _createClass(PostFxPipelineControllerBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
         }
-      }, {
-        key: "enable",
-        get: function get() {
-          return this._enable;
-        },
-        set: function set(value) {
-          value = !!value;
 
-          if (this._enable === value) {
-            return;
-          }
+        this.freePipeline();
 
-          this._enable = value;
-          var gameObject = this.gameObject;
+        _get(_getPrototypeOf(PostFxPipelineControllerBase.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "getPipeline",
+      value: function getPipeline(config) {
+        if (!this.pipeline) {
+          var pipeline = this.createPipeline(this.scene.game);
+          var gameObject = this.parent;
           var postPipelines = gameObject.postPipelines;
-
-          if (value) {
-            postPipelines.push(this);
-          } else {
-            RemoveIte(postPipelines, this);
-          }
-
+          pipeline.gameObject = gameObject;
+          postPipelines.push(pipeline);
           gameObject.hasPostPipeline = postPipelines.length > 0;
+          this.pipeline = pipeline;
         }
-      }, {
-        key: "setEnable",
-        value: function setEnable(enable) {
-          if (enable === undefined) {
-            enable = true;
-          }
 
-          this.enable = enable;
+        if (config) {
+          this.pipeline.resetFromJSON(config);
+        }
+
+        return this.pipeline;
+      }
+    }, {
+      key: "freePipeline",
+      value: function freePipeline() {
+        if (!this.pipeline) {
           return this;
         }
-      }]);
 
-      return Base;
-    }(PostFxPipelineClass);
-  };
+        var gameObject = this.parent;
+        var postPipelines = gameObject.postPipelines;
+        RemoveIte(postPipelines, this.pipeline);
+        gameObject.hasPostPipeline = postPipelines.length > 0;
+        this.pipeline.destroy();
+        this.pipeline = undefined;
+        return this;
+      } // Override
+
+    }, {
+      key: "createPipeline",
+      value: function createPipeline(game) {}
+    }]);
+
+    return PostFxPipelineControllerBase;
+  }(ComponentBase);
 
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequency;\nuniform vec2 progress;\n\n\nvoid main (void) {\n  vec2 dxy = frequency/texSize;\n  vec2 r = amplitude/texSize;\n  vec2 angle = (outTexCoord / dxy) + progress;\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
@@ -416,8 +578,15 @@
       return _super.apply(this, arguments);
     }
 
-    return _createClass(WarpPostFxPipelineController);
-  }(PostFxPipelineControllerBase(WarpPostFxPipeline));
+    _createClass(WarpPostFxPipelineController, [{
+      key: "createPipeline",
+      value: function createPipeline(game) {
+        return new WarpPostFxPipeline(game);
+      }
+    }]);
+
+    return WarpPostFxPipelineController;
+  }(PostFxPipelineControllerBase);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;

@@ -1,55 +1,66 @@
-import GetGame from '../../system/GetGame.js';
+import ComponentBase from '../../componentbase/ComponentBase.js';
 
 const RemoveIte = Phaser.Utils.Array.Remove;
 
-var PostFxPipelineControllerBase = function (PostFxPipelineClass) {
-    return class Base extends PostFxPipelineClass {
-        constructor(gameObject, config) {
-            super(GetGame(gameObject));
-            this.gameObject = gameObject;
+class PostFxPipelineControllerBase extends ComponentBase {
+    constructor(gameObject, config) {
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
+        // this.parent = gameObject;
+        // this.scene
 
-            this.resetFromJSON(config);
+        if (config !== false) {
+            this.getPipeline(config);
+        }
+    }
+
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+
         }
 
-        resetFromJSON(o) {
-            if (o === undefined) {
-                o = {};
-            }
-            super.resetFromJSON(o);
-            this.setEnable(o.enable);
-            return this;
-        }
+        this.freePipeline();
 
-        get enable() {
-            return this._enable;
-        }
+        super.shutdown(fromScene);
+    }
 
-        set enable(value) {
-            value = !!value;
-            if (this._enable === value) {
-                return;
-            }
-            this._enable = value;
-
-            var gameObject = this.gameObject;
+    getPipeline(config) {
+        if (!this.pipeline) {
+            var pipeline = this.createPipeline(this.scene.game);
+            var gameObject = this.parent;
             var postPipelines = gameObject.postPipelines;
-            if (value) {
-                postPipelines.push(this);
-            } else {
-                RemoveIte(postPipelines, this);
-            }
-
+            pipeline.gameObject = gameObject;
+            postPipelines.push(pipeline);
             gameObject.hasPostPipeline = (postPipelines.length > 0);
+
+            this.pipeline = pipeline;
         }
+        if (config) {
+            this.pipeline.resetFromJSON(config);
+        }
+        return this.pipeline;
+    }
 
-        setEnable(enable) {
-            if (enable === undefined) {
-                enable = true;
-            }
-
-            this.enable = enable;
+    freePipeline() {
+        if (!this.pipeline) {
             return this;
         }
+
+        var gameObject = this.parent;
+        var postPipelines = gameObject.postPipelines;
+        RemoveIte(postPipelines, this.pipeline);
+        gameObject.hasPostPipeline = (postPipelines.length > 0);
+
+        this.pipeline.destroy();
+        this.pipeline = undefined;
+        return this;
+    }
+
+    // Override
+    createPipeline(game) {
+
     }
 }
 
