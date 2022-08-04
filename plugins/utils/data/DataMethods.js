@@ -9,11 +9,6 @@ export default {
         return this;
     },
 
-    getData(key, defaultValue) {
-        this.enableData();
-        return (key === undefined) ? this.data : GetValue(this.data, key, defaultValue);
-    },
-
     setData(key, value) {
         this.enableData();
         if (arguments.length === 1) {
@@ -25,6 +20,11 @@ export default {
             this.data[key] = value;
         }
         return this;
+    },
+
+    getData(key, defaultValue) {
+        this.enableData();
+        return (key === undefined) ? this.data : GetValue(this.data, key, defaultValue);
     },
 
     incData(key, inc, defaultValue) {

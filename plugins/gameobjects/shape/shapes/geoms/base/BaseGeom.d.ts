@@ -1,4 +1,6 @@
-export default class BaseGeom {
+import DataMethods from '../../../../../utils/data/DataMethods.js';
+
+export default class BaseGeom extends DataMethods {
     name: string;
     dirty: boolean;
     data: { [name: string]: any } | undefined;
@@ -21,27 +23,4 @@ export default class BaseGeom {
         color?: number,
         alpha?: number
     ): this;
-
-    setData(
-        key: string,
-        value: any
-    ): this;
-    setData(
-        data: { [key: string]: any }
-    ): this;
-    getData(
-        key: string,
-        defaultValue?: any
-    ): any;
-    incData(
-        key: string,
-        inc: number,
-        defaultValue: number
-    ): this;
-    mulData(
-        key: string,
-        mul: number,
-        defaultValue: number
-    ): this;
-    clearData(): this;
 }

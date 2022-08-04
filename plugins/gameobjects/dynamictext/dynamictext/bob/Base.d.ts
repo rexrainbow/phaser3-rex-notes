@@ -1,6 +1,7 @@
 // import * as Phaser from 'phaser';
+import DataMethods from '../../../../utils/data/DataMethods';
 
-export default class Base {
+export default class Base extends DataMethods {
     readonly type: string;
 
     setActive(active?: boolean): this;

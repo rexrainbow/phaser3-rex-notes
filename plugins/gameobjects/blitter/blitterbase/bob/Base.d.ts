@@ -1,8 +1,9 @@
 import BlitterBase from '../BlitterBase';
+import DataMethods from '../../../../utils/data/DataMethods';
 
 export default BobBase;
 
-declare class BobBase {
+declare class BobBase extends DataMethods{
     constructor(
         parent: BlitterBase,
         type: string
@@ -19,27 +20,4 @@ declare class BobBase {
     ): this;
 
     reset(): this;
-
-    setData(
-        key: string,
-        value: any
-    ): this;
-    setData(
-        data: { [key: string]: any }
-    ): this;
-    getData(
-        key: string,
-        defaultValue?: any
-    ): any;
-    incData(
-        key: string,
-        inc: number,
-        defaultValue: number
-    ): this;
-    mulData(
-        key: string,
-        mul: number,
-        defaultValue: number
-    ): this;
-    clearData(): this;
 }

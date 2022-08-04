@@ -2,6 +2,8 @@ import {
     QuestionType as QuestionTypeRef,
     OptionsType as OptionsTypeRef
 } from '../questions/types';
+import DataMethods from '../../../utils/data/DataMethods';
+
 export default Quest;
 
 declare namespace Quest {
@@ -14,7 +16,7 @@ declare namespace Quest {
     }
 }
 
-declare class Quest {
+declare class Quest extends DataMethods{
     getNextQuestion(
         questionKey?: string
     ): Quest.QuestionType;
@@ -23,32 +25,6 @@ declare class Quest {
     isLastQuestion(): boolean;
 
     start(): this;
-
-    getData(
-        key: string,
-        defaultValue?: any
-    ): any;
-
-    getData(): any[];
-
-    setData(
-        key: string,
-        value: any
-    ): this;
-
-    incData(
-        key: string,
-        inc: number,
-        defaultValue?: number
-    ): this;
-
-    mulData(
-        key: string,
-        mul: number,
-        defaultValue?: number
-    ): this;
-
-    clearData(): this;
 
     getOption(
         question: string | Quest.QuestionType,
