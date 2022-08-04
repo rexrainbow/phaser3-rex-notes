@@ -56,13 +56,15 @@ Phaser is a fast, free, and fun open source HTML5 game framework that offers Web
 
                 // ignoreNextPageInput: true,  // or text.setIgnoreNextPageInput()
                 clickTarget: this,
-                nextPageInput: 'click|2000'
+                nextPageInput: 'click|1000'
 
             }
         )
-            .play(content)
 
-        console.log(text.width, text.height);
+        text
+            .play(content)
+            .setFixedSize(text.width, text.height)
+
     }
 
     update() { }
