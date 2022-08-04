@@ -1,5 +1,5 @@
 import PixelationPostFxPipeline from './pixelationpipeline.js';
-import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
+import BasePostFxPipelinePlugin from './utils/renderer/postfxpipeline/BasePostFxPipelinePlugin.js';
 import SetValue from './utils/object/SetValue.js';
 
 class PixelationPipelinePlugin extends BasePostFxPipelinePlugin {

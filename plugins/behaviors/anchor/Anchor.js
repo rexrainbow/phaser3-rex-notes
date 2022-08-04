@@ -11,6 +11,23 @@ class Anchor extends ComponentBase {
         this.resetFromJSON(config);
     }
 
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        this.autoAnchor(false);
+
+        this.viewport = undefined;
+        this.onUpdateViewportCallback = undefined;
+        this.onUpdateViewportCallbackScope = undefined;
+        this.onResizeCallback = undefined;
+        this.onResizeCallbackScope = undefined;
+
+        super.shutdown(fromScene);
+    }
+
     resetFromJSON(o) {
         if (o === undefined) {
             o = {};
@@ -100,23 +117,6 @@ class Anchor extends ComponentBase {
         this.autoAnchor(o.enable);
 
         return this;
-    }
-
-    shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-            return;
-        }
-
-        this.autoAnchor(false);
-
-        this.viewport = undefined;
-        this.onUpdateViewportCallback = undefined;
-        this.onUpdateViewportCallbackScope = undefined;
-        this.onResizeCallback = undefined;
-        this.onResizeCallbackScope = undefined;
-
-        super.shutdown(fromScene);
     }
 
     autoAnchor(enable) {

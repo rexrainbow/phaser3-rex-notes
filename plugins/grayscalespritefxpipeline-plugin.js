@@ -1,4 +1,4 @@
-import BaseSpriteFxPipelinePlugin from './utils/renderer/BaseSpriteFxPipelinePlugin.js';
+import BaseSpriteFxPipelinePlugin from './utils/renderer/spritefxpipeline/BaseSpriteFxPipelinePlugin.js';
 import GrayScaleSpriteFxPipeline from './grayscalespritefxpipeline.js';
 import GrayScaleSpriteFxPipelineControl from './shaders/grayscale/spritefx/GrayScaleSpriteFxPipelineControl.js';
 import SetValue from './utils/object/SetValue.js';

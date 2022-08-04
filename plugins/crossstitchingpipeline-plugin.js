@@ -1,5 +1,5 @@
 import CrossStitchingPostFxPipeline from './crossstitchingpipeline.js';
-import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
+import BasePostFxPipelinePlugin from './utils/renderer/postfxpipeline/BasePostFxPipelinePlugin.js';
 import SetValue from './utils/object/SetValue.js';
 
 class CrossStitchingPipelinePlugin extends BasePostFxPipelinePlugin {
