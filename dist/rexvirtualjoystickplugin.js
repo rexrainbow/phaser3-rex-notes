@@ -791,6 +791,7 @@
 
         this.pointer = pointer;
         this.onKeyDown(pointer);
+        this.emit('pointerdown', pointer);
       }
     }, {
       key: "onKeyDown",
@@ -842,6 +843,7 @@
         this.pointer = undefined;
         this.clearVector();
         this.emit('update');
+        this.emit('pointerup', pointer);
       }
     }]);
 
@@ -1053,6 +1055,11 @@
           gameObject = this.scene.add.circle(0, 0, this.radius).setStrokeStyle(3, 0x0000ff);
         }
 
+        if (config === undefined) {
+          config = {};
+        }
+
+        config.eventEmitter = this.getEventEmitter();
         this.touchCursor = new TouchCursor(gameObject, config);
         this.base = gameObject;
         return this;
@@ -1081,7 +1088,7 @@
     }, {
       key: "boot",
       value: function boot() {
-        this.touchCursor.on('update', this.update, this);
+        this.on('update', this.update, this);
       }
     }, {
       key: "update",

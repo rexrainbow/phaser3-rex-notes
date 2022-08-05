@@ -765,10 +765,6 @@
 
       return this;
     },
-    getData: function getData(key, defaultValue) {
-      this.enableData();
-      return key === undefined ? this.data : GetValue$9(this.data, key, defaultValue);
-    },
     setData: function setData(key, value) {
       this.enableData();
 
@@ -783,6 +779,10 @@
       }
 
       return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$9(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {

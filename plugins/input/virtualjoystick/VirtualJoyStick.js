@@ -183,6 +183,10 @@ class VirtualJoyStick {
                 .setStrokeStyle(3, 0x0000ff);
         }
 
+        if (config === undefined) {
+            config = {};
+        }
+        config.eventEmitter = this.getEventEmitter();
         this.touchCursor = new TouchCursor(gameObject, config)
         this.base = gameObject;
         return this;
@@ -208,7 +212,7 @@ class VirtualJoyStick {
     }
 
     boot() {
-        this.touchCursor.on('update', this.update, this);
+        this.on('update', this.update, this);
     }
 
     update() {

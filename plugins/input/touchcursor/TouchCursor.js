@@ -89,6 +89,7 @@ class TouchCursor extends VectorToCursorKeys {
         }
         this.pointer = pointer;
         this.onKeyDown(pointer);
+        this.emit('pointerdown', pointer);
     }
 
     onKeyDown(pointer) {
@@ -136,6 +137,7 @@ class TouchCursor extends VectorToCursorKeys {
         this.pointer = undefined;
         this.clearVector();
         this.emit('update');
+        this.emit('pointerup', pointer);
     }
 
 }

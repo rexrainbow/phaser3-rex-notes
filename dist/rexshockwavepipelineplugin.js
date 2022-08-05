@@ -231,7 +231,103 @@
     return ShockwavePostFxPipeline;
   }(PostFXPipeline);
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsSceneObject(object)) {
+      return object.game;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.game;
+    }
+  };
+
+  var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
+    GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
+  };
+
+  var AddPostFxPipelineInstance = function AddPostFxPipelineInstance(gameObject, PostFxPipelineClass, config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    gameObject.setPostPipeline(PostFxPipelineClass);
+    var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
+    pipeline.resetFromJSON(config);
+
+    if (config.name) {
+      pipeline.name = config.name;
+    }
+
+    return pipeline;
+  };
+
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
+
+  var RemovePostFxPipelineInstance = function RemovePostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
+    if (name === undefined) {
+      var pipelines = gameObject.postPipelines;
+
+      for (var i = pipelines.length - 1; i >= 0; i--) {
+        var instance = pipelines[i];
+
+        if (instance instanceof PostFxPipelineClass) {
+          instance.destroy();
+          SpliceOne(pipelines, i);
+        }
+      }
+    } else {
+      var pipelines = gameObject.postPipelines;
+
+      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+        var instance = pipelines[i];
+
+        if (instance instanceof PostFxPipelineClass && instance.name === name) {
+          instance.destroy();
+          SpliceOne(pipelines, i);
+        }
+      }
+    }
+  };
+
+  var GetPostFxPipelineInstance = function GetPostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
+    if (name === undefined) {
+      var result = [];
+      var pipelines = gameObject.postPipelines;
+
+      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+        var instance = pipelines[i];
+
+        if (instance instanceof PostFxPipelineClass) {
+          result.push(instance);
+        }
+      }
+
+      return result;
+    } else {
+      var pipelines = gameObject.postPipelines;
+
+      for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+        var instance = pipelines[i];
+
+        if (instance instanceof PostFxPipelineClass && instance.name === name) {
+          return instance;
+        }
+      }
+    }
+  };
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
@@ -256,85 +352,23 @@
       value: function start() {
         var eventEmitter = this.game.events;
         eventEmitter.once('destroy', this.destroy, this);
-        this.game.renderer.pipelines.addPostPipeline(this.postFxPipelineName, this.PostFxPipelineClass);
+        RegisterPostPipeline(this.game, this.postFxPipelineName, this.PostFxPipelineClass);
       }
     }, {
       key: "add",
       value: function add(gameObject, config) {
-        if (config === undefined) {
-          config = {};
-        }
-
-        gameObject.setPostPipeline(this.PostFxPipelineClass);
-        var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
-        pipeline.resetFromJSON(config);
-
-        if (config.name) {
-          pipeline.name = config.name;
-        }
-
-        return pipeline;
+        return AddPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, config);
       }
     }, {
       key: "remove",
       value: function remove(gameObject, name) {
-        var PostFxPipelineClass = this.PostFxPipelineClass;
-
-        if (name === undefined) {
-          var pipelines = gameObject.postPipelines;
-
-          for (var i = pipelines.length - 1; i >= 0; i--) {
-            var instance = pipelines[i];
-
-            if (instance instanceof PostFxPipelineClass) {
-              instance.destroy();
-              SpliceOne(pipelines, i);
-            }
-          }
-        } else {
-          var pipelines = gameObject.postPipelines;
-
-          for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
-            var instance = pipelines[i];
-
-            if (instance instanceof PostFxPipelineClass && instance.name === name) {
-              instance.destroy();
-              SpliceOne(pipelines, i);
-            }
-          }
-        }
-
+        RemovePostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
         return this;
       }
     }, {
       key: "get",
       value: function get(gameObject, name) {
-        var PostFxPipelineClass = this.PostFxPipelineClass;
-
-        if (name === undefined) {
-          var result = [];
-          var pipelines = gameObject.postPipelines;
-
-          for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
-            var instance = pipelines[i];
-
-            if (instance instanceof PostFxPipelineClass) {
-              result.push(instance);
-            }
-          }
-
-          return result;
-        } else {
-          var pipelines = gameObject.postPipelines;
-
-          for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
-            var instance = pipelines[i];
-
-            if (instance instanceof PostFxPipelineClass && instance.name === name) {
-              return instance;
-            }
-          }
-        }
+        return GetPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
       }
     }]);
 

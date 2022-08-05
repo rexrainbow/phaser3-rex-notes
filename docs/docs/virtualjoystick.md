@@ -215,9 +215,17 @@ joystick.destroy();
 ### Events
 
 - On joystick updated :
-   ```javascript
-   joystick.on('update', function(){});
-   ```
+    ```javascript
+    joystick.on('update', function(){});
+    ```
+- On pointer-down
+    ```javascript
+    joystick.on('pointerdown', function(pointer){});
+    ```
+- On pointer-up
+    ```javascript
+    joystick.on('pointerup', function(pointer){});
+    ```
 
 ### Elements
 

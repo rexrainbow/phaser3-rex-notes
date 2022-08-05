@@ -3524,8 +3524,9 @@
 
       var bob = this.get(name);
       delete this.bobs[name];
-      this.removedGOs.push(bob.gameObject);
-      var hasTintChange = !!bob.gameObject.setTint && this.fadeTime > 0;
+      var gameObject = bob.gameObject;
+      this.removedGOs.push(gameObject);
+      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
       var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {

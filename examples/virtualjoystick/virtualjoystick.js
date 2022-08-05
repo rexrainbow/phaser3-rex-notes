@@ -21,7 +21,14 @@ class Demo extends Phaser.Scene {
             // forceMin: 16,
             // enable: true
         })
-            .on('update', this.dumpJoyStickState, this);
+            .on('update', this.dumpJoyStickState, this)
+            .on('pointerdown', function(){
+                console.log('pointerdown')
+            })
+            .on('pointerup', function(){
+                console.log('pointerup')
+            })
+
 
         this.text = this.add.text(0, 0);
         this.dumpJoyStickState();

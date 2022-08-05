@@ -155,8 +155,8 @@
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequency;\nuniform vec2 progress;\n\n\nvoid main (void) {\n  vec2 dxy = frequency/texSize;\n  vec2 r = amplitude/texSize;\n  vec2 angle = (outTexCoord / dxy) + progress;\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
 
-  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var PI2 = Math.PI * 2;
 
   var WarpPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
@@ -187,12 +187,12 @@
     _createClass(WarpPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var frequency = GetValue$1(o, 'frequency', 10);
-        this.setFrequency(GetValue$1(o, 'frequencyX', frequency), GetValue$1(o, 'frequencyY', frequency));
-        var amplitude = GetValue$1(o, 'amplitude', 10);
-        this.setAmplitude(GetValue$1(o, 'amplitudeX', amplitude), GetValue$1(o, 'amplitudeY', amplitude));
-        var progress = GetValue$1(o, 'progress', 0);
-        this.setProgress(GetValue$1(o, 'progressX', progress), GetValue$1(o, 'progressY', progress));
+        var frequency = GetValue$2(o, 'frequency', 10);
+        this.setFrequency(GetValue$2(o, 'frequencyX', frequency), GetValue$2(o, 'frequencyY', frequency));
+        var amplitude = GetValue$2(o, 'amplitude', 10);
+        this.setAmplitude(GetValue$2(o, 'amplitudeX', amplitude), GetValue$2(o, 'amplitudeY', amplitude));
+        var progress = GetValue$2(o, 'progress', 0);
+        this.setProgress(GetValue$2(o, 'progressX', progress), GetValue$2(o, 'progressY', progress));
         return this;
       }
     }, {
@@ -307,7 +307,7 @@
     }]);
 
     return WarpPostFxPipeline;
-  }(PostFXPipeline);
+  }(PostFXPipeline$1);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -422,7 +422,7 @@
     }
   };
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -433,7 +433,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -487,32 +487,52 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var GetValue = Phaser.Utils.Objects.GetValue;
   var RemoveIte = Phaser.Utils.Array.Remove;
 
-  var PostFxPipelineControllerBase = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(PostFxPipelineControllerBase, _ComponentBase);
+  var PostFxPipelineBehaviorBase = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(PostFxPipelineBehaviorBase, _ComponentBase);
 
-    var _super = _createSuper(PostFxPipelineControllerBase);
+    var _super = _createSuper(PostFxPipelineBehaviorBase);
 
-    function PostFxPipelineControllerBase(gameObject, config) {
+    function PostFxPipelineBehaviorBase(gameObject, config) {
       var _this;
 
-      _classCallCheck(this, PostFxPipelineControllerBase);
+      _classCallCheck(this, PostFxPipelineBehaviorBase);
 
       _this = _super.call(this, gameObject, {
         eventEmitter: false
       }); // No event emitter
       // this.parent = gameObject;
       // this.scene
+      // Can inject PipelineClass at runtime
 
-      if (config !== false) {
+      var PipelineClass;
+
+      if (IsPostFxPipelineClass(config)) {
+        PipelineClass = config;
+        config = undefined;
+      } else {
+        PipelineClass = GetValue(config, 'PipelineClass');
+      }
+
+      if (PipelineClass) {
+        _this.createPipeline = function (game) {
+          return new PipelineClass(game);
+        };
+      }
+
+      var enable = GetValue(config, 'enable', config !== false);
+
+      if (enable) {
         _this.getPipeline(config);
       }
 
       return _this;
     }
 
-    _createClass(PostFxPipelineControllerBase, [{
+    _createClass(PostFxPipelineBehaviorBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
@@ -522,7 +542,7 @@
 
         this.freePipeline();
 
-        _get(_getPrototypeOf(PostFxPipelineControllerBase.prototype), "shutdown", this).call(this, fromScene);
+        _get(_getPrototypeOf(PostFxPipelineBehaviorBase.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "getPipeline",
@@ -537,7 +557,7 @@
           this.pipeline = pipeline;
         }
 
-        if (config) {
+        if (config && this.pipeline.resetFromJSON) {
           this.pipeline.resetFromJSON(config);
         }
 
@@ -564,8 +584,12 @@
       value: function createPipeline(game) {}
     }]);
 
-    return PostFxPipelineControllerBase;
+    return PostFxPipelineBehaviorBase;
   }(ComponentBase);
+
+  var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
+    return object && object.prototype && object.prototype instanceof PostFXPipeline;
+  };
 
   var WarpPostFxPipelineBehavior = /*#__PURE__*/function (_BasePostFxPipelineBe) {
     _inherits(WarpPostFxPipelineBehavior, _BasePostFxPipelineBe);
@@ -586,7 +610,7 @@
     }]);
 
     return WarpPostFxPipelineBehavior;
-  }(PostFxPipelineControllerBase);
+  }(PostFxPipelineBehaviorBase);
 
   var GameClass = Phaser.Game;
 

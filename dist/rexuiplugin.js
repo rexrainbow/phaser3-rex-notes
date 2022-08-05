@@ -1343,10 +1343,6 @@
 
       return this;
     },
-    getData: function getData(key, defaultValue) {
-      this.enableData();
-      return key === undefined ? this.data : GetValue$2i(this.data, key, defaultValue);
-    },
     setData: function setData(key, value) {
       this.enableData();
 
@@ -1361,6 +1357,10 @@
       }
 
       return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$2i(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -17234,8 +17234,9 @@
 
       var bob = this.get(name);
       delete this.bobs[name];
-      this.removedGOs.push(bob.gameObject);
-      var hasTintChange = !!bob.gameObject.setTint && this.fadeTime > 0;
+      var gameObject = bob.gameObject;
+      this.removedGOs.push(gameObject);
+      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
       var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
@@ -21578,6 +21579,23 @@
     }
 
     _createClass(Anchor, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        this.autoAnchor(false);
+        this.viewport = undefined;
+        this.onUpdateViewportCallback = undefined;
+        this.onUpdateViewportCallbackScope = undefined;
+        this.onResizeCallback = undefined;
+        this.onResizeCallbackScope = undefined;
+
+        _get(_getPrototypeOf(Anchor.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         if (o === undefined) {
@@ -21675,23 +21693,6 @@
 
         this.autoAnchor(o.enable);
         return this;
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        this.autoAnchor(false);
-        this.viewport = undefined;
-        this.onUpdateViewportCallback = undefined;
-        this.onUpdateViewportCallbackScope = undefined;
-        this.onResizeCallback = undefined;
-        this.onResizeCallbackScope = undefined;
-
-        _get(_getPrototypeOf(Anchor.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "autoAnchor",

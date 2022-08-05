@@ -414,6 +414,23 @@
     }
 
     _createClass(Anchor, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        this.autoAnchor(false);
+        this.viewport = undefined;
+        this.onUpdateViewportCallback = undefined;
+        this.onUpdateViewportCallbackScope = undefined;
+        this.onResizeCallback = undefined;
+        this.onResizeCallbackScope = undefined;
+
+        _get(_getPrototypeOf(Anchor.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         if (o === undefined) {
@@ -511,23 +528,6 @@
 
         this.autoAnchor(o.enable);
         return this;
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        this.autoAnchor(false);
-        this.viewport = undefined;
-        this.onUpdateViewportCallback = undefined;
-        this.onUpdateViewportCallbackScope = undefined;
-        this.onResizeCallback = undefined;
-        this.onResizeCallbackScope = undefined;
-
-        _get(_getPrototypeOf(Anchor.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "autoAnchor",

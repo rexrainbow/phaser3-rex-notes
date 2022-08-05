@@ -791,6 +791,7 @@
 
         this.pointer = pointer;
         this.onKeyDown(pointer);
+        this.emit('pointerdown', pointer);
       }
     }, {
       key: "onKeyDown",
@@ -842,6 +843,7 @@
         this.pointer = undefined;
         this.clearVector();
         this.emit('update');
+        this.emit('pointerup', pointer);
       }
     }]);
 
