@@ -4,12 +4,10 @@ const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveIte = Phaser.Utils.Array.Remove;
 
-class PostFxPipelineBehaviorBase extends ComponentBase {
+class PostFxPipelineBehaviorBase {
     constructor(gameObject, config) {
-        super(gameObject, { eventEmitter: false });
-        // No event emitter
-        // this.parent = gameObject;
-        // this.scene
+        this.gameObject = gameObject;
+        this.scene = gameObject.scene;
 
         // Can inject PipelineClass at runtime
         var PipelineClass;
@@ -25,29 +23,19 @@ class PostFxPipelineBehaviorBase extends ComponentBase {
             }
         }
 
-        var enable = GetValue(config, 'enable', (config !== false))
+        var enable = GetValue(config, 'enable', !!config)
 
         if (enable) {
             this.getPipeline(config);
         }
-    }
 
-    shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-            return;
-
-        }
-
-        this.freePipeline();
-
-        super.shutdown(fromScene);
+        // Will destroy pipeline when gameObject destroying
     }
 
     getPipeline(config) {
         if (!this.pipeline) {
             var pipeline = this.createPipeline(this.scene.game);
-            var gameObject = this.parent;
+            var gameObject = this.gameObject;
             var postPipelines = gameObject.postPipelines;
             pipeline.gameObject = gameObject;
             postPipelines.push(pipeline);
@@ -66,7 +54,7 @@ class PostFxPipelineBehaviorBase extends ComponentBase {
             return this;
         }
 
-        var gameObject = this.parent;
+        var gameObject = this.gameObject;
         var postPipelines = gameObject.postPipelines;
         RemoveIte(postPipelines, this.pipeline);
         gameObject.hasPostPipeline = (postPipelines.length > 0);

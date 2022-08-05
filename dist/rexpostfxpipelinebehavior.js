@@ -39,119 +39,6 @@
     return Constructor;
   }
 
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        writable: true,
-        configurable: true
-      }
-    });
-    Object.defineProperty(subClass, "prototype", {
-      writable: false
-    });
-    if (superClass) _setPrototypeOf(subClass, superClass);
-  }
-
-  function _getPrototypeOf(o) {
-    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-      return o.__proto__ || Object.getPrototypeOf(o);
-    };
-    return _getPrototypeOf(o);
-  }
-
-  function _setPrototypeOf(o, p) {
-    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
-    return _setPrototypeOf(o, p);
-  }
-
-  function _isNativeReflectConstruct() {
-    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-    if (Reflect.construct.sham) return false;
-    if (typeof Proxy === "function") return true;
-
-    try {
-      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function _assertThisInitialized(self) {
-    if (self === void 0) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return self;
-  }
-
-  function _possibleConstructorReturn(self, call) {
-    if (call && (typeof call === "object" || typeof call === "function")) {
-      return call;
-    } else if (call !== void 0) {
-      throw new TypeError("Derived constructors may only return object or undefined");
-    }
-
-    return _assertThisInitialized(self);
-  }
-
-  function _createSuper(Derived) {
-    var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
-    return function _createSuperInternal() {
-      var Super = _getPrototypeOf(Derived),
-          result;
-
-      if (hasNativeReflectConstruct) {
-        var NewTarget = _getPrototypeOf(this).constructor;
-
-        result = Reflect.construct(Super, arguments, NewTarget);
-      } else {
-        result = Super.apply(this, arguments);
-      }
-
-      return _possibleConstructorReturn(this, result);
-    };
-  }
-
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-
-    return object;
-  }
-
-  function _get() {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-
-        if (desc.get) {
-          return desc.get.call(arguments.length < 3 ? target : receiver);
-        }
-
-        return desc.value;
-      };
-    }
-
-    return _get.apply(this, arguments);
-  }
-
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
@@ -334,22 +221,12 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var RemoveIte = Phaser.Utils.Array.Remove;
 
-  var PostFxPipelineBehaviorBase = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(PostFxPipelineBehaviorBase, _ComponentBase);
-
-    var _super = _createSuper(PostFxPipelineBehaviorBase);
-
+  var PostFxPipelineBehaviorBase = /*#__PURE__*/function () {
     function PostFxPipelineBehaviorBase(gameObject, config) {
-      var _this;
-
       _classCallCheck(this, PostFxPipelineBehaviorBase);
 
-      _this = _super.call(this, gameObject, {
-        eventEmitter: false
-      }); // No event emitter
-      // this.parent = gameObject;
-      // this.scene
-      // Can inject PipelineClass at runtime
+      this.gameObject = gameObject;
+      this.scene = gameObject.scene; // Can inject PipelineClass at runtime
 
       var PipelineClass;
 
@@ -361,38 +238,25 @@
       }
 
       if (PipelineClass) {
-        _this.createPipeline = function (game) {
+        this.createPipeline = function (game) {
           return new PipelineClass(game);
         };
       }
 
-      var enable = GetValue(config, 'enable', config !== false);
+      var enable = GetValue(config, 'enable', !!config);
 
       if (enable) {
-        _this.getPipeline(config);
-      }
+        this.getPipeline(config);
+      } // Will destroy pipeline when gameObject destroying
 
-      return _this;
     }
 
     _createClass(PostFxPipelineBehaviorBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        this.freePipeline();
-
-        _get(_getPrototypeOf(PostFxPipelineBehaviorBase.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
       key: "getPipeline",
       value: function getPipeline(config) {
         if (!this.pipeline) {
           var pipeline = this.createPipeline(this.scene.game);
-          var gameObject = this.parent;
+          var gameObject = this.gameObject;
           var postPipelines = gameObject.postPipelines;
           pipeline.gameObject = gameObject;
           postPipelines.push(pipeline);
@@ -413,7 +277,7 @@
           return this;
         }
 
-        var gameObject = this.parent;
+        var gameObject = this.gameObject;
         var postPipelines = gameObject.postPipelines;
         RemoveIte(postPipelines, this.pipeline);
         gameObject.hasPostPipeline = postPipelines.length > 0;
@@ -428,7 +292,7 @@
     }]);
 
     return PostFxPipelineBehaviorBase;
-  }(ComponentBase);
+  }();
 
   var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
     return object && object.prototype && object.prototype instanceof PostFXPipeline;
