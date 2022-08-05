@@ -1,15 +1,33 @@
 import ComponentBase from '../../componentbase/ComponentBase.js';
 
+const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveIte = Phaser.Utils.Array.Remove;
 
-class PostFxPipelineControllerBase extends ComponentBase {
+class PostFxPipelineBehaviorBase extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter
         // this.parent = gameObject;
         // this.scene
 
-        if (config !== false) {
+        // Can inject PipelineClass at runtime
+        var PipelineClass;
+        if (IsPostFxPipelineClass(config)) {
+            PipelineClass = config;
+            config = undefined;
+        } else {
+            PipelineClass = GetValue(config, 'PipelineClass');
+        }
+        if (PipelineClass) {
+            this.createPipeline = function (game) {
+                return new PipelineClass(game);
+            }
+        }
+
+        var enable = GetValue(config, 'enable', (config !== false))
+
+        if (enable) {
             this.getPipeline(config);
         }
     }
@@ -37,7 +55,7 @@ class PostFxPipelineControllerBase extends ComponentBase {
 
             this.pipeline = pipeline;
         }
-        if (config) {
+        if (config && this.pipeline.resetFromJSON) {
             this.pipeline.resetFromJSON(config);
         }
         return this.pipeline;
@@ -64,4 +82,9 @@ class PostFxPipelineControllerBase extends ComponentBase {
     }
 }
 
-export default PostFxPipelineControllerBase;
+var IsPostFxPipelineClass = function (object) {
+    return object && object.prototype &&
+        (object.prototype instanceof PostFXPipeline);
+}
+
+export default PostFxPipelineBehaviorBase;

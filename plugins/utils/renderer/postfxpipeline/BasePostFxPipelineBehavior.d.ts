@@ -9,6 +9,11 @@ declare class BasePostFxPipelineBehavior {
         config?: {}
     );
 
+    constructor(
+        gameObject: Phaser.GameObjects.GameObject,
+        PostFxPipelineClass?: Phaser.Renderer.WebGL.Pipelines.PostFXPipeline
+    );
+
     getPipeline(
         config?: {}
     ): Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
