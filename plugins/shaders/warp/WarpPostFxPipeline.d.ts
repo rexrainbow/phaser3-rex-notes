@@ -1,6 +1,24 @@
 // import * as Phaser from 'phaser';
+export default WarpPostFxPipeline;
 
-export default class WarpPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+declare namespace WarpPostFxPipeline {
+    interface IConfig {
+        frequency?: number,
+        frequencyX?: number, frequencyY?: number,
+
+        amplitude?: number,
+        amplitudeX?: number, amplitudeY?: number,
+
+        progress?: number,
+        progressX?: number, progressY?: number,
+    }
+}
+
+declare class WarpPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    resetFromJSON(
+        config?: WarpPostFxPipeline.IConfig
+    ): this;
+
     setFrequency(width: number, height?: number): this;
     setFrequencyX(value: number): this;
     setFrequencyY(value: number): this;

@@ -189,8 +189,6 @@ module.exports = {
     'dropshadowpipelineplugin': './plugins/dropshadowpipeline-plugin.js',
     'warppipelineplugin': './plugins/warppipeline-plugin.js',
 
-    'warppipelinecontrollerplugin': './plugins/warppipelinecontroller-plugin.js',
-
     // board
     'boardplugin': './plugins/board-plugin.js',
 
