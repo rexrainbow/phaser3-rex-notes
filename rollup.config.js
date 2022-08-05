@@ -8,7 +8,7 @@ import { uglify } from "rollup-plugin-uglify";
 // import { terser } from 'rollup-plugin-terser'; // Uglify for ES6
 
 
-const pluginList = {'warppipelineplugin': './plugins/warppipeline-plugin.js'};
+const pluginList = require('./plugin-list.js');
 // {name: path}           // pure javascript
 // {name: [path, true]}   // javascript + typescript
 

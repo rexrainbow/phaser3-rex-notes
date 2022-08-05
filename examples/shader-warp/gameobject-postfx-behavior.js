@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import WarpPipelineController from '../../plugins/warppipelinecontroller.js'
+import WarpPipelineBehavior from '../../plugins/warppipelinebehavior.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -15,8 +15,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
-        var controller = new WarpPipelineController(gameObject);
-        var postFxPipeline = controller.getPipeline();
+        var behavior = new WarpPipelineBehavior(gameObject);
+        var postFxPipeline = behavior.getPipeline();
 
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'frequencyX', 0, 100);
