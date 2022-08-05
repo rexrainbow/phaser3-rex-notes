@@ -1,6 +1,6 @@
 import WarpPostFxPipeline from './warppipeline.js';
 import WarpPostFxPipelineBehavior from './warppipelinebehavior.js';
-import BasePostFxPipelinePlugin from './warppipelinebehavior.js';
+import BasePostFxPipelinePlugin from './utils/renderer/postfxpipeline/BasePostFxPipelinePlugin.js';
 import SetValue from './utils/object/SetValue.js';
 
 class WarpPipelinePlugin extends BasePostFxPipelinePlugin {
