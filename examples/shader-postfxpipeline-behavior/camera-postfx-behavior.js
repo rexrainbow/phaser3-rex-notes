@@ -1,7 +1,47 @@
 import phaser from 'phaser/src/phaser.js';
-import PostFxPipelineBehavior from '../../plugins/postfxpipelinebehavior.js';
-import GrayScalePostFxPipeline from '../../plugins/shaders/grayscale/GrayScalePostFxPipeline.js';
-import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
+import PostFxPipelineBehavior from '../../dist/rexpostfxpipelinebehavior.js';
+
+const frag = `\
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
+// Scene buffer
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
+// Effect parameters
+uniform float intensity;
+void main (void) {
+  vec4 front = texture2D(uMainSampler, outTexCoord);
+  float gray = dot(front.rgb, vec3(0.299, 0.587, 0.114));
+  gl_FragColor = mix(front, vec4(gray, gray, gray, front.a), intensity);
+}
+`;
+
+class GrayScalePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+    constructor(game) {
+        super({
+            name: 'rexGrayScalePostFx',
+            game: game,
+            renderTarget: true,
+            fragShader: frag
+        });
+
+        this.intensity = 1;
+    }
+
+    onPreRender() {
+        this.set1f('intensity', this.intensity);
+    }
+
+    // intensity
+    setIntensity(value) {
+        this.intensity = value;
+        return this;
+    }
+}
 
 class Demo extends Phaser.Scene {
     constructor() {
