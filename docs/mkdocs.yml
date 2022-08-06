@@ -248,12 +248,13 @@ nav:
         - Fisheye: shader-fisheye.md
         - Shockwave: shader-shockwave.md
         - Split: shader-split.md
+        - Warp: shader-warp.md
     - Blur:
         - Kawase blur: shader-kawaseblur.md
     - Others:
         - Drop shadow: shader-dropshadow.md
     - Transition:
-        - Warp: shader-warp.md
+        - Warp: shader-warp-transition.md
         - Dissolve: shader-dissolve.md
 - Logic:
     - Events:

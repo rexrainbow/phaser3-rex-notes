@@ -1,28 +1,59 @@
 ## Introduction
 
-Warp transition post processing filter.
+Warp post processing filter. 
 
-- Author: Richard Davey
+- Author: Rex
 - A post-fx shader effect
 
 !!! warning "WebGL only"
     Only work in WebGL render mode.
 
+## Live demos
+
+- [Warp](https://codepen.io/rexrainbow/pen/dymddOj)
+
 ## Usage
 
-[Reference](https://github.com/photonstorm/phaser3-warp-post-fx)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-warp)
 
 ### Install plugin
 
-#### Import class
+#### Load minify file
 
-- Get minify file from [github](https://github.com/photonstorm/phaser3-warp-post-fx/tree/main/dist)
-- Add to game config
+- Load plugin (minify file) in preload stage
     ```javascript
-    import { WarpPostFX } from './dist/WarpPostFX.js';  // Path to your minify file
+    scene.load.plugin('rexwarppipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexwarppipelineplugin.min.js', true);
+    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexwarppipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexwarppipelineplugin').add(camera, config);
+        ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import WarpPipelinePlugin from 'phaser3-rex-plugins/plugins/warppipeline-plugin.js';
     var config = {
         // ...
-        pipeline: { WarpPostFX }
+        plugins: {
+            global: [{
+                key: 'rexWarpPipeline',
+                plugin: WarpPipelinePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
         // ...
     };
     var game = new Phaser.Game(config);
@@ -30,95 +61,154 @@ Warp transition post processing filter.
 - Apply effect
     - Apply effect to game object
         ```javascript
-        gameObject.setPostPipeline(WarpPostFX);
+        var pipelineInstance = scene.plugins.get('rexWarpPipeline').add(gameObject, config);
         ```
     - Apply effect to camera
         ```javascript
-        camera.setPostPipeline(WarpPostFX);
+        var pipelineInstance = scene.plugins.get('rexWarpPipeline').add(camera, config);
         ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Add to game config
+    ```javascript
+    import WarpPostFx from 'phaser3-rex-plugins/plugins/warppipeline.js';
+    var config = {
+        // ...
+        pipeline: [WarpPostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(WarpPostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(WarpPostFx);
+        ```
+
+### Apply effect
+
+- Apply effect to game object. A game object only can add 1 warp effect.
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexWarpPipeline').add(gameObject, {
+        // frequencyX: 10,
+        // frequencyY: 10,
+
+        // amplitudeX: 10,
+        // amplitudeY: 10,
+
+        // progressX: 0,
+        // progressY: 0,
+
+        // name: 'rexWarpPostFx'
+    });
+    ```
+    - `frequencyX`, `frequencyY` : Horizontal/vertical frequency, in pixel.
+    - `amplitudeX`, `amplitudeY` : Horizontal/vertical amplitude, in pixel.
+    - `progressX`, `progressY` : Horizontal/vertical progress. Range is `0`-`1`
+
+- Apply effect to camera. A camera only can add 1 warp effect.
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexWarpPipeline').add(camera, config);
+    ```
 
 ### Remove effect
 
-```javascript
-gameObject.removePostPipeline(WarpPostFX); // WarpPostFX class
-```
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexWarpPipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexWarpPipeline').remove(camera);
+    ```
 
 ### Get effect
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = gameObject.getPostPipeline(WarpPostFX); // WarpPostFX class
+    var pipelineInstance = scene.plugins.get('rexWarpPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexWarpPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = camera.getPostPipeline(WarpPostFX); // WarpPostFX class
+    var pipelineInstance = scene.plugins.get('rexWarpPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexWarpPipeline').get(camera);
     ```
 
-#### Set texture
+### Frequency
 
-```javascript
-pipelineInstance.setTexture(textureKey, resizeMode);
-```
+Horizontal/vertical frequency, in pixel.
 
-- `textureKey` : The key of the texture to use.
-- `resizeMode` : 
-    - `0`, or `'stretch'` : The target texture is stretched to the size of the source texture.
-    - `1`, or `'contain'` : The target texture is resized to fit the source texture.
-    - `2`, or `'cover'` : The target texture is resized to cover the source texture.   
+- Get
+    ```javascript
+    var frequencyX = pipelineInstance.frequencyX;
+    var frequencyY = pipelineInstance.frequencyY;
+    ```
+- Set
+    ```javascript
+    pipelineInstance.frequencyX = frequencyX;
+    pipelineInstance.frequencyY = frequencyY;
+    // pipelineInstance.frequencyX += value;
+    // pipelineInstance.frequencyY += value;
+    ```
+    or
+    ```javascript
+    pipelineInstance.setFrequencyX(frequencyX);
+    pipelineInstance.setFrequencyY(frequencyY);
+    pipelineInstance.setFrequency(frequencyX, frequencyY);
+    ```
+
+### Amplitude
+
+Horizontal/vertical amplitude, in pixel.
+
+- Get
+    ```javascript
+    var amplitudeX = pipelineInstance.amplitudeX;
+    var amplitudeY = pipelineInstance.amplitudeY;
+    ```
+- Set
+    ```javascript
+    pipelineInstance.amplitudeX = amplitudeX;
+    pipelineInstance.amplitudeY = amplitudeY;
+    // pipelineInstance.amplitudeX += value;
+    // pipelineInstance.amplitudeY += value;
+    ```
+    or
+    ```javascript
+    pipelineInstance.setAmplitudeX(amplitudeX);
+    pipelineInstance.setAmplitudeY(amplitudeY);
+    pipelineInstance.setAmplitude(amplitudeX, amplitudeY);
+    ```
 
 ### Progress
 
+Horizontal/vertical progress. Range is `0`-`1`
+
 - Get
     ```javascript
-    var progress = pipelineInstance.progress;
+    var progressX = pipelineInstance.progressX;
+    var progressY = pipelineInstance.progressY;
     ```
 - Set
     ```javascript
-    pipelineInstance.setProgress(value);  // value: 0~1
+    pipelineInstance.progressX = progressX;
+    pipelineInstance.progressY = progressY;
+    // pipelineInstance.progressX += value;
+    // pipelineInstance.progressY += value;
     ```
     or
     ```javascript
-    pipelineInstance.progress = value;  // value: 0~1
+    pipelineInstance.setProgressX(progressX);
+    pipelineInstance.setProgressY(progressY);
+    pipelineInstance.setProgress(progressX, progressY);
     ```
-
-### Direction
-
-- Get
-    ```javascript
-    var direction = pipelineInstance.direction;  // {x, y}
-    ```
-    - Default value is `{x:-1, y:1}`
-- Set
-    ```javascript
-    pipelineInstance.setDirection(x, y);  // x, y : 1, or -1
-    ```
-
-### Smoothness
-
-- Get
-    ```javascript
-    var smoothness = pipelineInstance.smoothness;
-    ```
-- Set
-    ```javascript
-    pipelineInstance.setSmoothness(value);  // value: 0~1
-    ```
-    or
-    ```javascript
-    pipelineInstance.smoothness = value;  // value: 0~1
-    ```
-
-#### Resize mode
-
-- Get
-    ```javascript
-    var mode = pipelineInstance.resizeMode;
-    ```
-- Set
-    ```javascript
-    pipelineInstance.setResizeMode(mode);
-    ```
-    - `mode` : 
-        - `0`, or `'stretch'` : The target texture is stretched to the size of the source texture.
-        - `1`, or `'contain'` : The target texture is resized to fit the source texture.
-        - `2`, or `'cover'` : The target texture is resized to cover the source texture.    

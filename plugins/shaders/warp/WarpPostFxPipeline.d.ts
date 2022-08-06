@@ -3,14 +3,14 @@ export default WarpPostFxPipeline;
 
 declare namespace WarpPostFxPipeline {
     interface IConfig {
-        frequency?: number,
         frequencyX?: number, frequencyY?: number,
+        frequency?: number,
 
-        amplitude?: number,
         amplitudeX?: number, amplitudeY?: number,
+        amplitude?: number,
 
-        progress?: number,
         progressX?: number, progressY?: number,
+        progress?: number,
     }
 }
 
