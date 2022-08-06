@@ -5668,15 +5668,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#content" class="md-nav__link">
-    Content
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#typing-speed" class="md-nav__link">
-    Typing speed
+  <a href="#text" class="md-nav__link">
+    Text
   </a>
   
 </li>
@@ -8621,15 +8614,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#content" class="md-nav__link">
-    Content
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#typing-speed" class="md-nav__link">
-    Typing speed
+  <a href="#text" class="md-nav__link">
+    Text
   </a>
   
 </li>
@@ -8911,18 +8897,58 @@
 </code></pre></div></li>
 </ul>
 <h3 id="tags-of-content">Tags of content<a class="headerlink" href="#tags-of-content" title="Permanent link">&para;</a></h3>
-<h4 id="content">Content<a class="headerlink" href="#content" title="Permanent link">&para;</a></h4>
-<p>These lines will be skipped :</p>
+<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Empty line, which only has space characters.</li>
-<li>Comment line, start with <code>'//'</code>.</li>
+<li>Add text : <code>[text.name]</code><ul>
+<li>Tint-fade-in if <code>text.fade</code> is not <code>0</code></li>
 </ul>
-<p>New line symbol <code>'\n'</code> will be removed, use <code>[r]</code> to insert a new line character.</p>
-<h4 id="typing-speed">Typing speed<a class="headerlink" href="#typing-speed" title="Permanent link">&para;</a></h4>
-<ul>
-<li>No typing : <code>[speed=0]</code></li>
-<li>Set speed : <code>[speed=1000]</code></li>
-<li>Back to default speed : <code>[/speed]</code></li>
+</li>
+<li>Remove text : <code>[/text.name]</code><ul>
+<li>Tint-fade-out if <code>text.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove all texts : <code>[/text]</code><ul>
+<li>Tint-fade-out if <code>text.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Call method : <code>[text.name.methodName=value0,value1,value2]</code></li>
+<li>Set property : <code>[text.name.x=value]</code>, <code>[text.name.alpha=value]</code>, ....</li>
+<li>Ease property : 
+    <div class="highlight"><pre><span></span><code>[text.name.x.to=value,duration]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[text.name.x.to=value,duration,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[text.name.x.to=value,duration,easeFunction,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[text.name.x.to=value]
+</code></pre></div><ul>
+<li><code>duration</code> : Default value is <code>1000</code></li>
+<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
+<li><code>repeat</code> : Default value is <code>0</code></li>
+</ul>
+</li>
+<li>Yoyo ease property : 
+    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value,duration]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value,duration,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value,duration,easeFunction,repeat]
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value]
+</code></pre></div></li>
+<li>Set text
+    <div class="highlight"><pre><span></span><code>[text.name.text]
+content\\n
+newline\\n
+newline
+</code></pre></div></li>
+<li>Typing text
+    <div class="highlight"><pre><span></span><code>[text.name.typing]
+// [text.name.typing=speed]
+content\\n
+newline\\n
+newline
+</code></pre></div></li>
 </ul>
 <h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
 <ul>
@@ -8938,6 +8964,7 @@
 <li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
 </ul>
 </li>
+<li>Call method : <code>[sprite.name.methodName=value0,value1,value2]</code></li>
 <li>Set property : <code>[sprite.name.x=value]</code>, <code>[sprite.name.alpha=value]</code>, ....</li>
 <li>Ease property : 
     <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration]

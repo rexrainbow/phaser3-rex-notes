@@ -614,6 +614,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     - Tint-fade-out if `sprite.fade` is not `0`
 - Remove all sprites : `[/sprite]`
     - Tint-fade-out if `sprite.fade` is not `0`
+- Call method : `[sprite.name.methodName=value0,value1,value2]`
 - Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
 - Ease property : 
     ```

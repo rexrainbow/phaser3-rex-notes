@@ -204,20 +204,60 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
 
 ### Tags of content
 
-#### Content
+#### Text
 
-These lines will be skipped :
-
-- Empty line, which only has space characters.
-- Comment line, start with `'//'`.
-
-New line symbol `'\n'` will be removed, use `[r]` to insert a new line character.
-
-#### Typing speed
-
-- No typing : `[speed=0]`
-- Set speed : `[speed=1000]`
-- Back to default speed : `[/speed]`
+- Add text : `[text.name]`
+    - Tint-fade-in if `text.fade` is not `0`
+- Remove text : `[/text.name]`
+    - Tint-fade-out if `text.fade` is not `0`
+- Remove all texts : `[/text]`
+    - Tint-fade-out if `text.fade` is not `0`
+- Call method : `[text.name.methodName=value0,value1,value2]`
+- Set property : `[text.name.x=value]`, `[text.name.alpha=value]`, ....
+- Ease property : 
+    ```
+    [text.name.x.to=value,duration]
+    ```
+    ```
+    [text.name.x.to=value,duration,repeat]
+    ```
+    ```
+    [text.name.x.to=value,duration,easeFunction,repeat]
+    ```
+    ```
+    [text.name.x.to=value]
+    ```
+    - `duration` : Default value is `1000`
+    - `easeFunction` : Default value is `'Linear'`
+    - `repeat` : Default value is `0`
+- Yoyo ease property : 
+    ```
+    [text.name.x.yoyo=value,duration]
+    ```
+    ```
+    [text.name.x.yoyo=value,duration,repeat]
+    ```
+    ```
+    [text.name.x.yoyo=value,duration,easeFunction,repeat]
+    ```
+    ```
+    [text.name.x.yoyo=value]
+    ```
+- Set text
+    ```
+    [text.name.text]
+    content\\n
+    newline\\n
+    newline
+    ```
+- Typing text
+    ```
+    [text.name.typing]
+    // [text.name.typing=speed]
+    content\\n
+    newline\\n
+    newline
+    ```
 
 #### Sprite
 
@@ -227,6 +267,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     - Tint-fade-out if `sprite.fade` is not `0`
 - Remove all sprites : `[/sprite]`
     - Tint-fade-out if `sprite.fade` is not `0`
+- Call method : `[sprite.name.methodName=value0,value1,value2]`
 - Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
 - Ease property : 
     ```
