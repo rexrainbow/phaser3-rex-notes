@@ -5,9 +5,6 @@ var IsTypingTextTag = function (tags, prefix) {
 
 var OnParseTypingTextTag = function (tagPlayer, parser, config) {
     var prefix = 'text';
-    if (!prefix) {
-        return;
-    }
     parser
         .on(`+`, function (tag, speed) {
             if (parser.skipEventFlag) {  // Has been processed before

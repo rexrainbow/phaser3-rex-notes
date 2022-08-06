@@ -15,6 +15,8 @@ declare class BobBase {
 
     destroy(): void;
 
+    hasProperty(property: string): boolean;
+
     setProperty(property: string, value: any): this;
 
     easeProperty(
@@ -28,4 +30,11 @@ declare class BobBase {
     ): this;
 
     setTimeScale(timeScale: number): this;
+
+    hasMethod(methodName: string): boolean;
+
+    call(
+        methodName: string,
+        ...parameters: any[]
+    ): this;
 }

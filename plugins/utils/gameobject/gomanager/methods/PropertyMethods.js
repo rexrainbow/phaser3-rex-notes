@@ -1,4 +1,11 @@
 export default {
+    hasProperty(name, property) {
+        if (!this.has(name)) {
+            return false;
+        }
+        return this.get(name).hasProperty(property);
+    },
+
     setProperty(name, property, value) {
         if (!this.has(name)) {
             return this;

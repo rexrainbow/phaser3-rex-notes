@@ -55,6 +55,7 @@ class Demo extends Phaser.Scene {
 [text.a]
 [text.a.x=300]
 [text.a.y=100]
+[text.a.setColor=yellow]
 [text.a.typing]
 Hello\\n
 Phaser\\n

@@ -14467,6 +14467,55 @@
     (_this$spriteManager = this.spriteManager).easeProperty.apply(_this$spriteManager, _toConsumableArray(params));
   };
 
+  var IsCallSpriteMethodTag = function IsCallSpriteMethodTag(tags, prefix) {
+    // sprite.name.methodName
+    return tags.length === 3 && tags[0] === prefix;
+  };
+
+  var OnParseCallSpriteMethodTag = function OnParseCallSpriteMethodTag(textPlayer, parser, config) {
+    var prefix = 'sprite';
+
+    parser.on("+", function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [sprite.name.methodName=value0,value1,value2...]
+
+
+      var tags = tag.split('.');
+      var name, methodName;
+
+      if (IsCallSpriteMethodTag(tags, prefix)) {
+        name = tags[1];
+        methodName = tags[2];
+      } else {
+        return;
+      }
+
+      if (!textPlayer.spriteManager.hasMethod(name, methodName)) {
+        return;
+      }
+
+      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        parameters[_key - 1] = arguments[_key];
+      }
+
+      AppendCommand$3.call(textPlayer, 'sprite.call', // name
+      CallMethod, // callback
+      [name, methodName].concat(parameters), // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var CallMethod = function CallMethod(params) {
+    var _this$spriteManager;
+
+    // this: textPlayer
+    (_this$spriteManager = this.spriteManager).call.apply(_this$spriteManager, _toConsumableArray(params));
+  };
+
   var OnParseNewLineTag = function OnParseNewLineTag(textPlayer, parser, config) {
     var tagName = 'r';
     parser.on("+".concat(tagName), function () {
@@ -14554,7 +14603,8 @@
     );
   };
 
-  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
+  OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
@@ -16874,6 +16924,18 @@
         return this;
       }
     }, {
+      key: "hasProperty",
+      value: function hasProperty(property) {
+        var gameObject = this.gameObject;
+
+        if (gameObject.hasOwnProperty(property)) {
+          return true;
+        } else {
+          var value = gameObject[property];
+          return value !== undefined;
+        }
+      }
+    }, {
       key: "setProperty",
       value: function setProperty(property, value) {
         this.gameObject[property] = value;
@@ -16920,6 +16982,27 @@
           tweenTasks[key].timeScale = timeScale;
         }
 
+        return this;
+      }
+    }, {
+      key: "hasMethod",
+      value: function hasMethod(methodName) {
+        return typeof this.gameObject[methodName] === 'function';
+      }
+    }, {
+      key: "call",
+      value: function call(methodName) {
+        if (!this.hasMethod(methodName)) {
+          return this;
+        }
+
+        var gameObject = this.gameObject;
+
+        for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          parameters[_key - 1] = arguments[_key];
+        }
+
+        gameObject[methodName].apply(gameObject, parameters);
         return this;
       }
     }]);
@@ -17297,6 +17380,13 @@
   };
 
   var PropertyMethods = {
+    hasProperty: function hasProperty(name, property) {
+      if (!this.has(name)) {
+        return false;
+      }
+
+      return this.get(name).hasProperty(property);
+    },
     setProperty: function setProperty(name, property, value) {
       if (!this.has(name)) {
         return this;
@@ -17342,8 +17432,33 @@
     }
   };
 
+  var CallMethods = {
+    hasMethod: function hasMethod(name, methodName) {
+      if (!this.has(name)) {
+        return false;
+      }
+
+      return this.get(name).hasMethod(methodName);
+    },
+    call: function call(name, methodName) {
+      var _this$get;
+
+      if (!this.has(name)) {
+        return this;
+      }
+
+      for (var _len = arguments.length, parameters = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        parameters[_key - 2] = arguments[_key];
+      }
+
+      (_this$get = this.get(name)).call.apply(_this$get, [methodName].concat(parameters));
+
+      return this;
+    }
+  };
+
   var Methods$7 = {};
-  Object.assign(Methods$7, AddMethods$1, RemoveMethods$1, PropertyMethods);
+  Object.assign(Methods$7, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods);
 
   var GetValue$1J = Phaser.Utils.Objects.GetValue;
 

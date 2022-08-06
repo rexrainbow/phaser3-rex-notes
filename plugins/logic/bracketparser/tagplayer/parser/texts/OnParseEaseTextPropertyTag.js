@@ -10,9 +10,6 @@ var IsEasePropertyTag = function (tags, prefix) {
 
 var OnParseEaseTextPropertyTag = function (tagPlayer, parser, config) {
     var prefix = 'text';
-    if (!prefix) {
-        return;
-    }
     parser
         .on(`+`, function (tag, value, duration, ease, repeat) {
             if (parser.skipEventFlag) {  // Has been processed before

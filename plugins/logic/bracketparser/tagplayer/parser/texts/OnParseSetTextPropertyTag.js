@@ -5,9 +5,6 @@ var IsSetPropertyTag = function (tags, prefix) {
 
 var OnParseSetTextPropertyTag = function (tagPlayer, parser, config) {
     var prefix = 'text';
-    if (!prefix) {
-        return;
-    }
     parser
         .on(`+`, function (tag, value) {
             if (parser.skipEventFlag) {  // Has been processed before

@@ -36,6 +36,7 @@ import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
+import ParseCallSpriteMethodTag from './sprites/OnParseCallSpriteMethodTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseContentOff from './content/OnParseContentOff.js';
 import ParseContentOn from './content/OnParseContentOn.js';
@@ -60,6 +61,8 @@ const ParseCallbacks = [
 
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
+    ParseCallSpriteMethodTag,
+    // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
     ParseNewLineTag,

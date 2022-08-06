@@ -23,12 +23,14 @@ import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
+import ParseCallSpriteMethodTag from './sprites/OnParseCallSpriteMethodTag.js';
 import ParseAddTextTag from './texts/OnParseAddTextTag.js';
 import ParseRemoveTextTag from './texts/OnParseRemoveAllTextsTag.js';
 import ParseSetTextTag from './texts/OnParseSetTextTag.js';
 import ParseTypingTextTag from './texts/OnParseTypingTextTag.js';
 import ParseSetTextPropertyTag from './texts/OnParseSetTextPropertyTag.js';
 import ParseEaseTextPropertyTag from './texts/OnParseEaseTextPropertyTag.js'
+import ParseCallTextMethodTag from './texts/OnParseCallTextMethodTag.js';
 import ParseContent from './content/OnParseContent.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 
@@ -43,10 +45,14 @@ const ParseCallbacks = [
 
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
+    ParseCallSpriteMethodTag,
+    // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
     ParseAddTextTag, ParseRemoveTextTag,
     ParseSetTextTag, ParseTypingTextTag,
+    ParseCallTextMethodTag,
+    // ParseCallTextMethodTag has heigher priority then ParseSetTextPropertyTag
     ParseSetTextPropertyTag, ParseEaseTextPropertyTag,
 
     ParseContent,

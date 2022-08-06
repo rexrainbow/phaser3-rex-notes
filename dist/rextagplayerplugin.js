@@ -839,7 +839,6 @@
 
   var OnParseAddSpriteTag = function OnParseAddSpriteTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on('+', function (tag) {
       var _tagPlayer$spriteMana;
 
@@ -888,7 +887,6 @@
 
   var OnParseRemoveAllSpritesTag = function OnParseRemoveAllSpritesTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on('-', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -912,7 +910,6 @@
 
   var OnParseSetTextureTag = function OnParseSetTextureTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on('+', function (tag, textureKey, frameKey) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -946,7 +943,6 @@
 
   var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1018,7 +1014,6 @@
 
   var OnParseChainAnimationTag = function OnParseChainAnimationTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1048,7 +1043,6 @@
 
   var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1077,7 +1071,6 @@
 
   var OnParseSetSpritePropertyTag = function OnParseSetSpritePropertyTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on("+", function (tag, value) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1112,7 +1105,6 @@
 
   var OnParseEaseSpritePropertyTag = function OnParseEaseSpritePropertyTag(tagPlayer, parser, config) {
     var prefix = 'sprite';
-
     parser.on("+", function (tag, value, duration, ease, repeat) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1143,6 +1135,46 @@
     });
   };
 
+  var IsCallMethodTag$1 = function IsCallMethodTag(tags, prefix) {
+    // sprite.name.methodName
+    return tags.length === 3 && tags[0] === prefix;
+  };
+
+  var OnParseCallSpriteMethodTag = function OnParseCallSpriteMethodTag(tagPlayer, parser, config) {
+    var prefix = 'sprite';
+    parser.on("+", function (tag) {
+      var _tagPlayer$spriteMana;
+
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [sprite.name.methodName=value0,value1,value2...]
+
+
+      var tags = tag.split('.');
+      var name, methodName;
+
+      if (IsCallMethodTag$1(tags, prefix)) {
+        name = tags[1];
+        methodName = tags[2];
+      } else {
+        return;
+      }
+
+      if (!tagPlayer.spriteManager.hasMethod(name, methodName)) {
+        return;
+      }
+
+      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        parameters[_key - 1] = arguments[_key];
+      }
+
+      (_tagPlayer$spriteMana = tagPlayer.spriteManager).call.apply(_tagPlayer$spriteMana, [name, methodName].concat(parameters));
+
+      parser.skipEvent();
+    });
+  };
+
   var IsAddTextTag = function IsAddTextTag(tags, prefix) {
     // text.name
     return tags.length === 2 && tags[0] === prefix;
@@ -1150,7 +1182,6 @@
 
   var OnParseAddTextTag = function OnParseAddTextTag(tagPlayer, parser, config) {
     var prefix = 'text';
-
     parser.on('+', function (tag) {
       var _tagPlayer$textManage;
 
@@ -1199,7 +1230,6 @@
 
   var OnParseRemoveAllTextsTag = function OnParseRemoveAllTextsTag(tagPlayer, parser, config) {
     var prefix = 'text';
-
     parser.on('-', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1223,7 +1253,6 @@
 
   var OnParseSetTextTag = function OnParseSetTextTag(tagPlayer, parser, config) {
     var prefix = 'text';
-
     parser.on("+", function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1274,7 +1303,6 @@
 
   var OnParseTypingTextTag = function OnParseTypingTextTag(tagPlayer, parser, config) {
     var prefix = 'text';
-
     parser.on("+", function (tag, speed) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1330,7 +1358,6 @@
 
   var OnParseSetTextPropertyTag = function OnParseSetTextPropertyTag(tagPlayer, parser, config) {
     var prefix = 'text';
-
     parser.on("+", function (tag, value) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1365,7 +1392,6 @@
 
   var OnParseEaseTextPropertyTag = function OnParseEaseTextPropertyTag(tagPlayer, parser, config) {
     var prefix = 'text';
-
     parser.on("+", function (tag, value, duration, ease, repeat) {
       if (parser.skipEventFlag) {
         // Has been processed before
@@ -1392,6 +1418,46 @@
       }
 
       tagPlayer.textManager.easeProperty(name, property, value, duration, ease, repeat, isYoyo);
+      parser.skipEvent();
+    });
+  };
+
+  var IsCallMethodTag = function IsCallMethodTag(tags, prefix) {
+    // text.name.methodName
+    return tags.length === 3 && tags[0] === prefix;
+  };
+
+  var OnParseCallTextMethodTag = function OnParseCallTextMethodTag(tagPlayer, parser, config) {
+    var prefix = 'text';
+    parser.on("+", function (tag) {
+      var _tagPlayer$textManage;
+
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [text.name.methodName=value0,value1,value2...]
+
+
+      var tags = tag.split('.');
+      var name, methodName;
+
+      if (IsCallMethodTag(tags, prefix)) {
+        name = tags[1];
+        methodName = tags[2];
+      } else {
+        return;
+      }
+
+      if (!tagPlayer.textManager.hasMethod(name, methodName)) {
+        return;
+      }
+
+      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        parameters[_key - 1] = arguments[_key];
+      }
+
+      (_tagPlayer$textManage = tagPlayer.textManager).call.apply(_tagPlayer$textManage, [name, methodName].concat(parameters));
+
       parser.skipEvent();
     });
   };
@@ -1436,7 +1502,9 @@
     });
   };
 
-  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseAddTextTag, OnParseRemoveAllTextsTag, OnParseSetTextTag, OnParseTypingTextTag, OnParseSetTextPropertyTag, OnParseEaseTextPropertyTag, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
+  OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseAddTextTag, OnParseRemoveAllTextsTag, OnParseSetTextTag, OnParseTypingTextTag, OnParseCallTextMethodTag, // ParseCallTextMethodTag has heigher priority then ParseSetTextPropertyTag
+  OnParseSetTextPropertyTag, OnParseEaseTextPropertyTag, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(tagPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
@@ -3164,6 +3232,18 @@
         return this;
       }
     }, {
+      key: "hasProperty",
+      value: function hasProperty(property) {
+        var gameObject = this.gameObject;
+
+        if (gameObject.hasOwnProperty(property)) {
+          return true;
+        } else {
+          var value = gameObject[property];
+          return value !== undefined;
+        }
+      }
+    }, {
       key: "setProperty",
       value: function setProperty(property, value) {
         this.gameObject[property] = value;
@@ -3210,6 +3290,27 @@
           tweenTasks[key].timeScale = timeScale;
         }
 
+        return this;
+      }
+    }, {
+      key: "hasMethod",
+      value: function hasMethod(methodName) {
+        return typeof this.gameObject[methodName] === 'function';
+      }
+    }, {
+      key: "call",
+      value: function call(methodName) {
+        if (!this.hasMethod(methodName)) {
+          return this;
+        }
+
+        var gameObject = this.gameObject;
+
+        for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          parameters[_key - 1] = arguments[_key];
+        }
+
+        gameObject[methodName].apply(gameObject, parameters);
         return this;
       }
     }]);
@@ -3587,6 +3688,13 @@
   };
 
   var PropertyMethods = {
+    hasProperty: function hasProperty(name, property) {
+      if (!this.has(name)) {
+        return false;
+      }
+
+      return this.get(name).hasProperty(property);
+    },
     setProperty: function setProperty(name, property, value) {
       if (!this.has(name)) {
         return this;
@@ -3632,8 +3740,33 @@
     }
   };
 
+  var CallMethods = {
+    hasMethod: function hasMethod(name, methodName) {
+      if (!this.has(name)) {
+        return false;
+      }
+
+      return this.get(name).hasMethod(methodName);
+    },
+    call: function call(name, methodName) {
+      var _this$get;
+
+      if (!this.has(name)) {
+        return this;
+      }
+
+      for (var _len = arguments.length, parameters = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        parameters[_key - 2] = arguments[_key];
+      }
+
+      (_this$get = this.get(name)).call.apply(_this$get, [methodName].concat(parameters));
+
+      return this;
+    }
+  };
+
   var Methods$3 = {};
-  Object.assign(Methods$3, AddMethods, RemoveMethods, PropertyMethods);
+  Object.assign(Methods$3, AddMethods, RemoveMethods, PropertyMethods, CallMethods);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
 

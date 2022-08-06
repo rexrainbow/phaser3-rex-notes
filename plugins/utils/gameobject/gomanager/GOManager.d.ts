@@ -54,6 +54,11 @@ declare class GOManager extends Phaser.Events.EventEmitter {
     removeAll(): this;
     clear(destroyChild?: boolean): this;
 
+    hasProperty(
+        name: string,
+        property: string,
+    ): boolean;
+
     setProperty(
         name: string,
         property: string,
@@ -72,6 +77,12 @@ declare class GOManager extends Phaser.Events.EventEmitter {
             gameObject: Phaser.GameObjects.GameObject,
             property: string
         ) => void
+    ): this;
+
+    call(
+        name: string,
+        methodName: string,
+        ...parameters: any[]
     ): this;
 
     getTweenTask(

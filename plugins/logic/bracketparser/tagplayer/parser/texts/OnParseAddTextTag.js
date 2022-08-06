@@ -5,9 +5,6 @@ var IsAddTextTag = function (tags, prefix) {
 
 var OnParseAddTextTag = function (tagPlayer, parser, config) {
     var prefix = 'text';
-    if (!prefix) {
-        return;
-    }
     parser
         .on('+', function (tag, ...args) {
             if (parser.skipEventFlag) {  // Has been processed before

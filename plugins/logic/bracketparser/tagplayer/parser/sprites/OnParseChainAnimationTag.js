@@ -5,9 +5,6 @@ var IsChainAnimationTag = function (tags, prefix) {
 
 var OnParseChainAnimationTag = function (tagPlayer, parser, config) {
     var prefix = 'sprite';
-    if (!prefix) {
-        return;
-    }
     parser
         .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before

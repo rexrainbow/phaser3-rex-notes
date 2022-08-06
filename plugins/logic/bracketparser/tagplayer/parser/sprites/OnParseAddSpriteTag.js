@@ -5,9 +5,6 @@ var IsAddSpriteTag = function (tags, prefix) {
 
 var OnParseAddSpriteTag = function (tagPlayer, parser, config) {
     var prefix = 'sprite';
-    if (!prefix) {
-        return;
-    }
     parser
         .on('+', function (tag, ...args) {
             if (parser.skipEventFlag) {  // Has been processed before

@@ -41,6 +41,16 @@ class BobBase {
         return this;
     }
 
+    hasProperty(property) {
+        var gameObject = this.gameObject;
+        if (gameObject.hasOwnProperty(property)) {
+            return true;
+        } else {
+            var value = gameObject[property];
+            return (value !== undefined);
+        }
+    }
+
     setProperty(property, value) {
         this.gameObject[property] = value;
         return this;
@@ -81,6 +91,21 @@ class BobBase {
         for (var key in tweenTasks) {
             tweenTasks[key].timeScale = timeScale;
         }
+
+        return this;
+    }
+
+    hasMethod(methodName) {
+        return typeof (this.gameObject[methodName]) === 'function';
+    }
+
+    call(methodName, ...parameters) {
+        if (!this.hasMethod(methodName)) {
+            return this;
+        }
+
+        var gameObject = this.gameObject;
+        gameObject[methodName].apply(gameObject, parameters);
 
         return this;
     }
