@@ -34,13 +34,4 @@ export default {
         this.get(name).pauseAnimation();
         return this;
     },
-
-    setTexture(name, textureKey, frameKey) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        this.get(name).setTexture(textureKey, frameKey);
-        return this;
-    }
 }

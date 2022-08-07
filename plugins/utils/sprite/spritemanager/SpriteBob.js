@@ -1,11 +1,6 @@
 import BobBase from '../../gameobject/gomanager/BobBase.js';
 
 class SpriteBob extends BobBase {
-    setTexture(textureKey, frameKey) {
-        this.gameObject.setTexture(textureKey, frameKey);
-        return this;
-    }
-
     playAnimation(key) {
         this.gameObject.anims.timeScale = this.timeScale;
         this.gameObject.play(key);

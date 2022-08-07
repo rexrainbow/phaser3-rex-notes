@@ -11,7 +11,7 @@ var OnParsePauseAnimationTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [sprite.name.chain=key]
+            // [sprite.name.pause=key]
             var tags = tag.split('.');
             var name;
             if (IsPauseAnimationTag(tags, prefix)) {
