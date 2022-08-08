@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexWarpPipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
         var postFxPipeline = postFxPlugin.add(gameObject, {
+            speedY: 6
         });
 
         var gui = new Dat.GUI();
@@ -24,8 +25,8 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'frequencyY', 0, 100);
         gui.add(postFxPipeline, 'amplitudeX', 0, 100);
         gui.add(postFxPipeline, 'amplitudeY', 0, 100);
-        gui.add(postFxPipeline, 'progressX', 0, 1);
-        gui.add(postFxPipeline, 'progressY', 0, 1);
+        gui.add(postFxPipeline, 'speedX', 0, 100);
+        gui.add(postFxPipeline, 'speedY', 0, 100);
     }
 
     update() {
