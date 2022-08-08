@@ -903,34 +903,6 @@
     });
   };
 
-  var IsSetTextureTag = function IsSetTextureTag(tags, prefix) {
-    // sprite.name.texture
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'texture';
-  };
-
-  var OnParseSetTextureTag = function OnParseSetTextureTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on('+', function (tag, textureKey, frameKey) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.texture=key,frame]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsSetTextureTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      tagPlayer.spriteManager.setTexture(name, textureKey, frameKey);
-      parser.skipEvent();
-    });
-  };
-
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
     // sprite.name.play
     return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
@@ -1047,7 +1019,7 @@
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [sprite.name.chain=key]
+      } // [sprite.name.pause=key]
 
 
       var tags = tag.split('.');
@@ -1502,7 +1474,7 @@
     });
   };
 
-  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
+  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
   OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseAddTextTag, OnParseRemoveAllTextsTag, OnParseSetTextTag, OnParseTypingTextTag, OnParseCallTextMethodTag, // ParseCallTextMethodTag has heigher priority then ParseSetTextPropertyTag
   OnParseSetTextPropertyTag, OnParseEaseTextPropertyTag, OnParseContent, OnParseCustomTag];
 
@@ -3861,12 +3833,6 @@
     }
 
     _createClass(SpriteBob, [{
-      key: "setTexture",
-      value: function setTexture(textureKey, frameKey) {
-        this.gameObject.setTexture(textureKey, frameKey);
-        return this;
-      }
-    }, {
       key: "playAnimation",
       value: function playAnimation(key) {
         this.gameObject.anims.timeScale = this.timeScale;
@@ -3938,14 +3904,6 @@
       }
 
       this.get(name).pauseAnimation();
-      return this;
-    },
-    setTexture: function setTexture(name, textureKey, frameKey) {
-      if (!this.has(name)) {
-        return this;
-      }
-
-      this.get(name).setTexture(textureKey, frameKey);
       return this;
     }
   };

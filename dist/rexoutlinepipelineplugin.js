@@ -268,9 +268,9 @@
   var GetGame = function GetGame(object) {
     if (IsGame(object)) {
       return object;
-    } else if (IsSceneObject(object)) {
+    } else if (IsGame(object.game)) {
       return object.game;
-    } else if (object.scene && IsSceneObject(object.scene)) {
+    } else if (IsSceneObject(object.scene)) {
       // object = game object
       return object.scene.game;
     }

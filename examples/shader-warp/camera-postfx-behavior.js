@@ -15,8 +15,18 @@ class Demo extends Phaser.Scene {
 
     create() {
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
-        var behavior = new WarpPipelineBehavior(this.cameras.main);
+        var behavior = new WarpPipelineBehavior(this.cameras.main, {
+            speedY: 6
+        });
         var postFxPipeline = behavior.getPipeline();
+
+        this.input
+            .on('pointerdown', function () {
+                postFxPipeline.setSpeedEnable(false)
+            })
+            .on('pointerup', function () {
+                postFxPipeline.setSpeedEnable()
+            })
 
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'frequencyX', 0, 100);
@@ -25,6 +35,8 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'amplitudeY', 0, 100);
         gui.add(postFxPipeline, 'progressX', 0, 1);
         gui.add(postFxPipeline, 'progressY', 0, 1);
+        gui.add(postFxPipeline, 'speedX', 0, 100);
+        gui.add(postFxPipeline, 'speedY', 0, 100);
     }
 
     update() {

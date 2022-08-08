@@ -108,12 +108,20 @@ Warp post processing filter.
         // progressX: 0,
         // progressY: 0,
 
+        // speedX: 0,
+        // speedY: 0,
+        // speedEnable: 
+
         // name: 'rexWarpPostFx'
     });
     ```
     - `frequencyX`, `frequencyY` : Horizontal/vertical frequency, in pixel.
     - `amplitudeX`, `amplitudeY` : Horizontal/vertical amplitude, in pixel.
     - `progressX`, `progressY` : Horizontal/vertical progress. Range is `0`-`1`
+    - `speedX`, `speedY` : Horizontal/vertical speed.
+    - `speedEnable`
+        - `true` : Enable speed. Default value if `speedX` or `speedY` is not `0`.
+        - `false` : Disable speed. Default value if `speedX` and `speedY` are both `0`.
 
 - Apply effect to camera. A camera only can add 1 warp effect.
     ```javascript
@@ -211,4 +219,35 @@ Horizontal/vertical progress. Range is `0`-`1`
     pipelineInstance.setProgressX(progressX);
     pipelineInstance.setProgressY(progressY);
     pipelineInstance.setProgress(progressX, progressY);
+    ```
+
+### Speed
+
+Horizontal/vertical speed.
+
+- Eanble/resume
+    ```javascript
+    pipelineInstance.setSpeedEnable();
+    ```
+- Pause
+    ```javascript
+    pipelineInstance.setSpeedEnable(false);
+    ```
+- Get
+    ```javascript
+    var speedX = pipelineInstance.speedX;
+    var speedY = pipelineInstance.speedY;
+    ```
+- Set
+    ```javascript
+    pipelineInstance.speedX = speedX;
+    pipelineInstance.speedY = speedY;
+    // pipelineInstance.speedX += value;
+    // pipelineInstance.speedY += value;
+    ```
+    or
+    ```javascript
+    pipelineInstance.setSpeedX(speedX);
+    pipelineInstance.setSpeedY(speedY);
+    pipelineInstance.setSpeed(speedX, speedY);
     ```

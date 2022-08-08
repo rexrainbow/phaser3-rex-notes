@@ -17,12 +17,15 @@ uniform vec2 texSize;
 uniform vec2 amplitude;
 uniform vec2 frequency;
 uniform vec2 progress;
+uniform vec2 speed;
+uniform float time;
 
 
 void main (void) {
   vec2 dxy = frequency/texSize;
   vec2 r = amplitude/texSize;
-  vec2 angle = (outTexCoord / dxy) + progress;
+  vec2 spd = speed/texSize;
+  vec2 angle = (outTexCoord / dxy) + progress + (spd*time);
   vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;
   gl_FragColor = texture2D(uMainSampler, tc);
 }

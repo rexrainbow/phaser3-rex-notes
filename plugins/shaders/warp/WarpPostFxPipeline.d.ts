@@ -11,6 +11,10 @@ declare namespace WarpPostFxPipeline {
 
         progressX?: number, progressY?: number,
         progress?: number,
+
+        speedX?: number, speedY?: number,
+        speed?: number,
+        speedEnable?: boolean
     }
 }
 
@@ -39,4 +43,11 @@ declare class WarpPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXP
     progressX: number;
     progressY: number;
     progress: number;
+
+    setSpeedX(value: number): this;
+    setSpeedY(value: number): this;
+    setSpeed(x: number, y?: number): this;
+    speedX: number;
+    speedY: number;
+    speed: Phaser.Math.Vector2;
 }

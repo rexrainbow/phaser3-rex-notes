@@ -4827,45 +4827,6 @@
     this.spriteManager.removeAll();
   };
 
-  var IsSetTextureTag = function IsSetTextureTag(tags, prefix) {
-    // sprite.name.texture
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'texture';
-  };
-
-  var OnParseSetTextureTag = function OnParseSetTextureTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on('+', function (tag, textureKey, frameKey) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.texture=key,frame]
-
-
-      var tags = tag.split('.');
-
-      if (IsSetTextureTag(tags, prefix)) {
-        var name = tags[1];
-        AppendCommand$3.call(textPlayer, 'sprite.texture', // name
-        SetTexture, // callback
-        [name, textureKey, frameKey], // params
-        textPlayer // scope
-        );
-      } else {
-        return;
-      }
-
-      parser.skipEvent();
-    });
-  };
-
-  var SetTexture = function SetTexture(params) {
-    var _this$spriteManager;
-
-    // this: textPlayer
-    (_this$spriteManager = this.spriteManager).setTexture.apply(_this$spriteManager, _toConsumableArray(params));
-  };
-
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
     // sprite.name.play 
     return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
@@ -5276,7 +5237,7 @@
     );
   };
 
-  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParseSetTextureTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
+  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
   OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
@@ -8371,12 +8332,6 @@
     }
 
     _createClass(SpriteBob, [{
-      key: "setTexture",
-      value: function setTexture(textureKey, frameKey) {
-        this.gameObject.setTexture(textureKey, frameKey);
-        return this;
-      }
-    }, {
       key: "playAnimation",
       value: function playAnimation(key) {
         this.gameObject.anims.timeScale = this.timeScale;
@@ -8448,14 +8403,6 @@
       }
 
       this.get(name).pauseAnimation();
-      return this;
-    },
-    setTexture: function setTexture(name, textureKey, frameKey) {
-      if (!this.has(name)) {
-        return this;
-      }
-
-      this.get(name).setTexture(textureKey, frameKey);
       return this;
     }
   };

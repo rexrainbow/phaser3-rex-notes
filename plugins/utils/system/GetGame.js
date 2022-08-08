@@ -4,9 +4,9 @@ import IsSceneObject from './IsSceneObject.js';
 var GetGame = function (object) {
     if (IsGame(object)) {
         return object;
-    } else if (IsSceneObject(object)) {
+    } else if (IsGame(object.game)) {
         return object.game;
-    } else if (object.scene && IsSceneObject(object.scene)) { // object = game object
+    } else if (IsSceneObject(object.scene)) { // object = game object
         return object.scene.game;
     }
 }
