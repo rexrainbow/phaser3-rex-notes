@@ -1,5 +1,4 @@
 import FragSrc from './warp-postfxfrag.js';
-import GameClock from '../../time/clock/GameClock.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const Vector2 = Phaser.Math.Vector2;
