@@ -104,11 +104,8 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
 
 - `parser` : Configuration of parser.
     - `parser.delimiters` : Delimiters of tag.
-        - A string : Default value is `'[]'`.
-        - A string array : 
-            ```javascript
-            ['[[',']]']
-            ``` 
+        - A single string with 2 characters. Default value is `'[]'`.
+        - A array with 2 strings. e.x. `['[[',']]']`.
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.
         - `null`, or `false` : No comment line.
 - `sprites` : Configuration of sprites.
