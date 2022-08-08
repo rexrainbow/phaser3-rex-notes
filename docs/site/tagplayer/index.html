@@ -8782,7 +8782,13 @@
 </code></pre></div>
 <ul>
 <li><code>parser</code> : Configuration of parser.<ul>
-<li><code>parser.delimiters</code> : Delimiters of tag. Default value is <code>'[]'</code>.</li>
+<li><code>parser.delimiters</code> : Delimiters of tag.<ul>
+<li>A string : Default value is <code>'[]'</code>.</li>
+<li>A string array : 
+    <div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s1">&#39;[[&#39;</span><span class="p">,</span><span class="s1">&#39;]]&#39;</span><span class="p">]</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>parser.comment</code> : Start word of a comment line. Default value is <code>'//'</code>.<ul>
 <li><code>null</code>, or <code>false</code> : No comment line.</li>
 </ul>
