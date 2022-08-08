@@ -122,36 +122,6 @@
     };
   }
 
-  function _superPropBase(object, property) {
-    while (!Object.prototype.hasOwnProperty.call(object, property)) {
-      object = _getPrototypeOf(object);
-      if (object === null) break;
-    }
-
-    return object;
-  }
-
-  function _get() {
-    if (typeof Reflect !== "undefined" && Reflect.get) {
-      _get = Reflect.get.bind();
-    } else {
-      _get = function _get(target, property, receiver) {
-        var base = _superPropBase(target, property);
-
-        if (!base) return;
-        var desc = Object.getOwnPropertyDescriptor(base, property);
-
-        if (desc.get) {
-          return desc.get.call(arguments.length < 3 ? target : receiver);
-        }
-
-        return desc.value;
-      };
-    }
-
-    return _get.apply(this, arguments);
-  }
-
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequency;\nuniform vec2 progress;\nuniform vec2 speed;\nuniform float time;\n\n\nvoid main (void) {\n  vec2 dxy = frequency/texSize;\n  vec2 r = amplitude/texSize;\n  vec2 spd = speed/texSize;\n  vec2 angle = (outTexCoord / dxy) + progress + (spd*time);\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
 
@@ -268,7 +238,7 @@
     }
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -279,7 +249,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$2(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -333,230 +303,9 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  Phaser.Utils.Objects.GetValue;
 
-  var TickTask = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(TickTask, _ComponentBase);
-
-    var _super = _createSuper(TickTask);
-
-    function TickTask(parent, config) {
-      var _this;
-
-      _classCallCheck(this, TickTask);
-
-      _this = _super.call(this, parent, config);
-      _this._isRunning = false;
-      _this.isPaused = false;
-      _this.tickingState = false;
-
-      _this.setTickingMode(GetValue$3(config, 'tickingMode', 1)); // boot() later
-
-
-      return _this;
-    } // override
-
-
-    _createClass(TickTask, [{
-      key: "boot",
-      value: function boot() {
-        if (this.tickingMode === 2 && !this.tickingState) {
-          this.startTicking();
-        }
-      } // override
-
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        this.stop();
-
-        if (this.tickingState) {
-          this.stopTicking();
-        }
-
-        _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "setTickingMode",
-      value: function setTickingMode(mode) {
-        if (typeof mode === 'string') {
-          mode = TICKINGMODE[mode];
-        }
-
-        this.tickingMode = mode;
-      } // override
-
-    }, {
-      key: "startTicking",
-      value: function startTicking() {
-        this.tickingState = true;
-      } // override
-
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        this.tickingState = false;
-      }
-    }, {
-      key: "isRunning",
-      get: function get() {
-        return this._isRunning;
-      },
-      set: function set(value) {
-        if (this._isRunning === value) {
-          return;
-        }
-
-        this._isRunning = value;
-
-        if (this.tickingMode === 1 && value != this.tickingState) {
-          if (value) {
-            this.startTicking();
-          } else {
-            this.stopTicking();
-          }
-        }
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.isPaused = false;
-        this.isRunning = true;
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        // Only can ba paused in running state
-        if (this.isRunning) {
-          this.isPaused = true;
-          this.isRunning = false;
-        }
-
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        // Only can ba resumed in paused state (paused from running state)
-        if (this.isPaused) {
-          this.isRunning = true;
-        }
-
-        return this;
-      }
-    }, {
-      key: "stop",
-      value: function stop() {
-        this.isPaused = false;
-        this.isRunning = false;
-        return this;
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        this.isPaused = false;
-        this.isRunning = false;
-        this.emit('complete', this.parent, this);
-      }
-    }]);
-
-    return TickTask;
-  }(ComponentBase);
-
-  var TICKINGMODE = {
-    'no': 0,
-    'lazy': 1,
-    'always': 2
-  };
-
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
-  var BaseClock = /*#__PURE__*/function (_TickTask) {
-    _inherits(BaseClock, _TickTask);
-
-    var _super = _createSuper(BaseClock);
-
-    function BaseClock(parent, config) {
-      var _this;
-
-      _classCallCheck(this, BaseClock);
-
-      _this = _super.call(this, parent, config);
-
-      _this.resetFromJSON(config);
-
-      _this.boot();
-
-      return _this;
-    }
-
-    _createClass(BaseClock, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.isRunning = GetValue$2(o, 'isRunning', false);
-        this.timeScale = GetValue$2(o, 'timeScale', 1);
-        this.now = GetValue$2(o, 'now', 0);
-        return this;
-      }
-    }, {
-      key: "toJSON",
-      value: function toJSON() {
-        return {
-          isRunning: this.isRunning,
-          timeScale: this.timeScale,
-          now: this.now,
-          tickingMode: this.tickingMode
-        };
-      } // Override
-      // startTicking() { }
-      // Override
-      // stopTicking() {}
-
-    }, {
-      key: "start",
-      value: function start(startAt) {
-        if (startAt === undefined) {
-          startAt = 0;
-        }
-
-        this.delta = 0;
-        this.now = startAt;
-
-        _get(_getPrototypeOf(BaseClock.prototype), "start", this).call(this);
-
-        return this;
-      }
-    }, {
-      key: "seek",
-      value: function seek(time) {
-        this.now = time;
-        return this;
-      }
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(value) {
-        this.timeScale = value;
-        return this;
-      }
-    }, {
-      key: "tick",
-      value: function tick(delta) {
-        delta *= this.timeScale;
-        this.now += delta;
-        this.delta = delta;
-        this.emit('update', this.now, this.delta);
-        return this;
-      }
-    }]);
-
-    return BaseClock;
-  }(TickTask);
+  Phaser.Utils.Objects.GetValue;
 
   var GameClass = Phaser.Game;
 
@@ -574,46 +323,6 @@
       return object.scene.game;
     }
   };
-
-  var Clock = /*#__PURE__*/function (_BaseClock) {
-    _inherits(Clock, _BaseClock);
-
-    var _super = _createSuper(Clock);
-
-    function Clock() {
-      _classCallCheck(this, Clock);
-
-      return _super.apply(this, arguments);
-    }
-
-    _createClass(Clock, [{
-      key: "startTicking",
-      value: function startTicking() {
-        _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
-
-        GetGame(this.parent).events.on('step', this.update, this);
-      }
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        _get(_getPrototypeOf(Clock.prototype), "stopTicking", this).call(this);
-
-        GetGame(this.parent).events.off('step', this.update, this);
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (!this.isRunning || this.timeScale === 0) {
-          return this;
-        }
-
-        this.tick(delta);
-        return this;
-      }
-    }]);
-
-    return Clock;
-  }(BaseClock);
 
   var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var Vector2 = Phaser.Math.Vector2;
@@ -642,6 +351,8 @@
       _this.amplitudeY = 10;
       _this.progressX = 0;
       _this.progressY = 0;
+      _this.speedEnable = false;
+      _this.now = 0;
       _this.speed = new Vector2(0, 0);
       return _this;
     }
@@ -663,24 +374,16 @@
     }, {
       key: "onPreRender",
       value: function onPreRender() {
+        if (this.speedEnable) {
+          this.now += this.game.loop.delta;
+        }
+
         this.set2f('frequency', this.frequencyX, this.frequencyY);
         this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
         this.set2f('progress', this.progressX * PI2, this.progressY * PI2);
         this.set2f('speed', this.speed.x, this.speed.y);
-        this.set1f('time', this.clock ? this.clock.now : 0);
+        this.set1f('time', this.now);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        if (this.clock) {
-          this.clock.destroy();
-          this.clock = undefined;
-        }
-
-        _get(_getPrototypeOf(WarpPostFxPipeline.prototype), "destroy", this).call(this);
-
-        return this;
       } // frequencyX
 
     }, {
@@ -824,33 +527,6 @@
         return this;
       } // Speed enable
 
-    }, {
-      key: "speedEnable",
-      get: function get() {
-        return this._speedEnable;
-      },
-      set: function set(value) {
-        if (this._speedEnable === value) {
-          return;
-        }
-
-        this._speedEnable = value;
-
-        if (value) {
-          if (!this.clock) {
-            this.clock = new Clock(this, {
-              eventEmitter: false
-            });
-            this.clock.start();
-          } else {
-            this.clock.resume();
-          }
-        } else {
-          if (this.clock) {
-            this.clock.pause();
-          }
-        }
-      }
     }, {
       key: "setSpeedEnable",
       value: function setSpeedEnable(enable) {

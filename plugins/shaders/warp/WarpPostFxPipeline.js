@@ -18,11 +18,17 @@ class WarpPostFxPipeline extends PostFXPipeline {
 
         this.frequencyX = 10;
         this.frequencyY = 10;
+
         this.amplitudeX = 10;
         this.amplitudeY = 10;
+
         this.progressX = 0;
         this.progressY = 0;
+
+        this.speedEnable = false;
+        this.now = 0;
         this.speed = new Vector2(0, 0);
+
     }
 
     resetFromJSON(o) {
@@ -44,25 +50,19 @@ class WarpPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
+        if (this.speedEnable) {
+            this.now += this.game.loop.delta;
+        }
+
         this.set2f('frequency', this.frequencyX, this.frequencyY);
         this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
 
         this.set2f('progress', this.progressX * PI2, this.progressY * PI2);
 
         this.set2f('speed', this.speed.x, this.speed.y);
-        this.set1f('time', (this.clock) ? this.clock.now : 0);
+        this.set1f('time', this.now);
 
         this.set2f('texSize', this.renderer.width, this.renderer.height);
-    }
-
-    destroy() {
-        if (this.clock) {
-            this.clock.destroy();
-            this.clock = undefined;
-        }
-
-        super.destroy();
-        return this;
     }
 
     // frequencyX
@@ -185,33 +185,10 @@ class WarpPostFxPipeline extends PostFXPipeline {
     }
 
     // Speed enable
-    get speedEnable() {
-        return this._speedEnable;
-    }
-    set speedEnable(value) {
-        if (this._speedEnable === value) {
-            return;
-        }
-
-        this._speedEnable = value;
-        if (value) {
-            if (!this.clock) {
-                this.clock = new GameClock(this, { eventEmitter: false });
-                this.clock.start();
-            } else {
-                this.clock.resume();
-            }
-        } else {
-            if (this.clock) {
-                this.clock.pause();
-            }
-        }
-    }
     setSpeedEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
-
         this.speedEnable = enable;
         return this;
     }
