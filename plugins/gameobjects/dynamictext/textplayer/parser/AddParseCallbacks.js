@@ -30,7 +30,6 @@ import ParseScrollCameraTag from './camera/OnParseScrollCameraTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
 import ParseRemoveAllSpriteTag from './sprites/OnParseRemoveAllSpritesTag.js';
-import ParseSetTextureTag from './sprites/OnParseSetTextureTag.js';
 import ParsePlayAnimationTag from './sprites/OnParsePlayAnimationTag.js';
 import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
@@ -60,7 +59,7 @@ const ParseCallbacks = [
     ParseWaitTag,
 
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
-    ParseSetTextureTag, ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
+    ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
     ParseCallSpriteMethodTag,
     // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
