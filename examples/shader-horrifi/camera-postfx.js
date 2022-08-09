@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     create() {
         var postFxPlugin = this.plugins.get('rexHorrifiPipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
-        var postFxPipeline = postFxPlugin.add(gameObject, {
+        var postFxPipeline = postFxPlugin.add(this.cameras.main, {
         });
 
         var gui = new Dat.GUI();
