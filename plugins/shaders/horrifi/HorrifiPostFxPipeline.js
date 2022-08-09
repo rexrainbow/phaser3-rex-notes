@@ -16,11 +16,11 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         // Bloon
         this.enableBloom = false;
-        this.bloomRadius = 0;
-        this.bloomIntensity = 0;
-        this.bloomThreshold = 0;
-        this.bloomTexelX = 0;
-        this.bloomTexelY = 0;
+        this.bloomRadius = 0.2;
+        this.bloomIntensity = 0.2;
+        this.bloomThreshold = 0.2;
+        this.bloomTexelX = 0.1;
+        this.bloomTexelY = 0.1;
 
         // Chromatic abberation
         this.enableChromatic = false;
@@ -28,8 +28,8 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         // Vignette
         this.enableVignette = false;
-        this.vignetteStrength = 0;
-        this.vignetteIntensity = 0;
+        this.vignetteStrength = 0.2;
+        this.vignetteIntensity = 0.2;
 
         // Noise
         this.enableNoise = false;
@@ -37,7 +37,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         // VHS
         this.enableVHS = false;
-        this.vhsStrength = 0.5;
+        this.vhsStrength = 0.25;
 
         // Scanlines
         this.enableScanlines = false;
@@ -60,6 +60,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         // Bloon
         this.set1f('enableBloom', (this.enableBloom) ? 1 : 0);
         this.set3f('bloom', this.bloomRadius, this.bloomIntensity, this.bloomThreshold);
+        this.set2f('bloomTexel', this.bloomTexelX, this.bloomTexelY);
 
         // Chromatic abberation
         this.set1f('enableChromatic', (this.enableChromatic) ? 1 : 0);
@@ -84,9 +85,6 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         // CRT        
         this.set1f('enableCRT', (this.enableCRT) ? 1 : 0);
         this.set2f('crtCurve', this.crtCurveX, this.crtCurveY);
-
-
-        this.set2f('bloomTexel', this.bloomTexelX, this.bloomTexelY);
 
         // Eanble by VHS    
         if (this.enableVHS) {
