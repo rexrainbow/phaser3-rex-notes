@@ -21,9 +21,6 @@ class WarpPostFxPipeline extends PostFXPipeline {
         this.amplitudeX = 10;
         this.amplitudeY = 10;
 
-        this.progressX = 0;
-        this.progressY = 0;
-
         this.speedEnable = false;
         this.now = 0;
         this.speed = new Vector2(0, 0);
@@ -36,9 +33,6 @@ class WarpPostFxPipeline extends PostFXPipeline {
 
         var amplitude = GetValue(o, 'amplitude', 10);
         this.setAmplitude(GetValue(o, 'amplitudeX', amplitude), GetValue(o, 'amplitudeY', amplitude));
-
-        var progress = GetValue(o, 'progress', 0);
-        this.setProgress(GetValue(o, 'progressX', progress), GetValue(o, 'progressY', progress));
 
         var speed = GetValue(o, 'speed', 0);
         this.setSpeed(GetValue(o, 'speedX', speed), GetValue(o, 'speedY', speed));
@@ -55,8 +49,6 @@ class WarpPostFxPipeline extends PostFXPipeline {
 
         this.set2f('frequency', this.frequencyX, this.frequencyY);
         this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
-
-        this.set2f('progress', this.progressX * PI2, this.progressY * PI2);
 
         this.set2f('speed', this.speed.x, this.speed.y);
         this.set1f('time', this.now);
@@ -122,34 +114,6 @@ class WarpPostFxPipeline extends PostFXPipeline {
     set amplitude(value) {
         this.amplitudeX = value;
         this.amplitudeY = value;
-    }
-
-    // progress
-    setProgressX(value) {
-        this.progressX = value;
-        return this;
-    }
-    setProgressY(value) {
-        this.progressY = value;
-        return this;
-    }
-
-    setProgress(x, y) {
-        if (y === undefined) {
-            y = x;
-        }
-        this.progressX = x;
-        this.progressY = y;
-        return this;
-    }
-
-    get progress() {
-        return (this.progressX + this.progressY) / 2;
-    }
-
-    set progress(value) {
-        this.progressX = value;
-        this.progressY = value;
     }
 
     // speed
