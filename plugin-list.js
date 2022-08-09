@@ -188,6 +188,7 @@ module.exports = {
     'kawaseblurpipelineplugin': './plugins/kawaseblurpipeline-plugin.js',
     'dropshadowpipelineplugin': './plugins/dropshadowpipeline-plugin.js',
     'warppipelineplugin': './plugins/warppipeline-plugin.js',
+    'horrifipipelineplugin': './plugins/horrifipipeline-plugin.js',
 
     'postfxpipelinebehavior': './plugins/postfxpipelinebehavior.js',
 

@@ -1,6 +1,8 @@
 import FragSrc from './horrifi-postfxfrag.js';
+import Methods from './methods/Methods.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class HorrifiPostFxPipeline extends PostFXPipeline {
     constructor(game) {
@@ -16,40 +18,46 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         // Bloon
         this.enableBloom = false;
-        this.bloomRadius = 0.2;
-        this.bloomIntensity = 0.2;
-        this.bloomThreshold = 0.2;
-        this.bloomTexelX = 0.1;
-        this.bloomTexelY = 0.1;
+        this.bloomRadius = 0;
+        this.bloomIntensity = 0;
+        this.bloomThreshold = 0;
+        this.bloomTexelX = 0;
+        this.bloomTexelY = 0;
 
         // Chromatic abberation
         this.enableChromatic = false;
-        this.chabIntensity = 0.5;
+        this.chabIntensity = 0;
 
         // Vignette
         this.enableVignette = false;
-        this.vignetteStrength = 0.2;
-        this.vignetteIntensity = 0.2;
+        this.vignetteStrength = 0;
+        this.vignetteIntensity = 0;
 
         // Noise
         this.enableNoise = false;
-        this.noiseStrength = 0.5;
+        this.noiseStrength = 0;
 
         // VHS
         this.enableVHS = false;
-        this.vhsStrength = 0.25;
+        this.vhsStrength = 0;
 
         // Scanlines
         this.enableScanlines = false;
-        this.scanStrength = 0.5;
+        this.scanStrength = 0;
 
         // CRT
         this.enableCRT = false;
-        this.crtCurveX = 2;
-        this.crtCurveY = 2;
+        this.crtWidth = 1;
+        this.crtHeight = 1;
     }
 
     resetFromJSON(o) {
+        var enable = GetValue(o, 'enable', false);
+
+        // Bloom
+        this.setBloomEnable(GetValue(o, 'bloomEnable', enable));
+        this.setBloomRadius(GetValue(o, 'bloomRadius', 0));
+
 
         return this;
     }
@@ -84,7 +92,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         // CRT        
         this.set1f('enableCRT', (this.enableCRT) ? 1 : 0);
-        this.set2f('crtCurve', this.crtCurveX, this.crtCurveY);
+        this.set2f('crtSize', this.crtWidth, this.crtHeight);
 
         // Eanble by VHS    
         if (this.enableVHS) {
@@ -93,5 +101,10 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.set1f('time', this.now);
     }
 }
+
+Object.assign(
+    HorrifiPostFxPipeline.prototype,
+    Methods
+)
 
 export default HorrifiPostFxPipeline;

@@ -59,8 +59,8 @@ class Demo extends Phaser.Scene {
         // CRT 
         var CRT = gui.addFolder('CRT');
         CRT.add(postFxPipeline, 'enableCRT');
-        CRT.add(postFxPipeline, 'crtCurveX', 0, 5);
-        CRT.add(postFxPipeline, 'crtCurveY', 0, 5);
+        CRT.add(postFxPipeline, 'crtWidth', 0, 5);
+        CRT.add(postFxPipeline, 'crtHeight', 0, 5);
 
         gui.add(postFxPipeline, 'seed', 0, 1);
 

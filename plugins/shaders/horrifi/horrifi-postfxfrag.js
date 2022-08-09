@@ -43,7 +43,7 @@ uniform float scanStrength;
 
 // CRT
 uniform float enableCRT;
-uniform vec2 crtCurve;
+uniform vec2 crtSize;
 
 
 // Noise
@@ -99,7 +99,7 @@ vec4 blur(vec2 uv) {
 // TV Curve
 vec2 crtRunCurve( vec2 uv ) {
   uv = uv*2.-1.;
-  vec2 uvoff = abs(uv.xy) / vec2(crtCurve.x, crtCurve.y);
+  vec2 uvoff = abs(uv.xy) / crtSize;
   uv = uv + uv * uvoff * uvoff;
   uv = uv * .5 + .5;
   return uv;
