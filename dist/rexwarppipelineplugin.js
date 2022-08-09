@@ -123,12 +123,11 @@
   }
 
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequency;\nuniform vec2 progress;\nuniform vec2 speed;\nuniform float time;\n\n\nvoid main (void) {\n  vec2 dxy = frequency/texSize;\n  vec2 r = amplitude/texSize;\n  vec2 spd = speed/texSize;\n  vec2 angle = (outTexCoord / dxy) + progress + (spd*time);\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequency;\nuniform vec2 speed;\nuniform float time;\n\n\nvoid main (void) {\n  vec2 dxy = frequency/texSize;\n  vec2 r = amplitude/texSize;\n  vec2 spd = speed/texSize;\n  vec2 angle = (outTexCoord / dxy) + (spd*time);\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
 
   var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var Vector2 = Phaser.Math.Vector2;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var PI2 = Math.PI * 2;
 
   var WarpPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(WarpPostFxPipeline, _PostFXPipeline);
@@ -150,8 +149,6 @@
       _this.frequencyY = 10;
       _this.amplitudeX = 10;
       _this.amplitudeY = 10;
-      _this.progressX = 0;
-      _this.progressY = 0;
       _this.speedEnable = false;
       _this.now = 0;
       _this.speed = new Vector2(0, 0);
@@ -165,8 +162,6 @@
         this.setFrequency(GetValue$1(o, 'frequencyX', frequency), GetValue$1(o, 'frequencyY', frequency));
         var amplitude = GetValue$1(o, 'amplitude', 10);
         this.setAmplitude(GetValue$1(o, 'amplitudeX', amplitude), GetValue$1(o, 'amplitudeY', amplitude));
-        var progress = GetValue$1(o, 'progress', 0);
-        this.setProgress(GetValue$1(o, 'progressX', progress), GetValue$1(o, 'progressY', progress));
         var speed = GetValue$1(o, 'speed', 0);
         this.setSpeed(GetValue$1(o, 'speedX', speed), GetValue$1(o, 'speedY', speed));
         this.setSpeedEnable(GetValue$1(o, 'speedEnable', this.speedX !== 0 || this.speedY !== 0));
@@ -181,7 +176,6 @@
 
         this.set2f('frequency', this.frequencyX, this.frequencyY);
         this.set2f('amplitude', this.amplitudeX, this.amplitudeY);
-        this.set2f('progress', this.progressX * PI2, this.progressY * PI2);
         this.set2f('speed', this.speed.x, this.speed.y);
         this.set1f('time', this.now);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
@@ -253,39 +247,6 @@
       set: function set(value) {
         this.amplitudeX = value;
         this.amplitudeY = value;
-      } // progress
-
-    }, {
-      key: "setProgressX",
-      value: function setProgressX(value) {
-        this.progressX = value;
-        return this;
-      }
-    }, {
-      key: "setProgressY",
-      value: function setProgressY(value) {
-        this.progressY = value;
-        return this;
-      }
-    }, {
-      key: "setProgress",
-      value: function setProgress(x, y) {
-        if (y === undefined) {
-          y = x;
-        }
-
-        this.progressX = x;
-        this.progressY = y;
-        return this;
-      }
-    }, {
-      key: "progress",
-      get: function get() {
-        return (this.progressX + this.progressY) / 2;
-      },
-      set: function set(value) {
-        this.progressX = value;
-        this.progressY = value;
       } // speed
 
     }, {

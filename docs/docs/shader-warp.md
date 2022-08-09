@@ -105,9 +105,6 @@ Warp post processing filter.
         // amplitudeX: 10,
         // amplitudeY: 10,
 
-        // progressX: 0,
-        // progressY: 0,
-
         // speedX: 0,
         // speedY: 0,
         // speedEnable: 
@@ -117,7 +114,6 @@ Warp post processing filter.
     ```
     - `frequencyX`, `frequencyY` : Horizontal/vertical frequency, in pixel.
     - `amplitudeX`, `amplitudeY` : Horizontal/vertical amplitude, in pixel.
-    - `progressX`, `progressY` : Horizontal/vertical progress. Range is `0`-`1`
     - `speedX`, `speedY` : Horizontal/vertical speed.
     - `speedEnable`
         - `true` : Enable speed. Default value if `speedX` or `speedY` is not `0`.
@@ -196,29 +192,6 @@ Horizontal/vertical amplitude, in pixel.
     pipelineInstance.setAmplitudeX(amplitudeX);
     pipelineInstance.setAmplitudeY(amplitudeY);
     pipelineInstance.setAmplitude(amplitudeX, amplitudeY);
-    ```
-
-### Progress
-
-Horizontal/vertical progress. Range is `0`-`1`
-
-- Get
-    ```javascript
-    var progressX = pipelineInstance.progressX;
-    var progressY = pipelineInstance.progressY;
-    ```
-- Set
-    ```javascript
-    pipelineInstance.progressX = progressX;
-    pipelineInstance.progressY = progressY;
-    // pipelineInstance.progressX += value;
-    // pipelineInstance.progressY += value;
-    ```
-    or
-    ```javascript
-    pipelineInstance.setProgressX(progressX);
-    pipelineInstance.setProgressY(progressY);
-    pipelineInstance.setProgress(progressX, progressY);
     ```
 
 ### Speed

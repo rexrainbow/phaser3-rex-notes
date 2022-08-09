@@ -4874,8 +4874,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#progress" class="md-nav__link">
-    Progress
+  <a href="#speed" class="md-nav__link">
+    Speed
   </a>
   
 </li>
@@ -8539,8 +8539,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#progress" class="md-nav__link">
-    Progress
+  <a href="#speed" class="md-nav__link">
+    Speed
   </a>
   
 </li>
@@ -8668,8 +8668,9 @@
     <span class="c1">// amplitudeX: 10,</span>
     <span class="c1">// amplitudeY: 10,</span>
 
-    <span class="c1">// progressX: 0,</span>
-    <span class="c1">// progressY: 0,</span>
+    <span class="c1">// speedX: 0,</span>
+    <span class="c1">// speedY: 0,</span>
+    <span class="c1">// speedEnable: </span>
 
     <span class="c1">// name: &#39;rexWarpPostFx&#39;</span>
 <span class="p">});</span>
@@ -8677,7 +8678,12 @@
 <ul>
 <li><code>frequencyX</code>, <code>frequencyY</code> : Horizontal/vertical frequency, in pixel.</li>
 <li><code>amplitudeX</code>, <code>amplitudeY</code> : Horizontal/vertical amplitude, in pixel.</li>
-<li><code>progressX</code>, <code>progressY</code> : Horizontal/vertical progress. Range is <code>0</code>-<code>1</code></li>
+<li><code>speedX</code>, <code>speedY</code> : Horizontal/vertical speed.</li>
+<li><code>speedEnable</code><ul>
+<li><code>true</code> : Enable speed. Default value if <code>speedX</code> or <code>speedY</code> is not <code>0</code>.</li>
+<li><code>false</code> : Disable speed. Default value if <code>speedX</code> and <code>speedY</code> are both <code>0</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -8744,23 +8750,29 @@
 <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setAmplitude</span><span class="p">(</span><span class="nx">amplitudeX</span><span class="p">,</span> <span class="nx">amplitudeY</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="progress">Progress<a class="headerlink" href="#progress" title="Permanent link">&para;</a></h3>
-<p>Horizontal/vertical progress. Range is <code>0</code>-<code>1</code></p>
+<h3 id="speed">Speed<a class="headerlink" href="#speed" title="Permanent link">&para;</a></h3>
+<p>Horizontal/vertical speed.</p>
 <ul>
+<li>Eanble/resume
+    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSpeedEnable</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Pause
+    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSpeedEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">progressX</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">progressX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">progressY</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">progressY</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">speedX</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">speedX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">speedY</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">speedY</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">progressX</span> <span class="o">=</span> <span class="nx">progressX</span><span class="p">;</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">progressY</span> <span class="o">=</span> <span class="nx">progressY</span><span class="p">;</span>
-<span class="c1">// pipelineInstance.progressX += value;</span>
-<span class="c1">// pipelineInstance.progressY += value;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">speedX</span> <span class="o">=</span> <span class="nx">speedX</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">speedY</span> <span class="o">=</span> <span class="nx">speedY</span><span class="p">;</span>
+<span class="c1">// pipelineInstance.speedX += value;</span>
+<span class="c1">// pipelineInstance.speedY += value;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setProgressX</span><span class="p">(</span><span class="nx">progressX</span><span class="p">);</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setProgressY</span><span class="p">(</span><span class="nx">progressY</span><span class="p">);</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setProgress</span><span class="p">(</span><span class="nx">progressX</span><span class="p">,</span> <span class="nx">progressY</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSpeedX</span><span class="p">(</span><span class="nx">speedX</span><span class="p">);</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSpeedY</span><span class="p">(</span><span class="nx">speedY</span><span class="p">);</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speedX</span><span class="p">,</span> <span class="nx">speedY</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 
