@@ -1,5 +1,5 @@
 import HorrifiPostFxPipeline from './horrifipipeline.js';
-// import HorrifiPostFxPipelineBehavior from './warppipelinebehavior.js';
+import HorrifiPostFxPipelineBehavior from './horrifipipelinebehavior.js';
 import BasePostFxPipelinePlugin from './utils/renderer/postfxpipeline/BasePostFxPipelinePlugin.js';
 import SetValue from './utils/object/SetValue.js';
 
@@ -9,9 +9,9 @@ class HorrifiPipelinePlugin extends BasePostFxPipelinePlugin {
         this.setPostPipelineClass(HorrifiPostFxPipeline, 'rexHorrifiPostFx');
     }
 
-    // addBehavior(gameObject, config) {
-    //     return new HorrifiPostFxPipelineBehavior(gameObject, config);
-    // }
+    addBehavior(gameObject, config) {
+        return new HorrifiPostFxPipelineBehavior(gameObject, config);
+    }
 }
 
 SetValue(window, 'RexPlugins.Pipelines.HorrifiPostFx', HorrifiPostFxPipeline);
