@@ -122,7 +122,7 @@
     };
   }
 
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float seed;\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float bloomEnable;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float chromaticEnable;\nuniform float chabIntensity;\n\n// Vignette\nuniform float vignetteEnable;\nuniform vec2 vignette;\n\n// Noise\nuniform float noiseEnable;\nuniform float noiseStrength;\n\n// VHS\nuniform float VHSEnable;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float scanlinesEnable;\nuniform float scanStrength;\n\n// CRT\nuniform float CRTEnable;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*seed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtRunCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( CRTEnable > .5 ) {\n    mainUv = crtRunCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( chromaticEnable > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( scanlinesEnable > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( bloomEnable > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( noiseEnable > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( VHSEnable > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( vignetteEnable > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( CRTEnable > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float seed;\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float bloomEnable;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float chromaticEnable;\nuniform float chabIntensity;\n\n// Vignette\nuniform float vignetteEnable;\nuniform vec2 vignette;\n\n// Noise\nuniform float noiseEnable;\nuniform float noiseStrength;\n\n// VHS\nuniform float vhsEnable;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float scanlinesEnable;\nuniform float scanStrength;\n\n// CRT\nuniform float crtEnable;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*seed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtRunCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( crtEnable > .5 ) {\n    mainUv = crtRunCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( chromaticEnable > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( scanlinesEnable > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( bloomEnable > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( noiseEnable > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( vhsEnable > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( vignetteEnable > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( crtEnable > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
 
   var BloonConfigurationMethods = {
     setBloomEnable: function setBloomEnable(enable) {
@@ -215,7 +215,7 @@
         enable = true;
       }
 
-      this.VHSEnable = enable;
+      this.vhsEnable = enable;
       return this;
     },
     setVhsStrength: function setVhsStrength(value) {
@@ -245,7 +245,7 @@
         enable = true;
       }
 
-      this.CRTEnable = enable;
+      this.crtEnable = enable;
       return this;
     },
     setCrtSize: function setCrtSize(width, height) {
@@ -262,8 +262,8 @@
   var Methods = {};
   Object.assign(Methods, BloonConfigurationMethods, ChromaticConfigurationMethods, VignetteConfigurationMethod, NoiseConfigurationMethod, VHSConfigurationMethod, ScanlinesConfigurationMethod, CRTConfigurationMethod);
 
-  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var HorrifiPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(HorrifiPostFxPipeline, _PostFXPipeline);
@@ -301,13 +301,13 @@
       _this.noiseEnable = false;
       _this.noiseStrength = 0; // VHS
 
-      _this.VHSEnable = false;
+      _this.vhsEnable = false;
       _this.vhsStrength = 0; // Scanlines
 
       _this.scanlinesEnable = false;
       _this.scanStrength = 0; // CRT
 
-      _this.CRTEnable = false;
+      _this.crtEnable = false;
       _this.crtWidth = 0;
       _this.crtHeight = 0;
       return _this;
@@ -316,33 +316,33 @@
     _createClass(HorrifiPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var enable = GetValue(o, 'enable', false); // Bloom
+        var enable = GetValue$1(o, 'enable', false); // Bloom
 
-        this.setBloomEnable(GetValue(o, 'bloomEnable', enable));
-        this.setBloomRadius(GetValue(o, 'bloomRadius', 0));
-        this.setBloomIntensity(GetValue(o, 'bloomIntensity', 0));
-        this.setBloomThreshold(GetValue(o, 'bloomThreshold', 0));
-        this.setBloomTexelSize(GetValue(o, 'bloomTexelWidth', 0), GetValue(o, 'bloomTexelHeight')); // Chromatic abberation
+        this.setBloomEnable(GetValue$1(o, 'bloomEnable', enable));
+        this.setBloomRadius(GetValue$1(o, 'bloomRadius', 0));
+        this.setBloomIntensity(GetValue$1(o, 'bloomIntensity', 0));
+        this.setBloomThreshold(GetValue$1(o, 'bloomThreshold', 0));
+        this.setBloomTexelSize(GetValue$1(o, 'bloomTexelWidth', 0), GetValue$1(o, 'bloomTexelHeight')); // Chromatic abberation
 
-        this.setChromaticEnable(GetValue(o, 'chromaticEnable', enable));
-        this.setChabIntensity(GetValue(o, 'chabIntensity', 0)); // Vignette
+        this.setChromaticEnable(GetValue$1(o, 'chromaticEnable', enable));
+        this.setChabIntensity(GetValue$1(o, 'chabIntensity', 0)); // Vignette
 
-        this.setVignetteEnable(GetValue(o, 'vignetteEnable', enable));
-        this.setVignetteStrength(GetValue(o, 'vignetteStrength', 0));
-        this.setVignetteIntensity(GetValue(o, 'vignetteIntensity', 0)); // Noise
+        this.setVignetteEnable(GetValue$1(o, 'vignetteEnable', enable));
+        this.setVignetteStrength(GetValue$1(o, 'vignetteStrength', 0));
+        this.setVignetteIntensity(GetValue$1(o, 'vignetteIntensity', 0)); // Noise
 
-        this.setNoiseEnable(GetValue(o, 'noiseEnable', enable));
-        this.setNoiseStrength(GetValue(o, 'noiseStrength', 0));
-        this.setSeed(GetValue(0, 'seed', Math.random())); // VHS
+        this.setNoiseEnable(GetValue$1(o, 'noiseEnable', enable));
+        this.setNoiseStrength(GetValue$1(o, 'noiseStrength', 0));
+        this.setSeed(GetValue$1(0, 'seed', Math.random())); // VHS
 
-        this.setVHSEnable(GetValue(o, 'VHSEnable', enable));
-        this.setVhsStrength(GetValue(o, 'vhsStrength', 0)); // Scanlines
+        this.setVHSEnable(GetValue$1(o, 'vhsEnable', enable));
+        this.setVhsStrength(GetValue$1(o, 'vhsStrength', 0)); // Scanlines
 
-        this.setScanlinesEnable(GetValue(o, 'scanlinesEnable', enable));
-        this.setScanStrength(GetValue(o, 'scanStrength', 0)); // CRT
+        this.setScanlinesEnable(GetValue$1(o, 'scanlinesEnable', enable));
+        this.setScanStrength(GetValue$1(o, 'scanStrength', 0)); // CRT
 
-        this.setCRTEnable(GetValue(o, 'CRTEnable', enable));
-        this.setCrtSize(GetValue(o, 'crtWidth', 0), GetValue(o, 'crtHeight', undefined));
+        this.setCRTEnable(GetValue$1(o, 'crtEnable', enable));
+        this.setCrtSize(GetValue$1(o, 'crtWidth', 0), GetValue$1(o, 'crtHeight', undefined));
         return this;
       }
     }, {
@@ -363,16 +363,16 @@
         this.set1f('noiseEnable', this.noiseEnable ? 1 : 0);
         this.set1f('noiseStrength', this.noiseStrength); // VHS
 
-        this.set1f('VHSEnable', this.VHSEnable ? 1 : 0);
+        this.set1f('vhsEnable', this.vhsEnable ? 1 : 0);
         this.set1f('vhsStrength', this.vhsStrength); // Scanlines
 
         this.set1f('ScanlinesEnable', this.ScanlinesEnable ? 1 : 0);
         this.set1f('scanStrength', this.scanStrength); // CRT        
 
-        this.set1f('CRTEnable', this.CRTEnable ? 1 : 0);
+        this.set1f('crtEnable', this.crtEnable ? 1 : 0);
         this.set2f('crtSize', this.crtWidth, this.crtHeight); // Eanble by VHS    
 
-        if (this.VHSEnable) {
+        if (this.vhsEnable) {
           this.now += this.game.loop.delta;
         }
 
@@ -381,9 +381,111 @@
     }]);
 
     return HorrifiPostFxPipeline;
-  }(PostFXPipeline);
+  }(PostFXPipeline$1);
 
   Object.assign(HorrifiPostFxPipeline.prototype, Methods);
+
+  var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var RemoveIte = Phaser.Utils.Array.Remove;
+
+  var PostFxPipelineBehaviorBase = /*#__PURE__*/function () {
+    function PostFxPipelineBehaviorBase(gameObject, config) {
+      _classCallCheck(this, PostFxPipelineBehaviorBase);
+
+      this.gameObject = gameObject;
+      this.scene = gameObject.scene; // Can inject PipelineClass at runtime
+
+      var PipelineClass;
+
+      if (IsPostFxPipelineClass(config)) {
+        PipelineClass = config;
+        config = undefined;
+      } else {
+        PipelineClass = GetValue(config, 'PipelineClass');
+      }
+
+      if (PipelineClass) {
+        this.createPipeline = function (game) {
+          return new PipelineClass(game);
+        };
+      }
+
+      var enable = GetValue(config, 'enable', !!config);
+
+      if (enable) {
+        this.getPipeline(config);
+      } // Will destroy pipeline when gameObject destroying
+
+    }
+
+    _createClass(PostFxPipelineBehaviorBase, [{
+      key: "getPipeline",
+      value: function getPipeline(config) {
+        if (!this.pipeline) {
+          var pipeline = this.createPipeline(this.scene.game);
+          var gameObject = this.gameObject;
+          var postPipelines = gameObject.postPipelines;
+          pipeline.gameObject = gameObject;
+          postPipelines.push(pipeline);
+          gameObject.hasPostPipeline = postPipelines.length > 0;
+          this.pipeline = pipeline;
+        }
+
+        if (config && this.pipeline.resetFromJSON) {
+          this.pipeline.resetFromJSON(config);
+        }
+
+        return this.pipeline;
+      }
+    }, {
+      key: "freePipeline",
+      value: function freePipeline() {
+        if (!this.pipeline) {
+          return this;
+        }
+
+        var gameObject = this.gameObject;
+        var postPipelines = gameObject.postPipelines;
+        RemoveIte(postPipelines, this.pipeline);
+        gameObject.hasPostPipeline = postPipelines.length > 0;
+        this.pipeline.destroy();
+        this.pipeline = undefined;
+        return this;
+      } // Override
+
+    }, {
+      key: "createPipeline",
+      value: function createPipeline(game) {}
+    }]);
+
+    return PostFxPipelineBehaviorBase;
+  }();
+
+  var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
+    return object && object.prototype && object.prototype instanceof PostFXPipeline;
+  };
+
+  var HorrifiPostFxPipelineBehavior = /*#__PURE__*/function (_BasePostFxPipelineBe) {
+    _inherits(HorrifiPostFxPipelineBehavior, _BasePostFxPipelineBe);
+
+    var _super = _createSuper(HorrifiPostFxPipelineBehavior);
+
+    function HorrifiPostFxPipelineBehavior() {
+      _classCallCheck(this, HorrifiPostFxPipelineBehavior);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(HorrifiPostFxPipelineBehavior, [{
+      key: "createPipeline",
+      value: function createPipeline(game) {
+        return new HorrifiPostFxPipeline(game);
+      }
+    }]);
+
+    return HorrifiPostFxPipelineBehavior;
+  }(PostFxPipelineBehaviorBase);
 
   var GameClass = Phaser.Game;
 
@@ -614,12 +716,16 @@
       _this.setPostPipelineClass(HorrifiPostFxPipeline, 'rexHorrifiPostFx');
 
       return _this;
-    } // addBehavior(gameObject, config) {
-    //     return new HorrifiPostFxPipelineBehavior(gameObject, config);
-    // }
+    }
 
+    _createClass(HorrifiPipelinePlugin, [{
+      key: "addBehavior",
+      value: function addBehavior(gameObject, config) {
+        return new HorrifiPostFxPipelineBehavior(gameObject, config);
+      }
+    }]);
 
-    return _createClass(HorrifiPipelinePlugin);
+    return HorrifiPipelinePlugin;
   }(BasePostFxPipelinePlugin);
 
   SetValue(window, 'RexPlugins.Pipelines.HorrifiPostFx', HorrifiPostFxPipeline);

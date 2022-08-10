@@ -24,7 +24,7 @@ declare namespace HorrifiPostFxPipeline {
         seed?: number,
 
         // VHS
-        VHSEnable?: boolean,
+        vhsEnable?: boolean,
         vhsStrength?: number,
 
         // Scanlines
@@ -32,7 +32,7 @@ declare namespace HorrifiPostFxPipeline {
         scanStrength?: number,
 
         // CRT
-        CRTEnable?: boolean,
+        crtEnable?: boolean,
         crtWidth?: number, crtHeight?: number,
 
     }
@@ -63,7 +63,7 @@ declare class HorrifiPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.Post
     seed: number;
 
     // VHS
-    VHSEnable: boolean;
+    vhsEnable: boolean;
     vhsStrength: number;
 
     // Scanlines
@@ -71,7 +71,7 @@ declare class HorrifiPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.Post
     scanStrength: number;
 
     // CRT
-    CRTEnable: boolean;
+    crtEnable: boolean;
     crtWidth: number;
     crtHeight: number;
 

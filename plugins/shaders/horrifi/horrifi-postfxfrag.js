@@ -34,7 +34,7 @@ uniform float noiseEnable;
 uniform float noiseStrength;
 
 // VHS
-uniform float VHSEnable;
+uniform float vhsEnable;
 uniform float vhsStrength;
 
 // Scanlines
@@ -42,7 +42,7 @@ uniform float scanlinesEnable;
 uniform float scanStrength;
 
 // CRT
-uniform float CRTEnable;
+uniform float crtEnable;
 uniform vec2 crtSize;
 
 
@@ -109,7 +109,7 @@ void main() {
   vec2 mainUv = outTexCoord;
 
   // CRT
-  if ( CRTEnable > .5 ) {
+  if ( crtEnable > .5 ) {
     mainUv = crtRunCurve(outTexCoord);
   }
 	
@@ -137,7 +137,7 @@ void main() {
   }
 	
   // VHS
-  if ( VHSEnable > .5 ) {
+  if ( vhsEnable > .5 ) {
     color += vhs(mainUv);
   }
 	
@@ -147,7 +147,7 @@ void main() {
   }
 	
   // Cutoff edges
-  if ( CRTEnable > .5) {
+  if ( crtEnable > .5) {
     if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {
       color.rgb *= 0.;
     }

@@ -73,7 +73,7 @@ class Demo extends Phaser.Scene {
 
         // VHS
         var VHS = gui.addFolder('VHS');
-        VHS.add(postFxPipeline, 'VHSEnable');
+        VHS.add(postFxPipeline, 'vhsEnable');
         VHS.add(postFxPipeline, 'vhsStrength', 0, 1);
 
         // Scanlines
@@ -83,7 +83,7 @@ class Demo extends Phaser.Scene {
 
         // CRT 
         var CRT = gui.addFolder('CRT');
-        CRT.add(postFxPipeline, 'CRTEnable');
+        CRT.add(postFxPipeline, 'crtEnable');
         CRT.add(postFxPipeline, 'crtWidth', 0, 5);
         CRT.add(postFxPipeline, 'crtHeight', 0, 5);
 

@@ -38,7 +38,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.noiseStrength = 0;
 
         // VHS
-        this.VHSEnable = false;
+        this.vhsEnable = false;
         this.vhsStrength = 0;
 
         // Scanlines
@@ -46,7 +46,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.scanStrength = 0;
 
         // CRT
-        this.CRTEnable = false;
+        this.crtEnable = false;
         this.crtWidth = 0;
         this.crtHeight = 0;
     }
@@ -76,7 +76,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.setSeed(GetValue(0, 'seed', Math.random()));
 
         // VHS
-        this.setVHSEnable(GetValue(o, 'VHSEnable', enable));
+        this.setVHSEnable(GetValue(o, 'vhsEnable', enable));
         this.setVhsStrength(GetValue(o, 'vhsStrength', 0));
 
         // Scanlines
@@ -84,7 +84,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.setScanStrength(GetValue(o, 'scanStrength', 0));
 
         // CRT
-        this.setCRTEnable(GetValue(o, 'CRTEnable', enable));
+        this.setCRTEnable(GetValue(o, 'crtEnable', enable));
         this.setCrtSize(GetValue(o, 'crtWidth', 0), GetValue(o, 'crtHeight', undefined));
 
         return this;
@@ -111,7 +111,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.set1f('noiseStrength', this.noiseStrength);
 
         // VHS
-        this.set1f('VHSEnable', (this.VHSEnable) ? 1 : 0);
+        this.set1f('vhsEnable', (this.vhsEnable) ? 1 : 0);
         this.set1f('vhsStrength', this.vhsStrength);
 
         // Scanlines
@@ -119,11 +119,11 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.set1f('scanStrength', this.scanStrength);
 
         // CRT        
-        this.set1f('CRTEnable', (this.CRTEnable) ? 1 : 0);
+        this.set1f('crtEnable', (this.crtEnable) ? 1 : 0);
         this.set2f('crtSize', this.crtWidth, this.crtHeight);
 
         // Eanble by VHS    
-        if (this.VHSEnable) {
+        if (this.vhsEnable) {
             this.now += this.game.loop.delta;
         }
         this.set1f('time', this.now);

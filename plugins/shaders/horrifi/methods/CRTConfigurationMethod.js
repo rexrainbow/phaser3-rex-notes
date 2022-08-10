@@ -3,7 +3,7 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-        this.CRTEnable = enable;
+        this.crtEnable = enable;
         return this;
     },
 
