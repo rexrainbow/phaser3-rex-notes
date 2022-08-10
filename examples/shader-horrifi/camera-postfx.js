@@ -17,52 +17,75 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexHorrifiPipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom')//.setScale(0.75);
         var postFxPipeline = postFxPlugin.add(this.cameras.main, {
+            enable: true,
+
+            // Bloom
+            bloomRadius: 25,
+            bloomIntensity: 0.5,
+            bloomThreshold: 0.75,
+            bloomTexelWidth: 0.5,
+
+            // Chromatic abberation
+            chabIntensity: 0.6,
+
+            // Vignette
+            vignetteStrength: 0.8,
+            vignetteIntensity: 0.85,
+
+            // Noise
+            noiseStrength: 0.5,
+            // seed: 0.5,
+
+            // VHS
+            vhsStrength: 0.5,
+
+            //CRT
+            crtWidth: 2,
         });
 
         var gui = new Dat.GUI();
 
         // Bloom
         var bloom = gui.addFolder('Bloom');
-        bloom.add(postFxPipeline, 'enableBloom');
+        bloom.add(postFxPipeline, 'bloomEnable');
         bloom.add(postFxPipeline, 'bloomRadius', 0, 1);
         bloom.add(postFxPipeline, 'bloomIntensity', 0, 1);
         bloom.add(postFxPipeline, 'bloomThreshold', 0, 1);
-        bloom.add(postFxPipeline, 'bloomTexelX', 0, 1);
-        bloom.add(postFxPipeline, 'bloomTexelY', 0, 1);
+        bloom.add(postFxPipeline, 'bloomTexelWidth', 0, 1);
+        bloom.add(postFxPipeline, 'bloomTexelHeight', 0, 1);
 
         // Chromatic abberation
         var chromatic = gui.addFolder('Chromatic abberation');
-        chromatic.add(postFxPipeline, 'enableChromatic');
+        chromatic.add(postFxPipeline, 'chromaticEnable');
         chromatic.add(postFxPipeline, 'chabIntensity', 0, 1);
 
         // Vignette
         var vignette = gui.addFolder('Vignette');
-        vignette.add(postFxPipeline, 'enableVignette');
+        vignette.add(postFxPipeline, 'vignetteEnable');
         vignette.add(postFxPipeline, 'vignetteStrength', 0, 1);
         vignette.add(postFxPipeline, 'vignetteIntensity', 0, 1);
 
         // Noise
         var noise = gui.addFolder('Noise');
-        noise.add(postFxPipeline, 'enableNoise');
+        noise.add(postFxPipeline, 'noiseEnable');
         noise.add(postFxPipeline, 'noiseStrength', 0, 1);
+        noise.add(postFxPipeline, 'seed', 0, 1);
 
         // VHS
         var VHS = gui.addFolder('VHS');
-        VHS.add(postFxPipeline, 'enableVHS');
+        VHS.add(postFxPipeline, 'VHSEnable');
         VHS.add(postFxPipeline, 'vhsStrength', 0, 1);
 
         // Scanlines
         var scanlines = gui.addFolder('Scanlines');
-        scanlines.add(postFxPipeline, 'enableScanlines');
+        scanlines.add(postFxPipeline, 'scanlinesEnable');
         scanlines.add(postFxPipeline, 'scanStrength', 0, 1);
 
         // CRT 
         var CRT = gui.addFolder('CRT');
-        CRT.add(postFxPipeline, 'enableCRT');
+        CRT.add(postFxPipeline, 'CRTEnable');
         CRT.add(postFxPipeline, 'crtWidth', 0, 5);
         CRT.add(postFxPipeline, 'crtHeight', 0, 5);
-
-        gui.add(postFxPipeline, 'seed', 0, 1);
 
     }
 

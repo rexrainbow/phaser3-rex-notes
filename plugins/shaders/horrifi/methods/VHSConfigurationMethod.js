@@ -3,7 +3,7 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-        this.enableVHS = enable;
+        this.VHSEnable = enable;
         return this;
     },
 

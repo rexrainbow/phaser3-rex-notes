@@ -17,38 +17,38 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.now = 0;
 
         // Bloon
-        this.enableBloom = false;
+        this.bloomEnable = false;
         this.bloomRadius = 0;
         this.bloomIntensity = 0;
         this.bloomThreshold = 0;
-        this.bloomTexelX = 0;
-        this.bloomTexelY = 0;
+        this.bloomTexelWidth = 0;
+        this.bloomTexelHeight = 0;
 
         // Chromatic abberation
-        this.enableChromatic = false;
+        this.chromaticEnable = false;
         this.chabIntensity = 0;
 
         // Vignette
-        this.enableVignette = false;
+        this.vignetteEnable = false;
         this.vignetteStrength = 0;
         this.vignetteIntensity = 0;
 
         // Noise
-        this.enableNoise = false;
+        this.noiseEnable = false;
         this.noiseStrength = 0;
 
         // VHS
-        this.enableVHS = false;
+        this.VHSEnable = false;
         this.vhsStrength = 0;
 
         // Scanlines
-        this.enableScanlines = false;
+        this.scanlinesEnable = false;
         this.scanStrength = 0;
 
         // CRT
-        this.enableCRT = false;
-        this.crtWidth = 1;
-        this.crtHeight = 1;
+        this.CRTEnable = false;
+        this.crtWidth = 0;
+        this.crtHeight = 0;
     }
 
     resetFromJSON(o) {
@@ -57,7 +57,35 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         // Bloom
         this.setBloomEnable(GetValue(o, 'bloomEnable', enable));
         this.setBloomRadius(GetValue(o, 'bloomRadius', 0));
+        this.setBloomIntensity(GetValue(o, 'bloomIntensity', 0));
+        this.setBloomThreshold(GetValue(o, 'bloomThreshold', 0));
+        this.setBloomTexelSize(GetValue(o, 'bloomTexelWidth', 0), GetValue(o, 'bloomTexelHeight'));
 
+        // Chromatic abberation
+        this.setChromaticEnable(GetValue(o, 'chromaticEnable', enable));
+        this.setChabIntensity(GetValue(o, 'chabIntensity', 0));
+
+        // Vignette
+        this.setVignetteEnable(GetValue(o, 'vignetteEnable', enable));
+        this.setVignetteStrength(GetValue(o, 'vignetteStrength', 0));
+        this.setVignetteIntensity(GetValue(o, 'vignetteIntensity', 0));
+
+        // Noise
+        this.setNoiseEnable(GetValue(o, 'noiseEnable', enable));
+        this.setNoiseStrength(GetValue(o, 'noiseStrength', 0));
+        this.setSeed(GetValue(0, 'seed', Math.random()));
+
+        // VHS
+        this.setVHSEnable(GetValue(o, 'VHSEnable', enable));
+        this.setVhsStrength(GetValue(o, 'vhsStrength', 0));
+
+        // Scanlines
+        this.setScanlinesEnable(GetValue(o, 'scanlinesEnable', enable));
+        this.setScanStrength(GetValue(o, 'scanStrength', 0));
+
+        // CRT
+        this.setCRTEnable(GetValue(o, 'CRTEnable', enable));
+        this.setCrtSize(GetValue(o, 'crtWidth', 0), GetValue(o, 'crtHeight', undefined));
 
         return this;
     }
@@ -66,36 +94,36 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.set1f('seed', this.seed);
 
         // Bloon
-        this.set1f('enableBloom', (this.enableBloom) ? 1 : 0);
+        this.set1f('bloomEnable', (this.bloomEnable) ? 1 : 0);
         this.set3f('bloom', this.bloomRadius, this.bloomIntensity, this.bloomThreshold);
-        this.set2f('bloomTexel', this.bloomTexelX, this.bloomTexelY);
+        this.set2f('bloomTexel', this.bloomTexelWidth, this.bloomTexelHeight);
 
         // Chromatic abberation
-        this.set1f('enableChromatic', (this.enableChromatic) ? 1 : 0);
+        this.set1f('chromaticEnable', (this.chromaticEnable) ? 1 : 0);
         this.set1f('chabIntensity', this.chabIntensity);
 
         // Vignette
-        this.set1f('enableVignette', (this.enableVignette) ? 1 : 0);
+        this.set1f('vignetteEnable', (this.vignetteEnable) ? 1 : 0);
         this.set2f('vignette', this.vignetteStrength, this.vignetteIntensity);
 
         // Noise
-        this.set1f('enableNoise', (this.enableNoise) ? 1 : 0);
+        this.set1f('noiseEnable', (this.noiseEnable) ? 1 : 0);
         this.set1f('noiseStrength', this.noiseStrength);
 
         // VHS
-        this.set1f('enableVHS', (this.enableVHS) ? 1 : 0);
+        this.set1f('VHSEnable', (this.VHSEnable) ? 1 : 0);
         this.set1f('vhsStrength', this.vhsStrength);
 
         // Scanlines
-        this.set1f('enableScanlines', (this.enableScanlines) ? 1 : 0);
+        this.set1f('ScanlinesEnable', (this.ScanlinesEnable) ? 1 : 0);
         this.set1f('scanStrength', this.scanStrength);
 
         // CRT        
-        this.set1f('enableCRT', (this.enableCRT) ? 1 : 0);
+        this.set1f('CRTEnable', (this.CRTEnable) ? 1 : 0);
         this.set2f('crtSize', this.crtWidth, this.crtHeight);
 
         // Eanble by VHS    
-        if (this.enableVHS) {
+        if (this.VHSEnable) {
             this.now += this.game.loop.delta;
         }
         this.set1f('time', this.now);

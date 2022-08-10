@@ -3,7 +3,7 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-        this.enableVignette = enable;
+        this.vignetteEnable = enable;
         return this;
     },
 

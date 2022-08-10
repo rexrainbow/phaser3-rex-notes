@@ -122,7 +122,7 @@
     };
   }
 
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float seed;\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float enableBloom;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float enableChromatic;\nuniform float chabIntensity;\n\n// Vignette\nuniform float enableVignette;\nuniform vec2 vignette;\n\n// Noise\nuniform float enableNoise;\nuniform float noiseStrength;\n\n// VHS\nuniform float enableVHS;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float enableScanlines;\nuniform float scanStrength;\n\n// CRT\nuniform float enableCRT;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*seed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtRunCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( enableCRT > .5 ) {\n    mainUv = crtRunCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( enableChromatic > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( enableScanlines > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( enableBloom > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( enableNoise > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( enableVHS > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( enableVignette > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( enableCRT > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float seed;\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float bloomEnable;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float chromaticEnable;\nuniform float chabIntensity;\n\n// Vignette\nuniform float vignetteEnable;\nuniform vec2 vignette;\n\n// Noise\nuniform float noiseEnable;\nuniform float noiseStrength;\n\n// VHS\nuniform float VHSEnable;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float scanlinesEnable;\nuniform float scanStrength;\n\n// CRT\nuniform float CRTEnable;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*seed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtRunCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( CRTEnable > .5 ) {\n    mainUv = crtRunCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( chromaticEnable > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( scanlinesEnable > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( bloomEnable > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( noiseEnable > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( VHSEnable > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( vignetteEnable > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( CRTEnable > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
 
   var BloonConfigurationMethods = {
     setBloomEnable: function setBloomEnable(enable) {
@@ -130,7 +130,7 @@
         enable = true;
       }
 
-      this.enableBloom = enable;
+      this.bloomEnable = enable;
       return this;
     },
     setBloomRadius: function setBloomRadius(value) {
@@ -144,6 +144,15 @@
     setBloomThreshold: function setBloomThreshold(value) {
       this.bloomThreshold = value;
       return this;
+    },
+    setBloomTexelSize: function setBloomTexelSize(width, height) {
+      if (height === undefined) {
+        height = width;
+      }
+
+      this.bloomTexelWidth = width;
+      this.bloomTexelHeight = height;
+      return this;
     }
   };
 
@@ -153,7 +162,7 @@
         enable = true;
       }
 
-      this.enableChromatic = enable;
+      this.chromaticEnable = enable;
       return this;
     },
     setChabIntensity: function setChabIntensity(value) {
@@ -168,7 +177,7 @@
         enable = true;
       }
 
-      this.enableVignette = enable;
+      this.vignetteEnable = enable;
       return this;
     },
     setVignetteStrength: function setVignetteStrength(value) {
@@ -187,11 +196,15 @@
         enable = true;
       }
 
-      this.enableNoise = enable;
+      this.noiseEnable = enable;
       return this;
     },
     setNoiseStrength: function setNoiseStrength(value) {
       this.noiseStrength = value;
+      return this;
+    },
+    setSeed: function setSeed(value) {
+      this.seed = value;
       return this;
     }
   };
@@ -202,7 +215,7 @@
         enable = true;
       }
 
-      this.enableVHS = enable;
+      this.VHSEnable = enable;
       return this;
     },
     setVhsStrength: function setVhsStrength(value) {
@@ -217,7 +230,7 @@
         enable = true;
       }
 
-      this.enableScanlines = enable;
+      this.scanlinesEnable = enable;
       return this;
     },
     setScanStrength: function setScanStrength(value) {
@@ -232,10 +245,14 @@
         enable = true;
       }
 
-      this.enableCRT = enable;
+      this.CRTEnable = enable;
       return this;
     },
     setCrtSize: function setCrtSize(width, height) {
+      if (height === undefined) {
+        height = width;
+      }
+
       this.crtWidth = width;
       this.crtHeight = height;
       return this;
@@ -267,32 +284,32 @@
       _this.seed = Math.random();
       _this.now = 0; // Bloon
 
-      _this.enableBloom = false;
+      _this.bloomEnable = false;
       _this.bloomRadius = 0;
       _this.bloomIntensity = 0;
       _this.bloomThreshold = 0;
-      _this.bloomTexelX = 0;
-      _this.bloomTexelY = 0; // Chromatic abberation
+      _this.bloomTexelWidth = 0;
+      _this.bloomTexelHeight = 0; // Chromatic abberation
 
-      _this.enableChromatic = false;
+      _this.chromaticEnable = false;
       _this.chabIntensity = 0; // Vignette
 
-      _this.enableVignette = false;
+      _this.vignetteEnable = false;
       _this.vignetteStrength = 0;
       _this.vignetteIntensity = 0; // Noise
 
-      _this.enableNoise = false;
+      _this.noiseEnable = false;
       _this.noiseStrength = 0; // VHS
 
-      _this.enableVHS = false;
+      _this.VHSEnable = false;
       _this.vhsStrength = 0; // Scanlines
 
-      _this.enableScanlines = false;
+      _this.scanlinesEnable = false;
       _this.scanStrength = 0; // CRT
 
-      _this.enableCRT = false;
-      _this.crtWidth = 1;
-      _this.crtHeight = 1;
+      _this.CRTEnable = false;
+      _this.crtWidth = 0;
+      _this.crtHeight = 0;
       return _this;
     }
 
@@ -303,6 +320,29 @@
 
         this.setBloomEnable(GetValue(o, 'bloomEnable', enable));
         this.setBloomRadius(GetValue(o, 'bloomRadius', 0));
+        this.setBloomIntensity(GetValue(o, 'bloomIntensity', 0));
+        this.setBloomThreshold(GetValue(o, 'bloomThreshold', 0));
+        this.setBloomTexelSize(GetValue(o, 'bloomTexelWidth', 0), GetValue(o, 'bloomTexelHeight')); // Chromatic abberation
+
+        this.setChromaticEnable(GetValue(o, 'chromaticEnable', enable));
+        this.setChabIntensity(GetValue(o, 'chabIntensity', 0)); // Vignette
+
+        this.setVignetteEnable(GetValue(o, 'vignetteEnable', enable));
+        this.setVignetteStrength(GetValue(o, 'vignetteStrength', 0));
+        this.setVignetteIntensity(GetValue(o, 'vignetteIntensity', 0)); // Noise
+
+        this.setNoiseEnable(GetValue(o, 'noiseEnable', enable));
+        this.setNoiseStrength(GetValue(o, 'noiseStrength', 0));
+        this.setSeed(GetValue(0, 'seed', Math.random())); // VHS
+
+        this.setVHSEnable(GetValue(o, 'VHSEnable', enable));
+        this.setVhsStrength(GetValue(o, 'vhsStrength', 0)); // Scanlines
+
+        this.setScanlinesEnable(GetValue(o, 'scanlinesEnable', enable));
+        this.setScanStrength(GetValue(o, 'scanStrength', 0)); // CRT
+
+        this.setCRTEnable(GetValue(o, 'CRTEnable', enable));
+        this.setCrtSize(GetValue(o, 'crtWidth', 0), GetValue(o, 'crtHeight', undefined));
         return this;
       }
     }, {
@@ -310,29 +350,29 @@
       value: function onPreRender() {
         this.set1f('seed', this.seed); // Bloon
 
-        this.set1f('enableBloom', this.enableBloom ? 1 : 0);
+        this.set1f('bloomEnable', this.bloomEnable ? 1 : 0);
         this.set3f('bloom', this.bloomRadius, this.bloomIntensity, this.bloomThreshold);
-        this.set2f('bloomTexel', this.bloomTexelX, this.bloomTexelY); // Chromatic abberation
+        this.set2f('bloomTexel', this.bloomTexelWidth, this.bloomTexelHeight); // Chromatic abberation
 
-        this.set1f('enableChromatic', this.enableChromatic ? 1 : 0);
+        this.set1f('chromaticEnable', this.chromaticEnable ? 1 : 0);
         this.set1f('chabIntensity', this.chabIntensity); // Vignette
 
-        this.set1f('enableVignette', this.enableVignette ? 1 : 0);
+        this.set1f('vignetteEnable', this.vignetteEnable ? 1 : 0);
         this.set2f('vignette', this.vignetteStrength, this.vignetteIntensity); // Noise
 
-        this.set1f('enableNoise', this.enableNoise ? 1 : 0);
+        this.set1f('noiseEnable', this.noiseEnable ? 1 : 0);
         this.set1f('noiseStrength', this.noiseStrength); // VHS
 
-        this.set1f('enableVHS', this.enableVHS ? 1 : 0);
+        this.set1f('VHSEnable', this.VHSEnable ? 1 : 0);
         this.set1f('vhsStrength', this.vhsStrength); // Scanlines
 
-        this.set1f('enableScanlines', this.enableScanlines ? 1 : 0);
+        this.set1f('ScanlinesEnable', this.ScanlinesEnable ? 1 : 0);
         this.set1f('scanStrength', this.scanStrength); // CRT        
 
-        this.set1f('enableCRT', this.enableCRT ? 1 : 0);
+        this.set1f('CRTEnable', this.CRTEnable ? 1 : 0);
         this.set2f('crtSize', this.crtWidth, this.crtHeight); // Eanble by VHS    
 
-        if (this.enableVHS) {
+        if (this.VHSEnable) {
           this.now += this.game.loop.delta;
         }
 

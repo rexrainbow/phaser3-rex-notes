@@ -3,7 +3,7 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-        this.enableNoise = enable;
+        this.noiseEnable = enable;
         return this;
     },
 
@@ -11,4 +11,9 @@ export default {
         this.noiseStrength = value;
         return this;
     },
+
+    setSeed(value) {       
+        this.seed = value;
+        return this;
+    }
 }

@@ -3,7 +3,7 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-        this.enableChromatic = enable;
+        this.chromaticEnable = enable;
         return this;
     },
 

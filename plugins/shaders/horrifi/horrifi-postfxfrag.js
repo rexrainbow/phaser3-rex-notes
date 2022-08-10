@@ -17,32 +17,32 @@ varying vec2 outTexCoord;
 #define SAMPLES 32.
 
 // Bloom
-uniform float enableBloom;
+uniform float bloomEnable;
 uniform vec3 bloom;
 uniform vec2 bloomTexel;
 
 // Chromatic abberation
-uniform float enableChromatic;
+uniform float chromaticEnable;
 uniform float chabIntensity;
 
 // Vignette
-uniform float enableVignette;
+uniform float vignetteEnable;
 uniform vec2 vignette;
 
 // Noise
-uniform float enableNoise;
+uniform float noiseEnable;
 uniform float noiseStrength;
 
 // VHS
-uniform float enableVHS;
+uniform float VHSEnable;
 uniform float vhsStrength;
 
 // Scanlines
-uniform float enableScanlines;
+uniform float scanlinesEnable;
 uniform float scanStrength;
 
 // CRT
-uniform float enableCRT;
+uniform float CRTEnable;
 uniform vec2 crtSize;
 
 
@@ -109,7 +109,7 @@ void main() {
   vec2 mainUv = outTexCoord;
 
   // CRT
-  if ( enableCRT > .5 ) {
+  if ( CRTEnable > .5 ) {
     mainUv = crtRunCurve(outTexCoord);
   }
 	
@@ -117,37 +117,37 @@ void main() {
   vec4 color = texture2D( uMainSampler, mainUv);
 	
   // Chromatic abberation
-  if ( enableChromatic > .5 ) {
+  if ( chromaticEnable > .5 ) {
     color.rgb *= chromatic(mainUv, chabIntensity * 0.01);
   }
 	
   // Scanlines
-  if ( enableScanlines > .5 ) {
+  if ( scanlinesEnable > .5 ) {
     color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);
   }
 
   // Bloom
-  if ( enableBloom > .5 ) {
+  if ( bloomEnable > .5 ) {
     color.rgb += blur(mainUv).rgb;
   }
 	
   // Noise
-  if ( enableNoise > .5 ) {
+  if ( noiseEnable > .5 ) {
     color.rgb += noise(mainUv)*noiseStrength;
   }
 	
   // VHS
-  if ( enableVHS > .5 ) {
+  if ( VHSEnable > .5 ) {
     color += vhs(mainUv);
   }
 	
   // Vignette
-  if ( enableVignette > .5) {
+  if ( vignetteEnable > .5) {
     color.rgb *= vig(mainUv);
   }
 	
   // Cutoff edges
-  if ( enableCRT > .5) {
+  if ( CRTEnable > .5) {
     if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {
       color.rgb *= 0.;
     }

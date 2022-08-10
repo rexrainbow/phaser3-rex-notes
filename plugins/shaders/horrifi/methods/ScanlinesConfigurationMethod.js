@@ -3,7 +3,7 @@ export default {
         if (enable === undefined) {
             enable = true;
         }
-        this.enableScanlines = enable;
+        this.scanlinesEnable = enable;
         return this;
     },
 
