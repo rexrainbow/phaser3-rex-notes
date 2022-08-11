@@ -848,6 +848,30 @@
     return State;
   }(FSM);
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetTickDelta = function GetTickDelta(game) {
+    return GetGame(game).loop.delta;
+  };
+
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var DistanceBetween = Phaser.Math.Distance.Between;
 
@@ -991,8 +1015,7 @@
     }, {
       key: "dt",
       get: function get() {
-        var game = this.scene.sys.game;
-        var delta = game.loop.delta;
+        var delta = GetTickDelta(this.scene);
         return delta;
       }
     }, {

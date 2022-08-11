@@ -14,6 +14,7 @@ import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
+import SpriteMethods from './SpriteMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
@@ -35,7 +36,8 @@ var Methods = {
 
 Object.assign(
     Methods,
-    TypingSpeedMethods
+    TypingSpeedMethods,
+    SpriteMethods
 );
 
 export default Methods;

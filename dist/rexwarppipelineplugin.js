@@ -125,6 +125,36 @@
   // reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
   var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\nuniform vec2 texSize;\nuniform vec2 amplitude;\nuniform vec2 frequency;\nuniform vec2 speed;\nuniform float time;\n\n\nvoid main (void) {\n  vec2 dxy = frequency/texSize;\n  vec2 r = amplitude/texSize;\n  vec2 spd = speed/texSize;\n  vec2 angle = (outTexCoord / dxy) + (spd*time);\n  vec2 tc = (vec2(cos(angle.x),sin(angle.y)) * r) + outTexCoord;\n  gl_FragColor = texture2D(uMainSampler, tc);\n}\n";
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetTickDelta = function GetTickDelta(game) {
+    return GetGame(game).loop.delta;
+  };
+
   var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var Vector2 = Phaser.Math.Vector2;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -171,7 +201,7 @@
       key: "onPreRender",
       value: function onPreRender() {
         if (this.speedEnable) {
-          this.now += this.game.loop.delta;
+          this.now += GetTickDelta(this.game);
         }
 
         this.set2f('frequency', this.frequencyX, this.frequencyY);
@@ -405,29 +435,6 @@
 
     return WarpPostFxPipelineBehavior;
   }(PostFxPipelineBehaviorBase);
-
-  var GameClass = Phaser.Game;
-
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var SceneClass = Phaser.Scene;
-
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.game;
-    }
-  };
 
   var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
     GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);

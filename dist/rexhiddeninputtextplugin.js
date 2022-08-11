@@ -653,6 +653,36 @@
     return text;
   };
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetTickDelta = function GetTickDelta(game) {
+    return GetGame(game).loop.delta;
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Wrap = Phaser.Math.Wrap;
 
@@ -792,7 +822,7 @@
           cursor = ' ';
         }
 
-        var timerValue = this.cursorFlashTimer + this.scene.game.loop.delta;
+        var timerValue = this.cursorFlashTimer + GetTickDelta(this.scene);
         this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
         return cursor;
       }

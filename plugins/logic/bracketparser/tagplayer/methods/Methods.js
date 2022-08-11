@@ -6,6 +6,8 @@ import PlayPromise from './PlayPromise.js';
 import Pause from './Pause.js';
 import Resume from './Resume.js';
 import Wait from './Wait.js';
+import SpriteMethods from './SpriteMethods.js';
+import TextMethods from './TextMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
@@ -17,5 +19,11 @@ var Methods = {
     resume: Resume,
     wait: Wait,
 }
+
+Object.assign(
+    Methods,
+    SpriteMethods,
+    TextMethods
+)
 
 export default Methods;

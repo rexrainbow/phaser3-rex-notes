@@ -50,6 +50,9 @@ class Demo extends Phaser.Scene {
 [sprite.knight.play=idle,guard]
 [sprite.knight.x=400][sprite.knight.y=300]
 
+// extDude
+[sprite.extDude.x.to=1000,5000]
+
 [wait=1000]
 
 [text.a]
@@ -77,7 +80,9 @@ World
 [/sprite][wait=sprite]
 `
 
+        var extDude = this.add.image(100, 100, 'dude');
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this)
+            .addSprite('extDude', extDude)
             .playPromise(content)
             .then(function () {
                 console.log('Complete')

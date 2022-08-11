@@ -230,9 +230,12 @@
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
     } else if (IsSceneObject(object.scene)) {
       // object = game object
-      return object.scene.game;
+      return object.scene.sys.game;
     }
   };
 

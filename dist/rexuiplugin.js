@@ -8118,6 +8118,36 @@
     return text;
   };
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetTickDelta = function GetTickDelta(game) {
+    return GetGame(game).loop.delta;
+  };
+
   var GetValue$25 = Phaser.Utils.Objects.GetValue;
   var Wrap$1 = Phaser.Math.Wrap;
 
@@ -8257,7 +8287,7 @@
           cursor = ' ';
         }
 
-        var timerValue = this.cursorFlashTimer + this.scene.game.loop.delta;
+        var timerValue = this.cursorFlashTimer + GetTickDelta(this.scene);
         this.cursorFlashTimer = Wrap$1(timerValue, 0, this.cursorFlashDuration);
         return cursor;
       }
@@ -15181,12 +15211,6 @@
   };
   Object.assign(Methods$8, TypingSpeedMethods$1);
 
-  var SceneClass = Phaser.Scene;
-
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
   var GetSceneObject = function GetSceneObject(object) {
     if (object == null || _typeof(object) !== 'object') {
       return null;
@@ -17229,18 +17253,12 @@
       return this.bobs[name];
     },
     getGO: function getGO(name) {
-      return this.get(name).gameObject;
+      var bob = this.get(name);
+      return bob ? bob.gameObject : null;
     },
-    add: function add(name) {
+    addGO: function addGO(name, gameObject) {
       this.remove(name);
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
       var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
-      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
         AddTintRGBProperties(gameObject);
@@ -17259,6 +17277,18 @@
       }, this);
       var bob = new this.BobClass(this, gameObject, name);
       this.bobs[name] = bob;
+      return this;
+    },
+    add: function add(name) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
+      this.addGO(name, gameObject);
+      var bob = this.get(name);
+      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
+      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
         bob.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
@@ -17812,6 +17842,16 @@
     return this;
   };
 
+  var SpriteMethods = {
+    getSprite: function getSprite(name) {
+      return this.spriteManager.getGO(name);
+    },
+    addSprite: function addSprite(name, gameObject) {
+      this.spriteManager.addGO(name, gameObject);
+      return this;
+    }
+  };
+
   var Methods$5 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
@@ -17829,7 +17869,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$5, TypingSpeedMethods);
+  Object.assign(Methods$5, TypingSpeedMethods, SpriteMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -25735,8 +25775,7 @@
   var AngleBetween$1 = Phaser.Math.Angle.Between;
   var VelocityMethods = {
     getDt: function getDt() {
-      var game = this.scene.sys.game;
-      var dt = game.loop.delta;
+      var dt = GetTickDelta(this.scene);
       return dt;
     },
     getVelocity: function getVelocity() {
@@ -35298,8 +35337,7 @@
     }, {
       key: "dt",
       get: function get() {
-        var game = this.scene.sys.game;
-        var delta = game.loop.delta;
+        var delta = GetTickDelta(this.scene);
         return delta;
       }
     }, {

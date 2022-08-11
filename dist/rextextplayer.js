@@ -8047,18 +8047,12 @@
       return this.bobs[name];
     },
     getGO: function getGO(name) {
-      return this.get(name).gameObject;
+      var bob = this.get(name);
+      return bob ? bob.gameObject : null;
     },
-    add: function add(name) {
+    addGO: function addGO(name, gameObject) {
       this.remove(name);
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
       var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
-      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
         AddTintRGBProperties(gameObject);
@@ -8077,6 +8071,18 @@
       }, this);
       var bob = new this.BobClass(this, gameObject, name);
       this.bobs[name] = bob;
+      return this;
+    },
+    add: function add(name) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
+      this.addGO(name, gameObject);
+      var bob = this.get(name);
+      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
+      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
 
       if (hasTintChange) {
         bob.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
@@ -8630,6 +8636,16 @@
     return this;
   };
 
+  var SpriteMethods = {
+    getSprite: function getSprite(name) {
+      return this.spriteManager.getGO(name);
+    },
+    addSprite: function addSprite(name, gameObject) {
+      this.spriteManager.addGO(name, gameObject);
+      return this;
+    }
+  };
+
   var Methods = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
@@ -8647,7 +8663,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods, TypingSpeedMethods);
+  Object.assign(Methods, TypingSpeedMethods, SpriteMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {

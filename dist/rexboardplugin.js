@@ -8468,12 +8468,35 @@
     EmitChessEvent('gameobjectpressend', 'board.pressend', board, tileX, tileY, press);
   };
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetTickDelta = function GetTickDelta(game) {
+    return GetGame(game).loop.delta;
+  };
+
   var DistanceBetween$1 = Phaser.Math.Distance.Between;
   var AngleBetween$1 = Phaser.Math.Angle.Between;
   var VelocityMethods = {
     getDt: function getDt() {
-      var game = this.scene.sys.game;
-      var dt = game.loop.delta;
+      var dt = GetTickDelta(this.scene);
       return dt;
     },
     getVelocity: function getVelocity() {

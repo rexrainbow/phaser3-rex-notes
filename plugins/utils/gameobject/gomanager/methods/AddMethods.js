@@ -13,19 +13,18 @@ export default {
     },
 
     getGO(name) {
-        return this.get(name).gameObject;
+        var bob = this.get(name);
+        return (bob) ? bob.gameObject : null;
     },
 
-    add(name, ...args) {
+    addGO(name, gameObject) {
         this.remove(name);
 
-        var gameObject = this.createGameObjectCallback(this.scene, ...args);
         var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
-        var hasAlphaChange = (!!gameObject.setAlpha) && (this.fadeTime > 0);
-
         if (hasTintChange) {
             AddTintRGBProperties(gameObject);
         }
+
         if (this.viewportCoordinateEnable) {
             AddViewportCoordinateProperties(gameObject);
         }
@@ -40,6 +39,16 @@ export default {
         var bob = new this.BobClass(this, gameObject, name);
         this.bobs[name] = bob;
 
+        return this;
+    },
+
+    add(name, ...args) {
+        var gameObject = this.createGameObjectCallback(this.scene, ...args);
+        this.addGO(name, gameObject);
+        var bob = this.get(name);
+
+        var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
+        var hasAlphaChange = (!!gameObject.setAlpha) && (this.fadeTime > 0);
         if (hasTintChange) {
             bob
                 .setProperty('tintGray', 0)
@@ -49,6 +58,7 @@ export default {
                 .setProperty('alpha', 0)
                 .easeProperty('alpha', 1, this.fadeTime)
         }
+
         return this;
     }
 }
