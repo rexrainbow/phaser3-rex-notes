@@ -12,7 +12,7 @@ export default {
         return this;
     },
 
-    setSeed(value) {       
+    setSeed(value) {
         this.seed = value;
         return this;
     }

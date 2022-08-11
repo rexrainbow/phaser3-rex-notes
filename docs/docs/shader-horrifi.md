@@ -198,3 +198,319 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
     ```
 
 ### Bloom
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setBloomEnable();
+    // pipelineInstance.setBloomEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.bloomEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setBloomEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.bloomEnable = false;
+    ```
+- Get
+    ```javascript
+    var bloomEnable = pipelineInstance.bloomEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setBloomRadius(value);
+    pipelineInstance.setBloomIntensity(value);
+    pipelineInstance.setBloomThreshold(value);
+    pipelineInstance.setBloomTexelSize(width, height);
+    ```
+    or
+    ```javascript
+    pipelineInstance.bloomRadius = value;
+    pipelineInstance.bloomIntensity = value;
+    pipelineInstance.bloomThreshold = value;
+    pipelineInstance.bloomTexelWidth = width;
+    pipelineInstance.bloomTexelHeight = height;
+    ```
+- Get
+    ```javascript
+    var bloomRadius = pipelineInstance.bloomRadius;
+    var bloomIntensity = pipelineInstance.bloomIntensity;
+    var bloomThreshold = pipelineInstance.bloomThreshold;
+    var bloomTexelWidth = pipelineInstance.bloomTexelWidth;
+    var bloomTexelHeight = pipelineInstance.bloomTexelHeight;
+    ```
+
+### Chromatic abberation
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setChromaticEnable();
+    // pipelineInstance.setChromaticEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.chromaticEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setChromaticEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.chromaticEnable = false;
+    ```
+- Get
+    ```javascript
+    var chromaticEnable = pipelineInstance.chromaticEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setChabIntensity(value);
+    ```
+    or
+    ```javascript
+    pipelineInstance.chabIntensity = value;
+    ```
+- Get
+    ```javascript
+    var chabIntensity = pipelineInstance.chabIntensity;
+    ```
+
+### Vignette
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setVignetteEnable();
+    // pipelineInstance.setVignetteEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.vignetteEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setVignetteEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.vignetteEnable = false;
+    ```
+- Get
+    ```javascript
+    var vignetteEnable = pipelineInstance.vignetteEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setVignetteStrength(value);
+    pipelineInstance.setVignetteIntensity(value);
+    ```
+    or
+    ```javascript
+    pipelineInstance.vignetteStrength = value;
+    pipelineInstance.vignetteIntensity = value;
+    ```
+- Get
+    ```javascript
+    var vignetteStrength = pipelineInstance.vignetteStrength;
+    var vignetteIntensity = pipelineInstance.vignetteIntensity;
+    ```
+
+### Noise
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setNoiseEnable();
+    // pipelineInstance.setNoiseEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.noiseEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setNoiseEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.noiseEnable = false;
+    ```
+- Get
+    ```javascript
+    var noiseEnable = pipelineInstance.noiseEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setNoiseStrength(value);
+    pipelineInstance.setSeed(value);
+    ```
+    or
+    ```javascript
+    pipelineInstance.noiseStrength = value;
+    pipelineInstance.seed = value;
+    ```
+- Get
+    ```javascript
+    var noiseStrength = pipelineInstance.noiseStrength;
+    var seed = pipelineInstance.seed;
+    ```
+
+### VHS
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setVHSEnable();
+    // pipelineInstance.setVHSEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.vhsEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setVHSEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.vhsEnable = false;
+    ```
+- Get
+    ```javascript
+    var vhsEnable = pipelineInstance.vhsEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setVhsStrength(value);
+    ```
+    or
+    ```javascript
+    pipelineInstance.vhsStrength = value;
+    ```
+- Get
+    ```javascript
+    var vhsStrength = pipelineInstance.vhsStrength;
+    ```
+
+### Scanlines
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setScanlinesEnable();
+    // pipelineInstance.setScanlinesEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.scanlinesEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setScanlinesEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.scanlinesEnable = false;
+    ```
+- Get
+    ```javascript
+    var scanlinesEnable = pipelineInstance.scanlinesEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setScanStrength(value);
+    ```
+    or
+    ```javascript
+    pipelineInstance.scanStrength = value;
+    ```
+- Get
+    ```javascript
+    var scanStrength = pipelineInstance.scanStrength;
+    ```
+
+### CRT
+
+#### Enable
+
+- Enable
+    ```javascript
+    pipelineInstance.setCRTEnable();
+    // pipelineInstance.setCRTEnable(true);
+    ```
+    or
+    ```javascript
+    pipelineInstance.crtEnable = true;
+    ```
+- Disable
+    ```javascript
+    pipelineInstance.setCRTEnable(false);
+    ```
+    or
+    ```javascript
+    pipelineInstance.crtEnable = false;
+    ```
+- Get
+    ```javascript
+    var crtEnable = pipelineInstance.crtEnable;
+    ```
+
+#### Parameters
+
+- Set
+    ```javascript
+    pipelineInstance.setCrtSize(width, height);
+    ```
+    or
+    ```javascript
+    pipelineInstance.crtWidth = width;
+    pipelineInstance.crtHeight = height;
+    ```
+- Get
+    ```javascript
+    var crtWidth = pipelineInstance.crtWidth;
+    var crtHeight = pipelineInstance.crtHeight;
+    ```
+
+### Enable all effects
+
+- Enable all
+    ```javascript
+    pipelineInstance.setEnable();
+    // pipelineInstance.setEnable(true);
+    ```
+- Disable all
+    ```javascript
+    pipelineInstance.setEnable(false);
+    ```

@@ -133,6 +133,7 @@
 1. [Shader/glow-filter](shader-glowfilter.md): Glow post processing filter.
 1. [Shader/glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
 1. [Shader/gray-scale](shader-grayscale.md): Gray scale post processing filter.
+1. [Shader/horri-fi](shader-horrifi.md): 6-in-1 post processing filter.
 1. [Shader/hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 1. [Shader/inverse](shader-inverse.md): Inverse color post processing filter.
 1. [Shader/kawaseblur](shader-kawaseblur.md): Kawase-blur post processing filter.

@@ -97,7 +97,7 @@ vec4 blur(vec2 uv) {
 }
 
 // TV Curve
-vec2 crtRunCurve( vec2 uv ) {
+vec2 crtCurve( vec2 uv ) {
   uv = uv*2.-1.;
   vec2 uvoff = abs(uv.xy) / crtSize;
   uv = uv + uv * uvoff * uvoff;
@@ -110,7 +110,7 @@ void main() {
 
   // CRT
   if ( crtEnable > .5 ) {
-    mainUv = crtRunCurve(outTexCoord);
+    mainUv = crtCurve(outTexCoord);
   }
 	
   // Base coloring

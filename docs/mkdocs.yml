@@ -256,6 +256,7 @@ nav:
     - Transition:
         - Warp: shader-warp-transition.md
         - Dissolve: shader-dissolve.md
+    - Horri-fi: shader-horrifi.md
 - Logic:
     - Events:
         - Event emitter: eventemitter3.md
