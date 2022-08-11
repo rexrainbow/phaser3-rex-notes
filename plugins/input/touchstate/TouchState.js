@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import GetTickDelta from '../../utils/system/GetTickDelta.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -102,8 +103,7 @@ class TouchState extends ComponentBase {
     }
 
     get dt() {
-        var game = this.scene.sys.game;
-        var delta = game.loop.delta;
+        var delta = GetTickDelta(this.scene);
         return delta;
     }
 

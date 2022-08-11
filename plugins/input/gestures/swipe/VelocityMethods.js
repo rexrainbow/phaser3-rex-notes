@@ -1,10 +1,11 @@
+import GetTickDelta from '../../../utils/system/GetTickDelta.js';
+
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 export default {
     getDt: function () {
-        var game = this.scene.sys.game;
-        var dt = game.loop.delta;
+        var dt = GetTickDelta(this.scene);
         return dt;
     },
 

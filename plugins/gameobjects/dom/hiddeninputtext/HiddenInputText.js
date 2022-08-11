@@ -1,6 +1,7 @@
 import InputText from '../inputtext/InputText.js';
 import IsPointerInHitArea from '../../../utils/input/IsPointerInHitArea.js';
 import NumberInputUpdateCallback from './defaultcallbacks/NumberInputUpdateCallback.js';
+import GetTickDelta from '../../../utils/system/GetTickDelta.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Wrap = Phaser.Math.Wrap;
@@ -131,7 +132,7 @@ class HiddenInputText extends InputText {
             cursor = ' ';
         }
 
-        var timerValue = this.cursorFlashTimer + this.scene.game.loop.delta;
+        var timerValue = this.cursorFlashTimer + GetTickDelta(this.scene);
         this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
         return cursor;
     }

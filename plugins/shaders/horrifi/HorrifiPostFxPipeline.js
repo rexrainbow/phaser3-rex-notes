@@ -1,5 +1,6 @@
 import FragSrc from './horrifi-postfxfrag.js';
 import Methods from './methods/Methods.js';
+import GetTickDelta from '../../utils/system/GetTickDelta.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -124,7 +125,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
 
         // Eanble by VHS    
         if (this.vhsEnable) {
-            this.now += this.game.loop.delta;
+            this.now += GetTickDelta(this.game);
         }
         this.set1f('time', this.now);
     }

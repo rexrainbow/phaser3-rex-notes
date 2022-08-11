@@ -1,4 +1,5 @@
 import FragSrc from './warp-postfxfrag.js';
+import GetTickDelta from '../../utils/system/GetTickDelta.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const Vector2 = Phaser.Math.Vector2;
@@ -44,7 +45,7 @@ class WarpPostFxPipeline extends PostFXPipeline {
 
     onPreRender() {
         if (this.speedEnable) {
-            this.now += this.game.loop.delta;
+            this.now += GetTickDelta(this.game);
         }
 
         this.set2f('frequency', this.frequencyX, this.frequencyY);
