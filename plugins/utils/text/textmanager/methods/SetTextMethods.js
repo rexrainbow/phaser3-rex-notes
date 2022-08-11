@@ -1,7 +1,7 @@
 export default {
     setText(name, text) {
         if (!this.has(name)) {
-            this.add(name);
+            return this;
         }
 
         this.get(name).setText(text);
@@ -10,7 +10,7 @@ export default {
 
     typingText(name, text) {
         if (!this.has(name)) {
-            this.add(name);
+            return this;
         }
 
         this.get(name).typing(text);
@@ -18,14 +18,19 @@ export default {
     },
 
     setTypingSpeed(name, speed) {
+        if (!this.has(name)) {
+            return this;
+        }
+
         this.get(name).setTypingSpeed(speed);
         return this;
     },
 
     getTypingTask(name) {
-        if (this.has(name)) {
-            return this.get(name).getTypingTask();
+        if (!this.has(name)) {
+            return null;
         }
-        return null;
+
+        return this.get(name).getTypingTask();
     }
 }
