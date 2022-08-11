@@ -359,6 +359,20 @@ Also will fire `'complete'` event.
    })
    ```
 
+### Flip
+
+- Flip
+    ```javascript
+    image.flipX(value);
+    image.flipY(value);
+    image.flip(x, y);
+    ```
+- Toggle
+    ```javascript
+    image.toggleFlipX();
+    image.toggleFlipY();
+    ```
+
 ### Use cases
 
 - Ease property of current/next image.

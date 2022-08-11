@@ -28770,8 +28770,37 @@
     }
   };
 
+  var FlipMethods = {
+    setFlipX: function setFlipX(value) {
+      this.flipX = value;
+      return this;
+    },
+    setFlipY: function setFlipY(value) {
+      this.flipY = value;
+      return this;
+    },
+    toggleFlipX: function toggleFlipX() {
+      this.flipX = !this.flipX;
+      return this;
+    },
+    toggleFlipY: function toggleFlipY() {
+      this.flipY = !this.flipY;
+      return this;
+    },
+    setFlip: function setFlip(x, y) {
+      this.flipX = x;
+      this.flipY = y;
+      return this;
+    },
+    resetFlip: function resetFlip() {
+      this.flipX = false;
+      this.flipY = false;
+      return this;
+    }
+  };
+
   var methods$f = {};
-  Object.assign(methods$f, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods);
+  Object.assign(methods$f, SetTransitionCallbackMethods, TransitionMethods, MaskMethods, GridCutMethods, FlipMethods);
 
   var OnStart = function OnStart(parent, currentImage, nextImage, t) {};
 
@@ -28907,6 +28936,34 @@
       key: "frame",
       get: function get() {
         return this.nextImage.frame;
+      }
+    }, {
+      key: "flipX",
+      get: function get() {
+        return this._flipX;
+      },
+      set: function set(value) {
+        if (this._flipX === value) {
+          return;
+        }
+
+        this._flipX = value;
+        this.backImage.setFlipX(value);
+        this.frontImage.setFlipX(value);
+      }
+    }, {
+      key: "flipY",
+      get: function get() {
+        return this._flipY;
+      },
+      set: function set(value) {
+        if (this._flipY === value) {
+          return;
+        }
+
+        this._flipY = value;
+        this.backImage.setFlipY(value);
+        this.frontImage.setFlipY(value);
       }
     }, {
       key: "t",

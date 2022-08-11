@@ -127,6 +127,33 @@ class TransitionImage extends Container {
         return this.nextImage.frame;
     }
 
+    get flipX() {
+        return this._flipX;
+    }
+
+    set flipX(value) {
+        if (this._flipX === value) {
+            return;
+        }
+
+        this._flipX = value;
+        this.backImage.setFlipX(value);
+        this.frontImage.setFlipX(value);
+    }
+
+    get flipY() {
+        return this._flipY;
+    }
+
+    set flipY(value) {
+        if (this._flipY === value) {
+            return;
+        }
+        this._flipY = value;
+        this.backImage.setFlipY(value);
+        this.frontImage.setFlipY(value);
+    }
+
     get t() {
         return this._t;
     }

@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
     create() {
         // Default transition behavior is cross-fade
         var image = this.add.rexTransitionImage(400, 300, 'classroom')
+            .setFlipX(true)
             .on('complete', function () {
                 console.log('complete')
             })

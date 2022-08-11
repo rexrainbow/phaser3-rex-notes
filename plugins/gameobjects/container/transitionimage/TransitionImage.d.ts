@@ -90,4 +90,13 @@ declare class TransitionImage extends ContainerLite {
     pause(): this;
     resume(): this;
     stop(): this;
+
+    flipX: boolean;
+    flipY: boolean;
+    setFlipX(value: boolean): this;
+    setFlipY(value: boolean): this;
+    toggleFlipX(): this;
+    toggleFlipY(): this;
+    setFlip(x: boolean, y: boolean): this;
+
 }

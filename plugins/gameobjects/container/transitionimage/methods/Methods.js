@@ -2,6 +2,7 @@ import SetTransitionCallbackMethods from './SetTransitionCallbackMethods.js';
 import TransitionMethods from './TransitionMethods.js';
 import MaskMethods from './MaskMethods.js';
 import GridCutMethods from './GridCutMethods.js';
+import FlipMethods from './FlipMethods.js';
 
 var methods = {
 }
@@ -11,7 +12,8 @@ Object.assign(
     SetTransitionCallbackMethods,
     TransitionMethods,
     MaskMethods,
-    GridCutMethods
+    GridCutMethods,
+    FlipMethods
 )
 
 export default methods;
