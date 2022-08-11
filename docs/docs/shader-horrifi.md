@@ -127,7 +127,7 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
         // Noise
         noiseEnable: false,
         noiseStrength: 0,
-        seed: 0,
+        noiseSeed: 0,
 
         // VHS
         vhsEnable: false,
@@ -158,7 +158,7 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
     - Noise
         - `noiseEnable` : Set `true` to enable noise effect.
         - `noiseStrength`
-        - `seed`
+        - `noiseSeed`
     - VHS
         - `vhsEnable` : Set `true` to enable VHS effect.
         - `vhsStrength`
@@ -365,17 +365,17 @@ Reference : [Horri-fi shader effect](https://gizmo199.itch.io/horri-fi)
 - Set
     ```javascript
     pipelineInstance.setNoiseStrength(value);
-    pipelineInstance.setSeed(value);
+    pipelineInstance.setNoiseSeed(value);
     ```
     or
     ```javascript
     pipelineInstance.noiseStrength = value;
-    pipelineInstance.seed = value;
+    pipelineInstance.noiseSeed = value;
     ```
 - Get
     ```javascript
     var noiseStrength = pipelineInstance.noiseStrength;
-    var seed = pipelineInstance.seed;
+    var noiseSeed = pipelineInstance.noiseSeed;
     ```
 
 ### VHS

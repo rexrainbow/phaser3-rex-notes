@@ -12,8 +12,8 @@ export default {
         return this;
     },
 
-    setSeed(value) {
-        this.seed = value;
+    setNoiseSeed(value) {
+        this.noiseSeed = value;
         return this;
     }
 }

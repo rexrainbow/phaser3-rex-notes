@@ -9051,7 +9051,7 @@
     <span class="c1">// Noise</span>
     <span class="nx">noiseEnable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">noiseStrength</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">seed</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">noiseSeed</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="c1">// VHS</span>
     <span class="nx">vhsEnable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -9088,7 +9088,7 @@
 <li>Noise<ul>
 <li><code>noiseEnable</code> : Set <code>true</code> to enable noise effect.</li>
 <li><code>noiseStrength</code></li>
-<li><code>seed</code></li>
+<li><code>noiseSeed</code></li>
 </ul>
 </li>
 <li>VHS<ul>
@@ -9266,15 +9266,15 @@
 <ul>
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setNoiseStrength</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSeed</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setNoiseSeed</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseStrength</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">seed</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseSeed</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">noiseStrength</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseStrength</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">seed</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">seed</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">noiseSeed</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseSeed</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="vhs">VHS<a class="headerlink" href="#vhs" title="Permanent link">&para;</a></h3>

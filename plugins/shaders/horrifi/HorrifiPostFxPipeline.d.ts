@@ -21,7 +21,7 @@ declare namespace HorrifiPostFxPipeline {
         // Noise
         noiseEnable?: boolean,
         noiseStrength?: number,
-        seed?: number,
+        noiseSeed?: number,
 
         // VHS
         vhsEnable?: boolean,
@@ -60,7 +60,7 @@ declare class HorrifiPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.Post
     // Noise
     noiseEnable: boolean;
     noiseStrength: number;
-    seed: number;
+    noiseSeed: number;
 
     // VHS
     vhsEnable: boolean;

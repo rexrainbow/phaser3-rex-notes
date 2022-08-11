@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
 
             // Noise
             noiseStrength: 0.5,
-            // seed: 0.5,
+            // noiseSeed: 0.5,
 
             // VHS
             vhsStrength: 0.5,
@@ -69,7 +69,7 @@ class Demo extends Phaser.Scene {
         var noise = gui.addFolder('Noise');
         noise.add(postFxPipeline, 'noiseEnable');
         noise.add(postFxPipeline, 'noiseStrength', 0, 1);
-        noise.add(postFxPipeline, 'seed', 0, 1);
+        noise.add(postFxPipeline, 'noiseSeed', 0, 1);
 
         // VHS
         var VHS = gui.addFolder('VHS');

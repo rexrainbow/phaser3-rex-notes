@@ -13,8 +13,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
             renderTarget: true,
             fragShader: FragSrc
         });
-
-        this.seed = Math.random();
+        
         this.now = 0;
 
         // Bloon
@@ -37,6 +36,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         // Noise
         this.noiseEnable = false;
         this.noiseStrength = 0;
+        this.noiseSeed = Math.random();
 
         // VHS
         this.vhsEnable = false;
@@ -74,7 +74,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         // Noise
         this.setNoiseEnable(GetValue(o, 'noiseEnable', enable));
         this.setNoiseStrength(GetValue(o, 'noiseStrength', 0));
-        this.setSeed(GetValue(0, 'seed', Math.random()));
+        this.setSeed(GetValue(0, 'noiseSeed', Math.random()));
 
         // VHS
         this.setVHSEnable(GetValue(o, 'vhsEnable', enable));
@@ -92,7 +92,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('seed', this.seed);
+        this.set1f('noiseSeed', this.noiseSeed);
 
         // Bloon
         this.set1f('bloomEnable', (this.bloomEnable) ? 1 : 0);

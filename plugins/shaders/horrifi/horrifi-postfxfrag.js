@@ -6,7 +6,6 @@ const frag = `\
 #endif
 precision highmedp float;
 
-uniform float seed;
 uniform float time;
 
 // Scene buffer
@@ -32,6 +31,7 @@ uniform vec2 vignette;
 // Noise
 uniform float noiseEnable;
 uniform float noiseStrength;
+uniform float noiseSeed;
 
 // VHS
 uniform float vhsEnable;
@@ -48,7 +48,7 @@ uniform vec2 crtSize;
 
 // Noise
 float noise(vec2 uv) {
-  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*seed);
+  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*noiseSeed);
 }
 
 // VHS

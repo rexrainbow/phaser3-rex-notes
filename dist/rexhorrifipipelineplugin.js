@@ -122,7 +122,7 @@
     };
   }
 
-  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float seed;\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float bloomEnable;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float chromaticEnable;\nuniform float chabIntensity;\n\n// Vignette\nuniform float vignetteEnable;\nuniform vec2 vignette;\n\n// Noise\nuniform float noiseEnable;\nuniform float noiseStrength;\n\n// VHS\nuniform float vhsEnable;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float scanlinesEnable;\nuniform float scanStrength;\n\n// CRT\nuniform float crtEnable;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*seed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( crtEnable > .5 ) {\n    mainUv = crtCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( chromaticEnable > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( scanlinesEnable > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( bloomEnable > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( noiseEnable > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( vhsEnable > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( vignetteEnable > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( crtEnable > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
+  var frag = "#ifdef GL_FRAGMENT_PRECISION_HIGH\n#define highmedp highp\n#else\n#define highmedp mediump\n#endif\nprecision highmedp float;\n\nuniform float time;\n\n// Scene buffer\nuniform sampler2D uMainSampler; \nvarying vec2 outTexCoord;\n\n// Effect parameters\n#define SAMPLES 32.\n\n// Bloom\nuniform float bloomEnable;\nuniform vec3 bloom;\nuniform vec2 bloomTexel;\n\n// Chromatic abberation\nuniform float chromaticEnable;\nuniform float chabIntensity;\n\n// Vignette\nuniform float vignetteEnable;\nuniform vec2 vignette;\n\n// Noise\nuniform float noiseEnable;\nuniform float noiseStrength;\nuniform float noiseSeed;\n\n// VHS\nuniform float vhsEnable;\nuniform float vhsStrength;\n\n// Scanlines\nuniform float scanlinesEnable;\nuniform float scanStrength;\n\n// CRT\nuniform float crtEnable;\nuniform vec2 crtSize;\n\n\n// Noise\nfloat noise(vec2 uv) {\n  return fract(sin(uv.x*12.9898+uv.y*78.233)*437.585453*noiseSeed);\n}\n\n// VHS\nvec4 vhs(vec2 uv) {\n  vec2 tcoord = uv;\n  tcoord.x += sin(time*noise(uv));\n  return texture2D( uMainSampler, tcoord)*vhsStrength;\t\n}\n\n// Vignette\nfloat vig(vec2 uv) {\n  uv *= 1. - uv;\n  return ( pow(uv.x*uv.y*vignette.x*10.,vignette.y) );\n}\n\n// Chromatic abberation\nvec3 chromatic(vec2 uv, float offset) {\n  float r = texture2D( uMainSampler, vec2(uv.x+offset, uv.y)).r;\n  float g = texture2D( uMainSampler, uv).g;\n  float b = texture2D( uMainSampler, vec2(uv.x-offset, uv.y)).b;\n  return vec3(r,g,b);\n}\n\n// Bloom\nvec4 blur(vec2 uv) {\n  float total = 0.;\n  float rad = 1.;\n  mat2 ang = mat2(.73736882209777832,-.67549037933349609,.67549037933349609,.73736882209777832);\n  vec2 point = normalize(fract(cos(uv*mat2(195,174,286,183))*742.)-.5)*(bloom.x/sqrt(SAMPLES));\n  vec4 amount = vec4(0);\n\t\n  for ( float i=0.; i<SAMPLES; i++ ) {\n    point*=ang;\n    rad+=1./rad;\n    vec4 samp = texture2D(uMainSampler, uv + point * (rad-1.) * bloomTexel);\n    \n    float mul = 1.;\n    float lum = ( samp.r+samp.g+samp.b )/3.;\n    if ( lum < bloom.z ){ mul = 0.; }\n    \n    amount += samp*(1./rad)*mul;\n    total+=(1./rad);\n  }\n  amount /= total;\n  return amount*bloom.y;\n}\n\n// TV Curve\nvec2 crtCurve( vec2 uv ) {\n  uv = uv*2.-1.;\n  vec2 uvoff = abs(uv.xy) / crtSize;\n  uv = uv + uv * uvoff * uvoff;\n  uv = uv * .5 + .5;\n  return uv;\n}\n\nvoid main() {\t\n  vec2 mainUv = outTexCoord;\n\n  // CRT\n  if ( crtEnable > .5 ) {\n    mainUv = crtCurve(outTexCoord);\n  }\n\t\n  // Base coloring\n  vec4 color = texture2D( uMainSampler, mainUv);\n\t\n  // Chromatic abberation\n  if ( chromaticEnable > .5 ) {\n    color.rgb *= chromatic(mainUv, chabIntensity * 0.01);\n  }\n\t\n  // Scanlines\n  if ( scanlinesEnable > .5 ) {\n    color.rgb *= (1.-scanStrength)+(sin(mainUv.y*1024.)*scanStrength);\n  }\n\n  // Bloom\n  if ( bloomEnable > .5 ) {\n    color.rgb += blur(mainUv).rgb;\n  }\n\t\n  // Noise\n  if ( noiseEnable > .5 ) {\n    color.rgb += noise(mainUv)*noiseStrength;\n  }\n\t\n  // VHS\n  if ( vhsEnable > .5 ) {\n    color += vhs(mainUv);\n  }\n\t\n  // Vignette\n  if ( vignetteEnable > .5) {\n    color.rgb *= vig(mainUv);\n  }\n\t\n  // Cutoff edges\n  if ( crtEnable > .5) {\n    if ( (mainUv.x < 0.)|| (mainUv.y < 0.) || (mainUv.x > 1.)|| (mainUv.y > 1.) ) {\n      color.rgb *= 0.;\n    }\n  }\n\t\n  gl_FragColor = color;\n}\n";
 
   var SetEnable = function SetEnable(enable) {
     if (enable === undefined) {
@@ -218,8 +218,8 @@
       this.noiseStrength = value;
       return this;
     },
-    setSeed: function setSeed(value) {
-      this.seed = value;
+    setNoiseSeed: function setNoiseSeed(value) {
+      this.noiseSeed = value;
       return this;
     }
   };
@@ -279,6 +279,36 @@
   };
   Object.assign(Methods, BloonConfigurationMethods, ChromaticConfigurationMethods, VignetteConfigurationMethod, NoiseConfigurationMethod, VHSConfigurationMethod, ScanlinesConfigurationMethod, CRTConfigurationMethod);
 
+  var GameClass = Phaser.Game;
+
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
+    }
+  };
+
+  var GetTickDelta = function GetTickDelta(game) {
+    return GetGame(game).loop.delta;
+  };
+
   var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
@@ -298,7 +328,6 @@
         renderTarget: true,
         fragShader: frag
       });
-      _this.seed = Math.random();
       _this.now = 0; // Bloon
 
       _this.bloomEnable = false;
@@ -316,7 +345,8 @@
       _this.vignetteIntensity = 0; // Noise
 
       _this.noiseEnable = false;
-      _this.noiseStrength = 0; // VHS
+      _this.noiseStrength = 0;
+      _this.noiseSeed = Math.random(); // VHS
 
       _this.vhsEnable = false;
       _this.vhsStrength = 0; // Scanlines
@@ -350,7 +380,7 @@
 
         this.setNoiseEnable(GetValue$1(o, 'noiseEnable', enable));
         this.setNoiseStrength(GetValue$1(o, 'noiseStrength', 0));
-        this.setSeed(GetValue$1(0, 'seed', Math.random())); // VHS
+        this.setSeed(GetValue$1(0, 'noiseSeed', Math.random())); // VHS
 
         this.setVHSEnable(GetValue$1(o, 'vhsEnable', enable));
         this.setVhsStrength(GetValue$1(o, 'vhsStrength', 0)); // Scanlines
@@ -365,7 +395,7 @@
     }, {
       key: "onPreRender",
       value: function onPreRender() {
-        this.set1f('seed', this.seed); // Bloon
+        this.set1f('noiseSeed', this.noiseSeed); // Bloon
 
         this.set1f('bloomEnable', this.bloomEnable ? 1 : 0);
         this.set3f('bloom', this.bloomRadius, this.bloomIntensity, this.bloomThreshold);
@@ -390,7 +420,7 @@
         this.set2f('crtSize', this.crtWidth, this.crtHeight); // Eanble by VHS    
 
         if (this.vhsEnable) {
-          this.now += this.game.loop.delta;
+          this.now += GetTickDelta(this.game);
         }
 
         this.set1f('time', this.now);
@@ -503,29 +533,6 @@
 
     return HorrifiPostFxPipelineBehavior;
   }(PostFxPipelineBehaviorBase);
-
-  var GameClass = Phaser.Game;
-
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var SceneClass = Phaser.Scene;
-
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.game;
-    }
-  };
 
   var RegisterPostPipeline = function RegisterPostPipeline(game, postFxPipelineName, PostFxPipelineClass) {
     GetGame(game).renderer.pipelines.addPostPipeline(postFxPipelineName, PostFxPipelineClass);
