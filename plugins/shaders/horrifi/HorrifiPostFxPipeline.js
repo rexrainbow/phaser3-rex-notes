@@ -74,7 +74,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         // Noise
         this.setNoiseEnable(GetValue(o, 'noiseEnable', enable));
         this.setNoiseStrength(GetValue(o, 'noiseStrength', 0));
-        this.setSeed(GetValue(0, 'noiseSeed', Math.random()));
+        this.setNoiseSeed(GetValue(0, 'noiseSeed', Math.random()));
 
         // VHS
         this.setVHSEnable(GetValue(o, 'vhsEnable', enable));

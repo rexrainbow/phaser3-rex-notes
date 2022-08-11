@@ -380,7 +380,7 @@
 
         this.setNoiseEnable(GetValue$1(o, 'noiseEnable', enable));
         this.setNoiseStrength(GetValue$1(o, 'noiseStrength', 0));
-        this.setSeed(GetValue$1(0, 'noiseSeed', Math.random())); // VHS
+        this.setNoiseSeed(GetValue$1(0, 'noiseSeed', Math.random())); // VHS
 
         this.setVHSEnable(GetValue$1(o, 'vhsEnable', enable));
         this.setVhsStrength(GetValue$1(o, 'vhsStrength', 0)); // Scanlines

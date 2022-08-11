@@ -94,7 +94,7 @@ declare class HorrifiPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.Post
     // Noise
     setNoiseEnable(enable?: boolean): this;
     setNoiseStrength(value: number): this;
-    setSeed(value: number): this;
+    setNoiseSeed(value: number): this;
 
     // VHS
     setVHSEnable(enable?: boolean): this;
