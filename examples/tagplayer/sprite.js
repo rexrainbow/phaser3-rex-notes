@@ -70,6 +70,11 @@ World
 [text.b.text]
 2nd text
 
+[text.c=knight]
+[text.c.typing]
+For the King
+
+
 
 [wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
@@ -81,7 +86,11 @@ World
 `
 
         var extDude = this.add.image(100, 100, 'dude');
-        var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this)
+        var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
+            texts: {
+                createGameObject: CreateText
+            }
+        })
             .addSprite('extDude', extDude)
             .playPromise(content)
             .then(function () {
@@ -90,6 +99,19 @@ World
     }
 
     update() { }
+}
+
+var CreateText = function (scene, spriteName, tagPlayer) {
+    var textObject = scene.add.text(0, 0, '', {
+
+    });
+
+    if (arguments.length >= 3) {
+        var sprite = tagPlayer.getSprite(spriteName);
+        textObject.setPosition(sprite.x, sprite.y - 20);
+    }
+
+    return textObject;
 }
 
 var config = {

@@ -57,6 +57,7 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
 
 var AddSprite = function (params) {
     // this: textPlayer
+    params.push(this);
     this.spriteManager.add(...params);
 }
 

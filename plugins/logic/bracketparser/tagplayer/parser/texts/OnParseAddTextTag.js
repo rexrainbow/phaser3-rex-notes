@@ -19,7 +19,7 @@ var OnParseAddTextTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            args.push(this);
+            args.push(tagPlayer);
             tagPlayer.textManager.add(name, ...args);
 
             parser.skipEvent();

@@ -19,7 +19,7 @@ var OnParseAddSpriteTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            args.push(this);
+            args.push(tagPlayer);
             tagPlayer.spriteManager.add(name, ...args);
 
             parser.skipEvent();

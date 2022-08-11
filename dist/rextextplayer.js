@@ -4790,6 +4790,8 @@
     var _this$spriteManager;
 
     // this: textPlayer
+    params.push(this);
+
     (_this$spriteManager = this.spriteManager).add.apply(_this$spriteManager, _toConsumableArray(params));
   };
 

@@ -861,7 +861,7 @@
         args[_key - 1] = arguments[_key];
       }
 
-      args.push(this);
+      args.push(tagPlayer);
 
       (_tagPlayer$spriteMana = tagPlayer.spriteManager).add.apply(_tagPlayer$spriteMana, [name].concat(args));
 
@@ -1178,7 +1178,7 @@
         args[_key - 1] = arguments[_key];
       }
 
-      args.push(this);
+      args.push(tagPlayer);
 
       (_tagPlayer$textManage = tagPlayer.textManager).add.apply(_tagPlayer$textManage, [name].concat(args));
 
