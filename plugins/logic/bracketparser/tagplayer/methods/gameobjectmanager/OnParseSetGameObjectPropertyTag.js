@@ -1,17 +1,18 @@
 var IsSetPropertyTag = function (tags, prefix) {
-    // sprite.name.prop
+    // prefix.name.prop
     return (tags.length === 3) && (tags[0] === prefix);
 }
 
-var OnParseSetSpritePropertyTag = function (tagPlayer, parser, config) {
-    var prefix = 'sprite';
+var OnParseSetGameObjectPropertyTag = function (tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
     parser
         .on(`+`, function (tag, value) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [sprite.name.prop=value]
+            // [prefix.name.prop=value]
             var tags = tag.split('.');
             var name, property;
             if (IsSetPropertyTag(tags, prefix)) {
@@ -20,10 +21,10 @@ var OnParseSetSpritePropertyTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            tagPlayer.spriteManager.setProperty(name, property, value);
+            gameObjectManager.setProperty(name, property, value);
 
             parser.skipEvent();
         })
 }
 
-export default OnParseSetSpritePropertyTag;
+export default OnParseSetGameObjectPropertyTag;

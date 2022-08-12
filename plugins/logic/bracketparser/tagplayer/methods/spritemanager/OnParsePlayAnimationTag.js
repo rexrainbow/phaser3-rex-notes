@@ -1,22 +1,23 @@
 var IsPlayAnimationTag = function (tags, prefix) {
-    // sprite.name.play
+    // prefix.name.play
     return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'play');
 }
 
 var IsStopAnimationTag = function (tags, prefix) {
-    // sprite.name.stop
+    // prefix.name.stop
     return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'stop');
 }
 
 var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
-    var prefix = 'sprite';
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
     parser
         .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [sprite.name.play=key], or [sprite.name.play=key0,key1,...]
+            // [prefix.name.play=key], or [prefix.name.play=key0,key1,...]
             var tags = tag.split('.');
             var name;
             if (IsPlayAnimationTag(tags, prefix)) {
@@ -26,9 +27,9 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
             }
             var keys = Array.prototype.slice.call(arguments, 1);
             var firstKey = keys.shift();
-            tagPlayer.spriteManager.playAnimation(name, firstKey);
+            gameObjectManager.playAnimation(name, firstKey);
             if (keys.length > 0) {
-                tagPlayer.spriteManager.chainAnimation(name, keys);
+                gameObjectManager.chainAnimation(name, keys);
             }
 
             parser.skipEvent();
@@ -38,7 +39,7 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [sprite.name.stop]
+            // [prefix.name.stop]
             var tags = tag.split('.');
             var name;
             if (IsStopAnimationTag(tags, prefix)) {
@@ -46,7 +47,7 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            tagPlayer.spriteManager.stopAnimation(name);
+            gameObjectManager.stopAnimation(name);
 
             parser.skipEvent();
         })
@@ -55,7 +56,7 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [/sprite.name.play]
+            // [/prefix.name.play]
             var tags = tag.split('.');
             var name;
             if (IsPlayAnimationTag(tags, prefix)) {
@@ -63,7 +64,7 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            tagPlayer.spriteManager.stopAnimation(name);
+            gameObjectManager.stopAnimation(name);
 
             parser.skipEvent();
         })

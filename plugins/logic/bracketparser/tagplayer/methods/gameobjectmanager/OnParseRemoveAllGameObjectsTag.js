@@ -1,20 +1,21 @@
-var OnParseRemoveAllTextsTag = function (tagPlayer, parser, config) {
-    var prefix = 'text';
+var OnParseRemoveAllGameObjectsTag = function (tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
     parser
         .on('-', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [/text]
+            // [/prefix]
             if (tag === prefix) {
             } else {
                 return;
             }
 
-            tagPlayer.textManager.removeAll();
+            gameObjectManager.removeAll();
             parser.skipEvent();
         })
 }
 
-export default OnParseRemoveAllTextsTag;
+export default OnParseRemoveAllGameObjectsTag;

@@ -1,17 +1,18 @@
 var IsCallMethodTag = function (tags, prefix) {
-    // sprite.name.methodName
+    // prefix.name.methodName
     return (tags.length === 3) && (tags[0] === prefix);
 }
 
-var OnParseCallSpriteMethodTag = function (tagPlayer, parser, config) {
-    var prefix = 'sprite';
+var OnParseCallGameObjectMethodTag = function (tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
     parser
         .on(`+`, function (tag, ...parameters) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [sprite.name.methodName=value0,value1,value2...]
+            // [prefix.name.methodName=value0,value1,value2...]
             var tags = tag.split('.');
             var name, methodName;
             if (IsCallMethodTag(tags, prefix)) {
@@ -21,7 +22,7 @@ var OnParseCallSpriteMethodTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            var methodEventName = `sprite.${methodName}`;
+            var methodEventName = `${prefix}.${methodName}`;
             tagPlayer.emit(
                 methodEventName,
                 name, ...parameters
@@ -31,14 +32,14 @@ var OnParseCallSpriteMethodTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            if (!tagPlayer.spriteManager.hasMethod(name, methodName)) {
+            if (!gameObjectManager.hasMethod(name, methodName)) {
                 return;
             }
-            tagPlayer.spriteManager.call(name, methodName, ...parameters);
+            gameObjectManager.call(name, methodName, ...parameters);
 
             parser.skipEvent();
-            // Will block SetSpritePropertyTag callback
+            // Will block SetGameObjectPropertyTag callback
         })
 }
 
-export default OnParseCallSpriteMethodTag;
+export default OnParseCallGameObjectMethodTag;

@@ -1,26 +1,27 @@
-var IsAddSpriteTag = function (tags, prefix) {
-    // sprite.name
+var IsAddGameObjectTag = function (tags, prefix) {
+    // prefix.name
     return (tags.length === 2) && (tags[0] === prefix)
 }
 
-var OnParseAddSpriteTag = function (tagPlayer, parser, config) {
-    var prefix = 'sprite';
+var OnParseAddGameObjectTag = function (tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
     parser
         .on('+', function (tag, ...args) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [sprite.name=key,frame], or [sprite.name]
+            // [prefix.name=key,frame], or [prefix.name]
             var tags = tag.split('.');
             var name;
-            if (IsAddSpriteTag(tags, prefix)) {
+            if (IsAddGameObjectTag(tags, prefix)) {
                 name = tags[1];                
             } else {
                 return;
             }
             args.push(tagPlayer);
-            tagPlayer.spriteManager.add(name, ...args);
+            gameObjectManager.add(name, ...args);
 
             parser.skipEvent();
         })
@@ -29,18 +30,18 @@ var OnParseAddSpriteTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [/sprite.name]
+            // [/prefix.name]
             var tags = tag.split('.');
             var name;
-            if (IsAddSpriteTag(tags, prefix)) {
+            if (IsAddGameObjectTag(tags, prefix)) {
                 name = tags[1];                
             } else {
                 return;
             }
-            tagPlayer.spriteManager.remove(name);
+            gameObjectManager.remove(name);
 
             parser.skipEvent();
         })
 }
 
-export default OnParseAddSpriteTag;
+export default OnParseAddGameObjectTag;

@@ -832,612 +832,6 @@
     });
   };
 
-  var IsAddSpriteTag = function IsAddSpriteTag(tags, prefix) {
-    // sprite.name
-    return tags.length === 2 && tags[0] === prefix;
-  };
-
-  var OnParseAddSpriteTag = function OnParseAddSpriteTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on('+', function (tag) {
-      var _tagPlayer$spriteMana;
-
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name=key,frame], or [sprite.name]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsAddSpriteTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      args.push(tagPlayer);
-
-      (_tagPlayer$spriteMana = tagPlayer.spriteManager).add.apply(_tagPlayer$spriteMana, [name].concat(args));
-
-      parser.skipEvent();
-    }).on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/sprite.name]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsAddSpriteTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      tagPlayer.spriteManager.remove(name);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseRemoveAllSpritesTag = function OnParseRemoveAllSpritesTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/sprite]
-
-
-      if (tag === prefix) ; else {
-        return;
-      }
-
-      tagPlayer.spriteManager.removeAll();
-      parser.skipEvent();
-    });
-  };
-
-  var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
-    // sprite.name.play
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
-  };
-
-  var IsStopAnimationTag = function IsStopAnimationTag(tags, prefix) {
-    // sprite.name.stop
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'stop';
-  };
-
-  var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.play=key], or [sprite.name.play=key0,key1,...]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsPlayAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      var keys = Array.prototype.slice.call(arguments, 1);
-      var firstKey = keys.shift();
-      tagPlayer.spriteManager.playAnimation(name, firstKey);
-
-      if (keys.length > 0) {
-        tagPlayer.spriteManager.chainAnimation(name, keys);
-      }
-
-      parser.skipEvent();
-    }).on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.stop]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsStopAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      tagPlayer.spriteManager.stopAnimation(name);
-      parser.skipEvent();
-    }).on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/sprite.name.play]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsPlayAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      tagPlayer.spriteManager.stopAnimation(name);
-      parser.skipEvent();
-    });
-  };
-
-  var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
-    // sprite.name.chain 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'chain';
-  };
-
-  var OnParseChainAnimationTag = function OnParseChainAnimationTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.chain=key]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsChainAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      var keys = Array.prototype.slice.call(arguments, 1);
-      tagPlayer.spriteManager.chainAnimation(name, keys);
-      parser.skipEvent();
-    });
-  };
-
-  var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
-    // sprite.name.pause 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'pause';
-  };
-
-  var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.pause=key]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsPauseAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      tagPlayer.spriteManager.pauseAnimation(name);
-      parser.skipEvent();
-    });
-  };
-
-  var IsSetPropertyTag$1 = function IsSetPropertyTag(tags, prefix) {
-    // sprite.name.prop
-    return tags.length === 3 && tags[0] === prefix;
-  };
-
-  var OnParseSetSpritePropertyTag = function OnParseSetSpritePropertyTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on("+", function (tag, value) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.prop=value]
-
-
-      var tags = tag.split('.');
-      var name, property;
-
-      if (IsSetPropertyTag$1(tags, prefix)) {
-        name = tags[1];
-        property = tags[2];
-      } else {
-        return;
-      }
-
-      tagPlayer.spriteManager.setProperty(name, property, value);
-      parser.skipEvent();
-    });
-  };
-
-  var EaseMode$1 = {
-    to: true,
-    yoyo: true
-  };
-
-  var IsEasePropertyTag$1 = function IsEasePropertyTag(tags, prefix) {
-    // sprite.name.prop.to, or sprite.name.prop.yoyo
-    return tags.length === 4 && tags[0] === prefix && EaseMode$1[tags[3]];
-  };
-
-  var OnParseEaseSpritePropertyTag = function OnParseEaseSpritePropertyTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on("+", function (tag, value, duration, ease, repeat) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.prop.to=value,duration]
-      // [sprite.name.prop.to=value,duration,ease,repeat]
-      // [sprite.name.prop.to=value,duration,repeat]
-
-
-      var tags = tag.split('.');
-      var name, property, isYoyo;
-
-      if (IsEasePropertyTag$1(tags, prefix)) {
-        name = tags[1];
-        property = tags[2];
-        isYoyo = tags[3] === 'yoyo';
-      } else {
-        return;
-      }
-
-      if (typeof ease === 'number') {
-        repeat = ease;
-        ease = undefined;
-      }
-
-      tagPlayer.spriteManager.easeProperty(name, property, value, duration, ease, repeat, isYoyo);
-      parser.skipEvent();
-    });
-  };
-
-  var IsCallMethodTag$1 = function IsCallMethodTag(tags, prefix) {
-    // sprite.name.methodName
-    return tags.length === 3 && tags[0] === prefix;
-  };
-
-  var OnParseCallSpriteMethodTag = function OnParseCallSpriteMethodTag(tagPlayer, parser, config) {
-    var prefix = 'sprite';
-    parser.on("+", function (tag) {
-      var _tagPlayer$spriteMana;
-
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.methodName=value0,value1,value2...]
-
-
-      var tags = tag.split('.');
-      var name, methodName;
-
-      if (IsCallMethodTag$1(tags, prefix)) {
-        name = tags[1];
-        methodName = tags[2];
-      } else {
-        return;
-      }
-
-      if (!tagPlayer.spriteManager.hasMethod(name, methodName)) {
-        return;
-      }
-
-      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        parameters[_key - 1] = arguments[_key];
-      }
-
-      (_tagPlayer$spriteMana = tagPlayer.spriteManager).call.apply(_tagPlayer$spriteMana, [name, methodName].concat(parameters));
-
-      parser.skipEvent();
-    });
-  };
-
-  var IsAddTextTag = function IsAddTextTag(tags, prefix) {
-    // text.name
-    return tags.length === 2 && tags[0] === prefix;
-  };
-
-  var OnParseAddTextTag = function OnParseAddTextTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on('+', function (tag) {
-      var _tagPlayer$textManage;
-
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [text.name], or [text.name=bbcodetext]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsAddTextTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      args.push(tagPlayer);
-
-      (_tagPlayer$textManage = tagPlayer.textManager).add.apply(_tagPlayer$textManage, [name].concat(args));
-
-      parser.skipEvent();
-    }).on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/text.name]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsAddTextTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      tagPlayer.textManager.remove(name);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseRemoveAllTextsTag = function OnParseRemoveAllTextsTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/text]
-
-
-      if (tag === prefix) ; else {
-        return;
-      }
-
-      tagPlayer.textManager.removeAll();
-      parser.skipEvent();
-    });
-  };
-
-  var IsSetTextTag = function IsSetTextTag(tags, prefix) {
-    // text.name.text
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'text';
-  };
-
-  var OnParseSetTextTag = function OnParseSetTextTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on("+", function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [text.name.text]
-
-
-      var tags = tag.split('.');
-
-      if (IsSetTextTag(tags, prefix)) {
-        tags[1];
-      } else {
-        return;
-      } // Set text in content section
-
-
-      parser.skipEvent();
-    }).on('content', function (content) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      }
-
-      if (content === '\n') {
-        return;
-      } // [text.name.text]
-
-
-      var tags = parser.lastTagStart.split('.');
-      var name;
-
-      if (IsSetTextTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      content = content.replaceAll('\\n', '\n');
-      tagPlayer.textManager.setText(name, content);
-      parser.skipEvent();
-    });
-  };
-
-  var IsTypingTextTag = function IsTypingTextTag(tags, prefix) {
-    // text.name.typing
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'typing';
-  };
-
-  var OnParseTypingTextTag = function OnParseTypingTextTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on("+", function (tag, speed) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [text.name.typing]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsTypingTextTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      } // Set text in content section
-
-
-      if (speed !== undefined) {
-        tagPlayer.textManager.setTypingSpeed(name, speed);
-      }
-
-      parser.skipEvent();
-    }).on('content', function (content) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      }
-
-      if (content === '\n') {
-        return;
-      } // [text.name.typing]
-
-
-      var tags = parser.lastTagStart.split('.');
-      var name;
-
-      if (IsTypingTextTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      content = content.replaceAll('\\n', '\n');
-      tagPlayer.textManager.typingText(name, content);
-      parser.skipEvent();
-    });
-  };
-
-  var IsSetPropertyTag = function IsSetPropertyTag(tags, prefix) {
-    // text.name.prop
-    return tags.length === 3 && tags[0] === prefix;
-  };
-
-  var OnParseSetTextPropertyTag = function OnParseSetTextPropertyTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on("+", function (tag, value) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [text.name.prop=value]
-
-
-      var tags = tag.split('.');
-      var name, property;
-
-      if (IsSetPropertyTag(tags, prefix)) {
-        name = tags[1];
-        property = tags[2];
-      } else {
-        return;
-      }
-
-      tagPlayer.textManager.setProperty(name, property, value);
-      parser.skipEvent();
-    });
-  };
-
-  var EaseMode = {
-    to: true,
-    yoyo: true
-  };
-
-  var IsEasePropertyTag = function IsEasePropertyTag(tags, prefix) {
-    // text.name.prop.to, or text.name.prop.yoyo
-    return tags.length === 4 && tags[0] === prefix && EaseMode[tags[3]];
-  };
-
-  var OnParseEaseTextPropertyTag = function OnParseEaseTextPropertyTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on("+", function (tag, value, duration, ease, repeat) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [text.name.prop.to=value,duration]
-      // [text.name.prop.to=value,duration,ease,repeat]
-      // [text.name.prop.to=value,duration,repeat]
-
-
-      var tags = tag.split('.');
-      var name, property, isYoyo;
-
-      if (IsEasePropertyTag(tags, prefix)) {
-        name = tags[1];
-        property = tags[2];
-        isYoyo = tags[3] === 'yoyo';
-      } else {
-        return;
-      }
-
-      if (typeof ease === 'number') {
-        repeat = ease;
-        ease = undefined;
-      }
-
-      tagPlayer.textManager.easeProperty(name, property, value, duration, ease, repeat, isYoyo);
-      parser.skipEvent();
-    });
-  };
-
-  var IsCallMethodTag = function IsCallMethodTag(tags, prefix) {
-    // text.name.methodName
-    return tags.length === 3 && tags[0] === prefix;
-  };
-
-  var OnParseCallTextMethodTag = function OnParseCallTextMethodTag(tagPlayer, parser, config) {
-    var prefix = 'text';
-    parser.on("+", function (tag) {
-      var _tagPlayer$textManage;
-
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [text.name.methodName=value0,value1,value2...]
-
-
-      var tags = tag.split('.');
-      var name, methodName;
-
-      if (IsCallMethodTag(tags, prefix)) {
-        name = tags[1];
-        methodName = tags[2];
-      } else {
-        return;
-      }
-
-      if (!tagPlayer.textManager.hasMethod(name, methodName)) {
-        return;
-      }
-
-      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        parameters[_key - 1] = arguments[_key];
-      }
-
-      (_tagPlayer$textManage = tagPlayer.textManager).call.apply(_tagPlayer$textManage, [name, methodName].concat(parameters));
-
-      parser.skipEvent();
-    });
-  };
-
   var OnParseContent = function OnParseContent(tagPlayer, parser, config) {
     parser.on('content', function (content) {
       if (parser.skipEventFlag) {
@@ -1446,6 +840,14 @@
       }
 
       if (content === '\n') {
+        return;
+      }
+
+      content = content.replaceAll('\\n', '\n');
+
+      if (tagPlayer.contentCallback) {
+        tagPlayer.contentCallback(content);
+        parser.skipEvent();
         return;
       }
 
@@ -1478,13 +880,11 @@
     });
   };
 
-  var ParseCallbacks = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
-  OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseAddTextTag, OnParseRemoveAllTextsTag, OnParseSetTextTag, OnParseTypingTextTag, OnParseCallTextMethodTag, // ParseCallTextMethodTag has heigher priority then ParseSetTextPropertyTag
-  OnParseSetTextPropertyTag, OnParseEaseTextPropertyTag, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks$3 = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(tagPlayer, parser, config) {
-    for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
-      ParseCallbacks[i](tagPlayer, parser, config);
+    for (var i = 0, cnt = ParseCallbacks$3.length; i < cnt; i++) {
+      ParseCallbacks$3[i](tagPlayer, parser, config);
     }
 
     parser.on('start', function () {
@@ -3956,14 +3356,170 @@
   }(GOManager);
 
   var CreateSprite = function CreateSprite(scene, textureKey, frameName) {
+    if (typeof frameName !== 'string' && typeof frameName !== 'number') {
+      frameName = undefined;
+    }
+
     return scene.add.sprite(0, 0, textureKey, frameName);
   };
 
   var CreateImage = function CreateImage(scene, textureKey, frameName) {
+    if (typeof frameName !== 'string' && typeof frameName !== 'number') {
+      frameName = undefined;
+    }
+
     return scene.add.image(0, 0, textureKey, frameName);
   };
 
   Object.assign(SpriteManager.prototype, Methods$2);
+
+  var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
+    // prefix.name.play
+    return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
+  };
+
+  var IsStopAnimationTag = function IsStopAnimationTag(tags, prefix) {
+    // prefix.name.stop
+    return tags.length === 3 && tags[0] === prefix && tags[2] === 'stop';
+  };
+
+  var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.play=key], or [prefix.name.play=key0,key1,...]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsPlayAnimationTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      var keys = Array.prototype.slice.call(arguments, 1);
+      var firstKey = keys.shift();
+      gameObjectManager.playAnimation(name, firstKey);
+
+      if (keys.length > 0) {
+        gameObjectManager.chainAnimation(name, keys);
+      }
+
+      parser.skipEvent();
+    }).on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.stop]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsStopAnimationTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      gameObjectManager.stopAnimation(name);
+      parser.skipEvent();
+    }).on('-', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [/prefix.name.play]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsPlayAnimationTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      gameObjectManager.stopAnimation(name);
+      parser.skipEvent();
+    });
+  };
+
+  var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
+    // prefix.name.pause 
+    return tags.length === 3 && tags[0] === prefix && tags[2] === 'pause';
+  };
+
+  var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.pause=key]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsPauseAnimationTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      gameObjectManager.pauseAnimation(name);
+      parser.skipEvent();
+    });
+  };
+
+  var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
+    // prefix.name.chain 
+    return tags.length === 3 && tags[0] === prefix && tags[2] === 'chain';
+  };
+
+  var OnParseChainAnimationTag = function OnParseChainAnimationTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.chain=key]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsChainAnimationTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      var keys = Array.prototype.slice.call(arguments, 1);
+      gameObjectManager.chainAnimation(name, keys);
+      parser.skipEvent();
+    });
+  };
+
+  var ParseCallbacks$2 = [OnParsePlayAnimationTag, OnParsePauseAnimationTag, OnParseChainAnimationTag];
+
+  var AddSpriteManager = function AddSpriteManager(config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    config.name = 'sprite';
+    config.parseCallbacks = ParseCallbacks$2;
+    this.addGameObjectManager(config, SpriteManager);
+  };
 
   var TextKlass = Phaser.GameObjects.Text;
 
@@ -4439,9 +3995,15 @@
     }
 
     _createClass(TextBob, [{
-      key: "setText",
-      value: function setText(text) {
-        this.gameObject.setText(text);
+      key: "clearText",
+      value: function clearText() {
+        this.gameObject.setText('');
+        return this;
+      }
+    }, {
+      key: "appendText",
+      value: function appendText(text) {
+        this.gameObject.setText(this.gameObject.text + text);
         return this;
       }
     }, {
@@ -4457,6 +4019,19 @@
         return this;
       }
     }, {
+      key: "clearTyping",
+      value: function clearTyping() {
+        var gameObject = this.gameObject;
+
+        if (!gameObject.typing) {
+          gameObject.typing = new TextTyping(gameObject);
+        } else {
+          gameObject.typing.start('');
+        }
+
+        return this;
+      }
+    }, {
       key: "typing",
       value: function typing(text, speed) {
         var gameObject = this.gameObject;
@@ -4465,7 +4040,11 @@
           gameObject.typing = new TextTyping(gameObject);
         }
 
-        gameObject.typing.start(text, speed);
+        if (speed !== undefined) {
+          gameObject.typing.setTypeSpeed(speed);
+        }
+
+        gameObject.typing.appendText(text);
         return this;
       }
     }, {
@@ -4485,32 +4064,60 @@
   }(BobBase);
 
   var SetTextMethods = {
-    setText: function setText(name, text) {
+    clearText: function clearText(name) {
       if (!this.has(name)) {
-        this.add(name);
+        return this;
       }
 
-      this.get(name).setText(text);
+      this.get(name).clearText();
       return this;
     },
-    typingText: function typingText(name, text) {
+    appendText: function appendText(name, text) {
       if (!this.has(name)) {
-        this.add(name);
+        return this;
+      }
+
+      this.get(name).appendText(text);
+      return this;
+    },
+    clearTyping: function clearTyping(name) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).clearTyping();
+      return this;
+    },
+    typing: function typing(name, text) {
+      if (!this.has(name)) {
+        return this;
       }
 
       this.get(name).typing(text);
       return this;
     },
+    appendTyping: function appendTyping(name, text) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).appendTyping(text);
+      return this;
+    },
     setTypingSpeed: function setTypingSpeed(name, speed) {
+      if (!this.has(name)) {
+        return this;
+      }
+
       this.get(name).setTypingSpeed(speed);
       return this;
     },
     getTypingTask: function getTypingTask(name) {
-      if (this.has(name)) {
-        return this.get(name).getTypingTask();
+      if (!this.has(name)) {
+        return null;
       }
 
-      return null;
+      return this.get(name).getTypingTask();
     }
   };
 
@@ -4554,6 +4161,271 @@
   };
 
   Object.assign(TextManager.prototype, Methods$1);
+
+  var OnParseSetTextTag = function OnParseSetTextTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix); // [prefix.name.text] -> event : 'prefix.text'    
+
+    tagPlayer.on("".concat(prefix, ".text"), function (name) {
+      // Clear text
+      gameObjectManager.clearText(name); // Append text
+
+      tagPlayer.setContentCallback(function (content) {
+        gameObjectManager.appendText(name, content);
+      });
+    });
+  };
+
+  var OnParseTypingTextTag = function OnParseTypingTextTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix); // [prefix.name.typing] -> event : 'prefix.typing'    
+
+    tagPlayer.on("".concat(prefix, ".typing"), function (name, speed) {
+      // Clear text
+      gameObjectManager.clearTyping(name); // Append text
+
+      tagPlayer.setContentCallback(function (content) {
+        if (speed !== undefined) {
+          gameObjectManager.setTypingSpeed(name, speed);
+        }
+
+        gameObjectManager.typing(name, content);
+      });
+    });
+  };
+
+  var ParseCallbacks$1 = [OnParseSetTextTag, OnParseTypingTextTag];
+
+  var AddTextManager = function AddTextManager(config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    config.name = 'text';
+    config.parseCallbacks = ParseCallbacks$1;
+    this.addGameObjectManager(config, TextManager);
+  };
+
+  var IsAddGameObjectTag = function IsAddGameObjectTag(tags, prefix) {
+    // prefix.name
+    return tags.length === 2 && tags[0] === prefix;
+  };
+
+  var OnParseAddGameObjectTag = function OnParseAddGameObjectTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name=key,frame], or [prefix.name]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsAddGameObjectTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      args.push(tagPlayer);
+      gameObjectManager.add.apply(gameObjectManager, [name].concat(args));
+      parser.skipEvent();
+    }).on('-', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [/prefix.name]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsAddGameObjectTag(tags, prefix)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      gameObjectManager.remove(name);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseRemoveAllGameObjectsTag = function OnParseRemoveAllGameObjectsTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on('-', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [/prefix]
+
+
+      if (tag === prefix) ; else {
+        return;
+      }
+
+      gameObjectManager.removeAll();
+      parser.skipEvent();
+    });
+  };
+
+  var IsCallMethodTag = function IsCallMethodTag(tags, prefix) {
+    // prefix.name.methodName
+    return tags.length === 3 && tags[0] === prefix;
+  };
+
+  var OnParseCallGameObjectMethodTag = function OnParseCallGameObjectMethodTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on("+", function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.methodName=value0,value1,value2...]
+
+
+      var tags = tag.split('.');
+      var name, methodName;
+
+      if (IsCallMethodTag(tags, prefix)) {
+        name = tags[1];
+        methodName = tags[2];
+      } else {
+        return;
+      }
+
+      var methodEventName = "".concat(prefix, ".").concat(methodName);
+
+      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        parameters[_key - 1] = arguments[_key];
+      }
+
+      tagPlayer.emit.apply(tagPlayer, [methodEventName, name].concat(parameters));
+
+      if (tagPlayer.listenerCount(methodEventName) > 0) {
+        parser.skipEvent();
+        return;
+      }
+
+      if (!gameObjectManager.hasMethod(name, methodName)) {
+        return;
+      }
+
+      gameObjectManager.call.apply(gameObjectManager, [name, methodName].concat(parameters));
+      parser.skipEvent(); // Will block SetGameObjectPropertyTag callback
+    });
+  };
+
+  var IsSetPropertyTag = function IsSetPropertyTag(tags, prefix) {
+    // prefix.name.prop
+    return tags.length === 3 && tags[0] === prefix;
+  };
+
+  var OnParseSetGameObjectPropertyTag = function OnParseSetGameObjectPropertyTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on("+", function (tag, value) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.prop=value]
+
+
+      var tags = tag.split('.');
+      var name, property;
+
+      if (IsSetPropertyTag(tags, prefix)) {
+        name = tags[1];
+        property = tags[2];
+      } else {
+        return;
+      }
+
+      gameObjectManager.setProperty(name, property, value);
+      parser.skipEvent();
+    });
+  };
+
+  var EaseMode = {
+    to: true,
+    yoyo: true
+  };
+
+  var IsEasePropertyTag = function IsEasePropertyTag(tags, prefix) {
+    // prefix.name.prop.to, or prefix.name.prop.yoyo
+    return tags.length === 4 && tags[0] === prefix && EaseMode[tags[3]];
+  };
+
+  var OnParseEaseGameObjectPropertyTag = function OnParseEaseGameObjectPropertyTag(tagPlayer, parser, config) {
+    var prefix = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    parser.on("+", function (tag, value, duration, ease, repeat) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [prefix.name.prop.to=value,duration]
+      // [prefix.name.prop.to=value,duration,ease,repeat]
+      // [prefix.name.prop.to=value,duration,repeat]
+
+
+      var tags = tag.split('.');
+      var name, property, isYoyo;
+
+      if (IsEasePropertyTag(tags, prefix)) {
+        name = tags[1];
+        property = tags[2];
+        isYoyo = tags[3] === 'yoyo';
+      } else {
+        return;
+      }
+
+      if (typeof ease === 'number') {
+        repeat = ease;
+        ease = undefined;
+      }
+
+      gameObjectManager.easeProperty(name, property, value, duration, ease, repeat, isYoyo);
+      parser.skipEvent();
+    });
+  };
+
+  var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseSetGameObjectPropertyTag, OnParseEaseGameObjectPropertyTag];
+  var GameObjectManagerMethods = {
+    addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
+      if (GameObjectManagerClass === undefined) {
+        GameObjectManagerClass = GOManager;
+      }
+
+      var gameobjectManager = new GameObjectManagerClass(this.scene, config);
+      var name = config.name;
+      this.gameObjectManagers[name] = gameobjectManager; // Register parse callbacks
+
+      var customParseCallbacks = config.parseCallbacks;
+
+      if (!customParseCallbacks) {
+        customParseCallbacks = ParseCallbacks;
+      } else {
+        customParseCallbacks = [].concat(_toConsumableArray(customParseCallbacks), ParseCallbacks);
+      }
+
+      for (var i = 0, cnt = customParseCallbacks.length; i < cnt; i++) {
+        customParseCallbacks[i](this, this.parser, config);
+      }
+
+      return this;
+    },
+    getGameObjectManager: function getGameObjectManager(name) {
+      return this.gameObjectManagers[name];
+    }
+  };
 
   var SetClickTarget = function SetClickTarget(target) {
     this.clickTarget = target;
@@ -5002,6 +4874,13 @@
     }
   };
 
+  var ContentMethods = {
+    setContentCallback: function setContentCallback(callback) {
+      this.contentCallback = callback;
+      return this;
+    }
+  };
+
   var Methods = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
@@ -5012,7 +4891,7 @@
     resume: Resume,
     wait: Wait
   };
-  Object.assign(Methods, SpriteMethods, TextMethods);
+  Object.assign(Methods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(tagPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -5046,19 +4925,9 @@
 
       _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
 
-      _this._spriteManager = undefined;
-      var spriteManagerConfig = GetValue(config, 'sprites', undefined);
-
-      if (spriteManagerConfig) {
-        _this._spriteManager = new SpriteManager(_this.scene, spriteManagerConfig);
-      }
-
-      _this._textManager = undefined;
-      var textManagerConfig = GetValue(config, 'texts', undefined);
-
-      if (textManagerConfig) {
-        _this._textManager = new TextManager(_this.scene, textManagerConfig);
-      }
+      _this.gameObjectManagers = {};
+      AddSpriteManager.call(_assertThisInitialized(_this), GetValue(config, 'sprites'));
+      AddTextManager.call(_assertThisInitialized(_this), GetValue(config, 'texts'));
 
       _this.setClickTarget(GetValue(config, 'clickTarget', scene)); // this.clickEE
 
@@ -5083,20 +4952,12 @@
     }, {
       key: "spriteManager",
       get: function get() {
-        if (this._spriteManager === undefined) {
-          this._spriteManager = new SpriteManager(this.scene);
-        }
-
-        return this._spriteManager;
+        return this.getGameObjectManager('sprite');
       }
     }, {
       key: "textManager",
       get: function get() {
-        if (this._textManager === undefined) {
-          this._textManager = new TextManager(this.scene);
-        }
-
-        return this._textManager;
+        return this.getGameObjectManager('text');
       }
     }, {
       key: "destroy",
@@ -5115,11 +4976,11 @@
         this._soundManager = undefined;
         this.camera = undefined;
 
-        if (this._spriteManager) {
-          this._spriteManager.destroy(fromScene);
+        for (var name in this.gameObjectManagers) {
+          this.gameObjectManagers.destroy(fromScene);
+          delete this.gameObjectManagers[name];
         }
 
-        this._spriteManager = undefined;
         this.scene = undefined;
       }
     }]);

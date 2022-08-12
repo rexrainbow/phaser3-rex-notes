@@ -1,8 +1,8 @@
 import Parser from './parser/Parser.js';
 import Timeline from '../../../time/progresses/Timeline.js';
 import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
-import SpriteManager from '../../../utils/sprite/spritemanager/SpriteManager.js';
-import TextManager from '../../../utils/text/textmanager/TextManager.js';
+import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
+import AddTextManager from './methods/textmanager/AddTextManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 
@@ -27,17 +27,9 @@ class TagPlayer extends EventEmitter {
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        this._spriteManager = undefined;
-        var spriteManagerConfig = GetValue(config, 'sprites', undefined);
-        if (spriteManagerConfig) {
-            this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
-        }
-
-        this._textManager = undefined;
-        var textManagerConfig = GetValue(config, 'texts', undefined);
-        if (textManagerConfig) {
-            this._textManager = new TextManager(this.scene, textManagerConfig);
-        }
+        this.gameObjectManagers = {};
+        AddSpriteManager.call(this, GetValue(config, 'sprites'));
+        AddTextManager.call(this, GetValue(config, 'texts'));
 
         this.setClickTarget(GetValue(config, 'clickTarget', scene));  // this.clickEE
     }
@@ -54,17 +46,11 @@ class TagPlayer extends EventEmitter {
     }
 
     get spriteManager() {
-        if (this._spriteManager === undefined) {
-            this._spriteManager = new SpriteManager(this.scene);
-        }
-        return this._spriteManager;
+        return this.getGameObjectManager('sprite');
     }
 
     get textManager() {
-        if (this._textManager === undefined) {
-            this._textManager = new TextManager(this.scene);
-        }
-        return this._textManager;
+        return this.getGameObjectManager('text');
     }
 
     destroy(fromScene) {
@@ -82,10 +68,10 @@ class TagPlayer extends EventEmitter {
 
         this.camera = undefined;
 
-        if (this._spriteManager) {
-            this._spriteManager.destroy(fromScene);
+        for (var name in this.gameObjectManagers) {
+            this.gameObjectManagers.destroy(fromScene);
+            delete this.gameObjectManagers[name];
         }
-        this._spriteManager = undefined;
 
         this.scene = undefined;
     }

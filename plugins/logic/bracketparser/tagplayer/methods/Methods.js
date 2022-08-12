@@ -1,3 +1,4 @@
+import GameObjectManagerMethods from './gameobjectmanager/GameObjectManagerMethods.js';
 import SetClickTarget from './SetClickTarget.js';
 import SetTargetCamera from './SetTargetCamera.js';
 import SetSkipSoundEffect from './SetSkipSoundEffect.js';
@@ -23,6 +24,7 @@ var Methods = {
 
 Object.assign(
     Methods,
+    GameObjectManagerMethods,
     SpriteMethods,
     TextMethods,
     ContentMethods,
