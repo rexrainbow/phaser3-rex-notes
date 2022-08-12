@@ -413,7 +413,7 @@
         this.set1f('vhsEnable', this.vhsEnable ? 1 : 0);
         this.set1f('vhsStrength', this.vhsStrength); // Scanlines
 
-        this.set1f('ScanlinesEnable', this.ScanlinesEnable ? 1 : 0);
+        this.set1f('scanlinesEnable', this.scanlinesEnable ? 1 : 0);
         this.set1f('scanStrength', this.scanStrength); // CRT        
 
         this.set1f('crtEnable', this.crtEnable ? 1 : 0);

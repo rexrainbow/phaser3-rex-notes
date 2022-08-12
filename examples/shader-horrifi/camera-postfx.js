@@ -39,6 +39,9 @@ class Demo extends Phaser.Scene {
             // VHS
             vhsStrength: 0.5,
 
+            // Scanlines
+            scanStrength: 0.5,
+
             //CRT
             crtWidth: 2,
         });

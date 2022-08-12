@@ -116,7 +116,7 @@ class HorrifiPostFxPipeline extends PostFXPipeline {
         this.set1f('vhsStrength', this.vhsStrength);
 
         // Scanlines
-        this.set1f('ScanlinesEnable', (this.ScanlinesEnable) ? 1 : 0);
+        this.set1f('scanlinesEnable', (this.scanlinesEnable) ? 1 : 0);
         this.set1f('scanStrength', this.scanStrength);
 
         // CRT        
