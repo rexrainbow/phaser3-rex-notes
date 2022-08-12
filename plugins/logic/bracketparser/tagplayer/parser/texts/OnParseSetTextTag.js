@@ -1,10 +1,4 @@
-var IsSetTextTag = function (tags, prefix) {
-    // text.name.text
-    return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'text');
-}
-
-var OnParseSetTextTag = function (tagPlayer, parser, config) {
-    var prefix = 'text';
+var OnParseSetTextTag = function (tagPlayer, parser, config) {    
     // [text.name.text] -> event : 'text.text'    
     tagPlayer.on('text.text', function (name) {
         // Clear text

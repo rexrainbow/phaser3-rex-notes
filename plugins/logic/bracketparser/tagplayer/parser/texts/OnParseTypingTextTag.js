@@ -1,10 +1,4 @@
-var IsTypingTextTag = function (tags, prefix) {
-    // text.name.typing
-    return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'typing');
-}
-
-var OnParseTypingTextTag = function (tagPlayer, parser, config) {
-    var prefix = 'text';
+var OnParseTypingTextTag = function (tagPlayer, parser, config) {    
     // [text.name.typing] -> event : 'text.typing'    
     tagPlayer.on('text.typing', function (name, speed) {
         // Clear text
