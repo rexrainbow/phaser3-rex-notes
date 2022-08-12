@@ -1,26 +1,26 @@
-var IsPlayAnimationTag = function (tags, prefix) {
-    // prefix.name.play
-    return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'play');
+var IsPlayAnimationTag = function (tags, goType) {
+    // goType.name.play
+    return (tags.length === 3) && (tags[0] === goType) && (tags[2] === 'play');
 }
 
-var IsStopAnimationTag = function (tags, prefix) {
-    // prefix.name.stop
-    return (tags.length === 3) && (tags[0] === prefix) && (tags[2] === 'stop');
+var IsStopAnimationTag = function (tags, goType) {
+    // goType.name.stop
+    return (tags.length === 3) && (tags[0] === goType) && (tags[2] === 'stop');
 }
 
 var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser
         .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [prefix.name.play=key], or [prefix.name.play=key0,key1,...]
+            // [goType.name.play=key], or [goType.name.play=key0,key1,...]
             var tags = tag.split('.');
             var name;
-            if (IsPlayAnimationTag(tags, prefix)) {
+            if (IsPlayAnimationTag(tags, goType)) {
                 name = tags[1];
             } else {
                 return;
@@ -39,10 +39,10 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [prefix.name.stop]
+            // [goType.name.stop]
             var tags = tag.split('.');
             var name;
-            if (IsStopAnimationTag(tags, prefix)) {
+            if (IsStopAnimationTag(tags, goType)) {
                 name = tags[1];
             } else {
                 return;
@@ -56,10 +56,10 @@ var OnParsePlayAnimationTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [/prefix.name.play]
+            // [/goType.name.play]
             var tags = tag.split('.');
             var name;
-            if (IsPlayAnimationTag(tags, prefix)) {
+            if (IsPlayAnimationTag(tags, goType)) {
                 name = tags[1];
             } else {
                 return;

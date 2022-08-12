@@ -1,21 +1,21 @@
-var IsAddGameObjectTag = function (tags, prefix) {
-    // prefix.name
-    return (tags.length === 2) && (tags[0] === prefix)
+var IsAddGameObjectTag = function (tags, goType) {
+    // goType.name
+    return (tags.length === 2) && (tags[0] === goType)
 }
 
 var OnParseAddGameObjectTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser
         .on('+', function (tag, ...args) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [prefix.name=key,frame], or [prefix.name]
+            // [goType.name=key,frame], or [goType.name]
             var tags = tag.split('.');
             var name;
-            if (IsAddGameObjectTag(tags, prefix)) {
+            if (IsAddGameObjectTag(tags, goType)) {
                 name = tags[1];                
             } else {
                 return;
@@ -30,10 +30,10 @@ var OnParseAddGameObjectTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            // [/prefix.name]
+            // [/goType.name]
             var tags = tag.split('.');
             var name;
-            if (IsAddGameObjectTag(tags, prefix)) {
+            if (IsAddGameObjectTag(tags, goType)) {
                 name = tags[1];                
             } else {
                 return;

@@ -1,35 +1,38 @@
 import GetWrapCallback from './GetWrapCallback.js';
 import { RemoveWaitEvents } from '../Events.js';
 
-var IsWaitSprite = function (name) {
+var IsWaitGameObject = function (tagPlayer, name) {
     // sprite, sprite.name, sprite.name.prop
     var names = name.split('.');
-    return (names[0] === 'sprite') && (names.length <= 3);
+    return (tagPlayer.gameObjectManagers.hasOwnProperty(names[0])) &&
+        (names.length <= 3);
 }
 
-var WaitSprite = function (tagPlayer, tag, callback, args, scope) {
+var WaitGameObject = function (tagPlayer, tag, callback, args, scope) {
     var wrapCallback = GetWrapCallback(tagPlayer, callback, args, scope);
     var tags = tag.split('.');
-    var spriteManager = tagPlayer.spriteManager;
+    var goType = tags[0];
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
+    var waitEventName = `wait.${goType}`
     switch (tags.length) {
         case 1:  // sprite: wait all sprites has beeen destroyed
-            if (spriteManager.isEmpty) {
-                tagPlayer.emit('wait.sprite');
+            if (gameObjectManager.isEmpty) {
+                tagPlayer.emit(waitEventName);
                 wrapCallback();
             } else {
                 // Remove all wait events
                 tagPlayer.once(RemoveWaitEvents, function (removeFrom) {
-                    spriteManager.off('empty', wrapCallback, tagPlayer);
+                    gameObjectManager.off('empty', wrapCallback, tagPlayer);
                 });
-                spriteManager.once('empty', wrapCallback, tagPlayer);
-                tagPlayer.emit('wait.sprite');
+                gameObjectManager.once('empty', wrapCallback, tagPlayer);
+                tagPlayer.emit(waitEventName);
             }
             break;
 
         case 2:  // sprite.name: wait sprite.name has been destroyed
             var name = tags[1];
-            if (spriteManager.has(name)) {
-                var spriteData = tagPlayer.spriteManager.get(name);
+            if (gameObjectManager.has(name)) {
+                var spriteData = gameObjectManager.get(name);
                 var sprite = spriteData.sprite;
                 // Remove all wait events
                 tagPlayer.once(RemoveWaitEvents, function () {
@@ -37,9 +40,9 @@ var WaitSprite = function (tagPlayer, tag, callback, args, scope) {
                 });
 
                 sprite.once('destroy', wrapCallback, tagPlayer);
-                tagPlayer.emit('wait.sprite', name);
+                tagPlayer.emit(waitEventName, name);
             } else {
-                tagPlayer.emit('wait.sprite', name);
+                tagPlayer.emit(waitEventName, name);
                 wrapCallback();
             }
             break;
@@ -47,7 +50,7 @@ var WaitSprite = function (tagPlayer, tag, callback, args, scope) {
         case 3:  // sprite.name.prop: wait ease sprite.name.prop has been completed
             var name = tags[1];
             var prop = tags[2];
-            var task = tagPlayer.spriteManager.getTweenTask(name, prop);
+            var task = gameObjectManager.getTweenTask(name, prop);
             if (task) {
                 // Remove all wait events
                 tagPlayer.once(RemoveWaitEvents, function () {
@@ -55,9 +58,9 @@ var WaitSprite = function (tagPlayer, tag, callback, args, scope) {
                 });
 
                 task.once('complete', wrapCallback, tagPlayer);
-                tagPlayer.emit('wait.sprite', name, prop);
+                tagPlayer.emit(waitEventName, name, prop);
             } else {
-                tagPlayer.emit('wait.sprite', name, prop);
+                tagPlayer.emit(waitEventName, name, prop);
                 wrapCallback();
             }
             break;
@@ -66,4 +69,4 @@ var WaitSprite = function (tagPlayer, tag, callback, args, scope) {
 }
 
 
-export { IsWaitSprite, WaitSprite };
+export { IsWaitGameObject, WaitGameObject };

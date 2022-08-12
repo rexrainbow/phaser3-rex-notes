@@ -1,9 +1,9 @@
 var OnParseSetTextTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
 
-    // [prefix.name.text] -> event : 'prefix.text'    
-    tagPlayer.on(`${prefix}.text`, function (name) {
+    // [goType.name.text] -> event : 'goType.text'    
+    tagPlayer.on(`${goType}.text`, function (name) {
         // Clear text
         gameObjectManager.clearText(name);
         // Append text

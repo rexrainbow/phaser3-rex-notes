@@ -3373,30 +3373,30 @@
 
   Object.assign(SpriteManager.prototype, Methods$2);
 
-  var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
-    // prefix.name.play
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
+  var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
+    // goType.name.play
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'play';
   };
 
-  var IsStopAnimationTag = function IsStopAnimationTag(tags, prefix) {
-    // prefix.name.stop
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'stop';
+  var IsStopAnimationTag = function IsStopAnimationTag(tags, goType) {
+    // goType.name.stop
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'stop';
   };
 
   var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.play=key], or [prefix.name.play=key0,key1,...]
+      } // [goType.name.play=key], or [goType.name.play=key0,key1,...]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsPlayAnimationTag(tags, prefix)) {
+      if (IsPlayAnimationTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -3415,13 +3415,13 @@
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.stop]
+      } // [goType.name.stop]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsStopAnimationTag(tags, prefix)) {
+      if (IsStopAnimationTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -3433,13 +3433,13 @@
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [/prefix.name.play]
+      } // [/goType.name.play]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsPlayAnimationTag(tags, prefix)) {
+      if (IsPlayAnimationTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -3450,25 +3450,25 @@
     });
   };
 
-  var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
-    // prefix.name.pause 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'pause';
+  var IsPauseAnimationTag = function IsPauseAnimationTag(tags, goType) {
+    // goType.name.pause 
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'pause';
   };
 
   var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.pause=key]
+      } // [goType.name.pause=key]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsPauseAnimationTag(tags, prefix)) {
+      if (IsPauseAnimationTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -3479,25 +3479,25 @@
     });
   };
 
-  var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
-    // prefix.name.chain 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'chain';
+  var IsChainAnimationTag = function IsChainAnimationTag(tags, goType) {
+    // goType.name.chain 
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'chain';
   };
 
   var OnParseChainAnimationTag = function OnParseChainAnimationTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.chain=key]
+      } // [goType.name.chain=key]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsChainAnimationTag(tags, prefix)) {
+      if (IsChainAnimationTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -4163,10 +4163,10 @@
   Object.assign(TextManager.prototype, Methods$1);
 
   var OnParseSetTextTag = function OnParseSetTextTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix); // [prefix.name.text] -> event : 'prefix.text'    
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType); // [goType.name.text] -> event : 'goType.text'    
 
-    tagPlayer.on("".concat(prefix, ".text"), function (name) {
+    tagPlayer.on("".concat(goType, ".text"), function (name) {
       // Clear text
       gameObjectManager.clearText(name); // Append text
 
@@ -4177,10 +4177,10 @@
   };
 
   var OnParseTypingTextTag = function OnParseTypingTextTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix); // [prefix.name.typing] -> event : 'prefix.typing'    
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType); // [goType.name.typing] -> event : 'goType.typing'    
 
-    tagPlayer.on("".concat(prefix, ".typing"), function (name, speed) {
+    tagPlayer.on("".concat(goType, ".typing"), function (name, speed) {
       // Clear text
       gameObjectManager.clearTyping(name); // Append text
 
@@ -4206,25 +4206,25 @@
     this.addGameObjectManager(config, TextManager);
   };
 
-  var IsAddGameObjectTag = function IsAddGameObjectTag(tags, prefix) {
-    // prefix.name
-    return tags.length === 2 && tags[0] === prefix;
+  var IsAddGameObjectTag = function IsAddGameObjectTag(tags, goType) {
+    // goType.name
+    return tags.length === 2 && tags[0] === goType;
   };
 
   var OnParseAddGameObjectTag = function OnParseAddGameObjectTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on('+', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name=key,frame], or [prefix.name]
+      } // [goType.name=key,frame], or [goType.name]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsAddGameObjectTag(tags, prefix)) {
+      if (IsAddGameObjectTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -4241,13 +4241,13 @@
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [/prefix.name]
+      } // [/goType.name]
 
 
       var tags = tag.split('.');
       var name;
 
-      if (IsAddGameObjectTag(tags, prefix)) {
+      if (IsAddGameObjectTag(tags, goType)) {
         name = tags[1];
       } else {
         return;
@@ -4259,16 +4259,16 @@
   };
 
   var OnParseRemoveAllGameObjectsTag = function OnParseRemoveAllGameObjectsTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on('-', function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [/prefix]
+      } // [/goType]
 
 
-      if (tag === prefix) ; else {
+      if (tag === goType) ; else {
         return;
       }
 
@@ -4277,32 +4277,32 @@
     });
   };
 
-  var IsCallMethodTag = function IsCallMethodTag(tags, prefix) {
-    // prefix.name.methodName
-    return tags.length === 3 && tags[0] === prefix;
+  var IsCallMethodTag = function IsCallMethodTag(tags, goType) {
+    // goType.name.methodName
+    return tags.length === 3 && tags[0] === goType;
   };
 
   var OnParseCallGameObjectMethodTag = function OnParseCallGameObjectMethodTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on("+", function (tag) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.methodName=value0,value1,value2...]
+      } // [goType.name.methodName=value0,value1,value2...]
 
 
       var tags = tag.split('.');
       var name, methodName;
 
-      if (IsCallMethodTag(tags, prefix)) {
+      if (IsCallMethodTag(tags, goType)) {
         name = tags[1];
         methodName = tags[2];
       } else {
         return;
       }
 
-      var methodEventName = "".concat(prefix, ".").concat(methodName);
+      var methodEventName = "".concat(goType, ".").concat(methodName);
 
       for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         parameters[_key - 1] = arguments[_key];
@@ -4324,25 +4324,25 @@
     });
   };
 
-  var IsSetPropertyTag = function IsSetPropertyTag(tags, prefix) {
-    // prefix.name.prop
-    return tags.length === 3 && tags[0] === prefix;
+  var IsSetPropertyTag = function IsSetPropertyTag(tags, goType) {
+    // goType.name.prop
+    return tags.length === 3 && tags[0] === goType;
   };
 
   var OnParseSetGameObjectPropertyTag = function OnParseSetGameObjectPropertyTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on("+", function (tag, value) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.prop=value]
+      } // [goType.name.prop=value]
 
 
       var tags = tag.split('.');
       var name, property;
 
-      if (IsSetPropertyTag(tags, prefix)) {
+      if (IsSetPropertyTag(tags, goType)) {
         name = tags[1];
         property = tags[2];
       } else {
@@ -4359,27 +4359,27 @@
     yoyo: true
   };
 
-  var IsEasePropertyTag = function IsEasePropertyTag(tags, prefix) {
-    // prefix.name.prop.to, or prefix.name.prop.yoyo
-    return tags.length === 4 && tags[0] === prefix && EaseMode[tags[3]];
+  var IsEasePropertyTag = function IsEasePropertyTag(tags, goType) {
+    // goType.name.prop.to, or goType.name.prop.yoyo
+    return tags.length === 4 && tags[0] === goType && EaseMode[tags[3]];
   };
 
   var OnParseEaseGameObjectPropertyTag = function OnParseEaseGameObjectPropertyTag(tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser.on("+", function (tag, value, duration, ease, repeat) {
       if (parser.skipEventFlag) {
         // Has been processed before
         return;
-      } // [prefix.name.prop.to=value,duration]
-      // [prefix.name.prop.to=value,duration,ease,repeat]
-      // [prefix.name.prop.to=value,duration,repeat]
+      } // [goType.name.prop.to=value,duration]
+      // [goType.name.prop.to=value,duration,ease,repeat]
+      // [goType.name.prop.to=value,duration,repeat]
 
 
       var tags = tag.split('.');
       var name, property, isYoyo;
 
-      if (IsEasePropertyTag(tags, prefix)) {
+      if (IsEasePropertyTag(tags, goType)) {
         name = tags[1];
         property = tags[2];
         isYoyo = tags[3] === 'yoyo';
@@ -4652,30 +4652,32 @@
     tagPlayer.emit('wait.keydown', keyName);
   };
 
-  var IsWaitSprite = function IsWaitSprite(name) {
+  var IsWaitGameObject = function IsWaitGameObject(tagPlayer, name) {
     // sprite, sprite.name, sprite.name.prop
     var names = name.split('.');
-    return names[0] === 'sprite' && names.length <= 3;
+    return tagPlayer.gameObjectManagers.hasOwnProperty(names[0]) && names.length <= 3;
   };
 
-  var WaitSprite = function WaitSprite(tagPlayer, tag, callback, args, scope) {
+  var WaitGameObject = function WaitGameObject(tagPlayer, tag, callback, args, scope) {
     var wrapCallback = GetWrapCallback(tagPlayer, callback, args, scope);
     var tags = tag.split('.');
-    var spriteManager = tagPlayer.spriteManager;
+    var goType = tags[0];
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
+    var waitEventName = "wait.".concat(goType);
 
     switch (tags.length) {
       case 1:
         // sprite: wait all sprites has beeen destroyed
-        if (spriteManager.isEmpty) {
-          tagPlayer.emit('wait.sprite');
+        if (gameObjectManager.isEmpty) {
+          tagPlayer.emit(waitEventName);
           wrapCallback();
         } else {
           // Remove all wait events
           tagPlayer.once(RemoveWaitEvents, function (removeFrom) {
-            spriteManager.off('empty', wrapCallback, tagPlayer);
+            gameObjectManager.off('empty', wrapCallback, tagPlayer);
           });
-          spriteManager.once('empty', wrapCallback, tagPlayer);
-          tagPlayer.emit('wait.sprite');
+          gameObjectManager.once('empty', wrapCallback, tagPlayer);
+          tagPlayer.emit(waitEventName);
         }
 
         break;
@@ -4684,17 +4686,17 @@
         // sprite.name: wait sprite.name has been destroyed
         var name = tags[1];
 
-        if (spriteManager.has(name)) {
-          var spriteData = tagPlayer.spriteManager.get(name);
+        if (gameObjectManager.has(name)) {
+          var spriteData = gameObjectManager.get(name);
           var sprite = spriteData.sprite; // Remove all wait events
 
           tagPlayer.once(RemoveWaitEvents, function () {
             sprite.off('destroy', wrapCallback, tagPlayer);
           });
           sprite.once('destroy', wrapCallback, tagPlayer);
-          tagPlayer.emit('wait.sprite', name);
+          tagPlayer.emit(waitEventName, name);
         } else {
-          tagPlayer.emit('wait.sprite', name);
+          tagPlayer.emit(waitEventName, name);
           wrapCallback();
         }
 
@@ -4704,7 +4706,7 @@
         // sprite.name.prop: wait ease sprite.name.prop has been completed
         var name = tags[1];
         var prop = tags[2];
-        var task = tagPlayer.spriteManager.getTweenTask(name, prop);
+        var task = gameObjectManager.getTweenTask(name, prop);
 
         if (task) {
           // Remove all wait events
@@ -4712,89 +4714,9 @@
             task.off('complete', wrapCallback, tagPlayer);
           });
           task.once('complete', wrapCallback, tagPlayer);
-          tagPlayer.emit('wait.sprite', name, prop);
+          tagPlayer.emit(waitEventName, name, prop);
         } else {
-          tagPlayer.emit('wait.sprite', name, prop);
-          wrapCallback();
-        }
-
-        break;
-    }
-  };
-
-  var IsWaitText = function IsWaitText(name) {
-    // text, text.name, text.name.prop, text.name.typing
-    var names = name.split('.');
-    return names[0] === 'text' && names.length <= 3;
-  };
-
-  var WaitText = function WaitText(tagPlayer, tag, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(tagPlayer, callback, args, scope);
-    var tags = tag.split('.');
-    var textManager = tagPlayer.textManager;
-
-    switch (tags.length) {
-      case 1:
-        // text: wait all texts has beeen destroyed
-        if (textManager.isEmpty) {
-          tagPlayer.emit('wait.text');
-          wrapCallback();
-        } else {
-          // Remove all wait events
-          tagPlayer.once(RemoveWaitEvents, function (removeFrom) {
-            textManager.off('empty', wrapCallback, tagPlayer);
-          });
-          textManager.once('empty', wrapCallback, tagPlayer);
-          tagPlayer.emit('wait.text');
-        }
-
-        break;
-
-      case 2:
-        // text.name: wait text.name has been destroyed
-        var name = tags[1];
-
-        if (textManager.has(name)) {
-          var textData = tagPlayer.textManager.get(name);
-          var text = textData.text; // Remove all wait events
-
-          tagPlayer.once(RemoveWaitEvents, function () {
-            text.off('destroy', wrapCallback, tagPlayer);
-          });
-          text.once('destroy', wrapCallback, tagPlayer);
-          tagPlayer.emit('wait.text', name);
-        } else {
-          tagPlayer.emit('wait.text', name);
-          wrapCallback();
-        }
-
-        break;
-
-      case 3:
-        // text.name.prop: wait ease text.name.prop has been completed
-        var name = tags[1];
-        var prop = tags[2];
-        var task;
-
-        switch (prop) {
-          case 'typing':
-            task = tagPlayer.textManager.getTypingTask(name);
-            break;
-
-          default:
-            task = tagPlayer.textManager.getTweenTask(name, prop);
-            break;
-        }
-
-        if (task) {
-          // Remove all wait events
-          tagPlayer.once(RemoveWaitEvents, function () {
-            task.off('complete', wrapCallback, tagPlayer);
-          });
-          task.once('complete', wrapCallback, tagPlayer);
-          tagPlayer.emit('wait.text', name, prop);
-        } else {
-          tagPlayer.emit('wait.text', name, prop);
+          tagPlayer.emit(waitEventName, name, prop);
           wrapCallback();
         }
 
@@ -4833,10 +4755,8 @@
         WaitKeyDown(tagPlayer, name, callback, args, scope);
       } else if (IsWaitCameraEffect(name)) {
         WaitCameraEffect(tagPlayer, name, callback, args, scope);
-      } else if (IsWaitSprite(name)) {
-        WaitSprite(tagPlayer, name, callback, args, scope);
-      } else if (IsWaitText(name)) {
-        WaitText(tagPlayer, name, callback, args, scope);
+      } else if (IsWaitGameObject(tagPlayer, name)) {
+        WaitGameObject(tagPlayer, name, callback, args, scope);
       } else {
         WaitCallback(tagPlayer, name, callback, args, scope);
       }

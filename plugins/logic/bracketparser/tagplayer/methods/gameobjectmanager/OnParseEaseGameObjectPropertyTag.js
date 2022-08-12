@@ -3,26 +3,26 @@ var EaseMode = {
     yoyo: true
 }
 
-var IsEasePropertyTag = function (tags, prefix) {
-    // prefix.name.prop.to, or prefix.name.prop.yoyo
-    return (tags.length === 4) && (tags[0] === prefix) && EaseMode[tags[3]];
+var IsEasePropertyTag = function (tags, goType) {
+    // goType.name.prop.to, or goType.name.prop.yoyo
+    return (tags.length === 4) && (tags[0] === goType) && EaseMode[tags[3]];
 }
 
 var OnParseEaseGameObjectPropertyTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser
         .on(`+`, function (tag, value, duration, ease, repeat) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [prefix.name.prop.to=value,duration]
-            // [prefix.name.prop.to=value,duration,ease,repeat]
-            // [prefix.name.prop.to=value,duration,repeat]
+            // [goType.name.prop.to=value,duration]
+            // [goType.name.prop.to=value,duration,ease,repeat]
+            // [goType.name.prop.to=value,duration,repeat]
             var tags = tag.split('.');
             var name, property, isYoyo;
-            if (IsEasePropertyTag(tags, prefix)) {
+            if (IsEasePropertyTag(tags, goType)) {
                 name = tags[1];
                 property = tags[2];
                 isYoyo = (tags[3] === 'yoyo');

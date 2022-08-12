@@ -1,9 +1,9 @@
 var OnParseTypingTextTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
 
-    // [prefix.name.typing] -> event : 'prefix.typing'    
-    tagPlayer.on(`${prefix}.typing`, function (name, speed) {
+    // [goType.name.typing] -> event : 'goType.typing'    
+    tagPlayer.on(`${goType}.typing`, function (name, speed) {
         // Clear text
         gameObjectManager.clearTyping(name);
         // Append text

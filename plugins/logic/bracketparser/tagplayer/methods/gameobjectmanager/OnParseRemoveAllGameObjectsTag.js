@@ -1,14 +1,14 @@
 var OnParseRemoveAllGameObjectsTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser
         .on('-', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [/prefix]
-            if (tag === prefix) {
+            // [/goType]
+            if (tag === goType) {
             } else {
                 return;
             }

@@ -1,28 +1,28 @@
-var IsCallMethodTag = function (tags, prefix) {
-    // prefix.name.methodName
-    return (tags.length === 3) && (tags[0] === prefix);
+var IsCallMethodTag = function (tags, goType) {
+    // goType.name.methodName
+    return (tags.length === 3) && (tags[0] === goType);
 }
 
 var OnParseCallGameObjectMethodTag = function (tagPlayer, parser, config) {
-    var prefix = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(prefix);
+    var goType = config.name;
+    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
     parser
         .on(`+`, function (tag, ...parameters) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            // [prefix.name.methodName=value0,value1,value2...]
+            // [goType.name.methodName=value0,value1,value2...]
             var tags = tag.split('.');
             var name, methodName;
-            if (IsCallMethodTag(tags, prefix)) {
+            if (IsCallMethodTag(tags, goType)) {
                 name = tags[1];
                 methodName = tags[2];
             } else {
                 return;
             }
 
-            var methodEventName = `${prefix}.${methodName}`;
+            var methodEventName = `${goType}.${methodName}`;
             tagPlayer.emit(
                 methodEventName,
                 name, ...parameters
