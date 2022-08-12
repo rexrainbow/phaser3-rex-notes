@@ -8,6 +8,7 @@ import Resume from './Resume.js';
 import Wait from './Wait.js';
 import SpriteMethods from './SpriteMethods.js';
 import TextMethods from './TextMethods.js';
+import ContentMethods from './ContentMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
@@ -23,7 +24,8 @@ var Methods = {
 Object.assign(
     Methods,
     SpriteMethods,
-    TextMethods
+    TextMethods,
+    ContentMethods,
 )
 
 export default Methods;

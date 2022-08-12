@@ -5,49 +5,15 @@ var IsSetTextTag = function (tags, prefix) {
 
 var OnParseSetTextTag = function (tagPlayer, parser, config) {
     var prefix = 'text';
-    parser
-        .on(`+`, function (tag) {
-            if (parser.skipEventFlag) {  // Has been processed before
-                return;
-            }
-
-            // [text.name.text]
-            var tags = tag.split('.');
-            var name;
-            if (IsSetTextTag(tags, prefix)) {
-                name = tags[1];
-            } else {
-                return;
-            }
-
-            // Set text in content section
-
-            parser.skipEvent();
-        })
-        .on('content', function (content) {
-            if (parser.skipEventFlag) {  // Has been processed before
-                return;
-            }
-
-            if (content === '\n') {
-                return;
-            }
-
-            // [text.name.text]
-            var tags = parser.lastTagStart.split('.');
-            var name;
-            if (IsSetTextTag(tags, prefix)) {
-                name = tags[1];
-            } else {
-                return;
-            }
-
-            content = content.replaceAll('\\n', '\n');
-
-            tagPlayer.textManager.setText(name, content);
-
-            parser.skipEvent();
-        })
+    // [text.name.text] -> event : 'text.text'    
+    tagPlayer.on('text.text', function (name) {
+        // Clear text
+        tagPlayer.textManager.clearText(name);
+        // Append text
+        tagPlayer.setContentCallback(function (content) {
+            tagPlayer.textManager.appendText(name, content);
+        });
+    });
 }
 
 export default OnParseSetTextTag;

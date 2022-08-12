@@ -20,12 +20,24 @@ var OnParseCallTextMethodTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
+
+            var methodEventName = `text.${methodName}`;
+            tagPlayer.emit(
+                methodEventName,
+                name, ...parameters
+            );
+            if (tagPlayer.listenerCount(methodEventName) > 0) {
+                parser.skipEvent();
+                return;
+            }
+
             if (!tagPlayer.textManager.hasMethod(name, methodName)) {
                 return;
             }
             tagPlayer.textManager.call(name, methodName, ...parameters);
 
             parser.skipEvent();
+            // Will block SetTextPropertyTag callback
         })
 }
 

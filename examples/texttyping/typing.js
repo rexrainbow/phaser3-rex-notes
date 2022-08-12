@@ -13,13 +13,14 @@ class Demo extends Phaser.Scene {
     create() {                
         var txt = this.add.text(100, 100, 'Touch to start typing');
         txt.typing = this.plugins.get('rexTextTyping').add(txt, {
-            speed: 0.3 * 1000,
+            speed: 0.1 * 1000,
             //typeMode: 'middle-to-sides',
             //setTextCallback: myTypingFn
         });
 
         this.input.on('pointerdown', function () {
             txt.typing.start('ABCDEFG');
+            txt.typing.appendText('ABCDEFG');
         }, this);
 
         txt.typing.on('type', function () {

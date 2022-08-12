@@ -5,52 +5,18 @@ var IsTypingTextTag = function (tags, prefix) {
 
 var OnParseTypingTextTag = function (tagPlayer, parser, config) {
     var prefix = 'text';
-    parser
-        .on(`+`, function (tag, speed) {
-            if (parser.skipEventFlag) {  // Has been processed before
-                return;
-            }
-
-            // [text.name.typing]
-            var tags = tag.split('.');
-            var name;
-            if (IsTypingTextTag(tags, prefix)) {
-                name = tags[1];
-            } else {
-                return;
-            }
-
-            // Set text in content section
+    // [text.name.typing] -> event : 'text.typing'    
+    tagPlayer.on('text.typing', function (name, speed) {
+        // Clear text
+        tagPlayer.textManager.clearTyping(name);
+        // Append text
+        tagPlayer.setContentCallback(function (content) {
             if (speed !== undefined) {
                 tagPlayer.textManager.setTypingSpeed(name, speed);
             }
-
-            parser.skipEvent();
-        })
-        .on('content', function (content) {
-            if (parser.skipEventFlag) {  // Has been processed before
-                return;
-            }
-
-            if (content === '\n') {
-                return;
-            }
-
-            // [text.name.typing]
-            var tags = parser.lastTagStart.split('.');
-            var name;
-            if (IsTypingTextTag(tags, prefix)) {
-                name = tags[1];
-            } else {
-                return;
-            }
-
-            content = content.replaceAll('\\n', '\n');
-
-            tagPlayer.textManager.typingText(name, content);
-
-            parser.skipEvent();
-        })
+            tagPlayer.textManager.typing(name, content);
+        });
+    });
 }
 
 export default OnParseTypingTextTag;

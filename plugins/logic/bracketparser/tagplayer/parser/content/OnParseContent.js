@@ -9,6 +9,14 @@ var OnParseContent = function (tagPlayer, parser, config) {
                 return;
             }
 
+            content = content.replaceAll('\\n', '\n');
+
+            if (tagPlayer.contentCallback) {
+                tagPlayer.contentCallback(content);
+                parser.skipEvent();
+                return;
+            }
+
             var startTag = `+${parser.lastTagStart}`;
             tagPlayer.emit(`${startTag}#content`, parser, content);
         })

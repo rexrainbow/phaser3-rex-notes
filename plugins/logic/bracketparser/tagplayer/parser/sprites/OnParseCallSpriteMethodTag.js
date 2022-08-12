@@ -20,12 +20,24 @@ var OnParseCallSpriteMethodTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
+
+            var methodEventName = `sprite.${methodName}`;
+            tagPlayer.emit(
+                methodEventName,
+                name, ...parameters
+            );
+            if (tagPlayer.listenerCount(methodEventName) > 0) {
+                parser.skipEvent();
+                return;
+            }
+
             if (!tagPlayer.spriteManager.hasMethod(name, methodName)) {
                 return;
             }
             tagPlayer.spriteManager.call(name, methodName, ...parameters);
 
             parser.skipEvent();
+            // Will block SetSpritePropertyTag callback
         })
 }
 
