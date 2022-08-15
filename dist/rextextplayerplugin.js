@@ -3821,7 +3821,9 @@
       this.setValueConverter(GetValue$o(config, 'valueConvert', true)); // Brackets and generate regex
 
       var delimiters = GetValue$o(config, 'delimiters', '<>');
-      this.setDelimiters(delimiters[0], delimiters[1]);
+      this.setDelimiters(delimiters[0], delimiters[1]); // Loop
+
+      this.setLoopEnable(GetValue$o(config, 'loop', false));
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
@@ -3884,6 +3886,16 @@
         return this;
       }
     }, {
+      key: "setLoopEnable",
+      value: function setLoopEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.loopEnable = enable;
+        return this;
+      }
+    }, {
       key: "setSource",
       value: function setSource(source) {
         this.source = source;
@@ -3901,6 +3913,7 @@
         this.lastTagStart = null;
         this.lastTagEnd = null;
         this.lastContent = null;
+        this.justCompleted = false;
         return this;
       }
     }, {
@@ -3921,19 +3934,29 @@
           this.onResume();
         }
 
+        if (this.justCompleted) {
+          return this;
+        }
+
         if (this.reSplit.lastIndex === 0) {
           this.onStart();
         }
 
         var text = this.source,
             lastIndex = text.length;
+        this.reSplit.lastIndex = this.progressIndex;
 
         while (!this.isPaused) {
-          var regexResult = this.reSplit.exec(text);
+          var regexResult = this.reSplit.exec(text); // No tag found, complete
 
           if (!regexResult) {
             if (this.progressIndex < lastIndex) {
               this.onContent(text.substring(this.progressIndex, lastIndex));
+
+              if (this.isPaused) {
+                this.progressIndex = lastIndex;
+                break;
+              }
             }
 
             this.onComplete();
@@ -3941,11 +3964,17 @@
           }
 
           var match = regexResult[0];
-          var matchStart = this.reSplit.lastIndex - match.length;
+          var matchStart = this.reSplit.lastIndex - match.length; // Process content between previous tag and current tag
 
           if (this.progressIndex < matchStart) {
-            this.onContent(text.substring(this.progressIndex, matchStart));
-          }
+            this.onContent(text.substring(this.progressIndex, matchStart)); // Might pause here
+
+            if (this.isPaused) {
+              this.progressIndex = matchStart;
+              break;
+            }
+          } // Process current tag
+
 
           if (this.reTagOff.test(match)) {
             this.onTagEnd(match);
@@ -3955,6 +3984,8 @@
 
           this.progressIndex = this.reSplit.lastIndex;
         }
+
+        return this;
       }
     }, {
       key: "skipEvent",
@@ -3969,6 +4000,19 @@
           this.onPause();
         }
 
+        return this;
+      }
+    }, {
+      key: "pauseUntilEvent",
+      value: function pauseUntilEvent(eventEmitter, eventName) {
+        if (this.isPaused) {
+          return this;
+        }
+
+        this.pause();
+        eventEmitter.once(eventName, function () {
+          this.next();
+        }, this);
         return this;
       }
     }, {
@@ -4016,8 +4060,12 @@
       key: "onComplete",
       value: function onComplete() {
         this.isRunning = false;
+        this.justCompleted = true;
         this.emit('complete', this);
-        this.resetIndex();
+
+        if (this.loopEnable) {
+          this.resetIndex();
+        }
       }
     }, {
       key: "onPause",

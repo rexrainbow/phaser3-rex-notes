@@ -42,17 +42,16 @@ class Demo extends Phaser.Scene {
         });
 
         var content = `
-// char.A
+// Setup
 [char.A][char.A.setPosition=300,300]
 [char.A.play=idle]
-[char.A.talk]
-Hello
 
-// char.B
 [char.B][char.B.flipX=true][char.B.setPosition=500,300]
 [char.B.play=idle]
-[char.B.talk]
-World
+
+// Talk
+[char.A.talk]Hello
+[char.B.talk]World
 
 `
 
@@ -64,7 +63,10 @@ World
                 name: 'char',
                 createGameObject: CreateGameObject
             })
-            .play(content)
+            .playPromise(content)
+            .then(function(){
+                console.log('TagPlayer: Complete')
+            })
     }
 
     update() { }
@@ -206,19 +208,31 @@ class MySprite extends RexPlugins.UI.Container {
         return this;
     }
 
-    talk(speed) {
+    talk(speed, waitTyping) {
+        if (typeof (speed) === 'boolean') {
+            waitTyping = speed;
+            speed = undefined;
+        }
+        if (waitTyping === undefined) {
+            waitTyping = true;
+        }
+
         var textBox = this.text;
         textBox.setVisible(true);
         if (speed !== undefined) {
             textBox.setTypeSpeed(speed);
         }
-
+        this.waitTyping = waitTyping;
         this.tagPlayer.setContentCallback(this.typing, this);
         return this;
     }
 
     typing(content) {
+        if (this.waitTyping) {
+            this.tagPlayer.pauseUntilEvent(this.text, 'complete');
+        }
         this.text.start(content);
+        return this;
     }
 }
 

@@ -35,8 +35,15 @@ declare class BracketParser extends EventEmitter {
     );
 
     start(text: string): this;
+
     pause(): this;
+    pauseUntilEvent(
+        eventEmitter: EventEmitter,
+        eventName: string
+    ): this;
+
     next(): this;
+
     restart(): this;
 
     skipEvent(): this;

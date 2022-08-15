@@ -21,6 +21,8 @@ class BracketParser {
         // Brackets and generate regex
         var delimiters = GetValue(config, 'delimiters', '<>');
         this.setDelimiters(delimiters[0], delimiters[1]);
+        // Loop
+        this.setLoopEnable(GetValue(config, 'loop', false));
 
         this.isRunning = false;
         this.isPaused = false;
@@ -77,6 +79,14 @@ class BracketParser {
         return this;
     }
 
+    setLoopEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.loopEnable = enable;
+        return this;
+    }
+
     setSource(source) {
         this.source = source;
         return this;
@@ -91,6 +101,7 @@ class BracketParser {
         this.lastTagStart = null;
         this.lastTagEnd = null;
         this.lastContent = null;
+        this.justCompleted = false;
         return this;
     }
 
@@ -112,6 +123,10 @@ class BracketParser {
             this.onResume();
         }
 
+        if (this.justCompleted) {
+            return this;
+        }
+
         if (this.reSplit.lastIndex === 0) {
             this.onStart();
         }
@@ -119,11 +134,17 @@ class BracketParser {
         var text = this.source,
             lastIndex = text.length;
 
+        this.reSplit.lastIndex = this.progressIndex;
         while (!this.isPaused) {
             var regexResult = this.reSplit.exec(text);
+            // No tag found, complete
             if (!regexResult) {
                 if (this.progressIndex < lastIndex) {
                     this.onContent(text.substring(this.progressIndex, lastIndex));
+                    if (this.isPaused) {
+                        this.progressIndex = lastIndex;
+                        break;
+                    }
                 }
                 this.onComplete();
                 return;
@@ -132,10 +153,17 @@ class BracketParser {
             var match = regexResult[0];
             var matchStart = this.reSplit.lastIndex - match.length;
 
+            // Process content between previous tag and current tag
             if (this.progressIndex < matchStart) {
                 this.onContent(text.substring(this.progressIndex, matchStart));
+                // Might pause here
+                if (this.isPaused) {
+                    this.progressIndex = matchStart;
+                    break;
+                }
             }
 
+            // Process current tag
             if (this.reTagOff.test(match)) {
                 this.onTagEnd(match);
             } else {
@@ -145,6 +173,7 @@ class BracketParser {
             this.progressIndex = this.reSplit.lastIndex;
         }
 
+        return this;
     }
 
     skipEvent() {
@@ -156,6 +185,18 @@ class BracketParser {
         if (!this.isPaused) {
             this.onPause();
         }
+        return this;
+    }
+
+    pauseUntilEvent(eventEmitter, eventName) {
+        if (this.isPaused) {
+            return this;
+        }
+
+        this.pause();
+        eventEmitter.once(eventName, function () {
+            this.next();
+        }, this);
         return this;
     }
 
@@ -198,8 +239,11 @@ class BracketParser {
 
     onComplete() {
         this.isRunning = false;
+        this.justCompleted = true;
         this.emit('complete', this);
-        this.resetIndex();
+        if (this.loopEnable) {
+            this.resetIndex();
+        }
     }
 
     onPause() {
