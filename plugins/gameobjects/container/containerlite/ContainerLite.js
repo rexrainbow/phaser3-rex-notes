@@ -4,6 +4,11 @@ import { GetParent } from './GetParent.js';
 
 class ContainerLite extends Base {
     constructor(scene, x, y, width, height, children) {
+        if (Array.isArray(width)) {
+            children = width;
+            width = undefined;
+            height = undefined;
+        }
         super(scene, x, y, width, height);
         this.type = 'rexContainerLite';
         this.isRexContainerLite = true;

@@ -33,6 +33,12 @@ declare class ContainerLite extends Base {
         children?: Phaser.GameObjects.GameObject[]
     );
 
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        children?: Phaser.GameObjects.GameObject[]
+    );
+
     add(
         gameObject: Phaser.GameObjects.GameObject | Phaser.GameObjects.GameObject[]
     ): this;
