@@ -28,8 +28,16 @@ class TagPlayer extends EventEmitter {
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
         this.gameObjectManagers = {};
-        AddSpriteManager.call(this, GetValue(config, 'sprites'));
-        AddTextManager.call(this, GetValue(config, 'texts'));
+
+        var spriteManagerConfig = GetValue(config, 'sprites');
+        if (spriteManagerConfig !== false) {
+            AddSpriteManager.call(this, spriteManagerConfig);
+        }
+
+        var textManagerConfig = GetValue(config, 'texts');
+        if (textManagerConfig !== false) {
+            AddTextManager.call(this, textManagerConfig);
+        }
 
         this.setClickTarget(GetValue(config, 'clickTarget', scene));  // this.clickEE
     }
