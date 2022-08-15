@@ -10,7 +10,10 @@ class GOManager {
         this.scene = scene;
 
         this.BobClass = GetValue(config, 'BobClass', BobBase);
-        this.setCreateGameObjectCallback(GetValue(config, 'createGameObject'));
+        this.setCreateGameObjectCallback(
+            GetValue(config, 'createGameObject'),
+            GetValue(config, 'createGameObjectScope')
+        );
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.setGOFadeTime(GetValue(config, 'fade', 500));
         this.setViewportCoordinateEnable(GetValue(config, 'viewportCoordinate', false));
@@ -48,8 +51,9 @@ class GOManager {
         return this;
     }
 
-    setCreateGameObjectCallback(callback) {
+    setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
+        this.createGameObjectScope = scope;
         return this;
     }
 

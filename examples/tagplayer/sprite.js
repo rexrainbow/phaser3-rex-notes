@@ -101,13 +101,13 @@ For the King
     update() { }
 }
 
-var CreateText = function (scene, spriteName, tagPlayer) {
+var CreateText = function (scene, spriteName) {
     var textObject = scene.add.text(0, 0, '', {
 
     });
 
-    if (arguments.length >= 3) {
-        var sprite = tagPlayer.getSprite(spriteName);
+    if (spriteName) {
+        var sprite = this.getSprite(spriteName);  // this = tagPlayer
         textObject.setPosition(sprite.x, sprite.y - 20);
     }
 

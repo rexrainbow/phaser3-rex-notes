@@ -13,8 +13,15 @@ const ParseCallbacks = [
 
 export default {
     addGameObjectManager(config, GameObjectManagerClass) {
+        if (config === undefined) {
+            config = {};
+        }
         if (GameObjectManagerClass === undefined) {
             GameObjectManagerClass = GameObjectManagerBase;
+        }
+
+        if (!config.createGameObjectScope) {
+            config.createGameObjectScope = this;
         }
         var gameobjectManager = new GameObjectManagerClass(this.scene, config);
         var name = config.name;

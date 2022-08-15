@@ -13,11 +13,11 @@ class TextManager extends GOManager {
         super(scene, config);
     }
 
-    setCreateGameObjectCallback(callback) {
+    setCreateGameObjectCallback(callback, scope) {
         if ((!callback) || (callback === 'text')) {
             callback = CreateTextObject;
         }
-        super.setCreateGameObjectCallback(callback);
+        super.setCreateGameObjectCallback(callback, scope);
         return this;
     }
 

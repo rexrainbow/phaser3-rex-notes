@@ -43,7 +43,9 @@ export default {
     },
 
     add(name, ...args) {
-        var gameObject = this.createGameObjectCallback(this.scene, ...args);
+        var callback = this.createGameObjectCallback;
+        var scope = this.createGameObjectScope;
+        var gameObject = callback.call(scope, this.scene, ...args);
         this.addGO(name, gameObject);
         var bob = this.get(name);
 

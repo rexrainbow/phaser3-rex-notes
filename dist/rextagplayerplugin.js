@@ -2979,11 +2979,14 @@
       return this;
     },
     add: function add(name) {
+      var callback = this.createGameObjectCallback;
+      var scope = this.createGameObjectScope;
+
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
 
-      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
+      var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
       var bob = this.get(name);
       var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
@@ -3158,7 +3161,7 @@
 
       this.scene = scene;
       this.BobClass = GetValue$2(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$2(config, 'createGameObject'));
+      this.setCreateGameObjectCallback(GetValue$2(config, 'createGameObject'), GetValue$2(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$2(config, 'eventEmitter', undefined));
       this.setGOFadeTime(GetValue$2(config, 'fade', 500));
       this.setViewportCoordinateEnable(GetValue$2(config, 'viewportCoordinate', false));
@@ -3199,8 +3202,9 @@
       }
     }, {
       key: "setCreateGameObjectCallback",
-      value: function setCreateGameObjectCallback(callback) {
+      value: function setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
+        this.createGameObjectScope = scope;
         return this;
       }
     }, {
@@ -3339,14 +3343,14 @@
 
     _createClass(SpriteManager, [{
       key: "setCreateGameObjectCallback",
-      value: function setCreateGameObjectCallback(callback) {
+      value: function setCreateGameObjectCallback(callback, scope) {
         if (!callback || callback === 'sprite') {
           callback = CreateSprite;
         } else if (callback === 'image') {
           callback = CreateImage;
         }
 
-        _get(_getPrototypeOf(SpriteManager.prototype), "setCreateGameObjectCallback", this).call(this, callback);
+        _get(_getPrototypeOf(SpriteManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
 
         return this;
       }
@@ -4142,12 +4146,12 @@
 
     _createClass(TextManager, [{
       key: "setCreateGameObjectCallback",
-      value: function setCreateGameObjectCallback(callback) {
+      value: function setCreateGameObjectCallback(callback, scope) {
         if (!callback || callback === 'text') {
           callback = CreateTextObject;
         }
 
-        _get(_getPrototypeOf(TextManager.prototype), "setCreateGameObjectCallback", this).call(this, callback);
+        _get(_getPrototypeOf(TextManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
 
         return this;
       }
@@ -4234,7 +4238,6 @@
         args[_key - 1] = arguments[_key];
       }
 
-      args.push(tagPlayer);
       gameObjectManager.add.apply(gameObjectManager, [name].concat(args));
       parser.skipEvent();
     }).on('-', function (tag) {
@@ -4400,8 +4403,16 @@
   var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseSetGameObjectPropertyTag, OnParseEaseGameObjectPropertyTag];
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
+      if (config === undefined) {
+        config = {};
+      }
+
       if (GameObjectManagerClass === undefined) {
         GameObjectManagerClass = GOManager;
+      }
+
+      if (!config.createGameObjectScope) {
+        config.createGameObjectScope = this;
       }
 
       var gameobjectManager = new GameObjectManagerClass(this.scene, config);

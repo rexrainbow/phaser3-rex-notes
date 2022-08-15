@@ -20,7 +20,6 @@ var OnParseAddGameObjectTag = function (tagPlayer, parser, config) {
             } else {
                 return;
             }
-            args.push(tagPlayer);
             gameObjectManager.add(name, ...args);
 
             parser.skipEvent();

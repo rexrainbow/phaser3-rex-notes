@@ -13,13 +13,13 @@ class SpriteManager extends GOManager {
         super(scene, config);
     }
 
-    setCreateGameObjectCallback(callback) {
+    setCreateGameObjectCallback(callback, scope) {
         if (!callback || (callback === 'sprite')) {
             callback = CreateSprite;
         } else if (callback === 'image') {
             callback = CreateImage;
         }
-        super.setCreateGameObjectCallback(callback);
+        super.setCreateGameObjectCallback(callback, scope);
         return this;
     }
 
