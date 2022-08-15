@@ -2053,6 +2053,12 @@
 
       _classCallCheck(this, ContainerLite);
 
+      if (Array.isArray(width)) {
+        children = width;
+        width = undefined;
+        height = undefined;
+      }
+
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;

@@ -844,9 +844,17 @@
       }
 
       content = content.replaceAll('\\n', '\n');
+      var callback = tagPlayer.contentCallback;
 
-      if (tagPlayer.contentCallback) {
-        tagPlayer.contentCallback(content);
+      if (callback) {
+        var scope = tagPlayer.contentCallbackScope;
+
+        if (scope) {
+          callback.call(scope, content);
+        } else {
+          callback(content);
+        }
+
         parser.skipEvent();
         return;
       }
@@ -4417,6 +4425,11 @@
 
       var gameobjectManager = new GameObjectManagerClass(this.scene, config);
       var name = config.name;
+
+      if (!name) {
+        console.warn("Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method");
+      }
+
       this.gameObjectManagers[name] = gameobjectManager; // Register parse callbacks
 
       var customParseCallbacks = config.parseCallbacks;
@@ -4806,8 +4819,9 @@
   };
 
   var ContentMethods = {
-    setContentCallback: function setContentCallback(callback) {
+    setContentCallback: function setContentCallback(callback, scope) {
       this.contentCallback = callback;
+      this.contentCallbackScope = scope;
       return this;
     }
   };
@@ -4857,8 +4871,17 @@
       _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
 
       _this.gameObjectManagers = {};
-      AddSpriteManager.call(_assertThisInitialized(_this), GetValue(config, 'sprites'));
-      AddTextManager.call(_assertThisInitialized(_this), GetValue(config, 'texts'));
+      var spriteManagerConfig = GetValue(config, 'sprites');
+
+      if (spriteManagerConfig !== false) {
+        AddSpriteManager.call(_assertThisInitialized(_this), spriteManagerConfig);
+      }
+
+      var textManagerConfig = GetValue(config, 'texts');
+
+      if (textManagerConfig !== false) {
+        AddTextManager.call(_assertThisInitialized(_this), textManagerConfig);
+      }
 
       _this.setClickTarget(GetValue(config, 'clickTarget', scene)); // this.clickEE
 

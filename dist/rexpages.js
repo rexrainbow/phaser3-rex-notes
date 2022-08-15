@@ -375,7 +375,7 @@
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base$1, [Components.Alpha, Components.Flip]);
 
-  var GetParent = function GetParent(gameObject, name) {
+  var GetParent$1 = function GetParent(gameObject, name) {
     var parent;
 
     if (name === undefined) {
@@ -397,12 +397,12 @@
     return parent;
   };
 
-  var GetTopmostParent = function GetTopmostParent(gameObject) {
-    var parent = GetParent(gameObject);
+  var GetTopmostParent$1 = function GetTopmostParent(gameObject) {
+    var parent = GetParent$1(gameObject);
 
     while (parent) {
       gameObject = parent;
-      parent = GetParent(parent);
+      parent = GetParent$1(parent);
     }
 
     return gameObject;
@@ -490,14 +490,14 @@
         gameObject = this;
       }
 
-      return GetParent(gameObject, name);
+      return GetParent$1(gameObject, name);
     },
     getTopmostParent: function getTopmostParent(gameObject) {
       if (gameObject === undefined) {
         gameObject = this;
       }
 
-      return GetTopmostParent(gameObject);
+      return GetTopmostParent$1(gameObject);
     }
   };
 
@@ -613,7 +613,7 @@
   var BaseClear = Base$1.prototype.clear;
   var RemoveChild$1 = {
     remove: function remove(gameObject, destroyChild) {
-      if (GetParent(gameObject) !== this) {
+      if (GetParent$1(gameObject) !== this) {
         return this;
       }
 
@@ -1320,7 +1320,7 @@
     },
     contains: function contains(gameObject) {
       // Override Base.contains method
-      var parent = GetParent(gameObject);
+      var parent = GetParent$1(gameObject);
 
       if (!parent) {
         return false;
@@ -2053,6 +2053,12 @@
 
       _classCallCheck(this, ContainerLite);
 
+      if (Array.isArray(width)) {
+        children = width;
+        width = undefined;
+        height = undefined;
+      }
+
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
@@ -2266,8 +2272,8 @@
       }
     }], [{
       key: "GetParent",
-      value: function GetParent$1(child) {
-        return GetParent(child);
+      value: function GetParent(child) {
+        return GetParent$1(child);
       }
     }]);
 
@@ -6006,7 +6012,7 @@
 
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
-    var parent = GetParent(gameObject);
+    var parent = GetParent$1(gameObject);
 
     if (parent) {
       parent.setChildVisible(gameObject, !hidden);
@@ -6168,12 +6174,62 @@
     return null;
   };
 
+  var GetParent = function GetParent(gameObject, name) {
+    var parent;
+
+    if (name === undefined) {
+      if (gameObject.hasOwnProperty('rexContainer')) {
+        parent = gameObject.rexContainer.parent;
+
+        if (!parent.isRexSizer) {
+          parent = null;
+        }
+      }
+    } else {
+      parent = GetParent(gameObject);
+
+      while (parent) {
+        if (parent.name === name) {
+          break;
+        }
+
+        parent = GetParent(parent);
+      }
+    }
+
+    return parent;
+  };
+
+  var GetTopmostParent = function GetTopmostParent(gameObject) {
+    var parent = GetParent(gameObject);
+
+    while (parent) {
+      gameObject = parent;
+      parent = GetParent(parent);
+    }
+
+    return gameObject;
+  };
+
   var GetParentSizerMethods = {
     getParentSizer: function getParentSizer(gameObject, name) {
-      return this.getParent(gameObject, name);
+      if (typeof gameObject === 'string') {
+        name = gameObject;
+        gameObject = undefined;
+      }
+
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+
+      return GetParent(gameObject, name);
     },
     getTopmostSizer: function getTopmostSizer(gameObject) {
-      return this.getTopmostParent(gameObject);
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+
+      return GetTopmostParent(gameObject);
     }
   };
 

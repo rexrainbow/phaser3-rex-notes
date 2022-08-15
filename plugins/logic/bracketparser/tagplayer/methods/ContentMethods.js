@@ -1,6 +1,7 @@
 export default {
-    setContentCallback(callback) {
+    setContentCallback(callback, scope) {
         this.contentCallback = callback;
+        this.contentCallbackScope = scope;
         return this;
     }
 }

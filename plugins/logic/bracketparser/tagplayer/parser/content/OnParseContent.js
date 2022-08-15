@@ -11,8 +11,14 @@ var OnParseContent = function (tagPlayer, parser, config) {
 
             content = content.replaceAll('\\n', '\n');
 
-            if (tagPlayer.contentCallback) {
-                tagPlayer.contentCallback(content);
+            var callback = tagPlayer.contentCallback;
+            if (callback) {
+                var scope = tagPlayer.contentCallbackScope;
+                if (scope) {
+                    callback.call(scope, content);
+                } else {
+                    callback(content);
+                }
                 parser.skipEvent();
                 return;
             }

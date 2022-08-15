@@ -8455,7 +8455,7 @@
   var Components$1 = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base$2, [Components$1.Alpha, Components$1.Flip]);
 
-  var GetParent = function GetParent(gameObject, name) {
+  var GetParent$1 = function GetParent(gameObject, name) {
     var parent;
 
     if (name === undefined) {
@@ -8477,12 +8477,12 @@
     return parent;
   };
 
-  var GetTopmostParent = function GetTopmostParent(gameObject) {
-    var parent = GetParent(gameObject);
+  var GetTopmostParent$1 = function GetTopmostParent(gameObject) {
+    var parent = GetParent$1(gameObject);
 
     while (parent) {
       gameObject = parent;
-      parent = GetParent(parent);
+      parent = GetParent$1(parent);
     }
 
     return gameObject;
@@ -8570,14 +8570,14 @@
         gameObject = this;
       }
 
-      return GetParent(gameObject, name);
+      return GetParent$1(gameObject, name);
     },
     getTopmostParent: function getTopmostParent(gameObject) {
       if (gameObject === undefined) {
         gameObject = this;
       }
 
-      return GetTopmostParent(gameObject);
+      return GetTopmostParent$1(gameObject);
     }
   };
 
@@ -8693,7 +8693,7 @@
   var BaseClear = Base$2.prototype.clear;
   var RemoveChild$2 = {
     remove: function remove(gameObject, destroyChild) {
-      if (GetParent(gameObject) !== this) {
+      if (GetParent$1(gameObject) !== this) {
         return this;
       }
 
@@ -9400,7 +9400,7 @@
     },
     contains: function contains(gameObject) {
       // Override Base.contains method
-      var parent = GetParent(gameObject);
+      var parent = GetParent$1(gameObject);
 
       if (!parent) {
         return false;
@@ -10086,6 +10086,12 @@
 
       _classCallCheck(this, ContainerLite);
 
+      if (Array.isArray(width)) {
+        children = width;
+        width = undefined;
+        height = undefined;
+      }
+
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
@@ -10299,8 +10305,8 @@
       }
     }], [{
       key: "GetParent",
-      value: function GetParent$1(child) {
-        return GetParent(child);
+      value: function GetParent(child) {
+        return GetParent$1(child);
       }
     }]);
 
@@ -17282,11 +17288,14 @@
       return this;
     },
     add: function add(name) {
+      var callback = this.createGameObjectCallback;
+      var scope = this.createGameObjectScope;
+
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
 
-      var gameObject = this.createGameObjectCallback.apply(this, [this.scene].concat(args));
+      var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
       var bob = this.get(name);
       var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
@@ -17461,7 +17470,7 @@
 
       this.scene = scene;
       this.BobClass = GetValue$1J(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$1J(config, 'createGameObject'));
+      this.setCreateGameObjectCallback(GetValue$1J(config, 'createGameObject'), GetValue$1J(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$1J(config, 'eventEmitter', undefined));
       this.setGOFadeTime(GetValue$1J(config, 'fade', 500));
       this.setViewportCoordinateEnable(GetValue$1J(config, 'viewportCoordinate', false));
@@ -17502,8 +17511,9 @@
       }
     }, {
       key: "setCreateGameObjectCallback",
-      value: function setCreateGameObjectCallback(callback) {
+      value: function setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
+        this.createGameObjectScope = scope;
         return this;
       }
     }, {
@@ -17642,14 +17652,14 @@
 
     _createClass(SpriteManager, [{
       key: "setCreateGameObjectCallback",
-      value: function setCreateGameObjectCallback(callback) {
+      value: function setCreateGameObjectCallback(callback, scope) {
         if (!callback || callback === 'sprite') {
           callback = CreateSprite$1;
         } else if (callback === 'image') {
           callback = CreateImage$1;
         }
 
-        _get(_getPrototypeOf(SpriteManager.prototype), "setCreateGameObjectCallback", this).call(this, callback);
+        _get(_getPrototypeOf(SpriteManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
 
         return this;
       }
@@ -23504,7 +23514,7 @@
 
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
-    var parent = GetParent(gameObject);
+    var parent = GetParent$1(gameObject);
 
     if (parent) {
       parent.setChildVisible(gameObject, !hidden);
@@ -23666,12 +23676,62 @@
     return null;
   };
 
+  var GetParent = function GetParent(gameObject, name) {
+    var parent;
+
+    if (name === undefined) {
+      if (gameObject.hasOwnProperty('rexContainer')) {
+        parent = gameObject.rexContainer.parent;
+
+        if (!parent.isRexSizer) {
+          parent = null;
+        }
+      }
+    } else {
+      parent = GetParent(gameObject);
+
+      while (parent) {
+        if (parent.name === name) {
+          break;
+        }
+
+        parent = GetParent(parent);
+      }
+    }
+
+    return parent;
+  };
+
+  var GetTopmostParent = function GetTopmostParent(gameObject) {
+    var parent = GetParent(gameObject);
+
+    while (parent) {
+      gameObject = parent;
+      parent = GetParent(parent);
+    }
+
+    return gameObject;
+  };
+
   var GetParentSizerMethods = {
     getParentSizer: function getParentSizer(gameObject, name) {
-      return this.getParent(gameObject, name);
+      if (typeof gameObject === 'string') {
+        name = gameObject;
+        gameObject = undefined;
+      }
+
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+
+      return GetParent(gameObject, name);
     },
     getTopmostSizer: function getTopmostSizer(gameObject) {
-      return this.getTopmostParent(gameObject);
+      if (gameObject === undefined) {
+        gameObject = this;
+      }
+
+      return GetTopmostParent(gameObject);
     }
   };
 
@@ -51790,8 +51850,8 @@
   }(Phaser.Plugins.ScenePlugin);
 
   var methods = {
-    getParentSizer: GetParent,
-    getTopmostSizer: GetTopmostParent,
+    getParentSizer: GetParent$1,
+    getTopmostSizer: GetTopmostParent$1,
     hide: Hide,
     show: Show,
     isShown: IsShown,
