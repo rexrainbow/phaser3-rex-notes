@@ -25,6 +25,9 @@ export default {
         }
         var gameobjectManager = new GameObjectManagerClass(this.scene, config);
         var name = config.name;
+        if (!name) {
+            console.warn(`Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method`);
+        }
         this.gameObjectManagers[name] = gameobjectManager;
 
         // Register parse callbacks
