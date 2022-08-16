@@ -1,11 +1,9 @@
 import GetWrapCallback from './GetWrapCallback.js';
 import { RemoveWaitEvents } from '../Events.js';
 
-var IsWaitGameObject = function (tagPlayer, name) {
-    // goType, goType.name, goType.name.prop
+var IsWaitGameObject = function (tagPlayer, name) {    
     var names = name.split('.');
-    return (tagPlayer.gameObjectManagers.hasOwnProperty(names[0])) &&
-        (names.length <= 3);
+    return tagPlayer.gameObjectManagers.hasOwnProperty(names[0]);
 }
 
 var WaitGameObject = function (tagPlayer, tag, callback, args, scope) {
