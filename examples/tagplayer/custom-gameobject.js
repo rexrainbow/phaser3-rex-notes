@@ -42,16 +42,22 @@ class Demo extends Phaser.Scene {
         });
 
         var content = `
-// Setup
-[char.A][char.A.setPosition=300,300]
-[char.A.play=idle]
+// Prelude
+[char.A][char.A.play=idle]
+[char.A.x=0][char.A.x.to=300,1000]
+[char.A.y=0][char.A.y.to=300,1000]
 
-[char.B][char.B.flipX=true][char.B.setPosition=500,300]
-[char.B.play=idle]
+[char.B][char.B.flipX=true][char.B.play=idle]
+[char.B.x=800][char.B.x.to=500,1000]
+[char.B.y=600][char.B.y.to=300,1000]
 
-// Talk
+[wait=1000]
+
+// Main
 [char.A.talk]Hello
 [char.B.talk]World
+
+// Postlude
 
 `
 

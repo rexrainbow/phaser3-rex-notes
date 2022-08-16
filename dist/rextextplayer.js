@@ -3827,6 +3827,7 @@
       this.isRunning = false;
       this.isPaused = false;
       this.skipEventFlag = false;
+      this.justCompleted = false;
       this.lastTagStart = null;
       this.lastTagEnd = null;
       this.lastContent = null;
@@ -3946,12 +3947,12 @@
             lastIndex = text.length;
         this.reSplit.lastIndex = this.progressIndex;
 
-        while (!this.isPaused) {
+        while (true) {
           var regexResult = this.reSplit.exec(text); // No tag found, complete
 
           if (!regexResult) {
             if (this.progressIndex < lastIndex) {
-              this.onContent(text.substring(this.progressIndex, lastIndex));
+              this.onContent(text.substring(this.progressIndex, lastIndex)); // Might pause here
 
               if (this.isPaused) {
                 this.progressIndex = lastIndex;
@@ -3964,7 +3965,8 @@
           }
 
           var match = regexResult[0];
-          var matchStart = this.reSplit.lastIndex - match.length; // Process content between previous tag and current tag
+          var matchEnd = this.reSplit.lastIndex;
+          var matchStart = matchEnd - match.length; // Process content between previous tag and current tag            
 
           if (this.progressIndex < matchStart) {
             this.onContent(text.substring(this.progressIndex, matchStart)); // Might pause here
@@ -3982,7 +3984,11 @@
             this.onTagStart(match);
           }
 
-          this.progressIndex = this.reSplit.lastIndex;
+          this.progressIndex = matchEnd; // Might pause here
+
+          if (this.isPaused) {
+            break;
+          }
         }
 
         return this;

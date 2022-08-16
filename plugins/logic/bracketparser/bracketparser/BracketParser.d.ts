@@ -13,6 +13,8 @@ declare namespace BracketParser {
         },
 
         eventEmitter?: EventEmitter | false,
+
+        loop?: boolean
     }
 
     namespace Events {

@@ -8731,7 +8731,7 @@
     <span class="c1">// regex : {</span>
     <span class="c1">//     tag: &#39;[a-z0-9-_.]+&#39;,</span>
     <span class="c1">//     value: &#39;[ #a-z-_.0-9,|&amp;]+&#39;</span>
-    <span class="c1">// }</span>
+    <span class="c1">// },</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8786,8 +8786,21 @@
 </code></pre></div>
 <p>These <a href="./#events">events</a> will be emitted under this method.</p>
 <h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</code></pre></div>
+<ul>
+<li>Pause
+    <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Pause until event
+    <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">pauseUntilEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Will invoke 
+    <div class="highlight"><pre><span></span><code><span class="nx">eventEmitter</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">parser</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <p>Invoke this method during tag-start,tag-end, or content events to suspend parsing.</p>
 <h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>

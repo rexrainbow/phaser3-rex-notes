@@ -80,7 +80,7 @@ var parser = scene.plugins.get('rexBracketParser').add({
     // regex : {
     //     tag: '[a-z0-9-_.]+',
     //     value: '[ #a-z-_.0-9,|&]+'
-    // }
+    // },
 });
 ```
 
@@ -128,9 +128,20 @@ These [events](bracketparser.md#events) will be emitted under this method.
 
 ### Pause
 
-```javascript
-parser.pause();
-```
+- Pause
+    ```javascript
+    parser.pause();
+    ```
+- Pause until event
+    ```javascript
+    parser.pauseUntilEvent(eventEmitter, eventName);
+    ```
+    - Will invoke 
+        ```javascript
+        eventEmitter.once(eventName, function() {
+            parser.next();
+        })
+        ```
 
 Invoke this method during tag-start,tag-end, or content events to suspend parsing.
 
