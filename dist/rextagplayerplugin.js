@@ -370,8 +370,8 @@
     return values;
   };
 
-  var DefaultTagExpression = "[a-z0-9-_.]+";
-  var DefaultValueExpression = "[ #a-z-_.0-9,|&]+";
+  var DefaultTagExpression = "[!$a-z0-9-_.]+";
+  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
 
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
@@ -2644,11 +2644,17 @@
     }, {
       key: "freeTweens",
       value: function freeTweens() {
-        var tweenTasks = this.tweens;
+        var tweenTasks = this.tweens,
+            tweenTask;
 
         for (var propName in tweenTasks) {
-          tweenTasks[propName].remove();
-          delete tweenTasks[propName];
+          tweenTask = tweenTasks[propName];
+
+          if (tweenTask) {
+            tweenTask.remove();
+          }
+
+          tweenTasks[propName] = null;
         }
 
         return this;
@@ -2682,6 +2688,11 @@
         }
       }
     }, {
+      key: "getProperty",
+      value: function getProperty(property) {
+        return this.gameObject[property];
+      }
+    }, {
       key: "setProperty",
       value: function setProperty(property, value) {
         this.gameObject[property] = value;
@@ -2691,9 +2702,10 @@
       key: "easeProperty",
       value: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
         var tweenTasks = this.tweens;
+        var tweenTask = tweenTasks[property];
 
-        if (tweenTasks.hasOwnProperty(property)) {
-          tweenTasks[property].remove();
+        if (tweenTask) {
+          tweenTask.remove();
         }
 
         var gameObject = this.gameObject;
@@ -2705,7 +2717,7 @@
           yoyo: isYoyo,
           onComplete: function onComplete() {
             tweenTasks[property].remove();
-            delete tweenTasks[property];
+            tweenTasks[property] = null;
 
             if (_onComplete) {
               _onComplete(gameObject, property);
@@ -2714,9 +2726,9 @@
           onCompleteScope: this
         };
         config[property] = value;
-        var tween = this.scene.tweens.add(config);
-        tween.timeScale = this.timeScale;
-        tweenTasks[property] = tween;
+        tweenTask = this.scene.tweens.add(config);
+        tweenTask.timeScale = this.timeScale;
+        tweenTasks[property] = tweenTask;
         return this;
       }
     }, {
@@ -3145,6 +3157,13 @@
 
       return this.get(name).hasProperty(property);
     },
+    getProperty: function getProperty(name, property) {
+      if (!this.has(name)) {
+        return undefined;
+      }
+
+      return this.get(name).getProperty(property);
+    },
     setProperty: function setProperty(name, property, value) {
       if (!this.has(name)) {
         return this;
@@ -3177,16 +3196,22 @@
       this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
       return this;
     },
-    getTweenTask: function getTweenTask(name, property) {
-      if (this.has(name)) {
-        var tweenTasks = this.get(name).tweens;
-
-        if (tweenTasks.hasOwnProperty(property)) {
-          return tweenTasks[property];
-        }
+    hasTweenTask: function hasTweenTask(name, property) {
+      if (!this.has(name)) {
+        return false;
       }
 
-      return null;
+      var tweenTasks = this.get(name).tweens;
+      return tweenTasks.hasOwnProperty(property);
+    },
+    getTweenTask: function getTweenTask(name, property) {
+      if (!this.has(name)) {
+        return null;
+      }
+
+      var tweenTasks = this.get(name).tweens;
+      var tweenTask = tweenTasks[property];
+      return tweenTask ? tweenTask : null;
     }
   };
 
@@ -4743,7 +4768,7 @@
   };
 
   var IsWaitGameObject = function IsWaitGameObject(tagPlayer, name) {
-    // sprite, sprite.name, sprite.name.prop
+    // goType, goType.name, goType.name.prop
     var names = name.split('.');
     return tagPlayer.gameObjectManagers.hasOwnProperty(names[0]) && names.length <= 3;
   };
@@ -4757,7 +4782,7 @@
 
     switch (tags.length) {
       case 1:
-        // sprite: wait all sprites has beeen destroyed
+        // 'goType' : wait all sprites has beeen destroyed
         if (gameObjectManager.isEmpty) {
           tagPlayer.emit(waitEventName);
           wrapCallback();
@@ -4773,17 +4798,17 @@
         break;
 
       case 2:
-        // sprite.name: wait sprite.name has been destroyed
+        // 'goType.name' : wait goType.name has been destroyed
         var name = tags[1];
 
         if (gameObjectManager.has(name)) {
           var spriteData = gameObjectManager.get(name);
-          var sprite = spriteData.sprite; // Remove all wait events
+          var gameObject = spriteData.gameObject; // Remove all wait events
 
           tagPlayer.once(RemoveWaitEvents, function () {
-            sprite.off('destroy', wrapCallback, tagPlayer);
+            gameObject.off('destroy', wrapCallback, tagPlayer);
           });
-          sprite.once('destroy', wrapCallback, tagPlayer);
+          gameObject.once('destroy', wrapCallback, tagPlayer);
           tagPlayer.emit(waitEventName, name);
         } else {
           tagPlayer.emit(waitEventName, name);
@@ -4793,21 +4818,26 @@
         break;
 
       case 3:
-        // sprite.name.prop: wait ease sprite.name.prop has been completed
-        var name = tags[1];
-        var prop = tags[2];
-        var task = gameObjectManager.getTweenTask(name, prop);
+        // 'goType.name.prop' : wait ease goType.name.prop has been completed
+        var name = tags[1],
+            prop = tags[2];
+        var value = gameObjectManager.getProperty(name, prop);
 
-        if (task) {
-          // Remove all wait events
-          tagPlayer.once(RemoveWaitEvents, function () {
-            task.off('complete', wrapCallback, tagPlayer);
-          });
-          task.once('complete', wrapCallback, tagPlayer);
-          tagPlayer.emit(waitEventName, name, prop);
-        } else {
-          tagPlayer.emit(waitEventName, name, prop);
-          wrapCallback();
+        if (typeof value === 'number') {
+          // Can start tween task for a number property
+          var task = gameObjectManager.getTweenTask(name, prop);
+
+          if (task) {
+            // Remove all wait events
+            tagPlayer.once(RemoveWaitEvents, function () {
+              task.off('complete', wrapCallback, tagPlayer);
+            });
+            task.once('complete', wrapCallback, tagPlayer);
+            tagPlayer.emit(waitEventName, name, prop);
+          } else {
+            tagPlayer.emit(waitEventName, name, prop);
+            wrapCallback();
+          }
         }
 
         break;

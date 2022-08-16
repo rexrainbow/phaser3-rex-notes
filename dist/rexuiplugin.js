@@ -13164,8 +13164,8 @@
     return values;
   };
 
-  var DefaultTagExpression = "[a-z0-9-_.]+";
-  var DefaultValueExpression = "[ #a-z-_.0-9,|&]+";
+  var DefaultTagExpression = "[!$a-z0-9-_.]+";
+  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
 
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
@@ -16945,11 +16945,17 @@
     }, {
       key: "freeTweens",
       value: function freeTweens() {
-        var tweenTasks = this.tweens;
+        var tweenTasks = this.tweens,
+            tweenTask;
 
         for (var propName in tweenTasks) {
-          tweenTasks[propName].remove();
-          delete tweenTasks[propName];
+          tweenTask = tweenTasks[propName];
+
+          if (tweenTask) {
+            tweenTask.remove();
+          }
+
+          tweenTasks[propName] = null;
         }
 
         return this;
@@ -16983,6 +16989,11 @@
         }
       }
     }, {
+      key: "getProperty",
+      value: function getProperty(property) {
+        return this.gameObject[property];
+      }
+    }, {
       key: "setProperty",
       value: function setProperty(property, value) {
         this.gameObject[property] = value;
@@ -16992,9 +17003,10 @@
       key: "easeProperty",
       value: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
         var tweenTasks = this.tweens;
+        var tweenTask = tweenTasks[property];
 
-        if (tweenTasks.hasOwnProperty(property)) {
-          tweenTasks[property].remove();
+        if (tweenTask) {
+          tweenTask.remove();
         }
 
         var gameObject = this.gameObject;
@@ -17006,7 +17018,7 @@
           yoyo: isYoyo,
           onComplete: function onComplete() {
             tweenTasks[property].remove();
-            delete tweenTasks[property];
+            tweenTasks[property] = null;
 
             if (_onComplete) {
               _onComplete(gameObject, property);
@@ -17015,9 +17027,9 @@
           onCompleteScope: this
         };
         config[property] = value;
-        var tween = this.scene.tweens.add(config);
-        tween.timeScale = this.timeScale;
-        tweenTasks[property] = tween;
+        tweenTask = this.scene.tweens.add(config);
+        tweenTask.timeScale = this.timeScale;
+        tweenTasks[property] = tweenTask;
         return this;
       }
     }, {
@@ -17446,6 +17458,13 @@
 
       return this.get(name).hasProperty(property);
     },
+    getProperty: function getProperty(name, property) {
+      if (!this.has(name)) {
+        return undefined;
+      }
+
+      return this.get(name).getProperty(property);
+    },
     setProperty: function setProperty(name, property, value) {
       if (!this.has(name)) {
         return this;
@@ -17478,16 +17497,22 @@
       this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
       return this;
     },
-    getTweenTask: function getTweenTask(name, property) {
-      if (this.has(name)) {
-        var tweenTasks = this.get(name).tweens;
-
-        if (tweenTasks.hasOwnProperty(property)) {
-          return tweenTasks[property];
-        }
+    hasTweenTask: function hasTweenTask(name, property) {
+      if (!this.has(name)) {
+        return false;
       }
 
-      return null;
+      var tweenTasks = this.get(name).tweens;
+      return tweenTasks.hasOwnProperty(property);
+    },
+    getTweenTask: function getTweenTask(name, property) {
+      if (!this.has(name)) {
+        return null;
+      }
+
+      var tweenTasks = this.get(name).tweens;
+      var tweenTask = tweenTasks[property];
+      return tweenTask ? tweenTask : null;
     }
   };
 

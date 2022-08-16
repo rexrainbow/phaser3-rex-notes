@@ -4,8 +4,8 @@ import EscapeRegex from '../../../utils/string/EscapeRegex.js';
 import DefaultValueConverter from '../../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
-const DefaultTagExpression = `[a-z0-9-_.]+`;
-const DefaultValueExpression = `[ #a-z-_.0-9,|&]+`;
+const DefaultTagExpression = `[!$a-z0-9-_.]+`;
+const DefaultValueExpression = `[ !$a-z0-9-_.#,|&]+`;
 const BypassValueConverter = function (s) { return s; }
 
 class BracketParser {
@@ -155,7 +155,7 @@ class BracketParser {
             var match = regexResult[0];
             var matchEnd = this.reSplit.lastIndex;
             var matchStart = matchEnd - match.length;
-            
+
             // Process content between previous tag and current tag            
             if (this.progressIndex < matchStart) {
                 this.onContent(text.substring(this.progressIndex, matchStart));
@@ -172,7 +172,7 @@ class BracketParser {
             } else {
                 this.onTagStart(match);
             }
-            
+
             this.progressIndex = matchEnd;
             // Might pause here
             if (this.isPaused) {

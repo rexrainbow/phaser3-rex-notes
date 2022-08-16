@@ -78,8 +78,8 @@ var parser = scene.plugins.get('rexBracketParser').add({
     // delimiters: '<>', // or ['<', '>']
     // valueConvert: true,
     // regex : {
-    //     tag: '[a-z0-9-_.]+',
-    //     value: '[ #a-z-_.0-9,|&]+'
+    //     tag: '[!$a-z0-9-_.]+',
+    //     value: '[ !$a-z0-9-_.#,|&]+'
     // },
 });
 ```
@@ -97,8 +97,8 @@ var parser = scene.plugins.get('rexBracketParser').add({
         }
         ```
 - `regex` :
-    - `regex.tag` : Expression of parse tag. Default value is `'[a-z0-9-_.]+'`.
-    - `regex.value` : Expression of parse value. Default value is `'[ #a-z-_.0-9,|&]+'`.
+    - `regex.tag` : Expression of parse tag. Default value is `'[!$a-z0-9-_.]+'`.
+    - `regex.value` : Expression of parse value. Default value is `'[ !$a-z0-9-_.#,|&]+'`.
 
 #### Tag and content
 

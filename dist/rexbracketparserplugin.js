@@ -330,8 +330,8 @@
     return values;
   };
 
-  var DefaultTagExpression = "[a-z0-9-_.]+";
-  var DefaultValueExpression = "[ #a-z-_.0-9,|&]+";
+  var DefaultTagExpression = "[!$a-z0-9-_.]+";
+  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
 
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
