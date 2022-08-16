@@ -27,6 +27,9 @@ declare class BlitterBase extends Phaser.GameObjects.GameObject {
         frame?: string | number | undefined,
     ): this;
 
+    resize(width: number, height: number): this;
+    setSize(width: number, height: number): this;
+
     addChild(
         bob: BobBase
     ): this;
@@ -52,7 +55,7 @@ declare class BlitterBase extends Phaser.GameObjects.GameObject {
     tint: number;
     tintFill: boolean;
 
-    // Components    
+    // Components
     clearAlpha(): this;
     setAlpha(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
     alpha: number;
@@ -64,11 +67,11 @@ declare class BlitterBase extends Phaser.GameObjects.GameObject {
     blendMode: Phaser.BlendModes | string;
     setBlendMode(value: string | Phaser.BlendModes): this;
 
+    width: number;
+    height: number;
     displayWidth: number;
     displayHeight: number;
-    setSize(width: number, height: number): this;
     setDisplaySize(width: number, height: number): this;
-    resize(width: number, height: number): this;
 
     depth: number;
     setDepth(value: number): this;
