@@ -85,6 +85,11 @@ declare class GOManager extends Phaser.Events.EventEmitter {
         ...parameters: any[]
     ): this;
 
+    hasTweenTask(
+        name: string,
+        property: string
+    ): boolean;
+
     getTweenTask(
         name: string,
         property: string

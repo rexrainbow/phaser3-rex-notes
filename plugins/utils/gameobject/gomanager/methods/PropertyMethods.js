@@ -36,13 +36,22 @@ export default {
         return this;
     },
 
-    getTweenTask(name, property) {
-        if (this.has(name)) {
-            var tweenTasks = this.get(name).tweens;
-            if (tweenTasks.hasOwnProperty(property)) {
-                return tweenTasks[property];
-            }
+    hasTweenTask(name, property) {
+        if (!this.has(name)) {
+            return false;
         }
-        return null;
+
+        var tweenTasks = this.get(name).tweens;
+        return tweenTasks.hasOwnProperty(property);
+    },
+
+    getTweenTask(name, property) {
+        if (!this.has(name)) {
+            return null;
+        }
+
+        var tweenTasks = this.get(name).tweens;
+        var tweenTask = tweenTasks[property];
+        return (tweenTask) ? tweenTask : null;
     }
 }
