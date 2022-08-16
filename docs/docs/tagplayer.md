@@ -122,6 +122,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     - `sprites.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
         - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+    - `false`, `null` : No sprite manager
 - `texts` : Configuration of texts.
     - `texts.createCallback` : 
         - `undefined`, or `'text'` : Create text game object. Default behavior.
@@ -135,6 +136,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     - `texts.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
         - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+    - `false`, `null` : No text manager
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
@@ -178,6 +180,26 @@ tagPlayer.playPromise(commands)
         // Typing content complete
     })
 ```
+
+### Pause
+
+- Pause
+    ```javascript
+    tagPlayer.pause();
+    ```
+- Pause until event
+    ```javascript
+    tagPlayer.pauseUntilEvent(eventEmitter, eventName);
+    ```
+
+Invoke this method during tag-start,tag-end, or content events to suspend parsing.
+
+### Resume
+
+```javascript
+tagPlayer.resume();
+```
+
 
 #### Time scale
 

@@ -47,17 +47,20 @@ class Demo extends Phaser.Scene {
 [char.A.x=0][char.A.x.to=300,1000]
 [char.A.y=0][char.A.y.to=300,1000]
 
-[char.B][char.B.flipX=true][char.B.play=idle]
+[char.B][char.B.toggleFlipX][char.B.play=idle]
 [char.B.x=800][char.B.x.to=500,1000]
 [char.B.y=600][char.B.y.to=300,1000]
 
 [wait=1000]
 
 // Main
-[char.A.talk]Hello
+[char.A.talk=false]Hello
 [char.B.talk]World
 
+[wait=500]
+
 // Postlude
+[/char]
 
 `
 
@@ -70,7 +73,7 @@ class Demo extends Phaser.Scene {
                 createGameObject: CreateGameObject
             })
             .playPromise(content)
-            .then(function(){
+            .then(function () {
                 console.log('TagPlayer: Complete')
             })
     }
@@ -206,6 +209,16 @@ class MySprite extends RexPlugins.UI.Container {
     setflip(x, y) {
         this.flipX = x;
         this.flipY = y;
+        return this;
+    }
+
+    toggleFlipX() {
+        this.flipX = !this.flipX;
+        return this;
+    }
+
+    toggleFlipY() {
+        this.flipY = !this.flipY;
         return this;
     }
 

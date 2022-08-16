@@ -6,5 +6,6 @@ export default {
 
     pauseUntilEvent(eventEmitter, eventName) {
         this.parser.pauseUntilEvent(eventEmitter, eventName);
+        return this;
     }
 };

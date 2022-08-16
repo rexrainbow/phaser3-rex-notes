@@ -2,10 +2,9 @@ import GameObjectManagerMethods from './gameobjectmanager/GameObjectManagerMetho
 import SetClickTarget from './SetClickTarget.js';
 import SetTargetCamera from './SetTargetCamera.js';
 import SetSkipSoundEffect from './SetSkipSoundEffect.js';
-import Play from './Play.js';
-import PlayPromise from './PlayPromise.js';
+import PlayMethods from './PlayMethods.js';
 import PauseMethods from './PauseMethods.js';
-import Resume from './Resume.js';
+import ResumeMethods from './ResumeMethods.js';
 import Wait from './Wait.js';
 import SpriteMethods from './SpriteMethods.js';
 import TextMethods from './TextMethods.js';
@@ -15,15 +14,14 @@ var Methods = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setSkipSoundEffect: SetSkipSoundEffect,
-    play: Play,
-    playPromise: PlayPromise,
-    resume: Resume,
     wait: Wait,
 }
 
 Object.assign(
     Methods,
+    PlayMethods,
     PauseMethods,
+    ResumeMethods,
     GameObjectManagerMethods,
     SpriteMethods,
     TextMethods,

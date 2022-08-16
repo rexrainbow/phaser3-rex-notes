@@ -5651,7 +5651,21 @@
     Execute commands
   </a>
   
-    <nav class="md-nav" aria-label="Execute commands">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    Resume
+  </a>
+  
+    <nav class="md-nav" aria-label="Resume">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -8597,7 +8611,21 @@
     Execute commands
   </a>
   
-    <nav class="md-nav" aria-label="Execute commands">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    Resume
+  </a>
+  
+    <nav class="md-nav" aria-label="Resume">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -8826,6 +8854,7 @@
 <li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
 </ul>
 </li>
+<li><code>false</code>, <code>null</code> : No sprite manager</li>
 </ul>
 </li>
 <li><code>texts</code> : Configuration of texts.<ul>
@@ -8846,6 +8875,7 @@
 <li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
 </ul>
 </li>
+<li><code>false</code>, <code>null</code> : No text manager</li>
 </ul>
 </li>
 <li><code>sounds</code> : Configuration of sound effect, or background music.<ul>
@@ -8893,6 +8923,19 @@
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// Typing content complete</span>
     <span class="p">})</span>
+</code></pre></div>
+<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pause
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Pause until event
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">pauseUntilEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<p>Invoke this method during tag-start,tag-end, or content events to suspend parsing.</p>
+<h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
 <h4 id="time-scale">Time scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h4>
 <p>Time scale of typing, typing animation, sprite animation and easing of sprite's properties.</p>

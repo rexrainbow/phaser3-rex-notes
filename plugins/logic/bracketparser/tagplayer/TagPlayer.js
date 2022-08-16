@@ -30,12 +30,12 @@ class TagPlayer extends EventEmitter {
         this.gameObjectManagers = {};
 
         var spriteManagerConfig = GetValue(config, 'sprites');
-        if (spriteManagerConfig !== false) {
+        if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
             AddSpriteManager.call(this, spriteManagerConfig);
         }
 
         var textManagerConfig = GetValue(config, 'texts');
-        if (textManagerConfig !== false) {
+        if ((textManagerConfig !== false) && (textManagerConfig !== null)) {
             AddTextManager.call(this, textManagerConfig);
         }
 

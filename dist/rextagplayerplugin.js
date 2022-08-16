@@ -2816,7 +2816,10 @@
       },
       set: function set(value) {
         value = Math.floor(value) & 0xffffff;
-        gameObject.setTint(value);
+
+        if (gameObject.setTint) {
+          gameObject.setTint(value);
+        }
 
         if (tintRGB !== value) {
           tintRGB = value;
@@ -4543,11 +4546,6 @@
     return this;
   };
 
-  var Play = function Play(content) {
-    this.parser.start(content);
-    return this;
-  };
-
   var WaitEvent = function WaitEvent(eventEmitter, eventName) {
     return new Promise(function (resolve, reject) {
       eventEmitter.once(eventName, function () {
@@ -4560,10 +4558,16 @@
     return WaitEvent(eventEmitter, 'complete');
   };
 
-  var PlayPromise = function PlayPromise(content) {
-    var promise = WaitComplete(this);
-    this.play(content);
-    return promise;
+  var PlayMethods = {
+    play: function play(content) {
+      this.parser.start(content);
+      return this;
+    },
+    playPromise: function playPromise(content) {
+      var promise = WaitComplete(this);
+      this.play(content);
+      return promise;
+    }
   };
 
   var PauseMethods = {
@@ -4573,12 +4577,15 @@
     },
     pauseUntilEvent: function pauseUntilEvent(eventEmitter, eventName) {
       this.parser.pauseUntilEvent(eventEmitter, eventName);
+      return this;
     }
   };
 
-  var Resume = function Resume() {
-    this.parser.next();
-    return this;
+  var ResumeMethods = {
+    resume: function resume() {
+      this.parser.next();
+      return this;
+    }
   };
 
   // Internal events
@@ -4889,12 +4896,9 @@
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setSkipSoundEffect: SetSkipSoundEffect,
-    play: Play,
-    playPromise: PlayPromise,
-    resume: Resume,
     wait: Wait
   };
-  Object.assign(Methods, PauseMethods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods);
+  Object.assign(Methods, PlayMethods, PauseMethods, ResumeMethods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(tagPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -4931,13 +4935,13 @@
       _this.gameObjectManagers = {};
       var spriteManagerConfig = GetValue(config, 'sprites');
 
-      if (spriteManagerConfig !== false) {
+      if (spriteManagerConfig !== false && spriteManagerConfig !== null) {
         AddSpriteManager.call(_assertThisInitialized(_this), spriteManagerConfig);
       }
 
       var textManagerConfig = GetValue(config, 'texts');
 
-      if (textManagerConfig !== false) {
+      if (textManagerConfig !== false && textManagerConfig !== null) {
         AddTextManager.call(_assertThisInitialized(_this), textManagerConfig);
       }
 

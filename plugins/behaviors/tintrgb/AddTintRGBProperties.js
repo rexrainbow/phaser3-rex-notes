@@ -22,7 +22,9 @@ var AddTintRGBProperties = function (gameObject, tintRGB) {
         },
         set: function (value) {
             value = Math.floor(value) & 0xffffff;
-            gameObject.setTint(value);
+            if (gameObject.setTint) {
+                gameObject.setTint(value);
+            }
             if (tintRGB !== value) {
                 tintRGB = value;
                 tintR = GetR(tintRGB);
