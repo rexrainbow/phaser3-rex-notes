@@ -44,8 +44,8 @@ class Demo extends Phaser.Scene {
         var content = `
 // Prelude
 [char.A][char.A.play=idle]
-[char.A.x=0][char.A.x.to=300,1000]
-[char.A.y=0][char.A.y.to=300,1000]
+[char.A.x=300][char.A.x.fromLeft=300,1000]
+[char.A.y=300][char.A.y.fromUp=300,1000]
 
 [char.B][char.B.toggleFlipX][char.B.play=idle]
 [char.B.x=800][char.B.x.to=500,1000]
@@ -56,6 +56,15 @@ class Demo extends Phaser.Scene {
 // Main
 [char.A.talk=false]Hello
 [char.B.talk]World
+
+[wait=1000]
+
+[char.A.x.toLeft=100,1000]
+[char.B.x.toRight=100,1000]
+[wait=1000]
+
+[char.A.talk=false]Good
+[char.B.talk]Bye
 
 [wait=500]
 
