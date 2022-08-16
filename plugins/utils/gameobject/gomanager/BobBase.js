@@ -19,10 +19,14 @@ class BobBase {
     }
 
     freeTweens() {
-        var tweenTasks = this.tweens;
+        var tweenTasks = this.tweens,
+            tweenTask;
         for (var propName in tweenTasks) {
-            tweenTasks[propName].remove();
-            delete tweenTasks[propName];
+            tweenTask = tweenTasks[propName];
+            if (tweenTask) {
+                tweenTask.remove();
+            }
+            tweenTasks[propName] = null;
         }
         return this;
     }
@@ -51,6 +55,10 @@ class BobBase {
         }
     }
 
+    getProperty(property) {
+        return this.gameObject[property];
+    }
+
     setProperty(property, value) {
         this.gameObject[property] = value;
         return this;
@@ -58,8 +66,9 @@ class BobBase {
 
     easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete) {
         var tweenTasks = this.tweens;
-        if (tweenTasks.hasOwnProperty(property)) {
-            tweenTasks[property].remove();
+        var tweenTask = tweenTasks[property];
+        if (tweenTask) {
+            tweenTask.remove();
         }
 
         var gameObject = this.gameObject;
@@ -71,7 +80,7 @@ class BobBase {
             yoyo: isYoyo,
             onComplete: function () {
                 tweenTasks[property].remove();
-                delete tweenTasks[property];
+                tweenTasks[property] = null;
                 if (onComplete) {
                     onComplete(gameObject, property);
                 }
@@ -80,9 +89,9 @@ class BobBase {
         }
         config[property] = value;
 
-        var tween = this.scene.tweens.add(config);
-        tween.timeScale = this.timeScale;
-        tweenTasks[property] = tween;
+        tweenTask = this.scene.tweens.add(config);
+        tweenTask.timeScale = this.timeScale;
+        tweenTasks[property] = tweenTask;
         return this;
     }
 

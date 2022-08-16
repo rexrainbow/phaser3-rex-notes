@@ -6,6 +6,13 @@ export default {
         return this.get(name).hasProperty(property);
     },
 
+    getProperty(name, property) {
+        if (!this.has(name)) {
+            return undefined;
+        }
+        return this.get(name).getProperty(property);
+    },
+
     setProperty(name, property, value) {
         if (!this.has(name)) {
             return this;
