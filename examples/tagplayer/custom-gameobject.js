@@ -51,7 +51,7 @@ class Demo extends Phaser.Scene {
 [char.B.x=800][char.B.x.to=500,1000]
 [char.B.y=600][char.B.y.to=300,1000]
 
-[wait=1000]
+[wait=1200]
 
 // Main
 [char.A.talk=false]Hello
@@ -60,7 +60,7 @@ class Demo extends Phaser.Scene {
 [wait=500]
 
 // Postlude
-[/char]
+[/char][wait=char]
 
 `
 
