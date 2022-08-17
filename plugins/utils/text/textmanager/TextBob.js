@@ -1,4 +1,4 @@
-import BobBase from '../../gameobject/gomanager/BobBase.js';
+import BobBase from '../../gameobject/gomanager/bobbase/BobBase.js';
 import TextTyping from '../../../behaviors/texttyping/TextTyping.js';
 
 class TextBob extends BobBase {

@@ -1,4 +1,4 @@
-import BobBase from '../../gameobject/gomanager/BobBase.js';
+import BobBase from '../../gameobject/gomanager/bobbase/BobBase.js';
 
 class SpriteBob extends BobBase {
     playAnimation(key) {

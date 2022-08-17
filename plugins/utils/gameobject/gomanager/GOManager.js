@@ -1,5 +1,5 @@
 import EventEmitterMethods from '../../eventemitter/EventEmitterMethods.js';
-import BobBase from './BobBase.js';
+import BobBase from './bobbase/BobBase.js';
 import IsEmpty from '../../object/IsEmpty.js';
 import Methods from './methods/Methods.js';
 

@@ -54,7 +54,7 @@ class Demo extends Phaser.Scene {
 [wait=1200]
 
 // Main
-[char.A.talk=false]Hello
+[char.A.talk=0,false]Hello
 [char.B.talk]World
 
 [wait=1000]

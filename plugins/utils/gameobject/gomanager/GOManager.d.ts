@@ -1,4 +1,4 @@
-import BobBase from './BobBase';
+import BobBase from './bobbase/BobBase';
 
 export default GOManager;
 
