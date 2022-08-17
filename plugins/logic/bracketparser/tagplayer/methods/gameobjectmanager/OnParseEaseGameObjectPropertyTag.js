@@ -1,5 +1,5 @@
 var EaseMode = {
-    to: true, yoyo: true,
+    to: true, yoyo: true, from: true,
     toLeft: true, toRight: true, toUp: true, toDown: true,
     yoyoLeft: true, yoyoRight: true, yoyoUp: true, yoyoDown: true,
     fromLeft: true, fromRight: true, fromUp: true, fromDown: true,
@@ -57,6 +57,9 @@ var OnParseEaseGameObjectPropertyTag = function (tagPlayer, parser, config) {
                     gameObjectManager.setProperty(name, property, (currentValue + value));
                     value = currentValue;
                 }
+            } else if (easeMode === 'from') {
+                gameObjectManager.setProperty(name, property, value);
+                value = currentValue;
             }
 
             var isYoyo = easeMode.startsWith('yoyo');
