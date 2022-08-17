@@ -4450,6 +4450,7 @@
   var EaseMode = {
     to: true,
     yoyo: true,
+    from: true,
     toLeft: true,
     toRight: true,
     toUp: true,
@@ -4517,6 +4518,9 @@
           gameObjectManager.setProperty(name, property, currentValue + value);
           value = currentValue;
         }
+      } else if (easeMode === 'from') {
+        gameObjectManager.setProperty(name, property, value);
+        value = currentValue;
       }
 
       var isYoyo = easeMode.startsWith('yoyo');

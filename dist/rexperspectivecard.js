@@ -501,7 +501,7 @@
     }
   };
 
-  var GetValue$F = Phaser.Utils.Objects.GetValue;
+  var GetValue$G = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base$1.prototype.add;
 
   var Add$1 = function Add(gameObject, config) {
@@ -547,10 +547,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$F(config, 'syncPosition', true);
-    state.syncRotation = GetValue$F(config, 'syncRotation', true);
-    state.syncScale = GetValue$F(config, 'syncScale', true);
-    state.syncAlpha = GetValue$F(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$G(config, 'syncPosition', true);
+    state.syncRotation = GetValue$G(config, 'syncRotation', true);
+    state.syncScale = GetValue$G(config, 'syncScale', true);
+    state.syncAlpha = GetValue$G(config, 'syncAlpha', true);
   };
 
   var AddChild$1 = {
@@ -1889,7 +1889,7 @@
     return out;
   };
 
-  var GetValue$E = Phaser.Utils.Objects.GetValue;
+  var GetValue$F = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -1898,13 +1898,13 @@
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-    var x = GetValue$E(config, 'x', undefined);
-    var y = GetValue$E(config, 'y', undefined);
-    var width = GetValue$E(config, 'width', undefined);
-    var height = GetValue$E(config, 'height', undefined);
-    var originX = GetValue$E(config, 'originX', 0);
-    var originY = GetValue$E(config, 'originY', 0);
-    var padding = GetValue$E(config, 'padding', 0);
+    var x = GetValue$F(config, 'x', undefined);
+    var y = GetValue$F(config, 'y', undefined);
+    var width = GetValue$F(config, 'width', undefined);
+    var height = GetValue$F(config, 'height', undefined);
+    var originX = GetValue$F(config, 'originX', 0);
+    var originY = GetValue$F(config, 'originY', 0);
+    var padding = GetValue$F(config, 'padding', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -2006,6 +2006,53 @@
     }
   };
 
+  var GetValue$E = Phaser.Utils.Objects.GetValue;
+
+  var DrawBounds$1 = function DrawBounds(graphics, config) {
+    var color, drawContainer;
+
+    if (typeof config === 'number') {
+      color = config;
+    } else {
+      color = GetValue$E(config, 'color');
+      drawContainer = GetValue$E(config, 'drawContainer');
+    }
+
+    if (color === undefined) {
+      color = 0xffffff;
+    }
+
+    if (drawContainer === undefined) {
+      drawContainer = true;
+    }
+
+    var children = this.getAllVisibleChildren([this]),
+        child;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      child = children[i];
+
+      if (!drawContainer && child.isRexContainerLite) {
+        continue;
+      }
+
+      if (child.getBounds || child.width !== undefined && child.height !== undefined) {
+        Points[0] = GetTopLeft(child, Points[0]);
+        Points[1] = GetTopRight(child, Points[1]);
+        Points[2] = GetBottomRight(child, Points[2]);
+        Points[3] = GetBottomLeft(child, Points[3]);
+      } else {
+        continue;
+      }
+
+      graphics.lineStyle(1, color).strokePoints(Points, true, true);
+    }
+
+    return this;
+  };
+
+  var Points = [undefined, undefined, undefined, undefined];
+
   var RotateAround$1 = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
@@ -2039,7 +2086,8 @@
   };
 
   var methods$3 = {
-    changeOrigin: ChangeOrigin
+    changeOrigin: ChangeOrigin,
+    drawBounds: DrawBounds$1
   };
   Object.assign(methods$3, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer, RenderTexture$1);
 
@@ -2374,7 +2422,7 @@
   };
 
   var ALIGN = Phaser.Display.Align;
-  var ALIGNMODE = {
+  var AlignConst = {
     center: ALIGN.CENTER,
     left: ALIGN.LEFT_CENTER,
     right: ALIGN.RIGHT_CENTER,
@@ -2752,7 +2800,7 @@
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$D(config, 'color', 0xffffff);
+      color = GetValue$D(config, 'color');
       var nameTextConfig = GetValue$D(config, 'name', false);
 
       if (nameTextConfig) {
@@ -2761,9 +2809,13 @@
         textAlign = GetValue$D(nameTextConfig, 'align', 'left-top');
 
         if (typeof textAlign === 'string') {
-          textAlign = ALIGNMODE[textAlign];
+          textAlign = AlignConst[textAlign];
         }
       }
+    }
+
+    if (color === undefined) {
+      color = 0xffffff;
     }
 
     if (createTextCallback && !graphics.children) {
@@ -9817,7 +9869,7 @@
     }
 
     if (typeof align === 'string') {
-      align = ALIGNMODE[align];
+      align = AlignConst[align];
     }
 
     if (align === undefined) {

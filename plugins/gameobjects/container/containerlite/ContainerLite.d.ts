@@ -310,4 +310,17 @@ declare class ContainerLite extends Base {
         originX: number,
         originY: number
     ): this;
+
+    drawBounds(
+        graphics: Phaser.GameObjects.Graphics,
+        color?: number
+    ): this;
+
+    drawBounds(
+        graphics: Phaser.GameObjects.Graphics,
+        config?: {
+            color?: number,
+        }
+    ): this;
+
 }

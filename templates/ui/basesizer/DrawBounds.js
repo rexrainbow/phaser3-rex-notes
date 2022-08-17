@@ -13,7 +13,7 @@ var DrawBounds = function (graphics, config) {
     if (typeof (config) === 'number') {
         color = config;
     } else {
-        color = GetValue(config, 'color', 0xffffff);
+        color = GetValue(config, 'color');
         var nameTextConfig = GetValue(config, 'name', false);
         if (nameTextConfig) {
             createTextCallback = GetValue(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
@@ -23,6 +23,10 @@ var DrawBounds = function (graphics, config) {
                 textAlign = ALIGNMODE[textAlign];
             }
         }
+    }
+
+    if (color === undefined) {
+        color = 0xffffff;
     }
 
     if (createTextCallback && !graphics.children) {

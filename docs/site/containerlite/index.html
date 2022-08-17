@@ -2536,6 +2536,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#draw-bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-factor" class="md-nav__link">
     Scroll factor
   </a>
@@ -8962,6 +8969,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#draw-bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-factor" class="md-nav__link">
     Scroll factor
   </a>
@@ -9514,6 +9528,28 @@ Current children and new children will draw on this layer, instead of display li
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>saveTexture</code> : <a href="../rendertexture/#save-texture">Save render result to texture manager</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Draw bounds of shown game object on a graphics game object
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
+<span class="c1">// container.drawBounds(graphics, color);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// color: 0xffffff,</span>
+    <span class="c1">// drawContainer: true</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
+<li><code>drawContainer</code> : <ul>
+<li><code>true</code> : Draw all children game objects included containerLite. Default behavior.</li>
+<li><code>false</code> : Draw all children game objects excluded containerLite</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

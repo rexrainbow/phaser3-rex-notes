@@ -599,6 +599,26 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
     ```
     - `saveTexture` : [Save render result to texture manager](rendertexture.md#save-texture).
 
+### Draw bounds
+
+- Draw bounds of shown game object on a graphics game object
+    ```javascript
+    container.drawBounds(graphics);
+    // container.drawBounds(graphics, color);
+    ```
+    or
+    ```javascript
+    container.drawBounds(graphics, {
+        // color: 0xffffff,
+        // drawContainer: true
+    });
+    ```
+    - `graphics` : [Graphics game object](graphics.md)
+    - `color` : Default value is `0xffffff`
+    - `drawContainer` : 
+        - `true` : Draw all children game objects included containerLite. Default behavior.
+        - `false` : Draw all children game objects excluded containerLite
+
 ### Scroll factor
 
 - Set scroll factor to children

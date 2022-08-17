@@ -292,7 +292,7 @@
 
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$f = Phaser.Utils.Objects.GetValue;
+  var GetValue$g = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
   var DegToRad$6 = Phaser.Math.DegToRad;
@@ -311,10 +311,10 @@
 
       if (IsPlainObject$6(x)) {
         config = x;
-        x = GetValue$f(config, 'x', 0);
-        y = GetValue$f(config, 'y', 0);
-        key = GetValue$f(config, 'key', null);
-        frame = GetValue$f(config, 'frame', null);
+        x = GetValue$g(config, 'x', 0);
+        y = GetValue$g(config, 'y', 0);
+        key = GetValue$g(config, 'key', null);
+        frame = GetValue$g(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
@@ -326,9 +326,9 @@
 
       _this.panZ(PanZ);
 
-      _this.hideCCW = GetValue$f(config, 'hideCCW', true);
-      var gridWidth = GetValue$f(config, 'gridWidth', 32);
-      var gridHeight = GetValue$f(config, 'gridHeight', gridWidth);
+      _this.hideCCW = GetValue$g(config, 'hideCCW', true);
+      var gridWidth = GetValue$g(config, 'gridWidth', 32);
+      var gridHeight = GetValue$g(config, 'gridHeight', gridWidth);
 
       _this.resetVerts(gridWidth, gridHeight);
 
@@ -830,7 +830,7 @@
     return gameObjects;
   };
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -839,13 +839,13 @@
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-    var x = GetValue$e(config, 'x', undefined);
-    var y = GetValue$e(config, 'y', undefined);
-    var width = GetValue$e(config, 'width', undefined);
-    var height = GetValue$e(config, 'height', undefined);
-    var originX = GetValue$e(config, 'originX', 0);
-    var originY = GetValue$e(config, 'originY', 0);
-    var padding = GetValue$e(config, 'padding', 0);
+    var x = GetValue$f(config, 'x', undefined);
+    var y = GetValue$f(config, 'y', undefined);
+    var width = GetValue$f(config, 'width', undefined);
+    var height = GetValue$f(config, 'height', undefined);
+    var originX = GetValue$f(config, 'originX', 0);
+    var originY = GetValue$f(config, 'originY', 0);
+    var padding = GetValue$f(config, 'padding', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -913,7 +913,7 @@
 
   var RT = Phaser.GameObjects.RenderTexture;
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
 
   var RenderTexture$1 = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
@@ -927,10 +927,10 @@
 
       if (IsPlainObject$5(x)) {
         config = x;
-        x = GetValue$d(config, 'x', 0);
-        y = GetValue$d(config, 'y', 0);
-        width = GetValue$d(config, 'width', 32);
-        height = GetValue$d(config, 'height', 32);
+        x = GetValue$e(config, 'x', 0);
+        y = GetValue$e(config, 'y', 0);
+        width = GetValue$e(config, 'width', 32);
+        height = GetValue$e(config, 'height', 32);
       } // render-texture -> perspective-image
 
 
@@ -999,7 +999,7 @@
 
   var AnimationState = Phaser.Animations.AnimationState;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
 
   var Sprite = /*#__PURE__*/function (_PerspectiveImage) {
     _inherits(Sprite, _PerspectiveImage);
@@ -1013,10 +1013,10 @@
 
       if (IsPlainObject$4(x)) {
         config = x;
-        x = GetValue$c(config, 'x', 0);
-        y = GetValue$c(config, 'y', 0);
-        key = GetValue$c(config, 'key', null);
-        frame = GetValue$c(config, 'frame', null);
+        x = GetValue$d(config, 'x', 0);
+        y = GetValue$d(config, 'y', 0);
+        key = GetValue$d(config, 'key', null);
+        frame = GetValue$d(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame, config);
@@ -1370,7 +1370,7 @@
     }
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
 
   var Add = function Add(gameObject, config) {
@@ -1416,10 +1416,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$b(config, 'syncPosition', true);
-    state.syncRotation = GetValue$b(config, 'syncRotation', true);
-    state.syncScale = GetValue$b(config, 'syncScale', true);
-    state.syncAlpha = GetValue$b(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$c(config, 'syncPosition', true);
+    state.syncRotation = GetValue$c(config, 'syncRotation', true);
+    state.syncScale = GetValue$c(config, 'syncScale', true);
+    state.syncAlpha = GetValue$c(config, 'syncAlpha', true);
   };
 
   var AddChild = {
@@ -2501,6 +2501,53 @@
     }
   };
 
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
+
+  var DrawBounds = function DrawBounds(graphics, config) {
+    var color, drawContainer;
+
+    if (typeof config === 'number') {
+      color = config;
+    } else {
+      color = GetValue$b(config, 'color');
+      drawContainer = GetValue$b(config, 'drawContainer');
+    }
+
+    if (color === undefined) {
+      color = 0xffffff;
+    }
+
+    if (drawContainer === undefined) {
+      drawContainer = true;
+    }
+
+    var children = this.getAllVisibleChildren([this]),
+        child;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      child = children[i];
+
+      if (!drawContainer && child.isRexContainerLite) {
+        continue;
+      }
+
+      if (child.getBounds || child.width !== undefined && child.height !== undefined) {
+        Points[0] = GetTopLeft(child, Points[0]);
+        Points[1] = GetTopRight(child, Points[1]);
+        Points[2] = GetBottomRight(child, Points[2]);
+        Points[3] = GetBottomLeft(child, Points[3]);
+      } else {
+        continue;
+      }
+
+      graphics.lineStyle(1, color).strokePoints(Points, true, true);
+    }
+
+    return this;
+  };
+
+  var Points = [undefined, undefined, undefined, undefined];
+
   var RotateAround = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
@@ -2534,7 +2581,8 @@
   };
 
   var methods = {
-    changeOrigin: ChangeOrigin
+    changeOrigin: ChangeOrigin,
+    drawBounds: DrawBounds
   };
   Object.assign(methods, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer, RenderTexture);
 

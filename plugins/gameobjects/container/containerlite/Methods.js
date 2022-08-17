@@ -18,10 +18,12 @@ import AddToContainer from './AddToContainer.js';
 import Layer from './Layer.js';
 import RenderTexture from './RenderTexture.js';
 
+import DrawBounds from './DrawBounds.js';
 import ChangeOrigin from './ChangeOrigin.js';
 
 var methods = {
     changeOrigin: ChangeOrigin,
+    drawBounds: DrawBounds,
 };
 
 Object.assign(

@@ -58,14 +58,7 @@ class Demo extends Phaser.Scene {
             scene.containerLite.toggleFlipY();
         });
 
-        this.lines = this.add.graphics()
-            .setDefaultStyles({
-                lineStyle: {
-                    width: 2,
-                    color: 0x00ffff,
-                    alpha: 1
-                }
-            });
+        this.debugGraphics = this.add.graphics();
         this.update();
 
         var allChildren = this.containerLite.getAllChildren();
@@ -76,8 +69,9 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        this.lines.clear();
+        this.debugGraphics.clear();
         this.lineParentToChildren(this.containerLite);
+        this.containerLite.drawBounds(this.debugGraphics, 0xff0000);
     }
 
     lineParentToChildren(parent) {
@@ -85,7 +79,9 @@ class Demo extends Phaser.Scene {
             child;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            this.lines.lineBetween(parent.x, parent.y, child.x, child.y);
+            this.debugGraphics
+                .lineStyle(2, 0x00ffff)
+                .lineBetween(parent.x, parent.y, child.x, child.y);
             if (child.children) {
                 this.lineParentToChildren(child);
             }

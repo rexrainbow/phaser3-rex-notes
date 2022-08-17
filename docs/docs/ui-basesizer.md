@@ -896,7 +896,8 @@ sizer.pin(gameObject);
 
 - Draw bounds of shown game object on a graphics game object
     ```javascript
-    sizer.drawBounds(graphics, color);
+    sizer.drawBounds(graphics);
+    // sizer.drawBounds(graphics, color);
     ```
     - `graphics` : [Graphics game object](graphics.md)
     - `color` : Default value is `0xffffff`
