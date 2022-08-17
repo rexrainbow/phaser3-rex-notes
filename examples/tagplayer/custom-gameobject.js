@@ -201,7 +201,7 @@ var CreateSpeechBubbleShape = function (scene) {
 }
 
 const IsTyping = false;
-class MySprite extends RexPlugins.UI.Container {
+class MySpriteBase extends RexPlugins.UI.Container {
     constructor(scene, key, frame) {
         var sprite = scene.add.sprite(0, 0, key, frame);
         var text = CreateTextBox(scene, 100).setPosition(0, -(sprite.height / 2)).setVisible(false);
@@ -245,29 +245,16 @@ class MySprite extends RexPlugins.UI.Container {
         return this;
     }
 
-    talk(speed, waitTyping) {
-        if (typeof (speed) === 'boolean') {
-            waitTyping = speed;
-            speed = undefined;
-        }
-        if (waitTyping === undefined) {
-            waitTyping = true;
-        }
-
+    talk(speed) {
         var textBox = this.text;
         textBox.setVisible(true);
         if (speed !== undefined) {
             textBox.setTypeSpeed(speed);
         }
-        this.waitTyping = waitTyping;
-        this.tagPlayer.setContentCallback(this.typing, this);
         return this;
     }
 
     typing(content) {
-        if (this.waitTyping) {
-            this.tagPlayer.pauseUntilEvent(this.text, 'complete');
-        }
         this.setData('typing', IsTyping);
         this.text
             .once('complete', function () {
@@ -277,6 +264,34 @@ class MySprite extends RexPlugins.UI.Container {
         return this;
     }
 }
+
+class MySprite extends MySpriteBase {
+    talk(speed, waitTyping) {
+        if (typeof (speed) === 'boolean') {
+            waitTyping = speed;
+            speed = undefined;
+        }
+        if (waitTyping === undefined) {
+            waitTyping = true;
+        }
+
+        super.talk(speed);
+
+        this.waitTyping = waitTyping;
+        this.tagPlayer.setContentCallback(this.typing, this);
+        return this;
+    }
+
+    typing(content) {
+        if (this.waitTyping) {
+            this.tagPlayer.pauseUntilEvent(this.text, 'complete');
+        }
+        super.typing(content);
+        return this;
+    }
+}
+
+
 
 var CreateGameObject = function (scene, key, frame) {
     var sprite = new MySprite(scene, key, frame);
