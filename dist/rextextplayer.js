@@ -757,7 +757,7 @@
     return obj;
   };
 
-  var DataMethods = {
+  var DataMethods$2 = {
     enableData: function enableData() {
       if (this.data === undefined) {
         this.data = {};
@@ -896,7 +896,7 @@
     return Base;
   }();
 
-  Object.assign(Base.prototype, DataMethods);
+  Object.assign(Base.prototype, DataMethods$2);
 
   var DegToRad$2 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
@@ -3915,6 +3915,7 @@
         this.lastTagEnd = null;
         this.lastContent = null;
         this.justCompleted = false;
+        this.isRunning = false;
         return this;
       }
     }, {
@@ -3933,9 +3934,17 @@
       value: function next() {
         if (this.isPaused) {
           this.onResume();
+        } // Don't re-enter this method
+
+
+        if (this.isRunning) {
+          return this;
         }
 
+        this.isRunning = true;
+
         if (this.justCompleted) {
+          this.isRunning = false;
           return this;
         }
 
@@ -3961,6 +3970,7 @@
             }
 
             this.onComplete();
+            this.isRunning = false;
             return;
           }
 
@@ -3991,6 +4001,7 @@
           }
         }
 
+        this.isRunning = false;
         return this;
       }
     }, {
@@ -7705,6 +7716,91 @@
     return SoundManager;
   }();
 
+  var PropertyMethods$1 = {
+    hasProperty: function hasProperty(property) {
+      var gameObject = this.gameObject;
+
+      if (gameObject.hasOwnProperty(property)) {
+        return true;
+      } else {
+        var value = gameObject[property];
+        return value !== undefined;
+      }
+    },
+    getProperty: function getProperty(property) {
+      return this.gameObject[property];
+    },
+    setProperty: function setProperty(property, value) {
+      this.gameObject[property] = value;
+      return this;
+    },
+    easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
+      var tweenTasks = this.tweens;
+      var tweenTask = tweenTasks[property];
+
+      if (tweenTask) {
+        tweenTask.remove();
+      }
+
+      var gameObject = this.gameObject;
+      var config = {
+        targets: gameObject,
+        duration: duration,
+        ease: ease,
+        repeat: repeat,
+        yoyo: isYoyo,
+        onComplete: function onComplete() {
+          tweenTasks[property].remove();
+          tweenTasks[property] = null;
+
+          if (_onComplete) {
+            _onComplete(gameObject, property);
+          }
+        },
+        onCompleteScope: this
+      };
+      config[property] = value;
+      tweenTask = this.scene.tweens.add(config);
+      tweenTask.timeScale = this.timeScale;
+      tweenTasks[property] = tweenTask;
+      return this;
+    }
+  };
+
+  var CallMethods$1 = {
+    hasMethod: function hasMethod(methodName) {
+      return typeof this.gameObject[methodName] === 'function';
+    },
+    call: function call(methodName) {
+      if (!this.hasMethod(methodName)) {
+        return this;
+      }
+
+      var gameObject = this.gameObject;
+
+      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        parameters[_key - 1] = arguments[_key];
+      }
+
+      gameObject[methodName].apply(gameObject, parameters);
+      return this;
+    }
+  };
+
+  var DataMethods$1 = {
+    hasData: function hasData(dataKey) {
+      var gameObject = this.gameObject;
+      return gameObject.data ? gameObject.data.has(dataKey) : false;
+    },
+    getData: function getData(dataKey) {
+      return this.gameObject.getData(dataKey);
+    },
+    setData: function setData(dataKey, value) {
+      this.gameObject.setData(dataKey, value);
+      return this;
+    }
+  };
+
   var BobBase = /*#__PURE__*/function () {
     function BobBase(GOManager, gameObject, name) {
       _classCallCheck(this, BobBase);
@@ -7759,65 +7855,10 @@
     }, {
       key: "setGO",
       value: function setGO(gameObject, name) {
-        this.gameObject = gameObject.setName(name);
+        gameObject.setName(name);
+        this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
-        return this;
-      }
-    }, {
-      key: "hasProperty",
-      value: function hasProperty(property) {
-        var gameObject = this.gameObject;
-
-        if (gameObject.hasOwnProperty(property)) {
-          return true;
-        } else {
-          var value = gameObject[property];
-          return value !== undefined;
-        }
-      }
-    }, {
-      key: "getProperty",
-      value: function getProperty(property) {
-        return this.gameObject[property];
-      }
-    }, {
-      key: "setProperty",
-      value: function setProperty(property, value) {
-        this.gameObject[property] = value;
-        return this;
-      }
-    }, {
-      key: "easeProperty",
-      value: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
-        var tweenTasks = this.tweens;
-        var tweenTask = tweenTasks[property];
-
-        if (tweenTask) {
-          tweenTask.remove();
-        }
-
-        var gameObject = this.gameObject;
-        var config = {
-          targets: gameObject,
-          duration: duration,
-          ease: ease,
-          repeat: repeat,
-          yoyo: isYoyo,
-          onComplete: function onComplete() {
-            tweenTasks[property].remove();
-            tweenTasks[property] = null;
-
-            if (_onComplete) {
-              _onComplete(gameObject, property);
-            }
-          },
-          onCompleteScope: this
-        };
-        config[property] = value;
-        tweenTask = this.scene.tweens.add(config);
-        tweenTask.timeScale = this.timeScale;
-        tweenTasks[property] = tweenTask;
         return this;
       }
     }, {
@@ -7831,31 +7872,12 @@
 
         return this;
       }
-    }, {
-      key: "hasMethod",
-      value: function hasMethod(methodName) {
-        return typeof this.gameObject[methodName] === 'function';
-      }
-    }, {
-      key: "call",
-      value: function call(methodName) {
-        if (!this.hasMethod(methodName)) {
-          return this;
-        }
-
-        var gameObject = this.gameObject;
-
-        for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          parameters[_key - 1] = arguments[_key];
-        }
-
-        gameObject[methodName].apply(gameObject, parameters);
-        return this;
-      }
     }]);
 
     return BobBase;
   }();
+
+  Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$1);
 
   var IsEmpty = function IsEmpty(source) {
     for (var k in source) {
@@ -8329,8 +8351,33 @@
     }
   };
 
+  var DataMethods = {
+    hasData: function hasData(name, dataKey) {
+      if (!this.has(name)) {
+        return false;
+      }
+
+      return this.get(name).hasData(dataKey);
+    },
+    getData: function getData(name, dataKey) {
+      if (!this.has(name)) {
+        return undefined;
+      }
+
+      return this.get(name).getData(dataKey);
+    },
+    setData: function setData(name, dataKey, value) {
+      if (!this.has(name)) {
+        return this;
+      }
+
+      this.get(name).setData(dataKey, value);
+      return this;
+    }
+  };
+
   var Methods$2 = {};
-  Object.assign(Methods$2, AddMethods, RemoveMethods, PropertyMethods, CallMethods);
+  Object.assign(Methods$2, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
 

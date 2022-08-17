@@ -54,10 +54,17 @@ class Demo extends Phaser.Scene {
 [wait=1200]
 
 // Main
-[char.A.talk=0,false]Hello
-[char.B.talk]World
+[char.A.talk=false]
+Hello\\n
+Hello\\n
+Hello
 
-[wait=1000]
+[char.B.talk]
+World
+
+[wait=char.A.typing]
+[wait=char.B.typing]
+[wait=200]
 
 [char.A.x.toLeft=100,1000]
 [char.B.x.toRight=100,1000]
@@ -193,6 +200,7 @@ var CreateSpeechBubbleShape = function (scene) {
     })
 }
 
+const IsTyping = false;
 class MySprite extends RexPlugins.UI.Container {
     constructor(scene, key, frame) {
         var sprite = scene.add.sprite(0, 0, key, frame);
@@ -200,6 +208,7 @@ class MySprite extends RexPlugins.UI.Container {
         super(scene, 0, 0, [sprite, text]);
         this.sprite = sprite;
         this.text = text;
+        this.setData('typing', !IsTyping);
     }
 
     get flipX() {
@@ -259,7 +268,12 @@ class MySprite extends RexPlugins.UI.Container {
         if (this.waitTyping) {
             this.tagPlayer.pauseUntilEvent(this.text, 'complete');
         }
-        this.text.start(content);
+        this.setData('typing', IsTyping);
+        this.text
+            .once('complete', function () {
+                this.setData('typing', !IsTyping);
+            }, this)
+            .start(content);
         return this;
     }
 }

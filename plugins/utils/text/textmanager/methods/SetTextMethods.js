@@ -52,12 +52,4 @@ export default {
         this.get(name).setTypingSpeed(speed);
         return this;
     },
-
-    getTypingTask(name) {
-        if (!this.has(name)) {
-            return null;
-        }
-
-        return this.get(name).getTypingTask();
-    }
 }

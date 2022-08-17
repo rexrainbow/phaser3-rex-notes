@@ -1,7 +1,15 @@
 import BobBase from '../../gameobject/gomanager/bobbase/BobBase.js';
 import TextTyping from '../../../behaviors/texttyping/TextTyping.js';
 
+const IsTyping = false;
+
 class TextBob extends BobBase {
+    setGO(gameObject, name) {
+        super.setGO(gameObject, name);
+        gameObject.setData('typing', !IsTyping);
+        return this;
+    }
+
     clearText() {
         this.gameObject.setText('');
         return this;
@@ -41,16 +49,14 @@ class TextBob extends BobBase {
             gameObject.typing.setTypeSpeed(speed);
         }
 
-        gameObject.typing.appendText(text);
-        return this;
-    }
+        gameObject.setData('typing', IsTyping);
+        gameObject.typing
+            .once('complete', function () {
+                gameObject.setData('typing', !IsTyping);
+            })
+            .appendText(text)
 
-    getTypingTask() {
-        var typing = this.gameObject.typing;
-        if (typing && typing.isTyping) {
-            return typing;
-        }
-        return null;
+        return this;
     }
 }
 

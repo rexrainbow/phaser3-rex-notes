@@ -103,6 +103,7 @@ class BracketParser {
         this.lastTagEnd = null;
         this.lastContent = null;
         this.justCompleted = false;
+        this.isRunning = false;
         return this;
     }
 
@@ -124,7 +125,15 @@ class BracketParser {
             this.onResume();
         }
 
+        // Don't re-enter this method
+        if (this.isRunning) {
+            return this;
+        }
+
+        this.isRunning = true;
+
         if (this.justCompleted) {
+            this.isRunning = false;
             return this;
         }
 
@@ -149,6 +158,7 @@ class BracketParser {
                     }
                 }
                 this.onComplete();
+                this.isRunning = false;
                 return;
             }
 
@@ -181,6 +191,7 @@ class BracketParser {
 
         }
 
+        this.isRunning = false;
         return this;
     }
 

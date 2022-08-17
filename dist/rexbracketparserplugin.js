@@ -444,6 +444,7 @@
         this.lastTagEnd = null;
         this.lastContent = null;
         this.justCompleted = false;
+        this.isRunning = false;
         return this;
       }
     }, {
@@ -462,9 +463,17 @@
       value: function next() {
         if (this.isPaused) {
           this.onResume();
+        } // Don't re-enter this method
+
+
+        if (this.isRunning) {
+          return this;
         }
 
+        this.isRunning = true;
+
         if (this.justCompleted) {
+          this.isRunning = false;
           return this;
         }
 
@@ -490,6 +499,7 @@
             }
 
             this.onComplete();
+            this.isRunning = false;
             return;
           }
 
@@ -520,6 +530,7 @@
           }
         }
 
+        this.isRunning = false;
         return this;
       }
     }, {

@@ -43,7 +43,8 @@ class BobBase {
     }
 
     setGO(gameObject, name) {
-        this.gameObject = gameObject.setName(name);
+        gameObject.setName(name);
+        this.gameObject = gameObject;
         this.name = name;
         this.freeTweens();
         return this;

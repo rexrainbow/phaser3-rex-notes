@@ -2,6 +2,7 @@ import AddMethods from './AddMethods.js';
 import RemoveMethods from './RemoveMethods.js';
 import PropertyMethods from './PropertyMethods.js';
 import CallMethods from './CallMethods.js';
+import DataMethods from './DataMethods.js';
 
 var Methods = {}
 Object.assign(
@@ -10,6 +11,7 @@ Object.assign(
     RemoveMethods,
     PropertyMethods,
     CallMethods,
+    DataMethods,
 )
 
 export default Methods;
