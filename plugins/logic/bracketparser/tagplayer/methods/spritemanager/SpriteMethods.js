@@ -1,10 +1,10 @@
 export default {
     getSprite(name) {
-        return this.spriteManager.getGO(name);
+        return this.getGameObject('sprite', name);
     },
 
     addSprite(name, gameObject) {
-        this.spriteManager.addGO(name, gameObject);
+        this.addGameObject('sprite', name, gameObject);
         return this;
     }
 

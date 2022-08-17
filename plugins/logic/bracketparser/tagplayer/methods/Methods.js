@@ -6,8 +6,9 @@ import PlayMethods from './PlayMethods.js';
 import PauseMethods from './PauseMethods.js';
 import ResumeMethods from './ResumeMethods.js';
 import Wait from './Wait.js';
-import SpriteMethods from './SpriteMethods.js';
-import TextMethods from './TextMethods.js';
+import GameObjectMethods from './gameobjectmanager/GameObjectMethods.js';
+import SpriteMethods from './spritemanager/SpriteMethods.js';
+import TextMethods from './textmanager/TextMethods.js';
 import ContentMethods from './ContentMethods.js';
 
 var Methods = {
@@ -23,6 +24,7 @@ Object.assign(
     PauseMethods,
     ResumeMethods,
     GameObjectManagerMethods,
+    GameObjectMethods,
     SpriteMethods,
     TextMethods,
     ContentMethods,
