@@ -8,12 +8,13 @@ const Group = Phaser.GameObjects.Group;
 var DrawBounds = function (graphics, config) {
     var scene = graphics.scene;
 
-    var color;
+    var color, lineWidth;
     var createTextCallback, createTextCallbackScope, textAlign;
     if (typeof (config) === 'number') {
         color = config;
     } else {
         color = GetValue(config, 'color');
+        lineWidth = GetBounds(config, 'lineWidth');
         var nameTextConfig = GetValue(config, 'name', false);
         if (nameTextConfig) {
             createTextCallback = GetValue(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);
@@ -27,6 +28,9 @@ var DrawBounds = function (graphics, config) {
 
     if (color === undefined) {
         color = 0xffffff;
+    }
+    if (lineWidth === undefined) {
+        lineWidth = 1;
     }
 
     if (createTextCallback && !graphics.children) {
@@ -56,7 +60,7 @@ var DrawBounds = function (graphics, config) {
 
         if (color != null) {
             graphics
-                .lineStyle(1, color)
+                .lineStyle(lineWidth, color)
                 .strokeRectShape(GlobRect);
         }
 

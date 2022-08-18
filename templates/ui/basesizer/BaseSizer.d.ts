@@ -135,6 +135,7 @@ declare class BaseSizer extends ContainerLite {
         graphics: Phaser.GameObjects.Graphics,
         config?: {
             color?: number,
+            lineWidth?: number,
             name?: boolean |
             {
                 createTextCallback: (scene: Phaser.Scene) => Phaser.GameObjects.GameObject,

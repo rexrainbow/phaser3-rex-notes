@@ -62,5 +62,17 @@ export default {
         }
 
         return this;
+    },
+
+    forEachGO(callback, scope) {
+        for (var name in this.bobs) {
+            var gameObject = this.bobs[name].gameObject;
+            if (scope) {
+                callback.call(scope, gameObject, name, this);
+            } else {
+                callback(gameObject, name, this);
+            }
+        }
+        return this;
     }
 }

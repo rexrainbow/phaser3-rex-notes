@@ -88,10 +88,19 @@ World
                 name: 'char',
                 createGameObject: CreateGameObject
             })
+
+        tagPlayer
             .playPromise(content)
             .then(function () {
                 console.log('TagPlayer: Complete')
             })
+
+        // Draw bounds of all game objects
+        var debuggerGraphics = this.add.graphics();
+        this.events.on('postupdate', function () {
+            debuggerGraphics.clear();
+            tagPlayer.drawGameObjectsBounds(debuggerGraphics, 0xff0000);
+        })
     }
 
     update() { }

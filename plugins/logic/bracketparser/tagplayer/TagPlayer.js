@@ -61,6 +61,14 @@ class TagPlayer extends EventEmitter {
         return this.getGameObjectManager('text');
     }
 
+    get gameObjectManagerNames() {
+        var names = [];
+        for (var name in this.gameObjectManagers) {
+            names.push(name);
+        }
+        return names;
+    }
+
     destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {

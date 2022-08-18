@@ -320,6 +320,7 @@ declare class ContainerLite extends Base {
         graphics: Phaser.GameObjects.Graphics,
         config?: {
             color?: number,
+            lineWidth?: number,
         }
     ): this;
 

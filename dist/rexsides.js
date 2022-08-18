@@ -513,7 +513,7 @@
     }
   };
 
-  var GetValue$B = Phaser.Utils.Objects.GetValue;
+  var GetValue$C = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base$1.prototype.add;
 
   var Add$1 = function Add(gameObject, config) {
@@ -559,10 +559,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$B(config, 'syncPosition', true);
-    state.syncRotation = GetValue$B(config, 'syncRotation', true);
-    state.syncScale = GetValue$B(config, 'syncScale', true);
-    state.syncAlpha = GetValue$B(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$C(config, 'syncPosition', true);
+    state.syncRotation = GetValue$C(config, 'syncRotation', true);
+    state.syncScale = GetValue$C(config, 'syncScale', true);
+    state.syncAlpha = GetValue$C(config, 'syncAlpha', true);
   };
 
   var AddChild$1 = {
@@ -1901,7 +1901,7 @@
     return out;
   };
 
-  var GetValue$A = Phaser.Utils.Objects.GetValue;
+  var GetValue$B = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -1910,13 +1910,13 @@
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-    var x = GetValue$A(config, 'x', undefined);
-    var y = GetValue$A(config, 'y', undefined);
-    var width = GetValue$A(config, 'width', undefined);
-    var height = GetValue$A(config, 'height', undefined);
-    var originX = GetValue$A(config, 'originX', 0);
-    var originY = GetValue$A(config, 'originY', 0);
-    var padding = GetValue$A(config, 'padding', 0);
+    var x = GetValue$B(config, 'x', undefined);
+    var y = GetValue$B(config, 'y', undefined);
+    var width = GetValue$B(config, 'width', undefined);
+    var height = GetValue$B(config, 'height', undefined);
+    var originX = GetValue$B(config, 'originX', 0);
+    var originY = GetValue$B(config, 'originY', 0);
+    var padding = GetValue$B(config, 'padding', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -2018,52 +2018,59 @@
     }
   };
 
-  var GetValue$z = Phaser.Utils.Objects.GetValue;
+  var GetValue$A = Phaser.Utils.Objects.GetValue;
 
-  var DrawBounds$1 = function DrawBounds(graphics, config) {
-    var color, drawContainer;
+  var DrawBounds$2 = function DrawBounds(gameObject, graphics, config) {
+    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
+
+    if (!canDrawBound) {
+      return;
+    }
+
+    var color, lineWidth;
 
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$z(config, 'color');
-      drawContainer = GetValue$z(config, 'drawContainer');
+      color = GetValue$A(config, 'color');
+      lineWidth = GetValue$A(config, 'lineWidth');
     }
 
     if (color === undefined) {
       color = 0xffffff;
     }
 
-    if (drawContainer === undefined) {
-      drawContainer = true;
+    if (lineWidth === undefined) {
+      lineWidth = 1;
     }
 
-    var children = this.getAllVisibleChildren([this]),
-        child;
+    Points[0] = GetTopLeft(gameObject, Points[0]);
+    Points[1] = GetTopRight(gameObject, Points[1]);
+    Points[2] = GetBottomRight(gameObject, Points[2]);
+    Points[3] = GetBottomLeft(gameObject, Points[3]);
+    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+  };
 
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      child = children[i];
+  var Points = [undefined, undefined, undefined, undefined];
 
-      if (!drawContainer && child.isRexContainerLite) {
+  var GetValue$z = Phaser.Utils.Objects.GetValue;
+
+  var DrawBounds$1 = function DrawBounds(graphics, config) {
+    var drawContainer = GetValue$z(config, 'drawContainer', true);
+    var gameObjects = this.getAllVisibleChildren([this]);
+
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+      var gameObject = gameObjects[i];
+
+      if (!drawContainer && gameObject.isRexContainerLite) {
         continue;
       }
 
-      if (child.getBounds || child.width !== undefined && child.height !== undefined) {
-        Points[0] = GetTopLeft(child, Points[0]);
-        Points[1] = GetTopRight(child, Points[1]);
-        Points[2] = GetBottomRight(child, Points[2]);
-        Points[3] = GetBottomLeft(child, Points[3]);
-      } else {
-        continue;
-      }
-
-      graphics.lineStyle(1, color).strokePoints(Points, true, true);
+      DrawBounds$2(gameObject, graphics, config);
     }
 
     return this;
   };
-
-  var Points = [undefined, undefined, undefined, undefined];
 
   var RotateAround$1 = Phaser.Math.RotateAround;
 
@@ -2806,13 +2813,14 @@
 
   var DrawBounds = function DrawBounds(graphics, config) {
     var scene = graphics.scene;
-    var color;
+    var color, lineWidth;
     var createTextCallback, createTextCallbackScope, textAlign;
 
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$y(config, 'color');
+      lineWidth = GetBounds(config, 'lineWidth');
       var nameTextConfig = GetValue$y(config, 'name', false);
 
       if (nameTextConfig) {
@@ -2828,6 +2836,10 @@
 
     if (color === undefined) {
       color = 0xffffff;
+    }
+
+    if (lineWidth === undefined) {
+      lineWidth = 1;
     }
 
     if (createTextCallback && !graphics.children) {
@@ -2858,7 +2870,7 @@
       }
 
       if (color != null) {
-        graphics.lineStyle(1, color).strokeRectShape(GlobRect);
+        graphics.lineStyle(lineWidth, color).strokeRectShape(GlobRect);
       }
 
       if (child.name && createTextCallback) {

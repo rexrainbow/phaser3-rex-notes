@@ -610,11 +610,13 @@ Apply post-fx pipeline on [layer of containerLite](containerlite.md#layer).
     ```javascript
     container.drawBounds(graphics, {
         // color: 0xffffff,
+        // lineWidth: 1,
         // drawContainer: true
     });
     ```
     - `graphics` : [Graphics game object](graphics.md)
-    - `color` : Default value is `0xffffff`
+    - `color` : Default value is `0xffffff`.
+    - `lineWidth` : Default value is `1`.
     - `drawContainer` : 
         - `true` : Draw all children game objects included containerLite. Default behavior.
         - `false` : Draw all children game objects excluded containerLite

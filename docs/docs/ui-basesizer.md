@@ -905,6 +905,7 @@ sizer.pin(gameObject);
     ```javascript
     sizer.drawBounds(graphics, {
         // color: 0xffffff,
+        // lineWidth: 2,
 
         // name: false, 
         // name: true, 
@@ -918,7 +919,8 @@ sizer.pin(gameObject);
     });
     ```
     - `graphics` : [Graphics game object](graphics.md)
-    - `color` : Default value is `0xffffff`
+    - `color` : Default value is `0xffffff`.
+    - `lineWidth` : Default value is `1`.
     - `name` :
         - `false` : Don't display child name, default value
         - `true` : Display child name with default text game object, aligned at left-top of child bounds.

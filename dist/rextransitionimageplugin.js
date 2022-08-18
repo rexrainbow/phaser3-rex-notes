@@ -501,7 +501,7 @@
     }
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
 
   var Add = function Add(gameObject, config) {
@@ -547,10 +547,10 @@
   };
 
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
-    state.syncPosition = GetValue$b(config, 'syncPosition', true);
-    state.syncRotation = GetValue$b(config, 'syncRotation', true);
-    state.syncScale = GetValue$b(config, 'syncScale', true);
-    state.syncAlpha = GetValue$b(config, 'syncAlpha', true);
+    state.syncPosition = GetValue$c(config, 'syncPosition', true);
+    state.syncRotation = GetValue$c(config, 'syncRotation', true);
+    state.syncScale = GetValue$c(config, 'syncScale', true);
+    state.syncAlpha = GetValue$c(config, 'syncAlpha', true);
   };
 
   var AddChild = {
@@ -1889,7 +1889,7 @@
     return out;
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -1898,13 +1898,13 @@
 
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
-    var x = GetValue$a(config, 'x', undefined);
-    var y = GetValue$a(config, 'y', undefined);
-    var width = GetValue$a(config, 'width', undefined);
-    var height = GetValue$a(config, 'height', undefined);
-    var originX = GetValue$a(config, 'originX', 0);
-    var originY = GetValue$a(config, 'originY', 0);
-    var padding = GetValue$a(config, 'padding', 0);
+    var x = GetValue$b(config, 'x', undefined);
+    var y = GetValue$b(config, 'y', undefined);
+    var width = GetValue$b(config, 'width', undefined);
+    var height = GetValue$b(config, 'height', undefined);
+    var originX = GetValue$b(config, 'originX', 0);
+    var originY = GetValue$b(config, 'originY', 0);
+    var padding = GetValue$b(config, 'padding', 0);
     var scrollX, scrollY;
 
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
@@ -2006,52 +2006,59 @@
     }
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
 
-  var DrawBounds = function DrawBounds(graphics, config) {
-    var color, drawContainer;
+  var DrawBounds$1 = function DrawBounds(gameObject, graphics, config) {
+    var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
+
+    if (!canDrawBound) {
+      return;
+    }
+
+    var color, lineWidth;
 
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$9(config, 'color');
-      drawContainer = GetValue$9(config, 'drawContainer');
+      color = GetValue$a(config, 'color');
+      lineWidth = GetValue$a(config, 'lineWidth');
     }
 
     if (color === undefined) {
       color = 0xffffff;
     }
 
-    if (drawContainer === undefined) {
-      drawContainer = true;
+    if (lineWidth === undefined) {
+      lineWidth = 1;
     }
 
-    var children = this.getAllVisibleChildren([this]),
-        child;
+    Points[0] = GetTopLeft(gameObject, Points[0]);
+    Points[1] = GetTopRight(gameObject, Points[1]);
+    Points[2] = GetBottomRight(gameObject, Points[2]);
+    Points[3] = GetBottomLeft(gameObject, Points[3]);
+    graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
+  };
 
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      child = children[i];
+  var Points = [undefined, undefined, undefined, undefined];
 
-      if (!drawContainer && child.isRexContainerLite) {
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+
+  var DrawBounds = function DrawBounds(graphics, config) {
+    var drawContainer = GetValue$9(config, 'drawContainer', true);
+    var gameObjects = this.getAllVisibleChildren([this]);
+
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+      var gameObject = gameObjects[i];
+
+      if (!drawContainer && gameObject.isRexContainerLite) {
         continue;
       }
 
-      if (child.getBounds || child.width !== undefined && child.height !== undefined) {
-        Points[0] = GetTopLeft(child, Points[0]);
-        Points[1] = GetTopRight(child, Points[1]);
-        Points[2] = GetBottomRight(child, Points[2]);
-        Points[3] = GetBottomLeft(child, Points[3]);
-      } else {
-        continue;
-      }
-
-      graphics.lineStyle(1, color).strokePoints(Points, true, true);
+      DrawBounds$1(gameObject, graphics, config);
     }
 
     return this;
   };
-
-  var Points = [undefined, undefined, undefined, undefined];
 
   var RotateAround$1 = Phaser.Math.RotateAround;
 

@@ -3,8 +3,12 @@ import RemoveMethods from './RemoveMethods.js';
 import PropertyMethods from './PropertyMethods.js';
 import CallMethods from './CallMethods.js';
 import DataMethods from './DataMethods.js';
+import DrawGameObjectsBounds from './DrawGameObjectsBounds.js';
 
-var Methods = {}
+var Methods = {
+    drawGameObjectsBounds: DrawGameObjectsBounds,
+};
+
 Object.assign(
     Methods,
     AddMethods,
