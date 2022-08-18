@@ -42,12 +42,26 @@ declare class GOManager extends Phaser.Events.EventEmitter {
     isEmpty: boolean;
 
     has(name: string): boolean;
+
     get(name: string): BobBase;
     getGO(name: string): Phaser.GameObjects.GameObject;
+
+    addGO(
+        name: string,
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
     add(
         name: string,
-        textureKey: string,
-        frameName?: string | number
+        ...args: any[]
+    ): this;
+
+    forEachGO(
+        callback: (
+            gameObject: Phaser.GameObjects.GameObject,
+            name: string,
+            goManager: GOManager
+        ) => boolean,
+        scope?: Object
     ): this;
 
     remove(name: string): this;
@@ -95,23 +109,15 @@ declare class GOManager extends Phaser.Events.EventEmitter {
         property: string
     ): Phaser.Tweens.Tween | null;
 
-    playAnimation(
-        name: string,
-        key: string,
+    drawGameObjectsBounds(
+        graphics: Phaser.GameObjects.Graphics,
+        config?: number
     ): this;
-
-    stopAnimation(name: string): this;
-
-    chainAnimation(
-        name: string,
-        keys: string | string[] | Phaser.Types.Animations.PlayAnimationConfig | Phaser.Types.Animations.PlayAnimationConfig[]
-    ): this;
-
-    pauseAnimation(name: string): this;
-
-    setTexture(
-        name: string,
-        textureKey: string,
-        frameName: string | number
+    drawGameObjectsBounds(
+        graphics: Phaser.GameObjects.Graphics,
+        config?: {
+            color?: number,
+            lineWidth?: number
+        }
     ): this;
 }

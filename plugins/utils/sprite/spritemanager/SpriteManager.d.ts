@@ -21,6 +21,12 @@ declare class SpriteManager extends GOManager {
         config?: SpriteManager.IConfig
     )
 
+    add(
+        name: string,
+        textureKey: string,
+        frameName?: string | number
+    ): this;
+
     setCreateGameObjectCallback(
         callback?: 'sprite' | 'image' | SpriteManager.CreateCallbackType
     ): this;
