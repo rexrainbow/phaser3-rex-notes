@@ -2,6 +2,17 @@ import phaser from 'phaser/src/phaser.js';
 import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
+var content = `
+[[text.a]]
+[[text.a.x=300]]
+[[text.a.y=100]]
+[[text.a.typing=100]]
+
+[b][color=yellow]H[/color][/b]ello\\n
+[u=red]Phaser[/u]\\n
+World
+`
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -14,17 +25,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var content = `
-[[text.a]]
-[[text.a.x=300]]
-[[text.a.y=100]]
-[[text.a.typing=100]]
-
-[b][color=yellow]H[/color][/b]ello\\n
-[u=red]Phaser[/u]\\n
-World
-`
-
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
             parser: {
                 delimiters: ['[[', ']]'],

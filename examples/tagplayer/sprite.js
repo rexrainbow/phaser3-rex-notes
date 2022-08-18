@@ -1,46 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 
-class Demo extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'examples'
-        })
-    }
-
-    preload() {
-        this.load.image('dude', 'assets/images/phaser-dude.png');
-        this.load.atlas('knight', 'assets/animations/knight.png', 'assets/animations/knight.json');
-    }
-
-    create() {
-        this.anims.create({
-            key: 'guardStart',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_start/frame', start: 0, end: 3, zeroPad: 4 }),
-            frameRate: 8
-        });
-
-        this.anims.create({
-            key: 'guard',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'guard/frame', start: 0, end: 5, zeroPad: 4 }),
-            frameRate: 8,
-            repeat: 2
-        });
-
-        this.anims.create({
-            key: 'guardEnd',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_end/frame', start: 0, end: 3, zeroPad: 4 }),
-            frameRate: 8
-        });
-
-        this.anims.create({
-            key: 'idle',
-            frames: this.anims.generateFrameNames('knight', { prefix: 'idle/frame', start: 0, end: 5, zeroPad: 4 }),
-            frameRate: 8,
-            repeat: -1
-        });
-
-        var content = `
+var content = `
 // Comments : dude sprite
 [sprite.dude=dude]
 [sprite.dude.x=100][sprite.dude.x.to=700,5000,Cubic]
@@ -84,6 +45,45 @@ For the King
 // Wait until all sprites are fade out
 [/sprite][wait=sprite]
 `
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() {
+        this.load.image('dude', 'assets/images/phaser-dude.png');
+        this.load.atlas('knight', 'assets/animations/knight.png', 'assets/animations/knight.json');
+    }
+
+    create() {
+        this.anims.create({
+            key: 'guardStart',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_start/frame', start: 0, end: 3, zeroPad: 4 }),
+            frameRate: 8
+        });
+
+        this.anims.create({
+            key: 'guard',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'guard/frame', start: 0, end: 5, zeroPad: 4 }),
+            frameRate: 8,
+            repeat: 2
+        });
+
+        this.anims.create({
+            key: 'guardEnd',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_end/frame', start: 0, end: 3, zeroPad: 4 }),
+            frameRate: 8
+        });
+
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'idle/frame', start: 0, end: 5, zeroPad: 4 }),
+            frameRate: 8,
+            repeat: -1
+        });
 
         var extDude = this.add.image(100, 100, 'dude');
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {

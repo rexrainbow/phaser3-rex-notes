@@ -2,19 +2,7 @@ import phaser from 'phaser/src/phaser.js';
 import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-class Demo extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'examples'
-        })
-    }
-
-    preload() {
-        this.load.image('nextPage', 'assets/images/arrow-down-left.png');
-    }
-
-    create() {
-        var content = `
+var content = `
 // [text.a=100,100,100]  // wrapWidth, width, height
 [text.a]
 [text.a.x=200]
@@ -27,6 +15,18 @@ World
 [wait=text.a.typing]
 `
 
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() {
+        this.load.image('nextPage', 'assets/images/arrow-down-left.png');
+    }
+
+    create() {
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
             texts: {
                 createGameObject: CreateTextBox

@@ -2,6 +2,45 @@ import Phaser from 'phaser/src/phaser.js';
 import TagPlayerPlugin from '../../plugins/tagplayer-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
+var content = `
+// Prelude
+[char.A][char.A.play=idle]
+[char.A.x=300][char.A.x.fromLeft=300,1000]
+[char.A.y=300][char.A.y.fromUp=300,1000]
+
+[char.B][char.B.toggleFlipX][char.B.play=idle]
+[char.B.x=800][char.B.x.to=500,1000]
+[char.B.y=600][char.B.y.to=300,1000]
+
+[wait=1200]
+
+// Main
+[char.A.talk=false]
+Hello\\n
+Hello\\n
+Hello
+
+[char.B.talk]
+World
+
+[wait=char.A.typing]
+[wait=char.B.typing]
+[wait=200]
+
+[char.A.x.toLeft=100,1000]
+[char.B.x.toRight=100,1000]
+[wait=1000]
+
+[char.A.talk=false]Good
+[char.B.talk]Bye
+
+[wait=500]
+
+// Postlude
+[/char][wait=char]
+
+`
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -40,45 +79,6 @@ class Demo extends Phaser.Scene {
             frameRate: 8,
             repeat: -1
         });
-
-        var content = `
-// Prelude
-[char.A][char.A.play=idle]
-[char.A.x=300][char.A.x.fromLeft=300,1000]
-[char.A.y=300][char.A.y.fromUp=300,1000]
-
-[char.B][char.B.toggleFlipX][char.B.play=idle]
-[char.B.x=800][char.B.x.to=500,1000]
-[char.B.y=600][char.B.y.to=300,1000]
-
-[wait=1200]
-
-// Main
-[char.A.talk=false]
-Hello\\n
-Hello\\n
-Hello
-
-[char.B.talk]
-World
-
-[wait=char.A.typing]
-[wait=char.B.typing]
-[wait=200]
-
-[char.A.x.toLeft=100,1000]
-[char.B.x.toRight=100,1000]
-[wait=1000]
-
-[char.A.talk=false]Good
-[char.B.talk]Bye
-
-[wait=500]
-
-// Postlude
-[/char][wait=char]
-
-`
 
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
             sprites: false,
