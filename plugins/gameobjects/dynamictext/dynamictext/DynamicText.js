@@ -28,7 +28,7 @@ class DynamicText extends Canvas {
         this.type = 'rexDynamicText';
         this.autoRound = true;
         this.padding = {};
-        this.warpPadding = {};
+        this.wrapPadding = {};
 
         var textStyleConfig = GetValue(config, 'style', undefined);
         this.defaultTextStyle = new TextStyle(textStyleConfig);

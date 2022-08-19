@@ -18,6 +18,7 @@ import DrawContent from './DrawContent.js';
 import GetChildren from './GetChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
+import SetToMinSize from './SetToMinSize.js';
 
 
 export default {
@@ -44,4 +45,6 @@ export default {
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
+
+    setToMinSize: SetToMinSize,
 }
