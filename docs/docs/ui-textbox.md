@@ -244,6 +244,37 @@ var textBox = scene.rexUI.add.textBox({
     var pageIndex = textBox.pageCount;
     ```
 
+### Get element
+
+- Get element
+    - Background game object
+        ```javascript
+        var background = textBox.getElement('background');
+        ```
+    - Icon game object
+        ```javascript
+        var icon = textBox.getElement('icon');
+        ```
+    - Text game object
+        ```javascript
+        var textObject = textBox.getElement('text');
+        ```
+    - Action icon game object
+        ```javascript
+        var action = textBox.getElement('action');
+        ```
+- Get by name
+    ```javascript
+    var gameObject = textBox.getElement('#' + name);
+    // var gameObject = textBox.getElement('#' + name, recursive);
+    ```
+    or
+    ```javascript
+    var gameObject = textBox.getByName(name);
+    // var gameObject = textBox.getByName(name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
+
 ### Events
 
 - On typing a character
@@ -269,4 +300,4 @@ var textBox = scene.rexUI.add.textBox({
 
 ### Other properties
 
-See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [textBox object](ui-textBox.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
