@@ -1,5 +1,5 @@
-import OffsetChildren from '../OffsetChildren.js';
 import GetChildrenAlign from '../GetChildrenAlign.js';
+import OffsetChildren from '../OffsetChildren.js';
 
 var AlignLines = function (result, width, height) {
     var hAlign = result.hAlign,

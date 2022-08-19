@@ -188,7 +188,7 @@ var CreateSpeechBubbleShape = function (scene) {
             var radius = 20;
             var indent = 15;
 
-            var left = 0, right = this.width,
+            var left = 0, right = this.width, centerX = (left + right) / 2,
                 top = 0, bottom = this.height, boxBottom = bottom - indent;
             this.getShapes()[0]
                 .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
@@ -198,7 +198,7 @@ var CreateSpeechBubbleShape = function (scene) {
                 // right line, bottom arc
                 .lineTo(right, boxBottom - radius).arc(right - radius, boxBottom - radius, radius, 0, 90)
                 // bottom indent                    
-                .lineTo(left + 60, boxBottom).lineTo(left + 50, bottom).lineTo(left + 40, boxBottom)
+                .lineTo(centerX + 10, boxBottom).lineTo(centerX, bottom).lineTo(centerX - 10, boxBottom)
                 // bottom line, left arc
                 .lineTo(left + radius, boxBottom).arc(left + radius, boxBottom - radius, radius, 90, 180)
                 // left line, top arc
