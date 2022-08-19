@@ -1,3 +1,4 @@
+import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import AlignLines from './AlignLines.js';
 import { CanRender, IsNewLineChar } from '../../../bob/Types.js';
 
@@ -7,10 +8,11 @@ var RunVerticalWrap = function (config) {
     // Parse parameters
     var startIndex = GetValue(config, 'start', 0);
 
-    var extraTopPadding = GetValue(config, 'padding.top', 0);
-    var extraBottomPadding = GetValue(config, 'padding.bottom', 0);  // Add extra space below last character
-    var extraLeftPadding = GetValue(config, 'padding.left', 0);
-    var extraRightPadding = GetValue(config, 'padding.right', 0);
+    SetPadding(this.warpPadding, GetValue(config, 'padding', 0));
+    var warpPaddingVertical = this.warpPadding.top + this.warpPadding.bottom;
+    var warpPaddingHorizontal = this.warpPadding.left + this.warpPadding.right;
+    var paddingVertical = this.padding.top + this.padding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right;
 
     var lineWidth = GetValue(config, 'lineWidth', undefined);
     var maxLines;
@@ -18,7 +20,7 @@ var RunVerticalWrap = function (config) {
         // Calculate lineWidth via maxLines, in fixedWidth mode
         maxLines = GetValue(config, 'maxLines', 0);
         if (this.fixedWidth > 0) {
-            var innerWidth = this.fixedWidth - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
+            var innerWidth = this.fixedWidth - paddingHorizontal - warpPaddingHorizontal;
             lineWidth = innerWidth / maxLines;
         } else {
             lineWidth = 0;
@@ -28,7 +30,7 @@ var RunVerticalWrap = function (config) {
             // Calculate maxLines via lineWidth, in fixedWidth mode
             maxLines = GetValue(config, 'maxLines', undefined);
             if (maxLines === undefined) {
-                var innerWidth = this.fixedWidth - this.padding.left - this.padding.right;
+                var innerWidth = this.fixedWidth - paddingHorizontal;
                 maxLines = Math.floor(innerWidth / lineWidth);
             }
         } else {
@@ -43,7 +45,7 @@ var RunVerticalWrap = function (config) {
     if (fixedChildHeight === undefined) {
         var charPerLine = GetValue(config, 'charPerLine', undefined);
         if (charPerLine !== undefined) {
-            var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+            var innerHeight = this.fixedHeight - paddingVertical - warpPaddingVertical;
             fixedChildHeight = Math.floor(innerHeight / charPerLine);
         } else {
             // Use char.heigh as fixedChildHeight
@@ -54,7 +56,7 @@ var RunVerticalWrap = function (config) {
     var wrapHeight = GetValue(config, 'wrapHeight', undefined);
     if (wrapHeight === undefined) {
         if (this.fixedHeight > 0) {
-            wrapHeight = this.fixedHeight - this.padding.top - this.padding.bottom;
+            wrapHeight = this.fixedHeight - paddingVertical;
         } else {
             wrapHeight = Infinity; // No word-wrap
         }
@@ -69,12 +71,7 @@ var RunVerticalWrap = function (config) {
     var result = {
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
-        padding: {
-            top: extraTopPadding,
-            bottom: extraBottomPadding,
-            left: extraLeftPadding,
-            right: extraRightPadding
-        },
+        padding: this.warpPadding,
         lineWidth: lineWidth,
         maxLines: maxLines,
         fixedChildHeight: fixedChildHeight,
@@ -97,8 +94,8 @@ var RunVerticalWrap = function (config) {
 
     // Layout children
     wrapHeight += letterSpacing;
-    var startX = this.padding.left + extraLeftPadding,  // Reset x of each character in AlignLines method
-        startY = this.padding.top + extraTopPadding,
+    var startX = this.padding.left + this.warpPadding.left,  // Reset x of each character in AlignLines method
+        startY = this.padding.top + this.warpPadding.top,
         x = startX,
         y = startY;
     var remainderHeight = wrapHeight,
@@ -162,15 +159,15 @@ var RunVerticalWrap = function (config) {
     result.start += resultChildren.length;
     result.isLastPage = (result.start === lastChildIndex);
     result.maxLineHeight = maxLineHeight;
-    result.linesWidth = (resultLines.length * lineWidth) + extraLeftPadding + extraRightPadding;
+    result.linesWidth = (resultLines.length * lineWidth) + warpPaddingHorizontal;
 
     // Calculate size of game object
-    var width = (this.fixedWidth > 0) ? this.fixedWidth : (result.linesWidth + this.padding.left + this.padding.right);
-    var height = (this.fixedHeight > 0) ? this.fixedHeight : (result.maxLineHeight + this.padding.top + this.padding.bottom);
+    var width = (this.fixedWidth > 0) ? this.fixedWidth : (result.linesWidth + paddingHorizontal);
+    var height = (this.fixedHeight > 0) ? this.fixedHeight : (result.maxLineHeight + paddingVertical);
 
     // Size might be changed after wrapping
-    var innerWidth = width - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
-    var innerHeight = height - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+    var innerWidth = width - paddingHorizontal - warpPaddingHorizontal;
+    var innerHeight = height - paddingVertical - warpPaddingVertical;
     AlignLines(result, innerWidth, innerHeight);
 
     // Resize

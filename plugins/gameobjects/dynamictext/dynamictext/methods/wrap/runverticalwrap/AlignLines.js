@@ -1,3 +1,4 @@
+import GetChildrenAlign from '../GetChildrenAlign.js';
 import OffsetChildren from '../OffsetChildren.js';
 
 var AlignLines = function (result, width, height) {
