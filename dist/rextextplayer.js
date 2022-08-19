@@ -3494,7 +3494,12 @@
     var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
     var height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom; // Ignore fixedWidth, and fixedHeight
 
-    this.setSize(width, height);
+    if (this.width !== width || this.height !== height) {
+      this.dirty = true;
+      this.width = width;
+      this.height = height;
+    }
+
     return this;
   };
 
