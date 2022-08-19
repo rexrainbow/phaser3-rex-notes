@@ -1,9 +1,4 @@
 var SetToMinSize = function () {
-    if ((this.fixedWidth > 0) && (this.fixedHeight > 0)) {
-        this.setSize(this.fixedWidth, this.fixedHeight);
-        return this;
-    }
-
     var children = this.children;
     var maxX = 0,
         maxY = 0;
@@ -17,19 +12,10 @@ var SetToMinSize = function () {
         maxY = Math.max(maxY, child.y);
     }
 
-    var width;
-    if (this.fixedWidth > 0) {
-        width = this.fixedWidth;
-    } else {
-        width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
-    }
-    var height;
-    if (this.fixedHeight > 0) {
-        height = this.fixedHeight;
-    } else {
-        height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
-    }
+    var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
+    var height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
 
+    // Ignore fixedWidth, and fixedHeight
     this.setSize(width, height);
     return this;
 }

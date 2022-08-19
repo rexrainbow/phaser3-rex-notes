@@ -3102,11 +3102,16 @@
     forEachGO: function forEachGO(callback, scope) {
       for (var name in this.bobs) {
         var gameObject = this.bobs[name].gameObject;
+        var stopLoop;
 
         if (scope) {
-          callback.call(scope, gameObject, name, this);
+          stopLoop = callback.call(scope, gameObject, name, this);
         } else {
-          callback(gameObject, name, this);
+          stopLoop = callback(gameObject, name, this);
+        }
+
+        if (stopLoop) {
+          break;
         }
       }
 

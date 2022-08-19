@@ -2280,6 +2280,15 @@
 
     this.fixedWidth = width;
     this.fixedHeight = height;
+
+    if (width > 0) {
+      this.width = width;
+    }
+
+    if (height > 0) {
+      this.height = height;
+    }
+
     return this;
   };
 
@@ -2888,6 +2897,18 @@
     return result;
   };
 
+  var GetChildrenAlign = function GetChildrenAlign(children) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (child.align !== undefined) {
+        return child.align;
+      }
+    }
+
+    return undefined;
+  };
+
   var OffsetChildren = function OffsetChildren(children, offsetX, offsetY) {
     if (offsetX === 0 && offsetY === 0) {
       return;
@@ -2903,18 +2924,6 @@
       child.x += offsetX;
       child.y += offsetY;
     }
-  };
-
-  var GetChildrenAlign$1 = function GetChildrenAlign(children) {
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-
-      if (child.align !== undefined) {
-        return child.align;
-      }
-    }
-
-    return undefined;
   };
 
   var AlignLines$1 = function AlignLines(result, width, height) {
@@ -2947,7 +2956,7 @@
       var line = lines[li];
       var lineWidth = line.width,
           children = line.children;
-      var lineHAlign = GetChildrenAlign$1(children);
+      var lineHAlign = GetChildrenAlign(children);
 
       if (lineHAlign === undefined) {
         lineHAlign = hAlign;
@@ -2980,9 +2989,10 @@
   var RunWordWrap$1 = function RunWordWrap(config) {
     // Parse parameters
     var startIndex = GetValue$i(config, 'start', 0);
-    var paddingTop = GetValue$i(config, 'padding.top', 0);
-    var paddingBottom = GetValue$i(config, 'padding.bottom', 0); // Add extra space below last line
-    // Get lineHeight, maxLines
+    SetPadding$1(this.wrapPadding, GetValue$i(config, 'padding', 0));
+    var wrapPaddingVertical = this.wrapPadding.top + this.wrapPadding.bottom;
+    var paddingVertical = this.padding.top + this.padding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right; // Get lineHeight, maxLines
 
     var lineHeight = GetValue$i(config, 'lineHeight', undefined);
     var maxLines;
@@ -2992,7 +3002,7 @@
       maxLines = GetValue$i(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
-        var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
+        var innerHeight = this.fixedHeight - paddingVertical - wrapPaddingVertical;
         lineHeight = innerHeight / maxLines;
       } else {
         lineHeight = 0;
@@ -3003,7 +3013,7 @@
         maxLines = GetValue$i(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
-          var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
+          var innerHeight = this.fixedHeight - paddingVertical - wrapPaddingVertical;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
@@ -3017,7 +3027,7 @@
 
     if (wrapWidth === undefined) {
       if (this.fixedWidth > 0) {
-        wrapWidth = this.fixedWidth - this.padding.left - this.padding.right;
+        wrapWidth = this.fixedWidth - paddingHorizontal;
       } else {
         wrapWidth = Infinity; // No word-wrap
       }
@@ -3032,10 +3042,7 @@
       // Next start index
       isLastPage: false,
       // Is last page
-      padding: {
-        top: paddingTop,
-        bottom: paddingBottom
-      },
+      padding: this.wrapPadding,
       lineHeight: lineHeight,
       maxLines: maxLines,
       wrapWidth: wrapWidth,
@@ -3060,7 +3067,7 @@
 
     wrapWidth += letterSpacing;
     var startX = this.padding.left,
-        startY = this.padding.top + lineHeight + paddingTop,
+        startY = this.padding.top + lineHeight + this.wrapPadding.top,
         // Start(baseline) from 1st lineHeight, not 0
     x = startX,
         y = startY;
@@ -3142,13 +3149,13 @@
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
-    result.linesHeight = resultLines.length * lineHeight + paddingTop + paddingBottom; // Calculate size of game object
+    result.linesHeight = resultLines.length * lineHeight + wrapPaddingVertical; // Calculate size of game object
 
-    var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + this.padding.left + this.padding.right;
-    var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + this.padding.top + this.padding.bottom; // Size might be changed after wrapping
+    var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + paddingHorizontal;
+    var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + paddingVertical; // Size might be changed after wrapping
 
-    var innerWidth = width - this.padding.left - this.padding.right;
-    var innerHeight = height - this.padding.top - this.padding.bottom - paddingTop - paddingBottom;
+    var innerWidth = width - paddingHorizontal;
+    var innerHeight = height - paddingVertical - wrapPaddingVertical;
     AlignLines$1(result, innerWidth, innerHeight); // Resize
 
     this.setSize(width, height);
@@ -3236,11 +3243,11 @@
   var RunVerticalWrap$1 = function RunVerticalWrap(config) {
     // Parse parameters
     var startIndex = GetValue$h(config, 'start', 0);
-    var extraTopPadding = GetValue$h(config, 'padding.top', 0);
-    var extraBottomPadding = GetValue$h(config, 'padding.bottom', 0); // Add extra space below last character
-
-    var extraLeftPadding = GetValue$h(config, 'padding.left', 0);
-    var extraRightPadding = GetValue$h(config, 'padding.right', 0);
+    SetPadding$1(this.wrapPadding, GetValue$h(config, 'padding', 0));
+    var wrapPaddingVertical = this.wrapPadding.top + this.wrapPadding.bottom;
+    var wrapPaddingHorizontal = this.wrapPadding.left + this.wrapPadding.right;
+    var paddingVertical = this.padding.top + this.padding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right;
     var lineWidth = GetValue$h(config, 'lineWidth', undefined);
     var maxLines;
 
@@ -3249,7 +3256,7 @@
       maxLines = GetValue$h(config, 'maxLines', 0);
 
       if (this.fixedWidth > 0) {
-        var innerWidth = this.fixedWidth - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
+        var innerWidth = this.fixedWidth - paddingHorizontal - wrapPaddingHorizontal;
         lineWidth = innerWidth / maxLines;
       } else {
         lineWidth = 0;
@@ -3260,7 +3267,7 @@
         maxLines = GetValue$h(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
-          var innerWidth = this.fixedWidth - this.padding.left - this.padding.right;
+          var innerWidth = this.fixedWidth - paddingHorizontal;
           maxLines = Math.floor(innerWidth / lineWidth);
         }
       } else {
@@ -3276,7 +3283,7 @@
       var charPerLine = GetValue$h(config, 'charPerLine', undefined);
 
       if (charPerLine !== undefined) {
-        var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+        var innerHeight = this.fixedHeight - paddingVertical - wrapPaddingVertical;
         fixedChildHeight = Math.floor(innerHeight / charPerLine);
       }
     } // Get wrapHeight
@@ -3286,7 +3293,7 @@
 
     if (wrapHeight === undefined) {
       if (this.fixedHeight > 0) {
-        wrapHeight = this.fixedHeight - this.padding.top - this.padding.bottom;
+        wrapHeight = this.fixedHeight - paddingVertical;
       } else {
         wrapHeight = Infinity; // No word-wrap
       }
@@ -3301,12 +3308,7 @@
       // Next start index
       isLastPage: false,
       // Is last page
-      padding: {
-        top: extraTopPadding,
-        bottom: extraBottomPadding,
-        left: extraLeftPadding,
-        right: extraRightPadding
-      },
+      padding: this.wrapPadding,
       lineWidth: lineWidth,
       maxLines: maxLines,
       fixedChildHeight: fixedChildHeight,
@@ -3331,9 +3333,9 @@
 
 
     wrapHeight += letterSpacing;
-    var startX = this.padding.left + extraLeftPadding,
+    var startX = this.padding.left + this.wrapPadding.left,
         // Reset x of each character in AlignLines method
-    startY = this.padding.top + extraTopPadding,
+    startY = this.padding.top + this.wrapPadding.top,
         x = startX,
         y = startY;
     var remainderHeight = wrapHeight,
@@ -3413,13 +3415,13 @@
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineHeight = maxLineHeight;
-    result.linesWidth = resultLines.length * lineWidth + extraLeftPadding + extraRightPadding; // Calculate size of game object
+    result.linesWidth = resultLines.length * lineWidth + wrapPaddingHorizontal; // Calculate size of game object
 
-    var width = this.fixedWidth > 0 ? this.fixedWidth : result.linesWidth + this.padding.left + this.padding.right;
-    var height = this.fixedHeight > 0 ? this.fixedHeight : result.maxLineHeight + this.padding.top + this.padding.bottom; // Size might be changed after wrapping
+    var width = this.fixedWidth > 0 ? this.fixedWidth : result.linesWidth + paddingHorizontal;
+    var height = this.fixedHeight > 0 ? this.fixedHeight : result.maxLineHeight + paddingVertical; // Size might be changed after wrapping
 
-    var innerWidth = width - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
-    var innerHeight = height - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
+    var innerWidth = width - paddingHorizontal - wrapPaddingHorizontal;
+    var innerHeight = height - paddingVertical - wrapPaddingVertical;
     AlignLines(result, innerWidth, innerHeight); // Resize
 
     this.setSize(width, height);
@@ -3438,9 +3440,7 @@
 
   var DrawContent = function DrawContent() {
     this.clear();
-    var width = this.fixedWidth > 0 ? this.fixedWidth : this.width;
-    var height = this.fixedHeight > 0 ? this.fixedHeight : this.height;
-    this.setSize(width, height);
+    this.setSize(this.width, this.height);
 
     if (this.background.active) {
       this.background.draw();
@@ -3475,6 +3475,29 @@
     return GetAll(this.children, 'active', true);
   };
 
+  var SetToMinSize = function SetToMinSize() {
+    var children = this.children;
+    var maxX = 0,
+        maxY = 0;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (!child.active || !child.visible) {
+        continue;
+      }
+
+      maxX = Math.max(maxX, child.x);
+      maxY = Math.max(maxY, child.y);
+    }
+
+    var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
+    var height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom; // Ignore fixedWidth, and fixedHeight
+
+    this.setSize(width, height);
+    return this;
+  };
+
   var Methods$4 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
@@ -3495,7 +3518,8 @@
     drawContent: DrawContent,
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
-    getActiveChildren: GetActiveChildren
+    getActiveChildren: GetActiveChildren,
+    setToMinSize: SetToMinSize
   };
 
   var Stack = /*#__PURE__*/function () {
@@ -3625,6 +3649,7 @@
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
       _this.padding = {};
+      _this.wrapPadding = {};
       var textStyleConfig = GetValue$g(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
@@ -8191,11 +8216,16 @@
     forEachGO: function forEachGO(callback, scope) {
       for (var name in this.bobs) {
         var gameObject = this.bobs[name].gameObject;
+        var stopLoop;
 
         if (scope) {
-          callback.call(scope, gameObject, name, this);
+          stopLoop = callback.call(scope, gameObject, name, this);
         } else {
-          callback(gameObject, name, this);
+          stopLoop = callback(gameObject, name, this);
+        }
+
+        if (stopLoop) {
+          break;
         }
       }
 

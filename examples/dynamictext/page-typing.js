@@ -48,8 +48,6 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 580, '');
 
-        text.maxWidth = text.width;
-        text.maxHeight = text.height;
         TypingNextPage(text, {
             maxLines: 5,         // Show 5 lines per page
             padding: { bottom: 10 },
@@ -60,9 +58,7 @@ class Demo extends Phaser.Scene {
 }
 
 var TypingNextPage = function (text, config) {
-    text.setFixedSize(text.maxWidth, text.maxHeight);
     var result = text.runWordWrap(config);
-    text.setFixedSize(0, 0);  // Wait for changing size when typing any new character
 
     var scene = text.scene;
     var tween = scene.tweens.add({

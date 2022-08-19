@@ -17,6 +17,13 @@ var SetFixedSize = function (width, height) {
     this.fixedWidth = width;
     this.fixedHeight = height;
 
+    if (width > 0) {
+        this.width = width;
+    }
+    if (height > 0) {
+        this.height = height;
+    }
+
     return this;
 }
 
