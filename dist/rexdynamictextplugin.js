@@ -692,6 +692,44 @@
   Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, // Components.FX,
   Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
 
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+
+  var GetPadding$1 = function GetPadding(padding, key) {
+    if (key === undefined) {
+      return padding;
+    }
+
+    return padding[key];
+  };
+
+  var SetPadding$1 = function SetPadding(padding, key, value) {
+    if (padding === undefined) {
+      padding = {};
+    }
+
+    if (key === undefined) {
+      key = 0;
+    }
+
+    var keyType = _typeof(key);
+
+    if (keyType === 'string') {
+      padding[key] = value;
+    } else if (keyType === 'number') {
+      padding.left = key;
+      padding.right = key;
+      padding.top = key;
+      padding.bottom = key;
+    } else {
+      padding.left = GetValue$9(key, 'left', 0);
+      padding.right = GetValue$9(key, 'right', 0);
+      padding.top = GetValue$9(key, 'top', 0);
+      padding.bottom = GetValue$9(key, 'bottom', 0);
+    }
+
+    return padding;
+  };
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -713,7 +751,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$9 = function GetValue(source, key, defaultValue) {
+  var GetValue$8 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -782,7 +820,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$9(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$8(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -900,7 +938,7 @@
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
 
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
@@ -1188,10 +1226,10 @@
         } // ScaleX, ScaleY
 
 
-        var width = GetValue$8(o, 'width', undefined);
-        var height = GetValue$8(o, 'height', undefined);
-        var scaleX = GetValue$8(o, 'scaleX', undefined);
-        var scaleY = GetValue$8(o, 'scaleY', undefined);
+        var width = GetValue$7(o, 'width', undefined);
+        var height = GetValue$7(o, 'height', undefined);
+        var scaleX = GetValue$7(o, 'scaleX', undefined);
+        var scaleY = GetValue$7(o, 'scaleY', undefined);
 
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
@@ -1328,7 +1366,7 @@
     }
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
   var RoundRectangle = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
@@ -1429,15 +1467,15 @@
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$7(value, 'x', 0);
-          defaultRadiusY = GetValue$7(value, 'y', 0);
+          defaultRadiusX = GetValue$6(value, 'x', 0);
+          defaultRadiusY = GetValue$6(value, 'y', 0);
         }
 
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$7(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$7(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$7(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$7(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$6(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$6(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$6(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$6(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -1501,8 +1539,8 @@
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$7(value, 'x', 0);
-      radius.y = GetValue$7(value, 'y', 0);
+      radius.x = GetValue$6(value, 'x', 0);
+      radius.y = GetValue$6(value, 'y', 0);
     }
   };
 
@@ -1652,7 +1690,7 @@
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var Background = /*#__PURE__*/function (_Base) {
     _inherits(Background, _Base);
@@ -1666,11 +1704,11 @@
 
       _this = _super.call(this, parent, 'background');
 
-      _this.setColor(GetValue$6(config, 'color', null), GetValue$6(config, 'color2', null), GetValue$6(config, 'horizontalGradient', true));
+      _this.setColor(GetValue$5(config, 'color', null), GetValue$5(config, 'color2', null), GetValue$5(config, 'horizontalGradient', true));
 
-      _this.setStroke(GetValue$6(config, 'stroke', null), GetValue$6(config, 'strokeThickness', 2));
+      _this.setStroke(GetValue$5(config, 'stroke', null), GetValue$5(config, 'strokeThickness', 2));
 
-      _this.setCornerRadius(GetValue$6(config, 'cornerRadius', 0), GetValue$6(config, 'cornerIteration', null));
+      _this.setCornerRadius(GetValue$5(config, 'cornerRadius', 0), GetValue$5(config, 'cornerIteration', null));
 
       return _this;
     }
@@ -1777,7 +1815,7 @@
     return Background;
   }(RenderBase);
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
   var InnerBounds = /*#__PURE__*/function (_Base) {
     _inherits(InnerBounds, _Base);
@@ -1791,9 +1829,9 @@
 
       _this = _super.call(this, parent, 'background');
 
-      _this.setColor(GetValue$5(config, 'color', null), GetValue$5(config, 'color2', null), GetValue$5(config, 'horizontalGradient', true));
+      _this.setColor(GetValue$4(config, 'color', null), GetValue$4(config, 'color2', null), GetValue$4(config, 'horizontalGradient', true));
 
-      _this.setStroke(GetValue$5(config, 'stroke', null), GetValue$5(config, 'strokeThickness', 2));
+      _this.setStroke(GetValue$4(config, 'stroke', null), GetValue$4(config, 'strokeThickness', 2));
 
       return _this;
     }
@@ -1917,7 +1955,7 @@
     }
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(config) {
@@ -1951,16 +1989,16 @@
     }, {
       key: "set",
       value: function set(o) {
-        this.setBold(GetValue$4(o, 'bold', false));
-        this.setItalic(GetValue$4(o, 'italic', false));
-        this.setFontSize(GetValue$4(o, 'fontSize', '16px'));
-        this.setFontFamily(GetValue$4(o, 'fontFamily', 'Courier'));
-        this.setColor(GetValue$4(o, 'color', '#fff'));
-        this.setStrokeStyle(GetValue$4(o, 'stroke', null), GetValue$4(o, 'strokeThickness', 0));
-        this.setShadow(GetValue$4(o, 'shadowColor', null), GetValue$4(o, 'shadowOffsetX', 0), GetValue$4(o, 'shadowOffsetY', 0), GetValue$4(o, 'shadowBlur', 0));
-        this.setOffset(GetValue$4(o, 'offsetX', 0), GetValue$4(o, 'offsetY', 0));
-        this.setSpace(GetValue$4(o, 'leftSpace', 0), GetValue$4(o, 'rightSpace', 0));
-        this.setAlign(GetValue$4(o, 'align', undefined));
+        this.setBold(GetValue$3(o, 'bold', false));
+        this.setItalic(GetValue$3(o, 'italic', false));
+        this.setFontSize(GetValue$3(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$3(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$3(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue$3(o, 'stroke', null), GetValue$3(o, 'strokeThickness', 0));
+        this.setShadow(GetValue$3(o, 'shadowColor', null), GetValue$3(o, 'shadowOffsetX', 0), GetValue$3(o, 'shadowOffsetY', 0), GetValue$3(o, 'shadowBlur', 0));
+        this.setOffset(GetValue$3(o, 'offsetX', 0), GetValue$3(o, 'offsetY', 0));
+        this.setSpace(GetValue$3(o, 'leftSpace', 0), GetValue$3(o, 'rightSpace', 0));
+        this.setAlign(GetValue$3(o, 'align', undefined));
         return this;
       }
     }, {
@@ -2297,34 +2335,6 @@
     }
 
     return this;
-  };
-
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
-  var GetPadding$1 = function GetPadding(padding, key) {
-    if (key === undefined) {
-      return padding;
-    }
-
-    return padding[key];
-  };
-
-  var SetPadding$1 = function SetPadding(padding, key, value) {
-    var keyType = _typeof(key);
-
-    if (keyType === 'string') {
-      padding[key] = value;
-    } else if (keyType === 'number') {
-      padding.left = key;
-      padding.right = key;
-      padding.top = key;
-      padding.bottom = key;
-    } else {
-      padding.left = GetValue$3(key, 'left', 0);
-      padding.right = GetValue$3(key, 'right', 0);
-      padding.top = GetValue$3(key, 'top', 0);
-      padding.bottom = GetValue$3(key, 'bottom', 0);
-    }
   };
 
   var SetPadding = function SetPadding(key, value) {
@@ -3672,8 +3682,8 @@
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
-      _this.padding = {};
-      _this.wrapPadding = {};
+      _this.padding = SetPadding$1();
+      _this.wrapPadding = SetPadding$1();
       var textStyleConfig = GetValue(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();

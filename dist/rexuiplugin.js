@@ -10631,6 +10631,44 @@
   });
   SetValue(window, 'RexPlugins.UI.AlphaMaskImage', AlphaMaskImage);
 
+  var GetValue$20 = Phaser.Utils.Objects.GetValue;
+
+  var GetPadding$1 = function GetPadding(padding, key) {
+    if (key === undefined) {
+      return padding;
+    }
+
+    return padding[key];
+  };
+
+  var SetPadding$1 = function SetPadding(padding, key, value) {
+    if (padding === undefined) {
+      padding = {};
+    }
+
+    if (key === undefined) {
+      key = 0;
+    }
+
+    var keyType = _typeof(key);
+
+    if (keyType === 'string') {
+      padding[key] = value;
+    } else if (keyType === 'number') {
+      padding.left = key;
+      padding.right = key;
+      padding.top = key;
+      padding.bottom = key;
+    } else {
+      padding.left = GetValue$20(key, 'left', 0);
+      padding.right = GetValue$20(key, 'right', 0);
+      padding.top = GetValue$20(key, 'top', 0);
+      padding.bottom = GetValue$20(key, 'bottom', 0);
+    }
+
+    return padding;
+  };
+
   var Base$1 = /*#__PURE__*/function () {
     function Base(parent, type) {
       _classCallCheck(this, Base);
@@ -10720,7 +10758,7 @@
 
   var DegToRad$8 = Phaser.Math.DegToRad;
   var RadToDeg$6 = Phaser.Math.RadToDeg;
-  var GetValue$20 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1$ = Phaser.Utils.Objects.GetValue;
 
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
@@ -11008,10 +11046,10 @@
         } // ScaleX, ScaleY
 
 
-        var width = GetValue$20(o, 'width', undefined);
-        var height = GetValue$20(o, 'height', undefined);
-        var scaleX = GetValue$20(o, 'scaleX', undefined);
-        var scaleY = GetValue$20(o, 'scaleY', undefined);
+        var width = GetValue$1$(o, 'width', undefined);
+        var height = GetValue$1$(o, 'height', undefined);
+        var scaleX = GetValue$1$(o, 'scaleX', undefined);
+        var scaleY = GetValue$1$(o, 'scaleY', undefined);
 
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
@@ -11105,7 +11143,7 @@
     return RenderBase;
   }(Base$1);
 
-  var GetValue$1$ = Phaser.Utils.Objects.GetValue;
+  var GetValue$1_ = Phaser.Utils.Objects.GetValue;
 
   var Background = /*#__PURE__*/function (_Base) {
     _inherits(Background, _Base);
@@ -11119,11 +11157,11 @@
 
       _this = _super.call(this, parent, 'background');
 
-      _this.setColor(GetValue$1$(config, 'color', null), GetValue$1$(config, 'color2', null), GetValue$1$(config, 'horizontalGradient', true));
+      _this.setColor(GetValue$1_(config, 'color', null), GetValue$1_(config, 'color2', null), GetValue$1_(config, 'horizontalGradient', true));
 
-      _this.setStroke(GetValue$1$(config, 'stroke', null), GetValue$1$(config, 'strokeThickness', 2));
+      _this.setStroke(GetValue$1_(config, 'stroke', null), GetValue$1_(config, 'strokeThickness', 2));
 
-      _this.setCornerRadius(GetValue$1$(config, 'cornerRadius', 0), GetValue$1$(config, 'cornerIteration', null));
+      _this.setCornerRadius(GetValue$1_(config, 'cornerRadius', 0), GetValue$1_(config, 'cornerIteration', null));
 
       return _this;
     }
@@ -11230,7 +11268,7 @@
     return Background;
   }(RenderBase);
 
-  var GetValue$1_ = Phaser.Utils.Objects.GetValue;
+  var GetValue$1Z = Phaser.Utils.Objects.GetValue;
 
   var InnerBounds = /*#__PURE__*/function (_Base) {
     _inherits(InnerBounds, _Base);
@@ -11244,9 +11282,9 @@
 
       _this = _super.call(this, parent, 'background');
 
-      _this.setColor(GetValue$1_(config, 'color', null), GetValue$1_(config, 'color2', null), GetValue$1_(config, 'horizontalGradient', true));
+      _this.setColor(GetValue$1Z(config, 'color', null), GetValue$1Z(config, 'color2', null), GetValue$1Z(config, 'horizontalGradient', true));
 
-      _this.setStroke(GetValue$1_(config, 'stroke', null), GetValue$1_(config, 'strokeThickness', 2));
+      _this.setStroke(GetValue$1Z(config, 'stroke', null), GetValue$1Z(config, 'strokeThickness', 2));
 
       return _this;
     }
@@ -11370,7 +11408,7 @@
     }
   };
 
-  var GetValue$1Z = Phaser.Utils.Objects.GetValue;
+  var GetValue$1Y = Phaser.Utils.Objects.GetValue;
 
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(config) {
@@ -11404,16 +11442,16 @@
     }, {
       key: "set",
       value: function set(o) {
-        this.setBold(GetValue$1Z(o, 'bold', false));
-        this.setItalic(GetValue$1Z(o, 'italic', false));
-        this.setFontSize(GetValue$1Z(o, 'fontSize', '16px'));
-        this.setFontFamily(GetValue$1Z(o, 'fontFamily', 'Courier'));
-        this.setColor(GetValue$1Z(o, 'color', '#fff'));
-        this.setStrokeStyle(GetValue$1Z(o, 'stroke', null), GetValue$1Z(o, 'strokeThickness', 0));
-        this.setShadow(GetValue$1Z(o, 'shadowColor', null), GetValue$1Z(o, 'shadowOffsetX', 0), GetValue$1Z(o, 'shadowOffsetY', 0), GetValue$1Z(o, 'shadowBlur', 0));
-        this.setOffset(GetValue$1Z(o, 'offsetX', 0), GetValue$1Z(o, 'offsetY', 0));
-        this.setSpace(GetValue$1Z(o, 'leftSpace', 0), GetValue$1Z(o, 'rightSpace', 0));
-        this.setAlign(GetValue$1Z(o, 'align', undefined));
+        this.setBold(GetValue$1Y(o, 'bold', false));
+        this.setItalic(GetValue$1Y(o, 'italic', false));
+        this.setFontSize(GetValue$1Y(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$1Y(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$1Y(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue$1Y(o, 'stroke', null), GetValue$1Y(o, 'strokeThickness', 0));
+        this.setShadow(GetValue$1Y(o, 'shadowColor', null), GetValue$1Y(o, 'shadowOffsetX', 0), GetValue$1Y(o, 'shadowOffsetY', 0), GetValue$1Y(o, 'shadowBlur', 0));
+        this.setOffset(GetValue$1Y(o, 'offsetX', 0), GetValue$1Y(o, 'offsetY', 0));
+        this.setSpace(GetValue$1Y(o, 'leftSpace', 0), GetValue$1Y(o, 'rightSpace', 0));
+        this.setAlign(GetValue$1Y(o, 'align', undefined));
         return this;
       }
     }, {
@@ -11750,34 +11788,6 @@
     }
 
     return this;
-  };
-
-  var GetValue$1Y = Phaser.Utils.Objects.GetValue;
-
-  var GetPadding$1 = function GetPadding(padding, key) {
-    if (key === undefined) {
-      return padding;
-    }
-
-    return padding[key];
-  };
-
-  var SetPadding$1 = function SetPadding(padding, key, value) {
-    var keyType = _typeof(key);
-
-    if (keyType === 'string') {
-      padding[key] = value;
-    } else if (keyType === 'number') {
-      padding.left = key;
-      padding.right = key;
-      padding.top = key;
-      padding.bottom = key;
-    } else {
-      padding.left = GetValue$1Y(key, 'left', 0);
-      padding.right = GetValue$1Y(key, 'right', 0);
-      padding.top = GetValue$1Y(key, 'top', 0);
-      padding.bottom = GetValue$1Y(key, 'bottom', 0);
-    }
   };
 
   var SetPadding = function SetPadding(key, value) {
@@ -13087,8 +13097,8 @@
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexDynamicText';
       _this.autoRound = true;
-      _this.padding = {};
-      _this.wrapPadding = {};
+      _this.padding = SetPadding$1();
+      _this.wrapPadding = SetPadding$1();
       var textStyleConfig = GetValue$1V(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();

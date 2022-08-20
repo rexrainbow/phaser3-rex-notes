@@ -1,4 +1,5 @@
 import Canvas from '../../canvas/canvas/Canvas.js';
+import { SetPadding } from '../../../utils/padding/PaddingMethods';
 import Background from './bob/Background.js';
 import InnerBounds from './bob/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';
@@ -27,8 +28,8 @@ class DynamicText extends Canvas {
         super(scene, x, y, width, height);
         this.type = 'rexDynamicText';
         this.autoRound = true;
-        this.padding = {};
-        this.wrapPadding = {};
+        this.padding = SetPadding();
+        this.wrapPadding = SetPadding();
 
         var textStyleConfig = GetValue(config, 'style', undefined);
         this.defaultTextStyle = new TextStyle(textStyleConfig);

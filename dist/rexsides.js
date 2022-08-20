@@ -3058,6 +3058,14 @@
   };
 
   var SetPadding = function SetPadding(padding, key, value) {
+    if (padding === undefined) {
+      padding = {};
+    }
+
+    if (key === undefined) {
+      key = 0;
+    }
+
     var keyType = _typeof(key);
 
     if (keyType === 'string') {
@@ -3073,6 +3081,8 @@
       padding.top = GetValue$w(key, 'top', 0);
       padding.bottom = GetValue$w(key, 'bottom', 0);
     }
+
+    return padding;
   };
 
   var PaddingMethods = {

@@ -8,6 +8,13 @@ var GetPadding = function (padding, key) {
 }
 
 var SetPadding = function (padding, key, value) {
+    if (padding === undefined) {
+        padding = {};
+    }
+    if (key === undefined) {
+        key = 0;
+    }
+
     var keyType = typeof (key);
     if (keyType === 'string') {
         padding[key] = value;
@@ -22,6 +29,7 @@ var SetPadding = function (padding, key, value) {
         padding.top = GetValue(key, 'top', 0);
         padding.bottom = GetValue(key, 'bottom', 0);
     }
+    return padding;
 }
 
 export {
