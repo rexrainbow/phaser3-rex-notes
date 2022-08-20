@@ -608,6 +608,14 @@ txt.setWrapConfig(config);
     var children = txt.getActiveChildren();
     ```
 
+### Minimun size
+
+Resize to minimun size for showing all visible characters.
+
+```javascript
+txt.setToMinSize();
+```
+
 ### Compare with other kinds of text game object
 
 - [Built-in text](text.md): 

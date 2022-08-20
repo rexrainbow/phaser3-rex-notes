@@ -21,6 +21,7 @@ class TypeWriter {
         this.setDefaultTypingSpeed(GetValue(config, 'speed', 250));
         this.setTypingSpeed();
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
+        this.setMinSizeEnable(GetValue(config, 'minSizeEnable', false));
     }
 
     destroy() {
@@ -68,6 +69,15 @@ class TypeWriter {
         }
 
         this.animationConfig = config;
+        return this;
+    }
+
+    setMinSizeEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.minSizeEnable = enable;
         return this;
     }
 

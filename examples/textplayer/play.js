@@ -85,7 +85,9 @@ class Demo extends Phaser.Scene {
                             var value = Linear(p0, p1, Cubic(t));
                             char.setY(value);
                         }
-                    }
+                    },
+
+                    minSizeEnable: true
                 },
 
                 images: {
@@ -158,7 +160,7 @@ class Demo extends Phaser.Scene {
             .on('wait.music', function (music) {
                 print.setText(`Wait music ${music.key}`);
             })
-            .on('wait.custom', function(callback){
+            .on('wait.custom', function (callback) {
                 print.setText(`Wait custom`);
                 callback();
             })

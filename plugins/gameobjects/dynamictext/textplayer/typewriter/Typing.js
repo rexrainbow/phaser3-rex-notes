@@ -45,6 +45,12 @@ var Typing = function (offsetTime) {
                     animationConfig.onStart(child, 0);
                 }
             }
+
+            // Set to min size
+            if (this.minSizeEnable) {
+                this.textPlayer.setToMinSize();
+            }
+
             this.textPlayer.emit('typing', child);
 
             delay += (this.speed + offsetTime);

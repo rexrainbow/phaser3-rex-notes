@@ -2,11 +2,9 @@ import SetClickTarget from './SetClickTarget.js';
 import SetTargetCamera from './SetTargetCamera.js';
 import SetNextPageInput from './SetNextPageInput.js';
 import AddImage from './AddImage.js';
-import Play from './Play.js';
-import PlayPromise from './PlayPromise.js';
+import PlayMethods from './PlayMethods.js';
 import TypingNextPage from './TypingNextPage.js';
-import Pause from './Pause.js';
-import PauseTyping from './PauseTyping.js';
+import PauseMethods from './PauseMethods.js';
 import Resume from './Resume.js';
 import Wait from './Wait.js';
 import TypingSpeedMethods from './TypingSpeedMethods.js';
@@ -21,11 +19,7 @@ var Methods = {
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
     addImage: AddImage,
-    play: Play,
-    playPromise: PlayPromise,
     typingNextPage: TypingNextPage,
-    pause: Pause,
-    pauseTyping: PauseTyping,
     resume: Resume,
     wait: Wait,
     setTimeScale: SetTimeScale,
@@ -36,6 +30,8 @@ var Methods = {
 
 Object.assign(
     Methods,
+    PlayMethods,
+    PauseMethods,
     TypingSpeedMethods,
     SpriteMethods
 );

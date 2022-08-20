@@ -161,7 +161,9 @@ var txt = scene.add.rexTextPlayer({
             onComplete: function(child) {
 
             }
-        }
+        },
+
+        // minSizeEnable: false,
     },
 
     images: {
@@ -285,6 +287,9 @@ var txt = scene.add.rexTextPlayer({
         }
         ```
         - [child](dynamictext.md#child)
+    - `typing.minSizeEnable` : 
+        - `true` : Resize to minimun size for showing all visible characters.
+        - `false` : Won't resize during typing. Default behavior.
 - `parser` : Configuration of parser.
     - `parser.delimiters` : Delimiters of tag. Default value is `'[]'`.
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.

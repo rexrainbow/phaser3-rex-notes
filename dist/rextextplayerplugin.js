@@ -5541,6 +5541,11 @@
           if (animationConfig.onStart) {
             animationConfig.onStart(child, 0);
           }
+        } // Set to min size
+
+
+        if (this.minSizeEnable) {
+          this.textPlayer.setToMinSize();
         }
 
         this.textPlayer.emit('typing', child);
@@ -5570,7 +5575,7 @@
     this.inTypingProcessLoop = false;
   };
 
-  var Pause$1 = function Pause() {
+  var Pause = function Pause() {
     // Pause typing timer and animation progresses
     this.timeline.pause();
     return this;
@@ -5582,7 +5587,7 @@
     return this;
   };
 
-  var PauseTyping$1 = function PauseTyping() {
+  var PauseTyping = function PauseTyping() {
     // Already in typingPaused state
     if (this.isTypingPaused) {
       return this;
@@ -5961,9 +5966,9 @@
   var Methods$3 = {
     start: Start,
     typing: Typing,
-    pause: Pause$1,
+    pause: Pause,
     resume: Resume$1,
-    pauseTyping: PauseTyping$1,
+    pauseTyping: PauseTyping,
     resumeTyping: ResumeTyping,
     wait: Wait$1,
     setTimeScale: SetTimeScale$1,
@@ -6669,6 +6674,7 @@
       this.setDefaultTypingSpeed(GetValue$a(config, 'speed', 250));
       this.setTypingSpeed();
       this.setAnimationConfig(GetValue$a(config, 'animation', undefined));
+      this.setMinSizeEnable(GetValue$a(config, 'minSizeEnable', false));
     }
 
     _createClass(TypeWriter, [{
@@ -6714,6 +6720,16 @@
         }
 
         this.animationConfig = config;
+        return this;
+      }
+    }, {
+      key: "setMinSizeEnable",
+      value: function setMinSizeEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.minSizeEnable = enable;
         return this;
       }
     }, {
@@ -8883,27 +8899,28 @@
     return this;
   };
 
-  var Play = function Play(content) {
-    if (this.isPlaying) {
+  var PlayMethods = {
+    play: function play(content) {
+      if (this.isPlaying) {
+        return this;
+      }
+
+      this.removeChildren();
+      this.parser.start(content); // Parse bbcode-content
+
+      this.isPlaying = true;
+      this.once('complete', function () {
+        this.isPlaying = false;
+      }, this);
+      this.lastWrapResult = undefined;
+      this.typingNextPage();
       return this;
+    },
+    playPromise: function playPromise(content) {
+      var promise = WaitComplete(this);
+      this.play(content);
+      return promise;
     }
-
-    this.removeChildren();
-    this.parser.start(content); // Parse bbcode-content
-
-    this.isPlaying = true;
-    this.once('complete', function () {
-      this.isPlaying = false;
-    }, this);
-    this.lastWrapResult = undefined;
-    this.typingNextPage();
-    return this;
-  };
-
-  var PlayPromise = function PlayPromise(content) {
-    var promise = WaitComplete(this);
-    this.play(content);
-    return promise;
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -8946,16 +8963,17 @@
     this.typeWriter.once('complete', OnTypingPageComplete, this).start(result.children);
   };
 
-  var Pause = function Pause() {
-    // Pause typing, typing timer and animation progresses
-    this.typeWriter.pauseTyping().pause();
-    return this;
-  };
-
-  var PauseTyping = function PauseTyping() {
-    // Pause typing
-    this.typeWriter.pauseTyping();
-    return this;
+  var PauseMethods = {
+    pause: function pause() {
+      // Pause typing, typing timer and animation progresses
+      this.typeWriter.pauseTyping().pause();
+      return this;
+    },
+    pauseTyping: function pauseTyping() {
+      // Pause typing
+      this.typeWriter.pauseTyping();
+      return this;
+    }
   };
 
   var Resume = function Resume() {
@@ -9032,11 +9050,7 @@
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
     addImage: AddImage,
-    play: Play,
-    playPromise: PlayPromise,
     typingNextPage: TypingNextPage,
-    pause: Pause,
-    pauseTyping: PauseTyping,
     resume: Resume,
     wait: Wait,
     setTimeScale: SetTimeScale,
@@ -9044,7 +9058,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods, TypingSpeedMethods, SpriteMethods);
+  Object.assign(Methods, PlayMethods, PauseMethods, TypingSpeedMethods, SpriteMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
