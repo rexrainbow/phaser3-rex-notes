@@ -79,6 +79,12 @@ class RenderBase extends Base {
         return this;
     }
 
+    setInitialPosition(x, y) {
+        this.x0 = x;
+        this.y0 = y;
+        return this;
+    }
+
     get rotation() {
         return this._rotation;
     }

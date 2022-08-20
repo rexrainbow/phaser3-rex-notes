@@ -8,8 +8,10 @@ var SetToMinSize = function () {
             continue;
         }
 
-        maxX = Math.max(maxX, child.x);
-        maxY = Math.max(maxY, child.y);
+        var x0 = (child.x0 !== undefined) ? child.x0 : child.x;
+        var y0 = (child.y0 !== undefined) ? child.y0 : child.y;
+        maxX = Math.max(maxX, x0);
+        maxY = Math.max(maxY, y0);
     }
 
     var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;

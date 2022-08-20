@@ -993,6 +993,13 @@
         return this;
       }
     }, {
+      key: "setInitialPosition",
+      value: function setInitialPosition(x, y) {
+        this.x0 = x;
+        this.y0 = y;
+        return this;
+      }
+    }, {
       key: "rotation",
       get: function get() {
         return this._rotation;
@@ -3154,7 +3161,14 @@
     var innerHeight = height - paddingVertical - wrapPaddingVertical;
     AlignLines$1(result, innerWidth, innerHeight); // Resize
 
-    this.setSize(width, height);
+    this.setSize(width, height); // Set initial position
+
+    for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
+      var child = resultChildren[i];
+      child.x0 = child.x;
+      child.y0 = child.y;
+    }
+
     return result;
   };
 
@@ -3420,7 +3434,14 @@
     var innerHeight = height - paddingVertical - wrapPaddingVertical;
     AlignLines(result, innerWidth, innerHeight); // Resize
 
-    this.setSize(width, height);
+    this.setSize(width, height); // Set initial position
+
+    for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
+      var child = resultChildren[i];
+      child.x0 = child.x;
+      child.y0 = child.y;
+    }
+
     return result;
   };
 
@@ -3483,8 +3504,10 @@
         continue;
       }
 
-      maxX = Math.max(maxX, child.x);
-      maxY = Math.max(maxY, child.y);
+      var x0 = child.x0 !== undefined ? child.x0 : child.x;
+      var y0 = child.y0 !== undefined ? child.y0 : child.y;
+      maxX = Math.max(maxX, x0);
+      maxY = Math.max(maxY, y0);
     }
 
     var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;

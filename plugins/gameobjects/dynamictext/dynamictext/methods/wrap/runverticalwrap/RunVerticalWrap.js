@@ -173,6 +173,13 @@ var RunVerticalWrap = function (config) {
     // Resize
     this.setSize(width, height);
 
+    // Set initial position
+    for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
+        var child = resultChildren[i];
+        child.x0 = child.x;
+        child.y0 = child.y;
+    }
+
     return result;
 }
 
