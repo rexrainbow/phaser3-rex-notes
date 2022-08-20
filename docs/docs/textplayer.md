@@ -807,3 +807,11 @@ Assume that adding a custom tag : `[custom=10,20][/custom]`
     })
     ```
     - `params` : Parameters passed from `params` in `'parser.-custom'` event.
+
+### Minimun size
+
+Resize to minimun size for showing all visible characters.
+
+```javascript
+txt.setToMinSize();
+```
