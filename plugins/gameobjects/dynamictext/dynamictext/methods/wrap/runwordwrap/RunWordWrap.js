@@ -169,6 +169,9 @@ var RunWordWrap = function (config) {
     // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
         var child = resultChildren[i];
+        if (!CanRender(child)) {
+            continue;
+        }
         child.x0 = child.x;
         child.y0 = child.y;
     }

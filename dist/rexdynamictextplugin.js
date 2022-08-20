@@ -3175,6 +3175,11 @@
 
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
+
+      if (!CanRender(child)) {
+        continue;
+      }
+
       child.x0 = child.x;
       child.y0 = child.y;
     }
@@ -3448,6 +3453,11 @@
 
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
+
+      if (!CanRender(child)) {
+        continue;
+      }
+
       child.x0 = child.x;
       child.y0 = child.y;
     }
@@ -3510,7 +3520,7 @@
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
 
-      if (!child.active || !child.visible) {
+      if (!CanRender(child) || !child.active || !child.visible) {
         continue;
       }
 
