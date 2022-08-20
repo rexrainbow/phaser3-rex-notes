@@ -610,7 +610,7 @@ txt.setWrapConfig(config);
 
 ### Minimun size
 
-Resize to minimun size for showing all visible characters.
+Resize to minimun size to show all visible characters.
 
 ```javascript
 txt.setToMinSize();
