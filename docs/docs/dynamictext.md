@@ -297,6 +297,8 @@ txt.appendImage(key, frame, {
 ```javascript
 var result = txt.runWordWrap({
     padding: {
+        left: 0,
+        right: 0,
         top: 0,
         bottom: 0
     },
@@ -310,8 +312,8 @@ var result = txt.runWordWrap({
 });
 ```
 
-- `padding.top` : Extra space above first line.
-- `padding.bottom` : Extra space below last line.
+- `padding` :
+    - `padding.top`, `padding.bottom`, `padding.left`, `padding.right` : Extra space around lines.
 - `lineHeight` : Line height. 
     - `undefined` : It will be set if `maxLines` and `fixedHeight` is given.
 - `maxLines` : Lines number of this page. 
@@ -353,9 +355,8 @@ var result = txt.runVerticalWrap({
 });
 ```
 
-- `padding.left` : Extra space of left line.
-- `padding.right` : Extra space of right line.
-- `padding.top` : Extra space of first character.
+- `padding` :
+    - `padding.top`, `padding.bottom`, `padding.left`, `padding.right` : Extra space around lines.
 - `lineWidth` : Line width. 
     - `undefined` : It will be set if `maxLines` and `fixedWidth` is given.
 - `maxLines` : Lines number of this page. 

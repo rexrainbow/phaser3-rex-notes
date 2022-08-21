@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
             fixedChildHeight: 20,
             padding: {
                 top: 15,
-                right: 4,
+                right: 10,
                 left: 8
             },
             // rtl: false

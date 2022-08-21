@@ -12460,9 +12460,8 @@
     // Parse parameters
     var startIndex = GetValue$1X(config, 'start', 0);
     SetPadding$1(this.wrapPadding, GetValue$1X(config, 'padding', 0));
-    var wrapPaddingVertical = this.wrapPadding.top + this.wrapPadding.bottom;
-    var paddingVertical = this.padding.top + this.padding.bottom;
-    var paddingHorizontal = this.padding.left + this.padding.right; // Get lineHeight, maxLines
+    var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right; // Get lineHeight, maxLines
 
     var lineHeight = GetValue$1X(config, 'lineHeight', undefined);
     var maxLines;
@@ -12472,7 +12471,7 @@
       maxLines = GetValue$1X(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
-        var innerHeight = this.fixedHeight - paddingVertical - wrapPaddingVertical;
+        var innerHeight = this.fixedHeight - paddingVertical;
         lineHeight = innerHeight / maxLines;
       } else {
         lineHeight = 0;
@@ -12483,7 +12482,7 @@
         maxLines = GetValue$1X(config, 'maxLines', undefined);
 
         if (maxLines === undefined) {
-          var innerHeight = this.fixedHeight - paddingVertical - wrapPaddingVertical;
+          var innerHeight = this.fixedHeight - paddingVertical;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
@@ -12536,8 +12535,8 @@
 
 
     wrapWidth += letterSpacing;
-    var startX = this.padding.left,
-        startY = this.padding.top + lineHeight + this.wrapPadding.top,
+    var startX = this.padding.left + this.wrapPadding.left,
+        startY = this.padding.top + this.wrapPadding.top,
         // Start(baseline) from 1st lineHeight, not 0
     x = startX,
         y = startY;
@@ -12619,13 +12618,13 @@
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
-    result.linesHeight = resultLines.length * lineHeight + wrapPaddingVertical; // Calculate size of game object
+    result.linesHeight = resultLines.length * lineHeight; // Calculate size of game object
 
     var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + paddingHorizontal;
     var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + paddingVertical; // Size might be changed after wrapping
 
     var innerWidth = width - paddingHorizontal;
-    var innerHeight = height - paddingVertical - wrapPaddingVertical;
+    var innerHeight = height - paddingVertical;
     AlignLines$1(result, innerWidth, innerHeight); // Resize
 
     this.setSize(width, height); // Set initial position
@@ -12726,10 +12725,8 @@
     // Parse parameters
     var startIndex = GetValue$1W(config, 'start', 0);
     SetPadding$1(this.wrapPadding, GetValue$1W(config, 'padding', 0));
-    var wrapPaddingVertical = this.wrapPadding.top + this.wrapPadding.bottom;
-    var wrapPaddingHorizontal = this.wrapPadding.left + this.wrapPadding.right;
-    var paddingVertical = this.padding.top + this.padding.bottom;
-    var paddingHorizontal = this.padding.left + this.padding.right;
+    var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
     var lineWidth = GetValue$1W(config, 'lineWidth', undefined);
     var maxLines;
 
@@ -12738,7 +12735,7 @@
       maxLines = GetValue$1W(config, 'maxLines', 0);
 
       if (this.fixedWidth > 0) {
-        var innerWidth = this.fixedWidth - paddingHorizontal - wrapPaddingHorizontal;
+        var innerWidth = this.fixedWidth - paddingHorizontal;
         lineWidth = innerWidth / maxLines;
       } else {
         lineWidth = 0;
@@ -12750,7 +12747,7 @@
 
         if (maxLines === undefined) {
           var innerWidth = this.fixedWidth - paddingHorizontal;
-          maxLines = Math.floor(innerWidth / lineWidth);
+          maxLines = Math.floor(innerWidth / lineWidth) + 1;
         }
       } else {
         maxLines = GetValue$1W(config, 'maxLines', 0); // Default is show all lines
@@ -12765,7 +12762,7 @@
       var charPerLine = GetValue$1W(config, 'charPerLine', undefined);
 
       if (charPerLine !== undefined) {
-        var innerHeight = this.fixedHeight - paddingVertical - wrapPaddingVertical;
+        var innerHeight = this.fixedHeight - paddingVertical;
         fixedChildHeight = Math.floor(innerHeight / charPerLine);
       }
     } // Get wrapHeight
@@ -12897,13 +12894,13 @@
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineHeight = maxLineHeight;
-    result.linesWidth = resultLines.length * lineWidth + wrapPaddingHorizontal; // Calculate size of game object
+    result.linesWidth = resultLines.length * lineWidth; // Calculate size of game object
 
     var width = this.fixedWidth > 0 ? this.fixedWidth : result.linesWidth + paddingHorizontal;
     var height = this.fixedHeight > 0 ? this.fixedHeight : result.maxLineHeight + paddingVertical; // Size might be changed after wrapping
 
-    var innerWidth = width - paddingHorizontal - wrapPaddingHorizontal;
-    var innerHeight = height - paddingVertical - wrapPaddingVertical;
+    var innerWidth = width - paddingHorizontal;
+    var innerHeight = height - paddingVertical;
     AlignLines(result, innerWidth, innerHeight); // Resize
 
     this.setSize(width, height); // Set initial position
