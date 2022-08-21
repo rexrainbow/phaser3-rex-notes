@@ -12536,7 +12536,7 @@
 
     wrapWidth += letterSpacing;
     var startX = this.padding.left + this.wrapPadding.left,
-        startY = this.padding.top + this.wrapPadding.top,
+        startY = this.padding.top + this.wrapPadding.top + lineHeight,
         // Start(baseline) from 1st lineHeight, not 0
     x = startX,
         y = startY;

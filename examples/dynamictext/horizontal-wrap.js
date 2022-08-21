@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
             padding: {
                 left: 20,
                 right: 20,
-                top: 20,
+                top: -20,
                 bottom: 10
             },
         })
