@@ -45881,6 +45881,14 @@
           return this;
         }
 
+        var gameObject = this.parent;
+
+        if (this.orientation === 0) {
+          this.scale0 = gameObject.scaleX;
+        } else {
+          this.scale0 = gameObject.scaleY;
+        }
+
         this.timer.setDelay(this.delay).setDuration(this.duration / 2).setRepeat(1); // 2 times
 
         _get(_getPrototypeOf(Flip.prototype), "start", this).call(this);
@@ -45916,7 +45924,7 @@
         }
 
         t = this.easeFn(t);
-        var value = Linear(1, 0, t);
+        var value = Linear(this.scale0, 0, t);
 
         if (this.orientation === 0) {
           gameObject.scaleX = value;
