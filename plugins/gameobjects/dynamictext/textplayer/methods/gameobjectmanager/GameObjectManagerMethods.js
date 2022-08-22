@@ -1,14 +1,12 @@
 import GameObjectManagerBase from '../../../../../utils/gameobject/gomanager/GOManager.js';
 import OnParseAddGameObjectTag from './OnParseAddGameObjectTag.js';
 import OnParseRemoveAllGameObjectsTag from './OnParseRemoveAllGameObjectsTag.js';
-// import OnParseCallGameObjectMethodTag from './OnParseCallGameObjectMethodTag.js';
-import OnParseSetGameObjectPropertyTag from './OnParseSetGameObjectPropertyTag.js';
+import OnParseCallGameObjectMethodTag from './OnParseCallGameObjectMethodTag.js';
 import OnParseEaseGameObjectPropertyTag from './OnParseEaseGameObjectPropertyTag.js';
 
 const ParseCallbacks = [
     OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag,
-    // OnParseCallGameObjectMethodTag,
-    OnParseSetGameObjectPropertyTag,
+    OnParseCallGameObjectMethodTag,
     OnParseEaseGameObjectPropertyTag
 ];
 
@@ -27,7 +25,7 @@ export default {
         var gameobjectManager = new GameObjectManagerClass(this.scene, config);
         var name = config.name;
         if (!name) {
-            console.warn(`Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method`);
+            console.warn(`Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method`);
         }
         this.gameObjectManagers[name] = gameobjectManager;
 
@@ -36,7 +34,10 @@ export default {
         if (!customParseCallbacks) {
             customParseCallbacks = ParseCallbacks;
         } else {
-            customParseCallbacks = [...customParseCallbacks, ...ParseCallbacks];
+            customParseCallbacks = [
+                ...customParseCallbacks, // customParseCallbacks have higher priority
+                ...ParseCallbacks
+            ];
         }
         for (var i = 0, cnt = customParseCallbacks.length; i < cnt; i++) {
             customParseCallbacks[i](this, this.parser, config);

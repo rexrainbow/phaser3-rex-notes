@@ -23,12 +23,12 @@ var OnParseCallGameObjectMethodTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            var methodEventName = `${goType}.${prop}`;
+            var eventName = `${goType}.${prop}`;
             tagPlayer.emit(
-                methodEventName,
+                eventName,
                 name, ...parameters
             );
-            if (tagPlayer.listenerCount(methodEventName) > 0) {
+            if (tagPlayer.listenerCount(eventName) > 0) {
                 parser.skipEvent();
                 return;
             }

@@ -34,7 +34,10 @@ export default {
         if (!customParseCallbacks) {
             customParseCallbacks = ParseCallbacks;
         } else {
-            customParseCallbacks = [...customParseCallbacks, ...ParseCallbacks];
+            customParseCallbacks = [
+                ...customParseCallbacks, // customParseCallbacks have higher priority
+                ...ParseCallbacks
+            ];
         }
         for (var i = 0, cnt = customParseCallbacks.length; i < cnt; i++) {
             customParseCallbacks[i](this, this.parser, config);
