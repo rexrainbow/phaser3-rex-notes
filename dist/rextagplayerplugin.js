@@ -4597,8 +4597,8 @@
     });
   };
 
-  var IsCallMethodTag = function IsCallMethodTag(tags, goType) {
-    // goType.name.methodName
+  var IsPropTag = function IsPropTag(tags, goType) {
+    // goType.name.prop
     return tags.length === 3 && tags[0] === goType;
   };
 
@@ -4610,66 +4610,40 @@
         // Has been processed before
         return;
       } // [goType.name.methodName=value0,value1,value2...]
+      // [goType.name.prop=value]
 
 
       var tags = tag.split('.');
-      var name, methodName;
+      var name, prop;
 
-      if (IsCallMethodTag(tags, goType)) {
+      if (IsPropTag(tags, goType)) {
         name = tags[1];
-        methodName = tags[2];
+        prop = tags[2];
       } else {
         return;
       }
 
-      var methodEventName = "".concat(goType, ".").concat(methodName);
+      var eventName = "".concat(goType, ".").concat(prop);
 
       for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         parameters[_key - 1] = arguments[_key];
       }
 
-      tagPlayer.emit.apply(tagPlayer, [methodEventName, name].concat(parameters));
+      tagPlayer.emit.apply(tagPlayer, [eventName, name].concat(parameters));
 
-      if (tagPlayer.listenerCount(methodEventName) > 0) {
+      if (tagPlayer.listenerCount(eventName) > 0) {
         parser.skipEvent();
         return;
       }
 
-      if (!gameObjectManager.hasMethod(name, methodName)) {
-        return;
-      }
-
-      gameObjectManager.call.apply(gameObjectManager, [name, methodName].concat(parameters));
-      parser.skipEvent(); // Will block SetGameObjectPropertyTag callback
-    });
-  };
-
-  var IsSetPropertyTag = function IsSetPropertyTag(tags, goType) {
-    // goType.name.prop
-    return tags.length === 3 && tags[0] === goType;
-  };
-
-  var OnParseSetGameObjectPropertyTag = function OnParseSetGameObjectPropertyTag(tagPlayer, parser, config) {
-    var goType = config.name;
-    var gameObjectManager = tagPlayer.getGameObjectManager(goType);
-    parser.on("+", function (tag, value) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [goType.name.prop=value]
-
-
-      var tags = tag.split('.');
-      var name, property;
-
-      if (IsSetPropertyTag(tags, goType)) {
-        name = tags[1];
-        property = tags[2];
+      if (gameObjectManager.hasMethod(name, prop)) {
+        // Is method
+        gameObjectManager.call.apply(gameObjectManager, [name, prop].concat(parameters));
       } else {
-        return;
+        // Is property
+        gameObjectManager.setProperty(name, prop, parameters[0]);
       }
 
-      gameObjectManager.setProperty(name, property, value);
       parser.skipEvent();
     });
   };
@@ -4756,7 +4730,7 @@
     });
   };
 
-  var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseSetGameObjectPropertyTag, OnParseEaseGameObjectPropertyTag];
+  var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseEaseGameObjectPropertyTag];
   var GameObjectManagerMethods = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
       if (config === undefined) {

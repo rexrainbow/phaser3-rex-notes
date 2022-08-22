@@ -217,6 +217,14 @@
     return value;
   }
 
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function _toArray(arr) {
+    return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
+  }
+
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
@@ -225,8 +233,42 @@
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
 
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+
+    var _s, _e;
+
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
   }
 
   function _unsupportedIterableToArray(o, minLen) {
@@ -248,6 +290,10 @@
 
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   // copy from Phaser.GameObjects.Text
@@ -4863,430 +4909,6 @@
     );
   };
 
-  var IsAddSpriteTag = function IsAddSpriteTag(tags, prefix) {
-    // sprite.name
-    return tags.length === 2 && tags[0] === prefix;
-  };
-
-  var OnParseAddSpriteTag = function OnParseAddSpriteTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name=key,frame], or [sprite.name]
-
-
-      var tags = tag.split('.');
-
-      if (IsAddSpriteTag(tags, prefix)) {
-        var name = tags[1];
-
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-
-        AppendCommand$3.call(textPlayer, 'sprite.add', // name
-        AddSprite, // callback
-        [name].concat(args), // params
-        textPlayer // scope
-        );
-      } else {
-        return;
-      }
-
-      parser.skipEvent();
-    }).on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/sprite.name]
-
-
-      var tags = tag.split('.');
-
-      if (IsAddSpriteTag(tags, prefix)) {
-        var name = tags[1];
-        AppendCommand$3.call(textPlayer, 'sprite.remove', // name
-        RemoveSprite, // callback
-        name, // params
-        textPlayer // scope
-        );
-      } else {
-        return;
-      }
-
-      parser.skipEvent();
-    });
-  };
-
-  var AddSprite = function AddSprite(params) {
-    var _this$spriteManager;
-
-    // this: textPlayer
-    params.push(this);
-
-    (_this$spriteManager = this.spriteManager).add.apply(_this$spriteManager, _toConsumableArray(params));
-  };
-
-  var RemoveSprite = function RemoveSprite(name) {
-    // this: textPlayer
-    this.spriteManager.remove(name);
-  };
-
-  var OnParseRemoveAllSpritesTag = function OnParseRemoveAllSpritesTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/sprite]
-
-
-      if (tag === prefix) {
-        AppendCommand$3.call(textPlayer, 'sprite.removeall', // name
-        RemoveAllSprites, // callback
-        undefined, // params
-        textPlayer // scope
-        );
-      } else {
-        return;
-      }
-
-      parser.skipEvent();
-    });
-  };
-
-  var RemoveAllSprites = function RemoveAllSprites() {
-    // this: textPlayer
-    this.spriteManager.removeAll();
-  };
-
-  var IsPlayAnimationTag = function IsPlayAnimationTag(tags, prefix) {
-    // sprite.name.play 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'play';
-  };
-
-  var IsStopAnimationTag = function IsStopAnimationTag(tags, prefix) {
-    // sprite.name.stop 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'stop';
-  };
-
-  var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.play=key], or [sprite.name.play=key0,key1,...]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsPlayAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      var keys = Array.prototype.slice.call(arguments, 1);
-      AppendCommand$3.call(textPlayer, 'sprite.play', // name
-      PlayAnimation, // callback
-      [name, keys], // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    }).on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.stop]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsStopAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      AppendCommand$3.call(textPlayer, 'sprite.stop', // name
-      StopAnimation, // callback
-      name, // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    }).on('-', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [/sprite.name.play]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsPlayAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      AppendCommand$3.call(textPlayer, 'sprite.stop', // name
-      StopAnimation, // callback
-      name, // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    });
-  };
-
-  var PlayAnimation = function PlayAnimation(params) {
-    var name = params[0];
-    var keys = params[1];
-    var key = keys.shift(); // this: textPlayer
-
-    this.spriteManager.playAnimation(name, key);
-
-    if (keys.length > 0) {
-      this.spriteManager.chainAnimation(name, keys);
-    }
-  };
-
-  var StopAnimation = function StopAnimation(name) {
-    // this: textPlayer
-    this.spriteManager.stopAnimation(name);
-  };
-
-  var IsChainAnimationTag = function IsChainAnimationTag(tags, prefix) {
-    // sprite.name.chain 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'chain';
-  };
-
-  var OnParseChainAnimationTag = function OnParseChainAnimationTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.chain=key]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsChainAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      var keys = Array.prototype.slice.call(arguments, 1);
-      AppendCommand$3.call(textPlayer, 'sprite.chain', // name
-      ChainAnimation, // callback
-      [name, keys], // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    });
-  };
-
-  var ChainAnimation = function ChainAnimation(params) {
-    var _this$spriteManager;
-
-    // this: textPlayer
-    (_this$spriteManager = this.spriteManager).chainAnimation.apply(_this$spriteManager, _toConsumableArray(params));
-  };
-
-  var IsPauseAnimationTag = function IsPauseAnimationTag(tags, prefix) {
-    // sprite.name.pause 
-    return tags.length === 3 && tags[0] === prefix && tags[2] === 'pause';
-  };
-
-  var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on('+', function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.chain=key]
-
-
-      var tags = tag.split('.');
-      var name;
-
-      if (IsPauseAnimationTag(tags, prefix)) {
-        name = tags[1];
-      } else {
-        return;
-      }
-
-      AppendCommand$3.call(textPlayer, 'sprite.pause', // name
-      PauseAnimation, // callback
-      name, // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    });
-  };
-
-  var PauseAnimation = function PauseAnimation(name) {
-    // this: textPlayer
-    this.spriteManager.pauseAnimation(name);
-  };
-
-  var IsSetPropertyTag = function IsSetPropertyTag(tags, prefix) {
-    // sprite.name.prop
-    return tags.length === 3 && tags[0] === prefix;
-  };
-
-  var OnParseSetSpritePropertyTag = function OnParseSetSpritePropertyTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on("+", function (tag, value) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.prop=value]
-
-
-      var tags = tag.split('.');
-      var name, property;
-
-      if (IsSetPropertyTag(tags, prefix)) {
-        name = tags[1];
-        property = tags[2];
-      } else {
-        return;
-      }
-
-      AppendCommand$3.call(textPlayer, 'sprite.set', // name
-      SetProperty, // callback
-      [name, property, value], // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    });
-  };
-
-  var SetProperty = function SetProperty(params) {
-    var _this$spriteManager;
-
-    // this: textPlayer
-    (_this$spriteManager = this.spriteManager).setProperty.apply(_this$spriteManager, _toConsumableArray(params));
-  };
-
-  var EaseMode = {
-    to: true,
-    yoyo: true
-  };
-
-  var IsEasePropertyTag = function IsEasePropertyTag(tags, prefix) {
-    // sprite.name.prop.to, or sprite.name.prop.yoyo
-    return tags.length === 4 && tags[0] === prefix && EaseMode[tags[3]];
-  };
-
-  var OnParseEaseSpritePropertyTag = function OnParseEaseSpritePropertyTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on("+", function (tag, value, duration, ease, repeat) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.prop.to=value,duration]
-      // [sprite.name.prop.to=value,duration,ease,repeat]
-      // [sprite.name.prop.to=value,duration,repeat]
-
-
-      var tags = tag.split('.');
-      var name, property, isYoyo;
-
-      if (IsEasePropertyTag(tags, prefix)) {
-        name = tags[1];
-        property = tags[2];
-        isYoyo = tags[3] === 'yoyo';
-      } else {
-        return;
-      }
-
-      if (typeof ease === 'number') {
-        repeat = ease;
-        ease = undefined;
-      }
-
-      AppendCommand$3.call(textPlayer, 'sprite.ease', // name
-      EaseProperty, // callback
-      [name, property, value, duration, ease, repeat, isYoyo], // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    });
-  };
-
-  var EaseProperty = function EaseProperty(params) {
-    var _this$spriteManager;
-
-    // this: textPlayer
-    (_this$spriteManager = this.spriteManager).easeProperty.apply(_this$spriteManager, _toConsumableArray(params));
-  };
-
-  var IsCallSpriteMethodTag = function IsCallSpriteMethodTag(tags, prefix) {
-    // sprite.name.methodName
-    return tags.length === 3 && tags[0] === prefix;
-  };
-
-  var OnParseCallSpriteMethodTag = function OnParseCallSpriteMethodTag(textPlayer, parser, config) {
-    var prefix = 'sprite';
-
-    parser.on("+", function (tag) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      } // [sprite.name.methodName=value0,value1,value2...]
-
-
-      var tags = tag.split('.');
-      var name, methodName;
-
-      if (IsCallSpriteMethodTag(tags, prefix)) {
-        name = tags[1];
-        methodName = tags[2];
-      } else {
-        return;
-      }
-
-      if (!textPlayer.spriteManager.hasMethod(name, methodName)) {
-        return;
-      }
-
-      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        parameters[_key - 1] = arguments[_key];
-      }
-
-      AppendCommand$3.call(textPlayer, 'sprite.call', // name
-      CallMethod, // callback
-      [name, methodName].concat(parameters), // params
-      textPlayer // scope
-      );
-      parser.skipEvent();
-    });
-  };
-
-  var CallMethod = function CallMethod(params) {
-    var _this$spriteManager;
-
-    // this: textPlayer
-    (_this$spriteManager = this.spriteManager).call.apply(_this$spriteManager, _toConsumableArray(params));
-  };
-
   var OnParseNewLineTag = function OnParseNewLineTag(textPlayer, parser, config) {
     var tagName = 'r';
     parser.on("+".concat(tagName), function () {
@@ -5374,12 +4996,11 @@
     );
   };
 
-  var ParseCallbacks = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseAddSpriteTag, OnParseRemoveAllSpritesTag, OnParsePlayAnimationTag, OnParseChainAnimationTag, OnParsePauseAnimationTag, OnParseCallSpriteMethodTag, // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
-  OnParseSetSpritePropertyTag, OnParseEaseSpritePropertyTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
-    for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
-      ParseCallbacks[i](textPlayer, parser, config);
+    for (var i = 0, cnt = ParseCallbacks$2.length; i < cnt; i++) {
+      ParseCallbacks$2[i](textPlayer, parser, config);
     }
   };
 
@@ -8874,6 +8495,545 @@
 
   Object.assign(SpriteManager.prototype, Methods$1);
 
+  var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
+    // goType.name.play
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'play';
+  };
+
+  var IsStopAnimationTag = function IsStopAnimationTag(tags, goType) {
+    // goType.name.stop
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'stop';
+  };
+
+  var OnParsePlayAnimationTag = function OnParsePlayAnimationTag(textPlayer, parser, config) {
+    var goType = config.name;
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name.play=key], or [goType.name.play=key0,key1,...]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsPlayAnimationTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      for (var _len = arguments.length, keys = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        keys[_key - 1] = arguments[_key];
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".play"), // name
+      PlayAnimation, // callback
+      [goType, name, keys], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    }).on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name.stop]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsStopAnimationTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".stop"), // name
+      StopAnimation, // callback
+      [goType, name], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    }).on('-', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [/goType.name.play]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsPlayAnimationTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".stop"), // name
+      StopAnimation, // callback
+      [goType, name], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var PlayAnimation = function PlayAnimation(params) {
+    var goType, name, keys;
+
+    var _params = _slicedToArray(params, 3);
+
+    goType = _params[0];
+    name = _params[1];
+    keys = _params[2];
+    var key = keys.shift(); // this: textPlayer
+
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.playAnimation(name, key);
+
+    if (keys.length > 0) {
+      gameObjectManager.chainAnimation(name, keys);
+    }
+  };
+
+  var StopAnimation = function StopAnimation(params) {
+    var goType, args;
+
+    var _params2 = _toArray(params);
+
+    goType = _params2[0];
+    args = _params2.slice(1);
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.stopAnimation.apply(gameObjectManager, _toConsumableArray(args));
+  };
+
+  var IsPauseAnimationTag = function IsPauseAnimationTag(tags, goType) {
+    // goType.name.pause 
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'pause';
+  };
+
+  var OnParsePauseAnimationTag = function OnParsePauseAnimationTag(textPlayer, parser, config) {
+    var goType = config.name;
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name.pause=key]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsPauseAnimationTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".pause"), // name
+      PauseAnimation, // callback
+      [goType, name], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var PauseAnimation = function PauseAnimation(params) {
+    var goType, args;
+
+    var _params = _toArray(params);
+
+    goType = _params[0];
+    args = _params.slice(1);
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.pauseAnimation.apply(gameObjectManager, _toConsumableArray(args));
+  };
+
+  var IsChainAnimationTag = function IsChainAnimationTag(tags, goType) {
+    // goType.name.chain 
+    return tags.length === 3 && tags[0] === goType && tags[2] === 'chain';
+  };
+
+  var OnParseChainAnimationTag = function OnParseChainAnimationTag(textPlayer, parser, config) {
+    var goType = config.name;
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name.chain=key]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsChainAnimationTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      var keys = Array.prototype.slice.call(arguments, 1);
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".chain"), // name
+      ChainAnimation, // callback
+      [goType, name, keys], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var ChainAnimation = function ChainAnimation(params) {
+    var goType, args;
+
+    var _params = _toArray(params);
+
+    goType = _params[0];
+    args = _params.slice(1);
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.chainAnimation.apply(gameObjectManager, _toConsumableArray(args));
+  };
+
+  var ParseCallbacks$1 = [OnParsePlayAnimationTag, OnParsePauseAnimationTag, OnParseChainAnimationTag];
+
+  var AddSpriteManager = function AddSpriteManager(config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    config.name = 'sprite';
+    config.parseCallbacks = ParseCallbacks$1;
+    this.addGameObjectManager(config, SpriteManager);
+  };
+
+  var IsAddGameObjectTag = function IsAddGameObjectTag(tags, goType) {
+    // goType.name
+    return tags.length === 2 && tags[0] === goType;
+  };
+
+  var OnParseAddGameObjectTag = function OnParseAddGameObjectTag(textPlayer, parser, config) {
+    var goType = config.name;
+    parser.on('+', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name=key,frame], or [goType.name]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsAddGameObjectTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".add"), // name
+      AddGameObject, // callback
+      [goType, name].concat(args), // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    }).on('-', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [/goType.name]
+
+
+      var tags = tag.split('.');
+      var name;
+
+      if (IsAddGameObjectTag(tags, goType)) {
+        name = tags[1];
+      } else {
+        return;
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".remove"), // name
+      RemoveGameObject, // callback
+      [goType, name], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var AddGameObject = function AddGameObject(params) {
+    var goType, args;
+
+    var _params = _toArray(params);
+
+    goType = _params[0];
+    args = _params.slice(1);
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.add.apply(gameObjectManager, _toConsumableArray(args));
+  };
+
+  var RemoveGameObject = function RemoveGameObject(params) {
+    var goType, args;
+
+    var _params2 = _toArray(params);
+
+    goType = _params2[0];
+    args = _params2.slice(1);
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.remove.apply(gameObjectManager, _toConsumableArray(args));
+  };
+
+  var OnParseRemoveAllGameObjectsTag = function OnParseRemoveAllGameObjectsTag(textPlayer, parser, config) {
+    var goType = config.name;
+    parser.on('-', function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [/goType]
+
+
+      if (tag === goType) ; else {
+        return;
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".removeall"), // name
+      RemoveAllSprites, // callback
+      goType, // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var RemoveAllSprites = function RemoveAllSprites(goType) {
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    gameObjectManager.removeAll();
+  };
+
+  var IsPropTag = function IsPropTag(tags, goType) {
+    // goType.name.prop
+    return tags.length === 3 && tags[0] === goType;
+  };
+
+  var OnParseCallGameObjectMethodTag = function OnParseCallGameObjectMethodTag(textPlayer, parser, config) {
+    var goType = config.name;
+    parser.on("+", function (tag) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name.methodName=value0,value1,value2...]
+      // [goType.name.prop=value]
+
+
+      var tags = tag.split('.');
+      var name, prop;
+
+      if (IsPropTag(tags, goType)) {
+        name = tags[1];
+        prop = tags[2];
+      } else {
+        return;
+      }
+
+      for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        parameters[_key - 1] = arguments[_key];
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".call"), // name
+      CallMethod, // callback
+      [goType, name, prop].concat(parameters), // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var CallMethod = function CallMethod(params) {
+    var goType, name, prop, args;
+
+    var _params = _toArray(params);
+
+    goType = _params[0];
+    name = _params[1];
+    prop = _params[2];
+    args = _params.slice(3);
+    // this: textPlayer
+    var eventName = "".concat(goType, ".").concat(prop);
+    this.emit.apply(this, [eventName, name].concat(_toConsumableArray(args)));
+
+    if (this.listenerCount(eventName) > 0) {
+      return;
+    }
+
+    var gameObjectManager = this.getGameObjectManager(goType);
+
+    if (gameObjectManager.hasMethod(name, prop)) {
+      // Is method
+      gameObjectManager.call.apply(gameObjectManager, [name, prop].concat(_toConsumableArray(args)));
+    } else {
+      // Is property
+      gameObjectManager.setProperty(name, prop, args[0]);
+    }
+  };
+
+  var EaseMode = {
+    to: true,
+    yoyo: true,
+    from: true,
+    toLeft: true,
+    toRight: true,
+    toUp: true,
+    toDown: true,
+    yoyoLeft: true,
+    yoyoRight: true,
+    yoyoUp: true,
+    yoyoDown: true,
+    fromLeft: true,
+    fromRight: true,
+    fromUp: true,
+    fromDown: true
+  };
+
+  var IsEasePropertyTag = function IsEasePropertyTag(tags, goType) {
+    // goType.name.prop.to
+    return tags.length === 4 && tags[0] === goType && EaseMode[tags[3]];
+  };
+
+  var OnParseEaseGameObjectPropertyTag = function OnParseEaseGameObjectPropertyTag(textPlayer, parser, config) {
+    var goType = config.name;
+    textPlayer.getGameObjectManager(goType);
+    parser.on("+", function (tag, value, duration, ease, repeat) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      } // [goType.name.prop.to=value,duration]
+      // [goType.name.prop.to=value,duration,ease,repeat]
+      // [goType.name.prop.to=value,duration,repeat]
+
+
+      var tags = tag.split('.');
+      var name, property, easeMode;
+
+      if (IsEasePropertyTag(tags, goType)) {
+        name = tags[1];
+        property = tags[2];
+        easeMode = tags[3];
+      } else {
+        return;
+      }
+
+      if (typeof ease === 'number') {
+        repeat = ease;
+        ease = undefined;
+      }
+
+      AppendCommand$3.call(textPlayer, "".concat(goType, ".ease"), // name
+      EaseProperty, // callback
+      [goType, name, property, value, duration, ease, repeat, easeMode], // params
+      textPlayer // scope
+      );
+      parser.skipEvent();
+    });
+  };
+
+  var EaseProperty = function EaseProperty(params) {
+    var goType, name, property, value, duration, ease, repeat, easeMode;
+
+    var _params = _slicedToArray(params, 8);
+
+    goType = _params[0];
+    name = _params[1];
+    property = _params[2];
+    value = _params[3];
+    duration = _params[4];
+    ease = _params[5];
+    repeat = _params[6];
+    easeMode = _params[7];
+    // this: textPlayer
+    var gameObjectManager = this.getGameObjectManager(goType);
+    var currentValue = gameObjectManager.getProperty(name, property); // Only can tween number property
+
+    if (typeof currentValue !== 'number') {
+      return;
+    }
+
+    if (easeMode.endsWith('Left') || easeMode.endsWith('Up')) {
+      if (easeMode.startsWith('to') || easeMode.startsWith('yoyo')) {
+        value = currentValue - value;
+      } else if (easeMode.startsWith('from')) {
+        gameObjectManager.setProperty(name, property, currentValue - value);
+        value = currentValue;
+      }
+    } else if (easeMode.endsWith('Right') || easeMode.endsWith('Down')) {
+      if (easeMode.startsWith('to') || easeMode.startsWith('yoyo')) {
+        value = currentValue + value;
+      } else if (easeMode.startsWith('from')) {
+        gameObjectManager.setProperty(name, property, currentValue + value);
+        value = currentValue;
+      }
+    } else if (easeMode === 'from') {
+      gameObjectManager.setProperty(name, property, value);
+      value = currentValue;
+    }
+
+    var isYoyo = easeMode.startsWith('yoyo');
+    gameObjectManager.easeProperty(name, property, value, duration, ease, repeat, isYoyo);
+  };
+
+  var ParseCallbacks = [OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag, OnParseCallGameObjectMethodTag, OnParseEaseGameObjectPropertyTag];
+  var GameObjectManagerMethods = {
+    addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (GameObjectManagerClass === undefined) {
+        GameObjectManagerClass = GOManager;
+      }
+
+      if (!config.createGameObjectScope) {
+        config.createGameObjectScope = this;
+      }
+
+      var gameobjectManager = new GameObjectManagerClass(this.scene, config);
+      var name = config.name;
+
+      if (!name) {
+        console.warn("Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method");
+      }
+
+      this.gameObjectManagers[name] = gameobjectManager; // Register parse callbacks
+
+      var customParseCallbacks = config.parseCallbacks;
+
+      if (!customParseCallbacks) {
+        customParseCallbacks = ParseCallbacks;
+      } else {
+        customParseCallbacks = [].concat(_toConsumableArray(customParseCallbacks), ParseCallbacks);
+      }
+
+      for (var i = 0, cnt = customParseCallbacks.length; i < cnt; i++) {
+        customParseCallbacks[i](this, this.parser, config);
+      }
+
+      return this;
+    },
+    getGameObjectManager: function getGameObjectManager(name) {
+      return this.gameObjectManagers[name];
+    }
+  };
+
   var SetClickTarget = function SetClickTarget(target) {
     this.clickTarget = target;
 
@@ -9052,12 +9212,53 @@
     return this;
   };
 
+  var GameObjectMethods = {
+    getGameObject: function getGameObject(goType, name, out) {
+      var gameobjectManager = this.getGameObjectManager(goType);
+
+      if (typeof name === 'string') {
+        return gameobjectManager.getGO(name);
+      } else {
+        var names = name;
+
+        if (names === undefined) {
+          names = gameobjectManager.bobs;
+        }
+
+        if (out === undefined) {
+          out = {};
+        }
+
+        for (name in names) {
+          out[name] = gameobjectManager.getGO(name);
+        }
+
+        return result;
+      }
+    },
+    addGameObject: function addGameObject(goType, name, gameObject) {
+      var gameobjectManager = this.getGameObjectManager(goType);
+
+      if (typeof name === 'string') {
+        gameobjectManager.addGO(name, gameObject);
+      } else {
+        var names = name;
+
+        for (name in names) {
+          gameobjectManager.addGO(name, names[name]);
+        }
+      }
+
+      return this;
+    }
+  };
+
   var SpriteMethods = {
     getSprite: function getSprite(name) {
-      return this.spriteManager.getGO(name);
+      return this.getGameObject('sprite', name);
     },
     addSprite: function addSprite(name, gameObject) {
-      this.spriteManager.addGO(name, gameObject);
+      this.addGameObject('sprite', name, gameObject);
       return this;
     }
   };
@@ -9075,7 +9276,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods, PlayMethods, PauseMethods, TypingSpeedMethods, SpriteMethods);
+  Object.assign(Methods, GameObjectManagerMethods, PlayMethods, PauseMethods, TypingSpeedMethods, GameObjectMethods, SpriteMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -9129,11 +9330,11 @@
 
       _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
 
-      _this._spriteManager = undefined;
-      var spriteManagerConfig = GetValue(config, 'sprites', undefined);
+      _this.gameObjectManagers = {};
+      var spriteManagerConfig = GetValue(config, 'sprites');
 
-      if (spriteManagerConfig) {
-        _this._spriteManager = new SpriteManager(_this.scene, spriteManagerConfig);
+      if (spriteManagerConfig !== false && spriteManagerConfig !== null) {
+        AddSpriteManager.call(_assertThisInitialized(_this), spriteManagerConfig);
       }
 
       _this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
@@ -9173,11 +9374,7 @@
     }, {
       key: "spriteManager",
       get: function get() {
-        if (this._spriteManager === undefined) {
-          this._spriteManager = new SpriteManager(this.scene);
-        }
-
-        return this._spriteManager;
+        return this.getGameObjectManager('sprite');
       }
     }, {
       key: "destroy",
@@ -9206,11 +9403,11 @@
         this._soundManager = undefined;
         this.camera = undefined;
 
-        if (this._spriteManager) {
-          this._spriteManager.destroy(fromScene);
+        for (var name in this.gameObjectManagers) {
+          this.gameObjectManagers.destroy(fromScene);
+          delete this.gameObjectManagers[name];
         }
 
-        this._spriteManager = undefined;
         this.clickEE = undefined;
 
         _get(_getPrototypeOf(TextPlayer.prototype), "destroy", this).call(this, fromScene);
