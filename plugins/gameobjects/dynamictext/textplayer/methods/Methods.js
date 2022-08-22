@@ -15,6 +15,7 @@ import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
 import GameObjectMethods from './gameobjectmanager/GameObjectMethods.js';
 import SpriteMethods from './spritemanager/SpriteMethods.js';
+import ContentMethods from './ContentMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
@@ -38,6 +39,7 @@ Object.assign(
     TypingSpeedMethods,
     GameObjectMethods,
     SpriteMethods,
+    ContentMethods,
 );
 
 export default Methods;

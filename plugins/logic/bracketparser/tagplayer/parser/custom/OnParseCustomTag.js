@@ -1,20 +1,18 @@
 var OnParseCustomTag = function (tagPlayer, parser, config) {
     parser
-        .on('+', function (tagName, ...value) {
+        .on('+', function (tagName, ...params) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
 
-            var startTag = `+${tagName}`;
-            tagPlayer.emit(`${startTag}`, parser, ...value);
+            tagPlayer.emit(`+${tagName}`, parser, ...params);
         })
         .on('-', function (tagName) {
             if (parser.skipEventFlag) {
                 return;
             }
 
-            var endTag = `-${tagName}`;
-            tagPlayer.emit(`${endTag}`, parser);
+            tagPlayer.emit(`-${tagName}`, parser);
         })
 }
 

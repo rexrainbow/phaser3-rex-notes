@@ -5744,6 +5744,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    Content
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8704,6 +8711,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    Content
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9191,46 +9205,53 @@ newline
 <h4 id="custom-tag">Custom tag<a class="headerlink" href="#custom-tag" title="Permanent link">&para;</a></h4>
 <p>Assume that adding a custom tag : <code>[custom=10,20][/custom]</code></p>
 <ul>
-<li>On parse a <code>+custom</code> tag, will add a custom command child 
-    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.+custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+<li>On parse/execute a <code>+custom</code> tag, will add a custom command child 
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// console.log(&#39;Parse +custom tag:&#39;, a, b)</span>
 <span class="p">})</span>
 </code></pre></div><ul>
 <li><code>a</code>, <code>b</code>, ... : Parameters after <code>=</code></li>
-<li><code>params</code> : Arguments array used when executing <code>+custom</code>. Equal to <code>[a, b]</code> in this case.</li>
-<li>Disable content after this start tag
-    <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setContentOutputEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<li>Set content callback, will invoke this callback when getting a content 
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">setContentCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>On execute a <code>+custom</code> command child
-    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tag.+custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// console.log(&#39;Execute +custom tag:&#39;, a, b)</span>
-<span class="p">})</span>
-</code></pre></div><ul>
-<li><code>a</code>, <code>b</code>, ... : Parameters passed from <code>params</code> in <code>'parser.+custom'</code> event.</li>
-</ul>
-</li>
-<li>On parse a <code>-custom</code> tag, will add a custom command child 
-    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;parser.-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+<li>On parse/execute a <code>-custom</code> tag, will add a custom command child 
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// console.log(&#39;Parse -custom tag&#39;)</span>
 <span class="p">})</span>
 </code></pre></div><ul>
-<li><code>params</code> : Arguments array used when executing <code>-custom</code>. Equal to <code>[]</code> in this case.</li>
-<li>Enable content after this start tag
-    <div class="highlight"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">setContentOutputEnable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<li>Clear content callback
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">setContentCallback</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>On execute a <code>-custom</code> command child
-    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tag.-custom&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(...</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// console.log(&#39;Execute -custom tag&#39;)</span>
-<span class="p">})</span>
+</ul>
+<h4 id="content">Content<a class="headerlink" href="#content" title="Permanent link">&para;</a></h4>
+<p>These lines will be skipped :</p>
+<ul>
+<li>Empty line, which only has space characters.</li>
+<li>Comment line, start with <code>'//'</code>.</li>
+</ul>
+<p>New line symbol <code>'\n'</code> will be removed, use <code>\\n</code> to insert a new line character.</p>
+<p>Content will pass to one of these callback/event</p>
+<ol>
+<li>Set content callback
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">setContentCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>params</code> : Parameters passed from <code>params</code> in <code>'parser.-custom'</code> event.</li>
+<li>Clear content callback
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">setContentCallback</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 </li>
-</ul>
+<li>On parse/execute a content, after a <code>[custom]</code> tag.
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;custom#content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>   
+<span class="p">})</span>
+</code></pre></div></li>
+</ol>
 
               
             </article>

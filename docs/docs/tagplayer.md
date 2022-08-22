@@ -442,40 +442,52 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
 
 Assume that adding a custom tag : `[custom=10,20][/custom]`
 
-- On parse a `+custom` tag, will add a custom command child 
+- On parse/execute a `+custom` tag, will add a custom command child 
     ```javascript
-    tagPlayer.on('parser.+custom', function(parser, a, b, params) {
+    tagPlayer.on('+custom', function(parser, a, b) {
         // console.log('Parse +custom tag:', a, b)
     })
     ```
     - `a`, `b`, ... : Parameters after `=`
-    - `params` : Arguments array used when executing `+custom`. Equal to `[a, b]` in this case.
-    - Disable content after this start tag
+    - Set content callback, will invoke this callback when getting a content 
         ```javascript
-        parser.setContentOutputEnable(false);
+        var callback = function(content) {
+            // ...
+        }
+        tagPlayer.setContentCallback(callback, scope);
         ```
-- On execute a `+custom` command child
+- On parse/execute a `-custom` tag, will add a custom command child 
     ```javascript
-    tagPlayer.on('tag.+custom', function(a, b) {
-        // console.log('Execute +custom tag:', a, b)
-    })
-    ```
-    - `a`, `b`, ... : Parameters passed from `params` in `'parser.+custom'` event.
-- On parse a `-custom` tag, will add a custom command child 
-    ```javascript
-    tagPlayer.on('parser.-custom', function(parser, params) {
+    tagPlayer.on('-custom', function(parser) {
         // console.log('Parse -custom tag')
     })
     ```
-    - `params` : Arguments array used when executing `-custom`. Equal to `[]` in this case.
-    - Enable content after this start tag
+    - Clear content callback
         ```javascript
-        parser.setContentOutputEnable(true);
-        ```
-- On execute a `-custom` command child
+        tagPlayer.setContentCallback();
+        ``` 
+
+#### Content
+
+These lines will be skipped :
+
+- Empty line, which only has space characters.
+- Comment line, start with `'//'`.
+
+New line symbol `'\n'` will be removed, use `\\n` to insert a new line character.
+
+Content will pass to one of these callback/event
+
+1. Set content callback
     ```javascript
-    tagPlayer.on('tag.-custom', function(...params) {
-        // console.log('Execute -custom tag')
+    tagPlayer.setContentCallback(callback, scope);
+    ```
+    - Clear content callback
+        ```javascript
+        tagPlayer.setContentCallback();
+        ``` 
+1. On parse/execute a content, after a `[custom]` tag.
+    ```javascript
+    tagPlayer.on('custom#content', function(parser, content) {   
     })
     ```
-    - `params` : Parameters passed from `params` in `'parser.-custom'` event.

@@ -23,8 +23,7 @@ var OnParseContent = function (tagPlayer, parser, config) {
                 return;
             }
 
-            var startTag = `+${parser.lastTagStart}`;
-            tagPlayer.emit(`${startTag}#content`, parser, content);
+            tagPlayer.emit(`+${parser.lastTagStart}#content`, parser, content);
         })
 }
 

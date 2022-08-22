@@ -14828,73 +14828,117 @@
     textPlayer.emit('wait.keydown', keyName);
   };
 
-  var IsWaitSprite = function IsWaitSprite(name) {
-    // sprite, sprite.name, sprite.name.prop
+  var IsWaitGameObject = function IsWaitGameObject(textPlayer, name) {
     var names = name.split('.');
-    return names[0] === 'sprite' && names.length <= 3;
+    return textPlayer.gameObjectManagers.hasOwnProperty(names[0]);
   };
 
-  var WaitSprite = function WaitSprite(textPlayer, tag, callback, args, scope) {
+  var WaitGameObject = function WaitGameObject(textPlayer, tag, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
     var tags = tag.split('.');
-    var spriteManager = textPlayer.spriteManager;
+    var goType = tags[0];
+    var gameObjectManager = textPlayer.getGameObjectManager(goType);
+    var waitEventName = "wait.".concat(goType);
 
     switch (tags.length) {
       case 1:
-        // sprite: wait all sprites has beeen destroyed
-        if (spriteManager.isEmpty) {
-          textPlayer.emit('wait.sprite');
+        // 'goType' : wait all sprites has beeen destroyed
+        if (gameObjectManager.isEmpty) {
+          textPlayer.emit(waitEventName);
           wrapCallback();
         } else {
           // Remove all wait events
           textPlayer.once(RemoveWaitEvents, function (removeFrom) {
-            spriteManager.off('empty', wrapCallback, textPlayer);
+            gameObjectManager.off('empty', wrapCallback, textPlayer);
           });
-          spriteManager.once('empty', wrapCallback, textPlayer);
-          textPlayer.emit('wait.sprite');
+          gameObjectManager.once('empty', wrapCallback, textPlayer);
+          textPlayer.emit(waitEventName);
         }
 
-        break;
+        return;
 
       case 2:
-        // sprite.name: wait sprite.name has been destroyed
+        // 'goType.name' : wait goType.name has been destroyed
         var name = tags[1];
 
-        if (spriteManager.has(name)) {
-          var spriteData = textPlayer.spriteManager.get(name);
-          var sprite = spriteData.sprite; // Remove all wait events
+        if (!gameObjectManager.has(name)) {
+          textPlayer.emit(waitEventName, name);
+          wrapCallback();
+        } else {
+          var spriteData = gameObjectManager.get(name);
+          var gameObject = spriteData.gameObject; // Remove all wait events
 
           textPlayer.once(RemoveWaitEvents, function () {
-            sprite.off('destroy', wrapCallback, textPlayer);
+            gameObject.off('destroy', wrapCallback, textPlayer);
           });
-          sprite.once('destroy', wrapCallback, textPlayer);
-          textPlayer.emit('wait.sprite', name);
-        } else {
-          textPlayer.emit('wait.sprite', name);
-          wrapCallback();
+          gameObject.once('destroy', wrapCallback, textPlayer);
+          textPlayer.emit(waitEventName, name);
         }
 
-        break;
+        return;
 
       case 3:
-        // sprite.name.prop: wait ease sprite.name.prop has been completed
-        var name = tags[1];
-        var prop = tags[2];
-        var task = textPlayer.spriteManager.getTweenTask(name, prop);
+        // 'goType.name.prop' : wait ease goType.name.prop has been completed
+        var name = tags[1],
+            prop = tags[2];
+        var value = gameObjectManager.getProperty(name, prop); // Can start tween task for a number property
 
-        if (task) {
-          // Remove all wait events
-          textPlayer.once(RemoveWaitEvents, function () {
-            task.off('complete', wrapCallback, textPlayer);
-          });
-          task.once('complete', wrapCallback, textPlayer);
-          textPlayer.emit('wait.sprite', name, prop);
-        } else {
-          textPlayer.emit('wait.sprite', name, prop);
-          wrapCallback();
+        if (typeof value === 'number') {
+          var task = gameObjectManager.getTweenTask(name, prop);
+
+          if (!task) {
+            textPlayer.emit(waitEventName, name, prop);
+            wrapCallback();
+          } else {
+            // Remove all wait events
+            textPlayer.once(RemoveWaitEvents, function () {
+              task.off('complete', wrapCallback, textPlayer);
+            });
+            task.once('complete', wrapCallback, textPlayer);
+            textPlayer.emit(waitEventName, name, prop);
+          }
+
+          return;
         }
 
-        break;
+        var dataKey = prop;
+        var matchFalseFlag = dataKey.startsWith('!');
+
+        if (matchFalseFlag) {
+          dataKey = dataKey.substring(1);
+        } // Wait until flag is true/false
+
+
+        if (gameObjectManager.hasData(name, dataKey)) {
+          var gameObject = gameObjectManager.getGO(name);
+          var flag = gameObject.getData(dataKey);
+          var matchTrueFlag = !matchFalseFlag;
+
+          if (flag === matchTrueFlag) {
+            textPlayer.emit(waitEventName, name, prop);
+            wrapCallback();
+          } else {
+            // Remove all wait events
+            var eventName = "changedata-".concat(dataKey);
+
+            var callback = function callback(gameObject, value, previousValue) {
+              value = !!value;
+
+              if (value === matchTrueFlag) {
+                wrapCallback.call(textPlayer);
+              }
+            };
+
+            textPlayer.once(RemoveWaitEvents, function () {
+              gameObject.off(eventName, callback);
+            });
+            gameObject.on(eventName, callback);
+            textPlayer.emit(waitEventName, name, prop);
+          }
+
+          return;
+        }
+
     }
   };
 
@@ -14929,8 +14973,8 @@
         WaitKeyDown(textPlayer, name, callback, args, scope);
       } else if (IsWaitCameraEffect(name)) {
         WaitCameraEffect(textPlayer, name, callback, args, scope);
-      } else if (IsWaitSprite(name)) {
-        WaitSprite(textPlayer, name, callback, args, scope);
+      } else if (IsWaitGameObject(textPlayer, name)) {
+        WaitGameObject(textPlayer, name, callback, args, scope);
       } else {
         WaitCallback(textPlayer, name, callback, args, scope);
       }
@@ -18364,6 +18408,18 @@
     }
   };
 
+  var ContentMethods = {
+    setContentOutputEnable: function setContentOutputEnable(enable) {
+      this.parser.setContentOutputEnable(enable);
+      return this;
+    },
+    setContentCallback: function setContentCallback(callback, scope) {
+      this.contentCallback = callback;
+      this.contentCallbackScope = scope;
+      return this;
+    }
+  };
+
   var Methods$5 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
@@ -18377,7 +18433,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$5, GameObjectManagerMethods, PlayMethods, PauseMethods, TypingSpeedMethods, GameObjectMethods, SpriteMethods);
+  Object.assign(Methods$5, GameObjectManagerMethods, PlayMethods, PauseMethods, TypingSpeedMethods, GameObjectMethods, SpriteMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {

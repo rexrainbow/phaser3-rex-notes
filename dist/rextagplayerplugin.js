@@ -924,8 +924,7 @@
         return;
       }
 
-      var startTag = "+".concat(parser.lastTagStart);
-      tagPlayer.emit("".concat(startTag, "#content"), parser, content);
+      tagPlayer.emit("+".concat(parser.lastTagStart, "#content"), parser, content);
     });
   };
 
@@ -936,20 +935,17 @@
         return;
       }
 
-      var startTag = "+".concat(tagName);
-
-      for (var _len = arguments.length, value = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        value[_key - 1] = arguments[_key];
+      for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        params[_key - 1] = arguments[_key];
       }
 
-      tagPlayer.emit.apply(tagPlayer, ["".concat(startTag), parser].concat(value));
+      tagPlayer.emit.apply(tagPlayer, ["+".concat(tagName), parser].concat(params));
     }).on('-', function (tagName) {
       if (parser.skipEventFlag) {
         return;
       }
 
-      var endTag = "-".concat(tagName);
-      tagPlayer.emit("".concat(endTag), parser);
+      tagPlayer.emit("-".concat(tagName), parser);
     });
   };
 
