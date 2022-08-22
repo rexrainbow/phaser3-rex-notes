@@ -63,6 +63,7 @@ var OnParseEaseGameObjectPropertyTag = function (tagPlayer, parser, config) {
             }
 
             var isYoyo = easeMode.startsWith('yoyo');
+
             gameObjectManager.easeProperty(
                 name, property, value,
                 duration, ease, repeat, isYoyo
