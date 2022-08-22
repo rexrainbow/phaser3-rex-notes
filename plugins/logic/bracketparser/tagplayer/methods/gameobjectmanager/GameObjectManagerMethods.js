@@ -2,12 +2,11 @@ import GameObjectManagerBase from '../../../../../utils/gameobject/gomanager/GOM
 import OnParseAddGameObjectTag from './OnParseAddGameObjectTag.js';
 import OnParseRemoveAllGameObjectsTag from './OnParseRemoveAllGameObjectsTag.js';
 import OnParseCallGameObjectMethodTag from './OnParseCallGameObjectMethodTag.js';
-import OnParseSetGameObjectPropertyTag from './OnParseSetGameObjectPropertyTag.js';
 import OnParseEaseGameObjectPropertyTag from './OnParseEaseGameObjectPropertyTag.js';
 
 const ParseCallbacks = [
     OnParseAddGameObjectTag, OnParseRemoveAllGameObjectsTag,
-    OnParseCallGameObjectMethodTag, OnParseSetGameObjectPropertyTag,
+    OnParseCallGameObjectMethodTag,
     OnParseEaseGameObjectPropertyTag
 ];
 

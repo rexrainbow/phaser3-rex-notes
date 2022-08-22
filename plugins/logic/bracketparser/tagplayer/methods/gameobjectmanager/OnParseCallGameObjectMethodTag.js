@@ -1,5 +1,5 @@
-var IsCallMethodTag = function (tags, goType) {
-    // goType.name.methodName
+var IsPropTag = function (tags, goType) {
+    // goType.name.prop
     return (tags.length === 3) && (tags[0] === goType);
 }
 
@@ -13,16 +13,17 @@ var OnParseCallGameObjectMethodTag = function (tagPlayer, parser, config) {
             }
 
             // [goType.name.methodName=value0,value1,value2...]
+            // [goType.name.prop=value]
             var tags = tag.split('.');
-            var name, methodName;
-            if (IsCallMethodTag(tags, goType)) {
+            var name, prop;
+            if (IsPropTag(tags, goType)) {
                 name = tags[1];
-                methodName = tags[2];
+                prop = tags[2];
             } else {
                 return;
             }
 
-            var methodEventName = `${goType}.${methodName}`;
+            var methodEventName = `${goType}.${prop}`;
             tagPlayer.emit(
                 methodEventName,
                 name, ...parameters
@@ -32,13 +33,15 @@ var OnParseCallGameObjectMethodTag = function (tagPlayer, parser, config) {
                 return;
             }
 
-            if (!gameObjectManager.hasMethod(name, methodName)) {
-                return;
+            if (gameObjectManager.hasMethod(name, prop)) {
+                // Is method
+                gameObjectManager.call(name, prop, ...parameters);
+            } else {
+                // Is property
+                gameObjectManager.setProperty(name, prop, parameters[0]);
             }
-            gameObjectManager.call(name, methodName, ...parameters);
 
             parser.skipEvent();
-            // Will block SetGameObjectPropertyTag callback
         })
 }
 
