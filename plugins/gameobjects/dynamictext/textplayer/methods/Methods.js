@@ -1,3 +1,4 @@
+import GameObjectManagerMethods from './gameobjectmanager/GameObjectManagerMethods.js';
 import SetClickTarget from './SetClickTarget.js';
 import SetTargetCamera from './SetTargetCamera.js';
 import SetNextPageInput from './SetNextPageInput.js';
@@ -12,7 +13,8 @@ import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
-import SpriteMethods from './SpriteMethods.js';
+import GameObjectMethods from './gameobjectmanager/GameObjectMethods.js';
+import SpriteMethods from './spritemanager/SpriteMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
@@ -30,10 +32,12 @@ var Methods = {
 
 Object.assign(
     Methods,
+    GameObjectManagerMethods,
     PlayMethods,
     PauseMethods,
     TypingSpeedMethods,
-    SpriteMethods
+    GameObjectMethods,
+    SpriteMethods,
 );
 
 export default Methods;

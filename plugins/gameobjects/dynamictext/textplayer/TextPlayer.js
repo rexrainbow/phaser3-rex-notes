@@ -3,7 +3,7 @@ import Parser from './parser/Parser.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
-import SpriteManager from '../../../utils/sprite/spritemanager/SpriteManager.js';
+import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 
@@ -46,10 +46,11 @@ class TextPlayer extends DynamicText {
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        this._spriteManager = undefined;
-        var spriteManagerConfig = GetValue(config, 'sprites', undefined);
-        if (spriteManagerConfig) {
-            this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
+        this.gameObjectManagers = {};
+
+        var spriteManagerConfig = GetValue(config, 'sprites');
+        if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
+            AddSpriteManager.call(this, spriteManagerConfig);
         }
 
         this.setIgnoreNextPageInput(GetValue(config, 'ignoreNextPageInput', false));
@@ -78,10 +79,7 @@ class TextPlayer extends DynamicText {
     }
 
     get spriteManager() {
-        if (this._spriteManager === undefined) {
-            this._spriteManager = new SpriteManager(this.scene);
-        }
-        return this._spriteManager;
+        return this.getGameObjectManager('sprite');
     }
 
     destroy(fromScene) {
@@ -110,10 +108,10 @@ class TextPlayer extends DynamicText {
 
         this.camera = undefined;
 
-        if (this._spriteManager) {
-            this._spriteManager.destroy(fromScene);
+        for (var name in this.gameObjectManagers) {
+            this.gameObjectManagers.destroy(fromScene);
+            delete this.gameObjectManagers[name];
         }
-        this._spriteManager = undefined;
 
         this.clickEE = undefined;
 

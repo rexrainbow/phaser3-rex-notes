@@ -28,14 +28,6 @@ import ParseZoomCameraTag from './camera/OnParseZoomCameraTag.js';
 import ParseRotateCameraTag from './camera/OnParseRotateCameraTag.js';
 import ParseScrollCameraTag from './camera/OnParseScrollCameraTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
-import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
-import ParseRemoveAllSpriteTag from './sprites/OnParseRemoveAllSpritesTag.js';
-import ParsePlayAnimationTag from './sprites/OnParsePlayAnimationTag.js';
-import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
-import ParsePauseAnimationTag from './sprites/OnParsePauseAnimationTag.js';
-import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
-import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
-import ParseCallSpriteMethodTag from './sprites/OnParseCallSpriteMethodTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseContentOff from './content/OnParseContentOff.js';
 import ParseContentOn from './content/OnParseContentOn.js';
@@ -57,12 +49,6 @@ const ParseCallbacks = [
     ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag, ParseRotateCameraTag, ParseScrollCameraTag,
 
     ParseWaitTag,
-
-    ParseAddSpriteTag, ParseRemoveAllSpriteTag,
-    ParsePlayAnimationTag, ParseChainAnimationTag, ParsePauseAnimationTag,
-    ParseCallSpriteMethodTag,
-    // ParseCallSpriteMethodTag has heigher priority then ParseSetSpritePropertyTag
-    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
 
     ParseNewLineTag,
     ParseContentOff, ParseContentOn,
