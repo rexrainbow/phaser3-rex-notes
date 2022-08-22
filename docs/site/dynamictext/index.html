@@ -1692,6 +1692,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#minimun-size" class="md-nav__link">
+    Minimun size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
     Compare with other kinds of text game object
   </a>
@@ -8733,6 +8740,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#minimun-size" class="md-nav__link">
+    Minimun size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
     Compare with other kinds of text game object
   </a>
@@ -9061,6 +9075,8 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <h4 id="horizontal-wrap">Horizontal wrap<a class="headerlink" href="#horizontal-wrap" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runWordWrap</span><span class="p">({</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
@@ -9074,8 +9090,10 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>padding.top</code> : Extra space above first line.</li>
-<li><code>padding.bottom</code> : Extra space below last line.</li>
+<li><code>padding</code> :<ul>
+<li><code>padding.top</code>, <code>padding.bottom</code>, <code>padding.left</code>, <code>padding.right</code> : Extra space around lines.</li>
+</ul>
+</li>
 <li><code>lineHeight</code> : Line height. <ul>
 <li><code>undefined</code> : It will be set if <code>maxLines</code> and <code>fixedHeight</code> is given.</li>
 </ul>
@@ -9125,9 +9143,10 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>padding.left</code> : Extra space of left line.</li>
-<li><code>padding.right</code> : Extra space of right line.</li>
-<li><code>padding.top</code> : Extra space of first character.</li>
+<li><code>padding</code> :<ul>
+<li><code>padding.top</code>, <code>padding.bottom</code>, <code>padding.left</code>, <code>padding.right</code> : Extra space around lines.</li>
+</ul>
+</li>
 <li><code>lineWidth</code> : Line width. <ul>
 <li><code>undefined</code> : It will be set if <code>maxLines</code> and <code>fixedWidth</code> is given.</li>
 </ul>
@@ -9376,6 +9395,10 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getActiveChildren</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
+<h3 id="minimun-size">Minimun size<a class="headerlink" href="#minimun-size" title="Permanent link">&para;</a></h3>
+<p>Resize to minimun size to show all visible characters.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setToMinSize</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="compare-with-other-kinds-of-text-game-object">Compare with other kinds of text game object<a class="headerlink" href="#compare-with-other-kinds-of-text-game-object" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="../text/">Built-in text</a>: <ul>

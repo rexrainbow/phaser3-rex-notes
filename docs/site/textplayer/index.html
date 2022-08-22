@@ -1794,6 +1794,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#minimun-size" class="md-nav__link">
+    Minimun size
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8903,6 +8910,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#minimun-size" class="md-nav__link">
+    Minimun size
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9049,7 +9063,7 @@
         <span class="nx">callback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="c1">// Default wrapping callback is dynamicText.runWordWrap()</span>
         <span class="nx">lineHeight</span><span class="o">:</span>
         <span class="c1">// maxLines: </span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span> <span class="p">},</span>
         <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">hAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c1">// 0|&#39;left&#39;|1|&#39;center&#39;|2|&#39;right&#39;</span>
         <span class="nx">vAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c1">// 0|&#39;top&#39;|1|&#39;center&#39;|2|&#39;bottom&#39;</span>
@@ -9076,7 +9090,9 @@
             <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
 
             <span class="p">}</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
+
+        <span class="c1">// minSizeEnable: false,</span>
     <span class="p">},</span>
 
     <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
@@ -9242,6 +9258,11 @@
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><a href="../dynamictext/#child">child</a></li>
+</ul>
+</li>
+<li><code>typing.minSizeEnable</code> : <ul>
+<li><code>true</code> : Resize to minimun size for showing all visible characters.</li>
+<li><code>false</code> : Won't resize during typing. Default behavior.</li>
 </ul>
 </li>
 </ul>
@@ -9777,6 +9798,10 @@
 </ul>
 </li>
 </ul>
+<h3 id="minimun-size">Minimun size<a class="headerlink" href="#minimun-size" title="Permanent link">&para;</a></h3>
+<p>Resize to minimun size to show all visible characters.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setToMinSize</span><span class="p">();</span>
+</code></pre></div>
 
               
             </article>
