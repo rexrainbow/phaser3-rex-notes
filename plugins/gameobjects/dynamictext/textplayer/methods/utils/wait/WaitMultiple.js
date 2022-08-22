@@ -4,7 +4,7 @@ import WaitClick from './WaitClick.js';
 import WaitMusic from './WaitMusic.js';
 import { IsWaitCameraEffect, WaitCameraEffect } from './WaitCameraEffect.js';
 import WaitKeyDown from './WaitKeyDown.js';
-import { IsWaitSprite, WaitSprite } from './WaitSprite.js'
+import { IsWaitGameObject, WaitGameObject } from './WaitGameObject.js'
 
 const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 
@@ -41,8 +41,8 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
         } else if (IsWaitCameraEffect(name)) {
             WaitCameraEffect(textPlayer, name, callback, args, scope);
 
-        } else if (IsWaitSprite(name)) {
-            WaitSprite(textPlayer, name, callback, args, scope);
+        } else if (IsWaitGameObject(textPlayer, name)) {
+            WaitGameObject(textPlayer, name, callback, args, scope);
 
         } else {
             WaitCallback(textPlayer, name, callback, args, scope);
