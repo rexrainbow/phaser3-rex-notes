@@ -13052,7 +13052,6 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
-      _this._parentContainer = null;
 
       if (children) {
         _this.add(children);
@@ -13263,8 +13262,14 @@
         return this._parentContainer;
       },
       set: function set(value) {
-        // Set this._parentContainer only,
+        // Initialize
+        if (!this._parentContainer && !value) {
+          this._parentContainer = value;
+          return;
+        } // Set this._parentContainer only,
         // if under AddToContainer, or RemoveFromContainer methods
+
+
         if (this.setParentContainerFlag) {
           this._parentContainer = value;
           return;
@@ -13282,7 +13287,6 @@
           this._parentContainer = value;
           this.addToContainer(value);
         } else {
-          // parentContainer is null and value is unll
           this._parentContainer = value;
         }
       }

@@ -18,7 +18,6 @@ class ContainerLite extends Base {
         this._mask = null;
         this._scrollFactorX = 1;
         this._scrollFactorY = 1;
-        this._parentContainer = null;
 
         if (children) {
             this.add(children);
@@ -218,6 +217,12 @@ class ContainerLite extends Base {
     }
 
     set parentContainer(value) {
+        // Initialize
+        if (!this._parentContainer && !value) {
+            this._parentContainer = value;
+            return;
+        }
+
         // Set this._parentContainer only,
         // if under AddToContainer, or RemoveFromContainer methods
         if (this.setParentContainerFlag) {
@@ -236,7 +241,7 @@ class ContainerLite extends Base {
             // Add to container
             this._parentContainer = value;
             this.addToContainer(value);
-        } else { // parentContainer is null and value is unll
+        } else {
             this._parentContainer = value;
         }
     }
