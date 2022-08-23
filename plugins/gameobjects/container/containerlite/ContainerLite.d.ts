@@ -288,6 +288,8 @@ declare class ContainerLite extends Base {
         container: Phaser.GameObjects.Container
     ): this;
 
+    removeFromContainer(): this;
+
     enableLayer(): this;
 
     getLayer(): Phaser.GameObjects.Layer;

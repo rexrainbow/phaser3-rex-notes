@@ -18,6 +18,7 @@ class ContainerLite extends Base {
         this._mask = null;
         this._scrollFactorX = 1;
         this._scrollFactorY = 1;
+        this._parentContainer = null;
 
         if (children) {
             this.add(children);
@@ -210,6 +211,44 @@ class ContainerLite extends Base {
     static GetParent(child) {
         return GetParent(child);
     }
+
+    // For p3-container
+    get parentContainer() {
+        return this._parentContainer;
+    }
+
+    set parentContainer(value) {
+        // Set this._parentContainer only,
+        // if under AddToContainer, or RemoveFromContainer methods
+        if (this.setParentContainerFlag) {
+            this._parentContainer = value;
+            return;
+        }
+        // else if (!this.setParentContainerFlag)
+
+        // Add itself and all children to container,
+        // Or remove itseld and all children from container
+        if (this._parentContainer && !value) {
+            // Remove from container
+            this.removeFromContainer();
+            this._parentContainer = value;
+        } else if (value) {
+            // Add to container
+            this._parentContainer = value;
+            this.addToContainer(value);
+        } else { // parentContainer is null and value is unll
+            this._parentContainer = value;
+        }
+    }
+
+    get setParentContainerFlag() {
+        if (this._setParentContainerFlag) {
+            return true;
+        }
+        var parent = GetParent(this);
+        return (parent) ? parent.setParentContainerFlag : false;
+    }
+
 }
 
 Object.assign(

@@ -1523,16 +1523,33 @@
     }
   };
 
-  var AddToLayer = function AddToLayer(layer) {
+  var AddToContainer = function AddToContainer(layer) {
+    this._setParentContainerFlag = true;
     var gameObjects = this.getAllChildren([this]);
     SortGameObjectsByDepth(gameObjects);
     layer.add(gameObjects);
+    this._setParentContainerFlag = false;
     return this;
   };
 
-  var AddToContainer = {
-    addToLayer: AddToLayer,
-    addToContainer: AddToLayer
+  var RemoveFromContainer = function RemoveFromContainer() {
+    if (!this.parentContainer) {
+      return this;
+    }
+
+    this._setParentContainerFlag = true;
+    var gameObjects = this.getAllChildren([this]);
+    SortGameObjectsByDepth(gameObjects);
+    gameObjects.reverse();
+    this.parentContainer.remove(gameObjects);
+    this._setParentContainerFlag = false;
+    return this;
+  };
+
+  var AddToContainer$1 = {
+    addToLayer: AddToContainer,
+    addToContainer: AddToContainer,
+    removeFromContainer: RemoveFromContainer
   };
 
   var Layer = {
@@ -2096,7 +2113,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds
   };
-  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer, Layer, RenderTexture);
+  Object.assign(methods$1, Parent, AddChild, RemoveChild, ChildState, Transform, Position, Rotation, Scale, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -2122,6 +2139,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
+      _this._parentContainer = null;
 
       if (children) {
         _this.add(children);
@@ -2324,6 +2342,47 @@
       key: "list",
       get: function get() {
         return this.children;
+      }
+    }, {
+      key: "parentContainer",
+      get: // For p3-container
+      function get() {
+        return this._parentContainer;
+      },
+      set: function set(value) {
+        // Set this._parentContainer only,
+        // if under AddToContainer, or RemoveFromContainer methods
+        if (this.setParentContainerFlag) {
+          this._parentContainer = value;
+          return;
+        } // else if (!this.setParentContainerFlag)
+        // Add itself and all children to container,
+        // Or remove itseld and all children from container
+
+
+        if (this._parentContainer && !value) {
+          // Remove from container
+          this.removeFromContainer();
+          this._parentContainer = value;
+        } else if (value) {
+          // Add to container
+          this._parentContainer = value;
+          this.addToContainer(value);
+        } else {
+          // parentContainer is null and value is unll
+          this._parentContainer = value;
+        }
+      }
+    }, {
+      key: "setParentContainerFlag",
+      get: function get() {
+        if (this._setParentContainerFlag) {
+          return true;
+        }
+
+        var parent = GetParent(this);
+
+        return parent ? parent.setParentContainerFlag : false;
       }
     }], [{
       key: "GetParent",

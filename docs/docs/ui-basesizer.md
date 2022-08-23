@@ -1149,6 +1149,10 @@ var isTouching = sizer.isInTouching();
 
 - Add to [built-in container](container.md)
     ```javascript
+    p3Container.add(sizer);
+    ```
+    or
+    ```javascript
     sizer.addToContainer(p3Container);
     ```
     - `container` : [Container](container.md) game object.
