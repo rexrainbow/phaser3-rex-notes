@@ -81,14 +81,18 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     }
 
     sprites: {
-        // createCallback: 'sprite',
-        fade: 500
+        // createGameObject: 'sprite',
+        // fade: 500,
+        // viewportCoordinate: false,
     }, 
+    // sprites: false,
 
     texts: {
-        // createCallback: undefined,        
-        fade: 500
+        // createGameObject: undefined,        
+        // fade: 500,
+        // viewportCoordinate: false,
     }
+    // texts: false,
     
     sounds: {
         bgm: {
@@ -109,7 +113,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     - `parser.comment` : Start word of a comment line. Default value is `'//'`.
         - `null`, or `false` : No comment line.
 - `sprites` : Configuration of sprites.
-    - `sprites.createCallback` : 
+    - `sprites.createGameObject` : 
         - `'sprite'` : Create sprite game object. Default behavior.
         - `'image'` : Create image game object.
         - Callback to return a game object            
@@ -122,9 +126,14 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     - `sprites.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
         - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+    - `sprites.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
+        - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
+            - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
+            - `vp` : Viewport in [rectangle](geom-rectangle.md)
+        - `false` : Do nothing, default behavior.
     - `false`, `null` : No sprite manager
 - `texts` : Configuration of texts.
-    - `texts.createCallback` : 
+    - `texts.createGameObject` : 
         - `undefined`, or `'text'` : Create text game object. Default behavior.
         - Callback to return a game object            
             ```javascript
@@ -134,8 +143,13 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             ```
             - `a`, `b`, `c` : Parameters pass from `[text.name=a,b,c]` 
     - `texts.fade` :
-        - `0` : No fade-in or fade-out when adding or removing a sprite.
-        - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+        - `0` : No fade-in or fade-out when adding or removing a text game object.
+        - A number : Tint-fade-in or Tint-fade-out when adding or removing a text game object. Default value is `500`.
+    - `texts.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to text game object.
+        - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
+            - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
+            - `vp` : Viewport in [rectangle](geom-rectangle.md)
+        - `false` : Do nothing, default behavior.
     - `false`, `null` : No text manager
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
@@ -165,6 +179,92 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     ```javascript
     var tagPlayer = new MyTagPlayer(scene, config);
     ```
+
+### Game object manager
+
+```javascript
+tagPlayer.addGameObjectManager({
+    name: goType,
+    createGameObject: function(scene, ...) {
+        return gameObject
+    },
+
+    // fade: 500,
+    // viewportCoordinate: false,
+
+})
+```
+
+- `name` : Name of this game object manager, a string.
+- `createGameObject` : Callback to return a game object            
+    ```javascript
+    function(scene, a, b, c) {
+        // return gameObject;
+    }
+    ```
+    - `a`, `b`, `c` : Parameters pass from `[goType.name=a,b,c]` 
+- `fade` : Tint-fade (if game object has `tint` property) or alpha-fade game object when creating or destroying a game object.
+    - `0` : No fade-in or fade-out when adding or removing a sprite.
+    - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+- `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
+    - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
+        - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
+        - `vp` : Viewport in [rectangle](geom-rectangle.md)
+    - `false` : Do nothing, default behavior.
+
+#### Built-in commands
+
+`goType` : `name` parameter in config of `tagPlayer.addGameObjectManager` method
+
+- Add game object : `[goType.name=a,b,c]`
+    - Tint-fade-in, or alpha-fade-in if `fade` is not `0`
+- Remove game object : `[/goType.name]`
+    - Tint-fade-out, or alpha-fade-out if `fade` is not `0`
+- Remove all game objects : `[/goType]`
+    - Tint-fade-out, or alpha-fade-out if `fade` is not `0`
+- Call method : `[goType.name.methodName=value0,value1,value2]`
+- Set property : `[goType.name.x=value]`, `[goType.name.alpha=value]`, ....
+- Ease property : 
+    ```
+    [goType.name.prop.easeMode=value,duration]
+    [goType.name.prop.easeMode=value,duration,repeat]
+    [goType.name.prop.easeMode=value,duration,easeFunction,repeat]
+    [goType.name.prop.easeMode=value]
+    ```
+    - `prop` : Any number property of this sprite.
+    - `easeMode` : One of these modes
+        - `to`, `toLeft`, `toRight`, `toUp`, `toDown`
+        - `yoyo`, `yoyoLeft`, `yoyoRight`, `yoyoUp`, `yoyoDown`
+        - `from`, `fromLeft`, `fromRight`, `fromUp`, `fromDown`    
+    - `duration` : Default value is `1000`
+    - `easeFunction` : Default value is `'Linear'`
+    - `repeat` : Default value is `0`
+- Wait ease task of game object's number property : `[wait=goType.name.prop]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        tagPlayer.on('wait.' + goType, function(name, prop) {
+        })
+        ```
+- Wait a game objects are destroyed : `[wait=goType.name]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        tagPlayer.on('wait.' + goType, function(name, prop) {
+            // prop parameter are `undefined` here
+        })
+        ``` 
+- Wait all game objects are destroyed : `[wait=goType]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        tagPlayer.on('wait.' + goType, function(name, prop) {
+            // name and prop parameter are `undefined` here
+        })
+        ``` 
+- Wait boolean data in game object's data manager set to `true`/`false` : `[wait=goType.name.dataKey]`/`[wait=goType.name.!dataKey]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        tagPlayer.on('wait.' + goType, function(name, prop) {
+        })
+        ```
 
 ### Execute commands
 
@@ -228,6 +328,37 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
 
 ### Tags of content
 
+#### Sprite
+
+- Add sprite : `[sprite.name=textureKey,frameKey]`
+    - Tint-fade-in if `sprite.fade` is not `0`
+- Remove sprite : `[/sprite.name]`
+    - Tint-fade-out if `sprite.fade` is not `0`
+- Remove all sprites : `[/sprite]`
+    - Tint-fade-out if `sprite.fade` is not `0`
+- Call method : `[sprite.name.methodName=value0,value1,value2]`
+- Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
+- Ease property : 
+    ```
+    [sprite.name.prop.easeMode=value,duration]
+    [sprite.name.prop.easeMode=value,duration,repeat]
+    [sprite.name.prop.easeMode=value,duration,easeFunction,repeat]
+    [sprite.name.prop.easeMode=value]
+    ```
+    - `prop` : Any number property of this sprite.
+    - `easeMode` : One of these modes
+        - `to`, `toLeft`, `toRight`, `toUp`, `toDown`
+        - `yoyo`, `yoyoLeft`, `yoyoRight`, `yoyoUp`, `yoyoDown`
+        - `from`, `fromLeft`, `fromRight`, `fromUp`, `fromDown`    
+    - `duration` : Default value is `1000`
+    - `easeFunction` : Default value is `'Linear'`
+    - `repeat` : Default value is `0`
+- Set texture : `[sprite.name.texture=textureKey,frameKey]`
+- Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
+    - Can play animation without adding sprite first.
+- Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`
+- Pause animation : `[sprite.name.pause]`
+
 #### Text
 
 - Add text : `[text.name]`
@@ -240,33 +371,19 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
 - Set property : `[text.name.x=value]`, `[text.name.alpha=value]`, ....
 - Ease property : 
     ```
-    [text.name.x.to=value,duration]
+    [sprite.name.prop.easeMode=value,duration]
+    [sprite.name.prop.easeMode=value,duration,repeat]
+    [sprite.name.prop.easeMode=value,duration,easeFunction,repeat]
+    [sprite.name.prop.easeMode=value]
     ```
-    ```
-    [text.name.x.to=value,duration,repeat]
-    ```
-    ```
-    [text.name.x.to=value,duration,easeFunction,repeat]
-    ```
-    ```
-    [text.name.x.to=value]
-    ```
+    - `prop` : Any number property of this sprite.
+    - `easeMode` : One of these modes
+        - `to`, `toLeft`, `toRight`, `toUp`, `toDown`
+        - `yoyo`, `yoyoLeft`, `yoyoRight`, `yoyoUp`, `yoyoDown`
+        - `from`, `fromLeft`, `fromRight`, `fromUp`, `fromDown`    
     - `duration` : Default value is `1000`
     - `easeFunction` : Default value is `'Linear'`
     - `repeat` : Default value is `0`
-- Yoyo ease property : 
-    ```
-    [text.name.x.yoyo=value,duration]
-    ```
-    ```
-    [text.name.x.yoyo=value,duration,repeat]
-    ```
-    ```
-    [text.name.x.yoyo=value,duration,easeFunction,repeat]
-    ```
-    ```
-    [text.name.x.yoyo=value]
-    ```
 - Set text
     ```
     [text.name.text]
@@ -282,51 +399,6 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
     newline\\n
     newline
     ```
-
-#### Sprite
-
-- Add sprite : `[sprite.name=textureKey,frameKey]`
-    - Tint-fade-in if `sprite.fade` is not `0`
-- Remove sprite : `[/sprite.name]`
-    - Tint-fade-out if `sprite.fade` is not `0`
-- Remove all sprites : `[/sprite]`
-    - Tint-fade-out if `sprite.fade` is not `0`
-- Call method : `[sprite.name.methodName=value0,value1,value2]`
-- Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
-- Ease property : 
-    ```
-    [sprite.name.x.to=value,duration]
-    ```
-    ```
-    [sprite.name.x.to=value,duration,repeat]
-    ```
-    ```
-    [sprite.name.x.to=value,duration,easeFunction,repeat]
-    ```
-    ```
-    [sprite.name.x.to=value]
-    ```
-    - `duration` : Default value is `1000`
-    - `easeFunction` : Default value is `'Linear'`
-    - `repeat` : Default value is `0`
-- Yoyo ease property : 
-    ```
-    [sprite.name.x.yoyo=value,duration]
-    ```
-    ```
-    [sprite.name.x.yoyo=value,duration,repeat]
-    ```
-    ```
-    [sprite.name.x.yoyo=value,duration,easeFunction,repeat]
-    ```
-    ```
-    [sprite.name.x.yoyo=value]
-    ```
-- Set texture : `[sprite.name.texture=textureKey,frameKey]`
-- Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
-    - Can play animation without adding sprite first.
-- Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`
-- Pause animation : `[sprite.name.pause]`
 
 #### Sound effect
 
@@ -410,17 +482,30 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
        ```
 - Wait ease task of sprite's property : `[wait=sprite.name.prop]`
     - Also fire event `'wait.sprite'`
-       ```javascript
+        ```javascript
         tagPlayer.on('wait.sprite', function(name, prop) {
         })
-       ```
+        ```
+- Wait a sprite are destroyed : `[wait=sprite.name]`
+    - Also fire event `'wait.sprite'`
+        ```javascript
+        tagPlayer.on('wait.sprite', function(name, prop) {
+            // prop parameter are `undefined` here
+        })
+        ```
 - Wait all sprites are destroyed : `[wait=sprite]`
     - Also fire event `'wait.sprite'`
-       ```javascript
+        ```javascript
         tagPlayer.on('wait.sprite', function(name, prop) {
             // name and prop parameter are `undefined` here
         })
-       ```       
+        ```
+- Wait boolean data in sprite's data manager set to `true`/`false` : `[wait=sprite.name.dataKey]`/`[wait=sprite.name.!dataKey]`
+    - Also fire event `'wait.sprite'`
+        ```javascript
+        tagPlayer.on('wait.sprite', function(name, prop) {
+        })
+        ```
 - Wait callback : `[wait]`, or `[wait=xxx]` (`xxx` is any string which not been used in above case)
     - Fire event `'wait'`
         ```javascript
@@ -490,4 +575,20 @@ Content will pass to one of these callback/event
     ```javascript
     tagPlayer.on('custom#content', function(parser, content) {   
     })
+    ```
+
+### Game objects
+
+- Get game object by name
+    ```javascript
+    var gameObject = tagPlayer.getGameObject(goType, name);
+    ```
+- Get all game objects of a game object manager
+    ```javascript
+    var gameObjects = tagPlayer.getGameObject(goType);
+    ```
+    - `gameObjects` : `{name: gameObject}`
+- Add existed game object into game object manager
+    ```javascript
+    tagPlayer.addGameObject(goType, name, gameObject);
     ```

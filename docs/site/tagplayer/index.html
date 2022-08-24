@@ -5647,6 +5647,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#game-object-manager" class="md-nav__link">
+    Game object manager
+  </a>
+  
+    <nav class="md-nav" aria-label="Game object manager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-commands" class="md-nav__link">
+    Built-in commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#execute-commands" class="md-nav__link">
     Execute commands
   </a>
@@ -5696,15 +5716,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
-    Text
+  <a href="#sprite" class="md-nav__link">
+    Sprite
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sprite" class="md-nav__link">
-    Sprite
+  <a href="#text" class="md-nav__link">
+    Text
   </a>
   
 </li>
@@ -5753,6 +5773,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#game-objects" class="md-nav__link">
+    Game objects
+  </a>
   
 </li>
         
@@ -8614,6 +8641,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#game-object-manager" class="md-nav__link">
+    Game object manager
+  </a>
+  
+    <nav class="md-nav" aria-label="Game object manager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-commands" class="md-nav__link">
+    Built-in commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#execute-commands" class="md-nav__link">
     Execute commands
   </a>
@@ -8663,15 +8710,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
-    Text
+  <a href="#sprite" class="md-nav__link">
+    Sprite
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sprite" class="md-nav__link">
-    Sprite
+  <a href="#text" class="md-nav__link">
+    Text
   </a>
   
 </li>
@@ -8720,6 +8767,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#game-objects" class="md-nav__link">
+    Game objects
+  </a>
   
 </li>
         
@@ -8816,14 +8870,18 @@
     <span class="p">}</span>
 
     <span class="nx">sprites</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// createCallback: &#39;sprite&#39;,</span>
-        <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
+        <span class="c1">// createGameObject: &#39;sprite&#39;,</span>
+        <span class="c1">// fade: 500,</span>
+        <span class="c1">// viewportCoordinate: false,</span>
     <span class="p">},</span> 
+    <span class="c1">// sprites: false,</span>
 
     <span class="nx">texts</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// createCallback: undefined,        </span>
-        <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
+        <span class="c1">// createGameObject: undefined,        </span>
+        <span class="c1">// fade: 500,</span>
+        <span class="c1">// viewportCoordinate: false,</span>
     <span class="p">}</span>
+    <span class="c1">// texts: false,</span>
 
     <span class="nx">sounds</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">bgm</span><span class="o">:</span> <span class="p">{</span>
@@ -8850,7 +8908,7 @@
 </ul>
 </li>
 <li><code>sprites</code> : Configuration of sprites.<ul>
-<li><code>sprites.createCallback</code> : <ul>
+<li><code>sprites.createGameObject</code> : <ul>
 <li><code>'sprite'</code> : Create sprite game object. Default behavior.</li>
 <li><code>'image'</code> : Create image game object.</li>
 <li>Callback to return a game object          <br />
@@ -8868,11 +8926,20 @@
 <li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
 </ul>
 </li>
+<li><code>sprites.viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to sprite game object.<ul>
+<li><code>true</code> : Attach <code>vpx</code>, <code>vpy</code>, <code>vp</code> to sprite game object.<ul>
+<li><code>vpx</code>, <code>vpy</code> : Number between <code>0</code>~<code>1</code>. Proportion of viewport.</li>
+<li><code>vp</code> : Viewport in <a href="../geom-rectangle/">rectangle</a></li>
+</ul>
+</li>
+<li><code>false</code> : Do nothing, default behavior.</li>
+</ul>
+</li>
 <li><code>false</code>, <code>null</code> : No sprite manager</li>
 </ul>
 </li>
 <li><code>texts</code> : Configuration of texts.<ul>
-<li><code>texts.createCallback</code> : <ul>
+<li><code>texts.createGameObject</code> : <ul>
 <li><code>undefined</code>, or <code>'text'</code> : Create text game object. Default behavior.</li>
 <li>Callback to return a game object          <br />
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
@@ -8885,8 +8952,17 @@
 </ul>
 </li>
 <li><code>texts.fade</code> :<ul>
-<li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
-<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
+<li><code>0</code> : No fade-in or fade-out when adding or removing a text game object.</li>
+<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a text game object. Default value is <code>500</code>.</li>
+</ul>
+</li>
+<li><code>texts.viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to text game object.<ul>
+<li><code>true</code> : Attach <code>vpx</code>, <code>vpy</code>, <code>vp</code> to sprite game object.<ul>
+<li><code>vpx</code>, <code>vpy</code> : Number between <code>0</code>~<code>1</code>. Proportion of viewport.</li>
+<li><code>vp</code> : Viewport in <a href="../geom-rectangle/">rectangle</a></li>
+</ul>
+</li>
+<li><code>false</code> : Do nothing, default behavior.</li>
 </ul>
 </li>
 <li><code>false</code>, <code>null</code> : No text manager</li>
@@ -8928,6 +9004,109 @@
 <li>Create instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tagPlayer</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyTagPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="game-object-manager">Game object manager<a class="headerlink" href="#game-object-manager" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">addGameObjectManager</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">goType</span><span class="p">,</span>
+    <span class="nx">createGameObject</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">gameObject</span>
+    <span class="p">},</span>
+
+    <span class="c1">// fade: 500,</span>
+    <span class="c1">// viewportCoordinate: false,</span>
+
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : Name of this game object manager, a string.</li>
+<li><code>createGameObject</code> : Callback to return a game object          <br />
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return gameObject;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>a</code>, <code>b</code>, <code>c</code> : Parameters pass from <code>[goType.name=a,b,c]</code> </li>
+</ul>
+</li>
+<li><code>fade</code> : Tint-fade (if game object has <code>tint</code> property) or alpha-fade game object when creating or destroying a game object.<ul>
+<li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
+<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
+</ul>
+</li>
+<li><code>viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to sprite game object.<ul>
+<li><code>true</code> : Attach <code>vpx</code>, <code>vpy</code>, <code>vp</code> to sprite game object.<ul>
+<li><code>vpx</code>, <code>vpy</code> : Number between <code>0</code>~<code>1</code>. Proportion of viewport.</li>
+<li><code>vp</code> : Viewport in <a href="../geom-rectangle/">rectangle</a></li>
+</ul>
+</li>
+<li><code>false</code> : Do nothing, default behavior.</li>
+</ul>
+</li>
+</ul>
+<h4 id="built-in-commands">Built-in commands<a class="headerlink" href="#built-in-commands" title="Permanent link">&para;</a></h4>
+<p><code>goType</code> : <code>name</code> parameter in config of <code>tagPlayer.addGameObjectManager</code> method</p>
+<ul>
+<li>Add game object : <code>[goType.name=a,b,c]</code><ul>
+<li>Tint-fade-in, or alpha-fade-in if <code>fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove game object : <code>[/goType.name]</code><ul>
+<li>Tint-fade-out, or alpha-fade-out if <code>fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove all game objects : <code>[/goType]</code><ul>
+<li>Tint-fade-out, or alpha-fade-out if <code>fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Call method : <code>[goType.name.methodName=value0,value1,value2]</code></li>
+<li>Set property : <code>[goType.name.x=value]</code>, <code>[goType.name.alpha=value]</code>, ....</li>
+<li>Ease property : 
+    <div class="highlight"><pre><span></span><code>[goType.name.prop.easeMode=value,duration]
+[goType.name.prop.easeMode=value,duration,repeat]
+[goType.name.prop.easeMode=value,duration,easeFunction,repeat]
+[goType.name.prop.easeMode=value]
+</code></pre></div><ul>
+<li><code>prop</code> : Any number property of this sprite.</li>
+<li><code>easeMode</code> : One of these modes<ul>
+<li><code>to</code>, <code>toLeft</code>, <code>toRight</code>, <code>toUp</code>, <code>toDown</code></li>
+<li><code>yoyo</code>, <code>yoyoLeft</code>, <code>yoyoRight</code>, <code>yoyoUp</code>, <code>yoyoDown</code></li>
+<li><code>from</code>, <code>fromLeft</code>, <code>fromRight</code>, <code>fromUp</code>, <code>fromDown</code>    </li>
+</ul>
+</li>
+<li><code>duration</code> : Default value is <code>1000</code></li>
+<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
+<li><code>repeat</code> : Default value is <code>0</code></li>
+</ul>
+</li>
+<li>Wait ease task of game object's number property : <code>[wait=goType.name.prop]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait a game objects are destroyed : <code>[wait=goType.name]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// prop parameter are `undefined` here</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait all game objects are destroyed : <code>[wait=goType]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// name and prop parameter are `undefined` here</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait boolean data in game object's data manager set to <code>true</code>/<code>false</code> : <code>[wait=goType.name.dataKey]</code>/<code>[wait=goType.name.!dataKey]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="execute-commands">Execute commands<a class="headerlink" href="#execute-commands" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">commands</span><span class="p">);</span>
@@ -8972,59 +9151,6 @@
 </code></pre></div></li>
 </ul>
 <h3 id="tags-of-content">Tags of content<a class="headerlink" href="#tags-of-content" title="Permanent link">&para;</a></h3>
-<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Add text : <code>[text.name]</code><ul>
-<li>Tint-fade-in if <code>text.fade</code> is not <code>0</code></li>
-</ul>
-</li>
-<li>Remove text : <code>[/text.name]</code><ul>
-<li>Tint-fade-out if <code>text.fade</code> is not <code>0</code></li>
-</ul>
-</li>
-<li>Remove all texts : <code>[/text]</code><ul>
-<li>Tint-fade-out if <code>text.fade</code> is not <code>0</code></li>
-</ul>
-</li>
-<li>Call method : <code>[text.name.methodName=value0,value1,value2]</code></li>
-<li>Set property : <code>[text.name.x=value]</code>, <code>[text.name.alpha=value]</code>, ....</li>
-<li>Ease property : 
-    <div class="highlight"><pre><span></span><code>[text.name.x.to=value,duration]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[text.name.x.to=value,duration,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[text.name.x.to=value,duration,easeFunction,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[text.name.x.to=value]
-</code></pre></div><ul>
-<li><code>duration</code> : Default value is <code>1000</code></li>
-<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
-<li><code>repeat</code> : Default value is <code>0</code></li>
-</ul>
-</li>
-<li>Yoyo ease property : 
-    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value,duration]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value,duration,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value,duration,easeFunction,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[text.name.x.yoyo=value]
-</code></pre></div></li>
-<li>Set text
-    <div class="highlight"><pre><span></span><code>[text.name.text]
-content\\n
-newline\\n
-newline
-</code></pre></div></li>
-<li>Typing text
-    <div class="highlight"><pre><span></span><code>[text.name.typing]
-// [text.name.typing=speed]
-content\\n
-newline\\n
-newline
-</code></pre></div></li>
-</ul>
 <h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Add sprite : <code>[sprite.name=textureKey,frameKey]</code><ul>
@@ -9042,28 +9168,23 @@ newline
 <li>Call method : <code>[sprite.name.methodName=value0,value1,value2]</code></li>
 <li>Set property : <code>[sprite.name.x=value]</code>, <code>[sprite.name.alpha=value]</code>, ....</li>
 <li>Ease property : 
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value,duration,easeFunction,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.to=value]
+    <div class="highlight"><pre><span></span><code>[sprite.name.prop.easeMode=value,duration]
+[sprite.name.prop.easeMode=value,duration,repeat]
+[sprite.name.prop.easeMode=value,duration,easeFunction,repeat]
+[sprite.name.prop.easeMode=value]
 </code></pre></div><ul>
+<li><code>prop</code> : Any number property of this sprite.</li>
+<li><code>easeMode</code> : One of these modes<ul>
+<li><code>to</code>, <code>toLeft</code>, <code>toRight</code>, <code>toUp</code>, <code>toDown</code></li>
+<li><code>yoyo</code>, <code>yoyoLeft</code>, <code>yoyoRight</code>, <code>yoyoUp</code>, <code>yoyoDown</code></li>
+<li><code>from</code>, <code>fromLeft</code>, <code>fromRight</code>, <code>fromUp</code>, <code>fromDown</code>    </li>
+</ul>
+</li>
 <li><code>duration</code> : Default value is <code>1000</code></li>
 <li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
 <li><code>repeat</code> : Default value is <code>0</code></li>
 </ul>
 </li>
-<li>Yoyo ease property : 
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value,duration,easeFunction,repeat]
-</code></pre></div>
-    <div class="highlight"><pre><span></span><code>[sprite.name.x.yoyo=value]
-</code></pre></div></li>
 <li>Set texture : <code>[sprite.name.texture=textureKey,frameKey]</code></li>
 <li>Play animation : <code>[sprite.name.play=animationKey]</code>, or <code>[sprite.name.play=animationKey0,animationKey1,...]</code><ul>
 <li>Can play animation without adding sprite first.</li>
@@ -9071,6 +9192,54 @@ newline
 </li>
 <li>Stop animation : <code>[/sprite.name.play]</code>, or <code>[sprite.name.stop]</code></li>
 <li>Pause animation : <code>[sprite.name.pause]</code></li>
+</ul>
+<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add text : <code>[text.name]</code><ul>
+<li>Tint-fade-in if <code>text.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove text : <code>[/text.name]</code><ul>
+<li>Tint-fade-out if <code>text.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove all texts : <code>[/text]</code><ul>
+<li>Tint-fade-out if <code>text.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Call method : <code>[text.name.methodName=value0,value1,value2]</code></li>
+<li>Set property : <code>[text.name.x=value]</code>, <code>[text.name.alpha=value]</code>, ....</li>
+<li>Ease property : 
+    <div class="highlight"><pre><span></span><code>[sprite.name.prop.easeMode=value,duration]
+[sprite.name.prop.easeMode=value,duration,repeat]
+[sprite.name.prop.easeMode=value,duration,easeFunction,repeat]
+[sprite.name.prop.easeMode=value]
+</code></pre></div><ul>
+<li><code>prop</code> : Any number property of this sprite.</li>
+<li><code>easeMode</code> : One of these modes<ul>
+<li><code>to</code>, <code>toLeft</code>, <code>toRight</code>, <code>toUp</code>, <code>toDown</code></li>
+<li><code>yoyo</code>, <code>yoyoLeft</code>, <code>yoyoRight</code>, <code>yoyoUp</code>, <code>yoyoDown</code></li>
+<li><code>from</code>, <code>fromLeft</code>, <code>fromRight</code>, <code>fromUp</code>, <code>fromDown</code>    </li>
+</ul>
+</li>
+<li><code>duration</code> : Default value is <code>1000</code></li>
+<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
+<li><code>repeat</code> : Default value is <code>0</code></li>
+</ul>
+</li>
+<li>Set text
+    <div class="highlight"><pre><span></span><code>[text.name.text]
+content\\n
+newline\\n
+newline
+</code></pre></div></li>
+<li>Typing text
+    <div class="highlight"><pre><span></span><code>[text.name.typing]
+// [text.name.typing=speed]
+content\\n
+newline\\n
+newline
+</code></pre></div></li>
 </ul>
 <h4 id="sound-effect">Sound effect<a class="headerlink" href="#sound-effect" title="Permanent link">&para;</a></h4>
 <ul>
@@ -9170,16 +9339,31 @@ newline
 </li>
 <li>Wait ease task of sprite's property : <code>[wait=sprite.name.prop]</code><ul>
 <li>Also fire event <code>'wait.sprite'</code>
-   <div class="highlight"><pre><span></span><code> <span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
- <span class="p">})</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait a sprite are destroyed : <code>[wait=sprite.name]</code><ul>
+<li>Also fire event <code>'wait.sprite'</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// prop parameter are `undefined` here</span>
+<span class="p">})</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Wait all sprites are destroyed : <code>[wait=sprite]</code><ul>
 <li>Also fire event <code>'wait.sprite'</code>
-   <div class="highlight"><pre><span></span><code> <span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// name and prop parameter are `undefined` here</span>
- <span class="p">})</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// name and prop parameter are `undefined` here</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait boolean data in sprite's data manager set to <code>true</code>/<code>false</code> : <code>[wait=sprite.name.dataKey]</code>/<code>[wait=sprite.name.!dataKey]</code><ul>
+<li>Also fire event <code>'wait.sprite'</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -9252,6 +9436,21 @@ newline
 <span class="p">})</span>
 </code></pre></div></li>
 </ol>
+<h3 id="game-objects">Game objects<a class="headerlink" href="#game-objects" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get game object by name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">getGameObject</span><span class="p">(</span><span class="nx">goType</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get all game objects of a game object manager
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">getGameObject</span><span class="p">(</span><span class="nx">goType</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>gameObjects</code> : <code>{name: gameObject}</code></li>
+</ul>
+</li>
+<li>Add existed game object into game object manager
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">addGameObject</span><span class="p">(</span><span class="nx">goType</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 
               
             </article>
