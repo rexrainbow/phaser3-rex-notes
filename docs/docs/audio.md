@@ -82,6 +82,14 @@ scene.sound.decodeAudio(audioFiles);
     scene.sound.on('decodedall');
     ```
 
+### Unlock audio
+
+Unlocks Web Audio API/HTML5 Audio loading on the initial input event.
+
+```javascript
+scene.sound.unlock();
+```
+
 ### Play sound
 
 Sound instance will be destroyed when playback ends.
