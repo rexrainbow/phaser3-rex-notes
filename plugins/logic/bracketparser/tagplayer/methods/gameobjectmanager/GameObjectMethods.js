@@ -14,7 +14,7 @@ export default {
             for (name in names) {
                 out[name] = gameobjectManager.getGO(name);
             }
-            return result;
+            return out;
         }
     },
 
