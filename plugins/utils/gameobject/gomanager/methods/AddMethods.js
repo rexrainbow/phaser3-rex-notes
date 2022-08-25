@@ -18,10 +18,9 @@ export default {
     },
 
     addGO(name, gameObject) {
-        this.remove(name);
+        this.remove(name, true);
 
-        var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
-        if (hasTintChange) {
+        if (this.hasTintFadeEffect(gameObject)) {
             AddTintRGBProperties(gameObject);
         }
 
@@ -47,19 +46,9 @@ export default {
         var scope = this.createGameObjectScope;
         var gameObject = callback.call(scope, this.scene, ...args);
         this.addGO(name, gameObject);
-        var bob = this.get(name);
 
-        var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
-        var hasAlphaChange = (!!gameObject.setAlpha) && (this.fadeTime > 0);
-        if (hasTintChange) {
-            bob
-                .setProperty('tintGray', 0)
-                .easeProperty('tintGray', 255, this.fadeTime)
-        } else if (hasAlphaChange) {
-            bob
-                .setProperty('alpha', 0)
-                .easeProperty('alpha', 1, this.fadeTime)
-        }
+        var bob = this.get(name);
+        this.fadeBob(bob, 0, 1);
 
         return this;
     },

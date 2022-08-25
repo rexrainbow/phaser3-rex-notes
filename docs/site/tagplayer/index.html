@@ -8871,7 +8871,8 @@
 
     <span class="nx">sprites</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// createGameObject: &#39;sprite&#39;,</span>
-        <span class="c1">// fade: 500,</span>
+        <span class="c1">// fade: 500,  </span>
+        <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
         <span class="c1">// viewportCoordinate: false,</span>
     <span class="p">},</span> 
     <span class="c1">// sprites: false,</span>
@@ -8879,6 +8880,7 @@
     <span class="nx">texts</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// createGameObject: undefined,        </span>
         <span class="c1">// fade: 500,</span>
+        <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
         <span class="c1">// viewportCoordinate: false,</span>
     <span class="p">}</span>
     <span class="c1">// texts: false,</span>
@@ -8923,7 +8925,16 @@
 </li>
 <li><code>sprites.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
-<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
+<li>A number : Duration of fading. Default value is <code>500</code>.</li>
+<li>A plain object contains <code>mode</code>, <code>time</code><ul>
+<li><code>sprite.fade.mode</code> : Fade mode<ul>
+<li><code>0</code>, or <code>'tint'</code> : Fade-in or fade-out via <code>tint</code> property.</li>
+<li><code>1</code>, or <code>'alpha'</code> : Fade-in or fade-out via <code>alpha</code> property. </li>
+</ul>
+</li>
+<li><code>sprite.fade.time</code> : Duration of fading. Default value is <code>500</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>sprites.viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to sprite game object.<ul>
@@ -8953,7 +8964,16 @@
 </li>
 <li><code>texts.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when adding or removing a text game object.</li>
-<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a text game object. Default value is <code>500</code>.</li>
+<li>A number : Duration of fading. Default value is <code>500</code>.</li>
+<li>A plain object contains <code>mode</code>, <code>time</code><ul>
+<li><code>texts.fade.mode</code> : Fade mode<ul>
+<li><code>0</code>, or <code>'tint'</code> : Fade-in or fade-out via <code>tint</code> property.</li>
+<li><code>1</code>, or <code>'alpha'</code> : Fade-in or fade-out via <code>alpha</code> property.</li>
+</ul>
+</li>
+<li><code>texts.fade.time</code> : Duration of fading. Default value is <code>500</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>texts.viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to text game object.<ul>
@@ -9013,6 +9033,7 @@
     <span class="p">},</span>
 
     <span class="c1">// fade: 500,</span>
+    <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
     <span class="c1">// viewportCoordinate: false,</span>
 
 <span class="p">})</span>
@@ -9028,8 +9049,17 @@
 </ul>
 </li>
 <li><code>fade</code> : Tint-fade (if game object has <code>tint</code> property) or alpha-fade game object when creating or destroying a game object.<ul>
-<li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
-<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
+<li><code>0</code> : No fade-in or fade-out when adding or removing a game object.</li>
+<li>A number : Duration of fading. Default value is <code>500</code>.</li>
+<li>A plain object contains <code>mode</code>, <code>time</code><ul>
+<li><code>fade.mode</code> : Fade mode<ul>
+<li><code>0</code>, or <code>'tint'</code> : Fade-in or fade-out via <code>tint</code> property.</li>
+<li><code>1</code>, or <code>'alpha'</code> : Fade-in or fade-out via <code>alpha</code> property.</li>
+</ul>
+</li>
+<li><code>fade.time</code> : Duration of fading. Default value is <code>500</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to sprite game object.<ul>

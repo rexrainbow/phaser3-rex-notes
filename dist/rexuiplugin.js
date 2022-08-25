@@ -16956,6 +16956,68 @@
     return true;
   };
 
+  var FadeMode = {
+    tint: 0,
+    alpha: 1
+  };
+  var FadeMethods$1 = {
+    setGOFadeMode: function setGOFadeMode(fadeMode) {
+      if (typeof fadeMode === 'string') {
+        fadeMode = FadeMode[fadeMode];
+      }
+
+      this.fadeMode = fadeMode;
+      return this;
+    },
+    setGOFadeTime: function setGOFadeTime(time) {
+      this.fadeTime = time;
+      return this;
+    },
+    hasTintFadeEffect: function hasTintFadeEffect(gameObject) {
+      return this.fadeMode === 0 && this.fadeTime > 0 && gameObject.setTint !== undefined;
+    },
+    hasAlphaFadeEffect: function hasAlphaFadeEffect(gameObject) {
+      return this.fadeMode === 1 && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+    },
+    fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
+      var gameObject = bob.gameObject;
+
+      if (this.hasTintFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('tintGray', 255 * fromValue);
+        }
+
+        bob.easeProperty('tintGray', // property
+        Math.floor(255 * toValue), // to value
+        this.fadeTime, // duration
+        'Linear', // ease
+        0, // repeat
+        false, // yoyo
+        onComplete // onComplete
+        );
+      } else if (this.hasAlphaFadeEffect(gameObject)) {
+        if (fromValue !== undefined) {
+          bob.setProperty('alpha', fromValue);
+        }
+
+        bob.easeProperty('alpha', // property
+        toValue, // to value
+        this.fadeTime, // duration
+        'Linear', // ease
+        0, // repeat
+        false, // yoyo
+        onComplete // onComplete
+        );
+      } else {
+        if (onComplete) {
+          onComplete(gameObject);
+        }
+      }
+
+      return this;
+    }
+  };
+
   var GetR = function GetR(colorInt) {
     return colorInt >> 16 & 0xff;
   };
@@ -17213,10 +17275,9 @@
       return bob ? bob.gameObject : null;
     },
     addGO: function addGO(name, gameObject) {
-      this.remove(name);
-      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
+      this.remove(name, true);
 
-      if (hasTintChange) {
+      if (this.hasTintFadeEffect(gameObject)) {
         AddTintRGBProperties(gameObject);
       }
 
@@ -17246,15 +17307,7 @@
       var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
       var bob = this.get(name);
-      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
-      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
-
-      if (hasTintChange) {
-        bob.setProperty('tintGray', 0).easeProperty('tintGray', 255, this.fadeTime);
-      } else if (hasAlphaChange) {
-        bob.setProperty('alpha', 0).easeProperty('alpha', 1, this.fadeTime);
-      }
-
+      this.fadeBob(bob, 0, 1);
       return this;
     },
     forEachGO: function forEachGO(callback, scope) {
@@ -17278,36 +17331,19 @@
   };
 
   var RemoveMethods$1 = {
-    remove: function remove(name) {
+    remove: function remove(name, ignoreFade) {
       if (!this.has(name)) {
         return this;
       }
 
       var bob = this.get(name);
       delete this.bobs[name];
-      var gameObject = bob.gameObject;
-      this.removedGOs.push(gameObject);
-      var hasTintChange = !!gameObject.setTint && this.fadeTime > 0;
-      var hasAlphaChange = !!gameObject.setAlpha && this.fadeTime > 0;
+      this.removedGOs.push(bob.gameObject);
 
-      if (hasTintChange) {
-        bob.easeProperty('tintGray', // property
-        0, // to value
-        this.fadeTime, // duration
-        'Linear', // ease
-        0, // repeat
-        false, // yoyo
-        function () {
-          // onComplete
-          bob.destroy();
-        });
-      } else if (hasAlphaChange) {
-        bob.easeProperty('alpha', // property
-        0, // to value
-        this.fadeTime, // duration
-        'Linear', // ease
-        0, // repeat
-        false, // yoyo
+      if (!ignoreFade) {
+        this.fadeBob(bob, // bob
+        undefined, // fromValue
+        0, // toValue
         function () {
           // onComplete
           bob.destroy();
@@ -17477,7 +17513,7 @@
   var Methods$7 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$7, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$7, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var GetValue$1J = Phaser.Utils.Objects.GetValue;
 
@@ -17489,7 +17525,16 @@
       this.BobClass = GetValue$1J(config, 'BobClass', BobBase);
       this.setCreateGameObjectCallback(GetValue$1J(config, 'createGameObject'), GetValue$1J(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$1J(config, 'eventEmitter', undefined));
-      this.setGOFadeTime(GetValue$1J(config, 'fade', 500));
+      var fadeConfig = GetValue$1J(config, 'fade', 500);
+
+      if (typeof fadeConfig === 'number') {
+        this.setGOFadeMode(0);
+        this.setGOFadeTime(fadeConfig);
+      } else {
+        this.setGOFadeMode(GetValue$1J(fadeConfig, 'mode', 0));
+        this.setGOFadeTime(GetValue$1J(fadeConfig, 'time', 500));
+      }
+
       this.setViewportCoordinateEnable(GetValue$1J(config, 'viewportCoordinate', false));
       this.bobs = {};
       this.removedGOs = [];
@@ -17531,12 +17576,6 @@
       value: function setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
         this.createGameObjectScope = scope;
-        return this;
-      }
-    }, {
-      key: "setGOFadeTime",
-      value: function setGOFadeTime(time) {
-        this.fadeTime = time;
         return this;
       }
     }, {

@@ -87,7 +87,11 @@ class Demo extends Phaser.Scene {
 
         var extDude = this.add.image(100, 100, 'dude');
         var tagPlayer = this.plugins.get('rexTagPlayerPlugin').add(this, {
+            sprites: {
+                fade: 2000,
+            },
             texts: {
+                fade: 2000,
                 createGameObject: CreateText
             }
         })

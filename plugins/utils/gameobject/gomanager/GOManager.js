@@ -15,7 +15,16 @@ class GOManager {
             GetValue(config, 'createGameObjectScope')
         );
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
-        this.setGOFadeTime(GetValue(config, 'fade', 500));
+
+        var fadeConfig = GetValue(config, 'fade', 500);
+        if (typeof (fadeConfig) === 'number') {
+            this.setGOFadeMode(0);
+            this.setGOFadeTime(fadeConfig);
+        } else {
+            this.setGOFadeMode(GetValue(fadeConfig, 'mode', 0));
+            this.setGOFadeTime(GetValue(fadeConfig, 'time', 500));
+        }
+
         this.setViewportCoordinateEnable(GetValue(config, 'viewportCoordinate', false));
 
         this.bobs = {};
@@ -54,11 +63,6 @@ class GOManager {
     setCreateGameObjectCallback(callback, scope) {
         this.createGameObjectCallback = callback;
         this.createGameObjectScope = scope;
-        return this;
-    }
-
-    setGOFadeTime(time) {
-        this.fadeTime = time;
         return this;
     }
 

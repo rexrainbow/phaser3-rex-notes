@@ -1,5 +1,5 @@
 export default {
-    remove(name) {
+    remove(name, ignoreFade) {
         if (!this.has(name)) {
             return this;
         }
@@ -7,40 +7,21 @@ export default {
         var bob = this.get(name);
         delete this.bobs[name];
 
-        var gameObject = bob.gameObject;
-        this.removedGOs.push(gameObject);
-        var hasTintChange = (!!gameObject.setTint) && (this.fadeTime > 0);
-        var hasAlphaChange = (!!gameObject.setAlpha) && (this.fadeTime > 0);
+        this.removedGOs.push(bob.gameObject);
 
-        if (hasTintChange) {
-            bob.easeProperty(
-                'tintGray',                 // property
-                0,                          // to value
-                this.fadeTime,              // duration
-                'Linear',                   // ease
-                0,                          // repeat
-                false,                      // yoyo
-                function () {               // onComplete
+        if (!ignoreFade) {
+            this.fadeBob(
+                bob,                  // bob
+                undefined,            // fromValue
+                0,                    // toValue
+                function () {         // onComplete
                     bob.destroy();
                 }
             )
-        } else if (hasAlphaChange) {
-            bob.easeProperty(
-                'alpha',                    // property
-                0,                          // to value
-                this.fadeTime,              // duration
-                'Linear',                   // ease
-                0,                          // repeat
-                false,                      // yoyo
-                function () {               // onComplete
-                    bob.destroy();
-                }
-            )
-
         } else {
             bob.destroy();
-
         }
+
         return this;
     },
 

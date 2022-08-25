@@ -82,7 +82,8 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
 
     sprites: {
         // createGameObject: 'sprite',
-        // fade: 500,
+        // fade: 500,  
+        // fade: {mode: 'tint', time: 500},
         // viewportCoordinate: false,
     }, 
     // sprites: false,
@@ -90,6 +91,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
     texts: {
         // createGameObject: undefined,        
         // fade: 500,
+        // fade: {mode: 'tint', time: 500},
         // viewportCoordinate: false,
     }
     // texts: false,
@@ -125,7 +127,12 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             - `a`, `b`, `c` : Parameters pass from `[sprite.name=a,b,c]` 
     - `sprites.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
-        - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+        - A number : Duration of fading. Default value is `500`.
+        - A plain object contains `mode`, `time`
+            - `sprite.fade.mode` : Fade mode
+                - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+                - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property. 
+            - `sprite.fade.time` : Duration of fading. Default value is `500`.
     - `sprites.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
         - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
             - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
@@ -144,7 +151,12 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             - `a`, `b`, `c` : Parameters pass from `[text.name=a,b,c]` 
     - `texts.fade` :
         - `0` : No fade-in or fade-out when adding or removing a text game object.
-        - A number : Tint-fade-in or Tint-fade-out when adding or removing a text game object. Default value is `500`.
+        - A number : Duration of fading. Default value is `500`.
+        - A plain object contains `mode`, `time`
+            - `texts.fade.mode` : Fade mode
+                - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+                - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property.
+            - `texts.fade.time` : Duration of fading. Default value is `500`.
     - `texts.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to text game object.
         - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
             - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
@@ -190,6 +202,7 @@ tagPlayer.addGameObjectManager({
     },
 
     // fade: 500,
+    // fade: {mode: 'tint', time: 500},
     // viewportCoordinate: false,
 
 })
@@ -204,8 +217,13 @@ tagPlayer.addGameObjectManager({
     ```
     - `a`, `b`, `c` : Parameters pass from `[goType.name=a,b,c]` 
 - `fade` : Tint-fade (if game object has `tint` property) or alpha-fade game object when creating or destroying a game object.
-    - `0` : No fade-in or fade-out when adding or removing a sprite.
-    - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+    - `0` : No fade-in or fade-out when adding or removing a game object.
+    - A number : Duration of fading. Default value is `500`.
+    - A plain object contains `mode`, `time`
+        - `fade.mode` : Fade mode
+            - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+            - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property.
+        - `fade.time` : Duration of fading. Default value is `500`.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
     - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
         - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
