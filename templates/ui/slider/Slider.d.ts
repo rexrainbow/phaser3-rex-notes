@@ -19,6 +19,9 @@ declare namespace Slider {
 
         gap?: number,
 
+        value?: number,
+        min?: number, max?: number,
+
         easeValue?: {
             duration?: number,
             ease?: string
