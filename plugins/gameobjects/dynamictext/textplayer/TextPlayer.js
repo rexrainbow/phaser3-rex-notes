@@ -1,7 +1,6 @@
 import Extend from '../../../logic/utils/managers/Extend.js';
 import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
-import Timeline from '../../../time/progresses/Timeline.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
@@ -31,8 +30,6 @@ class TextPlayer extends Extend(DynamicText) {
 
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 
-        this.timeline = new Timeline(this);
-
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
 
         this._imageManager = undefined;
@@ -43,7 +40,7 @@ class TextPlayer extends Extend(DynamicText) {
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        this.initManagers(scene, config);
+        this.initManagers(config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
@@ -83,9 +80,6 @@ class TextPlayer extends Extend(DynamicText) {
         this.parser.destroy();
         this.parser = undefined;
 
-        this.timeline.destroy();
-        this.timeline = undefined;
-
         this.typeWriter.destroy(fromScene);
         this.typeWriter = undefined;
 
@@ -98,9 +92,9 @@ class TextPlayer extends Extend(DynamicText) {
 
         this.clickEE = undefined;
 
-        super.destroy(fromScene);
-
         this.destroyManagers(fromScene);
+
+        super.destroy(fromScene);
     }
 
     get isPageTyping() {

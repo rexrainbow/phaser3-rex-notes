@@ -1,5 +1,4 @@
 import GetWrapCallback from './GetWrapCallback.js';
-import DelayCall from '../DelayCall.js';
 import { RemoveWaitEvents } from '../Events.js';
 
 var WaitTime = function (textPlayer, time, callback, args, scope) {
@@ -15,7 +14,7 @@ var WaitTime = function (textPlayer, time, callback, args, scope) {
         }
     });
 
-    timer = DelayCall(textPlayer, time, wrapCallback);
+    timer = textPlayer.delayCall(time, wrapCallback);
 
     textPlayer.emit('wait.time', time);
 }

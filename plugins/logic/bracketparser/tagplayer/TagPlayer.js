@@ -1,6 +1,5 @@
 import Extend from '../../utils/managers/Extend.js';
 import Parser from './parser/Parser.js';
-import Timeline from '../../../time/progresses/Timeline.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import AddTextManager from './methods/textmanager/AddTextManager.js';
 import Methods from './methods/Methods.js';
@@ -17,11 +16,9 @@ class TagPlayer extends Extend(EventEmitter) {
 
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 
-        this.timeline = new Timeline(this);
-
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        this.initManagers(scene, config);
+        this.initManagers(config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
@@ -68,7 +65,9 @@ class TagPlayer extends Extend(EventEmitter) {
 
         super.destroy();
 
-        this.DestroyManagers(fromScene);
+        this.destroyManagers(fromScene);
+
+        this.scene = undefined;
     }
 }
 

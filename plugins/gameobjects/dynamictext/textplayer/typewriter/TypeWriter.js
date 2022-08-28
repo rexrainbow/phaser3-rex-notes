@@ -8,7 +8,6 @@ class TypeWriter {
         this.setEventEmitter();
         this.textPlayer = textPlayer;
         this.isPageTyping = false;
-        this.timeline = textPlayer.timeline;
         this.typingTimer = undefined;  // Typing delay
         this.pauseTypingTimer = undefined;  // Wait time
         this.inTypingProcessLoop = false;  // Used in this.typing()
@@ -28,8 +27,6 @@ class TypeWriter {
 
         this.textPlayer = undefined;
 
-        this.timeline = undefined;
-
         this.typingTimer = undefined;
 
         this.pauseTypingTimer = undefined;
@@ -37,6 +34,10 @@ class TypeWriter {
         this.onTypeStart = undefined;
 
         this.animationConfig = undefined;
+    }
+
+    get timeline() {
+        return this.textPlayer.timeline;
     }
 
     setTypingStartCallback(callback) {

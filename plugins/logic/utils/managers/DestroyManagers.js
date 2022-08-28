@@ -9,7 +9,10 @@ var DestroyManagers = function (fromScene) {
         delete this.gameObjectManagers[name];
     }
 
-    this.scene = undefined;
+    if (this.timeline) {
+        this.timeline.destroy();
+    }
+    this.timeline = undefined;
 }
 
 export default DestroyManagers;
