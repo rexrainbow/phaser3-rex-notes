@@ -1,8 +1,8 @@
+import Extend from '../../../logic/utils/managers/Extend.js';
 import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
-import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
@@ -10,7 +10,7 @@ import ClearEvents from './methods/utils/ClearEvents.js';
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextPlayer extends DynamicText {
+class TextPlayer extends Extend(DynamicText) {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -38,15 +38,9 @@ class TextPlayer extends DynamicText {
             this.addImage(imageData);
         }
 
-        this._soundManager = undefined;
-        var soundManagerConfig = GetValue(config, 'sounds', undefined);
-        if (soundManagerConfig) {
-            this._soundManager = new SoundManager(this.scene, soundManagerConfig);
-        }
-
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        this.gameObjectManagers = {};
+        this.initManagers(scene, config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
@@ -69,13 +63,6 @@ class TextPlayer extends DynamicText {
             this._imageManager = new ImageManager(this.scene);
         }
         return this._imageManager;
-    }
-
-    get soundManager() {
-        if (this._soundManager === undefined) {
-            this._soundManager = new SoundManager(this.scene);
-        }
-        return this._soundManager;
     }
 
     get spriteManager() {
@@ -101,21 +88,13 @@ class TextPlayer extends DynamicText {
         }
         this._imageManager = undefined;
 
-        if (this._soundManager) {
-            this._soundManager.destroy(fromScene);
-        }
-        this._soundManager = undefined;
-
         this.camera = undefined;
-
-        for (var name in this.gameObjectManagers) {
-            this.gameObjectManagers.destroy(fromScene);
-            delete this.gameObjectManagers[name];
-        }
 
         this.clickEE = undefined;
 
         super.destroy(fromScene);
+
+        this.destroyManagers(fromScene);
     }
 
     get isPageTyping() {

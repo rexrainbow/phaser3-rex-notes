@@ -1,6 +1,6 @@
+import Extend from '../../utils/managers/Extend.js';
 import Parser from './parser/Parser.js';
 import Timeline from '../../../time/progresses/Timeline.js';
-import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import AddTextManager from './methods/textmanager/AddTextManager.js';
 import Methods from './methods/Methods.js';
@@ -9,7 +9,7 @@ import ClearEvents from './methods/utils/ClearEvents.js';
 const EventEmitter = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TagPlayer extends EventEmitter {
+class TagPlayer extends Extend(EventEmitter) {
     constructor(scene, config) {
         super();
 
@@ -19,15 +19,9 @@ class TagPlayer extends EventEmitter {
 
         this.timeline = new Timeline(this);
 
-        this._soundManager = undefined;
-        var soundManagerConfig = GetValue(config, 'sounds', undefined);
-        if (soundManagerConfig) {
-            this._soundManager = new SoundManager(this.scene, soundManagerConfig);
-        }
-
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        this.gameObjectManagers = {};
+        this.initManagers(scene, config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
@@ -44,13 +38,6 @@ class TagPlayer extends EventEmitter {
 
     get isPlaying() {
         return this.parser.isRunning;
-    }
-
-    get soundManager() {
-        if (this._soundManager === undefined) {
-            this._soundManager = new SoundManager(this.scene);
-        }
-        return this._soundManager;
     }
 
     get spriteManager() {
@@ -77,19 +64,11 @@ class TagPlayer extends EventEmitter {
 
         ClearEvents(this);
 
-        if (this._soundManager) {
-            this._soundManager.destroy(fromScene);
-        }
-        this._soundManager = undefined;
-
         this.camera = undefined;
 
-        for (var name in this.gameObjectManagers) {
-            this.gameObjectManagers.destroy(fromScene);
-            delete this.gameObjectManagers[name];
-        }
+        super.destroy();
 
-        this.scene = undefined;
+        this.DestroyManagers(fromScene);
     }
 }
 

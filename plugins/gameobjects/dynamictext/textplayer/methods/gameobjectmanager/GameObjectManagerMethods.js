@@ -15,19 +15,17 @@ export default {
         if (config === undefined) {
             config = {};
         }
-        if (GameObjectManagerClass === undefined) {
-            GameObjectManagerClass = GameObjectManagerBase;
-        }
-
-        if (!config.createGameObjectScope) {
-            config.createGameObjectScope = this;
-        }
-        var gameobjectManager = new GameObjectManagerClass(this.scene, config);
         var name = config.name;
         if (!name) {
             console.warn(`Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method`);
         }
-        this.gameObjectManagers[name] = gameobjectManager;
+
+        this.__proto__.__proto__.addGameObjectManager.call(this, config, GameObjectManagerClass);
+        // super.addGameObjectManager(config, GameObjectManagerClass);
+
+        if (GameObjectManagerClass === undefined) {
+            GameObjectManagerClass = GameObjectManagerBase;
+        }
 
         // Register parse callbacks
         var customParseCallbacks = config.parseCallbacks;
@@ -45,8 +43,4 @@ export default {
 
         return this;
     },
-
-    getGameObjectManager(name) {
-        return this.gameObjectManagers[name];
-    }
 }

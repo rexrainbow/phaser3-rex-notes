@@ -14,7 +14,7 @@ export default {
             for (name in names) {
                 out[name] = gameobjectManager.getGO(name);
             }
-            return result;
+            return out;
         }
     },
 
@@ -28,6 +28,27 @@ export default {
                 gameobjectManager.addGO(name, names[name]);
             }
         }
+        return this;
+    },
+
+    drawGameObjectsBounds(goTypes, graphics, config) {
+        if (goTypes instanceof Phaser.GameObjects.Graphics) {
+            config = graphics;
+            graphics = goTypes;
+            goTypes = undefined;
+        }
+
+        if (goTypes === undefined) {
+            goTypes = this.getGameObjectManagerNames();
+        }
+
+        if (!Array.isArray(goTypes)) {
+            goTypes = [goTypes];
+        }
+        for (var i = 0, cnt = goTypes.length; i < cnt; i++) {
+            this.getGameObjectManager(goTypes[i]).drawGameObjectsBounds(graphics, config)
+        }
+
         return this;
     }
 

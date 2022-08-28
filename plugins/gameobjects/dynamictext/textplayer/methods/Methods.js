@@ -13,7 +13,6 @@ import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
-import GameObjectMethods from './gameobjectmanager/GameObjectMethods.js';
 import SpriteMethods from './spritemanager/SpriteMethods.js';
 import ContentMethods from './ContentMethods.js';
 
@@ -37,7 +36,6 @@ Object.assign(
     PlayMethods,
     PauseMethods,
     TypingSpeedMethods,
-    GameObjectMethods,
     SpriteMethods,
     ContentMethods,
 );

@@ -6,10 +6,8 @@ import PlayMethods from './PlayMethods.js';
 import PauseMethods from './PauseMethods.js';
 import ResumeMethods from './ResumeMethods.js';
 import Wait from './Wait.js';
-import GameObjectMethods from './gameobjectmanager/GameObjectMethods.js';
 import SpriteMethods from './spritemanager/SpriteMethods.js';
 import TextMethods from './textmanager/TextMethods.js';
-import DrawGameObjectsBounds from './DrawGameObjectsBounds.js';
 import ContentMethods from './ContentMethods.js';
 
 var Methods = {
@@ -17,7 +15,6 @@ var Methods = {
     setTargetCamera: SetTargetCamera,
     setSkipSoundEffect: SetSkipSoundEffect,
     wait: Wait,
-    drawGameObjectsBounds: DrawGameObjectsBounds,
 }
 
 Object.assign(
@@ -26,7 +23,6 @@ Object.assign(
     PauseMethods,
     ResumeMethods,
     GameObjectManagerMethods,
-    GameObjectMethods,
     SpriteMethods,
     TextMethods,
     ContentMethods,
