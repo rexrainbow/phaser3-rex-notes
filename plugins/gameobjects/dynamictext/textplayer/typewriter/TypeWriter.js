@@ -1,6 +1,5 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './Methods.js';
-import Timeline from '../../../../time/progresses/Timeline.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9,7 +8,7 @@ class TypeWriter {
         this.setEventEmitter();
         this.textPlayer = textPlayer;
         this.isPageTyping = false;
-        this.timeline = new Timeline(textPlayer);
+        this.timeline = textPlayer.timeline;
         this.typingTimer = undefined;  // Typing delay
         this.pauseTypingTimer = undefined;  // Wait time
         this.inTypingProcessLoop = false;  // Used in this.typing()
@@ -29,7 +28,6 @@ class TypeWriter {
 
         this.textPlayer = undefined;
 
-        this.timeline.destroy();
         this.timeline = undefined;
 
         this.typingTimer = undefined;
@@ -39,14 +37,6 @@ class TypeWriter {
         this.onTypeStart = undefined;
 
         this.animationConfig = undefined;
-    }
-
-    set timeScale(value) {
-        this.timeline.timeScale = value;
-    }
-
-    get timeScale() {
-        return this.timeline.timeScale;
     }
 
     setTypingStartCallback(callback) {

@@ -1,6 +1,7 @@
 import Extend from '../../../logic/utils/managers/Extend.js';
 import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
+import Timeline from '../../../time/progresses/Timeline.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
@@ -29,6 +30,8 @@ class TextPlayer extends Extend(DynamicText) {
         this.type = 'rexTextPlayer'
 
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
+
+        this.timeline = new Timeline(this);
 
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
 
@@ -80,6 +83,9 @@ class TextPlayer extends Extend(DynamicText) {
         this.parser.destroy();
         this.parser = undefined;
 
+        this.timeline.destroy();
+        this.timeline = undefined;
+
         this.typeWriter.destroy(fromScene);
         this.typeWriter = undefined;
 
@@ -117,16 +123,16 @@ class TextPlayer extends Extend(DynamicText) {
         return this.typeWriter.speed;
     }
 
-    set timeScale(timeScale) {
-        this.typeWriter.timeScale = timeScale;
+    set timeScale(value) {
+        this.timeline.timeScale = value;
 
         if (this._spriteManager !== undefined) {
-            this._spriteManager.setTimeScale(timeScale);
+            this._spriteManager.setTimeScale(value);
         }
     }
 
     get timeScale() {
-        return this.typeWriter.timeScale;
+        return this.timeline.timeScale;
     }
 }
 

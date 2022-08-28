@@ -1,7 +1,7 @@
 export default {
     pause() {
         // Pause typing, typing timer and animation progresses
-        this.typeWriter.pauseTyping().pause();
+        this.timeline.pause(); 
 
         return this;
     },

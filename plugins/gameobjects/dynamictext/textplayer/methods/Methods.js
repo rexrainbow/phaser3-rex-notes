@@ -6,7 +6,7 @@ import AddImage from './AddImage.js';
 import PlayMethods from './PlayMethods.js';
 import TypingNextPage from './TypingNextPage.js';
 import PauseMethods from './PauseMethods.js';
-import Resume from './Resume.js';
+import ResumeMethods from './ResumeMethods.js';
 import Wait from './Wait.js';
 import TypingSpeedMethods from './TypingSpeedMethods.js';
 import SetTimeScale from './SetTimeScale.js';
@@ -22,7 +22,6 @@ var Methods = {
     setNextPageInput: SetNextPageInput,
     addImage: AddImage,
     typingNextPage: TypingNextPage,
-    resume: Resume,
     wait: Wait,
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
@@ -35,6 +34,7 @@ Object.assign(
     GameObjectManagerMethods,
     PlayMethods,
     PauseMethods,
+    ResumeMethods,
     TypingSpeedMethods,
     SpriteMethods,
     ContentMethods,
