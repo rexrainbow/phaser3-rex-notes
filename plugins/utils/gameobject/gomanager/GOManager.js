@@ -18,10 +18,10 @@ class GOManager {
 
         var fadeConfig = GetValue(config, 'fade', 500);
         if (typeof (fadeConfig) === 'number') {
-            this.setGOFadeMode(0);
+            this.setGOFadeMode();
             this.setGOFadeTime(fadeConfig);
         } else {
-            this.setGOFadeMode(GetValue(fadeConfig, 'mode', 0));
+            this.setGOFadeMode(GetValue(fadeConfig, 'mode'));
             this.setGOFadeTime(GetValue(fadeConfig, 'time', 500));
         }
 

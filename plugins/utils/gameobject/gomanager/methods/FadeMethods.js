@@ -8,6 +8,7 @@ export default {
         if (typeof (fadeMode) === 'string') {
             fadeMode = FadeMode[fadeMode];
         }
+
         this.fadeMode = fadeMode;
         return this;
     },
@@ -18,11 +19,13 @@ export default {
     },
 
     hasTintFadeEffect(gameObject) {
-        return (this.fadeMode === 0) && (this.fadeTime > 0) && (gameObject.setTint !== undefined);
+        return ((this.fadeMode === undefined) || (this.fadeMode === 0)) &&
+            (this.fadeTime > 0) && (gameObject.setTint !== undefined);
     },
 
     hasAlphaFadeEffect(gameObject) {
-        return (this.fadeMode === 1) && (this.fadeTime > 0) && (gameObject.setAlpha !== undefined);
+        return ((this.fadeMode === undefined) || (this.fadeMode === 1)) &&
+            (this.fadeTime > 0) && (gameObject.setAlpha !== undefined);
     },
 
     fadeBob(bob, fromValue, toValue, onComplete) {

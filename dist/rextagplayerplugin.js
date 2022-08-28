@@ -277,762 +277,6 @@
     }
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-  //  Source object
-  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
-  //  The default value to use if the key doesn't exist
-
-  /**
-   * Retrieves a value from an object.
-   *
-   * @function Phaser.Utils.Objects.GetValue
-   * @since 3.0.0
-   *
-   * @param {object} source - The object to retrieve the value from.
-   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
-   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
-   *
-   * @return {*} The value of the requested key.
-   */
-  var GetValue$e = function GetValue(source, key, defaultValue) {
-    if (!source || typeof source === 'number') {
-      return defaultValue;
-    } else if (source.hasOwnProperty(key)) {
-      return source[key];
-    } else if (key.indexOf('.') !== -1) {
-      var keys = key.split('.');
-      var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
-
-      for (var i = 0; i < keys.length; i++) {
-        if (parent.hasOwnProperty(keys[i])) {
-          //  Yes it has a key property, let's carry on down
-          value = parent[keys[i]];
-          parent = parent[keys[i]];
-        } else {
-          //  Can't go any further, so reset to default
-          value = defaultValue;
-          break;
-        }
-      }
-
-      return value;
-    } else {
-      return defaultValue;
-    }
-  };
-
-  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
-  var EscapeRegex = function EscapeRegex(s) {
-    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
-  };
-
-  var re0 = /[|\\{}()[\]^$+*?.]/g;
-  var re1 = /-/g;
-
-  var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
-
-  var convert = function convert(s) {
-    if (typeof s !== 'string') {
-      return s;
-    }
-
-    if (s === '') {
-      s = null;
-    } else if (FLOAT.test(s)) {
-      s = parseFloat(s);
-    } else {
-      if (s === 'false') {
-        s = false;
-      } else if (s === 'true') {
-        s = true;
-      }
-    }
-
-    return s;
-  };
-
-  var ParseValue = function ParseValue(text, valueConverter) {
-    if (text == null) {
-      return [];
-    }
-
-    var values = text.split(',');
-
-    for (var i = 0, cnt = values.length; i < cnt; i++) {
-      values[i] = valueConverter(values[i]);
-    }
-
-    return values;
-  };
-
-  var DefaultTagExpression = "[!$a-z0-9-_.]+";
-  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
-
-  var BypassValueConverter = function BypassValueConverter(s) {
-    return s;
-  };
-
-  var BracketParser = /*#__PURE__*/function () {
-    function BracketParser(config) {
-      _classCallCheck(this, BracketParser);
-
-      // Event emitter
-      this.setEventEmitter(GetValue$e(config, 'eventEmitter', undefined)); // Parameters for regex
-
-      this.setTagExpression(GetValue$e(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue$e(config, 'regex.value', DefaultValueExpression)); // Value convert
-
-      this.setValueConverter(GetValue$e(config, 'valueConvert', true)); // Brackets and generate regex
-
-      var delimiters = GetValue$e(config, 'delimiters', '<>');
-      this.setDelimiters(delimiters[0], delimiters[1]); // Loop
-
-      this.setLoopEnable(GetValue$e(config, 'loop', false));
-      this.isRunning = false;
-      this.isPaused = false;
-      this.skipEventFlag = false;
-      this.justCompleted = false;
-      this.lastTagStart = null;
-      this.lastTagEnd = null;
-      this.lastContent = null;
-    }
-
-    _createClass(BracketParser, [{
-      key: "shutdown",
-      value: function shutdown() {
-        this.destroyEventEmitter();
-      }
-    }, {
-      key: "destroy",
-      value: function destroy() {
-        this.shutdown();
-      }
-    }, {
-      key: "setTagExpression",
-      value: function setTagExpression(express) {
-        this.tagExpression = express;
-        return this;
-      }
-    }, {
-      key: "setValueExpression",
-      value: function setValueExpression(express) {
-        this.valueExpression = express;
-        return this;
-      }
-    }, {
-      key: "setValueConverter",
-      value: function setValueConverter(converter) {
-        if (converter === true) {
-          converter = convert;
-        } else if (!converter) {
-          converter = BypassValueConverter;
-        }
-
-        this.valueConverter = converter;
-        return this;
-      }
-    }, {
-      key: "setDelimiters",
-      value: function setDelimiters(delimiterLeft, delimiterRight) {
-        if (delimiterRight === undefined) {
-          delimiterRight = delimiterLeft[1];
-          delimiterLeft = delimiterLeft[0];
-        }
-
-        this.delimiterLeft = delimiterLeft;
-        this.delimiterRight = delimiterRight;
-        delimiterLeft = EscapeRegex(delimiterLeft);
-        delimiterRight = EscapeRegex(delimiterRight);
-        var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
-        var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
-        this.reTagOn = RegExp(tagOn, 'i');
-        this.reTagOff = RegExp(tagOff, 'i');
-        this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
-        return this;
-      }
-    }, {
-      key: "setLoopEnable",
-      value: function setLoopEnable(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-
-        this.loopEnable = enable;
-        return this;
-      }
-    }, {
-      key: "setSource",
-      value: function setSource(source) {
-        this.source = source;
-        return this;
-      }
-    }, {
-      key: "resetIndex",
-      value: function resetIndex(index) {
-        if (index === undefined) {
-          index = 0;
-        }
-
-        this.progressIndex = index;
-        this.reSplit.lastIndex = index;
-        this.lastTagStart = null;
-        this.lastTagEnd = null;
-        this.lastContent = null;
-        this.justCompleted = false;
-        this.isRunning = false;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start(source) {
-        this.setSource(source).restart();
-        return this;
-      }
-    }, {
-      key: "restart",
-      value: function restart() {
-        this.resetIndex().next();
-      }
-    }, {
-      key: "next",
-      value: function next() {
-        if (this.isPaused) {
-          this.onResume();
-        } // Don't re-enter this method
-
-
-        if (this.isRunning) {
-          return this;
-        }
-
-        this.isRunning = true;
-
-        if (this.justCompleted) {
-          this.isRunning = false;
-          return this;
-        }
-
-        if (this.reSplit.lastIndex === 0) {
-          this.onStart();
-        }
-
-        var text = this.source,
-            lastIndex = text.length;
-        this.reSplit.lastIndex = this.progressIndex;
-
-        while (true) {
-          var regexResult = this.reSplit.exec(text); // No tag found, complete
-
-          if (!regexResult) {
-            if (this.progressIndex < lastIndex) {
-              this.onContent(text.substring(this.progressIndex, lastIndex)); // Might pause here
-
-              if (this.isPaused) {
-                this.progressIndex = lastIndex;
-                break;
-              }
-            }
-
-            this.onComplete();
-            this.isRunning = false;
-            return;
-          }
-
-          var match = regexResult[0];
-          var matchEnd = this.reSplit.lastIndex;
-          var matchStart = matchEnd - match.length; // Process content between previous tag and current tag            
-
-          if (this.progressIndex < matchStart) {
-            this.onContent(text.substring(this.progressIndex, matchStart)); // Might pause here
-
-            if (this.isPaused) {
-              this.progressIndex = matchStart;
-              break;
-            }
-          } // Process current tag
-
-
-          if (this.reTagOff.test(match)) {
-            this.onTagEnd(match);
-          } else {
-            this.onTagStart(match);
-          }
-
-          this.progressIndex = matchEnd; // Might pause here
-
-          if (this.isPaused) {
-            break;
-          }
-        }
-
-        this.isRunning = false;
-        return this;
-      }
-    }, {
-      key: "skipEvent",
-      value: function skipEvent() {
-        this.skipEventFlag = true;
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        if (!this.isPaused) {
-          this.onPause();
-        }
-
-        return this;
-      }
-    }, {
-      key: "pauseUntilEvent",
-      value: function pauseUntilEvent(eventEmitter, eventName) {
-        if (this.isPaused) {
-          return this;
-        }
-
-        this.pause();
-        eventEmitter.once(eventName, function () {
-          this.next();
-        }, this);
-        return this;
-      }
-    }, {
-      key: "onContent",
-      value: function onContent(content) {
-        this.skipEventFlag = false;
-        this.emit('content', content);
-        this.lastContent = content;
-      }
-    }, {
-      key: "onTagStart",
-      value: function onTagStart(tagContent) {
-        var regexResult = tagContent.match(this.reTagOn);
-        var tag = regexResult[1];
-        var values = ParseValue(regexResult[3], this.valueConverter);
-        this.skipEventFlag = false;
-        this.emit.apply(this, ["+".concat(tag)].concat(_toConsumableArray(values)));
-
-        if (!this.skipEventFlag) {
-          this.emit.apply(this, ['+', tag].concat(_toConsumableArray(values)));
-        }
-
-        this.lastTagStart = tag;
-      }
-    }, {
-      key: "onTagEnd",
-      value: function onTagEnd(tagContent) {
-        var tag = tagContent.match(this.reTagOff)[1];
-        this.skipEventFlag = false;
-        this.emit("-".concat(tag));
-
-        if (!this.skipEventFlag) {
-          this.emit('-', tag);
-        }
-
-        this.lastTagEnd = tag;
-      }
-    }, {
-      key: "onStart",
-      value: function onStart() {
-        this.isRunning = true;
-        this.emit('start', this);
-      }
-    }, {
-      key: "onComplete",
-      value: function onComplete() {
-        this.isRunning = false;
-        this.justCompleted = true;
-        this.emit('complete', this);
-
-        if (this.loopEnable) {
-          this.resetIndex();
-        }
-      }
-    }, {
-      key: "onPause",
-      value: function onPause() {
-        this.isPaused = true;
-        this.emit('pause', this);
-      }
-    }, {
-      key: "onResume",
-      value: function onResume() {
-        this.isPaused = false;
-        this.emit('resume', this);
-      }
-    }, {
-      key: "getTagOnRegString",
-      value: function getTagOnRegString(tagExpression, valueExpression) {
-        if (tagExpression === undefined) {
-          tagExpression = this.tagExpression;
-        }
-
-        if (valueExpression === undefined) {
-          valueExpression = this.valueExpression;
-        }
-
-        return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
-      }
-    }, {
-      key: "getTagOffRegString",
-      value: function getTagOffRegString(tagExpression) {
-        if (tagExpression === undefined) {
-          tagExpression = this.tagExpression;
-        }
-
-        return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
-      }
-    }]);
-
-    return BracketParser;
-  }();
-
-  Object.assign(BracketParser.prototype, EventEmitterMethods);
-
-  var OnParseWaitTag = function OnParseWaitTag(tagPlayer, parser, config) {
-    var tagWait = 'wait';
-    var tagClick = 'click';
-    parser.on("+".concat(tagWait), function (name) {
-      tagPlayer.wait(name);
-      parser.skipEvent();
-    }).on("-".concat(tagWait), function () {
-      parser.skipEvent();
-    }).on("+".concat(tagClick), function () {
-      // Equal to [wait=click]
-      tagPlayer.wait('click');
-      parser.skipEvent();
-    }).on("-".concat(tagClick), function () {
-      // Equal to [/wait]
-      parser.skipEvent();
-    });
-  };
-
-  var OnParsePlaySoundEffectTag = function OnParsePlaySoundEffectTag(tagPlayer, parser, config) {
-    var tagName = 'se';
-    parser.on("+".concat(tagName), function (name, fadeInTime) {
-      if (this.skipSoundEffect) {
-        return;
-      }
-
-      tagPlayer.soundManager.playSoundEffect(name); // this: tagPlayer
-
-      if (fadeInTime) {
-        tagPlayer.soundManager.fadeInSoundEffect(fadeInTime);
-      }
-
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(tagPlayer, parser, config) {
-    var tagName = 'se.fadein';
-    parser.on("+".concat(tagName), function (time) {
-      tagPlayer.soundManager.fadeInSoundEffect(time);
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFadeOutSoundEffectTag = function OnParseFadeOutSoundEffectTag(tagPlayer, parser, config) {
-    var tagName = 'se.fadeout';
-    parser.on("+".concat(tagName), function (time, isStopped) {
-      isStopped = isStopped === 'stop';
-      tagPlayer.soundManager.fadeOutSoundEffect(time, isStopped);
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(tagPlayer, parser, config) {
-    var tagName = 'se.volume';
-    parser.on("+".concat(tagName), function (volume) {
-      tagPlayer.soundManager.setSoundEffectVolume(volume);
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = 'bgm';
-    parser.on("+".concat(tagName), function (name, fadeInTime) {
-      tagPlayer.soundManager.playBackgroundMusic(name);
-
-      if (fadeInTime) {
-        tagPlayer.soundManager.fadeInBackgroundMusic(fadeInTime);
-      }
-
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      tagPlayer.soundManager.stopBackgroundMusic();
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = 'bgm.fadein';
-    parser.on("+".concat(tagName), function (time) {
-      tagPlayer.soundManager.fadeInBackgroundMusic(time);
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = 'bgm.fadeout';
-    parser.on("+".concat(tagName), function (time, isStopped) {
-      isStopped = isStopped === 'stop';
-      tagPlayer.soundManager.fadeOutBackgroundMusic(time, isStopped);
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = 'bgm.cross';
-    parser.on("+".concat(tagName), function (name, fadeTime) {
-      tagPlayer.soundManager.crossFadeBackgroundMusic(name, fadeTime);
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      parser.skipEvent();
-    });
-  };
-
-  var OnParsePauseBackgroundMusicTag = function OnParsePauseBackgroundMusicTag(tagPlayer, parser, config) {
-    var tagName = 'bgm.pause';
-    parser.on("+".concat(tagName), function () {
-      tagPlayer.soundManager.pauseBackgroundMusic();
-      parser.skipEvent();
-    }).on("-".concat(tagName), function () {
-      tagPlayer.soundManager.resumeBackgroundMusic();
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.fadein';
-    parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      tagPlayer.camera.fadeIn(duration, red, green, blue);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.fadeout';
-    parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      tagPlayer.camera.fadeOut(duration, red, green, blue);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseShakeCameraTag = function OnParseShakeCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.shake';
-    parser.on("+".concat(tagName), function (duration, intensity) {
-      tagPlayer.camera.shake(duration, intensity);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseFlashCameraTag = function OnParseFlashCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.flash';
-    parser.on("+".concat(tagName), function (duration, red, green, blue) {
-      tagPlayer.camera.flash(duration, red, green, blue);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseZoomCameraTag = function OnParseZoomCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.zoom';
-    parser.on("+".concat(tagName), function (value) {
-      tagPlayer.camera.setZoom(value);
-      parser.skipEvent();
-    }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
-      tagPlayer.camera.zoomTo(value, duration, ease);
-      parser.skipEvent();
-    });
-  };
-
-  var DegToRad = Phaser.Math.DegToRad;
-
-  var OnParseRotateCameraTag = function OnParseRotateCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.rotate';
-    parser.on("+".concat(tagName), function (value) {
-      tagPlayer.camera.setRotation(DegToRad(value));
-      parser.skipEvent();
-    }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
-      value = DegToRad(value);
-      tagPlayer.camera.rotateTo(DegToRad(value), false, duration, ease);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseScrollCameraTag = function OnParseScrollCameraTag(tagPlayer, parser, config) {
-    var tagName = 'camera.scroll';
-    parser.on("+".concat(tagName), function (x, y) {
-      tagPlayer.camera.setScroll(x, y);
-      parser.skipEvent();
-    }).on("+".concat(tagName, ".to"), function (x, y, duration, ease) {
-      // this: tagPlayer
-      var camera = tagPlayer.camera;
-      var xSave = camera.scrollX;
-      var ySave = camera.scrollY;
-      camera.setScroll(x, y);
-      x += camera.centerX;
-      y += camera.centerY;
-      camera.setScroll(xSave, ySave); // x,y in pan() is the centerX, centerY
-
-      camera.pan(x, y, duration, ease);
-      parser.skipEvent();
-    });
-  };
-
-  var OnParseContent = function OnParseContent(tagPlayer, parser, config) {
-    parser.on('content', function (content) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      }
-
-      if (content === '\n') {
-        return;
-      }
-
-      content = content.replaceAll('\\n', '\n');
-      var callback = tagPlayer.contentCallback;
-
-      if (callback) {
-        var scope = tagPlayer.contentCallbackScope;
-
-        if (scope) {
-          callback.call(scope, content);
-        } else {
-          callback(content);
-        }
-
-        parser.skipEvent();
-        return;
-      }
-
-      tagPlayer.emit("+".concat(parser.lastTagStart, "#content"), parser, content);
-    });
-  };
-
-  var OnParseCustomTag = function OnParseCustomTag(tagPlayer, parser, config) {
-    parser.on('+', function (tagName) {
-      if (parser.skipEventFlag) {
-        // Has been processed before
-        return;
-      }
-
-      for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        params[_key - 1] = arguments[_key];
-      }
-
-      tagPlayer.emit.apply(tagPlayer, ["+".concat(tagName), parser].concat(params));
-    }).on('-', function (tagName) {
-      if (parser.skipEventFlag) {
-        return;
-      }
-
-      tagPlayer.emit("-".concat(tagName), parser);
-    });
-  };
-
-  var ParseCallbacks$3 = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseContent, OnParseCustomTag];
-
-  var AddParseCallbacks = function AddParseCallbacks(tagPlayer, parser, config) {
-    for (var i = 0, cnt = ParseCallbacks$3.length; i < cnt; i++) {
-      ParseCallbacks$3[i](tagPlayer, parser, config);
-    }
-
-    parser.on('start', function () {
-      tagPlayer.emit('start', parser);
-    }).on('complete', function () {
-      tagPlayer.emit('complete', parser);
-    });
-  };
-
-  /*
-  Skip line
-  - An empty line, only has space
-  - A comment line, start with commentLineStart ('//')
-  */
-  var PreProcess = function PreProcess(parser, source) {
-    var comentLineStart = parser.commentLineStart;
-    var lines = source.split('\n');
-
-    for (var i = 0, cnt = lines.length; i < cnt; i++) {
-      var line = lines[i];
-
-      if (line === '') ; else if (line.trim().length === 0) {
-        // An empty line, only has space
-        lines[i] = '';
-      } else if (comentLineStart && line.startsWith(comentLineStart)) {
-        // A comment line, start with commentLineStart ('//')
-        lines[i] = '';
-      }
-    }
-
-    return lines.join('');
-  };
-
-  var GetValue$d = Phaser.Utils.Objects.GetValue;
-
-  var Parser = /*#__PURE__*/function (_BracketParser) {
-    _inherits(Parser, _BracketParser);
-
-    var _super = _createSuper(Parser);
-
-    function Parser(tagPlayer, config) {
-      var _this;
-
-      _classCallCheck(this, Parser);
-
-      if (config === undefined) {
-        config = {};
-      }
-
-      if (!config.hasOwnProperty('delimiters')) {
-        config.delimiters = '[]';
-      }
-
-      _this = _super.call(this, config);
-      AddParseCallbacks(tagPlayer, _assertThisInitialized(_this), config);
-
-      _this.setCommentLineStartSymbol(GetValue$d(config, 'comment', '//'));
-
-      return _this;
-    }
-
-    _createClass(Parser, [{
-      key: "setCommentLineStartSymbol",
-      value: function setCommentLineStartSymbol(symbol) {
-        this.commentLineStart = symbol;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start(source) {
-        _get(_getPrototypeOf(Parser.prototype), "start", this).call(this, PreProcess(this, source));
-
-        return this;
-      }
-    }]);
-
-    return Parser;
-  }(BracketParser);
-
   var SceneClass = Phaser.Scene;
 
   var IsSceneObject = function IsSceneObject(object) {
@@ -1054,7 +298,7 @@
     }
   };
 
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -1065,7 +309,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$c(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$f(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -1119,7 +363,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var GetValue$e = Phaser.Utils.Objects.GetValue;
 
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
@@ -1136,7 +380,7 @@
       _this.isPaused = false;
       _this.tickingState = false;
 
-      _this.setTickingMode(GetValue$b(config, 'tickingMode', 1)); // boot() later
+      _this.setTickingMode(GetValue$e(config, 'tickingMode', 1)); // boot() later
 
 
       return _this;
@@ -1261,492 +505,7 @@
     'always': 2
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
-
-  var BaseClock = /*#__PURE__*/function (_TickTask) {
-    _inherits(BaseClock, _TickTask);
-
-    var _super = _createSuper(BaseClock);
-
-    function BaseClock(parent, config) {
-      var _this;
-
-      _classCallCheck(this, BaseClock);
-
-      _this = _super.call(this, parent, config);
-
-      _this.resetFromJSON(config);
-
-      _this.boot();
-
-      return _this;
-    }
-
-    _createClass(BaseClock, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        this.isRunning = GetValue$a(o, 'isRunning', false);
-        this.timeScale = GetValue$a(o, 'timeScale', 1);
-        this.now = GetValue$a(o, 'now', 0);
-        return this;
-      }
-    }, {
-      key: "toJSON",
-      value: function toJSON() {
-        return {
-          isRunning: this.isRunning,
-          timeScale: this.timeScale,
-          now: this.now,
-          tickingMode: this.tickingMode
-        };
-      } // Override
-      // startTicking() { }
-      // Override
-      // stopTicking() {}
-
-    }, {
-      key: "start",
-      value: function start(startAt) {
-        if (startAt === undefined) {
-          startAt = 0;
-        }
-
-        this.delta = 0;
-        this.now = startAt;
-
-        _get(_getPrototypeOf(BaseClock.prototype), "start", this).call(this);
-
-        return this;
-      }
-    }, {
-      key: "seek",
-      value: function seek(time) {
-        this.now = time;
-        return this;
-      }
-    }, {
-      key: "setTimeScale",
-      value: function setTimeScale(value) {
-        this.timeScale = value;
-        return this;
-      }
-    }, {
-      key: "tick",
-      value: function tick(delta) {
-        delta *= this.timeScale;
-        this.now += delta;
-        this.delta = delta;
-        this.emit('update', this.now, this.delta);
-        return this;
-      }
-    }]);
-
-    return BaseClock;
-  }(TickTask);
-
-  var Clock = /*#__PURE__*/function (_BaseClock) {
-    _inherits(Clock, _BaseClock);
-
-    var _super = _createSuper(Clock);
-
-    function Clock() {
-      _classCallCheck(this, Clock);
-
-      return _super.apply(this, arguments);
-    }
-
-    _createClass(Clock, [{
-      key: "startTicking",
-      value: function startTicking() {
-        _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
-
-        this.scene.sys.events.on('update', this.update, this);
-      }
-    }, {
-      key: "stopTicking",
-      value: function stopTicking() {
-        _get(_getPrototypeOf(Clock.prototype), "stopTicking", this).call(this);
-
-        if (this.scene) {
-          // Scene might be destoryed
-          this.scene.sys.events.off('update', this.update, this);
-        }
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (!this.isRunning || this.timeScale === 0) {
-          return this;
-        }
-
-        this.tick(delta);
-        return this;
-      }
-    }]);
-
-    return Clock;
-  }(BaseClock);
-
-  var Yoyo = function Yoyo(t, threshold) {
-    if (threshold === undefined) {
-      threshold = 0.5;
-    }
-
-    if (t <= threshold) {
-      t = t / threshold;
-    } else {
-      t = 1 - (t - threshold) / (1 - threshold);
-    }
-
-    return t;
-  };
-
-  var Clamp$1 = Phaser.Math.Clamp;
-
-  var Timer$1 = /*#__PURE__*/function () {
-    function Timer(timeline, config) {
-      _classCallCheck(this, Timer);
-
-      this.setTimeline(timeline).reset(config);
-    }
-
-    _createClass(Timer, [{
-      key: "setTimeline",
-      value: function setTimeline(timeline) {
-        this.timeline = timeline;
-        return this;
-      }
-    }, {
-      key: "setName",
-      value: function setName(name) {
-        this.name = name;
-        return this;
-      }
-    }, {
-      key: "setCallbacks",
-      value: function setCallbacks(target, onStart, onProgress, onComplete) {
-        this.target = target;
-        this.onStart = onStart;
-        this.onProgress = onProgress;
-        this.onComplete = onComplete;
-        return this;
-      }
-    }, {
-      key: "setDuration",
-      value: function setDuration(duration, yoyo) {
-        if (yoyo === undefined) {
-          yoyo = false;
-        }
-
-        this.duration = duration;
-        this.remainder = duration;
-        this.t = 0;
-        this.yoyo = yoyo;
-        return this;
-      }
-    }, {
-      key: "setPaused",
-      value: function setPaused(state) {
-        this.isPaused = state;
-        return this;
-      }
-    }, {
-      key: "pause",
-      value: function pause() {
-        this.isPaused = true;
-        return this;
-      }
-    }, {
-      key: "resume",
-      value: function resume() {
-        this.isPaused = false;
-        return this;
-      }
-    }, {
-      key: "setRemoved",
-      value: function setRemoved(state) {
-        this.removed = state;
-        return this;
-      }
-    }, {
-      key: "remove",
-      value: function remove() {
-        this.removed = true;
-        return this;
-      }
-    }, {
-      key: "seek",
-      value: function seek(t) {
-        this.remainder = this.duration * (1 - t);
-        return this;
-      }
-    }, {
-      key: "reset",
-      value: function reset(o) {
-        this.setName(o.name).setDuration(o.duration, o.yoyo).setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete).setPaused(false).setRemoved(false);
-        return this;
-      }
-    }, {
-      key: "onFree",
-      value: function onFree() {
-        this.setTimeline().setCallbacks();
-      }
-    }, {
-      key: "getProgress",
-      value: function getProgress() {
-        var value = 1 - this.remainder / this.duration;
-        value = Clamp$1(value, 0, 1);
-
-        if (this.yoyo) {
-          value = Yoyo(value);
-        }
-
-        return value;
-      }
-    }, {
-      key: "setProgress",
-      value: function setProgress(value) {
-        value = Clamp$1(value, 0, 1);
-        this.remainder = this.duration * (1 - value);
-      }
-    }, {
-      key: "runCallback",
-      value: function runCallback(callback) {
-        if (!callback) {
-          return;
-        }
-
-        callback(this.target, this.t, this);
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        if (this.removed) {
-          return true;
-        } else if (this.isPaused) {
-          return false;
-        }
-
-        this.remainder -= delta;
-        this.t = this.getProgress();
-        this.runCallback(this.onProgress);
-        var isCompleted = this.remainder <= 0;
-
-        if (isCompleted) {
-          this.runCallback(this.onComplete);
-        }
-
-        return isCompleted;
-      }
-    }]);
-
-    return Timer;
-  }();
-
-  var Stack = /*#__PURE__*/function () {
-    function Stack() {
-      _classCallCheck(this, Stack);
-
-      this.items = [];
-    }
-
-    _createClass(Stack, [{
-      key: "destroy",
-      value: function destroy() {
-        this.clear();
-        this.items = undefined;
-      }
-    }, {
-      key: "pop",
-      value: function pop() {
-        return this.items.length > 0 ? this.items.pop() : null;
-      }
-    }, {
-      key: "push",
-      value: function push(l) {
-        this.items.push(l);
-        return this;
-      }
-    }, {
-      key: "pushMultiple",
-      value: function pushMultiple(arr) {
-        this.items.push.apply(this.items, arr);
-        arr.length = 0;
-        return this;
-      }
-    }, {
-      key: "clear",
-      value: function clear() {
-        this.items.length = 0;
-        return this;
-      }
-    }]);
-
-    return Stack;
-  }();
-
-  var TimerPool$1 = /*#__PURE__*/function (_Pool) {
-    _inherits(TimerPool, _Pool);
-
-    var _super = _createSuper(TimerPool);
-
-    function TimerPool() {
-      _classCallCheck(this, TimerPool);
-
-      return _super.apply(this, arguments);
-    }
-
-    _createClass(TimerPool, [{
-      key: "allocate",
-      value: function allocate() {
-        return this.pop();
-      }
-    }, {
-      key: "free",
-      value: function free(timer) {
-        timer.onFree();
-        this.push(timer);
-      }
-    }, {
-      key: "freeMultiple",
-      value: function freeMultiple(arr) {
-        for (var i = 0, cnt = arr.length; i < cnt; i++) {
-          this.free(arr[i]);
-        }
-
-        return this;
-      }
-    }]);
-
-    return TimerPool;
-  }(Stack);
-
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
-  var TimerPool = new TimerPool$1();
-
-  var Timeline = /*#__PURE__*/function (_Clock) {
-    _inherits(Timeline, _Clock);
-
-    var _super = _createSuper(Timeline);
-
-    function Timeline(parent, config) {
-      var _this;
-
-      _classCallCheck(this, Timeline);
-
-      _this = _super.call(this, parent, config);
-      _this.addedTimers = [];
-      _this.timers = [];
-      _this.timerPool = GetValue$9(config, 'pool', TimerPool);
-      return _this;
-    }
-
-    _createClass(Timeline, [{
-      key: "shutdown",
-      value: function shutdown() {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        this.timerPool.freeMultiple(this.addedTimers).freeMultiple(this.timers);
-        this.timerPool = undefined;
-        this.addedTimers = undefined;
-        this.timers = undefined;
-
-        _get(_getPrototypeOf(Timeline.prototype), "shutdown", this).call(this);
-      }
-    }, {
-      key: "addTimer",
-      value: function addTimer(config) {
-        var timer = this.timerPool.allocate();
-
-        if (!timer) {
-          timer = new Timer$1(this, config);
-        } else {
-          timer.setTimeline(this).reset(config);
-        }
-
-        this.addedTimers.push(timer);
-        timer.runCallback(timer.onStart);
-
-        if (!this.isRunning) {
-          this.start();
-        }
-
-        return timer;
-      }
-    }, {
-      key: "delayCall",
-      value: function delayCall(delay, callback, args, scope) {
-        var timer = this.addTimer({
-          duration: delay,
-          onComplete: function onComplete(target, t, timer) {
-            if (args === undefined) {
-              args = [];
-            }
-
-            args.push(timer);
-            callback.apply(scope, args);
-          }
-        });
-        return timer;
-      }
-    }, {
-      key: "getTimers",
-      value: function getTimers(name) {
-        var timers = [];
-        var timerQueues = [this.addedTimers, this.timers];
-
-        for (var ti = 0, tcnt = timerQueues.length; ti < tcnt; ti++) {
-          var timerQueue = timerQueues[ti];
-
-          for (var i = 0, cnt = timerQueue.length; i < cnt; i++) {
-            var timer = timerQueue[i];
-
-            if (timer.name === name) {
-              timers.push(timer);
-            }
-          }
-        }
-
-        return timers;
-      }
-    }, {
-      key: "update",
-      value: function update(time, delta) {
-        var _this$timers;
-
-        _get(_getPrototypeOf(Timeline.prototype), "update", this).call(this, time, delta);
-
-        (_this$timers = this.timers).push.apply(_this$timers, _toConsumableArray(this.addedTimers));
-
-        this.addedTimers.length = 0;
-        var pendingTimers = [];
-
-        for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
-          var timer = this.timers[i];
-          var isStopped = timer.update(this.now, this.delta);
-
-          if (isStopped) {
-            this.timerPool.free(timer); // Free timer
-          } else {
-            pendingTimers.push(timer); // Add to timer queue
-          }
-        }
-
-        this.timers = pendingTimers;
-
-        if (this.timers.length === 0 && this.addedTimers.length === 0) {
-          this.complete(); // Emit 'complete' event
-        }
-      }
-    }]);
-
-    return Timeline;
-  }(Clock);
-
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
 
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
@@ -1759,7 +518,7 @@
       _classCallCheck(this, SceneUpdateTickTask);
 
       _this = _super.call(this, parent, config);
-      _this.tickEventName = GetValue$8(config, 'tickEventName', 'update');
+      _this.tickEventName = GetValue$d(config, 'tickEventName', 'update');
       return _this;
     }
 
@@ -1788,10 +547,10 @@
     return SceneUpdateTickTask;
   }(TickTask);
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
-  var Clamp = Phaser.Math.Clamp;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var Clamp$1 = Phaser.Math.Clamp;
 
-  var Timer = /*#__PURE__*/function () {
+  var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
 
@@ -1801,15 +560,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$7(o, 'state', IDLE);
-        this.timeScale = GetValue$7(o, 'timeScale', 1);
-        this.delay = GetValue$7(o, 'delay', 0);
-        this.repeat = GetValue$7(o, 'repeat', 0);
-        this.repeatCounter = GetValue$7(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$7(o, 'repeatDelay', 0);
-        this.duration = GetValue$7(o, 'duration', 0);
-        this.nowTime = GetValue$7(o, 'nowTime', 0);
-        this.justRestart = GetValue$7(o, 'justRestart', false);
+        this.state = GetValue$c(o, 'state', IDLE);
+        this.timeScale = GetValue$c(o, 'timeScale', 1);
+        this.delay = GetValue$c(o, 'delay', 0);
+        this.repeat = GetValue$c(o, 'repeat', 0);
+        this.repeatCounter = GetValue$c(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$c(o, 'repeatDelay', 0);
+        this.duration = GetValue$c(o, 'duration', 0);
+        this.nowTime = GetValue$c(o, 'nowTime', 0);
+        this.justRestart = GetValue$c(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -1932,10 +691,10 @@
             break;
         }
 
-        return Clamp(t, 0, 1);
+        return Clamp$1(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp(value, -1, 1);
+        value = Clamp$1(value, -1, 1);
 
         if (value < 0) {
           this.state = DELAY;
@@ -2012,7 +771,7 @@
       _classCallCheck(this, TimerTickTask);
 
       _this = _super.call(this, parent, config);
-      _this.timer = new Timer(); // boot() later 
+      _this.timer = new Timer$1(); // boot() later 
 
       return _this;
     } // override
@@ -2063,7 +822,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
@@ -2081,13 +840,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$6(o, 'timer'));
-        this.setEnable(GetValue$6(o, 'enable', true));
-        this.setTarget(GetValue$6(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$b(o, 'timer'));
+        this.setEnable(GetValue$b(o, 'enable', true));
+        this.setTarget(GetValue$b(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$6(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$6(o, 'repeat', 0));
+        this.setEase(GetValue$b(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$b(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -2217,7 +976,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
 
@@ -2248,8 +1007,8 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setMode(GetValue$5(o, 'mode', 0));
-        this.setEnable(GetValue$5(o, 'enable', true));
+        this.setMode(GetValue$a(o, 'mode', 0));
+        this.setEnable(GetValue$a(o, 'enable', true));
         this.setVolumeRange(GetAdvancedValue(o, 'volume.start', this.parent.volume), GetAdvancedValue(o, 'volume.end', 0));
         return this;
       }
@@ -2390,7 +1149,7 @@
     return sound;
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var RemoveItem$1 = Phaser.Utils.Array.Remove;
 
   var SoundManager = /*#__PURE__*/function () {
@@ -2402,9 +1161,9 @@
       this.soundEffects = []; // Background music will be (fade out)destroyed when play next one.
 
       this.backgroundMusic = undefined;
-      this.setBackgroundMusicLoopValue(GetValue$4(config, 'bgm.loop', true));
-      this.setBackgroundMusicFadeTime(GetValue$4(config, 'bgm.fade', 500));
-      var initialBackgroundMusic = GetValue$4(config, 'bgm.initial', undefined);
+      this.setBackgroundMusicLoopValue(GetValue$9(config, 'bgm.loop', true));
+      this.setBackgroundMusicFadeTime(GetValue$9(config, 'bgm.fade', 500));
+      var initialBackgroundMusic = GetValue$9(config, 'bgm.initial', undefined);
 
       if (initialBackgroundMusic) {
         this.setCurrentBackgroundMusic(initialBackgroundMusic);
@@ -2623,6 +1382,523 @@
     return SoundManager;
   }();
 
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+
+  var BaseClock = /*#__PURE__*/function (_TickTask) {
+    _inherits(BaseClock, _TickTask);
+
+    var _super = _createSuper(BaseClock);
+
+    function BaseClock(parent, config) {
+      var _this;
+
+      _classCallCheck(this, BaseClock);
+
+      _this = _super.call(this, parent, config);
+
+      _this.resetFromJSON(config);
+
+      _this.boot();
+
+      return _this;
+    }
+
+    _createClass(BaseClock, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.isRunning = GetValue$8(o, 'isRunning', false);
+        this.timeScale = GetValue$8(o, 'timeScale', 1);
+        this.now = GetValue$8(o, 'now', 0);
+        return this;
+      }
+    }, {
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          isRunning: this.isRunning,
+          timeScale: this.timeScale,
+          now: this.now,
+          tickingMode: this.tickingMode
+        };
+      } // Override
+      // startTicking() { }
+      // Override
+      // stopTicking() {}
+
+    }, {
+      key: "start",
+      value: function start(startAt) {
+        if (startAt === undefined) {
+          startAt = 0;
+        }
+
+        this.delta = 0;
+        this.now = startAt;
+
+        _get(_getPrototypeOf(BaseClock.prototype), "start", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "seek",
+      value: function seek(time) {
+        this.now = time;
+        return this;
+      }
+    }, {
+      key: "setTimeScale",
+      value: function setTimeScale(value) {
+        this.timeScale = value;
+        return this;
+      }
+    }, {
+      key: "tick",
+      value: function tick(delta) {
+        delta *= this.timeScale;
+        this.now += delta;
+        this.delta = delta;
+        this.emit('update', this.now, this.delta);
+        return this;
+      }
+    }]);
+
+    return BaseClock;
+  }(TickTask);
+
+  var Clock = /*#__PURE__*/function (_BaseClock) {
+    _inherits(Clock, _BaseClock);
+
+    var _super = _createSuper(Clock);
+
+    function Clock() {
+      _classCallCheck(this, Clock);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(Clock, [{
+      key: "startTicking",
+      value: function startTicking() {
+        _get(_getPrototypeOf(Clock.prototype), "startTicking", this).call(this);
+
+        this.scene.sys.events.on('update', this.update, this);
+      }
+    }, {
+      key: "stopTicking",
+      value: function stopTicking() {
+        _get(_getPrototypeOf(Clock.prototype), "stopTicking", this).call(this);
+
+        if (this.scene) {
+          // Scene might be destoryed
+          this.scene.sys.events.off('update', this.update, this);
+        }
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (!this.isRunning || this.timeScale === 0) {
+          return this;
+        }
+
+        this.tick(delta);
+        return this;
+      }
+    }]);
+
+    return Clock;
+  }(BaseClock);
+
+  var Yoyo = function Yoyo(t, threshold) {
+    if (threshold === undefined) {
+      threshold = 0.5;
+    }
+
+    if (t <= threshold) {
+      t = t / threshold;
+    } else {
+      t = 1 - (t - threshold) / (1 - threshold);
+    }
+
+    return t;
+  };
+
+  var Clamp = Phaser.Math.Clamp;
+
+  var Timer = /*#__PURE__*/function () {
+    function Timer(timeline, config) {
+      _classCallCheck(this, Timer);
+
+      this.setTimeline(timeline).reset(config);
+    }
+
+    _createClass(Timer, [{
+      key: "setTimeline",
+      value: function setTimeline(timeline) {
+        this.timeline = timeline;
+        return this;
+      }
+    }, {
+      key: "setName",
+      value: function setName(name) {
+        this.name = name;
+        return this;
+      }
+    }, {
+      key: "setCallbacks",
+      value: function setCallbacks(target, onStart, onProgress, onComplete) {
+        this.target = target;
+        this.onStart = onStart;
+        this.onProgress = onProgress;
+        this.onComplete = onComplete;
+        return this;
+      }
+    }, {
+      key: "setDuration",
+      value: function setDuration(duration, yoyo) {
+        if (yoyo === undefined) {
+          yoyo = false;
+        }
+
+        this.duration = duration;
+        this.remainder = duration;
+        this.t = 0;
+        this.yoyo = yoyo;
+        return this;
+      }
+    }, {
+      key: "setPaused",
+      value: function setPaused(state) {
+        this.isPaused = state;
+        return this;
+      }
+    }, {
+      key: "pause",
+      value: function pause() {
+        this.isPaused = true;
+        return this;
+      }
+    }, {
+      key: "resume",
+      value: function resume() {
+        this.isPaused = false;
+        return this;
+      }
+    }, {
+      key: "setRemoved",
+      value: function setRemoved(state) {
+        this.removed = state;
+        return this;
+      }
+    }, {
+      key: "remove",
+      value: function remove() {
+        this.removed = true;
+        return this;
+      }
+    }, {
+      key: "seek",
+      value: function seek(t) {
+        this.remainder = this.duration * (1 - t);
+        return this;
+      }
+    }, {
+      key: "reset",
+      value: function reset(o) {
+        this.setName(o.name).setDuration(o.duration, o.yoyo).setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete).setPaused(false).setRemoved(false);
+        return this;
+      }
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        this.setTimeline().setCallbacks();
+      }
+    }, {
+      key: "getProgress",
+      value: function getProgress() {
+        var value = 1 - this.remainder / this.duration;
+        value = Clamp(value, 0, 1);
+
+        if (this.yoyo) {
+          value = Yoyo(value);
+        }
+
+        return value;
+      }
+    }, {
+      key: "setProgress",
+      value: function setProgress(value) {
+        value = Clamp(value, 0, 1);
+        this.remainder = this.duration * (1 - value);
+      }
+    }, {
+      key: "runCallback",
+      value: function runCallback(callback) {
+        if (!callback) {
+          return;
+        }
+
+        callback(this.target, this.t, this);
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        if (this.removed) {
+          return true;
+        } else if (this.isPaused) {
+          return false;
+        }
+
+        this.remainder -= delta;
+        this.t = this.getProgress();
+        this.runCallback(this.onProgress);
+        var isCompleted = this.remainder <= 0;
+
+        if (isCompleted) {
+          this.runCallback(this.onComplete);
+        }
+
+        return isCompleted;
+      }
+    }]);
+
+    return Timer;
+  }();
+
+  var Stack = /*#__PURE__*/function () {
+    function Stack() {
+      _classCallCheck(this, Stack);
+
+      this.items = [];
+    }
+
+    _createClass(Stack, [{
+      key: "destroy",
+      value: function destroy() {
+        this.clear();
+        this.items = undefined;
+      }
+    }, {
+      key: "pop",
+      value: function pop() {
+        return this.items.length > 0 ? this.items.pop() : null;
+      }
+    }, {
+      key: "push",
+      value: function push(l) {
+        this.items.push(l);
+        return this;
+      }
+    }, {
+      key: "pushMultiple",
+      value: function pushMultiple(arr) {
+        this.items.push.apply(this.items, arr);
+        arr.length = 0;
+        return this;
+      }
+    }, {
+      key: "clear",
+      value: function clear() {
+        this.items.length = 0;
+        return this;
+      }
+    }]);
+
+    return Stack;
+  }();
+
+  var TimerPool$1 = /*#__PURE__*/function (_Pool) {
+    _inherits(TimerPool, _Pool);
+
+    var _super = _createSuper(TimerPool);
+
+    function TimerPool() {
+      _classCallCheck(this, TimerPool);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(TimerPool, [{
+      key: "allocate",
+      value: function allocate() {
+        return this.pop();
+      }
+    }, {
+      key: "free",
+      value: function free(timer) {
+        timer.onFree();
+        this.push(timer);
+      }
+    }, {
+      key: "freeMultiple",
+      value: function freeMultiple(arr) {
+        for (var i = 0, cnt = arr.length; i < cnt; i++) {
+          this.free(arr[i]);
+        }
+
+        return this;
+      }
+    }]);
+
+    return TimerPool;
+  }(Stack);
+
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var TimerPool = new TimerPool$1();
+
+  var Timeline = /*#__PURE__*/function (_Clock) {
+    _inherits(Timeline, _Clock);
+
+    var _super = _createSuper(Timeline);
+
+    function Timeline(parent, config) {
+      var _this;
+
+      _classCallCheck(this, Timeline);
+
+      _this = _super.call(this, parent, config);
+      _this.addedTimers = [];
+      _this.timers = [];
+      _this.timerPool = GetValue$7(config, 'pool', TimerPool);
+      return _this;
+    }
+
+    _createClass(Timeline, [{
+      key: "shutdown",
+      value: function shutdown() {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        this.timerPool.freeMultiple(this.addedTimers).freeMultiple(this.timers);
+        this.timerPool = undefined;
+        this.addedTimers = undefined;
+        this.timers = undefined;
+
+        _get(_getPrototypeOf(Timeline.prototype), "shutdown", this).call(this);
+      }
+    }, {
+      key: "addTimer",
+      value: function addTimer(config) {
+        var timer = this.timerPool.allocate();
+
+        if (!timer) {
+          timer = new Timer(this, config);
+        } else {
+          timer.setTimeline(this).reset(config);
+        }
+
+        this.addedTimers.push(timer);
+        timer.runCallback(timer.onStart);
+
+        if (!this.isRunning) {
+          this.start();
+        }
+
+        return timer;
+      }
+    }, {
+      key: "delayCall",
+      value: function delayCall(delay, callback, args, scope) {
+        var timer = this.addTimer({
+          duration: delay,
+          onComplete: function onComplete(target, t, timer) {
+            if (args === undefined) {
+              args = [];
+            }
+
+            args.push(timer);
+            callback.apply(scope, args);
+          }
+        });
+        return timer;
+      }
+    }, {
+      key: "getTimers",
+      value: function getTimers(name) {
+        var timers = [];
+        var timerQueues = [this.addedTimers, this.timers];
+
+        for (var ti = 0, tcnt = timerQueues.length; ti < tcnt; ti++) {
+          var timerQueue = timerQueues[ti];
+
+          for (var i = 0, cnt = timerQueue.length; i < cnt; i++) {
+            var timer = timerQueue[i];
+
+            if (timer.name === name) {
+              timers.push(timer);
+            }
+          }
+        }
+
+        return timers;
+      }
+    }, {
+      key: "update",
+      value: function update(time, delta) {
+        var _this$timers;
+
+        _get(_getPrototypeOf(Timeline.prototype), "update", this).call(this, time, delta);
+
+        (_this$timers = this.timers).push.apply(_this$timers, _toConsumableArray(this.addedTimers));
+
+        this.addedTimers.length = 0;
+        var pendingTimers = [];
+
+        for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
+          var timer = this.timers[i];
+          var isStopped = timer.update(this.now, this.delta);
+
+          if (isStopped) {
+            this.timerPool.free(timer); // Free timer
+          } else {
+            pendingTimers.push(timer); // Add to timer queue
+          }
+        }
+
+        this.timers = pendingTimers;
+
+        if (this.timers.length === 0 && this.addedTimers.length === 0) {
+          this.complete(); // Emit 'complete' event
+        }
+      }
+    }]);
+
+    return Timeline;
+  }(Clock);
+
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+
+  var InitManagers = function InitManagers(config) {
+    var soundManagerConfig = GetValue$6(config, 'sounds');
+
+    if (soundManagerConfig !== false) {
+      this.soundManager = new SoundManager(this.scene, soundManagerConfig);
+    }
+
+    this.gameObjectManagers = {};
+    this.timeline = new Timeline(this);
+  };
+
+  var DestroyManagers = function DestroyManagers(fromScene) {
+    if (this.soundManager) {
+      this.soundManager.destroy(fromScene);
+    }
+
+    this.soundManager = undefined;
+
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers.destroy(fromScene);
+      delete this.gameObjectManagers[name];
+    }
+
+    if (this.timeline) {
+      this.timeline.destroy();
+    }
+
+    this.timeline = undefined;
+  };
+
   var PropertyMethods$1 = {
     hasProperty: function hasProperty(property) {
       var gameObject = this.gameObject;
@@ -2812,10 +2088,10 @@
       return this;
     },
     hasTintFadeEffect: function hasTintFadeEffect(gameObject) {
-      return this.fadeMode === 0 && this.fadeTime > 0 && gameObject.setTint !== undefined;
+      return (this.fadeMode === undefined || this.fadeMode === 0) && this.fadeTime > 0 && gameObject.setTint !== undefined;
     },
     hasAlphaFadeEffect: function hasAlphaFadeEffect(gameObject) {
-      return this.fadeMode === 1 && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
+      return (this.fadeMode === undefined || this.fadeMode === 1) && this.fadeTime > 0 && gameObject.setAlpha !== undefined;
     },
     fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
       var gameObject = bob.gameObject;
@@ -3456,7 +2732,7 @@
     return output;
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var DrawBounds = function DrawBounds(gameObject, graphics, config) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
@@ -3470,8 +2746,8 @@
     if (typeof config === 'number') {
       color = config;
     } else {
-      color = GetValue$3(config, 'color');
-      lineWidth = GetValue$3(config, 'lineWidth');
+      color = GetValue$5(config, 'color');
+      lineWidth = GetValue$5(config, 'lineWidth');
     }
 
     if (color === undefined) {
@@ -3491,7 +2767,7 @@
 
   var Points = [undefined, undefined, undefined, undefined];
 
-  var DrawGameObjectsBounds$1 = function DrawGameObjectsBounds(graphics, config) {
+  var DrawGameObjectsBounds = function DrawGameObjectsBounds(graphics, config) {
     this.forEachGO(function (gameObject) {
       if (gameObject.drawBounds) {
         gameObject.drawBounds(graphics, config);
@@ -3503,31 +2779,31 @@
   };
 
   var Methods$3 = {
-    drawGameObjectsBounds: DrawGameObjectsBounds$1
+    drawGameObjectsBounds: DrawGameObjectsBounds
   };
   Object.assign(Methods$3, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
 
       this.scene = scene;
-      this.BobClass = GetValue$2(config, 'BobClass', BobBase);
-      this.setCreateGameObjectCallback(GetValue$2(config, 'createGameObject'), GetValue$2(config, 'createGameObjectScope'));
-      this.setEventEmitter(GetValue$2(config, 'eventEmitter', undefined));
-      var fadeConfig = GetValue$2(config, 'fade', 500);
+      this.BobClass = GetValue$4(config, 'BobClass', BobBase);
+      this.setCreateGameObjectCallback(GetValue$4(config, 'createGameObject'), GetValue$4(config, 'createGameObjectScope'));
+      this.setEventEmitter(GetValue$4(config, 'eventEmitter', undefined));
+      var fadeConfig = GetValue$4(config, 'fade', 500);
 
       if (typeof fadeConfig === 'number') {
-        this.setGOFadeMode(0);
+        this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
       } else {
-        this.setGOFadeMode(GetValue$2(fadeConfig, 'mode', 0));
-        this.setGOFadeTime(GetValue$2(fadeConfig, 'time', 500));
+        this.setGOFadeMode(GetValue$4(fadeConfig, 'mode'));
+        this.setGOFadeTime(GetValue$4(fadeConfig, 'time', 500));
       }
 
-      this.setViewportCoordinateEnable(GetValue$2(config, 'viewportCoordinate', false));
+      this.setViewportCoordinateEnable(GetValue$4(config, 'viewportCoordinate', false));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -3591,6 +2867,886 @@
   }();
 
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods$3);
+
+  var GameObjectManagerMethods$1 = {
+    addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (GameObjectManagerClass === undefined) {
+        GameObjectManagerClass = GOManager;
+      }
+
+      if (!config.createGameObjectScope) {
+        config.createGameObjectScope = this;
+      }
+
+      var gameobjectManager = new GameObjectManagerClass(this.scene, config);
+      this.gameObjectManagers[config.name] = gameobjectManager;
+      return this;
+    },
+    getGameObjectManager: function getGameObjectManager(name) {
+      return this.gameObjectManagers[name];
+    },
+    getGameObjectManagerNames: function getGameObjectManagerNames() {
+      var names = [];
+
+      for (var name in this.gameObjectManagers) {
+        names.push(name);
+      }
+
+      return names;
+    }
+  };
+
+  var GameObjectMethods = {
+    getGameObject: function getGameObject(goType, name, out) {
+      var gameobjectManager = this.getGameObjectManager(goType);
+
+      if (typeof name === 'string') {
+        return gameobjectManager.getGO(name);
+      } else {
+        var names = name;
+
+        if (names === undefined) {
+          names = gameobjectManager.bobs;
+        }
+
+        if (out === undefined) {
+          out = {};
+        }
+
+        for (name in names) {
+          out[name] = gameobjectManager.getGO(name);
+        }
+
+        return out;
+      }
+    },
+    addGameObject: function addGameObject(goType, name, gameObject) {
+      var gameobjectManager = this.getGameObjectManager(goType);
+
+      if (typeof name === 'string') {
+        gameobjectManager.addGO(name, gameObject);
+      } else {
+        var names = name;
+
+        for (name in names) {
+          gameobjectManager.addGO(name, names[name]);
+        }
+      }
+
+      return this;
+    },
+    drawGameObjectsBounds: function drawGameObjectsBounds(goTypes, graphics, config) {
+      if (goTypes instanceof Phaser.GameObjects.Graphics) {
+        config = graphics;
+        graphics = goTypes;
+        goTypes = undefined;
+      }
+
+      if (goTypes === undefined) {
+        goTypes = this.getGameObjectManagerNames();
+      }
+
+      if (!Array.isArray(goTypes)) {
+        goTypes = [goTypes];
+      }
+
+      for (var i = 0, cnt = goTypes.length; i < cnt; i++) {
+        this.getGameObjectManager(goTypes[i]).drawGameObjectsBounds(graphics, config);
+      }
+
+      return this;
+    }
+  };
+
+  var TimelineMethods = {
+    delayCall: function delayCall(delay, callback, args, scope) {
+      return this.timeline.delayCall(delay, callback, args, scope);
+    }
+  };
+
+  var Extend = function Extend(BaseClass) {
+    var Managers = /*#__PURE__*/function (_BaseClass) {
+      _inherits(Managers, _BaseClass);
+
+      var _super = _createSuper(Managers);
+
+      function Managers() {
+        _classCallCheck(this, Managers);
+
+        return _super.apply(this, arguments);
+      }
+
+      return _createClass(Managers);
+    }(BaseClass);
+
+    var Methods = {
+      initManagers: InitManagers,
+      destroyManagers: DestroyManagers
+    };
+    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods$1, GameObjectMethods, TimelineMethods); // Note: `Managers.scene` member is required
+
+    return Managers;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$3 = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+  var EscapeRegex = function EscapeRegex(s) {
+    return s.replace(re0, '\\$&').replace(re1, '\\x2d');
+  };
+
+  var re0 = /[|\\{}()[\]^$+*?.]/g;
+  var re1 = /-/g;
+
+  var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
+
+  var convert = function convert(s) {
+    if (typeof s !== 'string') {
+      return s;
+    }
+
+    if (s === '') {
+      s = null;
+    } else if (FLOAT.test(s)) {
+      s = parseFloat(s);
+    } else {
+      if (s === 'false') {
+        s = false;
+      } else if (s === 'true') {
+        s = true;
+      }
+    }
+
+    return s;
+  };
+
+  var ParseValue = function ParseValue(text, valueConverter) {
+    if (text == null) {
+      return [];
+    }
+
+    var values = text.split(',');
+
+    for (var i = 0, cnt = values.length; i < cnt; i++) {
+      values[i] = valueConverter(values[i]);
+    }
+
+    return values;
+  };
+
+  var DefaultTagExpression = "[!$a-z0-9-_.]+";
+  var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
+
+  var BypassValueConverter = function BypassValueConverter(s) {
+    return s;
+  };
+
+  var BracketParser = /*#__PURE__*/function () {
+    function BracketParser(config) {
+      _classCallCheck(this, BracketParser);
+
+      // Event emitter
+      this.setEventEmitter(GetValue$3(config, 'eventEmitter', undefined)); // Parameters for regex
+
+      this.setTagExpression(GetValue$3(config, 'regex.tag', DefaultTagExpression));
+      this.setValueExpression(GetValue$3(config, 'regex.value', DefaultValueExpression)); // Value convert
+
+      this.setValueConverter(GetValue$3(config, 'valueConvert', true)); // Brackets and generate regex
+
+      var delimiters = GetValue$3(config, 'delimiters', '<>');
+      this.setDelimiters(delimiters[0], delimiters[1]); // Loop
+
+      this.setLoopEnable(GetValue$3(config, 'loop', false));
+      this.isRunning = false;
+      this.isPaused = false;
+      this.skipEventFlag = false;
+      this.justCompleted = false;
+      this.lastTagStart = null;
+      this.lastTagEnd = null;
+      this.lastContent = null;
+    }
+
+    _createClass(BracketParser, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.destroyEventEmitter();
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.shutdown();
+      }
+    }, {
+      key: "setTagExpression",
+      value: function setTagExpression(express) {
+        this.tagExpression = express;
+        return this;
+      }
+    }, {
+      key: "setValueExpression",
+      value: function setValueExpression(express) {
+        this.valueExpression = express;
+        return this;
+      }
+    }, {
+      key: "setValueConverter",
+      value: function setValueConverter(converter) {
+        if (converter === true) {
+          converter = convert;
+        } else if (!converter) {
+          converter = BypassValueConverter;
+        }
+
+        this.valueConverter = converter;
+        return this;
+      }
+    }, {
+      key: "setDelimiters",
+      value: function setDelimiters(delimiterLeft, delimiterRight) {
+        if (delimiterRight === undefined) {
+          delimiterRight = delimiterLeft[1];
+          delimiterLeft = delimiterLeft[0];
+        }
+
+        this.delimiterLeft = delimiterLeft;
+        this.delimiterRight = delimiterRight;
+        delimiterLeft = EscapeRegex(delimiterLeft);
+        delimiterRight = EscapeRegex(delimiterRight);
+        var tagOn = "".concat(delimiterLeft, "(").concat(this.tagExpression, ")(=(").concat(this.valueExpression, "))?").concat(delimiterRight);
+        var tagOff = "".concat(delimiterLeft, "/(").concat(this.tagExpression, ")").concat(delimiterRight);
+        this.reTagOn = RegExp(tagOn, 'i');
+        this.reTagOff = RegExp(tagOff, 'i');
+        this.reSplit = RegExp("".concat(tagOn, "|").concat(tagOff), 'gi');
+        return this;
+      }
+    }, {
+      key: "setLoopEnable",
+      value: function setLoopEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.loopEnable = enable;
+        return this;
+      }
+    }, {
+      key: "setSource",
+      value: function setSource(source) {
+        this.source = source;
+        return this;
+      }
+    }, {
+      key: "resetIndex",
+      value: function resetIndex(index) {
+        if (index === undefined) {
+          index = 0;
+        }
+
+        this.progressIndex = index;
+        this.reSplit.lastIndex = index;
+        this.lastTagStart = null;
+        this.lastTagEnd = null;
+        this.lastContent = null;
+        this.justCompleted = false;
+        this.isRunning = false;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start(source) {
+        this.setSource(source).restart();
+        return this;
+      }
+    }, {
+      key: "restart",
+      value: function restart() {
+        this.resetIndex().next();
+      }
+    }, {
+      key: "next",
+      value: function next() {
+        if (this.isPaused) {
+          this.onResume();
+        } // Don't re-enter this method
+
+
+        if (this.isRunning) {
+          return this;
+        }
+
+        this.isRunning = true;
+
+        if (this.justCompleted) {
+          this.isRunning = false;
+          return this;
+        }
+
+        if (this.reSplit.lastIndex === 0) {
+          this.onStart();
+        }
+
+        var text = this.source,
+            lastIndex = text.length;
+        this.reSplit.lastIndex = this.progressIndex;
+
+        while (true) {
+          var regexResult = this.reSplit.exec(text); // No tag found, complete
+
+          if (!regexResult) {
+            if (this.progressIndex < lastIndex) {
+              this.onContent(text.substring(this.progressIndex, lastIndex)); // Might pause here
+
+              if (this.isPaused) {
+                this.progressIndex = lastIndex;
+                break;
+              }
+            }
+
+            this.onComplete();
+            this.isRunning = false;
+            return;
+          }
+
+          var match = regexResult[0];
+          var matchEnd = this.reSplit.lastIndex;
+          var matchStart = matchEnd - match.length; // Process content between previous tag and current tag            
+
+          if (this.progressIndex < matchStart) {
+            this.onContent(text.substring(this.progressIndex, matchStart)); // Might pause here
+
+            if (this.isPaused) {
+              this.progressIndex = matchStart;
+              break;
+            }
+          } // Process current tag
+
+
+          if (this.reTagOff.test(match)) {
+            this.onTagEnd(match);
+          } else {
+            this.onTagStart(match);
+          }
+
+          this.progressIndex = matchEnd; // Might pause here
+
+          if (this.isPaused) {
+            break;
+          }
+        }
+
+        this.isRunning = false;
+        return this;
+      }
+    }, {
+      key: "skipEvent",
+      value: function skipEvent() {
+        this.skipEventFlag = true;
+        return this;
+      }
+    }, {
+      key: "pause",
+      value: function pause() {
+        if (!this.isPaused) {
+          this.onPause();
+        }
+
+        return this;
+      }
+    }, {
+      key: "pauseUntilEvent",
+      value: function pauseUntilEvent(eventEmitter, eventName) {
+        if (this.isPaused) {
+          return this;
+        }
+
+        this.pause();
+        eventEmitter.once(eventName, function () {
+          this.next();
+        }, this);
+        return this;
+      }
+    }, {
+      key: "onContent",
+      value: function onContent(content) {
+        this.skipEventFlag = false;
+        this.emit('content', content);
+        this.lastContent = content;
+      }
+    }, {
+      key: "onTagStart",
+      value: function onTagStart(tagContent) {
+        var regexResult = tagContent.match(this.reTagOn);
+        var tag = regexResult[1];
+        var values = ParseValue(regexResult[3], this.valueConverter);
+        this.skipEventFlag = false;
+        this.emit.apply(this, ["+".concat(tag)].concat(_toConsumableArray(values)));
+
+        if (!this.skipEventFlag) {
+          this.emit.apply(this, ['+', tag].concat(_toConsumableArray(values)));
+        }
+
+        this.lastTagStart = tag;
+      }
+    }, {
+      key: "onTagEnd",
+      value: function onTagEnd(tagContent) {
+        var tag = tagContent.match(this.reTagOff)[1];
+        this.skipEventFlag = false;
+        this.emit("-".concat(tag));
+
+        if (!this.skipEventFlag) {
+          this.emit('-', tag);
+        }
+
+        this.lastTagEnd = tag;
+      }
+    }, {
+      key: "onStart",
+      value: function onStart() {
+        this.isRunning = true;
+        this.emit('start', this);
+      }
+    }, {
+      key: "onComplete",
+      value: function onComplete() {
+        this.isRunning = false;
+        this.justCompleted = true;
+        this.emit('complete', this);
+
+        if (this.loopEnable) {
+          this.resetIndex();
+        }
+      }
+    }, {
+      key: "onPause",
+      value: function onPause() {
+        this.isPaused = true;
+        this.emit('pause', this);
+      }
+    }, {
+      key: "onResume",
+      value: function onResume() {
+        this.isPaused = false;
+        this.emit('resume', this);
+      }
+    }, {
+      key: "getTagOnRegString",
+      value: function getTagOnRegString(tagExpression, valueExpression) {
+        if (tagExpression === undefined) {
+          tagExpression = this.tagExpression;
+        }
+
+        if (valueExpression === undefined) {
+          valueExpression = this.valueExpression;
+        }
+
+        return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
+      }
+    }, {
+      key: "getTagOffRegString",
+      value: function getTagOffRegString(tagExpression) {
+        if (tagExpression === undefined) {
+          tagExpression = this.tagExpression;
+        }
+
+        return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
+      }
+    }]);
+
+    return BracketParser;
+  }();
+
+  Object.assign(BracketParser.prototype, EventEmitterMethods);
+
+  var OnParseWaitTag = function OnParseWaitTag(tagPlayer, parser, config) {
+    var tagWait = 'wait';
+    var tagClick = 'click';
+    parser.on("+".concat(tagWait), function (name) {
+      tagPlayer.wait(name);
+      parser.skipEvent();
+    }).on("-".concat(tagWait), function () {
+      parser.skipEvent();
+    }).on("+".concat(tagClick), function () {
+      // Equal to [wait=click]
+      tagPlayer.wait('click');
+      parser.skipEvent();
+    }).on("-".concat(tagClick), function () {
+      // Equal to [/wait]
+      parser.skipEvent();
+    });
+  };
+
+  var OnParsePlaySoundEffectTag = function OnParsePlaySoundEffectTag(tagPlayer, parser, config) {
+    var tagName = 'se';
+    parser.on("+".concat(tagName), function (name, fadeInTime) {
+      if (this.skipSoundEffect) {
+        return;
+      }
+
+      tagPlayer.soundManager.playSoundEffect(name); // this: tagPlayer
+
+      if (fadeInTime) {
+        tagPlayer.soundManager.fadeInSoundEffect(fadeInTime);
+      }
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFadeInSoundEffectTag = function OnParseFadeInSoundEffectTag(tagPlayer, parser, config) {
+    var tagName = 'se.fadein';
+    parser.on("+".concat(tagName), function (time) {
+      tagPlayer.soundManager.fadeInSoundEffect(time);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFadeOutSoundEffectTag = function OnParseFadeOutSoundEffectTag(tagPlayer, parser, config) {
+    var tagName = 'se.fadeout';
+    parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
+      tagPlayer.soundManager.fadeOutSoundEffect(time, isStopped);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(tagPlayer, parser, config) {
+    var tagName = 'se.volume';
+    parser.on("+".concat(tagName), function (volume) {
+      tagPlayer.soundManager.setSoundEffectVolume(volume);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParsePlayBackgroundMusicTag = function OnParsePlayBackgroundMusicTag(tagPlayer, parser, config) {
+    var tagName = 'bgm';
+    parser.on("+".concat(tagName), function (name, fadeInTime) {
+      tagPlayer.soundManager.playBackgroundMusic(name);
+
+      if (fadeInTime) {
+        tagPlayer.soundManager.fadeInBackgroundMusic(fadeInTime);
+      }
+
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      tagPlayer.soundManager.stopBackgroundMusic();
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFadeInBackgroundMusicTag = function OnParseFadeInBackgroundMusicTag(tagPlayer, parser, config) {
+    var tagName = 'bgm.fadein';
+    parser.on("+".concat(tagName), function (time) {
+      tagPlayer.soundManager.fadeInBackgroundMusic(time);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFadeOutBackgroundMusicTag = function OnParseFadeOutBackgroundMusicTag(tagPlayer, parser, config) {
+    var tagName = 'bgm.fadeout';
+    parser.on("+".concat(tagName), function (time, isStopped) {
+      isStopped = isStopped === 'stop';
+      tagPlayer.soundManager.fadeOutBackgroundMusic(time, isStopped);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseCrossFadeBackgroundMusicTag = function OnParseCrossFadeBackgroundMusicTag(tagPlayer, parser, config) {
+    var tagName = 'bgm.cross';
+    parser.on("+".concat(tagName), function (name, fadeTime) {
+      tagPlayer.soundManager.crossFadeBackgroundMusic(name, fadeTime);
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParsePauseBackgroundMusicTag = function OnParsePauseBackgroundMusicTag(tagPlayer, parser, config) {
+    var tagName = 'bgm.pause';
+    parser.on("+".concat(tagName), function () {
+      tagPlayer.soundManager.pauseBackgroundMusic();
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      tagPlayer.soundManager.resumeBackgroundMusic();
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFadeInCameraTag = function OnParseFadeInCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.fadein';
+    parser.on("+".concat(tagName), function (duration, red, green, blue) {
+      tagPlayer.camera.fadeIn(duration, red, green, blue);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFadeOutCameraTag = function OnParseFadeOutCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.fadeout';
+    parser.on("+".concat(tagName), function (duration, red, green, blue) {
+      tagPlayer.camera.fadeOut(duration, red, green, blue);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseShakeCameraTag = function OnParseShakeCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.shake';
+    parser.on("+".concat(tagName), function (duration, intensity) {
+      tagPlayer.camera.shake(duration, intensity);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseFlashCameraTag = function OnParseFlashCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.flash';
+    parser.on("+".concat(tagName), function (duration, red, green, blue) {
+      tagPlayer.camera.flash(duration, red, green, blue);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseZoomCameraTag = function OnParseZoomCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.zoom';
+    parser.on("+".concat(tagName), function (value) {
+      tagPlayer.camera.setZoom(value);
+      parser.skipEvent();
+    }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
+      tagPlayer.camera.zoomTo(value, duration, ease);
+      parser.skipEvent();
+    });
+  };
+
+  var DegToRad = Phaser.Math.DegToRad;
+
+  var OnParseRotateCameraTag = function OnParseRotateCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.rotate';
+    parser.on("+".concat(tagName), function (value) {
+      tagPlayer.camera.setRotation(DegToRad(value));
+      parser.skipEvent();
+    }).on("+".concat(tagName, ".to"), function (value, duration, ease) {
+      value = DegToRad(value);
+      tagPlayer.camera.rotateTo(DegToRad(value), false, duration, ease);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseScrollCameraTag = function OnParseScrollCameraTag(tagPlayer, parser, config) {
+    var tagName = 'camera.scroll';
+    parser.on("+".concat(tagName), function (x, y) {
+      tagPlayer.camera.setScroll(x, y);
+      parser.skipEvent();
+    }).on("+".concat(tagName, ".to"), function (x, y, duration, ease) {
+      // this: tagPlayer
+      var camera = tagPlayer.camera;
+      var xSave = camera.scrollX;
+      var ySave = camera.scrollY;
+      camera.setScroll(x, y);
+      x += camera.centerX;
+      y += camera.centerY;
+      camera.setScroll(xSave, ySave); // x,y in pan() is the centerX, centerY
+
+      camera.pan(x, y, duration, ease);
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseContent = function OnParseContent(tagPlayer, parser, config) {
+    parser.on('content', function (content) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      }
+
+      if (content === '\n') {
+        return;
+      }
+
+      content = content.replaceAll('\\n', '\n');
+      var callback = tagPlayer.contentCallback;
+
+      if (callback) {
+        var scope = tagPlayer.contentCallbackScope;
+
+        if (scope) {
+          callback.call(scope, content);
+        } else {
+          callback(content);
+        }
+
+        parser.skipEvent();
+        return;
+      }
+
+      tagPlayer.emit("+".concat(parser.lastTagStart, "#content"), parser, content);
+    });
+  };
+
+  var OnParseCustomTag = function OnParseCustomTag(tagPlayer, parser, config) {
+    parser.on('+', function (tagName) {
+      if (parser.skipEventFlag) {
+        // Has been processed before
+        return;
+      }
+
+      for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        params[_key - 1] = arguments[_key];
+      }
+
+      tagPlayer.emit.apply(tagPlayer, ["+".concat(tagName), parser].concat(params));
+    }).on('-', function (tagName) {
+      if (parser.skipEventFlag) {
+        return;
+      }
+
+      tagPlayer.emit("-".concat(tagName), parser);
+    });
+  };
+
+  var ParseCallbacks$3 = [OnParseWaitTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseContent, OnParseCustomTag];
+
+  var AddParseCallbacks = function AddParseCallbacks(tagPlayer, parser, config) {
+    for (var i = 0, cnt = ParseCallbacks$3.length; i < cnt; i++) {
+      ParseCallbacks$3[i](tagPlayer, parser, config);
+    }
+
+    parser.on('start', function () {
+      tagPlayer.emit('start', parser);
+    }).on('complete', function () {
+      tagPlayer.emit('complete', parser);
+    });
+  };
+
+  /*
+  Skip line
+  - An empty line, only has space
+  - A comment line, start with commentLineStart ('//')
+  */
+  var PreProcess = function PreProcess(parser, source) {
+    var comentLineStart = parser.commentLineStart;
+    var lines = source.split('\n');
+
+    for (var i = 0, cnt = lines.length; i < cnt; i++) {
+      var line = lines[i];
+
+      if (line === '') ; else if (line.trim().length === 0) {
+        // An empty line, only has space
+        lines[i] = '';
+      } else if (comentLineStart && line.startsWith(comentLineStart)) {
+        // A comment line, start with commentLineStart ('//')
+        lines[i] = '';
+      }
+    }
+
+    return lines.join('');
+  };
+
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+
+  var Parser = /*#__PURE__*/function (_BracketParser) {
+    _inherits(Parser, _BracketParser);
+
+    var _super = _createSuper(Parser);
+
+    function Parser(tagPlayer, config) {
+      var _this;
+
+      _classCallCheck(this, Parser);
+
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (!config.hasOwnProperty('delimiters')) {
+        config.delimiters = '[]';
+      }
+
+      _this = _super.call(this, config);
+      AddParseCallbacks(tagPlayer, _assertThisInitialized(_this), config);
+
+      _this.setCommentLineStartSymbol(GetValue$2(config, 'comment', '//'));
+
+      return _this;
+    }
+
+    _createClass(Parser, [{
+      key: "setCommentLineStartSymbol",
+      value: function setCommentLineStartSymbol(symbol) {
+        this.commentLineStart = symbol;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start(source) {
+        _get(_getPrototypeOf(Parser.prototype), "start", this).call(this, PreProcess(this, source));
+
+        return this;
+      }
+    }]);
+
+    return Parser;
+  }(BracketParser);
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
@@ -4772,22 +4928,15 @@
         config = {};
       }
 
-      if (GameObjectManagerClass === undefined) {
-        GameObjectManagerClass = GOManager;
-      }
-
-      if (!config.createGameObjectScope) {
-        config.createGameObjectScope = this;
-      }
-
-      var gameobjectManager = new GameObjectManagerClass(this.scene, config);
       var name = config.name;
 
       if (!name) {
         console.warn("Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method");
       }
 
-      this.gameObjectManagers[name] = gameobjectManager; // Register parse callbacks
+      this.__proto__.__proto__.addGameObjectManager.call(this, config, GameObjectManagerClass); // super.addGameObjectManager(config, GameObjectManagerClass);
+      // Register parse callbacks
+
 
       var customParseCallbacks = config.parseCallbacks;
 
@@ -4802,9 +4951,6 @@
       }
 
       return this;
-    },
-    getGameObjectManager: function getGameObjectManager(name) {
-      return this.gameObjectManagers[name];
     }
   };
 
@@ -4907,10 +5053,6 @@
     tagPlayer.emit(eventName, wrapCallback);
   };
 
-  var DelayCall = function DelayCall(tagPlayer, delay, callback, args, scope) {
-    return tagPlayer.timeline.delayCall(delay, callback, args, scope);
-  };
-
   var WaitTime = function WaitTime(tagPlayer, time, callback, args, scope) {
     var wrapCallback = GetWrapCallback(tagPlayer, callback, args, scope, 'time');
     var timer; // Remove all wait events
@@ -4921,7 +5063,7 @@
         timer = undefined;
       }
     });
-    timer = DelayCall(tagPlayer, time, wrapCallback);
+    timer = tagPlayer.delayCall(time, wrapCallback);
     tagPlayer.emit('wait.time', time);
   };
 
@@ -5206,47 +5348,6 @@
     return this;
   };
 
-  var GameObjectMethods = {
-    getGameObject: function getGameObject(goType, name, out) {
-      var gameobjectManager = this.getGameObjectManager(goType);
-
-      if (typeof name === 'string') {
-        return gameobjectManager.getGO(name);
-      } else {
-        var names = name;
-
-        if (names === undefined) {
-          names = gameobjectManager.bobs;
-        }
-
-        if (out === undefined) {
-          out = {};
-        }
-
-        for (name in names) {
-          out[name] = gameobjectManager.getGO(name);
-        }
-
-        return out;
-      }
-    },
-    addGameObject: function addGameObject(goType, name, gameObject) {
-      var gameobjectManager = this.getGameObjectManager(goType);
-
-      if (typeof name === 'string') {
-        gameobjectManager.addGO(name, gameObject);
-      } else {
-        var names = name;
-
-        for (name in names) {
-          gameobjectManager.addGO(name, names[name]);
-        }
-      }
-
-      return this;
-    }
-  };
-
   var SpriteMethods = {
     getSprite: function getSprite(name) {
       return this.getGameObject('sprite', name);
@@ -5267,30 +5368,6 @@
     }
   };
 
-  var Graphics = Phaser.GameObjects.Graphics;
-
-  var DrawGameObjectsBounds = function DrawGameObjectsBounds(goTypes, graphics, config) {
-    if (goTypes instanceof Graphics) {
-      config = graphics;
-      graphics = goTypes;
-      goTypes = undefined;
-    }
-
-    if (goTypes === undefined) {
-      goTypes = this.gameObjectManagerNames;
-    }
-
-    if (!Array.isArray(goTypes)) {
-      goTypes = [goTypes];
-    }
-
-    for (var i = 0, cnt = goTypes.length; i < cnt; i++) {
-      this.getGameObjectManager(goTypes[i]).drawGameObjectsBounds(graphics, config);
-    }
-
-    return this;
-  };
-
   var ContentMethods = {
     setContentCallback: function setContentCallback(callback, scope) {
       this.contentCallback = callback;
@@ -5303,10 +5380,9 @@
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setSkipSoundEffect: SetSkipSoundEffect,
-    wait: Wait,
-    drawGameObjectsBounds: DrawGameObjectsBounds
+    wait: Wait
   };
-  Object.assign(Methods, PlayMethods, PauseMethods, ResumeMethods, GameObjectManagerMethods, GameObjectMethods, SpriteMethods, TextMethods, ContentMethods);
+  Object.assign(Methods, PlayMethods, PauseMethods, ResumeMethods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(tagPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -5317,8 +5393,8 @@
   var EventEmitter = Phaser.Events.EventEmitter;
   var GetValue = Phaser.Utils.Objects.GetValue;
 
-  var TagPlayer = /*#__PURE__*/function (_EventEmitter) {
-    _inherits(TagPlayer, _EventEmitter);
+  var TagPlayer = /*#__PURE__*/function (_Extend) {
+    _inherits(TagPlayer, _Extend);
 
     var _super = _createSuper(TagPlayer);
 
@@ -5330,17 +5406,11 @@
       _this = _super.call(this);
       _this.scene = scene;
       _this.parser = new Parser(_assertThisInitialized(_this), GetValue(config, 'parser', undefined));
-      _this.timeline = new Timeline(_assertThisInitialized(_this));
-      _this._soundManager = undefined;
-      var soundManagerConfig = GetValue(config, 'sounds', undefined);
-
-      if (soundManagerConfig) {
-        _this._soundManager = new SoundManager(_this.scene, soundManagerConfig);
-      }
 
       _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
 
-      _this.gameObjectManagers = {};
+      _this.initManagers(config);
+
       var spriteManagerConfig = GetValue(config, 'sprites');
 
       if (spriteManagerConfig !== false && spriteManagerConfig !== null) {
@@ -5363,15 +5433,6 @@
       key: "isPlaying",
       get: function get() {
         return this.parser.isRunning;
-      }
-    }, {
-      key: "soundManager",
-      get: function get() {
-        if (this._soundManager === undefined) {
-          this._soundManager = new SoundManager(this.scene);
-        }
-
-        return this._soundManager;
       }
     }, {
       key: "spriteManager",
@@ -5403,25 +5464,17 @@
         }
 
         ClearEvents(this);
-
-        if (this._soundManager) {
-          this._soundManager.destroy(fromScene);
-        }
-
-        this._soundManager = undefined;
         this.camera = undefined;
 
-        for (var name in this.gameObjectManagers) {
-          this.gameObjectManagers.destroy(fromScene);
-          delete this.gameObjectManagers[name];
-        }
+        _get(_getPrototypeOf(TagPlayer.prototype), "destroy", this).call(this);
 
+        this.destroyManagers(fromScene);
         this.scene = undefined;
       }
     }]);
 
     return TagPlayer;
-  }(EventEmitter);
+  }(Extend(EventEmitter));
 
   Object.assign(TagPlayer.prototype, Methods);
 
