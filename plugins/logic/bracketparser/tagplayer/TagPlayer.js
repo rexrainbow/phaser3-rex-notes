@@ -19,10 +19,9 @@ class TagPlayer extends EventEmitter {
 
         this.timeline = new Timeline(this);
 
-        this._soundManager = undefined;
-        var soundManagerConfig = GetValue(config, 'sounds', undefined);
-        if (soundManagerConfig) {
-            this._soundManager = new SoundManager(this.scene, soundManagerConfig);
+        var soundManagerConfig = GetValue(config, 'sounds');
+        if (soundManagerConfig !== false) {
+            this.soundManager = new SoundManager(scene, soundManagerConfig);
         }
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
@@ -44,13 +43,6 @@ class TagPlayer extends EventEmitter {
 
     get isPlaying() {
         return this.parser.isRunning;
-    }
-
-    get soundManager() {
-        if (this._soundManager === undefined) {
-            this._soundManager = new SoundManager(this.scene);
-        }
-        return this._soundManager;
     }
 
     get spriteManager() {
@@ -77,10 +69,10 @@ class TagPlayer extends EventEmitter {
 
         ClearEvents(this);
 
-        if (this._soundManager) {
-            this._soundManager.destroy(fromScene);
+        if (this.soundManager) {
+            this.soundManager.destroy(fromScene);
         }
-        this._soundManager = undefined;
+        this.soundManager = undefined;
 
         this.camera = undefined;
 

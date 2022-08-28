@@ -15,19 +15,12 @@ export default {
         if (config === undefined) {
             config = {};
         }
-        if (GameObjectManagerClass === undefined) {
-            GameObjectManagerClass = GameObjectManagerBase;
-        }
-
-        if (!config.createGameObjectScope) {
-            config.createGameObjectScope = this;
-        }
-        var gameobjectManager = new GameObjectManagerClass(this.scene, config);
         var name = config.name;
         if (!name) {
             console.warn(`Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method`);
         }
-        this.gameObjectManagers[name] = gameobjectManager;
+
+        super.addGameObjectManager(config, GameObjectManagerClass);
 
         // Register parse callbacks
         var customParseCallbacks = config.parseCallbacks;
