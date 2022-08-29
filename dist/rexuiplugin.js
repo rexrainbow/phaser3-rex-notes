@@ -17290,24 +17290,26 @@
         }
 
         this.textPlayer.emit('typing', child);
+        var nextChild = this.nextChild;
 
-        if (this.skipSpaceEnable && IsSpaceChar(this.nextChild)) ; else {
-          delay += this.speed + offsetTime;
-          offsetTime = 0;
-          var isLastChild = this.index === this.children.length; // this.index: Point to next child
+        if (nextChild) {
+          if (this.skipSpaceEnable && IsSpaceChar(nextChild)) ; else {
+            delay += this.speed + offsetTime;
+            offsetTime = 0;
 
-          if (delay > 0 && !isLastChild) {
-            // Process next character later
-            this.typingTimer = this.timeline.addTimer({
-              name: TypingDelayTimerType,
-              target: this,
-              duration: delay,
-              onComplete: function onComplete(target, t, timer) {
-                target.typingTimer = undefined;
-                Typing.call(target, timer.remainder);
-              }
-            });
-            break; // Leave this typing loop     
+            if (delay > 0) {
+              // Process next character later
+              this.typingTimer = this.timeline.addTimer({
+                name: TypingDelayTimerType,
+                target: this,
+                duration: delay,
+                onComplete: function onComplete(target, t, timer) {
+                  target.typingTimer = undefined;
+                  Typing.call(target, timer.remainder);
+                }
+              });
+              break; // Leave this typing loop     
+            }
           }
         } // Process next child
 
