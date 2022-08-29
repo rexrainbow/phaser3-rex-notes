@@ -28,6 +28,7 @@ class TextPlayer extends Extend(DynamicText) {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexTextPlayer'
 
+        config.scene = scene;
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));

@@ -10,6 +10,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TagPlayer extends Extend(EventEmitter) {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
         super();
 
         this.scene = scene;
@@ -18,6 +21,7 @@ class TagPlayer extends Extend(EventEmitter) {
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
+        config.scene = scene;
         this.initManagers(config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');

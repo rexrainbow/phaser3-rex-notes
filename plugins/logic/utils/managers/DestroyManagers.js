@@ -13,6 +13,8 @@ var DestroyManagers = function (fromScene) {
         this.timeline.destroy();
     }
     this.timeline = undefined;
+
+    this.managersScene = undefined;
 }
 
 export default DestroyManagers;

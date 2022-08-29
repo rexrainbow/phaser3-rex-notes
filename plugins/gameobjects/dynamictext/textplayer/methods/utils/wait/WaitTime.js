@@ -14,7 +14,7 @@ var WaitTime = function (textPlayer, time, callback, args, scope) {
         }
     });
 
-    timer = textPlayer.delayCall(time, wrapCallback);
+    timer = textPlayer.timeline.delayCall(time, wrapCallback);
 
     textPlayer.emit('wait.time', time);
 }
