@@ -17852,12 +17852,17 @@
         var child = this.nextChild;
         this.index = Math.min(this.index + 1, this.children.length); // Point to next child
 
+        this._nextChild = undefined;
         return child;
       }
     }, {
       key: "nextChild",
       get: function get() {
-        return this.children[this.index];
+        if (!this._nextChild) {
+          this._nextChild = this.children[this.index];
+        }
+
+        return this._nextChild;
       }
     }]);
 
