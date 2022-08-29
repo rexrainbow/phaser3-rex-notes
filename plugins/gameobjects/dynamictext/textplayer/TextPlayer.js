@@ -1,4 +1,4 @@
-import Extend from '../../../logic/utils/managers/Extend.js';
+import Extend from '../../../utils/managers/Extend.js';
 import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
 import TypeWriter from './typewriter/TypeWriter.js';

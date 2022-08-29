@@ -1,4 +1,4 @@
-import GameObjectManagerBase from '../../../utils/gameobject/gomanager/GOManager.js';
+import GameObjectManagerBase from '../gameobject/gomanager/GOManager.js';
 
 export default {
     addGameObjectManager(config, GameObjectManagerClass) {

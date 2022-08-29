@@ -1,4 +1,4 @@
-import Extend from '../../utils/managers/Extend.js';
+import Extend from '../../../utils/managers/Extend.js';
 import Parser from './parser/Parser.js';
 import AddSpriteManager from './methods/spritemanager/AddSpriteManager.js';
 import AddTextManager from './methods/textmanager/AddTextManager.js';

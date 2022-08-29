@@ -1,5 +1,5 @@
-import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
-import Timeline from '../../../time/progresses/Timeline.js';
+import SoundManager from '../audio/soundmanager/SoundManager.js';
+import Timeline from '../../time/progresses/Timeline.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
