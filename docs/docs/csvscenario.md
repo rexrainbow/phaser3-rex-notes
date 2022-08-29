@@ -7,7 +7,8 @@ Run script in csv format. Csv could be edited by excel or google document.
 
 ## Live demos
 
-[CSV-scenario](https://codepen.io/rexrainbow/pen/OELGaR)
+- [CSV-scenario](https://codepen.io/rexrainbow/pen/OELGaR)
+- [With TextPlayer](https://codepen.io/rexrainbow/pen/OJveeKJ)
 
 ## Usage
 
