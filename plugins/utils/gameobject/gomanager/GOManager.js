@@ -2,6 +2,7 @@ import EventEmitterMethods from '../../eventemitter/EventEmitterMethods.js';
 import BobBase from './bobbase/BobBase.js';
 import IsEmpty from '../../object/IsEmpty.js';
 import Methods from './methods/Methods.js';
+import GetViewport from '../../system/GetViewport.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -25,7 +26,13 @@ class GOManager {
             this.setGOFadeTime(GetValue(fadeConfig, 'time', 500));
         }
 
-        this.setViewportCoordinateEnable(GetValue(config, 'viewportCoordinate', false));
+        var viewportCoordinateConfig = GetValue(config, 'viewportCoordinate', false);
+        if (viewportCoordinateConfig !== false) {
+            this.setViewportCoordinateEnable(GetValue(config, 'enable', true));
+            this.setViewport(GetValue(viewportCoordinateConfig, 'viewport'))
+        } else {
+            this.setViewportCoordinateEnable(false);
+        }
 
         this.bobs = {};
         this.removedGOs = [];
@@ -35,6 +42,7 @@ class GOManager {
     destroy(fromScene) {
         this.clear(!fromScene);
         this.createGameObjectCallback = undefined;
+        this.viewport = undefined;
         this.scene = undefined;
     }
 
@@ -72,6 +80,15 @@ class GOManager {
         }
 
         this.viewportCoordinateEnable = enable;
+        return this;
+    }
+
+    setViewport(viewport) {
+        if (viewport === undefined) {
+            viewport = GetViewport(this.scene, this.scene.cameras.main);
+        }
+
+        this.viewport = viewport;
         return this;
     }
 

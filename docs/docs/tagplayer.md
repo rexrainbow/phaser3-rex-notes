@@ -203,7 +203,9 @@ tagPlayer.addGameObjectManager({
 
     // fade: 500,
     // fade: {mode: 'tint', time: 500},
+
     // viewportCoordinate: false,
+    // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }
 
 })
 ```
@@ -225,10 +227,11 @@ tagPlayer.addGameObjectManager({
             - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property.
         - `fade.time` : Duration of fading. Default value is `500`.
 - `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
-    - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
-        - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
-        - `vp` : Viewport in [rectangle](geom-rectangle.md)
     - `false` : Do nothing, default behavior.
+    - `true`, or an object :
+        - `viewport` : 
+            - `undefined` : Rectangle of display area under main camera of current scene. Default value.
+            - A [rectangle](geom-rectangle.md)
 
 #### Built-in commands
 

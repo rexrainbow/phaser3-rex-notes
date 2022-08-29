@@ -300,4 +300,4 @@ var textBox = scene.rexUI.add.textBox({
 
 ### Other properties
 
-See [textBox object](ui-textBox.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
+See [textBox object](ui-textbox.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).

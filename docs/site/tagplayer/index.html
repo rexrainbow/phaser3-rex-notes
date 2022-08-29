@@ -9034,7 +9034,9 @@
 
     <span class="c1">// fade: 500,</span>
     <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
+
     <span class="c1">// viewportCoordinate: false,</span>
+    <span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }</span>
 
 <span class="p">})</span>
 </code></pre></div>
@@ -9063,12 +9065,15 @@
 </ul>
 </li>
 <li><code>viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to sprite game object.<ul>
-<li><code>true</code> : Attach <code>vpx</code>, <code>vpy</code>, <code>vp</code> to sprite game object.<ul>
-<li><code>vpx</code>, <code>vpy</code> : Number between <code>0</code>~<code>1</code>. Proportion of viewport.</li>
-<li><code>vp</code> : Viewport in <a href="../geom-rectangle/">rectangle</a></li>
+<li><code>false</code> : Do nothing, default behavior.</li>
+<li><code>true</code>, or an object :<ul>
+<li><code>viewport</code> : <ul>
+<li><code>undefined</code> : Rectangle of display area under main camera of current scene. Default value.</li>
+<li>A <a href="../geom-rectangle/">rectangle</a></li>
 </ul>
 </li>
-<li><code>false</code> : Do nothing, default behavior.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

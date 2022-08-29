@@ -25,7 +25,7 @@ export default {
         }
 
         if (this.viewportCoordinateEnable) {
-            AddViewportCoordinateProperties(gameObject);
+            AddViewportCoordinateProperties(gameObject, this.viewport);
         }
 
         gameObject.once('destroy', function () {

@@ -1870,14 +1870,16 @@
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
   var InitManagers = function InitManagers(config) {
+    var scene = config.scene;
     var soundManagerConfig = GetValue$6(config, 'sounds');
 
     if (soundManagerConfig !== false) {
-      this.soundManager = new SoundManager(this.scene, soundManagerConfig);
+      this.soundManager = new SoundManager(scene, soundManagerConfig);
     }
 
     this.gameObjectManagers = {};
     this.timeline = new Timeline(this);
+    this.managersScene = scene;
   };
 
   var DestroyManagers = function DestroyManagers(fromScene) {
@@ -1897,6 +1899,7 @@
     }
 
     this.timeline = undefined;
+    this.managersScene = undefined;
   };
 
   var PropertyMethods$1 = {
@@ -2396,7 +2399,7 @@
       }
 
       if (this.viewportCoordinateEnable) {
-        AddViewportCoordinateProperties(gameObject);
+        AddViewportCoordinateProperties(gameObject, this.viewport);
       }
 
       gameObject.once('destroy', function () {
@@ -2783,6 +2786,67 @@
   };
   Object.assign(Methods$3, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
 
+  var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
+
+  var IsCameraObject = function IsCameraObject(object) {
+    return object instanceof CameraClass;
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+
+  var GetViewport = function GetViewport(scene, camera, out) {
+    if (!IsCameraObject(camera)) {
+      out = camera;
+      camera = undefined;
+    }
+
+    if (out === undefined) {
+      out = new Rectangle();
+    } else if (out === true) {
+      out = globRect;
+    }
+
+    var scaleManager = scene.sys.scale;
+    var baseSize = scaleManager.baseSize;
+    var parentSize = scaleManager.parentSize;
+    var canvasBounds = scaleManager.canvasBounds;
+    var displayScale = scaleManager.displayScale;
+    var x = canvasBounds.x >= 0 ? 0 : -(canvasBounds.x * displayScale.x);
+    var y = canvasBounds.y >= 0 ? 0 : -(canvasBounds.y * displayScale.y);
+    var width;
+
+    if (parentSize.width >= canvasBounds.width) {
+      width = baseSize.width;
+    } else {
+      width = baseSize.width - (canvasBounds.width - parentSize.width) * displayScale.x;
+    }
+
+    var height;
+
+    if (parentSize.height >= canvasBounds.height) {
+      height = baseSize.height;
+    } else {
+      height = baseSize.height - (canvasBounds.height - parentSize.height) * displayScale.y;
+    }
+
+    out.setTo(x, y, width, height);
+
+    if (camera) {
+      var offsetX = camera.scrollX;
+      var offsetY = camera.scrollY;
+      var scaleX = 1 / camera.zoomX;
+      var scaleY = 1 / camera.zoomY;
+      out.width *= scaleX;
+      out.height *= scaleY;
+      out.centerX = camera.centerX + offsetX;
+      out.centerY = camera.centerY + offsetY;
+    }
+
+    return out;
+  };
+
+  var globRect = new Rectangle();
+
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
   var GOManager = /*#__PURE__*/function () {
@@ -2803,7 +2867,15 @@
         this.setGOFadeTime(GetValue$4(fadeConfig, 'time', 500));
       }
 
-      this.setViewportCoordinateEnable(GetValue$4(config, 'viewportCoordinate', false));
+      var viewportCoordinateConfig = GetValue$4(config, 'viewportCoordinate', false);
+
+      if (viewportCoordinateConfig !== false) {
+        this.setViewportCoordinateEnable(GetValue$4(config, 'enable', true));
+        this.setViewport(GetValue$4(viewportCoordinateConfig, 'viewport'));
+      } else {
+        this.setViewportCoordinateEnable(false);
+      }
+
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -2814,6 +2886,7 @@
       value: function destroy(fromScene) {
         this.clear(!fromScene);
         this.createGameObjectCallback = undefined;
+        this.viewport = undefined;
         this.scene = undefined;
       }
     }, {
@@ -2857,6 +2930,16 @@
         return this;
       }
     }, {
+      key: "setViewport",
+      value: function setViewport(viewport) {
+        if (viewport === undefined) {
+          viewport = GetViewport(this.scene, this.scene.cameras.main);
+        }
+
+        this.viewport = viewport;
+        return this;
+      }
+    }, {
       key: "isEmpty",
       get: function get() {
         return IsEmpty(this.bobs) && this.removedGOs.length === 0;
@@ -2882,7 +2965,7 @@
         config.createGameObjectScope = this;
       }
 
-      var gameobjectManager = new GameObjectManagerClass(this.scene, config);
+      var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
       this.gameObjectManagers[config.name] = gameobjectManager;
       return this;
     },
@@ -2901,6 +2984,47 @@
   };
 
   var GameObjectMethods = {
+    createGameObject: function createGameObject(goType, name) {
+      var _this$getGameObjectMa;
+
+      for (var _len = arguments.length, params = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        params[_key - 2] = arguments[_key];
+      }
+
+      (_this$getGameObjectMa = this.getGameObjectManager(goType)).add.apply(_this$getGameObjectMa, [name].concat(params));
+
+      return this;
+    },
+    destroyGameObject: function destroyGameObject(goType, name) {
+      var gameObjectManager = this.getGameObjectManager(goType);
+
+      if (name === undefined) {
+        gameObjectManager.removeAll();
+      } else {
+        gameObjectManager.remove(name);
+      }
+
+      return this;
+    },
+    callGameObjectMethod: function callGameObjectMethod(goType, name, methodName) {
+      var _this$getGameObjectMa2;
+
+      for (var _len2 = arguments.length, params = new Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+        params[_key2 - 3] = arguments[_key2];
+      }
+
+      (_this$getGameObjectMa2 = this.getGameObjectManager(goType)).call.apply(_this$getGameObjectMa2, [name, methodName].concat(params));
+
+      return this;
+    },
+    setGameObjectProperty: function setGameObjectProperty(goType, name, prop, value) {
+      this.getGameObjectManager(goType).setProperty(name, prop, value);
+      return this;
+    },
+    easeGameObjectProperty: function easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
+      this.getGameObjectManager(goType).easeProperty(name, prop, value, duration, ease, repeat, isYoyo);
+      return this;
+    },
     getGameObject: function getGameObject(goType, name, out) {
       var gameobjectManager = this.getGameObjectManager(goType);
 
@@ -2962,12 +3086,6 @@
     }
   };
 
-  var TimelineMethods = {
-    delayCall: function delayCall(delay, callback, args, scope) {
-      return this.timeline.delayCall(delay, callback, args, scope);
-    }
-  };
-
   var Extend = function Extend(BaseClass) {
     var Managers = /*#__PURE__*/function (_BaseClass) {
       _inherits(Managers, _BaseClass);
@@ -2987,8 +3105,7 @@
       initManagers: InitManagers,
       destroyManagers: DestroyManagers
     };
-    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods$1, GameObjectMethods, TimelineMethods); // Note: `Managers.scene` member is required
-
+    Object.assign(Managers.prototype, Methods, GameObjectManagerMethods$1, GameObjectMethods);
     return Managers;
   };
 
@@ -5063,7 +5180,7 @@
         timer = undefined;
       }
     });
-    timer = tagPlayer.delayCall(time, wrapCallback);
+    timer = tagPlayer.timeline.delayCall(time, wrapCallback);
     tagPlayer.emit('wait.time', time);
   };
 
@@ -5403,11 +5520,17 @@
 
       _classCallCheck(this, TagPlayer);
 
+      if (config === undefined) {
+        config = {};
+      }
+
       _this = _super.call(this);
       _this.scene = scene;
       _this.parser = new Parser(_assertThisInitialized(_this), GetValue(config, 'parser', undefined));
 
       _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
+
+      config.scene = scene;
 
       _this.initManagers(config);
 

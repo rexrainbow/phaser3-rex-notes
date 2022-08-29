@@ -4,8 +4,8 @@ import Extend from '../../plugins/utils/managers/Extend.js';
 
 var csvString = `\
 -,add-sprite,A,dude,,
--,set-sprite-position,A,0,300,,
--,move-sprite,A,400,300,1000`;
+-,set-sprite-position,A,1,1,,
+-,move-sprite,A,0.5,0.5,1000`;
 
 class Managers extends Extend(Phaser.Events.EventEmitter) {
     constructor(scene) {
@@ -20,6 +20,7 @@ class Managers extends Extend(Phaser.Events.EventEmitter) {
             createGameObject(scene, key, frame) {
                 return scene.add.sprite(0, 0, key, frame);
             },
+            viewportCoordinate: true,
         })
     }
 
@@ -48,8 +49,8 @@ class Managers extends Extend(Phaser.Events.EventEmitter) {
     }
 
     ['set-sprite-position'](name, x, y) {
-        this.setGameObjectProperty('sprite', name, 'x', x);
-        this.setGameObjectProperty('sprite', name, 'y', y);
+        this.setGameObjectProperty('sprite', name, 'vpx', x);
+        this.setGameObjectProperty('sprite', name, 'vpy', y);
         // Execute next command
     }
 
@@ -59,8 +60,8 @@ class Managers extends Extend(Phaser.Events.EventEmitter) {
     }
 
     ['move-sprite'](name, x, y, duration, ease, isYoyo) {
-        this.easeGameObjectProperty('sprite', name, 'x', x, duration, ease, 0, isYoyo);
-        this.easeGameObjectProperty('sprite', name, 'y', y, duration, ease, 0, isYoyo);
+        this.easeGameObjectProperty('sprite', name, 'vpx', x, duration, ease, 0, isYoyo);
+        this.easeGameObjectProperty('sprite', name, 'vpy', y, duration, ease, 0, isYoyo);
         // Execute next command
     }
 
