@@ -1,4 +1,37 @@
 export default {
+    createGameObject(goType, name, ...params) {
+        this.getGameObjectManager(goType).add(name, ...params);
+        return this;
+    },
+
+    destroyGameObject(goType, name) {
+        var gameObjectManager = this.getGameObjectManager(goType);
+        if (name === undefined) {
+            gameObjectManager.removeAll();
+        } else {
+            gameObjectManager.remove(name);
+        }
+        return this;
+    },
+
+    callGameObjectMethod(goType, name, methodName, ...params) {
+        this.getGameObjectManager(goType).call(name, methodName, ...params);
+        return this;
+    },
+
+    setGameObjectProperty(goType, name, prop, value) {
+        this.getGameObjectManager(goType).setProperty(name, prop, value);
+        return this;
+    },
+
+    easeGameObjectProperty(goType, name, prop, value, duration, ease, repeat, isYoyo) {
+        this.getGameObjectManager(goType).easeProperty(
+            name, prop, value,
+            duration, ease, repeat, isYoyo
+        );
+        return this;
+    },
+
     getGameObject(goType, name, out) {
         var gameobjectManager = this.getGameObjectManager(goType);
         if (typeof (name) === 'string') {
