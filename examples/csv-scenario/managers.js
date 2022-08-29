@@ -11,17 +11,15 @@ class Managers extends Extend(Phaser.Events.EventEmitter) {
     constructor(scene) {
         super();
 
-        this.initManagers({
-            scene: scene
-        })
-
-        this.addGameObjectManager({
-            name: 'sprite',
-            createGameObject(scene, key, frame) {
-                return scene.add.sprite(0, 0, key, frame);
-            },
-            viewportCoordinate: true,
-        })
+        this
+            .initManagers(scene)
+            .addGameObjectManager({
+                name: 'sprite',
+                createGameObject(scene, key, frame) {
+                    return scene.add.sprite(0, 0, key, frame);
+                },
+                viewportCoordinate: true,
+            })
     }
 
     destroy() {

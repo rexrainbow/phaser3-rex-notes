@@ -3,8 +3,7 @@ import Timeline from '../../time/progresses/Timeline.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var InitManagers = function (config) {
-    var scene = config.scene;
+var InitManagers = function (scene, config) {
     var soundManagerConfig = GetValue(config, 'sounds');
     if (soundManagerConfig !== false) {
         this.soundManager = new SoundManager(scene, soundManagerConfig);
@@ -15,6 +14,8 @@ var InitManagers = function (config) {
     this.timeline = new Timeline(this);
 
     this.managersScene = scene;
+
+    return this;
 }
 
 export default InitManagers;

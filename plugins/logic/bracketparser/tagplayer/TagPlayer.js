@@ -21,8 +21,7 @@ class TagPlayer extends Extend(EventEmitter) {
 
         this.setTargetCamera(GetValue(config, 'camera', this.scene.sys.cameras.main));
 
-        config.scene = scene;
-        this.initManagers(config);
+        this.initManagers(scene, config);
 
         var spriteManagerConfig = GetValue(config, 'sprites');
         if ((spriteManagerConfig !== false) && (spriteManagerConfig !== null)) {
