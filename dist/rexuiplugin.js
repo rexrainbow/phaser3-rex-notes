@@ -14886,8 +14886,7 @@
 
   var GetValue$1M = Phaser.Utils.Objects.GetValue;
 
-  var InitManagers = function InitManagers(config) {
-    var scene = config.scene;
+  var InitManagers = function InitManagers(scene, config) {
     var soundManagerConfig = GetValue$1M(config, 'sounds');
 
     if (soundManagerConfig !== false) {
@@ -14897,6 +14896,7 @@
     this.gameObjectManagers = {};
     this.timeline = new Timeline(this);
     this.managersScene = scene;
+    return this;
   };
 
   var DestroyManagers = function DestroyManagers(fromScene) {
@@ -18787,7 +18787,6 @@
       delete config.text;
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexTextPlayer';
-      config.scene = scene;
       _this.parser = new Parser(_assertThisInitialized(_this), GetValue$1H(config, 'parser', undefined));
       _this.typeWriter = new TypeWriter(_assertThisInitialized(_this), GetValue$1H(config, 'typing', undefined));
       _this._imageManager = undefined;
@@ -18799,7 +18798,7 @@
 
       _this.setTargetCamera(GetValue$1H(config, 'camera', _this.scene.sys.cameras.main));
 
-      _this.initManagers(config);
+      _this.initManagers(scene, config);
 
       var spriteManagerConfig = GetValue$1H(config, 'sprites');
 

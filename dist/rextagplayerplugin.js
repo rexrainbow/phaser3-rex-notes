@@ -1869,8 +1869,7 @@
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
-  var InitManagers = function InitManagers(config) {
-    var scene = config.scene;
+  var InitManagers = function InitManagers(scene, config) {
     var soundManagerConfig = GetValue$6(config, 'sounds');
 
     if (soundManagerConfig !== false) {
@@ -1880,6 +1879,7 @@
     this.gameObjectManagers = {};
     this.timeline = new Timeline(this);
     this.managersScene = scene;
+    return this;
   };
 
   var DestroyManagers = function DestroyManagers(fromScene) {
@@ -5530,9 +5530,7 @@
 
       _this.setTargetCamera(GetValue(config, 'camera', _this.scene.sys.cameras.main));
 
-      config.scene = scene;
-
-      _this.initManagers(config);
+      _this.initManagers(scene, config);
 
       var spriteManagerConfig = GetValue(config, 'sprites');
 
