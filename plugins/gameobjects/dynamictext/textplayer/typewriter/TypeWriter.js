@@ -18,6 +18,7 @@ class TypeWriter {
         this.setTypingStartCallback(GetValue(config, 'onTypingStart', SetChildrenInvisible));
         this.setDefaultTypingSpeed(GetValue(config, 'speed', 250));
         this.setTypingSpeed();
+        this.setSkipSpaceEnable(GetValue(config,'skipSpace', false));
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
         this.setMinSizeEnable(GetValue(config, 'minSizeEnable', false));
     }
@@ -73,9 +74,13 @@ class TypeWriter {
     }
 
     getNextChild() {
-        var child = this.children[this.index];
+        var child = this.nextChild;
         this.index = Math.min(this.index + 1, this.children.length);  // Point to next child
         return child;
+    }
+
+    get nextChild() {
+        return this.children[this.index];
     }
 }
 

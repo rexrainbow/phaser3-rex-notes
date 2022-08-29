@@ -1,4 +1,4 @@
-import { CanRender, IsCommand } from '../../dynamictext/bob/Types.js';
+import { CanRender, IsCommand, IsSpaceChar } from '../../dynamictext/bob/Types.js';
 import { TypingDelayTimerType, TypingAnimationTimerType, } from './TimerTypes.js';
 
 var Typing = function (offsetTime) {
@@ -53,21 +53,25 @@ var Typing = function (offsetTime) {
 
             this.textPlayer.emit('typing', child);
 
-            delay += (this.speed + offsetTime);
-            offsetTime = 0;
-            var isLastChild = (this.index === this.children.length);  // this.index: Point to next child
-            if ((delay > 0) && !isLastChild) {
-                // Process next character later
-                this.typingTimer = this.timeline.addTimer({
-                    name: TypingDelayTimerType,
-                    target: this,
-                    duration: delay,
-                    onComplete: function (target, t, timer) {
-                        target.typingTimer = undefined;
-                        Typing.call(target, timer.remainder);
-                    }
-                })
-                break;  // Leave this typing loop                
+            if (this.skipSpaceEnable && IsSpaceChar(this.nextChild)) {
+                // Don't have delay when typing a space character
+            } else {
+                delay += (this.speed + offsetTime);
+                offsetTime = 0;
+                var isLastChild = (this.index === this.children.length);  // this.index: Point to next child
+                if ((delay > 0) && !isLastChild) {
+                    // Process next character later
+                    this.typingTimer = this.timeline.addTimer({
+                        name: TypingDelayTimerType,
+                        target: this,
+                        duration: delay,
+                        onComplete: function (target, t, timer) {
+                            target.typingTimer = undefined;
+                            Typing.call(target, timer.remainder);
+                        }
+                    })
+                    break;  // Leave this typing loop     
+                }
             }
             // Process next child
         } else if (IsCommand(child)) {

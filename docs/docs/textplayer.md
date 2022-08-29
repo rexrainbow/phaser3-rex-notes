@@ -162,6 +162,7 @@ var txt = scene.add.rexTextPlayer({
 
             }
         },
+        // skipSpace: false,
 
         // minSizeEnable: false,
     },
@@ -287,6 +288,9 @@ var txt = scene.add.rexTextPlayer({
         }
         ```
         - [child](dynamictext.md#child)
+    - `typing.skipSpace` :
+        - `false` : Will have delay when typing space character. Default behavior.
+        - `true` : Typing space character immediately. 
     - `typing.minSizeEnable` : 
         - `true` : Resize to minimun size for showing all visible characters.
         - `false` : Won't resize during typing. Default behavior.

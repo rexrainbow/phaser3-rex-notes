@@ -65,6 +65,7 @@ class Demo extends Phaser.Scene {
 
                 typing: {
                     speed: 100,  // 0: no-typing
+                    skipSpace: true,
                 },
 
                 clickTarget: this,

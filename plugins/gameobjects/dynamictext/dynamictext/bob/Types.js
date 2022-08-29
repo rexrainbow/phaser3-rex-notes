@@ -11,6 +11,10 @@ var IsNewLineChar = function (bob) {
     return (bob.type === CharTypeName) && (bob.text === '\n');
 }
 
+var IsSpaceChar = function (bob) {
+    return (bob.type === CharTypeName) && (bob.text === ' ');
+}
+
 var IsCommand = function (bob) {
     return bob.type === CmdTypeName;
 }
@@ -21,5 +25,6 @@ export {
     CmdTypeName,
     CanRender,
     IsNewLineChar,
+    IsSpaceChar,
     IsCommand
 }

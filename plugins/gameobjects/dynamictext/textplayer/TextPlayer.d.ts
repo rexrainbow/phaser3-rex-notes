@@ -20,7 +20,9 @@ declare namespace TextPlayer {
             onStart?: (child: DynamicText.RenderChildTypes) => void,
             onProgress: (child: DynamicText.RenderChildTypes, t: number) => void,
             onComplete: (child: DynamicText.RenderChildTypes) => void
-        }
+        },
+        skipSpace?: boolean,
+        minSizeEnable?: boolean,
     }
 
     interface IConfigImages {

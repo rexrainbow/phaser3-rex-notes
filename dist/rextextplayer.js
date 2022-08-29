@@ -5383,6 +5383,10 @@
     return bob.type === CharTypeName && bob.text === '\n';
   };
 
+  var IsSpaceChar = function IsSpaceChar(bob) {
+    return bob.type === CharTypeName && bob.text === ' ';
+  };
+
   var IsCommand = function IsCommand(bob) {
     return bob.type === CmdTypeName;
   };
@@ -7977,22 +7981,25 @@
         }
 
         this.textPlayer.emit('typing', child);
-        delay += this.speed + offsetTime;
-        offsetTime = 0;
-        var isLastChild = this.index === this.children.length; // this.index: Point to next child
 
-        if (delay > 0 && !isLastChild) {
-          // Process next character later
-          this.typingTimer = this.timeline.addTimer({
-            name: TypingDelayTimerType,
-            target: this,
-            duration: delay,
-            onComplete: function onComplete(target, t, timer) {
-              target.typingTimer = undefined;
-              Typing.call(target, timer.remainder);
-            }
-          });
-          break; // Leave this typing loop                
+        if (this.skipSpaceEnable && IsSpaceChar(this.nextChild)) ; else {
+          delay += this.speed + offsetTime;
+          offsetTime = 0;
+          var isLastChild = this.index === this.children.length; // this.index: Point to next child
+
+          if (delay > 0 && !isLastChild) {
+            // Process next character later
+            this.typingTimer = this.timeline.addTimer({
+              name: TypingDelayTimerType,
+              target: this,
+              duration: delay,
+              onComplete: function onComplete(target, t, timer) {
+                target.typingTimer = undefined;
+                Typing.call(target, timer.remainder);
+              }
+            });
+            break; // Leave this typing loop     
+          }
         } // Process next child
 
       } else if (IsCommand(child)) {
@@ -8381,6 +8388,15 @@
     return this;
   };
 
+  var SetSkipSpaceEnable = function SetSkipSpaceEnable(enable) {
+    if (enable === undefined) {
+      enable = true;
+    }
+
+    this.skipSpaceEnable = enable;
+    return this;
+  };
+
   var SetSkipTypingAnimation = function SetSkipTypingAnimation(value) {
     if (value === undefined) {
       value = true;
@@ -8435,6 +8451,7 @@
     resumeTyping: ResumeTyping,
     wait: Wait$1,
     setIgnoreWait: SetIgnoreWait$1,
+    setSkipSpaceEnable: SetSkipSpaceEnable,
     setSkipTypingAnimation: SetSkipTypingAnimation,
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
@@ -8463,6 +8480,7 @@
       this.setTypingStartCallback(GetValue$3(config, 'onTypingStart', SetChildrenInvisible));
       this.setDefaultTypingSpeed(GetValue$3(config, 'speed', 250));
       this.setTypingSpeed();
+      this.setSkipSpaceEnable(GetValue$3(config, 'skipSpace', false));
       this.setAnimationConfig(GetValue$3(config, 'animation', undefined));
       this.setMinSizeEnable(GetValue$3(config, 'minSizeEnable', false));
     }
@@ -8520,10 +8538,15 @@
     }, {
       key: "getNextChild",
       value: function getNextChild() {
-        var child = this.children[this.index];
+        var child = this.nextChild;
         this.index = Math.min(this.index + 1, this.children.length); // Point to next child
 
         return child;
+      }
+    }, {
+      key: "nextChild",
+      get: function get() {
+        return this.children[this.index];
       }
     }]);
 

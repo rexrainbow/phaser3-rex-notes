@@ -7,6 +7,7 @@ import PauseTyping from './PauseTyping.js';
 import ResumeTyping from './ResumeTyping.js';
 import Wait from './Wait.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
+import SetSkipSpaceEnable from './SetSkipSpaceEnable.js';
 import SetSkipTypingAnimation from './SetSkipTypingAnimation.js';
 import SetSkipSoundEffect from './SetSkipSoundEffect.js';
 import SkipCurrentTypingDelay from './SkipCurrentTypingDelay.js';
@@ -20,6 +21,7 @@ var Methods = {
     resumeTyping: ResumeTyping,
     wait: Wait,
     setIgnoreWait: SetIgnoreWait,
+    setSkipSpaceEnable: SetSkipSpaceEnable,
     setSkipTypingAnimation: SetSkipTypingAnimation,
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay,
