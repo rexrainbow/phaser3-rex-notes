@@ -16,21 +16,15 @@ class Demo extends Phaser.Scene {
         AddUpdateEvent(gameObject, function (time, delta) {
             gameObject.angle += (delta / 1000) * 180;
         })
+
+        // Or a scene target
+        AddUpdateEvent(this, function (time, delta) {
+            gameObject.alpha = (time / 1000) % 1;
+        })
     }
 
     update() { }
 }
-
-/*
-var AddUpdateEvent = function (gameObject, callback, scope) {
-    var eventEmitter = gameObject.scene.events;
-    eventEmitter.on('update', callback, scope);
-    gameObject.on('destroy', function () {
-        eventEmitter.off('update', callback, scope);
-    })
-    return gameObject;
-}
-*/
 
 var config = {
     type: Phaser.AUTO,

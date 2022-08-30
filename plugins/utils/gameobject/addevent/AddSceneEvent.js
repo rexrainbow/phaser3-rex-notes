@@ -1,8 +1,9 @@
 import AddEvent from './AddEvent.js';
+import IsSceneObject from '../../system/IsSceneObject.js';
 
-var AddSceneEvent = function (gameObject, eventName, callback, scope) {
-    var eventEmitter = gameObject.scene.events;
-    return AddEvent(gameObject, eventEmitter, eventName, callback, scope);
+var AddSceneEvent = function (target, eventName, callback, scope) {
+    var eventEmitter = (!IsSceneObject(target)) ? target.scene.sys.events : target.sys.events;
+    return AddEvent(target, eventEmitter, eventName, callback, scope);
 }
 
 export default AddSceneEvent;

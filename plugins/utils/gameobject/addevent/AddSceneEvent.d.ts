@@ -1,6 +1,6 @@
 export default function (
-    gameObject: Phaser.GameObjects.GameObject,
+    target: Phaser.GameObjects.GameObject | Phaser.Scene,
     eventName: string,
     callback: Function,
     scope?: unknown
-): Phaser.GameObjects.GameObject
+): Phaser.GameObjects.GameObject;
