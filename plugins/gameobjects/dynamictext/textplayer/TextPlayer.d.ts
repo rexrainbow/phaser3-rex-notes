@@ -42,8 +42,37 @@ declare namespace TextPlayer {
         }
     }
 
-    interface IConfigSprite {
-        fade?: number
+    type CreateGameObjectCallbackType = (
+        scene: Phaser.Scene,
+        ...args: any[]
+    ) => Phaser.GameObjects.GameObject
+
+    interface IGameObjectConfig {
+        createGameObject: CreateGameObjectCallbackType,
+
+        fade?: number | {
+            mode?: 0 | 1 | 'tint' | 'alpha',
+            time?: number
+        },
+
+        viewportCoordinate?: boolean | {
+            enable?: boolean,
+            viewport?: Phaser.Geom.Rectangle
+        }
+    }
+
+    interface ISpriteGameObjectConfig {
+        createGameObject?: 'sprite' | 'image' | CreateGameObjectCallbackType,
+
+        fade?: number | {
+            mode?: 0 | 1 | 'tint' | 'alpha',
+            time?: number
+        },
+
+        viewportCoordinate?: boolean | {
+            enable?: boolean,
+            viewport?: Phaser.Geom.Rectangle
+        }
     }
 
     type NextPageInputTypes = string | ((callback: Function) => void) | null;
@@ -59,7 +88,7 @@ declare namespace TextPlayer {
 
         sounds?: IConfigSounds
 
-        sprite?: IConfigSprite,
+        sprites?: ISpriteGameObjectConfig | false,
 
         nextPageInput?: NextPageInputTypes,
 
@@ -126,11 +155,24 @@ declare class TextPlayer extends DynamicText {
     timeScale: number;
 
     readonly isPlaying: boolean;
-    readonly isPageTYyping: boolean;
+    readonly isPageTyping: boolean;
 
     addImage(config: TextPlayer.IConfigImages): this;
 
     ignoreNextPageInput(enable?: boolean): this;
     setClickTarget(clickTarget: TextPlayer.ClickTrgetTypes): this;
     readonly clickTarget: TextPlayer.ClickTrgetTypes;
+    
+    getGameObject(
+        goType: string,
+        name: string
+    ): Phaser.GameObjects.GameObject;
+    getGameObject(
+        goType: string,
+    ): { [name: string]: Phaser.GameObjects.GameObject }
+    addGameObject(
+        goType: string,
+        name: string,
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
 }

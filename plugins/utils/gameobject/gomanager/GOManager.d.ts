@@ -16,10 +16,19 @@ declare namespace GOManager {
     ) => Phaser.GameObjects.GameObject;
 
     interface IConfig {
-        createBob?: CreateBobCallbackType
+        createBob?: CreateBobCallbackType,
+
         createGameObject?: CreateGameObjectCallbackType,
-        fade?: number,
-        viewportCoordinate?: boolean
+
+        fade?: number | {
+            mode?: 0 | 1 | 'tint' | 'alpha',
+            time?: number
+        },
+
+        viewportCoordinate?: boolean | {
+            enable?: boolean,
+            viewport?: Phaser.Geom.Rectangle
+        }
     }
 }
 
