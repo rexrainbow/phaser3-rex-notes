@@ -519,6 +519,10 @@ declare class BaseSizer extends ContainerLite {
         scope?: object
     ): this;
 
+    enableTouching(enable?: boolean): this;
+
+    disableTouching(): this;
+
     setChildrenInteractive(
         config: SetChildrenInteractive.IConfig
     ): this;
