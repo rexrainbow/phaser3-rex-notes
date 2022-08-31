@@ -15536,9 +15536,21 @@
 
       return this.get(name).getProperty(property);
     },
+    isNumberProperty: function isNumberProperty(name, property) {
+      var value = this.getProperty(name, property);
+      return typeof value === 'number';
+    },
     setProperty: function setProperty(name, property, value) {
       if (!this.has(name)) {
         return this;
+      }
+
+      if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property)) {
+        if (value in this.symbols) {
+          value = this.symbols[value];
+        } else {
+          console.warn("Can't find symbol ".concat(value));
+        }
       }
 
       this.get(name).setProperty(property, value);
@@ -15563,6 +15575,14 @@
 
       if (isYoyo === undefined) {
         isYoyo = false;
+      }
+
+      if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property)) {
+        if (value in this.symbols) {
+          value = this.symbols[value];
+        } else {
+          console.warn("Can't find symbol ".concat(value));
+        }
       }
 
       this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
@@ -15743,6 +15763,7 @@
         this.setViewportCoordinateEnable(false);
       }
 
+      this.setSymbols(GetValue$1L(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
@@ -15804,6 +15825,12 @@
         }
 
         this.viewport = viewport;
+        return this;
+      }
+    }, {
+      key: "setSymbols",
+      value: function setSymbols(symbols) {
+        this.symbols = symbols;
         return this;
       }
     }, {

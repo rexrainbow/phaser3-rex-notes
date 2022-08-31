@@ -49,9 +49,8 @@ var WaitGameObject = function (tagPlayer, tag, callback, args, scope) {
             var name = tags[1],
                 prop = tags[2];
 
-            var value = gameObjectManager.getProperty(name, prop);
             // Can start tween task for a number property
-            if (typeof (value) === 'number') {
+            if (gameObjectManager.isNumberProperty(name, prop)) {
                 var task = gameObjectManager.getTweenTask(name, prop);
                 if (!task) {
                     tagPlayer.emit(waitEventName, name, prop);

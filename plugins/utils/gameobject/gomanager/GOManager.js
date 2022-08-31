@@ -34,6 +34,8 @@ class GOManager {
             this.setViewportCoordinateEnable(false);
         }
 
+        this.setSymbols(GetValue(config, 'symbols'));
+
         this.bobs = {};
         this.removedGOs = [];
         this._timeScale = 1;
@@ -89,6 +91,11 @@ class GOManager {
         }
 
         this.viewport = viewport;
+        return this;
+    }
+
+    setSymbols(symbols) {
+        this.symbols = symbols;
         return this;
     }
 

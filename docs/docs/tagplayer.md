@@ -86,6 +86,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
         // fade: 500,  
         // fade: {mode: 'tint', time: 500},
         // viewportCoordinate: false,
+        // symbols: undefined,  // { key:value }
     }, 
     // sprites: false,
 
@@ -94,6 +95,7 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
         // fade: 500,
         // fade: {mode: 'tint', time: 500},
         // viewportCoordinate: false,
+        // symbols: undefined,  // { key:value }
     }
     // texts: false,
     
@@ -139,6 +141,8 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
             - `vp` : Viewport in [rectangle](geom-rectangle.md)
         - `false` : Do nothing, default behavior.
+    - `sprites.symbols` : Convert string value to number value when Set or Ease property of game object.    
+        - A plain object contains string key and number value.
     - `false`, `null` : No sprite manager
 - `texts` : Configuration of texts.
     - `texts.createGameObject` : 
@@ -163,6 +167,8 @@ var tagPlayer = scene.plugins.get('rexTagPlayerPlugin').add(scene, {
             - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
             - `vp` : Viewport in [rectangle](geom-rectangle.md)
         - `false` : Do nothing, default behavior.
+    - `texts.symbols` : Convert string value to number value when Set or Ease property of game object.    
+        - A plain object contains string key and number value.
     - `false`, `null` : No text manager
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
@@ -206,8 +212,9 @@ tagPlayer.addGameObjectManager({
     // fade: {mode: 'tint', time: 500},
 
     // viewportCoordinate: false,
-    // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }
+    // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },
 
+    // symbols: undefined,  // { key:value },
 })
 ```
 
@@ -233,6 +240,8 @@ tagPlayer.addGameObjectManager({
         - `viewport` : 
             - `undefined` : Rectangle of display area under main camera of current scene. Default value.
             - A [rectangle](geom-rectangle.md)
+- `symbols` : Convert string value to number value when Set or Ease property of game object.    
+    - A plain object contains string key and number value.
 
 #### Built-in commands
 

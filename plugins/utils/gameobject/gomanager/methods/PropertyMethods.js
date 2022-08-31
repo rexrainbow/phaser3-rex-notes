@@ -13,10 +13,27 @@ export default {
         return this.get(name).getProperty(property);
     },
 
+    isNumberProperty(name, property) {
+        var value = this.getProperty(name, property);
+        return typeof (value) === 'number';
+    },
+
     setProperty(name, property, value) {
         if (!this.has(name)) {
             return this;
         }
+
+        if (this.symbols &&
+            (typeof (value) === 'string') &&
+            this.isNumberProperty(name, property)
+        ) {
+            if (value in this.symbols) {
+                value = this.symbols[value];
+            } else {
+                console.warn(`Can't find symbol ${value}`)
+            }
+        }
+
         this.get(name).setProperty(property, value);
         return this;
     },
@@ -37,6 +54,17 @@ export default {
         }
         if (isYoyo === undefined) {
             isYoyo = false;
+        }
+
+        if (this.symbols &&
+            (typeof (value) === 'string') &&
+            this.isNumberProperty(name, property)
+        ) {
+            if (value in this.symbols) {
+                value = this.symbols[value];
+            } else {
+                console.warn(`Can't find symbol ${value}`)
+            }
         }
 
         this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
