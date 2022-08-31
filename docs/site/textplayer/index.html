@@ -1596,6 +1596,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#game-object-manager" class="md-nav__link">
+    Game object manager
+  </a>
+  
+    <nav class="md-nav" aria-label="Game object manager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-commands" class="md-nav__link">
+    Built-in commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#typing-content" class="md-nav__link">
     Typing content
   </a>
@@ -8712,6 +8732,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#game-object-manager" class="md-nav__link">
+    Game object manager
+  </a>
+  
+    <nav class="md-nav" aria-label="Game object manager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-in-commands" class="md-nav__link">
+    Built-in commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#typing-content" class="md-nav__link">
     Typing content
   </a>
@@ -9103,7 +9143,13 @@
 
     <span class="nx">sprites</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// createCallback: &#39;sprite&#39;,</span>
-        <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
+        <span class="c1">// createCallback: function(scene, ...) { return gameObject; },</span>
+
+        <span class="c1">// fade: 500,</span>
+        <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
+
+        <span class="c1">// viewportCoordinate: false,</span>
+        <span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }</span>
     <span class="p">},</span> 
 
     <span class="nx">sounds</span><span class="o">:</span> <span class="p">{</span>
@@ -9380,6 +9426,124 @@
 <li>Create instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyTextPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="game-object-manager">Game object manager<a class="headerlink" href="#game-object-manager" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addGameObjectManager</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">goType</span><span class="p">,</span>
+    <span class="nx">createGameObject</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">gameObject</span>
+    <span class="p">},</span>
+
+    <span class="c1">// fade: 500,</span>
+    <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
+
+    <span class="c1">// viewportCoordinate: false,</span>
+    <span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }</span>
+
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> : Name of this game object manager, a string.</li>
+<li><code>createGameObject</code> : Callback to return a game object          <br />
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return gameObject;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>a</code>, <code>b</code>, <code>c</code> : Parameters pass from <code>[goType.name=a,b,c]</code> </li>
+</ul>
+</li>
+<li><code>fade</code> : Tint-fade (if game object has <code>tint</code> property) or alpha-fade game object when creating or destroying a game object.<ul>
+<li><code>0</code> : No fade-in or fade-out when adding or removing a game object.</li>
+<li>A number : Duration of fading. Default value is <code>500</code>.</li>
+<li>A plain object contains <code>mode</code>, <code>time</code><ul>
+<li><code>fade.mode</code> : Fade mode<ul>
+<li><code>0</code>, or <code>'tint'</code> : Fade-in or fade-out via <code>tint</code> property.</li>
+<li><code>1</code>, or <code>'alpha'</code> : Fade-in or fade-out via <code>alpha</code> property.</li>
+</ul>
+</li>
+<li><code>fade.time</code> : Duration of fading. Default value is <code>500</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>viewportCoordinate</code> : Apply <a href="../viewport-coordinate/">viewportCoordinate behavior</a> to sprite game object.<ul>
+<li><code>false</code> : Do nothing, default behavior.</li>
+<li><code>true</code>, or an object :<ul>
+<li><code>viewport</code> : <ul>
+<li><code>undefined</code> : Rectangle of display area under main camera of current scene. Default value.</li>
+<li>A <a href="../geom-rectangle/">rectangle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="built-in-commands">Built-in commands<a class="headerlink" href="#built-in-commands" title="Permanent link">&para;</a></h4>
+<p><code>goType</code> : <code>name</code> parameter in config of <code>txt.addGameObjectManager</code> method</p>
+<ul>
+<li>Add game object : <code>[goType.name=a,b,c]</code><ul>
+<li>Tint-fade-in, or alpha-fade-in if <code>fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove game object : <code>[/goType.name]</code><ul>
+<li>Tint-fade-out, or alpha-fade-out if <code>fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove all game objects : <code>[/goType]</code><ul>
+<li>Tint-fade-out, or alpha-fade-out if <code>fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Call method : <code>[goType.name.methodName=value0,value1,value2]</code></li>
+<li>Set property : <code>[goType.name.x=value]</code>, <code>[goType.name.alpha=value]</code>, ....</li>
+<li>Ease property : 
+    <div class="highlight"><pre><span></span><code>[goType.name.prop.easeMode=value,duration]
+[goType.name.prop.easeMode=value,duration,repeat]
+[goType.name.prop.easeMode=value,duration,easeFunction,repeat]
+[goType.name.prop.easeMode=value]
+</code></pre></div><ul>
+<li><code>prop</code> : Any number property of this sprite.</li>
+<li><code>easeMode</code> : One of these modes<ul>
+<li><code>to</code>, <code>toLeft</code>, <code>toRight</code>, <code>toUp</code>, <code>toDown</code></li>
+<li><code>yoyo</code>, <code>yoyoLeft</code>, <code>yoyoRight</code>, <code>yoyoUp</code>, <code>yoyoDown</code></li>
+<li><code>from</code>, <code>fromLeft</code>, <code>fromRight</code>, <code>fromUp</code>, <code>fromDown</code>    </li>
+</ul>
+</li>
+<li><code>duration</code> : Default value is <code>1000</code></li>
+<li><code>easeFunction</code> : Default value is <code>'Linear'</code></li>
+<li><code>repeat</code> : Default value is <code>0</code></li>
+</ul>
+</li>
+<li>Wait ease task of game object's number property : <code>[wait=goType.name.prop]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait a game objects are destroyed : <code>[wait=goType.name]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// prop parameter are `undefined` here</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait all game objects are destroyed : <code>[wait=goType]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// name and prop parameter are `undefined` here</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait boolean data in game object's data manager set to <code>true</code>/<code>false</code> : <code>[wait=goType.name.dataKey]</code>/<code>[wait=goType.name.!dataKey]</code><ul>
+<li>Also fire event <code>'wait.' + goType</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.&#39;</span> <span class="o">+</span> <span class="nx">goType</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="typing-content">Typing content<a class="headerlink" href="#typing-content" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>

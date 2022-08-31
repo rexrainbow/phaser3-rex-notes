@@ -174,7 +174,13 @@ var txt = scene.add.rexTextPlayer({
 
     sprites: {
         // createCallback: 'sprite',
-        fade: 500
+        // createCallback: function(scene, ...) { return gameObject; },
+
+        // fade: 500,
+        // fade: {mode: 'tint', time: 500},
+
+        // viewportCoordinate: false,
+        // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }
     }, 
     
     sounds: {
@@ -386,6 +392,101 @@ var txt = scene.make.rexTextPlayer({
     ```javascript
     var txt = new MyTextPlayer(scene, x, y, config);
     ```
+
+### Game object manager
+
+```javascript
+txt.addGameObjectManager({
+    name: goType,
+    createGameObject: function(scene, ...) {
+        return gameObject
+    },
+
+    // fade: 500,
+    // fade: {mode: 'tint', time: 500},
+
+    // viewportCoordinate: false,
+    // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }
+
+})
+```
+
+- `name` : Name of this game object manager, a string.
+- `createGameObject` : Callback to return a game object            
+    ```javascript
+    function(scene, a, b, c) {
+        // return gameObject;
+    }
+    ```
+    - `a`, `b`, `c` : Parameters pass from `[goType.name=a,b,c]` 
+- `fade` : Tint-fade (if game object has `tint` property) or alpha-fade game object when creating or destroying a game object.
+    - `0` : No fade-in or fade-out when adding or removing a game object.
+    - A number : Duration of fading. Default value is `500`.
+    - A plain object contains `mode`, `time`
+        - `fade.mode` : Fade mode
+            - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+            - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property.
+        - `fade.time` : Duration of fading. Default value is `500`.
+- `viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
+    - `false` : Do nothing, default behavior.
+    - `true`, or an object :
+        - `viewport` : 
+            - `undefined` : Rectangle of display area under main camera of current scene. Default value.
+            - A [rectangle](geom-rectangle.md)
+
+#### Built-in commands
+
+`goType` : `name` parameter in config of `txt.addGameObjectManager` method
+
+- Add game object : `[goType.name=a,b,c]`
+    - Tint-fade-in, or alpha-fade-in if `fade` is not `0`
+- Remove game object : `[/goType.name]`
+    - Tint-fade-out, or alpha-fade-out if `fade` is not `0`
+- Remove all game objects : `[/goType]`
+    - Tint-fade-out, or alpha-fade-out if `fade` is not `0`
+- Call method : `[goType.name.methodName=value0,value1,value2]`
+- Set property : `[goType.name.x=value]`, `[goType.name.alpha=value]`, ....
+- Ease property : 
+    ```
+    [goType.name.prop.easeMode=value,duration]
+    [goType.name.prop.easeMode=value,duration,repeat]
+    [goType.name.prop.easeMode=value,duration,easeFunction,repeat]
+    [goType.name.prop.easeMode=value]
+    ```
+    - `prop` : Any number property of this sprite.
+    - `easeMode` : One of these modes
+        - `to`, `toLeft`, `toRight`, `toUp`, `toDown`
+        - `yoyo`, `yoyoLeft`, `yoyoRight`, `yoyoUp`, `yoyoDown`
+        - `from`, `fromLeft`, `fromRight`, `fromUp`, `fromDown`    
+    - `duration` : Default value is `1000`
+    - `easeFunction` : Default value is `'Linear'`
+    - `repeat` : Default value is `0`
+- Wait ease task of game object's number property : `[wait=goType.name.prop]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        txt.on('wait.' + goType, function(name, prop) {
+        })
+        ```
+- Wait a game objects are destroyed : `[wait=goType.name]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        txt.on('wait.' + goType, function(name, prop) {
+            // prop parameter are `undefined` here
+        })
+        ``` 
+- Wait all game objects are destroyed : `[wait=goType]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        txt.on('wait.' + goType, function(name, prop) {
+            // name and prop parameter are `undefined` here
+        })
+        ``` 
+- Wait boolean data in game object's data manager set to `true`/`false` : `[wait=goType.name.dataKey]`/`[wait=goType.name.!dataKey]`
+    - Also fire event `'wait.' + goType`
+        ```javascript
+        txt.on('wait.' + goType, function(name, prop) {
+        })
+        ```
 
 ### Typing content
 
