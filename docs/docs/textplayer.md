@@ -180,7 +180,8 @@ var txt = scene.add.rexTextPlayer({
         // fade: {mode: 'tint', time: 500},
 
         // viewportCoordinate: false,
-        // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }
+        // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },
+        
     }, 
     
     sounds: {
@@ -317,7 +318,19 @@ var txt = scene.add.rexTextPlayer({
             ```
     - `sprites.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
-        - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
+        - A number : Duration of fading. Default value is `500`.
+        - A plain object contains `mode`, `time`
+            - `sprite.fade.mode` : Fade mode
+                - `0`, or `'tint'` : Fade-in or fade-out via `tint` property.
+                - `1`, or `'alpha'` : Fade-in or fade-out via `alpha` property. 
+            - `sprite.fade.time` : Duration of fading. Default value is `500`.
+    - `sprites.viewportCoordinate` : Apply [viewportCoordinate behavior](viewport-coordinate.md) to sprite game object.
+        - `true` : Attach `vpx`, `vpy`, `vp` to sprite game object.
+            - `vpx`, `vpy` : Number between `0`~`1`. Proportion of viewport.
+            - `vp` : Viewport in [rectangle](geom-rectangle.md)
+        - `false` : Do nothing, default behavior.
+    - `sprites.symbols` : Convert string value to number value when Set or Ease property of game object.    
+        - A plain object contains string key and number value.
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
@@ -408,6 +421,7 @@ txt.addGameObjectManager({
     // viewportCoordinate: false,
     // viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }
 
+    // symbols: undefined,  // { key:value },
 })
 ```
 
@@ -433,6 +447,8 @@ txt.addGameObjectManager({
         - `viewport` : 
             - `undefined` : Rectangle of display area under main camera of current scene. Default value.
             - A [rectangle](geom-rectangle.md)
+- `symbols` : Convert string value to number value when Set or Ease property of game object.    
+    - A plain object contains string key and number value.
 
 #### Built-in commands
 

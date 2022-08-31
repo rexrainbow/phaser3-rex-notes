@@ -8875,6 +8875,7 @@
         <span class="c1">// fade: 500,  </span>
         <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
         <span class="c1">// viewportCoordinate: false,</span>
+        <span class="c1">// symbols: undefined,  // { key:value }</span>
     <span class="p">},</span> 
     <span class="c1">// sprites: false,</span>
 
@@ -8883,6 +8884,7 @@
         <span class="c1">// fade: 500,</span>
         <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
         <span class="c1">// viewportCoordinate: false,</span>
+        <span class="c1">// symbols: undefined,  // { key:value }</span>
     <span class="p">}</span>
     <span class="c1">// texts: false,</span>
 
@@ -8947,6 +8949,10 @@
 <li><code>false</code> : Do nothing, default behavior.</li>
 </ul>
 </li>
+<li><code>sprites.symbols</code> : Convert string value to number value when Set or Ease property of game object.    <ul>
+<li>A plain object contains string key and number value.</li>
+</ul>
+</li>
 <li><code>false</code>, <code>null</code> : No sprite manager</li>
 </ul>
 </li>
@@ -8984,6 +8990,10 @@
 </ul>
 </li>
 <li><code>false</code> : Do nothing, default behavior.</li>
+</ul>
+</li>
+<li><code>texts.symbols</code> : Convert string value to number value when Set or Ease property of game object.    <ul>
+<li>A plain object contains string key and number value.</li>
 </ul>
 </li>
 <li><code>false</code>, <code>null</code> : No text manager</li>
@@ -9037,8 +9047,9 @@
     <span class="c1">// fade: {mode: &#39;tint&#39;, time: 500},</span>
 
     <span class="c1">// viewportCoordinate: false,</span>
-    <span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() }</span>
+    <span class="c1">// viewportCoordinate: { viewport: new Phaser.Geom.Rectangle() },</span>
 
+    <span class="c1">// symbols: undefined,  // { key:value },</span>
 <span class="p">})</span>
 </code></pre></div>
 <ul>
@@ -9075,6 +9086,10 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><code>symbols</code> : Convert string value to number value when Set or Ease property of game object.    <ul>
+<li>A plain object contains string key and number value.</li>
 </ul>
 </li>
 </ul>
