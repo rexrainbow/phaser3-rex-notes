@@ -167,7 +167,12 @@ var createHeader = function (scene, data) {
     });
     var header = scene.rexUI.add.label({
         orientation: 'y',
-        icon: scene.rexUI.add.roundRectangle(0, 0, 100, 100, 5, COLOR_LIGHT),
+
+        // Can put built-in container as child of panel
+        icon: scene.add.container(0, 0, [
+            scene.rexUI.add.roundRectangle(0, 0, 100, 100, 5, COLOR_LIGHT)
+        ]).setSize(140, 100),
+
         text: scene.add.text(0, 0, data.name),
 
         space: { icon: 10 }
