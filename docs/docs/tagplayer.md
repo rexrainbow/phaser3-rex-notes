@@ -624,3 +624,45 @@ Content will pass to one of these callback/event
     ```javascript
     tagPlayer.addGameObject(goType, name, gameObject);
     ```
+
+### Data
+
+- Get
+    ```javascript
+    var value = tagPlayer.getData(key);
+    var values = tagPlayer.getData(keys); // keys: an array of keys
+    var value = tagPlayer.data.values[key];
+    ```
+- Set
+    ```javascript
+    tagPlayer.setData(key, value);
+    tagPlayer.incData(key, value);    
+    tagPlayer.setData(obj); // obj: {key0:value0, key1:value1, ...}
+    tagPlayer.data.values[key] = value;
+    tagPlayer.data.values[key] += inc;
+    ```
+    or
+    ```javascript
+    tagPlayer.toggleData(key);
+    ```
+- Enable
+    ```javascript
+    tagPlayer.setDataEnabled();
+    ```
+- Events : 
+    - Set data evant
+        ```javascript
+        tagPlayer.on('setdata', function(tagPlayer, key, value){ /* ... */ });
+        ```
+    - Change data event
+        ```javascript
+        tagPlayer.on('changedata', function(tagPlayer, key, value, previousValue){ /* ... */ });
+        ```
+        ```javascript
+        tagPlayer.on('changedata-' + key, function(tagPlayer, value, previousValue){ /* ... */ });
+        ```
+
+See [data manager](datamanager.md)
+
+!!! note
+    Ensure data manager is created before binding any data-changed events.

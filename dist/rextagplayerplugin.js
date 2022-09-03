@@ -5519,13 +5519,62 @@
     }
   };
 
+  var DataManager = Phaser.Data.DataManager;
+  var DataManagerMethods = {
+    // this.data
+    destroyDataManager: function destroyDataManager() {
+      if (this.data) {
+        this.data.destroy();
+        this.data = undefined;
+      }
+    },
+    setDataEnabled: function setDataEnabled() {
+      if (!this.data) {
+        this.data = new DataManager(this);
+      }
+
+      return this;
+    },
+    setData: function setData(key, value) {
+      if (!this.data) {
+        this.data = new DataManager(this);
+      }
+
+      this.data.set(key, value);
+      return this;
+    },
+    incData: function incData(key, value) {
+      if (!this.data) {
+        this.data = new DataManager(this);
+      }
+
+      this.data.inc(key, value);
+      return this;
+    },
+    toggleData: function toggleData(key) {
+      if (!this.data) {
+        this.data = new DataManager(this);
+      }
+
+      this.data.toggle(key);
+      return this;
+    },
+    getData: function getData(key) {
+      if (!this.data) {
+        this.data = new DataManager(this);
+      }
+
+      return this.data.get(key);
+    }
+  };
+
   var Methods = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setSkipSoundEffect: SetSkipSoundEffect,
     wait: Wait
   };
-  Object.assign(Methods, PlayMethods, PauseMethods, ResumeMethods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods);
+  Object.assign(Methods, PlayMethods, PauseMethods, ResumeMethods, GameObjectManagerMethods, SpriteMethods, TextMethods, ContentMethods, DataManagerMethods);
 
   var ClearEvents = function ClearEvents(tagPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {

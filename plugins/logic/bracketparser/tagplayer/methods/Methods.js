@@ -9,6 +9,7 @@ import Wait from './Wait.js';
 import SpriteMethods from './spritemanager/SpriteMethods.js';
 import TextMethods from './textmanager/TextMethods.js';
 import ContentMethods from './ContentMethods.js';
+import DataManagerMethods from '../../../../utils/data/DataManagerMethods.js';
 
 var Methods = {
     setClickTarget: SetClickTarget,
@@ -26,6 +27,7 @@ Object.assign(
     SpriteMethods,
     TextMethods,
     ContentMethods,
+    DataManagerMethods,
 )
 
 export default Methods;

@@ -116,4 +116,10 @@ declare class TagPlayer extends Phaser.Events.EventEmitter {
         gameObject: Phaser.GameObjects.GameObject
     ): this;
 
+    setDataEnabled(): this;
+    setData(key: string | object, data?: any): this;
+    incData(key: string | object, data?: any): this;
+    toggleData(key: string | object): this;
+    getData(key: string | string[]): any;
+
 }
