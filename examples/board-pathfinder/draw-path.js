@@ -15,14 +15,13 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var config = {
+        var board = new Board(this, {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
             width: 20,
             height: 16,
             // wrap: true
-        }
-        var board = new Board(this, config);
+        });
 
         // create chess       
         for (var i = 0; i < 80; i++) {

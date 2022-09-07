@@ -23,6 +23,8 @@ var GetTileXYAtDirection = function (chess, directions, distance, out) {
         this.getWrapTileXY(out.x, out.y, out);
         if ((out.x == null) || (out.y == null)) {
             out = null;
+        } else {
+            out.direction = directions;
         }
 
     } else {

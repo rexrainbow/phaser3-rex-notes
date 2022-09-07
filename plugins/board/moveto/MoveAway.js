@@ -29,7 +29,6 @@ var MoveAway = function (tileX, tileY, moveAwayMode) {
 
         if (i < (cnt - 1)) {
             // Neighbors
-            chessInfo.direction = i;
             var out = board.getNeighborTileXY(myTileXYZ, i, chessInfo);
             if (out === null) { // Invalid neighbor tile position
                 chessInfo.x = undefined;

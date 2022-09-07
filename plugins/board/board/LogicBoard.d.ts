@@ -3,7 +3,10 @@ import QuadGrid from '../grid/quad/Quad';
 import HexagonGrid from '../grid/hexagon/Hexagon';
 import Quad from '../grid/quad/Quad';
 import Hexagon from '../grid/hexagon/Hexagon';
-import { TileXYZType, TileXYType, WorldXYType } from '../types/Position';
+import {
+    TileXYZType, TileXYType, TileXYDirectionType,
+    WorldXYType
+} from '../types/Position';
 import Line from '../../utils/geom/line/Line';
 import Circle from '../../utils/geom/circle/Circle';
 import Rectangle from '../../utils/geom/rectangle/Rectangle';
@@ -295,12 +298,12 @@ declare class Board<ChessType = unknown> extends EE {
         srcTileXY: ChessType | TileXYType,
         direction: number,
         out?: TileXYType | true
-    ): TileXYType;
+    ): TileXYDirectionType;
     getNeighborTileXY(
         srcTileXY: ChessType | TileXYType,
         direction: number | number[] | string | null,
         out?: TileXYType[]
-    ): TileXYType | TileXYType[];
+    ): TileXYDirectionType | TileXYDirectionType[];
 
     getNeighborTileDirection(
         srcTile: ChessType | TileXYType,
@@ -324,12 +327,33 @@ declare class Board<ChessType = unknown> extends EE {
         tileB: ChessType | TileXYType
     ): boolean;
 
+    mapNeighbors(
+        tileXYZ: ChessType | TileXYType,
+        callback: (
+            tileXY: TileXYDirectionType,
+            index: number,
+            tileXYArray: TileXYDirectionType[]
+        ) => any,
+        scope?: object
+    ): any[];
+
+    mapNeighbors(
+        tileXYZ: ChessType | TileXYType,
+        distance: number,
+        callback: (
+            tileXY: TileXYDirectionType,
+            index: number,
+            tileXYArray: TileXYDirectionType[]
+        ) => any,
+        scope?: object
+    ): any[];
+
     getTileXYAtDirection(
         srcTileXY: ChessType | TileXYType,
         direction: number | number[] | string | null,
         distance: number | number[] | { start?: number, end?: number, step?: number },
         out?: TileXYType[]
-    ): TileXYType | TileXYType[];
+    ): TileXYDirectionType | TileXYDirectionType[];
 
     getRandomEmptyTileXY(
         tileZ: number | string,

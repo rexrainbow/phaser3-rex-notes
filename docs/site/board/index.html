@@ -7996,6 +7996,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#map-neighbor-tile-position" class="md-nav__link">
+    Map neighbor tile position
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9173,6 +9180,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#map-neighbor-tile-position" class="md-nav__link">
+    Map neighbor tile position
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9976,6 +9990,15 @@
 </code></pre></div></li>
 <li><code>tileA</code>, <code>tileB</code> : A chess object, or tile position <code>{x, y}</code>.</li>
 <li><code>areNeighbor</code> : Return <code>true</code> if <code>chessA</code> and <code>chessB</code> are neighbors.</li>
+</ul>
+<h4 id="map-neighbor-tile-position">Map neighbor tile position<a class="headerlink" href="#map-neighbor-tile-position" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">newArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">mapNeighbors</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">neighborTileXY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">neighborTileXYArray</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><code>chess</code> : A chess object, or tile position <code>{x,y,z}</code>.</li>
+<li><code>neighborTileXY</code> : Neighbor tile position <code>{x,y,direction}</code></li>
 </ul>
 <h3 id="tile-at-direction">Tile at direction<a class="headerlink" href="#tile-at-direction" title="Permanent link">&para;</a></h3>
 <ul>

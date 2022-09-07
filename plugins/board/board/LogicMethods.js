@@ -70,6 +70,7 @@ import GetNeighborChess from './neighbors/GetNeighborChess.js';
 import GetNeighborTileDirection from './neighbors/GetNeighborTileDirection.js';
 import GetNeighborChessDirection from './neighbors/GetNeighborChessDirection.js';
 import AreNeighbors from './neighbors/AreNeighbors.js';
+import MapNeighbors from './neighbors/MapNeighobrs.js';
 
 import RingToTileXYArray from './ring/RingToTileXYArray.js';
 import FilledRingToTileXYArray from './ring/FilledRingToTileXYArray.js';
@@ -152,6 +153,7 @@ export default {
     getNeighborTileDirection: GetNeighborTileDirection,
     getNeighborChessDirection: GetNeighborChessDirection,
     areNeighbors: AreNeighbors,
+    mapNeighbors: MapNeighbors,
 
     ringToTileXYArray: RingToTileXYArray,
     filledRingToTileXYArray: FilledRingToTileXYArray,

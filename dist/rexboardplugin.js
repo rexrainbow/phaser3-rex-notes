@@ -4604,14 +4604,18 @@
     var isNumberDistance = typeof distance === 'number';
 
     if (isNumberDirection && isNumberDistance) {
+      // Return a single tileXY
       out = this.grid.getTileXYAtDirection(srcTileXY.x, srcTileXY.y, directions, distance, out); // directions is a number, distance is a number, return a singl tileXY
 
       this.getWrapTileXY(out.x, out.y, out);
 
       if (out.x == null || out.y == null) {
         out = null;
+      } else {
+        out.direction = directions;
       }
     } else {
+      // Return an array of tileXY
       if (out === undefined) {
         out = [];
       }
@@ -4630,14 +4634,14 @@
           var step = GetValue$c(distance, 'step', endIdx >= startIdx ? 1 : -1);
 
           if (startIdx === endIdx) {
-            resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, endIdx); // return a single tileXY
+            resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, endIdx); // Return a single tileXY
 
             if (resultTileXY !== null) {
               out.push(resultTileXY);
             }
           } else if (startIdx < endIdx) {
             for (var i = startIdx; i <= endIdx; i += step) {
-              resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // return a single tileXY
+              resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // Return a single tileXY
 
               if (resultTileXY !== null) {
                 out.push(resultTileXY);
@@ -4645,7 +4649,7 @@
             }
           } else {
             for (var i = startIdx; i >= endIdx; i += step) {
-              resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // return a single tileXY
+              resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // Return a single tileXY
 
               if (resultTileXY !== null) {
                 out.push(resultTileXY);
@@ -4781,6 +4785,18 @@
 
   var AreNeighbors = function AreNeighbors(chessA, chessB) {
     return this.getNeighborChessDirection(chessA, chessB) !== null;
+  };
+
+  var MapNeighbors = function MapNeighbors(chess, distance, callback, scope) {
+    if (typeof distance !== 'number') {
+      scope = callback;
+      callback = distance;
+      distance = 1;
+    }
+
+    var tileXYArray = this.getTileXYAtDirection(chess, undefined, distance); // Array of {x,y,direction}
+
+    return tileXYArray.map(callback, scope);
   };
 
   var RingToTileXYArray$2 = function RingToTileXYArray(centerTileXY, radius, out) {
@@ -4994,6 +5010,7 @@
     getNeighborTileDirection: GetNeighborTileDirection$2,
     getNeighborChessDirection: GetNeighborChessDirection,
     areNeighbors: AreNeighbors,
+    mapNeighbors: MapNeighbors,
     ringToTileXYArray: RingToTileXYArray$2,
     filledRingToTileXYArray: FilledRingToTileXYArray,
     hasBlocker: HasBlocker,
@@ -5470,15 +5487,8 @@
         break;
     }
 
-    if (distance === 1) {
-      // Neighbor
-      out.x = tileX + deltaTileX;
-      out.y = tileY + deltaTileY;
-    } else {
-      out.x = tileX + distance * deltaTileX;
-      out.y = tileY + distance * deltaTileY;
-    }
-
+    out.x = tileX + distance * deltaTileX;
+    out.y = tileY + distance * deltaTileY;
     return out;
   };
 
@@ -9522,89 +9532,79 @@
       moveAwayMode = true;
     }
 
-    var myTileXYZ = this.chessData.tileXYZ,
-        chessInfo,
-        direction;
-    var directions = board.grid.allDirections; // Initial chess info of each neighbor and current tile position
+    var myTileXYZ = this.chessData.tileXYZ;
+    var directions = board.grid.allDirections; // Get tileXY and distance of each neighbor, and current tile position
 
-    if (globChessInfo.length !== directions.length + 1) {
-      globChessInfo.length = 0; // Neighbors
+    for (var i = 0, cnt = directions.length + 1; i < cnt; i++) {
+      var chessInfo = globChessInfo[i];
 
-      for (var i = 0, cnt = directions.length; i < cnt; i++) {
-        globChessInfo.push({
-          direction: i
-        });
-      } // current tile position
+      if (!chessInfo) {
+        chessInfo = {};
+        globChessInfo.push(chessInfo);
+      }
 
-
-      globChessInfo.push({
-        direction: null
-      });
-    } // Get tileXY and distance of each neighbor and current tile position
-
-
-    var out;
-
-    for (var i = 0, cnt = globChessInfo.length; i < cnt; i++) {
-      chessInfo = globChessInfo[i];
-      direction = chessInfo.direction;
-
-      if (direction === null) {
-        // Current tile position
-        chessInfo.x = myTileXYZ.x;
-        chessInfo.y = myTileXYZ.y;
-      } else {
-        // Neighobrs
-        out = board.getNeighborTileXY(myTileXYZ, direction, chessInfo);
+      if (i < cnt - 1) {
+        // Neighbors
+        var out = board.getNeighborTileXY(myTileXYZ, i, chessInfo);
 
         if (out === null) {
           // Invalid neighbor tile position
-          chessInfo.x = null;
-          chessInfo.y = null;
-          chessInfo.distance = null;
-          continue;
+          chessInfo.x = undefined;
+          chessInfo.y = undefined;
+          chessInfo.distance = undefined;
+        } else {
+          chessInfo.distance = board.getDistance(chessInfo, targetTileXY$2, true);
         }
+      } else {
+        // Current tile
+        chessInfo.direction = undefined;
+        chessInfo.x = myTileXYZ.x;
+        chessInfo.y = myTileXYZ.y;
+        chessInfo.distance = board.getDistance(chessInfo, targetTileXY$2, true);
       }
-
-      chessInfo.distance = board.getDistance(chessInfo, targetTileXY$2, true);
     }
 
-    var previousDirection = this.destinationDirection; // Sort chess info
+    globChessInfo.length = directions.length + 1; // Sort chess info
 
+    var previousDirection = this.destinationDirection;
     globChessInfo.sort(function (infoA, infoB) {
-      // Invalid tile position
-      if (infoA.distance === null) {
+      var distanceA = infoA.distance,
+          distanceB = infoB.distance; // Invalid tile position
+
+      if (distanceA === undefined) {
         return 1;
       }
 
-      if (infoB.distance === null) {
+      if (distanceB === undefined) {
         return -1;
       }
 
-      if (infoA.distance > infoB.distance) {
+      if (distanceA > distanceB) {
         return moveAwayMode ? -1 : 1;
       }
 
-      if (infoA.distance < infoB.distance) {
+      if (distanceA < distanceB) {
         return moveAwayMode ? 1 : -1;
       } // Equal-to case
-      // Diagonal
 
 
-      if (infoA.direction === previousDirection) {
+      var directionA = infoA.direction,
+          directionB = infoB.direction; // Diagonal
+
+      if (directionA === previousDirection) {
         return 1;
       }
 
-      if (infoB.direction === previousDirection) {
+      if (directionB === previousDirection) {
         return -1;
       } // Current tile position
 
 
-      if (infoA.direction === null) {
+      if (directionA === undefined) {
         return 1;
       }
 
-      if (infoB.direction === null) {
+      if (directionB === undefined) {
         return -1;
       }
 

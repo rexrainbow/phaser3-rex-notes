@@ -685,6 +685,26 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
    - `tileA`, `tileB` : A chess object, or tile position `{x, y}`.
    - `areNeighbor` : Return `true` if `chessA` and `chessB` are neighbors.
 
+#### Map neighbor tile position
+
+```javascript
+var newArray = board.mapNeighbors(chess, function(neighborTileXY, index, neighborTileXYArray){
+    return {};
+}, scope);
+```
+
+or
+
+```javascript
+var newArray = board.mapNeighbors(chess, distance, function(neighborTileXY, index, neighborTileXYArray){
+    return {};
+}, scope);
+```
+
+
+- `chess` : A chess object, or tile position `{x,y,z}`.
+- `neighborTileXY` : Neighbor tile position `{x,y,direction}`
+
 ### Tile at direction
 
 - Get tile position at 1 direction
