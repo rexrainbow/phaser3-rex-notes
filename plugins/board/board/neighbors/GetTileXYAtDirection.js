@@ -18,6 +18,7 @@ var GetTileXYAtDirection = function (chess, directions, distance, out) {
     var isNumberDirection = (typeof (directions) === 'number');
     var isNumberDistance = (typeof (distance) === 'number');
     if (isNumberDirection && isNumberDistance) {
+        // Return a single tileXY
         out = this.grid.getTileXYAtDirection(srcTileXY.x, srcTileXY.y, directions, distance, out);  // directions is a number, distance is a number, return a singl tileXY
         this.getWrapTileXY(out.x, out.y, out);
         if ((out.x == null) || (out.y == null)) {
@@ -25,6 +26,7 @@ var GetTileXYAtDirection = function (chess, directions, distance, out) {
         }
 
     } else {
+        // Return an array of tileXY
         if (out === undefined) {
             out = [];
         }
@@ -39,20 +41,20 @@ var GetTileXYAtDirection = function (chess, directions, distance, out) {
                 var startIdx = GetValue(distance, 'start', (endIdx > 0) ? 1 : -1);
                 var step = GetValue(distance, 'step', ((endIdx >= startIdx) ? 1 : -1));
                 if (startIdx === endIdx) {
-                    resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, endIdx); // return a single tileXY
+                    resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, endIdx); // Return a single tileXY
                     if (resultTileXY !== null) {
                         out.push(resultTileXY);
                     }
                 } else if (startIdx < endIdx) {
                     for (var i = startIdx; i <= endIdx; i += step) {
-                        resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // return a single tileXY
+                        resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // Return a single tileXY
                         if (resultTileXY !== null) {
                             out.push(resultTileXY);
                         }
                     }
                 } else {
                     for (var i = startIdx; i >= endIdx; i += step) {
-                        resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // return a single tileXY
+                        resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // Return a single tileXY
                         if (resultTileXY !== null) {
                             out.push(resultTileXY);
                         }

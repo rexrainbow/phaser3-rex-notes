@@ -22,13 +22,9 @@ var GetTileXAtDirection = function (tileX, tileY, direction, distance, out) {
             break;
     }
 
-    if (distance === 1) { // Neighbor
-        out.x = tileX + deltaTileX;
-        out.y = tileY + deltaTileY;
-    } else {
-        out.x = tileX + (distance * deltaTileX);
-        out.y = tileY + (distance * deltaTileY);
-    }
+    out.x = tileX + (distance * deltaTileX);
+    out.y = tileY + (distance * deltaTileY);
+
     return out;
 }
 

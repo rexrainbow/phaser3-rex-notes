@@ -16,77 +16,79 @@ var MoveAway = function (tileX, tileY, moveAwayMode) {
         moveAwayMode = true;
     }
 
-    var myTileXYZ = this.chessData.tileXYZ,
-        chessInfo, direction;
+    var myTileXYZ = this.chessData.tileXYZ;
     var directions = board.grid.allDirections;
-    // Initial chess info of each neighbor and current tile position
-    if (globChessInfo.length !== (directions.length + 1)) {
-        globChessInfo.length = 0;
-        // Neighbors
-        for (var i = 0, cnt = directions.length; i < cnt; i++) {
-            globChessInfo.push({
-                direction: i
-            });
+
+    // Get tileXY and distance of each neighbor, and current tile position
+    for (var i = 0, cnt = directions.length + 1; i < cnt; i++) {
+        var chessInfo = globChessInfo[i];
+        if (!chessInfo) {
+            chessInfo = {};
+            globChessInfo.push(chessInfo);
         }
-        // current tile position
-        globChessInfo.push({
-            direction: null
-        });
-    }
-    // Get tileXY and distance of each neighbor and current tile position
-    var out;
-    for (var i = 0, cnt = globChessInfo.length; i < cnt; i++) {
-        chessInfo = globChessInfo[i];
-        direction = chessInfo.direction;
-        if (direction === null) { // Current tile position
+
+        if (i < (cnt - 1)) {
+            // Neighbors
+            chessInfo.direction = i;
+            var out = board.getNeighborTileXY(myTileXYZ, i, chessInfo);
+            if (out === null) { // Invalid neighbor tile position
+                chessInfo.x = undefined;
+                chessInfo.y = undefined;
+                chessInfo.distance = undefined;
+            } else {
+                chessInfo.distance = board.getDistance(chessInfo, targetTileXY, true);
+            }
+        } else {
+            // Current tile
+            chessInfo.direction = undefined;
             chessInfo.x = myTileXYZ.x;
             chessInfo.y = myTileXYZ.y;
-        } else { // Neighobrs
-            out = board.getNeighborTileXY(myTileXYZ, direction, chessInfo);
-            if (out === null) { // Invalid neighbor tile position
-                chessInfo.x = null;
-                chessInfo.y = null;
-                chessInfo.distance = null;
-                continue;
-            }
+            chessInfo.distance = board.getDistance(chessInfo, targetTileXY, true);
         }
-        chessInfo.distance = board.getDistance(chessInfo, targetTileXY, true);
+
     }
-    var previousDirection = this.destinationDirection;
+    globChessInfo.length = directions.length + 1;
+
     // Sort chess info
+    var previousDirection = this.destinationDirection;
     globChessInfo.sort(function (infoA, infoB) {
+        var distanceA = infoA.distance,
+            distanceB = infoB.distance;
         // Invalid tile position
-        if (infoA.distance === null) {
+        if (distanceA === undefined) {
             return 1;
         }
-        if (infoB.distance === null) {
+        if (distanceB === undefined) {
             return -1;
         }
 
-        if (infoA.distance > infoB.distance) {
+        if (distanceA > distanceB) {
             return (moveAwayMode) ? -1 : 1;
         }
-        if (infoA.distance < infoB.distance) {
+        if (distanceA < distanceB) {
             return (moveAwayMode) ? 1 : -1;
         }
 
         // Equal-to case
+        var directionA = infoA.direction,
+            directionB = infoB.direction;
         // Diagonal
-        if (infoA.direction === previousDirection) {
+        if (directionA === previousDirection) {
             return 1;
         }
-        if (infoB.direction === previousDirection) {
+        if (directionB === previousDirection) {
             return -1;
         }
         // Current tile position
-        if (infoA.direction === null) {
+        if (directionA === undefined) {
             return 1;
         }
-        if (infoB.direction === null) {
+        if (directionB === undefined) {
             return -1;
         }
         return 0;
     });
+
     // Try move to neighbor, or current tile position
     for (var i = 0, cnt = globChessInfo.length; i < cnt; i++) {
         chessInfo = globChessInfo[i];
