@@ -8,6 +8,7 @@ Move chess towards target position with a steady speed, chess behavior of Board 
 ## Live demos
 
 - [Push](https://codepen.io/rexrainbow/pen/rNNqpPg)
+- [Follow chess](https://codepen.io/rexrainbow/pen/RwyWjJr)
 
 ## Usage
 

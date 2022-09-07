@@ -9993,7 +9993,12 @@
 </ul>
 <h4 id="map-neighbor-tile-position">Map neighbor tile position<a class="headerlink" href="#map-neighbor-tile-position" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">newArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">mapNeighbors</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">neighborTileXY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">neighborTileXYArray</span><span class="p">){</span>
-
+    <span class="k">return</span> <span class="p">{};</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">newArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">mapNeighbors</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">distance</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">neighborTileXY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">neighborTileXYArray</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">{};</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 <ul>
