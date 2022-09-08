@@ -1132,11 +1132,26 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
 
 ### Bounds
 
+#### Board bounds
+
+- Get a rectangle of all tiles
+    ```javascript
+    var rectangle = board.getBoardBounds();
+    // var out = board.getGridBounds(out);
+    ```
+    - `rectangle` : [Rectangle object](geom-rectangle.md).
+- Draw rectangle on [graphics object](graphics.md#lines)
+    ```javascript
+    graphics.strokeRectShape(rectangle);
+    ```
+
+#### Grid bounds
+
 - Get a rectangle of a tile
     ```javascript
-    var rectangle = board.getTileBounds(tileX, tileY);
-    // var out = board.getTileBounds(tileX, tileY, out);
-    // var rectangle = board.getTileBounds(chess, out);  // chess or tileXY
+    var rectangle = board.getGridBounds(tileX, tileY);
+    // var out = board.getGridBounds(tileX, tileY, out);
+    // var rectangle = board.getGridBounds(chess, out);  // chess or tileXY
     ```
     - `rectangle` : [Rectangle object](geom-rectangle.md).
 - Draw rectangle on [graphics object](graphics.md#lines)

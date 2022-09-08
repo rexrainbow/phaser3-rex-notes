@@ -25,10 +25,10 @@ var ForEachCullTileXY = function (callback, scope, config) {
 
     this.forEachTileXY(function (tileXY, board) {
         // Center position in world bounds
-        var worldXY = this.tileXYToWorldXY(tileXY.x, tileXY.y, true);
+        var worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
         if (!ViewportBounds.contains(worldXY.x, worldXY.y)) {
             // Tile bounds across world bounds
-            var tileBounds = this.getGridBounds(tileXY.x, tileXY.y, true);
+            var tileBounds = board.getGridBounds(tileXY.x, tileXY.y, true);
             if (ContainsPoints(ViewportBounds, tileBounds) === 0) {
                 return;
             }
@@ -41,7 +41,7 @@ var ForEachCullTileXY = function (callback, scope, config) {
             isBreak = callback(tileXY, board);
         }
         return isBreak;
-    }, this, order);
+    }, undefined, order);
 
     return this;
 }

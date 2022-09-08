@@ -21,8 +21,8 @@ class Demo extends Phaser.Scene {
         var graphics = this.add.graphics();
 
         var board = this.rexBoard.add.board({
-            grid: getHexagonGrid(this),
-            // grid: getQuadGrid(this),
+            // grid: getHexagonGrid(this),
+            grid: getQuadGrid(this),
             width: 4,
             height: 4
         })
@@ -32,11 +32,16 @@ class Demo extends Phaser.Scene {
                     .lineStyle(1, COLOR_DARK, 1)
                     .strokePoints(points, true);
 
-                var bounds = board.getTileBounds(tileXY.x, tileXY.y, true);
+                var bounds = board.getGridBounds(tileXY.x, tileXY.y, true);
                 graphics
                     .lineStyle(1, 0xff0000, 1)
                     .strokeRectShape(bounds);
             }, this);
+
+        var bounds = board.getBoardBounds(true);
+        graphics
+            .lineStyle(1, 0x556B2F, 1)
+            .strokeRectShape(bounds);
 
     }
 

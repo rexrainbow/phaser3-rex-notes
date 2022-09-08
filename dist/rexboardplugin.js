@@ -1656,204 +1656,6 @@
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * Calculate the distance between two sets of coordinates (points).
-   *
-   * @function Phaser.Math.Distance.Between
-   * @since 3.0.0
-   *
-   * @param {number} x1 - The x coordinate of the first point.
-   * @param {number} y1 - The y coordinate of the first point.
-   * @param {number} x2 - The x coordinate of the second point.
-   * @param {number} y2 - The y coordinate of the second point.
-   *
-   * @return {number} The distance between each point.
-   */
-  var DistanceBetween$3 = function DistanceBetween(x1, y1, x2, y2) {
-    var dx = x1 - x2;
-    var dy = y1 - y2;
-    return Math.sqrt(dx * dx + dy * dy);
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * Calculates a linear (interpolation) value over t.
-   *
-   * @function Phaser.Math.Linear
-   * @since 3.0.0
-   *
-   * @param {number} p0 - The first point.
-   * @param {number} p1 - The second point.
-   * @param {number} t - The percentage between p0 and p1 to return, represented as a number between 0 and 1.
-   *
-   * @return {number} The step t% of the way between p0 and p1.
-   */
-  var Linear = function Linear(p0, p1, t) {
-    return (p1 - p0) * t + p0;
-  };
-
-  var AreTileXYEqual = function AreTileXYEqual(tileA, tileB) {
-    return tileA && tileB && tileA.x === tileB.x && tileA.y === tileB.y;
-  };
-
-  var LineToTileXYArray = function LineToTileXYArray(startX, startY, endX, endY, out) {
-    if (typeof startX !== 'number') {
-      var line = startX;
-      out = startY;
-      startX = line.x1;
-      startY = line.y1;
-      endX = line.x2;
-      endY = line.y2;
-    }
-
-    if (out === undefined) {
-      out = [];
-    }
-
-    var totalDistance = DistanceBetween$3(startX, startY, endX, endY);
-    var gridSize = Math.min(this.grid.cellWidth, this.grid.cellHeight);
-    var quantity = Math.ceil(totalDistance / (gridSize / 4)),
-        t;
-    var worldX, worldY;
-    var preTileXY, tileXY;
-
-    for (var i = 0; i <= quantity; i++) {
-      t = i / quantity;
-      worldX = Linear(startX, endX, t);
-      worldY = Linear(startY, endY, t);
-      tileXY = this.worldXYToTileXY(worldX, worldY);
-
-      if (!this.contains(tileXY.x, tileXY.y)) {
-        continue;
-      }
-
-      if (preTileXY && AreTileXYEqual(preTileXY, tileXY)) {
-        continue;
-      }
-
-      out.push(tileXY);
-      preTileXY = tileXY;
-    }
-
-    return out;
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-
-  /**
-   * Check to see if the Circle contains the given x / y coordinates.
-   *
-   * @function Phaser.Geom.Circle.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Circle} circle - The Circle to check.
-   * @param {number} x - The x coordinate to check within the circle.
-   * @param {number} y - The y coordinate to check within the circle.
-   *
-   * @return {boolean} True if the coordinates are within the circle, otherwise false.
-   */
-  var Contains$5 = function Contains(circle, x, y) {
-    //  Check if x/y are within the bounds first
-    if (circle.radius > 0 && x >= circle.left && x <= circle.right && y >= circle.top && y <= circle.bottom) {
-      var dx = (circle.x - x) * (circle.x - x);
-      var dy = (circle.y - y) * (circle.y - y);
-      return dx + dy <= circle.radius * circle.radius;
-    } else {
-      return false;
-    }
-  };
-
-  var CircleToTileXYArray = function CircleToTileXYArray(circle, out) {
-    return this.shapeToTileXYArray(circle, Contains$5, out);
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-
-  /**
-   * Check to see if the Ellipse contains the given x / y coordinates.
-   *
-   * @function Phaser.Geom.Ellipse.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
-   * @param {number} x - The x coordinate to check within the ellipse.
-   * @param {number} y - The y coordinate to check within the ellipse.
-   *
-   * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
-   */
-  var Contains$4 = function Contains(ellipse, x, y) {
-    if (ellipse.width <= 0 || ellipse.height <= 0) {
-      return false;
-    } //  Normalize the coords to an ellipse with center 0,0 and a radius of 0.5
-
-
-    var normx = (x - ellipse.x) / ellipse.width;
-    var normy = (y - ellipse.y) / ellipse.height;
-    normx *= normx;
-    normy *= normy;
-    return normx + normy < 0.25;
-  };
-
-  var EllipseToTileXYArray = function EllipseToTileXYArray(ellipse, out) {
-    return this.shapeToTileXYArray(ellipse, Contains$4, out);
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-  // Checks whether the x and y coordinates are contained within this polygon.
-  //  Adapted from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html by Jonas Raoni Soares Silva
-
-  /**
-   * Checks if a point is within the bounds of a Polygon.
-   *
-   * @function Phaser.Geom.Polygon.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Polygon} polygon - The Polygon to check against.
-   * @param {number} x - The X coordinate of the point to check.
-   * @param {number} y - The Y coordinate of the point to check.
-   *
-   * @return {boolean} `true` if the point is within the bounds of the Polygon, otherwise `false`.
-   */
-  var Contains$3 = function Contains(polygon, x, y) {
-    var inside = false;
-
-    for (var i = -1, j = polygon.points.length - 1; ++i < polygon.points.length; j = i) {
-      var ix = polygon.points[i].x;
-      var iy = polygon.points[i].y;
-      var jx = polygon.points[j].x;
-      var jy = polygon.points[j].y;
-
-      if ((iy <= y && y < jy || jy <= y && y < iy) && x < (jx - ix) * (y - iy) / (jy - iy) + ix) {
-        inside = !inside;
-      }
-    }
-
-    return inside;
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
   //  Taken from klasse by mattdesl https://github.com/mattdesl/klasse
@@ -2072,7 +1874,7 @@
    *
    * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
    */
-  var Contains$2 = function Contains(rect, x, y) {
+  var Contains$5 = function Contains(rect, x, y) {
     if (rect.width <= 0 || rect.height <= 0) {
       return false;
     }
@@ -3386,7 +3188,7 @@
      * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
      */
     contains: function contains(x, y) {
-      return Contains$2(this, x, y);
+      return Contains$5(this, x, y);
     },
 
     /**
@@ -3742,6 +3544,260 @@
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
   /**
+   * Creates a new Rectangle or repositions and/or resizes an existing Rectangle so that it encompasses the two given Rectangles, i.e. calculates their union.
+   *
+   * @function Phaser.Geom.Rectangle.Union
+   * @since 3.0.0
+   *
+   * @generic {Phaser.Geom.Rectangle} O - [out,$return]
+   *
+   * @param {Phaser.Geom.Rectangle} rectA - The first Rectangle to use.
+   * @param {Phaser.Geom.Rectangle} rectB - The second Rectangle to use.
+   * @param {Phaser.Geom.Rectangle} [out] - The Rectangle to store the union in.
+   *
+   * @return {Phaser.Geom.Rectangle} The modified `out` Rectangle, or a new Rectangle if none was provided.
+   */
+
+  var Union$1 = function Union(rectA, rectB, out) {
+    if (out === undefined) {
+      out = new Rectangle$2();
+    } //  Cache vars so we can use one of the input rects as the output rect
+
+
+    var x = Math.min(rectA.x, rectB.x);
+    var y = Math.min(rectA.y, rectB.y);
+    var w = Math.max(rectA.right, rectB.right) - x;
+    var h = Math.max(rectA.bottom, rectB.bottom) - y;
+    return out.setTo(x, y, w, h);
+  };
+
+  var GetBoardBounds = function GetBoardBounds(out) {
+    if (out === undefined) {
+      out = new Rectangle$2();
+    } else if (out === true) {
+      out = globalBounds$2;
+    }
+
+    var isFirstTile = true;
+    this.forEachTileXY(function (tileXY, board) {
+      var tileBounds = board.getGridBounds(tileXY.x, tileXY.y, true);
+
+      if (isFirstTile) {
+        out.setTo(tileBounds.x, tileBounds.y, tileBounds.width, tileBounds.height);
+        isFirstTile = false;
+      } else {
+        out = Union$1(out, tileBounds, out);
+      }
+    });
+    return out;
+  };
+
+  var globalBounds$2 = new Rectangle$2();
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * Calculate the distance between two sets of coordinates (points).
+   *
+   * @function Phaser.Math.Distance.Between
+   * @since 3.0.0
+   *
+   * @param {number} x1 - The x coordinate of the first point.
+   * @param {number} y1 - The y coordinate of the first point.
+   * @param {number} x2 - The x coordinate of the second point.
+   * @param {number} y2 - The y coordinate of the second point.
+   *
+   * @return {number} The distance between each point.
+   */
+  var DistanceBetween$3 = function DistanceBetween(x1, y1, x2, y2) {
+    var dx = x1 - x2;
+    var dy = y1 - y2;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * Calculates a linear (interpolation) value over t.
+   *
+   * @function Phaser.Math.Linear
+   * @since 3.0.0
+   *
+   * @param {number} p0 - The first point.
+   * @param {number} p1 - The second point.
+   * @param {number} t - The percentage between p0 and p1 to return, represented as a number between 0 and 1.
+   *
+   * @return {number} The step t% of the way between p0 and p1.
+   */
+  var Linear = function Linear(p0, p1, t) {
+    return (p1 - p0) * t + p0;
+  };
+
+  var AreTileXYEqual = function AreTileXYEqual(tileA, tileB) {
+    return tileA && tileB && tileA.x === tileB.x && tileA.y === tileB.y;
+  };
+
+  var LineToTileXYArray = function LineToTileXYArray(startX, startY, endX, endY, out) {
+    if (typeof startX !== 'number') {
+      var line = startX;
+      out = startY;
+      startX = line.x1;
+      startY = line.y1;
+      endX = line.x2;
+      endY = line.y2;
+    }
+
+    if (out === undefined) {
+      out = [];
+    }
+
+    var totalDistance = DistanceBetween$3(startX, startY, endX, endY);
+    var gridSize = Math.min(this.grid.cellWidth, this.grid.cellHeight);
+    var quantity = Math.ceil(totalDistance / (gridSize / 4)),
+        t;
+    var worldX, worldY;
+    var preTileXY, tileXY;
+
+    for (var i = 0; i <= quantity; i++) {
+      t = i / quantity;
+      worldX = Linear(startX, endX, t);
+      worldY = Linear(startY, endY, t);
+      tileXY = this.worldXYToTileXY(worldX, worldY);
+
+      if (!this.contains(tileXY.x, tileXY.y)) {
+        continue;
+      }
+
+      if (preTileXY && AreTileXYEqual(preTileXY, tileXY)) {
+        continue;
+      }
+
+      out.push(tileXY);
+      preTileXY = tileXY;
+    }
+
+    return out;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+
+  /**
+   * Check to see if the Circle contains the given x / y coordinates.
+   *
+   * @function Phaser.Geom.Circle.Contains
+   * @since 3.0.0
+   *
+   * @param {Phaser.Geom.Circle} circle - The Circle to check.
+   * @param {number} x - The x coordinate to check within the circle.
+   * @param {number} y - The y coordinate to check within the circle.
+   *
+   * @return {boolean} True if the coordinates are within the circle, otherwise false.
+   */
+  var Contains$4 = function Contains(circle, x, y) {
+    //  Check if x/y are within the bounds first
+    if (circle.radius > 0 && x >= circle.left && x <= circle.right && y >= circle.top && y <= circle.bottom) {
+      var dx = (circle.x - x) * (circle.x - x);
+      var dy = (circle.y - y) * (circle.y - y);
+      return dx + dy <= circle.radius * circle.radius;
+    } else {
+      return false;
+    }
+  };
+
+  var CircleToTileXYArray = function CircleToTileXYArray(circle, out) {
+    return this.shapeToTileXYArray(circle, Contains$4, out);
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+
+  /**
+   * Check to see if the Ellipse contains the given x / y coordinates.
+   *
+   * @function Phaser.Geom.Ellipse.Contains
+   * @since 3.0.0
+   *
+   * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
+   * @param {number} x - The x coordinate to check within the ellipse.
+   * @param {number} y - The y coordinate to check within the ellipse.
+   *
+   * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
+   */
+  var Contains$3 = function Contains(ellipse, x, y) {
+    if (ellipse.width <= 0 || ellipse.height <= 0) {
+      return false;
+    } //  Normalize the coords to an ellipse with center 0,0 and a radius of 0.5
+
+
+    var normx = (x - ellipse.x) / ellipse.width;
+    var normy = (y - ellipse.y) / ellipse.height;
+    normx *= normx;
+    normy *= normy;
+    return normx + normy < 0.25;
+  };
+
+  var EllipseToTileXYArray = function EllipseToTileXYArray(ellipse, out) {
+    return this.shapeToTileXYArray(ellipse, Contains$3, out);
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+  // Checks whether the x and y coordinates are contained within this polygon.
+  //  Adapted from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html by Jonas Raoni Soares Silva
+
+  /**
+   * Checks if a point is within the bounds of a Polygon.
+   *
+   * @function Phaser.Geom.Polygon.Contains
+   * @since 3.0.0
+   *
+   * @param {Phaser.Geom.Polygon} polygon - The Polygon to check against.
+   * @param {number} x - The X coordinate of the point to check.
+   * @param {number} y - The Y coordinate of the point to check.
+   *
+   * @return {boolean} `true` if the point is within the bounds of the Polygon, otherwise `false`.
+   */
+  var Contains$2 = function Contains(polygon, x, y) {
+    var inside = false;
+
+    for (var i = -1, j = polygon.points.length - 1; ++i < polygon.points.length; j = i) {
+      var ix = polygon.points[i].x;
+      var iy = polygon.points[i].y;
+      var jx = polygon.points[j].x;
+      var jy = polygon.points[j].y;
+
+      if ((iy <= y && y < jy || jy <= y && y < iy) && x < (jx - ix) * (y - iy) / (jy - iy) + ix) {
+        inside = !inside;
+      }
+    }
+
+    return inside;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+  /**
    * Calculates the bounding AABB rectangle of a polygon.
    *
    * @function Phaser.Geom.Polygon.GetAABB
@@ -3783,13 +3839,13 @@
 
   var PolygonToTileXYArray = function PolygonToTileXYArray(polygon, out) {
     globSearchRectangle = GetAABB(polygon, globSearchRectangle);
-    return this.shapeToTileXYArray(polygon, Contains$3, globSearchRectangle, out);
+    return this.shapeToTileXYArray(polygon, Contains$2, globSearchRectangle, out);
   };
 
   var globSearchRectangle;
 
   var RectangleToTileXYArray = function RectangleToTileXYArray(rectangle, out) {
-    return this.shapeToTileXYArray(rectangle, Contains$2, out);
+    return this.shapeToTileXYArray(rectangle, Contains$5, out);
   };
 
   /**
@@ -4983,6 +5039,7 @@
     gridAlign: GridAlign,
     getGridPoints: GetGridPoints$2,
     getGridBounds: GetGridBounds,
+    getBoardBounds: GetBoardBounds,
     lineToTileXYArray: LineToTileXYArray,
     circleToTileXYArray: CircleToTileXYArray,
     ellipseToTileXYArray: EllipseToTileXYArray,
@@ -9026,11 +9083,11 @@
     ViewportBounds.centerY = camera.centerY + camera.scrollY;
     this.forEachTileXY(function (tileXY, board) {
       // Center position in world bounds
-      var worldXY = this.tileXYToWorldXY(tileXY.x, tileXY.y, true);
+      var worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
 
       if (!ViewportBounds.contains(worldXY.x, worldXY.y)) {
         // Tile bounds across world bounds
-        var tileBounds = this.getGridBounds(tileXY.x, tileXY.y, true);
+        var tileBounds = board.getGridBounds(tileXY.x, tileXY.y, true);
 
         if (ContainsPoints(ViewportBounds, tileBounds) === 0) {
           return;
@@ -9046,7 +9103,7 @@
       }
 
       return isBreak;
-    }, this, order);
+    }, undefined, order);
     return this;
   };
 
