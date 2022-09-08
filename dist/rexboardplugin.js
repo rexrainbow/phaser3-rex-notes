@@ -1641,6 +1641,18 @@
     return this.grid.getGridPoints(tileX, tileY, points);
   };
 
+  var GetGridBounds = function GetGridBounds(tileX, tileY, out) {
+    if (tileX && typeof tileX !== 'number') {
+      out = tileY;
+      var tileXY = this.chessToTileXYZ(tileX); // tileX is a Chess or TileXY
+
+      tileX = tileXY.x;
+      tileY = tileXY.y;
+    }
+
+    return this.grid.getBounds(tileX, tileY, out);
+  };
+
   /**
    * @author       Richard Davey <rich@photonstorm.com>
    * @copyright    2019 Photon Storm Ltd.
@@ -4970,6 +4982,7 @@
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
     getGridPoints: GetGridPoints$2,
+    getGridBounds: GetGridBounds,
     lineToTileXYArray: LineToTileXYArray,
     circleToTileXYArray: CircleToTileXYArray,
     ellipseToTileXYArray: EllipseToTileXYArray,
@@ -5824,6 +5837,23 @@
   var globWorldXY$2 = {};
   var globPoints$1 = InitPoints(4);
 
+  var GetBounds$2 = function GetBounds(tileX, tileY, out) {
+    if (out === undefined) {
+      out = new Rectangle$2();
+    } else if (out === true) {
+      out = globalBounds$1;
+    }
+
+    var worldXY = this.getWorldXY(tileX, tileY, true);
+    out.x = worldXY.x - this.width * 0.5;
+    out.y = worldXY.y - this.height * 0.5;
+    out.width = this.width;
+    out.height = this.height;
+    return out;
+  };
+
+  var globalBounds$1 = new Rectangle$2();
+
   var RingToTileXYArray$1 = function RingToTileXYArray(centerTileXY, radius, out) {
     if (out === undefined) {
       out = [];
@@ -5920,6 +5950,7 @@
     directionBetween: DirectionBetween$1,
     directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints$1,
+    getBounds: GetBounds$2,
     ringToTileXYArray: RingToTileXYArray$1
   };
   Object.assign(QuadGrid.prototype, methods$5);
@@ -6803,6 +6834,23 @@
   var globWorldXY = {};
   var globSize = {};
 
+  var GetBounds$1 = function GetBounds(tileX, tileY, out) {
+    if (out === undefined) {
+      out = new Rectangle$2();
+    } else if (out === true) {
+      out = globalBounds;
+    }
+
+    var worldXY = this.getWorldXY(tileX, tileY, true);
+    out.x = worldXY.x - this.width * 0.5;
+    out.y = worldXY.y - this.height * 0.5;
+    out.width = this.width;
+    out.height = this.height;
+    return out;
+  };
+
+  var globalBounds = new Rectangle$2();
+
   var RingToTileXYArray = function RingToTileXYArray(centerTileXY, radius, out) {
     if (out === undefined) {
       out = [];
@@ -6914,6 +6962,7 @@
     directionBetween: DirectionBetween,
     directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints,
+    getBounds: GetBounds$1,
     ringToTileXYArray: RingToTileXYArray
   };
   Object.assign(HexagonGrid.prototype, methods$3);
@@ -8955,6 +9004,67 @@
     return this;
   };
 
+  var ForEachCullTileXY = function ForEachCullTileXY(callback, scope, config) {
+    var order;
+
+    if (typeof config === 'number') {
+      order = config;
+      config = undefined;
+    }
+
+    if (config === undefined) {
+      config = {};
+    }
+
+    order = GetValue$c(config, 'order', order);
+    var camera = GetValue$c(config, 'camera', this.scene.cameras.main);
+    var paddingX = GetValue$c(config, 'paddingX', 1);
+    var paddingY = GetValue$c(config, 'paddingY', 1);
+    ViewportBounds.width = (camera.width + paddingX * 2) / camera.zoomX;
+    ViewportBounds.height = (camera.height + paddingY * 2) / camera.zoomY;
+    ViewportBounds.centerX = camera.centerX + camera.scrollX;
+    ViewportBounds.centerY = camera.centerY + camera.scrollY;
+    this.forEachTileXY(function (tileXY, board) {
+      // Center position in world bounds
+      var worldXY = this.tileXYToWorldXY(tileXY.x, tileXY.y, true);
+
+      if (!ViewportBounds.contains(worldXY.x, worldXY.y)) {
+        // Tile bounds across world bounds
+        var tileBounds = this.getGridBounds(tileXY.x, tileXY.y, true);
+
+        if (ContainsPoints(ViewportBounds, tileBounds) === 0) {
+          return;
+        }
+      }
+
+      var isBreak;
+
+      if (scope) {
+        isBreak = callback.call(scope, tileXY, board);
+      } else {
+        isBreak = callback(tileXY, board);
+      }
+
+      return isBreak;
+    }, this, order);
+    return this;
+  };
+
+  var ContainsPoints = function ContainsPoints(rectA, rectB) {
+    var result = 0;
+    var top = rectB.top,
+        bottom = rectB.bottom,
+        left = rectB.left,
+        right = rectB.right;
+    result += rectA.contains(left, top) ? 1 : 0;
+    result += rectA.contains(left, bottom) ? 1 : 0;
+    result += rectA.contains(right, top) ? 1 : 0;
+    result += rectA.contains(right, bottom) ? 1 : 0;
+    return result;
+  };
+
+  var ViewportBounds = new Rectangle$2();
+
   var Board = /*#__PURE__*/function (_LogicBoard) {
     _inherits(Board, _LogicBoard);
 
@@ -8986,7 +9096,8 @@
   }(Board$1);
 
   var methods$2 = {
-    setInteractive: SetInteractive$1
+    setInteractive: SetInteractive$1,
+    forEachCullTileXY: ForEachCullTileXY
   };
   Object.assign(Board.prototype, methods$2);
 

@@ -2476,14 +2476,10 @@
     out.setTo(x, y, width, height);
 
     if (camera) {
-      var offsetX = camera.scrollX;
-      var offsetY = camera.scrollY;
-      var scaleX = 1 / camera.zoomX;
-      var scaleY = 1 / camera.zoomY;
-      out.width *= scaleX;
-      out.height *= scaleY;
-      out.centerX = camera.centerX + offsetX;
-      out.centerY = camera.centerY + offsetY;
+      out.width /= camera.zoomX;
+      out.height /= camera.zoomY;
+      out.centerX = camera.centerX + camera.scrollX;
+      out.centerY = camera.centerY + camera.scrollY;
     }
 
     return out;

@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
             width: boardWidth,
             height: boardHeight,
             // wrap: true
-        });
+        })
 
         // create chess       
         for (var i = 0; i < 1000; i++) {
@@ -78,7 +78,20 @@ class Demo extends Phaser.Scene {
             })
 
         var t1 = window.performance.now();
-        console.log(`Initial time = ${t1 - t0} ms`)
+        console.log(`Initial time = ${t1 - t0} ms`);
+
+        var camera = this.cameras.main;
+        camera.setZoom(0.75).setScroll(300, 300);
+
+        var lastScrollX, lastScrollY, lastZoom;
+        this.events.on('postupdate', function () {
+            if ((camera.scrollX !== lastScrollX) || (camera.scrollY !== lastScrollY) || (camera.zoom !== lastZoom)) {
+                board.drawGrids();
+                lastScrollX = camera.scrollX;
+                lastScrollY = camera.scrollY;
+                lastZoom = camera.zoom;
+            }
+        });
     }
 }
 
@@ -95,7 +108,7 @@ class Board extends RexPlugins.Board.Board {
                 alpha: 1
             }
         })
-        this.gridsTexture = scene.add.renderTexture(0, 0, 800, 600)
+        this.gridsTexture = scene.add.renderTexture(0, 0, 1, 1)
             .setDepth(-1);
 
         // Graphics and rendertexture for path
@@ -106,41 +119,47 @@ class Board extends RexPlugins.Board.Board {
                 alpha: 1
             }
         })
-        this.pathTexture = scene.add.renderTexture(0, 0, 800, 600)
-            .setDepth(2);
 
         this.pathFinder = scene.rexBoard.add.pathFinder({
             occupiedTest: true,
             pathMode: 'A*',
         });
-
-        this.drawGrids();
     }
 
     drawGrids() {
-        this.forEachTileXY(function (tileXY, board) {
+        this.gridsGraphics.clear();
+        var totalVisibleGrids = 0;
+        this.forEachCullTileXY(function (tileXY, board) {
             var points = board.getGridPoints(tileXY.x, tileXY.y, true);
             this.gridsGraphics.strokePoints(points, true);
-        }, this)
-        this.gridsTexture
-            .clear()
-            .draw(this.gridsGraphics);
-        this.gridsGraphics.clear()
+            totalVisibleGrids++;
+        }, this);
+        console.log(totalVisibleGrids);
+
+        //var camera = this.scene.cameras.main;
+        //this.gridsTexture
+        //    .setSize(camera.width / camera.zoomX, camera.height / camera.zoomY)
+        //    .setPosition(camera.scrollX, camera.scrollY)
+        //this.gridsTexture.camera.setScroll(camera.scrollX, camera.scrollY);
+        ////this.gridsTexture.camera.setZoom(camera.zoomX, camera.zoomY);
+        //this.gridsTexture
+        //    .clear()
+        //    .draw(this.gridsGraphics);
+        //this.gridsGraphics.clear();
+
         return this;
     }
 
     clearPath() {
-        this.pathTexture.clear();
+        this.pathGraphics.clear()
         return this;
     }
 
     drawPath(tileXYArray) {
         this.pathGraphics
-            .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
-        this.pathTexture
             .clear()
-            .draw(this.pathGraphics);
-        this.pathGraphics.clear();
+            .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
+
         return this;
     }
 

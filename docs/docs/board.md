@@ -369,6 +369,35 @@ for (var tileY = 0; tileY < board.height; tileY++) {
 
 - `board.width` , `board.height` : Board width/height in tiles.
 
+### For each tile in viewport of a camera
+
+```javascript
+board.forEachCullTileXY(function(tileXY, board) {
+    // var tileX = tileXY.x;
+    // var tileY = tileXY.y;
+}, scope);
+```
+
+```javascript
+board.forEachCullTileXY(function(tileXY, board) {
+    // var tileX = tileXY.x;
+    // var tileY = tileXY.y;
+}, scope, {
+    camera: board.scene.cameras.main,
+    paddingX: 1,
+    paddingY: 1,
+    order: 0,
+});
+```
+
+- `camera` : Camera of scene. Default value is the main camera.
+- `paddingX` , `paddingY` : Padding space of camera's viewport
+- `order` :
+    - `0`, or `'x+'` : Increasing x, increasing y.
+    - `1`, or `'x-'` : Decreasing x, increasing y.
+    - `2`, or `'y+'` : Increasing y, increasing x.
+    - `3`, or `'y-'` : Decreasing y, increasing x.
+
 ### Tile position -> world position
 
 ```javascript
@@ -1095,10 +1124,24 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     // var out = board.getGridPoints(tileX, tileY, out);
     // var points = board.getGridPoints(chess, out);  // chess or tileXY
     ```
-    - `points` :　World position `{x, y}`.
+    - `points` :　Array of world position `{x, y}`.
 - Draw grid polygon on [graphics object](graphics.md#lines)
     ```javascript
     graphics.strokePoints(points, true);
+    ```
+
+### Bounds
+
+- Get a rectangle of a tile
+    ```javascript
+    var rectangle = board.getTileBounds(tileX, tileY);
+    // var out = board.getTileBounds(tileX, tileY, out);
+    // var rectangle = board.getTileBounds(chess, out);  // chess or tileXY
+    ```
+    - `rectangle` : [Rectangle object](geom-rectangle.md).
+- Draw rectangle on [graphics object](graphics.md#lines)
+    ```javascript
+    graphics.strokeRectShape(rectangle);
     ```
 
 ### Get Board

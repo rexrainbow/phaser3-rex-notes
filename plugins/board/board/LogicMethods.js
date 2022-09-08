@@ -25,6 +25,7 @@ import AngleSnapToDirection from './worldposition/AngleSnapToDirection.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
 import GetGridPoints from './worldposition/GetGridPoints.js';
+import GetGridBounds from './worldposition/GetGridBounds.js';
 
 import LineToTileXYArray from './shape/LineToTileXYArray.js';
 import CircleToTileXYArray from './shape/CircleToTileXYArray.js';
@@ -108,6 +109,7 @@ export default {
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
     getGridPoints: GetGridPoints,
+    getGridBounds: GetGridBounds,
 
     lineToTileXYArray: LineToTileXYArray,
     circleToTileXYArray: CircleToTileXYArray,

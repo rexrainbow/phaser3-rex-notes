@@ -1,4 +1,5 @@
 import { WorldXYType, TileXYType } from '../../types/Position';
+import Rectangle from '../../../utils/geom/rectangle/Rectangle';
 
 export default Quad;
 
@@ -52,4 +53,15 @@ declare class Quad {
         out?: TileXYType | true
     ): TileXYType;
 
+    getGridPoints(
+        tileX: number,
+        tileY: number,
+        points?: WorldXYType[]
+    ): WorldXYType[];
+
+    getBounds(
+        tileX: number,
+        tileY: number,
+        out?: Rectangle
+    ): Rectangle;
 }

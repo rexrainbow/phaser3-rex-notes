@@ -1,5 +1,6 @@
 import LogicBoard from './LogicBoard.js';
 import SetInteractive from './input/SetInteractive.js';
+import ForEachCullTileXY from './camera/ForEachCullTileXY.js';
 
 class Board extends LogicBoard {
     get touchZone() {
@@ -16,7 +17,8 @@ class Board extends LogicBoard {
 }
 
 var methods = {
-    setInteractive: SetInteractive
+    setInteractive: SetInteractive,
+    forEachCullTileXY: ForEachCullTileXY,
 }
 Object.assign(
     Board.prototype,
