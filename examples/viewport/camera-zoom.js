@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
         var onResize = (function () {
             var viewport = GetViewport(this, camera);
-            graphics.strokeRectShape(viewport);
+            graphics.clear().strokeRectShape(viewport);
         }).bind(this);
         this.scale.on('resize', onResize);
         onResize();
@@ -42,7 +42,7 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.ENVELO,
+        mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
