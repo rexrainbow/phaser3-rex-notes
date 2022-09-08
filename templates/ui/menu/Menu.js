@@ -2,7 +2,7 @@ import Buttons from '../buttons/Buttons.js';
 import Methods from './methods/Methods.js';
 import CreateBackground from './methods/CreateBackground.js';
 import CreateButtons from './methods/CreateButtons.js';
-import GetViewPort from '../../../plugins/utils/system/GetViewport.js';
+import GetViewport from '../../../plugins/utils/system/GetViewport.js';
 import MenuSetInteractive from './methods/MenuSetInteractive.js';
 import ParseEaseConfig from './methods/ParseEaseConfig.js';
 import GetEaseConfig from './methods/GetEaseConfig.js';
@@ -54,7 +54,7 @@ class Menu extends Buttons {
             // Bounds
             var bounds = config.bounds;
             if (bounds === undefined) {
-                bounds = GetViewPort(scene);
+                bounds = GetViewport(scene);
             }
             this.bounds = bounds;
 

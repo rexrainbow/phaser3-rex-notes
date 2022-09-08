@@ -1,5 +1,5 @@
 import CreateListPanel from './CreateListPanel.js';
-import GetViewPort from '../../../../../plugins/utils/system/GetViewport.js';
+import GetViewport from '../../../../../plugins/utils/system/GetViewport.js';
 
 var OpenListPanel = function () {
     if (this.listPanel) {
@@ -16,7 +16,7 @@ var OpenListPanel = function () {
 
     var bounds = this.listBounds;
     if (!bounds) {
-        bounds = GetViewPort(scene);
+        bounds = GetViewport(scene);
     }
     if (listPanel.bottom > bounds.bottom) {
         // Out of bounds, can't put list-panel below parent

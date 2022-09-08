@@ -1,5 +1,5 @@
 import CursorKeys from '../../utils/input/CursorKeys.js'
-import GetViewPort from '../../utils/system/GetViewport.js';
+import GetViewport from '../../utils/system/GetViewport.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -12,7 +12,7 @@ class CursorAtBound extends CursorKeys {
 
         var bounds = GetValue(config, 'bounds', undefined);
         if (bounds === undefined) {
-            bounds = GetViewPort(scene);
+            bounds = GetViewport(scene);
         }
         this.bounds = bounds;
 
