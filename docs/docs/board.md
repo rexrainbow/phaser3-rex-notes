@@ -12,6 +12,7 @@ Core object of Board system.
 - [Line to tileXY array](https://codepen.io/rexrainbow/pen/aMBXOE)
 - [Triangle to tileXY array](https://codepen.io/rexrainbow/pen/wLYmyw)
 - [Ellipse to tileXY array](https://codepen.io/rexrainbow/pen/LYYJmxE)
+- [Bounds](https://codepen.io/rexrainbow/pen/PoeZOGo)
 
 ## Usage
 
@@ -477,10 +478,15 @@ Get array of tile position inside a [circle shape](geom-circle.md)
 ```javascript
 var out = board.circleToTileXYArray(circle);
 // var out = board.circleToTileXYArray(circle, out);
+// var out = board.circleToTileXYArray(circle, testMode, out);
 ```
 
 - `circle` : [Circle shape](geom-circle.md)
-- `out` : An array of tile position
+- `testMode` : 
+    - `0` : Test if shape is overlapping center position of a grid. Default behavior.
+    - `1` : Test if shape is overlapping grid bounds of a grid.
+    - `2` : Test if shape is overlapping grid points of a grid.
+- `out` : An array of tile position.
 
 #### Rectangle -> tile position
 
@@ -489,10 +495,15 @@ Get array of tile position inside a [rectangle shape](geom-rectangle.md)
 ```javascript
 var out = board.rectangleToTileXYArray(rectangle);
 // var out = board.rectangleToTileXYArray(rectangle, out);
+// var out = board.rectangleToTileXYArray(rectangle, testMode, out);
 ```
 
 - `rectangle` : [Rectangle shape](geom-rectangle.md)
-- `out` : An array of tile position
+- `testMode` : 
+    - `0` : Test if shape is overlapping center position of a grid. Default behavior.
+    - `1` : Test if shape is overlapping grid bounds of a grid.
+    - `2` : Test if shape is overlapping grid points of a grid.
+- `out` : An array of tile position.
 
 #### Ellipse -> tile position
 
@@ -501,10 +512,15 @@ Get array of tile position inside a [ellipse shape](geom-ellipse.md)
 ```javascript
 var out = board.ellipseToTileXYArray(ellipse);
 // var out = board.ellipseToTileXYArray(ellipse, out);
+// var out = board.ellipseToTileXYArray(ellipse, testMode, out);
 ```
 
 - `ellipse` : [Ellipse shape](geom-ellipse.md)
-- `out` : An array of tile position
+- `testMode` : 
+    - `0` : Test if shape is overlapping center position of a grid. Default behavior.
+    - `1` : Test if shape is overlapping grid bounds of a grid.
+    - `2` : Test if shape is overlapping grid points of a grid.
+- `out` : An array of tile position.
 
 #### Triangle -> tile position
 
@@ -513,10 +529,15 @@ Get array of tile position inside a [triangle shape](geom-triangle.md)
 ```javascript
 var out = board.triangleToTileXYArray(triangle);
 // var out = board.triangleToTileXYArray(triangle, out);
+// var out = board.triangleToTileXYArray(triangle, testMode, out);
 ```
 
 - `triangle` : [Triangle shape](geom-triangle.md)
-- `out` : An array of tile position
+- `testMode` : 
+    - `0` : Test if shape is overlapping center position of a grid. Default behavior.
+    - `1` : Test if shape is overlapping grid bounds of a grid.
+    - `2` : Test if shape is overlapping grid points of a grid.
+- `out` : An array of tile position.
 
 #### Polygon -> tile position
 
@@ -525,10 +546,15 @@ Get array of tile position inside a [polygon shape](geom-polygon.md)
 ```javascript
 var out = board.polygonToTileXYArray(polygon);
 // var out = board.polygonToTileXYArray(polygon, out);
+// var out = board.polygonToTileXYArray(polygon, testMode, out);
 ```
 
 - `polygon` : [Polygon shape](geom-polygon.md)
-- `out` : An array of tile position
+- `testMode` : 
+    - `0` : Test if shape is overlapping center position of a grid. Default behavior.
+    - `1` : Test if shape is overlapping grid bounds of a grid.
+    - `2` : Test if shape is overlapping grid points of a grid.
+- `out` : An array of tile position.
 
 ### Angle between world position of 2 tiles
 

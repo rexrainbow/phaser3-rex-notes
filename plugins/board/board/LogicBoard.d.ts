@@ -230,8 +230,20 @@ declare class Board<ChessType = unknown> extends EE {
         out?: TileXYType[]
     ): TileXYType[];
 
+    circleToTileXYArray(
+        circle: Circle,
+        testMode?: number,
+        out?: TileXYType[]
+    ): TileXYType[];
+
     rectangleToTileXYArray(
         rectangle: Rectangle,
+        out?: TileXYType[]
+    ): TileXYType[];
+
+    rectangleToTileXYArray(
+        rectangle: Rectangle,
+        testMode?: number,
         out?: TileXYType[]
     ): TileXYType[];
 
@@ -240,13 +252,31 @@ declare class Board<ChessType = unknown> extends EE {
         out?: TileXYType[]
     ): TileXYType[];
 
+    ellipseToTileXYArray(
+        ellipse: Ellipse,
+        testMode?: number,
+        out?: TileXYType[]
+    ): TileXYType[];
+
     triangleToTileXYArray(
         triangle: Triangle,
         out?: TileXYType[]
     ): TileXYType[];
 
+    triangleToTileXYArray(
+        triangle: Triangle,
+        testMode?: number,
+        out?: TileXYType[]
+    ): TileXYType[];
+
     polygonToTileXYArray(
         polygon: Polygon,
+        out?: TileXYType[]
+    ): TileXYType[];
+
+    polygonToTileXYArray(
+        polygon: Polygon,
+        testMode?: number,
         out?: TileXYType[]
     ): TileXYType[];
 

@@ -35,15 +35,15 @@ class Demo extends Phaser.Scene {
         var board = this.rexBoard.add.board({
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
-            width: 10,
-            height: 10
+            width: 20,
+            height: 20
         })
             .forEachTileXY(function (tileXY, board) {
                 var points = board.getGridPoints(tileXY.x, tileXY.y, true);
                 gridGraphics.strokePoints(points, true);
             }, this);
 
-        var shape = new Phaser.Geom.Ellipse(0, 0, 120, 100);
+        var shape = new Phaser.Geom.Ellipse(0, 0, 240, 200);
         this.input
             .on('pointerdown', function (pointer) {
                 Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
@@ -51,7 +51,7 @@ class Demo extends Phaser.Scene {
                 });
 
                 shape.setPosition(pointer.x, pointer.y);
-                var tileXYArray = board.ellipseToTileXYArray(shape);
+                var tileXYArray = board.ellipseToTileXYArray(shape, 1);
                 var tileXY;
                 for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
                     tileXY = tileXYArray[i];

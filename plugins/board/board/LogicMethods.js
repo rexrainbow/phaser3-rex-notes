@@ -35,6 +35,7 @@ import PolygonToTileXYArray from './shape/PolygonToTileXYArray.js';
 import RectangleToTileXYArray from './shape/RectangleToTileXYArray.js';
 import TriangleToTileXYArray from './shape/TriangleToTileXYArray.js';
 import ShapeToTileXYArray from './shape/ShapeToTileXYArray.js';
+import ForEachTileXYInShape from './shape/ForEachTileXYInShape.js';
 
 import UidToChess from './chess/UidToChess.js';
 import AddChess from './chess/AddChess.js';
@@ -120,6 +121,7 @@ export default {
     rectangleToTileXYArray: RectangleToTileXYArray,
     triangleToTileXYArray: TriangleToTileXYArray,
     shapeToTileXYArray: ShapeToTileXYArray,
+    forEachTileXYInShape: ForEachTileXYInShape,
 
     uidToChess: UidToChess,
     addChess: AddChess,
