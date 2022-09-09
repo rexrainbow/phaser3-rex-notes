@@ -1874,7 +1874,7 @@
    *
    * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
    */
-  var Contains$5 = function Contains(rect, x, y) {
+  var Contains$1 = function Contains(rect, x, y) {
     if (rect.width <= 0 || rect.height <= 0) {
       return false;
     }
@@ -3188,7 +3188,7 @@
      * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
      */
     contains: function contains(x, y) {
-      return Contains$5(this, x, y);
+      return Contains$1(this, x, y);
     },
 
     /**
@@ -3687,109 +3687,28 @@
     return out;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-
-  /**
-   * Check to see if the Circle contains the given x / y coordinates.
-   *
-   * @function Phaser.Geom.Circle.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Circle} circle - The Circle to check.
-   * @param {number} x - The x coordinate to check within the circle.
-   * @param {number} y - The y coordinate to check within the circle.
-   *
-   * @return {boolean} True if the coordinates are within the circle, otherwise false.
-   */
-  var Contains$4 = function Contains(circle, x, y) {
-    //  Check if x/y are within the bounds first
-    if (circle.radius > 0 && x >= circle.left && x <= circle.right && y >= circle.top && y <= circle.bottom) {
-      var dx = (circle.x - x) * (circle.x - x);
-      var dy = (circle.y - y) * (circle.y - y);
-      return dx + dy <= circle.radius * circle.radius;
-    } else {
-      return false;
-    }
-  };
-
-  var CircleToTileXYArray = function CircleToTileXYArray(circle, out) {
-    return this.shapeToTileXYArray(circle, Contains$4, out);
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-
-  /**
-   * Check to see if the Ellipse contains the given x / y coordinates.
-   *
-   * @function Phaser.Geom.Ellipse.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Ellipse} ellipse - The Ellipse to check.
-   * @param {number} x - The x coordinate to check within the ellipse.
-   * @param {number} y - The y coordinate to check within the ellipse.
-   *
-   * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
-   */
-  var Contains$3 = function Contains(ellipse, x, y) {
-    if (ellipse.width <= 0 || ellipse.height <= 0) {
-      return false;
-    } //  Normalize the coords to an ellipse with center 0,0 and a radius of 0.5
-
-
-    var normx = (x - ellipse.x) / ellipse.width;
-    var normy = (y - ellipse.y) / ellipse.height;
-    normx *= normx;
-    normy *= normy;
-    return normx + normy < 0.25;
-  };
-
-  var EllipseToTileXYArray = function EllipseToTileXYArray(ellipse, out) {
-    return this.shapeToTileXYArray(ellipse, Contains$3, out);
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-  // Checks whether the x and y coordinates are contained within this polygon.
-  //  Adapted from http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html by Jonas Raoni Soares Silva
-
-  /**
-   * Checks if a point is within the bounds of a Polygon.
-   *
-   * @function Phaser.Geom.Polygon.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Polygon} polygon - The Polygon to check against.
-   * @param {number} x - The X coordinate of the point to check.
-   * @param {number} y - The Y coordinate of the point to check.
-   *
-   * @return {boolean} `true` if the point is within the bounds of the Polygon, otherwise `false`.
-   */
-  var Contains$2 = function Contains(polygon, x, y) {
-    var inside = false;
-
-    for (var i = -1, j = polygon.points.length - 1; ++i < polygon.points.length; j = i) {
-      var ix = polygon.points[i].x;
-      var iy = polygon.points[i].y;
-      var jx = polygon.points[j].x;
-      var jy = polygon.points[j].y;
-
-      if ((iy <= y && y < jy || jy <= y && y < iy) && x < (jx - ix) * (y - iy) / (jy - iy) + ix) {
-        inside = !inside;
-      }
+  var CircleToTileXYArray = function CircleToTileXYArray(circle, testMode, out) {
+    if (Array.isArray(testMode)) {
+      out = testMode;
+      testMode = undefined;
     }
 
-    return inside;
+    var config = {
+      testMode: testMode
+    };
+    return this.shapeToTileXYArray(circle, config, out);
+  };
+
+  var EllipseToTileXYArray = function EllipseToTileXYArray(ellipse, testMode, out) {
+    if (Array.isArray(testMode)) {
+      out = testMode;
+      testMode = undefined;
+    }
+
+    var config = {
+      testMode: testMode
+    };
+    return this.shapeToTileXYArray(ellipse, config, out);
   };
 
   /**
@@ -3837,58 +3756,63 @@
     return out;
   };
 
-  var PolygonToTileXYArray = function PolygonToTileXYArray(polygon, out) {
+  var PolygonToTileXYArray = function PolygonToTileXYArray(polygon, testMode, out) {
+    if (Array.isArray(testMode)) {
+      out = testMode;
+      testMode = undefined;
+    }
+
     globSearchRectangle = GetAABB(polygon, globSearchRectangle);
-    return this.shapeToTileXYArray(polygon, Contains$2, globSearchRectangle, out);
+    var config = {
+      testMode: testMode,
+      searchRectangle: globSearchRectangle
+    };
+    return this.shapeToTileXYArray(polygon, config, out);
   };
 
   var globSearchRectangle;
 
-  var RectangleToTileXYArray = function RectangleToTileXYArray(rectangle, out) {
-    return this.shapeToTileXYArray(rectangle, Contains$5, out);
+  var RectangleToTileXYArray = function RectangleToTileXYArray(rectangle, testMode, out) {
+    if (Array.isArray(testMode)) {
+      out = testMode;
+      testMode = undefined;
+    }
+
+    var config = {
+      testMode: testMode
+    };
+    return this.shapeToTileXYArray(rectangle, config, out);
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-  //  http://www.blackpawn.com/texts/pointinpoly/
+  var TriangleToTileXYArray = function TriangleToTileXYArray(triangle, testMode, out) {
+    if (Array.isArray(testMode)) {
+      out = testMode;
+      testMode = undefined;
+    }
 
-  /**
-   * Checks if a point (as a pair of coordinates) is inside a Triangle's bounds.
-   *
-   * @function Phaser.Geom.Triangle.Contains
-   * @since 3.0.0
-   *
-   * @param {Phaser.Geom.Triangle} triangle - The Triangle to check.
-   * @param {number} x - The X coordinate of the point to check.
-   * @param {number} y - The Y coordinate of the point to check.
-   *
-   * @return {boolean} `true` if the point is inside the Triangle, otherwise `false`.
-   */
-  var Contains$1 = function Contains(triangle, x, y) {
-    var v0x = triangle.x3 - triangle.x1;
-    var v0y = triangle.y3 - triangle.y1;
-    var v1x = triangle.x2 - triangle.x1;
-    var v1y = triangle.y2 - triangle.y1;
-    var v2x = x - triangle.x1;
-    var v2y = y - triangle.y1;
-    var dot00 = v0x * v0x + v0y * v0y;
-    var dot01 = v0x * v1x + v0y * v1y;
-    var dot02 = v0x * v2x + v0y * v2y;
-    var dot11 = v1x * v1x + v1y * v1y;
-    var dot12 = v1x * v2x + v1y * v2y; // Compute barycentric coordinates
-
-    var b = dot00 * dot11 - dot01 * dot01;
-    var inv = b === 0 ? 0 : 1 / b;
-    var u = (dot11 * dot02 - dot01 * dot12) * inv;
-    var v = (dot00 * dot12 - dot01 * dot02) * inv;
-    return u >= 0 && v >= 0 && u + v < 1;
+    var config = {
+      testMode: testMode
+    };
+    return this.shapeToTileXYArray(triangle, config, out);
   };
 
-  var TriangleToTileXYArray = function TriangleToTileXYArray(triangle, out) {
-    return this.shapeToTileXYArray(triangle, Contains$1, out);
+  var ShapeToTileXYArray = function ShapeToTileXYArray(shape, config, out) {
+    if (Array.isArray(config)) {
+      out = config;
+      config = undefined;
+    }
+
+    if (out === undefined) {
+      out = [];
+    }
+
+    this.forEachTileXYInShape(shape, function (tileXY) {
+      out.push({
+        x: tileXY.x,
+        y: tileXY.y
+      });
+    }, undefined, config);
+    return out;
   };
 
   /**
@@ -3913,13 +3837,17 @@
     return Math.max(min, Math.min(max, value));
   };
 
-  var ShapeToTileXYArray = function ShapeToTileXYArray(shape, containsCallback, out) {
-    if (out === undefined) {
-      out = [];
+  var ForEachTileXYInShape = function ForEachTileXYInShape(shape, callback, scope, config) {
+    var testMode = GetValue$c(config, 'testMode', 0);
+    var searchRectangle = GetValue$c(config, 'searchRectangle', shape);
+    var order = GetValue$c(config, 'order', 0);
+
+    if (scope) {
+      callback = callback.bind(scope);
     }
 
-    globLeftToptileXY = this.worldXYToTileXY(shape.left, shape.top, globLeftToptileXY);
-    globRightBottomTileXY = this.worldXYToTileXY(shape.right, shape.bottom, globRightBottomTileXY);
+    globLeftToptileXY = this.worldXYToTileXY(searchRectangle.left, searchRectangle.top, globLeftToptileXY);
+    globRightBottomTileXY = this.worldXYToTileXY(searchRectangle.right, searchRectangle.bottom, globRightBottomTileXY);
     var left = globLeftToptileXY.x - 1,
         top = globLeftToptileXY.y - 1,
         right = globRightBottomTileXY.x + 1,
@@ -3932,25 +3860,152 @@
       bottom = Clamp(bottom, 0, this.height - 1);
     }
 
-    var targetWorldXY;
+    switch (order) {
+      case 0:
+        // x+,y+
+        var isBreak;
 
-    for (var x = left; x <= right; x++) {
-      for (var y = top; y <= bottom; y++) {
-        targetWorldXY = this.tileXYToWorldXY(x, y, true);
+        for (var y = top; y <= bottom; y++) {
+          for (var x = left; x <= right; x++) {
+            if (IsInShape.call(this, shape, x, y, testMode)) {
+              globalTileXY.x = x;
+              globalTileXY.y = y;
+              isBreak = callback(globalTileXY, this);
+            }
 
-        if (containsCallback(shape, targetWorldXY.x, targetWorldXY.y)) {
-          out.push({
-            x: x,
-            y: y
-          });
+            if (isBreak) {
+              break;
+            }
+          }
         }
+
+        break;
+
+      case 1:
+        // x-,y+
+        var isBreak;
+
+        for (var y = top; y <= bottom; y++) {
+          for (var x = right; x >= left; x--) {
+            if (IsInShape.call(this, shape, x, y, testMode)) {
+              globalTileXY.x = x;
+              globalTileXY.y = y;
+              isBreak = callback(globalTileXY, this);
+            }
+
+            if (isBreak) {
+              break;
+            }
+          }
+        }
+
+        break;
+
+      case 2:
+        // y+,x+
+        var isBreak;
+
+        for (var x = left; x <= right; x++) {
+          for (var y = top; y <= bottom; y++) {
+            if (IsInShape.call(this, shape, x, y, testMode)) {
+              globalTileXY.x = x;
+              globalTileXY.y = y;
+              isBreak = callback(globalTileXY, this);
+            }
+
+            if (isBreak) {
+              break;
+            }
+          }
+        }
+
+        break;
+
+      case 3:
+        // y-,x+
+        var isBreak;
+
+        for (var x = left; x <= right; x++) {
+          for (var y = bottom; y >= top; y--) {
+            if (IsInShape.call(this, shape, x, y, testMode)) {
+              globalTileXY.x = x;
+              globalTileXY.y = y;
+              isBreak = callback(globalTileXY, this);
+            }
+
+            if (isBreak) {
+              break;
+            }
+          }
+        }
+
+    }
+
+    return this;
+  };
+
+  var IsInShape = function IsInShape(shape, x, y, testMode) {
+    var targetWorldXY = this.tileXYToWorldXY(x, y, true);
+
+    if (shape.contains(targetWorldXY.x, targetWorldXY.y)) {
+      return true;
+    }
+
+    switch (testMode) {
+      case 1:
+        // Test grid bounds (a rectangle)
+        var rect = this.getGridBounds(x, y, true);
+        return OverlapRectangle(shape, rect);
+
+      case 2:
+        // Test grid points
+        var points = this.getGridPoints(x, y, true);
+        return ContainsAnyPoint(shape, points);
+
+      default:
+        return false;
+    }
+  };
+
+  var OverlapRectangle = function OverlapRectangle(shape, rectangle) {
+    var top = rectangle.top,
+        bottom = rectangle.bottom,
+        left = rectangle.left,
+        right = rectangle.right;
+
+    if (shape.contains(left, top)) {
+      return true;
+    }
+
+    if (shape.contains(left, bottom)) {
+      return true;
+    }
+
+    if (shape.contains(right, top)) {
+      return true;
+    }
+
+    if (shape.contains(right, bottom)) {
+      return true;
+    }
+
+    return false;
+  };
+
+  var ContainsAnyPoint = function ContainsAnyPoint(shape, points) {
+    for (var i = 0, cnt = points.length; i < cnt; i++) {
+      var point = points[i];
+
+      if (shape.contains(point.x, point.y)) {
+        return true;
       }
     }
 
-    return out;
+    return false;
   };
 
   var globLeftToptileXY, globRightBottomTileXY;
+  var globalTileXY = {};
 
   var UidToChess = function UidToChess(uid) {
     if (uid == null) {
@@ -5047,6 +5102,7 @@
     rectangleToTileXYArray: RectangleToTileXYArray,
     triangleToTileXYArray: TriangleToTileXYArray,
     shapeToTileXYArray: ShapeToTileXYArray,
+    forEachTileXYInShape: ForEachTileXYInShape,
     uidToChess: UidToChess,
     addChess: AddChess$1,
     removeChess: RemoveChess$1,
@@ -9062,65 +9118,37 @@
   };
 
   var ForEachCullTileXY = function ForEachCullTileXY(callback, scope, config) {
-    var order;
-
     if (typeof config === 'number') {
-      order = config;
-      config = undefined;
+      config = {
+        order: config
+      };
     }
 
     if (config === undefined) {
       config = {};
     }
 
-    order = GetValue$c(config, 'order', order);
+    var order = GetValue$c(config, 'order', 0);
     var camera = GetValue$c(config, 'camera', this.scene.cameras.main);
     var paddingX = GetValue$c(config, 'paddingX', 1);
     var paddingY = GetValue$c(config, 'paddingY', 1);
+
+    if (ViewportBounds === undefined) {
+      ViewportBounds = new Rectangle$2();
+    }
+
     ViewportBounds.width = (camera.width + paddingX * 2) / camera.zoomX;
     ViewportBounds.height = (camera.height + paddingY * 2) / camera.zoomY;
     ViewportBounds.centerX = camera.centerX + camera.scrollX;
     ViewportBounds.centerY = camera.centerY + camera.scrollY;
-    this.forEachTileXY(function (tileXY, board) {
-      // Center position in world bounds
-      var worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
-
-      if (!ViewportBounds.contains(worldXY.x, worldXY.y)) {
-        // Tile bounds across world bounds
-        var tileBounds = board.getGridBounds(tileXY.x, tileXY.y, true);
-
-        if (ContainsPoints(ViewportBounds, tileBounds) === 0) {
-          return;
-        }
-      }
-
-      var isBreak;
-
-      if (scope) {
-        isBreak = callback.call(scope, tileXY, board);
-      } else {
-        isBreak = callback(tileXY, board);
-      }
-
-      return isBreak;
-    }, undefined, order);
+    this.forEachTileXYInShape(ViewportBounds, callback, scope, {
+      order: order,
+      testMode: 1
+    });
     return this;
   };
 
-  var ContainsPoints = function ContainsPoints(rectA, rectB) {
-    var result = 0;
-    var top = rectB.top,
-        bottom = rectB.bottom,
-        left = rectB.left,
-        right = rectB.right;
-    result += rectA.contains(left, top) ? 1 : 0;
-    result += rectA.contains(left, bottom) ? 1 : 0;
-    result += rectA.contains(right, top) ? 1 : 0;
-    result += rectA.contains(right, bottom) ? 1 : 0;
-    return result;
-  };
-
-  var ViewportBounds = new Rectangle$2();
+  var ViewportBounds;
 
   var Board = /*#__PURE__*/function (_LogicBoard) {
     _inherits(Board, _LogicBoard);
