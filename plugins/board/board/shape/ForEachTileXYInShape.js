@@ -92,6 +92,11 @@ var ForEachTileXYInShape = function (shape, callback, scope, config) {
 };
 
 var IsInShape = function (shape, x, y, testMode) {
+    var targetWorldXY = this.tileXYToWorldXY(x, y, true);
+    if (shape.contains(targetWorldXY.x, targetWorldXY.y)) {
+        return true;
+    }
+
     switch (testMode) {
         case 1:  // Test grid bounds (a rectangle)
             var rect = this.getGridBounds(x, y, true);
@@ -101,9 +106,8 @@ var IsInShape = function (shape, x, y, testMode) {
             var points = this.getGridPoints(x, y, true);
             return ContainsAnyPoint(shape, points);
 
-        default: // Test center position only
-            var targetWorldXY = this.tileXYToWorldXY(x, y, true);
-            return shape.contains(targetWorldXY.x, targetWorldXY.y);
+        default:
+            return false;
     }
 }
 
