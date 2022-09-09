@@ -1,4 +1,4 @@
-var ShapeToTileXYArray = function (shape, containsCallback, config, out) {
+var ShapeToTileXYArray = function (shape, config, out) {
     if (Array.isArray(config)) {
         out = config;
         config = undefined;
@@ -10,7 +10,6 @@ var ShapeToTileXYArray = function (shape, containsCallback, config, out) {
 
     this.forEachTileXYInShape(
         shape,
-        containsCallback,
         function (tileXY) {
             out.push({ x: tileXY.x, y: tileXY.y });
         },

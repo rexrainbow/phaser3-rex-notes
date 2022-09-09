@@ -1,5 +1,3 @@
-import Contains from '../../../utils/geom/ellipse/Contains.js';
-
 var EllipseToTileXYArray = function (ellipse, testMode, out) {
     if (Array.isArray(testMode)) {
         out = testMode;
@@ -8,7 +6,7 @@ var EllipseToTileXYArray = function (ellipse, testMode, out) {
     var config = {
         testMode: testMode,
     }
-    return this.shapeToTileXYArray(ellipse, Contains, config, out);
+    return this.shapeToTileXYArray(ellipse, config, out);
 }
 
 export default EllipseToTileXYArray;

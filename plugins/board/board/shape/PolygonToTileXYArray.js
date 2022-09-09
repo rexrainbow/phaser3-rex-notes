@@ -1,4 +1,3 @@
-import Contains from '../../../utils/geom/polygon/Contains.js';
 import GetAABB from '../../../utils/geom/polygon/GetAABB.js';
 
 var PolygonToTileXYArray = function (polygon, testMode, out) {
@@ -11,7 +10,7 @@ var PolygonToTileXYArray = function (polygon, testMode, out) {
         testMode: testMode,
         searchRectangle: globSearchRectangle
     }
-    return this.shapeToTileXYArray(polygon, Contains, config, out);
+    return this.shapeToTileXYArray(polygon, config, out);
 }
 
 var globSearchRectangle;

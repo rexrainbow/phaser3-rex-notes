@@ -1,9 +1,10 @@
 import GetValue from '../../../utils/object/GetValue.js';
 import Clamp from '../../../utils/math/Clamp.js';
 
-var ForEachTileXYInShape = function (shape, containsCallback, callback, scope, config) {
+var ForEachTileXYInShape = function (shape, callback, scope, config) {
     var testMode = GetValue(config, 'testMode', 0);
     var searchRectangle = GetValue(config, 'searchRectangle', shape);
+    var order = GetValue(config, 'order', 0);
 
     if (scope) {
         callback = callback.bind(scope);
@@ -22,42 +23,89 @@ var ForEachTileXYInShape = function (shape, containsCallback, callback, scope, c
         bottom = Clamp(bottom, 0, this.height - 1);
     }
 
-    for (var x = left; x <= right; x++) {
-        for (var y = top; y <= bottom; y++) {
-            switch (testMode) {
-                case 1:  // Test grid bounds (a rectangle)
-                    var rect = this.getGridBounds(x, y, true);
-                    if (OverlapRectangle(shape, rect)) {
+    switch (order) {
+        case 0: // x+,y+
+            var isBreak;
+            for (var y = top; y <= bottom; y++) {
+                for (var x = left; x <= right; x++) {
+                    if (IsInShape.call(this, shape, x, y, testMode)) {
                         globalTileXY.x = x;
                         globalTileXY.y = y;
-                        callback(globalTileXY, this);
+                        isBreak = callback(globalTileXY, this);
                     }
-                    break;
-
-                case 2:  // Test grid points
-                    var points = this.getGridPoints(x, y, true);
-                    if (ContainsAnyPoint(shape, points)) {
-                        globalTileXY.x = x;
-                        globalTileXY.y = y;
-                        callback(globalTileXY, this);
+                    if (isBreak) {
+                        break;
                     }
-                    break;
-
-                default: // Test center position only
-                    var targetWorldXY = this.tileXYToWorldXY(x, y, true);
-                    if (containsCallback(shape, targetWorldXY.x, targetWorldXY.y)) {
-                        globalTileXY.x = x;
-                        globalTileXY.y = y;
-                        callback(globalTileXY, this);
-                    }
-                    break;
+                }
             }
+            break;
 
-        }
+        case 1: // x-,y+
+            var isBreak;
+            for (var y = top; y <= bottom; y++) {
+                for (var x = right; x >= left; x--) {
+                    if (IsInShape.call(this, shape, x, y, testMode)) {
+                        globalTileXY.x = x;
+                        globalTileXY.y = y;
+                        isBreak = callback(globalTileXY, this);
+                    }
+                    if (isBreak) {
+                        break;
+                    }
+                }
+            }
+            break;
+
+        case 2: // y+,x+
+            var isBreak;
+            for (var x = left; x <= right; x++) {
+                for (var y = top; y <= bottom; y++) {
+                    if (IsInShape.call(this, shape, x, y, testMode)) {
+                        globalTileXY.x = x;
+                        globalTileXY.y = y;
+                        isBreak = callback(globalTileXY, this);
+                    }
+                    if (isBreak) {
+                        break;
+                    }
+                }
+            }
+            break;
+
+        case 3: // y-,x+
+            var isBreak;
+            for (var x = left; x <= right; x++) {
+                for (var y = bottom; y >= top; y--) {
+                    if (IsInShape.call(this, shape, x, y, testMode)) {
+                        globalTileXY.x = x;
+                        globalTileXY.y = y;
+                        isBreak = callback(globalTileXY, this);
+                    }
+                    if (isBreak) {
+                        break;
+                    }
+                }
+            }
     }
 
     return this;
 };
+
+var IsInShape = function (shape, x, y, testMode) {
+    switch (testMode) {
+        case 1:  // Test grid bounds (a rectangle)
+            var rect = this.getGridBounds(x, y, true);
+            return OverlapRectangle(shape, rect);
+
+        case 2:  // Test grid points
+            var points = this.getGridPoints(x, y, true);
+            return ContainsAnyPoint(shape, points);
+
+        default: // Test center position only
+            var targetWorldXY = this.tileXYToWorldXY(x, y, true);
+            return shape.contains(targetWorldXY.x, targetWorldXY.y);
+    }
+}
 
 var OverlapRectangle = function (shape, rectangle) {
     var top = rectangle.top,
