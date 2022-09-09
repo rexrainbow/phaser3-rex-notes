@@ -19,6 +19,7 @@ class DropDownList extends Label {
         this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
+        this.setListExpandDirection(GetValue(listConfig, 'expandDirection'));
         this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
         this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
         this.setListTransitInCallback(GetValue(listConfig, 'transitIn'));

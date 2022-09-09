@@ -7,18 +7,28 @@ var OpenListPanel = function () {
     }
 
     var scene = this.scene;
-    var listPanel = CreateListPanel.call(this, scene)
-        .setOrigin(0, 0)
+    // Expand direction
+    var isExpandDown = (this.listExpandDirection === 0);
+    var isExpandUp = (this.listExpandDirection === 1);
+    var flexExpand = !isExpandDown && !isExpandUp;
+
+    var listPanel = CreateListPanel.call(this, scene);
+
+    var originX = 0;
+    var originY = (isExpandDown || flexExpand) ? 0 : 1;
+    listPanel
+        .setOrigin(originX, originY)
         .layout();
 
     var x = this.getElement(this.listAlignMode).getTopLeft().x;
-    listPanel.setPosition(x, this.bottom);
+    var y = (isExpandDown || flexExpand) ? this.bottom : this.top;
+    listPanel.setPosition(x, y);
 
     var bounds = this.listBounds;
     if (!bounds) {
         bounds = GetViewport(scene);
     }
-    if (listPanel.bottom > bounds.bottom) {
+    if (flexExpand && (listPanel.bottom > bounds.bottom)) {
         // Out of bounds, can't put list-panel below parent
         listPanel
             .changeOrigin(0, 1)

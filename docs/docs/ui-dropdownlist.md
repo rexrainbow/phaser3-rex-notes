@@ -118,6 +118,7 @@ var dropDownList = scene.rexUI.add.dropDownList({
         // width: undefined, 
         // height: undefined,
         // alignParent: 'text',
+        // expandDirection: 0,
         // bounds: undefined,
 
         // space: {
@@ -233,6 +234,9 @@ var dropDownList = scene.rexUI.add.dropDownList({
     - `list.alignParent` : Align x position to label.
         - `icon` : Align x position to *icon* game object of parent label.
         - `text` : Align x position to *text* game object of parent label.    
+    - `list.expandDirection` :
+        - `0`, `'down'` : Expand list down. i.e. list panel will put below parent label.
+        - `1`, `'up'` : Expand list up. i.e. list panel will put above parent label.
     - `list.bounds` : Put list panel below parent label if *bottom of list panel* is inside bounds ([Rectangle](geom-rectangle.md))
         - `undefined` : Use viewport as bounds
         - [Rectangle](geom-rectangle.md)

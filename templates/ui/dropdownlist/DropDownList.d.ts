@@ -42,6 +42,8 @@ declare namespace DropDownList {
 
     type AlignParentType = 'text' | 'icon';
 
+    type ExpandDirectionType = 0 | 1 | 'down' | 'up';
+
     type SetValueCallbackType = (
         dropDownList: DropDownList,
         value?: any,
@@ -74,6 +76,7 @@ declare namespace DropDownList {
             width?: number;
             height?: number;
             alignParent?: AlignParentType;
+            expandDirection?: ExpandDirectionType;
             bounds?: Phaser.Geom.Rectangle;
 
             space?: ListSpaceType | WrapListSpaceType;

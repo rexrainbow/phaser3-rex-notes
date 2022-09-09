@@ -87,6 +87,8 @@ class Demo extends Phaser.Scene {
                 onButtonOut: function (button, index, pointer, event) {
                     button.getElement('background').setStrokeStyle();
                 },
+
+                // expandDirection: 'up',
             },
 
             setValueCallback: function (dropDownList, value, previousValue) {

@@ -40230,6 +40230,14 @@
       this.listOnButtonOut = callback;
       return this;
     },
+    setListExpandDirection: function setListExpandDirection(direction) {
+      if (typeof direction === 'string') {
+        direction = ListExpandDirections[direction];
+      }
+
+      this.listExpandDirection = direction;
+      return this;
+    },
     setListEaseInDuration: function setListEaseInDuration(duration) {
       if (duration === undefined) {
         duration = 0;
@@ -40301,6 +40309,10 @@
       return this;
     }
   };
+  var ListExpandDirections = {
+    down: 0,
+    up: 1
+  };
 
   var CreateListPanel = function CreateListPanel(scene) {
     var background;
@@ -40367,17 +40379,25 @@
       return this;
     }
 
-    var scene = this.scene;
-    var listPanel = CreateListPanel.call(this, scene).setOrigin(0, 0).layout();
+    var scene = this.scene; // Expand direction
+
+    var isExpandDown = this.listExpandDirection === 0;
+    var isExpandUp = this.listExpandDirection === 1;
+    var flexExpand = !isExpandDown && !isExpandUp;
+    var listPanel = CreateListPanel.call(this, scene);
+    var originX = 0;
+    var originY = isExpandDown || flexExpand ? 0 : 1;
+    listPanel.setOrigin(originX, originY).layout();
     var x = this.getElement(this.listAlignMode).getTopLeft().x;
-    listPanel.setPosition(x, this.bottom);
+    var y = isExpandDown || flexExpand ? this.bottom : this.top;
+    listPanel.setPosition(x, y);
     var bounds = this.listBounds;
 
     if (!bounds) {
       bounds = GetViewport(scene);
     }
 
-    if (listPanel.bottom > bounds.bottom) {
+    if (flexExpand && listPanel.bottom > bounds.bottom) {
       // Out of bounds, can't put list-panel below parent
       listPanel.changeOrigin(0, 1).setPosition(x, this.top);
     }
@@ -40500,6 +40520,8 @@
       _this.setButtonOverCallback(GetValue$x(listConfig, 'onButtonOver'));
 
       _this.setButtonOutCallback(GetValue$x(listConfig, 'onButtonOut'));
+
+      _this.setListExpandDirection(GetValue$x(listConfig, 'expandDirection'));
 
       _this.setListEaseInDuration(GetValue$x(listConfig, 'easeIn', 500));
 

@@ -3688,27 +3688,11 @@
   };
 
   var CircleToTileXYArray = function CircleToTileXYArray(circle, testMode, out) {
-    if (Array.isArray(testMode)) {
-      out = testMode;
-      testMode = undefined;
-    }
-
-    var config = {
-      testMode: testMode
-    };
-    return this.shapeToTileXYArray(circle, config, out);
+    return this.shapeToTileXYArray(circle, testMode, out);
   };
 
   var EllipseToTileXYArray = function EllipseToTileXYArray(ellipse, testMode, out) {
-    if (Array.isArray(testMode)) {
-      out = testMode;
-      testMode = undefined;
-    }
-
-    var config = {
-      testMode: testMode
-    };
-    return this.shapeToTileXYArray(ellipse, config, out);
+    return this.shapeToTileXYArray(ellipse, testMode, out);
   };
 
   /**
@@ -3773,30 +3757,20 @@
   var globSearchRectangle;
 
   var RectangleToTileXYArray = function RectangleToTileXYArray(rectangle, testMode, out) {
-    if (Array.isArray(testMode)) {
-      out = testMode;
-      testMode = undefined;
-    }
-
-    var config = {
-      testMode: testMode
-    };
-    return this.shapeToTileXYArray(rectangle, config, out);
+    return this.shapeToTileXYArray(rectangle, testMode, out);
   };
 
   var TriangleToTileXYArray = function TriangleToTileXYArray(triangle, testMode, out) {
-    if (Array.isArray(testMode)) {
-      out = testMode;
-      testMode = undefined;
-    }
-
-    var config = {
-      testMode: testMode
-    };
-    return this.shapeToTileXYArray(triangle, config, out);
+    return this.shapeToTileXYArray(triangle, testMode, out);
   };
 
   var ShapeToTileXYArray = function ShapeToTileXYArray(shape, config, out) {
+    if (typeof config === 'number') {
+      config = {
+        testMode: config
+      };
+    }
+
     if (Array.isArray(config)) {
       out = config;
       config = undefined;
@@ -3815,32 +3789,10 @@
     return out;
   };
 
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2019 Photon Storm Ltd.
-   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
-   */
-
-  /**
-   * Force a value within the boundaries by clamping it to the range `min`, `max`.
-   *
-   * @function Phaser.Math.Clamp
-   * @since 3.0.0
-   *
-   * @param {number} value - The value to be clamped.
-   * @param {number} min - The minimum bounds.
-   * @param {number} max - The maximum bounds.
-   *
-   * @return {number} The clamped value.
-   */
-  var Clamp = function Clamp(value, min, max) {
-    return Math.max(min, Math.min(max, value));
-  };
-
   var ForEachTileXYInShape = function ForEachTileXYInShape(shape, callback, scope, config) {
     var testMode = GetValue$c(config, 'testMode', 0);
     var searchRectangle = GetValue$c(config, 'searchRectangle', shape);
-    var order = GetValue$c(config, 'order', 0);
+    GetValue$c(config, 'order', 0);
 
     if (scope) {
       callback = callback.bind(scope);
@@ -3852,100 +3804,21 @@
         top = globLeftToptileXY.y - 1,
         right = globRightBottomTileXY.x + 1,
         bottom = globRightBottomTileXY.y + 1;
-
-    if (!this.infinityMode) {
-      left = Clamp(left, 0, this.width - 1);
-      top = Clamp(top, 0, this.height - 1);
-      right = Clamp(right, 0, this.width - 1);
-      bottom = Clamp(bottom, 0, this.height - 1);
-    }
-
-    switch (order) {
-      case 0:
-        // x+,y+
-        var isBreak;
-
-        for (var y = top; y <= bottom; y++) {
-          for (var x = left; x <= right; x++) {
-            if (IsInShape.call(this, shape, x, y, testMode)) {
-              globalTileXY.x = x;
-              globalTileXY.y = y;
-              isBreak = callback(globalTileXY, this);
-            }
-
-            if (isBreak) {
-              break;
-            }
-          }
-        }
-
-        break;
-
-      case 1:
-        // x-,y+
-        var isBreak;
-
-        for (var y = top; y <= bottom; y++) {
-          for (var x = right; x >= left; x--) {
-            if (IsInShape.call(this, shape, x, y, testMode)) {
-              globalTileXY.x = x;
-              globalTileXY.y = y;
-              isBreak = callback(globalTileXY, this);
-            }
-
-            if (isBreak) {
-              break;
-            }
-          }
-        }
-
-        break;
-
-      case 2:
-        // y+,x+
-        var isBreak;
-
-        for (var x = left; x <= right; x++) {
-          for (var y = top; y <= bottom; y++) {
-            if (IsInShape.call(this, shape, x, y, testMode)) {
-              globalTileXY.x = x;
-              globalTileXY.y = y;
-              isBreak = callback(globalTileXY, this);
-            }
-
-            if (isBreak) {
-              break;
-            }
-          }
-        }
-
-        break;
-
-      case 3:
-        // y-,x+
-        var isBreak;
-
-        for (var x = left; x <= right; x++) {
-          for (var y = bottom; y >= top; y--) {
-            if (IsInShape.call(this, shape, x, y, testMode)) {
-              globalTileXY.x = x;
-              globalTileXY.y = y;
-              isBreak = callback(globalTileXY, this);
-            }
-
-            if (isBreak) {
-              break;
-            }
-          }
-        }
-
-    }
-
+    this.forEachTileXY(function (tileXY, board) {
+      if (IsInShape(board, shape, tileXY.x, tileXY.y, testMode)) {
+        return callback(tileXY, board);
+      }
+    }, this, {
+      left: left,
+      right: right,
+      top: top,
+      bottom: bottom
+    });
     return this;
   };
 
-  var IsInShape = function IsInShape(shape, x, y, testMode) {
-    var targetWorldXY = this.tileXYToWorldXY(x, y, true);
+  var IsInShape = function IsInShape(board, shape, x, y, testMode) {
+    var targetWorldXY = board.tileXYToWorldXY(x, y, true);
 
     if (shape.contains(targetWorldXY.x, targetWorldXY.y)) {
       return true;
@@ -3954,12 +3827,12 @@
     switch (testMode) {
       case 1:
         // Test grid bounds (a rectangle)
-        var rect = this.getGridBounds(x, y, true);
+        var rect = board.getGridBounds(x, y, true);
         return OverlapRectangle(shape, rect);
 
       case 2:
         // Test grid points
-        var points = this.getGridPoints(x, y, true);
+        var points = board.getGridPoints(x, y, true);
         return ContainsAnyPoint(shape, points);
 
       default:
@@ -4005,7 +3878,6 @@
   };
 
   var globLeftToptileXY, globRightBottomTileXY;
-  var globalTileXY = {};
 
   var UidToChess = function UidToChess(uid) {
     if (uid == null) {
@@ -4185,9 +4057,48 @@
     return result;
   };
 
-  var ForEachTileXY = function ForEachTileXY(callback, scope, order) {
-    if (order === undefined) {
-      order = 0;
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+   */
+
+  /**
+   * Force a value within the boundaries by clamping it to the range `min`, `max`.
+   *
+   * @function Phaser.Math.Clamp
+   * @since 3.0.0
+   *
+   * @param {number} value - The value to be clamped.
+   * @param {number} min - The minimum bounds.
+   * @param {number} max - The maximum bounds.
+   *
+   * @return {number} The clamped value.
+   */
+  var Clamp = function Clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  };
+
+  var ForEachTileXY = function ForEachTileXY(callback, scope, config) {
+    if (typeof config === 'number') {
+      config = {
+        order: config
+      };
+    }
+
+    var lastX = this.width - 1,
+        lastY = this.height - 1;
+    var order = GetValue$c(config, 'order', 0);
+    var left = GetValue$c(config, 'left', 0);
+    var right = GetValue$c(config, 'right', lastX);
+    var top = GetValue$c(config, 'top', 0);
+    var bottom = GetValue$c(config, 'bottom', lastY);
+
+    if (!this.infinityMode) {
+      left = Clamp(left, 0, lastX);
+      top = Clamp(top, 0, lastY);
+      right = Clamp(right, 0, lastX);
+      bottom = Clamp(bottom, 0, lastY);
     }
 
     switch (order) {
@@ -4195,10 +4106,10 @@
         // x+,y+
         var isBreak;
 
-        for (var tileY = 0; tileY < this.height; tileY++) {
-          for (var tileX = 0; tileX < this.width; tileX++) {
-            globTileXY$g.x = tileX;
-            globTileXY$g.y = tileY;
+        for (var y = top; y <= bottom; y++) {
+          for (var x = left; x <= right; x++) {
+            globTileXY$g.x = x;
+            globTileXY$g.y = y;
 
             if (scope) {
               isBreak = callback.call(scope, globTileXY$g, this);
@@ -4218,10 +4129,10 @@
         // x-,y+
         var isBreak;
 
-        for (var tileY = 0; tileY < this.height; tileY++) {
-          for (var tileX = this.width - 1; tileX >= 0; tileX--) {
-            globTileXY$g.x = tileX;
-            globTileXY$g.y = tileY;
+        for (var y = top; y <= bottom; y++) {
+          for (var x = right; x >= left; x--) {
+            globTileXY$g.x = x;
+            globTileXY$g.y = y;
 
             if (scope) {
               isBreak = callback.call(scope, globTileXY$g, this);
@@ -4241,10 +4152,10 @@
         // y+,x+
         var isBreak;
 
-        for (var tileX = 0; tileX < this.width; tileX++) {
-          for (var tileY = 0; tileY < this.height; tileY++) {
-            globTileXY$g.x = tileX;
-            globTileXY$g.y = tileY;
+        for (var x = left; x <= right; x++) {
+          for (var y = top; y <= bottom; y++) {
+            globTileXY$g.x = x;
+            globTileXY$g.y = y;
 
             if (scope) {
               isBreak = callback.call(scope, globTileXY$g, this);
@@ -4264,10 +4175,10 @@
         // y-,x+
         var isBreak;
 
-        for (var tileX = 0; tileX < this.width; tileX++) {
-          for (var tileY = this.height - 1; tileY >= 0; tileY--) {
-            globTileXY$g.x = tileX;
-            globTileXY$g.y = tileY;
+        for (var x = left; x <= right; x++) {
+          for (var y = bottom; y >= top; y--) {
+            globTileXY$g.x = x;
+            globTileXY$g.y = y;
 
             if (scope) {
               isBreak = callback.call(scope, globTileXY$g, this);

@@ -42,6 +42,14 @@ var methods = {
         return this;
     },
 
+    setListExpandDirection(direction) {
+        if (typeof (direction) === 'string') {
+            direction = ListExpandDirections[direction];
+        }
+        this.listExpandDirection = direction;
+        return this;
+    },
+
     setListEaseInDuration(duration) {
         if (duration === undefined) {
             duration = 0;
@@ -119,6 +127,11 @@ var methods = {
         return this;
     },
 
+}
+
+const ListExpandDirections = {
+    down: 0,
+    up: 1
 }
 
 export default methods;
