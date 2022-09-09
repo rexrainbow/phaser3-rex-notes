@@ -1,4 +1,10 @@
 var ShapeToTileXYArray = function (shape, config, out) {
+    if (typeof (config) === 'number') {
+        config = {
+            testMode: config
+        }
+    }
+
     if (Array.isArray(config)) {
         out = config;
         config = undefined;
