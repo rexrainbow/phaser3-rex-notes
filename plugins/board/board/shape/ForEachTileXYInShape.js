@@ -1,5 +1,4 @@
 import GetValue from '../../../utils/object/GetValue.js';
-import Clamp from '../../../utils/math/Clamp.js';
 
 var ForEachTileXYInShape = function (shape, callback, scope, config) {
     var testMode = GetValue(config, 'testMode', 0);
@@ -16,94 +15,38 @@ var ForEachTileXYInShape = function (shape, callback, scope, config) {
         top = globLeftToptileXY.y - 1,
         right = globRightBottomTileXY.x + 1,
         bottom = globRightBottomTileXY.y + 1;
-    if (!this.infinityMode) {
-        left = Clamp(left, 0, this.width - 1);
-        top = Clamp(top, 0, this.height - 1);
-        right = Clamp(right, 0, this.width - 1);
-        bottom = Clamp(bottom, 0, this.height - 1);
-    }
 
-    switch (order) {
-        case 0: // x+,y+
-            var isBreak;
-            for (var y = top; y <= bottom; y++) {
-                for (var x = left; x <= right; x++) {
-                    if (IsInShape.call(this, shape, x, y, testMode)) {
-                        globalTileXY.x = x;
-                        globalTileXY.y = y;
-                        isBreak = callback(globalTileXY, this);
-                    }
-                    if (isBreak) {
-                        break;
-                    }
-                }
+    this.forEachTileXY(
+        function (tileXY, board) {
+            if (IsInShape(board, shape, tileXY.x, tileXY.y, testMode)) {
+                return callback(tileXY, board);
             }
-            break;
-
-        case 1: // x-,y+
-            var isBreak;
-            for (var y = top; y <= bottom; y++) {
-                for (var x = right; x >= left; x--) {
-                    if (IsInShape.call(this, shape, x, y, testMode)) {
-                        globalTileXY.x = x;
-                        globalTileXY.y = y;
-                        isBreak = callback(globalTileXY, this);
-                    }
-                    if (isBreak) {
-                        break;
-                    }
-                }
-            }
-            break;
-
-        case 2: // y+,x+
-            var isBreak;
-            for (var x = left; x <= right; x++) {
-                for (var y = top; y <= bottom; y++) {
-                    if (IsInShape.call(this, shape, x, y, testMode)) {
-                        globalTileXY.x = x;
-                        globalTileXY.y = y;
-                        isBreak = callback(globalTileXY, this);
-                    }
-                    if (isBreak) {
-                        break;
-                    }
-                }
-            }
-            break;
-
-        case 3: // y-,x+
-            var isBreak;
-            for (var x = left; x <= right; x++) {
-                for (var y = bottom; y >= top; y--) {
-                    if (IsInShape.call(this, shape, x, y, testMode)) {
-                        globalTileXY.x = x;
-                        globalTileXY.y = y;
-                        isBreak = callback(globalTileXY, this);
-                    }
-                    if (isBreak) {
-                        break;
-                    }
-                }
-            }
-    }
+        },
+        this,
+        {
+            left: left,
+            right: right,
+            top: top,
+            bottom: bottom
+        }
+    )
 
     return this;
 };
 
-var IsInShape = function (shape, x, y, testMode) {
-    var targetWorldXY = this.tileXYToWorldXY(x, y, true);
+var IsInShape = function (board, shape, x, y, testMode) {
+    var targetWorldXY = board.tileXYToWorldXY(x, y, true);
     if (shape.contains(targetWorldXY.x, targetWorldXY.y)) {
         return true;
     }
 
     switch (testMode) {
         case 1:  // Test grid bounds (a rectangle)
-            var rect = this.getGridBounds(x, y, true);
+            var rect = board.getGridBounds(x, y, true);
             return OverlapRectangle(shape, rect);
 
         case 2:  // Test grid points
-            var points = this.getGridPoints(x, y, true);
+            var points = board.getGridPoints(x, y, true);
             return ContainsAnyPoint(shape, points);
 
         default:
@@ -142,6 +85,5 @@ var ContainsAnyPoint = function (shape, points) {
 };
 
 var globLeftToptileXY, globRightBottomTileXY;
-var globalTileXY = {};
 
 export default ForEachTileXYInShape;
