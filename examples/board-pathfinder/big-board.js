@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
+import GetViewport from '../../plugins/utils/system/GetViewport.js';
 
 const COLOR_PRIMARY = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
@@ -119,6 +120,8 @@ class Board extends RexPlugins.Board.Board {
                 alpha: 1
             }
         })
+        this.pathTexture = scene.add.renderTexture(0, 0, 1, 1)
+            .setDepth(2);
 
         this.pathFinder = scene.rexBoard.add.pathFinder({
             occupiedTest: true,
@@ -127,6 +130,7 @@ class Board extends RexPlugins.Board.Board {
     }
 
     drawGrids() {
+        // Draw grids on Graphics
         this.gridsGraphics.clear();
         var totalVisibleGrids = 0;
         this.forEachCullTileXY(function (tileXY, board) {
@@ -136,16 +140,16 @@ class Board extends RexPlugins.Board.Board {
         }, this);
         console.log(totalVisibleGrids);
 
-        //var camera = this.scene.cameras.main;
-        //this.gridsTexture
-        //    .setSize(camera.width / camera.zoomX, camera.height / camera.zoomY)
-        //    .setPosition(camera.scrollX, camera.scrollY)
-        //this.gridsTexture.camera.setScroll(camera.scrollX, camera.scrollY);
-        ////this.gridsTexture.camera.setZoom(camera.zoomX, camera.zoomY);
-        //this.gridsTexture
-        //    .clear()
-        //    .draw(this.gridsGraphics);
-        //this.gridsGraphics.clear();
+        // Paste Graphics to RenderTexture
+        var viewport = GetViewport(this.scene, this.scene.cameras.main);
+        this.gridsTexture
+            .setSize(viewport.width, viewport.height)
+            .setPosition(viewport.x, viewport.y)
+        this.gridsTexture.camera.setScroll(this.gridsTexture.x, this.gridsTexture.y);
+        this.gridsTexture
+            .clear()
+            .draw(this.gridsGraphics);
+        this.gridsGraphics.clear();
 
         return this;
     }
@@ -156,9 +160,21 @@ class Board extends RexPlugins.Board.Board {
     }
 
     drawPath(tileXYArray) {
+        // Draw path on Graphics
         this.pathGraphics
             .clear()
             .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
+
+        // Paste Graphics to RenderTexture
+        var viewport = GetViewport(this.scene, this.scene.cameras.main);
+        this.pathTexture
+            .setSize(viewport.width, viewport.height)
+            .setPosition(viewport.x, viewport.y)
+        this.pathTexture.camera.setScroll(this.pathTexture.x, this.pathTexture.y);
+        this.pathTexture
+            .clear()
+            .draw(this.pathGraphics);
+        this.pathGraphics.clear();
 
         return this;
     }

@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             // grid: getQuadGrid(this),
             width: 20,
             height: 16,
-            wrap: true
+            // wrap: true
         });
 
         var chessArray = [];
