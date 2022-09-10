@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import GetViewport from '../../plugins/utils/system/GetViewport.js';
+import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport';
 
 
 class Demo extends Phaser.Scene {
@@ -26,23 +26,11 @@ class Demo extends Phaser.Scene {
             this.add.image(1000, 800, 'mushroom'),
         ];
 
-        var viewport = GetViewport(this, camera);
-        var rt = this.add.renderTexture(
-            viewport.x,
-            viewport.y,
-            viewport.width,
-            viewport.height
-        );
-
-        rt.camera.setScroll(rt.x, rt.y);
-
-        rt
+        var rt = this.add.renderTexture(0, 0, 1, 1);
+        FitToViewport(rt)
             .draw(sprites)
             .setTint(0xff0000)
             .setAlpha(0.75)
-
-        console.log(camera);
-        console.log(viewport);
     }
 
     update() { }

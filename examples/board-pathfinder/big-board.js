@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
+import FitToViewport from '../../plugins/utils/rendertexture/FitToViewport.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 
 const COLOR_PRIMARY = 0x03a9f4;
@@ -140,14 +141,8 @@ class Board extends RexPlugins.Board.Board {
         }, this);
         console.log(totalVisibleGrids);
 
-        // Paste Graphics to RenderTexture
-        var viewport = GetViewport(this.scene, this.scene.cameras.main);
-        this.gridsTexture
-            .setSize(viewport.width, viewport.height)
-            .setPosition(viewport.x, viewport.y)
-        this.gridsTexture.camera.setScroll(this.gridsTexture.x, this.gridsTexture.y);
-        this.gridsTexture
-            .clear()
+        // Paste Graphics to RenderTexture        
+        FitToViewport(this.gridsTexture)
             .draw(this.gridsGraphics);
         this.gridsGraphics.clear();
 
@@ -166,13 +161,7 @@ class Board extends RexPlugins.Board.Board {
             .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
 
         // Paste Graphics to RenderTexture
-        var viewport = GetViewport(this.scene, this.scene.cameras.main);
-        this.pathTexture
-            .setSize(viewport.width, viewport.height)
-            .setPosition(viewport.x, viewport.y)
-        this.pathTexture.camera.setScroll(this.pathTexture.x, this.pathTexture.y);
-        this.pathTexture
-            .clear()
+        FitToViewport(this.pathTexture)
             .draw(this.pathGraphics);
         this.pathGraphics.clear();
 
