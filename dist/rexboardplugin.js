@@ -5861,7 +5861,7 @@
   var globWorldXY$2 = {};
   var globPoints$1 = InitPoints(4);
 
-  var GetBounds$2 = function GetBounds(tileX, tileY, out) {
+  var GetBounds$3 = function GetBounds(tileX, tileY, out) {
     if (out === undefined) {
       out = new Rectangle$2();
     } else if (out === true) {
@@ -5974,7 +5974,7 @@
     directionBetween: DirectionBetween$1,
     directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints$1,
-    getBounds: GetBounds$2,
+    getBounds: GetBounds$3,
     ringToTileXYArray: RingToTileXYArray$1
   };
   Object.assign(QuadGrid.prototype, methods$5);
@@ -6858,7 +6858,7 @@
   var globWorldXY = {};
   var globSize = {};
 
-  var GetBounds$1 = function GetBounds(tileX, tileY, out) {
+  var GetBounds$2 = function GetBounds(tileX, tileY, out) {
     if (out === undefined) {
       out = new Rectangle$2();
     } else if (out === true) {
@@ -6986,7 +6986,7 @@
     directionBetween: DirectionBetween,
     directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints,
-    getBounds: GetBounds$1,
+    getBounds: GetBounds$2,
     ringToTileXYArray: RingToTileXYArray
   };
   Object.assign(HexagonGrid.prototype, methods$3);
@@ -14202,7 +14202,7 @@
   var Vector2 = Phaser.Math.Vector2;
   var RotateAround$1 = Phaser.Math.RotateAround;
 
-  var GetBounds = function GetBounds(gameObject, output) {
+  var GetBounds$1 = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$1();
     } else if (output === true) {
@@ -14387,7 +14387,7 @@
         continue;
       }
 
-      var boundsRect = GetBounds(gameObject, true);
+      var boundsRect = GetBounds$1(gameObject, true);
 
       if (firstClone) {
         out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
@@ -15950,7 +15950,7 @@
     }
   };
 
-  var CreatePolygonTexture = function CreatePolygonTexture(scene, key, points, fillStyle, strokeStyle, lineWidth, lineJoin) {
+  var CreatePolygonTexture = function CreatePolygonTexture(scene, key, points, fillStyle, strokeStyle, lineWidth, expandSize, lineJoin) {
     if (fillStyle === undefined && strokeStyle === undefined) {
       fillStyle = 0xffffff;
     }
@@ -15961,41 +15961,79 @@
       lineWidth = 2;
     }
 
-    var minX = Infinity,
-        minY = Infinity,
-        maxX = -Infinity,
-        maxY = -Infinity;
+    if (lineJoin === undefined) {
+      lineJoin = 'round';
+    }
+
+    if (expandSize === undefined) {
+      expandSize = false;
+    }
+
+    globBounds = GetBounds(points, globBounds);
+    OffsetPoints(points, -globBounds.left, -globBounds.top);
+    var width = globBounds.right - globBounds.left;
+    var height = globBounds.bottom - globBounds.top;
+
+    if (!expandSize) {
+      IndentPoints(points, globBounds, lineWidth);
+    } else {
+      width += lineWidth;
+      height += lineWidth;
+      OffsetPoints(points, lineWidth / 2);
+    }
+
+    var texture = scene.sys.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
+    var canvas = texture.getCanvas();
+    var context = texture.getContext();
+    DrawPolygon(canvas, context, points, GetStyle(fillStyle, canvas, context), GetStyle(strokeStyle, canvas, context), lineWidth, lineJoin);
+    texture.refresh();
+  };
+
+  var GetBounds = function GetBounds(points, out) {
+    if (out === undefined) {
+      out = {};
+    }
+
+    var left = Infinity,
+        top = Infinity,
+        right = -Infinity,
+        bottom = -Infinity;
 
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       var p = points[i],
           px = p.x,
           py = p.y;
-      minX = Math.min(minX, px);
-      minY = Math.min(minY, py);
-      maxX = Math.max(maxX, px);
-      maxY = Math.max(maxY, py);
+      left = Math.min(left, px);
+      top = Math.min(top, py);
+      right = Math.max(right, px);
+      bottom = Math.max(bottom, py);
     }
 
-    var width = maxX - minX;
-    var height = maxY - minY;
-    var texture = scene.sys.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
-    var canvas = texture.getCanvas();
-    var context = texture.getContext();
+    out.left = left;
+    out.top = top;
+    out.right = right;
+    out.bottom = bottom;
+    return out;
+  };
+
+  var IndentPoints = function IndentPoints(points, bounds, lineWidth) {
+    if (lineWidth === 0) {
+      return points;
+    }
+
+    var width = bounds.right - bounds.left;
+    var height = bounds.bottom - bounds.top;
     var halfW = width / 2;
     var halfH = height / 2;
     var halfLW = lineWidth / 2;
-    var drawPoints = [];
 
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       var p = points[i];
-      drawPoints.push({
-        x: Indent(p.x - minX, halfW, halfLW),
-        y: Indent(p.y - minY, halfH, halfLW)
-      });
+      p.x = Indent(p.x, halfW, halfLW);
+      p.y = Indent(p.y, halfH, halfLW);
     }
 
-    DrawPolygon(canvas, context, drawPoints, GetStyle(fillStyle, canvas, context), GetStyle(strokeStyle, canvas, context), lineWidth, lineJoin);
-    texture.refresh();
+    return points;
   };
 
   var Indent = function Indent(value, halfBound, offset) {
@@ -16008,12 +16046,41 @@
     }
   };
 
-  var CreateTileTexture = function CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, lineJoin) {
+  var OffsetPoints = function OffsetPoints(points, x, y) {
+    if (y === undefined) {
+      y = x;
+    }
+
+    if (x === 0 && y === 0) {
+      return points;
+    }
+
+    for (var i = 0, cnt = points.length; i < cnt; i++) {
+      var p = points[i];
+      p.x += x;
+      p.y += y;
+    }
+
+    return points;
+  };
+
+  var globBounds;
+
+  var CreateTileTexture = function CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin) {
+    if (typeof overlapGrid === 'string') {
+      lineJoin = overlapGrid;
+      overlapGrid = undefined;
+    }
+
+    if (overlapGrid === undefined) {
+      overlapGrid = true;
+    }
+
     if (lineJoin === undefined) {
       lineJoin = 'miter';
     }
 
-    CreatePolygonTexture(board.scene, key, board.getGridPoints(0, 0, true), fillStyle, strokeStyle, lineWidth, lineJoin);
+    CreatePolygonTexture(board.scene, key, board.getGridPoints(0, 0, true), fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);
   };
 
   var BoardPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {

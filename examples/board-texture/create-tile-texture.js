@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             height: 8
         })
 
-        this.rexBoard.createTileTexture(board, 'tile', 0xffffff);
+        this.rexBoard.createTileTexture(board, 'tile', 0xffffff, 0xff0000, 3);
 
         board
             .forEachTileXY(function (tileXY, board) {

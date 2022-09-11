@@ -13,7 +13,9 @@ class Demo extends Phaser.Scene {
 
     create() {
         CreateCircleTexture(this, 'circle', 100, 0xff0000, 0xffffff, 3);
-        this.add.image(400, 300, 'circle');
+        var gameObject = this.add.image(400, 300, 'circle');
+
+        console.log(gameObject.width)
     }
 
     update() { }

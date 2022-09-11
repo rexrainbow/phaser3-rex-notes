@@ -1,7 +1,9 @@
 var DrawPolygon = function (
     canvas, context,
     points,
-    fillStyle, strokeStyle, lineWidth, lineJoin
+    fillStyle,
+    strokeStyle, lineWidth,
+    lineJoin
 ) {
 
     if (lineJoin === undefined) {

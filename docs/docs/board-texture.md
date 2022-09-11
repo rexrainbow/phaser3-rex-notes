@@ -74,7 +74,7 @@ Create [canvas-texture](canvas-texture) of tile.
 
 ```javascript
 CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth);
-// CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, lineJoin);
+// CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);
 ```
 
 - `board` : [Board object](board.md).
@@ -82,4 +82,7 @@ CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth);
     - `undefined` : Don't fill tile texture.
 - `strokeStyle`, `lineWidth` : Stroke color, stroke line width of tile texture.
     - `undefined` : Don't stroke tile texture.
+- `overlapGrid` : 
+    - `true` : Overlap grid. i.e. Grid width = lineWidth. Default behavior.
+    - `false` : Don't overlap grid. i.e. Grid width = 2 * lineWidth.
 - `lineJoin` : Join style of stroke lines. `'round'`, `'bevel'` and `'miter'`. Default is `'miter'`.

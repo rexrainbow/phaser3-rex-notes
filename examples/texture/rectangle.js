@@ -12,8 +12,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        CreateRectangleTexture(this, 'rectangle', 200, 100, 0xff0000, 0xffffff, 3, 0x000000, true);
-        this.add.image(400, 300, 'rectangle');
+        CreateRectangleTexture(this, 'rectangle', 200, 100, 0xff0000, 0xffffff, 3, 0x000000, true, true);
+        var gameObject = this.add.image(400, 300, 'rectangle');
+        console.log(gameObject.width)
     }
 
     update() { }

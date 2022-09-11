@@ -7,4 +7,14 @@ export default function CreateTileTexture(
     strokeStyle?: number | string | undefined,
     lineWidth?: number,
     lineJoin?: 'round' | 'bevel' | 'miter'
-): void
+): void;
+
+export default function CreateTileTexture(
+    board: Board,
+    key: string,
+    fillStyle: number | string | undefined,
+    strokeStyle?: number | string | undefined,
+    lineWidth?: number,
+    overlapGrid?: boolean,
+    lineJoin?: 'round' | 'bevel' | 'miter'
+): void;

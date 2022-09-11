@@ -1,4 +1,11 @@
-var CreateTriangleTexture = function (scene, key, width, height, color, direction) {
+var CreateTriangleTexture = function (
+    scene,
+    key,
+    width, height,
+    color,
+    direction
+) {
+
     if (height === undefined) {
         height = width;
     }
