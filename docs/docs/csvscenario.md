@@ -123,6 +123,15 @@ scenario.start({
 
     });
     ```
+- Wait event
+    ```javascript
+    scenario.on('wait.' + eventName, function(scenario){ 
+    });
+    ```
+    ```javascript
+    scenario.on('wait', function(eventName, scenario){ 
+    });
+    ```
 - Label has changed
     ```javascript
     scenario.on('labelchange', function(lastLabel, prevLabel, scope, scenario){ 

@@ -8544,6 +8544,9 @@
 <li>Help method of board</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/LYmZZLm">Tile texture</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-texture">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
@@ -8597,7 +8600,7 @@
 <h4 id="create-tile-texture">Create tile texture<a class="headerlink" href="#create-tile-texture" title="Permanent link">&para;</a></h4>
 <h5 id="hexagon">Hexagon<a class="headerlink" href="#hexagon" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="nx">CreateTileTexture</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
-<span class="c1">// CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, lineJoin);</span>
+<span class="c1">// CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);</span>
 </code></pre></div>
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
@@ -8607,6 +8610,11 @@
 </li>
 <li><code>strokeStyle</code>, <code>lineWidth</code> : Stroke color, stroke line width of tile texture.<ul>
 <li><code>undefined</code> : Don't stroke tile texture.</li>
+</ul>
+</li>
+<li><code>overlapGrid</code> : <ul>
+<li><code>true</code> : Overlap grid. i.e. Grid width = lineWidth. Default behavior.</li>
+<li><code>false</code> : Don't overlap grid. i.e. Grid width = 2 * lineWidth.</li>
 </ul>
 </li>
 <li><code>lineJoin</code> : Join style of stroke lines. <code>'round'</code>, <code>'bevel'</code> and <code>'miter'</code>. Default is <code>'miter'</code>.</li>

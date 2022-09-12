@@ -8145,6 +8145,26 @@
     Bounds
   </a>
   
+    <nav class="md-nav" aria-label="Bounds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#board-bounds" class="md-nav__link">
+    Board bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-bounds" class="md-nav__link">
+    Grid bounds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9343,6 +9363,26 @@
     Bounds
   </a>
   
+    <nav class="md-nav" aria-label="Bounds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#board-bounds" class="md-nav__link">
+    Board bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-bounds" class="md-nav__link">
+    Grid bounds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9396,6 +9436,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/aMBXOE">Line to tileXY array</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/wLYmyw">Triangle to tileXY array</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/LYYJmxE">Ellipse to tileXY array</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/PoeZOGo">Bounds</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board">Sample code</a></p>
@@ -9822,46 +9863,81 @@
 <p>Get array of tile position inside a <a href="../geom-circle/">circle shape</a></p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">circleToTileXYArray</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 <span class="c1">// var out = board.circleToTileXYArray(circle, out);</span>
+<span class="c1">// var out = board.circleToTileXYArray(circle, testMode, out);</span>
 </code></pre></div>
 <ul>
 <li><code>circle</code> : <a href="../geom-circle/">Circle shape</a></li>
-<li><code>out</code> : An array of tile position</li>
+<li><code>testMode</code> : <ul>
+<li><code>0</code> : Test if shape is overlapping center position of a grid. Default behavior.</li>
+<li><code>1</code> : Test if shape is overlapping grid bounds of a grid.</li>
+<li><code>2</code> : Test if shape is overlapping grid points of a grid.</li>
+</ul>
+</li>
+<li><code>out</code> : An array of tile position.</li>
 </ul>
 <h4 id="rectangle-tile-position">Rectangle -&gt; tile position<a class="headerlink" href="#rectangle-tile-position" title="Permanent link">&para;</a></h4>
 <p>Get array of tile position inside a <a href="../geom-rectangle/">rectangle shape</a></p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">rectangleToTileXYArray</span><span class="p">(</span><span class="nx">rectangle</span><span class="p">);</span>
 <span class="c1">// var out = board.rectangleToTileXYArray(rectangle, out);</span>
+<span class="c1">// var out = board.rectangleToTileXYArray(rectangle, testMode, out);</span>
 </code></pre></div>
 <ul>
 <li><code>rectangle</code> : <a href="../geom-rectangle/">Rectangle shape</a></li>
-<li><code>out</code> : An array of tile position</li>
+<li><code>testMode</code> : <ul>
+<li><code>0</code> : Test if shape is overlapping center position of a grid. Default behavior.</li>
+<li><code>1</code> : Test if shape is overlapping grid bounds of a grid.</li>
+<li><code>2</code> : Test if shape is overlapping grid points of a grid.</li>
+</ul>
+</li>
+<li><code>out</code> : An array of tile position.</li>
 </ul>
 <h4 id="ellipse-tile-position">Ellipse -&gt; tile position<a class="headerlink" href="#ellipse-tile-position" title="Permanent link">&para;</a></h4>
 <p>Get array of tile position inside a <a href="../geom-ellipse/">ellipse shape</a></p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">ellipseToTileXYArray</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
 <span class="c1">// var out = board.ellipseToTileXYArray(ellipse, out);</span>
+<span class="c1">// var out = board.ellipseToTileXYArray(ellipse, testMode, out);</span>
 </code></pre></div>
 <ul>
 <li><code>ellipse</code> : <a href="../geom-ellipse/">Ellipse shape</a></li>
-<li><code>out</code> : An array of tile position</li>
+<li><code>testMode</code> : <ul>
+<li><code>0</code> : Test if shape is overlapping center position of a grid. Default behavior.</li>
+<li><code>1</code> : Test if shape is overlapping grid bounds of a grid.</li>
+<li><code>2</code> : Test if shape is overlapping grid points of a grid.</li>
+</ul>
+</li>
+<li><code>out</code> : An array of tile position.</li>
 </ul>
 <h4 id="triangle-tile-position">Triangle -&gt; tile position<a class="headerlink" href="#triangle-tile-position" title="Permanent link">&para;</a></h4>
 <p>Get array of tile position inside a <a href="../geom-triangle/">triangle shape</a></p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">triangleToTileXYArray</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span>
 <span class="c1">// var out = board.triangleToTileXYArray(triangle, out);</span>
+<span class="c1">// var out = board.triangleToTileXYArray(triangle, testMode, out);</span>
 </code></pre></div>
 <ul>
 <li><code>triangle</code> : <a href="../geom-triangle/">Triangle shape</a></li>
-<li><code>out</code> : An array of tile position</li>
+<li><code>testMode</code> : <ul>
+<li><code>0</code> : Test if shape is overlapping center position of a grid. Default behavior.</li>
+<li><code>1</code> : Test if shape is overlapping grid bounds of a grid.</li>
+<li><code>2</code> : Test if shape is overlapping grid points of a grid.</li>
+</ul>
+</li>
+<li><code>out</code> : An array of tile position.</li>
 </ul>
 <h4 id="polygon-tile-position">Polygon -&gt; tile position<a class="headerlink" href="#polygon-tile-position" title="Permanent link">&para;</a></h4>
 <p>Get array of tile position inside a <a href="../geom-polygon/">polygon shape</a></p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">polygonToTileXYArray</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
 <span class="c1">// var out = board.polygonToTileXYArray(polygon, out);</span>
+<span class="c1">// var out = board.polygonToTileXYArray(polygon, testMode, out);</span>
 </code></pre></div>
 <ul>
 <li><code>polygon</code> : <a href="../geom-polygon/">Polygon shape</a></li>
-<li><code>out</code> : An array of tile position</li>
+<li><code>testMode</code> : <ul>
+<li><code>0</code> : Test if shape is overlapping center position of a grid. Default behavior.</li>
+<li><code>1</code> : Test if shape is overlapping grid bounds of a grid.</li>
+<li><code>2</code> : Test if shape is overlapping grid points of a grid.</li>
+</ul>
+</li>
+<li><code>out</code> : An array of tile position.</li>
 </ul>
 <h3 id="angle-between-world-position-of-2-tiles">Angle between world position of 2 tiles<a class="headerlink" href="#angle-between-world-position-of-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileA</span><span class="p">,</span> <span class="nx">tileB</span><span class="p">);</span>
@@ -10485,11 +10561,25 @@
 </code></pre></div></li>
 </ul>
 <h3 id="bounds">Bounds<a class="headerlink" href="#bounds" title="Permanent link">&para;</a></h3>
+<h4 id="board-bounds">Board bounds<a class="headerlink" href="#board-bounds" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get a rectangle of all tiles
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rectangle</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getBoardBounds</span><span class="p">();</span>
+<span class="c1">// var out = board.getGridBounds(out);</span>
+</code></pre></div><ul>
+<li><code>rectangle</code> : <a href="../geom-rectangle/">Rectangle object</a>.</li>
+</ul>
+</li>
+<li>Draw rectangle on <a href="../graphics/#lines">graphics object</a>
+    <div class="highlight"><pre><span></span><code><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRectShape</span><span class="p">(</span><span class="nx">rectangle</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="grid-bounds">Grid bounds<a class="headerlink" href="#grid-bounds" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get a rectangle of a tile
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rectangle</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getTileBounds</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-<span class="c1">// var out = board.getTileBounds(tileX, tileY, out);</span>
-<span class="c1">// var rectangle = board.getTileBounds(chess, out);  // chess or tileXY</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rectangle</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getGridBounds</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// var out = board.getGridBounds(tileX, tileY, out);</span>
+<span class="c1">// var rectangle = board.getGridBounds(chess, out);  // chess or tileXY</span>
 </code></pre></div><ul>
 <li><code>rectangle</code> : <a href="../geom-rectangle/">Rectangle object</a>.</li>
 </ul>
