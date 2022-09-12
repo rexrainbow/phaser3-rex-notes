@@ -33,6 +33,7 @@ import Buttons from './buttons/Buttons.js';
 import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
 import Dialog from './dialog/Dialog.js';
+import Choices from './choices/Choices.js';
 import HolyGrail from './holygrail/HolyGrail.js';
 import Tabs from './tabs/Tabs.js';
 import Slider from './slider/Slider.js';
@@ -126,6 +127,7 @@ export {
     GridButtons,
     FixWidthButtons,
     Dialog,
+    Choices,
     HolyGrail,
     Tabs,
     Slider,

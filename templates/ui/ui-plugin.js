@@ -35,6 +35,7 @@ import ButtonsFactory from './buttons/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory.js';
 import FixWidthButtons from './fixwidthbuttons/Factory.js';
 import DialogFactory from './dialog/Factory.js';
+import ChoicesFactory from './choices/Factory.js';
 import HolyGrailFactory from './holygrail/Factory.js';
 import TabsFactory from './tabs/Factory.js';
 import SliderFactory from './slider/Factory.js';

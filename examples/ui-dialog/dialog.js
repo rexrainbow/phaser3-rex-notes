@@ -13,8 +13,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var dialog = this.rexUI.add.dialog({
-            x: 400,
-            y: 300,
+            x: 400, y: 300,
             width: 500,
 
             background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
@@ -90,7 +89,7 @@ class Demo extends Phaser.Scene {
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
             .popUp(1000)
-            // .moveFrom('-=400', undefined, 1000, 'Bounce')
+        // .moveFrom('-=400', undefined, 1000, 'Bounce')
 
         this.print = this.add.text(0, 0, '');
         dialog

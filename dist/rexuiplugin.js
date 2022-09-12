@@ -34649,6 +34649,110 @@
   });
   SetValue(window, 'RexPlugins.UI.Dialog', Dialog);
 
+  var Choices = /*#__PURE__*/function (_Dialog) {
+    _inherits(Choices, _Dialog);
+
+    var _super = _createSuper(Choices);
+
+    function Choices() {
+      _classCallCheck(this, Choices);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(Choices, [{
+      key: "setChildText",
+      value: // Assume that each child is a Label or a text game object
+      function setChildText(child, text) {
+        if (typeof child === 'string') {
+          child = this.childrenMap[child];
+        }
+
+        if (!child) {
+          return this;
+        }
+
+        if (text) {
+          child.show().setText(text);
+        } else {
+          child.hide();
+        }
+
+        return this;
+      }
+    }, {
+      key: "setTitle",
+      value: function setTitle(text) {
+        this.setChildText('title', text);
+        return this;
+      }
+    }, {
+      key: "setContent",
+      value: function setContent(text) {
+        this.setChildText('content', text);
+        return this;
+      }
+    }, {
+      key: "setDescription",
+      value: function setDescription(text) {
+        this.setChildText('description', text);
+        return this;
+      }
+    }, {
+      key: "setChoices",
+      value: function setChoices(textArray) {
+        var choices = this.childrenMap.choices;
+
+        for (var i = 0, cnt = choices.length; i < cnt; i++) {
+          this.setChildText(choices[i], textArray[i]);
+        }
+
+        return this;
+      }
+    }, {
+      key: "setText",
+      value: function setText(config) {
+        if (config === undefined) {
+          config = {};
+        }
+
+        this.setTitle(config.title).setContent(config.content).setDescription(config.description).setChoices(config.choices);
+        return this;
+      }
+    }, {
+      key: "clickChoicePromise",
+      value: function clickChoicePromise(config) {
+        if (config) {
+          this.setText(config).layout();
+        }
+
+        var self = this;
+        return new Promise(function (resolve, reject) {
+          self.once('button.click', function (button, groupName, index, pointer, event) {
+            if (groupName !== 'choices') {
+              return;
+            }
+
+            resolve({
+              button: button,
+              index: index,
+              pointer: pointer
+            });
+          });
+        });
+      }
+    }]);
+
+    return Choices;
+  }(Dialog);
+
+  ObjectFactory.register('choices', function (config) {
+    var gameObject = new Choices(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue(window, 'RexPlugins.UI.Choices', Choices);
+
   var GetValue$R = Phaser.Utils.Objects.GetValue;
 
   var HolyGrail = /*#__PURE__*/function (_Sizer) {

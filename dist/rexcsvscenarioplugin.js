@@ -1174,8 +1174,11 @@
 
           this.timer = this.scene.time.delayedCall(delay, this["continue"], [eventName], this);
           this.timer.timeScale = this._timeScale;
+        } else {
+          this.emit("wait.".concat(eventName), this);
         }
 
+        this.emit('wait', eventName, this);
         return this;
       }
     }, {
