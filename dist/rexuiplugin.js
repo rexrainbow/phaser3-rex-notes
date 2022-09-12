@@ -34618,9 +34618,9 @@
 
       _this.addChildrenMap('description', description);
 
-      _this.addChildrenMap('choices', choices);
+      _this.addChildrenMap('choices', choicesSizer ? choicesSizer.buttons : undefined);
 
-      _this.addChildrenMap('actions', actions);
+      _this.addChildrenMap('actions', actionsSizer ? actionsSizer.buttons : undefined);
 
       _this.addChildrenMap('choicesSizer', choicesSizer);
 
@@ -34654,16 +34654,49 @@
 
     var _super = _createSuper(Choices);
 
-    function Choices() {
+    // Assume that each child is a Label or a text game object
+    function Choices(scene, config) {
+      var _this;
+
       _classCallCheck(this, Choices);
 
-      return _super.apply(this, arguments);
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (!config.hasOwnProperty('choices')) {
+        config.choices = [];
+      }
+
+      var createChoiceCallback, createChoiceCallbackScope;
+
+      if (typeof config.choices === 'function') {
+        createChoiceCallback = config.choices;
+        createChoiceCallbackScope = undefined;
+        config.choices = [];
+      } else {
+        createChoiceCallback = config.createChoiceCallback;
+        createChoiceCallbackScope = config.createChoiceCallbackScope;
+      }
+
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexChoices';
+
+      _this.setCreateChoiceCallback(createChoiceCallback, createChoiceCallbackScope);
+
+      return _this;
     }
 
     _createClass(Choices, [{
+      key: "setCreateChoiceCallback",
+      value: function setCreateChoiceCallback(callback, scope) {
+        this.createChoiceCallback = callback;
+        this.createChoiceCallbackScope = scope;
+        return this;
+      }
+    }, {
       key: "setChildText",
-      value: // Assume that each child is a Label or a text game object
-      function setChildText(child, text) {
+      value: function setChildText(child, text) {
         if (typeof child === 'string') {
           child = this.childrenMap[child];
         }
@@ -34702,6 +34735,25 @@
       key: "setChoices",
       value: function setChoices(textArray) {
         var choices = this.childrenMap.choices;
+
+        if (textArray.length > choices.length) {
+          var callback = this.createChoiceCallback;
+          var scope = this.createChoiceCallbackScope;
+
+          if (callback) {
+            for (var i = 0, cnt = textArray.length - choices.length; i < cnt; i++) {
+              var gameObject;
+
+              if (scope) {
+                gameObject = callback.call(scope, this.scene);
+              } else {
+                gameObject = callback(this.scene);
+              }
+
+              this.addChoice(gameObject);
+            }
+          }
+        }
 
         for (var i = 0, cnt = choices.length; i < cnt; i++) {
           this.setChildText(choices[i], textArray[i]);

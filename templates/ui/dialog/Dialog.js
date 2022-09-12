@@ -256,8 +256,8 @@ class Dialog extends Sizer {
         this.addChildrenMap('leftToolbar', leftToolbar);
         this.addChildrenMap('content', content);
         this.addChildrenMap('description', description);
-        this.addChildrenMap('choices', choices);
-        this.addChildrenMap('actions', actions);
+        this.addChildrenMap('choices', (choicesSizer) ? choicesSizer.buttons : undefined);
+        this.addChildrenMap('actions', (actionsSizer) ? actionsSizer.buttons : undefined);
         this.addChildrenMap('choicesSizer', choicesSizer);
         this.addChildrenMap('actionsSizer', actionsSizer);
         this.addChildrenMap('toolbarSizer', toolbarSizer);

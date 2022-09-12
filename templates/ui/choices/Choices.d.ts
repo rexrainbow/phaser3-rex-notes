@@ -4,6 +4,13 @@ import Dialog from '../dialog/Dialog';
 export default Choices;
 
 declare namespace Choices {
+    type CreateChoiceCallbackType = (scene: Phaser.Scene) => Phaser.GameObjects.GameObject;
+
+    interface IConfig extends Dialog.IConfig {
+        createChoiceCallback?: CreateChoiceCallbackType;
+        createChoiceCallbackScope?: object
+    }
+
     interface SetTextIConfig {
         title?: string,
         content?: string,
@@ -13,6 +20,16 @@ declare namespace Choices {
 }
 
 declare class Choices extends Dialog {
+    constructor(
+        scene: Phaser.Scene,
+        config?: Choices.IConfig
+    );
+
+    setCreateChoiceCallback(
+        callback?: Choices.CreateChoiceCallbackType,
+        scope?: object
+    ): this;
+
     setTitle(text?: string): this;
     setContent(text?: string): this;
     setDescription(text?: string): this;

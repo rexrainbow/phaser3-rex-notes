@@ -50,13 +50,9 @@ var CreateChoices = function (scene) {
 
         description: CreateLabel(scene, ''),
 
-        // Allows 4 choices
-        choices: [
-            CreateLabel(scene, '', COLOR_DARK),
-            CreateLabel(scene, '', COLOR_DARK),
-            CreateLabel(scene, '', COLOR_DARK),
-            CreateLabel(scene, '', COLOR_DARK),
-        ],
+        createChoiceCallback(scene) {
+            return CreateLabel(scene, '', COLOR_DARK);
+        },
 
         space: {
             left: 20, right: 20, top: 20, bottom: 20,

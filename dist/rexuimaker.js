@@ -25554,9 +25554,9 @@
 
       _this.addChildrenMap('description', description);
 
-      _this.addChildrenMap('choices', choices);
+      _this.addChildrenMap('choices', choicesSizer ? choicesSizer.buttons : undefined);
 
-      _this.addChildrenMap('actions', actions);
+      _this.addChildrenMap('actions', actionsSizer ? actionsSizer.buttons : undefined);
 
       _this.addChildrenMap('choicesSizer', choicesSizer);
 
