@@ -9103,15 +9103,21 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li><a href="./#tileset"><code>tileset</code></a> : Image and tileData of some kind of tiles.</li>
 </ul>
 <h3 id="load-tile-map">Load tile map<a class="headerlink" href="#load-tile-map" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapTiledJSON</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// JSON</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>          <span class="c1">// CSV</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapTiledJSON</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>   <span class="c1">// JSON</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>         <span class="c1">// CSV</span>
 </code></pre></div>
 <h3 id="add-tile-map-object">Add tile map object<a class="headerlink" href="#add-tile-map-object" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create <a href="./#map"><code>map</code></a><ul>
 <li>Create map from tiled
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var map = this.make.tilemap({ key: &#39;map&#39;, tileWidth: 16, tileHeight: 16 });</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span> 
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span> 
+    <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">16</span><span class="p">,</span> 
+    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">16</span>
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Create map from 2d array
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span>
@@ -9119,14 +9125,18 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mf">10</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
+    <span class="c1">// orientation: &#39;orthogonal&#39;,</span>
+    <span class="c1">// renderOrder: &#39;right-down&#39;,</span>
 <span class="p">});</span>
 </code></pre></div></li>
 <li>Create map from csv
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>     <span class="c1">// csv file</span>
     <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
-    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span>
+    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
+    <span class="c1">// orientation: &#39;orthogonal&#39;,</span>
+    <span class="c1">// renderOrder: &#39;right-down&#39;,</span>
 <span class="p">});</span>
 </code></pre></div></li>
 </ul>
@@ -9135,7 +9145,26 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileset</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">addTilesetImage</span><span class="p">(</span><span class="nx">tilesetName</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span> <span class="c1">// key: texture key</span>
 <span class="c1">// var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName</span>
 <span class="c1">// var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>key</code> : The key of the Phaser.Cache image used for this tileset.<ul>
+<li><code>undefined</code> , <code>null</code> : Use <code>tilesetName</code> as default value.</li>
+</ul>
+</li>
+<li><code>tileWidth</code> , <code>tileHeight</code> : The width/height of the tile (in pixels) in the Tileset Image.<ul>
+<li><code>undefined</code> : Default to the map's <code>tileWidth</code>/<code>tileHeight</code>.</li>
+</ul>
+</li>
+<li><code>tileMargin</code> : The margin around the tiles in the sheet (in pixels).<ul>
+<li><code>undefined</code> : Default to <code>0</code></li>
+</ul>
+</li>
+<li><code>tileSpacing</code> The spacing between each the tile in the sheet (in pixels).<ul>
+<li><code>undefined</code> : Default to <code>0</code> </li>
+</ul>
+</li>
+<li><code>gid</code> : If adding multiple tilesets to a blank map, specify the starting GID this set will use here.</li>
+</ul>
+</li>
 <li>Create <a href="./#layer"><code>layer</code></a><ul>
 <li>Create existed layer
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">layer</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">createLayer</span><span class="p">(</span><span class="nx">layerID</span><span class="p">,</span> <span class="nx">tileset</span><span class="p">);</span>

@@ -27,8 +27,8 @@ layerB --> tilesB["tiles"]
 ### Load tile map
 
 ```javascript
-scene.load.tilemapTiledJSON(key, url);  // JSON
-scene.load.tilemapCSV(key, url);          // CSV
+scene.load.tilemapTiledJSON(key, url);   // JSON
+scene.load.tilemapCSV(key, url);         // CSV
 ```
 
 ### Add tile map object
@@ -37,7 +37,14 @@ scene.load.tilemapCSV(key, url);          // CSV
     - Create map from tiled
         ```javascript
         var map = scene.add.tilemap(key);
-        // var map = this.make.tilemap({ key: 'map', tileWidth: 16, tileHeight: 16 });
+        ```
+        or
+        ```javascript
+        var map = this.make.tilemap({ 
+            key: 'map', 
+            tileWidth: 16, 
+            tileHeight: 16
+        });
         ```
     - Create map from 2d array
         ```javascript
@@ -46,7 +53,9 @@ scene.load.tilemapCSV(key, url);          // CSV
             tileWidth: 32,
             tileHeight: 32,
             width: 10,
-            height: 10
+            height: 10,
+            // orientation: 'orthogonal',
+            // renderOrder: 'right-down',
         });
         ```
     - Create map from csv
@@ -54,7 +63,9 @@ scene.load.tilemapCSV(key, url);          // CSV
         var map = this.make.tilemap({
             key: 'map',     // csv file
             tileWidth: 32,
-            tileHeight: 32
+            tileHeight: 32,
+            // orientation: 'orthogonal',
+            // renderOrder: 'right-down',
         });
         ```
 2. Add [`tileset`](tilemap.md#tileset) image
@@ -63,6 +74,15 @@ scene.load.tilemapCSV(key, url);          // CSV
     // var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName
     // var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);
     ```
+    - `key` : The key of the Phaser.Cache image used for this tileset.
+        - `undefined` , `null` : Use `tilesetName` as default value.
+    - `tileWidth` , `tileHeight` : The width/height of the tile (in pixels) in the Tileset Image.
+        - `undefined` : Default to the map's `tileWidth`/`tileHeight`.
+    - `tileMargin` : The margin around the tiles in the sheet (in pixels).
+        - `undefined` : Default to `0`
+    - `tileSpacing` The spacing between each the tile in the sheet (in pixels).
+        - `undefined` : Default to `0` 
+    - `gid` : If adding multiple tilesets to a blank map, specify the starting GID this set will use here.
 3. Create [`layer`](tilemap.md#layer)
     - Create existed layer
         ```javascript
