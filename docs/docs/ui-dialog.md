@@ -349,14 +349,56 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    dialog.on('choice.click', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('action.click', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('toolbar.click', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('leftToolbar.click', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
     - `button` : Triggered button game object.
-    - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`.
+    - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`, `'leftToolbar'`.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
     dialog.on('button.over', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    dialog.on('choice.over', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('action.over', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('toolbar.over', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('leftToolbar.over', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -371,6 +413,27 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    dialog.on('choice.out', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('action.out', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('toolbar.out', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('leftToolbar.out', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
     - `button` : Triggered button game object.
     - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`
     - `index` : Index of triggered button game object.
@@ -382,12 +445,54 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    dialog.on('choice.enable', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('action.enable', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('toolbar.enable', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('leftToolbar.enable', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
     - `button` : Triggered button game object.
     - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`
     - `index` : Index of triggered button game object.
 - Disable button's input
     ```javascript
     dialog.on('button.disalbe', function(button, groupName, index) {
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    dialog.on('choice.disalbe', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('action.disalbe', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('toolbar.disalbe', function(button, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    dialog.on('leftToolbar.disalbe', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```

@@ -14076,6 +14076,12 @@
         });
       }
 
+      EmitButtonEvent(_assertThisInitialized(_this), 'click');
+      EmitButtonEvent(_assertThisInitialized(_this), 'over');
+      EmitButtonEvent(_assertThisInitialized(_this), 'out');
+      EmitButtonEvent(_assertThisInitialized(_this), 'enable');
+      EmitButtonEvent(_assertThisInitialized(_this), 'disalbe');
+
       _this.addChildrenMap('background', background);
 
       _this.addChildrenMap('title', title);
@@ -14108,6 +14114,23 @@
 
   var Contains = function Contains(arr, item) {
     return arr.indexOf(item) !== -1;
+  };
+
+  var ButtonsGroupEventNameMap = {
+    actions: 'action',
+    choices: 'choice',
+    toolbar: 'toolbar',
+    leftToolbar: 'leftToolbar'
+  };
+
+  var EmitButtonEvent = function EmitButtonEvent(dialog, postEventName) {
+    dialog.on("button.".concat(postEventName), function (button, groupName, index, pointer, event) {
+      if (!ButtonsGroupEventNameMap.hasOwnProperty(groupName)) {
+        return;
+      }
+
+      dialog.emit("".concat(ButtonsGroupEventNameMap[groupName], ".").concat(postEventName), button, index, pointer, event);
+    });
   };
 
   Object.assign(Dialog.prototype, ButtonMethods);
@@ -14243,11 +14266,7 @@
 
         var self = this;
         return new Promise(function (resolve, reject) {
-          self.once('button.click', function (button, groupName, index, pointer, event) {
-            if (groupName !== 'choices') {
-              return;
-            }
-
+          self.once('choice.click', function (button, index, pointer, event) {
             resolve({
               button: button,
               index: index,

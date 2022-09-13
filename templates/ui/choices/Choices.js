@@ -114,10 +114,7 @@ class Choices extends Dialog {
 
         var self = this;
         return new Promise(function (resolve, reject) {
-            self.once('button.click', function (button, groupName, index, pointer, event) {
-                if (groupName !== 'choices') {
-                    return;
-                }
+            self.once('choice.click', function (button, index, pointer, event) {
                 resolve({
                     button: button,
                     index: index,

@@ -250,6 +250,12 @@ class Dialog extends Sizer {
             );
         }
 
+        EmitButtonEvent(this, 'click');
+        EmitButtonEvent(this, 'over');
+        EmitButtonEvent(this, 'out');
+        EmitButtonEvent(this, 'enable');
+        EmitButtonEvent(this, 'disalbe');
+
         this.addChildrenMap('background', background);
         this.addChildrenMap('title', title);
         this.addChildrenMap('toolbar', toolbar);
@@ -267,6 +273,22 @@ class Dialog extends Sizer {
 
 var Contains = function (arr, item) {
     return arr.indexOf(item) !== -1;
+}
+
+var ButtonsGroupEventNameMap = {
+    actions: 'action',
+    choices: 'choice',
+    toolbar: 'toolbar',
+    leftToolbar: 'leftToolbar'
+}
+
+var EmitButtonEvent = function (dialog, postEventName) {
+    dialog.on(`button.${postEventName}`, function (button, groupName, index, pointer, event) {
+        if (!ButtonsGroupEventNameMap.hasOwnProperty(groupName)) {
+            return
+        }
+        dialog.emit(`${ButtonsGroupEventNameMap[groupName]}.${postEventName}`, button, index, pointer, event);
+    })
 }
 
 Object.assign(
