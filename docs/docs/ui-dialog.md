@@ -471,28 +471,28 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `index` : Index of triggered button game object.
 - Disable button's input
     ```javascript
-    dialog.on('button.disalbe', function(button, groupName, index) {
+    dialog.on('button.disable', function(button, groupName, index) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    dialog.on('choice.disalbe', function(button, index, pointer, event) {
+    dialog.on('choice.disable', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     ```javascript
-    dialog.on('action.disalbe', function(button, index, pointer, event) {
+    dialog.on('action.disable', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     ```javascript
-    dialog.on('toolbar.disalbe', function(button, index, pointer, event) {
+    dialog.on('toolbar.disable', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     ```javascript
-    dialog.on('leftToolbar.disalbe', function(button, index, pointer, event) {
+    dialog.on('leftToolbar.disable', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
