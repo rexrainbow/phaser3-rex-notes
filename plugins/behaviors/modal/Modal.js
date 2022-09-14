@@ -1,8 +1,10 @@
 import Transition from '../transition/Transition.js';
 import CreateCover from './CreateCover.js';
-import FadeIn from '../../fade-in.js';
-import FadeOutDestroy from '../../fade-out-destroy.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
+import {
+    DefaultCoverTransitInCallback,
+    DefaultCoverTransitOutCallback
+} from './DefaultCoverTransitCallbacks.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -173,14 +175,6 @@ class Modal extends Transition {
         return this;
     }
 
-}
-
-var DefaultCoverTransitInCallback = function (cover, duration) {
-    FadeIn(cover, duration, cover.alpha);
-}
-
-var DefaultCoverTransitOutCallback = function (cover, duration) {
-    FadeOutDestroy(cover, duration, false);
 }
 
 const TransitionMode = {
