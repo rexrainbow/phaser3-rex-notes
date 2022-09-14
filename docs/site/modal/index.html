@@ -8592,7 +8592,9 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">modal</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexModal&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// cover: {</span>
     <span class="c1">//     color: 0x0,</span>
-    <span class="c1">//     alpha: 0.8</span>
+    <span class="c1">//     alpha: 0.8,</span>
+    <span class="c1">//     transitIn: function(gameObject, duration) { },</span>
+    <span class="c1">//     transitOut: function(gameObject, duration) { },</span>
     <span class="c1">// },</span>
     <span class="c1">// cover: false, </span>
 
@@ -8614,6 +8616,16 @@
 <ul>
 <li><code>cover</code> : Configuration of <a href="../shape-cover/#create-cover-object">Cover</a> -- A <a href="../shape-fullwindowrectangle/">rectangle shape covered full window</a>, and <a href="../toucheventstop/">block all touch events</a>.<ul>
 <li><code>false</code> : Don't create cover game object.</li>
+<li><code>cover.transitIn</code> : Custom callback. Default behavior is fade-in.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>cover.transitOut</code> : Custom callback. Default behavior is fade-out.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>manualClose</code> :<ul>

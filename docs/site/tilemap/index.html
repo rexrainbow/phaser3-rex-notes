@@ -9118,7 +9118,10 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">16</span><span class="p">,</span> 
     <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">16</span>
 <span class="p">});</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Support ORTHOGONAL, ISOMETRIC, STAGGERED, HEXAGONAL map</li>
+</ul>
+</li>
 <li>Create map from 2d array
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span>
     <span class="c1">// data: tileIdxArray,  // [ [], [], ... ]</span>
@@ -9126,19 +9129,21 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
-    <span class="c1">// orientation: &#39;orthogonal&#39;,</span>
-    <span class="c1">// renderOrder: &#39;right-down&#39;,</span>
 <span class="p">});</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Only support ORTHOGONAL map</li>
+</ul>
+</li>
 <li>Create map from csv
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>     <span class="c1">// csv file</span>
     <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
-    <span class="c1">// orientation: &#39;orthogonal&#39;,</span>
-    <span class="c1">// renderOrder: &#39;right-down&#39;,</span>
 <span class="p">});</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Only support ORTHOGONAL map</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Add <a href="./#tileset"><code>tileset</code></a> image

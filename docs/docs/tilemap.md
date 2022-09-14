@@ -46,6 +46,7 @@ scene.load.tilemapCSV(key, url);         // CSV
             tileHeight: 16
         });
         ```
+        - Support ORTHOGONAL, ISOMETRIC, STAGGERED, HEXAGONAL map
     - Create map from 2d array
         ```javascript
         var map = this.make.tilemap({
@@ -54,20 +55,18 @@ scene.load.tilemapCSV(key, url);         // CSV
             tileHeight: 32,
             width: 10,
             height: 10,
-            // orientation: 'orthogonal',
-            // renderOrder: 'right-down',
         });
         ```
+        - Only support ORTHOGONAL map
     - Create map from csv
         ```javascript
         var map = this.make.tilemap({
             key: 'map',     // csv file
             tileWidth: 32,
             tileHeight: 32,
-            // orientation: 'orthogonal',
-            // renderOrder: 'right-down',
         });
         ```
+        - Only support ORTHOGONAL map
 2. Add [`tileset`](tilemap.md#tileset) image
     ```javascript
     var tileset = map.addTilesetImage(tilesetName, key); // key: texture key
