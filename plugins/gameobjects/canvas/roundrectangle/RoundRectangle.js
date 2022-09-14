@@ -66,7 +66,7 @@ class RoundRectangle extends Canvas {
     }
 
     get isHorizontalGradient() {
-        return this._fillStyle;
+        return this._isHorizontalGradient;
     }
 
     set isHorizontalGradient(value) {

@@ -3645,7 +3645,7 @@
     }, {
       key: "isHorizontalGradient",
       get: function get() {
-        return this._fillStyle;
+        return this._isHorizontalGradient;
       },
       set: function set(value) {
         this.dirty |= this._isHorizontalGradient != value;
@@ -52609,6 +52609,14 @@
     }
   };
 
+  var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
+    FadeIn(cover, duration, cover.alpha);
+  };
+
+  var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
+    FadeOutDestroy(cover, duration, false);
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var Modal$1 = /*#__PURE__*/function (_Transition) {
@@ -52638,8 +52646,15 @@
       // Cover : key of modal, to block touch input        
 
       var coverConfig = GetValue(config, 'cover');
-      _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined; // Close conditions:
+      _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined;
+
+      if (_this.cover) {
+        _this.setCoverTransitInCallback(GetValue(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+
+        _this.setCoverTransitOutCallback(GetValue(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+      } // Close conditions:
       // OK/Cancel buttons, invoke modal.requestClose()
+
 
       var manualClose = GetValue(config, 'manualClose', true); // Timeout/any-touch
 
@@ -52699,8 +52714,8 @@
         var duration = this.transitInTime;
         var cover = this.cover;
 
-        if (cover) {
-          FadeIn(cover, duration, cover.alpha);
+        if (cover && this.coverTransitInCallback) {
+          this.coverTransitInCallback(cover, duration);
         }
 
         return this;
@@ -52713,8 +52728,8 @@
         var duration = this.transitOutTime;
         var cover = this.cover;
 
-        if (cover) {
-          FadeOutDestroy(cover, duration, false);
+        if (cover && this.coverTransitOutCallback) {
+          this.coverTransitOutCallback(cover, duration);
         }
 
         return this;
@@ -52789,6 +52804,18 @@
         _get(_getPrototypeOf(Modal.prototype), "setTransitOutCallback", this).call(this, callback); // callback = function(gameObject, duration) {}
 
 
+        return this;
+      }
+    }, {
+      key: "setCoverTransitInCallback",
+      value: function setCoverTransitInCallback(callback) {
+        this.coverTransitInCallback = callback;
+        return this;
+      }
+    }, {
+      key: "setCoverTransitOutCallback",
+      value: function setCoverTransitOutCallback(callback) {
+        this.coverTransitOutCallback = callback;
         return this;
       }
     }]);

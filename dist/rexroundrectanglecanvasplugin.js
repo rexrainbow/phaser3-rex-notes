@@ -1046,7 +1046,7 @@
     }, {
       key: "isHorizontalGradient",
       get: function get() {
-        return this._fillStyle;
+        return this._isHorizontalGradient;
       },
       set: function set(value) {
         this.dirty |= this._isHorizontalGradient != value;

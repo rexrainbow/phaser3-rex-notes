@@ -1783,168 +1783,6 @@
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$1 = Phaser.Math.Linear;
 
-  var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
-    _inherits(Fade, _EaseValueTaskBase);
-
-    var _super = _createSuper(Fade);
-
-    function Fade(gameObject, config) {
-      var _this;
-
-      _classCallCheck(this, Fade);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
-      // this.timer
-
-      _this.resetFromJSON(config);
-
-      _this.boot();
-
-      return _this;
-    }
-
-    _createClass(Fade, [{
-      key: "resetFromJSON",
-      value: function resetFromJSON(o) {
-        _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
-
-        this.setMode(GetValue$2(o, 'mode', 0));
-        this.setAlphaRange(GetAdvancedValue$1(o, 'start', this.parent.alpha), GetAdvancedValue$1(o, 'end', 0));
-        return this;
-      }
-    }, {
-      key: "setMode",
-      value: function setMode(m) {
-        if (typeof m === 'string') {
-          m = MODE$1[m];
-        }
-
-        this.mode = m;
-        return this;
-      }
-    }, {
-      key: "setAlphaRange",
-      value: function setAlphaRange(start, end) {
-        this.alphaStart = start;
-        this.alphaEnd = end;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        if (this.timer.isRunning) {
-          return this;
-        }
-
-        var gameObject = this.parent;
-        gameObject.setAlpha(this.alphaStart);
-        this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(this.mode === 2 ? -1 : 0);
-
-        _get(_getPrototypeOf(Fade.prototype), "start", this).call(this);
-
-        return this;
-      }
-    }, {
-      key: "updateGameObject",
-      value: function updateGameObject(gameObject, timer) {
-        var t = timer.t;
-
-        if (timer.isOddIteration) {
-          // Yoyo
-          t = 1 - t;
-        }
-
-        gameObject.alpha = Linear$1(this.alphaStart, this.alphaEnd, t);
-      }
-    }, {
-      key: "complete",
-      value: function complete() {
-        _get(_getPrototypeOf(Fade.prototype), "complete", this).call(this);
-
-        if (this.mode === 1) {
-          this.parent.destroy(); // Will also destroy this behavior
-        }
-
-        return this;
-      }
-    }]);
-
-    return Fade;
-  }(EaseValueTaskBase);
-
-  var MODE$1 = {
-    stop: 0,
-    destroy: 1,
-    yoyo: 2
-  };
-
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
-  var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
-    var startAlpha, endAlpha;
-
-    if (IsPlainObject(alpha)) {
-      startAlpha = alpha.start;
-      endAlpha = alpha.end;
-    } else {
-      endAlpha = alpha;
-    }
-
-    if (startAlpha === undefined) {
-      startAlpha = 0;
-    }
-
-    if (endAlpha === undefined) {
-      endAlpha = 1;
-    }
-
-    var config = {
-      mode: 0,
-      start: startAlpha,
-      end: endAlpha,
-      duration: duration
-    };
-
-    if (fade === undefined) {
-      fade = new Fade(gameObject, config);
-    } else {
-      fade.resetFromJSON(config);
-    }
-
-    fade.restart();
-    return fade;
-  };
-
-  var FadeOutDestroy = function FadeOutDestroy(gameObject, duration, destroyMode, fade) {
-    if (destroyMode instanceof Fade) {
-      fade = destroyMode;
-      destroyMode = undefined;
-    }
-
-    if (destroyMode === undefined) {
-      destroyMode = true;
-    }
-
-    var config = {
-      mode: destroyMode ? 1 : 0,
-      end: 0,
-      duration: duration
-    };
-
-    if (fade === undefined) {
-      fade = new Fade(gameObject, config);
-    } else {
-      fade.resetFromJSON(config);
-    }
-
-    fade.restart();
-    return fade;
-  };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var Linear = Phaser.Math.Linear;
-
   var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
 
@@ -1973,15 +1811,15 @@
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Scale.prototype), "resetFromJSON", this).call(this, o);
 
-        this.setMode(GetValue$1(o, 'mode', 0));
-        this.setScaleRange(GetAdvancedValue(o, 'start', undefined), GetAdvancedValue(o, 'end', 0));
+        this.setMode(GetValue$2(o, 'mode', 0));
+        this.setScaleRange(GetAdvancedValue$1(o, 'start', undefined), GetAdvancedValue$1(o, 'end', 0));
         return this;
       }
     }, {
       key: "setMode",
       value: function setMode(m) {
         if (typeof m === 'string') {
-          m = MODE[m];
+          m = MODE$1[m];
         }
 
         this.mode = m;
@@ -1994,16 +1832,16 @@
           this.startX = start;
           this.startY = start;
         } else {
-          this.startX = GetAdvancedValue(start, 'x', this.parent.scaleX);
-          this.startY = GetAdvancedValue(start, 'y', this.parent.scaleY);
+          this.startX = GetAdvancedValue$1(start, 'x', this.parent.scaleX);
+          this.startY = GetAdvancedValue$1(start, 'y', this.parent.scaleY);
         }
 
         if (typeof end === 'number') {
           this.endX = end;
           this.endY = end;
         } else {
-          this.endX = GetAdvancedValue(end, 'x', undefined);
-          this.endY = GetAdvancedValue(end, 'y', undefined);
+          this.endX = GetAdvancedValue$1(end, 'x', undefined);
+          this.endY = GetAdvancedValue$1(end, 'y', undefined);
         }
 
         this.hasScaleX = this.startX !== undefined && this.endX !== undefined;
@@ -2055,11 +1893,11 @@
         t = this.easeFn(t);
 
         if (this.hasScaleX) {
-          gameObject.scaleX = Linear(this.startX, this.endX, t);
+          gameObject.scaleX = Linear$1(this.startX, this.endX, t);
         }
 
         if (this.hasScaleY) {
-          gameObject.scaleY = Linear(this.startY, this.endY, t);
+          gameObject.scaleY = Linear$1(this.startY, this.endY, t);
         }
       }
     }, {
@@ -2078,7 +1916,7 @@
     return Scale;
   }(EaseValueTaskBase);
 
-  var MODE = {
+  var MODE$1 = {
     stop: 0,
     destroy: 1,
     yoyo: 2
@@ -2188,6 +2026,168 @@
     return scale;
   };
 
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var Linear = Phaser.Math.Linear;
+
+  var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
+    _inherits(Fade, _EaseValueTaskBase);
+
+    var _super = _createSuper(Fade);
+
+    function Fade(gameObject, config) {
+      var _this;
+
+      _classCallCheck(this, Fade);
+
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      // this.timer
+
+      _this.resetFromJSON(config);
+
+      _this.boot();
+
+      return _this;
+    }
+
+    _createClass(Fade, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
+
+        this.setMode(GetValue$1(o, 'mode', 0));
+        this.setAlphaRange(GetAdvancedValue(o, 'start', this.parent.alpha), GetAdvancedValue(o, 'end', 0));
+        return this;
+      }
+    }, {
+      key: "setMode",
+      value: function setMode(m) {
+        if (typeof m === 'string') {
+          m = MODE[m];
+        }
+
+        this.mode = m;
+        return this;
+      }
+    }, {
+      key: "setAlphaRange",
+      value: function setAlphaRange(start, end) {
+        this.alphaStart = start;
+        this.alphaEnd = end;
+        return this;
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        if (this.timer.isRunning) {
+          return this;
+        }
+
+        var gameObject = this.parent;
+        gameObject.setAlpha(this.alphaStart);
+        this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(this.mode === 2 ? -1 : 0);
+
+        _get(_getPrototypeOf(Fade.prototype), "start", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "updateGameObject",
+      value: function updateGameObject(gameObject, timer) {
+        var t = timer.t;
+
+        if (timer.isOddIteration) {
+          // Yoyo
+          t = 1 - t;
+        }
+
+        gameObject.alpha = Linear(this.alphaStart, this.alphaEnd, t);
+      }
+    }, {
+      key: "complete",
+      value: function complete() {
+        _get(_getPrototypeOf(Fade.prototype), "complete", this).call(this);
+
+        if (this.mode === 1) {
+          this.parent.destroy(); // Will also destroy this behavior
+        }
+
+        return this;
+      }
+    }]);
+
+    return Fade;
+  }(EaseValueTaskBase);
+
+  var MODE = {
+    stop: 0,
+    destroy: 1,
+    yoyo: 2
+  };
+
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
+  var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
+    var startAlpha, endAlpha;
+
+    if (IsPlainObject(alpha)) {
+      startAlpha = alpha.start;
+      endAlpha = alpha.end;
+    } else {
+      endAlpha = alpha;
+    }
+
+    if (startAlpha === undefined) {
+      startAlpha = 0;
+    }
+
+    if (endAlpha === undefined) {
+      endAlpha = 1;
+    }
+
+    var config = {
+      mode: 0,
+      start: startAlpha,
+      end: endAlpha,
+      duration: duration
+    };
+
+    if (fade === undefined) {
+      fade = new Fade(gameObject, config);
+    } else {
+      fade.resetFromJSON(config);
+    }
+
+    fade.restart();
+    return fade;
+  };
+
+  var FadeOutDestroy = function FadeOutDestroy(gameObject, duration, destroyMode, fade) {
+    if (destroyMode instanceof Fade) {
+      fade = destroyMode;
+      destroyMode = undefined;
+    }
+
+    if (destroyMode === undefined) {
+      destroyMode = true;
+    }
+
+    var config = {
+      mode: destroyMode ? 1 : 0,
+      end: 0,
+      duration: duration
+    };
+
+    if (fade === undefined) {
+      fade = new Fade(gameObject, config);
+    } else {
+      fade.resetFromJSON(config);
+    }
+
+    fade.restart();
+    return fade;
+  };
+
   var DefaultTransitCallbacks = {
     popUp: PopUp,
     scaleDown: function scaleDown(gameObject, duration) {
@@ -2199,6 +2199,14 @@
       // Don't destroy here
       FadeOutDestroy(gameObject, duration, false);
     }
+  };
+
+  var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
+    FadeIn(cover, duration, cover.alpha);
+  };
+
+  var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
+    FadeOutDestroy(cover, duration, false);
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -2230,8 +2238,15 @@
       // Cover : key of modal, to block touch input        
 
       var coverConfig = GetValue(config, 'cover');
-      _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined; // Close conditions:
+      _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined;
+
+      if (_this.cover) {
+        _this.setCoverTransitInCallback(GetValue(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+
+        _this.setCoverTransitOutCallback(GetValue(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+      } // Close conditions:
       // OK/Cancel buttons, invoke modal.requestClose()
+
 
       var manualClose = GetValue(config, 'manualClose', true); // Timeout/any-touch
 
@@ -2291,8 +2306,8 @@
         var duration = this.transitInTime;
         var cover = this.cover;
 
-        if (cover) {
-          FadeIn(cover, duration, cover.alpha);
+        if (cover && this.coverTransitInCallback) {
+          this.coverTransitInCallback(cover, duration);
         }
 
         return this;
@@ -2305,8 +2320,8 @@
         var duration = this.transitOutTime;
         var cover = this.cover;
 
-        if (cover) {
-          FadeOutDestroy(cover, duration, false);
+        if (cover && this.coverTransitOutCallback) {
+          this.coverTransitOutCallback(cover, duration);
         }
 
         return this;
@@ -2381,6 +2396,18 @@
         _get(_getPrototypeOf(Modal.prototype), "setTransitOutCallback", this).call(this, callback); // callback = function(gameObject, duration) {}
 
 
+        return this;
+      }
+    }, {
+      key: "setCoverTransitInCallback",
+      value: function setCoverTransitInCallback(callback) {
+        this.coverTransitInCallback = callback;
+        return this;
+      }
+    }, {
+      key: "setCoverTransitOutCallback",
+      value: function setCoverTransitOutCallback(callback) {
+        this.coverTransitOutCallback = callback;
         return this;
       }
     }]);
