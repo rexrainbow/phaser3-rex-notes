@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../rex-phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
                 ],
                 tileWidth: 100,
                 tileHeight: 65,
-                orientation: 'isometric',
+                orientation: Phaser.Tilemaps.ISOMETRIC
             }
         );
 

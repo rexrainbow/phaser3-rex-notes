@@ -10,6 +10,8 @@ declare namespace Modal {
         cover?: {
             color?: number,
             alpha?: number,
+            transitIn?: TransitCallbackType | null,
+            transitOut?: TransitCallbackType | null,
         },
 
         manualClose?: boolean,
@@ -39,4 +41,7 @@ declare class Modal extends Phaser.Events.EventEmitter {
     requestClose(
         closeEventData?: unknown
     ): this;
+
+    setCoverTransitInCallback(callback?: Modal.TransitCallbackType): this;
+    setCoverTransitOutCallback(callback?: Modal.TransitCallbackType): this;
 }

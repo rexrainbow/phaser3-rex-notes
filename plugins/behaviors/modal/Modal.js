@@ -25,6 +25,10 @@ class Modal extends Transition {
         // Cover : key of modal, to block touch input        
         var coverConfig = GetValue(config, 'cover');
         this.cover = (coverConfig !== false) ? CreateCover(gameObject, coverConfig) : undefined;
+        if (this.cover) {
+            this.setCoverTransitInCallback(GetValue(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
+            this.setCoverTransitOutCallback(GetValue(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
+        }
 
         // Close conditions:
         // OK/Cancel buttons, invoke modal.requestClose()
@@ -76,8 +80,8 @@ class Modal extends Transition {
 
         var duration = this.transitInTime;
         var cover = this.cover;
-        if (cover) {
-            FadeIn(cover, duration, cover.alpha);
+        if (cover && this.coverTransitInCallback) {
+            this.coverTransitInCallback(cover, duration);
         }
 
         return this;
@@ -88,8 +92,8 @@ class Modal extends Transition {
 
         var duration = this.transitOutTime;
         var cover = this.cover;
-        if (cover) {
-            FadeOutDestroy(cover, duration, false);
+        if (cover && this.coverTransitOutCallback) {
+            this.coverTransitOutCallback(cover, duration);
         }
 
         return this;
@@ -159,6 +163,24 @@ class Modal extends Transition {
         return this;
     }
 
+    setCoverTransitInCallback(callback) {
+        this.coverTransitInCallback = callback;
+        return this;
+    }
+
+    setCoverTransitOutCallback(callback) {
+        this.coverTransitOutCallback = callback;
+        return this;
+    }
+
+}
+
+var DefaultCoverTransitInCallback = function (cover, duration) {
+    FadeIn(cover, duration, cover.alpha);
+}
+
+var DefaultCoverTransitOutCallback = function (cover, duration) {
+    FadeOutDestroy(cover, duration, false);
 }
 
 const TransitionMode = {

@@ -60,7 +60,9 @@ Pop-up modal dialog, then scale-down this dialog.
 var modal = scene.plugins.get('rexModal').add(gameObject, {
     // cover: {
     //     color: 0x0,
-    //     alpha: 0.8
+    //     alpha: 0.8,
+    //     transitIn: function(gameObject, duration) { },
+    //     transitOut: function(gameObject, duration) { },
     // },
     // cover: false, 
 
@@ -82,6 +84,18 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 
 - `cover` : Configuration of [Cover](shape-cover.md#create-cover-object) -- A [rectangle shape covered full window](shape-fullwindowrectangle.md), and [block all touch events](toucheventstop.md).
     - `false` : Don't create cover game object.
+    - `cover.transitIn` : Custom callback. Default behavior is fade-in.
+        ```javascript
+        function(gameObject, duration) {
+
+        }
+        ```
+    - `cover.transitOut` : Custom callback. Default behavior is fade-out.
+        ```javascript
+        function(gameObject, duration) {
+
+        }
+        ```
 - `manualClose` :
     - `true` : Close modal dialog via `modal.requestClose()` method. Default behavior.
     - `false` : Close modal dialog when timeout (`duration.hold`), or any-touch (if set `anyTouchClose` to `true`)
