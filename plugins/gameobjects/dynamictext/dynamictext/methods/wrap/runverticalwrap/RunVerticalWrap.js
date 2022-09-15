@@ -1,6 +1,6 @@
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import AlignLines from './AlignLines.js';
-import { CanRender, IsNewLineChar } from '../../../bob/Types.js';
+import { IsNewLineChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -106,7 +106,7 @@ var RunVerticalWrap = function (config) {
         // Append non-typeable child directly
         var char = children[childIndex];
         childIndex++;
-        if (!CanRender(char)) {
+        if (!child.renderable) {
             char.setActive();
             resultChildren.push(char);
             lastLine.push(char);
@@ -174,7 +174,7 @@ var RunVerticalWrap = function (config) {
     // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
         var child = resultChildren[i];
-        if (!CanRender(child)) {
+        if (!child.renderable) {
             continue;
         }
         child.x0 = child.x;

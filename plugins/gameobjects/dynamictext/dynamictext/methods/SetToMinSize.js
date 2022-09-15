@@ -1,12 +1,10 @@
-import { CanRender } from '../bob/Types.js';
-
 var SetToMinSize = function () {
     var children = this.children;
     var maxX = 0,
         maxY = 0;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-        if (!CanRender(child) || !child.active || !child.visible) {
+        if (!child.renderable || !child.active || !child.visible) {
             continue;
         }
 

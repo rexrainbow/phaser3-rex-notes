@@ -9,6 +9,7 @@ class RenderBase extends Base {
     constructor(parent, type) {
         super(parent, type);
 
+        this.renderable = true;
         this.originX = 0;
         this.offsetX = 0;  // Override
         this.offsetY = 0;  // Override

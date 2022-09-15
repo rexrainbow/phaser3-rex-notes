@@ -1,7 +1,7 @@
 import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
-import { CanRender, IsNewLineChar } from '../../../bob/Types.js';
+import { IsNewLineChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -136,7 +136,7 @@ var RunWordWrap = function (config) {
             resultChildren.push(child);
             lastLine.push(child);
 
-            if (CanRender(child)) {
+            if (child.renderable) {
                 child.setPosition(x, y);
                 x += (child.outerWidth + letterSpacing);
             }
@@ -168,7 +168,7 @@ var RunWordWrap = function (config) {
     // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
         var child = resultChildren[i];
-        if (!CanRender(child)) {
+        if (!child.renderable) {
             continue;
         }
         child.x0 = child.x;

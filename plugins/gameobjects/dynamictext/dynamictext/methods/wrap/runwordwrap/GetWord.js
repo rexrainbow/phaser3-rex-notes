@@ -1,4 +1,4 @@
-import { CanRender, CharTypeName } from '../../../bob/Types.js';
+import { CharTypeName } from '../../../bob/Types.js';
 
 var GetWord = function (children, startIndex, charMode, result) {
     if (result === undefined) {
@@ -13,7 +13,7 @@ var GetWord = function (children, startIndex, charMode, result) {
     while (currentIndex < endIndex) {
         var child = children[currentIndex];
         // Can't render (command child), put into output directly
-        if (!CanRender(child)) {
+        if (!child.renderable) {
             word.push(child);
             currentIndex++;
             continue;

@@ -49,6 +49,8 @@ declare class RenderBase extends Base {
     offsetX: number;
     offsetY: number;
 
+    readonly willRender: boolean;
+
     setDrawBelowCallback(
         callback?: RenderBase.DrawCallbackType
     ): this;

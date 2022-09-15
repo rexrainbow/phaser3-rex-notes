@@ -3,6 +3,7 @@ import DataMethods from '../../../../utils/data/DataMethods';
 
 export default class Base extends DataMethods {
     readonly type: string;
+    readonly renderable: boolean;
 
     setActive(active?: boolean): this;
     active: boolean;

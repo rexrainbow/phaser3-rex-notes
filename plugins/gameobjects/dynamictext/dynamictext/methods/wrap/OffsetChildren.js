@@ -1,5 +1,3 @@
-import { CanRender } from '../../bob/Types.js';
-
 var OffsetChildren = function (children, offsetX, offsetY) {
     if ((offsetX === 0) && (offsetY === 0)) {
         return;
@@ -7,7 +5,7 @@ var OffsetChildren = function (children, offsetX, offsetY) {
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-        if (!CanRender(child)) {
+        if (!child.renderable) {
             continue;
         }
 

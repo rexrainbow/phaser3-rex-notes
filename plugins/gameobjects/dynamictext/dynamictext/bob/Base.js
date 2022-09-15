@@ -4,6 +4,7 @@ class Base {
     constructor(parent, type) {
         this.setParent(parent);
         this.type = type;
+        this.renderable = false;
 
         this.reset().setActive();
     }
