@@ -136,7 +136,18 @@ var rect = scene.add.rexRoundRectangleCanvas(x, y, width, height, radiusConfig, 
             ```
             - `iteration` : Number of interpolation points in each round corner. Default value is `4`.
                 - `0` : Draw a straight line instead of arc.
-- `fillStyle` : Fill color in number or css string value.
+- `fillStyle` : Fill color in number or css string value, or a callback
+    - Number, or css string value : Color value
+    - Callback : 
+        ```javascript
+        function(canvas, context) {
+            // Radial gradient
+            var grd = context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+            grd.addColorStop(0, color0);
+            grd.addColorStop(1, color1);
+            return grd;
+        }
+        ```
 - `strokeStyle` : Stroke color in number or css string value.
 - `lineWidth` : Stroke line width.
 - `fillColor2` : Gradient color in number or css string value.
@@ -210,6 +221,18 @@ var rect = scene.add.rexRoundRectangleCanvas(x, y, width, height, radiusConfig, 
         rect.setFillStyle(fillStyle);
         // rect.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
         ```
+        - `fillStyle` : Fill color in number or css string value, or a callback
+            - Number, or css string value : Color value
+            - Callback : 
+                ```javascript
+                function(canvas, context) {
+                    // Radial gradient
+                    var grd = context.createRadialGradient(x0, y0, r0, x1, y1, r1);
+                    grd.addColorStop(0, color0);
+                    grd.addColorStop(1, color1);
+                    return grd;
+                }
+                ```
     - Clear
         ```javascript
         rect.setFillStyle();

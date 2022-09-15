@@ -8767,7 +8767,19 @@
 </li>
 </ul>
 </li>
-<li><code>fillStyle</code> : Fill color in number or css string value.</li>
+<li><code>fillStyle</code> : Fill color in number or css string value, or a callback<ul>
+<li>Number, or css string value : Color value</li>
+<li>Callback : 
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Radial gradient</span>
+    <span class="kd">var</span> <span class="nx">grd</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">createRadialGradient</span><span class="p">(</span><span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span> <span class="nx">r0</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">r1</span><span class="p">);</span>
+    <span class="nx">grd</span><span class="p">.</span><span class="nx">addColorStop</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="nx">color0</span><span class="p">);</span>
+    <span class="nx">grd</span><span class="p">.</span><span class="nx">addColorStop</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span> <span class="nx">color1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">grd</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>strokeStyle</code> : Stroke color in number or css string value.</li>
 <li><code>lineWidth</code> : Stroke line width.</li>
 <li><code>fillColor2</code> : Gradient color in number or css string value.</li>
@@ -8837,7 +8849,22 @@
 <li>Set
     <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">fillStyle</span><span class="p">);</span>
 <span class="c1">// rect.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);</span>
+</code></pre></div><ul>
+<li><code>fillStyle</code> : Fill color in number or css string value, or a callback<ul>
+<li>Number, or css string value : Color value</li>
+<li>Callback : 
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Radial gradient</span>
+    <span class="kd">var</span> <span class="nx">grd</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">createRadialGradient</span><span class="p">(</span><span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span> <span class="nx">r0</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">r1</span><span class="p">);</span>
+    <span class="nx">grd</span><span class="p">.</span><span class="nx">addColorStop</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="nx">color0</span><span class="p">);</span>
+    <span class="nx">grd</span><span class="p">.</span><span class="nx">addColorStop</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span> <span class="nx">color1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">grd</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Clear
     <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">();</span>
 </code></pre></div></li>

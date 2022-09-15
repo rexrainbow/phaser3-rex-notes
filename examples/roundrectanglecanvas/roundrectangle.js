@@ -34,6 +34,14 @@ class Demo extends Phaser.Scene {
             radius: 30,
             iteration: 0
         }, 0x008888, 0x880000, 4, 0x001111);
+        // Round-rectangle with stroke, custom gradient
+        var fillStyle = function (canvas, context) {
+            var grd = context.createRadialGradient(40, 40, 5, 60, 60, 90);
+            grd.addColorStop(0, '#008888');
+            grd.addColorStop(1, '#001111');
+            return grd;
+        }
+        this.add.rexRoundRectangleCanvas(700, 300, 100, 100, 30, fillStyle, 0x880000, 2);
     }
 
     update() { }
