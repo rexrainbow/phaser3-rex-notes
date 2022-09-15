@@ -1,3 +1,5 @@
+//import Polygon from '../../utils/geom/polygon/Polygon.js';
+
 const Polygon = Phaser.Geom.Polygon;
 
 var ToPolygon = function (pathData, polygon) {
