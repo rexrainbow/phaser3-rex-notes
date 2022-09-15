@@ -1,4 +1,5 @@
 import Base from '../Base.js';
+import Methods from './Methods.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -319,37 +320,21 @@ class RenderBase extends Base {
     }
 
     // Override
-    drawContent() { }
+    get willRender() {
+        return this.visible && (this.alpha > 0);
+    }
 
-    // Override
-    draw() {
-        var context = this.context;
-        context.save();
-
-        var x = this.x + this.leftSpace + this.offsetX - (this.originX * this.width),
-            y = this.y + this.offsetY;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        context.translate(x, y);
-        context.globalAlpha = this.alpha;
-        context.scale(this.scaleX, this.scaleY);
-        context.rotate(this.rotation);
-
-        if (this.drawBelowCallback) {
-            this.drawBelowCallback(this);
-        }
-
-        this.drawContent();
-
-        if (this.drawAboveCallback) {
-            this.drawAboveCallback(this);
-        }
-
-        context.restore();
+    get drawX() {
+        return this.x + this.leftSpace + this.offsetX - (this.originX * this.width);
+    }
+    get drawY() {
+        return this.y + this.offsetY;
     }
 }
+
+Object.assign(
+    RenderBase.prototype,
+    Methods,
+)
 
 export default RenderBase;

@@ -1,23 +1,23 @@
-var DrawContent = function () {
+var RenderContent = function () {
     this.clear();
 
     this.setSize(this.width, this.height);
 
     if (this.background.active) {
-        this.background.draw();
+        this.background.render();
     }
 
     var child;
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
         child = this.children[i];
-        if (child.active && child.visible) {
-            child.draw();
+        if (child.active) {
+            child.render();
         }
     }
 
     if (this.innerBounds.active) {
-        this.innerBounds.draw();
+        this.innerBounds.render();
     }
 }
 
-export default DrawContent;
+export default RenderContent;

@@ -114,7 +114,7 @@ class Background extends Base {
         return this;
     }
 
-    drawContent() {
+    renderContent() {
         DrawRoundRectangleBackground(
             this.parent,
             this.color,

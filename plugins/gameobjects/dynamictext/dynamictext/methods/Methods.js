@@ -14,11 +14,13 @@ import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
-import DrawContent from './DrawContent.js';
+import RenderContent from './RenderContent.js';
 import GetChildren from './GetChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
 import SetToMinSize from './SetToMinSize.js';
+
+// import SetInteractive from './input/SetInteractive.js';
 
 
 export default {
@@ -40,11 +42,13 @@ export default {
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,
-    drawContent: DrawContent,
+    renderContent: RenderContent,
 
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
 
     setToMinSize: SetToMinSize,
+
+    // setInteractive: SetInteractive,
 }

@@ -80,7 +80,7 @@ class ImageData extends RenderBase {
         return this;
     }
 
-    drawContent() {
+    renderContent() {
         var context = this.context;
         var frame = this.frameObj;
 
@@ -92,15 +92,6 @@ class ImageData extends RenderBase {
             0, 0, width, height,
         );
     }
-
-    draw() {
-        if (!this.visible) {
-            return this;
-        }
-
-        super.draw();
-    }
-
 }
 
 export default ImageData;

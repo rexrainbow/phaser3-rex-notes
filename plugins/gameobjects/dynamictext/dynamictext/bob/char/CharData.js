@@ -139,7 +139,7 @@ class CharData extends RenderBase {
         }
     }
 
-    drawContent() {
+    renderContent() {
         var textStyle = this.style;
         var hasFill = textStyle.hasFill,
             hasStroke = textStyle.hasStroke;
@@ -162,12 +162,12 @@ class CharData extends RenderBase {
         }
     }
 
-    draw() {
-        if (!this.visible || (this.text === '') || (this.text === '\n')) {
-            return this;
+    get willRender() {
+        if ((this.text === '') || (this.text === '\n')) {
+            return false;
+        } else {
+            return super.willRender;
         }
-
-        super.draw();
     }
 }
 

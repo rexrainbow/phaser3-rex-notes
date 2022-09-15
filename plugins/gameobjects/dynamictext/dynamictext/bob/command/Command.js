@@ -37,7 +37,7 @@ class Command extends Base {
         return result;
     }
 
-    draw() { }
+    render() { }
 
     onFree() {
         super.onFree();

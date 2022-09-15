@@ -52,7 +52,7 @@ class DynamicText extends Canvas {
     }
 
     updateTexture() {
-        this.drawContent();
+        this.renderContent();
         super.updateTexture();
         return this;
     }

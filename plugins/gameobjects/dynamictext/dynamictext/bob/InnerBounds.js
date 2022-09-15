@@ -84,7 +84,7 @@ class InnerBounds extends Base {
         return this;
     }
 
-    drawContent() {
+    renderContent() {
         var padding = this.parent.padding;
         var x = padding.left,
             y = padding.top,
