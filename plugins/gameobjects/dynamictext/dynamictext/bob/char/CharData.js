@@ -139,6 +139,14 @@ class CharData extends RenderBase {
         }
     }
 
+    get willRender() {
+        if ((this.text === '') || (this.text === '\n')) {
+            return false;
+        } else {
+            return super.willRender;
+        }
+    }
+
     renderContent() {
         var textStyle = this.style;
         var hasFill = textStyle.hasFill,
@@ -162,13 +170,6 @@ class CharData extends RenderBase {
         }
     }
 
-    get willRender() {
-        if ((this.text === '') || (this.text === '\n')) {
-            return false;
-        } else {
-            return super.willRender;
-        }
-    }
 }
 
 export default CharData;
