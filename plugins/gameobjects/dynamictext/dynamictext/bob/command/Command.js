@@ -37,8 +37,6 @@ class Command extends Base {
         return result;
     }
 
-    render() { }
-
     onFree() {
         super.onFree();
         this

@@ -66,6 +66,9 @@ class Base {
     reset() {
         return this;
     }
+
+    // Override
+    render() { }
 }
 
 Object.assign(
