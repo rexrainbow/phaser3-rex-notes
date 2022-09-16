@@ -1,9 +1,9 @@
-import Base from './renderbase/RenderBase.js';
+import RenderBase from './renderbase/RenderBase.js';
 import GetStyle from '../../../../utils/canvas/GetStyle.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class InnerBounds extends Base {
+class InnerBounds extends RenderBase {
     constructor(parent, config) {
         super(parent, 'background');
 

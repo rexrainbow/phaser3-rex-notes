@@ -158,6 +158,7 @@ class CharData extends RenderBase {
 
         var context = this.context;
         textStyle.syncFont(context).syncStyle(context);
+        // textBaseline = 'alphabetic'
 
         if (hasStroke) {
             textStyle.syncShadow(context);

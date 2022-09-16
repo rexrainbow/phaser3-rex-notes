@@ -70,6 +70,11 @@ class Base {
 
     // Override
     render() { }
+
+    // Override
+    contains(x, y) {
+        return false;
+    }
 }
 
 Object.assign(

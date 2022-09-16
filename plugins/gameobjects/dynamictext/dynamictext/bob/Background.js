@@ -1,10 +1,10 @@
-import Base from './renderbase/RenderBase.js';
+import RenderBase from './renderbase/RenderBase.js';
 import GetStyle from '../../../../utils/canvas/GetStyle.js';
 import DrawRoundRectangleBackground from '../../../canvas/utils/DrawRoundRectangleBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Background extends Base {
+class Background extends RenderBase {
     constructor(parent, config) {
         super(parent, 'background');
 
