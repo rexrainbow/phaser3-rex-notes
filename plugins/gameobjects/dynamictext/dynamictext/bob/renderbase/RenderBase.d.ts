@@ -59,4 +59,17 @@ declare class RenderBase extends Base {
         callback?: RenderBase.DrawCallbackType
     ): this;
 
+    readonly drawTLx: number;
+    readonly drawTLy: number;
+    readonly drawBLx: number;
+    readonly drawBLy: number;
+    readonly drawTRx: number;
+    readonly drawTRy: number;
+    readonly drawBRx: number;
+    readonly drawBRy: number;
+
+    getDrawBounds(
+        out?: Phaser.Geom.Rectangle | true
+    ): Phaser.Geom.Rectangle;
+
 }

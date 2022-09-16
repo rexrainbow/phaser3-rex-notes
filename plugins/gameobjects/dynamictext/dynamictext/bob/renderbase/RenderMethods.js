@@ -1,3 +1,5 @@
+const Rectangle = Phaser.Geom.Rectangle;
+
 export default {
     // Override
     renderContent() {
@@ -36,6 +38,25 @@ export default {
 
         context.restore();
         return this;
+    },
+
+    getDrawBounds(out) {
+        if (out === undefined) {
+            out = new Rectangle();
+        } else if (out === true) {
+            if (globBounds === undefined) {
+                globBounds = new Rectangle();
+            }
+            out = globBounds;
+        }
+
+        var x = this.drawTLx,
+            y = this.drawTLy;
+        out.setTo(x, y, (this.drawTRx - x), (this.drawBLy - y));
+
+        return out;
     }
 
 }
+
+var globBounds;

@@ -16,25 +16,18 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexDynamicText(
             {
                 x: 400, y: 300,
-
-                //background: {
-                //    stroke: 'white',
-                //    cornerRadius: 20
-                //},
-                //innerBounds: {
-                //    stroke: '#A52A2A'
-                //},
-                //padding: 20,
+                padding: 20,
                 style: {
-                    fontSize: '20px',
+                    fontSize: '60px',
                 },
             }
         )
 
-        text.appendText('Phaser is a fast, free, and fun open source HTML5 game framework');
+        text.appendText('Phaser');
         var result = text.runWordWrap({
-            lineHeight: 30,
+            lineHeight: 60,
             maxLines: 0,       // Set maxLines to 0
+            letterSpacing: 5,
             padding: { bottom: 10 },
         });
 
@@ -50,7 +43,7 @@ class Demo extends Phaser.Scene {
             context.lineCap = 'butt';
 
             context.strokeStyle = 'red';
-            context.lineWidth = 1;
+            context.lineWidth = 2;
             context.beginPath();
             context.moveTo(bob.drawTLx, bob.drawTLy);
             context.lineTo(bob.drawBLx, bob.drawBLy);
@@ -65,7 +58,7 @@ class Demo extends Phaser.Scene {
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             children[i]
                 .setAngle(Math.random() * 30 - 15)
-                .modifyStyle({ fontSize: Phaser.Math.Between(16, 24) })
+                .modifyStyle({ fontSize: Phaser.Math.Between(30, 60) })
                 .setDrawBelowCallback(drawBounds)
         }
     }

@@ -5430,7 +5430,7 @@
   }();
   var PEN_CONFIG = {};
 
-  var Rectangle$5 = Phaser.Geom.Rectangle;
+  var Rectangle$6 = Phaser.Geom.Rectangle;
   var RectanglePool = new Stack();
 
   var HitAreaManager = /*#__PURE__*/function () {
@@ -5457,7 +5457,7 @@
         var rectangle = RectanglePool.pop();
 
         if (rectangle === null) {
-          rectangle = new Rectangle$5(x, y, width, height);
+          rectangle = new Rectangle$6(x, y, width, height);
         } else {
           rectangle.setTo(x, y, width, height);
         }
@@ -9769,16 +9769,16 @@
     }
   };
 
-  var Rectangle$4 = Phaser.Geom.Rectangle;
+  var Rectangle$5 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
   var RotateAround$5 = Phaser.Math.RotateAround;
 
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
-      output = new Rectangle$4();
+      output = new Rectangle$5();
     } else if (output === true) {
       if (GlobRect$2 === undefined) {
-        GlobRect$2 = new Rectangle$4();
+        GlobRect$2 = new Rectangle$5();
       }
 
       output = GlobRect$2;
@@ -9933,15 +9933,15 @@
     return output;
   };
 
-  var Rectangle$3 = Phaser.Geom.Rectangle;
+  var Rectangle$4 = Phaser.Geom.Rectangle;
   var Union = Phaser.Geom.Rectangle.Union;
 
   var GetBoundsOfGameObjects = function GetBoundsOfGameObjects(gameObjects, out) {
     if (out === undefined) {
-      out = new Rectangle$3();
+      out = new Rectangle$4();
     } else if (out === true) {
       if (GlobRect$1 === undefined) {
-        GlobRect$1 = new Rectangle$3();
+        GlobRect$1 = new Rectangle$4();
       }
 
       out = GlobRect$1;
@@ -10864,6 +10864,7 @@
 
   Object.assign(Base$1.prototype, DataMethods$2);
 
+  var Rectangle$3 = Phaser.Geom.Rectangle;
   var RenderMethods = {
     // Override
     renderContent: function renderContent() {},
@@ -10900,8 +10901,25 @@
 
       context.restore();
       return this;
+    },
+    getDrawBounds: function getDrawBounds(out) {
+      if (out === undefined) {
+        out = new Rectangle$3();
+      } else if (out === true) {
+        if (globBounds === undefined) {
+          globBounds = new Rectangle$3();
+        }
+
+        out = globBounds;
+      }
+
+      var x = this.drawTLx,
+          y = this.drawTLy;
+      out.setTo(x, y, this.drawTRx - x, this.drawBLy - y);
+      return out;
     }
   };
+  var globBounds;
 
   var Methods$a = {};
   Object.assign(Methods$a, RenderMethods);
@@ -11269,6 +11287,47 @@
       key: "drawY",
       get: function get() {
         return this.y + this.offsetY;
+      } // Override
+
+    }, {
+      key: "drawTLx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTLy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTRx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTRy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRy",
+      get: function get() {
+        return 0;
       }
     }]);
 
@@ -12115,6 +12174,8 @@
         if (this.text === '\n' || this.text === '') {
           this.textWidth = 0;
           this.textHeight = 0;
+          this.ascent = 0;
+          this.descent = 0;
         } else {
           var metrics = this.style.getTextMetrics(this.context, this.text);
           this.textWidth = metrics.width;
@@ -12129,6 +12190,8 @@
           }
 
           this.textHeight = ascent + descent;
+          this.ascent = ascent;
+          this.descent = descent;
         }
 
         return this;
@@ -12189,6 +12252,46 @@
           textStyle.syncShadow(context);
           context.fillText(this.text, 0, 0);
         }
+      }
+    }, {
+      key: "drawTLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLy",
+      get: function get() {
+        return -this.ascent;
+      }
+    }, {
+      key: "drawBLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLy",
+      get: function get() {
+        return this.descent;
+      }
+    }, {
+      key: "drawTRx",
+      get: function get() {
+        return this.textWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRy",
+      get: function get() {
+        return -this.ascent;
+      }
+    }, {
+      key: "drawBRx",
+      get: function get() {
+        return this.textWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRy",
+      get: function get() {
+        return this.descent;
       }
     }]);
 
@@ -12336,6 +12439,46 @@
             height = this.frameHeight;
         context.drawImage(frame.source.image, // image
         frame.cutX, frame.cutY, width, height, 0, 0, width, height);
+      }
+    }, {
+      key: "drawTLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLy",
+      get: function get() {
+        return this.frameHeight;
+      }
+    }, {
+      key: "drawTRx",
+      get: function get() {
+        return this.frameWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRx",
+      get: function get() {
+        return this.frameWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRy",
+      get: function get() {
+        return this.frameHeight;
       }
     }]);
 

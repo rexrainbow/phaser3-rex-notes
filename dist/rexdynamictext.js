@@ -947,6 +947,7 @@
 
   Object.assign(Base.prototype, DataMethods);
 
+  var Rectangle = Phaser.Geom.Rectangle;
   var RenderMethods = {
     // Override
     renderContent: function renderContent() {},
@@ -983,8 +984,25 @@
 
       context.restore();
       return this;
+    },
+    getDrawBounds: function getDrawBounds(out) {
+      if (out === undefined) {
+        out = new Rectangle();
+      } else if (out === true) {
+        if (globBounds === undefined) {
+          globBounds = new Rectangle();
+        }
+
+        out = globBounds;
+      }
+
+      var x = this.drawTLx,
+          y = this.drawTLy;
+      out.setTo(x, y, this.drawTRx - x, this.drawBLy - y);
+      return out;
     }
   };
+  var globBounds;
 
   var Methods$1 = {};
   Object.assign(Methods$1, RenderMethods);
@@ -1352,6 +1370,47 @@
       key: "drawY",
       get: function get() {
         return this.y + this.offsetY;
+      } // Override
+
+    }, {
+      key: "drawTLx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTLy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTRx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTRy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRx",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRy",
+      get: function get() {
+        return 0;
       }
     }]);
 
@@ -2557,6 +2616,8 @@
         if (this.text === '\n' || this.text === '') {
           this.textWidth = 0;
           this.textHeight = 0;
+          this.ascent = 0;
+          this.descent = 0;
         } else {
           var metrics = this.style.getTextMetrics(this.context, this.text);
           this.textWidth = metrics.width;
@@ -2571,6 +2632,8 @@
           }
 
           this.textHeight = ascent + descent;
+          this.ascent = ascent;
+          this.descent = descent;
         }
 
         return this;
@@ -2631,6 +2694,46 @@
           textStyle.syncShadow(context);
           context.fillText(this.text, 0, 0);
         }
+      }
+    }, {
+      key: "drawTLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLy",
+      get: function get() {
+        return -this.ascent;
+      }
+    }, {
+      key: "drawBLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLy",
+      get: function get() {
+        return this.descent;
+      }
+    }, {
+      key: "drawTRx",
+      get: function get() {
+        return this.textWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRy",
+      get: function get() {
+        return -this.ascent;
+      }
+    }, {
+      key: "drawBRx",
+      get: function get() {
+        return this.textWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRy",
+      get: function get() {
+        return this.descent;
       }
     }]);
 
@@ -2778,6 +2881,46 @@
             height = this.frameHeight;
         context.drawImage(frame.source.image, // image
         frame.cutX, frame.cutY, width, height, 0, 0, width, height);
+      }
+    }, {
+      key: "drawTLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLx",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLy",
+      get: function get() {
+        return this.frameHeight;
+      }
+    }, {
+      key: "drawTRx",
+      get: function get() {
+        return this.frameWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRy",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRx",
+      get: function get() {
+        return this.frameWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRy",
+      get: function get() {
+        return this.frameHeight;
       }
     }]);
 
