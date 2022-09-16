@@ -92,6 +92,15 @@ class ImageData extends RenderBase {
             0, 0, width, height,
         );
     }
+
+    get drawTLx() { return -this.leftSpace; }
+    get drawTLy() { return 0; }
+    get drawBLx() { return -this.leftSpace; }
+    get drawBLy() { return this.frameHeight; }
+    get drawTRx() { return this.frameWidth + this.rightSpace; }
+    get drawTRy() { return 0; }
+    get drawBRx() { return this.frameWidth + this.rightSpace; }
+    get drawBRy() { return this.frameHeight; }
 }
 
 export default ImageData;

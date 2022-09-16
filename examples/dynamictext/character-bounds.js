@@ -49,14 +49,13 @@ class Demo extends Phaser.Scene {
             var savedLineCap = context.lineCap;
             context.lineCap = 'butt';
 
-            var w = bob.textWidth, h = bob.textHeight;
             context.strokeStyle = 'red';
             context.lineWidth = 1;
             context.beginPath();
-            context.moveTo(0, 0);
-            context.lineTo(w, 0);
-            context.lineTo(w, -h);
-            context.lineTo(0, -h);
+            context.moveTo(bob.drawTLx, bob.drawTLy);
+            context.lineTo(bob.drawBLx, bob.drawBLy);
+            context.lineTo(bob.drawBRx, bob.drawBRy);
+            context.lineTo(bob.drawTRx, bob.drawTRy);
             context.closePath();
             context.stroke();
 

@@ -98,6 +98,9 @@ class CharData extends RenderBase {
         if ((this.text === '\n') || (this.text === '')) {
             this.textWidth = 0;
             this.textHeight = 0;
+            this.ascent = 0;
+            this.descent = 0;
+
         } else {
             var metrics = this.style.getTextMetrics(this.context, this.text);
             this.textWidth = metrics.width;
@@ -110,7 +113,10 @@ class CharData extends RenderBase {
                 ascent = 0;
                 descent = 0;
             }
+
             this.textHeight = ascent + descent;
+            this.ascent = ascent;
+            this.descent = descent;
         }
         return this;
     }
@@ -170,6 +176,15 @@ class CharData extends RenderBase {
             context.fillText(this.text, 0, 0);
         }
     }
+
+    get drawTLx() { return -this.leftSpace; }
+    get drawTLy() { return -this.ascent; }
+    get drawBLx() { return -this.leftSpace; }
+    get drawBLy() { return this.descent; }
+    get drawTRx() { return this.textWidth + this.rightSpace; }
+    get drawTRy() { return -this.ascent; }
+    get drawBRx() { return this.textWidth + this.rightSpace; }
+    get drawBRy() { return this.descent; }
 
 }
 

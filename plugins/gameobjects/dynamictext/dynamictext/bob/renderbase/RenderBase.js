@@ -33,9 +33,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get alpha() {
-        return this._alpha;
-    }
+    get alpha() { return this._alpha; }
 
     set alpha(value) {
         this.setDirty(this._alpha != value);
@@ -47,9 +45,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get x() {
-        return this._x;
-    }
+    get x() { return this._x; }
 
     set x(value) {
         this.setDirty(this._x != value);
@@ -61,9 +57,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get y() {
-        return this._y;
-    }
+    get y() { return this._y; }
 
     set y(value) {
         this.setDirty(this._y != value);
@@ -87,9 +81,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get rotation() {
-        return this._rotation;
-    }
+    get rotation() { return this._rotation; }
 
     set rotation(value) {
         this.setDirty(this._rotation != value);
@@ -101,9 +93,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get angle() {
-        return RadToDeg(this._rotation);
-    }
+    get angle() { return RadToDeg(this._rotation); }
 
     set angle(value) {
         this.rotation = DegToRad(value);
@@ -114,9 +104,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get scaleX() {
-        return this._scaleX;
-    }
+    get scaleX() { return this._scaleX; }
 
     set scaleX(value) {
         this.setDirty(this._scaleX !== value);
@@ -129,9 +117,7 @@ class RenderBase extends Base {
     }
 
     // Override
-    get width() {
-        return 0;
-    }
+    get width() { return 0; }
 
     // Override
     set width(value) { }
@@ -148,9 +134,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get leftSpace() {
-        return this._leftSpace;
-    }
+    get leftSpace() { return this._leftSpace; }
 
     set leftSpace(value) {
         this.setDirty(this._leftSpace !== value);
@@ -162,9 +146,7 @@ class RenderBase extends Base {
         return this;
     }
 
-    get rightSpace() {
-        return this._rightSpace;
-    }
+    get rightSpace() { return this._rightSpace; }
 
     set rightSpace(value) {
         this.setDirty(this._rightSpace !== value);
@@ -180,9 +162,7 @@ class RenderBase extends Base {
         return this.width + this.leftSpace + this.rightSpace;
     }
 
-    get scaleY() {
-        return this._scaleY;
-    }
+    get scaleY() { return this._scaleY; }
 
     set scaleY(value) {
         this.setDirty(this._scaleY !== value);
@@ -195,9 +175,7 @@ class RenderBase extends Base {
     }
 
     // Override
-    get height() {
-        return 0;
-    }
+    get height() { return 0; }
 
     // Override
     set height(value) { }
@@ -331,6 +309,16 @@ class RenderBase extends Base {
     get drawY() {
         return this.y + this.offsetY;
     }
+
+    // Override
+    get drawTLx() { return 0; }
+    get drawTLy() { return 0; }
+    get drawBLx() { return 0; }
+    get drawBLy() { return 0; }
+    get drawTRx() { return 0; }
+    get drawTRy() { return 0; }
+    get drawBRx() { return 0; }
+    get drawBRy() { return 0; }
 }
 
 Object.assign(
