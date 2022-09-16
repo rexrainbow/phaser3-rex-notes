@@ -17,14 +17,14 @@ class Demo extends Phaser.Scene {
             {
                 x: 400, y: 300,
 
-                background: {
-                    stroke: 'white',
-                    cornerRadius: 20
-                },
-                innerBounds: {
-                    stroke: '#A52A2A'
-                },
-                padding: 20,
+                //background: {
+                //    stroke: 'white',
+                //    cornerRadius: 20
+                //},
+                //innerBounds: {
+                //    stroke: '#A52A2A'
+                //},
+                //padding: 20,
                 style: {
                     fontSize: '20px',
                 },
@@ -37,11 +37,37 @@ class Demo extends Phaser.Scene {
             maxLines: 0,       // Set maxLines to 0
             padding: { bottom: 10 },
         });
+
+        var drawBounds = function (bob) {
+            var text = bob.text;
+            if ((text === ' ') || (text === '\n')) {
+                return;
+            }
+
+            var context = bob.context;
+
+            var savedLineCap = context.lineCap;
+            context.lineCap = 'butt';
+
+            var w = bob.textWidth, h = bob.textHeight;
+            context.strokeStyle = 'red';
+            context.lineWidth = 1;
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(w, 0);
+            context.lineTo(w, -h);
+            context.lineTo(0, -h);
+            context.closePath();
+            context.stroke();
+
+            context.lineCap = savedLineCap;
+        }
         var children = result.children;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             children[i]
                 .setAngle(Math.random() * 30 - 15)
                 .modifyStyle({ fontSize: Phaser.Math.Between(16, 24) })
+                .setDrawBelowCallback(drawBounds)
         }
     }
 

@@ -933,7 +933,13 @@
 
     }, {
       key: "render",
-      value: function render() {}
+      value: function render() {} // Override
+
+    }, {
+      key: "contains",
+      value: function contains(x, y) {
+        return false;
+      }
     }]);
 
     return Base;
@@ -1723,8 +1729,8 @@
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
-  var Background = /*#__PURE__*/function (_Base) {
-    _inherits(Background, _Base);
+  var Background = /*#__PURE__*/function (_RenderBase) {
+    _inherits(Background, _RenderBase);
 
     var _super = _createSuper(Background);
 
@@ -1848,8 +1854,8 @@
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
-  var InnerBounds = /*#__PURE__*/function (_Base) {
-    _inherits(InnerBounds, _Base);
+  var InnerBounds = /*#__PURE__*/function (_RenderBase) {
+    _inherits(InnerBounds, _RenderBase);
 
     var _super = _createSuper(InnerBounds);
 
@@ -2556,7 +2562,7 @@
           this.textWidth = metrics.width;
           var ascent, descent;
 
-          if (metrics.hasOwnProperty('actualBoundingBoxAscent')) {
+          if ('actualBoundingBoxAscent' in metrics) {
             ascent = metrics.actualBoundingBoxAscent;
             descent = metrics.actualBoundingBoxDescent;
           } else {
@@ -2614,7 +2620,7 @@
         }
 
         var context = this.context;
-        textStyle.syncFont(context).syncStyle(context);
+        textStyle.syncFont(context).syncStyle(context); // textBaseline = 'alphabetic'
 
         if (hasStroke) {
           textStyle.syncShadow(context);

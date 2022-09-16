@@ -13,4 +13,7 @@ export default class Base extends DataMethods {
     scene: Phaser.Scene;
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
+
+    render(): void;
+    contains(x: number, y: number): boolean;
 }

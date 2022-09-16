@@ -103,7 +103,7 @@ class CharData extends RenderBase {
             this.textWidth = metrics.width;
 
             var ascent, descent;
-            if (metrics.hasOwnProperty('actualBoundingBoxAscent')) {
+            if ('actualBoundingBoxAscent' in metrics) {
                 ascent = metrics.actualBoundingBoxAscent;
                 descent = metrics.actualBoundingBoxDescent;
             } else {
