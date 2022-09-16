@@ -17,7 +17,6 @@ var OnParseImageTag = function (textPlayer, parser, config) {
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
-
             parser.skipEvent();
         })
 }

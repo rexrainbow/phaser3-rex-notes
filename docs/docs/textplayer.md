@@ -704,7 +704,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 
 #### Image
 
-- Image : `[img=key]`
+`[img=key]`
 
 ##### Render size
 
@@ -725,6 +725,10 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     })
     ```
 - Use origin render size by default
+
+#### Space
+
+`[space=width]`
 
 #### Typing speed
 

@@ -10,6 +10,7 @@ import ParseRightSpaceTag from './textstyle/OnParseRightSpaceTag.js';
 import ParseShadowColorTag from './textstyle/OnParseShadowColorTag.js';
 import ParseAlignTag from './textstyle/OnParseAlignTag.js'
 import ParseImageTag from './image/OnParseImageTag.js';
+import ParseSpaceTag from './space/OnParseSpaceTag.js';
 import ParseTypingSpeedTag from './typing/OnParseTypingSpeedTag.js';
 import ParsePlaySoundEffectTag from './soundeffect/OnParsePlaySoundEffectTag.js';
 import ParseFadeInSoundEffectTag from './soundeffect/OnParseFadeInSoundEffectTag.js';
@@ -40,6 +41,7 @@ const ParseCallbacks = [
     ParseFontSizeTag, ParseShadowColorTag, ParseAlignTag,
     ParseOffsetYTag, ParseOffsetXTag, ParseLeftSpaceTag, ParseRightSpaceTag,
     ParseImageTag,
+    ParseSpaceTag,
 
     ParseTypingSpeedTag,
 

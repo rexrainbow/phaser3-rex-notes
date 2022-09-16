@@ -10,6 +10,7 @@ import AddChild from './AddChild.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import AppendImage from './AppendImage.js';
+import AppendSpace from './AppendSpace.js';
 import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
@@ -37,6 +38,7 @@ export default {
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,
+    appendSpace: AppendSpace,
     appendCommand: AppendCommand,
 
     setWrapConfig: SetWrapConfig,

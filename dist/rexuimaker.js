@@ -31706,10 +31706,13 @@
     return _createClass(Circle);
   }(Arc);
 
+  //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
   Phaser.Math.Interpolation.QuadraticBezier;
 
+  //import PointRotateAround from '../../utils/math/RotateAround.js';
   Phaser.Math.RotateAround;
 
+  //import Polygon from '../../utils/geom/polygon/Polygon.js';
   Phaser.Geom.Polygon;
 
   Phaser.Math.DegToRad;

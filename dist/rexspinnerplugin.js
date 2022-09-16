@@ -2381,6 +2381,7 @@
     return pathData;
   };
 
+  //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
   var QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
 
   var QuadraticBezierTo = function QuadraticBezierTo(cx, cy, x, y, iterations, pathData) {
@@ -2396,6 +2397,7 @@
     return pathData;
   };
 
+  //import PointRotateAround from '../../utils/math/RotateAround.js';
   var PointRotateAround$1 = Phaser.Math.RotateAround;
 
   var RotateAround = function RotateAround(centerX, centerY, angle, pathData) {
@@ -2439,6 +2441,7 @@
     return points;
   };
 
+  //import Polygon from '../../utils/geom/polygon/Polygon.js';
   var Polygon = Phaser.Geom.Polygon;
 
   var ToPolygon = function ToPolygon(pathData, polygon) {
@@ -3411,8 +3414,6 @@
   });
   SetValue(window, 'RexPlugins.Spinner.Bars', Bars);
 
-  Phaser.Math.Linear;
-
   var Box = /*#__PURE__*/function (_Base) {
     _inherits(Box, _Base);
 
@@ -3442,15 +3443,14 @@
         var radius = this.radius;
         var halfWidth = radius * 0.7;
         var left = centerX - halfWidth,
-            right = centerX + halfWidth,
             top = centerY - halfWidth,
-            bottom = centerY + halfWidth;
-        this.getShape('border').lineStyle(2, this.color, 1).startAt(left, top).lineTo(right, top).lineTo(right, bottom).lineTo(left, bottom).lineTo(left, top).close();
+            width = halfWidth * 2;
+        this.getShape('border').lineStyle(2, this.color, 1).startAt(left, top).lineTo(width, 0, true).lineTo(0, width, true).lineTo(-width, 0, true).lineTo(0, -width, true).close();
 
         if (this.value < 0.5) {
           var t = (0.5 - this.value) * 2;
-          var fillBottom = top + t * halfWidth * 2;
-          this.getShape('fill').fillStyle(this.color, 1).startAt(left, top).lineTo(right, top).lineTo(right, fillBottom).lineTo(left, fillBottom).lineTo(left, top).close();
+          var height = width * t;
+          this.getShape('fill').fillStyle(this.color, 1).startAt(left, top).lineTo(width, 0, true).lineTo(0, height, true).lineTo(-width, 0, true).lineTo(0, -height, true).close();
         } else {
           // Rotate
           var t = (this.value - 0.5) * 2;

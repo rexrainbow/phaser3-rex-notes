@@ -1,5 +1,6 @@
 const CharTypeName = 'text';
 const ImageTypeName = 'image';
+const SpaceTypeName = 'space';
 const CmdTypeName = 'command';
 
 var IsNewLineChar = function (bob) {
@@ -17,6 +18,7 @@ var IsCommand = function (bob) {
 export {
     CharTypeName,
     ImageTypeName,
+    SpaceTypeName,
     CmdTypeName,
     IsNewLineChar,
     IsSpaceChar,

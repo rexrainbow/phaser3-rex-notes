@@ -2912,10 +2912,10 @@
     return this;
   };
 
-  var Methods$4 = {
+  var Methods$5 = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$4, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1);
+  Object.assign(Methods$5, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods$1);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
 
@@ -3083,7 +3083,7 @@
     return GOManager;
   }();
 
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$4);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$5);
 
   var GameObjectManagerMethods$1 = {
     addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
@@ -3848,6 +3848,7 @@
 
       this.setParent(parent);
       this.type = type;
+      this.renderable = false;
       this.reset().setActive();
     }
 
@@ -3921,13 +3922,59 @@
       key: "reset",
       value: function reset() {
         return this;
-      }
+      } // Override
+
+    }, {
+      key: "render",
+      value: function render() {}
     }]);
 
     return Base;
   }();
 
   Object.assign(Base.prototype, DataMethods);
+
+  var RenderMethods = {
+    // Override
+    renderContent: function renderContent() {},
+    // Override
+    render: function render() {
+      if (!this.willRender) {
+        return this;
+      }
+
+      var context = this.context;
+      context.save();
+      var x = this.drawX,
+          y = this.drawY;
+
+      if (this.autoRound) {
+        x = Math.round(x);
+        y = Math.round(y);
+      }
+
+      context.translate(x, y);
+      context.globalAlpha = this.alpha;
+      context.scale(this.scaleX, this.scaleY);
+      context.rotate(this.rotation);
+
+      if (this.drawBelowCallback) {
+        this.drawBelowCallback(this);
+      }
+
+      this.renderContent();
+
+      if (this.drawAboveCallback) {
+        this.drawAboveCallback(this);
+      }
+
+      context.restore();
+      return this;
+    }
+  };
+
+  var Methods$4 = {};
+  Object.assign(Methods$4, RenderMethods);
 
   var DegToRad$2 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
@@ -3944,6 +3991,7 @@
       _classCallCheck(this, RenderBase);
 
       _this = _super.call(this, parent, type);
+      _this.renderable = true;
       _this.originX = 0;
       _this.offsetX = 0; // Override
 
@@ -4278,43 +4326,26 @@
       } // Override
 
     }, {
-      key: "drawContent",
-      value: function drawContent() {} // Override
-
+      key: "willRender",
+      get: function get() {
+        return this.visible && this.alpha > 0;
+      }
     }, {
-      key: "draw",
-      value: function draw() {
-        var context = this.context;
-        context.save();
-        var x = this.x + this.leftSpace + this.offsetX - this.originX * this.width,
-            y = this.y + this.offsetY;
-
-        if (this.autoRound) {
-          x = Math.round(x);
-          y = Math.round(y);
-        }
-
-        context.translate(x, y);
-        context.globalAlpha = this.alpha;
-        context.scale(this.scaleX, this.scaleY);
-        context.rotate(this.rotation);
-
-        if (this.drawBelowCallback) {
-          this.drawBelowCallback(this);
-        }
-
-        this.drawContent();
-
-        if (this.drawAboveCallback) {
-          this.drawAboveCallback(this);
-        }
-
-        context.restore();
+      key: "drawX",
+      get: function get() {
+        return this.x + this.leftSpace + this.offsetX - this.originX * this.width;
+      }
+    }, {
+      key: "drawY",
+      get: function get() {
+        return this.y + this.offsetY;
       }
     }]);
 
     return RenderBase;
   }(Base);
+
+  Object.assign(RenderBase.prototype, Methods$4);
 
   var Pad = Phaser.Utils.String.Pad;
 
@@ -4799,8 +4830,8 @@
         return this;
       }
     }, {
-      key: "drawContent",
-      value: function drawContent() {
+      key: "renderContent",
+      value: function renderContent() {
         DrawRoundRectangleBackground(this.parent, this.color, this.stroke, this.strokeThickness, this.cornerRadius, this.color2, this.horizontalGradient, this.cornerIteration);
       }
     }]);
@@ -4897,8 +4928,8 @@
         return this;
       }
     }, {
-      key: "drawContent",
-      value: function drawContent() {
+      key: "renderContent",
+      value: function renderContent() {
         var padding = this.parent.padding;
         var x = padding.left,
             y = padding.top,
@@ -5395,12 +5426,8 @@
 
   var CharTypeName = 'text';
   var ImageTypeName = 'image';
+  var SpaceTypeName = 'space';
   var CmdTypeName = 'command';
-
-  var CanRender = function CanRender(bob) {
-    var bobType = bob.type;
-    return bobType === CharTypeName || bobType === ImageTypeName;
-  };
 
   var IsNewLineChar = function IsNewLineChar(bob) {
     return bob.type === CharTypeName && bob.text === '\n';
@@ -5568,8 +5595,17 @@
         }
       }
     }, {
-      key: "drawContent",
-      value: function drawContent() {
+      key: "willRender",
+      get: function get() {
+        if (this.text === '' || this.text === '\n') {
+          return false;
+        } else {
+          return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
+        }
+      }
+    }, {
+      key: "renderContent",
+      value: function renderContent() {
         var textStyle = this.style;
         var hasFill = textStyle.hasFill,
             hasStroke = textStyle.hasStroke;
@@ -5590,15 +5626,6 @@
           textStyle.syncShadow(context);
           context.fillText(this.text, 0, 0);
         }
-      }
-    }, {
-      key: "draw",
-      value: function draw() {
-        if (!this.visible || this.text === '' || this.text === '\n') {
-          return this;
-        }
-
-        _get(_getPrototypeOf(CharData.prototype), "draw", this).call(this);
       }
     }]);
 
@@ -5738,23 +5765,14 @@
         return this;
       }
     }, {
-      key: "drawContent",
-      value: function drawContent() {
+      key: "renderContent",
+      value: function renderContent() {
         var context = this.context;
         var frame = this.frameObj;
         var width = this.frameWidth,
             height = this.frameHeight;
         context.drawImage(frame.source.image, // image
         frame.cutX, frame.cutY, width, height, 0, 0, width, height);
-      }
-    }, {
-      key: "draw",
-      value: function draw() {
-        if (!this.visible) {
-          return this;
-        }
-
-        _get(_getPrototypeOf(ImageData.prototype), "draw", this).call(this);
       }
     }]);
 
@@ -5772,6 +5790,60 @@
     }
 
     bob.modifyPorperties(properties);
+    this.addChild(bob);
+    return this;
+  };
+
+  var Space = /*#__PURE__*/function (_RenderBase) {
+    _inherits(Space, _RenderBase);
+
+    var _super = _createSuper(Space);
+
+    function Space(parent, width) {
+      var _this;
+
+      _classCallCheck(this, Space);
+
+      _this = _super.call(this, parent, SpaceTypeName);
+
+      _this.setSpaceWidth(width);
+
+      return _this;
+    }
+
+    _createClass(Space, [{
+      key: "width",
+      get: function get() {
+        return this.spaceWidth * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.spaceWidth > 0) {
+          this.scaleX = value / this.spaceWidth;
+        } else {
+          this.scaleX = 1;
+        }
+      }
+    }, {
+      key: "setSpaceWidth",
+      value: function setSpaceWidth(width) {
+        this.spaceWidth = width;
+        return this;
+      }
+    }]);
+
+    return Space;
+  }(RenderBase);
+
+  var AppendSpace = function AppendSpace(width) {
+    var bob = this.poolManager.allocate(SpaceTypeName);
+
+    if (bob === null) {
+      bob = new Space(this, // parent
+      width);
+    } else {
+      bob.setParent(this).setActive().setSpaceWidth(width);
+    }
+
     this.addChild(bob);
     return this;
   };
@@ -5826,9 +5898,6 @@
         return result;
       }
     }, {
-      key: "draw",
-      value: function draw() {}
-    }, {
       key: "onFree",
       value: function onFree() {
         _get(_getPrototypeOf(Command.prototype), "onFree", this).call(this);
@@ -5880,7 +5949,7 @@
     while (currentIndex < endIndex) {
       var child = children[currentIndex]; // Can't render (command child), put into output directly
 
-      if (!CanRender(child)) {
+      if (!child.renderable) {
         word.push(child);
         currentIndex++;
         continue;
@@ -5931,7 +6000,7 @@
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
 
-      if (!CanRender(child)) {
+      if (!child.renderable) {
         continue;
       }
 
@@ -6144,7 +6213,7 @@
         resultChildren.push(child);
         lastLine.push(child);
 
-        if (CanRender(child)) {
+        if (child.renderable) {
           child.setPosition(x, y);
           x += child.outerWidth + letterSpacing;
         }
@@ -6176,7 +6245,7 @@
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
 
-      if (!CanRender(child)) {
+      if (!child.renderable) {
         continue;
       }
 
@@ -6375,7 +6444,7 @@
       var _char = children[childIndex];
       childIndex++;
 
-      if (!CanRender(_char)) {
+      if (!child.renderable) {
         _char.setActive();
 
         resultChildren.push(_char);
@@ -6452,7 +6521,7 @@
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
 
-      if (!CanRender(child)) {
+      if (!child.renderable) {
         continue;
       }
 
@@ -6473,12 +6542,12 @@
     return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
   };
 
-  var DrawContent = function DrawContent() {
+  var RenderContent = function RenderContent() {
     this.clear();
     this.setSize(this.width, this.height);
 
     if (this.background.active) {
-      this.background.draw();
+      this.background.render();
     }
 
     var child;
@@ -6486,13 +6555,13 @@
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
       child = this.children[i];
 
-      if (child.active && child.visible) {
-        child.draw();
+      if (child.active) {
+        child.render();
       }
     }
 
     if (this.innerBounds.active) {
-      this.innerBounds.draw();
+      this.innerBounds.render();
     }
   };
 
@@ -6518,7 +6587,7 @@
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
 
-      if (!CanRender(child) || !child.active || !child.visible) {
+      if (!child.renderable || !child.active || !child.visible) {
         continue;
       }
 
@@ -6553,15 +6622,17 @@
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,
+    appendSpace: AppendSpace,
     appendCommand: AppendCommand$3,
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,
-    drawContent: DrawContent,
+    renderContent: RenderContent,
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
-    setToMinSize: SetToMinSize
+    setToMinSize: SetToMinSize // setInteractive: SetInteractive,
+
   };
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -6677,7 +6748,7 @@
     _createClass(DynamicText, [{
       key: "updateTexture",
       value: function updateTexture() {
-        this.drawContent();
+        this.renderContent();
 
         _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);
 
@@ -7255,7 +7326,7 @@
     });
   };
 
-  var OnParseImageTag = function OnParseImageTag(textPlayer, parser, config) {
+  var OnParseImageTag$1 = function OnParseImageTag(textPlayer, parser, config) {
     var tagName = 'img';
     parser.on("+".concat(tagName), function (name) {
       var imgData = textPlayer.imageManager.get(name);
@@ -7265,6 +7336,16 @@
         leftSpace: imgData.left,
         rightSpace: imgData.right
       });
+      parser.skipEvent();
+    }).on("-".concat(tagName), function () {
+      parser.skipEvent();
+    });
+  };
+
+  var OnParseImageTag = function OnParseImageTag(textPlayer, parser, config) {
+    var tagName = 'space';
+    parser.on("+".concat(tagName), function (width) {
+      AppendSpace.call(textPlayer, width);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();
@@ -7813,7 +7894,7 @@
     );
   };
 
-  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
+  var ParseCallbacks$2 = [OnParseColorTag, OnParseStrokeColorTag, OnParseBoldTag, OnParseItalicTag, OnParseFontSizeTag, OnParseShadowColorTag, OnParseAlignTag, OnParseOffsetYTag, OnParseOffsetXTag, OnParseLeftSpaceTag, OnParseRightSpaceTag, OnParseImageTag$1, OnParseImageTag, OnParseTypingSpeedTag, OnParsePlaySoundEffectTag, OnParseFadeInSoundEffectTag, OnParseFadeOutSoundEffectTag, OnParseSetSoundEffectVolumeTag, OnParsePlayBackgroundMusicTag, OnParseFadeInBackgroundMusicTag, OnParseFadeOutBackgroundMusicTag, OnParseCrossFadeBackgroundMusicTag, OnParsePauseBackgroundMusicTag, OnParseFadeInCameraTag, OnParseFadeOutCameraTag, OnParseShakeCameraTag, OnParseFlashCameraTag, OnParseZoomCameraTag, OnParseRotateCameraTag, OnParseScrollCameraTag, OnParseWaitTag, OnParseNewLineTag, OnParseContentOff, OnParseContentOn, OnParseContent, OnParseCustomTag];
 
   var AddParseCallbacks = function AddParseCallbacks(textPlayer, parser, config) {
     for (var i = 0, cnt = ParseCallbacks$2.length; i < cnt; i++) {
@@ -7973,7 +8054,7 @@
         break; // Leave this typing loop
       }
 
-      if (CanRender(child)) {
+      if (child.renderable) {
         // Typing this char
         var animationConfig = this.animationConfig;
 

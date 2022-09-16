@@ -1302,6 +1302,7 @@
     return pathData;
   };
 
+  //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
   var QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
 
   var QuadraticBezierTo = function QuadraticBezierTo(cx, cy, x, y, iterations, pathData) {
@@ -1317,6 +1318,7 @@
     return pathData;
   };
 
+  //import PointRotateAround from '../../utils/math/RotateAround.js';
   var PointRotateAround$1 = Phaser.Math.RotateAround;
 
   var RotateAround = function RotateAround(centerX, centerY, angle, pathData) {
@@ -1360,6 +1362,7 @@
     return points;
   };
 
+  //import Polygon from '../../utils/geom/polygon/Polygon.js';
   var Polygon = Phaser.Geom.Polygon;
 
   var ToPolygon = function ToPolygon(pathData, polygon) {
