@@ -59,12 +59,12 @@ declare class RenderBase extends Base {
         callback?: RenderBase.DrawCallbackType
     ): this;
 
-    readonly drawTLx: number;
-    readonly drawTLy: number;
-    readonly drawBLx: number;
-    readonly drawBLy: number;
-    readonly drawTRx: number;
-    readonly drawTRy: number;
-    readonly drawBRx: number;
-    readonly drawBRy: number;
+    readonly drawTLX: number;
+    readonly drawTLY: number;
+    readonly drawBLX: number;
+    readonly drawBLY: number;
+    readonly drawTRX: number;
+    readonly drawTRY: number;
+    readonly drawBRX: number;
+    readonly drawBRY: number;
 }

@@ -17,6 +17,10 @@ class Demo extends Phaser.Scene {
             {
                 x: 400, y: 300,
                 padding: 20,
+                background: {
+                    stroke: 'white',
+                    cornerRadius: 20
+                },
                 style: {
                     fontSize: '60px',
                 },
@@ -41,10 +45,10 @@ class Demo extends Phaser.Scene {
             context.strokeStyle = 'red';
             context.lineWidth = 2;
             context.beginPath();
-            context.moveTo(bob.drawTLx, bob.drawTLy);
-            context.lineTo(bob.drawBLx, bob.drawBLy);
-            context.lineTo(bob.drawBRx, bob.drawBRy);
-            context.lineTo(bob.drawTRx, bob.drawTRy);
+            context.moveTo(bob.drawTLX, bob.drawTLY);
+            context.lineTo(bob.drawBLX, bob.drawBLY);
+            context.lineTo(bob.drawBRX, bob.drawBRY);
+            context.lineTo(bob.drawTRX, bob.drawTRY);
             context.closePath();
             context.stroke();
 
@@ -61,7 +65,7 @@ class Demo extends Phaser.Scene {
         text.runWordWrap({
             lineHeight: 60,
             maxLines: 0,       // Set maxLines to 0
-            letterSpacing: 5,
+            letterSpacing: 20,
             padding: { bottom: 10 },
         });
 
@@ -76,6 +80,10 @@ class Demo extends Phaser.Scene {
                 child.modifyStyle({
                     color: 'white'
                 })
+            })
+            .on('pointerdown', function (pointer, localX, localY, event) {
+                var child = text.getNearestChild(localX, localY);
+                console.log(`Nearest char = ${child.text}`);
             })
     }
 

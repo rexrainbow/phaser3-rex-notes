@@ -625,6 +625,10 @@ txt.setToMinSize();
 
 ### Input events of child
 
+- Enable input events of child on [config of constructor](dynamictext.md#create-instance), or via method
+    ```javascript
+    txt.setChildrenInteractiveEnable();
+    ```
 - Pointer down/up on child
     ```javascript
     txt.on('child.pointerdown', function(child, pointer, localX, localY, event) {        

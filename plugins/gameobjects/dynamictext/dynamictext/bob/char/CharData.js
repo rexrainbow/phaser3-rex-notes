@@ -182,14 +182,14 @@ class CharData extends RenderBase {
         }
     }
 
-    get drawTLx() { return -this.leftSpace; }
-    get drawTLy() { return -this.ascent; }
-    get drawBLx() { return -this.leftSpace; }
-    get drawBLy() { return this.descent; }
-    get drawTRx() { return this.textWidth + this.rightSpace; }
-    get drawTRy() { return -this.ascent; }
-    get drawBRx() { return this.textWidth + this.rightSpace; }
-    get drawBRy() { return this.descent; }
+    get drawTLX() { return -this.leftSpace; }
+    get drawTLY() { return -this.ascent; }
+    get drawBLX() { return -this.leftSpace; }
+    get drawBLY() { return this.descent; }
+    get drawTRX() { return this.textWidth + this.rightSpace; }
+    get drawTRY() { return -this.ascent; }
+    get drawBRX() { return this.textWidth + this.rightSpace; }
+    get drawBRY() { return this.descent; }
 
 }
 

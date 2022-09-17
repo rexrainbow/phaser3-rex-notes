@@ -19,11 +19,11 @@ import RenderContent from './RenderContent.js';
 import GetChildren from './GetChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
+import GetNearestChild from './GetNearestChild.js';
 import SetToMinSize from './SetToMinSize.js';
 
 import SetChildrenInteractiveEnable from './input/SetChildrenInteractiveEnable.js';
 import SetInteractive from './input/SetInteractive.js';
-
 
 export default {
     setFixedSize: SetFixedSize,
@@ -50,6 +50,7 @@ export default {
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
+    getNearestChild: GetNearestChild,
 
     setToMinSize: SetToMinSize,
 

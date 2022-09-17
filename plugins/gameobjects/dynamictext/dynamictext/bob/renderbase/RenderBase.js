@@ -311,14 +311,21 @@ class RenderBase extends Base {
     }
 
     // Override
-    get drawTLx() { return 0; }
-    get drawTLy() { return 0; }
-    get drawBLx() { return 0; }
-    get drawBLy() { return 0; }
-    get drawTRx() { return 0; }
-    get drawTRy() { return 0; }
-    get drawBRx() { return 0; }
-    get drawBRy() { return 0; }
+    get drawTLX() { return 0; }
+    get drawTLY() { return 0; }
+    get drawBLX() { return 0; }
+    get drawBLY() { return 0; }
+    get drawTRX() { return 0; }
+    get drawTRY() { return 0; }
+    get drawBRX() { return 0; }
+    get drawBRY() { return 0; }
+
+    get drawCenterX() {
+        return (this.drawTRX + this.drawTLX) / 2;
+    }
+    get drawCenterY() {
+        return (this.drawBLY + this.drawTLY) / 2;
+    }
 }
 
 Object.assign(

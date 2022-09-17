@@ -12,9 +12,9 @@ var GetBounds = function (bob) {
         globBounds = new Rectangle();
     }
 
-    var x = bob.drawTLx,
-        y = bob.drawTLy;
-    globBounds.setTo(x, y, (bob.drawTRx - x), (bob.drawBLy - y));
+    var x = bob.drawTLX,
+        y = bob.drawTLY;
+    globBounds.setTo(x, y, (bob.drawTRX - x), (bob.drawBLY - y));
 
     return globBounds;
 }

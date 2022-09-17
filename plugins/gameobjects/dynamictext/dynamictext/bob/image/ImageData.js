@@ -93,14 +93,14 @@ class ImageData extends RenderBase {
         );
     }
 
-    get drawTLx() { return -this.leftSpace; }
-    get drawTLy() { return 0; }
-    get drawBLx() { return -this.leftSpace; }
-    get drawBLy() { return this.frameHeight; }
-    get drawTRx() { return this.frameWidth + this.rightSpace; }
-    get drawTRy() { return 0; }
-    get drawBRx() { return this.frameWidth + this.rightSpace; }
-    get drawBRy() { return this.frameHeight; }
+    get drawTLX() { return -this.leftSpace; }
+    get drawTLY() { return 0; }
+    get drawBLX() { return -this.leftSpace; }
+    get drawBLY() { return this.frameHeight; }
+    get drawTRX() { return this.frameWidth + this.rightSpace; }
+    get drawTRY() { return 0; }
+    get drawBRX() { return this.frameWidth + this.rightSpace; }
+    get drawBRY() { return this.frameHeight; }
 }
 
 export default ImageData;
