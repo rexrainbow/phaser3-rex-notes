@@ -1699,6 +1699,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#input-events-of-child" class="md-nav__link">
+    Input events of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
     Compare with other kinds of text game object
   </a>
@@ -8747,6 +8754,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#input-events-of-child" class="md-nav__link">
+    Input events of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
     Compare with other kinds of text game object
   </a>
@@ -8788,6 +8802,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/LYxoRWJ">Page typing</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/JjEQXqj">Align, rotation, drawBelowCallback</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/oNBKpYG">Vertical wrap</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/GRdrLrw">Child input event</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dynamictext">Sample code</a></p>
@@ -8886,6 +8901,8 @@
         <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
 
+    <span class="nx">childrenInteractive</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 
     <span class="nx">wrap</span><span class="o">:</span> <span class="kc">undefined</span>
@@ -8983,6 +9000,11 @@
 <li><code>undefined</code> : Use default line-alignment setting.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><code>childrenInteractive</code> :<ul>
+<li><code>true</code> : Fire input events (<code>'child.pointerdown'</code>, <code>'child.pointerup'</code>, <code>'child.pointerover'</code>, <code>'child.pointerout'</code>) of any child after <code>text.setInteractive()</code>.</li>
+<li><code>false</code> : Won't fire any input events of child. Default behavior.</li>
 </ul>
 </li>
 <li><code>text</code> : Content of text.</li>
@@ -9399,6 +9421,29 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <p>Resize to minimun size to show all visible characters.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setToMinSize</span><span class="p">();</span>
 </code></pre></div>
+<h3 id="input-events-of-child">Input events of child<a class="headerlink" href="#input-events-of-child" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pointer down/up on child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+<span class="p">})</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>child</code> : Any <a href="./#character">Character</a> or <a href="./#image">Image</a> child</li>
+</ul>
+</li>
+<li>Pointer over/out on child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+<span class="p">})</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>child</code> : Any <a href="./#character">Character</a> or <a href="./#image">Image</a> child</li>
+</ul>
+</li>
+</ul>
 <h3 id="compare-with-other-kinds-of-text-game-object">Compare with other kinds of text game object<a class="headerlink" href="#compare-with-other-kinds-of-text-game-object" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="../text/">Built-in text</a>: <ul>
