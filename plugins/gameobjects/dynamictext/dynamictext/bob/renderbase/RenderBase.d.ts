@@ -67,9 +67,4 @@ declare class RenderBase extends Base {
     readonly drawTRy: number;
     readonly drawBRx: number;
     readonly drawBRy: number;
-
-    getDrawBounds(
-        out?: Phaser.Geom.Rectangle | true
-    ): Phaser.Geom.Rectangle;
-
 }

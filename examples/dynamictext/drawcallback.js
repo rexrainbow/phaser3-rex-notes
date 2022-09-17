@@ -79,7 +79,7 @@ class Demo extends Phaser.Scene {
         var children = result.children;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             children[i]
-                .setAngle(Math.random() * 30 - 15)
+                .setAngle((Math.random() - 0.5) * 30)
                 .modifyStyle({ fontSize: Phaser.Math.Between(16, 24) })
                 .setDrawBelowCallback(drawUnderline)
         }

@@ -39,15 +39,21 @@ class DynamicText extends Canvas {
         this.innerBounds = new InnerBounds(this, GetValue(config, 'innerBounds', undefined));
         this.children = [];
         this.lastAppendedChildren = [];
+        this.lastOverChild = null;
         this.poolManager = new PoolManager(config);
 
         this.setFixedSize(fixedWidth, fixedHeight);
         this.setPadding(GetValue(config, 'padding', 0));
         this.setWrapConfig(GetValue(config, 'wrap', undefined));
+        this.setChildrenInteractiveEnable(GetValue(config, 'childrenInteractive', false));
 
         var text = GetValue(config, 'text', undefined);
         if (text) {
             this.setText(text);
+        }
+
+        if (this.childrenInteractiveEnable) {
+            this.setInteractive();
         }
     }
 

@@ -111,7 +111,9 @@ declare namespace DynamicText {
 
         text?: string,
 
-        wrap?: IConfigWordWrap | IConfigVerticalWrap
+        wrap?: IConfigWordWrap | IConfigVerticalWrap,
+
+        childrenInteractive?: boolean,
     }
 
 }

@@ -6547,9 +6547,9 @@
       // Case of pointerout
       if (this.lastHitAreaKey !== null) {
         FireEvent$1.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+        this.lastHitAreaKey = null;
       }
 
-      this.lastHitAreaKey = null;
       return;
     }
 

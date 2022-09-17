@@ -21,7 +21,8 @@ import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
 import SetToMinSize from './SetToMinSize.js';
 
-// import SetInteractive from './input/SetInteractive.js';
+import SetChildrenInteractiveEnable from './input/SetChildrenInteractiveEnable.js';
+import SetInteractive from './input/SetInteractive.js';
 
 
 export default {
@@ -52,5 +53,6 @@ export default {
 
     setToMinSize: SetToMinSize,
 
-    // setInteractive: SetInteractive,
+    setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
+    setInteractive: SetInteractive,
 }

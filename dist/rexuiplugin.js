@@ -1201,7 +1201,7 @@
     return PoolManager;
   }();
 
-  var GameObject$3 = Phaser.GameObjects.GameObject;
+  var GameObject$4 = Phaser.GameObjects.GameObject;
   var IsPlainObject$E = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2m = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
@@ -1289,7 +1289,7 @@
     }]);
 
     return Blitter;
-  }(GameObject$3);
+  }(GameObject$4);
 
   var ChildCanRender = function ChildCanRender(child) {
     return child.active && child.visible && child.alpha > 0;
@@ -3196,7 +3196,7 @@
   };
 
   var CanvasPool$3 = Phaser.Display.Canvas.CanvasPool;
-  var GameObject$2 = Phaser.GameObjects.GameObject;
+  var GameObject$3 = Phaser.GameObjects.GameObject;
 
   var Canvas = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
@@ -3365,7 +3365,7 @@
     }]);
 
     return Canvas;
-  }(GameObject$2);
+  }(GameObject$3);
 
   var Components$3 = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Canvas, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip, // Components.FX,
@@ -3838,7 +3838,7 @@
     return out;
   };
 
-  var GameObject$1 = Phaser.GameObjects.GameObject;
+  var GameObject$2 = Phaser.GameObjects.GameObject;
 
   var TextBase = /*#__PURE__*/function (_GameObject) {
     _inherits(TextBase, _GameObject);
@@ -4023,7 +4023,7 @@
     }]);
 
     return TextBase;
-  }(GameObject$1);
+  }(GameObject$2);
 
   var Components$2 = Phaser.GameObjects.Components;
   Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, // Components.FX,
@@ -5506,9 +5506,9 @@
     return HitAreaManager;
   }();
 
-  var SetInteractive = function SetInteractive() {
-    this.parent.on('pointerdown', OnAreaDown, this).on('pointerup', OnAreaUp, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
-      OnAreaOverOut.call(this, pointer, null, null, event);
+  var SetInteractive$1 = function SetInteractive() {
+    this.parent.on('pointerdown', OnAreaDown, this).on('pointerup', OnAreaUp, this).on('pointermove', OnAreaOverOut$1, this).on('pointerover', OnAreaOverOut$1, this).on('pointerout', function (pointer, event) {
+      OnAreaOverOut$1.call(this, pointer, null, null, event);
     }, this);
   };
 
@@ -5532,14 +5532,14 @@
     FireEvent$2.call(this, 'areaup', area.key, pointer, localX, localY, event);
   };
 
-  var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
+  var OnAreaOverOut$1 = function OnAreaOverOut(pointer, localX, localY, event) {
     if (localX === null) {
       // Case of pointerout
       if (this.lastHitAreaKey !== null) {
         FireEvent$2.call(this, 'areaout', this.lastHitAreaKey, pointer, localX, localY, event);
+        this.lastHitAreaKey = null;
       }
 
-      this.lastHitAreaKey = null;
       return;
     }
 
@@ -6043,7 +6043,7 @@
     return CanvasText;
   }();
   var methods$n = {
-    setInteractive: SetInteractive
+    setInteractive: SetInteractive$1
   };
   Object.assign(CanvasText.prototype, DrawMethods, methods$n);
 
@@ -6245,7 +6245,7 @@
   var IsPlainObject$B = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
-  var GameObject = Phaser.GameObjects.GameObject;
+  var GameObject$1 = Phaser.GameObjects.GameObject;
   var GetValue$2c = Phaser.Utils.Objects.GetValue;
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP; // Reuse objects can increase performance
@@ -6630,7 +6630,7 @@
       key: "setInteractive",
       value: function setInteractive(hitArea, hitAreaCallback, dropZone) {
         var isInteractived = !!this.input;
-        GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+        GameObject$1.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
 
         if (!isInteractived) {
           this.canvasText.setInteractive();
@@ -8778,14 +8778,14 @@
     }
   };
 
-  var RotateAround$6 = Phaser.Math.RotateAround;
+  var RotateAround$7 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y; // Rotate
 
-      RotateAround$6(point, 0, 0, -this.rotation); // Scale
+      RotateAround$7(point, 0, 0, -this.rotation); // Scale
 
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -8796,7 +8796,7 @@
       point.x *= this.scaleX;
       point.y *= this.scaleY; // Rotate
 
-      RotateAround$6(point, 0, 0, this.rotation); // Transform
+      RotateAround$7(point, 0, 0, this.rotation); // Transform
 
       point.x += this.x;
       point.y += this.y;
@@ -9771,9 +9771,9 @@
 
   var Rectangle$5 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$5 = Phaser.Math.RotateAround;
+  var RotateAround$6 = Phaser.Math.RotateAround;
 
-  var GetBounds = function GetBounds(gameObject, output) {
+  var GetBounds$1 = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$5();
     } else if (output === true) {
@@ -9922,7 +9922,7 @@
     }
 
     if (gameObject.rotation !== 0) {
-      RotateAround$5(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$6(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
 
     if (includeParent && gameObject.parentContainer) {
@@ -9958,7 +9958,7 @@
         continue;
       }
 
-      var boundsRect = GetBounds(gameObject, true);
+      var boundsRect = GetBounds$1(gameObject, true);
 
       if (firstClone) {
         out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
@@ -10144,7 +10144,7 @@
     return this;
   };
 
-  var RotateAround$4 = Phaser.Math.RotateAround;
+  var RotateAround$5 = Phaser.Math.RotateAround;
 
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
@@ -10155,7 +10155,7 @@
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
     };
-    RotateAround$4(deltaXY, 0, 0, gameObject.rotation);
+    RotateAround$5(deltaXY, 0, 0, gameObject.rotation);
     gameObject.originX = originX;
     gameObject.originY = originY;
     gameObject.x = gameObject.x + deltaXY.x;
@@ -10864,7 +10864,6 @@
 
   Object.assign(Base$1.prototype, DataMethods$2);
 
-  var Rectangle$3 = Phaser.Geom.Rectangle;
   var RenderMethods = {
     // Override
     renderContent: function renderContent() {},
@@ -10901,27 +10900,40 @@
 
       context.restore();
       return this;
-    },
-    getDrawBounds: function getDrawBounds(out) {
-      if (out === undefined) {
-        out = new Rectangle$3();
-      } else if (out === true) {
-        if (globBounds === undefined) {
-          globBounds = new Rectangle$3();
-        }
-
-        out = globBounds;
-      }
-
-      var x = this.drawTLx,
-          y = this.drawTLy;
-      out.setTo(x, y, this.drawTRx - x, this.drawBLy - y);
-      return out;
     }
   };
+
+  var RotateAround$4 = Phaser.Math.RotateAround;
+  var Rectangle$3 = Phaser.Geom.Rectangle;
+
+  var Contains$1 = function Contains(x, y) {
+    if (globPoint === undefined) {
+      globPoint = {};
+    }
+
+    globPoint.x = x - this.drawX;
+    globPoint.y = y - this.drawY;
+    RotateAround$4(globPoint, 0, 0, -this.rotation);
+    return GetBounds(this).contains(globPoint.x, globPoint.y);
+  };
+
+  var GetBounds = function GetBounds(bob) {
+    if (globBounds === undefined) {
+      globBounds = new Rectangle$3();
+    }
+
+    var x = bob.drawTLx,
+        y = bob.drawTLy;
+    globBounds.setTo(x, y, bob.drawTRx - x, bob.drawBLy - y);
+    return globBounds;
+  };
+
+  var globPoint;
   var globBounds;
 
-  var Methods$a = {};
+  var Methods$a = {
+    contains: Contains$1
+  };
   Object.assign(Methods$a, RenderMethods);
 
   var DegToRad$8 = Phaser.Math.DegToRad;
@@ -12012,6 +12024,7 @@
     this.poolManager.free(bob);
     RemoveItem(this.children.list, bob);
     this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
     this.dirty = true;
     return this;
   };
@@ -12020,6 +12033,7 @@
     this.poolManager.freeMultiple(this.children);
     this.children.length = 0;
     this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
     this.dirty = true;
     return this;
   };
@@ -13315,6 +13329,101 @@
     return this;
   };
 
+  var SetChildrenInteractiveEnable = function SetChildrenInteractiveEnable(enable) {
+    if (enable === undefined) {
+      enable = true;
+    }
+
+    this.childrenInteractiveEnable = enable;
+    return this;
+  };
+
+  var GetFirstChildContains = function GetFirstChildContains(x, y) {
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (!child.active || !child.renderable) {
+        continue;
+      }
+
+      if (child.contains(x, y)) {
+        return child;
+      }
+    }
+
+    return null;
+  };
+
+  var SetChildrenInteractive$1 = function SetChildrenInteractive() {
+    this.on('pointerdown', OnPointerDown$1, this).on('pointerdown', OnPointerUp$1, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
+      OnAreaOverOut.call(this, pointer, null, null, event);
+    }, this);
+    return this;
+  };
+
+  var OnPointerDown$1 = function OnPointerDown(pointer, localX, localY, event) {
+    var child = GetFirstChildContains.call(this, localX, localY);
+
+    if (!child) {
+      return;
+    }
+
+    this.emit('child.pointerdown', child, pointer, localX, localY, event);
+  };
+
+  var OnPointerUp$1 = function OnPointerUp(pointer, localX, localY, event) {
+    var child = GetFirstChildContains.call(this, localX, localY);
+
+    if (!child) {
+      return;
+    }
+
+    this.emit('child.pointerup', child, pointer, localX, localY, event);
+  };
+
+  var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
+    if (localX === null) {
+      // Case of pointerout
+      if (this.lastOverChild !== null) {
+        this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+        this.lastOverChild = null;
+      }
+
+      return;
+    }
+
+    var child = GetFirstChildContains.call(this, localX, localY);
+
+    if (child === this.lastOverChild) {
+      return;
+    }
+
+    if (this.lastOverChild !== null) {
+      this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+    }
+
+    if (child !== null) {
+      this.emit('child.pointerover', child, pointer, localX, localY, event);
+    }
+
+    this.lastOverChild = child;
+  };
+
+  var GameObject = Phaser.GameObjects.GameObject;
+
+  var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
+    var isInteractived = !!this.input;
+    GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+
+    if (!isInteractived && this.childrenInteractiveEnable) {
+      SetChildrenInteractive$1.call(this);
+    }
+
+    return this;
+  };
+
   var Methods$9 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
@@ -13337,8 +13446,9 @@
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
-    setToMinSize: SetToMinSize // setInteractive: SetInteractive,
-
+    setToMinSize: SetToMinSize,
+    setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
+    setInteractive: SetInteractive
   };
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
@@ -13434,6 +13544,7 @@
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$1W(config, 'innerBounds', undefined));
       _this.children = [];
       _this.lastAppendedChildren = [];
+      _this.lastOverChild = null;
       _this.poolManager = new PoolManager(config);
 
       _this.setFixedSize(fixedWidth, fixedHeight);
@@ -13442,10 +13553,16 @@
 
       _this.setWrapConfig(GetValue$1W(config, 'wrap', undefined));
 
+      _this.setChildrenInteractiveEnable(GetValue$1W(config, 'childrenInteractive', false));
+
       var text = GetValue$1W(config, 'text', undefined);
 
       if (text) {
         _this.setText(text);
+      }
+
+      if (_this.childrenInteractiveEnable) {
+        _this.setInteractive();
       }
 
       return _this;
@@ -22202,7 +22319,7 @@
       color = config;
     } else {
       color = GetValue$1D(config, 'color');
-      lineWidth = GetBounds(config, 'lineWidth');
+      lineWidth = GetBounds$1(config, 'lineWidth');
       var nameTextConfig = GetValue$1D(config, 'name', false);
 
       if (nameTextConfig) {
@@ -22246,7 +22363,7 @@
       child = children[i];
 
       if (child.getBounds || child.width !== undefined && child.height !== undefined) {
-        GlobRect = GetBounds(child, GlobRect);
+        GlobRect = GetBounds$1(child, GlobRect);
       } else {
         continue;
       }
@@ -24625,7 +24742,7 @@
       return false;
     }
 
-    var boundsRect = GetBounds(gameObject, true);
+    var boundsRect = GetBounds$1(gameObject, true);
 
     if (!boundsRect.contains(x, y)) {
       return false;

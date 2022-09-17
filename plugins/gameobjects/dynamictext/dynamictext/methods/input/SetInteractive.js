@@ -1,4 +1,4 @@
-import SetCharacterInteractive from './SetCharacterInteractive.js';
+import SetChildrenInteractive from './SetChildrenInteractive.js';
 
 const GameObject = Phaser.GameObjects.GameObject;
 
@@ -7,8 +7,8 @@ var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
 
     GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
 
-    if (!isInteractived) {
-        SetCharacterInteractive.call(this);
+    if (!isInteractived && this.childrenInteractiveEnable) {
+        SetChildrenInteractive.call(this);
     }
 
     return this;
