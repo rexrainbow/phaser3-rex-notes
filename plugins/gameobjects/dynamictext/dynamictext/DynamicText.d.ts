@@ -126,10 +126,15 @@ declare class DynamicText extends Canvas {
 
     clearContent(): this;
 
+    setText(
+        text: string,
+        style?: IConfigTextStyle
+    ): this;
     appendText(
         text: string,
         style?: IConfigTextStyle
     ): this;
+    getText(activeOnly?: boolean): string;
 
     appendImage(
         key: string, frame?: string | null,

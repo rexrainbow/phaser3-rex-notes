@@ -9,6 +9,7 @@ import ClearContent from './ClearContent.js';
 import AddChild from './AddChild.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
+import GetText from './GetText.js';
 import AppendImage from './AppendImage.js';
 import AppendSpace from './AppendSpace.js';
 import AppendCommand from './AppendCommand.js';
@@ -37,6 +38,7 @@ export default {
     addChild: AddChild,
     setText: SetText,
     appendText: AppendText,
+    getText: GetText,
     appendImage: AppendImage,
     appendSpace: AppendSpace,
     appendCommand: AppendCommand,
