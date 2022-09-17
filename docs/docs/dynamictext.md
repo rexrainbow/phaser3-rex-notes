@@ -10,6 +10,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
 - [Page typing](https://codepen.io/rexrainbow/pen/LYxoRWJ)
 - [Align, rotation, drawBelowCallback](https://codepen.io/rexrainbow/pen/JjEQXqj)
 - [Vertical wrap](https://codepen.io/rexrainbow/pen/oNBKpYG)
+- [Child input event](https://codepen.io/rexrainbow/pen/GRdrLrw)
 
 ## Usage
 
@@ -121,6 +122,8 @@ var txt = scene.add.rexDynamicText({
         offsetY: 0
     },
 
+    childrenInteractive: false,
+
     text: '',
 
     wrap: undefined
@@ -184,6 +187,9 @@ var txt = scene.add.rexDynamicText({
         - `1`, `'center'` : Align remainder lines to center.
         - `2`, `'right'`, `'bottom'` : Align remainder lines to right/bottom.
         - `undefined` : Use default line-alignment setting.
+- `childrenInteractive` :
+    - `true` : Fire input events (`'child.pointerdown'`, `'child.pointerup'`, `'child.pointerover'`, `'child.pointerout'`) of any child after `text.setInteractive()`.
+    - `false` : Won't fire any input events of child. Default behavior.
 - `text` : Content of text.
 - `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
 
@@ -616,6 +622,29 @@ Resize to minimun size to show all visible characters.
 ```javascript
 txt.setToMinSize();
 ```
+
+### Input events of child
+
+- Pointer down/up on child
+    ```javascript
+    txt.on('child.pointerdown', function(child, pointer, localX, localY, event) {        
+    })
+    ```
+    ```javascript
+    txt.on('child.pointerup', function(child, pointer, localX, localY, event) {        
+    })
+    ```
+    - `child` : Any [Character](dynamictext.md#character) or [Image](dynamictext.md#image) child
+- Pointer over/out on child
+    ```javascript
+    txt.on('child.pointerover', function(child, pointer, localX, localY, event) {        
+    })
+    ```
+    ```javascript
+    txt.on('child.pointerout', function(child, pointer, localX, localY, event) {        
+    })
+    ```
+    - `child` : Any [Character](dynamictext.md#character) or [Image](dynamictext.md#image) child
 
 ### Compare with other kinds of text game object
 

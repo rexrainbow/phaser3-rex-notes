@@ -12,7 +12,10 @@ var CanvasPositionToBobPosition = function (canvasX, canvasY, bob, out) {
 
     out.x = (canvasX - bob.drawX) / bob.scaleX;
     out.y = (canvasY - bob.drawY) / bob.scaleY;
-    RotateAround(out, 0, 0, -bob.rotation);
+
+    if (bob.rotation !== 0) {
+        RotateAround(out, 0, 0, -bob.rotation);
+    }
     return out;
 }
 
