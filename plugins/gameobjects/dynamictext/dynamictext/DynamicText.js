@@ -1,7 +1,7 @@
 import Canvas from '../../canvas/canvas/Canvas.js';
 import { SetPadding } from '../../../utils/padding/PaddingMethods';
-import Background from './bob/Background.js';
-import InnerBounds from './bob/InnerBounds.js';
+import Background from './bob/background/Background.js';
+import InnerBounds from './bob/innerbounds/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';
 import Methods from './methods/Methods';
 import PoolManager from './poolmanager/PoolManager.js';

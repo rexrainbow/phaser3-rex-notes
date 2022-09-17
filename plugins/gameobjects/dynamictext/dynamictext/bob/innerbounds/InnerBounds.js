@@ -1,5 +1,5 @@
-import RenderBase from './renderbase/RenderBase.js';
-import GetStyle from '../../../../utils/canvas/GetStyle.js';
+import RenderBase from '../renderbase/RenderBase.js';
+import GetStyle from '../../../../../utils/canvas/GetStyle.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
