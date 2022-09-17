@@ -7,7 +7,7 @@ var SetInteractive = function (hitArea, hitAreaCallback, dropZone) {
 
     GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
 
-    if (!isInteractived && this.childrenInteractiveEnable) {
+    if (!isInteractived) {
         SetChildrenInteractive.call(this);
     }
 

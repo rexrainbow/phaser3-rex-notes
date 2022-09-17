@@ -1,16 +1,10 @@
-const RotateAround = Phaser.Math.RotateAround;
+import CanvasPositionToBobPosition from '../../methods/transform/CanvasPositionToBobPosition.js';
+
 const Rectangle = Phaser.Geom.Rectangle;
 
-
-var Contains = function (x, y) {
-    if (globPoint === undefined) {
-        globPoint = {};
-    }
-    globPoint.x = x - this.drawX;
-    globPoint.y = y - this.drawY;
-    RotateAround(globPoint, 0, 0, -this.rotation);
-
-    return GetBounds(this).contains(globPoint.x, globPoint.y);
+var Contains = function (canvasX, canvasY) {
+    var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
+    return GetBounds(this).contains(bobPosition.x, bobPosition.y);
 }
 
 var GetBounds = function (bob) {
@@ -25,7 +19,6 @@ var GetBounds = function (bob) {
     return globBounds;
 }
 
-var globPoint;
 var globBounds;
 
 export default Contains;

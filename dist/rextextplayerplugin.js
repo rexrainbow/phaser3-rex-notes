@@ -3980,17 +3980,31 @@
   };
 
   var RotateAround = Phaser.Math.RotateAround;
-  var Rectangle = Phaser.Geom.Rectangle;
 
-  var Contains = function Contains(x, y) {
-    if (globPoint === undefined) {
-      globPoint = {};
+  var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      if (globPoint === undefined) {
+        globPoint = {};
+      }
+
+      out = globPoint;
     }
 
-    globPoint.x = x - this.drawX;
-    globPoint.y = y - this.drawY;
-    RotateAround(globPoint, 0, 0, -this.rotation);
-    return GetBounds(this).contains(globPoint.x, globPoint.y);
+    out.x = (canvasX - bob.drawX) / bob.scaleX;
+    out.y = (canvasY - bob.drawY) / bob.scaleY;
+    RotateAround(out, 0, 0, -bob.rotation);
+    return out;
+  };
+
+  var globPoint;
+
+  var Rectangle = Phaser.Geom.Rectangle;
+
+  var Contains = function Contains(canvasX, canvasY) {
+    var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
+    return GetBounds(this).contains(bobPosition.x, bobPosition.y);
   };
 
   var GetBounds = function GetBounds(bob) {
@@ -4004,7 +4018,6 @@
     return globBounds;
   };
 
-  var globPoint;
   var globBounds;
 
   var Methods$4 = {
@@ -6777,6 +6790,10 @@
       enable = true;
     }
 
+    if (this.childrenInteractiveEnable !== enable) {
+      this.lastOverChild = null;
+    }
+
     this.childrenInteractiveEnable = enable;
     return this;
   };
@@ -6807,6 +6824,10 @@
   };
 
   var OnPointerDown = function OnPointerDown(pointer, localX, localY, event) {
+    if (!this.childrenInteractiveEnable) {
+      return;
+    }
+
     var child = GetFirstChildContains.call(this, localX, localY);
 
     if (!child) {
@@ -6817,6 +6838,10 @@
   };
 
   var OnPointerUp = function OnPointerUp(pointer, localX, localY, event) {
+    if (!this.childrenInteractiveEnable) {
+      return;
+    }
+
     var child = GetFirstChildContains.call(this, localX, localY);
 
     if (!child) {
@@ -6827,6 +6852,10 @@
   };
 
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
+    if (!this.childrenInteractiveEnable) {
+      return;
+    }
+
     if (localX === null) {
       // Case of pointerout
       if (this.lastOverChild !== null) {
@@ -6860,7 +6889,7 @@
     var isInteractived = !!this.input;
     GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
 
-    if (!isInteractived && this.childrenInteractiveEnable) {
+    if (!isInteractived) {
       SetChildrenInteractive.call(this);
     }
 
@@ -7002,10 +7031,6 @@
 
       if (text) {
         _this.setText(text);
-      }
-
-      if (_this.childrenInteractiveEnable) {
-        _this.setInteractive();
       }
 
       return _this;

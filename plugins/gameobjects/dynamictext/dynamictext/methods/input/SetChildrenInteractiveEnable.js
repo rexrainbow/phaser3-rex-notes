@@ -3,6 +3,10 @@ var SetChildrenInteractiveEnable = function (enable) {
         enable = true;
     }
 
+    if (this.childrenInteractiveEnable !== enable) {
+        this.lastOverChild = null;
+    }
+
     this.childrenInteractiveEnable = enable;
 
     return this;

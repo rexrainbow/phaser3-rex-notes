@@ -65,6 +65,7 @@ class Demo extends Phaser.Scene {
         }
 
         text
+            .setInteractive()
             .on('child.pointerover', function (child) {
                 child.modifyStyle({
                     color: 'green'

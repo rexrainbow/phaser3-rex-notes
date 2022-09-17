@@ -51,10 +51,6 @@ class DynamicText extends Canvas {
         if (text) {
             this.setText(text);
         }
-
-        if (this.childrenInteractiveEnable) {
-            this.setInteractive();
-        }
     }
 
     updateTexture() {
