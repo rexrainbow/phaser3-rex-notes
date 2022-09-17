@@ -26,12 +26,6 @@ class Demo extends Phaser.Scene {
         )
 
         text.appendText('Phaser');
-        var result = text.runWordWrap({
-            lineHeight: 60,
-            maxLines: 0,       // Set maxLines to 0
-            letterSpacing: 5,
-            padding: { bottom: 10 },
-        });
 
         var drawBounds = function (bob) {
             var text = bob.text;
@@ -56,13 +50,20 @@ class Demo extends Phaser.Scene {
 
             context.lineCap = savedLineCap;
         }
-        var children = result.children;
+        var children = text.getChildren();
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             children[i]
                 .setAngle((Math.random() - 0.5) * 30)
                 .modifyStyle({ fontSize: Phaser.Math.Between(30, 60) })
                 .setDrawAboveCallback(drawBounds)
         }
+
+        text.runWordWrap({
+            lineHeight: 60,
+            maxLines: 0,       // Set maxLines to 0
+            letterSpacing: 5,
+            padding: { bottom: 10 },
+        });
 
         text
             .setInteractive()

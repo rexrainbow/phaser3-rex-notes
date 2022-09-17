@@ -6,6 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class TextStyle {
     constructor(config) {
         this.set(config);
+        this.updateTextFlag = true;
     }
 
     toJSON() {
@@ -136,6 +137,7 @@ class TextStyle {
             value = true;
         }
         this.bold = value;
+        this.updateTextFlag = true;
         return this;
     }
 
@@ -144,6 +146,7 @@ class TextStyle {
             value = true;
         }
         this.italic = value;
+        this.updateTextFlag = true;
         return this;
     }
 
@@ -164,11 +167,13 @@ class TextStyle {
             fontSize = `${fontSize}px`;
         }
         this.fontSize = fontSize;
+        this.updateTextFlag = true;
         return this;
     }
 
     setFontFamily(fontFamily) {
         this.fontFamily = fontFamily;
+        this.updateTextFlag = true;
         return this;
     }
 

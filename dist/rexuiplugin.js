@@ -11633,6 +11633,7 @@
       _classCallCheck(this, TextStyle);
 
       this.set(config);
+      this.updateTextFlag = true;
     }
 
     _createClass(TextStyle, [{
@@ -11758,6 +11759,7 @@
         }
 
         this.bold = value;
+        this.updateTextFlag = true;
         return this;
       }
     }, {
@@ -11768,6 +11770,7 @@
         }
 
         this.italic = value;
+        this.updateTextFlag = true;
         return this;
       }
     }, {
@@ -11791,12 +11794,14 @@
         }
 
         this.fontSize = fontSize;
+        this.updateTextFlag = true;
         return this;
       }
     }, {
       key: "setFontFamily",
       value: function setFontFamily(fontFamily) {
         this.fontFamily = fontFamily;
+        this.updateTextFlag = true;
         return this;
       }
     }, {
@@ -12172,6 +12177,12 @@
       value: function modifyStyle(style) {
         this.setDirty(true);
         this.style.modify(style);
+
+        if (this.style.updateTextFlag) {
+          this.updateTextSize();
+          this.style.updateTextFlag = false;
+        }
+
         return this;
       }
     }, {

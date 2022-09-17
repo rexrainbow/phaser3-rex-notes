@@ -72,6 +72,11 @@ class CharData extends RenderBase {
     modifyStyle(style) {
         this.setDirty(true);
         this.style.modify(style);
+
+        if (this.style.updateTextFlag) {
+            this.updateTextSize();
+            this.style.updateTextFlag = false;
+        }
         return this;
     }
 
