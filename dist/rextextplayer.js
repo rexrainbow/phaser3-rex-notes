@@ -2765,7 +2765,7 @@
 
   Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$2 = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
 
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
     if (output === undefined) {
@@ -2855,7 +2855,7 @@
     }
 
     if (gameObject.rotation !== 0) {
-      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$1(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
 
     if (includeParent && gameObject.parentContainer) {
@@ -3979,30 +3979,30 @@
     }
   };
 
-  var RotateAround$1 = Phaser.Math.RotateAround;
+  var RotateAround = Phaser.Math.RotateAround;
 
   var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      if (globPoint$2 === undefined) {
-        globPoint$2 = {};
+      if (globPoint === undefined) {
+        globPoint = {};
       }
 
-      out = globPoint$2;
+      out = globPoint;
     }
 
     out.x = (canvasX - bob.drawX) / bob.scaleX;
     out.y = (canvasY - bob.drawY) / bob.scaleY;
 
     if (bob.rotation !== 0) {
-      RotateAround$1(out, 0, 0, -bob.rotation);
+      RotateAround(out, 0, 0, -bob.rotation);
     }
 
     return out;
   };
 
-  var globPoint$2;
+  var globPoint;
 
   var Rectangle = Phaser.Geom.Rectangle;
 
@@ -6780,72 +6780,6 @@
     return GetAll(this.children, 'active', true);
   };
 
-  var RotateAround = Phaser.Math.RotateAround;
-
-  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bobX, bobY, bob, out) {
-    if (out === undefined) {
-      out = {};
-    } else if (out === true) {
-      if (globPoint$1 === undefined) {
-        globPoint$1 = {};
-      }
-
-      out = globPoint$1;
-    }
-
-    out.x = bobX;
-    out.y = bobY;
-
-    if (bob.rotation !== 0) {
-      RotateAround(out, 0, 0, bob.rotation);
-    }
-
-    out.x = out.x * bob.scaleX + bob.drawX;
-    out.y = out.y * bob.scaleY + bob.drawY;
-    return out;
-  };
-
-  var globPoint$1;
-
-  var DistanceSquare = Phaser.Math.Distance.BetweenPointsSquared;
-
-  var GetNearestChild = function GetNearestChild(canvasX, canvasY) {
-    if (globPoint === undefined) {
-      globPoint = {};
-    }
-
-    globPoint.x = canvasX;
-    globPoint.y = canvasY;
-    var children = this.children;
-    var distances = [];
-
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-
-      if (!child.active || !child.renderable) {
-        continue;
-      }
-
-      var childPoint = BobPositionToCanvasPosition(child.drawCenterX, child.drawCenterY, child, true);
-      var distanceSquare = DistanceSquare(childPoint, globPoint);
-      distances.push({
-        child: child,
-        distance: distanceSquare
-      });
-    }
-
-    if (distances.length === 0) {
-      return null;
-    } else {
-      distances.sort(function (a, b) {
-        return a.distance - b.distance;
-      });
-      return distances[0].child;
-    }
-  };
-
-  var globPoint = {};
-
   var SetToMinSize = function SetToMinSize() {
     var children = this.children;
     var maxX = 0,
@@ -7009,7 +6943,6 @@
     getChildren: GetChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
-    getNearestChild: GetNearestChild,
     setToMinSize: SetToMinSize,
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive

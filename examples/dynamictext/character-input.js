@@ -65,7 +65,7 @@ class Demo extends Phaser.Scene {
         text.runWordWrap({
             lineHeight: 60,
             maxLines: 0,       // Set maxLines to 0
-            letterSpacing: 20,
+            letterSpacing: 10,
             padding: { bottom: 10 },
         });
 
@@ -80,10 +80,6 @@ class Demo extends Phaser.Scene {
                 child.modifyStyle({
                     color: 'white'
                 })
-            })
-            .on('pointerdown', function (pointer, localX, localY, event) {
-                var child = text.getNearestChild(localX, localY);
-                console.log(`Nearest char = ${child.text}`);
             })
     }
 
