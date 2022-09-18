@@ -26,7 +26,7 @@ class TextPlayer extends Extend(DynamicText) {
         delete config.text;
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
-        this.type = 'rexTextPlayer'
+        this.type = 'rexTextPlayer';
 
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 

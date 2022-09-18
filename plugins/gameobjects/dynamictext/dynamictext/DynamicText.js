@@ -58,6 +58,14 @@ class DynamicText extends Canvas {
         super.updateTexture();
         return this;
     }
+
+    get text() {
+        return this.getText(true);
+    }
+
+    set text(value) {
+        this.setText(value);
+    }
 }
 
 Object.assign(

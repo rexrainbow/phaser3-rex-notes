@@ -121,6 +121,17 @@ declare namespace DynamicText {
 declare class DynamicText extends Canvas {
     constructor(
         scene: Phaser.Scene,
+        x?: number, y?: number,
+        fixedWidth?: number, fixedHeight?: number,
+        config?: DynamicText.IConfig
+    );
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        config?: DynamicText.IConfig
+    );
+    constructor(
+        scene: Phaser.Scene,
         config?: DynamicText.IConfig
     );
 
