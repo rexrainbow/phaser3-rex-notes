@@ -151,6 +151,9 @@ declare class DynamicText extends Canvas {
         style?: IConfigTextStyle
     ): this;
     getText(activeOnly?: boolean): string;
+    removeText(index: number): this;
+
+    text: string;
 
     appendImage(
         key: string, frame?: string | null,
@@ -168,4 +171,30 @@ declare class DynamicText extends Canvas {
     getChildren(): DynamicText.ChildTypes[];
     getLastAppendedChildren(): DynamicText.ChildTypes[];
     getActiveChildren(): DynamicText.ChildTypes[];
+
+    setBackgroundColor(
+        color?: string | number | null,
+        color2?: string | number | null,
+        horizontalGradient?: boolean
+    ): this;
+    setBackgroundStroke(
+        stroke?: string | number | null,
+        strokeThickness?: number,
+    ): this;
+    setBackgroundCornerRadius(
+        cornerRadius?: number |
+            ({ x?: number, y?: number }) |
+            DynamicText.IRadiusConfig,
+        cornerIteration?: number
+    ): this;
+
+    setInnerBoundsColor(
+        color?: string | number | null,
+        color2?: string | number | null,
+        horizontalGradient?: boolean
+    ): this;
+    setInnerBoundsStroke(
+        stroke?: string | number | null,
+        strokeThickness?: number,
+    ): this;
 }

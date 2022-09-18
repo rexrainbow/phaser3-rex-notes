@@ -248,7 +248,9 @@ var txt = scene.make.rexDynamicText({
 txt.clearContent();
 ```
 
-### Append text
+### Text
+
+#### Append text
 
 ```javascript
 txt.appendText(text);
@@ -282,7 +284,43 @@ To overwrite some properties of text-style.
 Each [character](dynamictext.md#character-data) will be placed at position (0,0), without rotation. 
 Uses [word-wrap](dynamictext.md#word-wrap) method to rearrange position of characters. 
 
-### Append image
+#### Insert text
+
+```javascript
+txt.insertText(index, text);
+```
+or
+
+```javascript
+txt.insertText(index, text, 
+    {
+        // bold: false,
+        // italic: false,
+        // fontSize: '16px',
+        // fontFamily: 'Courier',
+        // color: '#fff',
+        // stroke: '#fff',
+        // strokeThickness: 0,
+        // shadowColor: null,
+        // shadowOffsetX: 0,
+        // shadowOffsetY: 0,
+        // shadowBlur: 0,
+        // offsetY: 0,
+        // offsetY: 0,
+        // align: undefined
+    }
+);
+```
+
+#### Remove text
+
+```javascript
+txt.removeText(index);
+```
+
+### Image
+
+#### Append image
 
 ```javascript
 txt.appendImage(key, frame, {
@@ -295,6 +333,35 @@ txt.appendImage(key, frame, {
 
 - `width` : Scaled-width. Aspect-ratio will be keep if no `height`, or `scaleY` is set.
 - `height` : Scaled-height. Aspect-ratio will be keep if no `width`, or `scaleX` is set.
+
+### Background
+
+- Fill style
+    ```javascript
+    txt.setBackgroundColor(color);
+    // txt.setBackgroundColor(color, color2, isHorizontalGradient);
+    ```
+- Stroke style
+    ```javascript
+    txt.setBackgroundStroke(color, lineWidth);
+    ```
+- Corner radius
+    ```javascript
+    txt.setBackgroundCornerRadius(radius);
+    // txt.setBackgroundCornerRadius(radius, iteration)
+    ```
+
+### Inner bounds
+
+- Fill style
+    ```javascript
+    txt.setInnerBoundsColor(color);
+    // txt.setInnerBoundsColor(color, color2, isHorizontalGradient);
+    ```
+- Stroke style
+    ```javascript
+    txt.setInnerBoundsStroke(color, lineWidth);
+    ```
 
 ### Wrap
 

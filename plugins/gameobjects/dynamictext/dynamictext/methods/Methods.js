@@ -27,7 +27,10 @@ import SetToMinSize from './SetToMinSize.js';
 import SetChildrenInteractiveEnable from './input/SetChildrenInteractiveEnable.js';
 import SetInteractive from './input/SetInteractive.js';
 
-export default {
+import BackgroundMethods from './BackgroundMethods.js';
+import InnerBoundsMethods from './InnerBoundsMethods.js';
+
+var Methods = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -61,3 +64,11 @@ export default {
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive,
 }
+
+Object.assign(
+    Methods,
+    BackgroundMethods,
+    InnerBoundsMethods,
+)
+
+export default Methods;

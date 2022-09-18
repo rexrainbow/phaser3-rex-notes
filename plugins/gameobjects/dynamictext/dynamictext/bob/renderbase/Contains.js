@@ -1,4 +1,4 @@
-import CanvasPositionToBobPosition from '../../methods/transform/CanvasPositionToBobPosition.js';
+import CanvasPositionToBobPosition from '../../methods/utils/transform/CanvasPositionToBobPosition.js';
 
 const Rectangle = Phaser.Geom.Rectangle;
 
