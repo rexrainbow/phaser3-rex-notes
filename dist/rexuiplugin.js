@@ -12075,17 +12075,34 @@
     return this;
   };
 
-  var AddChild$1 = function AddChild(bob) {
+  var AddChild$1 = function AddChild(bob, index) {
+    var isBobArray = Array.isArray(bob);
+
+    if (index === undefined || index === this.children.length) {
+      if (isBobArray) {
+        var _this$children;
+
+        (_this$children = this.children).push.apply(_this$children, _toConsumableArray(bob));
+      } else {
+        this.children.push(bob);
+      }
+    } else {
+      if (isBobArray) {
+        var _this$children2;
+
+        (_this$children2 = this.children).splice.apply(_this$children2, [index, 0].concat(_toConsumableArray(bob)));
+      } else {
+        this.children.splice(index, 0, bob);
+      }
+    }
+
     this.lastAppendedChildren.length = 0;
 
-    if (Array.isArray(bob)) {
-      var _this$children, _this$lastAppendedChi;
-
-      (_this$children = this.children).push.apply(_this$children, _toConsumableArray(bob));
+    if (isBobArray) {
+      var _this$lastAppendedChi;
 
       (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(bob));
     } else {
-      this.children.push(bob);
       this.lastAppendedChildren.push(bob);
     }
 
@@ -12103,6 +12120,10 @@
 
   var IsSpaceChar = function IsSpaceChar(bob) {
     return bob.type === CharTypeName && bob.text === ' ';
+  };
+
+  var IsChar = function IsChar(bob) {
+    return bob.type === CharTypeName;
   };
 
   var IsCommand = function IsCommand(bob) {
@@ -12350,7 +12371,7 @@
     return CharData;
   }(RenderBase);
 
-  var AppendText$1 = function AppendText(text, style) {
+  var CreateCharBobArray = function CreateCharBobArray(text, style) {
     if (style) {
       this.textStyle.modify(style);
     }
@@ -12374,6 +12395,11 @@
       bobArray.push(bob);
     }
 
+    return bobArray;
+  };
+
+  var AppendText$1 = function AppendText(text, style) {
+    var bobArray = CreateCharBobArray.call(this, text, style);
     this.addChild(bobArray);
     return this;
   };
@@ -12388,6 +12414,52 @@
 
     this.dirty = true;
     return this;
+  };
+
+  var InsertText = function InsertText(index, text, style) {
+    var bobArray = CreateCharBobArray.call(this, text, style);
+    var textIndex = index;
+    index = undefined;
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      if (IsChar(children[i])) {
+        if (textIndex === 0) {
+          index = i;
+          break;
+        } else {
+          textIndex--;
+        }
+      }
+    }
+
+    this.addChild(bobArray, index);
+    return this;
+  };
+
+  var GetText = function GetText(activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+    var text = '';
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (!IsChar(child)) {
+        continue;
+      }
+
+      text += child.text;
+    }
+
+    return text;
   };
 
   var ImageData = /*#__PURE__*/function (_RenderBase) {
@@ -13490,6 +13562,8 @@
     addChild: AddChild$1,
     setText: SetText$2,
     appendText: AppendText$1,
+    insertText: InsertText,
+    getText: GetText,
     appendImage: AppendImage,
     appendSpace: AppendSpace,
     appendCommand: AppendCommand$3,

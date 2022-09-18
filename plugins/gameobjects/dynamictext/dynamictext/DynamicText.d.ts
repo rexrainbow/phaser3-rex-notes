@@ -134,6 +134,11 @@ declare class DynamicText extends Canvas {
         text: string,
         style?: IConfigTextStyle
     ): this;
+    insertText(
+        index: number,
+        text: string,
+        style?: IConfigTextStyle
+    ): this;
     getText(activeOnly?: boolean): string;
 
     appendImage(

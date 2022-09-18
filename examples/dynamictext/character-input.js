@@ -81,8 +81,6 @@ class Demo extends Phaser.Scene {
                     color: 'white'
                 })
             })
-
-        console.log(text.getText())
     }
 
     update() { }

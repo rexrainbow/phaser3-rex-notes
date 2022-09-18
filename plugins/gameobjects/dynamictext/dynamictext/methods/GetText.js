@@ -1,8 +1,8 @@
-import { CharTypeName } from '../bob/Types.js';
+import { IsChar } from '../bob/Types.js';
 
 var GetText = function (activeOnly) {
     if (activeOnly === undefined) {
-        activeOnly = false;
+        activeOnly = true;
     }
 
     var children = this.children;
@@ -14,7 +14,7 @@ var GetText = function (activeOnly) {
             continue;
         }
 
-        if (child.type !== CharTypeName) {
+        if (!IsChar(child)) {
             continue;
         }
 
