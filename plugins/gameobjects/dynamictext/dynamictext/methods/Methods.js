@@ -10,6 +10,7 @@ import AddChild from './AddChild.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import InsertText from './InsertText.js';
+import RemoveText from './RemoveChild.js';
 import GetText from './GetText.js';
 import AppendImage from './AppendImage.js';
 import AppendSpace from './AppendSpace.js';
@@ -40,6 +41,7 @@ export default {
     setText: SetText,
     appendText: AppendText,
     insertText: InsertText,
+    removeText: RemoveText,
     getText: GetText,
     appendImage: AppendImage,
     appendSpace: AppendSpace,
