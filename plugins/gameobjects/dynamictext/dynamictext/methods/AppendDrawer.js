@@ -10,12 +10,12 @@ var AppendDrawer = function (renderCallback, width, height) {
             renderCallback,
             width, height
         );
-    } else {
+    } else {        
         bob
             .setParent(this)
             .setActive()
             .setRenderCallback(renderCallback)
-            .setSize(width, height)
+            .setDrawerSize(width, height)
     }
 
     this.addChild(bob);

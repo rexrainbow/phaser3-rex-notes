@@ -6,14 +6,7 @@ class Drawer extends RenderBase {
         super(parent, RenderTypeName);
 
         this.setRenderCallback(renderCallback);
-
-        if (width === true) {
-            // Drawer with canvas position
-            this.toLocalPosition = false;
-            this.setSize(0);
-        } else {
-            this.setSize(width, height);
-        }
+        this.setDrawerSize(width, height);
     }
 
     setRenderCallback(callback) {
@@ -25,7 +18,16 @@ class Drawer extends RenderBase {
         return this;
     }
 
-    setSize(width, height) {
+    setDrawerSize(width, height) {
+        // Whole canvas
+        if (width === true) {
+            this.toLocalPosition = false;
+            width = undefined;
+            height = undefined;
+        } else {
+            this.toLocalPosition = true;
+        }
+
         if (width === undefined) {
             width = 0;
         }
@@ -33,8 +35,8 @@ class Drawer extends RenderBase {
             height = width;
         }
 
-        this.canvasWidth = width;
-        this.canvasHeight = height;
+        this.drawerWidth = width;
+        this.drawerHeight = height;
 
         return this;
     }
@@ -46,31 +48,31 @@ class Drawer extends RenderBase {
     }
 
     get width() {
-        return this.canvasWidth * this.scaleX;
+        return this.drawerWidth * this.scaleX;
     }
 
     set width(value) {
         this.setDirty(this.width !== value);
-        this.scaleX = (this.canvasWidth > 0) ? value / this.canvasWidth : 1;
+        this.scaleX = (this.drawerWidth > 0) ? value / this.drawerWidth : 1;
     }
 
     get height() {
-        return this.canvasHeight * this.scaleY;
+        return this.drawerHeight * this.scaleY;
     }
 
     set height(value) {
         this.setDirty(this.height !== value);
-        this.scaleY = (this.canvasHeight > 0) ? value / this.canvasHeight : 1;
+        this.scaleY = (this.drawerHeight > 0) ? value / this.drawerHeight : 1;
     }
 
     get drawTLX() { return -this.leftSpace; }
     get drawTLY() { return 0; }
     get drawBLX() { return -this.leftSpace; }
-    get drawBLY() { return this.canvasHeight; }
-    get drawTRX() { return this.canvasWidth + this.rightSpace; }
+    get drawBLY() { return this.drawerHeight; }
+    get drawTRX() { return this.drawerWidth + this.rightSpace; }
     get drawTRY() { return 0; }
-    get drawBRX() { return this.canvasWidth + this.rightSpace; }
-    get drawBRY() { return this.canvasHeight; }
+    get drawBRX() { return this.drawerWidth + this.rightSpace; }
+    get drawBRY() { return this.drawerHeight; }
 
 }
 
