@@ -1589,6 +1589,14 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text
+  </a>
+  
+    <nav class="md-nav" aria-label="Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#append-text" class="md-nav__link">
     Append text
   </a>
@@ -1596,8 +1604,54 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-text" class="md-nav__link">
+    Insert text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-text" class="md-nav__link">
+    Remove text
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
+    Image
+  </a>
+  
+    <nav class="md-nav" aria-label="Image">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#append-image" class="md-nav__link">
     Append image
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inner-bounds" class="md-nav__link">
+    Inner bounds
   </a>
   
 </li>
@@ -1673,7 +1727,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
+  <a href="#image_1" class="md-nav__link">
     Image
   </a>
   
@@ -8644,6 +8698,14 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text
+  </a>
+  
+    <nav class="md-nav" aria-label="Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#append-text" class="md-nav__link">
     Append text
   </a>
@@ -8651,8 +8713,54 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#insert-text" class="md-nav__link">
+    Insert text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-text" class="md-nav__link">
+    Remove text
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
+    Image
+  </a>
+  
+    <nav class="md-nav" aria-label="Image">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#append-image" class="md-nav__link">
     Append image
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inner-bounds" class="md-nav__link">
+    Inner bounds
   </a>
   
 </li>
@@ -8728,7 +8836,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
+  <a href="#image_1" class="md-nav__link">
     Image
   </a>
   
@@ -9055,7 +9163,8 @@
 <h3 id="clear-content">Clear content<a class="headerlink" href="#clear-content" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">clearContent</span><span class="p">();</span>
 </code></pre></div>
-<h3 id="append-text">Append text<a class="headerlink" href="#append-text" title="Permanent link">&para;</a></h3>
+<h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
+<h4 id="append-text">Append text<a class="headerlink" href="#append-text" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </code></pre></div>
 <p>or</p>
@@ -9081,7 +9190,34 @@
 <p>To overwrite some properties of text-style.</p>
 <p>Each <a href="./#character-data">character</a> will be placed at position (0,0), without rotation. 
 Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of characters. </p>
-<h3 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h3>
+<h4 id="insert-text">Insert text<a class="headerlink" href="#insert-text" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">insertText</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
+or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">insertText</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="c1">// bold: false,</span>
+        <span class="c1">// italic: false,</span>
+        <span class="c1">// fontSize: &#39;16px&#39;,</span>
+        <span class="c1">// fontFamily: &#39;Courier&#39;,</span>
+        <span class="c1">// color: &#39;#fff&#39;,</span>
+        <span class="c1">// stroke: &#39;#fff&#39;,</span>
+        <span class="c1">// strokeThickness: 0,</span>
+        <span class="c1">// shadowColor: null,</span>
+        <span class="c1">// shadowOffsetX: 0,</span>
+        <span class="c1">// shadowOffsetY: 0,</span>
+        <span class="c1">// shadowBlur: 0,</span>
+        <span class="c1">// offsetY: 0,</span>
+        <span class="c1">// offsetY: 0,</span>
+        <span class="c1">// align: undefined</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+<h4 id="remove-text">Remove text<a class="headerlink" href="#remove-text" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">removeText</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h3>
+<h4 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendImage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// width</span>
     <span class="c1">// height</span>
@@ -9092,6 +9228,30 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <ul>
 <li><code>width</code> : Scaled-width. Aspect-ratio will be keep if no <code>height</code>, or <code>scaleY</code> is set.</li>
 <li><code>height</code> : Scaled-height. Aspect-ratio will be keep if no <code>width</code>, or <code>scaleX</code> is set.</li>
+</ul>
+<h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fill style
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// txt.setBackgroundColor(color, color2, isHorizontalGradient);</span>
+</code></pre></div></li>
+<li>Stroke style
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundStroke</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Corner radius
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundCornerRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// txt.setBackgroundCornerRadius(radius, iteration)</span>
+</code></pre></div></li>
+</ul>
+<h3 id="inner-bounds">Inner bounds<a class="headerlink" href="#inner-bounds" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fill style
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setInnerBoundsColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// txt.setInnerBoundsColor(color, color2, isHorizontalGradient);</span>
+</code></pre></div></li>
+<li>Stroke style
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setInnerBoundsStroke</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
 <h4 id="horizontal-wrap">Horizontal wrap<a class="headerlink" href="#horizontal-wrap" title="Permanent link">&para;</a></h4>
@@ -9389,7 +9549,7 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 </ul>
 </li>
 </ul>
-<h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
+<h4 id="image_1">Image<a class="headerlink" href="#image_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Size<ul>
 <li>Get
@@ -9423,6 +9583,9 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 </code></pre></div>
 <h3 id="input-events-of-child">Input events of child<a class="headerlink" href="#input-events-of-child" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Enable input events of child on <a href="./#create-instance">config of constructor</a>, or via method
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setChildrenInteractiveEnable</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Pointer down/up on child
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
 <span class="p">})</span>
