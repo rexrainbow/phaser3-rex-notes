@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
         )
 
         text
-            .appendRender(function () {
+            .appendDrawer(function () {
                 var canvas = this.canvas;
                 var context = this.context;
                 var width = canvas.width, height = canvas.height;

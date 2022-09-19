@@ -1,11 +1,11 @@
-import Render from '../bob/render/Render.js';
-import { RenderTypeName } from '../bob/Types.js';
+import Drawer from '../bob/drawer/Drawer.js';
+import { DrawerTypeName } from '../bob/Types.js';
 
-var AppendRender = function (renderCallback, width, height) {
-    var bob = this.poolManager.allocate(RenderTypeName);
+var AppendDrawer = function (renderCallback, width, height) {
+    var bob = this.poolManager.allocate(DrawerTypeName);
 
     if (bob === null) {
-        bob = new Render(
+        bob = new Drawer(
             this,               // parent
             renderCallback,
             width, height
@@ -23,4 +23,4 @@ var AppendRender = function (renderCallback, width, height) {
     return this;
 };
 
-export default AppendRender;
+export default AppendDrawer;

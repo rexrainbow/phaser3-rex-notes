@@ -13,7 +13,7 @@ import InsertText from './InsertText.js';
 import RemoveText from './RemoveChild.js';
 import GetText from './GetText.js';
 import AppendImage from './AppendImage.js';
-import AppendRender from './AppendRender.js';
+import AppendDrawer from './AppendDrawer.js';
 import AppendSpace from './AppendSpace.js';
 import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
@@ -49,7 +49,7 @@ var Methods = {
     removeText: RemoveText,
     getText: GetText,
     appendImage: AppendImage,
-    appendRender: AppendRender,
+    appendDrawer: AppendDrawer,
     appendSpace: AppendSpace,
     appendCommand: AppendCommand,
 

@@ -1,14 +1,14 @@
 import RenderBase from '../renderbase/RenderBase.js';
 import { RenderTypeName } from '../Types.js';
 
-class Render extends RenderBase {
+class Drawer extends RenderBase {
     constructor(parent, renderCallback, width, height) {
         super(parent, RenderTypeName);
 
         this.setRenderCallback(renderCallback);
 
         if (width === true) {
-            // Render with canvas position
+            // Drawer with canvas position
             this.toLocalPosition = false;
             this.setSize(0);
         } else {
@@ -74,4 +74,4 @@ class Render extends RenderBase {
 
 }
 
-export default Render;
+export default Drawer;
