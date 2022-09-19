@@ -16,9 +16,9 @@ const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
 
 // Reuse objects can increase performance
-var PensPools = null;
-var LinesPool = null;
-var WrapTextLinesPool = null;
+var SharedPensPools = null;
+var SharedLinesPool = null;
+var SharedWrapTextLinesPool = null;
 
 class Text extends TextBase {
     constructor(scene, x, y, text, style, type, parser) {
@@ -27,7 +27,7 @@ class Text extends TextBase {
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             text = GetValue(config, 'text', '');
-            style = GetValue(config, 'style', '');
+            style = GetValue(config, 'style');
         }
         if (x === undefined) {
             x = 0;
@@ -110,21 +110,34 @@ class Text extends TextBase {
             this.frame.source.glTexture = null;
         }
 
-        // Use pools first time
-        if (!PensPools) {
-            PensPools = {};
-            LinesPool = new Pool();
-            WrapTextLinesPool = new WrapTextLinesPoolClass();
+        var sharedPoolMode = GetValue(style, 'sharedPool', true);
 
-            // Remove cached data
-            this.scene.game.events.once('destroy', function () {
-                PensPools = null;
-                LinesPool = null;
-                WrapTextLinesPool = null;
-            });
-        }
-        if (!PensPools.hasOwnProperty(type)) {
-            PensPools[type] = new Pool();
+        var pensPool, linesPool, wrapTextLinesPool;
+        if (sharedPoolMode) {
+            // Use pools first time
+            if (!SharedPensPools) {
+                SharedPensPools = {};
+                SharedLinesPool = new Pool();
+                SharedWrapTextLinesPool = new WrapTextLinesPoolClass();
+
+                // Remove cached data
+                this.scene.game.events.once('destroy', function () {
+                    SharedPensPools = null;
+                    SharedLinesPool = null;
+                    SharedWrapTextLinesPool = null;
+                });
+            }
+            if (!SharedPensPools.hasOwnProperty(type)) {
+                SharedPensPools[type] = new Pool();
+            }
+
+            pensPool = SharedPensPools[type];
+            linesPool = SharedLinesPool;
+            wrapTextLinesPool = SharedWrapTextLinesPool;
+        } else {
+            pensPool = new Pool();
+            linesPool = new Pool();
+            wrapTextLinesPool = new WrapTextLinesPoolClass();
         }
 
         this.canvasText = new CanvasText({
@@ -132,9 +145,9 @@ class Text extends TextBase {
             context: this.context,
             parser: parser,
             style: this.style,
-            pensPool: PensPools[type],
-            linesPool: LinesPool,
-            wrapTextLinesPool: WrapTextLinesPool,
+            pensPool: pensPool,
+            linesPool: linesPool,
+            wrapTextLinesPool: wrapTextLinesPool,
         });
         this.parser = parser;
 

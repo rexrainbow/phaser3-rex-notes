@@ -14,10 +14,12 @@ class Demo extends Phaser.Scene {
 
     create() {
         for (var i = 0; i < 1; i++) {
-            this.add.rexBBCodeText(400, 300, 'ABC')
-            .once('destroy', function(){
-                console.log('destroy text')
+            this.add.rexBBCodeText(400, 300, 'ABC', {
+                sharedPool: false
             })
+                .once('destroy', function () {
+                    console.log('destroy text')
+                })
         }
 
         this.input.once('pointerdown', function () {

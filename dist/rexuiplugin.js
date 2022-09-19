@@ -5750,6 +5750,10 @@
           this.hitAreaManager.destroy();
           this.hitAreaManager = undefined;
         }
+
+        this.pensPool = undefined;
+        this.linesPool = undefined;
+        this.wrapTextLinesPool = undefined;
       }
     }, {
       key: "updatePenManager",
@@ -6047,7 +6051,7 @@
   };
   Object.assign(CanvasText.prototype, DrawMethods, methods$n);
 
-  var WrapTextLinesPool$1 = /*#__PURE__*/function (_Pool) {
+  var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
 
     var _super = _createSuper(WrapTextLinesPool);
@@ -6250,9 +6254,9 @@
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP; // Reuse objects can increase performance
 
-  var PensPools = null;
-  var LinesPool = null;
-  var WrapTextLinesPool = null;
+  var SharedPensPools = null;
+  var SharedLinesPool = null;
+  var SharedWrapTextLinesPool = null;
 
   var Text = /*#__PURE__*/function (_TextBase) {
     _inherits(Text, _TextBase);
@@ -6269,7 +6273,7 @@
         x = GetValue$2c(config, 'x', 0);
         y = GetValue$2c(config, 'y', 0);
         text = GetValue$2c(config, 'text', '');
-        style = GetValue$2c(config, 'style', '');
+        style = GetValue$2c(config, 'style');
       }
 
       if (x === undefined) {
@@ -6343,23 +6347,36 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
 
         _this.frame.source.glTexture = null;
-      } // Use pools first time
-
-
-      if (!PensPools) {
-        PensPools = {};
-        LinesPool = new Stack();
-        WrapTextLinesPool = new WrapTextLinesPool$1(); // Remove cached data
-
-        _this.scene.game.events.once('destroy', function () {
-          PensPools = null;
-          LinesPool = null;
-          WrapTextLinesPool = null;
-        });
       }
 
-      if (!PensPools.hasOwnProperty(type)) {
-        PensPools[type] = new Stack();
+      var sharedPoolMode = GetValue$2c(style, 'sharedPool', true);
+      var pensPool, linesPool, wrapTextLinesPool;
+
+      if (sharedPoolMode) {
+        // Use pools first time
+        if (!SharedPensPools) {
+          SharedPensPools = {};
+          SharedLinesPool = new Stack();
+          SharedWrapTextLinesPool = new WrapTextLinesPool(); // Remove cached data
+
+          _this.scene.game.events.once('destroy', function () {
+            SharedPensPools = null;
+            SharedLinesPool = null;
+            SharedWrapTextLinesPool = null;
+          });
+        }
+
+        if (!SharedPensPools.hasOwnProperty(type)) {
+          SharedPensPools[type] = new Stack();
+        }
+
+        pensPool = SharedPensPools[type];
+        linesPool = SharedLinesPool;
+        wrapTextLinesPool = SharedWrapTextLinesPool;
+      } else {
+        pensPool = new Stack();
+        linesPool = new Stack();
+        wrapTextLinesPool = new WrapTextLinesPool();
       }
 
       _this.canvasText = new CanvasText({
@@ -6367,9 +6384,9 @@
         context: _this.context,
         parser: parser,
         style: _this.style,
-        pensPool: PensPools[type],
-        linesPool: LinesPool,
-        wrapTextLinesPool: WrapTextLinesPool
+        pensPool: pensPool,
+        linesPool: linesPool,
+        wrapTextLinesPool: wrapTextLinesPool
       });
       _this.parser = parser;
 
@@ -12052,9 +12069,11 @@
     return this;
   };
 
+  var RemoveItem$7 = Phaser.Utils.Array.Remove;
+
   var RemoveChild$1 = function RemoveChild(bob) {
     this.poolManager.free(bob);
-    RemoveItem(this.children.list, bob);
+    RemoveItem$7(this.children, bob);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -12122,7 +12141,7 @@
     return bob.type === CharTypeName && bob.text === ' ';
   };
 
-  var IsChar = function IsChar(bob) {
+  var IsChar$1 = function IsChar(bob) {
     return bob.type === CharTypeName;
   };
 
@@ -12416,23 +12435,35 @@
     return this;
   };
 
-  var InsertText = function InsertText(index, text, style) {
-    var bobArray = CreateCharBobArray.call(this, text, style);
-    var textIndex = index;
-    index = undefined;
+  var GetCharDataIndex = function GetCharDataIndex(textIndex, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
     var children = this.children;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      if (IsChar(children[i])) {
+      var child = children;
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child)) {
         if (textIndex === 0) {
-          index = i;
-          break;
+          return i;
         } else {
           textIndex--;
         }
       }
     }
 
+    return undefined;
+  };
+
+  var InsertText = function InsertText(index, text, style) {
+    var bobArray = CreateCharBobArray.call(this, text, style);
+    index = GetCharDataIndex(index, true);
     this.addChild(bobArray, index);
     return this;
   };
@@ -12452,7 +12483,7 @@
         continue;
       }
 
-      if (!IsChar(child)) {
+      if (!IsChar$1(child)) {
         continue;
       }
 
@@ -13550,6 +13581,32 @@
     return this;
   };
 
+  var BackgroundMethods = {
+    setBackgroundColor: function setBackgroundColor(color, color2, isHorizontalGradient) {
+      this.background.setColor(color, color2, isHorizontalGradient);
+      return this;
+    },
+    setBackgroundStroke: function setBackgroundStroke(color, lineWidth) {
+      this.background.setStroke(color, lineWidth);
+      return this;
+    },
+    setBackgroundCornerRadius: function setBackgroundCornerRadius(radius, iteration) {
+      this.background.setCornerRadius(radius, iteration);
+      return this;
+    }
+  };
+
+  var InnerBoundsMethods = {
+    setInnerBoundsColor: function setInnerBoundsColor(color, color2, isHorizontalGradient) {
+      this.innerBounds.setColor(color, color2, isHorizontalGradient);
+      return this;
+    },
+    setInnerBoundsStroke: function setInnerBoundsStroke(color, lineWidth) {
+      this.innerBounds.setStroke(color, lineWidth);
+      return this;
+    }
+  };
+
   var Methods$9 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
@@ -13563,6 +13620,7 @@
     setText: SetText$2,
     appendText: AppendText$1,
     insertText: InsertText,
+    removeText: RemoveChild$1,
     getText: GetText,
     appendImage: AppendImage,
     appendSpace: AppendSpace,
@@ -13578,6 +13636,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
+  Object.assign(Methods$9, BackgroundMethods, InnerBoundsMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -13700,6 +13759,14 @@
         _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);
 
         return this;
+      }
+    }, {
+      key: "text",
+      get: function get() {
+        return this.getText(true);
+      },
+      set: function set(value) {
+        this.setText(value);
       }
     }]);
 
@@ -14674,7 +14741,7 @@
   };
 
   var GetValue$1P = Phaser.Utils.Objects.GetValue;
-  var RemoveItem$7 = Phaser.Utils.Array.Remove;
+  var RemoveItem$6 = Phaser.Utils.Array.Remove;
 
   var SoundManager = /*#__PURE__*/function () {
     function SoundManager(scene, config) {
@@ -14751,14 +14818,14 @@
             return;
           }
 
-          RemoveItem$7(this.soundEffects, soundEffect);
+          RemoveItem$6(this.soundEffects, soundEffect);
         }, this).once('destroy', function () {
           // SoundManager has been destroyed
           if (!this.scene) {
             return;
           }
 
-          RemoveItem$7(this.soundEffects, soundEffect);
+          RemoveItem$6(this.soundEffects, soundEffect);
         }, this).play();
         return this;
       }
@@ -15861,7 +15928,7 @@
     gameObject.y = viewport.y + viewport.height * vpy;
   };
 
-  var RemoveItem$6 = Phaser.Utils.Array.Remove;
+  var RemoveItem$5 = Phaser.Utils.Array.Remove;
   var AddMethods$1 = {
     has: function has(name) {
       return this.bobs.hasOwnProperty(name);
@@ -15885,7 +15952,7 @@
       }
 
       gameObject.once('destroy', function () {
-        RemoveItem$6(this.removedGOs, gameObject);
+        RemoveItem$5(this.removedGOs, gameObject);
 
         if (this.isEmpty) {
           this.emit('empty');
@@ -20126,7 +20193,7 @@
   };
 
   var Shape = Phaser.GameObjects.Shape;
-  var RemoveItem$5 = Phaser.Utils.Array.Remove;
+  var RemoveItem$4 = Phaser.Utils.Array.Remove;
 
   var BaseShapes = /*#__PURE__*/function (_Shape) {
     _inherits(BaseShapes, _Shape);
@@ -20346,7 +20413,7 @@
 
         if (shape) {
           delete this.shapes[name];
-          RemoveItem$5(this.geom, shape);
+          RemoveItem$4(this.geom, shape);
         }
 
         return this;
@@ -28797,12 +28864,12 @@
     add: Add$7
   };
 
-  var RemoveItem$4 = Phaser.Utils.Array.Remove;
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var ContainerRemove = ContainerLite.prototype.remove;
 
   var RemoveChild = function RemoveChild(gameObject, destroyChild) {
     if (this.isBackground(gameObject)) {
-      RemoveItem$4(this.backgroundChildren, gameObject);
+      RemoveItem$3(this.backgroundChildren, gameObject);
     }
 
     ContainerRemove.call(this, gameObject, destroyChild);
@@ -31430,14 +31497,14 @@
     }
   };
 
-  var RemoveItem$3 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var RemoveChildMethods$5 = {
     remove: function remove(gameObject, destroyChild) {
       if (this.getParentSizer(gameObject) !== this) {
         return this;
       }
 
-      RemoveItem$3(this.sizerChildren, gameObject);
+      RemoveItem$2(this.sizerChildren, gameObject);
       RemoveChild.call(this, gameObject, destroyChild);
       return this;
     },
@@ -32854,14 +32921,14 @@
     }
   };
 
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var RemoveChildMethods$3 = {
     remove: function remove(gameObject, destroyChild) {
       if (this.getParentSizer(gameObject) !== this) {
         return this;
       }
 
-      RemoveItem$2(this.sizerChildren, gameObject);
+      RemoveItem$1(this.sizerChildren, gameObject);
       RemoveChild.call(this, gameObject, destroyChild);
       return this;
     },
@@ -33557,10 +33624,10 @@
     }
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem = Phaser.Utils.Array.Remove;
   var RemoveMethods = {
     remove: function remove(gameObject) {
-      RemoveItem$1(this.buttons, gameObject);
+      RemoveItem(this.buttons, gameObject);
 
       if (this.buttonsType) {
         var key = gameObject.name;

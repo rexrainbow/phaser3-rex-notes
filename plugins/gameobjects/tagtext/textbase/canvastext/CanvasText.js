@@ -53,6 +53,10 @@ class CanvasText {
             this.hitAreaManager.destroy();
             this.hitAreaManager = undefined;
         }
+
+        this.pensPool = undefined;
+        this.linesPool = undefined;
+        this.wrapTextLinesPool = undefined;
     }
 
     updatePenManager(text, wrapMode, wrapWidth, lineHeight, penManager) {

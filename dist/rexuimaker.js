@@ -6760,6 +6760,10 @@
           this.hitAreaManager.destroy();
           this.hitAreaManager = undefined;
         }
+
+        this.pensPool = undefined;
+        this.linesPool = undefined;
+        this.wrapTextLinesPool = undefined;
       }
     }, {
       key: "updatePenManager",
@@ -7057,7 +7061,7 @@
   };
   Object.assign(CanvasText.prototype, DrawMethods, methods$f);
 
-  var WrapTextLinesPool$1 = /*#__PURE__*/function (_Pool) {
+  var WrapTextLinesPool = /*#__PURE__*/function (_Pool) {
     _inherits(WrapTextLinesPool, _Pool);
 
     var _super = _createSuper(WrapTextLinesPool);
@@ -7307,9 +7311,9 @@
   var RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
   var SPLITREGEXP = CONST.SPLITREGEXP; // Reuse objects can increase performance
 
-  var PensPools = null;
-  var LinesPool = null;
-  var WrapTextLinesPool = null;
+  var SharedPensPools = null;
+  var SharedLinesPool = null;
+  var SharedWrapTextLinesPool = null;
 
   var Text = /*#__PURE__*/function (_TextBase) {
     _inherits(Text, _TextBase);
@@ -7326,7 +7330,7 @@
         x = GetValue$1j(config, 'x', 0);
         y = GetValue$1j(config, 'y', 0);
         text = GetValue$1j(config, 'text', '');
-        style = GetValue$1j(config, 'style', '');
+        style = GetValue$1j(config, 'style');
       }
 
       if (x === undefined) {
@@ -7400,23 +7404,36 @@
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
 
         _this.frame.source.glTexture = null;
-      } // Use pools first time
-
-
-      if (!PensPools) {
-        PensPools = {};
-        LinesPool = new Stack();
-        WrapTextLinesPool = new WrapTextLinesPool$1(); // Remove cached data
-
-        _this.scene.game.events.once('destroy', function () {
-          PensPools = null;
-          LinesPool = null;
-          WrapTextLinesPool = null;
-        });
       }
 
-      if (!PensPools.hasOwnProperty(type)) {
-        PensPools[type] = new Stack();
+      var sharedPoolMode = GetValue$1j(style, 'sharedPool', true);
+      var pensPool, linesPool, wrapTextLinesPool;
+
+      if (sharedPoolMode) {
+        // Use pools first time
+        if (!SharedPensPools) {
+          SharedPensPools = {};
+          SharedLinesPool = new Stack();
+          SharedWrapTextLinesPool = new WrapTextLinesPool(); // Remove cached data
+
+          _this.scene.game.events.once('destroy', function () {
+            SharedPensPools = null;
+            SharedLinesPool = null;
+            SharedWrapTextLinesPool = null;
+          });
+        }
+
+        if (!SharedPensPools.hasOwnProperty(type)) {
+          SharedPensPools[type] = new Stack();
+        }
+
+        pensPool = SharedPensPools[type];
+        linesPool = SharedLinesPool;
+        wrapTextLinesPool = SharedWrapTextLinesPool;
+      } else {
+        pensPool = new Stack();
+        linesPool = new Stack();
+        wrapTextLinesPool = new WrapTextLinesPool();
       }
 
       _this.canvasText = new CanvasText({
@@ -7424,9 +7441,9 @@
         context: _this.context,
         parser: parser,
         style: _this.style,
-        pensPool: PensPools[type],
-        linesPool: LinesPool,
-        wrapTextLinesPool: WrapTextLinesPool
+        pensPool: pensPool,
+        linesPool: linesPool,
+        wrapTextLinesPool: wrapTextLinesPool
       });
       _this.parser = parser;
 

@@ -170,7 +170,9 @@ Default style
 
     // images: {
     //    key: { y:-8 }
-    // }
+    // },
+
+    // sharedPool: true,
 }
 ```
 
@@ -226,6 +228,9 @@ var txt = scene.make.rexBBCodeText({
     - `valign` : Vertical alignment.
         - `'top'`, `'center'`, `'bottom'`
 - `images` : See [Image](bbcodetext.md#image)
+- `sharedPool` : 
+    - `true` : Use shared resouce pools during game. Default behavior.
+    - `false` : Use local resource pools, will be free when game object destroying.
 
 ### Custom class
 

@@ -5495,9 +5495,11 @@
     return this;
   };
 
+  var RemoveItem = Phaser.Utils.Array.Remove;
+
   var RemoveChild = function RemoveChild(bob) {
     this.poolManager.free(bob);
-    RemoveItem(this.children.list, bob);
+    RemoveItem(this.children, bob);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -5565,7 +5567,7 @@
     return bob.type === CharTypeName && bob.text === ' ';
   };
 
-  var IsChar = function IsChar(bob) {
+  var IsChar$1 = function IsChar(bob) {
     return bob.type === CharTypeName;
   };
 
@@ -5859,23 +5861,35 @@
     return this;
   };
 
-  var InsertText = function InsertText(index, text, style) {
-    var bobArray = CreateCharBobArray.call(this, text, style);
-    var textIndex = index;
-    index = undefined;
+  var GetCharDataIndex = function GetCharDataIndex(textIndex, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
     var children = this.children;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      if (IsChar(children[i])) {
+      var child = children;
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child)) {
         if (textIndex === 0) {
-          index = i;
-          break;
+          return i;
         } else {
           textIndex--;
         }
       }
     }
 
+    return undefined;
+  };
+
+  var InsertText = function InsertText(index, text, style) {
+    var bobArray = CreateCharBobArray.call(this, text, style);
+    index = GetCharDataIndex(index, true);
     this.addChild(bobArray, index);
     return this;
   };
@@ -5895,7 +5909,7 @@
         continue;
       }
 
-      if (!IsChar(child)) {
+      if (!IsChar$1(child)) {
         continue;
       }
 
@@ -6993,6 +7007,32 @@
     return this;
   };
 
+  var BackgroundMethods = {
+    setBackgroundColor: function setBackgroundColor(color, color2, isHorizontalGradient) {
+      this.background.setColor(color, color2, isHorizontalGradient);
+      return this;
+    },
+    setBackgroundStroke: function setBackgroundStroke(color, lineWidth) {
+      this.background.setStroke(color, lineWidth);
+      return this;
+    },
+    setBackgroundCornerRadius: function setBackgroundCornerRadius(radius, iteration) {
+      this.background.setCornerRadius(radius, iteration);
+      return this;
+    }
+  };
+
+  var InnerBoundsMethods = {
+    setInnerBoundsColor: function setInnerBoundsColor(color, color2, isHorizontalGradient) {
+      this.innerBounds.setColor(color, color2, isHorizontalGradient);
+      return this;
+    },
+    setInnerBoundsStroke: function setInnerBoundsStroke(color, lineWidth) {
+      this.innerBounds.setStroke(color, lineWidth);
+      return this;
+    }
+  };
+
   var Methods$3 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
@@ -7006,6 +7046,7 @@
     setText: SetText,
     appendText: AppendText,
     insertText: InsertText,
+    removeText: RemoveChild,
     getText: GetText,
     appendImage: AppendImage,
     appendSpace: AppendSpace,
@@ -7021,6 +7062,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
+  Object.assign(Methods$3, BackgroundMethods, InnerBoundsMethods);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -7143,6 +7185,14 @@
         _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);
 
         return this;
+      }
+    }, {
+      key: "text",
+      get: function get() {
+        return this.getText(true);
+      },
+      set: function set(value) {
+        this.setText(value);
       }
     }]);
 
