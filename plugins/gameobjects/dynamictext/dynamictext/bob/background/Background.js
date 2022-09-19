@@ -85,6 +85,11 @@ class Background extends RenderBase {
     }
 
     setStroke(color, lineWidth) {
+        if (color != null) {
+            if (lineWidth === undefined) {
+                lineWidth = 2;
+            }
+        }
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;

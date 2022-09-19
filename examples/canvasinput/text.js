@@ -16,14 +16,14 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexCanvasInput(
             {
                 x: 400, y: 300,
-                width: 200, height: 100,
+                width: 400, height: 100,
 
                 background: {
                     stroke: 'white',
                     cornerRadius: 20
                 },
                 innerBounds: {
-                    stroke: '#A52A2A'
+                    stroke: 'darkcyan'
                 },
                 padding: 20,
                 style: {
@@ -35,6 +35,16 @@ class Demo extends Phaser.Scene {
                     maxLines: 0,       // Set maxLines to 0
                     letterSpacing: 0,
                     padding: { bottom: 10 },
+                },
+
+                input: {
+                    onOpen(textObject) {
+                        textObject.setBackgroundStroke('red')
+                    },
+        
+                    onClose(textObject) {
+                        textObject.setBackgroundStroke('white')
+                    }
                 }
             }
         )

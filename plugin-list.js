@@ -17,6 +17,7 @@ module.exports = {
     'customprogressplugin': './plugins/customprogress-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',
+    'canvasinputplugin': './plugins/canvasinput-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',

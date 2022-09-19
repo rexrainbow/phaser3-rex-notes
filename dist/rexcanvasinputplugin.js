@@ -1,0 +1,5261 @@
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexcanvasinputplugin = factory());
+})(this, (function () { 'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+    return _setPrototypeOf(o, p);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get.apply(this, arguments);
+  }
+
+  function set(target, property, value, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.set) {
+      set = Reflect.set;
+    } else {
+      set = function set(target, property, value, receiver) {
+        var base = _superPropBase(target, property);
+
+        var desc;
+
+        if (base) {
+          desc = Object.getOwnPropertyDescriptor(base, property);
+
+          if (desc.set) {
+            desc.set.call(receiver, value);
+            return true;
+          } else if (!desc.writable) {
+            return false;
+          }
+        }
+
+        desc = Object.getOwnPropertyDescriptor(receiver, property);
+
+        if (desc) {
+          if (!desc.writable) {
+            return false;
+          }
+
+          desc.value = value;
+          Object.defineProperty(receiver, property, desc);
+        } else {
+          _defineProperty(receiver, property, value);
+        }
+
+        return true;
+      };
+    }
+
+    return set(target, property, value, receiver);
+  }
+
+  function _set(target, property, value, receiver, isStrict) {
+    var s = set(target, property, value, receiver || target);
+
+    if (!s && isStrict) {
+      throw new Error('failed to set property');
+    }
+
+    return value;
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  // copy from Phaser.GameObjects.Text
+  var Utils = Phaser.Renderer.WebGL.Utils;
+
+  var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+      src.updateTexture();
+      src.dirty = false;
+    }
+
+    if (src.width === 0 || src.height === 0) {
+      return;
+    }
+
+    camera.addToRenderList(src);
+    var frame = src.frame;
+    var width = frame.width;
+    var height = frame.height;
+    var getTint = Utils.getTintAppendFloatAlpha;
+    var pipeline = renderer.pipelines.set(src.pipeline, src);
+    var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
+    renderer.pipelines.preBatch(src);
+    pipeline.batchTexture(src, frame.glTexture, width, height, src.x, src.y, width / src.resolution, height / src.resolution, src.scaleX, src.scaleY, src.rotation, src.flipX, src.flipY, src.scrollFactorX, src.scrollFactorY, src.displayOriginX, src.displayOriginY, 0, 0, width, height, getTint(src.tintTopLeft, camera.alpha * src._alphaTL), getTint(src.tintTopRight, camera.alpha * src._alphaTR), getTint(src.tintBottomLeft, camera.alpha * src._alphaBL), getTint(src.tintBottomRight, camera.alpha * src._alphaBR), src.tintFill, 0, 0, camera, parentMatrix, false, textureUnit);
+    renderer.pipelines.postBatch(src);
+  };
+
+  // copy from Phaser.GameObjects.Text
+  var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+      src.updateTexture();
+      src.dirty = false;
+    }
+
+    if (src.width === 0 || src.height === 0) {
+      return;
+    }
+
+    camera.addToRenderList(src);
+    renderer.batchSprite(src, src.frame, camera, parentMatrix);
+  };
+
+  var Render = {
+    renderWebGL: WebGLRenderer,
+    renderCanvas: CanvasRenderer
+  };
+
+  var Color = Phaser.Display.Color;
+  var CanvasMethods = {
+    clear: function clear() {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.dirty = true;
+      return this;
+    },
+    fill: function fill(color) {
+      this.context.fillStyle = color;
+      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.dirty = true;
+      return this;
+    },
+    loadFromURL: function loadFromURL(url, callback) {
+      var self = this;
+      var img = new Image();
+
+      img.onload = function () {
+        if (self.width !== img.width || self.height !== img.height) {
+          self.resize(img.width, img.height);
+        } else {
+          self.clear();
+        }
+
+        self.context.drawImage(img, 0, 0);
+        self.updateTexture();
+
+        if (callback) {
+          callback();
+        }
+
+        img.onload = null;
+        img.src = '';
+        img.remove();
+      };
+
+      img.src = url;
+      return this;
+    },
+    loadFromURLPromise: function loadFromURLPromise(url) {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        self.loadFromURL(url, resolve);
+      });
+    },
+    drawFrame: function drawFrame(key, frame, x, y, width, height) {
+      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+
+      if (!textureFrame) {
+        return this;
+      }
+
+      if (x === undefined) {
+        x = 0;
+      }
+
+      if (y === undefined) {
+        y = 0;
+      }
+
+      if (width === undefined) {
+        width = textureFrame.cutWidth;
+      }
+
+      if (height === undefined) {
+        height = textureFrame.cutHeight;
+      }
+
+      this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
+      this.dirty = true;
+      return this;
+    },
+    getDataURL: function getDataURL(type, encoderOptions) {
+      return this.canvas.toDataURL(type, encoderOptions);
+    },
+    getPixel: function getPixel(x, y, out) {
+      if (out === undefined) {
+        out = new Color();
+      }
+
+      var rgb = this.context.getImageData(x, y, 1, 1);
+      out.setTo(rgb.data[0], rgb.data[1], rgb.data[2], rgb.data[3]);
+      return out;
+    },
+    setPixel: function setPixel(x, y, r, g, b, a) {
+      if (typeof r !== 'number') {
+        var color = r;
+        r = color.red;
+        g = color.green;
+        b = color.blue;
+        a = color.alpha;
+      }
+
+      if (a === undefined) {
+        a = r !== 0 || g !== 0 || b !== 0 ? 255 : 0;
+      }
+
+      var imgData = this.context.createImageData(1, 1);
+      imgData.data[0] = r;
+      imgData.data[1] = g;
+      imgData.data[2] = b;
+      imgData.data[3] = a;
+      this.context.putImageData(imgData, x, y);
+      this.dirty = true;
+      return this;
+    }
+  };
+
+  var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
+    var textures = scene.sys.textures;
+    var renderer = scene.renderer;
+
+    if (x === undefined) {
+      x = 0;
+    }
+
+    if (y === undefined) {
+      y = 0;
+    }
+
+    if (width === undefined) {
+      width = srcCanvas.width;
+    }
+
+    if (height === undefined) {
+      height = srcCanvas.height;
+    }
+
+    var texture;
+
+    if (textures.exists(key)) {
+      texture = textures.get(key);
+    } else {
+      texture = textures.createCanvas(key, width, height);
+    }
+
+    var destCanvas = texture.getSourceImage();
+
+    if (destCanvas.width !== width) {
+      destCanvas.width = width;
+    }
+
+    if (destCanvas.height !== height) {
+      destCanvas.height = height;
+    }
+
+    var destCtx = destCanvas.getContext('2d');
+    destCtx.clearRect(0, 0, width, height);
+    destCtx.drawImage(srcCanvas, x, y, width, height);
+
+    if (renderer.gl && texture) {
+      renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
+    }
+  };
+
+  var TextureMethods = {
+    updateTexture: function updateTexture(callback, scope) {
+      if (callback) {
+        if (scope) {
+          callback.call(scope, this.canvas, this.context);
+        } else {
+          callback(this.canvas, this.context);
+        }
+      }
+
+      if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
+        this.frame.setSize(this.canvas.width, this.canvas.height);
+      }
+
+      if (this.renderer.gl) {
+        this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+        this.frame.glTexture = this.frame.source.glTexture;
+      }
+
+      this.dirty = false;
+      var input = this.input;
+
+      if (input && !input.customHitArea) {
+        input.hitArea.width = this.width;
+        input.hitArea.height = this.height;
+      }
+
+      return this;
+    },
+    generateTexture: function generateTexture(key, x, y, width, height) {
+      var srcCanvas = this.canvas;
+
+      if (width === undefined) {
+        width = srcCanvas.width;
+      } else {
+        width *= this.resolution;
+      }
+
+      if (height === undefined) {
+        height = srcCanvas.height;
+      } else {
+        height *= this.resolution;
+      }
+
+      CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
+      return this;
+    },
+    loadTexture: function loadTexture(key, frame) {
+      var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+
+      if (!textureFrame) {
+        return this;
+      }
+
+      if (this.width !== textureFrame.cutWidth || this.height !== textureFrame.cutHeight) {
+        this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
+      } else {
+        this.clear();
+      }
+
+      this.drawFrame(key, frame);
+      this.dirty = true;
+      return this;
+    }
+  };
+
+  var CanvasPool = Phaser.Display.Canvas.CanvasPool;
+  var GameObject$1 = Phaser.GameObjects.GameObject;
+
+  var Canvas = /*#__PURE__*/function (_GameObject) {
+    _inherits(Canvas, _GameObject);
+
+    var _super = _createSuper(Canvas);
+
+    function Canvas(scene, x, y, width, height) {
+      var _this;
+
+      _classCallCheck(this, Canvas);
+
+      if (x === undefined) {
+        x = 0;
+      }
+
+      if (y === undefined) {
+        y = 0;
+      }
+
+      if (width === undefined) {
+        width = 1;
+      }
+
+      if (height === undefined) {
+        height = 1;
+      }
+
+      _this = _super.call(this, scene, 'rexCanvas');
+      _this.renderer = scene.sys.game.renderer;
+      _this.resolution = 1;
+      _this._width = width;
+      _this._height = height;
+      width = Math.max(Math.ceil(width * _this.resolution), 1);
+      height = Math.max(Math.ceil(height * _this.resolution), 1);
+      _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
+      _this.context = _this.canvas.getContext('2d');
+      _this.dirty = false;
+
+      _this.setPosition(x, y);
+
+      _this.setOrigin(0.5, 0.5);
+
+      _this.initPipeline();
+
+      _this._crop = _this.resetCropObject(); //  Create a Texture for this Text object
+
+      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true); //  Get the frame
+
+      _this.frame = _this.texture.get(); //  Set the resolution
+
+      _this.frame.source.resolution = _this.resolution;
+
+      if (_this.renderer && _this.renderer.gl) {
+        //  Clear the default 1x1 glTexture, as we override it later
+        _this.renderer.deleteTexture(_this.frame.source.glTexture);
+
+        _this.frame.source.glTexture = null;
+      }
+
+      _this.dirty = true;
+      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
+      return _this;
+    }
+
+    _createClass(Canvas, [{
+      key: "onContextRestored",
+      value: function onContextRestored() {
+        this.dirty = true;
+      }
+    }, {
+      key: "preDestroy",
+      value: function preDestroy() {
+        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
+        CanvasPool.remove(this.canvas);
+        this.texture.destroy();
+        this.canvas = null;
+        this.context = null;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {
+        this.setSize(value, this._height);
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {
+        this.setSize(this._width, value);
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        if (this._width === width && this._height === height) {
+          return this;
+        }
+
+        this._width = width;
+        this._height = height;
+        this.updateDisplayOrigin();
+        width = Math.max(Math.ceil(width * this.resolution), 1);
+        height = Math.max(Math.ceil(height * this.resolution), 1);
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.frame.setSize(width, height);
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "displayWidth",
+      get: function get() {
+        return this.scaleX * this._width;
+      },
+      set: function set(value) {
+        this.scaleX = value / this._width;
+      }
+    }, {
+      key: "displayHeight",
+      get: function get() {
+        return this.scaleY * this._height;
+      },
+      set: function set(value) {
+        this.scaleY = value / this._height;
+      }
+    }, {
+      key: "setDisplaySize",
+      value: function setDisplaySize(width, height) {
+        this.displayWidth = width;
+        this.displayHeight = height;
+        return this;
+      }
+    }, {
+      key: "getCanvas",
+      value: function getCanvas(readOnly) {
+        if (!readOnly) {
+          this.dirty = true;
+        }
+
+        return this.canvas;
+      }
+    }, {
+      key: "getContext",
+      value: function getContext(readOnly) {
+        if (!readOnly) {
+          this.dirty = true;
+        }
+
+        return this.context;
+      }
+    }, {
+      key: "needRedraw",
+      value: function needRedraw() {
+        this.dirty = true;
+        return this;
+      }
+    }, {
+      key: "resize",
+      value: function resize(width, height) {
+        this.setSize(width, height);
+        return this;
+      }
+    }]);
+
+    return Canvas;
+  }(GameObject$1);
+
+  var Components = Phaser.GameObjects.Components;
+  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, // Components.FX,
+  Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
+
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
+
+  var GetPadding$1 = function GetPadding(padding, key) {
+    if (key === undefined) {
+      return padding;
+    }
+
+    return padding[key];
+  };
+
+  var SetPadding$1 = function SetPadding(padding, key, value) {
+    if (padding === undefined) {
+      padding = {};
+    }
+
+    if (key === undefined) {
+      key = 0;
+    }
+
+    var keyType = _typeof(key);
+
+    if (keyType === 'string') {
+      padding[key] = value;
+    } else if (keyType === 'number') {
+      padding.left = key;
+      padding.right = key;
+      padding.top = key;
+      padding.bottom = key;
+    } else {
+      padding.left = GetValue$d(key, 'left', 0);
+      padding.right = GetValue$d(key, 'right', 0);
+      padding.top = GetValue$d(key, 'top', 0);
+      padding.bottom = GetValue$d(key, 'bottom', 0);
+    }
+
+    return padding;
+  };
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2019 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+  //  Source object
+  //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
+  //  The default value to use if the key doesn't exist
+
+  /**
+   * Retrieves a value from an object.
+   *
+   * @function Phaser.Utils.Objects.GetValue
+   * @since 3.0.0
+   *
+   * @param {object} source - The object to retrieve the value from.
+   * @param {string} key - The name of the property to retrieve from the object. If a property is nested, the names of its preceding properties should be separated by a dot (`.`) - `banner.hideBanner` would return the value of the `hideBanner` property from the object stored in the `banner` property of the `source` object.
+   * @param {*} defaultValue - The value to return if the `key` isn't found in the `source` object.
+   *
+   * @return {*} The value of the requested key.
+   */
+  var GetValue$c = function GetValue(source, key, defaultValue) {
+    if (!source || typeof source === 'number') {
+      return defaultValue;
+    } else if (source.hasOwnProperty(key)) {
+      return source[key];
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+      var value = defaultValue; //  Use for loop here so we can break early
+
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          //  Yes it has a key property, let's carry on down
+          value = parent[keys[i]];
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further, so reset to default
+          value = defaultValue;
+          break;
+        }
+      }
+
+      return value;
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var Clear = function Clear(obj) {
+    if (_typeof(obj) !== 'object' || obj === null) {
+      return obj;
+    }
+
+    if (Array.isArray(obj)) {
+      obj.length = 0;
+    } else {
+      for (var key in obj) {
+        delete obj[key];
+      }
+    }
+
+    return obj;
+  };
+
+  var DataMethods = {
+    enableData: function enableData() {
+      if (this.data === undefined) {
+        this.data = {};
+      }
+
+      return this;
+    },
+    setData: function setData(key, value) {
+      this.enableData();
+
+      if (arguments.length === 1) {
+        var data = key;
+
+        for (key in data) {
+          this.data[key] = data[key];
+        }
+      } else {
+        this.data[key] = value;
+      }
+
+      return this;
+    },
+    getData: function getData(key, defaultValue) {
+      this.enableData();
+      return key === undefined ? this.data : GetValue$c(this.data, key, defaultValue);
+    },
+    incData: function incData(key, inc, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) + inc);
+      return this;
+    },
+    mulData: function mulData(key, mul, defaultValue) {
+      if (defaultValue === undefined) {
+        defaultValue = 0;
+      }
+
+      this.enableData();
+      this.setData(key, this.getData(key, defaultValue) * mul);
+      return this;
+    },
+    clearData: function clearData() {
+      if (this.data) {
+        Clear(this.data);
+      }
+
+      return this;
+    }
+  };
+
+  var Base = /*#__PURE__*/function () {
+    function Base(parent, type) {
+      _classCallCheck(this, Base);
+
+      this.setParent(parent);
+      this.type = type;
+      this.renderable = false;
+      this.reset().setActive();
+    }
+
+    _createClass(Base, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent.removeChild(this);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent;
+        return this;
+      }
+    }, {
+      key: "scene",
+      get: function get() {
+        return this.parent.scene;
+      }
+    }, {
+      key: "canvas",
+      get: function get() {
+        return this.parent ? this.parent.canvas : null;
+      }
+    }, {
+      key: "context",
+      get: function get() {
+        return this.parent ? this.parent.context : null;
+      }
+    }, {
+      key: "setDirty",
+      value: function setDirty(dirty) {
+        if (dirty && this.parent) {
+          this.parent.dirty = true;
+        }
+
+        return this;
+      }
+    }, {
+      key: "active",
+      get: function get() {
+        return this._active;
+      },
+      set: function set(value) {
+        this.setDirty(this._active != value);
+        this._active = value;
+      }
+    }, {
+      key: "setActive",
+      value: function setActive(active) {
+        if (active === undefined) {
+          active = true;
+        }
+
+        this.active = active;
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        return this;
+      } // Override
+
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        this.reset().setParent();
+      } // Override
+
+    }, {
+      key: "reset",
+      value: function reset() {
+        return this;
+      } // Override
+
+    }, {
+      key: "render",
+      value: function render() {} // Override
+
+    }, {
+      key: "contains",
+      value: function contains(x, y) {
+        return false;
+      }
+    }]);
+
+    return Base;
+  }();
+
+  Object.assign(Base.prototype, DataMethods);
+
+  var RenderMethods = {
+    // Override
+    renderContent: function renderContent() {},
+    // Override
+    render: function render() {
+      if (!this.willRender) {
+        return this;
+      }
+
+      var context = this.context;
+      context.save();
+      context.globalAlpha = this.alpha;
+
+      if (this.toLocalPosition) {
+        var x = this.drawX,
+            y = this.drawY;
+
+        if (this.autoRound) {
+          x = Math.round(x);
+          y = Math.round(y);
+        }
+
+        context.translate(x, y);
+        context.scale(this.scaleX, this.scaleY);
+        context.rotate(this.rotation);
+      }
+
+      if (this.drawBelowCallback) {
+        this.drawBelowCallback(this);
+      }
+
+      this.renderContent();
+
+      if (this.drawAboveCallback) {
+        this.drawAboveCallback(this);
+      }
+
+      context.restore();
+      return this;
+    }
+  };
+
+  var RotateAround = Phaser.Math.RotateAround;
+
+  var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      if (globPoint === undefined) {
+        globPoint = {};
+      }
+
+      out = globPoint;
+    }
+
+    out.x = (canvasX - bob.drawX) / bob.scaleX;
+    out.y = (canvasY - bob.drawY) / bob.scaleY;
+
+    if (bob.rotation !== 0) {
+      RotateAround(out, 0, 0, -bob.rotation);
+    }
+
+    return out;
+  };
+
+  var globPoint;
+
+  var Rectangle = Phaser.Geom.Rectangle;
+
+  var Contains = function Contains(canvasX, canvasY) {
+    if (this.width === 0 || this.height === 0) {
+      return false;
+    }
+
+    var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
+    return GetBounds(this).contains(bobPosition.x, bobPosition.y);
+  };
+
+  var GetBounds = function GetBounds(bob) {
+    if (globBounds === undefined) {
+      globBounds = new Rectangle();
+    }
+
+    var x = bob.drawTLX,
+        y = bob.drawTLY;
+    globBounds.setTo(x, y, bob.drawTRX - x, bob.drawBLY - y);
+    return globBounds;
+  };
+
+  var globBounds;
+
+  var Methods$1 = {
+    contains: Contains
+  };
+  Object.assign(Methods$1, RenderMethods);
+
+  var DegToRad$1 = Phaser.Math.DegToRad;
+  var RadToDeg = Phaser.Math.RadToDeg;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
+
+  var RenderBase = /*#__PURE__*/function (_Base) {
+    _inherits(RenderBase, _Base);
+
+    var _super = _createSuper(RenderBase);
+
+    function RenderBase(parent, type) {
+      var _this;
+
+      _classCallCheck(this, RenderBase);
+
+      _this = _super.call(this, parent, type);
+      _this.renderable = true;
+      _this.toLocalPosition = true;
+      _this.originX = 0;
+      _this.offsetX = 0; // Override
+
+      _this.offsetY = 0; // Override
+
+      return _this;
+    }
+
+    _createClass(RenderBase, [{
+      key: "visible",
+      get: function get() {
+        return this._visible;
+      },
+      set: function set(value) {
+        this.setDirty(this._visible != value);
+        this._visible = value;
+      }
+    }, {
+      key: "setVisible",
+      value: function setVisible(visible) {
+        if (visible === undefined) {
+          visible = true;
+        }
+
+        this.visible = visible;
+        return this;
+      }
+    }, {
+      key: "alpha",
+      get: function get() {
+        return this._alpha;
+      },
+      set: function set(value) {
+        this.setDirty(this._alpha != value);
+        this._alpha = value;
+      }
+    }, {
+      key: "setAlpha",
+      value: function setAlpha(alpha) {
+        this.alpha = alpha;
+        return this;
+      }
+    }, {
+      key: "x",
+      get: function get() {
+        return this._x;
+      },
+      set: function set(value) {
+        this.setDirty(this._x != value);
+        this._x = value;
+      }
+    }, {
+      key: "setX",
+      value: function setX(x) {
+        this.x = x;
+        return this;
+      }
+    }, {
+      key: "y",
+      get: function get() {
+        return this._y;
+      },
+      set: function set(value) {
+        this.setDirty(this._y != value);
+        this._y = value;
+      }
+    }, {
+      key: "setY",
+      value: function setY(y) {
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "setInitialPosition",
+      value: function setInitialPosition(x, y) {
+        this.x0 = x;
+        this.y0 = y;
+        return this;
+      }
+    }, {
+      key: "rotation",
+      get: function get() {
+        return this._rotation;
+      },
+      set: function set(value) {
+        this.setDirty(this._rotation != value);
+        this._rotation = value;
+      }
+    }, {
+      key: "setRotation",
+      value: function setRotation(rotation) {
+        this.rotation = rotation;
+        return this;
+      }
+    }, {
+      key: "angle",
+      get: function get() {
+        return RadToDeg(this._rotation);
+      },
+      set: function set(value) {
+        this.rotation = DegToRad$1(value);
+      }
+    }, {
+      key: "setAngle",
+      value: function setAngle(angle) {
+        this.angle = angle;
+        return this;
+      }
+    }, {
+      key: "scaleX",
+      get: function get() {
+        return this._scaleX;
+      },
+      set: function set(value) {
+        this.setDirty(this._scaleX !== value);
+        this._scaleX = value;
+      }
+    }, {
+      key: "setScaleX",
+      value: function setScaleX(scaleX) {
+        this.scaleX = scaleX;
+        return this;
+      } // Override
+
+    }, {
+      key: "width",
+      get: function get() {
+        return 0;
+      } // Override
+      ,
+      set: function set(value) {}
+    }, {
+      key: "setWidth",
+      value: function setWidth(width, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.width = width;
+
+        if (keepAspectRatio) {
+          this.scaleY = this.scaleX;
+        }
+
+        return this;
+      }
+    }, {
+      key: "leftSpace",
+      get: function get() {
+        return this._leftSpace;
+      },
+      set: function set(value) {
+        this.setDirty(this._leftSpace !== value);
+        this._leftSpace = value;
+      }
+    }, {
+      key: "setLeftSpace",
+      value: function setLeftSpace(value) {
+        this.leftSpace = value;
+        return this;
+      }
+    }, {
+      key: "rightSpace",
+      get: function get() {
+        return this._rightSpace;
+      },
+      set: function set(value) {
+        this.setDirty(this._rightSpace !== value);
+        this._rightSpace = value;
+      }
+    }, {
+      key: "setRightSpace",
+      value: function setRightSpace(value) {
+        this.rightSpace = value;
+        return this;
+      }
+    }, {
+      key: "outerWidth",
+      get: function get() {
+        return this.width + this.leftSpace + this.rightSpace;
+      }
+    }, {
+      key: "scaleY",
+      get: function get() {
+        return this._scaleY;
+      },
+      set: function set(value) {
+        this.setDirty(this._scaleY !== value);
+        this._scaleY = value;
+      }
+    }, {
+      key: "setScaleY",
+      value: function setScaleY(scaleY) {
+        this.scaleY = scaleY;
+        return this;
+      } // Override
+
+    }, {
+      key: "height",
+      get: function get() {
+        return 0;
+      } // Override
+      ,
+      set: function set(value) {}
+    }, {
+      key: "setHeight",
+      value: function setHeight(height, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.height = height;
+
+        if (keepAspectRatio) {
+          this.scaleX = this.scaleY;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setScale",
+      value: function setScale(scaleX, scaleY) {
+        if (scaleY === undefined) {
+          scaleY = scaleX;
+        }
+
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        return this;
+      }
+    }, {
+      key: "setOrigin",
+      value: function setOrigin(x) {
+        this.originX = x;
+        return this;
+      }
+    }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        this.align = align;
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        if (!o) {
+          return this;
+        }
+
+        if (o.hasOwnProperty('x')) {
+          this.setX(o.x);
+        }
+
+        if (o.hasOwnProperty('y')) {
+          this.setY(o.y);
+        }
+
+        if (o.hasOwnProperty('rotation')) {
+          this.setRotation(o.rotation);
+        } else if (o.hasOwnProperty('angle')) {
+          this.setAngle(o.angle);
+        }
+
+        if (o.hasOwnProperty('alpha')) {
+          this.setAlpha(o.alpha);
+        } // ScaleX, ScaleY
+
+
+        var width = GetValue$b(o, 'width', undefined);
+        var height = GetValue$b(o, 'height', undefined);
+        var scaleX = GetValue$b(o, 'scaleX', undefined);
+        var scaleY = GetValue$b(o, 'scaleY', undefined);
+
+        if (width !== undefined) {
+          if (height === undefined && scaleY === undefined) {
+            this.setWidth(width, true);
+          } else {
+            this.setWidth(width);
+          }
+        } else if (scaleX !== undefined) {
+          this.setScaleX(scaleX);
+        }
+
+        if (height !== undefined) {
+          if (width === undefined && scaleX === undefined) {
+            this.setHeight(height, true);
+          } else {
+            this.setHeight(height);
+          }
+        } else if (scaleY !== undefined) {
+          this.setScaleY(scaleY);
+        }
+
+        if (o.hasOwnProperty('leftSpace')) {
+          this.setLeftSpace(o.leftSpace);
+        }
+
+        if (o.hasOwnProperty('rightSpace')) {
+          this.setRightSpace(o.rightSpace);
+        }
+
+        if (o.hasOwnProperty('align')) {
+          this.setAlign(o.align);
+        }
+
+        return this;
+      }
+    }, {
+      key: "setDrawBelowCallback",
+      value: function setDrawBelowCallback(callback) {
+        this.drawBelowCallback = callback;
+        return this;
+      }
+    }, {
+      key: "setDrawAboveCallback",
+      value: function setDrawAboveCallback(callback) {
+        this.drawAboveCallback = callback;
+        return this;
+      }
+    }, {
+      key: "reset",
+      value: function reset() {
+        this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setAlign().setDrawBelowCallback().setDrawAboveCallback();
+        return this;
+      } // Override
+
+    }, {
+      key: "willRender",
+      get: function get() {
+        return this.visible && this.alpha > 0;
+      }
+    }, {
+      key: "drawX",
+      get: function get() {
+        return this.x + this.leftSpace + this.offsetX - this.originX * this.width;
+      }
+    }, {
+      key: "drawY",
+      get: function get() {
+        return this.y + this.offsetY;
+      } // Override
+
+    }, {
+      key: "drawTLX",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTLY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLX",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTRX",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawTRY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRX",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawCenterX",
+      get: function get() {
+        return (this.drawTRX + this.drawTLX) / 2;
+      }
+    }, {
+      key: "drawCenterY",
+      get: function get() {
+        return (this.drawBLY + this.drawTLY) / 2;
+      }
+    }]);
+
+    return RenderBase;
+  }(Base);
+
+  Object.assign(RenderBase.prototype, Methods$1);
+
+  var Pad = Phaser.Utils.String.Pad;
+
+  var GetStyle = function GetStyle(style, canvas, context) {
+    if (style == null) {
+      return style;
+    }
+
+    switch (_typeof(style)) {
+      case 'string':
+        return style;
+
+      case 'number':
+        return "#".concat(Pad(Math.floor(style).toString(16), 6, '0', 1));
+
+      case 'function':
+        return style(canvas, context);
+
+      case 'object':
+        if (style.hasOwnProperty('r')) {
+          if (style.hasOwnProperty('a')) {
+            // rgba
+            return "rgba(".concat(style.r, ",").concat(style.g, ",").concat(style.b, ",").concat(style.a, ")");
+          } else {
+            // rgb
+            return "rgb(".concat(style.r, ",").concat(style.g, ",").concat(style.b, ")");
+          }
+        } else if (style.hasOwnProperty('h')) {
+          if (style.hasOwnProperty('a')) {
+            // hsla
+            return "hsla(".concat(style.h, ",").concat(style.s, ",").concat(style.l, ",").concat(style.a, ")");
+          } else {
+            // hsl
+            return "hsl(".concat(style.h, ",").concat(style.s, ",").concat(style.l, ")");
+          }
+        } else {
+          return style; // Not a valid input
+        }
+
+      default:
+        return style;
+    }
+  };
+
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
+
+  var RoundRectangle = /*#__PURE__*/function () {
+    function RoundRectangle(x, y, width, height, radiusConfig) {
+      _classCallCheck(this, RoundRectangle);
+
+      this.cornerRadius = {};
+      this._width = 0;
+      this._height = 0;
+      this.setTo(x, y, width, height, radiusConfig);
+    }
+
+    _createClass(RoundRectangle, [{
+      key: "setTo",
+      value: function setTo(x, y, width, height, radiusConfig) {
+        this.setPosition(x, y);
+        this.setRadius(radiusConfig);
+        this.setSize(width, height);
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        if (x === undefined) {
+          x = 0;
+        }
+
+        if (y === undefined) {
+          y = x;
+        }
+
+        this.x = x;
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "setRadius",
+      value: function setRadius(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.radius = value;
+        return this;
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.width = width;
+        this.height = height;
+        return this;
+      }
+    }, {
+      key: "minWidth",
+      get: function get() {
+        var radius = this.cornerRadius;
+        return Math.max(radius.tl.x + radius.tr.x, radius.bl.x + radius.br.x);
+      }
+    }, {
+      key: "minHeight",
+      get: function get() {
+        var radius = this.cornerRadius;
+        return Math.max(radius.tl.y + radius.bl.y, radius.tr.y + radius.br.y);
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {
+        if (value == null) {
+          value = 0;
+        }
+
+        this._width = Math.max(value, this.minWidth);
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {
+        if (value == null) {
+          value = 0;
+        }
+
+        this._height = Math.max(value, this.minHeight);
+      }
+    }, {
+      key: "radius",
+      get: function get() {
+        var radius = this.cornerRadius;
+        return Math.max(radius.tl.x, radius.tl.y, radius.tr.x, radius.tr.y, radius.bl.x, radius.bl.y, radius.br.x, radius.br.y);
+      },
+      set: function set(value) {
+        var defaultRadiusX, defaultRadiusY;
+
+        if (typeof value === 'number') {
+          defaultRadiusX = value;
+          defaultRadiusY = value;
+        } else {
+          defaultRadiusX = GetValue$a(value, 'x', 0);
+          defaultRadiusY = GetValue$a(value, 'y', 0);
+        }
+
+        var radius = this.cornerRadius;
+        radius.tl = GetRadius(GetValue$a(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$a(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$a(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$a(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+      }
+    }, {
+      key: "radiusTL",
+      get: function get() {
+        var radius = this.cornerRadius.tl;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.tl, value);
+      }
+    }, {
+      key: "radiusTR",
+      get: function get() {
+        var radius = this.cornerRadius.tr;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.tr, value);
+      }
+    }, {
+      key: "radiusBL",
+      get: function get() {
+        var radius = this.cornerRadius.bl;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.bl, value);
+      }
+    }, {
+      key: "radiusBR",
+      get: function get() {
+        var radius = this.cornerRadius.br;
+        return Math.max(radius.x, radius.y);
+      },
+      set: function set(value) {
+        SetRadius(this.cornerRadius.br, value);
+      }
+    }]);
+
+    return RoundRectangle;
+  }();
+
+  var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
+    if (radius === undefined) {
+      return {
+        x: defaultRadiusX,
+        y: defaultRadiusY
+      };
+    } else if (typeof radius === 'number') {
+      return {
+        x: radius,
+        y: radius
+      };
+    } else {
+      return radius;
+    }
+  };
+
+  var SetRadius = function SetRadius(radius, value) {
+    if (typeof value === 'number') {
+      radius.x = value;
+      radius.y = value;
+    } else {
+      radius.x = GetValue$a(value, 'x', 0);
+      radius.y = GetValue$a(value, 'y', 0);
+    }
+  };
+
+  var DegToRad = Phaser.Math.DegToRad;
+  var Rad0 = DegToRad(0);
+  var Rad90 = DegToRad(90);
+  var Rad180 = DegToRad(180);
+  var Rad270 = DegToRad(270);
+
+  var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
+    var geom = new RoundRectangle(x, y, width, height, radiusConfig),
+        minWidth = geom.minWidth,
+        minHeight = geom.minHeight,
+        scaleRX = width >= minWidth ? 1 : width / minWidth,
+        scaleRY = height >= minHeight ? 1 : height / minHeight;
+    var cornerRadius = geom.cornerRadius;
+    var radius, radiusX, radiusY, centerX, centerY;
+    context.save();
+    context.beginPath();
+    context.translate(x, y); // Bottom-right
+
+    radius = cornerRadius.br;
+    radiusX = radius.x * scaleRX;
+    radiusY = radius.y * scaleRY;
+    centerX = width - radiusX;
+    centerY = height - radiusY;
+    context.moveTo(width, centerY);
+
+    if (radiusX > 0 && radiusY > 0) {
+      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
+    } else {
+      context.lineTo(width, height);
+      context.lineTo(centerX, height);
+    } // Bottom-left
+
+
+    radius = cornerRadius.bl;
+    radiusX = radius.x * scaleRX;
+    radiusY = radius.y * scaleRY;
+    centerX = radiusX;
+    centerY = height - radiusY;
+    context.lineTo(radiusX, height);
+
+    if (radiusX > 0 && radiusY > 0) {
+      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
+    } else {
+      context.lineTo(0, height);
+      context.lineTo(0, centerY);
+    } // Top-left
+
+
+    radius = cornerRadius.tl;
+    radiusX = radius.x * scaleRX;
+    radiusY = radius.y * scaleRY;
+    centerX = radiusX;
+    centerY = radiusY;
+    context.lineTo(0, centerY);
+
+    if (radiusX > 0 && radiusY > 0) {
+      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
+    } else {
+      context.lineTo(0, 0);
+      context.lineTo(centerX, 0);
+    } // Top-right
+
+
+    radius = cornerRadius.tr;
+    radiusX = radius.x * scaleRX;
+    radiusY = radius.y * scaleRY;
+    centerX = width - radiusX;
+    centerY = radiusY;
+    context.lineTo(centerX, 0);
+
+    if (radiusX > 0 && radiusY > 0) {
+      ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
+    } else {
+      context.lineTo(width, 0);
+      context.lineTo(width, centerY);
+    }
+
+    context.closePath();
+    context.restore();
+  };
+
+  var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+    if (iteration == null) {
+      // undefined, or null
+      context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+    } else {
+      iteration += 1;
+      var x, y, angle;
+      var step = (endAngle - startAngle) / iteration;
+
+      for (var i = 0; i <= iteration; i++) {
+        angle = startAngle + step * i;
+        x = centerX + radiusX * Math.cos(angle);
+        y = centerY + radiusY * Math.sin(angle);
+        context.lineTo(x, y);
+      }
+    }
+  };
+
+  var DrawRoundRectangle = function DrawRoundRectangle(canvas, context, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient, iteration) {
+    AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration);
+
+    if (fillStyle != null) {
+      if (fillColor2 != null) {
+        var grd;
+
+        if (isHorizontalGradient) {
+          grd = context.createLinearGradient(0, 0, width, 0);
+        } else {
+          grd = context.createLinearGradient(0, 0, 0, height);
+        }
+
+        grd.addColorStop(0, fillStyle);
+        grd.addColorStop(1, fillColor2);
+        fillStyle = grd;
+      }
+
+      context.fillStyle = fillStyle;
+      context.fill();
+    }
+
+    if (strokeStyle != null && lineWidth > 0) {
+      context.strokeStyle = strokeStyle;
+      context.lineWidth = lineWidth;
+      context.stroke();
+    }
+  };
+
+  var DrawRoundRectangleBackground = function DrawRoundRectangleBackground(canvasObject, color, strokeColor, strokeLineWidth, radius, color2, isHorizontalGradient, iteration) {
+    if (color == null && strokeColor == null) {
+      return;
+    }
+
+    var width = canvasObject.canvas.width,
+        height = canvasObject.canvas.height;
+
+    if (strokeColor == null) {
+      strokeLineWidth = 0;
+    }
+
+    var x = strokeLineWidth / 2;
+    width -= strokeLineWidth;
+    height -= strokeLineWidth;
+    DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
+  };
+
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+
+  var Background = /*#__PURE__*/function (_RenderBase) {
+    _inherits(Background, _RenderBase);
+
+    var _super = _createSuper(Background);
+
+    function Background(parent, config) {
+      var _this;
+
+      _classCallCheck(this, Background);
+
+      _this = _super.call(this, parent, 'background');
+
+      _this.setColor(GetValue$9(config, 'color', null), GetValue$9(config, 'color2', null), GetValue$9(config, 'horizontalGradient', true));
+
+      _this.setStroke(GetValue$9(config, 'stroke', null), GetValue$9(config, 'strokeThickness', 2));
+
+      _this.setCornerRadius(GetValue$9(config, 'cornerRadius', 0), GetValue$9(config, 'cornerIteration', null));
+
+      return _this;
+    }
+
+    _createClass(Background, [{
+      key: "color",
+      get: function get() {
+        return this._color;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.setDirty(this._color != value);
+        this._color = value;
+      }
+    }, {
+      key: "color2",
+      get: function get() {
+        return this._color2;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.setDirty(this._color2 != value);
+        this._color2 = value;
+      }
+    }, {
+      key: "horizontalGradient",
+      get: function get() {
+        return this._horizontalGradient;
+      },
+      set: function set(value) {
+        this.setDirty(this._horizontalGradient != value);
+        this._horizontalGradient = value;
+      }
+    }, {
+      key: "setColor",
+      value: function setColor(color, color2, isHorizontalGradient) {
+        if (isHorizontalGradient === undefined) {
+          isHorizontalGradient = true;
+        }
+
+        this.color = color;
+        this.color2 = color2;
+        this.horizontalGradient = isHorizontalGradient;
+        return this;
+      }
+    }, {
+      key: "stroke",
+      get: function get() {
+        return this._stroke;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.setDirty(this._stroke != value);
+        this._stroke = value;
+      }
+    }, {
+      key: "strokeThickness",
+      get: function get() {
+        return this._strokeThickness;
+      },
+      set: function set(value) {
+        this.setDirty(this._strokeThickness != value);
+        this._strokeThickness = value;
+      }
+    }, {
+      key: "setStroke",
+      value: function setStroke(color, lineWidth) {
+        if (color != null) {
+          if (lineWidth === undefined) {
+            lineWidth = 2;
+          }
+        }
+
+        this.stroke = color;
+        this.strokeThickness = lineWidth;
+        return this;
+      }
+    }, {
+      key: "cornerRadius",
+      get: function get() {
+        return this._cornerRadius;
+      },
+      set: function set(value) {
+        this.setDirty(this._cornerRadius != value);
+        this._cornerRadius = value;
+      }
+    }, {
+      key: "cornerIteration",
+      get: function get() {
+        return this._cornerIteration;
+      },
+      set: function set(value) {
+        this.setDirty(this._cornerIteration != value);
+        this._cornerIteration = value;
+      }
+    }, {
+      key: "setCornerRadius",
+      value: function setCornerRadius(radius, iteration) {
+        this.cornerRadius = radius;
+        this.cornerIteration = iteration;
+        return this;
+      }
+    }, {
+      key: "renderContent",
+      value: function renderContent() {
+        DrawRoundRectangleBackground(this.parent, this.color, this.stroke, this.strokeThickness, this.cornerRadius, this.color2, this.horizontalGradient, this.cornerIteration);
+      }
+    }]);
+
+    return Background;
+  }(RenderBase);
+
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+
+  var InnerBounds = /*#__PURE__*/function (_RenderBase) {
+    _inherits(InnerBounds, _RenderBase);
+
+    var _super = _createSuper(InnerBounds);
+
+    function InnerBounds(parent, config) {
+      var _this;
+
+      _classCallCheck(this, InnerBounds);
+
+      _this = _super.call(this, parent, 'background');
+
+      _this.setColor(GetValue$8(config, 'color', null), GetValue$8(config, 'color2', null), GetValue$8(config, 'horizontalGradient', true));
+
+      _this.setStroke(GetValue$8(config, 'stroke', null), GetValue$8(config, 'strokeThickness', 2));
+
+      return _this;
+    }
+
+    _createClass(InnerBounds, [{
+      key: "color",
+      get: function get() {
+        return this._color;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.setDirty(this._color != value);
+        this._color = value;
+      }
+    }, {
+      key: "color2",
+      get: function get() {
+        return this._color2;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.setDirty(this._color2 != value);
+        this._color2 = value;
+      }
+    }, {
+      key: "horizontalGradient",
+      get: function get() {
+        return this._horizontalGradient;
+      },
+      set: function set(value) {
+        this.setDirty(this._horizontalGradient != value);
+        this._horizontalGradient = value;
+      }
+    }, {
+      key: "setColor",
+      value: function setColor(color, color2, isHorizontalGradient) {
+        if (isHorizontalGradient === undefined) {
+          isHorizontalGradient = true;
+        }
+
+        this.color = color;
+        this.color2 = color2;
+        this.horizontalGradient = isHorizontalGradient;
+        return this;
+      }
+    }, {
+      key: "stroke",
+      get: function get() {
+        return this._stroke;
+      },
+      set: function set(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.setDirty(this._stroke != value);
+        this._stroke = value;
+      }
+    }, {
+      key: "strokeThickness",
+      get: function get() {
+        return this._strokeThickness;
+      },
+      set: function set(value) {
+        this.setDirty(this._strokeThickness != value);
+        this._strokeThickness = value;
+      }
+    }, {
+      key: "setStroke",
+      value: function setStroke(color, lineWidth) {
+        if (color != null) {
+          if (lineWidth === undefined) {
+            lineWidth = 2;
+          }
+        }
+
+        this.stroke = color;
+        this.strokeThickness = lineWidth;
+        return this;
+      }
+    }, {
+      key: "renderContent",
+      value: function renderContent() {
+        var padding = this.parent.padding;
+        var x = padding.left,
+            y = padding.top,
+            width = this.parent.width - padding.left - padding.right,
+            height = this.parent.height - padding.top - padding.bottom;
+        var context = this.context;
+
+        if (this.color != null) {
+          var fillStyle;
+
+          if (this.color2 != null) {
+            var grd;
+
+            if (this.horizontalGradient) {
+              grd = context.createLinearGradient(0, 0, width, 0);
+            } else {
+              grd = context.createLinearGradient(0, 0, 0, height);
+            }
+
+            grd.addColorStop(0, this.color);
+            grd.addColorStop(1, this.color2);
+            fillStyle = grd;
+          } else {
+            fillStyle = this.color;
+          }
+
+          context.fillStyle = fillStyle;
+          context.fillRect(x, y, width, height);
+        }
+
+        if (this.stroke != null && this.strokeThickness > 0) {
+          context.strokeStyle = this.stroke;
+          context.lineWidth = this.strokeThickness;
+          context.strokeRect(x, y, width, height);
+        }
+      }
+    }]);
+
+    return InnerBounds;
+  }(RenderBase);
+
+  var GetProperty = function GetProperty(name, config, defaultConfig) {
+    if (config.hasOwnProperty(name)) {
+      return config[name];
+    } else {
+      return defaultConfig[name];
+    }
+  };
+
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+
+  var TextStyle = /*#__PURE__*/function () {
+    function TextStyle(config) {
+      _classCallCheck(this, TextStyle);
+
+      this.set(config);
+      this.updateTextFlag = true;
+    }
+
+    _createClass(TextStyle, [{
+      key: "toJSON",
+      value: function toJSON() {
+        return {
+          bold: this.bold,
+          italic: this.italic,
+          fontSize: this.fontSize,
+          fontFamily: this.fontFamily,
+          color: this.color,
+          stroke: this.stroke,
+          strokeThickness: this.strokeThickness,
+          shaodwColor: this.shadowColor,
+          shadowBlur: this.shadowBlur,
+          shadowOffsetX: this.shadowOffsetX,
+          shadowOffsetY: this.shadowOffsetY,
+          offsetX: this.offsetX,
+          offsetY: this.offsetY,
+          leftSpace: this.leftSpace,
+          rightSpace: this.rightSpace,
+          align: this.align
+        };
+      }
+    }, {
+      key: "set",
+      value: function set(o) {
+        this.setBold(GetValue$7(o, 'bold', false));
+        this.setItalic(GetValue$7(o, 'italic', false));
+        this.setFontSize(GetValue$7(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$7(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$7(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue$7(o, 'stroke', null), GetValue$7(o, 'strokeThickness', 0));
+        this.setShadow(GetValue$7(o, 'shadowColor', null), GetValue$7(o, 'shadowOffsetX', 0), GetValue$7(o, 'shadowOffsetY', 0), GetValue$7(o, 'shadowBlur', 0));
+        this.setOffset(GetValue$7(o, 'offsetX', 0), GetValue$7(o, 'offsetY', 0));
+        this.setSpace(GetValue$7(o, 'leftSpace', 0), GetValue$7(o, 'rightSpace', 0));
+        this.setAlign(GetValue$7(o, 'align', undefined));
+        return this;
+      }
+    }, {
+      key: "modify",
+      value: function modify(o) {
+        if (o.hasOwnProperty('bold')) {
+          this.setBold(o.bold);
+        }
+
+        if (o.hasOwnProperty('italic')) {
+          this.setItalic(o.italic);
+        }
+
+        if (o.hasOwnProperty('fontSize')) {
+          this.setFontSize(o.fontSize);
+        }
+
+        if (o.hasOwnProperty('fontFamily')) {
+          this.setFontFamily(o.fontFamily);
+        }
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color);
+        }
+
+        if (o.hasOwnProperty('stroke') || o.hasOwnProperty('strokeThickness')) {
+          this.setStrokeStyle(GetProperty('stroke', o, this), GetProperty('strokeThickness', o, this));
+        }
+
+        if (o.hasOwnProperty('shadowColor')) {
+          this.setShadowColor(o.shadowColor);
+        }
+
+        if (o.hasOwnProperty('shadowOffsetX') || o.hasOwnProperty('shadowOffsetY')) {
+          this.setShadowOffset(GetProperty('shadowOffsetX', o, this), GetProperty('shadowOffsetY', o, this));
+        }
+
+        if (o.hasOwnProperty('shadowBlur')) {
+          this.setShadowBlur(o.shaodwBlur);
+        }
+
+        if (o.hasOwnProperty('offsetX')) {
+          this.setOffsetX(o.offsetX);
+        }
+
+        if (o.hasOwnProperty('offsetY')) {
+          this.setOffsetY(o.offsetY);
+        }
+
+        if (o.hasOwnProperty('leftSpace')) {
+          this.setLeftSpace(o.leftSpace);
+        }
+
+        if (o.hasOwnProperty('rightSpace')) {
+          this.setRightSpace(o.rightSpace);
+        }
+
+        if (o.hasOwnProperty('align')) {
+          this.setAlign(o.align);
+        }
+
+        return this;
+      }
+    }, {
+      key: "clone",
+      value: function clone() {
+        return new TextStyle(this.toJSON());
+      }
+    }, {
+      key: "copyFrom",
+      value: function copyFrom(sourceTextStyle) {
+        this.set(sourceTextStyle.toJSON());
+        return this;
+      }
+    }, {
+      key: "copyTo",
+      value: function copyTo(targetTextStyle) {
+        targetTextStyle.set(this.toJSON());
+        return this;
+      }
+    }, {
+      key: "setBold",
+      value: function setBold(value) {
+        if (value === undefined) {
+          value = true;
+        }
+
+        this.bold = value;
+        this.updateTextFlag = true;
+        return this;
+      }
+    }, {
+      key: "setItalic",
+      value: function setItalic(value) {
+        if (value === undefined) {
+          value = true;
+        }
+
+        this.italic = value;
+        this.updateTextFlag = true;
+        return this;
+      }
+    }, {
+      key: "fontStyle",
+      get: function get() {
+        if (this.bold && this.italic) {
+          return 'bold italic';
+        } else if (this.bold) {
+          return 'bold';
+        } else if (this.italic) {
+          return 'italic';
+        } else {
+          return '';
+        }
+      }
+    }, {
+      key: "setFontSize",
+      value: function setFontSize(fontSize) {
+        if (typeof fontSize === 'number') {
+          fontSize = "".concat(fontSize, "px");
+        }
+
+        this.fontSize = fontSize;
+        this.updateTextFlag = true;
+        return this;
+      }
+    }, {
+      key: "setFontFamily",
+      value: function setFontFamily(fontFamily) {
+        this.fontFamily = fontFamily;
+        this.updateTextFlag = true;
+        return this;
+      }
+    }, {
+      key: "font",
+      get: function get() {
+        return "".concat(this.fontStyle, " ").concat(this.fontSize, " ").concat(this.fontFamily);
+      }
+    }, {
+      key: "setColor",
+      value: function setColor(color) {
+        this.color = GetStyle(color);
+        return this;
+      }
+    }, {
+      key: "hasFill",
+      get: function get() {
+        return this.color != null;
+      }
+    }, {
+      key: "setStrokeStyle",
+      value: function setStrokeStyle(stroke, strokeThickness) {
+        this.stroke = GetStyle(stroke);
+
+        if (strokeThickness !== undefined) {
+          this.strokeThickness = strokeThickness;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setStrokeThickness",
+      value: function setStrokeThickness(strokeThickness) {
+        this.strokeThickness = strokeThickness;
+        return this;
+      }
+    }, {
+      key: "hasStroke",
+      get: function get() {
+        return this.stroke != null && this.strokeThickness > 0;
+      }
+    }, {
+      key: "setShadowColor",
+      value: function setShadowColor(color) {
+        this.shadowColor = GetStyle(color);
+        return this;
+      }
+    }, {
+      key: "setShadowOffset",
+      value: function setShadowOffset(offsetX, offsetY) {
+        if (offsetX === undefined) {
+          offsetX = 0;
+        }
+
+        if (offsetY === undefined) {
+          offsetY = 0;
+        }
+
+        this.shadowOffsetX = offsetX;
+        this.shadowOffsetY = offsetY;
+        return this;
+      }
+    }, {
+      key: "setShadowBlur",
+      value: function setShadowBlur(blur) {
+        if (blur === undefined) {
+          blur = 0;
+        }
+
+        this.shaodwBlur = blur;
+        return this;
+      }
+    }, {
+      key: "setShadow",
+      value: function setShadow(color, offsetX, offsetY, blur) {
+        this.setShadowColor(color).setShadowOffset(offsetX, offsetY).setShadowBlur(blur);
+        return this;
+      }
+    }, {
+      key: "setOffsetX",
+      value: function setOffsetX(offsetX) {
+        if (offsetX === undefined) {
+          offsetX = 0;
+        }
+
+        this.offsetX = offsetX;
+        return this;
+      }
+    }, {
+      key: "setOffsetY",
+      value: function setOffsetY(offsetY) {
+        if (offsetY === undefined) {
+          offsetY = 0;
+        }
+
+        this.offsetY = offsetY;
+        return this;
+      }
+    }, {
+      key: "setOffset",
+      value: function setOffset(offsetX, offsetY) {
+        this.setOffsetX(offsetX).setOffsetY(offsetY);
+        return this;
+      }
+    }, {
+      key: "setLeftSpace",
+      value: function setLeftSpace(space) {
+        if (space === undefined) {
+          space = 0;
+        }
+
+        this.leftSpace = space;
+        return this;
+      }
+    }, {
+      key: "setRightSpace",
+      value: function setRightSpace(space) {
+        if (space === undefined) {
+          space = 0;
+        }
+
+        this.rightSpace = space;
+        return this;
+      }
+    }, {
+      key: "setSpace",
+      value: function setSpace(leftSpace, rightSpace) {
+        this.setLeftSpace(leftSpace).setRightSpace(rightSpace);
+        return this;
+      }
+    }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        this.align = align;
+        return this;
+      }
+    }, {
+      key: "syncFont",
+      value: function syncFont(context) {
+        context.font = this.font;
+        return this;
+      }
+    }, {
+      key: "syncStyle",
+      value: function syncStyle(context) {
+        context.textBaseline = 'alphabetic';
+        var hasFill = this.hasFill;
+        var hasStroke = this.hasStroke;
+        context.fillStyle = hasFill ? this.color : '#000';
+        context.strokeStyle = hasStroke ? this.stroke : '#000';
+        context.lineWidth = hasStroke ? this.strokeThickness : 0;
+        context.lineCap = 'round';
+        context.lineJoin = 'round';
+        return this;
+      }
+    }, {
+      key: "syncShadow",
+      value: function syncShadow(context) {
+        if (context.shadowColor != null) {
+          context.shadowColor = this.shadowColor;
+          context.shadowOffsetX = this.shadowOffsetX;
+          context.shadowOffsetY = this.shadowOffsetY;
+          context.shadowBlur = this.shadowBlur;
+        } else {
+          context.shadowColor = 0;
+          context.shadowOffsetX = 0;
+          context.shadowOffsetY = 0;
+          context.shadowBlur = 0;
+        }
+      }
+    }, {
+      key: "getTextMetrics",
+      value: function getTextMetrics(context, text) {
+        this.syncFont(context).syncStyle(context);
+        return context.measureText(text);
+      }
+    }]);
+
+    return TextStyle;
+  }();
+
+  var SetFixedSize = function SetFixedSize(width, height) {
+    if (width === undefined) {
+      width = 0;
+    }
+
+    if (height === undefined) {
+      height = 0;
+    }
+
+    if (width > 0 && height > 0) {
+      if (this.fixedWidth !== width || this.fixedHeight !== height) {
+        this.dirty = true;
+      }
+    } else {
+      this.dirty = true;
+    }
+
+    this.fixedWidth = width;
+    this.fixedHeight = height;
+
+    if (width > 0) {
+      this.width = width;
+    }
+
+    if (height > 0) {
+      this.height = height;
+    }
+
+    return this;
+  };
+
+  var SetPadding = function SetPadding(key, value) {
+    var padding = this.padding;
+    var paddingLeft = padding.left,
+        paddingRight = padding.right,
+        paddingTop = padding.top,
+        paddingBottom = padding.bottom;
+    SetPadding$1(padding, key, value);
+    this.dirty = this.dirty || paddingLeft != padding.left || paddingRight != padding.right || paddingTop != padding.top || paddingBottom != padding.bottom;
+    return this;
+  };
+
+  var GetPadding = function GetPadding(key) {
+    return GetPadding$1(this.padding, key);
+  };
+
+  var ModifyTextStyle = function ModifyTextStyle(style) {
+    this.textStyle.modify(style);
+    return this;
+  };
+
+  var ResetTextStyle = function ResetTextStyle() {
+    this.textStyle.copyFrom(this.defaultTextStyle);
+    return this;
+  };
+
+  var RemoveItem = Phaser.Utils.Array.Remove;
+
+  var RemoveChild = function RemoveChild(bob) {
+    this.poolManager.free(bob);
+    RemoveItem(this.children, bob);
+    this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
+    this.dirty = true;
+    return this;
+  };
+
+  var RemoveChildren = function RemoveChildren() {
+    this.poolManager.freeMultiple(this.children);
+    this.children.length = 0;
+    this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
+    this.dirty = true;
+    return this;
+  };
+
+  var ClearContent = function ClearContent() {
+    this.setText();
+    return this;
+  };
+
+  // const RemoveItem = Phaser.Utils.Array.Remove;
+  var AddChild = function AddChild(bob, index) {
+    var isBobArray = Array.isArray(bob); // Remove existed bob(s)
+    // RemoveItem(this.children, bob);
+
+    if (index === undefined || index === this.children.length) {
+      if (isBobArray) {
+        var _this$children;
+
+        (_this$children = this.children).push.apply(_this$children, _toConsumableArray(bob));
+      } else {
+        this.children.push(bob);
+      }
+    } else {
+      if (isBobArray) {
+        var _this$children2;
+
+        (_this$children2 = this.children).splice.apply(_this$children2, [index, 0].concat(_toConsumableArray(bob)));
+      } else {
+        this.children.splice(index, 0, bob);
+      }
+    }
+
+    this.lastAppendedChildren.length = 0;
+
+    if (isBobArray) {
+      var _this$lastAppendedChi;
+
+      (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(bob));
+    } else {
+      this.lastAppendedChildren.push(bob);
+    }
+
+    return this;
+  };
+
+  var CharTypeName = 'text';
+  var ImageTypeName = 'image';
+  var DrawerTypeName = 'drawer';
+  var SpaceTypeName = 'space';
+  var CmdTypeName = 'command';
+
+  var IsNewLineChar = function IsNewLineChar(bob) {
+    return bob.type === CharTypeName && bob.text === '\n';
+  };
+
+  var IsChar$1 = function IsChar(bob) {
+    return bob.type === CharTypeName;
+  };
+
+  var CharData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(CharData, _RenderBase);
+
+    var _super = _createSuper(CharData);
+
+    function CharData(parent, text, style) {
+      var _this;
+
+      _classCallCheck(this, CharData);
+
+      _this = _super.call(this, parent, CharTypeName);
+      _this.style = new TextStyle(style);
+
+      _this.setText(text);
+
+      return _this;
+    }
+
+    _createClass(CharData, [{
+      key: "autoRound",
+      get: function get() {
+        return this.parent.autoRound;
+      }
+    }, {
+      key: "offsetX",
+      get: function get() {
+        return this.style.offsetX;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.offsetX = value;
+        }
+      }
+    }, {
+      key: "offsetY",
+      get: function get() {
+        return this.style.offsetY;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.offsetY = value;
+        }
+      }
+    }, {
+      key: "leftSpace",
+      get: function get() {
+        return this.style.leftSpace * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.leftSpace = value;
+        }
+
+        _set(_getPrototypeOf(CharData.prototype), "leftSpace", value, this, true);
+      }
+    }, {
+      key: "rightSpace",
+      get: function get() {
+        return this.style.rightSpace * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.rightSpace = value;
+        }
+
+        _set(_getPrototypeOf(CharData.prototype), "rightSpace", value, this, true);
+      }
+    }, {
+      key: "align",
+      get: function get() {
+        return this.style.align;
+      },
+      set: function set(value) {
+        if (this.style) {
+          this.style.align = value;
+        }
+      }
+    }, {
+      key: "modifyStyle",
+      value: function modifyStyle(style) {
+        this.setDirty(true);
+        this.style.modify(style);
+
+        if (this.style.updateTextFlag) {
+          this.updateTextSize();
+          this.style.updateTextFlag = false;
+        }
+
+        return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        if (!o) {
+          return this;
+        }
+
+        this.modifyStyle(o);
+
+        _get(_getPrototypeOf(CharData.prototype), "modifyPorperties", this).call(this, o);
+
+        return this;
+      }
+    }, {
+      key: "setText",
+      value: function setText(text) {
+        this.setDirty(this.text != text);
+        this.text = text;
+        this.updateTextSize();
+        return this;
+      }
+    }, {
+      key: "updateTextSize",
+      value: function updateTextSize() {
+        if (this.text === '\n' || this.text === '') {
+          this.textWidth = 0;
+          this.textHeight = 0;
+          this.ascent = 0;
+          this.descent = 0;
+        } else {
+          var metrics = this.style.getTextMetrics(this.context, this.text);
+          this.textWidth = metrics.width;
+          var ascent, descent;
+
+          if ('actualBoundingBoxAscent' in metrics) {
+            ascent = metrics.actualBoundingBoxAscent;
+            descent = metrics.actualBoundingBoxDescent;
+          } else {
+            ascent = 0;
+            descent = 0;
+          }
+
+          this.textHeight = ascent + descent;
+          this.ascent = ascent;
+          this.descent = descent;
+        }
+
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this.textWidth * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.textWidth > 0) {
+          this.scaleX = value / this.textWidth;
+        } else {
+          this.scaleX = 1;
+        }
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this.textHeight * this.scaleY;
+      },
+      set: function set(value) {
+        if (this.textHeight > 0) {
+          this.scaleY = value / this.textHeight;
+        } else {
+          this.scaleY = 1;
+        }
+      }
+    }, {
+      key: "willRender",
+      get: function get() {
+        if (this.text === '' || this.text === '\n') {
+          return false;
+        } else {
+          return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
+        }
+      }
+    }, {
+      key: "renderContent",
+      value: function renderContent() {
+        var textStyle = this.style;
+        var hasFill = textStyle.hasFill,
+            hasStroke = textStyle.hasStroke;
+
+        if (!hasFill && !hasStroke) {
+          return;
+        }
+
+        var context = this.context;
+        textStyle.syncFont(context).syncStyle(context); // textBaseline = 'alphabetic'
+
+        if (hasStroke) {
+          textStyle.syncShadow(context);
+          context.strokeText(this.text, 0, 0);
+        }
+
+        if (hasFill) {
+          textStyle.syncShadow(context);
+          context.fillText(this.text, 0, 0);
+        }
+      }
+    }, {
+      key: "drawTLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLY",
+      get: function get() {
+        return -this.ascent;
+      }
+    }, {
+      key: "drawBLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLY",
+      get: function get() {
+        return this.descent;
+      }
+    }, {
+      key: "drawTRX",
+      get: function get() {
+        return this.textWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRY",
+      get: function get() {
+        return -this.ascent;
+      }
+    }, {
+      key: "drawBRX",
+      get: function get() {
+        return this.textWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRY",
+      get: function get() {
+        return this.descent;
+      }
+    }]);
+
+    return CharData;
+  }(RenderBase);
+
+  var CreateCharBobArray = function CreateCharBobArray(text, style) {
+    if (style) {
+      this.textStyle.modify(style);
+    }
+
+    var bobArray = [];
+
+    for (var i = 0, cnt = text.length; i < cnt; i++) {
+      var _char = text.charAt(i);
+
+      var bob = this.poolManager.allocate(CharTypeName);
+
+      if (bob === null) {
+        bob = new CharData(this, // parent
+        _char, // text
+        this.textStyle);
+      } else {
+        bob.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
+      } // bob.modifyPorperties(properties);  // Warning: Will modify text-style twice
+
+
+      bobArray.push(bob);
+    }
+
+    return bobArray;
+  };
+
+  var AppendText = function AppendText(text, style) {
+    var bobArray = CreateCharBobArray.call(this, text, style);
+    this.addChild(bobArray);
+    return this;
+  };
+
+  var SetText = function SetText(text, style) {
+    if (text === undefined) {
+      text = '';
+    }
+
+    this.removeChildren();
+    AppendText.call(this, text, style); // this.appendText might be override
+
+    this.dirty = true;
+    return this;
+  };
+
+  var GetCharDataIndex = function GetCharDataIndex(textIndex, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children;
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child)) {
+        if (textIndex === 0) {
+          return i;
+        } else {
+          textIndex--;
+        }
+      }
+    }
+
+    return undefined;
+  };
+
+  var InsertText = function InsertText(index, text, style) {
+    var bobArray = CreateCharBobArray.call(this, text, style);
+    index = GetCharDataIndex(index, true);
+    this.addChild(bobArray, index);
+    return this;
+  };
+
+  var GetText = function GetText(activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+    var text = '';
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (!IsChar$1(child)) {
+        continue;
+      }
+
+      text += child.text;
+    }
+
+    return text;
+  };
+
+  var ImageData = /*#__PURE__*/function (_RenderBase) {
+    _inherits(ImageData, _RenderBase);
+
+    var _super = _createSuper(ImageData);
+
+    function ImageData(parent, key, frame) {
+      var _this;
+
+      _classCallCheck(this, ImageData);
+
+      _this = _super.call(this, parent, ImageTypeName);
+
+      _this.setTexture(key, frame);
+
+      return _this;
+    }
+
+    _createClass(ImageData, [{
+      key: "frameWidth",
+      get: function get() {
+        return this.frameObj ? this.frameObj.cutWidth : 0;
+      }
+    }, {
+      key: "frameHeight",
+      get: function get() {
+        return this.frameObj ? this.frameObj.cutHeight : 0;
+      }
+    }, {
+      key: "offsetY",
+      get: function get() {
+        return -this.height;
+      },
+      set: function set(value) {}
+    }, {
+      key: "key",
+      get: function get() {
+        return this._key;
+      },
+      set: function set(value) {
+        this.setDirty(this._key != value);
+        this._key = value;
+      }
+    }, {
+      key: "frame",
+      get: function get() {
+        return this._frame;
+      },
+      set: function set(value) {
+        this.setDirty(this._frame != value);
+        this._frame = value;
+      }
+    }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        this.key = key;
+        this.frame = frame;
+        this.frameObj = this.scene.sys.textures.getFrame(key, frame);
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this.frameWidth * this.scaleX;
+      },
+      set: function set(value) {
+        this.setDirty(this.width !== value);
+        this.scaleX = value / this.frameWidth;
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this.frameHeight * this.scaleY;
+      },
+      set: function set(value) {
+        this.setDirty(this.height !== value);
+        this.scaleY = value / this.frameHeight;
+      }
+    }, {
+      key: "setHeight",
+      value: function setHeight(height, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+          keepAspectRatio = false;
+        }
+
+        this.height = height;
+
+        if (keepAspectRatio) {
+          this.scaleX = this.scaleY;
+        }
+
+        return this;
+      }
+    }, {
+      key: "renderContent",
+      value: function renderContent() {
+        var context = this.context;
+        var frame = this.frameObj;
+        var width = this.frameWidth,
+            height = this.frameHeight;
+        context.drawImage(frame.source.image, // image
+        frame.cutX, frame.cutY, width, height, 0, 0, width, height);
+      }
+    }, {
+      key: "drawTLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLY",
+      get: function get() {
+        return this.frameHeight;
+      }
+    }, {
+      key: "drawTRX",
+      get: function get() {
+        return this.frameWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRX",
+      get: function get() {
+        return this.frameWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRY",
+      get: function get() {
+        return this.frameHeight;
+      }
+    }]);
+
+    return ImageData;
+  }(RenderBase);
+
+  var AppendImage = function AppendImage(key, frame, properties) {
+    var bob = this.poolManager.allocate(ImageTypeName);
+
+    if (bob === null) {
+      bob = new ImageData(this, // parent
+      key, frame);
+    } else {
+      bob.setParent(this).setActive().setTexture(key, frame);
+    }
+
+    bob.modifyPorperties(properties);
+    this.addChild(bob);
+    return this;
+  };
+
+  var Drawer = /*#__PURE__*/function (_RenderBase) {
+    _inherits(Drawer, _RenderBase);
+
+    var _super = _createSuper(Drawer);
+
+    function Drawer(parent, renderCallback, width, height) {
+      var _this;
+
+      _classCallCheck(this, Drawer);
+
+      _this = _super.call(this, parent, DrawerTypeName);
+
+      _this.setRenderCallback(renderCallback);
+
+      _this.setDrawerSize(width, height);
+
+      return _this;
+    }
+
+    _createClass(Drawer, [{
+      key: "setRenderCallback",
+      value: function setRenderCallback(callback) {
+        if (callback) {
+          this.renderContent = callback.bind(this);
+        } else {
+          delete this.renderContent;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setDrawerSize",
+      value: function setDrawerSize(width, height) {
+        // Whole canvas
+        if (width === true) {
+          this.toLocalPosition = false;
+          width = undefined;
+          height = undefined;
+        } else {
+          this.toLocalPosition = true;
+        }
+
+        if (width === undefined) {
+          width = 0;
+        }
+
+        if (height === undefined) {
+          height = width;
+        }
+
+        this.drawerWidth = width;
+        this.drawerHeight = height;
+        return this;
+      }
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        _get(_getPrototypeOf(Drawer.prototype), "onFree", this).call(this);
+
+        this.setRenderCallback();
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this.drawerWidth * this.scaleX;
+      },
+      set: function set(value) {
+        this.setDirty(this.width !== value);
+        this.scaleX = this.drawerWidth > 0 ? value / this.drawerWidth : 1;
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this.drawerHeight * this.scaleY;
+      },
+      set: function set(value) {
+        this.setDirty(this.height !== value);
+        this.scaleY = this.drawerHeight > 0 ? value / this.drawerHeight : 1;
+      }
+    }, {
+      key: "drawTLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLY",
+      get: function get() {
+        return this.drawerHeight;
+      }
+    }, {
+      key: "drawTRX",
+      get: function get() {
+        return this.drawerWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRX",
+      get: function get() {
+        return this.drawerWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRY",
+      get: function get() {
+        return this.drawerHeight;
+      }
+    }]);
+
+    return Drawer;
+  }(RenderBase);
+
+  var AppendDrawer = function AppendDrawer(renderCallback, width, height) {
+    var bob = this.poolManager.allocate(DrawerTypeName);
+
+    if (bob === null) {
+      bob = new Drawer(this, // parent
+      renderCallback, width, height);
+    } else {
+      bob.setParent(this).setActive().setRenderCallback(renderCallback).setDrawerSize(width, height);
+    }
+
+    this.addChild(bob);
+    return this;
+  };
+
+  var Space = /*#__PURE__*/function (_RenderBase) {
+    _inherits(Space, _RenderBase);
+
+    var _super = _createSuper(Space);
+
+    function Space(parent, width) {
+      var _this;
+
+      _classCallCheck(this, Space);
+
+      _this = _super.call(this, parent, SpaceTypeName);
+
+      _this.setSpaceWidth(width);
+
+      return _this;
+    }
+
+    _createClass(Space, [{
+      key: "width",
+      get: function get() {
+        return this.spaceWidth * this.scaleX;
+      },
+      set: function set(value) {
+        if (this.spaceWidth > 0) {
+          this.scaleX = value / this.spaceWidth;
+        } else {
+          this.scaleX = 1;
+        }
+      }
+    }, {
+      key: "setSpaceWidth",
+      value: function setSpaceWidth(width) {
+        this.spaceWidth = width;
+        return this;
+      }
+    }]);
+
+    return Space;
+  }(RenderBase);
+
+  var AppendSpace = function AppendSpace(width) {
+    var bob = this.poolManager.allocate(SpaceTypeName);
+
+    if (bob === null) {
+      bob = new Space(this, // parent
+      width);
+    } else {
+      bob.setParent(this).setActive().setSpaceWidth(width);
+    }
+
+    this.addChild(bob);
+    return this;
+  };
+
+  var Command = /*#__PURE__*/function (_Base) {
+    _inherits(Command, _Base);
+
+    var _super = _createSuper(Command);
+
+    function Command(parent, name, callback, param, scope) {
+      var _this;
+
+      _classCallCheck(this, Command);
+
+      _this = _super.call(this, parent, CmdTypeName);
+
+      _this.setName(name).setParameter(param).setCallback(callback, scope);
+
+      return _this;
+    }
+
+    _createClass(Command, [{
+      key: "setName",
+      value: function setName(name) {
+        this.name = name;
+        return this;
+      }
+    }, {
+      key: "setParameter",
+      value: function setParameter(param) {
+        this.param = param;
+        return this;
+      }
+    }, {
+      key: "setCallback",
+      value: function setCallback(callback, scope) {
+        this.callback = callback;
+        this.scope = scope;
+        return this;
+      }
+    }, {
+      key: "exec",
+      value: function exec() {
+        var result;
+
+        if (this.scope) {
+          result = this.callback.call(this.scope, this.param, this.name);
+        } else {
+          result = this.callback(this.param, this.name);
+        }
+
+        return result;
+      }
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        _get(_getPrototypeOf(Command.prototype), "onFree", this).call(this);
+
+        this.setName().setCallback().setParameter();
+      }
+    }]);
+
+    return Command;
+  }(Base);
+
+  var AppendCommand = function AppendCommand(name, callback, param, scope) {
+    var bob = this.poolManager.allocate(CmdTypeName);
+
+    if (bob === null) {
+      bob = new Command(this, // parent
+      name, callback, param, scope);
+    } else {
+      bob.setParent(this).setActive().setName(name).setCallback(callback, scope).setParameter(param);
+    }
+
+    this.addChild(bob);
+    return this;
+  };
+
+  var SetWrapConfig = function SetWrapConfig(config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    this.wrapConfig = config;
+    return this;
+  };
+
+  var GetWord = function GetWord(children, startIndex, charMode, result) {
+    if (result === undefined) {
+      result = {
+        word: [],
+        width: 0
+      };
+    }
+
+    result.word.length = 0;
+    var endIndex = children.length;
+    var currentIndex = startIndex;
+    var word = result.word,
+        wordWidth = 0;
+
+    while (currentIndex < endIndex) {
+      var child = children[currentIndex]; // Can't render (command child), put into output directly
+
+      if (!child.renderable) {
+        word.push(child);
+        currentIndex++;
+        continue;
+      }
+
+      if (child.type === CharTypeName && child.text !== ' ' && child.text !== '\n') {
+        word.push(child);
+        wordWidth += child.outerWidth;
+        currentIndex++; // Continue
+      } else {
+        // Get image child, a space, or a new-line
+        if (currentIndex === startIndex) {
+          // Single child
+          word.push(child);
+          wordWidth += child.outerWidth;
+        }
+
+        break;
+      }
+
+      if (charMode) {
+        // Word only contains 1 character
+        break;
+      }
+    }
+
+    result.width = wordWidth;
+    return result;
+  };
+
+  var GetChildrenAlign = function GetChildrenAlign(children) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (child.align !== undefined) {
+        return child.align;
+      }
+    }
+
+    return undefined;
+  };
+
+  var OffsetChildren = function OffsetChildren(children, offsetX, offsetY) {
+    if (offsetX === 0 && offsetY === 0) {
+      return;
+    }
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (!child.renderable) {
+        continue;
+      }
+
+      child.x += offsetX;
+      child.y += offsetY;
+    }
+  };
+
+  var AlignLines$1 = function AlignLines(result, width, height) {
+    var hAlign = result.hAlign,
+        vAlign = result.vAlign;
+    var offsetX, offsetY;
+    var linesHeight = result.linesHeight;
+
+    switch (vAlign) {
+      case 1: // center
+
+      case 'center':
+        offsetY = (height - linesHeight) / 2;
+        break;
+
+      case 2: // bottom
+
+      case 'bottom':
+        offsetY = height - linesHeight;
+        break;
+
+      default:
+        offsetY = 0;
+        break;
+    }
+
+    var lines = result.lines;
+
+    for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
+      var line = lines[li];
+      var lineWidth = line.width,
+          children = line.children;
+      var lineHAlign = GetChildrenAlign(children);
+
+      if (lineHAlign === undefined) {
+        lineHAlign = hAlign;
+      }
+
+      switch (lineHAlign) {
+        case 1: // center
+
+        case 'center':
+          offsetX = (width - lineWidth) / 2;
+          break;
+
+        case 2: // right
+
+        case 'right':
+          offsetX = width - lineWidth;
+          break;
+
+        default:
+          offsetX = 0;
+          break;
+      }
+
+      OffsetChildren(children, offsetX, offsetY);
+    }
+  };
+
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+
+  var RunWordWrap$1 = function RunWordWrap(config) {
+    // Parse parameters
+    var startIndex = GetValue$6(config, 'start', 0);
+    SetPadding$1(this.wrapPadding, GetValue$6(config, 'padding', 0));
+    var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right; // Get lineHeight, maxLines
+
+    var lineHeight = GetValue$6(config, 'lineHeight', undefined);
+    var maxLines;
+
+    if (lineHeight === undefined) {
+      // Calculate lineHeight via maxLines, in fixedHeight mode
+      maxLines = GetValue$6(config, 'maxLines', 0);
+
+      if (this.fixedHeight > 0) {
+        var innerHeight = this.fixedHeight - paddingVertical;
+        lineHeight = innerHeight / maxLines;
+      } else {
+        lineHeight = 0;
+      }
+    } else {
+      if (this.fixedHeight > 0) {
+        // Calculate maxLines via lineHeight, in fixedHeight mode
+        maxLines = GetValue$6(config, 'maxLines', undefined);
+
+        if (maxLines === undefined) {
+          var innerHeight = this.fixedHeight - paddingVertical;
+          maxLines = Math.floor(innerHeight / lineHeight);
+        }
+      } else {
+        maxLines = GetValue$6(config, 'maxLines', 0); // Default is show all lines
+      }
+    }
+
+    var showAllLines = maxLines === 0; // Get wrapWidth
+
+    var wrapWidth = GetValue$6(config, 'wrapWidth', undefined);
+
+    if (wrapWidth === undefined) {
+      if (this.fixedWidth > 0) {
+        wrapWidth = this.fixedWidth - paddingHorizontal;
+      } else {
+        wrapWidth = Infinity; // No word-wrap
+      }
+    }
+
+    var letterSpacing = GetValue$6(config, 'letterSpacing', 0);
+    var hAlign = GetValue$6(config, 'hAlign', 0);
+    var vAlign = GetValue$6(config, 'vAlign', 0);
+    var charWrap = GetValue$6(config, 'charWrap', false);
+    var result = {
+      start: startIndex,
+      // Next start index
+      isLastPage: false,
+      // Is last page
+      padding: this.wrapPadding,
+      lineHeight: lineHeight,
+      maxLines: maxLines,
+      wrapWidth: wrapWidth,
+      letterSpacing: letterSpacing,
+      hAlign: hAlign,
+      vAlign: vAlign,
+      charWrap: charWrap,
+      children: [],
+      // Word-wrap result
+      lines: [],
+      // Word-wrap result in lines
+      maxLineWidth: 0,
+      linesHeight: 0
+    }; // Set all children to inactive
+
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      children[i].setActive(false);
+    } // Layout children
+
+
+    wrapWidth += letterSpacing;
+    var startX = this.padding.left + this.wrapPadding.left,
+        startY = this.padding.top + this.wrapPadding.top + lineHeight,
+        // Start(baseline) from 1st lineHeight, not 0
+    x = startX,
+        y = startY;
+    var remainderWidth = wrapWidth,
+        childIndex = startIndex,
+        lastChildIndex = children.length;
+    var resultChildren = result.children;
+    var resultLines = result.lines,
+        lastLine = [],
+        lastLineWidth = 0,
+        maxLineWidth = 0;
+    var wordResult;
+
+    while (childIndex < lastChildIndex) {
+      wordResult = GetWord(children, childIndex, charWrap, wordResult);
+      var word = wordResult.word;
+      var charCnt = word.length;
+      var wordWidth = wordResult.width + charCnt * letterSpacing;
+      childIndex += charCnt; // Next line
+
+      var isNewLineChar = IsNewLineChar(word[0]);
+
+      if (remainderWidth < wordWidth || isNewLineChar) {
+        // Add to result
+        if (isNewLineChar) {
+          var _char = word[0];
+
+          _char.setActive().setPosition(x, y);
+
+          resultChildren.push(_char);
+          lastLine.push(_char);
+        } // Move cursor
+
+
+        x = startX;
+        y += lineHeight;
+        remainderWidth = wrapWidth;
+        resultLines.push({
+          children: lastLine,
+          width: lastLineWidth
+        });
+        maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
+        lastLineWidth = 0;
+        lastLine = [];
+
+        if (!showAllLines && resultLines.length === maxLines) {
+          // Exceed maxLines
+          break;
+        } else if (isNewLineChar) {
+          // Already add to result
+          continue;
+        }
+      }
+
+      remainderWidth -= wordWidth;
+      lastLineWidth += wordWidth;
+
+      for (var i = 0, cnt = word.length; i < cnt; i++) {
+        var child = word[i];
+        child.setActive();
+        resultChildren.push(child);
+        lastLine.push(child);
+
+        if (child.renderable) {
+          child.setPosition(x, y);
+          x += child.outerWidth + letterSpacing;
+        }
+      }
+    }
+
+    if (lastLine.length > 0) {
+      resultLines.push({
+        children: lastLine,
+        width: lastLineWidth
+      });
+      maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
+    }
+
+    result.start += resultChildren.length;
+    result.isLastPage = result.start === lastChildIndex;
+    result.maxLineWidth = maxLineWidth;
+    result.linesHeight = resultLines.length * lineHeight; // Calculate size of game object
+
+    var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + paddingHorizontal;
+    var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + paddingVertical; // Size might be changed after wrapping
+
+    var innerWidth = width - paddingHorizontal;
+    var innerHeight = height - paddingVertical;
+    AlignLines$1(result, innerWidth, innerHeight); // Resize
+
+    this.setSize(width, height); // Set initial position
+
+    for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
+      var child = resultChildren[i];
+
+      if (!child.renderable) {
+        continue;
+      }
+
+      child.x0 = child.x;
+      child.y0 = child.y;
+    }
+
+    return result;
+  };
+
+  var Merge$1 = Phaser.Utils.Objects.Merge;
+
+  var RunWordWrap = function RunWordWrap(config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    return RunWordWrap$1.call(this, Merge$1(config, this.wrapConfig));
+  };
+
+  var AlignLines = function AlignLines(result, width, height) {
+    var hAlign = result.hAlign,
+        vAlign = result.vAlign;
+    var offsetX, offsetY;
+    var rtl = result.rtl;
+    var lines = result.lines,
+        lineWidth = result.lineWidth,
+        linesWidth = result.linesWidth;
+
+    switch (hAlign) {
+      case 1: // center
+
+      case 'center':
+        offsetX = (width - linesWidth) / 2;
+        break;
+
+      case 2: // right
+
+      case 'right':
+        offsetX = width - linesWidth;
+        break;
+
+      default:
+        // left
+        offsetX = 0;
+        break;
+    }
+
+    if (rtl) {
+      offsetX += lineWidth;
+    }
+
+    for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
+      var line = lines[rtl ? lcnt - li - 1 : li];
+      var children = line.children;
+      var lineHeight = line.height;
+      var lineVAlign = GetChildrenAlign(children);
+
+      if (lineVAlign === undefined) {
+        lineVAlign = vAlign;
+      }
+
+      switch (lineVAlign) {
+        case 1: // center
+
+        case 'center':
+          offsetY = (height - lineHeight) / 2;
+          break;
+
+        case 2: // bottom
+
+        case 'bottom':
+          offsetY = height - lineHeight;
+          break;
+
+        default:
+          // top
+          offsetY = 0;
+          break;
+      }
+
+      OffsetChildren(children, offsetX, offsetY);
+      offsetX += lineWidth;
+    }
+  };
+
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+
+  var RunVerticalWrap$1 = function RunVerticalWrap(config) {
+    // Parse parameters
+    var startIndex = GetValue$5(config, 'start', 0);
+    SetPadding$1(this.wrapPadding, GetValue$5(config, 'padding', 0));
+    var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
+    var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
+    var lineWidth = GetValue$5(config, 'lineWidth', undefined);
+    var maxLines;
+
+    if (lineWidth === undefined) {
+      // Calculate lineWidth via maxLines, in fixedWidth mode
+      maxLines = GetValue$5(config, 'maxLines', 0);
+
+      if (this.fixedWidth > 0) {
+        var innerWidth = this.fixedWidth - paddingHorizontal;
+        lineWidth = innerWidth / maxLines;
+      } else {
+        lineWidth = 0;
+      }
+    } else {
+      if (this.fixedWidth > 0) {
+        // Calculate maxLines via lineWidth, in fixedWidth mode
+        maxLines = GetValue$5(config, 'maxLines', undefined);
+
+        if (maxLines === undefined) {
+          var innerWidth = this.fixedWidth - paddingHorizontal;
+          maxLines = Math.floor(innerWidth / lineWidth) + 1;
+        }
+      } else {
+        maxLines = GetValue$5(config, 'maxLines', 0); // Default is show all lines
+      }
+    }
+
+    var showAllLines = maxLines === 0; // Get fixedChildHeight
+
+    var fixedChildHeight = GetValue$5(config, 'fixedChildHeight', undefined);
+
+    if (fixedChildHeight === undefined) {
+      var charPerLine = GetValue$5(config, 'charPerLine', undefined);
+
+      if (charPerLine !== undefined) {
+        var innerHeight = this.fixedHeight - paddingVertical;
+        fixedChildHeight = Math.floor(innerHeight / charPerLine);
+      }
+    } // Get wrapHeight
+
+
+    var wrapHeight = GetValue$5(config, 'wrapHeight', undefined);
+
+    if (wrapHeight === undefined) {
+      if (this.fixedHeight > 0) {
+        wrapHeight = this.fixedHeight - paddingVertical;
+      } else {
+        wrapHeight = Infinity; // No word-wrap
+      }
+    }
+
+    var letterSpacing = GetValue$5(config, 'letterSpacing', 0);
+    var rtl = GetValue$5(config, 'rtl', true);
+    var hAlign = GetValue$5(config, 'hAlign', rtl ? 2 : 0);
+    var vAlign = GetValue$5(config, 'vAlign', 0);
+    var result = {
+      start: startIndex,
+      // Next start index
+      isLastPage: false,
+      // Is last page
+      padding: this.wrapPadding,
+      lineWidth: lineWidth,
+      maxLines: maxLines,
+      fixedChildHeight: fixedChildHeight,
+      wrapHeight: wrapHeight,
+      letterSpacing: letterSpacing,
+      hAlign: hAlign,
+      vAlign: vAlign,
+      rtl: rtl,
+      children: [],
+      // Word-wrap result
+      lines: [],
+      // Word-wrap result in lines
+      maxLineHeight: 0,
+      linesWidth: 0
+    }; // Set all children to active
+
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      children[i].setActive(false);
+    } // Layout children
+
+
+    wrapHeight += letterSpacing;
+    var startX = this.padding.left + this.wrapPadding.left,
+        // Reset x of each character in AlignLines method
+    startY = this.padding.top + this.wrapPadding.top,
+        x = startX,
+        y = startY;
+    var remainderHeight = wrapHeight,
+        childIndex = startIndex,
+        lastChildIndex = children.length;
+    var resultChildren = result.children;
+    var resultLines = result.lines,
+        lastLine = [],
+        lastLineHeight = 0,
+        maxLineHeight = 0;
+
+    while (childIndex < lastChildIndex) {
+      // Append non-typeable child directly
+      var _char = children[childIndex];
+      childIndex++;
+
+      if (!child.renderable) {
+        _char.setActive();
+
+        resultChildren.push(_char);
+        lastLine.push(_char);
+        continue;
+      }
+
+      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing; // Next line
+
+      var isNewLineChar = IsNewLineChar(_char);
+
+      if (remainderHeight < childHeight || isNewLineChar) {
+        // Add to result
+        if (isNewLineChar) {
+          _char.setActive().setPosition(x, y).setOrigin(0.5);
+
+          resultChildren.push(_char);
+          lastLine.push(_char);
+        } // Move cursor
+
+
+        x = startX;
+        y = startY;
+        remainderHeight = wrapHeight;
+        resultLines.push({
+          children: lastLine,
+          height: lastLineHeight
+        });
+        maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
+        lastLineHeight = 0;
+        lastLine = [];
+
+        if (!showAllLines && resultLines.length === maxLines) {
+          // Exceed maxLines
+          break;
+        } else if (isNewLineChar) {
+          // Already add to result                
+          continue;
+        }
+      }
+
+      remainderHeight -= childHeight;
+      lastLineHeight += childHeight;
+
+      _char.setActive().setPosition(x, y).setOrigin(0.5);
+
+      resultChildren.push(_char);
+      lastLine.push(_char);
+      y += childHeight;
+    }
+
+    if (lastLine.length > 0) {
+      resultLines.push({
+        children: lastLine,
+        height: lastLineHeight
+      });
+      maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
+    }
+
+    result.start += resultChildren.length;
+    result.isLastPage = result.start === lastChildIndex;
+    result.maxLineHeight = maxLineHeight;
+    result.linesWidth = resultLines.length * lineWidth; // Calculate size of game object
+
+    var width = this.fixedWidth > 0 ? this.fixedWidth : result.linesWidth + paddingHorizontal;
+    var height = this.fixedHeight > 0 ? this.fixedHeight : result.maxLineHeight + paddingVertical; // Size might be changed after wrapping
+
+    var innerWidth = width - paddingHorizontal;
+    var innerHeight = height - paddingVertical;
+    AlignLines(result, innerWidth, innerHeight); // Resize
+
+    this.setSize(width, height); // Set initial position
+
+    for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
+      var child = resultChildren[i];
+
+      if (!child.renderable) {
+        continue;
+      }
+
+      child.x0 = child.x;
+      child.y0 = child.y;
+    }
+
+    return result;
+  };
+
+  var Merge = Phaser.Utils.Objects.Merge;
+
+  var RunVerticalWrap = function RunVerticalWrap(config) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
+  };
+
+  var RenderContent = function RenderContent() {
+    this.clear();
+    this.setSize(this.width, this.height);
+
+    if (this.background.active) {
+      this.background.render();
+    }
+
+    var child;
+
+    for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+      child = this.children[i];
+
+      if (child.active) {
+        child.render();
+      }
+    }
+
+    if (this.innerBounds.active) {
+      this.innerBounds.render();
+    }
+  };
+
+  var GetChildren = function GetChildren() {
+    return this.children;
+  };
+
+  var GetLastAppendedChildren = function GetLastAppendedChildren() {
+    return this.lastAppendedChildren;
+  };
+
+  var GetAll = Phaser.Utils.Array.GetAll;
+
+  var GetActiveChildren = function GetActiveChildren() {
+    return GetAll(this.children, 'active', true);
+  };
+
+  var SetToMinSize = function SetToMinSize() {
+    var children = this.children;
+    var maxX = 0,
+        maxY = 0;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (!child.renderable || !child.active || !child.visible) {
+        continue;
+      }
+
+      var x0 = child.x0 !== undefined ? child.x0 : child.x;
+      var y0 = child.y0 !== undefined ? child.y0 : child.y;
+      maxX = Math.max(maxX, x0);
+      maxY = Math.max(maxY, y0);
+    }
+
+    var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
+    var height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom; // Ignore fixedWidth, and fixedHeight
+
+    if (this.width !== width || this.height !== height) {
+      this.dirty = true;
+      this.width = width;
+      this.height = height;
+    }
+
+    return this;
+  };
+
+  var SetChildrenInteractiveEnable = function SetChildrenInteractiveEnable(enable) {
+    if (enable === undefined) {
+      enable = true;
+    }
+
+    if (this.childrenInteractiveEnable !== enable) {
+      this.lastOverChild = null;
+    }
+
+    this.childrenInteractiveEnable = enable;
+    return this;
+  };
+
+  var GetFirstChildContains = function GetFirstChildContains(x, y) {
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (!child.active || !child.renderable) {
+        continue;
+      }
+
+      if (child.contains(x, y)) {
+        return child;
+      }
+    }
+
+    return null;
+  };
+
+  var SetChildrenInteractive = function SetChildrenInteractive() {
+    this.on('pointerdown', OnPointerDown, this).on('pointerdown', OnPointerUp, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
+      OnAreaOverOut.call(this, pointer, null, null, event);
+    }, this);
+    return this;
+  };
+
+  var OnPointerDown = function OnPointerDown(pointer, localX, localY, event) {
+    if (!this.childrenInteractiveEnable) {
+      return;
+    }
+
+    var child = GetFirstChildContains.call(this, localX, localY);
+
+    if (!child) {
+      return;
+    }
+
+    this.emit('child.pointerdown', child, pointer, localX, localY, event);
+  };
+
+  var OnPointerUp = function OnPointerUp(pointer, localX, localY, event) {
+    if (!this.childrenInteractiveEnable) {
+      return;
+    }
+
+    var child = GetFirstChildContains.call(this, localX, localY);
+
+    if (!child) {
+      return;
+    }
+
+    this.emit('child.pointerup', child, pointer, localX, localY, event);
+  };
+
+  var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
+    if (!this.childrenInteractiveEnable) {
+      return;
+    }
+
+    if (localX === null) {
+      // Case of pointerout
+      if (this.lastOverChild !== null) {
+        this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+        this.lastOverChild = null;
+      }
+
+      return;
+    }
+
+    var child = GetFirstChildContains.call(this, localX, localY);
+
+    if (child === this.lastOverChild) {
+      return;
+    }
+
+    if (this.lastOverChild !== null) {
+      this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+    }
+
+    if (child !== null) {
+      this.emit('child.pointerover', child, pointer, localX, localY, event);
+    }
+
+    this.lastOverChild = child;
+  };
+
+  var GameObject = Phaser.GameObjects.GameObject;
+
+  var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
+    var isInteractived = !!this.input;
+    GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
+
+    if (!isInteractived) {
+      SetChildrenInteractive.call(this);
+    }
+
+    return this;
+  };
+
+  var BringToTop = Phaser.Utils.Array.BringToTop;
+  var SendToBack = Phaser.Utils.Array.SendToBack;
+  var MoveUp = Phaser.Utils.Array.MoveUp;
+  var MoveDown = Phaser.Utils.Array.MoveDown;
+  var MoveAbove = Phaser.Utils.Array.MoveAbove;
+  var MoveBelow = Phaser.Utils.Array.MoveBelow;
+  var MoveChildMethods = {
+    moveChildToFist: function moveChildToFist(bob) {
+      BringToTop(this.children, bob);
+      return this;
+    },
+    moveChildToLast: function moveChildToLast(bob) {
+      SendToBack(this.children, bob);
+      return this;
+    },
+    movechildUp: function movechildUp(bob) {
+      MoveUp(this.children, bob);
+      return this;
+    },
+    movechildDown: function movechildDown(bob) {
+      MoveDown(this.children, bob);
+      return this;
+    },
+    movechildAbove: function movechildAbove(bob, baseBob) {
+      MoveAbove(this.children, bob, baseBob);
+      return this;
+    },
+    movechildBelow: function movechildBelow(bob, baseBob) {
+      MoveBelow(this.children, bob, baseBob);
+      return this;
+    }
+  };
+
+  var BackgroundMethods = {
+    setBackgroundColor: function setBackgroundColor(color, color2, isHorizontalGradient) {
+      this.background.setColor(color, color2, isHorizontalGradient);
+      return this;
+    },
+    setBackgroundStroke: function setBackgroundStroke(color, lineWidth) {
+      this.background.setStroke(color, lineWidth);
+      return this;
+    },
+    setBackgroundCornerRadius: function setBackgroundCornerRadius(radius, iteration) {
+      this.background.setCornerRadius(radius, iteration);
+      return this;
+    }
+  };
+
+  var InnerBoundsMethods = {
+    setInnerBoundsColor: function setInnerBoundsColor(color, color2, isHorizontalGradient) {
+      this.innerBounds.setColor(color, color2, isHorizontalGradient);
+      return this;
+    },
+    setInnerBoundsStroke: function setInnerBoundsStroke(color, lineWidth) {
+      this.innerBounds.setStroke(color, lineWidth);
+      return this;
+    }
+  };
+
+  var Methods = {
+    setFixedSize: SetFixedSize,
+    setPadding: SetPadding,
+    getPadding: GetPadding,
+    modifyTextStyle: ModifyTextStyle,
+    resetTextStyle: ResetTextStyle,
+    removeChild: RemoveChild,
+    removeChildren: RemoveChildren,
+    clearContent: ClearContent,
+    addChild: AddChild,
+    setText: SetText,
+    appendText: AppendText,
+    insertText: InsertText,
+    removeText: RemoveChild,
+    getText: GetText,
+    appendImage: AppendImage,
+    appendDrawer: AppendDrawer,
+    appendSpace: AppendSpace,
+    appendCommand: AppendCommand,
+    setWrapConfig: SetWrapConfig,
+    runWordWrap: RunWordWrap,
+    runVerticalWrap: RunVerticalWrap,
+    renderContent: RenderContent,
+    getChildren: GetChildren,
+    getLastAppendedChildren: GetLastAppendedChildren,
+    getActiveChildren: GetActiveChildren,
+    setToMinSize: SetToMinSize,
+    setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
+    setInteractive: SetInteractive
+  };
+  Object.assign(Methods, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
+
+  var Stack = /*#__PURE__*/function () {
+    function Stack() {
+      _classCallCheck(this, Stack);
+
+      this.items = [];
+    }
+
+    _createClass(Stack, [{
+      key: "destroy",
+      value: function destroy() {
+        this.clear();
+        this.items = undefined;
+      }
+    }, {
+      key: "pop",
+      value: function pop() {
+        return this.items.length > 0 ? this.items.pop() : null;
+      }
+    }, {
+      key: "push",
+      value: function push(l) {
+        this.items.push(l);
+        return this;
+      }
+    }, {
+      key: "pushMultiple",
+      value: function pushMultiple(arr) {
+        this.items.push.apply(this.items, arr);
+        arr.length = 0;
+        return this;
+      }
+    }, {
+      key: "clear",
+      value: function clear() {
+        this.items.length = 0;
+        return this;
+      }
+    }]);
+
+    return Stack;
+  }();
+
+  var GetFastValue = Phaser.Utils.Objects.GetFastValue;
+  var Pools = {};
+
+  var PoolManager = /*#__PURE__*/function () {
+    function PoolManager(config) {
+      _classCallCheck(this, PoolManager);
+
+      this.pools = GetFastValue(config, 'pools', Pools);
+    }
+
+    _createClass(PoolManager, [{
+      key: "free",
+      value: function free(bob) {
+        if (!this.pools) {
+          return this;
+        }
+
+        var bobType = bob.type;
+
+        if (!this.pools.hasOwnProperty(bobType)) {
+          this.pools[bobType] = new Stack();
+        }
+
+        this.pools[bobType].push(bob);
+        bob.onFree();
+        return this;
+      }
+    }, {
+      key: "freeMultiple",
+      value: function freeMultiple(arr) {
+        if (!this.pools) {
+          return this;
+        }
+
+        for (var i = 0, cnt = arr.length; i < cnt; i++) {
+          this.free(arr[i]);
+        }
+
+        return this;
+      }
+    }, {
+      key: "allocate",
+      value: function allocate(bobType) {
+        if (!this.pools || !this.pools.hasOwnProperty(bobType)) {
+          return null;
+        }
+
+        return this.pools[bobType].pop();
+      }
+    }]);
+
+    return PoolManager;
+  }();
+
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
+  var DynamicText = /*#__PURE__*/function (_Canvas) {
+    _inherits(DynamicText, _Canvas);
+
+    var _super = _createSuper(DynamicText);
+
+    function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
+      var _this;
+
+      _classCallCheck(this, DynamicText);
+
+      if (IsPlainObject$2(x)) {
+        config = x;
+        x = GetValue$4(config, 'x', 0);
+        y = GetValue$4(config, 'y', 0);
+        fixedWidth = GetValue$4(config, 'width', 0);
+        fixedHeight = GetValue$4(config, 'height', 0);
+      } else if (IsPlainObject$2(fixedWidth)) {
+        config = fixedWidth;
+        fixedWidth = GetValue$4(config, 'width', 0);
+        fixedHeight = GetValue$4(config, 'height', 0);
+      }
+
+      var width = fixedWidth === 0 ? 1 : fixedWidth;
+      var height = fixedHeight === 0 ? 1 : fixedHeight;
+      _this = _super.call(this, scene, x, y, width, height);
+      _this.type = 'rexDynamicText';
+      _this.autoRound = true;
+      _this.padding = SetPadding$1();
+      _this.wrapPadding = SetPadding$1();
+      var textStyleConfig = GetValue$4(config, 'style', undefined);
+      _this.defaultTextStyle = new TextStyle(textStyleConfig);
+      _this.textStyle = _this.defaultTextStyle.clone();
+      _this.background = new Background(_assertThisInitialized(_this), GetValue$4(config, 'background', undefined));
+      _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$4(config, 'innerBounds', undefined));
+      _this.children = [];
+      _this.lastAppendedChildren = [];
+      _this.lastOverChild = null;
+      _this.poolManager = new PoolManager(config);
+
+      _this.setFixedSize(fixedWidth, fixedHeight);
+
+      _this.setPadding(GetValue$4(config, 'padding', 0));
+
+      _this.setWrapConfig(GetValue$4(config, 'wrap', undefined));
+
+      _this.setChildrenInteractiveEnable(GetValue$4(config, 'childrenInteractive', false));
+
+      var text = GetValue$4(config, 'text', undefined);
+
+      if (text) {
+        _this.setText(text);
+      }
+
+      return _this;
+    }
+
+    _createClass(DynamicText, [{
+      key: "updateTexture",
+      value: function updateTexture() {
+        this.renderContent();
+
+        _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);
+
+        return this;
+      }
+    }, {
+      key: "text",
+      get: function get() {
+        return this.getText(true);
+      },
+      set: function set(value) {
+        this.setText(value);
+      }
+    }]);
+
+    return DynamicText;
+  }(Canvas);
+
+  Object.assign(DynamicText.prototype, Methods);
+
+  var Resize = function Resize(width, height) {
+    if (this.scene.sys.scale.autoRound) {
+      width = Math.floor(width);
+      height = Math.floor(height);
+    }
+
+    if (this.width === width && this.height === height) {
+      return this;
+    }
+
+    var style = this.node.style;
+    style.width = "".concat(width, "px");
+    style.height = "".concat(height, "px");
+    this.updateSize();
+    return this;
+  };
+
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+
+  var SetProperties = function SetProperties(properties, config, out) {
+    if (out === undefined) {
+      out = {};
+    }
+
+    var property, value;
+
+    for (var key in properties) {
+      property = properties[key]; // [propName, defaultValue]
+
+      value = GetValue$3(config, key, property[1]);
+
+      if (value !== undefined) {
+        out[property[0]] = value;
+      }
+    }
+
+    return out;
+  };
+
+  var RouteEvents = function RouteEvents(gameObject, element, elementEvents) {
+    var _loop = function _loop(elementEventName) {
+      // Note: Don't use `var` here
+      element.addEventListener(elementEventName, function (e) {
+        gameObject.emit(elementEvents[elementEventName], gameObject, e);
+      });
+    };
+
+    for (var elementEventName in elementEvents) {
+      _loop(elementEventName);
+    }
+  };
+
+  var StopPropagationTouchEvents = function StopPropagationTouchEvents(element) {
+    // Don't propagate touch/mouse events to parent(game canvas)
+    element.addEventListener('touchstart', callback, false);
+    element.addEventListener('touchmove', callback, false);
+    element.addEventListener('touchend', callback, false);
+    element.addEventListener('mousedown', callback, false);
+    element.addEventListener('mouseup', callback, false);
+    element.addEventListener('mousemove', callback, false);
+  };
+
+  var callback = function callback(e) {
+    e.stopPropagation();
+  };
+
+  var DOMElement = Phaser.GameObjects.DOMElement;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+
+  var InputText = /*#__PURE__*/function (_DOMElement) {
+    _inherits(InputText, _DOMElement);
+
+    var _super = _createSuper(InputText);
+
+    function InputText(scene, x, y, width, height, config) {
+      var _this;
+
+      _classCallCheck(this, InputText);
+
+      if (IsPlainObject$1(x)) {
+        config = x;
+        x = GetValue$2(config, 'x', 0);
+        y = GetValue$2(config, 'y', 0);
+        width = GetValue$2(config, 'width', 0);
+        height = GetValue$2(config, 'height', 0);
+      } else if (IsPlainObject$1(width)) {
+        config = width;
+        width = GetValue$2(config, 'width', 0);
+        height = GetValue$2(config, 'height', 0);
+      }
+
+      if (config === undefined) {
+        config = {};
+      }
+
+      var element;
+      var textType = GetValue$2(config, 'type', 'text');
+
+      if (textType === 'textarea') {
+        element = document.createElement('textarea');
+        element.style.resize = 'none';
+      } else {
+        element = document.createElement('input');
+        element.type = textType;
+      }
+
+      SetProperties(ElementProperties, config, element);
+      var style = GetValue$2(config, 'style', undefined);
+      style = SetProperties(StyleProperties, config, style); // Apply other style properties
+
+      var elementStyle = element.style;
+
+      for (var key in config) {
+        if (key in ElementProperties || key in StyleProperties) {
+          continue;
+        } else if (key in elementStyle) {
+          style[key] = config[key];
+        }
+      }
+
+      style['box-sizing'] = 'border-box';
+      _this = _super.call(this, scene, x, y, element, style);
+      _this.type = 'rexInputText';
+
+      _this.resize(width, height); // Apply events
+
+
+      RouteEvents(_assertThisInitialized(_this), element, ElementEvents); // Don't propagate touch/mouse events to parent(game canvas)
+
+      StopPropagationTouchEvents(element);
+
+      if (GetValue$2(config, 'selectAll', false)) {
+        _this.selectAll();
+      }
+
+      _this._isFocused = false;
+
+      _this.on('focus', function () {
+        this._isFocused = true;
+      }, _assertThisInitialized(_this)).on('blur', function () {
+        this._isFocused = false;
+      }, _assertThisInitialized(_this));
+
+      return _this;
+    }
+
+    _createClass(InputText, [{
+      key: "text",
+      get: function get() {
+        return this.node.value;
+      },
+      set: function set(value) {
+        this.node.value = value;
+      }
+    }, {
+      key: "setText",
+      value: function setText(value) {
+        // Override
+        this.text = value;
+        return this;
+      }
+    }, {
+      key: "maxLength",
+      get: function get() {
+        return this.node.maxLength;
+      },
+      set: function set(value) {
+        this.node.maxLength = value;
+      }
+    }, {
+      key: "setMaxLength",
+      value: function setMaxLength(value) {
+        this.maxLength = value;
+        return this;
+      }
+    }, {
+      key: "minLength",
+      get: function get() {
+        return this.node.minLength;
+      },
+      set: function set(value) {
+        this.node.minLength = value;
+      }
+    }, {
+      key: "setMinLength",
+      value: function setMinLength(value) {
+        this.minLength = value;
+        return this;
+      }
+    }, {
+      key: "placeholder",
+      get: function get() {
+        return this.node.placeholder;
+      },
+      set: function set(value) {
+        this.node.placeholder = value;
+      }
+    }, {
+      key: "setPlaceholder",
+      value: function setPlaceholder(value) {
+        this.placeholder = value;
+        return this;
+      }
+    }, {
+      key: "selectText",
+      value: function selectText(selectionStart, selectionEnd) {
+        if (selectionStart === undefined) {
+          this.node.select();
+        } else {
+          this.node.setSelectionRange(selectionStart, selectionEnd);
+        }
+
+        return this;
+      }
+    }, {
+      key: "selectAll",
+      value: function selectAll() {
+        this.selectText();
+        return this;
+      }
+    }, {
+      key: "selectionStart",
+      get: function get() {
+        return this.node.selectionStart;
+      }
+    }, {
+      key: "selectionEnd",
+      get: function get() {
+        return this.node.selectionEnd;
+      }
+    }, {
+      key: "selectedText",
+      get: function get() {
+        var node = this.node;
+        return node.value.substring(node.selectionStart, node.selectionEnd);
+      }
+    }, {
+      key: "cursorPosition",
+      get: function get() {
+        return this.node.selectionStart;
+      },
+      set: function set(value) {
+        this.node.setSelectionRange(value, value);
+      }
+    }, {
+      key: "setCursorPosition",
+      value: function setCursorPosition(value) {
+        if (value === undefined) {
+          value = 0;
+        }
+
+        this.cursorPosition = value;
+        return this;
+      }
+    }, {
+      key: "tooltip",
+      get: function get() {
+        return this.node.title;
+      },
+      set: function set(value) {
+        this.node.title = value;
+      }
+    }, {
+      key: "setTooltip",
+      value: function setTooltip(value) {
+        this.tooltip = value;
+        return this;
+      }
+    }, {
+      key: "setTextChangedCallback",
+      value: function setTextChangedCallback(callback) {
+        this.onTextChanged = callback;
+        return this;
+      }
+    }, {
+      key: "readOnly",
+      get: function get() {
+        return this.node.readOnly;
+      },
+      set: function set(value) {
+        this.node.readOnly = value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(value) {
+        if (value === undefined) {
+          value = true;
+        }
+
+        this.readOnly = value;
+        return this;
+      }
+    }, {
+      key: "spellCheck",
+      get: function get() {
+        return this.node.spellcheck;
+      },
+      set: function set(value) {
+        this.node.spellcheck = value;
+      }
+    }, {
+      key: "setSpellCheck",
+      value: function setSpellCheck(value) {
+        this.spellCheck = value;
+        return this;
+      }
+    }, {
+      key: "fontColor",
+      get: function get() {
+        return this.node.style.color;
+      },
+      set: function set(value) {
+        this.node.style.color = value;
+      }
+    }, {
+      key: "setFontColor",
+      value: function setFontColor(value) {
+        this.fontColor = value;
+        return this;
+      }
+    }, {
+      key: "setStyle",
+      value: function setStyle(key, value) {
+        this.node.style[key] = value;
+        return this;
+      }
+    }, {
+      key: "getStyle",
+      value: function getStyle(key) {
+        return this.node.style[key];
+      }
+    }, {
+      key: "scrollToBottom",
+      value: function scrollToBottom() {
+        this.node.scrollTop = this.node.scrollHeight;
+        return this;
+      }
+    }, {
+      key: "setEnabled",
+      value: function setEnabled(enabled) {
+        if (enabled === undefined) {
+          enabled = true;
+        }
+
+        this.node.disabled = !enabled;
+        return this;
+      }
+    }, {
+      key: "setBlur",
+      value: function setBlur() {
+        this.node.blur();
+        return this;
+      }
+    }, {
+      key: "setFocus",
+      value: function setFocus() {
+        this.node.focus();
+        return this;
+      }
+    }, {
+      key: "isFocused",
+      get: function get() {
+        return this._isFocused;
+      }
+    }]);
+
+    return InputText;
+  }(DOMElement);
+
+  var methods = {
+    resize: Resize
+  };
+  Object.assign(InputText.prototype, methods);
+  var ElementProperties = {
+    id: ['id', undefined],
+    text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
+    placeholder: ['placeholder', undefined],
+    tooltip: ['title', undefined],
+    readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off']
+  };
+  var StyleProperties = {
+    align: ['textAlign', undefined],
+    paddingLeft: ['padding-left', undefined],
+    paddingRight: ['padding-right', undefined],
+    paddingTop: ['padding-top', undefined],
+    paddingBottom: ['padding-bottom', undefined],
+    fontFamily: ['fontFamily', undefined],
+    fontSize: ['font-size', undefined],
+    color: ['color', '#ffffff'],
+    backgroundColor: ['backgroundColor', 'transparent'],
+    border: ['border', 0],
+    borderColor: ['borderColor', 'transparent'],
+    outline: ['outline', 'none'],
+    direction: ['direction', undefined]
+  };
+  var ElementEvents = {
+    input: 'textchange',
+    click: 'click',
+    dblclick: 'dblclick',
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress',
+    focus: 'focus',
+    blur: 'blur',
+    select: 'select'
+  };
+
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+    if (pointer) {
+      if (preTest && !preTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (!HitTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (postTest && !postTest(gameObject, pointer)) {
+        return false;
+      }
+
+      return true;
+    } else {
+      var inputManager = gameObject.scene.input.manager;
+      var pointersTotal = inputManager.pointersTotal;
+      var pointers = inputManager.pointers,
+          pointer;
+
+      for (var i = 0; i < pointersTotal; i++) {
+        pointer = pointers[i];
+
+        if (preTest && !preTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (!HitTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (postTest && !postTest(gameObject, pointer)) {
+          continue;
+        }
+
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  var HitTest = function HitTest(gameObject, pointer) {
+    var scene = gameObject.scene;
+    var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
+    var inputManager = scene.input.manager;
+    var gameObjects = [gameObject];
+    var output;
+
+    for (var i = 0, len = cameras.length; i < len; i++) {
+      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
+
+      if (output.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+  var HiddenInputTextBase = /*#__PURE__*/function (_InputText) {
+    _inherits(HiddenInputTextBase, _InputText);
+
+    var _super = _createSuper(HiddenInputTextBase);
+
+    function HiddenInputTextBase(textObject, config) {
+      var _this;
+
+      _classCallCheck(this, HiddenInputTextBase);
+
+      _this = _super.call(this, textObject.scene, config); // Note: Don't add this game object into scene
+      // Set style
+
+      var style = _this.node.style;
+      style.position = 'absolute';
+      style.opacity = 0;
+      style.pointerEvents = 'none';
+      style.zIndex = 0; // hide native blue text cursor on iOS
+
+      style.transform = 'scale(0)';
+
+      _this.setEnterCloseEnable(GetValue$1(config, 'enterClose', true));
+
+      _this.onOpenCallback = GetValue$1(config, 'onOpen', undefined);
+      _this.onCloseCallback = GetValue$1(config, 'onClose', undefined);
+      _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
+      _this.textObject = textObject;
+      textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
+      var updateTextMode = GetValue$1(config, 'updateTextMode', 0);
+
+      if (typeof updateTextMode === 'string') {
+        updateTextMode = UpdateTextModes[updateTextMode];
+      }
+
+      _this.updateTextMode = updateTextMode;
+
+      _this.on('focus', function () {
+        this.initText();
+
+        if (this.enterCloseEnable) {
+          this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
+        }
+
+        if (updateTextMode === 0) {
+          this.scene.sys.events.on('postupdate', this.updateText, this);
+        } else {
+          this.on('textchange', this.updateText, this);
+        }
+
+        this.scene.input.on('pointerdown', this.onClickOutside, this);
+
+        if (this.onOpenCallback) {
+          this.onOpenCallback(this.textObject, this);
+        }
+      }, _assertThisInitialized(_this)).on('blur', function () {
+        this.updateText();
+
+        if (updateTextMode === 0) {
+          this.scene.sys.events.off('postupdate', this.updateText, this);
+        } else {
+          this.off('textchange', this.updateText, this);
+        }
+
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
+
+        if (this.onCloseCallback) {
+          this.onCloseCallback(this.textObject, this);
+        }
+      }, _assertThisInitialized(_this));
+
+      return _this;
+    }
+
+    _createClass(HiddenInputTextBase, [{
+      key: "preDestroy",
+      value: function preDestroy() {
+        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('destroy', this.destroy, this);
+
+        if (this.updateTextMode === 0) {
+          this.scene.sys.events.off('postupdate', this.updateText, this);
+        } else {
+          this.off('textchange', this.updateText, this);
+        }
+
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
+
+        _get(_getPrototypeOf(HiddenInputTextBase.prototype), "preDestroy", this).call(this);
+      }
+    }, {
+      key: "onClickOutside",
+      value: function onClickOutside(pointer) {
+        if (!IsPointerInHitArea(this.textObject, pointer)) {
+          this.setBlur();
+        }
+      }
+    }, {
+      key: "setEnterCloseEnable",
+      value: function setEnterCloseEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.enterCloseEnable = enable;
+        return this;
+      }
+    }, {
+      key: "open",
+      value: function open() {
+        this.setFocus();
+        return this;
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        this.setBlur();
+        return this;
+      }
+    }, {
+      key: "isOpened",
+      get: function get() {
+        return this._isFocused;
+      } // Override
+
+    }, {
+      key: "initText",
+      value: function initText() {} // Override
+
+    }, {
+      key: "updateText",
+      value: function updateText() {}
+    }]);
+
+    return HiddenInputTextBase;
+  }(InputText);
+
+  var UpdateTextModes = {
+    everyTick: 0,
+    textChange: 1
+  };
+
+  var HiddenInputText = /*#__PURE__*/function (_HiddenInputTextBase) {
+    _inherits(HiddenInputText, _HiddenInputTextBase);
+
+    var _super = _createSuper(HiddenInputText);
+
+    function HiddenInputText(textObject, config) {
+      _classCallCheck(this, HiddenInputText);
+
+      if (config === undefined) {
+        config = {};
+      }
+
+      config.updateTextMode = 1;
+      return _super.call(this, textObject, config);
+    }
+
+    _createClass(HiddenInputText, [{
+      key: "initText",
+      value: function initText() {
+        this.setText(this.textObject.text);
+        return this;
+      }
+    }, {
+      key: "updateText",
+      value: function updateText() {
+        var text = this.text;
+
+        if (this.onUpdateCallback) {
+          var newText = this.onUpdateCallback(text, this.textObject, this);
+
+          if (newText != null) {
+            text = newText;
+          }
+        }
+
+        if (text !== this.textObject.text) {
+          this.textObject.setText(text).runWordWrap();
+        }
+
+        return this;
+      }
+    }]);
+
+    return HiddenInputText;
+  }(HiddenInputTextBase);
+
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
+  var CanvasInput = /*#__PURE__*/function (_DynamicText) {
+    _inherits(CanvasInput, _DynamicText);
+
+    var _super = _createSuper(CanvasInput);
+
+    function CanvasInput(scene, x, y, fixedWidth, fixedHeight, config) {
+      var _this;
+
+      _classCallCheck(this, CanvasInput);
+
+      if (IsPlainObject(x)) {
+        config = x;
+      } else if (IsPlainObject(fixedWidth)) {
+        config = fixedWidth;
+      }
+
+      _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
+      _this.type = 'rexCanvasInput';
+      _this.textEdit = new HiddenInputText(_assertThisInitialized(_this), GetValue(config, 'input'));
+      return _this;
+    }
+
+    return _createClass(CanvasInput);
+  }(DynamicText);
+
+  function Factory (x, y, width, height, config) {
+    var gameObject = new CanvasInput(this.scene, x, y, width, height, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function Creator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+
+    var width = GetAdvancedValue(config, 'width', undefined);
+    var height = GetAdvancedValue(config, 'height', undefined);
+    var gameObject = new CanvasInput(this.scene, 0, 0, width, height, config);
+    BuildGameObject(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+
+      var key;
+
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+
+          entry[key] = newEntry;
+        }
+
+        entry = entry[key];
+      }
+    }
+
+    return entry;
+  };
+
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    } // no object
+
+
+    if (_typeof(target) !== 'object') {
+      return;
+    } // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      } // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+
+    return target;
+  };
+
+  var CanvasInputPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(CanvasInputPlugin, _Phaser$Plugins$BaseP);
+
+    var _super = _createSuper(CanvasInputPlugin);
+
+    function CanvasInputPlugin(pluginManager) {
+      var _this;
+
+      _classCallCheck(this, CanvasInputPlugin);
+
+      _this = _super.call(this, pluginManager); //  Register our new Game Object type
+
+      pluginManager.registerGameObject('rexCanvasInput', Factory, Creator);
+      return _this;
+    }
+
+    _createClass(CanvasInputPlugin, [{
+      key: "start",
+      value: function start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.on('destroy', this.destroy, this);
+      }
+    }]);
+
+    return CanvasInputPlugin;
+  }(Phaser.Plugins.BasePlugin);
+
+  SetValue(window, 'RexPlugins.GameObjects.CanvasInput', CanvasInput);
+
+  return CanvasInputPlugin;
+
+}));

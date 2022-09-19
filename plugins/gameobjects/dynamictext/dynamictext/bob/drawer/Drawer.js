@@ -1,9 +1,9 @@
 import RenderBase from '../renderbase/RenderBase.js';
-import { RenderTypeName } from '../Types.js';
+import { DrawerTypeName } from '../Types.js';
 
 class Drawer extends RenderBase {
     constructor(parent, renderCallback, width, height) {
-        super(parent, RenderTypeName);
+        super(parent, DrawerTypeName);
 
         this.setRenderCallback(renderCallback);
         this.setDrawerSize(width, height);
