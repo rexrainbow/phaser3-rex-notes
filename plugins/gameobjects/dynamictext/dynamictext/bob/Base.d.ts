@@ -1,7 +1,9 @@
 // import * as Phaser from 'phaser';
 import DataMethods from '../../../../utils/data/DataMethods';
+import DynamicText from '../DynamicText';
 
 export default class Base extends DataMethods {
+    parent: DynamicText;
     readonly type: string;
     readonly renderable: boolean;
 

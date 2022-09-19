@@ -10,6 +10,7 @@ class RenderBase extends Base {
         super(parent, type);
 
         this.renderable = true;
+        this.toLocalPosition = true;
         this.originX = 0;
         this.offsetX = 0;  // Override
         this.offsetY = 0;  // Override

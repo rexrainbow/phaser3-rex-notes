@@ -13,6 +13,7 @@ import InsertText from './InsertText.js';
 import RemoveText from './RemoveChild.js';
 import GetText from './GetText.js';
 import AppendImage from './AppendImage.js';
+import AppendRender from './AppendRender.js';
 import AppendSpace from './AppendSpace.js';
 import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
@@ -27,6 +28,7 @@ import SetToMinSize from './SetToMinSize.js';
 import SetChildrenInteractiveEnable from './input/SetChildrenInteractiveEnable.js';
 import SetInteractive from './input/SetInteractive.js';
 
+import MoveChildMethods from './MoveChildMethods.js';
 import BackgroundMethods from './BackgroundMethods.js';
 import InnerBoundsMethods from './InnerBoundsMethods.js';
 
@@ -47,6 +49,7 @@ var Methods = {
     removeText: RemoveText,
     getText: GetText,
     appendImage: AppendImage,
+    appendRender: AppendRender,
     appendSpace: AppendSpace,
     appendCommand: AppendCommand,
 
@@ -67,8 +70,11 @@ var Methods = {
 
 Object.assign(
     Methods,
+
+    MoveChildMethods,
     BackgroundMethods,
     InnerBoundsMethods,
+
 )
 
 export default Methods;

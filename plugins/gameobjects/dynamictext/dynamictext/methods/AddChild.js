@@ -1,5 +1,10 @@
+// const RemoveItem = Phaser.Utils.Array.Remove;
+
 var AddChild = function (bob, index) {
     var isBobArray = Array.isArray(bob);
+
+    // Remove existed bob(s)
+    // RemoveItem(this.children, bob);
 
     if ((index === undefined) || (index === this.children.length)) {
         if (isBobArray) {

@@ -3,6 +3,10 @@ import CanvasPositionToBobPosition from '../../methods/utils/transform/CanvasPos
 const Rectangle = Phaser.Geom.Rectangle;
 
 var Contains = function (canvasX, canvasY) {
+    if ((this.width === 0) || (this.height === 0)) {
+        return false;
+    }
+
     var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
     return GetBounds(this).contains(bobPosition.x, bobPosition.y);
 }

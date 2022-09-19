@@ -10,6 +10,9 @@ declare namespace RenderBase {
 }
 
 declare class RenderBase extends Base {
+    renderable: boolean;
+    toLocalPosition: boolean;
+
     setVisible(visible?: boolean): this;
     visible: boolean;
 

@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-
     }
 
     create() {
@@ -31,25 +30,28 @@ class Demo extends Phaser.Scene {
             }
         )
 
-        var content = [
-            'Phaser is a fast, free, and fun open source HTML5 game framework\n',
-            'that offers WebGL and DynamicText rendering across desktop and mobile web browsers.\n',
-            'Games can be compiled to iOS, Android and native apps by using 3rd party tools.\n',
-            'You can use JavaScript or TypeScript for development.'
-        ];
         text
-            .appendText(content[0], { color: '#FFF8DC' })
-            .appendText(content[1], { color: '#008B8B' })
-            .appendText(content[2], { color: '#FF7F50' })
-            .appendText(content[3], { color: '#F8F8FF' });
+            .appendRender(function () {
+                var canvas = this.canvas;
+                var context = this.context;
+                var width = canvas.width, height = canvas.height;
+
+                // Create gradient
+                var grd = context.createRadialGradient(width / 2, height / 2, 5, width / 2, height / 2, 100);
+                grd.addColorStop(0, "blue");
+                grd.addColorStop(1, "red");
+
+                // Fill with gradient
+                context.fillStyle = grd;
+                context.fillRect(20, 20, width - 40, height - 40);
+
+            }, true)
+            .appendText('Phaser is a fast, free, and fun open source HTML5 game framework')
 
         var result = text.runWordWrap({
             lineHeight: 30,
             maxLines: 0,       // Set maxLines to 0
             padding: { bottom: 10 },
-
-            hAlign: 'right',
-            vAlign: 'bottom'
         });
     }
 
