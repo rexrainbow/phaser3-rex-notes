@@ -1,6 +1,14 @@
 import HiddenInputTextBase from '../../dom/hiddeninputtext/HiddenInputTextBase.js';
 
 class HiddenInputText extends HiddenInputTextBase {
+    constructor(textObject, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        config.updateTextMode = 1;
+        super(textObject, config);
+    }
+
     initText() {
         this.setText(this.textObject.text);
 
@@ -17,7 +25,11 @@ class HiddenInputText extends HiddenInputTextBase {
             }
         }
 
-        this.textObject.setText(text);
+        if (text !== this.textObject.text) {
+            this.textObject
+                .setText(text)
+                .runWordWrap()
+        }
 
         return this;
     }

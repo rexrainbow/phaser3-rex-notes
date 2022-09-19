@@ -2,6 +2,7 @@ import DynamicText from '../dynamictext/DynamicText.js';
 import HiddenInputText from './HiddenInputText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class CanvasInput extends DynamicText {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {

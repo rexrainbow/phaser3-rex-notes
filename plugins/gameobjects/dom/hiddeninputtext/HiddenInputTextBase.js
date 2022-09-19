@@ -23,7 +23,6 @@ class HiddenInputTextBase extends InputText {
         this.onCloseCallback = GetValue(config, 'onClose', undefined);
         this.onUpdateCallback = GetValue(config, 'onUpdate', undefined);
 
-
         this.textObject = textObject;
         textObject
             .setInteractive()
@@ -31,15 +30,26 @@ class HiddenInputTextBase extends InputText {
             .on('destroy', this.destroy, this);
 
 
+        var updateTextMode = GetValue(config, 'updateTextMode', 0);
+        if (typeof (updateTextMode) === 'string') {
+            updateTextMode = UpdateTextModes[updateTextMode];
+        }
+        this.updateTextMode = updateTextMode;
+
         this
             .on('focus', function () {
                 this.initText();
 
-                if (this.enableEnable) {
+                if (this.enterCloseEnable) {
                     this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
                 }
 
-                this.scene.sys.events.on('postupdate', this.updateText, this);
+                if (updateTextMode === 0) {
+                    this.scene.sys.events.on('postupdate', this.updateText, this);
+                } else {
+                    this.on('textchange', this.updateText, this);
+                }
+
                 this.scene.input.on('pointerdown', this.onClickOutside, this);
 
                 if (this.onOpenCallback) {
@@ -50,7 +60,12 @@ class HiddenInputTextBase extends InputText {
             .on('blur', function () {
                 this.updateText();
 
-                this.scene.sys.events.off('postupdate', this.updateText, this);
+                if (updateTextMode === 0) {
+                    this.scene.sys.events.off('postupdate', this.updateText, this);
+                } else {
+                    this.off('textchange', this.updateText, this);
+                }
+
                 this.scene.input.off('pointerdown', this.onClickOutside, this);
 
                 if (this.onCloseCallback) {
@@ -63,7 +78,13 @@ class HiddenInputTextBase extends InputText {
     preDestroy() {
         this.textObject.off('pointerdown', this.setFocus, this);
         this.textObject.off('destroy', this.destroy, this);
-        this.scene.sys.events.off('postupdate', this.updateText, this);
+
+        if (this.updateTextMode === 0) {
+            this.scene.sys.events.off('postupdate', this.updateText, this);
+        } else {
+            this.off('textchange', this.updateText, this);
+        }
+
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         super.preDestroy();
@@ -79,7 +100,7 @@ class HiddenInputTextBase extends InputText {
         if (enable === undefined) {
             enable = true;
         }
-        this.enableEnable = enable;
+        this.enterCloseEnable = enable;
         return this;
     }
 
@@ -105,6 +126,11 @@ class HiddenInputTextBase extends InputText {
     updateText() {
     }
 
+}
+
+const UpdateTextModes = {
+    everyTick: 0,
+    textChange: 1
 }
 
 export default HiddenInputTextBase;
