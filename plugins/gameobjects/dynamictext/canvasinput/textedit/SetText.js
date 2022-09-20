@@ -1,4 +1,4 @@
-import { diffChars as DiffChars } from 'diff';
+import * as Diff from 'diff';
 
 var SetText = function (textObject, newText) {
     var text = textObject.text;
@@ -8,7 +8,7 @@ var SetText = function (textObject, newText) {
 
     // textObject.setText(newText);
 
-    var results = DiffChars(text, newText);
+    var results = Diff.diffChars(text, newText);
     var charIndex = 0;
     for (var i = 0, cnt = results.length; i < cnt; i++) {
         var result = results[i];
@@ -18,6 +18,9 @@ var SetText = function (textObject, newText) {
         } else if (result.added) {
             textObject.insertText(charIndex, result.value);
             charIndex += result.count;
+
+            var addedChild = textObject.lastAppendedChildren[0];
+            textObject.emit('addchar', addedChild, textObject);
         } else {
             charIndex += result.count;
         }

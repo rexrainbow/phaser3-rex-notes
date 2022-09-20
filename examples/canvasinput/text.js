@@ -27,27 +27,32 @@ class Demo extends Phaser.Scene {
                 },
                 padding: 20,
                 style: {
-                    fontSize: '16px',
+                    fontSize: '20px',
                 },
 
                 wrap: {
                     lineHeight: 40,
                     maxLines: 0,       // Set maxLines to 0
-                    letterSpacing: 0,
+                    letterSpacing: 1,
                     padding: { bottom: 10 },
                 },
 
-                input: {
+                edit: {
                     onOpen(textObject) {
                         textObject.setBackgroundStroke('red')
                     },
-        
+
                     onClose(textObject) {
                         textObject.setBackgroundStroke('white')
                     }
                 }
             }
         )
+            .on('addchar', function (child) {
+                child
+                    .setAngle((Math.random() - 0.5) * 30)
+                    .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
+            })
 
     }
 

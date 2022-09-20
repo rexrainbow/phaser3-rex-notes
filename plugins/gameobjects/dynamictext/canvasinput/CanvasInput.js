@@ -15,7 +15,7 @@ class CanvasInput extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
-        this.textEdit = new HiddenInputText(this, GetValue(config, 'input'));
+        this.textEdit = new HiddenInputText(this, GetValue(config, 'edit'));
     }
 
 }
