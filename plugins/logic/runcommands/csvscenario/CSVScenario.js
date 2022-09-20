@@ -250,11 +250,11 @@ class CSVScenario {
     }
 
     get lastLabel() {
-        return this.cmdHandlers.labelCmd.lastLabel;
+        return this.cmdHandlers.cmds.label.lastLabel;
     }
 
     get previousLabel() {
-        return this.cmdHandlers.labelCmd.preLabel;
+        return this.cmdHandlers.cmds.label.prevLabel;
     }
 
     getCmdHandler(name) {
