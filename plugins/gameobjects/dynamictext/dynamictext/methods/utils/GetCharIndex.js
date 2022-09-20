@@ -1,27 +1,27 @@
 import { IsChar } from '../../bob/Types.js';
 
-var GetCharDataIndex = function (charIndex, activeOnly) {
+var GetCharIndex = function (childIndex, activeOnly) {
     if (activeOnly === undefined) {
         activeOnly = true;
     }
 
     var children = this.children;
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
+    if (childIndex >= children.length) {
+        childIndex = children.length;
+    }
+    var charIndex = 0;
+    for (var i = 0; i < childIndex; i++) {
         var child = children[i];
         if (activeOnly && !child.active) {
             continue;
         }
 
         if (IsChar(child) && !child.removed) {
-            if (charIndex === 0) {
-                return i;
-            } else {
-                charIndex--;
-            }
+            charIndex++;
         }
     }
 
-    return undefined;
+    return charIndex;
 }
 
-export default GetCharDataIndex;
+export default GetCharIndex;

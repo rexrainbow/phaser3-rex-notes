@@ -23,12 +23,10 @@ class CanvasInput extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
+        this.setChildrenInteractiveEnable(true);  // Fire 'child.pointerdown' event
         this.textEdit = new HiddenInputText(this, GetValue(config, 'edit'));
 
-        var onAddCharCallback = GetValue(config, 'onAddChar');
-        if (onAddCharCallback) {
-            this.on('addchar', onAddCharCallback);
-        }
+        this.onAddCharCallback = GetValue(config, 'onAddChar');
 
         if (text) {
             this.setText(text);
@@ -43,12 +41,12 @@ class CanvasInput extends DynamicText {
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
                 if (IsChar(child)) {
-                    this.emit('addchar', child, index + i);
+                    this.onAddCharCallback(child, index + i);
                 }
             }
         } else {
             if (IsChar(child)) {
-                this.emit('addchar', child, index);
+                this.onAddCharCallback(child, index);
             }
         }
 

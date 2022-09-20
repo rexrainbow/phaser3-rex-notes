@@ -26,7 +26,7 @@ class HiddenInputTextBase extends InputText {
         this.textObject = textObject;
         textObject
             .setInteractive()
-            .on('pointerdown', this.setFocus, this)
+            .on('pointerdown', this.open, this)
             .on('destroy', this.destroy, this);
 
 
@@ -35,7 +35,7 @@ class HiddenInputTextBase extends InputText {
                 this.initText();
 
                 if (this.enterCloseEnable) {
-                    this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
+                    this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
                 }
 
                 // There is no cursor-position-change event, 
@@ -64,7 +64,7 @@ class HiddenInputTextBase extends InputText {
     }
 
     preDestroy() {
-        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('pointerdown', this.open, this);
         this.textObject.off('destroy', this.destroy, this);
 
         this.scene.sys.events.off('postupdate', this.updateText, this);
@@ -76,7 +76,7 @@ class HiddenInputTextBase extends InputText {
 
     onClickOutside(pointer) {
         if (!IsPointerInHitArea(this.textObject, pointer)) {
-            this.setBlur();
+            this.close();
         }
     }
 
