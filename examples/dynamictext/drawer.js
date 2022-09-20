@@ -37,9 +37,9 @@ class Demo extends Phaser.Scene {
                 var width = canvas.width, height = canvas.height;
 
                 // Create gradient
-                var grd = context.createRadialGradient(width / 2, height / 2, 5, width / 2, height / 2, 100);
-                grd.addColorStop(0, "blue");
-                grd.addColorStop(1, "red");
+                var grd = context.createRadialGradient(width / 2, height / 2, 5, width / 2, height / 2, width / 3);
+                grd.addColorStop(0, 'black');
+                grd.addColorStop(1, 'gray');
 
                 // Fill with gradient
                 context.fillStyle = grd;
@@ -47,6 +47,12 @@ class Demo extends Phaser.Scene {
 
             }, true)
             .appendText('Phaser is a fast, free, and fun open source HTML5 game framework')
+            .appendSpace(10)
+            .appendDrawer(function () {
+                var context = this.context;
+                context.fillStyle = 'LightSkyBlue';
+                context.fillRect(0, 0, 10, 15);
+            }, 15, 15)
 
         var result = text.runWordWrap({
             lineHeight: 30,

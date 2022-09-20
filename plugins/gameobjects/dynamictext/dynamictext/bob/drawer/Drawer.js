@@ -65,6 +65,12 @@ class Drawer extends RenderBase {
         this.scaleY = (this.drawerHeight > 0) ? value / this.drawerHeight : 1;
     }
 
+    get offsetY() {
+        return -this.height;
+    }
+
+    set offsetY(value) { }
+
     get drawTLX() { return -this.leftSpace; }
     get drawTLY() { return 0; }
     get drawBLX() { return -this.leftSpace; }
