@@ -30,14 +30,13 @@ class HiddenInputText extends HiddenInputTextBase {
             }
         }
 
+        this.textObject.setText(text);
+
         var cursorPosition = this.cursorPosition;
         if (this.prevCursorPosition !== cursorPosition) {
-            this.textObject.emit('movecursor', cursorPosition);
+            this.textObject.emit('movecursor', cursorPosition, this.textObject);
             this.prevCursorPosition = cursorPosition;
         }
-
-
-        this.textObject.setText(text);
 
         return this;
     }

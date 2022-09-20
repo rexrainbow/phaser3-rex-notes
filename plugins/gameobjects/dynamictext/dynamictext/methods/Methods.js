@@ -11,6 +11,7 @@ import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import InsertText from './InsertText.js';
 import RemoveText from './RemoveText.js';
+import ForEachCharChild from './ForEachCharChild.js';
 import GetText from './GetText.js';
 import AppendImage from './AppendImage.js';
 import AppendDrawer from './AppendDrawer.js';
@@ -22,6 +23,7 @@ import RunVerticalWrap from './RunVerticalWrap.js';
 import RenderContent from './RenderContent.js';
 import GetChildren from './GetChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
+import GetCharChildren from './GetCharChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import SetToMinSize from './SetToMinSize.js';
 import GetCharDataIndex from './GetCharDataIndex.js';
@@ -49,6 +51,7 @@ var Methods = {
     appendText: AppendText,
     insertText: InsertText,
     removeText: RemoveText,
+    forEachCharChild: ForEachCharChild,
     getText: GetText,
     appendImage: AppendImage,
     appendDrawer: AppendDrawer,
@@ -62,6 +65,7 @@ var Methods = {
 
     getChildren: GetChildren,
     getActiveChildren: GetActiveChildren,
+    getCharChildren: GetCharChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
 
     setToMinSize: SetToMinSize,

@@ -49,12 +49,12 @@ class CanvasInput extends DynamicText {
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
                 if (IsChar(child)) {
-                    this.emit('addChar', child, index + i);
+                    this.emit('addChar', child, index + i, this);
                 }
             }
         } else {
             if (IsChar(child)) {
-                this.emit('addChar', child, index);
+                this.emit('addChar', child, index, this);
             }
         }
 

@@ -53,8 +53,22 @@ class Demo extends Phaser.Scene {
                         .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
                 },
 
-                onMoveCursor(cursorIndex) {
-                    console.log(cursorIndex)
+                onMoveCursor(cursorIndex, textObject) {
+                    var children = textObject.getCharChildren();
+                    for (var i = 0, cnt = children.length; i < cnt; i++) {
+                        var child = children[i];
+                        if (i === cursorIndex) {
+                            child.modifyStyle({
+                                color: 'black',
+                                backgroundColor: 'white'
+                            })
+                        } else {
+                            child.modifyStyle({
+                                color: 'white',
+                                backgroundColor: null
+                            })
+                        }
+                    }
                 },
 
                 text: 'Phaser',

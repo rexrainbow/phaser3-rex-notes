@@ -11975,6 +11975,17 @@
         return this;
       }
     }, {
+      key: "setBackgroundColor",
+      value: function setBackgroundColor(color) {
+        this.backgroundColor = GetStyle(color);
+        return this;
+      }
+    }, {
+      key: "hasBackgroundColor",
+      get: function get() {
+        return this.backgroundColor != null;
+      }
+    }, {
       key: "setOffsetX",
       value: function setOffsetX(offsetX) {
         if (offsetX === undefined) {
@@ -12031,17 +12042,6 @@
       value: function setAlign(align) {
         this.align = align;
         return this;
-      }
-    }, {
-      key: "setBackgroundColor",
-      value: function setBackgroundColor(color) {
-        this.backgroundColor = GetStyle(color);
-        return this;
-      }
-    }, {
-      key: "hasBackgroundColor",
-      get: function get() {
-        return this.backgroundColor != null;
       }
     }, {
       key: "syncFont",
@@ -12548,13 +12548,12 @@
     return this;
   };
 
-  var GetText = function GetText(activeOnly) {
+  var ForEachCharChild = function ForEachCharChild(callback, scope, activeOnly) {
     if (activeOnly === undefined) {
       activeOnly = true;
     }
 
     var children = this.children;
-    var text = '';
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
@@ -12564,10 +12563,28 @@
       }
 
       if (IsChar(child) && !child.removed) {
-        text += child.text;
+        var isBreak;
+
+        if (scope) {
+          isBreak = callback.call(this, child, i, children);
+        } else {
+          isBreak = callback(child, i, children);
+        }
+
+        if (isBreak) {
+          break;
+        }
       }
     }
 
+    return this;
+  };
+
+  var GetText = function GetText(activeOnly) {
+    var text = '';
+    this.forEachCharChild(function (child) {
+      text += child.text;
+    }, undefined, activeOnly);
     return text;
   };
 
@@ -13658,6 +13675,17 @@
     return GetAll(this.children, 'active', true);
   };
 
+  var GetCharChildren = function GetCharChildren(activeOnly, out) {
+    if (out === undefined) {
+      out = [];
+    }
+
+    this.forEachCharChild(function (child) {
+      out.push(child);
+    }, undefined, activeOnly);
+    return out;
+  };
+
   var GetLastAppendedChildren = function GetLastAppendedChildren() {
     return this.lastAppendedChildren;
   };
@@ -13949,6 +13977,7 @@
     appendText: AppendText$1,
     insertText: InsertText,
     removeText: RemoveText,
+    forEachCharChild: ForEachCharChild,
     getText: GetText,
     appendImage: AppendImage,
     appendDrawer: AppendDrawer,
@@ -13960,6 +13989,7 @@
     renderContent: RenderContent,
     getChildren: GetChildren,
     getActiveChildren: GetActiveChildren,
+    getCharChildren: GetCharChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     setToMinSize: SetToMinSize,
     getCharDataIndex: GetCharDataIndex,

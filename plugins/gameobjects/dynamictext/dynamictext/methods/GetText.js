@@ -1,23 +1,8 @@
-import { IsChar } from '../bob/Types.js';
-
 var GetText = function (activeOnly) {
-    if (activeOnly === undefined) {
-        activeOnly = true;
-    }
-
-    var children = this.children;
-    var text = '';
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-        var child = children[i];
-
-        if (activeOnly && !child.active) {
-            continue;
-        }
-
-        if (IsChar(child) && !child.removed) {
-            text += child.text;
-        }
-    }
+    var text = ''
+    this.forEachCharChild(function (child) {
+        text += child.text;
+    }, undefined, activeOnly);
     return text;
 }
 
