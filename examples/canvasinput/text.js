@@ -44,6 +44,13 @@ class Demo extends Phaser.Scene {
 
                     onClose(textObject) {
                         textObject.setBackgroundStroke('white')
+
+                        textObject.forEachCharChild(function (child) {
+                            child.modifyStyle({
+                                color: 'white',
+                                backgroundColor: null
+                            })
+                        })
                     }
                 },
 
@@ -54,9 +61,7 @@ class Demo extends Phaser.Scene {
                 },
 
                 onMoveCursor(cursorIndex, textObject) {
-                    var children = textObject.getCharChildren();
-                    for (var i = 0, cnt = children.length; i < cnt; i++) {
-                        var child = children[i];
+                    textObject.forEachCharChild(function (child, i) {
                         if (i === cursorIndex) {
                             child.modifyStyle({
                                 color: 'black',
@@ -68,7 +73,7 @@ class Demo extends Phaser.Scene {
                                 backgroundColor: null
                             })
                         }
-                    }
+                    })
                 },
 
                 text: 'Phaser',
