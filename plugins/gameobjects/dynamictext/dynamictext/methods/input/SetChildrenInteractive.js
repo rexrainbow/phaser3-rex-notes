@@ -20,12 +20,12 @@ var OnPointerDown = function (pointer, localX, localY, event) {
         return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
-    if (!child) {
+    var result = GetFirstChildContains(this.children, localX, localY);
+    if (!result.child) {
         return;
     }
 
-    this.emit('child.pointerdown', child, pointer, localX, localY, event);
+    this.emit('child.pointerdown', result.child, result.index, pointer, localX, localY, event);
 }
 
 var OnPointerUp = function (pointer, localX, localY, event) {
@@ -33,12 +33,12 @@ var OnPointerUp = function (pointer, localX, localY, event) {
         return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
-    if (!child) {
+    var result = GetFirstChildContains(this.children, localX, localY);
+    if (!result.child) {
         return;
     }
 
-    this.emit('child.pointerup', child, pointer, localX, localY, event);
+    this.emit('child.pointerup', result.child, result.index, pointer, localX, localY, event);
 }
 
 var OnAreaOverOut = function (pointer, localX, localY, event) {
@@ -54,17 +54,18 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
         return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
-    if (child === this.lastOverChild) {
+    var result = GetFirstChildContains(this.children, localX, localY);
+    if (!result.child) {
         return;
     }
 
     if (this.lastOverChild !== null) {
-        this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+        var lastOverChild = this.children.indexOf(this.lastOverChild);
+        this.emit('child.pointerout', this.lastOverChild, lastOverChild, pointer, localX, localY, event);
     }
 
     if (child !== null) {
-        this.emit('child.pointerover', child, pointer, localX, localY, event);
+        this.emit('child.pointerover', result.child, result.index, pointer, localX, localY, event);
     }
 
     this.lastOverChild = child;

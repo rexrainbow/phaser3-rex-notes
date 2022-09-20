@@ -25,9 +25,9 @@ class HiddenInputTextBase extends InputText {
 
         this.textObject = textObject;
         textObject
-            .setInteractive()
             .on('pointerdown', this.open, this)
-            .on('destroy', this.destroy, this);
+            .on('destroy', this.destroy, this)
+            .setInteractive()
 
 
         this

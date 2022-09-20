@@ -31,9 +31,10 @@ var OnTouchPad = function (pointer, localX, localY) {
 
 var InstallEvents = function () {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive()
+    knob
         .on('pointerdown', OnTouchPad, this)
-        .on('pointermove', OnTouchPad, this);
+        .on('pointermove', OnTouchPad, this)
+        .setInteractive()
 }
 
 export default InstallEvents;

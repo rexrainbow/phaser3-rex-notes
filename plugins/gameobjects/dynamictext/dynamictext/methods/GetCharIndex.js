@@ -1,6 +1,13 @@
-import { IsChar } from '../../bob/Types.js';
+import { IsChar } from '../bob/Types.js';
 
 var GetCharIndex = function (childIndex, activeOnly) {
+    if (typeof (childIndex) !== 'number') {
+        childIndex = this.children.indexOf(childIndex);
+        if (childIndex < 0) {
+            return null;
+        }
+    }
+
     if (activeOnly === undefined) {
         activeOnly = true;
     }

@@ -74,7 +74,7 @@ class Slider extends Sizer {
                 }
                 break;
             case 1: // 'click'
-                this.setInteractive()
+                this
                     .on('pointerdown', OnTouchTrack, this)
                     .on('pointermove', OnTouchTrack, this)
                     .on('pointerdown', function (pointer) {
@@ -93,6 +93,8 @@ class Slider extends Sizer {
                             this.eventEmitter.emit('inputend', pointer);
                         }
                     }, this)
+                    .setInteractive()
+
                 break;
         }
 

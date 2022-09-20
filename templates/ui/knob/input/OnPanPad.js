@@ -77,10 +77,11 @@ const TOUCH1 = 1;
 
 var InstallEvents = function () {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive()
+    knob
         .on('pointerdown', OnPointerDown, this)
         .on('pointermove', OnPointerMove, this)
-        .on('pointerup', OnPointerUp, this);
+        .on('pointerup', OnPointerUp, this)
+        .setInteractive()
 
     this.panPointer = undefined;
     this.panState = TOUCH0;

@@ -1,4 +1,4 @@
-import { IsChar } from '../../bob/Types.js';
+import { IsChar } from '../bob/Types.js';
 
 var GetCharDataIndex = function (charIndex, activeOnly) {
     if (activeOnly === undefined) {

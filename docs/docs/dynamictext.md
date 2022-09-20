@@ -698,21 +698,21 @@ txt.setToMinSize();
     ```
 - Pointer down/up on child
     ```javascript
-    txt.on('child.pointerdown', function(child, pointer, localX, localY, event) {        
+    txt.on('child.pointerdown', function(child, childIndex, pointer, localX, localY, event) {        
     })
     ```
     ```javascript
-    txt.on('child.pointerup', function(child, pointer, localX, localY, event) {        
+    txt.on('child.pointerup', function(child, childIndex, pointer, localX, localY, event) {        
     })
     ```
     - `child` : Any [Character](dynamictext.md#character) or [Image](dynamictext.md#image) child
 - Pointer over/out on child
     ```javascript
-    txt.on('child.pointerover', function(child, pointer, localX, localY, event) {        
+    txt.on('child.pointerover', function(child, childIndex, pointer, localX, localY, event) {        
     })
     ```
     ```javascript
-    txt.on('child.pointerout', function(child, pointer, localX, localY, event) {        
+    txt.on('child.pointerout', function(child, childIndex, pointer, localX, localY, event) {        
     })
     ```
     - `child` : Any [Character](dynamictext.md#character) or [Image](dynamictext.md#image) child

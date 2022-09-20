@@ -1,16 +1,27 @@
-var GetFirstChildContains = function (x, y) {
-    var children = this.children;
+var GetFirstChildContains = function (children, x, y) {
+    if (Result === undefined) {
+        Result = {};
+    }
+
+    Result.child = null;
+    Result.index = -1;
+
+    var children = children;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
         if (!child.active || !child.renderable) {
             continue;
         }
         if (child.contains(x, y)) {
-            return child;
+            Result.child = child;
+            Result.index = i;
+            break;
         }
     }
 
-    return null;
+    return Result;
 }
+
+var Result;
 
 export default GetFirstChildContains;
