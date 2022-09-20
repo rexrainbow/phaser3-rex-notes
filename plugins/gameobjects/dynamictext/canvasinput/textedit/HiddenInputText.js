@@ -1,5 +1,4 @@
 import HiddenInputTextBase from '../../../dom/hiddeninputtext/HiddenInputTextBase.js';
-import SetText from './SetText.js';
 
 class HiddenInputText extends HiddenInputTextBase {
     constructor(textObject, config) {
@@ -23,7 +22,7 @@ class HiddenInputText extends HiddenInputTextBase {
             }
         }
 
-        SetText(this.textObject, text);
+        this.textObject.setText(text);
 
         return this;
     }

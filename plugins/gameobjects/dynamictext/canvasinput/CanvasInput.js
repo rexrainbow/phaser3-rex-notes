@@ -31,7 +31,7 @@ class CanvasInput extends DynamicText {
         }
 
         if (text) {
-            SetText(this, text);
+            this.setText(text);
         }
     }
 
@@ -52,6 +52,11 @@ class CanvasInput extends DynamicText {
             }
         }
 
+        return this;
+    }
+
+    setText(text) {
+        SetText(this, text);
         return this;
     }
 }
