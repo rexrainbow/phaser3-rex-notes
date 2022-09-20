@@ -1277,12 +1277,12 @@
     }, {
       key: "lastLabel",
       get: function get() {
-        return this.cmdHandlers.labelCmd.lastLabel;
+        return this.cmdHandlers.cmds.label.lastLabel;
       }
     }, {
       key: "previousLabel",
       get: function get() {
-        return this.cmdHandlers.labelCmd.preLabel;
+        return this.cmdHandlers.cmds.label.prevLabel;
       }
     }, {
       key: "getCmdHandler",

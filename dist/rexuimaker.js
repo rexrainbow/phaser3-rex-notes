@@ -27000,7 +27000,7 @@
 
         case 1:
           // 'click'
-          _this.setInteractive().on('pointerdown', OnTouchTrack, _assertThisInitialized(_this)).on('pointermove', OnTouchTrack, _assertThisInitialized(_this)).on('pointerdown', function (pointer) {
+          _this.on('pointerdown', OnTouchTrack, _assertThisInitialized(_this)).on('pointermove', OnTouchTrack, _assertThisInitialized(_this)).on('pointerdown', function (pointer) {
             this.eventEmitter.emit('inputstart', pointer);
           }, _assertThisInitialized(_this)).on('pointerup', function (pointer) {
             this.eventEmitter.emit('inputend', pointer);
@@ -27012,7 +27012,7 @@
             if (pointer.isDown) {
               this.eventEmitter.emit('inputend', pointer);
             }
-          }, _assertThisInitialized(_this));
+          }, _assertThisInitialized(_this)).setInteractive();
 
           break;
       }
@@ -32073,7 +32073,7 @@
 
   var InstallEvents$1 = function InstallEvents() {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive().on('pointerdown', OnTouchPad, this).on('pointermove', OnTouchPad, this);
+    knob.on('pointerdown', OnTouchPad, this).on('pointermove', OnTouchPad, this).setInteractive();
   };
 
   var GetAngle = Phaser.Math.Angle.Between;
@@ -32158,7 +32158,7 @@
 
   var InstallEvents = function InstallEvents() {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive().on('pointerdown', OnPointerDown, this).on('pointermove', OnPointerMove, this).on('pointerup', OnPointerUp, this);
+    knob.on('pointerdown', OnPointerDown, this).on('pointermove', OnPointerMove, this).on('pointerup', OnPointerUp, this).setInteractive();
     this.panPointer = undefined;
     this.panState = TOUCH0;
   };

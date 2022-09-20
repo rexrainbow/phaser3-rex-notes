@@ -55,6 +55,7 @@ class TextStyle {
             GetValue(o, 'rightSpace', 0)
         );
         this.setAlign(GetValue(o, 'align', undefined));
+        this.setBackgroundColor(GetValue(o, 'backgroundColor', null));
 
         return this;
     }
@@ -113,6 +114,10 @@ class TextStyle {
 
         if (o.hasOwnProperty('align')) {
             this.setAlign(o.align);
+        }
+
+        if (o.hasOwnProperty('backgroundColor')) {
+            this.setBackgroundColor(o.backgroundColor);
         }
 
         return this;
@@ -242,6 +247,15 @@ class TextStyle {
         return this;
     }
 
+    setBackgroundColor(color) {
+        this.backgroundColor = GetStyle(color);
+        return this;
+    }
+
+    get hasBackgroundColor() {
+        return this.backgroundColor != null;
+    }
+
     setOffsetX(offsetX) {
         if (offsetX === undefined) {
             offsetX = 0
@@ -291,6 +305,7 @@ class TextStyle {
             .setRightSpace(rightSpace);
         return this;
     }
+
     setAlign(align) {
         this.align = align;
         return this;

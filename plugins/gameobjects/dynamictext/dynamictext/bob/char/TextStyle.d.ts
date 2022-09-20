@@ -10,6 +10,7 @@ export interface IConfigTextStyle {
     shadowOffsetX?: number,
     shadowOffsetY?: number,
     shadowBlur?: number,
+    backgroundColor?: string | number | null,
     offsetX?: number,
     offsetY?: number,
     leftSpace?: number,
@@ -55,6 +56,8 @@ export default class TextStyle {
         offsetY?: number,
         blur?: number
     ): this;
+
+    setBackgroundColor(color?: number | string | null): this;
 
     setOffsetX(offsetX?: number): this;
     offsetX: number;

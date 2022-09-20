@@ -11528,7 +11528,7 @@
 
   var InstallEvents$1 = function InstallEvents() {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive().on('pointerdown', OnTouchPad, this).on('pointermove', OnTouchPad, this);
+    knob.on('pointerdown', OnTouchPad, this).on('pointermove', OnTouchPad, this).setInteractive();
   };
 
   var GetAngle = Phaser.Math.Angle.Between;
@@ -11613,7 +11613,7 @@
 
   var InstallEvents = function InstallEvents() {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive().on('pointerdown', OnPointerDown, this).on('pointermove', OnPointerMove, this).on('pointerup', OnPointerUp, this);
+    knob.on('pointerdown', OnPointerDown, this).on('pointermove', OnPointerMove, this).on('pointerup', OnPointerUp, this).setInteractive();
     this.panPointer = undefined;
     this.panState = TOUCH0;
   };

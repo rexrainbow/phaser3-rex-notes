@@ -660,13 +660,13 @@
       _this.onCloseCallback = GetValue$1(config, 'onClose', undefined);
       _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
       _this.textObject = textObject;
-      textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
+      textObject.on('pointerdown', _this.open, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this)).setInteractive();
 
       _this.on('focus', function () {
         this.initText();
 
         if (this.enterCloseEnable) {
-          this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
+          this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
         } // There is no cursor-position-change event, 
         // so updating cursor position every tick
 
@@ -693,7 +693,7 @@
     _createClass(HiddenInputTextBase, [{
       key: "preDestroy",
       value: function preDestroy() {
-        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('pointerdown', this.open, this);
         this.textObject.off('destroy', this.destroy, this);
         this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
@@ -704,7 +704,7 @@
       key: "onClickOutside",
       value: function onClickOutside(pointer) {
         if (!IsPointerInHitArea(this.textObject, pointer)) {
-          this.setBlur();
+          this.close();
         }
       }
     }, {

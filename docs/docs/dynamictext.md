@@ -592,6 +592,7 @@ txt.setWrapConfig(config);
         var shadowBlur = char.style.shadowBlur;
         var shadowOffsetX = char.style.shadowOffsetX;
         var shadowOffsetY = char.style.shadowOffsetY;
+        var backgroundColor = char.style.backgroundColor;
         var xOffset = char.style.x;
         var yOffset = char.style.y;
         ```
@@ -609,6 +610,7 @@ txt.setWrapConfig(config);
             // shadowBlur: 0,
             // shadowOffsetX: 0,
             // shadowOffsetY: 0,
+            // backgroundColor: null,
             // offsetX: 0,
             // offsetY: 0
         })
@@ -645,6 +647,10 @@ txt.setWrapConfig(config);
         ```
         ```javascript
         char.setShadowBlur(blur);
+        ```
+        ```javascript
+        char.setBackgroundColor(color);
+        // char.setBackgroundColor();  // No shadow
         ```
         ```javascript
         char.setOffsetX(offsetX);

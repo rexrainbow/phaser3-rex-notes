@@ -8176,13 +8176,13 @@
       _this.onCloseCallback = GetValue$29(config, 'onClose', undefined);
       _this.onUpdateCallback = GetValue$29(config, 'onUpdate', undefined);
       _this.textObject = textObject;
-      textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
+      textObject.on('pointerdown', _this.open, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this)).setInteractive();
 
       _this.on('focus', function () {
         this.initText();
 
         if (this.enterCloseEnable) {
-          this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
+          this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
         } // There is no cursor-position-change event, 
         // so updating cursor position every tick
 
@@ -8209,7 +8209,7 @@
     _createClass(HiddenInputTextBase, [{
       key: "preDestroy",
       value: function preDestroy() {
-        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('pointerdown', this.open, this);
         this.textObject.off('destroy', this.destroy, this);
         this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
@@ -8220,7 +8220,7 @@
       key: "onClickOutside",
       value: function onClickOutside(pointer) {
         if (!IsPointerInHitArea(this.textObject, pointer)) {
-          this.setBlur();
+          this.close();
         }
       }
     }, {
@@ -11761,6 +11761,7 @@
         this.setOffset(GetValue$1Z(o, 'offsetX', 0), GetValue$1Z(o, 'offsetY', 0));
         this.setSpace(GetValue$1Z(o, 'leftSpace', 0), GetValue$1Z(o, 'rightSpace', 0));
         this.setAlign(GetValue$1Z(o, 'align', undefined));
+        this.setBackgroundColor(GetValue$1Z(o, 'backgroundColor', null));
         return this;
       }
     }, {
@@ -11820,6 +11821,10 @@
 
         if (o.hasOwnProperty('align')) {
           this.setAlign(o.align);
+        }
+
+        if (o.hasOwnProperty('backgroundColor')) {
+          this.setBackgroundColor(o.backgroundColor);
         }
 
         return this;
@@ -12026,6 +12031,17 @@
       value: function setAlign(align) {
         this.align = align;
         return this;
+      }
+    }, {
+      key: "setBackgroundColor",
+      value: function setBackgroundColor(color) {
+        this.backgroundColor = GetStyle(color);
+        return this;
+      }
+    }, {
+      key: "hasBackgroundColor",
+      get: function get() {
+        return this.backgroundColor != null;
       }
     }, {
       key: "syncFont",
@@ -12386,7 +12402,18 @@
     }, {
       key: "renderContent",
       value: function renderContent() {
+        var context = this.context;
         var textStyle = this.style;
+
+        if (textStyle.hasBackgroundColor) {
+          context.fillStyle = textStyle.backgroundColor;
+          var x = this.drawTLX,
+              y = this.drawTLY,
+              width = this.drawTRX - x,
+              height = this.drawBLY - y;
+          context.fillRect(x, y, width, height);
+        }
+
         var hasFill = textStyle.hasFill,
             hasStroke = textStyle.hasStroke;
 
@@ -12394,7 +12421,6 @@
           return;
         }
 
-        var context = this.context;
         textStyle.syncFont(context).syncStyle(context); // textBaseline = 'alphabetic'
 
         if (hasStroke) {
@@ -12497,35 +12523,9 @@
     return this;
   };
 
-  var GetCharDataIndex = function GetCharDataIndex(textIndex, activeOnly) {
-    if (activeOnly === undefined) {
-      activeOnly = true;
-    }
-
-    var children = this.children;
-
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-
-      if (activeOnly && !child.active) {
-        continue;
-      }
-
-      if (IsChar(child) && !child.removed) {
-        if (textIndex === 0) {
-          return i;
-        } else {
-          textIndex--;
-        }
-      }
-    }
-
-    return undefined;
-  };
-
   var InsertText = function InsertText(index, text, style) {
     var bobArray = CreateCharBobArray.call(this, text, style);
-    index = GetCharDataIndex.call(this, index, true);
+    index = this.getCharDataIndex(index, true);
     this.addChild(bobArray, index);
     return this;
   };
@@ -12536,7 +12536,7 @@
     }
 
     for (var i = 0; i < length; i++) {
-      var childIndex = GetCharDataIndex.call(this, index, true);
+      var childIndex = this.getCharDataIndex(index, true);
 
       if (childIndex === undefined) {
         break;
@@ -13692,6 +13692,68 @@
     return this;
   };
 
+  var GetCharDataIndex = function GetCharDataIndex(charIndex, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child) && !child.removed) {
+        if (charIndex === 0) {
+          return i;
+        } else {
+          charIndex--;
+        }
+      }
+    }
+
+    return undefined;
+  };
+
+  var GetCharIndex = function GetCharIndex(childIndex, activeOnly) {
+    if (typeof childIndex !== 'number') {
+      childIndex = this.children.indexOf(childIndex);
+
+      if (childIndex < 0) {
+        return null;
+      }
+    }
+
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+
+    if (childIndex >= children.length) {
+      childIndex = children.length;
+    }
+
+    var charIndex = 0;
+
+    for (var i = 0; i < childIndex; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child) && !child.removed) {
+        charIndex++;
+      }
+    }
+
+    return charIndex;
+  };
+
   var SetChildrenInteractiveEnable = function SetChildrenInteractiveEnable(enable) {
     if (enable === undefined) {
       enable = true;
@@ -13705,8 +13767,14 @@
     return this;
   };
 
-  var GetFirstChildContains = function GetFirstChildContains(x, y) {
-    var children = this.children;
+  var GetFirstChildContains = function GetFirstChildContains(children, x, y) {
+    if (Result === undefined) {
+      Result = {};
+    }
+
+    Result.child = null;
+    Result.index = -1;
+    var children = children;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
@@ -13716,12 +13784,16 @@
       }
 
       if (child.contains(x, y)) {
-        return child;
+        Result.child = child;
+        Result.index = i;
+        break;
       }
     }
 
-    return null;
+    return Result;
   };
+
+  var Result;
 
   var SetChildrenInteractive$1 = function SetChildrenInteractive() {
     this.on('pointerdown', OnPointerDown$1, this).on('pointerdown', OnPointerUp$1, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
@@ -13735,13 +13807,13 @@
       return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);
 
-    if (!child) {
+    if (!result.child) {
       return;
     }
 
-    this.emit('child.pointerdown', child, pointer, localX, localY, event);
+    this.emit('child.pointerdown', result.child, result.index, pointer, localX, localY, event);
   };
 
   var OnPointerUp$1 = function OnPointerUp(pointer, localX, localY, event) {
@@ -13749,13 +13821,13 @@
       return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);
 
-    if (!child) {
+    if (!result.child) {
       return;
     }
 
-    this.emit('child.pointerup', child, pointer, localX, localY, event);
+    this.emit('child.pointerup', result.child, result.index, pointer, localX, localY, event);
   };
 
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
@@ -13773,21 +13845,22 @@
       return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);
 
-    if (child === this.lastOverChild) {
+    if (!result.child) {
       return;
     }
 
     if (this.lastOverChild !== null) {
-      this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+      var lastOverChild = this.children.indexOf(this.lastOverChild);
+      this.emit('child.pointerout', this.lastOverChild, lastOverChild, pointer, localX, localY, event);
     }
 
-    if (child !== null) {
-      this.emit('child.pointerover', child, pointer, localX, localY, event);
+    if (result.child !== null) {
+      this.emit('child.pointerover', result.child, result.index, pointer, localX, localY, event);
     }
 
-    this.lastOverChild = child;
+    this.lastOverChild = result.child;
   };
 
   var GameObject = Phaser.GameObjects.GameObject;
@@ -13889,6 +13962,8 @@
     getActiveChildren: GetActiveChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     setToMinSize: SetToMinSize,
+    getCharDataIndex: GetCharDataIndex,
+    getCharIndex: GetCharIndex,
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
@@ -29337,7 +29412,7 @@
 
   var InstallEvents$1 = function InstallEvents() {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive().on('pointerdown', OnTouchPad, this).on('pointermove', OnTouchPad, this);
+    knob.on('pointerdown', OnTouchPad, this).on('pointermove', OnTouchPad, this).setInteractive();
   };
 
   var GetAngle = Phaser.Math.Angle.Between;
@@ -29422,7 +29497,7 @@
 
   var InstallEvents = function InstallEvents() {
     var knob = this.sizerChildren.knob;
-    knob.setInteractive().on('pointerdown', OnPointerDown, this).on('pointermove', OnPointerMove, this).on('pointerup', OnPointerUp, this);
+    knob.on('pointerdown', OnPointerDown, this).on('pointermove', OnPointerMove, this).on('pointerup', OnPointerUp, this).setInteractive();
     this.panPointer = undefined;
     this.panState = TOUCH0;
   };
@@ -36515,7 +36590,7 @@
 
         case 1:
           // 'click'
-          _this.setInteractive().on('pointerdown', OnTouchTrack, _assertThisInitialized(_this)).on('pointermove', OnTouchTrack, _assertThisInitialized(_this)).on('pointerdown', function (pointer) {
+          _this.on('pointerdown', OnTouchTrack, _assertThisInitialized(_this)).on('pointermove', OnTouchTrack, _assertThisInitialized(_this)).on('pointerdown', function (pointer) {
             this.eventEmitter.emit('inputstart', pointer);
           }, _assertThisInitialized(_this)).on('pointerup', function (pointer) {
             this.eventEmitter.emit('inputend', pointer);
@@ -36527,7 +36602,7 @@
             if (pointer.isDown) {
               this.eventEmitter.emit('inputend', pointer);
             }
-          }, _assertThisInitialized(_this));
+          }, _assertThisInitialized(_this)).setInteractive();
 
           break;
       }

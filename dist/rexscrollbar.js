@@ -10958,7 +10958,7 @@
 
         case 1:
           // 'click'
-          _this.setInteractive().on('pointerdown', OnTouchTrack, _assertThisInitialized(_this)).on('pointermove', OnTouchTrack, _assertThisInitialized(_this)).on('pointerdown', function (pointer) {
+          _this.on('pointerdown', OnTouchTrack, _assertThisInitialized(_this)).on('pointermove', OnTouchTrack, _assertThisInitialized(_this)).on('pointerdown', function (pointer) {
             this.eventEmitter.emit('inputstart', pointer);
           }, _assertThisInitialized(_this)).on('pointerup', function (pointer) {
             this.eventEmitter.emit('inputend', pointer);
@@ -10970,7 +10970,7 @@
             if (pointer.isDown) {
               this.eventEmitter.emit('inputend', pointer);
             }
-          }, _assertThisInitialized(_this));
+          }, _assertThisInitialized(_this)).setInteractive();
 
           break;
       }

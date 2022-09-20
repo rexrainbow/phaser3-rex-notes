@@ -22,6 +22,8 @@ class Demo extends Phaser.Scene {
                     cornerRadius: 20
                 },
                 style: {
+                    color: 'white',
+                    backgroundColor: null,
                     fontSize: '60px',
                 },
 
@@ -73,12 +75,14 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('child.pointerover', function (child) {
                 child.modifyStyle({
-                    color: 'green'
+                    color: 'black',
+                    backgroundColor: 'white'
                 })
             })
             .on('child.pointerout', function (child) {
                 child.modifyStyle({
-                    color: 'white'
+                    color: 'white',
+                    backgroundColor: null
                 })
             })
     }

@@ -2155,6 +2155,7 @@
         this.setOffset(GetValue$3(o, 'offsetX', 0), GetValue$3(o, 'offsetY', 0));
         this.setSpace(GetValue$3(o, 'leftSpace', 0), GetValue$3(o, 'rightSpace', 0));
         this.setAlign(GetValue$3(o, 'align', undefined));
+        this.setBackgroundColor(GetValue$3(o, 'backgroundColor', null));
         return this;
       }
     }, {
@@ -2214,6 +2215,10 @@
 
         if (o.hasOwnProperty('align')) {
           this.setAlign(o.align);
+        }
+
+        if (o.hasOwnProperty('backgroundColor')) {
+          this.setBackgroundColor(o.backgroundColor);
         }
 
         return this;
@@ -2420,6 +2425,17 @@
       value: function setAlign(align) {
         this.align = align;
         return this;
+      }
+    }, {
+      key: "setBackgroundColor",
+      value: function setBackgroundColor(color) {
+        this.backgroundColor = GetStyle(color);
+        return this;
+      }
+    }, {
+      key: "hasBackgroundColor",
+      get: function get() {
+        return this.backgroundColor != null;
       }
     }, {
       key: "syncFont",
@@ -2772,7 +2788,18 @@
     }, {
       key: "renderContent",
       value: function renderContent() {
+        var context = this.context;
         var textStyle = this.style;
+
+        if (textStyle.hasBackgroundColor) {
+          context.fillStyle = textStyle.backgroundColor;
+          var x = this.drawTLX,
+              y = this.drawTLY,
+              width = this.drawTRX - x,
+              height = this.drawBLY - y;
+          context.fillRect(x, y, width, height);
+        }
+
         var hasFill = textStyle.hasFill,
             hasStroke = textStyle.hasStroke;
 
@@ -2780,7 +2807,6 @@
           return;
         }
 
-        var context = this.context;
         textStyle.syncFont(context).syncStyle(context); // textBaseline = 'alphabetic'
 
         if (hasStroke) {
@@ -2883,35 +2909,9 @@
     return this;
   };
 
-  var GetCharDataIndex = function GetCharDataIndex(textIndex, activeOnly) {
-    if (activeOnly === undefined) {
-      activeOnly = true;
-    }
-
-    var children = this.children;
-
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-
-      if (activeOnly && !child.active) {
-        continue;
-      }
-
-      if (IsChar(child) && !child.removed) {
-        if (textIndex === 0) {
-          return i;
-        } else {
-          textIndex--;
-        }
-      }
-    }
-
-    return undefined;
-  };
-
   var InsertText = function InsertText(index, text, style) {
     var bobArray = CreateCharBobArray.call(this, text, style);
-    index = GetCharDataIndex.call(this, index, true);
+    index = this.getCharDataIndex(index, true);
     this.addChild(bobArray, index);
     return this;
   };
@@ -2922,7 +2922,7 @@
     }
 
     for (var i = 0; i < length; i++) {
-      var childIndex = GetCharDataIndex.call(this, index, true);
+      var childIndex = this.getCharDataIndex(index, true);
 
       if (childIndex === undefined) {
         break;
@@ -4078,6 +4078,68 @@
     return this;
   };
 
+  var GetCharDataIndex = function GetCharDataIndex(charIndex, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child) && !child.removed) {
+        if (charIndex === 0) {
+          return i;
+        } else {
+          charIndex--;
+        }
+      }
+    }
+
+    return undefined;
+  };
+
+  var GetCharIndex = function GetCharIndex(childIndex, activeOnly) {
+    if (typeof childIndex !== 'number') {
+      childIndex = this.children.indexOf(childIndex);
+
+      if (childIndex < 0) {
+        return null;
+      }
+    }
+
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+
+    if (childIndex >= children.length) {
+      childIndex = children.length;
+    }
+
+    var charIndex = 0;
+
+    for (var i = 0; i < childIndex; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child) && !child.removed) {
+        charIndex++;
+      }
+    }
+
+    return charIndex;
+  };
+
   var SetChildrenInteractiveEnable = function SetChildrenInteractiveEnable(enable) {
     if (enable === undefined) {
       enable = true;
@@ -4091,8 +4153,14 @@
     return this;
   };
 
-  var GetFirstChildContains = function GetFirstChildContains(x, y) {
-    var children = this.children;
+  var GetFirstChildContains = function GetFirstChildContains(children, x, y) {
+    if (Result === undefined) {
+      Result = {};
+    }
+
+    Result.child = null;
+    Result.index = -1;
+    var children = children;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
@@ -4102,12 +4170,16 @@
       }
 
       if (child.contains(x, y)) {
-        return child;
+        Result.child = child;
+        Result.index = i;
+        break;
       }
     }
 
-    return null;
+    return Result;
   };
+
+  var Result;
 
   var SetChildrenInteractive = function SetChildrenInteractive() {
     this.on('pointerdown', OnPointerDown, this).on('pointerdown', OnPointerUp, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
@@ -4121,13 +4193,13 @@
       return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);
 
-    if (!child) {
+    if (!result.child) {
       return;
     }
 
-    this.emit('child.pointerdown', child, pointer, localX, localY, event);
+    this.emit('child.pointerdown', result.child, result.index, pointer, localX, localY, event);
   };
 
   var OnPointerUp = function OnPointerUp(pointer, localX, localY, event) {
@@ -4135,13 +4207,13 @@
       return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);
 
-    if (!child) {
+    if (!result.child) {
       return;
     }
 
-    this.emit('child.pointerup', child, pointer, localX, localY, event);
+    this.emit('child.pointerup', result.child, result.index, pointer, localX, localY, event);
   };
 
   var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
@@ -4159,21 +4231,22 @@
       return;
     }
 
-    var child = GetFirstChildContains.call(this, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);
 
-    if (child === this.lastOverChild) {
+    if (!result.child) {
       return;
     }
 
     if (this.lastOverChild !== null) {
-      this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
+      var lastOverChild = this.children.indexOf(this.lastOverChild);
+      this.emit('child.pointerout', this.lastOverChild, lastOverChild, pointer, localX, localY, event);
     }
 
-    if (child !== null) {
-      this.emit('child.pointerover', child, pointer, localX, localY, event);
+    if (result.child !== null) {
+      this.emit('child.pointerover', result.child, result.index, pointer, localX, localY, event);
     }
 
-    this.lastOverChild = child;
+    this.lastOverChild = result.child;
   };
 
   var GameObject = Phaser.GameObjects.GameObject;
@@ -4275,6 +4348,8 @@
     getActiveChildren: GetActiveChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
     setToMinSize: SetToMinSize,
+    getCharDataIndex: GetCharDataIndex,
+    getCharIndex: GetCharIndex,
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };

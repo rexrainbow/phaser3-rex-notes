@@ -159,7 +159,18 @@ class CharData extends RenderBase {
     }
 
     renderContent() {
+        var context = this.context;
         var textStyle = this.style;
+
+        if (textStyle.hasBackgroundColor) {
+            context.fillStyle = textStyle.backgroundColor;
+            var x = this.drawTLX,
+                y = this.drawTLY,
+                width = this.drawTRX - x,
+                height = this.drawBLY - y;
+            context.fillRect(x, y, width, height);
+        }
+
         var hasFill = textStyle.hasFill,
             hasStroke = textStyle.hasStroke;
 
@@ -167,7 +178,6 @@ class CharData extends RenderBase {
             return;
         }
 
-        var context = this.context;
         textStyle.syncFont(context).syncStyle(context);
         // textBaseline = 'alphabetic'
 
