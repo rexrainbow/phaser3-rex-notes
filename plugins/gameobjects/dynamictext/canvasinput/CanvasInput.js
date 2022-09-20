@@ -1,6 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import HiddenInputText from './textedit/HiddenInputText.js';
-import SetText from './textedit/SetText.js';
+import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -26,7 +26,15 @@ class CanvasInput extends DynamicText {
         this.setChildrenInteractiveEnable(true);  // Fire 'child.pointerdown' event
         this.textEdit = new HiddenInputText(this, GetValue(config, 'edit'));
 
-        this.onAddCharCallback = GetValue(config, 'onAddChar');
+        var addCharCallback = GetValue(config, 'onAddChar');
+        if (addCharCallback) {
+            this.on('addChar', addCharCallback);
+        }
+
+        var moveCursorCallback = GetValue(config, 'onMoveCursor');
+        if (moveCursorCallback) {
+            this.on('movecursor', moveCursorCallback);
+        }
 
         if (text) {
             this.setText(text);
@@ -41,12 +49,12 @@ class CanvasInput extends DynamicText {
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
                 if (IsChar(child)) {
-                    this.onAddCharCallback(child, index + i);
+                    this.emit('addChar', child, index + i);
                 }
             }
         } else {
             if (IsChar(child)) {
-                this.onAddCharCallback(child, index);
+                this.emit('addChar', child, index);
             }
         }
 

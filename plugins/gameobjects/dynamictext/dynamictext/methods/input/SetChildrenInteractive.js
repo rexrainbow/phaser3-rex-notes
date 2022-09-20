@@ -20,7 +20,7 @@ var OnPointerDown = function (pointer, localX, localY, event) {
         return;
     }
 
-    var result = GetFirstChildContains(this.children, localX, localY);
+    var result = GetFirstChildContains(this.children, localX, localY);    
     if (!result.child) {
         return;
     }
@@ -64,11 +64,11 @@ var OnAreaOverOut = function (pointer, localX, localY, event) {
         this.emit('child.pointerout', this.lastOverChild, lastOverChild, pointer, localX, localY, event);
     }
 
-    if (child !== null) {
+    if (result.child !== null) {
         this.emit('child.pointerover', result.child, result.index, pointer, localX, localY, event);
     }
 
-    this.lastOverChild = child;
+    this.lastOverChild = result.child;
 }
 
 export default SetChildrenInteractive;

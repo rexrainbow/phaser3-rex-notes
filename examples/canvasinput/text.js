@@ -53,6 +53,10 @@ class Demo extends Phaser.Scene {
                         .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
                 },
 
+                onMoveCursor(cursorIndex) {
+                    console.log(cursorIndex)
+                },
+
                 text: 'Phaser',
             }
         )
