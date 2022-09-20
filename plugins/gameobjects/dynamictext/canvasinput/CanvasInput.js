@@ -1,5 +1,5 @@
 import DynamicText from '../dynamictext/DynamicText.js';
-import HiddenInputText from './HiddenInputText.js';
+import HiddenInputText from './textedit/HiddenInputText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

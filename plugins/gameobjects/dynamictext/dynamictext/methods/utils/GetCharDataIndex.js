@@ -12,7 +12,7 @@ var GetCharDataIndex = function (textIndex, activeOnly) {
             continue;
         }
 
-        if (IsChar(child)) {
+        if (IsChar(child) && !child.removed) {
             if (textIndex === 0) {
                 return i;
             } else {

@@ -14,7 +14,7 @@ var GetText = function (activeOnly) {
             continue;
         }
 
-        if (IsChar(child)) {
+        if (IsChar(child) && !child.removed) {
             text += child.text;
         }
     }
