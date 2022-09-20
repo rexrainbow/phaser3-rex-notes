@@ -3951,18 +3951,21 @@
 
       var context = this.context;
       context.save();
-      var x = this.drawX,
-          y = this.drawY;
-
-      if (this.autoRound) {
-        x = Math.round(x);
-        y = Math.round(y);
-      }
-
-      context.translate(x, y);
       context.globalAlpha = this.alpha;
-      context.scale(this.scaleX, this.scaleY);
-      context.rotate(this.rotation);
+
+      if (this.toLocalPosition) {
+        var x = this.drawX,
+            y = this.drawY;
+
+        if (this.autoRound) {
+          x = Math.round(x);
+          y = Math.round(y);
+        }
+
+        context.translate(x, y);
+        context.scale(this.scaleX, this.scaleY);
+        context.rotate(this.rotation);
+      }
 
       if (this.drawBelowCallback) {
         this.drawBelowCallback(this);
@@ -4007,6 +4010,10 @@
   var Rectangle = Phaser.Geom.Rectangle;
 
   var Contains = function Contains(canvasX, canvasY) {
+    if (this.width === 0 || this.height === 0) {
+      return false;
+    }
+
     var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
     return GetBounds(this).contains(bobPosition.x, bobPosition.y);
   };
@@ -4045,6 +4052,7 @@
 
       _this = _super.call(this, parent, type);
       _this.renderable = true;
+      _this.toLocalPosition = true;
       _this.originX = 0;
       _this.offsetX = 0; // Override
 
@@ -4904,6 +4912,12 @@
     }, {
       key: "setStroke",
       value: function setStroke(color, lineWidth) {
+        if (color != null) {
+          if (lineWidth === undefined) {
+            lineWidth = 2;
+          }
+        }
+
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
@@ -5027,6 +5041,12 @@
     }, {
       key: "setStroke",
       value: function setStroke(color, lineWidth) {
+        if (color != null) {
+          if (lineWidth === undefined) {
+            lineWidth = 2;
+          }
+        }
+
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
@@ -5520,8 +5540,10 @@
     return this;
   };
 
+  // const RemoveItem = Phaser.Utils.Array.Remove;
   var AddChild = function AddChild(bob, index) {
-    var isBobArray = Array.isArray(bob);
+    var isBobArray = Array.isArray(bob); // Remove existed bob(s)
+    // RemoveItem(this.children, bob);
 
     if (index === undefined || index === this.children.length) {
       if (isBobArray) {
@@ -5556,6 +5578,7 @@
 
   var CharTypeName = 'text';
   var ImageTypeName = 'image';
+  var DrawerTypeName = 'drawer';
   var SpaceTypeName = 'space';
   var CmdTypeName = 'command';
 
@@ -5567,7 +5590,7 @@
     return bob.type === CharTypeName && bob.text === ' ';
   };
 
-  var IsChar$1 = function IsChar(bob) {
+  var IsChar = function IsChar(bob) {
     return bob.type === CharTypeName;
   };
 
@@ -5869,13 +5892,13 @@
     var children = this.children;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children;
+      var child = children[i];
 
       if (activeOnly && !child.active) {
         continue;
       }
 
-      if (IsChar(child)) {
+      if (IsChar(child) && !child.removed) {
         if (textIndex === 0) {
           return i;
         } else {
@@ -5889,8 +5912,26 @@
 
   var InsertText = function InsertText(index, text, style) {
     var bobArray = CreateCharBobArray.call(this, text, style);
-    index = GetCharDataIndex(index, true);
+    index = GetCharDataIndex.call(this, index, true);
     this.addChild(bobArray, index);
+    return this;
+  };
+
+  var RemoveText = function RemoveText(index, length) {
+    if (length === undefined) {
+      length = 1;
+    }
+
+    for (var i = 0; i < length; i++) {
+      var childIndex = GetCharDataIndex.call(this, index, true);
+
+      if (childIndex === undefined) {
+        break;
+      }
+
+      this.removeChild(this.children[childIndex]);
+    }
+
     return this;
   };
 
@@ -5909,11 +5950,9 @@
         continue;
       }
 
-      if (!IsChar$1(child)) {
-        continue;
+      if (IsChar(child) && !child.removed) {
+        text += child.text;
       }
-
-      text += child.text;
     }
 
     return text;
@@ -6077,6 +6116,150 @@
     }
 
     bob.modifyPorperties(properties);
+    this.addChild(bob);
+    return this;
+  };
+
+  var Drawer = /*#__PURE__*/function (_RenderBase) {
+    _inherits(Drawer, _RenderBase);
+
+    var _super = _createSuper(Drawer);
+
+    function Drawer(parent, renderCallback, width, height) {
+      var _this;
+
+      _classCallCheck(this, Drawer);
+
+      _this = _super.call(this, parent, DrawerTypeName);
+
+      _this.setRenderCallback(renderCallback);
+
+      _this.setDrawerSize(width, height);
+
+      return _this;
+    }
+
+    _createClass(Drawer, [{
+      key: "setRenderCallback",
+      value: function setRenderCallback(callback) {
+        if (callback) {
+          this.renderContent = callback.bind(this);
+        } else {
+          delete this.renderContent;
+        }
+
+        return this;
+      }
+    }, {
+      key: "setDrawerSize",
+      value: function setDrawerSize(width, height) {
+        // Whole canvas
+        if (width === true) {
+          this.toLocalPosition = false;
+          width = undefined;
+          height = undefined;
+        } else {
+          this.toLocalPosition = true;
+        }
+
+        if (width === undefined) {
+          width = 0;
+        }
+
+        if (height === undefined) {
+          height = width;
+        }
+
+        this.drawerWidth = width;
+        this.drawerHeight = height;
+        return this;
+      }
+    }, {
+      key: "onFree",
+      value: function onFree() {
+        _get(_getPrototypeOf(Drawer.prototype), "onFree", this).call(this);
+
+        this.setRenderCallback();
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this.drawerWidth * this.scaleX;
+      },
+      set: function set(value) {
+        this.setDirty(this.width !== value);
+        this.scaleX = this.drawerWidth > 0 ? value / this.drawerWidth : 1;
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this.drawerHeight * this.scaleY;
+      },
+      set: function set(value) {
+        this.setDirty(this.height !== value);
+        this.scaleY = this.drawerHeight > 0 ? value / this.drawerHeight : 1;
+      }
+    }, {
+      key: "offsetY",
+      get: function get() {
+        return -this.height;
+      },
+      set: function set(value) {}
+    }, {
+      key: "drawTLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawTLY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBLX",
+      get: function get() {
+        return -this.leftSpace;
+      }
+    }, {
+      key: "drawBLY",
+      get: function get() {
+        return this.drawerHeight;
+      }
+    }, {
+      key: "drawTRX",
+      get: function get() {
+        return this.drawerWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawTRY",
+      get: function get() {
+        return 0;
+      }
+    }, {
+      key: "drawBRX",
+      get: function get() {
+        return this.drawerWidth + this.rightSpace;
+      }
+    }, {
+      key: "drawBRY",
+      get: function get() {
+        return this.drawerHeight;
+      }
+    }]);
+
+    return Drawer;
+  }(RenderBase);
+
+  var AppendDrawer = function AppendDrawer(renderCallback, width, height) {
+    var bob = this.poolManager.allocate(DrawerTypeName);
+
+    if (bob === null) {
+      bob = new Drawer(this, // parent
+      renderCallback, width, height);
+    } else {
+      bob.setParent(this).setActive().setRenderCallback(renderCallback).setDrawerSize(width, height);
+    }
+
     this.addChild(bob);
     return this;
   };
@@ -6856,14 +7039,14 @@
     return this.children;
   };
 
-  var GetLastAppendedChildren = function GetLastAppendedChildren() {
-    return this.lastAppendedChildren;
-  };
-
   var GetAll = Phaser.Utils.Array.GetAll;
 
   var GetActiveChildren = function GetActiveChildren() {
     return GetAll(this.children, 'active', true);
+  };
+
+  var GetLastAppendedChildren = function GetLastAppendedChildren() {
+    return this.lastAppendedChildren;
   };
 
   var SetToMinSize = function SetToMinSize() {
@@ -7007,6 +7190,39 @@
     return this;
   };
 
+  var BringToTop = Phaser.Utils.Array.BringToTop;
+  var SendToBack = Phaser.Utils.Array.SendToBack;
+  var MoveUp = Phaser.Utils.Array.MoveUp;
+  var MoveDown = Phaser.Utils.Array.MoveDown;
+  var MoveAbove = Phaser.Utils.Array.MoveAbove;
+  var MoveBelow = Phaser.Utils.Array.MoveBelow;
+  var MoveChildMethods = {
+    moveChildToFist: function moveChildToFist(bob) {
+      BringToTop(this.children, bob);
+      return this;
+    },
+    moveChildToLast: function moveChildToLast(bob) {
+      SendToBack(this.children, bob);
+      return this;
+    },
+    movechildUp: function movechildUp(bob) {
+      MoveUp(this.children, bob);
+      return this;
+    },
+    movechildDown: function movechildDown(bob) {
+      MoveDown(this.children, bob);
+      return this;
+    },
+    movechildAbove: function movechildAbove(bob, baseBob) {
+      MoveAbove(this.children, bob, baseBob);
+      return this;
+    },
+    movechildBelow: function movechildBelow(bob, baseBob) {
+      MoveBelow(this.children, bob, baseBob);
+      return this;
+    }
+  };
+
   var BackgroundMethods = {
     setBackgroundColor: function setBackgroundColor(color, color2, isHorizontalGradient) {
       this.background.setColor(color, color2, isHorizontalGradient);
@@ -7046,9 +7262,10 @@
     setText: SetText,
     appendText: AppendText,
     insertText: InsertText,
-    removeText: RemoveChild,
+    removeText: RemoveText,
     getText: GetText,
     appendImage: AppendImage,
+    appendDrawer: AppendDrawer,
     appendSpace: AppendSpace,
     appendCommand: AppendCommand$3,
     setWrapConfig: SetWrapConfig,
@@ -7056,13 +7273,13 @@
     runVerticalWrap: RunVerticalWrap,
     renderContent: RenderContent,
     getChildren: GetChildren,
-    getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
+    getLastAppendedChildren: GetLastAppendedChildren,
     setToMinSize: SetToMinSize,
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$3, BackgroundMethods, InnerBoundsMethods);
+  Object.assign(Methods$3, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};

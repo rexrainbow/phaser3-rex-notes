@@ -169,7 +169,7 @@
     return this;
   };
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
@@ -181,7 +181,7 @@
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
 
-      value = GetValue$2(config, key, property[1]);
+      value = GetValue$3(config, key, property[1]);
 
       if (value !== undefined) {
         out[property[0]] = value;
@@ -220,7 +220,7 @@
 
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var InputText = /*#__PURE__*/function (_DOMElement) {
     _inherits(InputText, _DOMElement);
@@ -234,14 +234,14 @@
 
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue$1(config, 'x', 0);
-        y = GetValue$1(config, 'y', 0);
-        width = GetValue$1(config, 'width', 0);
-        height = GetValue$1(config, 'height', 0);
+        x = GetValue$2(config, 'x', 0);
+        y = GetValue$2(config, 'y', 0);
+        width = GetValue$2(config, 'width', 0);
+        height = GetValue$2(config, 'height', 0);
       } else if (IsPlainObject(width)) {
         config = width;
-        width = GetValue$1(config, 'width', 0);
-        height = GetValue$1(config, 'height', 0);
+        width = GetValue$2(config, 'width', 0);
+        height = GetValue$2(config, 'height', 0);
       }
 
       if (config === undefined) {
@@ -249,7 +249,7 @@
       }
 
       var element;
-      var textType = GetValue$1(config, 'type', 'text');
+      var textType = GetValue$2(config, 'type', 'text');
 
       if (textType === 'textarea') {
         element = document.createElement('textarea');
@@ -260,7 +260,7 @@
       }
 
       SetProperties(ElementProperties, config, element);
-      var style = GetValue$1(config, 'style', undefined);
+      var style = GetValue$2(config, 'style', undefined);
       style = SetProperties(StyleProperties, config, style); // Apply other style properties
 
       var elementStyle = element.style;
@@ -284,7 +284,7 @@
 
       StopPropagationTouchEvents(element);
 
-      if (GetValue$1(config, 'selectAll', false)) {
+      if (GetValue$2(config, 'selectAll', false)) {
         _this.selectAll();
       }
 
@@ -631,6 +631,122 @@
     return false;
   };
 
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+
+  var HiddenInputTextBase = /*#__PURE__*/function (_InputText) {
+    _inherits(HiddenInputTextBase, _InputText);
+
+    var _super = _createSuper(HiddenInputTextBase);
+
+    function HiddenInputTextBase(textObject, config) {
+      var _this;
+
+      _classCallCheck(this, HiddenInputTextBase);
+
+      _this = _super.call(this, textObject.scene, config); // Note: Don't add this game object into scene
+      // Set style
+
+      var style = _this.node.style;
+      style.position = 'absolute';
+      style.opacity = 0;
+      style.pointerEvents = 'none';
+      style.zIndex = 0; // hide native blue text cursor on iOS
+
+      style.transform = 'scale(0)';
+
+      _this.setEnterCloseEnable(GetValue$1(config, 'enterClose', true));
+
+      _this.onOpenCallback = GetValue$1(config, 'onOpen', undefined);
+      _this.onCloseCallback = GetValue$1(config, 'onClose', undefined);
+      _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
+      _this.textObject = textObject;
+      textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
+
+      _this.on('focus', function () {
+        this.initText();
+
+        if (this.enterCloseEnable) {
+          this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
+        } // There is no cursor-position-change event, 
+        // so updating cursor position every tick
+
+
+        this.scene.sys.events.on('postupdate', this.updateText, this);
+        this.scene.input.on('pointerdown', this.onClickOutside, this);
+
+        if (this.onOpenCallback) {
+          this.onOpenCallback(this.textObject, this);
+        }
+      }, _assertThisInitialized(_this)).on('blur', function () {
+        this.updateText();
+        this.scene.sys.events.off('postupdate', this.updateText, this);
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
+
+        if (this.onCloseCallback) {
+          this.onCloseCallback(this.textObject, this);
+        }
+      }, _assertThisInitialized(_this));
+
+      return _this;
+    }
+
+    _createClass(HiddenInputTextBase, [{
+      key: "preDestroy",
+      value: function preDestroy() {
+        this.textObject.off('pointerdown', this.setFocus, this);
+        this.textObject.off('destroy', this.destroy, this);
+        this.scene.sys.events.off('postupdate', this.updateText, this);
+        this.scene.input.off('pointerdown', this.onClickOutside, this);
+
+        _get(_getPrototypeOf(HiddenInputTextBase.prototype), "preDestroy", this).call(this);
+      }
+    }, {
+      key: "onClickOutside",
+      value: function onClickOutside(pointer) {
+        if (!IsPointerInHitArea(this.textObject, pointer)) {
+          this.setBlur();
+        }
+      }
+    }, {
+      key: "setEnterCloseEnable",
+      value: function setEnterCloseEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.enterCloseEnable = enable;
+        return this;
+      }
+    }, {
+      key: "open",
+      value: function open() {
+        this.setFocus();
+        return this;
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        this.setBlur();
+        return this;
+      }
+    }, {
+      key: "isOpened",
+      get: function get() {
+        return this._isFocused;
+      } // Override
+
+    }, {
+      key: "initText",
+      value: function initText() {} // Override
+
+    }, {
+      key: "updateText",
+      value: function updateText() {}
+    }]);
+
+    return HiddenInputTextBase;
+  }(InputText);
+
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
     var previousText = hiddenInputText.previousText;
@@ -686,8 +802,8 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Wrap = Phaser.Math.Wrap;
 
-  var HiddenInputText = /*#__PURE__*/function (_InputText) {
-    _inherits(HiddenInputText, _InputText);
+  var HiddenInputText = /*#__PURE__*/function (_HiddenInputTextBase) {
+    _inherits(HiddenInputText, _HiddenInputTextBase);
 
     var _super = _createSuper(HiddenInputText);
 
@@ -696,80 +812,30 @@
 
       _classCallCheck(this, HiddenInputText);
 
-      _this = _super.call(this, textObject.scene, config); // Note: Don't add this game object into scene
-      // Set style
+      if (config === undefined) {
+        config = {};
+      }
 
-      var style = _this.node.style;
-      style.position = 'absolute';
-      style.opacity = 0;
-      style.pointerEvents = 'none';
-      style.zIndex = 0; // hide native blue text cursor on iOS
+      if (config.onUpdate === 'number') {
+        config.onUpdate = NumberInputUpdateCallback;
+      }
 
-      style.transform = 'scale(0)';
+      _this = _super.call(this, textObject, config); // Note: Don't add this game object into scene
 
       _this.setCursor(GetValue(config, 'cursor', '|'));
 
       _this.setCursorFlashDuration(GetValue(config, 'cursorFlashDuration', 1000));
 
       _this.cursorFlashTimer = 0;
-
-      _this.setEnterClose(GetValue(config, 'enterClose', true));
-
-      _this.onOpenCallback = GetValue(config, 'onOpen', undefined);
-      _this.onCloseCallback = GetValue(config, 'onClose', undefined);
-      var onUpdateCallback = GetValue(config, 'onUpdate', undefined);
-
-      if (onUpdateCallback === 'number') {
-        onUpdateCallback = NumberInputUpdateCallback;
-      }
-
-      _this.onUpdateCallback = onUpdateCallback;
-      _this.textObject = textObject;
-      textObject.setInteractive().on('pointerdown', _this.setFocus, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this));
-
-      _this.on('focus', function () {
-        this.cursorFlashTimer = 0;
-
-        if (this.enterClose) {
-          this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
-        }
-
-        this.setText(this.textObject.text);
-        this.scene.sys.events.on('postupdate', this.updateText, this);
-        this.scene.input.on('pointerdown', this.onClickOutside, this);
-
-        if (this.onOpenCallback) {
-          this.onOpenCallback(this.textObject, this);
-        }
-      }, _assertThisInitialized(_this)).on('blur', function () {
-        this.updateText();
-        this.scene.sys.events.off('postupdate', this.updateText, this);
-        this.scene.input.off('pointerdown', this.onClickOutside, this);
-
-        if (this.onCloseCallback) {
-          this.onCloseCallback(this.textObject, this);
-        }
-      }, _assertThisInitialized(_this));
-
       return _this;
     }
 
     _createClass(HiddenInputText, [{
-      key: "preDestroy",
-      value: function preDestroy() {
-        this.textObject.off('pointerdown', this.setFocus, this);
-        this.textObject.off('destroy', this.destroy, this);
-        this.scene.sys.events.off('postupdate', this.updateText, this);
-        this.scene.input.off('pointerdown', this.onClickOutside, this);
-
-        _get(_getPrototypeOf(HiddenInputText.prototype), "preDestroy", this).call(this);
-      }
-    }, {
-      key: "onClickOutside",
-      value: function onClickOutside(pointer) {
-        if (!IsPointerInHitArea(this.textObject, pointer)) {
-          this.setBlur();
-        }
+      key: "initText",
+      value: function initText() {
+        this.cursorFlashTimer = 0;
+        this.setText(this.textObject.text);
+        return this;
       }
     }, {
       key: "updateText",
@@ -826,37 +892,10 @@
         this.cursorFlashTimer = Wrap(timerValue, 0, this.cursorFlashDuration);
         return cursor;
       }
-    }, {
-      key: "setEnterClose",
-      value: function setEnterClose(value) {
-        if (value === undefined) {
-          value = true;
-        }
-
-        this.enterClose = value;
-        return this;
-      }
-    }, {
-      key: "open",
-      value: function open() {
-        this.setFocus();
-        return this;
-      }
-    }, {
-      key: "close",
-      value: function close() {
-        this.setBlur();
-        return this;
-      }
-    }, {
-      key: "isOpened",
-      get: function get() {
-        return this._isFocused;
-      }
     }]);
 
     return HiddenInputText;
-  }(InputText);
+  }(HiddenInputTextBase);
 
   function Factory (textObject, config) {
     var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene
