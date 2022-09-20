@@ -18,9 +18,6 @@ var SetText = function (textObject, newText) {
         } else if (result.added) {
             textObject.insertText(charIndex, result.value);
             charIndex += result.count;
-
-            var addedChild = textObject.lastAppendedChildren[0];
-            textObject.emit('addchar', addedChild, textObject);
         } else {
             charIndex += result.count;
         }

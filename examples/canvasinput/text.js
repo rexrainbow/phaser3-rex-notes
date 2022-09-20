@@ -45,14 +45,17 @@ class Demo extends Phaser.Scene {
                     onClose(textObject) {
                         textObject.setBackgroundStroke('white')
                     }
-                }
+                },
+
+                onAddChar(child) {
+                    child
+                        .setAngle((Math.random() - 0.5) * 30)
+                        .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
+                },
+
+                text: 'Phaser',
             }
         )
-            .on('addchar', function (child) {
-                child
-                    .setAngle((Math.random() - 0.5) * 30)
-                    .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
-            })
 
     }
 

@@ -5524,8 +5524,6 @@
       } else if (result.added) {
         textObject.insertText(charIndex, result.value);
         charIndex += result.count;
-        var addedChild = textObject.lastAppendedChildren[0];
-        textObject.emit('addchar', addedChild, textObject);
       } else {
         charIndex += result.count;
       }
@@ -5589,15 +5587,57 @@
         config = x;
       } else if (IsPlainObject(fixedWidth)) {
         config = fixedWidth;
+      } // Set text later
+
+
+      var text = GetValue(config, 'text', undefined);
+
+      if (text) {
+        delete config.text;
       }
 
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
       _this.textEdit = new HiddenInputText(_assertThisInitialized(_this), GetValue(config, 'edit'));
+      var onAddCharCallback = GetValue(config, 'onAddChar');
+
+      if (onAddCharCallback) {
+        _this.on('addchar', onAddCharCallback);
+      }
+
+      if (text) {
+        SetText(_assertThisInitialized(_this), text);
+      }
+
       return _this;
     }
 
-    return _createClass(CanvasInput);
+    _createClass(CanvasInput, [{
+      key: "addChild",
+      value: function addChild(child, index) {
+        _get(_getPrototypeOf(CanvasInput.prototype), "addChild", this).call(this, child, index);
+
+        if (Array.isArray(child)) {
+          var children = child;
+
+          for (var i = 0, cnt = children.length; i < cnt; i++) {
+            var child = children[i];
+
+            if (IsChar(child)) {
+              this.emit('addchar', child, index + i);
+            }
+          }
+        } else {
+          if (IsChar(child)) {
+            this.emit('addchar', child, index);
+          }
+        }
+
+        return this;
+      }
+    }]);
+
+    return CanvasInput;
   }(DynamicText);
 
   function Factory (x, y, width, height, config) {
