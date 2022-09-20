@@ -1,4 +1,4 @@
-import * as Diff from 'diff';
+import { diffChars } from '../../../../utils/jsdiff/index.js'
 
 var SetText = function (textObject, newText) {
     var text = textObject.text;
@@ -8,7 +8,7 @@ var SetText = function (textObject, newText) {
 
     // textObject.setText(newText);
 
-    var results = Diff.diffChars(text, newText);
+    var results = diffChars(text, newText);
     var charIndex = 0;
     for (var i = 0, cnt = results.length; i < cnt; i++) {
         var result = results[i];
