@@ -10,7 +10,7 @@ import AddChild from './AddChild.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import InsertText from './InsertText.js';
-import RemoveText from './RemoveChild.js';
+import RemoveText from './RemoveText.js';
 import GetText from './GetText.js';
 import AppendImage from './AppendImage.js';
 import AppendDrawer from './AppendDrawer.js';

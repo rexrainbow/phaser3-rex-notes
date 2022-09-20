@@ -3,7 +3,7 @@ import GetCharDataIndex from './utils/GetCharDataIndex.js';
 
 var InsertText = function (index, text, style) {
     var bobArray = CreateCharBobArray.call(this, text, style);
-    index = GetCharDataIndex(index, true);
+    index = GetCharDataIndex.call(this, index, true);
     this.addChild(bobArray, index);
 
     return this;

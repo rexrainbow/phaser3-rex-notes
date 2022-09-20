@@ -1,3 +1,5 @@
+import { IsChar } from '../../bob/Types.js';
+
 var GetCharDataIndex = function (textIndex, activeOnly) {
     if (activeOnly === undefined) {
         activeOnly = true;
@@ -5,7 +7,7 @@ var GetCharDataIndex = function (textIndex, activeOnly) {
 
     var children = this.children;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        var child = children;
+        var child = children[i];
         if (activeOnly && !child.active) {
             continue;
         }
