@@ -2,15 +2,12 @@ import HiddenInputTextBase from '../../dom/hiddeninputtext/HiddenInputTextBase.j
 
 class HiddenInputText extends HiddenInputTextBase {
     constructor(textObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.updateTextMode = 1;
         super(textObject, config);
+        // this.textObject = textObject;
     }
 
     initText() {
-        this.setText(this.textObject.text);
+        this.setText(this.getParentText());
 
         return this;
     }
@@ -25,13 +22,27 @@ class HiddenInputText extends HiddenInputTextBase {
             }
         }
 
-        if (text !== this.textObject.text) {
-            this.textObject
-                .setText(text)
-                .runWordWrap()
-        }
+        this.setParentText(text);
 
         return this;
+    }
+
+    getParentText() {
+        return this.textObject.text;
+    }
+
+    setParentText(newText) {
+        var text = this.getParentText();
+        if (newText === text) {
+            return this;
+        }
+
+        this.textObject.setText(newText)
+
+        this.textObject.runWordWrap();
+
+        return this;
+
     }
 }
 

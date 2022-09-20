@@ -30,12 +30,6 @@ class HiddenInputTextBase extends InputText {
             .on('destroy', this.destroy, this);
 
 
-        var updateTextMode = GetValue(config, 'updateTextMode', 0);
-        if (typeof (updateTextMode) === 'string') {
-            updateTextMode = UpdateTextModes[updateTextMode];
-        }
-        this.updateTextMode = updateTextMode;
-
         this
             .on('focus', function () {
                 this.initText();
@@ -44,11 +38,9 @@ class HiddenInputTextBase extends InputText {
                     this.scene.input.keyboard.once('keydown-ENTER', this.setBlur, this);
                 }
 
-                if (updateTextMode === 0) {
-                    this.scene.sys.events.on('postupdate', this.updateText, this);
-                } else {
-                    this.on('textchange', this.updateText, this);
-                }
+                // There is no cursor-position-change event, 
+                // so updating cursor position every tick
+                this.scene.sys.events.on('postupdate', this.updateText, this);
 
                 this.scene.input.on('pointerdown', this.onClickOutside, this);
 
@@ -60,11 +52,7 @@ class HiddenInputTextBase extends InputText {
             .on('blur', function () {
                 this.updateText();
 
-                if (updateTextMode === 0) {
-                    this.scene.sys.events.off('postupdate', this.updateText, this);
-                } else {
-                    this.off('textchange', this.updateText, this);
-                }
+                this.scene.sys.events.off('postupdate', this.updateText, this);
 
                 this.scene.input.off('pointerdown', this.onClickOutside, this);
 
@@ -79,11 +67,7 @@ class HiddenInputTextBase extends InputText {
         this.textObject.off('pointerdown', this.setFocus, this);
         this.textObject.off('destroy', this.destroy, this);
 
-        if (this.updateTextMode === 0) {
-            this.scene.sys.events.off('postupdate', this.updateText, this);
-        } else {
-            this.off('textchange', this.updateText, this);
-        }
+        this.scene.sys.events.off('postupdate', this.updateText, this);
 
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 

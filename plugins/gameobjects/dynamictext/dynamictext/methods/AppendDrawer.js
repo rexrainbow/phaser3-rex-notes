@@ -10,7 +10,7 @@ var AppendDrawer = function (renderCallback, width, height) {
             renderCallback,
             width, height
         );
-    } else {        
+    } else {
         bob
             .setParent(this)
             .setActive()

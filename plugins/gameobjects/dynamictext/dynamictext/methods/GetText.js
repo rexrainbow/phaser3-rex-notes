@@ -14,11 +14,9 @@ var GetText = function (activeOnly) {
             continue;
         }
 
-        if (!IsChar(child)) {
-            continue;
+        if (IsChar(child)) {
+            text += child.text;
         }
-
-        text += child.text;
     }
     return text;
 }

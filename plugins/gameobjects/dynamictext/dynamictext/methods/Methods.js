@@ -21,8 +21,8 @@ import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
 import RenderContent from './RenderContent.js';
 import GetChildren from './GetChildren.js';
-import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
+import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import SetToMinSize from './SetToMinSize.js';
 
 import SetChildrenInteractiveEnable from './input/SetChildrenInteractiveEnable.js';
@@ -59,8 +59,8 @@ var Methods = {
     renderContent: RenderContent,
 
     getChildren: GetChildren,
-    getLastAppendedChildren: GetLastAppendedChildren,
     getActiveChildren: GetActiveChildren,
+    getLastAppendedChildren: GetLastAppendedChildren,
 
     setToMinSize: SetToMinSize,
 
