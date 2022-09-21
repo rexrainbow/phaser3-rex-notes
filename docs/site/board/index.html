@@ -10195,17 +10195,44 @@
 </ul>
 <h3 id="empty-tile-position">Empty tile position<a class="headerlink" href="#empty-tile-position" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Is tile empty? (TileXY is inside board, and TileXYZ has no chess)
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isEmpty</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isEmptyTileXYZ</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get a random tile position which does not have any chess
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getRandomEmptyTileXY</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span>
 <span class="c1">// var out = board.getRandomEmptyTileXY(tileZ, out);</span>
 </code></pre></div><ul>
-<li><code>tileXY</code> : Tile position <code>{x, y}</code>, return <code>null</code> if all positions are occupied.</li>
+<li><code>tileXY</code> : Tile position <code>{x, y}</code>, <ul>
+<li><code>null</code> : All positions are occupied.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Get an array of tile position which does not have any chess
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getEmptyTileXYArray</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span>
 <span class="c1">// var out = board.getEmptyTileXYArray(tileZ, out);</span>
 </code></pre></div><ul>
+<li><code>tileXYArray</code> : An array of tile position</li>
+</ul>
+</li>
+<li>Get a random tile position of neighbor which does not have any chess
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getRandomEmptyTileXYInRange</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.getRandomEmptyTileXYInRange(centerTileXY, radius, tileZ, out);</span>
+</code></pre></div><ul>
+<li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
+<li><code>radius</code> : Radius of the ring.</li>
+<li><code>tileXY</code> : Tile position <code>{x, y}</code>, <ul>
+<li><code>null</code> : All positions are occupied.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Get an array of tile position of neighbors which does not have any chess
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getEmptyTileXYArrayInRange</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.getEmptyTileXYArrayInRange(centerTileXY, radius, tileZ, out);</span>
+</code></pre></div><ul>
+<li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
+<li><code>radius</code> : Radius of the ring.</li>
 <li><code>tileXYArray</code> : An array of tile position</li>
 </ul>
 </li>

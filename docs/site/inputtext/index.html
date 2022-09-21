@@ -9093,6 +9093,13 @@
     <span class="kd">var</span> <span class="nx">selectionEnd</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">selectionEnd</span><span class="p">;</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
+<li>On composition inpit
+    <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;compositionStart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span> <span class="nx">e</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;compositionEnd&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span> <span class="nx">e</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;compositionUpdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">,</span> <span class="nx">e</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="bypass-key-input">Bypass key input<a class="headerlink" href="#bypass-key-input" title="Permanent link">&para;</a></h3>
 <p>Registered <a href="../keyboardevents/#key-object">keyboard events</a> might capture key input. </p>
