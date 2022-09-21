@@ -63,8 +63,11 @@ import Mirror from './transform/Mirror.js';
 import Rotate from './transform/Rotate.js';
 import Fit from './transform/Fit.js';
 
+import IsEmptyTileXYZ from './empty/IsEmptyTileXYZ.js';
 import GetEmptyTileXYArray from './empty/GetEmptyTileXYArray.js';
 import GetRandomEmptyTileXY from './empty/GetRandomEmptyTileXY.js';
+import GetEmptyTileXYArrayInRange from './empty/GetEmptyTileXYArrayInRange.js';
+import GetRandomEmptyTileXYInRange from './empty/GetRandomEmptyTileXYInRange.js';
 
 import GetTileXYAtDirection from './neighbors/GetTileXYAtDirection.js';
 import GetNeighborTileXY from './neighbors/GetNeighborTileXY.js';
@@ -149,8 +152,11 @@ export default {
     isDirectionInCone: IsDirectionInCone,
     fit: Fit,
 
+    isEmptyTileXYZ: IsEmptyTileXYZ,
     getEmptyTileXYArray: GetEmptyTileXYArray,
     getRandomEmptyTileXY: GetRandomEmptyTileXY,
+    getEmptyTileXYArrayInRange: GetEmptyTileXYArrayInRange,
+    getRandomEmptyTileXYInRange: GetRandomEmptyTileXYInRange,
 
     getTileXYAtDirection: GetTileXYAtDirection,
     getNeighborTileXY: GetNeighborTileXY,
