@@ -118,6 +118,7 @@ var txt = scene.add.rexDynamicText({
         shadowOffsetX: 0,
         shadowOffsetY: 0,
         shadowBlur: 0,
+        backgroundColor: null,
         offsetX: 0,
         offsetY: 0
     },
@@ -180,6 +181,7 @@ var txt = scene.add.rexDynamicText({
     - `style.shadowOffsetX` : OffsetX of shadow.
     - `style.shadowOffsetY` : OffsetY of shadow.
     - `style.shadowBlur` : Blur of shadow.
+    - `style.backgroundColor` : Background color of a character.
     - `style.offsetX` : OffsetX.
     - `style.offsetY` : OffsetY.
     - `style.align` : Override default line-alignment setting.
@@ -272,6 +274,7 @@ txt.appendText(text,
         // shadowOffsetX: 0,
         // shadowOffsetY: 0,
         // shadowBlur: 0,
+        // backgroundColor: null,
         // offsetY: 0,
         // offsetY: 0,
         // align: undefined
@@ -305,6 +308,7 @@ txt.insertText(index, text,
         // shadowOffsetX: 0,
         // shadowOffsetY: 0,
         // shadowBlur: 0,
+        // backgroundColor: null,
         // offsetY: 0,
         // offsetY: 0,
         // align: undefined
@@ -317,6 +321,21 @@ txt.insertText(index, text,
 ```javascript
 txt.removeText(index);
 ```
+
+#### Get text
+
+- Get active characters
+    ```javascript
+    var text = txt.text;
+    ```
+    or
+    ```javascript
+    var text = txt.getText();
+    ```
+- Get all characters
+    ```javascript
+    var text = txt.getText(false);
+    ```
 
 ### Image
 
@@ -673,12 +692,47 @@ txt.setWrapConfig(config);
         // image.setHeight(height, true);  // Resize and keep aspect- ratio
         ```
 
+
+### For each child
+
+- Any child
+    - For each active child
+        ```javascript
+        txt.forEachChild(function(child, childIndex){
+        }, scope)
+        ```
+    - For each character child
+        ```javascript
+        txt.forEachChild(function(child, childIndex){
+        }, scope, false);
+        ```
+- Character child
+    - For each active character child
+        ```javascript
+        txt.forEachCharChild(function(child, charIndex){
+        }, scope)
+        ```
+    - For each character child
+        ```javascript
+        txt.forEachCharChild(function(child, charIndex){
+        }, scope, false);
+        ```
+
 ### Get children
 
 - Get all children
     ```javascript
     var children = txt.getChildren();
     ```
+- Character children
+    - Active character children
+        ```javascript
+        var children = txt.getCharChildren();
+        ```
+    - All character children
+        ```javascript
+        var children = txt.getCharChildren(false);
+        ```
 - Get last appended children
     ```javascript
     var children = txt.getLastAppendedChildren();

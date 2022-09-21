@@ -6,6 +6,7 @@ var ForEachCharChild = function (callback, scope, activeOnly) {
     }
 
     var children = this.children;
+    var charIndex = 0;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
 
@@ -16,10 +17,11 @@ var ForEachCharChild = function (callback, scope, activeOnly) {
         if (IsChar(child) && !child.removed) {
             var isBreak;
             if (scope) {
-                isBreak = callback.call(this, child, i, children);
+                isBreak = callback.call(this, child, charIndex, children);
             } else {
-                isBreak = callback(child, i, children);
+                isBreak = callback(child, charIndex, children);
             }
+            charIndex++;
 
             if (isBreak) {
                 break;

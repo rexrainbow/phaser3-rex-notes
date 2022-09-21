@@ -1617,6 +1617,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-text" class="md-nav__link">
+    Get text
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1735,6 +1742,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-each-child" class="md-nav__link">
+    For each child
+  </a>
   
 </li>
         
@@ -8726,6 +8740,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-text" class="md-nav__link">
+    Get text
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8844,6 +8865,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-each-child" class="md-nav__link">
+    For each child
+  </a>
   
 </li>
         
@@ -9005,6 +9033,7 @@
         <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
@@ -9099,6 +9128,7 @@
 <li><code>style.shadowOffsetX</code> : OffsetX of shadow.</li>
 <li><code>style.shadowOffsetY</code> : OffsetY of shadow.</li>
 <li><code>style.shadowBlur</code> : Blur of shadow.</li>
+<li><code>style.backgroundColor</code> : Background color of a character.</li>
 <li><code>style.offsetX</code> : OffsetX.</li>
 <li><code>style.offsetY</code> : OffsetY.</li>
 <li><code>style.align</code> : Override default line-alignment setting.<ul>
@@ -9181,6 +9211,7 @@
         <span class="c1">// shadowOffsetX: 0,</span>
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
+        <span class="c1">// backgroundColor: null,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// align: undefined</span>
@@ -9207,6 +9238,7 @@ or</p>
         <span class="c1">// shadowOffsetX: 0,</span>
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
+        <span class="c1">// backgroundColor: null,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// align: undefined</span>
@@ -9216,6 +9248,18 @@ or</p>
 <h4 id="remove-text">Remove text<a class="headerlink" href="#remove-text" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">removeText</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
+<h4 id="get-text">Get text<a class="headerlink" href="#get-text" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get active characters
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getText</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get all characters
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getText</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h3>
 <h4 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendImage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
@@ -9499,6 +9543,7 @@ or</p>
 <span class="kd">var</span> <span class="nx">shadowBlur</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowBlur</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">shadowOffsetX</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetX</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">shadowOffsetY</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">backgroundColor</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">xOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">yOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
@@ -9515,6 +9560,7 @@ or</p>
     <span class="c1">// shadowBlur: 0,</span>
     <span class="c1">// shadowOffsetX: 0,</span>
     <span class="c1">// shadowOffsetY: 0,</span>
+    <span class="c1">// backgroundColor: null,</span>
     <span class="c1">// offsetX: 0,</span>
     <span class="c1">// offsetY: 0</span>
 <span class="p">})</span>
@@ -9543,6 +9589,9 @@ or</p>
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setShadowBlur</span><span class="p">(</span><span class="nx">blur</span><span class="p">);</span>
 </code></pre></div>
+    <div class="highlight"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// char.setBackgroundColor();  // No shadow</span>
+</code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setOffsetX</span><span class="p">(</span><span class="nx">offsetX</span><span class="p">);</span>
 <span class="kr">char</span><span class="p">.</span><span class="nx">setOffsetY</span><span class="p">(</span><span class="nx">offsetY</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9565,11 +9614,45 @@ or</p>
 </ul>
 </li>
 </ul>
+<h3 id="for-each-child">For each child<a class="headerlink" href="#for-each-child" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Any child<ul>
+<li>For each active child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">childIndex</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div></li>
+<li>For each character child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">childIndex</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Character child<ul>
+<li>For each active character child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachCharChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">charIndex</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div></li>
+<li>For each character child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">forEachCharChild</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">charIndex</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="get-children">Get children<a class="headerlink" href="#get-children" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get all children
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Character children<ul>
+<li>Active character children
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChildren</span><span class="p">();</span>
+</code></pre></div></li>
+<li>All character children
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChildren</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Get last appended children
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getLastAppendedChildren</span><span class="p">();</span>
 </code></pre></div></li>
@@ -9587,20 +9670,20 @@ or</p>
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setChildrenInteractiveEnable</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Pointer down/up on child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">childIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
 <span class="p">})</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">childIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
 <span class="p">})</span>
 </code></pre></div><ul>
 <li><code>child</code> : Any <a href="./#character">Character</a> or <a href="./#image">Image</a> child</li>
 </ul>
 </li>
 <li>Pointer over/out on child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">childIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
 <span class="p">})</span>
 </code></pre></div>
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">childIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>        
 <span class="p">})</span>
 </code></pre></div><ul>
 <li><code>child</code> : Any <a href="./#character">Character</a> or <a href="./#image">Image</a> child</li>
