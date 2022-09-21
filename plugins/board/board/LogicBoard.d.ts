@@ -385,12 +385,32 @@ declare class Board<ChessType = unknown> extends EE {
         out?: TileXYType[]
     ): TileXYDirectionType | TileXYDirectionType[];
 
+    isEmptyTileXYZ(
+        tileX: number | ChessType | TileXYType,
+        tileY?: number,
+        tileZ?: number | string
+    ): boolean;
+
     getRandomEmptyTileXY(
         tileZ: number | string,
         out?: TileXYType | true
     ): TileXYType;
 
     getEmptyTileXYArray(
+        tileZ: number | string,
+        out?: TileXYType[]
+    ): TileXYType[];
+
+    getRandomEmptyTileXYInRange(
+        centerTileXY: ChessType | TileXYType,
+        radius: number,
+        tileZ: number | string,
+        out?: TileXYType | true
+    ): TileXYType;
+
+    getEmptyTileXYArrayInRange(
+        centerTileXY: ChessType | TileXYType,
+        radius: number,
         tileZ: number | string,
         out?: TileXYType[]
     ): TileXYType[];
