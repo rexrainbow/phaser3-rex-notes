@@ -386,7 +386,7 @@ declare class Board<ChessType = unknown> extends EE {
     ): TileXYDirectionType | TileXYDirectionType[];
 
     isEmptyTileXYZ(
-        tileX: number | ChessType | TileXYType,
+        tileX: number,
         tileY?: number,
         tileZ?: number | string
     ): boolean;
