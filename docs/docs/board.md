@@ -807,17 +807,39 @@ var newArray = board.mapNeighbors(chess, distance, function(neighborTileXY, inde
 
 ### Empty tile position
 
+- Is tile empty? (TileXY is inside board, and TileXYZ has no chess)
+    ```javascript
+    var isEmpty = board.isEmptyTileXYZ(tileX, tileY, tileZ);
+    ```
 - Get a random tile position which does not have any chess
     ```javascript
     var tileXY = board.getRandomEmptyTileXY(tileZ);
     // var out = board.getRandomEmptyTileXY(tileZ, out);
     ```
-    - `tileXY` : Tile position `{x, y}`, return `null` if all positions are occupied.
+    - `tileXY` : Tile position `{x, y}`, 
+        - `null` : All positions are occupied.
 - Get an array of tile position which does not have any chess
     ```javascript
     var tileXYArray = board.getEmptyTileXYArray(tileZ);
     // var out = board.getEmptyTileXYArray(tileZ, out);
     ```
+    - `tileXYArray` : An array of tile position
+- Get a random tile position of neighbor which does not have any chess
+    ```javascript
+    var tileXY = board.getRandomEmptyTileXYInRange(centerTileXY, radius, tileZ);
+    // var out = board.getRandomEmptyTileXYInRange(centerTileXY, radius, tileZ, out);
+    ```
+    - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
+    - `radius` : Radius of the ring.
+    - `tileXY` : Tile position `{x, y}`, 
+        - `null` : All positions are occupied.
+- Get an array of tile position of neighbors which does not have any chess
+    ```javascript
+    var tileXYArray = board.getEmptyTileXYArrayInRange(centerTileXY, radius, tileZ);
+    // var out = board.getEmptyTileXYArrayInRange(centerTileXY, radius, tileZ, out);
+    ```
+    - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
+    - `radius` : Radius of the ring.
     - `tileXYArray` : An array of tile position
 
 ### Get all chess

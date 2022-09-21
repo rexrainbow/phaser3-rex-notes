@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
             }, this)
             .setInteractive()
             .on('tiledown', function (pointer, tileXY) {
-                if (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) {
+                if (!board.isEmptyTileXYZ(tileXY.x, tileXY.y, 0)) {
                     return;
                 }
 

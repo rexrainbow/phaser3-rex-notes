@@ -1005,12 +1005,12 @@
       return null;
     }
 
-    globTileXY$h.x = tileX;
-    globTileXY$h.y = tileY;
-    return board.getNeighborTileDirection(this.tileXYZ, globTileXY$h);
+    globTileXY$i.x = tileX;
+    globTileXY$i.y = tileY;
+    return board.getNeighborTileDirection(this.tileXYZ, globTileXY$i);
   };
 
-  var globTileXY$h = {
+  var globTileXY$i = {
     x: 0,
     y: 0
   };
@@ -4108,13 +4108,13 @@
 
         for (var y = top; y <= bottom; y++) {
           for (var x = left; x <= right; x++) {
-            globTileXY$g.x = x;
-            globTileXY$g.y = y;
+            globTileXY$h.x = x;
+            globTileXY$h.y = y;
 
             if (scope) {
-              isBreak = callback.call(scope, globTileXY$g, this);
+              isBreak = callback.call(scope, globTileXY$h, this);
             } else {
-              isBreak = callback(globTileXY$g, this);
+              isBreak = callback(globTileXY$h, this);
             }
 
             if (isBreak) {
@@ -4131,13 +4131,13 @@
 
         for (var y = top; y <= bottom; y++) {
           for (var x = right; x >= left; x--) {
-            globTileXY$g.x = x;
-            globTileXY$g.y = y;
+            globTileXY$h.x = x;
+            globTileXY$h.y = y;
 
             if (scope) {
-              isBreak = callback.call(scope, globTileXY$g, this);
+              isBreak = callback.call(scope, globTileXY$h, this);
             } else {
-              isBreak = callback(globTileXY$g, this);
+              isBreak = callback(globTileXY$h, this);
             }
 
             if (isBreak) {
@@ -4154,13 +4154,13 @@
 
         for (var x = left; x <= right; x++) {
           for (var y = top; y <= bottom; y++) {
-            globTileXY$g.x = x;
-            globTileXY$g.y = y;
+            globTileXY$h.x = x;
+            globTileXY$h.y = y;
 
             if (scope) {
-              isBreak = callback.call(scope, globTileXY$g, this);
+              isBreak = callback.call(scope, globTileXY$h, this);
             } else {
-              isBreak = callback(globTileXY$g, this);
+              isBreak = callback(globTileXY$h, this);
             }
 
             if (isBreak) {
@@ -4177,13 +4177,13 @@
 
         for (var x = left; x <= right; x++) {
           for (var y = bottom; y >= top; y--) {
-            globTileXY$g.x = x;
-            globTileXY$g.y = y;
+            globTileXY$h.x = x;
+            globTileXY$h.y = y;
 
             if (scope) {
-              isBreak = callback.call(scope, globTileXY$g, this);
+              isBreak = callback.call(scope, globTileXY$h, this);
             } else {
-              isBreak = callback(globTileXY$g, this);
+              isBreak = callback(globTileXY$h, this);
             }
 
             if (isBreak) {
@@ -4197,7 +4197,7 @@
     return this;
   };
 
-  var globTileXY$g = {
+  var globTileXY$h = {
     x: 0,
     y: 0
   };
@@ -4229,7 +4229,7 @@
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      out = globTileXY$f;
+      out = globTileXY$g;
     }
 
     if (this.wrapMode) {
@@ -4249,7 +4249,7 @@
     return out;
   };
 
-  var globTileXY$f = {};
+  var globTileXY$g = {};
 
   var TileXYZToChess = function TileXYZToChess(tileX, tileY, tileZ) {
     var uid = this.boardData.getUID(tileX, tileY, tileZ);
@@ -4398,7 +4398,7 @@
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      out = globTileXY$e;
+      out = globTileXY$f;
     }
 
     if (OffsetTileX === 0 && OffsetTileY === 0) {
@@ -4411,13 +4411,13 @@
     return out;
   };
 
-  var globTileXY$e = {};
+  var globTileXY$f = {};
 
   var Mirror$4 = function Mirror(tileXY, mode, originTileXY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      out = globTileXY$d;
+      out = globTileXY$e;
     }
 
     if (originTileXY !== undefined) {
@@ -4436,13 +4436,13 @@
     return out;
   };
 
-  var globTileXY$d = {};
+  var globTileXY$e = {};
 
   var Rotate$4 = function Rotate(tileXY, direction, originTileXY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      out = globTileXY$c;
+      out = globTileXY$d;
     }
 
     if (originTileXY !== undefined) {
@@ -4461,7 +4461,7 @@
     return out;
   };
 
-  var globTileXY$c = {};
+  var globTileXY$d = {};
 
   // Offset tileXYArray to (0,0), and set board size to fit tileXYArray
   var Fit = function Fit(tileXYArray) {
@@ -4500,18 +4500,23 @@
     return tileXYArray;
   };
 
-  var GetEmptyTileXYArray = function GetEmptyTileXYArray(tileZ, out) {
-    if (out === undefined) {
-      out = [];
-    }
+  var IsEmptyTileXYZ = function IsEmptyTileXYZ(tileX, tileY, tileZ) {
+    // TileXY is inside board, and TileXYZ has no chess
+    return this.contains(tileX, tileY) && !this.contains(tileX, tileY, tileZ);
+  };
 
+  var GetEmptyTileXYArray = function GetEmptyTileXYArray(tileZ, out) {
     if (tileZ === undefined) {
       tileZ = 0;
     }
 
+    if (out === undefined) {
+      out = [];
+    }
+
     for (var tileY = 0; tileY < this.height; tileY++) {
       for (var tileX = 0; tileX < this.width; tileX++) {
-        if (this.tileXYZToChess(tileX, tileY, tileZ) === null) {
+        if (this.isEmptyTileXYZ(tileX, tileY, tileZ)) {
           out.push({
             x: tileX,
             y: tileY
@@ -4583,7 +4588,7 @@
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      out = globTileXY$b;
+      out = globTileXY$c;
     }
 
     var tileX, tileY;
@@ -4602,18 +4607,116 @@
       out.y = tileY;
       return out;
     } else {
-      globTileXYArray$1 = this.getEmptyTileXYArray(tileZ, globTileXYArray$1);
+      globTileXYArray$3 = this.getEmptyTileXYArray(tileZ, globTileXYArray$3);
 
-      if (globTileXYArray$1.length === 0) {
+      if (globTileXYArray$3.length === 0) {
         return null;
       } else {
-        var tileXY = GetRandom(globTileXYArray$1);
+        var tileXY = GetRandom(globTileXYArray$3);
+        out.x = tileXY.x;
+        out.y = tileXY.y;
+        globTileXYArray$3.length = 0;
+        return out;
+      }
+    }
+  };
+
+  var globTileXYArray$3 = [];
+  var globTileXY$c = {};
+
+  var GetEmptyTileXYArrayInRange = function GetEmptyTileXYArrayInRange(centerTileXY, radius, tileZ, out) {
+    if (radius === undefined) {
+      radius = 1;
+    }
+
+    if (tileZ === undefined) {
+      tileZ = 0;
+    }
+
+    if (out === undefined) {
+      out = [];
+    }
+
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+    this.grid.ringToTileXYArray(centerTileXY, radius, globTileXYArray$2);
+    var tileXY;
+
+    for (var i = 0, cnt = globTileXYArray$2.length; i < cnt; i++) {
+      tileXY = globTileXYArray$2[i];
+
+      if (this.isEmptyTileXYZ(tileXY.x, tileXY.y, tileZ)) {
+        out.push(tileXY);
+      }
+    }
+
+    globTileXYArray$2.length = 0;
+    return out;
+  };
+
+  var globTileXYArray$2 = [];
+
+  /**
+   * @author       Richard Davey <rich@photonstorm.com>
+   * @copyright    2018 Photon Storm Ltd.
+   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+   */
+
+  /**
+   * Shuffles the contents of the given array using the Fisher-Yates implementation.
+   *
+   * The original array is modified directly and returned.
+   *
+   * @function Phaser.Utils.Array.Shuffle
+   * @since 3.0.0
+   *
+   * @param {array} array - The array to shuffle. This array is modified in place.
+   *
+   * @return {array} The shuffled array.
+   */
+  var Shuffle = function Shuffle(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+
+    return array;
+  };
+
+  var GetRandomEmptyTileXYInRange = function GetRandomEmptyTileXYInRange(centerTileXY, radius, tileZ, out) {
+    if (radius === undefined) {
+      radius = 1;
+    }
+
+    if (tileZ === undefined) {
+      tileZ = 0;
+    }
+
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globTileXY$b;
+    }
+
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+    this.grid.ringToTileXYArray(centerTileXY, radius, globTileXYArray$1);
+    Shuffle(globTileXYArray$1);
+    var tileXY;
+
+    for (var i = 0, cnt = globTileXYArray$1.length; i < cnt; i++) {
+      tileXY = globTileXYArray$1[i];
+
+      if (this.isEmptyTileXYZ(tileXY.x, tileXY.y, tileZ)) {
         out.x = tileXY.x;
         out.y = tileXY.y;
         globTileXYArray$1.length = 0;
         return out;
       }
     }
+
+    globTileXYArray$1.length = 0;
+    return null;
   };
 
   var globTileXYArray$1 = [];
@@ -5038,8 +5141,11 @@
     directionBetween: DirectionBetween$2,
     isDirectionInCone: IsDirectionInCone,
     fit: Fit,
+    isEmptyTileXYZ: IsEmptyTileXYZ,
     getEmptyTileXYArray: GetEmptyTileXYArray,
     getRandomEmptyTileXY: GetRandomEmptyTileXY,
+    getEmptyTileXYArrayInRange: GetEmptyTileXYArrayInRange,
+    getRandomEmptyTileXYInRange: GetRandomEmptyTileXYInRange,
     getTileXYAtDirection: GetTileXYAtDirection,
     getNeighborTileXY: GetNeighborTileXY$2,
     getNeighborTileXYAtAngle: GetNeighborTileXYAtAngle,
@@ -9556,35 +9662,6 @@
     }
 
     return out;
-  };
-
-  /**
-   * @author       Richard Davey <rich@photonstorm.com>
-   * @copyright    2018 Photon Storm Ltd.
-   * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
-   */
-
-  /**
-   * Shuffles the contents of the given array using the Fisher-Yates implementation.
-   *
-   * The original array is modified directly and returned.
-   *
-   * @function Phaser.Utils.Array.Shuffle
-   * @since 3.0.0
-   *
-   * @param {array} array - The array to shuffle. This array is modified in place.
-   *
-   * @return {array} The shuffled array.
-   */
-  var Shuffle = function Shuffle(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
-    }
-
-    return array;
   };
 
   var MoveToRandomNeighbor$1 = function MoveToRandomNeighbor() {
