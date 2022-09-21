@@ -2934,38 +2934,6 @@
     return this;
   };
 
-  var ForEachCharChild = function ForEachCharChild(callback, scope, activeOnly) {
-    if (activeOnly === undefined) {
-      activeOnly = true;
-    }
-
-    var children = this.children;
-
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-      var child = children[i];
-
-      if (activeOnly && !child.active) {
-        continue;
-      }
-
-      if (IsChar(child) && !child.removed) {
-        var isBreak;
-
-        if (scope) {
-          isBreak = callback.call(this, child, i, children);
-        } else {
-          isBreak = callback(child, i, children);
-        }
-
-        if (isBreak) {
-          break;
-        }
-      }
-    }
-
-    return this;
-  };
-
   var GetText = function GetText(activeOnly) {
     var text = '';
     this.forEachCharChild(function (child) {
@@ -4051,6 +4019,74 @@
     }
   };
 
+  var ForEachChild = function ForEachChild(callback, scope, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+    var childIndex = 0;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      var isBreak;
+
+      if (scope) {
+        isBreak = callback.call(this, child, childIndex, children);
+      } else {
+        isBreak = callback(child, childIndex, children);
+      }
+
+      childIndex++;
+
+      if (isBreak) {
+        break;
+      }
+    }
+
+    return this;
+  };
+
+  var ForEachCharChild = function ForEachCharChild(callback, scope, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+    var charIndex = 0;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child) && !child.removed) {
+        var isBreak;
+
+        if (scope) {
+          isBreak = callback.call(this, child, charIndex, children);
+        } else {
+          isBreak = callback(child, charIndex, children);
+        }
+
+        charIndex++;
+
+        if (isBreak) {
+          break;
+        }
+      }
+    }
+
+    return this;
+  };
+
   var GetChildren = function GetChildren() {
     return this.children;
   };
@@ -4363,7 +4399,6 @@
     appendText: AppendText,
     insertText: InsertText,
     removeText: RemoveText,
-    forEachCharChild: ForEachCharChild,
     getText: GetText,
     appendImage: AppendImage,
     appendDrawer: AppendDrawer,
@@ -4373,6 +4408,8 @@
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,
     renderContent: RenderContent,
+    forEachChild: ForEachChild,
+    forEachCharChild: ForEachCharChild,
     getChildren: GetChildren,
     getActiveChildren: GetActiveChildren,
     getCharChildren: GetCharChildren,
@@ -4813,7 +4850,9 @@
       key: "setCursorPosition",
       value: function setCursorPosition(value) {
         if (value === undefined) {
-          value = 0;
+          value = this.text.length;
+        } else if (value < 0) {
+          value = this.text.length + value;
         }
 
         this.cursorPosition = value;
@@ -4977,6 +5016,9 @@
     keydown: 'keydown',
     keyup: 'keyup',
     keypress: 'keypress',
+    compositionstart: 'compositionStart',
+    compositionend: 'compositionEnd',
+    compositionupdate: 'compositionUpdate',
     focus: 'focus',
     blur: 'blur',
     select: 'select'

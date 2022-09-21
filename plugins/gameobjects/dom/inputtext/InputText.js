@@ -163,8 +163,11 @@ class InputText extends DOMElement {
 
     setCursorPosition(value) {
         if (value === undefined) {
-            value = 0;
+            value = this.text.length;
+        } else if (value < 0) {
+            value = this.text.length + value;
         }
+
         this.cursorPosition = value;
         return this;
     }
@@ -321,10 +324,14 @@ const ElementEvents = {
     keyup: 'keyup',
     keypress: 'keypress',
 
+    compositionstart: 'compositionStart',
+    compositionend: 'compositionEnd',
+    compositionupdate: 'compositionUpdate',
+
     focus: 'focus',
     blur: 'blur',
 
-    select: 'select'
+    select: 'select',
 };
 
 export default InputText;

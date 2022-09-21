@@ -415,6 +415,16 @@ inputText.resize(width, height);
         var selectionEnd = inputText.selectionEnd;
     }, scope);
     ```
+- On composition inpit
+    ```javascript
+    inputText.on('compositionStart', function(inputText, e){ }, scope);
+    ```
+    ```javascript
+    inputText.on('compositionEnd', function(inputText, e){ }, scope);
+    ```
+    ```javascript
+    inputText.on('compositionUpdate', function(inputText, e){ }, scope);
+    ```
 
 ### Bypass key input
 

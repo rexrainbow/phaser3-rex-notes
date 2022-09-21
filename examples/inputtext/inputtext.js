@@ -47,6 +47,9 @@ class Demo extends Phaser.Scene {
             .on('keypress', function (inputText, e) {
                 //console.log(`keypress ${e.which} : ${e.code}`)
             })
+            .on('compositionUpdate', function (inputText, e) {
+                console.log(`CompositionUpdate ${e.data}`)
+            })
 
         printText.text = inputText.text;
 

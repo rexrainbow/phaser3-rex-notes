@@ -401,7 +401,9 @@
       key: "setCursorPosition",
       value: function setCursorPosition(value) {
         if (value === undefined) {
-          value = 0;
+          value = this.text.length;
+        } else if (value < 0) {
+          value = this.text.length + value;
         }
 
         this.cursorPosition = value;
@@ -565,6 +567,9 @@
     keydown: 'keydown',
     keyup: 'keyup',
     keypress: 'keypress',
+    compositionstart: 'compositionStart',
+    compositionend: 'compositionEnd',
+    compositionupdate: 'compositionUpdate',
     focus: 'focus',
     blur: 'blur',
     select: 'select'
@@ -834,7 +839,9 @@
       key: "initText",
       value: function initText() {
         this.cursorFlashTimer = 0;
+        this.prevCursorPosition = undefined;
         this.setText(this.textObject.text);
+        this.setCursorPosition();
         return this;
       }
     }, {
@@ -854,6 +861,11 @@
           // Insert Cursor
           var cursorPosition = this.cursorPosition;
           text = text.substring(0, cursorPosition) + this.cursor + text.substring(cursorPosition);
+
+          if (this.prevCursorPosition !== cursorPosition) {
+            // console.log(cursorPosition);
+            this.prevCursorPosition = cursorPosition;
+          }
         }
 
         this.textObject.setText(text);

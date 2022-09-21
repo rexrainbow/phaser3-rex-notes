@@ -26,7 +26,9 @@ class HiddenInputText extends HiddenInputTextBase {
 
     initText() {
         this.cursorFlashTimer = 0;
+        this.prevCursorPosition = undefined;
         this.setText(this.textObject.text);
+        this.setCursorPosition();
 
         return this;
     }
@@ -45,6 +47,11 @@ class HiddenInputText extends HiddenInputTextBase {
             // Insert Cursor
             var cursorPosition = this.cursorPosition;
             text = text.substring(0, cursorPosition) + this.cursor + text.substring(cursorPosition);
+
+            if (this.prevCursorPosition !== cursorPosition) {
+                // console.log(cursorPosition);
+                this.prevCursorPosition = cursorPosition;
+            }
         }
 
         this.textObject.setText(text);
