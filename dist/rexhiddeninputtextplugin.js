@@ -152,21 +152,229 @@
     return _get.apply(this, arguments);
   }
 
-  var Resize = function Resize(width, height) {
-    if (this.scene.sys.scale.autoRound) {
-      width = Math.floor(width);
-      height = Math.floor(height);
-    }
+  var EventEmitterMethods = {
+    setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
+      if (EventEmitterClass === undefined) {
+        EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
+      }
 
-    if (this.width === width && this.height === height) {
+      this._privateEE = eventEmitter === true || eventEmitter === undefined;
+      this._eventEmitter = this._privateEE ? new EventEmitterClass() : eventEmitter;
       return this;
+    },
+    destroyEventEmitter: function destroyEventEmitter() {
+      if (this._eventEmitter && this._privateEE) {
+        this._eventEmitter.shutdown();
+      }
+
+      return this;
+    },
+    getEventEmitter: function getEventEmitter() {
+      return this._eventEmitter;
+    },
+    on: function on() {
+      if (this._eventEmitter) {
+        this._eventEmitter.on.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    once: function once() {
+      if (this._eventEmitter) {
+        this._eventEmitter.once.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    off: function off() {
+      if (this._eventEmitter) {
+        this._eventEmitter.off.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    emit: function emit(event) {
+      if (this._eventEmitter && event) {
+        this._eventEmitter.emit.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    addListener: function addListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeListener: function removeListener() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    removeAllListeners: function removeAllListeners() {
+      if (this._eventEmitter) {
+        this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
+      }
+
+      return this;
+    },
+    listenerCount: function listenerCount() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
+      }
+
+      return 0;
+    },
+    listeners: function listeners() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    },
+    eventNames: function eventNames() {
+      if (this._eventEmitter) {
+        return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+      }
+
+      return [];
+    }
+  };
+
+  var SceneClass = Phaser.Scene;
+
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSceneObject = function GetSceneObject(object) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsSceneObject(object)) {
+      // object = scene
+      return object;
+    } else if (object.scene && IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene;
+    } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
+      // parent = bob object
+      return object.parent.scene;
+    }
+  };
+
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+
+      this.parent = parent; // gameObject or scene
+
+      this.scene = GetSceneObject(parent);
+      this.isShutdown = false; // Event emitter, default is private event emitter
+
+      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+
+      if (this.parent && this.parent === this.scene) {
+        // parent is a scene
+        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
+      } else if (this.parent && this.parent.once) {
+        // bob object does not have event emitter
+        this.parent.once('destroy', this.onParentDestroy, this);
+      }
     }
 
-    var style = this.node.style;
-    style.width = "".concat(width, "px");
-    style.height = "".concat(height, "px");
-    this.updateSize();
-    return this;
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        } // parent might not be shutdown yet
+
+
+        if (this.parent && this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
+        } else if (this.parent && this.parent.once) {
+          // bob object does not have event emitter
+          this.parent.off('destroy', this.onParentDestroy, this);
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onSceneDestroy",
+      value: function onSceneDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }]);
+
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
+  var ElementProperties = {
+    id: ['id', undefined],
+    text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
+    placeholder: ['placeholder', undefined],
+    tooltip: ['title', undefined],
+    readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off']
+  };
+  var StyleProperties = {
+    align: ['textAlign', undefined],
+    paddingLeft: ['padding-left', undefined],
+    paddingRight: ['padding-right', undefined],
+    paddingTop: ['padding-top', undefined],
+    paddingBottom: ['padding-bottom', undefined],
+    fontFamily: ['fontFamily', undefined],
+    fontSize: ['font-size', undefined],
+    color: ['color', '#ffffff'],
+    backgroundColor: ['backgroundColor', 'transparent'],
+    border: ['border', 0],
+    borderColor: ['borderColor', 'transparent'],
+    outline: ['outline', 'none'],
+    direction: ['direction', undefined]
+  };
+  var ElementEvents = {
+    input: 'textchange',
+    click: 'click',
+    dblclick: 'dblclick',
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress',
+    compositionstart: 'compositionStart',
+    compositionend: 'compositionEnd',
+    compositionupdate: 'compositionUpdate',
+    focus: 'focus',
+    blur: 'blur',
+    select: 'select'
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
@@ -218,361 +426,56 @@
     e.stopPropagation();
   };
 
-  var DOMElement = Phaser.GameObjects.DOMElement;
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
-  var InputText = /*#__PURE__*/function (_DOMElement) {
-    _inherits(InputText, _DOMElement);
+  var CreateElement = function CreateElement(parent, config) {
+    var element;
+    var textType = GetValue$2(config, 'type', 'text');
 
-    var _super = _createSuper(InputText);
-
-    function InputText(scene, x, y, width, height, config) {
-      var _this;
-
-      _classCallCheck(this, InputText);
-
-      if (IsPlainObject(x)) {
-        config = x;
-        x = GetValue$2(config, 'x', 0);
-        y = GetValue$2(config, 'y', 0);
-        width = GetValue$2(config, 'width', 0);
-        height = GetValue$2(config, 'height', 0);
-      } else if (IsPlainObject(width)) {
-        config = width;
-        width = GetValue$2(config, 'width', 0);
-        height = GetValue$2(config, 'height', 0);
-      }
-
-      if (config === undefined) {
-        config = {};
-      }
-
-      var element;
-      var textType = GetValue$2(config, 'type', 'text');
-
-      if (textType === 'textarea') {
-        element = document.createElement('textarea');
-        element.style.resize = 'none';
-      } else {
-        element = document.createElement('input');
-        element.type = textType;
-      }
-
-      SetProperties(ElementProperties, config, element);
-      var style = GetValue$2(config, 'style', undefined);
-      style = SetProperties(StyleProperties, config, style); // Apply other style properties
-
-      var elementStyle = element.style;
-
-      for (var key in config) {
-        if (key in ElementProperties || key in StyleProperties) {
-          continue;
-        } else if (key in elementStyle) {
-          style[key] = config[key];
-        }
-      }
-
-      style['box-sizing'] = 'border-box';
-      _this = _super.call(this, scene, x, y, element, style);
-      _this.type = 'rexInputText';
-
-      _this.resize(width, height); // Apply events
-
-
-      RouteEvents(_assertThisInitialized(_this), element, ElementEvents); // Don't propagate touch/mouse events to parent(game canvas)
-
-      StopPropagationTouchEvents(element);
-
-      if (GetValue$2(config, 'selectAll', false)) {
-        _this.selectAll();
-      }
-
-      _this._isFocused = false;
-
-      _this.on('focus', function () {
-        this._isFocused = true;
-      }, _assertThisInitialized(_this)).on('blur', function () {
-        this._isFocused = false;
-      }, _assertThisInitialized(_this));
-
-      return _this;
+    if (textType === 'textarea') {
+      element = document.createElement('textarea');
+      element.style.resize = 'none';
+    } else {
+      element = document.createElement('input');
+      element.type = textType;
     }
 
-    _createClass(InputText, [{
-      key: "text",
-      get: function get() {
-        return this.node.value;
-      },
-      set: function set(value) {
-        this.node.value = value;
-      }
-    }, {
-      key: "setText",
-      value: function setText(value) {
-        // Override
-        this.text = value;
-        return this;
-      }
-    }, {
-      key: "maxLength",
-      get: function get() {
-        return this.node.maxLength;
-      },
-      set: function set(value) {
-        this.node.maxLength = value;
-      }
-    }, {
-      key: "setMaxLength",
-      value: function setMaxLength(value) {
-        this.maxLength = value;
-        return this;
-      }
-    }, {
-      key: "minLength",
-      get: function get() {
-        return this.node.minLength;
-      },
-      set: function set(value) {
-        this.node.minLength = value;
-      }
-    }, {
-      key: "setMinLength",
-      value: function setMinLength(value) {
-        this.minLength = value;
-        return this;
-      }
-    }, {
-      key: "placeholder",
-      get: function get() {
-        return this.node.placeholder;
-      },
-      set: function set(value) {
-        this.node.placeholder = value;
-      }
-    }, {
-      key: "setPlaceholder",
-      value: function setPlaceholder(value) {
-        this.placeholder = value;
-        return this;
-      }
-    }, {
-      key: "selectText",
-      value: function selectText(selectionStart, selectionEnd) {
-        if (selectionStart === undefined) {
-          this.node.select();
-        } else {
-          this.node.setSelectionRange(selectionStart, selectionEnd);
-        }
+    var style = GetValue$2(config, 'style', undefined);
+    style = SetProperties(StyleProperties, config, style); // Apply other style properties
 
-        return this;
-      }
-    }, {
-      key: "selectAll",
-      value: function selectAll() {
-        this.selectText();
-        return this;
-      }
-    }, {
-      key: "selectionStart",
-      get: function get() {
-        return this.node.selectionStart;
-      }
-    }, {
-      key: "selectionEnd",
-      get: function get() {
-        return this.node.selectionEnd;
-      }
-    }, {
-      key: "selectedText",
-      get: function get() {
-        var node = this.node;
-        return node.value.substring(node.selectionStart, node.selectionEnd);
-      }
-    }, {
-      key: "cursorPosition",
-      get: function get() {
-        return this.node.selectionStart;
-      },
-      set: function set(value) {
-        this.node.setSelectionRange(value, value);
-      }
-    }, {
-      key: "setCursorPosition",
-      value: function setCursorPosition(value) {
-        if (value === undefined) {
-          value = this.text.length;
-        } else if (value < 0) {
-          value = this.text.length + value;
-        }
+    var elementStyle = element.style;
 
-        this.cursorPosition = value;
-        return this;
+    for (var key in config) {
+      if (key in ElementProperties || key in StyleProperties) {
+        continue;
+      } else if (key in elementStyle) {
+        style[key] = config[key];
       }
-    }, {
-      key: "tooltip",
-      get: function get() {
-        return this.node.title;
-      },
-      set: function set(value) {
-        this.node.title = value;
-      }
-    }, {
-      key: "setTooltip",
-      value: function setTooltip(value) {
-        this.tooltip = value;
-        return this;
-      }
-    }, {
-      key: "setTextChangedCallback",
-      value: function setTextChangedCallback(callback) {
-        this.onTextChanged = callback;
-        return this;
-      }
-    }, {
-      key: "readOnly",
-      get: function get() {
-        return this.node.readOnly;
-      },
-      set: function set(value) {
-        this.node.readOnly = value;
-      }
-    }, {
-      key: "setReadOnly",
-      value: function setReadOnly(value) {
-        if (value === undefined) {
-          value = true;
-        }
+    }
 
-        this.readOnly = value;
-        return this;
-      }
-    }, {
-      key: "spellCheck",
-      get: function get() {
-        return this.node.spellcheck;
-      },
-      set: function set(value) {
-        this.node.spellcheck = value;
-      }
-    }, {
-      key: "setSpellCheck",
-      value: function setSpellCheck(value) {
-        this.spellCheck = value;
-        return this;
-      }
-    }, {
-      key: "fontColor",
-      get: function get() {
-        return this.node.style.color;
-      },
-      set: function set(value) {
-        this.node.style.color = value;
-      }
-    }, {
-      key: "setFontColor",
-      value: function setFontColor(value) {
-        this.fontColor = value;
-        return this;
-      }
-    }, {
-      key: "setStyle",
-      value: function setStyle(key, value) {
-        this.node.style[key] = value;
-        return this;
-      }
-    }, {
-      key: "getStyle",
-      value: function getStyle(key) {
-        return this.node.style[key];
-      }
-    }, {
-      key: "scrollToBottom",
-      value: function scrollToBottom() {
-        this.node.scrollTop = this.node.scrollHeight;
-        return this;
-      }
-    }, {
-      key: "setEnabled",
-      value: function setEnabled(enabled) {
-        if (enabled === undefined) {
-          enabled = true;
-        }
+    style['box-sizing'] = 'border-box'; // Set style
 
-        this.node.disabled = !enabled;
-        return this;
-      }
-    }, {
-      key: "setBlur",
-      value: function setBlur() {
-        this.node.blur();
-        return this;
-      }
-    }, {
-      key: "setFocus",
-      value: function setFocus() {
-        this.node.focus();
-        return this;
-      }
-    }, {
-      key: "isFocused",
-      get: function get() {
-        return this._isFocused;
-      }
-    }]);
+    elementStyle.position = 'absolute';
+    elementStyle.opacity = 0;
+    elementStyle.pointerEvents = 'none';
+    elementStyle.zIndex = 0; // hide native blue text cursor on iOS
 
-    return InputText;
-  }(DOMElement);
+    elementStyle.transform = 'scale(0)';
+    SetProperties(ElementProperties, config, element); // Apply events
 
-  var methods = {
-    resize: Resize
+    RouteEvents(parent, element, ElementEvents); // Don't propagate touch/mouse events to parent(game canvas)
+
+    StopPropagationTouchEvents(element);
+    document.body.appendChild(element);
+    return element;
   };
-  Object.assign(InputText.prototype, methods);
-  var ElementProperties = {
-    id: ['id', undefined],
-    text: ['value', undefined],
-    maxLength: ['maxLength', undefined],
-    minLength: ['minLength', undefined],
-    placeholder: ['placeholder', undefined],
-    tooltip: ['title', undefined],
-    readOnly: ['readOnly', false],
-    spellCheck: ['spellcheck', false],
-    autoComplete: ['autocomplete', 'off']
-  };
-  var StyleProperties = {
-    align: ['textAlign', undefined],
-    paddingLeft: ['padding-left', undefined],
-    paddingRight: ['padding-right', undefined],
-    paddingTop: ['padding-top', undefined],
-    paddingBottom: ['padding-bottom', undefined],
-    fontFamily: ['fontFamily', undefined],
-    fontSize: ['font-size', undefined],
-    color: ['color', '#ffffff'],
-    backgroundColor: ['backgroundColor', 'transparent'],
-    border: ['border', 0],
-    borderColor: ['borderColor', 'transparent'],
-    outline: ['outline', 'none'],
-    direction: ['direction', undefined]
-  };
-  var ElementEvents = {
-    input: 'textchange',
-    click: 'click',
-    dblclick: 'dblclick',
-    mousedown: 'pointerdown',
-    mousemove: 'pointermove',
-    mouseup: 'pointerup',
-    touchstart: 'pointerdown',
-    touchmove: 'pointermove',
-    touchend: 'pointerup',
-    keydown: 'keydown',
-    keyup: 'keyup',
-    keypress: 'keypress',
-    compositionstart: 'compositionStart',
-    compositionend: 'compositionEnd',
-    compositionupdate: 'compositionUpdate',
-    focus: 'focus',
-    blur: 'blur',
-    select: 'select'
+
+  var RemoveElement = function RemoveElement(element) {
+    if (!element) {
+      return;
+    }
+
+    document.body.removeChild(element);
   };
 
   var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
@@ -638,36 +541,31 @@
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
-  var HiddenInputTextBase = /*#__PURE__*/function (_InputText) {
-    _inherits(HiddenInputTextBase, _InputText);
+  var HiddenTextEditBase = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(HiddenTextEditBase, _ComponentBase);
 
-    var _super = _createSuper(HiddenInputTextBase);
+    var _super = _createSuper(HiddenTextEditBase);
 
-    function HiddenInputTextBase(textObject, config) {
+    function HiddenTextEditBase(gameObject, config) {
       var _this;
 
-      _classCallCheck(this, HiddenInputTextBase);
+      _classCallCheck(this, HiddenTextEditBase);
 
-      _this = _super.call(this, textObject.scene, config); // Note: Don't add this game object into scene
-      // Set style
-
-      var style = _this.node.style;
-      style.position = 'absolute';
-      style.opacity = 0;
-      style.pointerEvents = 'none';
-      style.zIndex = 0; // hide native blue text cursor on iOS
-
-      style.transform = 'scale(0)';
+      _this = _super.call(this, gameObject); // this.parent = gameObject;
 
       _this.setEnterCloseEnable(GetValue$1(config, 'enterClose', true));
 
       _this.onOpenCallback = GetValue$1(config, 'onOpen', undefined);
       _this.onCloseCallback = GetValue$1(config, 'onClose', undefined);
       _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
-      _this.textObject = textObject;
-      textObject.on('pointerdown', _this.open, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this)).setInteractive();
+      gameObject.on('pointerdown', _this.open, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this)).setInteractive();
+      _this.nodeConfig = config; // Create/remove input text element when opening/closing editor
+
+      _this.node = undefined;
+      _this._isFocused = false;
 
       _this.on('focus', function () {
+        this._isFocused = true;
         this.initText();
 
         if (this.enterCloseEnable) {
@@ -680,35 +578,38 @@
         this.scene.input.on('pointerdown', this.onClickOutside, this);
 
         if (this.onOpenCallback) {
-          this.onOpenCallback(this.textObject, this);
+          this.onOpenCallback(this.parent, this);
         }
       }, _assertThisInitialized(_this)).on('blur', function () {
+        this._isFocused = false;
         this.updateText();
         this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
 
         if (this.onCloseCallback) {
-          this.onCloseCallback(this.textObject, this);
+          this.onCloseCallback(this.parent, this);
         }
       }, _assertThisInitialized(_this));
 
       return _this;
     }
 
-    _createClass(HiddenInputTextBase, [{
-      key: "preDestroy",
-      value: function preDestroy() {
-        this.textObject.off('pointerdown', this.open, this);
-        this.textObject.off('destroy', this.destroy, this);
+    _createClass(HiddenTextEditBase, [{
+      key: "destroy",
+      value: function destroy() {
+        // this.parent.off('pointerdown', this.open, this);
+        // this.parent.off('destroy', this.destroy, this);
         this.scene.sys.events.off('postupdate', this.updateText, this);
         this.scene.input.off('pointerdown', this.onClickOutside, this);
+        RemoveElement(this.node);
+        this.node = undefined;
 
-        _get(_getPrototypeOf(HiddenInputTextBase.prototype), "preDestroy", this).call(this);
+        _get(_getPrototypeOf(HiddenTextEditBase.prototype), "destroy", this).call(this);
       }
     }, {
       key: "onClickOutside",
       value: function onClickOutside(pointer) {
-        if (!IsPointerInHitArea(this.textObject, pointer)) {
+        if (!IsPointerInHitArea(this.parent, pointer)) {
           this.close();
         }
       }
@@ -725,12 +626,23 @@
     }, {
       key: "open",
       value: function open() {
+        if (!this.node) {
+          // Create input text element when opening/closing editor
+          this.node = CreateElement(this, this.nodeConfig);
+        }
+
         this.setFocus();
         return this;
       }
     }, {
       key: "close",
       value: function close() {
+        if (this.node) {
+          // Remove input text element when opening/closing editor
+          RemoveElement(this.node);
+          this.node = undefined;
+        }
+
         this.setBlur();
         return this;
       }
@@ -746,11 +658,340 @@
 
     }, {
       key: "updateText",
-      value: function updateText() {}
+      value: function updateText() {} // Copy from InputText class
+
+    }, {
+      key: "text",
+      get: function get() {
+        if (!this.node) {
+          return '';
+        }
+
+        return this.node.value;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.value = value;
+      }
+    }, {
+      key: "setText",
+      value: function setText(value) {
+        // Override
+        this.text = value;
+        return this;
+      }
+    }, {
+      key: "maxLength",
+      get: function get() {
+        if (!this.node) {
+          return 0;
+        }
+
+        return this.node.maxLength;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.maxLength = value;
+      }
+    }, {
+      key: "setMaxLength",
+      value: function setMaxLength(value) {
+        this.maxLength = value;
+        return this;
+      }
+    }, {
+      key: "minLength",
+      get: function get() {
+        if (!this.node) {
+          return 0;
+        }
+
+        return this.node.minLength;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.minLength = value;
+      }
+    }, {
+      key: "setMinLength",
+      value: function setMinLength(value) {
+        this.minLength = value;
+        return this;
+      }
+    }, {
+      key: "placeholder",
+      get: function get() {
+        return this.node.placeholder;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.placeholder = value;
+      }
+    }, {
+      key: "setPlaceholder",
+      value: function setPlaceholder(value) {
+        this.placeholder = value;
+        return this;
+      }
+    }, {
+      key: "selectText",
+      value: function selectText(selectionStart, selectionEnd) {
+        if (!this.node) {
+          return this;
+        }
+
+        if (selectionStart === undefined) {
+          this.node.select();
+        } else {
+          this.node.setSelectionRange(selectionStart, selectionEnd);
+        }
+
+        return this;
+      }
+    }, {
+      key: "selectAll",
+      value: function selectAll() {
+        this.selectText();
+        return this;
+      }
+    }, {
+      key: "selectionStart",
+      get: function get() {
+        if (!this.node) {
+          return 0;
+        }
+
+        return this.node.selectionStart;
+      }
+    }, {
+      key: "selectionEnd",
+      get: function get() {
+        if (!this.node) {
+          return 0;
+        }
+
+        return this.node.selectionEnd;
+      }
+    }, {
+      key: "selectedText",
+      get: function get() {
+        if (!this.node) {
+          return '';
+        }
+
+        var node = this.node;
+        return node.value.substring(node.selectionStart, node.selectionEnd);
+      }
+    }, {
+      key: "cursorPosition",
+      get: function get() {
+        if (!this.node) {
+          return 0;
+        }
+
+        return this.node.selectionStart;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.setSelectionRange(value, value);
+      }
+    }, {
+      key: "setCursorPosition",
+      value: function setCursorPosition(value) {
+        if (value === undefined) {
+          value = this.text.length;
+        } else if (value < 0) {
+          value = this.text.length + value;
+        }
+
+        this.cursorPosition = value;
+        return this;
+      }
+    }, {
+      key: "tooltip",
+      get: function get() {
+        if (!this.node) {
+          return '';
+        }
+
+        return this.node.title;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return this;
+        }
+
+        this.node.title = value;
+      }
+    }, {
+      key: "setTooltip",
+      value: function setTooltip(value) {
+        this.tooltip = value;
+        return this;
+      }
+    }, {
+      key: "setTextChangedCallback",
+      value: function setTextChangedCallback(callback) {
+        this.onTextChanged = callback;
+        return this;
+      }
+    }, {
+      key: "readOnly",
+      get: function get() {
+        if (!this.node) {
+          return false;
+        }
+
+        return this.node.readOnly;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.readOnly = value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(value) {
+        if (value === undefined) {
+          value = true;
+        }
+
+        this.readOnly = value;
+        return this;
+      }
+    }, {
+      key: "spellCheck",
+      get: function get() {
+        if (!this.node) {
+          return '';
+        }
+
+        return this.node.spellcheck;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.spellcheck = value;
+      }
+    }, {
+      key: "setSpellCheck",
+      value: function setSpellCheck(value) {
+        this.spellCheck = value;
+        return this;
+      }
+    }, {
+      key: "fontColor",
+      get: function get() {
+        if (!this.node) {
+          return undefined;
+        }
+
+        return this.node.style.color;
+      },
+      set: function set(value) {
+        if (!this.node) {
+          return;
+        }
+
+        this.node.style.color = value;
+      }
+    }, {
+      key: "setFontColor",
+      value: function setFontColor(value) {
+        this.fontColor = value;
+        return this;
+      }
+    }, {
+      key: "setStyle",
+      value: function setStyle(key, value) {
+        if (!this.node) {
+          return this;
+        }
+
+        this.node.style[key] = value;
+        return this;
+      }
+    }, {
+      key: "getStyle",
+      value: function getStyle(key) {
+        if (!this.node) {
+          return undefined;
+        }
+
+        return this.node.style[key];
+      }
+    }, {
+      key: "scrollToBottom",
+      value: function scrollToBottom() {
+        if (!this.node) {
+          return this;
+        }
+
+        this.node.scrollTop = this.node.scrollHeight;
+        return this;
+      }
+    }, {
+      key: "setEnabled",
+      value: function setEnabled(enabled) {
+        if (!this.node) {
+          return this;
+        }
+
+        if (enabled === undefined) {
+          enabled = true;
+        }
+
+        this.node.disabled = !enabled;
+        return this;
+      }
+    }, {
+      key: "setBlur",
+      value: function setBlur() {
+        if (!this.node) {
+          return this;
+        }
+
+        this.node.blur();
+        return this;
+      }
+    }, {
+      key: "setFocus",
+      value: function setFocus() {
+        if (!this.node) {
+          return this;
+        }
+
+        this.node.focus();
+        return this;
+      }
+    }, {
+      key: "isFocused",
+      get: function get() {
+        return this._isFocused;
+      }
     }]);
 
-    return HiddenInputTextBase;
-  }(InputText);
+    return HiddenTextEditBase;
+  }(ComponentBase);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -780,12 +1021,6 @@
     return object instanceof GameClass;
   };
 
-  var SceneClass = Phaser.Scene;
-
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
   var GetGame = function GetGame(object) {
     if (IsGame(object)) {
       return object;
@@ -807,15 +1042,15 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Wrap = Phaser.Math.Wrap;
 
-  var HiddenInputText = /*#__PURE__*/function (_HiddenInputTextBase) {
-    _inherits(HiddenInputText, _HiddenInputTextBase);
+  var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
+    _inherits(HiddenTextEdit, _HiddenTextEditBase);
 
-    var _super = _createSuper(HiddenInputText);
+    var _super = _createSuper(HiddenTextEdit);
 
-    function HiddenInputText(textObject, config) {
+    function HiddenTextEdit(gameObject, config) {
       var _this;
 
-      _classCallCheck(this, HiddenInputText);
+      _classCallCheck(this, HiddenTextEdit);
 
       if (config === undefined) {
         config = {};
@@ -825,7 +1060,7 @@
         config.onUpdate = NumberInputUpdateCallback;
       }
 
-      _this = _super.call(this, textObject, config); // Note: Don't add this game object into scene
+      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       _this.setCursor(GetValue(config, 'cursor', '|'));
 
@@ -835,12 +1070,12 @@
       return _this;
     }
 
-    _createClass(HiddenInputText, [{
+    _createClass(HiddenTextEdit, [{
       key: "initText",
       value: function initText() {
         this.cursorFlashTimer = 0;
         this.prevCursorPosition = undefined;
-        this.setText(this.textObject.text);
+        this.setText(this.parent.text);
         this.setCursorPosition();
         return this;
       }
@@ -850,7 +1085,7 @@
         var text = this.text;
 
         if (this.onUpdateCallback) {
-          var newText = this.onUpdateCallback(text, this.textObject, this);
+          var newText = this.onUpdateCallback(text, this.parent, this);
 
           if (newText != null) {
             text = newText;
@@ -868,7 +1103,7 @@
           }
         }
 
-        this.textObject.setText(text);
+        this.parent.setText(text);
         return this;
       }
     }, {
@@ -906,20 +1141,8 @@
       }
     }]);
 
-    return HiddenInputText;
-  }(HiddenInputTextBase);
-
-  function Factory (textObject, config) {
-    var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene
-
-    return gameObject;
-  }
-
-  function Creator (textObject, config) {
-    var gameObject = new HiddenInputText(textObject, config); // Note: Don't add this game object into scene
-
-    return gameObject;
-  }
+    return HiddenTextEdit;
+  }(HiddenTextEditBase);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -997,14 +1220,9 @@
     var _super = _createSuper(HiddenInputTextPlugin);
 
     function HiddenInputTextPlugin(pluginManager) {
-      var _this;
-
       _classCallCheck(this, HiddenInputTextPlugin);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
-      pluginManager.registerGameObject('rexHiddenInputText', Factory, Creator);
-      return _this;
+      return _super.call(this, pluginManager);
     }
 
     _createClass(HiddenInputTextPlugin, [{
@@ -1016,14 +1234,14 @@
     }, {
       key: "add",
       value: function add(textObject, config) {
-        return new HiddenInputText(textObject, config);
+        return new HiddenTextEdit(textObject, config);
       }
     }]);
 
     return HiddenInputTextPlugin;
   }(Phaser.Plugins.BasePlugin);
 
-  SetValue(window, 'RexPlugins.GameObjects.HiddenInputText', HiddenInputText);
+  SetValue(window, 'RexPlugins.GameObjects.HiddenInputText', HiddenTextEdit);
 
   return HiddenInputTextPlugin;
 

@@ -1,12 +1,11 @@
 ## Introduction
 
-An invisible [Input DOM element](https://www.w3schools.com/tags/tag_input.asp) to 
+An invisible Input DOM element to 
 receive character input and display on [text](text.md), [bbocodetext](bbcodetext.md), or [tagtext](tagtext.md).
 
 Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
 
 - Author: Rex
-- [DOM Game object](domelement.md)
 
 ## Live demos
 
@@ -23,19 +22,6 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 #### Load minify file
 
-- Enable dom element in [configuration of game](game.md#configuration)
-    ```javascript
-    var config = {
-        parent: divId,
-        dom: {
-            createContainer: true
-        },        
-        // ...
-    };
-    var game = new Phaser.Game(config);
-    ```
-    - Set `parent` to divId
-    - Set `dom.createContainer` to `true`.
 - Load plugin (minify file) in preload stage
     ```javascript
     scene.load.plugin('rexhiddeninputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhiddeninputtextplugin.min.js', true);
@@ -55,10 +41,6 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
     ```javascript
     import HiddenInputTextPlugin from 'phaser3-rex-plugins/plugins/hiddeninputtext-plugin.js';
     var config = {
-        parent: divId,
-        dom: {
-            createContainer: true
-        },        
         // ...
         plugins: {
             global: [{
@@ -84,19 +66,6 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
     ```
     npm i phaser3-rex-plugins
     ```
-- Enable dom element in [configuration of game](game.md#configuration)
-    ```javascript
-    var config = {
-        parent: divId,
-        dom: {
-            createContainer: true
-        },        
-        // ...
-    };
-    var game = new Phaser.Game(config);
-    ```
-    - Set `parent` to divId
-    - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
     import HiddenInputText from 'phaser3-rex-plugins/plugins/hiddeninputtext.js';
@@ -232,4 +201,4 @@ See [InputText/Bypass key input](inputtext.md#bypass-key-input)
 
 ### Other properties
 
-See [InputText](inputtext.md), [DOM game object](domelement.md).
+See [InputText](inputtext.md)

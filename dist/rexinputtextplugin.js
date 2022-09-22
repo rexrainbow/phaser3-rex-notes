@@ -139,6 +139,53 @@
     return this;
   };
 
+  var ElementProperties = {
+    id: ['id', undefined],
+    text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
+    placeholder: ['placeholder', undefined],
+    tooltip: ['title', undefined],
+    readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off']
+  };
+  var StyleProperties = {
+    align: ['textAlign', undefined],
+    paddingLeft: ['padding-left', undefined],
+    paddingRight: ['padding-right', undefined],
+    paddingTop: ['padding-top', undefined],
+    paddingBottom: ['padding-bottom', undefined],
+    fontFamily: ['fontFamily', undefined],
+    fontSize: ['font-size', undefined],
+    color: ['color', '#ffffff'],
+    backgroundColor: ['backgroundColor', 'transparent'],
+    border: ['border', 0],
+    borderColor: ['borderColor', 'transparent'],
+    outline: ['outline', 'none'],
+    direction: ['direction', undefined]
+  };
+  var ElementEvents = {
+    input: 'textchange',
+    click: 'click',
+    dblclick: 'dblclick',
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress',
+    compositionstart: 'compositionStart',
+    compositionend: 'compositionEnd',
+    compositionupdate: 'compositionUpdate',
+    focus: 'focus',
+    blur: 'blur',
+    select: 'select'
+  };
+
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
   var SetProperties = function SetProperties(properties, config, out) {
@@ -498,52 +545,6 @@
     resize: Resize
   };
   Object.assign(InputText.prototype, methods);
-  var ElementProperties = {
-    id: ['id', undefined],
-    text: ['value', undefined],
-    maxLength: ['maxLength', undefined],
-    minLength: ['minLength', undefined],
-    placeholder: ['placeholder', undefined],
-    tooltip: ['title', undefined],
-    readOnly: ['readOnly', false],
-    spellCheck: ['spellcheck', false],
-    autoComplete: ['autocomplete', 'off']
-  };
-  var StyleProperties = {
-    align: ['textAlign', undefined],
-    paddingLeft: ['padding-left', undefined],
-    paddingRight: ['padding-right', undefined],
-    paddingTop: ['padding-top', undefined],
-    paddingBottom: ['padding-bottom', undefined],
-    fontFamily: ['fontFamily', undefined],
-    fontSize: ['font-size', undefined],
-    color: ['color', '#ffffff'],
-    backgroundColor: ['backgroundColor', 'transparent'],
-    border: ['border', 0],
-    borderColor: ['borderColor', 'transparent'],
-    outline: ['outline', 'none'],
-    direction: ['direction', undefined]
-  };
-  var ElementEvents = {
-    input: 'textchange',
-    click: 'click',
-    dblclick: 'dblclick',
-    mousedown: 'pointerdown',
-    mousemove: 'pointermove',
-    mouseup: 'pointerup',
-    touchstart: 'pointerdown',
-    touchmove: 'pointermove',
-    touchend: 'pointerup',
-    keydown: 'keydown',
-    keyup: 'keyup',
-    keypress: 'keypress',
-    compositionstart: 'compositionStart',
-    compositionend: 'compositionEnd',
-    compositionupdate: 'compositionUpdate',
-    focus: 'focus',
-    blur: 'blur',
-    select: 'select'
-  };
 
   function Factory (x, y, width, height, config) {
     var gameObject = new InputText(this.scene, x, y, width, height, config);

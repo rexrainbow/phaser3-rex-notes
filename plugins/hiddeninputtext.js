@@ -1,2 +1,2 @@
-import HiddenInputText from './gameobjects/dom/hiddeninputtext/HiddenInputText.js';
+import HiddenInputText from './behaviors/hiddentextedit/HiddenTextEdit.js';
 export default HiddenInputText;
