@@ -7,7 +7,8 @@ Create an [input text object](textedit.md) above a text object to edit string co
 
 ## Live demos
 
-- [Text edit](https://codepen.io/rexrainbow/pen/GaxqLZ)
+- [Text edit](https://codepen.io/rexrainbow/pen/dyezeQN)
+- [Edit](https://codepen.io/rexrainbow/pen/GaxqLZ)
 - [Number edit](https://codepen.io/rexrainbow/pen/OJLQyKz)
 
 ## Usage

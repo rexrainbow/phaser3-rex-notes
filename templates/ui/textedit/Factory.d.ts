@@ -1,7 +1,7 @@
 // import * as Phaser from 'phaser';
-import Tap from './Tap';
+import TextEdit from './TextEdit';
 
 export default function (
     gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
-    config?: Tap.IConfig
-): Tap;
+    config?: TextEdit.IConfig
+): TextEdit;

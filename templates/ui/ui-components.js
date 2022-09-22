@@ -68,6 +68,7 @@ import TouchEventStop from './toucheventstop/TouchEventStop.js';
 import Perspective from './perspective/Perspective.js';
 import Skew from './skew/Skew.js';
 import Anchor from './anchor/Anchor.js';
+import TextEdit from './textedit/TextEdit.js';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal.js';
@@ -80,7 +81,7 @@ import {
     Hide,
     IsShown,
 } from './utils/Hide.js';
-import { Edit } from '../../plugins/textedit.js';
+import Edit from './textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth.js';
@@ -163,6 +164,7 @@ export {
     Perspective,
     Skew,
     Anchor,
+    TextEdit,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
     Modal, ModalPromise, ModalClose,

@@ -62,12 +62,13 @@ import TagTextFactory from './tagtext/Factory';
 import TapFactory from './tap/Factory';
 import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
+import TextEditFactory from './textedit/Factory';
 import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
-import { Edit } from '../../plugins/textedit';
+import Edit from './textedit/Edit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
 import { Modal, ModalPromise, ModalClose } from './modal/Modal';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
@@ -148,6 +149,7 @@ declare class Factories {
     tap: typeof TapFactory;
     textArea: typeof TextAreaFactory;
     textBox: typeof TextBoxFactory;
+    textEdit: typeof TextEditFactory;
     textPlayer: typeof TextPlayerFactory;
     toast: typeof ToastFactory;
     touchEventStop: typeof TouchEventStopFactory;
@@ -177,7 +179,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     wrapExpandText: typeof WrapExpandText;
     fontSizeExpandText: typeof FontSizeExpandText;
     fontSizeResize: typeof SetFontSizeToFitWidth;  // Backward compatibility
-    setFontSizeToFitWidth: typeof SetFontSizeToFitWidth; 
+    setFontSizeToFitWidth: typeof SetFontSizeToFitWidth;
     requestDrag: typeof RequestDrag;
 
     isInTouching(

@@ -70,12 +70,13 @@ import TouchEventStopFactory from './toucheventstop/Factory.js';
 import PerspectiveFactory from './perspective/Factory.js';
 import SkewFactory from './skew/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
+import TextEditFactory from './textedit/Factory.js';
 import MakerFactory from './maker/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
 import { Show, Hide, IsShown, } from './utils/Hide.js';
-import { Edit } from '../../plugins/textedit.js';
+import Edit from './textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText.js';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth.js';
