@@ -818,6 +818,7 @@
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var Merge = Phaser.Utils.Objects.Merge;
   var LastOpenedEditor = undefined;
 
   var TextEdit = /*#__PURE__*/function (_ComponentBase) {
@@ -825,19 +826,28 @@
 
     var _super = _createSuper(TextEdit);
 
-    function TextEdit(gameObject) {
+    function TextEdit(gameObject, config) {
       var _this;
 
       _classCallCheck(this, TextEdit);
 
       // No event emitter
-      _this = _super.call(this, gameObject, {
-        eventEmitter: false
-      }); // this.parent = gameObject;
+      _this = _super.call(this, gameObject); // this.parent = gameObject;
 
       _this.inputText = undefined;
       _this.onClose = undefined;
       _this.delayCall = undefined;
+
+      _this.setOpenConfig(config);
+
+      var clickEnable = GetValue(config, 'clickEnable', true);
+
+      if (clickEnable) {
+        gameObject.on('pointerdown', function () {
+          this.open();
+        }, _assertThisInitialized(_this)).setInteractive();
+      }
+
       return _this;
     }
 
@@ -858,8 +868,24 @@
         _get(_getPrototypeOf(TextEdit.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
+      key: "setOpenConfig",
+      value: function setOpenConfig(config) {
+        if (config === undefined) {
+          config = {};
+        }
+
+        this.openConfig = config;
+        return this;
+      }
+    }, {
       key: "open",
       value: function open(config, onCloseCallback) {
+        if (config === undefined) {
+          config = {};
+        }
+
+        Merge(config, this.openConfig);
+
         if (LastOpenedEditor !== undefined) {
           LastOpenedEditor.close();
         }
@@ -903,6 +929,7 @@
 
           if (onOpenCallback) {
             onOpenCallback(this.parent);
+            this.emit('open', this.parent);
           }
         }, [], this);
         return this;
@@ -932,6 +959,7 @@
 
         if (this.onClose) {
           this.onClose(this.parent);
+          this.emit('close', this.parent);
         }
 
         return this;
@@ -953,7 +981,9 @@
 
   var Edit = function Edit(gameObject, config, onCloseCallback) {
     if (!gameObject._edit) {
-      gameObject._edit = new TextEdit(gameObject);
+      gameObject._edit = new TextEdit(gameObject, {
+        clickEnable: false
+      });
     }
 
     gameObject._edit.open(config, onCloseCallback);
@@ -980,8 +1010,8 @@
       }
     }, {
       key: "add",
-      value: function add(gameObject) {
-        return new TextEdit(gameObject);
+      value: function add(gameObject, config) {
+        return new TextEdit(gameObject, config);
       }
     }]);
 

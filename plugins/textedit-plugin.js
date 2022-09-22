@@ -11,8 +11,8 @@ class TextEditPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(gameObject) {
-        return new TextEdit(gameObject);
+    add(gameObject, config) {
+        return new TextEdit(gameObject, config);
     }
 }
 

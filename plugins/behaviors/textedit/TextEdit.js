@@ -3,18 +3,30 @@ import CreateInputTextFromText from './CreateInputText.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Merge = Phaser.Utils.Objects.Merge;
 
 var LastOpenedEditor = undefined;
 
 class TextEdit extends ComponentBase {
-    constructor(gameObject) {
+    constructor(gameObject, config) {
         // No event emitter
-        super(gameObject, { eventEmitter: false });
+        super(gameObject);
         // this.parent = gameObject;
 
         this.inputText = undefined;
         this.onClose = undefined;
         this.delayCall = undefined;
+
+        this.setOpenConfig(config);
+
+        var clickEnable = GetValue(config, 'clickEnable', true);
+        if (clickEnable) {
+            gameObject
+                .on('pointerdown', function () {
+                    this.open();
+                }, this)
+                .setInteractive()
+        }
     }
 
     shutdown(fromScene) {
@@ -31,7 +43,20 @@ class TextEdit extends ComponentBase {
         super.shutdown(fromScene);
     }
 
+    setOpenConfig(config) {
+        if (config === undefined) {
+            config = {};
+        }
+        this.openConfig = config;
+        return this;
+    }
+
     open(config, onCloseCallback) {
+        if (config === undefined) {
+            config = {};
+        }
+        Merge(config, this.openConfig)
+
         if (LastOpenedEditor !== undefined) {
             LastOpenedEditor.close();
         }
@@ -55,7 +80,7 @@ class TextEdit extends ComponentBase {
                     customOnTextChanged(this.parent, text);
                 } else { // Default on-text-changed callback
                     this.parent.text = text;
-                }
+                }                
             }, this)
             .setFocus();
         this.parent.setVisible(false); // Set parent text invisible
@@ -71,7 +96,8 @@ class TextEdit extends ComponentBase {
 
             // Open editor completly, invoke onOpenCallback
             if (onOpenCallback) {
-                onOpenCallback(this.parent)
+                onOpenCallback(this.parent);
+                this.emit('open', this.parent);
             }
 
         }, [], this);
@@ -100,6 +126,7 @@ class TextEdit extends ComponentBase {
 
         if (this.onClose) {
             this.onClose(this.parent);
+            this.emit('close', this.parent);
         }
         return this;
     }

@@ -13336,14 +13336,14 @@
     return result;
   };
 
-  var Merge$2 = Phaser.Utils.Objects.Merge;
+  var Merge$3 = Phaser.Utils.Objects.Merge;
 
   var RunWordWrap = function RunWordWrap(config) {
     if (config === undefined) {
       config = {};
     }
 
-    return RunWordWrap$1.call(this, Merge$2(config, this.wrapConfig));
+    return RunWordWrap$1.call(this, Merge$3(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
@@ -13612,14 +13612,14 @@
     return result;
   };
 
-  var Merge$1 = Phaser.Utils.Objects.Merge;
+  var Merge$2 = Phaser.Utils.Objects.Merge;
 
   var RunVerticalWrap = function RunVerticalWrap(config) {
     if (config === undefined) {
       config = {};
     }
 
-    return RunVerticalWrap$1.call(this, Merge$1(config, this.wrapConfig));
+    return RunVerticalWrap$1.call(this, Merge$2(config, this.wrapConfig));
   };
 
   var RenderContent = function RenderContent() {
@@ -52130,25 +52130,25 @@
     }
 
     if (data.hasOwnProperty('name')) {
-      Merge(data, styles["#".concat(data.name)]);
+      Merge$1(data, styles["#".concat(data.name)]);
     }
 
     if (data.hasOwnProperty('$class')) {
       var clasKeys = data.$class.split(' ');
 
       for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
-        Merge(data, styles[".".concat(clasKeys[i])]);
+        Merge$1(data, styles[".".concat(clasKeys[i])]);
       }
     }
 
     if (data.hasOwnProperty('$type')) {
-      Merge(data, styles[data.$type]);
+      Merge$1(data, styles[data.$type]);
     }
 
     return data;
   };
 
-  var Merge = function Merge(toObj, fromObj) {
+  var Merge$1 = function Merge(toObj, fromObj) {
     if (fromObj === undefined) {
       return toObj;
     }
@@ -52931,6 +52931,7 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var Merge = Phaser.Utils.Objects.Merge;
   var LastOpenedEditor = undefined;
 
   var TextEdit = /*#__PURE__*/function (_ComponentBase) {
@@ -52938,19 +52939,28 @@
 
     var _super = _createSuper(TextEdit);
 
-    function TextEdit(gameObject) {
+    function TextEdit(gameObject, config) {
       var _this;
 
       _classCallCheck(this, TextEdit);
 
       // No event emitter
-      _this = _super.call(this, gameObject, {
-        eventEmitter: false
-      }); // this.parent = gameObject;
+      _this = _super.call(this, gameObject); // this.parent = gameObject;
 
       _this.inputText = undefined;
       _this.onClose = undefined;
       _this.delayCall = undefined;
+
+      _this.setOpenConfig(config);
+
+      var clickEnable = GetValue$2(config, 'clickEnable', true);
+
+      if (clickEnable) {
+        gameObject.on('pointerdown', function () {
+          this.open();
+        }, _assertThisInitialized(_this)).setInteractive();
+      }
+
       return _this;
     }
 
@@ -52971,8 +52981,24 @@
         _get(_getPrototypeOf(TextEdit.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
+      key: "setOpenConfig",
+      value: function setOpenConfig(config) {
+        if (config === undefined) {
+          config = {};
+        }
+
+        this.openConfig = config;
+        return this;
+      }
+    }, {
       key: "open",
       value: function open(config, onCloseCallback) {
+        if (config === undefined) {
+          config = {};
+        }
+
+        Merge(config, this.openConfig);
+
         if (LastOpenedEditor !== undefined) {
           LastOpenedEditor.close();
         }
@@ -53016,6 +53042,7 @@
 
           if (onOpenCallback) {
             onOpenCallback(this.parent);
+            this.emit('open', this.parent);
           }
         }, [], this);
         return this;
@@ -53045,6 +53072,7 @@
 
         if (this.onClose) {
           this.onClose(this.parent);
+          this.emit('close', this.parent);
         }
 
         return this;
@@ -53066,7 +53094,9 @@
 
   var Edit = function Edit(gameObject, config, onCloseCallback) {
     if (!gameObject._edit) {
-      gameObject._edit = new TextEdit(gameObject);
+      gameObject._edit = new TextEdit(gameObject, {
+        clickEnable: false
+      });
     }
 
     gameObject._edit.open(config, onCloseCallback);

@@ -1,29 +1,37 @@
 import InputText from "../../inputtext";
 
-export interface IConfigOpen {
-    type?: string,
-    enterClose?: boolean,
-    selectAll?: boolean,
+export default TextEdit;
 
-    onOpen?: (textObject: Phaser.GameObjects.GameObject) => void,
-    onTextChanged?: (textObject: Phaser.GameObjects.GameObject, text: string) => void,
-    onClose?: (textObject: Phaser.GameObjects.GameObject) => void,
+declare namespace TextEdit {
+    interface IConfigOpen {
+        type?: string,
+        enterClose?: boolean,
+        selectAll?: boolean,
 
-    text?: string,
-    fontFamily?: string,
-    fontSize?: string,
-    color?: string,
-    align?: string,
-    style?: { [name: string]: any },
+        onOpen?: (textObject: Phaser.GameObjects.GameObject) => void,
+        onTextChanged?: (textObject: Phaser.GameObjects.GameObject, text: string) => void,
+        onClose?: (textObject: Phaser.GameObjects.GameObject) => void,
+
+        text?: string,
+        fontFamily?: string,
+        fontSize?: string,
+        color?: string,
+        align?: string,
+        style?: { [name: string]: any },
+    }
+
+    interface IConfig extends IConfigOpen {
+        clickEnable?: boolean;
+    }
 }
 
-export default class TextEdit {
+declare class TextEdit {
     constructor(
         textObject: Phaser.GameObjects.GameObject
     );
 
     open(
-        config?: IConfigOpen,
+        config?: TextEdit.IConfigOpen,
         onCloseCallback?: (textObject: Phaser.GameObjects.GameObject) => void
     ): this;
 
