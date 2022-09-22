@@ -8619,7 +8619,8 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/GaxqLZ">Text edit</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/dyezeQN">Text edit</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/GaxqLZ">Edit</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/OJLQyKz">Number edit</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -8644,9 +8645,15 @@
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextexteditplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add text-edit behavior
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexteditplugin&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">)</span>
+<li>Open editor<ul>
+<li>Add text-edit behavior, will open editor under <code>'pointerdown'</code> event.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexteditplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Open editor directly
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexteditplugin&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
@@ -8674,9 +8681,15 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add text-edit behavior
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">)</span>
+<li>Open editor<ul>
+<li>Add text-edit behavior, will open editor under <code>'pointerdown'</code> event.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Open editor directly
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
@@ -8698,11 +8711,17 @@
 </ul>
 </li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TextEdit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textedit.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TextEdit</span><span class="p">,</span> <span class="nx">Edit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textedit.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add text-edit behavior
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">TextEdit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">)</span>
+<li>Open editor<ul>
+<li>Add text-edit behavior, will open editor under <code>'pointerdown'</code> event.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">TextEdit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Open editor directly
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">Edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="open-text-editor">Open text editor<a class="headerlink" href="#open-text-editor" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/behaviors/textedit/Edit.js">An easy way</a> to open a text editor.</p>
@@ -8771,11 +8790,18 @@
 Because that text input element does not have vertical align setting, text will always align to middle/center.</p>
 </div>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// type: &#39;text&#39;,   //&#39;text&#39;,&#39;password&#39;,&#39;number&#39;</span>
+    <span class="c1">// enterClose: true,</span>
+    <span class="c1">// selectAll: false,</span>
+
+    <span class="c1">// onOpen: undefined,</span>
+    <span class="c1">// onTextChanged: undefined,</span>
+    <span class="c1">// onClose: undefined,</span>
+
+    <span class="c1">// text: &#39;&#39;,</span>
+<span class="p">});</span>
 </code></pre></div>
-<ul>
-<li><code>textGameObject</code> : <a href="../text/">Text</a>, <a href="../bbcodetext/">bbcodt-text</a>, or <a href="../tagtext/">tag-text</a></li>
-</ul>
 <h3 id="open-editor">Open editor<a class="headerlink" href="#open-editor" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">editor</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="c1">// editor.open(config, onClose);</span>

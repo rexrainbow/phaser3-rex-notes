@@ -36,10 +36,15 @@ Create an [input text object](textedit.md) above a text object to edit string co
     ```javascript
     scene.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
     ```
-- Add text-edit behavior
-    ```javascript
-    var editor = scene.plugins.get('rextexteditplugin').edit(textGameObject)
-    ```
+- Open editor
+    - Add text-edit behavior, will open editor under `'pointerdown'` event.
+        ```javascript
+        var editor = scene.plugins.get('rextexteditplugin').add(textGameObject, config);
+        ```
+    - Open editor directly
+        ```javascript
+        var editor = scene.plugins.get('rextexteditplugin').edit(textGameObject, config);
+        ```
 
 #### Import plugin
 
@@ -69,10 +74,15 @@ Create an [input text object](textedit.md) above a text object to edit string co
     };
     var game = new Phaser.Game(config);
     ```
-- Add text-edit behavior
-    ```javascript
-    var editor = scene.plugins.get('rexTextEdit').edit(textGameObject)
-    ```
+- Open editor
+    - Add text-edit behavior, will open editor under `'pointerdown'` event.
+        ```javascript
+        var editor = scene.plugins.get('rexTextEdit').add(textGameObject, config);
+        ```
+    - Open editor directly
+        ```javascript
+        var editor = scene.plugins.get('rexTextEdit').edit(textGameObject, config);
+        ```
 
 #### Import class
 
@@ -95,12 +105,17 @@ Create an [input text object](textedit.md) above a text object to edit string co
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import { TextEdit } from 'phaser3-rex-plugins/plugins/textedit.js';
+    import { TextEdit, Edit } from 'phaser3-rex-plugins/plugins/textedit.js';
     ```
-- Add text-edit behavior
-    ```javascript
-    var editor = new TextEdit(textGameObject)
-    ```
+- Open editor
+    - Add text-edit behavior, will open editor under `'pointerdown'` event.
+        ```javascript
+        var editor = new TextEdit(textGameObject, config);
+        ```
+    - Open editor directly
+        ```javascript
+        var editor = Edit(textGameObject, config);
+        ```
  
 ### Open text editor
 
@@ -171,10 +186,18 @@ Create a text editor ([input element](textedit.md)) above text object.
 ### Create instance
 
 ```javascript
-var editor = scene.plugins.get('rexTextEdit').add(textGameObject);
-```
+var editor = scene.plugins.get('rexTextEdit').add(textGameObject, {
+    // type: 'text',   //'text','password','number'
+    // enterClose: true,
+    // selectAll: false,
 
-- `textGameObject` : [Text](text.md), [bbcodt-text](bbcodetext.md), or [tag-text](tagtext.md)
+    // onOpen: undefined,
+    // onTextChanged: undefined,
+    // onClose: undefined,
+
+    // text: '',
+});
+```
 
 ### Open editor
 

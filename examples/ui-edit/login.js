@@ -61,16 +61,17 @@ var CreateLoginDialog = function (scene, config) {
         text: scene.rexUI.add.BBCodeText(0, 0, username, { fixedWidth: 150, fixedHeight: 36, valign: 'center' }),
         space: { top: 5, bottom: 5, left: 5, right: 5, icon: 10, }
     })
-        .setInteractive()
-        .on('pointerdown', function () {
-            var config = {
-                onTextChanged: function (textObject, text) {
-                    username = text;
-                    textObject.text = text;
-                }
+
+    // SolutionA: Use textEdit behavior
+    scene.rexUI.add.textEdit(
+        userNameField.getElement('text'),
+        {
+            onTextChanged: function (textObject, text) {
+                username = text;
+                textObject.text = text;
             }
-            scene.rexUI.edit(userNameField.getElement('text'), config);
-        });
+        }
+    )
 
     // Password field object
     var passwordField = scene.rexUI.add.label({
@@ -82,15 +83,18 @@ var CreateLoginDialog = function (scene, config) {
     })
         .setInteractive()
         .on('pointerdown', function () {
-            var config = {
-                type: 'password',
-                text: password,
-                onTextChanged: function (textObject, text) {
-                    password = text;
-                    textObject.text = markPassword(password);
+           // SolutionB: Open text edit directly under pointerdown event
+            scene.rexUI.edit(
+                passwordField.getElement('text'),
+                {
+                    type: 'password',
+                    text: password,
+                    onTextChanged: function (textObject, text) {
+                        password = text;
+                        textObject.text = markPassword(password);
+                    }
                 }
-            };
-            scene.rexUI.edit(passwordField.getElement('text'), config);
+            );
         });
 
     // Login button object
