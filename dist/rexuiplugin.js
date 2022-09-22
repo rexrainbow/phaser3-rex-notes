@@ -15849,7 +15849,7 @@
     this.soundManager = undefined;
 
     for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers.destroy(fromScene);
+      this.gameObjectManagers[name].destroy(fromScene);
       delete this.gameObjectManagers[name];
     }
 

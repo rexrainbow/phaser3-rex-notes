@@ -1,4 +1,4 @@
-export default function FontSizeResize(
+export default function (
     textObject: Phaser.GameObjects.GameObject,
     width: number,
     height?: number
