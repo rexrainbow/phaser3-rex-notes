@@ -1,13 +1,13 @@
-import HiddenInputTextBase from '../../../dom/hiddeninputtext/HiddenInputTextBase.js';
+import HiddenTextEditBase from '../../../../behaviors/hiddentextedit/HiddenTextEditBase.js';
 
-class HiddenInputText extends HiddenInputTextBase {
-    constructor(textObject, config) {
-        super(textObject, config);
-        // this.textObject = textObject;
+class HiddenTextEdit extends HiddenTextEditBase {
+    constructor(gameObject, config) {
+        super(gameObject, config);
+        // this.parent = gameObject;
 
-        textObject
+        gameObject
             .on('child.pointerdown', function (child, childIndex, pointer, localX, localY, event) {
-                var charIndex = textObject.getCharIndex(childIndex);
+                var charIndex = gameObject.getCharIndex(childIndex);
                 this.setCursorPosition(charIndex);
             }, this);
 
@@ -15,7 +15,7 @@ class HiddenInputText extends HiddenInputTextBase {
 
     initText() {
         this.prevCursorPosition = undefined;
-        this.setText(this.textObject.text);
+        this.setText(this.parent.text);
 
         return this;
     }
@@ -24,17 +24,17 @@ class HiddenInputText extends HiddenInputTextBase {
         var text = this.text;
 
         if (this.onUpdateCallback) {
-            var newText = this.onUpdateCallback(text, this.textObject, this);
+            var newText = this.onUpdateCallback(text, this.parent, this);
             if (newText != null) {
                 text = newText;
             }
         }
 
-        this.textObject.setText(text);
+        this.parent.setText(text);
 
         var cursorPosition = this.cursorPosition;
         if (this.prevCursorPosition !== cursorPosition) {
-            this.textObject.emit('movecursor', cursorPosition, this.textObject);
+            this.parent.emit('movecursor', cursorPosition, this.parent);
             this.prevCursorPosition = cursorPosition;
         }
 
@@ -42,4 +42,4 @@ class HiddenInputText extends HiddenInputTextBase {
     }
 }
 
-export default HiddenInputText;
+export default HiddenTextEdit;

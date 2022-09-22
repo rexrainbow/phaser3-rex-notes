@@ -1,5 +1,5 @@
 import DynamicText from '../dynamictext/DynamicText.js';
-import HiddenInputText from './textedit/HiddenInputText.js';
+import HiddenTextEdit from './textedit/HiddenTextEdit.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 
@@ -24,7 +24,7 @@ class CanvasInput extends DynamicText {
         this.type = 'rexCanvasInput';
 
         this.setChildrenInteractiveEnable(true);  // Fire 'child.pointerdown' event
-        this.textEdit = new HiddenInputText(this, GetValue(config, 'edit'));
+        this.textEdit = new HiddenTextEdit(this, GetValue(config, 'edit'));
 
         var addCharCallback = GetValue(config, 'onAddChar');
         if (addCharCallback) {

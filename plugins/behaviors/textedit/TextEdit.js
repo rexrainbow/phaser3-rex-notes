@@ -8,8 +8,7 @@ const Merge = Phaser.Utils.Objects.Merge;
 var LastOpenedEditor = undefined;
 
 class TextEdit extends ComponentBase {
-    constructor(gameObject, config) {
-        // No event emitter
+    constructor(gameObject, config) {        
         super(gameObject);
         // this.parent = gameObject;
 

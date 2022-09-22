@@ -112,9 +112,4 @@ class HiddenInputTextBase extends InputText {
 
 }
 
-const UpdateTextModes = {
-    everyTick: 0,
-    textChange: 1
-}
-
 export default HiddenInputTextBase;

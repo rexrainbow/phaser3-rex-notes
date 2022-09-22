@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import HiddenInputTextPlugin from '../../plugins/hiddeninputtext-plugin.js'
+import HiddenTextEdit from '../../plugins/behaviors/hiddentextedit/HiddenTextEdit.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             backgroundColor: '#222222',
         })
 
-        this.plugins.get('rexHiddenInputText').add(textObject, {
+        var editor = new HiddenTextEdit(textObject,{
             // type: 'textarea',
             enterClose: false,
 
@@ -30,6 +30,7 @@ class Demo extends Phaser.Scene {
                 textObject.setBackgroundColor('#222222')
             }
         })
+        
     }
 
     update() {
@@ -46,17 +47,7 @@ var config = {
         width: 800,
         height: 600,
     },
-    dom: {
-        createContainer: true
-    },
     scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexHiddenInputText',
-            plugin: HiddenInputTextPlugin,
-            start: true
-        }]
-    }
 };
 
 var game = new Phaser.Game(config);

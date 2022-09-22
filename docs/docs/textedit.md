@@ -119,7 +119,7 @@ Create an [input text object](textedit.md) above a text object to edit string co
  
 ### Open text editor
 
-[An easy way](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/behaviors/textedit/Edit.js) to open a text editor.
+Open editor directly.
 
 ```javascript
 var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
@@ -184,6 +184,8 @@ Create a text editor ([input element](textedit.md)) above text object.
     Because that text input element does not have vertical align setting, text will always align to middle/center.
 
 ### Create instance
+
+Add text-edit behavior, will open editor under `'pointerdown'` event.
 
 ```javascript
 var editor = scene.plugins.get('rexTextEdit').add(textGameObject, {
