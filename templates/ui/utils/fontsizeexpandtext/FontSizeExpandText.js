@@ -1,4 +1,4 @@
-import FontSizeResize from '../../../../plugins/utils/text/fontsizeresize/FontSizeResize.js';
+import SetFontSizeToFitWidth from '../../../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth.js';
 
 var FontSizeExpandText = function (textObject, minWidth) {
     if (minWidth === undefined) {
@@ -8,7 +8,7 @@ var FontSizeExpandText = function (textObject, minWidth) {
     textObject._minWidth = minWidth;
 
     textObject.runWidthWrap = function (width, maxHeight) {
-        FontSizeResize(textObject, width, maxHeight);
+        SetFontSizeToFitWidth(textObject, width, maxHeight);
         return textObject;
     }
     textObject.resize = function (width, height) {
@@ -16,7 +16,7 @@ var FontSizeExpandText = function (textObject, minWidth) {
             return textObject;
         }
 
-        // Font size is set under runWidthWrap/FontSizeResize
+        // Font size is set under runWidthWrap/SetFontSizeToFitWidth
         textObject.setFixedSize(width, height);
         return textObject;
     }

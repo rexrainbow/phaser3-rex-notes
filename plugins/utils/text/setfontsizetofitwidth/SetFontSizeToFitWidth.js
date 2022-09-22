@@ -1,6 +1,6 @@
 const MaxTestCount = 65535;
 
-var FontSizeResize = function (textObject, width, height) {
+var SetFontSizeToFitWidth = function (textObject, width, height) {
     if (width == null) {
         // Do nothing if invalid width input
         return textObject;
@@ -35,7 +35,7 @@ var FontSizeResize = function (textObject, width, height) {
     }
 
     if (i === MaxTestCount) {
-        console.warn(`FontSizeResize: Test count exceeds ${MaxTestCount}`);
+        console.warn(`SetFontSizeToFitWidth: Test count exceeds ${MaxTestCount}`);
     }
 
     textObject.setFontSize(fontSize);
@@ -96,4 +96,4 @@ var SetTextWidth = function (textObject, width, height) {
     style.update(false);
 }
 
-export default FontSizeResize;
+export default SetFontSizeToFitWidth;

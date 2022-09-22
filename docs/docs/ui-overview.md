@@ -420,7 +420,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         - `undefined` :　Ignore this constraint. Default value. 
 1. Set font-size to fit width
     ```javascript
-    var textObject = scene.rexUI.fontSizeResize(textObject, width);
+    var textObject = scene.rexUI.setFontSizeFitToWidth(textObject, width);
     ```
     - `textObject` :
         - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text object](tagtext.md)

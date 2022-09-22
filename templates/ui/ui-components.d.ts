@@ -83,13 +83,14 @@ import { Edit } from '../../plugins/textedit';
 import HiddenEdit from './hiddenedit/HiddenEdit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
-import FontSizeResize from '../../plugins/utils/text/fontsizeresize/FontSizeResize';
+import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import DelayPromise from '../../plugins/utils/promise/Delay'
 import GetViewport from '../../plugins/utils/system/GetViewport';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import RequestDrag from '../../plugins/utils/input/RequestDrag';
 
+type FontSizeResize = typeof SetFontSizeToFitWidth;
 
 export {
     RoundRectangle,
@@ -176,7 +177,8 @@ export {
     Edit,
     WrapExpandText,
     FontSizeExpandText,
-    FontSizeResize,
+    FontSizeResize,  // Backward compatibility
+    SetFontSizeToFitWidth,
     WaitEvent,
     WaitComplete,
     DelayPromise,

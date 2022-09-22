@@ -53139,7 +53139,7 @@
 
   var MaxTestCount = 65535;
 
-  var FontSizeResize = function FontSizeResize(textObject, width, height) {
+  var SetFontSizeToFitWidth = function SetFontSizeToFitWidth(textObject, width, height) {
     if (width == null) {
       // Do nothing if invalid width input
       return textObject;
@@ -53177,7 +53177,7 @@
     }
 
     if (i === MaxTestCount) {
-      console.warn("FontSizeResize: Test count exceeds ".concat(MaxTestCount));
+      console.warn("SetFontSizeToFitWidth: Test count exceeds ".concat(MaxTestCount));
     }
 
     textObject.setFontSize(fontSize);
@@ -53244,14 +53244,14 @@
     textObject._minWidth = minWidth;
 
     textObject.runWidthWrap = function (width, maxHeight) {
-      FontSizeResize(textObject, width, maxHeight);
+      SetFontSizeToFitWidth(textObject, width, maxHeight);
       return textObject;
     };
 
     textObject.resize = function (width, height) {
       if (textObject.width === width && textObject.height === height) {
         return textObject;
-      } // Font size is set under runWidthWrap/FontSizeResize
+      } // Font size is set under runWidthWrap/SetFontSizeToFitWidth
 
 
       textObject.setFixedSize(width, height);
@@ -53874,7 +53874,9 @@
     edit: Edit,
     wrapExpandText: WrapExpandText,
     fontSizeExpandText: FontSizeExpandText,
-    fontSizeResize: FontSizeResize,
+    fontSizeResize: SetFontSizeToFitWidth,
+    // Backward compatibility
+    setFontSizeToFitWidth: SetFontSizeToFitWidth,
     waitEvent: WaitEvent,
     waitComplete: WaitComplete,
     delayPromise: Delay,
