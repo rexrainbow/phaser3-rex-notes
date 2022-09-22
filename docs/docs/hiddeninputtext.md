@@ -6,6 +6,7 @@ receive character input and display on [text](text.md), [bbocodetext](bbcodetext
 Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canvas-text-input).
 
 - Author: Rex
+- Behavior of text object
 
 ## Live demos
 

@@ -1,4 +1,4 @@
-import InputText from "../../inputtext";
+import InputText from '../../inputtext';
 
 export default TextEdit;
 
@@ -25,7 +25,7 @@ declare namespace TextEdit {
     }
 }
 
-declare class TextEdit {
+declare class TextEdit extends Phaser.Events.EventEmitter {
     constructor(
         textObject: Phaser.GameObjects.GameObject
     );
