@@ -1,5 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import HiddenTextEdit from './textedit/HiddenTextEdit.js';
+import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 
@@ -35,8 +36,12 @@ class CanvasInput extends DynamicText {
             this.on('movecursor', moveCursorCallback);
         }
 
+        this.lastInsertCursor = AddLastInsertCursor(this);
         if (text) {
             this.setText(text);
+        } else {
+            // Still need run word wrap for lastInsertCursor child
+            this.runWordWrap();
         }
     }
 

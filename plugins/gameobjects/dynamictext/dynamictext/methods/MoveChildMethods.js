@@ -6,32 +6,32 @@ const MoveAbove = Phaser.Utils.Array.MoveAbove;
 const MoveBelow = Phaser.Utils.Array.MoveBelow;
 
 export default {
-    moveChildToFist(bob) {
-        BringToTop(this.children, bob);
+    moveChildToFist(child) {
+        SendToBack(this.children, child);
         return this;
     },
 
-    moveChildToLast(bob) {
-        SendToBack(this.children, bob);
+    moveChildToLast(child) {
+        BringToTop(this.children, child);
         return this;
     },
-    movechildUp(bob) {
-        MoveUp(this.children, bob);
-        return this;
-    },
-
-    movechildDown(bob) {
-        MoveDown(this.children, bob);
+    movechildUp(child) {
+        MoveUp(this.children, child);
         return this;
     },
 
-    movechildAbove(bob, baseBob) {
-        MoveAbove(this.children, bob, baseBob);
+    movechildDown(child) {
+        MoveDown(this.children, child);
         return this;
     },
 
-    movechildBelow(bob, baseBob) {
-        MoveBelow(this.children, bob, baseBob);
+    movechildAbove(child, baseChild) {
+        MoveAbove(this.children, child, baseChild);
+        return this;
+    },
+
+    movechildBelow(child, baseChild) {
+        MoveBelow(this.children, child, baseChild);
         return this;
     },
 

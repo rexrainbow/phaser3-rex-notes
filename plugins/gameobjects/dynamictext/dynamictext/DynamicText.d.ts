@@ -203,6 +203,19 @@ declare class DynamicText extends Canvas {
     removeChildren(): this;
     removeText(index: number, length?: number): this;
 
+    moveChildToFist(child: DynamicText.BobBase): this;
+    moveChildToLast(child: DynamicText.BobBase): this;
+    movechildUp(child: DynamicText.BobBase): this;
+    movechildDown(child: DynamicText.BobBase): this;
+    movechildAbove(
+        child: DynamicText.BobBase,
+        baseChild: DynamicText.BobBase
+    ): this;
+    movechildBelow(
+        child: DynamicText.BobBase,
+        baseChild: DynamicText.BobBase
+    ): this;
+
     runWordWrap(
         config?: DynamicText.IConfigWordWrap
     ): DynamicText.IWrapResult;

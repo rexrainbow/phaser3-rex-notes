@@ -32,7 +32,7 @@ class DynamicText extends Canvas {
         this.wrapPadding = SetPadding();
 
         var textStyleConfig = GetValue(config, 'style', undefined);
-        this.defaultTextStyle = new TextStyle(textStyleConfig);
+        this.defaultTextStyle = new TextStyle(null, textStyleConfig);
         this.textStyle = this.defaultTextStyle.clone();
 
         this.background = new Background(this, GetValue(config, 'background', undefined));

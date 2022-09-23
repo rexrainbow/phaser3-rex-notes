@@ -2113,11 +2113,11 @@
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
 
   var TextStyle = /*#__PURE__*/function () {
-    function TextStyle(config) {
+    function TextStyle(parent, config) {
       _classCallCheck(this, TextStyle);
 
+      this.parent = parent;
       this.set(config);
-      this.updateTextFlag = true;
     }
 
     _createClass(TextStyle, [{
@@ -2224,9 +2224,18 @@
         return this;
       }
     }, {
+      key: "setUpdateTextFlag",
+      value: function setUpdateTextFlag() {
+        if (this.parent) {
+          this.parent.updateTextFlag = true;
+        }
+
+        return this;
+      }
+    }, {
       key: "clone",
       value: function clone() {
-        return new TextStyle(this.toJSON());
+        return new TextStyle(null, this.toJSON());
       }
     }, {
       key: "copyFrom",
@@ -2248,7 +2257,7 @@
         }
 
         this.bold = value;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
       }
     }, {
@@ -2259,7 +2268,7 @@
         }
 
         this.italic = value;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
       }
     }, {
@@ -2283,14 +2292,14 @@
         }
 
         this.fontSize = fontSize;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
       }
     }, {
       key: "setFontFamily",
       value: function setFontFamily(fontFamily) {
         this.fontFamily = fontFamily;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
       }
     }, {
@@ -2540,9 +2549,9 @@
 
   var RemoveItem = Phaser.Utils.Array.Remove;
 
-  var RemoveChild = function RemoveChild(bob) {
-    this.poolManager.free(bob);
-    RemoveItem(this.children, bob);
+  var RemoveChild = function RemoveChild(child) {
+    this.poolManager.free(child);
+    RemoveItem(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -2624,7 +2633,8 @@
       _classCallCheck(this, CharData);
 
       _this = _super.call(this, parent, CharTypeName);
-      _this.style = new TextStyle(style);
+      _this.updateTextFlag = false;
+      _this.style = new TextStyle(_assertThisInitialized(_this), style);
 
       _this.setText(text);
 
@@ -2696,9 +2706,8 @@
         this.setDirty(true);
         this.style.modify(style);
 
-        if (this.style.updateTextFlag) {
+        if (this.updateTextFlag) {
           this.updateTextSize();
-          this.style.updateTextFlag = false;
         }
 
         return this;
@@ -2750,6 +2759,7 @@
           this.descent = descent;
         }
 
+        this.updateTextFlag = false;
         return this;
       }
     }, {
@@ -2779,11 +2789,11 @@
     }, {
       key: "willRender",
       get: function get() {
-        if (this.text === '' || this.text === '\n') {
+        if (this.text === '\n') {
           return false;
-        } else {
-          return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
         }
+
+        return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
       }
     }, {
       key: "renderContent",
@@ -2864,36 +2874,54 @@
     return CharData;
   }(RenderBase);
 
-  var CreateCharBobArray = function CreateCharBobArray(text, style) {
+  var CreateCharChild = function CreateCharChild(text, style) {
     if (style) {
       this.textStyle.modify(style);
     }
 
-    var bobArray = [];
+    var child = this.poolManager.allocate(CharTypeName);
+
+    if (child === null) {
+      child = new CharData(this, // parent
+      text, // text
+      this.textStyle);
+    } else {
+      child.setParent(this).setActive().modifyStyle(this.textStyle).setText(text);
+    }
+
+    return child;
+  };
+
+  var CreateCharChildren = function CreateCharChildren(text, style) {
+    if (style) {
+      this.textStyle.modify(style);
+    }
+
+    var children = [];
 
     for (var i = 0, cnt = text.length; i < cnt; i++) {
       var _char = text.charAt(i);
 
-      var bob = this.poolManager.allocate(CharTypeName);
+      var child = this.poolManager.allocate(CharTypeName);
 
-      if (bob === null) {
-        bob = new CharData(this, // parent
+      if (child === null) {
+        child = new CharData(this, // parent
         _char, // text
         this.textStyle);
       } else {
-        bob.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
-      } // bob.modifyPorperties(properties);  // Warning: Will modify text-style twice
+        child.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
+      } // child.modifyPorperties(properties);  // Warning: Will modify text-style twice
 
 
-      bobArray.push(bob);
+      children.push(child);
     }
 
-    return bobArray;
+    return children;
   };
 
   var AppendText = function AppendText(text, style) {
-    var bobArray = CreateCharBobArray.call(this, text, style);
-    this.addChild(bobArray);
+    var children = this.createCharChildren(text, style);
+    this.addChild(children);
     return this;
   };
 
@@ -2910,9 +2938,9 @@
   };
 
   var InsertText = function InsertText(index, text, style) {
-    var bobArray = CreateCharBobArray.call(this, text, style);
+    var children = this.createCharChildren(text, style);
     index = this.getCharDataIndex(index, true);
-    this.addChild(bobArray, index);
+    this.addChild(children, index);
     return this;
   };
 
@@ -3089,18 +3117,23 @@
     return ImageData;
   }(RenderBase);
 
-  var AppendImage = function AppendImage(key, frame, properties) {
-    var bob = this.poolManager.allocate(ImageTypeName);
+  var CreateImageChild = function CreateImageChild(key, frame, properties) {
+    var child = this.poolManager.allocate(ImageTypeName);
 
-    if (bob === null) {
-      bob = new ImageData(this, // parent
+    if (child === null) {
+      child = new ImageData(this, // parent
       key, frame);
     } else {
-      bob.setParent(this).setActive().setTexture(key, frame);
+      child.setParent(this).setActive().setTexture(key, frame);
     }
 
-    bob.modifyPorperties(properties);
-    this.addChild(bob);
+    child.modifyPorperties(properties);
+    return child;
+  };
+
+  var AppendImage = function AppendImage(key, frame, properties) {
+    var child = this.createImageChild(key, frame, properties);
+    this.addChild(child);
     return this;
   };
 
@@ -3234,17 +3267,22 @@
     return Drawer;
   }(RenderBase);
 
-  var AppendDrawer = function AppendDrawer(renderCallback, width, height) {
-    var bob = this.poolManager.allocate(DrawerTypeName);
+  var CreateDrawerChild = function CreateDrawerChild(renderCallback, width, height) {
+    var child = this.poolManager.allocate(DrawerTypeName);
 
-    if (bob === null) {
-      bob = new Drawer(this, // parent
+    if (child === null) {
+      child = new Drawer(this, // parent
       renderCallback, width, height);
     } else {
-      bob.setParent(this).setActive().setRenderCallback(renderCallback).setDrawerSize(width, height);
+      child.setParent(this).setActive().setRenderCallback(renderCallback).setDrawerSize(width, height);
     }
 
-    this.addChild(bob);
+    return child;
+  };
+
+  var AppendDrawer = function AppendDrawer(renderCallback, width, height) {
+    var child = this.createDrawerChild(renderCallback, width, height);
+    this.addChild(child);
     return this;
   };
 
@@ -3288,17 +3326,22 @@
     return Space;
   }(RenderBase);
 
-  var AppendSpace = function AppendSpace(width) {
-    var bob = this.poolManager.allocate(SpaceTypeName);
+  var CreateSpaceChild = function CreateSpaceChild(width) {
+    var child = this.poolManager.allocate(SpaceTypeName);
 
-    if (bob === null) {
-      bob = new Space(this, // parent
+    if (child === null) {
+      child = new Space(this, // parent
       width);
     } else {
-      bob.setParent(this).setActive().setSpaceWidth(width);
+      child.setParent(this).setActive().setSpaceWidth(width);
     }
 
-    this.addChild(bob);
+    return child;
+  };
+
+  var AppendSpace = function AppendSpace(width) {
+    var child = this.createSpaceChild(width);
+    this.addChild(child);
     return this;
   };
 
@@ -3363,17 +3406,22 @@
     return Command;
   }(Base);
 
-  var AppendCommand = function AppendCommand(name, callback, param, scope) {
-    var bob = this.poolManager.allocate(CmdTypeName);
+  var CreateCommandChild = function CreateCommandChild(name, callback, param, scope) {
+    var child = this.poolManager.allocate(CmdTypeName);
 
-    if (bob === null) {
-      bob = new Command(this, // parent
+    if (child === null) {
+      child = new Command(this, // parent
       name, callback, param, scope);
     } else {
-      bob.setParent(this).setActive().setName(name).setCallback(callback, scope).setParameter(param);
+      child.setParent(this).setActive().setName(name).setCallback(callback, scope).setParameter(param);
     }
 
-    this.addChild(bob);
+    return child;
+  };
+
+  var AppendCommand = function AppendCommand(name, callback, param, scope) {
+    var child = this.createCommandChild(name, callback, param, scope);
+    this.addChild(child);
     return this;
   };
 
@@ -4058,7 +4106,7 @@
     }
 
     var children = this.children;
-    var charIndex = 0;
+    var childIndex = 0;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
@@ -4071,12 +4119,12 @@
         var isBreak;
 
         if (scope) {
-          isBreak = callback.call(this, child, charIndex, children);
+          isBreak = callback.call(this, child, childIndex, children);
         } else {
-          isBreak = callback(child, charIndex, children);
+          isBreak = callback(child, childIndex, children);
         }
 
-        charIndex++;
+        childIndex++;
 
         if (isBreak) {
           break;
@@ -4408,28 +4456,28 @@
   var MoveAbove = Phaser.Utils.Array.MoveAbove;
   var MoveBelow = Phaser.Utils.Array.MoveBelow;
   var MoveChildMethods = {
-    moveChildToFist: function moveChildToFist(bob) {
-      BringToTop(this.children, bob);
+    moveChildToFist: function moveChildToFist(child) {
+      SendToBack(this.children, child);
       return this;
     },
-    moveChildToLast: function moveChildToLast(bob) {
-      SendToBack(this.children, bob);
+    moveChildToLast: function moveChildToLast(child) {
+      BringToTop(this.children, child);
       return this;
     },
-    movechildUp: function movechildUp(bob) {
-      MoveUp(this.children, bob);
+    movechildUp: function movechildUp(child) {
+      MoveUp(this.children, child);
       return this;
     },
-    movechildDown: function movechildDown(bob) {
-      MoveDown(this.children, bob);
+    movechildDown: function movechildDown(child) {
+      MoveDown(this.children, child);
       return this;
     },
-    movechildAbove: function movechildAbove(bob, baseBob) {
-      MoveAbove(this.children, bob, baseBob);
+    movechildAbove: function movechildAbove(child, baseChild) {
+      MoveAbove(this.children, child, baseChild);
       return this;
     },
-    movechildBelow: function movechildBelow(bob, baseBob) {
-      MoveBelow(this.children, bob, baseBob);
+    movechildBelow: function movechildBelow(child, baseChild) {
+      MoveBelow(this.children, child, baseChild);
       return this;
     }
   };
@@ -4470,14 +4518,20 @@
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
     addChild: AddChild,
+    createCharChild: CreateCharChild,
+    createCharChildren: CreateCharChildren,
     setText: SetText$1,
     appendText: AppendText,
     insertText: InsertText,
     removeText: RemoveText,
     getText: GetText,
+    createImageChild: CreateImageChild,
     appendImage: AppendImage,
+    createDrawerChild: CreateDrawerChild,
     appendDrawer: AppendDrawer,
+    createSpaceChild: CreateSpaceChild,
     appendSpace: AppendSpace,
+    createCommandChild: CreateCommandChild,
     appendCommand: AppendCommand,
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
@@ -4628,7 +4682,7 @@
       _this.padding = SetPadding$1();
       _this.wrapPadding = SetPadding$1();
       var textStyleConfig = GetValue$5(config, 'style', undefined);
-      _this.defaultTextStyle = new TextStyle(textStyleConfig);
+      _this.defaultTextStyle = new TextStyle(null, textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
       _this.background = new Background(_assertThisInitialized(_this), GetValue$5(config, 'background', undefined));
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$5(config, 'innerBounds', undefined));
@@ -5572,28 +5626,30 @@
     _createClass(HiddenTextEdit, [{
       key: "initText",
       value: function initText() {
+        var textObject = this.parent;
         this.prevCursorPosition = undefined;
-        this.setText(this.parent.text);
+        this.setText(textObject.text);
         return this;
       }
     }, {
       key: "updateText",
       value: function updateText() {
+        var textObject = this.parent;
         var text = this.text;
 
         if (this.onUpdateCallback) {
-          var newText = this.onUpdateCallback(text, this.parent, this);
+          var newText = this.onUpdateCallback(text, textObject, this);
 
           if (newText != null) {
             text = newText;
           }
         }
 
-        this.parent.setText(text);
+        textObject.setText(text);
         var cursorPosition = this.isOpened ? this.cursorPosition : null;
 
         if (this.prevCursorPosition !== cursorPosition) {
-          this.parent.emit('movecursor', cursorPosition, this.parent);
+          textObject.emit('movecursor', cursorPosition, textObject);
           this.prevCursorPosition = cursorPosition;
         }
 
@@ -5603,6 +5659,19 @@
 
     return HiddenTextEdit;
   }(HiddenTextEditBase);
+
+  var AddLastInsertCursor = function AddLastInsertCursor(textObject) {
+    var child = textObject.createCharChild('|'); // Use '|' to update render size
+
+    child.text = ''; // Render empty string ''
+    // Don't invoke 'addchar' event
+
+    var typeSave = child.type;
+    child.type = '';
+    textObject.addChild(child);
+    child.type = typeSave;
+    return child;
+  };
 
   function Diff() {}
   Diff.prototype = {
@@ -6079,7 +6148,7 @@
       }
     }
 
-    textObject.runWordWrap();
+    textObject.moveChildToLast(textObject.lastInsertCursor).runWordWrap();
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -6123,8 +6192,13 @@
         _this.on('movecursor', moveCursorCallback);
       }
 
+      _this.lastInsertCursor = AddLastInsertCursor(_assertThisInitialized(_this));
+
       if (text) {
         _this.setText(text);
+      } else {
+        // Still need run word wrap for lastInsertCursor child
+        _this.runWordWrap();
       }
 
       return _this;

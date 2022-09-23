@@ -13,14 +13,14 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var txt0 = CreateCanvasInput(this).setPosition(400, 200)
-        var txt1 = CreateCanvasInput(this).setPosition(400, 400)
+        var txt0 = CreateCanvasInput(this, 'Phaser').setPosition(400, 200)
+        var txt1 = CreateCanvasInput(this, 'Phaser').setPosition(400, 400)
     }
 
     update() { }
 }
 
-var CreateCanvasInput = function (scene) {
+var CreateCanvasInput = function (scene, text) {
     return scene.add.rexCanvasInput(
         {
             width: 600, height: 100,
@@ -34,7 +34,7 @@ var CreateCanvasInput = function (scene) {
             },
             padding: 20,
             style: {
-                fontSize: '20px',
+                fontSize: '24px',
             },
 
             wrap: {
@@ -76,7 +76,7 @@ var CreateCanvasInput = function (scene) {
                 })
             },
 
-            text: 'Phaser',
+            text: text,
         }
     )
 }

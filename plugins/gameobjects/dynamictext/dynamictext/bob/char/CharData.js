@@ -9,7 +9,8 @@ class CharData extends RenderBase {
         style
     ) {
         super(parent, CharTypeName);
-        this.style = new TextStyle(style);
+        this.updateTextFlag = false;
+        this.style = new TextStyle(this, style);
         this.setText(text);
     }
 
@@ -73,9 +74,8 @@ class CharData extends RenderBase {
         this.setDirty(true);
         this.style.modify(style);
 
-        if (this.style.updateTextFlag) {
+        if (this.updateTextFlag) {
             this.updateTextSize();
-            this.style.updateTextFlag = false;
         }
         return this;
     }
@@ -123,6 +123,8 @@ class CharData extends RenderBase {
             this.ascent = ascent;
             this.descent = descent;
         }
+
+        this.updateTextFlag = false;
         return this;
     }
 
@@ -151,11 +153,11 @@ class CharData extends RenderBase {
     }
 
     get willRender() {
-        if ((this.text === '') || (this.text === '\n')) {
+        if (this.text === '\n') {
             return false;
-        } else {
-            return super.willRender;
         }
+
+        return super.willRender;
     }
 
     renderContent() {

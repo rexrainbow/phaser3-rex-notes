@@ -4,9 +4,9 @@ import GetProperty from '../utils/GetProperty.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TextStyle {
-    constructor(config) {
+    constructor(parent, config) {
+        this.parent = parent;
         this.set(config);
-        this.updateTextFlag = true;
     }
 
     toJSON() {
@@ -123,8 +123,15 @@ class TextStyle {
         return this;
     }
 
+    setUpdateTextFlag() {
+        if (this.parent) {
+            this.parent.updateTextFlag = true;
+        }
+        return this;
+    }
+
     clone() {
-        return new TextStyle(this.toJSON());
+        return new TextStyle(null, this.toJSON());
     }
 
     copyFrom(sourceTextStyle) {
@@ -142,7 +149,7 @@ class TextStyle {
             value = true;
         }
         this.bold = value;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
     }
 
@@ -151,7 +158,7 @@ class TextStyle {
             value = true;
         }
         this.italic = value;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
     }
 
@@ -172,13 +179,13 @@ class TextStyle {
             fontSize = `${fontSize}px`;
         }
         this.fontSize = fontSize;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
     }
 
     setFontFamily(fontFamily) {
         this.fontFamily = fontFamily;
-        this.updateTextFlag = true;
+        this.setUpdateTextFlag();
         return this;
     }
 

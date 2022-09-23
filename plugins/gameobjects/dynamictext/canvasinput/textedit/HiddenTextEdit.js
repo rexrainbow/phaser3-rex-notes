@@ -17,27 +17,28 @@ class HiddenTextEdit extends HiddenTextEditBase {
     }
 
     initText() {
+        var textObject = this.parent;
         this.prevCursorPosition = undefined;
-        this.setText(this.parent.text);
-
+        this.setText(textObject.text);
         return this;
     }
 
     updateText() {
-        var text = this.text;
+        var textObject = this.parent;
 
+        var text = this.text;
         if (this.onUpdateCallback) {
-            var newText = this.onUpdateCallback(text, this.parent, this);
+            var newText = this.onUpdateCallback(text, textObject, this);
             if (newText != null) {
                 text = newText;
             }
         }
 
-        this.parent.setText(text);
+        textObject.setText(text);
 
         var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
         if (this.prevCursorPosition !== cursorPosition) {
-            this.parent.emit('movecursor', cursorPosition, this.parent);
+            textObject.emit('movecursor', cursorPosition, textObject);
             this.prevCursorPosition = cursorPosition;
         }
 
