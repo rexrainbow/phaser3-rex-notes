@@ -1,14 +1,10 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import CreateInputTextFromText from './CreateInputText.js';
-import IsFunction from '../../utils/object/IsFunction.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Merge = Phaser.Utils.Objects.Merge;
-
-var LastOpenedEditor = undefined;
 
 class TextEdit extends ComponentBase {
-    constructor(gameObject, config) {        
+    constructor(gameObject, config) {
         super(gameObject);
         // this.parent = gameObject;
 
@@ -35,9 +31,6 @@ class TextEdit extends ComponentBase {
         }
 
         this.close();
-        if (LastOpenedEditor === this) {
-            LastOpenedEditor = undefined;
-        }
 
         super.shutdown(fromScene);
     }
@@ -50,86 +43,6 @@ class TextEdit extends ComponentBase {
         return this;
     }
 
-    open(config, onCloseCallback) {
-        if (config === undefined) {
-            config = {};
-        }
-        Merge(config, this.openConfig)
-
-        if (LastOpenedEditor !== undefined) {
-            LastOpenedEditor.close();
-        }
-
-        LastOpenedEditor = this;
-        if (IsFunction(config)) {
-            onCloseCallback = config;
-            config = undefined;
-        }
-        if (onCloseCallback === undefined) {
-            onCloseCallback = GetValue(config, 'onClose', undefined);
-        }
-
-        var onOpenCallback = GetValue(config, 'onOpen', undefined);
-        var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
-
-        this.inputText = CreateInputTextFromText(this.parent, config)
-            .on('textchange', function (inputText) {
-                var text = inputText.text;
-                if (customOnTextChanged) { // Custom on-text-changed callback
-                    customOnTextChanged(this.parent, text);
-                } else { // Default on-text-changed callback
-                    this.parent.text = text;
-                }                
-            }, this)
-            .setFocus();
-        this.parent.setVisible(false); // Set parent text invisible
-
-        // Attach close event
-        this.onClose = onCloseCallback;
-        if (GetValue(config, 'enterClose', true)) {
-            this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-        }
-        // Attach pointerdown (outside of input-text) event, at next tick
-        this.delayCall = this.scene.time.delayedCall(0, function () {
-            this.scene.input.once('pointerdown', this.close, this);
-
-            // Open editor completly, invoke onOpenCallback
-            if (onOpenCallback) {
-                onOpenCallback(this.parent);
-                this.emit('open', this.parent);
-            }
-
-        }, [], this);
-
-        return this;
-    }
-
-    close() {
-        LastOpenedEditor = undefined;
-        if (!this.inputText) {
-            return this;
-        }
-
-        this.parent.setVisible(true); // Set parent text visible
-
-        this.inputText.destroy();
-        this.inputText = undefined;
-        if (this.delayCall) {
-            this.delayCall.remove();
-            this.delayCall = undefined;
-        }
-
-        // Remove close event
-        this.scene.input.keyboard.off('keydown-ENTER', this.close, this);
-        this.scene.input.off('pointerdown', this.close, this);
-
-        if (this.onClose) {
-            this.onClose(this.parent);
-            this.emit('close', this.parent);
-        }
-        return this;
-    }
-
     get isOpened() {
         return (this.inputText !== undefined);
     }
@@ -138,5 +51,10 @@ class TextEdit extends ComponentBase {
         return (this.isOpened) ? this.inputText.text : this.parent.text;
     }
 }
+
+Object.assign(
+    TextEdit.prototype,
+    Methods,
+)
 
 export default TextEdit;

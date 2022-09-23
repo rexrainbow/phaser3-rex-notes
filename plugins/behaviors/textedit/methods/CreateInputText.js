@@ -1,5 +1,5 @@
-import InputText from '../../gameobjects/dom/inputtext/InputText.js';
-import IsTextGameObject from '../../utils/text/IsTextGameObject.js';
+import InputText from '../../../gameobjects/dom/inputtext/InputText.js';
+import IsTextGameObject from '../../../utils/text/IsTextGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
