@@ -3,6 +3,7 @@ import Canvas from '../../canvas/canvas/Canvas';
 import { IConfigTextStyle } from './bob/char/TextStyle';
 import CharBobClass from './bob/char/CharData';
 import ImageBobClass from './bob/image/ImageData';
+import DrawBobClass from './bob/drawer/Drawer';
 import CommandBobClass from './bob/command/Command';
 
 
@@ -83,9 +84,10 @@ declare namespace DynamicText {
 
     type CharBob = CharBobClass;
     type ImageBob = ImageBobClass;
+    type DrawBob = DrawBobClass;
     type CommandBob = CommandBobClass;
-    type RenderChildTypes = CharBob | ImageBob;
-    type ChildTypes = CharBob | ImageBob | CommandBob;
+    type RenderChildTypes = CharBob | ImageBob | DrawBob;
+    type ChildTypes = CharBob | ImageBob | DrawBob | CommandBob;
 
     interface IWrapResult {
         children: ChildTypes[],
@@ -137,6 +139,14 @@ declare class DynamicText extends Canvas {
 
     clearContent(): this;
 
+    createCharChild(
+        text: string,
+        style?: IConfigTextStyle
+    ): DynamicText.CharBob;
+    createCharChildren(
+        text: string,
+        style?: IConfigTextStyle
+    ): DynamicText.CharBob[];
     setText(
         text: string,
         style?: IConfigTextStyle
@@ -155,9 +165,37 @@ declare class DynamicText extends Canvas {
 
     text: string;
 
+    createImageChild(
+        key: string, frame?: string | null,
+        config?: DynamicText.IConfigImage
+    ): DynamicText.ImageBob;
     appendImage(
         key: string, frame?: string | null,
         config?: DynamicText.IConfigImage
+    ): this;
+
+    createDrawerChild(
+        renderCallback: (this: DynamicText.DrawBob) => void,
+        width?: number,
+        height?: number
+    ): DynamicText.DrawBob;
+    appendDrawer(
+        renderCallback: (this: DynamicText.DrawBob) => void,
+        width?: number,
+        height?: number
+    ): this;
+
+    createCommandChild(
+        name: string,
+        callback: (param: unknown, name: string) => any,
+        param: unknown,
+        scope?: Object
+    ): DynamicText.CommandBob;
+    appendCommand(
+        name: string,
+        callback: (param: unknown, name: string) => any,
+        param: unknown,
+        scope?: Object
     ): this;
 
     runWordWrap(
