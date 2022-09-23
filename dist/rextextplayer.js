@@ -7053,6 +7053,41 @@
     return this;
   };
 
+  var ForEachRenderableChild = function ForEachRenderableChild(callback, scope, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+    var charIndex = 0;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (child.renderable && !child.removed) {
+        var isBreak;
+
+        if (scope) {
+          isBreak = callback.call(this, child, charIndex, children);
+        } else {
+          isBreak = callback(child, charIndex, children);
+        }
+
+        charIndex++;
+
+        if (isBreak) {
+          break;
+        }
+      }
+    }
+
+    return this;
+  };
+
   var ForEachCharChild = function ForEachCharChild(callback, scope, activeOnly) {
     if (activeOnly === undefined) {
       activeOnly = true;
@@ -7151,17 +7186,17 @@
       x: canvasX,
       y: canvasY
     };
-    var distances = [];
-    this.forEachChild(function (child) {
-      distances.push({
-        child: child,
-        distance: GetDistance(pointA, GetBobCenterPosition(child, true))
-      });
+    var minDistance = Infinity;
+    var nearestChild = null;
+    this.forEachRenderableChild(function (child) {
+      var distance = GetDistance(pointA, GetBobCenterPosition(child, true));
+
+      if (minDistance > distance) {
+        minDistance = distance;
+        nearestChild = child;
+      }
     });
-    distances.sort(function (dataA, dataB) {
-      return dataA.distance - dataB.distance;
-    });
-    return distances[0].child;
+    return nearestChild;
   };
 
   var SetToMinSize = function SetToMinSize() {
@@ -7450,6 +7485,7 @@
     runVerticalWrap: RunVerticalWrap,
     renderContent: RenderContent,
     forEachChild: ForEachChild,
+    forEachRenderableChild: ForEachRenderableChild,
     forEachCharChild: ForEachCharChild,
     getChildren: GetChildren,
     getActiveChildren: GetActiveChildren,

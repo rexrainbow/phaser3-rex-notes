@@ -706,6 +706,17 @@ txt.setWrapConfig(config);
         txt.forEachChild(function(child, childIndex){
         }, scope, false);
         ```
+- Renderable child
+    - For each active renderable child
+        ```javascript
+        txt.forEachRenderableChild(function(child, charIndex){
+        }, scope)
+        ```
+    - For each renderable child
+        ```javascript
+        txt.forEachRenderableChild(function(child, charIndex){
+        }, scope, false);
+        ```
 - Character child
     - For each active character child
         ```javascript

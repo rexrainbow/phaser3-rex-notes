@@ -22,6 +22,7 @@ import RunVerticalWrap from './RunVerticalWrap.js';
 import RenderContent from './RenderContent.js';
 
 import ForEachChild from './ForEachChild.js';
+import ForEachRenderableChild from './ForEachRenderableChild.js';
 import ForEachCharChild from './ForEachCharChild.js';
 import GetChildren from './GetChildren.js';
 import GetActiveChildren from './GetActiveChildren.js';
@@ -66,6 +67,7 @@ var Methods = {
     renderContent: RenderContent,
 
     forEachChild: ForEachChild,
+    forEachRenderableChild: ForEachRenderableChild,
     forEachCharChild: ForEachCharChild,
     getChildren: GetChildren,
     getActiveChildren: GetActiveChildren,

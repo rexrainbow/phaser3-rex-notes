@@ -265,7 +265,7 @@
     }
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
 
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
@@ -276,7 +276,7 @@
       this.scene = GetSceneObject(parent);
       this.isShutdown = false; // Event emitter, default is private event emitter
 
-      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      this.setEventEmitter(GetValue$5(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
 
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
@@ -329,6 +329,33 @@
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
+
+  var LastOpenedEditor = undefined;
+
+  var SetLastOpenedEditor = function SetLastOpenedEditor(editor) {
+    if (editor === LastOpenedEditor) {
+      return;
+    }
+
+    if (LastOpenedEditor !== undefined) {
+      LastOpenedEditor.close();
+    }
+
+    LastOpenedEditor = editor;
+  };
+
+  var CloseLastOpenEditor = function CloseLastOpenEditor(editor) {
+    if (editor !== LastOpenedEditor) {
+      return;
+    } // Don't call `LastOpenedEditor.close()`
+
+
+    LastOpenedEditor = undefined;
+  };
+
+  var IsFunction = function IsFunction(obj) {
+    return obj && typeof obj === 'function';
+  };
 
   var Resize = function Resize(width, height) {
     if (this.scene.sys.scale.autoRound) {
@@ -394,7 +421,7 @@
     select: 'select'
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
@@ -406,7 +433,7 @@
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
 
-      value = GetValue$3(config, key, property[1]);
+      value = GetValue$4(config, key, property[1]);
 
       if (value !== undefined) {
         out[property[0]] = value;
@@ -445,7 +472,7 @@
 
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var InputText = /*#__PURE__*/function (_DOMElement) {
     _inherits(InputText, _DOMElement);
@@ -459,14 +486,14 @@
 
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue$2(config, 'x', 0);
-        y = GetValue$2(config, 'y', 0);
-        width = GetValue$2(config, 'width', 0);
-        height = GetValue$2(config, 'height', 0);
+        x = GetValue$3(config, 'x', 0);
+        y = GetValue$3(config, 'y', 0);
+        width = GetValue$3(config, 'width', 0);
+        height = GetValue$3(config, 'height', 0);
       } else if (IsPlainObject(width)) {
         config = width;
-        width = GetValue$2(config, 'width', 0);
-        height = GetValue$2(config, 'height', 0);
+        width = GetValue$3(config, 'width', 0);
+        height = GetValue$3(config, 'height', 0);
       }
 
       if (config === undefined) {
@@ -474,7 +501,7 @@
       }
 
       var element;
-      var textType = GetValue$2(config, 'type', 'text');
+      var textType = GetValue$3(config, 'type', 'text');
 
       if (textType === 'textarea') {
         element = document.createElement('textarea');
@@ -485,7 +512,7 @@
       }
 
       SetProperties(ElementProperties, config, element);
-      var style = GetValue$2(config, 'style', undefined);
+      var style = GetValue$3(config, 'style', undefined);
       style = SetProperties(StyleProperties, config, style); // Apply other style properties
 
       var elementStyle = element.style;
@@ -509,7 +536,7 @@
 
       StopPropagationTouchEvents(element);
 
-      if (GetValue$2(config, 'selectAll', false)) {
+      if (GetValue$3(config, 'selectAll', false)) {
         _this.selectAll();
       }
 
@@ -760,7 +787,7 @@
     return gameObject instanceof TextKlass;
   };
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var CreateInputText = function CreateInputText(text, config) {
     if (config === undefined) {
@@ -769,19 +796,19 @@
 
     var scene = text.scene;
     var style = text.style;
-    var backgroundColor = GetValue$1(config, 'backgroundColor', style.backgroundColor);
+    var backgroundColor = GetValue$2(config, 'backgroundColor', style.backgroundColor);
 
     if (backgroundColor === null) {
       backgroundColor = 'transparent';
     }
 
-    config.text = GetValue$1(config, 'text', text.text);
-    config.fontFamily = GetValue$1(config, 'fontFamily', style.fontFamily);
-    config.fontSize = GetValue$1(config, 'fontSize', style.fontSize);
-    config.color = GetValue$1(config, 'color', style.color);
+    config.text = GetValue$2(config, 'text', text.text);
+    config.fontFamily = GetValue$2(config, 'fontFamily', style.fontFamily);
+    config.fontSize = GetValue$2(config, 'fontSize', style.fontSize);
+    config.color = GetValue$2(config, 'color', style.color);
     config.backgroundColor = backgroundColor;
-    config.direction = GetValue$1(config, 'rtl', style.rtl) ? 'rtl' : 'ltr';
-    config.align = GetValue$1(config, 'align', GetHAlign(style)); // Built-in text game object with RTL only has 'right' align
+    config.direction = GetValue$2(config, 'rtl', style.rtl) ? 'rtl' : 'ltr';
+    config.align = GetValue$2(config, 'align', GetHAlign(style)); // Built-in text game object with RTL only has 'right' align
 
     if (config.direction === 'rtl' && IsTextGameObject(text)) {
       config.align = 'right';
@@ -798,7 +825,7 @@
     // }
 
 
-    var inputText = new InputText(scene, text.x, text.y, GetValue$1(config, 'width', text.width), GetValue$1(config, 'height', text.height), config);
+    var inputText = new InputText(scene, text.x, text.y, GetValue$2(config, 'width', text.width), GetValue$2(config, 'height', text.height), config);
     inputText.setOrigin(text.originX, text.originY);
     scene.add.existing(inputText);
     return inputText;
@@ -814,13 +841,92 @@
     }
   };
 
-  var IsFunction = function IsFunction(obj) {
-    return obj && typeof obj === 'function';
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var Merge = Phaser.Utils.Objects.Merge;
+
+  var Open = function Open(config, onCloseCallback) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    Merge(config, this.openConfig);
+    SetLastOpenedEditor(this);
+
+    if (IsFunction(config)) {
+      onCloseCallback = config;
+      config = undefined;
+    }
+
+    if (onCloseCallback === undefined) {
+      onCloseCallback = GetValue$1(config, 'onClose', undefined);
+    }
+
+    var onOpenCallback = GetValue$1(config, 'onOpen', undefined);
+    var customOnTextChanged = GetValue$1(config, 'onTextChanged', undefined);
+    this.inputText = CreateInputText(this.parent, config).on('textchange', function (inputText) {
+      var text = inputText.text;
+
+      if (customOnTextChanged) {
+        // Custom on-text-changed callback
+        customOnTextChanged(this.parent, text);
+      } else {
+        // Default on-text-changed callback
+        this.parent.text = text;
+      }
+    }, this).setFocus();
+    this.parent.setVisible(false); // Set parent text invisible
+    // Attach close event
+
+    this.onClose = onCloseCallback;
+
+    if (GetValue$1(config, 'enterClose', true)) {
+      this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+    } // Attach pointerdown (outside of input-text) event, at next tick
+
+
+    this.delayCall = this.scene.time.delayedCall(0, function () {
+      this.scene.input.once('pointerdown', this.close, this); // Open editor completly, invoke onOpenCallback
+
+      if (onOpenCallback) {
+        onOpenCallback(this.parent);
+        this.emit('open', this.parent);
+      }
+    }, [], this);
+    return this;
+  };
+
+  var Close = function Close() {
+    CloseLastOpenEditor(this);
+    this.parent.setVisible(true); // Set parent text visible
+
+    if (this.inputText) {
+      this.inputText.destroy();
+      this.inputText = undefined;
+    }
+
+    if (this.delayCall) {
+      this.delayCall.remove();
+      this.delayCall = undefined;
+    } // Remove close event
+
+
+    this.scene.input.keyboard.off('keydown-ENTER', this.close, this);
+    this.scene.input.off('pointerdown', this.close, this);
+
+    if (this.onClose) {
+      this.onClose(this.parent);
+      this.emit('close', this.parent);
+    }
+
+    return this;
+  };
+
+  var Methods = {
+    open: Open,
+    close: Close
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-  var Merge = Phaser.Utils.Objects.Merge;
-  var LastOpenedEditor = undefined;
 
   var TextEdit = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TextEdit, _ComponentBase);
@@ -861,10 +967,6 @@
 
         this.close();
 
-        if (LastOpenedEditor === this) {
-          LastOpenedEditor = undefined;
-        }
-
         _get(_getPrototypeOf(TextEdit.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -875,93 +977,6 @@
         }
 
         this.openConfig = config;
-        return this;
-      }
-    }, {
-      key: "open",
-      value: function open(config, onCloseCallback) {
-        if (config === undefined) {
-          config = {};
-        }
-
-        Merge(config, this.openConfig);
-
-        if (LastOpenedEditor !== undefined) {
-          LastOpenedEditor.close();
-        }
-
-        LastOpenedEditor = this;
-
-        if (IsFunction(config)) {
-          onCloseCallback = config;
-          config = undefined;
-        }
-
-        if (onCloseCallback === undefined) {
-          onCloseCallback = GetValue(config, 'onClose', undefined);
-        }
-
-        var onOpenCallback = GetValue(config, 'onOpen', undefined);
-        var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
-        this.inputText = CreateInputText(this.parent, config).on('textchange', function (inputText) {
-          var text = inputText.text;
-
-          if (customOnTextChanged) {
-            // Custom on-text-changed callback
-            customOnTextChanged(this.parent, text);
-          } else {
-            // Default on-text-changed callback
-            this.parent.text = text;
-          }
-        }, this).setFocus();
-        this.parent.setVisible(false); // Set parent text invisible
-        // Attach close event
-
-        this.onClose = onCloseCallback;
-
-        if (GetValue(config, 'enterClose', true)) {
-          this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-        } // Attach pointerdown (outside of input-text) event, at next tick
-
-
-        this.delayCall = this.scene.time.delayedCall(0, function () {
-          this.scene.input.once('pointerdown', this.close, this); // Open editor completly, invoke onOpenCallback
-
-          if (onOpenCallback) {
-            onOpenCallback(this.parent);
-            this.emit('open', this.parent);
-          }
-        }, [], this);
-        return this;
-      }
-    }, {
-      key: "close",
-      value: function close() {
-        LastOpenedEditor = undefined;
-
-        if (!this.inputText) {
-          return this;
-        }
-
-        this.parent.setVisible(true); // Set parent text visible
-
-        this.inputText.destroy();
-        this.inputText = undefined;
-
-        if (this.delayCall) {
-          this.delayCall.remove();
-          this.delayCall = undefined;
-        } // Remove close event
-
-
-        this.scene.input.keyboard.off('keydown-ENTER', this.close, this);
-        this.scene.input.off('pointerdown', this.close, this);
-
-        if (this.onClose) {
-          this.onClose(this.parent);
-          this.emit('close', this.parent);
-        }
-
         return this;
       }
     }, {
@@ -978,6 +993,8 @@
 
     return TextEdit;
   }(ComponentBase);
+
+  Object.assign(TextEdit.prototype, Methods);
 
   var Edit = function Edit(gameObject, config, onCloseCallback) {
     if (!gameObject._edit) {

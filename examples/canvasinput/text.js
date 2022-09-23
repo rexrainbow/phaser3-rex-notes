@@ -13,76 +13,72 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = this.add.rexCanvasInput(
-            {
-                x: 400, y: 300,
-                width: 600, height: 100,
-
-                background: {
-                    stroke: 'white',
-                    cornerRadius: 20
-                },
-                innerBounds: {
-                    stroke: 'darkcyan'
-                },
-                padding: 20,
-                style: {
-                    fontSize: '20px',
-                },
-
-                wrap: {
-                    lineHeight: 40,
-                    maxLines: 0,       // Set maxLines to 0
-                    letterSpacing: 1,
-                    padding: { bottom: 10 },
-                },
-
-                edit: {
-                    onOpen(textObject) {
-                        textObject.setBackgroundStroke('red')
-                    },
-
-                    onClose(textObject) {
-                        textObject.setBackgroundStroke('white')
-
-                        textObject.forEachCharChild(function (child) {
-                            child.modifyStyle({
-                                color: 'white',
-                                backgroundColor: null
-                            })
-                        })
-                    }
-                },
-
-                onAddChar(child) {
-                    child
-                        .setAngle((Math.random() - 0.5) * 30)
-                        .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
-                },
-
-                onMoveCursor(cursorIndex, textObject) {
-                    textObject.forEachCharChild(function (child, i) {
-                        if (i === cursorIndex) {
-                            child.modifyStyle({
-                                color: 'black',
-                                backgroundColor: 'white'
-                            })
-                        } else {
-                            child.modifyStyle({
-                                color: 'white',
-                                backgroundColor: null
-                            })
-                        }
-                    })
-                },
-
-                text: 'Phaser',
-            }
-        )
-
+        var txt0 = CreateCanvasInput(this).setPosition(400, 200)
+        var txt1 = CreateCanvasInput(this).setPosition(400, 400)
     }
 
     update() { }
+}
+
+var CreateCanvasInput = function (scene) {
+    return scene.add.rexCanvasInput(
+        {
+            width: 600, height: 100,
+
+            background: {
+                stroke: 'white',
+                cornerRadius: 20
+            },
+            innerBounds: {
+                stroke: 'darkcyan'
+            },
+            padding: 20,
+            style: {
+                fontSize: '20px',
+            },
+
+            wrap: {
+                lineHeight: 40,
+                maxLines: 0,       // Set maxLines to 0
+                letterSpacing: 1,
+                padding: { bottom: 10 },
+            },
+
+            edit: {
+                onOpen(textObject) {
+                    textObject.setBackgroundStroke('red')
+                },
+
+                onClose(textObject) {
+                    textObject.setBackgroundStroke('white')
+                }
+            },
+
+            onAddChar(child) {
+                child
+                    .setAngle((Math.random() - 0.5) * 30)
+                    .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
+            },
+
+            onMoveCursor(cursorIndex, textObject) {
+                textObject.forEachCharChild(function (child, i) {
+                    if (i === cursorIndex) {
+                        child.modifyStyle({
+                            color: 'black',
+                            backgroundColor: 'white'
+                        })
+                    } else {
+                        child.modifyStyle({
+                            color: 'white',
+                            backgroundColor: null
+                        })
+                    }
+                })
+            },
+
+            text: 'Phaser',
+        }
+    )
 }
 
 var config = {

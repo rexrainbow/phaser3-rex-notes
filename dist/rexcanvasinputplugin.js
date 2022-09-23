@@ -1038,10 +1038,10 @@
 
   var globBounds;
 
-  var Methods$1 = {
+  var Methods$2 = {
     contains: Contains
   };
-  Object.assign(Methods$1, RenderMethods);
+  Object.assign(Methods$2, RenderMethods);
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
@@ -1464,7 +1464,7 @@
     return RenderBase;
   }(Base);
 
-  Object.assign(RenderBase.prototype, Methods$1);
+  Object.assign(RenderBase.prototype, Methods$2);
 
   var Pad = Phaser.Utils.String.Pad;
 
@@ -4052,6 +4052,41 @@
     return this;
   };
 
+  var ForEachRenderableChild = function ForEachRenderableChild(callback, scope, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+    var charIndex = 0;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (child.renderable && !child.removed) {
+        var isBreak;
+
+        if (scope) {
+          isBreak = callback.call(this, child, charIndex, children);
+        } else {
+          isBreak = callback(child, charIndex, children);
+        }
+
+        charIndex++;
+
+        if (isBreak) {
+          break;
+        }
+      }
+    }
+
+    return this;
+  };
+
   var ForEachCharChild = function ForEachCharChild(callback, scope, activeOnly) {
     if (activeOnly === undefined) {
       activeOnly = true;
@@ -4150,17 +4185,17 @@
       x: canvasX,
       y: canvasY
     };
-    var distances = [];
-    this.forEachChild(function (child) {
-      distances.push({
-        child: child,
-        distance: GetDistance(pointA, GetBobCenterPosition(child, true))
-      });
+    var minDistance = Infinity;
+    var nearestChild = null;
+    this.forEachRenderableChild(function (child) {
+      var distance = GetDistance(pointA, GetBobCenterPosition(child, true));
+
+      if (minDistance > distance) {
+        minDistance = distance;
+        nearestChild = child;
+      }
     });
-    distances.sort(function (dataA, dataB) {
-      return dataA.distance - dataB.distance;
-    });
-    return distances[0].child;
+    return nearestChild;
   };
 
   var SetToMinSize = function SetToMinSize() {
@@ -4425,7 +4460,7 @@
     }
   };
 
-  var Methods = {
+  var Methods$1 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -4449,6 +4484,7 @@
     runVerticalWrap: RunVerticalWrap,
     renderContent: RenderContent,
     forEachChild: ForEachChild,
+    forEachRenderableChild: ForEachRenderableChild,
     forEachCharChild: ForEachCharChild,
     getChildren: GetChildren,
     getActiveChildren: GetActiveChildren,
@@ -4461,7 +4497,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
+  Object.assign(Methods$1, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
 
   var Stack = /*#__PURE__*/function () {
     function Stack() {
@@ -4640,7 +4676,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods);
+  Object.assign(DynamicText.prototype, Methods$1);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -4820,6 +4856,90 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
+    if (pointer) {
+      if (preTest && !preTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (!HitTest(gameObject, pointer)) {
+        return false;
+      }
+
+      if (postTest && !postTest(gameObject, pointer)) {
+        return false;
+      }
+
+      return true;
+    } else {
+      var inputManager = gameObject.scene.input.manager;
+      var pointersTotal = inputManager.pointersTotal;
+      var pointers = inputManager.pointers,
+          pointer;
+
+      for (var i = 0; i < pointersTotal; i++) {
+        pointer = pointers[i];
+
+        if (preTest && !preTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (!HitTest(gameObject, pointer)) {
+          continue;
+        }
+
+        if (postTest && !postTest(gameObject, pointer)) {
+          continue;
+        }
+
+        return true;
+      }
+
+      return false;
+    }
+  };
+
+  var HitTest = function HitTest(gameObject, pointer) {
+    var scene = gameObject.scene;
+    var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
+    var inputManager = scene.input.manager;
+    var gameObjects = [gameObject];
+    var output;
+
+    for (var i = 0, len = cameras.length; i < len; i++) {
+      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
+
+      if (output.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  var LastOpenedEditor = undefined;
+
+  var SetLastOpenedEditor = function SetLastOpenedEditor(editor) {
+    if (editor === LastOpenedEditor) {
+      return;
+    }
+
+    if (LastOpenedEditor !== undefined) {
+      LastOpenedEditor.close();
+    }
+
+    LastOpenedEditor = editor;
+  };
+
+  var CloseLastOpenEditor = function CloseLastOpenEditor(editor) {
+    if (editor !== LastOpenedEditor) {
+      return;
+    } // Don't call `LastOpenedEditor.close()`
+
+
+    LastOpenedEditor = undefined;
+  };
+
   var ElementProperties = {
     id: ['id', undefined],
     text: ['value', undefined],
@@ -4960,6 +5080,39 @@
     return element;
   };
 
+  var Open = function Open() {
+    // Already opened
+    if (this.isOpened) {
+      return this;
+    }
+
+    SetLastOpenedEditor(this);
+    this.isOpened = true;
+
+    if (!this.node) {
+      // Create input text element when opening editor
+      this.node = CreateElement(this, this.nodeConfig);
+    }
+
+    this.setFocus();
+    this.initText();
+
+    if (this.enterCloseEnable) {
+      this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+    } // There is no cursor-position-change event, 
+    // so updating cursor position every tick
+
+
+    this.scene.sys.events.on('postupdate', this.updateText, this);
+    this.scene.input.on('pointerdown', this.onClickOutside, this);
+
+    if (this.onOpenCallback) {
+      this.onOpenCallback(this.parent, this);
+    }
+
+    return this;
+  };
+
   var RemoveElement = function RemoveElement(element) {
     if (!element) {
       return;
@@ -4968,65 +5121,32 @@
     document.body.removeChild(element);
   };
 
-  var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
-    if (pointer) {
-      if (preTest && !preTest(gameObject, pointer)) {
-        return false;
-      }
-
-      if (!HitTest(gameObject, pointer)) {
-        return false;
-      }
-
-      if (postTest && !postTest(gameObject, pointer)) {
-        return false;
-      }
-
-      return true;
-    } else {
-      var inputManager = gameObject.scene.input.manager;
-      var pointersTotal = inputManager.pointersTotal;
-      var pointers = inputManager.pointers,
-          pointer;
-
-      for (var i = 0; i < pointersTotal; i++) {
-        pointer = pointers[i];
-
-        if (preTest && !preTest(gameObject, pointer)) {
-          continue;
-        }
-
-        if (!HitTest(gameObject, pointer)) {
-          continue;
-        }
-
-        if (postTest && !postTest(gameObject, pointer)) {
-          continue;
-        }
-
-        return true;
-      }
-
-      return false;
+  var Close = function Close() {
+    // Already closed
+    if (!this.isOpened) {
+      return this;
     }
+
+    CloseLastOpenEditor(this);
+    this.setBlur();
+    this.isOpened = false;
+    this.updateText();
+    this.scene.sys.events.off('postupdate', this.updateText, this);
+    this.scene.input.off('pointerdown', this.onClickOutside, this);
+
+    if (this.onCloseCallback) {
+      this.onCloseCallback(this.parent, this);
+    } // Remove input text element when closing editor
+
+
+    RemoveElement(this.node);
+    this.node = undefined;
+    return this;
   };
 
-  var HitTest = function HitTest(gameObject, pointer) {
-    var scene = gameObject.scene;
-    var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
-    var inputManager = scene.input.manager;
-    var gameObjects = [gameObject];
-    var output;
-
-    for (var i = 0, len = cameras.length; i < len; i++) {
-      output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
-
-      if (output.length > 0) {
-        return true;
-      }
-    }
-
-    return false;
+  var Methods = {
+    open: Open,
+    close: Close
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -5048,39 +5168,13 @@
       _this.onOpenCallback = GetValue$1(config, 'onOpen', undefined);
       _this.onCloseCallback = GetValue$1(config, 'onClose', undefined);
       _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
-      gameObject.on('pointerdown', _this.open, _assertThisInitialized(_this)).on('destroy', _this.destroy, _assertThisInitialized(_this)).setInteractive();
+      _this.isOpened = false;
+      gameObject.on('pointerdown', function () {
+        this.open();
+      }, _assertThisInitialized(_this)).setInteractive();
       _this.nodeConfig = config; // Create/remove input text element when opening/closing editor
 
       _this.node = undefined;
-      _this._isFocused = false;
-
-      _this.on('focus', function () {
-        this._isFocused = true;
-        this.initText();
-
-        if (this.enterCloseEnable) {
-          this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-        } // There is no cursor-position-change event, 
-        // so updating cursor position every tick
-
-
-        this.scene.sys.events.on('postupdate', this.updateText, this);
-        this.scene.input.on('pointerdown', this.onClickOutside, this);
-
-        if (this.onOpenCallback) {
-          this.onOpenCallback(this.parent, this);
-        }
-      }, _assertThisInitialized(_this)).on('blur', function () {
-        this._isFocused = false;
-        this.updateText();
-        this.scene.sys.events.off('postupdate', this.updateText, this);
-        this.scene.input.off('pointerdown', this.onClickOutside, this);
-
-        if (this.onCloseCallback) {
-          this.onCloseCallback(this.parent, this);
-        }
-      }, _assertThisInitialized(_this));
-
       return _this;
     }
 
@@ -5088,11 +5182,7 @@
       key: "destroy",
       value: function destroy() {
         // this.parent.off('pointerdown', this.open, this);
-        // this.parent.off('destroy', this.destroy, this);
-        this.scene.sys.events.off('postupdate', this.updateText, this);
-        this.scene.input.off('pointerdown', this.onClickOutside, this);
-        RemoveElement(this.node);
-        this.node = undefined;
+        this.close();
 
         _get(_getPrototypeOf(HiddenTextEditBase.prototype), "destroy", this).call(this);
       }
@@ -5112,34 +5202,6 @@
 
         this.enterCloseEnable = enable;
         return this;
-      }
-    }, {
-      key: "open",
-      value: function open() {
-        if (!this.node) {
-          // Create input text element when opening/closing editor
-          this.node = CreateElement(this, this.nodeConfig);
-        }
-
-        this.setFocus();
-        return this;
-      }
-    }, {
-      key: "close",
-      value: function close() {
-        if (this.node) {
-          // Remove input text element when opening/closing editor
-          RemoveElement(this.node);
-          this.node = undefined;
-        }
-
-        this.setBlur();
-        return this;
-      }
-    }, {
-      key: "isOpened",
-      get: function get() {
-        return this._isFocused;
       } // Override
 
     }, {
@@ -5476,12 +5538,14 @@
     }, {
       key: "isFocused",
       get: function get() {
-        return this._isFocused;
+        return this.isOpened;
       }
     }]);
 
     return HiddenTextEditBase;
   }(ComponentBase);
+
+  Object.assign(HiddenTextEditBase.prototype, Methods);
 
   var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
@@ -5495,7 +5559,9 @@
 
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
-      gameObject.on('pointerdown', function (pointer, localX, localY, event) {
+      gameObject // Open editor by 'pointerdown' event
+      // Then set cursor position to nearest char
+      .on('pointerdown', function (pointer, localX, localY, event) {
         var child = gameObject.getNearestChild(localX, localY);
         var charIndex = gameObject.getCharIndex(child);
         this.setCursorPosition(charIndex);
@@ -5524,7 +5590,7 @@
         }
 
         this.parent.setText(text);
-        var cursorPosition = this.cursorPosition;
+        var cursorPosition = this.isOpened ? this.cursorPosition : null;
 
         if (this.prevCursorPosition !== cursorPosition) {
           this.parent.emit('movecursor', cursorPosition, this.parent);

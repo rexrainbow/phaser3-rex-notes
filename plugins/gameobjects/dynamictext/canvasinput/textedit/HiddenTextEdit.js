@@ -6,6 +6,8 @@ class HiddenTextEdit extends HiddenTextEditBase {
         // this.parent = gameObject;
 
         gameObject
+            // Open editor by 'pointerdown' event
+            // Then set cursor position to nearest char
             .on('pointerdown', function (pointer, localX, localY, event) {
                 var child = gameObject.getNearestChild(localX, localY);
                 var charIndex = gameObject.getCharIndex(child);
@@ -33,7 +35,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
 
         this.parent.setText(text);
 
-        var cursorPosition = this.cursorPosition;
+        var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
         if (this.prevCursorPosition !== cursorPosition) {
             this.parent.emit('movecursor', cursorPosition, this.parent);
             this.prevCursorPosition = cursorPosition;

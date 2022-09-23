@@ -43,7 +43,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
             }
         }
 
-        if (this.isFocused && this.hasCursor) {
+        if (this.isOpened && this.hasCursor) {
             // Insert Cursor
             var cursorPosition = this.cursorPosition;
             text = text.substring(0, cursorPosition) + this.cursor + text.substring(cursorPosition);

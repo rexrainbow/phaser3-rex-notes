@@ -1,7 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import CreateElement from './methods/CreateElement.js';
-import RemoveElement from './methods/RemoveElement.js';
 import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
+import Methods from './methods/Methods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -15,64 +14,23 @@ class HiddenTextEditBase extends ComponentBase {
         this.onOpenCallback = GetValue(config, 'onOpen', undefined);
         this.onCloseCallback = GetValue(config, 'onClose', undefined);
         this.onUpdateCallback = GetValue(config, 'onUpdate', undefined);
+        this.isOpened = false;
 
         gameObject
-            .on('pointerdown', this.open, this)
-            .on('destroy', this.destroy, this)
+            .on('pointerdown', function () {
+                this.open();
+            }, this)
             .setInteractive()
 
         this.nodeConfig = config;
         // Create/remove input text element when opening/closing editor
-        this.node = undefined;   
-        this._isFocused = false;
-
-        this
-            .on('focus', function () {
-                this._isFocused = true;
-
-                this.initText();
-
-                if (this.enterCloseEnable) {
-                    this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-                }
-
-                // There is no cursor-position-change event, 
-                // so updating cursor position every tick
-                this.scene.sys.events.on('postupdate', this.updateText, this);
-
-                this.scene.input.on('pointerdown', this.onClickOutside, this);
-
-                if (this.onOpenCallback) {
-                    this.onOpenCallback(this.parent, this);
-                }
-
-            }, this)
-            .on('blur', function () {
-                this._isFocused = false;
-
-                this.updateText();
-
-                this.scene.sys.events.off('postupdate', this.updateText, this);
-
-                this.scene.input.off('pointerdown', this.onClickOutside, this);
-
-                if (this.onCloseCallback) {
-                    this.onCloseCallback(this.parent, this);
-                }
-            }, this)
-
+        this.node = undefined;
     }
 
     destroy() {
         // this.parent.off('pointerdown', this.open, this);
-        // this.parent.off('destroy', this.destroy, this);
 
-        this.scene.sys.events.off('postupdate', this.updateText, this);
-
-        this.scene.input.off('pointerdown', this.onClickOutside, this);
-
-        RemoveElement(this.node);
-        this.node = undefined;
+        this.close();
 
         super.destroy();
     }
@@ -89,29 +47,6 @@ class HiddenTextEditBase extends ComponentBase {
         }
         this.enterCloseEnable = enable;
         return this;
-    }
-
-    open() {
-        if (!this.node) {
-            // Create input text element when opening/closing editor
-            this.node = CreateElement(this, this.nodeConfig);
-        }
-        this.setFocus();
-        return this;
-    }
-
-    close() {
-        if (this.node) {
-            // Remove input text element when opening/closing editor
-            RemoveElement(this.node);
-            this.node = undefined;
-        }
-        this.setBlur();
-        return this;
-    }
-
-    get isOpened() {
-        return this._isFocused;
     }
 
     // Override
@@ -395,9 +330,13 @@ class HiddenTextEditBase extends ComponentBase {
     }
 
     get isFocused() {
-        return this._isFocused;
+        return this.isOpened;
     }
-
 }
+
+Object.assign(
+    HiddenTextEditBase.prototype,
+    Methods,
+)
 
 export default HiddenTextEditBase;
