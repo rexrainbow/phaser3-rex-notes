@@ -23,7 +23,6 @@ class CanvasInput extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
-        this.setChildrenInteractiveEnable(true);  // Fire 'child.pointerdown' event
         this.textEdit = new HiddenTextEdit(this, GetValue(config, 'edit'));
 
         var addCharCallback = GetValue(config, 'onAddChar');

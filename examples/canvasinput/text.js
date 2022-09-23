@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexCanvasInput(
             {
                 x: 400, y: 300,
-                width: 400, height: 100,
+                width: 600, height: 100,
 
                 background: {
                     stroke: 'white',

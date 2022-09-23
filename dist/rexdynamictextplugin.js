@@ -989,30 +989,30 @@
     }
   };
 
-  var RotateAround = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
 
   var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      if (globPoint === undefined) {
-        globPoint = {};
+      if (globPoint$1 === undefined) {
+        globPoint$1 = {};
       }
 
-      out = globPoint;
+      out = globPoint$1;
     }
 
     out.x = (canvasX - bob.drawX) / bob.scaleX;
     out.y = (canvasY - bob.drawY) / bob.scaleY;
 
     if (bob.rotation !== 0) {
-      RotateAround(out, 0, 0, -bob.rotation);
+      RotateAround$1(out, 0, 0, -bob.rotation);
     }
 
     return out;
   };
 
-  var globPoint;
+  var globPoint$1;
 
   var Rectangle = Phaser.Geom.Rectangle;
 
@@ -4112,6 +4112,57 @@
     return this.lastAppendedChildren;
   };
 
+  var RotateAround = Phaser.Math.RotateAround;
+
+  var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bobX, bobY, bob, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      if (globPoint === undefined) {
+        globPoint = {};
+      }
+
+      out = globPoint;
+    }
+
+    out.x = bobX;
+    out.y = bobY;
+
+    if (bob.rotation !== 0) {
+      RotateAround(out, 0, 0, bob.rotation);
+    }
+
+    out.x = out.x * bob.scaleX + bob.drawX;
+    out.y = out.y * bob.scaleY + bob.drawY;
+    return out;
+  };
+
+  var globPoint;
+
+  var GetBobCenterPosition = function GetBobCenterPosition(bob, out) {
+    return BobPositionToCanvasPosition(bob.drawCenterX, bob.drawCenterY, bob, out);
+  };
+
+  var GetDistance = Phaser.Math.Distance.BetweenPointsSquared;
+
+  var GetNearestChild = function GetNearestChild(canvasX, canvasY) {
+    var pointA = {
+      x: canvasX,
+      y: canvasY
+    };
+    var distances = [];
+    this.forEachChild(function (child) {
+      distances.push({
+        child: child,
+        distance: GetDistance(pointA, GetBobCenterPosition(child, true))
+      });
+    });
+    distances.sort(function (dataA, dataB) {
+      return dataA.distance - dataB.distance;
+    });
+    return distances[0].child;
+  };
+
   var SetToMinSize = function SetToMinSize() {
     var children = this.children;
     var maxX = 0,
@@ -4218,12 +4269,6 @@
   };
 
   var GetFirstChildContains = function GetFirstChildContains(children, x, y) {
-    if (Result === undefined) {
-      Result = {};
-    }
-
-    Result.child = null;
-    Result.index = -1;
     var children = children;
 
     for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -4234,20 +4279,16 @@
       }
 
       if (child.contains(x, y)) {
-        Result.child = child;
-        Result.index = i;
-        break;
+        return child;
       }
     }
 
-    return Result;
+    return null;
   };
 
-  var Result;
-
   var SetChildrenInteractive = function SetChildrenInteractive() {
-    this.on('pointerdown', OnPointerDown, this).on('pointerdown', OnPointerUp, this).on('pointermove', OnAreaOverOut, this).on('pointerover', OnAreaOverOut, this).on('pointerout', function (pointer, event) {
-      OnAreaOverOut.call(this, pointer, null, null, event);
+    this.on('pointerdown', OnPointerDown, this).on('pointerdown', OnPointerUp, this).on('pointermove', OnPointOverOut, this).on('pointerover', OnPointOverOut, this).on('pointerout', function (pointer, event) {
+      OnPointOverOut.call(this, pointer, null, null, event);
     }, this);
     return this;
   };
@@ -4257,13 +4298,13 @@
       return;
     }
 
-    var result = GetFirstChildContains(this.children, localX, localY);
+    var child = GetFirstChildContains(this.children, localX, localY);
 
-    if (!result.child) {
+    if (!child) {
       return;
     }
 
-    this.emit('child.pointerdown', result.child, result.index, pointer, localX, localY, event);
+    this.emit('child.pointerdown', child, pointer, localX, localY, event);
   };
 
   var OnPointerUp = function OnPointerUp(pointer, localX, localY, event) {
@@ -4271,16 +4312,16 @@
       return;
     }
 
-    var result = GetFirstChildContains(this.children, localX, localY);
+    var child = GetFirstChildContains(this.children, localX, localY);
 
-    if (!result.child) {
+    if (!child) {
       return;
     }
 
-    this.emit('child.pointerup', result.child, result.index, pointer, localX, localY, event);
+    this.emit('child.pointerup', child, pointer, localX, localY, event);
   };
 
-  var OnAreaOverOut = function OnAreaOverOut(pointer, localX, localY, event) {
+  var OnPointOverOut = function OnPointOverOut(pointer, localX, localY, event) {
     if (!this.childrenInteractiveEnable) {
       return;
     }
@@ -4295,22 +4336,21 @@
       return;
     }
 
-    var result = GetFirstChildContains(this.children, localX, localY);
+    var child = GetFirstChildContains(this.children, localX, localY);
 
-    if (!result.child) {
+    if (child === this.lastOverChild) {
       return;
     }
 
     if (this.lastOverChild !== null) {
-      var lastOverChild = this.children.indexOf(this.lastOverChild);
-      this.emit('child.pointerout', this.lastOverChild, lastOverChild, pointer, localX, localY, event);
+      this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
     }
 
-    if (result.child !== null) {
-      this.emit('child.pointerover', result.child, result.index, pointer, localX, localY, event);
+    if (child !== null) {
+      this.emit('child.pointerover', child, pointer, localX, localY, event);
     }
 
-    this.lastOverChild = result.child;
+    this.lastOverChild = child;
   };
 
   var GameObject = Phaser.GameObjects.GameObject;
@@ -4414,6 +4454,7 @@
     getActiveChildren: GetActiveChildren,
     getCharChildren: GetCharChildren,
     getLastAppendedChildren: GetLastAppendedChildren,
+    getNearestChild: GetNearestChild,
     setToMinSize: SetToMinSize,
     getCharDataIndex: GetCharDataIndex,
     getCharIndex: GetCharIndex,

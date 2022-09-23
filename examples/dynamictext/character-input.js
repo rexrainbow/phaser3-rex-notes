@@ -1,5 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import DynamicTextPlugin from '../../plugins/dynamictext-plugin.js';
+import GetNearestChild from '../../plugins/gameobjects/dynamictext/dynamictext/methods/GetNearestChild.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -84,6 +85,10 @@ class Demo extends Phaser.Scene {
                     color: 'white',
                     backgroundColor: null
                 })
+            })
+            .on('pointerdown', function (pointer, localX, localY, event) {
+                var child = text.getNearestChild(localX, localY);
+                console.log(child.text)
             })
     }
 

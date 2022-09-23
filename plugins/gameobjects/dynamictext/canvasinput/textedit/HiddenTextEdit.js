@@ -6,10 +6,11 @@ class HiddenTextEdit extends HiddenTextEditBase {
         // this.parent = gameObject;
 
         gameObject
-            .on('child.pointerdown', function (child, childIndex, pointer, localX, localY, event) {
-                var charIndex = gameObject.getCharIndex(childIndex);
+            .on('pointerdown', function (pointer, localX, localY, event) {
+                var child = gameObject.getNearestChild(localX, localY);
+                var charIndex = gameObject.getCharIndex(child);
                 this.setCursorPosition(charIndex);
-            }, this);
+            }, this)
 
     }
 
