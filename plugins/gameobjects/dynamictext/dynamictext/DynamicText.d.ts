@@ -1,6 +1,7 @@
 // import * as Phaser from 'phaser';
 import Canvas from '../../canvas/canvas/Canvas';
 import { IConfigTextStyle } from './bob/char/TextStyle';
+import BobBaseClass from './bob/Base';
 import CharBobClass from './bob/char/CharData';
 import ImageBobClass from './bob/image/ImageData';
 import DrawBobClass from './bob/drawer/Drawer';
@@ -82,17 +83,17 @@ declare namespace DynamicText {
         vAlign?: VAlignTypes,
     }
 
+    type BobBase = BobBaseClass;
     type CharBob = CharBobClass;
     type ImageBob = ImageBobClass;
     type DrawBob = DrawBobClass;
     type CommandBob = CommandBobClass;
     type RenderChildTypes = CharBob | ImageBob | DrawBob;
-    type ChildTypes = CharBob | ImageBob | DrawBob | CommandBob;
 
     interface IWrapResult {
-        children: ChildTypes[],
+        children: BobBase[],
         lines: ({
-            children: ChildTypes[],
+            children: BobBase[],
             width: number,
             height: number
         })[],
@@ -161,7 +162,7 @@ declare class DynamicText extends Canvas {
         style?: IConfigTextStyle
     ): this;
     getText(activeOnly?: boolean): string;
-    removeText(index: number): this;
+    resetTextStyle(): this;
 
     text: string;
 
@@ -198,6 +199,10 @@ declare class DynamicText extends Canvas {
         scope?: Object
     ): this;
 
+    removeChild(child: DynamicText.BobBase): this;
+    removeChildren(): this;
+    removeText(index: number, length?: number): this;
+
     runWordWrap(
         config?: DynamicText.IConfigWordWrap
     ): DynamicText.IWrapResult;
@@ -206,9 +211,9 @@ declare class DynamicText extends Canvas {
         config?: DynamicText.IConfigVerticalWrap
     ): DynamicText.IWrapResult;
 
-    getChildren(): DynamicText.ChildTypes[];
-    getLastAppendedChildren(): DynamicText.ChildTypes[];
-    getActiveChildren(): DynamicText.ChildTypes[];
+    getChildren(): DynamicText.BobBase[];
+    getLastAppendedChildren(): DynamicText.BobBase[];
+    getActiveChildren(): DynamicText.BobBase[];
 
     setBackgroundColor(
         color?: string | number | null,

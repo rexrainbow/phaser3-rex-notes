@@ -1,8 +1,8 @@
 const RemoveItem = Phaser.Utils.Array.Remove;
 
-var RemoveChild = function (bob) {
-    this.poolManager.free(bob);
-    RemoveItem(this.children, bob);
+var RemoveChild = function (child) {
+    this.poolManager.free(child);
+    RemoveItem(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
