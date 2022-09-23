@@ -1,7 +1,7 @@
 var InsertText = function (index, text, style) {
-    var bobArray = this.createCharBobArray(text, style);
+    var children = this.createCharChildren(text, style);
     index = this.getCharDataIndex(index, true);
-    this.addChild(bobArray, index);
+    this.addChild(children, index);
 
     return this;
 };
