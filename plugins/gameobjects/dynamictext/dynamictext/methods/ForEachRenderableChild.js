@@ -4,7 +4,7 @@ var ForEachRenderableChild = function (callback, scope, activeOnly) {
     }
 
     var children = this.children;
-    var charIndex = 0;
+    var childIndex = 0;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
 
@@ -15,11 +15,11 @@ var ForEachRenderableChild = function (callback, scope, activeOnly) {
         if (child.renderable && !child.removed) {
             var isBreak;
             if (scope) {
-                isBreak = callback.call(this, child, charIndex, children);
+                isBreak = callback.call(this, child, childIndex, children);
             } else {
-                isBreak = callback(child, charIndex, children);
+                isBreak = callback(child, childIndex, children);
             }
-            charIndex++;
+            childIndex++;
 
             if (isBreak) {
                 break;
