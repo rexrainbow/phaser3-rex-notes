@@ -7,14 +7,20 @@ import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
 import ClearContent from './ClearContent.js';
 import AddChild from './AddChild.js';
+import CreateCharChild from './CreateCharChild.js';
+import CreateCharChildren from './CreateCharChildren.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import InsertText from './InsertText.js';
 import RemoveText from './RemoveText.js';
 import GetText from './GetText.js';
+import CreateImageChild from './CreateImageChild.js';
 import AppendImage from './AppendImage.js';
+import CreateDrawerChild from './CreateDrawerChild.js';
 import AppendDrawer from './AppendDrawer.js';
+import CreateSpaceChild from './CreateSpaceChild.js';
 import AppendSpace from './AppendSpace.js';
+import CreateCommandChild from './CreateCommandChild.js';
 import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
@@ -51,14 +57,20 @@ var Methods = {
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
     addChild: AddChild,
+    createCharChild: CreateCharChild,
+    createCharChildren: CreateCharChildren,
     setText: SetText,
     appendText: AppendText,
     insertText: InsertText,
     removeText: RemoveText,
     getText: GetText,
+    createImageChild: CreateImageChild,
     appendImage: AppendImage,
+    createDrawerChild: CreateDrawerChild,
     appendDrawer: AppendDrawer,
+    createSpaceChild: CreateSpaceChild,
     appendSpace: AppendSpace,
+    createCommandChild: CreateCommandChild,
     appendCommand: AppendCommand,
 
     setWrapConfig: SetWrapConfig,

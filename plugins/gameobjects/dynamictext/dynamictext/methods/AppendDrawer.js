@@ -1,24 +1,6 @@
-import Drawer from '../bob/drawer/Drawer.js';
-import { DrawerTypeName } from '../bob/Types.js';
-
 var AppendDrawer = function (renderCallback, width, height) {
-    var bob = this.poolManager.allocate(DrawerTypeName);
-
-    if (bob === null) {
-        bob = new Drawer(
-            this,               // parent
-            renderCallback,
-            width, height
-        );
-    } else {
-        bob
-            .setParent(this)
-            .setActive()
-            .setRenderCallback(renderCallback)
-            .setDrawerSize(width, height)
-    }
-
-    this.addChild(bob);
+    var child = this.createDrawerChild(renderCallback, width, height);
+    this.addChild(child);
 
     return this;
 };

@@ -1,8 +1,6 @@
-import CreateCharBobArray from './utils/CreateCharBobArray.js';
-
 var AppendText = function (text, style) {
-    var bobArray = CreateCharBobArray.call(this, text, style);
-    this.addChild(bobArray);
+    var children = this.createCharChildren(text, style);
+    this.addChild(children);
     return this;
 };
 
