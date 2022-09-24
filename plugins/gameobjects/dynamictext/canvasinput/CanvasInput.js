@@ -66,8 +66,28 @@ class CanvasInput extends DynamicText {
     }
 
     setText(text) {
+        this.moveChildToLast(this.lastInsertCursor);
         SetText(this, text);
         return this;
+    }
+
+    appendText(text) {
+        this.setText(this.text + text);
+        return this;
+    }
+
+    open() {
+        this.textEdit.open();
+        return this;
+    }
+
+    close() {
+        this.textEdit.close();
+        return this;
+    }
+
+    get isOpened() {
+        return this.textEdit.isOpened;
     }
 }
 

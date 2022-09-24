@@ -23,9 +23,7 @@ var SetText = function (textObject, newText) {
         }
     }
 
-    textObject
-        .moveChildToLast(textObject.lastInsertCursor)
-        .runWordWrap();
+    textObject.runWordWrap();
 }
 
 export default SetText;

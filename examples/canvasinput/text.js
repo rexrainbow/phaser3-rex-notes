@@ -14,7 +14,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var txt0 = CreateCanvasInput(this, 'Phaser').setPosition(400, 200)
-        var txt1 = CreateCanvasInput(this, 'Phaser').setPosition(400, 400)
+
+        var txt1 = CreateCanvasInput(this, 'P').setPosition(400, 400).appendText('haser')
     }
 
     update() { }

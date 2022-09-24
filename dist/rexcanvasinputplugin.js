@@ -6148,7 +6148,7 @@
       }
     }
 
-    textObject.moveChildToLast(textObject.lastInsertCursor).runWordWrap();
+    textObject.runWordWrap();
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -6230,8 +6230,32 @@
     }, {
       key: "setText",
       value: function setText(text) {
+        this.moveChildToLast(this.lastInsertCursor);
         SetText(this, text);
         return this;
+      }
+    }, {
+      key: "appendText",
+      value: function appendText(text) {
+        this.setText(this.text + text);
+        return this;
+      }
+    }, {
+      key: "open",
+      value: function open() {
+        this.textEdit.open();
+        return this;
+      }
+    }, {
+      key: "close",
+      value: function close() {
+        this.textEdit.close();
+        return this;
+      }
+    }, {
+      key: "isOpened",
+      get: function get() {
+        return this.textEdit.isOpened;
       }
     }]);
 

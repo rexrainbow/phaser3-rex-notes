@@ -9,6 +9,7 @@ import CircleMaskImage from './circlemaskimage/CircleMaskImage';
 import AlphaMaskImage from './alphamaskimage/AlphaMaskImage';
 import DynamicText from './dynamictext/DynamicText';
 import TextPlayer from './textplayer/TextPlayer';
+import CanvasInput from './canvasinput/CanvasInput';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas';
 import CircularProgress from './circularprogress/CircularProgress';
 import Knob from './knob/Knob';
@@ -106,6 +107,7 @@ export {
     AlphaMaskImage,
     DynamicText,
     TextPlayer,
+    CanvasInput,
     FullWindowRectangle,
     Cover,
     Chart,

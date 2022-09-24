@@ -12,6 +12,7 @@ import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
 import AlphaMaskImage from './alphamaskimage/AlphaMaskImage.js';
 import DynamicText from './dynamictext/DynamicText.js';
 import TextPlayer from './textplayer/TextPlayer.js';
+import CanvasInput from './canvasinput/CanvasInput.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
 import Knob from './knob/Knob.js';
@@ -108,6 +109,7 @@ export {
     AlphaMaskImage,
     DynamicText,
     TextPlayer,
+    CanvasInput,
     FullWindowRectangle,
     Cover,
     Chart,
