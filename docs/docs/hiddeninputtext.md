@@ -27,7 +27,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
     ```javascript
     scene.load.plugin('rexhiddeninputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhiddeninputtextplugin.min.js', true);
     ```
-- Add input-text object
+- Add text-edit behavior
     ```javascript
     var hiddenInputText = scene.plugins.get('rexhiddeninputtextplugin').add(textGameObject, config);
     ```
@@ -56,7 +56,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
     };
     var game = new Phaser.Game(config);
     ```
-- Add input-text object
+- Add text-edit behavior
     ```javascript
     var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, config);
     ```
@@ -71,32 +71,29 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
     ```javascript
     import HiddenInputText from 'phaser3-rex-plugins/plugins/hiddeninputtext.js';
     ```
-- Add input-text object
+- Add text-edit behavior
     ```javascript    
     var hiddenInputText = new HiddenInputText(textGameObject, config);
     ```
-
-!!! note
-
-    Don't add this game object into scene
 
 ### Add input text object
 
 ```javascript
 var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, {
-    type: 'text',    // 'text'|'password'|'textarea'|...
+    // type: 'text',    // 'text'|'password'|'textarea'|...
 
     cursor: '|',
     cursorFlashDuration: 1000,
 
-    // updateTextCallback: undefined,
-    // updateTextCallbackScope: undefined,
-    
     // enterClose: true,
 
-    // onOpen: undefined,
-    // onClose: undefined,
-    // onUpdate: undefined,
+    // onOpen: function (textObject, hiddenInputText) {
+    // },
+    // onClose: function (textObject, hiddenInputText) {
+    // },
+    // onUpdate: function (text, textObject, hiddenInputText) {
+    //     return text;
+    // },
 });
 ```
 

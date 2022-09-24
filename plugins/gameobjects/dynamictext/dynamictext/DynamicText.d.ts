@@ -163,8 +163,20 @@ declare class DynamicText extends Canvas {
     ): this;
     getText(activeOnly?: boolean): string;
     resetTextStyle(): this;
-
     text: string;
+
+    getCharChild(
+        charIndex: number,
+        activeOnly?: boolean
+    ): DynamicText.CharBob;
+    getCharChildIndex(
+        charIndex: number,
+        activeOnly?: boolean
+    ): DynamicText.CharBob;
+    getCharChildren(
+        activeOnly?: boolean,
+        out?: DynamicText.CharBob[]
+    ): DynamicText.CharBob[]
 
     createImageChild(
         key: string, frame?: string | null,

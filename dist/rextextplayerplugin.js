@@ -5940,7 +5940,7 @@
 
   var InsertText = function InsertText(index, text, style) {
     var children = this.createCharChildren(text, style);
-    index = this.getCharDataIndex(index, true);
+    index = this.getCharChildIndex(index, true);
     this.addChild(children, index);
     return this;
   };
@@ -5951,7 +5951,7 @@
     }
 
     for (var i = 0; i < length; i++) {
-      var childIndex = this.getCharDataIndex(index, true);
+      var childIndex = this.getCharChildIndex(index, true);
 
       if (childIndex === undefined) {
         break;
@@ -7277,7 +7277,7 @@
     return this;
   };
 
-  var GetCharDataIndex = function GetCharDataIndex(charIndex, activeOnly) {
+  var GetCharChildIndex = function GetCharChildIndex(charIndex, activeOnly) {
     if (activeOnly === undefined) {
       activeOnly = true;
     }
@@ -7294,6 +7294,32 @@
       if (IsChar(child) && !child.removed) {
         if (charIndex === 0) {
           return i;
+        } else {
+          charIndex--;
+        }
+      }
+    }
+
+    return undefined;
+  };
+
+  var GetCharChild = function GetCharChild(charIndex, activeOnly) {
+    if (activeOnly === undefined) {
+      activeOnly = true;
+    }
+
+    var children = this.children;
+
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+      var child = children[i];
+
+      if (activeOnly && !child.active) {
+        continue;
+      }
+
+      if (IsChar(child) && !child.removed) {
+        if (charIndex === 0) {
+          return child;
         } else {
           charIndex--;
         }
@@ -7547,7 +7573,8 @@
     getLastAppendedChildren: GetLastAppendedChildren,
     getNearestChild: GetNearestChild,
     setToMinSize: SetToMinSize,
-    getCharDataIndex: GetCharDataIndex,
+    getCharChildIndex: GetCharChildIndex,
+    getCharChild: GetCharChild,
     getCharIndex: GetCharIndex,
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive

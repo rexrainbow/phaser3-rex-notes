@@ -11,7 +11,8 @@ declare namespace CanvasInput {
     ) => void;
 
     type MoveCursorCallbackType = (
-        cursorPosition: number,
+        currCursorIndex: number,
+        prevCursorIndex: number,
         canvasInput: CanvasInput
     ) => void;
 

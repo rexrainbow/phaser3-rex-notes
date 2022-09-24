@@ -4,7 +4,7 @@ var RemoveText = function (index, length) {
     }
 
     for (var i = 0; i < length; i++) {
-        var childIndex = this.getCharDataIndex(index, true);
+        var childIndex = this.getCharChildIndex(index, true);
         if (childIndex === undefined) {
             break;
         }

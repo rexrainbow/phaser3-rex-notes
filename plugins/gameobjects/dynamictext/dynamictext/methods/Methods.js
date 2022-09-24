@@ -36,7 +36,8 @@ import GetCharChildren from './GetCharChildren.js';
 import GetLastAppendedChildren from './GetLastAppendedChildren.js';
 import GetNearestChild from './GetNearestChild.js';
 import SetToMinSize from './SetToMinSize.js';
-import GetCharDataIndex from './GetCharDataIndex.js';
+import GetCharChildIndex from './GetCharChildIndex.js';
+import GetCharChild from './GetCharChild.js';
 import GetCharIndex from './GetCharIndex.js';
 
 import SetChildrenInteractiveEnable from './input/SetChildrenInteractiveEnable.js';
@@ -89,8 +90,10 @@ var Methods = {
 
     setToMinSize: SetToMinSize,
 
-    getCharDataIndex: GetCharDataIndex,
+    getCharChildIndex: GetCharChildIndex,
+    getCharChild: GetCharChild,
     getCharIndex: GetCharIndex,
+
 
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive,

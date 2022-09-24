@@ -38,7 +38,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
 
         var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
         if (this.prevCursorPosition !== cursorPosition) {            
-            textObject.emit('movecursor', cursorPosition, textObject);
+            textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
             this.prevCursorPosition = cursorPosition;
         }
 

@@ -26,7 +26,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
     ```
 - Add dynamic-text object
     ```javascript
-    var txt = scene.add.rexDynamicText(x, y, width, height);
+    var txt = scene.add.rexDynamicText(x, y, width, height, config);
     ```
 
 #### Import plugin
@@ -55,7 +55,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
     ```
 - Add dynamic-text object
     ```javascript
-    var txt = scene.add.rexDynamicText(x, y, config);
+    var txt = scene.add.rexDynamicText(x, y, width, height, config);
     ```
 
 #### Import class
@@ -70,7 +70,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
     ```
 - Add dynamic-text object
     ```javascript
-    var txt = new DynamicText(scene, x, y, config);
+    var txt = new DynamicText(scene, x, y, width, height, config);
     scene.add.existing(txt);
     ```
 
@@ -226,8 +226,8 @@ var txt = scene.make.rexDynamicText({
 - Define class
     ```javascript
     class MyDynamicText extends DynamicText {
-        constructor(scene, x, y, config) {
-            super(scene, x, y, config);
+        constructor(scene, x, y, width, height, config)) {
+            super(scene, x, y, width, height, config));
             // ...
             scene.add.existing(this);
         }

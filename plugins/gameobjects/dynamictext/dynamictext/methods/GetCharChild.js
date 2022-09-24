@@ -1,6 +1,6 @@
 import { IsChar } from '../bob/Types.js';
 
-var GetCharDataIndex = function (charIndex, activeOnly) {
+var GetCharChild = function (charIndex, activeOnly) {
     if (activeOnly === undefined) {
         activeOnly = true;
     }
@@ -14,7 +14,7 @@ var GetCharDataIndex = function (charIndex, activeOnly) {
 
         if (IsChar(child) && !child.removed) {
             if (charIndex === 0) {
-                return i;
+                return child;
             } else {
                 charIndex--;
             }
@@ -24,4 +24,4 @@ var GetCharDataIndex = function (charIndex, activeOnly) {
     return undefined;
 }
 
-export default GetCharDataIndex;
+export default GetCharChild;

@@ -61,20 +61,21 @@ var CreateCanvasInput = function (scene, text) {
                     .modifyStyle({ fontSize: Phaser.Math.Between(20, 30) })
             },
 
-            onMoveCursor(cursorIndex, textObject) {
-                textObject.forEachCharChild(function (child, i) {
-                    if (i === cursorIndex) {
-                        child.modifyStyle({
+            onMoveCursor(currCursorIndex, prevCursorIndex, textObject) {
+                if (currCursorIndex != null) {
+                    textObject.getCharChild(currCursorIndex)
+                        .modifyStyle({
                             color: 'black',
                             backgroundColor: 'white'
                         })
-                    } else {
-                        child.modifyStyle({
+                }
+                if (prevCursorIndex != null) {
+                    textObject.getCharChild(prevCursorIndex)
+                        .modifyStyle({
                             color: 'white',
                             backgroundColor: null
                         })
-                    }
-                })
+                }
             },
 
             text: text,
