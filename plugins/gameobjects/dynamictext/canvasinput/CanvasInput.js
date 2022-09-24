@@ -76,7 +76,10 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
-    open() {
+    open(onCloseCallback) {
+        if (onCloseCallback) {
+            this.textEdit.once('close', onCloseCallback)
+        }
         this.textEdit.open();
         return this;
     }

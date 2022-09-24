@@ -584,6 +584,7 @@
       this.onOpenCallback(this.parent, this);
     }
 
+    this.emit('open', this);
     return this;
   };
 
@@ -615,6 +616,7 @@
 
     RemoveElement(this.node);
     this.node = undefined;
+    this.emit('close', this);
     return this;
   };
 

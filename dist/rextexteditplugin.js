@@ -889,8 +889,9 @@
 
       if (onOpenCallback) {
         onOpenCallback(this.parent);
-        this.emit('open', this.parent);
       }
+
+      this.emit('open', this.parent);
     }, [], this);
     return this;
   };
@@ -915,9 +916,9 @@
 
     if (this.onClose) {
       this.onClose(this.parent);
-      this.emit('close', this.parent);
     }
 
+    this.emit('close', this.parent);
     return this;
   };
 

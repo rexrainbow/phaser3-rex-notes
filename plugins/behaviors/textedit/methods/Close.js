@@ -21,8 +21,8 @@ var Close = function () {
 
     if (this.onClose) {
         this.onClose(this.parent);
-        this.emit('close', this.parent);
     }
+    this.emit('close', this.parent);
 
     return this;
 }

@@ -33,6 +33,7 @@ var Open = function () {
     if (this.onOpenCallback) {
         this.onOpenCallback(this.parent, this);
     }
+    this.emit('open', this);
 
     return this;
 }

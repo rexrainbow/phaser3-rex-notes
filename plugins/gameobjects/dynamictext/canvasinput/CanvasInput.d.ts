@@ -27,7 +27,7 @@ declare class CanvasInput extends DynamicText {
     setText(text: string): this;
     appendText(text: string): this;
 
-    open(): this;
+    open(onCloseCallback?: Function): this;
     close(): this;
     readonly isOpened: boolean;
 }

@@ -2573,36 +2573,36 @@
   };
 
   // const RemoveItem = Phaser.Utils.Array.Remove;
-  var AddChild = function AddChild(bob, index) {
-    var isBobArray = Array.isArray(bob); // Remove existed bob(s)
-    // RemoveItem(this.children, bob);
+  var AddChild = function AddChild(child, index) {
+    var areChildren = Array.isArray(child); // Remove existed child(s)
+    // RemoveItem(this.children, child);
 
     if (index === undefined || index === this.children.length) {
-      if (isBobArray) {
+      if (areChildren) {
         var _this$children;
 
-        (_this$children = this.children).push.apply(_this$children, _toConsumableArray(bob));
+        (_this$children = this.children).push.apply(_this$children, _toConsumableArray(child));
       } else {
-        this.children.push(bob);
+        this.children.push(child);
       }
     } else {
-      if (isBobArray) {
+      if (areChildren) {
         var _this$children2;
 
-        (_this$children2 = this.children).splice.apply(_this$children2, [index, 0].concat(_toConsumableArray(bob)));
+        (_this$children2 = this.children).splice.apply(_this$children2, [index, 0].concat(_toConsumableArray(child)));
       } else {
-        this.children.splice(index, 0, bob);
+        this.children.splice(index, 0, child);
       }
     }
 
     this.lastAppendedChildren.length = 0;
 
-    if (isBobArray) {
+    if (areChildren) {
       var _this$lastAppendedChi;
 
-      (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(bob));
+      (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(child));
     } else {
-      this.lastAppendedChildren.push(bob);
+      this.lastAppendedChildren.push(child);
     }
 
     return this;
@@ -5164,6 +5164,7 @@
       this.onOpenCallback(this.parent, this);
     }
 
+    this.emit('open', this);
     return this;
   };
 
@@ -5195,6 +5196,7 @@
 
     RemoveElement(this.node);
     this.node = undefined;
+    this.emit('close', this);
     return this;
   };
 
@@ -5664,12 +5666,9 @@
     var child = textObject.createCharChild('|'); // Use '|' to update render size
 
     child.text = ''; // Render empty string ''
-    // Don't invoke 'addchar' event
+    // Inove DynamicText's addChild method directly
 
-    var typeSave = child.type;
-    child.type = '';
-    textObject.addChild(child);
-    child.type = typeSave;
+    AddChild.call(textObject, child);
     return child;
   };
 
@@ -6242,7 +6241,11 @@
       }
     }, {
       key: "open",
-      value: function open() {
+      value: function open(onCloseCallback) {
+        if (onCloseCallback) {
+          this.textEdit.once('close', onCloseCallback);
+        }
+
         this.textEdit.open();
         return this;
       }

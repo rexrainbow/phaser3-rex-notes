@@ -1,30 +1,30 @@
 // const RemoveItem = Phaser.Utils.Array.Remove;
 
-var AddChild = function (bob, index) {
-    var isBobArray = Array.isArray(bob);
+var AddChild = function (child, index) {
+    var areChildren = Array.isArray(child);
 
-    // Remove existed bob(s)
-    // RemoveItem(this.children, bob);
+    // Remove existed child(s)
+    // RemoveItem(this.children, child);
 
     if ((index === undefined) || (index === this.children.length)) {
-        if (isBobArray) {
-            this.children.push(...bob);
+        if (areChildren) {
+            this.children.push(...child);
         } else {
-            this.children.push(bob);
+            this.children.push(child);
         }
     } else {
-        if (isBobArray) {
-            this.children.splice(index, 0, ...bob)
+        if (areChildren) {
+            this.children.splice(index, 0, ...child)
         } else {
-            this.children.splice(index, 0, bob);
+            this.children.splice(index, 0, child);
         }
     }
 
     this.lastAppendedChildren.length = 0;
-    if (isBobArray) {
-        this.lastAppendedChildren.push(...bob);
+    if (areChildren) {
+        this.lastAppendedChildren.push(...child);
     } else {
-        this.lastAppendedChildren.push(bob);
+        this.lastAppendedChildren.push(child);
     }
 
     return this;

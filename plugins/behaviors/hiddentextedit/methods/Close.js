@@ -27,6 +27,8 @@ var Close = function () {
     RemoveElement(this.node);
     this.node = undefined;
 
+    this.emit('close', this);
+
     return this;
 }
 
