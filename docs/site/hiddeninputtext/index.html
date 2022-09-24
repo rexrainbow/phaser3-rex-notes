@@ -1502,6 +1502,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../canvasinput/" class="md-nav__link">
+        Canvas input
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -8676,7 +8690,7 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexhiddeninputtextplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhiddeninputtextplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add input-text object
+<li>Add text-edit behavior
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hiddenInputText</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexhiddeninputtextplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -8702,7 +8716,7 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add input-text object
+<li>Add text-edit behavior
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hiddenInputText</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHiddenInputTextPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -8714,29 +8728,26 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 <li>Import class
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">HiddenInputText</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/hiddeninputtext.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add input-text object
+<li>Add text-edit behavior
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hiddenInputText</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HiddenInputText</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Don't add this game object into scene</p>
-</div>
 <h3 id="add-input-text-object">Add input text object<a class="headerlink" href="#add-input-text-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hiddenInputText</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHiddenInputTextPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>    <span class="c1">// &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
+    <span class="c1">// type: &#39;text&#39;,    // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
 
     <span class="nx">cursor</span><span class="o">:</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
     <span class="nx">cursorFlashDuration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
 
-    <span class="c1">// updateTextCallback: undefined,</span>
-    <span class="c1">// updateTextCallbackScope: undefined,</span>
-
     <span class="c1">// enterClose: true,</span>
 
-    <span class="c1">// onOpen: undefined,</span>
-    <span class="c1">// onClose: undefined,</span>
-    <span class="c1">// onUpdate: undefined,</span>
+    <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
+    <span class="c1">// },</span>
+    <span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
+    <span class="c1">// },</span>
+    <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
+    <span class="c1">//     return text;</span>
+    <span class="c1">// },</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>

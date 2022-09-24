@@ -381,6 +381,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Canvas input](canvasinput.md): An invisible Input DOM element to  receive character input and display on [DynamicText](dynamictext.md).
+    ```javascript
+    var txt = scene.rexUI.add.canvasInput(config);
+    ```
+    or
+    ```javascript
+    class MyText extends RexPlugins.UI.CanvasInput {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 #### Behaviors of text
 

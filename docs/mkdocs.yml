@@ -70,6 +70,7 @@ nav:
             - Tag Text: tagtext.md
             - Dynamic text: dynamictext.md
             - Text player: textplayer.md
+            - Canvas input: canvasinput.md
         - Bitmap text:
             - Static bitmap text: bitmaptext.md
             - Dynamic bitmap text: dynamicbitmaptext.md

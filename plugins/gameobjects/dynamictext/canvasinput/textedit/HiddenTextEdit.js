@@ -14,6 +14,13 @@ class HiddenTextEdit extends HiddenTextEditBase {
                 this.setCursorPosition(charIndex);
             }, this)
 
+        this
+            .on('open', function () {
+                gameObject.emit('open');
+            })
+            .on('close', function () {
+                gameObject.emit('close');
+            })
     }
 
     initText() {
@@ -37,7 +44,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
         textObject.setText(text);
 
         var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
-        if (this.prevCursorPosition !== cursorPosition) {            
+        if (this.prevCursorPosition !== cursorPosition) {
             textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
             this.prevCursorPosition = cursorPosition;
         }
