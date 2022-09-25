@@ -20170,6 +20170,14 @@
 
       _classCallCheck(this, HiddenTextEdit);
 
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (config.onUpdate === 'number') {
+        config.onUpdate = NumberInputUpdateCallback;
+      }
+
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       gameObject // Open editor by 'pointerdown' event
@@ -20179,6 +20187,13 @@
         var charIndex = gameObject.getCharIndex(child);
         this.setCursorPosition(charIndex);
       }, _assertThisInitialized(_this));
+
+      _this.on('open', function () {
+        gameObject.emit('open');
+      }).on('close', function () {
+        gameObject.emit('close');
+      });
+
       return _this;
     }
 

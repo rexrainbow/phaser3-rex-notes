@@ -11,6 +11,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 ## Live demos
 
 - [Text input](https://codepen.io/rexrainbow/pen/poVPGKe)
+- [Number input](https://codepen.io/rexrainbow/pen/jOxarOO)
 
 ## Usage
 
@@ -152,11 +153,14 @@ var txt = scene.add.rexCanvasInput({
     
         // onOpen: function (textObject, hiddenInputText) {
         // },
+
         // onClose: function (textObject, hiddenInputText) {
         // },
+
         // onUpdate: function (text, textObject, hiddenInputText) {
         //     return text;
         // },
+        // onUpdate: 'number',    // Only output number string
     },
 
     // Callbacks

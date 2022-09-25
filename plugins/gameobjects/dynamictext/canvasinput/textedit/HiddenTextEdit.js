@@ -1,7 +1,16 @@
 import HiddenTextEditBase from '../../../../behaviors/hiddentextedit/HiddenTextEditBase.js';
+import NumberInputUpdateCallback from '../../../../behaviors/hiddentextedit/defaultcallbacks/NumberInputUpdateCallback.js';
 
 class HiddenTextEdit extends HiddenTextEditBase {
     constructor(gameObject, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        if (config.onUpdate === 'number') {
+            config.onUpdate = NumberInputUpdateCallback;
+        }
+
         super(gameObject, config);
         // this.parent = gameObject;
 

@@ -5630,6 +5630,28 @@
 
   Object.assign(HiddenTextEditBase.prototype, Methods);
 
+  var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
+    text = text.replace(' ', '');
+    var previousText = hiddenInputText.previousText;
+
+    if (text === previousText) {
+      return text;
+    }
+
+    if (isNaN(text)) {
+      // Enter a NaN character, back to previous text
+      text = previousText;
+      var cursorPosition = hiddenInputText.cursorPosition - 1;
+      hiddenInputText.setText(text);
+      hiddenInputText.setCursorPosition(cursorPosition);
+    } else {
+      // New number text, update previous texr
+      hiddenInputText.previousText = text;
+    }
+
+    return text;
+  };
+
   var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
 
@@ -5640,6 +5662,14 @@
 
       _classCallCheck(this, HiddenTextEdit);
 
+      if (config === undefined) {
+        config = {};
+      }
+
+      if (config.onUpdate === 'number') {
+        config.onUpdate = NumberInputUpdateCallback;
+      }
+
       _this = _super.call(this, gameObject, config); // this.parent = gameObject;
 
       gameObject // Open editor by 'pointerdown' event
@@ -5649,6 +5679,13 @@
         var charIndex = gameObject.getCharIndex(child);
         this.setCursorPosition(charIndex);
       }, _assertThisInitialized(_this));
+
+      _this.on('open', function () {
+        gameObject.emit('open');
+      }).on('close', function () {
+        gameObject.emit('close');
+      });
+
       return _this;
     }
 
