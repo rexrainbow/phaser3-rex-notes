@@ -2,7 +2,7 @@ import {
     ElementProperties,
     StyleProperties,
     ElementEvents
-} from '../../../gameobjects/dom/utils/InputTextProperties.js';
+} from './InputTextProperties.js';
 import SetPrpoerties from '../../../gameobjects/dom/utils/SetProperties.js';
 import RouteEvents from '../../../gameobjects/dom/utils/RouteEvents.js';
 import StopPropagationTouchEvents from '../../../gameobjects/dom/utils/StopPropagationTouchEvents.js';

@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import CopyElementConfig from './methods/CopyElementConfig.js';
 import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
 import Methods from './methods/Methods.js';
 
@@ -22,7 +23,7 @@ class HiddenTextEditBase extends ComponentBase {
             }, this)
             .setInteractive()
 
-        this.nodeConfig = config;
+        this.nodeConfig = CopyElementConfig(config);
         // Create/remove input text element when opening/closing editor
         this.node = undefined;
     }
