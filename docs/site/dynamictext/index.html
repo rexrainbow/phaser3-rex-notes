@@ -1604,6 +1604,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-text" class="md-nav__link">
+    Set text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#insert-text" class="md-nav__link">
     Insert text
   </a>
@@ -1731,6 +1738,19 @@
     Character
   </a>
   
+    <nav class="md-nav" aria-label="Character">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text-style" class="md-nav__link">
+    Text-style
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1755,6 +1775,26 @@
           <li class="md-nav__item">
   <a href="#get-children" class="md-nav__link">
     Get children
+  </a>
+  
+    <nav class="md-nav" aria-label="Get children">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-character-children" class="md-nav__link">
+    Get character children
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-child" class="md-nav__link">
+    Move child
   </a>
   
 </li>
@@ -8741,6 +8781,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-text" class="md-nav__link">
+    Set text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#insert-text" class="md-nav__link">
     Insert text
   </a>
@@ -8868,6 +8915,19 @@
     Character
   </a>
   
+    <nav class="md-nav" aria-label="Character">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text-style" class="md-nav__link">
+    Text-style
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8892,6 +8952,26 @@
           <li class="md-nav__item">
   <a href="#get-children" class="md-nav__link">
     Get children
+  </a>
+  
+    <nav class="md-nav" aria-label="Get children">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-character-children" class="md-nav__link">
+    Get character children
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-child" class="md-nav__link">
+    Move child
   </a>
   
 </li>
@@ -9235,6 +9315,30 @@
 <p>To overwrite some properties of text-style.</p>
 <p>Each <a href="./#character-data">character</a> will be placed at position (0,0), without rotation. 
 Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of characters. </p>
+<h4 id="set-text">Set text<a class="headerlink" href="#set-text" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="c1">// bold: false,</span>
+        <span class="c1">// italic: false,</span>
+        <span class="c1">// fontSize: &#39;16px&#39;,</span>
+        <span class="c1">// fontFamily: &#39;Courier&#39;,</span>
+        <span class="c1">// color: &#39;#fff&#39;,</span>
+        <span class="c1">// stroke: &#39;#fff&#39;,</span>
+        <span class="c1">// strokeThickness: 0,</span>
+        <span class="c1">// shadowColor: null,</span>
+        <span class="c1">// shadowOffsetX: 0,</span>
+        <span class="c1">// shadowOffsetY: 0,</span>
+        <span class="c1">// shadowBlur: 0,</span>
+        <span class="c1">// backgroundColor: null,</span>
+        <span class="c1">// offsetY: 0,</span>
+        <span class="c1">// offsetY: 0,</span>
+        <span class="c1">// align: undefined</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
 <h4 id="insert-text">Insert text<a class="headerlink" href="#insert-text" title="Permanent link">&para;</a></h4>
 <p><div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">insertText</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
 </code></pre></div>
@@ -9543,8 +9647,8 @@ or</p>
 </li>
 </ul>
 <h4 id="character">Character<a class="headerlink" href="#character" title="Permanent link">&para;</a></h4>
+<h5 id="text-style">Text-style<a class="headerlink" href="#text-style" title="Permanent link">&para;</a></h5>
 <ul>
-<li>Text-style : <ul>
 <li>Get
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bold</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">bold</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">italic</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">italic</span><span class="p">;</span>
@@ -9610,8 +9714,6 @@ or</p>
 <span class="kr">char</span><span class="p">.</span><span class="nx">setOffsetY</span><span class="p">(</span><span class="nx">offsetY</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-</ul>
 <h4 id="image_1">Image<a class="headerlink" href="#image_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Size<ul>
@@ -9669,20 +9771,44 @@ or</p>
 <li>Get all children
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Character children<ul>
-<li>Active character children
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChildren</span><span class="p">();</span>
-</code></pre></div></li>
-<li>All character children
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChildren</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
 <li>Get last appended children
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getLastAppendedChildren</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Get active children, after wrapping
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getActiveChildren</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="get-character-children">Get character children<a class="headerlink" href="#get-character-children" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get active character children
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChildren</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get all character children
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChildren</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get character child by character index
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharChild</span><span class="p">(</span><span class="nx">charIndex</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="move-child">Move child<a class="headerlink" href="#move-child" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Move child to fist
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">moveChildToFist</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move child to last
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">moveChildToLast</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move child up
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">movechildUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move child to down
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">movechildDown</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move child above another child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">movechildAbove</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">baseChild</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move child below another child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">movechildBelow</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">baseChild</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="minimun-size">Minimun size<a class="headerlink" href="#minimun-size" title="Permanent link">&para;</a></h3>

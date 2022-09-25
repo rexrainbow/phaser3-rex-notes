@@ -287,6 +287,36 @@ To overwrite some properties of text-style.
 Each [character](dynamictext.md#character-data) will be placed at position (0,0), without rotation. 
 Uses [word-wrap](dynamictext.md#word-wrap) method to rearrange position of characters. 
 
+#### Set text
+
+```javascript
+txt.setText(text);
+```
+
+or
+
+```javascript
+txt.setText(text, 
+    {
+        // bold: false,
+        // italic: false,
+        // fontSize: '16px',
+        // fontFamily: 'Courier',
+        // color: '#fff',
+        // stroke: '#fff',
+        // strokeThickness: 0,
+        // shadowColor: null,
+        // shadowOffsetX: 0,
+        // shadowOffsetY: 0,
+        // shadowBlur: 0,
+        // backgroundColor: null,
+        // offsetY: 0,
+        // offsetY: 0,
+        // align: undefined
+    }
+);
+```
+
 #### Insert text
 
 ```javascript
@@ -597,84 +627,85 @@ txt.setWrapConfig(config);
 
 #### Character
 
-- Text-style : 
-    - Get
-        ```javascript
-        var bold = char.style.bold;
-        var italic = char.style.italic;
-        var fontSize = char.style.fontSize;
-        var fontFamily = char.style.fontFamily;
-        var color = char.style.color;
-        var stroke = char.style.stroke;
-        var strokeThickness = char.style.strokeThickness;
-        var shaodwColor = char.style.shadowColor;
-        var shadowBlur = char.style.shadowBlur;
-        var shadowOffsetX = char.style.shadowOffsetX;
-        var shadowOffsetY = char.style.shadowOffsetY;
-        var backgroundColor = char.style.backgroundColor;
-        var xOffset = char.style.x;
-        var yOffset = char.style.y;
-        ```
-    - Set
-        ```javascript
-        char.modifyStyle({
-            // bold: false,
-            // italic: false,
-            // fontSize: '16px',
-            // fontFamily: 'Courier',
-            // color: '#fff',
-            // stroke: '#fff',
-            // strokeThickness: 0,
-            // shaodwColor: null,
-            // shadowBlur: 0,
-            // shadowOffsetX: 0,
-            // shadowOffsetY: 0,
-            // backgroundColor: null,
-            // offsetX: 0,
-            // offsetY: 0
-        })
-        ```
-        or
-        ```javascript
-        char.setBold();
-        // char.setBold(false);
-        ```
-        ```javascript
-        char.setItalic();
-        // char.setItalic(false);
-        ```
-        ```javascript
-        char.setFontSize(fontSize); // number, string
-        ```
-        ```javascript
-        char.setFontFamily(fontFamily);
-        ```
-        ```javascript
-        char.setColor(color); // number, string
-        // char.setColor(); // No filling color
-        ```
-        ```javascript
-        char.setStrokeStyle(color, thickness);
-        // char.setStrokeStyle();  // No stroke
-        ``` 
-        ```javascript
-        char.setShadowColor(color);
-        // char.setShadowColor();  // No shadow
-        ```
-        ```javascript
-        char.setShadowOffset(offsetX, offsetY);
-        ```
-        ```javascript
-        char.setShadowBlur(blur);
-        ```
-        ```javascript
-        char.setBackgroundColor(color);
-        // char.setBackgroundColor();  // No shadow
-        ```
-        ```javascript
-        char.setOffsetX(offsetX);
-        char.setOffsetY(offsetY);
-        ```
+##### Text-style
+
+- Get
+    ```javascript
+    var bold = char.style.bold;
+    var italic = char.style.italic;
+    var fontSize = char.style.fontSize;
+    var fontFamily = char.style.fontFamily;
+    var color = char.style.color;
+    var stroke = char.style.stroke;
+    var strokeThickness = char.style.strokeThickness;
+    var shaodwColor = char.style.shadowColor;
+    var shadowBlur = char.style.shadowBlur;
+    var shadowOffsetX = char.style.shadowOffsetX;
+    var shadowOffsetY = char.style.shadowOffsetY;
+    var backgroundColor = char.style.backgroundColor;
+    var xOffset = char.style.x;
+    var yOffset = char.style.y;
+    ```
+- Set
+    ```javascript
+    char.modifyStyle({
+        // bold: false,
+        // italic: false,
+        // fontSize: '16px',
+        // fontFamily: 'Courier',
+        // color: '#fff',
+        // stroke: '#fff',
+        // strokeThickness: 0,
+        // shaodwColor: null,
+        // shadowBlur: 0,
+        // shadowOffsetX: 0,
+        // shadowOffsetY: 0,
+        // backgroundColor: null,
+        // offsetX: 0,
+        // offsetY: 0
+    })
+    ```
+    or
+    ```javascript
+    char.setBold();
+    // char.setBold(false);
+    ```
+    ```javascript
+    char.setItalic();
+    // char.setItalic(false);
+    ```
+    ```javascript
+    char.setFontSize(fontSize); // number, string
+    ```
+    ```javascript
+    char.setFontFamily(fontFamily);
+    ```
+    ```javascript
+    char.setColor(color); // number, string
+    // char.setColor(); // No filling color
+    ```
+    ```javascript
+    char.setStrokeStyle(color, thickness);
+    // char.setStrokeStyle();  // No stroke
+    ``` 
+    ```javascript
+    char.setShadowColor(color);
+    // char.setShadowColor();  // No shadow
+    ```
+    ```javascript
+    char.setShadowOffset(offsetX, offsetY);
+    ```
+    ```javascript
+    char.setShadowBlur(blur);
+    ```
+    ```javascript
+    char.setBackgroundColor(color);
+    // char.setBackgroundColor();  // No shadow
+    ```
+    ```javascript
+    char.setOffsetX(offsetX);
+    char.setOffsetY(offsetY);
+    ```
 
 #### Image
 
@@ -691,7 +722,6 @@ txt.setWrapConfig(config);
         image.setHeight(height);
         // image.setHeight(height, true);  // Resize and keep aspect- ratio
         ```
-
 
 ### For each child
 
@@ -735,15 +765,6 @@ txt.setWrapConfig(config);
     ```javascript
     var children = txt.getChildren();
     ```
-- Character children
-    - Active character children
-        ```javascript
-        var children = txt.getCharChildren();
-        ```
-    - All character children
-        ```javascript
-        var children = txt.getCharChildren(false);
-        ```
 - Get last appended children
     ```javascript
     var children = txt.getLastAppendedChildren();
@@ -751,6 +772,48 @@ txt.setWrapConfig(config);
 - Get active children, after wrapping
     ```javascript
     var children = txt.getActiveChildren();
+    ```
+
+#### Get character children
+
+- Get active character children
+    ```javascript
+    var children = txt.getCharChildren();
+    ```
+- Get all character children
+    ```javascript
+    var children = txt.getCharChildren(false);
+    ```
+- Get character child by character index
+    ```javascript
+    var child = txt.getCharChild(charIndex);
+    ```
+
+### Move child
+
+- Move child to fist
+    ```javascript
+    txt.moveChildToFist(child);
+    ```
+- Move child to last
+    ```javascript
+    txt.moveChildToLast(child);
+    ```
+- Move child up
+    ```javascript
+    txt.movechildUp(child);
+    ```
+- Move child to down
+    ```javascript
+    txt.movechildDown(child);
+    ```
+- Move child above another child
+    ```javascript
+    txt.movechildAbove(child, baseChild);
+    ```
+- Move child below another child
+    ```javascript
+    txt.movechildBelow(child, baseChild);
     ```
 
 ### Minimun size

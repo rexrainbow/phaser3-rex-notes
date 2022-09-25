@@ -169,6 +169,16 @@ var txt = scene.add.rexCanvasInput({
     // },
 
     // onMoveCursor: function(currCursorIndex, prevCursorIndex, canvasInput) {
+    //    if (currCursorIndex != null) {
+    //        textObject.getCharChild(currCursorIndex)
+    //            .modifyStyle({                  
+    //            })
+    //    }
+    //    if (prevCursorIndex != null) {
+    //        textObject.getCharChild(prevCursorIndex)
+    //            .modifyStyle({                  
+    //            })            
+    //    }
     // },
 
 
@@ -211,8 +221,18 @@ var txt = scene.add.rexCanvasInput({
         ```javascript
         function(currCursorIndex, prevCursorIndex, canvasInput) {
             if (currCursorIndex != null) {
+                textObject.getCharChild(currCursorIndex)
+                    .modifyStyle({
+                        color: 'black',
+                        backgroundColor: 'white'
+                    })                
             }
             if (prevCursorIndex != null) {
+                textObject.getCharChild(prevCursorIndex)
+                    .modifyStyle({
+                        color: 'white',
+                        backgroundColor: null
+                    })                
             }
         }
         ```
