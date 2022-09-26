@@ -331,49 +331,32 @@
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var ElementProperties = {
-    //id: ['id', undefined],
-    //text: ['value', undefined],
     maxLength: ['maxLength', undefined],
     minLength: ['minLength', undefined],
-    placeholder: ['placeholder', undefined],
-    tooltip: ['title', undefined],
-    readOnly: ['readOnly', false],
-    spellCheck: ['spellcheck', false],
-    autoComplete: ['autocomplete', 'off']
+    readOnly: ['readOnly', false]
   };
   var StyleProperties = {
-    //align: ['textAlign', undefined],
-    //paddingLeft: ['padding-left', undefined],
-    //paddingRight: ['padding-right', undefined],
-    //paddingTop: ['padding-top', undefined],
-    //paddingBottom: ['padding-bottom', undefined],
-    //fontFamily: ['fontFamily', undefined],
-    //fontSize: ['font-size', undefined],
-    //color: ['color', '#ffffff'],
-    //backgroundColor: ['backgroundColor', 'transparent'],
-    //border: ['border', 0],
-    //borderColor: ['borderColor', 'transparent'],
-    //outline: ['outline', 'none'],
     direction: ['direction', undefined]
   };
-  var ElementEvents = {//input: 'textchange',
-    //click: 'click',
-    //dblclick: 'dblclick',
-    //mousedown: 'pointerdown',
-    //mousemove: 'pointermove',
-    //mouseup: 'pointerup',
-    //touchstart: 'pointerdown',
-    //touchmove: 'pointermove',
-    //touchend: 'pointerup',
-    //keydown: 'keydown',
-    //keyup: 'keyup',
-    //keypress: 'keypress',
-    //compositionstart: 'compositionStart',
-    //compositionend: 'compositionEnd',
-    //compositionupdate: 'compositionUpdate',
-    //focus: 'focus',
-    //blur: 'blur',
-    //select: 'select',
+
+  var CopyProperty = function CopyProperty(from, to, key) {
+    if (typeof key === 'string') {
+      if (from.hasOwnProperty(key)) {
+        to[key] = from[key];
+      }
+    } else {
+      var keys = key;
+
+      if (Array.isArray(keys)) {
+        for (var i = 0, cnt = keys.length; i < cnt; i++) {
+          CopyProperty(from, to, keys[i]);
+        }
+      } else {
+        for (var key in keys) {
+          CopyProperty(from, to, key);
+        }
+      }
+    }
   };
 
   var CopyElementConfig = function CopyElementConfig(from) {
@@ -388,24 +371,6 @@
     CopyProperty(from, to, StyleProperties);
     CopyProperty(from, to, ElementProperties);
     return to;
-  };
-
-  var CopyProperty = function CopyProperty(from, to, key) {
-    if (typeof key === 'string') {
-      if (from.hasOwnProperty(key)) {
-        to[key] = from[key];
-      }
-    } else if (Array.isArray(key)) {
-      for (var i = 0, cnt = key.length; i < cnt; i++) {
-        CopyProperty(from, to, key[i]);
-      }
-    } else {
-      var keys = key;
-
-      for (var key in keys) {
-        CopyProperty(from, to, key);
-      }
-    }
   };
 
   var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
@@ -514,19 +479,6 @@
     return out;
   };
 
-  var RouteEvents = function RouteEvents(gameObject, element, elementEvents) {
-    var _loop = function _loop(elementEventName) {
-      // Note: Don't use `var` here
-      element.addEventListener(elementEventName, function (e) {
-        gameObject.emit(elementEvents[elementEventName], gameObject, e);
-      });
-    };
-
-    for (var elementEventName in elementEvents) {
-      _loop(elementEventName);
-    }
-  };
-
   var StopPropagationTouchEvents = function StopPropagationTouchEvents(element) {
     // Don't propagate touch/mouse events to parent(game canvas)
     element.addEventListener('touchstart', callback, false);
@@ -559,20 +511,10 @@
       element.type = textType;
     }
 
-    var style = GetValue$2(config, 'style', undefined);
-    style = SetProperties(StyleProperties, config, style); // Apply other style properties
+    var style = GetValue$2(config, 'style', undefined); // Apply other style properties
 
     var elementStyle = element.style;
-
-    for (var key in config) {
-      if (key in ElementProperties || key in StyleProperties) {
-        continue;
-      } else if (key in elementStyle) {
-        style[key] = config[key];
-      }
-    }
-
-    style['box-sizing'] = 'border-box'; // Set style
+    SetProperties(StyleProperties, style, elementStyle); // Set style
 
     elementStyle.position = 'absolute';
     elementStyle.opacity = 0;
@@ -580,9 +522,7 @@
     elementStyle.zIndex = 0; // hide native blue text cursor on iOS
 
     elementStyle.transform = 'scale(0)';
-    SetProperties(ElementProperties, config, element); // Apply events
-
-    RouteEvents(parent, element, ElementEvents); // Don't propagate touch/mouse events to parent(game canvas)
+    SetProperties(ElementProperties, config, element); // Don't propagate touch/mouse events to parent(game canvas)
 
     StopPropagationTouchEvents(element);
     document.body.appendChild(element);
@@ -674,10 +614,28 @@
 
       _this = _super.call(this, gameObject); // this.parent = gameObject;
 
-      _this.setEnterCloseEnable(GetValue$1(config, 'enterClose', true));
+      var textType = GetValue$1(config, 'inputType', undefined);
 
-      _this.onOpenCallback = GetValue$1(config, 'onOpen', undefined);
-      _this.onCloseCallback = GetValue$1(config, 'onClose', undefined);
+      if (textType === undefined) {
+        textType = GetValue$1(config, 'type', 'text');
+      }
+
+      _this.setEnterCloseEnable(GetValue$1(config, 'enterClose', textType !== 'textarea'));
+
+      var onOpen = GetValue$1(config, 'onOpen', undefined);
+
+      if (!onOpen) {
+        onOpen = GetValue$1(config, 'onFocus', undefined);
+      }
+
+      _this.onOpenCallback = onOpen;
+      var onClose = GetValue$1(config, 'onClose', undefined);
+
+      if (!onClose) {
+        onClose = GetValue$1(config, 'onBlur', undefined);
+      }
+
+      _this.onCloseCallback = onClose;
       _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
       _this.isOpened = false;
       gameObject.on('pointerdown', function () {

@@ -8713,9 +8713,9 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 
     <span class="c1">// enterClose: true,</span>
 
-    <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
+    <span class="c1">// onOpen: function (textObject, hiddenInputText) {   // Or onFocus:</span>
     <span class="c1">// },</span>
-    <span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
+    <span class="c1">// onClose: function (textObject, hiddenInputText) {  // Or onBlur:</span>
     <span class="c1">// },</span>
     <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
     <span class="c1">//     return text;</span>
@@ -8733,12 +8733,16 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 </ul>
 </li>
 <li><code>cursorFlashDuration</code> : Display cursor character or a space string to create a flash cursor.</li>
-<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is true.</li>
-<li><code>onOpen</code> : Callback invoked when focus on this hidden input text.
+<li><code>enterClose</code> : <ul>
+<li><code>true</code> : Close input text when enter-key was pressed. Default value is <code>true</code> if <code>inputType</code> is not <code>'textarea'</code>.</li>
+<li><code>false</code> : If <code>inputType</code> is set to <code>'textarea'</code>, default value will be <code>false</code>.</li>
+</ul>
+</li>
+<li><code>onOpen</code>, or <code>onFocuse</code> : Callback invoked when focus on this hidden input text.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>onClose</code> : Callback invoked when blur.
+<li><code>onClose</code>, or <code>onBlur</code> : Callback invoked when blur.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">hiddenInputText</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
@@ -8804,7 +8808,10 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 <h3 id="select-text">Select text<a class="headerlink" href="#select-text" title="Permanent link">&para;</a></h3>
 <p>This feature does not support.</p>
 <h3 id="bypass-key-input">Bypass key input<a class="headerlink" href="#bypass-key-input" title="Permanent link">&para;</a></h3>
-<p>See <a href="../inputtext/#bypass-key-input">InputText/Bypass key input</a></p>
+<p>Registered <a href="../keyboardevents/#key-object">keyboard events</a> might capture key input. </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="nx">enableCapture</span><span class="p">,</span> <span class="nx">emitOnRepeat</span><span class="p">);</span>
+</code></pre></div>
+<p>Set <code>enableCapture</code> to <code>false</code> to bypass key input to this input-text game objecct.</p>
 
               
             </article>

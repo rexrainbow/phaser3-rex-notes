@@ -8757,25 +8757,23 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
         <span class="nx">charWrap</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
 
-    <span class="c1">// Parameters of hidden-text-editor</span>
-    <span class="nx">edit</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// type: &#39;text&#39;,    // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
+    <span class="c1">// Parameters of hidden-text-editor   </span>
+    <span class="c1">// inputType: &#39;text&#39;,  // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...                </span>
 
-        <span class="c1">// enterClose: true,</span>
-
-        <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
-        <span class="c1">// },</span>
-
-        <span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
-        <span class="c1">// },</span>
-
-        <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
-        <span class="c1">//     return text;</span>
-        <span class="c1">// },</span>
-        <span class="c1">// onUpdate: &#39;number&#39;,    // Only output number string</span>
-    <span class="p">},</span>
+    <span class="c1">// enterClose: true,</span>
 
     <span class="c1">// Callbacks</span>
+    <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
+    <span class="c1">//     return text;</span>
+    <span class="c1">// },</span>
+    <span class="c1">// onUpdate: &#39;number&#39;,    // Only output number string</span>
+
     <span class="c1">// onAddChar: function(child, index, canvasInput) {</span>
     <span class="c1">//    child.modifyStyle({...})</span>
     <span class="c1">// },</span>
@@ -8799,20 +8797,23 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <ul>
 <li>Parameters of <a href="../dynamictext/#create-instance">DynamicText</a>...</li>
 <li>Parameters of hidden-text-editor<ul>
-<li><code>edit.type</code> : Type of element<ul>
+<li><code>inputType</code> : Type of element<ul>
 <li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>
 </ul>
 </li>
-<li><code>edit.enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is true.</li>
-<li><code>edit.onOpen</code> : Callback invoked when focus on this hidden input text.
+<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is true.</li>
+</ul>
+</li>
+<li>Callbacks<ul>
+<li><code>onOpen</code> : Callback invoked when focus on this hidden input text.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>edit.onClose</code> : Callback invoked when blur.
+<li><code>onClose</code> : Callback invoked when blur.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>edit.onUpdate</code> : <ul>
+<li><code>onUpdate</code> : <ul>
 <li>A callback invoked in each tick of editing.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return text;</span>
@@ -8824,9 +8825,6 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>'number'</code> : Only output number string.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Callbacks<ul>
 <li><code>onAddChar</code> : Callback invoked when adding new <a href="../dynamictext/#character">character child</a>
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">//    child.modifyStyle({...})</span>
