@@ -84,7 +84,7 @@ class Obstacles {
         }
 
         SpliceOne(this.gameObjects, index);
-        SpliceOne(this.polygon, index);
+        SpliceOne(this.polygons, index);
 
         this.removeDestroyCallback(gameObject);
         return this;
