@@ -1,10 +1,8 @@
 import {
     ElementProperties,
     StyleProperties,
-    ElementEvents
 } from './InputTextProperties.js';
 import SetPrpoerties from '../../../gameobjects/dom/utils/SetProperties.js';
-import RouteEvents from '../../../gameobjects/dom/utils/RouteEvents.js';
 import StopPropagationTouchEvents from '../../../gameobjects/dom/utils/StopPropagationTouchEvents.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -24,18 +22,9 @@ var CreateElement = function (parent, config) {
     }
 
     var style = GetValue(config, 'style', undefined);
-    style = SetPrpoerties(StyleProperties, config, style);
     // Apply other style properties
     var elementStyle = element.style;
-    for (var key in config) {
-        if ((key in ElementProperties) || (key in StyleProperties)) {
-            continue;
-        } else if (key in elementStyle) {
-            style[key] = config[key];
-        }
-    }
-    style['box-sizing'] = 'border-box';
-
+    SetPrpoerties(StyleProperties, style, elementStyle);
     // Set style
     elementStyle.position = 'absolute';
     elementStyle.opacity = 0;
@@ -45,9 +34,6 @@ var CreateElement = function (parent, config) {
     elementStyle.transform = 'scale(0)';
 
     SetPrpoerties(ElementProperties, config, element);
-
-    // Apply events
-    RouteEvents(parent, element, ElementEvents);
 
     // Don't propagate touch/mouse events to parent(game canvas)
     StopPropagationTouchEvents(element);

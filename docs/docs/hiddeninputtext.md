@@ -87,9 +87,9 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 
     // enterClose: true,
 
-    // onOpen: function (textObject, hiddenInputText) {
+    // onOpen: function (textObject, hiddenInputText) {   // Or onFocus:
     // },
-    // onClose: function (textObject, hiddenInputText) {
+    // onClose: function (textObject, hiddenInputText) {  // Or onBlur:
     // },
     // onUpdate: function (text, textObject, hiddenInputText) {
     //     return text;
@@ -103,13 +103,15 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 - `cursor` : Cursor character used in default update text callback.
     - `null`, or `''` : Don't insert cursor character.
 - `cursorFlashDuration` : Display cursor character or a space string to create a flash cursor.
-- `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
-- `onOpen` : Callback invoked when focus on this hidden input text.
+- `enterClose` : 
+    - `true` : Close input text when enter-key was pressed. Default value is `true` if `inputType` is not `'textarea'`.
+    - `false` : If `inputType` is set to `'textarea'`, default value will be `false`.
+- `onOpen`, or `onFocuse` : Callback invoked when focus on this hidden input text.
     ```javascript
     function (textObject, hiddenInputText) {
     }
     ```
-- `onClose` : Callback invoked when blur.
+- `onClose`, or `onBlur` : Callback invoked when blur.
     ```javascript
     function (textObject, hiddenInputText) {
     }
@@ -185,4 +187,10 @@ This feature does not support.
 
 ### Bypass key input
 
-See [InputText/Bypass key input](inputtext.md#bypass-key-input)
+Registered [keyboard events](keyboardevents.md#key-object) might capture key input. 
+
+```javascript
+var keyObj = scene.input.keyboard.addKey('W', enableCapture, emitOnRepeat);
+```
+
+Set `enableCapture` to `false` to bypass key input to this input-text game objecct.

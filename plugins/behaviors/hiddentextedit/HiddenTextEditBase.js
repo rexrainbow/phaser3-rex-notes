@@ -10,11 +10,27 @@ class HiddenTextEditBase extends ComponentBase {
         super(gameObject);
         // this.parent = gameObject;
 
-        this.setEnterCloseEnable(GetValue(config, 'enterClose', true));
+        var textType = GetValue(config, 'inputType', undefined);
+        if (textType === undefined) {
+            textType = GetValue(config, 'type', 'text');
+        }
 
-        this.onOpenCallback = GetValue(config, 'onOpen', undefined);
-        this.onCloseCallback = GetValue(config, 'onClose', undefined);
+        this.setEnterCloseEnable(GetValue(config, 'enterClose', (textType !== 'textarea')));
+
+        var onOpen = GetValue(config, 'onOpen', undefined);
+        if (!onOpen) {
+            onOpen = GetValue(config, 'onFocus', undefined);
+        }
+        this.onOpenCallback = onOpen;
+
+        var onClose = GetValue(config, 'onClose', undefined);
+        if (!onClose) {
+            onClose = GetValue(config, 'onBlur', undefined);
+        }
+        this.onCloseCallback = onClose;
+
         this.onUpdateCallback = GetValue(config, 'onUpdate', undefined);
+
         this.isOpened = false;
 
         gameObject

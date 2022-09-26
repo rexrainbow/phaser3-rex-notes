@@ -1,5 +1,5 @@
 import DynamicText from '../dynamictext/DynamicText.js';
-import HiddenTextEdit from './textedit/HiddenTextEdit.js';
+import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
@@ -15,6 +15,10 @@ class CanvasInput extends DynamicText {
             config = fixedWidth;
         }
 
+        if (config === undefined) {
+            config = {};
+        }
+
         // Set text later
         var text = GetValue(config, 'text', undefined);
         if (text) {
@@ -24,7 +28,7 @@ class CanvasInput extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
-        this.textEdit = new HiddenTextEdit(this, GetValue(config, 'edit'));
+        this.textEdit = CreateHiddenTextEdit(this, config);
 
         var addCharCallback = GetValue(config, 'onAddChar');
         if (addCharCallback) {

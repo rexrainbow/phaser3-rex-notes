@@ -145,25 +145,23 @@ var txt = scene.add.rexCanvasInput({
         charWrap: false
     },
     
-    // Parameters of hidden-text-editor
-    edit: {
-        // type: 'text',    // 'text'|'password'|'textarea'|...
-        
-        // enterClose: true,
-    
-        // onOpen: function (textObject, hiddenInputText) {
-        // },
+    // Parameters of hidden-text-editor   
+    // inputType: 'text',  // 'text'|'password'|'textarea'|...                
 
-        // onClose: function (textObject, hiddenInputText) {
-        // },
-
-        // onUpdate: function (text, textObject, hiddenInputText) {
-        //     return text;
-        // },
-        // onUpdate: 'number',    // Only output number string
-    },
+    // enterClose: true,
 
     // Callbacks
+    // onOpen: function (textObject, hiddenInputText) {
+    // },
+
+    // onClose: function (textObject, hiddenInputText) {
+    // },
+
+    // onUpdate: function (text, textObject, hiddenInputText) {
+    //     return text;
+    // },
+    // onUpdate: 'number',    // Only output number string
+
     // onAddChar: function(child, index, canvasInput) {
     //    child.modifyStyle({...})
     // },
@@ -187,20 +185,21 @@ var txt = scene.add.rexCanvasInput({
 
 - Parameters of [DynamicText](dynamictext.md#create-instance)...
 - Parameters of hidden-text-editor
-    - `edit.type` : Type of element
+    - `inputType` : Type of element
         - `'text'`, `'password'`, `'textarea'`, ...
-    - `edit.enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
-    - `edit.onOpen` : Callback invoked when focus on this hidden input text.
+    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
+- Callbacks
+    - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript
         function (textObject, txt) {
         }
         ```
-    - `edit.onClose` : Callback invoked when blur.
+    - `onClose` : Callback invoked when blur.
         ```javascript
         function (textObject, txt) {
         }
         ```
-    - `edit.onUpdate` : 
+    - `onUpdate` : 
         - A callback invoked in each tick of editing.
             ```javascript
             function (text, textObject, txt) {
@@ -209,7 +208,6 @@ var txt = scene.add.rexCanvasInput({
             ```
             - Can return a new string for text game object displaying.
         - `'number'` : Only output number string.
-- Callbacks
     - `onAddChar` : Callback invoked when adding new [character child](dynamictext.md#character)
         ```javascript
         function(child, index, canvasInput) {

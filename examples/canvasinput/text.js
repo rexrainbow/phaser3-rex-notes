@@ -45,14 +45,12 @@ var CreateCanvasInput = function (scene, text) {
                 padding: { bottom: 10 },
             },
 
-            edit: {
-                onOpen(textObject) {
-                    textObject.setBackgroundStroke('red')
-                },
+            onOpen(textObject) {
+                textObject.setBackgroundStroke('red')
+            },
 
-                onClose(textObject) {
-                    textObject.setBackgroundStroke('white')
-                }
+            onClose(textObject) {
+                textObject.setBackgroundStroke('white')
             },
 
             onAddChar(child) {
