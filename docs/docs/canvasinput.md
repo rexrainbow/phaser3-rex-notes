@@ -312,6 +312,20 @@ var isOpened = txt.isOpened;
     })
     ```
 
+### Select text
+
+This feature does not support.
+
+### Bypass key input
+
+Registered [keyboard events](keyboardevents.md#key-object) might capture key input. 
+
+```javascript
+var keyObj = scene.input.keyboard.addKey('W', enableCapture, emitOnRepeat);
+```
+
+Set `enableCapture` to `false` to bypass key input to this input-text game objecct.
+
 ### Other properties
 
 See [DynamicText](dynamictext.md).

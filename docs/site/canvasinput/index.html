@@ -1644,6 +1644,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#select-text" class="md-nav__link">
+    Select text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-key-input" class="md-nav__link">
+    Bypass key input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8595,6 +8609,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#select-text" class="md-nav__link">
+    Select text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bypass-key-input" class="md-nav__link">
+    Bypass key input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8919,6 +8947,13 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
+<h3 id="select-text">Select text<a class="headerlink" href="#select-text" title="Permanent link">&para;</a></h3>
+<p>This feature does not support.</p>
+<h3 id="bypass-key-input">Bypass key input<a class="headerlink" href="#bypass-key-input" title="Permanent link">&para;</a></h3>
+<p>Registered <a href="../keyboardevents/#key-object">keyboard events</a> might capture key input. </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="nx">enableCapture</span><span class="p">,</span> <span class="nx">emitOnRepeat</span><span class="p">);</span>
+</code></pre></div>
+<p>Set <code>enableCapture</code> to <code>false</code> to bypass key input to this input-text game objecct.</p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../dynamictext/">DynamicText</a>.</p>
 
