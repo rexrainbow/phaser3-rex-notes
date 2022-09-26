@@ -892,6 +892,17 @@ sizer.pin(gameObject);
 !!! note
     Method `sizer.add` is override in each sizer class usually.
 
+### Un-pin game object
+
+```javascript
+sizer.unpin(child);
+// sizer.unpin(child, destroyChild);
+```
+- `destroyChild` : Set true to destroy child. Default is `false`.
+
+!!! note
+    Method `sizer.remove` is override in each sizer class usually.
+
 ### Draw bounds
 
 - Draw bounds of shown game object on a graphics game object

@@ -5,7 +5,23 @@ const BaseRemove = Base.prototype.remove;
 const BaseClear = Base.prototype.clear;
 
 export default {
+    // Can override this method
     remove(gameObject, destroyChild) {
+        if (GetParent(gameObject) !== this) {
+            return this;
+        }
+        this.setParent(gameObject, null);
+
+        if (!destroyChild) {
+            this.removeFromRenderLayer(gameObject);
+        }
+
+        BaseRemove.call(this, gameObject, destroyChild);
+        return this;
+    },
+
+    // Don't override this method
+    unpin(gameObject, destroyChild) {
         if (GetParent(gameObject) !== this) {
             return this;
         }

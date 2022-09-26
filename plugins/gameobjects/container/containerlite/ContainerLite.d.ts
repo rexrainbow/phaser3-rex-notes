@@ -48,6 +48,11 @@ declare class ContainerLite extends Base {
         config?: ContainerLite.IAddChildConfig
     ): this;
 
+    unpin(
+        gameObject: Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
+
     addMultiple(
         children: Phaser.GameObjects.GameObject[]
     ): this;

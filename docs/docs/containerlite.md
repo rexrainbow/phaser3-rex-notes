@@ -237,10 +237,15 @@ For example, container-lite is at (100, 100), and child is at **(10, 10)**, then
 
 ### Remove child
 
-- Remove a child
+- Remove(unpin) a child
     ```javascript
     container.remove(child);
     // container.remove(child, destroyChild);
+    ```
+    or
+    ```javascript
+    container.unpin(child);
+    // container.unpin(child, destroyChild);
     ```
     - `child` : Game object
     - `destroyChild` : Set true to destroy child. Default is `false`.

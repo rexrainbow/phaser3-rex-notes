@@ -612,7 +612,23 @@
   var BaseRemove = Base$1.prototype.remove;
   var BaseClear = Base$1.prototype.clear;
   var RemoveChild$1 = {
+    // Can override this method
     remove: function remove(gameObject, destroyChild) {
+      if (GetParent$1(gameObject) !== this) {
+        return this;
+      }
+
+      this.setParent(gameObject, null);
+
+      if (!destroyChild) {
+        this.removeFromRenderLayer(gameObject);
+      }
+
+      BaseRemove.call(this, gameObject, destroyChild);
+      return this;
+    },
+    // Don't override this method
+    unpin: function unpin(gameObject, destroyChild) {
       if (GetParent$1(gameObject) !== this) {
         return this;
       }
