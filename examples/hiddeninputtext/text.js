@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
         })
 
         this.plugins.get('rexHiddenInputText').add(textObject, {
-            type: 'textarea',
+            inputType: 'textarea',
             enterClose: false,
 
             onOpen(textObject) {

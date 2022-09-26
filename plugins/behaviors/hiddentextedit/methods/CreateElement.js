@@ -11,7 +11,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateElement = function (parent, config) {
     var element;
-    var textType = GetValue(config, 'type', 'text');
+    var textType = GetValue(config, 'inputType', undefined);
+    if (textType === undefined) {
+        textType = GetValue(config, 'type', 'text');
+    }
     if (textType === 'textarea') {
         element = document.createElement('textarea');
         element.style.resize = 'none';

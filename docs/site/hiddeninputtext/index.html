@@ -1801,22 +1801,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#bypass-key-input" class="md-nav__link">
     Bypass key input
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
   </a>
   
 </li>
@@ -8623,22 +8609,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#bypass-key-input" class="md-nav__link">
     Bypass key input
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
   </a>
   
 </li>
@@ -8734,7 +8706,7 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 </ul>
 <h3 id="add-input-text-object">Add input text object<a class="headerlink" href="#add-input-text-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hiddenInputText</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHiddenInputTextPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// type: &#39;text&#39;,    // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
+    <span class="c1">// inputType: &#39;text&#39;,    // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...</span>
 
     <span class="nx">cursor</span><span class="o">:</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span>
     <span class="nx">cursorFlashDuration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
@@ -8752,7 +8724,7 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 </code></pre></div>
 <ul>
 <li><code>textGameObject</code> : </li>
-<li><code>type</code> : Type of element<ul>
+<li><code>inputType</code> : Type of element<ul>
 <li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>
 </ul>
 </li>
@@ -8823,23 +8795,16 @@ receive character input and display on <a href="../text/">text</a>, <a href="../
 <h3 id="open-editor">Open editor<a class="headerlink" href="#open-editor" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">hiddenInputText</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
 </code></pre></div>
-<p>Equal to <code>hiddenInputText.setFocus()</code></p>
 <h3 id="close-editor">Close editor<a class="headerlink" href="#close-editor" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">hiddenInputText</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div>
-<p>Equal to <code>hiddenInputText.setBlur()</code>;</p>
 <h4 id="is-opened">Is opened<a class="headerlink" href="#is-opened" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isOpened</span> <span class="o">=</span> <span class="nx">hiddenInputText</span><span class="p">.</span><span class="nx">isOpened</span><span class="p">;</span>
 </code></pre></div>
-<p>Equal to <code>hiddenInputText.isFocused</code></p>
 <h3 id="select-text">Select text<a class="headerlink" href="#select-text" title="Permanent link">&para;</a></h3>
 <p>This feature does not support.</p>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<p>See <a href="../inputtext/#events">InputText/Event</a></p>
 <h3 id="bypass-key-input">Bypass key input<a class="headerlink" href="#bypass-key-input" title="Permanent link">&para;</a></h3>
 <p>See <a href="../inputtext/#bypass-key-input">InputText/Bypass key input</a></p>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../inputtext/">InputText</a></p>
 
               
             </article>

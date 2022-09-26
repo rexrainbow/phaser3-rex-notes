@@ -80,7 +80,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 ```javascript
 var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGameObject, {
-    // type: 'text',    // 'text'|'password'|'textarea'|...
+    // inputType: 'text',    // 'text'|'password'|'textarea'|...
 
     cursor: '|',
     cursorFlashDuration: 1000,
@@ -98,7 +98,7 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 ```
 
 - `textGameObject` : 
-- `type` : Type of element
+- `inputType` : Type of element
     - `'text'`, `'password'`, `'textarea'`, ...
 - `cursor` : Cursor character used in default update text callback.
     - `null`, or `''` : Don't insert cursor character.
@@ -167,15 +167,11 @@ var hiddenInputText = scene.plugins.get('rexHiddenInputTextPlugin').add(textGame
 hiddenInputText.open();
 ```
 
-Equal to `hiddenInputText.setFocus()`
-
 ### Close editor
 
 ```javascript
 hiddenInputText.close();
 ```
-
-Equal to `hiddenInputText.setBlur()`;
 
 #### Is opened
 
@@ -183,20 +179,10 @@ Equal to `hiddenInputText.setBlur()`;
 var isOpened = hiddenInputText.isOpened;
 ```
 
-Equal to `hiddenInputText.isFocused`
-
 ### Select text
 
 This feature does not support.
 
-### Events
-
-See [InputText/Event](inputtext.md#events)
-
 ### Bypass key input
 
 See [InputText/Bypass key input](inputtext.md#bypass-key-input)
-
-### Other properties
-
-See [InputText](inputtext.md)

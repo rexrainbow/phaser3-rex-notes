@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
         })
 
         this.plugins.get('rexHiddenInputText').add(textObject, {
-            type: 'textarea',
+            inputType: 'textarea',
             cursor: '[color=blue][size=12][b][y=-2]|[/y][/b][/size][/color]',
             enterClose: false,
 

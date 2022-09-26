@@ -330,6 +330,84 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  var ElementProperties = {
+    //id: ['id', undefined],
+    //text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
+    placeholder: ['placeholder', undefined],
+    tooltip: ['title', undefined],
+    readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off']
+  };
+  var StyleProperties = {
+    //align: ['textAlign', undefined],
+    //paddingLeft: ['padding-left', undefined],
+    //paddingRight: ['padding-right', undefined],
+    //paddingTop: ['padding-top', undefined],
+    //paddingBottom: ['padding-bottom', undefined],
+    //fontFamily: ['fontFamily', undefined],
+    //fontSize: ['font-size', undefined],
+    //color: ['color', '#ffffff'],
+    //backgroundColor: ['backgroundColor', 'transparent'],
+    //border: ['border', 0],
+    //borderColor: ['borderColor', 'transparent'],
+    //outline: ['outline', 'none'],
+    direction: ['direction', undefined]
+  };
+  var ElementEvents = {//input: 'textchange',
+    //click: 'click',
+    //dblclick: 'dblclick',
+    //mousedown: 'pointerdown',
+    //mousemove: 'pointermove',
+    //mouseup: 'pointerup',
+    //touchstart: 'pointerdown',
+    //touchmove: 'pointermove',
+    //touchend: 'pointerup',
+    //keydown: 'keydown',
+    //keyup: 'keyup',
+    //keypress: 'keypress',
+    //compositionstart: 'compositionStart',
+    //compositionend: 'compositionEnd',
+    //compositionupdate: 'compositionUpdate',
+    //focus: 'focus',
+    //blur: 'blur',
+    //select: 'select',
+  };
+
+  var CopyElementConfig = function CopyElementConfig(from) {
+    if (from === undefined) {
+      from = {};
+    }
+
+    var to = {};
+    CopyProperty(from, to, 'inputType');
+    CopyProperty(from, to, 'type');
+    CopyProperty(from, to, 'style');
+    CopyProperty(from, to, StyleProperties);
+    CopyProperty(from, to, ElementProperties);
+    return to;
+  };
+
+  var CopyProperty = function CopyProperty(from, to, key) {
+    if (typeof key === 'string') {
+      if (from.hasOwnProperty(key)) {
+        to[key] = from[key];
+      }
+    } else if (Array.isArray(key)) {
+      for (var i = 0, cnt = key.length; i < cnt; i++) {
+        CopyProperty(from, to, key[i]);
+      }
+    } else {
+      var keys = key;
+
+      for (var key in keys) {
+        CopyProperty(from, to, key);
+      }
+    }
+  };
+
   var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
     if (pointer) {
       if (preTest && !preTest(gameObject, pointer)) {
@@ -414,53 +492,6 @@
     LastOpenedEditor = undefined;
   };
 
-  var ElementProperties = {
-    id: ['id', undefined],
-    text: ['value', undefined],
-    maxLength: ['maxLength', undefined],
-    minLength: ['minLength', undefined],
-    placeholder: ['placeholder', undefined],
-    tooltip: ['title', undefined],
-    readOnly: ['readOnly', false],
-    spellCheck: ['spellcheck', false],
-    autoComplete: ['autocomplete', 'off']
-  };
-  var StyleProperties = {
-    align: ['textAlign', undefined],
-    paddingLeft: ['padding-left', undefined],
-    paddingRight: ['padding-right', undefined],
-    paddingTop: ['padding-top', undefined],
-    paddingBottom: ['padding-bottom', undefined],
-    fontFamily: ['fontFamily', undefined],
-    fontSize: ['font-size', undefined],
-    color: ['color', '#ffffff'],
-    backgroundColor: ['backgroundColor', 'transparent'],
-    border: ['border', 0],
-    borderColor: ['borderColor', 'transparent'],
-    outline: ['outline', 'none'],
-    direction: ['direction', undefined]
-  };
-  var ElementEvents = {
-    input: 'textchange',
-    click: 'click',
-    dblclick: 'dblclick',
-    mousedown: 'pointerdown',
-    mousemove: 'pointermove',
-    mouseup: 'pointerup',
-    touchstart: 'pointerdown',
-    touchmove: 'pointermove',
-    touchend: 'pointerup',
-    keydown: 'keydown',
-    keyup: 'keyup',
-    keypress: 'keypress',
-    compositionstart: 'compositionStart',
-    compositionend: 'compositionEnd',
-    compositionupdate: 'compositionUpdate',
-    focus: 'focus',
-    blur: 'blur',
-    select: 'select'
-  };
-
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
   var SetProperties = function SetProperties(properties, config, out) {
@@ -514,7 +545,11 @@
 
   var CreateElement = function CreateElement(parent, config) {
     var element;
-    var textType = GetValue$2(config, 'type', 'text');
+    var textType = GetValue$2(config, 'inputType', undefined);
+
+    if (textType === undefined) {
+      textType = GetValue$2(config, 'type', 'text');
+    }
 
     if (textType === 'textarea') {
       element = document.createElement('textarea');
@@ -648,7 +683,7 @@
       gameObject.on('pointerdown', function () {
         this.open();
       }, _assertThisInitialized(_this)).setInteractive();
-      _this.nodeConfig = config; // Create/remove input text element when opening/closing editor
+      _this.nodeConfig = CopyElementConfig(config); // Create/remove input text element when opening/closing editor
 
       _this.node = undefined;
       return _this;

@@ -9,6 +9,7 @@ var CopyElementConfig = function (from) {
     }
     var to = {};
 
+    CopyProperty(from, to, 'inputType');
     CopyProperty(from, to, 'type');
     CopyProperty(from, to, 'style');
     CopyProperty(from, to, StyleProperties);

@@ -7846,6 +7846,84 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  var ElementProperties$1 = {
+    //id: ['id', undefined],
+    //text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
+    placeholder: ['placeholder', undefined],
+    tooltip: ['title', undefined],
+    readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off']
+  };
+  var StyleProperties$1 = {
+    //align: ['textAlign', undefined],
+    //paddingLeft: ['padding-left', undefined],
+    //paddingRight: ['padding-right', undefined],
+    //paddingTop: ['padding-top', undefined],
+    //paddingBottom: ['padding-bottom', undefined],
+    //fontFamily: ['fontFamily', undefined],
+    //fontSize: ['font-size', undefined],
+    //color: ['color', '#ffffff'],
+    //backgroundColor: ['backgroundColor', 'transparent'],
+    //border: ['border', 0],
+    //borderColor: ['borderColor', 'transparent'],
+    //outline: ['outline', 'none'],
+    direction: ['direction', undefined]
+  };
+  var ElementEvents$1 = {//input: 'textchange',
+    //click: 'click',
+    //dblclick: 'dblclick',
+    //mousedown: 'pointerdown',
+    //mousemove: 'pointermove',
+    //mouseup: 'pointerup',
+    //touchstart: 'pointerdown',
+    //touchmove: 'pointermove',
+    //touchend: 'pointerup',
+    //keydown: 'keydown',
+    //keyup: 'keyup',
+    //keypress: 'keypress',
+    //compositionstart: 'compositionStart',
+    //compositionend: 'compositionEnd',
+    //compositionupdate: 'compositionUpdate',
+    //focus: 'focus',
+    //blur: 'blur',
+    //select: 'select',
+  };
+
+  var CopyElementConfig = function CopyElementConfig(from) {
+    if (from === undefined) {
+      from = {};
+    }
+
+    var to = {};
+    CopyProperty(from, to, 'inputType');
+    CopyProperty(from, to, 'type');
+    CopyProperty(from, to, 'style');
+    CopyProperty(from, to, StyleProperties$1);
+    CopyProperty(from, to, ElementProperties$1);
+    return to;
+  };
+
+  var CopyProperty = function CopyProperty(from, to, key) {
+    if (typeof key === 'string') {
+      if (from.hasOwnProperty(key)) {
+        to[key] = from[key];
+      }
+    } else if (Array.isArray(key)) {
+      for (var i = 0, cnt = key.length; i < cnt; i++) {
+        CopyProperty(from, to, key[i]);
+      }
+    } else {
+      var keys = key;
+
+      for (var key in keys) {
+        CopyProperty(from, to, key);
+      }
+    }
+  };
+
   var IsPointerInHitArea = function IsPointerInHitArea(gameObject, pointer, preTest, postTest) {
     if (pointer) {
       if (preTest && !preTest(gameObject, pointer)) {
@@ -7930,53 +8008,6 @@
     LastOpenedEditor$1 = undefined;
   };
 
-  var ElementProperties = {
-    id: ['id', undefined],
-    text: ['value', undefined],
-    maxLength: ['maxLength', undefined],
-    minLength: ['minLength', undefined],
-    placeholder: ['placeholder', undefined],
-    tooltip: ['title', undefined],
-    readOnly: ['readOnly', false],
-    spellCheck: ['spellcheck', false],
-    autoComplete: ['autocomplete', 'off']
-  };
-  var StyleProperties = {
-    align: ['textAlign', undefined],
-    paddingLeft: ['padding-left', undefined],
-    paddingRight: ['padding-right', undefined],
-    paddingTop: ['padding-top', undefined],
-    paddingBottom: ['padding-bottom', undefined],
-    fontFamily: ['fontFamily', undefined],
-    fontSize: ['font-size', undefined],
-    color: ['color', '#ffffff'],
-    backgroundColor: ['backgroundColor', 'transparent'],
-    border: ['border', 0],
-    borderColor: ['borderColor', 'transparent'],
-    outline: ['outline', 'none'],
-    direction: ['direction', undefined]
-  };
-  var ElementEvents = {
-    input: 'textchange',
-    click: 'click',
-    dblclick: 'dblclick',
-    mousedown: 'pointerdown',
-    mousemove: 'pointermove',
-    mouseup: 'pointerup',
-    touchstart: 'pointerdown',
-    touchmove: 'pointermove',
-    touchend: 'pointerup',
-    keydown: 'keydown',
-    keyup: 'keyup',
-    keypress: 'keypress',
-    compositionstart: 'compositionStart',
-    compositionend: 'compositionEnd',
-    compositionupdate: 'compositionUpdate',
-    focus: 'focus',
-    blur: 'blur',
-    select: 'select'
-  };
-
   var GetValue$2d = Phaser.Utils.Objects.GetValue;
 
   var SetProperties = function SetProperties(properties, config, out) {
@@ -8030,7 +8061,11 @@
 
   var CreateElement = function CreateElement(parent, config) {
     var element;
-    var textType = GetValue$2c(config, 'type', 'text');
+    var textType = GetValue$2c(config, 'inputType', undefined);
+
+    if (textType === undefined) {
+      textType = GetValue$2c(config, 'type', 'text');
+    }
 
     if (textType === 'textarea') {
       element = document.createElement('textarea');
@@ -8041,12 +8076,12 @@
     }
 
     var style = GetValue$2c(config, 'style', undefined);
-    style = SetProperties(StyleProperties, config, style); // Apply other style properties
+    style = SetProperties(StyleProperties$1, config, style); // Apply other style properties
 
     var elementStyle = element.style;
 
     for (var key in config) {
-      if (key in ElementProperties || key in StyleProperties) {
+      if (key in ElementProperties$1 || key in StyleProperties$1) {
         continue;
       } else if (key in elementStyle) {
         style[key] = config[key];
@@ -8061,9 +8096,9 @@
     elementStyle.zIndex = 0; // hide native blue text cursor on iOS
 
     elementStyle.transform = 'scale(0)';
-    SetProperties(ElementProperties, config, element); // Apply events
+    SetProperties(ElementProperties$1, config, element); // Apply events
 
-    RouteEvents(parent, element, ElementEvents); // Don't propagate touch/mouse events to parent(game canvas)
+    RouteEvents(parent, element, ElementEvents$1); // Don't propagate touch/mouse events to parent(game canvas)
 
     StopPropagationTouchEvents(element);
     document.body.appendChild(element);
@@ -8164,7 +8199,7 @@
       gameObject.on('pointerdown', function () {
         this.open();
       }, _assertThisInitialized(_this)).setInteractive();
-      _this.nodeConfig = config; // Create/remove input text element when opening/closing editor
+      _this.nodeConfig = CopyElementConfig(config); // Create/remove input text element when opening/closing editor
 
       _this.node = undefined;
       return _this;
@@ -49201,6 +49236,53 @@
     style.height = "".concat(height, "px");
     this.updateSize();
     return this;
+  };
+
+  var ElementProperties = {
+    id: ['id', undefined],
+    text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
+    placeholder: ['placeholder', undefined],
+    tooltip: ['title', undefined],
+    readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off']
+  };
+  var StyleProperties = {
+    align: ['textAlign', undefined],
+    paddingLeft: ['padding-left', undefined],
+    paddingRight: ['padding-right', undefined],
+    paddingTop: ['padding-top', undefined],
+    paddingBottom: ['padding-bottom', undefined],
+    fontFamily: ['fontFamily', undefined],
+    fontSize: ['font-size', undefined],
+    color: ['color', '#ffffff'],
+    backgroundColor: ['backgroundColor', 'transparent'],
+    border: ['border', 0],
+    borderColor: ['borderColor', 'transparent'],
+    outline: ['outline', 'none'],
+    direction: ['direction', undefined]
+  };
+  var ElementEvents = {
+    input: 'textchange',
+    click: 'click',
+    dblclick: 'dblclick',
+    mousedown: 'pointerdown',
+    mousemove: 'pointermove',
+    mouseup: 'pointerup',
+    touchstart: 'pointerdown',
+    touchmove: 'pointermove',
+    touchend: 'pointerup',
+    keydown: 'keydown',
+    keyup: 'keyup',
+    keypress: 'keypress',
+    compositionstart: 'compositionStart',
+    compositionend: 'compositionEnd',
+    compositionupdate: 'compositionUpdate',
+    focus: 'focus',
+    blur: 'blur',
+    select: 'select'
   };
 
   var DOMElement = Phaser.GameObjects.DOMElement;
