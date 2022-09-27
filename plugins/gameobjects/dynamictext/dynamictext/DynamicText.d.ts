@@ -1,5 +1,7 @@
 // import * as Phaser from 'phaser';
 import Canvas from '../../canvas/canvas/Canvas';
+import Background from './bob/background/Background';
+import InnerBounds from './bob/innerbounds/InnerBounds';
 import { IConfigTextStyle } from './bob/char/TextStyle';
 import BobBaseClass from './bob/Base';
 import CharBobClass from './bob/char/CharData';
@@ -137,6 +139,9 @@ declare class DynamicText extends Canvas {
         scene: Phaser.Scene,
         config?: DynamicText.IConfig
     );
+
+    background: Background;
+    innerBounds: InnerBounds;
 
     clearContent(): this;
 

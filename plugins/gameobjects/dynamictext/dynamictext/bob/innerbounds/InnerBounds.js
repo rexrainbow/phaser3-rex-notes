@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class InnerBounds extends RenderBase {
     constructor(parent, config) {
-        super(parent, 'background');
+        super(parent, 'innerbounds');
 
         this.setColor(
             GetValue(config, 'color', null),
@@ -87,6 +87,24 @@ class InnerBounds extends RenderBase {
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
+    }
+
+    modifyPorperties(o) {
+        super.modifyPorperties(o);
+
+        if (o.hasOwnProperty('color')) {
+            this.setColor(
+                o.color,
+                GetValue(o, 'color2', null),
+                GetValue(o, 'horizontalGradient', true)
+            );
+        }
+        if (o.hasOwnProperty('stroke')) {
+            this.setStroke(
+                o.stroke,
+                GetValue(o, 'strokeThickness', 2)
+            );
+        }
     }
 
     renderContent() {

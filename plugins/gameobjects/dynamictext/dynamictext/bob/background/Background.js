@@ -113,6 +113,30 @@ class Background extends RenderBase {
         return this._cornerIteration;
     }
 
+    modifyPorperties(o) {
+        super.modifyPorperties(o);
+
+        if (o.hasOwnProperty('color')) {
+            this.setColor(
+                o.color,
+                GetValue(o, 'color2', null),
+                GetValue(o, 'horizontalGradient', true)
+            );
+        }
+        if (o.hasOwnProperty('stroke')) {
+            this.setStroke(
+                o.stroke,
+                GetValue(o, 'strokeThickness', 2)
+            );
+        }
+        if (o.hasOwnProperty('cornerRadius')) {
+            this.setCornerRadius(
+                o.cornerRadius,
+                GetValue(o, 'cornerIteration', null)
+            );
+        }
+    }
+
     setCornerRadius(radius, iteration) {
         this.cornerRadius = radius;
         this.cornerIteration = iteration;
