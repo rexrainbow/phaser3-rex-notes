@@ -5714,6 +5714,16 @@
             }
           }
 
+          if (this.prevCursorPosition != null) {
+            var child = textObject.getCharChild(this.prevCursorPosition);
+            textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
+          }
+
+          if (cursorPosition != null) {
+            var child = textObject.getCharChild(cursorPosition);
+            textObject.emit('cursorin', child, cursorPosition, textObject);
+          }
+
           textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
           this.prevCursorPosition = cursorPosition;
         }
@@ -6269,6 +6279,18 @@
 
       if (addCharCallback) {
         _this.on('addChar', addCharCallback);
+      }
+
+      var cursorOutCallback = GetValue(config, 'onCursorOut');
+
+      if (cursorOutCallback) {
+        _this.on('cursorout', cursorOutCallback);
+      }
+
+      var cursorInCallback = GetValue(config, 'onCursorIn');
+
+      if (cursorInCallback) {
+        _this.on('cursorin', cursorInCallback);
       }
 
       var moveCursorCallback = GetValue(config, 'onMoveCursor');

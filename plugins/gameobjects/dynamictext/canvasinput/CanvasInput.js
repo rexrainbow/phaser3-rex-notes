@@ -35,6 +35,14 @@ class CanvasInput extends DynamicText {
             this.on('addChar', addCharCallback);
         }
 
+        var cursorOutCallback = GetValue(config, 'onCursorOut');
+        if (cursorOutCallback) {
+            this.on('cursorout', cursorOutCallback);
+        }
+        var cursorInCallback = GetValue(config, 'onCursorIn');
+        if (cursorInCallback) {
+            this.on('cursorin', cursorInCallback);
+        }
         var moveCursorCallback = GetValue(config, 'onMoveCursor');
         if (moveCursorCallback) {
             this.on('movecursor', moveCursorCallback);

@@ -166,19 +166,17 @@ var txt = scene.add.rexCanvasInput({
     //    child.modifyStyle({...})
     // },
 
-    // onMoveCursor: function(currCursorIndex, prevCursorIndex, canvasInput) {
-    //    if (currCursorIndex != null) {
-    //        textObject.getCharChild(currCursorIndex)
-    //            .modifyStyle({                  
-    //            })
-    //    }
-    //    if (prevCursorIndex != null) {
-    //        textObject.getCharChild(prevCursorIndex)
-    //            .modifyStyle({                  
-    //            })            
-    //    }
+    // onCursorOut: function(child, cursorIndex, canvasInput) {
+    //     child.modifyStyle({
+    //         
+    //     });
     // },
 
+    // onCursorIn: function(child, cursorIndex, canvasInput) {
+    //     child.modifyStyle({
+    //         
+    //     });
+    // },
 
 });
 ```
@@ -211,31 +209,24 @@ var txt = scene.add.rexCanvasInput({
     - `onAddChar` : Callback invoked when adding new [character child](dynamictext.md#character)
         ```javascript
         function(child, index, canvasInput) {
-            //    child.modifyStyle({...})
+            child.modifyStyle({...})
         }
         ```
-        - `child` : [character child](dynamictext.md#character)        
-    - `onMoveCursor` : Callback invoked when postion of cursor is changed
+        - `child` : [character child](dynamictext.md#character)
+    - `onCursorOut` : Callback invoked when cursor move out of a character child
         ```javascript
-        function(currCursorIndex, prevCursorIndex, canvasInput) {
-            if (currCursorIndex != null) {
-                textObject.getCharChild(currCursorIndex)
-                    .modifyStyle({
-                        color: 'black',
-                        backgroundColor: 'white'
-                    })                
-            }
-            if (prevCursorIndex != null) {
-                textObject.getCharChild(prevCursorIndex)
-                    .modifyStyle({
-                        color: 'white',
-                        backgroundColor: null
-                    })                
-            }
+        function(child, index, canvasInput) {
+            child.modifyStyle({...})
         }
         ```
-        - `currCursorIndex`, `prevCursorIndex` : Character index of current/previous cursor position.
-        
+        - `child` : [character child](dynamictext.md#character)
+    - `onCursorIn` : Callback invoked when cursor move on a character child
+        ```javascript
+        function(child, index, canvasInput) {
+            child.modifyStyle({...})
+        }
+        ```
+        - `child` : [character child](dynamictext.md#character)
 
 ### Custom class
 
@@ -290,15 +281,24 @@ var isOpened = txt.isOpened;
 - On character child adding
     ```javascript
     txt.on('addChar', function(child, index, canvasInput) {
-
+        child.modifyStyle({...})
     })
     ```
-- On cursor moving
+    - `child` : [character child](dynamictext.md#character)
+- On cursor moving out of a character child
     ```javascript
-    txt.on('movecursor', function(currCursorIndex, prevCursorIndex, canvasInput) {
-
+    txt.on('cursorout', function(child, index, canvasInput) {
+        child.modifyStyle({...})
     })
     ```
+    - `child` : [character child](dynamictext.md#character)
+- On cursor moving on a character child
+    ```javascript
+    txt.on('cursorout', function(child, index, canvasInput) {
+        child.modifyStyle({...})
+    })
+    ```
+    - `child` : [character child](dynamictext.md#character)
 - On open text-editor
     ```javascript
     txt.on('open', function() {

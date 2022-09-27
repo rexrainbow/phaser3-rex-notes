@@ -8806,19 +8806,17 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
     <span class="c1">//    child.modifyStyle({...})</span>
     <span class="c1">// },</span>
 
-    <span class="c1">// onMoveCursor: function(currCursorIndex, prevCursorIndex, canvasInput) {</span>
-    <span class="c1">//    if (currCursorIndex != null) {</span>
-    <span class="c1">//        textObject.getCharChild(currCursorIndex)</span>
-    <span class="c1">//            .modifyStyle({                  </span>
-    <span class="c1">//            })</span>
-    <span class="c1">//    }</span>
-    <span class="c1">//    if (prevCursorIndex != null) {</span>
-    <span class="c1">//        textObject.getCharChild(prevCursorIndex)</span>
-    <span class="c1">//            .modifyStyle({                  </span>
-    <span class="c1">//            })            </span>
-    <span class="c1">//    }</span>
+    <span class="c1">// onCursorOut: function(child, cursorIndex, canvasInput) {</span>
+    <span class="c1">//     child.modifyStyle({</span>
+    <span class="c1">//         </span>
+    <span class="c1">//     });</span>
     <span class="c1">// },</span>
 
+    <span class="c1">// onCursorIn: function(child, cursorIndex, canvasInput) {</span>
+    <span class="c1">//     child.modifyStyle({</span>
+    <span class="c1">//         </span>
+    <span class="c1">//     });</span>
+    <span class="c1">// },</span>
 
 <span class="p">});</span>
 </code></pre></div>
@@ -8855,31 +8853,26 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </li>
 <li><code>onAddChar</code> : Callback invoked when adding new <a href="../dynamictext/#character">character child</a>
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//    child.modifyStyle({...})</span>
+    <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li><code>child</code> : <a href="../dynamictext/#character">character child</a>        </li>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
 </ul>
 </li>
-<li><code>onMoveCursor</code> : Callback invoked when postion of cursor is changed
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">currCursorIndex</span><span class="p">,</span> <span class="nx">prevCursorIndex</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">currCursorIndex</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">textObject</span><span class="p">.</span><span class="nx">getCharChild</span><span class="p">(</span><span class="nx">currCursorIndex</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({</span>
-                <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-                <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span>
-            <span class="p">})</span>                
-    <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">prevCursorIndex</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">textObject</span><span class="p">.</span><span class="nx">getCharChild</span><span class="p">(</span><span class="nx">prevCursorIndex</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({</span>
-                <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
-                <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span>
-            <span class="p">})</span>                
-    <span class="p">}</span>
+<li><code>onCursorOut</code> : Callback invoked when cursor move out of a character child
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li><code>currCursorIndex</code>, <code>prevCursorIndex</code> : Character index of current/previous cursor position.</li>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+</ul>
+</li>
+<li><code>onCursorIn</code> : Callback invoked when cursor move on a character child
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
 </ul>
 </li>
 </ul>
@@ -8928,14 +8921,28 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <ul>
 <li>On character child adding
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addChar&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
-
+    <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
 <span class="p">})</span>
-</code></pre></div></li>
-<li>On cursor moving
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;movecursor&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currCursorIndex</span><span class="p">,</span> <span class="nx">prevCursorIndex</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
-
+</code></pre></div><ul>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+</ul>
+</li>
+<li>On cursor moving out of a character child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cursorout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
 <span class="p">})</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+</ul>
+</li>
+<li>On cursor moving on a character child
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cursorout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+</ul>
+</li>
 <li>On open text-editor
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
