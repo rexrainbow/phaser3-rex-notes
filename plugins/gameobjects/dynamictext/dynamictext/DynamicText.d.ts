@@ -142,6 +142,8 @@ declare class DynamicText extends Canvas {
 
     background: Background;
     innerBounds: InnerBounds;
+    children: DynamicText.BobBase[];
+    lastAppendedChildren: DynamicText.BobBase[];
 
     clearContent(): this;
 
