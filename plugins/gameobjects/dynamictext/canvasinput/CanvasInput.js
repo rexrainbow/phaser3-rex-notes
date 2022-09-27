@@ -32,7 +32,7 @@ class CanvasInput extends DynamicText {
 
         var addCharCallback = GetValue(config, 'onAddChar');
         if (addCharCallback) {
-            this.on('addChar', addCharCallback);
+            this.on('addchar', addCharCallback);
         }
 
         var cursorOutCallback = GetValue(config, 'onCursorOut');
@@ -65,12 +65,12 @@ class CanvasInput extends DynamicText {
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 var child = children[i];
                 if (IsChar(child)) {
-                    this.emit('addChar', child, index + i, this);
+                    this.emit('addchar', child, index + i, this);
                 }
             }
         } else {
             if (IsChar(child)) {
-                this.emit('addChar', child, index, this);
+                this.emit('addchar', child, index, this);
             }
         }
 

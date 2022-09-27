@@ -280,7 +280,7 @@ var isOpened = txt.isOpened;
 
 - On character child adding
     ```javascript
-    txt.on('addChar', function(child, index, canvasInput) {
+    txt.on('addchar', function(child, index, canvasInput) {
         child.modifyStyle({...})
     })
     ```
