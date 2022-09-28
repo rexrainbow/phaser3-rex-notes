@@ -635,6 +635,42 @@ sizer.setChildVisible(child, visible);
 sizer.setChildAlpha(child, alpha);
 ```
 
+### Depth
+
+- Get depth of container
+    ```javascript
+    var depth = container.depth;
+    ```
+- Set depth of container
+    ```javascript
+    container.setDepth(value, true);
+    // container.depth = depth;
+    ```
+- Set depth of container and all children
+    ```javascript
+    container.setDepth(value);
+    ```
+- Bring this container and its children to top
+    ```javascript
+    container.bringToTop();
+    ```
+- Swap depth with another container
+    ```javascript
+    containerA.swapDepth(containerB);
+    ```
+- Increase of container and all children
+    ```javascript
+    container.incDepth(value);
+    ```
+- Move game object below this container and all children
+    ```javascript
+    container.moveDepthBelow(gameObject);
+    ```
+- Move game object above this container and all children
+    ```javascript
+    container.moveDepthAbove(gameObject);
+    ```
+
 ### Destroy
 
 ```javascript

@@ -7151,6 +7151,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#depth_1" class="md-nav__link">
+    Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -8808,6 +8815,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#depth_1" class="md-nav__link">
+    Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -9618,6 +9632,34 @@
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildVisible</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setChildAlpha</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </code></pre></div>
+<h3 id="depth_1">Depth<a class="headerlink" href="#depth_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get depth of container
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">depth</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">depth</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set depth of container
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="c1">// container.depth = depth;</span>
+</code></pre></div></li>
+<li>Set depth of container and all children
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Bring this container and its children to top
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Swap depth with another container
+    <div class="highlight"><pre><span></span><code><span class="nx">containerA</span><span class="p">.</span><span class="nx">swapDepth</span><span class="p">(</span><span class="nx">containerB</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Increase of container and all children
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">incDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move game object below this container and all children
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveDepthBelow</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Move game object above this container and all children
+    <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveDepthAbove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
