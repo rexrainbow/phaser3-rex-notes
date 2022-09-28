@@ -531,6 +531,10 @@ var timelineObj = container.timelineChild({
     ```javascript
     container.setDepth(value);
     ```
+- Bring this container and its children to top
+    ```javascript
+    container.bringToTop();
+    ```
 - Swap depth with another container
     ```javascript
     containerA.swapDepth(containerB);

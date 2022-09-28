@@ -260,6 +260,8 @@ declare class ContainerLite extends Base {
         inc: number
     ): this;
 
+    bringToTop(): this;
+
     moveDepthBelow(
         gameObject: Phaser.GameObjects.GameObject
     ): this;

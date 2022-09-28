@@ -31,6 +31,19 @@ export default {
         return this;
     },
 
+    bringToTop() {
+        var displayList = this.displayList;
+        var children = this.getAllChildren([this]);
+        SortGameObjectsByDepth(children, false);
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            var child = children[i];
+            if (displayList.exists(child)) {
+                displayList.bringToTop(child);
+            }
+        }
+        return this;
+    },
+
     moveDepthBelow(gameObject) {
         var displayList = this.displayList;
         if (gameObject.displayList !== displayList) {
@@ -39,7 +52,7 @@ export default {
         }
 
         var children = this.getAllChildren([this]);
-        SortGameObjectsByDepth(children);
+        SortGameObjectsByDepth(children, false);
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             var child = children[i];
             if (displayList.exists(child)) {
@@ -68,4 +81,5 @@ export default {
         }
         return this;
     },
+
 };

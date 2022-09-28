@@ -13825,7 +13825,7 @@
       }
 
       var children = this.getAllChildren([this]);
-      SortGameObjectsByDepth(children);
+      SortGameObjectsByDepth(children, false);
 
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
@@ -13855,6 +13855,21 @@
         if (displayList.exists(child)) {
           displayList.moveAbove(gameObject, child);
           break;
+        }
+      }
+
+      return this;
+    },
+    bringToTop: function bringToTop() {
+      var displayList = this.displayList;
+      var children = this.getAllChildren([this]);
+      SortGameObjectsByDepth(children, false);
+
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+
+        if (displayList.exists(child)) {
+          displayList.bringToTop(child);
         }
       }
 
