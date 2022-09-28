@@ -7,7 +7,7 @@ export default {
         }
 
         var layer = this.scene.add.layer();
-        layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
+        // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
 
         this.moveDepthBelow(layer);
 

@@ -4941,6 +4941,23 @@
         this._cornerIteration = value;
       }
     }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetValue$a(o, 'color2', null), GetValue$a(o, 'horizontalGradient', true));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetValue$a(o, 'strokeThickness', 2));
+        }
+
+        if (o.hasOwnProperty('cornerRadius')) {
+          this.setCornerRadius(o.cornerRadius, GetValue$a(o, 'cornerIteration', null));
+        }
+      }
+    }, {
       key: "setCornerRadius",
       value: function setCornerRadius(radius, iteration) {
         this.cornerRadius = radius;
@@ -4969,7 +4986,7 @@
 
       _classCallCheck(this, InnerBounds);
 
-      _this = _super.call(this, parent, 'background');
+      _this = _super.call(this, parent, 'innerbounds');
 
       _this.setColor(GetValue$9(config, 'color', null), GetValue$9(config, 'color2', null), GetValue$9(config, 'horizontalGradient', true));
 
@@ -5050,6 +5067,19 @@
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        _get(_getPrototypeOf(InnerBounds.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetValue$9(o, 'color2', null), GetValue$9(o, 'horizontalGradient', true));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetValue$9(o, 'strokeThickness', 2));
+        }
       }
     }, {
       key: "renderContent",

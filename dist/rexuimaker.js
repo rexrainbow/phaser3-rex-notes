@@ -12551,13 +12551,9 @@
         return this;
       }
 
-      var layer = this.scene.add.layer();
-      this.moveDepthBelow(layer);
-      this.once('destroy', function () {
-        layer.list.length = 0; // Remove all children without trigger callback
+      var layer = this.scene.add.layer(); // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
 
-        layer.destroy();
-      });
+      this.moveDepthBelow(layer);
       this.addToLayer(layer);
       this.layer = layer;
       return this;
@@ -13085,6 +13081,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
+      _this.layer = undefined;
 
       if (children) {
         _this.add(children);
@@ -13104,6 +13101,12 @@
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
 
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
+
+        if (this.layer) {
+          this.layer.list.length = 0; // Remove all children without trigger callback
+
+          this.layer.destroy();
+        }
       }
     }, {
       key: "resize",

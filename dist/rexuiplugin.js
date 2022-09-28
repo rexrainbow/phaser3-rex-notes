@@ -10014,13 +10014,9 @@
         return this;
       }
 
-      var layer = this.scene.add.layer();
-      this.moveDepthBelow(layer);
-      this.once('destroy', function () {
-        layer.list.length = 0; // Remove all children without trigger callback
+      var layer = this.scene.add.layer(); // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
 
-        layer.destroy();
-      });
+      this.moveDepthBelow(layer);
       this.addToLayer(layer);
       this.layer = layer;
       return this;
@@ -10548,6 +10544,7 @@
       _this._mask = null;
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
+      _this.layer = undefined;
 
       if (children) {
         _this.add(children);
@@ -10567,6 +10564,12 @@
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
 
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
+
+        if (this.layer) {
+          this.layer.list.length = 0; // Remove all children without trigger callback
+
+          this.layer.destroy();
+        }
       }
     }, {
       key: "resize",
@@ -11840,6 +11843,23 @@
         this._cornerIteration = value;
       }
     }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetValue$22(o, 'color2', null), GetValue$22(o, 'horizontalGradient', true));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetValue$22(o, 'strokeThickness', 2));
+        }
+
+        if (o.hasOwnProperty('cornerRadius')) {
+          this.setCornerRadius(o.cornerRadius, GetValue$22(o, 'cornerIteration', null));
+        }
+      }
+    }, {
       key: "setCornerRadius",
       value: function setCornerRadius(radius, iteration) {
         this.cornerRadius = radius;
@@ -11868,7 +11888,7 @@
 
       _classCallCheck(this, InnerBounds);
 
-      _this = _super.call(this, parent, 'background');
+      _this = _super.call(this, parent, 'innerbounds');
 
       _this.setColor(GetValue$21(config, 'color', null), GetValue$21(config, 'color2', null), GetValue$21(config, 'horizontalGradient', true));
 
@@ -11949,6 +11969,19 @@
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        _get(_getPrototypeOf(InnerBounds.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetValue$21(o, 'color2', null), GetValue$21(o, 'horizontalGradient', true));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetValue$21(o, 'strokeThickness', 2));
+        }
       }
     }, {
       key: "renderContent",
@@ -20802,7 +20835,7 @@
       var addCharCallback = GetValue$1J(config, 'onAddChar');
 
       if (addCharCallback) {
-        _this.on('addChar', addCharCallback);
+        _this.on('addchar', addCharCallback);
       }
 
       var cursorOutCallback = GetValue$1J(config, 'onCursorOut');
@@ -20847,12 +20880,12 @@
             var child = children[i];
 
             if (IsChar(child)) {
-              this.emit('addChar', child, index + i, this);
+              this.emit('addchar', child, index + i, this);
             }
           }
         } else {
           if (IsChar(child)) {
-            this.emit('addChar', child, index, this);
+            this.emit('addchar', child, index, this);
           }
         }
 

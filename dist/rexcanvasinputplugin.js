@@ -1948,6 +1948,23 @@
         this._cornerIteration = value;
       }
     }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetValue$b(o, 'color2', null), GetValue$b(o, 'horizontalGradient', true));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetValue$b(o, 'strokeThickness', 2));
+        }
+
+        if (o.hasOwnProperty('cornerRadius')) {
+          this.setCornerRadius(o.cornerRadius, GetValue$b(o, 'cornerIteration', null));
+        }
+      }
+    }, {
       key: "setCornerRadius",
       value: function setCornerRadius(radius, iteration) {
         this.cornerRadius = radius;
@@ -1976,7 +1993,7 @@
 
       _classCallCheck(this, InnerBounds);
 
-      _this = _super.call(this, parent, 'background');
+      _this = _super.call(this, parent, 'innerbounds');
 
       _this.setColor(GetValue$a(config, 'color', null), GetValue$a(config, 'color2', null), GetValue$a(config, 'horizontalGradient', true));
 
@@ -2057,6 +2074,19 @@
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
+      }
+    }, {
+      key: "modifyPorperties",
+      value: function modifyPorperties(o) {
+        _get(_getPrototypeOf(InnerBounds.prototype), "modifyPorperties", this).call(this, o);
+
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetValue$a(o, 'color2', null), GetValue$a(o, 'horizontalGradient', true));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetValue$a(o, 'strokeThickness', 2));
+        }
       }
     }, {
       key: "renderContent",
@@ -6278,7 +6308,7 @@
       var addCharCallback = GetValue(config, 'onAddChar');
 
       if (addCharCallback) {
-        _this.on('addChar', addCharCallback);
+        _this.on('addchar', addCharCallback);
       }
 
       var cursorOutCallback = GetValue(config, 'onCursorOut');
@@ -6323,12 +6353,12 @@
             var child = children[i];
 
             if (IsChar(child)) {
-              this.emit('addChar', child, index + i, this);
+              this.emit('addchar', child, index + i, this);
             }
           }
         } else {
           if (IsChar(child)) {
-            this.emit('addChar', child, index, this);
+            this.emit('addchar', child, index, this);
           }
         }
 
