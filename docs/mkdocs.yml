@@ -116,7 +116,9 @@ nav:
             - Skew: containerlite-skew.md
         - Grid table: gridtable.md
     - Zone: zone.md
-    - Layer: layer.md
+    - Layer:
+        - Layer: layer.md
+        - Layer manager: layermanager.md
     - Live2d: live2d.md
     - Light:
         - Light: light.md

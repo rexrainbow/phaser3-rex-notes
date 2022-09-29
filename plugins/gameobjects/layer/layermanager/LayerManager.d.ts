@@ -16,7 +16,9 @@ declare class LayerManager extends GOManager {
         config?: LayerManager.IConfig
     )
 
-    getLayer(name: string): this;
+    getLayer(name: string): Phaser.GameObjects.Layer;
+
+    getLayers(out?: Phaser.GameObjects.GameObject[]): Phaser.GameObjects.Layer[];
 
     addToLayer(
         name: string,

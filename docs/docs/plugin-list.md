@@ -85,6 +85,7 @@
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [In touching](intouching.md): Fires 'intouch' event every tick when pressing on a game object.
+1. [Layer manager](layermanager.md): A container of Layer game objects.
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [Line](line.md): Draw a line with start/end/body textures.
 1. [Live2d](live2d.md): Display [live2d](https://www.live2d.com/en/) model.

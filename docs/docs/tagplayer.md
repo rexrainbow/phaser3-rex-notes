@@ -333,7 +333,7 @@ tagPlayer.resume();
 ```
 
 
-#### Time scale
+### Time scale
 
 Time scale of typing, typing animation, sprite animation and easing of sprite's properties.
 
@@ -349,7 +349,7 @@ Time scale of typing, typing animation, sprite animation and easing of sprite's 
     tagPlayer.timeScale = timeScale;
     ```
 
-#### Events
+### Events
 
 - On typing content complete
     ```javascript

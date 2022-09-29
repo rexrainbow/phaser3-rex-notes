@@ -1,4 +1,5 @@
 import GOManager from '../../../utils/gameobject/gomanager/GOManager.js';
+import SortGameObjectsByDepth from '../../../utils/system/SortGameObjectsByDepth.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -32,8 +33,28 @@ class LayerManager extends GOManager {
         return this;
     }
 
+    // Override
+    addGO(name, gameObject) {
+        super.addGO(name, gameObject);
+        gameObject.name = name;
+
+        return this;
+    }
+
+    // New methods
     getLayer(name) {
         return this.getGO(name);
+    }
+
+    getLayers(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        this.forEachGO(function (gameObject) {
+            out.push(gameObject);
+        })
+        SortGameObjectsByDepth(out, false);
+        return out;
     }
 
     addToLayer(name, gameObject) {
