@@ -1,4 +1,4 @@
-import GOManager from '../../gameobject/gomanager/GOManager.js';
+import GOManager from '../../../utils/gameobject/gomanager/GOManager.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

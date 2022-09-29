@@ -29,6 +29,7 @@ module.exports = {
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     'coverplugin': './plugins/cover-plugin.js',
     'live2dplugin': ['./plugins/live2d-plugin.js', true],
+    'layermanagerplugin': './plugins/layermanager-plugin.js',
     // texture
     'canvasframemanagerplugin': './plugins/canvasframemanager-plugin.js',
     'charactercacheplugin': './plugins/charactercache-plugin.js',

@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import LayerManager from '../../plugins/utils/layer/layermanager/LayerManager.js';
+import LayerManagerPlugin from '../../plugins/layermanager-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.layers = new LayerManager(this, {
+        this.layers = this.plugins.get('rexLayerManager').add(this, {
             layers: [
                 'layer0',
                 'layer1'
@@ -36,7 +36,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexLayerManager',
+            plugin: LayerManagerPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
