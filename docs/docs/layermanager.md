@@ -74,6 +74,14 @@ var layerManager = scene.plugins.get('rexLayerManager').add(scene, {
 });
 ```
 
+or
+
+```javascript
+var layerManager = scene.plugins.get('rexLayerManager').add(scene, 
+    ['layer0', 'layer1', ...]
+);
+```
+
 - `layers` : Add layers by name string array.
 
 ### Destroy

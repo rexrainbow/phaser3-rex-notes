@@ -15,6 +15,10 @@ declare class LayerManager extends GOManager {
         scene: Phaser.Scene,
         config?: LayerManager.IConfig
     )
+    constructor(
+        scene: Phaser.Scene,
+        config?: string[]
+    )
 
     getLayer(name: string): Phaser.GameObjects.Layer;
 

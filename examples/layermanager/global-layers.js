@@ -12,12 +12,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.layers = this.plugins.get('rexLayerManager').add(this, {
-            layers: [
-                'layer0',
-                'layer1'
-            ]
-        });
+        this.layers = this.plugins.get('rexLayerManager').add(this, [
+            'layer0', 'layer1'
+        ]);
 
         var gameObject = this.add.circle(400, 300, 20, 0xff0000);
         this.layers.addToLayer('layer1', gameObject);

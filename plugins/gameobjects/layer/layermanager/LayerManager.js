@@ -7,6 +7,10 @@ class LayerManager extends GOManager {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
+        } else if (Array.isArray(config)) {
+            config = {
+                layers: config
+            }
         }
 
         if (!config.hasOwnProperty('fade')) {
