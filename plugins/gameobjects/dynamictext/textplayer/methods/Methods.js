@@ -9,7 +9,6 @@ import PauseMethods from './PauseMethods.js';
 import ResumeMethods from './ResumeMethods.js';
 import Wait from './Wait.js';
 import TypingSpeedMethods from './TypingSpeedMethods.js';
-import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import SetIgnoreNextPageInput from './SetIgnoreNextPageInput.js';
 import ShowPage from './ShowPage.js';
@@ -23,7 +22,6 @@ var Methods = {
     addImage: AddImage,
     typingNextPage: TypingNextPage,
     wait: Wait,
-    setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage,

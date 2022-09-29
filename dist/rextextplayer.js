@@ -1993,26 +1993,6 @@
     return this;
   };
 
-  var DestroyManagers = function DestroyManagers(fromScene) {
-    if (this.soundManager) {
-      this.soundManager.destroy(fromScene);
-    }
-
-    this.soundManager = undefined;
-
-    for (var name in this.gameObjectManagers) {
-      this.gameObjectManagers[name].destroy(fromScene);
-      delete this.gameObjectManagers[name];
-    }
-
-    if (this.timeline) {
-      this.timeline.destroy();
-    }
-
-    this.timeline = undefined;
-    this.managersScene = undefined;
-  };
-
   var PropertyMethods$1 = {
     hasProperty: function hasProperty(property) {
       var gameObject = this.gameObject;
@@ -3085,24 +3065,74 @@
 
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods$5);
 
+  var AddGameObjectManager = function AddGameObjectManager(config, GameObjectManagerClass) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (GameObjectManagerClass === undefined) {
+      GameObjectManagerClass = GOManager;
+    }
+
+    if (!config.createGameObjectScope) {
+      config.createGameObjectScope = this;
+    }
+
+    var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
+    this.gameObjectManagers[config.name] = gameobjectManager;
+    return this;
+  };
+
+  var GetGameObjectManager = function GetGameObjectManager(name) {
+    return this.gameObjectManagers[name];
+  };
+
+  var GetGameObjectManagerNames = function GetGameObjectManagerNames() {
+    var names = [];
+
+    for (var name in this.gameObjectManagers) {
+      names.push(name);
+    }
+
+    return names;
+  };
+
+  var SetTimeScale = function SetTimeScale(value) {
+    this.timeline.timeScale = value;
+
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].setTimeScale(value);
+    }
+
+    return this;
+  };
+
+  var GetTimeScale = function GetTimeScale() {
+    return this.timeline.timeScale;
+  };
+
+  var DestroyManagers = function DestroyManagers(fromScene) {
+    if (this.soundManager) {
+      this.soundManager.destroy(fromScene);
+    }
+
+    this.soundManager = undefined;
+
+    for (var name in this.gameObjectManagers) {
+      this.gameObjectManagers[name].destroy(fromScene);
+      delete this.gameObjectManagers[name];
+    }
+
+    if (this.timeline) {
+      this.timeline.destroy();
+    }
+
+    this.timeline = undefined;
+    this.managersScene = undefined;
+  };
+
   var GameObjectManagerMethods$1 = {
-    addGameObjectManager: function addGameObjectManager(config, GameObjectManagerClass) {
-      if (config === undefined) {
-        config = {};
-      }
-
-      if (GameObjectManagerClass === undefined) {
-        GameObjectManagerClass = GOManager;
-      }
-
-      if (!config.createGameObjectScope) {
-        config.createGameObjectScope = this;
-      }
-
-      var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-      this.gameObjectManagers[config.name] = gameobjectManager;
-      return this;
-    },
+    addGameObjectManager: AddGameObjectManager,
     getGameObjectManager: function getGameObjectManager(name) {
       return this.gameObjectManagers[name];
     },
@@ -3237,6 +3267,11 @@
 
     var Methods = {
       initManagers: InitManagers,
+      addGameObjectManager: AddGameObjectManager,
+      getGameObjectManager: GetGameObjectManager,
+      getGameObjectManagerNames: GetGameObjectManagerNames,
+      setTimeScale: SetTimeScale,
+      getTimeScale: GetTimeScale,
       destroyManagers: DestroyManagers
     };
     Object.assign(Managers.prototype, Methods, GameObjectManagerMethods$1, GameObjectMethods);
@@ -10465,13 +10500,7 @@
         console.warn("Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method");
       }
 
-      this.__proto__.__proto__.addGameObjectManager.call(this, config, GameObjectManagerClass); // super.addGameObjectManager(config, GameObjectManagerClass);
-
-
-      if (GameObjectManagerClass === undefined) {
-        GameObjectManagerClass = GOManager;
-      } // Register parse callbacks
-
+      AddGameObjectManager.call(this, config, GameObjectManagerClass); // Register parse callbacks
 
       var customParseCallbacks = config.parseCallbacks;
 
@@ -10637,11 +10666,6 @@
     }
   };
 
-  var SetTimeScale = function SetTimeScale(timeScale) {
-    this.timeScale = timeScale;
-    return this;
-  };
-
   var SetIgnoreWait = function SetIgnoreWait(value) {
     this.typeWriter.setIgnoreWait(value);
     return this;
@@ -10703,7 +10727,6 @@
     addImage: AddImage,
     typingNextPage: TypingNextPage,
     wait: Wait,
-    setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
@@ -10842,14 +10865,10 @@
     }, {
       key: "timeScale",
       get: function get() {
-        return this.timeline.timeScale;
+        return this.getTimeScale();
       },
       set: function set(value) {
-        this.timeline.timeScale = value;
-
-        if (this._spriteManager !== undefined) {
-          this._spriteManager.setTimeScale(value);
-        }
+        this.setTimeScale(value);
       }
     }]);
 

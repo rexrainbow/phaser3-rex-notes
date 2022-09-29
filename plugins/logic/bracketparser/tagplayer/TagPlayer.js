@@ -72,6 +72,15 @@ class TagPlayer extends Extend(EventEmitter) {
 
         this.scene = undefined;
     }
+
+    set timeScale(value) {
+        this.setTimeScale(value);
+    }
+
+    get timeScale() {
+        return this.getTimeScale();
+    }
+
 }
 
 Object.assign(

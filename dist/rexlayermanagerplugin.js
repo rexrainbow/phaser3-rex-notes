@@ -1306,6 +1306,32 @@
 
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods);
 
+  var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
+    if (gameObjects.length === 0) {
+      return gameObjects;
+    }
+
+    if (descending === undefined) {
+      descending = false;
+    }
+
+    var scene = gameObjects[0].scene;
+    var displayList = scene.sys.displayList;
+    displayList.depthSort();
+
+    if (descending) {
+      gameObjects.sort(function (childA, childB) {
+        return displayList.getIndex(childB) - displayList.getIndex(childA);
+      });
+    } else {
+      gameObjects.sort(function (childA, childB) {
+        return displayList.getIndex(childA) - displayList.getIndex(childB);
+      });
+    }
+
+    return gameObjects;
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
 
   var LayerManager = /*#__PURE__*/function (_GOManager) {
@@ -1320,6 +1346,10 @@
 
       if (config === undefined) {
         config = {};
+      } else if (Array.isArray(config)) {
+        config = {
+          layers: config
+        };
       }
 
       if (!config.hasOwnProperty('fade')) {
@@ -1349,11 +1379,34 @@
         _get(_getPrototypeOf(LayerManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
 
         return this;
-      }
+      } // Override
+
+    }, {
+      key: "addGO",
+      value: function addGO(name, gameObject) {
+        _get(_getPrototypeOf(LayerManager.prototype), "addGO", this).call(this, name, gameObject);
+
+        gameObject.name = name;
+        return this;
+      } // New methods
+
     }, {
       key: "getLayer",
       value: function getLayer(name) {
         return this.getGO(name);
+      }
+    }, {
+      key: "getLayers",
+      value: function getLayers(out) {
+        if (out === undefined) {
+          out = [];
+        }
+
+        this.forEachGO(function (gameObject) {
+          out.push(gameObject);
+        });
+        SortGameObjectsByDepth(out, false);
+        return out;
       }
     }, {
       key: "addToLayer",

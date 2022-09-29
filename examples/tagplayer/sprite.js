@@ -96,6 +96,7 @@ class Demo extends Phaser.Scene {
             }
         })
             .addSprite('extDude', extDude)
+            //.setTimeScale(10)
             .playPromise(content)
             .then(function () {
                 console.log('Complete')

@@ -118,12 +118,11 @@ class TextPlayer extends Extend(DynamicText) {
     }
 
     set timeScale(value) {
-        this.timeline.timeScale = value;
-        super.setTimeScale(value);
+        this.setTimeScale(value);
     }
 
     get timeScale() {
-        return this.timeline.timeScale;
+        return this.getTimeScale();
     }
 }
 

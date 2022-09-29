@@ -13816,6 +13816,21 @@
 
       return this;
     },
+    bringToTop: function bringToTop() {
+      var displayList = this.displayList;
+      var children = this.getAllChildren([this]);
+      SortGameObjectsByDepth(children, false);
+
+      for (var i = 0, cnt = children.length; i < cnt; i++) {
+        var child = children[i];
+
+        if (displayList.exists(child)) {
+          displayList.bringToTop(child);
+        }
+      }
+
+      return this;
+    },
     moveDepthBelow: function moveDepthBelow(gameObject) {
       var displayList = this.displayList;
 
@@ -13855,21 +13870,6 @@
         if (displayList.exists(child)) {
           displayList.moveAbove(gameObject, child);
           break;
-        }
-      }
-
-      return this;
-    },
-    bringToTop: function bringToTop() {
-      var displayList = this.displayList;
-      var children = this.getAllChildren([this]);
-      SortGameObjectsByDepth(children, false);
-
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        var child = children[i];
-
-        if (displayList.exists(child)) {
-          displayList.bringToTop(child);
         }
       }
 
