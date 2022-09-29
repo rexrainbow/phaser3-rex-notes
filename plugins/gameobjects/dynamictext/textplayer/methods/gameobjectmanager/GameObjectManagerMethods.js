@@ -1,4 +1,4 @@
-import GameObjectManagerBase from '../../../../../utils/gameobject/gomanager/GOManager.js';
+import AddGameObjectManager from '../../../../../utils/managers/AddGameObjectManager.js';
 import OnParseAddGameObjectTag from './OnParseAddGameObjectTag.js';
 import OnParseRemoveAllGameObjectsTag from './OnParseRemoveAllGameObjectsTag.js';
 import OnParseCallGameObjectMethodTag from './OnParseCallGameObjectMethodTag.js';
@@ -20,12 +20,7 @@ export default {
             console.warn(`Parameter 'name' is required in TextPlayer.addGameObjectManager(config) method`);
         }
 
-        this.__proto__.__proto__.addGameObjectManager.call(this, config, GameObjectManagerClass);
-        // super.addGameObjectManager(config, GameObjectManagerClass);
-
-        if (GameObjectManagerClass === undefined) {
-            GameObjectManagerClass = GameObjectManagerBase;
-        }
+        AddGameObjectManager.call(this, config, GameObjectManagerClass);
 
         // Register parse callbacks
         var customParseCallbacks = config.parseCallbacks;

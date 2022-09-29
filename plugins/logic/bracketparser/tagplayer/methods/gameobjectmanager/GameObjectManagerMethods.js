@@ -1,3 +1,4 @@
+import AddGameObjectManager from '../../../../../utils/managers/AddGameObjectManager.js';
 import OnParseAddGameObjectTag from './OnParseAddGameObjectTag.js';
 import OnParseRemoveAllGameObjectsTag from './OnParseRemoveAllGameObjectsTag.js';
 import OnParseCallGameObjectMethodTag from './OnParseCallGameObjectMethodTag.js';
@@ -19,8 +20,7 @@ export default {
             console.warn(`Parameter 'name' is required in TagPlayer.addGameObjectManager(config) method`);
         }
 
-        this.__proto__.__proto__.addGameObjectManager.call(this, config, GameObjectManagerClass);
-        // super.addGameObjectManager(config, GameObjectManagerClass);
+        AddGameObjectManager.call(this, config, GameObjectManagerClass);
 
         // Register parse callbacks
         var customParseCallbacks = config.parseCallbacks;

@@ -1,28 +1,13 @@
-import GameObjectManagerBase from '../gameobject/gomanager/GOManager.js';
+import AddGameObjectManager from './AddGameObjectManager.js';
 
 export default {
-    addGameObjectManager(config, GameObjectManagerClass) {
-        if (config === undefined) {
-            config = {};
-        }
-        if (GameObjectManagerClass === undefined) {
-            GameObjectManagerClass = GameObjectManagerBase;
-        }
+    addGameObjectManager: AddGameObjectManager,
 
-        if (!config.createGameObjectScope) {
-            config.createGameObjectScope = this;
-        }
-        var gameobjectManager = new GameObjectManagerClass(this.managersScene, config);
-        this.gameObjectManagers[config.name] = gameobjectManager;
-
-        return this;
-    },
-
-    getGameObjectManager(name) {
+    getGameObjectManager: function (name) {
         return this.gameObjectManagers[name];
     },
 
-    getGameObjectManagerNames() {
+    getGameObjectManagerNames: function () {
         var names = [];
         for (var name in this.gameObjectManagers) {
             names.push(name);
