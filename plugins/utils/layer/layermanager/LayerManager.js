@@ -1,5 +1,7 @@
 import GOManager from '../../gameobject/gomanager/GOManager.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class LayerManager extends GOManager {
     constructor(scene, config) {
         if (config === undefined) {
@@ -10,7 +12,16 @@ class LayerManager extends GOManager {
             config.fade = 0;
         }
 
+        config.viewportCoordinate = false;
+
         super(scene, config);
+
+        var initLayers = GetValue(config, 'layers');
+        if (initLayers) {
+            for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
+                this.add(initLayers[i]);
+            }
+        }
     }
 
     setCreateGameObjectCallback(callback, scope) {
