@@ -30,6 +30,7 @@ import OverlapSizer from './overlapsizer/OverlapSizer.js';
 
 import Space from './space/Space.js';
 import Label from './label/Label.js';
+import TitleLabel from './titlelabel/TitleLabel.js';
 import Buttons from './buttons/Buttons.js';
 import GridButtons from './gridbuttons/GridButtons.js';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons.js';
@@ -127,6 +128,7 @@ export {
 
     Space,
     Label,
+    TitleLabel,
     Buttons,
     GridButtons,
     FixWidthButtons,

@@ -67,6 +67,7 @@ import TextEditFactory from './textedit/Factory';
 import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
+import TitleLabelFactory from './titlelabel/Factory';
 
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import Edit from './textedit/Edit';
@@ -155,6 +156,7 @@ declare class Factories {
     textPlayer: typeof TextPlayerFactory;
     toast: typeof ToastFactory;
     touchEventStop: typeof TouchEventStopFactory;
+    twoRowsLabel: typeof TitleLabelFactory;
 }
 
 declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
@@ -270,6 +272,7 @@ import TextBoxClass from './textbox/TextBox';
 import TextPlayerClass from './textplayer/TextPlayer';
 import ToastClass from './toast/Toast';
 import TouchEventStopClass from './toucheventstop/TouchEventStop';
+import TitleLabellClass from './titlelabel/TitleLabel';
 
 declare namespace UIPlugins {
     type AlphaMaskImage = AlphaMaskImageClass;
@@ -337,4 +340,5 @@ declare namespace UIPlugins {
     type TextPlayer = TextPlayerClass;
     type Toast = ToastClass;
     type TouchEventStop = TouchEventStopClass;
+    type TitleLabel = TitleLabellClass;
 }

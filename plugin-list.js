@@ -237,6 +237,7 @@ module.exports = {
     'gridsizer': './templates/ui/gridsizer/GridSizer.js',
     'gridtable': './templates/ui/gridtable/GridTable.js',
     'label': './templates/ui/label/Label.js',
+    'titlelabel': './templates/ui/titlelabel/TitleLabel.js',
     'menu': './templates/ui/menu/Menu.js',
     'dropdownlist': './templates/ui/dropdownlist/DropDownList.js',
     'ninepatch': './templates/ui/ninepatch/NinePatch.js',
