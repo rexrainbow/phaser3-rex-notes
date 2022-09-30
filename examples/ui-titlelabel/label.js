@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var label = this.rexUI.add.titleLabel({
+        var label0 = this.rexUI.add.titleLabel({
             x: 400, y: 200,
             width: 200, height: 40,
 
@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
             .layout();
 
 
-        var label = this.rexUI.add.titleLabel({
+        var label1 = this.rexUI.add.titleLabel({
             x: 400, y: 400,
             width: 400, height: 40,
 
