@@ -9,9 +9,9 @@ declare namespace TitleLabel {
         space?: {
             left?: number, right?: number, top?: number, bottom?: number,
 
-            icon?: number,
+            icon?: number, iconTop?: number, iconBottom?: number, iconLeft?: number, iconRight?: number,
             text?: number,
-            separator?: number,
+            separator?: number, separatorLeft?: number, separatorRight?: number,
         },
 
         background?: Phaser.GameObjects.GameObject,
@@ -31,6 +31,12 @@ declare namespace TitleLabel {
             text?: 'left' | 'right' | 'center' | number,
             title?: 'left' | 'right' | 'center' | number,
         },
+
+        proportion?: {
+            title?: number,
+            separator?: number,
+            text?: number,
+        }
     }
 }
 

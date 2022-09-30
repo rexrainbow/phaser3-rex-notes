@@ -1,4 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
+import BuildHorizontalTextSizer from './methods/BuildHorizontalTextSizer.js';
+import BuildVerticalTextSizer from './methods/BuildVerticalTextSizer.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -18,9 +20,6 @@ class TitleLabel extends Sizer {
         var text = GetValue(config, 'text', undefined);
         var action = GetValue(config, 'action', undefined);
         var actionMask = GetValue(config, 'actionMask', undefined);
-        // Space
-        var iconSpace = GetValue(config, 'space.icon', 0);
-        var textSpace = GetValue(config, 'space.text', 0);
 
         if (background) {
             this.addBackground(background);
@@ -30,11 +29,19 @@ class TitleLabel extends Sizer {
             var padding;
             if (this.orientation === 0) {
                 if (text || action) {
-                    padding = { right: iconSpace };
+                    padding = {
+                        right: GetValue(config, 'space.icon', 0),
+                        top: GetValue(config, 'space.iconTop', 0),
+                        bottom: GetValue(config, 'space.iconBottom', 0),
+                    };
                 }
             } else {
                 if (text || action) {
-                    padding = { bottom: iconSpace };
+                    padding = {
+                        bottom: GetValue(config, 'space.icon', 0),
+                        left: GetValue(config, 'space.iconLeft', 0),
+                        right: GetValue(config, 'space.iconRight', 0),
+                    };
                 }
             }
 
@@ -53,79 +60,19 @@ class TitleLabel extends Sizer {
             var textSizer = new Sizer(scene, {
                 orientation: textOrientation,
             })
-            textOrientation = textSizer.orientation;
 
-            var separatorSpace = GetValue(config, 'space.separator', 0);
-
-            if (textOrientation === 1) {  // Title, text in vertical layout
-                if (title) {
-                    var titleAlign = GetValue(config, 'align.title', 'right');
-                    textSizer.add(
-                        title,
-                        { align: titleAlign }
-                    );
-                }
-
-                if (separator) {
-                    var padding = {
-                        top: (title) ? separatorSpace : 0,
-                        bottom: (text) ? separatorSpace : 0
-                    };
-                    textSizer.add(
-                        separator,
-                        { expand: true, padding: padding }
-                    );
-                }
-
-
-                if (text) {
-                    var textAlign = GetValue(config, 'align.text', 'right');
-                    textSizer.add(
-                        text,
-                        { align: textAlign }
-                    );
-                }
-
+            if (textSizer.orientation === 1) {  // Title, text in vertical layout
+                BuildHorizontalTextSizer(textSizer, config);
 
             } else {  // Title, text in horizontal layout
-                if (title) {
-                    var titleAlign = GetValue(config, 'align.title', 'left');
-                    textSizer.add(
-                        title,
-                        { align: titleAlign }
-                    );
-                }
-
-                if (separator) {
-                    var padding = {
-                        left: (title) ? separatorSpace : 0,
-                        right: (text) ? separatorSpace : 0
-                    };
-                    textSizer.add(
-                        separator,
-                        { proportion: 1, padding: padding }
-                    );
-                }
-
-                if (text) {
-                    var textAlign = GetValue(config, 'align.text', 'right');
-
-                    // Special case : title aligns to left, text aligns to right, wo separator
-                    if (!separator && title && (titleAlign === 'left') && (textAlign === 'right')) {
-                        textSizer.addSpace();
-                    }
-
-                    textSizer.add(
-                        text,
-                        { align: textAlign }
-                    );
-                }
-
+                BuildVerticalTextSizer(textSizer, config);
             }
 
             var padding;
             if (action) {
-                padding = { right: textSpace };
+                padding = {
+                    right: GetValue(config, 'space.text', 0)
+                };
             }
             this.add(
                 textSizer,
@@ -134,7 +81,23 @@ class TitleLabel extends Sizer {
         }
 
         if (action) {
-            this.add(action);
+            var padding;
+            if (this.orientation === 0) {
+                padding = {
+                    top: GetValue(config, 'space.actionTop', 0),
+                    bottom: GetValue(config, 'space.actionBottom', 0),
+                };
+            } else {
+                padding = {
+                    left: GetValue(config, 'space.actionLeft', 0),
+                    right: GetValue(config, 'space.actionRight', 0),
+                };
+            }
+
+            this.add(
+                action,
+                { proportion: 0, padding: padding, }
+            );
 
             if (actionMask) {
                 actionMask = AddChildMask.call(this, action, action, 1); // Circle mask

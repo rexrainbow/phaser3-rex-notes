@@ -21,11 +21,12 @@ class Demo extends Phaser.Scene {
             width: 200, height: 40,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-            icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 
             title: this.add.text(0, 0, "Title"),
             separator: this.add.rectangle(0, 0, 50, 4, COLOR_DARK),
             text: this.add.text(0, 0, "Text"),
+
+            icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 
             align: {
                 // title: 'left',
@@ -34,7 +35,8 @@ class Demo extends Phaser.Scene {
 
             space: {
                 left: 20, right: 20, top: 20, bottom: 20,
-                icon: 10, separator: 2,
+                icon: 10,
+                separator: 2, separatorLeft: -60, separatorRight: -10,
             }
 
         })
