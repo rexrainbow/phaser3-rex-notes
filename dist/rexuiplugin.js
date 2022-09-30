@@ -16300,7 +16300,11 @@
         var tweenTasks = this.tweens;
 
         for (var key in tweenTasks) {
-          tweenTasks[key].timeScale = timeScale;
+          var tweenTask = tweenTasks[key];
+
+          if (tweenTask) {
+            tweenTask.timeScale = timeScale;
+          }
         }
 
         return this;
