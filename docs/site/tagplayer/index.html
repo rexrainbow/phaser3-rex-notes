@@ -9240,6 +9240,9 @@
 <li>Pause until event
     <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">pauseUntilEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Is paused (not playing)
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="o">!</span><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <p>Invoke this method during tag-start,tag-end, or content events to suspend parsing.</p>
 <h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>

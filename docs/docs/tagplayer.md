@@ -323,6 +323,10 @@ tagPlayer.playPromise(commands)
     ```javascript
     tagPlayer.pauseUntilEvent(eventEmitter, eventName);
     ```
+- Is paused (not playing)
+    ```javascript
+    var isPaused = !tagPlayer.isPlaying;
+    ```
 
 Invoke this method during tag-start,tag-end, or content events to suspend parsing.
 
