@@ -38,7 +38,7 @@
         "browser-sync-webpack-plugin": "^2.3.0",
         "chart.js": "^2.9.4",
         "clean-webpack-plugin": "^0.1.19",
-        "copy-webpack-plugin": "^4.6.0",
+        "copy-webpack-plugin": "^11.0.0",
         "eslint": "^5.16.0",
         "eslint-plugin-import": "^2.26.0",
         "expose-loader": "^0.7.5",
