@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
 
             title: this.add.text(0, 0, "Title"),
-            separator: this.add.rectangle(0, 0, 50, 4, COLOR_DARK),
+            separator: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_DARK),
             text: this.add.text(0, 0, "Text"),
 
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
@@ -42,6 +42,41 @@ class Demo extends Phaser.Scene {
         })
             .layout();
 
+
+        var label1 = this.rexUI.add.titleLabel({
+            x: 400, y: 400,
+            width: 200, height: 40,
+
+            title: this.add.text(0, 0, "TitleTitle").setOrigin(1, 1),
+            separator: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_LIGHT).setOrigin(0, 0.5),
+            text: this.add.text(0, 0, "TextText").setOrigin(1, 0),
+
+            icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
+
+            align: {
+                // title: 'left',
+                // text: 'left'
+            },
+
+            space: {
+                separator: 2,
+            }
+
+        })
+            .layout();
+
+        this.tweens.add({
+            targets: label1.getElement('separator'),
+            scaleX: { start: 0, to: 1 },
+            duration: 500
+        })
+
+        this.tweens.add({
+            targets: [label1.getElement('title'), label1.getElement('text')],
+            scaleY: { start: 0, to: 1 },
+            duration: 500,
+            delay: 500,
+        })
     }
 
     update() {

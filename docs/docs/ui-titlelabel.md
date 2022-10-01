@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with an icon, title, text, and background.
+A container with title, text in two rows, and an icon, background.
 
 - Author: Rex
 - Game object
@@ -92,13 +92,11 @@ var label = scene.rexUI.add.titleLabel({
     separator: separatorGameObject,
     text: textGameObject,
 
-    expandTextWidth: false,
-    expandTextHeight: false,
     action: actionGameObject,
     actionMask: false,
 
     align: {
-        title: 'right', // or 'left'
+        title: 'right',
         text: 'right',
     },
 
@@ -108,7 +106,7 @@ var label = scene.rexUI.add.titleLabel({
         top: 0,
         bottom: 0,
 
-        icon: 0, iconTop: 0, iconBottom: 0, iconLeft: 0, iconRight: 0,
+        icon: 0, iconTop: 0, iconBottom: 0,
         text: 0,
     },
 
@@ -149,11 +147,11 @@ var label = scene.rexUI.add.titleLabel({
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
 - `align` : Alignment of title, text game objects.
     - `align.title` : `'left'`, or `'right'`. Default vale is `'right'`.
-    - `align.text` : `'left'`, or `'right'`.
-        - Default vale is `'right'`.
+    - `align.text` : `'left'`, or `'right'`. Default vale is `'right'`.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
+    - `space.iconTop`, `space.iconBottom` : Space around icon game object.
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
@@ -162,32 +160,11 @@ var label = scene.rexUI.add.titleLabel({
     - `false` : Add child game objects into scene's display list. Default behavior.
     - `true` : Add child game objects into an internal [layer game object](layer.md). [See also](containerlite.md#layer).
 
-#### Expand size of text
-
-Expand width/height of text when `expandTextWidth`/`expandTextHeight` is `true`
-
-To resize text object, text object should have `resize` method. For example
-
-```javascript
-class MyText extends Phaser.GameObjects.Text {
-    constructor(scene, x, y, text, style) {
-        super(scene, x, y, text, style);
-        scene.add.existing(this);
-    }
-    resize(width, height) {
-        this.setFixedSize(width, height);
-        return this;
-    }
-}
-```
-
-Or uses [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md)
-
 ### Custom class
 
 - Define class
     ```javascript
-    class MyLabel extends RexPlugins.UI.Label {
+    class MyTitleLabel extends RexPlugins.UI.TitleLabel {
         constructor(scene, config) {
             super(scene, config);
             // ...
@@ -198,7 +175,7 @@ Or uses [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md)
     ```
 - Create instance
     ```javascript
-    var label = new MyLabel(scene, config);
+    var label = new MyTitleLabel(scene, config);
     ```
 
 ### Layout children
