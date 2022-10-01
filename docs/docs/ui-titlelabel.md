@@ -1,20 +1,17 @@
 ## Introduction
 
-A container with an icon, text, and background.
+A container with an icon, title, text, and background.
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Align](https://codepen.io/rexrainbow/pen/WNvpoWw)
-- [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
-- [Text wrap in horizontal label](https://codepen.io/rexrainbow/pen/rNdyveo)
-- [Text wrap in vertical label](https://codepen.io/rexrainbow/pen/vYRymQq)
+- [Title-label](https://codepen.io/rexrainbow/pen/abGYYpO)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-label)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-titlelabel)
 
 ### Install plugin
 
@@ -26,7 +23,7 @@ A container with an icon, text, and background.
     ```
 - Add label object
     ```javascript
-    var label = scene.rexUI.add.label(config);
+    var label = scene.rexUI.add.titleLabel(config);
     ```
 
 #### Import plugin
@@ -55,7 +52,7 @@ A container with an icon, text, and background.
     ```
 - Add label object
     ```javascript
-    var label = scene.rexUI.add.label(config);
+    var label = scene.rexUI.add.titleLabel(config);
     ```
 
 #### Import class
@@ -66,18 +63,18 @@ A container with an icon, text, and background.
     ```
 - Import class
     ```javascript
-    import { Label } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { TitleLabel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add label object
     ```javascript    
-    var label = new Label(scene, config);
+    var label = new TitleLabel(scene, config);
     scene.add.existing(label);
     ```
 
 ### Add label object
 
 ```javascript
-var label = scene.rexUI.add.label({
+var label = scene.rexUI.add.titleLabel({
     // x: 0,
     // y: 0,
     // anchor: undefined,
@@ -90,13 +87,20 @@ var label = scene.rexUI.add.label({
     background: backgroundGameObject,
     icon: iconGameObject,
     iconMask: false,
+
+    title: titleGameObject,
+    separator: separatorGameObject,
     text: textGameObject,
+
     expandTextWidth: false,
     expandTextHeight: false,
     action: actionGameObject,
     actionMask: false,
 
-    align: undefined,
+    align: {
+        title: 'right', // or 'left'
+        text: 'right',
+    },
 
     space: {
         left: 0,
@@ -104,7 +108,7 @@ var label = scene.rexUI.add.label({
         top: 0,
         bottom: 0,
 
-        icon: 0,
+        icon: 0, iconTop: 0, iconBottom: 0, iconLeft: 0, iconRight: 0,
         text: 0,
     },
 
@@ -136,20 +140,17 @@ var label = scene.rexUI.add.label({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
-    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
-- `text` : Game object of text, optional.
-- `expandTextWidth` : 
-    - `false` : Keep width of text to original size. Default behavior.
-    - `true` : Expand width of text object. Will set display width by default.
-        - Must set to `true` if using [`scene.rexUI.wrapExpandText` method](ui-overview.md#behaviors-of-text) with any text game object.
-- `expandTextHeight` : Set `true` to expand height of text object.
+    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.   
+- `title` : Game object of title.
+- `separator` : Game object of title, optional.
+- `text` : Game object of text.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
-- `align` : Alignment of icon, text, action-icon game objects.
-    - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
-    - `'center'` : Align game objects at center.
-    - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
+- `align` : Alignment of title, text game objects.
+    - `align.title` : `'left'`, or `'right'`. Default vale is `'right'`.
+    - `align.text` : `'left'`, or `'right'`.
+        - Default vale is `'right'`.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
@@ -221,6 +222,14 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var icon = label.getElement('icon');
         ```
+    - Title game object
+        ```javascript
+        var textObject = label.getElement('title');
+        ```
+    - Separator game object
+        ```javascript
+        var textObject = label.getElement('separator');
+        ```
     - Text game object
         ```javascript
         var textObject = label.getElement('text');
@@ -240,6 +249,21 @@ See also - [dirty](ui-basesizer.md#dirty)
     // var gameObject = label.getByName(name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+### Title
+
+- Get title string
+    ```javascript
+    var s = label.title;
+    ```
+- Set title string
+    ```javascript
+    label.setTitle(s);
+    ```
+    or
+    ```javascript
+    label.title = s;
+    ```
 
 ### Text
 

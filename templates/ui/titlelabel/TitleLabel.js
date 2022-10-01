@@ -1,6 +1,4 @@
 import Sizer from '../sizer/Sizer.js';
-import BuildHorizontalTextSizer from './methods/BuildHorizontalTextSizer.js';
-import BuildVerticalTextSizer from './methods/BuildVerticalTextSizer.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -26,7 +24,7 @@ class TitleLabel extends Sizer {
         }
 
         if (icon) {
-            var padding;
+            var padding = undefined;
             if (this.orientation === 0) {
                 if (text || action) {
                     padding = {
@@ -56,19 +54,47 @@ class TitleLabel extends Sizer {
         }
 
         if (text || title || separator) {
-            var textOrientation = GetValue(config, 'textOrientation', 1);
             var textSizer = new Sizer(scene, {
-                orientation: textOrientation,
+                orientation: 1,
             })
 
-            if (textSizer.orientation === 1) {  // Title, text in vertical layout
-                BuildHorizontalTextSizer(textSizer, config);
+            var separatorSpace = GetValue(config, 'space.separator', 0);
 
-            } else {  // Title, text in horizontal layout
-                BuildVerticalTextSizer(textSizer, config);
+            if (title) {
+                var titleAlign = GetValue(config, 'align.title', 'right');
+                var padding = {
+                    bottom: (!separator && text) ? separatorSpace : 0
+                }
+                textSizer.add(
+                    title,
+                    { align: titleAlign }
+                );
             }
+        
+            if (separator) {
+                var padding = {
+                    top: (title) ? separatorSpace : 0,
+                    bottom: (text) ? separatorSpace : 0,
+                    left: GetValue(config, 'space.separatorLeft', 0),
+                    right: GetValue(config, 'space.separatorRight', 0),
+                };
+                textSizer.add(
+                    separator,
+                    { expand: true, padding: padding }
+                );
+            }
+        
+        
+            if (text) {
+                var textAlign = GetValue(config, 'align.text', 'right');
+                textSizer.add(
+                    text,
+                    { align: textAlign }
+                );
+            }
+        
 
-            var padding;
+            var padding = undefined;
             if (action) {
                 padding = {
                     right: GetValue(config, 'space.text', 0)

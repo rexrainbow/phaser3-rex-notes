@@ -42,26 +42,6 @@ class Demo extends Phaser.Scene {
         })
             .layout();
 
-
-        var label1 = this.rexUI.add.titleLabel({
-            x: 400, y: 400,
-            width: 400, height: 40,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-            icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
-
-            textOrientation: 0,
-            title: this.add.text(0, 0, "Title"),
-            text: this.add.text(0, 0, "Text"),
-
-            space: {
-                left: 20, right: 20, top: 20, bottom: 20,
-                icon: 10
-            }
-
-        })
-            .layout();
-
     }
 
     update() {

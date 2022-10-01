@@ -1,6 +1,6 @@
 ## Introduction
 
-A container of [Layer game objects](layer.md).
+A dictionary to store [Layer game objects](layer.md).
 
 - Author: Rex
 - Container of game objects
