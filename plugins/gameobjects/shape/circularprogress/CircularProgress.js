@@ -1,7 +1,5 @@
-import BaseShapes from '../shapes/BaseShapes.js';
+import ProgressBase from '../utils/ProgressBase.js';
 import { Arc, Circle } from '../shapes/geoms';
-import ProgressValueMethods from '../../../utils/progressvalue/ProgressValueMethods.js';
-import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -10,7 +8,7 @@ const Clamp = Phaser.Math.Clamp;
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 const RadToDeg = Phaser.Math.RadToDeg;
 
-class CircularProgress extends BaseShapes {
+class CircularProgress extends ProgressBase {
     constructor(scene, x, y, radius, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -21,9 +19,8 @@ class CircularProgress extends BaseShapes {
             value = GetValue(config, 'value', 0);
         }
         var width = radius * 2;
-        super(scene, x, y, width, width);
+        super(scene, x, y, width, width, config);
         this.type = 'rexCircularProgress';
-        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         this
             .addShape((new Circle()).setName('track'))
@@ -38,19 +35,6 @@ class CircularProgress extends BaseShapes {
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
-
-        var callback = GetValue(config, 'valuechangeCallback', null);
-        if (callback !== null) {
-            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-            this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        this
-            .setEaseValuePropName('value')
-            .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
-            .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
-
-        this.setValue(value);
     }
 
     resize(width, height) {
@@ -62,23 +46,6 @@ class CircularProgress extends BaseShapes {
         super.resize(width, width);
         this.setRadius(width / 2);
         return this;
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        value = Clamp(value, 0, 1);
-
-        var oldValue = this._value;
-        var valueChanged = (oldValue != value);
-        this.dirty = this.dirty || valueChanged;
-        this._value = value;
-
-        if (valueChanged) {
-            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
-        }
     }
 
     get radius() {
@@ -237,11 +204,5 @@ class CircularProgress extends BaseShapes {
         }
     }
 }
-
-Object.assign(
-    CircularProgress.prototype,
-    ProgressValueMethods,
-    EaseValueMethods
-);
 
 export default CircularProgress;
