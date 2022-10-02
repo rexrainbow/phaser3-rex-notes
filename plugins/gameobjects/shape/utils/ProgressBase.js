@@ -22,7 +22,6 @@ class ProgressBase extends CustomShapes {
             .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
             .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
 
-        this.setValue(GetValue(config, 'value', 0));
     }
 
     get value() {

@@ -19,6 +19,9 @@ class CustomProgress extends ProgressBase {
             config.type = 'rexCustomProgress';
         }
         super(scene, x, y, width, height, config);
+
+        // Set value in last step
+        this.setValue(GetValue(config, 'value', 0));
     }
 
     get centerX() {

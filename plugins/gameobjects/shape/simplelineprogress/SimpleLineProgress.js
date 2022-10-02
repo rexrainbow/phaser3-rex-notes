@@ -28,6 +28,9 @@ class SimpleLineProgress extends ProgressBase {
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
         this.setBarColor(barColor);
         this.setTrackStroke(GetValue(config, 'trackThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
+
+        // Set value in last step
+        this.setValue(GetValue(config, 'value', 0));
     }
 
     get trackColor() {

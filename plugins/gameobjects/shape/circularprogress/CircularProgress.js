@@ -35,6 +35,9 @@ class CircularProgress extends ProgressBase {
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
+
+        // Set value in last step
+        this.setValue(GetValue(config, 'value', 0));
     }
 
     resize(width, height) {
