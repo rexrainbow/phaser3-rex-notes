@@ -7,7 +7,7 @@ class TitleLabel extends Sizer {
     constructor(scene, config) {
         // Create sizer
         super(scene, config);
-        this.type = 'rexTitleLabell';
+        this.type = 'rexTitleLabel';
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
