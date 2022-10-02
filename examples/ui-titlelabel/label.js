@@ -22,9 +22,9 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
 
-            title: this.add.text(0, 0, "Title"),
+            title: this.add.text(0, 0, 'Title'),
             separator: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_DARK),
-            text: this.add.text(0, 0, "Text"),
+            text: this.add.text(0, 0, 'Text'),
 
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 
@@ -47,9 +47,9 @@ class Demo extends Phaser.Scene {
             x: 400, y: 400,
             width: 200, height: 40,
 
-            title: this.add.text(0, 0, "TitleTitle").setOrigin(1, 1),
+            title: this.add.text(0, 0, 'TitleTitle').setOrigin(1, 1),
             separator: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_LIGHT).setOrigin(0, 0.5),
-            text: this.add.text(0, 0, "TextText").setOrigin(1, 0),
+            text: this.add.text(0, 0, 'TextText').setOrigin(1, 0),
 
             icon: this.add.rectangle(0, 0, 40, 40, COLOR_LIGHT),
 

@@ -30,6 +30,7 @@ import OverlapSizer from './overlapsizer/OverlapSizer';
 import Space from './space/Space';
 import Label from './label/Label';
 import TitleLabel from './titlelabel/TitleLabel';
+import NameValueLabel from './namevaluelabel/NameValueLabel';
 import Buttons from './buttons/Buttons';
 import GridButtons from './gridbuttons/GridButtons';
 import FixWidthButtons from './fixwidthbuttons/FixWidthButtons';
@@ -129,6 +130,7 @@ export {
     Space,
     Label,
     TitleLabel,
+    NameValueLabel,
     Buttons,
     GridButtons,
     FixWidthButtons,

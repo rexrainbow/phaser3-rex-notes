@@ -3,7 +3,7 @@ import AddChildMask from '../../../plugins/gameobjects/container/containerlite/m
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TitleLabel extends Sizer {
+class NameValueLabel extends Sizer {
     constructor(scene, config) {
         // Create sizer
         super(scene, config);
@@ -13,13 +13,13 @@ class TitleLabel extends Sizer {
         var background = GetValue(config, 'background', undefined);
         var icon = GetValue(config, 'icon', undefined);
         var iconMask = GetValue(config, 'iconMask', undefined);
-        var title = GetValue(config, 'title', undefined);
-        var separator = GetValue(config, 'separator', undefined);
-        var text = GetValue(config, 'text', undefined);
+        var nameText = GetValue(config, 'nameText', undefined);
+        var valueText = GetValue(config, 'valueText', undefined);
+        var progress = GetValue(config, 'progress', undefined);
         var action = GetValue(config, 'action', undefined);
         var actionMask = GetValue(config, 'actionMask', undefined);
 
-        var hasTextSizer = text || title || separator;
+        var hasTextSizer = nameText || valueText || progress;
 
         if (background) {
             this.addBackground(background);
@@ -60,41 +60,60 @@ class TitleLabel extends Sizer {
                 orientation: 1,
             })
 
-            var separatorSpace = GetValue(config, 'space.separator', 0);
-
-            if (title) {
-                var titleAlign = GetValue(config, 'align.title', 'right');
-                var padding = {
-                    bottom: (!separator && text) ? separatorSpace : 0
+            var nameValueSizer;
+            if (nameText || valueText) {
+                var textAlign = GetValue(config, 'align.text', 'bottom');
+                if (textAlign === 'bottom') {
+                    textSizer.addSpace();
                 }
+
+                nameValueSizer = new Sizer(scene, {
+                    orientation: 0,
+                })
+
+                if (nameText) {
+                    nameText.setOrigin(0, nameText.originY);
+                    var padding = {
+                        left: GetValue(config, 'space.name', 0),
+                    }
+                    nameValueSizer.add(
+                        nameText,
+                        { padding: padding }
+                    );
+                }
+
+                if (valueText) {
+                    valueText.setOrigin(1, valueText.originY);
+
+                    nameValueSizer.addSpace();
+
+                    var padding = {
+                        right: GetValue(config, 'space.value', 0),
+                    }
+                    nameValueSizer.add(
+                        valueText,
+                        { padding: padding }
+                    );
+                }
+
                 textSizer.add(
-                    title,
-                    { align: titleAlign }
-                );
+                    nameValueSizer,
+                    { proportion: 1, expand: true, }
+                )
             }
 
-            if (separator) {
+            if (progress) {
                 var padding = {
-                    top: (title) ? separatorSpace : 0,
-                    bottom: (text) ? separatorSpace : 0,
-                    left: GetValue(config, 'space.separatorLeft', 0),
-                    right: GetValue(config, 'space.separatorRight', 0),
+                    top: (nameValueSizer) ? GetValue(config, 'space.progress', 0) : 0,
+                    bottom: GetValue(config, 'space.progressBottom', 0),
+                    left: GetValue(config, 'space.progressLeft', 0),
+                    right: GetValue(config, 'space.progressRight', 0),
                 };
                 textSizer.add(
-                    separator,
+                    progress,
                     { expand: true, padding: padding }
                 );
             }
-
-
-            if (text) {
-                var textAlign = GetValue(config, 'align.text', 'right');
-                textSizer.add(
-                    text,
-                    { align: textAlign }
-                );
-            }
-
 
             var padding = undefined;
             if (action) {
@@ -104,7 +123,7 @@ class TitleLabel extends Sizer {
             }
             this.add(
                 textSizer,
-                { proportion: 1, padding: padding }
+                { proportion: 1, expand: true, padding: padding }
             );
         }
 
@@ -135,64 +154,54 @@ class TitleLabel extends Sizer {
         this.addChildrenMap('background', background);
         this.addChildrenMap('icon', icon);
         this.addChildrenMap('iconMask', iconMask);
-        this.addChildrenMap('title', title);
-        this.addChildrenMap('separator', separator);
-        this.addChildrenMap('text', text);
+        this.addChildrenMap('name', nameText);
+        this.addChildrenMap('value', valueText);
+        this.addChildrenMap('progress', progress);
         this.addChildrenMap('action', action);
         this.addChildrenMap('actionMask', actionMask);
     }
 
-    // Access title game object
-    get title() {
-        var textObject = this.childrenMap.title;
-        if (textObject === undefined) {
-            return '';
-        }
-        return textObject.title;
-    }
-
-    set title(value) {
-        var textObject = this.childrenMap.title;
-        if (textObject === undefined) {
-            return;
-        }
-        textObject.setText(value);
-    }
-
-    setTitle(value) {
-        this.title = value;
-        return this;
-    }
-
-    appendTitle(value) {
-        this.title += value;
-        return this;
-    }
-
-    // Access text game object
-    get text() {
-        var textObject = this.childrenMap.text;
+    // Access nameText game object
+    get nameText() {
+        var textObject = this.childrenMap.name;
         if (textObject === undefined) {
             return '';
         }
         return textObject.text;
     }
 
-    set text(value) {
-        var textObject = this.childrenMap.text;
+    set nameText(value) {
+        var textObject = this.childrenMap.name;
         if (textObject === undefined) {
             return;
         }
         textObject.setText(value);
     }
 
-    setText(value) {
-        this.text = value;
+    setNameText(value) {
+        this.nameText = value;
         return this;
     }
 
-    appendText(value) {
-        this.text += value;
+    // Access valueText game object
+    get valueText() {
+        var textObject = this.childrenMap.value;
+        if (textObject === undefined) {
+            return '';
+        }
+        return textObject.text;
+    }
+
+    set valueText(value) {
+        var textObject = this.childrenMap.value;
+        if (textObject === undefined) {
+            return;
+        }
+        textObject.setText(value);
+    }
+
+    setValueText(value) {
+        this.valueText = value;
         return this;
     }
 
@@ -259,4 +268,4 @@ class TitleLabel extends Sizer {
     }
 }
 
-export default TitleLabel;
+export default NameValueLabel;
