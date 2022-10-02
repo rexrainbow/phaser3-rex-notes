@@ -5,7 +5,7 @@ import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
-import ValueMethods from '../../../plugins/utils/value/ValueMethods.js';
+import ProgressValueMethods from '../../../plugins/utils/progressvalue/ProgressValueMethods.js';
 import EaseValueMethods from '../../../plugins/utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -178,7 +178,7 @@ var methods = {
 Object.assign(
     Slider.prototype,
     methods,
-    ValueMethods,
+    ProgressValueMethods,
     EaseValueMethods
 );
 

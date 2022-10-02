@@ -3,7 +3,7 @@ import CircularProgress from '../circularprogress/CircularProgress.js';
 import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
 import TextObjectMethods from './TextObjectMethods.js';
-import ValueMethods from '../../../plugins/utils/value/ValueMethods.js';
+import ProgressValueMethods from '../../../plugins/utils/progressvalue/ProgressValueMethods.js';
 import EaseValueMethods from '../../../plugins/utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -126,7 +126,7 @@ const INPUTMODE = {
 Object.assign(
     Knob.prototype,
     TextObjectMethods,
-    ValueMethods,
+    ProgressValueMethods,
     EaseValueMethods
 );
 

@@ -1,5 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import ValueMethods from '../../utils/value/ValueMethods.js';
+import ProgressValueMethods from '../../utils/progressvalue/ProgressValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
@@ -172,7 +172,7 @@ class Slider extends ComponentBase {
 
 Object.assign(
     Slider.prototype,
-    ValueMethods,
+    ProgressValueMethods,
 )
 
 export default Slider;

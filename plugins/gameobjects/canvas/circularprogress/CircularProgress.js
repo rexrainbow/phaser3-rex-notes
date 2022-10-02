@@ -1,7 +1,7 @@
 import Canvas from '../canvas/Canvas.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import DrawContent from './DrawContent.js';
-import ValueMethods from '../../../utils/value/ValueMethods.js';
+import ProgressValueMethods from '../../../utils/progressvalue/ProgressValueMethods.js';
 import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -308,7 +308,7 @@ class CircularProgress extends Canvas {
 
 Object.assign(
     CircularProgress.prototype,
-    ValueMethods,
+    ProgressValueMethods,
     EaseValueMethods
 );
 

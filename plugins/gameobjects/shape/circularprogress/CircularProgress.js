@@ -1,6 +1,6 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import { Arc, Circle } from '../shapes/geoms';
-import ValueMethods from '../../../utils/value/ValueMethods.js';
+import ProgressValueMethods from '../../../utils/progressvalue/ProgressValueMethods.js';
 import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -240,7 +240,7 @@ class CircularProgress extends BaseShapes {
 
 Object.assign(
     CircularProgress.prototype,
-    ValueMethods,
+    ProgressValueMethods,
     EaseValueMethods
 );
 

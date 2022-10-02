@@ -1,5 +1,5 @@
 import CustomShapes from '../customshapes/CustomShapes.js';
-import ValueMethods from '../../../utils/value/ValueMethods.js';
+import ProgressValueMethods from '../../../utils/progressvalue/ProgressValueMethods.js';
 import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -71,7 +71,7 @@ class CustomProgress extends CustomShapes {
 
 Object.assign(
     CustomProgress.prototype,
-    ValueMethods,
+    ProgressValueMethods,
     EaseValueMethods
 );
 
