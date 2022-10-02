@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import ValueMethods from '../../utils/value/ValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
@@ -126,30 +127,6 @@ class Slider extends ComponentBase {
         this.emit('valuechange', this._value, oldValue);
     }
 
-    setValue(value, min, max) {
-        if (min !== undefined) {
-            value = Percent(value, min, max);
-        }
-        this.value = value;
-        return this;
-    }
-
-    addValue(inc, min, max) {
-        if (min !== undefined) {
-            inc = Percent(inc, min, max);
-        }
-        this.value += inc;
-        return this;
-    }
-
-    getValue(min, max) {
-        var value = this.value;
-        if (min !== undefined) {
-            value = Linear(min, max, value);
-        }
-        return value;
-    }
-
     get isDragging() {
         return (this.parent.input.dragState > 0);
     }
@@ -192,5 +169,10 @@ class Slider extends ComponentBase {
         return this;
     }
 }
+
+Object.assign(
+    Slider.prototype,
+    ValueMethods,
+)
 
 export default Slider;

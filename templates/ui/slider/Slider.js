@@ -5,12 +5,11 @@ import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
+import ValueMethods from '../../../plugins/utils/value/ValueMethods.js';
 import EaseValueMethods from '../../../plugins/utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
-const Linear = Phaser.Math.Linear;
-const Percent = Phaser.Math.Percent;
 const SnapTo = Phaser.Math.Snap.To;
 
 class Slider extends Sizer {
@@ -149,34 +148,6 @@ class Slider extends Sizer {
         }
     }
 
-    setValue(value, min, max) {
-        if ((value === undefined) || (value === null)) {
-            return this;
-        }
-
-        if (min !== undefined) {
-            value = Percent(value, min, max);
-        }
-        this.value = value;
-        return this;
-    }
-
-    addValue(inc, min, max) {
-        if (min !== undefined) {
-            inc = Percent(inc, min, max);
-        }
-        this.value += inc;
-        return this;
-    }
-
-    getValue(min, max) {
-        var value = this.value;
-        if (min !== undefined) {
-            value = Linear(min, max, value);
-        }
-        return value;
-    }
-
     runLayout(parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
         if (this.ignoreLayout) {
@@ -207,6 +178,7 @@ var methods = {
 Object.assign(
     Slider.prototype,
     methods,
+    ValueMethods,
     EaseValueMethods
 );
 

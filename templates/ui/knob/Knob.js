@@ -3,11 +3,10 @@ import CircularProgress from '../circularprogress/CircularProgress.js';
 import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
 import TextObjectMethods from './TextObjectMethods.js';
+import ValueMethods from '../../../plugins/utils/value/ValueMethods.js';
 import EaseValueMethods from '../../../plugins/utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Linear = Phaser.Math.Linear;
-const Percent = Phaser.Math.Percent;
 const SnapTo = Phaser.Math.Snap.To;
 
 class Knob extends OverlapSizer {
@@ -115,33 +114,6 @@ class Knob extends OverlapSizer {
         }
     }
 
-    setValue(value, min, max) {
-        if ((value === undefined) || (value === null)) {
-            return this;
-        }
-
-        if (min !== undefined) {
-            value = Percent(value, min, max);
-        }
-        this.value = value;
-        return this;
-    }
-
-    addValue(inc, min, max) {
-        if (min !== undefined) {
-            inc = Percent(inc, min, max);
-        }
-        this.value += inc;
-        return this;
-    }
-
-    getValue(min, max) {
-        var value = this.value;
-        if (min !== undefined) {
-            value = Linear(min, max, value);
-        }
-        return value;
-    }
 }
 
 const INPUTMODE = {
@@ -154,6 +126,7 @@ const INPUTMODE = {
 Object.assign(
     Knob.prototype,
     TextObjectMethods,
+    ValueMethods,
     EaseValueMethods
 );
 
