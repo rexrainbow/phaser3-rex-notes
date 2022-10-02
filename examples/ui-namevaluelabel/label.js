@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 18 }),
             valueText: this.add.text(0, 0, '100', { fontSize: 18 }),
-            progress: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_DARK),
+            bar: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_DARK),
 
             align: {
                 // title: 'left',

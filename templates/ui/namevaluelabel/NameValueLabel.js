@@ -116,6 +116,13 @@ class NameValueLabel extends Sizer {
         }
         return this;
     }
+
+    get value() {
+    }
+
+    set value(value) {
+
+    }
 }
 
 Object.assign(

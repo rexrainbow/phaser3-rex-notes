@@ -1,7 +1,9 @@
 import Sizer from '../../sizer/Sizer.js';
+import CreateBar from './CreateBar.js';
 import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 var Build = function (scene, config) {
     // Add elements
@@ -10,11 +12,14 @@ var Build = function (scene, config) {
     var iconMask = GetValue(config, 'iconMask', undefined);
     var nameText = GetValue(config, 'nameText', undefined);
     var valueText = GetValue(config, 'valueText', undefined);
-    var progress = GetValue(config, 'progress', undefined);
+    var bar = GetValue(config, 'bar', undefined);
     var action = GetValue(config, 'action', undefined);
     var actionMask = GetValue(config, 'actionMask', undefined);
 
-    var hasTextSizer = nameText || valueText || progress;
+    if (IsPlainObject(bar)) {
+        bar = CreateBar(scene, bar);
+    }
+    var hasTextSizer = nameText || valueText || bar;
 
     if (background) {
         this.addBackground(background);
@@ -57,11 +62,6 @@ var Build = function (scene, config) {
 
         var nameValueSizer;
         if (nameText || valueText) {
-            var textAlign = GetValue(config, 'align.text', 'bottom');
-            if (textAlign === 'bottom') {
-                textSizer.addSpace();
-            }
-
             nameValueSizer = new Sizer(scene, {
                 orientation: 0,
             })
@@ -93,19 +93,19 @@ var Build = function (scene, config) {
 
             textSizer.add(
                 nameValueSizer,
-                { proportion: 1, expand: true, }
+                { expand: true, }
             )
         }
 
-        if (progress) {
+        if (bar) {
             var padding = {
-                top: (nameValueSizer) ? GetValue(config, 'space.progress', 0) : 0,
-                bottom: GetValue(config, 'space.progressBottom', 0),
-                left: GetValue(config, 'space.progressLeft', 0),
-                right: GetValue(config, 'space.progressRight', 0),
+                top: (nameValueSizer) ? GetValue(config, 'space.bar', 0) : 0,
+                bottom: GetValue(config, 'space.barBottom', 0),
+                left: GetValue(config, 'space.barLeft', 0),
+                right: GetValue(config, 'space.barRight', 0),
             };
             textSizer.add(
-                progress,
+                bar,
                 { expand: true, padding: padding }
             );
         }
@@ -116,9 +116,10 @@ var Build = function (scene, config) {
                 right: GetValue(config, 'space.text', 0)
             };
         }
+        var textAlign = GetValue(config, 'align.text', 'bottom');
         this.add(
             textSizer,
-            { proportion: 1, expand: true, padding: padding }
+            { proportion: 1, align: textAlign, padding: padding }
         );
     }
 
@@ -151,7 +152,7 @@ var Build = function (scene, config) {
     this.addChildrenMap('iconMask', iconMask);
     this.addChildrenMap('name', nameText);
     this.addChildrenMap('value', valueText);
-    this.addChildrenMap('progress', progress);
+    this.addChildrenMap('bar', bar);
     this.addChildrenMap('action', action);
     this.addChildrenMap('actionMask', actionMask);
 }
