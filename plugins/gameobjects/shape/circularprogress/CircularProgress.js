@@ -1,12 +1,12 @@
 import ProgressBase from '../utils/ProgressBase.js';
 import { Arc, Circle } from '../shapes/geoms';
+import UpdateShapes from './UpdateShapes.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Clamp = Phaser.Math.Clamp;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
-const RadToDeg = Phaser.Math.RadToDeg;
 
 class CircularProgress extends ProgressBase {
     constructor(scene, x, y, radius, barColor, value, config) {
@@ -155,57 +155,15 @@ class CircularProgress extends ProgressBase {
         return this;
     }
 
-    updateShapes() {
-        var x = this.radius;
-        var lineWidth = this.thickness * this.radius;
-        var barRadius = this.radius - (lineWidth / 2);
-        var centerRadius = this.radius - lineWidth;
-
-        // Track shape
-        var trackShape = this.getShape('track');
-        if ((this.trackColor != null) && (lineWidth > 0)) {
-            trackShape
-                .setCenterPosition(x, x)
-                .setRadius(barRadius)
-                .lineStyle(lineWidth, this.trackColor);
-        } else {
-            trackShape.reset();
-        }
-
-        // Bar shape
-        var barShape = this.getShape('bar');
-        if ((this.barColor != null) && (barRadius > 0)) {
-            var anticlockwise, startAngle, endAngle;
-            if (this.value === 1) {
-                anticlockwise = false;
-                startAngle = 0;
-                endAngle = 361;  // overshoot 1
-            } else {
-                anticlockwise = this.anticlockwise;
-                startAngle = RadToDeg(this.startAngle);
-                var deltaAngle = 360 * ((anticlockwise) ? (1 - this.value) : this.value);
-                endAngle = deltaAngle + startAngle;
-            }
-            barShape
-                .setCenterPosition(x, x)
-                .setRadius(barRadius)
-                .setAngle(startAngle, endAngle, anticlockwise)
-                .lineStyle(lineWidth, this.barColor);
-        } else {
-            barShape.reset();
-        }
-
-        // Center shape
-        var centerShape = this.getShape('center');
-        if (this.centerColor && (centerRadius > 0)) {
-            centerShape
-                .setCenterPosition(x, x)
-                .setRadius(centerRadius)
-                .fillStyle(this.centerColor);
-        } else {
-            centerShape.reset();
-        }
-    }
 }
+
+var Methods = {
+    updateShapes: UpdateShapes,
+}
+
+Object.assign(
+    CircularProgress.prototype,
+    Methods,
+)
 
 export default CircularProgress;
