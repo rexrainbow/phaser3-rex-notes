@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexsimplelineprogress = factory());
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.rexlineprogressplugin = factory());
 })(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -2366,15 +2366,15 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-  var SimpleLineProgress = /*#__PURE__*/function (_ProgressBase) {
-    _inherits(SimpleLineProgress, _ProgressBase);
+  var LineProgress = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(LineProgress, _ProgressBase);
 
-    var _super = _createSuper(SimpleLineProgress);
+    var _super = _createSuper(LineProgress);
 
-    function SimpleLineProgress(scene, x, y, width, height, barColor, value, config) {
+    function LineProgress(scene, x, y, width, height, barColor, value, config) {
       var _this;
 
-      _classCallCheck(this, SimpleLineProgress);
+      _classCallCheck(this, LineProgress);
 
       if (IsPlainObject(x)) {
         config = x;
@@ -2397,7 +2397,7 @@
       }
 
       _this = _super.call(this, scene, x, y, width, height, config);
-      _this.type = 'rexSimpleLineProgress';
+      _this.type = 'rexLineProgress';
 
       _this.addShape(new Lines().setName('trackFill')).addShape(new Lines().setName('bar')).addShape(new Lines().setName('trackStroke'));
 
@@ -2417,7 +2417,7 @@
       return _this;
     }
 
-    _createClass(SimpleLineProgress, [{
+    _createClass(LineProgress, [{
       key: "trackColor",
       get: function get() {
         return this._trackColor;
@@ -2499,14 +2499,134 @@
       }
     }]);
 
-    return SimpleLineProgress;
+    return LineProgress;
   }(ProgressBase(BaseShapes));
 
   var Methods = {
     updateShapes: UpdateShapes
   };
-  Object.assign(SimpleLineProgress.prototype, Methods);
+  Object.assign(LineProgress.prototype, Methods);
 
-  return SimpleLineProgress;
+  function Factory (x, y, width, height, barColor, value, config) {
+    var gameObject = new LineProgress(this.scene, x, y, width, height, barColor, value, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function Creator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+
+    var gameObject = new LineProgress(this.scene, config);
+    BuildGameObject(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+
+      var key;
+
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+
+          entry[key] = newEntry;
+        }
+
+        entry = entry[key];
+      }
+    }
+
+    return entry;
+  };
+
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    } // no object
+
+
+    if (_typeof(target) !== 'object') {
+      return;
+    } // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      } // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+
+    return target;
+  };
+
+  var LineProgressPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
+    _inherits(LineProgressPlugin, _Phaser$Plugins$BaseP);
+
+    var _super = _createSuper(LineProgressPlugin);
+
+    function LineProgressPlugin(pluginManager) {
+      var _this;
+
+      _classCallCheck(this, LineProgressPlugin);
+
+      _this = _super.call(this, pluginManager); //  Register our new Game Object type
+
+      pluginManager.registerGameObject('rexLineProgress', Factory, Creator);
+      return _this;
+    }
+
+    _createClass(LineProgressPlugin, [{
+      key: "start",
+      value: function start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.on('destroy', this.destroy, this);
+      }
+    }]);
+
+    return LineProgressPlugin;
+  }(Phaser.Plugins.BasePlugin);
+
+  SetValue(window, 'RexPlugins.GameObjects.LineProgress', LineProgress);
+
+  return LineProgressPlugin;
 
 }));

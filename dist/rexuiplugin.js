@@ -23630,15 +23630,15 @@
   var GetValue$1I = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$y = Phaser.Utils.Objects.IsPlainObject;
 
-  var SimpleLineProgress = /*#__PURE__*/function (_ProgressBase) {
-    _inherits(SimpleLineProgress, _ProgressBase);
+  var LineProgress = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(LineProgress, _ProgressBase);
 
-    var _super = _createSuper(SimpleLineProgress);
+    var _super = _createSuper(LineProgress);
 
-    function SimpleLineProgress(scene, x, y, width, height, barColor, value, config) {
+    function LineProgress(scene, x, y, width, height, barColor, value, config) {
       var _this;
 
-      _classCallCheck(this, SimpleLineProgress);
+      _classCallCheck(this, LineProgress);
 
       if (IsPlainObject$y(x)) {
         config = x;
@@ -23661,7 +23661,7 @@
       }
 
       _this = _super.call(this, scene, x, y, width, height, config);
-      _this.type = 'rexSimpleLineProgress';
+      _this.type = 'rexLineProgress';
 
       _this.addShape(new Lines().setName('trackFill')).addShape(new Lines().setName('bar')).addShape(new Lines().setName('trackStroke'));
 
@@ -23681,7 +23681,7 @@
       return _this;
     }
 
-    _createClass(SimpleLineProgress, [{
+    _createClass(LineProgress, [{
       key: "trackColor",
       get: function get() {
         return this._trackColor;
@@ -23763,20 +23763,20 @@
       }
     }]);
 
-    return SimpleLineProgress;
+    return LineProgress;
   }(ProgressBase(BaseShapes));
 
   var Methods$6 = {
     updateShapes: UpdateShapes
   };
-  Object.assign(SimpleLineProgress.prototype, Methods$6);
+  Object.assign(LineProgress.prototype, Methods$6);
 
-  ObjectFactory.register('simpleLineProgress', function (x, y, width, height, barColor, value, config) {
-    var gameObject = new SimpleLineProgress(this.scene, x, y, width, height, barColor, value, config);
+  ObjectFactory.register('lineProgress', function (x, y, width, height, barColor, value, config) {
+    var gameObject = new LineProgress(this.scene, x, y, width, height, barColor, value, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.SimpleLineProgress', SimpleLineProgress);
+  SetValue(window, 'RexPlugins.UI.LineProgress', LineProgress);
 
   var GetSizerConfig = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -35343,7 +35343,7 @@
     var actionMask = GetValue$Z(config, 'actionMask', undefined);
 
     if (IsPlainObject$d(bar)) {
-      bar = new SimpleLineProgress(scene, bar);
+      bar = new LineProgress(scene, bar);
       scene.add.existing(bar); // Move bar game object below nameText and valueText
 
       if (nameText) {

@@ -6,7 +6,7 @@ import UpdateShapes from './UpdateShapes.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-class SimpleLineProgress extends ProgressBase(BaseShapes) {
+class LineProgress extends ProgressBase(BaseShapes) {
     constructor(scene, x, y, width, height, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -29,7 +29,7 @@ class SimpleLineProgress extends ProgressBase(BaseShapes) {
         }
 
         super(scene, x, y, width, height, config);
-        this.type = 'rexSimpleLineProgress';
+        this.type = 'rexLineProgress';
 
         this
             .addShape((new Lines()).setName('trackFill'))
@@ -130,8 +130,8 @@ var Methods = {
 }
 
 Object.assign(
-    SimpleLineProgress.prototype,
+    LineProgress.prototype,
     Methods,
 )
 
-export default SimpleLineProgress;
+export default LineProgress;

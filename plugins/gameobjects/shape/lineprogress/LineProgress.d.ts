@@ -1,14 +1,14 @@
 import BaseShapes from '../shapes/BaseShapes';
 
 // import * as Phaser from 'phaser';
-export default SimpleLineProgress;
+export default LineProgress;
 
-declare namespace SimpleLineProgress {
+declare namespace LineProgress {
 
     type ValueChangeCallbackType = (
         newValue: number,
         oldValue: number,
-        circularProgress: SimpleLineProgress
+        circularProgress: LineProgress
     ) => void;
 
     interface IConfig {
@@ -38,22 +38,22 @@ declare namespace SimpleLineProgress {
         type ValueChangeCallbackType = (
             newValue: number,
             oldValue: number,
-            circularProgress: SimpleLineProgress
+            circularProgress: LineProgress
         ) => void;
     }
 }
 
-declare class SimpleLineProgress extends BaseShapes {
+declare class LineProgress extends BaseShapes {
     constructor(
         scene: Phaser.Scene,
-        config?: SimpleLineProgress.IConfig
+        config?: LineProgress.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
         width?: number, height?: number,
-        config?: SimpleLineProgress.IConfig
+        config?: LineProgress.IConfig
     );
 
     constructor(
@@ -62,7 +62,7 @@ declare class SimpleLineProgress extends BaseShapes {
         width?: number, height?: number,
         barColor?: string | number,
         value?: number,
-        config?: SimpleLineProgress.IConfig
+        config?: LineProgress.IConfig
     );
 
     value: number;

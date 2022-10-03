@@ -1,5 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
-import SimpleLineProgressPlugin from '../../plugins/simplelineprogress-plugin.js';
+import LineProgressPlugin from '../../plugins/lineprogress-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var bar = this.add.rexSimpleLineProgress(400, 300, 200, 60, {
+        var bar = this.add.rexLineProgress(400, 300, 200, 60, {
             barColor: COLOR_PRIMARY,
             trackColor: COLOR_DARK,
             trackStrokeColor: COLOR_LIGHT,
@@ -52,8 +52,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexSimpleLineProgress',
-            plugin: SimpleLineProgressPlugin,
+            key: 'rexLineProgress',
+            plugin: LineProgressPlugin,
             start: true
         }]
     }

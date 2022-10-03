@@ -11880,15 +11880,15 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
 
-  var SimpleLineProgress = /*#__PURE__*/function (_ProgressBase) {
-    _inherits(SimpleLineProgress, _ProgressBase);
+  var LineProgress = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(LineProgress, _ProgressBase);
 
-    var _super = _createSuper(SimpleLineProgress);
+    var _super = _createSuper(LineProgress);
 
-    function SimpleLineProgress(scene, x, y, width, height, barColor, value, config) {
+    function LineProgress(scene, x, y, width, height, barColor, value, config) {
       var _this;
 
-      _classCallCheck(this, SimpleLineProgress);
+      _classCallCheck(this, LineProgress);
 
       if (IsPlainObject$1(x)) {
         config = x;
@@ -11911,7 +11911,7 @@
       }
 
       _this = _super.call(this, scene, x, y, width, height, config);
-      _this.type = 'rexSimpleLineProgress';
+      _this.type = 'rexLineProgress';
 
       _this.addShape(new Lines().setName('trackFill')).addShape(new Lines().setName('bar')).addShape(new Lines().setName('trackStroke'));
 
@@ -11931,7 +11931,7 @@
       return _this;
     }
 
-    _createClass(SimpleLineProgress, [{
+    _createClass(LineProgress, [{
       key: "trackColor",
       get: function get() {
         return this._trackColor;
@@ -12013,13 +12013,13 @@
       }
     }]);
 
-    return SimpleLineProgress;
+    return LineProgress;
   }(ProgressBase(BaseShapes));
 
   var Methods = {
     updateShapes: UpdateShapes
   };
-  Object.assign(SimpleLineProgress.prototype, Methods);
+  Object.assign(LineProgress.prototype, Methods);
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
     this.clear().fillStyle(0xffffff);
@@ -12196,7 +12196,7 @@
     var actionMask = GetValue(config, 'actionMask', undefined);
 
     if (IsPlainObject(bar)) {
-      bar = new SimpleLineProgress(scene, bar);
+      bar = new LineProgress(scene, bar);
       scene.add.existing(bar); // Move bar game object below nameText and valueText
 
       if (nameText) {

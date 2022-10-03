@@ -1,4 +1,4 @@
-import SimpleLineProgress from './SimpleLineProgress.js';
+import LineProgress from './LineProgress.js';
 
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
@@ -7,7 +7,7 @@ export default function (config, addToScene) {
     if (addToScene !== undefined) {
         config.add = addToScene;
     }
-    var gameObject = new SimpleLineProgress(this.scene, config);
+    var gameObject = new LineProgress(this.scene, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
 };

@@ -17,7 +17,7 @@ import TextPlayerFactory from './textplayer/Factory.js';
 import CanvasInputFactory from './canvasinput/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import CircularProgressFactory from './circularprogress/Factory.js';
-import SimpleLineProgressFactory from './simplelineprogress/Factory.js';
+import LineProgressFactory from './lineprogress/Factory.js';
 import KnobFactory from './knob/Factory.js';
 import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';
