@@ -24,8 +24,8 @@ class Demo extends Phaser.Scene {
 
             icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
 
-            nameText: this.add.text(0, 0, 'HP', { fontSize: 18 }),
-            valueText: this.add.text(0, 0, '', { fontSize: 18 }),
+            nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
+            valueText: this.add.text(0, 0, '', { fontSize: 20 }),
 
             bar: {
                 height: 6,
@@ -46,6 +46,7 @@ class Demo extends Phaser.Scene {
             space: {
                 left: 20, right: 20, top: 20, bottom: 20,
                 icon: 10,
+                bar: -6
             }
 
         })

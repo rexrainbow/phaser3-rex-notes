@@ -1,3 +1,5 @@
+import SimpleLineProgress from '../simplelineprogress/SimpleLineProgress';
+
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 
@@ -21,8 +23,8 @@ declare namespace NameValueLabel {
 
         textOrientation?: Sizer.OrientationTypes;
         title?: Phaser.GameObjects.GameObject,
-        separator?: Phaser.GameObjects.GameObject,
         text?: Phaser.GameObjects.GameObject,
+        bar?: Phaser.GameObjects.GameObject | SimpleLineProgress.IConfig,
 
         action?: Phaser.GameObjects.GameObject,
         actionMask?: boolean,
@@ -53,6 +55,18 @@ declare class NameValueLabel extends Sizer {
     text: string;
     setText(text: string): this;
     appendText(text: string): this;
+
+    barValue: number;
+    setBarValue(
+        value: number,
+        min?: number,
+        max?: number
+    ): this;
+    easeBarValueTo(
+        value: number,
+        min?: number,
+        max?: number
+    ): this;
 
     setTexture(
         key: string | Phaser.Textures.Texture,

@@ -35290,12 +35290,6 @@
   });
   SetValue(window, 'RexPlugins.UI.TitleLabel', TitleLabel);
 
-  var CreateBar = function CreateBar(scene, config) {
-    var bar = new SimpleLineProgress(scene, config);
-    scene.add.existing(bar);
-    return bar;
-  };
-
   var GetValue$Z = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
 
@@ -35311,7 +35305,16 @@
     var actionMask = GetValue$Z(config, 'actionMask', undefined);
 
     if (IsPlainObject$d(bar)) {
-      bar = CreateBar(scene, bar);
+      bar = new SimpleLineProgress(scene, bar);
+      scene.add.existing(bar); // Move bar game object below nameText and valueText
+
+      if (nameText) {
+        scene.children.moveBelow(bar, nameText);
+      }
+
+      if (valueText) {
+        scene.children.moveBelow(bar, valueText);
+      }
     }
 
     var hasTextSizer = nameText || valueText || bar;

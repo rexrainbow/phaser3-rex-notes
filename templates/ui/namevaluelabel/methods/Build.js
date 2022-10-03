@@ -1,5 +1,5 @@
 import Sizer from '../../sizer/Sizer.js';
-import CreateBar from './CreateBar.js';
+import SimpleLineProgress from '../../simplelineprogress/SimpleLineProgress.js';
 import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -17,8 +17,17 @@ var Build = function (scene, config) {
     var actionMask = GetValue(config, 'actionMask', undefined);
 
     if (IsPlainObject(bar)) {
-        bar = CreateBar(scene, bar);
+        bar = new SimpleLineProgress(scene, bar);
+        scene.add.existing(bar);
+        // Move bar game object below nameText and valueText
+        if (nameText) {
+            scene.children.moveBelow(bar, nameText);
+        }
+        if (valueText) {
+            scene.children.moveBelow(bar, valueText);
+        }
     }
+
     var hasTextSizer = nameText || valueText || bar;
 
     if (background) {
