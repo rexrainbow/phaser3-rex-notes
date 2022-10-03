@@ -15,6 +15,7 @@ import TextPlayer from './textplayer/TextPlayer.js';
 import CanvasInput from './canvasinput/CanvasInput.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
+import SimpleLineProgress from './simplelineprogress/SimpleLineProgress.js';
 import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
@@ -117,6 +118,7 @@ export {
     Chart,
     CircularProgressCanvas,
     CircularProgress,
+    SimpleLineProgress,
     Knob,
     CustomShapes,
     CustomProgress,
