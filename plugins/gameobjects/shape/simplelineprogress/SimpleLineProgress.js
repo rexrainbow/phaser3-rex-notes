@@ -40,6 +40,8 @@ class SimpleLineProgress extends ProgressBase(BaseShapes) {
         this.setBarColor(barColor);
         this.setTrackStroke(GetValue(config, 'trackStrokeThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
 
+        this.setSkewX(GetValue(config, 'skewX', 0));
+
         this.setRTL(GetValue(config, 'rtl', false));
 
 
@@ -96,6 +98,20 @@ class SimpleLineProgress extends ProgressBase(BaseShapes) {
 
     setBarColor(color) {
         this.barColor = color;
+        return this;
+    }
+
+    get skewX() {
+        return this._skewX;
+    }
+
+    set skewX(value) {
+        this.dirty = this.dirty || (this._skewX != value);
+        this._skewX = value;
+    }
+
+    setSkewX(value) {
+        this.skewX = value;
         return this;
     }
 

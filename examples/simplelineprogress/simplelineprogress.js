@@ -17,13 +17,21 @@ class Demo extends Phaser.Scene {
 
     create() {
         var bar = this.add.rexSimpleLineProgress(400, 300, 200, 60, {
-            barColor: 0xAA0000,
-            trackColor: 0x330000,
-            trackStrokeColor: 0xffffff,
+            barColor: COLOR_PRIMARY,
+            trackColor: COLOR_DARK,
+            trackStrokeColor: COLOR_LIGHT,
 
+            skewX: 30,
             // rtl: true,
             value: 0.75
         });
+
+        //var graphics = this.add.graphics({
+        //    lineStyle: {
+        //        width: 2, color: 0xff0000, alpha: 1
+        //    }
+        //})
+        //    .strokeRectShape(bar.getBounds())
 
         var gui = new Dat.GUI();
         gui.add(bar, 'value', 0, 1);

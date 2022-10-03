@@ -11820,40 +11820,61 @@
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var UpdateShapes = function UpdateShapes() {
-    var trackX0 = 0,
-        trackX1 = this.width,
-        trackY0 = 0,
-        trackY1 = this.height;
+    var skewX = this.skewX;
+    var width = this.width - Math.abs(skewX);
+    var height = this.height;
     var trackFill = this.getShape('trackFill');
     trackFill.fillStyle(this.trackColor);
 
     if (trackFill.isFilled) {
-      trackFill.startAt(trackX0, trackY0).lineTo(trackX1, trackY0).lineTo(trackX1, trackY1).lineTo(trackX0, trackY1).lineTo(trackX0, trackY0).close();
+      BuildRectangle(trackFill, // lines
+      0, 0, // x0, y0
+      width, height, // x1, y1
+      skewX // skewX
+      ).close();
     }
 
     var bar = this.getShape('bar');
     bar.fillStyle(this.barColor);
 
     if (bar.isFilled) {
-      var barX0, barX;
+      var barX0, barX1;
 
       if (!this.rtl) {
-        barX = this.width * this.value;
         barX0 = 0;
+        barX1 = width * this.value;
       } else {
-        barX = this.width * (1 - this.value);
-        barX0 = this.width;
+        barX0 = width * (1 - this.value);
+        barX1 = width;
       }
 
-      bar.startAt(barX0, trackY0).lineTo(barX, trackY0).lineTo(barX, trackY1).lineTo(barX0, trackY1).lineTo(barX0, trackY0).close();
+      BuildRectangle(bar, // lines
+      barX0, 0, // x0, y0
+      barX1, height, // x1, y1
+      this.skewX // skew
+      ).close();
     }
 
     var trackStroke = this.getShape('trackStroke');
     trackStroke.lineStyle(this.trackStrokeThickness, this.trackStrokeColor);
 
     if (trackStroke.isStroked) {
-      trackStroke.startAt(trackX0, trackY0).lineTo(trackX1, trackY0).lineTo(trackX1, trackY1).lineTo(trackX0, trackY1).lineTo(trackX0, trackY0).end();
+      BuildRectangle(trackStroke, // lines            
+      0, 0, // x0, y0
+      width, height, // x1, y1
+      skewX // skewX
+      ).end();
     }
+  };
+
+  var BuildRectangle = function BuildRectangle(lines, x0, y0, x1, y1, skewX) {
+    if (skewX >= 0) {
+      lines.startAt(x0 + skewX, y0).lineTo(x1 + skewX, y0).lineTo(x1, y1).lineTo(x0, y1).lineTo(x0 + skewX, y0);
+    } else {
+      lines.startAt(x0, y0).lineTo(x1, y0).lineTo(x1 - skewX, y1).lineTo(x0 - skewX, y1).lineTo(x0, y0);
+    }
+
+    return lines;
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
@@ -11899,6 +11920,8 @@
       _this.setBarColor(barColor);
 
       _this.setTrackStroke(GetValue$1(config, 'trackStrokeThickness', 2), GetValue$1(config, 'trackStrokeColor', undefined));
+
+      _this.setSkewX(GetValue$1(config, 'skewX', 0));
 
       _this.setRTL(GetValue$1(config, 'rtl', false)); // Set value in last step
 
@@ -11961,6 +11984,21 @@
       key: "setBarColor",
       value: function setBarColor(color) {
         this.barColor = color;
+        return this;
+      }
+    }, {
+      key: "skewX",
+      get: function get() {
+        return this._skewX;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._skewX != value;
+        this._skewX = value;
+      }
+    }, {
+      key: "setSkewX",
+      value: function setSkewX(value) {
+        this.skewX = value;
         return this;
       }
     }, {

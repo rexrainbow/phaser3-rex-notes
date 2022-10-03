@@ -20,6 +20,10 @@ declare namespace SimpleLineProgress {
         trackStrokeColor?: string | number,
         barColor?: string | number,
 
+        skewX?: number,
+
+        rtl?: boolean,
+
         value?: number,
 
         easeValue?: {
@@ -83,6 +87,9 @@ declare class SimpleLineProgress extends BaseShapes {
 
     barColor: string;
     setBarColor(barColor?: string | number): this;
+
+    skewX: number;
+    setSkewX(skewX: number): this;
 
     rtl: boolean;
     setRTL(enable?: boolean): this;
