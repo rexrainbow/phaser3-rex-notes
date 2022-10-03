@@ -1,5 +1,5 @@
 var FillStyle = function (color, alpha) {
-    if (color === undefined) {
+    if (color == null) {
         this.isFilled = false;
     } else {
         if (alpha === undefined) {
@@ -13,7 +13,7 @@ var FillStyle = function (color, alpha) {
 }
 
 var LineStyle = function (lineWidth, color, alpha) {
-    if ((lineWidth === undefined) || (color === undefined)) {
+    if ((lineWidth == null) || (color == null)) {
         this.isStroked = false;
     } else {
         if (alpha === undefined) {

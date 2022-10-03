@@ -14,6 +14,7 @@ module.exports = {
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
     'customshapesplugin': './plugins/customshapes-plugin.js',
     'circularprogressplugin': './plugins/circularprogress-plugin.js',
+    'simplelineprogressplugin': './plugins/simplelineprogress-plugin.js',
     'customprogressplugin': './plugins/customprogress-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',

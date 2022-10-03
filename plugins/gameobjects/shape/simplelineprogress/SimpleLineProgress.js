@@ -1,33 +1,38 @@
+import BaseShapes from '../shapes/BaseShapes.js';
 import ProgressBase from '../utils/ProgressBase.js';
-import { Line } from '../shapes/geoms';
+import { Lines } from '../shapes/geoms';
+import UpdateShapes from './UpdateShapes.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-class SimpleLineProgress extends ProgressBase {
+class SimpleLineProgress extends ProgressBase(BaseShapes) {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            width = GetValue(config, 'width', 2);
+            height = GetValue(config, 'height', 2);
         } else if (IsPlainObject(width)) {
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            width = GetValue(config, 'width', 2);
+            height = GetValue(config, 'height', 2);
         }
 
         super(scene, x, y, width, height, config);
         this.type = 'rexSimpleLineProgress';
 
         this
-            .addShape((new Line()).setName('trackFill'))
-            .addShape((new Line()).setName('bar'))
-            .addShape((new Line()).setName('trackStroke'))
+            .addShape((new Lines()).setName('trackFill'))
+            .addShape((new Lines()).setName('bar'))
+            .addShape((new Lines()).setName('trackStroke'))
 
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
-        this.setBarColor(barColor);
+        this.setBarColor(GetValue(config, 'barColor', undefined));
         this.setTrackStroke(GetValue(config, 'trackThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
+
+        this.setRTL(GetValue(config, 'rtl', false));
+
 
         // Set value in last step
         this.setValue(GetValue(config, 'value', 0));
@@ -57,7 +62,7 @@ class SimpleLineProgress extends ProgressBase {
     }
 
     get trackStrokeThickness() {
-        return this._trackStrokeColor;
+        return this._trackStrokeThickness;
     }
 
     set trackStrokeThickness(value) {
@@ -85,57 +90,23 @@ class SimpleLineProgress extends ProgressBase {
         return this;
     }
 
-    updateShapes() {
-        var x = this.radius;
-        var lineWidth = this.thickness * this.radius;
-        var barRadius = this.radius - (lineWidth / 2);
-        var centerRadius = this.radius - lineWidth;
-
-        // Track shape
-        var trackShape = this.getShape('track');
-        if ((this.trackColor != null) && (lineWidth > 0)) {
-            trackShape
-                .setCenterPosition(x, x)
-                .setRadius(barRadius)
-                .lineStyle(lineWidth, this.trackColor);
-        } else {
-            trackShape.reset();
+    setRTL(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-
-        // Bar shape
-        var barShape = this.getShape('bar');
-        if ((this.barColor != null) && (barRadius > 0)) {
-            var anticlockwise, startAngle, endAngle;
-            if (this.value === 1) {
-                anticlockwise = false;
-                startAngle = 0;
-                endAngle = 361;  // overshoot 1
-            } else {
-                anticlockwise = this.anticlockwise;
-                startAngle = RadToDeg(this.startAngle);
-                var deltaAngle = 360 * ((anticlockwise) ? (1 - this.value) : this.value);
-                endAngle = deltaAngle + startAngle;
-            }
-            barShape
-                .setCenterPosition(x, x)
-                .setRadius(barRadius)
-                .setAngle(startAngle, endAngle, anticlockwise)
-                .lineStyle(lineWidth, this.barColor);
-        } else {
-            barShape.reset();
-        }
-
-        // Center shape
-        var centerShape = this.getShape('center');
-        if (this.centerColor && (centerRadius > 0)) {
-            centerShape
-                .setCenterPosition(x, x)
-                .setRadius(centerRadius)
-                .fillStyle(this.centerColor);
-        } else {
-            centerShape.reset();
-        }
+        this.rtl = enable;
+        return this;
     }
+
 }
+
+var Methods = {
+    updateShapes: UpdateShapes,
+}
+
+Object.assign(
+    SimpleLineProgress.prototype,
+    Methods,
+)
 
 export default SimpleLineProgress;

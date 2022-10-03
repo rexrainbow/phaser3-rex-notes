@@ -1,3 +1,5 @@
+import BaseShapes from '../shapes/BaseShapes';
+
 // import * as Phaser from 'phaser';
 export default CircularProgress;
 
@@ -40,7 +42,7 @@ declare namespace CircularProgress {
     }
 }
 
-declare class CircularProgress extends Phaser.GameObjects.Shape {
+declare class CircularProgress extends BaseShapes {
     constructor(
         scene: Phaser.Scene,
         config?: CircularProgress.IConfig

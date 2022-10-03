@@ -1,9 +1,10 @@
+import CustomShapes from '../customshapes/CustomShapes.js';
 import ProgressBase from '../utils/ProgressBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
-class CustomProgress extends ProgressBase {
+class CustomProgress extends ProgressBase(CustomShapes) {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;

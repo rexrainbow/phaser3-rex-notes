@@ -1,3 +1,5 @@
+import BaseShapes from '../shapes/BaseShapes';
+
 // import * as Phaser from 'phaser';
 export default SimpleLineProgress;
 
@@ -11,14 +13,12 @@ declare namespace SimpleLineProgress {
 
     interface IConfig {
         x?: number, y?: number,
-        radius?: number,
+        width?: number, height?: number,
 
-        barColor?: string | number,
         trackColor?: string | number,
-        centerColor?: string | number,
-        thickness?: number,
-        startAngle?: number,
-        anticlockwise?: boolean,
+        trackThickness?: number,
+        trackStrokeColor?: string | number,
+        barColor?: string | number,
 
         value?: number,
 
@@ -28,7 +28,6 @@ declare namespace SimpleLineProgress {
         },
 
         valuechangeCallback: ValueChangeCallbackType,
-
     }
 
     namespace Events {
@@ -40,7 +39,7 @@ declare namespace SimpleLineProgress {
     }
 }
 
-declare class SimpleLineProgress extends Phaser.GameObjects.Shape {
+declare class SimpleLineProgress extends BaseShapes {
     constructor(
         scene: Phaser.Scene,
         config?: SimpleLineProgress.IConfig
@@ -49,9 +48,7 @@ declare class SimpleLineProgress extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
-        radius?: number,
-        barColor?: string | number,
-        value?: number,
+        width?: number, height?: number,
         config?: SimpleLineProgress.IConfig
     );
 
@@ -65,23 +62,19 @@ declare class SimpleLineProgress extends Phaser.GameObjects.Shape {
     setEaseValueDuration(duration: number): this;
     setEaseValueFunction(ease: string): this;
 
-    radius: number;
-    setRadius(radius: number): this;
-
     trackColor: string;
-    setTrackColor(trackColor?: string | number): this;
+    setTrackColor(radius?: string | number): this;
 
-    setThickness(thickness: number): this;
+    trackStrokeThickness: number;
+    trackStrokeColor: string;
+    setTrackStroke(
+        lineWidth?: number,
+        color?: string | number
+    ): this;
 
     barColor: string;
     setBarColor(barColor?: string | number): this;
 
-    startAngle: number;
-    setStartAngle(startAngle: number): this;
-
-    anticlockwise: boolean;
-    setAnticlockwise(anticlockwise: boolean): this;
-
-    centerColor: string;
-    setCenterColor(centerColor?: string | number): this;
+    rtl: boolean;
+    setRTL(enable?: boolean): this;
 }
