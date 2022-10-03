@@ -39,7 +39,6 @@ class Demo extends Phaser.Scene {
             },
 
             align: {
-                // title: 'left',
                 // text: 'left'
             },
 
