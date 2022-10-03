@@ -26,7 +26,11 @@ class Demo extends Phaser.Scene {
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 18 }),
             valueText: this.add.text(0, 0, '100', { fontSize: 18 }),
-            bar: this.rexUI.add.roundRectangle(0, 0, 50, 4, 0, COLOR_DARK),
+            bar: {
+                height: 6,
+                trackColor: COLOR_DARK,
+                trackStrokeColor: COLOR_LIGHT
+            },
 
             align: {
                 // title: 'left',

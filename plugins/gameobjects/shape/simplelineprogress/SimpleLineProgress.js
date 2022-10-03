@@ -7,16 +7,20 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class SimpleLineProgress extends ProgressBase(BaseShapes) {
-    constructor(scene, x, y, width, height, config) {
+    constructor(scene, x, y, width, height, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             width = GetValue(config, 'width', 2);
             height = GetValue(config, 'height', 2);
+            barColor = GetValue(config, 'barColor', undefined);
+            value = GetValue(config, 'value', 0);
         } else if (IsPlainObject(width)) {
             width = GetValue(config, 'width', 2);
             height = GetValue(config, 'height', 2);
+            barColor = GetValue(config, 'barColor', undefined);
+            value = GetValue(config, 'value', 0);
         }
 
         super(scene, x, y, width, height, config);
@@ -28,14 +32,14 @@ class SimpleLineProgress extends ProgressBase(BaseShapes) {
             .addShape((new Lines()).setName('trackStroke'))
 
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
-        this.setBarColor(GetValue(config, 'barColor', undefined));
+        this.setBarColor(barColor);
         this.setTrackStroke(GetValue(config, 'trackThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
 
         this.setRTL(GetValue(config, 'rtl', false));
 
 
         // Set value in last step
-        this.setValue(GetValue(config, 'value', 0));
+        this.setValue(value);
     }
 
     get trackColor() {

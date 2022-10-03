@@ -52,6 +52,15 @@ declare class SimpleLineProgress extends BaseShapes {
         config?: SimpleLineProgress.IConfig
     );
 
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        width?: number, height?: number,
+        barColor?: string | number,
+        value?: number,
+        config?: SimpleLineProgress.IConfig
+    );
+
     value: number;
     getValue(min?: number, max?: number): number;
     setValue(value?: number, min?: number, max?: number): this;

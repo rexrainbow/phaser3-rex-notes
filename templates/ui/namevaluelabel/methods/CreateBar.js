@@ -1,11 +1,9 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import SimpleLineProgress from '../../simplelineprogress/SimpleLineProgress.js';
 
 var CreateBar = function (scene, config) {
-    var color = GetValue(config, 'color', undefined);
-    var trackColor = GetValue(config, 'trackColor', undefined);
-    var thickness = GetValue(config, 'thickness', 4);
-
-    return; //TODO
+    var bar = new SimpleLineProgress(scene, config);
+    scene.add.existing(bar);
+    return bar;
 }
 
 export default CreateBar;
