@@ -15,19 +15,19 @@ var UpdateShapes = function () {
     var bar = this.getShape('bar');
     bar.fillStyle(this.barColor);
     if (bar.isFilled) {
-        var x0, x;
+        var barX0, barX;
         if (!this.rtl) {
-            x = this.width * this.value;
-            x0 = 0;
+            barX = this.width * this.value;
+            barX0 = 0;
         } else {
-            x = this.width * (1 - this.value);
-            x0 = this.width;
+            barX = this.width * (1 - this.value);
+            barX0 = this.width;
         }
         bar
-            .startAt(x0, trackY0).lineTo(x, trackY0)
-            .lineTo(x, trackY1)
-            .lineTo(x0, trackY1)
-            .lineTo(x0, trackY0).close()
+            .startAt(barX0, trackY0).lineTo(barX, trackY0)
+            .lineTo(barX, trackY1)
+            .lineTo(barX0, trackY1)
+            .lineTo(barX0, trackY0).close()
     }
 
     var trackStroke = this.getShape('trackStroke');

@@ -10991,7 +10991,41 @@
     this.resetChildPositionState(indicator);
   };
 
+  var Linear = Phaser.Math.Linear;
   var Percent$1 = Phaser.Math.Percent;
+  var ProgressValueMethods = {
+    setValue: function setValue(value, min, max) {
+      if (value === undefined || value === null) {
+        return this;
+      }
+
+      if (min !== undefined) {
+        value = Percent$1(value, min, max);
+      }
+
+      this.value = value;
+      return this;
+    },
+    addValue: function addValue(inc, min, max) {
+      if (min !== undefined) {
+        inc = Percent$1(inc, min, max);
+      }
+
+      this.value += inc;
+      return this;
+    },
+    getValue: function getValue(min, max) {
+      var value = this.value;
+
+      if (min !== undefined) {
+        value = Linear(min, max, value);
+      }
+
+      return value;
+    }
+  };
+
+  var Percent = Phaser.Math.Percent;
 
   var SetEaseValuePropName = function SetEaseValuePropName(name) {
     this.easeValuePropName = name;
@@ -11022,7 +11056,7 @@
     }
 
     if (min !== undefined) {
-      value = Percent$1(value, min, max);
+      value = Percent(value, min, max);
     }
 
     if (this.easeValueTask === undefined) {
@@ -11078,8 +11112,6 @@
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
-  var Linear = Phaser.Math.Linear;
-  var Percent = Phaser.Math.Percent;
   var SnapTo = Phaser.Math.Snap.To;
 
   var Slider = /*#__PURE__*/function (_Sizer) {
@@ -11232,41 +11264,6 @@
         }
       }
     }, {
-      key: "setValue",
-      value: function setValue(value, min, max) {
-        if (value === undefined || value === null) {
-          return this;
-        }
-
-        if (min !== undefined) {
-          value = Percent(value, min, max);
-        }
-
-        this.value = value;
-        return this;
-      }
-    }, {
-      key: "addValue",
-      value: function addValue(inc, min, max) {
-        if (min !== undefined) {
-          inc = Percent(inc, min, max);
-        }
-
-        this.value += inc;
-        return this;
-      }
-    }, {
-      key: "getValue",
-      value: function getValue(min, max) {
-        var value = this.value;
-
-        if (min !== undefined) {
-          value = Linear(min, max, value);
-        }
-
-        return value;
-      }
-    }, {
       key: "runLayout",
       value: function runLayout(parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
@@ -11297,7 +11294,7 @@
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider.prototype, methods, EaseValueMethods);
+  Object.assign(Slider.prototype, methods, ProgressValueMethods, EaseValueMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
 

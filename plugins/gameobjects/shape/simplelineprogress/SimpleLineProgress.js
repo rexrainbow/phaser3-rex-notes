@@ -17,8 +17,13 @@ class SimpleLineProgress extends ProgressBase(BaseShapes) {
             barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         } else if (IsPlainObject(width)) {
+            config = width;
             width = GetValue(config, 'width', 2);
             height = GetValue(config, 'height', 2);
+            barColor = GetValue(config, 'barColor', undefined);
+            value = GetValue(config, 'value', 0);
+        } else if (IsPlainObject(barColor)) {
+            config = barColor;
             barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         }
@@ -33,7 +38,7 @@ class SimpleLineProgress extends ProgressBase(BaseShapes) {
 
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
         this.setBarColor(barColor);
-        this.setTrackStroke(GetValue(config, 'trackThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
+        this.setTrackStroke(GetValue(config, 'trackStrokeThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
 
         this.setRTL(GetValue(config, 'rtl', false));
 

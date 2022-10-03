@@ -25,11 +25,17 @@ class Demo extends Phaser.Scene {
             icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 18 }),
-            valueText: this.add.text(0, 0, '100', { fontSize: 18 }),
+            valueText: this.add.text(0, 0, '', { fontSize: 18 }),
+
             bar: {
                 height: 6,
+                barColor: COLOR_LIGHT,
                 trackColor: COLOR_DARK,
-                trackStrokeColor: COLOR_LIGHT
+                // trackStrokeColor: COLOR_LIGHT
+
+                easeValue: {
+                    duration: 250
+                }
             },
 
             align: {
@@ -45,6 +51,11 @@ class Demo extends Phaser.Scene {
         })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000)
+
+        var value = 75, min = 0, max = 100;
+        label0
+            .setValueText(Math.floor(value).toString())
+            .easeBarValueTo(value, min, max);
 
     }
 

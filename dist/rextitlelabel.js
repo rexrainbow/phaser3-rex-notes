@@ -10755,7 +10755,7 @@
 
       // Create sizer
       _this = _super.call(this, scene, config);
-      _this.type = 'rexTitleLabell'; // Add elements
+      _this.type = 'rexTitleLabel'; // Add elements
 
       var background = GetValue(config, 'background', undefined);
       var icon = GetValue(config, 'icon', undefined);
@@ -10765,6 +10765,7 @@
       var text = GetValue(config, 'text', undefined);
       var action = GetValue(config, 'action', undefined);
       var actionMask = GetValue(config, 'actionMask', undefined);
+      var hasTextSizer = text || title || separator;
 
       if (background) {
         _this.addBackground(background);
@@ -10774,7 +10775,7 @@
         var padding = undefined;
 
         if (_this.orientation === 0) {
-          if (text || action) {
+          if (hasTextSizer || action) {
             padding = {
               right: GetValue(config, 'space.icon', 0),
               top: GetValue(config, 'space.iconTop', 0),
@@ -10782,7 +10783,7 @@
             };
           }
         } else {
-          if (text || action) {
+          if (hasTextSizer || action) {
             padding = {
               bottom: GetValue(config, 'space.icon', 0),
               left: GetValue(config, 'space.iconLeft', 0),
@@ -10801,7 +10802,7 @@
         }
       }
 
-      if (text || title || separator) {
+      if (hasTextSizer) {
         var textSizer = new Sizer(scene, {
           orientation: 1
         });

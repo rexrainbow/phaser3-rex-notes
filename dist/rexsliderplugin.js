@@ -300,6 +300,40 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
+  var Linear$1 = Phaser.Math.Linear;
+  var Percent$1 = Phaser.Math.Percent;
+  var ProgressValueMethods = {
+    setValue: function setValue(value, min, max) {
+      if (value === undefined || value === null) {
+        return this;
+      }
+
+      if (min !== undefined) {
+        value = Percent$1(value, min, max);
+      }
+
+      this.value = value;
+      return this;
+    },
+    addValue: function addValue(inc, min, max) {
+      if (min !== undefined) {
+        inc = Percent$1(inc, min, max);
+      }
+
+      this.value += inc;
+      return this;
+    },
+    getValue: function getValue(min, max) {
+      var value = this.value;
+
+      if (min !== undefined) {
+        value = Linear$1(min, max, value);
+      }
+
+      return value;
+    }
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var BetweenPoints = Phaser.Math.Angle.BetweenPoints;
   var DistanceBetween = Phaser.Math.Distance.Between;
@@ -453,37 +487,6 @@
         this.emit('valuechange', this._value, oldValue);
       }
     }, {
-      key: "setValue",
-      value: function setValue(value, min, max) {
-        if (min !== undefined) {
-          value = Percent(value, min, max);
-        }
-
-        this.value = value;
-        return this;
-      }
-    }, {
-      key: "addValue",
-      value: function addValue(inc, min, max) {
-        if (min !== undefined) {
-          inc = Percent(inc, min, max);
-        }
-
-        this.value += inc;
-        return this;
-      }
-    }, {
-      key: "getValue",
-      value: function getValue(min, max) {
-        var value = this.value;
-
-        if (min !== undefined) {
-          value = Linear(min, max, value);
-        }
-
-        return value;
-      }
-    }, {
       key: "isDragging",
       get: function get() {
         return this.parent.input.dragState > 0;
@@ -534,6 +537,8 @@
 
     return Slider;
   }(ComponentBase);
+
+  Object.assign(Slider.prototype, ProgressValueMethods);
 
   var SliderPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(SliderPlugin, _Phaser$Plugins$BaseP);

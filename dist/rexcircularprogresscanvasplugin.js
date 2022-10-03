@@ -757,6 +757,40 @@
     }
   };
 
+  var Linear$1 = Phaser.Math.Linear;
+  var Percent$1 = Phaser.Math.Percent;
+  var ProgressValueMethods = {
+    setValue: function setValue(value, min, max) {
+      if (value === undefined || value === null) {
+        return this;
+      }
+
+      if (min !== undefined) {
+        value = Percent$1(value, min, max);
+      }
+
+      this.value = value;
+      return this;
+    },
+    addValue: function addValue(inc, min, max) {
+      if (min !== undefined) {
+        inc = Percent$1(inc, min, max);
+      }
+
+      this.value += inc;
+      return this;
+    },
+    getValue: function getValue(min, max) {
+      var value = this.value;
+
+      if (min !== undefined) {
+        value = Linear$1(min, max, value);
+      }
+
+      return value;
+    }
+  };
+
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
@@ -1549,7 +1583,7 @@
   }(TimerTickTask);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var Linear$1 = Phaser.Math.Linear;
+  var Linear = Phaser.Math.Linear;
 
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -1600,14 +1634,14 @@
       value: function updateGameObject(target, timer) {
         var t = timer.t;
         t = this.easeFn(t);
-        target[this.propertyKey] = Linear$1(this.fromValue, this.toValue, t);
+        target[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
       }
     }]);
 
     return EaseValueTask;
   }(EaseValueTaskBase);
 
-  var Percent$1 = Phaser.Math.Percent;
+  var Percent = Phaser.Math.Percent;
 
   var SetEaseValuePropName = function SetEaseValuePropName(name) {
     this.easeValuePropName = name;
@@ -1638,7 +1672,7 @@
     }
 
     if (min !== undefined) {
-      value = Percent$1(value, min, max);
+      value = Percent(value, min, max);
     }
 
     if (this.easeValueTask === undefined) {
@@ -1695,8 +1729,6 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var Clamp = Phaser.Math.Clamp;
-  var Linear = Phaser.Math.Linear;
-  var Percent = Phaser.Math.Percent;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
 
   var CircularProgress = /*#__PURE__*/function (_Canvas) {
@@ -1795,41 +1827,6 @@
         if (valueChanged) {
           this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
         }
-      }
-    }, {
-      key: "setValue",
-      value: function setValue(value, min, max) {
-        if (value === undefined || value === null) {
-          return this;
-        }
-
-        if (min !== undefined) {
-          value = Percent(value, min, max);
-        }
-
-        this.value = value;
-        return this;
-      }
-    }, {
-      key: "addValue",
-      value: function addValue(inc, min, max) {
-        if (min !== undefined) {
-          inc = Percent(inc, min, max);
-        }
-
-        this.value += inc;
-        return this;
-      }
-    }, {
-      key: "getValue",
-      value: function getValue(min, max) {
-        var value = this.value;
-
-        if (min !== undefined) {
-          value = Linear(min, max, value);
-        }
-
-        return value;
       }
     }, {
       key: "radius",
@@ -2065,7 +2062,7 @@
     return CircularProgress;
   }(Canvas);
 
-  Object.assign(CircularProgress.prototype, EaseValueMethods);
+  Object.assign(CircularProgress.prototype, ProgressValueMethods, EaseValueMethods);
 
   function Factory (x, y, radius, barColor, value, config) {
     var gameObject = new CircularProgress(this.scene, x, y, radius, barColor, value, config);

@@ -1528,7 +1528,7 @@
   Object.assign(Base.prototype, EaseValueMethods);
 
   var FillStyle = function FillStyle(color, alpha) {
-    if (color === undefined) {
+    if (color == null) {
       this.isFilled = false;
     } else {
       if (alpha === undefined) {
@@ -1544,7 +1544,7 @@
   };
 
   var LineStyle = function LineStyle(lineWidth, color, alpha) {
-    if (lineWidth === undefined || color === undefined) {
+    if (lineWidth == null || color == null) {
       this.isStroked = false;
     } else {
       if (alpha === undefined) {

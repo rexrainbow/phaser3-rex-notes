@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import Build from './methods/Build.js';
-import ProgressValueMethods from '../../../plugins/utils/progressvalue/ProgressValueMethods.js';
 
 class NameValueLabel extends Sizer {
     constructor(scene, config) {
@@ -52,6 +51,41 @@ class NameValueLabel extends Sizer {
 
     setValueText(value) {
         this.valueText = value;
+        return this;
+    }
+
+    // Accrss bar game object
+    get barValue() {
+        var bar = this.childrenMap.bar;
+        if (bar === undefined) {
+            return;
+        }
+        return bar.value;
+    }
+
+    set barValue(value) {
+        var bar = this.childrenMap.bar;
+        if (bar === undefined) {
+            return;
+        }
+        bar.setValue(value);
+    }
+
+    setBarValue(value, min, max) {
+        var bar = this.childrenMap.bar;
+        if (bar === undefined) {
+            return this;
+        }
+        bar.setValue(value, min, max);
+        return this;
+    }
+
+    easeBarValueTo(value, min, max) {
+        var bar = this.childrenMap.bar;
+        if (bar === undefined) {
+            return this;
+        }
+        bar.easeValueTo(value, min, max);
         return this;
     }
 
@@ -116,18 +150,6 @@ class NameValueLabel extends Sizer {
         }
         return this;
     }
-
-    get value() {
-    }
-
-    set value(value) {
-
-    }
 }
-
-Object.assign(
-    NameValueLabel.prototype,
-    ProgressValueMethods
-)
 
 export default NameValueLabel;
