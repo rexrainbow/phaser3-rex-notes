@@ -23,6 +23,8 @@ class CircularProgress extends ProgressBase(Canvas) {
         super(scene, x, y, width, width);
         this.type = 'rexCircularProgressCanvas';
 
+        this.bootProgressBase(config);
+
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
         this.setBarColor(barColor);
@@ -53,7 +55,7 @@ class CircularProgress extends ProgressBase(Canvas) {
             GetValue(config, 'textFormatCallbackScope', undefined)
         );
 
-        this.bootProgressBase(config);
+        this.setValue(value);
     }
 
     resize(width, height) {

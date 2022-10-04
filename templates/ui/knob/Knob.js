@@ -1,15 +1,14 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
+import ProgressBase from '../../../plugins/utils/progressbase/ProgressBase.js';
 import CircularProgress from '../circularprogress/CircularProgress.js';
 import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
 import TextObjectMethods from './TextObjectMethods.js';
-import ProgressValueMethods from '../../../plugins/utils/progressvalue/ProgressValueMethods.js';
-import EaseValueMethods from '../../../plugins/utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SnapTo = Phaser.Math.Snap.To;
 
-class Knob extends OverlapSizer {
+class Knob extends ProgressBase(OverlapSizer) {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -18,7 +17,8 @@ class Knob extends OverlapSizer {
         // Create sizer
         super(scene, config);
         this.type = 'rexKnob';
-        this.eventEmitter = GetValue(config, 'eventEmitter', this);
+
+        this.bootProgressBase(config);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -53,17 +53,7 @@ class Knob extends OverlapSizer {
         this.addChildrenMap('knob', knob);
         this.addChildrenMap('text', textObject);
 
-        var callback = GetValue(config, 'valuechangeCallback', null);
-        if (callback !== null) {
-            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-            this.eventEmitter.on('valuechange', callback, scope);
-        }
         this.setEnable(GetValue(config, 'enable', undefined));
-
-        this
-            .setEaseValuePropName('value')
-            .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
-            .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
 
         this.setGap(GetValue(config, 'gap', undefined));
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
@@ -96,10 +86,12 @@ class Knob extends OverlapSizer {
         return this;
     }
 
+    // Override
     get value() {
         return this.sizerChildren.knob.value;
     }
 
+    // Override
     set value(value) {
         if (this.gap !== undefined) {
             value = SnapTo(value, this.gap);
@@ -126,8 +118,6 @@ const INPUTMODE = {
 Object.assign(
     Knob.prototype,
     TextObjectMethods,
-    ProgressValueMethods,
-    EaseValueMethods
 );
 
 export default Knob;

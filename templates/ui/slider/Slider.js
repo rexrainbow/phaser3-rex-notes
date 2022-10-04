@@ -1,23 +1,23 @@
 import Sizer from '../sizer/Sizer.js';
+import ProgressBase from '../../../plugins/utils/progressbase/ProgressBase.js';
 import OnDragThumb from './OnDragThumb.js';
 import OnTouchTrack from './OnTouchTrack.js';
 import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
-import ProgressValueMethods from '../../../plugins/utils/progressvalue/ProgressValueMethods.js';
-import EaseValueMethods from '../../../plugins/utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 const SnapTo = Phaser.Math.Snap.To;
 
-class Slider extends Sizer {
+class Slider extends ProgressBase(Sizer) {
     constructor(scene, config) {
         // Create sizer
         super(scene, config);
         this.type = 'rexSlider';
-        this.eventEmitter = GetValue(config, 'eventEmitter', this);
+
+        this.bootProgressBase(config);
 
         this.reverseAxis = GetValue(config, 'reverseAxis', false);
 
@@ -102,19 +102,10 @@ class Slider extends Sizer {
         this.addChildrenMap('indicator', indicator);
         this.addChildrenMap('thumb', thumb);
 
-        var callback = GetValue(config, 'valuechangeCallback', null);
-        if (callback !== null) {
-            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-            this.eventEmitter.on('valuechange', callback, scope);
-        }
         this.setEnable(GetValue(config, 'enable', undefined));
         this.setGap(GetValue(config, 'gap', undefined));
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
-        this
-            .setEaseValuePropName('value')
-            .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
-            .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
     }
 
     setEnable(enable) {
@@ -130,10 +121,12 @@ class Slider extends Sizer {
         return this;
     }
 
+    // Override
     get value() {
         return this._value;
     }
 
+    // Override
     set value(value) {
         if (this.gap !== undefined) {
             value = SnapTo(value, this.gap);
@@ -178,8 +171,6 @@ var methods = {
 Object.assign(
     Slider.prototype,
     methods,
-    ProgressValueMethods,
-    EaseValueMethods
 );
 
 export default Slider;
