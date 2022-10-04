@@ -115,6 +115,16 @@ class LineProgress extends ProgressBase(BaseShapes) {
         return this;
     }
 
+    get rtl() {
+        return this._rtl;
+    }
+
+    set rtl(value) {
+        value = !!value;
+        this.dirty = this.dirty || (this._rtl != value);
+        this._rtl = value;
+    }
+
     setRTL(enable) {
         if (enable === undefined) {
             enable = true;

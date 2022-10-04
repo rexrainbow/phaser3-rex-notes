@@ -26,15 +26,17 @@ class Demo extends Phaser.Scene {
             value: 0.75
         });
 
-        //var graphics = this.add.graphics({
-        //    lineStyle: {
-        //        width: 2, color: 0xff0000, alpha: 1
-        //    }
-        //})
-        //    .strokeRectShape(bar.getBounds())
+        var graphics = this.add.graphics({
+            lineStyle: {
+                width: 1, color: 0xff0000, alpha: 1
+            }
+        })
+            .strokeRectShape(bar.getBounds())
 
         var gui = new Dat.GUI();
         gui.add(bar, 'value', 0, 1);
+        gui.add(bar, 'skewX', -50, 50);
+        gui.add(bar, 'rtl');
     }
 
     update() { }

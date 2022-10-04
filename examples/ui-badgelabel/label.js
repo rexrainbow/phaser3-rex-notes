@@ -24,7 +24,11 @@ class Demo extends Phaser.Scene {
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
 
-            main: this.add.text(0, 0, 'Item', { fontSize: '20px', color: 'white' }),
+            // main: this.add.text(0, 0, 'Item', { fontSize: '20px', color: 'white' }),
+            main: this.rexUI.add.label({
+                icon: this.rexUI.add.roundRectangle(0, 0, 10, 10, 5, COLOR_LIGHT),
+                text: this.add.text(0, 0, 'Item')
+            }),
 
             rightBottom: this.add.text(0, 0, '', {
                 color: 'yellow',

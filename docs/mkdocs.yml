@@ -97,6 +97,7 @@ nav:
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
             - Circular progres: shape-circularprogress.md
+            - Line progress: shape-lineprogress.md
             - Spinner: shape-spinner.md
             - Custom shapes: shape-custom-shapes.md
             - Custom progress: shape-custom-progress.md

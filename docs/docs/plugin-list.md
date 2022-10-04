@@ -152,6 +152,7 @@
 1. [Shape/Custom progress](shape-custom-progress.md): Custom progress bar shape.
 1. [Shape/Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
 1. [Shape/Full window rectangle](shape-fullwindowrectangle.md): Rectangle shape covered full window.
+1. [Shape/Line progress](shape-lineprogress.md): Horizontal line progress bar shape.
 1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
 1. [Shatter/Image](shatter-image.md): Shatter image to triangle faces.

@@ -12002,6 +12002,16 @@
         return this;
       }
     }, {
+      key: "rtl",
+      get: function get() {
+        return this._rtl;
+      },
+      set: function set(value) {
+        value = !!value;
+        this.dirty = this.dirty || this._rtl != value;
+        this._rtl = value;
+      }
+    }, {
       key: "setRTL",
       value: function setRTL(enable) {
         if (enable === undefined) {
