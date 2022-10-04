@@ -4194,7 +4194,7 @@
   }(TickTask);
 
   var GetValue$u = Phaser.Utils.Objects.GetValue;
-  var Clamp$1 = Phaser.Math.Clamp;
+  var Clamp$2 = Phaser.Math.Clamp;
 
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
@@ -4337,10 +4337,10 @@
             break;
         }
 
-        return Clamp$1(t, 0, 1);
+        return Clamp$2(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$1(value, -1, 1);
+        value = Clamp$2(value, -1, 1);
 
         if (value < 0) {
           this.state = DELAY;
@@ -10981,40 +10981,40 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var Clamp = Phaser.Math.Clamp;
+  var Clamp$1 = Phaser.Math.Clamp;
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
 
       var _super = _createSuper(ProgressBase);
 
-      function ProgressBase(scene, x, y, width, height, config) {
-        var _this;
-
+      function ProgressBase() {
         _classCallCheck(this, ProgressBase);
 
-        _this = _super.call(this, scene, x, y, width, height, config);
-        _this.eventEmitter = GetValue$2(config, 'eventEmitter', _assertThisInitialized(_this));
-        var callback = GetValue$2(config, 'valuechangeCallback', null);
-
-        if (callback !== null) {
-          var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
-
-          _this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
-
-        return _this;
+        return _super.apply(this, arguments);
       }
 
       _createClass(ProgressBase, [{
+        key: "bootProgressBase",
+        value: function bootProgressBase(config) {
+          this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
+          var callback = GetValue$2(config, 'valuechangeCallback', null);
+
+          if (callback !== null) {
+            var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+          }
+
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
+          return this;
+        }
+      }, {
         key: "value",
         get: function get() {
           return this._value;
         },
         set: function set(value) {
-          value = Clamp(value, 0, 1);
+          value = Clamp$1(value, 0, 1);
           var oldValue = this._value;
           var valueChanged = oldValue != value;
           this.dirty = this.dirty || valueChanged;
@@ -11913,6 +11913,8 @@
       _this = _super.call(this, scene, x, y, width, height, config);
       _this.type = 'rexLineProgress';
 
+      _this.bootProgressBase(config);
+
       _this.addShape(new Lines().setName('trackFill')).addShape(new Lines().setName('bar')).addShape(new Lines().setName('trackStroke'));
 
       _this.setTrackColor(GetValue$1(config, 'trackColor', undefined));
@@ -11923,8 +11925,7 @@
 
       _this.setSkewX(GetValue$1(config, 'skewX', 0));
 
-      _this.setRTL(GetValue$1(config, 'rtl', false)); // Set value in last step
-
+      _this.setRTL(GetValue$1(config, 'rtl', false));
 
       _this.setValue(value);
 
@@ -12285,6 +12286,7 @@
           nameValueSizer.add(valueText, {
             padding: padding
           });
+          this.setValueTextFormatCallback(GetValue(config, 'valueTextFormatCallback', undefined), GetValue(config, 'valueTextFormatCallbackScope', undefined));
         }
 
         textSizer.add(nameValueSizer, {
@@ -12354,6 +12356,68 @@
     this.addChildrenMap('bar', bar);
     this.addChildrenMap('action', action);
     this.addChildrenMap('actionMask', actionMask);
+  };
+
+  var SetValueTextFormatCallback = function SetValueTextFormatCallback(callback, scope) {
+    this.valueTextFormatCallback = callback;
+    this.valueTextFormatCallbackScope = scope;
+    return this;
+  };
+
+  var GetFormatValueText = function GetFormatValueText(value, min, max) {
+    if (value === undefined) {
+      value = this.value;
+    }
+
+    if (min === undefined) {
+      min = this.minValue;
+    }
+
+    if (max === undefined) {
+      max = this.maxValue;
+    }
+
+    var text;
+
+    if (this.valueTextFormatCallbackScope) {
+      text = this.valueTextFormatCallback(value, min, max);
+    } else {
+      text = this.valueTextFormatCallback.call(this.valueTextFormatCallbackScope, value, min, max);
+    }
+
+    return text;
+  };
+
+  var UpdateValueText = function UpdateValueText(value, min, max) {
+    var textObject = this.childrenMap.value;
+
+    if (textObject && this.valueTextFormatCallback) {
+      textObject.setText(GetFormatValueText.call(this, value, min, max));
+
+      if (textObject.layout) {
+        textObject.layout();
+      }
+    }
+
+    return this;
+  };
+
+  var Clamp = Phaser.Math.Clamp;
+
+  var SetValue = function SetValue(value, min, max) {
+    this.value = Clamp(value, min, max);
+    this.minValue = min;
+    this.maxValue = max;
+    this.updateValueText(value, min, max);
+    this.setBarValue(value, min, max);
+    return this;
+  };
+
+  var SetValueMethods = {
+    setValueTextFormatCallback: SetValueTextFormatCallback,
+    getFormatValueText: GetFormatValueText,
+    updateValueText: UpdateValueText,
+    setValue: SetValue
   };
 
   var NameValueLabel = /*#__PURE__*/function (_Sizer) {
@@ -12559,6 +12623,8 @@
 
     return NameValueLabel;
   }(Sizer);
+
+  Object.assign(NameValueLabel.prototype, SetValueMethods);
 
   return NameValueLabel;
 

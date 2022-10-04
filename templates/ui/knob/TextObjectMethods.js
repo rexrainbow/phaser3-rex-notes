@@ -18,10 +18,10 @@ var GetFormatText = function (value) {
     return text;
 }
 
-var UpdateText = function () {
+var UpdateText = function (value) {
     var textObject = this.sizerChildren.text;
     if (textObject && this.textFormatCallback) {
-        textObject.setText(GetFormatText.call(this));
+        textObject.setText(GetFormatText.call(this, value));
         if (textObject.layout) {
             textObject.layout();
         }

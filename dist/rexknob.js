@@ -10238,6 +10238,178 @@
 
   Object.assign(OverlapSizer.prototype, methods);
 
+  var Linear = Phaser.Math.Linear;
+  var Percent$1 = Phaser.Math.Percent;
+  var ProgressValueMethods = {
+    setValue: function setValue(value, min, max) {
+      if (value === undefined || value === null) {
+        return this;
+      }
+
+      if (min !== undefined) {
+        value = Percent$1(value, min, max);
+      }
+
+      this.value = value;
+      return this;
+    },
+    addValue: function addValue(inc, min, max) {
+      if (min !== undefined) {
+        inc = Percent$1(inc, min, max);
+      }
+
+      this.value += inc;
+      return this;
+    },
+    getValue: function getValue(min, max) {
+      var value = this.value;
+
+      if (min !== undefined) {
+        value = Linear(min, max, value);
+      }
+
+      return value;
+    }
+  };
+
+  var Percent = Phaser.Math.Percent;
+
+  var SetEaseValuePropName = function SetEaseValuePropName(name) {
+    this.easeValuePropName = name;
+    return this;
+  };
+
+  var SetEaseValueDuration = function SetEaseValueDuration(duration) {
+    this.easeValueDuration = duration;
+    return this;
+  };
+
+  var SetEaseValueFunction = function SetEaseValueFunction(ease) {
+    this.easeFunction = ease;
+    return this;
+  };
+
+  var StopEaseValue = function StopEaseValue() {
+    if (this.easeValueTask) {
+      this.easeValueTask.stop();
+    }
+
+    return this;
+  };
+
+  var EaseValueTo = function EaseValueTo(value, min, max) {
+    if (value === undefined || value === null) {
+      return this;
+    }
+
+    if (min !== undefined) {
+      value = Percent(value, min, max);
+    }
+
+    if (this.easeValueTask === undefined) {
+      this.easeValueTask = new EaseValueTask(this, {
+        eventEmitter: null
+      });
+    }
+
+    this.easeValueTask.restart({
+      key: this.easeValuePropName,
+      to: value,
+      duration: this.easeValueDuration,
+      ease: this.easeFunction
+    });
+    return this;
+  };
+
+  var EaseValueRepeat = function EaseValueRepeat(from, to, repeat, repeatDelay) {
+    if (repeat === undefined) {
+      repeat = -1;
+    }
+
+    if (repeatDelay === undefined) {
+      repeatDelay = 0;
+    }
+
+    if (this.easeValueTask === undefined) {
+      this.easeValueTask = new EaseValueTask(this, {
+        eventEmitter: null
+      });
+    }
+
+    this.easeValueTask.restart({
+      key: this.easeValuePropName,
+      from: from,
+      to: to,
+      duration: this.easeValueDuration,
+      ease: this.easeFunction,
+      repeat: repeat,
+      repeatDelay: repeatDelay
+    });
+    return this;
+  };
+
+  var EaseValueMethods = {
+    setEaseValuePropName: SetEaseValuePropName,
+    setEaseValueDuration: SetEaseValueDuration,
+    setEaseValueFunction: SetEaseValueFunction,
+    stopEaseValue: StopEaseValue,
+    easeValueTo: EaseValueTo,
+    easeValueRepeat: EaseValueRepeat
+  };
+
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var Clamp$1 = Phaser.Math.Clamp;
+  function ProgressBase (BaseClass) {
+    var ProgressBase = /*#__PURE__*/function (_BaseClass) {
+      _inherits(ProgressBase, _BaseClass);
+
+      var _super = _createSuper(ProgressBase);
+
+      function ProgressBase() {
+        _classCallCheck(this, ProgressBase);
+
+        return _super.apply(this, arguments);
+      }
+
+      _createClass(ProgressBase, [{
+        key: "bootProgressBase",
+        value: function bootProgressBase(config) {
+          this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
+          var callback = GetValue$2(config, 'valuechangeCallback', null);
+
+          if (callback !== null) {
+            var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+          }
+
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
+          return this;
+        }
+      }, {
+        key: "value",
+        get: function get() {
+          return this._value;
+        },
+        set: function set(value) {
+          value = Clamp$1(value, 0, 1);
+          var oldValue = this._value;
+          var valueChanged = oldValue != value;
+          this.dirty = this.dirty || valueChanged;
+          this._value = value;
+
+          if (valueChanged) {
+            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
+          }
+        }
+      }]);
+
+      return ProgressBase;
+    }(BaseClass);
+
+    Object.assign(ProgressBase.prototype, ProgressValueMethods, EaseValueMethods);
+    return ProgressBase;
+  }
+
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
@@ -10517,178 +10689,6 @@
   }(Shape);
 
   Object.assign(BaseShapes.prototype, Render);
-
-  var Linear = Phaser.Math.Linear;
-  var Percent$1 = Phaser.Math.Percent;
-  var ProgressValueMethods = {
-    setValue: function setValue(value, min, max) {
-      if (value === undefined || value === null) {
-        return this;
-      }
-
-      if (min !== undefined) {
-        value = Percent$1(value, min, max);
-      }
-
-      this.value = value;
-      return this;
-    },
-    addValue: function addValue(inc, min, max) {
-      if (min !== undefined) {
-        inc = Percent$1(inc, min, max);
-      }
-
-      this.value += inc;
-      return this;
-    },
-    getValue: function getValue(min, max) {
-      var value = this.value;
-
-      if (min !== undefined) {
-        value = Linear(min, max, value);
-      }
-
-      return value;
-    }
-  };
-
-  var Percent = Phaser.Math.Percent;
-
-  var SetEaseValuePropName = function SetEaseValuePropName(name) {
-    this.easeValuePropName = name;
-    return this;
-  };
-
-  var SetEaseValueDuration = function SetEaseValueDuration(duration) {
-    this.easeValueDuration = duration;
-    return this;
-  };
-
-  var SetEaseValueFunction = function SetEaseValueFunction(ease) {
-    this.easeFunction = ease;
-    return this;
-  };
-
-  var StopEaseValue = function StopEaseValue() {
-    if (this.easeValueTask) {
-      this.easeValueTask.stop();
-    }
-
-    return this;
-  };
-
-  var EaseValueTo = function EaseValueTo(value, min, max) {
-    if (value === undefined || value === null) {
-      return this;
-    }
-
-    if (min !== undefined) {
-      value = Percent(value, min, max);
-    }
-
-    if (this.easeValueTask === undefined) {
-      this.easeValueTask = new EaseValueTask(this, {
-        eventEmitter: null
-      });
-    }
-
-    this.easeValueTask.restart({
-      key: this.easeValuePropName,
-      to: value,
-      duration: this.easeValueDuration,
-      ease: this.easeFunction
-    });
-    return this;
-  };
-
-  var EaseValueRepeat = function EaseValueRepeat(from, to, repeat, repeatDelay) {
-    if (repeat === undefined) {
-      repeat = -1;
-    }
-
-    if (repeatDelay === undefined) {
-      repeatDelay = 0;
-    }
-
-    if (this.easeValueTask === undefined) {
-      this.easeValueTask = new EaseValueTask(this, {
-        eventEmitter: null
-      });
-    }
-
-    this.easeValueTask.restart({
-      key: this.easeValuePropName,
-      from: from,
-      to: to,
-      duration: this.easeValueDuration,
-      ease: this.easeFunction,
-      repeat: repeat,
-      repeatDelay: repeatDelay
-    });
-    return this;
-  };
-
-  var EaseValueMethods = {
-    setEaseValuePropName: SetEaseValuePropName,
-    setEaseValueDuration: SetEaseValueDuration,
-    setEaseValueFunction: SetEaseValueFunction,
-    stopEaseValue: StopEaseValue,
-    easeValueTo: EaseValueTo,
-    easeValueRepeat: EaseValueRepeat
-  };
-
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
-  var Clamp$1 = Phaser.Math.Clamp;
-  function ProgressBase (BaseClass) {
-    var ProgressBase = /*#__PURE__*/function (_BaseClass) {
-      _inherits(ProgressBase, _BaseClass);
-
-      var _super = _createSuper(ProgressBase);
-
-      function ProgressBase(scene, x, y, width, height, config) {
-        var _this;
-
-        _classCallCheck(this, ProgressBase);
-
-        _this = _super.call(this, scene, x, y, width, height, config);
-        _this.eventEmitter = GetValue$2(config, 'eventEmitter', _assertThisInitialized(_this));
-        var callback = GetValue$2(config, 'valuechangeCallback', null);
-
-        if (callback !== null) {
-          var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
-
-          _this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
-
-        return _this;
-      }
-
-      _createClass(ProgressBase, [{
-        key: "value",
-        get: function get() {
-          return this._value;
-        },
-        set: function set(value) {
-          value = Clamp$1(value, 0, 1);
-          var oldValue = this._value;
-          var valueChanged = oldValue != value;
-          this.dirty = this.dirty || valueChanged;
-          this._value = value;
-
-          if (valueChanged) {
-            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
-          }
-        }
-      }]);
-
-      return ProgressBase;
-    }(BaseClass);
-
-    Object.assign(ProgressBase.prototype, ProgressValueMethods, EaseValueMethods);
-    return ProgressBase;
-  }
 
   var FillStyle = function FillStyle(color, alpha) {
     if (color == null) {
@@ -11383,12 +11383,14 @@
         y = GetValue$1(config, 'y', 0);
         radius = GetValue$1(config, 'radius', 1);
         barColor = GetValue$1(config, 'barColor', undefined);
-        GetValue$1(config, 'value', 0);
+        value = GetValue$1(config, 'value', 0);
       }
 
       var width = radius * 2;
-      _this = _super.call(this, scene, x, y, width, width, config);
+      _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
+
+      _this.bootProgressBase(config);
 
       _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
 
@@ -11404,10 +11406,9 @@
 
       _this.setStartAngle(GetValue$1(config, 'startAngle', DefaultStartAngle));
 
-      _this.setAnticlockwise(GetValue$1(config, 'anticlockwise', false)); // Set value in last step
+      _this.setAnticlockwise(GetValue$1(config, 'anticlockwise', false));
 
-
-      _this.setValue(GetValue$1(config, 'value', 0));
+      _this.setValue(value);
 
       return _this;
     }
@@ -11701,11 +11702,11 @@
     return text;
   };
 
-  var UpdateText = function UpdateText() {
+  var UpdateText = function UpdateText(value) {
     var textObject = this.sizerChildren.text;
 
     if (textObject && this.textFormatCallback) {
-      textObject.setText(GetFormatText.call(this));
+      textObject.setText(GetFormatText.call(this, value));
 
       if (textObject.layout) {
         textObject.layout();
@@ -11724,8 +11725,8 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var SnapTo = Phaser.Math.Snap.To;
 
-  var Knob = /*#__PURE__*/function (_OverlapSizer) {
-    _inherits(Knob, _OverlapSizer);
+  var Knob = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(Knob, _ProgressBase);
 
     var _super = _createSuper(Knob);
 
@@ -11741,7 +11742,9 @@
 
       _this = _super.call(this, scene, config);
       _this.type = 'rexKnob';
-      _this.eventEmitter = GetValue(config, 'eventEmitter', _assertThisInitialized(_this)); // Add elements
+
+      _this.bootProgressBase(config); // Add elements
+
 
       var background = GetValue(config, 'background', undefined);
       var textObject = GetValue(config, 'text', undefined);
@@ -11780,17 +11783,7 @@
 
       _this.addChildrenMap('text', textObject);
 
-      var callback = GetValue(config, 'valuechangeCallback', null);
-
-      if (callback !== null) {
-        var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-
-        _this.eventEmitter.on('valuechange', callback, scope);
-      }
-
       _this.setEnable(GetValue(config, 'enable', undefined));
-
-      _this.setEaseValuePropName('value').setEaseValueDuration(GetValue(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'));
 
       _this.setGap(GetValue(config, 'gap', undefined));
 
@@ -11833,12 +11826,14 @@
       value: function setGap(gap) {
         this.gap = gap;
         return this;
-      }
+      } // Override
+
     }, {
       key: "value",
       get: function get() {
         return this.sizerChildren.knob.value;
-      },
+      } // Override
+      ,
       set: function set(value) {
         if (this.gap !== undefined) {
           value = SnapTo(value, this.gap);
@@ -11856,7 +11851,7 @@
     }]);
 
     return Knob;
-  }(OverlapSizer);
+  }(ProgressBase(OverlapSizer));
 
   var INPUTMODE = {
     pan: 0,
@@ -11864,7 +11859,7 @@
     click: 1,
     none: -1
   };
-  Object.assign(Knob.prototype, TextObjectMethods, ProgressValueMethods, EaseValueMethods);
+  Object.assign(Knob.prototype, TextObjectMethods);
 
   return Knob;
 

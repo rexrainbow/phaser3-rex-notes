@@ -1425,27 +1425,27 @@
 
       var _super = _createSuper(ProgressBase);
 
-      function ProgressBase(scene, x, y, width, height, config) {
-        var _this;
-
+      function ProgressBase() {
         _classCallCheck(this, ProgressBase);
 
-        _this = _super.call(this, scene, x, y, width, height, config);
-        _this.eventEmitter = GetValue$2(config, 'eventEmitter', _assertThisInitialized(_this));
-        var callback = GetValue$2(config, 'valuechangeCallback', null);
-
-        if (callback !== null) {
-          var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
-
-          _this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
-
-        return _this;
+        return _super.apply(this, arguments);
       }
 
       _createClass(ProgressBase, [{
+        key: "bootProgressBase",
+        value: function bootProgressBase(config) {
+          this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
+          var callback = GetValue$2(config, 'valuechangeCallback', null);
+
+          if (callback !== null) {
+            var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+          }
+
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
+          return this;
+        }
+      }, {
         key: "value",
         get: function get() {
           return this._value;
@@ -2212,12 +2212,14 @@
         y = GetValue(config, 'y', 0);
         radius = GetValue(config, 'radius', 1);
         barColor = GetValue(config, 'barColor', undefined);
-        GetValue(config, 'value', 0);
+        value = GetValue(config, 'value', 0);
       }
 
       var width = radius * 2;
-      _this = _super.call(this, scene, x, y, width, width, config);
+      _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
+
+      _this.bootProgressBase(config);
 
       _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
 
@@ -2233,10 +2235,9 @@
 
       _this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
 
-      _this.setAnticlockwise(GetValue(config, 'anticlockwise', false)); // Set value in last step
+      _this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
-
-      _this.setValue(GetValue(config, 'value', 0));
+      _this.setValue(value);
 
       return _this;
     }

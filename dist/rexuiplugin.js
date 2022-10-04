@@ -897,7 +897,7 @@
     return entry;
   };
 
-  var SetValue = function SetValue(target, keys, value, delimiter) {
+  var SetValue$1 = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
     } // no object
@@ -932,7 +932,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.NinePatch', NinePatch$1);
+  SetValue$1(window, 'RexPlugins.UI.NinePatch', NinePatch$1);
 
   var GetCalcMatrix$2 = Phaser.GameObjects.GetCalcMatrix;
 
@@ -2203,7 +2203,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.NinePatch2', NinePatch);
+  SetValue$1(window, 'RexPlugins.UI.NinePatch2', NinePatch);
 
   var GetValue$2s = Phaser.Utils.Objects.GetValue;
 
@@ -2927,7 +2927,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$1);
+  SetValue$1(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$1);
 
   // copy from Phaser.GameObjects.Text
   var Utils$1 = Phaser.Renderer.WebGL.Utils;
@@ -3709,7 +3709,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle);
+  SetValue$1(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -7251,7 +7251,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.BBCodeText', BBCodeText);
+  SetValue$1(window, 'RexPlugins.UI.BBCodeText', BBCodeText);
 
   var GETPROP_RESULT = {
     plainText: null,
@@ -7666,7 +7666,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TagText', TagText);
+  SetValue$1(window, 'RexPlugins.UI.TagText', TagText);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -8688,7 +8688,7 @@
 
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.HiddenEdit', HiddenTextEdit$1);
+  SetValue$1(window, 'RexPlugins.UI.HiddenEdit', HiddenTextEdit$1);
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
@@ -10832,14 +10832,14 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Container', ContainerLite);
+  SetValue$1(window, 'RexPlugins.UI.Container', ContainerLite);
 
   ObjectFactory.register('canvas', function (x, y, width, height) {
     var gameObject = new Canvas(this.scene, x, y, width, height);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Canvas', Canvas);
+  SetValue$1(window, 'RexPlugins.UI.Canvas', Canvas);
 
   var GetValue$2a = Phaser.Utils.Objects.GetValue;
 
@@ -10971,7 +10971,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.CircleMaskImage', CircleMaskImage);
+  SetValue$1(window, 'RexPlugins.UI.CircleMaskImage', CircleMaskImage);
 
   var GetValue$29 = Phaser.Utils.Objects.GetValue;
 
@@ -11086,7 +11086,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.AlphaMaskImage', AlphaMaskImage);
+  SetValue$1(window, 'RexPlugins.UI.AlphaMaskImage', AlphaMaskImage);
 
   var GetValue$28 = Phaser.Utils.Objects.GetValue;
 
@@ -14670,7 +14670,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.DynamicText', DynamicText);
+  SetValue$1(window, 'RexPlugins.UI.DynamicText', DynamicText);
 
   var GetValue$20 = Phaser.Utils.Objects.GetValue;
 
@@ -14857,7 +14857,7 @@
   }(TickTask);
 
   var GetValue$1_ = Phaser.Utils.Objects.GetValue;
-  var Clamp$b = Phaser.Math.Clamp;
+  var Clamp$c = Phaser.Math.Clamp;
 
   var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
@@ -15000,10 +15000,10 @@
             break;
         }
 
-        return Clamp$b(t, 0, 1);
+        return Clamp$c(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$b(value, -1, 1);
+        value = Clamp$c(value, -1, 1);
 
         if (value < 0) {
           this.state = DELAY;
@@ -15831,7 +15831,7 @@
     return t;
   };
 
-  var Clamp$a = Phaser.Math.Clamp;
+  var Clamp$b = Phaser.Math.Clamp;
 
   var Timer = /*#__PURE__*/function () {
     function Timer(timeline, config) {
@@ -15925,7 +15925,7 @@
       key: "getProgress",
       value: function getProgress() {
         var value = 1 - this.remainder / this.duration;
-        value = Clamp$a(value, 0, 1);
+        value = Clamp$b(value, 0, 1);
 
         if (this.yoyo) {
           value = Yoyo$1(value);
@@ -15936,7 +15936,7 @@
     }, {
       key: "setProgress",
       value: function setProgress(value) {
-        value = Clamp$a(value, 0, 1);
+        value = Clamp$b(value, 0, 1);
         this.remainder = this.duration * (1 - value);
       }
     }, {
@@ -20238,7 +20238,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TextPlayer', TextPlayer);
+  SetValue$1(window, 'RexPlugins.UI.TextPlayer', TextPlayer);
 
   var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
@@ -20973,127 +20973,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.CanvasInput', CanvasInput);
-
-  var DrawCircle = function DrawCircle(canvas, context, x, y, rx, ry, fillStyle, strokeStyle, lineWidth, startAngle, endAngle, anticlockwise) {
-    if (startAngle === undefined) {
-      startAngle = 0;
-    }
-
-    if (endAngle === undefined) {
-      endAngle = 2 * Math.PI;
-    }
-
-    if (anticlockwise === undefined) {
-      anticlockwise = false;
-    }
-
-    context.beginPath();
-    context.ellipse(x, y, rx, ry, 0, startAngle, endAngle, anticlockwise);
-
-    if (fillStyle != null) {
-      context.fillStyle = fillStyle;
-      context.fill();
-    }
-
-    if (strokeStyle != null) {
-      context.strokeStyle = strokeStyle;
-      context.lineWidth = lineWidth;
-      context.stroke();
-    }
-  };
-
-  var DrawText = function DrawText(canvas, context, x, y, text, font, fillStyle, strokeStyle, lineWidth, textAlign, textBaseline) {
-    if (lineWidth === undefined && strokeStyle != null) {
-      lineWidth = 2;
-    }
-
-    if (textAlign === undefined) {
-      textAlign = 'start';
-    }
-
-    if (textBaseline === undefined) {
-      textBaseline = 'alphabetic';
-    }
-
-    context.font = font;
-    context.textAlign = textAlign;
-    context.textBaseline = textBaseline;
-    context.fillStyle = fillStyle;
-    context.strokeStyle = strokeStyle;
-    context.lineWidth = lineWidth;
-    context.lineCap = 'round';
-    context.lineJoin = 'round';
-
-    if (strokeStyle != null && strokeStyle !== 'none' && lineWidth > 0) {
-      context.strokeText(text, x, y);
-    }
-
-    if (fillStyle != null && fillStyle !== 'none') {
-      context.fillText(text, x, y);
-    }
-  };
-
-  var DrawContent = function DrawContent() {
-    var x = this.radius;
-    var lineWidth = this.thickness * this.radius;
-    var barRadius = this.radius - lineWidth / 2;
-    var centerRadius = this.radius - lineWidth;
-    var canvas = this.canvas,
-        context = this.context; // Draw track
-
-    if (this.trackColor && lineWidth > 0) {
-      context.save();
-      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.trackColor, lineWidth);
-      context.restore();
-    } // Draw bar
-
-
-    if (this.barColor && barRadius > 0) {
-      var anticlockwise, startAngle, endAngle;
-
-      if (this.value === 1) {
-        anticlockwise = false;
-        startAngle = 0;
-        endAngle = 2 * Math.PI;
-      } else {
-        anticlockwise = this.anticlockwise;
-        startAngle = this.startAngle;
-        var deltaAngle = 2 * Math.PI * (anticlockwise ? 1 - this.value : this.value);
-        endAngle = deltaAngle + startAngle;
-      }
-
-      context.save();
-      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.barColor, lineWidth, startAngle, endAngle, anticlockwise);
-      context.restore();
-    } // Draw center
-
-
-    if (this.centerColor && centerRadius > 0) {
-      var fillStyle;
-
-      if (this.centerColor2) {
-        fillStyle = this.context.createRadialGradient(x, x, 0, x, x, centerRadius);
-        fillStyle.addColorStop(0, this.centerColor);
-        fillStyle.addColorStop(1, this.centerColor2);
-      } else {
-        fillStyle = this.centerColor;
-      }
-
-      context.save();
-      DrawCircle(canvas, context, x, x, centerRadius, centerRadius, fillStyle);
-      context.restore();
-    } // Draw text
-
-
-    if (this.textFormatCallback && (this.textColor || this.textStrokeColor)) {
-      context.save();
-      DrawText(canvas, context, x, x, this.getFormatText(), this.textFont, this.textColor, this.textStrokeColor, this.textStrokeThickness, 'center', // textAlign
-      'middle' // textBaseline
-      );
-      context.restore();
-    }
-  };
+  SetValue$1(window, 'RexPlugins.UI.CanvasInput', CanvasInput);
 
   var Linear$7 = Phaser.Math.Linear;
   var Percent$2 = Phaser.Math.Percent;
@@ -21274,12 +21154,185 @@
   };
 
   var GetValue$1L = Phaser.Utils.Objects.GetValue;
+  var Clamp$a = Phaser.Math.Clamp;
+  function ProgressBase (BaseClass) {
+    var ProgressBase = /*#__PURE__*/function (_BaseClass) {
+      _inherits(ProgressBase, _BaseClass);
+
+      var _super = _createSuper(ProgressBase);
+
+      function ProgressBase() {
+        _classCallCheck(this, ProgressBase);
+
+        return _super.apply(this, arguments);
+      }
+
+      _createClass(ProgressBase, [{
+        key: "bootProgressBase",
+        value: function bootProgressBase(config) {
+          this.eventEmitter = GetValue$1L(config, 'eventEmitter', this);
+          var callback = GetValue$1L(config, 'valuechangeCallback', null);
+
+          if (callback !== null) {
+            var scope = GetValue$1L(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+          }
+
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1L(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1L(config, 'easeValue.ease', 'Linear'));
+          return this;
+        }
+      }, {
+        key: "value",
+        get: function get() {
+          return this._value;
+        },
+        set: function set(value) {
+          value = Clamp$a(value, 0, 1);
+          var oldValue = this._value;
+          var valueChanged = oldValue != value;
+          this.dirty = this.dirty || valueChanged;
+          this._value = value;
+
+          if (valueChanged) {
+            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
+          }
+        }
+      }]);
+
+      return ProgressBase;
+    }(BaseClass);
+
+    Object.assign(ProgressBase.prototype, ProgressValueMethods, EaseValueMethods);
+    return ProgressBase;
+  }
+
+  var DrawCircle = function DrawCircle(canvas, context, x, y, rx, ry, fillStyle, strokeStyle, lineWidth, startAngle, endAngle, anticlockwise) {
+    if (startAngle === undefined) {
+      startAngle = 0;
+    }
+
+    if (endAngle === undefined) {
+      endAngle = 2 * Math.PI;
+    }
+
+    if (anticlockwise === undefined) {
+      anticlockwise = false;
+    }
+
+    context.beginPath();
+    context.ellipse(x, y, rx, ry, 0, startAngle, endAngle, anticlockwise);
+
+    if (fillStyle != null) {
+      context.fillStyle = fillStyle;
+      context.fill();
+    }
+
+    if (strokeStyle != null) {
+      context.strokeStyle = strokeStyle;
+      context.lineWidth = lineWidth;
+      context.stroke();
+    }
+  };
+
+  var DrawText = function DrawText(canvas, context, x, y, text, font, fillStyle, strokeStyle, lineWidth, textAlign, textBaseline) {
+    if (lineWidth === undefined && strokeStyle != null) {
+      lineWidth = 2;
+    }
+
+    if (textAlign === undefined) {
+      textAlign = 'start';
+    }
+
+    if (textBaseline === undefined) {
+      textBaseline = 'alphabetic';
+    }
+
+    context.font = font;
+    context.textAlign = textAlign;
+    context.textBaseline = textBaseline;
+    context.fillStyle = fillStyle;
+    context.strokeStyle = strokeStyle;
+    context.lineWidth = lineWidth;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+
+    if (strokeStyle != null && strokeStyle !== 'none' && lineWidth > 0) {
+      context.strokeText(text, x, y);
+    }
+
+    if (fillStyle != null && fillStyle !== 'none') {
+      context.fillText(text, x, y);
+    }
+  };
+
+  var DrawContent = function DrawContent() {
+    var x = this.radius;
+    var lineWidth = this.thickness * this.radius;
+    var barRadius = this.radius - lineWidth / 2;
+    var centerRadius = this.radius - lineWidth;
+    var canvas = this.canvas,
+        context = this.context; // Draw track
+
+    if (this.trackColor && lineWidth > 0) {
+      context.save();
+      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.trackColor, lineWidth);
+      context.restore();
+    } // Draw bar
+
+
+    if (this.barColor && barRadius > 0) {
+      var anticlockwise, startAngle, endAngle;
+
+      if (this.value === 1) {
+        anticlockwise = false;
+        startAngle = 0;
+        endAngle = 2 * Math.PI;
+      } else {
+        anticlockwise = this.anticlockwise;
+        startAngle = this.startAngle;
+        var deltaAngle = 2 * Math.PI * (anticlockwise ? 1 - this.value : this.value);
+        endAngle = deltaAngle + startAngle;
+      }
+
+      context.save();
+      DrawCircle(canvas, context, x, x, barRadius, barRadius, undefined, this.barColor, lineWidth, startAngle, endAngle, anticlockwise);
+      context.restore();
+    } // Draw center
+
+
+    if (this.centerColor && centerRadius > 0) {
+      var fillStyle;
+
+      if (this.centerColor2) {
+        fillStyle = this.context.createRadialGradient(x, x, 0, x, x, centerRadius);
+        fillStyle.addColorStop(0, this.centerColor);
+        fillStyle.addColorStop(1, this.centerColor2);
+      } else {
+        fillStyle = this.centerColor;
+      }
+
+      context.save();
+      DrawCircle(canvas, context, x, x, centerRadius, centerRadius, fillStyle);
+      context.restore();
+    } // Draw text
+
+
+    if (this.textFormatCallback && (this.textColor || this.textStrokeColor)) {
+      context.save();
+      DrawText(canvas, context, x, x, this.getFormatText(), this.textFont, this.textColor, this.textStrokeColor, this.textStrokeThickness, 'center', // textAlign
+      'middle' // textBaseline
+      );
+      context.restore();
+    }
+  };
+
+  var GetValue$1K = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$A = Phaser.Utils.Objects.IsPlainObject;
   var Clamp$9 = Phaser.Math.Clamp;
   var DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
 
-  var CircularProgress$1 = /*#__PURE__*/function (_Canvas) {
-    _inherits(CircularProgress, _Canvas);
+  var CircularProgress$1 = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(CircularProgress, _ProgressBase);
 
     var _super = _createSuper(CircularProgress);
 
@@ -21290,55 +21343,46 @@
 
       if (IsPlainObject$A(x)) {
         config = x;
-        x = GetValue$1L(config, 'x', 0);
-        y = GetValue$1L(config, 'y', 0);
-        radius = GetValue$1L(config, 'radius', 1);
-        barColor = GetValue$1L(config, 'barColor', undefined);
-        value = GetValue$1L(config, 'value', 0);
+        x = GetValue$1K(config, 'x', 0);
+        y = GetValue$1K(config, 'y', 0);
+        radius = GetValue$1K(config, 'radius', 1);
+        barColor = GetValue$1K(config, 'barColor', undefined);
+        value = GetValue$1K(config, 'value', 0);
       }
 
       var width = radius * 2;
       _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgressCanvas';
-      _this.eventEmitter = GetValue$1L(config, 'eventEmitter', _assertThisInitialized(_this));
+
+      _this.bootProgressBase(config);
 
       _this.setRadius(radius);
 
-      _this.setTrackColor(GetValue$1L(config, 'trackColor', undefined));
+      _this.setTrackColor(GetValue$1K(config, 'trackColor', undefined));
 
       _this.setBarColor(barColor);
 
-      _this.setCenterColor(GetValue$1L(config, 'centerColor', undefined));
+      _this.setCenterColor(GetValue$1K(config, 'centerColor', undefined));
 
-      _this.setThickness(GetValue$1L(config, 'thickness', 0.2));
+      _this.setThickness(GetValue$1K(config, 'thickness', 0.2));
 
-      _this.setStartAngle(GetValue$1L(config, 'startAngle', DefaultStartAngle$1));
+      _this.setStartAngle(GetValue$1K(config, 'startAngle', DefaultStartAngle$1));
 
-      _this.setAnticlockwise(GetValue$1L(config, 'anticlockwise', false));
+      _this.setAnticlockwise(GetValue$1K(config, 'anticlockwise', false));
 
-      _this.setTextColor(GetValue$1L(config, 'textColor', undefined));
+      _this.setTextColor(GetValue$1K(config, 'textColor', undefined));
 
-      _this.setTextStrokeColor(GetValue$1L(config, 'textStrokeColor', undefined), GetValue$1L(config, 'textStrokeThickness', undefined));
+      _this.setTextStrokeColor(GetValue$1K(config, 'textStrokeColor', undefined), GetValue$1K(config, 'textStrokeThickness', undefined));
 
-      var textFont = GetValue$1L(config, 'textFont', undefined);
+      var textFont = GetValue$1K(config, 'textFont', undefined);
 
       if (textFont) {
         _this.setTextFont(textFont);
       } else {
-        _this.setTextFont(GetValue$1L(config, 'textSize', '16px'), GetValue$1L(config, 'textFamily', 'Courier'), GetValue$1L(config, 'textStyle', ''));
+        _this.setTextFont(GetValue$1K(config, 'textSize', '16px'), GetValue$1K(config, 'textFamily', 'Courier'), GetValue$1K(config, 'textStyle', ''));
       }
 
-      _this.setTextFormatCallback(GetValue$1L(config, 'textFormatCallback', undefined), GetValue$1L(config, 'textFormatCallbackScope', undefined));
-
-      var callback = GetValue$1L(config, 'valuechangeCallback', null);
-
-      if (callback !== null) {
-        var scope = GetValue$1L(config, 'valuechangeCallbackScope', undefined);
-
-        _this.eventEmitter.on('valuechange', callback, scope);
-      }
-
-      _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1L(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1L(config, 'easeValue.ease', 'Linear'));
+      _this.setTextFormatCallback(GetValue$1K(config, 'textFormatCallback', undefined), GetValue$1K(config, 'textFormatCallbackScope', undefined));
 
       _this.setValue(value);
 
@@ -21358,22 +21402,6 @@
 
         this.setRadius(width / 2);
         return this;
-      }
-    }, {
-      key: "value",
-      get: function get() {
-        return this._value;
-      },
-      set: function set(value) {
-        value = Clamp$9(value, 0, 1);
-        var oldValue = this._value;
-        var valueChanged = oldValue != value;
-        this.dirty = this.dirty || valueChanged;
-        this._value = value;
-
-        if (valueChanged) {
-          this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
-        }
       }
     }, {
       key: "radius",
@@ -21607,16 +21635,14 @@
     }]);
 
     return CircularProgress;
-  }(Canvas);
-
-  Object.assign(CircularProgress$1.prototype, ProgressValueMethods, EaseValueMethods);
+  }(ProgressBase(Canvas));
 
   ObjectFactory.register('circularProgressCanvas', function (x, y, radius, barColor, value, config) {
     var gameObject = new CircularProgress$1(this.scene, x, y, radius, barColor, value, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.CircularProgressCanvas', CircularProgress$1);
+  SetValue$1(window, 'RexPlugins.UI.CircularProgressCanvas', CircularProgress$1);
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
 
@@ -21897,59 +21923,6 @@
   }(Shape);
 
   Object.assign(BaseShapes.prototype, Render);
-
-  var GetValue$1K = Phaser.Utils.Objects.GetValue;
-  var Clamp$8 = Phaser.Math.Clamp;
-  function ProgressBase (BaseClass) {
-    var ProgressBase = /*#__PURE__*/function (_BaseClass) {
-      _inherits(ProgressBase, _BaseClass);
-
-      var _super = _createSuper(ProgressBase);
-
-      function ProgressBase(scene, x, y, width, height, config) {
-        var _this;
-
-        _classCallCheck(this, ProgressBase);
-
-        _this = _super.call(this, scene, x, y, width, height, config);
-        _this.eventEmitter = GetValue$1K(config, 'eventEmitter', _assertThisInitialized(_this));
-        var callback = GetValue$1K(config, 'valuechangeCallback', null);
-
-        if (callback !== null) {
-          var scope = GetValue$1K(config, 'valuechangeCallbackScope', undefined);
-
-          _this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1K(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1K(config, 'easeValue.ease', 'Linear'));
-
-        return _this;
-      }
-
-      _createClass(ProgressBase, [{
-        key: "value",
-        get: function get() {
-          return this._value;
-        },
-        set: function set(value) {
-          value = Clamp$8(value, 0, 1);
-          var oldValue = this._value;
-          var valueChanged = oldValue != value;
-          this.dirty = this.dirty || valueChanged;
-          this._value = value;
-
-          if (valueChanged) {
-            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
-          }
-        }
-      }]);
-
-      return ProgressBase;
-    }(BaseClass);
-
-    Object.assign(ProgressBase.prototype, ProgressValueMethods, EaseValueMethods);
-    return ProgressBase;
-  }
 
   var FillStyle = function FillStyle(color, alpha) {
     if (color == null) {
@@ -23378,7 +23351,7 @@
 
   var GetValue$1J = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$z = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$7 = Phaser.Math.Clamp;
+  var Clamp$8 = Phaser.Math.Clamp;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
 
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
@@ -23397,12 +23370,14 @@
         y = GetValue$1J(config, 'y', 0);
         radius = GetValue$1J(config, 'radius', 1);
         barColor = GetValue$1J(config, 'barColor', undefined);
-        GetValue$1J(config, 'value', 0);
+        value = GetValue$1J(config, 'value', 0);
       }
 
       var width = radius * 2;
-      _this = _super.call(this, scene, x, y, width, width, config);
+      _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
+
+      _this.bootProgressBase(config);
 
       _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
 
@@ -23418,10 +23393,9 @@
 
       _this.setStartAngle(GetValue$1J(config, 'startAngle', DefaultStartAngle));
 
-      _this.setAnticlockwise(GetValue$1J(config, 'anticlockwise', false)); // Set value in last step
+      _this.setAnticlockwise(GetValue$1J(config, 'anticlockwise', false));
 
-
-      _this.setValue(GetValue$1J(config, 'value', 0));
+      _this.setValue(value);
 
       return _this;
     }
@@ -23527,7 +23501,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$7(value, 0, 1);
+        value = Clamp$8(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -23567,7 +23541,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.CircularProgress', CircularProgress);
+  SetValue$1(window, 'RexPlugins.UI.CircularProgress', CircularProgress);
 
   var UpdateShapes = function UpdateShapes() {
     var skewX = this.skewX;
@@ -23663,6 +23637,8 @@
       _this = _super.call(this, scene, x, y, width, height, config);
       _this.type = 'rexLineProgress';
 
+      _this.bootProgressBase(config);
+
       _this.addShape(new Lines().setName('trackFill')).addShape(new Lines().setName('bar')).addShape(new Lines().setName('trackStroke'));
 
       _this.setTrackColor(GetValue$1I(config, 'trackColor', undefined));
@@ -23673,8 +23649,7 @@
 
       _this.setSkewX(GetValue$1I(config, 'skewX', 0));
 
-      _this.setRTL(GetValue$1I(config, 'rtl', false)); // Set value in last step
-
+      _this.setRTL(GetValue$1I(config, 'rtl', false));
 
       _this.setValue(value);
 
@@ -23786,7 +23761,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.LineProgress', LineProgress);
+  SetValue$1(window, 'RexPlugins.UI.LineProgress', LineProgress);
 
   var GetSizerConfig = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
@@ -30878,11 +30853,11 @@
     return text;
   };
 
-  var UpdateText = function UpdateText() {
+  var UpdateText = function UpdateText(value) {
     var textObject = this.sizerChildren.text;
 
     if (textObject && this.textFormatCallback) {
-      textObject.setText(GetFormatText.call(this));
+      textObject.setText(GetFormatText.call(this, value));
 
       if (textObject.layout) {
         textObject.layout();
@@ -30901,8 +30876,8 @@
   var GetValue$1f = Phaser.Utils.Objects.GetValue;
   var SnapTo$1 = Phaser.Math.Snap.To;
 
-  var Knob = /*#__PURE__*/function (_OverlapSizer) {
-    _inherits(Knob, _OverlapSizer);
+  var Knob = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(Knob, _ProgressBase);
 
     var _super = _createSuper(Knob);
 
@@ -30918,7 +30893,9 @@
 
       _this = _super.call(this, scene, config);
       _this.type = 'rexKnob';
-      _this.eventEmitter = GetValue$1f(config, 'eventEmitter', _assertThisInitialized(_this)); // Add elements
+
+      _this.bootProgressBase(config); // Add elements
+
 
       var background = GetValue$1f(config, 'background', undefined);
       var textObject = GetValue$1f(config, 'text', undefined);
@@ -30957,17 +30934,7 @@
 
       _this.addChildrenMap('text', textObject);
 
-      var callback = GetValue$1f(config, 'valuechangeCallback', null);
-
-      if (callback !== null) {
-        var scope = GetValue$1f(config, 'valuechangeCallbackScope', undefined);
-
-        _this.eventEmitter.on('valuechange', callback, scope);
-      }
-
       _this.setEnable(GetValue$1f(config, 'enable', undefined));
-
-      _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1f(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1f(config, 'easeValue.ease', 'Linear'));
 
       _this.setGap(GetValue$1f(config, 'gap', undefined));
 
@@ -31010,12 +30977,14 @@
       value: function setGap(gap) {
         this.gap = gap;
         return this;
-      }
+      } // Override
+
     }, {
       key: "value",
       get: function get() {
         return this.sizerChildren.knob.value;
-      },
+      } // Override
+      ,
       set: function set(value) {
         if (this.gap !== undefined) {
           value = SnapTo$1(value, this.gap);
@@ -31033,7 +31002,7 @@
     }]);
 
     return Knob;
-  }(OverlapSizer);
+  }(ProgressBase(OverlapSizer));
 
   var INPUTMODE$1 = {
     pan: 0,
@@ -31041,14 +31010,14 @@
     click: 1,
     none: -1
   };
-  Object.assign(Knob.prototype, TextObjectMethods, ProgressValueMethods, EaseValueMethods);
+  Object.assign(Knob.prototype, TextObjectMethods);
 
   ObjectFactory.register('knob', function (config) {
     var gameObject = new Knob(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Knob', Knob);
+  SetValue$1(window, 'RexPlugins.UI.Knob', Knob);
 
   var ShapeClasses = {
     arc: Arc,
@@ -31180,7 +31149,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.CustomShapes', CustomShapes);
+  SetValue$1(window, 'RexPlugins.UI.CustomShapes', CustomShapes);
 
   var GetValue$1c = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$n = Phaser.Utils.Objects.IsPlainObject;
@@ -31211,9 +31180,11 @@
         config.type = 'rexCustomProgress';
       }
 
-      _this = _super.call(this, scene, x, y, width, height, config); // Set value in last step
+      _this = _super.call(this, scene, x, y, width, height, config);
 
-      _this.setValue(GetValue$1c(config, 'value', 0));
+      _this.bootProgressBase(config);
+
+      _this.setValue(value);
 
       return _this;
     }
@@ -31243,7 +31214,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.CustomProgress', CustomProgress);
+  SetValue$1(window, 'RexPlugins.UI.CustomProgress', CustomProgress);
 
   var SetTransitionCallbackMethods = {
     setTransitionStartCallback: function setTransitionStartCallback(callback, scope) {
@@ -31838,7 +31809,7 @@
 
   var IsPlainObject$k = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$19 = Phaser.Utils.Objects.GetValue;
-  var Clamp$6 = Phaser.Math.Clamp;
+  var Clamp$7 = Phaser.Math.Clamp;
 
   var TransitionImage = /*#__PURE__*/function (_Container) {
     _inherits(TransitionImage, _Container);
@@ -31995,7 +31966,7 @@
         return this._t;
       },
       set: function set(value) {
-        value = Clamp$6(value, 0, 1);
+        value = Clamp$7(value, 0, 1);
 
         if (this._t === value) {
           return;
@@ -32084,7 +32055,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TransitionImage', TransitionImage);
+  SetValue$1(window, 'RexPlugins.UI.TransitionImage', TransitionImage);
 
   var Rectangle = Phaser.GameObjects.Rectangle;
 
@@ -32168,7 +32139,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.FullWindowRectangle', FullWindowRectangle);
+  SetValue$1(window, 'RexPlugins.UI.FullWindowRectangle', FullWindowRectangle);
 
   var GetValue$18 = Phaser.Utils.Objects.GetValue;
 
@@ -32303,7 +32274,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Cover', Cover);
+  SetValue$1(window, 'RexPlugins.UI.Cover', Cover);
 
   var SetChart = function SetChart(config) {
     if (!window.Chart) {
@@ -32526,7 +32497,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Chart', Chart$1);
+  SetValue$1(window, 'RexPlugins.UI.Chart', Chart$1);
 
   var GetChildrenWidth$3 = function GetChildrenWidth(minimumMode) {
     if (this.rexSizer.hidden) {
@@ -33258,7 +33229,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Sizer', Sizer);
+  SetValue$1(window, 'RexPlugins.UI.Sizer', Sizer);
 
   var Sum = function Sum() {
     return Array.prototype.reduce.call(arguments, Add$5, 0);
@@ -34120,7 +34091,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.GridSizer', GridSizer);
+  SetValue$1(window, 'RexPlugins.UI.GridSizer', GridSizer);
 
   var GetChildrenWidth$1 = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -34733,14 +34704,14 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.FixWidthSizer', FixWidthSizer);
+  SetValue$1(window, 'RexPlugins.UI.FixWidthSizer', FixWidthSizer);
 
   ObjectFactory.register('overlapSizer', function (x, y, minWidth, minHeight, config) {
     var gameObject = new OverlapSizer(this.scene, x, y, minWidth, minHeight, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.OverlapSizer', OverlapSizer);
+  SetValue$1(window, 'RexPlugins.UI.OverlapSizer', OverlapSizer);
 
   ObjectFactory.register('space', function () {
     var gameObject = new Space(this.scene); // Don't add Zone into scene
@@ -34748,7 +34719,7 @@
 
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Space', Space);
+  SetValue$1(window, 'RexPlugins.UI.Space', Space);
 
   var AddChildMask = function AddChildMask(maskTarget, sizeTarget, shape, padding) {
     var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
@@ -35020,7 +34991,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Label', Label);
+  SetValue$1(window, 'RexPlugins.UI.Label', Label);
 
   var GetValue$_ = Phaser.Utils.Objects.GetValue;
 
@@ -35336,7 +35307,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TitleLabel', TitleLabel);
+  SetValue$1(window, 'RexPlugins.UI.TitleLabel', TitleLabel);
 
   var GetValue$Z = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
@@ -35432,6 +35403,7 @@
           nameValueSizer.add(valueText, {
             padding: padding
           });
+          this.setValueTextFormatCallback(GetValue$Z(config, 'valueTextFormatCallback', undefined), GetValue$Z(config, 'valueTextFormatCallbackScope', undefined));
         }
 
         textSizer.add(nameValueSizer, {
@@ -35501,6 +35473,68 @@
     this.addChildrenMap('bar', bar);
     this.addChildrenMap('action', action);
     this.addChildrenMap('actionMask', actionMask);
+  };
+
+  var SetValueTextFormatCallback = function SetValueTextFormatCallback(callback, scope) {
+    this.valueTextFormatCallback = callback;
+    this.valueTextFormatCallbackScope = scope;
+    return this;
+  };
+
+  var GetFormatValueText = function GetFormatValueText(value, min, max) {
+    if (value === undefined) {
+      value = this.value;
+    }
+
+    if (min === undefined) {
+      min = this.minValue;
+    }
+
+    if (max === undefined) {
+      max = this.maxValue;
+    }
+
+    var text;
+
+    if (this.valueTextFormatCallbackScope) {
+      text = this.valueTextFormatCallback(value, min, max);
+    } else {
+      text = this.valueTextFormatCallback.call(this.valueTextFormatCallbackScope, value, min, max);
+    }
+
+    return text;
+  };
+
+  var UpdateValueText = function UpdateValueText(value, min, max) {
+    var textObject = this.childrenMap.value;
+
+    if (textObject && this.valueTextFormatCallback) {
+      textObject.setText(GetFormatValueText.call(this, value, min, max));
+
+      if (textObject.layout) {
+        textObject.layout();
+      }
+    }
+
+    return this;
+  };
+
+  var Clamp$6 = Phaser.Math.Clamp;
+
+  var SetValue = function SetValue(value, min, max) {
+    this.value = Clamp$6(value, min, max);
+    this.minValue = min;
+    this.maxValue = max;
+    this.updateValueText(value, min, max);
+    this.setBarValue(value, min, max);
+    return this;
+  };
+
+  var SetValueMethods = {
+    setValueTextFormatCallback: SetValueTextFormatCallback,
+    getFormatValueText: GetFormatValueText,
+    updateValueText: UpdateValueText,
+    setValue: SetValue
   };
 
   var NameValueLabel = /*#__PURE__*/function (_Sizer) {
@@ -35707,12 +35741,14 @@
     return NameValueLabel;
   }(Sizer);
 
+  Object.assign(NameValueLabel.prototype, SetValueMethods);
+
   ObjectFactory.register('nameValueLabel', function (config) {
     var gameObject = new NameValueLabel(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.NameValueLabel', NameValueLabel);
+  SetValue$1(window, 'RexPlugins.UI.NameValueLabel', NameValueLabel);
 
   var SizerAdd$3 = Sizer.prototype.add;
   var SizerAddSpace = Sizer.prototype.addSpace;
@@ -36422,7 +36458,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Buttons', Buttons$1);
+  SetValue$1(window, 'RexPlugins.UI.Buttons', Buttons$1);
 
   var SizerAdd$2 = GridSizer.prototype.add;
   var AddChildMethods$2 = {
@@ -36626,7 +36662,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.GridButtons', GridButtons);
+  SetValue$1(window, 'RexPlugins.UI.GridButtons', GridButtons);
 
   var SizerAdd$1 = FixWidthSizer.prototype.add;
 
@@ -36826,7 +36862,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.FixWidthButtons', Buttons);
+  SetValue$1(window, 'RexPlugins.UI.FixWidthButtons', Buttons);
 
   var ButtonMethods$1 = {
     getChoice: function getChoice(index) {
@@ -37485,7 +37521,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Dialog', Dialog);
+  SetValue$1(window, 'RexPlugins.UI.Dialog', Dialog);
 
   var Choices = /*#__PURE__*/function (_Dialog) {
     _inherits(Choices, _Dialog);
@@ -37637,7 +37673,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Choices', Choices);
+  SetValue$1(window, 'RexPlugins.UI.Choices', Choices);
 
   var GetValue$T = Phaser.Utils.Objects.GetValue;
 
@@ -37812,7 +37848,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.HolyGrail', HolyGrail);
+  SetValue$1(window, 'RexPlugins.UI.HolyGrail', HolyGrail);
 
   var ButtonMethods = {
     getButtonsSizer: function getButtonsSizer(groupName) {
@@ -38205,7 +38241,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Tabs', Tabs);
+  SetValue$1(window, 'RexPlugins.UI.Tabs', Tabs);
 
   var Percent = Phaser.Math.Percent;
 
@@ -38461,8 +38497,8 @@
   var Clamp$5 = Phaser.Math.Clamp;
   var SnapTo = Phaser.Math.Snap.To;
 
-  var Slider$1 = /*#__PURE__*/function (_Sizer) {
-    _inherits(Slider, _Sizer);
+  var Slider$1 = /*#__PURE__*/function (_ProgressBase) {
+    _inherits(Slider, _ProgressBase);
 
     var _super = _createSuper(Slider);
 
@@ -38474,7 +38510,9 @@
       // Create sizer
       _this = _super.call(this, scene, config);
       _this.type = 'rexSlider';
-      _this.eventEmitter = GetValue$R(config, 'eventEmitter', _assertThisInitialized(_this));
+
+      _this.bootProgressBase(config);
+
       _this.reverseAxis = GetValue$R(config, 'reverseAxis', false); // Add elements
 
       var background = GetValue$R(config, 'background', undefined);
@@ -38556,21 +38594,11 @@
 
       _this.addChildrenMap('thumb', thumb);
 
-      var callback = GetValue$R(config, 'valuechangeCallback', null);
-
-      if (callback !== null) {
-        var scope = GetValue$R(config, 'valuechangeCallbackScope', undefined);
-
-        _this.eventEmitter.on('valuechange', callback, scope);
-      }
-
       _this.setEnable(GetValue$R(config, 'enable', undefined));
 
       _this.setGap(GetValue$R(config, 'gap', undefined));
 
       _this.setValue(GetValue$R(config, 'value', 0), GetValue$R(config, 'min', undefined), GetValue$R(config, 'max', undefined));
-
-      _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$R(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$R(config, 'easeValue.ease', 'Linear'));
 
       return _this;
     }
@@ -38590,12 +38618,14 @@
       value: function setGap(gap) {
         this.gap = gap;
         return this;
-      }
+      } // Override
+
     }, {
       key: "value",
       get: function get() {
         return this._value;
-      },
+      } // Override
+      ,
       set: function set(value) {
         if (this.gap !== undefined) {
           value = SnapTo(value, this.gap);
@@ -38627,7 +38657,7 @@
     }]);
 
     return Slider;
-  }(Sizer);
+  }(ProgressBase(Sizer));
 
   var INPUTMODE = {
     pan: 0,
@@ -38641,14 +38671,14 @@
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator
   };
-  Object.assign(Slider$1.prototype, methods$a, ProgressValueMethods, EaseValueMethods);
+  Object.assign(Slider$1.prototype, methods$a);
 
   ObjectFactory.register('slider', function (config) {
     var gameObject = new Slider$1(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Slider', Slider$1);
+  SetValue$1(window, 'RexPlugins.UI.Slider', Slider$1);
 
   var SCROLLMODE$1 = {
     v: 0,
@@ -42660,7 +42690,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.GridTable', GridTable);
+  SetValue$1(window, 'RexPlugins.UI.GridTable', GridTable);
 
   var GetEaseConfig = function GetEaseConfig(easeConfig, menu) {
     if (easeConfig.sameOrientation) {
@@ -43143,7 +43173,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Menu', Menu);
+  SetValue$1(window, 'RexPlugins.UI.Menu', Menu);
 
   var PopUp = function PopUp(listPanel, duration) {
     listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic');
@@ -43578,7 +43608,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.DropDownList', DropDownList);
+  SetValue$1(window, 'RexPlugins.UI.DropDownList', DropDownList);
 
   var TextKlass = Phaser.GameObjects.Text;
 
@@ -44532,7 +44562,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TextBox', TextBox);
+  SetValue$1(window, 'RexPlugins.UI.TextBox', TextBox);
 
   var GetValue$v = Phaser.Utils.Objects.GetValue;
 
@@ -44817,14 +44847,14 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.NumberBar', NumberBar);
+  SetValue$1(window, 'RexPlugins.UI.NumberBar', NumberBar);
 
   ObjectFactory.register('scrollBar', function (config) {
     var gameObject = new ScrollBar(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.ScrollBar', ScrollBar);
+  SetValue$1(window, 'RexPlugins.UI.ScrollBar', ScrollBar);
 
   var GetValue$u = Phaser.Utils.Objects.GetValue;
   var BadgeKeys = {
@@ -44900,7 +44930,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.BadgeLabel', Badge);
+  SetValue$1(window, 'RexPlugins.UI.BadgeLabel', Badge);
 
   var OverlapSizerAdd = OverlapSizer.prototype.add;
 
@@ -45058,7 +45088,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Pages', Pages);
+  SetValue$1(window, 'RexPlugins.UI.Pages', Pages);
 
   var Vector3 = Phaser.Math.Vector3;
   var Matrix4 = Phaser.Math.Matrix4;
@@ -46401,7 +46431,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.PerspectiveCard', PerspectiveCard);
+  SetValue$1(window, 'RexPlugins.UI.PerspectiveCard', PerspectiveCard);
 
   var GetPageKeyByIndex = function GetPageKeyByIndex(index) {
     var buttons = this.getElement('tabs.buttons');
@@ -46673,7 +46703,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TabPages', TabPages);
+  SetValue$1(window, 'RexPlugins.UI.TabPages', TabPages);
 
   var SetText$1 = function SetText(text) {
     if (text !== undefined) {
@@ -47316,7 +47346,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.TextArea', TextArea);
+  SetValue$1(window, 'RexPlugins.UI.TextArea', TextArea);
 
   var GetChildrenWidth = function GetChildrenWidth() {
     if (this.rexSizer.hidden) {
@@ -47751,7 +47781,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.ScrollablePanel', ScrollablePanel);
+  SetValue$1(window, 'RexPlugins.UI.ScrollablePanel', ScrollablePanel);
 
   var DefaultTransitCallbacks$1 = {
     popUp: function popUp(gameObject, duration) {
@@ -48348,7 +48378,7 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Toast', Toast);
+  SetValue$1(window, 'RexPlugins.UI.Toast', Toast);
 
   var GetShowCallback$1 = function GetShowCallback() {
     return function (child, key, sides, reset) {
@@ -48927,22 +48957,22 @@
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue(window, 'RexPlugins.UI.Sides', Sides);
+  SetValue$1(window, 'RexPlugins.UI.Sides', Sides);
 
   ObjectFactory.register('click', function (gameObject, config) {
     return new Button(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Click', Button);
+  SetValue$1(window, 'RexPlugins.UI.Click', Button);
 
   ObjectFactory.register('clickOutside', function (gameObject, config) {
     return new ClickOutside(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.ClickOutside', ClickOutside);
+  SetValue$1(window, 'RexPlugins.UI.ClickOutside', ClickOutside);
 
   ObjectFactory.register('inTouching', function (gameObject, config) {
     return new InTouching(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.InTouching', InTouching);
+  SetValue$1(window, 'RexPlugins.UI.InTouching', InTouching);
 
   var GameObjectClass = Phaser.GameObjects.GameObject;
 
@@ -48958,7 +48988,7 @@
 
     return new Tap(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Tap', Tap);
+  SetValue$1(window, 'RexPlugins.UI.Tap', Tap);
 
   ObjectFactory.register('press', function (gameObject, config) {
     if (!IsGameObject(gameObject)) {
@@ -48968,7 +48998,7 @@
 
     return new Press(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Press', Press);
+  SetValue$1(window, 'RexPlugins.UI.Press', Press);
 
   ObjectFactory.register('swipe', function (gameObject, config) {
     if (!IsGameObject(gameObject)) {
@@ -48978,7 +49008,7 @@
 
     return new Swipe(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Swipe', Swipe);
+  SetValue$1(window, 'RexPlugins.UI.Swipe', Swipe);
 
   ObjectFactory.register('pan', function (gameObject, config) {
     if (!IsGameObject(gameObject)) {
@@ -48988,7 +49018,7 @@
 
     return new Pan(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Pan', Pan);
+  SetValue$1(window, 'RexPlugins.UI.Pan', Pan);
 
   var RequestDrag = function RequestDrag(gameObject) {
     var inputPlugin = gameObject.scene.input;
@@ -49243,17 +49273,17 @@
   ObjectFactory.register('drag', function (gameObject, config) {
     return new Drag(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Drag', Drag);
+  SetValue$1(window, 'RexPlugins.UI.Drag', Drag);
 
   ObjectFactory.register('pinch', function (config) {
     return new Pinch(this.scene, config);
   });
-  SetValue(window, 'RexPlugins.UI.Pinch', Pinch);
+  SetValue$1(window, 'RexPlugins.UI.Pinch', Pinch);
 
   ObjectFactory.register('rotate', function (config) {
     return new Rotate(this.scene, config);
   });
-  SetValue(window, 'RexPlugins.UI.Rotate', Rotate);
+  SetValue$1(window, 'RexPlugins.UI.Rotate', Rotate);
 
   var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$a = Phaser.Utils.Objects.GetValue;
@@ -49448,22 +49478,22 @@
   ObjectFactory.register('flip', function (gameObject, config) {
     return new Flip(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Flip', Flip);
+  SetValue$1(window, 'RexPlugins.UI.Flip', Flip);
 
   ObjectFactory.register('shake', function (gameObject, config) {
     return new ShakePosition(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Shake', ShakePosition);
+  SetValue$1(window, 'RexPlugins.UI.Shake', ShakePosition);
 
   ObjectFactory.register('touchEventStop', function (gameObject, config) {
     return new TouchEventStop(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.TouchEventStop', TouchEventStop);
+  SetValue$1(window, 'RexPlugins.UI.TouchEventStop', TouchEventStop);
 
   ObjectFactory.register('perspective', function (gameObject, config) {
     return new ContainerPerspective(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Perspective', ContainerPerspective);
+  SetValue$1(window, 'RexPlugins.UI.Perspective', ContainerPerspective);
 
   var RotateAround = Phaser.Math.RotateAround;
 
@@ -50048,12 +50078,12 @@
   ObjectFactory.register('skew', function (gameObject, config) {
     return new ContainerSkew(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Skew', ContainerSkew);
+  SetValue$1(window, 'RexPlugins.UI.Skew', ContainerSkew);
 
   ObjectFactory.register('anchor', function (gameObject, config) {
     return new Anchor(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.Anchor', Anchor);
+  SetValue$1(window, 'RexPlugins.UI.Anchor', Anchor);
 
   var LastOpenedEditor = undefined;
 
@@ -50691,7 +50721,7 @@
   ObjectFactory.register('textEdit', function (gameObject, config) {
     return new TextEdit(gameObject, config);
   });
-  SetValue(window, 'RexPlugins.UI.TextEdit', TextEdit);
+  SetValue$1(window, 'RexPlugins.UI.TextEdit', TextEdit);
 
   /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
   function isNothing(subject) {
@@ -55339,7 +55369,7 @@
   ObjectFactory.register('maker', function (styles, customBuilders) {
     return new Maker(this.scene, styles, customBuilders);
   });
-  SetValue(window, 'RexPlugins.UI.Maker', Maker);
+  SetValue$1(window, 'RexPlugins.UI.Maker', Maker);
 
   var TextRunWidthWrap = function TextRunWidthWrap(textObject) {
     var RunWidthWrap = function RunWidthWrap(width) {

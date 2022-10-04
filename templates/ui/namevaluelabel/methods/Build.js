@@ -98,6 +98,11 @@ var Build = function (scene, config) {
                     valueText,
                     { padding: padding }
                 );
+
+                this.setValueTextFormatCallback(
+                    GetValue(config, 'valueTextFormatCallback', undefined),
+                    GetValue(config, 'valueTextFormatCallbackScope', undefined)
+                );
             }
 
             textSizer.add(

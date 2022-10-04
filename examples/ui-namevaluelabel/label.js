@@ -24,8 +24,35 @@ class Demo extends Phaser.Scene {
 
             icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
 
+            nameText: this.add.text(0, 0, 'Rex', { fontSize: 20 }),
+            valueText: this.add.text(0, 0, '1000', { fontSize: 20 }),
+
+            align: {
+                text: 'center'
+            },
+
+            space: {
+                left: 20, right: 20, top: 20, bottom: 20,
+                icon: 10,
+            }
+
+        })
+            .layout()
+
+        var label1 = this.rexUI.add.nameValueLabel({
+            x: 400, y: 300,
+            width: 200, height: 40,
+
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+
+            icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
+
             nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
             valueText: this.add.text(0, 0, '', { fontSize: 20 }),
+
+            valueTextFormatCallback: function (value, min, max) {
+                return `${Math.floor(value)}/${max}`;
+            },
 
             bar: {
                 height: 6,
@@ -48,10 +75,12 @@ class Demo extends Phaser.Scene {
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000)
 
-        var value = 75, min = 0, max = 100;
-        label0
-            .setValueText(Math.floor(value).toString())
-            .setBarValue(value, min, max);
+        var min = 0, max = 100, value = min;
+        label1.setValue(value, min, max);
+        this.input.on('pointerdown', function () {
+            value = Phaser.Math.Clamp(value + 5, min, max);
+            label1.setValue(value, min, max);
+        })
 
     }
 

@@ -1425,27 +1425,27 @@
 
       var _super = _createSuper(ProgressBase);
 
-      function ProgressBase(scene, x, y, width, height, config) {
-        var _this;
-
+      function ProgressBase() {
         _classCallCheck(this, ProgressBase);
 
-        _this = _super.call(this, scene, x, y, width, height, config);
-        _this.eventEmitter = GetValue$2(config, 'eventEmitter', _assertThisInitialized(_this));
-        var callback = GetValue$2(config, 'valuechangeCallback', null);
-
-        if (callback !== null) {
-          var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
-
-          _this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
-
-        return _this;
+        return _super.apply(this, arguments);
       }
 
       _createClass(ProgressBase, [{
+        key: "bootProgressBase",
+        value: function bootProgressBase(config) {
+          this.eventEmitter = GetValue$2(config, 'eventEmitter', this);
+          var callback = GetValue$2(config, 'valuechangeCallback', null);
+
+          if (callback !== null) {
+            var scope = GetValue$2(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+          }
+
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$2(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$2(config, 'easeValue.ease', 'Linear'));
+          return this;
+        }
+      }, {
         key: "value",
         get: function get() {
           return this._value;
@@ -2399,6 +2399,8 @@
       _this = _super.call(this, scene, x, y, width, height, config);
       _this.type = 'rexLineProgress';
 
+      _this.bootProgressBase(config);
+
       _this.addShape(new Lines().setName('trackFill')).addShape(new Lines().setName('bar')).addShape(new Lines().setName('trackStroke'));
 
       _this.setTrackColor(GetValue(config, 'trackColor', undefined));
@@ -2409,8 +2411,7 @@
 
       _this.setSkewX(GetValue(config, 'skewX', 0));
 
-      _this.setRTL(GetValue(config, 'rtl', false)); // Set value in last step
-
+      _this.setRTL(GetValue(config, 'rtl', false));
 
       _this.setValue(value);
 

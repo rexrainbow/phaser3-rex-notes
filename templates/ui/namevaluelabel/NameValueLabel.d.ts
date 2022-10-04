@@ -26,6 +26,12 @@ declare namespace NameValueLabel {
         text?: Phaser.GameObjects.GameObject,
         bar?: Phaser.GameObjects.GameObject | LineProgress.IConfig,
 
+        valueTextFormatCallback?: (
+            value: number,
+            min: number,
+            max: number
+        ) => string,
+
         action?: Phaser.GameObjects.GameObject,
         actionMask?: boolean,
 
@@ -74,4 +80,13 @@ declare class NameValueLabel extends Sizer {
     ): this;
     readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
     readonly frame: Phaser.Textures.Frame;
+
+    setValue(
+        value: number,
+        min: number,
+        max: number
+    ): this;
+    value: number;
+    minValue: number;
+    maxValue: number;
 }

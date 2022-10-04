@@ -3162,27 +3162,27 @@
 
       var _super = _createSuper(ProgressBase);
 
-      function ProgressBase(scene, x, y, width, height, config) {
-        var _this;
-
+      function ProgressBase() {
         _classCallCheck(this, ProgressBase);
 
-        _this = _super.call(this, scene, x, y, width, height, config);
-        _this.eventEmitter = GetValue$1(config, 'eventEmitter', _assertThisInitialized(_this));
-        var callback = GetValue$1(config, 'valuechangeCallback', null);
-
-        if (callback !== null) {
-          var scope = GetValue$1(config, 'valuechangeCallbackScope', undefined);
-
-          _this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        _this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1(config, 'easeValue.ease', 'Linear'));
-
-        return _this;
+        return _super.apply(this, arguments);
       }
 
       _createClass(ProgressBase, [{
+        key: "bootProgressBase",
+        value: function bootProgressBase(config) {
+          this.eventEmitter = GetValue$1(config, 'eventEmitter', this);
+          var callback = GetValue$1(config, 'valuechangeCallback', null);
+
+          if (callback !== null) {
+            var scope = GetValue$1(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+          }
+
+          this.setEaseValuePropName('value').setEaseValueDuration(GetValue$1(config, 'easeValue.duration', 0)).setEaseValueFunction(GetValue$1(config, 'easeValue.ease', 'Linear'));
+          return this;
+        }
+      }, {
         key: "value",
         get: function get() {
           return this._value;
@@ -3236,9 +3236,11 @@
         config.type = 'rexCustomProgress';
       }
 
-      _this = _super.call(this, scene, x, y, width, height, config); // Set value in last step
+      _this = _super.call(this, scene, x, y, width, height, config);
 
-      _this.setValue(GetValue(config, 'value', 0));
+      _this.bootProgressBase(config);
+
+      _this.setValue(value);
 
       return _this;
     }

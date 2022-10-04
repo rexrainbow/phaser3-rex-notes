@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import Build from './methods/Build.js';
+import SetValueMethods from './methods/SetValueMethods.js';
 
 class NameValueLabel extends Sizer {
     constructor(scene, config) {
@@ -151,5 +152,10 @@ class NameValueLabel extends Sizer {
         return this;
     }
 }
+
+Object.assign(
+    NameValueLabel.prototype,
+    SetValueMethods,
+)
 
 export default NameValueLabel;
