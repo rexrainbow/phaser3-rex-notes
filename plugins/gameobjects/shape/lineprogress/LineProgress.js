@@ -31,6 +31,8 @@ class LineProgress extends ProgressBase(BaseShapes) {
         super(scene, x, y, width, height, config);
         this.type = 'rexLineProgress';
 
+        this.bootProgressBase(config);
+
         this
             .addShape((new Lines()).setName('trackFill'))
             .addShape((new Lines()).setName('bar'))
@@ -44,8 +46,6 @@ class LineProgress extends ProgressBase(BaseShapes) {
 
         this.setRTL(GetValue(config, 'rtl', false));
 
-
-        // Set value in last step
         this.setValue(value);
     }
 

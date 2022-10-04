@@ -6,9 +6,7 @@ const Clamp = Phaser.Math.Clamp;
 
 export default function (BaseClass) {
     class ProgressBase extends BaseClass {
-        constructor(scene, x, y, width, height, config) {
-            super(scene, x, y, width, height, config);
-
+        bootProgressBase(config) {
             this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
             var callback = GetValue(config, 'valuechangeCallback', null);
@@ -20,8 +18,9 @@ export default function (BaseClass) {
             this
                 .setEaseValuePropName('value')
                 .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
-                .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
+                .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'));
 
+            return this;
         }
 
         get value() {

@@ -21,8 +21,9 @@ class CustomProgress extends ProgressBase(CustomShapes) {
         }
         super(scene, x, y, width, height, config);
 
-        // Set value in last step
-        this.setValue(GetValue(config, 'value', 0));
+        this.bootProgressBase(config);
+
+        this.setValue(value);
     }
 
     get centerX() {

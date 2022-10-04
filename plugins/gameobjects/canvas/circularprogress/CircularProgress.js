@@ -20,7 +20,7 @@ class CircularProgress extends ProgressBase(Canvas) {
             value = GetValue(config, 'value', 0);
         }
         var width = radius * 2;
-        super(scene, x, y, width, width, config);
+        super(scene, x, y, width, width);
         this.type = 'rexCircularProgressCanvas';
 
         this.setRadius(radius);
@@ -53,7 +53,7 @@ class CircularProgress extends ProgressBase(Canvas) {
             GetValue(config, 'textFormatCallbackScope', undefined)
         );
 
-        this.setValue(value);
+        this.bootProgressBase(config);
     }
 
     resize(width, height) {

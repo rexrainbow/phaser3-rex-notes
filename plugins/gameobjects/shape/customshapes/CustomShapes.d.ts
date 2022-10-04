@@ -49,6 +49,13 @@ declare namespace CustomShapes {
 declare class CustomShapes extends BaseShapes {
     constructor(
         scene: Phaser.Scene,
+        x?: number, y?: number,
+        width?: number, height?: number,
+        config?: CustomShapes.IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
         config?: CustomShapes.IConfig
     );
 

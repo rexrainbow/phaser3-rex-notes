@@ -20,8 +20,10 @@ class CircularProgress extends ProgressBase(BaseShapes) {
             value = GetValue(config, 'value', 0);
         }
         var width = radius * 2;
-        super(scene, x, y, width, width, config);
+        super(scene, x, y, width, width);
         this.type = 'rexCircularProgress';
+
+        this.bootProgressBase(config);
 
         this
             .addShape((new Circle()).setName('track'))
@@ -37,8 +39,7 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
-        // Set value in last step
-        this.setValue(GetValue(config, 'value', 0));
+        this.setValue(value);
     }
 
     resize(width, height) {
