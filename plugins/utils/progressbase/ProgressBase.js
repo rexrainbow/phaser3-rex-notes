@@ -1,5 +1,5 @@
-import ProgressValueMethods from '../../../utils/progressvalue/ProgressValueMethods.js';
-import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
+import ProgressValueMethods from '../progressvalue/ProgressValueMethods.js';
+import EaseValueMethods from '../ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;

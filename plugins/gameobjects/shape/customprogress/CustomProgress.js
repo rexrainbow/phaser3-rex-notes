@@ -1,5 +1,5 @@
 import CustomShapes from '../customshapes/CustomShapes.js';
-import ProgressBase from '../utils/ProgressBase.js';
+import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

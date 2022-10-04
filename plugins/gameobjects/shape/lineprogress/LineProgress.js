@@ -1,5 +1,5 @@
 import BaseShapes from '../shapes/BaseShapes.js';
-import ProgressBase from '../utils/ProgressBase.js';
+import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
 import { Lines } from '../shapes/geoms';
 import UpdateShapes from './UpdateShapes.js';
 
