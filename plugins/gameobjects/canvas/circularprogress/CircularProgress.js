@@ -1,8 +1,7 @@
 import Canvas from '../canvas/Canvas.js';
+import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import DrawContent from './DrawContent.js';
-import ProgressValueMethods from '../../../utils/progressvalue/ProgressValueMethods.js';
-import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -10,7 +9,7 @@ const Clamp = Phaser.Math.Clamp;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 
-class CircularProgress extends Canvas {
+class CircularProgress extends ProgressBase(Canvas) {
     constructor(scene, x, y, radius, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -21,9 +20,8 @@ class CircularProgress extends Canvas {
             value = GetValue(config, 'value', 0);
         }
         var width = radius * 2;
-        super(scene, x, y, width, width);
+        super(scene, x, y, width, width, config);
         this.type = 'rexCircularProgressCanvas';
-        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
@@ -55,17 +53,6 @@ class CircularProgress extends Canvas {
             GetValue(config, 'textFormatCallbackScope', undefined)
         );
 
-        var callback = GetValue(config, 'valuechangeCallback', null);
-        if (callback !== null) {
-            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-            this.eventEmitter.on('valuechange', callback, scope);
-        }
-
-        this
-            .setEaseValuePropName('value')
-            .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
-            .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
-
         this.setValue(value);
     }
 
@@ -78,23 +65,6 @@ class CircularProgress extends Canvas {
         super.resize(width, width);
         this.setRadius(width / 2);
         return this;
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        value = Clamp(value, 0, 1);
-
-        var oldValue = this._value;
-        var valueChanged = (oldValue != value);
-        this.dirty = this.dirty || valueChanged;
-        this._value = value;
-
-        if (valueChanged) {
-            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
-        }
     }
 
     get radius() {
@@ -305,11 +275,5 @@ class CircularProgress extends Canvas {
         return text;
     }
 }
-
-Object.assign(
-    CircularProgress.prototype,
-    ProgressValueMethods,
-    EaseValueMethods
-);
 
 export default CircularProgress;
