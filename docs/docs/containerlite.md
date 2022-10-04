@@ -16,6 +16,7 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 - [Timeline child](https://codepen.io/rexrainbow/pen/GRQJPLV)
 - [Mix timeline](https://codepen.io/rexrainbow/pen/VwQLNyG)
 - [Snapshot](https://codepen.io/rexrainbow/pen/XWEVWrO)
+- [Destory](https://codepen.io/rexrainbow/pen/rNvKdqg)
 
 ## Usage
 
