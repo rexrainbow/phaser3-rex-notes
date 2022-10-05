@@ -76,6 +76,10 @@ var Build = function (scene, config) {
             })
 
             if (nameText) {
+                // A space character to reserve text height
+                if (nameText.text === '') {
+                    nameText.setText(' ');
+                }
                 nameText.setOrigin(0, nameText.originY);
                 var padding = {
                     left: GetValue(config, 'space.name', 0),
@@ -87,6 +91,10 @@ var Build = function (scene, config) {
             }
 
             if (valueText) {
+                // A space character to reserve text height
+                if (valueText.text === '') {
+                    valueText.setText(' ');
+                }
                 valueText.setOrigin(1, valueText.originY);
 
                 nameValueSizer.addSpace();
@@ -100,7 +108,7 @@ var Build = function (scene, config) {
                 );
 
                 this.setValueTextFormatCallback(
-                    GetValue(config, 'valueTextFormatCallback', undefined),
+                    GetValue(config, 'valueTextFormatCallback', DefaultValueTextFormatCallback),
                     GetValue(config, 'valueTextFormatCallbackScope', undefined)
                 );
             }
@@ -169,6 +177,10 @@ var Build = function (scene, config) {
     this.addChildrenMap('bar', bar);
     this.addChildrenMap('action', action);
     this.addChildrenMap('actionMask', actionMask);
+}
+
+var DefaultValueTextFormatCallback = function (value, min, max) {
+    return value.toString();
 }
 
 export default Build;

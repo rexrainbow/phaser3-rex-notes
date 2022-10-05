@@ -37,7 +37,8 @@ var UpdateValueText = function (value, min, max) {
 
 const Clamp = Phaser.Math.Clamp;
 var SetValue = function (value, min, max) {
-    this.value = Clamp(value, min, max);
+    value = Clamp(value, min, max);
+    this.value = value;
     this.minValue = min;
     this.maxValue = max;
     this.updateValueText(value, min, max);

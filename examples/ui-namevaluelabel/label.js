@@ -26,8 +26,7 @@ class Demo extends Phaser.Scene {
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
 
-            // A space character to reserve text height
-            valueText: this.rexUI.add.BBCodeText(0, 0, ' ', { fontSize: 20 }),
+            valueText: this.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
             valueTextFormatCallback: function (value, min, max) {
                 value = Math.floor(value);
                 if (value <= max * 0.3) {
