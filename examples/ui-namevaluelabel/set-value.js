@@ -23,8 +23,19 @@ class Demo extends Phaser.Scene {
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
 
             icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
+
             nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
+
             valueText: this.rexUI.add.BBCodeText(0, 0, '', { fontSize: 20 }),
+            valueTextFormatCallback: function (value, min, max) {
+                value = Math.floor(value);
+                if (value <= max * 0.3) {
+                    value = `[color=red][b]${value}[/b][/color]`;
+                } else {
+                    value = `[b]${value}[/b]`;
+                }
+                return `${value}/${max}`;
+            },
 
             bar: {
                 height: 6,
@@ -46,14 +57,10 @@ class Demo extends Phaser.Scene {
             .layout()
 
         var min = 0, max = 100, value = min;
-        label0
-            .setValueText(value.toString())
-            .setBarValue(value, min, max)
+        label0.setValue(value, min, max);
         this.input.on('pointerdown', function () {
             value = Phaser.Math.Clamp(value + 5, min, max);
-            label0
-                .setValueText(value.toString())
-                .setBarValue(value, min, max)
+            label0.setValue(value, min, max);
         })
 
     }
