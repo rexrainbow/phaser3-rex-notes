@@ -3815,10 +3815,11 @@
         }
 
         parser.skipEvent();
-        return;
       }
 
-      tagPlayer.emit("+".concat(parser.lastTagStart, "#content"), parser, content);
+      tagPlayer.emit("+".concat(parser.lastTagStart, "#content"), content); // Route 'content' event to tagPlayer
+
+      tagPlayer.emit('content', content);
     });
   };
 

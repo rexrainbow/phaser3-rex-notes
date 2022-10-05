@@ -35385,6 +35385,11 @@
         });
 
         if (nameText) {
+          // A space character to reserve text height
+          if (nameText.text === '') {
+            nameText.setText(' ');
+          }
+
           nameText.setOrigin(0, nameText.originY);
           var padding = {
             left: GetValue$Z(config, 'space.name', 0)
@@ -35395,6 +35400,11 @@
         }
 
         if (valueText) {
+          // A space character to reserve text height
+          if (valueText.text === '') {
+            valueText.setText(' ');
+          }
+
           valueText.setOrigin(1, valueText.originY);
           nameValueSizer.addSpace();
           var padding = {
@@ -35403,7 +35413,7 @@
           nameValueSizer.add(valueText, {
             padding: padding
           });
-          this.setValueTextFormatCallback(GetValue$Z(config, 'valueTextFormatCallback', undefined), GetValue$Z(config, 'valueTextFormatCallbackScope', undefined));
+          this.setValueTextFormatCallback(GetValue$Z(config, 'valueTextFormatCallback', DefaultValueTextFormatCallback), GetValue$Z(config, 'valueTextFormatCallbackScope', undefined));
         }
 
         textSizer.add(nameValueSizer, {
@@ -35475,6 +35485,10 @@
     this.addChildrenMap('actionMask', actionMask);
   };
 
+  var DefaultValueTextFormatCallback = function DefaultValueTextFormatCallback(value, min, max) {
+    return value.toString();
+  };
+
   var SetValueTextFormatCallback = function SetValueTextFormatCallback(callback, scope) {
     this.valueTextFormatCallback = callback;
     this.valueTextFormatCallbackScope = scope;
@@ -35522,7 +35536,8 @@
   var Clamp$6 = Phaser.Math.Clamp;
 
   var SetValue = function SetValue(value, min, max) {
-    this.value = Clamp$6(value, min, max);
+    value = Clamp$6(value, min, max);
+    this.value = value;
     this.minValue = min;
     this.maxValue = max;
     this.updateValueText(value, min, max);

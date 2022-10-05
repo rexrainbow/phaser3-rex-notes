@@ -609,7 +609,12 @@ Content will pass to one of these callback/event
         ``` 
 1. On parse/execute a content, after a `[custom]` tag.
     ```javascript
-    tagPlayer.on('custom#content', function(parser, content) {   
+    tagPlayer.on('custom#content', function(content) {   
+    })
+    ```
+1. On parse/execute a content, after any tag.
+    ```javascript
+    tagPlayer.on('content', function(content) {   
     })
     ```
 

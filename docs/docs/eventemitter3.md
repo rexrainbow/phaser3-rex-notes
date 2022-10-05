@@ -37,23 +37,28 @@ ee.emit(eventName, parameter0, ...);
 
 ### Remove listeners
 
-```javascript
-ee.off(eventName, callback, scope);
-ee.off(eventName, callback, scope, true);   // only remove one-time listeners
-```
-
-Alias
-
-```javascript
-ee.removeListener(eventName, callback, scope); 
-ee.removeListener(eventName, callback, scope, true);  // only remove one-time listeners
-```
-
-### Remove all listeners
-
-```javascript
-ee.removeAllListeners();
-```
+- Remove a linstener
+    ```javascript
+    ee.off(eventName, callback, scope);
+    ee.off(eventName, callback, scope, true);   // only remove one-time listeners
+    ```
+    or
+    ```javascript
+    ee.removeListener(eventName, callback, scope); 
+    ee.removeListener(eventName, callback, scope, true);  // only remove one-time listeners
+    ```
+- Remove listeners of an event
+    ```javascript
+    ee.off(eventName);
+    ```
+    or
+    ```javascript
+    ee.removeListener(eventName); 
+    ```
+- Remove listeners of all events
+    ```javascript
+    ee.removeAllListeners();
+    ```
 
 ### Get listeners count
 

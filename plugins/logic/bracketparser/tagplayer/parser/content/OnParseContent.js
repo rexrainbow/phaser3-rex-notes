@@ -20,10 +20,12 @@ var OnParseContent = function (tagPlayer, parser, config) {
                     callback(content);
                 }
                 parser.skipEvent();
-                return;
             }
 
-            tagPlayer.emit(`+${parser.lastTagStart}#content`, parser, content);
+            tagPlayer.emit(`+${parser.lastTagStart}#content`, content);
+
+            // Route 'content' event to tagPlayer
+            tagPlayer.emit('content', content);
         })
 }
 

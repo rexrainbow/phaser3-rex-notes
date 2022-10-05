@@ -287,7 +287,14 @@ class MySprite extends MySpriteBase {
         super.talk(speed);
 
         this.waitTyping = waitTyping;
+
+        // Solution A:
         this.tagPlayer.setContentCallback(this.typing, this);
+
+        // Solution B:
+        // this.tagPlayer.off('content');
+        // this.tagPlayer.on('content', this.typing, this);
+
         return this;
     }
 

@@ -9578,7 +9578,11 @@ newline
 </ul>
 </li>
 <li>On parse/execute a content, after a <code>[custom]</code> tag.
-    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;custom#content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parser</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="p">{</span>   
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;custom#content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>   
+<span class="p">})</span>
+</code></pre></div></li>
+<li>On parse/execute a content, after any tag.
+    <div class="highlight"><pre><span></span><code><span class="nx">tagPlayer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>   
 <span class="p">})</span>
 </code></pre></div></li>
 </ol>
