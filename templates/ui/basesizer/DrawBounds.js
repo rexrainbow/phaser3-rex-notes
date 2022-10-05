@@ -14,7 +14,7 @@ var DrawBounds = function (graphics, config) {
         color = config;
     } else {
         color = GetValue(config, 'color');
-        lineWidth = GetBounds(config, 'lineWidth');
+        lineWidth = GetValue(config, 'lineWidth');
         var nameTextConfig = GetValue(config, 'name', false);
         if (nameTextConfig) {
             createTextCallback = GetValue(nameTextConfig, 'createTextCallback', DefaultCreateTextCallback);

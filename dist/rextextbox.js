@@ -2901,7 +2901,7 @@
       color = config;
     } else {
       color = GetValue$B(config, 'color');
-      lineWidth = GetBounds(config, 'lineWidth');
+      lineWidth = GetValue$B(config, 'lineWidth');
       var nameTextConfig = GetValue$B(config, 'name', false);
 
       if (nameTextConfig) {

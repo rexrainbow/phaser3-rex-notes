@@ -24170,7 +24170,7 @@
       color = config;
     } else {
       color = GetValue$1H(config, 'color');
-      lineWidth = GetBounds$1(config, 'lineWidth');
+      lineWidth = GetValue$1H(config, 'lineWidth');
       var nameTextConfig = GetValue$1H(config, 'name', false);
 
       if (nameTextConfig) {
