@@ -17,29 +17,6 @@ class Demo extends Phaser.Scene {
 
     create() {
         var label0 = this.rexUI.add.nameValueLabel({
-            x: 400, y: 200,
-            width: 200, height: 40,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-
-            icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
-
-            nameText: this.add.text(0, 0, 'Rex', { fontSize: 20 }),
-            valueText: this.add.text(0, 0, '1000', { fontSize: 20 }),
-
-            align: {
-                text: 'center'
-            },
-
-            space: {
-                left: 20, right: 20, top: 20, bottom: 20,
-                icon: 10,
-            }
-
-        })
-            .layout()
-
-        var label1 = this.rexUI.add.nameValueLabel({
             x: 400, y: 300,
             width: 200, height: 40,
 
@@ -48,10 +25,17 @@ class Demo extends Phaser.Scene {
             icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
-            valueText: this.add.text(0, 0, '', { fontSize: 20 }),
 
+            // A space character to reserve text height
+            valueText: this.rexUI.add.BBCodeText(0, 0, ' ', { fontSize: 20 }),
             valueTextFormatCallback: function (value, min, max) {
-                return `${Math.floor(value)}/${max}`;
+                value = Math.floor(value);
+                if (value <= max * 0.3) {
+                    value = `[color=red][b]${value}[/b][/color]`;
+                } else {
+                    value = `[b]${value}[/b]`;
+                }
+                return `${value}/${max}`;
             },
 
             bar: {
@@ -62,7 +46,6 @@ class Demo extends Phaser.Scene {
             },
 
             align: {
-                // text: 'left'
             },
 
             space: {
@@ -73,13 +56,12 @@ class Demo extends Phaser.Scene {
 
         })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000)
 
         var min = 0, max = 100, value = min;
-        label1.setValue(value, min, max);
+        label0.setValue(value, min, max);
         this.input.on('pointerdown', function () {
             value = Phaser.Math.Clamp(value + 5, min, max);
-            label1.setValue(value, min, max);
+            label0.setValue(value, min, max);
         })
 
     }
