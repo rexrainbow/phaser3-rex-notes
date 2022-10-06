@@ -141,8 +141,8 @@ var lineProgress = scene.add.rexLineProgress({
 
 - `x`, `y` : Position of this object.
 - `width`, `height` : Size of this object.
-- `barColor` : Color of line bar, in number or css string value.
-- `trackColor` : Color of line track, in number or css string value.
+- `barColor` : Fill color of line bar, in number or css string value.
+- `trackColor` : Fill color of line track, in number or css string value.
 - `trackStrokeColor` : Stroke color of track, in number or css string value.
 - `trackStrokeThickness` : Stroke line width of track.
 - `skewX` : Horizontal skew of track and bar.

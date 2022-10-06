@@ -187,6 +187,7 @@
 1. [UI/Knob](ui-knob.md): A knob button based on circular progress.
 1. [UI/label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI/menu](ui-menu.md): A container with buttons and sub-menu.
+1. [UI/name-value label](ui-namevaluelabel.md): A container with name text, value text in a row, with a horizontal line progress bar, and an icon, background.
 1. [UI/number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
 1. [UI/overlap sizer](ui-overlapsizer.md): Layout children game objects overlapped.
 1. [UI/pages](ui-pages.md): A container with pages, only current page is visible.
