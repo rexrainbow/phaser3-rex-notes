@@ -108,6 +108,7 @@ var label = scene.rexUI.add.nameValueLabel({
             ease: 'linear'
         },
     }, 
+    // bar: undefined,
 
     action: actionGameObject,
     actionMask: false,
@@ -170,7 +171,8 @@ var label = scene.rexUI.add.nameValueLabel({
         return `${value}/${max}`;
     }
     ```
-- `bar` : Game object of bar, or config of [horizontal line progress bar](shape-lineprogress.md)
+- `bar` : Game object of bar, or config of [horizontal line progress bar](shape-lineprogress.md), or `undefined`.
+    - `undefined` : No bar game object.
     - `bar.trackColor` : Fill color of bar's track, in number or css string value.
     - `bar.trackStrokeColor` : Stroke color of bar's track, in number or css string value.
     - `bar.trackThickness` : Stroke line width of bar's track.
@@ -181,7 +183,7 @@ var label = scene.rexUI.add.nameValueLabel({
         - `true` : Bar starts from right side.
     - `bar.easeValue` : Parameters of easing value.
         - `bar.easeValue.duration` : Duration of value easing, default is `0` (no easing).
-        - `bar.easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
+        - `bar.easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.    
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
@@ -318,6 +320,14 @@ See also - [dirty](ui-basesizer.md#dirty)
     or
     ```javascript
     label.barValue = t;  // 0~1
+    ```
+- Ease bar value
+    ```javascript
+    label.easeBarValueTo(value);  // 0~1
+    ```
+    or
+    ```javascript
+    label.easeBarValueTo(value, min, max);    // min~max
     ```
 
 ### Icon texture

@@ -8838,6 +8838,7 @@
             <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;linear&#39;</span>
         <span class="p">},</span>
     <span class="p">},</span> 
+    <span class="c1">// bar: undefined,</span>
 
     <span class="nx">action</span><span class="o">:</span> <span class="nx">actionGameObject</span><span class="p">,</span>
     <span class="nx">actionMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -8917,7 +8918,8 @@
     <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="nx">max</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a><ul>
+<li><code>bar</code> : Game object of bar, or config of <a href="../shape-lineprogress/">horizontal line progress bar</a>, or <code>undefined</code>.<ul>
+<li><code>undefined</code> : No bar game object.</li>
 <li><code>bar.trackColor</code> : Fill color of bar's track, in number or css string value.</li>
 <li><code>bar.trackStrokeColor</code> : Stroke color of bar's track, in number or css string value.</li>
 <li><code>bar.trackThickness</code> : Stroke line width of bar's track.</li>
@@ -8930,7 +8932,7 @@
 </li>
 <li><code>bar.easeValue</code> : Parameters of easing value.<ul>
 <li><code>bar.easeValue.duration</code> : Duration of value easing, default is <code>0</code> (no easing).</li>
-<li><code>bar.easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
+<li><code>bar.easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.    </li>
 </ul>
 </li>
 </ul>
@@ -9060,6 +9062,12 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">barValue</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>  <span class="c1">// 0~1</span>
+</code></pre></div></li>
+<li>Ease bar value
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">easeBarValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// 0~1</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">easeBarValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>    <span class="c1">// min~max</span>
 </code></pre></div></li>
 </ul>
 <h3 id="icon-texture">Icon texture<a class="headerlink" href="#icon-texture" title="Permanent link">&para;</a></h3>
