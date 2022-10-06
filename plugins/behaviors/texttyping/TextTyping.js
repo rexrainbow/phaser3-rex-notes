@@ -17,7 +17,7 @@ class TextTyping extends ComponentBase {
     resetFromJSON(o) {
         this.setTextWrapEnable(GetValue(o, 'wrap', false));
         this.setTypeMode(GetValue(o, 'typeMode', 0));
-        this.setTypeSpeed(GetValue(o, 'speed', 333));
+        this.setTypingSpeed(GetValue(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 
@@ -53,6 +53,11 @@ class TextTyping extends ComponentBase {
     }
 
     setTypeSpeed(speed) {
+        this.speed = speed;
+        return this;
+    }
+
+    setTypingSpeed(speed) {
         this.speed = speed;
         return this;
     }

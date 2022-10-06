@@ -3368,7 +3368,7 @@
   }(GameObject$3);
 
   var Components$3 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip, // Components.FX,
+  Phaser.Class.mixin(Canvas, [Components$3.Alpha, Components$3.BlendMode, Components$3.Crop, Components$3.Depth, Components$3.Flip, // Components.FX,  // Open for 3.60
   Components$3.GetBounds, Components$3.Mask, Components$3.Origin, Components$3.Pipeline, Components$3.ScrollFactor, Components$3.Tint, Components$3.Transform, Components$3.Visible, Render$2, CanvasMethods, TextureMethods]);
 
   var Pad = Phaser.Utils.String.Pad;
@@ -4026,7 +4026,7 @@
   }(GameObject$2);
 
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, // Components.FX,
+  Phaser.Class.mixin(TextBase, [Components$2.Alpha, Components$2.BlendMode, Components$2.ComputedSize, Components$2.Crop, Components$2.Depth, Components$2.Flip, // Components.FX,  // Open for 3.60
   Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1]);
 
   var PropertyMap = {
@@ -44096,7 +44096,7 @@
       value: function resetFromJSON(o) {
         this.setTextWrapEnable(GetValue$x(o, 'wrap', false));
         this.setTypeMode(GetValue$x(o, 'typeMode', 0));
-        this.setTypeSpeed(GetValue$x(o, 'speed', 333));
+        this.setTypingSpeed(GetValue$x(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
@@ -44135,6 +44135,12 @@
     }, {
       key: "setTypeSpeed",
       value: function setTypeSpeed(speed) {
+        this.speed = speed;
+        return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
         this.speed = speed;
         return this;
       }
@@ -44473,7 +44479,7 @@
         this.page.setText(text);
 
         if (speed !== undefined) {
-          this.setTypeSpeed(speed);
+          this.setTypingSpeed(speed);
         }
 
         this.typeNextPage();
@@ -44512,7 +44518,13 @@
     }, {
       key: "setTypeSpeed",
       value: function setTypeSpeed(speed) {
-        this.typing.setTypeSpeed(speed);
+        this.typing.setTypingSpeed(speed);
+        return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
+        this.typing.setTypingSpeed(speed);
         return this;
       }
     }, {

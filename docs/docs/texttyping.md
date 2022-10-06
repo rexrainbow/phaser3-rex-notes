@@ -137,7 +137,7 @@ typing.stop();
 ### Set typing speed
 
 ```javascript
-typing.setTypeSpeed(speed);  // speed in ms
+typing.setTypingSpeed(speed);  // speed in ms
 // typing.speed = speed;
 ```
 

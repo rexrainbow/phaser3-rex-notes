@@ -19,7 +19,7 @@ class PageTypingText extends Phaser.GameObjects.Text {
     start(text, speed) {
         this.page.setText(text);
         if (speed !== undefined) {
-            this.typing.setTypeSpeed(speed);
+            this.typing.setTypingSpeed(speed);
         }
         this.typeNextPage();
     }

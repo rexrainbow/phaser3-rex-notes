@@ -20,7 +20,7 @@ class PageTypingText extends BaseTextClass {
     start(text, speed) {
         this.page.setText(text);
         if (speed !== undefined) {
-            this.typing.setTypeSpeed(speed);
+            this.typing.setTypingSpeed(speed);
         }
         this.typeNextPage();
     }

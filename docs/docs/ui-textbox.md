@@ -217,7 +217,7 @@ var textBox = scene.rexUI.add.textBox({
     ```
 - Change typing speed
     ```javascript
-    textBox.setTypeSpeed(speed);
+    textBox.setTypingSpeed(speed);
     ```
     - `speed` : Typing speed in ms.
 

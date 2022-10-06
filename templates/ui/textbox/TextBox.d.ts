@@ -36,6 +36,7 @@ declare class TextBox extends Label {
     isTyping: boolean;
 
     setTypeSpeed(speed: number): this;
+    setTypingSpeed(speed: number): this;
 
     typeNextPage(): this;
     isLastPage: boolean;

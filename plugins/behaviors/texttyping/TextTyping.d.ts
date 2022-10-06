@@ -32,6 +32,7 @@ declare class TextTyping extends Phaser.Events.EventEmitter {
     resume(): this;
 
     setTypeSpeed(speed: number): this;
+    setTypingSpeed(speed: number): this;
     speed: number;
 
     setTypeMode(mode: TextTyping.TypeModeType): this;

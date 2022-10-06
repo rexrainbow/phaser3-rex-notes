@@ -29,7 +29,7 @@ class TextBox extends Label {
     start(text, speed) {
         this.page.setText(text);
         if (speed !== undefined) {
-            this.setTypeSpeed(speed);
+            this.setTypingSpeed(speed);
         }
         this.typeNextPage();
         return this;
@@ -61,7 +61,12 @@ class TextBox extends Label {
     }
 
     setTypeSpeed(speed) {
-        this.typing.setTypeSpeed(speed);
+        this.typing.setTypingSpeed(speed);
+        return this;
+    }
+
+    setTypingSpeed(speed) {
+        this.typing.setTypingSpeed(speed);
         return this;
     }
 

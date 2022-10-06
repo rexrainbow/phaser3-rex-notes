@@ -4608,7 +4608,7 @@
   }(GameObject$3);
 
   var Components$4 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(TextBase, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Crop, Components$4.Depth, Components$4.Flip, // Components.FX,
+  Phaser.Class.mixin(TextBase, [Components$4.Alpha, Components$4.BlendMode, Components$4.ComputedSize, Components$4.Crop, Components$4.Depth, Components$4.Flip, // Components.FX,  // Open for 3.60
   Components$4.GetBounds, Components$4.Mask, Components$4.Origin, Components$4.Pipeline, Components$4.ScrollFactor, Components$4.Tint, Components$4.Transform, Components$4.Visible, Render$4]);
 
   var Pad = Phaser.Utils.String.Pad;
@@ -10979,7 +10979,7 @@
   }(GameObject);
 
   var Components$2 = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip, // Components.FX,
+  Phaser.Class.mixin(Canvas, [Components$2.Alpha, Components$2.BlendMode, Components$2.Crop, Components$2.Depth, Components$2.Flip, // Components.FX,  // Open for 3.60
   Components$2.GetBounds, Components$2.Mask, Components$2.Origin, Components$2.Pipeline, Components$2.ScrollFactor, Components$2.Tint, Components$2.Transform, Components$2.Visible, Render$1, CanvasMethods, TextureMethods]);
 
   var CreateCanvas = function CreateCanvas(scene, data, view, styles, customBuilders) {
@@ -26143,7 +26143,7 @@
       value: function resetFromJSON(o) {
         this.setTextWrapEnable(GetValue$n(o, 'wrap', false));
         this.setTypeMode(GetValue$n(o, 'typeMode', 0));
-        this.setTypeSpeed(GetValue$n(o, 'speed', 333));
+        this.setTypingSpeed(GetValue$n(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
@@ -26182,6 +26182,12 @@
     }, {
       key: "setTypeSpeed",
       value: function setTypeSpeed(speed) {
+        this.speed = speed;
+        return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
         this.speed = speed;
         return this;
       }
@@ -26520,7 +26526,7 @@
         this.page.setText(text);
 
         if (speed !== undefined) {
-          this.setTypeSpeed(speed);
+          this.setTypingSpeed(speed);
         }
 
         this.typeNextPage();
@@ -26559,7 +26565,13 @@
     }, {
       key: "setTypeSpeed",
       value: function setTypeSpeed(speed) {
-        this.typing.setTypeSpeed(speed);
+        this.typing.setTypingSpeed(speed);
+        return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
+        this.typing.setTypingSpeed(speed);
         return this;
       }
     }, {

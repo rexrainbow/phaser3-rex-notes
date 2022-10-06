@@ -25,7 +25,7 @@ class TextBob extends BobBase {
         if (!gameObject.typing) {
             gameObject.typing = new TextTyping(gameObject);
         }
-        gameObject.typing.setTypeSpeed(speed);
+        gameObject.typing.setTypingSpeed(speed);
         return this;
     }
 
@@ -46,7 +46,7 @@ class TextBob extends BobBase {
         }
 
         if (speed !== undefined) {
-            gameObject.typing.setTypeSpeed(speed);
+            gameObject.typing.setTypingSpeed(speed);
         }
 
         gameObject.setData('typing', IsTyping);

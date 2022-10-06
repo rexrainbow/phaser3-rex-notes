@@ -258,7 +258,7 @@ class MySpriteBase extends RexPlugins.UI.Container {
         var textBox = this.text;
         textBox.setVisible(true);
         if (speed !== undefined) {
-            textBox.setTypeSpeed(speed);
+            textBox.setTypingSpeed(speed);
         }
         return this;
     }

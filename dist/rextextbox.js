@@ -11460,7 +11460,7 @@
       value: function resetFromJSON(o) {
         this.setTextWrapEnable(GetValue$1(o, 'wrap', false));
         this.setTypeMode(GetValue$1(o, 'typeMode', 0));
-        this.setTypeSpeed(GetValue$1(o, 'speed', 333));
+        this.setTypingSpeed(GetValue$1(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
         this.setTypingContent(GetFastValue(o, 'text', ''));
@@ -11499,6 +11499,12 @@
     }, {
       key: "setTypeSpeed",
       value: function setTypeSpeed(speed) {
+        this.speed = speed;
+        return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
         this.speed = speed;
         return this;
       }
@@ -11837,7 +11843,7 @@
         this.page.setText(text);
 
         if (speed !== undefined) {
-          this.setTypeSpeed(speed);
+          this.setTypingSpeed(speed);
         }
 
         this.typeNextPage();
@@ -11876,7 +11882,13 @@
     }, {
       key: "setTypeSpeed",
       value: function setTypeSpeed(speed) {
-        this.typing.setTypeSpeed(speed);
+        this.typing.setTypingSpeed(speed);
+        return this;
+      }
+    }, {
+      key: "setTypingSpeed",
+      value: function setTypingSpeed(speed) {
+        this.typing.setTypingSpeed(speed);
         return this;
       }
     }, {
