@@ -6364,7 +6364,7 @@
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
 
-        if (!parent.isRexSizer) {
+        if (parent && !parent.isRexSizer) {
           parent = null;
         }
       }
