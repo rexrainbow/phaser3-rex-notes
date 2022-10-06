@@ -15,23 +15,40 @@ class Demo extends Phaser.Scene {
         var centerChild = this.add.rectangle(400, 300, 30, 30, 0x0000ff);
         var roundChild = this.add.circle(400, 200, 10, 0xff0000);
         var localTweenChild = this.add.circle(400, 100, 10, 0x00ff00);
+        var tweenSelfChild = this.add.rexContainerLite(400, 400, [
+            this.add.rectangle(400, 400, 30, 30, 0xffff00)
+        ])
+
         var parent = this.add.rexContainerLite(400, 300)
             .add(centerChild)
             .add(roundChild)
             .add(localTweenChild)
+            .add(tweenSelfChild)
 
         this.input.once('pointerdown', function () {
             parent.tweenChild({
                 targets: localTweenChild,
                 y: '+=200',
                 repeat: -1,
-                yoyo: true,              
+                yoyo: true,
             })
+
             parent.tween({
                 angle: 360,
                 duration: 3000,
                 repeat: -1
-            });
+            })
+
+            tweenSelfChild.tweenChild({
+                targets: [tweenSelfChild],
+                scaleX: 3,
+                scaleY: 3,
+                angle: 360,
+
+                yoyo: true,
+                repeat: -1,
+                duration: 2000,
+            })
         })
     }
 

@@ -468,6 +468,9 @@ var tweenObj = container.tweenChild({
 })
 ```
 
+- `targets` : A game object, or an array of game object.
+    - A containerLite child, can tween its local state.
+
 [Paramters of configuration](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween/#create-tween-task) is the same as tween task.
 
 Supported properties :
@@ -476,6 +479,29 @@ Supported properties :
 - `angle`, `rotation`
 - `scaleX`, `scaleY`, `displayWidth`, `displayHeight`
 - `alpha`
+
+#### Tween local state of a containerlite child
+
+```javascript
+var tweenObj = containerLiteChild.tweenSelf({    
+    // x: '+=100',
+    // y: '+=100',
+    // repeat: -1,
+    // yoyo: true
+})
+```
+
+Equal to
+
+```javascript
+containerLiteChild.tweenChild({
+    targets: containerLiteChild,
+    // x: '+=100',
+    // y: '+=100',
+    // repeat: -1,
+    // yoyo: true
+})
+```
 
 #### Create tween config
 

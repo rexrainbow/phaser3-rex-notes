@@ -9939,6 +9939,10 @@
       tween.on('update', UpdateChild);
       return tween;
     },
+    tweenSelf: function tweenSelf(tweenConfig) {
+      tweenConfig.targets = [this];
+      return this.tweenChild(tweenConfig);
+    },
     createTweenChildConfig: function createTweenChildConfig(tweenConfig) {
       var targets = tweenConfig.targets;
 

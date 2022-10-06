@@ -41,7 +41,7 @@ var UpdateChild = function (tween, key, target) {
             break;
 
         case 'scaleX':
-        case 'scaleY':
+        case 'scaleY':        
         case 'displayWidth':
         case 'displayHeight':
             parent.updateChildScale(child);
@@ -80,6 +80,11 @@ export default {
         tween.on('update', UpdateChild);
 
         return tween;
+    },
+
+    tweenSelf(tweenConfig) {
+        tweenConfig.targets = [this];
+        return this.tweenChild(tweenConfig);
     },
 
     createTweenChildConfig(tweenConfig) {

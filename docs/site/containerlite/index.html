@@ -2510,6 +2510,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tween-local-state-of-a-containerlite-child" class="md-nav__link">
+    Tween local state of a containerlite child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-tween-config" class="md-nav__link">
     Create tween config
   </a>
@@ -9004,6 +9011,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tween-local-state-of-a-containerlite-child" class="md-nav__link">
+    Tween local state of a containerlite child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-tween-config" class="md-nav__link">
     Create tween config
   </a>
@@ -9504,6 +9518,12 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
     <span class="c1">// yoyo: true</span>
 <span class="p">})</span>
 </code></pre></div>
+<ul>
+<li><code>targets</code> : A game object, or an array of game object.<ul>
+<li>A containerLite child, can tween its local state.</li>
+</ul>
+</li>
+</ul>
 <p><a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween/#create-tween-task">Paramters of configuration</a> is the same as tween task.</p>
 <p>Supported properties :</p>
 <ul>
@@ -9512,6 +9532,23 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <li><code>scaleX</code>, <code>scaleY</code>, <code>displayWidth</code>, <code>displayHeight</code></li>
 <li><code>alpha</code></li>
 </ul>
+<h4 id="tween-local-state-of-a-containerlite-child">Tween local state of a containerlite child<a class="headerlink" href="#tween-local-state-of-a-containerlite-child" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tweenObj</span> <span class="o">=</span> <span class="nx">containerLiteChild</span><span class="p">.</span><span class="nx">tweenSelf</span><span class="p">({</span>    
+    <span class="c1">// x: &#39;+=100&#39;,</span>
+    <span class="c1">// y: &#39;+=100&#39;,</span>
+    <span class="c1">// repeat: -1,</span>
+    <span class="c1">// yoyo: true</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>Equal to</p>
+<div class="highlight"><pre><span></span><code><span class="nx">containerLiteChild</span><span class="p">.</span><span class="nx">tweenChild</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">containerLiteChild</span><span class="p">,</span>
+    <span class="c1">// x: &#39;+=100&#39;,</span>
+    <span class="c1">// y: &#39;+=100&#39;,</span>
+    <span class="c1">// repeat: -1,</span>
+    <span class="c1">// yoyo: true</span>
+<span class="p">})</span>
+</code></pre></div>
 <h4 id="create-tween-config">Create tween config<a class="headerlink" href="#create-tween-config" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tweenConfig</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">createTweenChildConfig</span><span class="p">({</span>
      <span class="nx">targets</span><span class="o">:</span> <span class="nx">child</span><span class="p">,</span>

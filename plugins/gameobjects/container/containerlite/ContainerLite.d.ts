@@ -179,6 +179,10 @@ declare class ContainerLite extends Base {
         config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): Phaser.Tweens.Tween;
 
+    tweenSelf(
+        config: Phaser.Types.Tweens.TweenBuilderConfig | object
+    ): Phaser.Tweens.Tween;
+
     createTweenChildConfig(
         config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): Phaser.Types.Tweens.TweenBuilderConfig;
