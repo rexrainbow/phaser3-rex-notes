@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import QuadImagePlugin from '../../plugins/quadimage-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
             CreateControlCircle(this, controlPoints[i]);
         }
 
-        this.add.image(600, 300, image.texture.key);
+        this.add.image(600, 300, image.texture);
     }
 
     update() {

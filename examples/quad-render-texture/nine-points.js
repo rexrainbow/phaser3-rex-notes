@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
             CreateControlCircle(this, controlPoints[i]);
         }
 
-        this.add.image(600, 300, image.texture.key);
+        this.add.image(600, 300, image.texture);
     }
 
     update() {

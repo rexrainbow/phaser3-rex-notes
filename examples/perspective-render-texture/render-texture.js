@@ -38,7 +38,7 @@ class Demo extends Phaser.Scene {
             image.rotationY += pointer.velocity.x * (1 / 800);
         });
 
-        this.add.image(600, 300, image.texture.key);
+        this.add.image(600, 300, image.texture);
     }
 
     update() {
