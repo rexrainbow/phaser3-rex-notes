@@ -1,6 +1,6 @@
 import Image from '../image/Image.js';
+import CreateInternalRenderTexture from '../../../../utils/rendertexture/CreateInternalRenderTexture.js';
 
-const RT = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -15,8 +15,7 @@ class RenderTexture extends Image {
         }
 
         // render-texture -> perspective-image
-        var rt = (new RT(scene, x, y, width, height))
-            .setOrigin(0.5);
+        var rt = CreateInternalRenderTexture(scene, x, y, width, height);
 
         super(scene, x, y, rt.texture.key, null, config);
         this.type = 'rexShatterRenderTexture';

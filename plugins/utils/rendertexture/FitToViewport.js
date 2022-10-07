@@ -1,4 +1,5 @@
 import GetViewport from '../system/GetViewport.js';
+import GetInternalCamera from './GetInternalCamera.js';
 
 var FitToViewport = function (renderTexture, camera) {
     if (camera === undefined) {
@@ -20,7 +21,7 @@ var FitToViewport = function (renderTexture, camera) {
     }
 
     renderTexture.setPosition(x, y);
-    renderTexture.camera.setScroll(x, y);
+    GetInternalCamera(renderTexture).setScroll(x, y);
 
     return renderTexture;
 }

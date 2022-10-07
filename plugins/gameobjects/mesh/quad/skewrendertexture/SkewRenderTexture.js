@@ -1,6 +1,6 @@
 import SkewImage from '../skewimage/SkewImage.js';
+import CreateInternalRenderTexture from '../../../../utils/rendertexture/CreateInternalRenderTexture.js';
 
-const RT = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -15,8 +15,7 @@ class SkewRenderTexture extends SkewImage {
         }
 
         // render-texture -> skew-image
-        var rt = (new RT(scene, x, y, width, height))
-            .setOrigin(0.5);
+        var rt = CreateInternalRenderTexture(scene, x, y, width, height);
 
         super(scene, x, y, rt.texture.key, null);
         this.type = 'rexSkewRenderTexture';

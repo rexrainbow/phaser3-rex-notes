@@ -1,6 +1,7 @@
 import GetBoundsOfGameObjects from '../bounds/GetBoundsOfGameObjects.js';
 import Clone from '../object/Clone.js';
 import SortGameObjectsByDepth from '../system/SortGameObjectsByDepth.js';
+import GetInternalCamera from './GetInternalCamera.js';
 
 var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -60,7 +61,7 @@ var Snapshot = function (config) {
         renderTexture.setSize(width, height);
     }
     renderTexture.setOrigin(originX, originY);
-    renderTexture.camera.setScroll(scrollX, scrollY);
+    GetInternalCamera(renderTexture).setScroll(scrollX, scrollY);
 
     // Draw gameObjects
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
