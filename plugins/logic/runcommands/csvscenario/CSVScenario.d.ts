@@ -71,6 +71,7 @@ declare class CSVScenario extends Phaser.Events.EventEmitter {
     readonly isRunning: boolean;
     readonly isPaused: boolean;
     readonly lastLabel: string;
+    readonly lastCustomCommandName: string;
     readonly previousLabel: string;
 
     setTimeScale(timeScale: number): this;

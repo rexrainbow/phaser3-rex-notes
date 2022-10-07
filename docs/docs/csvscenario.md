@@ -167,6 +167,10 @@ Format:
 
 - 1st column of instruction: `-`
 - Parameters will be converted to number, boolean, null, or string by default.
+- Method name of last custom command :
+    ```javascript
+    var methodName = scenario.lastCustomCommandName;
+    ```
 
 ##### Delay execution
 

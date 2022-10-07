@@ -8,6 +8,7 @@ class CustomCmd extends BaseCmd {
     constructor(scenario) {
         super(scenario, '-');
         this.task = undefined;
+        this.lastMethodName = undefined;
     }
 
     resetFromJSON(o) {
@@ -23,7 +24,7 @@ class CustomCmd extends BaseCmd {
         var scenario = this.scenario;
         var argsConvert = scenario.argsConvert;
         var argsConvertScope = scenario.argsConvertScope;
-        if (argsConvert) {            
+        if (argsConvert) {
             if (argsConvert === true) {
                 argsConvert = TypeConvert;
                 argsConvertScope = undefined;
@@ -43,7 +44,9 @@ class CustomCmd extends BaseCmd {
 
     run(inst) {
         var scenario = this.scenario;
-        var task = RunCommands(inst[1], scenario.scope);
+        var command = inst[1];
+        this.lastMethodName = command[0];
+        var task = RunCommands(command, scenario.scope);
         if (task && (typeof (task.once) === 'function')) {
             task.once('complete', this.resume, this);
             this.pause();

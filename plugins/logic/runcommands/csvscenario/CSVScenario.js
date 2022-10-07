@@ -257,6 +257,10 @@ class CSVScenario {
         return this.cmdHandlers.cmds.label.prevLabel;
     }
 
+    get lastCustomCommandName() {
+        return this.cmdHandlers.cmds['-'].lastMethodName;
+    }
+
     getCmdHandler(name) {
         if (typeof (name) !== 'string') {
             name = name[0];
