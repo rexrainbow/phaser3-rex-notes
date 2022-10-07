@@ -50,6 +50,7 @@ class ShatterImage extends Mesh {
             texture: this.texture.key, frame: this.frame.name,
             width: this.frame.cutWidth / this.height,
             height: this.frame.cutHeight / this.height,
+            flipY: this.frame.source.isRenderTexture
         });
 
         this.setOrtho(this.width / this.height, 1);
