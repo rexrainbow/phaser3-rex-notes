@@ -17,7 +17,7 @@ class SkewRenderTexture extends SkewImage {
         // render-texture -> skew-image
         var rt = CreateInternalRenderTexture(scene, x, y, width, height);
 
-        super(scene, x, y, rt.texture.key, null);
+        super(scene, x, y, rt.texture, null);
         this.type = 'rexSkewRenderTexture';
         this.rt = rt;
     }

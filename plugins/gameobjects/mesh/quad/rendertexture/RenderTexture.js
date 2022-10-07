@@ -18,7 +18,7 @@ class RenderTexture extends Image {
         // render-texture -> quad-image
         var rt = CreateInternalRenderTexture(scene, x, y, width, height);
 
-        super(scene, x, y, rt.texture.key, null, config);
+        super(scene, x, y, rt.texture, null, config);
         this.type = 'rexQuadRenderTexture';
         this.rt = rt;
     }

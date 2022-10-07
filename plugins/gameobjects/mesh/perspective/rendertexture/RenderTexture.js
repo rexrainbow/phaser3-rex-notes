@@ -18,7 +18,7 @@ class RenderTexture extends Image {
         // render-texture -> perspective-image
         var rt = CreateInternalRenderTexture(scene, x, y, width, height);
 
-        super(scene, x, y, rt.texture.key, null, config);
+        super(scene, x, y, rt.texture, null, config);
         this.type = 'rexPerspectiveRenderTexture';
         this.rt = rt;
     }
