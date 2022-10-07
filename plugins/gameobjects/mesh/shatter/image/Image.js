@@ -95,10 +95,11 @@ class ShatterImage extends Mesh {
         var vHalfWidth = (this.frame.cutWidth / srcHeight) / 2;
         var vHalfHeight = (this.frame.cutHeight / srcHeight) / 2;
 
+        var flipY = this.frame.source.isRenderTexture;
         var frameU0 = this.frame.u0;
         var frameU1 = this.frame.u1;
-        var frameV0 = this.frame.v0;
-        var frameV1 = this.frame.v1;
+        var frameV0 = (!flipY) ? this.frame.v0 : this.frame.v1;
+        var frameV1 = (!flipY) ? this.frame.v1 : this.frame.v0;
         var frameU = frameU1 - frameU0;
         var frameV = frameV1 - frameV0;
 
