@@ -172,6 +172,20 @@
     return viewport;
   };
 
+  var VPXYToXY = function VPXYToXY(vpx, vpy, viewport, out) {
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = GlobXY;
+    }
+
+    out.x = viewport.x + viewport.width * vpx;
+    out.y = viewport.y + viewport.height * vpy;
+    return out;
+  };
+
+  var GlobXY = {};
+
   var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
     // Don't attach properties again
     if (gameObject.hasOwnProperty('vp')) {
@@ -187,7 +201,7 @@
     }
 
     if (transformCallback === undefined) {
-      transformCallback = DefaultTransformCallback;
+      transformCallback = VPXYToXY;
     }
 
     MonitorViewport(viewport);
@@ -195,7 +209,7 @@
     gameObject.vp = viewport; // Set position of game object when view-port changed.
 
     var Transform = function Transform() {
-      transformCallback(gameObject, viewport, vpx, vpy);
+      transformCallback(vpx, vpy, viewport, gameObject);
     };
 
     events.on('update', Transform);
@@ -228,11 +242,6 @@
     Transform();
   };
 
-  var DefaultTransformCallback = function DefaultTransformCallback(gameObject, viewport, vpx, vpy) {
-    gameObject.x = viewport.x + viewport.width * vpx;
-    gameObject.y = viewport.y + viewport.height * vpy;
-  };
-
   var ViewportCoordinatePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ViewportCoordinatePlugin, _Phaser$Plugins$BaseP);
 
@@ -254,6 +263,11 @@
       key: "add",
       value: function add(gameObject, viewport, vpx, vpy, transformCallback) {
         return AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback);
+      }
+    }, {
+      key: "vpxyToxy",
+      value: function vpxyToxy(vpx, vpy, viewport, out) {
+        return VPXYToXY(vpx, vpy, viewport, out);
       }
     }]);
 

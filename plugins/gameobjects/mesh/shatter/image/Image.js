@@ -8,6 +8,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const Vertex = Phaser.Geom.Mesh.Vertex;
 const DistanceSquared = Phaser.Math.Distance.Squared;
+const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
 class ShatterImage extends Mesh {
     constructor(scene, x, y, key, frame, config) {
@@ -26,17 +27,23 @@ class ShatterImage extends Mesh {
 
         this.shatterCenter = { x: null, y: null };
 
-        this.setVariation(GetValue(config, 'variation', 0.25));
+        this.setRingRadiusList(GetValue(config, 'ringRadiusList', DefaultRingRadiusList));
         this.setSamplesPerRing(GetValue(config, 'samplesPerRing', 12));
+        this.setVariation(GetValue(config, 'variation', 0.25));
     }
 
-    setVariation(variation) {
-        this.variation = variation;
+    setRingRadiusList(ringRadiusList) {
+        this.ringRadiusList = ringRadiusList;
         return this;
     }
 
     setSamplesPerRing(samples) {
         this.samplesPerRing = samples;
+        return this;
+    }
+
+    setVariation(variation) {
+        this.variation = variation;
         return this;
     }
 
@@ -56,7 +63,31 @@ class ShatterImage extends Mesh {
         return this
     }
 
-    shatter(centerX, centerY) {
+    shatter(centerX, centerY, config) {
+        if (IsPlainObject(centerX)) {
+            config = centerX;
+            centerX = undefined;
+            centerY = undefined;
+        }
+
+        if (IsPlainObject(config)) {
+            if (config.hasOwnProperty('centerX')) {
+                centerX = config.centerX;
+            }
+            if (config.hasOwnProperty('centerY')) {
+                centerY = config.centerY;
+            }
+            if (config.hasOwnProperty('ringRadiusList')) {
+                this.setRingRadiusList(config.ringRadiusList);
+            }
+            if (config.hasOwnProperty('samplesPerRing')) {
+                this.setSamplesPerRing(config.samplesPerRing);
+            }
+            if (config.hasOwnProperty('variation')) {
+                this.setVariation(config.variation);
+            }
+        }
+
         if (centerX === undefined) {
             centerX = this.width / 2;
             centerY = this.height / 2;
@@ -81,6 +112,7 @@ class ShatterImage extends Mesh {
             height: this.height,
             center: this.shatterCenter,
             triangleOutput: false,
+            ringRadiusList: this.ringRadiusList,
             variation: this.variation,
             samplesPerRing: this.samplesPerRing
         })

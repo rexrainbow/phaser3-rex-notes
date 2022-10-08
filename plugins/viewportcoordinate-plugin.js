@@ -1,4 +1,5 @@
 import AddViewportCoordinateProperties from './viewportcoordinate.js';
+import { VPXYToXY } from './viewportcoordinate.js';
 
 class ViewportCoordinatePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -13,6 +14,10 @@ class ViewportCoordinatePlugin extends Phaser.Plugins.BasePlugin {
 
     add(gameObject, viewport, vpx, vpy, transformCallback) {
         return AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback);
+    }
+
+    vpxyToxy(vpx, vpy, viewport, out) {
+        return VPXYToXY(vpx, vpy, viewport, out);
     }
 }
 

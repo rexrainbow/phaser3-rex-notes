@@ -80,8 +80,13 @@ Reference: [Delaunay Triangulation](https://github.com/darkskyapp/delaunay-fast)
 
 ```javascript
 var image = scene.add.rexShatterImage(x, y, texture, frame, {
-    // variation: 0.25,
+    // ringRadiusList: [1 / 27, 3 / 27, 9 / 27],
+    // ringRadiusList: function(width, height) {
+    //    return [1 / 27, 3 / 27, 9 / 27];
+    // },
+
     // samplesPerRing: 12
+    // variation: 0.25,    
 });
 ```
 
@@ -93,10 +98,26 @@ var image = scene.add.rexShatterImage({
     // y: 0,
     key,
     // frame: null,
+
+    // ringRadiusList: [1 / 27, 3 / 27, 9 / 27],
+    // ringRadiusList: function(width, height) {
+    //    return [1 / 27, 3 / 27, 9 / 27];
+    // },
+
+    // samplesPerRing: 12,
     // variation: 0.25,
-    // samplesPerRing: 12
+    
 });
 ```
+
+- `ringRadiusList` :
+    - A list of number. Default value is `[1 / 27, 3 / 27, 9 / 27]`
+    - A callback to return a list of number
+        ```javascript
+        function(width, height) {
+            return [1 / 27, 3 / 27, 9 / 27];
+        }
+        ```
 
 Add perspectiveimage from JSON
 
@@ -107,8 +128,14 @@ var perspectiveimage = scene.make.rexShatterImage({
     key: null,
     frame: null,
 
-    // variation: 0.25,
+    // ringRadiusList: [1 / 27, 3 / 27, 9 / 27],
+    // ringRadiusList: function(width, height) {
+    //    return [1 / 27, 3 / 27, 9 / 27];
+    // },
+
     // samplesPerRing: 12,
+    // variation: 0.25,
+    
 
     add: true
 });
@@ -144,6 +171,28 @@ var perspectiveimage = scene.make.rexShatterImage({
 ```javascript
 image.shatter(centerX, centerY);
 // image.shatter();
+```
+
+or
+
+```javascript
+image.shatter(centerX, centerY, {
+    // ringRadiusList:
+    // samplesPerRing: 
+    // variation
+});
+```
+
+or
+
+```javascript
+image.shatter({
+    // centerX: 
+    // centerY: 
+    // ringRadiusList:
+    // samplesPerRing: 
+    // variation
+});
 ```
 
 - `centerX`, `centerY` : Center position of shatter.

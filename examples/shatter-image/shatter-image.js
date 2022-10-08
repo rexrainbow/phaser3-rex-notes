@@ -25,7 +25,9 @@ class Demo extends Phaser.Scene {
                     image.task.stop();
                     image.task = null;
                 }
-                image.shatter(pointer.x, pointer.y);
+                image.shatter(pointer.x, pointer.y, {
+                    // ringRadiusList: [1 / 4, 1 / 2]
+                });
             })
             .on('pointerup', function () {
                 image.startUpdate();

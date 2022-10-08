@@ -8,10 +8,10 @@ declare namespace AddViewportCoordinateProperties {
     }
 
     type TransformCallbackType = (
-        gameObject: Phaser.GameObjects.GameObject,
-        viewport: Phaser.Geom.Rectangle,
         vpx: number,
         vpy: number,
+        viewport: Phaser.Geom.Rectangle,
+        gameObject: Phaser.GameObjects.GameObject,
     ) => void;
 }
 

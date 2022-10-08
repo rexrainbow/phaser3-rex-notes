@@ -547,6 +547,7 @@
 
       _this = _super.call(this, scenario, '-');
       _this.task = undefined;
+      _this.lastMethodName = undefined;
       return _this;
     }
 
@@ -588,7 +589,9 @@
       key: "run",
       value: function run(inst) {
         var scenario = this.scenario;
-        var task = RunCommands(inst[1], scenario.scope);
+        var command = inst[1];
+        this.lastMethodName = command[0];
+        var task = RunCommands(command, scenario.scope);
 
         if (task && typeof task.once === 'function') {
           task.once('complete', this.resume, this);
@@ -1283,6 +1286,11 @@
       key: "previousLabel",
       get: function get() {
         return this.cmdHandlers.cmds.label.prevLabel;
+      }
+    }, {
+      key: "lastCustomCommandName",
+      get: function get() {
+        return this.cmdHandlers.cmds['-'].lastMethodName;
       }
     }, {
       key: "getCmdHandler",
