@@ -68,7 +68,7 @@ var NinePatchBase = function (GOClass, type) {
             var maxFixedPartScaleY = GetValue(config, 'maxFixedPartScaleY', undefined);
             this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
 
-            this.setTexture(key, baseFrame, columns, rows);
+            this.setBaseTexture(key, baseFrame, columns, rows);
         }
 
         get minWidth() {

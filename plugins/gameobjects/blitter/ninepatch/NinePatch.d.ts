@@ -77,7 +77,7 @@ declare class NinePatch extends Blitter {
 
     resize(width: number, height: number): this;
 
-    setTexture(
+    setBaseTexture(
         key: string,
         baseFrame?: string | number | undefined,
         columns?: (number | undefined)[],

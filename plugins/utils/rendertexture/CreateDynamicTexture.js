@@ -1,5 +1,5 @@
-var DynamicTexture = Phaser.Textures.DynamicTexture;
-var UUID = Phaser.Utils.String.UUID;
+const DynamicTexture = Phaser.Textures.DynamicTexture;
+const UUID = Phaser.Utils.String.UUID;
 
 var CreateDynamicTexture = function (scene, width, height) {
     if (width === undefined) {

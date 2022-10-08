@@ -76,7 +76,7 @@ declare class NinePatch extends Phaser.GameObjects.RenderTexture {
 
     resize(width: number, height: number): this;
 
-    setTexture(
+    setBaseTexture(
         key: string,
         baseFrame: string | undefined,
         columns: (number | undefined)[],

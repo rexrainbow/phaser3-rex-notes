@@ -4,7 +4,7 @@ import Methods from './Methods.js';
 import SetTexture from '../blitterbase/methods/SetTexture.js';
 
 class NinePatch extends NinePatchBase(Blitter, 'rexNinePatch2') {
-    setTexture(key, baseFrameName, columns, rows) {
+    setBaseTexture(key, baseFrameName, columns, rows) {
         SetTexture.call(this, key, '__BASE');
 
         // Not initialized yet
@@ -12,7 +12,7 @@ class NinePatch extends NinePatchBase(Blitter, 'rexNinePatch2') {
             return this;
         }
 
-        super.setTexture(key, baseFrameName, columns, rows);
+        super.setBaseTexture(key, baseFrameName, columns, rows);
         return this;
     }
 }
