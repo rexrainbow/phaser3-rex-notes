@@ -22,9 +22,7 @@ Paste renderable game objects, or frames on a texture, built-in object of phaser
         ```
 - Create dynamic texture. (Not added to texture manager)
     ```javascript
-    const DynamicTexture = Phaser.Textures.DynamicTexture;
-    const UUID = Phaser.Utils.String.UUID;
-    var texture = new DynamicTexture(scene.sys.textures, UUID(), width, height)    
+    var texture = new Phaser.Textures.DynamicTexture(scene.sys.textures, null, width, height)    
     ```
     - Use this texture in any texture-based game object
         ```javascript

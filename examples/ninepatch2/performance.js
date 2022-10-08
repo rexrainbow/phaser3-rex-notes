@@ -1,4 +1,4 @@
-import phaser from 'phaser/src/phaser.js';
+import phaser from '../../../phaser/src/phaser.js';
 import NinePatchPlugin from '../../plugins/ninepatch-plugin.js';
 import NinePatch2Plugin from '../../plugins/ninepatch2-plugin.js';
 
@@ -16,9 +16,9 @@ var CreateNinePatch = function (scene, count) {
     var t1 = performance.now();
     scene.add.text(200, 250, `NinePatch: ${Math.floor(t1 - t0)}`);
     /*
-     10: 24
-     100: 119
-     1000: 2352
+     10: 26
+     100: 132
+     1000: 920
      */
 }
 
@@ -37,9 +37,9 @@ var CreateNinePatch2 = function (scene, count) {
     var t1 = performance.now();
     scene.add.text(500, 250, `NinePatch2: ${Math.floor(t1 - t0)}`);
     /*
-    10: 5
-    100: 36
-    1000: 360
+    10: 12
+    100: 45
+    1000: 293
     */
 }
 
@@ -55,7 +55,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var count = 1000;
+        var count = 10;
         this.time.delayedCall(1000, CreateNinePatch, [this, count]);
         this.time.delayedCall(2000, CreateNinePatch2, [this, count]);
     }
