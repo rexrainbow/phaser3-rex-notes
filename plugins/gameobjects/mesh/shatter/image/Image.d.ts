@@ -7,8 +7,11 @@ declare namespace ShatterImage {
         y?: number,
         key: string,
         frame?: string,
+
+        ringRadiusList?: number[] | ((width: number, height: number) => number[]),
+        samplesPerRing?: number,
         variation?: number,
-        samplesPerRing?: number
+
     }
 }
 

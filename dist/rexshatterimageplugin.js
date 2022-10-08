@@ -432,8 +432,13 @@
     }
   };
 
+  var IsFunction = function IsFunction(obj) {
+    return obj && typeof obj === 'function';
+  };
+
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
+  var DefaultRingRadiusList$1 = [1 / 27, 3 / 27, 9 / 27];
 
   var ShatterRectangleToTriangles = function ShatterRectangleToTriangles(config) {
     var left, right, top, bottom, width, height;
@@ -466,16 +471,21 @@
 
     var vertices = [];
     vertices.push([centerX, centerY]);
+    var ringRadiusList = GetValue$2(config, 'ringRadiusList', DefaultRingRadiusList$1);
     var ringSamples = GetValue$2(config, 'samplesPerRing', 12);
     var variation = GetValue$2(config, 'variation', 0.25);
+
+    if (IsFunction(ringRadiusList)) {
+      ringRadiusList = ringRadiusList(width, height);
+    }
+
     var radius = Math.min(width, height);
     var randMin = 1 - variation,
         randMax = 1 + variation;
 
-    for (var i = 0; i < 3; i++) {
-      // r = 1/27, 3/27, 9/27
-      AddRingVertices(vertices, centerX, centerY, radius * Math.pow(3, i) / 27, ringSamples, randMin, randMax, left, right, top, bottom);
-    } // r = 27/27
+    for (var i = 0, cnt = ringRadiusList.length; i < cnt; i++) {
+      AddRingVertices(vertices, centerX, centerY, radius * ringRadiusList[i], ringSamples, randMin, randMax, left, right, top, bottom);
+    } // Vertices outside of rectangle
 
 
     var radius = Math.max(width, height) * 2;
@@ -612,6 +622,7 @@
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var Vertex = Phaser.Geom.Mesh.Vertex;
   var DistanceSquared = Phaser.Math.Distance.Squared;
+  var DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
   var ShatterImage = /*#__PURE__*/function (_Mesh) {
     _inherits(ShatterImage, _Mesh);
@@ -642,23 +653,31 @@
         y: null
       };
 
-      _this.setVariation(GetValue$1(config, 'variation', 0.25));
+      _this.setRingRadiusList(GetValue$1(config, 'ringRadiusList', DefaultRingRadiusList));
 
       _this.setSamplesPerRing(GetValue$1(config, 'samplesPerRing', 12));
+
+      _this.setVariation(GetValue$1(config, 'variation', 0.25));
 
       return _this;
     }
 
     _createClass(ShatterImage, [{
-      key: "setVariation",
-      value: function setVariation(variation) {
-        this.variation = variation;
+      key: "setRingRadiusList",
+      value: function setRingRadiusList(ringRadiusList) {
+        this.ringRadiusList = ringRadiusList;
         return this;
       }
     }, {
       key: "setSamplesPerRing",
       value: function setSamplesPerRing(samples) {
         this.samplesPerRing = samples;
+        return this;
+      }
+    }, {
+      key: "setVariation",
+      value: function setVariation(variation) {
+        this.variation = variation;
         return this;
       }
     }, {
@@ -705,6 +724,7 @@
           height: this.height,
           center: this.shatterCenter,
           triangleOutput: false,
+          ringRadiusList: this.ringRadiusList,
           variation: this.variation,
           samplesPerRing: this.samplesPerRing
         });

@@ -1,7 +1,9 @@
 import Triangulate from './Triangulate.js';
+import IsFunction from '../../object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
+const DefaultRingRadiusList = [1 / 27, 3 / 27, 9 / 27];
 
 var ShatterRectangleToTriangles = function (config) {
     var left, right, top, bottom, width, height;
@@ -33,22 +35,27 @@ var ShatterRectangleToTriangles = function (config) {
     var vertices = [];
     vertices.push([centerX, centerY]);
 
+    var ringRadiusList = GetValue(config, 'ringRadiusList', DefaultRingRadiusList);
     var ringSamples = GetValue(config, 'samplesPerRing', 12);
     var variation = GetValue(config, 'variation', 0.25);
+
+    if (IsFunction(ringRadiusList)) {
+        ringRadiusList = ringRadiusList(width, height);
+    }
+
     var radius = Math.min(width, height);
     var randMin = 1 - variation,
         randMax = 1 + variation;
-    for (var i = 0; i < 3; i++) {
-        // r = 1/27, 3/27, 9/27
+    for (var i = 0, cnt = ringRadiusList.length; i < cnt; i++) {
         AddRingVertices(
             vertices,
-            centerX, centerY, (radius * (3 ** i) / 27), ringSamples,
+            centerX, centerY, (radius * ringRadiusList[i]), ringSamples,
             randMin, randMax,
             left, right, top, bottom
         )
     }
 
-    // r = 27/27
+    // Vertices outside of rectangle
     var radius = Math.max(width, height) * 2;
     AddRingVertices(
         vertices,

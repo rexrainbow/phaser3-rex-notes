@@ -8848,8 +8848,13 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexShatterImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// variation: 0.25,</span>
+    <span class="c1">// ringRadiusList: [1 / 27, 3 / 27, 9 / 27],</span>
+    <span class="c1">// ringRadiusList: function(width, height) {</span>
+    <span class="c1">//    return [1 / 27, 3 / 27, 9 / 27];</span>
+    <span class="c1">// },</span>
+
     <span class="c1">// samplesPerRing: 12</span>
+    <span class="c1">// variation: 0.25,    </span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or </p>
@@ -8858,10 +8863,28 @@
     <span class="c1">// y: 0,</span>
     <span class="nx">key</span><span class="p">,</span>
     <span class="c1">// frame: null,</span>
+
+    <span class="c1">// ringRadiusList: [1 / 27, 3 / 27, 9 / 27],</span>
+    <span class="c1">// ringRadiusList: function(width, height) {</span>
+    <span class="c1">//    return [1 / 27, 3 / 27, 9 / 27];</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// samplesPerRing: 12,</span>
     <span class="c1">// variation: 0.25,</span>
-    <span class="c1">// samplesPerRing: 12</span>
+
 <span class="p">});</span>
 </code></pre></div>
+<ul>
+<li><code>ringRadiusList</code> :<ul>
+<li>A list of number. Default value is <code>[1 / 27, 3 / 27, 9 / 27]</code></li>
+<li>A callback to return a list of number
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mf">1</span> <span class="o">/</span> <span class="mf">27</span><span class="p">,</span> <span class="mf">3</span> <span class="o">/</span> <span class="mf">27</span><span class="p">,</span> <span class="mf">9</span> <span class="o">/</span> <span class="mf">27</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <p>Add perspectiveimage from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspectiveimage</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexShatterImage</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -8869,8 +8892,14 @@
     <span class="nx">key</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">frame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
-    <span class="c1">// variation: 0.25,</span>
+    <span class="c1">// ringRadiusList: [1 / 27, 3 / 27, 9 / 27],</span>
+    <span class="c1">// ringRadiusList: function(width, height) {</span>
+    <span class="c1">//    return [1 / 27, 3 / 27, 9 / 27];</span>
+    <span class="c1">// },</span>
+
     <span class="c1">// samplesPerRing: 12,</span>
+    <span class="c1">// variation: 0.25,</span>
+
 
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
