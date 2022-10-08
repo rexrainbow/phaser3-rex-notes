@@ -173,6 +173,28 @@ image.shatter(centerX, centerY);
 // image.shatter();
 ```
 
+or
+
+```javascript
+image.shatter(centerX, centerY, {
+    // ringRadiusList:
+    // samplesPerRing: 
+    // variation
+});
+```
+
+or
+
+```javascript
+image.shatter({
+    // centerX: 
+    // centerY: 
+    // ringRadiusList:
+    // samplesPerRing: 
+    // variation
+});
+```
+
 - `centerX`, `centerY` : Center position of shatter.
     - `undefined` : Default value is center of image.
 

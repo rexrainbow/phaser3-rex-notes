@@ -64,7 +64,31 @@ class ShatterImage extends Mesh {
         return this
     }
 
-    shatter(centerX, centerY) {
+    shatter(centerX, centerY, config) {
+        if (IsPlainObject(centerX)) {
+            config = centerX;
+            centerX = undefined;
+            centerY = undefined;
+        }
+
+        if (IsPlainObject(config)) {
+            if (config.hasOwnProperty('centerX')) {
+                centerX = config.centerX;
+            }
+            if (config.hasOwnProperty('centerY')) {
+                centerY = config.centerY;
+            }
+            if (config.hasOwnProperty('ringRadiusList')) {
+                this.setRingRadiusList(config.ringRadiusList);
+            }
+            if (config.hasOwnProperty('samplesPerRing')) {
+                this.setSamplesPerRing(config.samplesPerRing);
+            }
+            if (config.hasOwnProperty('variation')) {
+                this.setVariation(config.variation);
+            }
+        }
+
         if (centerX === undefined) {
             centerX = this.width / 2;
             centerY = this.height / 2;
