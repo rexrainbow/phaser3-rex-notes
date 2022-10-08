@@ -181,6 +181,7 @@ nav:
     - Textures:
         - Textures: textures.md
         - Canvas texture: canvas-texture.md 
+        - Dynamic texture: dynamic-texture.md
         - Canvas frame manager: canvasframemanager.md
         - Character cache: charactercache.md
     - Display:
