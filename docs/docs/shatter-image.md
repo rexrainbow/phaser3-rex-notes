@@ -12,7 +12,7 @@ Reference: [Delaunay Triangulation](https://github.com/darkskyapp/delaunay-fast)
 
 ## Live demos
 
-- [Satter image](https://codepen.io/rexrainbow/pen/qBaawym)
+- [Shatter image](https://codepen.io/rexrainbow/pen/qBaawym)
 
 ## Usage
 
