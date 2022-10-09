@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 200, height: 40,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
 
             icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
 
@@ -40,7 +40,8 @@ class Demo extends Phaser.Scene {
             bar: {
                 height: 6,
                 barColor: COLOR_LIGHT,
-                trackColor: COLOR_DARK,
+                barColor2: COLOR_DARK,
+                // trackColor: COLOR_DARK,
                 // trackStrokeColor: COLOR_LIGHT
             },
 

@@ -334,6 +334,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Line progress canvas](canvas-lineprogress.md): Horizontal line progress bar on canvas.
+    ```javascript
+    var lineProgress = scene.rexUI.add.lineProgressCanvas(x, y, width, height, barColor, value, config);
+    ```
+    or
+    ```javascript
+    class MyLineProgress extends RexPlugins.UI.LinerProgressCanvas {
+        constructor(scene, x, y, width, height, barColor, value, config) {
+            super(scene, x, y, width, height, barColor, value, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects

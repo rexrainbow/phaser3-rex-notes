@@ -107,6 +107,7 @@ nav:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md
             - Circular progres: canvas-circularprogress.md
+            - Line progres: canvas-lineprogress.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:

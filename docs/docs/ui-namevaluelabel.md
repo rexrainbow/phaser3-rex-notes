@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with name text, value text in a row, with a [horizontal line progress bar](shape-lineprogress.md), and an icon, background.
+A container with name text, value text in a row, with a [horizontal line progress bar](canvas-lineprogress.md), and an icon, background.
 
 - Author: Rex
 - Game object
@@ -98,6 +98,7 @@ var label = scene.rexUI.add.nameValueLabel({
         trackThickness: 2,
         trackStrokeColor: undefined,
         barColor: undefined,
+        barColor2: undefined,
 
         skewX: 0,
 
@@ -176,7 +177,7 @@ var label = scene.rexUI.add.nameValueLabel({
     - `bar.trackColor` : Fill color of bar's track, in number or css string value.
     - `bar.trackStrokeColor` : Stroke color of bar's track, in number or css string value.
     - `bar.trackThickness` : Stroke line width of bar's track.
-    - `bar.barColor` : Fill color of bar, in number or css string value.
+    - `bar.barColor`, `bar.barColor2` : Fill color of bar, in number or css string value. Assign gradient start color by `barColor2`.
     - `bar.skewX` : Horizontal skew of track and bar.
     - `bar.rtl` :
         - `false` : Bar starts from left side. Default behavior.

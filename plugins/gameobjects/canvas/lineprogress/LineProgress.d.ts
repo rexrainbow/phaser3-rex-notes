@@ -1,35 +1,30 @@
 import Canvas from '../canvas/Canvas';
 
-export default LineProgressCanvas;
+// import * as Phaser from 'phaser';
+export default LineProgress;
 
-declare namespace LineProgressCanvas {
+declare namespace LineProgress {
 
     type ValueChangeCallbackType = (
         newValue: number,
         oldValue: number,
-        circularProgress: LineProgressCanvas
+        circularProgress: LineProgress
     ) => void;
-
 
     interface IConfig {
         x?: number, y?: number,
-        radius?: number,
+        width?: number, height?: number,
 
-        barColor?: string | number,
         trackColor?: string | number,
-        centerColor?: string | number,
-        thickness?: number,
-        startAngle?: number,
-        anticlockwise?: boolean,
+        trackThickness?: number,
+        trackStrokeColor?: string | number,
+        barColor?: string | number,
+        barColor2?: string | number,
+        isHorizontalGradient?: boolean,
 
-        textColor?: string | number,
-        textStrokeColor?: string | number,
-        textStrokeThickness?: number,
-        textSize?: string,
-        textFamily?: string,
-        textStyle?: string,
-        textFormatCallback?: (value: number) => string,
-        textFormatCallbackScope?: object,
+        skewX?: number,
+
+        rtl?: boolean,
 
         value?: number,
 
@@ -39,31 +34,37 @@ declare namespace LineProgressCanvas {
         },
 
         valuechangeCallback: ValueChangeCallbackType,
-
     }
 
     namespace Events {
         type ValueChangeCallbackType = (
             newValue: number,
             oldValue: number,
-            circularProgress: LineProgressCanvas
+            circularProgress: LineProgress
         ) => void;
     }
 }
 
-declare class LineProgressCanvas extends Canvas {
+declare class LineProgress extends Canvas {
     constructor(
         scene: Phaser.Scene,
-        config?: LineProgressCanvas.IConfig
+        config?: LineProgress.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
-        radius?: number,
+        width?: number, height?: number,
+        config?: LineProgress.IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        width?: number, height?: number,
         barColor?: string | number,
         value?: number,
-        config?: LineProgressCanvas.IConfig
+        config?: LineProgress.IConfig
     );
 
     value: number;
@@ -76,39 +77,28 @@ declare class LineProgressCanvas extends Canvas {
     setEaseValueDuration(duration: number): this;
     setEaseValueFunction(ease: string): this;
 
-    radius: number;
-    setRadius(radius: number): this;
-
     trackColor: string;
-    setTrackColor(trackColor?: string | number): this;
+    setTrackColor(radius?: string | number): this;
 
-    setThickness(thickness: number): this;
+    trackStrokeThickness: number;
+    trackStrokeColor: string;
+    setTrackStroke(
+        lineWidth?: number,
+        color?: string | number
+    ): this;
 
     barColor: string;
-    setBarColor(barColor?: string | number): this;
+    barColor2: string;
+    isHorizontalGradient: boolean;
+    setBarColor(
+        barColor?: string | number,
+        barColor2?: string | number,
+        isHorizontalGradient?: boolean,
+    ): this;
 
-    startAngle: number;
-    setStartAngle(startAngle: number): this;
+    skewX: number;
+    setSkewX(skewX: number): this;
 
-    anticlockwise: boolean;
-    setAnticlockwise(anticlockwise: boolean): this;
-
-    centerColor: string;
-    setCenterColor(centerColor?: string | number): this;
-
-    textColor: string;
-    setTextColor(color?: string | number): this;
-
-    textStrokeColor: string;
-    textStrokeThickness: number;
-    setTextStrokeColor(color?: string | number, thickness?: number): this;
-
-    textFont: string;
-    setTextFont(fontSize: string, fontFamily: string, fontStyle: string): this;
-    setTextFont(font: string): this;
-
-    setTextFormatCallback(
-        callback: (value: number) => string,
-        scope?: object
-    ): this
+    rtl: boolean;
+    setRTL(enable?: boolean): this;
 }

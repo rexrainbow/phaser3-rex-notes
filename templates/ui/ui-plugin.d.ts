@@ -34,6 +34,7 @@ import HiddenEditFactory from './hiddenedit/Factory';
 import HolyGrailFactory from './holygrail/Factory';
 import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
+import LineProgressCanvasFactory from './lineprogresscanvas/Factory';
 import LineProgressFactory from './lineprogress/Factory';
 import MakerFactory from './maker/Factory';
 import MenuFactory from './menu/Factory';
@@ -126,6 +127,7 @@ declare class Factories {
     knob: typeof KnobFactory;
     label: typeof LabelFactory;
     lineProgress: typeof LineProgressFactory;
+    lineProgressCanvas: typeof LineProgressCanvasFactory;
     maker: typeof MakerFactory;
     menu: typeof MenuFactory;
     nameValueLabel: typeof NameValueLabelFactory;
@@ -143,7 +145,7 @@ declare class Factories {
     roundRectangleCanvas: typeof RoundRectangleCanvasFactory;
     roundRectangle: typeof RoundRectangleFactory;
     scrollablePanel: typeof ScrollablePanelFactory;
-    scrollBar: typeof ScrollBarFactory;    
+    scrollBar: typeof ScrollBarFactory;
     sizer: typeof SizerFactory;
     shake: typeof ShakeFactory;
     skew: typeof SkewFactory;
@@ -246,6 +248,8 @@ import HolyGrailClass from './holygrail/HolyGrail';
 import InTouchingClass from './intouching/InTouching';
 import KnobClass from './knob/Knob';
 import LabelClass from './label/Label';
+import LineProgressCanvasClass from './lineprogresscanvas/LineProgressCanvas';
+import LineProgressClass from './lineprogress/LineProgress';
 import MenuClass from './menu/Menu';
 import NameValueLabelClass from './namevaluelabel/NameValueLabel';
 import NinePatchClass from './ninepatch/NinePatch';
@@ -262,7 +266,6 @@ import RoundRectangleCanvasClass from './roundrectanglecanvas/RoundRectangleCanv
 import RoundRectangleClass from './roundrectangle/RoundRectangle';
 import ScrollablePanelClass from './scrollablepanel/ScrollablePanel';
 import ScrollBarClass from './scrollbar/ScrollBar';
-import LineProgressClass from './lineprogress/LineProgress';
 import SizerClass from './sizer/Sizer';
 import ShakeClass from './shake/Shake';
 import SkewClass from './skew/Skew';
@@ -315,6 +318,8 @@ declare namespace UIPlugins {
     type InTouching = InTouchingClass;
     type Knob = KnobClass;
     type Label = LabelClass;
+    type LineProgress = LineProgressClass;
+    type LineProgressCanvas = LineProgressCanvasClass;
     type maker = MakerClass;
     type Menu = MenuClass;
     type NameValueLabel = NameValueLabelClass;
@@ -332,7 +337,6 @@ declare namespace UIPlugins {
     type RoundRectangle = RoundRectangleClass;
     type ScrollablePanel = ScrollablePanelClass;
     type ScrollBar = ScrollBarClass;
-    type LineProgress = LineProgressClass;
     type Sizer = SizerClass;
     type shake = ShakeClass;
     type skew = SkewClass;

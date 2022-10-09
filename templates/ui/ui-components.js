@@ -13,9 +13,10 @@ import AlphaMaskImage from './alphamaskimage/AlphaMaskImage.js';
 import DynamicText from './dynamictext/DynamicText.js';
 import TextPlayer from './textplayer/TextPlayer.js';
 import CanvasInput from './canvasinput/CanvasInput.js';
-import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
+import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import LineProgress from './lineprogress/LineProgress.js';
+import LineProgressCanvas from './lineprogresscanvas/LineProgressCanvas.js';
 import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
@@ -116,9 +117,10 @@ export {
     FullWindowRectangle,
     Cover,
     Chart,
-    CircularProgressCanvas,
     CircularProgress,
+    CircularProgressCanvas,
     LineProgress,
+    LineProgressCanvas,
     Knob,
     CustomShapes,
     CustomProgress,
