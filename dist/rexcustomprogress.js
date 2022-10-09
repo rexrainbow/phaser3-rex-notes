@@ -3240,7 +3240,7 @@
 
       _this.bootProgressBase(config);
 
-      _this.setValue(value);
+      _this.setValue(GetValue(config, 'value', 0));
 
       return _this;
     }
