@@ -426,4 +426,4 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
 ### Compare with Circular-progress shape
 
 - Circular-progress canvas creates a canvas then draw on that canvas, [circular progress shape](shape-circularprogress.md) draw on GRAPHICS pipeline like Shape or Graphics game object.
-- Circular-progress canvas) can draw text directly, [circular progress shape](shape-circularprogress.md) can't draw any text.
+- Circular-progress canvas can draw text directly, [circular progress shape](shape-circularprogress.md) can't draw any text.

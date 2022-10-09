@@ -29,7 +29,7 @@
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [CanvasInput](canvasinput.md): An invisible Input DOM element to receive character input and display on DynamicText.
 1. [Canvas/Circular progress](canvas-circularprogress.md): Circular progress bar on canvas.
-1. [Canvas/Line progress](canvas-lineprogress.md): Horizontal line progress bar on canvas.
+1. [Canvas/Line progress](canvas-lineprogress.md): Horizontal line progress bar filled with gradient color on canvas.
 1. [Canvas/Round rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
 1. [Canvas image data](canvas-data.md): Get image data from texture, or text object.
 1. [Canvas frame manager](canvasframemanager.md): Generate bitmapfont from text game object, or bbcode text game object.

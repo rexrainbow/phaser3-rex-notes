@@ -334,7 +334,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
-1. [Line progress canvas](canvas-lineprogress.md): Horizontal line progress bar on canvas.
+1. [Line progress canvas](canvas-lineprogress.md): Horizontal line progress bar filled with gradient color on canvas.
     ```javascript
     var lineProgress = scene.rexUI.add.lineProgressCanvas(x, y, width, height, barColor, value, config);
     ```

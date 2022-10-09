@@ -1,6 +1,6 @@
 ## Introduction
 
-Horizontal line progress bar on canvas.
+Horizontal line progress bar filled with gradient color on canvas.
 
 - Author: Rex
 - Game object
@@ -363,3 +363,8 @@ var lineProgress = scene.make.rexLineProgressCanvas({
     lineProgress.setAlpha(alpha);
     // lineProgress.alpha = alpha;
     ```
+
+### Compare with Line-progress shape
+
+- Line-progress canvas creates a canvas then draw on that canvas, [line progress shape](shape-lineprogress.md) draw on GRAPHICS pipeline like Shape or Graphics game object.
+- Line-progress canvas can fill gradient color, [line progress shape](shape-lineprogress.md) only can fill 1 color.
