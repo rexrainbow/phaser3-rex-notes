@@ -1,10 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -20,9 +16,9 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 200, height: 40,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, COLOR_LIGHT),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20).setStrokeStyle(2, 0xa98274),
 
-            icon: this.add.rectangle(0, 0, 20, 20, COLOR_LIGHT),
+            icon: this.add.rectangle(0, 0, 20, 20, 0xa98274),
 
             nameText: this.add.text(0, 0, 'HP', { fontSize: 20 }),
 
@@ -39,8 +35,8 @@ class Demo extends Phaser.Scene {
 
             bar: {
                 height: 6,
-                barColor: COLOR_LIGHT,
-                barColor2: COLOR_DARK,
+                barColor: 0xd3b8ae,
+                barColor2: 0x321911,
                 // trackColor: COLOR_DARK,
                 // trackStrokeColor: COLOR_LIGHT
             },
