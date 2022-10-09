@@ -23,7 +23,7 @@ class CustomProgress extends ProgressBase(CustomShapes) {
 
         this.bootProgressBase(config);
 
-        this.setValue(value);
+        this.setValue(GetValue(config, 'value', 0));
     }
 
     get centerX() {

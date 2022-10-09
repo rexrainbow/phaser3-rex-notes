@@ -1,5 +1,5 @@
 import Sizer from '../../sizer/Sizer.js';
-import LineProgress from '../../lineprogress/LineProgress.js';
+import LineProgressCanvas from '../../lineprogresscanvas/LineProgressCanvas.js';
 import AddChildMask from '../../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -17,7 +17,7 @@ var Build = function (scene, config) {
     var actionMask = GetValue(config, 'actionMask', undefined);
 
     if (IsPlainObject(bar)) {
-        bar = new LineProgress(scene, bar);
+        bar = new LineProgressCanvas(scene, bar);
         scene.add.existing(bar);
         // Move bar game object below nameText and valueText
         if (nameText) {

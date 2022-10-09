@@ -88,7 +88,7 @@ var parser = scene.plugins.get('rexBracketParser').add({
     - A single string with 2 characters. Default value is `'<>'`.
     - A array with 2 strings
 - `valueConvert` : A callback to convert values.
-    - `true` : Defaule value converter
+    - `true` : Use defaule value converter. Values will be converted to *number* (include hex number string like *'0xFF'*), *boolean*, *null*, or *string*.
     - `false`, or `null` : Bypass string value.
     - Function object:
         ```javascript

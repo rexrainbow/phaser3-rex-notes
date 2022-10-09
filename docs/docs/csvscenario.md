@@ -93,7 +93,14 @@ scenario.load(csvString, scope, {
     - `'ms'`, or `0` : dt in millisecond
     - `'s'`, `'sec'`, or 1 : dt in second
 - `prefix`: regex of picking control instructions
-- `argsConvert`: a callback to convert parameters of [run-custom-function](csvscenario.md#run-custom-function), or `true` to use default convert function
+- `argsConvert`: A callback to convert parameters of [run-custom-function](csvscenario.md#run-custom-function)
+    - `true` : Use defaule value converter. Values will be converted to *number* (include hex number string like *'0xFF'*), *boolean*, *null*, or *string*.
+    - Function object:
+        ```javascript
+        function(s) {
+            return s;
+        }
+        ```
 - `argsConvertScope`: scope of argsConvert
 - `delimiter` : Delimiter of CSV string.
 

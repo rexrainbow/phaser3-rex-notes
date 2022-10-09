@@ -280,8 +280,9 @@
   });
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
+  var HEX = /^0x[0-9A-F]+$/i;
 
-  var convert$1 = function convert(s) {
+  var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
@@ -290,6 +291,8 @@
       s = null;
     } else if (FLOAT.test(s)) {
       s = parseFloat(s);
+    } else if (HEX.test(s)) {
+      s = parseInt(s, 16);
     } else {
       if (s === 'false') {
         s = false;
@@ -312,7 +315,7 @@
     var convertFn = GetValue$1(config, 'convert', true);
 
     if (convertFn === true) {
-      convertFn = convert$1;
+      convertFn = TypeConvert;
     }
 
     var items = [];

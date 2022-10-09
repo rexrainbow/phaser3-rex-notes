@@ -1,4 +1,4 @@
-import LineProgress from '../lineprogress/LineProgress';
+import LineProgressCanvas from '../lineprogresscanvas/LineProgressCanvas';
 
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
@@ -24,7 +24,7 @@ declare namespace NameValueLabel {
         textOrientation?: Sizer.OrientationTypes;
         title?: Phaser.GameObjects.GameObject,
         text?: Phaser.GameObjects.GameObject,
-        bar?: Phaser.GameObjects.GameObject | LineProgress.IConfig,
+        bar?: Phaser.GameObjects.GameObject | LineProgressCanvas.IConfig,
 
         valueTextFormatCallback?: (
             value: number,

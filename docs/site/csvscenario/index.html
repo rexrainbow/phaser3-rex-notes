@@ -2111,6 +2111,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../canvas-lineprogress/" class="md-nav__link">
+        Line progres
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -9012,7 +9026,15 @@
 </ul>
 </li>
 <li><code>prefix</code>: regex of picking control instructions</li>
-<li><code>argsConvert</code>: a callback to convert parameters of <a href="./#run-custom-function">run-custom-function</a>, or <code>true</code> to use default convert function</li>
+<li><code>argsConvert</code>: A callback to convert parameters of <a href="./#run-custom-function">run-custom-function</a><ul>
+<li><code>true</code> : Use defaule value converter. Values will be converted to <em>number</em> (include hex number string like <em>'0xFF'</em>), <em>boolean</em>, <em>null</em>, or <em>string</em>.</li>
+<li>Function object:
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">s</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>argsConvertScope</code>: scope of argsConvert</li>
 <li><code>delimiter</code> : Delimiter of CSV string.</li>
 </ul>
