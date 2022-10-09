@@ -18,8 +18,8 @@ var DrawContent = function () {
     }
 
     // Has bar
+    var barX0, barX1;
     if (this.barColor) {
-        var barX0, barX1;
         if (!this.rtl) {
             barX0 = 0;
             barX1 = width * this.value;
@@ -51,10 +51,27 @@ var DrawContent = function () {
     if (this.barColor) {
         context.save();
 
+        var style;
+        if (this.barColor2) {
+            var grd;
+            if (this.isHorizontalGradient) {
+                var helfHeight = height / 2;
+                grd = context.createLinearGradient(barX0, helfHeight, barX1, helfHeight);
+            } else {
+                var helfWidth = width / 2;
+                grd = context.createLinearGradient(helfWidth, 0, helfWidth, height);
+            }
+            grd.addColorStop(0, (this.rtl) ? this.barColor : this.barColor2);
+            grd.addColorStop(1, (this.rtl) ? this.barColor2 : this.barColor);
+            style = grd;
+        } else {
+            style = this.barColor;
+        }
+
         DrawPolygon(
             canvas, context,
             this.barPoints,
-            this.barColor,
+            style,
         )
 
         context.restore();

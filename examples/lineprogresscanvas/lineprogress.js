@@ -2,10 +2,6 @@ import phaser from 'phaser/src/phaser.js';
 import LineProgressCanvasPlugin from '../../plugins/lineprogresscanvas-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -17,9 +13,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var bar = this.add.rexLineProgressCanvas(400, 300, 200, 60, {
-            barColor: COLOR_PRIMARY,
-            trackColor: COLOR_DARK,
-            trackStrokeColor: COLOR_LIGHT,
+            barColor: 0xb2fab4,
+            barColor2: 0x003300,  // Gradient from barColor2 to barColor
+            // trackColor: COLOR_DARK,
+            trackStrokeColor: 0x333333,
 
             skewX: 30,
             // rtl: true,

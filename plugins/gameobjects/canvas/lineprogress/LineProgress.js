@@ -35,7 +35,11 @@ class LineProgress extends ProgressBase(Canvas) {
         this.bootProgressBase(config);
 
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
-        this.setBarColor(barColor);
+        this.setBarColor(
+            barColor,
+            GetValue(config, 'barColor2', undefined),
+            GetValue(config, 'isHorizontalGradient', undefined)
+        );
         this.setTrackStroke(GetValue(config, 'trackStrokeThickness', 2), GetValue(config, 'trackStrokeColor', undefined));
 
         this.setSkewX(GetValue(config, 'skewX', 0));
@@ -95,8 +99,33 @@ class LineProgress extends ProgressBase(Canvas) {
         this._barColor = value;
     }
 
-    setBarColor(color) {
+    get barColor2() {
+        return this._barColor2;
+    }
+
+    set barColor2(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty = this.dirty || (this._barColor2 != value);
+        this._barColor2 = value;
+    }
+
+    get isHorizontalGradient() {
+        return this._isHorizontalGradient;
+    }
+
+    set isHorizontalGradient(value) {
+        this.dirty |= (this._isHorizontalGradient != value);
+        this._isHorizontalGradient = value;
+    }
+
+    setBarColor(color, color2, isHorizontalGradient) {
+        if (isHorizontalGradient === undefined) {
+            isHorizontalGradient = true;
+        }
+
         this.barColor = color;
+        this.barColor2 = color2;
+        this.isHorizontalGradient = isHorizontalGradient;
         return this;
     }
 
