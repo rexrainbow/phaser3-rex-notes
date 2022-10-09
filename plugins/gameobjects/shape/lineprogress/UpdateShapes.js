@@ -30,7 +30,7 @@ var UpdateShapes = function () {
             bar,            // lines
             barX0, 0,       // x0, y0
             barX1, height,  // x1, y1
-            this.skewX      // skew
+            skewX           // skew
         )
             .close()
     }
