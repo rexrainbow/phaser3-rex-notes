@@ -1,5 +1,4 @@
 import CSVParser from 'papaparse/papaparse.min.js';
-import ArrayCopy from '../../utils/array/Copy.js';
 import TypeConvert from '../../utils/string/TypeConvert.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -53,4 +53,4 @@ var arr = scene.plugins.get('rexCSVToArray').convert(csvString, {
 });
 ```
 
-Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`.
+Values will be converted to *number* (include hex number string like *'0xFF'*), *boolean*, *null*, or *string*, if `convert` is `true`.

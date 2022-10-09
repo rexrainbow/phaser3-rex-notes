@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var csvString = `name,hp,mp
-Rex,100,20
+Rex,100,0x10
 Alice,300,40`;
         var table = this.plugins.get('rexHashTable').add();
         table.loadCSV(csvString);

@@ -17306,8 +17306,9 @@
   var re1 = /-/g;
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
+  var HEX = /^0x[0-9A-F]+$/i;
 
-  var convert = function convert(s) {
+  var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
@@ -17316,6 +17317,8 @@
       s = null;
     } else if (FLOAT.test(s)) {
       s = parseFloat(s);
+    } else if (HEX.test(s)) {
+      s = parseInt(s, 16);
     } else {
       if (s === 'false') {
         s = false;
@@ -17399,7 +17402,7 @@
       key: "setValueConverter",
       value: function setValueConverter(converter) {
         if (converter === true) {
-          converter = convert;
+          converter = TypeConvert;
         } else if (!converter) {
           converter = BypassValueConverter;
         }
@@ -47888,7 +47891,7 @@
     if (argsConvert) {
       // convert string to floating number, boolean, null, or string        
       if (argsConvert === true) {
-        argsConvert = convert;
+        argsConvert = TypeConvert;
         argsConvertScope = undefined;
       }
 

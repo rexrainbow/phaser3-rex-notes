@@ -129,8 +129,9 @@
   });
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
+  var HEX = /^0x[0-9A-F]+$/i;
 
-  var convert = function convert(s) {
+  var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
@@ -139,6 +140,8 @@
       s = null;
     } else if (FLOAT.test(s)) {
       s = parseFloat(s);
+    } else if (HEX.test(s)) {
+      s = parseInt(s, 16);
     } else {
       if (s === 'false') {
         s = false;
@@ -196,14 +199,14 @@
       key: "loadCSV",
       value: function loadCSV(csvString, config) {
         var delimiter = GetValue(config, 'delimiter', ',');
-        var convert$1 = GetValue(config, 'convert', true);
+        var convert = GetValue(config, 'convert', true);
         var convertScope = GetValue(config, 'convertScope', undefined);
 
-        if (!convert$1) {
-          convert$1 = undefined;
+        if (!convert) {
+          convert = undefined;
           convertScope = undefined;
-        } else if (convert$1 === true) {
-          convert$1 = convert;
+        } else if (convert === true) {
+          convert = TypeConvert;
           convertScope = undefined;
         }
 
@@ -253,11 +256,11 @@
             value = arr[r + 1][c];
             colKey = inColKeys[c];
 
-            if (convert$1) {
+            if (convert) {
               if (convertScope) {
-                value = convert$1.call(convertScope, value, rowKey, colKey, this);
+                value = convert.call(convertScope, value, rowKey, colKey, this);
               } else {
-                value = convert$1(value, rowKey, colKey, this);
+                value = convert(value, rowKey, colKey, this);
               }
             }
 
@@ -608,7 +611,7 @@
         }
 
         if (callback === undefined) {
-          callback = convert;
+          callback = TypeConvert;
         }
 
         if (Array.isArray(colKey)) {
@@ -653,7 +656,7 @@
         }
 
         if (callback === undefined) {
-          callback = convert;
+          callback = TypeConvert;
         }
 
         if (Array.isArray(rowKey)) {
