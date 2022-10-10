@@ -77,7 +77,10 @@ var states = scene.plugins.get('rexFSM').add({
         A: {
             next: 'B',  // function() { return 'B'; }
             enter: function() {},
-            exit: function() {}
+            exit: function() {},
+            update: function(time, delta) {},
+            preupdate: function(time, delta) {},
+            postupdate: function(time, delta) {},
         },
         // ...
     },
@@ -88,6 +91,7 @@ var states = scene.plugins.get('rexFSM').add({
         // ...
     },
     enable: true,
+    scene: undefined,
     eventEmitter: undefined
 });
 ```
@@ -98,9 +102,11 @@ var states = scene.plugins.get('rexFSM').add({
         - `next`: String of next state, or a callback to get next state.
         - `enter`: Callback when enter state.
         - `exit`: Callback when exit state.
+        - `update`, `preupdate`, `postupdate` : Callback invoked by [scene's `'update'`, `'preupdate'`, `'postupdate'` events](scene.md#events).
 - `init`: Initial callback when creating instance.
 - `extend`: Inject key-value pairs into instance.
 - `enable`: Set `false` to block any state changing.
+- `scene` : [Scene object](scene.md) for *startUpdate*, *startPreUpdate*, *startPostUpdate* method. Optional.
 - `eventEmitter`
     - `undefined` : Create a private event emitter, default value.
     - `false` : Don't add any event emitter, i.e. no event will be fired.
@@ -249,13 +255,39 @@ states.toggleEnable();
 
 `states.next()` and `states.goto()` will be ignored if disabled.
 
+### Update
+
+- Start
+    ```javascript
+    states.startUpdate();
+    states.startPreUpdate();
+    states.startPostUpdate();
+    // Assume that `scene` is assigned in config of constructor
+    ```
+    or
+    ```javascript
+    states.startUpdate(scene);
+    states.startPreUpdate(scene);
+    states.startPostUpdate(scene);
+    ```
+    - `scene` : [Scene object](scene.md)
+- Stop
+    ```javascript
+    states.stopUpdate();
+    states.stopPreUpdate();
+    states.stopPostUpdate();
+    ```
+
 ### Add new state
 
 ```javascript
 states.addState(name, {
     next: 'B',  // function() { return 'B'; }
     enter: function() {},
-    exit: function() {}
+    exit: function() {},
+    update: function(time, delta) {},
+    preupdate: function(time, delta) {},
+    postupdate: function(time, delta) {},
 })
 ```
 ```javascript
@@ -263,7 +295,10 @@ states.addState({
     name: 'A',
     next: 'B',  // function() { return 'B'; }
     enter: function() {},
-    exit: function() {}
+    exit: function() {},
+    update: function(time, delta) {},
+    preupdate: function(time, delta) {},
+    postupdate: function(time, delta) {},
 })
 ```
 
@@ -274,7 +309,10 @@ states.addStates({
     'A' : {
         next: 'B',  // function() { return 'B'; }
         enter: function() {},
-        exit: function() {}
+        exit: function() {},
+        update: function(time, delta) {},
+        preupdate: function(time, delta) {},
+        postupdate: function(time, delta) {},
     },
     // ...
 })
@@ -285,7 +323,10 @@ states.addStates([
         name: 'A',
         next: 'B',  // function() { return 'B'; }
         enter: function() {},
-        exit: function() {}
+        exit: function() {},
+        update: function(time, delta) {},
+        preupdate: function(time, delta) {},
+        postupdate: function(time, delta) {},
     },
     // ...
 ]);
