@@ -106,7 +106,7 @@ var states = scene.plugins.get('rexFSM').add({
 - `init`: Initial callback when creating instance.
 - `extend`: Inject key-value pairs into instance.
 - `enable`: Set `false` to block any state changing.
-- `scene` : [Scene object](scene.md) for *startUpdate*, *startPreUpdate*, *startPostUpdate* method. Optional.
+- `scene` : [Scene object](scene.md) for [*startUpdate*, *startPreUpdate*, *startPostUpdate* method](fsm.md#update). Optional.
 - `eventEmitter`
     - `undefined` : Create a private event emitter, default value.
     - `false` : Don't add any event emitter, i.e. no event will be fired.
