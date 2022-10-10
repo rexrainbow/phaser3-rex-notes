@@ -87,5 +87,5 @@ export default {
             return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
         }
         return [];
-    }
+    },
 };

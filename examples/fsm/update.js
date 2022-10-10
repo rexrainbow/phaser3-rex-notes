@@ -9,14 +9,14 @@ var stateConfig = {
                 this.startUpdate();
             },
             update: function () {
-                console.log('update A')
+                console.log('update A');
                 this.next();
             }
         },
         B: {
             next: 'C',
             update: function () {
-                console.log('update B')
+                console.log('update B');
                 this.next();
             }
         },
@@ -30,7 +30,7 @@ var stateConfig = {
                 }
             },
             update: function () {
-                console.log('update C')
+                console.log('update C');
                 this.next();
             },
             exit: function () {

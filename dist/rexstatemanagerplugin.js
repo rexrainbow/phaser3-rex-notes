@@ -122,6 +122,36 @@
     };
   }
 
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get() {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get.bind();
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(arguments.length < 3 ? target : receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get.apply(this, arguments);
+  }
+
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
@@ -263,9 +293,9 @@
     }
   };
 
-  var StateManager = /*#__PURE__*/function () {
-    function StateManager(config) {
-      _classCallCheck(this, StateManager);
+  var StateManagerBase = /*#__PURE__*/function () {
+    function StateManagerBase(config) {
+      _classCallCheck(this, StateManagerBase);
 
       this._states = {};
       this._stateLock = false;
@@ -279,7 +309,7 @@
       this.setEventEmitter(eventEmitter, EventEmitterClass);
     }
 
-    _createClass(StateManager, [{
+    _createClass(StateManagerBase, [{
       key: "shutdown",
       value: function shutdown() {
         this.destroyEventEmitter();
@@ -496,6 +526,60 @@
         args[0] = this;
         return fn.apply(undefined, args);
       }
+    }]);
+
+    return StateManagerBase;
+  }();
+
+  Object.assign(StateManagerBase.prototype, EventEmitterMethods);
+
+  var HasListener = function HasListener(eventEmitter, eventName, fn, context, once) {
+    if (once === undefined) {
+      once = false;
+    }
+
+    var listeners = eventEmitter._events[eventName];
+
+    if (!listeners) {
+      return false;
+    }
+
+    for (var i = 0, cnt = listeners.length; i < cnt; i++) {
+      var listener = listeners[i];
+
+      if (listener.fn === fn && listener.context === context && listener.once === once) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  var StateManager = /*#__PURE__*/function (_StateManagerBase) {
+    _inherits(StateManager, _StateManagerBase);
+
+    var _super = _createSuper(StateManager);
+
+    function StateManager(config) {
+      var _this;
+
+      _classCallCheck(this, StateManager);
+
+      _this = _super.call(this, config);
+      _this._scene = GetValue(config, 'scene', undefined);
+      return _this;
+    }
+
+    _createClass(StateManager, [{
+      key: "shutdown",
+      value: function shutdown() {
+        this.stopUpdate();
+        this.stopPreUpdate();
+        this.stopPostUpdate();
+        this._scene = undefined;
+
+        _get(_getPrototypeOf(StateManager.prototype), "shutdown", this).call(this);
+      }
     }, {
       key: "update",
       value: function update(time, delta) {
@@ -511,12 +595,94 @@
       value: function postupdate(time, delta) {
         this.runMethod('postupdate', time, delta);
       }
+    }, {
+      key: "startUpdate",
+      value: function startUpdate(scene) {
+        if (!scene) {
+          scene = this._scene;
+        }
+
+        var eventEmitter = scene.sys.events;
+
+        if (HasListener(eventEmitter, 'update', this.update, this)) {
+          return this;
+        }
+
+        this._scene = scene;
+        eventEmitter.on('update', this.update, this);
+        return this;
+      }
+    }, {
+      key: "stopUpdate",
+      value: function stopUpdate() {
+        if (!this._scene) {
+          return this;
+        }
+
+        this._scene.sys.events.off('update', this.update, this);
+
+        return this;
+      }
+    }, {
+      key: "startPreUpdate",
+      value: function startPreUpdate(scene) {
+        if (!scene) {
+          scene = this._scene;
+        }
+
+        var eventEmitter = scene.sys.events;
+
+        if (HasListener(eventEmitter, 'preupdate', this.preupdate, this)) {
+          return this;
+        }
+
+        this._scene = scene;
+        eventEmitter.on('preupdate', this.preupdate, this);
+        return this;
+      }
+    }, {
+      key: "stopOreUpdate",
+      value: function stopOreUpdate() {
+        if (!this._scene) {
+          return this;
+        }
+
+        this._scene.sys.events.off('preupdate', this.preupdate, this);
+
+        return this;
+      }
+    }, {
+      key: "startPostUpdate",
+      value: function startPostUpdate(scene) {
+        if (!scene) {
+          scene = this._scene;
+        }
+
+        var eventEmitter = scene.sys.events;
+
+        if (HasListener(eventEmitter, 'postupdate', this.postupdate, this)) {
+          return this;
+        }
+
+        this._scene = scene;
+        eventEmitter.on('postupdate', this.postupdate, this);
+        return this;
+      }
+    }, {
+      key: "stopPostUpdate",
+      value: function stopPostUpdate() {
+        if (!this._scene) {
+          return this;
+        }
+
+        this._scene.sys.events.off('postupdate', this.postupdate, this);
+
+        return this;
+      }
     }]);
 
     return StateManager;
-  }();
-
-  Object.assign(StateManager.prototype, EventEmitterMethods);
+  }(StateManagerBase);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;

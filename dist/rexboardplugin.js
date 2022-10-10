@@ -8196,6 +8196,28 @@
 
   Object.assign(FSM$1.prototype, EventEmitterMethods);
 
+  var HasListener = function HasListener(eventEmitter, eventName, fn, context, once) {
+    if (once === undefined) {
+      once = false;
+    }
+
+    var listeners = eventEmitter._events[eventName];
+
+    if (!listeners) {
+      return false;
+    }
+
+    for (var i = 0, cnt = listeners.length; i < cnt; i++) {
+      var listener = listeners[i];
+
+      if (listener.fn === fn && listener.context === context && listener.once === once) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
 
   var FSM = /*#__PURE__*/function (_FSMBase) {
@@ -8246,11 +8268,6 @@
         _get(_getPrototypeOf(FSM.prototype), "shutdown", this).call(this);
       }
     }, {
-      key: "destroy",
-      value: function destroy() {
-        this.shutdown();
-      }
-    }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
@@ -8281,14 +8298,18 @@
     }, {
       key: "startUpdate",
       value: function startUpdate(scene) {
-        this.stopUpdate();
-
         if (!scene) {
           scene = this._scene;
         }
 
+        var eventEmitter = scene.sys.events;
+
+        if (HasListener(eventEmitter, 'update', this.update, this)) {
+          return this;
+        }
+
         this._scene = scene;
-        scene.sys.events.on('update', this.update, this);
+        eventEmitter.on('update', this.update, this);
         return this;
       }
     }, {
@@ -8305,14 +8326,18 @@
     }, {
       key: "startPreUpdate",
       value: function startPreUpdate(scene) {
-        this.stopPreUpdate();
-
         if (!scene) {
           scene = this._scene;
         }
 
+        var eventEmitter = scene.sys.events;
+
+        if (HasListener(eventEmitter, 'preupdate', this.preupdate, this)) {
+          return this;
+        }
+
         this._scene = scene;
-        scene.sys.events.on('preupdate', this.preupdate, this);
+        eventEmitter.on('preupdate', this.preupdate, this);
         return this;
       }
     }, {
@@ -8329,14 +8354,18 @@
     }, {
       key: "startPostUpdate",
       value: function startPostUpdate(scene) {
-        this.stopPostUpdate();
-
         if (!scene) {
           scene = this._scene;
         }
 
+        var eventEmitter = scene.sys.events;
+
+        if (HasListener(eventEmitter, 'postupdate', this.postupdate, this)) {
+          return this;
+        }
+
         this._scene = scene;
-        scene.sys.events.on('postupdate', this.postupdate, this);
+        eventEmitter.on('postupdate', this.postupdate, this);
         return this;
       }
     }, {

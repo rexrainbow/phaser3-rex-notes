@@ -6,6 +6,10 @@ var StateA = {
     next: 'B',
     enter(stateManager) {
         console.log('enter A');
+        stateManager.startUpdate();
+    },
+    update(stateManager, time, delta) {
+        console.log('update A');
         stateManager.next();
     }
 }
@@ -15,6 +19,9 @@ var StateB = {
     next: 'C',
     enter(stateManager) {
         console.log('enter B');
+    },
+    update(stateManager, time, delta) {
+        console.log('update B');
         stateManager.next();
     }
 }
@@ -34,10 +41,10 @@ class StateC {
 
     enter(stateManager) {
         console.log('enter C');
-        stateManager.next();
     }
-    exit(stateManager) {
-        console.log('exit C, i=' + this.i)
+    update(stateManager, time, delta) {
+        console.log('update C')
+        stateManager.next();
     }
 }
 
@@ -45,10 +52,7 @@ var StateD = {
     name: 'D',
     enter(stateManager) {
         console.log('enter D');
-
-        // Test removeState
-        stateManager.removeState('A');
-        stateManager.goto('A');
+        stateManager.stopUpdate()
     }
 }
 
@@ -63,7 +67,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        const states = this.plugins.get('rexStateManager').add()
+        const states = this.plugins.get('rexStateManager').add({
+            scene: this
+        })
             .addStates([
                 StateA,
                 StateB,
