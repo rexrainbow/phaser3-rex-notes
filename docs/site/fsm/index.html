@@ -5532,6 +5532,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-new-state" class="md-nav__link">
     Add new state
   </a>
@@ -8736,6 +8743,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-new-state" class="md-nav__link">
     Add new state
   </a>
@@ -8830,7 +8844,10 @@
         <span class="nx">A</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
             <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-            <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+            <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+            <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+            <span class="nx">preupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+            <span class="nx">postupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
     <span class="p">},</span>
@@ -8841,6 +8858,7 @@
         <span class="c1">// ...</span>
     <span class="p">},</span>
     <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">scene</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">eventEmitter</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -8851,6 +8869,7 @@
 <li><code>next</code>: String of next state, or a callback to get next state.</li>
 <li><code>enter</code>: Callback when enter state.</li>
 <li><code>exit</code>: Callback when exit state.</li>
+<li><code>update</code>, <code>preupdate</code>, <code>postupdate</code> : Callback invoked by <a href="../scene/#events">scene's <code>'update'</code>, <code>'preupdate'</code>, <code>'postupdate'</code> events</a>.</li>
 </ul>
 </li>
 </ul>
@@ -8858,6 +8877,7 @@
 <li><code>init</code>: Initial callback when creating instance.</li>
 <li><code>extend</code>: Inject key-value pairs into instance.</li>
 <li><code>enable</code>: Set <code>false</code> to block any state changing.</li>
+<li><code>scene</code> : <a href="../scene/">Scene object</a> for <a href="./#update"><em>startUpdate</em>, <em>startPreUpdate</em>, <em>startPostUpdate</em> method</a>. Optional.</li>
 <li><code>eventEmitter</code><ul>
 <li><code>undefined</code> : Create a private event emitter, default value.</li>
 <li><code>false</code> : Don't add any event emitter, i.e. no event will be fired.</li>
@@ -8982,18 +9002,46 @@ end</code></pre>
 <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
 </code></pre></div>
 <p><code>states.next()</code> and <code>states.goto()</code> will be ignored if disabled.</p>
+<h3 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Start
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">startUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPreUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPostUpdate</span><span class="p">();</span>
+<span class="c1">// Assume that `scene` is assigned in config of constructor</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">startUpdate</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPreUpdate</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPostUpdate</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>scene</code> : <a href="../scene/">Scene object</a></li>
+</ul>
+</li>
+<li>Stop
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">stopUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">stopPreUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">stopPostUpdate</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
 <h3 id="add-new-state">Add new state<a class="headerlink" href="#add-new-state" title="Permanent link">&para;</a></h3>
 <p><div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">addState</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
     <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+    <span class="nx">preupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+    <span class="nx">postupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
 <span class="p">})</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">addState</span><span class="p">({</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
     <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
     <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+    <span class="nx">preupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+    <span class="nx">postupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
 <span class="p">})</span>
 </code></pre></div></p>
 <p>or</p>
@@ -9001,7 +9049,10 @@ end</code></pre>
     <span class="s1">&#39;A&#39;</span> <span class="o">:</span> <span class="p">{</span>
         <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
         <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-        <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+        <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+        <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+        <span class="nx">preupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+        <span class="nx">postupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">})</span>
@@ -9011,7 +9062,10 @@ end</code></pre>
         <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
         <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
         <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-        <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+        <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+        <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+        <span class="nx">preupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
+        <span class="nx">postupdate</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">]);</span>

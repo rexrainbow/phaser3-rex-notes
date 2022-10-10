@@ -18030,7 +18030,9 @@
     }
   };
 
-  var FSM = /*#__PURE__*/function () {
+  var StateProperties$1 = ['next', 'exit', 'enter'];
+
+  var FSM$1 = /*#__PURE__*/function () {
     /*
     var config = {
         start: 'A',   // default: undefined
@@ -18038,7 +18040,7 @@
             A: {
                 next: 'B',  // function() { return 'B'; }
                 enter: function() {},
-                exit: function() {}
+                exit: function() {},
             },
             // ...
         },        
@@ -18215,6 +18217,11 @@
         return this;
       }
     }, {
+      key: "stateProperties",
+      get: function get() {
+        return StateProperties$1;
+      }
+    }, {
       key: "addState",
       value: function addState(name, state) {
         if (typeof name !== 'string') {
@@ -18222,22 +18229,15 @@
           name = state.name;
         }
 
-        var getNextStateCallback = state.next;
+        var stateProperties = this.stateProperties;
 
-        if (getNextStateCallback) {
-          this['next_' + name] = getNextStateCallback;
-        }
+        for (var i = 0, cnt = stateProperties.length; i < cnt; i++) {
+          var propertyName = stateProperties[i];
+          var propertyValue = state[propertyName];
 
-        var exitCallback = state.exit;
-
-        if (exitCallback) {
-          this['exit_' + name] = exitCallback;
-        }
-
-        var enterCallback = state.enter;
-
-        if (enterCallback) {
-          this['enter_' + name] = enterCallback;
+          if (propertyValue) {
+            this["".concat(propertyName, "_").concat(name)] = propertyValue;
+          }
         }
 
         return this;
@@ -18297,6 +18297,80 @@
 
         return fn.apply(this, args);
       }
+    }]);
+
+    return FSM;
+  }();
+
+  Object.assign(FSM$1.prototype, EventEmitterMethods);
+
+  var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
+
+  var FSM = /*#__PURE__*/function (_FSMBase) {
+    _inherits(FSM, _FSMBase);
+
+    var _super = _createSuper(FSM);
+
+    function FSM() {
+      _classCallCheck(this, FSM);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(FSM, [{
+      key: "shutdown",
+      value:
+      /*
+      var config = {
+          start: 'A',   // default: undefined
+          states: {
+              A: {
+                  next: 'B',  // function() { return 'B'; }
+                  enter: function() {},
+                  exit: function() {},
+                  update: function(time, delta) {},
+                  preupdate: function(time, delta) {},
+                  postupdate: function(time, delta) {},
+              },
+              // ...
+          },        
+          extend: {
+              i: 0,
+              name: 'abc'
+              // ...
+          },
+          init: function() {},
+          enable: true,
+          scene: undefined,
+          eventEmitter: true,
+      };
+      */
+      function shutdown() {
+        this.stopUpdate();
+        this.stopPreUpdate();
+        this.stopPostUpdate();
+        this._scene = undefined;
+
+        _get(_getPrototypeOf(FSM.prototype), "shutdown", this).call(this);
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        this.shutdown();
+      }
+    }, {
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
+
+        this._scene = GetValue$1e(o, 'scene', undefined);
+        return this;
+      }
+    }, {
+      key: "stateProperties",
+      get: function get() {
+        return StateProperties;
+      }
     }, {
       key: "update",
       value: function update(time, delta) {
@@ -18312,12 +18386,76 @@
       value: function postupdate(time, delta) {
         this.runMethod('postupdate', time, delta);
       }
+    }, {
+      key: "startUpdate",
+      value: function startUpdate(scene) {
+        if (!scene) {
+          scene = this._scene;
+        }
+
+        this._scene = scene;
+        scene.sys.events.on('update', this.update, this);
+        return this;
+      }
+    }, {
+      key: "stopUpdate",
+      value: function stopUpdate() {
+        if (!this._scene) {
+          return this;
+        }
+
+        this._scene.sys.events.off('update', this.update, this);
+
+        return this;
+      }
+    }, {
+      key: "startPreUpdate",
+      value: function startPreUpdate(scene) {
+        if (!scene) {
+          scene = this._scene;
+        }
+
+        this._scene = scene;
+        scene.sys.events.on('preupdate', this.preupdate, this);
+        return this;
+      }
+    }, {
+      key: "stopPreUpdate",
+      value: function stopPreUpdate() {
+        if (!this._scene) {
+          return this;
+        }
+
+        this._scene.sys.events.off('preupdate', this.preupdate, this);
+
+        return this;
+      }
+    }, {
+      key: "startPostUpdate",
+      value: function startPostUpdate(scene) {
+        if (!scene) {
+          scene = this._scene;
+        }
+
+        this._scene = scene;
+        scene.sys.events.on('postupdate', this.postupdate, this);
+        return this;
+      }
+    }, {
+      key: "stopPostUpdate",
+      value: function stopPostUpdate() {
+        if (!this._scene) {
+          return this;
+        }
+
+        this._scene.sys.events.off('postupdate', this.postupdate, this);
+
+        return this;
+      }
     }]);
 
     return FSM;
-  }();
-
-  Object.assign(FSM.prototype, EventEmitterMethods);
+  }(FSM$1);
 
   var Cooldown = /*#__PURE__*/function (_FSM) {
     _inherits(Cooldown, _FSM);
