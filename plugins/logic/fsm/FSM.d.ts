@@ -1,50 +1,22 @@
-import EventEmitter from "../../utils/eventemitter/EventEmitter";
+import FSMBase from './FSMBase';
 
 export default FSM;
 
 declare namespace FSM {
 
-    interface IStateConfig {
-        name?: string,
-        next?: string | (() => string),
-        enter?: Function,
-        exit?: Function,
+    interface IStateConfig extends FSMBase.IStateConfig {
+        update?: (time: number, delta: number) => void;
+        preupdate?: (time: number, delta: number) => void;
+        postupdate?: (time: number, delta: number) => void;
     }
 
-    interface IConfig {
-        start?: string,
-        states?: { [name: string]: IStateConfig },
-
-        init?: Function,
-
-        extend?: {
-            [name: string]: any,
-        },
-
-        enable?: boolean,
-
-        eventEmitter?: EventEmitter | false,
-    }
-
-    namespace Events {
-        type StateChangeCallbackType = (state: FSM) => void;
-        type ExitStateCallbackType = (state: FSM) => void;
-        type EnterStateCallbackType = (state: FSM) => void;
+    interface IConfig extends FSMBase.IConfig {
+        scene?: Phaser.Scene;
     }
 }
 
-declare class FSM extends EventEmitter {
+declare class FSM extends FSMBase {
     constructor(config?: FSM.IConfig);
-
-    start(newState: string): this;
-    next(): this;
-    goto(nextState: string): this;
-    state: string;
-    readonly prevState: string;
-
-    setEnable(enable?: boolean): this;
-    toggleEnable(): this;
-    enable: boolean;
 
     addState(
         name: string,
@@ -58,11 +30,6 @@ declare class FSM extends EventEmitter {
     addStates(
         states: FSM.IStateConfig[]
     ): this;
-
-    runMethod(
-        methodName: string,
-        ...args: unknown[]
-    ): unknown;
 
     update(
         time: number,
@@ -78,4 +45,20 @@ declare class FSM extends EventEmitter {
         time: number,
         delta: number
     ): void;
+
+    startUpdate(
+        scene?: Phaser.Scene
+    ): this;
+    stopUpdate(): this;
+
+    startPreUpdate(
+        scene?: Phaser.Scene
+    ): this;
+    stopPreUpdate(): this;
+
+    startPostUpdate(
+        scene?: Phaser.Scene
+    ): this;
+    stopPostUpdate(): this;
+
 }
