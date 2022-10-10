@@ -65,6 +65,7 @@ class FSM extends FSMBase {
     }
 
     startUpdate(scene) {
+        this.stopUpdate();
         if (!scene) {
             scene = this._scene;
         }
@@ -83,6 +84,7 @@ class FSM extends FSMBase {
     }
 
     startPreUpdate(scene) {
+        this.stopPreUpdate();
         if (!scene) {
             scene = this._scene;
         }
@@ -101,6 +103,7 @@ class FSM extends FSMBase {
     }
 
     startPostUpdate(scene) {
+        this.stopPostUpdate();
         if (!scene) {
             scene = this._scene;
         }

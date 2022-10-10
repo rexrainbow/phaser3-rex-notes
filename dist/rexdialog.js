@@ -7511,6 +7511,8 @@
     }, {
       key: "startUpdate",
       value: function startUpdate(scene) {
+        this.stopUpdate();
+
         if (!scene) {
           scene = this._scene;
         }
@@ -7533,6 +7535,8 @@
     }, {
       key: "startPreUpdate",
       value: function startPreUpdate(scene) {
+        this.stopPreUpdate();
+
         if (!scene) {
           scene = this._scene;
         }
@@ -7555,6 +7559,8 @@
     }, {
       key: "startPostUpdate",
       value: function startPostUpdate(scene) {
+        this.stopPostUpdate();
+
         if (!scene) {
           scene = this._scene;
         }
