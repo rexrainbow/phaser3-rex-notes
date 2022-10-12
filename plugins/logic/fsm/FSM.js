@@ -1,5 +1,6 @@
 import FSMBase from './FSMBase.js';
 import GetValue from '../../utils/object/GetValue.js';
+import HasListener from '../../utils/eventemitter/HasListener.js';
 
 const StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
 
@@ -38,10 +39,6 @@ class FSM extends FSMBase {
         super.shutdown();
     }
 
-    destroy() {
-        this.shutdown();
-    }
-
     resetFromJSON(o) {
         super.resetFromJSON(o);
         this._scene = GetValue(o, 'scene', undefined);
@@ -68,8 +65,14 @@ class FSM extends FSMBase {
         if (!scene) {
             scene = this._scene;
         }
+
+        var eventEmitter = scene.sys.events;
+        if (HasListener(eventEmitter, 'update', this.update, this)) {
+            return this;
+        }
+
         this._scene = scene;
-        scene.sys.events.on('update', this.update, this);
+        eventEmitter.on('update', this.update, this);
         return this;
     }
 
@@ -86,8 +89,14 @@ class FSM extends FSMBase {
         if (!scene) {
             scene = this._scene;
         }
+
+        var eventEmitter = scene.sys.events;
+        if (HasListener(eventEmitter, 'preupdate', this.preupdate, this)) {
+            return this;
+        }
+
         this._scene = scene;
-        scene.sys.events.on('preupdate', this.preupdate, this);
+        eventEmitter.on('preupdate', this.preupdate, this);
         return this;
     }
 
@@ -104,8 +113,14 @@ class FSM extends FSMBase {
         if (!scene) {
             scene = this._scene;
         }
+
+        var eventEmitter = scene.sys.events;
+        if (HasListener(eventEmitter, 'postupdate', this.postupdate, this)) {
+            return this;
+        }
+
         this._scene = scene;
-        scene.sys.events.on('postupdate', this.postupdate, this);
+        eventEmitter.on('postupdate', this.postupdate, this);
         return this;
     }
 

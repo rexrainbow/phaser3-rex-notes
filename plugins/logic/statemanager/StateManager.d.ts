@@ -1,40 +1,21 @@
-import EventEmitter from "../../utils/eventemitter/EventEmitter";
+import StateManagerBase from './StateManagerBase';
 
 export default StateManager;
 
 declare namespace StateManager {
-
-    interface IState {
-        name?: string,
-        next?: string | (() => string),
-        enter?: Function,
-        exit?: Function,
+    interface IState extends StateManagerBase.IState {
+        update?: Function,
+        preupdate?: Function,
+        postupdate?: Function,
     }
 
-    interface IConfig {
-        eventEmitter?: EventEmitter | false,
-    }
-
-    namespace Events {
-        type StateChangeCallbackType = (state: StateManager) => void;
-        type ExitStateCallbackType = (state: StateManager) => void;
-        type EnterStateCallbackType = (state: StateManager) => void;
+    interface IConfig extends StateManagerBase.IConfig {
+        scene?: Phaser.Scene;
     }
 }
 
-declare class StateManager extends EventEmitter {
+declare class StateManager extends StateManagerBase {
     constructor(config?: StateManager.IConfig);
-
-    start(newState: string): this;
-    next(): this;
-    goto(nextState: string): this;
-    state: string;
-    readonly prevState: string;
-    readonly stateList: string[];
-
-    setEnable(enable?: boolean): this;
-    toggleEnable(): this;
-    enable: boolean;
 
     addState(
         name: string,
@@ -51,11 +32,6 @@ declare class StateManager extends EventEmitter {
         states: { [name: string]: StateManager.IState },
     ): this;
 
-    runMethod(
-        methodName: string,
-        ...args: unknown[]
-    ): unknown;
-
     update(
         time: number,
         delta: number
@@ -70,4 +46,19 @@ declare class StateManager extends EventEmitter {
         time: number,
         delta: number
     ): void;
+
+    startUpdate(
+        scene?: Phaser.Scene
+    ): this;
+    stopUpdate(): this;
+
+    startPreUpdate(
+        scene?: Phaser.Scene
+    ): this;
+    stopPreUpdate(): this;
+
+    startPostUpdate(
+        scene?: Phaser.Scene
+    ): this;
+    stopPostUpdate(): this;
 }

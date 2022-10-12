@@ -5539,6 +5539,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-state" class="md-nav__link">
+    Remove state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8716,6 +8730,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-state" class="md-nav__link">
+    Remove state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8959,6 +8987,37 @@ end</code></pre>
 <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
 </code></pre></div>
 <p><code>states.next()</code> and <code>states.goto()</code> will be ignored if disabled.</p>
+<h3 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Start
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">startUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPreUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPostUpdate</span><span class="p">();</span>
+<span class="c1">// Assume that `scene` is assigned in config of constructor</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">startUpdate</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPreUpdate</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">startPostUpdate</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>scene</code> : <a href="../scene/">Scene object</a></li>
+</ul>
+</li>
+<li>Stop
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">stopUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">stopPreUpdate</span><span class="p">();</span>
+<span class="nx">states</span><span class="p">.</span><span class="nx">stopPostUpdate</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h3 id="remove-state">Remove state<a class="headerlink" href="#remove-state" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remve a state
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">removeState</span><span class="p">(</span><span class="nx">stateName</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remve all states
+    <div class="highlight"><pre><span></span><code><span class="nx">states</span><span class="p">.</span><span class="nx">removeAllStates</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
 
               
             </article>

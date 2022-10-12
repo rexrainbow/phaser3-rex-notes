@@ -7,7 +7,7 @@ declare namespace TagText {
     interface TagProg {
         color?: string,
 
-        stroke: {
+        stroke?: {
             color?: string,
             thickness?: number,
         },

@@ -262,3 +262,37 @@ states.toggleEnable();
 ```
 
 `states.next()` and `states.goto()` will be ignored if disabled.
+
+### Update
+
+- Start
+    ```javascript
+    states.startUpdate();
+    states.startPreUpdate();
+    states.startPostUpdate();
+    // Assume that `scene` is assigned in config of constructor
+    ```
+    or
+    ```javascript
+    states.startUpdate(scene);
+    states.startPreUpdate(scene);
+    states.startPostUpdate(scene);
+    ```
+    - `scene` : [Scene object](scene.md)
+- Stop
+    ```javascript
+    states.stopUpdate();
+    states.stopPreUpdate();
+    states.stopPostUpdate();
+    ```
+
+### Remove state
+
+- Remve a state
+    ```javascript
+    states.removeState(stateName);
+    ```
+- Remve all states
+    ```javascript
+    states.removeAllStates();
+    ```
