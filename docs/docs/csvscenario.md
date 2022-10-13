@@ -89,6 +89,9 @@ scenario.load(csvString, scope, {
 })
 ```
 
+- `csvString` : Commands in csv-string.
+- `scope` : Running commands via methods in this scope object.
+    - Get scope : `var scope = scenario.scope`
 - `timeUnit`: time-unit of dt, for [delay-execution](csvscenario.md#delay-execution)
     - `'ms'`, or `0` : dt in millisecond
     - `'s'`, `'sec'`, or 1 : dt in second
