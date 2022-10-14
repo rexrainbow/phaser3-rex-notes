@@ -31,15 +31,7 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textur
     var tw = tx + width;
     var th = ty + height;
 
-    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
-    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
-    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
-    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
-
-    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
-    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
-    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
-    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
+    var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
 
     var u0 = this.frame.u0;
     var v0 = this.frame.v0;
@@ -50,10 +42,7 @@ var WebglRender = function (pipeline, calcMatrix, alpha, dx, dy, texture, textur
 
     pipeline.batchQuad(
         this.parent,
-        tx0, ty0,
-        tx1, ty1,
-        tx2, ty2,
-        tx3, ty3,
+        quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7],
         u0, v0,
         u1, v1,
         tint, tint, tint, tint,
