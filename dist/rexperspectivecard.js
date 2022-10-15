@@ -1937,7 +1937,15 @@
     return out;
   };
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
   var GetValue$G = Phaser.Utils.Objects.GetValue;
+  var DynamicTexture$1 = Phaser.Textures.DynamicTexture;
+  var UUID$1 = Phaser.Utils.String.UUID;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -1945,7 +1953,8 @@
     }
 
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture;
+    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
+
     var x = GetValue$G(config, 'x', undefined);
     var y = GetValue$G(config, 'y', undefined);
     var width = GetValue$G(config, 'width', undefined);
@@ -1985,20 +1994,29 @@
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var tempRT = !renderTexture; // Configurate render texture
+    var scene = gameObjects[0].scene; // Snapshot on dynamicTexture directly
 
-    if (tempRT) {
-      var scene = gameObjects[0].scene;
+    if (saveTexture && !renderTexture) {
+      renderTexture = new DynamicTexture$1(scene.sys.textures, UUID$1(), width, height);
+    } // Return a renderTexture
+
+
+    if (!renderTexture) {
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
 
-    renderTexture.setPosition(x, y);
+    if (renderTexture.setPosition) {
+      renderTexture.setPosition(x, y);
+    }
 
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
 
-    renderTexture.setOrigin(originX, originY);
+    if (renderTexture.setOrigin) {
+      renderTexture.setOrigin(originX, originY);
+    }
+
     renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
 
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
@@ -2007,12 +2025,23 @@
     var saveTexture = config.saveTexture;
 
     if (saveTexture) {
-      renderTexture.saveTexture(saveTexture);
-    } // Destroy render texture if tempRT and saveTexture
+      if (IsGameObject(renderTexture)) {
+        renderTexture.saveTexture(saveTexture);
+      } else {
+        var dynamicTexture = renderTexture;
+        var textureManager = dynamicTexture.manager;
 
-
-    if (tempRT && saveTexture) {
-      renderTexture.destroy();
+        if (textureManager.exists(dynamicTexture.key)) {
+          // Rename texture
+          textureManager.renameTexture(dynamicTexture.key, key);
+        } else {
+          // Add texture to texture manager
+          dynamicTexture.key = key;
+          textureManager.list[key] = dynamicTexture;
+          textureManager.emit('addtexture', key, dynamicTexture);
+          textureManager.emit("addtexture-".concat(key), dynamicTexture);
+        }
+      }
     }
 
     return renderTexture;
@@ -6592,7 +6621,7 @@
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
         gameObject.on('pointerover', this.onOver, this);
-        gameObject.on('pointeroutr', this.onOut, this);
+        gameObject.on('pointerout', this.onOut, this);
       }
     }, {
       key: "shutdown",
@@ -10535,8 +10564,7 @@
           width: frameWidth / this.height,
           height: frameHeight / this.height,
           widthSegments: Math.ceil(frameWidth / this.gridWidth),
-          heightSegments: Math.ceil(frameHeight / this.gridHeight),
-          flipY: this.frame.source.isRenderTexture
+          heightSegments: Math.ceil(frameHeight / this.gridHeight)
         }); // Recover vertices transform
 
         var transformInfo = this.transformInfo;
@@ -10678,7 +10706,21 @@
     return Image;
   }(Mesh);
 
-  var RT = Phaser.GameObjects.RenderTexture;
+  var DynamicTexture = Phaser.Textures.DynamicTexture;
+
+  var CreateDynamicTexture = function CreateDynamicTexture(scene, width, height) {
+    if (width === undefined) {
+      width = 2;
+    }
+
+    if (height === undefined) {
+      height = 2;
+    }
+
+    var dt = new DynamicTexture(scene.sys.textures, null, width, height);
+    return dt;
+  };
+
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
 
@@ -10698,13 +10740,13 @@
         y = GetValue$4(config, 'y', 0);
         width = GetValue$4(config, 'width', 32);
         height = GetValue$4(config, 'height', 32);
-      } // render-texture -> perspective-image
+      } // dynamic-texture -> quad-image
 
 
-      var rt = new RT(scene, x, y, width, height).setOrigin(0.5);
-      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
+      var texture = CreateDynamicTexture(scene, width, height);
+      _this = _super.call(this, scene, x, y, texture, null, config);
       _this.type = 'rexPerspectiveRenderTexture';
-      _this.rt = rt;
+      _this.rt = _this.texture;
       return _this;
     }
 

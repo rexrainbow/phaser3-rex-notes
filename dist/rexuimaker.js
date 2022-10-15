@@ -8874,7 +8874,11 @@
     }
   };
 
-  var SetTexture$1 = function SetTexture(key, baseFrameName, columns, rows) {
+  var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
+    if (!key) {
+      return this;
+    }
+
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -9177,7 +9181,7 @@
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture$1,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,
@@ -9263,7 +9267,7 @@
 
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
 
-        _this.setTexture(key, baseFrame, columns, rows);
+        _this.setBaseTexture(key, baseFrame, columns, rows);
 
         return _this;
       }
@@ -9295,7 +9299,12 @@
             return this;
           }
 
-          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
+            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          } else {
+            // Use setSize method for alternative 
+            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
+          }
 
           this.updateTexture();
           return this;
@@ -10260,20 +10269,13 @@
     var ty = -displayOriginY;
     var tw = tx + width;
     var th = ty + height;
-    var tx0 = FrameMatrix.getXRound(tx, ty, roundPixels);
-    var tx1 = FrameMatrix.getXRound(tx, th, roundPixels);
-    var tx2 = FrameMatrix.getXRound(tw, th, roundPixels);
-    var tx3 = FrameMatrix.getXRound(tw, ty, roundPixels);
-    var ty0 = FrameMatrix.getYRound(tx, ty, roundPixels);
-    var ty1 = FrameMatrix.getYRound(tx, th, roundPixels);
-    var ty2 = FrameMatrix.getYRound(tw, th, roundPixels);
-    var ty3 = FrameMatrix.getYRound(tw, ty, roundPixels);
+    var quad = FrameMatrix.setQuad(tx, ty, tw, th, roundPixels);
     var u0 = this.frame.u0;
     var v0 = this.frame.v0;
     var u1 = this.frame.u1;
     var v1 = this.frame.v1;
     var tint = GetTint(this.tint, this.alpha * alpha);
-    pipeline.batchQuad(this.parent, tx0, ty0, tx1, ty1, tx2, ty2, tx3, ty3, u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
+    pipeline.batchQuad(this.parent, quad[0], quad[1], quad[2], quad[3], quad[4], quad[5], quad[6], quad[7], u0, v0, u1, v1, tint, tint, tint, tint, this.tintFill, texture, textureUnit);
   };
 
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
@@ -10561,15 +10563,15 @@
     }
 
     _createClass(NinePatch, [{
-      key: "setTexture",
-      value: function setTexture(key, baseFrameName, columns, rows) {
+      key: "setBaseTexture",
+      value: function setBaseTexture(key, baseFrameName, columns, rows) {
         SetTexture.call(this, key, '__BASE'); // Not initialized yet
 
         if (!this.columns) {
           return this;
         }
 
-        _get(_getPrototypeOf(NinePatch.prototype), "setTexture", this).call(this, key, baseFrameName, columns, rows);
+        _get(_getPrototypeOf(NinePatch.prototype), "setBaseTexture", this).call(this, key, baseFrameName, columns, rows);
 
         return this;
       }
@@ -12867,7 +12869,15 @@
 
   var GlobRect$1;
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
   var GetValue$1a = Phaser.Utils.Objects.GetValue;
+  var DynamicTexture = Phaser.Textures.DynamicTexture;
+  var UUID$1 = Phaser.Utils.String.UUID;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -12875,7 +12885,8 @@
     }
 
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture;
+    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
+
     var x = GetValue$1a(config, 'x', undefined);
     var y = GetValue$1a(config, 'y', undefined);
     var width = GetValue$1a(config, 'width', undefined);
@@ -12915,20 +12926,29 @@
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var tempRT = !renderTexture; // Configurate render texture
+    var scene = gameObjects[0].scene; // Snapshot on dynamicTexture directly
 
-    if (tempRT) {
-      var scene = gameObjects[0].scene;
+    if (saveTexture && !renderTexture) {
+      renderTexture = new DynamicTexture(scene.sys.textures, UUID$1(), width, height);
+    } // Return a renderTexture
+
+
+    if (!renderTexture) {
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
 
-    renderTexture.setPosition(x, y);
+    if (renderTexture.setPosition) {
+      renderTexture.setPosition(x, y);
+    }
 
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
 
-    renderTexture.setOrigin(originX, originY);
+    if (renderTexture.setOrigin) {
+      renderTexture.setOrigin(originX, originY);
+    }
+
     renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
 
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
@@ -12937,12 +12957,23 @@
     var saveTexture = config.saveTexture;
 
     if (saveTexture) {
-      renderTexture.saveTexture(saveTexture);
-    } // Destroy render texture if tempRT and saveTexture
+      if (IsGameObject(renderTexture)) {
+        renderTexture.saveTexture(saveTexture);
+      } else {
+        var dynamicTexture = renderTexture;
+        var textureManager = dynamicTexture.manager;
 
-
-    if (tempRT && saveTexture) {
-      renderTexture.destroy();
+        if (textureManager.exists(dynamicTexture.key)) {
+          // Rename texture
+          textureManager.renameTexture(dynamicTexture.key, key);
+        } else {
+          // Add texture to texture manager
+          dynamicTexture.key = key;
+          textureManager.list[key] = dynamicTexture;
+          textureManager.emit('addtexture', key, dynamicTexture);
+          textureManager.emit("addtexture-".concat(key), dynamicTexture);
+        }
+      }
     }
 
     return renderTexture;
@@ -17519,7 +17550,7 @@
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
         gameObject.on('pointerover', this.onOver, this);
-        gameObject.on('pointeroutr', this.onOut, this);
+        gameObject.on('pointerout', this.onOut, this);
       }
     }, {
       key: "shutdown",

@@ -691,8 +691,7 @@
           texture: this.texture.key,
           frame: this.frame.name,
           width: this.frame.cutWidth / this.height,
-          height: this.frame.cutHeight / this.height,
-          flipY: this.frame.source.isRenderTexture
+          height: this.frame.cutHeight / this.height
         });
         this.setOrtho(this.width / this.height, 1);
         return this;
@@ -764,11 +763,10 @@
         var srcHeight = this.height;
         var vHalfWidth = this.frame.cutWidth / srcHeight / 2;
         var vHalfHeight = this.frame.cutHeight / srcHeight / 2;
-        var flipY = this.frame.source.isRenderTexture;
         var frameU0 = this.frame.u0;
         var frameU1 = this.frame.u1;
-        var frameV0 = !flipY ? this.frame.v0 : this.frame.v1;
-        var frameV1 = !flipY ? this.frame.v1 : this.frame.v0;
+        var frameV0 = this.frame.v0;
+        var frameV1 = this.frame.v1;
         var frameU = frameU1 - frameU0;
         var frameV = frameV1 - frameV0;
 
@@ -869,7 +867,21 @@
     return gameObject;
   }
 
-  var RT = Phaser.GameObjects.RenderTexture;
+  var DynamicTexture = Phaser.Textures.DynamicTexture;
+
+  var CreateDynamicTexture = function CreateDynamicTexture(scene, width, height) {
+    if (width === undefined) {
+      width = 2;
+    }
+
+    if (height === undefined) {
+      height = 2;
+    }
+
+    var dt = new DynamicTexture(scene.sys.textures, null, width, height);
+    return dt;
+  };
+
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -889,13 +901,13 @@
         y = GetValue(config, 'y', 0);
         width = GetValue(config, 'width', 32);
         height = GetValue(config, 'height', 32);
-      } // render-texture -> perspective-image
+      } // dynamic-texture -> quad-image
 
 
-      var rt = new RT(scene, x, y, width, height).setOrigin(0.5);
-      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
+      var texture = CreateDynamicTexture(scene, width, height);
+      _this = _super.call(this, scene, x, y, texture, null, config);
       _this.type = 'rexShatterRenderTexture';
-      _this.rt = rt;
+      _this.rt = _this.texture;
       return _this;
     }
 

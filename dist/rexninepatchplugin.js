@@ -191,7 +191,11 @@
     return outObject;
   };
 
-  var SetTexture = function SetTexture(key, baseFrameName, columns, rows) {
+  var SetBaseTexture = function SetBaseTexture(key, baseFrameName, columns, rows) {
+    if (!key) {
+      return this;
+    }
+
     if (Array.isArray(baseFrameName)) {
       rows = columns;
       columns = baseFrameName;
@@ -497,7 +501,7 @@
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
-    setTexture: SetTexture,
+    setBaseTexture: SetBaseTexture,
     updateTexture: UpdateTexture,
     setStretchMode: SetStretchMode,
     getStretchMode: GetStretchMode,
@@ -583,7 +587,7 @@
 
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
 
-        _this.setTexture(key, baseFrame, columns, rows);
+        _this.setBaseTexture(key, baseFrame, columns, rows);
 
         return _this;
       }
@@ -615,7 +619,12 @@
             return this;
           }
 
-          _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          if (_get(_getPrototypeOf(NinePatch.prototype), "resize", this)) {
+            _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
+          } else {
+            // Use setSize method for alternative 
+            _get(_getPrototypeOf(NinePatch.prototype), "setSize", this).call(this, width, height);
+          }
 
           this.updateTexture();
           return this;

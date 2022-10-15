@@ -456,11 +456,10 @@
         var srcHeight = this.height;
         var vHalfWidth = this.frame.cutWidth / srcHeight / 2;
         var vHalfHeight = this.frame.cutHeight / srcHeight / 2;
-        var flipY = this.frame.source.isRenderTexture;
         var frameU0 = this.frame.u0;
         var frameU1 = this.frame.u1;
-        var frameV0 = !flipY ? this.frame.v0 : this.frame.v1;
-        var frameV1 = !flipY ? this.frame.v1 : this.frame.v0;
+        var frameV0 = this.frame.v0;
+        var frameV1 = this.frame.v1;
         var frameU = frameU1 - frameU0;
         var frameV = frameV1 - frameV0; // Update vertex
 
@@ -546,6 +545,21 @@
     BuildGameObject$3(this.scene, gameObject, config);
     return gameObject;
   }
+
+  var DynamicTexture$1 = Phaser.Textures.DynamicTexture;
+
+  var CreateDynamicTexture = function CreateDynamicTexture(scene, width, height) {
+    if (width === undefined) {
+      width = 2;
+    }
+
+    if (height === undefined) {
+      height = 2;
+    }
+
+    var dt = new DynamicTexture$1(scene.sys.textures, null, width, height);
+    return dt;
+  };
 
   var GetDisplayWidth = function GetDisplayWidth(gameObject) {
     if (gameObject.displayWidth !== undefined) {
@@ -840,7 +854,15 @@
     return gameObjects;
   };
 
+  var GameObjectClass = Phaser.GameObjects.GameObject;
+
+  var IsGameObject = function IsGameObject(object) {
+    return object instanceof GameObjectClass;
+  };
+
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var DynamicTexture = Phaser.Textures.DynamicTexture;
+  var UUID = Phaser.Utils.String.UUID;
 
   var Snapshot = function Snapshot(config) {
     if (!config) {
@@ -848,7 +870,8 @@
     }
 
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture;
+    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
+
     var x = GetValue$4(config, 'x', undefined);
     var y = GetValue$4(config, 'y', undefined);
     var width = GetValue$4(config, 'width', undefined);
@@ -888,20 +911,29 @@
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var tempRT = !renderTexture; // Configurate render texture
+    var scene = gameObjects[0].scene; // Snapshot on dynamicTexture directly
 
-    if (tempRT) {
-      var scene = gameObjects[0].scene;
+    if (saveTexture && !renderTexture) {
+      renderTexture = new DynamicTexture(scene.sys.textures, UUID(), width, height);
+    } // Return a renderTexture
+
+
+    if (!renderTexture) {
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
 
-    renderTexture.setPosition(x, y);
+    if (renderTexture.setPosition) {
+      renderTexture.setPosition(x, y);
+    }
 
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
 
-    renderTexture.setOrigin(originX, originY);
+    if (renderTexture.setOrigin) {
+      renderTexture.setOrigin(originX, originY);
+    }
+
     renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
 
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
@@ -910,18 +942,28 @@
     var saveTexture = config.saveTexture;
 
     if (saveTexture) {
-      renderTexture.saveTexture(saveTexture);
-    } // Destroy render texture if tempRT and saveTexture
+      if (IsGameObject(renderTexture)) {
+        renderTexture.saveTexture(saveTexture);
+      } else {
+        var dynamicTexture = renderTexture;
+        var textureManager = dynamicTexture.manager;
 
-
-    if (tempRT && saveTexture) {
-      renderTexture.destroy();
+        if (textureManager.exists(dynamicTexture.key)) {
+          // Rename texture
+          textureManager.renameTexture(dynamicTexture.key, key);
+        } else {
+          // Add texture to texture manager
+          dynamicTexture.key = key;
+          textureManager.list[key] = dynamicTexture;
+          textureManager.emit('addtexture', key, dynamicTexture);
+          textureManager.emit("addtexture-".concat(key), dynamicTexture);
+        }
+      }
     }
 
     return renderTexture;
   };
 
-  var RT$1 = Phaser.GameObjects.RenderTexture;
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
 
@@ -941,13 +983,13 @@
         y = GetValue$3(config, 'y', 0);
         width = GetValue$3(config, 'width', 32);
         height = GetValue$3(config, 'height', 32);
-      } // render-texture -> quad-image
+      } // dynamic-texture -> quad-image
 
 
-      var rt = new RT$1(scene, x, y, width, height).setOrigin(0.5);
-      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
+      var texture = CreateDynamicTexture(scene, width, height);
+      _this = _super.call(this, scene, x, y, texture, null, config);
       _this.type = 'rexQuadRenderTexture';
-      _this.rt = rt;
+      _this.rt = _this.texture;
       return _this;
     }
 
@@ -1172,7 +1214,6 @@
     return gameObject;
   }
 
-  var RT = Phaser.GameObjects.RenderTexture;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
 
@@ -1192,13 +1233,13 @@
         y = GetValue$1(config, 'y', 0);
         width = GetValue$1(config, 'width', 32);
         height = GetValue$1(config, 'height', 32);
-      } // render-texture -> skew-image
+      } // dynamic-texture -> quad-image
 
 
-      var rt = new RT(scene, x, y, width, height).setOrigin(0.5);
-      _this = _super.call(this, scene, x, y, rt.texture.key, null);
+      var texture = CreateDynamicTexture(scene, width, height);
+      _this = _super.call(this, scene, x, y, texture, null);
       _this.type = 'rexSkewRenderTexture';
-      _this.rt = rt;
+      _this.rt = _this.texture;
       return _this;
     }
 
