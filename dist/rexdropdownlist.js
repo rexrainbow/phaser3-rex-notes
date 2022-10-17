@@ -6592,7 +6592,7 @@
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
         gameObject.on('pointerover', this.onOver, this);
-        gameObject.on('pointeroutr', this.onOut, this);
+        gameObject.on('pointerout', this.onOut, this);
       }
     }, {
       key: "shutdown",

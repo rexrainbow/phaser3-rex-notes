@@ -6592,7 +6592,7 @@
         gameObject.on('pointerout', this.onPointOut, this);
         gameObject.on('pointermove', this.onMove, this);
         gameObject.on('pointerover', this.onOver, this);
-        gameObject.on('pointeroutr', this.onOut, this);
+        gameObject.on('pointerout', this.onOut, this);
       }
     }, {
       key: "shutdown",
@@ -14952,8 +14952,14 @@
         cellWidth = width / columns;
       }
 
-      config.cellWidth = cellWidth;
-      config.cellHeight = cellHeight;
+      if (cellWidth !== undefined) {
+        config.cellWidth = cellWidth;
+      }
+
+      if (cellHeight !== undefined) {
+        config.cellHeight = cellHeight;
+      }
+
       config.columns = columns;
       _this.table = new Table(_assertThisInitialized(_this), config);
 
