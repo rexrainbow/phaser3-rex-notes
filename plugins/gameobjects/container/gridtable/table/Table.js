@@ -13,11 +13,24 @@ class Table {
     }
 
     resetFromJSON(o) {
+        if (o === undefined) {
+            o = {};
+        }
         this.colCount = undefined;
         this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
-        this.setDefaultCellHeight(GetValue(o, 'cellHeight', 30));
-        this.setDefaultCellWidth(GetValue(o, 'cellWidth', 30));
+
+        var cellHeight = o.cellHeight;
+        if (cellHeight === undefined) {
+            cellHeight = 30;
+        }
+        var cellWidth = o.cellWidth;
+        if (cellWidth === undefined) {
+            cellWidth = 30;
+        }
+
+        this.setDefaultCellHeight(cellHeight);
+        this.setDefaultCellWidth(cellWidth);
         this.initCells(GetValue(o, 'cellsCount', 0));
         this.setColumnCount(GetValue(o, 'columns', 1));
         return this;

@@ -2813,11 +2813,27 @@
     _createClass(Table, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
+        if (o === undefined) {
+          o = {};
+        }
+
         this.colCount = undefined;
         this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
-        this.setDefaultCellHeight(GetValue$3(o, 'cellHeight', 30));
-        this.setDefaultCellWidth(GetValue$3(o, 'cellWidth', 30));
+        var cellHeight = o.cellHeight;
+
+        if (cellHeight === undefined) {
+          cellHeight = 30;
+        }
+
+        var cellWidth = o.cellWidth;
+
+        if (cellWidth === undefined) {
+          cellWidth = 30;
+        }
+
+        this.setDefaultCellHeight(cellHeight);
+        this.setDefaultCellWidth(cellWidth);
         this.initCells(GetValue$3(o, 'cellsCount', 0));
         this.setColumnCount(GetValue$3(o, 'columns', 1));
         return this;
@@ -4084,17 +4100,8 @@
         cellWidth = width / columns;
       }
 
-      delete config.Width;
-      delete config.cellHeight;
-
-      if (cellWidth !== undefined) {
-        config.cellWidth = cellWidth;
-      }
-
-      if (cellHeight !== undefined) {
-        config.cellHeight = cellHeight;
-      }
-
+      config.cellWidth = cellWidth;
+      config.cellHeight = cellHeight;
       config.columns = columns;
       _this.table = new Table(_assertThisInitialized(_this), config);
 
