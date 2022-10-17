@@ -9,7 +9,6 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 ## Live demos
 
-
 - [Rotate, alpha](https://codepen.io/rexrainbow/pen/NBgpYd)
 - [Tween child](https://codepen.io/rexrainbow/pen/KKpGzvx)
 - [Create tween config](https://codepen.io/rexrainbow/pen/qBxdwxo)
@@ -17,6 +16,7 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 - [Mix timeline](https://codepen.io/rexrainbow/pen/VwQLNyG)
 - [Snapshot](https://codepen.io/rexrainbow/pen/XWEVWrO)
 - [Destory](https://codepen.io/rexrainbow/pen/rNvKdqg)
+- [Add to p3-container](https://codepen.io/rexrainbow/pen/PoeXVYb)
 
 ## Usage
 

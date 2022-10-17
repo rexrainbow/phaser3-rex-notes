@@ -50,6 +50,7 @@ declare class CSVScenario extends Phaser.Events.EventEmitter {
         scope: object,
         config?: CSVScenario.IConfig
     ): this;
+    scope: object;
 
     append(
         csvString: string

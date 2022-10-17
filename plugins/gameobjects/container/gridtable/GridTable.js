@@ -64,8 +64,13 @@ class GridTable extends ContainerLite {
             var width = (scrollY) ? this.width : this.height;
             cellWidth = width / columns;
         }
-        config.cellWidth = cellWidth;
-        config.cellHeight = cellHeight;
+
+        if (cellWidth !== undefined) {
+            config.cellWidth = cellWidth;
+        }
+        if (cellHeight !== undefined) {
+            config.cellHeight = cellHeight;
+        }
         config.columns = columns;
 
         this.table = new Table(this, config);

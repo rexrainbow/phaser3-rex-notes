@@ -4113,8 +4113,14 @@
         cellWidth = width / columns;
       }
 
-      config.cellWidth = cellWidth;
-      config.cellHeight = cellHeight;
+      if (cellWidth !== undefined) {
+        config.cellWidth = cellWidth;
+      }
+
+      if (cellHeight !== undefined) {
+        config.cellHeight = cellHeight;
+      }
+
       config.columns = columns;
       _this.table = new Table(_assertThisInitialized(_this), config);
 
