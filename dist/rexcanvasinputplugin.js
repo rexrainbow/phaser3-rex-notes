@@ -2169,6 +2169,7 @@
           offsetY: this.offsetY,
           leftSpace: this.leftSpace,
           rightSpace: this.rightSpace,
+          backgroundHeight: this.backgroundHeight,
           align: this.align
         };
       }
@@ -2186,6 +2187,8 @@
         this.setSpace(GetValue$9(o, 'leftSpace', 0), GetValue$9(o, 'rightSpace', 0));
         this.setAlign(GetValue$9(o, 'align', undefined));
         this.setBackgroundColor(GetValue$9(o, 'backgroundColor', null));
+        this.setBackgroundHeight(GetValue$9(o, 'backgroundHeight', undefined));
+        this.setBackgroundBottomY(GetValue$9(o, 'backgroundBottomY', undefined));
         return this;
       }
     }, {
@@ -2249,6 +2252,14 @@
 
         if (o.hasOwnProperty('backgroundColor')) {
           this.setBackgroundColor(o.backgroundColor);
+        }
+
+        if (o.hasOwnProperty('backgroundHeight')) {
+          this.setBackgroundHeight(o.backgroundHeight);
+        }
+
+        if (o.hasOwnProperty('backgroundBottomY')) {
+          this.setBackgroundBottomY(o.backgroundBottomY);
         }
 
         return this;
@@ -2417,6 +2428,18 @@
       key: "hasBackgroundColor",
       get: function get() {
         return this.backgroundColor != null;
+      }
+    }, {
+      key: "setBackgroundHeight",
+      value: function setBackgroundHeight(height) {
+        this.backgroundHeight = height;
+        return this;
+      }
+    }, {
+      key: "setBackgroundBottomY",
+      value: function setBackgroundBottomY(y) {
+        this.backgroundBottomY = y;
+        return this;
       }
     }, {
       key: "setOffsetX",
@@ -2833,10 +2856,21 @@
 
         if (textStyle.hasBackgroundColor) {
           context.fillStyle = textStyle.backgroundColor;
-          var x = this.drawTLX,
-              y = this.drawTLY,
-              width = this.drawTRX - x,
-              height = this.drawBLY - y;
+          var x = this.drawTLX;
+          var width = this.drawTRX - x;
+          var bottomY = textStyle.backgroundBottomY;
+
+          if (bottomY == null) {
+            bottomY = this.drawBLY;
+          }
+
+          var height = textStyle.backgroundHeight;
+
+          if (height == null) {
+            height = bottomY - this.drawTLY;
+          }
+
+          var y = bottomY - height;
           context.fillRect(x, y, width, height);
         }
 
