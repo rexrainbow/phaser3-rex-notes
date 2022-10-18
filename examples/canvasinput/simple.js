@@ -36,6 +36,8 @@ var CreateCanvasInput = function (scene, text) {
             padding: 20,
             style: {
                 fontSize: '24px',
+                backgroundBottomY: 8,
+                backgroundHeight: 32
             },
 
             wrap: {
@@ -54,10 +56,6 @@ var CreateCanvasInput = function (scene, text) {
             },
 
             onAddChar(child) {
-                child.modifyStyle({
-                    backgroundBottomY: 8,
-                    backgroundHeight: 32
-                });
             },
 
             onCursorOut(child, cursorIndex, textObject) {

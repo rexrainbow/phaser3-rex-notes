@@ -12084,6 +12084,7 @@
           leftSpace: this.leftSpace,
           rightSpace: this.rightSpace,
           backgroundHeight: this.backgroundHeight,
+          backgroundBottomY: this.backgroundBottomY,
           align: this.align
         };
       }
@@ -42957,6 +42958,7 @@
       var callback = this.createCellContainerCallback;
       var scope = this.createCellContainerCallbackScope;
       cell.item = this.items[cell.index];
+      cell.items = this.items;
       var cellContainer;
 
       if (scope) {
@@ -42976,6 +42978,7 @@
       }
 
       cell.item = undefined;
+      cell.items = undefined;
       cell.setContainer(cellContainer);
     }, this);
   };

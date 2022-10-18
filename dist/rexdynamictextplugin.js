@@ -2170,6 +2170,7 @@
           leftSpace: this.leftSpace,
           rightSpace: this.rightSpace,
           backgroundHeight: this.backgroundHeight,
+          backgroundBottomY: this.backgroundBottomY,
           align: this.align
         };
       }

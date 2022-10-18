@@ -189,6 +189,7 @@ var table = scene.rexUI.add.gridTable({
             width = cell.width,
             height = cell.height,
             item = cell.item,
+            items = cell.items,
             index = cell.index;
         if (cellContainer === null) { // No reusable cell container, create a new one
             // cellContainer = scene.rexUI.add.label();
@@ -300,6 +301,7 @@ var table = scene.rexUI.add.gridTable({
         - `cell.width` : Width of this cell, in pixels.
         - `cell.height` : Height of this cell, in pixels.
         - `cell.item` : Item of this cell to display.
+        - `cell.items` : Array of item data for each cell, equal to `items` parameter.
         - `cell.index` : Index of this cell.
     - **Origin of returned cell container will be set to (0, 0)**
     - `cellContainer` : Cell container picked from object pool for reusing. Set `reuseCellContainer` to `true` to enable this feature.

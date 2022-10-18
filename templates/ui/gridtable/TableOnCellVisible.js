@@ -3,6 +3,7 @@ var TableOnCellVisible = function (table) {
         var callback = this.createCellContainerCallback;
         var scope = this.createCellContainerCallbackScope;
         cell.item = this.items[cell.index];
+        cell.items = this.items;
         var cellContainer;
         if (scope) {
             cellContainer = callback.call(scope, cell, cellContainer, table);
@@ -19,6 +20,7 @@ var TableOnCellVisible = function (table) {
         }
 
         cell.item = undefined;
+        cell.items = undefined;
         cell.setContainer(cellContainer);
     }, this);
 }
