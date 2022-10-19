@@ -196,7 +196,7 @@ var table = scene.rexUI.add.gridTable({
         }
         // Set child properties of cell container ...
         
-        // cell.setAlign();  // Set alignment of cellContainer
+        // cell.setCellContainerAlign();  // Set alignment of cellContainer
 
         return cellContainer; // or null
     },
@@ -308,7 +308,7 @@ var table = scene.rexUI.add.gridTable({
         - `cell.index` : Index of this cell.
     - Alignment of cellContainer : 
         ```javascript
-        cell.setAlign(align);
+        cell.setCellContainerAlign(align);
         ```
         - `align` :
             - `undefined` : Set position of cellContainer to left-top of cell space. Default behavior.

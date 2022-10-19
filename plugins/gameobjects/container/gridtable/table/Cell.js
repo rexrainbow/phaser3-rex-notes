@@ -94,11 +94,11 @@ class Cell {
         return this;
     }
 
-    setAlign(align) {
+    setCellContainerAlign(align) {
         if (typeof (align) === 'string') {
             align = AlignConst[align];
         }
-        this.align = align;
+        this.cellContainerAlign = align;
         return this;
     }
 

@@ -43,11 +43,11 @@ var ShowCells = function () {
                 x = cellTLY;
                 y = cellTLX;
             }
-            if (cell.align == null) {
+            if (cell.cellContainerAlign == null) {
                 cell.setXY(x, y);
             } else {
                 var cellContainer = cell.getContainer();
-                AlignIn(cellContainer, x, y, cell.width, cell.height, cell.align);
+                AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
                 cell.setXY(cellContainer.x, cellContainer.y);
             }
         }

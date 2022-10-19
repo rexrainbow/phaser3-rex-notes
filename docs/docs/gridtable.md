@@ -266,7 +266,7 @@ It is equal to `cellVisibleCallback` in configuration.
         ```
     - Alignment of cellContainer : 
         ```javascript
-        cell.setAlign(align);
+        cell.setCellContainerAlign(align);
         ```
         - `align` :
             - `undefined` : Set position of cellContainer to left-top of cell space. Default behavior.

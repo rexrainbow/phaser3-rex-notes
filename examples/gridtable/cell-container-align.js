@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
                     .setStrokeStyle(2, COLOR_LIGHT);
 
                 cell.setContainer(bg);
-                cell.setAlign((cell.index % 2) ? 'right' : 'left');
+                cell.setCellContainerAlign((cell.index % 2) ? 'right' : 'left');
                 //console.log('Cell ' + cell.index + ' visible');
             },
             // reuseCellContainer: true,

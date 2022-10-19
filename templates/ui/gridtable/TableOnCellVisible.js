@@ -12,7 +12,7 @@ var TableOnCellVisible = function (table) {
         }
 
         if (cellContainer) {
-            if ((cell.align == null) && cellContainer.setOrigin) {
+            if ((cell.cellContainerAlign == null) && cellContainer.setOrigin) {
                 cellContainer.setOrigin(0);
             }
             if (cellContainer.isRexSizer) {

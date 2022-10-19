@@ -13518,13 +13518,13 @@
         return this;
       }
     }, {
-      key: "setAlign",
-      value: function setAlign(align) {
+      key: "setCellContainerAlign",
+      value: function setCellContainerAlign(align) {
         if (typeof align === 'string') {
           align = AlignConst[align];
         }
 
-        this.align = align;
+        this.cellContainerAlign = align;
         return this;
       }
     }, {
@@ -14594,11 +14594,11 @@
           y = cellTLX;
         }
 
-        if (cell.align == null) {
+        if (cell.cellContainerAlign == null) {
           cell.setXY(x, y);
         } else {
           var cellContainer = cell.getContainer();
-          AlignIn(cellContainer, x, y, cell.width, cell.height, cell.align);
+          AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
           cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
@@ -15346,7 +15346,7 @@
       }
 
       if (cellContainer) {
-        if (cell.align == null && cellContainer.setOrigin) {
+        if (cell.cellContainerAlign == null && cellContainer.setOrigin) {
           cellContainer.setOrigin(0);
         }
 
