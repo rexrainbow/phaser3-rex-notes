@@ -10,6 +10,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 ## Live demos
 
+- [Simple](https://codepen.io/rexrainbow/pen/vYjwjyW)
 - [Text input](https://codepen.io/rexrainbow/pen/poVPGKe)
 - [Number input](https://codepen.io/rexrainbow/pen/jOxarOO)
 

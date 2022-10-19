@@ -9231,6 +9231,8 @@
         <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">backgroundHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">backgroundBottomY</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
@@ -9326,6 +9328,10 @@
 <li><code>style.shadowOffsetY</code> : OffsetY of shadow.</li>
 <li><code>style.shadowBlur</code> : Blur of shadow.</li>
 <li><code>style.backgroundColor</code> : Background color of a character.</li>
+<li><code>style.backgroundHeight</code>, <code>style.backgroundBottomY</code> : Background position and height of a character.<ul>
+<li><code>undefined</code>, or <code>null</code> : Use height of character as background height. Default behavior.</li>
+</ul>
+</li>
 <li><code>style.offsetX</code> : OffsetX.</li>
 <li><code>style.offsetY</code> : OffsetY.</li>
 <li><code>style.align</code> : Override default line-alignment setting.<ul>
@@ -9409,6 +9415,8 @@
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
         <span class="c1">// backgroundColor: null,</span>
+        <span class="c1">// backgroundHeight: undefined,</span>
+        <span class="c1">// backgroundBottomY: undefined,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// align: undefined</span>
@@ -9436,6 +9444,8 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
         <span class="c1">// backgroundColor: null,</span>
+        <span class="c1">// backgroundHeight: undefined,</span>
+        <span class="c1">// backgroundBottomY: undefined,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// align: undefined</span>
@@ -9460,6 +9470,8 @@ or</p>
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
         <span class="c1">// backgroundColor: null,</span>
+        <span class="c1">// backgroundHeight: undefined,</span>
+        <span class="c1">// backgroundBottomY: undefined,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// offsetY: 0,</span>
         <span class="c1">// align: undefined</span>
@@ -9765,6 +9777,8 @@ or</p>
 <span class="kd">var</span> <span class="nx">shadowOffsetX</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetX</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">shadowOffsetY</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetY</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">backgroundColor</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">backgroundHeight</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundHeight</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">backgroundBottomY</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundBottomY</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">xOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">yOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
@@ -9782,6 +9796,8 @@ or</p>
     <span class="c1">// shadowOffsetX: 0,</span>
     <span class="c1">// shadowOffsetY: 0,</span>
     <span class="c1">// backgroundColor: null,</span>
+    <span class="c1">// backgroundHeight: undefined,</span>
+    <span class="c1">// backgroundBottomY: undefined,</span>
     <span class="c1">// offsetX: 0,</span>
     <span class="c1">// offsetY: 0</span>
 <span class="p">})</span>
