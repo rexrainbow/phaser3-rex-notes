@@ -264,6 +264,17 @@ It is equal to `cellVisibleCallback` in configuration.
         ```javascript
         cell.setContainer(cellContainer);
         ```
+    - Alignment of cellContainer : 
+        ```javascript
+        cell.setAlign(align);
+        ```
+        - `align` :
+            - `undefined` : Set position of cellContainer to left-top of cell space. Default behavior.
+            - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center of cell space.
+            - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center of cell space.
+            - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center of cell space.
+            - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center of cell space.
+            - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center of cell space.         
 - `cellContainer` : Cell container picked from object pool for reusing. Set `reuseCellContainer` to `true` to enable this feature.
     - `null` : No cell container available.
     - Game object : Reusable cell container.

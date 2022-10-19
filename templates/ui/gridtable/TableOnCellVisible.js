@@ -10,8 +10,9 @@ var TableOnCellVisible = function (table) {
         } else {
             cellContainer = callback(cell, cellContainer, table);
         }
+
         if (cellContainer) {
-            if (cellContainer.setOrigin) {
+            if ((cell.align == null) && cellContainer.setOrigin) {
                 cellContainer.setOrigin(0);
             }
             if (cellContainer.isRexSizer) {

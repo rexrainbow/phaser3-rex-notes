@@ -41391,6 +41391,16 @@
         return this;
       }
     }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        if (typeof align === 'string') {
+          align = AlignConst[align];
+        }
+
+        this.align = align;
+        return this;
+      }
+    }, {
       key: "deltaHeight",
       get: function get() {
         return this._deltaHeight;
@@ -42245,10 +42255,22 @@
           this.showCell(cell);
         }
 
+        var x, y;
+
         if (this.scrollMode === 0) {
-          cell.setXY(cellTLX, cellTLY);
+          x = cellTLX;
+          y = cellTLY;
         } else {
-          cell.setXY(cellTLY, cellTLX);
+          x = cellTLY;
+          y = cellTLX;
+        }
+
+        if (cell.align == null) {
+          cell.setXY(x, y);
+        } else {
+          var cellContainer = cell.getContainer();
+          AlignIn(cellContainer, x, y, cell.width, cell.height, cell.align);
+          cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
 
@@ -42995,7 +43017,7 @@
       }
 
       if (cellContainer) {
-        if (cellContainer.setOrigin) {
+        if (cell.align == null && cellContainer.setOrigin) {
           cellContainer.setOrigin(0);
         }
 

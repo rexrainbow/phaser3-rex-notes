@@ -2541,6 +2541,24 @@
     }
   };
 
+  var ALIGN = Phaser.Display.Align;
+  var AlignConst = {
+    center: ALIGN.CENTER,
+    left: ALIGN.LEFT_CENTER,
+    right: ALIGN.RIGHT_CENTER,
+    top: ALIGN.TOP_CENTER,
+    bottom: ALIGN.BOTTOM_CENTER,
+    'left-top': ALIGN.TOP_LEFT,
+    'left-center': ALIGN.LEFT_CENTER,
+    'left-bottom': ALIGN.BOTTOM_LEFT,
+    'center-top': ALIGN.TOP_CENTER,
+    'center-center': ALIGN.CENTER,
+    'center-bottom': ALIGN.BOTTOM_CENTER,
+    'right-top': ALIGN.TOP_RIGHT,
+    'right-center': ALIGN.RIGHT_CENTER,
+    'right-bottom': ALIGN.BOTTOM_RIGHT
+  };
+
   var Cell = /*#__PURE__*/function () {
     function Cell(parent, config) {
       _classCallCheck(this, Cell);
@@ -2647,6 +2665,16 @@
           this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
 
+        return this;
+      }
+    }, {
+      key: "setAlign",
+      value: function setAlign(align) {
+        if (typeof align === 'string') {
+          align = AlignConst[align];
+        }
+
+        this.align = align;
         return this;
       }
     }, {
@@ -3668,6 +3696,356 @@
     }
   };
 
+  var NOOP = function NOOP() {//  NOOP
+  };
+
+  var globZone = new Phaser.GameObjects.Zone({
+    sys: {
+      queueDepthSort: NOOP,
+      events: {
+        once: NOOP
+      }
+    }
+  }, 0, 0, 1, 1);
+  globZone.setOrigin(0);
+
+  var ALIGN_CONST = {
+    /**
+    * A constant representing a top-left alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.TOP_LEFT
+    * @since 3.0.0
+    * @type {integer}
+    */
+    TOP_LEFT: 0,
+
+    /**
+    * A constant representing a top-center alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.TOP_CENTER
+    * @since 3.0.0
+    * @type {integer}
+    */
+    TOP_CENTER: 1,
+
+    /**
+    * A constant representing a top-right alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.TOP_RIGHT
+    * @since 3.0.0
+    * @type {integer}
+    */
+    TOP_RIGHT: 2,
+
+    /**
+    * A constant representing a left-top alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.LEFT_TOP
+    * @since 3.0.0
+    * @type {integer}
+    */
+    LEFT_TOP: 3,
+
+    /**
+    * A constant representing a left-center alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.LEFT_CENTER
+    * @since 3.0.0
+    * @type {integer}
+    */
+    LEFT_CENTER: 4,
+
+    /**
+    * A constant representing a left-bottom alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.LEFT_BOTTOM
+    * @since 3.0.0
+    * @type {integer}
+    */
+    LEFT_BOTTOM: 5,
+
+    /**
+    * A constant representing a center alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.CENTER
+    * @since 3.0.0
+    * @type {integer}
+    */
+    CENTER: 6,
+
+    /**
+    * A constant representing a right-top alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.RIGHT_TOP
+    * @since 3.0.0
+    * @type {integer}
+    */
+    RIGHT_TOP: 7,
+
+    /**
+    * A constant representing a right-center alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.RIGHT_CENTER
+    * @since 3.0.0
+    * @type {integer}
+    */
+    RIGHT_CENTER: 8,
+
+    /**
+    * A constant representing a right-bottom alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.RIGHT_BOTTOM
+    * @since 3.0.0
+    * @type {integer}
+    */
+    RIGHT_BOTTOM: 9,
+
+    /**
+    * A constant representing a bottom-left alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.BOTTOM_LEFT
+    * @since 3.0.0
+    * @type {integer}
+    */
+    BOTTOM_LEFT: 10,
+
+    /**
+    * A constant representing a bottom-center alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.BOTTOM_CENTER
+    * @since 3.0.0
+    * @type {integer}
+    */
+    BOTTOM_CENTER: 11,
+
+    /**
+    * A constant representing a bottom-right alignment or position.
+    * @constant
+    * @name Phaser.Display.Align.BOTTOM_RIGHT
+    * @since 3.0.0
+    * @type {integer}
+    */
+    BOTTOM_RIGHT: 12
+  };
+
+  var GetBottom = function GetBottom(gameObject) {
+    var height = GetDisplayHeight(gameObject);
+    return gameObject.y + height - height * gameObject.originY;
+  };
+
+  var GetCenterX = function GetCenterX(gameObject) {
+    var width = GetDisplayWidth(gameObject);
+    return gameObject.x - width * gameObject.originX + width * 0.5;
+  };
+
+  var SetBottom = function SetBottom(gameObject, value) {
+    var height = GetDisplayHeight(gameObject);
+    gameObject.y = value - height + height * gameObject.originY;
+    return gameObject;
+  };
+
+  var SetCenterX = function SetCenterX(gameObject, x) {
+    var width = GetDisplayWidth(gameObject);
+    var offsetX = width * gameObject.originX;
+    gameObject.x = x + offsetX - width * 0.5;
+    return gameObject;
+  };
+
+  var BottomCenter = function BottomCenter(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetCenterX(gameObject, GetCenterX(alignIn) + offsetX);
+    SetBottom(gameObject, GetBottom(alignIn) + offsetY);
+    return gameObject;
+  };
+
+  var GetLeft = function GetLeft(gameObject) {
+    var width = GetDisplayWidth(gameObject);
+    return gameObject.x - width * gameObject.originX;
+  };
+
+  var SetLeft = function SetLeft(gameObject, value) {
+    var width = GetDisplayWidth(gameObject);
+    gameObject.x = value + width * gameObject.originX;
+    return gameObject;
+  };
+
+  var BottomLeft = function BottomLeft(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetLeft(gameObject, GetLeft(alignIn) - offsetX);
+    SetBottom(gameObject, GetBottom(alignIn) + offsetY);
+    return gameObject;
+  };
+
+  var GetRight = function GetRight(gameObject) {
+    var width = GetDisplayWidth(gameObject);
+    return gameObject.x + width - width * gameObject.originX;
+  };
+
+  var SetRight = function SetRight(gameObject, value) {
+    var width = GetDisplayWidth(gameObject);
+    gameObject.x = value - width + width * gameObject.originX;
+    return gameObject;
+  };
+
+  var BottomRight = function BottomRight(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetRight(gameObject, GetRight(alignIn) + offsetX);
+    SetBottom(gameObject, GetBottom(alignIn) + offsetY);
+    return gameObject;
+  };
+
+  var SetCenterY = function SetCenterY(gameObject, y) {
+    var height = GetDisplayHeight(gameObject);
+    var offsetY = height * gameObject.originY;
+    gameObject.y = y + offsetY - height * 0.5;
+    return gameObject;
+  };
+
+  var CenterOn = function CenterOn(gameObject, x, y) {
+    SetCenterX(gameObject, x);
+    return SetCenterY(gameObject, y);
+  };
+
+  var GetCenterY = function GetCenterY(gameObject) {
+    var height = GetDisplayHeight(gameObject);
+    return gameObject.y - height * gameObject.originY + height * 0.5;
+  };
+
+  var Center = function Center(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    CenterOn(gameObject, GetCenterX(alignIn) + offsetX, GetCenterY(alignIn) + offsetY);
+    return gameObject;
+  };
+
+  var LeftCenter = function LeftCenter(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetLeft(gameObject, GetLeft(alignIn) - offsetX);
+    SetCenterY(gameObject, GetCenterY(alignIn) + offsetY);
+    return gameObject;
+  };
+
+  var RightCenter = function RightCenter(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetRight(gameObject, GetRight(alignIn) + offsetX);
+    SetCenterY(gameObject, GetCenterY(alignIn) + offsetY);
+    return gameObject;
+  };
+
+  var GetTop = function GetTop(gameObject) {
+    var height = GetDisplayHeight(gameObject);
+    return gameObject.y - height * gameObject.originY;
+  };
+
+  var SetTop = function SetTop(gameObject, value) {
+    var height = GetDisplayHeight(gameObject);
+    gameObject.y = value + height * gameObject.originY;
+    return gameObject;
+  };
+
+  var TopCenter = function TopCenter(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetCenterX(gameObject, GetCenterX(alignIn) + offsetX);
+    SetTop(gameObject, GetTop(alignIn) - offsetY);
+    return gameObject;
+  };
+
+  var TopLeft = function TopLeft(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetLeft(gameObject, GetLeft(alignIn) - offsetX);
+    SetTop(gameObject, GetTop(alignIn) - offsetY);
+    return gameObject;
+  };
+
+  var TopRight = function TopRight(gameObject, alignIn, offsetX, offsetY) {
+    if (offsetX === undefined) {
+      offsetX = 0;
+    }
+
+    if (offsetY === undefined) {
+      offsetY = 0;
+    }
+
+    SetRight(gameObject, GetRight(alignIn) + offsetX);
+    SetTop(gameObject, GetTop(alignIn) - offsetY);
+    return gameObject;
+  };
+
+  var AlignInMap = [];
+  AlignInMap[ALIGN_CONST.BOTTOM_CENTER] = BottomCenter;
+  AlignInMap[ALIGN_CONST.BOTTOM_LEFT] = BottomLeft;
+  AlignInMap[ALIGN_CONST.BOTTOM_RIGHT] = BottomRight;
+  AlignInMap[ALIGN_CONST.CENTER] = Center;
+  AlignInMap[ALIGN_CONST.LEFT_CENTER] = LeftCenter;
+  AlignInMap[ALIGN_CONST.RIGHT_CENTER] = RightCenter;
+  AlignInMap[ALIGN_CONST.TOP_CENTER] = TopCenter;
+  AlignInMap[ALIGN_CONST.TOP_LEFT] = TopLeft;
+  AlignInMap[ALIGN_CONST.TOP_RIGHT] = TopRight;
+
+  var QuickSet = function QuickSet(child, alignIn, position, offsetX, offsetY) {
+    return AlignInMap[position](child, alignIn, offsetX, offsetY);
+  };
+
+  var AlignIn = function AlignIn(child, x, y, width, height, align) {
+    globZone.setPosition(x, y).setSize(width, height);
+    QuickSet(child, globZone, align);
+  };
+
   var ShowCells = function ShowCells() {
     if (this.cellsCount === 0) {
       return;
@@ -3706,10 +4084,22 @@
           this.showCell(cell);
         }
 
+        var x, y;
+
         if (this.scrollMode === 0) {
-          cell.setXY(cellTLX, cellTLY);
+          x = cellTLX;
+          y = cellTLY;
         } else {
-          cell.setXY(cellTLY, cellTLX);
+          x = cellTLY;
+          y = cellTLX;
+        }
+
+        if (cell.align == null) {
+          cell.setXY(x, y);
+        } else {
+          var cellContainer = cell.getContainer();
+          AlignIn(cellContainer, x, y, cell.width, cell.height, cell.align);
+          cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
 

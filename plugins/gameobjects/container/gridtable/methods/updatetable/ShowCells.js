@@ -1,3 +1,5 @@
+import AlignIn from '../../../../../utils/actions/AlignIn.js';
+
 var ShowCells = function () {
     if (this.cellsCount === 0) {
         return;
@@ -32,10 +34,21 @@ var ShowCells = function () {
             if (!this.preVisibleCells.contains(cell)) {
                 this.showCell(cell);
             }
+
+            var x, y;
             if (this.scrollMode === 0) {
-                cell.setXY(cellTLX, cellTLY);
+                x = cellTLX;
+                y = cellTLY;
             } else {
-                cell.setXY(cellTLY, cellTLX);
+                x = cellTLY;
+                y = cellTLX;
+            }
+            if (cell.align == null) {
+                cell.setXY(x, y);
+            } else {
+                var cellContainer = cell.getContainer();
+                AlignIn(cellContainer, x, y, cell.width, cell.height, cell.align);
+                cell.setXY(cellContainer.x, cellContainer.y);
             }
         }
 
