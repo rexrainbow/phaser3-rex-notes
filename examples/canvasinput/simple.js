@@ -39,6 +39,10 @@ var CreateCanvasInput = function (scene, text) {
                 backgroundBottomY: 8,
                 backgroundHeight: 32
             },
+            cursorStyle: {
+                color: 'black',
+                backgroundColor: 'white'
+            },
 
             wrap: {
                 lineHeight: 40,
@@ -53,23 +57,6 @@ var CreateCanvasInput = function (scene, text) {
 
             onClose(textObject) {
                 textObject.setBackgroundStroke('white')
-            },
-
-            onAddChar(child) {
-            },
-
-            onCursorOut(child, cursorIndex, textObject) {
-                child.modifyStyle({
-                    color: 'white',
-                    backgroundColor: null
-                })
-            },
-
-            onCursorIn(child, cursorIndex, textObject) {
-                child.modifyStyle({
-                    color: 'black',
-                    backgroundColor: 'white'
-                })
             },
 
             text: text,

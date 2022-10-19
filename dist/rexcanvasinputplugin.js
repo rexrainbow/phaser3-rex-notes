@@ -6340,25 +6340,46 @@
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
-      var addCharCallback = GetValue(config, 'onAddChar');
+
+      _this.setCursorStyle(config.cursorStyle);
+
+      var addCharCallback = config.onAddChar;
 
       if (addCharCallback) {
         _this.on('addchar', addCharCallback);
       }
 
-      var cursorOutCallback = GetValue(config, 'onCursorOut');
+      if (_this.cursorStyle) {
+        _this.on('cursorin', function (child, index, canvasInput) {
+          var curStyle = child.style;
+          var cursorStyle = this.cursorStyle;
+          var styleSave = {};
+
+          for (var name in cursorStyle) {
+            styleSave[name] = curStyle[name];
+          }
+
+          child.styleSave = styleSave;
+          child.modifyStyle(cursorStyle);
+        }).on('cursorout', function (child, index, canvasInput) {
+          child.modifyStyle(child.styleSave);
+          child.styleSave = undefined;
+        });
+      }
+
+      var cursorOutCallback = config.onCursorOut;
 
       if (cursorOutCallback) {
         _this.on('cursorout', cursorOutCallback);
       }
 
-      var cursorInCallback = GetValue(config, 'onCursorIn');
+      var cursorInCallback = config.onCursorIn;
 
       if (cursorInCallback) {
         _this.on('cursorin', cursorInCallback);
       }
 
-      var moveCursorCallback = GetValue(config, 'onMoveCursor');
+      var moveCursorCallback = config.onMoveCursor;
 
       if (moveCursorCallback) {
         _this.on('movecursor', moveCursorCallback);
@@ -6432,6 +6453,12 @@
       key: "isOpened",
       get: function get() {
         return this.textEdit.isOpened;
+      }
+    }, {
+      key: "setCursorStyle",
+      value: function setCursorStyle(style) {
+        this.cursorStyle = style;
+        return this;
       }
     }]);
 

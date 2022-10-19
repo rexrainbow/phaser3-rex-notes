@@ -122,9 +122,12 @@ var txt = scene.add.rexCanvasInput({
         shadowOffsetY: 0,
         shadowBlur: 0,
         backgroundColor: null,
+        backgroundHeight: undefined,
+        backgroundBY: undefined,
         offsetX: 0,
         offsetY: 0
     },
+    cursorStyle: undefined,
 
     childrenInteractive: false,
 
@@ -228,6 +231,29 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
         - `child` : [character child](dynamictext.md#character)
+- `cursorStyle` : Will apply this style when cursor move on a character child.
+    - `undefined` : Ignore this behavior.
+    - A plain object
+        ```javascript
+        {
+            bold: false,
+            italic: false,
+            fontSize: '16px',
+            fontFamily: 'Courier',
+            color: '#fff',
+            stroke: '#fff',
+            strokeThickness: 0,
+            shadowColor: null,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 0,
+            backgroundColor: null,
+            backgroundHeight: undefined,
+            backgroundBY: undefined,
+            offsetX: 0,
+            offsetY: 0
+        }
+        ```
 
 ### Custom class
 
@@ -295,7 +321,7 @@ var isOpened = txt.isOpened;
     - `child` : [character child](dynamictext.md#character)
 - On cursor moving on a character child
     ```javascript
-    txt.on('cursorout', function(child, index, canvasInput) {
+    txt.on('cursorin', function(child, index, canvasInput) {
         child.modifyStyle({...})
     })
     ```

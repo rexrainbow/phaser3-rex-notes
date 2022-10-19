@@ -30,20 +30,41 @@ class CanvasInput extends DynamicText {
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
-        var addCharCallback = GetValue(config, 'onAddChar');
+        this.setCursorStyle(config.cursorStyle);
+
+        var addCharCallback = config.onAddChar;
         if (addCharCallback) {
             this.on('addchar', addCharCallback);
         }
 
-        var cursorOutCallback = GetValue(config, 'onCursorOut');
+        if (this.cursorStyle) {
+            this
+                .on('cursorin', function (child, index, canvasInput) {
+                    var curStyle = child.style;
+                    var cursorStyle = this.cursorStyle;
+                    var styleSave = {};
+                    for (var name in cursorStyle) {
+                        styleSave[name] = curStyle[name];
+                    }
+                    child.styleSave = styleSave;
+
+                    child.modifyStyle(cursorStyle);
+                })
+                .on('cursorout', function (child, index, canvasInput) {                    
+                    child.modifyStyle(child.styleSave);
+                    child.styleSave = undefined;
+                });
+        }
+
+        var cursorOutCallback = config.onCursorOut;
         if (cursorOutCallback) {
             this.on('cursorout', cursorOutCallback);
         }
-        var cursorInCallback = GetValue(config, 'onCursorIn');
+        var cursorInCallback = config.onCursorIn;
         if (cursorInCallback) {
             this.on('cursorin', cursorInCallback);
         }
-        var moveCursorCallback = GetValue(config, 'onMoveCursor');
+        var moveCursorCallback = config.onMoveCursor;
         if (moveCursorCallback) {
             this.on('movecursor', moveCursorCallback);
         }
@@ -103,6 +124,11 @@ class CanvasInput extends DynamicText {
 
     get isOpened() {
         return this.textEdit.isOpened;
+    }
+
+    setCursorStyle(style) {
+        this.cursorStyle = style;
+        return this;
     }
 }
 

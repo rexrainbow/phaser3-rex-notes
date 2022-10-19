@@ -8865,9 +8865,12 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
         <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">backgroundHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">backgroundBY</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
+    <span class="nx">cursorStyle</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">childrenInteractive</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
@@ -8981,6 +8984,30 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </li>
 </ul>
 </li>
+<li><code>cursorStyle</code> : Will apply this style when cursor move on a character child.<ul>
+<li><code>undefined</code> : Ignore this behavior.</li>
+<li>A plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">bold</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">italic</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+    <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">shadowColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">backgroundBY</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -9040,7 +9067,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </ul>
 </li>
 <li>On cursor moving on a character child
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cursorout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cursorin&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
 <span class="p">})</span>
 </code></pre></div><ul>
