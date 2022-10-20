@@ -125,7 +125,12 @@ var txt = scene.add.rexCanvasInput({
         backgroundHeight: undefined,
         backgroundBY: undefined,
         offsetX: 0,
-        offsetY: 0
+        offsetY: 0,
+
+        // Style when cursor move on
+        // 'cursor.color': ...
+        // 'cursor.backgroundColor': ...
+        // 'cursor.xxx': ...
     },
     cursorStyle: undefined,
 
@@ -254,6 +259,7 @@ var txt = scene.add.rexCanvasInput({
             offsetY: 0
         }
         ```
+    - Or add these style settings in `style` parameter, with prefix `'cursor.'`.
 
 ### Custom class
 

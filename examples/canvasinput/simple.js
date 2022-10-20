@@ -37,12 +37,17 @@ var CreateCanvasInput = function (scene, text) {
             style: {
                 fontSize: '24px',
                 backgroundBottomY: 8,
-                backgroundHeight: 32
+                backgroundHeight: 32,
+
+                // Solution A
+                'cursor.color': 'black',
+                'cursor.backgroundColor': 'white',
             },
-            cursorStyle: {
-                color: 'black',
-                backgroundColor: 'white'
-            },
+            // Solution B
+            // cursorStyle: {
+            //     color: 'black',
+            //     backgroundColor: 'white'
+            // },
 
             wrap: {
                 lineHeight: 40,

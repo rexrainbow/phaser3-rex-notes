@@ -1,10 +1,10 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
+import RetrieveKeysByPrefix from './methods/RetrieveKeysByPrefix.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class CanvasInput extends DynamicText {
@@ -20,17 +20,22 @@ class CanvasInput extends DynamicText {
         }
 
         // Set text later
-        var text = GetValue(config, 'text', undefined);
+        var text = config.text;
         if (text) {
             delete config.text;
         }
+
+        var cursorStyle = RetrieveKeysByPrefix(config.style, 'cursor.');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
-        this.setCursorStyle(config.cursorStyle);
+        if (config.cursorStyle) {
+            Object.assign(cursorStyle, config.cursorStyle);
+        }
+        this.setCursorStyle(cursorStyle);
 
         var addCharCallback = config.onAddChar;
         if (addCharCallback) {
@@ -50,7 +55,7 @@ class CanvasInput extends DynamicText {
 
                     child.modifyStyle(cursorStyle);
                 })
-                .on('cursorout', function (child, index, canvasInput) {                    
+                .on('cursorout', function (child, index, canvasInput) {
                     child.modifyStyle(child.styleSave);
                     child.styleSave = undefined;
                 });
