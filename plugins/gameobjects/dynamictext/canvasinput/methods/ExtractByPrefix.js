@@ -1,4 +1,4 @@
-var RetrieveKeysByPrefix = function (obj, prefix, out) {
+var ExtractByPrefix = function (obj, prefix, out) {
     if (out === undefined) {
         out = {};
     }
@@ -18,4 +18,4 @@ var RetrieveKeysByPrefix = function (obj, prefix, out) {
     return out;
 }
 
-export default RetrieveKeysByPrefix;
+export default ExtractByPrefix;

@@ -1,9 +1,11 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
-import RetrieveKeysByPrefix from './methods/RetrieveKeysByPrefix.js';
+import ExtractByPrefix from './methods/ExtractByPrefix.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
+import IsEmpty from '../../../utils/object/IsEmpty.js';
+import IsKeyValueEqual from '../../../utils/object/IsKeyValueEqual.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -25,7 +27,7 @@ class CanvasInput extends DynamicText {
             delete config.text;
         }
 
-        var cursorStyle = RetrieveKeysByPrefix(config.style, 'cursor.');
+        var cursorStyle = ExtractByPrefix(config.style, 'cursor.');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
@@ -35,7 +37,9 @@ class CanvasInput extends DynamicText {
         if (config.cursorStyle) {
             Object.assign(cursorStyle, config.cursorStyle);
         }
-        this.setCursorStyle(cursorStyle);
+        if (!IsEmpty(cursorStyle)) {
+            this.setCursorStyle(cursorStyle);
+        }
 
         var addCharCallback = config.onAddChar;
         if (addCharCallback) {
@@ -51,11 +55,19 @@ class CanvasInput extends DynamicText {
                     for (var name in cursorStyle) {
                         styleSave[name] = curStyle[name];
                     }
+                    if (IsKeyValueEqual(cursorStyle, styleSave)) {
+                        return;
+                    }
+
                     child.styleSave = styleSave;
 
                     child.modifyStyle(cursorStyle);
                 })
                 .on('cursorout', function (child, index, canvasInput) {
+                    if (!child.styleSave) {
+                        return;
+                    }
+
                     child.modifyStyle(child.styleSave);
                     child.styleSave = undefined;
                 });

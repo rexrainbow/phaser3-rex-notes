@@ -20400,7 +20400,7 @@
     return new HiddenTextEdit(parent, config);
   };
 
-  var RetrieveKeysByPrefix = function RetrieveKeysByPrefix(obj, prefix, out) {
+  var ExtractByPrefix = function ExtractByPrefix(obj, prefix, out) {
     if (out === undefined) {
       out = {};
     }
@@ -20909,6 +20909,26 @@
     textObject.runWordWrap();
   };
 
+  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
+    for (var key in objA) {
+      if (!(key in objB)) {
+        return false;
+      }
+
+      if (objA[key] !== objB[key]) {
+        return false;
+      }
+    }
+
+    for (var key in objB) {
+      if (!(key in objA)) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
 
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
@@ -20938,7 +20958,7 @@
         delete config.text;
       }
 
-      var cursorStyle = RetrieveKeysByPrefix(config.style, 'cursor.');
+      var cursorStyle = ExtractByPrefix(config.style, 'cursor.');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
@@ -20947,7 +20967,9 @@
         Object.assign(cursorStyle, config.cursorStyle);
       }
 
-      _this.setCursorStyle(cursorStyle);
+      if (!IsEmpty(cursorStyle)) {
+        _this.setCursorStyle(cursorStyle);
+      }
 
       var addCharCallback = config.onAddChar;
 
@@ -20965,9 +20987,17 @@
             styleSave[name] = curStyle[name];
           }
 
+          if (IsKeyValueEqual(cursorStyle, styleSave)) {
+            return;
+          }
+
           child.styleSave = styleSave;
           child.modifyStyle(cursorStyle);
         }).on('cursorout', function (child, index, canvasInput) {
+          if (!child.styleSave) {
+            return;
+          }
+
           child.modifyStyle(child.styleSave);
           child.styleSave = undefined;
         });
