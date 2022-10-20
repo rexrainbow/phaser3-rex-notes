@@ -135,6 +135,8 @@ class Background extends RenderBase {
                 GetValue(o, 'cornerIteration', null)
             );
         }
+
+        return this;
     }
 
     setCornerRadius(radius, iteration) {

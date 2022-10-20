@@ -38,16 +38,8 @@ class CanvasInput extends DynamicText {
             Object.assign(cursorStyle, config.cursorStyle);
         }
         if (!IsEmpty(cursorStyle)) {
-            this.setCursorStyle(cursorStyle);
-        }
-
-        var addCharCallback = config.onAddChar;
-        if (addCharCallback) {
-            this.on('addchar', addCharCallback);
-        }
-
-        if (this.cursorStyle) {
             this
+                .setCursorStyle(cursorStyle)
                 .on('cursorin', function (child, index, canvasInput) {
                     var curStyle = child.style;
                     var cursorStyle = this.cursorStyle;
@@ -62,7 +54,7 @@ class CanvasInput extends DynamicText {
                     child.styleSave = styleSave;
 
                     child.modifyStyle(cursorStyle);
-                })
+                }, this)
                 .on('cursorout', function (child, index, canvasInput) {
                     if (!child.styleSave) {
                         return;
@@ -70,7 +62,12 @@ class CanvasInput extends DynamicText {
 
                     child.modifyStyle(child.styleSave);
                     child.styleSave = undefined;
-                });
+                }, this)
+        }
+
+        var addCharCallback = config.onAddChar;
+        if (addCharCallback) {
+            this.on('addchar', addCharCallback);
         }
 
         var cursorOutCallback = config.onCursorOut;
