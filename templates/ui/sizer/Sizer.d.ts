@@ -189,4 +189,12 @@ declare class Sizer extends BaseSizer {
         proportion: number
     ): this;
 
+    getChildExpand(
+        gameObject: Phaser.GameObjects.GameObject
+    ): boolean;
+
+    setChildExpand(
+        gameObject: Phaser.GameObjects.GameObject,
+        expand: boolean
+    ): this;
 }

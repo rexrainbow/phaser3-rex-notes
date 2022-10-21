@@ -423,6 +423,12 @@ See also - [dirty](ui-basesizer.md#dirty)
 - Set proportion of child : `sizer.setChildProportion(child, proportion)`
 - Get proportion of child : `var align = sizer.getChildProportion(child)`
 
+### Expand of child
+
+- Set expand of child in [config of adding child](ui-sizer.md#add-child)
+- Set expand of child : `sizer.setChildExpand(child, expand)`
+- Get expand of child : `var expand = sizer.getChildExpand(child)`
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).

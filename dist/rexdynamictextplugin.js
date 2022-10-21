@@ -1963,6 +1963,8 @@
         if (o.hasOwnProperty('cornerRadius')) {
           this.setCornerRadius(o.cornerRadius, GetValue$5(o, 'cornerIteration', null));
         }
+
+        return this;
       }
     }, {
       key: "setCornerRadius",

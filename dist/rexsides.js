@@ -2450,7 +2450,7 @@
 
   Object.assign(ContainerLite.prototype, methods$4);
 
-  var GetSizerConfig = function GetSizerConfig(gameObject) {
+  var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
       gameObject.rexSizer = {};
     }
@@ -2458,8 +2458,16 @@
     return gameObject.rexSizer;
   };
 
+  function GetSizerConfig (gameObject) {
+    if (gameObject === undefined) {
+      gameObject = this;
+    }
+
+    return GetSizerConfig$1(gameObject);
+  }
+
   var GetChildPrevState = function GetChildPrevState(child) {
-    var childConfig = GetSizerConfig(child);
+    var childConfig = GetSizerConfig$1(child);
 
     if (!childConfig.hasOwnProperty('prevState')) {
       childConfig.prevState = {};
@@ -6184,7 +6192,7 @@
       return false;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     return !config.hidden;
   };
 
@@ -6193,7 +6201,7 @@
       return;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     config.hidden = hidden;
     var parent = GetParent$1(gameObject);
 

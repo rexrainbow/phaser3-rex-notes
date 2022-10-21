@@ -2438,7 +2438,7 @@
 
   Object.assign(ContainerLite.prototype, methods$8);
 
-  var GetSizerConfig = function GetSizerConfig(gameObject) {
+  var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
       gameObject.rexSizer = {};
     }
@@ -2446,8 +2446,16 @@
     return gameObject.rexSizer;
   };
 
+  function GetSizerConfig (gameObject) {
+    if (gameObject === undefined) {
+      gameObject = this;
+    }
+
+    return GetSizerConfig$1(gameObject);
+  }
+
   var GetChildPrevState = function GetChildPrevState(child) {
-    var childConfig = GetSizerConfig(child);
+    var childConfig = GetSizerConfig$1(child);
 
     if (!childConfig.hasOwnProperty('prevState')) {
       childConfig.prevState = {};
@@ -6172,7 +6180,7 @@
       return false;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     return !config.hidden;
   };
 
@@ -6181,7 +6189,7 @@
       return;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     config.hidden = hidden;
     var parent = GetParent$1(gameObject);
 
@@ -10609,6 +10617,40 @@
     }
   };
 
+  var AlignMethods = {
+    getChildAlign: function getChildAlign(gameObject) {
+      return this.getSizerConfig(gameObject).align;
+    },
+    setChildAlign: function setChildAlign(gameObject, align) {
+      if (typeof align === 'string') {
+        align = AlignConst[align];
+      }
+
+      this.getSizerConfig(gameObject).align = align;
+      return this;
+    }
+  };
+
+  var ProportionMethods = {
+    getChildProportion: function getChildProportion(gameObject) {
+      return this.getSizerConfig(gameObject).proportion;
+    },
+    setChildProportion: function setChildProportion(gameObject, proportion) {
+      this.getSizerConfig(gameObject).proportion = proportion;
+      return this;
+    }
+  };
+
+  var ExpandMethods = {
+    getChildExpand: function getChildExpand(gameObject) {
+      return this.getSizerConfig(gameObject).expand;
+    },
+    setChildExpand: function setChildExpand(gameObject, expand) {
+      this.getSizerConfig(gameObject).expand = expand;
+      return this;
+    }
+  };
+
   var methods$5 = {
     getChildrenWidth: GetChildrenWidth$2,
     getChildrenHeight: GetChildrenHeight$2,
@@ -10620,7 +10662,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$5, AddChildMethods$5, RemoveChildMethods$4);
+  Object.assign(methods$5, AddChildMethods$5, RemoveChildMethods$4, AlignMethods, ProportionMethods, ExpandMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;

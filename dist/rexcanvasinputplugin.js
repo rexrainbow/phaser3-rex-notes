@@ -1963,6 +1963,8 @@
         if (o.hasOwnProperty('cornerRadius')) {
           this.setCornerRadius(o.cornerRadius, GetValue$a(o, 'cornerIteration', null));
         }
+
+        return this;
       }
     }, {
       key: "setCornerRadius",
@@ -6395,17 +6397,7 @@
       }
 
       if (!IsEmpty(cursorStyle)) {
-        _this.setCursorStyle(cursorStyle);
-      }
-
-      var addCharCallback = config.onAddChar;
-
-      if (addCharCallback) {
-        _this.on('addchar', addCharCallback);
-      }
-
-      if (_this.cursorStyle) {
-        _this.on('cursorin', function (child, index, canvasInput) {
+        _this.setCursorStyle(cursorStyle).on('cursorin', function (child, index, canvasInput) {
           var curStyle = child.style;
           var cursorStyle = this.cursorStyle;
           var styleSave = {};
@@ -6420,14 +6412,20 @@
 
           child.styleSave = styleSave;
           child.modifyStyle(cursorStyle);
-        }).on('cursorout', function (child, index, canvasInput) {
+        }, _assertThisInitialized(_this)).on('cursorout', function (child, index, canvasInput) {
           if (!child.styleSave) {
             return;
           }
 
           child.modifyStyle(child.styleSave);
           child.styleSave = undefined;
-        });
+        }, _assertThisInitialized(_this));
+      }
+
+      var addCharCallback = config.onAddChar;
+
+      if (addCharCallback) {
+        _this.on('addchar', addCharCallback);
       }
 
       var cursorOutCallback = config.onCursorOut;

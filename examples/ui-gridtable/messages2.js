@@ -21,8 +21,8 @@ class Demo extends Phaser.Scene {
         var gridTable = this.rexUI.add.gridTable({
             x: 400,
             y: 300,
-            width: 400,
-            height: 420,
+            width: 600,
+            height: 500,
 
             scrollMode: 0,
 
