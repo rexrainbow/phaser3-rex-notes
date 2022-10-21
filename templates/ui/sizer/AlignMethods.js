@@ -2,7 +2,7 @@ import ALIGNMODE from '../utils/AlignConst.js';
 
 export default {
     getChildAlign(gameObject) {
-        return this.getSizerConfig(gameObject).algin;
+        return this.getSizerConfig(gameObject).align;
     },
 
     setChildAlign(gameObject, align) {
@@ -10,7 +10,7 @@ export default {
             align = ALIGNMODE[align];
         }
 
-        this.getSizerConfig(gameObject).algin = align;
+        this.getSizerConfig(gameObject).align = align;
         return this;
     },
 
