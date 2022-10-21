@@ -7288,6 +7288,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rtl" class="md-nav__link">
+    RTL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alignment-of-child" class="md-nav__link">
+    Alignment of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proportion-of-child" class="md-nav__link">
+    Proportion of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8752,6 +8773,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rtl" class="md-nav__link">
+    RTL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alignment-of-child" class="md-nav__link">
+    Alignment of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proportion-of-child" class="md-nav__link">
+    Proportion of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9150,6 +9192,34 @@
 <li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
 </ul>
 </li>
+</ul>
+<h3 id="rtl">RTL<a class="headerlink" href="#rtl" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set rtl in <a href="./#add-sizer-object">config of constructor</a></li>
+<li>Set rtl : <code>sizer.setRTL(enable)</code></li>
+<li>Get rtl : <code>var rtl = sizer.rtl</code></li>
+</ul>
+<h3 id="alignment-of-child">Alignment of child<a class="headerlink" href="#alignment-of-child" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set alignment of child in <a href="./#add-child">config of adding child</a></li>
+<li>Set alignment of child : <code>sizer.setChildAlign(child, align)</code><ul>
+<li><code>align</code> :<ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at top-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Get alignment of child : <code>var align = sizer.getChildAlign(child)</code></li>
+</ul>
+<h3 id="proportion-of-child">Proportion of child<a class="headerlink" href="#proportion-of-child" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set proportion of child in <a href="./#add-child">config of adding child</a></li>
+<li>Set proportion of child : <code>sizer.setChildProportion(child, proportion)</code></li>
+<li>Get proportion of child : <code>var align = sizer.getChildProportion(child)</code></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>

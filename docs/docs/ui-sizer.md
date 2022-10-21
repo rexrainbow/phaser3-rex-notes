@@ -399,6 +399,30 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - `recursive` : Set `true` to search all children recursively.
 
+### RTL
+
+- Set rtl in [config of constructor](ui-sizer.md#add-sizer-object)
+- Set rtl : `sizer.setRTL(enable)`
+- Get rtl : `var rtl = sizer.rtl`
+
+### Alignment of child
+
+- Set alignment of child in [config of adding child](ui-sizer.md#add-child)
+- Set alignment of child : `sizer.setChildAlign(child, align)`
+    - `align` :
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+        - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+        - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
+        - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.
+- Get alignment of child : `var align = sizer.getChildAlign(child)`
+
+### Proportion of child
+
+- Set proportion of child in [config of adding child](ui-sizer.md#add-child)
+- Set proportion of child : `sizer.setChildProportion(child, proportion)`
+- Get proportion of child : `var align = sizer.getChildProportion(child)`
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).
