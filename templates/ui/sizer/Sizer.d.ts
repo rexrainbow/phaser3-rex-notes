@@ -69,6 +69,8 @@ declare class Sizer extends BaseSizer {
         orientation?: Sizer.OrientationTypes
     ): this;
 
+    setRTL(enable?: boolean): this;
+
     setItemSpacing(value: number): this;
 
     add(
@@ -168,4 +170,23 @@ declare class Sizer extends BaseSizer {
     clear(
         destroyChild?: boolean
     ): this;
+
+    getChildAlign(
+        gameObject: Phaser.GameObjects.GameObject
+    ): Sizer.AlignTypes;
+
+    setChildAlign(
+        gameObject: Phaser.GameObjects.GameObject,
+        align: Sizer.AlignTypes
+    ): this;
+
+    getChildProportion(
+        gameObject: Phaser.GameObjects.GameObject
+    ): number;
+
+    setChildProportion(
+        gameObject: Phaser.GameObjects.GameObject,
+        proportion: number
+    ): this;
+
 }

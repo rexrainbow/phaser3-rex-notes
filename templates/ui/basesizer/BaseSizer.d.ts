@@ -178,6 +178,10 @@ declare class BaseSizer extends ContainerLite {
         gameObject?: Phaser.GameObjects.GameObject
     ): BaseSizer | null;
 
+    getSizerConfig(
+        gameObject?: Phaser.GameObjects.GameObject
+    ): { [name: string]: any };
+
     getChildPrevState(
         gameObject: Phaser.GameObjects.GameObject
     ): BaseSizer.PrevState;

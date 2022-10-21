@@ -1,4 +1,4 @@
-import GetSizerConfig from '../utils/GetSizerConfig.js';
+import GetSizerConfig from './GetSizerConfig.js';
 import GetChildPrevState from '../utils/GetChildPrevState.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from './DrawBounds.js';
