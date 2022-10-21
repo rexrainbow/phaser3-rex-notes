@@ -109,6 +109,7 @@ declare class GridTable extends ContainerLite {
     setTableOYByPercentage(t: number): this;
     t: number;
     getTableOYPercentage(): number;
+    scrollToBottom(): this;
 
     updateTable(refresh?: boolean): this;
     updateVisibleCell(cellIdx: number): this;

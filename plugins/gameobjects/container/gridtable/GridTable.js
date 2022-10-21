@@ -165,6 +165,14 @@ class GridTable extends ContainerLite {
         return this.getTableOYPercentage();
     }
 
+    scrollToBottom() {
+        while (this.t !== 1) {
+            this.t = 1;
+        }
+
+        return this;
+    }
+
     getCell(cellIdx) {
         return this.table.getCell(cellIdx, true);
     }

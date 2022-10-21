@@ -358,6 +358,12 @@ It is equal to `cellInvisibleCallback` in configuration.
 !!! note "Use case"
     Scroll table by [slider](slider.md) behavior.
 
+#### Scroll to bottom
+
+```javascript
+table.scrollToBottom();
+```
+
 ### Refresh table content
 
 - Refresh all visible cells.

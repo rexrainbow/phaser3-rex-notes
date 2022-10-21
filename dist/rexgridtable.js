@@ -15152,6 +15152,15 @@
         this.setTableOYByPercentage(value).updateTable();
       }
     }, {
+      key: "scrollToBottom",
+      value: function scrollToBottom() {
+        while (this.t !== 1) {
+          this.t = 1;
+        }
+
+        return this;
+      }
+    }, {
       key: "getCell",
       value: function getCell(cellIdx) {
         return this.table.getCell(cellIdx, true);
