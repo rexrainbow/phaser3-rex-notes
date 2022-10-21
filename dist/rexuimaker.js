@@ -29666,7 +29666,11 @@
     }, {
       key: "scrollToBottom",
       value: function scrollToBottom() {
-        this.t = 1;
+        // Panel/Table height might be expanded while cells are visible
+        while (this.t !== 1) {
+          this.t = 1;
+        }
+
         return this;
       }
     }, {

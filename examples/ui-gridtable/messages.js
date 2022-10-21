@@ -96,6 +96,7 @@ class Demo extends Phaser.Scene {
             items: GetItems(100)
         })
             .layout()
+        //.scrollToBottom()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
     }
