@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
 
             scrollMode: 0,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
 
             table: {
                 columns: 1,
@@ -66,9 +66,6 @@ class Demo extends Phaser.Scene {
                 var previousItem = items[index - 1];
                 var isTheSameName = (previousItem) ? (previousItem.name === item.name) : false;
 
-                // Set mini width
-                cellContainer.setMinWidth(width);
-
                 // Set icon
                 var iconGameObject = cellContainer.getElement('icon');
                 if (isTheSameName) {
@@ -88,24 +85,34 @@ class Demo extends Phaser.Scene {
                 }
 
                 // Set content
-                cellContainer.getElement('content').setText(item.content);
+                cellContainer.getElement('content.text')
+                    .setWordWrapWidth(width - 100)
+                    .setText(item.content);
 
                 // Set rtl
                 cellContainer.setRTL(!item.isLeft);
+                cell.setCellContainerAlign((item.isLeft) ? 'left' : 'right');
+
+                // Set padding
+                if (isTheSameName) {
+                    cellContainer.setInnerPadding('top', 5);
+                } else {
+                    cellContainer.setInnerPadding('top', 20);
+                }
 
                 // Layout manually, to get cell height
                 cellContainer
                     .setDirty(true).layout()  // Run layout manually
                     .setDirty(false)          // Don't run layout again
 
-                cell.height = cellContainer.height + 10;
+                cell.height = cellContainer.height;
 
                 return cellContainer;
             },
             items: GetItems(100)
         })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);
+        //.drawBounds(this.add.graphics(), 0xAA0000);
 
     }
 
@@ -117,15 +124,15 @@ var CreateCellContainer = function (scene) {
     var name = scene.add.text(0, 0, '');
     var content = scene.rexUI.add.label({
         orientation: 'x',
-        background: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10).setStrokeStyle(2, 0xffffff),
-        text: scene.rexUI.wrapExpandText(scene.add.text(0, 0, '')),
-        expandTextWidth: true,
+        background: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10).setStrokeStyle(2, 0x888888),
+        text: scene.add.text(0, 0, ''),
         space: { left: 10, right: 10, top: 10, bottom: 10 },
     })
 
     var messageSizer = scene.rexUI.add.sizer({
+        width: 0,
         orientation: 'y',
-        space: { item: 10 }
+        space: { item: 5 }
     })
         .add(name)
         .add(content, { expand: true })

@@ -62,7 +62,7 @@ var LayoutChildren = function () {
                 break;
         }
 
-
+        var isFirstChild = true;
         for (var j = 0, jcnt = lineChlidren.length; j < jcnt; j++) {
             child = lineChlidren[j];
             if (child.rexSizer.hidden) {
@@ -75,10 +75,12 @@ var LayoutChildren = function () {
             PreLayoutChild.call(this, child);
 
             x = (itemX + padding.left);
-            if (j > 0) {
+
+            if (isFirstChild) {
+                isFirstChild = false;
+            } else {
                 x += itemSpace;
             }
-
 
             indentTop = (j % 2) ? indentTopEven : indentTopOdd;
             y = (itemY + indentTop + padding.top);

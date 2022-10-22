@@ -9996,6 +9996,9 @@
     if (this.orientation === 0) {
       // x
       // Get summation of minimum width
+      var itemSpace = this.space.item;
+      var isFirstChild = true;
+
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
 
@@ -10012,8 +10015,10 @@
         padding = child.rexSizer.padding;
         childWidth += padding.left + padding.right;
 
-        if (i > 0) {
-          childWidth += this.space.item;
+        if (isFirstChild) {
+          isFirstChild = false;
+        } else {
+          childWidth += itemSpace;
         }
 
         result += childWidth;
@@ -10069,6 +10074,9 @@
       }
     } else {
       // Get summation of minimum height
+      var itemSpace = this.space.item;
+      var isFirstChild = true;
+
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
 
@@ -10089,8 +10097,10 @@
         padding = child.rexSizer.padding;
         childHeight += padding.top + padding.bottom;
 
-        if (i > 0) {
-          childHeight += this.space.item;
+        if (isFirstChild) {
+          isFirstChild = false;
+        } else {
+          childHeight += itemSpace;
         }
 
         result += childHeight;
@@ -12159,6 +12169,8 @@
           break;
       }
 
+      var isFirstChild = true;
+
       for (var j = 0, jcnt = lineChlidren.length; j < jcnt; j++) {
         child = lineChlidren[j];
 
@@ -12171,7 +12183,9 @@
         PreLayoutChild.call(this, child);
         x = itemX + padding.left;
 
-        if (j > 0) {
+        if (isFirstChild) {
+          isFirstChild = false;
+        } else {
           x += itemSpace;
         }
 

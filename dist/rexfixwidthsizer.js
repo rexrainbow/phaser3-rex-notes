@@ -10108,6 +10108,8 @@
           break;
       }
 
+      var isFirstChild = true;
+
       for (var j = 0, jcnt = lineChlidren.length; j < jcnt; j++) {
         child = lineChlidren[j];
 
@@ -10120,7 +10122,9 @@
         PreLayoutChild.call(this, child);
         x = itemX + padding.left;
 
-        if (j > 0) {
+        if (isFirstChild) {
+          isFirstChild = false;
+        } else {
           x += itemSpace;
         }
 

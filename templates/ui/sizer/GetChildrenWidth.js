@@ -12,6 +12,8 @@ var GetChildrenWidth = function (minimumMode) {
     var child, padding, childWidth;
     if (this.orientation === 0) { // x
         // Get summation of minimum width
+        var itemSpace = this.space.item;
+        var isFirstChild = true;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
             if (child.rexSizer.hidden) {
@@ -25,9 +27,13 @@ var GetChildrenWidth = function (minimumMode) {
             }
             padding = child.rexSizer.padding;
             childWidth += (padding.left + padding.right);
-            if (i > 0) {
-                childWidth += this.space.item;
+
+            if (isFirstChild) {
+                isFirstChild = false;
+            } else {
+                childWidth += itemSpace;
             }
+
             result += childWidth;
         }
     } else {
