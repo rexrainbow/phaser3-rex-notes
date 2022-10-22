@@ -1848,9 +1848,9 @@
     return RenderBase;
   }(Base$3);
 
-  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var TransformMatrix$1 = Phaser.GameObjects.Components.TransformMatrix;
   var GetTint$2 = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-  var FrameMatrix = new TransformMatrix();
+  var FrameMatrix = new TransformMatrix$1();
 
   var WebglRender = function WebglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
     var width = this._width,
@@ -29575,7 +29575,7 @@
     if (out === undefined) {
       out = {};
     } else if (out === true) {
-      out = globOut;
+      out = globOut$1;
     }
 
     out.left = false;
@@ -29649,7 +29649,7 @@
     return out;
   };
 
-  var globOut = {};
+  var globOut$1 = {};
 
   var GetValue$1q = Phaser.Utils.Objects.GetValue;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
@@ -31763,6 +31763,44 @@
     }
   };
 
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var TransformXY = Phaser.Math.TransformXY;
+
+  var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
+    if (camera === undefined) {
+      camera = gameObject.scene.cameras.main;
+    }
+
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+
+    var csx = camera.scrollX;
+    var csy = camera.scrollY;
+    var px = worldX + csx * gameObject.scrollFactorX - csx;
+    var py = worldY + csy * gameObject.scrollFactorY - csy;
+
+    if (gameObject.parentContainer) {
+      if (tempMatrix$1 === undefined) {
+        tempMatrix$1 = new TransformMatrix();
+      }
+
+      gameObject.getWorldTransformMatrix(tempMatrix$1, parentMatrix);
+      tempMatrix$1.applyInverse(px, py, out);
+    } else {
+      TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+    }
+
+    out.x += gameObject.displayOriginX;
+    out.y += gameObject.displayOriginY;
+    return out;
+  };
+
+  var tempMatrix$1;
+  var globOut = {};
+
   var GetValue$1d = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$o = Phaser.Utils.Objects.IsPlainObject;
 
@@ -31792,7 +31830,19 @@
       return _this;
     }
 
-    return _createClass(CustomShapes);
+    _createClass(CustomShapes, [{
+      key: "worldToLocalXY",
+      value: function worldToLocalXY(worldX, worldY, camera, out) {
+        if (typeof camera === 'boolean') {
+          out = camera;
+          camera = undefined;
+        }
+
+        return WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
+      }
+    }]);
+
+    return CustomShapes;
   }(BaseShapes);
 
   Object.assign(CustomShapes.prototype, ShapesUpdateMethods);

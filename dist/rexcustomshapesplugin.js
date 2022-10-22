@@ -2151,6 +2151,44 @@
     }
   };
 
+  var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
+  var TransformXY = Phaser.Math.TransformXY;
+
+  var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
+    if (camera === undefined) {
+      camera = gameObject.scene.cameras.main;
+    }
+
+    if (out === undefined) {
+      out = {};
+    } else if (out === true) {
+      out = globOut;
+    }
+
+    var csx = camera.scrollX;
+    var csy = camera.scrollY;
+    var px = worldX + csx * gameObject.scrollFactorX - csx;
+    var py = worldY + csy * gameObject.scrollFactorY - csy;
+
+    if (gameObject.parentContainer) {
+      if (tempMatrix === undefined) {
+        tempMatrix = new TransformMatrix();
+      }
+
+      gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
+      tempMatrix.applyInverse(px, py, out);
+    } else {
+      TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
+    }
+
+    out.x += gameObject.displayOriginX;
+    out.y += gameObject.displayOriginY;
+    return out;
+  };
+
+  var tempMatrix;
+  var globOut = {};
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -2180,7 +2218,19 @@
       return _this;
     }
 
-    return _createClass(CustomShapes);
+    _createClass(CustomShapes, [{
+      key: "worldToLocalXY",
+      value: function worldToLocalXY(worldX, worldY, camera, out) {
+        if (typeof camera === 'boolean') {
+          out = camera;
+          camera = undefined;
+        }
+
+        return WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
+      }
+    }]);
+
+    return CustomShapes;
   }(BaseShapes);
 
   Object.assign(CustomShapes.prototype, ShapesUpdateMethods);

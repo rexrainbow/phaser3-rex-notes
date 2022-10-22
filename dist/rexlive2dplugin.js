@@ -11198,6 +11198,10 @@
   var TransformXY = Phaser.Math.TransformXY;
 
   var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
+    if (camera === undefined) {
+      camera = gameObject.scene.cameras.main;
+    }
+
     if (out === undefined) {
       out = {};
     } else if (out === true) {
