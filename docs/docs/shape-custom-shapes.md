@@ -9,6 +9,7 @@ Custom shapes on shape.
 
 - [Speech bubble](https://codepen.io/rexrainbow/pen/vYgjyPJ)
 - [Jigsaw](https://codepen.io/rexrainbow/pen/vYZNZwr)
+- [World to localXY](https://codepen.io/rexrainbow/pen/PoeMXXQ)
 
 ## Usage
 
@@ -246,6 +247,18 @@ Will set dirty and redraw shapes
     ```
 
 Will set dirty and redraw shapes. Apply styles to shapes in update callback.
+
+#### World position to local position
+
+```javascript
+var localXY = customShapes.worldToLocalXY(worldX, worldY); // localXY: {x, y}
+```
+
+or
+
+```javascript
+var out = customShapes.worldToLocalXY(worldX, worldY, camera, out);
+```
 
 #### Recreate shapes
 
