@@ -1,5 +1,6 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import ShapesUpdateMethods from './ShapesUpdateMethods.js';
+import WorldXYToGameObjectLocalXY from '../../../utils/position/WorldXYToGameObjectLocalXY.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -16,6 +17,15 @@ class CustomShapes extends BaseShapes {
         super(scene, x, y, width, height);
         this.type = GetValue(config, 'type', 'rexCustomShapes');
         this.buildShapes(config);
+    }
+
+    worldToLocalXY(worldX, worldY, camera, out) {
+        if (typeof (camera) === 'boolean') {
+            out = camera;
+            camera = undefined;
+        }
+
+        return WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
     }
 }
 

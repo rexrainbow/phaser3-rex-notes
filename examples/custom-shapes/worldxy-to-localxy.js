@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import CustomShapesPlugin from '../../plugins/customshapes-plugin.js';
-import WorldXYToGameObjectLocalXY from '../../plugins/utils/position/WorldXYToGameObjectLocalXY.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -60,7 +59,7 @@ var CreateSpeechBubbleShape = function (scene) {
             var worldX = this.getData('x');
             var worldY = this.getData('y');
             if ((worldX !== undefined) && (worldY !== undefined)) {
-                var localXY = WorldXYToGameObjectLocalXY(this, worldX, worldY, undefined, true);
+                var localXY = this.worldToLocalXY(worldX, worldY, true);
                 localX = Phaser.Math.Clamp(localXY.x, 0, this.width);
 
             } else {
