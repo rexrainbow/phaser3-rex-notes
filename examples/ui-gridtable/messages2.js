@@ -86,7 +86,7 @@ class Demo extends Phaser.Scene {
 
                 // Set content
                 cellContainer.getElement('content.text')
-                    .setWordWrapWidth(width - 100)
+                    .setWordWrapWidth(width - 140)
                     .setText(item.content);
 
                 // Set rtl
