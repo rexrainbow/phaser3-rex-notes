@@ -13280,10 +13280,16 @@
     }, {
       key: "scrollToBottom",
       value: function scrollToBottom() {
-        // Panel/Table height might be expanded while cells are visible
-        while (this.t !== 1) {
+        this.t = 1; // t will be 0 if panel/table does not exceed visible area
+
+        if (this.t === 0) {
+          return this;
+        } // Panel/Table height might be expanded while cells are visible        
+
+
+        do {
           this.t = 1;
-        }
+        } while (this.t !== 1);
 
         return this;
       }
@@ -15154,9 +15160,16 @@
     }, {
       key: "scrollToBottom",
       value: function scrollToBottom() {
-        while (this.t !== 1) {
+        this.t = 1; // t will be 0 if table does not exceed visible area
+
+        if (this.t === 0) {
+          return this;
+        } // Table height might be expanded while cells are visible        
+
+
+        do {
           this.t = 1;
-        }
+        } while (this.t !== 1);
 
         return this;
       }
