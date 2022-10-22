@@ -3353,23 +3353,21 @@
         out = [];
       }
 
-      var children = this.children,
-          child;
+      var queue = [this];
 
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
+      while (queue.length > 0) {
+        var current = queue.shift();
 
-        if (child.rexSizer && child.rexSizer.hidden) {
-          // Don't add hidden child
+        if (current.rexSizer && current.rexSizer.hidden) {
           continue;
         }
 
-        out.push(child);
+        if (current !== this) {
+          out.push(current);
+        }
 
-        if (child.hasOwnProperty('isRexContainerLite')) {
-          var _out;
-
-          (_out = out).push.apply(_out, _toConsumableArray(child.getAllShownChildren()));
+        if (current.isRexContainerLite) {
+          queue.push.apply(queue, _toConsumableArray(current.children));
         }
       }
 
