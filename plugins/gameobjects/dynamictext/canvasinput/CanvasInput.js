@@ -27,23 +27,23 @@ class CanvasInput extends DynamicText {
             delete config.text;
         }
 
-        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
         var focusStyle = ExtractByPrefix(config.background, 'focus');
+        var cursorStyle = ExtractByPrefix(config.style, 'cursor');        
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
-        if (config.cursorStyle) {
-            Object.assign(cursorStyle, config.cursorStyle);
-        }
-        RegisterCursorStyle.call(this, cursorStyle);
-
         if (config.focusStyle) {
             Object.assign(focusStyle, config.focusStyle);
         }
         RegisterFocusStyle.call(this, focusStyle);
+
+        if (config.cursorStyle) {
+            Object.assign(cursorStyle, config.cursorStyle);
+        }
+        RegisterCursorStyle.call(this, cursorStyle);
 
         var addCharCallback = config.onAddChar;
         if (addCharCallback) {

@@ -16,9 +16,52 @@ declare namespace CanvasInput {
         canvasInput: CanvasInput
     ) => void;
 
+    interface IConfigBackground extends DynamicText.IConfigBackground {
+        'focus.color'?: string | number | null,
+        'focus.color2'?: string | number | null,
+        'focus.horizontalGradient'?: boolean,
+
+        'focus.stroke'?: string | number | null,
+        'focus.strokeThickness'?: number,
+
+        'focus.cornerRadius'?: number |
+        ({ x?: number, y?: number }) |
+        DynamicText.IRadiusConfig,
+        'focus.cornerIteration'?: number
+    }
+
+    interface IConfigTextStyle extends DynamicText.IConfigTextStyle {
+        'cursor.bold'?: boolean,
+        'cursor.italic'?: boolean,
+        'cursor.fontSize'?: string | number,
+        'cursor.fontFamily'?: string,
+        'cursor.color'?: string | number | null,
+        'cursor.stroke'?: string | number | null,
+        'cursor.strokeThickness'?: number,
+        'cursor.shadowColor'?: string | number | null,
+        'cursor.shadowOffsetX'?: number,
+        'cursor.shadowOffsetY'?: number,
+        'cursor.shadowBlur'?: number,
+        'cursor.backgroundColor'?: string | number | null,
+        'cursor.offsetX'?: number,
+        'cursor.offsetY'?: number,
+        'cursor.leftSpace'?: number,
+        'cursor.rightSpace'?: number,
+    }
+
     interface IConfig extends DynamicText.IConfig {
         edit?: HiddenTextEdit.IConfig;
+
+        background?: IConfigBackground,
+
+        focusStyle?: DynamicText.IConfigBackground;
+
+        style?: IConfigTextStyle
+
+        cursorStyle?: DynamicText.IConfigTextStyle;
+
         onAddChar?: AddCharCallbackType;
+
         onMoveCursor?: MoveCursorCallbackType
     }
 }

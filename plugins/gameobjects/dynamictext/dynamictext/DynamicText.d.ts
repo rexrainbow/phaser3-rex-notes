@@ -2,7 +2,7 @@
 import Canvas from '../../canvas/canvas/Canvas';
 import Background from './bob/background/Background';
 import InnerBounds from './bob/innerbounds/InnerBounds';
-import { IConfigTextStyle } from './bob/char/TextStyle';
+import { IConfigTextStyle as IConfigTextStyleBase } from './bob/char/TextStyle';
 import BobBaseClass from './bob/Base';
 import CharBobClass from './bob/char/CharData';
 import ImageBobClass from './bob/image/ImageData';
@@ -45,6 +45,10 @@ declare namespace DynamicText {
 
         stroke?: string | number | null,
         strokeThickness?: number,
+    }
+
+    interface IConfigTextStyle extends IConfigTextStyleBase {
+
     }
 
     interface IConfigImage {
@@ -149,24 +153,24 @@ declare class DynamicText extends Canvas {
 
     createCharChild(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): DynamicText.CharBob;
     createCharChildren(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): DynamicText.CharBob[];
     setText(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): this;
     appendText(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): this;
     insertText(
         index: number,
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): this;
     getText(activeOnly?: boolean): string;
     resetTextStyle(): this;
