@@ -3,7 +3,7 @@ import GetProperty from '../utils/GetProperty.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Style {
+class TextStyle {
     constructor(parent, config) {
         this.parent = parent;
         this.set(config);
@@ -142,16 +142,16 @@ class Style {
     }
 
     clone() {
-        return new Style(null, this.toJSON());
+        return new TextStyle(null, this.toJSON());
     }
 
-    copyFrom(sourceStyle) {
-        this.set(sourceStyle.toJSON());
+    copyFrom(sourceTextStyle) {
+        this.set(sourceTextStyle.toJSON());
         return this;
     }
 
-    copyTo(targetStyle) {
-        targetStyle.set(this.toJSON());
+    copyTo(targetTextStyle) {
+        targetTextStyle.set(this.toJSON());
         return this;
     }
 
@@ -380,4 +380,4 @@ class Style {
 
 }
 
-export default Style;
+export default TextStyle;

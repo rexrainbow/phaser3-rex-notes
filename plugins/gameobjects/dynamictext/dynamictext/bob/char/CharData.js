@@ -1,6 +1,6 @@
 import RenderBase from '../renderbase/RenderBase.js';
 import { CharTypeName } from '../Types.js';
-import Style from './Style.js';
+import TextStyle from './TextStyle.js';
 
 class CharData extends RenderBase {
     constructor(
@@ -10,7 +10,7 @@ class CharData extends RenderBase {
     ) {
         super(parent, CharTypeName);
         this.updateTextFlag = false;
-        this.style = new Style(this, style);
+        this.style = new TextStyle(this, style);
         this.setText(text);
     }
 

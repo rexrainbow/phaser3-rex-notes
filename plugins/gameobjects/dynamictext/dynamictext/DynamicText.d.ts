@@ -2,7 +2,7 @@
 import Canvas from '../../canvas/canvas/Canvas';
 import Background from './bob/background/Background';
 import InnerBounds from './bob/innerbounds/InnerBounds';
-import { IConfigStyle as IConfigTextStyle } from './bob/char/Style';
+import { IConfigTextStyle } from './bob/char/TextStyle';
 import BobBaseClass from './bob/Base';
 import CharBobClass from './bob/char/CharData';
 import ImageBobClass from './bob/image/ImageData';
