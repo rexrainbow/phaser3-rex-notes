@@ -1,4 +1,4 @@
-export interface IConfigTextStyle {
+export interface IConfigStyle {
     bold?: boolean,
     italic?: boolean,
     fontSize?: string | number,
@@ -17,8 +17,8 @@ export interface IConfigTextStyle {
     rightSpace?: number,
 }
 
-export default class TextStyle {
-    modify(o?: IConfigTextStyle): this;
+export default class Style {
+    modify(o?: IConfigStyle): this;
 
     setBold(bold?: boolean): this;
     bold: boolean;
