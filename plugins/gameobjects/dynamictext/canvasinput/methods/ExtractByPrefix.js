@@ -1,4 +1,8 @@
-var ExtractByPrefix = function (obj, prefix, out) {
+var ExtractByPrefix = function (obj, prefix, delimiter, out) {
+    if (delimiter === undefined) {
+        delimiter = '.';
+    }
+
     if (out === undefined) {
         out = {};
     }
@@ -6,6 +10,12 @@ var ExtractByPrefix = function (obj, prefix, out) {
     if (!obj) {
         return out;
     }
+
+    if (prefix in obj) {
+        return Object.assign(out, obj[prefix])
+    }
+
+    prefix += delimiter;
 
     for (var key in obj) {
         if (!key.startsWith(prefix)) {
@@ -15,6 +25,7 @@ var ExtractByPrefix = function (obj, prefix, out) {
         out[key.replace(prefix, '')] = obj[key];
         delete obj[key];
     }
+
     return out;
 }
 

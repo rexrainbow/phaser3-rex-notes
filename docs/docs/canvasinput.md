@@ -97,8 +97,14 @@ var txt = scene.add.rexCanvasInput({
         strokeThickness: 2,
 
         cornerRadius: 0,
-        cornerIteration: null
+        cornerIteration: null,
+        
+        // Style when focus
+        // 'focus.color': ...
+        // 'focus.color2': ...
+        // 'focus.stroke': ...
     },
+    focusStyle: undefined,
 
     innerBounds: {
         color: null,
@@ -236,6 +242,23 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
         - `child` : [character child](dynamictext.md#character)
+- `focusStyle` : Will apply this style to background when focusing.
+    - `undefined` : Ignore this behavior.
+    - A plain object
+        ```javascript
+        {
+            color: null,
+            color2: null,
+            horizontalGradient: true,
+
+            stroke: null,
+            strokeThickness: 2,
+
+            cornerRadius: 0,
+            cornerIteration: null,
+        }
+        ```
+    - Or add these style settings in `background` parameter, with prefix `'focus.'`.
 - `cursorStyle` : Will apply this style when cursor move on a character child.
     - `undefined` : Ignore this behavior.
     - A plain object

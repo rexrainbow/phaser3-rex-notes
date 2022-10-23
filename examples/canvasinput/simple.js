@@ -28,7 +28,9 @@ var CreateCanvasInput = function (scene, text) {
 
             background: {
                 stroke: 'white',
-                cornerRadius: 20
+                cornerRadius: 20,
+
+                'focus.stroke': 'red',
             },
             innerBounds: {
                 stroke: 'darkcyan'

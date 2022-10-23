@@ -11747,6 +11747,14 @@
 
   Object.assign(RenderBase.prototype, Methods$d);
 
+  var GetProperty = function GetProperty(name, config, defaultConfig) {
+    if (config.hasOwnProperty(name)) {
+      return config[name];
+    } else {
+      return defaultConfig[name];
+    }
+  };
+
   var GetValue$26 = Phaser.Utils.Objects.GetValue;
 
   var Background = /*#__PURE__*/function (_RenderBase) {
@@ -11862,22 +11870,28 @@
         this._cornerIteration = value;
       }
     }, {
+      key: "modifyStyle",
+      value: function modifyStyle(o) {
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetProperty('color2', o, this), GetProperty('horizontalGradient', o, this));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetProperty('strokeThickness', o, this));
+        }
+
+        if (o.hasOwnProperty('cornerRadius')) {
+          this.setCornerRadius(o.cornerRadius, GetProperty('cornerIteration', o, this));
+        }
+
+        return this;
+      }
+    }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
 
-        if (o.hasOwnProperty('color')) {
-          this.setColor(o.color, GetValue$26(o, 'color2', null), GetValue$26(o, 'horizontalGradient', true));
-        }
-
-        if (o.hasOwnProperty('stroke')) {
-          this.setStroke(o.stroke, GetValue$26(o, 'strokeThickness', 2));
-        }
-
-        if (o.hasOwnProperty('cornerRadius')) {
-          this.setCornerRadius(o.cornerRadius, GetValue$26(o, 'cornerIteration', null));
-        }
-
+        this.modifyStyle(o);
         return this;
       }
     }, {
@@ -12047,14 +12061,6 @@
 
     return InnerBounds;
   }(RenderBase);
-
-  var GetProperty = function GetProperty(name, config, defaultConfig) {
-    if (config.hasOwnProperty(name)) {
-      return config[name];
-    } else {
-      return defaultConfig[name];
-    }
-  };
 
   var GetValue$24 = Phaser.Utils.Objects.GetValue;
 
@@ -20402,7 +20408,11 @@
     return new HiddenTextEdit(parent, config);
   };
 
-  var ExtractByPrefix = function ExtractByPrefix(obj, prefix, out) {
+  var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+
     if (out === undefined) {
       out = {};
     }
@@ -20410,6 +20420,12 @@
     if (!obj) {
       return out;
     }
+
+    if (prefix in obj) {
+      return Object.assign(out, obj[prefix]);
+    }
+
+    prefix += delimiter;
 
     for (var key in obj) {
       if (!key.startsWith(prefix)) {
@@ -20421,6 +20437,100 @@
     }
 
     return out;
+  };
+
+  var GetPartialData = function GetPartialData(obj, keys, out) {
+    if (out === undefined) {
+      out = {};
+    }
+
+    if (Array.isArray(keys)) {
+      var key;
+
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        out[key] = obj[key];
+      }
+    } else {
+      for (var key in keys) {
+        out[key] = obj[key];
+      }
+    }
+
+    return out;
+  };
+
+  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
+    for (var key in objA) {
+      if (!(key in objB)) {
+        return false;
+      }
+
+      if (objA[key] !== objB[key]) {
+        return false;
+      }
+    }
+
+    for (var key in objB) {
+      if (!(key in objA)) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  var RegisterCursorStyle = function RegisterCursorStyle(cursorStyle) {
+    if (IsEmpty(cursorStyle)) {
+      return;
+    }
+
+    this.setCursorStyle(cursorStyle).on('cursorin', function (child) {
+      var cursorStyle = this.cursorStyle;
+      var styleSave = GetPartialData(child.style, cursorStyle);
+
+      if (IsKeyValueEqual(cursorStyle, styleSave)) {
+        return;
+      }
+
+      child.styleSave = styleSave;
+      child.modifyStyle(cursorStyle);
+    }, this).on('cursorout', function (child) {
+      if (!child.styleSave) {
+        return;
+      }
+
+      child.modifyStyle(child.styleSave);
+      child.styleSave = undefined;
+    }, this);
+  };
+
+  var RegisterFocusStyle = function RegisterFocusStyle(focusStyle) {
+    if (IsEmpty(focusStyle)) {
+      return;
+    }
+
+    this.setFocusStyle(focusStyle).on('open', function () {
+      var child = this.background;
+      var focusStyle = this.focusStyle;
+      var styleSave = GetPartialData(child, focusStyle);
+
+      if (IsKeyValueEqual(focusStyle, styleSave)) {
+        return;
+      }
+
+      child.styleSave = styleSave;
+      child.modifyStyle(focusStyle);
+    }, this).on('close', function () {
+      var child = this.background;
+
+      if (!child.styleSave) {
+        return;
+      }
+
+      child.modifyStyle(child.styleSave);
+      child.styleSave = undefined;
+    }, this);
   };
 
   var AddLastInsertCursor = function AddLastInsertCursor(textObject) {
@@ -20911,26 +21021,6 @@
     textObject.runWordWrap();
   };
 
-  var IsKeyValueEqual = function IsKeyValueEqual(objA, objB) {
-    for (var key in objA) {
-      if (!(key in objB)) {
-        return false;
-      }
-
-      if (objA[key] !== objB[key]) {
-        return false;
-      }
-    }
-
-    for (var key in objB) {
-      if (!(key in objA)) {
-        return false;
-      }
-    }
-
-    return true;
-  };
-
   var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
 
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
@@ -20960,7 +21050,8 @@
         delete config.text;
       }
 
-      var cursorStyle = ExtractByPrefix(config.style, 'cursor.');
+      var cursorStyle = ExtractByPrefix(config.style, 'cursor');
+      var focusStyle = ExtractByPrefix(config.background, 'focus');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
@@ -20969,32 +21060,13 @@
         Object.assign(cursorStyle, config.cursorStyle);
       }
 
-      if (!IsEmpty(cursorStyle)) {
-        _this.setCursorStyle(cursorStyle).on('cursorin', function (child, index, canvasInput) {
-          var curStyle = child.style;
-          var cursorStyle = this.cursorStyle;
-          var styleSave = {};
+      RegisterCursorStyle.call(_assertThisInitialized(_this), cursorStyle);
 
-          for (var name in cursorStyle) {
-            styleSave[name] = curStyle[name];
-          }
-
-          if (IsKeyValueEqual(cursorStyle, styleSave)) {
-            return;
-          }
-
-          child.styleSave = styleSave;
-          child.modifyStyle(cursorStyle);
-        }, _assertThisInitialized(_this)).on('cursorout', function (child, index, canvasInput) {
-          if (!child.styleSave) {
-            return;
-          }
-
-          child.modifyStyle(child.styleSave);
-          child.styleSave = undefined;
-        }, _assertThisInitialized(_this));
+      if (config.focusStyle) {
+        Object.assign(focusStyle, config.focusStyle);
       }
 
+      RegisterFocusStyle.call(_assertThisInitialized(_this), focusStyle);
       var addCharCallback = config.onAddChar;
 
       if (addCharCallback) {
@@ -21092,6 +21164,12 @@
       key: "setCursorStyle",
       value: function setCursorStyle(style) {
         this.cursorStyle = style;
+        return this;
+      }
+    }, {
+      key: "setFocusStyle",
+      value: function setFocusStyle(style) {
+        this.focusStyle = style;
         return this;
       }
     }]);

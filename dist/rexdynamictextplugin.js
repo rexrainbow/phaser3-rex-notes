@@ -1509,6 +1509,14 @@
     }
   };
 
+  var GetProperty = function GetProperty(name, config, defaultConfig) {
+    if (config.hasOwnProperty(name)) {
+      return config[name];
+    } else {
+      return defaultConfig[name];
+    }
+  };
+
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
 
   var RoundRectangle = /*#__PURE__*/function () {
@@ -1948,22 +1956,28 @@
         this._cornerIteration = value;
       }
     }, {
+      key: "modifyStyle",
+      value: function modifyStyle(o) {
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetProperty('color2', o, this), GetProperty('horizontalGradient', o, this));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetProperty('strokeThickness', o, this));
+        }
+
+        if (o.hasOwnProperty('cornerRadius')) {
+          this.setCornerRadius(o.cornerRadius, GetProperty('cornerIteration', o, this));
+        }
+
+        return this;
+      }
+    }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
 
-        if (o.hasOwnProperty('color')) {
-          this.setColor(o.color, GetValue$5(o, 'color2', null), GetValue$5(o, 'horizontalGradient', true));
-        }
-
-        if (o.hasOwnProperty('stroke')) {
-          this.setStroke(o.stroke, GetValue$5(o, 'strokeThickness', 2));
-        }
-
-        if (o.hasOwnProperty('cornerRadius')) {
-          this.setCornerRadius(o.cornerRadius, GetValue$5(o, 'cornerIteration', null));
-        }
-
+        this.modifyStyle(o);
         return this;
       }
     }, {
@@ -2133,14 +2147,6 @@
 
     return InnerBounds;
   }(RenderBase);
-
-  var GetProperty = function GetProperty(name, config, defaultConfig) {
-    if (config.hasOwnProperty(name)) {
-      return config[name];
-    } else {
-      return defaultConfig[name];
-    }
-  };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
 

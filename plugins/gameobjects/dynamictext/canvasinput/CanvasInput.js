@@ -1,11 +1,11 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
 import ExtractByPrefix from './methods/ExtractByPrefix.js';
+import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
+import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
-import IsEmpty from '../../../utils/object/IsEmpty.js';
-import IsKeyValueEqual from '../../../utils/object/IsKeyValueEqual.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -27,7 +27,8 @@ class CanvasInput extends DynamicText {
             delete config.text;
         }
 
-        var cursorStyle = ExtractByPrefix(config.style, 'cursor.');
+        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
+        var focusStyle = ExtractByPrefix(config.background, 'focus');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
@@ -37,33 +38,12 @@ class CanvasInput extends DynamicText {
         if (config.cursorStyle) {
             Object.assign(cursorStyle, config.cursorStyle);
         }
-        if (!IsEmpty(cursorStyle)) {
-            this
-                .setCursorStyle(cursorStyle)
-                .on('cursorin', function (child, index, canvasInput) {
-                    var curStyle = child.style;
-                    var cursorStyle = this.cursorStyle;
-                    var styleSave = {};
-                    for (var name in cursorStyle) {
-                        styleSave[name] = curStyle[name];
-                    }
-                    if (IsKeyValueEqual(cursorStyle, styleSave)) {
-                        return;
-                    }
+        RegisterCursorStyle.call(this, cursorStyle);
 
-                    child.styleSave = styleSave;
-
-                    child.modifyStyle(cursorStyle);
-                }, this)
-                .on('cursorout', function (child, index, canvasInput) {
-                    if (!child.styleSave) {
-                        return;
-                    }
-
-                    child.modifyStyle(child.styleSave);
-                    child.styleSave = undefined;
-                }, this)
+        if (config.focusStyle) {
+            Object.assign(focusStyle, config.focusStyle);
         }
+        RegisterFocusStyle.call(this, focusStyle);
 
         var addCharCallback = config.onAddChar;
         if (addCharCallback) {
@@ -142,6 +122,11 @@ class CanvasInput extends DynamicText {
 
     setCursorStyle(style) {
         this.cursorStyle = style;
+        return this;
+    }
+
+    setFocusStyle(style) {
+        this.focusStyle = style;
         return this;
     }
 }
