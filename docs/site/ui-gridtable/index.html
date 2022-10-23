@@ -8834,7 +8834,11 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/XyJbWX">Grid table</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYBdNQy">Varying cell size</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/bGgKbmv">Message list</a></li>
+<li>Messages<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/bGgKbmv">Demo 1</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/XWqvQMQ">Demo 2</a></li>
+</ul>
+</li>
 <li>Sizer cell: <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/pooZWme">Demo 1</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/abOgyPo">Demo 2</a></li>
@@ -9003,11 +9007,15 @@
             <span class="nx">width</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
             <span class="nx">height</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
             <span class="nx">item</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">item</span><span class="p">,</span>
+            <span class="nx">items</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span>
             <span class="nx">index</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">cellContainer</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// No reusable cell container, create a new one</span>
             <span class="c1">// cellContainer = scene.rexUI.add.label();</span>
         <span class="p">}</span>
         <span class="c1">// Set child properties of cell container ...</span>
+
+        <span class="c1">// cell.setCellContainerAlign();  // Set alignment of cellContainer</span>
+
         <span class="k">return</span> <span class="nx">cellContainer</span><span class="p">;</span> <span class="c1">// or null</span>
     <span class="p">},</span>
 
@@ -9174,10 +9182,25 @@
 <li><code>cell.width</code> : Width of this cell, in pixels.</li>
 <li><code>cell.height</code> : Height of this cell, in pixels.</li>
 <li><code>cell.item</code> : Item of this cell to display.</li>
+<li><code>cell.items</code> : Array of item data for each cell, equal to <code>items</code> parameter.</li>
 <li><code>cell.index</code> : Index of this cell.</li>
 </ul>
 </li>
-<li><strong>Origin of returned cell container will be set to (0, 0)</strong></li>
+<li>Alignment of cellContainer : 
+    <div class="highlight"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setCellContainerAlign</span><span class="p">(</span><span class="nx">align</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>align</code> :<ul>
+<li><code>undefined</code> : Set position of cellContainer to left-top of cell space. Default behavior.</li>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center of cell space.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center of cell space.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center of cell space.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at top-center of cell space.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center of cell space.         </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If <code>cell.align</code> is <code>undefined</code> (default value), <strong>Origin of returned cell container will be set to (0, 0)</strong></li>
 <li><code>cellContainer</code> : Cell container picked from object pool for reusing. Set <code>reuseCellContainer</code> to <code>true</code> to enable this feature.<ul>
 <li><code>null</code> : No cell container available.</li>
 <li>Game object : Reusable cell container.</li>

@@ -1,5 +1,6 @@
 import RenderBase from '../renderbase/RenderBase.js';
 import GetStyle from '../../../../../utils/canvas/GetStyle.js';
+import GetProperty from '../utils/GetProperty.js';
 import DrawRoundRectangleBackground from '../../../../canvas/utils/DrawRoundRectangleBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -113,28 +114,36 @@ class Background extends RenderBase {
         return this._cornerIteration;
     }
 
-    modifyPorperties(o) {
-        super.modifyPorperties(o);
-
+    modifyStyle(o) {
         if (o.hasOwnProperty('color')) {
             this.setColor(
                 o.color,
-                GetValue(o, 'color2', null),
-                GetValue(o, 'horizontalGradient', true)
+                GetProperty('color2', o, this),
+                GetProperty('horizontalGradient', o, this),
             );
         }
         if (o.hasOwnProperty('stroke')) {
             this.setStroke(
                 o.stroke,
-                GetValue(o, 'strokeThickness', 2)
+                GetProperty('strokeThickness', o, this),
             );
         }
         if (o.hasOwnProperty('cornerRadius')) {
             this.setCornerRadius(
                 o.cornerRadius,
-                GetValue(o, 'cornerIteration', null)
+                GetProperty('cornerIteration', o, this),
             );
         }
+
+        return this;
+    }
+
+    modifyPorperties(o) {
+        super.modifyPorperties(o);
+
+        this.modifyStyle(o);
+
+        return this;
     }
 
     setCornerRadius(radius, iteration) {

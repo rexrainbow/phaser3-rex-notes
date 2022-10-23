@@ -2,6 +2,10 @@ const TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
 const TransformXY = Phaser.Math.TransformXY;
 
 var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, out) {
+    if (camera === undefined) {
+        camera = gameObject.scene.cameras.main;
+    }
+
     if (out === undefined) {
         out = {}
     } else if (out === true) {

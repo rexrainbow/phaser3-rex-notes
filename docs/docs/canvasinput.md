@@ -10,6 +10,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 
 ## Live demos
 
+- [Simple](https://codepen.io/rexrainbow/pen/vYjwjyW)
 - [Text input](https://codepen.io/rexrainbow/pen/poVPGKe)
 - [Number input](https://codepen.io/rexrainbow/pen/jOxarOO)
 
@@ -96,8 +97,14 @@ var txt = scene.add.rexCanvasInput({
         strokeThickness: 2,
 
         cornerRadius: 0,
-        cornerIteration: null
+        cornerIteration: null,
+        
+        // Style when focus
+        // 'focus.color': ...
+        // 'focus.color2': ...
+        // 'focus.stroke': ...
     },
+    focusStyle: undefined,
 
     innerBounds: {
         color: null,
@@ -121,9 +128,17 @@ var txt = scene.add.rexCanvasInput({
         shadowOffsetY: 0,
         shadowBlur: 0,
         backgroundColor: null,
+        backgroundHeight: undefined,
+        backgroundBY: undefined,
         offsetX: 0,
-        offsetY: 0
+        offsetY: 0,
+
+        // Style when cursor move on
+        // 'cursor.color': ...
+        // 'cursor.backgroundColor': ...
+        // 'cursor.xxx': ...
     },
+    cursorStyle: undefined,
 
     childrenInteractive: false,
 
@@ -227,6 +242,47 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
         - `child` : [character child](dynamictext.md#character)
+- `focusStyle` : Will apply this style to background when focusing.
+    - `undefined` : Ignore this behavior.
+    - A plain object
+        ```javascript
+        {
+            color: null,
+            color2: null,
+            horizontalGradient: true,
+
+            stroke: null,
+            strokeThickness: 2,
+
+            cornerRadius: 0,
+            cornerIteration: null,
+        }
+        ```
+    - Or add these style settings in `background` parameter, with prefix `'focus.'`.
+- `cursorStyle` : Will apply this style when cursor move on a character child.
+    - `undefined` : Ignore this behavior.
+    - A plain object
+        ```javascript
+        {
+            bold: false,
+            italic: false,
+            fontSize: '16px',
+            fontFamily: 'Courier',
+            color: '#fff',
+            stroke: '#fff',
+            strokeThickness: 0,
+            shadowColor: null,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 0,
+            backgroundColor: null,
+            backgroundHeight: undefined,
+            backgroundBY: undefined,
+            offsetX: 0,
+            offsetY: 0
+        }
+        ```
+    - Or add these style settings in `style` parameter, with prefix `'cursor.'`.
 
 ### Custom class
 
@@ -294,7 +350,7 @@ var isOpened = txt.isOpened;
     - `child` : [character child](dynamictext.md#character)
 - On cursor moving on a character child
     ```javascript
-    txt.on('cursorout', function(child, index, canvasInput) {
+    txt.on('cursorin', function(child, index, canvasInput) {
         child.modifyStyle({...})
     })
     ```

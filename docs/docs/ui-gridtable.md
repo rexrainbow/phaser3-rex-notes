@@ -9,7 +9,9 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 
 - [Grid table](https://codepen.io/rexrainbow/pen/XyJbWX)
 - [Varying cell size](https://codepen.io/rexrainbow/pen/vYBdNQy)
-- [Message list](https://codepen.io/rexrainbow/pen/bGgKbmv)
+- Messages
+    - [Demo 1](https://codepen.io/rexrainbow/pen/bGgKbmv)
+    - [Demo 2](https://codepen.io/rexrainbow/pen/XWqvQMQ)
 - Sizer cell: 
     - [Demo 1](https://codepen.io/rexrainbow/pen/pooZWme)
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
@@ -189,11 +191,15 @@ var table = scene.rexUI.add.gridTable({
             width = cell.width,
             height = cell.height,
             item = cell.item,
+            items = cell.items,
             index = cell.index;
         if (cellContainer === null) { // No reusable cell container, create a new one
             // cellContainer = scene.rexUI.add.label();
         }
         // Set child properties of cell container ...
+        
+        // cell.setCellContainerAlign();  // Set alignment of cellContainer
+
         return cellContainer; // or null
     },
 
@@ -300,8 +306,20 @@ var table = scene.rexUI.add.gridTable({
         - `cell.width` : Width of this cell, in pixels.
         - `cell.height` : Height of this cell, in pixels.
         - `cell.item` : Item of this cell to display.
+        - `cell.items` : Array of item data for each cell, equal to `items` parameter.
         - `cell.index` : Index of this cell.
-    - **Origin of returned cell container will be set to (0, 0)**
+    - Alignment of cellContainer : 
+        ```javascript
+        cell.setCellContainerAlign(align);
+        ```
+        - `align` :
+            - `undefined` : Set position of cellContainer to left-top of cell space. Default behavior.
+            - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center of cell space.
+            - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center of cell space.
+            - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center of cell space.
+            - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center of cell space.
+            - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center of cell space.         
+    - If `cell.align` is `undefined` (default value), **Origin of returned cell container will be set to (0, 0)**
     - `cellContainer` : Cell container picked from object pool for reusing. Set `reuseCellContainer` to `true` to enable this feature.
         - `null` : No cell container available.
         - Game object : Reusable cell container.

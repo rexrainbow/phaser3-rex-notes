@@ -2467,7 +2467,7 @@
 
   Object.assign(ContainerLite.prototype, methods$6);
 
-  var GetSizerConfig = function GetSizerConfig(gameObject) {
+  var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
       gameObject.rexSizer = {};
     }
@@ -2475,8 +2475,16 @@
     return gameObject.rexSizer;
   };
 
+  function GetSizerConfig (gameObject) {
+    if (gameObject === undefined) {
+      gameObject = this;
+    }
+
+    return GetSizerConfig$1(gameObject);
+  }
+
   var GetChildPrevState = function GetChildPrevState(child) {
-    var childConfig = GetSizerConfig(child);
+    var childConfig = GetSizerConfig$1(child);
 
     if (!childConfig.hasOwnProperty('prevState')) {
       childConfig.prevState = {};
@@ -3374,23 +3382,21 @@
         out = [];
       }
 
-      var children = this.children,
-          child;
+      var queue = [this];
 
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
+      while (queue.length > 0) {
+        var current = queue.shift();
 
-        if (child.rexSizer && child.rexSizer.hidden) {
-          // Don't add hidden child
+        if (current.rexSizer && current.rexSizer.hidden) {
           continue;
         }
 
-        out.push(child);
+        if (current !== this) {
+          out.push(current);
+        }
 
-        if (child.hasOwnProperty('isRexContainerLite')) {
-          var _out;
-
-          (_out = out).push.apply(_out, _toConsumableArray(child.getAllShownChildren()));
+        if (current.isRexContainerLite) {
+          queue.push.apply(queue, _toConsumableArray(current.children));
         }
       }
 
@@ -6201,7 +6207,7 @@
       return false;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     return !config.hidden;
   };
 
@@ -6210,7 +6216,7 @@
       return;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     config.hidden = hidden;
     var parent = GetParent$1(gameObject);
 
@@ -10019,6 +10025,9 @@
     if (this.orientation === 0) {
       // x
       // Get summation of minimum width
+      var itemSpace = this.space.item;
+      var isFirstChild = true;
+
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
 
@@ -10035,8 +10044,10 @@
         padding = child.rexSizer.padding;
         childWidth += padding.left + padding.right;
 
-        if (i > 0) {
-          childWidth += this.space.item;
+        if (isFirstChild) {
+          isFirstChild = false;
+        } else {
+          childWidth += itemSpace;
         }
 
         result += childWidth;
@@ -10092,6 +10103,9 @@
       }
     } else {
       // Get summation of minimum height
+      var itemSpace = this.space.item;
+      var isFirstChild = true;
+
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
 
@@ -10112,8 +10126,10 @@
         padding = child.rexSizer.padding;
         childHeight += padding.top + padding.bottom;
 
-        if (i > 0) {
-          childHeight += this.space.item;
+        if (isFirstChild) {
+          isFirstChild = false;
+        } else {
+          childHeight += itemSpace;
         }
 
         result += childHeight;
@@ -10638,6 +10654,40 @@
     }
   };
 
+  var AlignMethods = {
+    getChildAlign: function getChildAlign(gameObject) {
+      return this.getSizerConfig(gameObject).align;
+    },
+    setChildAlign: function setChildAlign(gameObject, align) {
+      if (typeof align === 'string') {
+        align = AlignConst[align];
+      }
+
+      this.getSizerConfig(gameObject).align = align;
+      return this;
+    }
+  };
+
+  var ProportionMethods = {
+    getChildProportion: function getChildProportion(gameObject) {
+      return this.getSizerConfig(gameObject).proportion;
+    },
+    setChildProportion: function setChildProportion(gameObject, proportion) {
+      this.getSizerConfig(gameObject).proportion = proportion;
+      return this;
+    }
+  };
+
+  var ExpandMethods = {
+    getChildExpand: function getChildExpand(gameObject) {
+      return this.getSizerConfig(gameObject).expand;
+    },
+    setChildExpand: function setChildExpand(gameObject, expand) {
+      this.getSizerConfig(gameObject).expand = expand;
+      return this;
+    }
+  };
+
   var methods$3 = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
@@ -10649,7 +10699,7 @@
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight
   };
-  Object.assign(methods$3, AddChildMethods, RemoveChildMethods);
+  Object.assign(methods$3, AddChildMethods, RemoveChildMethods, AlignMethods, ProportionMethods, ExpandMethods);
 
   var GetChildrenProportion = function GetChildrenProportion() {
     var result = 0;
@@ -13267,7 +13317,17 @@
     }, {
       key: "scrollToBottom",
       value: function scrollToBottom() {
-        this.t = 1;
+        this.t = 1; // t will be 0 if panel/table does not exceed visible area
+
+        if (this.t === 0) {
+          return this;
+        } // Panel/Table height might be expanded while cells are visible        
+
+
+        do {
+          this.t = 1;
+        } while (this.t !== 1);
+
         return this;
       }
     }, {
@@ -13544,6 +13604,16 @@
           this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
 
+        return this;
+      }
+    }, {
+      key: "setCellContainerAlign",
+      value: function setCellContainerAlign(align) {
+        if (typeof align === 'string') {
+          align = AlignConst[align];
+        }
+
+        this.cellContainerAlign = align;
         return this;
       }
     }, {
@@ -14603,10 +14673,22 @@
           this.showCell(cell);
         }
 
+        var x, y;
+
         if (this.scrollMode === 0) {
-          cell.setXY(cellTLX, cellTLY);
+          x = cellTLX;
+          y = cellTLY;
         } else {
-          cell.setXY(cellTLY, cellTLX);
+          x = cellTLY;
+          y = cellTLX;
+        }
+
+        if (cell.cellContainerAlign == null) {
+          cell.setXY(x, y);
+        } else {
+          var cellContainer = cell.getContainer();
+          AlignIn(cellContainer, x, y, cell.width, cell.height, cell.cellContainerAlign);
+          cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
 
@@ -15113,6 +15195,22 @@
         this.setTableOYByPercentage(value).updateTable();
       }
     }, {
+      key: "scrollToBottom",
+      value: function scrollToBottom() {
+        this.t = 1; // t will be 0 if table does not exceed visible area
+
+        if (this.t === 0) {
+          return this;
+        } // Table height might be expanded while cells are visible        
+
+
+        do {
+          this.t = 1;
+        } while (this.t !== 1);
+
+        return this;
+      }
+    }, {
       key: "getCell",
       value: function getCell(cellIdx) {
         return this.table.getCell(cellIdx, true);
@@ -15343,6 +15441,7 @@
       var callback = this.createCellContainerCallback;
       var scope = this.createCellContainerCallbackScope;
       cell.item = this.items[cell.index];
+      cell.items = this.items;
       var cellContainer;
 
       if (scope) {
@@ -15352,7 +15451,7 @@
       }
 
       if (cellContainer) {
-        if (cellContainer.setOrigin) {
+        if (cell.cellContainerAlign == null && cellContainer.setOrigin) {
           cellContainer.setOrigin(0);
         }
 
@@ -15362,6 +15461,7 @@
       }
 
       cell.item = undefined;
+      cell.items = undefined;
       cell.setContainer(cellContainer);
     }, this);
   };

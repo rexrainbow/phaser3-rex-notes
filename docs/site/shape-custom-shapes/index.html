@@ -2107,6 +2107,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#world-position-to-local-position" class="md-nav__link">
+    World position to local position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#recreate-shapes" class="md-nav__link">
     Recreate shapes
   </a>
@@ -8762,6 +8769,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#world-position-to-local-position" class="md-nav__link">
+    World position to local position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#recreate-shapes" class="md-nav__link">
     Recreate shapes
   </a>
@@ -8904,6 +8918,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vYgjyPJ">Speech bubble</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYZNZwr">Jigsaw</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/PoeMXXQ">World to localXY</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/custom-shapes">Sample code</a></p>
@@ -9127,6 +9142,12 @@ or
 </code></pre></div></li>
 </ul>
 <p>Will set dirty and redraw shapes. Apply styles to shapes in update callback.</p>
+<h4 id="world-position-to-local-position">World position to local position<a class="headerlink" href="#world-position-to-local-position" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">localXY</span> <span class="o">=</span> <span class="nx">customShapes</span><span class="p">.</span><span class="nx">worldToLocalXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span> <span class="c1">// localXY: {x, y}</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">customShapes</span><span class="p">.</span><span class="nx">worldToLocalXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
+</code></pre></div>
 <h4 id="recreate-shapes">Recreate shapes<a class="headerlink" href="#recreate-shapes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Clear all shapes

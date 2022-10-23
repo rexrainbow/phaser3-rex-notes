@@ -96,6 +96,7 @@ class Demo extends Phaser.Scene {
             items: GetItems(100)
         })
             .layout()
+        //.scrollToBottom()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
     }
@@ -139,8 +140,8 @@ var CreateCellContainer = function (scene) {
 }
 
 var LeftTailBubble = function () {
-    var fillColor = this.getData('fillColor');
-    var strokeColor = this.getData('strokeColor');
+    var fillColor = this.fillColor,
+        strokeColor = this.strokeColor;
     var radius = 20;
     var indent = 15;
 
@@ -162,8 +163,8 @@ var LeftTailBubble = function () {
 }
 
 var RightTailBubble = function () {
-    var fillColor = this.getData('fillColor');
-    var strokeColor = this.getData('strokeColor');
+    var fillColor = this.fillColor,
+        strokeColor = this.strokeColor;
     var radius = 20;
     var indent = 15;
 
@@ -187,8 +188,8 @@ var CreateSpeechBubbleShape = function (scene, fillColor, strokeColor) {
     return scene.rexUI.add.customShapes({
         create: { lines: 1 }
     })
-        .setData('fillColor', fillColor)
-        .setData('strokeColor', strokeColor)
+        .setFillStyle(fillColor)
+        .setStrokeStyle(2, strokeColor);
 
 }
 

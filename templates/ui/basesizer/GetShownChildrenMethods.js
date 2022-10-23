@@ -22,18 +22,19 @@ export default {
             out = [];
         }
 
-        var children = this.children,
-            child;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = children[i];
-            if (child.rexSizer && child.rexSizer.hidden) { // Don't add hidden child
+        var queue = [this];
+        while (queue.length > 0) {
+            var current = queue.shift();
+            if (current.rexSizer && current.rexSizer.hidden) {
                 continue;
             }
 
-            out.push(child);
+            if (current !== this) {
+                out.push(current);
+            }
 
-            if (child.hasOwnProperty('isRexContainerLite')) {
-                out.push(...child.getAllShownChildren());
+            if (current.isRexContainerLite) {
+                queue.push(...current.children);
             }
         }
 

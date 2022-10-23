@@ -1,4 +1,5 @@
 import DataMethods from '../../../../utils/data/DataMethods.js';
+import AlignConst from '../../../../utils/actions/AlignConst.js';
 
 class Cell {
     constructor(parent, config) {
@@ -90,6 +91,14 @@ class Cell {
         if (this.container) {
             this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
+        return this;
+    }
+
+    setCellContainerAlign(align) {
+        if (typeof (align) === 'string') {
+            align = AlignConst[align];
+        }
+        this.cellContainerAlign = align;
         return this;
     }
 

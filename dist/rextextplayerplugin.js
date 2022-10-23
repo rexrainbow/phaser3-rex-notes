@@ -4550,6 +4550,14 @@
     }
   };
 
+  var GetProperty = function GetProperty(name, config, defaultConfig) {
+    if (config.hasOwnProperty(name)) {
+      return config[name];
+    } else {
+      return defaultConfig[name];
+    }
+  };
+
   var GetValue$b = Phaser.Utils.Objects.GetValue;
 
   var RoundRectangle = /*#__PURE__*/function () {
@@ -4989,21 +4997,29 @@
         this._cornerIteration = value;
       }
     }, {
+      key: "modifyStyle",
+      value: function modifyStyle(o) {
+        if (o.hasOwnProperty('color')) {
+          this.setColor(o.color, GetProperty('color2', o, this), GetProperty('horizontalGradient', o, this));
+        }
+
+        if (o.hasOwnProperty('stroke')) {
+          this.setStroke(o.stroke, GetProperty('strokeThickness', o, this));
+        }
+
+        if (o.hasOwnProperty('cornerRadius')) {
+          this.setCornerRadius(o.cornerRadius, GetProperty('cornerIteration', o, this));
+        }
+
+        return this;
+      }
+    }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
 
-        if (o.hasOwnProperty('color')) {
-          this.setColor(o.color, GetValue$a(o, 'color2', null), GetValue$a(o, 'horizontalGradient', true));
-        }
-
-        if (o.hasOwnProperty('stroke')) {
-          this.setStroke(o.stroke, GetValue$a(o, 'strokeThickness', 2));
-        }
-
-        if (o.hasOwnProperty('cornerRadius')) {
-          this.setCornerRadius(o.cornerRadius, GetValue$a(o, 'cornerIteration', null));
-        }
+        this.modifyStyle(o);
+        return this;
       }
     }, {
       key: "setCornerRadius",
@@ -5173,14 +5189,6 @@
     return InnerBounds;
   }(RenderBase);
 
-  var GetProperty = function GetProperty(name, config, defaultConfig) {
-    if (config.hasOwnProperty(name)) {
-      return config[name];
-    } else {
-      return defaultConfig[name];
-    }
-  };
-
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
 
   var TextStyle = /*#__PURE__*/function () {
@@ -5210,6 +5218,8 @@
           offsetY: this.offsetY,
           leftSpace: this.leftSpace,
           rightSpace: this.rightSpace,
+          backgroundHeight: this.backgroundHeight,
+          backgroundBottomY: this.backgroundBottomY,
           align: this.align
         };
       }
@@ -5227,6 +5237,8 @@
         this.setSpace(GetValue$8(o, 'leftSpace', 0), GetValue$8(o, 'rightSpace', 0));
         this.setAlign(GetValue$8(o, 'align', undefined));
         this.setBackgroundColor(GetValue$8(o, 'backgroundColor', null));
+        this.setBackgroundHeight(GetValue$8(o, 'backgroundHeight', undefined));
+        this.setBackgroundBottomY(GetValue$8(o, 'backgroundBottomY', undefined));
         return this;
       }
     }, {
@@ -5290,6 +5302,14 @@
 
         if (o.hasOwnProperty('backgroundColor')) {
           this.setBackgroundColor(o.backgroundColor);
+        }
+
+        if (o.hasOwnProperty('backgroundHeight')) {
+          this.setBackgroundHeight(o.backgroundHeight);
+        }
+
+        if (o.hasOwnProperty('backgroundBottomY')) {
+          this.setBackgroundBottomY(o.backgroundBottomY);
         }
 
         return this;
@@ -5458,6 +5478,18 @@
       key: "hasBackgroundColor",
       get: function get() {
         return this.backgroundColor != null;
+      }
+    }, {
+      key: "setBackgroundHeight",
+      value: function setBackgroundHeight(height) {
+        this.backgroundHeight = height;
+        return this;
+      }
+    }, {
+      key: "setBackgroundBottomY",
+      value: function setBackgroundBottomY(y) {
+        this.backgroundBottomY = y;
+        return this;
       }
     }, {
       key: "setOffsetX",
@@ -5882,10 +5914,21 @@
 
         if (textStyle.hasBackgroundColor) {
           context.fillStyle = textStyle.backgroundColor;
-          var x = this.drawTLX,
-              y = this.drawTLY,
-              width = this.drawTRX - x,
-              height = this.drawBLY - y;
+          var x = this.drawTLX;
+          var width = this.drawTRX - x;
+          var bottomY = textStyle.backgroundBottomY;
+
+          if (bottomY == null) {
+            bottomY = this.drawBLY;
+          }
+
+          var height = textStyle.backgroundHeight;
+
+          if (height == null) {
+            height = bottomY - this.drawTLY;
+          }
+
+          var y = bottomY - height;
           context.fillRect(x, y, width, height);
         }
 

@@ -24,6 +24,8 @@ var GetChildrenHeight = function (minimumMode) {
         }
     } else {
         // Get summation of minimum height
+        var itemSpace = this.space.item;
+        var isFirstChild = true;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
             if (!child.hasOwnProperty('rexSizer')) {
@@ -40,9 +42,13 @@ var GetChildrenHeight = function (minimumMode) {
             }
             padding = child.rexSizer.padding;
             childHeight += (padding.top + padding.bottom);
-            if (i > 0) {
-                childHeight += this.space.item;
+
+            if (isFirstChild) {
+                isFirstChild = false;
+            } else {
+                childHeight += itemSpace;
             }
+
             result += childHeight;
         }
     }

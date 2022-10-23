@@ -26,6 +26,8 @@ class TextStyle {
             offsetY: this.offsetY,
             leftSpace: this.leftSpace,
             rightSpace: this.rightSpace,
+            backgroundHeight: this.backgroundHeight,
+            backgroundBottomY: this.backgroundBottomY,
             align: this.align
         }
     }
@@ -56,6 +58,8 @@ class TextStyle {
         );
         this.setAlign(GetValue(o, 'align', undefined));
         this.setBackgroundColor(GetValue(o, 'backgroundColor', null));
+        this.setBackgroundHeight(GetValue(o, 'backgroundHeight', undefined));
+        this.setBackgroundBottomY(GetValue(o, 'backgroundBottomY', undefined));
 
         return this;
     }
@@ -118,6 +122,13 @@ class TextStyle {
 
         if (o.hasOwnProperty('backgroundColor')) {
             this.setBackgroundColor(o.backgroundColor);
+        }
+
+        if (o.hasOwnProperty('backgroundHeight')) {
+            this.setBackgroundHeight(o.backgroundHeight);
+        }
+        if (o.hasOwnProperty('backgroundBottomY')) {
+            this.setBackgroundBottomY(o.backgroundBottomY);
         }
 
         return this;
@@ -261,6 +272,16 @@ class TextStyle {
 
     get hasBackgroundColor() {
         return this.backgroundColor != null;
+    }
+
+    setBackgroundHeight(height) {
+        this.backgroundHeight = height;
+        return this;
+    }
+
+    setBackgroundBottomY(y) {
+        this.backgroundBottomY = y;
+        return this;
     }
 
     setOffsetX(offsetX) {

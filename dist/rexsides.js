@@ -2479,7 +2479,7 @@
 
   Object.assign(ContainerLite.prototype, methods$4);
 
-  var GetSizerConfig = function GetSizerConfig(gameObject) {
+  var GetSizerConfig$1 = function GetSizerConfig(gameObject) {
     if (!gameObject.hasOwnProperty('rexSizer')) {
       gameObject.rexSizer = {};
     }
@@ -2487,8 +2487,16 @@
     return gameObject.rexSizer;
   };
 
+  function GetSizerConfig (gameObject) {
+    if (gameObject === undefined) {
+      gameObject = this;
+    }
+
+    return GetSizerConfig$1(gameObject);
+  }
+
   var GetChildPrevState = function GetChildPrevState(child) {
-    var childConfig = GetSizerConfig(child);
+    var childConfig = GetSizerConfig$1(child);
 
     if (!childConfig.hasOwnProperty('prevState')) {
       childConfig.prevState = {};
@@ -3386,23 +3394,21 @@
         out = [];
       }
 
-      var children = this.children,
-          child;
+      var queue = [this];
 
-      for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
+      while (queue.length > 0) {
+        var current = queue.shift();
 
-        if (child.rexSizer && child.rexSizer.hidden) {
-          // Don't add hidden child
+        if (current.rexSizer && current.rexSizer.hidden) {
           continue;
         }
 
-        out.push(child);
+        if (current !== this) {
+          out.push(current);
+        }
 
-        if (child.hasOwnProperty('isRexContainerLite')) {
-          var _out;
-
-          (_out = out).push.apply(_out, _toConsumableArray(child.getAllShownChildren()));
+        if (current.isRexContainerLite) {
+          queue.push.apply(queue, _toConsumableArray(current.children));
         }
       }
 
@@ -6213,7 +6219,7 @@
       return false;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     return !config.hidden;
   };
 
@@ -6222,7 +6228,7 @@
       return;
     }
 
-    var config = GetSizerConfig(gameObject);
+    var config = GetSizerConfig$1(gameObject);
     config.hidden = hidden;
     var parent = GetParent$1(gameObject);
 

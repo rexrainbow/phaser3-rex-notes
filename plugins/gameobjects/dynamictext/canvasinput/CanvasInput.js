@@ -1,10 +1,12 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
+import ExtractByPrefix from './methods/ExtractByPrefix.js';
+import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
+import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class CanvasInput extends DynamicText {
@@ -20,30 +22,43 @@ class CanvasInput extends DynamicText {
         }
 
         // Set text later
-        var text = GetValue(config, 'text', undefined);
+        var text = config.text;
         if (text) {
             delete config.text;
         }
+
+        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
+        var focusStyle = ExtractByPrefix(config.background, 'focus');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
         this.textEdit = CreateHiddenTextEdit(this, config);
 
-        var addCharCallback = GetValue(config, 'onAddChar');
+        if (config.cursorStyle) {
+            Object.assign(cursorStyle, config.cursorStyle);
+        }
+        RegisterCursorStyle.call(this, cursorStyle);
+
+        if (config.focusStyle) {
+            Object.assign(focusStyle, config.focusStyle);
+        }
+        RegisterFocusStyle.call(this, focusStyle);
+
+        var addCharCallback = config.onAddChar;
         if (addCharCallback) {
             this.on('addchar', addCharCallback);
         }
 
-        var cursorOutCallback = GetValue(config, 'onCursorOut');
+        var cursorOutCallback = config.onCursorOut;
         if (cursorOutCallback) {
             this.on('cursorout', cursorOutCallback);
         }
-        var cursorInCallback = GetValue(config, 'onCursorIn');
+        var cursorInCallback = config.onCursorIn;
         if (cursorInCallback) {
             this.on('cursorin', cursorInCallback);
         }
-        var moveCursorCallback = GetValue(config, 'onMoveCursor');
+        var moveCursorCallback = config.onMoveCursor;
         if (moveCursorCallback) {
             this.on('movecursor', moveCursorCallback);
         }
@@ -103,6 +118,16 @@ class CanvasInput extends DynamicText {
 
     get isOpened() {
         return this.textEdit.isOpened;
+    }
+
+    setCursorStyle(style) {
+        this.cursorStyle = style;
+        return this;
+    }
+
+    setFocusStyle(style) {
+        this.focusStyle = style;
+        return this;
     }
 }
 

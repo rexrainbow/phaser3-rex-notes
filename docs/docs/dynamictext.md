@@ -119,6 +119,8 @@ var txt = scene.add.rexDynamicText({
         shadowOffsetY: 0,
         shadowBlur: 0,
         backgroundColor: null,
+        backgroundHeight: undefined,
+        backgroundBottomY: undefined,
         offsetX: 0,
         offsetY: 0
     },
@@ -182,6 +184,8 @@ var txt = scene.add.rexDynamicText({
     - `style.shadowOffsetY` : OffsetY of shadow.
     - `style.shadowBlur` : Blur of shadow.
     - `style.backgroundColor` : Background color of a character.
+    - `style.backgroundHeight`, `style.backgroundBottomY` : Background position and height of a character.
+        - `undefined`, or `null` : Use height of character as background height. Default behavior.
     - `style.offsetX` : OffsetX.
     - `style.offsetY` : OffsetY.
     - `style.align` : Override default line-alignment setting.
@@ -275,6 +279,8 @@ txt.appendText(text,
         // shadowOffsetY: 0,
         // shadowBlur: 0,
         // backgroundColor: null,
+        // backgroundHeight: undefined,
+        // backgroundBottomY: undefined,
         // offsetY: 0,
         // offsetY: 0,
         // align: undefined
@@ -310,6 +316,8 @@ txt.setText(text,
         // shadowOffsetY: 0,
         // shadowBlur: 0,
         // backgroundColor: null,
+        // backgroundHeight: undefined,
+        // backgroundBottomY: undefined,
         // offsetY: 0,
         // offsetY: 0,
         // align: undefined
@@ -339,6 +347,8 @@ txt.insertText(index, text,
         // shadowOffsetY: 0,
         // shadowBlur: 0,
         // backgroundColor: null,
+        // backgroundHeight: undefined,
+        // backgroundBottomY: undefined,
         // offsetY: 0,
         // offsetY: 0,
         // align: undefined
@@ -643,6 +653,8 @@ txt.setWrapConfig(config);
     var shadowOffsetX = char.style.shadowOffsetX;
     var shadowOffsetY = char.style.shadowOffsetY;
     var backgroundColor = char.style.backgroundColor;
+    var backgroundHeight = char.style.backgroundHeight;
+    var backgroundBottomY = char.style.backgroundBottomY;
     var xOffset = char.style.x;
     var yOffset = char.style.y;
     ```
@@ -661,6 +673,8 @@ txt.setWrapConfig(config);
         // shadowOffsetX: 0,
         // shadowOffsetY: 0,
         // backgroundColor: null,
+        // backgroundHeight: undefined,
+        // backgroundBottomY: undefined,
         // offsetX: 0,
         // offsetY: 0
     })

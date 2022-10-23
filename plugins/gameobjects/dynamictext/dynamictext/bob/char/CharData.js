@@ -166,10 +166,20 @@ class CharData extends RenderBase {
 
         if (textStyle.hasBackgroundColor) {
             context.fillStyle = textStyle.backgroundColor;
-            var x = this.drawTLX,
-                y = this.drawTLY,
-                width = this.drawTRX - x,
-                height = this.drawBLY - y;
+
+            var x = this.drawTLX;
+            var width = this.drawTRX - x;
+
+            var bottomY = textStyle.backgroundBottomY;
+            if (bottomY == null) {
+                bottomY = this.drawBLY;
+            }
+            var height = textStyle.backgroundHeight;
+            if (height == null) {
+                height = bottomY - this.drawTLY;
+            }
+            var y = bottomY - height;
+
             context.fillRect(x, y, width, height);
         }
 
