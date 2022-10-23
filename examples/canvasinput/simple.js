@@ -30,8 +30,14 @@ var CreateCanvasInput = function (scene, text) {
                 stroke: 'white',
                 cornerRadius: 20,
 
+                // Solution A
                 'focus.stroke': 'red',
             },
+            // Solution B
+            // focusStyle: {
+            //     stroke: 'red',
+            // },
+
             innerBounds: {
                 stroke: 'darkcyan'
             },
