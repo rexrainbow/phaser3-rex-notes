@@ -8840,8 +8840,14 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
         <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
 
         <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span>
+        <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
+        <span class="c1">// Style when focus</span>
+        <span class="c1">// &#39;focus.color&#39;: ...</span>
+        <span class="c1">// &#39;focus.color2&#39;: ...</span>
+        <span class="c1">// &#39;focus.stroke&#39;: ...</span>
     <span class="p">},</span>
+    <span class="nx">focusStyle</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">innerBounds</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -8987,6 +8993,24 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><code>focusStyle</code> : Will apply this style to background when focusing.<ul>
+<li><code>undefined</code> : Ignore this behavior.</li>
+<li>A plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+    <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+
+    <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Or add these style settings in <code>background</code> parameter, with prefix <code>'focus.'</code>.</li>
 </ul>
 </li>
 <li><code>cursorStyle</code> : Will apply this style when cursor move on a character child.<ul>
