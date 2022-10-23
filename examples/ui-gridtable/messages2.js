@@ -94,11 +94,7 @@ class Demo extends Phaser.Scene {
                 cell.setCellContainerAlign((item.isLeft) ? 'left' : 'right');
 
                 // Set padding
-                if (isTheSameName) {
-                    cellContainer.setInnerPadding('top', 5);
-                } else {
-                    cellContainer.setInnerPadding('top', 20);
-                }
+                cellContainer.setInnerPadding('top', (isTheSameName) ? 5 : 20);
 
                 // Layout manually, to get cell height
                 cellContainer
