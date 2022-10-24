@@ -43,7 +43,7 @@ var CreateCanvasInput = function (scene, text) {
             },
             padding: 20,
             style: {
-                fontSize: '24px',
+                fontSize: 24,
                 backgroundBottomY: 8,
                 backgroundHeight: 32,
 
@@ -59,8 +59,6 @@ var CreateCanvasInput = function (scene, text) {
 
             wrap: {
                 lineHeight: 40,
-                maxLines: 0,       // Set maxLines to 0
-                letterSpacing: 1,
                 padding: { bottom: 10 },
             },
 
