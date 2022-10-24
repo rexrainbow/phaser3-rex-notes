@@ -53,7 +53,7 @@ var CreateCanvasInput = function (scene, text) {
                 textObject.setBackgroundStroke('white')
             },
 
-            onUpdate: 'number',
+            // onUpdate: 'number',
 
             onAddChar(child) {
                 child
@@ -78,6 +78,7 @@ var CreateCanvasInput = function (scene, text) {
             text: text,
         }
     )
+        .setNumberInput()
 }
 
 var config = {

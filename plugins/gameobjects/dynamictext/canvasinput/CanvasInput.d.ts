@@ -74,4 +74,14 @@ declare class CanvasInput extends DynamicText {
     open(onCloseCallback?: Function): this;
     close(): this;
     readonly isOpened: boolean;
+
+    setFocusStyle(
+        style: DynamicText.IConfigBackground
+    ): this;
+
+    setCursorStyle(
+        style: DynamicText.IConfigTextStyle
+    ): this;
+
+    setNumberInput(): this;
 }

@@ -6,6 +6,7 @@ import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
 import SetText from './methods/SetText.js';
 import { IsChar } from '../dynamictext/bob/Types.js';
+import SetNumberInput from './methods/SetNumbetInput.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -28,7 +29,7 @@ class CanvasInput extends DynamicText {
         }
 
         var focusStyle = ExtractByPrefix(config.background, 'focus');
-        var cursorStyle = ExtractByPrefix(config.style, 'cursor');        
+        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
@@ -120,15 +121,25 @@ class CanvasInput extends DynamicText {
         return this.textEdit.isOpened;
     }
 
+    setFocusStyle(style) {
+        this.focusStyle = style;
+        return this;
+    }
+
     setCursorStyle(style) {
         this.cursorStyle = style;
         return this;
     }
 
-    setFocusStyle(style) {
-        this.focusStyle = style;
-        return this;
-    }
 }
+
+var Methods = {
+    setNumberInput: SetNumberInput,
+}
+
+Object.assign(
+    CanvasInput.prototype,
+    Methods,
+)
 
 export default CanvasInput;
