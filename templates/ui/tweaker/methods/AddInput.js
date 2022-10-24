@@ -26,7 +26,13 @@ var AddInput = function (object, key, config) {
     var inputTitleAddConfig = config.addConfig;
     inputSizer.add(inputTitle, inputTitleAddConfig);
 
-    //TODO: Add input
+    config.addConfig = {
+        proportion: 1,
+        expand: true,
+    };
+    var textInput = this.make('textInput', config);
+    var textInputAddConfig = config.addConfig;
+    inputSizer.add(textInput, textInputAddConfig);
 
     // Add InputSizer to Twealer
     this.add(inputSizer, inputSizerAddConfig);

@@ -40,6 +40,12 @@ class Demo extends Phaser.Scene {
                     space: { left: 10, right: 10, top: 10, bottom: 10 }
                 },
 
+                input: {
+                    background: {
+                        stroke: COLOR_LIGHT
+                    }
+                },
+
                 space: {
                     left: 20, right: 20, top: 20, bottom: 20, item: 8
                 }
