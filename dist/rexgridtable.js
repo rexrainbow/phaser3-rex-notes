@@ -7920,10 +7920,12 @@
   var GetValue$y = Phaser.Utils.Objects.GetValue;
 
   var DownChild = function DownChild(config) {
-    var overConfig = GetValue$y(config, 'down', undefined);
+    var downConfig = GetValue$y(config, 'down', undefined);
 
-    if (overConfig === false) {
+    if (downConfig === false) {
       return;
+    } else if (downConfig === true) {
+      downConfig = undefined;
     }
 
     this.on('pointerdown', OnDown, this);
@@ -7937,10 +7939,12 @@
   var GetValue$x = Phaser.Utils.Objects.GetValue;
 
   var UpChild = function UpChild(config) {
-    var overConfig = GetValue$x(config, 'up', undefined);
+    var upConfig = GetValue$x(config, 'up', undefined);
 
-    if (overConfig === false) {
+    if (upConfig === false) {
       return;
+    } else if (upConfig === true) {
+      upConfig = undefined;
     }
 
     this.on('pointerup', OnUp, this);
@@ -7958,6 +7962,8 @@
 
     if (overConfig === false) {
       return;
+    } else if (overConfig === true) {
+      overConfig = undefined;
     }
 
     this.on('pointermove', OnMove$1, this).on('pointerover', OnMove$1, this).on('pointerout', OnOut$1, this); // pointer-up is included too
@@ -7991,6 +7997,8 @@
 
     if (clickConfig === false) {
       return;
+    } else if (clickConfig === true) {
+      clickConfig = undefined;
     }
 
     if (clickConfig === undefined) {
@@ -9578,6 +9586,8 @@
 
     if (tapConfig === false) {
       return;
+    } else if (tapConfig === true) {
+      tapConfig = undefined;
     }
 
     var childrenInteractive = this._childrenInteractive;
@@ -9595,6 +9605,8 @@
 
     if (pressConfig === false) {
       return;
+    } else if (pressConfig === true) {
+      pressConfig = undefined;
     }
 
     var childrenInteractive = this._childrenInteractive;
@@ -9614,6 +9626,8 @@
 
     if (swipeConfig === false) {
       return;
+    } else if (swipeConfig === true) {
+      swipeConfig = undefined;
     }
 
     if (swipeConfig === undefined) {

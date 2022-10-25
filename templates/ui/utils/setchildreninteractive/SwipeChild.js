@@ -7,6 +7,8 @@ var SwipeChild = function (config) {
     var swipeConfig = GetValue(config, 'swipe', undefined);
     if (swipeConfig === false) {
         return;
+    } else if (swipeConfig === true) {
+        swipeConfig = undefined;
     }
 
     if (swipeConfig === undefined) {

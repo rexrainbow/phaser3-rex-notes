@@ -7,6 +7,8 @@ var OverChild = function (config) {
     var overConfig = GetValue(config, 'over', undefined);
     if (overConfig === false) {
         return;
+    } else if (overConfig === true) {
+        overConfig = undefined;
     }
 
     this
