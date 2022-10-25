@@ -34,6 +34,7 @@ class DynamicText extends Canvas {
         var textStyleConfig = GetValue(config, 'style', undefined);
         this.defaultTextStyle = new TextStyle(null, textStyleConfig);
         this.textStyle = this.defaultTextStyle.clone();
+        this.setTestString(GetValue(config, 'testString', '|MÉqgy'));
 
         this.background = new Background(this, GetValue(config, 'background', undefined));
         this.innerBounds = new InnerBounds(this, GetValue(config, 'innerBounds', undefined));

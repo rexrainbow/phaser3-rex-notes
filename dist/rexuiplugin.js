@@ -664,7 +664,7 @@
   var NOOP = function NOOP() {//  NOOP
   };
 
-  var Methods$h = {
+  var Methods$i = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -796,7 +796,7 @@
       return NinePatch;
     }(GOClass);
 
-    Object.assign(NinePatch.prototype, Methods$h);
+    Object.assign(NinePatch.prototype, Methods$i);
     return NinePatch;
   };
 
@@ -834,7 +834,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$g = {
+  var Methods$h = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -855,7 +855,7 @@
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
 
-  Object.assign(NinePatch$1.prototype, Methods$g);
+  Object.assign(NinePatch$1.prototype, Methods$h);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -2162,7 +2162,7 @@
     }
   };
 
-  var Methods$f = {
+  var Methods$g = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -2196,7 +2196,7 @@
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
 
-  Object.assign(NinePatch.prototype, Methods$f);
+  Object.assign(NinePatch.prototype, Methods$g);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -8111,7 +8111,7 @@
     return this;
   };
 
-  var Methods$e = {
+  var Methods$f = {
     open: Open$1,
     close: Close$1
   };
@@ -8530,7 +8530,7 @@
     return HiddenTextEditBase;
   }(ComponentBase);
 
-  Object.assign(HiddenTextEditBase.prototype, Methods$e);
+  Object.assign(HiddenTextEditBase.prototype, Methods$f);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -11319,10 +11319,10 @@
 
   var globBounds;
 
-  var Methods$d = {
+  var Methods$e = {
     contains: Contains$1
   };
-  Object.assign(Methods$d, RenderMethods);
+  Object.assign(Methods$e, RenderMethods);
 
   var DegToRad$8 = Phaser.Math.DegToRad;
   var RadToDeg$6 = Phaser.Math.RadToDeg;
@@ -11745,7 +11745,7 @@
     return RenderBase;
   }(Base$1);
 
-  Object.assign(RenderBase.prototype, Methods$d);
+  Object.assign(RenderBase.prototype, Methods$e);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -12518,8 +12518,18 @@
     return this;
   };
 
+  var ModifyDefaultTextStyle = function ModifyDefaultTextStyle(style) {
+    this.defaultTextStyle.modify(style);
+    return this;
+  };
+
   var ResetTextStyle = function ResetTextStyle() {
     this.textStyle.copyFrom(this.defaultTextStyle);
+    return this;
+  };
+
+  var SetTestString = function SetTestString(testString) {
+    this.testString = testString;
     return this;
   };
 
@@ -13564,6 +13574,26 @@
     }
   };
 
+  var GetDefaultTextHeight = function GetDefaultTextHeight() {
+    var metrics = this.defaultTextStyle.getTextMetrics(this.context, this.testString);
+    var ascent, descent;
+
+    if ('actualBoundingBoxAscent' in metrics) {
+      ascent = metrics.actualBoundingBoxAscent;
+      descent = metrics.actualBoundingBoxDescent;
+    } else {
+      ascent = 0;
+      descent = 0;
+    }
+
+    Result.ascent = ascent;
+    Result.descent = descent;
+    Result.height = ascent + descent;
+    return Result;
+  };
+
+  var Result = {};
+
   var GetValue$23 = Phaser.Utils.Objects.GetValue;
 
   var RunWordWrap$1 = function RunWordWrap(config) {
@@ -13573,23 +13603,37 @@
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right; // Get lineHeight, maxLines
 
-    var lineHeight = GetValue$23(config, 'lineHeight', undefined);
+    var lineHeight = GetValue$23(config, 'lineHeight');
+    var ascent = GetValue$23(config, 'ascent', lineHeight);
     var maxLines;
 
     if (lineHeight === undefined) {
-      // Calculate lineHeight via maxLines, in fixedHeight mode
+      // Calculate lineHeight        
       maxLines = GetValue$23(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
         var innerHeight = this.fixedHeight - paddingVertical;
-        lineHeight = innerHeight / maxLines;
+
+        if (maxLines > 0) {
+          // Calculate lineHeight via maxLines, in fixedHeight mode
+          lineHeight = innerHeight / maxLines;
+        } else {
+          var textHeightResult = GetDefaultTextHeight.call(this);
+          lineHeight = textHeightResult.height;
+          ascent = textHeightResult.ascent; // Calculate maxLines via (ascent, lineHeight), in fixedHeight mode
+
+          maxLines = Math.floor((innerHeight - ascent) / lineHeight);
+        }
       } else {
-        lineHeight = 0;
+        var textHeightResult = GetDefaultTextHeight.call(this);
+        lineHeight = textHeightResult.height;
+        ascent = textHeightResult.ascent;
       }
     } else {
+      // Calculate maxLines
       if (this.fixedHeight > 0) {
         // Calculate maxLines via lineHeight, in fixedHeight mode
-        maxLines = GetValue$23(config, 'maxLines', undefined);
+        maxLines = GetValue$23(config, 'maxLines');
 
         if (maxLines === undefined) {
           var innerHeight = this.fixedHeight - paddingVertical;
@@ -13598,6 +13642,11 @@
       } else {
         maxLines = GetValue$23(config, 'maxLines', 0); // Default is show all lines
       }
+    } // If ascent is undefined, assign to lineHeight
+
+
+    if (ascent === undefined) {
+      ascent = lineHeight;
     }
 
     var showAllLines = maxLines === 0; // Get wrapWidth
@@ -13622,6 +13671,7 @@
       isLastPage: false,
       // Is last page
       padding: this.wrapPadding,
+      ascent: ascent,
       lineHeight: lineHeight,
       maxLines: maxLines,
       wrapWidth: wrapWidth,
@@ -13646,8 +13696,8 @@
 
     wrapWidth += letterSpacing;
     var startX = this.padding.left + this.wrapPadding.left,
-        startY = this.padding.top + this.wrapPadding.top + lineHeight,
-        // Start(baseline) from 1st lineHeight, not 0
+        startY = this.padding.top + this.wrapPadding.top + ascent,
+        // Start(baseline) from ascent, not 0
     x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
@@ -14529,12 +14579,14 @@
     }
   };
 
-  var Methods$c = {
+  var Methods$d = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    modifyDefaultTextStyle: ModifyDefaultTextStyle,
     resetTextStyle: ResetTextStyle,
+    setTestString: SetTestString,
     removeChild: RemoveChild$1,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
@@ -14573,7 +14625,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$c, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
+  Object.assign(Methods$d, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -14664,6 +14716,9 @@
       var textStyleConfig = GetValue$21(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(null, textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
+
+      _this.setTestString(GetValue$21(config, 'testString', '|MÉqgy'));
+
       _this.background = new Background(_assertThisInitialized(_this), GetValue$21(config, 'background', undefined));
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$21(config, 'innerBounds', undefined));
       _this.children = [];
@@ -14710,7 +14765,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$c);
+  Object.assign(DynamicText.prototype, Methods$d);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -16954,10 +17009,10 @@
     return this;
   };
 
-  var Methods$b = {
+  var Methods$c = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$b, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$c, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
 
@@ -17125,7 +17180,7 @@
     return GOManager;
   }();
 
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$b);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$c);
 
   var AddGameObjectManager = function AddGameObjectManager(config, GameObjectManagerClass) {
     if (config === undefined) {
@@ -19130,7 +19185,7 @@
     return this;
   };
 
-  var Methods$a = {
+  var Methods$b = {
     start: Start,
     typing: Typing,
     pause: Pause,
@@ -19144,7 +19199,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$a, TypingSpeedMethods$1);
+  Object.assign(Methods$b, TypingSpeedMethods$1);
 
   var GetValue$1R = Phaser.Utils.Objects.GetValue;
 
@@ -19262,7 +19317,7 @@
     }
   };
 
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$a);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$b);
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
@@ -19351,8 +19406,8 @@
     }
   };
 
-  var Methods$9 = {};
-  Object.assign(Methods$9, AnimationMethods);
+  var Methods$a = {};
+  Object.assign(Methods$a, AnimationMethods);
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
@@ -19404,7 +19459,7 @@
     return scene.add.image(0, 0, textureKey, frameName);
   };
 
-  Object.assign(SpriteManager.prototype, Methods$9);
+  Object.assign(SpriteManager.prototype, Methods$a);
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
     // goType.name.play
@@ -20135,7 +20190,7 @@
     }
   };
 
-  var Methods$8 = {
+  var Methods$9 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -20146,7 +20201,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$8, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
+  Object.assign(Methods$9, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -20290,7 +20345,7 @@
     return TextPlayer;
   }(Extend(DynamicText));
 
-  Object.assign(TextPlayer.prototype, Methods$8);
+  Object.assign(TextPlayer.prototype, Methods$9);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -21021,6 +21076,11 @@
     textObject.runWordWrap();
   };
 
+  var SetNumberInput = function SetNumberInput() {
+    this.textEdit.onUpdateCallback = NumberInputUpdateCallback;
+    return this;
+  };
+
   var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
 
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
@@ -21050,23 +21110,23 @@
         delete config.text;
       }
 
-      var cursorStyle = ExtractByPrefix(config.style, 'cursor');
       var focusStyle = ExtractByPrefix(config.background, 'focus');
+      var cursorStyle = ExtractByPrefix(config.style, 'cursor');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
-
-      if (config.cursorStyle) {
-        Object.assign(cursorStyle, config.cursorStyle);
-      }
-
-      RegisterCursorStyle.call(_assertThisInitialized(_this), cursorStyle);
 
       if (config.focusStyle) {
         Object.assign(focusStyle, config.focusStyle);
       }
 
       RegisterFocusStyle.call(_assertThisInitialized(_this), focusStyle);
+
+      if (config.cursorStyle) {
+        Object.assign(cursorStyle, config.cursorStyle);
+      }
+
+      RegisterCursorStyle.call(_assertThisInitialized(_this), cursorStyle);
       var addCharCallback = config.onAddChar;
 
       if (addCharCallback) {
@@ -21161,21 +21221,26 @@
         return this.textEdit.isOpened;
       }
     }, {
-      key: "setCursorStyle",
-      value: function setCursorStyle(style) {
-        this.cursorStyle = style;
-        return this;
-      }
-    }, {
       key: "setFocusStyle",
       value: function setFocusStyle(style) {
         this.focusStyle = style;
+        return this;
+      }
+    }, {
+      key: "setCursorStyle",
+      value: function setCursorStyle(style) {
+        this.cursorStyle = style;
         return this;
       }
     }]);
 
     return CanvasInput;
   }(DynamicText);
+
+  var Methods$8 = {
+    setNumberInput: SetNumberInput
+  };
+  Object.assign(CanvasInput.prototype, Methods$8);
 
   ObjectFactory.register('canvasInput', function (x, y, fixedWidth, fixedHeight, config) {
     var gameObject = new CanvasInput(this.scene, x, y, fixedWidth, fixedHeight, config);

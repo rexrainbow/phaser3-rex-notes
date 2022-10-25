@@ -65,6 +65,7 @@ declare namespace DynamicText {
         padding?: {
             top?: number, bottom?: number,
         },
+        ascent?: number,
         lineHeight?: number,
         maxLines?: number,
         wrapWidth?: number,
@@ -174,7 +175,12 @@ declare class DynamicText extends Canvas {
     ): this;
     getText(activeOnly?: boolean): string;
     resetTextStyle(): this;
+    modifyTextStyle(style: DynamicText.IConfigTextStyle): this;
+    modifyDefaultTextStyle(style: DynamicText.IConfigTextStyle): this;
     text: string;
+
+    setTestString(testString: string): this;
+    testString: string;
 
     getCharChild(
         charIndex: number,

@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexDynamicText(
             {
                 x: 400, y: 300,
+                width: 300,
 
                 background: {
                     stroke: 'white',
@@ -26,34 +27,35 @@ class Demo extends Phaser.Scene {
                 },
                 padding: 20,
                 style: {
-                    fontSize: '16px',
+                    fontSize: 16,
                 },
             }
         )
 
-        var content = [
-            'Phaser is a fast, free, and fun open source HTML5 game framework\n',
-            'that offers WebGL and DynamicText rendering across desktop and mobile web browsers.\n',
-            'Games can be compiled to iOS, Android and native apps by using 3rd party tools.\n',
-            'You can use JavaScript or TypeScript for development.'
-        ];
-        text
-            .appendText(content[0], { color: '#FFF8DC' })
-            .appendText(content[1], { color: '#008B8B' })
-            .appendText(content[2], { color: '#FF7F50' })
-            .appendText(content[3], { color: '#F8F8FF' });
+        var content = 'Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.'
+        text.appendText(content)
 
-        text.runWordWrap({
-            ascent: 20,
-            lineHeight: 30,
-            padding: { bottom: 10 },
+        this.print = this.add.text(0, 580, '');
 
-            hAlign: 'right',
-            vAlign: 'bottom'
-        });
+        ShowNextPage(text);
     }
 
     update() { }
+}
+
+var ShowNextPage = function (text, config) {
+    var result = text.runWordWrap(config);
+
+    var scene = text.scene;
+    if (!result.isLastPage) {
+        scene.print.setText('Click to continue');
+        scene.input.once('pointerdown', function () {
+            scene.print.setText('');
+            ShowNextPage(text, result);
+        })
+    } else {
+        scene.print.setText('Last page');
+    }
 }
 
 var config = {

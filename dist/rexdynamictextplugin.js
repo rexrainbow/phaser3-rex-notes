@@ -2604,8 +2604,18 @@
     return this;
   };
 
+  var ModifyDefaultTextStyle = function ModifyDefaultTextStyle(style) {
+    this.defaultTextStyle.modify(style);
+    return this;
+  };
+
   var ResetTextStyle = function ResetTextStyle() {
     this.textStyle.copyFrom(this.defaultTextStyle);
+    return this;
+  };
+
+  var SetTestString = function SetTestString(testString) {
+    this.testString = testString;
     return this;
   };
 
@@ -3642,6 +3652,26 @@
     }
   };
 
+  var GetDefaultTextHeight = function GetDefaultTextHeight() {
+    var metrics = this.defaultTextStyle.getTextMetrics(this.context, this.testString);
+    var ascent, descent;
+
+    if ('actualBoundingBoxAscent' in metrics) {
+      ascent = metrics.actualBoundingBoxAscent;
+      descent = metrics.actualBoundingBoxDescent;
+    } else {
+      ascent = 0;
+      descent = 0;
+    }
+
+    Result.ascent = ascent;
+    Result.descent = descent;
+    Result.height = ascent + descent;
+    return Result;
+  };
+
+  var Result = {};
+
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
 
   var RunWordWrap$1 = function RunWordWrap(config) {
@@ -3651,23 +3681,37 @@
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right; // Get lineHeight, maxLines
 
-    var lineHeight = GetValue$2(config, 'lineHeight', undefined);
+    var lineHeight = GetValue$2(config, 'lineHeight');
+    var ascent = GetValue$2(config, 'ascent', lineHeight);
     var maxLines;
 
     if (lineHeight === undefined) {
-      // Calculate lineHeight via maxLines, in fixedHeight mode
+      // Calculate lineHeight        
       maxLines = GetValue$2(config, 'maxLines', 0);
 
       if (this.fixedHeight > 0) {
         var innerHeight = this.fixedHeight - paddingVertical;
-        lineHeight = innerHeight / maxLines;
+
+        if (maxLines > 0) {
+          // Calculate lineHeight via maxLines, in fixedHeight mode
+          lineHeight = innerHeight / maxLines;
+        } else {
+          var textHeightResult = GetDefaultTextHeight.call(this);
+          lineHeight = textHeightResult.height;
+          ascent = textHeightResult.ascent; // Calculate maxLines via (ascent, lineHeight), in fixedHeight mode
+
+          maxLines = Math.floor((innerHeight - ascent) / lineHeight);
+        }
       } else {
-        lineHeight = 0;
+        var textHeightResult = GetDefaultTextHeight.call(this);
+        lineHeight = textHeightResult.height;
+        ascent = textHeightResult.ascent;
       }
     } else {
+      // Calculate maxLines
       if (this.fixedHeight > 0) {
         // Calculate maxLines via lineHeight, in fixedHeight mode
-        maxLines = GetValue$2(config, 'maxLines', undefined);
+        maxLines = GetValue$2(config, 'maxLines');
 
         if (maxLines === undefined) {
           var innerHeight = this.fixedHeight - paddingVertical;
@@ -3676,6 +3720,11 @@
       } else {
         maxLines = GetValue$2(config, 'maxLines', 0); // Default is show all lines
       }
+    } // If ascent is undefined, assign to lineHeight
+
+
+    if (ascent === undefined) {
+      ascent = lineHeight;
     }
 
     var showAllLines = maxLines === 0; // Get wrapWidth
@@ -3700,6 +3749,7 @@
       isLastPage: false,
       // Is last page
       padding: this.wrapPadding,
+      ascent: ascent,
       lineHeight: lineHeight,
       maxLines: maxLines,
       wrapWidth: wrapWidth,
@@ -3724,8 +3774,8 @@
 
     wrapWidth += letterSpacing;
     var startX = this.padding.left + this.wrapPadding.left,
-        startY = this.padding.top + this.wrapPadding.top + lineHeight,
-        // Start(baseline) from 1st lineHeight, not 0
+        startY = this.padding.top + this.wrapPadding.top + ascent,
+        // Start(baseline) from ascent, not 0
     x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
@@ -4612,7 +4662,9 @@
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    modifyDefaultTextStyle: ModifyDefaultTextStyle,
     resetTextStyle: ResetTextStyle,
+    setTestString: SetTestString,
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
     clearContent: ClearContent,
@@ -4784,6 +4836,9 @@
       var textStyleConfig = GetValue(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(null, textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
+
+      _this.setTestString(GetValue(config, 'testString', '|MÉqgy'));
+
       _this.background = new Background(_assertThisInitialized(_this), GetValue(config, 'background', undefined));
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue(config, 'innerBounds', undefined));
       _this.children = [];

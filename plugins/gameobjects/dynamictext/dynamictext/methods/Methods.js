@@ -2,7 +2,10 @@ import SetFixedSize from './SetFixedSize.js';
 import SetPadding from './SetPadding.js';
 import GetPadding from './GetPadding.js';
 import ModifyTextStyle from './ModifyTextStyle.js';
+import ModifyDefaultTextStyle from './ModifyDefaultTextStyle.js';
 import ResetTextStyle from './ResetTextStyle.js';
+import SetTestString from './SetTestString.js';
+
 import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
 import ClearContent from './ClearContent.js';
@@ -52,7 +55,9 @@ var Methods = {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    modifyDefaultTextStyle: ModifyDefaultTextStyle,
     resetTextStyle: ResetTextStyle,
+    setTestString: SetTestString,
 
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,

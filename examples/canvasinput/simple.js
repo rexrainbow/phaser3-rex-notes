@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
 var CreateCanvasInput = function (scene, text) {
     return scene.add.rexCanvasInput(
         {
-            width: 600, height: 100,
+            width: 600,
 
             background: {
                 stroke: 'white',
@@ -44,8 +44,8 @@ var CreateCanvasInput = function (scene, text) {
             padding: 20,
             style: {
                 fontSize: 24,
-                backgroundBottomY: 8,
-                backgroundHeight: 32,
+                backgroundBottomY: 5,
+                backgroundHeight: 24,
 
                 // Solution A
                 'cursor.color': 'black',
@@ -56,11 +56,6 @@ var CreateCanvasInput = function (scene, text) {
             //     color: 'black',
             //     backgroundColor: 'white'
             // },
-
-            wrap: {
-                lineHeight: 40,
-                padding: { bottom: 10 },
-            },
 
             text: text,
         }
