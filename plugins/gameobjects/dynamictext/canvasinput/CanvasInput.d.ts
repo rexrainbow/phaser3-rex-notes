@@ -60,6 +60,14 @@ declare namespace CanvasInput {
 
         cursorStyle?: DynamicText.IConfigTextStyle;
 
+        onOpen?: HiddenTextEdit.OnOpenCallbackType;
+        onFocus?: HiddenTextEdit.OnOpenCallbackType;
+
+        onClose?: HiddenTextEdit.OnCloseCallbackType;
+        onBlur?: HiddenTextEdit.OnCloseCallbackType;
+
+        onUpdate?: HiddenTextEdit.OnUpdateCallbackType | 'number';
+
         onAddChar?: AddCharCallbackType;
 
         onMoveCursor?: MoveCursorCallbackType
