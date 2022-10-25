@@ -1683,6 +1683,19 @@
     Horizontal wrap
   </a>
   
+    <nav class="md-nav" aria-label="Horizontal wrap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-string" class="md-nav__link">
+    Test string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8963,6 +8976,19 @@
     Horizontal wrap
   </a>
   
+    <nav class="md-nav" aria-label="Horizontal wrap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-string" class="md-nav__link">
+    Test string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9241,7 +9267,9 @@
 
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 
-    <span class="nx">wrap</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="nx">wrap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">testString</span><span class="o">:</span> <span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9350,6 +9378,7 @@
 </li>
 <li><code>text</code> : Content of text.</li>
 <li><code>wrap</code> : Default configuration <a href="./#horizontal-wrap">Horizontal</a>/<a href="./#vertical-wrap">Vertical</a> wrapping.</li>
+<li><code>testString</code> : Test string to get text ascent and text height with default text style.</li>
 </ul>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -9539,6 +9568,7 @@ or</p>
         <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
+    <span class="nx">ascent</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -9553,13 +9583,14 @@ or</p>
 <li><code>padding.top</code>, <code>padding.bottom</code>, <code>padding.left</code>, <code>padding.right</code> : Extra space around lines.</li>
 </ul>
 </li>
-<li><code>lineHeight</code> : Line height. <ul>
-<li><code>undefined</code> : It will be set if <code>maxLines</code> and <code>fixedHeight</code> is given.</li>
+<li><code>ascent</code>, <code>lineHeight</code> : Height of first line and remainder lines<ul>
+<li><code>ascent</code> will set to <code>lineHeight</code> if <code>ascent</code> is <code>undefined</code> but <code>lineHeight</code> is not <code>undefined</code> (backward compatible)</li>
+<li>Get <code>ascent</code>, <code>lineHeight</code> from default text style and test string, if <code>ascent</code>, <code>lineHeight</code> are both <code>undefined</code></li>
 </ul>
 </li>
 <li><code>maxLines</code> : Lines number of this page. <ul>
 <li><code>0</code> : Wrapping whole content.</li>
-<li><code>undefined</code> : It will be set if <code>lineHeight</code> and <code>fixedHeight</code> is given.</li>
+<li><code>undefined</code> : It will be set if <code>lineHeight</code> and <code>fixedHeight</code> is giv</li>
 </ul>
 </li>
 <li><code>wrapWidth</code> : Width of wrapping</li>
@@ -9582,6 +9613,9 @@ or</p>
 </ul>
 </li>
 </ul>
+<h5 id="test-string">Test string<a class="headerlink" href="#test-string" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTestString</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
 <h4 id="vertical-wrap">Vertical wrap<a class="headerlink" href="#vertical-wrap" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runVerticalWrap</span><span class="p">({</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>

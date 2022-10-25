@@ -123,6 +123,8 @@ declare namespace DynamicText {
 
         wrap?: IConfigWordWrap | IConfigVerticalWrap,
 
+        testString?: string,
+
         childrenInteractive?: boolean,
     }
 

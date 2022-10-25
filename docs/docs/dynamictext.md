@@ -129,7 +129,9 @@ var txt = scene.add.rexDynamicText({
 
     text: '',
 
-    wrap: undefined
+    wrap: undefined,
+
+    testString: '|MÉqgy',
 });
 ```
 
@@ -198,6 +200,7 @@ var txt = scene.add.rexDynamicText({
     - `false` : Won't fire any input events of child. Default behavior.
 - `text` : Content of text.
 - `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
+- `testString` : Test string to get text ascent and text height with default text style.
 
 or
 
@@ -434,6 +437,7 @@ var result = txt.runWordWrap({
         top: 0,
         bottom: 0
     },
+    ascent: undefined,
     lineHeight: undefined,
     maxLines: undefined,
     wrapWidth: undefined,
@@ -446,11 +450,12 @@ var result = txt.runWordWrap({
 
 - `padding` :
     - `padding.top`, `padding.bottom`, `padding.left`, `padding.right` : Extra space around lines.
-- `lineHeight` : Line height. 
-    - `undefined` : It will be set if `maxLines` and `fixedHeight` is given.
+- `ascent`, `lineHeight` : Height of first line and remainder lines
+    - `ascent` will set to `lineHeight` if `ascent` is `undefined` but `lineHeight` is not `undefined` (backward compatible)
+    - Get `ascent`, `lineHeight` from default text style and test string, if `ascent`, `lineHeight` are both `undefined`
 - `maxLines` : Lines number of this page. 
     - `0` : Wrapping whole content.
-    - `undefined` : It will be set if `lineHeight` and `fixedHeight` is given.
+    - `undefined` : It will be set if `lineHeight` and `fixedHeight` is giv
 - `wrapWidth` : Width of wrapping
 - `letterSpacing` : Space between each character.
 - `hAlign` : Horizontal alignment.
@@ -464,6 +469,13 @@ var result = txt.runWordWrap({
 - `charWrap`
     - `false` : Word wrap. Default behavior.
     - `true` : Character wrap.
+
+
+##### Test string
+
+```javascript
+txt.setTestString(text);
+```
 
 #### Vertical wrap
 
