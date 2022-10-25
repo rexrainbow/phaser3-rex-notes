@@ -27,9 +27,6 @@ var CreateCanvasInput = function (scene, text) {
             width: 600,
 
             background: {
-                stroke: 'white',
-                cornerRadius: 20,
-
                 // Solution A
                 'focus.stroke': 'red',
             },
@@ -38,10 +35,6 @@ var CreateCanvasInput = function (scene, text) {
             //     stroke: 'red',
             // },
 
-            innerBounds: {
-                stroke: 'darkcyan'
-            },
-            padding: 20,
             style: {
                 fontSize: 24,
                 backgroundBottomY: 5,
