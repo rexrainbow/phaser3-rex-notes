@@ -43,6 +43,12 @@ class Demo extends Phaser.Scene {
                 input: {
                     background: {
                         stroke: COLOR_LIGHT
+                    },
+                    style: {
+                        backgroundBottomY: 4,
+                        backgroundHeight: 18,
+                        'cursor.color': 'black',
+                        'cursor.backgroundColor': 'white',
                     }
                 },
 
@@ -52,7 +58,7 @@ class Demo extends Phaser.Scene {
             },
         })
             .addInput(obj, 'a')
-            // .addInput(obj, 'b')
+            .addInput(obj, 'b')
 
         panel
             .layout();

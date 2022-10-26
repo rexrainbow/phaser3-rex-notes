@@ -65,8 +65,6 @@ var CreateLoginDialog = function (scene, config) {
                 fontSize: 20,
                 backgroundBottomY: 5,
                 backgroundHeight: 20,
-
-                // Solution A
                 'cursor.color': 'black',
                 'cursor.backgroundColor': 'white',
             },
@@ -91,8 +89,6 @@ var CreateLoginDialog = function (scene, config) {
                 fontSize: 20,
                 backgroundBottomY: 5,
                 backgroundHeight: 20,
-
-                // Solution A
                 'cursor.color': 'black',
                 'cursor.backgroundColor': 'white',
             },

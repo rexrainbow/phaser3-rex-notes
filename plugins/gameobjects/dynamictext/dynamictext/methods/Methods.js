@@ -28,6 +28,7 @@ import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
+import SetAlignMethods from './SetAlignMethods.js';
 import RenderContent from './RenderContent.js';
 
 import ForEachChild from './ForEachChild.js';
@@ -110,6 +111,7 @@ Object.assign(
     MoveChildMethods,
     BackgroundMethods,
     InnerBoundsMethods,
+    SetAlignMethods,
 
 )
 

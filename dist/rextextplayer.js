@@ -7214,6 +7214,17 @@
     return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
   };
 
+  var SetAlignMethods = {
+    setVAlign: function setVAlign(align) {
+      this.wrapConfig.vAlign = align;
+      return this;
+    },
+    setHAlign: function setHAlign(align) {
+      this.wrapConfig.hAlign = align;
+      return this;
+    }
+  };
+
   var RenderContent = function RenderContent() {
     this.clear();
     this.setCanvasSize(this.width, this.height);
@@ -7749,7 +7760,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$3, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
+  Object.assign(Methods$3, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};

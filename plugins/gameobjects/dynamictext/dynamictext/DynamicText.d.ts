@@ -255,6 +255,9 @@ declare class DynamicText extends Canvas {
         config?: DynamicText.IConfigVerticalWrap
     ): DynamicText.IWrapResult;
 
+    setVAlign(align: DynamicText.VAlignTypes): this;
+    setHAlign(align: DynamicText.HAlignTypes): this;
+
     getChildren(): DynamicText.BobBase[];
     getLastAppendedChildren(): DynamicText.BobBase[];
     getActiveChildren(): DynamicText.BobBase[];

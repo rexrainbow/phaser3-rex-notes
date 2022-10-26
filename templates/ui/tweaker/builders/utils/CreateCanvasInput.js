@@ -9,6 +9,8 @@ var CreateCanvasInput = function (scene, config, styles, gameObject) {
     if (config) {
     }
 
+    gameObject.setVAlign('center');
+
     return gameObject;
 }
 
