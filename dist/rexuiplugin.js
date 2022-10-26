@@ -13431,6 +13431,8 @@
   var SetWrapConfig = function SetWrapConfig(config) {
     if (config === undefined) {
       config = {};
+    } else if (_typeof(config) === 'object') {
+      config = DeepClone(config);
     }
 
     this.wrapConfig = config;
@@ -13801,14 +13803,14 @@
     return result;
   };
 
-  var Merge$3 = Phaser.Utils.Objects.Merge;
+  var Merge$2 = Phaser.Utils.Objects.Merge;
 
   var RunWordWrap = function RunWordWrap(config) {
     if (config === undefined) {
       config = {};
     }
 
-    return RunWordWrap$1.call(this, Merge$3(config, this.wrapConfig));
+    return RunWordWrap$1.call(this, Merge$2(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
@@ -14077,14 +14079,14 @@
     return result;
   };
 
-  var Merge$2 = Phaser.Utils.Objects.Merge;
+  var Merge$1 = Phaser.Utils.Objects.Merge;
 
   var RunVerticalWrap = function RunVerticalWrap(config) {
     if (config === undefined) {
       config = {};
     }
 
-    return RunVerticalWrap$1.call(this, Merge$2(config, this.wrapConfig));
+    return RunVerticalWrap$1.call(this, Merge$1(config, this.wrapConfig));
   };
 
   var SetAlignMethods = {
@@ -20508,7 +20510,6 @@
       }
 
       out[key.replace(prefix, '')] = obj[key];
-      delete obj[key];
     }
 
     return out;
@@ -51594,14 +51595,14 @@
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-  var Merge$1 = Phaser.Utils.Objects.Merge;
+  var Merge = Phaser.Utils.Objects.Merge;
 
   var Open = function Open(config, onCloseCallback) {
     if (config === undefined) {
       config = {};
     }
 
-    Merge$1(config, this.openConfig);
+    Merge(config, this.openConfig);
     SetLastOpenedEditor(this);
 
     if (IsFunction(config)) {
@@ -55655,6 +55656,27 @@
 
   };
 
+  var DeepMerge = function DeepMerge(toObj, fromObj) {
+    if (fromObj === undefined) {
+      return toObj;
+    }
+
+    for (var key in fromObj) {
+      if (!toObj.hasOwnProperty(key)) {
+        // Only add nonexistent property
+        toObj[key] = DeepClone(fromObj[key]);
+      } else {
+        var value = toObj[key];
+
+        if (value && _typeof(value) === 'object') {
+          DeepMerge(value, fromObj[key]);
+        }
+      }
+    }
+
+    return toObj;
+  };
+
   /*
   Priority of styles : name, $class, $type
     1. name    (#name)
@@ -55668,43 +55690,22 @@
     }
 
     if (data.hasOwnProperty('name')) {
-      Merge(data, styles["#".concat(data.name)]);
+      DeepMerge(data, styles["#".concat(data.name)]);
     }
 
     if (data.hasOwnProperty('$class')) {
       var clasKeys = data.$class.split(' ');
 
       for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
-        Merge(data, styles[".".concat(clasKeys[i])]);
+        DeepMerge(data, styles[".".concat(clasKeys[i])]);
       }
     }
 
     if (data.hasOwnProperty('$type')) {
-      Merge(data, styles[data.$type]);
+      DeepMerge(data, styles[data.$type]);
     }
 
     return data;
-  };
-
-  var Merge = function Merge(toObj, fromObj) {
-    if (fromObj === undefined) {
-      return toObj;
-    }
-
-    for (var key in fromObj) {
-      if (!toObj.hasOwnProperty(key)) {
-        // Only add nonexistent property
-        toObj[key] = DeepClone(fromObj[key]);
-      } else {
-        var value = toObj[key];
-
-        if (value && _typeof(value) === 'object') {
-          Merge(value, fromObj[key]);
-        }
-      }
-    }
-
-    return toObj;
   };
 
   var ProperiteList = ['tint', 'alpha', 'visible', 'flipX', 'flipY'];

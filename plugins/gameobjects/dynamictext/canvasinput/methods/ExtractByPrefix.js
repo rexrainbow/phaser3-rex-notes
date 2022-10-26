@@ -23,7 +23,6 @@ var ExtractByPrefix = function (obj, prefix, delimiter, out) {
         }
 
         out[key.replace(prefix, '')] = obj[key];
-        delete obj[key];
     }
 
     return out;

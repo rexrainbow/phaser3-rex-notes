@@ -6555,9 +6555,33 @@
     return this;
   };
 
+  var DeepClone = function DeepClone(inObject) {
+    var outObject;
+    var value;
+    var key;
+
+    if (_typeof(inObject) !== 'object' || inObject === null) {
+      //  inObject is not an object
+      return inObject;
+    } //  Create an array or object to hold the values
+
+
+    outObject = Array.isArray(inObject) ? [] : {};
+
+    for (key in inObject) {
+      value = inObject[key]; //  Recursively (deep) copy for nested objects, including arrays
+
+      outObject[key] = DeepClone(value);
+    }
+
+    return outObject;
+  };
+
   var SetWrapConfig = function SetWrapConfig(config) {
     if (config === undefined) {
       config = {};
+    } else if (_typeof(config) === 'object') {
+      config = DeepClone(config);
     }
 
     this.wrapConfig = config;

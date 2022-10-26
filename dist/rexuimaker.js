@@ -4161,6 +4161,27 @@
     return outObject;
   };
 
+  var DeepMerge = function DeepMerge(toObj, fromObj) {
+    if (fromObj === undefined) {
+      return toObj;
+    }
+
+    for (var key in fromObj) {
+      if (!toObj.hasOwnProperty(key)) {
+        // Only add nonexistent property
+        toObj[key] = DeepClone(fromObj[key]);
+      } else {
+        var value = toObj[key];
+
+        if (value && _typeof(value) === 'object') {
+          DeepMerge(value, fromObj[key]);
+        }
+      }
+    }
+
+    return toObj;
+  };
+
   /*
   Priority of styles : name, $class, $type
     1. name    (#name)
@@ -4174,43 +4195,22 @@
     }
 
     if (data.hasOwnProperty('name')) {
-      Merge(data, styles["#".concat(data.name)]);
+      DeepMerge(data, styles["#".concat(data.name)]);
     }
 
     if (data.hasOwnProperty('$class')) {
       var clasKeys = data.$class.split(' ');
 
       for (var i = 0, cnt = clasKeys.length; i < cnt; i++) {
-        Merge(data, styles[".".concat(clasKeys[i])]);
+        DeepMerge(data, styles[".".concat(clasKeys[i])]);
       }
     }
 
     if (data.hasOwnProperty('$type')) {
-      Merge(data, styles[data.$type]);
+      DeepMerge(data, styles[data.$type]);
     }
 
     return data;
-  };
-
-  var Merge = function Merge(toObj, fromObj) {
-    if (fromObj === undefined) {
-      return toObj;
-    }
-
-    for (var key in fromObj) {
-      if (!toObj.hasOwnProperty(key)) {
-        // Only add nonexistent property
-        toObj[key] = DeepClone(fromObj[key]);
-      } else {
-        var value = toObj[key];
-
-        if (value && _typeof(value) === 'object') {
-          Merge(value, fromObj[key]);
-        }
-      }
-    }
-
-    return toObj;
   };
 
   var ProperiteList = ['tint', 'alpha', 'visible', 'flipX', 'flipY'];
