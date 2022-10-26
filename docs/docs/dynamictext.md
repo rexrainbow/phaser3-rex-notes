@@ -471,6 +471,25 @@ var result = txt.runWordWrap({
     - `true` : Character wrap.
 
 
+##### Align
+
+- Set vertical align mode
+    ```javascript
+    txt.setVAlign(vAlign);
+    ```
+    - `vAlign` : Vertical alignment.
+        - `0`, or `'top'` : Align to top bound.
+        - `1`, or `'center'` : Align to center.
+        - `2`, or `'bottom'` : Align to bottom bound.
+- Set horizontal align mode
+    ```javascript
+    txt.setHAlign(hAlign);
+    ```
+    - `hAlign` : Horizontal alignment.
+        - `0`, or `'left'` : Align to left bound.
+        - `1`, or `'center'` : Align to center.
+        - `2`, or `'right'` : Align to right bound.
+
 ##### Test string
 
 ```javascript
