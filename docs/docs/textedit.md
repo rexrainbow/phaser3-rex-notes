@@ -10,6 +10,7 @@ Create an [input text object](textedit.md) above a text object to edit string co
 - [Text edit](https://codepen.io/rexrainbow/pen/dyezeQN)
 - [Edit](https://codepen.io/rexrainbow/pen/GaxqLZ)
 - [Number edit](https://codepen.io/rexrainbow/pen/OJLQyKz)
+- [With rexui-Label](https://codepen.io/rexrainbow/pen/YbvwBw)
 
 ## Usage
 
