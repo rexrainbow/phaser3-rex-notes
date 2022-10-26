@@ -103,7 +103,7 @@ var CreateLoginDialog = function (scene, config) {
 
             onOpen(textObject, hiddenInputText) {
                 // Can't use passwordField.text because it is masked by dot
-                hiddenInputText.setText(password);
+                textObject.setInputText(password);
             },
 
             onUpdate(text, textObject, hiddenInputText) {

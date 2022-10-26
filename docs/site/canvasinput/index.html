@@ -1637,6 +1637,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -8705,6 +8712,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -8769,6 +8783,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><a href="https://codepen.io/rexrainbow/pen/vYjwjyW">Simple</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/poVPGKe">Text input</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOxarOO">Number input</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOKOJoV">With rexui-Label</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasinput">Sample code</a></p>
@@ -8950,16 +8965,17 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </li>
 <li>Callbacks<ul>
 <li><code>onOpen</code> : Callback invoked when focus on this hidden input text.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// textObject.setInputText(txt);</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onClose</code> : Callback invoked when blur.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>            
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onUpdate</code> : <ul>
 <li>A callback invoked in each tick of editing.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return text;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -9078,6 +9094,33 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <h4 id="is-opened">Is opened<a class="headerlink" href="#is-opened" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isOpened</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">isOpened</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Display text on <a href="../dynamictext/">dynamic text game object</a><ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">displayText</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
+    or 
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDisplayText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Input text on <a href="../hiddeninputtext/">hidden text edit behavior</a><ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">inputText</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">setInputText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On character child adding

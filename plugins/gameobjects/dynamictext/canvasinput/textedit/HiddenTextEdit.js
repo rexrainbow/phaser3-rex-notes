@@ -59,7 +59,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
                     this.prevCursorPosition = null;
                 }
             }
-            
+
             if (this.prevCursorPosition != null) {
                 var child = textObject.getCharChild(this.prevCursorPosition);
                 textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
@@ -73,6 +73,11 @@ class HiddenTextEdit extends HiddenTextEditBase {
             this.prevCursorPosition = cursorPosition;
         }
 
+        return this;
+    }
+
+    setNumberInput() {
+        this.onUpdateCallback = NumberInputUpdateCallback;
         return this;
     }
 }

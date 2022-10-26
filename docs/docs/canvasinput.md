@@ -13,6 +13,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 - [Simple](https://codepen.io/rexrainbow/pen/vYjwjyW)
 - [Text input](https://codepen.io/rexrainbow/pen/poVPGKe)
 - [Number input](https://codepen.io/rexrainbow/pen/jOxarOO)
+- [With rexui-Label](https://codepen.io/rexrainbow/pen/jOKOJoV)
 
 ## Usage
 
@@ -204,18 +205,19 @@ var txt = scene.add.rexCanvasInput({
 - Callbacks
     - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript
-        function (textObject, txt) {
+        function (textObject) {
+            // textObject.setInputText(txt);
         }
         ```
     - `onClose` : Callback invoked when blur.
         ```javascript
-        function (textObject, txt) {
+        function (textObject) {            
         }
         ```
     - `onUpdate` : 
         - A callback invoked in each tick of editing.
             ```javascript
-            function (text, textObject, txt) {
+            function (text, textObject) {
                 // return text;
             }
             ```
@@ -331,6 +333,35 @@ txt.close();
 ```javascript
 var isOpened = txt.isOpened;
 ```
+
+### Text
+
+- Display text on [dynamic text game object](dynamictext.md)
+    - Get
+        ```javascript
+        var text = txt.text;
+        ```
+        or
+        ```javascript        
+        var text = txt.displayText;
+        ```
+    - Set
+        ```javascript
+        txt.setText(text);
+        ```
+        or 
+        ```javascript
+        txt.setDisplayText(text);
+        ```
+- Input text on [hidden text edit behavior](hiddeninputtext.md)
+    - Get
+        ```javascript
+        var text = txt.inputText;
+        ```
+    - Set
+        ```javascript
+        var text = txt.setInputText(text);
+        ```
 
 ### Events
 

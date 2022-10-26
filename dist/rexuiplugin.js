@@ -664,7 +664,7 @@
   var NOOP = function NOOP() {//  NOOP
   };
 
-  var Methods$i = {
+  var Methods$h = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -796,7 +796,7 @@
       return NinePatch;
     }(GOClass);
 
-    Object.assign(NinePatch.prototype, Methods$i);
+    Object.assign(NinePatch.prototype, Methods$h);
     return NinePatch;
   };
 
@@ -834,7 +834,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$h = {
+  var Methods$g = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -855,7 +855,7 @@
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
 
-  Object.assign(NinePatch$1.prototype, Methods$h);
+  Object.assign(NinePatch$1.prototype, Methods$g);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -2162,7 +2162,7 @@
     }
   };
 
-  var Methods$g = {
+  var Methods$f = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -2196,7 +2196,7 @@
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
 
-  Object.assign(NinePatch.prototype, Methods$g);
+  Object.assign(NinePatch.prototype, Methods$f);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -8111,7 +8111,7 @@
     return this;
   };
 
-  var Methods$f = {
+  var Methods$e = {
     open: Open$1,
     close: Close$1
   };
@@ -8530,7 +8530,7 @@
     return HiddenTextEditBase;
   }(ComponentBase);
 
-  Object.assign(HiddenTextEditBase.prototype, Methods$f);
+  Object.assign(HiddenTextEditBase.prototype, Methods$e);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -11319,10 +11319,10 @@
 
   var globBounds;
 
-  var Methods$e = {
+  var Methods$d = {
     contains: Contains$1
   };
-  Object.assign(Methods$e, RenderMethods);
+  Object.assign(Methods$d, RenderMethods);
 
   var DegToRad$8 = Phaser.Math.DegToRad;
   var RadToDeg$6 = Phaser.Math.RadToDeg;
@@ -11745,7 +11745,7 @@
     return RenderBase;
   }(Base$1);
 
-  Object.assign(RenderBase.prototype, Methods$e);
+  Object.assign(RenderBase.prototype, Methods$d);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -14579,7 +14579,7 @@
     }
   };
 
-  var Methods$d = {
+  var Methods$c = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -14625,7 +14625,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$d, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
+  Object.assign(Methods$c, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -14765,7 +14765,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$d);
+  Object.assign(DynamicText.prototype, Methods$c);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -17009,10 +17009,10 @@
     return this;
   };
 
-  var Methods$c = {
+  var Methods$b = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$c, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$b, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
 
@@ -17180,7 +17180,7 @@
     return GOManager;
   }();
 
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$c);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$b);
 
   var AddGameObjectManager = function AddGameObjectManager(config, GameObjectManagerClass) {
     if (config === undefined) {
@@ -19185,7 +19185,7 @@
     return this;
   };
 
-  var Methods$b = {
+  var Methods$a = {
     start: Start,
     typing: Typing,
     pause: Pause,
@@ -19199,7 +19199,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$b, TypingSpeedMethods$1);
+  Object.assign(Methods$a, TypingSpeedMethods$1);
 
   var GetValue$1R = Phaser.Utils.Objects.GetValue;
 
@@ -19317,7 +19317,7 @@
     }
   };
 
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$b);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$a);
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
@@ -19406,8 +19406,8 @@
     }
   };
 
-  var Methods$a = {};
-  Object.assign(Methods$a, AnimationMethods);
+  var Methods$9 = {};
+  Object.assign(Methods$9, AnimationMethods);
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
@@ -19459,7 +19459,7 @@
     return scene.add.image(0, 0, textureKey, frameName);
   };
 
-  Object.assign(SpriteManager.prototype, Methods$a);
+  Object.assign(SpriteManager.prototype, Methods$9);
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
     // goType.name.play
@@ -20190,7 +20190,7 @@
     }
   };
 
-  var Methods$9 = {
+  var Methods$8 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -20201,7 +20201,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$9, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
+  Object.assign(Methods$8, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -20345,7 +20345,7 @@
     return TextPlayer;
   }(Extend(DynamicText));
 
-  Object.assign(TextPlayer.prototype, Methods$9);
+  Object.assign(TextPlayer.prototype, Methods$8);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -20437,6 +20437,12 @@
           this.prevCursorPosition = cursorPosition;
         }
 
+        return this;
+      }
+    }, {
+      key: "setNumberInput",
+      value: function setNumberInput() {
+        this.onUpdateCallback = NumberInputUpdateCallback;
         return this;
       }
     }]);
@@ -21076,11 +21082,6 @@
     textObject.runWordWrap();
   };
 
-  var SetNumberInput = function SetNumberInput() {
-    this.textEdit.onUpdateCallback = NumberInputUpdateCallback;
-    return this;
-  };
-
   var IsPlainObject$C = Phaser.Utils.Objects.IsPlainObject;
 
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
@@ -21200,6 +21201,34 @@
         return this;
       }
     }, {
+      key: "displayText",
+      get: function get() {
+        return this.text;
+      },
+      set: function set(value) {
+        this.text = value;
+      }
+    }, {
+      key: "setDisplayText",
+      value: function setDisplayText(value) {
+        this.displayText = value;
+        return this;
+      }
+    }, {
+      key: "inputText",
+      get: function get() {
+        return this.textEdit.text;
+      },
+      set: function set(value) {
+        this.textEdit.text = value;
+      }
+    }, {
+      key: "setInputText",
+      value: function setInputText(value) {
+        this.inputText = value;
+        return this;
+      }
+    }, {
       key: "open",
       value: function open(onCloseCallback) {
         if (onCloseCallback) {
@@ -21232,15 +21261,16 @@
         this.cursorStyle = style;
         return this;
       }
+    }, {
+      key: "setNumberInput",
+      value: function setNumberInput() {
+        this.textEdit.setNumberInput();
+        return this;
+      }
     }]);
 
     return CanvasInput;
   }(DynamicText);
-
-  var Methods$8 = {
-    setNumberInput: SetNumberInput
-  };
-  Object.assign(CanvasInput.prototype, Methods$8);
 
   ObjectFactory.register('canvasInput', function (x, y, fixedWidth, fixedHeight, config) {
     var gameObject = new CanvasInput(this.scene, x, y, fixedWidth, fixedHeight, config);

@@ -1038,10 +1038,10 @@
 
   var globBounds;
 
-  var Methods$3 = {
+  var Methods$2 = {
     contains: Contains
   };
-  Object.assign(Methods$3, RenderMethods);
+  Object.assign(Methods$2, RenderMethods);
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
@@ -1464,7 +1464,7 @@
     return RenderBase;
   }(Base);
 
-  Object.assign(RenderBase.prototype, Methods$3);
+  Object.assign(RenderBase.prototype, Methods$2);
 
   var Pad = Phaser.Utils.String.Pad;
 
@@ -4657,7 +4657,7 @@
     }
   };
 
-  var Methods$2 = {
+  var Methods$1 = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -4703,7 +4703,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$2, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
+  Object.assign(Methods$1, MoveChildMethods, BackgroundMethods, InnerBoundsMethods);
 
   var Stack = /*#__PURE__*/function () {
     function Stack() {
@@ -4885,7 +4885,7 @@
     return DynamicText;
   }(Canvas);
 
-  Object.assign(DynamicText.prototype, Methods$2);
+  Object.assign(DynamicText.prototype, Methods$1);
 
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
@@ -5330,7 +5330,7 @@
     return this;
   };
 
-  var Methods$1 = {
+  var Methods = {
     open: Open,
     close: Close
   };
@@ -5749,7 +5749,7 @@
     return HiddenTextEditBase;
   }(ComponentBase);
 
-  Object.assign(HiddenTextEditBase.prototype, Methods$1);
+  Object.assign(HiddenTextEditBase.prototype, Methods);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -5856,6 +5856,12 @@
           this.prevCursorPosition = cursorPosition;
         }
 
+        return this;
+      }
+    }, {
+      key: "setNumberInput",
+      value: function setNumberInput() {
+        this.onUpdateCallback = NumberInputUpdateCallback;
         return this;
       }
     }]);
@@ -6503,11 +6509,6 @@
     textObject.runWordWrap();
   };
 
-  var SetNumberInput = function SetNumberInput() {
-    this.textEdit.onUpdateCallback = NumberInputUpdateCallback;
-    return this;
-  };
-
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
@@ -6627,6 +6628,34 @@
         return this;
       }
     }, {
+      key: "displayText",
+      get: function get() {
+        return this.text;
+      },
+      set: function set(value) {
+        this.text = value;
+      }
+    }, {
+      key: "setDisplayText",
+      value: function setDisplayText(value) {
+        this.displayText = value;
+        return this;
+      }
+    }, {
+      key: "inputText",
+      get: function get() {
+        return this.textEdit.text;
+      },
+      set: function set(value) {
+        this.textEdit.text = value;
+      }
+    }, {
+      key: "setInputText",
+      value: function setInputText(value) {
+        this.inputText = value;
+        return this;
+      }
+    }, {
       key: "open",
       value: function open(onCloseCallback) {
         if (onCloseCallback) {
@@ -6659,15 +6688,16 @@
         this.cursorStyle = style;
         return this;
       }
+    }, {
+      key: "setNumberInput",
+      value: function setNumberInput() {
+        this.textEdit.setNumberInput();
+        return this;
+      }
     }]);
 
     return CanvasInput;
   }(DynamicText);
-
-  var Methods = {
-    setNumberInput: SetNumberInput
-  };
-  Object.assign(CanvasInput.prototype, Methods);
 
   function Factory (x, y, width, height, config) {
     var gameObject = new CanvasInput(this.scene, x, y, width, height, config);
