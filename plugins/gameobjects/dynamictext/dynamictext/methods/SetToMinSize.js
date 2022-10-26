@@ -20,8 +20,7 @@ var SetToMinSize = function () {
     // Ignore fixedWidth, and fixedHeight
     if ((this.width !== width) || (this.height !== height)) {
         this.dirty = true;
-        this.width = width;
-        this.height = height;
+        this.setCanvasSize(width, height);
     }
     return this;
 }

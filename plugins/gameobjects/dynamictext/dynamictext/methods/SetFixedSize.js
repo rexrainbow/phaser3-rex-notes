@@ -6,23 +6,19 @@ var SetFixedSize = function (width, height) {
         height = 0;
     }
 
-    if ((width > 0) && (height > 0)) {
-        if ((this.fixedWidth !== width) || (this.fixedHeight !== height)) {
-            this.dirty = true;
-        }
-    } else {
-        this.dirty = true;
+    var dirty = (this.fixedWidth !== width) || (this.fixedHeight !== height);
+    if (!dirty) {
+        return this;
     }
 
     this.fixedWidth = width;
     this.fixedHeight = height;
+    this.dirty = true;
 
-    if (width > 0) {
-        this.width = width;
-    }
-    if (height > 0) {
-        this.height = height;
-    }
+    this.setCanvasSize(
+        (width > 0) ? width : this.width,
+        (height > 0) ? height : this.height
+    );
 
     return this;
 }

@@ -3292,8 +3292,8 @@
         this.setSize(this._width, value);
       }
     }, {
-      key: "setSize",
-      value: function setSize(width, height) {
+      key: "setCanvasSize",
+      value: function setCanvasSize(width, height) {
         if (this._width === width && this._height === height) {
           return this;
         }
@@ -3307,6 +3307,13 @@
         this.canvas.height = height;
         this.frame.setSize(width, height);
         this.dirty = true;
+        return this;
+      } // setSize might be override
+
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.setCanvasSize(width, height);
         return this;
       }
     }, {
@@ -12476,25 +12483,16 @@
       height = 0;
     }
 
-    if (width > 0 && height > 0) {
-      if (this.fixedWidth !== width || this.fixedHeight !== height) {
-        this.dirty = true;
-      }
-    } else {
-      this.dirty = true;
+    var dirty = this.fixedWidth !== width || this.fixedHeight !== height;
+
+    if (!dirty) {
+      return this;
     }
 
     this.fixedWidth = width;
     this.fixedHeight = height;
-
-    if (width > 0) {
-      this.width = width;
-    }
-
-    if (height > 0) {
-      this.height = height;
-    }
-
+    this.dirty = true;
+    this.setCanvasSize(width > 0 ? width : this.width, height > 0 ? height : this.height);
     return this;
   };
 
@@ -13787,7 +13785,7 @@
     var innerHeight = height - paddingVertical;
     AlignLines$1(result, innerWidth, innerHeight); // Resize
 
-    this.setSize(width, height); // Set initial position
+    this.setCanvasSize(width, height); // Set initial position
 
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
@@ -14063,7 +14061,7 @@
     var innerHeight = height - paddingVertical;
     AlignLines(result, innerWidth, innerHeight); // Resize
 
-    this.setSize(width, height); // Set initial position
+    this.setCanvasSize(width, height); // Set initial position
 
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
@@ -14091,7 +14089,7 @@
 
   var RenderContent = function RenderContent() {
     this.clear();
-    this.setSize(this.width, this.height);
+    this.setCanvasSize(this.width, this.height);
 
     if (this.background.active) {
       this.background.render();
@@ -14314,8 +14312,7 @@
 
     if (this.width !== width || this.height !== height) {
       this.dirty = true;
-      this.width = width;
-      this.height = height;
+      this.setCanvasSize(width, height);
     }
 
     return this;
@@ -14759,6 +14756,12 @@
       },
       set: function set(value) {
         this.setText(value);
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.setFixedSize(width, height);
+        return this;
       }
     }]);
 

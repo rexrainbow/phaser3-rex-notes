@@ -67,6 +67,11 @@ class DynamicText extends Canvas {
     set text(value) {
         this.setText(value);
     }
+
+    setSize(width, height) {
+        this.setFixedSize(width, height);
+        return this;
+    }
 }
 
 Object.assign(

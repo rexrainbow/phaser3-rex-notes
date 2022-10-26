@@ -455,7 +455,7 @@ var result = txt.runWordWrap({
     - Get `ascent`, `lineHeight` from default text style and test string, if `ascent`, `lineHeight` are both `undefined`
 - `maxLines` : Lines number of this page. 
     - `0` : Wrapping whole content.
-    - `undefined` : It will be set if `lineHeight` and `fixedHeight` is giv
+    - `undefined` : It will be set if `lineHeight` and `height` is given
 - `wrapWidth` : Width of wrapping
 - `letterSpacing` : Space between each character.
 - `hAlign` : Horizontal alignment.
@@ -842,13 +842,24 @@ txt.setWrapConfig(config);
     txt.movechildBelow(child, baseChild);
     ```
 
-### Minimun size
+### Size
 
-Resize to minimun size to show all visible characters.
-
-```javascript
-txt.setToMinSize();
-```
+- Resize canvas size
+    ```javascript
+    txt.setCanvasSize(width, height)
+    ```
+- Reisze text wrapping size and canvas size.
+    ```javascript
+    txt.setSize(width, height);
+    ```
+    or
+    ```javascript
+    txt.setFixedSize(width, height);
+    ```
+- Resize to minimun size to show all visible characters.
+    ```javascript
+    txt.setToMinSize();
+    ```
 
 ### Input events of child
 

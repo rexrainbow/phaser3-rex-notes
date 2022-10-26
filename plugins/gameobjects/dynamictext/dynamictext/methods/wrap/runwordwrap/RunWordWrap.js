@@ -185,7 +185,7 @@ var RunWordWrap = function (config) {
     AlignLines(result, innerWidth, innerHeight);
 
     // Resize
-    this.setSize(width, height);
+    this.setCanvasSize(width, height);
 
     // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {

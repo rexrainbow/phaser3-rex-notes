@@ -363,6 +363,25 @@ var isOpened = txt.isOpened;
         var text = txt.setInputText(text);
         ```
 
+### Size
+
+- Resize canvas size
+    ```javascript
+    txt.setCanvasSize(width, height)
+    ```
+- Reisze text wrapping size and canvas size.
+    ```javascript
+    txt.setSize(width, height);
+    ```
+    or
+    ```javascript
+    txt.setFixedSize(width, height);
+    ```
+- Resize to minimun size to show all visible characters.
+    ```javascript
+    txt.setToMinSize();
+    ```
+
 ### Events
 
 - On character child adding

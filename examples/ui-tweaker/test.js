@@ -52,7 +52,7 @@ class Demo extends Phaser.Scene {
             },
         })
             .addInput(obj, 'a')
-            .addInput(obj, 'b')
+            // .addInput(obj, 'b')
 
         panel
             .layout();

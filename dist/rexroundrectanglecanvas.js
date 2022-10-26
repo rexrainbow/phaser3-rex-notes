@@ -515,8 +515,8 @@
         this.setSize(this._width, value);
       }
     }, {
-      key: "setSize",
-      value: function setSize(width, height) {
+      key: "setCanvasSize",
+      value: function setCanvasSize(width, height) {
         if (this._width === width && this._height === height) {
           return this;
         }
@@ -530,6 +530,13 @@
         this.canvas.height = height;
         this.frame.setSize(width, height);
         this.dirty = true;
+        return this;
+      } // setSize might be override
+
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.setCanvasSize(width, height);
         return this;
       }
     }, {

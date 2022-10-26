@@ -10,6 +10,7 @@ export default class Canvas extends CanvasGameObjectBase {
 
     setSize(width: number, height: number): this;
     resize(width: number, height: number): this;
+    setCanvasSize(width: number, height: number): this;
 
     getCanvas(readOnly?: boolean): HTMLCanvasElement;
     canvas: HTMLCanvasElement;

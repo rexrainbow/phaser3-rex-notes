@@ -88,7 +88,7 @@ class Canvas extends GameObject {
         this.setSize(this._width, value);
     }
 
-    setSize(width, height) {
+    setCanvasSize(width, height) {
         if ((this._width === width) && (this._height === height)) {
             return this;
         }
@@ -106,6 +106,12 @@ class Canvas extends GameObject {
         this.frame.setSize(width, height);
 
         this.dirty = true;
+        return this;
+    }
+
+    // setSize might be override
+    setSize(width, height) {
+        this.setCanvasSize(width, height);
         return this;
     }
 
