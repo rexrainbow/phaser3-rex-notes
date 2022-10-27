@@ -103,6 +103,23 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    setSize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
+        super.setSize(width, height);
+
+        var vAlign = this.wrapConfig.vAlign,
+            hAlign = this.wrapConfig.hAlign;
+        if ((vAlign === 1) || (vAlign === 'center') || (vAlign === 2) || (vAlign === 'bottom') ||
+            (hAlign === 1) || (hAlign === 'center') || (hAlign === 2) || (hAlign === 'right')) {
+            this.runWrap();
+        }
+
+        return this;
+    }
+
     get displayText() {
         return this.text;
     }

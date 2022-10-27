@@ -28,6 +28,7 @@ import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
+import RunWrap from './RunWrap.js';
 import SetAlignMethods from './SetAlignMethods.js';
 import RenderContent from './RenderContent.js';
 
@@ -83,6 +84,7 @@ var Methods = {
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,
+    runWrap: RunWrap,
     renderContent: RenderContent,
 
     forEachChild: ForEachChild,

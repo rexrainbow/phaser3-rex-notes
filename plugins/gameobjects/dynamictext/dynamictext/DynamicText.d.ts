@@ -61,24 +61,29 @@ declare namespace DynamicText {
     type HAlignTypes = 0 | 1 | 2 | 'left' | 'center' | 'right';
     type VAlignTypes = 0 | 1 | 2 | 'top' | 'center' | 'bottom';
 
-    interface IConfigWordWrap {
+    interface IConfigWrapBase {
+        callback?: string | Function,
+
         padding?: {
-            top?: number, bottom?: number,
+            top?: number, left?: number, right?: number, bottom?: number,
         },
+
+        hAlign?: HAlignTypes,
+        vAlign?: VAlignTypes,
+    }
+
+    interface IConfigWordWrap extends IConfigWrapBase {
+
         ascent?: number,
         lineHeight?: number,
         maxLines?: number,
         wrapWidth?: number,
         letterSpacing?: number,
-        hAlign?: HAlignTypes,
-        vAlign?: VAlignTypes,
         charWrap?: boolean
     }
 
-    interface IConfigVerticalWrap {
-        padding: {
-            top?: number, left?: number, right?: number, bottom?: number,
-        },
+    interface IConfigVerticalWrap extends IConfigWrapBase {
+
         lineWidth?: number,
         maxLines?: number,
         fixedChildHeight?: number,
@@ -86,8 +91,6 @@ declare namespace DynamicText {
         wrapHeight?: number,
         letterSpacing?: number,
         rtl?: boolean,
-        hAlign?: HAlignTypes,
-        vAlign?: VAlignTypes,
     }
 
     type BobBase = BobBaseClass;
@@ -121,7 +124,7 @@ declare namespace DynamicText {
 
         text?: string,
 
-        wrap?: IConfigWordWrap | IConfigVerticalWrap,
+        wrap?: IConfigWordWrap | IConfigVerticalWrap | IConfigWordWrap,
 
         testString?: string,
 
@@ -253,6 +256,10 @@ declare class DynamicText extends Canvas {
 
     runVerticalWrap(
         config?: DynamicText.IConfigVerticalWrap
+    ): DynamicText.IWrapResult;
+
+    runWrap(
+        config?: DynamicText.IConfigWordWrap | DynamicText.IConfigVerticalWrap | DynamicText.IConfigWrapBase
     ): DynamicText.IWrapResult;
 
     setVAlign(align: DynamicText.VAlignTypes): this;
