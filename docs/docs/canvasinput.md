@@ -175,8 +175,7 @@ var txt = scene.add.rexCanvasInput({
 
     // onUpdate: function (text, textObject, hiddenInputText) {
     //     return text;
-    // },
-    // onUpdate: 'number',    // Only output number string
+    // },   
 
     // onAddChar: function(child, index, canvasInput) {
     //    child.modifyStyle({...})
@@ -193,6 +192,10 @@ var txt = scene.add.rexCanvasInput({
     //         
     //     });
     // },
+
+    // parseTextCallback: function(text) {
+    //     return text;
+    // }.
 
 });
 ```
@@ -244,6 +247,14 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
         - `child` : [character child](dynamictext.md#character)
+    - `parseTextCallback` : Callback of parsing text (`txt.text`) to value (`txt.value`)
+        - `undefined` : Bypass text to value. Default behavior.
+        - A function object
+            ```javascript
+            function(text) {
+                return text;
+            }
+            ```
 - `focusStyle` : Will apply this style to background when focusing.
     - `undefined` : Ignore this behavior.
     - A plain object
@@ -285,6 +296,13 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
     - Or add these style settings in `style` parameter, with prefix `'cursor.'`.
+
+
+#### Number input
+
+```javascript
+txt.setNumberInput();
+```
 
 ### Custom class
 
@@ -362,6 +380,31 @@ var isOpened = txt.isOpened;
         ```javascript
         var text = txt.setInputText(text);
         ```
+
+### Value
+
+- Get. Parse text to value.
+    ```javascript
+    var value = txt.getValue();
+    // var value = txt.value;
+    ```
+    - Set `parseTextCallback`
+        ```javascript
+        txt.setParseTextCallback(callback);
+        ```
+        - `callback` : 
+            - `undefined` : Bypass text to value. Default behavior.
+            - A function object
+                ```javascript
+                function(text) {
+                    return text;
+                }
+                ```
+- Set. Conver any type of `value` to string.
+    ```javascript
+    txt.setValue(value);
+    // txt.value = value;
+    ```
 
 ### Size
 

@@ -44,8 +44,10 @@ class Demo extends Phaser.Scene {
                     style: {
                         backgroundBottomY: 4,
                         backgroundHeight: 18,
-                        'cursor.color': 'black',
-                        'cursor.backgroundColor': 'white',
+                    },
+                    cursorStyle: {
+                        color: 'black',
+                        backgroundColor: 'white',
                     }
                 },
 
