@@ -93,8 +93,16 @@ class CanvasInput extends DynamicText {
     }
 
     setText(text) {
+        if (!text) {
+            text = '';
+        } else {
+            text = text.toString();
+        }
+
         this.moveChildToLast(this.lastInsertCursor);
+
         SetText(this, text);
+
         return this;
     }
 

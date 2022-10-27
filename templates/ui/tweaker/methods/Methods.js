@@ -1,5 +1,5 @@
 import Make from './Make.js';
-import AddInput from './AddInput.js';
+import AddInput from './AddInput/AddInput.js';
 
 var methods = {
     make: Make,

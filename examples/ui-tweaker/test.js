@@ -18,8 +18,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var obj = {
-            a: 10,
-            b: 'Phaser'
+            data: 10,
+            name: 'Phaser'
         }
 
         var panel = new Tweaker(this, {
@@ -57,8 +57,8 @@ class Demo extends Phaser.Scene {
                 }
             },
         })
-            .addInput(obj, 'a')
-            .addInput(obj, 'b')
+            .addInput(obj, 'data')
+            .addInput(obj, 'name')
 
         panel
             .layout();

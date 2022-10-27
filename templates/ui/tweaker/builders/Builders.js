@@ -2,8 +2,9 @@ import CreateBackground from './CreateBackground.js';
 // Input
 import CreateInputSizer from './CreateInputSizer.js';
 import CreateInputTitle from './CreateInputTitle.js';
-import CreateNumberInput from './CreateNumberInput.js';
 import CreateTextInput from './CreateTextInput.js';
+import CreateNumberInput from './CreateNumberInput.js';
+import CreateInputField from './CreateInputField.js';
 // Folder
 import CreateFolderBackground from './CreateFolderBackground.js';
 import CreateFolderTitle from './CreateFolderTitle.js';
@@ -16,8 +17,9 @@ var Builders = {
     // Input
     inputSizer: CreateInputSizer,
     inputTitle: CreateInputTitle,
-    numberInput: CreateNumberInput,
     textInput: CreateTextInput,
+    numberInput: CreateNumberInput,
+    inputField: CreateInputField,
 
     // Folder
     folderBackground: CreateFolderBackground,
