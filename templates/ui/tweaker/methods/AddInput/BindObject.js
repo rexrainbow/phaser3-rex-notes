@@ -1,6 +1,12 @@
 var BindObject = function (inputField, object, key) {
     // Set initial value
-    inputField.setText(object[key]);
+    inputField.setValue(object[key]);
+
+    // Set text value to object when closing editor
+    inputField.on('close', function () {
+        object[key] = inputField.getValue();
+    })
+
 
 }
 

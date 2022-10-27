@@ -16,6 +16,10 @@ declare namespace CanvasInput {
         canvasInput: CanvasInput
     ) => void;
 
+    type ParseTextCallbackType = (
+        text: string
+    ) => unknown;
+
     interface IConfigBackground extends DynamicText.IConfigBackground {
         'focus.color'?: string | number | null,
         'focus.color2'?: string | number | null,
@@ -66,11 +70,13 @@ declare namespace CanvasInput {
         onClose?: HiddenTextEdit.OnCloseCallbackType;
         onBlur?: HiddenTextEdit.OnCloseCallbackType;
 
-        onUpdate?: HiddenTextEdit.OnUpdateCallbackType | 'number';
+        onUpdate?: HiddenTextEdit.OnUpdateCallbackType;
 
         onAddChar?: AddCharCallbackType;
 
-        onMoveCursor?: MoveCursorCallbackType
+        onMoveCursor?: MoveCursorCallbackType;
+
+        parseTextCallback?: ParseTextCallbackType;
     }
 }
 
@@ -84,6 +90,11 @@ declare class CanvasInput extends DynamicText {
 
     inputText: string;
     setInputText(value: string): this;
+
+    setParseTextCallback(callback?: CanvasInput.ParseTextCallbackType): this;
+    getValue(): unknown;
+    setValue(value: unknown): this;
+    value: unknown;
 
     open(onCloseCallback?: Function): this;
     close(): this;

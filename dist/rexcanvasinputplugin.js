@@ -5180,9 +5180,6 @@
       if (config === undefined) {
         config = {};
       }
-      if (config.onUpdate === 'number') {
-        config.onUpdate = NumberInputUpdateCallback;
-      }
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
 
@@ -5220,7 +5217,10 @@
             text = newText;
           }
         }
-        textObject.setText(text);
+        if (textObject.text !== text) {
+          textObject.setText(text);
+          textObject.emit('textchange', text, textObject, this);
+        }
         var cursorPosition = this.isOpened ? this.cursorPosition : null;
         if (this.prevCursorPosition !== cursorPosition) {
           if (this.prevCursorPosition != null) {
@@ -5860,6 +5860,7 @@
       if (moveCursorCallback) {
         _this.on('movecursor', moveCursorCallback);
       }
+      _this.setParseTextCallback(config.parseTextCallback);
       _this.lastInsertCursor = AddLastInsertCursor(_assertThisInitialized(_this));
       if (text) {
         _this.setText(text);
@@ -5891,6 +5892,11 @@
     }, {
       key: "setText",
       value: function setText(text) {
+        if (!text) {
+          text = '';
+        } else {
+          text = text.toString();
+        }
         this.moveChildToLast(this.lastInsertCursor);
         SetText(this, text);
         return this;
@@ -5942,6 +5948,34 @@
         return this;
       }
     }, {
+      key: "setParseTextCallback",
+      value: function setParseTextCallback(callback) {
+        if (!callback) {
+          callback = DefaultParseTextCallback;
+        }
+        this.parseTextCallback = callback;
+        return this;
+      }
+    }, {
+      key: "value",
+      get: function get() {
+        return this.parseTextCallback(this.text);
+      },
+      set: function set(value) {
+        this.setText(value);
+      }
+    }, {
+      key: "getValue",
+      value: function getValue() {
+        return this.value;
+      }
+    }, {
+      key: "setValue",
+      value: function setValue(value) {
+        this.value = value;
+        return this;
+      }
+    }, {
       key: "open",
       value: function open(onCloseCallback) {
         if (onCloseCallback) {
@@ -5977,11 +6011,15 @@
       key: "setNumberInput",
       value: function setNumberInput() {
         this.textEdit.setNumberInput();
+        this.parseTextCallback = Number;
         return this;
       }
     }]);
     return CanvasInput;
   }(DynamicText);
+  var DefaultParseTextCallback = function DefaultParseTextCallback(text) {
+    return text;
+  };
 
   function Factory (x, y, width, height, config) {
     var gameObject = new CanvasInput(this.scene, x, y, width, height, config);

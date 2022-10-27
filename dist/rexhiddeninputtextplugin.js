@@ -970,9 +970,10 @@
     }, {
       key: "updateText",
       value: function updateText() {
+        var textObject = this.parent;
         var text = this.text;
         if (this.onUpdateCallback) {
-          var newText = this.onUpdateCallback(text, this.parent, this);
+          var newText = this.onUpdateCallback(text, textObject, this);
           if (newText != null) {
             text = newText;
           }
@@ -986,7 +987,10 @@
             this.prevCursorPosition = cursorPosition;
           }
         }
-        this.parent.setText(text);
+        if (textObject.text !== text) {
+          textObject.setText(text);
+          this.emit('textchange', text, textObject, this);
+        }
         return this;
       }
     }, {

@@ -53,8 +53,6 @@ var CreateCanvasInput = function (scene, text) {
                 textObject.setBackgroundStroke('white')
             },
 
-            // onUpdate: 'number',
-
             onAddChar(child) {
                 child
                     .setAngle((Math.random() - 0.5) * 30)

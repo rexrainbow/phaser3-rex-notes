@@ -63,6 +63,8 @@ class CanvasInput extends DynamicText {
             this.on('movecursor', moveCursorCallback);
         }
 
+        this.setParseTextCallback(config.parseTextCallback);
+
         this.lastInsertCursor = AddLastInsertCursor(this);
         if (text) {
             this.setText(text);
@@ -150,6 +152,31 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    setParseTextCallback(callback) {
+        if (!callback) {
+            callback = DefaultParseTextCallback;
+        }
+        this.parseTextCallback = callback;
+        return this;
+    }
+
+    get value() {
+        return this.parseTextCallback(this.text);
+    }
+
+    set value(value) {
+        this.setText(value);
+    }
+
+    getValue() {
+        return this.value;
+    }
+
+    setValue(value) {
+        this.value = value;
+        return this;
+    }
+
     open(onCloseCallback) {
         if (onCloseCallback) {
             this.textEdit.once('close', onCloseCallback)
@@ -179,9 +206,14 @@ class CanvasInput extends DynamicText {
 
     setNumberInput() {
         this.textEdit.setNumberInput();
+        this.parseTextCallback = Number;
         return this;
     }
 
+}
+
+var DefaultParseTextCallback = function (text) {
+    return text;
 }
 
 export default CanvasInput;

@@ -17,19 +17,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var obj = {
-            data: 10,
-            name: 'Phaser'
-        }
+        var gameObject = this.add.circle(400, 300, 20, 0xff0000);
 
-        var panel = new Tweaker(this, {
+        var panel = this.rexUI.add.tweaker({
             x: 400, y: 300,
             width: 300, height: 300,
 
             styles: {
                 background: {
                     radius: 20,
-                    strokeColor: 0xffffff
+                    strokeColor: 0x888888
                 },
 
                 inputTitle: {
@@ -57,13 +54,10 @@ class Demo extends Phaser.Scene {
                 }
             },
         })
-            .addInput(obj, 'data')
-            .addInput(obj, 'name')
-
-        panel
+            .addInput(gameObject, 'x')
+            .addInput(gameObject, 'y')
             .layout();
 
-        // this.add.existing(panel);
     }
 
     update() {

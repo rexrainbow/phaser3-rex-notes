@@ -384,6 +384,11 @@ var isOpened = txt.isOpened;
 
 ### Events
 
+- On text change
+    ```javascript
+    txt.on('textchange', function(text, txt){
+    })
+    ```
 - On character child adding
     ```javascript
     txt.on('addchar', function(child, index, canvasInput) {

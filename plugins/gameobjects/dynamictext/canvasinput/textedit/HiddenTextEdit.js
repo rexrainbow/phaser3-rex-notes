@@ -7,10 +7,6 @@ class HiddenTextEdit extends HiddenTextEditBase {
             config = {};
         }
 
-        if (config.onUpdate === 'number') {
-            config.onUpdate = NumberInputUpdateCallback;
-        }
-
         super(gameObject, config);
         // this.parent = gameObject;
 
@@ -50,7 +46,10 @@ class HiddenTextEdit extends HiddenTextEditBase {
             }
         }
 
-        textObject.setText(text);
+        if (textObject.text !== text) {
+            textObject.setText(text);
+            textObject.emit('textchange', text, textObject, this);
+        }
 
         var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
         if (this.prevCursorPosition !== cursorPosition) {
