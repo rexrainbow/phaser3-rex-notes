@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,7 +141,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -176,76 +150,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -266,18 +229,17 @@
   };
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
       this.parent = parent; // gameObject or scene
-
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true));
 
+      // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
         this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
@@ -286,16 +248,15 @@
         this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
-
+        // parent might not be shutdown yet
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
           this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
@@ -303,7 +264,6 @@
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -325,7 +285,6 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
@@ -335,6 +294,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -359,8 +319,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -372,7 +333,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -380,7 +340,6 @@
   };
 
   var StateProperties$1 = ['next', 'exit', 'enter'];
-
   var FSM$1 = /*#__PURE__*/function () {
     /*
     var config = {
@@ -405,33 +364,29 @@
     */
     function FSM(config) {
       _classCallCheck(this, FSM);
-
       // Attach get-next-state function
       var states = GetValue$3(config, 'states', undefined);
-
       if (states) {
         this.addStates(states);
-      } // Attach extend members
+      }
 
-
+      // Attach extend members
       var extend = GetValue$3(config, 'extend', undefined);
-
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
             this[name] = extend[name];
           }
         }
-      } // Event emitter
+      }
 
-
+      // Event emitter
       var eventEmitter = GetValue$3(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue$3(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
     }
-
     _createClass(FSM, [{
       key: "shutdown",
       value: function shutdown() {
@@ -448,11 +403,9 @@
         this.setEnable(GetValue$3(o, 'enable', true));
         this.start(GetValue$3(o, 'start', undefined));
         var init = GetValue$3(o, 'init', undefined);
-
         if (init) {
           init.call(this);
         }
-
         return this;
       }
     }, {
@@ -471,7 +424,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -490,38 +442,29 @@
         if (!this.enable || this._stateLock) {
           return;
         }
-
         if (this._state === newState) {
           return;
         }
-
         this._prevState = this._state;
         this._state = newState;
         this._stateLock = true; // lock state
 
         this.emit('statechange', this);
-
         if (this._prevState != null) {
           var exitEventName = 'exit_' + this._prevState;
           var exitCallback = this[exitEventName];
-
           if (exitCallback) {
             exitCallback.call(this);
           }
-
           this.emit(exitEventName, this);
         }
-
         this._stateLock = false;
-
         if (this._state != null) {
           var enterEventName = 'enter_' + this._state;
           var enterCallback = this[enterEventName];
-
           if (enterCallback) {
             enterCallback.call(this);
           }
-
           this.emit(enterEventName, this);
         }
       }
@@ -536,7 +479,6 @@
         this._start = state;
         this._prevState = undefined;
         this._state = state; // Won't fire statechange events
-
         return this;
       }
     }, {
@@ -545,7 +487,6 @@
         if (nextState != null) {
           this.state = nextState;
         }
-
         return this;
       }
     }, {
@@ -553,7 +494,6 @@
       value: function next() {
         var nextState;
         var getNextState = this['next_' + this.state];
-
         if (getNextState) {
           if (typeof getNextState === 'string') {
             nextState = getNextState;
@@ -561,7 +501,6 @@
             nextState = getNextState.call(this);
           }
         }
-
         this["goto"](nextState);
         return this;
       }
@@ -577,18 +516,14 @@
           state = name;
           name = state.name;
         }
-
         var stateProperties = this.stateProperties;
-
         for (var i = 0, cnt = stateProperties.length; i < cnt; i++) {
           var propertyName = stateProperties[i];
           var propertyValue = state[propertyName];
-
           if (propertyValue) {
             this["".concat(propertyName, "_").concat(name)] = propertyValue;
           }
         }
-
         return this;
       }
     }, {
@@ -603,91 +538,68 @@
             this.addState(name, states[name]);
           }
         }
-
         return this;
       }
     }, {
       key: "runMethod",
       value: function runMethod(methodName, a1, a2, a3, a4, a5) {
         var fn = this[methodName + '_' + this.state];
-
         if (!fn) {
           return undefined;
-        } // Copy from eventemitter3
+        }
 
-
+        // Copy from eventemitter3
         var len = arguments.length;
-
         switch (len) {
           case 1:
             return fn.call(this);
-
           case 2:
             return fn.call(this, a1);
-
           case 3:
             return fn.call(this, a1, a2);
-
           case 4:
             return fn.call(this, a1, a2, a3);
-
           case 5:
             return fn.call(this, a1, a2, a3, a4);
-
           case 6:
             return fn.call(this, a1, a2, a3, a4, a5);
         }
-
         var args = new Array(len - 1);
-
         for (var i = 1; i < len; i++) {
           args[i - 1] = arguments[i];
         }
-
         return fn.apply(this, args);
       }
     }]);
-
     return FSM;
   }();
-
   Object.assign(FSM$1.prototype, EventEmitterMethods);
 
   var HasListener = function HasListener(eventEmitter, eventName, fn, context, once) {
     if (once === undefined) {
       once = false;
     }
-
     var listeners = eventEmitter._events[eventName];
-
     if (!listeners) {
       return false;
     }
-
     for (var i = 0, cnt = listeners.length; i < cnt; i++) {
       var listener = listeners[i];
-
       if (listener.fn === fn && listener.context === context && listener.once === once) {
         return true;
       }
     }
-
     return false;
   };
 
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
-
   var FSM = /*#__PURE__*/function (_FSMBase) {
     _inherits(FSM, _FSMBase);
-
     var _super = _createSuper(FSM);
-
     function FSM() {
       _classCallCheck(this, FSM);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(FSM, [{
       key: "shutdown",
       value:
@@ -721,14 +633,12 @@
         this.stopPreUpdate();
         this.stopPostUpdate();
         this._scene = undefined;
-
         _get(_getPrototypeOf(FSM.prototype), "shutdown", this).call(this);
       }
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-
         this._scene = GetValue$3(o, 'scene', undefined);
         return this;
       }
@@ -758,13 +668,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'update', this.update, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('update', this.update, this);
         return this;
@@ -775,9 +682,7 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('update', this.update, this);
-
         return this;
       }
     }, {
@@ -786,13 +691,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'preupdate', this.preupdate, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('preupdate', this.preupdate, this);
         return this;
@@ -803,9 +705,7 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('preupdate', this.preupdate, this);
-
         return this;
       }
     }, {
@@ -814,13 +714,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'postupdate', this.postupdate, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('postupdate', this.postupdate, this);
         return this;
@@ -831,90 +728,78 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('postupdate', this.postupdate, this);
-
         return this;
       }
     }]);
-
     return FSM;
   }(FSM$1);
 
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
-
     var _super = _createSuper(State);
-
     function State(parent, config) {
       var _this;
-
       _classCallCheck(this, State);
-
       _this = _super.call(this, config);
       _this.parent = parent;
-
       _this.init();
-
       return _this;
     }
-
     _createClass(State, [{
       key: "init",
       value: function init() {
         this.start('IDLE');
-      } // IDLE -> DRAGBEGIN|DRAG
+      }
 
+      // IDLE -> DRAGBEGIN|DRAG
     }, {
       key: "next_IDLE",
       value: function next_IDLE() {
         var nextState,
-            parent = this.parent,
-            dragState = parent.dragState;
-
+          parent = this.parent,
+          dragState = parent.dragState;
         if (dragState.isDown) {
           nextState = parent.dragThreshold === 0 ? 'DRAG' : 'DRAGBEGIN';
         }
-
         return nextState;
       }
     }, {
       key: "update_IDLE",
       value: function update_IDLE(time, delta) {
         this.next();
-      } // IDLE
-      // DRAGBEGIN -> DRAG|IDLE
+      }
+      // IDLE
 
+      // DRAGBEGIN -> DRAG|IDLE
     }, {
       key: "next_DRAGBEGIN",
       value: function next_DRAGBEGIN() {
         var nextState,
-            parent = this.parent,
-            dragState = parent.dragState;
-
+          parent = this.parent,
+          dragState = parent.dragState;
         if (dragState.isDown) {
           nextState = dragState.pointer.getDistance() >= parent.dragThreshold ? 'DRAG' : 'DRAGBEGIN';
         } else {
           // dragState.isUp
           nextState = 'IDLE';
         }
-
         return nextState;
       }
     }, {
       key: "update_DRAGBEGIN",
       value: function update_DRAGBEGIN(time, delta) {
         this.next();
-      } // DRAGBEGIN
-      // DRAG -> BACK|SLIDE|IDLE
+      }
+      // DRAGBEGIN
 
+      // DRAG -> BACK|SLIDE|IDLE
     }, {
       key: "next_DRAG",
       value: function next_DRAG() {
         var nextState,
-            parent = this.parent,
-            dragState = parent.dragState;
-
+          parent = this.parent,
+          dragState = parent.dragState;
         if (dragState.isUp) {
           if (parent.outOfBounds) {
             nextState = 'BACK';
@@ -924,19 +809,16 @@
             nextState = 'IDLE';
           }
         }
-
         return nextState;
       }
     }, {
       key: "update_DRAG",
       value: function update_DRAG(time, delta) {
         var parent = this.parent,
-            dragState = parent.dragState;
-
+          dragState = parent.dragState;
         if (dragState.justMoved) {
           parent.dragging();
         }
-
         this.next();
       }
     }, {
@@ -948,22 +830,21 @@
       key: "exit_DRAG",
       value: function exit_DRAG() {
         this.parent.onDragEnd();
-      } // DRAG    
-      // SLIDE -> DRAG|IDLE
+      }
+      // DRAG    
 
+      // SLIDE -> DRAG|IDLE
     }, {
       key: "next_SLIDE",
       value: function next_SLIDE() {
         var nextState,
-            parent = this.parent,
-            dragState = parent.dragState;
-
+          parent = this.parent,
+          dragState = parent.dragState;
         if (dragState.isDown) {
           nextState = 'DRAG';
         } else if (!parent.isSliding) {
           nextState = 'IDLE';
         }
-
         return nextState;
       }
     }, {
@@ -981,22 +862,21 @@
       value: function update_SLIDE(time, delta) {
         this.parent.sliding(time, delta);
         this.next();
-      } // SLIDE    
-      // BACK -> DRAG|IDLE
+      }
+      // SLIDE    
 
+      // BACK -> DRAG|IDLE
     }, {
       key: "next_BACK",
       value: function next_BACK() {
         var nextState,
-            parent = this.parent,
-            dragState = parent.dragState;
-
+          parent = this.parent,
+          dragState = parent.dragState;
         if (dragState.isDown) {
           nextState = 'DRAG';
         } else if (!parent.isPullBack) {
           nextState = 'IDLE';
         }
-
         return nextState;
       }
     }, {
@@ -1014,15 +894,13 @@
       value: function update_BACK(time, delta) {
         this.parent.pullBack(time, delta);
         this.next();
-      } // BACK
-
+      }
+      // BACK
     }]);
-
     return State;
   }(FSM);
 
   var GameClass = Phaser.Game;
-
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
   };
@@ -1047,29 +925,21 @@
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var DistanceBetween = Phaser.Math.Distance.Between;
-
   var DragSpeed = /*#__PURE__*/function (_ComponentBase) {
     _inherits(DragSpeed, _ComponentBase);
-
     var _super = _createSuper(DragSpeed);
-
     function DragSpeed(gameObject, config) {
       var _this;
-
       _classCallCheck(this, DragSpeed);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
 
       _this._enable = undefined;
       gameObject.setInteractive(GetValue$2(config, "inputConfig", undefined));
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(DragSpeed, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1085,7 +955,6 @@
         this.justMoved = false;
         this.setEnable(GetValue$2(o, 'enable', true));
         this.holdThreshold = GetValue$2(o, 'holdThreshold', 50); // ms
-
         this.pointerOutReleaseEnable = GetValue$2(o, 'pointerOutRelease', true);
         return this;
       }
@@ -1093,14 +962,13 @@
       key: "boot",
       value: function boot() {
         // Drag start only when pointer down
-        this.parent.on('pointerdown', this.onPointIn, this); // this.parent.on('pointerover', this.onPointIn, this);
+        this.parent.on('pointerdown', this.onPointIn, this);
+        // this.parent.on('pointerover', this.onPointIn, this);
 
         this.parent.on('pointerup', this.onPointOut, this);
-
         if (this.pointerOutReleaseEnable) {
           this.parent.on('pointerout', this.onPointOut, this);
         }
-
         this.parent.on('pointermove', this.onPointerMove, this);
         this.scene.sys.events.on('preupdate', this.preupdate, this);
       }
@@ -1110,16 +978,16 @@
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // GameObject events will be removed when this gameObject destroyed 
+        }
+
+        // GameObject events will be removed when this gameObject destroyed 
         // this.parent.off('pointerdown', this.onPointIn, this);
         // this.parent.off('pointerup', this.onPointOut, this);
         // this.parent.off('pointerout', this.onPointOut, this);
         // this.parent.off('pointermove', this.onPointerMove, this);
 
-
         this.scene.sys.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
-
         _get(_getPrototypeOf(DragSpeed.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -1131,12 +999,10 @@
         if (this._enable === e) {
           return;
         }
-
         if (!e) {
           this.isInTouched = false;
           this.pointer = undefined;
         }
-
         this._enable = e;
       }
     }, {
@@ -1145,7 +1011,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -1161,7 +1026,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.pointerOutReleaseEnable = enable;
         return this;
       }
@@ -1197,7 +1061,6 @@
         if (this.x === this.preX && this.y === this.preY) {
           return 0;
         }
-
         var d = DistanceBetween(this.preX, this.preY, this.x, this.y);
         var speed = d / (this.dt * 0.001);
         return speed;
@@ -1211,15 +1074,15 @@
       key: "speedY",
       get: function get() {
         return this.dy / (this.dt * 0.001);
-      } // internal
+      }
 
+      // internal
     }, {
       key: "onPointIn",
       value: function onPointIn(pointer, localX, localY) {
         if (!this.enable || !pointer.isDown || this.pointer !== undefined) {
           return;
         }
-
         this.pointer = pointer;
         this.localX = localX;
         this.localY = localY;
@@ -1230,7 +1093,6 @@
         if (!this.enable || this.pointer !== pointer) {
           return;
         }
-
         this.pointer = undefined;
       }
     }, {
@@ -1239,7 +1101,6 @@
         if (!this.enable || !pointer.isDown || this.pointer !== pointer) {
           return;
         }
-
         this.localX = localX;
         this.localY = localY;
       }
@@ -1249,10 +1110,8 @@
         if (!this.enable) {
           return;
         }
-
         var pointer = this.pointer;
         this.justMoved = false;
-
         if (pointer && !this.isInTouched) {
           // Touch start
           this.x = pointer.worldX;
@@ -1290,19 +1149,15 @@
         }
       }
     }]);
-
     return DragSpeed;
   }(ComponentBase);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var Movement = /*#__PURE__*/function () {
     function Movement(config) {
       _classCallCheck(this, Movement);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Movement, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1347,12 +1202,10 @@
         // delta in sec
         if (this.acceleration !== 0) {
           this.speed += this.acceleration * delta;
-
           if (this.speed < 0) {
             this.speed = 0;
           }
         }
-
         return this;
       }
     }, {
@@ -1360,11 +1213,9 @@
       value: function getDeltaValue(delta) {
         // delta in sec
         this.updateSpeed(delta);
-
         if (this.speed <= 0) {
           return 0;
         }
-
         return this.speed * delta;
       }
     }, {
@@ -1372,11 +1223,9 @@
       value: function update(delta) {
         // delta in sec
         this.updateSpeed(delta);
-
         if (this.speed > 0) {
           this.value += this.getDeltaValue(delta);
         }
-
         return this;
       }
     }, {
@@ -1385,32 +1234,26 @@
         return this.speed > 0;
       }
     }]);
-
     return Movement;
   }();
 
   var SlowDown = /*#__PURE__*/function () {
     function SlowDown() {
       _classCallCheck(this, SlowDown);
-
       this.value;
       this.dir; // true:+, false:-
-
       this.movement = new Movement();
     }
-
     _createClass(SlowDown, [{
       key: "init",
       value: function init(start, dir, speed, dec, end) {
         this.value = start;
         this.end = end;
-
         if (end !== undefined) {
           this.dir = start < end;
         } else {
           this.dir = dir;
         }
-
         this.movement.setSpeed(speed).setAcceleration(-dec);
         return this;
       }
@@ -1424,11 +1267,9 @@
       value: function update(delta) {
         // delta in sec
         var d = this.movement.getDeltaValue(delta);
-
         if (!this.dir) {
           d = -d;
         }
-
         if (this.end === undefined) {
           this.value += d;
         } else {
@@ -1436,7 +1277,6 @@
             this.value = this.end;
           } else {
             this.value += d;
-
             if (this.dir) {
               // +
               if (this.value > this.end) {
@@ -1450,7 +1290,6 @@
             }
           }
         }
-
         return this;
       }
     }, {
@@ -1459,24 +1298,19 @@
         return this.movement.isMoving;
       }
     }]);
-
     return SlowDown;
   }();
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
-
   var Scroller = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Scroller, _ComponentBase);
-
     var _super = _createSuper(Scroller);
-
     function Scroller(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Scroller);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
 
       var enable = GetValue(config, 'enable', true);
       _this._state = new State(_assertThisInitialized(_this), {
@@ -1494,36 +1328,24 @@
       _this._value = undefined;
       _this._slowDown = new SlowDown();
       var callback = GetValue(config, 'valuechangeCallback', null);
-
       if (callback !== null) {
         var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-
         _this.on('valuechange', callback, scope);
       }
-
       callback = GetValue(config, 'overmaxCallback', null);
-
       if (callback !== null) {
         var scope = GetValue(config, 'overmaxCallbackScope', undefined);
-
         _this.on('overmax', callback, scope);
       }
-
       callback = GetValue(config, 'overminCallback', null);
-
       if (callback !== null) {
         var scope = GetValue(config, 'overminCallbackScope', undefined);
-
         _this.on('overmin', callback, scope);
       }
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(Scroller, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1532,13 +1354,11 @@
         this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue(o, 'backDeceleration', 2000));
         var bounds = GetValue(o, 'bounds', undefined);
-
         if (bounds) {
           this.setBounds(bounds);
         } else {
           this.setBounds(GetValue(o, 'max', 0), GetValue(o, 'min', 0));
         }
-
         this.setValue(GetValue(o, 'value', this.maxValue || 0));
         this.setEnable(GetValue(o, "enable", true));
         return this;
@@ -1555,15 +1375,11 @@
         if (this.isShutdown) {
           return;
         }
-
         this.scene.sys.events.off('preupdate', this._state.update, this._state);
-
         this._state.destroy(fromScene);
-
         this.dragState.destroy(fromScene);
         this._state = undefined;
         this.dragState = undefined;
-
         _get(_getPrototypeOf(Scroller.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -1575,11 +1391,8 @@
         if (this._enable === e) {
           return;
         }
-
         this._enable = e;
-
         this._state.setEnable(e);
-
         this.dragState.setEnable(e);
         return this;
       }
@@ -1589,7 +1402,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -1605,7 +1417,6 @@
         if (typeof m === 'string') {
           m = ORIENTATIONMODE[m];
         }
-
         this.orientationMode = m;
         return this;
       }
@@ -1635,7 +1446,6 @@
           value0 = bounds[0];
           value1 = bounds[1];
         }
-
         if (value0 < value1) {
           this.minValue = value0;
           this.maxValue = value1;
@@ -1643,7 +1453,6 @@
           this.minValue = value1;
           this.maxValue = value0;
         }
-
         return this;
       }
     }, {
@@ -1655,29 +1464,23 @@
         if (value === this._value) {
           return;
         }
-
         var oldValue = this._value;
         var isOverMax = this.overMax(value);
         var isOverMin = this.overMin(value);
-
         if (isOverMax) {
           this.emit('overmax', value, oldValue);
         }
-
         if (isOverMin) {
           this.emit('overmin', value, oldValue);
         }
-
         if (!this.backEnable) {
           if (isOverMax) {
             value = this.maxValue;
           }
-
           if (isOverMin) {
             value = this.minValue;
           }
         }
-
         this._value = value;
         this.emit('valuechange', value, oldValue);
       }
@@ -1687,11 +1490,9 @@
         if (clamp === undefined) {
           clamp = false;
         }
-
         if (clamp) {
           value = Clamp(value, this.minValue, this.maxValue);
         }
-
         this.value = value;
         return this;
       }
@@ -1725,8 +1526,9 @@
       key: "outOfBounds",
       get: function get() {
         return this.outOfMinBound || this.outOfMaxBound;
-      } // internal
+      }
 
+      // internal
     }, {
       key: "overMax",
       value: function overMax(value) {
@@ -1782,65 +1584,62 @@
         } else {
           return 0;
         }
-      } // enter_DRAG
+      }
 
+      // enter_DRAG
     }, {
       key: "onDragStart",
       value: function onDragStart() {
         this.emit('dragstart');
-      } // exit_DRAG
+      }
 
+      // exit_DRAG
     }, {
       key: "onDragEnd",
       value: function onDragEnd() {
         this.emit('dragend');
-      } // everyTick_DRAG
+      }
 
+      // everyTick_DRAG
     }, {
       key: "dragging",
       value: function dragging() {
         this.value += this.dragDelta;
-      } // enter_SLIDE 
+      }
 
+      // enter_SLIDE 
     }, {
       key: "onSliding",
       value: function onSliding() {
         var start = this.value;
         var speed = this.dragSpeed;
-
         if (speed === 0) {
           this._slowDown.stop();
-
           this._state.next();
-
           return;
         }
-
         var dec = this.slidingDeceleration;
-
         this._slowDown.init(start, speed > 0, Math.abs(speed), dec);
-      } // everyTick_SLIDE
+      }
 
+      // everyTick_SLIDE
     }, {
       key: "sliding",
       value: function sliding(time, delta) {
         delta *= 0.001;
-
         var newValue = this._slowDown.update(delta).value;
-
         if (this.overMax(newValue)) {
           this.value = this.maxValue;
-
           this._slowDown.stop();
         } else if (this.overMin(newValue)) {
           this.value = this.minValue;
-
           this._slowDown.stop();
         } else {
           this.value = newValue;
         }
-      } // enter_BACK
+      }
 
+      // enter_BACK
     }, {
       key: "onPullBack",
       value: function onPullBack() {
@@ -1849,31 +1648,29 @@
         var dist = Math.abs(end - start);
         var dec = this.backDeceleration;
         var speed = Math.sqrt(2 * dec * dist);
-
         this._slowDown.init(start, undefined, speed, dec, end);
-      } // everyTick_BACK
+      }
 
+      // everyTick_BACK
     }, {
       key: "pullBack",
       value: function pullBack(time, delta) {
         delta *= 0.001;
         this.value = this._slowDown.update(delta).value;
-
         if (!this._slowDown.isMoving) {
           this._state.next();
         }
-      } // exit_SLIDE, exit_BACK
+      }
 
+      // exit_SLIDE, exit_BACK
     }, {
       key: "stop",
       value: function stop() {
         this._slowDown.stop();
       }
     }]);
-
     return Scroller;
   }(ComponentBase);
-
   var ORIENTATIONMODE = {
     y: 0,
     v: 0,
@@ -1885,15 +1682,11 @@
 
   var ScrollerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ScrollerPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(ScrollerPlugin);
-
     function ScrollerPlugin(pluginManager) {
       _classCallCheck(this, ScrollerPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(ScrollerPlugin, [{
       key: "start",
       value: function start() {
@@ -1906,7 +1699,6 @@
         return new Scroller(gameObject, config);
       }
     }]);
-
     return ScrollerPlugin;
   }(Phaser.Plugins.BasePlugin);
 

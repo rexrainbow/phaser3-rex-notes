@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,88 +66,68 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
   var WarnCounter = 0;
-
   var CheckScaleMode = function CheckScaleMode(scene) {
     var scaleManager = scene.sys.scale;
-
     if (scaleManager.scaleMode !== Phaser.Scale.RESIZE) {
       if (WarnCounter === 0) {
         console.warn('Scale outer only works with RESIZE scale mode');
       }
-
       WarnCounter++;
       return false;
     }
-
     return true;
   };
 
@@ -163,48 +135,41 @@
     if (out === undefined) {
       out = {};
     }
-
     var gameConfig = scene.game.config;
     var gameWidth = gameConfig.width,
-        gameHeight = gameConfig.height;
+      gameHeight = gameConfig.height;
     var gameAspectRatio = gameHeight === 0 ? 1 : gameWidth / gameHeight;
     var displaySize = scene.sys.scale.displaySize;
     var displayWidth = displaySize.width,
-        displayHeight = displaySize.height;
+      displayHeight = displaySize.height;
     var displayAspectRatio = displayHeight === 0 ? 1 : displayWidth / displayHeight;
     out.scrollX = (gameWidth - displayWidth) / 2;
     out.scrollY = (gameHeight - displayHeight) / 2;
-
     if (gameAspectRatio < displayAspectRatio) {
       out.zoom = displayHeight / gameHeight;
     } else {
       out.zoom = displayWidth / gameWidth;
     }
-
     return out;
   };
 
   var Rectangle$1 = Phaser.Geom.Rectangle;
-
   var GetInnerViewport = function GetInnerViewport(scaleOuter, out) {
     if (out === undefined) {
       out = new Rectangle$1();
     }
-
     var gameConfig = scaleOuter.scene.game.config;
     var width = gameConfig.width,
-        height = gameConfig.height;
+      height = gameConfig.height;
     out.setTo(0, 0, width, height);
     return out;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
-
   var GetOuterViewport = function GetOuterViewport(scaleOuter, out) {
     if (out === undefined) {
       out = new Rectangle();
     }
-
     var scale = scaleOuter.zoom;
     var displaySize = scaleOuter.scene.sys.scale.displaySize;
     out.width = displaySize.width / scale;
@@ -216,12 +181,11 @@
   };
 
   var SetStruct = Phaser.Structs.Set;
-
   var ScaleOuter = /*#__PURE__*/function () {
     function ScaleOuter(scene) {
       _classCallCheck(this, ScaleOuter);
-
-      this.scene = scene; // Set gameConfig.scale.mode to Phaser.Scale.RESIZE
+      this.scene = scene;
+      // Set gameConfig.scale.mode to Phaser.Scale.RESIZE
 
       this.cameras = new SetStruct();
       this.scrollX = 0;
@@ -231,17 +195,14 @@
       this._outerViewport = undefined;
       this.boot();
     }
-
     _createClass(ScaleOuter, [{
       key: "boot",
       value: function boot() {
         var scene = this.scene;
-
         if (CheckScaleMode(scene)) {
           scene.sys.scale.on('resize', this.scale, this);
           scene.sys.events.once('preupdate', this.start, this);
         }
-
         scene.sys.events.on('shutdown', function () {
           // cameras of this scene will be destroyed when scene shutdown
           this.cameras.clear();
@@ -264,7 +225,6 @@
           // Add default camera
           this.add(this.scene.sys.cameras.main);
         }
-
         this.scale();
         return this;
       }
@@ -292,8 +252,9 @@
       key: "outerViewport",
       get: function get() {
         return this._outerViewport;
-      } // Internal methods
+      }
 
+      // Internal methods
     }, {
       key: "onFirstTick",
       value: function onFirstTick() {
@@ -301,7 +262,6 @@
           // Add default camera
           this.add(this.scene.sys.cameras.main);
         }
-
         this.scale();
       }
     }, {
@@ -319,25 +279,19 @@
         return this;
       }
     }]);
-
     return ScaleOuter;
   }();
 
   var ScaleOuterPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(ScaleOuterPlugin, _Phaser$Plugins$Scene);
-
     var _super = _createSuper(ScaleOuterPlugin);
-
     function ScaleOuterPlugin(scene, pluginManager) {
       var _this;
-
       _classCallCheck(this, ScaleOuterPlugin);
-
       _this = _super.call(this, scene, pluginManager);
       _this.scaleOuter = new ScaleOuter(scene);
       return _this;
     }
-
     _createClass(ScaleOuterPlugin, [{
       key: "start",
       value: function start() {
@@ -349,7 +303,6 @@
       value: function destroy() {
         this.scaleOuter.destroy();
         this.scaleOuter = undefined;
-
         _get(_getPrototypeOf(ScaleOuterPlugin.prototype), "destroy", this).call(this);
       }
     }, {
@@ -365,7 +318,6 @@
           // Add default camera
           this.add(this.scene.sys.cameras.main);
         }
-
         this.scaleOuter.scale();
         return this;
       }
@@ -401,7 +353,6 @@
         return this.scaleOuter.outerViewport;
       }
     }]);
-
     return ScaleOuterPlugin;
   }(Phaser.Plugins.ScenePlugin);
 

@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,7 +141,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -176,76 +150,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -266,18 +229,17 @@
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
       this.parent = parent; // gameObject or scene
-
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
 
+      // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
         this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
@@ -286,16 +248,15 @@
         this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
-
+        // parent might not be shutdown yet
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
           this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
@@ -303,7 +264,6 @@
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -325,19 +285,16 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var TextKlass = Phaser.GameObjects.Text;
-
   var IsTextGameObject = function IsTextGameObject(gameObject) {
     return gameObject instanceof TextKlass;
   };
 
   var BitmapTextKlass = Phaser.GameObjects.BitmapText;
-
   var IsBitmapTextGameObject = function IsBitmapTextGameObject(gameObject) {
     return gameObject instanceof BitmapTextKlass;
   };
@@ -345,10 +302,8 @@
   var TextType = 0;
   var TagTextType = 1;
   var BitmapTextType = 2;
-
   var GetTextObjectType = function GetTextObjectType(textObject) {
     var textObjectType;
-
     if (IsBitmapTextGameObject(textObject)) {
       textObjectType = BitmapTextType;
     } else if (IsTextGameObject(textObject)) {
@@ -356,34 +311,26 @@
     } else {
       textObjectType = TagTextType;
     }
-
     return textObjectType;
   };
 
   var TextToLines = function TextToLines(textObject, text, lines) {
     var textObjectType = GetTextObjectType(textObject);
-
     switch (textObjectType) {
       case TextType:
         lines = textObject.getWrappedText(text); // Array of string
-
         break;
-
       case TagTextType:
         lines = textObject.getPenManager(text, lines); // Pens-manager
-
         break;
-
       case BitmapTextType:
         if (textObject.maxWidth > 0) {
           lines = textObject.setText(text).getTextBounds().wrappedText.split('\n');
         } else {
           lines = text.split('\n');
         }
-
         break;
     }
-
     return lines;
   };
 
@@ -391,26 +338,21 @@
     if (startLineIndex === undefined) {
       startLineIndex = this.startLineIndex;
     }
-
     if (endLineIdx === undefined) {
       endLineIdx = startLineIndex + this.pageLinesCount;
     }
-
     var text;
-
     switch (this.textObjectType) {
       case TextType:
       case BitmapTextType:
         text = this.lines.slice(startLineIndex, endLineIdx).join('\n');
         break;
-
       case TagTextType:
         var startIdx = this.lines.getLineStartIndex(startLineIndex);
         var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
         text = this.lines.getSliceTagText(startIdx, endIdx, true);
         break;
     }
-
     return text;
   };
 
@@ -420,10 +362,8 @@
     } else if (typeof text === 'number') {
       text = text.toString();
     }
-
     return text;
   };
-
   var SetContentMethods = {
     clearText: function clearText() {
       this.sections.length = 0;
@@ -438,31 +378,27 @@
       this.lines = TextToLines(this.parent, text, this.lines);
       var newLinesCount = this.totalLinesCount - pageStartIndex;
       var pageCount = Math.ceil(newLinesCount / this.pageLinesCount);
-
       for (var i = 0; i < pageCount; i++) {
         this.pageStartIndexes.push(pageStartIndex + i * this.pageLinesCount);
       }
-
       return this;
     },
     setText: function setText(text, resetPageIdx) {
       if (resetPageIdx === undefined) {
         resetPageIdx = true;
       }
-
       if (resetPageIdx) {
         this.resetPageIdx();
       }
-
       this.clearText();
-      var sections = GetString(text).split(this.pageBreak); // if (sections[sections.length - 1] === '') { // Last section is an empty string
+      var sections = GetString(text).split(this.pageBreak);
+      // if (sections[sections.length - 1] === '') { // Last section is an empty string
       //     sections.length -= 1;
       // }
 
       for (var i = 0, cnt = sections.length; i < cnt; i++) {
         this.appendPage(sections[i]);
       }
-
       return this;
     },
     appendText: function appendText(text) {
@@ -478,7 +414,6 @@
       if (idx === undefined) {
         idx = this.pageIndex;
       }
-
       return this.setPageIndex(idx).getLines(this.startLineIndex, this.endLineIndex);
     },
     getNextPage: function getNextPage() {
@@ -502,43 +437,40 @@
 
   var SetNoWrapText = function SetNoWrapText(textObject, text) {
     var textObjectType = GetTextObjectType(textObject);
-
     switch (textObjectType) {
       case TextType:
         // Store wrap properties
         var style = textObject.style;
         var wordWrapWidth = style.wordWrapWidth;
-        var wordWrapCallback = style.wordWrapCallback; // Disable wrap
-
+        var wordWrapCallback = style.wordWrapCallback;
+        // Disable wrap
         style.wordWrapWidth = 0;
-        style.wordWrapCallback = undefined; // Set text
-
-        textObject.setText(text); // Restore wrap
-
+        style.wordWrapCallback = undefined;
+        // Set text
+        textObject.setText(text);
+        // Restore wrap
         style.wordWrapWidth = wordWrapWidth;
         style.wordWrapCallback = wordWrapCallback;
         break;
-
       case TagTextType:
         // Store wrap properties
         var style = textObject.style;
-        var wrapMode = style.wrapMode; // Disable wrap
-
-        style.wrapMode = 0; // Set text
-
-        textObject.setText(text); // Restore wrap
-
+        var wrapMode = style.wrapMode;
+        // Disable wrap
+        style.wrapMode = 0;
+        // Set text
+        textObject.setText(text);
+        // Restore wrap
         style.wrapMode = wrapMode;
         break;
-
       case BitmapTextType:
         // Store wrap properties
-        var maxWidth = textObject._maxWidth; // Disable wrap
-
-        textObject._maxWidth = 0; // Set text
-
-        textObject.setText(text); // Restore wrap
-
+        var maxWidth = textObject._maxWidth;
+        // Disable wrap
+        textObject._maxWidth = 0;
+        // Set text
+        textObject.setText(text);
+        // Restore wrap
         textObject._maxWidth = maxWidth;
         break;
     }
@@ -581,35 +513,29 @@
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
-
   var TextPage = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TextPage, _ComponentBase);
-
     var _super = _createSuper(TextPage);
-
     function TextPage(gameObject, config) {
       var _this;
-
       _classCallCheck(this, TextPage);
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
-      }); // No event emitter
+      });
+      // No event emitter
       // this.parent = gameObject;
 
       _this.textObjectType = GetTextObjectType(_this.parent);
-      _this.pageStartIndexes = []; // Text object : array of string
+      _this.pageStartIndexes = [];
+
+      // Text object : array of string
       // Tag text object : pens-manager
       // Bitmap text object : array of string
-
       _this.lines = TextToLines(_this.parent, '');
       _this.sections = [];
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(TextPage, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -638,27 +564,22 @@
         if (this.isShutdown) {
           return;
         }
-
         switch (this.textObjectType) {
           case TextType:
             this.lines.length = 0;
             break;
-
           case TagTextType:
             this.lines.destroy();
             break;
-
           case BitmapTextType:
             this.lines.length = 0;
             break;
         }
-
         this.pageStartIndexes.length = 0;
         this.sections.length = 0;
         this.lines = undefined;
         this.pageStartIndexes = undefined;
         this.sections = undefined;
-
         _get(_getPrototypeOf(TextPage.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -715,25 +636,20 @@
           return this.maxLines;
         } else {
           var count;
-
           switch (this.textObjectType) {
             case TextType:
             case TagTextType:
               var maxLines = this.parent.style.maxLines;
-
               if (maxLines > 0) {
                 count = maxLines;
               } else {
                 count = this.totalLinesCount;
               }
-
               break;
-
             case BitmapTextType:
               count = this.totalLinesCount;
               break;
           }
-
           return count;
         }
       }
@@ -743,23 +659,17 @@
         return this.sections.join(this.pageBreak);
       }
     }]);
-
     return TextPage;
   }(ComponentBase);
-
   Object.assign(TextPage.prototype, Methods);
 
   var TextPagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(TextPagePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(TextPagePlugin);
-
     function TextPagePlugin(pluginManager) {
       _classCallCheck(this, TextPagePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(TextPagePlugin, [{
       key: "start",
       value: function start() {
@@ -772,7 +682,6 @@
         return new TextPage(gameObject, config);
       }
     }]);
-
     return TextPagePlugin;
   }(Phaser.Plugins.BasePlugin);
 

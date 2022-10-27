@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,40 +66,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -130,12 +113,10 @@
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
-
   var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
-
     if (s === '') {
       s = null;
     } else if (FLOAT.test(s)) {
@@ -149,24 +130,19 @@
         s = true;
       }
     }
-
     return s;
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var CsvToHashTable = /*#__PURE__*/function () {
     function CsvToHashTable(config) {
       _classCallCheck(this, CsvToHashTable);
-
       this.resetFromJSON(config);
     }
-
     _createClass(CsvToHashTable, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.table = GetValue(o, 'table', {}); // 2d hash table
-
         this.rowKeys = GetValue(o, 'row', []);
         this.colKeys = GetValue(o, 'col', []);
         this.cursor = GetValue(o, 'cursor', {});
@@ -201,7 +177,6 @@
         var delimiter = GetValue(config, 'delimiter', ',');
         var convert = GetValue(config, 'convert', true);
         var convertScope = GetValue(config, 'convertScope', undefined);
-
         if (!convert) {
           convert = undefined;
           convertScope = undefined;
@@ -209,53 +184,39 @@
           convert = TypeConvert;
           convertScope = undefined;
         }
-
         var arr = papaparse_min.parse(csvString, {
           delimiter: delimiter
         }).data;
         var inColKeys = arr[0];
-
         for (var i = 0, cnt = inColKeys.length; i < cnt; i++) {
           var colKey = inColKeys[i];
-
           if (this.colKeys.indexOf(colKey) !== -1) {
             continue;
           }
-
           this.colKeys.push(colKey);
         }
-
         var inRowKeys = arr.map(function (row) {
           return row[0];
         });
         inRowKeys.shift(); // skip 1st row
-
         for (var i = 0, cnt = inRowKeys.length; i < cnt; i++) {
           var rowKey = inRowKeys[i];
-
           if (this.rowKeys.indexOf(rowKey) !== -1) {
             continue;
           }
-
           this.rowKeys.push(rowKey);
         }
-
         var table = this.table;
         var colKey, rowKey, row, value;
-
         for (var r = 0, rcnt = inRowKeys.length; r < rcnt; r++) {
           rowKey = inRowKeys[r];
-
           if (!table.hasOwnProperty(rowKey)) {
             table[rowKey] = {};
           }
-
           row = table[rowKey];
-
           for (var c = 0, ccnt = inColKeys.length; c < ccnt; c++) {
             value = arr[r + 1][c];
             colKey = inColKeys[c];
-
             if (convert) {
               if (convertScope) {
                 value = convert.call(convertScope, value, rowKey, colKey, this);
@@ -263,11 +224,9 @@
                 value = convert(value, rowKey, colKey, this);
               }
             }
-
             row[colKey] = value;
           }
         }
-
         this.setCursor('', '');
         return this;
       }
@@ -275,11 +234,9 @@
       key: "clear",
       value: function clear() {
         var table = this.table;
-
         for (var key in table) {
           delete table[key];
         }
-
         this.rowKeys.length = 0;
         this.colKeys.length = 0;
         return this;
@@ -290,22 +247,17 @@
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         var value = undefined;
         var table = this.table;
-
         if (table.hasOwnProperty(rowKey)) {
           var row = table[rowKey];
-
           if (row.hasOwnProperty(colKey)) {
             value = row[colKey];
           }
         }
-
         this.setCursor(rowKey, colKey);
         return value;
       }
@@ -315,21 +267,16 @@
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         var table = this.table;
-
         if (table.hasOwnProperty(rowKey)) {
           var row = table[rowKey];
-
           if (row.hasOwnProperty(colKey)) {
             row[colKey] = value;
           }
         }
-
         this.setCursor(rowKey, colKey);
         return this;
       }
@@ -339,21 +286,16 @@
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         var table = this.table;
-
         if (table.hasOwnProperty(rowKey)) {
           var row = table[rowKey];
-
           if (row.hasOwnProperty(colKey)) {
             row[colKey] += value;
           }
         }
-
         this.setCursor(rowKey, colKey);
         return this;
       }
@@ -363,7 +305,6 @@
         if (typeof rowKey === 'number') {
           return this.rowKeys.length > rowKey;
         }
-
         return this.rowKeys.indexOf(rowKey) !== -1;
       }
     }, {
@@ -372,7 +313,6 @@
         if (typeof colKey === 'number') {
           return this.colKeys.length > colKey;
         }
-
         return this.colKeys.indexOf(colKey) !== -1;
       }
     }, {
@@ -386,23 +326,18 @@
         if (!this.hasRowKey(rowKey)) {
           return false;
         }
-
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         var row = this.table[rowKey];
         var colKey,
-            colKeys = this.colKeys;
-
+          colKeys = this.colKeys;
         for (var i = 0, len = colKeys.length; i < len; i++) {
           colKey = colKeys[i];
-
           if (row[colKey] === value) {
             return true;
           }
         }
-
         return false;
       }
     }, {
@@ -411,21 +346,17 @@
         if (!this.hasColKey(colKey)) {
           return false;
         }
-
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         var table = this.table;
         var rowKey,
-            rowKeys = this.rowKeys;
-
+          rowKeys = this.rowKeys;
         for (var i = 0, len = rowKeys.length; i < len; i++) {
           if (table[rowKey][colKey] === value) {
             return true;
           }
         }
-
         return false;
       }
     }, {
@@ -434,23 +365,19 @@
         if (this.hasRowKey(rowKey)) {
           return this;
         }
-
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         var isCallbackMode = typeof callback === 'function';
         var initValue = isCallbackMode ? undefined : callback;
         this.rowKeys.push(rowKey);
         var row = {};
         this.table[rowKey] = row;
         var colKey,
-            colKeys = this.colKeys,
-            value;
-
+          colKeys = this.colKeys,
+          value;
         for (var i = 0, len = colKeys.length; i < len; i++) {
           colKey = colKeys[i];
-
           if (isCallbackMode) {
             if (scope) {
               value = callback.call(scope, this, rowKey, colKey);
@@ -460,10 +387,8 @@
           } else {
             value = initValue;
           }
-
           row[colKey] = value;
         }
-
         return this;
       }
     }, {
@@ -472,22 +397,18 @@
         if (this.hasColKey(colKey)) {
           return this;
         }
-
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         var isCallbackMode = typeof callback === 'function';
         var initValue = isCallbackMode ? undefined : callback;
         this.colKeys.push(colKey);
         var table = this.table;
         var rowKey,
-            rowKeys = this.rowKeys,
-            value;
-
+          rowKeys = this.rowKeys,
+          value;
         for (var i = 0, len = rowKeys.length; i < len; i++) {
           rowKey = rowKeys[i];
-
           if (isCallbackMode) {
             if (scope) {
               value = callback.call(scope, this, rowKey, colKey);
@@ -497,27 +418,22 @@
           } else {
             value = initValue;
           }
-
           table[rowKey][colKey] = value;
         }
-
         return this;
       }
     }, {
       key: "removeRol",
       value: function removeRol(rowKey) {
         var idx;
-
         if (typeof rowKey === 'number') {
           idx = this.rowKeys.length > rowKey ? rowKey : -1;
         } else {
           idx = this.rowKeys.indexOf(rowKey);
         }
-
         if (idx === -1) {
           return this;
         }
-
         this.rowKeys.splice(idx, 1);
         delete this.table[rowKey];
         return this;
@@ -526,25 +442,20 @@
       key: "removeCol",
       value: function removeCol(colKey) {
         var idx;
-
         if (typeof colKey === 'number') {
           idx = this.colKeys.length > colKey ? colKey : -1;
         } else {
           idx = this.colKeys.indexOf(colKey);
         }
-
         if (idx === -1) {
           return this;
         }
-
         this.colKeys.splice(idx, 1);
         var table = this.table;
         var rowKeys = this.rowKeys;
-
         for (var i = 0, len = rowKeys.length; i < len; i++) {
           delete table[rowKeys[i]][colKey];
         }
-
         return this;
       }
     }, {
@@ -553,26 +464,21 @@
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         var rowKeys = this.rowKeys,
-            rowKey,
-            value;
+          rowKey,
+          value;
         var isValidColKey = this.hasColKey(colKey);
-
         for (var i = 0, len = rowKeys.length; i < len; i++) {
           rowKey = rowKeys[i];
-
           if (isValidColKey) {
             value = this.get(rowKey, colKey);
           }
-
           if (scope) {
             callback.call(scope, this, rowKey, colKey, value);
           } else {
             callback(this, rowKey, colKey, value);
           }
         }
-
         return this;
       }
     }, {
@@ -581,26 +487,21 @@
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         var colKeys = this.colKeys,
-            colKey,
-            value;
+          colKey,
+          value;
         var isValidRowKey = this.hasRowKey(rowKey);
-
         for (var i = 0, len = colKeys.length; i < len; i++) {
           colKey = colKeys[i];
-
           if (isValidRowKey) {
             value = this.get(rowKey, colKey);
           }
-
           if (scope) {
             callback.call(scope, this, rowKey, colKey, value);
           } else {
             callback(scope, this, rowKey, colKey, value);
           }
         }
-
         return this;
       }
     }, {
@@ -609,43 +510,34 @@
         if (typeof colKey === 'number') {
           colKey = this.colKeys[colKey];
         }
-
         if (callback === undefined) {
           callback = TypeConvert;
         }
-
         if (Array.isArray(colKey)) {
           for (var i = 0, len = colKey.length; i < len; i++) {
             this.convertCol(colKey[i], callback, scope);
           }
-
           return this;
         }
-
         if (!this.hasColKey(colKey)) {
           return this;
         }
-
         var table = this.table,
-            row;
+          row;
         var rowKey,
-            rowKeys = this.rowKeys,
-            value;
-
+          rowKeys = this.rowKeys,
+          value;
         for (var r = 0, rcnt = rowKeys.length; r < rcnt; r++) {
           rowKey = rowKeys[r];
           row = table[rowKey];
           value = row[colKey];
-
           if (scope) {
             value = callback.call(scope, this, rowKey, colKey, value);
           } else {
             value = callback(this, rowKey, colKey, value);
           }
-
           row[colKey] = value;
         }
-
         return this;
       }
     }, {
@@ -654,37 +546,29 @@
         if (typeof rowKey === 'number') {
           rowKey = this.rowKeys[rowKey];
         }
-
         if (callback === undefined) {
           callback = TypeConvert;
         }
-
         if (Array.isArray(rowKey)) {
           for (var i = 0, len = rowKey.length; i < len; i++) {
             this.convertRow(rowKey[i], callback, scope);
           }
-
           return this;
         }
-
         var row = this.table[rowKey];
         var colKey,
-            colKeys = this.colKeys,
-            value;
-
+          colKeys = this.colKeys,
+          value;
         for (var c = 0, ccnt = colKeys.length; c < ccnt; c++) {
           colKey = colKeys[r];
           value = row[colKey];
-
           if (scope) {
             value = callback.call(scope, this, rowKey, colKey, value);
           } else {
             value = callback(this, rowKey, colKey, value);
           }
-
           row[colKey] = value;
         }
-
         return this;
       }
     }, {
@@ -703,18 +587,14 @@
         if (colKey === undefined) {
           colKey = this.cursor.colKey;
         }
-
         if (step === undefined) {
           step = 1;
         }
-
         var colKeys = this.colKeys;
         var idx = colKeys.indexOf(colKey);
-
         if (idx === -1) {
           return undefined;
         }
-
         return colKeys[idx + step];
       }
     }, {
@@ -723,14 +603,11 @@
         if (rowKey === undefined) {
           rowKey = this.cursor.rowKey;
         }
-
         var rowKeys = this.rowKeys;
         var idx = rowKeys.indexOf(rowKey);
-
         if (idx === -1) {
           return undefined;
         }
-
         return rowKeys[idx + 1];
       }
     }, {
@@ -739,7 +616,6 @@
         if (step === undefined) {
           step = 1;
         }
-
         step = -step;
         return this.nextColKey(colKey, step);
       }
@@ -749,7 +625,6 @@
         if (step === undefined) {
           step = 1;
         }
-
         step = -step;
         return this.nextRowlKey(rowKey, step);
       }
@@ -762,45 +637,35 @@
           }
         } else {
           var colKey = callback;
-
           if (!this.hasColKey(colKey)) {
             return this;
           }
-
           var mode = scope;
-
           if (typeof mode === 'string') {
             mode = SORTMODE[mode];
           }
-
           var table = this;
-
           callback = function callback(rowKeyA, rowKeyB) {
             var valA = table.get(rowKeyA, colKey);
             var valB = table.get(rowKeyB, colKey);
             var retVal;
-
             if (mode >= 2) {
               valA = parseFloat(valA);
               valB = parseFloat(valB);
             }
-
             switch (mode) {
               case 0:
               case 2:
                 retVal = valA > valB ? 1 : valA < valB ? -1 : 0;
                 break;
-
               case 1:
               case 3:
                 retVal = valA < valB ? 1 : valA > valB ? -1 : 0;
                 break;
             }
-
             return retVal;
           };
         }
-
         this.rowKeys.sort(callback);
         return this;
       }
@@ -813,45 +678,35 @@
           }
         } else {
           var rowKey = callback;
-
           if (!this.hasRowKey(rowKey)) {
             return this;
           }
-
           var mode = scope;
-
           if (typeof mode === 'string') {
             mode = SORTMODE[mode];
           }
-
           var table = this;
-
           callback = function callback(colKeyA, colKeyB) {
             var valA = table.get(rowKey, colKeyA);
             var valB = table.get(rowKey, colKeyB);
             var retVal;
-
             if (mode >= 2) {
               valA = parseFloat(valA);
               valB = parseFloat(valB);
             }
-
             switch (mode) {
               case 0:
               case 2:
                 retVal = valA > valB ? 1 : valA < valB ? -1 : 0;
                 break;
-
               case 1:
               case 3:
                 retVal = valA < valB ? 1 : valA > valB ? -1 : 0;
                 break;
             }
-
             return retVal;
           };
         }
-
         this.colKeys.sort(callback);
         return this;
       }
@@ -864,10 +719,8 @@
         return this;
       }
     }]);
-
     return CsvToHashTable;
   }();
-
   var SORTMODE = {
     'ascending': 0,
     'descending': 1,
@@ -877,15 +730,11 @@
 
   var CSVToHashTablePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CSVToHashTablePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(CSVToHashTablePlugin);
-
     function CSVToHashTablePlugin(pluginManager) {
       _classCallCheck(this, CSVToHashTablePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(CSVToHashTablePlugin, [{
       key: "start",
       value: function start() {
@@ -898,7 +747,6 @@
         return new CsvToHashTable(config);
       }
     }]);
-
     return CSVToHashTablePlugin;
   }(Phaser.Plugins.BasePlugin);
 

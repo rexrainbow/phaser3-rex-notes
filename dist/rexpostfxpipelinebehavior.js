@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -32,37 +30,32 @@
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var RemoveIte = Phaser.Utils.Array.Remove;
-
   var PostFxPipelineBehaviorBase = /*#__PURE__*/function () {
     function PostFxPipelineBehaviorBase(gameObject, config) {
       _classCallCheck(this, PostFxPipelineBehaviorBase);
-
       this.gameObject = gameObject;
-      this.scene = gameObject.scene; // Can inject PipelineClass at runtime
+      this.scene = gameObject.scene;
 
+      // Can inject PipelineClass at runtime
       var PipelineClass;
-
       if (IsPostFxPipelineClass(config)) {
         PipelineClass = config;
         config = undefined;
       } else {
         PipelineClass = GetValue(config, 'PipelineClass');
       }
-
       if (PipelineClass) {
         this.createPipeline = function (game) {
           return new PipelineClass(game);
         };
       }
-
       var enable = GetValue(config, 'enable', !!config);
-
       if (enable) {
         this.getPipeline(config);
-      } // Will destroy pipeline when gameObject destroying
+      }
 
+      // Will destroy pipeline when gameObject destroying
     }
-
     _createClass(PostFxPipelineBehaviorBase, [{
       key: "getPipeline",
       value: function getPipeline(config) {
@@ -75,11 +68,9 @@
           gameObject.hasPostPipeline = postPipelines.length > 0;
           this.pipeline = pipeline;
         }
-
         if (config && this.pipeline.resetFromJSON) {
           this.pipeline.resetFromJSON(config);
         }
-
         return this.pipeline;
       }
     }, {
@@ -88,7 +79,6 @@
         if (!this.pipeline) {
           return this;
         }
-
         var gameObject = this.gameObject;
         var postPipelines = gameObject.postPipelines;
         RemoveIte(postPipelines, this.pipeline);
@@ -96,16 +86,15 @@
         this.pipeline.destroy();
         this.pipeline = undefined;
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "createPipeline",
       value: function createPipeline(game) {}
     }]);
-
     return PostFxPipelineBehaviorBase;
   }();
-
   var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
     return object && object.prototype && object.prototype instanceof PostFXPipeline;
   };

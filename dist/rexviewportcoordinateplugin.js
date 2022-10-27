@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,51 +66,40 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
 
   var EventEmitter = Phaser.Events.EventEmitter;
-
   var MonitorViewport = function MonitorViewport(viewport) {
     if (viewport.events) {
       return viewport;
     }
-
     var events = new EventEmitter();
     var x = viewport.x;
     Object.defineProperty(viewport, 'x', {
@@ -178,12 +159,10 @@
     } else if (out === true) {
       out = GlobXY;
     }
-
     out.x = viewport.x + viewport.width * vpx;
     out.y = viewport.y + viewport.height * vpy;
     return out;
   };
-
   var GlobXY = {};
 
   var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
@@ -191,27 +170,23 @@
     if (gameObject.hasOwnProperty('vp')) {
       return gameObject;
     }
-
     if (vpx === undefined) {
       vpx = 0.5;
     }
-
     if (vpy === undefined) {
       vpy = 0.5;
     }
-
     if (transformCallback === undefined) {
       transformCallback = VPXYToXY;
     }
-
     MonitorViewport(viewport);
     var events = viewport.events;
-    gameObject.vp = viewport; // Set position of game object when view-port changed.
+    gameObject.vp = viewport;
 
+    // Set position of game object when view-port changed.
     var Transform = function Transform() {
       transformCallback(vpx, vpy, viewport, gameObject);
     };
-
     events.on('update', Transform);
     gameObject.once('destroy', function () {
       events.off('update', Transform);
@@ -244,15 +219,11 @@
 
   var ViewportCoordinatePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ViewportCoordinatePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(ViewportCoordinatePlugin);
-
     function ViewportCoordinatePlugin(pluginManager) {
       _classCallCheck(this, ViewportCoordinatePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(ViewportCoordinatePlugin, [{
       key: "start",
       value: function start() {
@@ -270,7 +241,6 @@
         return VPXYToXY(vpx, vpy, viewport, out);
       }
     }]);
-
     return ViewportCoordinatePlugin;
   }(Phaser.Plugins.BasePlugin);
 

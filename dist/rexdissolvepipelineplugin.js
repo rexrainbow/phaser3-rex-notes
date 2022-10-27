@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -131,17 +113,12 @@
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
-
   var DissolvePostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(DissolvePostFxPipeline, _PostFXPipeline);
-
     var _super = _createSuper(DissolvePostFxPipeline);
-
     function DissolvePostFxPipeline(game) {
       var _this;
-
       _classCallCheck(this, DissolvePostFxPipeline);
-
       _this = _super.call(this, {
         name: 'rexDissolvePostFx',
         game: game,
@@ -162,7 +139,6 @@
       _this.toEdgeWidth = 0.05;
       return _this;
     }
-
     _createClass(DissolvePostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -218,21 +194,16 @@
         if (key === undefined) {
           key = '__DEFAULT';
         }
-
         var phaserTexture = this.game.textures.getFrame(key, frame);
-
         if (!phaserTexture) {
           phaserTexture = this.game.textures.getFrame('__DEFAULT');
         }
-
         this.toRatio = phaserTexture.width / phaserTexture.height;
         this.toFrame = phaserTexture;
         this.targetTexture = phaserTexture.glTexture;
-
         if (resizeMode !== undefined) {
           this.resizeMode = resizeMode;
         }
-
         this.set1i('uMainSampler2', 1);
         this.set1f('toRatio', this.toRatio);
         return this;
@@ -243,7 +214,6 @@
         if (typeof mode === 'string') {
           mode = ResizeMode[mode];
         }
-
         this.resizeMode = mode;
         return this;
       }
@@ -253,15 +223,12 @@
         if (x === undefined) {
           x = 4 + Math.random() * 6;
         }
-
         if (y === undefined) {
           y = 4 + Math.random() * 6;
         }
-
         if (z === undefined) {
           z = Math.random() * 10;
         }
-
         this.noiseX = x;
         this.noiseY = y;
         this.noiseZ = z;
@@ -282,7 +249,6 @@
         return this;
       }
     }]);
-
     return DissolvePostFxPipeline;
   }(PostFXPipeline);
   /**
@@ -298,8 +264,6 @@
    * for speed.
    *
    */
-
-
   var ResizeMode = {
     stretch: 0,
     contain: 1,
@@ -307,13 +271,11 @@
   };
 
   var GameClass = Phaser.Game;
-
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -340,27 +302,21 @@
     if (config === undefined) {
       config = {};
     }
-
     gameObject.setPostPipeline(PostFxPipelineClass);
     var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
     pipeline.resetFromJSON(config);
-
     if (config.name) {
       pipeline.name = config.name;
     }
-
     return pipeline;
   };
 
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
-
   var RemovePostFxPipelineInstance = function RemovePostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
     if (name === undefined) {
       var pipelines = gameObject.postPipelines;
-
       for (var i = pipelines.length - 1; i >= 0; i--) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass) {
           instance.destroy();
           SpliceOne(pipelines, i);
@@ -368,10 +324,8 @@
       }
     } else {
       var pipelines = gameObject.postPipelines;
-
       for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass && instance.name === name) {
           instance.destroy();
           SpliceOne(pipelines, i);
@@ -384,22 +338,17 @@
     if (name === undefined) {
       var result = [];
       var pipelines = gameObject.postPipelines;
-
       for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass) {
           result.push(instance);
         }
       }
-
       return result;
     } else {
       var pipelines = gameObject.postPipelines;
-
       for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass && instance.name === name) {
           return instance;
         }
@@ -409,15 +358,11 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(BasePostFxPipelinePlugin);
-
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
       value: function setPostPipelineClass(PostFxPipelineClass, postFxPipelineName) {
@@ -449,30 +394,23 @@
         return GetPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
       }
     }]);
-
     return BasePostFxPipelinePlugin;
   }(Phaser.Plugins.BasePlugin);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -482,31 +420,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -514,35 +451,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var DissolvePipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(DissolvePipelinePlugin, _BasePostFxPipelinePl);
-
     var _super = _createSuper(DissolvePipelinePlugin);
-
     function DissolvePipelinePlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, DissolvePipelinePlugin);
-
       _this = _super.call(this, pluginManager);
-
       _this.setPostPipelineClass(DissolvePostFxPipeline, 'rexDissolvePostFx');
-
       return _this;
     }
-
     return _createClass(DissolvePipelinePlugin);
   }(BasePostFxPipelinePlugin);
-
   SetValue(window, 'RexPlugins.Pipelines.DissolvePostFx', DissolvePostFxPipeline);
 
   return DissolvePipelinePlugin;

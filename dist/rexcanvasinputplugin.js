@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,7 +35,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -50,15 +46,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -71,14 +64,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -86,12 +77,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -99,86 +88,66 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
-
   function set(target, property, value, receiver) {
     if (typeof Reflect !== "undefined" && Reflect.set) {
       set = Reflect.set;
     } else {
       set = function set(target, property, value, receiver) {
         var base = _superPropBase(target, property);
-
         var desc;
-
         if (base) {
           desc = Object.getOwnPropertyDescriptor(base, property);
-
           if (desc.set) {
             desc.set.call(receiver, value);
             return true;
@@ -186,49 +155,37 @@
             return false;
           }
         }
-
         desc = Object.getOwnPropertyDescriptor(receiver, property);
-
         if (desc) {
           if (!desc.writable) {
             return false;
           }
-
           desc.value = value;
           Object.defineProperty(receiver, property, desc);
         } else {
           _defineProperty(receiver, property, value);
         }
-
         return true;
       };
     }
-
     return set(target, property, value, receiver);
   }
-
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
-
     if (!s && isStrict) {
       throw new Error('failed to set property');
     }
-
     return value;
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -237,32 +194,26 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   // copy from Phaser.GameObjects.Text
-  var Utils = Phaser.Renderer.WebGL.Utils;
 
+  var Utils = Phaser.Renderer.WebGL.Utils;
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
       src.updateTexture();
       src.dirty = false;
     }
-
     if (src.width === 0 || src.height === 0) {
       return;
     }
-
     camera.addToRenderList(src);
     var frame = src.frame;
     var width = frame.width;
@@ -276,16 +227,15 @@
   };
 
   // copy from Phaser.GameObjects.Text
+
   var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
       src.updateTexture();
       src.dirty = false;
     }
-
     if (src.width === 0 || src.height === 0) {
       return;
     }
-
     camera.addToRenderList(src);
     renderer.batchSprite(src, src.frame, camera, parentMatrix);
   };
@@ -311,26 +261,21 @@
     loadFromURL: function loadFromURL(url, callback) {
       var self = this;
       var img = new Image();
-
       img.onload = function () {
         if (self.width !== img.width || self.height !== img.height) {
           self.resize(img.width, img.height);
         } else {
           self.clear();
         }
-
         self.context.drawImage(img, 0, 0);
         self.updateTexture();
-
         if (callback) {
           callback();
         }
-
         img.onload = null;
         img.src = '';
         img.remove();
       };
-
       img.src = url;
       return this;
     },
@@ -342,27 +287,21 @@
     },
     drawFrame: function drawFrame(key, frame, x, y, width, height) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
-
       if (!textureFrame) {
         return this;
       }
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = textureFrame.cutWidth;
       }
-
       if (height === undefined) {
         height = textureFrame.cutHeight;
       }
-
       this.context.drawImage(textureFrame.source.image, textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight, x, y, width, height);
       this.dirty = true;
       return this;
@@ -374,7 +313,6 @@
       if (out === undefined) {
         out = new Color();
       }
-
       var rgb = this.context.getImageData(x, y, 1, 1);
       out.setTo(rgb.data[0], rgb.data[1], rgb.data[2], rgb.data[3]);
       return out;
@@ -387,11 +325,9 @@
         b = color.blue;
         a = color.alpha;
       }
-
       if (a === undefined) {
         a = r !== 0 || g !== 0 || b !== 0 ? 255 : 0;
       }
-
       var imgData = this.context.createImageData(1, 1);
       imgData.data[0] = r;
       imgData.data[1] = g;
@@ -406,45 +342,34 @@
   var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
     var textures = scene.sys.textures;
     var renderer = scene.renderer;
-
     if (x === undefined) {
       x = 0;
     }
-
     if (y === undefined) {
       y = 0;
     }
-
     if (width === undefined) {
       width = srcCanvas.width;
     }
-
     if (height === undefined) {
       height = srcCanvas.height;
     }
-
     var texture;
-
     if (textures.exists(key)) {
       texture = textures.get(key);
     } else {
       texture = textures.createCanvas(key, width, height);
     }
-
     var destCanvas = texture.getSourceImage();
-
     if (destCanvas.width !== width) {
       destCanvas.width = width;
     }
-
     if (destCanvas.height !== height) {
       destCanvas.height = height;
     }
-
     var destCtx = destCanvas.getContext('2d');
     destCtx.clearRect(0, 0, width, height);
     destCtx.drawImage(srcCanvas, x, y, width, height);
-
     if (renderer.gl && texture) {
       renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
     }
@@ -459,57 +384,46 @@
           callback(this.canvas, this.context);
         }
       }
-
       if (this.canvas.width !== this.frame.width || this.canvas.height !== this.frame.height) {
         this.frame.setSize(this.canvas.width, this.canvas.height);
       }
-
       if (this.renderer.gl) {
         this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
         this.frame.glTexture = this.frame.source.glTexture;
       }
-
       this.dirty = false;
       var input = this.input;
-
       if (input && !input.customHitArea) {
         input.hitArea.width = this.width;
         input.hitArea.height = this.height;
       }
-
       return this;
     },
     generateTexture: function generateTexture(key, x, y, width, height) {
       var srcCanvas = this.canvas;
-
       if (width === undefined) {
         width = srcCanvas.width;
       } else {
         width *= this.resolution;
       }
-
       if (height === undefined) {
         height = srcCanvas.height;
       } else {
         height *= this.resolution;
       }
-
       CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
       return this;
     },
     loadTexture: function loadTexture(key, frame) {
       var textureFrame = this.scene.sys.textures.getFrame(key, frame);
-
       if (!textureFrame) {
         return this;
       }
-
       if (this.width !== textureFrame.cutWidth || this.height !== textureFrame.cutHeight) {
         this.setSize(textureFrame.cutWidth, textureFrame.cutHeight);
       } else {
         this.clear();
       }
-
       this.drawFrame(key, frame);
       this.dirty = true;
       return this;
@@ -518,33 +432,24 @@
 
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
   var GameObject$1 = Phaser.GameObjects.GameObject;
-
   var Canvas = /*#__PURE__*/function (_GameObject) {
     _inherits(Canvas, _GameObject);
-
     var _super = _createSuper(Canvas);
-
     function Canvas(scene, x, y, width, height) {
       var _this;
-
       _classCallCheck(this, Canvas);
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = 1;
       }
-
       if (height === undefined) {
         height = 1;
       }
-
       _this = _super.call(this, scene, 'rexCanvas');
       _this.renderer = scene.sys.game.renderer;
       _this.resolution = 1;
@@ -555,33 +460,28 @@
       _this.canvas = CanvasPool.create(_assertThisInitialized(_this), width, height);
       _this.context = _this.canvas.getContext('2d');
       _this.dirty = false;
-
       _this.setPosition(x, y);
-
       _this.setOrigin(0.5, 0.5);
-
       _this.initPipeline();
+      _this._crop = _this.resetCropObject();
 
-      _this._crop = _this.resetCropObject(); //  Create a Texture for this Text object
+      //  Create a Texture for this Text object
+      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true);
 
-      _this.texture = scene.sys.textures.addCanvas(null, _this.canvas, true); //  Get the frame
+      //  Get the frame
+      _this.frame = _this.texture.get();
 
-      _this.frame = _this.texture.get(); //  Set the resolution
-
+      //  Set the resolution
       _this.frame.source.resolution = _this.resolution;
-
       if (_this.renderer && _this.renderer.gl) {
         //  Clear the default 1x1 glTexture, as we override it later
         _this.renderer.deleteTexture(_this.frame.source.glTexture);
-
         _this.frame.source.glTexture = null;
       }
-
       _this.dirty = true;
       scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
-
     _createClass(Canvas, [{
       key: "onContextRestored",
       value: function onContextRestored() {
@@ -618,7 +518,6 @@
         if (this._width === width && this._height === height) {
           return this;
         }
-
         this._width = width;
         this._height = height;
         this.updateDisplayOrigin();
@@ -629,8 +528,9 @@
         this.frame.setSize(width, height);
         this.dirty = true;
         return this;
-      } // setSize might be override
+      }
 
+      // setSize might be override
     }, {
       key: "setSize",
       value: function setSize(width, height) {
@@ -666,7 +566,6 @@
         if (!readOnly) {
           this.dirty = true;
         }
-
         return this.canvas;
       }
     }, {
@@ -675,7 +574,6 @@
         if (!readOnly) {
           this.dirty = true;
         }
-
         return this.context;
       }
     }, {
@@ -691,35 +589,28 @@
         return this;
       }
     }]);
-
     return Canvas;
   }(GameObject$1);
-
   var Components = Phaser.GameObjects.Components;
-  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip, // Components.FX,  // Open for 3.60
+  Phaser.Class.mixin(Canvas, [Components.Alpha, Components.BlendMode, Components.Crop, Components.Depth, Components.Flip,
+  // Components.FX,  // Open for 3.60
   Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Tint, Components.Transform, Components.Visible, Render, CanvasMethods, TextureMethods]);
 
-  var GetValue$e = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$f = Phaser.Utils.Objects.GetValue;
   var GetPadding$1 = function GetPadding(padding, key) {
     if (key === undefined) {
       return padding;
     }
-
     return padding[key];
   };
-
   var SetPadding$1 = function SetPadding(padding, key, value) {
     if (padding === undefined) {
       padding = {};
     }
-
     if (key === undefined) {
       key = 0;
     }
-
     var keyType = _typeof(key);
-
     if (keyType === 'string') {
       padding[key] = value;
     } else if (keyType === 'number') {
@@ -728,12 +619,11 @@
       padding.top = key;
       padding.bottom = key;
     } else {
-      padding.left = GetValue$e(key, 'left', 0);
-      padding.right = GetValue$e(key, 'right', 0);
-      padding.top = GetValue$e(key, 'top', 0);
-      padding.bottom = GetValue$e(key, 'bottom', 0);
+      padding.left = GetValue$f(key, 'left', 0);
+      padding.right = GetValue$f(key, 'right', 0);
+      padding.top = GetValue$f(key, 'top', 0);
+      padding.bottom = GetValue$f(key, 'bottom', 0);
     }
-
     return padding;
   };
 
@@ -742,6 +632,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -758,7 +649,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$d = function GetValue(source, key, defaultValue) {
+  var GetValue$e = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -766,8 +657,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -779,7 +671,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -790,7 +681,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -798,7 +688,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -807,33 +696,28 @@
       if (this.data === undefined) {
         this.data = {};
       }
-
       return this;
     },
     setData: function setData(key, value) {
       this.enableData();
-
       if (arguments.length === 1) {
         var data = key;
-
         for (key in data) {
           this.data[key] = data[key];
         }
       } else {
         this.data[key] = value;
       }
-
       return this;
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$d(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$e(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) + inc);
       return this;
@@ -842,7 +726,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) * mul);
       return this;
@@ -851,7 +734,6 @@
       if (this.data) {
         Clear(this.data);
       }
-
       return this;
     }
   };
@@ -859,13 +741,11 @@
   var Base = /*#__PURE__*/function () {
     function Base(parent, type) {
       _classCallCheck(this, Base);
-
       this.setParent(parent);
       this.type = type;
       this.renderable = false;
       this.reset().setActive();
     }
-
     _createClass(Base, [{
       key: "destroy",
       value: function destroy() {
@@ -898,7 +778,6 @@
         if (dirty && this.parent) {
           this.parent.dirty = true;
         }
-
         return this;
       }
     }, {
@@ -916,7 +795,6 @@
         if (active === undefined) {
           active = true;
         }
-
         this.active = active;
         return this;
       }
@@ -924,34 +802,36 @@
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "onFree",
       value: function onFree() {
         this.reset().setParent();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "reset",
       value: function reset() {
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "render",
-      value: function render() {} // Override
+      value: function render() {}
 
+      // Override
     }, {
       key: "contains",
       value: function contains(x, y) {
         return false;
       }
     }]);
-
     return Base;
   }();
-
   Object.assign(Base.prototype, DataMethods);
 
   var RenderMethods = {
@@ -962,42 +842,33 @@
       if (!this.willRender) {
         return this;
       }
-
       var context = this.context;
       context.save();
       context.globalAlpha = this.alpha;
-
       if (this.toLocalPosition) {
         var x = this.drawX,
-            y = this.drawY;
-
+          y = this.drawY;
         if (this.autoRound) {
           x = Math.round(x);
           y = Math.round(y);
         }
-
         context.translate(x, y);
         context.scale(this.scaleX, this.scaleY);
         context.rotate(this.rotation);
       }
-
       if (this.drawBelowCallback) {
         this.drawBelowCallback(this);
       }
-
       this.renderContent();
-
       if (this.drawAboveCallback) {
         this.drawAboveCallback(this);
       }
-
       context.restore();
       return this;
     }
   };
 
   var RotateAround$1 = Phaser.Math.RotateAround;
-
   var CanvasPositionToBobPosition = function CanvasPositionToBobPosition(canvasX, canvasY, bob, out) {
     if (out === undefined) {
       out = {};
@@ -1005,44 +876,34 @@
       if (globPoint$1 === undefined) {
         globPoint$1 = {};
       }
-
       out = globPoint$1;
     }
-
     out.x = (canvasX - bob.drawX) / bob.scaleX;
     out.y = (canvasY - bob.drawY) / bob.scaleY;
-
     if (bob.rotation !== 0) {
       RotateAround$1(out, 0, 0, -bob.rotation);
     }
-
     return out;
   };
-
   var globPoint$1;
 
   var Rectangle = Phaser.Geom.Rectangle;
-
   var Contains = function Contains(canvasX, canvasY) {
     if (this.width === 0 || this.height === 0) {
       return false;
     }
-
     var bobPosition = CanvasPositionToBobPosition(canvasX, canvasY, this, true);
     return GetBounds(this).contains(bobPosition.x, bobPosition.y);
   };
-
   var GetBounds = function GetBounds(bob) {
     if (globBounds === undefined) {
       globBounds = new Rectangle();
     }
-
     var x = bob.drawTLX,
-        y = bob.drawTLY;
+      y = bob.drawTLY;
     globBounds.setTo(x, y, bob.drawTRX - x, bob.drawBLY - y);
     return globBounds;
   };
-
   var globBounds;
 
   var Methods$2 = {
@@ -1052,29 +913,21 @@
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
-
     var _super = _createSuper(RenderBase);
-
     function RenderBase(parent, type) {
       var _this;
-
       _classCallCheck(this, RenderBase);
-
       _this = _super.call(this, parent, type);
       _this.renderable = true;
       _this.toLocalPosition = true;
       _this.originX = 0;
       _this.offsetX = 0; // Override
-
       _this.offsetY = 0; // Override
-
       return _this;
     }
-
     _createClass(RenderBase, [{
       key: "visible",
       get: function get() {
@@ -1090,7 +943,6 @@
         if (visible === undefined) {
           visible = true;
         }
-
         this.visible = visible;
         return this;
       }
@@ -1196,13 +1048,16 @@
       value: function setScaleX(scaleX) {
         this.scaleX = scaleX;
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "width",
       get: function get() {
         return 0;
-      } // Override
+      }
+
+      // Override
       ,
       set: function set(value) {}
     }, {
@@ -1211,13 +1066,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.width = width;
-
         if (keepAspectRatio) {
           this.scaleY = this.scaleX;
         }
-
         return this;
       }
     }, {
@@ -1269,13 +1121,16 @@
       value: function setScaleY(scaleY) {
         this.scaleY = scaleY;
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "height",
       get: function get() {
         return 0;
-      } // Override
+      }
+
+      // Override
       ,
       set: function set(value) {}
     }, {
@@ -1284,13 +1139,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.height = height;
-
         if (keepAspectRatio) {
           this.scaleX = this.scaleY;
         }
-
         return this;
       }
     }, {
@@ -1299,7 +1151,6 @@
         if (scaleY === undefined) {
           scaleY = scaleX;
         }
-
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         return this;
@@ -1322,31 +1173,26 @@
         if (!o) {
           return this;
         }
-
         if (o.hasOwnProperty('x')) {
           this.setX(o.x);
         }
-
         if (o.hasOwnProperty('y')) {
           this.setY(o.y);
         }
-
         if (o.hasOwnProperty('rotation')) {
           this.setRotation(o.rotation);
         } else if (o.hasOwnProperty('angle')) {
           this.setAngle(o.angle);
         }
-
         if (o.hasOwnProperty('alpha')) {
           this.setAlpha(o.alpha);
-        } // ScaleX, ScaleY
+        }
 
-
-        var width = GetValue$c(o, 'width', undefined);
-        var height = GetValue$c(o, 'height', undefined);
-        var scaleX = GetValue$c(o, 'scaleX', undefined);
-        var scaleY = GetValue$c(o, 'scaleY', undefined);
-
+        // ScaleX, ScaleY
+        var width = GetValue$d(o, 'width', undefined);
+        var height = GetValue$d(o, 'height', undefined);
+        var scaleX = GetValue$d(o, 'scaleX', undefined);
+        var scaleY = GetValue$d(o, 'scaleY', undefined);
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
             this.setWidth(width, true);
@@ -1356,7 +1202,6 @@
         } else if (scaleX !== undefined) {
           this.setScaleX(scaleX);
         }
-
         if (height !== undefined) {
           if (width === undefined && scaleX === undefined) {
             this.setHeight(height, true);
@@ -1366,19 +1211,15 @@
         } else if (scaleY !== undefined) {
           this.setScaleY(scaleY);
         }
-
         if (o.hasOwnProperty('leftSpace')) {
           this.setLeftSpace(o.leftSpace);
         }
-
         if (o.hasOwnProperty('rightSpace')) {
           this.setRightSpace(o.rightSpace);
         }
-
         if (o.hasOwnProperty('align')) {
           this.setAlign(o.align);
         }
-
         return this;
       }
     }, {
@@ -1398,8 +1239,9 @@
       value: function reset() {
         this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setLeftSpace(0).setRightSpace(0).setOrigin(0).setAlign().setDrawBelowCallback().setDrawAboveCallback();
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "willRender",
       get: function get() {
@@ -1414,8 +1256,9 @@
       key: "drawY",
       get: function get() {
         return this.y + this.offsetY;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "drawTLX",
       get: function get() {
@@ -1467,29 +1310,22 @@
         return (this.drawBLY + this.drawTLY) / 2;
       }
     }]);
-
     return RenderBase;
   }(Base);
-
   Object.assign(RenderBase.prototype, Methods$2);
 
   var Pad = Phaser.Utils.String.Pad;
-
   var GetStyle = function GetStyle(style, canvas, context) {
     if (style == null) {
       return style;
     }
-
     switch (_typeof(style)) {
       case 'string':
         return style;
-
       case 'number':
         return "#".concat(Pad(Math.floor(style).toString(16), 6, '0', 1));
-
       case 'function':
         return style(canvas, context);
-
       case 'object':
         if (style.hasOwnProperty('r')) {
           if (style.hasOwnProperty('a')) {
@@ -1524,18 +1360,15 @@
     }
   };
 
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
-
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
       this.setTo(x, y, width, height, radiusConfig);
     }
-
     _createClass(RoundRectangle, [{
       key: "setTo",
       value: function setTo(x, y, width, height, radiusConfig) {
@@ -1550,11 +1383,9 @@
         if (x === undefined) {
           x = 0;
         }
-
         if (y === undefined) {
           y = x;
         }
-
         this.x = x;
         this.y = y;
         return this;
@@ -1565,7 +1396,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radius = value;
         return this;
       }
@@ -1597,7 +1427,6 @@
         if (value == null) {
           value = 0;
         }
-
         this._width = Math.max(value, this.minWidth);
       }
     }, {
@@ -1609,7 +1438,6 @@
         if (value == null) {
           value = 0;
         }
-
         this._height = Math.max(value, this.minHeight);
       }
     }, {
@@ -1620,20 +1448,18 @@
       },
       set: function set(value) {
         var defaultRadiusX, defaultRadiusY;
-
         if (typeof value === 'number') {
           defaultRadiusX = value;
           defaultRadiusY = value;
         } else {
-          defaultRadiusX = GetValue$b(value, 'x', 0);
-          defaultRadiusY = GetValue$b(value, 'y', 0);
+          defaultRadiusX = GetValue$c(value, 'x', 0);
+          defaultRadiusY = GetValue$c(value, 'y', 0);
         }
-
         var radius = this.cornerRadius;
-        radius.tl = GetRadius(GetValue$b(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.tr = GetRadius(GetValue$b(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
-        radius.bl = GetRadius(GetValue$b(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
-        radius.br = GetRadius(GetValue$b(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tl = GetRadius(GetValue$c(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue$c(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue$c(value, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue$c(value, 'br', undefined), defaultRadiusX, defaultRadiusY);
       }
     }, {
       key: "radiusTL",
@@ -1672,10 +1498,8 @@
         SetRadius(this.cornerRadius.br, value);
       }
     }]);
-
     return RoundRectangle;
   }();
-
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
       return {
@@ -1691,14 +1515,13 @@
       return radius;
     }
   };
-
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
       radius.x = value;
       radius.y = value;
     } else {
-      radius.x = GetValue$b(value, 'x', 0);
-      radius.y = GetValue$b(value, 'y', 0);
+      radius.x = GetValue$c(value, 'x', 0);
+      radius.y = GetValue$c(value, 'y', 0);
     }
   };
 
@@ -1707,82 +1530,76 @@
   var Rad90 = DegToRad(90);
   var Rad180 = DegToRad(180);
   var Rad270 = DegToRad(270);
-
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle(x, y, width, height, radiusConfig),
-        minWidth = geom.minWidth,
-        minHeight = geom.minHeight,
-        scaleRX = width >= minWidth ? 1 : width / minWidth,
-        scaleRY = height >= minHeight ? 1 : height / minHeight;
+      minWidth = geom.minWidth,
+      minHeight = geom.minHeight,
+      scaleRX = width >= minWidth ? 1 : width / minWidth,
+      scaleRY = height >= minHeight ? 1 : height / minHeight;
     var cornerRadius = geom.cornerRadius;
     var radius, radiusX, radiusY, centerX, centerY;
     context.save();
     context.beginPath();
-    context.translate(x, y); // Bottom-right
+    context.translate(x, y);
 
+    // Bottom-right
     radius = cornerRadius.br;
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
     centerX = width - radiusX;
     centerY = height - radiusY;
     context.moveTo(width, centerY);
-
     if (radiusX > 0 && radiusY > 0) {
       ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
     } else {
       context.lineTo(width, height);
       context.lineTo(centerX, height);
-    } // Bottom-left
+    }
 
-
+    // Bottom-left
     radius = cornerRadius.bl;
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
     centerX = radiusX;
     centerY = height - radiusY;
     context.lineTo(radiusX, height);
-
     if (radiusX > 0 && radiusY > 0) {
       ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
     } else {
       context.lineTo(0, height);
       context.lineTo(0, centerY);
-    } // Top-left
+    }
 
-
+    // Top-left
     radius = cornerRadius.tl;
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
     centerX = radiusX;
     centerY = radiusY;
     context.lineTo(0, centerY);
-
     if (radiusX > 0 && radiusY > 0) {
       ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
     } else {
       context.lineTo(0, 0);
       context.lineTo(centerX, 0);
-    } // Top-right
+    }
 
-
+    // Top-right
     radius = cornerRadius.tr;
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
     centerX = width - radiusX;
     centerY = radiusY;
     context.lineTo(centerX, 0);
-
     if (radiusX > 0 && radiusY > 0) {
       ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
     } else {
       context.lineTo(width, 0);
       context.lineTo(width, centerY);
     }
-
     context.closePath();
     context.restore();
   };
-
   var ArcTo = function ArcTo(context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
     if (iteration == null) {
       // undefined, or null
@@ -1791,7 +1608,6 @@
       iteration += 1;
       var x, y, angle;
       var step = (endAngle - startAngle) / iteration;
-
       for (var i = 0; i <= iteration; i++) {
         angle = startAngle + step * i;
         x = centerX + radiusX * Math.cos(angle);
@@ -1803,26 +1619,21 @@
 
   var DrawRoundRectangle = function DrawRoundRectangle(canvas, context, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient, iteration) {
     AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration);
-
     if (fillStyle != null) {
       if (fillColor2 != null) {
         var grd;
-
         if (isHorizontalGradient) {
           grd = context.createLinearGradient(0, 0, width, 0);
         } else {
           grd = context.createLinearGradient(0, 0, 0, height);
         }
-
         grd.addColorStop(0, fillStyle);
         grd.addColorStop(1, fillColor2);
         fillStyle = grd;
       }
-
       context.fillStyle = fillStyle;
       context.fill();
     }
-
     if (strokeStyle != null && lineWidth > 0) {
       context.strokeStyle = strokeStyle;
       context.lineWidth = lineWidth;
@@ -1834,43 +1645,30 @@
     if (color == null && strokeColor == null) {
       return;
     }
-
     var width = canvasObject.canvas.width,
-        height = canvasObject.canvas.height;
-
+      height = canvasObject.canvas.height;
     if (strokeColor == null) {
       strokeLineWidth = 0;
     }
-
     var x = strokeLineWidth / 2;
     width -= strokeLineWidth;
     height -= strokeLineWidth;
     DrawRoundRectangle(canvasObject.canvas, canvasObject.context, x, x, width, height, radius, color, strokeColor, strokeLineWidth, color2, isHorizontalGradient, iteration);
   };
 
-  var GetValue$a = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
   var Background = /*#__PURE__*/function (_RenderBase) {
     _inherits(Background, _RenderBase);
-
     var _super = _createSuper(Background);
-
     function Background(parent, config) {
       var _this;
-
       _classCallCheck(this, Background);
-
       _this = _super.call(this, parent, 'background');
-
-      _this.setColor(GetValue$a(config, 'color', null), GetValue$a(config, 'color2', null), GetValue$a(config, 'horizontalGradient', true));
-
-      _this.setStroke(GetValue$a(config, 'stroke', null), GetValue$a(config, 'strokeThickness', 2));
-
-      _this.setCornerRadius(GetValue$a(config, 'cornerRadius', 0), GetValue$a(config, 'cornerIteration', null));
-
+      _this.setColor(GetValue$b(config, 'color', null), GetValue$b(config, 'color2', null), GetValue$b(config, 'horizontalGradient', true));
+      _this.setStroke(GetValue$b(config, 'stroke', null), GetValue$b(config, 'strokeThickness', 2));
+      _this.setCornerRadius(GetValue$b(config, 'cornerRadius', 0), GetValue$b(config, 'cornerIteration', null));
       return _this;
     }
-
     _createClass(Background, [{
       key: "color",
       get: function get() {
@@ -1906,7 +1704,6 @@
         if (isHorizontalGradient === undefined) {
           isHorizontalGradient = true;
         }
-
         this.color = color;
         this.color2 = color2;
         this.horizontalGradient = isHorizontalGradient;
@@ -1939,7 +1736,6 @@
             lineWidth = 2;
           }
         }
-
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
@@ -1968,22 +1764,18 @@
         if (o.hasOwnProperty('color')) {
           this.setColor(o.color, GetProperty('color2', o, this), GetProperty('horizontalGradient', o, this));
         }
-
         if (o.hasOwnProperty('stroke')) {
           this.setStroke(o.stroke, GetProperty('strokeThickness', o, this));
         }
-
         if (o.hasOwnProperty('cornerRadius')) {
           this.setCornerRadius(o.cornerRadius, GetProperty('cornerIteration', o, this));
         }
-
         return this;
       }
     }, {
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         _get(_getPrototypeOf(Background.prototype), "modifyPorperties", this).call(this, o);
-
         this.modifyStyle(o);
         return this;
       }
@@ -2000,31 +1792,21 @@
         DrawRoundRectangleBackground(this.parent, this.color, this.stroke, this.strokeThickness, this.cornerRadius, this.color2, this.horizontalGradient, this.cornerIteration);
       }
     }]);
-
     return Background;
   }(RenderBase);
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var InnerBounds = /*#__PURE__*/function (_RenderBase) {
     _inherits(InnerBounds, _RenderBase);
-
     var _super = _createSuper(InnerBounds);
-
     function InnerBounds(parent, config) {
       var _this;
-
       _classCallCheck(this, InnerBounds);
-
       _this = _super.call(this, parent, 'innerbounds');
-
-      _this.setColor(GetValue$9(config, 'color', null), GetValue$9(config, 'color2', null), GetValue$9(config, 'horizontalGradient', true));
-
-      _this.setStroke(GetValue$9(config, 'stroke', null), GetValue$9(config, 'strokeThickness', 2));
-
+      _this.setColor(GetValue$a(config, 'color', null), GetValue$a(config, 'color2', null), GetValue$a(config, 'horizontalGradient', true));
+      _this.setStroke(GetValue$a(config, 'stroke', null), GetValue$a(config, 'strokeThickness', 2));
       return _this;
     }
-
     _createClass(InnerBounds, [{
       key: "color",
       get: function get() {
@@ -2060,7 +1842,6 @@
         if (isHorizontalGradient === undefined) {
           isHorizontalGradient = true;
         }
-
         this.color = color;
         this.color2 = color2;
         this.horizontalGradient = isHorizontalGradient;
@@ -2093,7 +1874,6 @@
             lineWidth = 2;
           }
         }
-
         this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
@@ -2102,13 +1882,11 @@
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         _get(_getPrototypeOf(InnerBounds.prototype), "modifyPorperties", this).call(this, o);
-
         if (o.hasOwnProperty('color')) {
-          this.setColor(o.color, GetValue$9(o, 'color2', null), GetValue$9(o, 'horizontalGradient', true));
+          this.setColor(o.color, GetValue$a(o, 'color2', null), GetValue$a(o, 'horizontalGradient', true));
         }
-
         if (o.hasOwnProperty('stroke')) {
-          this.setStroke(o.stroke, GetValue$9(o, 'strokeThickness', 2));
+          this.setStroke(o.stroke, GetValue$a(o, 'strokeThickness', 2));
         }
       }
     }, {
@@ -2116,34 +1894,28 @@
       value: function renderContent() {
         var padding = this.parent.padding;
         var x = padding.left,
-            y = padding.top,
-            width = this.parent.width - padding.left - padding.right,
-            height = this.parent.height - padding.top - padding.bottom;
+          y = padding.top,
+          width = this.parent.width - padding.left - padding.right,
+          height = this.parent.height - padding.top - padding.bottom;
         var context = this.context;
-
         if (this.color != null) {
           var fillStyle;
-
           if (this.color2 != null) {
             var grd;
-
             if (this.horizontalGradient) {
               grd = context.createLinearGradient(0, 0, width, 0);
             } else {
               grd = context.createLinearGradient(0, 0, 0, height);
             }
-
             grd.addColorStop(0, this.color);
             grd.addColorStop(1, this.color2);
             fillStyle = grd;
           } else {
             fillStyle = this.color;
           }
-
           context.fillStyle = fillStyle;
           context.fillRect(x, y, width, height);
         }
-
         if (this.stroke != null && this.strokeThickness > 0) {
           context.strokeStyle = this.stroke;
           context.lineWidth = this.strokeThickness;
@@ -2151,20 +1923,16 @@
         }
       }
     }]);
-
     return InnerBounds;
   }(RenderBase);
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var TextStyle = /*#__PURE__*/function () {
     function TextStyle(parent, config) {
       _classCallCheck(this, TextStyle);
-
       this.parent = parent;
       this.set(config);
     }
-
     _createClass(TextStyle, [{
       key: "toJSON",
       value: function toJSON() {
@@ -2192,19 +1960,19 @@
     }, {
       key: "set",
       value: function set(o) {
-        this.setBold(GetValue$8(o, 'bold', false));
-        this.setItalic(GetValue$8(o, 'italic', false));
-        this.setFontSize(GetValue$8(o, 'fontSize', '16px'));
-        this.setFontFamily(GetValue$8(o, 'fontFamily', 'Courier'));
-        this.setColor(GetValue$8(o, 'color', '#fff'));
-        this.setStrokeStyle(GetValue$8(o, 'stroke', null), GetValue$8(o, 'strokeThickness', 0));
-        this.setShadow(GetValue$8(o, 'shadowColor', null), GetValue$8(o, 'shadowOffsetX', 0), GetValue$8(o, 'shadowOffsetY', 0), GetValue$8(o, 'shadowBlur', 0));
-        this.setOffset(GetValue$8(o, 'offsetX', 0), GetValue$8(o, 'offsetY', 0));
-        this.setSpace(GetValue$8(o, 'leftSpace', 0), GetValue$8(o, 'rightSpace', 0));
-        this.setAlign(GetValue$8(o, 'align', undefined));
-        this.setBackgroundColor(GetValue$8(o, 'backgroundColor', null));
-        this.setBackgroundHeight(GetValue$8(o, 'backgroundHeight', undefined));
-        this.setBackgroundBottomY(GetValue$8(o, 'backgroundBottomY', undefined));
+        this.setBold(GetValue$9(o, 'bold', false));
+        this.setItalic(GetValue$9(o, 'italic', false));
+        this.setFontSize(GetValue$9(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue$9(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue$9(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue$9(o, 'stroke', null), GetValue$9(o, 'strokeThickness', 0));
+        this.setShadow(GetValue$9(o, 'shadowColor', null), GetValue$9(o, 'shadowOffsetX', 0), GetValue$9(o, 'shadowOffsetY', 0), GetValue$9(o, 'shadowBlur', 0));
+        this.setOffset(GetValue$9(o, 'offsetX', 0), GetValue$9(o, 'offsetY', 0));
+        this.setSpace(GetValue$9(o, 'leftSpace', 0), GetValue$9(o, 'rightSpace', 0));
+        this.setAlign(GetValue$9(o, 'align', undefined));
+        this.setBackgroundColor(GetValue$9(o, 'backgroundColor', null));
+        this.setBackgroundHeight(GetValue$9(o, 'backgroundHeight', undefined));
+        this.setBackgroundBottomY(GetValue$9(o, 'backgroundBottomY', undefined));
         return this;
       }
     }, {
@@ -2213,71 +1981,54 @@
         if (o.hasOwnProperty('bold')) {
           this.setBold(o.bold);
         }
-
         if (o.hasOwnProperty('italic')) {
           this.setItalic(o.italic);
         }
-
         if (o.hasOwnProperty('fontSize')) {
           this.setFontSize(o.fontSize);
         }
-
         if (o.hasOwnProperty('fontFamily')) {
           this.setFontFamily(o.fontFamily);
         }
-
         if (o.hasOwnProperty('color')) {
           this.setColor(o.color);
         }
-
         if (o.hasOwnProperty('stroke') || o.hasOwnProperty('strokeThickness')) {
           this.setStrokeStyle(GetProperty('stroke', o, this), GetProperty('strokeThickness', o, this));
         }
-
         if (o.hasOwnProperty('shadowColor')) {
           this.setShadowColor(o.shadowColor);
         }
-
         if (o.hasOwnProperty('shadowOffsetX') || o.hasOwnProperty('shadowOffsetY')) {
           this.setShadowOffset(GetProperty('shadowOffsetX', o, this), GetProperty('shadowOffsetY', o, this));
         }
-
         if (o.hasOwnProperty('shadowBlur')) {
           this.setShadowBlur(o.shaodwBlur);
         }
-
         if (o.hasOwnProperty('offsetX')) {
           this.setOffsetX(o.offsetX);
         }
-
         if (o.hasOwnProperty('offsetY')) {
           this.setOffsetY(o.offsetY);
         }
-
         if (o.hasOwnProperty('leftSpace')) {
           this.setLeftSpace(o.leftSpace);
         }
-
         if (o.hasOwnProperty('rightSpace')) {
           this.setRightSpace(o.rightSpace);
         }
-
         if (o.hasOwnProperty('align')) {
           this.setAlign(o.align);
         }
-
         if (o.hasOwnProperty('backgroundColor')) {
           this.setBackgroundColor(o.backgroundColor);
         }
-
         if (o.hasOwnProperty('backgroundHeight')) {
           this.setBackgroundHeight(o.backgroundHeight);
         }
-
         if (o.hasOwnProperty('backgroundBottomY')) {
           this.setBackgroundBottomY(o.backgroundBottomY);
         }
-
         return this;
       }
     }, {
@@ -2286,7 +2037,6 @@
         if (this.parent) {
           this.parent.updateTextFlag = true;
         }
-
         return this;
       }
     }, {
@@ -2312,7 +2062,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.bold = value;
         this.setUpdateTextFlag();
         return this;
@@ -2323,7 +2072,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.italic = value;
         this.setUpdateTextFlag();
         return this;
@@ -2347,7 +2095,6 @@
         if (typeof fontSize === 'number') {
           fontSize = "".concat(fontSize, "px");
         }
-
         this.fontSize = fontSize;
         this.setUpdateTextFlag();
         return this;
@@ -2379,11 +2126,9 @@
       key: "setStrokeStyle",
       value: function setStrokeStyle(stroke, strokeThickness) {
         this.stroke = GetStyle(stroke);
-
         if (strokeThickness !== undefined) {
           this.strokeThickness = strokeThickness;
         }
-
         return this;
       }
     }, {
@@ -2409,11 +2154,9 @@
         if (offsetX === undefined) {
           offsetX = 0;
         }
-
         if (offsetY === undefined) {
           offsetY = 0;
         }
-
         this.shadowOffsetX = offsetX;
         this.shadowOffsetY = offsetY;
         return this;
@@ -2424,7 +2167,6 @@
         if (blur === undefined) {
           blur = 0;
         }
-
         this.shaodwBlur = blur;
         return this;
       }
@@ -2463,7 +2205,6 @@
         if (offsetX === undefined) {
           offsetX = 0;
         }
-
         this.offsetX = offsetX;
         return this;
       }
@@ -2473,7 +2214,6 @@
         if (offsetY === undefined) {
           offsetY = 0;
         }
-
         this.offsetY = offsetY;
         return this;
       }
@@ -2489,7 +2229,6 @@
         if (space === undefined) {
           space = 0;
         }
-
         this.leftSpace = space;
         return this;
       }
@@ -2499,7 +2238,6 @@
         if (space === undefined) {
           space = 0;
         }
-
         this.rightSpace = space;
         return this;
       }
@@ -2556,7 +2294,6 @@
         return context.measureText(text);
       }
     }]);
-
     return TextStyle;
   }();
 
@@ -2564,17 +2301,13 @@
     if (width === undefined) {
       width = 0;
     }
-
     if (height === undefined) {
       height = 0;
     }
-
     var dirty = this.fixedWidth !== width || this.fixedHeight !== height;
-
     if (!dirty) {
       return this;
     }
-
     this.fixedWidth = width;
     this.fixedHeight = height;
     this.dirty = true;
@@ -2585,9 +2318,9 @@
   var SetPadding = function SetPadding(key, value) {
     var padding = this.padding;
     var paddingLeft = padding.left,
-        paddingRight = padding.right,
-        paddingTop = padding.top,
-        paddingBottom = padding.bottom;
+      paddingRight = padding.right,
+      paddingTop = padding.top,
+      paddingBottom = padding.bottom;
     SetPadding$1(padding, key, value);
     this.dirty = this.dirty || paddingLeft != padding.left || paddingRight != padding.right || paddingTop != padding.top || paddingBottom != padding.bottom;
     return this;
@@ -2618,7 +2351,6 @@
   };
 
   var RemoveItem = Phaser.Utils.Array.Remove;
-
   var RemoveChild = function RemoveChild(child) {
     this.poolManager.free(child);
     RemoveItem(this.children, child);
@@ -2643,14 +2375,16 @@
   };
 
   // const RemoveItem = Phaser.Utils.Array.Remove;
+
   var AddChild = function AddChild(child, index) {
-    var areChildren = Array.isArray(child); // Remove existed child(s)
+    var areChildren = Array.isArray(child);
+
+    // Remove existed child(s)
     // RemoveItem(this.children, child);
 
     if (index === undefined || index === this.children.length) {
       if (areChildren) {
         var _this$children;
-
         (_this$children = this.children).push.apply(_this$children, _toConsumableArray(child));
       } else {
         this.children.push(child);
@@ -2658,23 +2392,18 @@
     } else {
       if (areChildren) {
         var _this$children2;
-
         (_this$children2 = this.children).splice.apply(_this$children2, [index, 0].concat(_toConsumableArray(child)));
       } else {
         this.children.splice(index, 0, child);
       }
     }
-
     this.lastAppendedChildren.length = 0;
-
     if (areChildren) {
       var _this$lastAppendedChi;
-
       (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(child));
     } else {
       this.lastAppendedChildren.push(child);
     }
-
     return this;
   };
 
@@ -2683,34 +2412,25 @@
   var DrawerTypeName = 'drawer';
   var SpaceTypeName = 'space';
   var CmdTypeName = 'command';
-
   var IsNewLineChar = function IsNewLineChar(bob) {
     return bob.type === CharTypeName && bob.text === '\n';
   };
-
   var IsChar = function IsChar(bob) {
     return bob.type === CharTypeName;
   };
 
   var CharData = /*#__PURE__*/function (_RenderBase) {
     _inherits(CharData, _RenderBase);
-
     var _super = _createSuper(CharData);
-
     function CharData(parent, text, style) {
       var _this;
-
       _classCallCheck(this, CharData);
-
       _this = _super.call(this, parent, CharTypeName);
       _this.updateTextFlag = false;
       _this.style = new TextStyle(_assertThisInitialized(_this), style);
-
       _this.setText(text);
-
       return _this;
     }
-
     _createClass(CharData, [{
       key: "autoRound",
       get: function get() {
@@ -2745,7 +2465,6 @@
         if (this.style) {
           this.style.leftSpace = value;
         }
-
         _set(_getPrototypeOf(CharData.prototype), "leftSpace", value, this, true);
       }
     }, {
@@ -2757,7 +2476,6 @@
         if (this.style) {
           this.style.rightSpace = value;
         }
-
         _set(_getPrototypeOf(CharData.prototype), "rightSpace", value, this, true);
       }
     }, {
@@ -2775,11 +2493,9 @@
       value: function modifyStyle(style) {
         this.setDirty(true);
         this.style.modify(style);
-
         if (this.updateTextFlag) {
           this.updateTextSize();
         }
-
         return this;
       }
     }, {
@@ -2788,11 +2504,8 @@
         if (!o) {
           return this;
         }
-
         this.modifyStyle(o);
-
         _get(_getPrototypeOf(CharData.prototype), "modifyPorperties", this).call(this, o);
-
         return this;
       }
     }, {
@@ -2815,7 +2528,6 @@
           var metrics = this.style.getTextMetrics(this.context, this.text);
           this.textWidth = metrics.width;
           var ascent, descent;
-
           if ('actualBoundingBoxAscent' in metrics) {
             ascent = metrics.actualBoundingBoxAscent;
             descent = metrics.actualBoundingBoxDescent;
@@ -2823,12 +2535,10 @@
             ascent = 0;
             descent = 0;
           }
-
           this.textHeight = ascent + descent;
           this.ascent = ascent;
           this.descent = descent;
         }
-
         this.updateTextFlag = false;
         return this;
       }
@@ -2862,7 +2572,6 @@
         if (this.text === '\n') {
           return false;
         }
-
         return _get(_getPrototypeOf(CharData.prototype), "willRender", this);
       }
     }, {
@@ -2870,41 +2579,33 @@
       value: function renderContent() {
         var context = this.context;
         var textStyle = this.style;
-
         if (textStyle.hasBackgroundColor) {
           context.fillStyle = textStyle.backgroundColor;
           var x = this.drawTLX;
           var width = this.drawTRX - x;
           var bottomY = textStyle.backgroundBottomY;
-
           if (bottomY == null) {
             bottomY = this.drawBLY;
           }
-
           var height = textStyle.backgroundHeight;
-
           if (height == null) {
             height = bottomY - this.drawTLY;
           }
-
           var y = bottomY - height;
           context.fillRect(x, y, width, height);
         }
-
         var hasFill = textStyle.hasFill,
-            hasStroke = textStyle.hasStroke;
-
+          hasStroke = textStyle.hasStroke;
         if (!hasFill && !hasStroke) {
           return;
         }
-
-        textStyle.syncFont(context).syncStyle(context); // textBaseline = 'alphabetic'
+        textStyle.syncFont(context).syncStyle(context);
+        // textBaseline = 'alphabetic'
 
         if (hasStroke) {
           textStyle.syncShadow(context);
           context.strokeText(this.text, 0, 0);
         }
-
         if (hasFill) {
           textStyle.syncShadow(context);
           context.fillText(this.text, 0, 0);
@@ -2951,7 +2652,6 @@
         return this.descent;
       }
     }]);
-
     return CharData;
   }(RenderBase);
 
@@ -2959,17 +2659,16 @@
     if (style) {
       this.textStyle.modify(style);
     }
-
     var child = this.poolManager.allocate(CharTypeName);
-
     if (child === null) {
-      child = new CharData(this, // parent
-      text, // text
+      child = new CharData(this,
+      // parent
+      text,
+      // text
       this.textStyle);
     } else {
       child.setParent(this).setActive().modifyStyle(this.textStyle).setText(text);
     }
-
     return child;
   };
 
@@ -2977,26 +2676,23 @@
     if (style) {
       this.textStyle.modify(style);
     }
-
     var children = [];
-
     for (var i = 0, cnt = text.length; i < cnt; i++) {
       var _char = text.charAt(i);
-
       var child = this.poolManager.allocate(CharTypeName);
-
       if (child === null) {
-        child = new CharData(this, // parent
-        _char, // text
+        child = new CharData(this,
+        // parent
+        _char,
+        // text
         this.textStyle);
       } else {
         child.setParent(this).setActive().modifyStyle(this.textStyle).setText(_char);
-      } // child.modifyPorperties(properties);  // Warning: Will modify text-style twice
-
+      }
+      // child.modifyPorperties(properties);  // Warning: Will modify text-style twice
 
       children.push(child);
     }
-
     return children;
   };
 
@@ -3010,7 +2706,6 @@
     if (text === undefined) {
       text = '';
     }
-
     this.removeChildren();
     AppendText.call(this, text, style); // this.appendText might be override
 
@@ -3029,17 +2724,13 @@
     if (length === undefined) {
       length = 1;
     }
-
     for (var i = 0; i < length; i++) {
       var childIndex = this.getCharChildIndex(index, true);
-
       if (childIndex === undefined) {
         break;
       }
-
       this.removeChild(this.children[childIndex]);
     }
-
     return this;
   };
 
@@ -3053,21 +2744,14 @@
 
   var ImageData = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
-
     var _super = _createSuper(ImageData);
-
     function ImageData(parent, key, frame) {
       var _this;
-
       _classCallCheck(this, ImageData);
-
       _this = _super.call(this, parent, ImageTypeName);
-
       _this.setTexture(key, frame);
-
       return _this;
     }
-
     _createClass(ImageData, [{
       key: "frameWidth",
       get: function get() {
@@ -3134,13 +2818,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.height = height;
-
         if (keepAspectRatio) {
           this.scaleX = this.scaleY;
         }
-
         return this;
       }
     }, {
@@ -3149,8 +2830,9 @@
         var context = this.context;
         var frame = this.frameObj;
         var width = this.frameWidth,
-            height = this.frameHeight;
-        context.drawImage(frame.source.image, // image
+          height = this.frameHeight;
+        context.drawImage(frame.source.image,
+        // image
         frame.cutX, frame.cutY, width, height, 0, 0, width, height);
       }
     }, {
@@ -3194,20 +2876,18 @@
         return this.frameHeight;
       }
     }]);
-
     return ImageData;
   }(RenderBase);
 
   var CreateImageChild = function CreateImageChild(key, frame, properties) {
     var child = this.poolManager.allocate(ImageTypeName);
-
     if (child === null) {
-      child = new ImageData(this, // parent
+      child = new ImageData(this,
+      // parent
       key, frame);
     } else {
       child.setParent(this).setActive().setTexture(key, frame);
     }
-
     child.modifyPorperties(properties);
     return child;
   };
@@ -3220,23 +2900,15 @@
 
   var Drawer = /*#__PURE__*/function (_RenderBase) {
     _inherits(Drawer, _RenderBase);
-
     var _super = _createSuper(Drawer);
-
     function Drawer(parent, renderCallback, width, height) {
       var _this;
-
       _classCallCheck(this, Drawer);
-
       _this = _super.call(this, parent, DrawerTypeName);
-
       _this.setRenderCallback(renderCallback);
-
       _this.setDrawerSize(width, height);
-
       return _this;
     }
-
     _createClass(Drawer, [{
       key: "setRenderCallback",
       value: function setRenderCallback(callback) {
@@ -3245,7 +2917,6 @@
         } else {
           delete this.renderContent;
         }
-
         return this;
       }
     }, {
@@ -3259,15 +2930,12 @@
         } else {
           this.toLocalPosition = true;
         }
-
         if (width === undefined) {
           width = 0;
         }
-
         if (height === undefined) {
           height = width;
         }
-
         this.drawerWidth = width;
         this.drawerHeight = height;
         return this;
@@ -3276,7 +2944,6 @@
       key: "onFree",
       value: function onFree() {
         _get(_getPrototypeOf(Drawer.prototype), "onFree", this).call(this);
-
         this.setRenderCallback();
       }
     }, {
@@ -3344,20 +3011,18 @@
         return this.drawerHeight;
       }
     }]);
-
     return Drawer;
   }(RenderBase);
 
   var CreateDrawerChild = function CreateDrawerChild(renderCallback, width, height) {
     var child = this.poolManager.allocate(DrawerTypeName);
-
     if (child === null) {
-      child = new Drawer(this, // parent
+      child = new Drawer(this,
+      // parent
       renderCallback, width, height);
     } else {
       child.setParent(this).setActive().setRenderCallback(renderCallback).setDrawerSize(width, height);
     }
-
     return child;
   };
 
@@ -3369,21 +3034,14 @@
 
   var Space = /*#__PURE__*/function (_RenderBase) {
     _inherits(Space, _RenderBase);
-
     var _super = _createSuper(Space);
-
     function Space(parent, width) {
       var _this;
-
       _classCallCheck(this, Space);
-
       _this = _super.call(this, parent, SpaceTypeName);
-
       _this.setSpaceWidth(width);
-
       return _this;
     }
-
     _createClass(Space, [{
       key: "width",
       get: function get() {
@@ -3403,20 +3061,18 @@
         return this;
       }
     }]);
-
     return Space;
   }(RenderBase);
 
   var CreateSpaceChild = function CreateSpaceChild(width) {
     var child = this.poolManager.allocate(SpaceTypeName);
-
     if (child === null) {
-      child = new Space(this, // parent
+      child = new Space(this,
+      // parent
       width);
     } else {
       child.setParent(this).setActive().setSpaceWidth(width);
     }
-
     return child;
   };
 
@@ -3428,21 +3084,14 @@
 
   var Command = /*#__PURE__*/function (_Base) {
     _inherits(Command, _Base);
-
     var _super = _createSuper(Command);
-
     function Command(parent, name, callback, param, scope) {
       var _this;
-
       _classCallCheck(this, Command);
-
       _this = _super.call(this, parent, CmdTypeName);
-
       _this.setName(name).setParameter(param).setCallback(callback, scope);
-
       return _this;
     }
-
     _createClass(Command, [{
       key: "setName",
       value: function setName(name) {
@@ -3466,37 +3115,32 @@
       key: "exec",
       value: function exec() {
         var result;
-
         if (this.scope) {
           result = this.callback.call(this.scope, this.param, this.name);
         } else {
           result = this.callback(this.param, this.name);
         }
-
         return result;
       }
     }, {
       key: "onFree",
       value: function onFree() {
         _get(_getPrototypeOf(Command.prototype), "onFree", this).call(this);
-
         this.setName().setCallback().setParameter();
       }
     }]);
-
     return Command;
   }(Base);
 
   var CreateCommandChild = function CreateCommandChild(name, callback, param, scope) {
     var child = this.poolManager.allocate(CmdTypeName);
-
     if (child === null) {
-      child = new Command(this, // parent
+      child = new Command(this,
+      // parent
       name, callback, param, scope);
     } else {
       child.setParent(this).setActive().setName(name).setCallback(callback, scope).setParameter(param);
     }
-
     return child;
   };
 
@@ -3510,21 +3154,19 @@
     var outObject;
     var value;
     var key;
-
     if (_typeof(inObject) !== 'object' || inObject === null) {
       //  inObject is not an object
       return inObject;
-    } //  Create an array or object to hold the values
-
-
-    outObject = Array.isArray(inObject) ? [] : {};
-
-    for (key in inObject) {
-      value = inObject[key]; //  Recursively (deep) copy for nested objects, including arrays
-
-      outObject[key] = DeepClone(value);
     }
 
+    //  Create an array or object to hold the values
+    outObject = Array.isArray(inObject) ? [] : {};
+    for (key in inObject) {
+      value = inObject[key];
+
+      //  Recursively (deep) copy for nested objects, including arrays
+      outObject[key] = DeepClone(value);
+    }
     return outObject;
   };
 
@@ -3534,7 +3176,6 @@
     } else if (_typeof(config) === 'object') {
       config = DeepClone(config);
     }
-
     this.wrapConfig = config;
     return this;
   };
@@ -3546,26 +3187,24 @@
         width: 0
       };
     }
-
     result.word.length = 0;
     var endIndex = children.length;
     var currentIndex = startIndex;
     var word = result.word,
-        wordWidth = 0;
-
+      wordWidth = 0;
     while (currentIndex < endIndex) {
-      var child = children[currentIndex]; // Can't render (command child), put into output directly
-
+      var child = children[currentIndex];
+      // Can't render (command child), put into output directly
       if (!child.renderable) {
         word.push(child);
         currentIndex++;
         continue;
       }
-
       if (child.type === CharTypeName && child.text !== ' ' && child.text !== '\n') {
         word.push(child);
         wordWidth += child.outerWidth;
-        currentIndex++; // Continue
+        currentIndex++;
+        // Continue
       } else {
         // Get image child, a space, or a new-line
         if (currentIndex === startIndex) {
@@ -3573,16 +3212,13 @@
           word.push(child);
           wordWidth += child.outerWidth;
         }
-
         break;
       }
-
       if (charMode) {
         // Word only contains 1 character
         break;
       }
     }
-
     result.width = wordWidth;
     return result;
   };
@@ -3590,12 +3226,10 @@
   var GetChildrenAlign = function GetChildrenAlign(children) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (child.align !== undefined) {
         return child.align;
       }
     }
-
     return undefined;
   };
 
@@ -3603,14 +3237,11 @@
     if (offsetX === 0 && offsetY === 0) {
       return;
     }
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (!child.renderable) {
         continue;
       }
-
       child.x += offsetX;
       child.y += offsetY;
     }
@@ -3618,58 +3249,44 @@
 
   var AlignLines$1 = function AlignLines(result, width, height) {
     var hAlign = result.hAlign,
-        vAlign = result.vAlign;
+      vAlign = result.vAlign;
     var offsetX, offsetY;
     var linesHeight = result.linesHeight;
-
     switch (vAlign) {
       case 1: // center
-
       case 'center':
         offsetY = (height - linesHeight) / 2;
         break;
-
       case 2: // bottom
-
       case 'bottom':
         offsetY = height - linesHeight;
         break;
-
       default:
         offsetY = 0;
         break;
     }
-
     var lines = result.lines;
-
     for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
       var line = lines[li];
       var lineWidth = line.width,
-          children = line.children;
+        children = line.children;
       var lineHAlign = GetChildrenAlign(children);
-
       if (lineHAlign === undefined) {
         lineHAlign = hAlign;
       }
-
       switch (lineHAlign) {
         case 1: // center
-
         case 'center':
           offsetX = (width - lineWidth) / 2;
           break;
-
         case 2: // right
-
         case 'right':
           offsetX = width - lineWidth;
           break;
-
         default:
           offsetX = 0;
           break;
       }
-
       OffsetChildren(children, offsetX, offsetY);
     }
   };
@@ -3677,7 +3294,6 @@
   var GetDefaultTextHeight = function GetDefaultTextHeight() {
     var metrics = this.defaultTextStyle.getTextMetrics(this.context, this.testString);
     var ascent, descent;
-
     if ('actualBoundingBoxAscent' in metrics) {
       ascent = metrics.actualBoundingBoxAscent;
       descent = metrics.actualBoundingBoxDescent;
@@ -3685,43 +3301,38 @@
       ascent = 0;
       descent = 0;
     }
-
     Result.ascent = ascent;
     Result.descent = descent;
     Result.height = ascent + descent;
     return Result;
   };
-
   var Result = {};
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var RunWordWrap$1 = function RunWordWrap(config) {
     // Parse parameters
-    var startIndex = GetValue$7(config, 'start', 0);
-    SetPadding$1(this.wrapPadding, GetValue$7(config, 'padding', 0));
+    var startIndex = GetValue$8(config, 'start', 0);
+    SetPadding$1(this.wrapPadding, GetValue$8(config, 'padding', 0));
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
-    var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right; // Get lineHeight, maxLines
+    var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
-    var lineHeight = GetValue$7(config, 'lineHeight');
-    var ascent = GetValue$7(config, 'ascent', lineHeight);
+    // Get lineHeight, maxLines
+    var lineHeight = GetValue$8(config, 'lineHeight');
+    var ascent = GetValue$8(config, 'ascent', lineHeight);
     var maxLines;
-
     if (lineHeight === undefined) {
       // Calculate lineHeight        
-      maxLines = GetValue$7(config, 'maxLines', 0);
-
+      maxLines = GetValue$8(config, 'maxLines', 0);
       if (this.fixedHeight > 0) {
         var innerHeight = this.fixedHeight - paddingVertical;
-
         if (maxLines > 0) {
           // Calculate lineHeight via maxLines, in fixedHeight mode
           lineHeight = innerHeight / maxLines;
         } else {
           var textHeightResult = GetDefaultTextHeight.call(this);
           lineHeight = textHeightResult.height;
-          ascent = textHeightResult.ascent; // Calculate maxLines via (ascent, lineHeight), in fixedHeight mode
-
+          ascent = textHeightResult.ascent;
+          // Calculate maxLines via (ascent, lineHeight), in fixedHeight mode
           maxLines = Math.floor((innerHeight - ascent) / lineHeight);
         }
       } else {
@@ -3733,26 +3344,24 @@
       // Calculate maxLines
       if (this.fixedHeight > 0) {
         // Calculate maxLines via lineHeight, in fixedHeight mode
-        maxLines = GetValue$7(config, 'maxLines');
-
+        maxLines = GetValue$8(config, 'maxLines');
         if (maxLines === undefined) {
           var innerHeight = this.fixedHeight - paddingVertical;
           maxLines = Math.floor(innerHeight / lineHeight);
         }
       } else {
-        maxLines = GetValue$7(config, 'maxLines', 0); // Default is show all lines
+        maxLines = GetValue$8(config, 'maxLines', 0); // Default is show all lines
       }
-    } // If ascent is undefined, assign to lineHeight
+    }
 
-
+    // If ascent is undefined, assign to lineHeight
     if (ascent === undefined) {
       ascent = lineHeight;
     }
+    var showAllLines = maxLines === 0;
 
-    var showAllLines = maxLines === 0; // Get wrapWidth
-
-    var wrapWidth = GetValue$7(config, 'wrapWidth', undefined);
-
+    // Get wrapWidth
+    var wrapWidth = GetValue$8(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
       if (this.fixedWidth > 0) {
         wrapWidth = this.fixedWidth - paddingHorizontal;
@@ -3761,11 +3370,12 @@
       }
     }
 
-    var letterSpacing = GetValue$7(config, 'letterSpacing', 0);
-    var hAlign = GetValue$7(config, 'hAlign', 0);
-    var vAlign = GetValue$7(config, 'vAlign', 0);
-    var charWrap = GetValue$7(config, 'charWrap', false);
+    var letterSpacing = GetValue$8(config, 'letterSpacing', 0);
+    var hAlign = GetValue$8(config, 'hAlign', 0);
+    var vAlign = GetValue$8(config, 'vAlign', 0);
+    var charWrap = GetValue$8(config, 'charWrap', false);
     var result = {
+      callback: 'runWordWrap',
       start: startIndex,
       // Next start index
       isLastPage: false,
@@ -3785,52 +3395,48 @@
       // Word-wrap result in lines
       maxLineWidth: 0,
       linesHeight: 0
-    }; // Set all children to inactive
+    };
 
+    // Set all children to inactive
     var children = this.children;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       children[i].setActive(false);
-    } // Layout children
+    }
 
-
+    // Layout children
     wrapWidth += letterSpacing;
     var startX = this.padding.left + this.wrapPadding.left,
-        startY = this.padding.top + this.wrapPadding.top + ascent,
-        // Start(baseline) from ascent, not 0
-    x = startX,
-        y = startY;
+      startY = this.padding.top + this.wrapPadding.top + ascent,
+      // Start(baseline) from ascent, not 0
+      x = startX,
+      y = startY;
     var remainderWidth = wrapWidth,
-        childIndex = startIndex,
-        lastChildIndex = children.length;
+      childIndex = startIndex,
+      lastChildIndex = children.length;
     var resultChildren = result.children;
     var resultLines = result.lines,
-        lastLine = [],
-        lastLineWidth = 0,
-        maxLineWidth = 0;
+      lastLine = [],
+      lastLineWidth = 0,
+      maxLineWidth = 0;
     var wordResult;
-
     while (childIndex < lastChildIndex) {
       wordResult = GetWord(children, childIndex, charWrap, wordResult);
       var word = wordResult.word;
       var charCnt = word.length;
       var wordWidth = wordResult.width + charCnt * letterSpacing;
-      childIndex += charCnt; // Next line
-
+      childIndex += charCnt;
+      // Next line
       var isNewLineChar = IsNewLineChar(word[0]);
-
       if (remainderWidth < wordWidth || isNewLineChar) {
         // Add to result
         if (isNewLineChar) {
           var _char = word[0];
-
           _char.setActive().setPosition(x, y);
-
           resultChildren.push(_char);
           lastLine.push(_char);
-        } // Move cursor
+        }
 
-
+        // Move cursor
         x = startX;
         y += lineHeight;
         remainderWidth = wrapWidth;
@@ -3841,7 +3447,6 @@
         maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
         lastLineWidth = 0;
         lastLine = [];
-
         if (!showAllLines && resultLines.length === maxLines) {
           // Exceed maxLines
           break;
@@ -3850,23 +3455,19 @@
           continue;
         }
       }
-
       remainderWidth -= wordWidth;
       lastLineWidth += wordWidth;
-
       for (var i = 0, cnt = word.length; i < cnt; i++) {
         var child = word[i];
         child.setActive();
         resultChildren.push(child);
         lastLine.push(child);
-
         if (child.renderable) {
           child.setPosition(x, y);
           x += child.outerWidth + letterSpacing;
         }
       }
     }
-
     if (lastLine.length > 0) {
       resultLines.push({
         children: lastLine,
@@ -3874,126 +3475,107 @@
       });
       maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
     }
-
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineWidth = maxLineWidth;
-    result.linesHeight = resultLines.length * lineHeight; // Calculate size of game object
+    result.linesHeight = resultLines.length * lineHeight;
 
+    // Calculate size of game object
     var width = this.fixedWidth > 0 ? this.fixedWidth : result.maxLineWidth + paddingHorizontal;
-    var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + paddingVertical; // Size might be changed after wrapping
+    var height = this.fixedHeight > 0 ? this.fixedHeight : result.linesHeight + paddingVertical;
 
+    // Size might be changed after wrapping
     var innerWidth = width - paddingHorizontal;
     var innerHeight = height - paddingVertical;
-    AlignLines$1(result, innerWidth, innerHeight); // Resize
+    AlignLines$1(result, innerWidth, innerHeight);
 
-    this.setCanvasSize(width, height); // Set initial position
+    // Resize
+    this.setCanvasSize(width, height);
 
+    // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
-
       if (!child.renderable) {
         continue;
       }
-
       child.x0 = child.x;
       child.y0 = child.y;
     }
-
     return result;
   };
 
   var Merge$1 = Phaser.Utils.Objects.Merge;
-
   var RunWordWrap = function RunWordWrap(config) {
     if (config === undefined) {
       config = {};
     }
-
     return RunWordWrap$1.call(this, Merge$1(config, this.wrapConfig));
   };
 
   var AlignLines = function AlignLines(result, width, height) {
     var hAlign = result.hAlign,
-        vAlign = result.vAlign;
+      vAlign = result.vAlign;
     var offsetX, offsetY;
     var rtl = result.rtl;
     var lines = result.lines,
-        lineWidth = result.lineWidth,
-        linesWidth = result.linesWidth;
-
+      lineWidth = result.lineWidth,
+      linesWidth = result.linesWidth;
     switch (hAlign) {
       case 1: // center
-
       case 'center':
         offsetX = (width - linesWidth) / 2;
         break;
-
       case 2: // right
-
       case 'right':
         offsetX = width - linesWidth;
         break;
-
       default:
         // left
         offsetX = 0;
         break;
     }
-
     if (rtl) {
       offsetX += lineWidth;
     }
-
     for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
       var line = lines[rtl ? lcnt - li - 1 : li];
       var children = line.children;
       var lineHeight = line.height;
       var lineVAlign = GetChildrenAlign(children);
-
       if (lineVAlign === undefined) {
         lineVAlign = vAlign;
       }
-
       switch (lineVAlign) {
         case 1: // center
-
         case 'center':
           offsetY = (height - lineHeight) / 2;
           break;
-
         case 2: // bottom
-
         case 'bottom':
           offsetY = height - lineHeight;
           break;
-
         default:
           // top
           offsetY = 0;
           break;
       }
-
       OffsetChildren(children, offsetX, offsetY);
       offsetX += lineWidth;
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
-
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var RunVerticalWrap$1 = function RunVerticalWrap(config) {
     // Parse parameters
-    var startIndex = GetValue$6(config, 'start', 0);
-    SetPadding$1(this.wrapPadding, GetValue$6(config, 'padding', 0));
+    var startIndex = GetValue$7(config, 'start', 0);
+    SetPadding$1(this.wrapPadding, GetValue$7(config, 'padding', 0));
     var paddingVertical = this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
-    var lineWidth = GetValue$6(config, 'lineWidth', undefined);
+    var lineWidth = GetValue$7(config, 'lineWidth', undefined);
     var maxLines;
-
     if (lineWidth === undefined) {
       // Calculate lineWidth via maxLines, in fixedWidth mode
-      maxLines = GetValue$6(config, 'maxLines', 0);
-
+      maxLines = GetValue$7(config, 'maxLines', 0);
       if (this.fixedWidth > 0) {
         var innerWidth = this.fixedWidth - paddingHorizontal;
         lineWidth = innerWidth / maxLines;
@@ -4003,33 +3585,30 @@
     } else {
       if (this.fixedWidth > 0) {
         // Calculate maxLines via lineWidth, in fixedWidth mode
-        maxLines = GetValue$6(config, 'maxLines', undefined);
-
+        maxLines = GetValue$7(config, 'maxLines', undefined);
         if (maxLines === undefined) {
           var innerWidth = this.fixedWidth - paddingHorizontal;
           maxLines = Math.floor(innerWidth / lineWidth) + 1;
         }
       } else {
-        maxLines = GetValue$6(config, 'maxLines', 0); // Default is show all lines
+        maxLines = GetValue$7(config, 'maxLines', 0); // Default is show all lines
       }
     }
 
-    var showAllLines = maxLines === 0; // Get fixedChildHeight
+    var showAllLines = maxLines === 0;
 
-    var fixedChildHeight = GetValue$6(config, 'fixedChildHeight', undefined);
-
+    // Get fixedChildHeight
+    var fixedChildHeight = GetValue$7(config, 'fixedChildHeight', undefined);
     if (fixedChildHeight === undefined) {
-      var charPerLine = GetValue$6(config, 'charPerLine', undefined);
-
+      var charPerLine = GetValue$7(config, 'charPerLine', undefined);
       if (charPerLine !== undefined) {
         var innerHeight = this.fixedHeight - paddingVertical;
         fixedChildHeight = Math.floor(innerHeight / charPerLine);
       }
-    } // Get wrapHeight
+    }
 
-
-    var wrapHeight = GetValue$6(config, 'wrapHeight', undefined);
-
+    // Get wrapHeight
+    var wrapHeight = GetValue$7(config, 'wrapHeight', undefined);
     if (wrapHeight === undefined) {
       if (this.fixedHeight > 0) {
         wrapHeight = this.fixedHeight - paddingVertical;
@@ -4038,11 +3617,12 @@
       }
     }
 
-    var letterSpacing = GetValue$6(config, 'letterSpacing', 0);
-    var rtl = GetValue$6(config, 'rtl', true);
-    var hAlign = GetValue$6(config, 'hAlign', rtl ? 2 : 0);
-    var vAlign = GetValue$6(config, 'vAlign', 0);
+    var letterSpacing = GetValue$7(config, 'letterSpacing', 0);
+    var rtl = GetValue$7(config, 'rtl', true);
+    var hAlign = GetValue$7(config, 'hAlign', rtl ? 2 : 0);
+    var vAlign = GetValue$7(config, 'vAlign', 0);
     var result = {
+      callback: 'runVerticalWrap',
       start: startIndex,
       // Next start index
       isLastPage: false,
@@ -4062,57 +3642,51 @@
       // Word-wrap result in lines
       maxLineHeight: 0,
       linesWidth: 0
-    }; // Set all children to active
+    };
 
+    // Set all children to active
     var children = this.children;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       children[i].setActive(false);
-    } // Layout children
+    }
 
-
+    // Layout children
     wrapHeight += letterSpacing;
     var startX = this.padding.left + this.wrapPadding.left,
-        // Reset x of each character in AlignLines method
-    startY = this.padding.top + this.wrapPadding.top,
-        x = startX,
-        y = startY;
+      // Reset x of each character in AlignLines method
+      startY = this.padding.top + this.wrapPadding.top,
+      x = startX,
+      y = startY;
     var remainderHeight = wrapHeight,
-        childIndex = startIndex,
-        lastChildIndex = children.length;
+      childIndex = startIndex,
+      lastChildIndex = children.length;
     var resultChildren = result.children;
     var resultLines = result.lines,
-        lastLine = [],
-        lastLineHeight = 0,
-        maxLineHeight = 0;
-
+      lastLine = [],
+      lastLineHeight = 0,
+      maxLineHeight = 0;
     while (childIndex < lastChildIndex) {
       // Append non-typeable child directly
       var _char = children[childIndex];
       childIndex++;
-
       if (!child.renderable) {
         _char.setActive();
-
         resultChildren.push(_char);
         lastLine.push(_char);
         continue;
       }
-
-      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing; // Next line
-
+      var childHeight = (fixedChildHeight !== undefined ? fixedChildHeight : _char.height) + letterSpacing;
+      // Next line
       var isNewLineChar = IsNewLineChar(_char);
-
       if (remainderHeight < childHeight || isNewLineChar) {
         // Add to result
         if (isNewLineChar) {
           _char.setActive().setPosition(x, y).setOrigin(0.5);
-
           resultChildren.push(_char);
           lastLine.push(_char);
-        } // Move cursor
+        }
 
-
+        // Move cursor
         x = startX;
         y = startY;
         remainderHeight = wrapHeight;
@@ -4123,7 +3697,6 @@
         maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
         lastLineHeight = 0;
         lastLine = [];
-
         if (!showAllLines && resultLines.length === maxLines) {
           // Exceed maxLines
           break;
@@ -4132,17 +3705,13 @@
           continue;
         }
       }
-
       remainderHeight -= childHeight;
       lastLineHeight += childHeight;
-
       _char.setActive().setPosition(x, y).setOrigin(0.5);
-
       resultChildren.push(_char);
       lastLine.push(_char);
       y += childHeight;
     }
-
     if (lastLine.length > 0) {
       resultLines.push({
         children: lastLine,
@@ -4150,43 +3719,53 @@
       });
       maxLineHeight = Math.max(maxLineHeight, lastLineHeight);
     }
-
     result.start += resultChildren.length;
     result.isLastPage = result.start === lastChildIndex;
     result.maxLineHeight = maxLineHeight;
-    result.linesWidth = resultLines.length * lineWidth; // Calculate size of game object
+    result.linesWidth = resultLines.length * lineWidth;
 
+    // Calculate size of game object
     var width = this.fixedWidth > 0 ? this.fixedWidth : result.linesWidth + paddingHorizontal;
-    var height = this.fixedHeight > 0 ? this.fixedHeight : result.maxLineHeight + paddingVertical; // Size might be changed after wrapping
+    var height = this.fixedHeight > 0 ? this.fixedHeight : result.maxLineHeight + paddingVertical;
 
+    // Size might be changed after wrapping
     var innerWidth = width - paddingHorizontal;
     var innerHeight = height - paddingVertical;
-    AlignLines(result, innerWidth, innerHeight); // Resize
+    AlignLines(result, innerWidth, innerHeight);
 
-    this.setCanvasSize(width, height); // Set initial position
+    // Resize
+    this.setCanvasSize(width, height);
 
+    // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {
       var child = resultChildren[i];
-
       if (!child.renderable) {
         continue;
       }
-
       child.x0 = child.x;
       child.y0 = child.y;
     }
-
     return result;
   };
 
   var Merge = Phaser.Utils.Objects.Merge;
-
   var RunVerticalWrap = function RunVerticalWrap(config) {
     if (config === undefined) {
       config = {};
     }
-
     return RunVerticalWrap$1.call(this, Merge(config, this.wrapConfig));
+  };
+
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var RunWrap = function RunWrap(config) {
+    var wrapCallback = GetValue$6(this.wrapConfig, 'callback');
+    if (!wrapCallback) {
+      wrapCallback = GetValue$6(config, 'callback', this.runWordWrap);
+    }
+    if (typeof wrapCallback === 'string') {
+      wrapCallback = this[wrapCallback];
+    }
+    return wrapCallback.call(this, config);
   };
 
   var SetAlignMethods = {
@@ -4203,21 +3782,16 @@
   var RenderContent = function RenderContent() {
     this.clear();
     this.setCanvasSize(this.width, this.height);
-
     if (this.background.active) {
       this.background.render();
     }
-
     var child;
-
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
       child = this.children[i];
-
       if (child.active) {
         child.render();
       }
     }
-
     if (this.innerBounds.active) {
       this.innerBounds.render();
     }
@@ -4227,32 +3801,24 @@
     if (activeOnly === undefined) {
       activeOnly = true;
     }
-
     var children = this.children;
     var childIndex = 0;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (activeOnly && !child.active) {
         continue;
       }
-
       var isBreak;
-
       if (scope) {
         isBreak = callback.call(this, child, childIndex, children);
       } else {
         isBreak = callback(child, childIndex, children);
       }
-
       childIndex++;
-
       if (isBreak) {
         break;
       }
     }
-
     return this;
   };
 
@@ -4260,34 +3826,26 @@
     if (activeOnly === undefined) {
       activeOnly = true;
     }
-
     var children = this.children;
     var childIndex = 0;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (activeOnly && !child.active) {
         continue;
       }
-
       if (child.renderable && !child.removed) {
         var isBreak;
-
         if (scope) {
           isBreak = callback.call(this, child, childIndex, children);
         } else {
           isBreak = callback(child, childIndex, children);
         }
-
         childIndex++;
-
         if (isBreak) {
           break;
         }
       }
     }
-
     return this;
   };
 
@@ -4295,34 +3853,26 @@
     if (activeOnly === undefined) {
       activeOnly = true;
     }
-
     var children = this.children;
     var charIndex = 0;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (activeOnly && !child.active) {
         continue;
       }
-
       if (IsChar(child) && !child.removed) {
         var isBreak;
-
         if (scope) {
           isBreak = callback.call(this, child, charIndex, children);
         } else {
           isBreak = callback(child, charIndex, children);
         }
-
         charIndex++;
-
         if (isBreak) {
           break;
         }
       }
     }
-
     return this;
   };
 
@@ -4331,7 +3881,6 @@
   };
 
   var GetAll = Phaser.Utils.Array.GetAll;
-
   var GetActiveChildren = function GetActiveChildren() {
     return GetAll(this.children, 'active', true);
   };
@@ -4340,7 +3889,6 @@
     if (out === undefined) {
       out = [];
     }
-
     this.forEachCharChild(function (child) {
       out.push(child);
     }, undefined, activeOnly);
@@ -4352,7 +3900,6 @@
   };
 
   var RotateAround = Phaser.Math.RotateAround;
-
   var BobPositionToCanvasPosition = function BobPositionToCanvasPosition(bobX, bobY, bob, out) {
     if (out === undefined) {
       out = {};
@@ -4360,22 +3907,17 @@
       if (globPoint === undefined) {
         globPoint = {};
       }
-
       out = globPoint;
     }
-
     out.x = bobX;
     out.y = bobY;
-
     if (bob.rotation !== 0) {
       RotateAround(out, 0, 0, bob.rotation);
     }
-
     out.x = out.x * bob.scaleX + bob.drawX;
     out.y = out.y * bob.scaleY + bob.drawY;
     return out;
   };
-
   var globPoint;
 
   var GetBobCenterPosition = function GetBobCenterPosition(bob, out) {
@@ -4383,7 +3925,6 @@
   };
 
   var GetDistance = Phaser.Math.Distance.BetweenPointsSquared;
-
   var GetNearestChild = function GetNearestChild(canvasX, canvasY) {
     var pointA = {
       x: canvasX,
@@ -4393,7 +3934,6 @@
     var nearestChild = null;
     this.forEachRenderableChild(function (child) {
       var distance = GetDistance(pointA, GetBobCenterPosition(child, true));
-
       if (minDistance > distance) {
         minDistance = distance;
         nearestChild = child;
@@ -4405,29 +3945,25 @@
   var SetToMinSize = function SetToMinSize() {
     var children = this.children;
     var maxX = 0,
-        maxY = 0;
-
+      maxY = 0;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (!child.renderable || !child.active || !child.visible) {
         continue;
       }
-
       var x0 = child.x0 !== undefined ? child.x0 : child.x;
       var y0 = child.y0 !== undefined ? child.y0 : child.y;
       maxX = Math.max(maxX, x0);
       maxY = Math.max(maxY, y0);
     }
-
     var width = maxX + this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
-    var height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom; // Ignore fixedWidth, and fixedHeight
+    var height = maxY + this.padding.top + this.padding.bottom + this.wrapPadding.top + this.wrapPadding.bottom;
 
+    // Ignore fixedWidth, and fixedHeight
     if (this.width !== width || this.height !== height) {
       this.dirty = true;
       this.setCanvasSize(width, height);
     }
-
     return this;
   };
 
@@ -4435,16 +3971,12 @@
     if (activeOnly === undefined) {
       activeOnly = true;
     }
-
     var children = this.children;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (activeOnly && !child.active) {
         continue;
       }
-
       if (IsChar(child) && !child.removed) {
         if (charIndex === 0) {
           return i;
@@ -4453,7 +3985,6 @@
         }
       }
     }
-
     return undefined;
   };
 
@@ -4461,16 +3992,12 @@
     if (activeOnly === undefined) {
       activeOnly = true;
     }
-
     var children = this.children;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (activeOnly && !child.active) {
         continue;
       }
-
       if (IsChar(child) && !child.removed) {
         if (charIndex === 0) {
           return child;
@@ -4479,43 +4006,33 @@
         }
       }
     }
-
     return undefined;
   };
 
   var GetCharIndex = function GetCharIndex(childIndex, activeOnly) {
     if (typeof childIndex !== 'number') {
       childIndex = this.children.indexOf(childIndex);
-
       if (childIndex < 0) {
         return null;
       }
     }
-
     if (activeOnly === undefined) {
       activeOnly = true;
     }
-
     var children = this.children;
-
     if (childIndex >= children.length) {
       childIndex = children.length;
     }
-
     var charIndex = 0;
-
     for (var i = 0; i < childIndex; i++) {
       var child = children[i];
-
       if (activeOnly && !child.active) {
         continue;
       }
-
       if (IsChar(child) && !child.removed) {
         charIndex++;
       }
     }
-
     return charIndex;
   };
 
@@ -4523,30 +4040,24 @@
     if (enable === undefined) {
       enable = true;
     }
-
     if (this.childrenInteractiveEnable !== enable) {
       this.lastOverChild = null;
     }
-
     this.childrenInteractiveEnable = enable;
     return this;
   };
 
   var GetFirstChildContains = function GetFirstChildContains(children, x, y) {
     var children = children;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (!child.active || !child.renderable) {
         continue;
       }
-
       if (child.contains(x, y)) {
         return child;
       }
     }
-
     return null;
   };
 
@@ -4556,77 +4067,58 @@
     }, this);
     return this;
   };
-
   var OnPointerDown = function OnPointerDown(pointer, localX, localY, event) {
     if (!this.childrenInteractiveEnable) {
       return;
     }
-
     var child = GetFirstChildContains(this.children, localX, localY);
-
     if (!child) {
       return;
     }
-
     this.emit('child.pointerdown', child, pointer, localX, localY, event);
   };
-
   var OnPointerUp = function OnPointerUp(pointer, localX, localY, event) {
     if (!this.childrenInteractiveEnable) {
       return;
     }
-
     var child = GetFirstChildContains(this.children, localX, localY);
-
     if (!child) {
       return;
     }
-
     this.emit('child.pointerup', child, pointer, localX, localY, event);
   };
-
   var OnPointOverOut = function OnPointOverOut(pointer, localX, localY, event) {
     if (!this.childrenInteractiveEnable) {
       return;
     }
-
     if (localX === null) {
       // Case of pointerout
       if (this.lastOverChild !== null) {
         this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
         this.lastOverChild = null;
       }
-
       return;
     }
-
     var child = GetFirstChildContains(this.children, localX, localY);
-
     if (child === this.lastOverChild) {
       return;
     }
-
     if (this.lastOverChild !== null) {
       this.emit('child.pointerout', this.lastOverChild, pointer, localX, localY, event);
     }
-
     if (child !== null) {
       this.emit('child.pointerover', child, pointer, localX, localY, event);
     }
-
     this.lastOverChild = child;
   };
 
   var GameObject = Phaser.GameObjects.GameObject;
-
   var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
     var isInteractived = !!this.input;
     GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
-
     if (!isInteractived) {
       SetChildrenInteractive.call(this);
     }
-
     return this;
   };
 
@@ -4719,6 +4211,7 @@
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,
+    runWrap: RunWrap,
     renderContent: RenderContent,
     forEachChild: ForEachChild,
     forEachRenderableChild: ForEachRenderableChild,
@@ -4740,10 +4233,8 @@
   var Stack = /*#__PURE__*/function () {
     function Stack() {
       _classCallCheck(this, Stack);
-
       this.items = [];
     }
-
     _createClass(Stack, [{
       key: "destroy",
       value: function destroy() {
@@ -4775,33 +4266,26 @@
         return this;
       }
     }]);
-
     return Stack;
   }();
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
-
   var PoolManager = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
-
       this.pools = GetFastValue(config, 'pools', Pools);
     }
-
     _createClass(PoolManager, [{
       key: "free",
       value: function free(bob) {
         if (!this.pools) {
           return this;
         }
-
         var bobType = bob.type;
-
         if (!this.pools.hasOwnProperty(bobType)) {
           this.pools[bobType] = new Stack();
         }
-
         this.pools[bobType].push(bob);
         bob.onFree();
         return this;
@@ -4812,11 +4296,9 @@
         if (!this.pools) {
           return this;
         }
-
         for (var i = 0, cnt = arr.length; i < cnt; i++) {
           this.free(arr[i]);
         }
-
         return this;
       }
     }, {
@@ -4825,27 +4307,20 @@
         if (!this.pools || !this.pools.hasOwnProperty(bobType)) {
           return null;
         }
-
         return this.pools[bobType].pop();
       }
     }]);
-
     return PoolManager;
   }();
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
-
     var _super = _createSuper(DynamicText);
-
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
-
       _classCallCheck(this, DynamicText);
-
       if (IsPlainObject$1(x)) {
         config = x;
         x = GetValue$5(config, 'x', 0);
@@ -4857,7 +4332,6 @@
         fixedWidth = GetValue$5(config, 'width', 0);
         fixedHeight = GetValue$5(config, 'height', 0);
       }
-
       var width = fixedWidth === 0 ? 1 : fixedWidth;
       var height = fixedHeight === 0 ? 1 : fixedHeight;
       _this = _super.call(this, scene, x, y, width, height);
@@ -4868,40 +4342,28 @@
       var textStyleConfig = GetValue$5(config, 'style', undefined);
       _this.defaultTextStyle = new TextStyle(null, textStyleConfig);
       _this.textStyle = _this.defaultTextStyle.clone();
-
       _this.setTestString(GetValue$5(config, 'testString', '|MÉqgy'));
-
       _this.background = new Background(_assertThisInitialized(_this), GetValue$5(config, 'background', undefined));
       _this.innerBounds = new InnerBounds(_assertThisInitialized(_this), GetValue$5(config, 'innerBounds', undefined));
       _this.children = [];
       _this.lastAppendedChildren = [];
       _this.lastOverChild = null;
       _this.poolManager = new PoolManager(config);
-
       _this.setFixedSize(fixedWidth, fixedHeight);
-
       _this.setPadding(GetValue$5(config, 'padding', 0));
-
       _this.setWrapConfig(GetValue$5(config, 'wrap', undefined));
-
       _this.setChildrenInteractiveEnable(GetValue$5(config, 'childrenInteractive', false));
-
       var text = GetValue$5(config, 'text', undefined);
-
       if (text) {
         _this.setText(text);
       }
-
       return _this;
     }
-
     _createClass(DynamicText, [{
       key: "updateTexture",
       value: function updateTexture() {
         this.renderContent();
-
         _get(_getPrototypeOf(DynamicText.prototype), "updateTexture", this).call(this);
-
         return this;
       }
     }, {
@@ -4919,10 +4381,8 @@
         return this;
       }
     }]);
-
     return DynamicText;
   }(Canvas);
-
   Object.assign(DynamicText.prototype, Methods$1);
 
   var EventEmitterMethods = {
@@ -4939,7 +4399,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -4949,76 +4408,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -5039,18 +4487,17 @@
   };
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
       this.parent = parent; // gameObject or scene
-
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$4(config, 'eventEmitter', true));
 
+      // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
         this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
@@ -5059,16 +4506,15 @@
         this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
-
+        // parent might not be shutdown yet
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
           this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
@@ -5076,7 +4522,6 @@
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -5098,7 +4543,6 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
@@ -5119,7 +4563,6 @@
       }
     } else {
       var keys = key;
-
       if (Array.isArray(keys)) {
         for (var i = 0, cnt = keys.length; i < cnt; i++) {
           CopyProperty(from, to, keys[i]);
@@ -5136,7 +4579,6 @@
     if (from === undefined) {
       from = {};
     }
-
     var to = {};
     CopyProperty(from, to, 'inputType');
     CopyProperty(from, to, 'type');
@@ -5151,104 +4593,81 @@
       if (preTest && !preTest(gameObject, pointer)) {
         return false;
       }
-
       if (!HitTest(gameObject, pointer)) {
         return false;
       }
-
       if (postTest && !postTest(gameObject, pointer)) {
         return false;
       }
-
       return true;
     } else {
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers,
-          pointer;
-
+        pointer;
       for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
-
         if (preTest && !preTest(gameObject, pointer)) {
           continue;
         }
-
         if (!HitTest(gameObject, pointer)) {
           continue;
         }
-
         if (postTest && !postTest(gameObject, pointer)) {
           continue;
         }
-
         return true;
       }
-
       return false;
     }
   };
-
   var HitTest = function HitTest(gameObject, pointer) {
     var scene = gameObject.scene;
     var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
     var inputManager = scene.input.manager;
     var gameObjects = [gameObject];
     var output;
-
     for (var i = 0, len = cameras.length; i < len; i++) {
       output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
-
       if (output.length > 0) {
         return true;
       }
     }
-
     return false;
   };
 
   var LastOpenedEditor = undefined;
-
   var SetLastOpenedEditor = function SetLastOpenedEditor(editor) {
     if (editor === LastOpenedEditor) {
       return;
     }
-
     if (LastOpenedEditor !== undefined) {
       LastOpenedEditor.close();
     }
-
     LastOpenedEditor = editor;
   };
-
   var CloseLastOpenEditor = function CloseLastOpenEditor(editor) {
     if (editor !== LastOpenedEditor) {
       return;
-    } // Don't call `LastOpenedEditor.close()`
+    }
 
-
+    // Don't call `LastOpenedEditor.close()`
     LastOpenedEditor = undefined;
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
       out = {};
     }
-
     var property, value;
-
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
-
       value = GetValue$3(config, key, property[1]);
-
       if (value !== undefined) {
         out[property[0]] = value;
       }
     }
-
     return out;
   };
 
@@ -5261,21 +4680,17 @@
     element.addEventListener('mouseup', callback, false);
     element.addEventListener('mousemove', callback, false);
   };
-
   var callback = function callback(e) {
     e.stopPropagation();
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
   var CreateElement = function CreateElement(parent, config) {
     var element;
     var textType = GetValue$2(config, 'inputType', undefined);
-
     if (textType === undefined) {
       textType = GetValue$2(config, 'type', 'text');
     }
-
     if (textType === 'textarea') {
       element = document.createElement('textarea');
       element.style.resize = 'none';
@@ -5283,20 +4698,20 @@
       element = document.createElement('input');
       element.type = textType;
     }
-
-    var style = GetValue$2(config, 'style', undefined); // Apply other style properties
-
+    var style = GetValue$2(config, 'style', undefined);
+    // Apply other style properties
     var elementStyle = element.style;
-    SetProperties(StyleProperties, style, elementStyle); // Set style
-
+    SetProperties(StyleProperties, style, elementStyle);
+    // Set style
     elementStyle.position = 'absolute';
     elementStyle.opacity = 0;
     elementStyle.pointerEvents = 'none';
-    elementStyle.zIndex = 0; // hide native blue text cursor on iOS
-
+    elementStyle.zIndex = 0;
+    // hide native blue text cursor on iOS
     elementStyle.transform = 'scale(0)';
-    SetProperties(ElementProperties, config, element); // Don't propagate touch/mouse events to parent(game canvas)
+    SetProperties(ElementProperties, config, element);
 
+    // Don't propagate touch/mouse events to parent(game canvas)
     StopPropagationTouchEvents(element);
     document.body.appendChild(element);
     return element;
@@ -5307,31 +4722,25 @@
     if (this.isOpened) {
       return this;
     }
-
     SetLastOpenedEditor(this);
     this.isOpened = true;
-
     if (!this.node) {
       // Create input text element when opening editor
       this.node = CreateElement(this, this.nodeConfig);
     }
-
     this.setFocus();
     this.initText();
-
     if (this.enterCloseEnable) {
       this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-    } // There is no cursor-position-change event, 
+    }
+
+    // There is no cursor-position-change event, 
     // so updating cursor position every tick
-
-
     this.scene.sys.events.on('postupdate', this.updateText, this);
     this.scene.input.on('pointerdown', this.onClickOutside, this);
-
     if (this.onOpenCallback) {
       this.onOpenCallback(this.parent, this);
     }
-
     this.emit('open', this);
     return this;
   };
@@ -5340,7 +4749,6 @@
     if (!element) {
       return;
     }
-
     document.body.removeChild(element);
   };
 
@@ -5349,19 +4757,17 @@
     if (!this.isOpened) {
       return this;
     }
-
     CloseLastOpenEditor(this);
     this.setBlur();
     this.isOpened = false;
     this.updateText();
     this.scene.sys.events.off('postupdate', this.updateText, this);
     this.scene.input.off('pointerdown', this.onClickOutside, this);
-
     if (this.onCloseCallback) {
       this.onCloseCallback(this.parent, this);
-    } // Remove input text element when closing editor
+    }
 
-
+    // Remove input text element when closing editor
     RemoveElement(this.node);
     this.node = undefined;
     this.emit('close', this);
@@ -5374,58 +4780,46 @@
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var HiddenTextEditBase = /*#__PURE__*/function (_ComponentBase) {
     _inherits(HiddenTextEditBase, _ComponentBase);
-
     var _super = _createSuper(HiddenTextEditBase);
-
     function HiddenTextEditBase(gameObject, config) {
       var _this;
-
       _classCallCheck(this, HiddenTextEditBase);
-
-      _this = _super.call(this, gameObject); // this.parent = gameObject;
+      _this = _super.call(this, gameObject);
+      // this.parent = gameObject;
 
       var textType = GetValue$1(config, 'inputType', undefined);
-
       if (textType === undefined) {
         textType = GetValue$1(config, 'type', 'text');
       }
-
       _this.setEnterCloseEnable(GetValue$1(config, 'enterClose', textType !== 'textarea'));
-
       var onOpen = GetValue$1(config, 'onOpen', undefined);
-
       if (!onOpen) {
         onOpen = GetValue$1(config, 'onFocus', undefined);
       }
-
       _this.onOpenCallback = onOpen;
       var onClose = GetValue$1(config, 'onClose', undefined);
-
       if (!onClose) {
         onClose = GetValue$1(config, 'onBlur', undefined);
       }
-
       _this.onCloseCallback = onClose;
       _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
       _this.isOpened = false;
       gameObject.on('pointerdown', function () {
         this.open();
       }, _assertThisInitialized(_this)).setInteractive();
-      _this.nodeConfig = CopyElementConfig(config); // Create/remove input text element when opening/closing editor
-
+      _this.nodeConfig = CopyElementConfig(config);
+      // Create/remove input text element when opening/closing editor
       _this.node = undefined;
       return _this;
     }
-
     _createClass(HiddenTextEditBase, [{
       key: "destroy",
       value: function destroy() {
         // this.parent.off('pointerdown', this.open, this);
-        this.close();
 
+        this.close();
         _get(_getPrototypeOf(HiddenTextEditBase.prototype), "destroy", this).call(this);
       }
     }, {
@@ -5441,33 +4835,33 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.enterCloseEnable = enable;
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "initText",
-      value: function initText() {} // Override
+      value: function initText() {}
 
+      // Override
     }, {
       key: "updateText",
-      value: function updateText() {} // Copy from InputText class
+      value: function updateText() {}
 
+      // Copy from InputText class
     }, {
       key: "text",
       get: function get() {
         if (!this.node) {
           return '';
         }
-
         return this.node.value;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.value = value;
       }
     }, {
@@ -5483,14 +4877,12 @@
         if (!this.node) {
           return 0;
         }
-
         return this.node.maxLength;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.maxLength = value;
       }
     }, {
@@ -5505,14 +4897,12 @@
         if (!this.node) {
           return 0;
         }
-
         return this.node.minLength;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.minLength = value;
       }
     }, {
@@ -5530,7 +4920,6 @@
         if (!this.node) {
           return;
         }
-
         this.node.placeholder = value;
       }
     }, {
@@ -5545,13 +4934,11 @@
         if (!this.node) {
           return this;
         }
-
         if (selectionStart === undefined) {
           this.node.select();
         } else {
           this.node.setSelectionRange(selectionStart, selectionEnd);
         }
-
         return this;
       }
     }, {
@@ -5566,7 +4953,6 @@
         if (!this.node) {
           return 0;
         }
-
         return this.node.selectionStart;
       }
     }, {
@@ -5575,7 +4961,6 @@
         if (!this.node) {
           return 0;
         }
-
         return this.node.selectionEnd;
       }
     }, {
@@ -5584,7 +4969,6 @@
         if (!this.node) {
           return '';
         }
-
         var node = this.node;
         return node.value.substring(node.selectionStart, node.selectionEnd);
       }
@@ -5594,14 +4978,12 @@
         if (!this.node) {
           return 0;
         }
-
         return this.node.selectionStart;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.setSelectionRange(value, value);
       }
     }, {
@@ -5612,7 +4994,6 @@
         } else if (value < 0) {
           value = this.text.length + value;
         }
-
         this.cursorPosition = value;
         return this;
       }
@@ -5622,14 +5003,12 @@
         if (!this.node) {
           return '';
         }
-
         return this.node.title;
       },
       set: function set(value) {
         if (!this.node) {
           return this;
         }
-
         this.node.title = value;
       }
     }, {
@@ -5650,14 +5029,12 @@
         if (!this.node) {
           return false;
         }
-
         return this.node.readOnly;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.readOnly = value;
       }
     }, {
@@ -5666,7 +5043,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.readOnly = value;
         return this;
       }
@@ -5676,14 +5052,12 @@
         if (!this.node) {
           return '';
         }
-
         return this.node.spellcheck;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.spellcheck = value;
       }
     }, {
@@ -5698,14 +5072,12 @@
         if (!this.node) {
           return undefined;
         }
-
         return this.node.style.color;
       },
       set: function set(value) {
         if (!this.node) {
           return;
         }
-
         this.node.style.color = value;
       }
     }, {
@@ -5720,7 +5092,6 @@
         if (!this.node) {
           return this;
         }
-
         this.node.style[key] = value;
         return this;
       }
@@ -5730,7 +5101,6 @@
         if (!this.node) {
           return undefined;
         }
-
         return this.node.style[key];
       }
     }, {
@@ -5739,7 +5109,6 @@
         if (!this.node) {
           return this;
         }
-
         this.node.scrollTop = this.node.scrollHeight;
         return this;
       }
@@ -5749,11 +5118,9 @@
         if (!this.node) {
           return this;
         }
-
         if (enabled === undefined) {
           enabled = true;
         }
-
         this.node.disabled = !enabled;
         return this;
       }
@@ -5763,7 +5130,6 @@
         if (!this.node) {
           return this;
         }
-
         this.node.blur();
         return this;
       }
@@ -5773,7 +5139,6 @@
         if (!this.node) {
           return this;
         }
-
         this.node.focus();
         return this;
       }
@@ -5783,20 +5148,16 @@
         return this.isOpened;
       }
     }]);
-
     return HiddenTextEditBase;
   }(ComponentBase);
-
   Object.assign(HiddenTextEditBase.prototype, Methods);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
     var previousText = hiddenInputText.previousText;
-
     if (text === previousText) {
       return text;
     }
-
     if (isNaN(text)) {
       // Enter a NaN character, back to previous text
       text = previousText;
@@ -5807,47 +5168,39 @@
       // New number text, update previous texr
       hiddenInputText.previousText = text;
     }
-
     return text;
   };
 
   var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
-
     var _super = _createSuper(HiddenTextEdit);
-
     function HiddenTextEdit(gameObject, config) {
       var _this;
-
       _classCallCheck(this, HiddenTextEdit);
-
       if (config === undefined) {
         config = {};
       }
-
       if (config.onUpdate === 'number') {
         config.onUpdate = NumberInputUpdateCallback;
       }
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
 
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
-
-      gameObject // Open editor by 'pointerdown' event
+      gameObject
+      // Open editor by 'pointerdown' event
       // Then set cursor position to nearest char
       .on('pointerdown', function (pointer, localX, localY, event) {
         var child = gameObject.getNearestChild(localX, localY);
         var charIndex = gameObject.getCharIndex(child);
         this.setCursorPosition(charIndex);
       }, _assertThisInitialized(_this));
-
       _this.on('open', function () {
         gameObject.emit('open');
       }).on('close', function () {
         gameObject.emit('close');
       });
-
       return _this;
     }
-
     _createClass(HiddenTextEdit, [{
       key: "initText",
       value: function initText() {
@@ -5861,39 +5214,31 @@
       value: function updateText() {
         var textObject = this.parent;
         var text = this.text;
-
         if (this.onUpdateCallback) {
           var newText = this.onUpdateCallback(text, textObject, this);
-
           if (newText != null) {
             text = newText;
           }
         }
-
         textObject.setText(text);
         var cursorPosition = this.isOpened ? this.cursorPosition : null;
-
         if (this.prevCursorPosition !== cursorPosition) {
           if (this.prevCursorPosition != null) {
             if (this.prevCursorPosition > text.length) {
               this.prevCursorPosition = null;
             }
           }
-
           if (this.prevCursorPosition != null) {
             var child = textObject.getCharChild(this.prevCursorPosition);
             textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
           }
-
           if (cursorPosition != null) {
             var child = textObject.getCharChild(cursorPosition);
             textObject.emit('cursorin', child, cursorPosition, textObject);
           }
-
           textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
           this.prevCursorPosition = cursorPosition;
         }
-
         return this;
       }
     }, {
@@ -5903,19 +5248,15 @@
         return this;
       }
     }]);
-
     return HiddenTextEdit;
   }(HiddenTextEditBase);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var CreateHiddenTextEdit = function CreateHiddenTextEdit(parent, parentConfig) {
     var config = GetValue(parentConfig, 'edit');
-
     if (config === undefined) {
       config = {};
     }
-
     CopyProperty(parentConfig, config, 'inputType');
     CopyProperty(parentConfig, config, 'enterClose');
     CopyProperty(parentConfig, config, 'onOpen');
@@ -5930,29 +5271,22 @@
     if (delimiter === undefined) {
       delimiter = '.';
     }
-
     if (out === undefined) {
       out = {};
     }
-
     if (!obj) {
       return out;
     }
-
     if (prefix in obj) {
       return Object.assign(out, obj[prefix]);
     }
-
     prefix += delimiter;
-
     for (var key in obj) {
       if (!key.startsWith(prefix)) {
         continue;
       }
-
       out[key.replace(prefix, '')] = obj[key];
     }
-
     return out;
   };
 
@@ -5960,7 +5294,6 @@
     for (var k in source) {
       return false;
     }
-
     return true;
   };
 
@@ -5968,10 +5301,8 @@
     if (out === undefined) {
       out = {};
     }
-
     if (Array.isArray(keys)) {
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
         out[key] = obj[key];
@@ -5981,7 +5312,6 @@
         out[key] = obj[key];
       }
     }
-
     return out;
   };
 
@@ -5990,18 +5320,15 @@
       if (!(key in objB)) {
         return false;
       }
-
       if (objA[key] !== objB[key]) {
         return false;
       }
     }
-
     for (var key in objB) {
       if (!(key in objA)) {
         return false;
       }
     }
-
     return true;
   };
 
@@ -6009,22 +5336,18 @@
     if (IsEmpty(cursorStyle)) {
       return;
     }
-
     this.setCursorStyle(cursorStyle).on('cursorin', function (child) {
       var cursorStyle = this.cursorStyle;
       var styleSave = GetPartialData(child.style, cursorStyle);
-
       if (IsKeyValueEqual(cursorStyle, styleSave)) {
         return;
       }
-
       child.styleSave = styleSave;
       child.modifyStyle(cursorStyle);
     }, this).on('cursorout', function (child) {
       if (!child.styleSave) {
         return;
       }
-
       child.modifyStyle(child.styleSave);
       child.styleSave = undefined;
     }, this);
@@ -6034,25 +5357,20 @@
     if (IsEmpty(focusStyle)) {
       return;
     }
-
     this.setFocusStyle(focusStyle).on('open', function () {
       var child = this.background;
       var focusStyle = this.focusStyle;
       var styleSave = GetPartialData(child, focusStyle);
-
       if (IsKeyValueEqual(focusStyle, styleSave)) {
         return;
       }
-
       child.styleSave = styleSave;
       child.modifyStyle(focusStyle);
     }, this).on('close', function () {
       var child = this.background;
-
       if (!child.styleSave) {
         return;
       }
-
       child.modifyStyle(child.styleSave);
       child.styleSave = undefined;
     }, this);
@@ -6060,10 +5378,9 @@
 
   var AddLastInsertCursor = function AddLastInsertCursor(textObject) {
     var child = textObject.createCharChild('|'); // Use '|' to update render size
-
     child.text = ''; // Render empty string ''
-    // Inove DynamicText's addChild method directly
 
+    // Inove DynamicText's addChild method directly
     AddChild.call(textObject, child);
     return child;
   };
@@ -6073,15 +5390,12 @@
     diff: function diff(oldString, newString) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       var callback = options.callback;
-
       if (typeof options === 'function') {
         callback = options;
         options = {};
       }
-
       this.options = options;
       var self = this;
-
       function done(value) {
         if (callback) {
           setTimeout(function () {
@@ -6091,75 +5405,68 @@
         } else {
           return value;
         }
-      } // Allow subclasses to massage the input prior to running
+      }
 
-
+      // Allow subclasses to massage the input prior to running
       oldString = this.castInput(oldString);
       newString = this.castInput(newString);
       oldString = this.removeEmpty(this.tokenize(oldString));
       newString = this.removeEmpty(this.tokenize(newString));
       var newLen = newString.length,
-          oldLen = oldString.length;
+        oldLen = oldString.length;
       var editLength = 1;
       var maxEditLength = newLen + oldLen;
-
       if (options.maxEditLength) {
         maxEditLength = Math.min(maxEditLength, options.maxEditLength);
       }
-
       var bestPath = [{
         newPos: -1,
         components: []
-      }]; // Seed editLength = 0, i.e. the content starts with the same values
+      }];
 
+      // Seed editLength = 0, i.e. the content starts with the same values
       var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
-
       if (bestPath[0].newPos + 1 >= newLen && oldPos + 1 >= oldLen) {
         // Identity per the equality and tokenizer
         return done([{
           value: this.join(newString),
           count: newString.length
         }]);
-      } // Main worker method. checks all permutations of a given edit length for acceptance.
+      }
 
-
+      // Main worker method. checks all permutations of a given edit length for acceptance.
       function execEditLength() {
         for (var diagonalPath = -1 * editLength; diagonalPath <= editLength; diagonalPath += 2) {
           var basePath = void 0;
-
           var addPath = bestPath[diagonalPath - 1],
-              removePath = bestPath[diagonalPath + 1],
-              _oldPos = (removePath ? removePath.newPos : 0) - diagonalPath;
-
+            removePath = bestPath[diagonalPath + 1],
+            _oldPos = (removePath ? removePath.newPos : 0) - diagonalPath;
           if (addPath) {
             // No one else is going to attempt to use this value, clear it
             bestPath[diagonalPath - 1] = undefined;
           }
-
           var canAdd = addPath && addPath.newPos + 1 < newLen,
-              canRemove = removePath && 0 <= _oldPos && _oldPos < oldLen;
-
+            canRemove = removePath && 0 <= _oldPos && _oldPos < oldLen;
           if (!canAdd && !canRemove) {
             // If this path is a terminal then prune
             bestPath[diagonalPath] = undefined;
             continue;
-          } // Select the diagonal that we want to branch from. We select the prior
+          }
+
+          // Select the diagonal that we want to branch from. We select the prior
           // path whose position in the new string is the farthest from the origin
           // and does not pass the bounds of the diff graph
-
-
           if (!canAdd || canRemove && addPath.newPos < removePath.newPos) {
             basePath = clonePath(removePath);
             self.pushComponent(basePath.components, undefined, true);
           } else {
             basePath = addPath; // No need to clone, we've pulled it from the list
-
             basePath.newPos++;
             self.pushComponent(basePath.components, true, undefined);
           }
+          _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath);
 
-          _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath); // If we have hit the end of both strings, then we are done
-
+          // If we have hit the end of both strings, then we are done
           if (basePath.newPos + 1 >= newLen && _oldPos + 1 >= oldLen) {
             return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
           } else {
@@ -6167,21 +5474,19 @@
             bestPath[diagonalPath] = basePath;
           }
         }
-
         editLength++;
-      } // Performs the length of edit iteration. Is a bit fugly as this has to support the
+      }
+
+      // Performs the length of edit iteration. Is a bit fugly as this has to support the
       // sync and async mode which is never fun. Loops over execEditLength until a value
       // is produced, or until the edit length exceeds options.maxEditLength (if given),
       // in which case it will return undefined.
-
-
       if (callback) {
         (function exec() {
           setTimeout(function () {
             if (editLength > maxEditLength) {
               return callback();
             }
-
             if (!execEditLength()) {
               exec();
             }
@@ -6190,7 +5495,6 @@
       } else {
         while (editLength <= maxEditLength) {
           var ret = execEditLength();
-
           if (ret) {
             return ret;
           }
@@ -6199,7 +5503,6 @@
     },
     pushComponent: function pushComponent(components, added, removed) {
       var last = components[components.length - 1];
-
       if (last && last.added === added && last.removed === removed) {
         // We need to clone here as the component clone operation is just
         // as shallow array clone
@@ -6218,23 +5521,20 @@
     },
     extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath) {
       var newLen = newString.length,
-          oldLen = oldString.length,
-          newPos = basePath.newPos,
-          oldPos = newPos - diagonalPath,
-          commonCount = 0;
-
+        oldLen = oldString.length,
+        newPos = basePath.newPos,
+        oldPos = newPos - diagonalPath,
+        commonCount = 0;
       while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
         newPos++;
         oldPos++;
         commonCount++;
       }
-
       if (commonCount) {
         basePath.components.push({
           count: commonCount
         });
       }
-
       basePath.newPos = newPos;
       return oldPos;
     },
@@ -6247,13 +5547,11 @@
     },
     removeEmpty: function removeEmpty(array) {
       var ret = [];
-
       for (var i = 0; i < array.length; i++) {
         if (array[i]) {
           ret.push(array[i]);
         }
       }
-
       return ret;
     },
     castInput: function castInput(value) {
@@ -6266,16 +5564,13 @@
       return chars.join('');
     }
   };
-
   function buildValues(diff, components, newString, oldString, useLongestToken) {
     var componentPos = 0,
-        componentLen = components.length,
-        newPos = 0,
-        oldPos = 0;
-
+      componentLen = components.length,
+      newPos = 0,
+      oldPos = 0;
     for (; componentPos < componentLen; componentPos++) {
       var component = components[componentPos];
-
       if (!component.removed) {
         if (!component.added && useLongestToken) {
           var value = newString.slice(newPos, newPos + component.count);
@@ -6287,39 +5582,37 @@
         } else {
           component.value = diff.join(newString.slice(newPos, newPos + component.count));
         }
+        newPos += component.count;
 
-        newPos += component.count; // Common case
-
+        // Common case
         if (!component.added) {
           oldPos += component.count;
         }
       } else {
         component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
-        oldPos += component.count; // Reverse add and remove so removes are output first to match common convention
+        oldPos += component.count;
+
+        // Reverse add and remove so removes are output first to match common convention
         // The diffing algorithm is tied to add then remove output and this is the simplest
         // route to get the desired output with minimal overhead.
-
         if (componentPos && components[componentPos - 1].added) {
           var tmp = components[componentPos - 1];
           components[componentPos - 1] = components[componentPos];
           components[componentPos] = tmp;
         }
       }
-    } // Special case handle for when one terminal is ignored (i.e. whitespace).
+    }
+
+    // Special case handle for when one terminal is ignored (i.e. whitespace).
     // For this case we merge the terminal into the prior string and drop the change.
     // This is only available for string mode.
-
-
     var lastComponent = components[componentLen - 1];
-
     if (componentLen > 1 && typeof lastComponent.value === 'string' && (lastComponent.added || lastComponent.removed) && diff.equals('', lastComponent.value)) {
       components[componentLen - 2].value += lastComponent.value;
       components.pop();
     }
-
     return components;
   }
-
   function clonePath(path) {
     return {
       newPos: path.newPos,
@@ -6332,6 +5625,7 @@
     return characterDiff.diff(oldStr, newStr, options);
   }
 
+  // Based on https://en.wikipedia.org/wiki/Latin_script_in_Unicode
   //
   // Ranges and exceptions:
   // Latin-1 Supplement, 0080–00FF
@@ -6349,24 +5643,21 @@
   //  - U+02DC  ˜ &#732;  Small Tilde
   //  - U+02DD  ˝ &#733;  Double Acute Accent
   // Latin Extended Additional, 1E00–1EFF
-
   var extendedWordChars = /^[A-Za-z\xC0-\u02C6\u02C8-\u02D7\u02DE-\u02FF\u1E00-\u1EFF]+$/;
   var reWhitespace = /\S/;
   var wordDiff = new Diff();
-
   wordDiff.equals = function (left, right) {
     if (this.options.ignoreCase) {
       left = left.toLowerCase();
       right = right.toLowerCase();
     }
-
     return left === right || this.options.ignoreWhitespace && !reWhitespace.test(left) && !reWhitespace.test(right);
   };
-
   wordDiff.tokenize = function (value) {
     // All whitespace symbols except newline group into one token, each newline - in separate token
-    var tokens = value.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/); // Join the boundary splits that we do not consider to be boundaries. This is primarily the extended Latin character set.
+    var tokens = value.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/);
 
+    // Join the boundary splits that we do not consider to be boundaries. This is primarily the extended Latin character set.
     for (var i = 0; i < tokens.length - 1; i++) {
       // If we have an empty string in the next field and we have only word chars before and after, merge
       if (!tokens[i + 1] && tokens[i + 2] && extendedWordChars.test(tokens[i]) && extendedWordChars.test(tokens[i + 2])) {
@@ -6375,163 +5666,137 @@
         i--;
       }
     }
-
     return tokens;
   };
 
   var lineDiff = new Diff();
-
   lineDiff.tokenize = function (value) {
     var retLines = [],
-        linesAndNewlines = value.split(/(\n|\r\n)/); // Ignore the final empty token that occurs if the string ends with a new line
+      linesAndNewlines = value.split(/(\n|\r\n)/);
 
+    // Ignore the final empty token that occurs if the string ends with a new line
     if (!linesAndNewlines[linesAndNewlines.length - 1]) {
       linesAndNewlines.pop();
-    } // Merge the content and line separators into single tokens
+    }
 
-
+    // Merge the content and line separators into single tokens
     for (var i = 0; i < linesAndNewlines.length; i++) {
       var line = linesAndNewlines[i];
-
       if (i % 2 && !this.options.newlineIsToken) {
         retLines[retLines.length - 1] += line;
       } else {
         if (this.options.ignoreWhitespace) {
           line = line.trim();
         }
-
         retLines.push(line);
       }
     }
-
     return retLines;
   };
 
   var sentenceDiff = new Diff();
-
   sentenceDiff.tokenize = function (value) {
     return value.split(/(\S.+?[.!?])(?=\s+|$)/);
   };
 
   var cssDiff = new Diff();
-
   cssDiff.tokenize = function (value) {
     return value.split(/([{}:;,]|\s+)/);
   };
 
   var objectPrototypeToString = Object.prototype.toString;
-  var jsonDiff = new Diff(); // Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
+  var jsonDiff = new Diff();
+  // Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
   // dangling comma and the other doesn't. Turns out including the dangling comma yields the nicest output:
-
   jsonDiff.useLongestToken = true;
   jsonDiff.tokenize = lineDiff.tokenize;
-
   jsonDiff.castInput = function (value) {
     var _this$options = this.options,
-        undefinedReplacement = _this$options.undefinedReplacement,
-        _this$options$stringi = _this$options.stringifyReplacer,
-        stringifyReplacer = _this$options$stringi === void 0 ? function (k, v) {
-      return typeof v === 'undefined' ? undefinedReplacement : v;
-    } : _this$options$stringi;
+      undefinedReplacement = _this$options.undefinedReplacement,
+      _this$options$stringi = _this$options.stringifyReplacer,
+      stringifyReplacer = _this$options$stringi === void 0 ? function (k, v) {
+        return typeof v === 'undefined' ? undefinedReplacement : v;
+      } : _this$options$stringi;
     return typeof value === 'string' ? value : JSON.stringify(canonicalize(value, null, null, stringifyReplacer), stringifyReplacer, '  ');
   };
-
   jsonDiff.equals = function (left, right) {
     return Diff.prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'));
   };
-  // object that is already on the "stack" of items being processed. Accepts an optional replacer
 
+  // This function handles the presence of circular references by bailing out when encountering an
+  // object that is already on the "stack" of items being processed. Accepts an optional replacer
   function canonicalize(obj, stack, replacementStack, replacer, key) {
     stack = stack || [];
     replacementStack = replacementStack || [];
-
     if (replacer) {
       obj = replacer(key, obj);
     }
-
     var i;
-
     for (i = 0; i < stack.length; i += 1) {
       if (stack[i] === obj) {
         return replacementStack[i];
       }
     }
-
     var canonicalizedObj;
-
     if ('[object Array]' === objectPrototypeToString.call(obj)) {
       stack.push(obj);
       canonicalizedObj = new Array(obj.length);
       replacementStack.push(canonicalizedObj);
-
       for (i = 0; i < obj.length; i += 1) {
         canonicalizedObj[i] = canonicalize(obj[i], stack, replacementStack, replacer, key);
       }
-
       stack.pop();
       replacementStack.pop();
       return canonicalizedObj;
     }
-
     if (obj && obj.toJSON) {
       obj = obj.toJSON();
     }
-
     if (_typeof(obj) === 'object' && obj !== null) {
       stack.push(obj);
       canonicalizedObj = {};
       replacementStack.push(canonicalizedObj);
-
       var sortedKeys = [],
-          _key;
-
+        _key;
       for (_key in obj) {
         /* istanbul ignore else */
         if (obj.hasOwnProperty(_key)) {
           sortedKeys.push(_key);
         }
       }
-
       sortedKeys.sort();
-
       for (i = 0; i < sortedKeys.length; i += 1) {
         _key = sortedKeys[i];
         canonicalizedObj[_key] = canonicalize(obj[_key], stack, replacementStack, replacer, _key);
       }
-
       stack.pop();
       replacementStack.pop();
     } else {
       canonicalizedObj = obj;
     }
-
     return canonicalizedObj;
   }
 
   var arrayDiff = new Diff();
-
   arrayDiff.tokenize = function (value) {
     return value.slice();
   };
-
   arrayDiff.join = arrayDiff.removeEmpty = function (value) {
     return value;
   };
 
   var SetText = function SetText(textObject, newText) {
     var text = textObject.text;
-
     if (newText === text) {
       return;
-    } // textObject.setText(newText);
+    }
 
+    // textObject.setText(newText);
 
     var results = diffChars(text, newText);
     var charIndex = 0;
-
     for (var i = 0, cnt = results.length; i < cnt; i++) {
       var result = results[i];
-
       if (result.removed) {
         // Remove character at charIndex
         textObject.removeText(charIndex, result.count);
@@ -6542,103 +5807,76 @@
         charIndex += result.count;
       }
     }
-
     textObject.runWordWrap();
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
     _inherits(CanvasInput, _DynamicText);
-
     var _super = _createSuper(CanvasInput);
-
     function CanvasInput(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
-
       _classCallCheck(this, CanvasInput);
-
       if (IsPlainObject(x)) {
         config = x;
       } else if (IsPlainObject(fixedWidth)) {
         config = fixedWidth;
       }
-
       if (config === undefined) {
         config = {};
-      } // Set text later
+      }
 
-
+      // Set text later
       var text = config.text;
-
       if (text) {
         delete config.text;
       }
-
       var focusStyle = ExtractByPrefix(config.background, 'focus');
       var cursorStyle = ExtractByPrefix(config.style, 'cursor');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
-
       if (config.focusStyle) {
         Object.assign(focusStyle, config.focusStyle);
       }
-
       RegisterFocusStyle.call(_assertThisInitialized(_this), focusStyle);
-
       if (config.cursorStyle) {
         Object.assign(cursorStyle, config.cursorStyle);
       }
-
       RegisterCursorStyle.call(_assertThisInitialized(_this), cursorStyle);
       var addCharCallback = config.onAddChar;
-
       if (addCharCallback) {
         _this.on('addchar', addCharCallback);
       }
-
       var cursorOutCallback = config.onCursorOut;
-
       if (cursorOutCallback) {
         _this.on('cursorout', cursorOutCallback);
       }
-
       var cursorInCallback = config.onCursorIn;
-
       if (cursorInCallback) {
         _this.on('cursorin', cursorInCallback);
       }
-
       var moveCursorCallback = config.onMoveCursor;
-
       if (moveCursorCallback) {
         _this.on('movecursor', moveCursorCallback);
       }
-
       _this.lastInsertCursor = AddLastInsertCursor(_assertThisInitialized(_this));
-
       if (text) {
         _this.setText(text);
       } else {
         // Still need run word wrap for lastInsertCursor child
         _this.runWordWrap();
       }
-
       return _this;
     }
-
     _createClass(CanvasInput, [{
       key: "addChild",
       value: function addChild(child, index) {
         _get(_getPrototypeOf(CanvasInput.prototype), "addChild", this).call(this, child, index);
-
         if (Array.isArray(child)) {
           var children = child;
-
           for (var i = 0, cnt = children.length; i < cnt; i++) {
             var child = children[i];
-
             if (IsChar(child)) {
               this.emit('addchar', child, index + i, this);
             }
@@ -6648,7 +5886,6 @@
             this.emit('addchar', child, index, this);
           }
         }
-
         return this;
       }
     }, {
@@ -6662,6 +5899,18 @@
       key: "appendText",
       value: function appendText(text) {
         this.setText(this.text + text);
+        return this;
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        if (this.width === width && this.height === height) {
+          return this;
+        }
+        _get(_getPrototypeOf(CanvasInput.prototype), "setSize", this).call(this, width, height);
+
+        // Run wrap again since fixedWidth and fixedHeight are changed
+        this.runWrap();
         return this;
       }
     }, {
@@ -6698,7 +5947,6 @@
         if (onCloseCallback) {
           this.textEdit.once('close', onCloseCallback);
         }
-
         this.textEdit.open();
         return this;
       }
@@ -6732,7 +5980,6 @@
         return this;
       }
     }]);
-
     return CanvasInput;
   }(DynamicText);
 
@@ -6748,11 +5995,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', undefined);
     var gameObject = new CanvasInput(this.scene, 0, 0, width, height, config);
@@ -6763,23 +6008,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -6789,31 +6028,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -6821,31 +6059,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var CanvasInputPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CanvasInputPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(CanvasInputPlugin);
-
     function CanvasInputPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, CanvasInputPlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexCanvasInput', Factory, Creator);
       return _this;
     }
-
     _createClass(CanvasInputPlugin, [{
       key: "start",
       value: function start() {
@@ -6853,10 +6085,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return CanvasInputPlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.CanvasInput', CanvasInput);
 
   return CanvasInputPlugin;

@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,7 +35,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -50,15 +46,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -71,14 +64,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -86,12 +77,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -99,86 +88,66 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
-
   function set(target, property, value, receiver) {
     if (typeof Reflect !== "undefined" && Reflect.set) {
       set = Reflect.set;
     } else {
       set = function set(target, property, value, receiver) {
         var base = _superPropBase(target, property);
-
         var desc;
-
         if (base) {
           desc = Object.getOwnPropertyDescriptor(base, property);
-
           if (desc.set) {
             desc.set.call(receiver, value);
             return true;
@@ -186,49 +155,37 @@
             return false;
           }
         }
-
         desc = Object.getOwnPropertyDescriptor(receiver, property);
-
         if (desc) {
           if (!desc.writable) {
             return false;
           }
-
           desc.value = value;
           Object.defineProperty(receiver, property, desc);
         } else {
           _defineProperty(receiver, property, value);
         }
-
         return true;
       };
     }
-
     return set(target, property, value, receiver);
   }
-
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
-
     if (!s && isStrict) {
       throw new Error('failed to set property');
     }
-
     return value;
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -237,15 +194,11 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
@@ -253,13 +206,11 @@
   var ObjectFactory = /*#__PURE__*/function () {
     function ObjectFactory(scene) {
       _classCallCheck(this, ObjectFactory);
-
       this.scene = scene;
       this.displayList = scene.sys.displayList;
       this.updateList = scene.sys.updateList;
       scene.sys.events.once('destroy', this.destroy, this);
     }
-
     _createClass(ObjectFactory, [{
       key: "destroy",
       value: function destroy() {
@@ -273,7 +224,6 @@
         ObjectFactory.prototype[type] = callback;
       }
     }]);
-
     return ObjectFactory;
   }();
 
@@ -621,15 +571,11 @@
 
   var EventEmitter = /*#__PURE__*/function (_EE) {
     _inherits(EventEmitter, _EE);
-
     var _super = _createSuper(EventEmitter);
-
     function EventEmitter() {
       _classCallCheck(this, EventEmitter);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(EventEmitter, [{
       key: "shutdown",
       value: function shutdown() {
@@ -641,7 +587,6 @@
         this.removeAllListeners();
       }
     }]);
-
     return EventEmitter;
   }(eventemitter3);
 
@@ -650,6 +595,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -674,8 +620,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -687,7 +634,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -697,44 +643,35 @@
   var Bank = /*#__PURE__*/function () {
     function Bank(config) {
       _classCallCheck(this, Bank);
-
       this.nextId = GetValue$c(config, 'start', 1); // start index
-
       this.uidKey = GetValue$c(config, 'uidKey', '$uid');
       this.autoRemove = GetValue$c(config, 'remove', true);
       this.refs = {};
       this.count = 0;
     }
-
     _createClass(Bank, [{
       key: "add",
       value: function add(gameObject, uid) {
         var refs = this.refs;
         var uidKey = this.uidKey;
-
         if (uidKey) {
           var uid = gameObject[uidKey];
-
           if (uid != null) {
             return this;
           }
         }
-
         if (uid == null) {
           do {
             uid = this.nextId;
             this.nextId++;
           } while (refs.hasOwnProperty(uid));
         }
-
         if (!refs.hasOwnProperty(uid)) {
           refs[uid] = gameObject;
           this.count++;
-
           if (uidKey) {
             gameObject[uidKey] = uid;
           }
-
           if (this.autoRemove && gameObject.on) {
             gameObject.once('destroy', function () {
               this.remove(uid);
@@ -743,7 +680,6 @@
         } else {
           uid = null;
         }
-
         if (uidKey) {
           return this;
         } else {
@@ -756,7 +692,6 @@
         for (var i = 0, cnt = objects.length; i < cnt; i++) {
           this.add(objects[i]);
         }
-
         return this;
       }
     }, {
@@ -773,28 +708,23 @@
       key: "remove",
       value: function remove(uid) {
         var refs = this.refs;
-
         if (refs.hasOwnProperty(uid)) {
           if (this.uidKey) {
             var gameObject = refs[uid];
             gameObject[this.uidKey] = undefined;
           }
-
           delete refs[uid];
           this.count--;
         }
-
         return this;
       }
     }, {
       key: "forEach",
       value: function forEach(callback, scope) {
         var refs = this.refs,
-            gameObject;
-
+          gameObject;
         for (var uid in refs) {
           gameObject = refs[uid];
-
           if (scope) {
             callback.call(scope, gameObject, uid);
           } else {
@@ -810,14 +740,12 @@
         }, this);
       }
     }]);
-
     return Bank;
   }();
 
   var ChessBank = new Bank({
     uidKey: '$uid',
     remove: false // remove uid manually
-
   });
 
   var EventEmitterMethods = {
@@ -834,7 +762,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -844,76 +771,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -934,18 +850,17 @@
   };
 
   var GetValue$b = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
       this.parent = parent; // gameObject or scene
-
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true));
 
+      // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
         this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
@@ -954,16 +869,15 @@
         this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
-
+        // parent might not be shutdown yet
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
           this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
@@ -971,7 +885,6 @@
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -993,23 +906,19 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var GetTileDirection = function GetTileDirection(tileX, tileY) {
     var board = this.board;
-
     if (board === null) {
       return null;
     }
-
     globTileXY$i.x = tileX;
     globTileXY$i.y = tileY;
     return board.getNeighborTileDirection(this.tileXYZ, globTileXY$i);
   };
-
   var globTileXY$i = {
     x: 0,
     y: 0
@@ -1039,48 +948,42 @@
     // - window
     if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
       return false;
-    } // Support: Firefox <20
+    }
+
+    // Support: Firefox <20
     // The try/catch suppresses exceptions thrown when attempting to access
     // the "constructor" property of certain host objects, ie. |window.location|
     // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-
-
     try {
       if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
         return false;
       }
     } catch (e) {
       return false;
-    } // If the function hasn't returned already, we're confident that
+    }
+
+    // If the function hasn't returned already, we're confident that
     // |obj| is a plain object, created by {} or constructed with new Object
-
-
     return true;
   };
 
   var uidKey$1 = ChessBank.uidKey;
-
   var Chess = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Chess, _ComponentBase);
-
     var _super = _createSuper(Chess);
-
     function Chess(parent, uid) {
       var _this;
-
       _classCallCheck(this, Chess);
-
       _this = _super.call(this, parent, {
         eventEmitter: false
-      }); // this.parent
+      });
+      // this.parent
 
       ChessBank.add(_assertThisInitialized(_this), uid); // uid is stored in `this.$uid`
-
       _this.board = null;
       _this.blocker = false;
       return _this;
     }
-
     _createClass(Chess, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -1088,14 +991,11 @@
         if (this.isShutdown) {
           return;
         }
-
         if (this.board) {
           this.board.removeChess(this[uidKey$1]);
         }
-
         ChessBank.remove(this[uidKey$1]);
         this.board = null;
-
         _get(_getPrototypeOf(Chess.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -1110,7 +1010,6 @@
         if (this.board == null) {
           return null;
         }
-
         return this.board.chessToTileXYZ(this[uidKey$1]);
       }
     }, {
@@ -1119,7 +1018,6 @@
         if (this.board == null) {
           return this;
         }
-
         this.board.setChessTileZ(this.parent, tileZ);
         return this;
       }
@@ -1129,7 +1027,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.blocker = value;
         return this;
       }
@@ -1139,12 +1036,9 @@
         if (this.blocker === false) {
           this.blocker = {};
         }
-
         var blocker = this.blocker;
-
         if (IsPlainObject(direction)) {
           var blockEdges = direction;
-
           for (direction in blockEdges) {
             blocker[direction] = blockEdges[direction];
           }
@@ -1152,21 +1046,17 @@
           if (value === undefined) {
             value = true;
           }
-
           blocker[direction] = value;
         }
-
         return this;
       }
     }, {
       key: "getBlockEdge",
       value: function getBlockEdge(direction) {
         var blocker = this.blocker;
-
         if (blocker === false) {
           return false;
         }
-
         if (!blocker.hasOwnProperty(direction)) {
           return false;
         } else {
@@ -1174,10 +1064,8 @@
         }
       }
     }]);
-
     return Chess;
   }(ComponentBase);
-
   var methods$7 = {
     getTileDirection: GetTileDirection
   };
@@ -1185,7 +1073,6 @@
 
   var IsUID = function IsUID(object) {
     var type = _typeof(object);
-
     return type === 'number' || type === 'string';
   };
 
@@ -1199,23 +1086,19 @@
       if (!gameObject.hasOwnProperty('rexChess')) {
         gameObject.rexChess = new Chess(gameObject);
       }
-
       return gameObject.rexChess;
     }
   };
 
   var uidKey = ChessBank.uidKey;
-
   var GetChessUID = function GetChessUID(gameObject) {
     // Game object or uid
     var uid;
-
     if (IsUID(gameObject)) {
       uid = gameObject;
     } else {
       uid = GetChessData(gameObject)[uidKey];
     }
-
     return uid;
   };
 
@@ -1223,25 +1106,21 @@
     if (this.infinityMode) {
       return this;
     }
-
     if (this.width === undefined || this.width <= width) {
       this.width = width;
       return this;
-    } // this.width > width : collapse
+    }
 
-
+    // this.width > width : collapse
     var tileX, tileY, tileZ, tileZToUIDs;
-
     for (tileX = width; tileX < this.width; tileX++) {
       for (tileY = 0; tileY < this.height; tileY++) {
         tileZToUIDs = this.boardData.getUID(tileX, tileY);
-
         for (tileZ in tileZToUIDs) {
           this.RemoveChess(false, tileX, tileY, tileZ);
         }
       }
     }
-
     this.width = width;
     return this;
   };
@@ -1250,25 +1129,21 @@
     if (this.infinityMode) {
       return this;
     }
-
     if (this.height === undefined || this.height <= height) {
       this.height = height;
       return this;
-    } // this.height > height : collapse
+    }
 
-
+    // this.height > height : collapse
     var tileX, tileY, tileZ, tileZToUIDs;
-
     for (tileY = height; tileY < this.height; tileY++) {
       for (tileX = 0; tileX < this.width; tileX++) {
         tileZToUIDs = this.boardData.getUID(tileX, tileY);
-
         for (tileZ in tileZToUIDs) {
           this.RemoveChess(false, tileX, tileY, tileZ);
         }
       }
     }
-
     this.height = height;
     return this;
   };
@@ -1277,7 +1152,6 @@
     if (separator === undefined) {
       separator = ',';
     }
-
     return "".concat(tileX).concat(separator).concat(tileY).concat(separator).concat(tileZ);
   };
 
@@ -1285,7 +1159,6 @@
     if (separator === undefined) {
       separator = ',';
     }
-
     return "".concat(tileX).concat(separator).concat(tileY);
   };
 
@@ -1295,18 +1168,15 @@
     } else if (out === true) {
       out = globTileXYZ$1;
     }
-
     if (separator === undefined) {
       separator = ',';
     }
-
     var items = key.split(separator);
     out.x = items[0];
     out.y = items[1];
     out.z = items[2];
     return out;
   };
-
   var globTileXYZ$1 = {};
 
   var TileXYToWorldX = function TileXYToWorldX(tileX, tileY) {
@@ -1327,14 +1197,11 @@
     if (out === undefined) {
       out = [];
     }
-
     var tileXY;
-
     for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
       tileXY = tileXYArray[i];
       out.push(this.tileXYToWorldXY(tileXY.x, tileXY.y));
     }
-
     return out;
   };
 
@@ -1359,16 +1226,13 @@
 
   var WorldXYToChess = function WorldXYToChess(worldX, worldY, tileZ) {
     var tileXY = this.worldXYToTileXY(worldX, worldY, true);
-
     if (tileZ !== undefined) {
       return this.tileXYZToChess(tileXY.x, tileXY.y, tileZ);
     } else {
       var tileZToUIDs = this.boardData.getUID(tileXY.x, tileXY.y);
-
       if (tileZToUIDs == null) {
         return null;
       }
-
       for (var tileZ in tileZToUIDs) {
         return this.uidToChess(tileZToUIDs[tileZ]);
       }
@@ -1381,12 +1245,10 @@
     } else if (out === true) {
       out = globWorldXY$4;
     }
-
     this.worldXYToTileXY(worldX, worldY, out);
     this.tileXYToWorldXY(out.x, out.y, out);
     return out;
   };
-
   var globWorldXY$4 = {};
 
   /**
@@ -1442,7 +1304,6 @@
    */
   var Normalize = function Normalize(angle) {
     angle = angle % (2 * Math.PI);
-
     if (angle >= 0) {
       return angle;
     } else {
@@ -1474,7 +1335,6 @@
     if (epsilon === undefined) {
       epsilon = 0.0001;
     }
-
     return Math.abs(a - b) < epsilon;
   };
 
@@ -1482,9 +1342,7 @@
     var tileXYA = this.chessToTileXYZ(chessA);
     var tileXYB = this.chessToTileXYZ(chessB);
     var targetAngle = this.angleBetween(tileXYA, tileXYB); // -PI~PI
-
     targetAngle = Normalize(targetAngle); // 0~2PI
-
     var deltaAngle = Math.abs(targetAngle - face);
     deltaAngle = Math.min(deltaAngle, PI2 - deltaAngle);
     var halfCone = cone / 2;
@@ -1495,16 +1353,17 @@
   var AngleToward = function AngleToward(tileXY, direction) {
     if (tileXY === undefined) {
       tileXY = zeroTileXY;
-    } // Save wrapMode, infinityMode and clear them
-
-
+    }
+    // Save wrapMode, infinityMode and clear them
     var wrapModeSave = this.wrapMode;
     var infinityModeSave = this.infinityMode;
     this.wrapMode = false;
-    this.infinityMode = true; // Get neighborTileXY
+    this.infinityMode = true;
 
-    var neighborTileXY = this.getNeighborTileXY(tileXY, direction, true); // Restore wrapMode, infinityMode and clear them
+    // Get neighborTileXY
+    var neighborTileXY = this.getNeighborTileXY(tileXY, direction, true);
 
+    // Restore wrapMode, infinityMode and clear them
     this.wrapMode = wrapModeSave;
     this.infinityMode = infinityModeSave;
     return this.angleBetween(tileXY, neighborTileXY); // -PI~PI
@@ -1520,7 +1379,9 @@
    * @copyright    2018 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   var RAD_TO_DEG = 180 / Math.PI;
+
   /**
    * Convert the given angle in radians, to the equivalent angle in degrees.
    *
@@ -1531,7 +1392,6 @@
    *
    * @return {integer} The given angle converted to degrees.
    */
-
   var RadToDeg$2 = function RadToDeg(radians) {
     return radians * RAD_TO_DEG;
   };
@@ -1565,34 +1425,27 @@
    */
   var ShortestBetween = function ShortestBetween(angle1, angle2) {
     var difference = angle2 - angle1;
-
     if (difference === 0) {
       return 0;
     }
-
     var times = Math.floor((difference - -180) / 360);
     return difference - times * 360;
   };
 
   var AngleSnapToDirection = function AngleSnapToDirection(tileXY, angle) {
     angle = RadToDeg$2(angle); // -180~180
-
     var directions = this.grid.allDirections;
     var neighborAngle, deltaAngle;
     var minDeltaAngle = Infinity,
-        direction = undefined;
-
+      direction = undefined;
     for (var i = 0, cnt = directions.length; i < cnt; i++) {
       neighborAngle = RadToDeg$2(this.angleToward(tileXY, directions[i])); // -PI~PI -> -180~180
-
       deltaAngle = Math.abs(ShortestBetween(angle, neighborAngle));
-
       if (deltaAngle < minDeltaAngle) {
         minDeltaAngle = deltaAngle;
         direction = i;
       }
     }
-
     return direction;
   };
 
@@ -1600,7 +1453,6 @@
     if (this.infinityMode && tileZ === undefined) {
       return true;
     }
-
     var out = this.worldXYToTileXY(worldX, worldY, true);
     return this.contains(out.x, out.y, tileZ);
   };
@@ -1608,7 +1460,6 @@
   var GridAlign = function GridAlign(gameObject, tileX, tileY) {
     if (gameObject === undefined) {
       var chess = this.getAllChess();
-
       for (var i = 0, cnt = chess.length; i < cnt; i++) {
         this.gridAlign(chess[i]);
       }
@@ -1616,16 +1467,13 @@
       if (IsUID(gameObject)) {
         gameObject = this.uidToChess(gameObject);
       }
-
       if (tileX === undefined) {
         var tileXYZ = this.chessToTileXYZ(gameObject);
         tileX = tileXYZ.x;
         tileY = tileXYZ.y;
       }
-
       this.tileXYToWorldXY(tileX, tileY, gameObject);
     }
-
     return this;
   };
 
@@ -1633,11 +1481,9 @@
     if (tileX && typeof tileX !== 'number') {
       points = tileY;
       var tileXY = this.chessToTileXYZ(tileX); // tileX is a Chess or TileXY
-
       tileX = tileXY.x;
       tileY = tileXY.y;
     }
-
     return this.grid.getGridPoints(tileX, tileY, points);
   };
 
@@ -1645,11 +1491,9 @@
     if (tileX && typeof tileX !== 'number') {
       out = tileY;
       var tileXY = this.chessToTileXYZ(tileX); // tileX is a Chess or TileXY
-
       tileX = tileXY.x;
       tileY = tileXY.y;
     }
-
     return this.grid.getBounds(tileX, tileY, out);
   };
 
@@ -1658,53 +1502,48 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   //  Taken from klasse by mattdesl https://github.com/mattdesl/klasse
+
   function hasGetterOrSetter(def) {
     return !!def.get && typeof def.get === 'function' || !!def.set && typeof def.set === 'function';
   }
-
   function getProperty(definition, k, isClassDescriptor) {
     //  This may be a lightweight object, OR it might be a property that was defined previously.
+
     //  For simple class descriptors we can just assume its NOT previously defined.
     var def = isClassDescriptor ? definition[k] : Object.getOwnPropertyDescriptor(definition, k);
-
     if (!isClassDescriptor && def.value && _typeof(def.value) === 'object') {
       def = def.value;
-    } //  This might be a regular property, or it may be a getter/setter the user defined in a class.
+    }
 
-
+    //  This might be a regular property, or it may be a getter/setter the user defined in a class.
     if (def && hasGetterOrSetter(def)) {
       if (typeof def.enumerable === 'undefined') {
         def.enumerable = true;
       }
-
       if (typeof def.configurable === 'undefined') {
         def.configurable = true;
       }
-
       return def;
     } else {
       return false;
     }
   }
-
   function hasNonConfigurable(obj, k) {
     var prop = Object.getOwnPropertyDescriptor(obj, k);
-
     if (!prop) {
       return false;
     }
-
     if (prop.value && _typeof(prop.value) === 'object') {
       prop = prop.value;
     }
-
     if (prop.configurable === false) {
       return true;
     }
-
     return false;
   }
+
   /**
    * Extends the given `myClass` object's prototype with the properties of `definition`.
    *
@@ -1714,40 +1553,36 @@
    * @param {boolean} isClassDescriptor Is the definition a class descriptor?
    * @param {Object} [extend] The parent constructor object.
    */
-
-
   function extend(ctor, definition, isClassDescriptor, extend) {
     for (var k in definition) {
       if (!definition.hasOwnProperty(k)) {
         continue;
       }
-
       var def = getProperty(definition, k, isClassDescriptor);
-
       if (def !== false) {
         //  If Extends is used, we will check its prototype to see if the final variable exists.
-        var parent = extend || ctor;
 
+        var parent = extend || ctor;
         if (hasNonConfigurable(parent.prototype, k)) {
           //  Just skip the final property
           if (Class.ignoreFinals) {
             continue;
-          } //  We cannot re-define a property that is configurable=false.
+          }
+
+          //  We cannot re-define a property that is configurable=false.
           //  So we will consider them final and throw an error. This is by
           //  default so it is clear to the developer what is happening.
           //  You can set ignoreFinals to true if you need to extend a class
           //  which has configurable=false; it will simply not re-define final properties.
-
-
           throw new Error('cannot override final property \'' + k + '\', set Class.ignoreFinals = true to skip');
         }
-
         Object.defineProperty(ctor.prototype, k, def);
       } else {
         ctor.prototype[k] = definition[k];
       }
     }
   }
+
   /**
    * Applies the given `mixins` to the prototype of `myClass`.
    *
@@ -1755,21 +1590,18 @@
    * @param {Object} myClass The constructor object to mix into.
    * @param {Object|Array<Object>} mixins The mixins to apply to the constructor.
    */
-
-
   function mixin(myClass, mixins) {
     if (!mixins) {
       return;
     }
-
     if (!Array.isArray(mixins)) {
       mixins = [mixins];
     }
-
     for (var i = 0; i < mixins.length; i++) {
       extend(myClass, mixins[i].prototype || mixins[i]);
     }
   }
+
   /**
    * Creates a new class with the given descriptor.
    * The constructor, defined by the name `initialize`,
@@ -1796,62 +1628,58 @@
    *          }
    *      });
    */
-
-
   function Class(definition) {
     if (!definition) {
       definition = {};
-    } //  The variable name here dictates what we see in Chrome debugger
+    }
 
-
+    //  The variable name here dictates what we see in Chrome debugger
     var initialize;
     var Extends;
-
     if (definition.initialize) {
       if (typeof definition.initialize !== 'function') {
         throw new Error('initialize must be a function');
       }
+      initialize = definition.initialize;
 
-      initialize = definition.initialize; //  Usually we should avoid 'delete' in V8 at all costs.
+      //  Usually we should avoid 'delete' in V8 at all costs.
       //  However, its unlikely to make any performance difference
       //  here since we only call this on class creation (i.e. not object creation).
-
       delete definition.initialize;
     } else if (definition.Extends) {
       var base = definition.Extends;
-
       initialize = function initialize() {
         base.apply(this, arguments);
       };
     } else {
       initialize = function initialize() {};
     }
-
     if (definition.Extends) {
       initialize.prototype = Object.create(definition.Extends.prototype);
-      initialize.prototype.constructor = initialize; //  For getOwnPropertyDescriptor to work, we need to act directly on the Extends (or Mixin)
+      initialize.prototype.constructor = initialize;
+
+      //  For getOwnPropertyDescriptor to work, we need to act directly on the Extends (or Mixin)
 
       Extends = definition.Extends;
       delete definition.Extends;
     } else {
       initialize.prototype.constructor = initialize;
-    } //  Grab the mixins, if they are specified...
+    }
 
-
+    //  Grab the mixins, if they are specified...
     var mixins = null;
-
     if (definition.Mixins) {
       mixins = definition.Mixins;
       delete definition.Mixins;
-    } //  First, mixin if we can.
+    }
 
+    //  First, mixin if we can.
+    mixin(initialize, mixins);
 
-    mixin(initialize, mixins); //  Now we grab the actual definition which defines the overrides.
-
+    //  Now we grab the actual definition which defines the overrides.
     extend(initialize, definition, true, Extends);
     return initialize;
   }
-
   Class.extend = extend;
   Class.mixin = mixin;
   Class.ignoreFinals = false;
@@ -1878,7 +1706,6 @@
     if (rect.width <= 0 || rect.height <= 0) {
       return false;
     }
-
     return rect.x <= x && rect.x + rect.width >= x && rect.y <= y && rect.y + rect.height >= y;
   };
 
@@ -1907,6 +1734,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * @classdesc
    * Defines a Point in 2D space, with an x and y component.
@@ -1919,16 +1747,15 @@
    * @param {number} [x=0] - The x coordinate of this Point.
    * @param {number} [y=x] - The y coordinate of this Point.
    */
-
   var Point = new Class({
     initialize: function Point(x, y) {
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = x;
       }
+
       /**
        * The x coordinate of this Point.
        *
@@ -1937,9 +1764,8 @@
        * @default 0
        * @since 3.0.0
        */
-
-
       this.x = x;
+
       /**
        * The y coordinate of this Point.
        *
@@ -1948,10 +1774,8 @@
        * @default 0
        * @since 3.0.0
        */
-
       this.y = y;
     },
-
     /**
      * Set the x and y coordinates of the point to the given values.
      *
@@ -1967,11 +1791,9 @@
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = x;
       }
-
       this.x = x;
       this.y = y;
       return this;
@@ -1983,6 +1805,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Position is a value between 0 and 1 where 0 = the top-left of the rectangle and 0.5 = the bottom right.
    *
@@ -1997,23 +1820,18 @@
    *
    * @return {Phaser.Geom.Point} [description]
    */
-
   var GetPoint$1 = function GetPoint(rectangle, position, out) {
     if (out === undefined) {
       out = new Point();
     }
-
     if (position <= 0 || position >= 1) {
       out.x = rectangle.x;
       out.y = rectangle.y;
       return out;
     }
-
     var p = Perimeter(rectangle) * position;
-
     if (position > 0.5) {
       p -= rectangle.width + rectangle.height;
-
       if (p <= rectangle.width) {
         //  Face 3
         out.x = rectangle.right - p;
@@ -2032,7 +1850,6 @@
       out.x = rectangle.right;
       out.y = rectangle.y + (p - rectangle.width);
     }
-
     return out;
   };
 
@@ -2041,6 +1858,8 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
+  //  Return an array of points from the perimeter of the rectangle
   //  each spaced out based on the quantity or step required
 
   /**
@@ -2058,22 +1877,19 @@
    *
    * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.
    */
-
   var GetPoints$1 = function GetPoints(rectangle, quantity, stepRate, out) {
     if (out === undefined) {
       out = [];
-    } //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    }
 
-
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
     if (!quantity) {
       quantity = Perimeter(rectangle) / stepRate;
     }
-
     for (var i = 0; i < quantity; i++) {
       var position = i / quantity;
       out.push(GetPoint$1(rectangle, position));
     }
-
     return out;
   };
 
@@ -2082,6 +1898,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Get a point on a line that's a given percentage along its length.
    *
@@ -2096,12 +1913,10 @@
    *
    * @return {(Phaser.Geom.Point|object)} The point on the line.
    */
-
   var GetPoint = function GetPoint(line, position, out) {
     if (out === undefined) {
       out = new Point();
     }
-
     out.x = line.x1 + (line.x2 - line.x1) * position;
     out.y = line.y1 + (line.y2 - line.y1) * position;
     return out;
@@ -2132,6 +1947,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Get a number of points along a line's length.
    *
@@ -2152,29 +1968,25 @@
    *
    * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
    */
-
   var GetPoints = function GetPoints(line, quantity, stepRate, out) {
     if (out === undefined) {
       out = [];
-    } //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    }
 
-
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
     if (!quantity) {
       quantity = Length(line) / stepRate;
     }
-
     var x1 = line.x1;
     var y1 = line.y1;
     var x2 = line.x2;
     var y2 = line.y2;
-
     for (var i = 0; i < quantity; i++) {
       var position = i / quantity;
       var x = x1 + (x2 - x1) * position;
       var y = y1 + (y2 - y1) * position;
       out.push(new Point(x, y));
     }
-
     return out;
   };
 
@@ -2183,6 +1995,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Returns a random point on a given Line.
    *
@@ -2196,12 +2009,10 @@
    *
    * @return {(Phaser.Geom.Point|object)} A random Point on the Line.
    */
-
   var Random$1 = function Random(line, out) {
     if (out === undefined) {
       out = new Point();
     }
-
     var t = Math.random();
     out.x = line.x1 + t * (line.x2 - line.x1);
     out.y = line.y1 + t * (line.y2 - line.y1);
@@ -2222,7 +2033,6 @@
    * @param {number|Phaser.Types.Math.Vector2Like} [x] - The x component, or an object with `x` and `y` properties.
    * @param {number} [y] - The y component.
    */
-
   var Vector2$1 = new Class({
     initialize: function Vector2(x, y) {
       /**
@@ -2234,6 +2044,7 @@
        * @since 3.0.0
        */
       this.x = 0;
+
       /**
        * The y component of this Vector.
        *
@@ -2242,9 +2053,7 @@
        * @default 0
        * @since 3.0.0
        */
-
       this.y = 0;
-
       if (_typeof(x) === 'object') {
         this.x = x.x || 0;
         this.y = x.y || 0;
@@ -2252,12 +2061,10 @@
         if (y === undefined) {
           y = x;
         }
-
         this.x = x || 0;
         this.y = y || 0;
       }
     },
-
     /**
      * Make a clone of this Vector2.
      *
@@ -2269,7 +2076,6 @@
     clone: function clone() {
       return new Vector2$1(this.x, this.y);
     },
-
     /**
      * Copy the components of a given Vector into this Vector.
      *
@@ -2285,7 +2091,6 @@
       this.y = src.y || 0;
       return this;
     },
-
     /**
      * Set the component values of this Vector from a given Vector2Like object.
      *
@@ -2301,7 +2106,6 @@
       this.y = obj.y || 0;
       return this;
     },
-
     /**
      * Set the `x` and `y` components of the this Vector to the given `x` and `y` values.
      *
@@ -2317,12 +2121,10 @@
       if (y === undefined) {
         y = x;
       }
-
       this.x = x;
       this.y = y;
       return this;
     },
-
     /**
      * This method is an alias for `Vector2.set`.
      *
@@ -2337,7 +2139,6 @@
     setTo: function setTo(x, y) {
       return this.set(x, y);
     },
-
     /**
      * Sets the `x` and `y` values of this object from a given polar coordinate.
      *
@@ -2353,12 +2154,10 @@
       if (radius == null) {
         radius = 1;
       }
-
       this.x = Math.cos(azimuth) * radius;
       this.y = Math.sin(azimuth) * radius;
       return this;
     },
-
     /**
      * Check whether this Vector is equal to a given Vector.
      *
@@ -2374,7 +2173,6 @@
     equals: function equals(v) {
       return this.x === v.x && this.y === v.y;
     },
-
     /**
      * Calculate the angle between this Vector and the positive x-axis, in radians.
      *
@@ -2385,15 +2183,13 @@
      */
     angle: function angle() {
       // computes the angle in radians with respect to the positive x-axis
-      var angle = Math.atan2(this.y, this.x);
 
+      var angle = Math.atan2(this.y, this.x);
       if (angle < 0) {
         angle += 2 * Math.PI;
       }
-
       return angle;
     },
-
     /**
      * Add a given Vector to this Vector. Addition is component-wise.
      *
@@ -2409,7 +2205,6 @@
       this.y += src.y;
       return this;
     },
-
     /**
      * Subtract the given Vector from this Vector. Subtraction is component-wise.
      *
@@ -2425,7 +2220,6 @@
       this.y -= src.y;
       return this;
     },
-
     /**
      * Perform a component-wise multiplication between this Vector and the given Vector.
      *
@@ -2443,7 +2237,6 @@
       this.y *= src.y;
       return this;
     },
-
     /**
      * Scale this Vector by the given value.
      *
@@ -2462,10 +2255,8 @@
         this.x = 0;
         this.y = 0;
       }
-
       return this;
     },
-
     /**
      * Perform a component-wise division between this Vector and the given Vector.
      *
@@ -2483,7 +2274,6 @@
       this.y /= src.y;
       return this;
     },
-
     /**
      * Negate the `x` and `y` components of this Vector.
      *
@@ -2497,7 +2287,6 @@
       this.y = -this.y;
       return this;
     },
-
     /**
      * Calculate the distance between this Vector and the given Vector.
      *
@@ -2513,7 +2302,6 @@
       var dy = src.y - this.y;
       return Math.sqrt(dx * dx + dy * dy);
     },
-
     /**
      * Calculate the distance between this Vector and the given Vector, squared.
      *
@@ -2529,7 +2317,6 @@
       var dy = src.y - this.y;
       return dx * dx + dy * dy;
     },
-
     /**
      * Calculate the length (or magnitude) of this Vector.
      *
@@ -2543,7 +2330,6 @@
       var y = this.y;
       return Math.sqrt(x * x + y * y);
     },
-
     /**
      * Calculate the length of this Vector squared.
      *
@@ -2557,7 +2343,6 @@
       var y = this.y;
       return x * x + y * y;
     },
-
     /**
      * Normalize this Vector.
      *
@@ -2572,16 +2357,13 @@
       var x = this.x;
       var y = this.y;
       var len = x * x + y * y;
-
       if (len > 0) {
         len = 1 / Math.sqrt(len);
         this.x = x * len;
         this.y = y * len;
       }
-
       return this;
     },
-
     /**
      * Right-hand normalize (make unit length) this Vector.
      *
@@ -2596,7 +2378,6 @@
       this.y = x;
       return this;
     },
-
     /**
      * Calculate the dot product of this Vector and the given Vector.
      *
@@ -2610,7 +2391,6 @@
     dot: function dot(src) {
       return this.x * src.x + this.y * src.y;
     },
-
     /**
      * Calculate the cross product of this Vector and the given Vector.
      *
@@ -2624,7 +2404,6 @@
     cross: function cross(src) {
       return this.x * src.y - this.y * src.x;
     },
-
     /**
      * Linearly interpolate between this Vector and the given Vector.
      *
@@ -2642,14 +2421,12 @@
       if (t === undefined) {
         t = 0;
       }
-
       var ax = this.x;
       var ay = this.y;
       this.x = ax + t * (src.x - ax);
       this.y = ay + t * (src.y - ay);
       return this;
     },
-
     /**
      * Transform this Vector with the given Matrix.
      *
@@ -2668,7 +2445,6 @@
       this.y = m[1] * x + m[4] * y + m[7];
       return this;
     },
-
     /**
      * Transform this Vector with the given Matrix.
      *
@@ -2687,7 +2463,6 @@
       this.y = m[1] * x + m[5] * y + m[13];
       return this;
     },
-
     /**
      * Make this Vector the zero vector (0, 0).
      *
@@ -2702,6 +2477,7 @@
       return this;
     }
   });
+
   /**
    * A static zero Vector2 for use by reference.
    * 
@@ -2712,8 +2488,8 @@
    * @type {Phaser.Math.Vector2}
    * @since 3.1.0
    */
-
   Vector2$1.ZERO = new Vector2$1();
+
   /**
    * A static right Vector2 for use by reference.
    * 
@@ -2724,8 +2500,8 @@
    * @type {Phaser.Math.Vector2}
    * @since 3.16.0
    */
-
   Vector2$1.RIGHT = new Vector2$1(1, 0);
+
   /**
    * A static left Vector2 for use by reference.
    * 
@@ -2736,8 +2512,8 @@
    * @type {Phaser.Math.Vector2}
    * @since 3.16.0
    */
-
   Vector2$1.LEFT = new Vector2$1(-1, 0);
+
   /**
    * A static up Vector2 for use by reference.
    * 
@@ -2748,8 +2524,8 @@
    * @type {Phaser.Math.Vector2}
    * @since 3.16.0
    */
-
   Vector2$1.UP = new Vector2$1(0, -1);
+
   /**
    * A static down Vector2 for use by reference.
    * 
@@ -2760,8 +2536,8 @@
    * @type {Phaser.Math.Vector2}
    * @since 3.16.0
    */
-
   Vector2$1.DOWN = new Vector2$1(0, 1);
+
   /**
    * A static one Vector2 for use by reference.
    * 
@@ -2772,7 +2548,6 @@
    * @type {Phaser.Math.Vector2}
    * @since 3.16.0
    */
-
   Vector2$1.ONE = new Vector2$1(1, 1);
 
   /**
@@ -2780,6 +2555,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * @classdesc
    * Defines a Line segment, a part of a line between two endpoints.
@@ -2794,24 +2570,21 @@
    * @param {number} [x2=0] - The x coordinate of the lines ending point.
    * @param {number} [y2=0] - The y coordinate of the lines ending point.
    */
-
   var Line = new Class({
     initialize: function Line(x1, y1, x2, y2) {
       if (x1 === undefined) {
         x1 = 0;
       }
-
       if (y1 === undefined) {
         y1 = 0;
       }
-
       if (x2 === undefined) {
         x2 = 0;
       }
-
       if (y2 === undefined) {
         y2 = 0;
       }
+
       /**
        * The x coordinate of the lines starting point.
        *
@@ -2819,9 +2592,8 @@
        * @type {number}
        * @since 3.0.0
        */
-
-
       this.x1 = x1;
+
       /**
        * The y coordinate of the lines starting point.
        *
@@ -2829,8 +2601,8 @@
        * @type {number}
        * @since 3.0.0
        */
-
       this.y1 = y1;
+
       /**
        * The x coordinate of the lines ending point.
        *
@@ -2838,8 +2610,8 @@
        * @type {number}
        * @since 3.0.0
        */
-
       this.x2 = x2;
+
       /**
        * The y coordinate of the lines ending point.
        *
@@ -2847,10 +2619,8 @@
        * @type {number}
        * @since 3.0.0
        */
-
       this.y2 = y2;
     },
-
     /**
      * Get a point on a line that's a given percentage along its length.
      *
@@ -2867,7 +2637,6 @@
     getPoint: function getPoint(position, output) {
       return GetPoint(this, position, output);
     },
-
     /**
      * Get a number of points along a line's length.
      *
@@ -2890,7 +2659,6 @@
     getPoints: function getPoints(quantity, stepRate, output) {
       return GetPoints(this, quantity, stepRate, output);
     },
-
     /**
      * Get a random Point on the Line.
      *
@@ -2906,7 +2674,6 @@
     getRandomPoint: function getRandomPoint(point) {
       return Random$1(this, point);
     },
-
     /**
      * Set new coordinates for the line endpoints.
      *
@@ -2924,26 +2691,21 @@
       if (x1 === undefined) {
         x1 = 0;
       }
-
       if (y1 === undefined) {
         y1 = 0;
       }
-
       if (x2 === undefined) {
         x2 = 0;
       }
-
       if (y2 === undefined) {
         y2 = 0;
       }
-
       this.x1 = x1;
       this.y1 = y1;
       this.x2 = x2;
       this.y2 = y2;
       return this;
     },
-
     /**
      * Returns a Vector2 object that corresponds to the start of this Line.
      *
@@ -2960,11 +2722,9 @@
       if (vec2 === undefined) {
         vec2 = new Vector2$1();
       }
-
       vec2.set(this.x1, this.y1);
       return vec2;
     },
-
     /**
      * Returns a Vector2 object that corresponds to the end of this Line.
      *
@@ -2981,11 +2741,9 @@
       if (vec2 === undefined) {
         vec2 = new Vector2$1();
       }
-
       vec2.set(this.x2, this.y2);
       return vec2;
     },
-
     /**
      * The left position of the Line.
      *
@@ -3005,7 +2763,6 @@
         }
       }
     },
-
     /**
      * The right position of the Line.
      *
@@ -3025,7 +2782,6 @@
         }
       }
     },
-
     /**
      * The top position of the Line.
      *
@@ -3045,7 +2801,6 @@
         }
       }
     },
-
     /**
      * The bottom position of the Line.
      *
@@ -3072,6 +2827,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Returns a random point within a Rectangle.
    *
@@ -3085,12 +2841,10 @@
    *
    * @return {Phaser.Geom.Point} The modified `out` object, or a new Point if none was provided.
    */
-
   var Random = function Random(rect, out) {
     if (out === undefined) {
       out = new Point();
     }
-
     out.x = rect.x + Math.random() * rect.width;
     out.y = rect.y + Math.random() * rect.height;
     return out;
@@ -3101,6 +2855,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * @classdesc
    * Encapsulates a 2D rectangle defined by its corner point in the top-left and its extends in x (width) and y (height)
@@ -3115,24 +2870,21 @@
    * @param {number} [width=0] - The width of the Rectangle.
    * @param {number} [height=0] - The height of the Rectangle.
    */
-
   var Rectangle$2 = new Class({
     initialize: function Rectangle(x, y, width, height) {
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = 0;
       }
-
       if (height === undefined) {
         height = 0;
       }
+
       /**
        * The X coordinate of the top left corner of the Rectangle.
        *
@@ -3141,9 +2893,8 @@
        * @default 0
        * @since 3.0.0
        */
-
-
       this.x = x;
+
       /**
        * The Y coordinate of the top left corner of the Rectangle.
        *
@@ -3152,8 +2903,8 @@
        * @default 0
        * @since 3.0.0
        */
-
       this.y = y;
+
       /**
        * The width of the Rectangle, i.e. the distance between its left side (defined by `x`) and its right side.
        *
@@ -3162,8 +2913,8 @@
        * @default 0
        * @since 3.0.0
        */
-
       this.width = width;
+
       /**
        * The height of the Rectangle, i.e. the distance between its top side (defined by `y`) and its bottom side.
        *
@@ -3172,10 +2923,8 @@
        * @default 0
        * @since 3.0.0
        */
-
       this.height = height;
     },
-
     /**
      * Checks if the given point is inside the Rectangle's bounds.
      *
@@ -3190,7 +2939,6 @@
     contains: function contains(x, y) {
       return Contains$1(this, x, y);
     },
-
     /**
      * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
      * 
@@ -3211,7 +2959,6 @@
     getPoint: function getPoint(position, output) {
       return GetPoint$1(this, position, output);
     },
-
     /**
      * Returns an array of points from the perimeter of the Rectangle, each spaced out based on the quantity or step required.
      *
@@ -3229,7 +2976,6 @@
     getPoints: function getPoints(quantity, stepRate, output) {
       return GetPoints$1(this, quantity, stepRate, output);
     },
-
     /**
      * Returns a random point within the Rectangle's bounds.
      *
@@ -3245,7 +2991,6 @@
     getRandomPoint: function getRandomPoint(point) {
       return Random(this, point);
     },
-
     /**
      * Sets the position, width, and height of the Rectangle.
      *
@@ -3266,7 +3011,6 @@
       this.height = height;
       return this;
     },
-
     /**
      * Resets the position, width, and height of the Rectangle to 0.
      *
@@ -3278,7 +3022,6 @@
     setEmpty: function setEmpty() {
       return this.setTo(0, 0, 0, 0);
     },
-
     /**
      * Sets the position of the Rectangle.
      *
@@ -3294,12 +3037,10 @@
       if (y === undefined) {
         y = x;
       }
-
       this.x = x;
       this.y = y;
       return this;
     },
-
     /**
      * Sets the width and height of the Rectangle.
      *
@@ -3315,12 +3056,10 @@
       if (height === undefined) {
         height = width;
       }
-
       this.width = width;
       this.height = height;
       return this;
     },
-
     /**
      * Determines if the Rectangle is empty. A Rectangle is empty if its width or height is less than or equal to 0.
      *
@@ -3332,7 +3071,6 @@
     isEmpty: function isEmpty() {
       return this.width <= 0 || this.height <= 0;
     },
-
     /**
      * Returns a Line object that corresponds to the top of this Rectangle.
      *
@@ -3349,11 +3087,9 @@
       if (line === undefined) {
         line = new Line();
       }
-
       line.setTo(this.x, this.y, this.right, this.y);
       return line;
     },
-
     /**
      * Returns a Line object that corresponds to the right of this Rectangle.
      *
@@ -3370,11 +3106,9 @@
       if (line === undefined) {
         line = new Line();
       }
-
       line.setTo(this.right, this.y, this.right, this.bottom);
       return line;
     },
-
     /**
      * Returns a Line object that corresponds to the bottom of this Rectangle.
      *
@@ -3391,11 +3125,9 @@
       if (line === undefined) {
         line = new Line();
       }
-
       line.setTo(this.right, this.bottom, this.x, this.bottom);
       return line;
     },
-
     /**
      * Returns a Line object that corresponds to the left of this Rectangle.
      *
@@ -3412,11 +3144,9 @@
       if (line === undefined) {
         line = new Line();
       }
-
       line.setTo(this.x, this.bottom, this.x, this.y);
       return line;
     },
-
     /**
      * The x coordinate of the left of the Rectangle.
      * Changing the left property of a Rectangle object has no effect on the y and height properties. However it does affect the width property, whereas changing the x value does not affect the width property.
@@ -3435,11 +3165,9 @@
         } else {
           this.width = this.right - value;
         }
-
         this.x = value;
       }
     },
-
     /**
      * The sum of the x and width properties.
      * Changing the right property of a Rectangle object has no effect on the x, y and height properties, however it does affect the width property.
@@ -3460,7 +3188,6 @@
         }
       }
     },
-
     /**
      * The y coordinate of the top of the Rectangle. Changing the top property of a Rectangle object has no effect on the x and width properties.
      * However it does affect the height property, whereas changing the y value does not affect the height property.
@@ -3479,11 +3206,9 @@
         } else {
           this.height = this.bottom - value;
         }
-
         this.y = value;
       }
     },
-
     /**
      * The sum of the y and height properties.
      * Changing the bottom property of a Rectangle object has no effect on the x, y and width properties, but does change the height property.
@@ -3504,7 +3229,6 @@
         }
       }
     },
-
     /**
      * The x coordinate of the center of the Rectangle.
      *
@@ -3520,7 +3244,6 @@
         this.x = value - this.width / 2;
       }
     },
-
     /**
      * The y coordinate of the center of the Rectangle.
      *
@@ -3543,6 +3266,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Creates a new Rectangle or repositions and/or resizes an existing Rectangle so that it encompasses the two given Rectangles, i.e. calculates their union.
    *
@@ -3557,13 +3281,12 @@
    *
    * @return {Phaser.Geom.Rectangle} The modified `out` Rectangle, or a new Rectangle if none was provided.
    */
-
   var Union$1 = function Union(rectA, rectB, out) {
     if (out === undefined) {
       out = new Rectangle$2();
-    } //  Cache vars so we can use one of the input rects as the output rect
+    }
 
-
+    //  Cache vars so we can use one of the input rects as the output rect
     var x = Math.min(rectA.x, rectB.x);
     var y = Math.min(rectA.y, rectB.y);
     var w = Math.max(rectA.right, rectB.right) - x;
@@ -3577,11 +3300,9 @@
     } else if (out === true) {
       out = globalBounds$2;
     }
-
     var isFirstTile = true;
     this.forEachTileXY(function (tileXY, board) {
       var tileBounds = board.getGridBounds(tileXY.x, tileXY.y, true);
-
       if (isFirstTile) {
         out.setTo(tileBounds.x, tileBounds.y, tileBounds.width, tileBounds.height);
         isFirstTile = false;
@@ -3591,7 +3312,6 @@
     });
     return out;
   };
-
   var globalBounds$2 = new Rectangle$2();
 
   /**
@@ -3654,36 +3374,29 @@
       endX = line.x2;
       endY = line.y2;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     var totalDistance = DistanceBetween$3(startX, startY, endX, endY);
     var gridSize = Math.min(this.grid.cellWidth, this.grid.cellHeight);
     var quantity = Math.ceil(totalDistance / (gridSize / 4)),
-        t;
+      t;
     var worldX, worldY;
     var preTileXY, tileXY;
-
     for (var i = 0; i <= quantity; i++) {
       t = i / quantity;
       worldX = Linear(startX, endX, t);
       worldY = Linear(startY, endY, t);
       tileXY = this.worldXYToTileXY(worldX, worldY);
-
       if (!this.contains(tileXY.x, tileXY.y)) {
         continue;
       }
-
       if (preTileXY && AreTileXYEqual(preTileXY, tileXY)) {
         continue;
       }
-
       out.push(tileXY);
       preTileXY = tileXY;
     }
-
     return out;
   };
 
@@ -3700,6 +3413,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Calculates the bounding AABB rectangle of a polygon.
    *
@@ -3713,18 +3427,15 @@
    *
    * @return {(Phaser.Geom.Rectangle|object)} The resulting rectangle or object that is passed in with position and dimensions of the polygon's AABB.
    */
-
   var GetAABB = function GetAABB(polygon, out) {
     if (out === undefined) {
       out = new Rectangle$2();
     }
-
     var minX = Infinity;
     var minY = Infinity;
     var maxX = -minX;
     var maxY = -minY;
     var p;
-
     for (var i = 0; i < polygon.points.length; i++) {
       p = polygon.points[i];
       minX = Math.min(minX, p.x);
@@ -3732,7 +3443,6 @@
       maxX = Math.max(maxX, p.x);
       maxY = Math.max(maxY, p.y);
     }
-
     out.x = minX;
     out.y = minY;
     out.width = maxX - minX;
@@ -3745,7 +3455,6 @@
       out = testMode;
       testMode = undefined;
     }
-
     globSearchRectangle = GetAABB(polygon, globSearchRectangle);
     var config = {
       testMode: testMode,
@@ -3753,7 +3462,6 @@
     };
     return this.shapeToTileXYArray(polygon, config, out);
   };
-
   var globSearchRectangle;
 
   var RectangleToTileXYArray = function RectangleToTileXYArray(rectangle, testMode, out) {
@@ -3770,16 +3478,13 @@
         testMode: config
       };
     }
-
     if (Array.isArray(config)) {
       out = config;
       config = undefined;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     this.forEachTileXYInShape(shape, function (tileXY) {
       out.push({
         x: tileXY.x,
@@ -3793,17 +3498,15 @@
     var testMode = GetValue$c(config, 'testMode', 0);
     var searchRectangle = GetValue$c(config, 'searchRectangle', shape);
     GetValue$c(config, 'order', 0);
-
     if (scope) {
       callback = callback.bind(scope);
     }
-
     globLeftToptileXY = this.worldXYToTileXY(searchRectangle.left, searchRectangle.top, globLeftToptileXY);
     globRightBottomTileXY = this.worldXYToTileXY(searchRectangle.right, searchRectangle.bottom, globRightBottomTileXY);
     var left = globLeftToptileXY.x - 1,
-        top = globLeftToptileXY.y - 1,
-        right = globRightBottomTileXY.x + 1,
-        bottom = globRightBottomTileXY.y + 1;
+      top = globLeftToptileXY.y - 1,
+      right = globRightBottomTileXY.x + 1,
+      bottom = globRightBottomTileXY.y + 1;
     this.forEachTileXY(function (tileXY, board) {
       if (IsInShape(board, shape, tileXY.x, tileXY.y, testMode)) {
         return callback(tileXY, board);
@@ -3816,67 +3519,52 @@
     });
     return this;
   };
-
   var IsInShape = function IsInShape(board, shape, x, y, testMode) {
     var targetWorldXY = board.tileXYToWorldXY(x, y, true);
-
     if (shape.contains(targetWorldXY.x, targetWorldXY.y)) {
       return true;
     }
-
     switch (testMode) {
       case 1:
         // Test grid bounds (a rectangle)
         var rect = board.getGridBounds(x, y, true);
         return OverlapRectangle(shape, rect);
-
       case 2:
         // Test grid points
         var points = board.getGridPoints(x, y, true);
         return ContainsAnyPoint(shape, points);
-
       default:
         return false;
     }
   };
-
   var OverlapRectangle = function OverlapRectangle(shape, rectangle) {
     var top = rectangle.top,
-        bottom = rectangle.bottom,
-        left = rectangle.left,
-        right = rectangle.right;
-
+      bottom = rectangle.bottom,
+      left = rectangle.left,
+      right = rectangle.right;
     if (shape.contains(left, top)) {
       return true;
     }
-
     if (shape.contains(left, bottom)) {
       return true;
     }
-
     if (shape.contains(right, top)) {
       return true;
     }
-
     if (shape.contains(right, bottom)) {
       return true;
     }
-
     return false;
   };
-
   var ContainsAnyPoint = function ContainsAnyPoint(shape, points) {
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       var point = points[i];
-
       if (shape.contains(point.x, point.y)) {
         return true;
       }
     }
-
     return false;
   };
-
   var globLeftToptileXY, globRightBottomTileXY;
 
   var UidToChess = function UidToChess(uid) {
@@ -3886,7 +3574,6 @@
       if (!this.boardData.exists(uid)) {
         return null;
       }
-
       return ChessBank.get(uid).parent;
     }
   };
@@ -3895,13 +3582,10 @@
     if (!this.contains(tileX, tileY)) {
       return this;
     }
-
     if (align === undefined) {
       align = true;
     }
-
     var curTileXYZ = this.chessToTileXYZ(gameObject);
-
     if (tileZ === undefined) {
       if (curTileXYZ) {
         tileZ = curTileXYZ.z;
@@ -3909,34 +3593,25 @@
         tileZ = 0;
       }
     }
-
     if (curTileXYZ && curTileXYZ.x === tileX && curTileXYZ.y === tileY && curTileXYZ.z === tileZ) {
       // Move to current position
       return this;
     }
-
     var occupiedChess = this.tileXYZToChess(tileX, tileY, tileZ);
-
     if (occupiedChess) {
       this.emit('kickout', gameObject, occupiedChess, curTileXYZ);
     }
-
     this.removeChess(gameObject);
-
     if (occupiedChess) {
       this.removeChess(occupiedChess, tileX, tileY, tileZ);
     }
-
     this.boardData.addUID(this.getChessUID(gameObject), tileX, tileY, tileZ);
-
     if (this.isBoard) {
       this.getChessData(gameObject).setBoard(this);
     }
-
     if (align) {
       this.gridAlign(gameObject, tileX, tileY);
     }
-
     return this;
   };
 
@@ -3944,13 +3619,10 @@
     if (align === undefined) {
       align = false;
     }
-
     var tileXYZ = this.chessToTileXYZ(chess);
-
     if (tileXYZ) {
       this.moveChess(chess, tileXYZ.x, tileXYZ.y, tileZ, align);
     }
-
     return this;
   };
 
@@ -3958,14 +3630,11 @@
     if (destroy === undefined) {
       destroy = false;
     }
-
     if (fromBoardRemove === undefined) {
       fromBoardRemove = false;
     }
-
     if (gameObject) {
       var tileXYZ = this.chessToTileXYZ(gameObject);
-
       if (tileXYZ) {
         tileX = tileXYZ.x;
         tileY = tileXYZ.y;
@@ -3976,35 +3645,28 @@
       }
     } else {
       gameObject = this.tileXYZToChess(tileX, tileY, tileZ);
-
       if (!gameObject) {
         // chess is not in this board
         return this;
       }
     }
-
     if (!fromBoardRemove) {
       this.boardData.removeUID(tileX, tileY, tileZ);
     }
-
     if (this.isBoard) {
       this.getChessData(gameObject).setBoard(null);
     }
-
     if (destroy && gameObject.destroy) {
       gameObject.destroy();
     }
-
     return this;
   };
 
   var RemoveAllChess$1 = function RemoveAllChess(destroy, fromBoardRemove) {
     var chess = this.getAllChess();
-
     for (var i = 0, cnt = chess.length; i < cnt; i++) {
       this.removeChess(chess[i], undefined, undefined, undefined, destroy, fromBoardRemove);
     }
-
     return this;
   };
 
@@ -4012,14 +3674,11 @@
     if (align === undefined) {
       align = true;
     }
-
     var tileXYZA = this.chessToTileXYZ(gameObjectA);
     var tileXYZB = this.chessToTileXYZ(gameObjectB);
-
     if (tileXYZA == null || tileXYZB == null) {
       return this;
     }
-
     this.removeChess(gameObjectA);
     this.removeChess(gameObjectB);
     this.addChess(gameObjectA, tileXYZB.x, tileXYZB.y, tileXYZB.z, align);
@@ -4031,29 +3690,23 @@
     if (out === undefined) {
       out = [];
     }
-
     var uids = this.boardData.UIDToXYZ;
-
     for (var uid in uids) {
       out.push(this.uidToChess(uid));
     }
-
     return out;
   };
 
   var Contains = function Contains(tileX, tileY, tileZ) {
     var result;
-
     if (this.infinityMode) {
       result = true;
     } else {
       result = tileX >= 0 && tileX < this.width && tileY >= 0 && tileY < this.height;
     }
-
     if (result && tileZ !== undefined) {
       result = this.boardData.contains(tileX, tileY, tileZ);
     }
-
     return result;
   };
 
@@ -4085,118 +3738,94 @@
         order: config
       };
     }
-
     var lastX = this.width - 1,
-        lastY = this.height - 1;
+      lastY = this.height - 1;
     var order = GetValue$c(config, 'order', 0);
     var left = GetValue$c(config, 'left', 0);
     var right = GetValue$c(config, 'right', lastX);
     var top = GetValue$c(config, 'top', 0);
     var bottom = GetValue$c(config, 'bottom', lastY);
-
     if (!this.infinityMode) {
       left = Clamp(left, 0, lastX);
       top = Clamp(top, 0, lastY);
       right = Clamp(right, 0, lastX);
       bottom = Clamp(bottom, 0, lastY);
     }
-
     switch (order) {
       case 0:
         // x+,y+
         var isBreak;
-
         for (var y = top; y <= bottom; y++) {
           for (var x = left; x <= right; x++) {
             globTileXY$h.x = x;
             globTileXY$h.y = y;
-
             if (scope) {
               isBreak = callback.call(scope, globTileXY$h, this);
             } else {
               isBreak = callback(globTileXY$h, this);
             }
-
             if (isBreak) {
               break;
             }
           }
         }
-
         break;
-
       case 1:
         // x-,y+
         var isBreak;
-
         for (var y = top; y <= bottom; y++) {
           for (var x = right; x >= left; x--) {
             globTileXY$h.x = x;
             globTileXY$h.y = y;
-
             if (scope) {
               isBreak = callback.call(scope, globTileXY$h, this);
             } else {
               isBreak = callback(globTileXY$h, this);
             }
-
             if (isBreak) {
               break;
             }
           }
         }
-
         break;
-
       case 2:
         // y+,x+
         var isBreak;
-
         for (var x = left; x <= right; x++) {
           for (var y = top; y <= bottom; y++) {
             globTileXY$h.x = x;
             globTileXY$h.y = y;
-
             if (scope) {
               isBreak = callback.call(scope, globTileXY$h, this);
             } else {
               isBreak = callback(globTileXY$h, this);
             }
-
             if (isBreak) {
               break;
             }
           }
         }
-
         break;
-
       case 3:
         // y-,x+
         var isBreak;
-
         for (var x = left; x <= right; x++) {
           for (var y = bottom; y >= top; y--) {
             globTileXY$h.x = x;
             globTileXY$h.y = y;
-
             if (scope) {
               isBreak = callback.call(scope, globTileXY$h, this);
             } else {
               isBreak = callback(globTileXY$h, this);
             }
-
             if (isBreak) {
               break;
             }
           }
         }
-
     }
-
     return this;
   };
-
   var globTileXY$h = {
     x: 0,
     y: 0
@@ -4231,24 +3860,20 @@
     } else if (out === true) {
       out = globTileXY$g;
     }
-
     if (this.wrapMode) {
       tileX = Wrap(tileX, 0, this.width);
     } else if (!this.infinityMode && (tileX < 0 || tileX >= this.width)) {
       tileX = null;
     }
-
     if (this.wrapMode) {
       tileY = Wrap(tileY, 0, this.height);
     } else if (!this.infinityMode && (tileY < 0 || tileY >= this.height)) {
       tileY = null;
     }
-
     out.x = tileX;
     out.y = tileY;
     return out;
   };
-
   var globTileXY$g = {};
 
   var TileXYZToChess = function TileXYZToChess(tileX, tileY, tileZ) {
@@ -4260,17 +3885,13 @@
     if (out === undefined) {
       out = [];
     }
-
     var tileZToUIDs = this.boardData.getUID(tileX, tileY);
-
     if (tileZToUIDs == null) {
       return out;
     }
-
     for (var tileZ in tileZToUIDs) {
       out.push(this.uidToChess(tileZToUIDs[tileZ]));
     }
-
     return out;
   };
 
@@ -4278,20 +3899,15 @@
     if (out === undefined) {
       out = [];
     }
-
     var uids = this.boardData.UIDToXYZ;
     var tileXYZ;
-
     for (var uid in uids) {
       tileXYZ = uids[uid];
-
       if (tileXYZ.z !== tileZ) {
         continue;
       }
-
       out.push(this.uidToChess(uid));
     }
-
     return out;
   };
 
@@ -4300,24 +3916,19 @@
       out = tileZ;
       tileZ = undefined;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     var tileZMode = tileZ != null;
     var tileXY;
-
     for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
       tileXY = tileXYArray[i];
-
       if (tileZMode) {
         out.push(this.tileXYZToChess(tileXY.x, tileXY.y, tileZ));
       } else {
         this.tileXYToChessArray(tileXY.x, tileXY.y, out);
       }
     }
-
     return out;
   };
 
@@ -4337,9 +3948,9 @@
   var ChessToTileXYZ = function ChessToTileXYZ(chess) {
     if (!chess) {
       return null;
-    } // chess: chess object, UID, or tileXYZ
+    }
 
-
+    // chess: chess object, UID, or tileXYZ
     if (IsUID(chess) || IsChess(chess)) {
       // UID, or game object
       var uid = GetChessUID(chess);
@@ -4360,7 +3971,6 @@
       tileX = tileXY.x;
       tileY = tileXY.y;
     }
-
     return this.grid.getOppositeDirection(tileX, tileY, direction);
   };
 
@@ -4374,7 +3984,6 @@
     if (round === undefined) {
       round = true;
     }
-
     var tileA = this.chessToTileXYZ(chessA);
     var tileB = this.chessToTileXYZ(chessB);
     return this.grid.directionBetween(tileA, tileB, round);
@@ -4384,7 +3993,6 @@
     var tileXYA = this.chessToTileXYZ(chessA);
     var tileXYB = this.chessToTileXYZ(chessB);
     var savedDirections = this.grid.directions; // Save directions
-
     this.grid.setDirectionMode(this.sides);
     var direction = this.grid.directionBetween(tileXYA, tileXYB, false);
     this.grid.setDirectionMode(savedDirections); // Restore directions
@@ -4400,17 +4008,14 @@
     } else if (out === true) {
       out = globTileXY$f;
     }
-
     if (OffsetTileX === 0 && OffsetTileY === 0) {
       out.x = tileXY.x;
       out.y = tileXY.y;
     } else {
       this.grid.offset(tileXY, OffsetTileX, OffsetTileY, out);
     }
-
     return out;
   };
-
   var globTileXY$f = {};
 
   var Mirror$4 = function Mirror(tileXY, mode, originTileXY, out) {
@@ -4419,23 +4024,18 @@
     } else if (out === true) {
       out = globTileXY$e;
     }
-
     if (originTileXY !== undefined) {
       this.offset(tileXY, -originTileXY.x, -originTileXY.y, out);
     } else {
       out.x = tileXY.x;
       out.y = tileXY.y;
     }
-
     this.grid.mirror(out, mode, out);
-
     if (originTileXY !== undefined) {
       this.offset(out, originTileXY.x, originTileXY.y, out);
     }
-
     return out;
   };
-
   var globTileXY$e = {};
 
   var Rotate$4 = function Rotate(tileXY, direction, originTileXY, out) {
@@ -4444,23 +4044,18 @@
     } else if (out === true) {
       out = globTileXY$d;
     }
-
     if (originTileXY !== undefined) {
       this.offset(tileXY, -originTileXY.x, -originTileXY.y, out);
     } else {
       out.x = tileXY.x;
       out.y = tileXY.y;
     }
-
     this.grid.rotate(out, direction, out);
-
     if (originTileXY !== undefined) {
       this.offset(out, originTileXY.x, originTileXY.y, out);
     }
-
     return out;
   };
-
   var globTileXY$d = {};
 
   // Offset tileXYArray to (0,0), and set board size to fit tileXYArray
@@ -4469,32 +4064,28 @@
     var minX = Infinity;
     var minY = Infinity;
     var tileXY;
-
     for (var i in tileXYArray) {
       tileXY = tileXYArray[i];
       minX = Math.min(minX, tileXY.x);
       minY = Math.min(minY, tileXY.y);
-    } // Offset tileXYArray to (0,0)
-
-
+    }
+    // Offset tileXYArray to (0,0)
     if (minX !== 0 || minY !== 0) {
       for (var i in tileXYArray) {
         tileXY = tileXYArray[i];
         this.offset(tileXY, -minX, -minY, tileXY);
       }
-    } // Get maximun tileX, tileY
+    }
 
-
+    // Get maximun tileX, tileY
     var maxX = -Infinity;
     var maxY = -Infinity;
-
     for (var i in tileXYArray) {
       tileXY = tileXYArray[i];
       maxX = Math.max(maxX, tileXY.x);
       maxY = Math.max(maxY, tileXY.y);
-    } // Set board size
-
-
+    }
+    // Set board size
     this.setBoardWidth(maxX + 1);
     this.setBoardHeight(maxY + 1);
     return tileXYArray;
@@ -4509,11 +4100,9 @@
     if (tileZ === undefined) {
       tileZ = 0;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     for (var tileY = 0; tileY < this.height; tileY++) {
       for (var tileX = 0; tileX < this.width; tileX++) {
         if (this.isEmptyTileXYZ(tileX, tileY, tileZ)) {
@@ -4524,7 +4113,6 @@
         }
       }
     }
-
     return out;
   };
 
@@ -4571,11 +4159,9 @@
     if (startIndex === undefined) {
       startIndex = 0;
     }
-
     if (length === undefined) {
       length = array.length;
     }
-
     var randomIndex = startIndex + Math.floor(Math.random() * length);
     return array[randomIndex] === undefined ? null : array[randomIndex];
   };
@@ -4584,31 +4170,26 @@
     if (tileZ === undefined) {
       tileZ = 0;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globTileXY$c;
     }
-
     var tileX, tileY;
     var isOccupied = true;
     var tryCount = 20;
-
     while (isOccupied && tryCount > 0) {
       tileX = Between(0, this.width - 1);
       tileY = Between(0, this.height - 1);
       isOccupied = this.tileXYZToChess(tileX, tileY, tileZ) !== null;
       tryCount--;
     }
-
     if (!isOccupied) {
       out.x = tileX;
       out.y = tileY;
       return out;
     } else {
       globTileXYArray$3 = this.getEmptyTileXYArray(tileZ, globTileXYArray$3);
-
       if (globTileXYArray$3.length === 0) {
         return null;
       } else {
@@ -4620,7 +4201,6 @@
       }
     }
   };
-
   var globTileXYArray$3 = [];
   var globTileXY$c = {};
 
@@ -4628,31 +4208,24 @@
     if (radius === undefined) {
       radius = 1;
     }
-
     if (tileZ === undefined) {
       tileZ = 0;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     centerTileXY = this.chessToTileXYZ(centerTileXY);
     this.grid.ringToTileXYArray(centerTileXY, radius, globTileXYArray$2);
     var tileXY;
-
     for (var i = 0, cnt = globTileXYArray$2.length; i < cnt; i++) {
       tileXY = globTileXYArray$2[i];
-
       if (this.isEmptyTileXYZ(tileXY.x, tileXY.y, tileZ)) {
         out.push(tileXY);
       }
     }
-
     globTileXYArray$2.length = 0;
     return out;
   };
-
   var globTileXYArray$2 = [];
 
   /**
@@ -4680,7 +4253,6 @@
       array[i] = array[j];
       array[j] = temp;
     }
-
     return array;
   };
 
@@ -4688,25 +4260,20 @@
     if (radius === undefined) {
       radius = 1;
     }
-
     if (tileZ === undefined) {
       tileZ = 0;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globTileXY$b;
     }
-
     centerTileXY = this.chessToTileXYZ(centerTileXY);
     this.grid.ringToTileXYArray(centerTileXY, radius, globTileXYArray$1);
     Shuffle(globTileXYArray$1);
     var tileXY;
-
     for (var i = 0, cnt = globTileXYArray$1.length; i < cnt; i++) {
       tileXY = globTileXYArray$1[i];
-
       if (this.isEmptyTileXYZ(tileXY.x, tileXY.y, tileZ)) {
         out.x = tileXY.x;
         out.y = tileXY.y;
@@ -4714,21 +4281,17 @@
         return out;
       }
     }
-
     globTileXYArray$1.length = 0;
     return null;
   };
-
   var globTileXYArray$1 = [];
   var globTileXY$b = {};
 
   var GetTileXYAtDirection = function GetTileXYAtDirection(chess, directions, distance, out) {
     var srcTileXY = this.chessToTileXYZ(chess);
-
     if (!srcTileXY) {
       return null;
     }
-
     if (typeof directions === 'string') {
       if (directions.indexOf(',') === -1) {
         directions = parseInt(directions);
@@ -4736,16 +4299,12 @@
         directions = directions.split(',');
       }
     }
-
     var isNumberDirection = typeof directions === 'number';
     var isNumberDistance = typeof distance === 'number';
-
     if (isNumberDirection && isNumberDistance) {
       // Return a single tileXY
       out = this.grid.getTileXYAtDirection(srcTileXY.x, srcTileXY.y, directions, distance, out); // directions is a number, distance is a number, return a singl tileXY
-
       this.getWrapTileXY(out.x, out.y, out);
-
       if (out.x == null || out.y == null) {
         out = null;
       } else {
@@ -4756,30 +4315,24 @@
       if (out === undefined) {
         out = [];
       }
-
       if (directions == null) {
         directions = this.grid.allDirections;
       }
-
       var resultTileXY;
-
       if (isNumberDirection) {
         // directions is a number, distance is an object or list
         if (IsPlainObject(distance)) {
           var endIdx = GetValue$c(distance, 'end', 1);
           var startIdx = GetValue$c(distance, 'start', endIdx > 0 ? 1 : -1);
           var step = GetValue$c(distance, 'step', endIdx >= startIdx ? 1 : -1);
-
           if (startIdx === endIdx) {
             resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, endIdx); // Return a single tileXY
-
             if (resultTileXY !== null) {
               out.push(resultTileXY);
             }
           } else if (startIdx < endIdx) {
             for (var i = startIdx; i <= endIdx; i += step) {
               resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // Return a single tileXY
-
               if (resultTileXY !== null) {
                 out.push(resultTileXY);
               }
@@ -4787,7 +4340,6 @@
           } else {
             for (var i = startIdx; i >= endIdx; i += step) {
               resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, i); // Return a single tileXY
-
               if (resultTileXY !== null) {
                 out.push(resultTileXY);
               }
@@ -4797,7 +4349,6 @@
           // Is array
           for (var i = 0, cnt = distance.length; i < cnt; i++) {
             resultTileXY = this.getTileXYAtDirection(srcTileXY, directions, distance[i]);
-
             if (resultTileXY !== null) {
               out.push(resultTileXY);
             }
@@ -4809,7 +4360,6 @@
           if (isNumberDistance) {
             // return a single tileXY
             resultTileXY = this.getTileXYAtDirection(srcTileXY, directions[i], distance);
-
             if (resultTileXY !== null) {
               out.push(resultTileXY);
             }
@@ -4820,7 +4370,6 @@
         }
       }
     }
-
     return out;
   };
 
@@ -4835,83 +4384,63 @@
 
   var GetNeighborChess = function GetNeighborChess(tileXYZ, directions, neighborTileZ, out) {
     var tileXYZ = this.chessToTileXYZ(tileXYZ);
-
     if (tileXYZ === null) {
       return null;
     }
-
     if (neighborTileZ == null) {
       neighborTileZ = tileXYZ.z;
     }
-
     var typeOfDirection = _typeof(directions);
-
     if (typeOfDirection === 'number' || typeOfDirection === 'string' && directions.indexOf(',') === -1) {
       // 1 direction
       var dir = directions;
       var neighborTileXY = this.getNeighborTileXY(tileXYZ, dir, true);
-
       if (neighborTileXY === null) {
         return null;
       }
-
       return this.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, neighborTileZ);
     } else {
       // directions array
       if (out === undefined) {
         out = [];
       }
-
       this.getNeighborTileXY(tileXYZ, directions, globTileXYArray);
       var neighborChess;
-
       for (var i = 0, cnt = globTileXYArray.length; i < cnt; i++) {
         neighborChess = this.tileXYZToChess(globTileXYArray[i].x, globTileXYArray[i].y, neighborTileZ);
-
         if (neighborChess == null) {
           continue;
         }
-
         out.push(neighborChess);
       }
-
       globTileXYArray.length = 0;
       return out;
     }
   };
-
   var globTileXYArray = [];
 
   var GetNeighborTileDirection$2 = function GetNeighborTileDirection(srcTileXY, neighborTileXY) {
     if (srcTileXY === null || neighborTileXY === null) {
       return null;
     }
-
     srcTileXY = this.chessToTileXYZ(srcTileXY);
     neighborTileXY = this.chessToTileXYZ(neighborTileXY);
-
     if (AreTileXYEqual(srcTileXY, neighborTileXY)) {
       return null;
     }
-
     var direction = this.grid.getNeighborTileDirection(srcTileXY, neighborTileXY);
-
     if (this.wrapMode && direction === null) {
       globNeighborTileXYArray = this.getNeighborTileXY(srcTileXY, null, globNeighborTileXYArray);
-
       for (var i = 0, cnt = globNeighborTileXYArray.length; i < cnt; i++) {
         if (AreTileXYEqual(neighborTileXY, globNeighborTileXYArray[i])) {
           direction = i;
           break;
         }
       }
-
       globNeighborTileXYArray.length = 0;
     }
-
     return direction;
   };
-
   var globNeighborTileXYArray = [];
 
   var GetNeighborChessDirection = function GetNeighborChessDirection(chess, neighborChess) {
@@ -4930,9 +4459,8 @@
       callback = distance;
       distance = 1;
     }
-
-    var tileXYArray = this.getTileXYAtDirection(chess, undefined, distance); // Array of {x,y,direction}
-
+    var tileXYArray = this.getTileXYAtDirection(chess, undefined, distance);
+    // Array of {x,y,direction}
     return tileXYArray.map(callback, scope);
   };
 
@@ -4940,23 +4468,18 @@
     if (out === undefined) {
       out = [];
     }
-
     centerTileXY = this.chessToTileXYZ(centerTileXY);
     this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray);
     var tileXY;
-
     for (var i = 0, cnt = globTileArray.length; i < cnt; i++) {
       tileXY = globTileArray[i];
-
       if (this.contains(tileXY.x, tileXY.y)) {
         out.push(tileXY);
       }
     }
-
     globTileArray.length = 0;
     return out;
   };
-
   var globTileArray = [];
 
   var IsArray = function IsArray(obj) {
@@ -4968,95 +4491,75 @@
       out = nearToFar;
       nearToFar = undefined;
     }
-
     if (nearToFar === undefined) {
       nearToFar = true;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     centerTileXY = this.chessToTileXYZ(centerTileXY);
     var level;
-
     for (var i = 0; i <= radius; i++) {
       level = nearToFar ? i : radius - i;
       this.ringToTileXYArray(centerTileXY, level, out);
     }
-
     return out;
   };
 
   var HasBlocker = function HasBlocker(tileX, tileY, tileZ) {
     if (tileX && typeof tileX !== 'number') {
       var tileXYZ = this.chessToTileXYZ(tileX); // tileX is a Chess or TileXY
-
       tileX = tileXYZ.x;
       tileY = tileXYZ.y;
       tileZ = tileXYZ.z;
     }
-
     var chess, blocker;
-
     if (tileZ === undefined) {
       // any chess at (tileX, tileY) has blocker
       chess = this.tileXYToChessArray(tileX, tileY, globChessArray$5);
-
       for (var i = 0, cnt = chess.length; i < cnt; i++) {
         blocker = this.getChessData(chess[i]).blocker;
-
         if (blocker === true) {
           globChessArray$5.length = 0;
           return true;
         }
       }
-
       globChessArray$5.length = 0;
       return false;
     } else {
       // chess at (tileX, tileY, tileZ) has blocker
       var chess = this.tileXYZToChess(tileX, tileY, tileZ);
-
       if (chess === null) {
         return false;
       }
-
       blocker = this.getChessData(chess).blocker;
       return blocker === true;
     }
   };
-
   var globChessArray$5 = [];
 
   var HasEdgeBlocker = function HasEdgeBlocker(tileX, tileY, tileZ, direction) {
     var chess;
-
     if (tileZ === undefined) {
       // any chess at (tileX, tileY) has blocker
       chess = this.tileXYToChessArray(tileX, tileY, globChessArray$4);
-
       for (var i = 0, cnt = chess.length; i < cnt; i++) {
         if (isEdgeBlocker(this.getChessData(chess[i]).blocker)) {
           globChessArray$4.length = 0;
           return true;
         }
       }
-
       globChessArray$4.length = 0;
       return false;
     } else {
       // chess at (tileX, tileY, tileZ) has blocker
       var chess = this.tileXYZToChess(tileX, tileY, tileZ);
-
       if (chess === null) {
         return false;
       }
-
       return isEdgeBlocker(this.getChessData(chess).blocker);
     }
   };
-
   var isEdgeBlocker = function isEdgeBlocker(blocker, direction) {
     if (blocker === false || blocker === true) {
       return blocker;
@@ -5064,7 +4567,6 @@
       return blocker[direction] === true;
     }
   };
-
   var globChessArray$4 = [];
 
   var GetBoard = function GetBoard(chess) {
@@ -5164,7 +4666,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -5172,7 +4673,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -5180,21 +4680,16 @@
     for (var k in source) {
       return false;
     }
-
     return true;
   };
 
   var BoardData = /*#__PURE__*/function () {
     function BoardData() {
       _classCallCheck(this, BoardData);
-
       this.XYZToUID = {}; // [x][y][z] : uid
-
       this.UIDToXYZ = {}; // uid : xyz
-
       this.clear();
     }
-
     _createClass(BoardData, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -5232,13 +4727,10 @@
         if (!this.XYZToUID.hasOwnProperty(x)) {
           this.XYZToUID[x] = {};
         }
-
         var tmpx = this.XYZToUID[x];
-
         if (!tmpx.hasOwnProperty(y)) {
           tmpx[y] = {};
         }
-
         var tmpy = tmpx[y];
         tmpy[z] = uid;
         this.UIDToXYZ[uid] = {
@@ -5256,17 +4748,14 @@
         // (x,y,z) -> uid
         // (x,y) -> zHash = {z:uid}
         var tmp = this.XYZToUID[x];
-
         if (tmp) {
           tmp = tmp[y];
-
           if (tmp) {
             if (z !== undefined) {
               tmp = tmp[z];
             }
           }
         }
-
         return tmp;
       }
     }, {
@@ -5275,31 +4764,23 @@
         if (!this.XYZToUID.hasOwnProperty(x)) {
           return this;
         }
-
         var tmpx = this.XYZToUID[x];
-
         if (!tmpx.hasOwnProperty(y)) {
           return this;
         }
-
         var tmpy = tmpx[y];
-
         if (!tmpy.hasOwnProperty(z)) {
           return this;
         }
-
         var uid = tmpy[z];
         delete tmpy[z];
         delete this.UIDToXYZ[uid];
-
         if (IsEmpty(tmpy)) {
           delete tmpx[y];
         }
-
         if (IsEmpty(tmpx)) {
           delete this.XYZToUID[x];
         }
-
         this.chessCount--;
         this.clearBounds();
         return this;
@@ -5320,7 +4801,6 @@
         if (this.exists(uid)) {
           return this.UIDToXYZ[uid];
         }
-
         return null;
       }
     }, {
@@ -5329,17 +4809,14 @@
         if (this._xMax === undefined) {
           this._xMax = -Infinity;
           var UIDToXYZ = this.UIDToXYZ,
-              x;
-
+            x;
           for (var uid in UIDToXYZ) {
             x = UIDToXYZ[uid].x;
-
             if (this._xMax < x) {
               this._xMax = x;
             }
           }
         }
-
         return this._xMax;
       }
     }, {
@@ -5348,17 +4825,14 @@
         if (this._xMin === undefined) {
           this._xMin = Infinity;
           var UIDToXYZ = this.UIDToXYZ,
-              x;
-
+            x;
           for (var uid in UIDToXYZ) {
             x = UIDToXYZ[uid].x;
-
             if (this._xMin > x) {
               this._xMin = x;
             }
           }
         }
-
         return this._xMin;
       }
     }, {
@@ -5367,17 +4841,14 @@
         if (this._yMax === undefined) {
           this._yMax = -Infinity;
           var UIDToXYZ = this.UIDToXYZ,
-              y;
-
+            y;
           for (var uid in UIDToXYZ) {
             y = UIDToXYZ[uid].y;
-
             if (this._yMax < y) {
               this._yMax = y;
             }
           }
         }
-
         return this._yMax;
       }
     }, {
@@ -5386,21 +4857,17 @@
         if (this._yMin === undefined) {
           this._yMin = Infinity;
           var UIDToXYZ = this.UIDToXYZ,
-              y;
-
+            y;
           for (var uid in UIDToXYZ) {
             y = UIDToXYZ[uid].y;
-
             if (this._yMin > y) {
               this._yMin = y;
             }
           }
         }
-
         return this._yMin;
       }
     }]);
-
     return BoardData;
   }();
 
@@ -5410,30 +4877,25 @@
     } else if (out === true) {
       out = globWorldXY$3;
     }
-
     var worldX, worldY;
-
     switch (this.mode) {
       case 0:
         // orthogonal
         worldX = tileX * this.width;
         worldY = tileY * this.height;
         break;
-
       case 1:
         // isometric
         worldX = (tileX - tileY) * this._halfWidth;
         worldY = (tileX + tileY) * this._halfHeight;
         break;
     }
-
     worldX += this.x;
     worldY += this.y;
     out.x = worldX;
     out.y = worldY;
     return out;
   };
-
   var globWorldXY$3 = {};
 
   var GetWorldX$1 = function GetWorldX(tileX, tileY) {
@@ -5450,29 +4912,24 @@
     } else if (out === true) {
       out = globTileXY$a;
     }
-
     worldX -= this.x;
     worldY -= this.y;
     var tmpx = worldX / this.width;
     var tmpy = worldY / this.height;
-
     switch (this.mode) {
       case 0:
         // orthogonal
         out.x = Math.round(tmpx);
         out.y = Math.round(tmpy);
         break;
-
       case 1:
         // isometric            
         out.x = Math.round(+tmpx + tmpy);
         out.y = Math.round(-tmpx + tmpy);
         break;
     }
-
     return out;
   };
-
   var globTileXY$a = {};
 
   var GetTileX$1 = function GetTileX(worldX, worldY) {
@@ -5486,10 +4943,8 @@
   var Quad = /*#__PURE__*/function () {
     function Quad(config) {
       _classCallCheck(this, Quad);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Quad, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -5504,9 +4959,7 @@
         if (typeof type === 'string') {
           type = ORIENTATIONTYPE[type];
         }
-
         this.mode = type; // orthogonal, isometric, or staggered
-
         return this;
       }
     }, {
@@ -5515,7 +4968,6 @@
         if (typeof mode === 'string') {
           mode = DIRMODE$1[mode];
         }
-
         this.directions = mode;
         return this;
       }
@@ -5568,10 +5020,8 @@
         this.height = value;
       }
     }]);
-
     return Quad;
   }();
-
   var methods$6 = {
     getWorldXY: GetWorldX$2,
     getWorldX: GetWorldX$1,
@@ -5613,28 +5063,23 @@
     } else if (out === true) {
       out = globTileXY$9;
     }
-
     var deltaTileX, deltaTileY;
-
     switch (this.mode) {
       case 0:
         // orthogonal
         deltaTileX = OrthogonalMap[direction][0];
         deltaTileY = OrthogonalMap[direction][1];
         break;
-
       case 1:
         // isometric
         deltaTileX = IsometricMap[direction][0];
         deltaTileY = IsometricMap[direction][1];
         break;
     }
-
     out.x = tileX + distance * deltaTileX;
     out.y = tileY + distance * deltaTileY;
     return out;
   };
-
   var globTileXY$9 = {};
 
   var GetNeighborTileXY$1 = function GetNeighborTileXY(tileX, tileY, direction, out) {
@@ -5642,65 +5087,51 @@
   };
 
   // Not included in Base Gird object.
-
   var ReverseDirMap$1 = function ReverseDirMap(dirMap) {
     var out = {},
-        entry,
-        x,
-        y;
-
+      entry,
+      x,
+      y;
     for (var dir in dirMap) {
       entry = dirMap[dir]; // [x, y]
-
       x = entry[0];
       y = entry[1];
-
       if (!out.hasOwnProperty(x)) {
         out[x] = {};
       }
-
       out[x][y] = parseInt(dir);
     }
-
     return out;
   };
-
   var OrthogonalMapOut = ReverseDirMap$1(OrthogonalMap);
   var IsometricMapOut = OrthogonalMapOut;
 
   var GetNeighborTileDirection$1 = function GetNeighborTileDirection(srcTileXY, neighborTileXY) {
     var deltaTileXYToDirMap;
-
     switch (this.mode) {
       case 0:
         // orthogonal
         deltaTileXYToDirMap = OrthogonalMapOut;
         break;
-
       case 1:
         // isometric
         deltaTileXYToDirMap = IsometricMapOut;
         break;
     }
-
     var deltaTileX = neighborTileXY.x - srcTileXY.x;
     var deltaTileY = neighborTileXY.y - srcTileXY.y;
-
     if (deltaTileXYToDirMap.hasOwnProperty(deltaTileX)) {
       var xEntry = deltaTileXYToDirMap[deltaTileX];
-
       if (xEntry.hasOwnProperty(deltaTileY)) {
         return xEntry[deltaTileY];
       }
     }
-
     return null;
   };
 
   var GetOppositeDirection$1 = function GetOppositeDirection(tileX, tileY, direction) {
     return oppositeDirectionMap[direction];
   };
-
   var oppositeDirectionMap = {
     0: 2,
     // Left
@@ -5717,7 +5148,6 @@
     6: 4,
     // Right-up
     7: 5 // Up-left
-
   };
 
   var Offset$2 = function Offset(srcTile, offsetTileX, offsetTileY, out) {
@@ -5726,15 +5156,13 @@
     } else if (out === true) {
       out = globTileXY$8;
     }
-
     var newTileX = srcTile.x + offsetTileX;
-    var newTileY = srcTile.y + offsetTileY; // TODO: staggered?
-
+    var newTileY = srcTile.y + offsetTileY;
+    // TODO: staggered?
     out.x = newTileX;
     out.y = newTileY;
     return out;
   };
-
   var globTileXY$8 = {};
 
   var Mirror$3 = function Mirror(src, mode, out) {
@@ -5743,12 +5171,10 @@
     } else if (out === true) {
       out = globTileXY$7;
     }
-
     out.x = mode & 1 ? -src.x : src.x;
     out.y = mode & 2 ? -src.y : src.y;
     return out;
   };
-
   var globTileXY$7 = {};
 
   var Rotate$3 = function Rotate(src, dir, out) {
@@ -5757,52 +5183,43 @@
     } else if (out === true) {
       out = globTileXY$6;
     }
-
     dir = Wrap(dir, 0, 3);
     var newTileX;
     var newTileY;
-
     switch (dir) {
       case 1:
         newTileX = -src.y;
         newTileY = src.x;
         break;
-
       case 2:
         newTileX = -src.x;
         newTileY = -src.y;
         break;
-
       case 3:
         newTileX = src.y;
         newTileY = -src.x;
         break;
-
       default:
         newTileX = src.x;
         newTileY = src.y;
         break;
-    } // TODO: staggered?
-
-
+    }
+    // TODO: staggered?
     out.x = newTileX;
     out.y = newTileY;
     return out;
   };
-
   var globTileXY$6 = {};
 
   var GetDistance$1 = function GetDistance(tileA, tileB, roughMode) {
     var dx = tileB.x - tileA.x;
     var dy = tileB.y - tileA.y;
     var dist;
-
     if (roughMode) {
       dist = Math.abs(dx) + Math.abs(dy);
     } else {
       dist = Math.sqrt(dx * dx + dy * dy);
     }
-
     return dist;
   };
 
@@ -5810,12 +5227,9 @@
     if (round === undefined) {
       round = true;
     }
-
     var direction;
-
     switch (this.mode) {
       case 0: // orthogonal
-
       case 1:
         // isometric
         if (tileA.y === tileB.y) {
@@ -5824,13 +5238,10 @@
           direction = tileB.y >= tileA.y ? 1 : 3;
         } else if (this.directions === 4) {
           var angle = RadToDeg$2(Between$1(tileA.x, tileA.y, tileB.x, tileB.y)); // -180~180
-
           if (angle < 0) {
             angle += 360;
           }
-
           direction = angle / 90;
-
           if (round) {
             direction = Math.round(direction);
           }
@@ -5838,24 +5249,19 @@
           // this.directions === 8
           var dx = tileB.x - tileA.x;
           var dy = tileB.y - tileA.y;
-
           if (dx === dy) {
             direction = dx > 0 ? 4 : 6;
           } else if (dx === -dy) {
             direction = dx > 0 ? 7 : 5;
           } else {
             var angle = RadToDeg$2(Math.atan2(dy, dx));
-
             if (angle < 0) {
               angle += 360;
             }
-
             var steps = angle / 45;
-
             if (round) {
               steps = Math.round(steps);
             }
-
             if (steps >= 0 && steps < 1) {
               direction = steps; // (steps - 0) + 0
             } else if (steps >= 1 && steps < 2) {
@@ -5879,11 +5285,9 @@
 
         break;
     }
-
     if (direction === this.directions) {
       direction = 0;
     }
-
     return direction;
   };
 
@@ -5893,14 +5297,12 @@
 
   var InitPoints = function InitPoints(count) {
     var points = [];
-
     for (var i = 0; i < count; i++) {
       points.push({
         x: 0,
         y: 0
       });
     }
-
     return points;
   };
 
@@ -5908,40 +5310,37 @@
     if (points === undefined) {
       points = InitPoints(4);
     }
-
     var halfW = width / 2;
     var halfH = height / 2;
-
     if (type === 0) {
       // rectangle
       // top-right
       points[0].x = x + halfW;
-      points[0].y = y - halfH; // bottom-right
-
+      points[0].y = y - halfH;
+      // bottom-right
       points[1].x = x + halfW;
-      points[1].y = y + halfH; // bottom-left
-
+      points[1].y = y + halfH;
+      // bottom-left
       points[2].x = x - halfW;
-      points[2].y = y + halfH; // top-left
-
+      points[2].y = y + halfH;
+      // top-left
       points[3].x = x - halfW;
       points[3].y = y - halfH;
     } else {
       // rhombus
       // 0
       points[0].x = x + halfW;
-      points[0].y = y; // 90
-
+      points[0].y = y;
+      // 90
       points[1].x = x;
-      points[1].y = y + halfH; // 180
-
+      points[1].y = y + halfH;
+      // 180
       points[2].x = x - halfW;
-      points[2].y = y; // 270
-
+      points[2].y = y;
+      // 270
       points[3].x = x;
       points[3].y = y - halfH;
     }
-
     return points;
   };
 
@@ -5951,19 +5350,16 @@
     } else if (points === true) {
       points = globPoints$1;
     }
-
     if (tileX === undefined) {
       globWorldXY$2.x = 0;
       globWorldXY$2.y = 0;
     } else {
       this.getWorldXY(tileX, tileY, globWorldXY$2);
     }
-
     var quadType = this.mode === 0 ? 0 : 1;
     SetPoints$1(globWorldXY$2.x, globWorldXY$2.y, this.width, this.height, quadType, points);
     return points;
   };
-
   var globWorldXY$2 = {};
   var globPoints$1 = InitPoints(4);
 
@@ -5973,7 +5369,6 @@
     } else if (out === true) {
       out = globalBounds$1;
     }
-
     var worldXY = this.getWorldXY(tileX, tileY, true);
     out.x = worldXY.x - this.width * 0.5;
     out.y = worldXY.y - this.height * 0.5;
@@ -5981,87 +5376,74 @@
     out.height = this.height;
     return out;
   };
-
   var globalBounds$1 = new Rectangle$2();
 
   var RingToTileXYArray$1 = function RingToTileXYArray(centerTileXY, radius, out) {
     if (out === undefined) {
       out = [];
     }
-
-    var i, j; // Top-right to bottom-right
-
+    var i, j;
+    // Top-right to bottom-right
     i = radius;
-
     for (j = -radius; j <= radius; j++) {
       out.push(Offset$2(centerTileXY, i, j));
-    } // Bottom-right to bottom-left
-
-
+    }
+    // Bottom-right to bottom-left
     j = radius;
-
     for (i = radius - 1; i >= -radius; i--) {
       out.push(Offset$2(centerTileXY, i, j));
-    } // Bottom-left to top-left
-
-
+    }
+    // Bottom-left to top-left
     i = -radius;
-
     for (j = radius - 1; j >= -radius; j--) {
       out.push(Offset$2(centerTileXY, i, j));
-    } // Top-left to top-right
-
-
+    }
+    // Top-left to top-right
     j = -radius;
-
     for (i = -radius + 1; i <= radius - 1; i++) {
       out.push(Offset$2(centerTileXY, i, j));
     }
-
     return out;
   };
 
   var QuadGrid = /*#__PURE__*/function (_Quad) {
     _inherits(QuadGrid, _Quad);
-
     var _super = _createSuper(QuadGrid);
-
     function QuadGrid(config) {
       var _this;
-
       _classCallCheck(this, QuadGrid);
-
       _this = _super.call(this, config);
       _this.sides = 4;
       return _this;
-    } // resetFromJSON(o) {
+    }
+
+    // resetFromJSON(o) {
     //     super.resetFromJSON(o);
     // }
+
     // Direction of neighbors
-
-
     _createClass(QuadGrid, [{
       key: "allDirections",
       get: function get() {
         return this.directions === 4 ? ALLDIR4 : ALLDIR8;
-      } // Board-match
+      }
 
+      // Board-match
     }, {
       key: "halfDirections",
       get: function get() {
         return this.directions === 4 ? HALFDIR4 : HALFDIR8;
-      } // setOriginPosition
+      }
+
+      // setOriginPosition
       // setCellSize
       // setType
       // getWorldXY
       // getTileXY
       // getGridPolygon        
-
     }]);
-
     return QuadGrid;
   }(Quad);
-
   var ALLDIR4 = [0, 1, 2, 3];
   var ALLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
   var HALFDIR4 = [0, 1];
@@ -6086,13 +5468,11 @@
   Object.assign(QuadGrid.prototype, methods$5);
 
   var SQRT3$1 = Math.sqrt(3);
-
   var Width = function Width(hexagon) {
     return hexagon.type === 0 ? 2 * hexagon.size : SQRT3$1 * hexagon.size;
   };
 
   var SQRT3 = Math.sqrt(3);
-
   var Height = function Height(hexagon) {
     return hexagon.type === 0 ? SQRT3 * hexagon.size : 2 * hexagon.size;
   };
@@ -6108,60 +5488,46 @@
   var EVEN_R$7 = CONST$3.EVEN_R;
   var ODD_Q$6 = CONST$3.ODD_Q;
   var EVEN_Q$6 = CONST$3.EVEN_Q;
-
   var GetWorldXY = function GetWorldXY(tileX, tileY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globWorldXY$1;
     }
-
     var worldX = tileX * this.width;
     var worldY = tileY * this.height;
-
     switch (this.mode) {
       case ODD_R$7:
         if (tileY & 1) {
           worldX += this._halfWidth;
         }
-
         worldY *= 0.75;
         break;
-
       case EVEN_R$7:
         if (tileY & 1) {
           worldX -= this._halfWidth;
         }
-
         worldY *= 0.75;
         break;
-
       case ODD_Q$6:
         worldX *= 0.75;
-
         if (tileX & 1) {
           worldY += this._halfHeight;
         }
-
         break;
-
       case EVEN_Q$6:
         worldX *= 0.75;
-
         if (tileX & 1) {
           worldY -= this._halfHeight;
         }
-
         break;
     }
-
     worldX += this.x;
     worldY += this.y;
     out.x = worldX;
     out.y = worldY;
     return out;
   };
-
   var globWorldXY$1 = {};
 
   var GetWorldX = function GetWorldX(tileX, tileY) {
@@ -6176,40 +5542,33 @@
   var EVEN_R$6 = CONST$3.EVEN_R;
   var ODD_Q$5 = CONST$3.ODD_Q;
   var EVEN_Q$5 = CONST$3.EVEN_Q;
-
   var cr2cube = function cr2cube(mode, col, row, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCube$1;
     }
-
     switch (mode) {
       case ODD_R$6:
         out.x = col - (row - (row & 1)) / 2;
         out.z = row;
         break;
-
       case EVEN_R$6:
         out.x = col - (row + (row & 1)) / 2;
         out.z = row;
         break;
-
       case ODD_Q$5:
         out.x = col;
         out.z = row - (col - (col & 1)) / 2;
         break;
-
       case EVEN_Q$5:
         out.x = col;
         out.z = row - (col + (col & 1)) / 2;
         break;
     }
-
     out.y = -out.x - out.z;
     return out;
   };
-
   var roundcube = function roundcube(x, y, z, out) {
     if (typeof x !== 'number') {
       out = x;
@@ -6217,20 +5576,17 @@
       y = out.y;
       z = out.z;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCube$1;
     }
-
     var rx = Math.round(x);
     var ry = Math.round(y);
     var rz = Math.round(z);
     var dx = Math.abs(rx - x);
     var dy = Math.abs(ry - y);
     var dz = Math.abs(rz - z);
-
     if (dx > dy && dx > dz) {
       rx = -ry - rz;
     } else if (dy > dz) {
@@ -6238,58 +5594,48 @@
     } else {
       rz = -rx - ry;
     }
-
     out.x = rx;
     out.y = ry;
     out.z = rz;
     return out;
   };
-
   var cube2cr = function cube2cr(mode, x, y, z, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCR;
     }
-
     switch (mode) {
       case ODD_R$6:
         out.x = x + (z - (z & 1)) / 2;
         out.y = z;
         break;
-
       case EVEN_R$6:
         out.x = x + (z + (z & 1)) / 2;
         out.y = z;
         break;
-
       case ODD_Q$5:
         out.x = x;
         out.y = z + (x - (x & 1)) / 2;
         break;
-
       case EVEN_Q$5:
         out.x = x;
         out.y = z + (x + (x & 1)) / 2;
         break;
     }
-
     return out;
   };
-
   var qr2cube = function qr2cube(q, r, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCube$1;
     }
-
     out.x = q;
     out.y = -q - r;
     out.z = r;
     return out;
   };
-
   var globCube$1 = {};
   var globCR = {};
 
@@ -6299,38 +5645,32 @@
   var EVEN_Q$4 = CONST$3.EVEN_Q;
   var C4DIV3 = 4 / 3;
   var C2DIV3 = 2 / 3;
-
   var GetTileXY = function GetTileXY(worldX, worldY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globTileXY$5;
     }
-
     worldX -= this.x;
     worldY -= this.y;
     var q, r;
-
     switch (this.mode) {
       case ODD_R$5:
       case EVEN_R$5:
         r = worldY * C4DIV3 / this.height;
         q = worldX / this.width - C2DIV3 * (worldY / this.height);
         break;
-
       case ODD_Q$4:
       case EVEN_Q$4:
         r = worldY / this.height - C2DIV3 * (worldX / this.width);
         q = worldX * C4DIV3 / this.width;
         break;
     }
-
     var cube = qr2cube(q, r, globCube);
     roundcube(cube);
     cube2cr(this.mode, cube.x, cube.y, cube.z, out);
     return out;
   };
-
   var globCube = {};
   var globTileXY$5 = {};
 
@@ -6346,14 +5686,11 @@
   var EVEN_R$4 = CONST$3.EVEN_R;
   var ODD_Q$3 = CONST$3.ODD_Q;
   var EVEN_Q$3 = CONST$3.EVEN_Q;
-
   var Hexagon = /*#__PURE__*/function () {
     function Hexagon(config) {
       _classCallCheck(this, Hexagon);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Hexagon, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -6361,7 +5698,6 @@
         this.setDirectionMode();
         this.setOriginPosition(GetValue$c(o, 'x', 0), GetValue$c(o, 'y', 0));
         var size = GetValue$c(o, 'size', undefined);
-
         if (size !== undefined) {
           this.setCellRadius(size);
         } else {
@@ -6374,13 +5710,10 @@
         if (typeof staggeraxis === 'string') {
           staggeraxis = STAGGERAXIS[staggeraxis];
         }
-
         if (typeof staggerindex === 'string') {
           staggerindex = STAGGERINDEX[staggerindex];
         }
-
         this.staggeraxis = staggeraxis; // 0|y(flat), or 1|x(pointy)
-
         this.staggerindex = staggerindex; // even, or odd
 
         if (staggeraxis === 0) {
@@ -6390,7 +5723,6 @@
           // pointy
           this.mode = staggerindex === 0 ? EVEN_R$4 : ODD_R$4;
         }
-
         return this;
       }
     }, {
@@ -6461,10 +5793,8 @@
         this.height = value;
       }
     }]);
-
     return Hexagon;
   }();
-
   var methods$4 = {
     getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
@@ -6485,32 +5815,29 @@
 
   // Not included in Base Gird object.
   // Direction to delta tileXY
+
   var ODD_R$3 = [[[+1, 0], [0, +1], [-1, +1], [-1, 0], [-1, -1], [0, -1]], [[+1, 0], [+1, +1], [0, +1], [-1, 0], [0, -1], [+1, -1]]];
   var EVEN_R$3 = [[[+1, 0], [+1, +1], [0, +1], [-1, 0], [0, -1], [+1, -1]], [[+1, 0], [0, +1], [-1, +1], [-1, 0], [-1, -1], [0, -1]]];
   var ODD_Q$2 = [[[+1, 0], [0, +1], [-1, 0], [-1, -1], [0, -1], [+1, -1]], [[+1, +1], [0, +1], [-1, +1], [-1, 0], [0, -1], [+1, 0]]];
   var EVEN_Q$2 = [[[+1, +1], [0, +1], [-1, +1], [-1, 0], [0, -1], [+1, 0]], [[+1, 0], [0, +1], [-1, 0], [-1, -1], [0, -1], [+1, -1]]];
-  var Neighbors$1 = [ODD_R$3, EVEN_R$3, ODD_Q$2, EVEN_Q$2]; // Neighbors[mode][parity][dir]: [x/y]
+  var Neighbors$1 = [ODD_R$3, EVEN_R$3, ODD_Q$2, EVEN_Q$2];
 
   var ODD_R$2 = CONST$3.ODD_R;
   var EVEN_R$2 = CONST$3.EVEN_R;
   var ODD_Q$1 = CONST$3.ODD_Q;
   var EVEN_Q$1 = CONST$3.EVEN_Q;
-
   var GetParity = function GetParity(mode, tileX, tileY) {
     var parity;
-
     switch (mode) {
       case ODD_R$2:
       case EVEN_R$2:
         parity = tileY & 1;
         break;
-
       case ODD_Q$1:
       case EVEN_Q$1:
         parity = tileX & 1;
         break;
     }
-
     return parity;
   };
 
@@ -6520,7 +5847,6 @@
     } else if (out === true) {
       out = globTileXY$4;
     }
-
     if (distance === 1) {
       // Neighbor
       var parity = GetParity(this.mode, tileX, tileY);
@@ -6532,51 +5858,42 @@
     } else {
       var cubeXYZ = cr2cube(this.mode, tileX, tileY, true);
       var newCubeX, newCubeY, newCubeZ;
-
       switch (direction) {
         case 1:
           newCubeX = cubeXYZ.x;
           newCubeY = cubeXYZ.y - distance;
           newCubeZ = cubeXYZ.z + distance;
           break;
-
         case 2:
           newCubeX = cubeXYZ.x - distance;
           newCubeY = cubeXYZ.y;
           newCubeZ = cubeXYZ.z + distance;
           break;
-
         case 3:
           newCubeX = cubeXYZ.x - distance;
           newCubeY = cubeXYZ.y + distance;
           newCubeZ = cubeXYZ.z;
           break;
-
         case 4:
           newCubeX = cubeXYZ.x;
           newCubeY = cubeXYZ.y + distance;
           newCubeZ = cubeXYZ.z - distance;
           break;
-
         case 5:
           newCubeX = cubeXYZ.x + distance;
           newCubeY = cubeXYZ.y;
           newCubeZ = cubeXYZ.z - distance;
           break;
-
         default:
           newCubeX = cubeXYZ.x + distance;
           newCubeY = cubeXYZ.y - distance;
           newCubeZ = cubeXYZ.z;
           break;
       }
-
       cube2cr(this.mode, newCubeX, newCubeY, newCubeZ, out);
     }
-
     return out;
   };
-
   var globTileXY$4 = {};
 
   var GetNeighborTileXY = function GetNeighborTileXY(tileX, tileY, direction, out) {
@@ -6584,45 +5901,35 @@
   };
 
   // Not included in Base Gird object.
-
   var ReverseDirMap = function ReverseDirMap(dirMap) {
     var out = {},
-        entry,
-        x,
-        y;
-
+      entry,
+      x,
+      y;
     for (var dir in dirMap) {
       entry = dirMap[dir]; // [x, y]
-
       x = entry[0];
       y = entry[1];
-
       if (!out.hasOwnProperty(x)) {
         out[x] = {};
       }
-
       out[x][y] = parseInt(dir);
     }
-
     return out;
   };
-
-  var Neighbors = [[ReverseDirMap(Neighbors$1[0][0]), ReverseDirMap(Neighbors$1[0][1])], [ReverseDirMap(Neighbors$1[1][0]), ReverseDirMap(Neighbors$1[1][1])], [ReverseDirMap(Neighbors$1[2][0]), ReverseDirMap(Neighbors$1[2][1])], [ReverseDirMap(Neighbors$1[3][0]), ReverseDirMap(Neighbors$1[3][1])]]; // Neighbors[mode][parity][x][y]: dir
+  var Neighbors = [[ReverseDirMap(Neighbors$1[0][0]), ReverseDirMap(Neighbors$1[0][1])], [ReverseDirMap(Neighbors$1[1][0]), ReverseDirMap(Neighbors$1[1][1])], [ReverseDirMap(Neighbors$1[2][0]), ReverseDirMap(Neighbors$1[2][1])], [ReverseDirMap(Neighbors$1[3][0]), ReverseDirMap(Neighbors$1[3][1])]];
 
   var GetNeighborTileDirection = function GetNeighborTileDirection(srcTileXY, neighborTileXY) {
     var parity = GetParity(this.mode, srcTileXY.x, srcTileXY.y);
     var deltaTileXYToDirMap = Neighbors[this.mode][parity];
     var deltaTileX = neighborTileXY.x - srcTileXY.x;
     var deltaTileY = neighborTileXY.y - srcTileXY.y;
-
     if (deltaTileXYToDirMap.hasOwnProperty(deltaTileX)) {
       var xEntry = deltaTileXYToDirMap[deltaTileX];
-
       if (xEntry.hasOwnProperty(deltaTileY)) {
         return xEntry[deltaTileY];
       }
     }
-
     return null;
   };
 
@@ -6634,17 +5941,14 @@
   var EVEN_R$1 = CONST$3.EVEN_R;
   var ODD_Q = CONST$3.ODD_Q;
   var EVEN_Q = CONST$3.EVEN_Q;
-
   var Offset$1 = function Offset(src, offsetX, offsetY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globTileXY$3;
     }
-
     var newX = src.x + offsetX;
     var newY = src.y + offsetY;
-
     switch (this.mode) {
       case ODD_R$1:
         if ((offsetY & 1) !== 0) {
@@ -6652,58 +5956,46 @@
             newX += 1;
           }
         }
-
         break;
-
       case EVEN_R$1:
         if ((offsetY & 1) !== 0) {
           if ((newY & 1) === 0) {
             newX -= 1;
           }
         }
-
         break;
-
       case ODD_Q:
         if ((offsetX & 1) !== 0) {
           if ((newX & 1) == 0) {
             newY += 1;
           }
         }
-
         break;
-
       case EVEN_Q:
         if ((offsetX & 1) !== 0) {
           if ((newX & 1) == 0) {
             newY -= 1;
           }
         }
-
         break;
     }
-
     out.x = newX;
     out.y = newY;
     return out;
   };
-
   var globTileXY$3 = {};
 
   var ODD_R = CONST$3.ODD_R;
   var EVEN_R = CONST$3.EVEN_R;
-
   var Mirror$2 = function Mirror(src, mode, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globTileXY$2;
     }
-
     var cubeXYZ = cr2cube(this.mode, src.x, src.y, true);
     var isRMode = this.mode === ODD_R || this.mode === EVEN_R;
     var newCubeX, newCubeY, newCubeZ;
-
     if (mode & 1) {
       // Mirror x
       if (isRMode) {
@@ -6715,12 +6007,10 @@
         newCubeY = -cubeXYZ.z;
         newCubeZ = -cubeXYZ.y;
       }
-
       cubeXYZ.x = newCubeX;
       cubeXYZ.y = newCubeY;
       cubeXYZ.z = newCubeZ;
     }
-
     if (mode & 2) {
       // Mirror y
       if (isRMode) {
@@ -6733,11 +6023,9 @@
         newCubeZ = cubeXYZ.y;
       }
     }
-
     cube2cr(this.mode, newCubeX, newCubeY, newCubeZ, out);
     return out;
   };
-
   var globTileXY$2 = {};
 
   var Rotate$2 = function Rotate(src, dir, out) {
@@ -6746,53 +6034,44 @@
     } else if (out === true) {
       out = globTileXY$1;
     }
-
     dir = Wrap(dir, 0, 5);
     var cubeXYZ = cr2cube(this.mode, src.x, src.y, true);
     var newCubeX, newCubeY, newCubeZ;
-
     switch (dir) {
       case 1:
         newCubeX = -cubeXYZ.z;
         newCubeY = -cubeXYZ.x;
         newCubeZ = -cubeXYZ.y;
         break;
-
       case 2:
         newCubeX = cubeXYZ.y;
         newCubeY = cubeXYZ.z;
         newCubeZ = cubeXYZ.x;
         break;
-
       case 3:
         newCubeX = -cubeXYZ.x;
         newCubeY = -cubeXYZ.y;
         newCubeZ = -cubeXYZ.z;
         break;
-
       case 4:
         newCubeX = cubeXYZ.z;
         newCubeY = cubeXYZ.x;
         newCubeZ = cubeXYZ.y;
         break;
-
       case 5:
         newCubeX = -cubeXYZ.y;
         newCubeY = -cubeXYZ.z;
         newCubeZ = -cubeXYZ.x;
         break;
-
       default:
         newCubeX = cubeXYZ.x;
         newCubeY = cubeXYZ.y;
         newCubeZ = cubeXYZ.z;
         break;
     }
-
     cube2cr(this.mode, newCubeX, newCubeY, newCubeZ, out);
     return out;
   };
-
   var globTileXY$1 = {};
 
   var GetDistance = function GetDistance(tileA, tileB, roughMode) {
@@ -6803,7 +6082,6 @@
     var dz = globCubeB$1.z - globCubeA$1.z;
     return (Math.abs(dx) + Math.abs(dy) + Math.abs(dz)) / 2;
   };
-
   var globCubeA$1 = {};
   var globCubeB$1 = {};
 
@@ -6811,14 +6089,12 @@
     if (round === undefined) {
       round = true;
     }
-
     var direction;
     cr2cube(this.mode, tileA.x, tileA.y, globCubeA);
     cr2cube(this.mode, tileB.x, tileB.y, globCubeB);
     var dx = globCubeB.x - globCubeA.x;
     var dy = globCubeB.y - globCubeA.y;
     var dz = globCubeB.z - globCubeA.z;
-
     if (dz === 0) {
       direction = dx > 0 ? 0 : 3;
     } else if (dx === 0) {
@@ -6844,14 +6120,11 @@
       // ((dx > 0) && (dy < 0) && (dz < 0)) // 5~0
       direction = 5 + -dy / dx;
     }
-
     if (round) {
       direction = Math.round(direction);
     }
-
     return direction;
   };
-
   var globCubeA = {};
   var globCubeB = {};
 
@@ -6860,7 +6133,9 @@
    * @copyright    2018 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   var DEG_TO_RAD = Math.PI / 180;
+
   /**
    * Convert the given angle from degrees, to the equivalent angle in radians.
    *
@@ -6871,7 +6146,6 @@
    *
    * @return {number} The given angle converted to radians.
    */
-
   var DegToRad$2 = function DegToRad(degrees) {
     return degrees * DEG_TO_RAD;
   };
@@ -6880,11 +6154,9 @@
     if (points === undefined) {
       points = InitPoints(6);
     }
-
     if (size === undefined) ; else if (typeof size === 'number') {
       var angleOffset = type === 0 ? 0 : -30;
       var angleDeg, angleRad;
-
       for (var i = 0; i < 6; i++) {
         angleDeg = 60 * i + angleOffset;
         angleRad = DegToRad$2(angleDeg);
@@ -6899,7 +6171,6 @@
       var quarterW = w / 4;
       var halfH = h / 2;
       var quarterH = h / 4;
-
       if (type === 0) {
         points[0].x = x + halfW;
         points[0].y = y;
@@ -6928,7 +6199,6 @@
         points[5].y = y - halfH;
       }
     }
-
     return points;
   };
 
@@ -6938,16 +6208,13 @@
     } else if (points === true) {
       points = globPoints;
     }
-
     if (tileX === undefined) {
       globWorldXY.x = 0;
       globWorldXY.y = 0;
     } else {
       this.getWorldXY(tileX, tileY, globWorldXY);
     }
-
     var size;
-
     if (this.size !== undefined) {
       size = this.size;
     } else {
@@ -6955,11 +6222,9 @@
       size.width = this.width;
       size.height = this.height;
     }
-
     SetPoints(globWorldXY.x, globWorldXY.y, size, this.staggeraxis, points);
     return points;
   };
-
   var globPoints = InitPoints(6);
   var globWorldXY = {};
   var globSize = {};
@@ -6970,7 +6235,6 @@
     } else if (out === true) {
       out = globalBounds;
     }
-
     var worldXY = this.getWorldXY(tileX, tileY, true);
     out.x = worldXY.x - this.width * 0.5;
     out.y = worldXY.y - this.height * 0.5;
@@ -6978,104 +6242,87 @@
     out.height = this.height;
     return out;
   };
-
   var globalBounds = new Rectangle$2();
 
   var RingToTileXYArray = function RingToTileXYArray(centerTileXY, radius, out) {
     if (out === undefined) {
       out = [];
     }
-
     var centerCube = cr2cube(this.mode, centerTileXY.x, centerTileXY.y, true);
     var cx = centerCube.x,
-        cy = centerCube.y,
-        cz = centerCube.z;
+      cy = centerCube.y,
+      cz = centerCube.z;
     var i, j, k;
     k = radius;
-
     for (i = 0; i >= -radius; i--) {
       j = -i - k;
       out.push(cube2cr(this.mode, cx + i, cy + j, cz + k));
     }
-
     i = -radius;
-
     for (j = 1; j <= radius; j++) {
       k = -i - j;
       out.push(cube2cr(this.mode, cx + i, cy + j, cz + k));
     }
-
     j = radius;
-
     for (k = -1; k >= -radius; k--) {
       i = -j - k;
       out.push(cube2cr(this.mode, cx + i, cy + j, cz + k));
     }
-
     k = -radius;
-
     for (i = 1; i <= radius; i++) {
       j = -i - k;
       out.push(cube2cr(this.mode, cx + i, cy + j, cz + k));
     }
-
     i = radius;
-
     for (j = -1; j >= -radius; j--) {
       k = -i - j;
       out.push(cube2cr(this.mode, cx + i, cy + j, cz + k));
     }
-
     j = -radius;
-
     for (k = 1; k <= radius - 1; k++) {
       i = -j - k;
       out.push(cube2cr(this.mode, cx + i, cy + j, cz + k));
     }
-
     return out;
   };
 
   var HexagonGrid = /*#__PURE__*/function (_Hexagon) {
     _inherits(HexagonGrid, _Hexagon);
-
     var _super = _createSuper(HexagonGrid);
-
     function HexagonGrid(config) {
       var _this;
-
       _classCallCheck(this, HexagonGrid);
-
       _this = _super.call(this, config);
       _this.sides = 6;
       return _this;
-    } // resetFromJSON(o) {
+    }
+
+    // resetFromJSON(o) {
     //     super.resetFromJSON(o);
     // }
+
     // Direction of neighbors
-
-
     _createClass(HexagonGrid, [{
       key: "allDirections",
       get: function get() {
         return ALLDIR;
-      } // Board-match
+      }
 
+      // Board-match
     }, {
       key: "halfDirections",
       get: function get() {
         return HALFDIR;
-      } // setOriginPosition
+      }
+
+      // setOriginPosition
       // setCellSize
       // setType
       // getWorldXY
       // getTileXY
-
     }]);
-
     return HexagonGrid;
   }(Hexagon);
-
   var ALLDIR = [0, 1, 2, 3, 4, 5];
   var HALFDIR = [0, 1, 2];
   var methods$3 = {
@@ -7104,32 +6351,23 @@
 
   var Board$1 = /*#__PURE__*/function (_EE) {
     _inherits(Board, _EE);
-
     var _super = _createSuper(Board);
-
     function Board(scene, config) {
       var _this;
-
       _classCallCheck(this, Board);
-
       // scene: scene instance, or undefined
       _this = _super.call(this);
       _this.isShutdown = false;
       _this.scene = scene;
       _this.boardData = new BoardData();
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(Board, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.isBoard = GetValue$c(o, 'isBoard', true); // false: in Miniboard
-
         this.setGrid(GetValue$c(o, 'grid', undefined));
         this.setWrapMode(GetValue$c(o, 'wrap', false));
         this.setInfinityMode(GetValue$c(o, 'infinity', false));
@@ -7150,17 +6388,13 @@
         if (this.isShutdown) {
           return;
         }
-
         if (this.scene && this.isBoard) {
           this.scene.sys.events.off('shutdown', this.destroy, this);
         }
-
         if (this.isBoard) {
           this.removeAllChess(!fromScene, true);
         }
-
         _get(_getPrototypeOf(Board.prototype), "shutdown", this).call(this);
-
         this.boardData.shutdown(fromScene);
         this.scene = undefined;
         this.boardData = undefined;
@@ -7173,7 +6407,6 @@
         if (this.isShutdown) {
           return;
         }
-
         this.emit('destroy', this, fromScene);
         this.shutdown(fromScene);
       }
@@ -7185,7 +6418,6 @@
           var gridType = GetValue$c(config, 'gridType', 'quadGrid');
           var grid = new DefaultGrids[gridType](config);
         }
-
         this.grid = grid;
         return this;
       }
@@ -7195,7 +6427,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.wrapMode = enable;
         return this;
       }
@@ -7205,7 +6436,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.infinityMode = enable;
         return this;
       }
@@ -7233,7 +6463,6 @@
         if (destroy === undefined) {
           destroy = true;
         }
-
         this.removeAllChess(destroy, true);
         this.boardData.clear();
         return this;
@@ -7244,63 +6473,47 @@
         return GetBoard(chess);
       }
     }]);
-
     return Board;
   }(EventEmitter);
-
   Object.assign(Board$1.prototype, LogicMethods);
 
   var Zone$1 = Phaser.GameObjects.Zone;
-
   var TouchZone = /*#__PURE__*/function (_Zone) {
     _inherits(TouchZone, _Zone);
-
     var _super = _createSuper(TouchZone);
-
     function TouchZone(scene) {
       var _this;
-
       _classCallCheck(this, TouchZone);
-
       _this = _super.call(this, scene, 0, 0, 1, 1);
       scene.add.existing(_assertThisInitialized(_this)); // Add to scene
-
       _this.setScrollFactor(0);
-
       _this.setInteractive({
         hitArea: {},
         hitAreaCallback: function hitAreaCallback() {
           return true;
         }
       });
-
       return _this;
     }
-
     return _createClass(TouchZone);
   }(Zone$1);
 
   var RENDER_MASK = Phaser.GameObjects.GameObject.RENDER_MASK;
-
   var InputCandidate = function InputCandidate(gameObject) {
     if (gameObject.renderFlags !== RENDER_MASK) {
       return false;
     }
-
     var visible = true;
     var parent = gameObject.parentContainer;
-
     if (parent) {
       do {
         if (parent.renderFlags !== RENDER_MASK) {
           visible = false;
           break;
         }
-
         parent = parent.parentContainer;
       } while (parent);
     }
-
     return visible;
   };
 
@@ -7308,20 +6521,16 @@
     if (tileX == null || tileY == null) {
       return;
     }
-
     var boardEventCallback = typeof boardEventName !== 'string' ? boardEventName : undefined;
     var chessEventCallback = typeof chessEventName !== 'string' ? chessEventName : undefined;
-    var gameObjects = board.tileXYToChessArray(tileX, tileY, globChessArray$3); // Fire events
-
+    var gameObjects = board.tileXYToChessArray(tileX, tileY, globChessArray$3);
+    // Fire events
     var gameObject;
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       gameObject = gameObjects[i];
-
       if (!InputCandidate(gameObject)) {
         continue;
       }
-
       if (gameObject.emit) {
         if (!chessEventCallback) {
           gameObject.emit(chessEventName, pointer);
@@ -7329,61 +6538,49 @@
           chessEventCallback(gameObject);
         }
       }
-
       if (!boardEventCallback) {
         board.emit(boardEventName, pointer, gameObject);
       } else {
         boardEventCallback(gameObject);
       }
     }
-
     globChessArray$3.length = 0;
   };
-
   var globChessArray$3 = [];
 
   var OnPointerDown$1 = function OnPointerDown(pointer) {
     if (!this.enable) {
       return;
     }
-
     if (!pointer.isDown) {
       return;
     }
-
     var board = this.board;
-
     if (this.pointer === null) {
       // Catch new touch pointer
       this.pointer = pointer;
-    } // Get touched tileX, tileY
-
-
+    }
+    // Get touched tileX, tileY
     var out = board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
     var tileX = out.x,
-        tileY = out.y;
+      tileY = out.y;
     this.prevTilePosition.x = this.tilePosition.x;
     this.prevTilePosition.y = this.tilePosition.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
-
     if (!board.contains(tileX, tileY)) {
       return;
     }
-
     board.emit('tiledown', pointer, this.tilePosition);
     board.emit('tileover', pointer, this.tilePosition);
-
     var boardEventCallback = function boardEventCallback(gameObject) {
       board.emit('gameobjectdown', pointer, gameObject);
       board.emit('gameobjectover', pointer, gameObject);
     };
-
     var chessEventCallback = function chessEventCallback(gameObject) {
       gameObject.emit('board.pointerdown', pointer);
       gameObject.emit('board.pointerover', pointer);
     };
-
     EmitChessEvent(boardEventCallback, chessEventCallback, board, tileX, tileY, pointer);
   };
 
@@ -7391,36 +6588,29 @@
     if (!this.enable) {
       return;
     }
-
-    var board = this.board; // Get touched tileX, tileY
-
+    var board = this.board;
+    // Get touched tileX, tileY
     var out = board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
     var tileX = out.x,
-        tileY = out.y;
+      tileY = out.y;
     this.prevTilePosition.x = this.tilePosition.x;
     this.prevTilePosition.y = this.tilePosition.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
-
     if (!board.contains(tileX, tileY)) {
       return;
     }
-
     board.emit('tileup', pointer, this.tilePosition);
     board.emit('tileout', pointer, this.prevTilePosition);
-
     var boardEventCallback = function boardEventCallback(gameObject) {
       board.emit('gameobjectup', pointer, gameObject);
       board.emit('gameobjectout', pointer, gameObject);
     };
-
     var chessEventCallback = function chessEventCallback(gameObject) {
       gameObject.emit('board.pointerup', pointer);
       gameObject.emit('board.pointerout', pointer);
     };
-
     EmitChessEvent(boardEventCallback, chessEventCallback, board, tileX, tileY, pointer);
-
     if (this.pointer === pointer) {
       // Release touch pointer
       this.pointer = null;
@@ -7431,92 +6621,75 @@
     if (!this.enable) {
       return;
     }
-
-    var board = this.board; // Get touched tileX, tileY
-
+    var board = this.board;
+    // Get touched tileX, tileY
     var out = board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
-
     if (AreTileXYEqual(this.tilePosition, out)) {
       // Tile position dose not change
       return;
     }
-
     this.prevTilePosition.x = this.tilePosition.x;
-    this.prevTilePosition.y = this.tilePosition.y; // prevTilePosition might be undefined at beginning
-
+    this.prevTilePosition.y = this.tilePosition.y;
+    // prevTilePosition might be undefined at beginning
     if (this.prevTilePosition.x != null && this.prevTilePosition.y != null) {
       board.emit('tileout', pointer, this.prevTilePosition);
     }
-
     var tileX = out.x,
-        tileY = out.y;
+      tileY = out.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
-
     if (!board.contains(tileX, tileY)) {
       // Move outside
       if (this.pointer === pointer) {
         // Release touch pointer
         this.pointer = null;
       }
-
       return;
     }
-
     if (this.pointer === null) {
       // Catch new touch pointer
       this.pointer = pointer;
     }
-
     board.emit('tilemove', pointer, this.tilePosition);
     board.emit('tileover', pointer, this.tilePosition);
     EmitChessEvent('gameobjectout', 'board.pointerout', board, this.prevTilePosition.x, this.prevTilePosition.y, pointer);
-
     var boardEventCallback = function boardEventCallback(gameObject) {
       board.emit('gameobjectmove', pointer, gameObject);
       board.emit('gameobjectover', pointer, gameObject);
     };
-
     var chessEventCallback = function chessEventCallback(gameObject) {
       gameObject.emit('board.pointermove', pointer);
       gameObject.emit('board.pointerover', pointer);
     };
-
     EmitChessEvent(boardEventCallback, chessEventCallback, board, tileX, tileY, pointer);
   };
 
   var GetValue$a = Phaser.Utils.Objects.GetValue;
-
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-
     var _super = _createSuper(TickTask);
-
     function TickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, TickTask);
-
       _this = _super.call(this, parent, config);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-
-      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1)); // boot() later
-
-
+      _this.setTickingMode(GetValue$a(config, 'tickingMode', 1));
+      // boot() later
       return _this;
-    } // override
+    }
 
-
+    // override
     _createClass(TickTask, [{
       key: "boot",
       value: function boot() {
         if (this.tickingMode === 2 && !this.tickingState) {
           this.startTicking();
         }
-      } // override
+      }
 
+      // override
     }, {
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -7524,13 +6697,10 @@
         if (this.isShutdown) {
           return;
         }
-
         this.stop();
-
         if (this.tickingState) {
           this.stopTicking();
         }
-
         _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -7539,16 +6709,17 @@
         if (typeof mode === 'string') {
           mode = TICKINGMODE[mode];
         }
-
         this.tickingMode = mode;
-      } // override
+      }
 
+      // override
     }, {
       key: "startTicking",
       value: function startTicking() {
         this.tickingState = true;
-      } // override
+      }
 
+      // override
     }, {
       key: "stopTicking",
       value: function stopTicking() {
@@ -7563,9 +6734,7 @@
         if (this._isRunning === value) {
           return;
         }
-
         this._isRunning = value;
-
         if (this.tickingMode === 1 && value != this.tickingState) {
           if (value) {
             this.startTicking();
@@ -7589,7 +6758,6 @@
           this.isPaused = true;
           this.isRunning = false;
         }
-
         return this;
       }
     }, {
@@ -7599,7 +6767,6 @@
         if (this.isPaused) {
           this.isRunning = true;
         }
-
         return this;
       }
     }, {
@@ -7617,10 +6784,8 @@
         this.emit('complete', this.parent, this);
       }
     }]);
-
     return TickTask;
   }(ComponentBase);
-
   var TICKINGMODE = {
     'no': 0,
     'lazy': 1,
@@ -7628,56 +6793,40 @@
   };
 
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
-
   var OnePointerTracer = /*#__PURE__*/function (_TickTask) {
     _inherits(OnePointerTracer, _TickTask);
-
     var _super = _createSuper(OnePointerTracer);
-
     function OnePointerTracer(gameObject, config) {
       var _this;
-
       _classCallCheck(this, OnePointerTracer);
-
       var scene = GetSceneObject(gameObject);
-
       if (scene === gameObject) {
         gameObject = undefined;
       }
-
       _this = _super.call(this, scene, config);
       _this.gameObject = gameObject;
-
       if (gameObject) {
         gameObject.setInteractive(GetValue$9(config, "inputConfig", undefined));
       }
-
       _this._enable = undefined;
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(OnePointerTracer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setEnable(GetValue$9(o, 'enable', true));
         this.setDetectBounds();
-
         if (this.gameObject === undefined) {
           this.setDetectBounds(GetValue$9(o, 'bounds', undefined));
         } else {
           this.setDetectBounds();
         }
-
-        this.tracerState = TOUCH0; // this.recongizedState = new stateClass(this);
-
+        this.tracerState = TOUCH0;
+        // this.recongizedState = new stateClass(this);
         this.pointer = undefined;
         this.lastPointer = undefined; // Last catched pointer
-
         this.movedState = false;
         this.isTouchingAnyObject = false;
         return this;
@@ -7686,13 +6835,11 @@
       key: "boot",
       value: function boot() {
         _get(_getPrototypeOf(OnePointerTracer.prototype), "boot", this).call(this);
-
         if (this.gameObject) {
           this.gameObject.on('pointerdown', this.onPointerDown, this);
         } else {
           this.scene.input.on('pointerdown', this.onPointerDown, this);
         }
-
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('gameout', this.dragCancel, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
@@ -7704,11 +6851,9 @@
         if (!this.scene) {
           return;
         }
-
         if (this.gameObject) ; else {
           this.scene.input.off('pointerdown', this.onPointerDown, this);
         }
-
         this.scene.input.off('pointerup', this.onPointerUp, this);
         this.scene.input.off('gameout', this.dragCancel, this);
         this.scene.input.off('pointermove', this.onPointerMove, this);
@@ -7717,9 +6862,7 @@
         this.bounds = undefined;
         this.pointer = undefined;
         this.lastPointer = undefined; // Last catched pointer
-
         this.movedState = false;
-
         _get(_getPrototypeOf(OnePointerTracer.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -7731,11 +6874,9 @@
         if (this._enable === e) {
           return;
         }
-
         if (!e) {
           this.dragCancel();
         }
-
         this._enable = e;
         return this;
       }
@@ -7745,7 +6886,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -7767,30 +6907,23 @@
         if (!this.enable) {
           return;
         }
-
         if (this.pointer !== undefined) {
           return;
         }
-
         var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
-
         if (!isInsideBounds) {
           return;
         }
-
         if (this.pointer === pointer) {
           return;
         }
-
         this.pointer = pointer;
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1;
-
         if (this.gameObject === undefined) {
           this.isTouchingAnyObject = gameObjects.length > 0;
         }
-
         this.onDragStart();
       }
     }, {
@@ -7799,17 +6932,13 @@
         if (!this.enable) {
           return;
         }
-
         var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
-
         if (!isInsideBounds) {
           return;
         }
-
         if (this.pointer !== pointer) {
           return;
         }
-
         this.pointer = undefined;
         this.movedState = false;
         this.tracerState = TOUCH0;
@@ -7821,11 +6950,9 @@
         if (!this.enable) {
           return;
         }
-
         if (pointer.isDown) {
           var isInsideBounds = this.bounds ? this.bounds.contains(pointer.x, pointer.y) : true;
           var isCatchedPointer = this.pointer === pointer;
-
           if (!isCatchedPointer && isInsideBounds) ; else if (isCatchedPointer && !isInsideBounds) {
             // Pointer moves out of bounds
             this.onPointerUp(pointer);
@@ -7834,7 +6961,6 @@
             if (!this.movedState) {
               this.movedState = pointer.x !== pointer.downX || pointer.y !== pointer.downY;
             }
-
             if (this.movedState) {
               this.onDrag();
             }
@@ -7847,7 +6973,6 @@
         if (this.tracerState === TOUCH1) {
           this.onDragEnd();
         }
-
         this.pointer = undefined;
         this.tracerState = TOUCH0;
         return this;
@@ -7866,8 +6991,9 @@
       key: "onDrag",
       value: function onDrag() {
         this.emit('drag', this);
-      } // onLastPointerMove() { }
+      }
 
+      // onLastPointerMove() { }
     }, {
       key: "preUpdate",
       value: function preUpdate(time, delta) {}
@@ -7878,7 +7004,6 @@
       key: "startTicking",
       value: function startTicking() {
         _get(_getPrototypeOf(OnePointerTracer.prototype), "startTicking", this).call(this);
-
         this.scene.sys.events.on('preupdate', this.preUpdate, this);
         this.scene.sys.events.on('postupdate', this.postUpdate, this);
       }
@@ -7886,7 +7011,6 @@
       key: "stopTicking",
       value: function stopTicking() {
         _get(_getPrototypeOf(OnePointerTracer.prototype), "stopTicking", this).call(this);
-
         if (this.scene) {
           // Scene might be destoryed
           this.scene.sys.events.off('preupdate', this.preUpdate, this);
@@ -7914,16 +7038,13 @@
         return this;
       }
     }]);
-
     return OnePointerTracer;
   }(TickTask);
-
   var TOUCH0 = 0;
   var TOUCH1 = 1;
   var IDLE$3 = 'IDLE';
 
   var StateProperties$1 = ['next', 'exit', 'enter'];
-
   var FSM$1 = /*#__PURE__*/function () {
     /*
     var config = {
@@ -7948,33 +7069,29 @@
     */
     function FSM(config) {
       _classCallCheck(this, FSM);
-
       // Attach get-next-state function
       var states = GetValue$c(config, 'states', undefined);
-
       if (states) {
         this.addStates(states);
-      } // Attach extend members
+      }
 
-
+      // Attach extend members
       var extend = GetValue$c(config, 'extend', undefined);
-
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
             this[name] = extend[name];
           }
         }
-      } // Event emitter
+      }
 
-
+      // Event emitter
       var eventEmitter = GetValue$c(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue$c(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
     }
-
     _createClass(FSM, [{
       key: "shutdown",
       value: function shutdown() {
@@ -7991,11 +7108,9 @@
         this.setEnable(GetValue$c(o, 'enable', true));
         this.start(GetValue$c(o, 'start', undefined));
         var init = GetValue$c(o, 'init', undefined);
-
         if (init) {
           init.call(this);
         }
-
         return this;
       }
     }, {
@@ -8014,7 +7129,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -8033,38 +7147,29 @@
         if (!this.enable || this._stateLock) {
           return;
         }
-
         if (this._state === newState) {
           return;
         }
-
         this._prevState = this._state;
         this._state = newState;
         this._stateLock = true; // lock state
 
         this.emit('statechange', this);
-
         if (this._prevState != null) {
           var exitEventName = 'exit_' + this._prevState;
           var exitCallback = this[exitEventName];
-
           if (exitCallback) {
             exitCallback.call(this);
           }
-
           this.emit(exitEventName, this);
         }
-
         this._stateLock = false;
-
         if (this._state != null) {
           var enterEventName = 'enter_' + this._state;
           var enterCallback = this[enterEventName];
-
           if (enterCallback) {
             enterCallback.call(this);
           }
-
           this.emit(enterEventName, this);
         }
       }
@@ -8079,7 +7184,6 @@
         this._start = state;
         this._prevState = undefined;
         this._state = state; // Won't fire statechange events
-
         return this;
       }
     }, {
@@ -8088,7 +7192,6 @@
         if (nextState != null) {
           this.state = nextState;
         }
-
         return this;
       }
     }, {
@@ -8096,7 +7199,6 @@
       value: function next() {
         var nextState;
         var getNextState = this['next_' + this.state];
-
         if (getNextState) {
           if (typeof getNextState === 'string') {
             nextState = getNextState;
@@ -8104,7 +7206,6 @@
             nextState = getNextState.call(this);
           }
         }
-
         this["goto"](nextState);
         return this;
       }
@@ -8120,18 +7221,14 @@
           state = name;
           name = state.name;
         }
-
         var stateProperties = this.stateProperties;
-
         for (var i = 0, cnt = stateProperties.length; i < cnt; i++) {
           var propertyName = stateProperties[i];
           var propertyValue = state[propertyName];
-
           if (propertyValue) {
             this["".concat(propertyName, "_").concat(name)] = propertyValue;
           }
         }
-
         return this;
       }
     }, {
@@ -8146,91 +7243,68 @@
             this.addState(name, states[name]);
           }
         }
-
         return this;
       }
     }, {
       key: "runMethod",
       value: function runMethod(methodName, a1, a2, a3, a4, a5) {
         var fn = this[methodName + '_' + this.state];
-
         if (!fn) {
           return undefined;
-        } // Copy from eventemitter3
+        }
 
-
+        // Copy from eventemitter3
         var len = arguments.length;
-
         switch (len) {
           case 1:
             return fn.call(this);
-
           case 2:
             return fn.call(this, a1);
-
           case 3:
             return fn.call(this, a1, a2);
-
           case 4:
             return fn.call(this, a1, a2, a3);
-
           case 5:
             return fn.call(this, a1, a2, a3, a4);
-
           case 6:
             return fn.call(this, a1, a2, a3, a4, a5);
         }
-
         var args = new Array(len - 1);
-
         for (var i = 1; i < len; i++) {
           args[i - 1] = arguments[i];
         }
-
         return fn.apply(this, args);
       }
     }]);
-
     return FSM;
   }();
-
   Object.assign(FSM$1.prototype, EventEmitterMethods);
 
   var HasListener = function HasListener(eventEmitter, eventName, fn, context, once) {
     if (once === undefined) {
       once = false;
     }
-
     var listeners = eventEmitter._events[eventName];
-
     if (!listeners) {
       return false;
     }
-
     for (var i = 0, cnt = listeners.length; i < cnt; i++) {
       var listener = listeners[i];
-
       if (listener.fn === fn && listener.context === context && listener.once === once) {
         return true;
       }
     }
-
     return false;
   };
 
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
-
   var FSM = /*#__PURE__*/function (_FSMBase) {
     _inherits(FSM, _FSMBase);
-
     var _super = _createSuper(FSM);
-
     function FSM() {
       _classCallCheck(this, FSM);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(FSM, [{
       key: "shutdown",
       value:
@@ -8264,14 +7338,12 @@
         this.stopPreUpdate();
         this.stopPostUpdate();
         this._scene = undefined;
-
         _get(_getPrototypeOf(FSM.prototype), "shutdown", this).call(this);
       }
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-
         this._scene = GetValue$c(o, 'scene', undefined);
         return this;
       }
@@ -8301,13 +7373,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'update', this.update, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('update', this.update, this);
         return this;
@@ -8318,9 +7387,7 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('update', this.update, this);
-
         return this;
       }
     }, {
@@ -8329,13 +7396,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'preupdate', this.preupdate, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('preupdate', this.preupdate, this);
         return this;
@@ -8346,9 +7410,7 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('preupdate', this.preupdate, this);
-
         return this;
       }
     }, {
@@ -8357,13 +7419,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'postupdate', this.postupdate, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('postupdate', this.postupdate, this);
         return this;
@@ -8374,33 +7433,23 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('postupdate', this.postupdate, this);
-
         return this;
       }
     }]);
-
     return FSM;
   }(FSM$1);
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var DistanceBetween$2 = Phaser.Math.Distance.Between;
-
   var Tap = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Tap, _OnePointerTracer);
-
     var _super = _createSuper(Tap);
-
     function Tap(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Tap);
-
       _this = _super.call(this, gameObject, config);
-
       var self = _assertThisInitialized(_this);
-
       var stateConfig = {
         states: {
           IDLE: {
@@ -8440,31 +7489,24 @@
         },
         eventEmitter: false
       };
-
       _this.setRecongizedStateObject(new FSM(stateConfig));
-
       return _this;
     }
-
     _createClass(Tap, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Tap.prototype), "resetFromJSON", this).call(this, o);
-
         this.setHoldTime(GetValue$8(o, 'time', 250)); // min-hold-time of Press is 251
-
         this.setTapInterval(GetValue$8(o, 'tapInterval', 200));
         this.setDragThreshold(GetValue$8(o, 'threshold', 9));
         this.setTapOffset(GetValue$8(o, 'tapOffset', 10));
         var taps = GetValue$8(o, 'taps', undefined);
-
         if (taps !== undefined) {
           this.setTaps(taps);
         } else {
           this.setMaxTaps(GetValue$8(o, 'maxTaps', undefined));
           this.setMinTaps(GetValue$8(o, 'minTaps', undefined));
         }
-
         return this;
       }
     }, {
@@ -8474,19 +7516,15 @@
           case IDLE$2:
             this.state = BEGIN$2;
             break;
-
           case BEGIN$2:
             var pointer = this.lastPointer;
             var tapsOffset = DistanceBetween$2(pointer.upX, pointer.upY, pointer.x, pointer.y);
-
             if (tapsOffset > this.tapOffset) {
               // Can't recognize next level, restart here
               this.state = RECOGNIZED$2;
               this.state = BEGIN$2;
             }
-
             break;
-
           case RECOGNIZED$2:
             this.state = BEGIN$2;
             break;
@@ -8497,9 +7535,7 @@
       value: function onDragEnd() {
         if (this.state === BEGIN$2) {
           this.tapsCount++; // Try recognize next level
-
           this.emit('tapping', this, this.gameObject, this.lastPointer);
-
           if (this.maxTaps !== undefined && this.tapsCount === this.maxTaps) {
             // Reach to maxTaps, stop here                
             this.state = RECOGNIZED$2;
@@ -8512,7 +7548,6 @@
         if (this.state === IDLE$2) {
           return;
         }
-
         if (this.pointer.getDistance() > this.dragThreshold) {
           // Cancel
           this.state = IDLE$2;
@@ -8524,20 +7559,16 @@
         if (!this.isRunning || !this.enable) {
           return;
         }
-
         if (this.state === BEGIN$2) {
           var pointer = this.lastPointer;
-
           if (pointer.isDown) {
             var holdTime = time - pointer.downTime;
-
             if (holdTime > this.holdTime) {
               this.state = IDLE$2;
             }
           } else {
             // isUp
             var releasedTime = time - pointer.upTime;
-
             if (releasedTime > this.tapInterval) {
               if (this.minTaps === undefined || this.tapsCount >= this.minTaps) {
                 this.state = RECOGNIZED$2;
@@ -8553,9 +7584,8 @@
       value: function postUpdate(time, delta) {
         if (!this.isRunning || !this.enable) {
           return;
-        } // Clear RECOGNIZED after update()
-
-
+        }
+        // Clear RECOGNIZED after update()
         if (this.state === RECOGNIZED$2) {
           this.state = IDLE$2;
         }
@@ -8569,14 +7599,12 @@
       key: "setHoldTime",
       value: function setHoldTime(time) {
         this.holdTime = time; // ms
-
         return this;
       }
     }, {
       key: "setTapInterval",
       value: function setTapInterval(time) {
         this.tapInterval = time; // ms
-
         return this;
       }
     }, {
@@ -8609,15 +7637,12 @@
         if (maxTaps === undefined) {
           maxTaps = minTaps;
         }
-
         this.setMinTaps(minTaps).setMaxTaps(maxTaps);
         return this;
       }
     }]);
-
     return Tap;
   }(OnePointerTracer);
-
   var IDLE$2 = 'IDLE';
   var BEGIN$2 = 'BEGIN';
   var RECOGNIZED$2 = 'RECOGNIZED';
@@ -8628,50 +7653,37 @@
     tap.on('tap', OnTap, this);
     return tap;
   };
-
   var OnTap = function OnTap(tap) {
-    var board = this.board; // Get touched tileX, tileY
-
+    var board = this.board;
+    // Get touched tileX, tileY
     var tileXY = board.worldXYToTileXY(tap.worldX, tap.worldY);
     var tileX = tileXY.x,
-        tileY = tileXY.y;
-
+      tileY = tileXY.y;
     if (!board.contains(tileX, tileY)) {
       return;
     }
-
     board.emit('tiletap', tap, tileXY);
     board.emit("tile".concat(tap.tapsCount, "tap"), tap, tileXY);
-
     var boardEventCallback = function boardEventCallback(gameObject) {
       board.emit('gameobjecttap', tap, gameObject);
       board.emit("gameobject".concat(tap.tapsCount, "tap"), tap, gameObject);
     };
-
     var chessEventCallback = function chessEventCallback(gameObject) {
       gameObject.emit('board.tap', tap);
       gameObject.emit("board.".concat(tap.tapsCount, "tap"), tap);
     };
-
     EmitChessEvent(boardEventCallback, chessEventCallback, board, tileX, tileY, tap);
   };
 
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
-
   var Press = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Press, _OnePointerTracer);
-
     var _super = _createSuper(Press);
-
     function Press(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Press);
-
       _this = _super.call(this, gameObject, config);
-
       var self = _assertThisInitialized(_this);
-
       var stateConfig = {
         states: {
           IDLE: {
@@ -8711,17 +7723,13 @@
         },
         eventEmitter: false
       };
-
       _this.setRecongizedStateObject(new FSM(stateConfig));
-
       return _this;
     }
-
     _createClass(Press, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Press.prototype), "resetFromJSON", this).call(this, o);
-
         this.setDragThreshold(GetValue$7(o, 'threshold', 9));
         this.setHoldTime(GetValue$7(o, 'time', 251));
         return this;
@@ -8730,7 +7738,6 @@
       key: "onDragStart",
       value: function onDragStart() {
         this.state = BEGIN$1;
-
         if (this.holdTime === 0) {
           this.state = RECOGNIZED$1;
         }
@@ -8746,7 +7753,6 @@
         if (this.state === IDLE$1) {
           return;
         }
-
         if (this.pointer.getDistance() > this.dragThreshold) {
           this.state = IDLE$1;
         }
@@ -8757,10 +7763,8 @@
         if (!this.isRunning || !this.enable) {
           return;
         }
-
         if (this.state === BEGIN$1) {
           var holdTime = time - this.pointer.downTime;
-
           if (holdTime >= this.holdTime) {
             this.state = RECOGNIZED$1;
           }
@@ -8775,7 +7779,6 @@
       key: "setHoldTime",
       value: function setHoldTime(time) {
         this.holdTime = time; // ms
-
         return this;
       }
     }, {
@@ -8785,10 +7788,8 @@
         return this;
       }
     }]);
-
     return Press;
   }(OnePointerTracer);
-
   var IDLE$1 = 'IDLE';
   var BEGIN$1 = 'BEGIN';
   var RECOGNIZED$1 = 'RECOGNIZED';
@@ -8799,39 +7800,32 @@
     press.on('pressstart', OnPressStart, this).on('pressend', OnPressEnd, this);
     return press;
   };
-
   var OnPressStart = function OnPressStart(press) {
-    var board = this.board; // Get touched tileX, tileY
-
+    var board = this.board;
+    // Get touched tileX, tileY
     var tileXY = board.worldXYToTileXY(press.worldX, press.worldY);
     var tileX = tileXY.x,
-        tileY = tileXY.y;
-
+      tileY = tileXY.y;
     if (!board.contains(tileX, tileY)) {
       return;
     }
-
     board.emit('tilepressstart', press, tileXY);
     EmitChessEvent('gameobjectpressstart', 'board.pressstart', board, tileX, tileY, press);
   };
-
   var OnPressEnd = function OnPressEnd(press) {
-    var board = this.board; // Get touched tileX, tileY
-
+    var board = this.board;
+    // Get touched tileX, tileY
     var tileXY = board.worldXYToTileXY(press.worldX, press.worldY);
     var tileX = tileXY.x,
-        tileY = tileXY.y;
-
+      tileY = tileXY.y;
     if (!board.contains(tileX, tileY)) {
       return;
     }
-
     board.emit('tilepressend', press, tileXY);
     EmitChessEvent('gameobjectpressend', 'board.pressend', board, tileX, tileY, press);
   };
 
   var GameClass = Phaser.Game;
-
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
   };
@@ -8903,13 +7897,11 @@
     } else if (out === true) {
       out = globOut;
     }
-
     out.left = false;
     out.right = false;
     out.up = false;
     out.down = false;
     angle = (angle + 360) % 360;
-
     switch (dirMode) {
       case 0:
         // up & down
@@ -8918,9 +7910,7 @@
         } else {
           out.up = true;
         }
-
         break;
-
       case 1:
         // left & right
         if (angle > 90 && angle <= 270) {
@@ -8928,9 +7918,7 @@
         } else {
           out.right = true;
         }
-
         break;
-
       case 2:
         // 4 dir
         if (angle > 45 && angle <= 135) {
@@ -8942,9 +7930,7 @@
         } else {
           out.right = true;
         }
-
         break;
-
       case 3:
         // 8 dir
         if (angle > 22.5 && angle <= 67.5) {
@@ -8968,32 +7954,22 @@
         } else {
           out.right = true;
         }
-
         break;
     }
-
     return out;
   };
-
   var globOut = {};
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var RadToDeg$1 = Phaser.Math.RadToDeg;
-
   var Swipe = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Swipe, _OnePointerTracer);
-
     var _super = _createSuper(Swipe);
-
     function Swipe(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Swipe);
-
       _this = _super.call(this, gameObject, config);
-
       var self = _assertThisInitialized(_this);
-
       var stateConfig = {
         states: {
           IDLE: {
@@ -9033,19 +8009,14 @@
         },
         eventEmitter: false
       };
-
       _this.setRecongizedStateObject(new FSM(stateConfig));
-
       _this.clearDirectionStates();
-
       return _this;
     }
-
     _createClass(Swipe, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Swipe.prototype), "resetFromJSON", this).call(this, o);
-
         this.setDragThreshold(GetValue$6(o, 'threshold', 10));
         this.setVelocityThreshold(GetValue$6(o, 'velocityThreshold', 1000));
         this.setDirectionMode(GetValue$6(o, 'dir', '8dir'));
@@ -9068,7 +8039,6 @@
           if (!this.validDrag) {
             this.validDrag = this.dragThreshold === 0 || this.pointer.getDistance() >= this.dragThreshold;
           }
-
           if (this.validDrag && this.dragVelocity > this.velocityThreshold) {
             this.state = RECOGNIZED;
           }
@@ -9079,9 +8049,8 @@
       value: function postUpdate(time, delta) {
         if (!this.isRunning || !this.enable) {
           return;
-        } // Clear RECOGNIZED after update()
-
-
+        }
+        // Clear RECOGNIZED after update()
         if (this.state === RECOGNIZED) {
           this.state = IDLE;
         }
@@ -9095,18 +8064,15 @@
       key: "dragVelocity",
       get: function get() {
         var velocity;
-
         switch (this.dirMode) {
           case 0:
             velocity = this.getVelocityY();
             break;
           // up & down
-
           case 1:
             velocity = this.getVelocityX();
             break;
           // left & right
-
           default:
             velocity = this.getVelocity();
             break;
@@ -9133,7 +8099,6 @@
         if (typeof m === 'string') {
           m = DIRMODE[m];
         }
-
         this.dirMode = m;
         return this;
       }
@@ -9154,10 +8119,8 @@
         return this;
       }
     }]);
-
     return Swipe;
   }(OnePointerTracer);
-
   Object.assign(Swipe.prototype, VelocityMethods);
   var IDLE = 'IDLE';
   var BEGIN = 'BEGIN';
@@ -9169,18 +8132,15 @@
     swipe.on('swipe', OnSwipe, this);
     return swipe;
   };
-
   var OnSwipe = function OnSwipe(swipe) {
-    var board = this.board; // Get touched tileX, tileY
-
+    var board = this.board;
+    // Get touched tileX, tileY
     var tileXY = board.worldXYToTileXY(swipe.worldX, swipe.worldY);
     var tileX = tileXY.x,
-        tileY = tileXY.y;
-
+      tileY = tileXY.y;
     if (!board.contains(tileX, tileY)) {
       return;
     }
-
     swipe.direction = board.angleSnapToDirection(tileXY, swipe.getVelocityAngle());
     board.emit('tileswipe', swipe, tileXY);
     EmitChessEvent('gameobjectswipe', 'board.swipe', board, tileX, tileY, swipe);
@@ -9189,7 +8149,6 @@
   var Input = /*#__PURE__*/function () {
     function Input(board, config) {
       _classCallCheck(this, Input);
-
       var enable = GetValue$c(config, 'enable', true);
       var useTouchZone = GetValue$c(config, 'useTouchZone', true);
       var scene = board.scene;
@@ -9205,7 +8164,6 @@
         x: undefined,
         y: undefined
       };
-
       if (useTouchZone) {
         var touchZone = new TouchZone(scene);
         touchZone.on('pointerdown', OnPointerDown$1, this);
@@ -9217,35 +8175,32 @@
         scene.input.on('pointerup', OnPointerUp$1, this);
         scene.input.on('pointermove', OnPointerMove$1, this);
       }
-
       this.tap = InstallTap.call(this);
       this.press = InstallPress.call(this);
       this.swipe = InstallSwipe.call(this);
       board.once('destroy', this.onBoardDestroy, this);
       this.setEnable(enable);
     }
-
     _createClass(Input, [{
       key: "destroy",
       value: function destroy(fromScene) {
         this.tap.destroy(fromScene);
         this.press.destroy(fromScene);
         this.swipe.destroy(fromScene);
-
         if (this.touchZone) {
           this.touchZone.destroy(fromScene);
           this.touchZone = undefined;
         } else {
           var scene = this.board.scene;
-
           if (scene) {
             scene.input.off('pointerdown', OnPointerDown$1, this);
             scene.input.off('pointerup', OnPointerUp$1, this);
             scene.input.off('pointermove', OnPointerMove$1, this);
           }
         }
+        this.board = undefined;
 
-        this.board = undefined; // board.off('destroy', this.onBoardDestroy, this);
+        // board.off('destroy', this.onBoardDestroy, this);
       }
     }, {
       key: "onBoardDestroy",
@@ -9261,13 +8216,10 @@
         if (this._enable === e) {
           return;
         }
-
         if (!e) {
           this.pointer = null;
         }
-
         this._enable = e;
-
         if (this.touchZone) {
           if (e) {
             this.touchZone.setInteractive();
@@ -9275,7 +8227,6 @@
             this.touchZone.disableInteractive();
           }
         }
-
         this.tap.setEnable(e);
         this.press.setEnable(e);
         this.swipe.setEnable(e);
@@ -9286,12 +8237,10 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
     }]);
-
     return Input;
   }();
 
@@ -9303,7 +8252,6 @@
       var enable = config === false ? false : true;
       this.input.setEnable(enable);
     }
-
     return this;
   };
 
@@ -9313,20 +8261,16 @@
         order: config
       };
     }
-
     if (config === undefined) {
       config = {};
     }
-
     var order = GetValue$c(config, 'order', 0);
     var camera = GetValue$c(config, 'camera', this.scene.cameras.main);
     var paddingX = GetValue$c(config, 'paddingX', 1);
     var paddingY = GetValue$c(config, 'paddingY', 1);
-
     if (ViewportBounds === undefined) {
       ViewportBounds = new Rectangle$2();
     }
-
     ViewportBounds.width = (camera.width + paddingX * 2) / camera.zoomX;
     ViewportBounds.height = (camera.height + paddingY * 2) / camera.zoomY;
     ViewportBounds.centerX = camera.centerX + camera.scrollX;
@@ -9337,20 +8281,15 @@
     });
     return this;
   };
-
   var ViewportBounds;
 
   var Board = /*#__PURE__*/function (_LogicBoard) {
     _inherits(Board, _LogicBoard);
-
     var _super = _createSuper(Board);
-
     function Board() {
       _classCallCheck(this, Board);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(Board, [{
       key: "touchZone",
       get: function get() {
@@ -9366,10 +8305,8 @@
         return this.touchZone;
       }
     }]);
-
     return Board;
   }(Board$1);
-
   var methods$2 = {
     setInteractive: SetInteractive$1,
     forEachCullTileXY: ForEachCullTileXY
@@ -9379,23 +8316,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -9405,31 +8336,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -9437,12 +8367,10 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
@@ -9464,33 +8392,25 @@
   };
 
   var Base$1 = Phaser.GameObjects.Polygon;
-
   var Shape = /*#__PURE__*/function (_Base) {
     _inherits(Shape, _Base);
-
     var _super = _createSuper(Shape);
-
     function Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
       var _this;
-
       _classCallCheck(this, Shape);
-
       if (addToBoard === undefined) {
         addToBoard = true;
-      } // Chess-Container
+      }
 
-
+      // Chess-Container
       var isMiniBoard = IsMiniBoardObject(board),
-          miniBoard;
-
+        miniBoard;
       if (isMiniBoard) {
         miniBoard = board;
         board = miniBoard.board;
       }
-
       var scene = board.scene;
       var worldX, worldY;
-
       if (addToBoard) {
         worldX = 0;
         worldY = 0;
@@ -9498,11 +8418,9 @@
         worldX = tileX;
         worldY = tileY;
       }
-
       var points = board.getGridPoints(undefined, undefined, true);
       ShiftToO(points);
       _this = _super.call(this, scene, worldX, worldY, points, fillColor, fillAlpha);
-
       if (addToBoard) {
         if (isMiniBoard) {
           // Chess-Container
@@ -9513,34 +8431,27 @@
       } else {
         GetChessData(_assertThisInitialized(_this));
       }
-
       return _this;
     }
-
     return _createClass(Shape);
   }(Base$1);
-
   var ShiftToO = function ShiftToO(points) {
     var minX = Infinity;
     var minY = Infinity;
     var point;
-
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       point = points[i];
       minX = Math.min(minX, point.x);
       minY = Math.min(minY, point.y);
     }
-
     if (minX === 0 && minY === 0) {
       return points;
     }
-
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       point = points[i];
       point.x -= minX;
       point.y -= minY;
     }
-
     return points;
   };
 
@@ -9552,119 +8463,106 @@
   SetValue(window, 'RexPlugins.Board.Shape', Shape);
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-
     var _super = _createSuper(SceneUpdateTickTask);
-
     function SceneUpdateTickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, SceneUpdateTickTask);
-
       _this = _super.call(this, parent, config);
       _this.tickEventName = GetValue$5(config, 'tickEventName', 'update');
       return _this;
     }
-
     _createClass(SceneUpdateTickTask, [{
       key: "startTicking",
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-
         this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
       value: function stopTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-
         if (this.scene) {
           // Scene might be destoryed
           this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
-      } // update(time, delta) {
+      }
+
+      // update(time, delta) {
       //     
       // }
-
     }]);
-
     return SceneUpdateTickTask;
   }(TickTask);
 
   var CanMoveToTile$1 = function CanMoveToTile(tileX, tileY, direction) {
-    var board = this.chessData.board; // Chess is not in a board
-
+    var board = this.chessData.board;
+    // Chess is not in a board
     if (board == null) {
       return false;
     }
-
     var myTileXYZ = this.chessData.tileXYZ;
     var myTileX = myTileXYZ.x,
-        myTileY = myTileXYZ.y,
-        myTileZ = myTileXYZ.z; // Move to current position
+      myTileY = myTileXYZ.y,
+      myTileZ = myTileXYZ.z;
 
+    // Move to current position
     if (tileX === myTileX && tileY === myTileY) {
       return true;
-    } // Target position is not in board
+    }
 
-
+    // Target position is not in board
     if (!board.contains(tileX, tileY)) {
       return false;
-    } // Blocker test
+    }
 
-
+    // Blocker test
     if (this.blockerTest) {
       if (board.hasBlocker(tileX, tileY)) {
         return false;
       }
-    } // Edge-blocker test
+    }
 
+    // Edge-blocker test
+    if (this.edgeBlockerTest) ;
 
-    if (this.edgeBlockerTest) ; // Custom moveable test
-
-
+    // Custom moveable test
     if (this.moveableTestCallback) {
       if (direction === undefined) {
         direction = this.chessData.getTileDirection(tileX, tileY);
       }
-
       targetTileXY$3.x = tileX;
       targetTileXY$3.y = tileY;
       targetTileXY$3.z = myTileZ;
-
       if (this.moveableTestScope) {
         var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, targetTileXY$3, direction, board);
       } else {
         var moveable = this.moveableTestCallback(myTileXYZ, targetTileXY$3, direction, board);
       }
-
       if (!moveable) {
         return false;
       }
-    } // Sneak mode, change tileZ in MoveToTile method
+    }
+
+    // Sneak mode, change tileZ in MoveToTile method
     // if (this.sneakMode) {
     // }
+
     // Occupied test
-
-
     if (this.occupiedTest && !this.sneakMode) {
       var occupiedChess = board.tileXYZToChess(tileX, tileY, myTileZ);
-
       if (occupiedChess) {
-        this.emit('occupy', occupiedChess, this.parent, this); // Try to move occupiedChess away in this event
+        this.emit('occupy', occupiedChess, this.parent, this);
+        // Try to move occupiedChess away in this event
         // Still ooccupied?
-
         if (board.contains(tileX, tileY, myTileZ)) {
           return false;
         }
       }
     }
-
     return true;
   };
-
   var targetTileXY$3 = {
     x: 0,
     y: 0,
@@ -9674,36 +8572,29 @@
   var GetSneakTileZ = function GetSneakTileZ(moveTo, tileX, tileY, tileZ) {
     var board = moveTo.chessData.board;
     var sneakTileZ = tileZ.toString();
-
     do {
       sneakTileZ += '.';
     } while (board.contains(tileX, tileY, sneakTileZ));
-
     return sneakTileZ;
   };
 
   var MoveToTile$1 = function MoveToTile(tileX, tileY, direction) {
     var board = this.chessData.board;
-
     if (board === null) {
       // chess is not in a board
       this.lastMoveResult = false;
       return this;
     }
-
     if (tileX != null && typeof tileX !== 'number') {
       var config = tileX;
       tileX = GetValue$c(config, 'x', undefined);
       tileY = GetValue$c(config, 'y', undefined);
       direction = GetValue$c(config, 'direction', undefined);
     }
-
     var myTileXYZ = this.chessData.tileXYZ;
-
     if (direction !== undefined && tileX == null || tileY == null) {
       // Get neighbor tile position if direction is not undefined
       var targetTileXY = board.getNeighborTileXY(myTileXYZ, direction, true);
-
       if (targetTileXY !== null) {
         tileX = targetTileXY.x;
         tileY = targetTileXY.y;
@@ -9711,32 +8602,28 @@
         tileX = null;
         tileY = null;
       }
-    } // invalid tile position
+    }
 
-
+    // invalid tile position
     if (tileX == null || tileY == null) {
       this.lastMoveResult = false;
       return this;
     }
-
     if (direction === undefined) {
       globTileXYZ.x = tileX;
       globTileXYZ.y = tileY;
       direction = board.getNeighborTileDirection(myTileXYZ, globTileXYZ);
     }
-
     if (!this.canMoveTo(tileX, tileY, direction)) {
       this.lastMoveResult = false;
       return this;
     }
-
     this.destinationTileX = tileX;
     this.destinationTileY = tileY;
     this.destinationDirection = direction;
-
     if (board.wrapMode && direction !== null) {
-      board.grid.getNeighborTileXY(myTileXYZ.x, myTileXYZ.y, direction, neighborTileXY); // wrap mode && neighbor
-
+      board.grid.getNeighborTileXY(myTileXYZ.x, myTileXYZ.y, direction, neighborTileXY);
+      // wrap mode && neighbor
       if (neighborTileXY.x === tileX && neighborTileXY.y === tileY) {
         // not a wrapped neighbor
         var out = board.tileXYToWorldXY(tileX, tileY, true);
@@ -9752,8 +8639,8 @@
         var startY = out.y;
         var endX = (startX + originNeighborWorldX) / 2;
         var endY = (startY + originNeighborWorldY) / 2;
-        this.moveAlongLine(undefined, undefined, endX, endY); // line 1
-
+        this.moveAlongLine(undefined, undefined, endX, endY);
+        // line 1
         var oppositeDirection = board.getOppositeDirection(tileX, tileY, direction);
         board.grid.getNeighborTileXY(tileX, tileY, oppositeDirection, neighborTileXY);
         out = board.tileXYToWorldXY(neighborTileXY.x, neighborTileXY.y, true);
@@ -9770,9 +8657,7 @@
       var out = board.tileXYToWorldXY(tileX, tileY, true);
       this.moveAlongLine(undefined, undefined, out.x, out.y);
     }
-
     var tileZ = myTileXYZ.z;
-
     if (this.sneakMode) {
       if (this.tileZSave === undefined) {
         if (board.contains(tileX, tileY, tileZ)) {
@@ -9791,13 +8676,11 @@
         }
       }
     }
-
     board.moveChess(this.parent, tileX, tileY, tileZ, false);
     this.isRunning = true;
     this.lastMoveResult = true;
     return this;
   };
-
   var globTileXYZ = {};
   var neighborTileXY = {};
 
@@ -9812,19 +8695,15 @@
    * @param {object} ret JSON object to return, set null to return a new object
    * @returns {object} this object
    */
-
   var Clone = function Clone(obj, out) {
     var objIsArray = Array.isArray(obj);
-
     if (out === undefined) {
       out = objIsArray ? [] : {};
     } else {
       Clear(out);
     }
-
     if (objIsArray) {
       out.length = obj.length;
-
       for (var i = 0, cnt = obj.length; i < cnt; i++) {
         out[i] = obj[i];
       }
@@ -9833,77 +8712,61 @@
         out[key] = obj[key];
       }
     }
-
     return out;
   };
 
   var MoveToRandomNeighbor$1 = function MoveToRandomNeighbor() {
     var board = this.chessData.board;
-
     if (board === null) {
       // chess is not in a board
       this.lastMoveResult = false;
       return this;
     }
-
     var directions = board.grid.allDirections;
-
     if (globDirections$1.length !== directions.length) {
       Clone(directions, globDirections$1);
     }
-
     Shuffle(globDirections$1);
-
     for (var i = 0, cnt = globDirections$1.length; i < cnt; i++) {
       this.moveToward(globDirections$1[i]);
-
       if (this.lastMoveResult) {
         return this;
       }
     }
-
     return this;
   };
-
   var globDirections$1 = [];
 
   var MoveAway = function MoveAway(tileX, tileY, moveAwayMode) {
     var board = this.chessData.board;
-
     if (board === null) {
       // chess is not in a board
       this.lastMoveResult = false;
       return this;
     }
-
     if (typeof tileX !== 'number') {
       var config = tileX;
       tileX = config.x;
       tileY = config.y;
     }
-
     targetTileXY$2.x = tileX;
     targetTileXY$2.y = tileY;
-
     if (moveAwayMode === undefined) {
       moveAwayMode = true;
     }
-
     var myTileXYZ = this.chessData.tileXYZ;
-    var directions = board.grid.allDirections; // Get tileXY and distance of each neighbor, and current tile position
+    var directions = board.grid.allDirections;
 
+    // Get tileXY and distance of each neighbor, and current tile position
     for (var i = 0, cnt = directions.length + 1; i < cnt; i++) {
       var chessInfo = globChessInfo[i];
-
       if (!chessInfo) {
         chessInfo = {};
         globChessInfo.push(chessInfo);
       }
-
       if (i < cnt - 1) {
         // Neighbors
         var out = board.getNeighborTileXY(myTileXYZ, i, chessInfo);
-
         if (out === null) {
           // Invalid neighbor tile position
           chessInfo.x = undefined;
@@ -9920,72 +8783,61 @@
         chessInfo.distance = board.getDistance(chessInfo, targetTileXY$2, true);
       }
     }
+    globChessInfo.length = directions.length + 1;
 
-    globChessInfo.length = directions.length + 1; // Sort chess info
-
+    // Sort chess info
     var previousDirection = this.destinationDirection;
     globChessInfo.sort(function (infoA, infoB) {
       var distanceA = infoA.distance,
-          distanceB = infoB.distance; // Invalid tile position
-
+        distanceB = infoB.distance;
+      // Invalid tile position
       if (distanceA === undefined) {
         return 1;
       }
-
       if (distanceB === undefined) {
         return -1;
       }
-
       if (distanceA > distanceB) {
         return moveAwayMode ? -1 : 1;
       }
-
       if (distanceA < distanceB) {
         return moveAwayMode ? 1 : -1;
-      } // Equal-to case
+      }
 
-
+      // Equal-to case
       var directionA = infoA.direction,
-          directionB = infoB.direction; // Diagonal
-
+        directionB = infoB.direction;
+      // Diagonal
       if (directionA === previousDirection) {
         return 1;
       }
-
       if (directionB === previousDirection) {
         return -1;
-      } // Current tile position
-
-
+      }
+      // Current tile position
       if (directionA === undefined) {
         return 1;
       }
-
       if (directionB === undefined) {
         return -1;
       }
-
       return 0;
-    }); // Try move to neighbor, or current tile position
+    });
 
+    // Try move to neighbor, or current tile position
     for (var i = 0, cnt = globChessInfo.length; i < cnt; i++) {
       chessInfo = globChessInfo[i];
-
       if (chessInfo.distance === null) {
         // Invalid tile position
         return this;
       }
-
       this.moveTo(chessInfo);
-
       if (this.lastMoveResult) {
         return this;
       }
     }
-
     return this;
   };
-
   var targetTileXY$2 = {
     x: 0,
     y: 0
@@ -10010,26 +8862,19 @@
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Lerp = Phaser.Math.Linear;
   var AngleBetween = Phaser.Math.Angle.Between;
-
   var MoveTo$2 = /*#__PURE__*/function (_TickTask) {
     _inherits(MoveTo, _TickTask);
-
     var _super = _createSuper(MoveTo);
-
     function MoveTo(gameObject, config) {
       var _this;
-
       _classCallCheck(this, MoveTo);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
 
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(MoveTo, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -10062,7 +8907,6 @@
         if (e == undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -10086,12 +8930,9 @@
           x = config.x;
           y = config.y;
         }
-
         this.targetX = x;
         this.targetY = y;
-
         _get(_getPrototypeOf(MoveTo.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
@@ -10102,7 +8943,6 @@
           x = config.x;
           y = config.y;
         }
-
         var gameObject = this.parent;
         var targetX = gameObject.x;
         var targetY = gameObject.y;
@@ -10125,32 +8965,25 @@
         if (!this.isRunning || !this.enable) {
           return this;
         }
-
         var gameObject = this.parent;
-
         if (!gameObject.active) {
           return this;
         }
-
         var curX = gameObject.x,
-            curY = gameObject.y;
+          curY = gameObject.y;
         var targetX = this.targetX,
-            targetY = this.targetY;
-
+          targetY = this.targetY;
         if (curX === targetX && curY === targetY) {
           this.complete();
           return this;
         }
-
         if (this.speed === 0 || delta === 0 || this.timeScale === 0) {
           return this;
         }
-
         var dt = delta * this.timeScale / 1000;
         var movingDist = this.speed * dt;
         var distToTarget = DistanceBetween(curX, curY, targetX, targetY);
         var newX, newY;
-
         if (movingDist < distToTarget) {
           var t = movingDist / distToTarget;
           newX = Lerp(curX, targetX, t);
@@ -10159,45 +8992,34 @@
           newX = targetX;
           newY = targetY;
         }
-
         gameObject.setPosition(newX, newY);
-
         if (this.rotateToTarget) {
           gameObject.rotation = AngleBetween(curX, curY, newX, newY);
         }
-
         return this;
       }
     }]);
-
     return MoveTo;
   }(SceneUpdateTickTask);
 
   var MoveTo$1 = /*#__PURE__*/function (_TickTask) {
     _inherits(MoveTo, _TickTask);
-
     var _super = _createSuper(MoveTo);
-
     function MoveTo(gameObject, config) {
       var _this;
-
       _classCallCheck(this, MoveTo);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
 
       _this.chessData = GetChessData(gameObject);
       _this.scene = gameObject.scene;
       _this.moveToTask = new MoveTo$2(gameObject, {
         tickingMode: 0
       });
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(MoveTo, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -10242,7 +9064,6 @@
       key: "shutdown",
       value: function shutdown(fromScene) {
         this.moveToTask.shutdown(fromScene);
-
         _get(_getPrototypeOf(MoveTo.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -10259,7 +9080,6 @@
         if (e == undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -10299,7 +9119,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.rotateToTarget = enable;
         return this;
       }
@@ -10309,7 +9128,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.occupiedTest = enable;
         return this;
       }
@@ -10319,7 +9137,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.blockerTest = enable;
         return this;
       }
@@ -10329,7 +9146,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.edgeBlockerTest = enable;
         return this;
       }
@@ -10346,7 +9162,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.sneakMode = enable;
         this.tileZSave = undefined;
         return this;
@@ -10357,11 +9172,9 @@
         if (startX !== undefined) {
           this.parent.x = startX;
         }
-
         if (startY !== undefined) {
           this.parent.y = startY;
         }
-
         this.moveToTask.moveTo(endX, endY);
         return this;
       }
@@ -10371,7 +9184,6 @@
         if (!this.moveToTask.hasOwnProperty('nextlines')) {
           this.moveToTask.nextlines = [];
         }
-
         this.moveToTask.nextlines.push([startX, startY, endX, endY]);
         return this;
       }
@@ -10379,16 +9191,13 @@
       key: "moveNextLine",
       value: function moveNextLine() {
         var nextlines = this.moveToTask.nextlines;
-
         if (!nextlines) {
           return false;
         }
-
         if (nextlines.length === 0) {
           return false;
-        } // has next line
-
-
+        }
+        // has next line
         this.moveAlongLine.apply(this, nextlines[0]);
         nextlines.length = 0;
         return true;
@@ -10399,73 +9208,61 @@
         if (!this.isRunning || !this.enable) {
           return this;
         }
-
         var moveToTask = this.moveToTask;
         moveToTask.update(time, delta);
-
         if (!moveToTask.isRunning) {
           if (!this.moveNextLine()) {
             this.complete();
           }
-
           return this;
         }
-
         return this;
       }
     }]);
-
     return MoveTo;
   }(SceneUpdateTickTask);
-
   Object.assign(MoveTo$1.prototype, Methods$5);
 
   var CanMoveToTile = function CanMoveToTile(tileX, tileY, direction) {
     var miniBoard = this.parent;
-    var mainBoard = miniBoard.mainBoard; // Not on a mainBoard
-
+    var mainBoard = miniBoard.mainBoard;
+    // Not on a mainBoard
     if (mainBoard == null) {
       return false;
     }
-
     myTileXYZ.x = miniBoard.tileX;
     myTileXYZ.y = miniBoard.tileY;
     targetTileXYZ.x = tileX;
-    targetTileXYZ.y = tileY; // Move to current position
-
+    targetTileXYZ.y = tileY;
+    // Move to current position
     if (targetTileXYZ.x === myTileXYZ.x && targetTileXYZ.y === myTileXYZ.y) {
       return true;
     }
-
-    miniBoard.pullOutFromMainBoard(); // Can not put on main board
-
+    miniBoard.pullOutFromMainBoard();
+    // Can not put on main board
     if (!miniBoard.canPutOnMainBoard(mainBoard, targetTileXYZ.x, targetTileXYZ.y)) {
       miniBoard.putBack();
       return false;
-    } // Custom moveable test
+    }
 
-
+    // Custom moveable test
     if (this.moveableTestCallback) {
       if (direction === undefined) {
         direction = mainBoard.getNeighborTileDirection(myTileXYZ, targetTileXYZ);
       }
-
       if (this.moveableTestScope) {
         var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, targetTileXYZ, direction, mainBoard);
       } else {
         var moveable = this.moveableTestCallback(myTileXYZ, targetTileXYZ, direction, mainBoard);
       }
-
       if (!moveable) {
         miniBoard.putBack();
         return false;
       }
     }
-
     miniBoard.putBack();
     return true;
   };
-
   var myTileXYZ = {
     x: 0,
     y: 0,
@@ -10479,27 +9276,23 @@
 
   var MoveToTile = function MoveToTile(tileX, tileY, direction) {
     var miniBoard = this.parent;
-    var mainBoard = miniBoard.mainBoard; // Not on a mainBoard
-
+    var mainBoard = miniBoard.mainBoard;
+    // Not on a mainBoard
     if (mainBoard == null) {
       this.lastMoveResult = false;
       return this;
     }
-
     if (tileX != null && typeof tileX !== 'number') {
       var config = tileX;
       tileX = GetValue$c(config, 'x', undefined);
       tileY = GetValue$c(config, 'y', undefined);
       direction = GetValue$c(config, 'direction', undefined);
     }
-
     myTileXY.x = miniBoard.tileX;
     myTileXY.y = miniBoard.tileY;
-
     if (direction !== undefined && tileX == null || tileY == null) {
       // Get neighbor tile position if direction is not undefined
       var out = mainBoard.getNeighborTileXY(myTileXY, direction, true);
-
       if (out !== null) {
         tileX = out.x;
         tileY = out.y;
@@ -10507,29 +9300,27 @@
         tileX = null;
         tileY = null;
       }
-    } // invalid tile position
+    }
 
-
+    // invalid tile position
     if (tileX == null || tileY == null) {
       this.lastMoveResult = false;
       return this;
     }
-
     if (direction === undefined) {
       targetTileXY$1.x = tileX;
       targetTileXY$1.y = tileY;
       direction = board.getNeighborTileDirection(myTileXY, targetTileXY$1);
     }
-
     if (!this.canMoveTo(tileX, tileY, direction)) {
       this.lastMoveResult = false;
       return this;
     }
-
     this.destinationTileX = tileX;
     this.destinationTileY = tileY;
-    this.destinationDirection = direction; // Not support wrap mode
+    this.destinationDirection = direction;
 
+    // Not support wrap mode
     var out = mainBoard.tileXYToWorldXY(tileX, tileY, true);
     this.moveToTask.moveTo(out.x, out.y);
     miniBoard.putOnMainBoard(mainBoard, tileX, tileY, false);
@@ -10537,7 +9328,6 @@
     this.lastMoveResult = true;
     return this;
   };
-
   var myTileXY = {};
   var targetTileXY$1 = {};
 
@@ -10548,57 +9338,43 @@
 
   var MoveToRandomNeighbor = function MoveToRandomNeighbor() {
     var miniBoard = this.parent;
-    var mainBoard = miniBoard.mainBoard; // Not on a mainBoard
-
+    var mainBoard = miniBoard.mainBoard;
+    // Not on a mainBoard
     if (mainBoard == null) {
       this.lastMoveResult = false;
       return this;
     }
-
     var directions = mainBoard.grid.allDirections;
-
     if (globDirections.length !== directions.length) {
       Clone(directions, globDirections);
     }
-
     Shuffle(globDirections);
-
     for (var i = 0, cnt = globDirections.length; i < cnt; i++) {
       this.moveToward(globDirections[i]);
-
       if (this.lastMoveResult) {
         return this;
       }
     }
-
     return this;
   };
-
   var globDirections = [];
 
   var MoveTo = /*#__PURE__*/function (_TickTask) {
     _inherits(MoveTo, _TickTask);
-
     var _super = _createSuper(MoveTo);
-
     function MoveTo(miniBoard, config) {
       var _this;
-
       _classCallCheck(this, MoveTo);
-
-      _this = _super.call(this, miniBoard, config); // this.parent = miniBoard;
+      _this = _super.call(this, miniBoard, config);
+      // this.parent = miniBoard;
 
       _this.moveToTask = new MoveTo$2(miniBoard, {
         tickingMode: 0
       });
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(MoveTo, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -10636,9 +9412,7 @@
         if (this.isShutdown) {
           return;
         }
-
         this.moveToTask.shutdown(fromScene);
-
         _get(_getPrototypeOf(MoveTo.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -10655,7 +9429,6 @@
         if (e == undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -10687,11 +9460,9 @@
         if (startX !== undefined) {
           this.parent.x = startX;
         }
-
         if (startY !== undefined) {
           this.parent.y = startY;
         }
-
         this.moveToTask.moveTo(endX, endY);
         return this;
       }
@@ -10701,22 +9472,17 @@
         if (!this.isRunning || !this.enable) {
           return this;
         }
-
         var moveToTask = this.moveToTask;
         moveToTask.update(time, delta);
-
         if (!moveToTask.isRunning) {
           this.complete();
           return this;
         }
-
         return this;
       }
     }]);
-
     return MoveTo;
   }(SceneUpdateTickTask);
-
   var methods$1 = {
     canMoveTo: CanMoveToTile,
     moveTo: MoveToTile,
@@ -10735,29 +9501,24 @@
   var MatchBoard = function MatchBoard(pattern, callback, scope, getFirst) {
     // pattern: pattern list or repeat count
     var board = this.board,
-        grid = board.grid;
+      grid = board.grid;
     var directions = grid.halfDirections,
-        dir,
-        dirMask = this.dirMask;
+      dir,
+      dirMask = this.dirMask;
     var width = board.width,
-        height = board.height;
+      height = board.height;
     var result, isBreak;
-
     for (var i = 0, cnt = directions.length; i < cnt; i++) {
       dir = directions[i];
-
       if (dirMask[dir] === false) {
         continue;
       }
-
       for (var tileY = 0; tileY < height; tileY++) {
         for (var tileX = 0; tileX < width; tileX++) {
           result = this.matchAtDir(pattern, tileX, tileY, dir);
-
           if (result === false) {
             continue;
           }
-
           if (callback) {
             if (scope) {
               isBreak = callback.call(scope, result, board);
@@ -10765,22 +9526,18 @@
               isBreak = callback(result, board);
             }
           }
-
           if (getFirst) {
             return result;
           }
-
           if (isBreak) {
             break;
           }
         }
-
         if (isBreak) {
           break;
         }
       }
     }
-
     return this;
   };
 
@@ -10788,21 +9545,18 @@
     // pattern: pattern list or repeat count
     var matchNMode = typeof pattern === 'number';
     var patternLength;
-
     if (matchNMode) {
       patternLength = pattern;
       pattern = null;
     } else {
       patternLength = pattern.length;
     }
-
     var symbol,
-        wildcard = this.wildcard;
+      wildcard = this.wildcard;
     var curTileXY;
     var board = this.board;
     var matchedTileXY = result.tileXY;
     matchedTileXY.length = 0;
-
     for (var i = 0; i < patternLength; i++) {
       if (curTileXY === undefined) {
         curTileXY = {
@@ -10812,18 +9566,14 @@
       } else {
         // get next tileXY 
         curTileXY = board.getNeighborTileXY(curTileXY, direction, curTileXY);
-
         if (curTileXY === null) {
           return false;
         }
       }
-
       symbol = this.getSymbol(curTileXY.x, curTileXY.y);
-
       if (symbol == null) {
         return false;
       }
-
       if (symbol !== wildcard) {
         if (matchNMode) {
           if (pattern === null) {
@@ -10836,18 +9586,15 @@
           return false;
         }
       }
-
       matchedTileXY.push({
         x: curTileXY.x,
         y: curTileXY.y
       });
     }
-
     result.direction = direction;
     result.pattern = pattern;
     return result;
   };
-
   var result = {
     tileXY: [],
     direction: undefined,
@@ -10858,69 +9605,53 @@
     if (out === undefined) {
       out = [];
     }
-
     var board = this.board;
     var wildcard = this.wildcard;
     var targetSymbol = this.getSymbol(startTileX, startTileY);
-
     if (targetSymbol == null || targetSymbol === wildcard) {
       return out;
     }
-
     if (globalQueue === undefined) {
       globalQueue = new Queue();
     }
-
     var curTileXY, symbol;
     globalQueue.push(startTileX, startTileY);
-
     while (globalQueue.length) {
       curTileXY = globalQueue.pop();
       symbol = this.getSymbol(curTileXY.x, curTileXY.y);
-
       if (symbol === targetSymbol || symbol === wildcard) {
         out.push(curTileXY);
         globalQueue.push(board.getNeighborTileXY(curTileXY));
       }
     }
-
     globalQueue.clear();
     return out;
   };
-
   var Queue = /*#__PURE__*/function () {
     function Queue() {
       _classCallCheck(this, Queue);
-
       this.data = [];
       this.visited = {};
     }
-
     _createClass(Queue, [{
       key: "push",
       value: function push(x, y) {
         if (IsArray(x)) {
           var xyArray = x;
-
           for (var i = 0, cnt = xyArray.length; i < cnt; i++) {
             this.push(xyArray[i]);
           }
-
           return this;
         }
-
         if (IsPlainObject(x)) {
           var xy = x;
           x = xy.x;
           y = xy.y;
         }
-
         var key = "".concat(x, ",").concat(y);
-
         if (this.visited.hasOwnProperty(key)) {
           return this;
         }
-
         this.data.push({
           x: x,
           y: y
@@ -10946,10 +9677,8 @@
         return this;
       }
     }]);
-
     return Queue;
   }();
-
   var globalQueue;
 
   var Methods$4 = {
@@ -10965,25 +9694,20 @@
   var Match = /*#__PURE__*/function () {
     function Match(config) {
       _classCallCheck(this, Match);
-
       this.symbols = []; // tileX+(tileY*board.width)
-
       this.dirMask = {};
       this.resetFromJSON(config);
       this.boot();
     }
-
     _createClass(Match, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setBoard(GetValue$c(o, 'board', undefined));
         this.setWildcard(GetValue$c(o, 'wildcard', undefined));
         var dirMask = GetValue$c(o, 'dirMask', undefined);
-
         if (dirMask !== undefined) {
           this.setDirMask(dirMask);
         }
-
         return this;
       }
     }, {
@@ -11007,11 +9731,9 @@
       key: "setBoard",
       value: function setBoard(board) {
         this.board = board;
-
         if (board) {
           this.clearSymbols();
         }
-
         return this;
       }
     }, {
@@ -11019,14 +9741,12 @@
       value: function setDirMask(dir, value) {
         if (IsPlainObject(dir)) {
           var dirMask = dir;
-
           for (dir in dirMask) {
             this.dirMask[dir] = dirMask[dir];
           }
         } else {
           this.dirMask[dir] = value;
         }
-
         return this;
       }
     }, {
@@ -11045,11 +9765,9 @@
       key: "setSymbol",
       value: function setSymbol(tileX, tileY, symbol) {
         var board = this.board;
-
         if (!board.contains(tileX, tileY)) {
           return this;
         }
-
         this.symbols[this.tileXYToKey(tileX, tileY)] = symbol;
         return this;
       }
@@ -11064,22 +9782,18 @@
         var board = this.board;
         var tileXY, symbol;
         var isBreak;
-
         for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
           symbol = this.symbols[i];
           tileXY = this.keyToTileXY(i);
-
           if (scope) {
             isBreak = callback.call(scope, tileXY, symbol, board);
           } else {
             isBreak = callback(tileXY, symbol, board);
           }
-
           if (isBreak) {
             break;
           }
         }
-
         return this;
       }
     }, {
@@ -11087,32 +9801,27 @@
       value: function refreshSymbols(callback, scope) {
         var board = this.board;
         var width = board.width,
-            height = board.height;
+          height = board.height;
         this.symbols.length = width * height;
         var symbol, tileXY;
-
         if (IsFunction(callback)) {
           // Get symbol by callback
           for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
             tileXY = this.keyToTileXY(i, true);
-
             if (scope) {
               symbol = callback.call(scope, tileXY, board);
             } else {
               symbol = callback(tileXY, board);
             }
-
             this.symbols[i] = symbol;
           }
         } else {
           // Fill a given symbol
           symbol = callback;
-
           for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
             this.symbols[i] = symbol;
           }
         }
-
         return this;
       }
     }, {
@@ -11134,7 +9843,6 @@
         } else if (out === true) {
           out = globTileXY;
         }
-
         var width = this.board.width;
         out.x = key % width;
         out.y = Math.floor(key / width);
@@ -11146,10 +9854,8 @@
         return this.match(pattern, null, null, true);
       }
     }]);
-
     return Match;
   }();
-
   var globTileXY = {
     x: 0,
     y: 0
@@ -11164,10 +9870,8 @@
   var Stack = /*#__PURE__*/function () {
     function Stack() {
       _classCallCheck(this, Stack);
-
       this.items = [];
     }
-
     _createClass(Stack, [{
       key: "destroy",
       value: function destroy() {
@@ -11199,37 +9903,32 @@
         return this;
       }
     }]);
-
     return Stack;
   }();
 
   var Node = /*#__PURE__*/function () {
     function Node() {
       _classCallCheck(this, Node);
-
       this.preNodes = [];
       this.manager = undefined;
     }
-
     _createClass(Node, [{
       key: "reset",
       value: function reset(manager) {
-        this.manager = manager; // overwrite
-
+        this.manager = manager;
+        // overwrite
         this.sn = undefined; // for sorting by created order        
-
         this.key = undefined;
         this.x = undefined;
         this.y = undefined;
-        this.isTileXYZ = true; // overwrite
+        this.isTileXYZ = true;
+        // overwrite
 
         this._px = undefined;
         this._py = undefined;
         this.cost = undefined; // cost cache
-
         this.f = 0;
         this.g = 0; // path cost
-
         this.h = 0;
         this.closerH = 0;
         this.visited = false;
@@ -11248,10 +9947,8 @@
         if (pathMode === null) {
           return 0;
         }
-
         var h,
-            dist = this.board.getDistance(endNode, this, true) * this.pathFinder.weight;
-
+          dist = this.board.getDistance(endNode, this, true) * this.pathFinder.weight;
         if (pathMode === 1 && baseNode !== undefined) {
           var deltaAngle = endNode.angleTo(baseNode) - this.angleTo(baseNode);
           h = dist + Math.abs(deltaAngle);
@@ -11260,26 +9957,21 @@
         } else {
           h = dist;
         }
-
         return h;
       }
     }, {
       key: "getNeighborNodes",
       value: function getNeighborNodes() {
         var neighborsTileXY = this.board.getNeighborTileXY(this);
-
         if (this.pathFinder.shuffleNeighbors) {
           Shuffle(neighborsTileXY);
         }
-
         var node,
-            neighborNodes = [];
-
+          neighborNodes = [];
         for (var i = 0, cnt = neighborsTileXY.length; i < cnt; i++) {
           node = this.manager.getNode(neighborsTileXY[i], true);
           neighborNodes.push(node);
         }
-
         return neighborNodes;
       }
     }, {
@@ -11292,7 +9984,6 @@
         } else {
           this.cost = this.pathFinder.getCost(this, preNode);
         }
-
         return this.cost;
       }
     }, {
@@ -11316,7 +10007,6 @@
         if (this._px === undefined) {
           this._px = this.board.tileXYToWroldX(this.x, this.y);
         }
-
         return this._px;
       }
     }, {
@@ -11325,7 +10015,6 @@
         if (this._py === undefined) {
           this._py = this.board.tileXYToWroldY(this.x, this.y);
         }
-
         return this._py;
       }
     }, {
@@ -11334,25 +10023,21 @@
         return this.g;
       }
     }]);
-
     return Node;
   }();
 
+  // global object
   var NodesPool = new Stack(); // recycle dead nodes
   // global object
-
   var NodeCache = /*#__PURE__*/function () {
     function NodeCache(pathFinder) {
       _classCallCheck(this, NodeCache);
-
       this.sn = 0;
       this.pool = NodesPool;
       this.nodes = {}; // {tileXYKey:node}
-
       this.pathFinder = pathFinder;
       this.closestNode = null;
     }
-
     _createClass(NodeCache, [{
       key: "destroy",
       value: function destroy() {
@@ -11365,19 +10050,16 @@
       key: "getNode",
       value: function getNode(tileX, tileY, createNewNode) {
         var key;
-
         switch (_typeof(tileX)) {
           case 'number':
             // (tileX, tileY, createNewNode)
             key = TileXYToKey(tileX, tileY);
             break;
-
           case 'string':
             // (key, createNewNode)
             key = tileX;
             createNewNode = tileY;
             break;
-
           default:
             // (tileXY, createNewNode)
             var tileXY = tileX;
@@ -11387,24 +10069,18 @@
             key = TileXYToKey(tileX, tileY);
             break;
         }
-
         if (createNewNode === undefined) {
           createNewNode = false;
         }
-
         this.sn++;
-
         if (!this.nodes.hasOwnProperty(key)) {
           if (!createNewNode) {
             return null;
           }
-
           var node = this.pool.pop();
-
           if (node === null) {
             node = new Node();
           }
-
           node.reset(this);
           node.sn = this.sn;
           node.key = key;
@@ -11412,7 +10088,6 @@
           node.y = tileY;
           this.nodes[key] = node;
         }
-
         return this.nodes[key];
       }
     }, {
@@ -11420,16 +10095,14 @@
       value: function freeAllNodes() {
         this.closestNode = null;
         var nodes = this.nodes,
-            pool = this.pool;
+          pool = this.pool;
         var node;
-
         for (var key in nodes) {
           node = nodes[key];
           node.destroy();
           pool.push(node);
           delete nodes[key];
         }
-
         this.sn = 0;
         return this;
       }
@@ -11439,18 +10112,15 @@
         return this.nodes;
       }
     }]);
-
     return NodeCache;
   }();
 
   var BinaryHeap = /*#__PURE__*/function () {
     function BinaryHeap(scoreFunction) {
       _classCallCheck(this, BinaryHeap);
-
       this.content = [];
       this.scoreFunction = scoreFunction;
     }
-
     _createClass(BinaryHeap, [{
       key: "clear",
       value: function clear() {
@@ -11460,37 +10130,36 @@
       key: "push",
       value: function push(element) {
         // Add the new element to the end of the array.
-        this.content.push(element); // Allow it to sink down.
+        this.content.push(element);
 
+        // Allow it to sink down.
         this.sinkDown(this.content.length - 1);
       }
     }, {
       key: "pop",
       value: function pop() {
         // Store the first element so we can return it later.
-        var result = this.content[0]; // Get the element at the end of the array.
-
-        var end = this.content.pop(); // If there are any elements left, put the end element at the
+        var result = this.content[0];
+        // Get the element at the end of the array.
+        var end = this.content.pop();
+        // If there are any elements left, put the end element at the
         // start, and let it bubble up.
-
         if (this.content.length > 0) {
           this.content[0] = end;
           this.bubbleUp(0);
         }
-
         return result;
       }
     }, {
       key: "remove",
       value: function remove(node) {
-        var i = this.content.indexOf(node); // When it is found, the process seen in 'pop' is repeated
+        var i = this.content.indexOf(node);
+
+        // When it is found, the process seen in 'pop' is repeated
         // to fill up the hole.
-
         var end = this.content.pop();
-
         if (i !== this.content.length - 1) {
           this.content[i] = end;
-
           if (this.scoreFunction(end) < this.scoreFunction(node)) {
             this.sinkDown(i);
           } else {
@@ -11512,19 +10181,21 @@
       key: "sinkDown",
       value: function sinkDown(n) {
         // Fetch the element that has to be sunk.
-        var element = this.content[n]; // When at 0, an element can not sink any further.
+        var element = this.content[n];
 
+        // When at 0, an element can not sink any further.
         while (n > 0) {
           // Compute the parent element's index, and fetch it.
           var parentN = (n + 1 >> 1) - 1,
-              parent = this.content[parentN]; // Swap the elements if the parent is greater.
-
+            parent = this.content[parentN];
+          // Swap the elements if the parent is greater.
           if (this.scoreFunction(element) < this.scoreFunction(parent)) {
             this.content[parentN] = element;
-            this.content[n] = parent; // Update 'n' to continue at the new position.
-
+            this.content[n] = parent;
+            // Update 'n' to continue at the new position.
             n = parentN;
-          } // Found a parent that is less, no need to sink any further.
+          }
+          // Found a parent that is less, no need to sink any further.
           else {
             break;
           }
@@ -11535,50 +10206,49 @@
       value: function bubbleUp(n) {
         // Look up the target element and its score.
         var length = this.content.length,
-            element = this.content[n],
-            elemScore = this.scoreFunction(element);
-
+          element = this.content[n],
+          elemScore = this.scoreFunction(element);
         while (true) {
           // Compute the indices of the child elements.
           var child2N = n + 1 << 1,
-              child1N = child2N - 1; // This is used to store the new position of the element, if any.
-
+            child1N = child2N - 1;
+          // This is used to store the new position of the element, if any.
           var swap = null,
-              child1Score; // If the first child exists (is inside the array)...
-
+            child1Score;
+          // If the first child exists (is inside the array)...
           if (child1N < length) {
             // Look it up and compute its score.
             var child1 = this.content[child1N];
-            child1Score = this.scoreFunction(child1); // If the score is less than our element's, we need to swap.
+            child1Score = this.scoreFunction(child1);
 
+            // If the score is less than our element's, we need to swap.
             if (child1Score < elemScore) {
               swap = child1N;
             }
-          } // Do the same checks for the other child.
+          }
 
-
+          // Do the same checks for the other child.
           if (child2N < length) {
             var child2 = this.content[child2N],
-                child2Score = this.scoreFunction(child2);
-
+              child2Score = this.scoreFunction(child2);
             if (child2Score < (swap === null ? elemScore : child1Score)) {
               swap = child2N;
             }
-          } // If the element needs to be moved, swap it, and continue.
+          }
 
-
+          // If the element needs to be moved, swap it, and continue.
           if (swap !== null) {
             this.content[n] = this.content[swap];
             this.content[swap] = element;
             n = swap;
-          } // Otherwise, we are done.
+          }
+          // Otherwise, we are done.
           else {
             break;
           }
         }
       }
     }]);
-
     return BinaryHeap;
   }();
 
@@ -11615,20 +10285,22 @@
   var ASTAR_LINE$1 = CONST$2['A*-line'];
   var ASTAR_RANDOM$1 = CONST$2['A*-random'];
   var BLOCKER$5 = CONST$2.BLOCKER;
-  var INFINITY$6 = CONST$2.INFINITY; // global object
+  var INFINITY$6 = CONST$2.INFINITY;
 
+  // global object
   var gOpenHeap = new BinaryHeap(function (node) {
     return node.f;
-  }); // global object
+  });
+  // global object
 
   var AStarSerach = function AStarSerach(startTileXYZ, endTileXY, movingPoints, mode) {
     if (this.nodeManager === undefined) {
       this.nodeManager = new NodeCache(this);
     }
-
     var nodeManager = this.nodeManager;
-    nodeManager.freeAllNodes(); // const isAreaSearch = (mode === AREA_MODE);
+    nodeManager.freeAllNodes();
 
+    // const isAreaSearch = (mode === AREA_MODE);
     var isPathSearch = mode === PATH_MODE$1;
     var isAStarMode = this.pathMode === ASTAR$1 || this.pathMode === ASTAR_LINE$1 || this.pathMode === ASTAR_RANDOM$1;
     var astarHeuristicEnable = isPathSearch && isAStarMode;
@@ -11636,53 +10308,52 @@
     var astarHeuristicMode = !astarHeuristicEnable ? null : this.pathMode == ASTAR$1 ? 0 : this.pathMode == ASTAR_LINE$1 ? 1 : this.pathMode == ASTAR_RANDOM$1 ? 2 : null;
     var end = endTileXY !== null ? nodeManager.getNode(endTileXY.x, endTileXY.y, true) : null;
     var start = nodeManager.getNode(startTileXYZ.x, startTileXYZ.y, true);
-    start.h = start.heuristic(end, astarHeuristicMode); // NEAREST NODE
+    start.h = start.heuristic(end, astarHeuristicMode);
 
+    // NEAREST NODE
     var closestNode;
-
     if (isPathSearch) {
       closestNode = start;
       closestNode.closerH = closestNode.h || closestNode.heuristic(end, 0);
-    } // NEAREST NODE
-
+    }
+    // NEAREST NODE
 
     gOpenHeap.push(start);
-
     while (gOpenHeap.size() > 0) {
       // Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
-      var curNode = gOpenHeap.pop(); // End case -- result has been found, return the traced path.
+      var curNode = gOpenHeap.pop();
 
+      // End case -- result has been found, return the traced path.
       if (isPathSearch && curNode === end) {
         closestNode = end;
         break;
-      } // Normal case -- move curNode from open to closed, process each of its neighbors.
+      }
 
+      // Normal case -- move curNode from open to closed, process each of its neighbors.
+      curNode.closed = true;
 
-      curNode.closed = true; // Find all neighbors for the current node.
-
+      // Find all neighbors for the current node.
       var neighbors = curNode.getNeighborNodes();
       var neighbor, neighborCost, isNeighborMoreCloser;
-
       for (var i = 0, cnt = neighbors.length; i < cnt; ++i) {
         neighbor = neighbors[i];
         neighborCost = neighbor.getCost(curNode);
-
         if (neighbor.closed || neighborCost === BLOCKER$5) {
           // Not a valid node to process, skip to next neighbor.
           //log("("+neighbor.x+","+neighbor.y+") is closed");
           continue;
-        } // The g score is the shortest distance from start to current node.
+        }
+
+        // The g score is the shortest distance from start to current node.
         // We need to check if the path we have arrived at this neighbor is the shortest one we have seen yet.
-
-
         var gScore = curNode.g + neighborCost,
-            beenVisited = neighbor.visited; //log("("+curNode.x+","+curNode.y+") -> ("+neighbor.x+","+neighbor.y+")="+neighborCost+" ,acc="+gScore);
+          beenVisited = neighbor.visited;
 
+        //log("("+curNode.x+","+curNode.y+") -> ("+neighbor.x+","+neighbor.y+")="+neighborCost+" ,acc="+gScore);
         if (movingPoints != INFINITY$6 && gScore > movingPoints) {
           //log("("+neighbor.x+","+neighbor.y+") out of range");
           continue;
         }
-
         if (!beenVisited || gScore < neighbor.g) {
           // Found an optimal (so far) path to this node.  Take score for node to see how good it is.
           neighbor.visited = true;
@@ -11690,75 +10361,72 @@
           neighbor.preNodes.push(curNode);
           neighbor.h = neighbor.h || neighbor.heuristic(end, astarHeuristicMode, start);
           neighbor.g = gScore;
-          neighbor.f = neighbor.g + neighbor.h; // NEAREST NODE
+          neighbor.f = neighbor.g + neighbor.h;
 
+          // NEAREST NODE
           if (isPathSearch) {
             neighbor.closerH = neighbor.h || neighbor.heuristic(end, 0);
             isNeighborMoreCloser = neighbor.closerH < closestNode.closerH || neighbor.closerH === closestNode.closerH && neighbor.g < closestNode.g;
-
             if (isNeighborMoreCloser) {
               closestNode = neighbor;
             }
-          } // NEAREST NODE
-
+          }
+          // NEAREST NODE
 
           if (!beenVisited) {
             // Pushing to heap will put it in proper place based on the 'f' value.
-            gOpenHeap.push(neighbor); //log("push ("+neighbor.x+","+neighbor.y+") ")
+            gOpenHeap.push(neighbor);
+            //log("push ("+neighbor.x+","+neighbor.y+") ")
           } else {
             // Already seen the node, but since it has been rescored we need to reorder it in the heap
-            gOpenHeap.rescoreElement(neighbor); //log("reorder ("+neighbor.x+","+neighbor.y+") ")
+            gOpenHeap.rescoreElement(neighbor);
+            //log("reorder ("+neighbor.x+","+neighbor.y+") ")
           }
         } else if (shortestPathEnable && gScore == neighbor.g) {
-          neighbor.preNodes.push(curNode); //if (neighbor.preNodes.indexOf(curNode) == -1)                    
+          neighbor.preNodes.push(curNode);
+
+          //if (neighbor.preNodes.indexOf(curNode) == -1)                    
           //    neighbor.preNodes.push(curNode);                    
           //else                    
           //    debugger;                 
+
           //log("drop ("+neighbor.x+","+neighbor.y+") ")                
         } else ;
       }
     }
-
     nodeManager.closestNode = isPathSearch ? closestNode : null;
     gOpenHeap.clear();
     return this;
   };
 
   var BLOCKER$4 = CONST$2.BLOCKER;
-
   var GetCost$2 = function GetCost(curNode, preNode) {
     // Occupied test
     if (this.occupiedTest) {
       if (this.board.contains(curNode.x, curNode.y, this.chessData.tileXYZ.z)) {
         return BLOCKER$4;
       }
-    } // Blocker test
-
-
+    }
+    // Blocker test
     if (this.blockerTest) {
       if (this.board.hasBlocker(curNode.x, curNode.y)) {
         return BLOCKER$4;
       }
-    } // Edge-blocker test
-
-
+    }
+    // Edge-blocker test
     if (this.edgeBlockerTest) ;
-
     if (typeof this.costCallback === 'number') {
       return this.costCallback;
     } else {
       var cost;
-
       if (this.costCallbackScope) {
         cost = this.costCallback.call(this.costCallbackScope, curNode, preNode, this);
       } else {
         cost = this.costCallback(curNode, preNode, this);
       }
-
       if (cost === undefined) {
         cost = BLOCKER$4;
       }
-
       return cost;
     }
   };
@@ -11770,47 +10438,39 @@
     if (out === undefined) {
       out = [];
     }
-
     if (this.board === null) {
       // chess is not in board
       return out;
     }
-
     if (movingPoints !== INFINITY$5 && movingPoints <= 0) {
       return out;
     }
-
     var startTileXYZ = this.chessData.tileXYZ,
-        startTileX = startTileXYZ.x,
-        startTileY = startTileXYZ.y;
-    this.aStarSearch(startTileXYZ, null, movingPoints, AREA_MODE); // output : this.nodeManager.getAllNodes()
-
+      startTileX = startTileXYZ.x,
+      startTileY = startTileXYZ.y;
+    this.aStarSearch(startTileXYZ, null, movingPoints, AREA_MODE);
+    // output : this.nodeManager.getAllNodes()
     var nodes = this.nodeManager.getAllNodes(),
-        node,
-        nodesList = [];
-
+      node,
+      nodesList = [];
     for (var key in nodes) {
-      node = nodes[key]; // not include start node
-
+      node = nodes[key];
+      // not include start node
       if (node.x === startTileX && node.y === startTileY) {
         continue;
-      } // not include open node
-
-
+      }
+      // not include open node
       if (!node.closed) {
         continue;
       }
-
       nodesList.push(node);
-    } // sort by sn (creating order)
-
-
+    }
+    // sort by sn (creating order)
     nodesList.sort(function (nodeA, nodeB) {
       var snA = nodeA.sn;
       var snB = nodeB.sn;
       return snA > snB ? 1 : snA < snB ? -1 : 0;
     });
-
     for (var i = 0, cnt = nodesList.length; i < cnt; i++) {
       node = nodesList[i];
       out.push({
@@ -11819,7 +10479,6 @@
         cost: node.g
       });
     }
-
     return out;
   };
 
@@ -11830,22 +10489,18 @@
   var ASTAR = CONST$2['A*'];
   var ASTAR_LINE = CONST$2['A*-line'];
   var ASTAR_RANDOM = CONST$2['A*-random'];
-
   var GetNodePath = function GetNodePath(startNode, endNode, pathMode) {
     var board = startNode.board;
     var curDir, preNodeDir; // DIAGONAL, STRAIGN
-
     var targetAngle; // LINE
 
     var curNode = endNode,
-        preNode,
-        preNodeKeysCnt;
+      preNode,
+      preNodeKeysCnt;
     var path = [];
-
     while (curNode.preNodes.length > 0) {
       path.push(curNode);
       preNodeKeysCnt = curNode.preNodes.length;
-
       switch (pathMode) {
         case ASTAR:
         case ASTAR_LINE:
@@ -11853,45 +10508,36 @@
           preNode = curNode.preNodes[0];
           curNode = preNode;
           break;
-
         case RANDOM:
           preNode = preNodeKeysCnt === 1 ? curNode.preNodes[0] : curNode.preNodes[Between(0, preNodeKeysCnt - 1)];
           curNode = preNode;
           break;
-
         case DIAGONAL:
           for (var i = 0; i < preNodeKeysCnt; i++) {
             preNode = curNode.preNodes[i];
             preNodeDir = board.getNeighborTileDirection(curNode, preNode);
-
             if (preNodeDir !== curDir) {
               curDir = preNodeDir;
               break;
             }
           }
-
           curNode = preNode;
           break;
-
         case STRAIGN:
           for (i = 0; i < preNodeKeysCnt; i++) {
             preNode = curNode.preNodes[i];
             preNodeDir = board.getNeighborTileDirection(curNode, preNode);
-
             if (preNodeDir === curDir) {
               break;
             }
           }
-
           curDir = preNodeDir;
           curNode = preNode;
           break;
-
         case LINE:
           if (targetAngle === undefined) {
             targetAngle = endNode.angleTo(startNode);
           }
-
           if (preNodeKeysCnt === 1) {
             preNode = curNode.preNodes[0];
             curNode = preNode;
@@ -11900,23 +10546,18 @@
             preNode = curNode.preNodes[0];
             var deltaAngle = Math.abs(endNode.angleTo(preNode) - targetAngle);
             var preNodeB, deltaAngleB;
-
             for (var i = 1; i < preNodeKeysCnt; i++) {
               preNodeB = curNode.preNodes[i];
               deltaAngleB = Math.abs(endNode.angleTo(preNodeB) - targetAngle);
-
               if (deltaAngleB < deltaAngle) {
                 preNode = preNodeB;
               }
             }
-
             curNode = preNode;
           }
-
           break;
       }
     }
-
     return path.reverse();
   };
 
@@ -11924,27 +10565,20 @@
     if (out === undefined) {
       out = [];
     }
-
     if (this.board === undefined) {
       return out;
     }
-
     var nodeManager = this.nodeManager;
-
     if (nodeManager === undefined) {
       return out;
     }
-
     var startNode = nodeManager.getNode(this.chessData.tileXYZ, false);
     var endNode = nodeManager.getNode(endTileXY, false);
-
     if (startNode === null || endNode === null) {
       return out;
     }
-
     var nodes = GetNodePath(startNode, endNode, this.pathMode);
     var node;
-
     for (var i = 0, cnt = nodes.length; i < cnt; i++) {
       node = nodes[i];
       out.push({
@@ -11953,7 +10587,6 @@
         cost: node.g
       });
     }
-
     return out;
   };
 
@@ -11964,29 +10597,23 @@
     if (isClosest === undefined) {
       isClosest = true;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     if (this.board === null) {
       // chess is not in board
       return out;
     }
-
     if (movingPoints !== INFINITY$4 && movingPoints <= 0) {
       return out;
     }
-
     var startTileXYZ = this.chessData.tileXYZ;
     this.aStarSearch(startTileXYZ, endTileXY, movingPoints, PATH_MODE);
     var nodeManager = this.nodeManager;
     var endNode = isClosest ? nodeManager.closestNode : nodeManager.getNode(endTileXY);
-
     if (endNode === null) {
       return out;
     }
-
     return this.getPath(endNode, out);
   };
 
@@ -11994,17 +10621,13 @@
     if (this.nodeManager === undefined) {
       return null;
     }
-
     var node = this.nodeManager.getNode(tileX, tileY);
-
     if (node === null) {
       return null;
     }
-
     if (pathCost === undefined) {
       pathCost = true;
     }
-
     return pathCost ? node.g : node.cost;
   };
 
@@ -12019,45 +10642,32 @@
 
   var BLOCKER$3 = CONST$2.BLOCKER;
   var INFINITY$3 = CONST$2.INFINITY;
-
   var PathFinder = /*#__PURE__*/function (_ComponentBase) {
     _inherits(PathFinder, _ComponentBase);
-
     var _super = _createSuper(PathFinder);
-
     function PathFinder(gameObject, config) {
       var _this;
-
       _classCallCheck(this, PathFinder);
-
       if (IsPlainObject(gameObject)) {
         config = gameObject;
         gameObject = undefined;
       }
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
       });
-
       _this.setChess(gameObject);
-
       _this.nodeManager = undefined;
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(PathFinder, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         var costCallback = GetValue$c(o, 'costCallback', undefined);
         var costCallbackScope = GetValue$c(o, 'costCallbackScope', undefined);
-
         if (costCallback === undefined) {
           costCallback = GetValue$c(o, 'cost', 1);
         }
-
         this.setOccupiedTest(GetValue$c(o, 'occupiedTest', false));
         this.setBlockerTest(GetValue$c(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue$c(o, 'edgeBlockerTest', false));
@@ -12075,13 +10685,10 @@
         if (this.isShutdown) {
           return;
         }
-
         if (this.nodeManager !== undefined) {
           this.nodeManager.destroy();
         }
-
         this.chessData = undefined;
-
         _get(_getPrototypeOf(PathFinder.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -12094,16 +10701,13 @@
       value: function setChess(gameObject) {
         if (gameObject) {
           this.chessData = GetChessData(gameObject);
-
           if (this.parent !== gameObject) {
             // Remove attatched event from previous gameObject
             if (this.parent && this.parent.once) {
               this.parent.off('destroy', this.onParentDestroy, this);
-            } // Attach event
-
-
+            }
+            // Attach event
             this.parent = gameObject;
-
             if (this.parent && this.parent.once) {
               this.parent.once('destroy', this.onParentDestroy, this);
             }
@@ -12112,7 +10716,6 @@
           this.parent = undefined;
           this.chessData = undefined;
         }
-
         return this;
       }
     }, {
@@ -12128,7 +10731,6 @@
         if (typeof mode === 'string') {
           mode = CONST$2[mode];
         }
-
         this.pathMode = mode;
         return this;
       }
@@ -12138,7 +10740,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.cacheCost = value;
         return this;
       }
@@ -12148,7 +10749,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.occupiedTest = enable;
         return this;
       }
@@ -12158,7 +10758,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.blockerTest = enable;
         return this;
       }
@@ -12168,7 +10767,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.edgeBlockerTest = enable;
         return this;
       }
@@ -12184,7 +10782,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.shuffleNeighbors = value;
         return this;
       }
@@ -12204,10 +10801,8 @@
         return this.chessData.board;
       }
     }]);
-
     return PathFinder;
   }(ComponentBase);
-
   Object.assign(PathFinder.prototype, Methods$3);
 
   ObjectFactory.register('pathFinder', function (gameObject, config) {
@@ -12219,28 +10814,24 @@
     if (this.occupiedTest || this.blockerTest || this.edgeBlockerTest) {
       var myTileZ = this.chessData.tileXYZ.z;
       var tileXY;
-
       for (var i = 1, cnt = tileXYArray.length; i < cnt; i++) {
-        tileXY = tileXYArray[i]; // Occupied test
-
+        tileXY = tileXYArray[i];
+        // Occupied test
         if (this.occupiedTest) {
           if (this.board.contains(tileXY.x, tileXY.y, myTileZ)) {
             return false;
           }
-        } // Blocker test
-
-
+        }
+        // Blocker test
         if (this.blockerTest) {
           if (this.board.hasBlocker(tileXY.x, tileXY.y)) {
             return false;
           }
-        } // Edge-blocker test
-
-
+        }
+        // Edge-blocker test
         if (this.edgeBlockerTest) ;
       }
     }
-
     if (this.preTestCallback) {
       if (this.preTestCallbackScope) {
         return this.preTestCallback.call(this.preTestCallbackScope, tileXYArray, visiblePoints, this);
@@ -12248,7 +10839,6 @@
         return this.preTestCallback(tileXYArray, visiblePoints, this);
       }
     }
-
     return true;
   };
 
@@ -12256,7 +10846,6 @@
     if (typeof this.costCallback === 'number') {
       return this.costCallback;
     }
-
     if (this.costCallbackScope) {
       return this.costCallback.call(this.costCallbackScope, curTileXY, this, tileXYArray);
     } else {
@@ -12268,10 +10857,8 @@
     if (this.cone === undefined) {
       return true;
     }
-
     var board = this.board;
     var myTileXYZ = this.chessData.tileXYZ;
-
     if (this.coneMode === 0) {
       // Direction
       return board.isDirectionInCone(myTileXYZ, targetTileXY, this.face, this.cone);
@@ -12290,48 +10877,37 @@
 
   var BLOCKER$2 = CONST$1.BLOCKER;
   var INFINITY$2 = CONST$1.INFINITY;
-
   var IsPathVisible = function IsPathVisible(tileXYArray, visiblePoints) {
     if (this.preTest(tileXYArray, visiblePoints) === false) {
       return false;
     }
-
     if (this.costCallback === undefined) {
       return true;
     }
-
     var myTileXYZ = this.chessData.tileXYZ;
     var tileXY,
-        cost,
-        behindBlocker = false;
-
+      cost,
+      behindBlocker = false;
     for (var i = 1, cnt = tileXYArray.length; i < cnt; i++) {
       tileXY = tileXYArray[i];
-
       if (AreTileXYEqual(myTileXYZ, tileXY)) {
         continue;
       }
-
       if (behindBlocker) {
         return false;
       }
-
       cost = this.getCost(tileXY, tileXYArray);
-
       if (cost === BLOCKER$2) {
         behindBlocker = true;
         continue;
       }
-
       if (visiblePoints !== INFINITY$2) {
         visiblePoints -= cost;
-
         if (visiblePoints < 0) {
           return false;
         }
       }
     }
-
     return true;
   };
 
@@ -12344,100 +10920,86 @@
           return false;
         }
       }
-
       return true;
     }
   };
 
   var INFINITY$1 = CONST$1.INFINITY;
   var LINEOFFSET = 0.001;
-
   var IsInLOS = function IsInLOS(chess, visiblePoints, originTileXY) {
     // chess: chess object or tileXY
     if (visiblePoints !== INFINITY$1 && visiblePoints <= 0) {
       return false;
     }
-
     var board = this.board;
     var targetTileXY = board.chessToTileXYZ(chess);
-
     if (!this.isInCone(targetTileXY)) {
       return false;
     }
-
     if (originTileXY === undefined) {
       originTileXY = this.chessData.tileXYZ;
     }
-
     if (this.debugLog) {
       console.log('Visible test from (' + originTileXY.x + ',' + originTileXY.y + ') to (' + targetTileXY.x + ',' + targetTileXY.y + ')');
     }
-
     var out = board.tileXYToWorldXY(originTileXY.x, originTileXY.y, true);
     var startX = out.x,
-        startY = out.y;
+      startY = out.y;
     out = board.tileXYToWorldXY(targetTileXY.x, targetTileXY.y, true);
     var endX = out.x,
-        endY = out.y;
+      endY = out.y;
     var lineAngle = Between$1(startX, startY, endX, endY),
-        offsetX,
-        offsetY,
-        isVisivle; // Shift a small distance
+      offsetX,
+      offsetY,
+      isVisivle;
 
+    // Shift a small distance
     lineAngle += Math.PI / 2;
     offsetX = LINEOFFSET * Math.cos(lineAngle);
     offsetY = LINEOFFSET * Math.sin(lineAngle);
     var x0 = startX + offsetX,
-        y0 = startY + offsetY,
-        x1 = endX + offsetX,
-        y1 = endY + offsetY;
+      y0 = startY + offsetY,
+      x1 = endX + offsetX,
+      y1 = endY + offsetY;
     board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray0);
-
     if (this.debugLog) {
       console.log('Line 0: ' + JSON.stringify(globTileXYArray0));
     }
-
     isVisivle = this.isPathVisible(globTileXYArray0, visiblePoints);
-
     if (isVisivle) {
       globTileXYArray0.length = 0;
       drawLine(this.debugGraphics, this.debugVisibleLineColor, startX, startY, endX, endY);
       return true;
-    } // Shift a small distance
+    }
 
-
+    // Shift a small distance
     lineAngle += Math.PI;
     offsetX = LINEOFFSET * Math.cos(lineAngle);
     offsetY = LINEOFFSET * Math.sin(lineAngle);
     var x0 = startX + offsetX,
-        y0 = startY + offsetY,
-        x1 = endX + offsetX,
-        y1 = endY + offsetY;
+      y0 = startY + offsetY,
+      x1 = endX + offsetX,
+      y1 = endY + offsetY;
     board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray1);
-
     if (this.debugLog) {
       console.log('Line 1: ' + JSON.stringify(globTileXYArray1));
-    } // No need do visible checking if path is the same as previous one
-
-
+    }
+    // No need do visible checking if path is the same as previous one
     if (!AreTileXYArrayEqual(globTileXYArray0, globTileXYArray1)) {
       isVisivle = this.isPathVisible(globTileXYArray1, visiblePoints);
     }
-
     globTileXYArray0.length = 0;
     globTileXYArray1.length = 0;
     drawLine(this.debugGraphics, isVisivle ? this.debugVisibleLineColor : this.debugInvisibleLineColor, startX, startY, endX, endY);
     return isVisivle;
   };
-
   var drawLine = function drawLine(graphics, color, startX, startY, endX, endY) {
     if (graphics && color !== undefined) {
       graphics.lineStyle(1, color, 1).lineBetween(startX, startY, endX, endY);
     }
   };
-
   var globTileXYArray0 = [],
-      globTileXYArray1 = [];
+    globTileXYArray1 = [];
 
   var LOS = function LOS(chessArray, visiblePoints, originTileXY, out) {
     // chessArray: array of chess object or tileXY
@@ -12454,28 +11016,21 @@
         visiblePoints = undefined;
         originTileXY = undefined;
       }
-
       if (IsArray(originTileXY)) {
         out = originTileXY;
         originTileXY = undefined;
       }
-
       if (out === undefined) {
         out = [];
       }
-
       var chess;
-
       for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
         chess = chessArray[i];
-
         if (!this.isInLOS(chess, visiblePoints, originTileXY)) {
           continue;
         }
-
         out.push(chess);
       }
-
       return out;
     }
   };
@@ -12490,42 +11045,33 @@
       originTileXY = undefined;
       visiblePoints = undefined;
     }
-
     if (IsArray(originTileXY)) {
       out = originTileXY;
       originTileXY = undefined;
     }
-
     if (out === undefined) {
       out = [];
     }
-
     var board = this.board;
     var myTileXYZ = this.chessData.tileXYZ;
     var isAnyVisible,
-        radius = 1,
-        targetTileXY;
-
+      radius = 1,
+      targetTileXY;
     do {
       isAnyVisible = false;
       board.ringToTileXYArray(myTileXYZ, radius, globRing);
-
       for (var i = 0, cnt = globRing.length; i < cnt; i++) {
         targetTileXY = globRing[i];
-
         if (this.isInLOS(targetTileXY, visiblePoints, originTileXY)) {
           isAnyVisible = true;
           out.push(targetTileXY);
         }
       }
-
       radius++;
       globRing.length = 0;
     } while (isAnyVisible);
-
     return out;
   };
-
   var globRing = [];
 
   var Methods$2 = {
@@ -12540,29 +11086,22 @@
 
   var BLOCKER$1 = CONST$1.BLOCKER;
   var INFINITY = CONST$1.INFINITY;
-
   var FieldOfView = /*#__PURE__*/function (_ComponentBase) {
     _inherits(FieldOfView, _ComponentBase);
-
     var _super = _createSuper(FieldOfView);
-
     function FieldOfView(gameObject, config) {
       var _this;
-
       _classCallCheck(this, FieldOfView);
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
-      }); // No event emitter
+      });
+      // No event emitter
       // this.parent = gameObject;
 
       _this.chessData = GetChessData(gameObject);
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(FieldOfView, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -12570,17 +11109,14 @@
         var occupiedTest = GetValue$c(o, 'occupiedTest', false);
         var blockerTest = GetValue$c(o, 'blockerTest', false);
         var edgeBlockerTest = GetValue$c(o, 'edgeBlockerTest', false); // Unsupport now
-
         var preTestCallback = GetValue$c(o, 'preTestCallback', undefined);
-        var preTestCallbackScope = GetValue$c(o, 'preTestCallbackScope', undefined); // Cost of each tile
-
+        var preTestCallbackScope = GetValue$c(o, 'preTestCallbackScope', undefined);
+        // Cost of each tile
         var costCallback = GetValue$c(o, 'costCallback', undefined);
         var costCallbackScope = GetValue$c(o, 'costCallbackScope', undefined);
-
         if (costCallback === undefined) {
           costCallback = GetValue$c(o, 'cost', undefined);
         }
-
         this.setFace(GetValue$c(o, 'face', 0));
         this.setConeMode(GetValue$c(o, 'coneMode', 0));
         this.setCone(GetValue$c(o, 'cone', undefined));
@@ -12601,10 +11137,8 @@
         if (this.isShutdown) {
           return;
         }
-
         this.debugGraphics = undefined;
         this.chessData = undefined;
-
         _get(_getPrototypeOf(FieldOfView.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -12615,11 +11149,9 @@
       set: function set(direction) {
         direction = this.board.grid.directionNormalize(direction);
         this._face = direction;
-
         if (this.coneMode === 0) ; else {
           // Angle
           var angle = this.board.angleToward(this.chessData.tileXYZ, direction); // -PI~PI
-
           this.faceAngle = Normalize(angle); // 0~2PI
         }
       }
@@ -12636,7 +11168,6 @@
       },
       set: function set(value) {
         this._cone = value;
-
         if (value !== undefined) {
           if (this.coneMode === 0) ; else {
             // Angle
@@ -12650,7 +11181,6 @@
         if (typeof mode === 'string') {
           mode = CONEMODE[mode];
         }
-
         this.coneMode = mode;
         return this;
       }
@@ -12666,7 +11196,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.occupiedTest = enable;
         return this;
       }
@@ -12676,7 +11205,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.blockerTest = enable;
         return this;
       }
@@ -12686,7 +11214,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.edgeBlockerTest = enable;
         return this;
       }
@@ -12723,7 +11250,6 @@
         if (enabled === undefined) {
           enabled = true;
         }
-
         this.debugLog = enabled;
         return this;
       }
@@ -12733,7 +11259,6 @@
         if (this.debugGraphics) {
           this.debugGraphics.clear();
         }
-
         return this;
       }
     }, {
@@ -12752,10 +11277,8 @@
         return this.chessData.board;
       }
     }]);
-
     return FieldOfView;
   }(ComponentBase);
-
   var CONEMODE = {
     direction: 0,
     angle: 1
@@ -12782,47 +11305,37 @@
   };
 
   var STOP$1 = CONST.STOP;
-
   var GetPath = function GetPath(movingPoints, out) {
     if (out === undefined) {
       out = [];
     }
-
     if (this.board === null) {
       // chess is not in board
       return out;
     }
-
     var curTileXYZ = this.chessData.tileXYZ,
-        curTileData = CreateTileData(curTileXYZ.x, curTileXYZ.y, this.face),
-        nextTileData;
+      curTileData = CreateTileData(curTileXYZ.x, curTileXYZ.y, this.face),
+      nextTileData;
     var cost;
-
     while (movingPoints > 0) {
       nextTileData = this.getNextTile(curTileData, this.preTileXY);
-
       if (nextTileData === null) {
         break;
       }
-
       cost = this.getCost(nextTileData, curTileData);
-
       if (cost === STOP$1) {
         cost = movingPoints;
       }
-
       nextTileData.cost = cost;
-
       if (movingPoints >= cost) {
         out.push(nextTileData);
       }
-
       movingPoints -= cost;
       this.preTileXY = curTileData;
       curTileData = nextTileData;
-    } // remove cost = 0 at tail
+    }
 
-
+    // remove cost = 0 at tail
     for (var i = out.length - 1; i >= 0; i--) {
       if (out[i].cost === 0) {
         out.length = i;
@@ -12830,7 +11343,6 @@
         break;
       }
     }
-
     return out;
   };
 
@@ -12838,38 +11350,29 @@
     var board = this.board;
     var directions = board.grid.allDirections;
     var forwardTileData = null,
-        backwardTileData = null;
+      backwardTileData = null;
     var neighborTileXArray = []; // forward and other neighbors, exclude backward
-
     var neighborTileXY,
-        neighborTileData = null;
-
+      neighborTileData = null;
     for (var i = 0, cnt = directions.length; i < cnt; i++) {
       neighborTileXY = board.getNeighborTileXY(curTileData, directions[i], true);
-
       if (neighborTileXY === null) {
         continue;
       }
-
       if (!board.contains(neighborTileXY.x, neighborTileXY.y, this.pathTileZ)) {
         continue;
       }
-
       neighborTileData = CreateTileData(neighborTileXY.x, neighborTileXY.y, directions[i]);
-
       if (directions[i] === curTileData.direction) {
         forwardTileData = neighborTileData;
       }
-
       if (preTileData !== undefined && AreTileXYEqual(neighborTileXY, preTileData)) {
         backwardTileData = neighborTileData;
       } else {
         neighborTileXArray.push(neighborTileData);
       }
     }
-
     var nextTileData;
-
     if (backwardTileData === null && neighborTileXArray.length === 0) {
       // no valid neighbor
       nextTileData = null;
@@ -12887,10 +11390,8 @@
           if (backwardTileData !== null) {
             neighborTileXArray.push(backwardTileData);
           }
-
           nextTileData = GetRandom(neighborTileXArray);
           break;
-
         default:
           // case 0: forward first
           if (forwardTileData !== null) {
@@ -12898,11 +11399,9 @@
           } else {
             nextTileData = GetRandom(neighborTileXArray);
           }
-
           break;
       }
     }
-
     return nextTileData;
   };
 
@@ -12910,7 +11409,6 @@
     if (typeof this.costCallback === 'number') {
       return this.costCallback;
     }
-
     if (this.costCallbackScope) {
       return this.costCallback.call(this.costCallbackScope, curTileXY, preTileXY, this);
     } else {
@@ -12926,40 +11424,31 @@
 
   var BLOCKER = CONST.BLOCKER;
   var STOP = CONST.STOP;
-
   var Monopoly = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Monopoly, _ComponentBase);
-
     var _super = _createSuper(Monopoly);
-
     function Monopoly(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Monopoly);
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
-      }); // No event emitter
+      });
+      // No event emitter
       // this.parent = gameObject;
 
       _this.chessData = GetChessData(gameObject);
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(Monopoly, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.preTileXY = GetValue$c(o, 'preTileXY', undefined);
         var costCallback = GetValue$c(o, 'costCallback', undefined);
         var costCallbackScope = GetValue$c(o, 'costCallbackScope', undefined);
-
         if (costCallback === undefined) {
           costCallback = GetValue$c(o, 'cost', 1);
         }
-
         this.setFace(GetValue$c(o, 'face', 0));
         this.setPathMode(GetValue$c(o, 'pathMode', 0));
         this.setPathTileZ(GetValue$c(o, 'pathTileZ', 0));
@@ -12973,9 +11462,7 @@
         if (this.isShutdown) {
           return;
         }
-
         this.chessData = undefined;
-
         _get(_getPrototypeOf(Monopoly.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -12991,7 +11478,6 @@
         if (typeof mode === 'string') {
           mode = PATHMODE[mode];
         }
-
         this.pathMode = mode;
         return this;
       }
@@ -13008,7 +11494,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.pathTileZ = value;
         return this;
       }
@@ -13028,10 +11513,8 @@
         return this.chessData.board;
       }
     }]);
-
     return Monopoly;
   }(ComponentBase);
-
   Object.assign(Monopoly.prototype, Methods$1);
   var PATHMODE = {
     'forward': 0,
@@ -13046,38 +11529,28 @@
   var Zone = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem = Phaser.Utils.Array.Remove;
-
   var Base = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-
     var _super = _createSuper(Base);
-
     function Base(scene, x, y, width, height) {
       var _this;
-
       _classCallCheck(this, Base);
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = 1;
       }
-
       if (height === undefined) {
         height = 1;
       }
-
       _this = _super.call(this, scene, x, y, width, height);
       _this.children = [];
       return _this;
     }
-
     _createClass(Base, [{
       key: "destroy",
       value: function destroy(fromScene) {
@@ -13085,26 +11558,23 @@
         if (!this.scene) {
           return;
         }
-
         if (fromScene) {
           // Stop scene
           var child;
-
           for (var i = this.children.length - 1; i >= 0; i--) {
             child = this.children[i];
-
-            if (!child.parentContainer && // Not in container
+            if (!child.parentContainer &&
+            // Not in container
             !child.displayList // Not in scene, neither in layer
             ) {
               // Destroy child which is not in scene, container, or layer manually
               child.destroy(fromScene);
             }
           }
-        } // Destroy/remove children
+        }
 
-
+        // Destroy/remove children
         this.clear(!fromScene);
-
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
@@ -13116,7 +11586,8 @@
       key: "add",
       value: function add(gameObjects) {
         var parent = this;
-        AddItem(this.children, gameObjects, 0, // Callback of item added
+        AddItem(this.children, gameObjects, 0,
+        // Callback of item added
         function (gameObject) {
           gameObject.once('destroy', parent.onChildDestroy, parent);
         }, this);
@@ -13126,10 +11597,10 @@
       key: "remove",
       value: function remove(gameObjects, destroyChild) {
         var parent = this;
-        RemoveItem(this.children, gameObjects, // Callback of item removed
+        RemoveItem(this.children, gameObjects,
+        // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', parent.onChildDestroy, parent);
-
           if (destroyChild) {
             gameObject.destroy();
           }
@@ -13147,63 +11618,50 @@
       value: function clear(destroyChild) {
         var parent = this;
         var gameObject;
-
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
           gameObject = this.children[i];
           gameObject.off('destroy', parent.onChildDestroy, parent);
-
           if (destroyChild) {
             gameObject.destroy();
           }
         }
-
         this.children.length = 0;
         return this;
       }
     }]);
-
     return Base;
   }(Zone);
-
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base, [Components.Alpha, Components.Flip]);
 
   var GetParent = function GetParent(gameObject, name) {
     var parent;
-
     if (name === undefined) {
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
       }
     } else {
       parent = GetParent(gameObject);
-
       while (parent) {
         if (parent.name === name) {
           break;
         }
-
         parent = GetParent(parent);
       }
     }
-
     return parent;
   };
-
   var GetTopmostParent = function GetTopmostParent(gameObject) {
     var parent = GetParent(gameObject);
-
     while (parent) {
       gameObject = parent;
       parent = GetParent(parent);
     }
-
     return gameObject;
   };
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
-
   var GetLocalState = function GetLocalState(gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
       var rexContainer = {
@@ -13249,7 +11707,6 @@
       });
       gameObject.rexContainer = rexContainer;
     }
-
     return gameObject.rexContainer;
   };
 
@@ -13258,9 +11715,7 @@
       if (parent === undefined) {
         parent = this;
       }
-
       var localState = GetLocalState(gameObject);
-
       if (parent) {
         // Add to parent
         localState.parent = parent;
@@ -13270,7 +11725,6 @@
         localState.parent = null;
         localState.self = null;
       }
-
       return this;
     },
     getParent: function getParent(gameObject, name) {
@@ -13278,25 +11732,21 @@
         name = gameObject;
         gameObject = undefined;
       }
-
       if (gameObject === undefined) {
         gameObject = this;
       }
-
       return GetParent(gameObject, name);
     },
     getTopmostParent: function getTopmostParent(gameObject) {
       if (gameObject === undefined) {
         gameObject = this;
       }
-
       return GetTopmostParent(gameObject);
     }
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
-
   var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
     var state = GetLocalState(gameObject);
@@ -13311,23 +11761,23 @@
     this.addToRenderLayer(gameObject);
     return this;
   };
-
   var AddLocal = function AddLocal(gameObject, config) {
-    this.setParent(gameObject); // Set local state from child directly
+    this.setParent(gameObject);
 
+    // Set local state from child directly
     var state = GetLocalState(gameObject);
-    SetupSyncFlags(state, config); // Position
-
+    SetupSyncFlags(state, config);
+    // Position
     state.x = gameObject.x;
     state.y = gameObject.y;
     state.rotation = gameObject.rotation;
     state.scaleX = gameObject.scaleX;
-    state.scaleY = gameObject.scaleY; // Alpha
-
-    state.alpha = gameObject.alpha; // Visible
-
-    state.visible = gameObject.visible; // Active
-
+    state.scaleY = gameObject.scaleY;
+    // Alpha
+    state.alpha = gameObject.alpha;
+    // Visible
+    state.visible = gameObject.visible;
+    // Active
     state.active = gameObject.active;
     this.updateChildPosition(gameObject).updateChildAlpha(gameObject).updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
@@ -13338,14 +11788,12 @@
     this.addToRenderLayer(gameObject);
     return this;
   };
-
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
     state.syncPosition = GetValue$3(config, 'syncPosition', true);
     state.syncRotation = GetValue$3(config, 'syncRotation', true);
     state.syncScale = GetValue$3(config, 'syncScale', true);
     state.syncAlpha = GetValue$3(config, 'syncAlpha', true);
   };
-
   var AddChild = {
     // Can override this method
     add: function add(gameObject) {
@@ -13354,7 +11802,6 @@
       } else {
         Add.call(this, gameObject);
       }
-
       return this;
     },
     // Don't override this method
@@ -13364,14 +11811,12 @@
       } else {
         Add.call(this, gameObject, config);
       }
-
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         Add.call(this, gameObjects[i]);
       }
-
       return this;
     },
     addLocal: function addLocal(gameObject) {
@@ -13380,7 +11825,6 @@
       } else {
         AddLocal.call(this, gameObject);
       }
-
       return this;
     },
     // Don't override this method
@@ -13390,14 +11834,12 @@
       } else {
         AddLocal.call(this, gameObject, config);
       }
-
       return this;
     },
     addLocalMultiple: function addLocalMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         AddLocal.call(this, gameObjects[i]);
       }
-
       return this;
     }
   };
@@ -13410,13 +11852,10 @@
       if (GetParent(gameObject) !== this) {
         return this;
       }
-
       this.setParent(gameObject, null);
-
       if (!destroyChild) {
         this.removeFromRenderLayer(gameObject);
       }
-
       BaseRemove.call(this, gameObject, destroyChild);
       return this;
     },
@@ -13425,28 +11864,22 @@
       if (GetParent(gameObject) !== this) {
         return this;
       }
-
       this.setParent(gameObject, null);
-
       if (!destroyChild) {
         this.removeFromRenderLayer(gameObject);
       }
-
       BaseRemove.call(this, gameObject, destroyChild);
       return this;
     },
     clear: function clear(destroyChild) {
       var children = this.children;
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
         this.setParent(child, null);
-
         if (!destroyChild) {
           this.removeFromRenderLayer(child);
         }
       }
-
       BaseClear.call(this, destroyChild);
       return this;
     }
@@ -13464,7 +11897,6 @@
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         this.resetChildState(gameObjects[i]);
       }
-
       return this;
     },
     syncProperties: function syncProperties() {
@@ -13478,10 +11910,10 @@
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
-      point.y -= this.y; // Rotate
-
-      RotateAround$2(point, 0, 0, -this.rotation); // Scale
-
+      point.y -= this.y;
+      // Rotate
+      RotateAround$2(point, 0, 0, -this.rotation);
+      // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
       return point;
@@ -13489,10 +11921,10 @@
     localToWorld: function localToWorld(point) {
       // Scale
       point.x *= this.scaleX;
-      point.y *= this.scaleY; // Rotate
-
-      RotateAround$2(point, 0, 0, this.rotation); // Transform
-
+      point.y *= this.scaleY;
+      // Rotate
+      RotateAround$2(point, 0, 0, this.rotation);
+      // Transform
       point.x += this.x;
       point.y += this.y;
       return point;
@@ -13512,37 +11944,30 @@
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = false;
       }
-
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncPosition) {
         child.x = state.x;
         child.y = state.y;
         parent.localToWorld(child);
       }
-
       if (state.syncRotation) {
         child.rotation = state.rotation + parent.rotation;
       }
-
       if (state.syncScale) {
         child.scaleX = state.scaleX * parent.scaleX;
         child.scaleY = state.scaleY * parent.scaleY;
       }
-
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;
         child.syncPosition();
       }
-
       return this;
     },
     syncPosition: function syncPosition() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildPosition, this);
       }
-
       return this;
     },
     resetChildPositionState: function resetChildPositionState(child) {
@@ -13571,11 +11996,9 @@
     },
     resetLocalPositionState: function resetLocalPositionState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildPositionState(this);
       }
-
       return this;
     }
   };
@@ -13585,18 +12008,15 @@
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncRotation) {
         child.rotation = parent.rotation + state.rotation;
       }
-
       return this;
     },
     syncRotation: function syncRotation() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildRotation, this);
       }
-
       return this;
     },
     resetChildRotationState: function resetChildRotationState(child) {
@@ -13629,11 +12049,9 @@
     },
     resetLocalRotationState: function resetLocalRotationState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildRotationState(this);
       }
-
       return this;
     }
   };
@@ -13642,19 +12060,16 @@
     updateChildScale: function updateChildScale(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncScale) {
         child.scaleX = parent.scaleX * state.scaleX;
         child.scaleY = parent.scaleY * state.scaleY;
       }
-
       return this;
     },
     syncScale: function syncScale() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildScale, this);
       }
-
       return this;
     },
     resetChildScaleState: function resetChildScaleState(child) {
@@ -13668,7 +12083,6 @@
       if (scaleY === undefined) {
         scaleY = scaleX;
       }
-
       child.scaleX = scaleX;
       child.scaleY = scaleY;
       this.resetChildScaleState(child);
@@ -13678,7 +12092,6 @@
       if (scaleY === undefined) {
         scaleY = scaleX;
       }
-
       var state = GetLocalState(child);
       state.scaleX = scaleX;
       state.scaleY = scaleY;
@@ -13692,11 +12105,9 @@
     },
     resetLocalScaleState: function resetLocalScaleState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildScaleState(this);
       }
-
       return this;
     }
   };
@@ -13725,16 +12136,14 @@
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildVisible, this);
       }
-
       return this;
     },
     resetChildVisibleState: function resetChildVisibleState(child) {
-      var localState = GetLocalState(child); // Delete maskVisible property
-
+      var localState = GetLocalState(child);
+      // Delete maskVisible property
       if (localState.hasOwnProperty('maskVisible')) {
         delete localState.maskVisible;
       }
-
       localState.visible = child.visible;
       return this;
     },
@@ -13748,7 +12157,6 @@
       if (visible === undefined) {
         visible = true;
       }
-
       var localState = GetLocalState(child);
       localState.visible = visible;
       this.updateChildVisible(child);
@@ -13759,7 +12167,6 @@
       if (visible === undefined) {
         visible = true;
       }
-
       var localState = GetLocalState(child);
       localState.maskVisible = visible;
       this.updateChildVisible(child);
@@ -13767,11 +12174,9 @@
     },
     resetLocalVisibleState: function resetLocalVisibleState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildVisibleState(this);
       }
-
       return this;
     }
   };
@@ -13780,18 +12185,15 @@
     updateChildAlpha: function updateChildAlpha(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncAlpha) {
         child.alpha = parent.alpha * state.alpha;
       }
-
       return this;
     },
     syncAlpha: function syncAlpha() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildAlpha, this);
       }
-
       return this;
     },
     resetChildAlphaState: function resetChildAlphaState(child) {
@@ -13813,11 +12215,9 @@
     },
     resetLocalAlphaState: function resetLocalAlphaState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildAlphaState(this);
       }
-
       return this;
     }
   };
@@ -13833,7 +12233,6 @@
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildActive, this);
       }
-
       return this;
     },
     resetChildActiveState: function resetChildActiveState(child) {
@@ -13850,7 +12249,6 @@
       if (active === undefined) {
         active = true;
       }
-
       var localState = GetLocalState(child);
       localState.active = active;
       this.updateChildActive(child);
@@ -13858,11 +12256,9 @@
     },
     resetLocalActiveState: function resetLocalActiveState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildActiveState(this);
       }
-
       return this;
     }
   };
@@ -13878,7 +12274,6 @@
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildScrollFactor, this);
       }
-
       return this;
     }
   };
@@ -13889,20 +12284,16 @@
       if (this.mask == null) {
         return this;
       }
-
       var maskGameObject = this.mask.hasOwnProperty('geometryMask') ? this.mask.geometryMask : this.mask.bitmapMask;
-
       if (maskGameObject !== child) {
         child.mask = this.mask;
       }
-
       return this;
     },
     syncMask: function syncMask() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildMask, this);
       }
-
       return this;
     },
     setMask: function setMask(mask) {
@@ -13912,19 +12303,17 @@
     clearMask: function clearMask(destroyMask) {
       if (destroyMask === undefined) {
         destroyMask = false;
-      } // Clear current mask
+      }
 
-
-      this._mask = null; // Clear children mask
-
+      // Clear current mask
+      this._mask = null;
+      // Clear children mask
       this.children.forEach(function (child) {
         child.clearMask(false);
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
-
       return this;
     }
   };
@@ -13933,15 +12322,12 @@
     if (gameObjects.length === 0) {
       return gameObjects;
     }
-
     if (descending === undefined) {
       descending = false;
     }
-
     var scene = gameObjects[0].scene;
     var displayList = scene.sys.displayList;
     displayList.depthSort();
-
     if (descending) {
       gameObjects.sort(function (childA, childB) {
         return displayList.getIndex(childB) - displayList.getIndex(childA);
@@ -13951,22 +12337,18 @@
         return displayList.getIndex(childA) - displayList.getIndex(childB);
       });
     }
-
     return gameObjects;
   };
 
   var Depth = {
     setDepth: function setDepth(value, containerOnly) {
       this.depth = value;
-
       if (!containerOnly && this.children) {
         var children = this.getAllChildren();
-
         for (var i = 0, cnt = children.length; i < cnt; i++) {
           children[i].depth = value;
         }
       }
-
       return this;
     },
     swapDepth: function swapDepth(containerB) {
@@ -13978,97 +12360,76 @@
     },
     incDepth: function incDepth(inc) {
       this.depth += inc;
-
       if (this.children) {
         var children = this.getAllChildren();
-
         for (var i = 0, cnt = children.length; i < cnt; i++) {
           children[i].depth += inc;
         }
       }
-
       return this;
     },
     bringToTop: function bringToTop() {
       var displayList = this.displayList;
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, false);
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-
         if (displayList.exists(child)) {
           displayList.bringToTop(child);
         }
       }
-
       return this;
     },
     moveDepthBelow: function moveDepthBelow(gameObject) {
       var displayList = this.displayList;
-
       if (gameObject.displayList !== displayList) {
         // Do nothing if not at the same display list
         return this;
       }
-
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, false);
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-
         if (displayList.exists(child)) {
           displayList.moveBelow(gameObject, child);
           break;
         }
       }
-
       return this;
     },
     moveDepthAbove: function moveDepthAbove(gameObject) {
       var displayList = this.displayList;
-
       if (gameObject.displayList !== displayList) {
         // Do nothing if not at the same display list
         return this;
       }
-
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, true);
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-
         if (displayList.exists(child)) {
           displayList.moveAbove(gameObject, child);
           break;
         }
       }
-
       return this;
     }
   };
 
   var DepthFirstSearch = function DepthFirstSearch(root, callback) {
     var skip = callback(root);
-
     if (!skip && root.isRexContainerLite) {
       var children = root.children;
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         DepthFirstSearch(children[i], callback);
       }
     }
   };
-
   var BreadthFirstSearch = function BreadthFirstSearch(root, callback) {
     var queue = [root];
-
     while (queue.length > 0) {
       var current = queue.shift();
       var skip = callback(current);
-
       if (!skip && current.isRexContainerLite) {
         queue.push.apply(queue, _toConsumableArray(current.children));
       }
@@ -14083,8 +12444,8 @@
       } else {
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
           out.push(this.children[i]);
-        } // Copy children
-
+        }
+        // Copy children
       }
 
       return out;
@@ -14093,14 +12454,12 @@
       if (out === undefined) {
         out = [];
       }
-
       var root = this;
       BreadthFirstSearch(root, function (child) {
         // Don't add root
         if (child === root) {
           return;
         }
-
         out.push(child);
       });
       return out;
@@ -14109,19 +12468,16 @@
       if (out === undefined) {
         out = [];
       }
-
       var root = this;
       BreadthFirstSearch(root, function (child) {
         // Don't add root
         if (child === root) {
           return;
-        } // Don't add invisible child
-
-
+        }
+        // Don't add invisible child
         if (!child.visible) {
           return true;
         }
-
         out.push(child);
       });
       return out;
@@ -14130,7 +12486,6 @@
       if (root === undefined) {
         root = this;
       }
-
       BreadthFirstSearch(root, callback);
       return this;
     },
@@ -14138,14 +12493,12 @@
       if (root === undefined) {
         root = this;
       }
-
       DepthFirstSearch(root, callback);
       return this;
     },
     contains: function contains(gameObject) {
       // Override Base.contains method
       var parent = GetParent(gameObject);
-
       if (!parent) {
         return false;
       } else if (parent === this) {
@@ -14162,13 +12515,10 @@
         // Breadth-first search
         var queue = [this];
         var parent, child;
-
         while (queue.length) {
           parent = queue.shift();
-
           for (var i = 0, cnt = parent.children.length; i < cnt; i++) {
             child = parent.children[i];
-
             if (child.name === name) {
               return child;
             } else if (child.isRexContainerLite) {
@@ -14176,7 +12526,6 @@
             }
           }
         }
-
         return null;
       }
     },
@@ -14204,64 +12553,50 @@
 
   var GetLocalStates = function GetLocalStates(gameObjects) {
     var localStates = [];
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       var gameObject = gameObjects[i];
-
       if (!gameObject.hasOwnProperty('rexContainer')) {
         continue;
       }
-
       localStates.push(gameObject.rexContainer);
     }
-
     return localStates;
   };
-
   var GetScene = function GetScene(gameObjects) {
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       var scene = gameObjects[i].scene;
-
       if (scene) {
         return scene;
       }
     }
-
     return null;
   };
-
   var UpdateChild = function UpdateChild(tween, key, target) {
     if (!target.parent) {
       // target object was removed, so remove this tween too
       tween.remove();
       return;
     }
-
     var parent = target.parent;
     var child = target.self;
-
     switch (key) {
       case 'x':
       case 'y':
         parent.updateChildPosition(child);
         break;
-
       case 'angle':
       case 'rotation':
         parent.updateChildRotation(child);
         break;
-
       case 'scaleX':
       case 'scaleY':
       case 'displayWidth':
       case 'displayHeight':
         parent.updateChildScale(child);
         break;
-
       case 'alpha':
         parent.updateChildAlpha(child);
         break;
-
       default:
         parent.updateChildPosition(child);
         parent.updateChildRotation(child);
@@ -14270,25 +12605,22 @@
         break;
     }
   };
-
   var Tween = {
     tweenChild: function tweenChild(tweenConfig) {
       var targets = tweenConfig.targets;
-
       if (!Array.isArray(targets)) {
         targets = [targets];
       }
-
       var scene = this.scene || GetScene(targets);
-
       if (!scene) {
         return;
-      } // Map child game objects to local states
+      }
 
-
+      // Map child game objects to local states
       tweenConfig.targets = GetLocalStates(targets);
-      var tween = scene.tweens.add(tweenConfig); // Update child game object in 'update' event
+      var tween = scene.tweens.add(tweenConfig);
 
+      // Update child game object in 'update' event
       tween.on('update', UpdateChild);
       return tween;
     },
@@ -14298,54 +12630,42 @@
     },
     createTweenChildConfig: function createTweenChildConfig(tweenConfig) {
       var targets = tweenConfig.targets;
-
       if (targets) {
         if (!Array.isArray(targets)) {
           targets = [targets];
-        } // Map child game objects to local states
-
-
+        }
+        // Map child game objects to local states
         tweenConfig.targets = GetLocalStates(targets);
       }
-
       var onUpdate = tweenConfig.onUpdate;
-
       tweenConfig.onUpdate = function (tween, target) {
         if (onUpdate) {
           onUpdate(tween, target);
         }
-
         UpdateChild(tween, undefined, target);
       };
-
       return tweenConfig;
     },
     tween: function tween(tweenConfig) {
       var scene = this.scene;
-
       if (!tweenConfig.targets) {
         tweenConfig.targets = this;
       }
-
       return scene.tweens.add(tweenConfig);
     },
     timelineChild: function timelineChild(timelineConfig) {
-      var targets = timelineConfig.targets; // Map child game objects to local states
-
+      var targets = timelineConfig.targets;
+      // Map child game objects to local states
       if (targets) {
         if (!Array.isArray(targets)) {
           targets = [targets];
         }
-
         timelineConfig.targets = GetLocalStates(targets);
       }
-
       var tweens = timelineConfig.tweens;
-
       for (var i = 0, cnt = tweens.length; i < cnt; i++) {
         tweens[i] = this.createTweenChildConfig(tweens[i]);
       }
-
       var timeline = this.scene.tweens.timeline(timelineConfig);
       return timeline;
     }
@@ -14359,12 +12679,10 @@
     this._setParentContainerFlag = false;
     return this;
   };
-
   var RemoveFromContainer = function RemoveFromContainer() {
     if (!this.parentContainer) {
       return this;
     }
-
     this._setParentContainerFlag = true;
     var gameObjects = this.getAllChildren([this]);
     SortGameObjectsByDepth(gameObjects);
@@ -14373,7 +12691,6 @@
     this._setParentContainerFlag = false;
     return this;
   };
-
   var AddToContainer$1 = {
     addToLayer: AddToContainer,
     addToContainer: AddToContainer,
@@ -14385,8 +12702,8 @@
       if (this.layer) {
         return this;
       }
-
-      var layer = this.scene.add.layer(); // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
+      var layer = this.scene.add.layer();
+      // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
 
       this.moveDepthBelow(layer);
       this.addToLayer(layer);
@@ -14397,28 +12714,23 @@
       if (!this.layer) {
         this.enableLayer();
       }
-
       return this.layer;
     },
     getRenderLayer: function getRenderLayer() {
       // This containerLite has a layer
       if (this.layer) {
         return this.layer;
-      } // One of parent container has a layer
+      }
 
-
+      // One of parent container has a layer
       var parent = this.getParent();
-
       while (parent) {
         var layer = parent.layer;
-
         if (layer) {
           return layer;
         }
-
         parent = parent.getParent();
       }
-
       return null;
     },
     // Internal method for adding child
@@ -14426,15 +12738,13 @@
       // Don't add to layer if gameObject is not in any displayList
       if (!gameObject.displayList) {
         return this;
-      } // Move gameObject from scene to layer
+      }
 
-
+      // Move gameObject from scene to layer
       var layer = this.getRenderLayer();
-
       if (!layer) {
         return this;
       }
-
       if (gameObject.isRexContainerLite) {
         // Add containerLite and its children
         gameObject.addToLayer(layer);
@@ -14442,7 +12752,6 @@
         // Add gameObject directly
         layer.add(gameObject);
       }
-
       var state = GetLocalState(gameObject);
       state.layer = layer;
       return this;
@@ -14452,11 +12761,9 @@
       // Move gameObject from layer to scene
       var state = GetLocalState(gameObject);
       var layer = state.layer;
-
       if (!layer) {
         return this;
       }
-
       layer.remove(gameObject);
       state.layer = null;
       return this;
@@ -14470,7 +12777,6 @@
       return gameObject.width;
     }
   };
-
   var GetDisplayHeight = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
@@ -14482,7 +12788,6 @@
   var Rectangle$1 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
   var RotateAround$1 = Phaser.Math.RotateAround;
-
   var GetBounds$1 = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$1();
@@ -14490,18 +12795,18 @@
       if (GlobRect$1 === undefined) {
         GlobRect$1 = new Rectangle$1();
       }
-
       output = GlobRect$1;
     }
-
     if (gameObject.getBounds) {
       return gameObject.getBounds(output);
-    } //  We can use the output object to temporarily store the x/y coords in:
+    }
 
+    //  We can use the output object to temporarily store the x/y coords in:
 
-    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy; // Instead of doing a check if parent container is
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+    // Instead of doing a check if parent container is
     // defined per corner we only do it once.
-
     if (gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       GetTopLeft(gameObject, output);
@@ -14534,16 +12839,13 @@
       BRx = output.x;
       BRy = output.y;
     }
-
     output.x = Math.min(TLx, TRx, BLx, BRx);
     output.y = Math.min(TLy, TRy, BLy, BRy);
     output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
     output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
     return output;
   };
-
   var GlobRect$1 = undefined;
-
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -14551,19 +12853,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopLeft) {
       return gameObject.getTopLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -14571,19 +12869,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopRight) {
       return gameObject.getTopRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -14591,19 +12885,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomLeft) {
       return gameObject.getBottomLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -14611,41 +12901,32 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomRight) {
       return gameObject.getBottomRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GlobVector = undefined;
-
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
       includeParent = false;
     }
-
     if (gameObject.rotation !== 0) {
       RotateAround$1(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
-
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       parentMatrix.transformPoint(output.x, output.y, output);
     }
-
     return output;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
   var Union = Phaser.Geom.Rectangle.Union;
-
   var GetBoundsOfGameObjects = function GetBoundsOfGameObjects(gameObjects, out) {
     if (out === undefined) {
       out = new Rectangle();
@@ -14653,23 +12934,17 @@
       if (GlobRect === undefined) {
         GlobRect = new Rectangle();
       }
-
       out = GlobRect;
     }
-
     out.setTo(0, 0, 0, 0);
     var gameObject;
     var firstClone = true;
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       gameObject = gameObjects[i];
-
       if (!gameObject.getBounds) {
         continue;
       }
-
       var boundsRect = GetBounds$1(gameObject, true);
-
       if (firstClone) {
         out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
         firstClone = false;
@@ -14677,19 +12952,15 @@
         Union(boundsRect, out, out);
       }
     }
-
     return out;
   };
-
   var GlobRect;
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
-
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
     var x = GetValue$2(config, 'x', undefined);
@@ -14700,12 +12971,10 @@
     var originY = GetValue$2(config, 'originY', 0);
     var padding = GetValue$2(config, 'padding', 0);
     var scrollX, scrollY;
-
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
       var bounds = GetBoundsOfGameObjects(gameObjects, true);
       var isCenterOrigin = x !== undefined && y !== undefined;
-
       if (isCenterOrigin) {
         width = Math.max(x - bounds.left, bounds.right - x) * 2;
         height = Math.max(y - bounds.top, bounds.bottom - y) * 2;
@@ -14719,48 +12988,42 @@
         originX = 0;
         originY = 0;
       }
-
       scrollX = bounds.x;
       scrollY = bounds.y;
     } else {
       scrollX = x + (0 - originX) * width;
       scrollY = y + (0 - originY) * height;
     }
-
     scrollX -= padding;
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var tempRT = !renderTexture; // Configurate render texture
-
+    var tempRT = !renderTexture;
+    // Configurate render texture
     if (tempRT) {
       var scene = gameObjects[0].scene;
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
-
     renderTexture.setPosition(x, y);
-
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
-
     renderTexture.setOrigin(originX, originY);
-    renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
+    renderTexture.camera.setScroll(scrollX, scrollY);
 
+    // Draw gameObjects
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-    renderTexture.draw(gameObjects); // Save render result to texture    
+    renderTexture.draw(gameObjects);
 
+    // Save render result to texture    
     var saveTexture = config.saveTexture;
-
     if (saveTexture) {
       renderTexture.saveTexture(saveTexture);
-    } // Destroy render texture if tempRT and saveTexture
-
-
+    }
+    // Destroy render texture if tempRT and saveTexture
     if (tempRT && saveTexture) {
       renderTexture.destroy();
     }
-
     return renderTexture;
   };
 
@@ -14770,97 +13033,79 @@
       var scaleXSave = this.scaleX;
       var scaleYSave = this.scaleY;
       var scale1 = scaleXSave === 1 && scaleYSave === 1;
-
       if (!scale1) {
         this.setScale(1);
-      } // Snapshot with scale = 1
+      }
 
-
+      // Snapshot with scale = 1
       if (config === undefined) {
         config = {};
       }
-
       config.gameObjects = this.getAllVisibleChildren();
       config.x = this.x;
       config.y = this.y;
       config.originX = this.originX;
       config.originY = this.originY;
       var rt = Snapshot(config);
-      var isValidRT = !!rt.scene; // Restore scale
+      var isValidRT = !!rt.scene;
 
+      // Restore scale
       if (!scale1) {
         this.setScale(scaleXSave, scaleYSave);
-
         if (isValidRT) {
           rt.setScale(scaleXSave, scaleYSave);
         }
       }
-
       return isValidRT ? rt : this;
     }
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var DrawBounds$1 = function DrawBounds(gameObject, graphics, config) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
-
     if (!canDrawBound) {
       return;
     }
-
     var color, lineWidth;
-
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$1(config, 'color');
       lineWidth = GetValue$1(config, 'lineWidth');
     }
-
     if (color === undefined) {
       color = 0xffffff;
     }
-
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-
     Points[0] = GetTopLeft(gameObject, Points[0]);
     Points[1] = GetTopRight(gameObject, Points[1]);
     Points[2] = GetBottomRight(gameObject, Points[2]);
     Points[3] = GetBottomLeft(gameObject, Points[3]);
     graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
   };
-
   var Points = [undefined, undefined, undefined, undefined];
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var DrawBounds = function DrawBounds(graphics, config) {
     var drawContainer = GetValue(config, 'drawContainer', true);
     var gameObjects = this.getAllVisibleChildren([this]);
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       var gameObject = gameObjects[i];
-
       if (!drawContainer && gameObject.isRexContainerLite) {
         continue;
       }
-
       DrawBounds$1(gameObject, graphics, config);
     }
-
     return this;
   };
 
   var RotateAround = Phaser.Math.RotateAround;
-
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
       originY = originX;
     }
-
     var deltaXY = {
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
@@ -14878,11 +13123,9 @@
     ChangeOrigin$1(this, originX, originY);
     this.syncChildrenEnable = true;
     var children = this.getAllChildren();
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       this.resetChildPositionState(children[i]);
     }
-
     return this;
   };
 
@@ -14894,20 +13137,15 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-
     var _super = _createSuper(ContainerLite);
-
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
-
       _classCallCheck(this, ContainerLite);
-
       if (Array.isArray(width)) {
         children = width;
         width = undefined;
         height = undefined;
       }
-
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
@@ -14917,14 +13155,11 @@
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
       _this.layer = undefined;
-
       if (children) {
         _this.add(children);
       }
-
       return _this;
     }
-
     _createClass(ContainerLite, [{
       key: "destroy",
       value: function destroy(fromScene) {
@@ -14932,14 +13167,10 @@
         if (!this.scene) {
           return;
         }
-
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
-
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
-
         if (this.layer) {
           this.layer.list.length = 0; // Remove all children without trigger callback
-
           this.layer.destroy();
         }
       }
@@ -14958,7 +13189,6 @@
         if (this._x === value) {
           return;
         }
-
         this._x = value;
         this.syncPosition();
       }
@@ -14971,11 +13201,11 @@
         if (this._y === value) {
           return;
         }
-
         this._y = value;
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "rotation",
       get: function get() {
@@ -14985,12 +13215,11 @@
         if (this.rotation === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "rotation", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scaleX",
       get: function get() {
@@ -15000,12 +13229,11 @@
         if (this.scaleX === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "scaleX", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scaleY",
       get: function get() {
@@ -15015,12 +13243,11 @@
         if (this.scaleY === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "scaleY", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scale",
       get: function get() {
@@ -15030,12 +13257,11 @@
         if (this.scale === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "scale", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "visible",
       get: function get() {
@@ -15045,12 +13271,11 @@
         if (_get(_getPrototypeOf(ContainerLite.prototype), "visible", this) === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "visible", value, this, true);
-
         this.syncVisible();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "alpha",
       get: function get() {
@@ -15060,12 +13285,11 @@
         if (_get(_getPrototypeOf(ContainerLite.prototype), "alpha", this) === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "alpha", value, this, true);
-
         this.syncAlpha();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "active",
       get: function get() {
@@ -15075,11 +13299,11 @@
         if (this._active === value) {
           return;
         }
-
         this._active = value;
         this.syncActive();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "mask",
       get: function get() {
@@ -15089,11 +13313,11 @@
         if (this._mask === mask) {
           return;
         }
-
         this._mask = mask;
         this.syncMask();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scrollFactorX",
       get: function get() {
@@ -15103,7 +13327,6 @@
         if (this._scrollFactorX === value) {
           return;
         }
-
         this._scrollFactorX = value;
         this.syncScrollFactor();
       }
@@ -15116,11 +13339,11 @@
         if (this._scrollFactorY === value) {
           return;
         }
-
         this._scrollFactorY = value;
         this.syncScrollFactor();
-      } // Compatiable with container plugin
+      }
 
+      // Compatiable with container plugin
     }, {
       key: "list",
       get: function get() {
@@ -15128,7 +13351,8 @@
       }
     }, {
       key: "parentContainer",
-      get: // For p3-container
+      get:
+      // For p3-container
       function get() {
         return this._parentContainer;
       },
@@ -15137,18 +13361,18 @@
         if (!this._parentContainer && !value) {
           this._parentContainer = value;
           return;
-        } // Set this._parentContainer only,
+        }
+
+        // Set this._parentContainer only,
         // if under AddToContainer, or RemoveFromContainer methods
-
-
         if (this.setParentContainerFlag) {
           this._parentContainer = value;
           return;
-        } // else if (!this.setParentContainerFlag)
+        }
+        // else if (!this.setParentContainerFlag)
+
         // Add itself and all children to container,
         // Or remove itseld and all children from container
-
-
         if (this._parentContainer && !value) {
           // Remove from container
           this.removeFromContainer();
@@ -15167,9 +13391,7 @@
         if (this._setParentContainerFlag) {
           return true;
         }
-
         var parent = GetParent(this);
-
         return parent ? parent.setParentContainerFlag : false;
       }
     }], [{
@@ -15178,23 +13400,21 @@
         return GetParent(child);
       }
     }]);
-
     return ContainerLite;
   }(Base);
-
   Object.assign(ContainerLite.prototype, methods);
 
   var AddChess = function AddChess(gameObject, tileX, tileY, tileZ) {
     var grid = this.grid;
     grid.saveOrigin();
-    grid.setOriginPosition(this.x, this.y); // Add chess to borad
+    grid.setOriginPosition(this.x, this.y);
 
-    this.board.addChess(gameObject, tileX, tileY, tileZ, true); // Add chess to container
-
+    // Add chess to borad
+    this.board.addChess(gameObject, tileX, tileY, tileZ, true);
+    // Add chess to container
     if (IsUID(gameObject)) {
       gameObject = this.board.uidToChess(gameObject);
     }
-
     this.add(gameObject);
     grid.restoreOrigin();
     return this;
@@ -15212,11 +13432,9 @@
 
   var SetMainBoard = function SetMainBoard(mainBoard, tileX, tileY) {
     this.mainBoardRef.set(mainBoard, tileX, tileY);
-
     if (mainBoard) {
       this.lastMainBoardRef.set(mainBoard, tileX, tileY);
     }
-
     return this;
   };
 
@@ -15224,28 +13442,23 @@
     if (!mainBoard) {
       return false;
     }
-
     if (chessTileXYMap === undefined) {
       chessTileXYMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
 
     var chessTileXYZ, mappedTileXY, isOccupied;
-
     for (var uid in chessTileXYMap) {
       chessTileXYZ = chessTileXYMap[uid];
       mappedTileXY = mainBoard.offset(chessTileXYZ, tileX, tileY, true);
-
       if (!mainBoard.contains(mappedTileXY.x, mappedTileXY.y)) {
         return false;
       }
-
       if (this.putTestCallback) {
         // Custom test function
         targetTileXY.x = mappedTileXY.x;
         targetTileXY.y = mappedTileXY.x;
         targetTileXY.z = chessTileXYZ.z;
         var chess = this.board.uidToChess(uid);
-
         if (this.putTestCallbackScpe) {
           isOccupied = this.putTestCallback.call(this.putTestCallbackScpe, targetTileXY, mainBoard, chess);
         } else {
@@ -15255,15 +13468,12 @@
         // Default test function
         isOccupied = mainBoard.contains(mappedTileXY.x, mappedTileXY.y, chessTileXYZ.z);
       }
-
       if (isOccupied) {
         return false;
       }
     }
-
     return true;
   };
-
   var targetTileXY = {
     x: 0,
     y: 0,
@@ -15274,55 +13484,42 @@
     if (!mainBoard) {
       return this;
     }
-
     if (tileX === undefined) {
       var out = mainBoard.worldXYToTileXY(this.x, this.y, true);
       tileX = out.x;
       tileY = out.y;
     }
-
     if (align === undefined) {
       align = true;
     }
-
     this.pullOutFromMainBoard();
-
     if (!this.canPutOnMainBoard(mainBoard, tileX, tileY)) {
       return this;
     }
-
     this.setMainBoard(mainBoard, tileX, tileY);
     var tileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
-
     var chessTileXYZ, mappedTileXY;
-
     for (var uid in tileXYZMap) {
       chessTileXYZ = tileXYZMap[uid];
       uid = parseInt(uid);
       mappedTileXY = mainBoard.offset(chessTileXYZ, tileX, tileY, true);
       mainBoard.addChess(uid, mappedTileXY.x, mappedTileXY.y, chessTileXYZ.z, false);
     }
-
     if (align) {
       this.alignToMainBoard(mainBoard, tileX, tileY);
     }
-
     return this;
   };
 
   var PullOutFromMainBoard = function PullOutFromMainBoard() {
     var mainBoard = this.mainBoard;
-
     if (mainBoard === null) {
       return this;
     }
-
     var tileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
-
     for (var uid in tileXYZMap) {
       mainBoard.removeChess(parseInt(uid));
     }
-
     this.setMainBoard(null);
     return this;
   };
@@ -15339,17 +13536,13 @@
     if (!mainBoard) {
       return false;
     }
-
     var gameObject;
-
     for (var uid in this.tileXYZMap) {
       gameObject = this.board.uidToChess(uid);
-
       if (mainBoard.isOverlappingPoint(gameObject.x, gameObject.y, tileZ)) {
         return true;
       }
     }
-
     return false;
   };
 
@@ -15357,13 +13550,11 @@
     if (!mainBoard) {
       return this;
     }
-
     if (tileX === undefined) {
       var out = mainBoard.worldXYToTileXY(this.x, this.y, true);
       tileX = out.x;
       tileY = out.y;
     }
-
     mainBoard.gridAlign(this, tileX, tileY);
     return this;
   };
@@ -15372,23 +13563,18 @@
     if (!this.input.enable) {
       return;
     }
-
     if (!pointer.isDown) {
       return;
     }
-
     if (this.input.pointer === null) {
       // Catch new touch pointer
       this.input.pointer = pointer;
     }
-
     var hitChess = OnTouchTileStart.call(this, pointer);
-
     if (hitChess) {
       OnDragStart.call(this, pointer);
     }
   };
-
   var OnTouchTileStart = function OnTouchTileStart(pointer) {
     // Get touched tileX, tileY
     var grid = this.grid;
@@ -15396,62 +13582,52 @@
     grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
-        tileY = out.y;
+      tileY = out.y;
     grid.restoreOrigin();
     this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY; // Get touched chess
+    this.input.tilePosition.y = tileY;
 
+    // Get touched chess
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray$2);
     var hitChess = gameObjects.length > 0;
-
     if (hitChess) {
       // Fire events
       var gameObject;
-
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
-
         if (gameObject.emit) {
           gameObject.emit('miniboard.pointerdown', pointer);
         }
-
         this.emit('gameobjectdown', pointer, gameObject);
       }
-
       this.emit('pointerdown', pointer, this);
     }
-
     globChessArray$2.length = 0;
     return hitChess;
   };
-
   var OnDragStart = function OnDragStart(pointer) {
-    var dragData = this.input.drag; // Drag by another pointer
-
+    var dragData = this.input.drag;
+    // Drag by another pointer
     if (dragData.state === 1) {
       return;
     }
-
     var dragPosition = dragData.position;
     dragPosition.x = pointer.x - this.x;
     dragPosition.y = pointer.y - this.y;
     dragData.state = 1;
     this.emit('dragstart', pointer, dragPosition.x, dragPosition.y);
   };
-
   var globChessArray$2 = [];
 
   var DragEnd = function DragEnd(pointer) {
-    var dragData = this.input.drag; // Not dragging
-
+    var dragData = this.input.drag;
+    // Not dragging
     if (dragData.state === 0) {
       return;
     }
-
     if (pointer === undefined) {
       pointer = this.input.pointer;
     }
-
     var dragPosition = dragData.position;
     var dragX = pointer.x - dragPosition.x;
     var dragY = pointer.y - dragPosition.y;
@@ -15464,16 +13640,13 @@
     if (!this.input.enable) {
       return;
     }
-
     OnTouchTileEnd.call(this, pointer);
     DragEnd.call(this, pointer);
-
     if (this.input.pointer === pointer) {
       // Release touch pointer
       this.input.pointer = null;
     }
   };
-
   var OnTouchTileEnd = function OnTouchTileEnd(pointer) {
     // Get touched tileX, tileY
     var grid = this.grid;
@@ -15481,46 +13654,38 @@
     grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
-        tileY = out.y;
+      tileY = out.y;
     grid.restoreOrigin();
     this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY; // Get touched chess
+    this.input.tilePosition.y = tileY;
 
+    // Get touched chess
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray$1);
     var hitChess = gameObjects.length > 0;
-
     if (hitChess) {
       // Fire events
       var gameObject;
-
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
-
         if (gameObject.emit) {
           gameObject.emit('miniboard.pointerup', pointer);
         }
-
         this.emit('gameobjectup', pointer, gameObject);
       }
-
       this.emit('pointerup', pointer, this);
     }
-
     globChessArray$1.length = 0;
     return hitChess;
   };
-
   var globChessArray$1 = [];
 
   var OnPointerMove = function OnPointerMove(pointer) {
     if (!this.input.enable) {
       return;
     }
-
     OnTouchTileMove.call(this, pointer);
     OnDrag.call(this, pointer);
   };
-
   var OnTouchTileMove = function OnTouchTileMove(pointer) {
     // Get touched tileX, tileY
     var grid = this.grid;
@@ -15528,34 +13693,28 @@
     grid.setOriginPosition(this.x, this.y);
     var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
     var tileX = out.x,
-        tileY = out.y;
+      tileY = out.y;
     grid.restoreOrigin();
-
     if (this.input.tilePosition.x === tileX && this.input.tilePosition.y === tileY) {
       // Tile position dose not change
       return;
     }
-
     this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY; // Get touched chess
+    this.input.tilePosition.y = tileY;
 
+    // Get touched chess
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
     var hitChess = gameObjects.length > 0;
-
     if (hitChess) {
       // Fire events
       var gameObject;
-
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
-
         if (gameObject.emit) {
           gameObject.emit('miniboard.pointermove', pointer);
         }
-
         this.emit('gameobjectmove', pointer, gameObject);
       }
-
       this.emit('pointermove', pointer, this);
     } else {
       // Move outside
@@ -15564,9 +13723,9 @@
         this.input.pointer = null;
       }
     }
+    globChessArray.length = 0;
 
-    globChessArray.length = 0; // Not dragging
-
+    // Not dragging
     if (this.input.drag.state === 0) {
       if (this.input.pointer === pointer) {
         if (!hitChess) {
@@ -15579,25 +13738,22 @@
   };
 
   var OnDrag = function OnDrag(pointer) {
-    var dragData = this.input.drag; // Not dragging
-
+    var dragData = this.input.drag;
+    // Not dragging
     if (dragData.state === 0) {
       return;
     }
-
     var dragPosition = dragData.position;
     var dragX = pointer.x - dragPosition.x;
     var dragY = pointer.y - dragPosition.y;
     this.emit('drag', pointer, dragX, dragY);
   };
-
   var globChessArray = [];
 
   var SetInteractive = function SetInteractive(enable) {
     if (enable === undefined) {
       enable = true;
     }
-
     if (!this.input) {
       this.input = {
         enable: true,
@@ -15626,13 +13782,10 @@
         }
       }, this);
     }
-
     this.input.enable = enable;
-
     if (!enable) {
       this.input.pointer = null;
     }
-
     return this;
   };
 
@@ -15640,14 +13793,11 @@
     if (enable === undefined) {
       enable = true;
     }
-
     this.setInteractive();
     this.input.drag.enable = enable;
-
     if (!enable) {
       this.input.drag.state = 0;
     }
-
     return this;
   };
 
@@ -15657,7 +13807,6 @@
     } else if (typeof mode === 'string') {
       mode = MODE[mode];
     }
-
     if (chessTileXYZMap === undefined) {
       chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
@@ -15665,16 +13814,13 @@
     if (out === undefined) {
       out = {};
     }
-
     var chessTileXYZ, newTileXYZ;
-
     for (var uid in chessTileXYZMap) {
       chessTileXYZ = chessTileXYZMap[uid];
       newTileXYZ = this.board.mirror(chessTileXYZ, mode);
       newTileXYZ.z = chessTileXYZ.z;
       out[uid] = newTileXYZ;
     }
-
     return out; // {uid:{x,y,z}}
   };
 
@@ -15688,7 +13834,6 @@
     if (this.mainBoard === null) {
       return true;
     }
-
     var newTileXYZMap = Mirror$1.call(this, mode);
     return this.canPutOnMainBoard(this.mainBoard, tileX, tileY, newTileXYZMap);
   };
@@ -15696,41 +13841,33 @@
   var ResetChessTileXYZ = function ResetChessTileXYZ(newTileXYZMap) {
     this.removeAllChess();
     var newTileXYZ;
-
     for (var uid in newTileXYZMap) {
       newTileXYZ = newTileXYZMap[uid];
       uid = parseInt(uid);
       this.addChess(uid, newTileXYZ.x, newTileXYZ.y, newTileXYZ.z, false);
     }
-
     return this;
   };
 
   var Mirror = function Mirror(mode) {
     var isOnMainBoard = this.mainBoard != null;
-
     if (isOnMainBoard) {
       this.pullOutFromMainBoard();
     }
-
     var newTileXYZMap = Mirror$1.call(this, mode);
-
     if (isOnMainBoard) {
       var mainBoard = this.lastMainBoardRef.mainBoard;
       var tileX = this.lastMainBoardRef.tileX;
       var tileY = this.lastMainBoardRef.tileY;
       this.lastTransferResult = this.canPutOnMainBoard(mainBoard, tileX, tileY, newTileXYZMap);
-
       if (this.lastTransferResult) {
         ResetChessTileXYZ.call(this, newTileXYZMap);
       }
-
       this.putBack();
     } else {
       this.lastTransferResult = true;
       ResetChessTileXYZ.call(this, newTileXYZMap);
     }
-
     return this;
   };
 
@@ -15738,7 +13875,6 @@
     if (direction === undefined) {
       direction = 0;
     }
-
     if (chessTileXYZMap === undefined) {
       chessTileXYZMap = this.tileXYZMap; // {uid:{x,y,z}}
     }
@@ -15746,16 +13882,13 @@
     if (out === undefined) {
       out = {};
     }
-
     var chessTileXYZ, newTileXYZ;
-
     for (var uid in chessTileXYZMap) {
       chessTileXYZ = chessTileXYZMap[uid];
       newTileXYZ = this.board.rotate(chessTileXYZ, direction);
       newTileXYZ.z = chessTileXYZ.z;
       out[uid] = newTileXYZ;
     }
-
     return out; // {uid:{x,y,z}}
   };
 
@@ -15763,7 +13896,6 @@
     if (this.mainBoard === null) {
       return true;
     }
-
     var newTileXYZMap = Rotate$1.call(this, direction);
     return this.canPutOnMainBoard(this.mainBoard, tileX, tileY, newTileXYZMap);
   };
@@ -15772,35 +13904,27 @@
     if (direction === 0) {
       return this;
     }
-
     var isOnMainBoard = this.mainBoard != null;
-
     if (isOnMainBoard) {
       this.pullOutFromMainBoard();
     }
-
     var newTileXYZMap = Rotate$1.call(this, direction);
-
     if (isOnMainBoard) {
       var mainBoard = this.lastMainBoardRef.mainBoard;
       var tileX = this.lastMainBoardRef.tileX;
       var tileY = this.lastMainBoardRef.tileY;
       this.lastTransferResult = this.canPutOnMainBoard(mainBoard, tileX, tileY, newTileXYZMap);
-
       if (this.lastTransferResult) {
         ResetChessTileXYZ.call(this, newTileXYZMap);
       }
-
       this.putBack();
     } else {
       this.lastTransferResult = true;
       ResetChessTileXYZ.call(this, newTileXYZMap);
     }
-
     if (this.lastTransferResult) {
       this.setFace(this.face + direction);
     }
-
     return this;
   };
 
@@ -15825,40 +13949,32 @@
     } else if (out === true) {
       out = globResult;
     }
-
     var minX = Infinity,
-        maxX = -Infinity;
+      maxX = -Infinity;
     var minY = Infinity,
-        maxY = -Infinity;
+      maxY = -Infinity;
     var chessTileXYZ;
-
     for (var uid in this.tileXYZMap) {
       chessTileXYZ = this.tileXYZMap[uid];
-
       if (chessTileXYZ.x < minX) {
         minX = chessTileXYZ.x;
       }
-
       if (chessTileXYZ.x > maxX) {
         maxX = chessTileXYZ.x;
       }
-
       if (chessTileXYZ.y < minY) {
         minY = chessTileXYZ.y;
       }
-
       if (chessTileXYZ.y > maxY) {
         maxY = chessTileXYZ.y;
       }
     }
-
     out.minX = minX;
     out.minY = minY;
     out.maxX = maxX;
     out.maxY = maxY;
     return out;
   };
-
   var globResult = {};
 
   var Offset = function Offset(tileX, tileY, chessTileXYZMap, out) {
@@ -15869,16 +13985,13 @@
     if (out === undefined) {
       out = {};
     }
-
     var chessTileXYZ, newTileXYZ;
-
     for (var uid in chessTileXYZMap) {
       chessTileXYZ = chessTileXYZMap[uid];
       newTileXYZ = this.board.offset(chessTileXYZ, tileX, tileY);
       newTileXYZ.z = chessTileXYZ.z;
       out[uid] = newTileXYZ;
     }
-
     return out; // {uid:{x,y,z}}
   };
 
@@ -15888,26 +14001,21 @@
         originX = 0.5;
         originY = 0.5;
         break;
-
       case 'top-left':
       case 'left-top':
         originX = 0;
         originY = 0;
         break;
     }
-
     if (originX === undefined) {
       originX = 0.5;
     }
-
     if (originY === undefined) {
       originY = originX;
     }
-
     var minMaxTileXY = GetMinMaxTileXY.call(this, undefined, true);
     var offsetX = -Math.floor(Linear(minMaxTileXY.minX, minMaxTileXY.maxX, originX));
     var offsetY = -Math.floor(Linear(minMaxTileXY.minY, minMaxTileXY.maxY, originY));
-
     if (offsetX !== 0 || offsetY !== 0) {
       var newTileXYZMap = Offset.call(this, offsetX, offsetY);
       ResetChessTileXYZ.call(this, newTileXYZMap);
@@ -15915,7 +14023,6 @@
       var world0 = this.board.tileXYToWorldXY(0, 0);
       this.setPosition(this.x + (world0.x - worldOffsetXY.x), this.y + (world0.y - worldOffsetXY.y));
     }
-
     return this;
   };
 
@@ -15945,11 +14052,9 @@
   var MainBoardReference = /*#__PURE__*/function () {
     function MainBoardReference(miniBoard) {
       _classCallCheck(this, MainBoardReference);
-
       this.miniBoard = miniBoard;
       this.set(null);
     }
-
     _createClass(MainBoardReference, [{
       key: "set",
       value: function set(mainBoard, tileX, tileY) {
@@ -15958,26 +14063,20 @@
           tileX = null;
           tileY = null;
         }
-
         this.mainBoard = mainBoard;
         this.tileX = tileX;
         this.tileY = tileY;
       }
     }]);
-
     return MainBoardReference;
   }();
 
   var MiniBoard = /*#__PURE__*/function (_Container) {
     _inherits(MiniBoard, _Container);
-
     var _super = _createSuper(MiniBoard);
-
     function MiniBoard(scene, x, y, config) {
       var _this;
-
       _classCallCheck(this, MiniBoard);
-
       _this = _super.call(this, scene, x, y, 0, 0);
       _this.type = 'rexMiniBoard';
       var boardConfig = {
@@ -15989,22 +14088,17 @@
       _this.board = new Board$1(scene, boardConfig);
       _this.mainBoardRef = new MainBoardReference();
       _this.lastMainBoardRef = new MainBoardReference();
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(MiniBoard, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setFace(GetValue$c(o, 'face', 0));
         var dragEnable = GetValue$c(o, 'draggable', undefined);
-
         if (dragEnable !== undefined) {
           this.setDraggable(dragEnable);
         }
-
         this.setPutTestCallback(GetValue$c(o, 'putTestCallback', undefined), GetValue$c(o, 'putTestCallbackScpe', undefined));
         this.lastTransferResult = GetValue$c(o, 'lastTransferResult', undefined);
         return this;
@@ -16015,12 +14109,10 @@
         if (!this.scene) {
           return;
         }
-
         this.clear(!fromScene);
         this.board.shutdown(fromScene);
         this.board = undefined;
         this.setPutTestCallback(undefined, undefined);
-
         _get(_getPrototypeOf(MiniBoard.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
@@ -16062,10 +14154,8 @@
         return this;
       }
     }]);
-
     return MiniBoard;
   }(ContainerLite);
-
   Object.assign(MiniBoard.prototype, Methods);
 
   ObjectFactory.register('miniBoard', function (x, y, config) {
@@ -16079,19 +14169,15 @@
     if (out === undefined) {
       out = [];
     }
-
     var mode = board.grid.mode;
     var r1, r2;
-
     for (var q = -radius; q <= radius; q++) {
       r1 = Math.max(-radius, -q - radius);
       r2 = Math.min(radius, -q + radius);
-
       for (var r = r1; r <= r2; r++) {
         out.push(cube2cr(mode, q, r, -q - r));
       }
     }
-
     return out;
   };
 
@@ -16099,10 +14185,8 @@
     if (out === undefined) {
       out = [];
     }
-
     var mode = board.grid.mode;
     var rStart, rEnd;
-
     for (var q = 0; q <= height; q++) {
       if (type === 1) {
         rStart = height - q;
@@ -16111,12 +14195,10 @@
         rStart = 0;
         rEnd = height - q;
       }
-
       for (var r = rStart; r <= rEnd; r++) {
         out.push(cube2cr(mode, q, r, -q - r));
       }
     }
-
     return out;
   };
 
@@ -16124,9 +14206,7 @@
     if (out === undefined) {
       out = [];
     }
-
     var mode = board.grid.mode;
-
     switch (type) {
       case 1:
         for (var s = 0; s <= width; s++) {
@@ -16134,18 +14214,14 @@
             out.push(cube2cr(mode, q, -q - s, s));
           }
         }
-
         break;
-
       case 2:
         for (var r = 0; r <= width; r++) {
           for (var s = 0; s <= height; s++) {
             out.push(cube2cr(mode, -r - s, r, s));
           }
         }
-
         break;
-
       default:
         // case 0
         for (var q = 0; q <= width; q++) {
@@ -16153,10 +14229,8 @@
             out.push(cube2cr(mode, q, r, -q - r));
           }
         }
-
         break;
     }
-
     return out;
   };
 
@@ -16167,22 +14241,17 @@
   };
 
   var Pad = Phaser.Utils.String.Pad;
-
   var GetStyle = function GetStyle(style, canvas, context) {
     if (style == null) {
       return style;
     }
-
     switch (_typeof(style)) {
       case 'string':
         return style;
-
       case 'number':
         return "#".concat(Pad(Math.floor(style).toString(16), 6, '0', 1));
-
       case 'function':
         return style(canvas, context);
-
       case 'object':
         if (style.hasOwnProperty('r')) {
           if (style.hasOwnProperty('a')) {
@@ -16213,24 +14282,19 @@
     if (lineJoin === undefined) {
       lineJoin = 'round';
     }
-
     context.beginPath();
     context.lineJoin = lineJoin;
     var point = points[0];
     context.moveTo(point.x, point.y);
-
     for (var i = 1, cnt = points.length; i < cnt; i++) {
       point = points[i];
       context.lineTo(point.x, point.y);
     }
-
     context.closePath();
-
     if (fillStyle != null) {
       context.fillStyle = fillStyle;
       context.fill();
     }
-
     if (strokeStyle != null) {
       context.strokeStyle = strokeStyle;
       context.lineWidth = lineWidth;
@@ -16242,26 +14306,21 @@
     if (fillStyle === undefined && strokeStyle === undefined) {
       fillStyle = 0xffffff;
     }
-
     if (strokeStyle === undefined) {
       lineWidth = 0;
     } else if (lineWidth === undefined) {
       lineWidth = 2;
     }
-
     if (lineJoin === undefined) {
       lineJoin = 'round';
     }
-
     if (expandSize === undefined) {
       expandSize = false;
     }
-
     globBounds = GetBounds(points, globBounds);
     OffsetPoints(points, -globBounds.left, -globBounds.top);
     var width = globBounds.right - globBounds.left;
     var height = globBounds.bottom - globBounds.top;
-
     if (!expandSize) {
       IndentPoints(points, globBounds, lineWidth);
     } else {
@@ -16269,61 +14328,51 @@
       height += lineWidth;
       OffsetPoints(points, lineWidth / 2);
     }
-
     var texture = scene.sys.textures.createCanvas(key, Math.ceil(width), Math.ceil(height));
     var canvas = texture.getCanvas();
     var context = texture.getContext();
     DrawPolygon(canvas, context, points, GetStyle(fillStyle, canvas, context), GetStyle(strokeStyle, canvas, context), lineWidth, lineJoin);
     texture.refresh();
   };
-
   var GetBounds = function GetBounds(points, out) {
     if (out === undefined) {
       out = {};
     }
-
     var left = Infinity,
-        top = Infinity,
-        right = -Infinity,
-        bottom = -Infinity;
-
+      top = Infinity,
+      right = -Infinity,
+      bottom = -Infinity;
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       var p = points[i],
-          px = p.x,
-          py = p.y;
+        px = p.x,
+        py = p.y;
       left = Math.min(left, px);
       top = Math.min(top, py);
       right = Math.max(right, px);
       bottom = Math.max(bottom, py);
     }
-
     out.left = left;
     out.top = top;
     out.right = right;
     out.bottom = bottom;
     return out;
   };
-
   var IndentPoints = function IndentPoints(points, bounds, lineWidth) {
     if (lineWidth === 0) {
       return points;
     }
-
     var width = bounds.right - bounds.left;
     var height = bounds.bottom - bounds.top;
     var halfW = width / 2;
     var halfH = height / 2;
     var halfLW = lineWidth / 2;
-
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       var p = points[i];
       p.x = Indent(p.x, halfW, halfLW);
       p.y = Indent(p.y, halfH, halfLW);
     }
-
     return points;
   };
-
   var Indent = function Indent(value, halfBound, offset) {
     if (value < halfBound) {
       return value + offset;
@@ -16333,25 +14382,20 @@
       return value;
     }
   };
-
   var OffsetPoints = function OffsetPoints(points, x, y) {
     if (y === undefined) {
       y = x;
     }
-
     if (x === 0 && y === 0) {
       return points;
     }
-
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       var p = points[i];
       p.x += x;
       p.y += y;
     }
-
     return points;
   };
-
   var globBounds;
 
   var CreateTileTexture = function CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin) {
@@ -16359,36 +14403,29 @@
       lineJoin = overlapGrid;
       overlapGrid = undefined;
     }
-
     if (overlapGrid === undefined) {
       overlapGrid = true;
     }
-
     if (lineJoin === undefined) {
       lineJoin = 'miter';
     }
-
     CreatePolygonTexture(board.scene, key, board.getGridPoints(0, 0, true), fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);
   };
 
   var BoardPlugin = /*#__PURE__*/function (_Phaser$Plugins$Scene) {
     _inherits(BoardPlugin, _Phaser$Plugins$Scene);
-
     var _super = _createSuper(BoardPlugin);
-
     function BoardPlugin(scene, pluginManager) {
       var _this;
-
       _classCallCheck(this, BoardPlugin);
-
       _this = _super.call(this, scene, pluginManager);
-      _this.add = new ObjectFactory(scene); // Helper functions
+      _this.add = new ObjectFactory(scene);
 
+      // Helper functions
       _this.hexagonMap = HexagonMap;
       _this.createTileTexture = CreateTileTexture;
       return _this;
     }
-
     _createClass(BoardPlugin, [{
       key: "start",
       value: function start() {
@@ -16396,7 +14433,6 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return BoardPlugin;
   }(Phaser.Plugins.ScenePlugin);
 

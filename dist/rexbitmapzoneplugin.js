@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,55 +66,43 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
 
   var GetRandom = Phaser.Utils.Array.GetRandom;
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var BitmapZone = /*#__PURE__*/function () {
     function BitmapZone(canvasObject, config) {
       _classCallCheck(this, BitmapZone);
-
       this.data = [];
       this.setSource(canvasObject, config);
     }
-
     _createClass(BitmapZone, [{
       key: "setSource",
       value: function setSource(canvasObject, config) {
@@ -135,13 +115,11 @@
         var imgData = context.getImageData(x, y, width, height).data;
         var data = this.data;
         data.length = 0;
-
         for (var i = 0, cnt = imgData.length / 4; i < cnt; i++) {
           if (imgData[i * 4 + 3] > 0) {
             data.push(i);
           }
         }
-
         this.width = width;
         this.height = height;
         var scaleX = GetValue(config, 'scaleX', canvasObject);
@@ -160,7 +138,6 @@
           offsetX = -(canvasObject.originX * canvasObject.displayWidth);
           offsetY = -(canvasObject.originY * canvasObject.displayHeight);
         }
-
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         return this;
@@ -173,11 +150,9 @@
           scaleX = canvasObject.scaleX;
           scaleY = canvasObject.scaleY;
         }
-
         if (scaleY === undefined) {
           scaleY = scaleX;
         }
-
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         return this;
@@ -188,7 +163,6 @@
         if (out === undefined) {
           out = {};
         }
-
         if (this.data.length > 0) {
           var index = GetRandom(this.data);
           var x = index % this.width;
@@ -199,27 +173,21 @@
           out.x = 0;
           out.y = 0;
         }
-
         out.x += this.offsetX;
         out.y += this.offsetY;
         return out;
       }
     }]);
-
     return BitmapZone;
   }();
 
   var BitmapZonePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BitmapZonePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(BitmapZonePlugin);
-
     function BitmapZonePlugin(pluginManager) {
       _classCallCheck(this, BitmapZonePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(BitmapZonePlugin, [{
       key: "start",
       value: function start() {
@@ -232,7 +200,6 @@
         return new BitmapZone(source, config);
       }
     }]);
-
     return BitmapZonePlugin;
   }(Phaser.Plugins.BasePlugin);
 

@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,7 +141,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -176,76 +150,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -266,18 +229,17 @@
   };
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
       this.parent = parent; // gameObject or scene
-
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$5(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$5(config, 'eventEmitter', true));
 
+      // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
         this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
@@ -286,16 +248,15 @@
         this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
-
+        // parent might not be shutdown yet
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
           this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
@@ -303,7 +264,6 @@
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -325,43 +285,36 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
-
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-
     var _super = _createSuper(TickTask);
-
     function TickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, TickTask);
-
       _this = _super.call(this, parent, config);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-
-      _this.setTickingMode(GetValue$4(config, 'tickingMode', 1)); // boot() later
-
-
+      _this.setTickingMode(GetValue$4(config, 'tickingMode', 1));
+      // boot() later
       return _this;
-    } // override
+    }
 
-
+    // override
     _createClass(TickTask, [{
       key: "boot",
       value: function boot() {
         if (this.tickingMode === 2 && !this.tickingState) {
           this.startTicking();
         }
-      } // override
+      }
 
+      // override
     }, {
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -369,13 +322,10 @@
         if (this.isShutdown) {
           return;
         }
-
         this.stop();
-
         if (this.tickingState) {
           this.stopTicking();
         }
-
         _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -384,16 +334,17 @@
         if (typeof mode === 'string') {
           mode = TICKINGMODE[mode];
         }
-
         this.tickingMode = mode;
-      } // override
+      }
 
+      // override
     }, {
       key: "startTicking",
       value: function startTicking() {
         this.tickingState = true;
-      } // override
+      }
 
+      // override
     }, {
       key: "stopTicking",
       value: function stopTicking() {
@@ -408,9 +359,7 @@
         if (this._isRunning === value) {
           return;
         }
-
         this._isRunning = value;
-
         if (this.tickingMode === 1 && value != this.tickingState) {
           if (value) {
             this.startTicking();
@@ -434,7 +383,6 @@
           this.isPaused = true;
           this.isRunning = false;
         }
-
         return this;
       }
     }, {
@@ -444,7 +392,6 @@
         if (this.isPaused) {
           this.isRunning = true;
         }
-
         return this;
       }
     }, {
@@ -462,10 +409,8 @@
         this.emit('complete', this.parent, this);
       }
     }]);
-
     return TickTask;
   }(ComponentBase);
-
   var TICKINGMODE = {
     'no': 0,
     'lazy': 1,
@@ -473,57 +418,46 @@
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-
     var _super = _createSuper(SceneUpdateTickTask);
-
     function SceneUpdateTickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, SceneUpdateTickTask);
-
       _this = _super.call(this, parent, config);
       _this.tickEventName = GetValue$3(config, 'tickEventName', 'update');
       return _this;
     }
-
     _createClass(SceneUpdateTickTask, [{
       key: "startTicking",
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-
         this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
       value: function stopTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-
         if (this.scene) {
           // Scene might be destoryed
           this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
-      } // update(time, delta) {
+      }
+
+      // update(time, delta) {
       //     
       // }
-
     }]);
-
     return SceneUpdateTickTask;
   }(TickTask);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
-
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -567,7 +501,6 @@
         if (delay === undefined) {
           delay = 0;
         }
-
         this.delay = delay;
         return this;
       }
@@ -615,16 +548,13 @@
         if (this.state === IDLE || this.state === DONE || delta === 0 || this.timeScale === 0) {
           return;
         }
-
         this.nowTime += delta * this.timeScale;
         this.justRestart = false;
-
         if (this.nowTime >= this.duration) {
           if (this.repeat === -1 || this.repeatCounter < this.repeat) {
             this.repeatCounter++;
             this.justRestart = true;
             this.nowTime -= this.duration;
-
             if (this.repeatDelay > 0) {
               this.nowTime -= this.repeatDelay;
               this.state = REPEATDELAY;
@@ -641,35 +571,29 @@
       key: "t",
       get: function get() {
         var t;
-
         switch (this.state) {
           case IDLE:
           case DELAY:
           case REPEATDELAY:
             t = 0;
             break;
-
           case COUNTDOWN:
             t = this.nowTime / this.duration;
             break;
-
           case DONE:
             t = 1;
             break;
         }
-
         return Clamp(t, 0, 1);
       },
       set: function set(value) {
         value = Clamp(value, -1, 1);
-
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
         } else {
           this.state = COUNTDOWN;
           this.nowTime = this.duration * value;
-
           if (value === 1 && this.repeat !== 0) {
             this.repeatCounter++;
           }
@@ -717,10 +641,8 @@
         return (this.repeatCounter & 1) === 0;
       }
     }]);
-
     return Timer;
   }();
-
   var IDLE = 0;
   var DELAY = 1;
   var COUNTDOWN = 2;
@@ -729,21 +651,17 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-
     var _super = _createSuper(TimerTickTask);
-
     function TimerTickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, TimerTickTask);
-
       _this = _super.call(this, parent, config);
-      _this.timer = new Timer(); // boot() later 
-
+      _this.timer = new Timer();
+      // boot() later 
       return _this;
-    } // override
+    }
 
-
+    // override
     _createClass(TimerTickTask, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -751,9 +669,7 @@
         if (this.isShutdown) {
           return;
         }
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "shutdown", this).call(this, fromScene);
-
         this.timer.destroy();
         this.timer = undefined;
       }
@@ -761,49 +677,37 @@
       key: "start",
       value: function start() {
         this.timer.start();
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
       key: "stop",
       value: function stop() {
         this.timer.stop();
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "stop", this).call(this);
-
         return this;
       }
     }, {
       key: "complete",
       value: function complete() {
         this.timer.stop();
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "complete", this).call(this);
-
         return this;
       }
     }]);
-
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-
   var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
     _inherits(EaseValueTaskBase, _TickTask);
-
     var _super = _createSuper(EaseValueTaskBase);
-
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -822,7 +726,6 @@
         if (e == undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -832,15 +735,14 @@
         if (target === undefined) {
           target = this.parent;
         }
-
         this.target = target;
         return this;
       }
     }, {
       key: "setDelay",
       value: function setDelay(time) {
-        this.delay = time; // Assign `this.timer.setRepeat(repeat)` manually
-
+        this.delay = time;
+        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
       }
     }, {
@@ -852,15 +754,15 @@
     }, {
       key: "setRepeat",
       value: function setRepeat(repeat) {
-        this.repeat = repeat; // Assign `this.timer.setRepeat(repeat)` manually
-
+        this.repeat = repeat;
+        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
       }
     }, {
       key: "setRepeatDelay",
       value: function setRepeatDelay(repeatDelay) {
-        this.repeatDelay = repeatDelay; // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
-
+        this.repeatDelay = repeatDelay;
+        // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
         return this;
       }
     }, {
@@ -869,12 +771,12 @@
         if (ease === undefined) {
           ease = 'Linear';
         }
-
         this.ease = ease;
         this.easeFn = GetEaseFunction(ease);
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "start",
       value: function start() {
@@ -882,9 +784,7 @@
         if (this.timer.isRunning) {
           return this;
         }
-
         _get(_getPrototypeOf(EaseValueTaskBase.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
@@ -900,15 +800,12 @@
         if (toEnd === undefined) {
           toEnd = false;
         }
-
         _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
-
         if (toEnd) {
           this.timer.setT(1);
           this.updateGameObject(this.target, this.timer);
           this.complete();
         }
-
         return this;
       }
     }, {
@@ -917,62 +814,51 @@
         if (!this.isRunning || !this.enable || !this.parent.active) {
           return this;
         }
-
         var target = this.target,
-            timer = this.timer;
-        timer.update(time, delta); // isDelay, isCountDown, isDone
+          timer = this.timer;
+        timer.update(time, delta);
 
+        // isDelay, isCountDown, isDone
         if (!timer.isDelay) {
           this.updateGameObject(target, timer);
         }
-
         this.emit('update', target, this);
-
         if (timer.isDone) {
           this.complete();
         }
-
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "updateGameObject",
       value: function updateGameObject(target, timer) {}
     }]);
-
     return EaseValueTaskBase;
   }(TimerTickTask);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Linear = Phaser.Math.Linear;
-
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
-
     var _super = _createSuper(EaseValueTask);
-
     function EaseValueTask(gameObject, config) {
       var _this;
-
       _classCallCheck(this, EaseValueTask);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
       // this.timer
 
       _this.resetFromJSON();
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(EaseValueTask, [{
       key: "start",
       value: function start(config) {
         if (this.timer.isRunning) {
           return this;
         }
-
         var target = this.target;
         this.propertyKey = GetValue(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
@@ -985,9 +871,7 @@
         this.setRepeatDelay(GetValue(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
-
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
@@ -998,30 +882,21 @@
         target[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
       }
     }]);
-
     return EaseValueTask;
   }(EaseValueTaskBase);
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var EaseData = /*#__PURE__*/function (_ComponentBase) {
     _inherits(EaseData, _ComponentBase);
-
     var _super = _createSuper(EaseData);
-
     function EaseData(parent, config) {
       var _this;
-
       _classCallCheck(this, EaseData);
-
       _this = _super.call(this, parent, config);
-
       _this.parent.setDataEnabled();
-
       _this.easeTasks = {};
       return _this;
     }
-
     _createClass(EaseData, [{
       key: "complete",
       value: function complete(key) {
@@ -1032,7 +907,6 @@
       key: "getEaseTask",
       value: function getEaseTask(key) {
         var easeTask = this.easeTasks[key];
-
         if (easeTask === undefined) {
           easeTask = new EaseValueTask(this.parent);
           this.easeTasks[key] = easeTask;
@@ -1040,7 +914,6 @@
             this.complete(key);
           }, this);
         }
-
         return easeTask;
       }
     }, {
@@ -1053,20 +926,16 @@
           duration = config.duration;
           ease = config.ease;
           var speed = config.speed;
-
           if (duration === undefined && speed !== undefined) {
             duration = Math.abs(value - this.parent.data.values[key]) / speed * 1000;
           }
         }
-
         if (duration === undefined) {
           duration = 1000;
         }
-
         if (ease === undefined) {
           ease = 'Linear';
         }
-
         var easeTask = this.getEaseTask(key);
         easeTask.restart({
           key: key,
@@ -1086,20 +955,16 @@
           duration = config.duration;
           ease = config.ease;
           var speed = config.speed;
-
           if (duration === undefined && speed !== undefined) {
             duration = Math.abs(value - this.parent.data.values[key]) / speed * 1000;
           }
         }
-
         if (duration === undefined) {
           duration = 1000;
         }
-
         if (ease === undefined) {
           ease = 'Linear';
         }
-
         var easeTask = this.getEaseTask(key);
         easeTask.restart({
           key: key,
@@ -1115,13 +980,10 @@
         if (toEnd === undefined) {
           toEnd = true;
         }
-
         var easeTask = this.easeTasks[key];
-
         if (easeTask) {
           easeTask.stop(toEnd);
         }
-
         return this;
       }
     }, {
@@ -1130,29 +992,22 @@
         if (toEnd === undefined) {
           toEnd = true;
         }
-
         for (var key in this.easeTasks) {
           this.stopEase(key, toEnd);
         }
-
         return this;
       }
     }]);
-
     return EaseData;
   }(ComponentBase);
 
   var EaseDataPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(EaseDataPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(EaseDataPlugin);
-
     function EaseDataPlugin(pluginManager) {
       _classCallCheck(this, EaseDataPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(EaseDataPlugin, [{
       key: "start",
       value: function start() {
@@ -1165,7 +1020,6 @@
         return new EaseData(gameObject, config);
       }
     }]);
-
     return EaseDataPlugin;
   }(Phaser.Plugins.BasePlugin);
 

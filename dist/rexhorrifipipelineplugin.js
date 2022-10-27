@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -128,7 +110,6 @@
     if (enable === undefined) {
       enable = true;
     }
-
     this.bloomEnable = enable;
     this.chromaticEnable = enable;
     this.vignetteEnable = enable;
@@ -144,7 +125,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.bloomEnable = enable;
       return this;
     },
@@ -164,7 +144,6 @@
       if (height === undefined) {
         height = width;
       }
-
       this.bloomTexelWidth = width;
       this.bloomTexelHeight = height;
       return this;
@@ -176,7 +155,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.chromaticEnable = enable;
       return this;
     },
@@ -191,7 +169,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.vignetteEnable = enable;
       return this;
     },
@@ -210,7 +187,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.noiseEnable = enable;
       return this;
     },
@@ -229,7 +205,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.vhsEnable = enable;
       return this;
     },
@@ -244,7 +219,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.scanlinesEnable = enable;
       return this;
     },
@@ -259,7 +233,6 @@
       if (enable === undefined) {
         enable = true;
       }
-
       this.crtEnable = enable;
       return this;
     },
@@ -267,7 +240,6 @@
       if (height === undefined) {
         height = width;
       }
-
       this.crtWidth = width;
       this.crtHeight = height;
       return this;
@@ -280,13 +252,11 @@
   Object.assign(Methods, BloonConfigurationMethods, ChromaticConfigurationMethods, VignetteConfigurationMethod, NoiseConfigurationMethod, VHSConfigurationMethod, ScanlinesConfigurationMethod, CRTConfigurationMethod);
 
   var GameClass = Phaser.Game;
-
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -311,83 +281,91 @@
 
   var PostFXPipeline$1 = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var HorrifiPostFxPipeline = /*#__PURE__*/function (_PostFXPipeline) {
     _inherits(HorrifiPostFxPipeline, _PostFXPipeline);
-
     var _super = _createSuper(HorrifiPostFxPipeline);
-
     function HorrifiPostFxPipeline(game) {
       var _this;
-
       _classCallCheck(this, HorrifiPostFxPipeline);
-
       _this = _super.call(this, {
         name: 'rexHorrifiPostFx',
         game: game,
         renderTarget: true,
         fragShader: frag
       });
-      _this.now = 0; // Bloon
+      _this.now = 0;
 
+      // Bloon
       _this.bloomEnable = false;
       _this.bloomRadius = 0;
       _this.bloomIntensity = 0;
       _this.bloomThreshold = 0;
       _this.bloomTexelWidth = 0;
-      _this.bloomTexelHeight = 0; // Chromatic abberation
+      _this.bloomTexelHeight = 0;
 
+      // Chromatic abberation
       _this.chromaticEnable = false;
-      _this.chabIntensity = 0; // Vignette
+      _this.chabIntensity = 0;
 
+      // Vignette
       _this.vignetteEnable = false;
       _this.vignetteStrength = 0;
-      _this.vignetteIntensity = 0; // Noise
+      _this.vignetteIntensity = 0;
 
+      // Noise
       _this.noiseEnable = false;
       _this.noiseStrength = 0;
-      _this.noiseSeed = Math.random(); // VHS
+      _this.noiseSeed = Math.random();
 
+      // VHS
       _this.vhsEnable = false;
-      _this.vhsStrength = 0; // Scanlines
+      _this.vhsStrength = 0;
 
+      // Scanlines
       _this.scanlinesEnable = false;
-      _this.scanStrength = 0; // CRT
+      _this.scanStrength = 0;
 
+      // CRT
       _this.crtEnable = false;
       _this.crtWidth = 0;
       _this.crtHeight = 0;
       return _this;
     }
-
     _createClass(HorrifiPostFxPipeline, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        var enable = GetValue$1(o, 'enable', false); // Bloom
+        var enable = GetValue$1(o, 'enable', false);
 
+        // Bloom
         this.setBloomEnable(GetValue$1(o, 'bloomEnable', enable));
         this.setBloomRadius(GetValue$1(o, 'bloomRadius', 0));
         this.setBloomIntensity(GetValue$1(o, 'bloomIntensity', 0));
         this.setBloomThreshold(GetValue$1(o, 'bloomThreshold', 0));
-        this.setBloomTexelSize(GetValue$1(o, 'bloomTexelWidth', 0), GetValue$1(o, 'bloomTexelHeight')); // Chromatic abberation
+        this.setBloomTexelSize(GetValue$1(o, 'bloomTexelWidth', 0), GetValue$1(o, 'bloomTexelHeight'));
 
+        // Chromatic abberation
         this.setChromaticEnable(GetValue$1(o, 'chromaticEnable', enable));
-        this.setChabIntensity(GetValue$1(o, 'chabIntensity', 0)); // Vignette
+        this.setChabIntensity(GetValue$1(o, 'chabIntensity', 0));
 
+        // Vignette
         this.setVignetteEnable(GetValue$1(o, 'vignetteEnable', enable));
         this.setVignetteStrength(GetValue$1(o, 'vignetteStrength', 0));
-        this.setVignetteIntensity(GetValue$1(o, 'vignetteIntensity', 0)); // Noise
+        this.setVignetteIntensity(GetValue$1(o, 'vignetteIntensity', 0));
 
+        // Noise
         this.setNoiseEnable(GetValue$1(o, 'noiseEnable', enable));
         this.setNoiseStrength(GetValue$1(o, 'noiseStrength', 0));
-        this.setNoiseSeed(GetValue$1(0, 'noiseSeed', Math.random())); // VHS
+        this.setNoiseSeed(GetValue$1(0, 'noiseSeed', Math.random()));
 
+        // VHS
         this.setVHSEnable(GetValue$1(o, 'vhsEnable', enable));
-        this.setVhsStrength(GetValue$1(o, 'vhsStrength', 0)); // Scanlines
+        this.setVhsStrength(GetValue$1(o, 'vhsStrength', 0));
 
+        // Scanlines
         this.setScanlinesEnable(GetValue$1(o, 'scanlinesEnable', enable));
-        this.setScanStrength(GetValue$1(o, 'scanStrength', 0)); // CRT
+        this.setScanStrength(GetValue$1(o, 'scanStrength', 0));
 
+        // CRT
         this.setCRTEnable(GetValue$1(o, 'crtEnable', enable));
         this.setCrtSize(GetValue$1(o, 'crtWidth', 0), GetValue$1(o, 'crtHeight', undefined));
         return this;
@@ -395,77 +373,77 @@
     }, {
       key: "onPreRender",
       value: function onPreRender() {
-        this.set1f('noiseSeed', this.noiseSeed); // Bloon
+        this.set1f('noiseSeed', this.noiseSeed);
 
+        // Bloon
         this.set1f('bloomEnable', this.bloomEnable ? 1 : 0);
         this.set3f('bloom', this.bloomRadius, this.bloomIntensity, this.bloomThreshold);
-        this.set2f('bloomTexel', this.bloomTexelWidth, this.bloomTexelHeight); // Chromatic abberation
+        this.set2f('bloomTexel', this.bloomTexelWidth, this.bloomTexelHeight);
 
+        // Chromatic abberation
         this.set1f('chromaticEnable', this.chromaticEnable ? 1 : 0);
-        this.set1f('chabIntensity', this.chabIntensity); // Vignette
+        this.set1f('chabIntensity', this.chabIntensity);
 
+        // Vignette
         this.set1f('vignetteEnable', this.vignetteEnable ? 1 : 0);
-        this.set2f('vignette', this.vignetteStrength, this.vignetteIntensity); // Noise
+        this.set2f('vignette', this.vignetteStrength, this.vignetteIntensity);
 
+        // Noise
         this.set1f('noiseEnable', this.noiseEnable ? 1 : 0);
-        this.set1f('noiseStrength', this.noiseStrength); // VHS
+        this.set1f('noiseStrength', this.noiseStrength);
 
+        // VHS
         this.set1f('vhsEnable', this.vhsEnable ? 1 : 0);
-        this.set1f('vhsStrength', this.vhsStrength); // Scanlines
+        this.set1f('vhsStrength', this.vhsStrength);
 
+        // Scanlines
         this.set1f('scanlinesEnable', this.scanlinesEnable ? 1 : 0);
-        this.set1f('scanStrength', this.scanStrength); // CRT        
+        this.set1f('scanStrength', this.scanStrength);
 
+        // CRT        
         this.set1f('crtEnable', this.crtEnable ? 1 : 0);
-        this.set2f('crtSize', this.crtWidth, this.crtHeight); // Eanble by VHS    
+        this.set2f('crtSize', this.crtWidth, this.crtHeight);
 
+        // Eanble by VHS    
         if (this.vhsEnable) {
           this.now += GetTickDelta(this.game);
         }
-
         this.set1f('time', this.now);
       }
     }]);
-
     return HorrifiPostFxPipeline;
   }(PostFXPipeline$1);
-
   Object.assign(HorrifiPostFxPipeline.prototype, Methods);
 
   var PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var RemoveIte = Phaser.Utils.Array.Remove;
-
   var PostFxPipelineBehaviorBase = /*#__PURE__*/function () {
     function PostFxPipelineBehaviorBase(gameObject, config) {
       _classCallCheck(this, PostFxPipelineBehaviorBase);
-
       this.gameObject = gameObject;
-      this.scene = gameObject.scene; // Can inject PipelineClass at runtime
+      this.scene = gameObject.scene;
 
+      // Can inject PipelineClass at runtime
       var PipelineClass;
-
       if (IsPostFxPipelineClass(config)) {
         PipelineClass = config;
         config = undefined;
       } else {
         PipelineClass = GetValue(config, 'PipelineClass');
       }
-
       if (PipelineClass) {
         this.createPipeline = function (game) {
           return new PipelineClass(game);
         };
       }
-
       var enable = GetValue(config, 'enable', !!config);
-
       if (enable) {
         this.getPipeline(config);
-      } // Will destroy pipeline when gameObject destroying
+      }
 
+      // Will destroy pipeline when gameObject destroying
     }
-
     _createClass(PostFxPipelineBehaviorBase, [{
       key: "getPipeline",
       value: function getPipeline(config) {
@@ -478,11 +456,9 @@
           gameObject.hasPostPipeline = postPipelines.length > 0;
           this.pipeline = pipeline;
         }
-
         if (config && this.pipeline.resetFromJSON) {
           this.pipeline.resetFromJSON(config);
         }
-
         return this.pipeline;
       }
     }, {
@@ -491,7 +467,6 @@
         if (!this.pipeline) {
           return this;
         }
-
         var gameObject = this.gameObject;
         var postPipelines = gameObject.postPipelines;
         RemoveIte(postPipelines, this.pipeline);
@@ -499,38 +474,32 @@
         this.pipeline.destroy();
         this.pipeline = undefined;
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "createPipeline",
       value: function createPipeline(game) {}
     }]);
-
     return PostFxPipelineBehaviorBase;
   }();
-
   var IsPostFxPipelineClass = function IsPostFxPipelineClass(object) {
     return object && object.prototype && object.prototype instanceof PostFXPipeline;
   };
 
   var HorrifiPostFxPipelineBehavior = /*#__PURE__*/function (_BasePostFxPipelineBe) {
     _inherits(HorrifiPostFxPipelineBehavior, _BasePostFxPipelineBe);
-
     var _super = _createSuper(HorrifiPostFxPipelineBehavior);
-
     function HorrifiPostFxPipelineBehavior() {
       _classCallCheck(this, HorrifiPostFxPipelineBehavior);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(HorrifiPostFxPipelineBehavior, [{
       key: "createPipeline",
       value: function createPipeline(game) {
         return new HorrifiPostFxPipeline(game);
       }
     }]);
-
     return HorrifiPostFxPipelineBehavior;
   }(PostFxPipelineBehaviorBase);
 
@@ -542,27 +511,21 @@
     if (config === undefined) {
       config = {};
     }
-
     gameObject.setPostPipeline(PostFxPipelineClass);
     var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
     pipeline.resetFromJSON(config);
-
     if (config.name) {
       pipeline.name = config.name;
     }
-
     return pipeline;
   };
 
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
-
   var RemovePostFxPipelineInstance = function RemovePostFxPipelineInstance(gameObject, PostFxPipelineClass, name) {
     if (name === undefined) {
       var pipelines = gameObject.postPipelines;
-
       for (var i = pipelines.length - 1; i >= 0; i--) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass) {
           instance.destroy();
           SpliceOne(pipelines, i);
@@ -570,10 +533,8 @@
       }
     } else {
       var pipelines = gameObject.postPipelines;
-
       for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass && instance.name === name) {
           instance.destroy();
           SpliceOne(pipelines, i);
@@ -586,22 +547,17 @@
     if (name === undefined) {
       var result = [];
       var pipelines = gameObject.postPipelines;
-
       for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass) {
           result.push(instance);
         }
       }
-
       return result;
     } else {
       var pipelines = gameObject.postPipelines;
-
       for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
         var instance = pipelines[i];
-
         if (instance instanceof PostFxPipelineClass && instance.name === name) {
           return instance;
         }
@@ -611,15 +567,11 @@
 
   var BasePostFxPipelinePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BasePostFxPipelinePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(BasePostFxPipelinePlugin);
-
     function BasePostFxPipelinePlugin() {
       _classCallCheck(this, BasePostFxPipelinePlugin);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(BasePostFxPipelinePlugin, [{
       key: "setPostPipelineClass",
       value: function setPostPipelineClass(PostFxPipelineClass, postFxPipelineName) {
@@ -651,30 +603,23 @@
         return GetPostFxPipelineInstance(gameObject, this.PostFxPipelineClass, name);
       }
     }]);
-
     return BasePostFxPipelinePlugin;
   }(Phaser.Plugins.BasePlugin);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -684,31 +629,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -716,42 +660,31 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var HorrifiPipelinePlugin = /*#__PURE__*/function (_BasePostFxPipelinePl) {
     _inherits(HorrifiPipelinePlugin, _BasePostFxPipelinePl);
-
     var _super = _createSuper(HorrifiPipelinePlugin);
-
     function HorrifiPipelinePlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, HorrifiPipelinePlugin);
-
       _this = _super.call(this, pluginManager);
-
       _this.setPostPipelineClass(HorrifiPostFxPipeline, 'rexHorrifiPostFx');
-
       return _this;
     }
-
     _createClass(HorrifiPipelinePlugin, [{
       key: "addBehavior",
       value: function addBehavior(gameObject, config) {
         return new HorrifiPostFxPipelineBehavior(gameObject, config);
       }
     }]);
-
     return HorrifiPipelinePlugin;
   }(BasePostFxPipelinePlugin);
-
   SetValue(window, 'RexPlugins.Pipelines.HorrifiPostFx', HorrifiPostFxPipeline);
 
   return HorrifiPipelinePlugin;

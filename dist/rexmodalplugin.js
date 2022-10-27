@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,7 +141,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -176,76 +150,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -266,18 +229,17 @@
   };
 
   var GetValue$b = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
       this.parent = parent; // gameObject or scene
-
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$b(config, 'eventEmitter', true));
 
+      // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent && this.parent === this.scene) {
         // parent is a scene
         this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
@@ -286,16 +248,15 @@
         this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
-
+        // parent might not be shutdown yet
         if (this.parent && this.parent === this.scene) {
           // parent is a scene
           this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
@@ -303,7 +264,6 @@
           // bob object does not have event emitter
           this.parent.off('destroy', this.onParentDestroy, this);
         }
-
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
@@ -325,12 +285,12 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var NOOP = function NOOP() {//  NOOP
+  var NOOP = function NOOP() {
+    //  NOOP
   };
 
   /**
@@ -338,6 +298,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -362,8 +323,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -375,7 +337,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -383,7 +344,6 @@
   };
 
   var StateProperties$1 = ['next', 'exit', 'enter'];
-
   var FSM$1 = /*#__PURE__*/function () {
     /*
     var config = {
@@ -408,33 +368,29 @@
     */
     function FSM(config) {
       _classCallCheck(this, FSM);
-
       // Attach get-next-state function
       var states = GetValue$a(config, 'states', undefined);
-
       if (states) {
         this.addStates(states);
-      } // Attach extend members
+      }
 
-
+      // Attach extend members
       var extend = GetValue$a(config, 'extend', undefined);
-
       if (extend) {
         for (var name in extend) {
           if (!this.hasOwnProperty(name) || this[name] === undefined) {
             this[name] = extend[name];
           }
         }
-      } // Event emitter
+      }
 
-
+      // Event emitter
       var eventEmitter = GetValue$a(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue$a(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this._stateLock = false;
       this.resetFromJSON(config);
     }
-
     _createClass(FSM, [{
       key: "shutdown",
       value: function shutdown() {
@@ -451,11 +407,9 @@
         this.setEnable(GetValue$a(o, 'enable', true));
         this.start(GetValue$a(o, 'start', undefined));
         var init = GetValue$a(o, 'init', undefined);
-
         if (init) {
           init.call(this);
         }
-
         return this;
       }
     }, {
@@ -474,7 +428,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -493,38 +446,29 @@
         if (!this.enable || this._stateLock) {
           return;
         }
-
         if (this._state === newState) {
           return;
         }
-
         this._prevState = this._state;
         this._state = newState;
         this._stateLock = true; // lock state
 
         this.emit('statechange', this);
-
         if (this._prevState != null) {
           var exitEventName = 'exit_' + this._prevState;
           var exitCallback = this[exitEventName];
-
           if (exitCallback) {
             exitCallback.call(this);
           }
-
           this.emit(exitEventName, this);
         }
-
         this._stateLock = false;
-
         if (this._state != null) {
           var enterEventName = 'enter_' + this._state;
           var enterCallback = this[enterEventName];
-
           if (enterCallback) {
             enterCallback.call(this);
           }
-
           this.emit(enterEventName, this);
         }
       }
@@ -539,7 +483,6 @@
         this._start = state;
         this._prevState = undefined;
         this._state = state; // Won't fire statechange events
-
         return this;
       }
     }, {
@@ -548,7 +491,6 @@
         if (nextState != null) {
           this.state = nextState;
         }
-
         return this;
       }
     }, {
@@ -556,7 +498,6 @@
       value: function next() {
         var nextState;
         var getNextState = this['next_' + this.state];
-
         if (getNextState) {
           if (typeof getNextState === 'string') {
             nextState = getNextState;
@@ -564,7 +505,6 @@
             nextState = getNextState.call(this);
           }
         }
-
         this["goto"](nextState);
         return this;
       }
@@ -580,18 +520,14 @@
           state = name;
           name = state.name;
         }
-
         var stateProperties = this.stateProperties;
-
         for (var i = 0, cnt = stateProperties.length; i < cnt; i++) {
           var propertyName = stateProperties[i];
           var propertyValue = state[propertyName];
-
           if (propertyValue) {
             this["".concat(propertyName, "_").concat(name)] = propertyValue;
           }
         }
-
         return this;
       }
     }, {
@@ -606,91 +542,68 @@
             this.addState(name, states[name]);
           }
         }
-
         return this;
       }
     }, {
       key: "runMethod",
       value: function runMethod(methodName, a1, a2, a3, a4, a5) {
         var fn = this[methodName + '_' + this.state];
-
         if (!fn) {
           return undefined;
-        } // Copy from eventemitter3
+        }
 
-
+        // Copy from eventemitter3
         var len = arguments.length;
-
         switch (len) {
           case 1:
             return fn.call(this);
-
           case 2:
             return fn.call(this, a1);
-
           case 3:
             return fn.call(this, a1, a2);
-
           case 4:
             return fn.call(this, a1, a2, a3);
-
           case 5:
             return fn.call(this, a1, a2, a3, a4);
-
           case 6:
             return fn.call(this, a1, a2, a3, a4, a5);
         }
-
         var args = new Array(len - 1);
-
         for (var i = 1; i < len; i++) {
           args[i - 1] = arguments[i];
         }
-
         return fn.apply(this, args);
       }
     }]);
-
     return FSM;
   }();
-
   Object.assign(FSM$1.prototype, EventEmitterMethods);
 
   var HasListener = function HasListener(eventEmitter, eventName, fn, context, once) {
     if (once === undefined) {
       once = false;
     }
-
     var listeners = eventEmitter._events[eventName];
-
     if (!listeners) {
       return false;
     }
-
     for (var i = 0, cnt = listeners.length; i < cnt; i++) {
       var listener = listeners[i];
-
       if (listener.fn === fn && listener.context === context && listener.once === once) {
         return true;
       }
     }
-
     return false;
   };
 
   var StateProperties = ['next', 'exit', 'enter', 'update', 'preupdate', 'postupdate'];
-
   var FSM = /*#__PURE__*/function (_FSMBase) {
     _inherits(FSM, _FSMBase);
-
     var _super = _createSuper(FSM);
-
     function FSM() {
       _classCallCheck(this, FSM);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(FSM, [{
       key: "shutdown",
       value:
@@ -724,14 +637,12 @@
         this.stopPreUpdate();
         this.stopPostUpdate();
         this._scene = undefined;
-
         _get(_getPrototypeOf(FSM.prototype), "shutdown", this).call(this);
       }
     }, {
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(FSM.prototype), "resetFromJSON", this).call(this, o);
-
         this._scene = GetValue$a(o, 'scene', undefined);
         return this;
       }
@@ -761,13 +672,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'update', this.update, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('update', this.update, this);
         return this;
@@ -778,9 +686,7 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('update', this.update, this);
-
         return this;
       }
     }, {
@@ -789,13 +695,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'preupdate', this.preupdate, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('preupdate', this.preupdate, this);
         return this;
@@ -806,9 +709,7 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('preupdate', this.preupdate, this);
-
         return this;
       }
     }, {
@@ -817,13 +718,10 @@
         if (!scene) {
           scene = this._scene;
         }
-
         var eventEmitter = scene.sys.events;
-
         if (HasListener(eventEmitter, 'postupdate', this.postupdate, this)) {
           return this;
         }
-
         this._scene = scene;
         eventEmitter.on('postupdate', this.postupdate, this);
         return this;
@@ -834,47 +732,39 @@
         if (!this._scene) {
           return this;
         }
-
         this._scene.sys.events.off('postupdate', this.postupdate, this);
-
         return this;
       }
     }]);
-
     return FSM;
   }(FSM$1);
 
   var State = /*#__PURE__*/function (_FSM) {
     _inherits(State, _FSM);
-
     var _super = _createSuper(State);
-
     function State(parent, config) {
       var _this;
-
       _classCallCheck(this, State);
-
       _this = _super.call(this, config);
       _this.parent = parent;
-
       _this.init();
-
       return _this;
     }
-
     _createClass(State, [{
       key: "init",
       value: function init() {
         this.start('IDLE');
-      } // IDLE -> TRANS_OPNE
+      }
 
+      // IDLE -> TRANS_OPNE
     }, {
       key: "next_IDLE",
       value: function next_IDLE() {
         return 'TRANS_OPNE';
-      } // IDLE
-      // TRANS_OPNE -> OPEN
+      }
+      // IDLE
 
+      // TRANS_OPNE -> OPEN
     }, {
       key: "next_TRANS_OPNE",
       value: function next_TRANS_OPNE() {
@@ -892,9 +782,10 @@
       value: function exit_TRANS_OPNE() {
         var transitionBehavior = this.parent;
         transitionBehavior.removeDelayCall();
-      } // TRANS_OPNE
-      // OPEN -> TRANS_CLOSE    
+      }
+      // TRANS_OPNE
 
+      // OPEN -> TRANS_CLOSE    
     }, {
       key: "next_OPEN",
       value: function next_OPEN() {
@@ -911,9 +802,10 @@
       value: function exit_OPEN() {
         var transitionBehavior = this.parent;
         transitionBehavior.removeDelayCall();
-      } // OPEN
-      // TRANS_CLOSE -> CLOSE
+      }
+      // OPEN
 
+      // TRANS_CLOSE -> CLOSE
     }, {
       key: "next_TRANS_CLOSE",
       value: function next_TRANS_CLOSE() {
@@ -931,9 +823,10 @@
       value: function exit_TRANS_CLOSE() {
         var transitionBehavior = this.parent;
         transitionBehavior.removeDelayCall();
-      } // TRANS_CLOSE
-      // CLOSE
+      }
+      // TRANS_CLOSE
 
+      // CLOSE
     }, {
       key: "next_CLOSE",
       value: function next_CLOSE() {}
@@ -945,10 +838,9 @@
       }
     }, {
       key: "exit_CLOSE",
-      value: function exit_CLOSE() {} // CLOSE
-
+      value: function exit_CLOSE() {}
+      // CLOSE
     }]);
-
     return State;
   }(FSM);
 
@@ -956,41 +848,39 @@
     // Invoke callback under scene's 'postupdate' event
     var scene = gameObject.scene;
     var sceneEE = scene.sys.events;
-    var timer = scene.time.delayedCall(delay, // delay
-    sceneEE.once, // callback
-    [// Event name of scene
-    'postupdate', // Callback
+    var timer = scene.time.delayedCall(delay,
+    // delay
+    sceneEE.once,
+    // callback
+    [
+    // Event name of scene
+    'postupdate',
+    // Callback
     function () {
       callback.call(scope, args);
-    }], // args
+    }],
+    // args
     sceneEE // scope, scene's EE
     );
+
     return timer;
   };
 
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
-
   var Modal$2 = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Modal, _ComponentBase);
-
     var _super = _createSuper(Modal);
-
     function Modal(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Modal);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
       // this.scene
 
       _this.setTransitInTime(GetValue$9(config, 'duration.in', 200));
-
       _this.setTransitOutTime(GetValue$9(config, 'duration.out', 200));
-
       _this.setTransitInCallback(GetValue$9(config, 'transitIn'));
-
       _this.setTransitOutCallback(GetValue$9(config, 'transitOut'));
-
       _this.destroyParent = GetValue$9(config, 'destroy', true);
       _this.timer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
@@ -999,7 +889,6 @@
       _this.closeEventData = undefined;
       return _this;
     }
-
     _createClass(Modal, [{
       key: "start",
       value: function start() {
@@ -1017,12 +906,10 @@
         if (this.isShutdown) {
           return;
         }
-
         this.transitInCallback = undefined;
         this.transitOutCallback = undefined;
         this.closeEventData = undefined;
         this.removeDelayCall();
-
         _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -1046,7 +933,8 @@
       key: "onClose",
       value: function onClose() {
         if (this.destroyParent) {
-          this.parent.destroy(); // Will invoke `this.destroy()`
+          this.parent.destroy();
+          // Will invoke `this.destroy()`
         } else {
           this.destroy();
         }
@@ -1065,7 +953,6 @@
           this.timer.remove(false);
           this.timer = undefined;
         }
-
         return this;
       }
     }, {
@@ -1086,9 +973,8 @@
         if (!callback) {
           callback = NOOP;
         }
-
-        this.transitInCallback = callback; // callback = function(gameObject, duration) {}
-
+        this.transitInCallback = callback;
+        // callback = function(gameObject, duration) {}
         return this;
       }
     }, {
@@ -1097,9 +983,8 @@
         if (!callback) {
           callback = NOOP;
         }
-
-        this.transitOutCallback = callback; // callback = function(gameObject, duration) {}
-
+        this.transitOutCallback = callback;
+        // callback = function(gameObject, duration) {}
         return this;
       }
     }, {
@@ -1108,41 +993,28 @@
         // Only can close modal in OPEN state
         if (this._state.state === 'OPEN') {
           this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
-
           this._state.next(); // OPEN -> TRANS_CLOSE 
-
         }
 
         return this;
       }
     }]);
-
     return Modal;
   }(ComponentBase);
 
   var Rectangle = Phaser.GameObjects.Rectangle;
-
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
     _inherits(FullWindowRectangle, _Rectangle);
-
     var _super = _createSuper(FullWindowRectangle);
-
     function FullWindowRectangle(scene, color, alpha) {
       var _this;
-
       _classCallCheck(this, FullWindowRectangle);
-
       _this = _super.call(this, scene, 0, 0, 2, 2, color, 1);
-
       _this.setAlpha(alpha);
-
       _this.setScrollFactor(0);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(FullWindowRectangle, [{
       key: "boot",
       value: function boot() {
@@ -1157,9 +1029,7 @@
         if (!this.scene) {
           return;
         }
-
         this.scene.sys.events.off('prerender', this.resize, this);
-
         _get(_getPrototypeOf(FullWindowRectangle.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
@@ -1177,50 +1047,40 @@
         var gameSize = scene.sys.scale.gameSize;
         var camera = scene.sys.cameras.main;
         var gameWidth = gameSize.width,
-            gameHeight = gameSize.height,
-            scale = 1 / camera.zoom;
+          gameHeight = gameSize.height,
+          scale = 1 / camera.zoom;
         var x = gameWidth / 2,
-            y = gameHeight / 2,
-            width = gameWidth * scale,
-            height = gameHeight * scale;
-
+          y = gameHeight / 2,
+          width = gameWidth * scale,
+          height = gameHeight * scale;
         if (this.x !== x || this.y !== y) {
           this.setPosition(x, y);
         }
-
         if (this.width !== width || this.height !== height) {
           this.setSize(width, height).setOrigin(0.5);
         }
       }
     }]);
-
     return FullWindowRectangle;
   }(Rectangle);
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
-
   var TouchEventStop = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TouchEventStop, _ComponentBase);
-
     var _super = _createSuper(TouchEventStop);
-
     function TouchEventStop(gameObject, config) {
       var _this;
-
       _classCallCheck(this, TouchEventStop);
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
-      }); // No event emitter
+      });
+      // No event emitter
       // this.parent = gameObject;
 
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(TouchEventStop, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1249,13 +1109,10 @@
         if (typeof mode === 'string') {
           mode = HitAreaMode[mode];
         }
-
         var gameObject = this.parent;
-
         if (gameObject.input) {
           gameObject.removeInteractive();
         }
-
         if (mode === 0) {
           gameObject.setInteractive();
         } else {
@@ -1266,7 +1123,6 @@
             }
           });
         }
-
         return this;
       }
     }, {
@@ -1275,13 +1131,11 @@
         if (e === undefined) {
           e = true;
         }
-
         if (e) {
           this.parent.setInteractive();
         } else {
           this.parent.disableInteractive();
         }
-
         this.enable = e;
         return this;
       }
@@ -1292,27 +1146,20 @@
         return this;
       }
     }]);
-
     return TouchEventStop;
   }(ComponentBase);
-
   var HitAreaMode = {
     "default": 0,
     fullWindow: 1
   };
 
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
-
   var Cover = /*#__PURE__*/function (_FullWindowRectangle) {
     _inherits(Cover, _FullWindowRectangle);
-
     var _super = _createSuper(Cover);
-
     function Cover(scene, config) {
       var _this;
-
       _classCallCheck(this, Cover);
-
       var fillColor = GetValue$7(config, 'color', 0x0);
       var fillAlpha = GetValue$7(config, 'alpha', 0.8);
       _this = _super.call(this, scene, fillColor, fillAlpha);
@@ -1321,56 +1168,49 @@
       });
       return _this;
     }
-
     return _createClass(Cover);
   }(FullWindowRectangle);
 
   var CreateCover = function CreateCover(gameObject, config) {
     var scene = gameObject.scene;
     var cover = new Cover(scene, config);
-    scene.add.existing(cover); // Put cover behind game object
+    scene.add.existing(cover);
 
+    // Put cover behind game object
     if (gameObject.isRexContainerLite) {
       gameObject.moveDepthBelow(cover);
     } else {
       scene.children.moveBelow(cover, gameObject);
     }
-
     return cover;
   };
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
-
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
-
     var _super = _createSuper(TickTask);
-
     function TickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, TickTask);
-
       _this = _super.call(this, parent, config);
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-
-      _this.setTickingMode(GetValue$6(config, 'tickingMode', 1)); // boot() later
-
-
+      _this.setTickingMode(GetValue$6(config, 'tickingMode', 1));
+      // boot() later
       return _this;
-    } // override
+    }
 
-
+    // override
     _createClass(TickTask, [{
       key: "boot",
       value: function boot() {
         if (this.tickingMode === 2 && !this.tickingState) {
           this.startTicking();
         }
-      } // override
+      }
 
+      // override
     }, {
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -1378,13 +1218,10 @@
         if (this.isShutdown) {
           return;
         }
-
         this.stop();
-
         if (this.tickingState) {
           this.stopTicking();
         }
-
         _get(_getPrototypeOf(TickTask.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -1393,16 +1230,17 @@
         if (typeof mode === 'string') {
           mode = TICKINGMODE[mode];
         }
-
         this.tickingMode = mode;
-      } // override
+      }
 
+      // override
     }, {
       key: "startTicking",
       value: function startTicking() {
         this.tickingState = true;
-      } // override
+      }
 
+      // override
     }, {
       key: "stopTicking",
       value: function stopTicking() {
@@ -1417,9 +1255,7 @@
         if (this._isRunning === value) {
           return;
         }
-
         this._isRunning = value;
-
         if (this.tickingMode === 1 && value != this.tickingState) {
           if (value) {
             this.startTicking();
@@ -1443,7 +1279,6 @@
           this.isPaused = true;
           this.isRunning = false;
         }
-
         return this;
       }
     }, {
@@ -1453,7 +1288,6 @@
         if (this.isPaused) {
           this.isRunning = true;
         }
-
         return this;
       }
     }, {
@@ -1471,10 +1305,8 @@
         this.emit('complete', this.parent, this);
       }
     }]);
-
     return TickTask;
   }(ComponentBase);
-
   var TICKINGMODE = {
     'no': 0,
     'lazy': 1,
@@ -1482,57 +1314,46 @@
   };
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
-
     var _super = _createSuper(SceneUpdateTickTask);
-
     function SceneUpdateTickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, SceneUpdateTickTask);
-
       _this = _super.call(this, parent, config);
       _this.tickEventName = GetValue$5(config, 'tickEventName', 'update');
       return _this;
     }
-
     _createClass(SceneUpdateTickTask, [{
       key: "startTicking",
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-
         this.scene.sys.events.on(this.tickEventName, this.update, this);
       }
     }, {
       key: "stopTicking",
       value: function stopTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-
         if (this.scene) {
           // Scene might be destoryed
           this.scene.sys.events.off(this.tickEventName, this.update, this);
         }
-      } // update(time, delta) {
+      }
+
+      // update(time, delta) {
       //     
       // }
-
     }]);
-
     return SceneUpdateTickTask;
   }(TickTask);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
-
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1576,7 +1397,6 @@
         if (delay === undefined) {
           delay = 0;
         }
-
         this.delay = delay;
         return this;
       }
@@ -1624,16 +1444,13 @@
         if (this.state === IDLE || this.state === DONE || delta === 0 || this.timeScale === 0) {
           return;
         }
-
         this.nowTime += delta * this.timeScale;
         this.justRestart = false;
-
         if (this.nowTime >= this.duration) {
           if (this.repeat === -1 || this.repeatCounter < this.repeat) {
             this.repeatCounter++;
             this.justRestart = true;
             this.nowTime -= this.duration;
-
             if (this.repeatDelay > 0) {
               this.nowTime -= this.repeatDelay;
               this.state = REPEATDELAY;
@@ -1650,35 +1467,29 @@
       key: "t",
       get: function get() {
         var t;
-
         switch (this.state) {
           case IDLE:
           case DELAY:
           case REPEATDELAY:
             t = 0;
             break;
-
           case COUNTDOWN:
             t = this.nowTime / this.duration;
             break;
-
           case DONE:
             t = 1;
             break;
         }
-
         return Clamp(t, 0, 1);
       },
       set: function set(value) {
         value = Clamp(value, -1, 1);
-
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
         } else {
           this.state = COUNTDOWN;
           this.nowTime = this.duration * value;
-
           if (value === 1 && this.repeat !== 0) {
             this.repeatCounter++;
           }
@@ -1726,10 +1537,8 @@
         return (this.repeatCounter & 1) === 0;
       }
     }]);
-
     return Timer;
   }();
-
   var IDLE = 0;
   var DELAY = 1;
   var COUNTDOWN = 2;
@@ -1738,21 +1547,17 @@
 
   var TimerTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(TimerTickTask, _TickTask);
-
     var _super = _createSuper(TimerTickTask);
-
     function TimerTickTask(parent, config) {
       var _this;
-
       _classCallCheck(this, TimerTickTask);
-
       _this = _super.call(this, parent, config);
-      _this.timer = new Timer(); // boot() later 
-
+      _this.timer = new Timer();
+      // boot() later 
       return _this;
-    } // override
+    }
 
-
+    // override
     _createClass(TimerTickTask, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -1760,9 +1565,7 @@
         if (this.isShutdown) {
           return;
         }
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "shutdown", this).call(this, fromScene);
-
         this.timer.destroy();
         this.timer = undefined;
       }
@@ -1770,49 +1573,37 @@
       key: "start",
       value: function start() {
         this.timer.start();
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
       key: "stop",
       value: function stop() {
         this.timer.stop();
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "stop", this).call(this);
-
         return this;
       }
     }, {
       key: "complete",
       value: function complete() {
         this.timer.stop();
-
         _get(_getPrototypeOf(TimerTickTask.prototype), "complete", this).call(this);
-
         return this;
       }
     }]);
-
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-
   var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
     _inherits(EaseValueTaskBase, _TickTask);
-
     var _super = _createSuper(EaseValueTaskBase);
-
     function EaseValueTaskBase() {
       _classCallCheck(this, EaseValueTaskBase);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1831,7 +1622,6 @@
         if (e == undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -1841,15 +1631,14 @@
         if (target === undefined) {
           target = this.parent;
         }
-
         this.target = target;
         return this;
       }
     }, {
       key: "setDelay",
       value: function setDelay(time) {
-        this.delay = time; // Assign `this.timer.setRepeat(repeat)` manually
-
+        this.delay = time;
+        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
       }
     }, {
@@ -1861,15 +1650,15 @@
     }, {
       key: "setRepeat",
       value: function setRepeat(repeat) {
-        this.repeat = repeat; // Assign `this.timer.setRepeat(repeat)` manually
-
+        this.repeat = repeat;
+        // Assign `this.timer.setRepeat(repeat)` manually
         return this;
       }
     }, {
       key: "setRepeatDelay",
       value: function setRepeatDelay(repeatDelay) {
-        this.repeatDelay = repeatDelay; // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
-
+        this.repeatDelay = repeatDelay;
+        // Assign `this.timer.setRepeatDelay(repeatDelay)` manually
         return this;
       }
     }, {
@@ -1878,12 +1667,12 @@
         if (ease === undefined) {
           ease = 'Linear';
         }
-
         this.ease = ease;
         this.easeFn = GetEaseFunction(ease);
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "start",
       value: function start() {
@@ -1891,9 +1680,7 @@
         if (this.timer.isRunning) {
           return this;
         }
-
         _get(_getPrototypeOf(EaseValueTaskBase.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
@@ -1909,15 +1696,12 @@
         if (toEnd === undefined) {
           toEnd = false;
         }
-
         _get(_getPrototypeOf(EaseValueTaskBase.prototype), "stop", this).call(this);
-
         if (toEnd) {
           this.timer.setT(1);
           this.updateGameObject(this.target, this.timer);
           this.complete();
         }
-
         return this;
       }
     }, {
@@ -1926,64 +1710,52 @@
         if (!this.isRunning || !this.enable || !this.parent.active) {
           return this;
         }
-
         var target = this.target,
-            timer = this.timer;
-        timer.update(time, delta); // isDelay, isCountDown, isDone
+          timer = this.timer;
+        timer.update(time, delta);
 
+        // isDelay, isCountDown, isDone
         if (!timer.isDelay) {
           this.updateGameObject(target, timer);
         }
-
         this.emit('update', target, this);
-
         if (timer.isDone) {
           this.complete();
         }
-
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "updateGameObject",
       value: function updateGameObject(target, timer) {}
     }]);
-
     return EaseValueTaskBase;
   }(TimerTickTask);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$1 = Phaser.Math.Linear;
-
   var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
-
     var _super = _createSuper(Scale);
-
     function Scale(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Scale);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
       // this.timer
 
       _this.scaleStart = {};
       _this.scaleEnd = {};
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(Scale, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Scale.prototype), "resetFromJSON", this).call(this, o);
-
         this.setMode(GetValue$2(o, 'mode', 0));
         this.setScaleRange(GetAdvancedValue$1(o, 'start', undefined), GetAdvancedValue$1(o, 'end', 0));
         return this;
@@ -1994,7 +1766,6 @@
         if (typeof m === 'string') {
           m = MODE$1[m];
         }
-
         this.mode = m;
         return this;
       }
@@ -2008,7 +1779,6 @@
           this.startX = GetAdvancedValue$1(start, 'x', this.parent.scaleX);
           this.startY = GetAdvancedValue$1(start, 'y', this.parent.scaleY);
         }
-
         if (typeof end === 'number') {
           this.endX = end;
           this.endY = end;
@@ -2016,7 +1786,6 @@
           this.endX = GetAdvancedValue$1(end, 'x', undefined);
           this.endY = GetAdvancedValue$1(end, 'y', undefined);
         }
-
         this.hasScaleX = this.startX !== undefined && this.endX !== undefined;
         this.hasScaleY = this.startY !== undefined && this.endY !== undefined;
         return this;
@@ -2027,48 +1796,36 @@
         if (this.timer.isRunning) {
           return this;
         }
-
         var gameObject = this.parent;
-
         if (this.hasScaleX) {
           gameObject.scaleX = this.startX;
         }
-
         if (this.hasScaleY) {
           gameObject.scaleY = this.startY;
         }
-
         var repeat = this.repeat;
-
         if (this.mode === 2) {
           // Yoyo
           if (repeat !== -1) {
             repeat = (repeat + 1) * 2 - 1;
           }
         }
-
         this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(repeat);
-
         _get(_getPrototypeOf(Scale.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
       key: "updateGameObject",
       value: function updateGameObject(gameObject, timer) {
         var t = timer.t;
-
         if (timer.isOddIteration) {
           // Yoyo
           t = 1 - t;
         }
-
         t = this.easeFn(t);
-
         if (this.hasScaleX) {
           gameObject.scaleX = Linear$1(this.startX, this.endX, t);
         }
-
         if (this.hasScaleY) {
           gameObject.scaleY = Linear$1(this.startY, this.endY, t);
         }
@@ -2077,18 +1834,16 @@
       key: "complete",
       value: function complete() {
         _get(_getPrototypeOf(Scale.prototype), "complete", this).call(this);
-
         if (this.mode === 1) {
-          this.parent.destroy(); // Will also destroy this behavior
+          this.parent.destroy();
+          // Will also destroy this behavior
         }
 
         return this;
       }
     }]);
-
     return Scale;
   }(EaseValueTaskBase);
-
   var MODE$1 = {
     stop: 0,
     destroy: 1,
@@ -2098,11 +1853,10 @@
   var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Cubic';
-    } // Ease scale from 0 to current scale
+    }
 
-
+    // Ease scale from 0 to current scale
     var start, end;
-
     switch (orientation) {
       case 0:
       case 'x':
@@ -2113,7 +1867,6 @@
           x: gameObject.scaleX
         };
         break;
-
       case 1:
       case 'y':
         start = {
@@ -2123,13 +1876,11 @@
           y: gameObject.scaleY
         };
         break;
-
       default:
         start = 0;
         end = gameObject.scale;
         break;
     }
-
     var config = {
       mode: 0,
       start: start,
@@ -2137,13 +1888,11 @@
       duration: duration,
       ease: ease
     };
-
     if (scale === undefined) {
       scale = new Scale(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
-
     scale.restart();
     return scale;
   };
@@ -2151,21 +1900,18 @@
   var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
     if (ease === undefined) {
       ease = 'Linear';
-    } // Ease from current scale to 0
+    }
 
-
+    // Ease from current scale to 0
     if (destroyMode instanceof Scale) {
       scale = destroyMode;
       destroyMode = undefined;
     }
-
     if (destroyMode === undefined) {
       destroyMode = true;
     }
-
     var config = {};
     config.mode = destroyMode ? 1 : 0;
-
     switch (orientation) {
       case 0:
       case 'x':
@@ -2173,28 +1919,23 @@
           x: 0
         };
         break;
-
       case 1:
       case 'y':
         config.end = {
           y: 0
         };
         break;
-
       default:
         config.end = 0;
         break;
     }
-
     config.duration = duration;
     config.ease = ease;
-
     if (scale === undefined) {
       scale = new Scale(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
-
     scale.restart();
     return scale;
   };
@@ -2202,32 +1943,24 @@
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
-
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
-
     var _super = _createSuper(Fade);
-
     function Fade(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Fade);
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
       // this.timer
 
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(Fade, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(Fade.prototype), "resetFromJSON", this).call(this, o);
-
         this.setMode(GetValue$1(o, 'mode', 0));
         this.setAlphaRange(GetAdvancedValue(o, 'start', this.parent.alpha), GetAdvancedValue(o, 'end', 0));
         return this;
@@ -2238,7 +1971,6 @@
         if (typeof m === 'string') {
           m = MODE[m];
         }
-
         this.mode = m;
         return this;
       }
@@ -2255,43 +1987,36 @@
         if (this.timer.isRunning) {
           return this;
         }
-
         var gameObject = this.parent;
         gameObject.setAlpha(this.alphaStart);
         this.timer.setDelay(this.delay).setDuration(this.duration).setRepeat(this.mode === 2 ? -1 : 0);
-
         _get(_getPrototypeOf(Fade.prototype), "start", this).call(this);
-
         return this;
       }
     }, {
       key: "updateGameObject",
       value: function updateGameObject(gameObject, timer) {
         var t = timer.t;
-
         if (timer.isOddIteration) {
           // Yoyo
           t = 1 - t;
         }
-
         gameObject.alpha = Linear(this.alphaStart, this.alphaEnd, t);
       }
     }, {
       key: "complete",
       value: function complete() {
         _get(_getPrototypeOf(Fade.prototype), "complete", this).call(this);
-
         if (this.mode === 1) {
-          this.parent.destroy(); // Will also destroy this behavior
+          this.parent.destroy();
+          // Will also destroy this behavior
         }
 
         return this;
       }
     }]);
-
     return Fade;
   }(EaseValueTaskBase);
-
   var MODE = {
     stop: 0,
     destroy: 1,
@@ -2299,38 +2024,31 @@
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var FadeIn = function FadeIn(gameObject, duration, alpha, fade) {
     var startAlpha, endAlpha;
-
     if (IsPlainObject(alpha)) {
       startAlpha = alpha.start;
       endAlpha = alpha.end;
     } else {
       endAlpha = alpha;
     }
-
     if (startAlpha === undefined) {
       startAlpha = 0;
     }
-
     if (endAlpha === undefined) {
       endAlpha = 1;
     }
-
     var config = {
       mode: 0,
       start: startAlpha,
       end: endAlpha,
       duration: duration
     };
-
     if (fade === undefined) {
       fade = new Fade(gameObject, config);
     } else {
       fade.resetFromJSON(config);
     }
-
     fade.restart();
     return fade;
   };
@@ -2340,23 +2058,19 @@
       fade = destroyMode;
       destroyMode = undefined;
     }
-
     if (destroyMode === undefined) {
       destroyMode = true;
     }
-
     var config = {
       mode: destroyMode ? 1 : 0,
       end: 0,
       duration: duration
     };
-
     if (fade === undefined) {
       fade = new Fade(gameObject, config);
     } else {
       fade.resetFromJSON(config);
     }
-
     fade.restart();
     return fade;
   };
@@ -2377,87 +2091,70 @@
   var DefaultCoverTransitInCallback = function DefaultCoverTransitInCallback(cover, duration) {
     FadeIn(cover, duration, cover.alpha);
   };
-
   var DefaultCoverTransitOutCallback = function DefaultCoverTransitOutCallback(cover, duration) {
     FadeOutDestroy(cover, duration, false);
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var Modal$1 = /*#__PURE__*/function (_Transition) {
     _inherits(Modal, _Transition);
-
     var _super = _createSuper(Modal);
-
     function Modal(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Modal);
-
       if (config === undefined) {
         config = {};
       }
-
       if (!config.hasOwnProperty('transitIn')) {
         config.transitIn = TransitionMode.popUp;
       }
-
       if (!config.hasOwnProperty('transitOut')) {
         config.transitOut = TransitionMode.scaleDown;
       }
-
-      _this = _super.call(this, gameObject, config); // this.parent = gameObject;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
       // this.scene
-      // Cover : key of modal, to block touch input        
 
+      // Cover : key of modal, to block touch input        
       var coverConfig = GetValue(config, 'cover');
       _this.cover = coverConfig !== false ? CreateCover(gameObject, coverConfig) : undefined;
-
       if (_this.cover) {
         _this.setCoverTransitInCallback(GetValue(coverConfig, 'transitIn', DefaultCoverTransitInCallback));
-
         _this.setCoverTransitOutCallback(GetValue(coverConfig, 'transitOut', DefaultCoverTransitOutCallback));
-      } // Close conditions:
+      }
+
+      // Close conditions:
       // OK/Cancel buttons, invoke modal.requestClose()
-
-
-      var manualClose = GetValue(config, 'manualClose', true); // Timeout/any-touch
-
+      var manualClose = GetValue(config, 'manualClose', true);
+      // Timeout/any-touch
       if (!manualClose) {
         _this.setDisplayTime(GetValue(config, 'duration.hold', 2000));
-
         var anyTouchClose = GetValue(config, 'anyTouchClose', true);
-
         if (anyTouchClose) {
           _this.anyTouchClose();
         }
       } else {
         _this.setDisplayTime(-1);
       }
-
       _this.start();
-
       return _this;
     }
-
     _createClass(Modal, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // Registered in anyTouchClose()
+        }
 
-
+        // Registered in anyTouchClose()
         if (!this.cover) {
           this.scene.input.off('pointerup', this.requestClose, this);
         }
-
         if (this.cover && !fromScene) {
           this.cover.destroy();
           this.cover = undefined;
         }
-
         _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -2468,57 +2165,48 @@
         } else {
           this.scene.input.once('pointerup', this.requestClose, this);
         }
-
         return this;
       }
     }, {
       key: "transitionIn",
       value: function transitionIn() {
         _get(_getPrototypeOf(Modal.prototype), "transitionIn", this).call(this);
-
         var duration = this.transitInTime;
         var cover = this.cover;
-
         if (cover && this.coverTransitInCallback) {
           this.coverTransitInCallback(cover, duration);
         }
-
         return this;
       }
     }, {
       key: "transitionOut",
       value: function transitionOut() {
         _get(_getPrototypeOf(Modal.prototype), "transitionOut", this).call(this);
-
         var duration = this.transitOutTime;
         var cover = this.cover;
-
         if (cover && this.coverTransitOutCallback) {
           this.coverTransitOutCallback(cover, duration);
         }
-
         return this;
       }
     }, {
       key: "onOpen",
       value: function onOpen() {
         var duration = this.displayTime;
-
         if (duration >= 0) {
-          this.delayCall(duration, this.requestClose, // callback
+          this.delayCall(duration, this.requestClose,
+          // callback
           this // scope
           );
         }
 
         this.emit('open', this.parent, this);
-
         _get(_getPrototypeOf(Modal.prototype), "onOpen", this).call(this);
       }
     }, {
       key: "onClose",
       value: function onClose() {
         this.emit('close', this.closeEventData);
-
         _get(_getPrototypeOf(Modal.prototype), "onClose", this).call(this);
       }
     }, {
@@ -2533,20 +2221,16 @@
         if (typeof callback === 'string') {
           callback = TransitionMode[callback];
         }
-
         switch (callback) {
           case TransitionMode.popUp:
             callback = DefaultTransitCallbacks.popUp;
             break;
-
           case TransitionMode.fadeIn:
             callback = DefaultTransitCallbacks.fadeIn;
             break;
         }
-
-        _get(_getPrototypeOf(Modal.prototype), "setTransitInCallback", this).call(this, callback); // callback = function(gameObject, duration) {}
-
-
+        _get(_getPrototypeOf(Modal.prototype), "setTransitInCallback", this).call(this, callback);
+        // callback = function(gameObject, duration) {}
         return this;
       }
     }, {
@@ -2555,20 +2239,16 @@
         if (typeof callback === 'string') {
           callback = TransitionMode[callback];
         }
-
         switch (callback) {
           case TransitionMode.scaleDown:
             callback = DefaultTransitCallbacks.scaleDown;
             break;
-
           case TransitionMode.fadeOut:
             callback = DefaultTransitCallbacks.fadeOut;
             break;
         }
-
-        _get(_getPrototypeOf(Modal.prototype), "setTransitOutCallback", this).call(this, callback); // callback = function(gameObject, duration) {}
-
-
+        _get(_getPrototypeOf(Modal.prototype), "setTransitOutCallback", this).call(this, callback);
+        // callback = function(gameObject, duration) {}
         return this;
       }
     }, {
@@ -2584,10 +2264,8 @@
         return this;
       }
     }]);
-
     return Modal;
   }(Modal$2);
-
   var TransitionMode = {
     popUp: 0,
     fadeIn: 1,
@@ -2596,22 +2274,23 @@
   };
 
   var Modal = function Modal(gameObject, config) {
-    var modalBehavior = new Modal$1(gameObject, config); // Route modal's 'open', 'close' event
+    var modalBehavior = new Modal$1(gameObject, config);
 
+    // Route modal's 'open', 'close' event
     modalBehavior.on('open', function () {
       gameObject.emit('modal.open', modalBehavior);
     });
     modalBehavior.on('close', function (closeEventData) {
       gameObject.emit('modal.close', closeEventData, modalBehavior);
-    }); // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
+    });
 
+    // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
     gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);
     modalBehavior.on('close', function () {
       gameObject.off('modal.requestClose', modalBehavior.requestClose, modalBehavior);
     });
     return modalBehavior;
   };
-
   var ModalPromise = function ModalPromise(gameObject, config) {
     var modalBehavior = Modal(gameObject, config);
     return new Promise(function (resolve, reject) {
@@ -2620,22 +2299,17 @@
       });
     });
   };
-
   var ModalClose = function ModalClose(gameObject, closeEventData) {
     gameObject.emit('modal.requestClose', closeEventData);
   };
 
   var ModalPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ModalPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(ModalPlugin);
-
     function ModalPlugin(pluginManager) {
       _classCallCheck(this, ModalPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(ModalPlugin, [{
       key: "start",
       value: function start() {
@@ -2663,7 +2337,6 @@
         return ModalClose(gameObject, closeEventData);
       }
     }]);
-
     return ModalPlugin;
   }(Phaser.Plugins.BasePlugin);
 

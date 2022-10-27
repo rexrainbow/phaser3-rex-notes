@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,86 +75,66 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -172,28 +143,21 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     var bobs = src.getRenderList();
-
     if (bobs.length === 0) {
       return;
     }
-
     camera.addToRenderList(src);
     var pipeline = renderer.pipelines.set(src.pipeline);
     var texture = src.frame.glTexture;
@@ -205,35 +169,29 @@
     var dy = src._displayOriginY;
     var alpha = camera.alpha * src.alpha;
     renderer.pipelines.preBatch(src);
-
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
       bobs[i].webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels);
     }
-
     renderer.pipelines.postBatch(src);
   };
 
   var SetTransform = Phaser.Renderer.Canvas.SetTransform;
-
   var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     var ctx = renderer.currentContext;
     var bobs = src.getRenderList();
-
     if (bobs.length === 0 || !SetTransform(renderer, ctx, src, camera, parentMatrix)) {
       return;
     }
-
     camera.addToRenderList(src);
     var roundPixels = camera.roundPixels;
     var dx = -src._displayOriginX,
-        dy = -src._displayOriginY;
+      dy = -src._displayOriginY;
     ctx.translate(dx, dy);
-
     for (var i = 0, cnt = bobs.length; i < cnt; i++) {
       bobs[i].canvasRender(ctx, dx, dy, roundPixels);
-    } //  Restore the context saved in SetTransform
+    }
 
-
+    //  Restore the context saved in SetTransform
     ctx.restore();
   };
 
@@ -252,46 +210,38 @@
     if (this.width === width && this.height === height) {
       return this;
     }
-
     this.width = width;
     this.height = height;
     this.updateDisplayOrigin();
     var input = this.input;
-
     if (input && !input.customHitArea) {
       input.hitArea.width = width;
       input.hitArea.height = height;
     }
-
     return this;
   };
 
   var AddChild = function AddChild(bob) {
     this.lastAppendedChildren.length = 0;
-
     if (Array.isArray(bob)) {
       var _this$lastAppendedChi;
-
       this.children.add(bob);
-
       (_this$lastAppendedChi = this.lastAppendedChildren).push.apply(_this$lastAppendedChi, _toConsumableArray(bob));
     } else {
       this.children.add(bob);
       this.lastAppendedChildren.push(bob);
     }
-
     return this;
   };
 
   var RemoveItem = Phaser.Utils.Array.Remove;
-
   var RemoveChild = function RemoveChild(bob) {
     if (this.poolManager) {
       // Free this bob (bob.onFree())
       this.poolManager.free(bob);
-    } // Remove this bob from blitter
+    }
 
-
+    // Remove this bob from blitter
     RemoveItem(this.children.list, bob);
     this.lastAppendedChildren.length = 0;
     this.dirty = true;
@@ -302,9 +252,9 @@
     if (this.poolManager) {
       // Free all bobs (bob.onFree())
       this.poolManager.freeMultiple(this.children.list);
-    } // Remove all bobs from blitter
+    }
 
-
+    // Remove all bobs from blitter
     this.children.list.length = 0;
     this.lastAppendedChildren.length = 0;
     this.dirty = true;
@@ -354,10 +304,8 @@
   var Stack = /*#__PURE__*/function () {
     function Stack() {
       _classCallCheck(this, Stack);
-
       this.items = [];
     }
-
     _createClass(Stack, [{
       key: "destroy",
       value: function destroy() {
@@ -389,20 +337,16 @@
         return this;
       }
     }]);
-
     return Stack;
   }();
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Pools = {};
-
   var PoolManager = /*#__PURE__*/function () {
     function PoolManager(config) {
       _classCallCheck(this, PoolManager);
-
       this.pools = GetValue$5(config, 'pools', Pools);
     }
-
     _createClass(PoolManager, [{
       key: "destroy",
       value: function destroy() {
@@ -414,13 +358,10 @@
         if (!this.pools) {
           return this;
         }
-
         var bobType = bob.type;
-
         if (!this.pools.hasOwnProperty(bobType)) {
           this.pools[bobType] = new Stack();
         }
-
         this.pools[bobType].push(bob);
         bob.onFree();
         return this;
@@ -431,11 +372,9 @@
         if (!this.pools) {
           return this;
         }
-
         for (var i = 0, cnt = bobs.length; i < cnt; i++) {
           this.free(bobs[i]);
         }
-
         return this;
       }
     }, {
@@ -444,11 +383,9 @@
         if (!this.pools || !this.pools.hasOwnProperty(bobType)) {
           return null;
         }
-
         return this.pools[bobType].pop();
       }
     }]);
-
     return PoolManager;
   }();
 
@@ -457,17 +394,12 @@
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var List = Phaser.Structs.List;
   var StableSort = Phaser.Utils.Array.StableSort;
-
   var Blitter = /*#__PURE__*/function (_GameObject) {
     _inherits(Blitter, _GameObject);
-
     var _super = _createSuper(Blitter);
-
     function Blitter(scene, x, y, texture, frame, config) {
       var _this;
-
       _classCallCheck(this, Blitter);
-
       if (IsPlainObject$3(x)) {
         config = x;
         x = GetValue$4(config, 'x', 0);
@@ -475,15 +407,12 @@
         texture = GetValue$4(config, 'texture');
         frame = GetValue$4(config, 'frame');
       }
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       _this = _super.call(this, scene, 'rexBlitter');
       _this.children = new List();
       _this.renderList = [];
@@ -491,19 +420,15 @@
       _this.lastAppendedChildren = [];
       var reuseBob = GetValue$4(config, 'reuseBob', true);
       _this.poolManager = reuseBob ? new PoolManager(config) : undefined;
-
       _this.setTexture(texture, frame).setPosition(x, y).setOrigin(0, 0).clearTint().initPipeline();
-
       return _this;
     }
-
     _createClass(Blitter, [{
       key: "preDestroy",
       value: function preDestroy() {
         this.removeChildren();
         this.children.destroy();
         this.renderList.length = 0;
-
         if (this.poolManager) {
           this.poolManager.destroy();
         }
@@ -515,41 +440,31 @@
           this.renderList.length = 0;
           var needDepthSort = false;
           var children = this.children.list;
-
           for (var i = 0, cnt = children.length; i < cnt; i++) {
             var child = children[i];
-
             if (ChildCanRender(child)) {
               this.renderList.push(child);
-
               if (!needDepthSort) {
                 needDepthSort = child.depth !== 0;
               }
             }
           }
-
           if (needDepthSort) {
             StableSort(this.renderList, SortByDepth);
           }
-
           this.displayListDirty = false;
         }
-
         return this.renderList;
       }
     }]);
-
     return Blitter;
   }(GameObject);
-
   var ChildCanRender = function ChildCanRender(child) {
     return child.active && child.visible && child.alpha > 0;
   };
-
   var SortByDepth = function SortByDepth(childA, childB) {
     return childA._depth - childB._depth;
   };
-
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Blitter, [Components.Alpha, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Mask, Components.Origin, Components.Pipeline, Components.ScrollFactor, Components.Transform, Components.Visible, Render, methods$1]);
 
@@ -557,11 +472,9 @@
     if (callback === undefined) {
       callback = DefaultGetFrameNameCallback;
     }
-
     this.getFrameNameCallback = callback;
     return this;
   };
-
   var DefaultGetFrameNameCallback = function DefaultGetFrameNameCallback(colIndex, rowIndex, baseFrameName) {
     if (baseFrameName === '__BASE') {
       return "".concat(colIndex, ",").concat(rowIndex);
@@ -574,21 +487,19 @@
     var outObject;
     var value;
     var key;
-
     if (_typeof(inObject) !== 'object' || inObject === null) {
       //  inObject is not an object
       return inObject;
-    } //  Create an array or object to hold the values
-
-
-    outObject = Array.isArray(inObject) ? [] : {};
-
-    for (key in inObject) {
-      value = inObject[key]; //  Recursively (deep) copy for nested objects, including arrays
-
-      outObject[key] = DeepClone(value);
     }
 
+    //  Create an array or object to hold the values
+    outObject = Array.isArray(inObject) ? [] : {};
+    for (key in inObject) {
+      value = inObject[key];
+
+      //  Recursively (deep) copy for nested objects, including arrays
+      outObject[key] = DeepClone(value);
+    }
     return outObject;
   };
 
@@ -598,11 +509,9 @@
       columns = baseFrameName;
       baseFrameName = undefined;
     }
-
     if (baseFrameName === undefined) {
       baseFrameName = '__BASE';
     }
-
     columns = DeepClone(columns);
     rows = DeepClone(rows);
     this.textureKey = key;
@@ -618,22 +527,19 @@
     this.rows.minHeight = 0;
     this.rows.scale = 1;
     var texture = this.scene.sys.textures.get(key);
-
     if (!texture) {
       this.clear();
       return this;
     }
-
     if (!columns || !rows) {
       this.clear();
       return this;
-    } // Get remainder width/height for unknown width/height
+    }
 
-
+    // Get remainder width/height for unknown width/height
     var baseFrame = texture.get(baseFrameName);
     var remainderTextureWidth = baseFrame.width;
     var unknownColumnWidthCount = 0;
-
     for (var i = 0, cnt = columns.length; i < cnt; i++) {
       if (columns[i] === undefined) {
         unknownColumnWidthCount++;
@@ -643,11 +549,9 @@
         remainderTextureWidth -= columns[i].width;
       }
     }
-
     var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
     var remainderTextureHeight = baseFrame.height;
     var unknownRowHeightCount = 0;
-
     for (var i = 0, cnt = rows.length; i < cnt; i++) {
       if (rows[i] === undefined) {
         unknownRowHeightCount++;
@@ -657,155 +561,121 @@
         remainderTextureHeight -= rows[i].width;
       }
     }
-
     var unknownRowHeight = remainderTextureHeight / unknownRowHeightCount;
     var row, col, rowHeight, colWidth, frameName;
     var offsetX = 0,
-        offsetY = 0;
-
+      offsetY = 0;
     for (var j = 0, jcnt = rows.length; j < jcnt; j++) {
       // Unknown height
       if (rows[j] === undefined) {
         rows[j] = unknownRowHeight;
       }
-
       if (typeof rows[j] === 'number') {
         rows[j] = {
           height: rows[j],
           stretch: j % 2
         };
       }
-
       row = rows[j];
       rowHeight = row.height;
       this.rows.stretch += row.stretch | 0;
       this.rows.minHeight += row.stretch > 0 ? 0 : rowHeight;
       offsetX = 0;
-
       for (var i = 0, icnt = columns.length; i < icnt; i++) {
         // Unknown width
         if (columns[i] === undefined) {
           columns[i] = unknownColumnWidth;
         }
-
         if (typeof columns[i] === 'number') {
           columns[i] = {
             width: columns[i],
             stretch: i % 2
           };
         }
-
         col = columns[i];
         colWidth = col.width;
-
         if (j === 0) {
           this.columns.stretch += col.stretch | 0;
           this.columns.minWidth += col.stretch > 0 ? 0 : colWidth;
         }
-
         if (colWidth >= 1 && rowHeight >= 1) {
           frameName = this.getFrameNameCallback(i, j, baseFrameName);
-
           var frameNameType = _typeof(frameName);
-
           if (frameNameType === 'string' || frameNameType === 'number') {
-            texture.add(frameName, 0, offsetX + baseFrame.cutX, offsetY + baseFrame.cutY, colWidth, rowHeight); // Do nothing if frameName is existed
+            texture.add(frameName, 0, offsetX + baseFrame.cutX, offsetY + baseFrame.cutY, colWidth, rowHeight);
+            // Do nothing if frameName is existed
           }
         }
-
         offsetX += colWidth;
       }
-
       offsetY += rowHeight;
     }
-
     this.updateTexture();
     return this;
   };
 
   var UpdateTexture = function UpdateTexture() {
     this.clear();
-
     if (this.textureKey === undefined) {
       return this;
     }
-
     var texture = this.scene.sys.textures.get(this.textureKey);
-
     if (!texture) {
       return this;
     }
-
     var minWidth = this.columns.minWidth * this.maxFixedPartScaleX; // Fixed-part width
-
     var minHeight = this.rows.minHeight * this.maxFixedPartScaleY; // Fixed-part height
-
     var stretchWidth = this.width - minWidth;
     var stretchHeight = this.height - minHeight;
     var fixedPartScaleX = stretchWidth >= 0 ? this.maxFixedPartScaleX : this.width / minWidth;
     var fixedPartScaleY = stretchHeight >= 0 ? this.maxFixedPartScaleY : this.height / minHeight;
-
     if (this.preserveRatio) {
       var minScale = Math.min(fixedPartScaleX, fixedPartScaleY);
-
       if (fixedPartScaleX > minScale) {
         var compensationWidth = (fixedPartScaleX - minScale) * minWidth;
-
         if (stretchWidth >= 0) {
           stretchWidth += compensationWidth;
         } else {
           stretchWidth = compensationWidth;
         }
-
         fixedPartScaleX = minScale;
       }
-
       if (fixedPartScaleY > minScale) {
         var compensationHeight = (fixedPartScaleY - minScale) * minHeight;
-
         if (stretchHeight >= 0) {
           stretchHeight += compensationHeight;
         } else {
           stretchHeight = compensationHeight;
         }
-
         fixedPartScaleY = minScale;
       }
     }
-
     this.columns.scale = fixedPartScaleX;
     this.rows.scale = fixedPartScaleY;
     var proportionWidth;
-
     if (stretchWidth > 0) {
       proportionWidth = this.columns.stretch > 0 ? stretchWidth / this.columns.stretch : 0;
     } else {
       proportionWidth = 0;
     }
-
     var proportionHeight;
-
     if (stretchHeight > 0) {
       proportionHeight = this.rows.stretch > 0 ? stretchHeight / this.rows.stretch : 0;
     } else {
       proportionHeight = 0;
     }
-
     var frameName, col, row, colWidth, rowHeight;
     var offsetX = 0,
-        offsetY = 0;
+      offsetY = 0;
     var imageType;
-
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
       row = this.rows.data[j];
       rowHeight = row.stretch === 0 ? row.height * fixedPartScaleY : proportionHeight * row.stretch;
       offsetX = 0;
-
       for (var i = 0, icnt = this.columns.count; i < icnt; i++) {
         col = this.columns.data[i];
         colWidth = col.stretch === 0 ? col.width * fixedPartScaleX : proportionWidth * col.stretch;
         frameName = this.getFrameNameCallback(i, j, this.baseFrameName);
-
         if (texture.has(frameName) && colWidth > 0 && rowHeight > 0) {
           if (row.stretch === 0 && col.stretch === 0) {
             // Fixed parts
@@ -827,17 +697,14 @@
             this._drawTileSprite(this.textureKey, frameName, offsetX, offsetY, colWidth, rowHeight);
           }
         }
-
         offsetX += colWidth;
       }
-
       offsetY += rowHeight;
     }
   };
 
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
   var SetStretchMode = function SetStretchMode(mode) {
     if (IsPlainObject$2(mode)) {
       this.stretchMode.edge = parseMode(GetValue$3(mode, 'edge', 0));
@@ -847,18 +714,14 @@
       this.stretchMode.edge = mode;
       this.stretchMode.internal = mode;
     }
-
     return this;
   };
-
   var parseMode = function parseMode(mode) {
     if (typeof mode === 'string') {
       mode = EXTENDMODE[mode];
     }
-
     return mode;
   };
-
   var EXTENDMODE = {
     scale: 0,
     repeat: 1
@@ -876,7 +739,6 @@
     if (enable == undefined) {
       enable = true;
     }
-
     this.preserveRatio = enable;
     return this;
   };
@@ -885,13 +747,13 @@
     if (scaleY === undefined) {
       scaleY = scaleX;
     }
-
     this.maxFixedPartScaleX = scaleX;
     this.maxFixedPartScaleY = scaleY;
     return this;
   };
 
-  var NOOP = function NOOP() {//  NOOP
+  var NOOP = function NOOP() {
+    //  NOOP
   };
 
   var Methods$1 = {
@@ -908,18 +770,13 @@
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
   var NinePatchBase = function NinePatchBase(GOClass, type) {
     var NinePatch = /*#__PURE__*/function (_GOClass) {
       _inherits(NinePatch, _GOClass);
-
       var _super = _createSuper(NinePatch);
-
       function NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
         var _this;
-
         _classCallCheck(this, NinePatch);
-
         if (IsPlainObject$1(x)) {
           config = x;
           x = GetValue$2(config, 'x', 0);
@@ -959,36 +816,25 @@
           columns = GetValue$2(config, 'columns', undefined);
           rows = GetValue$2(config, 'rows', undefined);
         }
-
         _this = _super.call(this, scene);
         _this.type = type;
-
         _this.setPosition(x, y).setSize(width, height).setOrigin(0.5, 0.5);
-
         _this.columns = {};
         _this.rows = {};
         _this.stretchMode = {};
         _this._tileSprite = undefined; // Reserved for drawing image
-
         _this._image = undefined; // Reserved for drawing image
 
         _this.setGetFrameNameCallback(GetValue$2(config, 'getFrameNameCallback', undefined));
-
         _this.setStretchMode(GetValue$2(config, 'stretchMode', 0));
-
         _this.setPreserveRatio(GetValue$2(config, 'preserveRatio', true));
-
         var maxFixedPartScale = GetValue$2(config, 'maxFixedPartScale', 1);
         var maxFixedPartScaleX = GetValue$2(config, 'maxFixedPartScaleX', maxFixedPartScale);
         var maxFixedPartScaleY = GetValue$2(config, 'maxFixedPartScaleY', undefined);
-
         _this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
-
         _this.setTexture(key, baseFrame, columns, rows);
-
         return _this;
       }
-
       _createClass(NinePatch, [{
         key: "minWidth",
         get: function get() {
@@ -1015,17 +861,13 @@
           if (this.width === width && this.height === height) {
             return this;
           }
-
           _get(_getPrototypeOf(NinePatch.prototype), "resize", this).call(this, width, height);
-
           this.updateTexture();
           return this;
         }
       }]);
-
       return NinePatch;
     }(GOClass);
-
     Object.assign(NinePatch.prototype, Methods$1);
     return NinePatch;
   };
@@ -1037,6 +879,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -1061,8 +904,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -1074,7 +918,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -1085,7 +928,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -1093,7 +935,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -1102,22 +943,18 @@
       if (this.data === undefined) {
         this.data = {};
       }
-
       return this;
     },
     setData: function setData(key, value) {
       this.enableData();
-
       if (arguments.length === 1) {
         var data = key;
-
         for (key in data) {
           this.data[key] = data[key];
         }
       } else {
         this.data[key] = value;
       }
-
       return this;
     },
     getData: function getData(key, defaultValue) {
@@ -1128,7 +965,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) + inc);
       return this;
@@ -1137,7 +973,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) * mul);
       return this;
@@ -1146,7 +981,6 @@
       if (this.data) {
         Clear(this.data);
       }
-
       return this;
     }
   };
@@ -1154,17 +988,16 @@
   var Base = /*#__PURE__*/function () {
     function Base(parent, type) {
       _classCallCheck(this, Base);
-
       this.type = type;
       this.data = undefined;
       this.setParent(parent).reset().setActive();
     }
-
     _createClass(Base, [{
       key: "destroy",
       value: function destroy() {
         if (this.parent) {
-          this.parent.removeChild(this); // Remove this bob from blitter, and free it (bob.onFree())
+          this.parent.removeChild(this);
+          // Remove this bob from blitter, and free it (bob.onFree())
           // Will set this.parent to undefined
         }
       }
@@ -1173,21 +1006,21 @@
       value: function setParent(parent) {
         this.parent = parent;
         return this;
-      } // get scene() {
+      }
+
+      // get scene() {
       //     if (this.parent) {
       //         return this.parent.scene;
       //     } else {
       //         return null;
       //     }
       // }
-
     }, {
       key: "setDisplayListDirty",
       value: function setDisplayListDirty(displayListDirty) {
         if (displayListDirty && this.parent) {
           this.parent.displayListDirty = true;
         }
-
         return this;
       }
     }, {
@@ -1205,7 +1038,6 @@
         if (active === undefined) {
           active = true;
         }
-
         this.active = active;
         return this;
       }
@@ -1213,41 +1045,36 @@
       key: "modifyPorperties",
       value: function modifyPorperties(o) {
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "reset",
       value: function reset() {
         this.clearData();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "onFree",
       value: function onFree() {
         this.reset().setActive(false).setParent();
       }
     }]);
-
     return Base;
   }();
-
   Object.assign(Base.prototype, DataMethods);
 
   var DegToRad = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var RenderBase = /*#__PURE__*/function (_Base) {
     _inherits(RenderBase, _Base);
-
     var _super = _createSuper(RenderBase);
-
     function RenderBase() {
       _classCallCheck(this, RenderBase);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(RenderBase, [{
       key: "visible",
       get: function get() {
@@ -1263,7 +1090,6 @@
         if (visible === undefined) {
           visible = true;
         }
-
         this.visible = visible;
         return this;
       }
@@ -1341,13 +1167,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.width = width;
-
         if (keepAspectRatio) {
           this.scaleY = this.scaleX;
         }
-
         return this;
       }
     }, {
@@ -1362,7 +1185,6 @@
         if (scaleY === undefined) {
           scaleY = scaleX;
         }
-
         this.scaleX = scaleX;
         this.scaleY = scaleY;
         return this;
@@ -1381,13 +1203,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.height = height;
-
         if (keepAspectRatio) {
           this.scaleX = this.scaleY;
         }
-
         return this;
       }
     }, {
@@ -1404,13 +1223,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.displayWidth = width;
-
         if (keepAspectRatio) {
           this.scaleY = this.scaleX;
         }
-
         return this;
       }
     }, {
@@ -1427,13 +1243,10 @@
         if (keepAspectRatio === undefined) {
           keepAspectRatio = false;
         }
-
         this.displayHeight = height;
-
         if (keepAspectRatio) {
           this.scaleX = this.scaleY;
         }
-
         return this;
       }
     }, {
@@ -1456,7 +1269,6 @@
         if (originY === undefined) {
           originY = originX;
         }
-
         this.setOriginX(originX).setOriginY(originY);
         return this;
       }
@@ -1475,7 +1287,6 @@
         if (depth === undefined) {
           depth = 0;
         }
-
         this.depth = depth;
         return this;
       }
@@ -1485,32 +1296,27 @@
         if (!o) {
           return this;
         }
-
         if (o.hasOwnProperty('x')) {
           this.setX(o.x);
         }
-
         if (o.hasOwnProperty('y')) {
           this.setY(o.y);
         }
-
         if (o.hasOwnProperty('rotation')) {
           this.setRotation(o.rotation);
         } else if (o.hasOwnProperty('angle')) {
           this.setAngle(o.angle);
         }
-
         if (o.hasOwnProperty('alpha')) {
           this.setAlpha(o.alpha);
-        } // ScaleX, ScaleY
+        }
 
-
+        // ScaleX, ScaleY
         var width = GetValue(o, 'width', undefined);
         var height = GetValue(o, 'height', undefined);
         var scale = GetValue(o, 'scale', undefined);
         var scaleX = GetValue(o, 'scaleX', scale);
         var scaleY = GetValue(o, 'scaleY', scale);
-
         if (width !== undefined) {
           if (height === undefined && scaleY === undefined) {
             this.setWidth(width, true);
@@ -1522,7 +1328,6 @@
         } else if (o.hasOwnProperty('displayWidth')) {
           this.setDisplayWidth(o.displayWidth);
         }
-
         if (height !== undefined) {
           if (width === undefined && scaleX === undefined) {
             this.setHeight(height, true);
@@ -1534,72 +1339,62 @@
         } else if (o.hasOwnProperty('displayHeight')) {
           this.setDisplayHeight(o.displayHeight);
         }
-
         var origin = GetValue(o, 'origin', undefined);
-
         if (origin !== undefined) {
           this.setOrigin(origin);
         } else {
           if (o.hasOwnProperty('originX')) {
             this.setOriginX(o.originX);
           }
-
           if (o.hasOwnProperty('originY')) {
             this.setOriginY(o.originY);
           }
         }
-
         if (o.hasOwnProperty('depth')) {
           this.setDepth(o.depth);
         }
-
         return this;
       }
     }, {
       key: "reset",
       value: function reset() {
         _get(_getPrototypeOf(RenderBase.prototype), "reset", this).call(this);
-
         this.setVisible().setAlpha(1).setPosition(0, 0).setRotation(0).setScale(1, 1).setOrigin(0).setDepth(0);
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "webglRender",
-      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {} // Override
-
+      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {}
+      // Override
     }, {
       key: "canvasRender",
       value: function canvasRender(ctx, dx, dy, roundPixels) {}
     }]);
-
     return RenderBase;
   }(Base);
 
   var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
   var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
   var FrameMatrix = new TransformMatrix();
-
   var WebglRender = function WebglRender(pipeline, calcMatrix, alpha, dx, dy, texture, textureUnit, roundPixels) {
     var width = this._width,
-        height = this._height;
+      height = this._height;
     var displayOriginX = width * this.originX,
-        displayOriginY = height * this.originY;
+      displayOriginY = height * this.originY;
     var x = this.x - dx,
-        y = this.y - dy;
+      y = this.y - dy;
     var flipX = 1;
     var flipY = 1;
-
     if (this.flipX) {
       x += width - displayOriginX * 2;
       flipX = -1;
     }
-
     if (this.flipY) {
       y += height - displayOriginY * 2;
       flipY = -1;
     }
-
     FrameMatrix.applyITRS(x, y, this.rotation, this.scaleX * flipX, this.scaleY * flipY);
     calcMatrix.multiply(FrameMatrix, FrameMatrix);
     var tx = -displayOriginX;
@@ -1625,29 +1420,25 @@
   var CanvasRender = function CanvasRender(ctx, dx, dy, roundPixels) {
     ctx.save();
     var width = this._width,
-        height = this._height;
+      height = this._height;
     var displayOriginX = width * this.originX,
-        displayOriginY = height * this.originY;
+      displayOriginY = height * this.originY;
     var x = this.x - displayOriginX,
-        y = this.y - displayOriginY;
+      y = this.y - displayOriginY;
     var flipX = 1;
     var flipY = 1;
-
     if (this.flipX) {
       x += width;
       flipX = -1;
     }
-
     if (this.flipY) {
       y += height;
       flipY = -1;
     }
-
     if (roundPixels) {
       x = Math.round(x);
       y = Math.round(y);
     }
-
     ctx.translate(x, y);
     ctx.rotate(this.rotation);
     ctx.scale(this.scaleX * flipX, this.scaleY * flipY);
@@ -1657,24 +1448,16 @@
   };
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var ImageData = /*#__PURE__*/function (_RenderBase) {
     _inherits(ImageData, _RenderBase);
-
     var _super = _createSuper(ImageData);
-
     function ImageData(parent, frame) {
       var _this;
-
       _classCallCheck(this, ImageData);
-
       _this = _super.call(this, parent, ImageTypeName);
-
       _this.setFrame(frame);
-
       return _this;
     }
-
     _createClass(ImageData, [{
       key: "width",
       get: function get() {
@@ -1693,7 +1476,6 @@
         if (arguments.length > 0 && !IsPlainObject(frame)) {
           frame = this.parent.texture.get(frame);
         }
-
         this.frame = frame;
         this._width = frame ? frame.width : 0;
         this._height = frame ? frame.height : 0;
@@ -1705,7 +1487,6 @@
         if (flipX === undefined) {
           flipX = true;
         }
-
         this.flipX = flipX;
         return this;
       }
@@ -1715,7 +1496,6 @@
         if (flipY === undefined) {
           flipY = true;
         }
-
         this.flipY = flipY;
         return this;
       }
@@ -1781,7 +1561,6 @@
       key: "reset",
       value: function reset() {
         _get(_getPrototypeOf(ImageData.prototype), "reset", this).call(this);
-
         this.resetFlip().resetTint().setFrame();
         return this;
       }
@@ -1790,49 +1569,39 @@
       value: function modifyPorperties(o) {
         if (!o) {
           return this;
-        } // Size of Image is equal to frame size,
+        }
+
+        // Size of Image is equal to frame size,
         // Move width, height properties to displayWidth,displayHeight
-
-
         if (o.hasOwnProperty('width')) {
           o.displayWidth = o.width;
           delete o.width;
         }
-
         if (o.hasOwnProperty('height')) {
           o.displayHeight = o.height;
           delete o.height;
         }
-
         if (o.hasOwnProperty('frame')) {
           this.setFrame(o.frame);
         }
-
         _get(_getPrototypeOf(ImageData.prototype), "modifyPorperties", this).call(this, o);
-
         if (o.hasOwnProperty('flipX')) {
           this.setFlipX(o.flipX);
         }
-
         if (o.hasOwnProperty('flipY')) {
           this.setFlipY(o.flipY);
         }
-
         if (o.hasOwnProperty('tint')) {
           this.setTint(o.tint);
         }
-
         if (o.hasOwnProperty('tintFill')) {
           this.setTintFill(o.tintFill);
         }
-
         return this;
       }
     }]);
-
     return ImageData;
   }(RenderBase);
-
   var methods = {
     webglRender: WebglRender,
     canvasRender: CanvasRender
@@ -1845,15 +1614,12 @@
         frame: config
       };
     }
-
     var bob = blitter.poolManager ? blitter.poolManager.allocate(ImageTypeName) : null;
-
     if (bob === null) {
       bob = new ImageData(blitter);
     } else {
       bob.setParent(blitter).setActive();
     }
-
     bob.modifyPorperties(config);
     blitter.addChild(bob);
     return bob;
@@ -1872,13 +1638,12 @@
   var DrawTileSprite = function DrawTileSprite(key, frame, x, y, width, height) {
     var frameObj = this.texture.get(frame);
     var frameWidth = frameObj.width,
-        frameHeight = frameObj.height;
+      frameHeight = frameObj.height;
     var colCount = Math.floor(width / frameWidth),
-        rowCount = Math.floor(height / frameHeight); // Align images at center
-
+      rowCount = Math.floor(height / frameHeight);
+    // Align images at center
     x += (width - colCount * frameWidth) / 2;
     y += (height - rowCount * frameHeight) / 2;
-
     for (var colIndex = 0; colIndex < colCount; colIndex++) {
       for (var rowIndex = 0; rowIndex < rowCount; rowIndex++) {
         AddImage(this, {
@@ -1897,33 +1662,26 @@
 
   var NinePatch = /*#__PURE__*/function (_NinePatchBase) {
     _inherits(NinePatch, _NinePatchBase);
-
     var _super = _createSuper(NinePatch);
-
     function NinePatch() {
       _classCallCheck(this, NinePatch);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(NinePatch, [{
       key: "setTexture",
       value: function setTexture(key, baseFrameName, columns, rows) {
-        SetTexture$1.call(this, key, '__BASE'); // Not initialized yet
+        SetTexture$1.call(this, key, '__BASE');
 
+        // Not initialized yet
         if (!this.columns) {
           return this;
         }
-
         _get(_getPrototypeOf(NinePatch.prototype), "setTexture", this).call(this, key, baseFrameName, columns, rows);
-
         return this;
       }
     }]);
-
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-
   Object.assign(NinePatch.prototype, Methods);
 
   function Factory (x, y, width, height, key, baseFrame, columns, rows, config) {
@@ -1937,11 +1695,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var gameObject = new NinePatch(this.scene, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
@@ -1950,23 +1706,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -1976,31 +1726,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -2008,31 +1757,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var NinePatchPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(NinePatchPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(NinePatchPlugin);
-
     function NinePatchPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, NinePatchPlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexNinePatch2', Factory, Creator);
       return _this;
     }
-
     _createClass(NinePatchPlugin, [{
       key: "start",
       value: function start() {
@@ -2040,10 +1783,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return NinePatchPlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.NinePatch2', NinePatch);
 
   return NinePatchPlugin;

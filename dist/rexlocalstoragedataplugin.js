@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -129,7 +111,6 @@
       return key;
     }
   };
-
   var GetDataKey = function GetDataKey(key, prefix) {
     if (prefix && prefix !== '') {
       return key.substring(prefix.length + 1);
@@ -137,17 +118,14 @@
       return key;
     }
   };
-
   var SetItem = function SetItem(dataKey, prefix, value) {
     // Ref : https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#basic_concepts
     // **The keys and the values are always strings**
     value = JSON.stringify([value]);
     localStorage.setItem(GetStoreKey(dataKey, prefix), value);
   };
-
   var GetItem = function GetItem(dataKey, prefix) {
     var value = localStorage.getItem(GetStoreKey(dataKey, prefix));
-
     if (value == null) {
       return undefined;
     } else {
@@ -155,7 +133,6 @@
       return value;
     }
   };
-
   var RemoveItem = function RemoveItem(dataKey, prefix) {
     localStorage.removeItem(GetStoreKey(dataKey, prefix));
     return this;
@@ -184,48 +161,38 @@
   var LoadDataKeys = function LoadDataKeys() {
     this.dataKeys.clear();
     var keys = this.getItem('__keys__');
-
     if (keys) {
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         this.dataKeys.set(keys[i]);
       }
     }
-
     return this;
   };
-
   var Load = function Load(defaultData, reset) {
     if (defaultData === undefined) {
       reset = false;
     }
-
     LoadDataKeys.call(this);
     this.defaultData = defaultData;
     this._syncEnable = false;
     this.reset();
-
     if (!reset) {
       // Load data from localstorage according to dataKeys
       this.dataKeys.iterate(function (dataKey, index) {
         this.set(dataKey, this.getItem(dataKey));
       }, this);
     }
-
     this._syncEnable = true;
-
     if (defaultData) {
       // Load data according to defaultData        
       var value, prevValue;
-
       for (var dataKey in defaultData) {
         prevValue = reset ? undefined : this.getItem(dataKey);
         value = prevValue === undefined ? defaultData[dataKey] : prevValue;
         this.set(dataKey, value);
       }
-
       this.setItem('__keys__', this.dataKeys.entries);
     }
-
     return this;
   };
 
@@ -234,37 +201,38 @@
   };
 
   var AddCallbacks = function AddCallbacks(dataManager) {
-    dataManager.events // Change value
+    dataManager.events
+
+    // Change value
     .on('changedata', function (parent, key, value, previousValue) {
       if (!this._syncEnable) {
         return;
       }
-
       if (_typeof(value) !== 'object' && value === previousValue) {
         return;
       }
-
       this.setItem(key, value);
-
       if (!this.dataKeys.contains(key)) {
         this.dataKeys.set(key);
         this.setItem('__keys__', this.dataKeys.entries);
       }
-    }, dataManager) // Add key
+    }, dataManager)
+
+    // Add key
     .on('setdata', function (parent, key, value) {
       if (!this._syncEnable) {
         return;
       }
-
       this.setItem(key, value);
       this.dataKeys.set(key);
       this.setItem('__keys__', this.dataKeys.entries);
-    }, dataManager) // Remove key
+    }, dataManager)
+
+    // Remove key
     .on('removedata', function (parent, key, value) {
       if (!this._syncEnable) {
         return;
       }
-
       this.removeItem(key);
       this.dataKeys["delete"](key);
       this.setItem('__keys__', this.dataKeys.entries);
@@ -277,13 +245,11 @@
     load: Load,
     getDefaultValue: GetDefaultValue
   };
-
   var Extend = function Extend(dataManager, config) {
     if (dataManager.hasOwnProperty('_syncEnable')) {
       // Already extended
       return dataManager;
     }
-
     dataManager._syncEnable = true;
     dataManager.dataKeys = new SetStruct();
     dataManager.defaultData = undefined;
@@ -291,30 +257,23 @@
     AddCallbacks(dataManager);
     dataManager.name = GetValue(config, 'name', '');
     var load = GetValue(config, 'load', true);
-
     if (load) {
       var defaultData = GetValue(config, 'default', undefined);
       var resetFlag = GetValue(config, 'reset', false);
       dataManager.load(defaultData, resetFlag);
     }
-
     return dataManager;
   };
 
   var Base = Phaser.Data.DataManager;
   var EventEmitterKlass = Phaser.Events.EventEmitter;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var DataManager = /*#__PURE__*/function (_Base) {
     _inherits(DataManager, _Base);
-
     var _super = _createSuper(DataManager);
-
     function DataManager(parent, eventEmitter, config) {
       var _this;
-
       _classCallCheck(this, DataManager);
-
       if (IsPlainObject(parent)) {
         config = parent;
         parent = undefined;
@@ -323,45 +282,33 @@
         config = eventEmitter;
         eventEmitter = undefined;
       }
-
       var useDefaultEventEmitter = eventEmitter === undefined;
-
       if (useDefaultEventEmitter) {
         eventEmitter = new EventEmitterKlass();
       }
-
       if (parent === undefined) {
         parent = eventEmitter;
       }
-
       _this = _super.call(this, parent, eventEmitter);
-
       if (useDefaultEventEmitter) {
         var parentEventEmitter = parent.events ? parent.events : parent;
-
         if (parentEventEmitter) {
           parentEventEmitter.once('destroy', _this.destroy, _assertThisInitialized(_this));
         }
       }
-
       Extend(_assertThisInitialized(_this), config);
       return _this;
     }
-
     return _createClass(DataManager);
   }(Base);
 
   var DataManagerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DataManagerPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(DataManagerPlugin);
-
     function DataManagerPlugin(pluginManager) {
       _classCallCheck(this, DataManagerPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(DataManagerPlugin, [{
       key: "start",
       value: function start() {
@@ -396,7 +343,6 @@
         return this;
       }
     }]);
-
     return DataManagerPlugin;
   }(Phaser.Plugins.BasePlugin);
 

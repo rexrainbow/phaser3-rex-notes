@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -469,6 +451,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -493,8 +476,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -506,7 +490,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -517,7 +500,6 @@
     if (typeof period === 'number') {
       return period;
     }
-
     var config = period;
     var days = config.day || config.d || 0;
     var hours = config.hour || config.h || 0;
@@ -552,14 +534,11 @@
     if (index >= array.length) {
       return;
     }
-
     var len = array.length - 1;
     var item = array[index];
-
     for (var i = index; i < len; i++) {
       array[i] = array[i + 1];
     }
-
     array.length = len;
     return item;
   };
@@ -569,6 +548,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Removes the given item, or array of items, from the array.
    * 
@@ -586,40 +566,34 @@
    *
    * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
    */
-
   var Remove = function Remove(array, item, callback, context) {
     if (context === undefined) {
       context = array;
     }
+    var index;
 
-    var index; //  Fast path to avoid array mutation and iteration
-
+    //  Fast path to avoid array mutation and iteration
     if (!Array.isArray(item)) {
       index = array.indexOf(item);
-
       if (index !== -1) {
         SpliceOne(array, index);
-
         if (callback) {
           callback.call(context, item);
         }
-
         return item;
       } else {
         return null;
       }
-    } //  If we got this far, we have an array of items to remove
+    }
 
+    //  If we got this far, we have an array of items to remove
 
     var itemLength = item.length - 1;
-
     while (itemLength >= 0) {
       var entry = item[itemLength];
       index = array.indexOf(entry);
-
       if (index !== -1) {
         SpliceOne(array, index);
-
         if (callback) {
           callback.call(context, entry);
         }
@@ -627,39 +601,27 @@
         //  Item wasn't found in the array, so remove it from our return results
         item.pop();
       }
-
       itemLength--;
     }
-
     return item;
   };
 
   var RealTimeTimers = /*#__PURE__*/function (_EventEmitter) {
     _inherits(RealTimeTimers, _EventEmitter);
-
     var _super = _createSuper(RealTimeTimers);
-
     function RealTimeTimers(config) {
       var _this;
-
       _classCallCheck(this, RealTimeTimers);
-
       _this = _super.call(this);
       var getTimestampCallback = GetValue(config, 'getTimestampCallback');
-
       if (!getTimestampCallback) {
         _this.setStartTimestamp(GetValue(config, 'startTimestamp'));
-
         getTimestampCallback = GetCurrentTimestampFromStartCallback.bind(_assertThisInitialized(_this));
       }
-
       _this.setGetTimestampCallback(getTimestampCallback);
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(RealTimeTimers, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -679,7 +641,6 @@
         if (timestamp === undefined) {
           timestamp = new Date().getTime();
         }
-
         this.startTimestamp = timestamp - window.performance.now();
         return this;
       }
@@ -695,7 +656,6 @@
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
-
         period = GetPeriodMS(period);
         var timer = {
           name: name,
@@ -703,28 +663,22 @@
           period: period,
           data: data
         };
-
         if (data !== undefined) {
           timer.data = data;
         }
-
         this._add(timer);
-
         return this;
       }
     }, {
       key: "incTimerPeriod",
       value: function incTimerPeriod(name, period) {
         period = GetPeriodMS(period);
-
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
           var timer = this.timers[i];
-
           if (timer.name === name) {
             timer.period += period;
           }
         }
-
         this.emitUpdateEvent();
         return this;
       }
@@ -734,26 +688,20 @@
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
-
         var result = [];
-
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
           var timer = this.timers[i];
-
           if (currentTimestamp >= timer.start + timer.period) {
             result.push(timer);
           }
         }
-
         return result;
       }
     }, {
       key: "popExpiredTimers",
       value: function popExpiredTimers(currentTimestamp) {
         var result = this.getExpiredTimers(currentTimestamp);
-
         this._remove(result);
-
         return result;
       }
     }, {
@@ -762,9 +710,7 @@
         if (currentTimestamp === undefined) {
           currentTimestamp = this.getCurrentTimestampCallback();
         }
-
         var result = [];
-
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
           var timer = this.timers[i];
           var elapsed = currentTimestamp - timer.start;
@@ -779,7 +725,6 @@
             timer: timer
           });
         }
-
         return result;
       }
     }, {
@@ -789,17 +734,13 @@
           // Get all timers
           return this.timers.slice();
         }
-
         var result = [];
-
         for (var i = 0, cnt = this.timers.length; i < cnt; i++) {
           var timer = this.timers[i];
-
           if (timer.name === name) {
             result.push(timer);
           }
         }
-
         return result;
       }
     }, {
@@ -809,13 +750,10 @@
           // string or number
           timers = this.getTimers(timers);
         }
-
         if (!Array.isArray(timers)) {
           timers = [timers];
         }
-
         this._remove(timers);
-
         return this;
       }
     }, {
@@ -841,16 +779,18 @@
       value: function emitUpdateEvent() {
         this.emit('update', this.timers);
         return this;
-      } // Internal
+      }
 
+      // Internal
     }, {
       key: "_add",
       value: function _add(timer) {
         this.timers.push(timer);
         this.emit('add', timer, this.timers);
         this.emitUpdateEvent();
-      } // Internal
+      }
 
+      // Internal
     }, {
       key: "_remove",
       value: function _remove(timers) {
@@ -860,25 +800,19 @@
         this.emitUpdateEvent();
       }
     }]);
-
     return RealTimeTimers;
   }(eventemitter3);
-
   var GetCurrentTimestampFromStartCallback = function GetCurrentTimestampFromStartCallback() {
     return this.startTimestamp + window.performance.now();
   };
 
   var RealTimeTimersPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(RealTimeTimersPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(RealTimeTimersPlugin);
-
     function RealTimeTimersPlugin(pluginManager) {
       _classCallCheck(this, RealTimeTimersPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(RealTimeTimersPlugin, [{
       key: "start",
       value: function start() {
@@ -891,7 +825,6 @@
         return new RealTimeTimers(config);
       }
     }]);
-
     return RealTimeTimersPlugin;
   }(Phaser.Plugins.BasePlugin);
 

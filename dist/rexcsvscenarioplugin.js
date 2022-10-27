@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -136,7 +118,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -146,70 +127,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -219,6 +190,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -243,8 +215,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -256,7 +229,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -283,7 +255,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -291,7 +262,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -301,19 +271,15 @@
    * @param {object} ret JSON object to return, set null to return a new object
    * @returns {object} this object
    */
-
   var Clone = function Clone(obj, out) {
     var objIsArray = Array.isArray(obj);
-
     if (out === undefined) {
       out = objIsArray ? [] : {};
     } else {
       Clear(out);
     }
-
     if (objIsArray) {
       out.length = obj.length;
-
       for (var i = 0, cnt = obj.length; i < cnt; i++) {
         out[i] = obj[i];
       }
@@ -322,33 +288,27 @@
         out[key] = obj[key];
       }
     }
-
     return out;
   };
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
   var InstMem = /*#__PURE__*/function () {
     function InstMem(scenario) {
       _classCallCheck(this, InstMem);
-
       this.scenario = scenario;
       this.queue = [];
       this.currentIdx = -1;
       this.nextIdx = 0;
     }
-
     _createClass(InstMem, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         var queue = GetValue$3(o, 'queue', undefined);
-
         if (queue === undefined) {
           Clear(this.queue);
         } else {
           Clone(queue, this.queue);
         }
-
         this.currentIdx = GetValue$3(o, 'curIdx', -1);
         this.nextIdx = GetValue$3(o, 'nextIdx', 0);
         return this;
@@ -373,7 +333,6 @@
         if (index === undefined) {
           index = this.currentIdx + 1;
         }
-
         this.nextIdx = index;
         return this;
       }
@@ -383,7 +342,6 @@
         if (index === undefined) {
           index = this.nextIdx;
         }
-
         this.currentIdx = index;
         return this.queue[index];
       }
@@ -393,18 +351,15 @@
         return this.queue.length;
       }
     }]);
-
     return InstMem;
   }();
 
   var BaseCmd = /*#__PURE__*/function () {
     function BaseCmd(scenario, type) {
       _classCallCheck(this, BaseCmd);
-
       this.scenario = scenario;
       this.type = type;
     }
-
     _createClass(BaseCmd, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {}
@@ -422,7 +377,6 @@
       key: "run",
       value: function run(inst) {}
     }]);
-
     return BaseCmd;
   }();
 
@@ -430,28 +384,22 @@
     if (startIdx === undefined) {
       startIdx = 0;
     }
-
     if (endIdx === undefined) {
       endIdx = src.length;
     }
-
     dest.length = endIdx - startIdx;
-
     for (var i = 0, len = dest.length; i < len; i++) {
       dest[i] = src[i + startIdx];
     }
-
     return dest;
   };
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
-
   var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
-
     if (s === '') {
       s = null;
     } else if (FLOAT.test(s)) {
@@ -465,7 +413,6 @@
         s = true;
       }
     }
-
     return s;
   };
 
@@ -474,11 +421,9 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
   var RunCommands = function RunCommands(queue, scope, config) {
     var reverse = GetValue$2(config, 'reverse', false);
     var retVal;
-
     if (IsArray(queue[0])) {
       if (!reverse) {
         for (var i = 0, len = queue.length; i < len; i++) {
@@ -492,23 +437,19 @@
     } else {
       retVal = RunCommand(queue, scope, config);
     }
-
     return retVal;
   };
-
   var RunCommand = function RunCommand(cmd, scope, config) {
     var argsConvert = GetValue$2(config, 'argsConvert', undefined);
     var argsConvertScope = GetValue$2(config, 'argsConvertScope', undefined);
     var fnName = cmd[0];
     ARGS = Copy(ARGS, cmd, 1);
-
     if (argsConvert) {
       // convert string to floating number, boolean, null, or string        
       if (argsConvert === true) {
         argsConvert = TypeConvert;
         argsConvertScope = undefined;
       }
-
       for (var i = 0, len = ARGS.length; i < len; i++) {
         if (argsConvertScope) {
           ARGS[i] = argsConvert.call(argsConvertScope, ARGS[i], cmd);
@@ -517,43 +458,32 @@
         }
       }
     }
-
     var fn;
-
     if (typeof fnName === 'string') {
       fn = scope[fnName];
-
       if (fn == null) {
         fn = GetValue$2(scope, fnName, null);
       }
     } else {
       fn = fnName;
     }
-
     var retValue = fn.apply(scope, ARGS);
     return retValue;
   };
-
   var ARGS = []; // reuse this array
 
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
-
   var CustomCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(CustomCmd, _BaseCmd);
-
     var _super = _createSuper(CustomCmd);
-
     function CustomCmd(scenario) {
       var _this;
-
       _classCallCheck(this, CustomCmd);
-
       _this = _super.call(this, scenario, '-');
       _this.task = undefined;
       _this.lastMethodName = undefined;
       return _this;
     }
-
     _createClass(CustomCmd, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -569,13 +499,11 @@
         var scenario = this.scenario;
         var argsConvert = scenario.argsConvert;
         var argsConvertScope = scenario.argsConvertScope;
-
         if (argsConvert) {
           if (argsConvert === true) {
             argsConvert = TypeConvert;
             argsConvertScope = undefined;
           }
-
           for (var i = 1, len = inst.length; i < len; i++) {
             if (argsConvertScope) {
               inst[i] = argsConvert.call(argsConvertScope, inst[i], inst);
@@ -584,7 +512,6 @@
             }
           }
         }
-
         inst = [cmd, inst];
         return inst;
       }
@@ -595,7 +522,6 @@
         var command = inst[1];
         this.lastMethodName = command[0];
         var task = RunCommands(command, scenario.scope);
-
         if (task && typeof task.once === 'function') {
           task.once('complete', this.resume, this);
           this.pause();
@@ -618,38 +544,30 @@
         scenario.runNextCmd();
       }
     }]);
-
     return CustomCmd;
   }(BaseCmd);
 
   var WaitCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(WaitCmd, _BaseCmd);
-
     var _super = _createSuper(WaitCmd);
-
     function WaitCmd(scenario) {
       _classCallCheck(this, WaitCmd);
-
       return _super.call(this, scenario, 'wait');
     }
-
     _createClass(WaitCmd, [{
       key: "parse",
       value: function parse(inst, index) {
         inst.length = 2;
         var eventName = this.getEventName(inst);
-
         if (!isNaN(eventName)) {
           inst[1] = parseFloat(eventName);
         }
-
         return inst;
       }
     }, {
       key: "run",
       value: function run(inst) {
         var eventName = this.getEventName(inst);
-
         if (typeof eventName === 'number') {
           this.waitTime(eventName);
         } else {
@@ -662,11 +580,9 @@
         if (delayTime > this.scenario.offset) {
           delayTime -= this.scenario.offset;
           this.scenario.offset = 0;
-
           if (this.scenario.isDebugMode) {
             this.scenario.log('#WAIT: ' + delayTime);
           }
-
           this.scenario.wait(delayTime);
         } else {
           this.scenario.offset -= delayTime;
@@ -678,52 +594,41 @@
         if (this.scenario.isDebugMode) {
           this.scenario.log('#WAIT: ' + eventName);
         }
-
         this.scenario.wait(eventName);
       }
     }, {
       key: "getEventName",
       value: function getEventName(inst) {
         var eventName = inst[1];
-
         if (eventName == null) {
           eventName = '';
           inst[1] = eventName;
         }
-
         return eventName;
       }
     }]);
-
     return WaitCmd;
   }(BaseCmd);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var LabelCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(LabelCmd, _BaseCmd);
-
     var _super = _createSuper(LabelCmd);
-
     function LabelCmd(scenario) {
       var _this;
-
       _classCallCheck(this, LabelCmd);
-
       _this = _super.call(this, scenario, 'label');
       _this.labels = {};
       _this.prevLabel = '';
       _this.lastLabel = '';
       return _this;
     }
-
     _createClass(LabelCmd, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.prevLabel = GetValue$1(o, 'preLabel', '');
         this.lastLabel = GetValue$1(o, 'lastLabel', '');
         var labels = GetValue$1(o, 'labels', undefined);
-
         if (labels === undefined) {
           Clear(this.labels);
         } else {
@@ -751,14 +656,12 @@
       key: "run",
       value: function run(inst) {
         var label = this.getLabel(inst);
-
         if (this.scenario.isDebugMode) {
           this.scenario.log('#LABEL: ' + label);
         }
-
         this.prevLabel = this.lastLabel;
-        this.lastLabel = label; //this.scenario.resetClock(); // TODO
-
+        this.lastLabel = label;
+        //this.scenario.resetClock(); // TODO
         var scenario = this.scenario;
         scenario.emit('labelchange', this.lastLabel, this.prevLabel, scenario.scope, scenario);
       }
@@ -766,12 +669,10 @@
       key: "getLabel",
       value: function getLabel(inst) {
         var label = inst[1];
-
         if (label == null) {
           label = '';
           inst[1] = label;
         }
-
         return label;
       }
     }, {
@@ -785,7 +686,6 @@
         if (name === '' || !this.hasLabel(name)) {
           return 0;
         }
-
         return this.labels[name];
       }
     }, {
@@ -794,21 +694,16 @@
         return this.labels.hasOwnProperty(name);
       }
     }]);
-
     return LabelCmd;
   }(BaseCmd);
 
   var ExitCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(ExitCmd, _BaseCmd);
-
     var _super = _createSuper(ExitCmd);
-
     function ExitCmd(scenario) {
       _classCallCheck(this, ExitCmd);
-
       return _super.call(this, scenario, 'exit');
     }
-
     _createClass(ExitCmd, [{
       key: "parse",
       value: function parse(inst, index) {
@@ -822,21 +717,16 @@
         this.scenario.complete();
       }
     }]);
-
     return ExitCmd;
   }(BaseCmd);
 
   var GotoCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(GotoCmd, _BaseCmd);
-
     var _super = _createSuper(GotoCmd);
-
     function GotoCmd(scenario) {
       _classCallCheck(this, GotoCmd);
-
       return _super.call(this, scenario, 'goto');
     }
-
     _createClass(GotoCmd, [{
       key: "parse",
       value: function parse(inst, index) {
@@ -847,41 +737,32 @@
       key: "run",
       value: function run(inst) {
         var label = this.getLabel(inst);
-
         if (this.scenario.isDebugMode) {
           this.scenario.log('#GOTO label: ' + label);
         }
-
         this.scenario["goto"](label);
       }
     }, {
       key: "getLabel",
       value: function getLabel(inst) {
         var label = inst[1];
-
         if (label == null) {
           label = '';
           inst[1] = label;
         }
-
         return label;
       }
     }]);
-
     return GotoCmd;
   }(BaseCmd);
 
   var IfCmd = /*#__PURE__*/function (_BaseCmd) {
     _inherits(IfCmd, _BaseCmd);
-
     var _super = _createSuper(IfCmd);
-
     function IfCmd(scenario) {
       _classCallCheck(this, IfCmd);
-
       return _super.call(this, scenario, 'if');
     }
-
     _createClass(IfCmd, [{
       key: "parse",
       value: function parse(inst, index) {
@@ -896,12 +777,10 @@
         var condFn = this.getCond(inst);
         var result = condFn.call(this.scenario.scope);
         var nextLabel = result ? this.getTrueLabel(inst) : this.getFalseLabel(inst);
-
         if (nextLabel !== '') {
           if (this.scenario.isDebugMode) {
             this.scenario.log('#IF ' + result + '- GOTO label: ' + nextLabel);
           }
-
           this.scenario["goto"](nextLabel);
         }
       }
@@ -909,49 +788,40 @@
       key: "getCond",
       value: function getCond(inst) {
         var cond = inst[1];
-
         if (cond == null || cond === '') {
           cond = 'true';
           inst[1] = cond;
         }
-
         return cond;
       }
     }, {
       key: "getTrueLabel",
       value: function getTrueLabel(inst) {
         var label = inst[2];
-
         if (label == null) {
           label = '';
           inst[2] = label;
         }
-
         return label;
       }
     }, {
       key: "getFalseLabel",
       value: function getFalseLabel(inst) {
         var label = inst[3];
-
         if (label == null) {
           label = '';
           inst[3] = label;
         }
-
         return label;
       }
     }]);
-
     return IfCmd;
   }(BaseCmd);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var CmdHandlers = /*#__PURE__*/function () {
     function CmdHandlers(scenario) {
       _classCallCheck(this, CmdHandlers);
-
       this.cmds = {
         '-': new CustomCmd(scenario),
         'wait': new WaitCmd(scenario),
@@ -961,25 +831,21 @@
         'if': new IfCmd(scenario)
       };
     }
-
     _createClass(CmdHandlers, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         for (var name in this.cmds) {
           this.cmds[name].resetFromJSON(GetValue(o, name, undefined));
         }
-
         return this;
       }
     }, {
       key: "toJSON",
       value: function toJSON() {
         var ret = {};
-
         for (var name in this.cmds) {
           ret[name] = this.cmds[name].toJSON();
         }
-
         return ret;
       }
     }, {
@@ -993,14 +859,12 @@
         return this.cmds.hasOwnProperty(name);
       }
     }]);
-
     return CmdHandlers;
   }();
 
   var CSVScenario = /*#__PURE__*/function () {
     function CSVScenario(scene, config) {
       _classCallCheck(this, CSVScenario);
-
       // Event emitter
       this.setEventEmitter(GetValue$4(config, 'eventEmitter', undefined));
       this.scene = scene;
@@ -1011,7 +875,6 @@
       this.resetFromJSON(config);
       this.boot();
     }
-
     _createClass(CSVScenario, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1057,7 +920,6 @@
         if (!this.scene) {
           return;
         }
-
         this.destroyEventEmitter();
         this.clear();
         this.scene.sys.events.off('shutdown', this.destroy, this);
@@ -1073,17 +935,13 @@
       value: function load(strCmd, scope, config) {
         this.clear();
         this.timeUnit = GetValue$4(config, 'timeUnit', this.timeUnit);
-
         if (typeof this.timeUnit === 'string') {
           this.timeUnit = TIMEUNITMODE[this.timeUnit];
         }
-
         this.cmdPrefix = GetValue$4(config, 'prefix', this.cmdPrefix);
-
         if (typeof this.cmdPrefix === 'string') {
           this.cmdPrefix = new RegExp(this.cmdPrefix);
         }
-
         this.argsConvert = GetValue$4(config, 'argsConvert', this.argsConvert);
         this.argsConvertScope = GetValue$4(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
@@ -1104,17 +962,13 @@
         this.stop();
         var label = GetValue$4(config, 'label', '');
         this.offset = GetValue$4(config, 'offset', 0);
-
         if (this.isDebugMode) {
           this.log('Start at Label: ' + label);
         }
-
         var result = this["goto"](label);
-
         if (!result) {
           return false;
         }
-
         this.isRunning = true;
         this.runNextCmd();
         return true;
@@ -1123,28 +977,23 @@
       key: "getIndex",
       value: function getIndex(label) {
         var index = this.getCmdHandler('label').getIndex(label);
-
         if (index == null) {
           this.error('Label: ' + label + ' is not found');
         }
-
         return index;
       }
     }, {
       key: "goto",
       value: function goto(label) {
         var index;
-
         if (typeof label === 'string') {
           index = this.getIndex(label);
         } else {
           index = label;
         }
-
         if (index == null) {
           return false;
         }
-
         this.instMem.setNextIndex(index);
         return true;
       }
@@ -1155,7 +1004,6 @@
       },
       set: function set(value) {
         this._timeScale = value;
-
         if (this.timer) {
           this.timer.timeScale = value;
         }
@@ -1170,20 +1018,16 @@
       key: "wait",
       value: function wait(eventName) {
         this.waitEvent = eventName;
-
         if (typeof eventName === 'number') {
           var delay = eventName;
-
           if (this.timeUnit === 1) {
             delay *= 1000;
           }
-
           this.timer = this.scene.time.delayedCall(delay, this["continue"], [eventName], this);
           this.timer.timeScale = this._timeScale;
         } else {
           this.emit("wait.".concat(eventName), this);
         }
-
         this.emit('wait', eventName, this);
         return this;
       }
@@ -1193,17 +1037,15 @@
         if (!this.isRunning) {
           return this;
         }
-
         this.isRunning = false;
-        this.isPaused = false; // clear wait event
+        this.isPaused = false;
 
+        // clear wait event
         this.waitEvent = undefined;
-
         if (this.timer) {
           this.timer.remove();
           this.timer = undefined;
         }
-
         return this;
       }
     }, {
@@ -1228,17 +1070,13 @@
         if (!this.isRunning) {
           return this;
         }
-
         if (this.isPaused) {
           return this;
         }
-
         this.isPaused = true;
-
         if (this.timer) {
           this.timer.paused = true;
         }
-
         return this;
       }
     }, {
@@ -1247,17 +1085,13 @@
         if (!this.isRunning) {
           return this;
         }
-
         if (!this.isPaused) {
           return this;
         }
-
         this.isPaused = false;
-
         if (this.timer) {
           this.timer.paused = false;
         }
-
         return this;
       }
     }, {
@@ -1266,18 +1100,14 @@
         if (!this.isRunning || this.isPaused || this.waitEvent === undefined) {
           return this;
         }
-
         if (eventName === true || eventName === this.waitEvent) {
           this.waitEvent = undefined;
-
           if (this.timer) {
             this.timer.remove();
             this.timer = undefined;
           }
-
           this.runNextCmd();
         }
-
         return this;
       }
     }, {
@@ -1301,37 +1131,31 @@
         if (typeof name !== 'string') {
           name = name[0];
         }
-
         return this.cmdHandlers.get(name);
       }
     }, {
       key: "parse",
       value: function parse(arr) {
         var item,
-            name,
-            prefix = this.cmdPrefix;
-
+          name,
+          prefix = this.cmdPrefix;
         for (var i = 0, len = arr.length; i < len; i++) {
           item = arr[i];
           name = item[0];
-
           if (name === '-') {
             this.appendCommand(item);
           } else if (!isNaN(name)) {
             var time = parseFloat(name);
-
             if (time > 0) {
               // insert 'wait' command
               this.appendCommand(['wait', time]);
             }
-
             item[0] = '-';
             this.appendCommand(item);
           } else if (prefix.test(name)) {
             var innerMatch = name.match(prefix);
             item[0] = innerMatch[1].toLowerCase();
             var isValid = this.appendCommand(item);
-
             if (!isValid) {
               this.error('Line ' + i + ': ' + JSON.stringify(item) + ' is not a valid command');
             }
@@ -1342,24 +1166,19 @@
             this.appendCommand(item);
           }
         }
-
         return this;
       }
     }, {
       key: "appendCommand",
       value: function appendCommand(inst) {
         var handler = this.getCmdHandler(inst);
-
         if (handler == null) {
           return false;
         }
-
         inst = handler.parse(inst, this.instMem.length);
-
         if (inst) {
           this.instMem.append(inst);
         }
-
         return true;
       }
     }, {
@@ -1369,23 +1188,18 @@
           // prevent re-entry
           return;
         }
-
         var instMem = this.instMem;
         var inst;
         this._inRunCmdLoop = true;
-
         while (this.isRunning && !this.isPaused && this.waitEvent === undefined) {
           inst = instMem.get();
           instMem.setNextIndex();
-
           if (inst == null) {
             this.complete();
             break;
           }
-
           this.getCmdHandler(inst).run(inst);
         }
-
         this._inRunCmdLoop = false;
         return this;
       }
@@ -1407,10 +1221,8 @@
         return this;
       }
     }]);
-
     return CSVScenario;
   }();
-
   Object.assign(CSVScenario.prototype, EventEmitterMethods);
   var TIMEUNITMODE = {
     ms: 0,
@@ -1421,15 +1233,11 @@
 
   var CSVScenarioPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CSVScenarioPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(CSVScenarioPlugin);
-
     function CSVScenarioPlugin(pluginManager) {
       _classCallCheck(this, CSVScenarioPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(CSVScenarioPlugin, [{
       key: "start",
       value: function start() {
@@ -1442,7 +1250,6 @@
         return new CSVScenario(scene, config);
       }
     }]);
-
     return CSVScenarioPlugin;
   }(Phaser.Plugins.BasePlugin);
 

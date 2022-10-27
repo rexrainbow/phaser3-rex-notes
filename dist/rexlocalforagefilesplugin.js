@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -2952,6 +2934,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -2976,8 +2959,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -2989,7 +2973,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -2999,15 +2982,12 @@
   var GetHeaderKey = function GetHeaderKey(fileID) {
     return "H-".concat(fileID);
   };
-
   var GetContentKey = function GetContentKey(fileID) {
     return "C-".concat(fileID);
   };
-
   var IsHeaderKey = function IsHeaderKey(key) {
     return key.charAt(0) === 'H';
   };
-
   var GetFileID = function GetFileID(key) {
     return key.split('-')[1];
   };
@@ -3016,28 +2996,22 @@
     if (store === undefined) {
       store = localforage;
     }
-
     if (Array.isArray(data)) {
       var keys = data;
       data = {};
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         data[keys[i]] = null;
       }
     }
-
     var promises = [];
-
     var _loop = function _loop(key) {
       promises.push(store.getItem(key).then(function (value) {
         data[key] = value;
       }));
     };
-
     for (var key in data) {
       _loop(key);
     }
-
     return Promise.all(promises).then(function () {
       return Promise.resolve(data);
     });
@@ -3047,13 +3021,10 @@
     if (store === undefined) {
       store = localforage;
     }
-
     var promises = [];
-
     for (var key in data) {
       promises.push(store.setItem(key, data[key]));
     }
-
     return Promise.all(promises);
   };
 
@@ -3062,21 +3033,16 @@
       updateMode = content;
       content = undefined;
     }
-
     if (updateMode === undefined) {
       updateMode = false;
     }
-
     if (header === undefined) {
       header = {};
     }
-
     header.fileID = fileID;
-
     if (content) {
       content.fileID = fileID;
     }
-
     var headerKey = GetHeaderKey(fileID);
     var contentKey = GetContentKey(fileID);
     var self = this;
@@ -3095,22 +3061,17 @@
       if (prevHeader && header) {
         header = Object.assign(prevHeader, header);
       }
-
       if (prevContent && content) {
         content = Object.assign(prevContent, content);
       }
-
       self.cacheHeaders[fileID] = header;
       var data = {};
-
       if (header) {
         data[headerKey] = self.toSaveData(header);
       }
-
       if (content) {
         data[contentKey] = self.toSaveData(content);
       }
-
       return SetItems(data, self.store);
     }).then(function () {
       return Promise.resolve({
@@ -3149,7 +3110,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -3157,7 +3117,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -3167,11 +3126,9 @@
       return GetItems(keys.filter(IsHeaderKey), self.store);
     }).then(function (data) {
       Clear$1(self.cacheHeaders);
-
       for (var key in data) {
         self.cacheHeaders[GetFileID(key)] = self.toLoadData(data[key]);
       }
-
       return Promise.resolve({
         headers: self.cacheHeaders
       });
@@ -3186,25 +3143,19 @@
     if (store === undefined) {
       store = localforage;
     }
-
     var keys;
-
     if (Array.isArray(data)) {
       keys = data;
     } else {
       keys = [];
-
       for (var key in data) {
         keys.push(key);
       }
     }
-
     var promises = [];
-
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
       promises.push(store.removeItem(keys[i]));
     }
-
     return Promise.all(promises);
   };
 
@@ -3224,95 +3175,84 @@
       function o(o, r) {
         if (!t[o]) {
           t[o] = {};
-
           for (var n = 0; n < o.length; n++) {
             t[o][o.charAt(n)] = n;
           }
         }
-
         return t[o][r];
       }
-
       var r = String.fromCharCode,
-          n = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-          e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$",
-          t = {},
-          i = {
-        compressToBase64: function compressToBase64(o) {
-          if (null == o) return "";
-
-          var r = i._compress(o, 6, function (o) {
-            return n.charAt(o);
-          });
-
-          switch (r.length % 4) {
-            default:
-            case 0:
-              return r;
-
-            case 1:
-              return r + "===";
-
-            case 2:
-              return r + "==";
-
-            case 3:
-              return r + "=";
-          }
-        },
-        decompressFromBase64: function decompressFromBase64(r) {
-          return null == r ? "" : "" == r ? null : i._decompress(r.length, 32, function (e) {
-            return o(n, r.charAt(e));
-          });
-        },
-        compressToUTF16: function compressToUTF16(o) {
-          return null == o ? "" : i._compress(o, 15, function (o) {
-            return r(o + 32);
-          }) + " ";
-        },
-        decompressFromUTF16: function decompressFromUTF16(o) {
-          return null == o ? "" : "" == o ? null : i._decompress(o.length, 16384, function (r) {
-            return o.charCodeAt(r) - 32;
-          });
-        },
-        compressToUint8Array: function compressToUint8Array(o) {
-          for (var r = i.compress(o), n = new Uint8Array(2 * r.length), e = 0, t = r.length; t > e; e++) {
-            var s = r.charCodeAt(e);
-            n[2 * e] = s >>> 8, n[2 * e + 1] = s % 256;
-          }
-
-          return n;
-        },
-        decompressFromUint8Array: function decompressFromUint8Array(o) {
-          if (null === o || void 0 === o) return i.decompress(o);
-
-          for (var n = new Array(o.length / 2), e = 0, t = n.length; t > e; e++) {
-            n[e] = 256 * o[2 * e] + o[2 * e + 1];
-          }
-
-          var s = [];
-          return n.forEach(function (o) {
-            s.push(r(o));
-          }), i.decompress(s.join(""));
-        },
-        compressToEncodedURIComponent: function compressToEncodedURIComponent(o) {
-          return null == o ? "" : i._compress(o, 6, function (o) {
-            return e.charAt(o);
-          });
-        },
-        decompressFromEncodedURIComponent: function decompressFromEncodedURIComponent(r) {
-          return null == r ? "" : "" == r ? null : (r = r.replace(/ /g, "+"), i._decompress(r.length, 32, function (n) {
-            return o(e, r.charAt(n));
-          }));
-        },
-        compress: function compress(o) {
-          return i._compress(o, 16, function (o) {
-            return r(o);
-          });
-        },
-        _compress: function _compress(o, r, n) {
-          if (null == o) return "";
-          var e,
+        n = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+        e = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$",
+        t = {},
+        i = {
+          compressToBase64: function compressToBase64(o) {
+            if (null == o) return "";
+            var r = i._compress(o, 6, function (o) {
+              return n.charAt(o);
+            });
+            switch (r.length % 4) {
+              default:
+              case 0:
+                return r;
+              case 1:
+                return r + "===";
+              case 2:
+                return r + "==";
+              case 3:
+                return r + "=";
+            }
+          },
+          decompressFromBase64: function decompressFromBase64(r) {
+            return null == r ? "" : "" == r ? null : i._decompress(r.length, 32, function (e) {
+              return o(n, r.charAt(e));
+            });
+          },
+          compressToUTF16: function compressToUTF16(o) {
+            return null == o ? "" : i._compress(o, 15, function (o) {
+              return r(o + 32);
+            }) + " ";
+          },
+          decompressFromUTF16: function decompressFromUTF16(o) {
+            return null == o ? "" : "" == o ? null : i._decompress(o.length, 16384, function (r) {
+              return o.charCodeAt(r) - 32;
+            });
+          },
+          compressToUint8Array: function compressToUint8Array(o) {
+            for (var r = i.compress(o), n = new Uint8Array(2 * r.length), e = 0, t = r.length; t > e; e++) {
+              var s = r.charCodeAt(e);
+              n[2 * e] = s >>> 8, n[2 * e + 1] = s % 256;
+            }
+            return n;
+          },
+          decompressFromUint8Array: function decompressFromUint8Array(o) {
+            if (null === o || void 0 === o) return i.decompress(o);
+            for (var n = new Array(o.length / 2), e = 0, t = n.length; t > e; e++) {
+              n[e] = 256 * o[2 * e] + o[2 * e + 1];
+            }
+            var s = [];
+            return n.forEach(function (o) {
+              s.push(r(o));
+            }), i.decompress(s.join(""));
+          },
+          compressToEncodedURIComponent: function compressToEncodedURIComponent(o) {
+            return null == o ? "" : i._compress(o, 6, function (o) {
+              return e.charAt(o);
+            });
+          },
+          decompressFromEncodedURIComponent: function decompressFromEncodedURIComponent(r) {
+            return null == r ? "" : "" == r ? null : (r = r.replace(/ /g, "+"), i._decompress(r.length, 32, function (n) {
+              return o(e, r.charAt(n));
+            }));
+          },
+          compress: function compress(o) {
+            return i._compress(o, 16, function (o) {
+              return r(o);
+            });
+          },
+          _compress: function _compress(o, r, n) {
+            if (null == o) return "";
+            var e,
               t,
               i,
               s = {},
@@ -3326,15 +3266,37 @@
               d = [],
               m = 0,
               v = 0;
-
-          for (i = 0; i < o.length; i += 1) {
-            if (u = o.charAt(i), Object.prototype.hasOwnProperty.call(s, u) || (s[u] = f++, p[u] = !0), c = a + u, Object.prototype.hasOwnProperty.call(s, c)) a = c;else {
+            for (i = 0; i < o.length; i += 1) {
+              if (u = o.charAt(i), Object.prototype.hasOwnProperty.call(s, u) || (s[u] = f++, p[u] = !0), c = a + u, Object.prototype.hasOwnProperty.call(s, c)) a = c;else {
+                if (Object.prototype.hasOwnProperty.call(p, a)) {
+                  if (a.charCodeAt(0) < 256) {
+                    for (e = 0; h > e; e++) {
+                      m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
+                    }
+                    for (t = a.charCodeAt(0), e = 0; 8 > e; e++) {
+                      m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
+                    }
+                  } else {
+                    for (t = 1, e = 0; h > e; e++) {
+                      m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
+                    }
+                    for (t = a.charCodeAt(0), e = 0; 16 > e; e++) {
+                      m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
+                    }
+                  }
+                  l--, 0 == l && (l = Math.pow(2, h), h++), delete p[a];
+                } else for (t = s[a], e = 0; h > e; e++) {
+                  m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
+                }
+                l--, 0 == l && (l = Math.pow(2, h), h++), s[c] = f++, a = String(u);
+              }
+            }
+            if ("" !== a) {
               if (Object.prototype.hasOwnProperty.call(p, a)) {
                 if (a.charCodeAt(0) < 256) {
                   for (e = 0; h > e; e++) {
                     m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
                   }
-
                   for (t = a.charCodeAt(0), e = 0; 8 > e; e++) {
                     m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
                   }
@@ -3342,71 +3304,35 @@
                   for (t = 1, e = 0; h > e; e++) {
                     m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
                   }
-
                   for (t = a.charCodeAt(0), e = 0; 16 > e; e++) {
                     m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
                   }
                 }
-
                 l--, 0 == l && (l = Math.pow(2, h), h++), delete p[a];
               } else for (t = s[a], e = 0; h > e; e++) {
                 m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
               }
-
-              l--, 0 == l && (l = Math.pow(2, h), h++), s[c] = f++, a = String(u);
+              l--, 0 == l && (l = Math.pow(2, h), h++);
             }
-          }
-
-          if ("" !== a) {
-            if (Object.prototype.hasOwnProperty.call(p, a)) {
-              if (a.charCodeAt(0) < 256) {
-                for (e = 0; h > e; e++) {
-                  m <<= 1, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++;
-                }
-
-                for (t = a.charCodeAt(0), e = 0; 8 > e; e++) {
-                  m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-                }
-              } else {
-                for (t = 1, e = 0; h > e; e++) {
-                  m = m << 1 | t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t = 0;
-                }
-
-                for (t = a.charCodeAt(0), e = 0; 16 > e; e++) {
-                  m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-                }
-              }
-
-              l--, 0 == l && (l = Math.pow(2, h), h++), delete p[a];
-            } else for (t = s[a], e = 0; h > e; e++) {
+            for (t = 2, e = 0; h > e; e++) {
               m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
             }
-
-            l--, 0 == l && (l = Math.pow(2, h), h++);
-          }
-
-          for (t = 2, e = 0; h > e; e++) {
-            m = m << 1 | 1 & t, v == r - 1 ? (v = 0, d.push(n(m)), m = 0) : v++, t >>= 1;
-          }
-
-          for (;;) {
-            if (m <<= 1, v == r - 1) {
-              d.push(n(m));
-              break;
+            for (;;) {
+              if (m <<= 1, v == r - 1) {
+                d.push(n(m));
+                break;
+              }
+              v++;
             }
-
-            v++;
-          }
-
-          return d.join("");
-        },
-        decompress: function decompress(o) {
-          return null == o ? "" : "" == o ? null : i._decompress(o.length, 32768, function (r) {
-            return o.charCodeAt(r);
-          });
-        },
-        _decompress: function _decompress(o, n, e) {
-          var i,
+            return d.join("");
+          },
+          decompress: function decompress(o) {
+            return null == o ? "" : "" == o ? null : i._decompress(o.length, 32768, function (r) {
+              return o.charCodeAt(r);
+            });
+          },
+          _decompress: function _decompress(o, n, e) {
+            var i,
               s,
               p,
               u,
@@ -3420,79 +3346,63 @@
               v = "",
               w = [],
               A = {
-            val: e(0),
-            position: n,
-            index: 1
-          };
-
-          for (i = 0; 3 > i; i += 1) {
-            f[i] = i;
-          }
-
-          for (p = 0, c = Math.pow(2, 2), a = 1; a != c;) {
-            u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-          }
-
-          switch (p) {
-            case 0:
-              for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) {
-                u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-              }
-
-              l = r(p);
-              break;
-
-            case 1:
-              for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) {
-                u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
-              }
-
-              l = r(p);
-              break;
-
-            case 2:
-              return "";
-          }
-
-          for (f[3] = l, s = l, w.push(l);;) {
-            if (A.index > o) return "";
-
-            for (p = 0, c = Math.pow(2, m), a = 1; a != c;) {
+                val: e(0),
+                position: n,
+                index: 1
+              };
+            for (i = 0; 3 > i; i += 1) {
+              f[i] = i;
+            }
+            for (p = 0, c = Math.pow(2, 2), a = 1; a != c;) {
               u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
             }
-
-            switch (l = p) {
+            switch (p) {
               case 0:
                 for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) {
                   u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
                 }
-
-                f[d++] = r(p), l = d - 1, h--;
+                l = r(p);
                 break;
-
               case 1:
                 for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) {
                   u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
                 }
-
-                f[d++] = r(p), l = d - 1, h--;
+                l = r(p);
                 break;
-
               case 2:
-                return w.join("");
+                return "";
             }
-
-            if (0 == h && (h = Math.pow(2, m), m++), f[l]) v = f[l];else {
-              if (l !== d) return null;
-              v = s + s.charAt(0);
+            for (f[3] = l, s = l, w.push(l);;) {
+              if (A.index > o) return "";
+              for (p = 0, c = Math.pow(2, m), a = 1; a != c;) {
+                u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
+              }
+              switch (l = p) {
+                case 0:
+                  for (p = 0, c = Math.pow(2, 8), a = 1; a != c;) {
+                    u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
+                  }
+                  f[d++] = r(p), l = d - 1, h--;
+                  break;
+                case 1:
+                  for (p = 0, c = Math.pow(2, 16), a = 1; a != c;) {
+                    u = A.val & A.position, A.position >>= 1, 0 == A.position && (A.position = n, A.val = e(A.index++)), p |= (u > 0 ? 1 : 0) * a, a <<= 1;
+                  }
+                  f[d++] = r(p), l = d - 1, h--;
+                  break;
+                case 2:
+                  return w.join("");
+              }
+              if (0 == h && (h = Math.pow(2, m), m++), f[l]) v = f[l];else {
+                if (l !== d) return null;
+                v = s + s.charAt(0);
+              }
+              w.push(v), f[d++] = s + v.charAt(0), h--, s = v, 0 == h && (h = Math.pow(2, m), m++);
             }
-            w.push(v), f[d++] = s + v.charAt(0), h--, s = v, 0 == h && (h = Math.pow(2, m), m++);
           }
-        }
-      };
+        };
       return i;
     }();
-
     null != module && (module.exports = LZString);
   });
 
@@ -3501,28 +3411,24 @@
       if (this.zipMode) {
         data = lzString_min.compress(JSON.stringify(data));
       }
-
       return data;
     },
     toLoadData: function toLoadData(data) {
       if (this.zipMode) {
         data = JSON.parse(lzString_min.decompress(data));
       }
-
       return data;
     }
   };
 
   var Files = /*#__PURE__*/_createClass(function Files(config) {
     _classCallCheck(this, Files);
-
     this.store = localforage.createInstance({
       name: GetValue(config, 'name', 'files')
     });
     this.zipMode = GetValue(config, 'zip', true);
     this.cacheHeaders = {};
   });
-
   var methods = {
     save: Save,
     load: Load,
@@ -3534,15 +3440,11 @@
 
   var FilesPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(FilesPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(FilesPlugin);
-
     function FilesPlugin(pluginManager) {
       _classCallCheck(this, FilesPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(FilesPlugin, [{
       key: "start",
       value: function start() {
@@ -3555,7 +3457,6 @@
         return new Files(config);
       }
     }]);
-
     return FilesPlugin;
   }(Phaser.Plugins.BasePlugin);
 

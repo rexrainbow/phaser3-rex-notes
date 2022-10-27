@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,7 +35,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -50,15 +46,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -71,14 +64,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -86,12 +77,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -99,86 +88,66 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
-
   function set(target, property, value, receiver) {
     if (typeof Reflect !== "undefined" && Reflect.set) {
       set = Reflect.set;
     } else {
       set = function set(target, property, value, receiver) {
         var base = _superPropBase(target, property);
-
         var desc;
-
         if (base) {
           desc = Object.getOwnPropertyDescriptor(base, property);
-
           if (desc.set) {
             desc.set.call(receiver, value);
             return true;
@@ -186,66 +155,50 @@
             return false;
           }
         }
-
         desc = Object.getOwnPropertyDescriptor(receiver, property);
-
         if (desc) {
           if (!desc.writable) {
             return false;
           }
-
           desc.value = value;
           Object.defineProperty(receiver, property, desc);
         } else {
           _defineProperty(receiver, property, value);
         }
-
         return true;
       };
     }
-
     return set(target, property, value, receiver);
   }
-
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
-
     if (!s && isStrict) {
       throw new Error('failed to set property');
     }
-
     return value;
   }
 
   var Live2dGameObjectBase = /*#__PURE__*/function (_Phaser$GameObjects$G) {
     _inherits(Live2dGameObjectBase, _Phaser$GameObjects$G);
-
     var _super = _createSuper(Live2dGameObjectBase);
-
     function Live2dGameObjectBase() {
       _classCallCheck(this, Live2dGameObjectBase);
-
       return _super.apply(this, arguments);
     }
-
     return _createClass(Live2dGameObjectBase);
   }(Phaser.GameObjects.GameObject);
-
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Live2dGameObjectBase, [Components.AlphaSingle, Components.BlendMode, Components.ComputedSize, Components.Depth, Components.GetBounds, Components.Origin, Components.ScrollFactor, Components.Transform, Components.Visible]);
 
   // const Utils = Phaser.Renderer.WebGL.Utils;
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     if (renderer.newType) {
       renderer.pipelines.clear();
     }
-
     camera.addToRenderList(src);
     var calcMatrix = GetCalcMatrix(src, camera, parentMatrix).calc;
     src.model.draw(calcMatrix);
-
     if (!renderer.nextTypeMatch) {
       renderer.pipelines.rebind();
     }
@@ -9973,15 +9926,11 @@
 
   var ViewMatrix = /*#__PURE__*/function (_CubismMatrix) {
     _inherits(ViewMatrix, _CubismMatrix);
-
     var _super = _createSuper(ViewMatrix);
-
     function ViewMatrix() {
       _classCallCheck(this, ViewMatrix);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(ViewMatrix, [{
       key: "copyFrom",
       value: function copyFrom(matrix) {
@@ -9995,7 +9944,6 @@
         if (angle === 0) {
           return;
         }
-
         var sin = Math.sin(angle);
         var cos = Math.cos(angle);
         var matrix = this._tr;
@@ -10009,18 +9957,15 @@
         matrix[5] = b * -sin + d * cos;
       }
     }]);
-
     return ViewMatrix;
   }(CubismMatrix44);
 
   var GameClass = Phaser.Game;
-
   var IsGame = function IsGame(object) {
     return object instanceof GameClass;
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -10041,33 +9986,24 @@
 
   var CanvasMatrix = /*#__PURE__*/function (_CubismMatrix) {
     _inherits(CanvasMatrix, _CubismMatrix);
-
     var _super = _createSuper(CanvasMatrix);
-
     function CanvasMatrix() {
       var _this;
-
       _classCallCheck(this, CanvasMatrix);
-
       _this = _super.call(this);
-
       _this.setSize(0, 0);
-
       return _this;
     }
-
     _createClass(CanvasMatrix, [{
       key: "setSize",
       value: function setSize(width, height) {
         this.width = width;
         this.height = height;
-
         if (width > height) {
           this.scale(1.0, width / height);
         } else {
           this.scale(height / width, 1.0);
         }
-
         return this;
       }
     }, {
@@ -10083,23 +10019,23 @@
         return 1 - 2 * t;
       }
     }]);
-
     return CanvasMatrix;
   }(CubismMatrix44);
 
-  var GlobalDataInstance = undefined; // Global data shared for all Live2dGameObjects
+  var GlobalDataInstance = undefined;
 
+  // Global data shared for all Live2dGameObjects
   var GlobalData = /*#__PURE__*/function () {
     function GlobalData(gameObject) {
       _classCallCheck(this, GlobalData);
-
       var game = GetGame(gameObject);
       var gl = game.renderer.gl;
       var scale = game.scale;
       this.game = game;
       this.gl = gl;
-      this.scale = scale; // A frame buffer for all live2d game object
+      this.scale = scale;
 
+      // A frame buffer for all live2d game object
       this.frameBuffer = gl.getParameter(gl.FRAMEBUFFER_BINDING);
       this.viewportRect = [0, 0, 0, 0];
       this.projectionMatrix = new CanvasMatrix();
@@ -10107,7 +10043,6 @@
       scale.on('resize', this.onResize, this);
       game.events.once('destroy', this.destroy, this);
     }
-
     _createClass(GlobalData, [{
       key: "destroy",
       value: function destroy() {
@@ -10134,11 +10069,13 @@
       key: "onResize",
       value: function onResize() {
         var width = this.canvasWidth;
-        var height = this.canvasHeight; // Set view port
+        var height = this.canvasHeight;
 
+        // Set view port
         this.viewportRect[2] = width;
-        this.viewportRect[3] = height; // Set projectionMatrix
+        this.viewportRect[3] = height;
 
+        // Set projectionMatrix
         this.projectionMatrix.setSize(width, height);
       }
     }], [{
@@ -10147,62 +10084,56 @@
         if (!GlobalDataInstance) {
           GlobalDataInstance = new GlobalData(gameObject);
         }
-
         return GlobalDataInstance;
       }
     }]);
-
     return GlobalData;
   }();
 
   var Setup = function Setup(data) {
     // Load setting
     var setting = data.setting;
-    this._modelSetting = setting; // Load CubismModel
+    this._modelSetting = setting;
 
-    var arrayBuffer = data.model; // - Create this._model
+    // Load CubismModel
+    var arrayBuffer = data.model;
+    // - Create this._model
+    this.loadModel(arrayBuffer, arrayBuffer.byteLength);
+    // - Re-create render for current this._model
+    this.createRenderer();
+    // - Set gl to current renderer
+    this.getRenderer().startUp(this._globalData.gl);
 
-    this.loadModel(arrayBuffer, arrayBuffer.byteLength); // - Re-create render for current this._model
-
-    this.createRenderer(); // - Set gl to current renderer
-
-    this.getRenderer().startUp(this._globalData.gl); // Load CubismExpression
-
+    // Load CubismExpression
     var expressions = data.expressions;
-
     for (var expressionName in expressions) {
       var arrayBuffer = expressions[expressionName];
       var motion = this.loadExpression(arrayBuffer, arrayBuffer.byteLength, expressionName);
-
       if (this._expressions.getValue(expressionName) != null) {
         ACubismMotion["delete"](this._expressions.getValue(expressionName));
-
         this._expressions.setValue(expressionName, null);
       }
-
       this._expressions.setValue(expressionName, motion);
-    } // Load CubismPhysics
+    }
 
-
+    // Load CubismPhysics
     var arrayBuffer = data.physics;
-
     if (arrayBuffer) {
       this.loadPhysics(arrayBuffer, arrayBuffer.byteLength);
-    } // Load CubismPose
+    }
 
-
+    // Load CubismPose
     var arrayBuffer = data.pose;
-
     if (arrayBuffer) {
       this.loadPose(arrayBuffer, arrayBuffer.byteLength);
-    } // Setup EyeBlink
+    }
 
-
+    // Setup EyeBlink
     if (setting.getEyeBlinkParameterCount() > 0) {
       this._eyeBlink = CubismEyeBlink.create(setting);
-    } // Setup Breath
+    }
 
-
+    // Setup Breath
     this._breath = CubismBreath.create();
     this.registerParameter('angleX');
     this.registerParameter('angleY');
@@ -10215,95 +10146,78 @@
     breathParameters.pushBack(new BreathParameterData(this._idParamAngleZ, 0.0, 10.0, 5.5345, 0.5));
     breathParameters.pushBack(new BreathParameterData(this._idParamBodyAngleX, 0.0, 4.0, 15.5345, 0.5));
     breathParameters.pushBack(new BreathParameterData(this._idParamBreath, 0.5, 0.5, 3.2345, 1));
+    this._breath.setParameters(breathParameters);
 
-    this._breath.setParameters(breathParameters); // Load UserData
-
-
+    // Load UserData
     var arrayBuffer = data.userData;
-
     if (arrayBuffer) {
       this.loadUserData(arrayBuffer, arrayBuffer.byteLength);
-    } // Setup EyeBlinkIds
+    }
 
-
+    // Setup EyeBlinkIds
     var eyeBlinkIdCount = setting.getEyeBlinkParameterCount();
-
     for (var i = 0; i < eyeBlinkIdCount; i++) {
       this._eyeBlinkIds.pushBack(setting.getEyeBlinkParameterId(i));
-    } // Setup LipSyncIds
+    }
 
-
+    // Setup LipSyncIds
     var lipSyncIdCount = setting.getLipSyncParameterCount();
-
     for (var _i = 0; _i < lipSyncIdCount; _i++) {
       this._lipSyncIds.pushBack(setting.getLipSyncParameterId(_i));
-    } // Load CubismMotion
+    }
 
-
+    // Load CubismMotion
     this._model.saveParameters();
-
     var motionGroups = data.motions;
-
     for (var groupName in motionGroups) {
       var motionGroup = motionGroups[groupName];
-
       for (var i in motionGroup) {
         var arrayBuffer = motionGroup[i];
         var motionName = "".concat(groupName, "_").concat(i);
         var motion = this.loadMotion(arrayBuffer, arrayBuffer.byteLength, motionName);
         i = parseInt(i);
         var fadeTime = setting.getMotionFadeInTimeValue(groupName, i);
-
         if (fadeTime >= 0.0) {
           motion.setFadeInTime(fadeTime);
         }
-
         var fadeTime = setting.getMotionFadeOutTimeValue(groupName, i);
-
         if (fadeTime >= 0.0) {
           motion.setFadeOutTime(fadeTime);
         }
-
         motion.setEffectIds(this._eyeBlinkIds, this._lipSyncIds);
-
         if (this._motions.getValue(motionName) != null) {
           ACubismMotion["delete"](this._motions.getValue(motionName));
         }
-
         this._motions.setValue(motionName, motion);
       }
-    } // Load texture
+    }
 
-
+    // Load texture
     var textures = data.textures;
-
     for (var i in textures) {
       this.getRenderer().bindTexture(parseInt(i), textures[i]);
-    } // Stop all motions
+    }
 
+    // Stop all motions
+    this._motionManager.stopAllMotions();
 
-    this._motionManager.stopAllMotions(); // Setup canvas size
-
-
+    // Setup canvas size
     var canvasinfo = this._model._model.canvasinfo;
     this._pixelWidth = canvasinfo.CanvasWidth;
     this._pixelHeight = canvasinfo.CanvasHeight;
-    this._pixelsPerUnit = canvasinfo.PixelsPerUnit; // Setup ModelMatrix
+    this._pixelsPerUnit = canvasinfo.PixelsPerUnit;
 
+    // Setup ModelMatrix
     var layout = new csmMap();
     setting.getLayoutMap(layout);
+    this._modelMatrix.setupFromLayout(layout);
 
-    this._modelMatrix.setupFromLayout(layout); // Hit test result
-
-
+    // Hit test result
     var count = this._modelSetting.getHitAreasCount();
-
     for (var i = 0; i < count; i++) {
       var hitAreaName = this._modelSetting.getHitAreaName(i);
-
       this._hitTestResult[hitAreaName] = false;
     }
-
     return this;
   };
 
@@ -10312,108 +10226,93 @@
   };
 
   var Capitalize$3 = Phaser.Utils.String.UppercaseFirst;
-
   var Update = function Update(time, delta) {
     var deltaTimeSeconds = delta / 1000;
     var motionUpdated = false;
-
     this._model.loadParameters();
-
     if (!this._motionManager.isFinished()) {
       motionUpdated = this._motionManager.updateMotion(this._model, deltaTimeSeconds);
     } else {
       OnIdle(this.parent);
     }
+    this._model.saveParameters();
 
-    this._model.saveParameters(); // Add parameter values
-
-
+    // Add parameter values
     for (var name in this._addParamValues) {
       var addValue = this._addParamValues[name];
-
       if (addValue === 0) {
         continue;
       }
-
       var propertyName = "_idParam".concat(Capitalize$3(name));
-
       if (!this.hasOwnProperty(propertyName)) {
-        this.registerParameter(name); // Can't register this parameter
+        this.registerParameter(name);
 
+        // Can't register this parameter
         if (!this.hasOwnProperty(propertyName)) {
           // Error
           return this;
         }
       }
-
       this._model.addParameterValueById(this[propertyName], addValue);
     }
-
     if (!motionUpdated && this._eyeBlink) {
       this._eyeBlink.updateParameters(this._model, deltaTimeSeconds);
     }
-
     if (this._expressionManager) {
       this._expressionManager.updateMotion(this._model, deltaTimeSeconds);
     }
-
     if (this._breath != null) {
       this._breath.updateParameters(this._model, deltaTimeSeconds);
     }
-
     if (this._physics != null) {
       this._physics.evaluate(this._model, deltaTimeSeconds);
     }
-
     if (this._lipsync && this._lipSyncValue !== 0) {
       var count = this._lipSyncIds.getSize();
-
       for (var i = 0; i < count; ++i) {
         this._model.addParameterValueById(this._lipSyncIds.at(i), this._lipSyncValue);
       }
     }
-
     if (this._pose != null) {
       this._pose.updateParameters(this._model, deltaTimeSeconds);
     }
-
     this._model.update();
-
     return this;
   };
 
   var UpdateViewMatrix = function UpdateViewMatrix(model, calcMatrix) {
     var gameObject = model.parent;
     var projectionMatrix = model._globalData.projectionMatrix;
-    var matrix = model.viewMatrix; // Reset to identity matrix
+    var matrix = model.viewMatrix;
+    // Reset to identity matrix
+    matrix.loadIdentity();
 
-    matrix.loadIdentity(); // Apply scale
-
+    // Apply scale
     var modelWidth = gameObject.width;
     var modelHeight = gameObject.height;
     var canvasWidth = projectionMatrix.width;
     var canvasHeight = projectionMatrix.height;
     var scaleX = calcMatrix.scaleX * modelWidth / canvasWidth;
     var scaleY = calcMatrix.scaleY * modelHeight / canvasHeight;
-
     if (modelWidth > modelHeight) {
       scaleY *= modelWidth / modelHeight;
     } else {
       scaleX *= modelHeight / modelWidth;
     }
+    matrix.scale(scaleX, scaleY);
 
-    matrix.scale(scaleX, scaleY); // Apply rotate
+    // Apply rotate
+    matrix.rotate(-calcMatrix.rotationNormalized);
 
-    matrix.rotate(-calcMatrix.rotationNormalized); // Apply translate
-
+    // Apply translate
     matrix.translate(projectionMatrix.toLocalX(calcMatrix.getX(0, 0)), projectionMatrix.toLocalY(calcMatrix.getY(0, 0)));
-    var modelMatrix = model._modelMatrix; // Offset for origin
+    var modelMatrix = model._modelMatrix;
+    // Offset for origin
     // modelMatrix.translate(
     //     modelMatrix._width * (0.5 - gameObject.originX),
     //     modelMatrix._height * (gameObject.originY - 0.5)
     // );
     // Apply model matrix
-
     matrix.multiplyByMatrix(modelMatrix);
     return matrix;
   };
@@ -10422,7 +10321,6 @@
     if (!this._model) {
       return;
     }
-
     var globalData = this._globalData;
     var matrix = UpdateViewMatrix(this, calcMatrix);
     var renderer = this.getRenderer();
@@ -10434,15 +10332,11 @@
 
   var GetExpressionNames$1 = function GetExpressionNames() {
     var names = [];
-
     var count = this._expressions.getSize();
-
     var keyValuse = this._expressions._keyValues;
-
     for (var i = 0; i < count; i++) {
       names.push(keyValuse[i].first);
     }
-
     return names;
   };
 
@@ -10460,11 +10354,8 @@
     if (name === undefined) {
       name = 0;
     }
-
     var motion;
-
     var nameType = _typeof(name);
-
     if (nameType === 'string') {
       motion = this._expressions.getValue(name);
     } else if (nameType === 'number') {
@@ -10472,16 +10363,12 @@
       motion = keyValue ? keyValue.second : null;
       name = keyValue ? keyValue.first : undefined;
     }
-
     if (!motion) {
       // Error
       return this;
     }
-
     motion._name = name;
-
     this._expressionManager.startMotionPriority(motion, false, PriorityForce);
-
     this._currentExpressionName = name;
     OnExpressionStart(this.parent, name);
     return this;
@@ -10489,11 +10376,9 @@
 
   var SetRandomExpression$1 = function SetRandomExpression() {
     var count = this._expressions.getSize();
-
     if (count === 0) {
       return this;
     }
-
     var index = Math.floor(Math.random() * count);
     this.setExpression(index);
     return this;
@@ -10501,42 +10386,30 @@
 
   var GetMotionNames$1 = function GetMotionNames(groupName) {
     var names = [];
-
     var count = this._motions.getSize();
-
     var keyValuse = this._motions._keyValues;
-
     for (var i = 0; i < count; i++) {
       var name = keyValuse[i].first;
-
       if (groupName & !name.startsWith(groupName)) {
         continue;
       }
-
       names.push(name);
     }
-
     return names;
   };
 
   var GetMotionGroupNames$1 = function GetMotionGroupNames() {
     var names = [];
-
     var count = this._motions.getSize();
-
     var keyValuse = this._motions._keyValues;
-
     for (var i = 0; i < count; i++) {
       var name = keyValuse[i].first;
       var groupName = name.split('_')[0];
-
       if (names.indexOf(groupName) !== -1) {
         continue;
       }
-
       names.push(groupName);
     }
-
     return names;
   };
 
@@ -10554,42 +10427,33 @@
     if (priority === undefined) {
       priority = PriorityNormal;
     }
-
     if (priority === PriorityForce) {
       this._motionManager.setReservePriority(priority);
     } else if (!this._motionManager.reserveMotion(priority)) {
       // Error
       return this;
     }
-
     if (no === undefined) {
       no = Math.floor(Math.random() * this._modelSetting.getMotionCount(group));
     }
-
     var name = "".concat(group, "_").concat(no);
-
     var motion = this._motions.getValue(name);
-
     if (!motion) {
       // Error
       return this;
     }
-
     motion._name = name;
     var gameObject = this.parent;
     motion.setFinishedMotionHandler(function () {
       OnMotionComplete(gameObject, group, no);
     });
-
     this._motionManager.startMotionPriority(motion, false, priority);
-
     OnMotionStart(gameObject, group, no);
     return this;
   };
 
   var StopAllMotions$1 = function StopAllMotions() {
     this._motionManager.stopAllMotions();
-
     return this;
   };
 
@@ -10601,17 +10465,13 @@
     var names = [];
     var motionManager = this._motionManager;
     var motions = motionManager._motions;
-
     for (var i = 0, cnt = motions.getSize(); i < cnt; i++) {
       var motionQueueEntry = motions.at(i);
-
       if (motionQueueEntry._finished) {
         continue;
       }
-
       names.push(motionQueueEntry._motion._name);
     }
-
     return names;
   };
 
@@ -10732,20 +10592,16 @@
   })(Live2DCubismFramework$2 || (Live2DCubismFramework$2 = {}));
 
   var Capitalize$2 = Phaser.Utils.String.UppercaseFirst;
-
   var RegisterParameter$1 = function RegisterParameter(name) {
     var capName = "Param".concat(Capitalize$2(name));
     var propertyName = "_id".concat(capName);
-
     if (this.hasOwnProperty(propertyName)) {
       return this;
     }
-
     if (!CubismDefaultParameterId.hasOwnProperty(capName)) {
       // Error;
       return this;
     }
-
     var parameterId = CubismDefaultParameterId[capName];
     this[propertyName] = CubismFramework.getIdManager().getId(parameterId);
     this._addParamValues[name] = 0;
@@ -10753,36 +10609,32 @@
   };
 
   var Capitalize$1 = Phaser.Utils.String.UppercaseFirst;
-
   var AddParameterValue$1 = function AddParameterValue(name, value) {
     var propertyName = "_idParam".concat(Capitalize$1(name));
-
     if (!this.hasOwnProperty(propertyName)) {
-      this.registerParameter(name); // Can't register this parameter
+      this.registerParameter(name);
 
+      // Can't register this parameter
       if (!this.hasOwnProperty(propertyName)) {
         // Error
         return this;
       }
     }
-
     this._addParamValues[name] += value;
     return this;
   };
 
   var Capitalize = Phaser.Utils.String.UppercaseFirst;
-
   var ResetParameterValue$1 = function ResetParameterValue(name) {
     var propertyName = "_idParam".concat(Capitalize(name));
-
     if (!this.hasOwnProperty(propertyName)) {
-      this.registerParameter(name); // Can't register this parameter
+      this.registerParameter(name);
 
+      // Can't register this parameter
       if (!this.hasOwnProperty(propertyName)) {
         return this;
       }
     }
-
     this._addParamValues[name] = 0;
     return this;
   };
@@ -10793,32 +10645,25 @@
     } else if (out === true) {
       out = GlobMatrixXY;
     }
-
     out.x = (localX - this._pixelWidth / 2) / this._pixelsPerUnit;
     out.y = (this._pixelHeight / 2 - localY) / this._pixelsPerUnit;
     return out;
   };
-
   var GlobMatrixXY = {};
 
   var HitAreaNameToDrawIndex = function HitAreaNameToDrawIndex(hitAreaName) {
     var count = this._modelSetting.getHitAreasCount();
-
     for (var i = 0; i < count; i++) {
       if (this._modelSetting.getHitAreaName(i) === hitAreaName) {
         var drawId = this._modelSetting.getHitAreaId(i);
-
         var drawIndex = this._model.getDrawableIndex(drawId);
-
         return drawIndex;
       }
     }
-
     return undefined;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
-
   var GetDrawableBounds = function GetDrawableBounds(index, bounds) {
     if (bounds === undefined) {
       bounds = new Rectangle();
@@ -10826,27 +10671,20 @@
       if (GlobRect === undefined) {
         GlobRect = new Rectangle();
       }
-
       bounds = GlobRect;
     }
-
     if (typeof index === 'string') {
       index = HitAreaNameToDrawIndex.call(this, index);
-
       if (index === undefined) {
         return null;
       }
     }
-
     var count = this._model.getDrawableVertexCount(index) * 2;
-
     var vertices = this._model.getDrawableVertices(index);
-
     var left = Infinity,
-        right = -Infinity,
-        top = Infinity,
-        bottom = -Infinity;
-
+      right = -Infinity,
+      top = Infinity,
+      bottom = -Infinity;
     for (var i = 0; i < count; i += 2) {
       var x = vertices[i];
       var y = vertices[i + 1];
@@ -10855,26 +10693,21 @@
       top = Math.min(top, y);
       bottom = Math.max(bottom, y);
     }
-
     bounds.setTo(left, top, right - left, bottom - top);
     return bounds;
   };
-
   var GlobRect;
 
   var HitTest$1 = function HitTest(hitAreaName, x, y) {
     var bounds = this.getDrawableBounds(hitAreaName, true);
-
     if (!bounds) {
       return false;
     }
-
     if (_typeof(x) === 'object') {
       var xy = x;
       x = xy.x;
       y = xy.y;
     }
-
     return bounds.contains(x, y);
   };
 
@@ -10901,19 +10734,15 @@
 
   var Model = /*#__PURE__*/function (_CubismUserModel) {
     _inherits(Model, _CubismUserModel);
-
     var _super = _createSuper(Model);
-
     function Model(parent) {
       var _this;
-
       _classCallCheck(this, Model);
+      _this = _super.call(this);
 
-      _this = _super.call(this); // Initialize Live2d framework, and get shared resources
-
+      // Initialize Live2d framework, and get shared resources
       _this._globalData = GlobalData.getInstance(parent);
       _this.parent = parent; // Live2dGameObject
-
       _this.viewMatrix = new ViewMatrix();
       _this._eyeBlinkIds = new csmVector();
       _this._lipSyncIds = new csmVector();
@@ -10924,44 +10753,36 @@
       _this._addParamValues = {};
       _this._pixelWidth = 0;
       _this._pixelHeight = 0;
-      _this._hitTestResult = {}; // this._wavFileHandler = new LAppWavFileHandler();
+      _this._hitTestResult = {};
 
+      // this._wavFileHandler = new LAppWavFileHandler();
       return _this;
     }
-
     _createClass(Model, [{
       key: "release",
       value: function release() {
         _get(_getPrototypeOf(Model.prototype), "release", this).call(this);
-
         this.parent = undefined;
         this._globalData = undefined;
       }
     }]);
-
     return Model;
   }(CubismUserModel);
-
   Object.assign(Model.prototype, Methods$1);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var SetModel = function SetModel(key, config) {
     if (this.key === key) {
       return this;
     }
-
     var data = this.scene.cache.custom.live2d.get(key);
-
     if (!data || !data.model) {
       console.error("Live2d: can't load ".concat(key, "'s assets"));
       return;
     }
-
     if (this.key !== undefined) {
       // Change model
       this.model.release(); // Release old model        
-
       this.model = new Model(this); // Create new model
     }
 
@@ -10969,11 +10790,9 @@
     this.model.setup(data);
     this.setSize(this.model._pixelWidth, this.model._pixelHeight);
     var autoPlayIdleMotion = GetValue$1(config, 'autoPlayIdleMotion', undefined);
-
     if (autoPlayIdleMotion !== undefined) {
       this.autoPlayIdleMotion(autoPlayIdleMotion);
     }
-
     return this;
   };
 
@@ -11003,11 +10822,9 @@
     if (typeof priority === 'string') {
       priority = PriorityModes[priority];
     }
-
     this.model.startMotion(group, no, priority);
     return this;
   };
-
   var PriorityModes = {
     none: PriorityNone,
     idle: PriorityIdle,
@@ -11032,21 +10849,18 @@
     // Not regiester 'idle' event, but also disable auto-play-idle-motion
     if (!this.autoPlayIdleMotionCallback && !motionName) {
       return this;
-    } // Register 'idle' event one time
+    }
 
-
+    // Register 'idle' event one time
     if (!this.autoPlayIdleMotionCallback) {
       this.autoPlayIdleMotionCallback = function () {
         if (!this.idleMotionName) {
           return;
         }
-
         this.startMotion(this.idleMotionName, undefined, PriorityIdle);
       };
-
       this.on('idle', this.autoPlayIdleMotionCallback, this);
     }
-
     this.idleMotionName = motionName;
     return this;
   };
@@ -11072,16 +10886,13 @@
 
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var LookAt = function LookAt(x, y, config) {
     if (IsPlainObject$3(x)) {
       config = x;
       x = undefined;
       y = undefined;
     }
-
     var modelX, modelY;
-
     if (x === undefined) {
       modelX = 0;
       modelY = 0;
@@ -11091,21 +10902,23 @@
       modelX = modelXY.x;
       modelY = modelXY.y;
     }
+    var params = this.getParameters();
 
-    var params = this.getParameters(); // Eyes
-
+    // Eyes
     var eyeBallXWeight = GetValue(config, 'eyeBallX', 1);
     var eyeBallYWeight = GetValue(config, 'eyeBallY', 1);
     params.EyeBallX = modelX * eyeBallXWeight;
-    params.EyeBallY = modelY * eyeBallYWeight; // Head
+    params.EyeBallY = modelY * eyeBallYWeight;
 
+    // Head
     var angleXWeight = GetValue(config, 'angleX', 30);
     var angleYWeight = GetValue(config, 'angleY', 30);
     var angleZWeight = GetValue(config, 'angleZ', 30);
     params.AngleX = modelX * angleXWeight;
     params.AngleY = modelY * angleYWeight;
-    params.AngleZ = -1 * modelX * modelY * angleZWeight; // Body
+    params.AngleZ = -1 * modelX * modelY * angleZWeight;
 
+    // Body
     var bodyAngleXWeight = GetValue(config, 'bodyAngleX', 10);
     params.BodyAngleX = modelX * bodyAngleXWeight;
     return this;
@@ -11123,11 +10936,9 @@
 
   var HitAreaCallback = function HitAreaCallback(shape, localX, localY, gameObject) {
     var model = gameObject.model;
-
     if (!model) {
       return false;
     }
-
     var matrixXY = model.localXYToModelMatrixXY(localX, localY, true);
     var x = matrixXY.x;
     var y = matrixXY.y;
@@ -11135,23 +10946,19 @@
     var count = modelSetting.getHitAreasCount();
     var anyHit = false;
     var hitTestResult = model._hitTestResult;
-
     for (var i = 0; i < count; i++) {
       var hitAreaName = modelSetting.getHitAreaName(i);
       var isHit = model.hitTest(hitAreaName, x, y);
       hitTestResult[hitAreaName] = isHit;
       anyHit = anyHit || isHit;
     }
-
     return anyHit;
   };
 
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GameObject = Phaser.GameObjects.GameObject;
-
   var SetInteractive = function SetInteractive(hitArea, hitAreaCallback, dropZone) {
     var isInit = !this.input;
-
     if (IsPlainObject$2(hitArea)) {
       hitArea.hitArea = HitAreaCallback;
       hitArea.hitAreaCallback = HitAreaCallback;
@@ -11159,9 +10966,7 @@
       hitArea = HitAreaCallback;
       hitAreaCallback = HitAreaCallback;
     }
-
     GameObject.prototype.setInteractive.call(this, hitArea, hitAreaCallback, dropZone);
-
     if (isInit) {
       this.on('pointerdown', function (pointer, localX, localY, event) {
         FireEvent(this, 'pointerdown', pointer, localX, localY, event);
@@ -11171,13 +10976,10 @@
         FireEvent(this, 'pointermove', pointer, localX, localY, event);
       });
     }
-
     return this;
   };
-
   var FireEvent = function FireEvent(gameObject, eventPrefix, pointer, localX, localY, event) {
     var hitTestResult = gameObject.hitTestResult;
-
     for (var name in hitTestResult) {
       if (hitTestResult[name]) {
         gameObject.emit("".concat(eventPrefix, "-").concat(name), pointer, localX, localY, event);
@@ -11196,60 +10998,49 @@
 
   var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
   var TransformXY = Phaser.Math.TransformXY;
-
   var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
     if (camera === undefined) {
       camera = gameObject.scene.cameras.main;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globOut$1;
     }
-
     var csx = camera.scrollX;
     var csy = camera.scrollY;
     var px = worldX + csx * gameObject.scrollFactorX - csx;
     var py = worldY + csy * gameObject.scrollFactorY - csy;
-
     if (gameObject.parentContainer) {
       if (tempMatrix === undefined) {
         tempMatrix = new TransformMatrix();
       }
-
       gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
       tempMatrix.applyInverse(px, py, out);
     } else {
       TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
     }
-
     out.x += gameObject.displayOriginX;
     out.y += gameObject.displayOriginY;
     return out;
   };
-
   var tempMatrix;
   var globOut$1 = {};
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-
   var WorldXYToModelXY = function WorldXYToModelXY(worldX, worldY, camera, out) {
     if (camera === undefined || camera === true || IsPlainObject$1(camera)) {
       out = camera;
       camera = this.scene.cameras.main;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globOut;
     }
-
     out = WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
     return this.model.localXYToModelMatrixXY(out.x, out.y, out);
   };
-
   var globOut = {};
 
   var SetTimeScale = function SetTimeScale(timeScale) {
@@ -11285,28 +11076,18 @@
 
   var Live2dGameObject = /*#__PURE__*/function (_Live2dGameObjectBase) {
     _inherits(Live2dGameObject, _Live2dGameObjectBase);
-
     var _super = _createSuper(Live2dGameObject);
-
     function Live2dGameObject(scene, x, y, key, config) {
       var _this;
-
       _classCallCheck(this, Live2dGameObject);
-
       _this = _super.call(this, scene, 'rexLive2d');
       _this.model = new Model(_assertThisInitialized(_this));
-
       _this.setModel(key, config);
-
       _this.setOrigin(0.5);
-
       _this.setPosition(x, y);
-
       _this.setTimeScale(1);
-
       return _this;
     }
-
     _createClass(Live2dGameObject, [{
       key: "preUpdate",
       value: function preUpdate(time, delta) {
@@ -11328,10 +11109,9 @@
         if (_get(_getPrototypeOf(Live2dGameObject.prototype), "alpha", this) === value) {
           return;
         }
-
         _set(_getPrototypeOf(Live2dGameObject.prototype), "alpha", value, this, true);
-
-        this.model.setOpacity(value); // But it won't change render result
+        this.model.setOpacity(value);
+        // But it won't change render result
         // Only work for hitTest
       }
     }, {
@@ -11361,10 +11141,8 @@
         return this.getHitTestResult();
       }
     }]);
-
     return Live2dGameObject;
   }(Live2dGameObjectBase);
-
   Object.assign(Live2dGameObject.prototype, Render, Methods);
 
   function Factory (x, y, key, config) {
@@ -11379,11 +11157,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var key = GetAdvancedValue(config, 'key');
     var gameObject = new Live2dGameObject(this.scene, 0, 0, key);
     BuildGameObject(this.scene, gameObject, config);
@@ -11392,30 +11168,22 @@
 
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var UUID = Phaser.Utils.String.UUID;
-
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits(AwaitFile, _Phaser$Loader$File);
-
     var _super = _createSuper(AwaitFile);
-
     function AwaitFile(loader, fileConfig) {
       _classCallCheck(this, AwaitFile);
-
       if (!fileConfig.hasOwnProperty('type')) {
         fileConfig.type = 'await';
       }
-
       if (!fileConfig.hasOwnProperty('url')) {
         fileConfig.url = '';
       }
-
       if (!fileConfig.hasOwnProperty('key')) {
         fileConfig.key = UUID();
       }
-
       return _super.call(this, loader, fileConfig);
     }
-
     _createClass(AwaitFile, [{
       key: "load",
       value: function load() {
@@ -11429,7 +11197,6 @@
           var scope = config.scope;
           var successCallback = this.onLoad.bind(this);
           var failureCallback = this.onError.bind(this);
-
           if (callback) {
             if (scope) {
               callback.call(scope, successCallback, failureCallback);
@@ -11452,30 +11219,24 @@
         this.loader.nextFile(this, false);
       }
     }]);
-
     return AwaitFile;
   }(Phaser.Loader.File);
 
   var LoadScript = function LoadScript(url, onload) {
     var scripts = document.getElementsByTagName('script');
-
     for (var i = 0, cnt = scripts.length; i < cnt; i++) {
       if (scripts[i].src.indexOf(url) != -1) {
         if (onload) {
           onload();
         }
-
         return;
       }
     }
-
     var newScriptTag = document.createElement('script');
     newScriptTag.setAttribute('src', url);
-
     if (onload) {
       newScriptTag.onload = onload;
     }
-
     document.head.appendChild(newScriptTag);
   };
 
@@ -11485,48 +11246,45 @@
     });
   };
 
+  // Invoke this method after loading live2dcubismcore.js, and before loading any model asset.
   var Initialize = function Initialize(config) {
     if (!window.Live2DCubismCore) {
       console.error('live2dcubismcore.js does not load');
-    } // Setup cubism
+    }
 
+    // Setup cubism
+    var option = new Option();
+    // TODO: option.logFunction, option.loggingLevel
+    CubismFramework.startUp(option);
 
-    var option = new Option(); // TODO: option.logFunction, option.loggingLevel
+    // Initialize cubism
+    CubismFramework.initialize();
 
-    CubismFramework.startUp(option); // Initialize cubism
-
-    CubismFramework.initialize(); // TODO: More...
+    // TODO: More...
   };
 
   var IDLE = 0;
   var LOADING = 1;
   var LOADED = 2;
   var Live2dCoreScriptState = IDLE;
-
   var SetState = function SetState(state) {
     Live2dCoreScriptState = state;
   };
-
   var IsIdle = function IsIdle() {
     return Live2dCoreScriptState === IDLE;
   };
-
   var IsLoaded = function IsLoaded() {
     return Live2dCoreScriptState === LOADED;
   };
 
   var Live2dCoreScriptFile = /*#__PURE__*/function (_AwaitFile) {
     _inherits(Live2dCoreScriptFile, _AwaitFile);
-
     var _super = _createSuper(Live2dCoreScriptFile);
-
     function Live2dCoreScriptFile(loader, url) {
       _classCallCheck(this, Live2dCoreScriptFile);
-
       if (url === undefined) {
         url = 'https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js';
       }
-
       var callback = function callback(successCallback, failureCallback) {
         LoadScriptPromise(url).then(function () {
           Initialize();
@@ -11534,11 +11292,9 @@
           successCallback();
         });
       };
-
       if (IsIdle) {
         SetState(LOADING);
       }
-
       return _super.call(this, loader, {
         type: 'live2dcore',
         key: 'live2dcore',
@@ -11547,7 +11303,6 @@
         }
       });
     }
-
     return _createClass(Live2dCoreScriptFile);
   }(AwaitFile);
 
@@ -11557,13 +11312,10 @@
   };
 
   var BinaryFile = Phaser.Loader.FileTypes.BinaryFile;
-
   var CreateBinaryFile = function CreateBinaryFile(loader, key, url, xhrSettings, dataKey) {
     var file = new BinaryFile(loader, key, url, xhrSettings);
     file.dataKey = dataKey; // Store data by dataKey into live2d cache later
-
     file.cache = false; // Don't store data into binary cache
-
     return file;
   };
 
@@ -12249,20 +12001,17 @@
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var ImageFile = Phaser.Loader.FileTypes.ImageFile;
-
   var LoadChildrenFiles = function LoadChildrenFiles(parent, setting) {
     var loader = parent.loader;
     var xhrSettings = GetFastValue$1(parent.config, 'xhrSettings');
     var key = parent.key;
     var homeDir = parent.homeDir;
     var requestUrls = []; // Load a file one time
+
     // Load CubismModel
-
     var modelFileName = setting.getModelFileName();
-
     if (modelFileName !== '') {
       var requestUrl = "".concat(homeDir).concat(modelFileName);
-
       if (requestUrls.indexOf(requestUrl) === -1) {
         var modelFile = CreateBinaryFile(loader, "".concat(key, "!").concat(modelFileName), requestUrl, xhrSettings, 'model');
         parent.addToMultiFile(modelFile);
@@ -12273,77 +12022,66 @@
       // Error
       console.error("Live2d: can't load model ".concat(key));
       return;
-    } // Load CubismExpression
+    }
 
-
+    // Load CubismExpression
     var cnt = setting.getExpressionCount();
-
     for (var i = 0; i < cnt; i++) {
       var expressionFileName = setting.getExpressionFileName(i);
       var expressionName = setting.getExpressionName(i);
       var requestUrl = "".concat(homeDir).concat(expressionFileName);
-
       if (requestUrls.indexOf(requestUrl) === -1) {
         var expressionFile = CreateBinaryFile(loader, "".concat(key, "!").concat(expressionFileName), requestUrl, xhrSettings, "expressions!!!".concat(expressionName));
         parent.addToMultiFile(expressionFile);
         loader.addFile(expressionFile);
         requestUrls.push(requestUrl);
       }
-    } // Load CubismPhysics
+    }
 
-
+    // Load CubismPhysics
     var physicsFileName = setting.getPhysicsFileName();
-
     if (physicsFileName !== '') {
       var requestUrl = "".concat(homeDir).concat(physicsFileName);
-
       if (requestUrls.indexOf(requestUrl) === -1) {
         var physicsFile = CreateBinaryFile(loader, "".concat(key, "!").concat(physicsFileName), requestUrl, xhrSettings, 'physics');
         parent.addToMultiFile(physicsFile);
         loader.addFile(physicsFile);
         requestUrls.push(requestUrl);
       }
-    } // Load CubismPose
+    }
 
-
+    // Load CubismPose
     var poseFileName = setting.getPoseFileName();
-
     if (poseFileName !== '') {
       var requestUrl = "".concat(homeDir).concat(poseFileName);
-
       if (requestUrls.indexOf(requestUrl) === -1) {
         var poseFile = CreateBinaryFile(loader, "".concat(key, "!").concat(poseFileName), requestUrl, xhrSettings, 'pose');
         parent.addToMultiFile(poseFile);
         loader.addFile(poseFile);
         requestUrls.push(requestUrl);
       }
-    } // Load UserData
+    }
 
-
+    // Load UserData
     var userDataFileName = setting.getUserDataFile();
-
     if (userDataFileName !== '') {
       var requestUrl = "".concat(homeDir).concat(userDataFileName);
-
       if (requestUrls.indexOf(requestUrl) === -1) {
         var userDataFile = CreateBinaryFile(loader, "".concat(key, "!").concat(userDataFileName), requestUrl, xhrSettings, 'userData');
         parent.addToMultiFile(userDataFile);
         loader.addFile(userDataFile);
         requestUrls.push(requestUrl);
       }
-    } // Load CubismMotion
+    }
 
-
+    // Load CubismMotion
     var groupCnt = setting.getMotionGroupCount();
-
     for (var gi = 0; gi < groupCnt; gi++) {
       var groupName = setting.getMotionGroupName(gi);
       var cnt = setting.getMotionCount(groupName);
-
       for (var i = 0; i < cnt; i++) {
         var motionFileName = setting.getMotionFileName(groupName, i);
         var requestUrl = "".concat(homeDir).concat(motionFileName);
-
         if (requestUrls.indexOf(requestUrl) === -1) {
           var motionFile = CreateBinaryFile(loader, "".concat(key, "!").concat(motionFileName), requestUrl, xhrSettings, "motions!!!".concat(groupName, "!!!").concat(i));
           parent.addToMultiFile(motionFile);
@@ -12351,22 +12089,19 @@
           requestUrls.push(requestUrl);
         }
       }
-    } // Load texture
+    }
 
-
+    // Load texture
     var textureCnt = setting.getTextureCount();
-
     for (var i = 0; i < textureCnt; i++) {
       var textureFileName = setting.getTextureFileName(i);
-
       if (textureFileName === '') {
         // Error
         continue;
-      } // TODO: store texture into live2d cache?
+      }
 
-
+      // TODO: store texture into live2d cache?
       var requestUrl = "".concat(homeDir).concat(textureFileName);
-
       if (requestUrls.indexOf(requestUrl) === -1) {
         var imageFile = new ImageFile(loader, "".concat(key, "!").concat(textureFileName), requestUrl, xhrSettings);
         imageFile.dataKey = "textures!!!".concat(i);
@@ -12380,23 +12115,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -12406,31 +12135,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -12438,61 +12166,53 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var Live2dFile = /*#__PURE__*/function (_Phaser$Loader$MultiF) {
     _inherits(Live2dFile, _Phaser$Loader$MultiF);
-
     var _super = _createSuper(Live2dFile);
-
     function Live2dFile(loader, key, url, xhrSettings) {
       var _this;
-
       _classCallCheck(this, Live2dFile);
-
       if (IsPlainObject(key)) {
         var config = key;
         key = GetFastValue(config, 'key');
         url = GetFastValue(config, 'url');
         xhrSettings = GetFastValue(config, 'xhrSettings');
       }
+      var cache = loader.cacheManager.custom.live2d;
 
-      var cache = loader.cacheManager.custom.live2d; // Load setting
-
+      // Load setting
       var settingFile = CreateBinaryFile(loader, key, url, xhrSettings, 'setting');
       _this = _super.call(this, loader, 'live2d', key, [settingFile]);
       _this.cache = cache;
       _this.homeDir = url.substring(0, url.lastIndexOf('/') + 1);
       return _this;
     }
-
     _createClass(Live2dFile, [{
       key: "onFileComplete",
       value: function onFileComplete(file) {
         var index = this.files.indexOf(file);
-
         if (index === -1) {
           return;
-        } // console.log(`Load file '${file.key}' at '${file.url}'`)
+        }
 
+        // console.log(`Load file '${file.key}' at '${file.url}'`)
 
         this.pending--;
-
         if (index === 0) {
           var arrayBuffer = file.data;
           var setting = new CubismModelSettingJson(arrayBuffer, arrayBuffer.byteLength);
-          file.data = setting; // Load remainder files by setting
+          file.data = setting;
 
+          // Load remainder files by setting
           LoadChildrenFiles(this, setting);
         }
       }
@@ -12504,42 +12224,37 @@
           var data = {
             key: this.key
           };
-
           for (var i = 0, cnt = this.files.length; i < cnt; i++) {
             var file = this.files[i];
-            var fileData = file.data; // Process textures
-
+            var fileData = file.data;
+            // Process textures
             if (file.dataKey.startsWith('textures')) {
               var key = file.key.replace("".concat(this.key, "!"), '');
-              var texture; // Add image to textureManager manually
-
+              var texture;
+              // Add image to textureManager manually
               if (!textureManager.exists(key)) {
                 texture = textureManager.addImage(key, file.data);
               } else {
                 texture = textureManager.get(key);
-              } // Store glTexture to live2d data cache
+              }
 
-
+              // Store glTexture to live2d data cache
               fileData = texture.source[0].glTexture;
             }
-
             SetValue(data, file.dataKey, fileData, '!!!');
             file.pendingDestroy();
           }
-
           this.cache.add(this.key, data);
           this.complete = true;
         }
       }
     }]);
-
     return Live2dFile;
   }(Phaser.Loader.MultiFile);
 
   var Live2dFileCallback = function Live2dFileCallback(key, url) {
     var loader = this;
     loader.cacheManager.addCustom('live2d');
-
     if (IsIdle()) {
       if (window.Live2DCubismCore) {
         // Core script is loaded before
@@ -12551,7 +12266,6 @@
         loader.addFile(new Live2dCoreScriptFile(loader));
       }
     }
-
     if (IsLoaded()) {
       // Core script is loaded
       // Can load model assets directly
@@ -12563,10 +12277,8 @@
         LoadFiles(loader, key, url);
       });
     }
-
     return this;
   };
-
   var LoadFiles = function LoadFiles(loader, key, url) {
     if (Array.isArray(key)) {
       for (var i = 0; i < key.length; i++) {
@@ -12581,31 +12293,27 @@
 
   var Live2dPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(Live2dPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(Live2dPlugin);
-
     function Live2dPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, Live2dPlugin);
-
       _this = _super.call(this, pluginManager);
       var game = pluginManager.game;
       var isWebGL = game.config.renderType === 2;
-
       if (!isWebGL) {
         console.error('Live2d can\'t run in CANVAS render mode.');
-      } // Register new file type to loader, to load live2d core script file (live2dcubismcore.min.js)
+      }
 
+      // Register new file type to loader, to load live2d core script file (live2dcubismcore.min.js)
+      pluginManager.registerFileType('rexLive2dCoreScript', CoreScriptFileCallback);
 
-      pluginManager.registerFileType('rexLive2dCoreScript', CoreScriptFileCallback); // Register new file type to loader, to load live2d model assets
+      // Register new file type to loader, to load live2d model assets
+      pluginManager.registerFileType('rexLive2d', Live2dFileCallback);
 
-      pluginManager.registerFileType('rexLive2d', Live2dFileCallback); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexLive2d', Factory, Creator);
       return _this;
     }
-
     _createClass(Live2dPlugin, [{
       key: "start",
       value: function start() {
@@ -12613,10 +12321,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return Live2dPlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.Live2d', Live2dGameObject);
 
   return Live2dPlugin;
