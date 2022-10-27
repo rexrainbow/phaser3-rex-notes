@@ -1,3 +1,2 @@
-import yaml from 'js-yaml';
-
-export default yaml;
+import jsyaml = require('js-yaml');
+export default jsyaml;
