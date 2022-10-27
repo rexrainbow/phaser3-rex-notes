@@ -67,6 +67,7 @@ var RunVerticalWrap = function (config) {
     var vAlign = GetValue(config, 'vAlign', 0);
 
     var result = {
+        callback: 'runVerticalWrap',
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
         padding: this.wrapPadding,

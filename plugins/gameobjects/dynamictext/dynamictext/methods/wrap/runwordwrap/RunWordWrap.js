@@ -79,6 +79,7 @@ var RunWordWrap = function (config) {
     var charWrap = GetValue(config, 'charWrap', false);
 
     var result = {
+        callback: 'runWordWrap',
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
         padding: this.wrapPadding,
