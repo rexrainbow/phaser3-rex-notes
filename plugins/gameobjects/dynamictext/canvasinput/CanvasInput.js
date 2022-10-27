@@ -110,6 +110,7 @@ class CanvasInput extends DynamicText {
 
         super.setSize(width, height);
 
+        // Run wrap if align is not top,left
         var vAlign = this.wrapConfig.vAlign,
             hAlign = this.wrapConfig.hAlign;
         if ((vAlign === 1) || (vAlign === 'center') || (vAlign === 2) || (vAlign === 'bottom') ||
