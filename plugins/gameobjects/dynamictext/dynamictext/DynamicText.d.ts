@@ -63,27 +63,26 @@ declare namespace DynamicText {
 
     interface IConfigWrapBase {
         callback?: string | Function,
-
-        padding?: {
-            top?: number, left?: number, right?: number, bottom?: number,
-        },
-
-        hAlign?: HAlignTypes,
-        vAlign?: VAlignTypes,
     }
 
     interface IConfigWordWrap extends IConfigWrapBase {
-
+        padding?: {
+            top?: number, left?: number, right?: number, bottom?: number,
+        },
         ascent?: number,
         lineHeight?: number,
         maxLines?: number,
         wrapWidth?: number,
         letterSpacing?: number,
+        hAlign?: HAlignTypes,
+        vAlign?: VAlignTypes,
         charWrap?: boolean
     }
 
     interface IConfigVerticalWrap extends IConfigWrapBase {
-
+        padding: {
+            top?: number, left?: number, right?: number, bottom?: number,
+        },
         lineWidth?: number,
         maxLines?: number,
         fixedChildHeight?: number,
@@ -91,6 +90,8 @@ declare namespace DynamicText {
         wrapHeight?: number,
         letterSpacing?: number,
         rtl?: boolean,
+        hAlign?: HAlignTypes,
+        vAlign?: VAlignTypes,
     }
 
     type BobBase = BobBaseClass;
