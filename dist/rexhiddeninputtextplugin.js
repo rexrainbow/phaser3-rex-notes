@@ -464,6 +464,10 @@
     if (this.isOpened) {
       return this;
     }
+    // Read only
+    if (this.readOnly) {
+      return this;
+    }
     SetLastOpenedEditor(this);
     this.isOpened = true;
     if (!this.node) {
@@ -616,16 +620,13 @@
     }, {
       key: "maxLength",
       get: function get() {
-        if (!this.node) {
-          return 0;
-        }
-        return this.node.maxLength;
+        return this.nodeConfig.maxLength;
       },
       set: function set(value) {
-        if (!this.node) {
-          return;
+        this.nodeConfig.maxLength = value;
+        if (this.node) {
+          this.node.maxLength = value;
         }
-        this.node.maxLength = value;
       }
     }, {
       key: "setMaxLength",
@@ -636,16 +637,13 @@
     }, {
       key: "minLength",
       get: function get() {
-        if (!this.node) {
-          return 0;
-        }
-        return this.node.minLength;
+        return this.nodeConfig.minLength;
       },
       set: function set(value) {
-        if (!this.node) {
-          return;
+        this.nodeConfig.minLength = value;
+        if (this.node) {
+          this.node.minLength = value;
         }
-        this.node.minLength = value;
       }
     }, {
       key: "setMinLength",
@@ -768,16 +766,13 @@
     }, {
       key: "readOnly",
       get: function get() {
-        if (!this.node) {
-          return false;
-        }
-        return this.node.readOnly;
+        return this.nodeConfig.readOnly;
       },
       set: function set(value) {
-        if (!this.node) {
-          return;
+        this.nodeConfig.readOnly = value;
+        if (this.node) {
+          this.node.readOnly = value;
         }
-        this.node.readOnly = value;
       }
     }, {
       key: "setReadOnly",

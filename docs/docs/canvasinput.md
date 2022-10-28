@@ -165,6 +165,7 @@ var txt = scene.add.rexCanvasInput({
     // inputType: 'text',  // 'text'|'password'|'textarea'|...                
 
     // enterClose: true,
+    // readOnly: false,
 
     // Callbacks
     // onOpen: function (textObject, hiddenInputText) {
@@ -204,7 +205,10 @@ var txt = scene.add.rexCanvasInput({
 - Parameters of hidden-text-editor
     - `inputType` : Type of element
         - `'text'`, `'password'`, `'textarea'`, ...
-    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
+    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
+    - `readOnly` : 
+        - `true` : un-editable.
+        - `false` : Editable. Defaule behavior.
 - Callbacks
     - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript
@@ -351,6 +355,30 @@ txt.close();
 ```javascript
 var isOpened = txt.isOpened;
 ```
+
+### Read only
+
+- Enable read only
+    ```javascript
+    txt.setReadOnly();
+    // txt.setReadOnly(true);
+    ```
+    or
+    ```javascript
+    txt.readOnly = true;
+    ```
+- Disable read only
+    ```javascript
+    txt.setReadOnly(false);
+    ```
+    or
+    ```javascript
+    txt.readOnly = false;
+    ```
+- Get read only
+    ```javascript
+    var readOnlyEanble = txt.readOnly;
+    ```
 
 ### Text
 

@@ -7130,6 +7130,10 @@
     if (this.isOpened) {
       return this;
     }
+    // Read only
+    if (this.readOnly) {
+      return this;
+    }
     SetLastOpenedEditor$1(this);
     this.isOpened = true;
     if (!this.node) {
@@ -7282,16 +7286,13 @@
     }, {
       key: "maxLength",
       get: function get() {
-        if (!this.node) {
-          return 0;
-        }
-        return this.node.maxLength;
+        return this.nodeConfig.maxLength;
       },
       set: function set(value) {
-        if (!this.node) {
-          return;
+        this.nodeConfig.maxLength = value;
+        if (this.node) {
+          this.node.maxLength = value;
         }
-        this.node.maxLength = value;
       }
     }, {
       key: "setMaxLength",
@@ -7302,16 +7303,13 @@
     }, {
       key: "minLength",
       get: function get() {
-        if (!this.node) {
-          return 0;
-        }
-        return this.node.minLength;
+        return this.nodeConfig.minLength;
       },
       set: function set(value) {
-        if (!this.node) {
-          return;
+        this.nodeConfig.minLength = value;
+        if (this.node) {
+          this.node.minLength = value;
         }
-        this.node.minLength = value;
       }
     }, {
       key: "setMinLength",
@@ -7434,16 +7432,13 @@
     }, {
       key: "readOnly",
       get: function get() {
-        if (!this.node) {
-          return false;
-        }
-        return this.node.readOnly;
+        return this.nodeConfig.readOnly;
       },
       set: function set(value) {
-        if (!this.node) {
-          return;
+        this.nodeConfig.readOnly = value;
+        if (this.node) {
+          this.node.readOnly = value;
         }
-        this.node.readOnly = value;
       }
     }, {
       key: "setReadOnly",
@@ -18277,6 +18272,7 @@
       config = {};
     }
     CopyProperty(parentConfig, config, 'inputType');
+    CopyProperty(parentConfig, config, 'readOnly');
     CopyProperty(parentConfig, config, 'enterClose');
     CopyProperty(parentConfig, config, 'onOpen');
     CopyProperty(parentConfig, config, 'onFocus');
@@ -18985,6 +18981,20 @@
       key: "setValue",
       value: function setValue(value) {
         this.value = value;
+        return this;
+      }
+    }, {
+      key: "readOnly",
+      get: function get() {
+        return this.textEdit.readOnly;
+      },
+      set: function set(value) {
+        this.textEdit.readOnly = value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(value) {
+        this.textEdit.setReadOnly(value);
         return this;
       }
     }, {
@@ -44076,8 +44086,8 @@
   };
 
   var CreateBackground = function CreateBackground(scene, config, styles, gameObject) {
-    styles = styles.background || {};
-    return CreateBackground$1(scene, config, styles, gameObject);
+    var backgroundStyle = styles.background || {};
+    return CreateBackground$1(scene, config, backgroundStyle, gameObject);
   };
 
   var PhaserText$1 = Phaser.GameObjects.Text;
@@ -44106,11 +44116,14 @@
 
   var CreateTitleLabel = function CreateTitleLabel(scene, config, styles, gameObject) {
     if (!gameObject) {
+      var backgroundStyle = styles.background || {};
+      var textStyle = styles.text || {};
+      styles.icon || {};
       gameObject = new TitleLabel(scene, _objectSpread2(_objectSpread2({}, styles), {}, {
         // Create game objects from config
-        background: CreateBackground$1(scene, undefined, styles.background || {}),
-        text: CreateText$1(scene, undefined, styles.text || {}),
-        icon: CreateImage$1(scene, undefined, styles.icon || {})
+        background: CreateBackground$1(scene, undefined, backgroundStyle),
+        text: CreateText$1(scene, undefined, textStyle),
+        icon: CreateImage$1(scene, undefined)
       }));
       scene.add.existing(gameObject);
     }
@@ -44172,13 +44185,13 @@
   };
 
   var CreateTextInput = function CreateTextInput(scene, config, styles, gameObject) {
-    styles = styles.input || {};
-    return CreateCanvasInput(scene, config, styles, gameObject);
+    var canvasInputStyle = styles.input || {};
+    return CreateCanvasInput(scene, config, canvasInputStyle, gameObject);
   };
 
   var CreateNumberInput = function CreateNumberInput(scene, config, styles, gameObject) {
-    styles = styles.input || {};
-    return CreateCanvasInput(scene, config, styles, gameObject).setNumberInput();
+    var canvasInputStyle = styles.input || {};
+    return CreateCanvasInput(scene, config, canvasInputStyle, gameObject).setNumberInput();
   };
 
   var CreateInputField = function CreateInputField(scene, config, styles, gameObject) {
@@ -44227,7 +44240,7 @@
         expand: true
       });
       _this.add(inputField, {
-        proportion: 1,
+        proportion: 2,
         expand: true
       });
       _this.addChildrenMap('title', inputTitle);
@@ -44280,8 +44293,8 @@
   }(Sizer);
 
   var CreateFolderBackground = function CreateFolderBackground(scene, config, styles, gameObject) {
-    styles = styles.folderBackground || {};
-    return CreateBackground$1(scene, config, styles, gameObject);
+    var folderBackgroundStyle = styles.folderBackground || {};
+    return CreateBackground$1(scene, config, folderBackgroundStyle, gameObject);
   };
 
   var CreateFolderTitle = function CreateFolderTitle(scene, config, styles, gameObject) {

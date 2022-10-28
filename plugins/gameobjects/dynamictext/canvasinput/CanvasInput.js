@@ -177,6 +177,19 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    get readOnly() {
+        return this.textEdit.readOnly;
+    }
+
+    set readOnly(value) {
+        this.textEdit.readOnly = value;
+    }
+
+    setReadOnly(value) {
+        this.textEdit.setReadOnly(value);
+        return this;
+    }
+
     open(onCloseCallback) {
         if (onCloseCallback) {
             this.textEdit.once('close', onCloseCallback)

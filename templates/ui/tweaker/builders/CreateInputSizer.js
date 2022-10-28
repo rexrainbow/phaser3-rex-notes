@@ -36,7 +36,7 @@ class InputSizer extends Sizer {
 
         this.add(
             inputField,
-            { proportion: 1, expand: true, }
+            { proportion: 2, expand: true, }
         );
 
         this.addChildrenMap('title', inputTitle);

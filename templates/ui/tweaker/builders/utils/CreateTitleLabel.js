@@ -6,13 +6,16 @@ import CreateImage from './CreateImage.js';
 
 var CreateTitleLabel = function (scene, config, styles, gameObject) {
     if (!gameObject) {
+        var backgroundStyle = styles.background || {};
+        var textStyle = styles.text || {};
+        var iconStyle = styles.icon || {};
         gameObject = new TitleLabel(scene, {
             ...styles,
 
             // Create game objects from config
-            background: CreateRoundRectangle(scene, undefined, (styles.background || {})),
-            text: CreateText(scene, undefined, (styles.text || {})),
-            icon: CreateImage(scene, undefined, (styles.icon || {})),
+            background: CreateRoundRectangle(scene, undefined, backgroundStyle),
+            text: CreateText(scene, undefined, textStyle),
+            icon: CreateImage(scene, undefined, iconStyle),
         });
 
         scene.add.existing(gameObject);

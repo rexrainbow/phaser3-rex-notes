@@ -1650,6 +1650,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#read-only" class="md-nav__link">
+    Read only
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
   </a>
@@ -8752,6 +8759,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#read-only" class="md-nav__link">
+    Read only
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
   </a>
@@ -8976,6 +8990,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
     <span class="c1">// inputType: &#39;text&#39;,  // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...                </span>
 
     <span class="c1">// enterClose: true,</span>
+    <span class="c1">// readOnly: false,</span>
 
     <span class="c1">// Callbacks</span>
     <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
@@ -9017,7 +9032,12 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>
 </ul>
 </li>
-<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is true.</li>
+<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is <code>true</code>.</li>
+<li><code>readOnly</code> : <ul>
+<li><code>true</code> : un-editable.</li>
+<li><code>false</code> : Editable. Defaule behavior.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Callbacks<ul>
@@ -9163,6 +9183,25 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <h4 id="is-opened">Is opened<a class="headerlink" href="#is-opened" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isOpened</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">isOpened</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="read-only">Read only<a class="headerlink" href="#read-only" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable read only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">();</span>
+<span class="c1">// txt.setReadOnly(true);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Disable read only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get read only
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">readOnlyEanble</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Display text on <a href="../dynamictext/">dynamic text game object</a><ul>

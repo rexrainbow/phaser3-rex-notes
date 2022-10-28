@@ -6,6 +6,10 @@ var Open = function () {
     if (this.isOpened) {
         return this;
     }
+    // Read only
+    if (this.readOnly) {
+        return this;
+    }
 
     SetLastOpenedEditor(this);
 

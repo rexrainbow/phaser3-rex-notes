@@ -96,6 +96,9 @@ declare class CanvasInput extends DynamicText {
     setValue(value: unknown): this;
     value: unknown;
 
+    setReadOnly(enable?: boolean): this;
+    readOnly: boolean;
+
     open(onCloseCallback?: Function): this;
     close(): this;
     readonly isOpened: boolean;
