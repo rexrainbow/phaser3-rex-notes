@@ -19,6 +19,7 @@ declare namespace Label {
 
         icon?: Phaser.GameObjects.GameObject,
         iconMask?: boolean,
+        iconSize?: number, iconWidth?: number, iconHeight?: number,
 
         text?: Phaser.GameObjects.GameObject,
         expandTextWidth?: boolean,
@@ -26,6 +27,7 @@ declare namespace Label {
 
         action?: Phaser.GameObjects.GameObject,
         actionMask?: boolean,
+        actionSize?: number, actionWidth?: number, actionHeight?: number,
 
         align?: AlignTypes,
     }
@@ -47,4 +49,29 @@ declare class Label extends Sizer {
     ): this;
     readonly texture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
     readonly frame: Phaser.Textures.Frame;
+
+    setIconTexture(
+        key: string | Phaser.Textures.Texture,
+        frame?: string | number
+    ): this;
+
+    setIconSize(
+        width?: number,
+        height?: number
+    ): this;
+    iconWidth: number;
+    iconHeight: number;
+
+    setActionTexture(
+        key: string | Phaser.Textures.Texture,
+        frame?: string | number
+    ): this;
+
+    setActionSize(
+        width?: number,
+        height?: number
+    ): this;
+    actionWidth: number;
+    actionHeight: number;
+
 }

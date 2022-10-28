@@ -22196,6 +22196,30 @@
     return maskGameObject;
   };
 
+  var SetDisplaySize = function SetDisplaySize(gameObject, width, height) {
+    if (!gameObject) {
+      return;
+    }
+    var unknownWidth = width == null;
+    var unknownHeight = height == null;
+    if (unknownWidth && unknownHeight) {
+      return gameObject;
+    }
+    if (!unknownWidth) {
+      gameObject.displayWidth = width;
+    }
+    if (!unknownHeight) {
+      gameObject.displayHeight = height;
+    }
+    if (unknownWidth) {
+      gameObject.scaleX = gameObject.scaleY;
+    }
+    if (unknownHeight) {
+      gameObject.scaleY = gameObject.scaleX;
+    }
+    return gameObject;
+  };
+
   var GetValue$r = Phaser.Utils.Objects.GetValue;
   var Label = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
@@ -22251,6 +22275,8 @@
         }
       }
 
+      var iconSize = GetValue$r(config, 'iconSize');
+      _this.setIconSize(GetValue$r(config, 'iconWidth', iconSize), GetValue$r(config, 'iconHeight', iconSize));
       if (text) {
         var expandTextWidth = GetValue$r(config, 'expandTextWidth', false);
         var expandTextHeight = GetValue$r(config, 'expandTextHeight', false);
@@ -22284,6 +22310,9 @@
           actionMask = AddChildMask.call(_assertThisInitialized(_this), action, action, 1); // Circle mask
         }
       }
+
+      var actionSize = GetValue$r(config, 'actionSize');
+      _this.setActionSize(GetValue$r(config, 'actionWidth', actionSize), GetValue$r(config, 'actionHeight', actionSize));
 
       // Add space
       if (align === 'center') {
@@ -22330,13 +22359,34 @@
 
       // Access icon game object
     }, {
-      key: "setTexture",
-      value: function setTexture(key, frame) {
+      key: "setIconTexture",
+      value: function setIconTexture(key, frame) {
         var imageObject = this.childrenMap.icon;
         if (imageObject === undefined) {
-          return;
+          return this;
         }
         imageObject.setTexture(key, frame);
+        SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
+        this.resetChildScaleState(imageObject);
+        return this;
+      }
+    }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        this.setIconTexture(key, frame);
+        return this;
+      }
+    }, {
+      key: "setIconSize",
+      value: function setIconSize(width, height) {
+        this.iconWidth = width;
+        this.iconHeight = height;
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+          return this;
+        }
+        SetDisplaySize(imageObject, width, height);
+        this.resetChildScaleState(imageObject);
         return this;
       }
     }, {
@@ -22358,11 +22408,38 @@
         return imageObject.frame;
       }
     }, {
+      key: "setActionTexture",
+      value: function setActionTexture(key, frame) {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return this;
+        }
+        imageObject.setTexture(key, frame);
+        SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
+        this.resetChildScaleState(imageObject);
+        return this;
+      }
+    }, {
+      key: "setActionSize",
+      value: function setActionSize(width, height) {
+        this.actionWidth = width;
+        this.actionHeight = height;
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return this;
+        }
+        SetDisplaySize(imageObject, width, height);
+        this.resetChildScaleState(imageObject);
+        return this;
+      }
+    }, {
       key: "runLayout",
       value: function runLayout(parent, newWidth, newHeight) {
         if (this.ignoreLayout) {
           return this;
         }
+        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
+        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
         _get(_getPrototypeOf(Label.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
