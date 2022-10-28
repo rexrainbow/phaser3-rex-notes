@@ -75,6 +75,14 @@ declare namespace Dialog {
 
         actionsBackground?: Phaser.GameObjects.GameObject,
 
+        proportion?: {
+            title?: number,
+            content?: number,
+            description?: number,
+            choices?: number,
+            actions?: number,
+        },
+
         expand?: {
             title?: boolean,
             content?: boolean,

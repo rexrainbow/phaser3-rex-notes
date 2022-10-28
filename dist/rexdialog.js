@@ -12309,8 +12309,10 @@
             bottom: titleSpace
           };
         }
+        var proportion = GetValue(config, 'proportion.title', 0);
         _this.add(titleSizer, {
           padding: padding,
+          proportion: proportion,
           expand: true
         });
       }
@@ -12322,10 +12324,12 @@
           right: GetValue(config, 'space.contentRight', 0),
           bottom: description || choices || actions ? contentSpace : 0
         };
+        var proportion = GetValue(config, 'proportion.content', 0);
         var expand = GetValue(config, 'expand.content', true);
         _this.add(content, {
           align: align,
           padding: padding,
+          proportion: proportion,
           expand: expand
         });
       }
@@ -12337,10 +12341,12 @@
           right: GetValue(config, 'space.descriptionRight', 0),
           bottom: choices || actions ? descriptionSpace : 0
         };
+        var proportion = GetValue(config, 'proportion.description', 0);
         var expand = GetValue(config, 'expand.description', true);
         _this.add(description, {
           align: align,
           padding: padding,
+          proportion: proportion,
           expand: expand
         });
       }
@@ -12389,10 +12395,12 @@
           bottom: actions ? choicesSpace : 0
         };
         var align = GetValue(config, 'align.choices', 'center');
+        var proportion = GetValue(config, 'proportion.choices', 0);
         var expand = GetValue(config, 'expand.choices', true);
         _this.add(choicesSizer, {
           align: align,
           padding: padding,
+          proportion: proportion,
           expand: expand
         });
       }
@@ -12415,9 +12423,11 @@
           left: GetValue(config, 'space.actionsLeft', 0),
           right: GetValue(config, 'space.actionsRight', 0)
         };
+        var proportion = GetValue(config, 'proportion.action', 0);
         _this.add(actionsSizer, {
           align: 'center',
           padding: padding,
+          proportion: proportion,
           expand: true
         });
       }

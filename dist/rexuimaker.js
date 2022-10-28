@@ -22900,8 +22900,10 @@
             bottom: titleSpace
           };
         }
+        var proportion = GetValue$p(config, 'proportion.title', 0);
         _this.add(titleSizer, {
           padding: padding,
+          proportion: proportion,
           expand: true
         });
       }
@@ -22913,10 +22915,12 @@
           right: GetValue$p(config, 'space.contentRight', 0),
           bottom: description || choices || actions ? contentSpace : 0
         };
+        var proportion = GetValue$p(config, 'proportion.content', 0);
         var expand = GetValue$p(config, 'expand.content', true);
         _this.add(content, {
           align: align,
           padding: padding,
+          proportion: proportion,
           expand: expand
         });
       }
@@ -22928,10 +22932,12 @@
           right: GetValue$p(config, 'space.descriptionRight', 0),
           bottom: choices || actions ? descriptionSpace : 0
         };
+        var proportion = GetValue$p(config, 'proportion.description', 0);
         var expand = GetValue$p(config, 'expand.description', true);
         _this.add(description, {
           align: align,
           padding: padding,
+          proportion: proportion,
           expand: expand
         });
       }
@@ -22980,10 +22986,12 @@
           bottom: actions ? choicesSpace : 0
         };
         var align = GetValue$p(config, 'align.choices', 'center');
+        var proportion = GetValue$p(config, 'proportion.choices', 0);
         var expand = GetValue$p(config, 'expand.choices', true);
         _this.add(choicesSizer, {
           align: align,
           padding: padding,
+          proportion: proportion,
           expand: expand
         });
       }
@@ -23006,9 +23014,11 @@
           left: GetValue$p(config, 'space.actionsLeft', 0),
           right: GetValue$p(config, 'space.actionsRight', 0)
         };
+        var proportion = GetValue$p(config, 'proportion.action', 0);
         _this.add(actionsSizer, {
           align: 'center',
           padding: padding,
+          proportion: proportion,
           expand: true
         });
       }
