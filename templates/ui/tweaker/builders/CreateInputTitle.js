@@ -1,14 +1,15 @@
-import CreateLabel from './utils/CreateLabel.js';
+import CreateTitleLabel from './utils/CreateTitleLabel.js';
 
 var CreateInputTitle = function (scene, config, styles, gameObject) {
-    styles = styles.inputTitle || {};
-    config = {
-        text: config.title,
+    var titleLabelStyle = styles.inputTitle || {};
+    var title = CreateTitleLabel(scene, undefined, titleLabelStyle, gameObject);
 
-        icon: config.icon,
-        iconFrame: config.iconFrame,
-    };
-    return CreateLabel(scene, config, styles, gameObject);
+    if (config.title) {
+        config.text = config.title;
+    }
+
+    title.setTitle(config);
+    return title;
 }
 
 export default CreateInputTitle;

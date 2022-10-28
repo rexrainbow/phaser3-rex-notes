@@ -6,9 +6,10 @@ var CreateInputSizer = function (scene, config, styles, gameObject) {
     if (!gameObject) {
         var inputTitle = CreateInputTitle(scene, config, styles);
         var inputField = CreateInputField(scene, config, styles);
+        var inputSizerStyle = styles.inputSizer || {};
         var inputSizerconfig = {
             ...config,
-            ...(styles.inputSizer || {}),
+            ...inputSizerStyle,
             inputTitle: inputTitle,
             inputField: inputField,
         }
@@ -30,7 +31,7 @@ class InputSizer extends Sizer {
 
         this.add(
             inputTitle,
-            { proportion: 1, }
+            { proportion: 1, expand: true, }
         );
 
         this.add(

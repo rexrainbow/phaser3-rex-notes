@@ -1600,6 +1600,19 @@
     Create instance
   </a>
   
+    <nav class="md-nav" aria-label="Create instance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#number-input" class="md-nav__link">
+    Number input
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1639,6 +1652,13 @@
           <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
   </a>
   
 </li>
@@ -8682,6 +8702,19 @@
     Create instance
   </a>
   
+    <nav class="md-nav" aria-label="Create instance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#number-input" class="md-nav__link">
+    Number input
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8721,6 +8754,13 @@
           <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
   </a>
   
 </li>
@@ -8946,8 +8986,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 
     <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
     <span class="c1">//     return text;</span>
-    <span class="c1">// },</span>
-    <span class="c1">// onUpdate: &#39;number&#39;,    // Only output number string</span>
+    <span class="c1">// },   </span>
 
     <span class="c1">// onAddChar: function(child, index, canvasInput) {</span>
     <span class="c1">//    child.modifyStyle({...})</span>
@@ -8964,6 +9003,10 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
     <span class="c1">//         </span>
     <span class="c1">//     });</span>
     <span class="c1">// },</span>
+
+    <span class="c1">// parseTextCallback: function(text) {</span>
+    <span class="c1">//     return text;</span>
+    <span class="c1">// }.</span>
 
 <span class="p">});</span>
 </code></pre></div>
@@ -9023,6 +9066,15 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
 </ul>
 </li>
+<li><code>parseTextCallback</code> : Callback of parsing text (<code>txt.text</code>) to value (<code>txt.value</code>)<ul>
+<li><code>undefined</code> : Bypass text to value. Default behavior.</li>
+<li>A function object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">text</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>focusStyle</code> : Will apply this style to background when focusing.<ul>
@@ -9069,6 +9121,9 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </ul>
 </li>
 </ul>
+<h4 id="number-input">Number input<a class="headerlink" href="#number-input" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setNumberInput</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
@@ -9134,6 +9189,33 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get. Parse text to value.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
+<span class="c1">// var value = txt.value;</span>
+</code></pre></div><ul>
+<li>Set <code>parseTextCallback</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setParseTextCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>callback</code> : <ul>
+<li><code>undefined</code> : Bypass text to value. Default behavior.</li>
+<li>A function object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">text</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set. Conver any type of <code>value</code> to string.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// txt.value = value;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
 <ul>

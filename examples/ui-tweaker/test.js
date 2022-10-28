@@ -14,13 +14,13 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('settings', 'assets/images/settings.png');
     }
 
     create() {
         var gameObject = this.add.circle(400, 300, 20, 0xff0000);
 
         var panel = this.rexUI.add.tweaker({
-            x: 400, y: 300,
             width: 300, height: 300,
 
             styles: {
@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
                         strokeColor: COLOR_LIGHT
                     },
 
-                    space: { left: 10, right: 10, top: 10, bottom: 10 }
+                    space: { item: 3 }
                 },
 
                 input: {
@@ -56,8 +56,19 @@ class Demo extends Phaser.Scene {
                 }
             },
         })
-            .addInput(gameObject, 'x')
-            .addInput(gameObject, 'y')
+            .setPosition(0, 0)
+            .setOrigin(0)
+            .layout();
+
+        panel
+            .addInput(
+                gameObject, 'x',
+                { icon: 'settings', iconSize: 24 }
+            )
+            .addInput(
+                gameObject, 'y',
+                { icon: 'settings', iconSize: 24 }
+            )
             .layout();
 
     }
