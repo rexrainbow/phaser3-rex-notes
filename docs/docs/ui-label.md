@@ -11,6 +11,7 @@ A container with an icon, text, and background.
 - [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
 - [Text wrap in horizontal label](https://codepen.io/rexrainbow/pen/rNdyveo)
 - [Text wrap in vertical label](https://codepen.io/rexrainbow/pen/vYRymQq)
+- [Icon size](https://codepen.io/rexrainbow/pen/jOKPKWa)
 
 ## Usage
 
@@ -88,13 +89,18 @@ var label = scene.rexUI.add.label({
     // rtl: false,
 
     background: backgroundGameObject,
+
     icon: iconGameObject,
-    iconMask: false,
+    // iconMask: false,
+    // iconSize: undefined, iconWidth: undefined, iconHeight: undefined,
+    
     text: textGameObject,
     expandTextWidth: false,
     expandTextHeight: false,
+
     action: actionGameObject,
-    actionMask: false,
+    // actionMask: false,
+    // actionSize: undefined, actionWidth: undefined, actionHeight: undefined,
 
     align: undefined,
 
@@ -137,6 +143,11 @@ var label = scene.rexUI.add.label({
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `iconSize` : Force display size of icon game object to `iconSize`x`iconSize`
+- `iconWidth` : Force display width of icon game object to `iconWidth`. 
+    - If `iconHeight` is `undefined`, set `scaleY` of icon game object to `scaleX` of icon game object, to keep size ratio.
+- `iconHeight` : Force display height of icon game object to `iconHeight`. 
+    - If `iconWidth` is `undefined`, set `scaleX` of icon game object to `scaleY` of icon game object, to keep size ratio.
 - `text` : Game object of text, optional.
 - `expandTextWidth` : 
     - `false` : Keep width of text to original size. Default behavior.
@@ -146,7 +157,12 @@ var label = scene.rexUI.add.label({
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
-- `align` : Alignment of icon, text, action-icon game objects.
+- `actionSize` : Force display size of action game object to `actionSize`x`actionSize`
+- `actionWidth` : Force display width of action game object to `actionWidth`. 
+    - If `actionHeight` is `undefined`, set `scaleY` of action game object to `scaleX` of action game object, to keep size ratio.
+- `actionHeight` : Force display height of action game object to `actionHeight`. 
+    - If `actionWidth` is `undefined`, set `scaleX` of action game object to `scaleY` of action game object, to keep size ratio.
+- `align` : Alignment of icon, text, action game objects.
     - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
     - `'center'` : Align game objects at center.
     - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
