@@ -44306,19 +44306,16 @@
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var CreateInputRow = function CreateInputRow(scene, config, style, gameObject) {
     if (!gameObject) {
-      var backgroundStyle = GetValue$c(style, 'background') || {};
-      var background = CreateBackground$1(scene, config, backgroundStyle);
       var titleStyle = GetValue$c(style, 'title') || {};
       var inputTitle = CreateInputTitle(scene, config, titleStyle);
       var inputTextStyle = GetValue$c(style, 'inputText') || {};
       var inputText = CreateInputField(scene, config, inputTextStyle);
-      var foregroundStyle = GetValue$c(style, 'foreground') || {};
-      var foreground = CreateBackground$1(scene, config, foregroundStyle);
+      var backgroundStyle = GetValue$c(style, 'background') || {};
+      var background = CreateBackground$1(scene, config, backgroundStyle);
       var inputSizerconfig = _objectSpread2(_objectSpread2(_objectSpread2({}, config), style), {}, {
-        background: background,
         inputTitle: inputTitle,
         inputText: inputText,
-        foreground: foreground
+        background: background
       });
       gameObject = new InputRow(scene, inputSizerconfig);
     }
@@ -44333,11 +44330,9 @@
       _classCallCheck(this, InputRow);
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker.InputRow';
-      var background = config.background;
       var inputTitle = config.inputTitle;
       var inputText = config.inputText;
-      var foreground = config.foreground;
-      _this.addBackground(background);
+      var background = config.background;
       var proportion = GetValue$c(config, 'proportion.title', 1);
       _this.add(inputTitle, {
         proportion: proportion,
@@ -44348,11 +44343,10 @@
         proportion: proportion,
         expand: true
       });
-      _this.addBackground(foreground);
-      _this.addChildrenMap('background', background);
+      _this.addBackground(background);
       _this.addChildrenMap('title', inputTitle);
       _this.addChildrenMap('inputText', inputText);
-      _this.addChildrenMap('foreground', foreground);
+      _this.addChildrenMap('background', background);
       _this.setupBinding();
       return _this;
     }

@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
                 },
 
                 inputRow: {
-                    foreground: {
+                    background: {
                         strokeColor: COLOR_LIGHT
                     },
 
