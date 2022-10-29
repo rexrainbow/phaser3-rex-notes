@@ -202,3 +202,9 @@ Set `enableCapture` to `false` to bypass key input to this input-text game objec
     hiddenInputText.on('textchange', function(text, textGameObject){
     })
     ```
+- Not a number input
+    ```javascript
+    hiddenInputText.on('nan', function(text){
+
+    })
+    ```

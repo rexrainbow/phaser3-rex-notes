@@ -13,9 +13,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var txt0 = CreateCanvasInput(this, '123').setPosition(400, 200)
+        var msg = this.add.text(0, 0, '');
 
-        var txt1 = CreateCanvasInput(this, '').setPosition(400, 400)
+        CreateCanvasInput(this, '123').setPosition(400, 200)
+            .on('nan', function (text) {
+                msg.text = `Input is not a number - ${text}`
+            })
+
+        CreateCanvasInput(this, '').setPosition(400, 400)
+            .on('nan', function (text) {
+                msg.text = `Input is not a number - ${text}`
+            })
     }
 
     update() { }

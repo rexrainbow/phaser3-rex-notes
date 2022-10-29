@@ -5155,6 +5155,7 @@
     }
     if (isNaN(text)) {
       // Enter a NaN character, back to previous text
+      hiddenInputText.emit('nan', text, hiddenInputText);
       text = previousText;
       var cursorPosition = hiddenInputText.cursorPosition - 1;
       hiddenInputText.setText(text);
@@ -5190,6 +5191,8 @@
         gameObject.emit('open');
       }).on('close', function () {
         gameObject.emit('close');
+      }).on('nan', function (text) {
+        gameObject.emit('nan', text);
       });
       return _this;
     }

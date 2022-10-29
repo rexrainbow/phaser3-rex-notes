@@ -26,6 +26,9 @@ class HiddenTextEdit extends HiddenTextEditBase {
             .on('close', function () {
                 gameObject.emit('close');
             })
+            .on('nan', function (text) {
+                gameObject.emit('nan', text);
+            })
     }
 
     initText() {

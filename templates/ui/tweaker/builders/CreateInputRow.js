@@ -7,7 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CreateInputRow = function (scene, config, style, gameObject) {
     if (!gameObject) {
-        var backgroundStyle = GetValue(style, 'background') || {};        
+        var backgroundStyle = GetValue(style, 'background') || {};
         var background = CreateRoundRectangle(scene, config, backgroundStyle);
 
         var titleStyle = GetValue(style, 'title') || {};
@@ -27,7 +27,7 @@ var CreateInputRow = function (scene, config, style, gameObject) {
             background: background,
             inputTitle: inputTitle,
             inputText: inputText,
-            foreground:foreground,
+            foreground: foreground,
         }
         gameObject = new InputRow(scene, inputSizerconfig);
     }
@@ -49,14 +49,16 @@ class InputRow extends Sizer {
 
         this.addBackground(background);
 
+        var proportion = GetValue(config, 'proportion.title', 1);
         this.add(
             inputTitle,
-            { proportion: 1, expand: true, }
+            { proportion: proportion, expand: true, }
         );
 
+        var proportion = GetValue(config, 'proportion.inputText', 2);
         this.add(
             inputText,
-            { proportion: 2, expand: true, }
+            { proportion: proportion, expand: true, }
         );
 
         this.addBackground(foreground);

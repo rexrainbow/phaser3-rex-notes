@@ -493,6 +493,12 @@ var isOpened = txt.isOpened;
         
     })
     ```
+- Not a number input
+    ```javascript
+    txt.on('nan', function(text){
+
+    })
+    ```
 
 ### Select text
 

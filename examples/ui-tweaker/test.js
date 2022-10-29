@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
                     },
 
                     title: {
-                        iconSize: 24,
+                        iconSize: 20,
                         space: { icon: 3 }
                     },
 
@@ -55,6 +55,11 @@ class Demo extends Phaser.Scene {
                             backgroundColor: 'white',
                         }
                     },
+
+                    proportion: {
+                        title: 1,
+                        inputText: 3
+                    }
                 },
 
                 space: {

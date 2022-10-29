@@ -7,10 +7,12 @@ var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
 
     if (isNaN(text)) {
         // Enter a NaN character, back to previous text
+        hiddenInputText.emit('nan', text, hiddenInputText);
+
         text = previousText;
         var cursorPosition = hiddenInputText.cursorPosition - 1;
         hiddenInputText.setText(text);
-        hiddenInputText.setCursorPosition(cursorPosition);
+        hiddenInputText.setCursorPosition(cursorPosition);        
     } else {
         // New number text, update previous texr
         hiddenInputText.previousText = text;
