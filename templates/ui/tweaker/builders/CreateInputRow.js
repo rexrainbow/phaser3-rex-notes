@@ -44,8 +44,6 @@ class InputRow extends Sizer {
         var inputText = config.inputText;
         var background = config.background;
 
-
-
         var proportion = GetValue(config, 'proportion.title', 1);
         this.add(
             inputTitle,
