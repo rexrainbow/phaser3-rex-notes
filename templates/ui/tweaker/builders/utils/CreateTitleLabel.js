@@ -4,13 +4,13 @@ import CreateText from './CreateText.js';
 import CreateImage from './CreateImage.js';
 
 
-var CreateTitleLabel = function (scene, config, styles, gameObject) {
+var CreateTitleLabel = function (scene, config, style, gameObject) {
     if (!gameObject) {
-        var backgroundStyle = styles.background || {};
-        var textStyle = styles.text || {};
-        var iconStyle = styles.icon || {};
+        var backgroundStyle = style.background || {};
+        var textStyle = style.text || {};
+        var iconStyle = style.icon || {};
         gameObject = new TitleLabel(scene, {
-            ...styles,
+            ...style,
 
             // Create game objects from config
             background: CreateRoundRectangle(scene, undefined, backgroundStyle),

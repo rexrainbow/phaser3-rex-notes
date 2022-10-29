@@ -1,8 +1,7 @@
 import CreateTitleLabel from './utils/CreateTitleLabel.js';
 
-var CreateInputTitle = function (scene, config, styles, gameObject) {
-    var titleLabelStyle = styles.inputTitle || {};
-    var title = CreateTitleLabel(scene, undefined, titleLabelStyle, gameObject);
+var CreateInputTitle = function (scene, config, style, gameObject) {
+    var title = CreateTitleLabel(scene, undefined, style, gameObject);
 
     if (config.title) {
         config.text = config.title;

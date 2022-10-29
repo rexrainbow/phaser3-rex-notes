@@ -2,9 +2,9 @@ import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import Tweaker from '../../templates/ui/tweaker/Tweaker.js';
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
+const COLOR_PRIMARY = 0x424242;
+const COLOR_LIGHT = 0x6d6d6d;
+const COLOR_DARK = 0x1b1b1b;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -29,26 +29,32 @@ class Demo extends Phaser.Scene {
                     strokeColor: 0x888888
                 },
 
-                inputTitle: {
-                    background: {
+                inputRow: {
+                    foreground: {
                         strokeColor: COLOR_LIGHT
                     },
 
-                    space: { item: 3 }
-                },
+                    title: {
+                        iconSize: 24,
+                        space: { icon: 3 }
+                    },
 
-                input: {
-                    background: {
-                        stroke: COLOR_LIGHT
+                    inputText: {
+                        background: {
+                            color: COLOR_DARK
+                        },
+                        focusStyle: {
+                            color: COLOR_PRIMARY,
+                        },
+                        style: {
+                            backgroundBottomY: 4,
+                            backgroundHeight: 18,
+                        },
+                        cursorStyle: {
+                            color: 'black',
+                            backgroundColor: 'white',
+                        }
                     },
-                    style: {
-                        backgroundBottomY: 4,
-                        backgroundHeight: 18,
-                    },
-                    cursorStyle: {
-                        color: 'black',
-                        backgroundColor: 'white',
-                    }
                 },
 
                 space: {
@@ -63,11 +69,11 @@ class Demo extends Phaser.Scene {
         panel
             .addInput(
                 gameObject, 'x',
-                { icon: 'settings', iconSize: 24 }
+                { icon: 'settings' }
             )
             .addInput(
                 gameObject, 'y',
-                { icon: 'settings', iconSize: 24 }
+                { icon: 'settings' }
             )
             .layout();
 

@@ -1,8 +1,15 @@
-var Make = function (name, config) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var Make = function (name, config, style) {
     var gameObject;
     var builder = this.builders[name];
     if (builder) {
-        gameObject = builder(this.scene, config, this.styles)
+        if (style === undefined) {
+            style = this.styles;
+        } else if (typeof (style) === 'string') {
+            style = GetValue(this.styles, style) || {};
+        }
+        gameObject = builder(this.scene, config, style);
     } else {
 
     }

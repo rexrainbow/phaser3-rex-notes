@@ -14,10 +14,10 @@ var AddInput = function (object, key, config) {
 
     config.view = GetInputType(object[key], config);
 
-    // Create InputSizer
-    var inputSizer = this.make('inputSizer', config);
+    // Create InputRow
+    var inputSizer = this.make('inputRow', config, 'inputRow');
 
-    // Add InputSizer to Tweaker
+    // Add InputRow to Tweaker
     this.add(
         inputSizer,
         { expand: true }

@@ -1,6 +1,6 @@
 const PhaserImage = Phaser.GameObjects.Image;
 
-var CreateImage = function (scene, config, styles, gameObject) {
+var CreateImage = function (scene, config, style, gameObject) {
     if (!gameObject) {
         gameObject = new PhaserImage(scene, 0, 0, '');
         scene.add.existing(gameObject);

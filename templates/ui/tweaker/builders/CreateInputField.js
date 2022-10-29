@@ -6,7 +6,7 @@ import CreateTextInput from './CreateTextInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
-var CreateInputField = function (scene, config, styles, gameObject) {
+var CreateInputField = function (scene, config, style, gameObject) {
     var viewType = config.view;
     var callback;
     switch (viewType) {
@@ -23,7 +23,7 @@ var CreateInputField = function (scene, config, styles, gameObject) {
             break;
     }
 
-    return callback(scene, config, styles, gameObject);
+    return callback(scene, config, style, gameObject);
 }
 
 export default CreateInputField;

@@ -1,8 +1,7 @@
 import CreateCanvasInput from './utils/CreateCanvasInput.js';
 
-var CreateNumberInput = function (scene, config, styles, gameObject) {
-    var canvasInputStyle = styles.input || {};
-    return CreateCanvasInput(scene, config, canvasInputStyle, gameObject)
+var CreateNumberInput = function (scene, config, style, gameObject) {
+    return CreateCanvasInput(scene, config, style, gameObject)
         .setNumberInput();
 }
 

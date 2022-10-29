@@ -1,4 +1,4 @@
-var CreateSliderInput = function (scene, config, styles, gameObject) {
+var CreateSliderInput = function (scene, config, style, gameObject) {
     return gameObject;
 }
 

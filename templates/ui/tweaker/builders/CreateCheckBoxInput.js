@@ -1,4 +1,4 @@
-var CreateCheckBoxInput = function (scene, config, styles, gameObject) {
+var CreateCheckBoxInput = function (scene, config, style, gameObject) {
     return gameObject;
 }
 

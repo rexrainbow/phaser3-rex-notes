@@ -1,8 +1,8 @@
 const PhaserText = Phaser.GameObjects.Text;
 
-var CreateText = function (scene, config, styles, gameObject) {
+var CreateText = function (scene, config, style, gameObject) {
     if (!gameObject) {
-        gameObject = new PhaserText(scene, 0, 0, '', styles);
+        gameObject = new PhaserText(scene, 0, 0, '', style);
         scene.add.existing(gameObject);
     }
 

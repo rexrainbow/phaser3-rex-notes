@@ -143,10 +143,10 @@ var label = scene.rexUI.add.label({
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
-- `iconSize` : Force display size of icon game object to `iconSize`x`iconSize`
-- `iconWidth` : Force display width of icon game object to `iconWidth`. 
+- `iconSize` : Set display size of icon game object to `iconSize`x`iconSize`
+- `iconWidth` : Set display width of icon game object to `iconWidth`. 
     - If `iconHeight` is `undefined`, set `scaleY` of icon game object to `scaleX` of icon game object, to keep size ratio.
-- `iconHeight` : Force display height of icon game object to `iconHeight`. 
+- `iconHeight` : Set display height of icon game object to `iconHeight`. 
     - If `iconWidth` is `undefined`, set `scaleX` of icon game object to `scaleY` of icon game object, to keep size ratio.
 - `text` : Game object of text, optional.
 - `expandTextWidth` : 
@@ -157,10 +157,10 @@ var label = scene.rexUI.add.label({
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
-- `actionSize` : Force display size of action game object to `actionSize`x`actionSize`
-- `actionWidth` : Force display width of action game object to `actionWidth`. 
+- `actionSize` : Set display size of action game object to `actionSize`x`actionSize`
+- `actionWidth` : Set display width of action game object to `actionWidth`. 
     - If `actionHeight` is `undefined`, set `scaleY` of action game object to `scaleX` of action game object, to keep size ratio.
-- `actionHeight` : Force display height of action game object to `actionHeight`. 
+- `actionHeight` : Set display height of action game object to `actionHeight`. 
     - If `actionWidth` is `undefined`, set `scaleX` of action game object to `scaleY` of action game object, to keep size ratio.
 - `align` : Alignment of icon, text, action game objects.
     - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.

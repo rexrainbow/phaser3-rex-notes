@@ -1,8 +1,8 @@
 import CanvasInput from '../../../canvasinput/CanvasInput.js';
 
-var CreateCanvasInput = function (scene, config, styles, gameObject) {
+var CreateCanvasInput = function (scene, config, style, gameObject) {
     if (!gameObject) {
-        gameObject = new CanvasInput(scene, styles);
+        gameObject = new CanvasInput(scene, style);
         scene.add.existing(gameObject);
     }
 
