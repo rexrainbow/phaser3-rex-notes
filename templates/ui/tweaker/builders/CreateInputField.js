@@ -12,12 +12,10 @@ var CreateInputField = function (scene, config, style, gameObject) {
     switch (viewType) {
         case StringType:
             callback = CreateTextInput;
-            style = style.inputText || {};
             break;
 
         case NumberType:
             callback = CreateNumberInput;
-            style = style.inputText || {};
             break;
 
         default:

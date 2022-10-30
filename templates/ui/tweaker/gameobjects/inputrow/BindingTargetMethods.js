@@ -3,11 +3,11 @@ export default {
         var inputField = this.childrenMap.inputField;
         inputField
             // Set text value to object when closing editor
-            .on('close', function () {
+            .on('valuechange', function (value) {
                 if (!this.bindTarget) {
                     return;
                 }
-                this.bindTarget[this.bindTargetKey] = inputField.getValue();;
+                this.bindTarget[this.bindTargetKey] = value;
             }, this);
 
         return this;
