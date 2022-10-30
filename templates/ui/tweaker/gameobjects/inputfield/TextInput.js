@@ -1,6 +1,6 @@
 import Sizer from '../../../sizer/Sizer.js';
 import InputFiledBase from './InputFieldBase.js';
-import CreateCanvasInput from './CreateCanvasInput.js';
+import CreateCanvasInput from '../utils/CreateCanvasInput.js';
 
 class TextInput extends InputFiledBase(Sizer) {
     constructor(scene, config) {
@@ -12,6 +12,7 @@ class TextInput extends InputFiledBase(Sizer) {
             orientation: 0, // x            
         }
         super(scene, sizerConfig);
+        this.type = 'rexTweaker.TextInput';
 
         var inputTextConfig = config.inputText;
         var inputText = CreateCanvasInput(scene, inputTextConfig);

@@ -4,6 +4,7 @@ import {
 } from '../utils/inputs/InputTypes.js';
 import CreateTextInput from './CreateTextInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
+import CreateNumberRangeInput from './CreateNumberRangeInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 var CreateInputField = function (scene, config, style, gameObject) {
@@ -16,6 +17,10 @@ var CreateInputField = function (scene, config, style, gameObject) {
 
         case NumberType:
             callback = CreateNumberInput;
+            break;
+
+        case NumberRangeType:
+            callback = CreateNumberRangeInput;
             break;
 
         default:

@@ -56,6 +56,15 @@ class Demo extends Phaser.Scene {
                         }
                     },
 
+                    slider: {
+                        track: {
+                            color: COLOR_DARK
+                        },
+                        thumb: {
+                            color: COLOR_PRIMARY,
+                        },
+                    },
+
                     proportion: {
                         title: 1,
                         inputText: 3
@@ -74,7 +83,7 @@ class Demo extends Phaser.Scene {
         panel
             .addInput(
                 gameObject, 'x',
-                { icon: 'settings' }
+                { icon: 'settings', min: 0, max: 800 }
             )
             .addInput(
                 gameObject, 'y',
