@@ -1,13 +1,13 @@
 export default {
     setupBinding() {
-        var inputText = this.childrenMap.inputText;
-        inputText
+        var inputField = this.childrenMap.inputField;
+        inputField
             // Set text value to object when closing editor
             .on('close', function () {
                 if (!this.bindTarget) {
                     return;
                 }
-                this.bindTarget[this.bindTargetKey] = inputText.getValue();;
+                this.bindTarget[this.bindTargetKey] = inputField.getValue();;
             }, this);
 
         return this;
@@ -32,8 +32,8 @@ export default {
             return this;
         }
 
-        var inputText = this.childrenMap.inputText;
-        inputText.setValue(this.bindTarget[this.bindTargetKey]);
+        var inputField = this.childrenMap.inputField;
+        inputField.setValue(this.bindTarget[this.bindTargetKey]);
 
         return this;
     },

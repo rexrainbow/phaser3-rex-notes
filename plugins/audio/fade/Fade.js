@@ -1,4 +1,5 @@
 import EaseValueTaskBase from '../../utils/componentbase/tweentask/EaseValueTaskBase.js';
+import IsSoundObject from '../../utils/system/IsSoundObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
@@ -6,11 +7,18 @@ const Linear = Phaser.Math.Linear;
 
 class Fade extends EaseValueTaskBase {
     constructor(scene, sound, config) {
-        sound.scene = scene;
+        if (IsSoundObject(scene)) {
+            config = sound;
+            sound = scene;
+            scene = undefined;
+        }
+
         sound.active = true;
+        sound.scene = scene;
+        sound.game = sound.manager.game;
 
         super(sound, config);
-        // this.parent = sound
+        // this.parent = parent
         // this.timer
 
         this.volume = {};
@@ -57,8 +65,8 @@ class Fade extends EaseValueTaskBase {
         return this;
     }
 
-    updateGameObject(sound, timer) {
-        sound.volume = Linear(this.volume.start, this.volume.end, timer.t);
+    updateGameObject(parent, timer) {
+        parent.volume = Linear(this.volume.start, this.volume.end, timer.t);
     }
 
     complete() {

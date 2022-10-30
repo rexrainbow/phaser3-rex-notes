@@ -1,6 +1,14 @@
 import Fade from './Fade.js';
+import IsSoundObject from '../../utils/system/IsSoundObject.js';
 
 var FadeOut = function (scene, sound, duration, destroy) {
+    if (IsSoundObject(scene)) {
+        destroy = duration;
+        duration = sound;
+        sound = scene;
+        scene = undefined;
+    }
+
     if (destroy === undefined) {
         destroy = true;
     }

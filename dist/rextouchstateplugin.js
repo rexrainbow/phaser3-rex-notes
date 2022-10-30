@@ -225,69 +225,10 @@
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
       // parent = bob object
       return object.parent.scene;
+    } else {
+      return null;
     }
   };
-
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var ComponentBase = /*#__PURE__*/function () {
-    function ComponentBase(parent, config) {
-      _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject or scene
-      this.scene = GetSceneObject(parent);
-      this.isShutdown = false;
-
-      // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
-
-      // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
-        // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
-      }
-    }
-    _createClass(ComponentBase, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // parent might not be shutdown yet
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
-          // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
-        }
-        this.destroyEventEmitter();
-        this.parent = undefined;
-        this.scene = undefined;
-        this.isShutdown = true;
-      }
-    }, {
-      key: "destroy",
-      value: function destroy(fromScene) {
-        this.shutdown(fromScene);
-      }
-    }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
-        this.destroy(true);
-      }
-    }, {
-      key: "onParentDestroy",
-      value: function onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
-      }
-    }]);
-    return ComponentBase;
-  }();
-  Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var GameClass = Phaser.Game;
   var IsGame = function IsGame(object) {
@@ -307,6 +248,85 @@
       return object.scene.sys.game;
     }
   };
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var ComponentBase = /*#__PURE__*/function () {
+    function ComponentBase(parent, config) {
+      _classCallCheck(this, ComponentBase);
+      this.parent = parent; // gameObject, scene, or game
+
+      this.scene = GetSceneObject(parent);
+      this.game = GetGame(parent);
+      this.isShutdown = false;
+
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
+
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
+        // bob object does not have event emitter
+      }
+    }
+    _createClass(ComponentBase, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
+          // bob object does not have event emitter
+        }
+
+        this.destroyEventEmitter();
+        this.parent = undefined;
+        this.scene = undefined;
+        this.game = undefined;
+        this.isShutdown = true;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy(fromScene) {
+        this.shutdown(fromScene);
+      }
+    }, {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
+        this.destroy(true);
+      }
+    }, {
+      key: "onParentDestroy",
+      value: function onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+      }
+    }]);
+    return ComponentBase;
+  }();
+  Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var GetTickDelta = function GetTickDelta(game) {
     return GetGame(game).loop.delta;

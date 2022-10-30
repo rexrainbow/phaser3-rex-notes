@@ -19,7 +19,7 @@ var OnParseSetSoundEffectVolumeTag = function (textPlayer, parser, config) {
 
 var SetSoundEffectVolume = function (volume) {
     // this: textPlayer
-    this.soundManager.setSoundEffectVolume(volume);
+    this.soundManager.setSoundEffectVolume(volume, true);
 }
 
 export default OnParseSetSoundEffectVolumeTag;

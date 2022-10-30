@@ -10,8 +10,7 @@ var CreateInputRow = function (scene, config, style, gameObject) {
         var titleStyle = GetValue(style, 'title') || {};
         var inputTitle = CreateTitleLabel(scene, config, titleStyle);
 
-        var inputTextStyle = GetValue(style, 'inputText') || {};
-        var inputText = CreateInputField(scene, config, inputTextStyle);
+        var inputField = CreateInputField(scene, config, style);
 
         var backgroundStyle = GetValue(style, 'background') || {};
         var background = CreateRoundRectangle(scene, config, backgroundStyle);
@@ -21,7 +20,7 @@ var CreateInputRow = function (scene, config, style, gameObject) {
             ...style,
 
             inputTitle: inputTitle,
-            inputText: inputText,
+            inputField: inputField,
             background: background,
         }
         gameObject = new InputRow(scene, inputSizerconfig);

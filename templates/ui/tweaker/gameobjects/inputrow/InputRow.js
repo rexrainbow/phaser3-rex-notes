@@ -9,7 +9,7 @@ class InputRow extends Sizer {
         this.type = 'rexTweaker.InputRow';
 
         var inputTitle = config.inputTitle;
-        var inputText = config.inputText;
+        var inputField = config.inputField;
         var background = config.background;
 
         var proportion = GetValue(config, 'proportion.title', 1);
@@ -18,16 +18,16 @@ class InputRow extends Sizer {
             { proportion: proportion, expand: true, }
         );
 
-        var proportion = GetValue(config, 'proportion.inputText', 2);
+        var proportion = GetValue(config, 'proportion.inputField', 2);
         this.add(
-            inputText,
+            inputField,
             { proportion: proportion, expand: true, }
         );
 
         this.addBackground(background);
 
         this.addChildrenMap('title', inputTitle);
-        this.addChildrenMap('inputText', inputText);
+        this.addChildrenMap('inputField', inputField);
         this.addChildrenMap('background', background);
 
         this.setupBinding();

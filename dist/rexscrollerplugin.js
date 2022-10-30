@@ -225,6 +225,27 @@
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
       // parent = bob object
       return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
   };
 
@@ -232,20 +253,29 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject or scene
+      this.parent = parent; // gameObject, scene, or game
+
       this.scene = GetSceneObject(parent);
+      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
       this.setEventEmitter(GetValue$4(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
         // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
     _createClass(ComponentBase, [{
@@ -257,16 +287,25 @@
         }
 
         // parent might not be shutdown yet
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
           // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
         }
+
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
+        this.game = undefined;
         this.isShutdown = true;
       }
     }, {
@@ -275,8 +314,8 @@
         this.shutdown(fromScene);
       }
     }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
         this.destroy(true);
       }
     }, {
@@ -899,25 +938,6 @@
     }]);
     return State;
   }(FSM);
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
 
   var GetTickDelta = function GetTickDelta(game) {
     return GetGame(game).loop.delta;

@@ -1,18 +1,20 @@
-import FadeIn from '../../../audio/fade/FadeIn.js';
-import FadeOut from '../../../audio/fade/FadeOut.js';
+import GetSoundManager from '../../../utils/system/GetSoundManager.js';
+import BackgroundMusicMethods from './BackgroundMusicMethods.js';
+import SoundEffectsMethods from './SoundEffectsMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const RemoveItem = Phaser.Utils.Array.Remove;
 
 class SoundManager {
-    constructor(scene, config) {
-        this.scene = scene;
-
-        // Sound effect will be destroyed when completed
-        this.soundEffects = [];
+    constructor(game, config) {
+        this.sound = GetSoundManager(game);
 
         // Background music will be (fade out)destroyed when play next one.
         this.backgroundMusic = undefined;
+        this._backgroundMusicVolume = GetValue(config, 'bgm.volume', 1);
+
+        // Sound effect will be destroyed when completed
+        this.soundEffects = [];
+        this._soundEffectsVolume = GetValue(config, 'soundEffect.volume', 1);
 
         this.setBackgroundMusicLoopValue(GetValue(config, 'bgm.loop', true));
         this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 500));
@@ -23,199 +25,53 @@ class SoundManager {
         }
     }
 
-    destroy(fromScene) {
-        if (this.soundEffects.length && !fromScene) {
+    destroy() {
+        if (this.soundEffects.length) {
             for (var i = this.soundEffects.length - 1; i >= 0; i--) {
                 this.soundEffects[i].destroy();
             }
         }
         this.soundEffects.length = 0;
 
-        if (this.backgroundMusic && !fromScene) {
+        if (this.backgroundMusic) {
             this.backgroundMusic.destroy();
         }
         this.backgroundMusic = undefined;
 
-        this.scene = undefined;
-    }
-
-    setBackgroundMusicLoopValue(value) {
-        this.backgroundMusicLoopValue = value;
-        return this;
-    }
-
-    setBackgroundMusicFadeTime(time) {
-        this.backgroundMusicFadeTime = time;
-        return this;
-    }
-
-    getSoundEffects() {
-        return this.soundEffects;
-    }
-
-    getLastSoundEffect() {
-        return this.soundEffects[this.soundEffects.length - 1];
-    }
-
-    getBackgroundMusic() {
-        return this.backgroundMusic;
-    }
-
-    playSoundEffect(key) {
-        var soundEffect = this.scene.sys.sound.add(key);
-        this.soundEffects.push(soundEffect);
-
-        soundEffect
-            .once('complete', function () {
-                soundEffect.destroy();
-
-                // SoundManager has been destroyed
-                if (!this.scene) {
-                    return;
-                }
-                RemoveItem(this.soundEffects, soundEffect);
-            }, this)
-            .once('destroy', function () {
-                // SoundManager has been destroyed
-                if (!this.scene) {
-                    return;
-                }
-                RemoveItem(this.soundEffects, soundEffect);
-            }, this)
-            .play();
+        this.sound = undefined;
 
         return this;
     }
 
-    setSoundEffectVolume(volume) {
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-            soundEffect.setVolume(volume);
-        }
-
-        return this;
+    get backgroundMusicVolume() {
+        return this._backgroundMusicVolume;
     }
 
-    fadeInSoundEffect(time) {
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-            FadeIn(this.scene, soundEffect, time);
-        }
-
-        return this;
-    }
-
-    fadeOutSoundEffect(time, isStopped) {
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-            FadeOut(this.scene, soundEffect, time, isStopped);
-        }
-
-        return this;
-    }
-
-    fadeOutAllSoundEffects(time, isStopped) {
-        for (var i = this.soundEffects.length - 1; i >= 0; i--) {
-            FadeOut(this.scene, this.soundEffects[i], time, isStopped);
-        }
-
-        return this;
-    }
-
-    setCurrentBackgroundMusic(music) {
-        this.backgroundMusic = music;
-
-        if (music) {
-            music.setLoop(this.backgroundMusicLoopValue);
-            music
-                .once('complete', function () {
-                    this.backgroundMusic.destroy();
-                    this.backgroundMusic = undefined;
-                }, this)
-                .once('destroy', function () {
-                    this.backgroundMusic = undefined;
-                }, this)
-
-            if (!music.isPlaying) {
-                music.play();
-            }
-        }
-    }
-
-    playBackgroundMusic(key) {
-        // Don't re-play the same background music
-        if (this.backgroundMusic && (this.backgroundMusic.key === key)) {
-            return this;
-        }
-
-        this.stopBackgroundMusic(); // Stop previous background music
-
-        this.setCurrentBackgroundMusic(this.scene.sys.sound.add(key));
-
-        if (this.backgroundMusicFadeTime > 0) {
-            this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
-        }
-        return this;
-    }
-
-    pauseBackgroundMusic() {
+    set backgroundMusicVolume(value) {
+        this._backgroundMusicVolume = value;
         if (this.backgroundMusic) {
-            this.backgroundMusic.pause();
+            this.backgroundMusic.setVolume(value);
         }
-        return this;
     }
 
-    resumeBackgroundMusic() {
-        if (this.backgroundMusic) {
-            this.backgroundMusic.resume();
-        }
-        return this;
+    get soundEffectsVolume() {
+        return this._soundEffectsVolume;
     }
 
-    stopBackgroundMusic() {
-        if (this.backgroundMusic) {
-            if (this.backgroundMusicFadeTime > 0) {
-                this.fadeOutBackgroundMusic(this.backgroundMusicFadeTime, true);
-
-            } else {
-                this.backgroundMusic.stop();
-                this.backgroundMusic.destroy();
-                this.backgroundMusic = undefined;
-            }
+    set soundEffectsVolume(value) {
+        this._soundEffectsVolume = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+            soundEffects[i].setVolume(value);
         }
-        return this;
-    }
-
-    fadeInBackgroundMusic(time) {
-        if (this.backgroundMusic) {
-            FadeIn(this.scene, this.backgroundMusic, time);
-        }
-
-        return this;
-    }
-
-    fadeOutBackgroundMusic(time, isStopped) {
-        if (this.backgroundMusic) {
-            FadeOut(this.scene, this.backgroundMusic, time, isStopped);
-        }
-
-        return this;
-    }
-
-    crossFadeBackgroundMusic(key, time) {
-        var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
-        this.backgroundMusicFadeTime = 0;
-
-        this
-            .fadeOutBackgroundMusic(time, true)
-            .playBackgroundMusic(key)
-            .fadeInBackgroundMusic(time);
-
-        this.backgroundMusicFadeTime = backgroundMusicFadeTimeSave;
-
-        return this;
     }
 
 }
+
+Object.assign(
+    SoundManager.prototype,
+    BackgroundMusicMethods,
+    SoundEffectsMethods,
+)
 
 export default SoundManager;

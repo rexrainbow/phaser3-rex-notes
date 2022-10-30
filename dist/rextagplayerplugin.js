@@ -152,6 +152,18 @@
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
+  var SceneClass = Phaser.Scene;
+  var IsSceneObject = function IsSceneObject(object) {
+    return object instanceof SceneClass;
+  };
+
+  var GetSoundManager = function GetSoundManager(game) {
+    if (IsSceneObject(game)) {
+      return game.sys.sound;
+    }
+    return game.sound;
+  };
+
   var EventEmitterMethods = {
     setEventEmitter: function setEventEmitter(eventEmitter, EventEmitterClass) {
       if (EventEmitterClass === undefined) {
@@ -233,11 +245,6 @@
     }
   };
 
-  var SceneClass = Phaser.Scene;
-  var IsSceneObject = function IsSceneObject(object) {
-    return object instanceof SceneClass;
-  };
-
   var GetSceneObject = function GetSceneObject(object) {
     if (object == null || _typeof(object) !== 'object') {
       return null;
@@ -250,6 +257,27 @@
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
       // parent = bob object
       return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
   };
 
@@ -257,20 +285,29 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject or scene
+      this.parent = parent; // gameObject, scene, or game
+
       this.scene = GetSceneObject(parent);
+      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
       this.setEventEmitter(GetValue$f(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
         // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
     _createClass(ComponentBase, [{
@@ -282,16 +319,25 @@
         }
 
         // parent might not be shutdown yet
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
           // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
         }
+
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
+        this.game = undefined;
         this.isShutdown = true;
       }
     }, {
@@ -300,8 +346,8 @@
         this.shutdown(fromScene);
       }
     }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
         this.destroy(true);
       }
     }, {
@@ -450,22 +496,35 @@
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
       _this = _super.call(this, parent, config);
-      _this.tickEventName = GetValue$d(config, 'tickEventName', 'update');
+
+      // scene update : update, preupdate, postupdate, prerender, render
+      // game update : step, poststep, 
+
+      // If this.scene is not available, use game's 'step' event
+      var defaultEventName = _this.scene ? 'update' : 'step';
+      _this.tickEventName = GetValue$d(config, 'tickEventName', defaultEventName);
+      _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
     _createClass(SceneUpdateTickTask, [{
       key: "startTicking",
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-        this.scene.sys.events.on(this.tickEventName, this.update, this);
+        if (this.isSceneTicker) {
+          this.scene.sys.events.on(this.tickEventName, this.update, this);
+        } else {
+          this.game.events.on(this.tickEventName, this.update, this);
+        }
       }
     }, {
       key: "stopTicking",
       value: function stopTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-        if (this.scene) {
+        if (this.isSceneTicker && this.scene) {
           // Scene might be destoryed
           this.scene.sys.events.off(this.tickEventName, this.update, this);
+        } else if (this.game) {
+          this.game.events.off(this.tickEventName, this.update, this);
         }
       }
 
@@ -475,6 +534,9 @@
     }]);
     return SceneUpdateTickTask;
   }(TickTask);
+  var IsGameUpdateEvent = function IsGameUpdateEvent(eventName) {
+    return eventName === 'step' || eventName === 'poststep';
+  };
 
   var GetValue$c = Phaser.Utils.Objects.GetValue;
   var Clamp$1 = Phaser.Math.Clamp;
@@ -862,6 +924,11 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
+  var SoundObjectClass = Phaser.Sound.BaseSound;
+  var IsSoundObject = function IsSoundObject(object) {
+    return object instanceof SoundObjectClass;
+  };
+
   var GetValue$a = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear = Phaser.Math.Linear;
@@ -871,10 +938,16 @@
     function Fade(scene, sound, config) {
       var _this;
       _classCallCheck(this, Fade);
-      sound.scene = scene;
+      if (IsSoundObject(scene)) {
+        config = sound;
+        sound = scene;
+        scene = undefined;
+      }
       sound.active = true;
+      sound.scene = scene;
+      sound.game = sound.manager.game;
       _this = _super.call(this, sound, config);
-      // this.parent = sound
+      // this.parent = parent
       // this.timer
 
       _this.volume = {};
@@ -919,8 +992,8 @@
       }
     }, {
       key: "updateGameObject",
-      value: function updateGameObject(sound, timer) {
-        sound.volume = Linear(this.volume.start, this.volume.end, timer.t);
+      value: function updateGameObject(parent, timer) {
+        parent.volume = Linear(this.volume.start, this.volume.end, timer.t);
       }
     }, {
       key: "complete",
@@ -945,6 +1018,13 @@
   };
 
   var FadeIn = function FadeIn(scene, sound, duration, endVolume, startVolume) {
+    if (IsSoundObject(scene)) {
+      startVolume = endVolume;
+      endVolume = duration;
+      duration = sound;
+      sound = scene;
+      scene = undefined;
+    }
     if (endVolume === undefined) {
       endVolume = 1;
     }
@@ -980,6 +1060,12 @@
   };
 
   var FadeOut = function FadeOut(scene, sound, duration, destroy) {
+    if (IsSoundObject(scene)) {
+      destroy = duration;
+      duration = sound;
+      sound = scene;
+      scene = undefined;
+    }
     if (destroy === undefined) {
       destroy = true;
     }
@@ -1007,18 +1093,181 @@
     return sound;
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
-  var SoundManager = /*#__PURE__*/function () {
-    function SoundManager(scene, config) {
-      _classCallCheck(this, SoundManager);
-      this.scene = scene;
+  var BackgroundMusicMethods = {
+    setBackgroundMusicLoopValue: function setBackgroundMusicLoopValue(value) {
+      this.backgroundMusicLoopValue = value;
+      return this;
+    },
+    setBackgroundMusicFadeTime: function setBackgroundMusicFadeTime(time) {
+      this.backgroundMusicFadeTime = time;
+      return this;
+    },
+    getBackgroundMusic: function getBackgroundMusic() {
+      return this.backgroundMusic;
+    },
+    // Internal method
+    setCurrentBackgroundMusic: function setCurrentBackgroundMusic(music) {
+      this.backgroundMusic = music;
+      if (music) {
+        music.setLoop(this.backgroundMusicLoopValue);
+        music.once('complete', function () {
+          if (this.backgroundMusic === music) {
+            this.backgroundMusic.destroy();
+            this.backgroundMusic = undefined;
+          }
+        }, this).once('destroy', function () {
+          if (this.backgroundMusic === music) {
+            this.backgroundMusic = undefined;
+          }
+        }, this);
+        if (!music.isPlaying) {
+          music.play();
+        }
+      }
+      return this;
+    },
+    playBackgroundMusic: function playBackgroundMusic(key) {
+      // Don't re-play the same background music
+      if (this.backgroundMusic && this.backgroundMusic.key === key) {
+        return this;
+      }
+      this.stopBackgroundMusic(); // Stop previous background music
 
-      // Sound effect will be destroyed when completed
-      this.soundEffects = [];
+      this.setCurrentBackgroundMusic(this.sound.add(key));
+      if (this.backgroundMusicFadeTime > 0) {
+        this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
+      }
+      return this;
+    },
+    pauseBackgroundMusic: function pauseBackgroundMusic() {
+      if (this.backgroundMusic) {
+        this.backgroundMusic.pause();
+      }
+      return this;
+    },
+    resumeBackgroundMusic: function resumeBackgroundMusic() {
+      if (this.backgroundMusic) {
+        this.backgroundMusic.resume();
+      }
+      return this;
+    },
+    stopBackgroundMusic: function stopBackgroundMusic() {
+      if (this.backgroundMusic) {
+        if (this.backgroundMusicFadeTime > 0) {
+          this.fadeOutBackgroundMusic(this.backgroundMusicFadeTime, true);
+        } else {
+          this.backgroundMusic.stop();
+          this.backgroundMusic.destroy();
+          this.backgroundMusic = undefined;
+        }
+      }
+      return this;
+    },
+    fadeInBackgroundMusic: function fadeInBackgroundMusic(time) {
+      if (this.backgroundMusic) {
+        FadeIn(this.backgroundMusic, time, this.backgroundMusicVolume, 0);
+      }
+      return this;
+    },
+    fadeOutBackgroundMusic: function fadeOutBackgroundMusic(time, isStopped) {
+      if (this.backgroundMusic) {
+        FadeOut(this.backgroundMusic, time, isStopped);
+      }
+      return this;
+    },
+    crossFadeBackgroundMusic: function crossFadeBackgroundMusic(key, time) {
+      var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
+      this.backgroundMusicFadeTime = 0;
+      this.fadeOutBackgroundMusic(time, true).playBackgroundMusic(key).fadeInBackgroundMusic(time);
+      this.backgroundMusicFadeTime = backgroundMusicFadeTimeSave;
+      return this;
+    },
+    setBackgroundMusicVolume: function setBackgroundMusicVolume(volume) {
+      this.backgroundMusicVolume = volume;
+      return this;
+    }
+  };
+
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var SoundEffectsMethods = {
+    getSoundEffects: function getSoundEffects() {
+      return this.soundEffects;
+    },
+    getLastSoundEffect: function getLastSoundEffect() {
+      return this.soundEffects[this.soundEffects.length - 1];
+    },
+    playSoundEffect: function playSoundEffect(key) {
+      var soundEffect = this.sound.add(key);
+      soundEffect.setVolume(this.soundEffectsVolume);
+      this.soundEffects.push(soundEffect);
+      soundEffect.once('complete', function () {
+        soundEffect.destroy();
+
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$1(this.soundEffects, soundEffect);
+      }, this).once('destroy', function () {
+        // SoundManager has been destroyed
+        if (!this.sound) {
+          return;
+        }
+        RemoveItem$1(this.soundEffects, soundEffect);
+      }, this).play();
+      return this;
+    },
+    fadeInSoundEffect: function fadeInSoundEffect(time) {
+      var soundEffect = this.getLastSoundEffect();
+      if (soundEffect) {
+        FadeIn(soundEffect, time, this.soundEffectsVolume, 0);
+      }
+      return this;
+    },
+    fadeOutSoundEffect: function fadeOutSoundEffect(time, isStopped) {
+      var soundEffect = this.getLastSoundEffect();
+      if (soundEffect) {
+        FadeOut(soundEffect, time, isStopped);
+      }
+      return this;
+    },
+    fadeOutAllSoundEffects: function fadeOutAllSoundEffects(time, isStopped) {
+      for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+        FadeOut(this.soundEffects[i], time, isStopped);
+      }
+      return this;
+    },
+    setSoundEffectVolume: function setSoundEffectVolume(volume, lastSoundEffect) {
+      if (lastSoundEffect === undefined) {
+        lastSoundEffect = false;
+      }
+      if (lastSoundEffect) {
+        // Set volume of last sound effect
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+          soundEffect.setVolume(volume);
+        }
+      } else {
+        // Set volume of all sound effects
+        this.soundEffectsVolume = volume;
+      }
+      return this;
+    }
+  };
+
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var SoundManager = /*#__PURE__*/function () {
+    function SoundManager(game, config) {
+      _classCallCheck(this, SoundManager);
+      this.sound = GetSoundManager(game);
 
       // Background music will be (fade out)destroyed when play next one.
       this.backgroundMusic = undefined;
+      this._backgroundMusicVolume = GetValue$9(config, 'bgm.volume', 1);
+
+      // Sound effect will be destroyed when completed
+      this.soundEffects = [];
+      this._soundEffectsVolume = GetValue$9(config, 'soundEffect.volume', 1);
       this.setBackgroundMusicLoopValue(GetValue$9(config, 'bgm.loop', true));
       this.setBackgroundMusicFadeTime(GetValue$9(config, 'bgm.fade', 500));
       var initialBackgroundMusic = GetValue$9(config, 'bgm.initial', undefined);
@@ -1028,193 +1277,47 @@
     }
     _createClass(SoundManager, [{
       key: "destroy",
-      value: function destroy(fromScene) {
-        if (this.soundEffects.length && !fromScene) {
+      value: function destroy() {
+        if (this.soundEffects.length) {
           for (var i = this.soundEffects.length - 1; i >= 0; i--) {
             this.soundEffects[i].destroy();
           }
         }
         this.soundEffects.length = 0;
-        if (this.backgroundMusic && !fromScene) {
+        if (this.backgroundMusic) {
           this.backgroundMusic.destroy();
         }
         this.backgroundMusic = undefined;
-        this.scene = undefined;
-      }
-    }, {
-      key: "setBackgroundMusicLoopValue",
-      value: function setBackgroundMusicLoopValue(value) {
-        this.backgroundMusicLoopValue = value;
+        this.sound = undefined;
         return this;
       }
     }, {
-      key: "setBackgroundMusicFadeTime",
-      value: function setBackgroundMusicFadeTime(time) {
-        this.backgroundMusicFadeTime = time;
-        return this;
-      }
-    }, {
-      key: "getSoundEffects",
-      value: function getSoundEffects() {
-        return this.soundEffects;
-      }
-    }, {
-      key: "getLastSoundEffect",
-      value: function getLastSoundEffect() {
-        return this.soundEffects[this.soundEffects.length - 1];
-      }
-    }, {
-      key: "getBackgroundMusic",
-      value: function getBackgroundMusic() {
-        return this.backgroundMusic;
-      }
-    }, {
-      key: "playSoundEffect",
-      value: function playSoundEffect(key) {
-        var soundEffect = this.scene.sys.sound.add(key);
-        this.soundEffects.push(soundEffect);
-        soundEffect.once('complete', function () {
-          soundEffect.destroy();
-
-          // SoundManager has been destroyed
-          if (!this.scene) {
-            return;
-          }
-          RemoveItem$1(this.soundEffects, soundEffect);
-        }, this).once('destroy', function () {
-          // SoundManager has been destroyed
-          if (!this.scene) {
-            return;
-          }
-          RemoveItem$1(this.soundEffects, soundEffect);
-        }, this).play();
-        return this;
-      }
-    }, {
-      key: "setSoundEffectVolume",
-      value: function setSoundEffectVolume(volume) {
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-          soundEffect.setVolume(volume);
-        }
-        return this;
-      }
-    }, {
-      key: "fadeInSoundEffect",
-      value: function fadeInSoundEffect(time) {
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-          FadeIn(this.scene, soundEffect, time);
-        }
-        return this;
-      }
-    }, {
-      key: "fadeOutSoundEffect",
-      value: function fadeOutSoundEffect(time, isStopped) {
-        var soundEffect = this.getLastSoundEffect();
-        if (soundEffect) {
-          FadeOut(this.scene, soundEffect, time, isStopped);
-        }
-        return this;
-      }
-    }, {
-      key: "fadeOutAllSoundEffects",
-      value: function fadeOutAllSoundEffects(time, isStopped) {
-        for (var i = this.soundEffects.length - 1; i >= 0; i--) {
-          FadeOut(this.scene, this.soundEffects[i], time, isStopped);
-        }
-        return this;
-      }
-    }, {
-      key: "setCurrentBackgroundMusic",
-      value: function setCurrentBackgroundMusic(music) {
-        this.backgroundMusic = music;
-        if (music) {
-          music.setLoop(this.backgroundMusicLoopValue);
-          music.once('complete', function () {
-            this.backgroundMusic.destroy();
-            this.backgroundMusic = undefined;
-          }, this).once('destroy', function () {
-            this.backgroundMusic = undefined;
-          }, this);
-          if (!music.isPlaying) {
-            music.play();
-          }
-        }
-      }
-    }, {
-      key: "playBackgroundMusic",
-      value: function playBackgroundMusic(key) {
-        // Don't re-play the same background music
-        if (this.backgroundMusic && this.backgroundMusic.key === key) {
-          return this;
-        }
-        this.stopBackgroundMusic(); // Stop previous background music
-
-        this.setCurrentBackgroundMusic(this.scene.sys.sound.add(key));
-        if (this.backgroundMusicFadeTime > 0) {
-          this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
-        }
-        return this;
-      }
-    }, {
-      key: "pauseBackgroundMusic",
-      value: function pauseBackgroundMusic() {
+      key: "backgroundMusicVolume",
+      get: function get() {
+        return this._backgroundMusicVolume;
+      },
+      set: function set(value) {
+        this._backgroundMusicVolume = value;
         if (this.backgroundMusic) {
-          this.backgroundMusic.pause();
+          this.backgroundMusic.setVolume(value);
         }
-        return this;
       }
     }, {
-      key: "resumeBackgroundMusic",
-      value: function resumeBackgroundMusic() {
-        if (this.backgroundMusic) {
-          this.backgroundMusic.resume();
+      key: "soundEffectsVolume",
+      get: function get() {
+        return this._soundEffectsVolume;
+      },
+      set: function set(value) {
+        this._soundEffectsVolume = value;
+        var soundEffects = this.soundEffects;
+        for (var i = 0, cnt = soundEffects.length; i < cnt; i++) {
+          soundEffects[i].setVolume(value);
         }
-        return this;
-      }
-    }, {
-      key: "stopBackgroundMusic",
-      value: function stopBackgroundMusic() {
-        if (this.backgroundMusic) {
-          if (this.backgroundMusicFadeTime > 0) {
-            this.fadeOutBackgroundMusic(this.backgroundMusicFadeTime, true);
-          } else {
-            this.backgroundMusic.stop();
-            this.backgroundMusic.destroy();
-            this.backgroundMusic = undefined;
-          }
-        }
-        return this;
-      }
-    }, {
-      key: "fadeInBackgroundMusic",
-      value: function fadeInBackgroundMusic(time) {
-        if (this.backgroundMusic) {
-          FadeIn(this.scene, this.backgroundMusic, time);
-        }
-        return this;
-      }
-    }, {
-      key: "fadeOutBackgroundMusic",
-      value: function fadeOutBackgroundMusic(time, isStopped) {
-        if (this.backgroundMusic) {
-          FadeOut(this.scene, this.backgroundMusic, time, isStopped);
-        }
-        return this;
-      }
-    }, {
-      key: "crossFadeBackgroundMusic",
-      value: function crossFadeBackgroundMusic(key, time) {
-        var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
-        this.backgroundMusicFadeTime = 0;
-        this.fadeOutBackgroundMusic(time, true).playBackgroundMusic(key).fadeInBackgroundMusic(time);
-        this.backgroundMusicFadeTime = backgroundMusicFadeTimeSave;
-        return this;
       }
     }]);
     return SoundManager;
   }();
+  Object.assign(SoundManager.prototype, BackgroundMusicMethods, SoundEffectsMethods);
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var BaseClock = /*#__PURE__*/function (_TickTask) {
@@ -2654,7 +2757,7 @@
 
   var DestroyManagers = function DestroyManagers(fromScene) {
     if (this.soundManager) {
-      this.soundManager.destroy(fromScene);
+      this.soundManager.destroy();
     }
     this.soundManager = undefined;
     for (var name in this.gameObjectManagers) {
@@ -3234,7 +3337,7 @@
   var OnParseSetSoundEffectVolumeTag = function OnParseSetSoundEffectVolumeTag(tagPlayer, parser, config) {
     var tagName = 'se.volume';
     parser.on("+".concat(tagName), function (volume) {
-      tagPlayer.soundManager.setSoundEffectVolume(volume);
+      tagPlayer.soundManager.setSoundEffectVolume(volume, true);
       parser.skipEvent();
     }).on("-".concat(tagName), function () {
       parser.skipEvent();

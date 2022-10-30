@@ -3138,6 +3138,27 @@
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
       // parent = bob object
       return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
   };
 
@@ -3145,20 +3166,29 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject or scene
+      this.parent = parent; // gameObject, scene, or game
+
       this.scene = GetSceneObject(parent);
+      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
       this.setEventEmitter(GetValue$v(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
         // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
     _createClass(ComponentBase, [{
@@ -3170,16 +3200,25 @@
         }
 
         // parent might not be shutdown yet
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
+
           // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
         }
+
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
+        this.game = undefined;
         this.isShutdown = true;
       }
     }, {
@@ -3188,8 +3227,8 @@
         this.shutdown(fromScene);
       }
     }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
         this.destroy(true);
       }
     }, {
@@ -3647,22 +3686,35 @@
       var _this;
       _classCallCheck(this, SceneUpdateTickTask);
       _this = _super.call(this, parent, config);
-      _this.tickEventName = GetValue$t(config, 'tickEventName', 'update');
+
+      // scene update : update, preupdate, postupdate, prerender, render
+      // game update : step, poststep, 
+
+      // If this.scene is not available, use game's 'step' event
+      var defaultEventName = _this.scene ? 'update' : 'step';
+      _this.tickEventName = GetValue$t(config, 'tickEventName', defaultEventName);
+      _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
     _createClass(SceneUpdateTickTask, [{
       key: "startTicking",
       value: function startTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "startTicking", this).call(this);
-        this.scene.sys.events.on(this.tickEventName, this.update, this);
+        if (this.isSceneTicker) {
+          this.scene.sys.events.on(this.tickEventName, this.update, this);
+        } else {
+          this.game.events.on(this.tickEventName, this.update, this);
+        }
       }
     }, {
       key: "stopTicking",
       value: function stopTicking() {
         _get(_getPrototypeOf(SceneUpdateTickTask.prototype), "stopTicking", this).call(this);
-        if (this.scene) {
+        if (this.isSceneTicker && this.scene) {
           // Scene might be destoryed
           this.scene.sys.events.off(this.tickEventName, this.update, this);
+        } else if (this.game) {
+          this.game.events.off(this.tickEventName, this.update, this);
         }
       }
 
@@ -3672,6 +3724,9 @@
     }]);
     return SceneUpdateTickTask;
   }(TickTask);
+  var IsGameUpdateEvent = function IsGameUpdateEvent(eventName) {
+    return eventName === 'step' || eventName === 'poststep';
+  };
 
   var GetValue$s = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
@@ -7527,25 +7582,6 @@
   var RECOGNIZED$2 = 'RECOGNIZED';
 
   Phaser.Utils.Objects.GetValue;
-
-  var GameClass = Phaser.Game;
-  var IsGame = function IsGame(object) {
-    return object instanceof GameClass;
-  };
-
-  var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
-      return object;
-    } else if (IsGame(object.game)) {
-      return object.game;
-    } else if (IsSceneObject(object)) {
-      // object = scene object
-      return object.sys.game;
-    } else if (IsSceneObject(object.scene)) {
-      // object = game object
-      return object.scene.sys.game;
-    }
-  };
 
   var GetTickDelta = function GetTickDelta(game) {
     return GetGame(game).loop.delta;
