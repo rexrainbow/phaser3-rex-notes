@@ -6,10 +6,6 @@ var CreateText = function (scene, config, style, gameObject) {
         scene.add.existing(gameObject);
     }
 
-    if (config) {
-        gameObject.setText(config.text);
-    }
-
     return gameObject;
 }
 

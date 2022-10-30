@@ -5,9 +5,6 @@ var AddInput = function (object, key, config) {
         config = {};
     }
 
-    config.target = object;
-    config.targetKey = key;
-
     if (!config.title) {
         config.title = key;
     }
@@ -22,6 +19,11 @@ var AddInput = function (object, key, config) {
         inputSizer,
         { expand: true }
     );
+
+    // Set content
+    inputSizer
+        .setTitle(config)
+        .setBindingTarget(object, key)
 
     return this;
 }

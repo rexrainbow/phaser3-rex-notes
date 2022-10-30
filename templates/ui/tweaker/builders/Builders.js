@@ -1,7 +1,6 @@
 import CreateBackground from './CreateBackground.js';
 // Input
 import CreateInputRow from './CreateInputRow.js';
-import CreateInputTitle from './CreateInputTitle.js';
 import CreateTextInput from './CreateTextInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
 import CreateInputField from './CreateInputField.js';
@@ -18,7 +17,6 @@ var Builders = {
 
     // Input
     inputRow: CreateInputRow,
-    inputTitle: CreateInputTitle,
     textInput: CreateTextInput,
     numberInput: CreateNumberInput,
     inputField: CreateInputField,
