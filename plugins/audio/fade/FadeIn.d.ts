@@ -1,5 +1,4 @@
 export default function FadeIn(
-    scene: Phaser.Scene,
     sound: string | Phaser.Sound.BaseSound,
     duration: number,
     endVolume?: number,
@@ -7,6 +6,7 @@ export default function FadeIn(
 ): Phaser.Sound.BaseSound;
 
 export default function FadeIn(
+    scene: Phaser.Scene,
     sound: string | Phaser.Sound.BaseSound,
     duration: number,
     endVolume?: number,
