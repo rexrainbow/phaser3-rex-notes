@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import Tweaker from '../../templates/ui/tweaker/Tweaker.js';
 
 const COLOR_PRIMARY = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
@@ -62,8 +61,12 @@ class Demo extends Phaser.Scene {
                             color: COLOR_DARK,
                             height: 8,
                         },
-                        thumb: {
+                        indicator: {
                             color: COLOR_PRIMARY,
+                            height: 8,
+                        },
+                        thumb: {
+                            color: COLOR_LIGHT,
                             size: 16,
                         },
                     },

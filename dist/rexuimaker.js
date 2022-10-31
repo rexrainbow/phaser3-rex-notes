@@ -4092,7 +4092,7 @@
     var outObject;
     var value;
     var key;
-    if (_typeof(inObject) !== 'object' || inObject === null) {
+    if (inObject == null || _typeof(inObject) !== 'object') {
       //  inObject is not an object
       return inObject;
     }
@@ -22454,6 +22454,24 @@
         SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
         this.resetChildScaleState(imageObject);
         return this;
+      }
+    }, {
+      key: "actionTexture",
+      get: function get() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.texture;
+      }
+    }, {
+      key: "actionFrame",
+      get: function get() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.frame;
       }
     }, {
       key: "setActionSize",

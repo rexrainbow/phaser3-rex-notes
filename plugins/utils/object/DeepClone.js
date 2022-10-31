@@ -3,7 +3,7 @@ var DeepClone = function (inObject) {
     var value;
     var key;
 
-    if ((typeof inObject !== 'object') || (inObject === null)) {
+    if ((inObject == null) || (typeof inObject !== 'object')) {
         //  inObject is not an object
         return inObject;
     }

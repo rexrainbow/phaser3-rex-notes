@@ -3163,7 +3163,7 @@
     var outObject;
     var value;
     var key;
-    if (_typeof(inObject) !== 'object' || inObject === null) {
+    if (inObject == null || _typeof(inObject) !== 'object') {
       //  inObject is not an object
       return inObject;
     }

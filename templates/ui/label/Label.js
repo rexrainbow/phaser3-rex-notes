@@ -202,6 +202,22 @@ class Label extends Sizer {
         return this;
     }
 
+    get actionTexture() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+            return undefined;
+        }
+        return imageObject.texture;
+    }
+
+    get actionFrame() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+            return undefined;
+        }
+        return imageObject.frame;
+    }
+
     setActionSize(width, height) {
         this.actionWidth = width;
         this.actionHeight = height;

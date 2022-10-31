@@ -303,7 +303,7 @@
     var outObject;
     var value;
     var key;
-    if (_typeof(inObject) !== 'object' || inObject === null) {
+    if (inObject == null || _typeof(inObject) !== 'object') {
       //  inObject is not an object
       return inObject;
     }
@@ -31803,6 +31803,24 @@
         return this;
       }
     }, {
+      key: "actionTexture",
+      get: function get() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.texture;
+      }
+    }, {
+      key: "actionFrame",
+      get: function get() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+          return undefined;
+        }
+        return imageObject.frame;
+      }
+    }, {
       key: "setActionSize",
       value: function setActionSize(width, height) {
         this.actionWidth = width;
@@ -44460,9 +44478,7 @@
       }
       _createClass(Base, [{
         key: "value",
-        get:
-        // Override
-        function get() {
+        get: function get() {
           return this._value;
         }
 
@@ -44556,6 +44572,7 @@
   };
 
   var CreateCanvasInput = function CreateCanvasInput(scene, config) {
+    config = DeepClone(config);
     if (!HasValue(config, 'wrap.vAlign')) {
       SetValue$1(config, 'wrap.vAlign', 'center');
     }
@@ -44679,9 +44696,14 @@
   };
 
   var CreateSlider$1 = function CreateSlider(scene, config) {
+    config = DeepClone(config);
     var trackConfig = config.track;
     if (trackConfig) {
       config.track = CreateRoundRectangle$1(scene, trackConfig);
+    }
+    var indicatorConfig = config.indicator;
+    if (indicatorConfig) {
+      config.indicator = CreateRoundRectangle$1(scene, indicatorConfig);
     }
     var thumbConfig = config.thumb;
     if (thumbConfig) {

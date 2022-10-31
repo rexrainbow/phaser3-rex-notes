@@ -1,6 +1,5 @@
 var InputFiledBase = function (BaseClass) {
-    class Base extends BaseClass {      
-        // Override
+    class Base extends BaseClass {
         get value() {
             return this._value;
         }

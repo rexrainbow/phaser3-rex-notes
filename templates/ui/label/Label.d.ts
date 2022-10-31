@@ -66,6 +66,8 @@ declare class Label extends Sizer {
         key: string | Phaser.Textures.Texture,
         frame?: string | number
     ): this;
+    readonly actionTexture: Phaser.Textures.Texture | Phaser.Textures.CanvasTexture;
+    readonly actionFrame: Phaser.Textures.Frame;
 
     setActionSize(
         width?: number,
