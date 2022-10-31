@@ -1,6 +1,6 @@
 ## Introduction
 
-Create an [input text object](textedit.md) above a text object to edit string content.
+Create an [input text object](inputtext.md) above a text object to edit string content.
 
 - Author: Rex
 - Behavior of text object
