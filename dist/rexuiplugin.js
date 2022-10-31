@@ -44576,9 +44576,9 @@
     if (!HasValue(config, 'wrap.vAlign')) {
       SetValue$1(config, 'wrap.vAlign', 'center');
     }
-    if (!HasValue(config, 'wrap.hAlign')) {
-      SetValue$1(config, 'wrap.hAlign', 'right');
-    }
+    //if (!HasValue(config, 'wrap.hAlign')) {
+    //    SetValue(config, 'wrap.hAlign', 'right');
+    //}
     if (!HasValue(config, 'wrap.charWrap')) {
       SetValue$1(config, 'wrap.charWrap', true);
     }

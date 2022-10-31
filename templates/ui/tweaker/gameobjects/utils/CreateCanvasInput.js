@@ -9,9 +9,9 @@ var CreateCanvasInput = function (scene, config) {
     if (!HasValue(config, 'wrap.vAlign')) {
         SetValue(config, 'wrap.vAlign', 'center');
     }
-    if (!HasValue(config, 'wrap.hAlign')) {
-        SetValue(config, 'wrap.hAlign', 'right');
-    }
+    //if (!HasValue(config, 'wrap.hAlign')) {
+    //    SetValue(config, 'wrap.hAlign', 'right');
+    //}
     if (!HasValue(config, 'wrap.charWrap')) {
         SetValue(config, 'wrap.charWrap', true);
     }
