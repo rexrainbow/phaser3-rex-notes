@@ -4,7 +4,7 @@ var AddLastInsertCursor = function (textObject) {
     var child = textObject.createCharChild('|');  // Use '|' to update render size
     child.text = '';  // Render empty string ''
 
-    // Inove DynamicText's addChild method directly
+    // Invoke DynamicText's addChild method directly
     AddChild.call(textObject, child);
 
     return child;

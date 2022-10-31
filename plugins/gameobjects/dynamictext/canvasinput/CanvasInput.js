@@ -33,6 +33,8 @@ class CanvasInput extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
+        this._text = '';
+
         this.textEdit = CreateHiddenTextEdit(this, config);
 
         if (config.focusStyle) {
@@ -94,17 +96,34 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
-    setText(text) {
-        if (!text) {
-            text = '';
+    get text() {
+        return this._text;
+    }
+
+    set text(value) {
+        if (value == null) {
+            value = '';
         } else {
-            text = text.toString();
+            value = value.toString();
+        }
+        if (this._text === value) {
+            return;
         }
 
-        this.moveChildToLast(this.lastInsertCursor);
+        if (value === '') {
+            this.popChild(this.lastInsertCursor);
+            this.removeChildren();
+            super.addChild(this.lastInsertCursor, 0);
+        } else {
+            this.moveChildToLast(this.lastInsertCursor);
+            SetText(this, value);
+        }
 
-        SetText(this, text);
+        this._text = value;
+    }
 
+    setText(text) {
+        this.text = text;
         return this;
     }
 

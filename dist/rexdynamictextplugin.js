@@ -2350,10 +2350,10 @@
     return this;
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var RemoveChild = function RemoveChild(child) {
     this.poolManager.free(child);
-    RemoveItem(this.children, child);
+    RemoveItem$1(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -2363,6 +2363,15 @@
   var RemoveChildren = function RemoveChildren() {
     this.poolManager.freeMultiple(this.children);
     this.children.length = 0;
+    this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
+    this.dirty = true;
+    return this;
+  };
+
+  var RemoveItem = Phaser.Utils.Array.Remove;
+  var PopChild = function PopChild(child) {
+    RemoveItem(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -4191,6 +4200,7 @@
     setTestString: SetTestString,
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
+    popChild: PopChild,
     clearContent: ClearContent,
     addChild: AddChild,
     createCharChild: CreateCharChild,

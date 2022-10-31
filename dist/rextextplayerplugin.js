@@ -1275,7 +1275,7 @@
     }
   };
 
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var SoundEffectsMethods = {
     getSoundEffects: function getSoundEffects() {
       return this.soundEffects;
@@ -1294,13 +1294,13 @@
         if (!this.sound) {
           return;
         }
-        RemoveItem$2(this.soundEffects, soundEffect);
+        RemoveItem$3(this.soundEffects, soundEffect);
       }, this).once('destroy', function () {
         // SoundManager has been destroyed
         if (!this.sound) {
           return;
         }
-        RemoveItem$2(this.soundEffects, soundEffect);
+        RemoveItem$3(this.soundEffects, soundEffect);
       }, this).play();
       return this;
     },
@@ -2297,7 +2297,7 @@
     Transform();
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var AddMethods = {
     has: function has(name) {
       return this.bobs.hasOwnProperty(name);
@@ -2318,7 +2318,7 @@
         AddViewportCoordinateProperties(gameObject, this.viewport);
       }
       gameObject.once('destroy', function () {
-        RemoveItem$1(this.removedGOs, gameObject);
+        RemoveItem$2(this.removedGOs, gameObject);
         if (this.isEmpty) {
           this.emit('empty');
         }
@@ -5125,10 +5125,10 @@
     return this;
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var RemoveChild = function RemoveChild(child) {
     this.poolManager.free(child);
-    RemoveItem(this.children, child);
+    RemoveItem$1(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -5138,6 +5138,15 @@
   var RemoveChildren = function RemoveChildren() {
     this.poolManager.freeMultiple(this.children);
     this.children.length = 0;
+    this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
+    this.dirty = true;
+    return this;
+  };
+
+  var RemoveItem = Phaser.Utils.Array.Remove;
+  var PopChild = function PopChild(child) {
+    RemoveItem(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -6972,6 +6981,7 @@
     setTestString: SetTestString,
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
+    popChild: PopChild,
     clearContent: ClearContent,
     addChild: AddChild,
     createCharChild: CreateCharChild,

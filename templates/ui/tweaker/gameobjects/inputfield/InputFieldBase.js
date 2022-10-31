@@ -1,10 +1,5 @@
 var InputFiledBase = function (BaseClass) {
-    class Base extends BaseClass {
-        onValueChange() {
-            // Fire 'valuechange' event to trigger object updating of InputRow class
-            this.emit('valuechange', this.value);
-        }
-
+    class Base extends BaseClass {      
         // Override
         get value() {
             return this._value;
@@ -12,7 +7,12 @@ var InputFiledBase = function (BaseClass) {
 
         // Override
         set value(value) {
+            if (this._value === value) {
+                return;
+            }
+
             this._value = value;
+            this.emit('valuechange', value);
         }
 
         getValue() {

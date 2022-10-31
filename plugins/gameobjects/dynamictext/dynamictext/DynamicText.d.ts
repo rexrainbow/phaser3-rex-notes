@@ -236,6 +236,8 @@ declare class DynamicText extends Canvas {
     removeChildren(): this;
     removeText(index: number, length?: number): this;
 
+    popChild(child: DynamicText.BobBase): this;
+
     moveChildToFist(child: DynamicText.BobBase): this;
     moveChildToLast(child: DynamicText.BobBase): this;
     movechildUp(child: DynamicText.BobBase): this;

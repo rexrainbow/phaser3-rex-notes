@@ -8,6 +8,7 @@ import SetTestString from './SetTestString.js';
 
 import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
+import PopChild from './PopChild.js';
 import ClearContent from './ClearContent.js';
 import AddChild from './AddChild.js';
 import CreateCharChild from './CreateCharChild.js';
@@ -63,6 +64,7 @@ var Methods = {
 
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
+    popChild: PopChild,
     clearContent: ClearContent,
     addChild: AddChild,
     createCharChild: CreateCharChild,

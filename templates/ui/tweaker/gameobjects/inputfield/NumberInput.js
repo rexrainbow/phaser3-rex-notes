@@ -25,15 +25,22 @@ class NumberInput extends InputFiledBase(Sizer) {
 
         this.addChildrenMap('inputNumber', inputNumber);
 
-        inputNumber.on('close', this.onValueChange, this);
+        inputNumber.on('close', function () {
+            this.setValue(inputNumber.value);
+        }, this);
     }
 
     get value() {
-        return this.childrenMap.inputNumber.value;
+        return this._value;
     }
 
     set value(value) {
-        this.childrenMap.inputNumber.value = value;
+        if (this._value === value) {
+            return;
+        }
+
+        this.childrenMap.inputNumber.setValue(value);
+        super.value = value;
     }
 
 }

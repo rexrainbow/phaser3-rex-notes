@@ -2350,10 +2350,10 @@
     return this;
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var RemoveChild = function RemoveChild(child) {
     this.poolManager.free(child);
-    RemoveItem(this.children, child);
+    RemoveItem$1(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -2363,6 +2363,15 @@
   var RemoveChildren = function RemoveChildren() {
     this.poolManager.freeMultiple(this.children);
     this.children.length = 0;
+    this.lastAppendedChildren.length = 0;
+    this.lastOverChild = null;
+    this.dirty = true;
+    return this;
+  };
+
+  var RemoveItem = Phaser.Utils.Array.Remove;
+  var PopChild = function PopChild(child) {
+    RemoveItem(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -4191,6 +4200,7 @@
     setTestString: SetTestString,
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
+    popChild: PopChild,
     clearContent: ClearContent,
     addChild: AddChild,
     createCharChild: CreateCharChild,
@@ -5418,7 +5428,7 @@
     var child = textObject.createCharChild('|'); // Use '|' to update render size
     child.text = ''; // Render empty string ''
 
-    // Inove DynamicText's addChild method directly
+    // Invoke DynamicText's addChild method directly
     AddChild.call(textObject, child);
     return child;
   };
@@ -5873,6 +5883,7 @@
       var cursorStyle = ExtractByPrefix(config.style, 'cursor');
       _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
       _this.type = 'rexCanvasInput';
+      _this._text = '';
       _this.textEdit = CreateHiddenTextEdit(_assertThisInitialized(_this), config);
       if (config.focusStyle) {
         Object.assign(focusStyle, config.focusStyle);
@@ -5928,15 +5939,33 @@
         return this;
       }
     }, {
+      key: "text",
+      get: function get() {
+        return this._text;
+      },
+      set: function set(value) {
+        if (value == null) {
+          value = '';
+        } else {
+          value = value.toString();
+        }
+        if (this._text === value) {
+          return;
+        }
+        if (value === '') {
+          this.popChild(this.lastInsertCursor);
+          this.removeChildren();
+          _get(_getPrototypeOf(CanvasInput.prototype), "addChild", this).call(this, this.lastInsertCursor, 0);
+        } else {
+          this.moveChildToLast(this.lastInsertCursor);
+          SetText(this, value);
+        }
+        this._text = value;
+      }
+    }, {
       key: "setText",
       value: function setText(text) {
-        if (!text) {
-          text = '';
-        } else {
-          text = text.toString();
-        }
-        this.moveChildToLast(this.lastInsertCursor);
-        SetText(this, text);
+        this.text = text;
         return this;
       }
     }, {

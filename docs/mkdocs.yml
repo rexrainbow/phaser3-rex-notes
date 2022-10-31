@@ -322,7 +322,9 @@ nav:
         - Clamp: clamp.md
         - Wrap: wrap.md
         - Ease: ease-function.md
-    - Snap: snap.md
+    - Round to:
+        - Round to: round-to.md
+        - Snap: snap.md
     - Distance: distance.md
     - Angle: angle.md
     - Random:

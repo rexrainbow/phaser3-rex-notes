@@ -24,15 +24,22 @@ class TextInput extends InputFiledBase(Sizer) {
 
         this.addChildrenMap('inputText', inputText);
 
-        inputText.on('close', this.onValueChange, this);
+        inputText.on('close', function () {
+            this.setValue(inputText.value);
+        }, this);
     }
 
     get value() {
-        return this.childrenMap.inputText.value;
+        return this._value;
     }
 
     set value(value) {
-        this.childrenMap.inputText.value = value;
+        if (this._value === value) {
+            return;
+        }
+
+        this.childrenMap.inputText.setValue(value);
+        super.value = value;
     }
 
 }

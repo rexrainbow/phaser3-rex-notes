@@ -9874,7 +9874,10 @@
       }
     }, {
       key: "setGap",
-      value: function setGap(gap) {
+      value: function setGap(gap, min, max) {
+        if (gap && min !== undefined) {
+          gap = gap / (max - min);
+        }
         this.gap = gap;
         return this;
       }
