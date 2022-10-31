@@ -47,7 +47,14 @@ var CreateInputText = function (text, config) {
         config
     );
     inputText.setOrigin(text.originX, text.originY);
-    scene.add.existing(inputText);
+
+    var textParentContainer = text.parentContainer;
+    if (!textParentContainer) {
+        scene.add.existing(inputText);
+    } else {
+        textParentContainer.add(inputText);
+    }
+
     return inputText;
 }
 

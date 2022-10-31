@@ -786,7 +786,12 @@
 
     var inputText = new InputText(scene, text.x, text.y, GetValue$2(config, 'width', text.width), GetValue$2(config, 'height', text.height), config);
     inputText.setOrigin(text.originX, text.originY);
-    scene.add.existing(inputText);
+    var textParentContainer = text.parentContainer;
+    if (!textParentContainer) {
+      scene.add.existing(inputText);
+    } else {
+      textParentContainer.add(inputText);
+    }
     return inputText;
   };
   var GetHAlign = function GetHAlign(style) {
