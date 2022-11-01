@@ -94,7 +94,7 @@ class Demo extends Phaser.Scene {
                     icon: 'settings',           // Title icon
                     min: 0, max: 800,           // Range
                     format(value) {             // Formatter of text
-                        return (Math.floor(value * 100) / 100).toString();
+                        return value.toFixed(2);
                     },
                     // inputTextReadOnly: true  // Uneditable
                 }

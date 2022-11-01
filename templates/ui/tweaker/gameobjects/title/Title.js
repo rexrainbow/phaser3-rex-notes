@@ -11,7 +11,7 @@ class Title extends Label {
             config = {};
         }
 
-        var text = config.text || config.title || '';
+        var text = config.text || config.label || '';
         this.setText(text);
 
         var iconGameObjct = this.childrenMap.icon;

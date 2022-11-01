@@ -5,8 +5,8 @@ var AddInput = function (object, key, config) {
         config = {};
     }
 
-    if (!config.title) {
-        config.title = key;
+    if (!config.label) {
+        config.label = key;
     }
 
     config.view = GetInputType(object[key], config);
