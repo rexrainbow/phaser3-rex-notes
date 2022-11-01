@@ -669,6 +669,14 @@ See [base sizer object](ui-basesizer.md).
         ```javascript
         var scroller = table.getElement('scroller');
         ```
+    - Header game object
+        ```javascript
+        var tableBody = table.getElement('header');
+        ```
+    - Footer game object
+        ```javascript
+        var tableBody = table.getElement('footer');
+        ```
 - Get by name
     ```javascript
     var gameObject = table.getElement('#' + name);
