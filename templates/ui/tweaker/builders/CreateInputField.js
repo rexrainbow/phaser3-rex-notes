@@ -28,7 +28,12 @@ var CreateInputField = function (scene, config, style, gameObject) {
             break;
     }
 
-    return callback(scene, config, style, gameObject);
+    var gameObject = callback(scene, config, style, gameObject);
+
+    // Extra settings
+    gameObject.setTextFormatCallback(config.format);
+
+    return gameObject;
 }
 
 export default CreateInputField;

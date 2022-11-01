@@ -24,26 +24,28 @@ class RangeInput extends InputFiledBase(Sizer) {
         var trackSize = GetValue(sliderConfig, trackSizeKey);
         var slider = CreateSlider(scene, sliderConfig);
 
+        var proportion = GetValue(config, 'proportion.range.slider', 2);
         var expand = (trackSize === undefined);
         this.add(
             slider,
-            { proportion: 2, expand: expand }
+            { proportion: proportion, expand: expand }
         )
 
-        var inputNumberConfig = config.inputNumber || config.inputText;
-        var inputNumber = CreateCanvasInput(scene, inputNumberConfig)
+        var inputTextConfig = config.inputText || config.inputText;
+        var inputText = CreateCanvasInput(scene, inputTextConfig)
             .setNumberInput();
 
+        var proportion = GetValue(config, 'proportion.range.inputText', 1);
         this.add(
-            inputNumber,
-            { proportion: 1, expand: true }
+            inputText,
+            { proportion: proportion, expand: true }
         )
 
         this.addChildrenMap('slider', slider);
-        this.addChildrenMap('inputNumber', inputNumber);
+        this.addChildrenMap('inputText', inputText);
 
-        inputNumber.on('close', function () {
-            this.setValue(inputNumber.value);
+        inputText.on('close', function () {
+            this.setValue(inputText.value);
         }, this);
 
         slider.on('valuechange', function () {
@@ -65,7 +67,9 @@ class RangeInput extends InputFiledBase(Sizer) {
             return;
         }
 
-        this.childrenMap.inputNumber.setText('').setValue(value);
+        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;        
+        this.childrenMap.inputText.setText('').setText(text);
+
         this.childrenMap.slider.setValue(value, this.minValue, this.maxValue);
         super.value = value;
     }

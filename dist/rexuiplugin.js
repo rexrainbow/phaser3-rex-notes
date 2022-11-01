@@ -44524,6 +44524,12 @@
           this.readOnly = enable;
           return true;
         }
+      }, {
+        key: "setTextFormatCallback",
+        value: function setTextFormatCallback(callback) {
+          this.textFormatCallback = callback;
+          return this;
+        }
       }]);
       return Base;
     }(BaseClass);
@@ -44623,7 +44629,8 @@
         if (this._value === value) {
           return;
         }
-        this.childrenMap.inputText.setValue(value);
+        var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
+        this.childrenMap.inputText.setText(text);
         _set(_getPrototypeOf(TextInput.prototype), "value", value, this, true);
       }
     }]);
@@ -44653,15 +44660,15 @@
 
       _this = _super.call(this, scene, sizerConfig);
       _this.type = 'rexTweaker.NumberInput';
-      var inputNumberConfig = config.inputNumber || config.inputText;
-      var inputNumber = CreateCanvasInput(scene, inputNumberConfig).setNumberInput();
-      _this.add(inputNumber, {
+      var inputTextConfig = config.inputText || config.inputText;
+      var inputText = CreateCanvasInput(scene, inputTextConfig).setNumberInput();
+      _this.add(inputText, {
         proportion: 1,
         expand: true
       });
-      _this.addChildrenMap('inputNumber', inputNumber);
-      inputNumber.on('close', function () {
-        this.setValue(inputNumber.value);
+      _this.addChildrenMap('inputText', inputText);
+      inputText.on('close', function () {
+        this.setValue(inputText.value);
       }, _assertThisInitialized(_this));
       return _this;
     }
@@ -44674,7 +44681,8 @@
         if (this._value === value) {
           return;
         }
-        this.childrenMap.inputNumber.setValue(value);
+        var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
+        this.childrenMap.inputText.setText(text);
         _set(_getPrototypeOf(NumberInput.prototype), "value", value, this, true);
       }
     }]);
@@ -44741,21 +44749,23 @@
       var trackSizeKey = _this.orientation === 0 ? 'track.height' : 'track.width';
       var trackSize = GetValue$d(sliderConfig, trackSizeKey);
       var slider = CreateSlider$1(scene, sliderConfig);
+      var proportion = GetValue$d(config, 'proportion.range.slider', 2);
       var expand = trackSize === undefined;
       _this.add(slider, {
-        proportion: 2,
+        proportion: proportion,
         expand: expand
       });
-      var inputNumberConfig = config.inputNumber || config.inputText;
-      var inputNumber = CreateCanvasInput(scene, inputNumberConfig).setNumberInput();
-      _this.add(inputNumber, {
-        proportion: 1,
+      var inputTextConfig = config.inputText || config.inputText;
+      var inputText = CreateCanvasInput(scene, inputTextConfig).setNumberInput();
+      var proportion = GetValue$d(config, 'proportion.range.inputText', 1);
+      _this.add(inputText, {
+        proportion: proportion,
         expand: true
       });
       _this.addChildrenMap('slider', slider);
-      _this.addChildrenMap('inputNumber', inputNumber);
-      inputNumber.on('close', function () {
-        this.setValue(inputNumber.value);
+      _this.addChildrenMap('inputText', inputText);
+      inputText.on('close', function () {
+        this.setValue(inputText.value);
       }, _assertThisInitialized(_this));
       slider.on('valuechange', function () {
         var value = Linear$1(this.minValue, this.maxValue, slider.value);
@@ -44775,7 +44785,8 @@
         if (this._value === value) {
           return;
         }
-        this.childrenMap.inputNumber.setText('').setValue(value);
+        var text = this.textFormatCallback ? this.textFormatCallback(value) : value;
+        this.childrenMap.inputText.setText('').setText(text);
         this.childrenMap.slider.setValue(value, this.minValue, this.maxValue);
         _set(_getPrototypeOf(RangeInput.prototype), "value", value, this, true);
       }
@@ -44818,7 +44829,11 @@
         callback = IsFunction(viewType) ? viewType : CreateTextInput;
         break;
     }
-    return callback(scene, config, style, gameObject);
+    var gameObject = callback(scene, config, style, gameObject);
+
+    // Extra settings
+    gameObject.setTextFormatCallback(config.format);
+    return gameObject;
   };
 
   var GetValue$c = Phaser.Utils.Objects.GetValue;

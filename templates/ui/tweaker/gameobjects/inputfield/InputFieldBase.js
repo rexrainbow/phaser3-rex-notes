@@ -39,6 +39,12 @@ var InputFiledBase = function (BaseClass) {
             this.readOnly = enable;
             return true;
         }
+
+        setTextFormatCallback(callback) {
+            this.textFormatCallback = callback;
+            return this;
+        }
+
     }
     return Base;
 }

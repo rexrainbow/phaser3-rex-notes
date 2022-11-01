@@ -38,7 +38,8 @@ class TextInput extends InputFiledBase(Sizer) {
             return;
         }
 
-        this.childrenMap.inputText.setValue(value);
+        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
+        this.childrenMap.inputText.setText(text);
         super.value = value;
     }
 

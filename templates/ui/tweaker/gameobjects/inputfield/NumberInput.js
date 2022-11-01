@@ -14,19 +14,19 @@ class NumberInput extends InputFiledBase(Sizer) {
         super(scene, sizerConfig);
         this.type = 'rexTweaker.NumberInput';
 
-        var inputNumberConfig = config.inputNumber || config.inputText;
-        var inputNumber = CreateCanvasInput(scene, inputNumberConfig)
+        var inputTextConfig = config.inputText || config.inputText;
+        var inputText = CreateCanvasInput(scene, inputTextConfig)
             .setNumberInput();
 
         this.add(
-            inputNumber,
+            inputText,
             { proportion: 1, expand: true }
         )
 
-        this.addChildrenMap('inputNumber', inputNumber);
+        this.addChildrenMap('inputText', inputText);
 
-        inputNumber.on('close', function () {
-            this.setValue(inputNumber.value);
+        inputText.on('close', function () {
+            this.setValue(inputText.value);
         }, this);
     }
 
@@ -39,7 +39,9 @@ class NumberInput extends InputFiledBase(Sizer) {
             return;
         }
 
-        this.childrenMap.inputNumber.setValue(value);
+
+        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
+        this.childrenMap.inputText.setText(text);
         super.value = value;
     }
 
