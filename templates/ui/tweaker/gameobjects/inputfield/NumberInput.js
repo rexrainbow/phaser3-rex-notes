@@ -14,7 +14,7 @@ class NumberInput extends InputFiledBase(Sizer) {
         super(scene, sizerConfig);
         this.type = 'rexTweaker.NumberInput';
 
-        var inputTextConfig = config.inputText || config.inputText;
+        var inputTextConfig = config.inputNumber || config.inputText;
         var inputText = CreateCanvasInput(scene, inputTextConfig)
             .setNumberInput();
 
@@ -45,6 +45,13 @@ class NumberInput extends InputFiledBase(Sizer) {
         super.value = value;
     }
 
+    setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
+        return this;
+    }
 }
 
 export default NumberInput;

@@ -31,7 +31,7 @@ class RangeInput extends InputFiledBase(Sizer) {
             { proportion: proportion, expand: expand }
         )
 
-        var inputTextConfig = config.inputText || config.inputText;
+        var inputTextConfig = config.inputNumber || config.inputText;
         var inputText = CreateCanvasInput(scene, inputTextConfig)
             .setNumberInput();
 
@@ -67,7 +67,7 @@ class RangeInput extends InputFiledBase(Sizer) {
             return;
         }
 
-        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;        
+        var text = (this.textFormatCallback) ? this.textFormatCallback(value) : value;
         this.childrenMap.inputText.setText('').setText(text);
 
         this.childrenMap.slider.setValue(value, this.minValue, this.maxValue);
@@ -81,6 +81,14 @@ class RangeInput extends InputFiledBase(Sizer) {
 
         this.childrenMap.slider.setGap(step, min, max);
 
+        return this;
+    }
+
+    setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
         return this;
     }
 

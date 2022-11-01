@@ -7,6 +7,7 @@ var CreateRangeInput = function (scene, config, style, gameObject) {
     }
 
     gameObject.setRange(config.min, config.max, config.step);
+    gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
 
     return gameObject;
 }

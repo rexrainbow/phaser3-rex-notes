@@ -74,7 +74,7 @@ class Demo extends Phaser.Scene {
                     proportion: {
                         title: 1,
                         inputField: 3,
-                        range: { slider: 1, inputText: 1 }
+                        range: { slider: 2, inputText: 1 }
                     }
                 },
 
@@ -95,7 +95,8 @@ class Demo extends Phaser.Scene {
                     min: 0, max: 800,           // Range
                     format(value) {             // Formatter of text
                         return (Math.floor(value * 100) / 100).toString();
-                    }
+                    },
+                    // inputTextReadOnly: true  // Uneditable
                 }
             )
             .addInput(

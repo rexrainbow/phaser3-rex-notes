@@ -6,6 +6,8 @@ var CreateNumberInput = function (scene, config, style, gameObject) {
         scene.add.existing(gameObject);
     }
 
+    gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
+
     return gameObject;
 }
 

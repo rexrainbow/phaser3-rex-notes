@@ -44633,6 +44633,15 @@
         this.childrenMap.inputText.setText(text);
         _set(_getPrototypeOf(TextInput.prototype), "value", value, this, true);
       }
+    }, {
+      key: "setInputTextReadOnly",
+      value: function setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
+        return this;
+      }
     }]);
     return TextInput;
   }(InputFiledBase(Sizer));
@@ -44642,6 +44651,7 @@
       gameObject = new TextInput(scene, style);
       scene.add.existing(gameObject);
     }
+    gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
   };
 
@@ -44660,7 +44670,7 @@
 
       _this = _super.call(this, scene, sizerConfig);
       _this.type = 'rexTweaker.NumberInput';
-      var inputTextConfig = config.inputText || config.inputText;
+      var inputTextConfig = config.inputNumber || config.inputText;
       var inputText = CreateCanvasInput(scene, inputTextConfig).setNumberInput();
       _this.add(inputText, {
         proportion: 1,
@@ -44685,6 +44695,15 @@
         this.childrenMap.inputText.setText(text);
         _set(_getPrototypeOf(NumberInput.prototype), "value", value, this, true);
       }
+    }, {
+      key: "setInputTextReadOnly",
+      value: function setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
+        return this;
+      }
     }]);
     return NumberInput;
   }(InputFiledBase(Sizer));
@@ -44694,6 +44713,7 @@
       gameObject = new NumberInput(scene, style);
       scene.add.existing(gameObject);
     }
+    gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
   };
 
@@ -44755,7 +44775,7 @@
         proportion: proportion,
         expand: expand
       });
-      var inputTextConfig = config.inputText || config.inputText;
+      var inputTextConfig = config.inputNumber || config.inputText;
       var inputText = CreateCanvasInput(scene, inputTextConfig).setNumberInput();
       var proportion = GetValue$d(config, 'proportion.range.inputText', 1);
       _this.add(inputText, {
@@ -44799,6 +44819,15 @@
         this.childrenMap.slider.setGap(step, min, max);
         return this;
       }
+    }, {
+      key: "setInputTextReadOnly",
+      value: function setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
+        return this;
+      }
     }]);
     return RangeInput;
   }(InputFiledBase(Sizer));
@@ -44809,6 +44838,7 @@
       scene.add.existing(gameObject);
     }
     gameObject.setRange(config.min, config.max, config.step);
+    gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
     return gameObject;
   };
 

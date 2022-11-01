@@ -43,6 +43,13 @@ class TextInput extends InputFiledBase(Sizer) {
         super.value = value;
     }
 
+    setInputTextReadOnly(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.childrenMap.inputText.setReadOnly(enable);
+        return this;
+    }
 }
 
 export default TextInput;
