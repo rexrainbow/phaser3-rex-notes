@@ -4560,7 +4560,7 @@
    * @param {object} ret JSON object to return, set null to return a new object
    * @returns {object} this object
    */
-  var Clone = function Clone(obj, out) {
+  var Clone$1 = function Clone(obj, out) {
     var objIsArray = Array.isArray(obj);
     if (out === undefined) {
       out = objIsArray ? [] : {};
@@ -4640,7 +4640,7 @@
         var previousPen = this.lastPen;
         var x = previousPen ? previousPen.lastX : 0;
         var y = previousPen ? previousPen.y : 0;
-        var prop = previousPen ? Clone(previousPen.prop) : null;
+        var prop = previousPen ? Clone$1(previousPen.prop) : null;
         this.addTextPen('', x, y, 0, prop, WRAPPED_NEWLINE$1);
         return this;
       }
@@ -4679,7 +4679,7 @@
           var pens = this.lines[li];
           for (var pi = 0, plen = pens.length; pi < plen; pi++) {
             var pen = pens[pi];
-            targetPenManager.addPen(pen.text, pen.x, pen.y, pen.width, Clone(pen.prop), pen.newLineMode);
+            targetPenManager.addPen(pen.text, pen.x, pen.y, pen.width, Clone$1(pen.prop), pen.newLineMode);
           }
         }
         return targetPenManager;
@@ -5169,7 +5169,7 @@
                 cursorX = 0;
               }
             }
-            penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
+            penManager.addImagePen(cursorX, cursorY, imgWidth, Clone$1(curProp));
             cursorX += imgWidth;
           } else if (plainText !== '') {
             // wrap text to lines
@@ -5202,7 +5202,7 @@
             var n;
             for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
               n = wrapLines[j];
-              penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone(curProp), n.newLineMode);
+              penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone$1(curProp), n.newLineMode);
               if (n.newLineMode !== NO_NEWLINE) {
                 cursorX = 0;
                 cursorY += lineHeight;
@@ -9203,7 +9203,7 @@
     renderTexture.camera.setScroll(scrollX, scrollY);
 
     // Draw gameObjects
-    gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
+    gameObjects = SortGameObjectsByDepth(Clone$1(gameObjects));
     renderTexture.draw(gameObjects);
 
     // Save render result to texture    
@@ -35294,7 +35294,7 @@
       if (config === undefined) {
         config = {};
       }
-      var sliderConfig = Clone(config);
+      var sliderConfig = Clone$1(config);
       config = {
         slider: sliderConfig
       };
@@ -41738,7 +41738,7 @@
   var CreatePerspectiveCardMesh = function CreatePerspectiveCardMesh(config) {
     var scene = this.scene;
     this.setSnapshotPadding(GetValue$s(config, 'snapshotPadding', 0));
-    config = Clone(config);
+    config = Clone$1(config);
     // Remove size config
     delete config.width;
     delete config.height;
@@ -50896,10 +50896,12 @@
   Object.assign(InputText.prototype, methods$1);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var Clone = Phaser.Utils.Objects.Clone;
   var CreateInputText = function CreateInputText(text, config) {
     if (config === undefined) {
       config = {};
     }
+    config = Clone(config);
     var scene = text.scene;
     var style = text.style;
     var backgroundColor = GetValue$4(config, 'backgroundColor', style.backgroundColor);
@@ -50957,7 +50959,7 @@
     if (config === undefined) {
       config = {};
     }
-    Merge(config, this.openConfig);
+    config = Merge(config, this.openConfig);
     SetLastOpenedEditor(this);
     if (IsFunction(config)) {
       onCloseCallback = config;

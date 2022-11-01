@@ -749,10 +749,12 @@
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var Clone = Phaser.Utils.Objects.Clone;
   var CreateInputText = function CreateInputText(text, config) {
     if (config === undefined) {
       config = {};
     }
+    config = Clone(config);
     var scene = text.scene;
     var style = text.style;
     var backgroundColor = GetValue$2(config, 'backgroundColor', style.backgroundColor);
@@ -810,7 +812,7 @@
     if (config === undefined) {
       config = {};
     }
-    Merge(config, this.openConfig);
+    config = Merge(config, this.openConfig);
     SetLastOpenedEditor(this);
     if (IsFunction(config)) {
       onCloseCallback = config;

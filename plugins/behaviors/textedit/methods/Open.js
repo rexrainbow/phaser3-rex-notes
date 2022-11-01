@@ -9,7 +9,7 @@ var Open = function (config, onCloseCallback) {
     if (config === undefined) {
         config = {};
     }
-    Merge(config, this.openConfig)
+    config = Merge(config, this.openConfig)
 
     SetLastOpenedEditor(this);
 

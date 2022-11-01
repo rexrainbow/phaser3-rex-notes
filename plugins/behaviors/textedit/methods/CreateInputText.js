@@ -2,11 +2,13 @@ import InputText from '../../../gameobjects/dom/inputtext/InputText.js';
 import IsTextGameObject from '../../../utils/text/IsTextGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clone = Phaser.Utils.Objects.Clone;
 
 var CreateInputText = function (text, config) {
     if (config === undefined) {
         config = {};
     }
+    config = Clone(config);
 
     var scene = text.scene;
     var style = text.style;
