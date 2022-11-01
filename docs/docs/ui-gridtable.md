@@ -15,6 +15,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - Sizer cell: 
     - [Demo 1](https://codepen.io/rexrainbow/pen/pooZWme)
     - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
+- [Modal](https://codepen.io/rexrainbow/pen/zYarzzO)
 - [Fade-out-destroy cell](https://codepen.io/rexrainbow/pen/YzXYemw)
 
 ## Usage
