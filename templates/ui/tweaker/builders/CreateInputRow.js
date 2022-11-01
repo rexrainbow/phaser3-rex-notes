@@ -1,6 +1,6 @@
 import InputRow from '../gameobjects/inputrow/InputRow.js';
-import CreateRoundRectangle from './utils/CreateRoundRectangle.js';
-import CreateTitleLabel from './utils/CreateTitleLabel.js';
+import CreateRoundRectangle from '../gameobjects/utils/CreateRoundRectangle.js';
+import CreateTitleLabel from './CreateTitleLabel.js';
 import CreateInputField from './CreateInputField.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -13,7 +13,7 @@ var CreateInputRow = function (scene, config, style, gameObject) {
         var inputField = CreateInputField(scene, config, style);
 
         var backgroundStyle = GetValue(style, 'background') || {};
-        var background = CreateRoundRectangle(scene, config, backgroundStyle);
+        var background = CreateRoundRectangle(scene, backgroundStyle);
 
         var inputSizerconfig = {
             ...config,

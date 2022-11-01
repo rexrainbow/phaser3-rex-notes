@@ -1,8 +1,7 @@
-import Sizer from '../../../sizer/Sizer.js';
 import InputFiledBase from './InputFieldBase.js';
 import CreateCanvasInput from '../utils/CreateCanvasInput.js';
 
-class TextInput extends InputFiledBase(Sizer) {
+class TextInput extends InputFiledBase {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};

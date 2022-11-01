@@ -1,4 +1,3 @@
-import Sizer from '../../../sizer/Sizer.js';
 import InputFiledBase from './InputFieldBase.js';
 import CreateSlider from '../utils/CreateSlider.js';
 import CreateCanvasInput from '../utils/CreateCanvasInput.js';
@@ -7,7 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const Linear = Phaser.Math.Linear;
 const SnapFloor = Phaser.Math.Snap.Floor;
 
-class RangeInput extends InputFiledBase(Sizer) {
+class RangeInput extends InputFiledBase {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -29,7 +28,7 @@ class RangeInput extends InputFiledBase(Sizer) {
         this.add(
             slider,
             { proportion: proportion, expand: expand }
-        )
+        );
 
         var inputTextConfig = config.inputNumber || config.inputText;
         var inputText = CreateCanvasInput(scene, inputTextConfig)
@@ -39,7 +38,7 @@ class RangeInput extends InputFiledBase(Sizer) {
         this.add(
             inputText,
             { proportion: proportion, expand: true }
-        )
+        );
 
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('inputText', inputText);

@@ -1,4 +1,4 @@
-import CreateTitleLabel from './utils/CreateTitleLabel.js';
+import CreateTitleLabel from './CreateTitleLabel.js';
 
 var CreateFolderTitle = function (scene, config, style, gameObject) {
     style = style.folderTitle || {};

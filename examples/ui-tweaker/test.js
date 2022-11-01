@@ -39,6 +39,11 @@ class Demo extends Phaser.Scene {
                         space: { icon: 3 }
                     },
 
+                    label: {
+                        iconSize: 20,
+                        space: { icon: 3 }
+                    },
+
                     inputText: {
                         background: {
                             color: COLOR_DARK
@@ -73,7 +78,7 @@ class Demo extends Phaser.Scene {
 
                     proportion: {
                         title: 1,
-                        inputField: 3,
+                        inputField: 2,
                         range: { slider: 2, inputText: 1 }
                     }
                 },
@@ -101,6 +106,23 @@ class Demo extends Phaser.Scene {
             )
             .addInput(
                 gameObject, 'y',
+                {
+                    icon: 'settings',           // Title icon
+                    options: [
+                        { text: 'top', value: 0 },
+                        { text: 'center', value: 300 },
+                        { text: 'bottom', value: 600 },
+                    ]
+                }
+            )
+            .addInput(
+                gameObject, 'alpha',
+                {
+                    icon: 'settings',           // Title icon
+                }
+            )
+            .addInput(
+                gameObject, 'name',
                 {
                     icon: 'settings',           // Title icon
                 }

@@ -1,4 +1,4 @@
-import CreateRoundRectangle from './utils/CreateRoundRectangle.js';
+import CreateRoundRectangle from '../gameobjects/utils/CreateRoundRectangle.js';
 
 var CreateFolderBackground = function (scene, config, style, gameObject) {
     var folderBackgroundStyle = style.folderBackground || {};

@@ -8,8 +8,6 @@ import CreateRangeInput from './CreateRangeInput.js';
 // Folder
 import CreateFolderBackground from './CreateFolderBackground.js';
 import CreateFolderTitle from './CreateFolderTitle.js';
-// Utils
-import CreateRoundRectangle from './utils/CreateRoundRectangle.js';
 
 // function (scene, config, style, gameObject) { return gameObject; }
 
@@ -26,9 +24,6 @@ var Builders = {
     // Folder
     folderBackground: CreateFolderBackground,
     folderTitle: CreateFolderTitle,
-
-    // Uitls
-    roundRectangle: CreateRoundRectangle
 }
 
 export default Builders;

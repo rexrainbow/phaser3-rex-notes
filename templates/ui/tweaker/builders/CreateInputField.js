@@ -5,6 +5,7 @@ import {
 import CreateTextInput from './CreateTextInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
 import CreateRangeInput from './CreateRangeInput.js';
+import CreateListInput from './CreateListInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 var CreateInputField = function (scene, config, style, gameObject) {
@@ -21,6 +22,10 @@ var CreateInputField = function (scene, config, style, gameObject) {
 
         case RangeType:
             callback = CreateRangeInput;
+            break;
+
+        case ListType:
+            callback = CreateListInput;
             break;
 
         default:
