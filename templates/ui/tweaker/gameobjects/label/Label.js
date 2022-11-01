@@ -12,13 +12,13 @@ class Label extends LabelBase {
         config.background = CreateRoundRectangle(scene, undefined, backgroundStyle);
 
         var textStyle = config.text || {};
-        config.text = CreateText(scene, undefined, textStyle);
+        config.text = CreateText(scene, textStyle);
 
-        var iconStyle = config.icon || {};
-        config.icon = CreateImage(scene, undefined, iconStyle);
+        var iconConfig = config.icon || {};
+        config.icon = CreateImage(scene, iconConfig);
 
-        var actionStyle = config.action || {};
-        config.action = CreateImage(scene, undefined, actionStyle);
+        var actionConfig = config.action || {};
+        config.action = CreateImage(scene, actionConfig);
 
         super(scene, config);
     }
