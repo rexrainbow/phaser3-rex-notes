@@ -38450,9 +38450,9 @@
 
   var PointerUpDownCell = function PointerUpDownCell(table, tableConfig) {
     table.on('pointerdown', function (pointer, localX, localY, event) {
-      EmitCellEvent(this.eventEmitter, 'cell.down', table, pointer.x, pointer.y, pointer, event);
+      EmitCellEvent(this.eventEmitter, 'cell.down', table, pointer.worldX, pointer.worldY, pointer, event);
     }, this).on('pointerup', function (pointer, localX, localY, event) {
-      EmitCellEvent(this.eventEmitter, 'cell.up', table, pointer.x, pointer.y, pointer, event);
+      EmitCellEvent(this.eventEmitter, 'cell.up', table, pointer.worldX, pointer.worldY, pointer, event);
     }, this);
   };
 
@@ -38462,7 +38462,7 @@
 
   var OnMove = function OnMove(pointer, localX, localY, event) {
     var table = this.childrenMap.child;
-    var cellIndex = table.pointToCellIndex(pointer.x, pointer.y);
+    var cellIndex = table.pointToCellIndex(pointer.worldX, pointer.worldY);
     if (cellIndex === table.input.lastOverCellIndex) {
       return;
     }
@@ -38489,7 +38489,7 @@
     buttonConfig.threshold = 10;
     table._click = new Button(table, buttonConfig);
     table._click.on('click', function (button, gameObject, pointer, event) {
-      EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.x, pointer.y, pointer, event);
+      EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.worldX, pointer.worldY, pointer, event);
     }, this);
   };
 
@@ -38502,7 +38502,7 @@
     table._tap = new Tap(table, tapConfig);
     table._tap.on('tap', function (tap, gameObject, lastPointer) {
       var eventName = "cell.".concat(tap.tapsCount, "tap");
-      EmitCellEvent(this.eventEmitter, eventName, tap.gameObject, tap.x, tap.y, lastPointer);
+      EmitCellEvent(this.eventEmitter, eventName, tap.gameObject, tap.worldX, tap.worldY, lastPointer);
     }, this);
   };
 
@@ -38514,9 +38514,9 @@
     }
     table._press = new Press(table, pressConfig);
     table._press.on('pressstart', function (press, gameObject, lastPointer) {
-      EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, press.x, press.y, lastPointer);
+      EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, press.worldX, press.worldY, lastPointer);
     }, this).on('pressend', function (press, gameObject, lastPointer) {
-      EmitCellEvent(this.eventEmitter, 'cell.pressend', table, press.x, press.y, lastPointer);
+      EmitCellEvent(this.eventEmitter, 'cell.pressend', table, press.worldX, press.worldY, lastPointer);
     }, this);
   };
 
@@ -38532,7 +38532,7 @@
     table._swipe = new Swipe(table, swipeConfig);
     table._swipe.on('swipe', function (swipe, gameObject, lastPointer) {
       var dirName = swipe.left ? 'left' : swipe.right ? 'right' : swipe.up ? 'up' : 'down';
-      EmitCellEvent(this.eventEmitter, "cell.swipe".concat(dirName), table, swipe.x, swipe.y, lastPointer);
+      EmitCellEvent(this.eventEmitter, "cell.swipe".concat(dirName), table, swipe.worldX, swipe.worldY, lastPointer);
     }, this);
   };
 
