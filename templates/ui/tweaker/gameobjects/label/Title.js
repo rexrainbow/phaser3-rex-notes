@@ -5,7 +5,8 @@ import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
 class Title extends Label {
     constructor(scene, config) {
-        super(scene, BuildLabelConfig(scene, config));
+        config = BuildLabelConfig(scene, config);
+        super(scene, config);
         this.type = 'rexTweaker.Title';
     }
 

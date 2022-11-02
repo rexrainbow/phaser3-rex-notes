@@ -1,5 +1,6 @@
 import InputFiledBase from './InputFieldBase.js';
 import BuildLabelConfig from '../utils/BuildLabelConfig.js';
+import CreateLabel from '../utils/CreateLabel.js';
 import CreateList from '../utils/CreateList.js';
 import SetLabelData from '../utils/SetLabelData.js';
 
@@ -16,9 +17,22 @@ class ListInput extends InputFiledBase {
         super(scene, sizerConfig);
         this.type = 'rexTweaker.ListInput';
 
-        var dropDownListConfig = BuildLabelConfig(scene, config.label);
-        dropDownListConfig.list = {
+        var self = this;
 
+        var listConfig = config.list || {};
+        var labelConfig = listConfig.label || listConfig.button;
+        var listButtonConfig = listConfig.button || listConfig.label ;
+        var dropDownListConfig = BuildLabelConfig(scene, labelConfig);
+        dropDownListConfig.list = {
+            createButtonCallback(scene, option) {
+                var gameObject = CreateLabel(scene, listButtonConfig);
+                SetLabelData(gameObject, { text: option.text });
+                gameObject.value = option.value;
+                return gameObject;
+            },
+            onButtonClick(gameObject) {
+                self.setValue(gameObject.value);
+            }
         }
         var list = CreateList(scene, dropDownListConfig);
 

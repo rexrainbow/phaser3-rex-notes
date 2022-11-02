@@ -38827,7 +38827,7 @@
   };
   Object.assign(Methods$4, SetTransitCallbackMethods, DelayCallMethods$1);
 
-  var CreateBackground$2 = function CreateBackground(scene, items, callback, scope) {
+  var CreateBackground$1 = function CreateBackground(scene, items, callback, scope) {
     var background;
     if (callback) {
       items.scene = scene;
@@ -38958,7 +38958,7 @@
       // Background
       var createBackgroundCallback = GetValue$F(config, 'createBackgroundCallback', undefined);
       var createBackgroundCallbackScope = GetValue$F(config, 'createBackgroundCallbackScope', undefined);
-      config.background = CreateBackground$2(scene, items, createBackgroundCallback, createBackgroundCallbackScope);
+      config.background = CreateBackground$1(scene, items, createBackgroundCallback, createBackgroundCallbackScope);
       // Buttons
       var createButtonCallback = GetValue$F(config, 'createButtonCallback', undefined);
       var createButtonCallbackScope = GetValue$F(config, 'createButtonCallbackScope', undefined);
@@ -44296,29 +44296,15 @@
   }(Sizer);
   Object.assign(TweakerShell.prototype, methods$2);
 
-  var CreateBackground$1 = function CreateBackground(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new RoundRectangle$1(scene);
-      scene.add.existing(gameObject);
-    }
-    if (style.radius !== undefined) {
-      gameObject.setRadius(style.radius);
-    }
-    if (style.color) {
-      gameObject.setFillStyle(style.color, style.alpha);
-    }
-    if (style.strokeColor) {
-      if (style.strokeWidth === undefined) {
-        style.strokeWidth = 2;
-      }
-      gameObject.setStrokeStyle(style.strokeWidth, style.strokeColor, style.strokeAlpha);
-    }
+  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
+    var gameObject = new RoundRectangle$1(scene, config);
+    scene.add.existing(gameObject);
     return gameObject;
   };
 
   var CreateBackground = function CreateBackground(scene, config, style, gameObject) {
     // TODO: Might create nine-slice as background
-    return CreateBackground$1(scene, config, style, gameObject);
+    return CreateRoundRectangle$1(scene, style);
   };
 
   var BindingTargetMethods = {
@@ -44397,12 +44383,68 @@
   }(Sizer);
   Object.assign(InputRow.prototype, BindingTargetMethods);
 
+  var PhaserText$1 = Phaser.GameObjects.Text;
+  var CreateText$1 = function CreateText(scene, style) {
+    var gameObject = new PhaserText$1(scene, 0, 0, '', style);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var PhaserImage$1 = Phaser.GameObjects.Image;
+  var CreateImage$1 = function CreateImage(scene, config) {
+    var gameObject = new PhaserImage$1(scene, 0, 0, '');
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var BuildLabelConfig = function BuildLabelConfig(scene, config) {
+    config = config ? DeepClone(config) : {};
+    var backgroundStyle = config.background || {};
+    config.background = CreateRoundRectangle$1(scene, backgroundStyle);
+    var textStyle = config.text || {};
+    config.text = CreateText$1(scene, textStyle);
+    config.icon || {};
+    config.icon = CreateImage$1(scene);
+    config.action || {};
+    config.action = CreateImage$1(scene);
+    return config;
+  };
+
+  var SetLabelData = function SetLabelData(label, config) {
+    if (config === undefined) {
+      config = {};
+    }
+    var text = config.text || '';
+    label.setText(text);
+    var iconGameObjct = label.childrenMap.icon;
+    iconGameObjct.setTexture(config.icon, config.iconFrame);
+    if (config.iconSize) {
+      iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+    }
+    if (config.icon === undefined) {
+      label.hide(iconGameObjct);
+    } else {
+      label.show(iconGameObjct);
+    }
+    var actionGameObjct = label.childrenMap.action;
+    actionGameObjct.setTexture(config.action, config.actionFrame);
+    if (config.iconSize) {
+      actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+    }
+    if (config.action === undefined) {
+      label.hide(actionGameObjct);
+    } else {
+      label.show(actionGameObjct);
+    }
+  };
+
   var Title = /*#__PURE__*/function (_Label) {
     _inherits(Title, _Label);
     var _super = _createSuper(Title);
     function Title(scene, config) {
       var _this;
       _classCallCheck(this, Title);
+      config = BuildLabelConfig(scene, config);
       _this = _super.call(this, scene, config);
       _this.type = 'rexTweaker.Title';
       return _this;
@@ -44413,128 +44455,87 @@
         if (config === undefined) {
           config = {};
         }
-        var text = config.text || config.title || '';
-        this.setText(text);
-        var iconGameObjct = this.childrenMap.icon;
-        iconGameObjct.setTexture(config.icon, config.iconFrame);
-        if (config.iconSize) {
-          iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
-        }
-        if (config.icon === undefined) {
-          this.hide(iconGameObjct);
-        } else {
-          this.show(iconGameObjct);
-        }
+        config = DeepClone(config);
+        config.text = config.text || config.title || '';
+        SetLabelData(this, config);
         return this;
       }
     }]);
     return Title;
   }(Label);
 
-  var PhaserText$1 = Phaser.GameObjects.Text;
-  var CreateText$1 = function CreateText(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new PhaserText$1(scene, 0, 0, '', style);
-      scene.add.existing(gameObject);
-    }
-    return gameObject;
-  };
-
-  var PhaserImage$1 = Phaser.GameObjects.Image;
-  var CreateImage$1 = function CreateImage(scene, config, style, gameObject) {
-    if (!gameObject) {
-      gameObject = new PhaserImage$1(scene, 0, 0, '');
-      scene.add.existing(gameObject);
-    }
-    if (config) {
-      gameObject.setTexture(config.key, config.frame);
-    }
-    return gameObject;
-  };
-
   var CreateTitleLabel = function CreateTitleLabel(scene, config, style, gameObject) {
     if (!gameObject) {
-      var backgroundStyle = style.background || {};
-      var textStyle = style.text || {};
-      style.icon || {};
-      gameObject = new Title(scene, _objectSpread2(_objectSpread2({}, style), {}, {
-        // Create game objects from config
-        background: CreateBackground$1(scene, undefined, backgroundStyle),
-        text: CreateText$1(scene, undefined, textStyle),
-        icon: CreateImage$1(scene, undefined)
-      }));
+      gameObject = new Title(scene, style);
       scene.add.existing(gameObject);
     }
     return gameObject;
   };
 
-  var InputFiledBase = function InputFiledBase(BaseClass) {
-    var Base = /*#__PURE__*/function (_BaseClass) {
-      _inherits(Base, _BaseClass);
-      var _super = _createSuper(Base);
-      function Base() {
-        _classCallCheck(this, Base);
-        return _super.apply(this, arguments);
+  var InputFiledBase = /*#__PURE__*/function (_Sizer) {
+    _inherits(InputFiledBase, _Sizer);
+    var _super = _createSuper(InputFiledBase);
+    function InputFiledBase() {
+      _classCallCheck(this, InputFiledBase);
+      return _super.apply(this, arguments);
+    }
+    _createClass(InputFiledBase, [{
+      key: "value",
+      get: function get() {
+        return this._value;
       }
-      _createClass(Base, [{
-        key: "value",
-        get: function get() {
-          return this._value;
-        }
 
-        // Override
-        ,
-        set: function set(value) {
-          if (this._value === value) {
-            return;
-          }
-          this._value = value;
-          this.emit('valuechange', value);
+      // Override
+      ,
+      set: function set(value) {
+        if (this._value === value) {
+          return;
         }
-      }, {
-        key: "getValue",
-        value: function getValue() {
-          return this.value;
-        }
-      }, {
-        key: "setValue",
-        value: function setValue(value) {
-          this.value = value;
-          return this;
-        }
+        this._value = value;
+        this.emit('valuechange', value);
+      }
+    }, {
+      key: "getValue",
+      value: function getValue() {
+        return this.value;
+      }
+    }, {
+      key: "setValue",
+      value: function setValue(value) {
+        this.value = value;
+        return this;
+      }
 
-        // Override
-      }, {
-        key: "readOnly",
-        get: function get() {
-          return this._readOnly;
-        }
+      // Override
+    }, {
+      key: "readOnly",
+      get: function get() {
+        return this._readOnly;
+      }
 
-        // Override
-        ,
-        set: function set(value) {
-          this._readOnly = value;
+      // Override
+      ,
+      set: function set(value) {
+        this._readOnly = value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
         }
-      }, {
-        key: "setReadOnly",
-        value: function setReadOnly(enable) {
-          if (enable === undefined) {
-            enable = true;
-          }
-          this.readOnly = enable;
-          return true;
-        }
-      }, {
-        key: "setTextFormatCallback",
-        value: function setTextFormatCallback(callback) {
-          this.textFormatCallback = callback;
-          return this;
-        }
-      }]);
-      return Base;
-    }(BaseClass);
-    return Base;
-  };
+        this.readOnly = enable;
+        return true;
+      }
+    }, {
+      key: "setTextFormatCallback",
+      value: function setTextFormatCallback(callback) {
+        this.textFormatCallback = callback;
+        return this;
+      }
+    }]);
+    return InputFiledBase;
+  }(Sizer);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -44644,7 +44645,7 @@
       }
     }]);
     return TextInput;
-  }(InputFiledBase(Sizer));
+  }(InputFiledBase);
 
   var CreateTextInput = function CreateTextInput(scene, config, style, gameObject) {
     if (!gameObject) {
@@ -44665,7 +44666,7 @@
         config = {};
       }
       var sizerConfig = {
-        orientation: 0 // x            
+        orientation: 0 // x
       };
 
       _this = _super.call(this, scene, sizerConfig);
@@ -44706,7 +44707,7 @@
       }
     }]);
     return NumberInput;
-  }(InputFiledBase(Sizer));
+  }(InputFiledBase);
 
   var CreateNumberInput = function CreateNumberInput(scene, config, style, gameObject) {
     if (!gameObject) {
@@ -44717,14 +44718,8 @@
     return gameObject;
   };
 
-  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle$1(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
-  var CreateSlider$1 = function CreateSlider(scene, config) {
-    config = DeepClone(config);
+  var BuildSliderConfig = function BuildSliderConfig(scene, config) {
+    config = config ? DeepClone(config) : {};
     var trackConfig = config.track;
     if (trackConfig) {
       config.track = CreateRoundRectangle$1(scene, trackConfig);
@@ -44742,6 +44737,11 @@
       }
       config.thumb = CreateRoundRectangle$1(scene, thumbConfig);
     }
+    return config;
+  };
+
+  var CreateSlider$1 = function CreateSlider(scene, config) {
+    config = BuildSliderConfig(scene, config);
     var gameObject = new Slider$1(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
@@ -44830,7 +44830,7 @@
       }
     }]);
     return RangeInput;
-  }(InputFiledBase(Sizer));
+  }(InputFiledBase);
 
   var CreateRangeInput = function CreateRangeInput(scene, config, style, gameObject) {
     if (!gameObject) {
@@ -44839,6 +44839,104 @@
     }
     gameObject.setRange(config.min, config.max, config.step);
     gameObject.setInputTextReadOnly(!!config.inputTextReadOnly);
+    return gameObject;
+  };
+
+  var CreateLabel$1 = function CreateLabel(scene, config) {
+    config = BuildLabelConfig(scene, config);
+    var gameObject = new Label(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var CreateList = function CreateList(scene, config) {
+    var gameObject = new DropDownList(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var ListInput = /*#__PURE__*/function (_InputFiledBase) {
+    _inherits(ListInput, _InputFiledBase);
+    var _super = _createSuper(ListInput);
+    function ListInput(scene, config) {
+      var _this;
+      _classCallCheck(this, ListInput);
+      if (config === undefined) {
+        config = {};
+      }
+      var sizerConfig = {
+        orientation: 0 // x
+      };
+
+      _this = _super.call(this, scene, sizerConfig);
+      _this.type = 'rexTweaker.ListInput';
+      var self = _assertThisInitialized(_this);
+      var listConfig = config.list || {};
+      var labelConfig = listConfig.label || listConfig.button;
+      var listButtonConfig = listConfig.button || listConfig.label;
+      var dropDownListConfig = BuildLabelConfig(scene, labelConfig);
+      dropDownListConfig.list = {
+        createButtonCallback: function createButtonCallback(scene, option) {
+          var gameObject = CreateLabel$1(scene, listButtonConfig);
+          SetLabelData(gameObject, {
+            text: option.text
+          });
+          gameObject.value = option.value;
+          return gameObject;
+        },
+        onButtonClick: function onButtonClick(gameObject) {
+          self.setValue(gameObject.value);
+        }
+      };
+      var list = CreateList(scene, dropDownListConfig);
+      _this.add(list, {
+        proportion: 1,
+        expand: true
+      });
+      _this.addChildrenMap('list', list);
+      return _this;
+    }
+    _createClass(ListInput, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value === value) {
+          return;
+        }
+        var list = this.childrenMap.list;
+        var text = GetOptionText(list.options, value);
+        SetLabelData(list, {
+          text: text
+        });
+        _set(_getPrototypeOf(ListInput.prototype), "value", value, this, true);
+      }
+    }, {
+      key: "setOptions",
+      value: function setOptions(options) {
+        this.childrenMap.list.setOptions(options);
+        return this;
+      }
+    }]);
+    return ListInput;
+  }(InputFiledBase);
+  var GetOptionText = function GetOptionText(options, value) {
+    for (var i = 0, cnt = options.length; i < cnt; i++) {
+      var option = options[i];
+      if (option.value === value) {
+        return option.text;
+      }
+    }
+    return undefined;
+  };
+
+  var CreateDropDownListInput = function CreateDropDownListInput(scene, config, style, gameObject) {
+    if (!gameObject) {
+      gameObject = new ListInput(scene, style);
+      scene.add.existing(gameObject);
+    }
+    gameObject.setOptions(config.options);
     return gameObject;
   };
 
@@ -44854,6 +44952,9 @@
         break;
       case RangeType:
         callback = CreateRangeInput;
+        break;
+      case ListType:
+        callback = CreateDropDownListInput;
         break;
       default:
         callback = IsFunction(viewType) ? viewType : CreateTextInput;
@@ -44873,7 +44974,7 @@
       var inputTitle = CreateTitleLabel(scene, config, titleStyle);
       var inputField = CreateInputField(scene, config, style);
       var backgroundStyle = GetValue$c(style, 'background') || {};
-      var background = CreateBackground$1(scene, config, backgroundStyle);
+      var background = CreateRoundRectangle$1(scene, backgroundStyle);
       var inputSizerconfig = _objectSpread2(_objectSpread2(_objectSpread2({}, config), style), {}, {
         inputTitle: inputTitle,
         inputField: inputField,
@@ -44886,8 +44987,8 @@
   };
 
   var CreateFolderBackground = function CreateFolderBackground(scene, config, style, gameObject) {
-    var folderBackgroundStyle = style.folderBackground || {};
-    return CreateBackground$1(scene, config, folderBackgroundStyle, gameObject);
+    style.folderBackground || {};
+    return CreateRoundRectangle$1(scene, config);
   };
 
   var CreateFolderTitle = function CreateFolderTitle(scene, config, style, gameObject) {
@@ -44907,9 +45008,7 @@
     rangeInput: CreateRangeInput,
     // Folder
     folderBackground: CreateFolderBackground,
-    folderTitle: CreateFolderTitle,
-    // Uitls
-    roundRectangle: CreateBackground$1
+    folderTitle: CreateFolderTitle
   };
 
   Phaser.Utils.Objects.GetValue;

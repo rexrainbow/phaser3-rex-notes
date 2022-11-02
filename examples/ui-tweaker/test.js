@@ -39,11 +39,6 @@ class Demo extends Phaser.Scene {
                         space: { icon: 3 }
                     },
 
-                    label: {
-                        iconSize: 20,
-                        space: { icon: 3 }
-                    },
-
                     inputText: {
                         background: {
                             color: COLOR_DARK
@@ -74,6 +69,23 @@ class Demo extends Phaser.Scene {
                             color: COLOR_LIGHT,
                             size: 16,
                         },
+                    },
+
+                    list: {
+                        label: {
+                            background: {
+                                color: COLOR_DARK,
+                            },
+                            space: { left: 5, right: 5 }
+                        },
+                        button: {
+                            background: {
+                                color: COLOR_DARK,
+                                strokeColor: COLOR_LIGHT
+                            },
+                            space: { left: 5, right: 5, top: 8, bottom: 8 }
+                        },
+
                     },
 
                     proportion: {
