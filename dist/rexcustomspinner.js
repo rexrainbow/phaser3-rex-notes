@@ -2179,6 +2179,7 @@
   };
 
   var DegToRad = Phaser.Math.DegToRad;
+  var PointRotateAround = Phaser.Math.RotateAround;
   var PathData = /*#__PURE__*/function () {
     function PathData(pathData) {
       _classCallCheck(this, PathData);

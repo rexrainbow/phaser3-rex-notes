@@ -41,24 +41,25 @@ class Demo extends Phaser.Scene {
                 gameObject, 'y',
                 {
                     icon: 'settings',           // Title icon
-                    options: [
+                    options: [                  // List options
                         { text: 'top', value: 0 },
                         { text: 'center', value: 300 },
                         { text: 'bottom', value: 600 },
                     ]
+                    // Default list is dropdown-list
                 }
             )
             .addInput(
                 gameObject, 'radius',
                 {
                     icon: 'settings',           // Title icon
-                    title: 'size',
-                    options: [
+                    title: 'size',              // Custom title
+                    options: [                  // List options
                         { text: 'L', value: 40 },
                         { text: 'M', value: 20 },
                         { text: 'S', value: 10 },
                     ],
-                    view: 'buttons'
+                    view: 'buttons'             // Buttons list
                 }
             )
             .addInput(

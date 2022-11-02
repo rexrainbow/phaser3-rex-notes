@@ -9,6 +9,7 @@ import ToPoints from './ToPoints.js';
 import ToPolygon from './ToPolygon.js';
 
 const DegToRad = Phaser.Math.DegToRad;
+const PointRotateAround = Phaser.Math.RotateAround;
 
 class PathData {
     constructor(pathData) {

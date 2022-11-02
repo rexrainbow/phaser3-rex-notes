@@ -1932,6 +1932,7 @@
   Phaser.Geom.Polygon;
 
   Phaser.Math.DegToRad;
+  Phaser.Math.RotateAround;
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
