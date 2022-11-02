@@ -11344,13 +11344,12 @@
     this.delayCall(duration, function () {
       // After popping up
       // Can click
-      var onButtonClick = this.listOnButtonClick;
-      if (onButtonClick) {
-        listPanel.on('button.click', function (button, index, pointer, event) {
-          onButtonClick.call(this, button, index, pointer, event);
-          this.emit('button.click', this, listPanel, button, index, pointer, event);
-        }, this);
-      }
+      listPanel.on('button.click', function (button, index, pointer, event) {
+        if (this.listOnButtonClick) {
+          this.listOnButtonClick.call(this, button, index, pointer, event);
+        }
+        this.emit('button.click', this, listPanel, button, index, pointer, event);
+      }, this);
 
       // Can close list panel
       scene.input.once('pointerup', this.closeListPanel, this);

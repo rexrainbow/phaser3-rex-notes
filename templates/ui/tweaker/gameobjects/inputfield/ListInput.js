@@ -1,6 +1,5 @@
 import InputFiledBase from './InputFieldBase.js';
-import BuildLabelConfig from '../utils/BuildLabelConfig.js';
-import CreateLabel from '../utils/CreateLabel.js';
+import BuildListConfig from '../utils/BuildListConfig.js';
 import CreateList from '../utils/CreateList.js';
 import SetLabelData from '../utils/SetLabelData.js';
 
@@ -17,24 +16,8 @@ class ListInput extends InputFiledBase {
         super(scene, sizerConfig);
         this.type = 'rexTweaker.ListInput';
 
-        var self = this;
-
-        var listConfig = config.list || {};
-        var labelConfig = listConfig.label || listConfig.button;
-        var listButtonConfig = listConfig.button || listConfig.label ;
-        var dropDownListConfig = BuildLabelConfig(scene, labelConfig);
-        dropDownListConfig.list = {
-            createButtonCallback(scene, option) {
-                var gameObject = CreateLabel(scene, listButtonConfig);
-                SetLabelData(gameObject, { text: option.text });
-                gameObject.value = option.value;
-                return gameObject;
-            },
-            onButtonClick(gameObject) {
-                self.setValue(gameObject.value);
-            }
-        }
-        var list = CreateList(scene, dropDownListConfig);
+        var listConfig = BuildListConfig(scene, config.list);
+        var list = CreateList(scene, listConfig);
 
         this.add(
             list,
@@ -42,6 +25,11 @@ class ListInput extends InputFiledBase {
         );
 
         this.addChildrenMap('list', list);
+
+        list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
+            var value = GetOptionValue(list.options, button.text);
+            this.setValue(value);
+        }, this);
 
     }
 
@@ -71,6 +59,16 @@ var GetOptionText = function (options, value) {
         var option = options[i];
         if (option.value === value) {
             return option.text;
+        }
+    }
+    return undefined;
+}
+
+var GetOptionValue = function (options, text) {
+    for (var i = 0, cnt = options.length; i < cnt; i++) {
+        var option = options[i];
+        if (option.text === text) {
+            return option.value;
         }
     }
     return undefined;

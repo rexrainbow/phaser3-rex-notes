@@ -39329,13 +39329,12 @@
     this.delayCall(duration, function () {
       // After popping up
       // Can click
-      var onButtonClick = this.listOnButtonClick;
-      if (onButtonClick) {
-        listPanel.on('button.click', function (button, index, pointer, event) {
-          onButtonClick.call(this, button, index, pointer, event);
-          this.emit('button.click', this, listPanel, button, index, pointer, event);
-        }, this);
-      }
+      listPanel.on('button.click', function (button, index, pointer, event) {
+        if (this.listOnButtonClick) {
+          this.listOnButtonClick.call(this, button, index, pointer, event);
+        }
+        this.emit('button.click', this, listPanel, button, index, pointer, event);
+      }, this);
 
       // Can close list panel
       scene.input.once('pointerup', this.closeListPanel, this);
@@ -44579,7 +44578,7 @@
   };
 
   var CreateCanvasInput = function CreateCanvasInput(scene, config) {
-    config = DeepClone(config);
+    config = config ? DeepClone(config) : {};
     if (!HasValue(config, 'wrap.vAlign')) {
       SetValue$1(config, 'wrap.vAlign', 'center');
     }
@@ -44849,6 +44848,24 @@
     return gameObject;
   };
 
+  var BuildListConfig = function BuildListConfig(scene, config) {
+    config = config ? DeepClone(config) : {};
+    var labelConfig = config.label || config.button;
+    var listButtonConfig = config.button || config.label;
+    delete config.label;
+    delete config.button;
+    var listConfig = BuildLabelConfig(scene, labelConfig);
+    listConfig.list = config;
+    listConfig.list.createButtonCallback = function (scene, option) {
+      var gameObject = CreateLabel$1(scene, listButtonConfig);
+      SetLabelData(gameObject, {
+        text: option.text
+      });
+      return gameObject;
+    };
+    return listConfig;
+  };
+
   var CreateList = function CreateList(scene, config) {
     var gameObject = new DropDownList(scene, config);
     scene.add.existing(gameObject);
@@ -44870,30 +44887,17 @@
 
       _this = _super.call(this, scene, sizerConfig);
       _this.type = 'rexTweaker.ListInput';
-      var self = _assertThisInitialized(_this);
-      var listConfig = config.list || {};
-      var labelConfig = listConfig.label || listConfig.button;
-      var listButtonConfig = listConfig.button || listConfig.label;
-      var dropDownListConfig = BuildLabelConfig(scene, labelConfig);
-      dropDownListConfig.list = {
-        createButtonCallback: function createButtonCallback(scene, option) {
-          var gameObject = CreateLabel$1(scene, listButtonConfig);
-          SetLabelData(gameObject, {
-            text: option.text
-          });
-          gameObject.value = option.value;
-          return gameObject;
-        },
-        onButtonClick: function onButtonClick(gameObject) {
-          self.setValue(gameObject.value);
-        }
-      };
-      var list = CreateList(scene, dropDownListConfig);
+      var listConfig = BuildListConfig(scene, config.list);
+      var list = CreateList(scene, listConfig);
       _this.add(list, {
         proportion: 1,
         expand: true
       });
       _this.addChildrenMap('list', list);
+      list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
+        var value = GetOptionValue(list.options, button.text);
+        this.setValue(value);
+      }, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(ListInput, [{
@@ -44926,6 +44930,15 @@
       var option = options[i];
       if (option.value === value) {
         return option.text;
+      }
+    }
+    return undefined;
+  };
+  var GetOptionValue = function GetOptionValue(options, text) {
+    for (var i = 0, cnt = options.length; i < cnt; i++) {
+      var option = options[i];
+      if (option.text === text) {
+        return option.value;
       }
     }
     return undefined;

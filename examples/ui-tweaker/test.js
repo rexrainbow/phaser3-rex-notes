@@ -19,87 +19,7 @@ class Demo extends Phaser.Scene {
     create() {
         var gameObject = this.add.circle(400, 300, 20, 0xff0000);
 
-        var panel = this.rexUI.add.tweaker({
-            width: 300, height: 300,
-
-            styles: {
-                background: {
-                    radius: 20,
-                    color: 0x0,
-                    strokeColor: 0x888888
-                },
-
-                inputRow: {
-                    background: {
-                        strokeColor: COLOR_LIGHT
-                    },
-
-                    title: {
-                        iconSize: 20,
-                        space: { icon: 3 }
-                    },
-
-                    inputText: {
-                        background: {
-                            color: COLOR_DARK
-                        },
-                        focusStyle: {
-                            color: COLOR_PRIMARY,
-                        },
-                        style: {
-                            backgroundBottomY: 4,
-                            backgroundHeight: 18,
-                        },
-                        cursorStyle: {
-                            color: 'black',
-                            backgroundColor: 'white',
-                        }
-                    },
-
-                    slider: {
-                        track: {
-                            color: COLOR_DARK,
-                            height: 8,
-                        },
-                        indicator: {
-                            color: COLOR_PRIMARY,
-                            height: 8,
-                        },
-                        thumb: {
-                            color: COLOR_LIGHT,
-                            size: 16,
-                        },
-                    },
-
-                    list: {
-                        label: {
-                            background: {
-                                color: COLOR_DARK,
-                            },
-                            space: { left: 5, right: 5 }
-                        },
-                        button: {
-                            background: {
-                                color: COLOR_DARK,
-                                strokeColor: COLOR_LIGHT
-                            },
-                            space: { left: 5, right: 5, top: 8, bottom: 8 }
-                        },
-
-                    },
-
-                    proportion: {
-                        title: 1,
-                        inputField: 2,
-                        range: { slider: 2, inputText: 1 }
-                    }
-                },
-
-                space: {
-                    left: 20, right: 20, top: 20, bottom: 20
-                }
-            },
-        })
+        var panel = CreatePanel(this)
             .setPosition(0, 0)
             .setOrigin(0)
             .layout();
@@ -145,6 +65,90 @@ class Demo extends Phaser.Scene {
 
     update() {
     }
+}
+
+var CreatePanel = function (scene) {
+    return scene.rexUI.add.tweaker({
+        width: 300,
+
+        styles: {
+            background: {
+                radius: 20,
+                color: 0x0,
+                strokeColor: 0x888888
+            },
+
+            inputRow: {
+                background: {
+                    strokeColor: COLOR_LIGHT
+                },
+
+                title: {
+                    iconSize: 20,
+                    space: { icon: 3 }
+                },
+
+                inputText: {
+                    background: {
+                        color: COLOR_DARK
+                    },
+                    focusStyle: {
+                        color: COLOR_PRIMARY,
+                    },
+                    style: {
+                        backgroundBottomY: 4,
+                        backgroundHeight: 18,
+                    },
+                    cursorStyle: {
+                        color: 'black',
+                        backgroundColor: 'white',
+                    }
+                },
+
+                slider: {
+                    track: {
+                        color: COLOR_DARK,
+                        height: 8,
+                    },
+                    indicator: {
+                        color: COLOR_PRIMARY,
+                        height: 8,
+                    },
+                    thumb: {
+                        color: COLOR_LIGHT,
+                        size: 16,
+                    },
+                },
+
+                list: {
+                    label: {
+                        background: {
+                            color: COLOR_DARK,
+                        },
+                        space: { left: 5, right: 5 }
+                    },
+                    button: {
+                        background: {
+                            color: COLOR_DARK,
+                            strokeColor: COLOR_LIGHT
+                        },
+                        space: { left: 5, right: 5, top: 8, bottom: 8 }
+                    },
+
+                },
+
+                proportion: {
+                    title: 1,
+                    inputField: 2,
+                    range: { slider: 2, inputText: 1 }
+                }
+            },
+
+            space: {
+                left: 20, right: 20, top: 20, bottom: 20
+            }
+        },
+    })
 }
 
 var config = {

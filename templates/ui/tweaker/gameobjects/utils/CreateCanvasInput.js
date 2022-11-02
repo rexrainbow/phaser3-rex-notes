@@ -4,7 +4,7 @@ import SetValue from '../../../../../plugins/utils/object/SetValue.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
 var CreateCanvasInput = function (scene, config) {
-    config = DeepClone(config);
+    config = (config) ? DeepClone(config) : {};
 
     if (!HasValue(config, 'wrap.vAlign')) {
         SetValue(config, 'wrap.vAlign', 'center');
