@@ -9,7 +9,7 @@ var OverCell = function (table, tableConfig) {
 
 var OnMove = function (pointer, localX, localY, event) {
     var table = this.childrenMap.child;
-    var cellIndex = table.pointToCellIndex(pointer.x, pointer.y);
+    var cellIndex = table.pointToCellIndex(pointer.worldX, pointer.worldY);
     if (cellIndex === table.input.lastOverCellIndex) {
         return;
     }
