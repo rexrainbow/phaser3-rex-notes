@@ -17,7 +17,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = this.add.circle(400, 300, 20, 0xff0000);
+        var gameObject = this.add.circle(400, 300, 20, 0xff0000)
+            .setName('abc');
 
         var panel = CreatePanel(this)
             .setPosition(0, 0)
@@ -45,6 +46,19 @@ class Demo extends Phaser.Scene {
                         { text: 'center', value: 300 },
                         { text: 'bottom', value: 600 },
                     ]
+                }
+            )
+            .addInput(
+                gameObject, 'radius',
+                {
+                    icon: 'settings',           // Title icon
+                    title: 'size',
+                    options: [
+                        { text: 'L', value: 40 },
+                        { text: 'M', value: 20 },
+                        { text: 'S', value: 10 },
+                    ],
+                    view: 'buttons'
                 }
             )
             .addInput(
@@ -134,7 +148,15 @@ var CreatePanel = function (scene) {
                         },
                         space: { left: 5, right: 5, top: 8, bottom: 8 }
                     },
+                },
 
+                button: {
+                    background: {
+                        color: COLOR_DARK,
+                        strokeColor: COLOR_LIGHT,
+                        'active.color': COLOR_LIGHT,
+                    },
+                    space: { left: 8, right: 8, top: 8, bottom: 8 }
                 },
 
                 proportion: {

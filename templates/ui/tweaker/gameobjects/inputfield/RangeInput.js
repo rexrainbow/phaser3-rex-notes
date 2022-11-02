@@ -12,10 +12,7 @@ class RangeInput extends InputFiledBase {
             config = {};
         }
 
-        var sizerConfig = {
-            orientation: 0, // x            
-        }
-        super(scene, sizerConfig);
+        super(scene);
         this.type = 'rexTweaker.RangeInput';
 
         var sliderConfig = config.slider;

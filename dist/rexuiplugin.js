@@ -1941,7 +1941,7 @@
   SetValue$1(window, 'RexPlugins.UI.NinePatch2', NinePatch);
 
   var GetValue$2x = Phaser.Utils.Objects.GetValue;
-  var RoundRectangle$2 = /*#__PURE__*/function () {
+  var RoundRectangle$3 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
       this.cornerRadius = {};
@@ -2298,7 +2298,7 @@
   var IsPlainObject$G = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$2w = Phaser.Utils.Objects.GetValue;
   var Earcut$1 = Phaser.Geom.Polygon.Earcut;
-  var RoundRectangle$1 = /*#__PURE__*/function (_Shape) {
+  var RoundRectangle$2 = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
     var _super = _createSuper(RoundRectangle);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
@@ -2327,7 +2327,7 @@
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
-      var geom = new RoundRectangle$2(); // Configurate it later
+      var geom = new RoundRectangle$3(); // Configurate it later
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       var radius = GetValue$2w(radiusConfig, 'radius', radiusConfig);
       geom.setTo(0, 0, width, height, radius);
@@ -2579,14 +2579,14 @@
   var isArcCorner = function isArcCorner(radius) {
     return radius.x !== 0 && radius.y !== 0;
   };
-  Object.assign(RoundRectangle$1.prototype, Render$3);
+  Object.assign(RoundRectangle$2.prototype, Render$3);
 
   ObjectFactory.register('roundRectangle', function (x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-    var gameObject = new RoundRectangle$1(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
+    var gameObject = new RoundRectangle$2(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue$1(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$1);
+  SetValue$1(window, 'RexPlugins.UI.RoundRectangle', RoundRectangle$2);
 
   // copy from Phaser.GameObjects.Text
 
@@ -3025,7 +3025,7 @@
   var Rad180 = DegToRad$b(180);
   var Rad270 = DegToRad$b(270);
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
-    var geom = new RoundRectangle$2(x, y, width, height, radiusConfig),
+    var geom = new RoundRectangle$3(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
       minHeight = geom.minHeight,
       scaleRX = width >= minWidth ? 1 : width / minWidth,
@@ -3155,7 +3155,7 @@
   };
 
   var GetValue$2v = Phaser.Utils.Objects.GetValue;
-  var RoundRectangle = /*#__PURE__*/function (_Canvas) {
+  var RoundRectangle$1 = /*#__PURE__*/function (_Canvas) {
     _inherits(RoundRectangle, _Canvas);
     var _super = _createSuper(RoundRectangle);
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
@@ -3280,11 +3280,11 @@
   }(Canvas);
 
   ObjectFactory.register('roundRectangleCanvas', function (x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
-    var gameObject = new RoundRectangle(this.scene, x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+    var gameObject = new RoundRectangle$1(this.scene, x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue$1(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle);
+  SetValue$1(window, 'RexPlugins.UI.RoundRectangleCanvas', RoundRectangle$1);
 
   /**
    * @author       Richard Davey <rich@photonstorm.com>
@@ -31604,7 +31604,7 @@
   };
 
   var GetValue$14 = Phaser.Utils.Objects.GetValue;
-  var Label = /*#__PURE__*/function (_Sizer) {
+  var Label$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
     var _super = _createSuper(Label);
     function Label(scene, config) {
@@ -31877,11 +31877,11 @@
   }(Sizer);
 
   ObjectFactory.register('label', function (config) {
-    var gameObject = new Label(this.scene, config);
+    var gameObject = new Label$1(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue$1(window, 'RexPlugins.UI.Label', Label);
+  SetValue$1(window, 'RexPlugins.UI.Label', Label$1);
 
   var GetValue$13 = Phaser.Utils.Objects.GetValue;
   var TitleLabel = /*#__PURE__*/function (_Sizer) {
@@ -38841,7 +38841,7 @@
     return background;
   };
 
-  var CreateButtons$1 = function CreateButtons(scene, items, callback, scope) {
+  var CreateButtons$2 = function CreateButtons(scene, items, callback, scope) {
     var item;
     var buttons = [],
       button;
@@ -38962,7 +38962,7 @@
       // Buttons
       var createButtonCallback = GetValue$F(config, 'createButtonCallback', undefined);
       var createButtonCallbackScope = GetValue$F(config, 'createButtonCallbackScope', undefined);
-      config.buttons = CreateButtons$1(scene, items, createButtonCallback, createButtonCallbackScope);
+      config.buttons = CreateButtons$2(scene, items, createButtonCallback, createButtonCallbackScope);
       _this = _super.call(this, scene, config);
       _this.type = 'rexMenu';
       _this.items = items;
@@ -39485,7 +39485,7 @@
       }
     }]);
     return DropDownList;
-  }(Label);
+  }(Label$1);
   Object.assign(DropDownList.prototype, Methods$3);
 
   ObjectFactory.register('dropDownList', function (config) {
@@ -40328,7 +40328,7 @@
       }
     }]);
     return TextBox;
-  }(Label);
+  }(Label$1);
   var createDefaultTextObject$1 = function createDefaultTextObject(scene) {
     return scene.add.text(0, 0, '', {
       wordWrap: {
@@ -43666,7 +43666,7 @@
       }
     }]);
     return Toast;
-  }(Label);
+  }(Label$1);
   var TransitionMode$1 = {
     popUp: 0,
     fadeIn: 1,
@@ -44190,6 +44190,7 @@
   var NumberType = 'number';
   var RangeType = 'range';
   var ListType = 'list';
+  var ButtonsType = 'buttons';
   var BooleanType = 'boolean';
   var ColorType = 'color';
   var Pointer2dType = 'pointer2d';
@@ -44296,9 +44297,71 @@
   Object.assign(TweakerShell.prototype, methods$2);
 
   var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle$1(scene, config);
+    var gameObject = new RoundRectangle(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
+  };
+  var RoundRectangle = /*#__PURE__*/function (_RoundRectangleBase) {
+    _inherits(RoundRectangle, _RoundRectangleBase);
+    var _super = _createSuper(RoundRectangle);
+    function RoundRectangle(scene, config) {
+      var _this;
+      _classCallCheck(this, RoundRectangle);
+      _this = _super.call(this, scene, config);
+      var activeStyle = ExtractByPrefix(config, 'active');
+      for (var name in activeStyle) {
+        var propertyName = StyleToProperty[name] || name;
+        var value = activeStyle[name];
+        delete activeStyle[name];
+        activeStyle[propertyName] = value;
+      }
+      _this.activeStyle = activeStyle;
+      return _this;
+    }
+    _createClass(RoundRectangle, [{
+      key: "modifyStyle",
+      value: function modifyStyle(style) {
+        for (var key in style) {
+          this[key] = style[key];
+        }
+        return this;
+      }
+    }, {
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        if (this.activeState === enable) {
+          return this;
+        }
+        this.activeState = enable;
+        if (enable) {
+          var activeStyle = this.activeStyle;
+          var styleSave = GetPartialData(this, activeStyle);
+          if (IsKeyValueEqual(activeStyle, styleSave)) {
+            return;
+          }
+          this.styleSave = styleSave;
+          this.modifyStyle(activeStyle);
+        } else {
+          if (!this.styleSave) {
+            return this;
+          }
+          this.modifyStyle(this.styleSave);
+          this.styleSave = undefined;
+        }
+        return this;
+      }
+    }]);
+    return RoundRectangle;
+  }(RoundRectangle$2);
+  var StyleToProperty = {
+    color: 'fillColor',
+    alpha: 'fillAlpha',
+    strokeColor: 'strokeColor',
+    strokeAlpha: 'strokeAlpha',
+    strokeWidth: 'lineWidth'
   };
 
   var CreateBackground = function CreateBackground(scene, config, style, gameObject) {
@@ -44461,7 +44524,7 @@
       }
     }]);
     return Title;
-  }(Label);
+  }(Label$1);
 
   var CreateTitleLabel = function CreateTitleLabel(scene, config, style, gameObject) {
     if (!gameObject) {
@@ -44602,11 +44665,7 @@
       if (config === undefined) {
         config = {};
       }
-      var sizerConfig = {
-        orientation: 0 // x            
-      };
-
-      _this = _super.call(this, scene, sizerConfig);
+      _this = _super.call(this, scene);
       _this.type = 'rexTweaker.TextInput';
       var inputTextConfig = config.inputText;
       var inputText = CreateCanvasInput(scene, inputTextConfig);
@@ -44664,11 +44723,7 @@
       if (config === undefined) {
         config = {};
       }
-      var sizerConfig = {
-        orientation: 0 // x
-      };
-
-      _this = _super.call(this, scene, sizerConfig);
+      _this = _super.call(this, scene);
       _this.type = 'rexTweaker.NumberInput';
       var inputTextConfig = config.inputNumber || config.inputText;
       var inputText = CreateCanvasInput(scene, inputTextConfig).setNumberInput();
@@ -44758,11 +44813,7 @@
       if (config === undefined) {
         config = {};
       }
-      var sizerConfig = {
-        orientation: 0 // x            
-      };
-
-      _this = _super.call(this, scene, sizerConfig);
+      _this = _super.call(this, scene);
       _this.type = 'rexTweaker.RangeInput';
       var sliderConfig = config.slider;
       var trackSizeKey = _this.orientation === 0 ? 'track.height' : 'track.width';
@@ -44847,6 +44898,22 @@
     scene.add.existing(gameObject);
     return gameObject;
   };
+  var Label = /*#__PURE__*/function (_LabelBase) {
+    _inherits(Label, _LabelBase);
+    var _super = _createSuper(Label);
+    function Label() {
+      _classCallCheck(this, Label);
+      return _super.apply(this, arguments);
+    }
+    _createClass(Label, [{
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        this.childrenMap.background.setActiveState(enable);
+        return this;
+      }
+    }]);
+    return Label;
+  }(Label$1);
 
   var BuildListConfig = function BuildListConfig(scene, config) {
     config = config ? DeepClone(config) : {};
@@ -44872,6 +44939,25 @@
     return gameObject;
   };
 
+  var GetOptionText = function GetOptionText(options, value) {
+    for (var i = 0, cnt = options.length; i < cnt; i++) {
+      var option = options[i];
+      if (option.value === value) {
+        return option.text;
+      }
+    }
+    return undefined;
+  };
+  var GetOptionValue = function GetOptionValue(options, text) {
+    for (var i = 0, cnt = options.length; i < cnt; i++) {
+      var option = options[i];
+      if (option.text === text) {
+        return option.value;
+      }
+    }
+    return undefined;
+  };
+
   var ListInput = /*#__PURE__*/function (_InputFiledBase) {
     _inherits(ListInput, _InputFiledBase);
     var _super = _createSuper(ListInput);
@@ -44881,11 +44967,7 @@
       if (config === undefined) {
         config = {};
       }
-      var sizerConfig = {
-        orientation: 0 // x
-      };
-
-      _this = _super.call(this, scene, sizerConfig);
+      _this = _super.call(this, scene);
       _this.type = 'rexTweaker.ListInput';
       var listConfig = BuildListConfig(scene, config.list);
       var list = CreateList(scene, listConfig);
@@ -44925,28 +45007,95 @@
     }]);
     return ListInput;
   }(InputFiledBase);
-  var GetOptionText = function GetOptionText(options, value) {
-    for (var i = 0, cnt = options.length; i < cnt; i++) {
-      var option = options[i];
-      if (option.value === value) {
-        return option.text;
-      }
-    }
-    return undefined;
-  };
-  var GetOptionValue = function GetOptionValue(options, text) {
-    for (var i = 0, cnt = options.length; i < cnt; i++) {
-      var option = options[i];
-      if (option.text === text) {
-        return option.value;
-      }
-    }
-    return undefined;
-  };
 
-  var CreateDropDownListInput = function CreateDropDownListInput(scene, config, style, gameObject) {
+  var CreateListInput = function CreateListInput(scene, config, style, gameObject) {
     if (!gameObject) {
       gameObject = new ListInput(scene, style);
+      scene.add.existing(gameObject);
+    }
+    gameObject.setOptions(config.options);
+    return gameObject;
+  };
+
+  var CreateButtons$1 = function CreateButtons(scene, config) {
+    var gameObject = new Buttons$1(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
+  var SetButtonsActiveStateByText = function SetButtonsActiveStateByText(buttons, text) {
+    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+      var button = buttons[i];
+      if (!button) {
+        continue;
+      }
+      button.setActiveState(button.text === text);
+    }
+  };
+
+  var ButtonsInput = /*#__PURE__*/function (_InputFiledBase) {
+    _inherits(ButtonsInput, _InputFiledBase);
+    var _super = _createSuper(ButtonsInput);
+    function ButtonsInput(scene, config) {
+      var _this;
+      _classCallCheck(this, ButtonsInput);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene);
+      _this.type = 'rexTweaker.ButtonsInput';
+      var list = CreateButtons$1(scene);
+      list.labelConfig = config.button || {};
+      _this.add(list, {
+        proportion: 1,
+        expand: true
+      });
+      _this.addChildrenMap('list', list);
+      list.on('button.click', function (button, index, pointer, event) {
+        var value = GetOptionValue(list.options, button.text);
+        this.setValue(value);
+      }, _assertThisInitialized(_this));
+      return _this;
+    }
+    _createClass(ButtonsInput, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value === value) {
+          return;
+        }
+        var list = this.childrenMap.list;
+        var text = GetOptionText(list.options, value);
+        SetButtonsActiveStateByText(list.childrenMap.buttons, text);
+        _set(_getPrototypeOf(ButtonsInput.prototype), "value", value, this, true);
+      }
+    }, {
+      key: "setOptions",
+      value: function setOptions(options) {
+        var list = this.childrenMap.list;
+        list.options = options;
+        var scene = this.scene;
+        var labelConfig = list.labelConfig;
+        list.clearButtons(true);
+        for (var i = 0, cnt = options.length; i < cnt; i++) {
+          var button = CreateLabel$1(scene, labelConfig).setActiveState(false);
+          var option = options[i];
+          SetLabelData(button, {
+            text: option.text
+          });
+          list.addButton(button);
+        }
+        return this;
+      }
+    }]);
+    return ButtonsInput;
+  }(InputFiledBase);
+
+  var CreateButtonsInput = function CreateButtonsInput(scene, config, style, gameObject) {
+    if (!gameObject) {
+      gameObject = new ButtonsInput(scene, style);
       scene.add.existing(gameObject);
     }
     gameObject.setOptions(config.options);
@@ -44967,7 +45116,10 @@
         callback = CreateRangeInput;
         break;
       case ListType:
-        callback = CreateDropDownListInput;
+        callback = CreateListInput;
+        break;
+      case ButtonsType:
+        callback = CreateButtonsInput;
         break;
       default:
         callback = IsFunction(viewType) ? viewType : CreateTextInput;
@@ -49071,7 +49223,7 @@
 
   var CreateRoundRectangle = function CreateRoundRectangle(scene, data, view, styles, customBuilders) {
     data = MergeStyle(data, styles);
-    var gameObject = new RoundRectangle$1(scene, data);
+    var gameObject = new RoundRectangle$2(scene, data);
     scene.add.existing(gameObject);
     return gameObject;
   };
@@ -49297,7 +49449,7 @@
   };
 
   var CreateLabel = function CreateLabel(scene, data, view, styles, customBuilders) {
-    return CreateAnyLabel(scene, data, view, styles, customBuilders, Label);
+    return CreateAnyLabel(scene, data, view, styles, customBuilders, Label$1);
   };
 
   var CreateBadgeLabel = function CreateBadgeLabel(scene, data, view, styles, customBuilders) {

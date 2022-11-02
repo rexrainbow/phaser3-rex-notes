@@ -1,6 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
-import ExtractByPrefix from './methods/ExtractByPrefix.js';
+import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';

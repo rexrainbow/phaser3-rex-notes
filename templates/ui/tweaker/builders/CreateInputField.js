@@ -1,11 +1,13 @@
 import {
-    StringType, NumberType, RangeType, ListType,
+    StringType, NumberType, RangeType,
+    ListType, ButtonsType,
     BooleanType, ColorType, Pointer2dType, Pointer3dType,
 } from '../utils/inputs/InputTypes.js';
 import CreateTextInput from './CreateTextInput.js';
 import CreateNumberInput from './CreateNumberInput.js';
 import CreateRangeInput from './CreateRangeInput.js';
 import CreateListInput from './CreateListInput.js';
+import CreateButtonsInput from './CreateButtonsInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 var CreateInputField = function (scene, config, style, gameObject) {
@@ -26,6 +28,10 @@ var CreateInputField = function (scene, config, style, gameObject) {
 
         case ListType:
             callback = CreateListInput;
+            break;
+
+        case ButtonsType:
+            callback = CreateButtonsInput;
             break;
 
         default:

@@ -1,6 +1,6 @@
 import ListInput from '../gameobjects/inputfield/ListInput.js';
 
-var CreateDropDownListInput = function (scene, config, style, gameObject) {
+var CreateListInput = function (scene, config, style, gameObject) {
     if (!gameObject) {
         gameObject = new ListInput(scene, style);
         scene.add.existing(gameObject);
@@ -11,4 +11,4 @@ var CreateDropDownListInput = function (scene, config, style, gameObject) {
     return gameObject;
 }
 
-export default CreateDropDownListInput;
+export default CreateListInput;

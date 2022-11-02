@@ -2,6 +2,7 @@ import InputFiledBase from './InputFieldBase.js';
 import BuildListConfig from '../utils/BuildListConfig.js';
 import CreateList from '../utils/CreateList.js';
 import SetLabelData from '../utils/SetLabelData.js';
+import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 
 
 class ListInput extends InputFiledBase {
@@ -10,10 +11,7 @@ class ListInput extends InputFiledBase {
             config = {};
         }
 
-        var sizerConfig = {
-            orientation: 0, // x
-        }
-        super(scene, sizerConfig);
+        super(scene);
         this.type = 'rexTweaker.ListInput';
 
         var listConfig = BuildListConfig(scene, config.list);
@@ -52,26 +50,6 @@ class ListInput extends InputFiledBase {
         this.childrenMap.list.setOptions(options);
         return this;
     }
-}
-
-var GetOptionText = function (options, value) {
-    for (var i = 0, cnt = options.length; i < cnt; i++) {
-        var option = options[i];
-        if (option.value === value) {
-            return option.text;
-        }
-    }
-    return undefined;
-}
-
-var GetOptionValue = function (options, text) {
-    for (var i = 0, cnt = options.length; i < cnt; i++) {
-        var option = options[i];
-        if (option.text === text) {
-            return option.value;
-        }
-    }
-    return undefined;
 }
 
 export default ListInput;
