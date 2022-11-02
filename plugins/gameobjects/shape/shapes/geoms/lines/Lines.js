@@ -138,8 +138,8 @@ class Lines extends PathBase {
         return this.builder.toPolygon(polygon);
     }
 
-    setDisplayPathLength(t) {
-        this.builder.setDisplayPathLength(t);
+    setDisplayPathSegment(startT, endT) {
+        this.builder.setDisplayPathSegment(startT, endT);
         return this;
     }
 }

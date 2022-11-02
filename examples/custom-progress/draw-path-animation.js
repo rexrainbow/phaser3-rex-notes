@@ -18,8 +18,14 @@ class Demo extends Phaser.Scene {
             .setStrokeStyle(2, 0xffffff, 1)
             .setPosition(250, 300)
 
-        var gui = new Dat.GUI();
-        gui.add(path, 'value', 0, 1);
+        this.tweens.add({
+            targets: path,
+            value: 1,
+            repeat: -1
+        })
+
+        // var gui = new Dat.GUI();
+        // gui.add(path, 'value', 0, 1);
     }
 
     update() { }
@@ -39,7 +45,7 @@ var CreatePath = function (scene) {
 
             if (this.isSizeChanged) {
                 path
-                    .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)                    
+                    .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
 
                     .startAt(centerX, centerY)
                     .lineTo(centerX, centerY + radius)
@@ -61,7 +67,9 @@ var CreatePath = function (scene) {
                     .close()
             }
 
-            path.setDisplayPathLength(this.value);
+            var startT = this.value + 0.5;
+            var endT = startT + 0.2;
+            path.setDisplayPathSegment(startT, endT);
 
         },
     })

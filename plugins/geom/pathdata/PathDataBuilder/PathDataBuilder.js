@@ -1,6 +1,6 @@
 import AddPathMethods from './AddPathMethods.js';
-import MovePointsMethods from './MovePointsMethods.js';
-import PathLengthMethods from './PathLengthMethods.js';
+import TransformPointsMethods from './TransformPointsMethods.js';
+import PathSegmentMethods from './PathSegmentMethods.js';
 import ToPoints from '../ToPoints.js';
 import ToPolygon from '../ToPolygon.js';
 
@@ -50,8 +50,8 @@ class PathDataBuilder {
 Object.assign(
     PathDataBuilder.prototype,
     AddPathMethods,
-    MovePointsMethods,
-    PathLengthMethods
+    TransformPointsMethods,
+    PathSegmentMethods
 )
 
 export default PathDataBuilder;

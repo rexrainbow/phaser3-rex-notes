@@ -5442,11 +5442,11 @@
     }
   };
 
-  var DegToRad$6 = Phaser.Math.DegToRad;
-  var Rad0 = DegToRad$6(0);
-  var Rad90 = DegToRad$6(90);
-  var Rad180 = DegToRad$6(180);
-  var Rad270 = DegToRad$6(270);
+  var DegToRad$7 = Phaser.Math.DegToRad;
+  var Rad0 = DegToRad$7(0);
+  var Rad90 = DegToRad$7(90);
+  var Rad180 = DegToRad$7(180);
+  var Rad270 = DegToRad$7(270);
   var AddRoundRectanglePath = function AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration) {
     var geom = new RoundRectangle$1(x, y, width, height, radiusConfig),
       minWidth = geom.minWidth,
@@ -7825,7 +7825,7 @@
     return pathData;
   };
 
-  var DegToRad$5 = Phaser.Math.DegToRad;
+  var DegToRad$6 = Phaser.Math.DegToRad;
   var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && endAngle > startAngle) {
@@ -7834,8 +7834,8 @@
       endAngle += 360;
     }
     var deltaAngle = endAngle - startAngle;
-    var step = DegToRad$5(deltaAngle) / iteration;
-    startAngle = DegToRad$5(startAngle);
+    var step = DegToRad$6(deltaAngle) / iteration;
+    startAngle = DegToRad$6(startAngle);
     for (var i = 0; i <= iteration; i++) {
       var angle = startAngle + step * i;
       var x = centerX + radiusX * Math.cos(angle);
@@ -9188,7 +9188,7 @@
   }();
   Object.assign(Base$2.prototype, DataMethods);
 
-  var DegToRad$4 = Phaser.Math.DegToRad;
+  var DegToRad$5 = Phaser.Math.DegToRad;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
   var GetValue$1d = Phaser.Utils.Objects.GetValue;
   var RenderBase = /*#__PURE__*/function (_Base) {
@@ -9262,7 +9262,7 @@
         return RadToDeg$4(this.rotation);
       },
       set: function set(value) {
-        this.rotation = DegToRad$4(value);
+        this.rotation = DegToRad$5(value);
       }
     }, {
       key: "setAngle",
@@ -10507,7 +10507,7 @@
     return gameObject;
   };
 
-  var DegToRad$3 = Phaser.Math.DegToRad;
+  var DegToRad$4 = Phaser.Math.DegToRad;
   var RadToDeg$3 = Phaser.Math.RadToDeg;
   var GetLocalState = function GetLocalState(gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
@@ -10533,7 +10533,7 @@
           return RadToDeg$3(this.rotation);
         },
         set: function set(value) {
-          this.rotation = DegToRad$3(value);
+          this.rotation = DegToRad$4(value);
         }
       });
       Object.defineProperty(rexContainer, 'displayWidth', {
@@ -10752,14 +10752,14 @@
     }
   };
 
-  var RotateAround$3 = Phaser.Math.RotateAround;
+  var RotateAround$4 = Phaser.Math.RotateAround;
   var Transform = {
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
       point.y -= this.y;
       // Rotate
-      RotateAround$3(point, 0, 0, -this.rotation);
+      RotateAround$4(point, 0, 0, -this.rotation);
       // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
@@ -10770,7 +10770,7 @@
       point.x *= this.scaleX;
       point.y *= this.scaleY;
       // Rotate
-      RotateAround$3(point, 0, 0, this.rotation);
+      RotateAround$4(point, 0, 0, this.rotation);
       // Transform
       point.x += this.x;
       point.y += this.y;
@@ -10850,7 +10850,7 @@
     }
   };
 
-  var DegToRad$2 = Phaser.Math.DegToRad;
+  var DegToRad$3 = Phaser.Math.DegToRad;
   var Rotation = {
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
@@ -10890,7 +10890,7 @@
     },
     setChildLocalAngle: function setChildLocalAngle(child, angle) {
       var state = GetLocalState(child);
-      state.rotation = DegToRad$2(angle);
+      state.rotation = DegToRad$3(angle);
       this.updateChildRotation(child);
       return this;
     },
@@ -11634,7 +11634,7 @@
 
   var Rectangle$2 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
-  var RotateAround$2 = Phaser.Math.RotateAround;
+  var RotateAround$3 = Phaser.Math.RotateAround;
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$2();
@@ -11763,7 +11763,7 @@
       includeParent = false;
     }
     if (gameObject.rotation !== 0) {
-      RotateAround$2(output, gameObject.x, gameObject.y, gameObject.rotation);
+      RotateAround$3(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
@@ -11948,7 +11948,7 @@
     return this;
   };
 
-  var RotateAround$1 = Phaser.Math.RotateAround;
+  var RotateAround$2 = Phaser.Math.RotateAround;
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
       originY = originX;
@@ -11957,7 +11957,7 @@
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
     };
-    RotateAround$1(deltaXY, 0, 0, gameObject.rotation);
+    RotateAround$2(deltaXY, 0, 0, gameObject.rotation);
     gameObject.originX = originX;
     gameObject.originY = originY;
     gameObject.x = gameObject.x + deltaXY.x;
@@ -14242,7 +14242,7 @@
 
   var GetValue$$ = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-  var Linear$5 = Phaser.Math.Linear;
+  var Linear$6 = Phaser.Math.Linear;
   var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
     var _super = _createSuper(Scale);
@@ -14331,10 +14331,10 @@
         }
         t = this.easeFn(t);
         if (this.hasScaleX) {
-          gameObject.scaleX = Linear$5(this.startX, this.endX, t);
+          gameObject.scaleX = Linear$6(this.startX, this.endX, t);
         }
         if (this.hasScaleY) {
-          gameObject.scaleY = Linear$5(this.startY, this.endY, t);
+          gameObject.scaleY = Linear$6(this.startY, this.endY, t);
         }
       }
     }, {
@@ -14604,7 +14604,7 @@
 
   var GetValue$_ = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-  var Linear$4 = Phaser.Math.Linear;
+  var Linear$5 = Phaser.Math.Linear;
   var Fade = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Fade, _EaseValueTaskBase);
     var _super = _createSuper(Fade);
@@ -14663,7 +14663,7 @@
           // Yoyo
           t = 1 - t;
         }
-        gameObject.alpha = Linear$4(this.alphaStart, this.alphaEnd, t);
+        gameObject.alpha = Linear$5(this.alphaStart, this.alphaEnd, t);
       }
     }, {
       key: "complete",
@@ -14805,7 +14805,7 @@
 
   var GetValue$Z = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var Linear$3 = Phaser.Math.Linear;
+  var Linear$4 = Phaser.Math.Linear;
   var EaseMove = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseMove, _EaseValueTaskBase);
     var _super = _createSuper(EaseMove);
@@ -14891,10 +14891,10 @@
         }
         t = this.easeFn(t);
         if (this.hasMoveX) {
-          gameObject.x = Linear$3(this.startX, this.endX, t);
+          gameObject.x = Linear$4(this.startX, this.endX, t);
         }
         if (this.hasMoveY) {
-          gameObject.y = Linear$3(this.startY, this.endY, t);
+          gameObject.y = Linear$4(this.startY, this.endY, t);
         }
       }
     }, {
@@ -14996,7 +14996,7 @@
   };
 
   var IsPlainObject$d = Phaser.Utils.Objects.IsPlainObject;
-  var DistanceBetween$5 = Phaser.Math.Distance.Between;
+  var DistanceBetween$6 = Phaser.Math.Distance.Between;
   var OnInitEaseMove = function OnInitEaseMove(gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
     easeMove.completeEventName = undefined;
@@ -15022,7 +15022,7 @@
         x = config.x;
         y = config.y;
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween$5(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$6(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -15054,7 +15054,7 @@
         x = config.x;
         y = config.y;
         if (config.hasOwnProperty('speed')) {
-          duration = DistanceBetween$5(x, y, this.x, this.y) * 1000 / config.speed;
+          duration = DistanceBetween$6(x, y, this.x, this.y) * 1000 / config.speed;
         } else {
           duration = config.duration;
         }
@@ -15344,7 +15344,7 @@
   };
 
   var GetValue$X = Phaser.Utils.Objects.GetValue;
-  var Linear$2 = Phaser.Math.Linear;
+  var Linear$3 = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
     var _super = _createSuper(EaseValueTask);
@@ -15385,7 +15385,7 @@
       value: function updateGameObject(target, timer) {
         var t = timer.t;
         t = this.easeFn(t);
-        target[this.propertyKey] = Linear$2(this.fromValue, this.toValue, t);
+        target[this.propertyKey] = Linear$3(this.fromValue, this.toValue, t);
       }
     }]);
     return EaseValueTask;
@@ -17332,7 +17332,7 @@
   var IDLE$5 = 'IDLE';
 
   var GetValue$O = Phaser.Utils.Objects.GetValue;
-  var DistanceBetween$4 = Phaser.Math.Distance.Between;
+  var DistanceBetween$5 = Phaser.Math.Distance.Between;
   var Tap = /*#__PURE__*/function (_OnePointerTracer) {
     _inherits(Tap, _OnePointerTracer);
     var _super = _createSuper(Tap);
@@ -17409,7 +17409,7 @@
             break;
           case BEGIN$3:
             var pointer = this.lastPointer;
-            var tapsOffset = DistanceBetween$4(pointer.upX, pointer.upY, pointer.x, pointer.y);
+            var tapsOffset = DistanceBetween$5(pointer.upX, pointer.upY, pointer.x, pointer.y);
             if (tapsOffset > this.tapOffset) {
               // Can't recognize next level, restart here
               this.state = RECOGNIZED$3;
@@ -17663,7 +17663,7 @@
     return GetGame(game).loop.delta;
   };
 
-  var DistanceBetween$3 = Phaser.Math.Distance.Between;
+  var DistanceBetween$4 = Phaser.Math.Distance.Between;
   var AngleBetween$1 = Phaser.Math.Angle.Between;
   var VelocityMethods = {
     getDt: function getDt() {
@@ -17673,7 +17673,7 @@
     getVelocity: function getVelocity() {
       var p1 = this.pointer.position;
       var p0 = this.pointer.prevPosition;
-      var d = DistanceBetween$3(p0.x, p0.y, p1.x, p1.y);
+      var d = DistanceBetween$4(p0.x, p0.y, p1.x, p1.y);
       var velocity = d / (this.getDt() * 0.001);
       return velocity;
     },
@@ -17943,7 +17943,7 @@
 
   var GetValue$L = Phaser.Utils.Objects.GetValue;
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
-  var DistanceBetween$2 = Phaser.Math.Distance.Between;
+  var DistanceBetween$3 = Phaser.Math.Distance.Between;
   var AngleBetween = Phaser.Math.Angle.Between;
   var TwoPointersTracer = /*#__PURE__*/function () {
     function TwoPointersTracer(scene, config) {
@@ -18171,7 +18171,7 @@
         }
         var p0 = this.pointers[0],
           p1 = this.pointers[1];
-        return DistanceBetween$2(p0.x, p0.y, p1.x, p1.y);
+        return DistanceBetween$3(p0.x, p0.y, p1.x, p1.y);
       }
     }, {
       key: "angleBetween",
@@ -18280,9 +18280,9 @@
 
   Phaser.Utils.Objects.GetValue;
 
-  var RotateAround = Phaser.Math.RotateAround;
+  var RotateAround$1 = Phaser.Math.RotateAround;
   var RotateObjectAround = function RotateObjectAround(gameObject, x, y, angle) {
-    RotateAround(gameObject, x, y, angle);
+    RotateAround$1(gameObject, x, y, angle);
     gameObject.rotation += angle;
     return gameObject;
   };
@@ -18331,7 +18331,7 @@
   var WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
   var ShortestBetween = Phaser.Math.Angle.ShortestBetween;
   var RadToDeg$1 = Phaser.Math.RadToDeg;
-  var DegToRad$1 = Phaser.Math.DegToRad;
+  var DegToRad$2 = Phaser.Math.DegToRad;
   var Rotate = /*#__PURE__*/function (_TwoPointersTracer) {
     _inherits(Rotate, _TwoPointersTracer);
     var _super = _createSuper(Rotate);
@@ -18415,7 +18415,7 @@
     }, {
       key: "rotation",
       get: function get() {
-        return DegToRad$1(this.angle);
+        return DegToRad$2(this.angle);
       }
     }, {
       key: "setDragThreshold",
@@ -18984,7 +18984,7 @@
     }
   };
 
-  var Wrap = Phaser.Math.Wrap;
+  var Wrap$1 = Phaser.Math.Wrap;
   var LayoutChildren$4 = function LayoutChildren() {
     var children = this.sizerChildren;
     var child, childConfig, padding;
@@ -19002,7 +19002,7 @@
       if (startChildIndex === 0) {
         childIndex = i;
       } else {
-        childIndex = Wrap(i + startChildIndex, 0, cnt);
+        childIndex = Wrap$1(i + startChildIndex, 0, cnt);
       }
       if (this.rtl) {
         childIndex = cnt - childIndex - 1;
@@ -19719,7 +19719,7 @@
     RunWidthWrap$2.call(this, width);
   };
 
-  var DistanceBetween$1 = Phaser.Math.Distance.Between;
+  var DistanceBetween$2 = Phaser.Math.Distance.Between;
   var GetNearestChildIndex = function GetNearestChildIndex(x, y) {
     var children = this.sizerChildren;
     if (children.length === 0) {
@@ -19735,7 +19735,7 @@
       }
 
       // Check left bound
-      var distance = DistanceBetween$1(child.left, child.centerY, x, y);
+      var distance = DistanceBetween$2(child.left, child.centerY, x, y);
       if (minDistance > distance) {
         minDistance = distance;
         nearestIndex = i;
@@ -19746,7 +19746,7 @@
       if (nextChild && nextChild.y === child.y) {
         continue;
       }
-      var distance = DistanceBetween$1(child.right, child.centerY, x, y);
+      var distance = DistanceBetween$2(child.right, child.centerY, x, y);
       if (minDistance > distance) {
         minDistance = distance;
         nearestIndex = i + 1;
@@ -24061,7 +24061,7 @@
     return CreateAnyLabel(scene, data, view, styles, customBuilders, TextBox);
   };
 
-  var Linear$1 = Phaser.Math.Linear;
+  var Linear$2 = Phaser.Math.Linear;
   var Percent$2 = Phaser.Math.Percent;
   var ProgressValueMethods = {
     setValue: function setValue(value, min, max) {
@@ -24084,7 +24084,7 @@
     getValue: function getValue(min, max) {
       var value = this.value;
       if (min !== undefined) {
-        value = Linear$1(min, max, value);
+        value = Linear$2(min, max, value);
       }
       return value;
     }
@@ -24323,13 +24323,13 @@
   };
   var tmpPoint = {};
 
-  var Linear = Phaser.Math.Linear;
+  var Linear$1 = Phaser.Math.Linear;
   var PercentToPosition = function PercentToPosition(t, startPoint, endPoint, out) {
     if (out === undefined) {
       out = tmpOut;
     }
-    out.x = Linear(startPoint.x, endPoint.x, t);
-    out.y = Linear(startPoint.y, endPoint.y, t);
+    out.x = Linear$1(startPoint.x, endPoint.x, t);
+    out.y = Linear$1(startPoint.y, endPoint.y, t);
     return out;
   };
   var tmpOut = {};
@@ -25252,7 +25252,7 @@
   }(FSM);
 
   var GetValue$g = Phaser.Utils.Objects.GetValue;
-  var DistanceBetween = Phaser.Math.Distance.Between;
+  var DistanceBetween$1 = Phaser.Math.Distance.Between;
   var DragSpeed = /*#__PURE__*/function (_ComponentBase) {
     _inherits(DragSpeed, _ComponentBase);
     var _super = _createSuper(DragSpeed);
@@ -25389,7 +25389,7 @@
         if (this.x === this.preX && this.y === this.preY) {
           return 0;
         }
-        var d = DistanceBetween(this.preX, this.preY, this.x, this.y);
+        var d = DistanceBetween$1(this.preX, this.preY, this.x, this.y);
         var speed = d / (this.dt * 0.001);
         return speed;
       }
@@ -28363,7 +28363,7 @@
     return PathBase;
   }(BaseGeom);
 
-  var DegToRad = Phaser.Math.DegToRad;
+  var DegToRad$1 = Phaser.Math.DegToRad;
   var Arc = /*#__PURE__*/function (_PathBase) {
     _inherits(Arc, _PathBase);
     var _super = _createSuper(Arc);
@@ -28551,8 +28551,8 @@
         ctx.beginPath();
         var x = this.x - dx,
           y = this.y - dy,
-          startAngle = DegToRad(this.startAngle),
-          endAngle = DegToRad(this.endAngle);
+          startAngle = DegToRad$1(this.startAngle),
+          endAngle = DegToRad$1(this.endAngle);
         if (this.pie) {
           ctx.moveTo(x, y);
           ctx.lineTo(x + Math.cos(startAngle) * this.radiusX, y + Math.sin(startAngle) * this.radiusY);
@@ -28584,20 +28584,352 @@
     return _createClass(Circle);
   }(Arc);
 
+  var StartAt = function StartAt(x, y, pathData) {
+    pathData.length = 0;
+    if (x != null) {
+      pathData.push(x, y);
+    }
+    return pathData;
+  };
+
   //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
 
-  Phaser.Math.Interpolation.QuadraticBezier;
+  var QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
+  var QuadraticBezierTo = function QuadraticBezierTo(cx, cy, x, y, iterations, pathData) {
+    var pathDataCnt = pathData.length;
+    var p0x = pathData[pathDataCnt - 2];
+    var p0y = pathData[pathDataCnt - 1];
+    for (var i = 1, last = iterations - 1; i <= last; i++) {
+      var t = i / last;
+      pathData.push(QuadraticBezierInterpolation(t, p0x, cx, x), QuadraticBezierInterpolation(t, p0y, cy, y));
+    }
+    return pathData;
+  };
+
+  var AddPathMethods = {
+    start: function start() {
+      this.startAt();
+      return this;
+    },
+    startAt: function startAt(x, y) {
+      this.restorePathData();
+      StartAt(x, y, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      this.accumulationLengths = undefined;
+      return this;
+    },
+    lineTo: function lineTo(x, y, relative) {
+      if (relative === undefined) {
+        relative = false;
+      }
+      if (relative) {
+        x += this.lastPointX;
+        y += this.lastPointY;
+      }
+      LineTo(x, y, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      return this;
+    },
+    verticalLineTo: function verticalLineTo(x, relative) {
+      this.lineTo(x, this.lastPointY, relative);
+      return this;
+    },
+    horizontalLineTo: function horizontalLineTo(y, relative) {
+      this.lineTo(this.lastPointX, y, relative);
+      return this;
+    },
+    ellipticalArc: function ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
+      if (anticlockwise === undefined) {
+        anticlockwise = false;
+      }
+      ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise, this.iterations, this.pathData);
+      var pathDataCnt = this.pathData.length;
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      return this;
+    },
+    arc: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+      this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise);
+      return this;
+    },
+    quadraticBezierTo: function quadraticBezierTo(cx, cy, x, y) {
+      QuadraticBezierTo(cx, cy, x, y, this.iterations, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      this.lastCX = cx;
+      this.lastCY = cy;
+      return this;
+    },
+    smoothQuadraticBezierTo: function smoothQuadraticBezierTo(x, y) {
+      var cx = this.lastPointX * 2 - this.lastCX;
+      var cy = this.lastPointY * 2 - this.lastCY;
+      this.quadraticBezierTo(cx, cy, x, y);
+      return this;
+    },
+    cubicBezierCurveTo: function cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
+      QuadraticBezierTo(cx0, cy0, cx1, cy1, x, y, this.iterations, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      this.lastCX = cx1;
+      this.lastCY = cy1;
+      return this;
+    },
+    smoothCubicBezierCurveTo: function smoothCubicBezierCurveTo(cx1, cy1, x, y) {
+      var cx0 = this.lastPointX * 2 - this.lastCX;
+      var cy0 = this.lastPointY * 2 - this.lastCY;
+      this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+      return this;
+    },
+    close: function close() {
+      this.closePath = true;
+      return this;
+    },
+    end: function end() {
+      this.pathData.push(this.lastPointX, this.lastPointY);
+      return this;
+    }
+  };
 
   //import PointRotateAround from '../../utils/math/RotateAround.js';
 
-  Phaser.Math.RotateAround;
+  var PointRotateAround$1 = Phaser.Math.RotateAround;
+  var RotateAround = function RotateAround(centerX, centerY, angle, pathData) {
+    var point = {
+      x: 0,
+      y: 0
+    };
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      point.x = pathData[i];
+      point.y = pathData[i + 1];
+      PointRotateAround$1(point, centerX, centerY, angle);
+      pathData[i] = point.x;
+      pathData[i + 1] = point.y;
+    }
+    return pathData;
+  };
+
+  var Offset = function Offset(x, y, pathData) {
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      pathData[i] += x;
+      pathData[i + 1] += y;
+    }
+    return pathData;
+  };
+
+  var DegToRad = Phaser.Math.DegToRad;
+  var PointRotateAround = Phaser.Math.RotateAround;
+  var TransformPointsMethods = {
+    rotateAround: function rotateAround(centerX, centerY, angle) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      angle = DegToRad(angle);
+      RotateAround(centerX, centerY, angle, this.pathData);
+      var pathDataCnt = this.pathData.length;
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var point = {
+          x: this.lastCX,
+          y: this.lastCY
+        };
+        PointRotateAround(point, centerX, centerY, angle);
+        this.lastCX = point.x;
+        this.lastCY = point.y;
+      }
+      return this;
+    },
+    offset: function offset(x, y) {
+      Offset(x, y, this.pathData);
+      return this;
+    }
+  };
+
+  var DistanceBetween = Phaser.Math.Distance.Between;
+  var Wrap = Phaser.Math.Wrap;
+  var Linear = Phaser.Math.Linear;
+  var AddDisplayPathSegment = function AddDisplayPathSegment(startT, endT) {
+    var startL = this.totalPathLength * startT;
+    var endL = this.totalPathLength * endT;
+    var pathData = this.pathData,
+      pathDataRef = this.pathDataSave;
+    var accumulationLengths = this.accumulationLengths,
+      d;
+    var skipState = startL > 0;
+    var pIdx;
+    for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
+      pIdx = i * 2;
+      d = accumulationLengths[i];
+      if (skipState) {
+        if (d < startL) {
+          continue;
+        } else if (d == startL) {
+          skipState = false;
+        } else {
+          // d > startL
+          var deltaD = d - accumulationLengths[i - 1];
+          var t = 1 - (d - startL) / deltaD;
+          pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
+          pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+          skipState = false;
+        }
+      }
+      if (d <= endL) {
+        pathData.push(pathDataRef[pIdx]);
+        pathData.push(pathDataRef[pIdx + 1]);
+        if (d === endL) {
+          break;
+        }
+      } else {
+        // d > endL
+        var deltaD = d - accumulationLengths[i - 1];
+        var t = 1 - (d - endL) / deltaD;
+        pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
+        pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+        break;
+      }
+    }
+  };
+  var GetInterpolation = function GetInterpolation(pathData, i0, i1, t) {
+    var p0 = pathData[i0],
+      p1 = pathData[i1];
+    return Linear(p0, p1, t);
+  };
+  var PathSegmentMethods = {
+    updateAccumulationLengths: function updateAccumulationLengths() {
+      if (this.accumulationLengths == null) {
+        this.accumulationLengths = [];
+      } else if (this.accumulationLengths.length === this.pathData.length / 2) {
+        return this;
+      }
+      var accumulationLengths = this.accumulationLengths;
+      var pathData = this.pathData;
+      var prevX, prevY, x, y;
+      var d,
+        accumulationLength = 0;
+      for (var i = 0, cnt = pathData.length; i < cnt; i += 2) {
+        x = pathData[i];
+        y = pathData[i + 1];
+        d = prevX === undefined ? 0 : DistanceBetween(prevX, prevY, x, y);
+        accumulationLength += d;
+        accumulationLengths.push(accumulationLength);
+        prevX = x;
+        prevY = y;
+      }
+      this.totalPathLength = accumulationLength;
+      return this;
+    },
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
+      return this;
+    },
+    setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
+      if (endT === undefined) {
+        endT = startT;
+        startT = 0;
+      }
+      startT = startT !== 1 ? Wrap(startT, 0, 1) : 1;
+      endT = endT !== 1 ? Wrap(endT, 0, 1) : 1;
+      if (!this.pathDataSaved) {
+        this.updateAccumulationLengths();
+        this.savePathData();
+      }
+      this.pathData.length = 0;
+      if (startT === endT) ; else if (startT < endT) {
+        AddDisplayPathSegment.call(this, startT, endT);
+      } else {
+        AddDisplayPathSegment.call(this, startT, 1);
+        AddDisplayPathSegment.call(this, 0, endT);
+      }
+      return this;
+    }
+  };
+
+  var ToPoints = function ToPoints(pathData, points) {
+    if (points === undefined) {
+      points = [];
+    }
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      points.push({
+        x: pathData[i],
+        y: pathData[i + 1]
+      });
+    }
+    return points;
+  };
 
   //import Polygon from '../../utils/geom/polygon/Polygon.js';
 
-  Phaser.Geom.Polygon;
+  var Polygon = Phaser.Geom.Polygon;
+  var ToPolygon = function ToPolygon(pathData, polygon) {
+    if (polygon === undefined) {
+      polygon = new Polygon();
+    }
+    polygon.setTo(pathData);
+    return polygon;
+  };
 
-  Phaser.Math.DegToRad;
-  Phaser.Math.RotateAround;
+  var PathDataBuilder = /*#__PURE__*/function () {
+    function PathDataBuilder(pathData) {
+      _classCallCheck(this, PathDataBuilder);
+      if (pathData === undefined) {
+        pathData = [];
+      }
+      this.pathData = pathData;
+      this.closePath = false;
+      this.setIterations(32);
+      this.lastPointX = undefined;
+      this.lastPointY = undefined;
+      this.accumulationLengths = undefined;
+    }
+    _createClass(PathDataBuilder, [{
+      key: "setIterations",
+      value: function setIterations(iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }, {
+      key: "toPoints",
+      value: function toPoints() {
+        return ToPoints(this.pathData);
+      }
+    }, {
+      key: "toPolygon",
+      value: function toPolygon(polygon) {
+        return ToPolygon(this.pathData, polygon);
+      }
+    }, {
+      key: "draw",
+      value: function draw(graphics, isFill, isStroke) {
+        var points = this.toPoints();
+        if (isFill) {
+          graphics.fillPoints(points, this.closePath, this.closePath);
+        }
+        if (isStroke) {
+          graphics.strokePoints(points, this.closePath, this.closePath);
+        }
+        return this;
+      }
+    }]);
+    return PathDataBuilder;
+  }();
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
