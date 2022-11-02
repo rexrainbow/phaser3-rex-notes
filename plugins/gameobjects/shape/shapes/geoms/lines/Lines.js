@@ -1,5 +1,5 @@
 import PathBase from './PathBase.js';
-import PathDataBuilder from '../../../../../geom/pathdata/PathData.js';
+import PathDataBuilder from '../../../../../geom/pathdata/PathDataBuilder/PathDataBuilder.js';
 
 class Lines extends PathBase {
     constructor() {
@@ -136,6 +136,11 @@ class Lines extends PathBase {
 
     toPolygon(polygon) {
         return this.builder.toPolygon(polygon);
+    }
+
+    setDisplayPathLength(t) {
+        this.builder.setDisplayPathLength(t);
+        return this;
     }
 }
 
