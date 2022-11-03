@@ -1,13 +1,15 @@
 const StringType = 'string';
 const NumberType = 'number';
-const NumberRangeType = 'range';
+const RangeType = 'range';
 const ListType = 'list';
+const ButtonsType = 'buttons';
 const BooleanType = 'boolean';
 const ColorType = 'color';
 const Pointer2dType = 'pointer2d';
 const Pointer3dType = 'pointer3d';
 
 export {
-    StringType, NumberType, NumberRangeType, ListType,
+    StringType, NumberType, RangeType,
+    ListType, ButtonsType,
     BooleanType, ColorType, Pointer2dType, Pointer3dType,
 }

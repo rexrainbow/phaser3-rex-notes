@@ -13,6 +13,7 @@ Inspirited from [CanvasInput](https://goldfirestudios.com/canvasinput-html5-canv
 - [Simple](https://codepen.io/rexrainbow/pen/vYjwjyW)
 - [Text input](https://codepen.io/rexrainbow/pen/poVPGKe)
 - [Number input](https://codepen.io/rexrainbow/pen/jOxarOO)
+- [With rexui-Label](https://codepen.io/rexrainbow/pen/jOKOJoV)
 
 ## Usage
 
@@ -164,6 +165,7 @@ var txt = scene.add.rexCanvasInput({
     // inputType: 'text',  // 'text'|'password'|'textarea'|...                
 
     // enterClose: true,
+    // readOnly: false,
 
     // Callbacks
     // onOpen: function (textObject, hiddenInputText) {
@@ -174,8 +176,7 @@ var txt = scene.add.rexCanvasInput({
 
     // onUpdate: function (text, textObject, hiddenInputText) {
     //     return text;
-    // },
-    // onUpdate: 'number',    // Only output number string
+    // },   
 
     // onAddChar: function(child, index, canvasInput) {
     //    child.modifyStyle({...})
@@ -193,6 +194,10 @@ var txt = scene.add.rexCanvasInput({
     //     });
     // },
 
+    // parseTextCallback: function(text) {
+    //     return text;
+    // }.
+
 });
 ```
 
@@ -200,22 +205,26 @@ var txt = scene.add.rexCanvasInput({
 - Parameters of hidden-text-editor
     - `inputType` : Type of element
         - `'text'`, `'password'`, `'textarea'`, ...
-    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is true.
+    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
+    - `readOnly` : 
+        - `true` : un-editable.
+        - `false` : Editable. Defaule behavior.
 - Callbacks
     - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript
-        function (textObject, txt) {
+        function (textObject) {
+            // textObject.setInputText(txt);
         }
         ```
     - `onClose` : Callback invoked when blur.
         ```javascript
-        function (textObject, txt) {
+        function (textObject) {            
         }
         ```
     - `onUpdate` : 
         - A callback invoked in each tick of editing.
             ```javascript
-            function (text, textObject, txt) {
+            function (text, textObject) {
                 // return text;
             }
             ```
@@ -242,6 +251,14 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
         - `child` : [character child](dynamictext.md#character)
+    - `parseTextCallback` : Callback of parsing text (`txt.text`) to value (`txt.value`)
+        - `undefined` : Bypass text to value. Default behavior.
+        - A function object
+            ```javascript
+            function(text) {
+                return text;
+            }
+            ```
 - `focusStyle` : Will apply this style to background when focusing.
     - `undefined` : Ignore this behavior.
     - A plain object
@@ -283,6 +300,13 @@ var txt = scene.add.rexCanvasInput({
         }
         ```
     - Or add these style settings in `style` parameter, with prefix `'cursor.'`.
+
+
+#### Number input
+
+```javascript
+txt.setNumberInput();
+```
 
 ### Custom class
 
@@ -332,8 +356,110 @@ txt.close();
 var isOpened = txt.isOpened;
 ```
 
+### Read only
+
+- Enable read only
+    ```javascript
+    txt.setReadOnly();
+    // txt.setReadOnly(true);
+    ```
+    or
+    ```javascript
+    txt.readOnly = true;
+    ```
+- Disable read only
+    ```javascript
+    txt.setReadOnly(false);
+    ```
+    or
+    ```javascript
+    txt.readOnly = false;
+    ```
+- Get read only
+    ```javascript
+    var readOnlyEanble = txt.readOnly;
+    ```
+
+### Text
+
+- Display text on [dynamic text game object](dynamictext.md)
+    - Get
+        ```javascript
+        var text = txt.text;
+        ```
+        or
+        ```javascript        
+        var text = txt.displayText;
+        ```
+    - Set
+        ```javascript
+        txt.setText(text);
+        ```
+        or 
+        ```javascript
+        txt.setDisplayText(text);
+        ```
+- Input text on [hidden text edit behavior](hiddeninputtext.md)
+    - Get
+        ```javascript
+        var text = txt.inputText;
+        ```
+    - Set
+        ```javascript
+        var text = txt.setInputText(text);
+        ```
+
+### Value
+
+- Get. Parse text to value.
+    ```javascript
+    var value = txt.getValue();
+    // var value = txt.value;
+    ```
+    - Set `parseTextCallback`
+        ```javascript
+        txt.setParseTextCallback(callback);
+        ```
+        - `callback` : 
+            - `undefined` : Bypass text to value. Default behavior.
+            - A function object
+                ```javascript
+                function(text) {
+                    return text;
+                }
+                ```
+- Set. Conver any type of `value` to string.
+    ```javascript
+    txt.setValue(value);
+    // txt.value = value;
+    ```
+
+### Size
+
+- Resize canvas size
+    ```javascript
+    txt.setCanvasSize(width, height)
+    ```
+- Reisze text wrapping size and canvas size.
+    ```javascript
+    txt.setSize(width, height);
+    ```
+    or
+    ```javascript
+    txt.setFixedSize(width, height);
+    ```
+- Resize to minimun size to show all visible characters.
+    ```javascript
+    txt.setToMinSize();
+    ```
+
 ### Events
 
+- On text change
+    ```javascript
+    txt.on('textchange', function(text, txt){
+    })
+    ```
 - On character child adding
     ```javascript
     txt.on('addchar', function(child, index, canvasInput) {
@@ -365,6 +491,12 @@ var isOpened = txt.isOpened;
     ```javascript
     txt.on('close', function() {
         
+    })
+    ```
+- Not a number input
+    ```javascript
+    txt.on('nan', function(text){
+
     })
     ```
 

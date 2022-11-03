@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,18 +141,14 @@
   var Shader = Phaser.GameObjects.Shader;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem = Phaser.Utils.Array.Remove;
-
   var EffectLayer = /*#__PURE__*/function (_Shader) {
     _inherits(EffectLayer, _Shader);
-
     var _super = _createSuper(EffectLayer);
-
     function EffectLayer(scene, key, x, y, width, height) {
       var _this;
-
       _classCallCheck(this, EffectLayer);
-
       // gameObjects -> render-texture -> shader
+
       if (_typeof(x) === 'object') {
         var config = x;
         x = config.x;
@@ -185,24 +156,20 @@
         width = config.width;
         height = config.height;
       }
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = scene.sys.scale.width;
       }
-
       if (height === undefined) {
         height = scene.sys.scale.height;
-      } // render-texture -> shader
+      }
 
-
+      // render-texture -> shader
       width = NearestPowerOf2(width);
       height = NearestPowerOf2(height);
       var rt = scene.make.renderTexture({
@@ -214,17 +181,12 @@
       });
       _this = _super.call(this, scene, key, x, y, width, height);
       _this.type = 'rexEffectLayer';
-
       _this.setSampler2DBuffer('iChannel0', rt.frame.glTexture, width, height, 0).setScrollFactor(0).setOrigin(0);
-
       _this.rt = rt;
       _this.children = [];
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(EffectLayer, [{
       key: "boot",
       value: function boot() {
@@ -235,12 +197,10 @@
       key: "destroy",
       value: function destroy(fromScene) {
         this.scene.game.events.off('prerender', this.drawTargets, this);
-        this.scene.sys.scale.off('resize', this.onWindowResize, this); // Private texture will be removed by shader game object
-
+        this.scene.sys.scale.off('resize', this.onWindowResize, this);
+        // Private texture will be removed by shader game object
         this.clear();
-
         _get(_getPrototypeOf(EffectLayer.prototype), "destroy", this).call(this, fromScene);
-
         this.rt.destroy(fromScene);
         this.rt = null;
       }
@@ -254,7 +214,6 @@
         var rt = this.rt;
         rt.clear();
         var child;
-
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
           child = this.children[i];
           rt.draw(child, child.x - offsetX, child.y - offsetY);
@@ -298,7 +257,8 @@
     }, {
       key: "add",
       value: function add(gameObjects) {
-        AddItem(this.children, gameObjects, 0, // Callback of item added
+        AddItem(this.children, gameObjects, 0,
+        // Callback of item added
         function (gameObject) {
           gameObject.once('destroy', this.onChildDestroy, this);
         }, this);
@@ -310,11 +270,10 @@
         if (destroyChild === undefined) {
           destroyChild = false;
         }
-
-        RemoveItem(this.children, gameObjects, // Callback of item removed
+        RemoveItem(this.children, gameObjects,
+        // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', this.onChildDestroy, this);
-
           if (destroyChild) {
             gameObject.destroy();
           }
@@ -325,16 +284,13 @@
       key: "clear",
       value: function clear(destroyChild) {
         var gameObject;
-
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
           gameObject = this.children[i];
           gameObject.off('destroy', this.onChildDestroy, this);
-
           if (destroyChild) {
             gameObject.destroy();
           }
         }
-
         this.children.length = 0;
         return this;
       }
@@ -348,11 +304,13 @@
       value: function resize(width, height) {
         width = NearestPowerOf2(width);
         height = NearestPowerOf2(height);
-        var rt = this.rt; // Set size of render texture
+        var rt = this.rt;
 
+        // Set size of render texture
         rt.setSize(width, height);
-        this.setSampler2DBuffer('iChannel0', rt.frame.glTexture, width, height, 0); // Set size of shader
+        this.setSampler2DBuffer('iChannel0', rt.frame.glTexture, width, height, 0);
 
+        // Set size of shader
         this.setSize(width, height);
         return this;
       }
@@ -365,7 +323,6 @@
         this.resize(width, height);
       }
     }]);
-
     return EffectLayer;
   }(Shader);
 
@@ -380,11 +337,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var key = GetAdvancedValue(config, 'key', undefined);
     var x = GetAdvancedValue(config, 'x', undefined);
     var y = GetAdvancedValue(config, 'y', undefined);
@@ -398,23 +353,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -424,31 +373,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -456,31 +404,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var EffectLayerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(EffectLayerPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(EffectLayerPlugin);
-
     function EffectLayerPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, EffectLayerPlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexEffectLayer', Factory, Creator);
       return _this;
     }
-
     _createClass(EffectLayerPlugin, [{
       key: "start",
       value: function start() {
@@ -488,10 +430,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return EffectLayerPlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.EffectLayer', EffectLayer);
 
   return EffectLayerPlugin;

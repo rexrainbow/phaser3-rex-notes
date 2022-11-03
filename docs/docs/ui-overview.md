@@ -755,7 +755,10 @@ scene.rexUI.yaml.loadAll(data, function (doc) {
     - [Yes/No](https://codepen.io/rexrainbow/pen/MPZWZG)
     - [Choice](https://codepen.io/rexrainbow/pen/ePoRVz)
     - [Pop-up](https://codepen.io/rexrainbow/pen/NEpjmP)
-- [Edit](https://codepen.io/rexrainbow/pen/YbvwBw)
+- Text input
+    - [Text edit](https://codepen.io/rexrainbow/pen/YbvwBw)
+    - [Hidden text edit](https://codepen.io/rexrainbow/pen/MWOjJzZ)
+    - [Canvas input](https://codepen.io/rexrainbow/pen/jOKOJoV)
 - [Menu](https://codepen.io/rexrainbow/pen/PxOEBr)
 - [Text-box](https://codepen.io/rexrainbow/pen/MzGoJv)
 - [Text-area](https://codepen.io/rexrainbow/pen/JzBZzy)

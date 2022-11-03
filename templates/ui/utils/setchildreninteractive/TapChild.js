@@ -7,6 +7,8 @@ var TapChild = function (config) {
     var tapConfig = GetValue(config, 'tap', undefined);
     if (tapConfig === false) {
         return;
+    } else if (tapConfig === true) {
+        tapConfig = undefined;
     }
 
     var childrenInteractive = this._childrenInteractive;

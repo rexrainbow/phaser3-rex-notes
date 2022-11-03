@@ -1,6 +1,6 @@
 var DestroyManagers = function (fromScene) {
     if (this.soundManager) {
-        this.soundManager.destroy(fromScene);
+        this.soundManager.destroy();
     }
     this.soundManager = undefined;
 

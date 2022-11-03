@@ -19,8 +19,8 @@ Fade-in/fade-out volume of sound.
     ```
 - Sound fade-in/fade-out
     ```javascript
-    var sound = scene.plugins.get('rexsoundfadeplugin').fadeIn(scene, sound, duration);
-    var sound = scene.plugins.get('rexsoundfadeplugin').fadeOut(scene, sound, duration);
+    var sound = scene.plugins.get('rexsoundfadeplugin').fadeIn(sound, duration);
+    var sound = scene.plugins.get('rexsoundfadeplugin').fadeOut(sound, duration);
     ```
 
 #### Import plugin
@@ -49,8 +49,8 @@ Fade-in/fade-out volume of sound.
     ```
 - Sound fade-in/fade-out
     ```javascript
-    var sound = scene.plugins.get('rexSoundFade').fadeIn(scene, sound, duration);
-    var sound = scene.plugins.get('rexSoundFade').fadeOut(scene, sound, duration);
+    var sound = scene.plugins.get('rexSoundFade').fadeIn(sound, duration);
+    var sound = scene.plugins.get('rexSoundFade').fadeOut(sound, duration);
     ```
 
 #### Import method
@@ -65,16 +65,16 @@ Fade-in/fade-out volume of sound.
     ```
 - Sound fade-in/fade-out
     ```javascript
-    var sound = SoundFade.fadeIn(scene, sound, duration);
-    var sound = SoundFade.fadeOut(scene, sound, duration);
+    var sound = SoundFade.fadeIn(sound, duration);
+    var sound = SoundFade.fadeOut(sound, duration);
     ```
 
 ### Fade in
 
 - Play and fade in voluem.
     ```javascript
-    var sound = scene.plugins.get('rexSoundFade').fadeIn(scene, sound, duration);
-    // var sound = scene.plugins.get('rexSoundFade').fadeIn(scene, sound, duration, endVolume, startVolume);
+    var sound = scene.plugins.get('rexSoundFade').fadeIn(sound, duration);
+    // var sound = scene.plugins.get('rexSoundFade').fadeIn(sound, duration, endVolume, startVolume);
     ```
     - `sound` : Sound instance, or a key of audio cache.
 
@@ -82,11 +82,11 @@ Fade-in/fade-out volume of sound.
 
 - Fade out volume then destroy it
     ```javascript
-    scene.plugins.get('rexSoundFade').fadeOut(scene, sound, duration);
+    scene.plugins.get('rexSoundFade').fadeOut(sound, duration);
     ```
     - `sound` : Sound instance.
 - Fade out volume then stop it
     ```javascript
-    scene.plugins.get('rexSoundFade').fadeOut(scene, sound, duration, false);
+    scene.plugins.get('rexSoundFade').fadeOut(sound, duration, false);
     ```
     - `sound` : Sound instance.

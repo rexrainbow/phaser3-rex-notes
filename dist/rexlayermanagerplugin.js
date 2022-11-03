@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,71 +66,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -156,7 +132,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -166,70 +141,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -237,7 +202,6 @@
   var PropertyMethods$1 = {
     hasProperty: function hasProperty(property) {
       var gameObject = this.gameObject;
-
       if (gameObject.hasOwnProperty(property)) {
         return true;
       } else {
@@ -255,11 +219,9 @@
     easeProperty: function easeProperty(property, value, duration, ease, repeat, isYoyo, _onComplete) {
       var tweenTasks = this.tweens;
       var tweenTask = tweenTasks[property];
-
       if (tweenTask) {
         tweenTask.remove();
       }
-
       var gameObject = this.gameObject;
       var config = {
         targets: gameObject,
@@ -270,7 +232,6 @@
         onComplete: function onComplete() {
           tweenTasks[property].remove();
           tweenTasks[property] = null;
-
           if (_onComplete) {
             _onComplete(gameObject, property);
           }
@@ -293,13 +254,10 @@
       if (!this.hasMethod(methodName)) {
         return this;
       }
-
       var gameObject = this.gameObject;
-
       for (var _len = arguments.length, parameters = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         parameters[_key - 1] = arguments[_key];
       }
-
       gameObject[methodName].apply(gameObject, parameters);
       return this;
     }
@@ -322,12 +280,10 @@
   var BobBase = /*#__PURE__*/function () {
     function BobBase(GOManager, gameObject, name) {
       _classCallCheck(this, BobBase);
-
       this.GOManager = GOManager;
       this.tweens = {};
       this.setGO(gameObject, name);
     }
-
     _createClass(BobBase, [{
       key: "scene",
       get: function get() {
@@ -348,18 +304,14 @@
       key: "freeTweens",
       value: function freeTweens() {
         var tweenTasks = this.tweens,
-            tweenTask;
-
+          tweenTask;
         for (var propName in tweenTasks) {
           tweenTask = tweenTasks[propName];
-
           if (tweenTask) {
             tweenTask.remove();
           }
-
           tweenTasks[propName] = null;
         }
-
         return this;
       }
     }, {
@@ -383,29 +335,23 @@
       key: "setTimeScale",
       value: function setTimeScale(timeScale) {
         var tweenTasks = this.tweens;
-
         for (var key in tweenTasks) {
           var tweenTask = tweenTasks[key];
-
           if (tweenTask) {
             tweenTask.timeScale = timeScale;
           }
         }
-
         return this;
       }
     }]);
-
     return BobBase;
   }();
-
   Object.assign(BobBase.prototype, PropertyMethods$1, CallMethods$1, DataMethods$1);
 
   var IsEmpty = function IsEmpty(source) {
     for (var k in source) {
       return false;
     }
-
     return true;
   };
 
@@ -418,7 +364,6 @@
       if (typeof fadeMode === 'string') {
         fadeMode = FadeMode[fadeMode];
       }
-
       this.fadeMode = fadeMode;
       return this;
     },
@@ -434,31 +379,40 @@
     },
     fadeBob: function fadeBob(bob, fromValue, toValue, onComplete) {
       var gameObject = bob.gameObject;
-
       if (this.hasTintFadeEffect(gameObject)) {
         if (fromValue !== undefined) {
           bob.setProperty('tintGray', 255 * fromValue);
         }
-
-        bob.easeProperty('tintGray', // property
-        Math.floor(255 * toValue), // to value
-        this.fadeTime, // duration
-        'Linear', // ease
-        0, // repeat
-        false, // yoyo
+        bob.easeProperty('tintGray',
+        // property
+        Math.floor(255 * toValue),
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
         onComplete // onComplete
         );
       } else if (this.hasAlphaFadeEffect(gameObject)) {
         if (fromValue !== undefined) {
           bob.setProperty('alpha', fromValue);
         }
-
-        bob.easeProperty('alpha', // property
-        toValue, // to value
-        this.fadeTime, // duration
-        'Linear', // ease
-        0, // repeat
-        false, // yoyo
+        bob.easeProperty('alpha',
+        // property
+        toValue,
+        // to value
+        this.fadeTime,
+        // duration
+        'Linear',
+        // ease
+        0,
+        // repeat
+        false,
+        // yoyo
         onComplete // onComplete
         );
       } else {
@@ -466,7 +420,6 @@
           onComplete(gameObject);
         }
       }
-
       return this;
     }
   };
@@ -474,11 +427,9 @@
   var GetR = function GetR(colorInt) {
     return colorInt >> 16 & 0xff;
   };
-
   var GetG = function GetG(colorInt) {
     return colorInt >> 8 & 0xff;
   };
-
   var GetB = function GetB(colorInt) {
     return colorInt & 0xff;
   };
@@ -486,19 +437,15 @@
   var MaskR = ~(0xff << 16) & 0xffffff;
   var MaskG = ~(0xff << 8) & 0xffffff;
   var MaskB = ~0xff & 0xffffff;
-
   var SetR = function SetR(colorInt, r) {
     return (r & 0xff) << 16 | colorInt & MaskR;
   };
-
   var SetG = function SetG(colorInt, g) {
     return (g & 0xff) << 8 | colorInt & MaskG;
   };
-
   var SetB = function SetB(colorInt, b) {
     return b & 0xff | colorInt & MaskB;
   };
-
   var SetRGB = function SetRGB(colorInt, r, g, b) {
     return (r & 0xff) << 16 | (g & 0xff) << 8 | b & 0xff;
   };
@@ -508,41 +455,39 @@
     if (gameObject.hasOwnProperty('tintR')) {
       return gameObject;
     }
-
     if (tintRGB === undefined) {
       tintRGB = 0xffffff;
     }
-
     var tintR = GetR(tintRGB);
     var tintG = GetG(tintRGB);
-    var tintB = GetB(tintRGB); // Override tint property
+    var tintB = GetB(tintRGB);
 
+    // Override tint property
     Object.defineProperty(gameObject, 'tint', {
       get: function get() {
         return tintRGB;
       },
       set: function set(value) {
         value = Math.floor(value) & 0xffffff;
-
         if (gameObject.setTint) {
           gameObject.setTint(value);
         }
-
         if (tintRGB !== value) {
           tintRGB = value;
           tintR = GetR(tintRGB);
           tintG = GetG(tintRGB);
-          tintB = GetB(tintRGB); // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
+          tintB = GetB(tintRGB);
+          // gameObject.emit('_tintchange', value, tintR, tintG, tintB);
         }
       }
     });
+
     Object.defineProperty(gameObject, 'tintR', {
       get: function get() {
         return tintR;
       },
       set: function set(value) {
         value = Math.floor(value) & 0xff;
-
         if (tintR !== value) {
           tintR = value;
           gameObject.tint = SetR(tintRGB, value);
@@ -555,7 +500,6 @@
       },
       set: function set(value) {
         value = Math.floor(value) & 0xff;
-
         if (tintG !== value) {
           tintG = value;
           gameObject.tint = SetG(tintRGB, value);
@@ -568,7 +512,6 @@
       },
       set: function set(value) {
         value = Math.floor(value) & 0xff;
-
         if (tintB !== value) {
           tintB = value;
           gameObject.tint = SetB(tintRGB, value);
@@ -581,7 +524,6 @@
       },
       set: function set(value) {
         value = Math.floor(value) & 0xff;
-
         if (tintR !== value || tintG !== value || tintB !== value) {
           tintR = value;
           tintG = value;
@@ -595,12 +537,10 @@
   };
 
   var EventEmitter = Phaser.Events.EventEmitter;
-
   var MonitorViewport = function MonitorViewport(viewport) {
     if (viewport.events) {
       return viewport;
     }
-
     var events = new EventEmitter();
     var x = viewport.x;
     Object.defineProperty(viewport, 'x', {
@@ -660,12 +600,10 @@
     } else if (out === true) {
       out = GlobXY;
     }
-
     out.x = viewport.x + viewport.width * vpx;
     out.y = viewport.y + viewport.height * vpy;
     return out;
   };
-
   var GlobXY = {};
 
   var AddViewportCoordinateProperties = function AddViewportCoordinateProperties(gameObject, viewport, vpx, vpy, transformCallback) {
@@ -673,27 +611,23 @@
     if (gameObject.hasOwnProperty('vp')) {
       return gameObject;
     }
-
     if (vpx === undefined) {
       vpx = 0.5;
     }
-
     if (vpy === undefined) {
       vpy = 0.5;
     }
-
     if (transformCallback === undefined) {
       transformCallback = VPXYToXY;
     }
-
     MonitorViewport(viewport);
     var events = viewport.events;
-    gameObject.vp = viewport; // Set position of game object when view-port changed.
+    gameObject.vp = viewport;
 
+    // Set position of game object when view-port changed.
     var Transform = function Transform() {
       transformCallback(vpx, vpy, viewport, gameObject);
     };
-
     events.on('update', Transform);
     gameObject.once('destroy', function () {
       events.off('update', Transform);
@@ -738,18 +672,14 @@
     },
     addGO: function addGO(name, gameObject) {
       this.remove(name, true);
-
       if (this.hasTintFadeEffect(gameObject)) {
         AddTintRGBProperties(gameObject);
       }
-
       if (this.viewportCoordinateEnable) {
         AddViewportCoordinateProperties(gameObject, this.viewport);
       }
-
       gameObject.once('destroy', function () {
         RemoveItem(this.removedGOs, gameObject);
-
         if (this.isEmpty) {
           this.emit('empty');
         }
@@ -761,11 +691,9 @@
     add: function add(name) {
       var callback = this.createGameObjectCallback;
       var scope = this.createGameObjectScope;
-
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
-
       var gameObject = callback.call.apply(callback, [scope, this.scene].concat(args));
       this.addGO(name, gameObject);
       var bob = this.get(name);
@@ -776,18 +704,15 @@
       for (var name in this.bobs) {
         var gameObject = this.bobs[name].gameObject;
         var stopLoop;
-
         if (scope) {
           stopLoop = callback.call(scope, gameObject, name, this);
         } else {
           stopLoop = callback(gameObject, name, this);
         }
-
         if (stopLoop) {
           break;
         }
       }
-
       return this;
     }
   };
@@ -797,15 +722,16 @@
       if (!this.has(name)) {
         return this;
       }
-
       var bob = this.get(name);
       delete this.bobs[name];
       this.removedGOs.push(bob.gameObject);
-
       if (!ignoreFade) {
-        this.fadeBob(bob, // bob
-        undefined, // fromValue
-        0, // toValue
+        this.fadeBob(bob,
+        // bob
+        undefined,
+        // fromValue
+        0,
+        // toValue
         function () {
           // onComplete
           bob.destroy();
@@ -813,33 +739,26 @@
       } else {
         bob.destroy();
       }
-
       return this;
     },
     removeAll: function removeAll() {
       var bobs = this.bobs;
-
       for (var name in bobs) {
         this.remove(name);
       }
-
       return this;
     },
     clear: function clear(destroyChild) {
       if (destroyChild === undefined) {
         destroyChild = true;
       }
-
       var bobs = this.bobs;
-
       for (var name in bobs) {
         if (destroyChild) {
           bobs[name].destroy();
         }
-
         delete bobs[name];
       }
-
       this.removedGOs.length = 0;
       return this;
     }
@@ -850,14 +769,12 @@
       if (!this.has(name)) {
         return false;
       }
-
       return this.get(name).hasProperty(property);
     },
     getProperty: function getProperty(name, property) {
       if (!this.has(name)) {
         return undefined;
       }
-
       return this.get(name).getProperty(property);
     },
     isNumberProperty: function isNumberProperty(name, property) {
@@ -868,7 +785,6 @@
       if (!this.has(name)) {
         return this;
       }
-
       if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property)) {
         if (value in this.symbols) {
           value = this.symbols[value];
@@ -876,7 +792,6 @@
           console.warn("Can't find symbol ".concat(value));
         }
       }
-
       this.get(name).setProperty(property, value);
       return this;
     },
@@ -884,23 +799,18 @@
       if (!this.has(name)) {
         return this;
       }
-
       if (duration === undefined) {
         duration = 1000;
       }
-
       if (ease === undefined) {
         ease = 'Linear';
       }
-
       if (repeat === undefined) {
         repeat = 0;
       }
-
       if (isYoyo === undefined) {
         isYoyo = false;
       }
-
       if (this.symbols && typeof value === 'string' && this.isNumberProperty(name, property)) {
         if (value in this.symbols) {
           value = this.symbols[value];
@@ -908,7 +818,6 @@
           console.warn("Can't find symbol ".concat(value));
         }
       }
-
       this.get(name).easeProperty(property, value, duration, ease, repeat, isYoyo, onComplete);
       return this;
     },
@@ -916,7 +825,6 @@
       if (!this.has(name)) {
         return false;
       }
-
       var tweenTasks = this.get(name).tweens;
       return tweenTasks.hasOwnProperty(property);
     },
@@ -924,7 +832,6 @@
       if (!this.has(name)) {
         return null;
       }
-
       var tweenTasks = this.get(name).tweens;
       var tweenTask = tweenTasks[property];
       return tweenTask ? tweenTask : null;
@@ -936,22 +843,17 @@
       if (!this.has(name)) {
         return false;
       }
-
       return this.get(name).hasMethod(methodName);
     },
     call: function call(name, methodName) {
       var _this$get;
-
       if (!this.has(name)) {
         return this;
       }
-
       for (var _len = arguments.length, parameters = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         parameters[_key - 2] = arguments[_key];
       }
-
       (_this$get = this.get(name)).call.apply(_this$get, [methodName].concat(parameters));
-
       return this;
     }
   };
@@ -961,21 +863,18 @@
       if (!this.has(name)) {
         return false;
       }
-
       return this.get(name).hasData(dataKey);
     },
     getData: function getData(name, dataKey) {
       if (!this.has(name)) {
         return undefined;
       }
-
       return this.get(name).getData(dataKey);
     },
     setData: function setData(name, dataKey, value) {
       if (!this.has(name)) {
         return this;
       }
-
       this.get(name).setData(dataKey, value);
       return this;
     }
@@ -988,7 +887,6 @@
       return gameObject.width;
     }
   };
-
   var GetDisplayHeight = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
@@ -1000,7 +898,6 @@
   Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
   var RotateAround = Phaser.Math.RotateAround;
-
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1008,19 +905,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopLeft) {
       return gameObject.getTopLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1028,19 +921,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopRight) {
       return gameObject.getTopRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1048,19 +937,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomLeft) {
       return gameObject.getBottomLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1068,71 +953,55 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomRight) {
       return gameObject.getBottomRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GlobVector = undefined;
-
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
       includeParent = false;
     }
-
     if (gameObject.rotation !== 0) {
       RotateAround(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
-
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       parentMatrix.transformPoint(output.x, output.y, output);
     }
-
     return output;
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
   var DrawBounds = function DrawBounds(gameObject, graphics, config) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
-
     if (!canDrawBound) {
       return;
     }
-
     var color, lineWidth;
-
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$2(config, 'color');
       lineWidth = GetValue$2(config, 'lineWidth');
     }
-
     if (color === undefined) {
       color = 0xffffff;
     }
-
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-
     Points[0] = GetTopLeft(gameObject, Points[0]);
     Points[1] = GetTopRight(gameObject, Points[1]);
     Points[2] = GetBottomRight(gameObject, Points[2]);
     Points[3] = GetBottomLeft(gameObject, Points[3]);
     graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
   };
-
   var Points = [undefined, undefined, undefined, undefined];
 
   var DrawGameObjectsBounds = function DrawGameObjectsBounds(graphics, config) {
@@ -1152,25 +1021,21 @@
   Object.assign(Methods, FadeMethods, AddMethods, RemoveMethods, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
-
   var IsCameraObject = function IsCameraObject(object) {
     return object instanceof CameraClass;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
-
   var GetViewport = function GetViewport(scene, camera, out) {
     if (!IsCameraObject(camera)) {
       out = camera;
       camera = undefined;
     }
-
     if (out === undefined) {
       out = new Rectangle();
     } else if (out === true) {
       out = globRect;
     }
-
     var scaleManager = scene.sys.scale;
     var baseSize = scaleManager.baseSize;
     var parentSize = scaleManager.parentSize;
@@ -1179,47 +1044,37 @@
     var x = canvasBounds.x >= 0 ? 0 : -(canvasBounds.x * displayScale.x);
     var y = canvasBounds.y >= 0 ? 0 : -(canvasBounds.y * displayScale.y);
     var width;
-
     if (parentSize.width >= canvasBounds.width) {
       width = baseSize.width;
     } else {
       width = baseSize.width - (canvasBounds.width - parentSize.width) * displayScale.x;
     }
-
     var height;
-
     if (parentSize.height >= canvasBounds.height) {
       height = baseSize.height;
     } else {
       height = baseSize.height - (canvasBounds.height - parentSize.height) * displayScale.y;
     }
-
     out.setTo(x, y, width, height);
-
     if (camera) {
       out.width /= camera.zoomX;
       out.height /= camera.zoomY;
       out.centerX = camera.centerX + camera.scrollX;
       out.centerY = camera.centerY + camera.scrollY;
     }
-
     return out;
   };
-
   var globRect = new Rectangle();
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var GOManager = /*#__PURE__*/function () {
     function GOManager(scene, config) {
       _classCallCheck(this, GOManager);
-
       this.scene = scene;
       this.BobClass = GetValue$1(config, 'BobClass', BobBase);
       this.setCreateGameObjectCallback(GetValue$1(config, 'createGameObject'), GetValue$1(config, 'createGameObjectScope'));
       this.setEventEmitter(GetValue$1(config, 'eventEmitter', undefined));
       var fadeConfig = GetValue$1(config, 'fade', 500);
-
       if (typeof fadeConfig === 'number') {
         this.setGOFadeMode();
         this.setGOFadeTime(fadeConfig);
@@ -1227,22 +1082,18 @@
         this.setGOFadeMode(GetValue$1(fadeConfig, 'mode'));
         this.setGOFadeTime(GetValue$1(fadeConfig, 'time', 500));
       }
-
       var viewportCoordinateConfig = GetValue$1(config, 'viewportCoordinate', false);
-
       if (viewportCoordinateConfig !== false) {
         this.setViewportCoordinateEnable(GetValue$1(config, 'enable', true));
         this.setViewport(GetValue$1(viewportCoordinateConfig, 'viewport'));
       } else {
         this.setViewportCoordinateEnable(false);
       }
-
       this.setSymbols(GetValue$1(config, 'symbols'));
       this.bobs = {};
       this.removedGOs = [];
       this._timeScale = 1;
     }
-
     _createClass(GOManager, [{
       key: "destroy",
       value: function destroy(fromScene) {
@@ -1260,10 +1111,8 @@
         if (this._timeScale === timeScale) {
           return;
         }
-
         this._timeScale = timeScale;
         var bobs = this.bobs;
-
         for (var name in bobs) {
           bobs[name].setTimeScale(timeScale);
         }
@@ -1287,7 +1136,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.viewportCoordinateEnable = enable;
         return this;
       }
@@ -1297,7 +1145,6 @@
         if (viewport === undefined) {
           viewport = GetViewport(this.scene, this.scene.cameras.main);
         }
-
         this.viewport = viewport;
         return this;
       }
@@ -1313,25 +1160,20 @@
         return IsEmpty(this.bobs) && this.removedGOs.length === 0;
       }
     }]);
-
     return GOManager;
   }();
-
   Object.assign(GOManager.prototype, EventEmitterMethods, Methods);
 
   var SortGameObjectsByDepth = function SortGameObjectsByDepth(gameObjects, descending) {
     if (gameObjects.length === 0) {
       return gameObjects;
     }
-
     if (descending === undefined) {
       descending = false;
     }
-
     var scene = gameObjects[0].scene;
     var displayList = scene.sys.displayList;
     displayList.depthSort();
-
     if (descending) {
       gameObjects.sort(function (childA, childB) {
         return displayList.getIndex(childB) - displayList.getIndex(childA);
@@ -1341,22 +1183,16 @@
         return displayList.getIndex(childA) - displayList.getIndex(childB);
       });
     }
-
     return gameObjects;
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var LayerManager = /*#__PURE__*/function (_GOManager) {
     _inherits(LayerManager, _GOManager);
-
     var _super = _createSuper(LayerManager);
-
     function LayerManager(scene, config) {
       var _this;
-
       _classCallCheck(this, LayerManager);
-
       if (config === undefined) {
         config = {};
       } else if (Array.isArray(config)) {
@@ -1364,45 +1200,39 @@
           layers: config
         };
       }
-
       if (!config.hasOwnProperty('fade')) {
         config.fade = 0;
       }
-
       config.viewportCoordinate = false;
       _this = _super.call(this, scene, config);
       var initLayers = GetValue(config, 'layers');
-
       if (initLayers) {
         for (var i = 0, cnt = initLayers.length; i < cnt; i++) {
           _this.add(initLayers[i]);
         }
       }
-
       return _this;
     }
-
     _createClass(LayerManager, [{
       key: "setCreateGameObjectCallback",
       value: function setCreateGameObjectCallback(callback, scope) {
         if (!callback) {
           callback = CreateLayer;
         }
-
         _get(_getPrototypeOf(LayerManager.prototype), "setCreateGameObjectCallback", this).call(this, callback, scope);
-
         return this;
-      } // Override
+      }
 
+      // Override
     }, {
       key: "addGO",
       value: function addGO(name, gameObject) {
         _get(_getPrototypeOf(LayerManager.prototype), "addGO", this).call(this, name, gameObject);
-
         gameObject.name = name;
         return this;
-      } // New methods
+      }
 
+      // New methods
     }, {
       key: "getLayer",
       value: function getLayer(name) {
@@ -1414,7 +1244,6 @@
         if (out === undefined) {
           out = [];
         }
-
         this.forEachGO(function (gameObject) {
           out.push(gameObject);
         });
@@ -1425,46 +1254,35 @@
       key: "addToLayer",
       value: function addToLayer(name, gameObject) {
         var layer = this.getGO(name);
-
         if (!layer) {
           console.warn("Can't get layer \"".concat(name, "\""));
           return;
         }
-
         if (gameObject.isRexContainerLite) {
           gameObject.addToLayer(layer);
         } else {
           layer.add(gameObject);
         }
-
         return this;
       }
     }]);
-
     return LayerManager;
   }(GOManager);
-
   var CreateLayer = function CreateLayer(scene, depth) {
     var layer = scene.add.layer();
-
     if (depth !== undefined) {
       layer.setDepth(depth);
     }
-
     return layer;
   };
 
   var LayerManagerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(LayerManagerPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(LayerManagerPlugin);
-
     function LayerManagerPlugin(pluginManager) {
       _classCallCheck(this, LayerManagerPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(LayerManagerPlugin, [{
       key: "start",
       value: function start() {
@@ -1477,7 +1295,6 @@
         return new LayerManager(scene, config);
       }
     }]);
-
     return LayerManagerPlugin;
   }(Phaser.Plugins.BasePlugin);
 

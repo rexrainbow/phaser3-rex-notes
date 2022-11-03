@@ -43,9 +43,9 @@ class Demo extends Phaser.Scene {
             .appendText(content[2], { color: '#FF7F50' })
             .appendText(content[3], { color: '#F8F8FF' });
 
-        var result = text.runWordWrap({
+        text.runWordWrap({
+            ascent: 20,
             lineHeight: 30,
-            maxLines: 0,       // Set maxLines to 0
             padding: { bottom: 10 },
 
             hAlign: 'right',

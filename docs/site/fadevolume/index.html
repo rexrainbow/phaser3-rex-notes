@@ -6293,10 +6293,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_2" type="checkbox" id="__nav_12_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_2">
+          Round to
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Round to" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_2">
+          <span class="md-nav__icon md-icon"></span>
+          Round to
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../round-to/" class="md-nav__link">
+        Round to
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../snap/" class="md-nav__link">
         Snap
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -8643,8 +8690,8 @@
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexsoundfadeplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsoundfadeplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Sound fade-in/fade-out
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexsoundfadeplugin&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexsoundfadeplugin&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexsoundfadeplugin&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexsoundfadeplugin&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -8670,8 +8717,8 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Sound fade-in/fade-out
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-method">Import method<a class="headerlink" href="#import-method" title="Permanent link">&para;</a></h4>
@@ -8683,15 +8730,15 @@
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">SoundFade</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/soundfade.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Sound fade-in/fade-out
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">SoundFade</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">SoundFade</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">SoundFade</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">SoundFade</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="fade-in">Fade in<a class="headerlink" href="#fade-in" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Play and fade in voluem.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// var sound = scene.plugins.get(&#39;rexSoundFade&#39;).fadeIn(scene, sound, duration, endVolume, startVolume);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// var sound = scene.plugins.get(&#39;rexSoundFade&#39;).fadeIn(sound, duration, endVolume, startVolume);</span>
 </code></pre></div><ul>
 <li><code>sound</code> : Sound instance, or a key of audio cache.</li>
 </ul>
@@ -8700,13 +8747,13 @@
 <h3 id="fade-out">Fade out<a class="headerlink" href="#fade-out" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fade out volume then destroy it
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>sound</code> : Sound instance.</li>
 </ul>
 </li>
 <li>Fade out volume then stop it
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSoundFade&#39;</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">sound</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>sound</code> : Sound instance.</li>
 </ul>

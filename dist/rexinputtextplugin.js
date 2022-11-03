@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -127,11 +109,9 @@
       width = Math.floor(width);
       height = Math.floor(height);
     }
-
     if (this.width === width && this.height === height) {
       return this;
     }
-
     var style = this.node.style;
     style.width = "".concat(width, "px");
     style.height = "".concat(height, "px");
@@ -187,24 +167,18 @@
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var SetProperties = function SetProperties(properties, config, out) {
     if (out === undefined) {
       out = {};
     }
-
     var property, value;
-
     for (var key in properties) {
       property = properties[key]; // [propName, defaultValue]
-
       value = GetValue$1(config, key, property[1]);
-
       if (value !== undefined) {
         out[property[0]] = value;
       }
     }
-
     return out;
   };
 
@@ -215,7 +189,6 @@
         gameObject.emit(elementEvents[elementEventName], gameObject, e);
       });
     };
-
     for (var elementEventName in elementEvents) {
       _loop(elementEventName);
     }
@@ -230,7 +203,6 @@
     element.addEventListener('mouseup', callback, false);
     element.addEventListener('mousemove', callback, false);
   };
-
   var callback = function callback(e) {
     e.stopPropagation();
   };
@@ -238,17 +210,12 @@
   var DOMElement = Phaser.GameObjects.DOMElement;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var InputText = /*#__PURE__*/function (_DOMElement) {
     _inherits(InputText, _DOMElement);
-
     var _super = _createSuper(InputText);
-
     function InputText(scene, x, y, width, height, config) {
       var _this;
-
       _classCallCheck(this, InputText);
-
       if (IsPlainObject(x)) {
         config = x;
         x = GetValue(config, 'x', 0);
@@ -260,14 +227,11 @@
         width = GetValue(config, 'width', 0);
         height = GetValue(config, 'height', 0);
       }
-
       if (config === undefined) {
         config = {};
       }
-
       var element;
       var textType = GetValue(config, 'type', 'text');
-
       if (textType === 'textarea') {
         element = document.createElement('textarea');
         element.style.resize = 'none';
@@ -275,13 +239,11 @@
         element = document.createElement('input');
         element.type = textType;
       }
-
       SetProperties(ElementProperties, config, element);
       var style = GetValue(config, 'style', undefined);
-      style = SetProperties(StyleProperties, config, style); // Apply other style properties
-
+      style = SetProperties(StyleProperties, config, style);
+      // Apply other style properties
       var elementStyle = element.style;
-
       for (var key in config) {
         if (key in ElementProperties || key in StyleProperties) {
           continue;
@@ -289,33 +251,27 @@
           style[key] = config[key];
         }
       }
-
       style['box-sizing'] = 'border-box';
       _this = _super.call(this, scene, x, y, element, style);
       _this.type = 'rexInputText';
+      _this.resize(width, height);
 
-      _this.resize(width, height); // Apply events
+      // Apply events
+      RouteEvents(_assertThisInitialized(_this), element, ElementEvents);
 
-
-      RouteEvents(_assertThisInitialized(_this), element, ElementEvents); // Don't propagate touch/mouse events to parent(game canvas)
-
+      // Don't propagate touch/mouse events to parent(game canvas)
       StopPropagationTouchEvents(element);
-
       if (GetValue(config, 'selectAll', false)) {
         _this.selectAll();
       }
-
       _this._isFocused = false;
-
       _this.on('focus', function () {
         this._isFocused = true;
       }, _assertThisInitialized(_this)).on('blur', function () {
         this._isFocused = false;
       }, _assertThisInitialized(_this));
-
       return _this;
     }
-
     _createClass(InputText, [{
       key: "text",
       get: function get() {
@@ -381,7 +337,6 @@
         } else {
           this.node.setSelectionRange(selectionStart, selectionEnd);
         }
-
         return this;
       }
     }, {
@@ -422,7 +377,6 @@
         } else if (value < 0) {
           value = this.text.length + value;
         }
-
         this.cursorPosition = value;
         return this;
       }
@@ -460,7 +414,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.readOnly = value;
         return this;
       }
@@ -515,7 +468,6 @@
         if (enabled === undefined) {
           enabled = true;
         }
-
         this.node.disabled = !enabled;
         return this;
       }
@@ -537,10 +489,8 @@
         return this._isFocused;
       }
     }]);
-
     return InputText;
   }(DOMElement);
-
   var methods = {
     resize: Resize
   };
@@ -558,11 +508,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', undefined);
     var gameObject = new InputText(this.scene, 0, 0, width, height, config);
@@ -573,23 +521,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -599,31 +541,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -631,31 +572,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var InputTextPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(InputTextPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(InputTextPlugin);
-
     function InputTextPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, InputTextPlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexInputText', Factory, Creator);
       return _this;
     }
-
     _createClass(InputTextPlugin, [{
       key: "start",
       value: function start() {
@@ -663,10 +598,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return InputTextPlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.InputText', InputText);
 
   return InputTextPlugin;

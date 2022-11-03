@@ -2,9 +2,13 @@ import SetFixedSize from './SetFixedSize.js';
 import SetPadding from './SetPadding.js';
 import GetPadding from './GetPadding.js';
 import ModifyTextStyle from './ModifyTextStyle.js';
+import ModifyDefaultTextStyle from './ModifyDefaultTextStyle.js';
 import ResetTextStyle from './ResetTextStyle.js';
+import SetTestString from './SetTestString.js';
+
 import RemoveChild from './RemoveChild.js';
 import RemoveChildren from './RemoveChildren.js';
+import PopChild from './PopChild.js';
 import ClearContent from './ClearContent.js';
 import AddChild from './AddChild.js';
 import CreateCharChild from './CreateCharChild.js';
@@ -25,6 +29,8 @@ import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
+import RunWrap from './RunWrap.js';
+import SetAlignMethods from './SetAlignMethods.js';
 import RenderContent from './RenderContent.js';
 
 import ForEachChild from './ForEachChild.js';
@@ -52,10 +58,13 @@ var Methods = {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    modifyDefaultTextStyle: ModifyDefaultTextStyle,
     resetTextStyle: ResetTextStyle,
+    setTestString: SetTestString,
 
     removeChild: RemoveChild,
     removeChildren: RemoveChildren,
+    popChild: PopChild,
     clearContent: ClearContent,
     addChild: AddChild,
     createCharChild: CreateCharChild,
@@ -77,6 +86,7 @@ var Methods = {
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,
+    runWrap: RunWrap,
     renderContent: RenderContent,
 
     forEachChild: ForEachChild,
@@ -105,6 +115,7 @@ Object.assign(
     MoveChildMethods,
     BackgroundMethods,
     InnerBoundsMethods,
+    SetAlignMethods,
 
 )
 

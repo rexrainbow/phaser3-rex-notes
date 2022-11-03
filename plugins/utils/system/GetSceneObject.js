@@ -9,6 +9,8 @@ var GetSceneObject = function (object) {
         return object.scene;
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) { // parent = bob object
         return object.parent.scene;
+    } else {
+        return null;
     }
 }
 

@@ -1600,6 +1600,19 @@
     Create instance
   </a>
   
+    <nav class="md-nav" aria-label="Create instance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#number-input" class="md-nav__link">
+    Number input
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1633,6 +1646,34 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-only" class="md-nav__link">
+    Read only
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    Size
+  </a>
   
 </li>
         
@@ -6359,10 +6400,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_2" type="checkbox" id="__nav_12_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_2">
+          Round to
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Round to" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_2">
+          <span class="md-nav__icon md-icon"></span>
+          Round to
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../round-to/" class="md-nav__link">
+        Round to
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../snap/" class="md-nav__link">
         Snap
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -8668,6 +8756,19 @@
     Create instance
   </a>
   
+    <nav class="md-nav" aria-label="Create instance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#number-input" class="md-nav__link">
+    Number input
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -8701,6 +8802,34 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-only" class="md-nav__link">
+    Read only
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    Size
+  </a>
   
 </li>
         
@@ -8769,6 +8898,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><a href="https://codepen.io/rexrainbow/pen/vYjwjyW">Simple</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/poVPGKe">Text input</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOxarOO">Number input</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOKOJoV">With rexui-Label</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasinput">Sample code</a></p>
@@ -8907,6 +9037,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
     <span class="c1">// inputType: &#39;text&#39;,  // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...                </span>
 
     <span class="c1">// enterClose: true,</span>
+    <span class="c1">// readOnly: false,</span>
 
     <span class="c1">// Callbacks</span>
     <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
@@ -8917,8 +9048,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 
     <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
     <span class="c1">//     return text;</span>
-    <span class="c1">// },</span>
-    <span class="c1">// onUpdate: &#39;number&#39;,    // Only output number string</span>
+    <span class="c1">// },   </span>
 
     <span class="c1">// onAddChar: function(child, index, canvasInput) {</span>
     <span class="c1">//    child.modifyStyle({...})</span>
@@ -8936,6 +9066,10 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
     <span class="c1">//     });</span>
     <span class="c1">// },</span>
 
+    <span class="c1">// parseTextCallback: function(text) {</span>
+    <span class="c1">//     return text;</span>
+    <span class="c1">// }.</span>
+
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8945,21 +9079,27 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>
 </ul>
 </li>
-<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is true.</li>
+<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is <code>true</code>.</li>
+<li><code>readOnly</code> : <ul>
+<li><code>true</code> : un-editable.</li>
+<li><code>false</code> : Editable. Defaule behavior.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Callbacks<ul>
 <li><code>onOpen</code> : Callback invoked when focus on this hidden input text.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// textObject.setInputText(txt);</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onClose</code> : Callback invoked when blur.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>            
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onUpdate</code> : <ul>
 <li>A callback invoked in each tick of editing.
-    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">,</span> <span class="nx">txt</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return text;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -8991,6 +9131,15 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>child</code> : <a href="../dynamictext/#character">character child</a></li>
+</ul>
+</li>
+<li><code>parseTextCallback</code> : Callback of parsing text (<code>txt.text</code>) to value (<code>txt.value</code>)<ul>
+<li><code>undefined</code> : Bypass text to value. Default behavior.</li>
+<li>A function object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">text</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
@@ -9039,6 +9188,9 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </ul>
 </li>
 </ul>
+<h4 id="number-input">Number input<a class="headerlink" href="#number-input" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setNumberInput</span><span class="p">();</span>
+</code></pre></div>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
@@ -9078,8 +9230,100 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <h4 id="is-opened">Is opened<a class="headerlink" href="#is-opened" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isOpened</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">isOpened</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="read-only">Read only<a class="headerlink" href="#read-only" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable read only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">();</span>
+<span class="c1">// txt.setReadOnly(true);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Disable read only
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setReadOnly</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get read only
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">readOnlyEanble</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">readOnly</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Display text on <a href="../dynamictext/">dynamic text game object</a><ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">displayText</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
+    or 
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDisplayText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Input text on <a href="../hiddeninputtext/">hidden text edit behavior</a><ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">inputText</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">setInputText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get. Parse text to value.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
+<span class="c1">// var value = txt.value;</span>
+</code></pre></div><ul>
+<li>Set <code>parseTextCallback</code>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setParseTextCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>callback</code> : <ul>
+<li><code>undefined</code> : Bypass text to value. Default behavior.</li>
+<li>A function object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">text</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set. Conver any type of <code>value</code> to string.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// txt.value = value;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Resize canvas size
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setCanvasSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Reisze text wrapping size and canvas size.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Resize to minimun size to show all visible characters.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setToMinSize</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>On text change
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;textchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">txt</span><span class="p">){</span>
+<span class="p">})</span>
+</code></pre></div></li>
 <li>On character child adding
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addchar&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">canvasInput</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">child</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({...})</span>
@@ -9111,6 +9355,11 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 </code></pre></div></li>
 <li>On close text-editor
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Not a number input
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">){</span>
 
 <span class="p">})</span>
 </code></pre></div></li>

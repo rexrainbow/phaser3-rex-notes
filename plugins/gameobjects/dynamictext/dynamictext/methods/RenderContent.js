@@ -1,7 +1,7 @@
 var RenderContent = function () {
     this.clear();
 
-    this.setSize(this.width, this.height);
+    this.setCanvasSize(this.width, this.height);
 
     if (this.background.active) {
         this.background.render();

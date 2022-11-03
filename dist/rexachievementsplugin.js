@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,56 +75,43 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _toArray(arr) {
     return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
   }
-
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -142,15 +120,11 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
@@ -159,7 +133,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -167,18 +140,15 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
   var Achievements$1 = /*#__PURE__*/function () {
     function Achievements() {
       _classCallCheck(this, Achievements);
-
       this.achievements = {};
       this.obtainedStates = {};
     }
-
     _createClass(Achievements, [{
       key: "clear",
       value: function clear() {
@@ -192,7 +162,6 @@
         if (!this.achievements.hasOwnProperty(levelName)) {
           this.achievements[levelName] = [];
         }
-
         this.achievements[levelName].push({
           name: achievementName,
           "function": callback
@@ -210,53 +179,41 @@
         if (levelName === undefined) {
           return this.obtainedStates;
         }
-
         if (!this.obtainedStates.hasOwnProperty(levelName)) {
           this.obtainedStates[levelName] = {};
         }
-
         var obtainedStates = this.obtainedStates[levelName];
-
         if (achievementName === undefined) {
           return obtainedStates;
         }
-
         if (!obtainedStates.hasOwnProperty(achievementName)) {
           obtainedStates[achievementName] = {
             wasObtained: false,
             justObtained: false
           };
         }
-
         return obtainedStates[achievementName];
       }
     }, {
       key: "runTest",
       value: function runTest(levelName, context) {
         var achievements = this.getAchievements(levelName);
-
         if (achievements === undefined) {
           return this;
         }
-
         var obtainedState;
-
         for (var i = 0, cnt = achievements.length; i < cnt; i++) {
           obtainedState = this.getObtainedState(levelName, achievements[i].name);
           obtainedState.justObtained = false;
-
           if (obtainedState.wasObtained) {
             continue;
           }
-
           if (!achievements[i]["function"](context)) {
             continue;
           }
-
           obtainedState.justObtained = true;
           obtainedState.wasObtained = true;
         }
-
         return this;
       }
     }, {
@@ -269,24 +226,19 @@
       key: "forEachObtainedState",
       value: function forEachObtainedState(levelName, callback, scope) {
         var achievements = this.getAchievements(levelName);
-
         if (achievements === undefined) {
           return this;
         }
-
         var achievementName, obtainedState;
-
         for (var i = 0, cnt = achievements.length; i < cnt; i++) {
           achievementName = achievements[i].name;
           obtainedState = this.getObtainedState(levelName, achievementName);
-
           if (scope) {
             callback.call(scope, levelName, achievementName, obtainedState);
           } else {
             callback(levelName, achievementName, obtainedState);
           }
         }
-
         return this;
       }
     }, {
@@ -295,11 +247,9 @@
         if (out === undefined) {
           out = [];
         }
-
         for (var levelName in this.achievements) {
           out.push(levelName);
         }
-
         return out;
       }
     }, {
@@ -308,17 +258,13 @@
         if (out === undefined) {
           out = [];
         }
-
         var achievements = this.getAchievements(levelName);
-
         if (!achievements) {
           return out;
         }
-
         for (var i = 0, cnt = achievements.length; i < cnt; i++) {
           out.push(achievements[i].name);
         }
-
         return names;
       }
     }, {
@@ -338,7 +284,6 @@
         if (value === undefined) {
           value = true;
         }
-
         var obtainedState = this.getObtainedState(levelName, achievementName);
         obtainedState.wasObtained = value;
         obtainedState.justObtained = value;
@@ -351,7 +296,6 @@
         return this;
       }
     }]);
-
     return Achievements;
   }();
 
@@ -360,6 +304,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -384,8 +329,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -397,7 +343,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -422,47 +367,36 @@
 
   var CreateTestFunction = function CreateTestFunction(keys, equations) {
     var conditions = [];
-
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
       if (equations[i] === '' || equations[i] == null) {
         continue;
       }
-
       conditions.push(CreateComparisonLogic(keys[i], equations[i]));
     }
-
     var logic = conditions.length > 0 ? conditions.join('&&') : 'false';
     var f = new Function('values', 'return ' + logic);
     return f;
   };
-
   var IsEquation = function IsEquation(s) {
     return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
   };
-
   var CreateComparisonLogic = function CreateComparisonLogic(key, equation) {
     if (!IsEquation(equation)) {
       if (isNaN(equation)) {
         equation = "'".concat(equation, "'");
       }
-
       equation = "==(".concat(equation, ")");
     }
-
     return "(values['".concat(key, "']").concat(equation, ")");
   };
 
   var Achievements = /*#__PURE__*/function (_Base) {
     _inherits(Achievements, _Base);
-
     var _super = _createSuper(Achievements);
-
     function Achievements() {
       _classCallCheck(this, Achievements);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(Achievements, [{
       key: "loadCSV",
       value: function loadCSV(csvString, config) {
@@ -474,34 +408,26 @@
         var keys = table[0];
         keys.splice(0, 2);
         var levelName, achievementName, items;
-
         for (var i = 1, cnt = table.length; i < cnt; i++) {
           var _table$i = _toArray(table[i]);
-
           levelName = _table$i[0];
           achievementName = _table$i[1];
           items = _table$i.slice(2);
           this.add(levelName, achievementName, CreateTestFunction(keys, items));
         }
-
         return this;
       }
     }]);
-
     return Achievements;
   }(Achievements$1);
 
   var AchievementsPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(AchievementsPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(AchievementsPlugin);
-
     function AchievementsPlugin(pluginManager) {
       _classCallCheck(this, AchievementsPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(AchievementsPlugin, [{
       key: "start",
       value: function start() {
@@ -514,7 +440,6 @@
         return new Achievements();
       }
     }]);
-
     return AchievementsPlugin;
   }(Phaser.Plugins.BasePlugin);
 

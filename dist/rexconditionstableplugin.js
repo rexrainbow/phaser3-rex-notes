@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,40 +66,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -115,10 +98,8 @@
   var ConditionsTable$1 = /*#__PURE__*/function () {
     function ConditionsTable() {
       _classCallCheck(this, ConditionsTable);
-
       this.tests = []; // [{name, function}, ...]
     }
-
     _createClass(ConditionsTable, [{
       key: "clear",
       value: function clear() {
@@ -138,36 +119,29 @@
       key: "getTestResults",
       value: function getTestResults(context) {
         var results = {}; // {name: boolean}
-
         var name, f;
-
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
           name = this.tests[i].name;
           f = this.tests[i]["function"];
-
           if (f(context)) {
             results[name] = true;
           } else if (!results.hasOwnProperty(name)) {
             results[name] = false;
           }
         }
-
         return results;
       }
     }, {
       key: "anyPassTest",
       value: function anyPassTest(context, callback, scope) {
         var name, f;
-
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
           name = this.tests[i].name;
           f = this.tests[i]["function"];
-
           if (!f(context)) {
             name = false;
             continue;
           }
-
           if (callback) {
             if (scope) {
               callback.call(scope, name);
@@ -175,55 +149,45 @@
               callback(name);
             }
           }
-
           break;
         }
-
         return callback ? this : name;
       }
     }, {
       key: "eachPassTest",
       value: function eachPassTest(context, callback, scope) {
         var name, f;
-
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
           name = this.tests[i].name;
           f = this.tests[i]["function"];
-
           if (!f(context)) {
             continue;
           }
-
           if (scope) {
             callback.call(scope, name);
           } else {
             callback(name);
           }
         }
-
         return this;
       }
     }, {
       key: "eachTest",
       value: function eachTest(context, callback, scope) {
         var pass, name, f;
-
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
           name = this.tests[i].name;
           f = this.tests[i]["function"];
           pass = f(context);
-
           if (scope) {
             callback.call(scope, name, pass);
           } else {
             callback(name, pass);
           }
         }
-
         return this;
       }
     }]);
-
     return ConditionsTable;
   }();
 
@@ -232,6 +196,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -256,8 +221,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -269,7 +235,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -294,47 +259,36 @@
 
   var CreateTestFunction = function CreateTestFunction(keys, equations) {
     var conditions = [];
-
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
       if (equations[i] === '' || equations[i] == null) {
         continue;
       }
-
       conditions.push(CreateComparisonLogic(keys[i], equations[i]));
     }
-
     var logic = conditions.length > 0 ? conditions.join('&&') : 'false';
     var f = new Function('values', 'return ' + logic);
     return f;
   };
-
   var IsEquation = function IsEquation(s) {
     return s.indexOf('==') != -1 || s.indexOf('!=') != -1 || s.indexOf('>=') != -1 || s.indexOf('<=') != -1 || s.indexOf('>') != -1 || s.indexOf('<') != -1;
   };
-
   var CreateComparisonLogic = function CreateComparisonLogic(key, equation) {
     if (!IsEquation(equation)) {
       if (isNaN(equation)) {
         equation = "'".concat(equation, "'");
       }
-
       equation = "==(".concat(equation, ")");
     }
-
     return "(values['".concat(key, "']").concat(equation, ")");
   };
 
   var ConditionsTable = /*#__PURE__*/function (_Base) {
     _inherits(ConditionsTable, _Base);
-
     var _super = _createSuper(ConditionsTable);
-
     function ConditionsTable() {
       _classCallCheck(this, ConditionsTable);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(ConditionsTable, [{
       key: "loadCSV",
       value: function loadCSV(csvString, config) {
@@ -346,31 +300,24 @@
         var keys = table[0];
         keys.shift();
         var items, testName;
-
         for (var i = 1, cnt = table.length; i < cnt; i++) {
           items = table[i];
           testName = items.shift();
           this.add(testName, CreateTestFunction(keys, items));
         }
-
         return this;
       }
     }]);
-
     return ConditionsTable;
   }(ConditionsTable$1);
 
   var ConditionsTablePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ConditionsTablePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(ConditionsTablePlugin);
-
     function ConditionsTablePlugin(pluginManager) {
       _classCallCheck(this, ConditionsTablePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(ConditionsTablePlugin, [{
       key: "start",
       value: function start() {
@@ -383,7 +330,6 @@
         return new ConditionsTable();
       }
     }]);
-
     return ConditionsTablePlugin;
   }(Phaser.Plugins.BasePlugin);
 

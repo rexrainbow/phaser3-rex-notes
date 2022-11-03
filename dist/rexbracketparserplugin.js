@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,56 +66,43 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -132,15 +111,11 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
@@ -159,7 +134,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -169,70 +143,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -242,6 +206,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -266,8 +231,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -279,7 +245,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -287,21 +252,19 @@
   };
 
   // https://github.com/sindresorhus/escape-string-regexp/blob/master/index.js
+
   var EscapeRegex = function EscapeRegex(s) {
     return s.replace(re0, '\\$&').replace(re1, '\\x2d');
   };
-
   var re0 = /[|\\{}()[\]^$+*?.]/g;
   var re1 = /-/g;
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
-
   var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
-
     if (s === '') {
       s = null;
     } else if (FLOAT.test(s)) {
@@ -315,7 +278,6 @@
         s = true;
       }
     }
-
     return s;
   };
 
@@ -323,38 +285,33 @@
     if (text == null) {
       return [];
     }
-
     var values = text.split(',');
-
     for (var i = 0, cnt = values.length; i < cnt; i++) {
       values[i] = valueConverter(values[i]);
     }
-
     return values;
   };
 
   var DefaultTagExpression = "[!$a-z0-9-_.]+";
   var DefaultValueExpression = "[ !$a-z0-9-_.#,|&]+";
-
   var BypassValueConverter = function BypassValueConverter(s) {
     return s;
   };
-
   var BracketParser = /*#__PURE__*/function () {
     function BracketParser(config) {
       _classCallCheck(this, BracketParser);
-
       // Event emitter
-      this.setEventEmitter(GetValue(config, 'eventEmitter', undefined)); // Parameters for regex
+      this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+      // Parameters for regex
       this.setTagExpression(GetValue(config, 'regex.tag', DefaultTagExpression));
-      this.setValueExpression(GetValue(config, 'regex.value', DefaultValueExpression)); // Value convert
-
-      this.setValueConverter(GetValue(config, 'valueConvert', true)); // Brackets and generate regex
-
+      this.setValueExpression(GetValue(config, 'regex.value', DefaultValueExpression));
+      // Value convert
+      this.setValueConverter(GetValue(config, 'valueConvert', true));
+      // Brackets and generate regex
       var delimiters = GetValue(config, 'delimiters', '<>');
-      this.setDelimiters(delimiters[0], delimiters[1]); // Loop
-
+      this.setDelimiters(delimiters[0], delimiters[1]);
+      // Loop
       this.setLoopEnable(GetValue(config, 'loop', false));
       this.isRunning = false;
       this.isPaused = false;
@@ -364,7 +321,6 @@
       this.lastTagEnd = null;
       this.lastContent = null;
     }
-
     _createClass(BracketParser, [{
       key: "shutdown",
       value: function shutdown() {
@@ -395,7 +351,6 @@
         } else if (!converter) {
           converter = BypassValueConverter;
         }
-
         this.valueConverter = converter;
         return this;
       }
@@ -406,7 +361,6 @@
           delimiterRight = delimiterLeft[1];
           delimiterLeft = delimiterLeft[0];
         }
-
         this.delimiterLeft = delimiterLeft;
         this.delimiterRight = delimiterRight;
         delimiterLeft = EscapeRegex(delimiterLeft);
@@ -424,7 +378,6 @@
         if (enable === undefined) {
           enable = true;
         }
-
         this.loopEnable = enable;
         return this;
       }
@@ -440,7 +393,6 @@
         if (index === undefined) {
           index = 0;
         }
-
         this.progressIndex = index;
         this.reSplit.lastIndex = index;
         this.lastTagStart = null;
@@ -466,73 +418,65 @@
       value: function next() {
         if (this.isPaused) {
           this.onResume();
-        } // Don't re-enter this method
+        }
 
-
+        // Don't re-enter this method
         if (this.isRunning) {
           return this;
         }
-
         this.isRunning = true;
-
         if (this.justCompleted) {
           this.isRunning = false;
           return this;
         }
-
         if (this.reSplit.lastIndex === 0) {
           this.onStart();
         }
-
         var text = this.source,
-            lastIndex = text.length;
+          lastIndex = text.length;
         this.reSplit.lastIndex = this.progressIndex;
-
         while (true) {
-          var regexResult = this.reSplit.exec(text); // No tag found, complete
-
+          var regexResult = this.reSplit.exec(text);
+          // No tag found, complete
           if (!regexResult) {
             if (this.progressIndex < lastIndex) {
-              this.onContent(text.substring(this.progressIndex, lastIndex)); // Might pause here
-
+              this.onContent(text.substring(this.progressIndex, lastIndex));
+              // Might pause here
               if (this.isPaused) {
                 this.progressIndex = lastIndex;
                 break;
               }
             }
-
             this.onComplete();
             this.isRunning = false;
             return;
           }
-
           var match = regexResult[0];
           var matchEnd = this.reSplit.lastIndex;
-          var matchStart = matchEnd - match.length; // Process content between previous tag and current tag            
+          var matchStart = matchEnd - match.length;
 
+          // Process content between previous tag and current tag            
           if (this.progressIndex < matchStart) {
-            this.onContent(text.substring(this.progressIndex, matchStart)); // Might pause here
-
+            this.onContent(text.substring(this.progressIndex, matchStart));
+            // Might pause here
             if (this.isPaused) {
               this.progressIndex = matchStart;
               break;
             }
-          } // Process current tag
+          }
 
-
+          // Process current tag
           if (this.reTagOff.test(match)) {
             this.onTagEnd(match);
           } else {
             this.onTagStart(match);
           }
-
-          this.progressIndex = matchEnd; // Might pause here
-
+          this.progressIndex = matchEnd;
+          // Might pause here
           if (this.isPaused) {
             break;
           }
         }
-
         this.isRunning = false;
         return this;
       }
@@ -548,7 +492,6 @@
         if (!this.isPaused) {
           this.onPause();
         }
-
         return this;
       }
     }, {
@@ -557,7 +500,6 @@
         if (this.isPaused) {
           return this;
         }
-
         this.pause();
         eventEmitter.once(eventName, function () {
           this.next();
@@ -579,11 +521,9 @@
         var values = ParseValue(regexResult[3], this.valueConverter);
         this.skipEventFlag = false;
         this.emit.apply(this, ["+".concat(tag)].concat(_toConsumableArray(values)));
-
         if (!this.skipEventFlag) {
           this.emit.apply(this, ['+', tag].concat(_toConsumableArray(values)));
         }
-
         this.lastTagStart = tag;
       }
     }, {
@@ -592,11 +532,9 @@
         var tag = tagContent.match(this.reTagOff)[1];
         this.skipEventFlag = false;
         this.emit("-".concat(tag));
-
         if (!this.skipEventFlag) {
           this.emit('-', tag);
         }
-
         this.lastTagEnd = tag;
       }
     }, {
@@ -611,7 +549,6 @@
         this.isRunning = false;
         this.justCompleted = true;
         this.emit('complete', this);
-
         if (this.loopEnable) {
           this.resetIndex();
         }
@@ -634,11 +571,9 @@
         if (tagExpression === undefined) {
           tagExpression = this.tagExpression;
         }
-
         if (valueExpression === undefined) {
           valueExpression = this.valueExpression;
         }
-
         return "".concat(EscapeRegex(this.delimiterLeft), "(").concat(tagExpression, ")(=(").concat(valueExpression, "))?").concat(EscapeRegex(this.delimiterRight));
       }
     }, {
@@ -647,27 +582,20 @@
         if (tagExpression === undefined) {
           tagExpression = this.tagExpression;
         }
-
         return "".concat(EscapeRegex(this.delimiterLeft), "/(").concat(tagExpression, ")").concat(EscapeRegex(this.delimiterRight));
       }
     }]);
-
     return BracketParser;
   }();
-
   Object.assign(BracketParser.prototype, EventEmitterMethods);
 
   var BracketParserPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(BracketParserPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(BracketParserPlugin);
-
     function BracketParserPlugin(pluginManager) {
       _classCallCheck(this, BracketParserPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(BracketParserPlugin, [{
       key: "start",
       value: function start() {
@@ -680,7 +608,6 @@
         return new BracketParser(config);
       }
     }]);
-
     return BracketParserPlugin;
   }(Phaser.Plugins.BasePlugin);
 

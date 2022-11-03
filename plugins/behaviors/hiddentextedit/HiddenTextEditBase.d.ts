@@ -1,29 +1,31 @@
 export default HiddenTextEditBase;
 
 declare namespace HiddenTextEditBase {
-    interface IConfig {       
+    type OnOpenCallbackType = (
+        textObject: Phaser.GameObjects.GameObject,
+        hiddenInputText: HiddenTextEditBase,
+    ) => void;
+
+    type OnCloseCallbackType = (
+        textObject: Phaser.GameObjects.GameObject,
+        hiddenInputText: HiddenTextEditBase,
+    ) => void;
+
+    type OnUpdateCallbackType = (
+        text: string,
+        textObject: Phaser.GameObjects.GameObject,
+        hiddenInputText: HiddenTextEditBase,
+    ) => void | string;
+
+
+    interface IConfig {
         enterClose?: boolean;
 
-        onOpen: (
-            textObject: Phaser.GameObjects.GameObject,
-            hiddenInputText: HiddenTextEditBase,
-        ) => void;
+        onOpen: OnOpenCallbackType;
 
-        onClose: (
-            textObject: Phaser.GameObjects.GameObject,
-            hiddenInputText: HiddenTextEditBase,
-        ) => void;
+        onClose: OnCloseCallbackType;
 
-        onUpdate:
-        (
-            (
-                text: string,
-                textObject: Phaser.GameObjects.GameObject,
-                hiddenInputText: HiddenTextEditBase,
-            )
-                => void | string
-        ) |
-        'number';
+        onUpdate: OnUpdateCallbackType | 'number';
 
         // Copy from InputText
         type?: string,

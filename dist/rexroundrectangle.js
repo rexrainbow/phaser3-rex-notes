@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,56 +66,44 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var RoundRectangle$1 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
-
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
       this.setTo(x, y, width, height, radiusConfig);
     }
-
     _createClass(RoundRectangle, [{
       key: "setTo",
       value: function setTo(x, y, width, height, radiusConfig) {
@@ -138,11 +118,9 @@
         if (x === undefined) {
           x = 0;
         }
-
         if (y === undefined) {
           y = x;
         }
-
         this.x = x;
         this.y = y;
         return this;
@@ -153,7 +131,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radius = value;
         return this;
       }
@@ -185,7 +162,6 @@
         if (value == null) {
           value = 0;
         }
-
         this._width = Math.max(value, this.minWidth);
       }
     }, {
@@ -197,7 +173,6 @@
         if (value == null) {
           value = 0;
         }
-
         this._height = Math.max(value, this.minHeight);
       }
     }, {
@@ -208,7 +183,6 @@
       },
       set: function set(value) {
         var defaultRadiusX, defaultRadiusY;
-
         if (typeof value === 'number') {
           defaultRadiusX = value;
           defaultRadiusY = value;
@@ -216,7 +190,6 @@
           defaultRadiusX = GetValue$1(value, 'x', 0);
           defaultRadiusY = GetValue$1(value, 'y', 0);
         }
-
         var radius = this.cornerRadius;
         radius.tl = GetRadius(GetValue$1(value, 'tl', undefined), defaultRadiusX, defaultRadiusY);
         radius.tr = GetRadius(GetValue$1(value, 'tr', undefined), defaultRadiusX, defaultRadiusY);
@@ -260,10 +233,8 @@
         SetRadius(this.cornerRadius.br, value);
       }
     }]);
-
     return RoundRectangle;
   }();
-
   var GetRadius = function GetRadius(radius, defaultRadiusX, defaultRadiusY) {
     if (radius === undefined) {
       return {
@@ -279,7 +250,6 @@
       return radius;
     }
   };
-
   var SetRadius = function SetRadius(radius, value) {
     if (typeof value === 'number') {
       radius.x = value;
@@ -292,22 +262,18 @@
 
   var LineTo = function LineTo(x, y, pathData) {
     var cnt = pathData.length;
-
     if (cnt >= 2) {
       var lastX = pathData[cnt - 2];
       var lastY = pathData[cnt - 1];
-
       if (x === lastX && y === lastY) {
         return pathData;
       }
     }
-
     pathData.push(x, y);
     return pathData;
   };
 
   var DegToRad = Phaser.Math.DegToRad;
-
   var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && endAngle > startAngle) {
@@ -315,18 +281,15 @@
     } else if (!antiClockWise && endAngle < startAngle) {
       endAngle += 360;
     }
-
     var deltaAngle = endAngle - startAngle;
     var step = DegToRad(deltaAngle) / iteration;
     startAngle = DegToRad(startAngle);
-
     for (var i = 0; i <= iteration; i++) {
       var angle = startAngle + step * i;
       var x = centerX + radiusX * Math.cos(angle);
       var y = centerY + radiusY * Math.sin(angle);
       LineTo(x, y, pathData);
     }
-
     return pathData;
   };
 
@@ -338,13 +301,12 @@
       pathIndexes  // Earcut(pathData)
   }
   */
-  var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
+  var Utils$1 = Phaser.Renderer.WebGL.Utils;
   var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
     var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
     var path = src.pathData;
     var pathIndexes = src.pathIndexes;
-
     for (var i = 0; i < pathIndexes.length; i += 3) {
       var p0 = pathIndexes[i] * 2;
       var p1 = pathIndexes[i + 1] * 2;
@@ -375,7 +337,6 @@
   }
   */
   var Utils = Phaser.Renderer.WebGL.Utils;
-
   var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
     var strokeTint = pipeline.strokeTint;
     var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
@@ -389,11 +350,9 @@
     var halfLineWidth = lineWidth / 2;
     var px1 = path[0] - dx;
     var py1 = path[1] - dy;
-
     if (!src.closePath) {
       pathLength -= 2;
     }
-
     for (var i = 2; i < pathLength; i += 2) {
       var px2 = path[i] - dx;
       var py2 = path[i + 1] - dy;
@@ -404,13 +363,11 @@
   };
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-
   var PolygonWebGLRenderer = function PolygonWebGLRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
       src.updateData();
       src.dirty = false;
     }
-
     camera.addToRenderList(src);
     var pipeline = renderer.pipelines.set(src.pipeline);
     var result = GetCalcMatrix(src, camera, parentMatrix);
@@ -419,15 +376,12 @@
     var dy = src._displayOriginY;
     var alpha = camera.alpha * src.alpha;
     renderer.pipelines.preBatch(src);
-
     if (src.isFilled) {
       FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy);
     }
-
     if (src.isStroked) {
       StrokePathWebGL(pipeline, src, alpha, dx, dy);
     }
-
     renderer.pipelines.postBatch(src);
   };
 
@@ -451,16 +405,13 @@
   };
 
   var SetTransform = Phaser.Renderer.Canvas.SetTransform;
-
   var PolygonCanvasRenderer = function PolygonCanvasRenderer(renderer, src, camera, parentMatrix) {
     if (src.dirty) {
       src.updateData();
       src.dirty = false;
     }
-
     camera.addToRenderList(src);
     var ctx = renderer.currentContext;
-
     if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
       var dx = src._displayOriginX;
       var dy = src._displayOriginY;
@@ -470,30 +421,25 @@
       var py1 = path[1] - dy;
       ctx.beginPath();
       ctx.moveTo(px1, py1);
-
       if (!src.closePath) {
         pathLength -= 2;
       }
-
       for (var i = 2; i < pathLength; i += 2) {
         var px2 = path[i] - dx;
         var py2 = path[i + 1] - dy;
         ctx.lineTo(px2, py2);
       }
-
       ctx.closePath();
-
       if (src.isFilled) {
         FillStyleCanvas(ctx, src);
         ctx.fill();
       }
-
       if (src.isStroked) {
         LineStyleCanvas(ctx, src);
         ctx.stroke();
-      } //  Restore the context saved in SetTransform
+      }
 
-
+      //  Restore the context saved in SetTransform
       ctx.restore();
     }
   };
@@ -507,19 +453,13 @@
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Earcut = Phaser.Geom.Polygon.Earcut;
-
   var RoundRectangle = /*#__PURE__*/function (_Shape) {
     _inherits(RoundRectangle, _Shape);
-
     var _super = _createSuper(RoundRectangle);
-
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
       var _this;
-
       _classCallCheck(this, RoundRectangle);
-
       var strokeColor, strokeAlpha, strokeWidth;
-
       if (IsPlainObject(x)) {
         var config = x;
         x = config.x;
@@ -533,48 +473,35 @@
         strokeAlpha = config.strokeAlpha;
         strokeWidth = config.strokeWidth;
       }
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
-
       var geom = new RoundRectangle$1(); // Configurate it later
-
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
       var radius = GetValue(radiusConfig, 'radius', radiusConfig);
       geom.setTo(0, 0, width, height, radius);
       var iteration = GetValue(radiusConfig, 'iteration', undefined);
-
       _this.setIteration(iteration);
-
       _this.setPosition(x, y);
-
       if (fillColor !== undefined) {
         _this.setFillStyle(fillColor, fillAlpha);
       }
-
       if (strokeColor !== undefined) {
         if (strokeWidth === undefined) {
           strokeWidth = 2;
         }
-
         _this.setStrokeStyle(strokeWidth, strokeColor, strokeAlpha);
       }
-
       _this.updateDisplayOrigin();
-
       _this.dirty = true;
       return _this;
     }
-
     _createClass(RoundRectangle, [{
       key: "updateData",
       value: function updateData() {
@@ -582,44 +509,40 @@
         var pathData = this.pathData;
         pathData.length = 0;
         var cornerRadius = geom.cornerRadius,
-            radius,
-            iteration = this.iteration + 1; // bottom-right
-
+          radius,
+          iteration = this.iteration + 1;
+        // bottom-right
         radius = cornerRadius.br;
-
         if (isArcCorner(radius)) {
           var centerX = geom.width - radius.x;
           var centerY = geom.height - radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
         } else {
           LineTo(geom.width, geom.height, pathData);
-        } // bottom-left
+        }
 
-
+        // bottom-left
         radius = cornerRadius.bl;
-
         if (isArcCorner(radius)) {
           var centerX = radius.x;
           var centerY = geom.height - radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
         } else {
           LineTo(0, geom.height, pathData);
-        } // top-left
+        }
 
-
+        // top-left
         radius = cornerRadius.tl;
-
         if (isArcCorner(radius)) {
           var centerX = radius.x;
           var centerY = radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
         } else {
           LineTo(0, 0, pathData);
-        } // top-right
+        }
 
-
+        // top-right
         radius = cornerRadius.tr;
-
         if (isArcCorner(radius)) {
           var centerX = geom.width - radius.x;
           var centerY = radius.y;
@@ -627,9 +550,7 @@
         } else {
           LineTo(geom.width, 0, pathData);
         }
-
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
-
         this.pathIndexes = Earcut(pathData);
         return this;
       }
@@ -656,21 +577,17 @@
         if (height === undefined) {
           height = width;
         }
-
         if (this.geom.width === width && this.geom.height === height) {
           return this;
         }
-
         this.geom.setSize(width, height);
         this.updateDisplayOrigin();
         this.dirty = true;
         var input = this.input;
-
         if (input && !input.customHitArea) {
           input.hitArea.width = width;
           input.hitArea.height = height;
         }
-
         return this;
       }
     }, {
@@ -689,13 +606,12 @@
         if (this._iteration === undefined) {
           this._iteration = value;
           return;
-        } // Change iteration value
+        }
 
-
+        // Change iteration value
         if (this._iteration === value) {
           return;
         }
-
         this._iteration = value;
         this.dirty = true;
       }
@@ -705,7 +621,6 @@
         if (iteration === undefined) {
           iteration = 6;
         }
-
         this.iteration = iteration;
         return this;
       }
@@ -761,7 +676,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radius = value;
         return this;
       }
@@ -771,7 +685,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radiusTL = value;
         return this;
       }
@@ -781,7 +694,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radiusTR = value;
         return this;
       }
@@ -791,7 +703,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radiuBL = value;
         return this;
       }
@@ -801,7 +712,6 @@
         if (value === undefined) {
           value = 0;
         }
-
         this.radiusBR = value;
         return this;
       }
@@ -819,14 +729,11 @@
         return this.setRadius(value);
       }
     }]);
-
     return RoundRectangle;
   }(Shape);
-
   var isArcCorner = function isArcCorner(radius) {
     return radius.x !== 0 && radius.y !== 0;
   };
-
   Object.assign(RoundRectangle.prototype, Render);
 
   return RoundRectangle;

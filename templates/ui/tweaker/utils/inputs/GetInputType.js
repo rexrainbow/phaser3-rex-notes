@@ -1,5 +1,5 @@
 import {
-    StringType, NumberType, NumberRangeType, ListType,
+    StringType, NumberType, RangeType, ListType,
     BooleanType, ColorType, Pointer2dType, Pointer3dType,
 } from './InputTypes.js';
 
@@ -17,7 +17,7 @@ var GetInputType = function (value, config) {
     switch (typeof (value)) {
         case 'number':
             if (HasProperties(config, 'min', 'max')) {
-                return NumberRangeType;
+                return RangeType;
             }
 
             return NumberType;

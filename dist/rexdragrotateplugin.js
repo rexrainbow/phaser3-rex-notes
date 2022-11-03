@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,40 +66,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -126,7 +109,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -136,70 +118,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -209,20 +181,17 @@
   var GetAngle = Phaser.Math.Angle.Between;
   var WrapAngle = Phaser.Math.Angle.Wrap;
   var RadToDeg = Phaser.Math.RadToDeg;
-
   var DragRotate = /*#__PURE__*/function () {
     function DragRotate(scene, config) {
       _classCallCheck(this, DragRotate);
-
-      this.scene = scene; // Event emitter
-
+      this.scene = scene;
+      // Event emitter
       this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
       this._enable = undefined;
       this._deltaRotation = undefined;
       this.resetFromJSON(config);
       this.boot();
     }
-
     _createClass(DragRotate, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -246,7 +215,6 @@
         if (!this.scene) {
           return;
         }
-
         this.destroyEventEmitter();
         this.scene.input.off('pointerdown', this.onPointerDown, this);
         this.scene.input.off('pointerup', this.onPointerUp, this);
@@ -268,11 +236,9 @@
         if (this._enable === e) {
           return;
         }
-
         if (!e) {
           this.dragCancel();
         }
-
         this._enable = e;
       }
     }, {
@@ -281,7 +247,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -299,7 +264,6 @@
           x = GetValue(point, 'x', 0);
           y = GetValue(point, 'y', 0);
         }
-
         this.x = x;
         this.y = y;
         return this;
@@ -310,7 +274,6 @@
         if (minRadius === undefined) {
           minRadius = 0;
         }
-
         this.maxRadius = maxRadius;
         this.minRadius = minRadius;
         return this;
@@ -327,11 +290,9 @@
         if (!this.enable || this.pointer) {
           return;
         }
-
         if (!this.contains(pointer.worldX, pointer.worldY)) {
           return;
         }
-
         this.onDragStart(pointer);
       }
     }, {
@@ -340,7 +301,6 @@
         if (!this.enable || this.pointer !== pointer) {
           return;
         }
-
         this.onDragEnd();
       }
     }, {
@@ -349,22 +309,18 @@
         if (!this.enable || !pointer.isDown) {
           return;
         }
-
         switch (this.state) {
           case TOUCH0:
             if (this.contains(pointer.worldX, pointer.worldY)) {
               this.onDragStart(pointer);
             }
-
             break;
-
           case TOUCH1:
             if (this.contains(pointer.worldX, pointer.worldY)) {
               this.onDrag();
             } else {
               this.onDragEnd();
             }
-
             break;
         }
       }
@@ -374,7 +330,6 @@
         if (this.state === TOUCH1) {
           this.onDragEnd();
         }
-
         this.pointer = undefined;
         this.state = TOUCH0;
         return this;
@@ -407,15 +362,13 @@
         if (this.state === TOUCH0) {
           return 0;
         }
-
         if (this._deltaRotation === undefined) {
           var p0 = this.pointer.prevPosition,
-              p1 = this.pointer.position;
+            p1 = this.pointer.position;
           var a0 = GetAngle(this.x, this.y, p0.x, p0.y),
-              a1 = GetAngle(this.x, this.y, p1.x, p1.y);
+            a1 = GetAngle(this.x, this.y, p1.x, p1.y);
           this._deltaRotation = WrapAngle(a1 - a0);
         }
-
         return this._deltaRotation;
       }
     }, {
@@ -424,7 +377,6 @@
         if (this.state === TOUCH0) {
           return 0;
         }
-
         return RadToDeg(this.deltaRotation);
       }
     }, {
@@ -438,25 +390,19 @@
         return !this.cw;
       }
     }]);
-
     return DragRotate;
   }();
-
   Object.assign(DragRotate.prototype, EventEmitterMethods);
   var TOUCH0 = 0;
   var TOUCH1 = 1;
 
   var DragRotatePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DragRotatePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(DragRotatePlugin);
-
     function DragRotatePlugin(pluginManager) {
       _classCallCheck(this, DragRotatePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(DragRotatePlugin, [{
       key: "start",
       value: function start() {
@@ -469,7 +415,6 @@
         return new DragRotate(scene, config);
       }
     }]);
-
     return DragRotatePlugin;
   }(Phaser.Plugins.BasePlugin);
 

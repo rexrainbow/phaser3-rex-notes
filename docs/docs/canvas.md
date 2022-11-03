@@ -229,7 +229,19 @@ canvas.drawFrame(key, frame);
     - `r`, `g`, `b`, `a` : Integer number between 0 ~ 255.
     - `color` : [Color object](color.md)
 
-### Resize
+### Size
+
+```javascript
+canvas.setCanvasSize(width, height);
+```
+
+or
+
+```javascript
+canvas.setSize(width, height);
+``` 
+
+or
 
 ```javascript
 canvas.resize(width, height);

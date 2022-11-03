@@ -116,7 +116,11 @@ class Slider extends ProgressBase(Sizer) {
         return this;
     }
 
-    setGap(gap) {
+    setGap(gap, min, max) {
+        if (gap && (min !== undefined)) {
+            gap = gap / (max - min);
+        }
+
         this.gap = gap;
         return this;
     }

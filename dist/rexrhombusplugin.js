@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,54 +66,43 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
 
   var Offset = function Offset(polygon, x, y) {
     var points = polygon.points,
-        point;
-
+      point;
     for (var i = 0, cnt = points.length; i < cnt; i++) {
       point = points[i];
       point.x += x;
       point.y += y;
     }
-
     return polygon;
   };
 
@@ -129,19 +110,13 @@
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Line = Phaser.Geom.Line;
-
   var Rhombus = /*#__PURE__*/function (_Polygon) {
     _inherits(Rhombus, _Polygon);
-
     var _super = _createSuper(Rhombus);
-
     function Rhombus(x, y, width, height) {
       var _this;
-
       _classCallCheck(this, Rhombus);
-
       _this = _super.call(this);
-
       if (IsPlainObject(x)) {
         var config = x;
         x = GetValue(config, 'x', 0);
@@ -149,19 +124,15 @@
         width = GetValue(config, 'width', 0);
         height = GetValue(config, 'height', 0);
       }
-
       var points = _this.points;
-
       for (var i = 0; i < 4; i++) {
         points.push({});
       }
-
       _this.setTo(x, y, width, height);
-
       return _this;
-    } // override
+    }
 
-
+    // override
     _createClass(Rhombus, [{
       key: "setTo",
       value: function setTo(x, y, width, height) {
@@ -171,19 +142,19 @@
         this._height = height;
         var points = this.points;
         var centerX = this.centerX,
-            centerY = this.centerY;
+          centerY = this.centerY;
         var helfWidth = width / 2;
-        var helfHeight = height / 2; // 0
-
+        var helfHeight = height / 2;
+        // 0
         points[0].x = centerX + helfWidth;
-        points[0].y = centerY; // 90
-
+        points[0].y = centerY;
+        // 90
         points[1].x = centerX;
-        points[1].y = centerY + helfHeight; // 180
-
+        points[1].y = centerY + helfHeight;
+        // 180
         points[2].x = centerX - helfWidth;
-        points[2].y = centerY; // 270
-
+        points[2].y = centerY;
+        // 270
         points[3].x = centerX;
         points[3].y = centerY - helfHeight;
         this.calculateArea();
@@ -196,11 +167,9 @@
       },
       set: function set(value) {
         var offsetX = value - this.x;
-
         if (offsetX === 0) {
           return;
         }
-
         Offset(this, offsetX, 0);
         this._x = value;
       }
@@ -211,11 +180,9 @@
       },
       set: function set(value) {
         var offsetY = value - this.y;
-
         if (offsetY === 0) {
           return;
         }
-
         Offset(this, 0, offsetY);
         this._y = value;
       }
@@ -224,11 +191,9 @@
       value: function setPosition(x, y) {
         var offsetX = x - this.x;
         var offsetY = y - this.y;
-
         if (offsetX === 0 && offsetY === 0) {
           return this;
         }
-
         Offset(this, offsetX, offsetY);
         this._x = x;
         this._y = y;
@@ -315,7 +280,6 @@
         if (line === undefined) {
           line = new Line();
         }
-
         var p0 = this.points[idx];
         var p1 = this.points[(idx + 1) % 4];
         line.setTo(p0.x, p0.y, p1.x, p1.y);
@@ -342,24 +306,17 @@
         return this.getEdge(3, line);
       }
     }]);
-
     return Rhombus;
   }(Polygon); // use `rexRhombus` to prevent name conflict
-
-
   Phaser.Geom.rexRhombus = Rhombus;
 
   var RhombusPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(RhombusPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(RhombusPlugin);
-
     function RhombusPlugin(pluginManager) {
       _classCallCheck(this, RhombusPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(RhombusPlugin, [{
       key: "start",
       value: function start() {
@@ -372,7 +329,6 @@
         return new Rhombus(x, y, width, height);
       }
     }]);
-
     return RhombusPlugin;
   }(Phaser.Plugins.BasePlugin);
 

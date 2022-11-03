@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,40 +66,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -126,7 +109,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -136,86 +118,73 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var Draw = function Draw(frameName, callback, scope) {
     var index = this.getFrameIndex(frameName);
-
     if (index === -1) {
       index = this.getFrameIndex(undefined);
     }
-
     if (index === -1) {
       console.warn('Does not have free space.');
       return this;
     }
-
     var tl = this.getTopLeftPosition(index);
     var frameSize = {
       width: this.cellWidth,
@@ -225,13 +194,12 @@
     context.save();
     context.translate(tl.x, tl.y);
     context.clearRect(0, 0, frameSize.width, frameSize.height);
-
     if (scope) {
       callback.call(scope, this.canvas, context, frameSize);
     } else {
       callback(this.canvas, context, frameSize);
-    } // frameSize might be changed
-
+    }
+    // frameSize might be changed
 
     context.restore();
     this.texture.add(frameName, 0, tl.x, tl.y, frameSize.width, frameSize.height);
@@ -241,16 +209,13 @@
 
   var Paste = function Paste(frameName, gameObject) {
     var srcCanvas = gameObject.canvas;
-
     if (!srcCanvas) {
       console.warn("Can't get canvas of game object.");
       return this;
     }
-
     var srcWidth = srcCanvas.width,
-        srcHeight = srcCanvas.height;
+      srcHeight = srcCanvas.height;
     var dWidth, dHeight;
-
     if (srcWidth <= this.cellWidth && srcHeight <= this.cellHeight) {
       dWidth = srcWidth;
       dHeight = srcHeight;
@@ -260,7 +225,6 @@
       dWidth = srcWidth / scale;
       dHeight = srcHeight / scale;
     }
-
     this.draw(frameName, function (canvas, context, frameSize) {
       context.drawImage(srcCanvas, 0, 0, dWidth, dHeight);
       frameSize.width = dWidth;
@@ -273,11 +237,9 @@
     if (width === undefined) {
       width = this.cellWidth;
     }
-
     if (height === undefined) {
       height = this.cellHeight;
     }
-
     this.draw(frameName, function (canvas, context, frameSize) {
       frameSize.width = width;
       frameSize.height = height;
@@ -286,10 +248,9 @@
   };
 
   var AddToBitmapFont = function AddToBitmapFont() {
-    var textureKey = this.texture.key; // Don't add a new font data, reuse current font data
-
+    var textureKey = this.texture.key;
+    // Don't add a new font data, reuse current font data
     var cacheData = this.bitmapFontCache.get(textureKey);
-
     if (!cacheData) {
       cacheData = {
         data: {
@@ -304,22 +265,18 @@
       };
       this.bitmapFontCache.add(textureKey, cacheData);
     }
-
     var charData = cacheData.data.chars;
     var letters = this.frameNames;
-
     for (var i = 0, cnt = letters.length; i < cnt; i++) {
       var _char = letters[i];
-
       if (_char === undefined) {
         continue;
       }
-
       var frame = this.texture.get(_char);
       var x = frame.cutX,
-          y = frame.cutY,
-          width = frame.cutWidth,
-          height = frame.cutHeight;
+        y = frame.cutY,
+        width = frame.cutWidth,
+        height = frame.cutHeight;
       charData[_char.charCodeAt(0)] = {
         x: x,
         y: y,
@@ -338,7 +295,6 @@
         v1: frame.v1
       };
     }
-
     return this;
   };
 
@@ -351,11 +307,9 @@
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
   var CanvasFrameManager = /*#__PURE__*/function () {
     function CanvasFrameManager(scene, key, width, height, cellWidth, cellHeight, fillColor) {
       _classCallCheck(this, CanvasFrameManager);
-
       if (IsPlainObject(key)) {
         var config = key;
         key = GetValue$3(config, 'key');
@@ -365,34 +319,27 @@
         cellHeight = GetValue$3(config, 'cellHeight');
         fillColor = GetValue$3(config, 'fillColor');
       }
-
       if (width === undefined) {
         width = 4096;
       }
-
       if (height === undefined) {
         height = 4096;
       }
-
       if (cellWidth === undefined) {
         cellWidth = 64;
       }
-
       if (cellHeight === undefined) {
         cellHeight = 64;
       }
-
       this.texture = scene.sys.textures.createCanvas(key, width, height);
       this.canvas = this.texture.getCanvas();
       this.context = this.texture.getContext();
       this.bitmapFontCache = scene.sys.cache.bitmapFont;
-
       if (fillColor !== undefined) {
         var context = this.context;
         context.fillStyle = fillColor;
         context.fillRect(0, 0, this.canvas.width, this.canvas.height);
       }
-
       this.key = key;
       this.width = width;
       this.height = height;
@@ -402,12 +349,10 @@
       this.rowCount = Math.floor(height / cellHeight);
       this.totalCount = this.columnCount * this.rowCount;
       this.frameNames = Array(this.totalCount);
-
       for (var i = 0, cnt = this.frameNames.length; i < cnt; i++) {
         this.frameNames[i] = undefined;
       }
     }
-
     _createClass(CanvasFrameManager, [{
       key: "destroy",
       value: function destroy() {
@@ -444,7 +389,6 @@
         if (out === undefined) {
           out = {};
         }
-
         var columnIndex = frameIndex % this.columnCount;
         var rowIndex = Math.floor(frameIndex / this.rowCount);
         out.x = columnIndex * this.cellWidth;
@@ -461,13 +405,13 @@
       key: "remove",
       value: function remove(frameName) {
         var index = this.getFrameIndex(frameName);
-
         if (index === -1) {
           return this;
         }
-
         this.addFrameName(index, undefined);
-        this.texture.remove(frameName); // Don't clear canvas
+        this.texture.remove(frameName);
+
+        // Don't clear canvas
 
         return this;
       }
@@ -476,24 +420,19 @@
       value: function clear() {
         for (var i, cnt = this.frameNames.length; i < cnt; i++) {
           var frameName = this.frameNames[i];
-
           if (frameName !== undefined) {
             this.addFrameName(index, undefined);
             this.texture.remove(frameName);
           }
         }
-
         return this;
       }
     }]);
-
     return CanvasFrameManager;
   }();
-
   Object.assign(CanvasFrameManager.prototype, methods);
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
-
   var CreateFrameManager = function CreateFrameManager(scene, config) {
     var key = GetValue$2(config, 'key');
     var cellWidth = GetValue$2(config, 'cellWidth', 32);
@@ -9010,7 +8949,6 @@
         env: 'BROWSER'
       });
     }
-
     var collection = db.addCollection('characters', {
       disableMeta: true,
       unique: ['character'],
@@ -9020,7 +8958,6 @@
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var CreateCharacterItem = function CreateCharacterItem(character) {
     return {
       character: character,
@@ -9029,18 +8966,14 @@
       lock: false
     };
   };
-
   var GetChatacter = function GetChatacter(collection, character) {
     var item = collection.by('character', character);
-
     if (item === undefined) {
       item = CreateCharacterItem(character);
       collection.insert(item);
     }
-
     return item;
   };
-
   var GetInCacheCharacterItems = function GetInCacheCharacterItems(collection, config) {
     var excludeCharacters = GetValue$1(config, 'exclude', undefined);
     var lock = GetValue$1(config, 'lock', undefined);
@@ -9048,21 +8981,17 @@
     var filter = {
       alive: true
     };
-
     if (excludeCharacters !== undefined) {
       if (typeof excludeCharacters === 'string') {
         excludeCharacters = excludeCharacters.split();
       }
-
       filter.character = {
         $nin: excludeCharacters
       };
     }
-
     if (lock !== undefined) {
       filter.lock = lock;
     }
-
     if (freqMode) {
       return collection.chain().find(filter).simplesort('freq', {
         desc: true
@@ -9071,16 +9000,13 @@
       return collection.chain().find(filter).data();
     }
   };
-
   var GetLockedCharacterItems = function GetLockedCharacterItems(collection) {
     return collection.find({
       lock: true
     });
   };
-
   var GetAllItems = function GetAllItems(collection, config) {
     var freqMode = GetValue$1(config, 'freq', true);
-
     if (freqMode) {
       return collection.chain().simplesort('freq', {
         desc: true
@@ -9094,35 +9020,26 @@
     if (Array.isArray(content)) {
       content = content.join('');
     }
-
     if (lock === undefined) {
       lock = false;
     }
-
     var insertCharacters = [];
     var removeCharacters = [];
     var totalCacheCount = this.frameManager.totalCount;
     var aliveCount = GetInCacheCharacterItems(this.characterCollection).length;
     var penddingItems = [];
-
     for (var i = 0, cnt = content.length; i < cnt; i++) {
       var character = content.charAt(i);
-
       if (character === '\n') {
         continue;
       }
-
       var item = GetChatacter(this.characterCollection, character);
-
       if (this.freqMode) {
         item.freq++;
       }
-
       item.lock = lock;
-
       if (!item.alive) {
         insertCharacters.push(character);
-
         if (totalCacheCount > aliveCount) {
           // Has free space, add to cache directly
           item.alive = true;
@@ -9132,21 +9049,17 @@
           penddingItems.push(item);
         }
       }
-
       this.characterCollection.update(item);
     }
-
     if (penddingItems.length > 0) {
       var freeCandidateItems = GetInCacheCharacterItems(this.characterCollection, {
         exclude: content,
         lock: false,
         freq: this.freqMode
       });
-
       for (var i = 0, cnt = penddingItems.length; i < cnt; i++) {
         var item = penddingItems[i];
         var freeItem = freeCandidateItems.pop();
-
         if (freeItem) {
           freeItem.alive = false;
           this.characterCollection.update(freeItem);
@@ -9157,35 +9070,30 @@
           console.warn("Character cache full, can't add '".concat(item.character, "' character."));
         }
       }
-    } // Update frame-manager
+    }
 
-
+    // Update frame-manager
     for (var i = 0, cnt = removeCharacters.length; i < cnt; i++) {
       this.emit('remove', character, this.textObject);
       this.frameManager.remove(removeCharacters[i]);
     }
-
     for (var i = 0, cnt = insertCharacters.length; i < cnt; i++) {
       var character = insertCharacters[i];
       this.emit('add', character, this.textObject);
       this.textObject.setText(character);
       this.frameManager.paste(character, this.textObject);
     }
-
     if (insertCharacters.length > 0) {
       this.frameManager.updateTexture().addToBitmapFont();
     }
-
     return this;
   };
 
   var Unlock = function Unlock() {
     var items = GetLockedCharacterItems(this.characterCollection);
-
     for (var i = 0, cnt = items.length; i < cnt; i++) {
       items[i].lock = false;
     }
-
     return this;
   };
 
@@ -9203,13 +9111,11 @@
     overrideBitmapText: function overrideBitmapText(bitmapText) {
       var self = this;
       var setTextSave = bitmapText.setText;
-
       bitmapText.setText = function (text, lock) {
         self.load(text, lock);
         setTextSave.call(bitmapText, text);
         return bitmapText;
       };
-
       return bitmapText;
     }
   };
@@ -9223,11 +9129,9 @@
   Object.assign(Methods, BitmapTextMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var CharacterCache = /*#__PURE__*/function () {
     function CharacterCache(scene, config) {
       _classCallCheck(this, CharacterCache);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
@@ -9238,28 +9142,27 @@
 
       this.key = this.frameManager.key;
       this.cellWidth = this.frameManager.cellWidth;
-      this.cellHeight = this.frameManager.cellHeight; // Create ChacacterCollection
+      this.cellHeight = this.frameManager.cellHeight;
 
-      this.characterCollection = CreateCharacterDB(); // Bind text object
+      // Create ChacacterCollection
+      this.characterCollection = CreateCharacterDB();
 
+      // Bind text object
       var textObject = GetValue(config, 'textObject');
-
       if (textObject) {
         this.bindTextObject(textObject);
       }
+      this.inCacheCount = 0;
 
-      this.inCacheCount = 0; // Load content
-
+      // Load content
       this.load(GetValue(config, 'content', ''));
     }
-
     _createClass(CharacterCache, [{
       key: "shutdown",
       value: function shutdown() {
         this.destroyEventEmitter();
         this.frameManager.destroy();
         this.characterCollection = undefined;
-
         if (this.textObject) {
           this.textObject.destroy();
         }
@@ -9276,23 +9179,17 @@
         return this;
       }
     }]);
-
     return CharacterCache;
   }();
-
   Object.assign(CharacterCache.prototype, EventEmitterMethods, Methods);
 
   var CharacterCachePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CharacterCachePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(CharacterCachePlugin);
-
     function CharacterCachePlugin(pluginManager) {
       _classCallCheck(this, CharacterCachePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(CharacterCachePlugin, [{
       key: "start",
       value: function start() {
@@ -9305,7 +9202,6 @@
         return new CharacterCache(scene, config);
       }
     }]);
-
     return CharacterCachePlugin;
   }(Phaser.Plugins.BasePlugin);
 

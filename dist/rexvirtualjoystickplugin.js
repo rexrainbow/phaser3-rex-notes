@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,81 +66,63 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
   var Key = Phaser.Input.Keyboard.Key;
   var KeyCodes = Phaser.Input.Keyboard.KeyCodes;
-
   var CursorKeys = /*#__PURE__*/function () {
     function CursorKeys(scene) {
       _classCallCheck(this, CursorKeys);
-
       // scene: scene instance, or undefined
       this.cursorKeys = {
         up: new Key(scene, KeyCodes.UP),
@@ -158,14 +132,12 @@
       };
       this.noKeyDown = true;
     }
-
     _createClass(CursorKeys, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         for (var key in this.cursorKeys) {
           this.cursorKeys[key].destroy();
         }
-
         this.cursorKeys = undefined;
       }
     }, {
@@ -182,37 +154,30 @@
       key: "setKeyState",
       value: function setKeyState(keyName, isDown) {
         var key = this.cursorKeys[keyName];
-
         if (!key.enabled) {
           return this;
         }
-
         if (isDown) {
           this.noKeyDown = false;
         }
-
         if (key.isDown !== isDown) {
           FakeEvent.timeStamp = Date.now();
           FakeEvent.keyCode = key.keyCode;
-
           if (isDown) {
             key.onDown(FakeEvent);
           } else {
             key.onUp(FakeEvent);
           }
         }
-
         return this;
       }
     }, {
       key: "clearAllKeysState",
       value: function clearAllKeysState() {
         this.noKeyDown = true;
-
         for (var keyName in this.cursorKeys) {
           this.setKeyState(keyName, false);
         }
-
         return this;
       }
     }, {
@@ -246,10 +211,8 @@
         return !this.noKeyDown;
       }
     }]);
-
     return CursorKeys;
   }();
-
   var FakeEvent = {
     timeStamp: 0,
     keyCode: 0,
@@ -265,7 +228,9 @@
    * @copyright    2018 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   var RAD_TO_DEG = 180 / Math.PI;
+
   /**
    * Convert the given angle in radians, to the equivalent angle in degrees.
    *
@@ -276,7 +241,6 @@
    *
    * @return {integer} The given angle converted to degrees.
    */
-
   var RadToDeg = function RadToDeg(radians) {
     return radians * RAD_TO_DEG;
   };
@@ -294,13 +258,11 @@
     } else if (out === true) {
       out = globOut;
     }
-
     out.left = false;
     out.right = false;
     out.up = false;
     out.down = false;
     angle = (angle + 360) % 360;
-
     switch (dirMode) {
       case 0:
         // up & down
@@ -309,9 +271,7 @@
         } else {
           out.up = true;
         }
-
         break;
-
       case 1:
         // left & right
         if (angle > 90 && angle <= 270) {
@@ -319,9 +279,7 @@
         } else {
           out.right = true;
         }
-
         break;
-
       case 2:
         // 4 dir
         if (angle > 45 && angle <= 135) {
@@ -333,9 +291,7 @@
         } else {
           out.right = true;
         }
-
         break;
-
       case 3:
         // 8 dir
         if (angle > 22.5 && angle <= 67.5) {
@@ -359,36 +315,25 @@
         } else {
           out.right = true;
         }
-
         break;
     }
-
     return out;
   };
-
   var globOut = {};
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var GetDist = Phaser.Math.Distance.Between;
   var GetAngle = Phaser.Math.Angle.Between;
-
   var VectorToCursorKeys = /*#__PURE__*/function (_CursorKeys) {
     _inherits(VectorToCursorKeys, _CursorKeys);
-
     var _super = _createSuper(VectorToCursorKeys);
-
     function VectorToCursorKeys(scene, config) {
       var _this;
-
       _classCallCheck(this, VectorToCursorKeys);
-
       _this = _super.call(this, scene);
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(VectorToCursorKeys, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -398,14 +343,12 @@
             y: 0
           };
         }
-
         if (this.end == undefined) {
           this.end = {
             x: 0,
             y: 0
           };
         }
-
         this._enable = undefined;
         this.setEnable(GetValue$2(o, 'enable', true));
         this.setMode(GetValue$2(o, 'dir', '8dir'));
@@ -440,7 +383,6 @@
         if (typeof m === 'string') {
           m = DIRMODE[m];
         }
-
         this.dirMode = m;
         return this;
       }
@@ -453,11 +395,9 @@
         if (this._enable === e) {
           return;
         }
-
         if (!e) {
           this.clearVector();
         }
-
         this._enable = e;
         return this;
       }
@@ -467,7 +407,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -483,7 +422,6 @@
         if (d < 0) {
           d = 0;
         }
-
         this.forceMin = d;
         return this;
       }
@@ -504,40 +442,35 @@
           // Do nothing
           return this;
         }
-
         if (x0 === null) {
           // Clear all keys' state
           this.clearVector();
           return this;
-        } // (0,0) -> (x0, y0)
+        }
 
-
+        // (0,0) -> (x0, y0)
         if (x1 === undefined) {
           x1 = x0;
           x0 = 0;
           y1 = y0;
           y0 = 0;
         }
-
         this.start.x = x0;
         this.start.y = y0;
         this.end.x = x1;
         this.end.y = y1;
-
         if (this.forceMin > 0 && this.force < this.forceMin) {
           // No key pressed
           this.clearVector();
           return this;
-        } // Update keys' state
+        }
 
-
+        // Update keys' state
         this.noKeyDown = true;
         var dirStates = AngleToDirections(this.angle, this.dirMode, true);
-
         for (var dir in dirStates) {
           this.setKeyState(dir, dirStates[dir]);
         }
-
         return this;
       }
     }, {
@@ -569,7 +502,6 @@
       key: "octant",
       get: function get() {
         var octant = 0;
-
         if (this.rightKeyDown) {
           octant = this.downKeyDown ? 45 : 0;
         } else if (this.downKeyDown) {
@@ -579,11 +511,9 @@
         } else if (this.upKeyDown) {
           octant = this.rightKeyDown ? 315 : 270;
         }
-
         return octant;
       }
     }]);
-
     return VectorToCursorKeys;
   }(CursorKeys);
 
@@ -601,7 +531,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -611,70 +540,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -685,53 +604,41 @@
     } else if (out === true) {
       out = globalOut;
     }
-
     camera.getWorldPoint(screenX, screenY, out);
     return out;
   };
-
   var globalOut = {};
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var CircleClass = Phaser.Geom.Circle;
   var CircleContains = Phaser.Geom.Circle.Contains;
-
   var TouchCursor = /*#__PURE__*/function (_VectorToCursorKeys) {
     _inherits(TouchCursor, _VectorToCursorKeys);
-
     var _super = _createSuper(TouchCursor);
-
     function TouchCursor(gameObject, config) {
       var _this;
-
       _classCallCheck(this, TouchCursor);
-
       var scene = gameObject.scene;
-      _this = _super.call(this, scene, config); //this.resetFromJSON(config); // this function had been called in super(config)
-      // Event emitter
+      _this = _super.call(this, scene, config);
+      //this.resetFromJSON(config); // this function had been called in super(config)
 
+      // Event emitter
       var eventEmitter = GetValue$1(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue$1(config, 'EventEmitterClass', undefined);
-
       _this.setEventEmitter(eventEmitter, EventEmitterClass);
-
       _this.scene = scene;
       _this.mainCamera = scene.sys.cameras.main;
       _this.pointer = undefined;
       _this.gameObject = gameObject;
       _this.radius = GetValue$1(config, 'radius', 100);
       gameObject.setInteractive(new CircleClass(gameObject.displayOriginX, gameObject.displayOriginY, _this.radius), CircleContains);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(TouchCursor, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         _get(_getPrototypeOf(TouchCursor.prototype), "resetFromJSON", this).call(this, o);
-
         this.pointer = undefined;
         return this;
       }
@@ -739,7 +646,6 @@
       key: "toJSON",
       value: function toJSON() {
         var o = _get(_getPrototypeOf(TouchCursor.prototype), "toJSON", this).call(this);
-
         o.radius = this.radius;
         return o;
       }
@@ -757,10 +663,11 @@
       value: function shutdown(fromScene) {
         if (!this.scene) {
           return;
-        } // gameObject events will be removed when this gameObject destroyed 
+        }
+
+        // gameObject events will be removed when this gameObject destroyed 
         // this.gameObject.off('pointerdown', this.onKeyDownStart, this);
         // this.gameObject.off('pointerover', this.onKeyDownStart, this);
-
 
         this.scene.input.off('pointermove', this.onKeyDown, this);
         this.scene.input.off('pointerup', this.onKeyUp, this);
@@ -769,7 +676,6 @@
         this.mainCamera = undefined;
         this.pointer = undefined;
         this.gameObject = undefined;
-
         _get(_getPrototypeOf(TouchCursor.prototype), "shutdown", this).call(this);
       }
     }, {
@@ -788,7 +694,6 @@
         if (!pointer.isDown || this.pointer !== undefined) {
           return;
         }
-
         this.pointer = pointer;
         this.onKeyDown(pointer);
         this.emit('pointerdown', pointer);
@@ -799,37 +704,32 @@
         if (this.pointer !== pointer) {
           return;
         }
-
         var camera = pointer.camera;
-
         if (!camera) {
           // Pointer is outside of any camera, no worldX/worldY available
           return;
-        } // Vector of world position
+        }
 
-
+        // Vector of world position
         var gameObject = this.gameObject;
-        var worldXY = this.end; // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
-        // if this camera is not main-camera
+        var worldXY = this.end;
 
+        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
+        // if this camera is not main-camera
         if (camera !== this.mainCamera) {
           worldXY = ScreenXYToWorldXY(pointer.x, pointer.y, camera, worldXY);
         } else {
           worldXY.x = pointer.worldX;
           worldXY.y = pointer.worldY;
         }
-
         var startX = gameObject.x;
         var startY = gameObject.y;
-
         if (gameObject.scrollFactorX === 0) {
           startX += camera.scrollX;
         }
-
         if (gameObject.scrollFactorY === 0) {
           startY += camera.scrollY;
         }
-
         this.setVector(startX, startY, worldXY.x, worldXY.y);
         this.emit('update');
       }
@@ -839,30 +739,25 @@
         if (this.pointer !== pointer) {
           return;
         }
-
         this.pointer = undefined;
         this.clearVector();
         this.emit('update');
         this.emit('pointerup', pointer);
       }
     }]);
-
     return TouchCursor;
   }(VectorToCursorKeys);
-
   Object.assign(TouchCursor.prototype, EventEmitterMethods);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var VirtualJoyStick = /*#__PURE__*/function () {
     function VirtualJoyStick(scene, config) {
       _classCallCheck(this, VirtualJoyStick);
-
       if (config === undefined) {
         config = {};
-      } // Event emitter
+      }
 
-
+      // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
@@ -878,20 +773,16 @@
       var y = GetValue(config, 'y', 0);
       this.base.setPosition(x, y);
       this.thumb.setPosition(x, y);
-
       if (GetValue(config, 'fixed', true)) {
         this.setScrollFactor(0);
       }
-
       this.boot();
     }
-
     _createClass(VirtualJoyStick, [{
       key: "destroy",
       value: function destroy() {
         this.destroyEventEmitter();
         this.base.destroy(); // Also destroy touchCursor behavior
-
         this.thumb.destroy();
         this.scene = undefined;
         this.base = undefined;
@@ -1028,7 +919,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -1048,17 +938,16 @@
       key: "addBase",
       value: function addBase(gameObject, config) {
         if (this.base) {
-          this.base.destroy(); // Also destroy touchCursor behavior
+          this.base.destroy();
+          // Also destroy touchCursor behavior
         }
 
         if (gameObject === undefined) {
           gameObject = this.scene.add.circle(0, 0, this.radius).setStrokeStyle(3, 0x0000ff);
         }
-
         if (config === undefined) {
           config = {};
         }
-
         config.eventEmitter = this.getEventEmitter();
         this.touchCursor = new TouchCursor(gameObject, config);
         this.base = gameObject;
@@ -1070,11 +959,9 @@
         if (this.thumb) {
           this.thumb.destroy();
         }
-
         if (gameObject === undefined) {
           gameObject = this.scene.add.circle(0, 0, 40).setStrokeStyle(3, 0x00ff00);
         }
-
         this.thumb = gameObject;
         return this;
       }
@@ -1093,11 +980,10 @@
     }, {
       key: "update",
       value: function update() {
-        var touchCursor = this.touchCursor; // Start from (0,0)
-
+        var touchCursor = this.touchCursor;
+        // Start from (0,0)
         var x = this.base.x;
         var y = this.base.y;
-
         if (touchCursor.anyKeyDown) {
           if (touchCursor.force > this.radius) {
             // Exceed radius
@@ -1109,29 +995,22 @@
             y += touchCursor.forceY;
           }
         }
-
         this.thumb.x = x;
         this.thumb.y = y;
         return this;
       }
     }]);
-
     return VirtualJoyStick;
   }();
-
   Object.assign(VirtualJoyStick.prototype, EventEmitterMethods);
 
   var VirtualJoyStickPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(VirtualJoyStickPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(VirtualJoyStickPlugin);
-
     function VirtualJoyStickPlugin(pluginManager) {
       _classCallCheck(this, VirtualJoyStickPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(VirtualJoyStickPlugin, [{
       key: "start",
       value: function start() {
@@ -1144,7 +1023,6 @@
         return new VirtualJoyStick(scene, config);
       }
     }]);
-
     return VirtualJoyStickPlugin;
   }(Phaser.Plugins.BasePlugin);
 

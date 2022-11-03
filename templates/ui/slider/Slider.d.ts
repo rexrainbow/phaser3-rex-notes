@@ -49,6 +49,9 @@ declare class Slider extends Sizer {
     setEaseValueDuration(duration: number): this;
     setEaseValueFunction(ease: string): this;
 
+    setGap(gap?: number, min?: number, max?: number): this;
+    gap: number;
+
     setEnable(enable?: boolean): this;
     enable: boolean;
 }

@@ -67,6 +67,7 @@ var RunVerticalWrap = function (config) {
     var vAlign = GetValue(config, 'vAlign', 0);
 
     var result = {
+        callback: 'runVerticalWrap',
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
         padding: this.wrapPadding,
@@ -169,7 +170,7 @@ var RunVerticalWrap = function (config) {
     AlignLines(result, innerWidth, innerHeight);
 
     // Resize
-    this.setSize(width, height);
+    this.setCanvasSize(width, height);
 
     // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {

@@ -305,6 +305,21 @@ Change value will also change the position of slider thumb and width of slider i
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
 
+### Gap
+
+- Set
+    ```javascript
+    slider.setGap(gap);  // gap: 0~1
+    ```
+    or
+    ```javascript
+    slider.setGap(gap, min, max);  // gap: min~max
+    ```
+- Get
+    ```javascript
+    var gap = slider.gap;  // gap: 0~1
+    ```
+
 ### Events
 
 - On value changed

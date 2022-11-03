@@ -6193,10 +6193,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_2" type="checkbox" id="__nav_12_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_2">
+          Round to
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Round to" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_2">
+          <span class="md-nav__icon md-icon"></span>
+          Round to
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../round-to/" class="md-nav__link">
+        Round to
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../snap/" class="md-nav__link">
         Snap
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -8752,6 +8799,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/oNZKmKZ">Add to layer</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/rNdyveo">Text wrap in horizontal label</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYRymQq">Text wrap in vertical label</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOKPKWa">Icon size</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-label">Sample code</a></p>
@@ -8816,13 +8864,18 @@
     <span class="c1">// rtl: false,</span>
 
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
     <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
-    <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// iconMask: false,</span>
+    <span class="c1">// iconSize: undefined, iconWidth: undefined, iconHeight: undefined,</span>
+
     <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
     <span class="nx">expandTextWidth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">expandTextHeight</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="nx">action</span><span class="o">:</span> <span class="nx">actionGameObject</span><span class="p">,</span>
-    <span class="nx">actionMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// actionMask: false,</span>
+    <span class="c1">// actionSize: undefined, actionWidth: undefined, actionHeight: undefined,</span>
 
     <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
@@ -8879,6 +8932,15 @@
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
 </ul>
 </li>
+<li><code>iconSize</code> : Set display size of icon game object to <code>iconSize</code>x<code>iconSize</code></li>
+<li><code>iconWidth</code> : Set display width of icon game object to <code>iconWidth</code>. <ul>
+<li>If <code>iconHeight</code> is <code>undefined</code>, set <code>scaleY</code> of icon game object to <code>scaleX</code> of icon game object, to keep size ratio.</li>
+</ul>
+</li>
+<li><code>iconHeight</code> : Set display height of icon game object to <code>iconHeight</code>. <ul>
+<li>If <code>iconWidth</code> is <code>undefined</code>, set <code>scaleX</code> of icon game object to <code>scaleY</code> of icon game object, to keep size ratio.</li>
+</ul>
+</li>
 <li><code>text</code> : Game object of text, optional.</li>
 <li><code>expandTextWidth</code> : <ul>
 <li><code>false</code> : Keep width of text to original size. Default behavior.</li>
@@ -8894,7 +8956,16 @@
 <li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
 </ul>
 </li>
-<li><code>align</code> : Alignment of icon, text, action-icon game objects.<ul>
+<li><code>actionSize</code> : Set display size of action game object to <code>actionSize</code>x<code>actionSize</code></li>
+<li><code>actionWidth</code> : Set display width of action game object to <code>actionWidth</code>. <ul>
+<li>If <code>actionHeight</code> is <code>undefined</code>, set <code>scaleY</code> of action game object to <code>scaleX</code> of action game object, to keep size ratio.</li>
+</ul>
+</li>
+<li><code>actionHeight</code> : Set display height of action game object to <code>actionHeight</code>. <ul>
+<li>If <code>actionWidth</code> is <code>undefined</code>, set <code>scaleX</code> of action game object to <code>scaleY</code> of action game object, to keep size ratio.</li>
+</ul>
+</li>
+<li><code>align</code> : Alignment of icon, text, action game objects.<ul>
 <li><code>undefined</code>, or <code>'left'</code>, or <code>'top'</code> : Align game objects at left, or top.</li>
 <li><code>'center'</code> : Align game objects at center.</li>
 <li><code>'right'</code>, or <code>'bottom'</code> : Align game objects at right, or bottom.</li>

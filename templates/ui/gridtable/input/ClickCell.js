@@ -13,7 +13,7 @@ var ClickCell = function (table, tableConfig) {
     buttonConfig.threshold = 10;
     table._click = new Button(table, buttonConfig);
     table._click.on('click', function (button, gameObject, pointer, event) {
-        EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.x, pointer.y, pointer, event);
+        EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.worldX, pointer.worldY, pointer, event);
     }, this);
 };
 

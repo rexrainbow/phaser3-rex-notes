@@ -3,9 +3,11 @@ import EmitChildEvent from './EmitChildEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var DownChild = function (config) {
-    var overConfig = GetValue(config, 'down', undefined);
-    if (overConfig === false) {
+    var downConfig = GetValue(config, 'down', undefined);
+    if (downConfig === false) {
         return;
+    } else if (downConfig === true) {
+        downConfig = undefined;
     }
 
     this

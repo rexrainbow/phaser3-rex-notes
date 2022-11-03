@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -136,7 +118,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -146,70 +127,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -219,6 +190,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -243,8 +215,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -256,7 +229,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -281,12 +253,10 @@
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
-
   var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
-
     if (s === '') {
       s = null;
     } else if (FLOAT.test(s)) {
@@ -300,7 +270,6 @@
         s = true;
       }
     }
-
     return s;
   };
 
@@ -313,55 +282,43 @@
     var questionType = GetValue(config, 'types.question', 'q');
     var optionType = GetValue(config, 'types.option', '');
     var convertFn = GetValue(config, 'convert', true);
-
     if (convertFn === true) {
       convertFn = TypeConvert;
     }
-
     var items = [];
     var rowObj, rowType, item, option;
-
     for (var i = 0, cnt = arr.length; i < cnt; i++) {
       rowObj = arr[i];
       rowType = rowObj.type;
       delete rowObj.type;
-
       if (rowType === questionType) {
         item = rowObj;
-
         if (item.key === '') {
           delete item.key;
         }
-
         convert(item, convertFn);
         item.options = [];
         items.push(item);
       } else if (rowType === optionType) {
         if (item) {
           option = rowObj;
-
           if (option.key === '') {
             delete option.key;
           }
-
           convert(option, convertFn);
           item.options.push(option);
         }
       }
     }
-
     return items;
   };
-
   var convert = function convert(item, convertFn) {
     if (!convertFn) {
       return item;
     }
-
     for (var key in item) {
       item[key] = convertFn(item[key], key);
     }
-
     return item;
   };
 
@@ -4215,7 +4172,6 @@
 
   var ParseYaml = function ParseYaml(yamlString, config) {
     var items = [];
-
     if (Array.isArray(yamlString)) {
       yamlString.forEach(function (s) {
         try {
@@ -4233,7 +4189,6 @@
         console.log(e);
       }
     }
-
     return items;
   };
 
@@ -4243,29 +4198,23 @@
         format: config
       };
     }
-
     var inputType;
-
     if (typeof inputData === 'string') {
       inputType = GetValue(config, 'format', 'csv');
     } else {
       inputType = GetValue(config, 'format', undefined);
     }
-
     switch (inputType) {
       case 'csv':
         inputData = ParseCSV(inputData, config);
         break;
-
       case 'yaml':
         inputData = ParseYaml(inputData, config);
         break;
-
       case 'json':
         inputData = JSON.parse(inputData);
         break;
     }
-
     return inputData;
   };
 
@@ -4291,14 +4240,11 @@
     if (index >= array.length) {
       return;
     }
-
     var len = array.length - 1;
     var item = array[index];
-
     for (var i = index; i < len; i++) {
       array[i] = array[i + 1];
     }
-
     array.length = len;
     return item;
   };
@@ -4308,6 +4254,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Removes the given item, or array of items, from the array.
    * 
@@ -4325,40 +4272,34 @@
    *
    * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
    */
-
   var Remove = function Remove(array, item, callback, context) {
     if (context === undefined) {
       context = array;
     }
+    var index;
 
-    var index; //  Fast path to avoid array mutation and iteration
-
+    //  Fast path to avoid array mutation and iteration
     if (!Array.isArray(item)) {
       index = array.indexOf(item);
-
       if (index !== -1) {
         SpliceOne(array, index);
-
         if (callback) {
           callback.call(context, item);
         }
-
         return item;
       } else {
         return null;
       }
-    } //  If we got this far, we have an array of items to remove
+    }
 
+    //  If we got this far, we have an array of items to remove
 
     var itemLength = item.length - 1;
-
     while (itemLength >= 0) {
       var entry = item[itemLength];
       index = array.indexOf(entry);
-
       if (index !== -1) {
         SpliceOne(array, index);
-
         if (callback) {
           callback.call(context, entry);
         }
@@ -4366,10 +4307,8 @@
         //  Item wasn't found in the array, so remove it from our return results
         item.pop();
       }
-
       itemLength--;
     }
-
     return item;
   };
 
@@ -4377,7 +4316,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -4385,39 +4323,34 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
   var AddQuestion = function AddQuestion(question) {
-    Polyfills(question); // Remove duplicated question
+    Polyfills(question);
 
+    // Remove duplicated question
     var key = question.key;
-
     if (this.questionMap.hasOwnProperty(key)) {
       this.remove(key);
-    } // Add question
+    }
 
-
+    // Add question
     this.questions.push(question);
     this.questionMap[key] = question;
     return this;
   };
-
   var Polyfills = function Polyfills(question) {
     var options = question.options;
-
     if (options) {
       // Apply key via serial number        
       for (var i = 0, cnt = options.length; i < cnt; i++) {
         var option = options[i];
-
         if (!option.hasOwnProperty('key')) {
           option.key = "_".concat(i);
         }
       }
     }
-
     if (!question.hasOwnProperty('key')) {
       // Apply key via serial numbers
       question.key = "_".concat(this.questions.length);
@@ -4448,22 +4381,22 @@
     // - window
     if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
       return false;
-    } // Support: Firefox <20
+    }
+
+    // Support: Firefox <20
     // The try/catch suppresses exceptions thrown when attempting to access
     // the "constructor" property of certain host objects, ie. |window.location|
     // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-
-
     try {
       if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
         return false;
       }
     } catch (e) {
       return false;
-    } // If the function hasn't returned already, we're confident that
+    }
+
+    // If the function hasn't returned already, we're confident that
     // |obj| is a plain object, created by {} or constructed with new Object
-
-
     return true;
   };
 
@@ -4492,7 +4425,6 @@
       array[i] = array[j];
       array[j] = temp;
     }
-
     return array;
   };
 
@@ -4501,22 +4433,18 @@
       if (this.data === undefined) {
         this.data = {};
       }
-
       return this;
     },
     setData: function setData(key, value) {
       this.enableData();
-
       if (arguments.length === 1) {
         var data = key;
-
         for (key in data) {
           this.data[key] = data[key];
         }
       } else {
         this.data[key] = value;
       }
-
       return this;
     },
     getData: function getData(key, defaultValue) {
@@ -4527,7 +4455,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) + inc);
       return this;
@@ -4536,7 +4463,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) * mul);
       return this;
@@ -4545,7 +4471,6 @@
       if (this.data) {
         Clear(this.data);
       }
-
       return this;
     }
   };
@@ -4553,7 +4478,6 @@
   var Quest = /*#__PURE__*/function () {
     function Quest(questionsManager, config) {
       _classCallCheck(this, Quest);
-
       // Event emitter
       this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
       this.questionsManager = questionsManager;
@@ -4561,7 +4485,6 @@
       this.resetFromJSON(config);
       this.start();
     }
-
     _createClass(Quest, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -4586,7 +4509,6 @@
         if (enabled === undefined) {
           enabled = true;
         }
-
         this.shuffleQuestionsEnable = enabled;
         return this;
       }
@@ -4596,7 +4518,6 @@
         if (enabled === undefined) {
           enabled = true;
         }
-
         this.shuffleOptionsEnable = enabled;
         return this;
       }
@@ -4606,11 +4527,9 @@
         // Reload keys
         this.questionKeys.length = 0;
         this.questionsManager.getKeys(this.questionKeys);
-
         if (this.shuffleQuestionsEnable) {
           Shuffle(this.questionKeys);
         }
-
         this.nextIndex = -1;
         this.nextKey = undefined;
         return this;
@@ -4625,22 +4544,18 @@
           this.nextKey = key;
           this.nextIndex = this.questionKeys.indexOf(key);
         } else ;
-
         return this;
       }
     }, {
       key: "getQuestion",
       value: function getQuestion() {
         var question = this.questionsManager.get(this.nextKey);
-
         if (this.shuffleOptionsEnable) {
           var options = question.options;
-
           if (options) {
             Shuffle(options);
           }
         }
-
         this.emit('quest', question, this.questionsManager, this);
         return question;
       }
@@ -4661,14 +4576,11 @@
           optionKey = question;
           question = this.questionsManager.get(this.nextKey);
         }
-
         return this.questionsManager.getOption(question, optionKey);
       }
     }]);
-
     return Quest;
   }();
-
   Object.assign(Quest.prototype, EventEmitterMethods, DataMethods$1);
 
   var QuestMethods = {
@@ -4683,19 +4595,15 @@
         if (!IsPlainObject(config)) {
           config = {};
         }
-
         if (!config.hasOwnProperty('eventEmitter')) {
           config.eventEmitter = this;
         }
-
         this._quest = this.newQuest(config);
       }
-
       return this;
     },
     restartQuest: function restartQuest() {
       this._quest.start();
-
       return this;
     },
     getNextQuestion: function getNextQuestion(key) {
@@ -4712,22 +4620,18 @@
     },
     setData: function setData(key, value) {
       this._quest.setData(key, value);
-
       return this;
     },
     incData: function incData(key, inc, defaultValue) {
       this._quest.incData(key, inc, defaultValue);
-
       return this;
     },
     mulData: function mulData(key, mul, defaultValue) {
       this._quest.mulData(key, mul, defaultValue);
-
       return this;
     },
     clearData: function clearData() {
       this._quest.clearData();
-
       return this;
     }
   };
@@ -4735,33 +4639,26 @@
   var QuestionManager = /*#__PURE__*/function () {
     function QuestionManager(config) {
       _classCallCheck(this, QuestionManager);
-
       // Event emitter. Create a private event emitter for private quest task object.
       this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
       this.questions = [];
       this.questionMap = {};
       this._quest = undefined;
       var questions = GetValue(config, 'questions', undefined);
-
       if (questions) {
         this.add(questions, config);
       }
-
       var questConfig = GetValue(config, 'quest', undefined);
-
       if (questConfig) {
         this.startQuest(questConfig);
       }
     }
-
     _createClass(QuestionManager, [{
       key: "shutdown",
       value: function shutdown() {
         this.destroyEventEmitter();
-
         if (this._quest) {
           this._quest.destroy();
-
           this._quest = undefined;
         }
       }
@@ -4774,17 +4671,14 @@
       key: "add",
       value: function add(question, config) {
         question = ParseInputData(question, config);
-
         if (Array.isArray(question)) {
           var questions = question;
-
           for (var i = 0, cnt = questions.length; i < cnt; i++) {
             AddQuestion.call(this, questions[i]);
           }
         } else {
           AddQuestion.call(this, question);
         }
-
         return this;
       }
     }, {
@@ -4794,7 +4688,6 @@
           Remove(this.questions, this.questionMap[key]);
           delete this.questionMap[key];
         }
-
         return this;
       }
     }, {
@@ -4819,11 +4712,9 @@
         if (out === undefined) {
           out = [];
         }
-
         for (var i = 0, cnt = this.questions.length; i < cnt; i++) {
           out.push(this.questions[i].key);
         }
-
         return out;
       }
     }, {
@@ -4832,45 +4723,33 @@
         if (typeof question === 'string') {
           question = this.get(question);
         }
-
         if (!question) {
           return null;
         }
-
         var options = question.options;
-
         if (options) {
           var option;
-
           for (var i = 0, cnt = options.length; i < cnt; i++) {
             option = options[i];
-
             if (option.key === optionKey) {
               return option;
             }
           }
         }
-
         return null;
       }
     }]);
-
     return QuestionManager;
   }();
-
   Object.assign(QuestionManager.prototype, EventEmitterMethods, QuestMethods, DataMethods);
 
   var QuestPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(QuestPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(QuestPlugin);
-
     function QuestPlugin(pluginManager) {
       _classCallCheck(this, QuestPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(QuestPlugin, [{
       key: "start",
       value: function start() {
@@ -4883,7 +4762,6 @@
         return new QuestionManager(config);
       }
     }]);
-
     return QuestPlugin;
   }(Phaser.Plugins.BasePlugin);
 

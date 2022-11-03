@@ -95,17 +95,15 @@ class HiddenTextEditBase extends ComponentBase {
     }
 
     get maxLength() {
-        if (!this.node) {
-            return 0;
-        }
-        return this.node.maxLength;
+        return this.nodeConfig.maxLength;
     }
 
     set maxLength(value) {
-        if (!this.node) {
-            return;
+        this.nodeConfig.maxLength = value;
+
+        if (this.node) {
+            this.node.maxLength = value;
         }
-        this.node.maxLength = value;
     }
 
     setMaxLength(value) {
@@ -114,17 +112,15 @@ class HiddenTextEditBase extends ComponentBase {
     }
 
     get minLength() {
-        if (!this.node) {
-            return 0;
-        }
-        return this.node.minLength;
+        return this.nodeConfig.minLength;
     }
 
     set minLength(value) {
-        if (!this.node) {
-            return;
+        this.nodeConfig.minLength = value;
+
+        if (this.node) {
+            this.node.minLength = value;
         }
-        this.node.minLength = value;
     }
 
     setMinLength(value) {
@@ -237,17 +233,15 @@ class HiddenTextEditBase extends ComponentBase {
     }
 
     get readOnly() {
-        if (!this.node) {
-            return false;
-        }
-        return this.node.readOnly;
+        return this.nodeConfig.readOnly;
     }
 
     set readOnly(value) {
-        if (!this.node) {
-            return;
+        this.nodeConfig.readOnly = value;
+
+        if (this.node) {
+            this.node.readOnly = value;
         }
-        this.node.readOnly = value;
     }
 
     setReadOnly(value) {

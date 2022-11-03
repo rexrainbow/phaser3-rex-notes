@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,52 +66,41 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
 
   var SQRT3$1 = Math.sqrt(3);
-
   var Width = function Width(hexagon) {
     return hexagon.type === 0 ? 2 * hexagon.size : SQRT3$1 * hexagon.size;
   };
 
   var SQRT3 = Math.sqrt(3);
-
   var Height = function Height(hexagon) {
     return hexagon.type === 0 ? SQRT3 * hexagon.size : 2 * hexagon.size;
   };
@@ -135,60 +116,46 @@
   var EVEN_R$3 = CONST.EVEN_R;
   var ODD_Q$3 = CONST.ODD_Q;
   var EVEN_Q$3 = CONST.EVEN_Q;
-
   var GetWorldXY = function GetWorldXY(tileX, tileY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globWorldXY$1;
     }
-
     var worldX = tileX * this.width;
     var worldY = tileY * this.height;
-
     switch (this.mode) {
       case ODD_R$3:
         if (tileY & 1) {
           worldX += this._halfWidth;
         }
-
         worldY *= 0.75;
         break;
-
       case EVEN_R$3:
         if (tileY & 1) {
           worldX -= this._halfWidth;
         }
-
         worldY *= 0.75;
         break;
-
       case ODD_Q$3:
         worldX *= 0.75;
-
         if (tileX & 1) {
           worldY += this._halfHeight;
         }
-
         break;
-
       case EVEN_Q$3:
         worldX *= 0.75;
-
         if (tileX & 1) {
           worldY -= this._halfHeight;
         }
-
         break;
     }
-
     worldX += this.x;
     worldY += this.y;
     out.x = worldX;
     out.y = worldY;
     return out;
   };
-
   var globWorldXY$1 = {};
 
   var GetWorldX$2 = function GetWorldX(tileX, tileY) {
@@ -203,7 +170,6 @@
   var EVEN_R$2 = CONST.EVEN_R;
   var ODD_Q$2 = CONST.ODD_Q;
   var EVEN_Q$2 = CONST.EVEN_Q;
-
   var roundcube = function roundcube(x, y, z, out) {
     if (typeof x !== 'number') {
       out = x;
@@ -211,20 +177,17 @@
       y = out.y;
       z = out.z;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCube$1;
     }
-
     var rx = Math.round(x);
     var ry = Math.round(y);
     var rz = Math.round(z);
     var dx = Math.abs(rx - x);
     var dy = Math.abs(ry - y);
     var dz = Math.abs(rz - z);
-
     if (dx > dy && dx > dz) {
       rx = -ry - rz;
     } else if (dy > dz) {
@@ -232,58 +195,48 @@
     } else {
       rz = -rx - ry;
     }
-
     out.x = rx;
     out.y = ry;
     out.z = rz;
     return out;
   };
-
   var cube2cr = function cube2cr(mode, x, y, z, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCR;
     }
-
     switch (mode) {
       case ODD_R$2:
         out.x = x + (z - (z & 1)) / 2;
         out.y = z;
         break;
-
       case EVEN_R$2:
         out.x = x + (z + (z & 1)) / 2;
         out.y = z;
         break;
-
       case ODD_Q$2:
         out.x = x;
         out.y = z + (x - (x & 1)) / 2;
         break;
-
       case EVEN_Q$2:
         out.x = x;
         out.y = z + (x + (x & 1)) / 2;
         break;
     }
-
     return out;
   };
-
   var qr2cube = function qr2cube(q, r, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globCube$1;
     }
-
     out.x = q;
     out.y = -q - r;
     out.z = r;
     return out;
   };
-
   var globCube$1 = {};
   var globCR = {};
 
@@ -293,38 +246,32 @@
   var EVEN_Q$1 = CONST.EVEN_Q;
   var C4DIV3 = 4 / 3;
   var C2DIV3 = 2 / 3;
-
   var GetTileXY$1 = function GetTileXY(worldX, worldY, out) {
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globTileXY$1;
     }
-
     worldX -= this.x;
     worldY -= this.y;
     var q, r;
-
     switch (this.mode) {
       case ODD_R$1:
       case EVEN_R$1:
         r = worldY * C4DIV3 / this.height;
         q = worldX / this.width - C2DIV3 * (worldY / this.height);
         break;
-
       case ODD_Q$1:
       case EVEN_Q$1:
         r = worldY / this.height - C2DIV3 * (worldX / this.width);
         q = worldX * C4DIV3 / this.width;
         break;
     }
-
     var cube = qr2cube(q, r, globCube);
     roundcube(cube);
     cube2cr(this.mode, cube.x, cube.y, cube.z, out);
     return out;
   };
-
   var globCube = {};
   var globTileXY$1 = {};
 
@@ -341,6 +288,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -365,8 +313,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -378,7 +327,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -389,14 +337,11 @@
   var EVEN_R = CONST.EVEN_R;
   var ODD_Q = CONST.ODD_Q;
   var EVEN_Q = CONST.EVEN_Q;
-
   var Hexagon = /*#__PURE__*/function () {
     function Hexagon(config) {
       _classCallCheck(this, Hexagon);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Hexagon, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -404,7 +349,6 @@
         this.setDirectionMode();
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
         var size = GetValue(o, 'size', undefined);
-
         if (size !== undefined) {
           this.setCellRadius(size);
         } else {
@@ -417,13 +361,10 @@
         if (typeof staggeraxis === 'string') {
           staggeraxis = STAGGERAXIS[staggeraxis];
         }
-
         if (typeof staggerindex === 'string') {
           staggerindex = STAGGERINDEX[staggerindex];
         }
-
         this.staggeraxis = staggeraxis; // 0|y(flat), or 1|x(pointy)
-
         this.staggerindex = staggerindex; // even, or odd
 
         if (staggeraxis === 0) {
@@ -433,7 +374,6 @@
           // pointy
           this.mode = staggerindex === 0 ? EVEN_R : ODD_R;
         }
-
         return this;
       }
     }, {
@@ -504,10 +444,8 @@
         this.height = value;
       }
     }]);
-
     return Hexagon;
   }();
-
   var methods$1 = {
     getWorldXY: GetWorldXY,
     getWorldX: GetWorldX$2,
@@ -526,7 +464,8 @@
     'odd': 1
   };
 
-  var NOOP = function NOOP() {//  NOOP
+  var NOOP = function NOOP() {
+    //  NOOP
   };
 
   var globZone = new Phaser.GameObjects.Zone({
@@ -548,7 +487,6 @@
     * @type {integer}
     */
     TOP_LEFT: 0,
-
     /**
     * A constant representing a top-center alignment or position.
     * @constant
@@ -557,7 +495,6 @@
     * @type {integer}
     */
     TOP_CENTER: 1,
-
     /**
     * A constant representing a top-right alignment or position.
     * @constant
@@ -566,7 +503,6 @@
     * @type {integer}
     */
     TOP_RIGHT: 2,
-
     /**
     * A constant representing a left-top alignment or position.
     * @constant
@@ -575,7 +511,6 @@
     * @type {integer}
     */
     LEFT_TOP: 3,
-
     /**
     * A constant representing a left-center alignment or position.
     * @constant
@@ -584,7 +519,6 @@
     * @type {integer}
     */
     LEFT_CENTER: 4,
-
     /**
     * A constant representing a left-bottom alignment or position.
     * @constant
@@ -593,7 +527,6 @@
     * @type {integer}
     */
     LEFT_BOTTOM: 5,
-
     /**
     * A constant representing a center alignment or position.
     * @constant
@@ -602,7 +535,6 @@
     * @type {integer}
     */
     CENTER: 6,
-
     /**
     * A constant representing a right-top alignment or position.
     * @constant
@@ -611,7 +543,6 @@
     * @type {integer}
     */
     RIGHT_TOP: 7,
-
     /**
     * A constant representing a right-center alignment or position.
     * @constant
@@ -620,7 +551,6 @@
     * @type {integer}
     */
     RIGHT_CENTER: 8,
-
     /**
     * A constant representing a right-bottom alignment or position.
     * @constant
@@ -629,7 +559,6 @@
     * @type {integer}
     */
     RIGHT_BOTTOM: 9,
-
     /**
     * A constant representing a bottom-left alignment or position.
     * @constant
@@ -638,7 +567,6 @@
     * @type {integer}
     */
     BOTTOM_LEFT: 10,
-
     /**
     * A constant representing a bottom-center alignment or position.
     * @constant
@@ -647,7 +575,6 @@
     * @type {integer}
     */
     BOTTOM_CENTER: 11,
-
     /**
     * A constant representing a bottom-right alignment or position.
     * @constant
@@ -665,7 +592,6 @@
       return gameObject.width;
     }
   };
-
   var GetDisplayHeight = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
@@ -701,11 +627,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetCenterX(gameObject, GetCenterX(alignIn) + offsetX);
     SetBottom(gameObject, GetBottom(alignIn) + offsetY);
     return gameObject;
@@ -726,11 +650,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetLeft(gameObject, GetLeft(alignIn) - offsetX);
     SetBottom(gameObject, GetBottom(alignIn) + offsetY);
     return gameObject;
@@ -751,11 +673,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetRight(gameObject, GetRight(alignIn) + offsetX);
     SetBottom(gameObject, GetBottom(alignIn) + offsetY);
     return gameObject;
@@ -782,11 +702,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     CenterOn(gameObject, GetCenterX(alignIn) + offsetX, GetCenterY(alignIn) + offsetY);
     return gameObject;
   };
@@ -795,11 +713,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetLeft(gameObject, GetLeft(alignIn) - offsetX);
     SetCenterY(gameObject, GetCenterY(alignIn) + offsetY);
     return gameObject;
@@ -809,11 +725,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetRight(gameObject, GetRight(alignIn) + offsetX);
     SetCenterY(gameObject, GetCenterY(alignIn) + offsetY);
     return gameObject;
@@ -834,11 +748,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetCenterX(gameObject, GetCenterX(alignIn) + offsetX);
     SetTop(gameObject, GetTop(alignIn) - offsetY);
     return gameObject;
@@ -848,11 +760,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetLeft(gameObject, GetLeft(alignIn) - offsetX);
     SetTop(gameObject, GetTop(alignIn) - offsetY);
     return gameObject;
@@ -862,11 +772,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetRight(gameObject, GetRight(alignIn) + offsetX);
     SetTop(gameObject, GetTop(alignIn) - offsetY);
     return gameObject;
@@ -882,13 +790,13 @@
   AlignInMap[ALIGN_CONST.TOP_CENTER] = TopCenter;
   AlignInMap[ALIGN_CONST.TOP_LEFT] = TopLeft;
   AlignInMap[ALIGN_CONST.TOP_RIGHT] = TopRight;
-
   var QuickSet = function QuickSet(child, alignIn, position, offsetX, offsetY) {
     return AlignInMap[position](child, alignIn, offsetX, offsetY);
   };
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var globHexagonGrid = new Hexagon();
+
   /**
    * @typedef {object} GridAlignConfig
    *
@@ -907,7 +815,6 @@
     if (options === undefined) {
       options = {};
     }
-
     var width = GetFastValue$1(options, 'width', -1);
     var height = GetFastValue$1(options, 'height', -1);
     var cellWidth = GetFastValue$1(options, 'cellWidth', 1);
@@ -920,14 +827,12 @@
     globHexagonGrid.setOriginPosition(x, y).setCellSize(cellWidth, cellHeight).setType(staggeraxis, staggerindex);
     globZone.setSize(cellWidth, cellHeight);
     var lastRowIdx = height - 1,
-        lastColIdx = width - 1,
-        rowIdx = 0,
-        colIdx = 0;
-
+      lastColIdx = width - 1,
+      rowIdx = 0,
+      colIdx = 0;
     for (var i = 0, cnt = items.length; i < cnt; i++) {
       globHexagonGrid.getWorldXY(colIdx, rowIdx, globZone);
       QuickSet(items[i], globZone, position);
-
       if (width === -1) {
         rowIdx++;
       } else if (height === -1) {
@@ -945,7 +850,6 @@
         }
       }
     }
-
     return items;
   };
 
@@ -955,30 +859,25 @@
     } else if (out === true) {
       out = globWorldXY;
     }
-
     var worldX, worldY;
-
     switch (this.mode) {
       case 0:
         // orthogonal
         worldX = tileX * this.width;
         worldY = tileY * this.height;
         break;
-
       case 1:
         // isometric
         worldX = (tileX - tileY) * this._halfWidth;
         worldY = (tileX + tileY) * this._halfHeight;
         break;
     }
-
     worldX += this.x;
     worldY += this.y;
     out.x = worldX;
     out.y = worldY;
     return out;
   };
-
   var globWorldXY = {};
 
   var GetWorldX = function GetWorldX(tileX, tileY) {
@@ -995,29 +894,24 @@
     } else if (out === true) {
       out = globTileXY;
     }
-
     worldX -= this.x;
     worldY -= this.y;
     var tmpx = worldX / this.width;
     var tmpy = worldY / this.height;
-
     switch (this.mode) {
       case 0:
         // orthogonal
         out.x = Math.round(tmpx);
         out.y = Math.round(tmpy);
         break;
-
       case 1:
         // isometric            
         out.x = Math.round(+tmpx + tmpy);
         out.y = Math.round(-tmpx + tmpy);
         break;
     }
-
     return out;
   };
-
   var globTileXY = {};
 
   var GetTileX = function GetTileX(worldX, worldY) {
@@ -1031,10 +925,8 @@
   var Quad = /*#__PURE__*/function () {
     function Quad(config) {
       _classCallCheck(this, Quad);
-
       this.resetFromJSON(config);
     }
-
     _createClass(Quad, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -1049,9 +941,7 @@
         if (typeof type === 'string') {
           type = ORIENTATIONTYPE[type];
         }
-
         this.mode = type; // orthogonal, isometric, or staggered
-
         return this;
       }
     }, {
@@ -1060,7 +950,6 @@
         if (typeof mode === 'string') {
           mode = DIRMODE[mode];
         }
-
         this.directions = mode;
         return this;
       }
@@ -1113,10 +1002,8 @@
         this.height = value;
       }
     }]);
-
     return Quad;
   }();
-
   var methods = {
     getWorldXY: GetWorldX$1,
     getWorldX: GetWorldX,
@@ -1138,6 +1025,7 @@
 
   var GetFastValue = Phaser.Utils.Objects.GetFastValue;
   var globQuadGrid = new Quad();
+
   /**
    * @typedef {object} GridAlignConfig
    *
@@ -1156,7 +1044,6 @@
     if (options === undefined) {
       options = {};
     }
-
     var width = GetFastValue(options, 'width', -1);
     var height = GetFastValue(options, 'height', -1);
     var cellWidth = GetFastValue(options, 'cellWidth', 1);
@@ -1168,14 +1055,12 @@
     globQuadGrid.setOriginPosition(x, y).setCellSize(cellWidth, cellHeight).setType(type);
     globZone.setSize(cellWidth, cellHeight);
     var lastRowIdx = height - 1,
-        lastColIdx = width - 1,
-        rowIdx = 0,
-        colIdx = 0;
-
+      lastColIdx = width - 1,
+      rowIdx = 0,
+      colIdx = 0;
     for (var i = 0, cnt = items.length; i < cnt; i++) {
       globQuadGrid.getWorldXY(colIdx, rowIdx, globZone);
       QuickSet(items[i], globZone, position);
-
       if (width === -1) {
         rowIdx++;
       } else if (height === -1) {
@@ -1193,21 +1078,16 @@
         }
       }
     }
-
     return items;
   };
 
   var GridAlignPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(GridAlignPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(GridAlignPlugin);
-
     function GridAlignPlugin(pluginManager) {
       _classCallCheck(this, GridAlignPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(GridAlignPlugin, [{
       key: "start",
       value: function start() {
@@ -1225,7 +1105,6 @@
         return GridAlign(items, options);
       }
     }]);
-
     return GridAlignPlugin;
   }(Phaser.Plugins.BasePlugin);
 

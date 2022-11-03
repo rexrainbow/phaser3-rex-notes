@@ -933,10 +933,22 @@ Assume that adding a custom tag : `[custom=10,20][/custom]`
     ```
     - `params` : Parameters passed from `params` in `'parser.-custom'` event.
 
-### Minimun size
 
-Resize to minimun size to show all visible characters.
+### Size
 
-```javascript
-txt.setToMinSize();
-```
+- Resize canvas size
+    ```javascript
+    txt.setCanvasSize(width, height)
+    ```
+- Reisze text wrapping size and canvas size.
+    ```javascript
+    txt.setSize(width, height);
+    ```
+    or
+    ```javascript
+    txt.setFixedSize(width, height);
+    ```
+- Resize to minimun size to show all visible characters.
+    ```javascript
+    txt.setToMinSize();
+    ```

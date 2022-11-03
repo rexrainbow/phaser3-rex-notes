@@ -9,7 +9,8 @@ var CreateHiddenTextEdit = function (parent, parentConfig) {
         config = {};
     }
 
-    CopyProperty(parentConfig, config, 'inputType');    
+    CopyProperty(parentConfig, config, 'inputType');
+    CopyProperty(parentConfig, config, 'readOnly');
     CopyProperty(parentConfig, config, 'enterClose');
     CopyProperty(parentConfig, config, 'onOpen');
     CopyProperty(parentConfig, config, 'onFocus');

@@ -1683,6 +1683,26 @@
     Horizontal wrap
   </a>
   
+    <nav class="md-nav" aria-label="Horizontal wrap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align" class="md-nav__link">
+    Align
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-string" class="md-nav__link">
+    Test string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1800,8 +1820,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#minimun-size" class="md-nav__link">
-    Minimun size
+  <a href="#size" class="md-nav__link">
+    Size
   </a>
   
 </li>
@@ -6543,10 +6563,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_2" type="checkbox" id="__nav_12_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_2">
+          Round to
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Round to" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_2">
+          <span class="md-nav__icon md-icon"></span>
+          Round to
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../round-to/" class="md-nav__link">
+        Round to
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../snap/" class="md-nav__link">
         Snap
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -8963,6 +9030,26 @@
     Horizontal wrap
   </a>
   
+    <nav class="md-nav" aria-label="Horizontal wrap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#align" class="md-nav__link">
+    Align
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-string" class="md-nav__link">
+    Test string
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9080,8 +9167,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#minimun-size" class="md-nav__link">
-    Minimun size
+  <a href="#size" class="md-nav__link">
+    Size
   </a>
   
 </li>
@@ -9241,7 +9328,9 @@
 
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 
-    <span class="nx">wrap</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="nx">wrap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">testString</span><span class="o">:</span> <span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -9350,6 +9439,7 @@
 </li>
 <li><code>text</code> : Content of text.</li>
 <li><code>wrap</code> : Default configuration <a href="./#horizontal-wrap">Horizontal</a>/<a href="./#vertical-wrap">Vertical</a> wrapping.</li>
+<li><code>testString</code> : Test string to get text ascent and text height with default text style.</li>
 </ul>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -9539,6 +9629,7 @@ or</p>
         <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
+    <span class="nx">ascent</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -9553,13 +9644,14 @@ or</p>
 <li><code>padding.top</code>, <code>padding.bottom</code>, <code>padding.left</code>, <code>padding.right</code> : Extra space around lines.</li>
 </ul>
 </li>
-<li><code>lineHeight</code> : Line height. <ul>
-<li><code>undefined</code> : It will be set if <code>maxLines</code> and <code>fixedHeight</code> is given.</li>
+<li><code>ascent</code>, <code>lineHeight</code> : Height of first line and remainder lines<ul>
+<li><code>ascent</code> will set to <code>lineHeight</code> if <code>ascent</code> is <code>undefined</code> but <code>lineHeight</code> is not <code>undefined</code> (backward compatible)</li>
+<li>Get <code>ascent</code>, <code>lineHeight</code> from default text style and test string, if <code>ascent</code>, <code>lineHeight</code> are both <code>undefined</code></li>
 </ul>
 </li>
 <li><code>maxLines</code> : Lines number of this page. <ul>
 <li><code>0</code> : Wrapping whole content.</li>
-<li><code>undefined</code> : It will be set if <code>lineHeight</code> and <code>fixedHeight</code> is given.</li>
+<li><code>undefined</code> : It will be set if <code>lineHeight</code> and <code>height</code> is given</li>
 </ul>
 </li>
 <li><code>wrapWidth</code> : Width of wrapping</li>
@@ -9582,6 +9674,34 @@ or</p>
 </ul>
 </li>
 </ul>
+<h5 id="align">Align<a class="headerlink" href="#align" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Set vertical align mode
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setVAlign</span><span class="p">(</span><span class="nx">vAlign</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>vAlign</code> : Vertical alignment.<ul>
+<li><code>0</code>, or <code>'top'</code> : Align to top bound.</li>
+<li><code>1</code>, or <code>'center'</code> : Align to center.</li>
+<li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set horizontal align mode
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setHAlign</span><span class="p">(</span><span class="nx">hAlign</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>hAlign</code> : Horizontal alignment.<ul>
+<li><code>0</code>, or <code>'left'</code> : Align to left bound.</li>
+<li><code>1</code>, or <code>'center'</code> : Align to center.</li>
+<li><code>2</code>, or <code>'right'</code> : Align to right bound.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="test-string">Test string<a class="headerlink" href="#test-string" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setTestString</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
 <h4 id="vertical-wrap">Vertical wrap<a class="headerlink" href="#vertical-wrap" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runVerticalWrap</span><span class="p">({</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
@@ -9930,10 +10050,21 @@ or</p>
     <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">movechildBelow</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">baseChild</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="minimun-size">Minimun size<a class="headerlink" href="#minimun-size" title="Permanent link">&para;</a></h3>
-<p>Resize to minimun size to show all visible characters.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setToMinSize</span><span class="p">();</span>
+<h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Resize canvas size
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setCanvasSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Reisze text wrapping size and canvas size.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Resize to minimun size to show all visible characters.
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setToMinSize</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
 <h3 id="input-events-of-child">Input events of child<a class="headerlink" href="#input-events-of-child" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Enable input events of child on <a href="./#create-instance">config of constructor</a>, or via method

@@ -1,6 +1,15 @@
 import Fade from './Fade.js';
+import IsSoundObject from '../../utils/system/IsSoundObject.js';
 
 var FadeIn = function (scene, sound, duration, endVolume, startVolume) {
+    if (IsSoundObject(scene)) {
+        startVolume = endVolume;
+        endVolume = duration;
+        duration = sound;
+        sound = scene;
+        scene = undefined;
+    }
+
     if (endVolume === undefined) {
         endVolume = 1;
     }

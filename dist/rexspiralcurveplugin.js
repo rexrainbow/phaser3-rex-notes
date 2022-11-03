@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,40 +75,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -129,26 +111,19 @@
   var Vector2 = Phaser.Math.Vector2;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var Linear = Phaser.Math.Linear;
-
   var SpiralCurve = /*#__PURE__*/function (_Base) {
     _inherits(SpiralCurve, _Base);
-
     var _super = _createSuper(SpiralCurve);
-
     function SpiralCurve(x, y, startRadius, endRadius, startAngle, endAngle, rotation) {
       var _this;
-
       _classCallCheck(this, SpiralCurve);
-
       var startX, endX, easeX;
       var startY, endY, easeY;
       var startXRadius, endXRadius, easeXRadius;
       var startYRadius, endYRadius, easeYRadius;
       var easeAngle;
-
       if (_typeof(x) === 'object') {
         var config = x;
-
         if (config.hasOwnProperty('x')) {
           startX = config.x;
           endX = startX;
@@ -156,9 +131,7 @@
           startX = GetValue(config, 'startX', 0);
           endX = GetValue(config, 'endX', startX);
         }
-
         easeX = GetValue(config, 'easeX', 'Linear');
-
         if (config.hasOwnProperty('y')) {
           startY = config.y;
           endY = startY;
@@ -166,9 +139,7 @@
           startY = GetValue(config, 'startY', 0);
           endY = GetValue(config, 'endY', startY);
         }
-
         easeY = GetValue(config, 'easeY', 'Linear');
-
         if (config.hasOwnProperty('startRadius')) {
           startXRadius = config.startRadius;
           startYRadius = startXRadius;
@@ -182,7 +153,6 @@
             startXRadius = GetValue(config, 'startXRadius', 0);
             endXRadius = GetValue(config, 'endXRadius', startXRadius);
           }
-
           if (config.hasOwnProperty('yRadius')) {
             startYRadius = config.yRadius;
             endYRadius = startYRadius;
@@ -191,7 +161,6 @@
             endYRadius = GetValue(config, 'endYRadius', endXRadius);
           }
         }
-
         easeXRadius = GetValue(config, 'easeXRadius', 'Linear');
         easeYRadius = GetValue(config, 'easeXRadius', easeXRadius);
         startAngle = GetValue(config, 'startAngle', 0);
@@ -202,31 +171,24 @@
         if (x === undefined) {
           x = 0;
         }
-
         if (y === undefined) {
           y = 0;
         }
-
         if (startRadius === undefined) {
           startRadius = 0;
         }
-
         if (endRadius === undefined) {
           endRadius = 0;
         }
-
         if (startAngle === undefined) {
           startAngle = 0;
         }
-
         if (endAngle === undefined) {
           endAngle = 360;
         }
-
         if (rotation === undefined) {
           rotation = 0;
         }
-
         startX = x;
         endX = x;
         easeX = 'Linear';
@@ -241,7 +203,6 @@
         easeYRadius = 'Linear';
         easeAngle = 'Linear';
       }
-
       _this = _super.call(this, 'SpiralCurve');
       _this.p0 = new Vector2(startX, startY);
       _this.p1 = new Vector2(endX, endY);
@@ -264,7 +225,6 @@
       _this._rotation = DegToRad(rotation);
       return _this;
     }
-
     _createClass(SpiralCurve, [{
       key: "getResolution",
       value: function getResolution(divisions) {
@@ -281,7 +241,6 @@
         if (out === undefined) {
           out = new Vector2();
         }
-
         var ox = Linear(this.p0.x, this.p1.x, this._easeXFunction(t));
         var oy = Linear(this.p0.y, this.p1.y, this._easeYFunction(t));
         var angle = Linear(this._startAngle, this._endAngle, this._easeAngleFunction(t));
@@ -289,17 +248,16 @@
         var yRadius = Linear(this._startYRadius, this._endYRadius, this._easeYRadiusFunction(t));
         var x = ox + xRadius * Math.cos(angle);
         var y = oy + yRadius * Math.sin(angle);
-
         if (this._rotation !== 0) {
           var cos = Math.cos(this._rotation);
           var sin = Math.sin(this._rotation);
           var tx = x - ox;
-          var ty = y - oy; // Rotate the point about the center of the ellipse.
+          var ty = y - oy;
 
+          // Rotate the point about the center of the ellipse.
           x = tx * cos - ty * sin + ox;
           y = tx * sin + ty * cos + oy;
         }
-
         return out.set(x, y);
       }
     }, {
@@ -633,30 +591,23 @@
         return new SpiralCurve(data);
       }
     }]);
-
     return SpiralCurve;
   }(Base);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -666,31 +617,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -698,26 +648,20 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var SpiralCurvePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(SpiralCurvePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(SpiralCurvePlugin);
-
     function SpiralCurvePlugin(pluginManager) {
       _classCallCheck(this, SpiralCurvePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(SpiralCurvePlugin, [{
       key: "start",
       value: function start() {
@@ -730,10 +674,8 @@
         return new SpiralCurve(x, y, startRadius, endRadius, startAngle, endAngle, rotation);
       }
     }]);
-
     return SpiralCurvePlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.Curve.SpiralCurve', SpiralCurve);
 
   return SpiralCurvePlugin;

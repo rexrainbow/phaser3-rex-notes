@@ -1,5 +1,5 @@
 import IsEmpty from '../../../../utils/object/IsEmpty.js';
-import GetPartialData from './GetPartialData.js';
+import GetPartialData from '../../../../utils/object/GetPartialData.js';
 import IsKeyValueEqual from '../../../../utils/object/IsKeyValueEqual.js';
 
 var RegisterCursorStyle = function (cursorStyle) {

@@ -129,7 +129,9 @@ var txt = scene.add.rexDynamicText({
 
     text: '',
 
-    wrap: undefined
+    wrap: undefined,
+
+    testString: '|MÉqgy',
 });
 ```
 
@@ -198,6 +200,7 @@ var txt = scene.add.rexDynamicText({
     - `false` : Won't fire any input events of child. Default behavior.
 - `text` : Content of text.
 - `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
+- `testString` : Test string to get text ascent and text height with default text style.
 
 or
 
@@ -434,6 +437,7 @@ var result = txt.runWordWrap({
         top: 0,
         bottom: 0
     },
+    ascent: undefined,
     lineHeight: undefined,
     maxLines: undefined,
     wrapWidth: undefined,
@@ -446,11 +450,12 @@ var result = txt.runWordWrap({
 
 - `padding` :
     - `padding.top`, `padding.bottom`, `padding.left`, `padding.right` : Extra space around lines.
-- `lineHeight` : Line height. 
-    - `undefined` : It will be set if `maxLines` and `fixedHeight` is given.
+- `ascent`, `lineHeight` : Height of first line and remainder lines
+    - `ascent` will set to `lineHeight` if `ascent` is `undefined` but `lineHeight` is not `undefined` (backward compatible)
+    - Get `ascent`, `lineHeight` from default text style and test string, if `ascent`, `lineHeight` are both `undefined`
 - `maxLines` : Lines number of this page. 
     - `0` : Wrapping whole content.
-    - `undefined` : It will be set if `lineHeight` and `fixedHeight` is given.
+    - `undefined` : It will be set if `lineHeight` and `height` is given
 - `wrapWidth` : Width of wrapping
 - `letterSpacing` : Space between each character.
 - `hAlign` : Horizontal alignment.
@@ -464,6 +469,32 @@ var result = txt.runWordWrap({
 - `charWrap`
     - `false` : Word wrap. Default behavior.
     - `true` : Character wrap.
+
+
+##### Align
+
+- Set vertical align mode
+    ```javascript
+    txt.setVAlign(vAlign);
+    ```
+    - `vAlign` : Vertical alignment.
+        - `0`, or `'top'` : Align to top bound.
+        - `1`, or `'center'` : Align to center.
+        - `2`, or `'bottom'` : Align to bottom bound.
+- Set horizontal align mode
+    ```javascript
+    txt.setHAlign(hAlign);
+    ```
+    - `hAlign` : Horizontal alignment.
+        - `0`, or `'left'` : Align to left bound.
+        - `1`, or `'center'` : Align to center.
+        - `2`, or `'right'` : Align to right bound.
+
+##### Test string
+
+```javascript
+txt.setTestString(text);
+```
 
 #### Vertical wrap
 
@@ -830,13 +861,24 @@ txt.setWrapConfig(config);
     txt.movechildBelow(child, baseChild);
     ```
 
-### Minimun size
+### Size
 
-Resize to minimun size to show all visible characters.
-
-```javascript
-txt.setToMinSize();
-```
+- Resize canvas size
+    ```javascript
+    txt.setCanvasSize(width, height)
+    ```
+- Reisze text wrapping size and canvas size.
+    ```javascript
+    txt.setSize(width, height);
+    ```
+    or
+    ```javascript
+    txt.setFixedSize(width, height);
+    ```
+- Resize to minimun size to show all visible characters.
+    ```javascript
+    txt.setToMinSize();
+    ```
 
 ### Input events of child
 

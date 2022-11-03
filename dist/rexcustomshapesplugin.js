@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,76 +75,84 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
+  }
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+  }
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var GetCalcMatrix = Phaser.GameObjects.GetCalcMatrix;
-
   var WebGLRenderer = function WebGLRenderer(renderer, src, camera, parentMatrix) {
     src.updateData();
     camera.addToRenderList(src);
@@ -165,31 +164,26 @@
     var alpha = camera.alpha * src.alpha;
     renderer.pipelines.preBatch(src);
     var shapes = src.geom;
-
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
       shapes[i].webglRender(pipeline, calcMatrix, alpha, dx, dy);
     }
-
     renderer.pipelines.postBatch(src);
   };
 
   var SetTransform = Phaser.Renderer.Canvas.SetTransform;
-
   var CanvasRenderer = function CanvasRenderer(renderer, src, camera, parentMatrix) {
     src.updateData();
     camera.addToRenderList(src);
     var ctx = renderer.currentContext;
-
     if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
       var dx = src._displayOriginX;
       var dy = src._displayOriginY;
       var shapes = src.geom;
-
       for (var i = 0, cnt = shapes.length; i < cnt; i++) {
         shapes[i].canvasRender(ctx, dx, dy);
-      } //  Restore the context saved in SetTransform
+      }
 
-
+      //  Restore the context saved in SetTransform
       ctx.restore();
     }
   };
@@ -203,7 +197,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -211,55 +204,40 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
   var Shape = Phaser.GameObjects.Shape;
   var RemoveItem = Phaser.Utils.Array.Remove;
-
   var BaseShapes = /*#__PURE__*/function (_Shape) {
     _inherits(BaseShapes, _Shape);
-
     var _super = _createSuper(BaseShapes);
-
     function BaseShapes(scene, x, y, width, height) {
       var _this;
-
       _classCallCheck(this, BaseShapes);
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = 0;
       }
-
       if (height === undefined) {
         height = width;
       }
-
       _this = _super.call(this, scene, 'rexShapes', []);
       _this._width = -1;
       _this._height = -1;
       _this.dirty = true;
       _this.isSizeChanged = true;
       _this.shapes = {};
-
       _this.setPosition(x, y);
-
       _this.setSize(width, height);
-
       _this.updateDisplayOrigin();
-
       return _this;
     }
-
     _createClass(BaseShapes, [{
       key: "width",
       get: function get() {
@@ -282,7 +260,6 @@
         if (value === undefined) {
           value = true;
         }
-
         this.dirty = value;
         return this;
       }
@@ -295,12 +272,10 @@
         this._height = height;
         this.updateDisplayOrigin();
         var input = this.input;
-
         if (input && !input.customHitArea) {
           input.hitArea.width = width;
           input.hitArea.height = height;
         }
-
         return this;
       }
     }, {
@@ -331,7 +306,6 @@
         if (alpha === undefined) {
           alpha = 1;
         }
-
         this.dirty = this.dirty || this.fillColor !== color || this.fillAlpha !== alpha;
         this._fillColor = color;
         this._fillAlpha = alpha;
@@ -367,7 +341,6 @@
         if (alpha === undefined) {
           alpha = 1;
         }
-
         this.dirty = this.dirty || this.lineWidth !== lineWidth || this.strokeColor !== color || this.strokeAlpha !== alpha;
         this._lineWidth = lineWidth;
         this._strokeColor = color;
@@ -383,18 +356,14 @@
         if (!this.dirty) {
           return this;
         }
-
         this.updateShapes();
         var shapes = this.geom;
-
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
           var shape = shapes[i];
-
           if (shape.dirty) {
             shape.updateData();
           }
         }
-
         this.isSizeChanged = false;
         this.dirty = false;
         return this;
@@ -421,11 +390,9 @@
       value: function addShape(shape) {
         this.geom.push(shape);
         var name = shape.name;
-
         if (name) {
           this.shapes[name] = shape;
         }
-
         this.dirty = true;
         return this;
       }
@@ -433,19 +400,15 @@
       key: "deleteShape",
       value: function deleteShape(name) {
         var shape = this.getShape(name);
-
         if (shape) {
           delete this.shapes[name];
           RemoveItem(this.geom, shape);
         }
-
         return this;
       }
     }]);
-
     return BaseShapes;
   }(Shape);
-
   Object.assign(BaseShapes.prototype, Render);
 
   var FillStyle = function FillStyle(color, alpha) {
@@ -455,15 +418,12 @@
       if (alpha === undefined) {
         alpha = 1;
       }
-
       this.isFilled = true;
       this.fillColor = color;
       this.fillAlpha = alpha;
     }
-
     return this;
   };
-
   var LineStyle = function LineStyle(lineWidth, color, alpha) {
     if (lineWidth == null || color == null) {
       this.isStroked = false;
@@ -471,16 +431,13 @@
       if (alpha === undefined) {
         alpha = 1;
       }
-
       this.isStroked = true;
       this.lineWidth = lineWidth;
       this.strokeColor = color;
       this.strokeAlpha = alpha;
     }
-
     return this;
   };
-
   var StyleMethods = {
     fillStyle: FillStyle,
     lineStyle: LineStyle
@@ -491,6 +448,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -515,8 +473,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -528,7 +487,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -540,22 +498,18 @@
       if (this.data === undefined) {
         this.data = {};
       }
-
       return this;
     },
     setData: function setData(key, value) {
       this.enableData();
-
       if (arguments.length === 1) {
         var data = key;
-
         for (key in data) {
           this.data[key] = data[key];
         }
       } else {
         this.data[key] = value;
       }
-
       return this;
     },
     getData: function getData(key, defaultValue) {
@@ -566,7 +520,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) + inc);
       return this;
@@ -575,7 +528,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) * mul);
       return this;
@@ -584,7 +536,6 @@
       if (this.data) {
         Clear(this.data);
       }
-
       return this;
     }
   };
@@ -592,7 +543,6 @@
   var BaseGeom = /*#__PURE__*/function () {
     function BaseGeom() {
       _classCallCheck(this, BaseGeom);
-
       this.name = undefined;
       this.dirty = true;
       this.data = undefined;
@@ -604,7 +554,6 @@
       this.strokeColor = undefined;
       this.strokeAlpha = 1;
     }
-
     _createClass(BaseGeom, [{
       key: "setName",
       value: function setName(name) {
@@ -629,10 +578,8 @@
         this.dirty = false;
       }
     }]);
-
     return BaseGeom;
   }();
-
   Object.assign(BaseGeom.prototype, StyleMethods, DataMethods);
 
   /*
@@ -643,13 +590,12 @@
       pathIndexes  // Earcut(pathData)
   }
   */
-  var Utils$1 = Phaser.Renderer.WebGL.Utils;
 
+  var Utils$1 = Phaser.Renderer.WebGL.Utils;
   var FillPathWebGL = function FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy) {
     var fillTintColor = Utils$1.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
     var path = src.pathData;
     var pathIndexes = src.pathIndexes;
-
     for (var i = 0; i < pathIndexes.length; i += 3) {
       var p0 = pathIndexes[i] * 2;
       var p1 = pathIndexes[i + 1] * 2;
@@ -680,7 +626,6 @@
   }
   */
   var Utils = Phaser.Renderer.WebGL.Utils;
-
   var StrokePathWebGL = function StrokePathWebGL(pipeline, src, alpha, dx, dy) {
     var strokeTint = pipeline.strokeTint;
     var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha);
@@ -694,11 +639,9 @@
     var halfLineWidth = lineWidth / 2;
     var px1 = path[0] - dx;
     var py1 = path[1] - dy;
-
     if (!src.closePath) {
       pathLength -= 2;
     }
-
     for (var i = 2; i < pathLength; i += 2) {
       var px2 = path[i] - dx;
       var py2 = path[i + 1] - dy;
@@ -728,31 +671,23 @@
   };
 
   var Earcut = Phaser.Geom.Polygon.Earcut;
-
   var PathBase = /*#__PURE__*/function (_BaseGeom) {
     _inherits(PathBase, _BaseGeom);
-
     var _super = _createSuper(PathBase);
-
     function PathBase() {
       var _this;
-
       _classCallCheck(this, PathBase);
-
       _this = _super.call(this);
       _this.pathData = [];
       _this.pathIndexes = [];
       _this.closePath = false;
       return _this;
     }
-
     _createClass(PathBase, [{
       key: "updateData",
       value: function updateData() {
         this.pathIndexes = Earcut(this.pathData);
-
         _get(_getPrototypeOf(PathBase.prototype), "updateData", this).call(this);
-
         return this;
       }
     }, {
@@ -761,7 +696,6 @@
         if (this.isFilled) {
           FillPathWebGL(pipeline, calcMatrix, this, alpha, dx, dy);
         }
-
         if (this.isStroked) {
           StrokePathWebGL(pipeline, this, alpha, dx, dy);
         }
@@ -775,54 +709,44 @@
         var py1 = path[1] - dy;
         ctx.beginPath();
         ctx.moveTo(px1, py1);
-
         if (!this.closePath) {
           pathLength -= 2;
         }
-
         for (var i = 2; i < pathLength; i += 2) {
           var px2 = path[i] - dx;
           var py2 = path[i + 1] - dy;
           ctx.lineTo(px2, py2);
         }
-
         if (this.closePath) {
           ctx.closePath();
         }
-
         if (this.isFilled) {
           FillStyleCanvas(ctx, this);
           ctx.fill();
         }
-
         if (this.isStroked) {
           LineStyleCanvas(ctx, this);
           ctx.stroke();
         }
       }
     }]);
-
     return PathBase;
   }(BaseGeom);
 
   var LineTo = function LineTo(x, y, pathData) {
     var cnt = pathData.length;
-
     if (cnt >= 2) {
       var lastX = pathData[cnt - 2];
       var lastY = pathData[cnt - 1];
-
       if (x === lastX && y === lastY) {
         return pathData;
       }
     }
-
     pathData.push(x, y);
     return pathData;
   };
 
   var DegToRad$2 = Phaser.Math.DegToRad;
-
   var ArcTo = function ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && endAngle > startAngle) {
@@ -830,80 +754,57 @@
     } else if (!antiClockWise && endAngle < startAngle) {
       endAngle += 360;
     }
-
     var deltaAngle = endAngle - startAngle;
     var step = DegToRad$2(deltaAngle) / iteration;
     startAngle = DegToRad$2(startAngle);
-
     for (var i = 0; i <= iteration; i++) {
       var angle = startAngle + step * i;
       var x = centerX + radiusX * Math.cos(angle);
       var y = centerY + radiusY * Math.sin(angle);
       LineTo(x, y, pathData);
     }
-
     return pathData;
   };
 
   var DegToRad$1 = Phaser.Math.DegToRad;
-
   var Arc = /*#__PURE__*/function (_PathBase) {
     _inherits(Arc, _PathBase);
-
     var _super = _createSuper(Arc);
-
     function Arc(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
       var _this;
-
       _classCallCheck(this, Arc);
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (radiusX === undefined) {
         radiusX = 0;
       }
-
       if (radiusY === undefined) {
         radiusY = 0;
       }
-
       if (startAngle === undefined) {
         startAngle = 0;
       }
-
       if (endAngle === undefined) {
         endAngle = 360;
       }
-
       if (anticlockwise === undefined) {
         anticlockwise = false;
       }
-
       if (pie === undefined) {
         pie = false;
       }
-
       _this = _super.call(this);
-
       _this.setCenterPosition(x, y);
-
       _this.setRadius(radiusX, radiusY);
-
       _this.setAngle(startAngle, endAngle, anticlockwise);
-
       _this.setPie(pie);
-
       _this.setIterations(32);
-
       return _this;
     }
-
     _createClass(Arc, [{
       key: "x",
       get: function get() {
@@ -928,7 +829,6 @@
         if (y === undefined) {
           y = x;
         }
-
         this.x = x;
         this.y = y;
         return this;
@@ -957,7 +857,6 @@
         if (radiusY === undefined) {
           radiusY = radiusX;
         }
-
         this.radiusX = radiusX;
         this.radiusY = radiusY;
         return this;
@@ -996,7 +895,6 @@
         if (anticlockwise === undefined) {
           anticlockwise = false;
         }
-
         this.startAngle = startAngle;
         this.endAngle = endAngle;
         this.anticlockwise = anticlockwise;
@@ -1017,7 +915,6 @@
         if (pie === undefined) {
           pie = true;
         }
-
         this.pie = pie;
         return this;
       }
@@ -1040,21 +937,15 @@
       key: "updateData",
       value: function updateData() {
         this.pathData.length = 0;
-
         if (this.pie) {
           this.pathData.push(this.x, this.y);
         }
-
         ArcTo(this.x, this.y, this.radiusX, this.radiusY, this.startAngle, this.endAngle, this.anticlockwise, this.iterations, this.pathData);
-
         if (this.pie) {
           this.pathData.push(this.x, this.y);
         }
-
         this.pathData.push(this.pathData[0], this.pathData[1]);
-
         _get(_getPrototypeOf(Arc.prototype), "updateData", this).call(this);
-
         return this;
       }
     }, {
@@ -1062,69 +953,51 @@
       value: function canvasRender(ctx, dx, dy) {
         ctx.beginPath();
         var x = this.x - dx,
-            y = this.y - dy,
-            startAngle = DegToRad$1(this.startAngle),
-            endAngle = DegToRad$1(this.endAngle);
-
+          y = this.y - dy,
+          startAngle = DegToRad$1(this.startAngle),
+          endAngle = DegToRad$1(this.endAngle);
         if (this.pie) {
           ctx.moveTo(x, y);
           ctx.lineTo(x + Math.cos(startAngle) * this.radiusX, y + Math.sin(startAngle) * this.radiusY);
         }
-
         ctx.ellipse(x, y, this.radiusX, this.radiusY, 0, startAngle, endAngle, this.anticlockwise);
-
         if (this.pie) {
           ctx.lineTo(x, y);
         }
-
         if (this.isFilled) {
           FillStyleCanvas(ctx, this);
           ctx.fill();
         }
-
         if (this.isStroked) {
           LineStyleCanvas(ctx, this);
           ctx.stroke();
         }
       }
     }]);
-
     return Arc;
   }(PathBase);
 
   var Circle = /*#__PURE__*/function (_Arc) {
     _inherits(Circle, _Arc);
-
     var _super = _createSuper(Circle);
-
     function Circle(x, y, radius) {
       _classCallCheck(this, Circle);
-
       return _super.call(this, x, y, radius, radius, 0, 360);
     }
-
     return _createClass(Circle);
   }(Arc);
 
   var Curve = /*#__PURE__*/function (_PathBase) {
     _inherits(Curve, _PathBase);
-
     var _super = _createSuper(Curve);
-
     function Curve(curve) {
       var _this;
-
       _classCallCheck(this, Curve);
-
       _this = _super.call(this);
-
       _this.setCurve(curve);
-
       _this.setIterations(32);
-
       return _this;
     }
-
     _createClass(Curve, [{
       key: "curve",
       get: function get() {
@@ -1160,71 +1033,50 @@
       value: function updateData() {
         this.pathData.length = 0;
         var points = this.curve.getPoints(this.iterations);
-
         for (var i = 0, cnt = points.length; i < cnt; i++) {
           this.pathData.push(points[i].x, points[i].y);
         }
-
         this.pathData.push(points[0].x, points[0].y);
-
         _get(_getPrototypeOf(Curve.prototype), "updateData", this).call(this);
-
         return this;
       }
     }]);
-
     return Curve;
   }(PathBase);
 
   var Ellipse = /*#__PURE__*/function (_Arc) {
     _inherits(Ellipse, _Arc);
-
     var _super = _createSuper(Ellipse);
-
     function Ellipse(x, y, radiusX, radiusY) {
       _classCallCheck(this, Ellipse);
-
       return _super.call(this, x, y, radiusX, radiusY, 0, 360);
     }
-
     return _createClass(Ellipse);
   }(Arc);
 
   var Line = /*#__PURE__*/function (_PathBase) {
     _inherits(Line, _PathBase);
-
     var _super = _createSuper(Line);
-
     function Line(x0, y0, x1, y1) {
       var _this;
-
       _classCallCheck(this, Line);
-
       if (x0 === undefined) {
         x0 = 0;
       }
-
       if (y0 === undefined) {
         y0 = 0;
       }
-
       if (x1 === undefined) {
         x1 = 0;
       }
-
       if (y1 === undefined) {
         y1 = 0;
       }
-
       _this = _super.call(this);
-
       _this.setP0(x0, y0);
-
       _this.setP1(x1, y1);
-
       return _this;
     }
-
     _createClass(Line, [{
       key: "x0",
       get: function get() {
@@ -1282,51 +1134,129 @@
         this.pathData.push(this.x0, this.y0);
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x0, this.y0);
-
         _get(_getPrototypeOf(Line.prototype), "updateData", this).call(this);
-
         return this;
       }
     }]);
-
     return Line;
   }(PathBase);
 
   var StartAt = function StartAt(x, y, pathData) {
     pathData.length = 0;
-
     if (x != null) {
       pathData.push(x, y);
     }
-
     return pathData;
   };
 
   //import QuadraticBezierInterpolation from '../../utils/math/interpolation/QuadraticBezierInterpolation.js';
-  var QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
 
+  var QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
   var QuadraticBezierTo = function QuadraticBezierTo(cx, cy, x, y, iterations, pathData) {
     var pathDataCnt = pathData.length;
     var p0x = pathData[pathDataCnt - 2];
     var p0y = pathData[pathDataCnt - 1];
-
     for (var i = 1, last = iterations - 1; i <= last; i++) {
       var t = i / last;
       pathData.push(QuadraticBezierInterpolation(t, p0x, cx, x), QuadraticBezierInterpolation(t, p0y, cy, y));
     }
-
     return pathData;
   };
 
-  //import PointRotateAround from '../../utils/math/RotateAround.js';
-  var PointRotateAround$1 = Phaser.Math.RotateAround;
+  var AddPathMethods = {
+    start: function start() {
+      this.startAt();
+      return this;
+    },
+    startAt: function startAt(x, y) {
+      this.restorePathData();
+      StartAt(x, y, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      this.accumulationLengths = undefined;
+      return this;
+    },
+    lineTo: function lineTo(x, y, relative) {
+      if (relative === undefined) {
+        relative = false;
+      }
+      if (relative) {
+        x += this.lastPointX;
+        y += this.lastPointY;
+      }
+      LineTo(x, y, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      return this;
+    },
+    verticalLineTo: function verticalLineTo(x, relative) {
+      this.lineTo(x, this.lastPointY, relative);
+      return this;
+    },
+    horizontalLineTo: function horizontalLineTo(y, relative) {
+      this.lineTo(this.lastPointX, y, relative);
+      return this;
+    },
+    ellipticalArc: function ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
+      if (anticlockwise === undefined) {
+        anticlockwise = false;
+      }
+      ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise, this.iterations, this.pathData);
+      var pathDataCnt = this.pathData.length;
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      return this;
+    },
+    arc: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+      this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise);
+      return this;
+    },
+    quadraticBezierTo: function quadraticBezierTo(cx, cy, x, y) {
+      QuadraticBezierTo(cx, cy, x, y, this.iterations, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      this.lastCX = cx;
+      this.lastCY = cy;
+      return this;
+    },
+    smoothQuadraticBezierTo: function smoothQuadraticBezierTo(x, y) {
+      var cx = this.lastPointX * 2 - this.lastCX;
+      var cy = this.lastPointY * 2 - this.lastCY;
+      this.quadraticBezierTo(cx, cy, x, y);
+      return this;
+    },
+    cubicBezierCurveTo: function cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
+      QuadraticBezierTo(cx0, cy0, cx1, cy1, x, y, this.iterations, this.pathData);
+      this.lastPointX = x;
+      this.lastPointY = y;
+      this.lastCX = cx1;
+      this.lastCY = cy1;
+      return this;
+    },
+    smoothCubicBezierCurveTo: function smoothCubicBezierCurveTo(cx1, cy1, x, y) {
+      var cx0 = this.lastPointX * 2 - this.lastCX;
+      var cy0 = this.lastPointY * 2 - this.lastCY;
+      this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+      return this;
+    },
+    close: function close() {
+      this.closePath = true;
+      return this;
+    },
+    end: function end() {
+      this.pathData.push(this.lastPointX, this.lastPointY);
+      return this;
+    }
+  };
 
+  //import PointRotateAround from '../../utils/math/RotateAround.js';
+
+  var PointRotateAround$1 = Phaser.Math.RotateAround;
   var RotateAround = function RotateAround(centerX, centerY, angle, pathData) {
     var point = {
       x: 0,
       y: 0
     };
-
     for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
       point.x = pathData[i];
       point.y = pathData[i + 1];
@@ -1334,7 +1264,6 @@
       pathData[i] = point.x;
       pathData[i + 1] = point.y;
     }
-
     return pathData;
   };
 
@@ -1343,199 +1272,213 @@
       pathData[i] += x;
       pathData[i + 1] += y;
     }
-
     return pathData;
+  };
+
+  var DegToRad = Phaser.Math.DegToRad;
+  var PointRotateAround = Phaser.Math.RotateAround;
+  var TransformPointsMethods = {
+    rotateAround: function rotateAround(centerX, centerY, angle) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      angle = DegToRad(angle);
+      RotateAround(centerX, centerY, angle, this.pathData);
+      var pathDataCnt = this.pathData.length;
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var point = {
+          x: this.lastCX,
+          y: this.lastCY
+        };
+        PointRotateAround(point, centerX, centerY, angle);
+        this.lastCX = point.x;
+        this.lastCY = point.y;
+      }
+      return this;
+    },
+    offset: function offset(x, y) {
+      Offset(x, y, this.pathData);
+      return this;
+    }
+  };
+
+  var Copy = function Copy(dest, src, startIdx, endIdx) {
+    if (startIdx === undefined) {
+      startIdx = 0;
+    }
+    if (endIdx === undefined) {
+      endIdx = src.length;
+    }
+    dest.length = endIdx - startIdx;
+    for (var i = 0, len = dest.length; i < len; i++) {
+      dest[i] = src[i + startIdx];
+    }
+    return dest;
+  };
+
+  var DistanceBetween = Phaser.Math.Distance.Between;
+  var Wrap = Phaser.Math.Wrap;
+  var Linear = Phaser.Math.Linear;
+  var AddDisplayPathSegment = function AddDisplayPathSegment(startT, endT) {
+    var startL = this.totalPathLength * startT;
+    var endL = this.totalPathLength * endT;
+    var pathData = this.pathData,
+      pathDataRef = this.pathDataSave;
+    var accumulationLengths = this.accumulationLengths,
+      d;
+    var skipState = startL > 0;
+    var pIdx;
+    for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
+      pIdx = i * 2;
+      d = accumulationLengths[i];
+      if (skipState) {
+        if (d < startL) {
+          continue;
+        } else if (d == startL) {
+          skipState = false;
+        } else {
+          // d > startL
+          var deltaD = d - accumulationLengths[i - 1];
+          var t = 1 - (d - startL) / deltaD;
+          pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
+          pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+          skipState = false;
+        }
+      }
+      if (d <= endL) {
+        pathData.push(pathDataRef[pIdx]);
+        pathData.push(pathDataRef[pIdx + 1]);
+        if (d === endL) {
+          break;
+        }
+      } else {
+        // d > endL
+        var deltaD = d - accumulationLengths[i - 1];
+        var t = 1 - (d - endL) / deltaD;
+        pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
+        pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+        break;
+      }
+    }
+  };
+  var GetInterpolation = function GetInterpolation(pathData, i0, i1, t) {
+    var p0 = pathData[i0],
+      p1 = pathData[i1];
+    return Linear(p0, p1, t);
+  };
+  var WrapT = function WrapT(t) {
+    if (t % 1 === 0) {
+      return 1;
+    }
+    return Wrap(t, 0, 1);
+  };
+  var PathSegmentMethods = {
+    updateAccumulationLengths: function updateAccumulationLengths() {
+      if (this.accumulationLengths == null) {
+        this.accumulationLengths = [];
+      } else if (this.accumulationLengths.length === this.pathData.length / 2) {
+        return this;
+      }
+      var accumulationLengths = this.accumulationLengths;
+      var pathData = this.pathData;
+      var prevX, prevY, x, y;
+      var d,
+        accumulationLength = 0;
+      for (var i = 0, cnt = pathData.length; i < cnt; i += 2) {
+        x = pathData[i];
+        y = pathData[i + 1];
+        d = prevX === undefined ? 0 : DistanceBetween(prevX, prevY, x, y);
+        accumulationLength += d;
+        accumulationLengths.push(accumulationLength);
+        prevX = x;
+        prevY = y;
+      }
+      this.totalPathLength = accumulationLength;
+      return this;
+    },
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
+      return this;
+    },
+    setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
+      if (endT === undefined) {
+        endT = startT;
+        startT = 0;
+      }
+      startT = WrapT(startT);
+      endT = WrapT(endT);
+      if (!this.pathDataSaved) {
+        this.updateAccumulationLengths();
+        this.savePathData();
+      }
+      this.pathData.length = 0;
+      if (startT === endT) ; else if (startT < endT) {
+        AddDisplayPathSegment.call(this, startT, endT);
+      } else {
+        AddDisplayPathSegment.call(this, startT, 1);
+        AddDisplayPathSegment.call(this, 0, endT);
+      }
+      return this;
+    }
   };
 
   var ToPoints = function ToPoints(pathData, points) {
     if (points === undefined) {
       points = [];
     }
-
     for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
       points.push({
         x: pathData[i],
         y: pathData[i + 1]
       });
     }
-
     return points;
   };
 
   //import Polygon from '../../utils/geom/polygon/Polygon.js';
-  var Polygon = Phaser.Geom.Polygon;
 
+  var Polygon = Phaser.Geom.Polygon;
   var ToPolygon = function ToPolygon(pathData, polygon) {
     if (polygon === undefined) {
       polygon = new Polygon();
     }
-
     polygon.setTo(pathData);
     return polygon;
   };
 
-  var DegToRad = Phaser.Math.DegToRad;
-
-  var PathData = /*#__PURE__*/function () {
-    function PathData(pathData) {
-      _classCallCheck(this, PathData);
-
+  var PathDataBuilder = /*#__PURE__*/function () {
+    function PathDataBuilder(pathData) {
+      _classCallCheck(this, PathDataBuilder);
       if (pathData === undefined) {
         pathData = [];
       }
-
       this.pathData = pathData;
       this.closePath = false;
       this.setIterations(32);
       this.lastPointX = undefined;
       this.lastPointY = undefined;
+      this.accumulationLengths = undefined;
     }
-
-    _createClass(PathData, [{
+    _createClass(PathDataBuilder, [{
       key: "setIterations",
       value: function setIterations(iterations) {
         this.iterations = iterations;
-        return this;
-      }
-    }, {
-      key: "start",
-      value: function start() {
-        this.startAt();
-        return this;
-      }
-    }, {
-      key: "startAt",
-      value: function startAt(x, y) {
-        StartAt(x, y, this.pathData);
-        this.lastPointX = x;
-        this.lastPointY = y;
-        return this;
-      }
-    }, {
-      key: "lineTo",
-      value: function lineTo(x, y, relative) {
-        if (relative === undefined) {
-          relative = false;
-        }
-
-        if (relative) {
-          x += this.lastPointX;
-          y += this.lastPointY;
-        }
-
-        LineTo(x, y, this.pathData);
-        this.lastPointX = x;
-        this.lastPointY = y;
-        return this;
-      }
-    }, {
-      key: "verticalLineTo",
-      value: function verticalLineTo(x, relative) {
-        this.lineTo(x, this.lastPointY, relative);
-        return this;
-      }
-    }, {
-      key: "horizontalLineTo",
-      value: function horizontalLineTo(y, relative) {
-        this.lineTo(this.lastPointX, y, relative);
-        return this;
-      }
-    }, {
-      key: "ellipticalArc",
-      value: function ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
-        if (anticlockwise === undefined) {
-          anticlockwise = false;
-        }
-
-        ArcTo(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise, this.iterations, this.pathData);
-        var pathDataCnt = this.pathData.length;
-        this.lastPointX = this.pathData[pathDataCnt - 2];
-        this.lastPointY = this.pathData[pathDataCnt - 1];
-        return this;
-      }
-    }, {
-      key: "arc",
-      value: function arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
-        this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise);
-        return this;
-      }
-    }, {
-      key: "quadraticBezierTo",
-      value: function quadraticBezierTo(cx, cy, x, y) {
-        QuadraticBezierTo(cx, cy, x, y, this.iterations, this.pathData);
-        this.lastPointX = x;
-        this.lastPointY = y;
-        this.lastCX = cx;
-        this.lastCY = cy;
-        return this;
-      }
-    }, {
-      key: "smoothQuadraticBezierTo",
-      value: function smoothQuadraticBezierTo(x, y) {
-        var cx = this.lastPointX * 2 - this.lastCX;
-        var cy = this.lastPointY * 2 - this.lastCY;
-        this.quadraticBezierTo(cx, cy, x, y);
-        return this;
-      }
-    }, {
-      key: "cubicBezierCurveTo",
-      value: function cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-        QuadraticBezierTo(cx0, cy0, cx1, cy1, x, y, this.iterations, this.pathData);
-        this.lastPointX = x;
-        this.lastPointY = y;
-        this.lastCX = cx1;
-        this.lastCY = cy1;
-        return this;
-      }
-    }, {
-      key: "smoothCubicBezierCurveTo",
-      value: function smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-        var cx0 = this.lastPointX * 2 - this.lastCX;
-        var cy0 = this.lastPointY * 2 - this.lastCY;
-        this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
-        return this;
-      }
-    }, {
-      key: "close",
-      value: function close() {
-        this.closePath = true;
-        return this;
-      }
-    }, {
-      key: "end",
-      value: function end() {
-        this.pathData.push(this.lastPointX, this.lastPointY);
-        return this;
-      }
-    }, {
-      key: "rotateAround",
-      value: function rotateAround(centerX, centerY, angle) {
-        if (this.pathData.length === 0) {
-          return this;
-        }
-
-        angle = DegToRad(angle);
-        RotateAround(centerX, centerY, angle, this.pathData);
-        var pathDataCnt = this.pathData.length;
-        this.lastPointX = this.pathData[pathDataCnt - 2];
-        this.lastPointY = this.pathData[pathDataCnt - 1];
-
-        if (this.lastCX !== undefined) {
-          var point = {
-            x: this.lastCX,
-            y: this.lastCY
-          };
-          PointRotateAround(point, centerX, centerY, angle);
-          this.lastCX = point.x;
-          this.lastCY = point.y;
-        }
-
-        return this;
-      }
-    }, {
-      key: "offset",
-      value: function offset(x, y) {
-        Offset(x, y, this.pathData);
         return this;
       }
     }, {
@@ -1552,37 +1495,29 @@
       key: "draw",
       value: function draw(graphics, isFill, isStroke) {
         var points = this.toPoints();
-
         if (isFill) {
           graphics.fillPoints(points, this.closePath, this.closePath);
         }
-
         if (isStroke) {
           graphics.strokePoints(points, this.closePath, this.closePath);
         }
-
         return this;
       }
     }]);
-
-    return PathData;
+    return PathDataBuilder;
   }();
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods);
 
   var Lines = /*#__PURE__*/function (_PathBase) {
     _inherits(Lines, _PathBase);
-
     var _super = _createSuper(Lines);
-
     function Lines() {
       var _this;
-
       _classCallCheck(this, Lines);
-
       _this = _super.call(this);
-      _this.builder = new PathData(_this.pathData);
+      _this.builder = new PathDataBuilder(_this.pathData);
       return _this;
     }
-
     _createClass(Lines, [{
       key: "iterations",
       get: function get() {
@@ -1719,50 +1654,42 @@
       value: function toPolygon(polygon) {
         return this.builder.toPolygon(polygon);
       }
+    }, {
+      key: "setDisplayPathSegment",
+      value: function setDisplayPathSegment(startT, endT) {
+        this.builder.setDisplayPathSegment(startT, endT);
+        return this;
+      }
     }]);
-
     return Lines;
   }(PathBase);
 
   var GetTint$1 = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
   var Rectangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Rectangle, _BaseGeom);
-
     var _super = _createSuper(Rectangle);
-
     function Rectangle(x, y, width, height) {
       var _this;
-
       _classCallCheck(this, Rectangle);
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = 0;
       }
-
       if (height === undefined) {
         height = width;
       }
-
       _this = _super.call(this);
       _this.pathData = [];
       _this.closePath = true;
-
       _this.setTopLeftPosition(x, y);
-
       _this.setSize(width, height);
-
       return _this;
     }
-
     _createClass(Rectangle, [{
       key: "x",
       get: function get() {
@@ -1818,17 +1745,15 @@
       value: function updateData() {
         this.pathData.length = 0;
         var x0 = this.x,
-            x1 = x0 + this.width,
-            y0 = this.y,
-            y1 = y0 + this.height;
+          x1 = x0 + this.width,
+          y0 = this.y,
+          y1 = y0 + this.height;
         this.pathData.push(x0, y0);
         this.pathData.push(x1, y0);
         this.pathData.push(x1, y1);
         this.pathData.push(x0, y1);
         this.pathData.push(x0, y0);
-
         _get(_getPrototypeOf(Rectangle.prototype), "updateData", this).call(this);
-
         return this;
       }
     }, {
@@ -1843,7 +1768,6 @@
           fillTint.BR = fillTintColor;
           pipeline.batchFillRect(-dx + this.x, -dy + this.y, this.width, this.height);
         }
-
         if (this.isStroked) {
           StrokePathWebGL(pipeline, this, alpha, dx, dy);
         }
@@ -1855,7 +1779,6 @@
           FillStyleCanvas(ctx, this);
           ctx.fillRect(-dx, -dy, this.width, this.height);
         }
-
         if (this.isStroked) {
           LineStyleCanvas(ctx, this);
           ctx.beginPath();
@@ -1864,59 +1787,42 @@
         }
       }
     }]);
-
     return Rectangle;
   }(BaseGeom);
 
   var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-
   var Triangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Triangle, _BaseGeom);
-
     var _super = _createSuper(Triangle);
-
     function Triangle(x0, y0, x1, y1, x2, y2) {
       var _this;
-
       _classCallCheck(this, Triangle);
-
       if (x0 === undefined) {
         x0 = 0;
       }
-
       if (y0 === undefined) {
         y0 = 0;
       }
-
       if (x1 === undefined) {
         x1 = 0;
       }
-
       if (y1 === undefined) {
         y1 = 0;
       }
-
       if (x2 === undefined) {
         x2 = 0;
       }
-
       if (y2 === undefined) {
         y2 = 0;
       }
-
       _this = _super.call(this);
       _this.pathData = [];
       _this.closePath = true;
-
       _this.setP0(x0, y0);
-
       _this.setP1(x1, y1);
-
       _this.setP2(x2, y2);
-
       return _this;
     }
-
     _createClass(Triangle, [{
       key: "x0",
       get: function get() {
@@ -2001,9 +1907,7 @@
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x2, this.y2);
         this.pathData.push(this.x0, this.y0);
-
         _get(_getPrototypeOf(Triangle.prototype), "updateData", this).call(this);
-
         return this;
       }
     }, {
@@ -2025,7 +1929,6 @@
           var ty2 = calcMatrix.getY(x2, y2);
           pipeline.batchTri(tx0, ty0, tx1, ty1, tx2, ty2, fillTintColor, fillTintColor, fillTintColor);
         }
-
         if (this.isStroked) {
           StrokePathWebGL(pipeline, this, alpha, dx, dy);
         }
@@ -2044,19 +1947,16 @@
         ctx.lineTo(x2, y2);
         ctx.lineTo(x3, y3);
         ctx.closePath();
-
         if (this.isFilled) {
           FillStyleCanvas(ctx, this);
           ctx.fill();
         }
-
         if (this.isStroked) {
           LineStyleCanvas(ctx, this);
           ctx.stroke();
         }
       }
     }]);
-
     return Triangle;
   }(BaseGeom);
 
@@ -2072,61 +1972,47 @@
   };
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
-
   var ClearAll = function ClearAll() {
     var shapes = this.getShapes();
-
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
       shapes[i].lineStyle().fillStyle();
     }
   };
-
   var ShapesUpdateMethods = {
     createShape: function createShape(shapeType, name) {
       var ShapeClass = ShapeClasses[shapeType];
       var shape = new ShapeClass();
-
       if (name) {
         shape.setName(name);
       }
-
       return shape;
     },
     buildShapes: function buildShapes(config) {
       var createCallback = GetValue$1(config, 'create', undefined);
-
       if (IsPlainObject$1(createCallback)) {
         var shapes = createCallback;
-
         for (var shapeType in shapes) {
           var name = shapes[shapeType];
-
           switch (_typeof(name)) {
             case 'number':
               for (var i = 0; i < name; i++) {
                 this.addShape(this.createShape(shapeType));
               }
-
               break;
-
             case 'string':
               this.addShape(this.createShape(shapeType, name));
               break;
-
             default:
               //Array
               var names = name;
-
               for (var i = 0, cnt = names.length; i < cnt; i++) {
                 this.addShape(this.createShape(shapeType, names[i]));
               }
-
               break;
           }
         }
       } else if (Array.isArray(createCallback)) {
         var shapes = createCallback;
-
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
           var shape = shapes[i];
           this.addShape(this.createShape(shape.type, shape.name));
@@ -2134,14 +2020,12 @@
       } else if (typeof createCallback === 'function') {
         createCallback.call(this);
       }
-
       this.setUpdateShapesCallback(GetValue$1(config, 'update'));
     },
     setUpdateShapesCallback: function setUpdateShapesCallback(callback) {
       if (callback === undefined) {
         callback = ClearAll;
       }
-
       this.dirty = this.dirty || this.updateCallback !== callback;
       this.updateCallback = callback;
       return this;
@@ -2153,55 +2037,43 @@
 
   var TransformMatrix = Phaser.GameObjects.Components.TransformMatrix;
   var TransformXY = Phaser.Math.TransformXY;
-
   var WorldXYToGameObjectLocalXY = function WorldXYToGameObjectLocalXY(gameObject, worldX, worldY, camera, out) {
     if (camera === undefined) {
       camera = gameObject.scene.cameras.main;
     }
-
     if (out === undefined) {
       out = {};
     } else if (out === true) {
       out = globOut;
     }
-
     var csx = camera.scrollX;
     var csy = camera.scrollY;
     var px = worldX + csx * gameObject.scrollFactorX - csx;
     var py = worldY + csy * gameObject.scrollFactorY - csy;
-
     if (gameObject.parentContainer) {
       if (tempMatrix === undefined) {
         tempMatrix = new TransformMatrix();
       }
-
       gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
       tempMatrix.applyInverse(px, py, out);
     } else {
       TransformXY(px, py, gameObject.x, gameObject.y, gameObject.rotation, gameObject.scaleX, gameObject.scaleY, out);
     }
-
     out.x += gameObject.displayOriginX;
     out.y += gameObject.displayOriginY;
     return out;
   };
-
   var tempMatrix;
   var globOut = {};
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var CustomShapes = /*#__PURE__*/function (_BaseShapes) {
     _inherits(CustomShapes, _BaseShapes);
-
     var _super = _createSuper(CustomShapes);
-
     function CustomShapes(scene, x, y, width, height, config) {
       var _this;
-
       _classCallCheck(this, CustomShapes);
-
       if (IsPlainObject(x)) {
         config = x;
         x = GetValue(config, 'x', 0);
@@ -2209,15 +2081,11 @@
         width = GetValue(config, 'width', 2);
         height = GetValue(config, 'height', 2);
       }
-
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = GetValue(config, 'type', 'rexCustomShapes');
-
       _this.buildShapes(config);
-
       return _this;
     }
-
     _createClass(CustomShapes, [{
       key: "worldToLocalXY",
       value: function worldToLocalXY(worldX, worldY, camera, out) {
@@ -2225,14 +2093,11 @@
           out = camera;
           camera = undefined;
         }
-
         return WorldXYToGameObjectLocalXY(this, worldX, worldY, camera, out);
       }
     }]);
-
     return CustomShapes;
   }(BaseShapes);
-
   Object.assign(CustomShapes.prototype, ShapesUpdateMethods);
 
   function Factory (x, y, width, height, config) {
@@ -2247,11 +2112,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', width);
     var gameObject = new CustomShapes(this.scene, 0, 0, width, height, config);
@@ -2262,23 +2125,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -2288,31 +2145,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -2320,31 +2176,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var CustomShapesPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CustomShapesPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(CustomShapesPlugin);
-
     function CustomShapesPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, CustomShapesPlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexCustomShapes', Factory, Creator);
       return _this;
     }
-
     _createClass(CustomShapesPlugin, [{
       key: "start",
       value: function start() {
@@ -2352,10 +2202,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return CustomShapesPlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.CustomShapes', CustomShapes);
 
   return CustomShapesPlugin;

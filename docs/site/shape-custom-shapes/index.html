@@ -2161,6 +2161,40 @@
     Lines
   </a>
   
+    <nav class="md-nav" aria-label="Lines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-path" class="md-nav__link">
+    Create path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    Transform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-path-segment" class="md-nav__link">
+    Display path segment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -6435,10 +6469,57 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_2" type="checkbox" id="__nav_12_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12_2">
+          Round to
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Round to" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_2">
+          <span class="md-nav__icon md-icon"></span>
+          Round to
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../round-to/" class="md-nav__link">
+        Round to
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
       <a href="../snap/" class="md-nav__link">
         Snap
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -8823,6 +8904,40 @@
     Lines
   </a>
   
+    <nav class="md-nav" aria-label="Lines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-path" class="md-nav__link">
+    Create path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    Transform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-path-segment" class="md-nav__link">
+    Display path segment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -9258,6 +9373,7 @@ or
 </li>
 </ul>
 <h5 id="lines">Lines<a class="headerlink" href="#lines" title="Permanent link">&para;</a></h5>
+<h6 id="create-path">Create path<a class="headerlink" href="#create-path" title="Permanent link">&para;</a></h6>
 <ul>
 <li>Start, clear points data
     <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
@@ -9335,6 +9451,9 @@ or
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<h6 id="transform">Transform<a class="headerlink" href="#transform" title="Permanent link">&para;</a></h6>
+<ul>
 <li>Offset all points
     <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">offset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
@@ -9344,6 +9463,26 @@ or
 <li><code>angle</code> : Rotate angle in degrees.</li>
 </ul>
 </li>
+</ul>
+<h6 id="display-path-segment">Display path segment<a class="headerlink" href="#display-path-segment" title="Permanent link">&para;</a></h6>
+<ol>
+<li>Create path, under <code>customShapes.isSizeChanged</code> condition.</li>
+<li>Display segment of path
+    <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">setDisplayPathSegment</span><span class="p">(</span><span class="nx">startT</span><span class="p">,</span> <span class="nx">endT</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">setDisplayPathSegment</span><span class="p">(</span><span class="nx">endT</span><span class="p">);</span>  <span class="c1">// startT = 0</span>
+</code></pre></div><ul>
+<li><code>startT</code>, <code>endT</code> : <code>0</code>~<code>1</code>. Start, end position on path, in percentage of path.<ul>
+<li><code>0</code> : Start position of path</li>
+<li><code>1</code> : End position of path</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h6 id="misc">Misc<a class="headerlink" href="#misc" title="Permanent link">&para;</a></h6>
+<ul>
 <li>Get polygon
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">toPolygon</span><span class="p">();</span>
 </code></pre></div><ul>

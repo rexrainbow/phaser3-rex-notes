@@ -18,6 +18,7 @@ Get snapshot image, built-in methods of phaser.
     game.renderer.snapshotArea(x, y, width, height, callback);
     // game.renderer.snapshot(x, y, width, height, callback, type, encoderOptions);
     ```
+    - `x`, `y`, `width`, `height` : Top-left position and size based on game viewport. (not the world)
 - A pixel
     ```javascript
     game.renderer.snapshotPixel(x, y, callback);

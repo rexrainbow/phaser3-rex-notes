@@ -12,10 +12,10 @@ var PressCell = function (table, tableConfig) {
     table._press = new Press(table, pressConfig);
     table._press
         .on('pressstart', function (press, gameObject, lastPointer) {
-            EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, press.x, press.y, lastPointer);
+            EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, press.worldX, press.worldY, lastPointer);
         }, this)
         .on('pressend', function (press, gameObject, lastPointer) {
-            EmitCellEvent(this.eventEmitter, 'cell.pressend', table, press.x, press.y, lastPointer);
+            EmitCellEvent(this.eventEmitter, 'cell.pressend', table, press.worldX, press.worldY, lastPointer);
         }, this)
 };
 

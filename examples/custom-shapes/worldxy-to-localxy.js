@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import CustomShapesPlugin from '../../plugins/customshapes-plugin.js';
-import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,16 +13,27 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var gameObject = this.add.image(400, 390, 'mushroom');
+        var speechBubble, gameObject;
 
-        var speechBubble = CreateSpeechBubbleShape(this)
+        gameObject = this.add.image(400, 400, 'mushroom')
+            .setInteractive({ draggable: true })
+            .on('drag', function (pointer, dragX, dragY) {
+                gameObject.setPosition(dragX, dragY);
+                speechBubble.setData({
+                    x: gameObject.x,
+                    y: gameObject.y - 30
+                })
+                    .setDirty()
+            });
+
+        speechBubble = CreateSpeechBubbleShape(this)
             .setFillStyle(0x008800, 1)
             .setStrokeStyle(2, 0xffffff, 1)
             .setPosition(400, 300)
             .setSize(200, 100)
-            .setData({
-                x: gameObject.x,
-                y: gameObject.y
+            .setData({ 
+                x: gameObject.x, 
+                y: gameObject.y - 30
             })
 
         var graphics = this.add.graphics({
@@ -32,15 +42,6 @@ class Demo extends Phaser.Scene {
             }
         })
             .strokeRectShape(speechBubble.getBounds())
-
-
-        var gui = new Dat.GUI();
-        gui.add(gameObject, 'x', 330, 470)
-            .onChange(function () {
-                speechBubble
-                    .setData('x', gameObject.x)
-                    .setDirty()
-            })
 
     }
 
@@ -53,21 +54,12 @@ var CreateSpeechBubbleShape = function (scene) {
         create: { lines: 1 },
         update: function () {
             var radius = 20;
-            var indent = 15;
-
-            var localX;
-            var worldX = this.getData('x');
-            var worldY = this.getData('y');
-            if ((worldX !== undefined) && (worldY !== undefined)) {
-                var localXY = this.worldToLocalXY(worldX, worldY, true);
-                localX = Phaser.Math.Clamp(localXY.x, 0, this.width);
-
-            } else {
-                localX = this.width * 0.5;
-            }
 
             var left = 0, right = this.width,
-                top = 0, bottom = this.height, boxBottom = bottom - indent;
+                top = 0, bottom = this.height,
+                centerX = this.width / 2;
+            var localXY = this.worldToLocalXY(this.getData('x'), this.getData('y'), true);
+
             this.getShapes()[0]
                 .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
                 .fillStyle(this.fillColor, this.fillAlpha)
@@ -75,11 +67,11 @@ var CreateSpeechBubbleShape = function (scene) {
                 // top line, right arc
                 .startAt(left + radius, top).lineTo(right - radius, top).arc(right - radius, top + radius, radius, 270, 360)
                 // right line, bottom arc
-                .lineTo(right, boxBottom - radius).arc(right - radius, boxBottom - radius, radius, 0, 90)
-                // bottom indent
-                .lineTo(localX + 10, boxBottom).lineTo(localX, bottom).lineTo(localX - 10, boxBottom)
+                .lineTo(right, bottom - radius).arc(right - radius, bottom - radius, radius, 0, 90)
+                // bottom line
+                .lineTo(centerX + 10, bottom).lineTo(localXY.x, localXY.y).lineTo(centerX - 10, bottom)
                 // bottom line, left arc
-                .lineTo(left + radius, boxBottom).arc(left + radius, boxBottom - radius, radius, 90, 180)
+                .lineTo(left + radius, bottom).arc(left + radius, bottom - radius, radius, 90, 180)
                 // left line, top arc
                 .lineTo(left, top + radius).arc(left + radius, top + radius, radius, 180, 270)
                 .close();

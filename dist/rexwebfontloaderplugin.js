@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,40 +66,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -137,66 +120,63 @@
   });
 
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
-
   var TestFont = function TestFont(familyName, testString) {
     // Get canvas from pool
     var canvas = CanvasPool.create();
-    var context = canvas.getContext('2d'); // Resize canvas
+    var context = canvas.getContext('2d');
 
+    // Resize canvas
     var font = "8px ".concat(familyName);
     context.font = font;
     var width = Math.ceil(context.measureText(testString).width);
     var baseline = width;
     var height = 2 * baseline;
-
     if (width !== canvas.width || height !== canvas.height) {
       canvas.width = width;
       canvas.height = height;
-    } // Clear canvas
+    }
 
-
+    // Clear canvas
     context.fillStyle = '#000';
-    context.fillRect(0, 0, width, height); // Draw text
+    context.fillRect(0, 0, width, height);
 
+    // Draw text
     context.textBaseline = 'alphabetic';
     context.fillStyle = '#fff';
     context.font = font;
-    context.fillText(testString, 0, baseline); // Check image data array
+    context.fillText(testString, 0, baseline);
 
+    // Check image data array
     var imagedata = context.getImageData(0, 0, width, height).data;
     var hasPixel = false;
-
     for (var i = 0, cnt = imagedata.length; i < cnt; i += 4) {
       if (imagedata[i] > 0) {
         hasPixel = true;
         break;
       }
-    } // Recycle canvas
+    }
 
-
+    // Recycle canvas
     CanvasPool.remove(canvas);
     return hasPixel;
   };
 
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var WebFont = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits(WebFont, _Phaser$Loader$File);
-
     var _super = _createSuper(WebFont);
-
     function WebFont() {
       _classCallCheck(this, WebFont);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(WebFont, [{
       key: "load",
-      value: // constructor(loader, fileConfig) {
+      value:
+      // constructor(loader, fileConfig) {
       //     super(loader, fileConfig);
       // }
+
       function load() {
         if (this.state === FILE_POPULATED) {
           //  Can happen for example in a JSONFile if they've provided a JSON object instead of a URL
@@ -205,14 +185,12 @@
           // start loading task
           var config = this.config;
           this.testString = GetValue(config, 'testString', undefined);
-
           if (this.testString !== undefined) {
             this.testInterval = GetValue(config, 'testInterval', 20);
             this.fontTests = {};
             delete config.testString;
             delete config.testInterval;
           }
-
           config.active = this.onLoad.bind(this);
           config.inactive = this.onError.bind(this);
           config.fontactive = this.onFontActive.bind(this);
@@ -233,7 +211,6 @@
               setTimeout(testFonts, this.testInterval);
             }
           }.bind(this);
-
           testFonts();
         }
       }
@@ -247,18 +224,15 @@
       value: function onFontActive(familyName, fvd) {
         if (this.testString !== undefined) {
           var testString;
-
           if (typeof this.testString === 'string') {
             testString = this.testString;
           } else {
             testString = this.testString[familyName];
           }
-
           if (testString !== undefined) {
             this.fontTests[familyName] = testString;
           }
         }
-
         this.loader.emit('webfontactive', this, familyName, fvd);
       }
     }, {
@@ -270,7 +244,6 @@
       key: "testFonts",
       value: function testFonts() {
         var allPass = true;
-
         for (var familyName in this.fontTests) {
           if (TestFont(familyName, this.fontTests[familyName])) {
             delete this.fontTests[familyName];
@@ -278,20 +251,16 @@
             allPass = false;
           }
         }
-
         return allPass;
       }
     }]);
-
     return WebFont;
   }(Phaser.Loader.File);
 
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
   var loaderCallback = function loaderCallback(key, config) {
     if (IsPlainObject(key)) {
       config = key;
-
       if (config.hasOwnProperty('config')) {
         config.type = 'webfont';
         config.url = '';
@@ -311,33 +280,26 @@
         config: config
       };
     }
-
     this.addFile(new WebFont(this, config));
     return this;
   };
 
   var WebFontLoaderPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(WebFontLoaderPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(WebFontLoaderPlugin);
-
     function WebFontLoaderPlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, WebFontLoaderPlugin);
-
       _this = _super.call(this, pluginManager);
       pluginManager.registerFileType('rexWebFont', loaderCallback);
       return _this;
     }
-
     _createClass(WebFontLoaderPlugin, [{
       key: "addToScene",
       value: function addToScene(scene) {
         scene.sys.load['rexWebFont'] = loaderCallback;
       }
     }]);
-
     return WebFontLoaderPlugin;
   }(Phaser.Plugins.BasePlugin);
 

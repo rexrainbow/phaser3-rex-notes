@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var txt0 = CreateCanvasInput(this, 'Apple').setPosition(400, 200)
-
-        var txt1 = CreateCanvasInput(this, 'A').setPosition(400, 400).appendText('pple')
+        var txt1 = CreateCanvasInput(this, 'A').setPosition(400, 300).appendText('pple')
+        var txt2 = CreateCanvasInput(this, 'Apple').setPosition(400, 400).setReadOnly()
     }
 
     update() { }
@@ -24,12 +24,9 @@ class Demo extends Phaser.Scene {
 var CreateCanvasInput = function (scene, text) {
     return scene.add.rexCanvasInput(
         {
-            width: 600, height: 100,
+            width: 600,
 
             background: {
-                stroke: 'white',
-                cornerRadius: 20,
-
                 // Solution A
                 'focus.stroke': 'red',
             },
@@ -38,14 +35,10 @@ var CreateCanvasInput = function (scene, text) {
             //     stroke: 'red',
             // },
 
-            innerBounds: {
-                stroke: 'darkcyan'
-            },
-            padding: 20,
             style: {
-                fontSize: '24px',
-                backgroundBottomY: 8,
-                backgroundHeight: 32,
+                fontSize: 24,
+                backgroundBottomY: 5,
+                backgroundHeight: 24,
 
                 // Solution A
                 'cursor.color': 'black',
@@ -56,13 +49,6 @@ var CreateCanvasInput = function (scene, text) {
             //     color: 'black',
             //     backgroundColor: 'white'
             // },
-
-            wrap: {
-                lineHeight: 40,
-                maxLines: 0,       // Set maxLines to 0
-                letterSpacing: 1,
-                padding: { bottom: 10 },
-            },
 
             text: text,
         }

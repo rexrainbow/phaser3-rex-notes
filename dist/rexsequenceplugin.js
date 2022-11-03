@@ -9,7 +9,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -19,7 +18,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -28,12 +26,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -46,14 +42,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -61,12 +55,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -74,40 +66,31 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
@@ -126,7 +109,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -136,70 +118,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -209,6 +181,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -233,8 +206,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -246,7 +220,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -257,28 +230,22 @@
     if (startIdx === undefined) {
       startIdx = 0;
     }
-
     if (endIdx === undefined) {
       endIdx = src.length;
     }
-
     dest.length = endIdx - startIdx;
-
     for (var i = 0, len = dest.length; i < len; i++) {
       dest[i] = src[i + startIdx];
     }
-
     return dest;
   };
 
   var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
   var HEX = /^0x[0-9A-F]+$/i;
-
   var TypeConvert = function TypeConvert(s) {
     if (typeof s !== 'string') {
       return s;
     }
-
     if (s === '') {
       s = null;
     } else if (FLOAT.test(s)) {
@@ -292,7 +259,6 @@
         s = true;
       }
     }
-
     return s;
   };
 
@@ -301,11 +267,9 @@
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var RunCommands = function RunCommands(queue, scope, config) {
     var reverse = GetValue(config, 'reverse', false);
     var retVal;
-
     if (IsArray(queue[0])) {
       if (!reverse) {
         for (var i = 0, len = queue.length; i < len; i++) {
@@ -319,23 +283,19 @@
     } else {
       retVal = RunCommand(queue, scope, config);
     }
-
     return retVal;
   };
-
   var RunCommand = function RunCommand(cmd, scope, config) {
     var argsConvert = GetValue(config, 'argsConvert', undefined);
     var argsConvertScope = GetValue(config, 'argsConvertScope', undefined);
     var fnName = cmd[0];
     ARGS = Copy(ARGS, cmd, 1);
-
     if (argsConvert) {
       // convert string to floating number, boolean, null, or string        
       if (argsConvert === true) {
         argsConvert = TypeConvert;
         argsConvertScope = undefined;
       }
-
       for (var i = 0, len = ARGS.length; i < len; i++) {
         if (argsConvertScope) {
           ARGS[i] = argsConvert.call(argsConvertScope, ARGS[i], cmd);
@@ -344,29 +304,23 @@
         }
       }
     }
-
     var fn;
-
     if (typeof fnName === 'string') {
       fn = scope[fnName];
-
       if (fn == null) {
         fn = GetValue(scope, fnName, null);
       }
     } else {
       fn = fnName;
     }
-
     var retValue = fn.apply(scope, ARGS);
     return retValue;
   };
-
   var ARGS = []; // reuse this array
 
   var Sequence = /*#__PURE__*/function () {
     function Sequence(config) {
       _classCallCheck(this, Sequence);
-
       // Event emitter
       this.setEventEmitter(GetValue$1(config, 'eventEmitter', undefined));
       this.commands = [];
@@ -374,15 +328,12 @@
       this.config = undefined;
       this.index = 0;
       this.indexStep = 1; // 1, or -1
-
       this.setYoyo(GetValue$1(config, 'yoyo', false));
       this.setRepeat(GetValue$1(config, 'repeat', 0));
       this.setLoop(GetValue$1(config, 'loop', false));
       this.state = 0; // 0: idle, 1: run, 2: run-last, 3: completed
-
       this.task = undefined;
     }
-
     _createClass(Sequence, [{
       key: "shutdown",
       value: function shutdown() {
@@ -417,13 +368,11 @@
         this.index = 0;
         this.indexStep = 1;
         this.state = 1;
-
         if (this.commands.length > 0) {
           this.runNextCommands();
         } else {
           this.complete();
         }
-
         return this;
       }
     }, {
@@ -433,7 +382,6 @@
           this.task.off('complete', this.runNextCommands, this);
           this.task = undefined;
         }
-
         this.state = 0;
         return this;
       }
@@ -443,7 +391,6 @@
         if (yoyo === undefined) {
           yoyo = true;
         }
-
         this.yoyo = yoyo;
         return this;
       }
@@ -460,7 +407,6 @@
         if (loop === undefined) {
           loop = true;
         }
-
         this.loop = loop;
         this.resetRepeatCount();
         return this;
@@ -485,29 +431,23 @@
       key: "runNextCommands",
       value: function runNextCommands() {
         var task, isFirstCommand, isLastCommand;
-
         while (1) {
           if (this.state === 2) {
             this.complete();
             return;
           }
-
           task = RunCommands(this.commands[this.index], this.scope);
-
           if (task && typeof task.once === 'function') {
             task.once('complete', this.runNextCommands, this);
             this.task = task;
           } else {
             this.task = undefined;
           }
-
           isFirstCommand = this.index === 0;
           isLastCommand = this.index === this.commands.length - 1;
-
           if (!this.yoyo) {
             if (isLastCommand) {
               this.index = 0;
-
               if (this.repeatCount > 0) {
                 this.repeatCount--;
               } else {
@@ -520,7 +460,6 @@
             if (this.indexStep > 0 && isLastCommand || this.indexStep < 0 && isFirstCommand) {
               this.indexStep = -this.indexStep;
               this.index += this.indexStep;
-
               if (this.repeatCount > 0) {
                 this.repeatCount--;
               } else {
@@ -530,7 +469,6 @@
               this.index += this.indexStep;
             }
           }
-
           if (this.task) {
             return this;
           }
@@ -543,23 +481,17 @@
         this.emit('complete', this.scope, this);
       }
     }]);
-
     return Sequence;
   }();
-
   Object.assign(Sequence.prototype, EventEmitterMethods);
 
   var SequencePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(SequencePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(SequencePlugin);
-
     function SequencePlugin(pluginManager) {
       _classCallCheck(this, SequencePlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(SequencePlugin, [{
       key: "start",
       value: function start() {
@@ -572,7 +504,6 @@
         return new Sequence(config);
       }
     }]);
-
     return SequencePlugin;
   }(Phaser.Plugins.BasePlugin);
 

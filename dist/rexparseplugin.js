@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,56 +75,43 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -142,39 +120,30 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var LoadScript = function LoadScript(url, onload) {
     var scripts = document.getElementsByTagName('script');
-
     for (var i = 0, cnt = scripts.length; i < cnt; i++) {
       if (scripts[i].src.indexOf(url) != -1) {
         if (onload) {
           onload();
         }
-
         return;
       }
     }
-
     var newScriptTag = document.createElement('script');
     newScriptTag.setAttribute('src', url);
-
     if (onload) {
       newScriptTag.onload = onload;
     }
-
     document.head.appendChild(newScriptTag);
   };
 
@@ -186,41 +155,31 @@
 
   var VERSION = '2.11.0';
   var CDNURL = "https://npmcdn.com/parse@".concat(VERSION, "/dist/parse.min.js");
-
   var Preload = function Preload(url) {
     if (url === undefined) {
       url = CDNURL;
     }
-
     return LoadScriptPromise(url);
   };
 
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var UUID = Phaser.Utils.String.UUID;
-
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits(AwaitFile, _Phaser$Loader$File);
-
     var _super = _createSuper(AwaitFile);
-
     function AwaitFile(loader, fileConfig) {
       _classCallCheck(this, AwaitFile);
-
       if (!fileConfig.hasOwnProperty('type')) {
         fileConfig.type = 'await';
       }
-
       if (!fileConfig.hasOwnProperty('url')) {
         fileConfig.url = '';
       }
-
       if (!fileConfig.hasOwnProperty('key')) {
         fileConfig.key = UUID();
       }
-
       return _super.call(this, loader, fileConfig);
     }
-
     _createClass(AwaitFile, [{
       key: "load",
       value: function load() {
@@ -234,7 +193,6 @@
           var scope = config.scope;
           var successCallback = this.onLoad.bind(this);
           var failureCallback = this.onError.bind(this);
-
           if (callback) {
             if (scope) {
               callback.call(scope, successCallback, failureCallback);
@@ -257,7 +215,6 @@
         this.loader.nextFile(this, false);
       }
     }]);
-
     return AwaitFile;
   }(Phaser.Loader.File);
 
@@ -267,7 +224,6 @@
         setTimeout(successCallback, 0);
       })["catch"](failureCallback);
     };
-
     this.addFile(new AwaitFile(this, {
       config: {
         callback: callback
@@ -280,7 +236,6 @@
     function ObjectFactory() {
       _classCallCheck(this, ObjectFactory);
     }
-
     _createClass(ObjectFactory, [{
       key: "initializeApp",
       value: function initializeApp(config) {
@@ -293,7 +248,6 @@
         ObjectFactory.prototype[type] = callback;
       }
     }]);
-
     return ObjectFactory;
   }();
 
@@ -302,6 +256,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -326,8 +281,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -339,7 +295,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -350,37 +305,29 @@
     if (config.startIndex === undefined) {
       config.startIndex = 0;
     }
-
     if (config.totalLines === undefined) {
       config.totalLines = Infinity;
     }
-
     if (config.linesPerPage === undefined) {
       config.linesPerPage = 1000;
     }
-
     config.remainderLines = config.totalLines;
     return QueryNextPage(config);
   };
-
   var QueryNextPage = function QueryNextPage(config) {
     var query = config.query;
     var lineCount = Math.min(config.remainderLines, config.linesPerPage);
     config.remainderLines -= lineCount;
     return query.skip(config.startIndex).limit(lineCount).find().then(function (items) {
       var done = config.remainderLines === 0 || items.length < lineCount; // Is last page
-
       if (config.forEachPageCallback) {
         done |= !!config.forEachPageCallback(items);
       }
-
       if (done) {
         var out;
-
         if (config.resolveCallback) {
           out = config.resolveCallback();
         }
-
         return Promise.resolve(out);
       } else {
         config.startIndex += items.length;
@@ -409,11 +356,9 @@
       if (startIndex === undefined) {
         startIndex = 0;
       }
-
       if (itemCount === undefined) {
         itemCount = Infinity;
       }
-
       this.items.length = 0;
       var self = this;
       return Load(this.query, startIndex, itemCount).then(function (items) {
@@ -450,7 +395,6 @@
   var PageLoader = /*#__PURE__*/function () {
     function PageLoader(config) {
       _classCallCheck(this, PageLoader);
-
       this.items = [];
       this.startIndex = 0;
       this.pageIndex = 0;
@@ -458,7 +402,6 @@
       this.setItemCount(GetValue(config, 'itemCount', 100));
       this.setQuery(GetValue(config, 'query', undefined));
     }
-
     _createClass(PageLoader, [{
       key: "setItemCount",
       value: function setItemCount(itemCount) {
@@ -485,36 +428,27 @@
             return i + this.startIndex;
           }
         }
-
         return -1;
       }
     }]);
-
     return PageLoader;
   }();
-
   Object.assign(PageLoader.prototype, Methods$5);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -524,31 +458,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -556,12 +489,10 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
@@ -574,13 +505,11 @@
     var query = this.baseQuery;
     var isItem = data instanceof this.customClass;
     var key, value;
-
     for (var i = 0, cnt = this.primaryKeys.length; i < cnt; i++) {
       key = this.primaryKeys[i];
       value = isItem ? data.get(key) : data[key];
       query.equalTo(key, value);
     }
-
     return query;
   };
 
@@ -609,7 +538,6 @@
       array[i] = array[j];
       array[j] = temp;
     }
-
     return array;
   };
 
@@ -618,16 +546,14 @@
       count = query;
       query = undefined;
     }
-
     if (query === undefined) {
       query = this.baseQuery;
     }
-
     if (count === undefined) {
       count = 1;
-    } // Load all item Id
+    }
 
-
+    // Load all item Id
     query.select('id');
     var self = this;
     return Load(query).then(function (items) {
@@ -635,12 +561,10 @@
       Shuffle(items);
       count = Math.min(count, items.length);
       var itemIds = [];
-
       for (var i = 0; i < count; i++) {
         itemIds.push(items[i].id);
-      } // Load first N items by item Id
-
-
+      }
+      // Load first N items by item Id
       query = self.baseQuery.containedIn('objectId', itemIds);
       return Load(query);
     });
@@ -650,20 +574,16 @@
     loadItem: function loadItem(itemId, select) {
       if (typeof itemId === 'string') {
         var query = this.baseQuery;
-
         if (select) {
           query = query.select(select);
         }
-
         return query.get(itemId);
       } else {
         // Query by primary keys
         var query = this.getQuery(itemId).limit(1);
-
         if (select) {
           query = query.select(select);
         }
-
         return query.find().then(function (result) {
           return Promise.resolve(result[0]);
         });
@@ -688,7 +608,6 @@
       if (query === undefined) {
         query = this.baseQuery;
       }
-
       return Load(query);
     },
     loadRandomItems: LoadRandomItems
@@ -700,7 +619,6 @@
       if (items.length === 0) {
         return Promise.resolve();
       }
-
       return Parse.Object.destroyAll(items);
     });
   };
@@ -713,7 +631,6 @@
       if (query === undefined) {
         query = this.baseQuery;
       }
-
       return Delete(query);
     }
   };
@@ -722,17 +639,13 @@
     if (startIdx === undefined) {
       startIdx = 0;
     }
-
     if (endIdx === undefined) {
       endIdx = src.length;
     }
-
     dest.length = endIdx - startIdx;
-
     for (var i = 0, len = dest.length; i < len; i++) {
       dest[i] = src[i + startIdx];
     }
-
     return dest;
   };
 
@@ -744,7 +657,6 @@
     if (!item) {
       item = new itemClass();
     }
-
     item.set(data);
     return item;
   };
@@ -753,23 +665,17 @@
     if (!ownerRead && !ownerWrite) {
       return item;
     }
-
     var currentUser = Parse.User.current();
-
     if (!currentUser) {
       return item;
     }
-
     var acl = new Parse.ACL(currentUser);
-
     if (!ownerWrite) {
       acl.setPublicWriteAccess(true);
     }
-
     if (!ownerRead) {
       acl.setPublicReadAccess(true);
     }
-
     item.setACL(acl);
     return item;
   };
@@ -779,7 +685,6 @@
     if (IsArray(data)) {
       return this.saveItems(data);
     }
-
     var self = this;
     return new Promise(function (resolve, reject) {
       if (self.primaryKeys.length > 0) {
@@ -798,11 +703,9 @@
     var self = this;
     return new Promise(function (resolve, reject) {
       var items = [];
-
       if (self.primaryKeys.length > 0) {
         var promises = [],
-            promise;
-
+          promise;
         var _loop = function _loop() {
           var data = dataArray[i];
           promise = self.loadItem(data, 'id').then(function (item) {
@@ -812,11 +715,9 @@
           });
           promises.push(promise);
         };
-
         for (var i = 0, cnt = dataArray.length; i < cnt; i++) {
           _loop();
         }
-
         Promise.all(promises).then(function () {
           return resolve(items);
         })["catch"](reject);
@@ -826,7 +727,6 @@
           SetOwnerAccessMode(item, self.ownerRead, self.ownerWrite);
           items.push(item);
         }
-
         return resolve(items);
       }
     }).then(function (items) {
@@ -838,30 +738,24 @@
     if (query === undefined) {
       query = this.baseQuery;
     }
-
     return query.count();
   };
 
   var ItemTable = /*#__PURE__*/function () {
     function ItemTable(config) {
       _classCallCheck(this, ItemTable);
-
       this.pageLoader = new PageLoader();
       this.setClassName(GetValue(config, 'className', 'Item'));
       this.setItemCount(GetValue(config, 'itemCount', 100));
       this.setQuery(); // Reset to base query
-
       this.primaryKeys = [];
       var primaryKeys = GetValue(config, 'primaryKeys', undefined);
-
       if (primaryKeys) {
         this.setPrimaryKey(primaryKeys);
       }
-
       this.setOwnerReadMode(GetValue(config, 'ownerRead', undefined));
       this.setOwnerWriteMode(GetValue(config, 'ownerWrite', undefined));
     }
-
     _createClass(ItemTable, [{
       key: "setClassName",
       value: function setClassName(className) {
@@ -879,7 +773,6 @@
         } else {
           Copy(this.primaryKeys, key);
         }
-
         return this;
       }
     }, {
@@ -911,7 +804,6 @@
         if (query === undefined) {
           query = this.baseQuery;
         }
-
         this.pageLoader.setQuery(query);
         return this;
       }
@@ -936,10 +828,8 @@
         return this.pageLoader.isLastPage;
       }
     }]);
-
     return ItemTable;
   }();
-
   var methods$2 = {
     getQuery: GetQuery,
     save: Save,
@@ -977,22 +867,22 @@
     // - window
     if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
       return false;
-    } // Support: Firefox <20
+    }
+
+    // Support: Firefox <20
     // The try/catch suppresses exceptions thrown when attempting to access
     // the "constructor" property of certain host objects, ie. |window.location|
     // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-
-
     try {
       if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
         return false;
       }
     } catch (e) {
       return false;
-    } // If the function hasn't returned already, we're confident that
+    }
+
+    // If the function hasn't returned already, we're confident that
     // |obj| is a plain object, created by {} or constructed with new Object
-
-
     return true;
   };
 
@@ -1028,23 +918,18 @@
     var newRecord = {
       userID: this.userID
     };
-
     if (this.boardID !== undefined) {
       newRecord.boardID = this.boardID;
     }
-
     if (this.userName) {
       newRecord.userName = this.userName;
     }
-
     var curTimeData = GetTime(timeStamp);
-
     if (this.timeFilters !== false) {
       for (var t in this.timeFilters) {
         if (!this.timeFilters[t]) {
           continue;
         }
-
         newRecord[TimeTagKeys[t]] = curTimeData[t];
         newRecord[ScoreKeys[t]] = score;
       }
@@ -1052,29 +937,23 @@
       // No time filters
       newRecord.score = score;
     }
-
     if (this.tag) {
       newRecord.tag = this.tag;
     }
-
     if (extraData) {
       Object.assign(newRecord, extraData);
     }
-
     var curTimeData = GetTime();
     var self = this;
     return this.getMyRecordQuery().find().then(function (results) {
       var prevRecord = results[0];
-
       if (prevRecord) {
         if (self.timeFilters !== false) {
           for (var t in self.timeFilters) {
             if (!self.timeFilters[t]) {
               continue;
             }
-
             var timeTagKey = TimeTagKeys[t];
-
             if (prevRecord.get(timeTagKey) === newRecord[timeTagKey]) {
               var scoreKey = ScoreKeys[t];
               newRecord[scoreKey] = Math.max(prevRecord.get(scoreKey), newRecord[scoreKey]);
@@ -1085,7 +964,6 @@
           newRecord.score = Math.max(prevRecord.get('score'), newRecord.score);
         }
       }
-
       var item = DataToItem(newRecord, self.customClass, prevRecord);
       return item.save();
     });
@@ -1131,44 +1009,36 @@
       if (!this.resetQueryFlag) {
         return this;
       }
-
       this.resetQueryFlag = false;
       this.page.setQuery(this.getPageQuery());
       return this;
     }
   };
-
   var ItemsToDataArray = function ItemsToDataArray(items) {
     var dataArray = [],
-        data;
+      data;
     var scoreKey = ScoreKeys[this.timeFilterType[0]];
-
     for (var i = 0, cnt = items.length; i < cnt; i++) {
       data = items[i].toJSON();
-
       if (this.timeFilters !== false) {
-        data.score = data[scoreKey]; // Remove timeFilterKeys, and scoreKeys
-
+        data.score = data[scoreKey];
+        // Remove timeFilterKeys, and scoreKeys
         for (var t in this.timeFilters) {
           delete data[TimeTagKeys[t]];
           delete data[ScoreKeys[t]];
         }
       }
-
       dataArray.push(data);
     }
-
     return dataArray;
   };
 
   var GetScore = function GetScore(userID) {
     return this.getMyRecordQuery(userID).find().then(function (results) {
       var myRecord = results[0];
-
       if (myRecord) {
         myRecord = myRecord.toJSON();
       }
-
       return Promise.resolve(myRecord);
     });
   };
@@ -1183,17 +1053,14 @@
       query: query,
       forEachPageCallback: function forEachPageCallback(items) {
         var item;
-
         for (var i = 0, cnt = items.length; i < cnt; i++) {
           item = items[i];
-
           if (testCallback(item)) {
             out.item = item;
             out.index = startIndex + i;
             return true;
           }
         }
-
         startIndex += items.length;
       },
       resolveCallback: function resolveCallback() {
@@ -1206,13 +1073,10 @@
     if (userID === undefined) {
       userID = this.userID;
     }
-
     var query = this.getPageQuery();
-
     var testCallback = function testCallback(item) {
       return item.get('userID') === userID;
     };
-
     return FindFirst(query, testCallback).then(function (result) {
       return Promise.resolve({
         userID: userID,
@@ -1226,7 +1090,6 @@
       if (userID === undefined) {
         userID = this.userID;
       }
-
       var query = this.getRecordQuery(undefined, undefined, userID, undefined);
       return Delete(query);
     },
@@ -1234,11 +1097,9 @@
       if (boardId === undefined) {
         boardId = this.boardID;
       }
-
       if (tag === undefined) {
         tag = this.tag;
       }
-
       var query = this.getRecordQuery(boardId, tag, undefined, undefined);
       return Delete(query);
     }
@@ -1250,23 +1111,19 @@
       query = boardID !== undefined ? query.equalTo('boardID', boardID) : query;
       query = customTag !== undefined ? query.equalTo('tag', customTag) : query;
       query = userID !== undefined ? query.equalTo('userID', userID) : query;
-
       if (timeTagKey !== undefined) {
         query = query.equalTo(timeTagKey[0], timeTagKey[1]);
       }
-
       return query;
     },
     getMyRecordQuery: function getMyRecordQuery(userID) {
       if (userID === undefined) {
         userID = this.userID;
       }
-
       return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1);
     },
     getPageQuery: function getPageQuery() {
       var timeTagKey, scoreKey;
-
       if (this.timeFilters !== false) {
         var t = this.timeFilterType[0];
         timeTagKey = [TimeTagKeys[t], GetTime()[t]];
@@ -1276,7 +1133,6 @@
         timeTagKey = undefined;
         scoreKey = 'score';
       }
-
       var query = this.getRecordQuery(this.boardID, this.tag, undefined, timeTagKey);
       query = query.descending(scoreKey);
       return query;
@@ -1286,7 +1142,6 @@
   var LeaderBoard = /*#__PURE__*/function () {
     function LeaderBoard(config) {
       _classCallCheck(this, LeaderBoard);
-
       this.setClassName(GetValue(config, 'className', 'Item'));
       this.userInfo = {
         userID: undefined,
@@ -1302,7 +1157,6 @@
       });
       this.resetQueryFlag = true;
     }
-
     _createClass(LeaderBoard, [{
       key: "shutdown",
       value: function shutdown() {}
@@ -1343,7 +1197,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -1374,7 +1227,6 @@
             y: GetValue(filters, 'year', true)
           };
         }
-
         return this;
       }
     }, {
@@ -1411,10 +1263,8 @@
         return this.page.isFullPage === false;
       }
     }]);
-
     return LeaderBoard;
   }();
-
   var methods$1 = {
     post: Post,
     getScore: GetScore,
@@ -1436,7 +1286,6 @@
       return SignUpThenLogin(userName, password);
     });
   };
-
   var SignUpThenLogin = function SignUpThenLogin(userName, password) {
     var user = new Parse.User();
     user.set('username', userName).set('password', password);
@@ -1448,19 +1297,14 @@
 
   var ParsePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(ParsePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(ParsePlugin);
-
     function ParsePlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, ParsePlugin);
-
       _this = _super.call(this, pluginManager);
       _this.add = new ObjectFactory();
       return _this;
     }
-
     _createClass(ParsePlugin, [{
       key: "start",
       value: function start() {
@@ -1474,10 +1318,8 @@
         return this;
       }
     }]);
-
     return ParsePlugin;
   }(Phaser.Plugins.BasePlugin);
-
   var methods = {
     quickLogin: QuickLogin
   };

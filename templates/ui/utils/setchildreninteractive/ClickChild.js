@@ -7,6 +7,8 @@ var ClickChild = function (config) {
     var clickConfig = GetValue(config, 'click', undefined);
     if (clickConfig === false) {
         return;
+    } else if (clickConfig === true) {
+        clickConfig = undefined;
     }
 
     if (clickConfig === undefined) {

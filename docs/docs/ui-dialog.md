@@ -171,6 +171,14 @@ var dialog = scene.rexUI.add.dialog({
         action: 0,
     },
 
+    proportion: {
+        title: 0,
+        content: 0,
+        description: 0,
+        choices: 0,
+        actions: 0,
+    },
+
     expand: {
         title: true,
         content: true,
@@ -263,6 +271,12 @@ var dialog = scene.rexUI.add.dialog({
     - `space.choice` : Space between each choice-button game objects.
     - `space.choicesBackgroundLeft`, `space.choicesBackgroundRight`, `space.choicesBackgroundTop`, `space.choicesBackgroundBottom` : Padding space around choices-background. 
     - `space.action` : Space between each action-button game objects.
+- `proportion` : Keep height of element, or expand height of element.
+    - `proportion.title` : Set to `1` to expand height of title. Default is `0`.
+    - `proportion.content` : Set to `1` to expand height of content. Default is `0`.
+    - `proportion.description` : Set to `1` to expand height of description. Default is `0`.
+    - `proportion.choices` : Set to `1` to expand height of choices. Default is `0`.
+    - `proportion.actions` : Set to `1` to expand height of actions. Default is `0`.
 - `expand` : Expand width of element
     - `expand.title` : Set `true` to expand width of title game object. Default is `true`.
     - `expand.content` : Set `true` to expand width of content game object. Default is `true`.

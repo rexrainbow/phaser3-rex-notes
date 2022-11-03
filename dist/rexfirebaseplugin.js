@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,56 +75,43 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -142,37 +120,32 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var VERSION = '7.19.0';
-
   var GetDefaultUrl = function GetDefaultUrl(version) {
     if (version === undefined) {
       version = VERSION;
     }
-
     return {
       app: "https://www.gstatic.com/firebasejs/".concat(version, "/firebase-app.js"),
       // auth: `https://www.gstatic.com/firebasejs/${version}/firebase-auth.js`,
       database: "https://www.gstatic.com/firebasejs/".concat(version, "/firebase-database.js"),
-      firestore: "https://www.gstatic.com/firebasejs/".concat(version, "/firebase-firestore.js") // storage: `https://www.gstatic.com/firebasejs/${version}/firebase-storage.js`,
+      firestore: "https://www.gstatic.com/firebasejs/".concat(version, "/firebase-firestore.js")
+      // storage: `https://www.gstatic.com/firebasejs/${version}/firebase-storage.js`,
+
       // analytics: `https://www.gstatic.com/firebasejs/${version}/firebase-analytics.js`,
       // functions: `https://www.gstatic.com/firebasejs${version}/firebase-functions.js`,
       // messaging: `https://www.gstatic.com/firebasejs/${version}/firebase-messaging.js`,
       // performance: `https://www.gstatic.com/firebasejs/${version}/firebase-performance.js`,
       // 'remote-config': `https://www.gstatic.com/firebasejs/${version}/firebase-remote-config.js`
-
     };
   };
 
@@ -180,7 +153,6 @@
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -188,7 +160,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -198,19 +169,15 @@
    * @param {object} ret JSON object to return, set null to return a new object
    * @returns {object} this object
    */
-
   var Clone = function Clone(obj, out) {
     var objIsArray = Array.isArray(obj);
-
     if (out === undefined) {
       out = objIsArray ? [] : {};
     } else {
       Clear$1(out);
     }
-
     if (objIsArray) {
       out.length = obj.length;
-
       for (var i = 0, cnt = obj.length; i < cnt; i++) {
         out[i] = obj[i];
       }
@@ -219,7 +186,6 @@
         out[key] = obj[key];
       }
     }
-
     return out;
   };
 
@@ -228,6 +194,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://opensource.org/licenses/MIT|MIT License}
    */
+
   /**
    * Creates a new Object using all values from obj1.
    * 
@@ -241,39 +208,31 @@
    *
    * @return {object} The merged object. `obj1` and `obj2` are not modified.
    */
-
   var MergeRight = function MergeRight(obj1, obj2) {
     var clone = Clone(obj1);
-
     for (var key in obj2) {
       if (clone.hasOwnProperty(key)) {
         clone[key] = obj2[key];
       }
     }
-
     return clone;
   };
 
   var LoadScript = function LoadScript(url, onload) {
     var scripts = document.getElementsByTagName('script');
-
     for (var i = 0, cnt = scripts.length; i < cnt; i++) {
       if (scripts[i].src.indexOf(url) != -1) {
         if (onload) {
           onload();
         }
-
         return;
       }
     }
-
     var newScriptTag = document.createElement('script');
     newScriptTag.setAttribute('src', url);
-
     if (onload) {
       newScriptTag.onload = onload;
     }
-
     document.head.appendChild(newScriptTag);
   };
 
@@ -287,7 +246,6 @@
     if (time === undefined) {
       time = 0;
     }
-
     return new Promise(function (resolve, reject) {
       setTimeout(function () {
         resolve(result);
@@ -298,32 +256,26 @@
   var AvailableTestPromise = function AvailableTestPromise(config) {
     if (AvailableTest(config)) {
       return Promise.resolve();
-    } // console.log('tset again')
+    }
 
-
+    // console.log('tset again')
     return Delay(10).then(function () {
       return AvailableTestPromise(config);
     });
   };
-
   var AvailableTest = function AvailableTest(config) {
     var testCallback;
-
     for (var k in config) {
       if (!config[k]) {
         continue;
       }
-
       testCallback = TestCallbacks[k];
-
       if (testCallback && !testCallback()) {
         return false;
       }
     }
-
     return true;
   };
-
   var TestCallbacks = {
     database: function database() {
       return firebase.database !== undefined;
@@ -341,27 +293,21 @@
       // Get default version
       urlConfig = MergeRight(GetDefaultUrl(), urlConfig);
     }
-
     return LoadScriptPromise(urlConfig.app) // Load firebase-app
     .then(function () {
       // Load other SDK
       var promises = [];
       var url;
-
       for (var k in urlConfig) {
         if (k === 'app') {
           continue;
         }
-
         url = urlConfig[k];
-
         if (!url) {
           continue;
         }
-
         promises.push(LoadScriptPromise(url));
       }
-
       if (promises.length === 0) {
         return Promise.resolve();
       } else {
@@ -374,37 +320,28 @@
       if (firebaseConfig !== undefined) {
         firebase.initializeApp(firebaseConfig);
       }
-
       return Promise.resolve();
     });
   };
 
   var FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
   var UUID = Phaser.Utils.String.UUID;
-
   var AwaitFile = /*#__PURE__*/function (_Phaser$Loader$File) {
     _inherits(AwaitFile, _Phaser$Loader$File);
-
     var _super = _createSuper(AwaitFile);
-
     function AwaitFile(loader, fileConfig) {
       _classCallCheck(this, AwaitFile);
-
       if (!fileConfig.hasOwnProperty('type')) {
         fileConfig.type = 'await';
       }
-
       if (!fileConfig.hasOwnProperty('url')) {
         fileConfig.url = '';
       }
-
       if (!fileConfig.hasOwnProperty('key')) {
         fileConfig.key = UUID();
       }
-
       return _super.call(this, loader, fileConfig);
     }
-
     _createClass(AwaitFile, [{
       key: "load",
       value: function load() {
@@ -418,7 +355,6 @@
           var scope = config.scope;
           var successCallback = this.onLoad.bind(this);
           var failureCallback = this.onError.bind(this);
-
           if (callback) {
             if (scope) {
               callback.call(scope, successCallback, failureCallback);
@@ -441,7 +377,6 @@
         this.loader.nextFile(this, false);
       }
     }]);
-
     return AwaitFile;
   }(Phaser.Loader.File);
 
@@ -451,7 +386,6 @@
         setTimeout(successCallback, 0);
       })["catch"](failureCallback);
     };
-
     this.addFile(new AwaitFile(this, {
       config: {
         callback: callback
@@ -464,7 +398,6 @@
     function ObjectFactory() {
       _classCallCheck(this, ObjectFactory);
     }
-
     _createClass(ObjectFactory, [{
       key: "initializeApp",
       value: function initializeApp(config) {
@@ -477,7 +410,6 @@
         ObjectFactory.prototype[type] = callback;
       }
     }]);
-
     return ObjectFactory;
   }();
 
@@ -495,7 +427,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -505,70 +436,60 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
@@ -578,6 +499,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -602,8 +524,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -615,7 +538,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -646,31 +568,31 @@
     // - window
     if (_typeof(obj) !== 'object' || obj.nodeType || obj === obj.window) {
       return false;
-    } // Support: Firefox <20
+    }
+
+    // Support: Firefox <20
     // The try/catch suppresses exceptions thrown when attempting to access
     // the "constructor" property of certain host objects, ie. |window.location|
     // https://bugzilla.mozilla.org/show_bug.cgi?id=814622
-
-
     try {
       if (obj.constructor && !{}.hasOwnProperty.call(obj.constructor.prototype, 'isPrototypeOf')) {
         return false;
       }
     } catch (e) {
       return false;
-    } // If the function hasn't returned already, we're confident that
+    }
+
+    // If the function hasn't returned already, we're confident that
     // |obj| is a plain object, created by {} or constructed with new Object
-
-
     return true;
   };
 
   var Send$1 = function Send(message) {
     if (!this.sendToRef || this.sendToRef.key !== this.receiverID) {
       this.sendToRef = this.database.ref(this.rootPath).child(this.receiverID);
-    } // Clear message
+    }
 
-
+    // Clear message
     if (message === undefined) {
       return this.sendToRef.remove(); // Promise
     }
@@ -680,11 +602,9 @@
       senderID: this.userID,
       stamp: this.stamp
     };
-
     if (this.userName !== undefined) {
       d.senderName = this.userName;
     }
-
     this.skipFirst = false;
     this.stamp = !this.stamp;
     return this.sendToRef.set(d);
@@ -695,11 +615,9 @@
       if (this.isReceiving && this.receiverRef.key === this.receiverID) {
         return this;
       }
-
       this.stopReceiving();
       this.isReceiving = true;
       this.skipFirst = true; // Skip previous message
-
       this.receiverRef = this.database.ref(this.rootPath).child(this.receiverID);
       this.receiverRef.on('value', OnReceive, this);
       this.receiverRef.onDisconnect().remove();
@@ -709,7 +627,6 @@
       if (!this.isReceiving) {
         return this;
       }
-
       this.isReceiving = false;
       this.receiverRef.off('value', OnReceive, this);
       this.receiverRef.remove();
@@ -717,19 +634,15 @@
       return this;
     }
   };
-
   var OnReceive = function OnReceive(snapshot) {
     if (this.skipFirst) {
       this.skipFirst = false;
       return;
     }
-
     var d = snapshot.val();
-
     if (d == null) {
       return;
     }
-
     delete d.stamp;
     this.history.add(d);
     this.emit(this.eventNameMap.receive, d);
@@ -738,25 +651,19 @@
   var History = /*#__PURE__*/function () {
     function History(config) {
       _classCallCheck(this, History);
-
       this.maxLength = GetValue(config, 'maxLength', -1); // -1: Infinity
-
       this.records = [];
     }
-
     _createClass(History, [{
       key: "add",
       value: function add(record) {
         if (this.maxLength === 0) {
           return this;
         }
-
         this.records.push(record);
-
         if (this.maxLength > 0 && this.records.length > this.maxLength) {
           this.records.shift();
         }
-
         return this;
       }
     }, {
@@ -771,7 +678,6 @@
         if (this.maxLength === 0) {
           return this;
         }
-
         this.records.forEach(function (record) {
           if (record.senderID === userID) {
             record.senderName = userName;
@@ -780,22 +686,21 @@
         return this;
       }
     }]);
-
     return History;
   }();
 
   var Broadcast = /*#__PURE__*/function () {
     function Broadcast(config) {
       _classCallCheck(this, Broadcast);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this.eventNameMap = GetValue(config, 'eventNames', DefaultEventNames$2);
       this.database = firebase.database();
-      this.setRootPath(GetValue(config, 'root', '')); // Sender
+      this.setRootPath(GetValue(config, 'root', ''));
 
+      // Sender
       this.skipFirst = true;
       this.stamp = false;
       this.userInfo = {
@@ -803,23 +708,22 @@
         userName: undefined
       };
       this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
-      this.setReceiver(GetValue(config, 'receiverID', '')); // Receiver
+      this.setReceiver(GetValue(config, 'receiverID', ''));
 
-      this.isReceiving = false; // History messages
+      // Receiver
+      this.isReceiving = false;
 
+      // History messages
       var historyMaxLength = GetValue(config, 'history', 0);
-
       if (historyMaxLength === true) {
         historyMaxLength = -1;
       } else if (historyMaxLength === false) {
         historyMaxLength = 0;
       }
-
       this.history = new History({
         maxLength: historyMaxLength
       });
     }
-
     _createClass(Broadcast, [{
       key: "shutdown",
       value: function shutdown() {
@@ -863,7 +767,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -878,7 +781,6 @@
         if (userID === this.userID) {
           this.userName = userName;
         }
-
         this.history.changeUserName(userID, userName);
         return this;
       }
@@ -894,10 +796,8 @@
         return this;
       }
     }]);
-
     return Broadcast;
   }();
-
   var methods$7 = {
     send: Send$1
   };
@@ -909,23 +809,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -935,31 +829,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -967,12 +860,10 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
@@ -997,20 +888,16 @@
       if (itemID == null) {
         return null;
       }
-
       return this.itemID2Index[itemID];
     },
     getItemFromItemID: function getItemFromItemID(itemID) {
       if (itemID == null) {
         return null;
       }
-
       var index = this.getItemIndexFromItemID(itemID);
-
       if (index == null) {
         return null;
       }
-
       return this.items[index];
     },
     forEach: function forEach(callback, scope) {
@@ -1020,12 +907,10 @@
     updateItemID2Index: function updateItemID2Index() {
       Clear$1(this.itemID2Index);
       var itemID;
-
       for (var i = 0, cnt = this.items.length; i < cnt; i++) {
         itemID = this.items[i][this.keyItemID];
         this.itemID2Index[itemID] = i;
       }
-
       return this;
     }
   };
@@ -1052,14 +937,11 @@
     if (index >= array.length) {
       return;
     }
-
     var len = array.length - 1;
     var item = array[index];
-
     for (var i = index; i < len; i++) {
       array[i] = array[i + 1];
     }
-
     array.length = len;
     return item;
   };
@@ -1070,7 +952,6 @@
     this.emit(this.eventNameMap.add, item);
     this.emit(this.eventNameMap.update, this.items);
   };
-
   var ChangeChildCallback = function ChangeChildCallback(snapshot, prevName) {
     var prevItem = RemoveItem.call(this, snapshot);
     this.updateItemID2Index();
@@ -1079,14 +960,12 @@
     this.emit(this.eventNameMap.change, newItem, prevItem);
     this.emit(this.eventNameMap.update, this.items);
   };
-
   var RemoveChildCallback = function RemoveChildCallback(snapshot) {
     var item = RemoveItem.call(this, snapshot);
     this.updateItemID2Index();
     this.emit(this.eventNameMap.remove, item);
     this.emit(this.eventNameMap.update, this.items);
   };
-
   var GetAllChildrenCallback = function GetAllChildrenCallback(snapshot) {
     this.clear();
     snapshot.forEach(function (childSnapshot) {
@@ -1095,38 +974,31 @@
     this.updateItemID2Index();
     this.emit(this.eventNameMap.update, this.items);
   };
-
   var AddItem = function AddItem(snapshot, prevName, pushMode) {
     var item;
     var callback = this.getItemCallback;
     var scope = this.getItemCallbackScope;
-
     if (scope) {
       item = callback.call(scope, snapshot);
     } else {
       item = callback(snapshot);
     }
-
     if (pushMode) {
       this.items.push(item);
       return item;
     }
-
     if (prevName == null) {
       this.items.unshift(item);
     } else {
       var i = this.itemID2Index[prevName];
-
       if (i === this.items.length - 1) {
         this.items.push(item);
       } else {
         this.items.splice(i + 1, 0, item);
       }
     }
-
     return item;
   };
-
   var RemoveItem = function RemoveItem(snapshot) {
     var index = this.itemID2Index[snapshot.key];
     var item = SpliceOne(this.items, index);
@@ -1176,7 +1048,6 @@
   var ItemList = /*#__PURE__*/function () {
     function ItemList(config) {
       _classCallCheck(this, ItemList);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
@@ -1190,7 +1061,6 @@
       this.setGetitemCallback(GetValue(config, 'getItemCallback', DefaultGetItemCallback), GetValue(config, 'getItemCallbackScope', this));
       this.setQuery(GetValue(config, 'query', undefined));
     }
-
     _createClass(ItemList, [{
       key: "shutdown",
       value: function shutdown() {
@@ -1213,7 +1083,6 @@
         if (typeof mode === 'string') {
           mode = MODE[mode];
         }
-
         this.mode = mode;
         this.updater = Updaters[mode];
         return this;
@@ -1242,7 +1111,6 @@
           // !query && !this.query
           return this;
         }
-
         this.stopUpdate().clear();
         this.isUpdating = true;
         this.updater.start.call(this, query);
@@ -1254,22 +1122,18 @@
         if (!this.query || !this.isUpdating) {
           return this;
         }
-
         this.isUpdating = false;
         this.updater.stop.call(this);
         return this;
       }
     }]);
-
     return ItemList;
   }();
-
   var DefaultGetItemCallback = function DefaultGetItemCallback(snapshot) {
     var item = snapshot.val();
     item[this.keyItemID] = snapshot.key;
     return item;
   };
-
   Object.assign(ItemList.prototype, EventEmitterMethods, Methods$9);
   var DefaultEventNames$1 = {
     update: 'update',
@@ -1293,12 +1157,11 @@
       userID = this.userID;
       userName = this.userName;
     }
-
     if (this.contains(userID)) {
       return Promise.resolve(); // Promise
-    } // Prepare data
+    }
 
-
+    // Prepare data
     var d = {
       userID: userID,
       userName: userName
@@ -1315,17 +1178,16 @@
       if (maxUsers === 0) {
         self.isInList = true;
         return Promise.resolve();
-      } // Has user count limitation
+      }
 
-
+      // Has user count limitation
       return rootRef.limitToFirst(maxUsers).once('value').then(function (snapshot) {
         if (Contains(snapshot, userID)) {
           self.isInList = true;
           return Promise.resolve();
         }
-
-        self.isInList = false; // UserID is not in firstN list
-
+        self.isInList = false;
+        // UserID is not in firstN list
         return userRef.remove().then(function () {
           return userRef.onDisconnect().cancel();
         }).then(function () {
@@ -1334,12 +1196,10 @@
       });
     });
   };
-
   var Contains = function Contains(snapshot, userID) {
     var result = false;
     snapshot.forEach(function (childSnapshot) {
       var user = childSnapshot.val();
-
       if (user.userID === userID) {
         result = true;
         return true;
@@ -1352,7 +1212,6 @@
     if (userID === undefined) {
       userID = this.userID;
     }
-
     if (!this.contains(userID)) {
       return Promise.resolve(); // Promise
     }
@@ -1366,7 +1225,6 @@
     var self = this;
     return new Promise(function (resolve, reject) {
       var userRef = self.getUserRef();
-
       if (userRef) {
         // Find userRef
         resolve(userRef);
@@ -1389,7 +1247,6 @@
   var OnlineUserList = /*#__PURE__*/function () {
     function OnlineUserList(config) {
       _classCallCheck(this, OnlineUserList);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
@@ -1418,27 +1275,23 @@
       this.userID2ItemID = {};
       this.userList.on(this.userList.eventNames.add, function (user) {
         this.userID2ItemID[user.userID] = user.joinAt;
-
         if (user.userID === this.userInfo.userID) {
           this.emit(this.userList.eventNames.init, this.getUsers());
         }
       }, this).on(this.userList.eventNames.remove, function (user) {
         delete this.userID2ItemID[user.userID];
-
         if (user.userID === this.userID) {
           this.isInList = false;
         }
       }, this).on(this.userList.eventNames.change, function (currUserInfo, prevUserInfo) {
         var userID = currUserInfo.userID,
-            userName = currUserInfo.userName,
-            prevUserName = prevUserInfo.userName;
-
+          userName = currUserInfo.userName,
+          prevUserName = prevUserInfo.userName;
         if (userName !== prevUserName) {
           this.emit(this.userList.eventNames.changename, userID, userName, prevUserName);
         }
       }, this);
     }
-
     _createClass(OnlineUserList, [{
       key: "shutdown",
       value: function shutdown() {
@@ -1486,7 +1339,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -1513,7 +1365,6 @@
         if (this.maxUsers === 0) {
           return false;
         }
-
         return this.userList.getItems().length >= this.maxUsers;
       }
     }, {
@@ -1522,7 +1373,6 @@
         if (userID === undefined) {
           userID = this.userID;
         }
-
         var user = this.usersList.getItems()[0];
         return user && user.userID === userID;
       }
@@ -1532,11 +1382,9 @@
         if (userID === undefined) {
           userID = this.userID;
         }
-
         if (!this.contains(userID)) {
           return null;
         }
-
         var itemID = this.userID2ItemID[userID];
         return this.userList.getItemFromItemID(itemID);
       }
@@ -1551,11 +1399,9 @@
         if (userID === undefined) {
           userID = this.userID;
         }
-
         if (!this.contains(userID)) {
           return null;
         }
-
         var itemID = this.userID2ItemID[userID];
         return this.rootRef.child(itemID);
       }
@@ -1565,18 +1411,15 @@
         if (userID === undefined) {
           userID = this.userID;
         }
-
         return this.userID2ItemID.hasOwnProperty(userID);
       }
     }, {
       key: "startUpdate",
       value: function startUpdate() {
         var query = this.database.ref(this.rootPath);
-
         if (this.maxUsers > 0) {
           query = query.limitToFirst(this.maxUsers);
         }
-
         this.userList.startUpdate(query);
         return this;
       }
@@ -1587,10 +1430,8 @@
         return this;
       }
     }]);
-
     return OnlineUserList;
   }();
-
   var methods$6 = {
     join: Join,
     leave: Leave,
@@ -1632,10 +1473,10 @@
     });
     return userList;
   };
-
   var OnLeftRoom$1 = function OnLeftRoom() {
-    this.emit('room.leave'); // Clear room info later
+    this.emit('room.leave');
 
+    // Clear room info later
     var self = this;
     setTimeout(function () {
       self.roomID = undefined;
@@ -1663,11 +1504,9 @@
 
   var CreateBroadcast$1 = function CreateBroadcast(config) {
     var broadcastConfig = GetValue(config, 'broadcast', true);
-
     if (!broadcastConfig) {
       return null;
     }
-
     var broadcast = new Broadcast({
       eventEmitter: this.getEventEmitter(),
       eventNames: {
@@ -1691,31 +1530,27 @@
     var outObject;
     var value;
     var key;
-
-    if (_typeof(inObject) !== 'object' || inObject === null) {
+    if (inObject == null || _typeof(inObject) !== 'object') {
       //  inObject is not an object
       return inObject;
-    } //  Create an array or object to hold the values
-
-
-    outObject = Array.isArray(inObject) ? [] : {};
-
-    for (key in inObject) {
-      value = inObject[key]; //  Recursively (deep) copy for nested objects, including arrays
-
-      outObject[key] = DeepClone(value);
     }
 
+    //  Create an array or object to hold the values
+    outObject = Array.isArray(inObject) ? [] : {};
+    for (key in inObject) {
+      value = inObject[key];
+
+      //  Recursively (deep) copy for nested objects, including arrays
+      outObject[key] = DeepClone(value);
+    }
     return outObject;
   };
 
   var Tree = /*#__PURE__*/function () {
     function Tree() {
       _classCallCheck(this, Tree);
-
       this.data = {};
     }
-
     _createClass(Tree, [{
       key: "setValue",
       value: function setValue(keys, value) {
@@ -1726,7 +1561,6 @@
         } else {
           SetValue(this.data, keys, value);
         }
-
         return this;
       }
     }, {
@@ -1738,17 +1572,13 @@
           if (typeof keys === 'string') {
             keys = keys.split('.');
           }
-
           var entry = this.data;
-
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
             if (!IsObject(entry)) {
               return undefined;
             }
-
             entry = entry[keys[i]];
           }
-
           return entry;
         }
       }
@@ -1766,24 +1596,19 @@
           if (typeof keys === 'string') {
             keys = keys.split('.');
           }
-
           var lastKey = keys.pop();
           var entry = this.data;
-
           for (var i = 0, cnt = keys.length; i < cnt; i++) {
             if (!IsObject(entry)) {
               // Stop here
               return this;
             }
-
             entry = entry[keys[i]];
           }
-
           if (IsObject(entry)) {
             delete entry[lastKey];
           }
         }
-
         return this;
       }
     }, {
@@ -1793,10 +1618,8 @@
         return this;
       }
     }]);
-
     return Tree;
   }();
-
   var IsObject = function IsObject(obj) {
     return obj != null && _typeof(obj) === 'object';
   };
@@ -1804,18 +1627,15 @@
   var BaseUpdater = /*#__PURE__*/function () {
     function BaseUpdater(config) {
       _classCallCheck(this, BaseUpdater);
-
       // Event emitter
       this.setEventEmitter(config.eventEmitter, config.EventEmitterClass);
       this.parent = config.parent;
       this.key = config.key;
-
       if (this.parent) {
         this.fullKeyPath = ExtendKeyPath(this.parent.fullKeyPath, this.key);
       } else {
         this.fullKeyPath = '';
       }
-
       this.type = config.type;
       this.eventNameMap = config.eventNames;
       this.table = config.table;
@@ -1823,7 +1643,6 @@
       this.setRootPath();
       this.children = {};
     }
-
     _createClass(BaseUpdater, [{
       key: "shutdown",
       value: function shutdown() {
@@ -1841,18 +1660,14 @@
           var parentRootPath = this.parent ? this.parent.rootPath : '';
           rootPath = "".concat(parentRootPath, "/").concat(this.key);
         }
-
         this.rootPath = rootPath;
         var child;
-
         for (var key in this.children) {
           child = this.children[key];
-
           if (child instanceof BaseUpdater) {
             child.setRootPath();
           }
         }
-
         return this;
       }
     }, {
@@ -1878,14 +1693,12 @@
           this.clear(); // Clear
         } else if (value === undefined) {
           var data = key; // JSON data
-
           for (key in this.children) {
             // Not in new data
             if (!data.hasOwnProperty(key)) {
               this.removeChild(key);
             }
           }
-
           for (key in data) {
             this.setChildData(key, data[key]);
           }
@@ -1899,26 +1712,25 @@
       key: "clear",
       value: function clear() {
         this.table.removeKey(this.fullKeyPath);
-
         for (var key in this.children) {
           this.removeChild(key);
         }
-
         return this;
-      } // Overwrite
+      }
 
+      // Overwrite
     }, {
       key: "childClass",
       get: function get() {
         return undefined;
-      } // Overwrite
+      }
 
+      // Overwrite
     }, {
       key: "setChildData",
       value: function setChildData(key, data) {
         var keyPath = ExtendKeyPath(this.fullKeyPath, key);
         this.table.setValue(keyPath, data);
-
         if (!this.children.hasOwnProperty(key)) {
           if (this.childClass) {
             var child = new this.childClass({
@@ -1935,10 +1747,10 @@
         } else {
           this.children[key].setData(data);
         }
-
         return this;
-      } // Overwrite
+      }
 
+      // Overwrite
     }, {
       key: "removeChild",
       value: function removeChild(key) {
@@ -1946,22 +1758,21 @@
           this.children[key].destroy();
           delete this.children[key];
         }
-
         return this;
-      } // Overwrite
+      }
 
+      // Overwrite
     }, {
       key: "startUpdate",
-      value: function startUpdate() {} // Overwrite
+      value: function startUpdate() {}
 
+      // Overwrite
     }, {
       key: "stopUpdate",
       value: function stopUpdate() {}
     }]);
-
     return BaseUpdater;
   }();
-
   var ExtendKeyPath = function ExtendKeyPath(baseKeyPath, newKey) {
     if (baseKeyPath == null || baseKeyPath === '') {
       return newKey;
@@ -1971,20 +1782,15 @@
       return "".concat(baseKeyPath, ".").concat(newKey);
     }
   };
-
   Object.assign(BaseUpdater.prototype, EventEmitterMethods);
 
   var ColumnUpdater = /*#__PURE__*/function (_BaseUpdater) {
     _inherits(ColumnUpdater, _BaseUpdater);
-
     var _super = _createSuper(ColumnUpdater);
-
     function ColumnUpdater() {
       _classCallCheck(this, ColumnUpdater);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(ColumnUpdater, [{
       key: "startUpdate",
       value: function startUpdate() {
@@ -2005,24 +1811,20 @@
       key: "addCol",
       value: function addCol(snapshot) {
         var key = snapshot.key,
-            value = snapshot.val();
+          value = snapshot.val();
         this.setData(key, value);
-
         switch (this.type) {
           case 1:
             this.emit(this.eventNameMap.addkey0, key, value);
             break;
-
           case 2:
             this.emit(this.eventNameMap.addkey1, this.key, key, value);
             break;
-
           default:
             // 3
             this.emit(this.eventNameMap.addkey2, this.pageKey, this.key, key, value);
             break;
         }
-
         this.emit(this.eventNameMap.update, this.table.data);
       }
     }, {
@@ -2030,46 +1832,38 @@
       value: function removeCol(snapshot) {
         var key = snapshot.key;
         this.removeChild(key);
-
         switch (this.type) {
           case 1:
             this.emit(this.eventNameMap.removekey0, key);
             break;
-
           case 2:
             this.emit(this.eventNameMap.removekey1, this.key, key);
             break;
-
           default:
             // 3
             this.emit(this.eventNameMap.removekey2, this.pageKey, this.key, key);
             break;
         }
-
         this.emit(this.eventNameMap.update, this.table.data);
       }
     }, {
       key: "changeColValue",
       value: function changeColValue(snapshot) {
         var key = snapshot.key,
-            value = snapshot.val();
+          value = snapshot.val();
         this.setData(key, value);
-
         switch (this.type) {
           case 1:
             this.emit(this.eventNameMap.changekey0, key, value);
             break;
-
           case 2:
             this.emit(this.eventNameMap.changekey1, this.key, key, value);
             break;
-
           default:
             // 3
             this.emit(this.eventNameMap.changekey2, this.pageKey, this.key, key, value);
             break;
         }
-
         this.emit(this.eventNameMap.update, this.table.data);
       }
     }, {
@@ -2078,21 +1872,16 @@
         return this.parent.key;
       }
     }]);
-
     return ColumnUpdater;
   }(BaseUpdater);
 
   var RowUpdater = /*#__PURE__*/function (_BaseUpdater) {
     _inherits(RowUpdater, _BaseUpdater);
-
     var _super = _createSuper(RowUpdater);
-
     function RowUpdater() {
       _classCallCheck(this, RowUpdater);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(RowUpdater, [{
       key: "startUpdate",
       value: function startUpdate() {
@@ -2111,14 +1900,12 @@
       key: "addRow",
       value: function addRow(snapshot) {
         var key = snapshot.key,
-            value = snapshot.val();
+          value = snapshot.val();
         this.setData(key, value);
-
         switch (this.type) {
           case 2:
             this.emit(this.eventNameMap.addkey0, this.key, key, value);
             break;
-
           default:
             // 3
             this.emit(this.eventNameMap.addkey1, this.key, key, value);
@@ -2130,12 +1917,10 @@
       value: function removeRow(snapshot) {
         var key = snapshot.key;
         this.removeChild(key);
-
         switch (this.type) {
           case 2:
             this.emit(this.eventNameMap.removekey0, key);
             break;
-
           default:
             // 3
             this.emit(this.eventNameMap.removekey1, this.key, key);
@@ -2153,21 +1938,16 @@
         return this.parent.key;
       }
     }]);
-
     return RowUpdater;
   }(BaseUpdater);
 
   var PageUpdater = /*#__PURE__*/function (_BaseUpdater) {
     _inherits(PageUpdater, _BaseUpdater);
-
     var _super = _createSuper(PageUpdater);
-
     function PageUpdater(config) {
       _classCallCheck(this, PageUpdater);
-
       return _super.call(this, config);
     }
-
     _createClass(PageUpdater, [{
       key: "startUpdate",
       value: function startUpdate() {
@@ -2186,7 +1966,7 @@
       key: "addPage",
       value: function addPage(snapshot) {
         var key = snapshot.key,
-            value = snapshot.val();
+          value = snapshot.val();
         this.setData(key, value);
         this.emit(this.eventNameMap.addkey0, key, value);
       }
@@ -2203,7 +1983,6 @@
         return RowUpdater;
       }
     }]);
-
     return PageUpdater;
   }(BaseUpdater);
 
@@ -2219,143 +1998,113 @@
 
   var SetData = function SetData() {
     var key0, key1, key2, value;
-
     switch (arguments.length) {
       case 4:
         var _arguments = Array.prototype.slice.call(arguments);
-
         key0 = _arguments[0];
         key1 = _arguments[1];
         key2 = _arguments[2];
         value = _arguments[3];
         break;
-
       case 3:
         var _arguments2 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments2[0];
         key1 = _arguments2[1];
         value = _arguments2[2];
         break;
-
       case 2:
         var _arguments3 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments3[0];
         value = _arguments3[1];
         break;
-
       default:
         value = arguments[0];
         break;
     }
-
     return this.getRef(key0, key1, key2).set(value);
   };
 
   var RemoveData = function RemoveData() {
     var key0, key1, key2;
-
     switch (arguments.length) {
       case 3:
         var _arguments = Array.prototype.slice.call(arguments);
-
         key0 = _arguments[0];
         key1 = _arguments[1];
         key2 = _arguments[2];
         break;
-
       case 2:
         var _arguments2 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments2[0];
         key1 = _arguments2[1];
         break;
-
       default:
         key0 = arguments[0];
         break;
     }
-
     return this.getRef(key0, key1, key2).remove();
   };
 
   var IncValue = function IncValue() {
     var key0, key1, key2, value;
-
     switch (arguments.length) {
       case 4:
         var _arguments = Array.prototype.slice.call(arguments);
-
         key0 = _arguments[0];
         key1 = _arguments[1];
         key2 = _arguments[2];
         value = _arguments[3];
         break;
-
       case 3:
         var _arguments2 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments2[0];
         key1 = _arguments2[1];
         value = _arguments2[2];
         break;
-
       case 2:
         var _arguments3 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments3[0];
         value = _arguments3[1];
         break;
-
       default:
         value = arguments[0];
         break;
     }
-
     return this.getRef(key0, key1, key2).transaction(function (preValue) {
       if (preValue === null) {
         preValue = 0;
       }
-
       return preValue + value;
     });
   };
 
   var Transaction = function Transaction() {
     var key0, key1, key2, callback;
-
     switch (arguments.length) {
       case 4:
         var _arguments = Array.prototype.slice.call(arguments);
-
         key0 = _arguments[0];
         key1 = _arguments[1];
         key2 = _arguments[2];
         callback = _arguments[3];
         break;
-
       case 3:
         var _arguments2 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments2[0];
         key1 = _arguments2[1];
         callback = _arguments2[2];
         break;
-
       case 2:
         var _arguments3 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments3[0];
         callback = _arguments3[1];
         break;
-
       default:
         callback = arguments[0];
         break;
-    } // callback: function(preValue) { return newValue; }
+    }
 
-
+    // callback: function(preValue) { return newValue; }
     return this.getRef(key0, key1, key2).transaction(callback);
   };
 
@@ -2365,71 +2114,56 @@
 
   var RemoveDataOnDisconnect = function RemoveDataOnDisconnect() {
     var key0, key1, key2;
-
     switch (arguments.length) {
       case 3:
         var _arguments = Array.prototype.slice.call(arguments);
-
         key0 = _arguments[0];
         key1 = _arguments[1];
         key2 = _arguments[2];
         break;
-
       case 2:
         var _arguments2 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments2[0];
         key1 = _arguments2[1];
         break;
-
       case 1:
         key0 = arguments[0];
         break;
     }
-
     return this.getRef(key0, key1, key2).onDisconnect().remove();
   };
 
   var SetDataOnDisconnect = function SetDataOnDisconnect() {
     var key0, key1, key2, value;
-
     switch (arguments.length) {
       case 4:
         var _arguments = Array.prototype.slice.call(arguments);
-
         key0 = _arguments[0];
         key1 = _arguments[1];
         key2 = _arguments[2];
         value = _arguments[3];
         break;
-
       case 3:
         var _arguments2 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments2[0];
         key1 = _arguments2[1];
         value = _arguments2[2];
         break;
-
       case 2:
         var _arguments3 = Array.prototype.slice.call(arguments);
-
         key0 = _arguments3[0];
         value = _arguments3[1];
         break;
-
       default:
         value = arguments[0];
         break;
     }
-
     return this.getRef(key0, key1, key2).onDisconnect().set(value);
   };
 
   var ItemTable = /*#__PURE__*/function () {
     function ItemTable(config) {
       _classCallCheck(this, ItemTable);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
@@ -2441,7 +2175,6 @@
       this.setRootPath(GetValue(config, 'root', ''));
       this.initialFlag = false;
     }
-
     _createClass(ItemTable, [{
       key: "shutdown",
       value: function shutdown() {
@@ -2466,7 +2199,6 @@
         if (typeof type === 'string') {
           type = TABLE_TYPE[type];
         }
-
         this.tableType = type;
         var UpdaterClass = UpdaterClasses[type];
         this.updater = new UpdaterClass({
@@ -2521,10 +2253,8 @@
         return this.table.cloneValue(arguments);
       }
     }]);
-
     return ItemTable;
   }();
-
   var UpdaterClasses = {
     1: ColumnUpdater,
     2: RowUpdater,
@@ -2561,22 +2291,17 @@
 
   var CreateTables$1 = function CreateTables(config) {
     var tablesConfig = GetValue(config, 'tables', undefined);
-
     if (tablesConfig === undefined) {
       return {};
     }
-
     var tableConfig;
     var tables = {};
-
     for (var i = 0, cnt = tablesConfig.length; i < cnt; i++) {
       tableConfig = tablesConfig[i];
       tables[tableConfig.key] = CreateTable$1.call(this, tableConfig);
     }
-
     return tables;
   };
-
   var CreateTable$1 = function CreateTable(config) {
     var key = config.key;
     var table = new ItemTable({
@@ -2608,16 +2333,13 @@
   var GetRoomState = function GetRoomState(filterString) {
     return filterString.split('|')[0];
   };
-
   var GetRoomType = function GetRoomType(filterString) {
     return filterString.split('|')[1];
   };
-
   var GetFilterString = function GetFilterString(roomState, roomType) {
     if (roomType === undefined) {
       roomType = '';
     }
-
     return "".concat(roomState, "|").concat(roomType);
   };
 
@@ -2632,18 +2354,15 @@
     if (config === undefined) {
       config = {};
     }
-
     if (config.roomID == null) {
       config.roomID = this.getRoomRef().push().key;
     }
-
     var self = this;
     return RegisterRoom.call(self, config.roomID).then(function () {
       // Create room
       return CreateRoom.call(self, config);
     });
   };
-
   var RegisterRoom = function RegisterRoom(roomID) {
     return this.getRoomAliveRef(roomID).transaction(function (value) {
       if (value === null) {
@@ -2666,30 +2385,29 @@
     var filterData = config.filterData;
     var roomRef = this.getRoomRef(roomID);
     var roomFilterRef = this.getRoomFilterRef(roomID);
-    var roomMetadataRef = this.getRoomDataRef(roomID); // Remove room when creater is offline
+    var roomMetadataRef = this.getRoomDataRef(roomID);
 
+    // Remove room when creater is offline
     this.isRemoveRoomWhenLeft = !config.presisted;
-
     if (this.isRemoveRoomWhenLeft) {
       roomRef.onDisconnect().remove();
       roomFilterRef.onDisconnect().remove();
       roomMetadataRef.onDisconnect().remove();
     }
-
     var filter = GetFilterString(doorState, roomType);
-    var d = {}; // Room-filter
+    var d = {};
 
+    // Room-filter
     var roomFilterData = {
       filter: filter,
       name: roomName
     };
-
     if (filterData) {
       roomFilterData.data = filterData;
     }
+    d["room-filters/".concat(roomID)] = roomFilterData;
 
-    d["room-filters/".concat(roomID)] = roomFilterData; // Room-metadata
-
+    // Room-metadata
     var roomMetadata = {
       name: roomName,
       filter: filter,
@@ -2703,7 +2421,6 @@
       if (join) {
         var promise = self.userList.setRootPath(self.getUserListPath(roomID)).setMaxUsers(0) // Don't test max user count
         .join(); // Promise
-
         self.userList.setMaxUsers(config.maxUsers);
         return promise.then(resolve, reject);
       } else {
@@ -2713,15 +2430,12 @@
       return self.getRootRef().update(d);
     }).then(function () {
       self.isRoomCreator = true;
-
       if (join) {
         OnJoinRoom.call(self, config);
       }
-
       return Promise.resolve(config);
     });
   };
-
   var DefaultConfig = {
     roomID: '',
     roomName: '',
@@ -2776,29 +2490,23 @@
     if (startIndex === undefined) {
       startIndex = 0;
     }
-
     if (length === undefined) {
       length = array.length;
     }
-
     var randomIndex = startIndex + Math.floor(Math.random() * length);
     return array[randomIndex] === undefined ? null : array[randomIndex];
   };
 
   var CANDIDATES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
   var GetRandomWord = function GetRandomWord(min, max, candidates) {
     if (candidates === undefined) {
       candidates = CANDIDATES;
     }
-
     var count = max === undefined ? min : Between(min, max);
     var word = '';
-
     for (var j = 0; j < count; j++) {
       word += GetRandom(candidates);
     }
-
     return word;
   };
 
@@ -2806,20 +2514,16 @@
     if (config === undefined) {
       config = {};
     }
-
     var digits = GetValue(config, 'digits', 10);
     var candidates = GetValue(config, 'candidates', '0123456789');
     var retry = GetValue(config, 'retry', 1000);
     return TryCreateRandomRoom.call(this, digits, candidates, retry, config);
   };
-
   var TryCreateRandomRoom = function TryCreateRandomRoom(digits, candidates, retry, config) {
     config.roomID = GetRandomWord(digits, digits, candidates);
-
     if (retry <= 0) {
       return Promise.reject(config);
     }
-
     retry--;
     var self = this;
     return this.createRoom(config)["catch"](function () {
@@ -2830,7 +2534,6 @@
   var TryJoinRoom = function TryJoinRoom(config) {
     var leftThenJoin = GetValue(config, 'leftThenJoin', true);
     var self = this;
-
     if (leftThenJoin) {
       return this.leaveRoom().then(function () {
         return JoinRoom$1.call(self, config);
@@ -2839,14 +2542,11 @@
       return JoinRoom$1.call(self, config);
     }
   };
-
   var JoinRoom$1 = function JoinRoom(config) {
     var roomID = GetValue(config, 'roomID', undefined);
-
     if (roomID === undefined) {
       return Promise.reject();
     }
-
     this.isRemoveRoomWhenLeft = false;
     var self = this;
     return IsRoomOpened$1.call(self, config).then(function (metadata) {
@@ -2856,20 +2556,16 @@
       return Promise.resolve(config);
     });
   };
-
   var IsRoomOpened$1 = function IsRoomOpened(config) {
     var self = this;
     return this.getRoomDataRef(config.roomID).once('value').then(function (snapshot) {
       var metadata = snapshot.val();
-
       if (metadata === null) {
         // Can't find room
         return Promise.reject();
       }
-
       config.roomName = metadata.name;
       config.roomType = GetRoomType(metadata.filter);
-
       if (!self.isRoomOpened(metadata)) {
         return Promise.reject();
       } else {
@@ -2903,7 +2599,6 @@
       array[i] = array[j];
       array[j] = temp;
     }
-
     return array;
   };
 
@@ -2911,7 +2606,6 @@
     if (config === undefined) {
       config = {};
     }
-
     var roomType = GetValue(config, 'roomType', '');
     var roomState = GetValue(config, 'door', 'open');
     var self = this;
@@ -2920,12 +2614,10 @@
       return JoinNextRoom.call(self, config, rooms, 0);
     });
   };
-
   var JoinNextRoom = function JoinNextRoom(config, rooms, index) {
     if (index === rooms.length) {
       return Promise.reject();
     }
-
     config.roomID = rooms[index].roomID;
     index++;
     var self = this;
@@ -2937,17 +2629,16 @@
   var LeaveRoom$1 = function LeaveRoom() {
     if (!this.isInRoom()) {
       return Promise.resolve();
-    } // 'userlist.leave' event -> 'room.leave' event -> then
+    }
 
-
+    // 'userlist.leave' event -> 'room.leave' event -> then
     this.leftRoomFlag = true;
-
     if (this.isRemoveRoomWhenLeft) {
       // Remove room, include user list
       return this.removeRoom();
     } else {
-      var prevRoomInfo = this.getRoomInfo(); // Leave user list only        
-
+      var prevRoomInfo = this.getRoomInfo();
+      // Leave user list only        
       return this.userList.leave().then(function () {
         return Promise.resolve(prevRoomInfo);
       });
@@ -2958,11 +2649,9 @@
     if (roomID === undefined) {
       roomID = this.roomID;
     }
-
     if (roomID === undefined) {
       return Promise.resolve();
     }
-
     var d = {};
     d["room-filter/".concat(roomID)] = null;
     d["room-data/".concat(roomID)] = null;
@@ -2988,29 +2677,22 @@
     if (metadata == null) {
       return false;
     }
-
     var state = GetRoomState(metadata.filter);
-
     if (state === 'closed') {
       return false;
     }
-
     var userID = this.userID;
     var IsModerator = metadata.moderators.hasOwnProperty(userID);
-
     if (IsModerator) {
       return true;
     }
-
     switch (metadata.permission) {
       case 'black-list':
         var blackList = metadata['black-list'];
         return !(blackList && blackList.hasOwnProperty(userID));
-
       case 'white-list':
         var whiteList = metadata['white-list'];
         return whiteList && whiteList.hasOwnProperty(userID);
-
       default:
         // 'anyone'
         return true;
@@ -3022,17 +2704,14 @@
       roomState = roomID;
       roomID = undefined;
     }
-
     if (roomID === undefined) {
       roomID = this.roomID;
     }
-
     var self = this;
     return this.hasRoom(roomID).then(function (hasRoom) {
       if (!hasRoom) {
         return Promise.resolve();
       }
-
       var filter = GetFilterString(roomState, self.roomType);
       var d = {};
       d["room-filters/".concat(roomID, "/filter")] = filter;
@@ -3040,11 +2719,9 @@
       return self.getRootRef().update(d);
     });
   };
-
   var OpenRoom = function OpenRoom(roomID) {
     return this.setRoomState(roomID, 'open');
   };
-
   var CloseRoom = function CloseRoom(roomID) {
     return this.setRoomState(roomID, 'closed');
   };
@@ -3054,17 +2731,14 @@
       filterData = roomID;
       roomID = undefined;
     }
-
     if (roomID === undefined) {
       roomID = this.roomID;
     }
-
     var self = this;
     return this.hasRoom(roomID).then(function (hasRoom) {
       if (!hasRoom) {
         return Promise.resolve();
       }
-
       return self.getRoomFilterRef(roomID).child('data').update(filterData);
     });
   };
@@ -3078,17 +2752,14 @@
       roomName = roomID;
       roomID = undefined;
     }
-
     if (roomID === undefined) {
       roomID = this.roomID;
     }
-
     var self = this;
     return this.hasRoom(roomID).then(function (hasRoom) {
       if (!hasRoom) {
         return Promise.resolve();
       }
-
       var d = {};
       d["room-filters/".concat(roomID, "/name")] = roomName;
       d["room-data/".concat(roomID, "/name")] = roomName;
@@ -3100,7 +2771,6 @@
     if (roomID === undefined) {
       return this.userList.getUsers();
     }
-
     var self = this;
     return new Promise(function (resolve, reject) {
       var userList = new ItemList({
@@ -3126,7 +2796,6 @@
     if (roomID === this.roomID) {
       return Promise.resolve(true);
     }
-
     return this.getRoomDataRef(roomID).once('value').then(function (snapshot) {
       var hasRoom = snapshot.val() !== null;
       return Promise.resolve(hasRoom);
@@ -3136,24 +2805,19 @@
   var Methods$8 = {
     getRootRef: function getRootRef(childKey) {
       var ref = this.database.ref(this.rootPath);
-
       if (childKey) {
         ref = ref.child(childKey);
       }
-
       return ref;
     },
     getRoomRef: function getRoomRef(roomID, childKey) {
       var ref = this.getRootRef('rooms');
-
       if (roomID !== undefined) {
         ref = ref.child(roomID);
-
         if (childKey !== undefined) {
           ref = ref.child(childKey);
         }
       }
-
       return ref;
     },
     getRoomAliveRef: function getRoomAliveRef(roomID) {
@@ -3164,39 +2828,31 @@
     },
     getRoomFilterRef: function getRoomFilterRef(roomID) {
       var ref = this.getRootRef('room-filters');
-
       if (roomID !== undefined) {
         ref = ref.child(roomID);
       }
-
       return ref;
     },
     getRoomDataRef: function getRoomDataRef(roomID) {
       var ref = this.getRootRef('room-data');
-
       if (roomID !== undefined) {
         ref = ref.child(roomID);
       }
-
       return ref;
     },
     // TODO: ??
     getUserDataRef: function getUserDataRef(userID) {
       var ref = this.getRootRef('user-data');
-
       if (userID !== undefined) {
         ref = ref.child(userID);
       }
-
       return ref;
     },
     getRoomDataPath: function getRoomDataPath(roomID, childKey) {
       var path = "".concat(this.rootPath, "/rooms/").concat(roomID);
-
       if (childKey) {
         path += "/".concat(childKey);
       }
-
       return path;
     },
     getUserListPath: function getUserListPath(roomID) {
@@ -3209,16 +2865,13 @@
       if (roomState === undefined) {
         roomState = 'open';
       }
-
       var query = this.getRoomFilterRef();
       query = query.orderByChild('filter');
-
       if (roomType === undefined) {
         query = query.startAt(roomState).endAt("".concat(roomState, "~"));
       } else {
         query = query.equalTo(GetFilterString(roomState, roomType));
       }
-
       return query;
     }
   };
@@ -3247,37 +2900,36 @@
   var Room = /*#__PURE__*/function () {
     function Room(config) {
       _classCallCheck(this, Room);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this.database = firebase.database();
-      this.rootPath = GetValue(config, 'root', ''); // User properties
+      this.rootPath = GetValue(config, 'root', '');
 
+      // User properties
       this.userInfo = {
         userID: '',
         userName: ''
       };
-      this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', '')); // Room properties
-
+      this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
+      // Room properties
       this.isRoomCreator = false;
       this.roomID = undefined;
       this.roomName = undefined;
       this.roomType = undefined;
       this.doorState = undefined;
       this.leftRoomFlag = false;
-      this.isRemoveRoomWhenLeft = undefined; // User list
-
-      this.userList = CreateUserList$1.call(this, config); // Room list
-
-      this.roomList = CreateRoomList.call(this, config); // Broadcast
-
-      this.broadcast = CreateBroadcast$1.call(this, config); // Item tables
-
+      this.isRemoveRoomWhenLeft = undefined;
+      // User list
+      this.userList = CreateUserList$1.call(this, config);
+      // Room list
+      this.roomList = CreateRoomList.call(this, config);
+      // Broadcast
+      this.broadcast = CreateBroadcast$1.call(this, config);
+      // Item tables
       this.tables = CreateTables$1.call(this, config);
     }
-
     _createClass(Room, [{
       key: "shutdown",
       value: function shutdown() {
@@ -3318,11 +2970,9 @@
         if (roomID === undefined) {
           roomID = this.roomID;
         }
-
         if (roomName === undefined) {
           roomName = this.roomName;
         }
-
         return {
           roomID: roomID,
           roomName: roomName
@@ -3337,7 +2987,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -3371,10 +3020,8 @@
         return this.tables[key];
       }
     }]);
-
     return Room;
   }();
-
   Object.assign(Room.prototype, EventEmitterMethods, Methods$7);
 
   ObjectFactory.register('room', function (config) {
@@ -3413,10 +3060,10 @@
     });
     return userList;
   };
-
   var OnLeftRoom = function OnLeftRoom() {
-    this.emit('room.leave'); // Clear room info later
+    this.emit('room.leave');
 
+    // Clear room info later
     var self = this;
     setTimeout(function () {
       self.leftRoomFlag = false;
@@ -3425,11 +3072,9 @@
 
   var CreateBroadcast = function CreateBroadcast(config) {
     var broadcastConfig = GetValue(config, 'broadcast', true);
-
     if (!broadcastConfig) {
       return null;
     }
-
     var broadcast = new Broadcast({
       eventEmitter: this.getEventEmitter(),
       eventNames: {
@@ -3452,22 +3097,17 @@
 
   var CreateTables = function CreateTables(config) {
     var tablesConfig = GetValue(config, 'tables', undefined);
-
     if (tablesConfig === undefined) {
       return {};
     }
-
     var tableConfig;
     var tables = {};
-
     for (var i = 0, cnt = tablesConfig.length; i < cnt; i++) {
       tableConfig = tablesConfig[i];
       tables[tableConfig.key] = CreateTable.call(this, tableConfig);
     }
-
     return tables;
   };
-
   var CreateTable = function CreateTable(config) {
     var key = config.key;
     var table = new ItemTable({
@@ -3507,9 +3147,9 @@
   var LeaveRoom = function LeaveRoom() {
     if (!this.isInRoom()) {
       return Promise.resolve();
-    } // 'userlist.leave' event -> 'room.leave' event -> then
+    }
 
-
+    // 'userlist.leave' event -> 'room.leave' event -> then
     this.leftRoomFlag = true;
     return this.userList.leave();
   };
@@ -3536,11 +3176,9 @@
   var Methods$6 = {
     getRoomRef: function getRoomRef(childKey) {
       var ref = this.database.ref(this.rootPath);
-
       if (childKey) {
         ref = ref.child(childKey);
       }
-
       return ref;
     },
     getUserListRef: function getUserListRef() {
@@ -3548,11 +3186,9 @@
     },
     getRoomDataPath: function getRoomDataPath(childKey) {
       var path = this.rootPath;
-
       if (childKey) {
         path += "/".concat(childKey);
       }
-
       return path;
     },
     getUserListPath: function getUserListPath() {
@@ -3575,29 +3211,28 @@
   var SingleRoom = /*#__PURE__*/function () {
     function SingleRoom(config) {
       _classCallCheck(this, SingleRoom);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
       this.setEventEmitter(eventEmitter, EventEmitterClass);
       this.database = firebase.database();
-      this.rootPath = GetValue(config, 'root', ''); // User properties
+      this.rootPath = GetValue(config, 'root', '');
 
+      // User properties
       this.userInfo = {
         userID: '',
         userName: ''
       };
-      this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', '')); // Room properties
-
-      this.leftRoomFlag = false; // User list
-
-      this.userList = CreateUserList.call(this, config); // Broadcast
-
-      this.broadcast = CreateBroadcast.call(this, config); // Item tables
-
+      this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
+      // Room properties
+      this.leftRoomFlag = false;
+      // User list
+      this.userList = CreateUserList.call(this, config);
+      // Broadcast
+      this.broadcast = CreateBroadcast.call(this, config);
+      // Item tables
       this.tables = CreateTables.call(this, config);
     }
-
     _createClass(SingleRoom, [{
       key: "shutdown",
       value: function shutdown() {}
@@ -3631,7 +3266,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -3665,10 +3299,8 @@
         return this.tables[key];
       }
     }]);
-
     return SingleRoom;
   }();
-
   Object.assign(SingleRoom.prototype, EventEmitterMethods, Methods$5);
 
   ObjectFactory.register('singleRoom', function (config) {
@@ -3685,38 +3317,29 @@
     if (config.totalLines === undefined) {
       config.totalLines = Infinity;
     }
-
     if (config.linesPerPage === undefined) {
       config.linesPerPage = 1000;
     }
-
     config.remainderLines = config.totalLines;
     return QueryNextPage(config);
   };
-
   var QueryNextPage = function QueryNextPage(config) {
     var query = config.query;
-
     if (config.startDocRef) {
       query = query[config.startMode](config.startDocRef);
     }
-
     var lineCount = Math.min(config.remainderLines, config.linesPerPage);
     config.remainderLines -= lineCount;
     return query.limit(lineCount).get().then(function (querySnapshot) {
       var done = config.remainderLines === 0 || querySnapshot.size < lineCount; // Is last page
-
       if (config.forEachPageCallback) {
         done |= !!config.forEachPageCallback(querySnapshot);
       }
-
       if (done) {
         var out;
-
         if (config.resolveCallback) {
           out = config.resolveCallback();
         }
-
         return Promise.resolve(out);
       } else {
         config.startDocRef = querySnapshot.docs[querySnapshot.size - 1];
@@ -3730,11 +3353,9 @@
     if (count === undefined) {
       count = Infinity;
     }
-
     if (skip === undefined) {
       skip = 0;
     }
-
     var out = [];
     var startIndex = 0;
     return Query({
@@ -3746,17 +3367,14 @@
         var validDocs;
         var docCount = querySnapshot.size;
         var localStart = skip - startIndex;
-
         if (localStart <= 0) {
           validDocs = querySnapshot.docs;
         } else if (localStart < docCount) {
           validDocs = querySnapshot.docs.slice(localStart, docCount);
         }
-
         if (validDocs) {
           out.push.apply(out, _toConsumableArray(validDocs));
         }
-
         startIndex += docCount;
       },
       resolveCallback: function resolveCallback() {
@@ -3769,7 +3387,6 @@
     var callback = this.dataMode === 0 ? LoadStaticPage$3 : LoadDynamicPage$3;
     return callback.call(this);
   };
-
   var LoadStaticPage$3 = function LoadStaticPage() {
     var self = this;
     return Load$1(this.nextQuery, this.itemCount, 0, this.baselineDocRef, this.baselineMode).then(function (docs) {
@@ -3778,15 +3395,14 @@
       self.pageIndex = 0;
       self.startItemIndex = 0;
       self.endItemIndex = self.startItemIndex + docCount - 1;
-      self.isFullPage = docCount === self.itemCount; // Doc reference for paging
-
+      self.isFullPage = docCount === self.itemCount;
+      // Doc reference for paging
       self.prevPageEndDocRef = undefined;
       self.currPageStartDocRef = docs[0];
       self.currPageEndDocRef = docs[docCount - 1];
       return Promise.resolve(self.cacheItems);
     });
   };
-
   var LoadDynamicPage$3 = function LoadDynamicPage() {
     var self = this;
     return Load$1(this.nextQuery, this.itemCount, 0, this.baselineDocRef, this.baselineMode).then(function (docs) {
@@ -3804,11 +3420,9 @@
     if (this.pageIndex === undefined) {
       return this.loadFirstPage();
     }
-
     var callback = this.dataMode === 0 ? LoadStaticPage$2 : LoadDynamicPage$2;
     return callback.call(this);
   };
-
   var LoadStaticPage$2 = function LoadStaticPage() {
     var self = this;
     return Load$1(this.nextQuery, this.itemCount, 0, this.currPageEndDocRef, 'startAfter').then(function (docs) {
@@ -3817,15 +3431,14 @@
       self.pageIndex += 1;
       self.startItemIndex = self.endItemIndex + 1;
       self.endItemIndex = self.startItemIndex + docCount - 1;
-      self.isFullPage = docCount === self.itemCount; // Doc reference for paging
-
+      self.isFullPage = docCount === self.itemCount;
+      // Doc reference for paging
       self.prevPageEndDocRef = self.currPageEndDocRef;
       self.currPageStartDocRef = docs[0];
       self.currPageEndDocRef = docs[docCount - 1];
       return Promise.resolve(self.cacheItems);
     });
   };
-
   var LoadDynamicPage$2 = function LoadDynamicPage() {
     var skip = (this.pageIndex + 1) * this.itemCount;
     var self = this;
@@ -3844,11 +3457,9 @@
     if (this.pageIndex === undefined || this.pageIndex === 1) {
       return this.loadFirstPage();
     }
-
     var callback = this.dataMode === 0 ? LoadStaticPage$1 : LoadDynamicPage$1;
     return callback.call(this);
   };
-
   var LoadStaticPage$1 = function LoadStaticPage() {
     var self = this;
     return Load$1(this.prevQuery, this.itemCount + 1, 0, this.currPageStartDocRef, 'startAfter').then(function (docs) {
@@ -3856,20 +3467,18 @@
       var docCount = docs.length - 1;
       self.cacheItems = docs;
       self.cacheItems.pop(); // Pop up endDoc of previous page
-
       self.cacheItems.reverse();
       self.pageIndex -= 1;
       self.endItemIndex = self.startItemIndex - 1;
       self.startItemIndex = self.endItemIndex - docCount + 1;
-      self.isFullPage = docCount === self.itemCount; // Doc reference for paging
-
+      self.isFullPage = docCount === self.itemCount;
+      // Doc reference for paging
       self.prevPageEndDocRef = docs[docCount];
       self.currPageStartDocRef = docs[docCount - 1];
       self.currPageEndDocRef = docs[0];
       return Promise.resolve(self.cacheItems);
     });
   };
-
   var LoadDynamicPage$1 = function LoadDynamicPage() {
     var skip = (this.pageIndex - 1) * this.itemCount;
     var self = this;
@@ -3889,25 +3498,22 @@
     if (this.pageIndex === undefined || this.pageIndex === 0) {
       return this.loadFirstPage();
     }
-
     var callback = this.dataMode === 0 ? LoadStaticPage : LoadDynamicPage;
     return callback.call(this);
   };
-
   var LoadStaticPage = function LoadStaticPage() {
     var self = this;
     return Load$1(this.nextQuery, this.itemCount, 0, this.prevPageEndDocRef, 'startAfter').then(function (docs) {
       var docCount = docs.length;
       self.cacheItems = docs;
       self.endItemIndex = self.startItemIndex + docCount - 1;
-      self.isFullPage = docCount === self.itemCount; // Doc reference for paging
-
+      self.isFullPage = docCount === self.itemCount;
+      // Doc reference for paging
       self.currPageStartDocRef = docs[0];
       self.currPageEndDocRef = docs[docCount - 1];
       return Promise.resolve(self.cacheItems);
     });
   };
-
   var LoadDynamicPage = function LoadDynamicPage() {
     var skip = this.pageIndex * this.itemCount;
     var self = this;
@@ -3924,13 +3530,11 @@
     if (skip === undefined) {
       skip = 0;
     }
-
     var self = this;
     return Load$1(this.nextQuery, count, skip, this.baselineDocRef, this.baselineMode).then(function (docs) {
       var docCount = docs.length;
       self.cacheItems = docs;
       self.pageIndex = undefined; // Not in Page mode
-
       self.startItemIndex = skip;
       self.endItemIndex = self.startItemIndex + docCount - 1;
       self.isFullPage = count === undefined ? true : docCount === count;
@@ -3941,7 +3545,6 @@
   var PageLoader = /*#__PURE__*/function () {
     function PageLoader(config) {
       _classCallCheck(this, PageLoader);
-
       this.setItemCount(GetValue(config, 'itemCount', 100));
       this.setQuery(GetValue(config, 'query', undefined));
       this.setDataMode(GetValue(config, 'dataMode', 0));
@@ -3954,7 +3557,6 @@
       this.cacheItems = undefined;
       this.isFullPage = undefined;
     }
-
     _createClass(PageLoader, [{
       key: "setItemCount",
       value: function setItemCount(count) {
@@ -3972,7 +3574,6 @@
           this.nextQuery = nextQuery;
           this.prevQuery = prevQuery;
         }
-
         this.pageIndex = undefined;
         this.isFullPage = undefined;
         return this;
@@ -3983,7 +3584,6 @@
         if (typeof mode === 'string') {
           mode = DATAMODE[mode];
         }
-
         this.dataMode = mode;
         return this;
       }
@@ -3996,14 +3596,11 @@
         } else {
           this.baselineDocRef = undefined;
         }
-
         return this;
       }
     }]);
-
     return PageLoader;
   }();
-
   var methods$4 = {
     loadFirstPage: LoadFirstPage,
     loadNextPage: LoadNextPage,
@@ -4028,19 +3625,18 @@
     return header;
   };
 
+  // Internal used
   var LoadHeader$1 = function LoadHeader(fileID) {
     var userID = this.userID;
     var header = this.cacheHeaders[fileID];
-
     if (header && header.userID === userID) {
       return Promise.resolve(header);
-    } // Can't find in cache headers, load from firestore    
+    }
 
-
+    // Can't find in cache headers, load from firestore    
     var self = this;
     return this.getFileQuery(userID, fileID, 'header').limit(1).get().then(function (querySnapshot) {
       var header = undefined;
-
       if (querySnapshot.size > 0) {
         var doc = querySnapshot.docs[0];
         header = DocToHeader$1(doc);
@@ -4056,37 +3652,29 @@
       updateMode = content;
       content = undefined;
     }
-
     if (updateMode === undefined) {
       updateMode = false;
     }
-
     var userID = this.userID;
-
     if (header === undefined) {
       header = {};
     }
-
     header.userID = userID;
     header.fileID = fileID;
     header.type = 'header';
-
     if (content) {
       content.userID = userID;
       content.fileID = fileID;
       content.type = 'content';
     }
-
     var writeCommand = updateMode ? 'update' : 'set';
     var self = this;
     return LoadHeader$1.call(this, fileID) // Try load header
     .then(function (prevHeader) {
       var headerDocRef, contentDocRef;
-
       if (prevHeader) {
         // Overwrite file
         headerDocRef = self.rootRef.doc(prevHeader.headerDocID);
-
         if (content) {
           if (prevHeader.contentDocID) {
             contentDocRef = self.rootRef.doc(prevHeader.contentDocID);
@@ -4097,29 +3685,24 @@
       } else {
         // Add new file
         headerDocRef = self.rootRef.doc();
-
         if (content) {
           contentDocRef = self.rootRef.doc();
         }
-      } // Don't save headerDocID to server
+      }
 
-
+      // Don't save headerDocID to server
       if (header.hasOwnProperty('headerDocID')) {
         delete header.headerDocID;
-      } // Save contentDocID
-
-
+      }
+      // Save contentDocID
       if (contentDocRef) {
         header.contentDocID = contentDocRef.id;
       }
-
       var batch = self.database.batch();
       batch[writeCommand](headerDocRef, header);
-
       if (content) {
         batch[writeCommand](contentDocRef, content);
       }
-
       return batch.commit();
     }).then(function () {
       return Promise.resolve({
@@ -4144,7 +3727,6 @@
           case 'header':
             header = DocToHeader$1(doc);
             break;
-
           case 'content':
             content = doc.data();
             break;
@@ -4199,20 +3781,16 @@
           fileID: fileID
         });
       }
-
       var batch = self.database.batch();
       batch["delete"](self.rootRef.doc(prevHeader.headerDocID));
-
       if (prevHeader.contentDocID) {
         batch["delete"](self.rootRef.doc(prevHeader.contentDocID));
       }
-
       return batch.commit();
     }).then(function () {
       if (self.cacheHeaders.hasOwnProperty(fileID)) {
         delete self.cacheHeaders[fileID];
       }
-
       return Promise.resolve({
         userID: userID,
         fileID: fileID
@@ -4235,7 +3813,6 @@
       querySnapshot.forEach(function (doc) {
         header = DocToHeader(doc);
         batch["delete"](self.rootRef.doc(header.headerDocID));
-
         if (header.contentDocID) {
           batch["delete"](self.rootRef.doc(header.contentDocID));
         }
@@ -4257,17 +3834,16 @@
   var Files = /*#__PURE__*/function () {
     function Files(config) {
       _classCallCheck(this, Files);
-
       this.database = firebase.firestore();
       this.setRootPath(GetValue(config, 'root', ''));
-      this.cacheHeaders = {}; // Owner
+      this.cacheHeaders = {};
 
+      // Owner
       this.userInfo = {
         userID: ''
       };
       this.setOwner(GetValue(config, 'userID', ''));
     }
-
     _createClass(Files, [{
       key: "shutdown",
       value: function shutdown() {}
@@ -4295,17 +3871,14 @@
       key: "setOwner",
       value: function setOwner(userID) {
         var prevUserID = this.userID;
-
         if (IsPlainObject(userID)) {
           this.userInfo = userID;
         } else {
           this.userID = userID;
         }
-
         if (prevUserID !== this.userID) {
           this.clearCache();
         }
-
         return this;
       }
     }, {
@@ -4324,10 +3897,8 @@
         return query;
       }
     }]);
-
     return Files;
   }();
-
   var methods$3 = {
     save: Save,
     load: Load,
@@ -4388,14 +3959,12 @@
 
   var TryAdd = function TryAdd(id, digits, candidates, retry) {
     var alias = GetRandomWord(digits, digits, candidates);
-
     if (retry <= 0) {
       return Promise.reject({
         id: id,
         alias: alias
       });
     }
-
     retry--;
     var self = this;
     return Add$1.call(self, id, alias)["catch"](function () {
@@ -4413,7 +3982,6 @@
     return this.getAlias(id).then(function (result) {
       if (result.alias) {
         var alias = GetRandomWord(digits, digits, candidates);
-
         if (result.alias === alias) {
           return Promise.resolve({
             id: id,
@@ -4434,11 +4002,9 @@
   var GetId = function GetId(alias) {
     return this.getAliasRef(alias).get().then(function (doc) {
       var id;
-
       if (doc.exists) {
         id = doc.data().id;
       }
-
       return Promise.resolve({
         id: id,
         alias: alias
@@ -4449,12 +4015,10 @@
   var GetAlias = function GetAlias(id) {
     return this.rootRef.where('id', '==', id).limit(1).get().then(function (querySnapshot) {
       var alias;
-
       if (querySnapshot.size > 0) {
         var doc = querySnapshot.docs[0];
         alias = doc.id;
       }
-
       return Promise.resolve({
         id: id,
         alias: alias
@@ -4486,11 +4050,9 @@
   var IdAlias = /*#__PURE__*/function () {
     function IdAlias(config) {
       _classCallCheck(this, IdAlias);
-
       this.database = firebase.firestore();
       this.setRootPath(GetValue(config, 'root', ''));
     }
-
     _createClass(IdAlias, [{
       key: "shutdown",
       value: function shutdown() {}
@@ -4512,10 +4074,8 @@
         return this.rootRef.doc(alias);
       }
     }]);
-
     return IdAlias;
   }();
-
   var methods$2 = {
     add: Add,
     addRandom: AddRandom,
@@ -4548,7 +4108,6 @@
       y: "".concat(y),
       // year filter
       a: '' // all-time filter
-
     };
   };
 
@@ -4571,23 +4130,18 @@
     var newRecord = {
       userID: this.userID
     };
-
     if (this.boardID !== undefined) {
       newRecord.boardID = this.boardID;
     }
-
     if (this.userName) {
       newRecord.userName = this.userName;
     }
-
     var curTimeData = GetTime(timeStamp);
-
     if (this.timeFilters !== false) {
       for (var t in this.timeFilters) {
         if (!this.timeFilters[t]) {
           continue;
         }
-
         newRecord[TimeTagKeys[t]] = curTimeData[t];
         newRecord[ScoreKeys[t]] = score;
       }
@@ -4595,34 +4149,27 @@
       // No time filters
       newRecord.score = score;
     }
-
     if (this.tag) {
       newRecord.tag = this.tag;
     }
-
     if (extraData) {
       Object.assign(newRecord, extraData);
     }
-
     var self = this;
     return this.getMyRecordQuery().get().then(function (querySnapshot) {
       var prevRecord, docID;
-
       if (querySnapshot.size > 0) {
         var doc = querySnapshot.docs[0];
         prevRecord = doc.data();
         docID = doc.id;
       }
-
       if (prevRecord) {
         if (self.timeFilters !== false) {
           for (var t in self.timeFilters) {
             if (!self.timeFilters[t]) {
               continue;
             }
-
             var timeTagKey = TimeTagKeys[t];
-
             if (prevRecord[timeTagKey] === newRecord[timeTagKey]) {
               var scoreKey = ScoreKeys[t];
               newRecord[scoreKey] = Math.max(prevRecord[scoreKey], newRecord[scoreKey]);
@@ -4633,11 +4180,9 @@
           newRecord.score = Math.max(prevRecord.score, newRecord.score);
         }
       }
-
       if (docID === undefined) {
         docID = self.rootRef.doc().id;
       }
-
       return self.rootRef.doc(docID).set(newRecord);
     });
   };
@@ -4682,45 +4227,37 @@
       if (!this.resetQueryFlag) {
         return this;
       }
-
       this.resetQueryFlag = false;
       this.page.setQuery(this.getPageQuery());
       return this;
     }
   };
-
   var DocsToDataArray = function DocsToDataArray(docs) {
     var items = [],
-        item;
+      item;
     var scoreKey = ScoreKeys[this.timeFilterType[0]];
-
     for (var i = 0, cnt = docs.length; i < cnt; i++) {
       item = docs[i].data();
-
       if (this.timeFilters !== false) {
-        item.score = item[scoreKey]; // Remove timeFilterKeys, and scoreKeys
-
+        item.score = item[scoreKey];
+        // Remove timeFilterKeys, and scoreKeys
         for (var t in this.timeFilters) {
           delete item[TimeTagKeys[t]];
           delete item[ScoreKeys[t]];
         }
       }
-
       items.push(item);
     }
-
     return items;
   };
 
   var GetScore = function GetScore(userID) {
     return this.getMyRecordQuery(userID).get().then(function (querySnapshot) {
       var item;
-
       if (querySnapshot.size > 0) {
         var doc = querySnapshot.docs[0];
         item = doc.data();
       }
-
       return Promise.resolve(item);
     });
   };
@@ -4735,18 +4272,15 @@
       query: query,
       forEachPageCallback: function forEachPageCallback(querySnapshot) {
         var docs = querySnapshot.docs,
-            doc;
-
+          doc;
         for (var i = 0, cnt = docs.length; i < cnt; i++) {
           doc = docs[i];
-
           if (testCallback(doc)) {
             out.doc = doc;
             out.index = startIndex + i;
             return true;
           }
         }
-
         startIndex += querySnapshot.size;
       },
       resolveCallback: function resolveCallback() {
@@ -4759,14 +4293,11 @@
     if (userID === undefined) {
       userID = this.userID;
     }
-
     var query = this.getPageQuery().next;
-
     var testCallback = function testCallback(doc) {
       var item = doc.data();
       return item.userID === userID;
     };
-
     return FindFirst(query, testCallback).then(function (result) {
       return Promise.resolve({
         userID: userID,
@@ -4781,29 +4312,23 @@
         // Last page, task done
         return Promise.resolve();
       }
-
       var tasks = [];
       var batch, actionCount;
-
       for (var i = 0, cnt = docs.length; i < cnt; i++) {
         if (batch === undefined) {
           batch = firebase.firestore().batch();
           actionCount = 0;
         }
-
         batch["delete"](docs[i].ref);
         actionCount++;
-
         if (actionCount >= 500) {
           tasks.push(batch.commit());
           batch = undefined;
         }
       }
-
       if (batch) {
         tasks.push(batch.commit());
       }
-
       return Promise.all(tasks);
     });
   };
@@ -4813,7 +4338,6 @@
       if (userID === undefined) {
         userID = this.userID;
       }
-
       var query = this.getRecordQuery(undefined, undefined, userID, undefined);
       return Delete(query);
     },
@@ -4821,11 +4345,9 @@
       if (boardID === undefined) {
         boardID = this.boardID;
       }
-
       if (tag === undefined) {
         tag = this.tag;
       }
-
       var query = this.getRecordQuery(boardID, tag, undefined, undefined);
       return Delete(query);
     }
@@ -4837,23 +4359,19 @@
       query = boardID !== undefined ? query.where('boardID', '==', boardID) : query;
       query = customTag !== undefined ? query.where('tag', '==', customTag) : query;
       query = userID !== undefined ? query.where('userID', '==', userID) : query;
-
       if (timeTagKey !== undefined) {
         query = query.where(timeTagKey[0], '==', timeTagKey[1]);
       }
-
       return query;
     },
     getMyRecordQuery: function getMyRecordQuery(userID) {
       if (userID === undefined) {
         userID = this.userID;
       }
-
       return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1);
     },
     getPageQuery: function getPageQuery() {
       var timeTagKey, scoreKey;
-
       if (this.timeFilters !== false) {
         var t = this.timeFilterType[0];
         timeTagKey = [TimeTagKeys[t], GetTime()[t]];
@@ -4863,7 +4381,6 @@
         timeTagKey = undefined;
         scoreKey = 'score';
       }
-
       var baseQuery = this.getRecordQuery(this.boardID, this.tag, undefined, timeTagKey);
       var nextPageQuery = baseQuery.orderBy(scoreKey, 'desc');
       var prevPageQuery = baseQuery.orderBy(scoreKey);
@@ -4877,7 +4394,6 @@
   var LeaderBoard = /*#__PURE__*/function () {
     function LeaderBoard(config) {
       _classCallCheck(this, LeaderBoard);
-
       this.database = firebase.firestore();
       this.setRootPath(GetValue(config, 'root', ''));
       this.userInfo = {
@@ -4895,7 +4411,6 @@
       });
       this.resetQueryFlag = true;
     }
-
     _createClass(LeaderBoard, [{
       key: "shutdown",
       value: function shutdown() {}
@@ -4937,7 +4452,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -4969,7 +4483,6 @@
             a: GetValue(filters, 'all', true)
           };
         }
-
         return this;
       }
     }, {
@@ -5001,10 +4514,8 @@
         return this.page.isFullPage === false;
       }
     }]);
-
     return LeaderBoard;
   }();
-
   var methods$1 = {
     post: Post,
     getScore: GetScore,
@@ -5023,15 +4534,12 @@
       message: message,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     };
-
     if (this.userName !== undefined) {
       d.senderName = this.userName;
     }
-
     if (this.receiverID !== undefined) {
       d.receiverID = this.receiverID;
     }
-
     return this.rootRef.add(d);
   };
 
@@ -5045,19 +4553,15 @@
         if (querySnapshot.size > 0) {
           // Load data
           var doc = querySnapshot.docs[0];
-
           if (doc.metadata.hasPendingWrites) {
             // Load local message                        
             if (self.skipFirst) {
               // Local doc dose not have timestamp
               self.skipFirst = false;
             }
-
             return;
           }
-
           self.resetPageQuery(self.receiverID, doc);
-
           if (self.skipFirst) {
             // Load previos data
             self.skipFirst = false;
@@ -5080,9 +4584,9 @@
     stopReceiving: function stopReceiving() {
       if (this.unsubscribe) {
         this.unsubscribe();
-      } // Reset to initial state
+      }
 
-
+      // Reset to initial state
       this.resetQueryFlag = true;
       this.cacheMessages.length = 0;
       return this;
@@ -5092,15 +4596,11 @@
       var self = this;
       return this.page.loadNextPage().then(function (docs) {
         var _self$cacheMessages;
-
         var messages = [];
-
         for (var i = 0, cnt = docs.length; i < cnt; i++) {
           messages.push(DocToMessage(docs[i]));
         }
-
         (_self$cacheMessages = self.cacheMessages).splice.apply(_self$cacheMessages, [0, 0].concat(messages));
-
         return Promise.resolve(messages);
       });
     },
@@ -5108,14 +4608,12 @@
       if (!this.resetQueryFlag) {
         return this;
       }
-
       this.resetQueryFlag = false;
       var baselineMode = this.skipFirst ? 'startAt' : 'startAfter';
       this.page.setBaselineDoc(baselineDoc, baselineMode).setQuery(this.getPageQuery(receiverID));
       return this;
     }
   };
-
   var DocToMessage = function DocToMessage(doc) {
     var message = doc.data();
     message.timestamp = message.timestamp.seconds * 1000;
@@ -5127,7 +4625,6 @@
       if (receiverID === undefined) {
         receiverID = this.receiverID;
       }
-
       var query = this.rootRef;
       query = receiverID !== undefined ? query.where('receiverID', '==', receiverID) : query;
       return query;
@@ -5146,7 +4643,6 @@
   var Messages = /*#__PURE__*/function () {
     function Messages(config) {
       _classCallCheck(this, Messages);
-
       // Event emitter
       var eventEmitter = GetValue(config, 'eventEmitter', undefined);
       var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
@@ -5166,7 +4662,6 @@
       this.resetQueryFlag = true;
       this.cacheMessages = [];
     }
-
     _createClass(Messages, [{
       key: "shutdown",
       value: function shutdown() {
@@ -5210,7 +4705,6 @@
           this.userID = userID;
           this.userName = userName;
         }
-
         return this;
       }
     }, {
@@ -5232,10 +4726,8 @@
         return this.page.isFullPage !== false;
       }
     }]);
-
     return Messages;
   }();
-
   var methods = {
     send: Send
   };
@@ -5248,19 +4740,14 @@
 
   var FirebasePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(FirebasePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(FirebasePlugin);
-
     function FirebasePlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, FirebasePlugin);
-
       _this = _super.call(this, pluginManager);
       _this.add = new ObjectFactory();
       return _this;
     }
-
     _createClass(FirebasePlugin, [{
       key: "start",
       value: function start() {
@@ -5280,7 +4767,6 @@
         return this;
       }
     }]);
-
     return FirebasePlugin;
   }(Phaser.Plugins.BasePlugin);
 

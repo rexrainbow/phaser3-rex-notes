@@ -134,9 +134,10 @@ class Dialog extends Sizer {
             if (content || description || choices || actions) {
                 padding = { bottom: titleSpace };
             }
+            var proportion = GetValue(config, 'proportion.title', 0);
             this.add(
                 titleSizer,
-                { padding: padding, expand: true }
+                { padding: padding, proportion: proportion, expand: true }
             );
         }
 
@@ -148,10 +149,11 @@ class Dialog extends Sizer {
                 right: GetValue(config, 'space.contentRight', 0),
                 bottom: ((description || choices || actions) ? contentSpace : 0)
             }
+            var proportion = GetValue(config, 'proportion.content', 0);
             var expand = GetValue(config, 'expand.content', true);
             this.add(
                 content,
-                { align: align, padding: padding, expand: expand }
+                { align: align, padding: padding, proportion: proportion, expand: expand }
             );
         }
 
@@ -163,10 +165,11 @@ class Dialog extends Sizer {
                 right: GetValue(config, 'space.descriptionRight', 0),
                 bottom: ((choices || actions) ? descriptionSpace : 0)
             }
+            var proportion = GetValue(config, 'proportion.description', 0);
             var expand = GetValue(config, 'expand.description', true);
             this.add(
                 description,
-                { align: align, padding: padding, expand: expand }
+                { align: align, padding: padding, proportion: proportion, expand: expand }
             );
         }
 
@@ -221,10 +224,11 @@ class Dialog extends Sizer {
                 bottom: ((actions) ? choicesSpace : 0)
             }
             var align = GetValue(config, 'align.choices', 'center');
+            var proportion = GetValue(config, 'proportion.choices', 0);
             var expand = GetValue(config, 'expand.choices', true);
             this.add(
                 choicesSizer,
-                { align: align, padding: padding, expand: expand }
+                { align: align, padding: padding, proportion: proportion, expand: expand }
             );
         }
 
@@ -244,9 +248,10 @@ class Dialog extends Sizer {
                 left: GetValue(config, 'space.actionsLeft', 0),
                 right: GetValue(config, 'space.actionsRight', 0)
             }
+            var proportion = GetValue(config, 'proportion.action', 0);
             this.add(
                 actionsSizer,
-                { align: 'center', padding: padding, expand: true }
+                { align: 'center', padding: padding, proportion: proportion, expand: true }
             );
         }
 

@@ -7,12 +7,7 @@ var TypingNextPage = function () {
         return this;
     }
 
-    var wrapCallback = GetValue(this.wrapConfig, 'callback', this.runWordWrap);
-    if (typeof (wrapCallback) === 'string') {
-        wrapCallback = this[wrapCallback];
-    }
-
-    var result = wrapCallback.call(this, this.lastWrapResult);
+    var result = this.runWrap(this.lastWrapResult);
     this.lastWrapResult = result;
 
     this.emit('page.start');

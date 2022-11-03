@@ -19,7 +19,7 @@ var SwipeCell = function (table, tableConfig) {
                     (swipe.right) ? 'right' :
                         (swipe.up) ? 'up' :
                             'down';
-            EmitCellEvent(this.eventEmitter, `cell.swipe${dirName}`, table, swipe.x, swipe.y, lastPointer);
+            EmitCellEvent(this.eventEmitter, `cell.swipe${dirName}`, table, swipe.worldX, swipe.worldY, lastPointer);
         }, this)
 };
 

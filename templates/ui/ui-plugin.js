@@ -58,6 +58,8 @@ import TextAreaFactory from './textarea/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
 import SidesFactory from './sides/Factory.js';
+import TweakerFactory from './tweaker/Factory.js';
+import MakerFactory from './maker/Factory.js';
 
 import ClickFactory from './click/Factory.js';
 import ClickOutsideFactory from './clickoutside/Factory.js';
@@ -76,7 +78,6 @@ import PerspectiveFactory from './perspective/Factory.js';
 import SkewFactory from './skew/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
 import TextEditFactory from './textedit/Factory.js';
-import MakerFactory from './maker/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';

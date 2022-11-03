@@ -11,25 +11,19 @@ var AddInput = function (object, key, config) {
 
     config.view = GetInputType(object[key], config);
 
-    // Create InputSizer
-    config.addConfig = {
-        expand: true
-    };
-    var inputSizer = this.make('inputSizer', config);
-    var inputSizerAddConfig = config.addConfig;
+    // Create InputRow
+    var inputSizer = this.make('inputRow', config, 'inputRow');
 
-    // Create InputTitle, add to InputSizer
-    config.addConfig = {
-        proportion: 1,
-    };
-    var inputTitle = this.make('inputTitle', config);
-    var inputTitleAddConfig = config.addConfig;
-    inputSizer.add(inputTitle, inputTitleAddConfig);
+    // Add InputRow to Tweaker
+    this.add(
+        inputSizer,
+        { expand: true }
+    );
 
-    //TODO: Add input
-
-    // Add InputSizer to Twealer
-    this.add(inputSizer, inputSizerAddConfig);
+    // Set content
+    inputSizer
+        .setTitle(config)
+        .setBindingTarget(object, key)
 
     return this;
 }

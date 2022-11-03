@@ -7,6 +7,8 @@ var PressChild = function (config) {
     var pressConfig = GetValue(config, 'press', undefined);
     if (pressConfig === false) {
         return;
+    } else if (pressConfig === true) {
+        pressConfig = undefined;
     }
 
     var childrenInteractive = this._childrenInteractive;

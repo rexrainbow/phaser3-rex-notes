@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,76 +75,59 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
   var RotateAround$1 = Phaser.Math.RotateAround;
-
   var LocalXYToWorldXY = function LocalXYToWorldXY(gameObject, localX, localY) {
     var ox = gameObject.width / 2;
     var oy = gameObject.height / 2;
@@ -166,7 +140,6 @@
     out.y += gameObject.y;
     return out;
   };
-
   var WorldXYToLocalXY = function WorldXYToLocalXY(gameObject, worldX, worldY) {
     var ox = gameObject.width / 2;
     var oy = gameObject.height / 2;
@@ -179,7 +152,6 @@
     out.y += oy;
     return out;
   };
-
   var out = {
     x: 0,
     y: 0
@@ -188,13 +160,11 @@
   var ControlPoint = /*#__PURE__*/function () {
     function ControlPoint(parent, vertex) {
       _classCallCheck(this, ControlPoint);
-
       this.parent = parent;
       this.vertex = vertex;
       this._localX = undefined;
       this._localY = undefined;
     }
-
     _createClass(ControlPoint, [{
       key: "destroy",
       value: function destroy() {
@@ -257,14 +227,11 @@
         if (this._localX === x && this._localY === y) {
           return this;
         }
-
         this._localX = x;
         this._localY = y;
-
         if (!ignoreUpdateVertex) {
           this.updateVertexPosition(x, y);
         }
-
         return this;
       }
     }, {
@@ -273,7 +240,6 @@
         if (this._worldX === x && this._worldY === y) {
           return this;
         }
-
         var localXY = WorldXYToLocalXY(this.parent, x, y);
         this.setLocalXY(localXY.x, localXY.y);
         return this;
@@ -308,35 +274,29 @@
         this.setWorldXY(this.x, y);
       }
     }]);
-
     return ControlPoint;
   }();
 
   var Vertex = Phaser.Geom.Mesh.Vertex;
   var Face = Phaser.Geom.Mesh.Face;
-
   var InitFaces = function InitFaces(quad) {
     var isNinePointMode = quad.isNinePointMode;
     var pointCount = isNinePointMode ? 9 : 4;
     var vertices = quad.vertices;
     var faces = quad.faces;
     var controlPoints = quad.controlPoints;
-
     for (var i = 0; i < pointCount; i++) {
       var vertex = new Vertex();
       vertices.push(vertex);
       controlPoints.push(new ControlPoint(quad, vertex));
     }
-
     var indices = isNinePointMode ? NinePointsIndices : FourPointsIndices;
-
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
       var vert1 = vertices[indices[i + 0]];
       var vert2 = vertices[indices[i + 1]];
       var vert3 = vertices[indices[i + 2]];
       faces.push(new Face(vert1, vert2, vert3));
     }
-
     if (isNinePointMode) {
       quad.topLeft = controlPoints[0];
       quad.topCenter = controlPoints[1];
@@ -354,45 +314,54 @@
       quad.bottomRight = controlPoints[3];
     }
   };
+
   /*
   0, 1,
   2, 3,
   */
-
-
   var FourPointsIndices = [0, 2, 3, 0, 3, 1];
+
   /*
   0, 1, 2,
   3, 4, 5,
   6, 7, 8
   */
-
   var NinePointsIndices = [0, 3, 4, 0, 4, 1, 1, 4, 2, 4, 5, 2, 3, 6, 4, 6, 7, 4, 4, 7, 8, 4, 8, 5];
 
   var GetPointPosition = function GetPointPosition(quad) {
     var points;
     var top = 0,
-        bottom = quad.height,
-        left = 0,
-        right = quad.width;
-
+      bottom = quad.height,
+      left = 0,
+      right = quad.width;
     if (quad.isNinePointMode) {
       var centerX = (left + right) / 2;
       var centerY = (top + bottom) / 2;
-      points = [left, top, // top-left
-      centerX, top, // top-center
-      right, top, // top-right
-      left, centerY, // center-left
-      centerX, centerY, // center-center
-      right, centerY, // top-right
-      left, bottom, // center-left
-      centerX, bottom, // bottom-center
+      points = [left, top,
+      // top-left
+      centerX, top,
+      // top-center
+      right, top,
+      // top-right
+      left, centerY,
+      // center-left
+      centerX, centerY,
+      // center-center
+      right, centerY,
+      // top-right
+      left, bottom,
+      // center-left
+      centerX, bottom,
+      // bottom-center
       right, bottom // bottom-right
       ];
     } else {
-      points = [left, top, // top-left
-      right, top, // top-right
-      left, bottom, // bottom-left
+      points = [left, top,
+      // top-left
+      right, top,
+      // top-right
+      left, bottom,
+      // bottom-left
       right, bottom // bottom-right
       ];
     }
@@ -403,17 +372,12 @@
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$3 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-
   var Image = /*#__PURE__*/function (_Mesh) {
     _inherits(Image, _Mesh);
-
     var _super = _createSuper(Image);
-
     function Image(scene, x, y, key, frame, config) {
       var _this;
-
       _classCallCheck(this, Image);
-
       if (IsPlainObject$3(x)) {
         config = x;
         x = GetValue$5(config, 'x', 0);
@@ -421,28 +385,22 @@
         key = GetValue$5(config, 'key', null);
         frame = GetValue$5(config, 'frame', null);
       }
-
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
       _this.isNinePointMode = GetValue$5(config, 'ninePointMode', false);
       _this.controlPoints = [];
       InitFaces(_assertThisInitialized(_this));
       _this.hideCCW = false;
-
       _this.syncSize();
-
       return _this;
     }
-
     _createClass(Image, [{
       key: "preDestroy",
       value: function preDestroy() {
         for (var i = 0, cnt = this.controlPoints.length; i < cnt; i++) {
           this.controlPoints[i].destroy();
         }
-
         this.controlPoints = undefined;
-
         _get(_getPrototypeOf(Image.prototype), "preDestroy", this).call(this);
       }
     }, {
@@ -450,21 +408,23 @@
       value: function resetVerts() {
         // Clear faces and vertices        
         this.dirtyCache[9] = -1;
-        var points = GetPointPosition(this); // Calculate vertex data
+        var points = GetPointPosition(this);
 
+        // Calculate vertex data
         var srcWidth = this.width;
         var srcHeight = this.height;
         var vHalfWidth = this.frame.cutWidth / srcHeight / 2;
         var vHalfHeight = this.frame.cutHeight / srcHeight / 2;
+        var flipY = this.frame.source.isRenderTexture;
         var frameU0 = this.frame.u0;
         var frameU1 = this.frame.u1;
-        var frameV0 = this.frame.v0;
-        var frameV1 = this.frame.v1;
+        var frameV0 = !flipY ? this.frame.v0 : this.frame.v1;
+        var frameV1 = !flipY ? this.frame.v1 : this.frame.v0;
         var frameU = frameU1 - frameU0;
-        var frameV = frameV1 - frameV0; // Update vertex
+        var frameV = frameV1 - frameV0;
 
+        // Update vertex
         var controlPoints = this.controlPoints;
-
         for (var i = 0, cnt = points.length; i < cnt; i += 2) {
           var px = points[i + 0];
           var py = points[i + 1];
@@ -476,17 +436,14 @@
           this.vertices[vertexIndex].set(x, -y, 0).setUVs(u, v);
           controlPoints[vertexIndex].resetLocalXY(px, py);
         }
-
         return this;
       }
     }, {
       key: "syncSize",
       value: function syncSize() {
         this.setSizeToFrame(); // Reset size
-
         this.setOrtho(this.width / this.height, 1);
         this.resetVerts(); // Reset verts
-
         return this;
       }
     }, {
@@ -506,7 +463,6 @@
       },
       set: function set(value) {
         var vertices = this.vertices;
-
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
           vertices[i].color = value;
         }
@@ -518,7 +474,6 @@
         return this;
       }
     }]);
-
     return Image;
   }(Mesh);
 
@@ -534,32 +489,15 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var key = GetAdvancedValue$3(config, 'key', null);
     var frame = GetAdvancedValue$3(config, 'frame', null);
     var gameObject = new Image(this.scene, 0, 0, key, frame, config);
     BuildGameObject$3(this.scene, gameObject, config);
     return gameObject;
   }
-
-  var DynamicTexture$1 = Phaser.Textures.DynamicTexture;
-
-  var CreateDynamicTexture = function CreateDynamicTexture(scene, width, height) {
-    if (width === undefined) {
-      width = 2;
-    }
-
-    if (height === undefined) {
-      height = 2;
-    }
-
-    var dt = new DynamicTexture$1(scene.sys.textures, null, width, height);
-    return dt;
-  };
 
   var GetDisplayWidth = function GetDisplayWidth(gameObject) {
     if (gameObject.displayWidth !== undefined) {
@@ -568,7 +506,6 @@
       return gameObject.width;
     }
   };
-
   var GetDisplayHeight = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
@@ -580,7 +517,6 @@
   var Rectangle$1 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
   var RotateAround = Phaser.Math.RotateAround;
-
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$1();
@@ -588,18 +524,18 @@
       if (GlobRect$1 === undefined) {
         GlobRect$1 = new Rectangle$1();
       }
-
       output = GlobRect$1;
     }
-
     if (gameObject.getBounds) {
       return gameObject.getBounds(output);
-    } //  We can use the output object to temporarily store the x/y coords in:
+    }
 
+    //  We can use the output object to temporarily store the x/y coords in:
 
-    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy; // Instead of doing a check if parent container is
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+    // Instead of doing a check if parent container is
     // defined per corner we only do it once.
-
     if (gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       GetTopLeft(gameObject, output);
@@ -632,16 +568,13 @@
       BRx = output.x;
       BRy = output.y;
     }
-
     output.x = Math.min(TLx, TRx, BLx, BRx);
     output.y = Math.min(TLy, TRy, BLy, BRy);
     output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
     output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
     return output;
   };
-
   var GlobRect$1 = undefined;
-
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -649,19 +582,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopLeft) {
       return gameObject.getTopLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -669,19 +598,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopRight) {
       return gameObject.getTopRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -689,19 +614,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomLeft) {
       return gameObject.getBottomLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -709,41 +630,32 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomRight) {
       return gameObject.getBottomRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GlobVector = undefined;
-
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
       includeParent = false;
     }
-
     if (gameObject.rotation !== 0) {
       RotateAround(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
-
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       parentMatrix.transformPoint(output.x, output.y, output);
     }
-
     return output;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
   var Union = Phaser.Geom.Rectangle.Union;
-
   var GetBoundsOfGameObjects = function GetBoundsOfGameObjects(gameObjects, out) {
     if (out === undefined) {
       out = new Rectangle();
@@ -751,23 +663,17 @@
       if (GlobRect === undefined) {
         GlobRect = new Rectangle();
       }
-
       out = GlobRect;
     }
-
     out.setTo(0, 0, 0, 0);
     var gameObject;
     var firstClone = true;
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       gameObject = gameObjects[i];
-
       if (!gameObject.getBounds) {
         continue;
       }
-
       var boundsRect = GetBounds(gameObject, true);
-
       if (firstClone) {
         out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
         firstClone = false;
@@ -775,17 +681,14 @@
         Union(boundsRect, out, out);
       }
     }
-
     return out;
   };
-
   var GlobRect;
 
   var Clear = function Clear(obj) {
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -793,7 +696,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -803,19 +705,15 @@
    * @param {object} ret JSON object to return, set null to return a new object
    * @returns {object} this object
    */
-
   var Clone = function Clone(obj, out) {
     var objIsArray = Array.isArray(obj);
-
     if (out === undefined) {
       out = objIsArray ? [] : {};
     } else {
       Clear(out);
     }
-
     if (objIsArray) {
       out.length = obj.length;
-
       for (var i = 0, cnt = obj.length; i < cnt; i++) {
         out[i] = obj[i];
       }
@@ -824,7 +722,6 @@
         out[key] = obj[key];
       }
     }
-
     return out;
   };
 
@@ -832,15 +729,12 @@
     if (gameObjects.length === 0) {
       return gameObjects;
     }
-
     if (descending === undefined) {
       descending = false;
     }
-
     var scene = gameObjects[0].scene;
     var displayList = scene.sys.displayList;
     displayList.depthSort();
-
     if (descending) {
       gameObjects.sort(function (childA, childB) {
         return displayList.getIndex(childB) - displayList.getIndex(childA);
@@ -850,28 +744,16 @@
         return displayList.getIndex(childA) - displayList.getIndex(childB);
       });
     }
-
     return gameObjects;
   };
 
-  var GameObjectClass = Phaser.GameObjects.GameObject;
-
-  var IsGameObject = function IsGameObject(object) {
-    return object instanceof GameObjectClass;
-  };
-
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
-  var DynamicTexture = Phaser.Textures.DynamicTexture;
-  var UUID = Phaser.Utils.String.UUID;
-
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
-
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
-
+    var renderTexture = config.renderTexture;
     var x = GetValue$4(config, 'x', undefined);
     var y = GetValue$4(config, 'y', undefined);
     var width = GetValue$4(config, 'width', undefined);
@@ -880,12 +762,10 @@
     var originY = GetValue$4(config, 'originY', 0);
     var padding = GetValue$4(config, 'padding', 0);
     var scrollX, scrollY;
-
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
       var bounds = GetBoundsOfGameObjects(gameObjects, true);
       var isCenterOrigin = x !== undefined && y !== undefined;
-
       if (isCenterOrigin) {
         width = Math.max(x - bounds.left, bounds.right - x) * 2;
         height = Math.max(y - bounds.top, bounds.bottom - y) * 2;
@@ -899,105 +779,73 @@
         originX = 0;
         originY = 0;
       }
-
       scrollX = bounds.x;
       scrollY = bounds.y;
     } else {
       scrollX = x + (0 - originX) * width;
       scrollY = y + (0 - originY) * height;
     }
-
     scrollX -= padding;
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var scene = gameObjects[0].scene; // Snapshot on dynamicTexture directly
-
-    if (saveTexture && !renderTexture) {
-      renderTexture = new DynamicTexture(scene.sys.textures, UUID(), width, height);
-    } // Return a renderTexture
-
-
-    if (!renderTexture) {
+    var tempRT = !renderTexture;
+    // Configurate render texture
+    if (tempRT) {
+      var scene = gameObjects[0].scene;
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
-
-    if (renderTexture.setPosition) {
-      renderTexture.setPosition(x, y);
-    }
-
+    renderTexture.setPosition(x, y);
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
+    renderTexture.setOrigin(originX, originY);
+    renderTexture.camera.setScroll(scrollX, scrollY);
 
-    if (renderTexture.setOrigin) {
-      renderTexture.setOrigin(originX, originY);
-    }
-
-    renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
-
+    // Draw gameObjects
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-    renderTexture.draw(gameObjects); // Save render result to texture    
+    renderTexture.draw(gameObjects);
 
+    // Save render result to texture    
     var saveTexture = config.saveTexture;
-
     if (saveTexture) {
-      if (IsGameObject(renderTexture)) {
-        renderTexture.saveTexture(saveTexture);
-      } else {
-        var dynamicTexture = renderTexture;
-        var textureManager = dynamicTexture.manager;
-
-        if (textureManager.exists(dynamicTexture.key)) {
-          // Rename texture
-          textureManager.renameTexture(dynamicTexture.key, key);
-        } else {
-          // Add texture to texture manager
-          dynamicTexture.key = key;
-          textureManager.list[key] = dynamicTexture;
-          textureManager.emit('addtexture', key, dynamicTexture);
-          textureManager.emit("addtexture-".concat(key), dynamicTexture);
-        }
-      }
+      renderTexture.saveTexture(saveTexture);
     }
-
+    // Destroy render texture if tempRT and saveTexture
+    if (tempRT && saveTexture) {
+      renderTexture.destroy();
+    }
     return renderTexture;
   };
 
+  var RT$1 = Phaser.GameObjects.RenderTexture;
   var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
-
   var RenderTexture = /*#__PURE__*/function (_Image) {
     _inherits(RenderTexture, _Image);
-
     var _super = _createSuper(RenderTexture);
-
     function RenderTexture(scene, x, y, width, height, config) {
       var _this;
-
       _classCallCheck(this, RenderTexture);
-
       if (IsPlainObject$2(x)) {
         config = x;
         x = GetValue$3(config, 'x', 0);
         y = GetValue$3(config, 'y', 0);
         width = GetValue$3(config, 'width', 32);
         height = GetValue$3(config, 'height', 32);
-      } // dynamic-texture -> quad-image
+      }
 
-
-      var texture = CreateDynamicTexture(scene, width, height);
-      _this = _super.call(this, scene, x, y, texture, null, config);
+      // render-texture -> quad-image
+      var rt = new RT$1(scene, x, y, width, height).setOrigin(0.5);
+      _this = _super.call(this, scene, x, y, rt.texture.key, null, config);
       _this.type = 'rexQuadRenderTexture';
-      _this.rt = _this.texture;
+      _this.rt = rt;
       return _this;
     }
-
     _createClass(RenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
         _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
-
         this.rt.destroy();
         this.rt = null;
       }
@@ -1007,19 +855,15 @@
         if (config === undefined) {
           config = {};
         }
-
         config.gameObjects = gameObjects;
         config.renderTexture = this.rt;
         Snapshot(config);
-
         if (this.width !== this.frame.realWidth || this.height !== this.frame.realHeight) {
           this.syncSize();
         }
-
         return this;
       }
     }]);
-
     return RenderTexture;
   }(Image);
 
@@ -1035,11 +879,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var x = GetAdvancedValue$2(config, 'x', 0);
     var y = GetAdvancedValue$2(config, 'y', 0);
     var width = GetAdvancedValue$2(config, 'width', 32);
@@ -1053,19 +895,16 @@
     if (skewX === undefined) {
       skewX = 0;
     }
-
     if (skewY === undefined) {
       skewY = 0;
     }
-
     var width = gameObject.width,
-        height = gameObject.height;
+      height = gameObject.height;
     var ox = width * 0.5;
     var oy = height * 0.5;
     var xOffset = Math.tan(skewX) * oy;
     var yOffset = Math.tan(skewY) * ox;
     var controlPoints = gameObject.controlPoints;
-
     for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
       var controlPoint = controlPoints[i];
       var x = controlPoint.localXOrigin;
@@ -1079,17 +918,12 @@
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var DegToRad = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
-
   var SkewImage = /*#__PURE__*/function (_Image) {
     _inherits(SkewImage, _Image);
-
     var _super = _createSuper(SkewImage);
-
     function SkewImage(scene, x, y, key, frame) {
       var _this;
-
       _classCallCheck(this, SkewImage);
-
       if (IsPlainObject$1(x)) {
         var config = x;
         x = GetValue$2(config, 'x', 0);
@@ -1097,14 +931,12 @@
         key = GetValue$2(config, 'key', null);
         frame = GetValue$2(config, 'frame', null);
       }
-
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexSkewmage';
       _this._skewX = 0;
       _this._skewY = 0;
       return _this;
     }
-
     _createClass(SkewImage, [{
       key: "skewX",
       get: function get() {
@@ -1157,7 +989,6 @@
         if (skewY === undefined) {
           skewY = skewX;
         }
-
         this.skewX = skewX;
         this.skewY = skewY;
         return this;
@@ -1180,13 +1011,11 @@
         if (skewY === undefined) {
           skewY = skewX;
         }
-
         this.skewXDeg = skewX;
         this.skewYDeg = skewY;
         return this;
       }
     }]);
-
     return SkewImage;
   }(Image);
 
@@ -1202,11 +1031,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var key = GetAdvancedValue$1(config, 'key', null);
     var frame = GetAdvancedValue$1(config, 'frame', null);
     var gameObject = new SkewImage(this.scene, 0, 0, key, frame);
@@ -1214,45 +1041,38 @@
     return gameObject;
   }
 
+  var RT = Phaser.GameObjects.RenderTexture;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var SkewRenderTexture = /*#__PURE__*/function (_SkewImage) {
     _inherits(SkewRenderTexture, _SkewImage);
-
     var _super = _createSuper(SkewRenderTexture);
-
     function SkewRenderTexture(scene, x, y, width, height) {
       var _this;
-
       _classCallCheck(this, SkewRenderTexture);
-
       if (IsPlainObject(x)) {
         var config = x;
         x = GetValue$1(config, 'x', 0);
         y = GetValue$1(config, 'y', 0);
         width = GetValue$1(config, 'width', 32);
         height = GetValue$1(config, 'height', 32);
-      } // dynamic-texture -> quad-image
+      }
 
-
-      var texture = CreateDynamicTexture(scene, width, height);
-      _this = _super.call(this, scene, x, y, texture, null);
+      // render-texture -> skew-image
+      var rt = new RT(scene, x, y, width, height).setOrigin(0.5);
+      _this = _super.call(this, scene, x, y, rt.texture.key, null);
       _this.type = 'rexSkewRenderTexture';
-      _this.rt = _this.texture;
+      _this.rt = rt;
       return _this;
     }
-
     _createClass(SkewRenderTexture, [{
       key: "destroy",
       value: function destroy(fromScene) {
         _get(_getPrototypeOf(SkewRenderTexture.prototype), "destroy", this).call(this, fromScene);
-
         this.rt.destroy();
         this.rt = null;
       }
     }]);
-
     return SkewRenderTexture;
   }(SkewImage);
 
@@ -1268,11 +1088,9 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var x = GetAdvancedValue(config, 'x', 0);
     var y = GetAdvancedValue(config, 'y', 0);
     var width = GetAdvancedValue(config, 'width', 32);
@@ -1283,7 +1101,6 @@
   }
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var Init = function Init(parentContainer, rtOwner, config) {
     rtOwner.visibleSibling = [];
     rtOwner.isRunning = false;
@@ -1296,15 +1113,14 @@
     if (!parentContainer) {
       return false;
     }
-
-    var visibleSibling = rtOwner.visibleSibling; // Set all visible children back
-
+    var visibleSibling = rtOwner.visibleSibling;
+    // Set all visible children back
     for (var i = 0, cnt = visibleSibling.length; i < cnt; i++) {
       parentContainer.setChildVisible(visibleSibling[i], true);
     }
+    visibleSibling.length = 0;
 
-    visibleSibling.length = 0; // Set rtOwner to be invisible
-
+    // Set rtOwner to be invisible
     parentContainer.setChildVisible(rtOwner, false);
     rtOwner.isRunning = false;
     return true;
@@ -1314,9 +1130,9 @@
     if (!parentContainer) {
       return false;
     }
+    Exit(parentContainer, rtOwner);
 
-    Exit(parentContainer, rtOwner); // Get and paste all visible children, which dose not include this render texture
-
+    // Get and paste all visible children, which dose not include this render texture
     var useParentBounds = rtOwner.useParentBounds;
     Snapshot({
       gameObjects: parentContainer.getAllVisibleChildren(),
@@ -1327,22 +1143,21 @@
       height: useParentBounds ? parentContainer.displayHeighth : undefined,
       originX: useParentBounds ? parentContainer.originX : undefined,
       originY: useParentBounds ? parentContainer.originY : undefined
-    }); // Set rtOwner to be visible
+    });
 
-    parentContainer.setChildVisible(rtOwner, true); // Set visible sibling to be invisible
+    // Set rtOwner to be visible
+    parentContainer.setChildVisible(rtOwner, true);
 
+    // Set visible sibling to be invisible
     var visibleSibling = rtOwner.visibleSibling;
     var children = parentContainer.children;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       var child = children[i];
-
       if (child.visible && child !== rtOwner) {
         parentContainer.setChildVisible(child, false);
         visibleSibling.push(child);
       }
     }
-
     rtOwner.isRunning = true;
     return true;
   };
@@ -1350,41 +1165,32 @@
   var MeshRenderTextureBase = function MeshRenderTextureBase(RenderTextureOwnerClass) {
     return /*#__PURE__*/function (_RenderTextureOwnerCl) {
       _inherits(Base, _RenderTextureOwnerCl);
-
       var _super = _createSuper(Base);
-
       function Base(parentContainer, config) {
         var _this;
-
         _classCallCheck(this, Base);
-
         var scene = parentContainer.scene;
         _this = _super.call(this, scene, 0, 0, 1, 1, config);
         scene.add.existing(_assertThisInitialized(_this));
         Init(parentContainer, _assertThisInitialized(_this), config);
         return _this;
       }
-
       _createClass(Base, [{
         key: "destroy",
         value: function destroy(fromScene) {
           if (!this.scene) {
             return;
           }
-
           this.exit();
-
           _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
         }
       }, {
         key: "enter",
         value: function enter() {
           var result = Enter(this.rexContainer.parent, this);
-
           if (result) {
             this.syncSize();
           }
-
           return this;
         }
       }, {
@@ -1394,52 +1200,40 @@
           return this;
         }
       }]);
-
       return Base;
     }(RenderTextureOwnerClass);
   };
 
   var ContainerSkew = /*#__PURE__*/function (_MeshRenderTextureBas) {
     _inherits(ContainerSkew, _MeshRenderTextureBas);
-
     var _super = _createSuper(ContainerSkew);
-
     function ContainerSkew() {
       _classCallCheck(this, ContainerSkew);
-
       return _super.apply(this, arguments);
     }
-
     _createClass(ContainerSkew, [{
       key: "skewState",
       get: function get() {
         return this.isRunning;
       }
     }]);
-
     return ContainerSkew;
   }(MeshRenderTextureBase(SkewRenderTexture));
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -1449,31 +1243,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -1481,34 +1274,28 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var QuadImagePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(QuadImagePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(QuadImagePlugin);
-
     function QuadImagePlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, QuadImagePlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexQuadImage', QuadImageFactory, QuadImageCreator);
       pluginManager.registerGameObject('rexQuadRenderTexture', QuadRenderTextureFactory, QuadRenderTextureCreator);
       pluginManager.registerGameObject('rexSkewImage', SkewImageFactory, SkewImageCreator);
       pluginManager.registerGameObject('rexSkewRenderTexture', SkewRenderTextureFactory, SkewRenderTextureCreator);
       return _this;
     }
-
     _createClass(QuadImagePlugin, [{
       key: "start",
       value: function start() {
@@ -1521,10 +1308,8 @@
         return new ContainerSkew(parentContainer, config);
       }
     }]);
-
     return QuadImagePlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.QuadImage', Image);
   SetValue(window, 'RexPlugins.GameObjects.QuadRenderTexture', RenderTexture);
   SetValue(window, 'RexPlugins.GameObjects.SkewImage', SkewImage);

@@ -2,7 +2,7 @@
 import Canvas from '../../canvas/canvas/Canvas';
 import Background from './bob/background/Background';
 import InnerBounds from './bob/innerbounds/InnerBounds';
-import { IConfigTextStyle } from './bob/char/TextStyle';
+import { IConfigTextStyle as IConfigTextStyleBase } from './bob/char/TextStyle';
 import BobBaseClass from './bob/Base';
 import CharBobClass from './bob/char/CharData';
 import ImageBobClass from './bob/image/ImageData';
@@ -47,6 +47,10 @@ declare namespace DynamicText {
         strokeThickness?: number,
     }
 
+    interface IConfigTextStyle extends IConfigTextStyleBase {
+
+    }
+
     interface IConfigImage {
         width?: number,
         height?: number,
@@ -57,20 +61,25 @@ declare namespace DynamicText {
     type HAlignTypes = 0 | 1 | 2 | 'left' | 'center' | 'right';
     type VAlignTypes = 0 | 1 | 2 | 'top' | 'center' | 'bottom';
 
-    interface IConfigWordWrap {
+    interface IConfigWrapBase {
+        callback?: string | Function,
+        hAlign?: HAlignTypes,
+        vAlign?: VAlignTypes,
+    }
+
+    interface IConfigWordWrap extends IConfigWrapBase {
         padding?: {
-            top?: number, bottom?: number,
+            top?: number, left?: number, right?: number, bottom?: number,
         },
+        ascent?: number,
         lineHeight?: number,
         maxLines?: number,
         wrapWidth?: number,
         letterSpacing?: number,
-        hAlign?: HAlignTypes,
-        vAlign?: VAlignTypes,
         charWrap?: boolean
     }
 
-    interface IConfigVerticalWrap {
+    interface IConfigVerticalWrap extends IConfigWrapBase {
         padding: {
             top?: number, left?: number, right?: number, bottom?: number,
         },
@@ -81,8 +90,6 @@ declare namespace DynamicText {
         wrapHeight?: number,
         letterSpacing?: number,
         rtl?: boolean,
-        hAlign?: HAlignTypes,
-        vAlign?: VAlignTypes,
     }
 
     type BobBase = BobBaseClass;
@@ -116,7 +123,9 @@ declare namespace DynamicText {
 
         text?: string,
 
-        wrap?: IConfigWordWrap | IConfigVerticalWrap,
+        wrap?: IConfigWordWrap | IConfigVerticalWrap | IConfigWordWrap,
+
+        testString?: string,
 
         childrenInteractive?: boolean,
     }
@@ -149,28 +158,33 @@ declare class DynamicText extends Canvas {
 
     createCharChild(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): DynamicText.CharBob;
     createCharChildren(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): DynamicText.CharBob[];
     setText(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): this;
     appendText(
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): this;
     insertText(
         index: number,
         text: string,
-        style?: IConfigTextStyle
+        style?: DynamicText.IConfigTextStyle
     ): this;
     getText(activeOnly?: boolean): string;
     resetTextStyle(): this;
+    modifyTextStyle(style: DynamicText.IConfigTextStyle): this;
+    modifyDefaultTextStyle(style: DynamicText.IConfigTextStyle): this;
     text: string;
+
+    setTestString(testString: string): this;
+    testString: string;
 
     getCharChild(
         charIndex: number,
@@ -222,6 +236,8 @@ declare class DynamicText extends Canvas {
     removeChildren(): this;
     removeText(index: number, length?: number): this;
 
+    popChild(child: DynamicText.BobBase): this;
+
     moveChildToFist(child: DynamicText.BobBase): this;
     moveChildToLast(child: DynamicText.BobBase): this;
     movechildUp(child: DynamicText.BobBase): this;
@@ -242,6 +258,13 @@ declare class DynamicText extends Canvas {
     runVerticalWrap(
         config?: DynamicText.IConfigVerticalWrap
     ): DynamicText.IWrapResult;
+
+    runWrap(
+        config?: DynamicText.IConfigWordWrap | DynamicText.IConfigVerticalWrap | DynamicText.IConfigWrapBase
+    ): DynamicText.IWrapResult;
+
+    setVAlign(align: DynamicText.VAlignTypes): this;
+    setHAlign(align: DynamicText.HAlignTypes): this;
 
     getChildren(): DynamicText.BobBase[];
     getLastAppendedChildren(): DynamicText.BobBase[];

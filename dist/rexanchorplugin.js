@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,7 +141,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -176,76 +150,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -262,51 +225,87 @@
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
       // parent = bob object
       return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
-      this.parent = parent; // gameObject or scene
+      this.parent = parent; // gameObject, scene, or game
 
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.game = GetGame(parent);
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue(config, 'eventEmitter', true));
 
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
         // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
 
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
         }
 
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
+        this.game = undefined;
         this.isShutdown = true;
       }
     }, {
@@ -315,8 +314,8 @@
         this.shutdown(fromScene);
       }
     }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
         this.destroy(true);
       }
     }, {
@@ -325,31 +324,26 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
-
   var IsCameraObject = function IsCameraObject(object) {
     return object instanceof CameraClass;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
-
   var GetViewport = function GetViewport(scene, camera, out) {
     if (!IsCameraObject(camera)) {
       out = camera;
       camera = undefined;
     }
-
     if (out === undefined) {
       out = new Rectangle();
     } else if (out === true) {
       out = globRect;
     }
-
     var scaleManager = scene.sys.scale;
     var baseSize = scaleManager.baseSize;
     var parentSize = scaleManager.parentSize;
@@ -358,57 +352,44 @@
     var x = canvasBounds.x >= 0 ? 0 : -(canvasBounds.x * displayScale.x);
     var y = canvasBounds.y >= 0 ? 0 : -(canvasBounds.y * displayScale.y);
     var width;
-
     if (parentSize.width >= canvasBounds.width) {
       width = baseSize.width;
     } else {
       width = baseSize.width - (canvasBounds.width - parentSize.width) * displayScale.x;
     }
-
     var height;
-
     if (parentSize.height >= canvasBounds.height) {
       height = baseSize.height;
     } else {
       height = baseSize.height - (canvasBounds.height - parentSize.height) * displayScale.y;
     }
-
     out.setTo(x, y, width, height);
-
     if (camera) {
       out.width /= camera.zoomX;
       out.height /= camera.zoomY;
       out.centerX = camera.centerX + camera.scrollX;
       out.centerY = camera.centerY + camera.scrollY;
     }
-
     return out;
   };
-
   var globRect = new Rectangle();
 
   var Anchor = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Anchor, _ComponentBase);
-
     var _super = _createSuper(Anchor);
-
     function Anchor(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Anchor);
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
-      }); // No event emitter
+      });
+      // No event emitter
       // this.parent = gameObject;
 
       _this.viewport = undefined;
-
       _this.resetFromJSON(config);
-
       return _this;
     }
-
     _createClass(Anchor, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
@@ -416,14 +397,12 @@
         if (this.isShutdown) {
           return;
         }
-
         this.autoAnchor(false);
         this.viewport = undefined;
         this.onUpdateViewportCallback = undefined;
         this.onUpdateViewportCallbackScope = undefined;
         this.onResizeCallback = undefined;
         this.onResizeCallbackScope = undefined;
-
         _get(_getPrototypeOf(Anchor.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -431,11 +410,10 @@
       value: function resetFromJSON(o) {
         if (o === undefined) {
           o = {};
-        } // Position
+        }
 
-
+        // Position
         var alignX, configX;
-
         if (o.x !== undefined) {
           alignX = null;
           configX = o.x;
@@ -449,9 +427,7 @@
           alignX = 0.5;
           configX = o.centerX;
         }
-
         var alignY, configY;
-
         if (o.y !== undefined) {
           alignY = null;
           configY = o.y;
@@ -465,63 +441,52 @@
           alignY = 0.5;
           configY = o.centerY;
         }
-
         var percentageX, offsetX;
-
         if (configX !== undefined) {
           configX = configX.replace('left', '0%').replace('right', '100%').replace('center', '50%').split('%');
           percentageX = parseFloat(configX[0]) / 100;
           offsetX = configX[1] === '' ? 0 : parseFloat(configX[1]);
         }
-
         var percentageY, offsetY;
-
         if (configY !== undefined) {
           configY = configY.replace('top', '0%').replace('bottom', '100%').replace('center', '50%').split('%');
           percentageY = parseFloat(configY[0]) / 100;
           offsetY = configY[1] === '' ? 0 : parseFloat(configY[1]);
-        } // Size
+        }
 
-
+        // Size
         var configWidth = o.width;
         var percentageWidth, paddingWidth;
-
         if (configWidth !== undefined) {
           configWidth = configWidth.split('%');
           percentageWidth = parseFloat(configWidth[0]) / 100;
           paddingWidth = configWidth[1] === '' ? 0 : parseFloat(configWidth[1]);
         }
-
         var configHeight = o.height;
         var percentageHeight, paddingHeight;
-
         if (configHeight !== undefined) {
           configHeight = configHeight.split('%');
           percentageHeight = parseFloat(configHeight[0]) / 100;
           paddingHeight = configHeight[1] === '' ? 0 : parseFloat(configHeight[1]);
-        } // Position
+        }
 
-
+        // Position
         this.setAlign(alignX, alignY);
         this.setPercentage(percentageX, percentageY);
-        this.setOffset(offsetX, offsetY); // Size
-
+        this.setOffset(offsetX, offsetY);
+        // Size
         this.setSizePercentage(percentageWidth, percentageHeight);
         this.setSizePadding(paddingWidth, paddingHeight);
         var onResizeCallback = o.onResizeCallback;
         var onResizeCallbackScope = o.onResizeCallbackScope;
-
         if (onResizeCallback !== undefined) {
           this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
         }
-
         var onUpdateViewportCallback = o.onUpdateViewportCallback;
         var onUpdateViewportCallbackScope = o.onUpdateViewportCallbackScope;
-
         if (onUpdateViewportCallback !== undefined) {
           this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
         }
-
         this.autoAnchor(o.enable);
         return this;
       }
@@ -531,24 +496,21 @@
         if (enable === undefined) {
           enable = true;
         }
-
         enable = !!enable;
-
         if (this.autoAnchorEnable === enable) {
           return this;
         }
-
         if (enable) {
           this.scene.sys.scale.on('resize', this.anchor, this);
           this.anchor();
         } else {
           this.scene.sys.scale.off('resize', this.anchor, this);
         }
-
         this.autoAnchorEnable = enable;
         return this;
-      } // Position
+      }
 
+      // Position
     }, {
       key: "setAlign",
       value: function setAlign(x, y) {
@@ -569,8 +531,9 @@
         this.offsetX = x;
         this.offsetY = y;
         return this;
-      } // Size
+      }
 
+      // Size
     }, {
       key: "setSizePercentage",
       value: function setSizePercentage(width, height) {
@@ -611,24 +574,19 @@
       key: "updateSize",
       value: function updateSize() {
         var callback = this.onResizeCallback,
-            scope = this.onResizeCallbackScope;
+          scope = this.onResizeCallbackScope;
         var newWidth = this.anchorWidth,
-            newHeight = this.anchorHeight;
-
+          newHeight = this.anchorHeight;
         if (newWidth === undefined && newHeight === undefined || !callback) {
           return;
         }
-
         var gameObject = this.parent;
-
         if (newWidth === undefined) {
           newWidth = gameObject.width;
         }
-
         if (newHeight === undefined) {
           newHeight = gameObject.height;
         }
-
         if (scope) {
           callback.call(scope, newWidth, newHeight, gameObject, this);
         } else {
@@ -639,19 +597,16 @@
       key: "updatePosition",
       value: function updatePosition() {
         var gameObject = this.parent;
-
         if (this.alignX === null) {
           gameObject.x = this.anchorX;
         } else if (this.alignX !== undefined) {
           gameObject.x = this.anchorX + gameObject.displayWidth * (gameObject.originX - this.alignX);
         }
-
         if (this.alignY === null) {
           gameObject.y = this.anchorY;
         } else if (this.alignY !== undefined) {
           gameObject.y = this.anchorY + gameObject.displayHeight * (gameObject.originY - this.alignY);
         }
-
         return this;
       }
     }, {
@@ -670,7 +625,6 @@
         if (this.percentageWidth === undefined) {
           return undefined;
         }
-
         return this.viewport.width * this.percentageWidth + this.paddingWidth;
       }
     }, {
@@ -679,7 +633,6 @@
         if (this.percentageHeight === undefined) {
           return undefined;
         }
-
         return this.viewport.height * this.percentageHeight + this.paddingHeight;
       }
     }, {
@@ -689,8 +642,7 @@
         this.viewport = GetViewport(this.scene, camera, this.viewport);
         var viewport = this.viewport;
         var callback = this.onUpdateViewportCallback,
-            scope = this.onUpdateViewportCallbackScope;
-
+          scope = this.onUpdateViewportCallbackScope;
         if (callback) {
           if (scope) {
             callback.call(scope, viewport, this.parent, this);
@@ -700,21 +652,16 @@
         }
       }
     }]);
-
     return Anchor;
   }(ComponentBase);
 
   var AnchorPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(AnchorPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(AnchorPlugin);
-
     function AnchorPlugin(pluginManager) {
       _classCallCheck(this, AnchorPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(AnchorPlugin, [{
       key: "start",
       value: function start() {
@@ -727,7 +674,6 @@
         return new Anchor(gameObject, config);
       }
     }]);
-
     return AnchorPlugin;
   }(Phaser.Plugins.BasePlugin);
 

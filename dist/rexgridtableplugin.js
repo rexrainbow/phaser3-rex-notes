@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,7 +35,6 @@
     });
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -50,15 +46,12 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -71,14 +64,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -86,12 +77,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -99,86 +88,66 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
-
   function set(target, property, value, receiver) {
     if (typeof Reflect !== "undefined" && Reflect.set) {
       set = Reflect.set;
     } else {
       set = function set(target, property, value, receiver) {
         var base = _superPropBase(target, property);
-
         var desc;
-
         if (base) {
           desc = Object.getOwnPropertyDescriptor(base, property);
-
           if (desc.set) {
             desc.set.call(receiver, value);
             return true;
@@ -186,49 +155,37 @@
             return false;
           }
         }
-
         desc = Object.getOwnPropertyDescriptor(receiver, property);
-
         if (desc) {
           if (!desc.writable) {
             return false;
           }
-
           desc.value = value;
           Object.defineProperty(receiver, property, desc);
         } else {
           _defineProperty(receiver, property, value);
         }
-
         return true;
       };
     }
-
     return set(target, property, value, receiver);
   }
-
   function _set(target, property, value, receiver, isStrict) {
     var s = set(target, property, value, receiver || target);
-
     if (!s && isStrict) {
       throw new Error('failed to set property');
     }
-
     return value;
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -237,15 +194,11 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
@@ -253,38 +206,28 @@
   var Zone = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
   var RemoveItem = Phaser.Utils.Array.Remove;
-
   var Base = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
-
     var _super = _createSuper(Base);
-
     function Base(scene, x, y, width, height) {
       var _this;
-
       _classCallCheck(this, Base);
-
       if (x === undefined) {
         x = 0;
       }
-
       if (y === undefined) {
         y = 0;
       }
-
       if (width === undefined) {
         width = 1;
       }
-
       if (height === undefined) {
         height = 1;
       }
-
       _this = _super.call(this, scene, x, y, width, height);
       _this.children = [];
       return _this;
     }
-
     _createClass(Base, [{
       key: "destroy",
       value: function destroy(fromScene) {
@@ -292,26 +235,23 @@
         if (!this.scene) {
           return;
         }
-
         if (fromScene) {
           // Stop scene
           var child;
-
           for (var i = this.children.length - 1; i >= 0; i--) {
             child = this.children[i];
-
-            if (!child.parentContainer && // Not in container
+            if (!child.parentContainer &&
+            // Not in container
             !child.displayList // Not in scene, neither in layer
             ) {
               // Destroy child which is not in scene, container, or layer manually
               child.destroy(fromScene);
             }
           }
-        } // Destroy/remove children
+        }
 
-
+        // Destroy/remove children
         this.clear(!fromScene);
-
         _get(_getPrototypeOf(Base.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
@@ -323,7 +263,8 @@
       key: "add",
       value: function add(gameObjects) {
         var parent = this;
-        AddItem(this.children, gameObjects, 0, // Callback of item added
+        AddItem(this.children, gameObjects, 0,
+        // Callback of item added
         function (gameObject) {
           gameObject.once('destroy', parent.onChildDestroy, parent);
         }, this);
@@ -333,10 +274,10 @@
       key: "remove",
       value: function remove(gameObjects, destroyChild) {
         var parent = this;
-        RemoveItem(this.children, gameObjects, // Callback of item removed
+        RemoveItem(this.children, gameObjects,
+        // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', parent.onChildDestroy, parent);
-
           if (destroyChild) {
             gameObject.destroy();
           }
@@ -354,63 +295,50 @@
       value: function clear(destroyChild) {
         var parent = this;
         var gameObject;
-
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
           gameObject = this.children[i];
           gameObject.off('destroy', parent.onChildDestroy, parent);
-
           if (destroyChild) {
             gameObject.destroy();
           }
         }
-
         this.children.length = 0;
         return this;
       }
     }]);
-
     return Base;
   }(Zone);
-
   var Components = Phaser.GameObjects.Components;
   Phaser.Class.mixin(Base, [Components.Alpha, Components.Flip]);
 
   var GetParent = function GetParent(gameObject, name) {
     var parent;
-
     if (name === undefined) {
       if (gameObject.hasOwnProperty('rexContainer')) {
         parent = gameObject.rexContainer.parent;
       }
     } else {
       parent = GetParent(gameObject);
-
       while (parent) {
         if (parent.name === name) {
           break;
         }
-
         parent = GetParent(parent);
       }
     }
-
     return parent;
   };
-
   var GetTopmostParent = function GetTopmostParent(gameObject) {
     var parent = GetParent(gameObject);
-
     while (parent) {
       gameObject = parent;
       parent = GetParent(parent);
     }
-
     return gameObject;
   };
 
   var DegToRad$1 = Phaser.Math.DegToRad;
   var RadToDeg = Phaser.Math.RadToDeg;
-
   var GetLocalState = function GetLocalState(gameObject) {
     if (!gameObject.hasOwnProperty('rexContainer')) {
       var rexContainer = {
@@ -456,7 +384,6 @@
       });
       gameObject.rexContainer = rexContainer;
     }
-
     return gameObject.rexContainer;
   };
 
@@ -465,9 +392,7 @@
       if (parent === undefined) {
         parent = this;
       }
-
       var localState = GetLocalState(gameObject);
-
       if (parent) {
         // Add to parent
         localState.parent = parent;
@@ -477,7 +402,6 @@
         localState.parent = null;
         localState.self = null;
       }
-
       return this;
     },
     getParent: function getParent(gameObject, name) {
@@ -485,25 +409,21 @@
         name = gameObject;
         gameObject = undefined;
       }
-
       if (gameObject === undefined) {
         gameObject = this;
       }
-
       return GetParent(gameObject, name);
     },
     getTopmostParent: function getTopmostParent(gameObject) {
       if (gameObject === undefined) {
         gameObject = this;
       }
-
       return GetTopmostParent(gameObject);
     }
   };
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var BaseAdd = Base.prototype.add;
-
   var Add = function Add(gameObject, config) {
     this.setParent(gameObject);
     var state = GetLocalState(gameObject);
@@ -518,23 +438,23 @@
     this.addToRenderLayer(gameObject);
     return this;
   };
-
   var AddLocal = function AddLocal(gameObject, config) {
-    this.setParent(gameObject); // Set local state from child directly
+    this.setParent(gameObject);
 
+    // Set local state from child directly
     var state = GetLocalState(gameObject);
-    SetupSyncFlags(state, config); // Position
-
+    SetupSyncFlags(state, config);
+    // Position
     state.x = gameObject.x;
     state.y = gameObject.y;
     state.rotation = gameObject.rotation;
     state.scaleX = gameObject.scaleX;
-    state.scaleY = gameObject.scaleY; // Alpha
-
-    state.alpha = gameObject.alpha; // Visible
-
-    state.visible = gameObject.visible; // Active
-
+    state.scaleY = gameObject.scaleY;
+    // Alpha
+    state.alpha = gameObject.alpha;
+    // Visible
+    state.visible = gameObject.visible;
+    // Active
     state.active = gameObject.active;
     this.updateChildPosition(gameObject).updateChildAlpha(gameObject).updateChildVisible(gameObject) // Apply parent's visible to child
     .updateChildActive(gameObject) // Apply parent's active to child
@@ -545,14 +465,12 @@
     this.addToRenderLayer(gameObject);
     return this;
   };
-
   var SetupSyncFlags = function SetupSyncFlags(state, config) {
     state.syncPosition = GetValue$8(config, 'syncPosition', true);
     state.syncRotation = GetValue$8(config, 'syncRotation', true);
     state.syncScale = GetValue$8(config, 'syncScale', true);
     state.syncAlpha = GetValue$8(config, 'syncAlpha', true);
   };
-
   var AddChild = {
     // Can override this method
     add: function add(gameObject) {
@@ -561,7 +479,6 @@
       } else {
         Add.call(this, gameObject);
       }
-
       return this;
     },
     // Don't override this method
@@ -571,14 +488,12 @@
       } else {
         Add.call(this, gameObject, config);
       }
-
       return this;
     },
     addMultiple: function addMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         Add.call(this, gameObjects[i]);
       }
-
       return this;
     },
     addLocal: function addLocal(gameObject) {
@@ -587,7 +502,6 @@
       } else {
         AddLocal.call(this, gameObject);
       }
-
       return this;
     },
     // Don't override this method
@@ -597,14 +511,12 @@
       } else {
         AddLocal.call(this, gameObject, config);
       }
-
       return this;
     },
     addLocalMultiple: function addLocalMultiple(gameObjects) {
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         AddLocal.call(this, gameObjects[i]);
       }
-
       return this;
     }
   };
@@ -617,13 +529,10 @@
       if (GetParent(gameObject) !== this) {
         return this;
       }
-
       this.setParent(gameObject, null);
-
       if (!destroyChild) {
         this.removeFromRenderLayer(gameObject);
       }
-
       BaseRemove.call(this, gameObject, destroyChild);
       return this;
     },
@@ -632,28 +541,22 @@
       if (GetParent(gameObject) !== this) {
         return this;
       }
-
       this.setParent(gameObject, null);
-
       if (!destroyChild) {
         this.removeFromRenderLayer(gameObject);
       }
-
       BaseRemove.call(this, gameObject, destroyChild);
       return this;
     },
     clear: function clear(destroyChild) {
       var children = this.children;
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
         this.setParent(child, null);
-
         if (!destroyChild) {
           this.removeFromRenderLayer(child);
         }
       }
-
       BaseClear.call(this, destroyChild);
       return this;
     }
@@ -671,7 +574,6 @@
       for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         this.resetChildState(gameObjects[i]);
       }
-
       return this;
     },
     syncProperties: function syncProperties() {
@@ -685,10 +587,10 @@
     worldToLocal: function worldToLocal(point) {
       // Transform
       point.x -= this.x;
-      point.y -= this.y; // Rotate
-
-      RotateAround$2(point, 0, 0, -this.rotation); // Scale
-
+      point.y -= this.y;
+      // Rotate
+      RotateAround$2(point, 0, 0, -this.rotation);
+      // Scale
       point.x /= this.scaleX;
       point.y /= this.scaleY;
       return point;
@@ -696,10 +598,10 @@
     localToWorld: function localToWorld(point) {
       // Scale
       point.x *= this.scaleX;
-      point.y *= this.scaleY; // Rotate
-
-      RotateAround$2(point, 0, 0, this.rotation); // Transform
-
+      point.y *= this.scaleY;
+      // Rotate
+      RotateAround$2(point, 0, 0, this.rotation);
+      // Transform
       point.x += this.x;
       point.y += this.y;
       return point;
@@ -719,37 +621,30 @@
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = false;
       }
-
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncPosition) {
         child.x = state.x;
         child.y = state.y;
         parent.localToWorld(child);
       }
-
       if (state.syncRotation) {
         child.rotation = state.rotation + parent.rotation;
       }
-
       if (state.syncScale) {
         child.scaleX = state.scaleX * parent.scaleX;
         child.scaleY = state.scaleY * parent.scaleY;
       }
-
       if (child.isRexContainerLite) {
         child.syncChildrenEnable = true;
         child.syncPosition();
       }
-
       return this;
     },
     syncPosition: function syncPosition() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildPosition, this);
       }
-
       return this;
     },
     resetChildPositionState: function resetChildPositionState(child) {
@@ -778,11 +673,9 @@
     },
     resetLocalPositionState: function resetLocalPositionState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildPositionState(this);
       }
-
       return this;
     }
   };
@@ -792,18 +685,15 @@
     updateChildRotation: function updateChildRotation(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncRotation) {
         child.rotation = parent.rotation + state.rotation;
       }
-
       return this;
     },
     syncRotation: function syncRotation() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildRotation, this);
       }
-
       return this;
     },
     resetChildRotationState: function resetChildRotationState(child) {
@@ -836,11 +726,9 @@
     },
     resetLocalRotationState: function resetLocalRotationState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildRotationState(this);
       }
-
       return this;
     }
   };
@@ -849,19 +737,16 @@
     updateChildScale: function updateChildScale(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncScale) {
         child.scaleX = parent.scaleX * state.scaleX;
         child.scaleY = parent.scaleY * state.scaleY;
       }
-
       return this;
     },
     syncScale: function syncScale() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildScale, this);
       }
-
       return this;
     },
     resetChildScaleState: function resetChildScaleState(child) {
@@ -875,7 +760,6 @@
       if (scaleY === undefined) {
         scaleY = scaleX;
       }
-
       child.scaleX = scaleX;
       child.scaleY = scaleY;
       this.resetChildScaleState(child);
@@ -885,7 +769,6 @@
       if (scaleY === undefined) {
         scaleY = scaleX;
       }
-
       var state = GetLocalState(child);
       state.scaleX = scaleX;
       state.scaleY = scaleY;
@@ -899,11 +782,9 @@
     },
     resetLocalScaleState: function resetLocalScaleState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildScaleState(this);
       }
-
       return this;
     }
   };
@@ -932,16 +813,14 @@
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildVisible, this);
       }
-
       return this;
     },
     resetChildVisibleState: function resetChildVisibleState(child) {
-      var localState = GetLocalState(child); // Delete maskVisible property
-
+      var localState = GetLocalState(child);
+      // Delete maskVisible property
       if (localState.hasOwnProperty('maskVisible')) {
         delete localState.maskVisible;
       }
-
       localState.visible = child.visible;
       return this;
     },
@@ -955,7 +834,6 @@
       if (visible === undefined) {
         visible = true;
       }
-
       var localState = GetLocalState(child);
       localState.visible = visible;
       this.updateChildVisible(child);
@@ -966,7 +844,6 @@
       if (visible === undefined) {
         visible = true;
       }
-
       var localState = GetLocalState(child);
       localState.maskVisible = visible;
       this.updateChildVisible(child);
@@ -974,11 +851,9 @@
     },
     resetLocalVisibleState: function resetLocalVisibleState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildVisibleState(this);
       }
-
       return this;
     }
   };
@@ -987,18 +862,15 @@
     updateChildAlpha: function updateChildAlpha(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
-
       if (state.syncAlpha) {
         child.alpha = parent.alpha * state.alpha;
       }
-
       return this;
     },
     syncAlpha: function syncAlpha() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildAlpha, this);
       }
-
       return this;
     },
     resetChildAlphaState: function resetChildAlphaState(child) {
@@ -1020,11 +892,9 @@
     },
     resetLocalAlphaState: function resetLocalAlphaState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildAlphaState(this);
       }
-
       return this;
     }
   };
@@ -1040,7 +910,6 @@
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildActive, this);
       }
-
       return this;
     },
     resetChildActiveState: function resetChildActiveState(child) {
@@ -1057,7 +926,6 @@
       if (active === undefined) {
         active = true;
       }
-
       var localState = GetLocalState(child);
       localState.active = active;
       this.updateChildActive(child);
@@ -1065,11 +933,9 @@
     },
     resetLocalActiveState: function resetLocalActiveState() {
       var parent = GetLocalState(this).parent;
-
       if (parent) {
         parent.resetChildActiveState(this);
       }
-
       return this;
     }
   };
@@ -1085,7 +951,6 @@
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildScrollFactor, this);
       }
-
       return this;
     }
   };
@@ -1096,20 +961,16 @@
       if (this.mask == null) {
         return this;
       }
-
       var maskGameObject = this.mask.hasOwnProperty('geometryMask') ? this.mask.geometryMask : this.mask.bitmapMask;
-
       if (maskGameObject !== child) {
         child.mask = this.mask;
       }
-
       return this;
     },
     syncMask: function syncMask() {
       if (this.syncChildrenEnable) {
         this.children.forEach(this.updateChildMask, this);
       }
-
       return this;
     },
     setMask: function setMask(mask) {
@@ -1119,19 +980,17 @@
     clearMask: function clearMask(destroyMask) {
       if (destroyMask === undefined) {
         destroyMask = false;
-      } // Clear current mask
+      }
 
-
-      this._mask = null; // Clear children mask
-
+      // Clear current mask
+      this._mask = null;
+      // Clear children mask
       this.children.forEach(function (child) {
         child.clearMask(false);
       });
-
       if (destroyMask && this.mask) {
         this.mask.destroy();
       }
-
       return this;
     }
   };
@@ -1140,15 +999,12 @@
     if (gameObjects.length === 0) {
       return gameObjects;
     }
-
     if (descending === undefined) {
       descending = false;
     }
-
     var scene = gameObjects[0].scene;
     var displayList = scene.sys.displayList;
     displayList.depthSort();
-
     if (descending) {
       gameObjects.sort(function (childA, childB) {
         return displayList.getIndex(childB) - displayList.getIndex(childA);
@@ -1158,22 +1014,18 @@
         return displayList.getIndex(childA) - displayList.getIndex(childB);
       });
     }
-
     return gameObjects;
   };
 
   var Depth = {
     setDepth: function setDepth(value, containerOnly) {
       this.depth = value;
-
       if (!containerOnly && this.children) {
         var children = this.getAllChildren();
-
         for (var i = 0, cnt = children.length; i < cnt; i++) {
           children[i].depth = value;
         }
       }
-
       return this;
     },
     swapDepth: function swapDepth(containerB) {
@@ -1185,97 +1037,76 @@
     },
     incDepth: function incDepth(inc) {
       this.depth += inc;
-
       if (this.children) {
         var children = this.getAllChildren();
-
         for (var i = 0, cnt = children.length; i < cnt; i++) {
           children[i].depth += inc;
         }
       }
-
       return this;
     },
     bringToTop: function bringToTop() {
       var displayList = this.displayList;
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, false);
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-
         if (displayList.exists(child)) {
           displayList.bringToTop(child);
         }
       }
-
       return this;
     },
     moveDepthBelow: function moveDepthBelow(gameObject) {
       var displayList = this.displayList;
-
       if (gameObject.displayList !== displayList) {
         // Do nothing if not at the same display list
         return this;
       }
-
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, false);
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-
         if (displayList.exists(child)) {
           displayList.moveBelow(gameObject, child);
           break;
         }
       }
-
       return this;
     },
     moveDepthAbove: function moveDepthAbove(gameObject) {
       var displayList = this.displayList;
-
       if (gameObject.displayList !== displayList) {
         // Do nothing if not at the same display list
         return this;
       }
-
       var children = this.getAllChildren([this]);
       SortGameObjectsByDepth(children, true);
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         var child = children[i];
-
         if (displayList.exists(child)) {
           displayList.moveAbove(gameObject, child);
           break;
         }
       }
-
       return this;
     }
   };
 
   var DepthFirstSearch = function DepthFirstSearch(root, callback) {
     var skip = callback(root);
-
     if (!skip && root.isRexContainerLite) {
       var children = root.children;
-
       for (var i = 0, cnt = children.length; i < cnt; i++) {
         DepthFirstSearch(children[i], callback);
       }
     }
   };
-
   var BreadthFirstSearch = function BreadthFirstSearch(root, callback) {
     var queue = [root];
-
     while (queue.length > 0) {
       var current = queue.shift();
       var skip = callback(current);
-
       if (!skip && current.isRexContainerLite) {
         queue.push.apply(queue, _toConsumableArray(current.children));
       }
@@ -1290,8 +1121,8 @@
       } else {
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
           out.push(this.children[i]);
-        } // Copy children
-
+        }
+        // Copy children
       }
 
       return out;
@@ -1300,14 +1131,12 @@
       if (out === undefined) {
         out = [];
       }
-
       var root = this;
       BreadthFirstSearch(root, function (child) {
         // Don't add root
         if (child === root) {
           return;
         }
-
         out.push(child);
       });
       return out;
@@ -1316,19 +1145,16 @@
       if (out === undefined) {
         out = [];
       }
-
       var root = this;
       BreadthFirstSearch(root, function (child) {
         // Don't add root
         if (child === root) {
           return;
-        } // Don't add invisible child
-
-
+        }
+        // Don't add invisible child
         if (!child.visible) {
           return true;
         }
-
         out.push(child);
       });
       return out;
@@ -1337,7 +1163,6 @@
       if (root === undefined) {
         root = this;
       }
-
       BreadthFirstSearch(root, callback);
       return this;
     },
@@ -1345,14 +1170,12 @@
       if (root === undefined) {
         root = this;
       }
-
       DepthFirstSearch(root, callback);
       return this;
     },
     contains: function contains(gameObject) {
       // Override Base.contains method
       var parent = GetParent(gameObject);
-
       if (!parent) {
         return false;
       } else if (parent === this) {
@@ -1369,13 +1192,10 @@
         // Breadth-first search
         var queue = [this];
         var parent, child;
-
         while (queue.length) {
           parent = queue.shift();
-
           for (var i = 0, cnt = parent.children.length; i < cnt; i++) {
             child = parent.children[i];
-
             if (child.name === name) {
               return child;
             } else if (child.isRexContainerLite) {
@@ -1383,7 +1203,6 @@
             }
           }
         }
-
         return null;
       }
     },
@@ -1411,64 +1230,50 @@
 
   var GetLocalStates = function GetLocalStates(gameObjects) {
     var localStates = [];
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       var gameObject = gameObjects[i];
-
       if (!gameObject.hasOwnProperty('rexContainer')) {
         continue;
       }
-
       localStates.push(gameObject.rexContainer);
     }
-
     return localStates;
   };
-
   var GetScene = function GetScene(gameObjects) {
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       var scene = gameObjects[i].scene;
-
       if (scene) {
         return scene;
       }
     }
-
     return null;
   };
-
   var UpdateChild = function UpdateChild(tween, key, target) {
     if (!target.parent) {
       // target object was removed, so remove this tween too
       tween.remove();
       return;
     }
-
     var parent = target.parent;
     var child = target.self;
-
     switch (key) {
       case 'x':
       case 'y':
         parent.updateChildPosition(child);
         break;
-
       case 'angle':
       case 'rotation':
         parent.updateChildRotation(child);
         break;
-
       case 'scaleX':
       case 'scaleY':
       case 'displayWidth':
       case 'displayHeight':
         parent.updateChildScale(child);
         break;
-
       case 'alpha':
         parent.updateChildAlpha(child);
         break;
-
       default:
         parent.updateChildPosition(child);
         parent.updateChildRotation(child);
@@ -1477,25 +1282,22 @@
         break;
     }
   };
-
   var Tween = {
     tweenChild: function tweenChild(tweenConfig) {
       var targets = tweenConfig.targets;
-
       if (!Array.isArray(targets)) {
         targets = [targets];
       }
-
       var scene = this.scene || GetScene(targets);
-
       if (!scene) {
         return;
-      } // Map child game objects to local states
+      }
 
-
+      // Map child game objects to local states
       tweenConfig.targets = GetLocalStates(targets);
-      var tween = scene.tweens.add(tweenConfig); // Update child game object in 'update' event
+      var tween = scene.tweens.add(tweenConfig);
 
+      // Update child game object in 'update' event
       tween.on('update', UpdateChild);
       return tween;
     },
@@ -1505,54 +1307,42 @@
     },
     createTweenChildConfig: function createTweenChildConfig(tweenConfig) {
       var targets = tweenConfig.targets;
-
       if (targets) {
         if (!Array.isArray(targets)) {
           targets = [targets];
-        } // Map child game objects to local states
-
-
+        }
+        // Map child game objects to local states
         tweenConfig.targets = GetLocalStates(targets);
       }
-
       var onUpdate = tweenConfig.onUpdate;
-
       tweenConfig.onUpdate = function (tween, target) {
         if (onUpdate) {
           onUpdate(tween, target);
         }
-
         UpdateChild(tween, undefined, target);
       };
-
       return tweenConfig;
     },
     tween: function tween(tweenConfig) {
       var scene = this.scene;
-
       if (!tweenConfig.targets) {
         tweenConfig.targets = this;
       }
-
       return scene.tweens.add(tweenConfig);
     },
     timelineChild: function timelineChild(timelineConfig) {
-      var targets = timelineConfig.targets; // Map child game objects to local states
-
+      var targets = timelineConfig.targets;
+      // Map child game objects to local states
       if (targets) {
         if (!Array.isArray(targets)) {
           targets = [targets];
         }
-
         timelineConfig.targets = GetLocalStates(targets);
       }
-
       var tweens = timelineConfig.tweens;
-
       for (var i = 0, cnt = tweens.length; i < cnt; i++) {
         tweens[i] = this.createTweenChildConfig(tweens[i]);
       }
-
       var timeline = this.scene.tweens.timeline(timelineConfig);
       return timeline;
     }
@@ -1566,12 +1356,10 @@
     this._setParentContainerFlag = false;
     return this;
   };
-
   var RemoveFromContainer = function RemoveFromContainer() {
     if (!this.parentContainer) {
       return this;
     }
-
     this._setParentContainerFlag = true;
     var gameObjects = this.getAllChildren([this]);
     SortGameObjectsByDepth(gameObjects);
@@ -1580,7 +1368,6 @@
     this._setParentContainerFlag = false;
     return this;
   };
-
   var AddToContainer$1 = {
     addToLayer: AddToContainer,
     addToContainer: AddToContainer,
@@ -1592,8 +1379,8 @@
       if (this.layer) {
         return this;
       }
-
-      var layer = this.scene.add.layer(); // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
+      var layer = this.scene.add.layer();
+      // layer.name = (this.name) ? `${this.name}.privateLayer` : 'privateLayer';
 
       this.moveDepthBelow(layer);
       this.addToLayer(layer);
@@ -1604,28 +1391,23 @@
       if (!this.layer) {
         this.enableLayer();
       }
-
       return this.layer;
     },
     getRenderLayer: function getRenderLayer() {
       // This containerLite has a layer
       if (this.layer) {
         return this.layer;
-      } // One of parent container has a layer
+      }
 
-
+      // One of parent container has a layer
       var parent = this.getParent();
-
       while (parent) {
         var layer = parent.layer;
-
         if (layer) {
           return layer;
         }
-
         parent = parent.getParent();
       }
-
       return null;
     },
     // Internal method for adding child
@@ -1633,15 +1415,13 @@
       // Don't add to layer if gameObject is not in any displayList
       if (!gameObject.displayList) {
         return this;
-      } // Move gameObject from scene to layer
+      }
 
-
+      // Move gameObject from scene to layer
       var layer = this.getRenderLayer();
-
       if (!layer) {
         return this;
       }
-
       if (gameObject.isRexContainerLite) {
         // Add containerLite and its children
         gameObject.addToLayer(layer);
@@ -1649,7 +1429,6 @@
         // Add gameObject directly
         layer.add(gameObject);
       }
-
       var state = GetLocalState(gameObject);
       state.layer = layer;
       return this;
@@ -1659,11 +1438,9 @@
       // Move gameObject from layer to scene
       var state = GetLocalState(gameObject);
       var layer = state.layer;
-
       if (!layer) {
         return this;
       }
-
       layer.remove(gameObject);
       state.layer = null;
       return this;
@@ -1677,7 +1454,6 @@
       return gameObject.width;
     }
   };
-
   var GetDisplayHeight = function GetDisplayHeight(gameObject) {
     if (gameObject.displayHeight !== undefined) {
       return gameObject.displayHeight;
@@ -1689,7 +1465,6 @@
   var Rectangle$1 = Phaser.Geom.Rectangle;
   var Vector2 = Phaser.Math.Vector2;
   var RotateAround$1 = Phaser.Math.RotateAround;
-
   var GetBounds = function GetBounds(gameObject, output) {
     if (output === undefined) {
       output = new Rectangle$1();
@@ -1697,18 +1472,18 @@
       if (GlobRect$1 === undefined) {
         GlobRect$1 = new Rectangle$1();
       }
-
       output = GlobRect$1;
     }
-
     if (gameObject.getBounds) {
       return gameObject.getBounds(output);
-    } //  We can use the output object to temporarily store the x/y coords in:
+    }
 
+    //  We can use the output object to temporarily store the x/y coords in:
 
-    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy; // Instead of doing a check if parent container is
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+    // Instead of doing a check if parent container is
     // defined per corner we only do it once.
-
     if (gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       GetTopLeft(gameObject, output);
@@ -1741,16 +1516,13 @@
       BRx = output.x;
       BRy = output.y;
     }
-
     output.x = Math.min(TLx, TRx, BLx, BRx);
     output.y = Math.min(TLy, TRy, BLy, BRy);
     output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
     output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
     return output;
   };
-
   var GlobRect$1 = undefined;
-
   var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1758,19 +1530,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopLeft) {
       return gameObject.getTopLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1778,19 +1546,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getTopRight) {
       return gameObject.getTopRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1798,19 +1562,15 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomLeft) {
       return gameObject.getBottomLeft(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
     if (output === undefined) {
       output = new Vector2();
@@ -1818,41 +1578,32 @@
       if (GlobVector === undefined) {
         GlobVector = new Vector2();
       }
-
       output = GlobVector;
     }
-
     if (gameObject.getBottomRight) {
       return gameObject.getBottomRight(output);
     }
-
     output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
     output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
     return PrepareBoundsOutput(gameObject, output, includeParent);
   };
-
   var GlobVector = undefined;
-
   var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
     if (includeParent === undefined) {
       includeParent = false;
     }
-
     if (gameObject.rotation !== 0) {
       RotateAround$1(output, gameObject.x, gameObject.y, gameObject.rotation);
     }
-
     if (includeParent && gameObject.parentContainer) {
       var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
       parentMatrix.transformPoint(output.x, output.y, output);
     }
-
     return output;
   };
 
   var Rectangle = Phaser.Geom.Rectangle;
   var Union = Phaser.Geom.Rectangle.Union;
-
   var GetBoundsOfGameObjects = function GetBoundsOfGameObjects(gameObjects, out) {
     if (out === undefined) {
       out = new Rectangle();
@@ -1860,23 +1611,17 @@
       if (GlobRect === undefined) {
         GlobRect = new Rectangle();
       }
-
       out = GlobRect;
     }
-
     out.setTo(0, 0, 0, 0);
     var gameObject;
     var firstClone = true;
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       gameObject = gameObjects[i];
-
       if (!gameObject.getBounds) {
         continue;
       }
-
       var boundsRect = GetBounds(gameObject, true);
-
       if (firstClone) {
         out.setTo(boundsRect.x, boundsRect.y, boundsRect.width, boundsRect.height);
         firstClone = false;
@@ -1884,17 +1629,14 @@
         Union(boundsRect, out, out);
       }
     }
-
     return out;
   };
-
   var GlobRect;
 
   var Clear = function Clear(obj) {
     if (_typeof(obj) !== 'object' || obj === null) {
       return obj;
     }
-
     if (Array.isArray(obj)) {
       obj.length = 0;
     } else {
@@ -1902,7 +1644,6 @@
         delete obj[key];
       }
     }
-
     return obj;
   };
 
@@ -1912,19 +1653,15 @@
    * @param {object} ret JSON object to return, set null to return a new object
    * @returns {object} this object
    */
-
   var Clone = function Clone(obj, out) {
     var objIsArray = Array.isArray(obj);
-
     if (out === undefined) {
       out = objIsArray ? [] : {};
     } else {
       Clear(out);
     }
-
     if (objIsArray) {
       out.length = obj.length;
-
       for (var i = 0, cnt = obj.length; i < cnt; i++) {
         out[i] = obj[i];
       }
@@ -1933,28 +1670,16 @@
         out[key] = obj[key];
       }
     }
-
     return out;
   };
 
-  var GameObjectClass = Phaser.GameObjects.GameObject;
-
-  var IsGameObject = function IsGameObject(object) {
-    return object instanceof GameObjectClass;
-  };
-
   var GetValue$7 = Phaser.Utils.Objects.GetValue;
-  var DynamicTexture = Phaser.Textures.DynamicTexture;
-  var UUID = Phaser.Utils.String.UUID;
-
   var Snapshot = function Snapshot(config) {
     if (!config) {
       return;
     }
-
     var gameObjects = config.gameObjects;
-    var renderTexture = config.renderTexture; // renderTexture, or dynamicTexture
-
+    var renderTexture = config.renderTexture;
     var x = GetValue$7(config, 'x', undefined);
     var y = GetValue$7(config, 'y', undefined);
     var width = GetValue$7(config, 'width', undefined);
@@ -1963,12 +1688,10 @@
     var originY = GetValue$7(config, 'originY', 0);
     var padding = GetValue$7(config, 'padding', 0);
     var scrollX, scrollY;
-
     if (width === undefined || height === undefined || x === undefined || y === undefined) {
       // Union bounds of gameObjects
       var bounds = GetBoundsOfGameObjects(gameObjects, true);
       var isCenterOrigin = x !== undefined && y !== undefined;
-
       if (isCenterOrigin) {
         width = Math.max(x - bounds.left, bounds.right - x) * 2;
         height = Math.max(y - bounds.top, bounds.bottom - y) * 2;
@@ -1982,68 +1705,42 @@
         originX = 0;
         originY = 0;
       }
-
       scrollX = bounds.x;
       scrollY = bounds.y;
     } else {
       scrollX = x + (0 - originX) * width;
       scrollY = y + (0 - originY) * height;
     }
-
     scrollX -= padding;
     scrollY -= padding;
     width += padding * 2;
     height += padding * 2;
-    var scene = gameObjects[0].scene; // Snapshot on dynamicTexture directly
-
-    if (saveTexture && !renderTexture) {
-      renderTexture = new DynamicTexture(scene.sys.textures, UUID(), width, height);
-    } // Return a renderTexture
-
-
-    if (!renderTexture) {
+    var tempRT = !renderTexture;
+    // Configurate render texture
+    if (tempRT) {
+      var scene = gameObjects[0].scene;
       renderTexture = scene.add.renderTexture(0, 0, width, height);
     }
-
-    if (renderTexture.setPosition) {
-      renderTexture.setPosition(x, y);
-    }
-
+    renderTexture.setPosition(x, y);
     if (renderTexture.width !== width || renderTexture.height !== height) {
       renderTexture.setSize(width, height);
     }
+    renderTexture.setOrigin(originX, originY);
+    renderTexture.camera.setScroll(scrollX, scrollY);
 
-    if (renderTexture.setOrigin) {
-      renderTexture.setOrigin(originX, originY);
-    }
-
-    renderTexture.camera.setScroll(scrollX, scrollY); // Draw gameObjects
-
+    // Draw gameObjects
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
-    renderTexture.draw(gameObjects); // Save render result to texture    
+    renderTexture.draw(gameObjects);
 
+    // Save render result to texture    
     var saveTexture = config.saveTexture;
-
     if (saveTexture) {
-      if (IsGameObject(renderTexture)) {
-        renderTexture.saveTexture(saveTexture);
-      } else {
-        var dynamicTexture = renderTexture;
-        var textureManager = dynamicTexture.manager;
-
-        if (textureManager.exists(dynamicTexture.key)) {
-          // Rename texture
-          textureManager.renameTexture(dynamicTexture.key, key);
-        } else {
-          // Add texture to texture manager
-          dynamicTexture.key = key;
-          textureManager.list[key] = dynamicTexture;
-          textureManager.emit('addtexture', key, dynamicTexture);
-          textureManager.emit("addtexture-".concat(key), dynamicTexture);
-        }
-      }
+      renderTexture.saveTexture(saveTexture);
     }
-
+    // Destroy render texture if tempRT and saveTexture
+    if (tempRT && saveTexture) {
+      renderTexture.destroy();
+    }
     return renderTexture;
   };
 
@@ -2053,97 +1750,79 @@
       var scaleXSave = this.scaleX;
       var scaleYSave = this.scaleY;
       var scale1 = scaleXSave === 1 && scaleYSave === 1;
-
       if (!scale1) {
         this.setScale(1);
-      } // Snapshot with scale = 1
+      }
 
-
+      // Snapshot with scale = 1
       if (config === undefined) {
         config = {};
       }
-
       config.gameObjects = this.getAllVisibleChildren();
       config.x = this.x;
       config.y = this.y;
       config.originX = this.originX;
       config.originY = this.originY;
       var rt = Snapshot(config);
-      var isValidRT = !!rt.scene; // Restore scale
+      var isValidRT = !!rt.scene;
 
+      // Restore scale
       if (!scale1) {
         this.setScale(scaleXSave, scaleYSave);
-
         if (isValidRT) {
           rt.setScale(scaleXSave, scaleYSave);
         }
       }
-
       return isValidRT ? rt : this;
     }
   };
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
-
   var DrawBounds$1 = function DrawBounds(gameObject, graphics, config) {
     var canDrawBound = gameObject.getBounds || gameObject.width !== undefined && gameObject.height !== undefined;
-
     if (!canDrawBound) {
       return;
     }
-
     var color, lineWidth;
-
     if (typeof config === 'number') {
       color = config;
     } else {
       color = GetValue$6(config, 'color');
       lineWidth = GetValue$6(config, 'lineWidth');
     }
-
     if (color === undefined) {
       color = 0xffffff;
     }
-
     if (lineWidth === undefined) {
       lineWidth = 1;
     }
-
     Points[0] = GetTopLeft(gameObject, Points[0]);
     Points[1] = GetTopRight(gameObject, Points[1]);
     Points[2] = GetBottomRight(gameObject, Points[2]);
     Points[3] = GetBottomLeft(gameObject, Points[3]);
     graphics.lineStyle(lineWidth, color).strokePoints(Points, true, true);
   };
-
   var Points = [undefined, undefined, undefined, undefined];
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
-
   var DrawBounds = function DrawBounds(graphics, config) {
     var drawContainer = GetValue$5(config, 'drawContainer', true);
     var gameObjects = this.getAllVisibleChildren([this]);
-
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
       var gameObject = gameObjects[i];
-
       if (!drawContainer && gameObject.isRexContainerLite) {
         continue;
       }
-
       DrawBounds$1(gameObject, graphics, config);
     }
-
     return this;
   };
 
   var RotateAround = Phaser.Math.RotateAround;
-
   var ChangeOrigin$1 = function ChangeOrigin(gameObject, originX, originY) {
     if (originY === undefined) {
       originY = originX;
     }
-
     var deltaXY = {
       x: (originX - gameObject.originX) * gameObject.displayWidth,
       y: (originY - gameObject.originY) * gameObject.displayHeight
@@ -2161,11 +1840,9 @@
     ChangeOrigin$1(this, originX, originY);
     this.syncChildrenEnable = true;
     var children = this.getAllChildren();
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       this.resetChildPositionState(children[i]);
     }
-
     return this;
   };
 
@@ -2177,20 +1854,15 @@
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
-
     var _super = _createSuper(ContainerLite);
-
     function ContainerLite(scene, x, y, width, height, children) {
       var _this;
-
       _classCallCheck(this, ContainerLite);
-
       if (Array.isArray(width)) {
         children = width;
         width = undefined;
         height = undefined;
       }
-
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexContainerLite';
       _this.isRexContainerLite = true;
@@ -2200,14 +1872,11 @@
       _this._scrollFactorX = 1;
       _this._scrollFactorY = 1;
       _this.layer = undefined;
-
       if (children) {
         _this.add(children);
       }
-
       return _this;
     }
-
     _createClass(ContainerLite, [{
       key: "destroy",
       value: function destroy(fromScene) {
@@ -2215,14 +1884,10 @@
         if (!this.scene) {
           return;
         }
-
         this.syncChildrenEnable = false; // Don't sync properties changing anymore
-
         _get(_getPrototypeOf(ContainerLite.prototype), "destroy", this).call(this, fromScene);
-
         if (this.layer) {
           this.layer.list.length = 0; // Remove all children without trigger callback
-
           this.layer.destroy();
         }
       }
@@ -2241,7 +1906,6 @@
         if (this._x === value) {
           return;
         }
-
         this._x = value;
         this.syncPosition();
       }
@@ -2254,11 +1918,11 @@
         if (this._y === value) {
           return;
         }
-
         this._y = value;
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "rotation",
       get: function get() {
@@ -2268,12 +1932,11 @@
         if (this.rotation === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "rotation", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scaleX",
       get: function get() {
@@ -2283,12 +1946,11 @@
         if (this.scaleX === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "scaleX", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scaleY",
       get: function get() {
@@ -2298,12 +1960,11 @@
         if (this.scaleY === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "scaleY", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scale",
       get: function get() {
@@ -2313,12 +1974,11 @@
         if (this.scale === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "scale", value, this, true);
-
         this.syncPosition();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "visible",
       get: function get() {
@@ -2328,12 +1988,11 @@
         if (_get(_getPrototypeOf(ContainerLite.prototype), "visible", this) === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "visible", value, this, true);
-
         this.syncVisible();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "alpha",
       get: function get() {
@@ -2343,12 +2002,11 @@
         if (_get(_getPrototypeOf(ContainerLite.prototype), "alpha", this) === value) {
           return;
         }
-
         _set(_getPrototypeOf(ContainerLite.prototype), "alpha", value, this, true);
-
         this.syncAlpha();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "active",
       get: function get() {
@@ -2358,11 +2016,11 @@
         if (this._active === value) {
           return;
         }
-
         this._active = value;
         this.syncActive();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "mask",
       get: function get() {
@@ -2372,11 +2030,11 @@
         if (this._mask === mask) {
           return;
         }
-
         this._mask = mask;
         this.syncMask();
-      } // Override
+      }
 
+      // Override
     }, {
       key: "scrollFactorX",
       get: function get() {
@@ -2386,7 +2044,6 @@
         if (this._scrollFactorX === value) {
           return;
         }
-
         this._scrollFactorX = value;
         this.syncScrollFactor();
       }
@@ -2399,11 +2056,11 @@
         if (this._scrollFactorY === value) {
           return;
         }
-
         this._scrollFactorY = value;
         this.syncScrollFactor();
-      } // Compatiable with container plugin
+      }
 
+      // Compatiable with container plugin
     }, {
       key: "list",
       get: function get() {
@@ -2411,7 +2068,8 @@
       }
     }, {
       key: "parentContainer",
-      get: // For p3-container
+      get:
+      // For p3-container
       function get() {
         return this._parentContainer;
       },
@@ -2420,18 +2078,18 @@
         if (!this._parentContainer && !value) {
           this._parentContainer = value;
           return;
-        } // Set this._parentContainer only,
+        }
+
+        // Set this._parentContainer only,
         // if under AddToContainer, or RemoveFromContainer methods
-
-
         if (this.setParentContainerFlag) {
           this._parentContainer = value;
           return;
-        } // else if (!this.setParentContainerFlag)
+        }
+        // else if (!this.setParentContainerFlag)
+
         // Add itself and all children to container,
         // Or remove itseld and all children from container
-
-
         if (this._parentContainer && !value) {
           // Remove from container
           this.removeFromContainer();
@@ -2450,9 +2108,7 @@
         if (this._setParentContainerFlag) {
           return true;
         }
-
         var parent = GetParent(this);
-
         return parent ? parent.setParentContainerFlag : false;
       }
     }], [{
@@ -2461,10 +2117,8 @@
         return GetParent(child);
       }
     }]);
-
     return ContainerLite;
   }(Base);
-
   Object.assign(ContainerLite.prototype, methods$1);
 
   /**
@@ -2472,6 +2126,7 @@
    * @copyright    2019 Photon Storm Ltd.
    * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
    */
+
   //  Source object
   //  The key as a string, or an array of keys, i.e. 'banner', or 'banner.hideBanner'
   //  The default value to use if the key doesn't exist
@@ -2496,8 +2151,9 @@
     } else if (key.indexOf('.') !== -1) {
       var keys = key.split('.');
       var parent = source;
-      var value = defaultValue; //  Use for loop here so we can break early
+      var value = defaultValue;
 
+      //  Use for loop here so we can break early
       for (var i = 0; i < keys.length; i++) {
         if (parent.hasOwnProperty(keys[i])) {
           //  Yes it has a key property, let's carry on down
@@ -2509,7 +2165,6 @@
           break;
         }
       }
-
       return value;
     } else {
       return defaultValue;
@@ -2521,22 +2176,18 @@
       if (this.data === undefined) {
         this.data = {};
       }
-
       return this;
     },
     setData: function setData(key, value) {
       this.enableData();
-
       if (arguments.length === 1) {
         var data = key;
-
         for (key in data) {
           this.data[key] = data[key];
         }
       } else {
         this.data[key] = value;
       }
-
       return this;
     },
     getData: function getData(key, defaultValue) {
@@ -2547,7 +2198,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) + inc);
       return this;
@@ -2556,7 +2206,6 @@
       if (defaultValue === undefined) {
         defaultValue = 0;
       }
-
       this.enableData();
       this.setData(key, this.getData(key, defaultValue) * mul);
       return this;
@@ -2565,7 +2214,6 @@
       if (this.data) {
         Clear(this.data);
       }
-
       return this;
     }
   };
@@ -2591,33 +2239,30 @@
   var Cell = /*#__PURE__*/function () {
     function Cell(parent, config) {
       _classCallCheck(this, Cell);
-
       this.container = null;
       this._deltaHeight = 0;
-      this.setParent(parent); // this.resetFromJSON(config);
+      this.setParent(parent);
+      // this.resetFromJSON(config);
     }
-
     _createClass(Cell, [{
       key: "setParent",
       value: function setParent(parent) {
         this.parent = parent; // parent: table
-
         this.parentContainer = parent.getParentContainer();
-      } // resetFromJSON(o) {
+      }
+
+      // resetFromJSON(o) {
       //     return this;
       // }
-
     }, {
       key: "destroy",
       value: function destroy(fromScene) {
         if (fromScene === undefined) {
           fromScene = false;
         }
-
         if (!fromScene) {
           this.destroyContainer();
         }
-
         this.deltaHeight = 0;
         this.data = undefined;
         this.container = null;
@@ -2656,11 +2301,9 @@
           this.destroyContainer();
           return this;
         }
-
         if (this.container) {
           this.container.destroy();
         }
-
         this.container = container;
         this.parentContainer.add(container);
         return this;
@@ -2672,7 +2315,6 @@
           this.container.destroy();
           this.container = null;
         }
-
         return this;
       }
     }, {
@@ -2693,7 +2335,6 @@
         if (this.container) {
           this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
-
         return this;
       }
     }, {
@@ -2702,7 +2343,6 @@
         if (typeof align === 'string') {
           align = AlignConst[align];
         }
-
         this.cellContainerAlign = align;
         return this;
       }
@@ -2715,18 +2355,14 @@
         if (deltaHeight == null) {
           deltaHeight = 0;
         }
-
         var table = this.parent;
-
         if (this._deltaHeight === 0 && deltaHeight !== 0) {
           table.nonZeroDeltaHeightCount++;
         } else if (this._deltaHeight !== 0 && deltaHeight === 0) {
           table.nonZeroDeltaHeightCount--;
         }
-
         var isTableHeightChanged = this._deltaHeight !== deltaHeight;
         this._deltaHeight = deltaHeight;
-
         if (isTableHeightChanged) {
           table.resetTotalRowsHeight();
           var eventName = this.scrollMode === 0 ? 'cellheightchange' : 'cellwidthchange';
@@ -2767,7 +2403,6 @@
         if (this.scrollMode === 1) {
           return;
         }
-
         this.setDeltaHeight(height - this.parent.defaultCellHeight);
       }
     }, {
@@ -2791,7 +2426,6 @@
         if (this.scrollMode === 0) {
           return;
         }
-
         this.setDeltaHeight(width - this.parent.defaultCellHeight);
       }
     }, {
@@ -2806,7 +2440,6 @@
         return this.parentContainer.scene;
       }
     }]);
-
     return Cell;
   }();
   Object.assign(Cell.prototype, DataMethods);
@@ -2814,10 +2447,8 @@
   var Stack = /*#__PURE__*/function () {
     function Stack() {
       _classCallCheck(this, Stack);
-
       this.items = [];
     }
-
     _createClass(Stack, [{
       key: "destroy",
       value: function destroy() {
@@ -2849,46 +2480,36 @@
         return this;
       }
     }]);
-
     return Stack;
   }();
 
   var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var SpliceOne = Phaser.Utils.Array.SpliceOne;
-
   var Table = /*#__PURE__*/function () {
     function Table(parent, config) {
       _classCallCheck(this, Table);
-
       this.parent = parent; // parent: GridTable game object (Container)
-
       this.cells = [];
       this.cellPool = new Stack();
       this.resetFromJSON(config);
     }
-
     _createClass(Table, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         if (o === undefined) {
           o = {};
         }
-
         this.colCount = undefined;
         this.nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
         var cellHeight = o.cellHeight;
-
         if (cellHeight === undefined) {
           cellHeight = 30;
         }
-
         var cellWidth = o.cellWidth;
-
         if (cellWidth === undefined) {
           cellWidth = 30;
         }
-
         this.setDefaultCellHeight(cellHeight);
         this.setDefaultCellWidth(cellWidth);
         this.initCells(GetValue$3(o, 'cellsCount', 0));
@@ -2926,39 +2547,31 @@
       value: function initCells(size) {
         var cells = this.cells;
         cells.length = size;
-
         for (var i = 0; i < size; i++) {
           cells[i] = null;
         }
-
         return this;
       }
     }, {
       key: "insertNewCells",
       value: function insertNewCells(cellIdx, count) {
         var cells = this.cells;
-
         if (cellIdx === cells.length) {
           // append at end of array
           var endIdx = cellIdx + count;
           cells.legth = endIdx;
-
           for (var i = cellIdx; i < endIdx; i++) {
             cells[i] = null;
           }
         } else {
           var _this$cells;
-
           var newCells = [];
           newCells.length = count;
-
           for (var i = 0; i < count; i++) {
             newCells[i] = null;
           }
-
           (_this$cells = this.cells).splice.apply(_this$cells, [cellIdx, 0].concat(newCells));
         }
-
         this.resetTotalRowsHeight();
         return this;
       }
@@ -2966,11 +2579,9 @@
       key: "removeCells",
       value: function removeCells(cellIdx, count) {
         var endIdx = cellIdx + count;
-
         for (var i = cellIdx; i < endIdx; i++) {
           this.freeCell(i);
         }
-
         if (endIdx === this.cells.length) {
           // remove until end of array
           this.cells.length = cellIdx;
@@ -2980,10 +2591,8 @@
           } else {
             this.cells.splice(cellIdx, count);
           }
-
           this.buildCellIndex(cellIdx);
         }
-
         this.resetTotalRowsHeight();
         return this;
       }
@@ -3015,28 +2624,24 @@
         // defaultCellHeightMode
         if (this.defaultCellHeightMode) {
           var rowIdx = height / this.defaultCellHeight;
-
           if (isCeil) {
             rowIdx = Math.ceil(rowIdx);
           } else {
             rowIdx = Math.floor(rowIdx);
           }
-
           return rowIdx;
-        } // count cell height one by one
+        }
 
-
+        // count cell height one by one
         var rowCount = this.rowCount;
         var remainder = height,
-            isValidIdx;
+          isValidIdx;
         var rowHeight,
-            rowIdx = 0;
-
+          rowIdx = 0;
         while (1) {
           rowHeight = this.getRowHeight(rowIdx);
           remainder -= rowHeight;
           isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
-
           if (remainder > 0 && isValidIdx) {
             rowIdx += 1;
           } else if (remainder === 0) {
@@ -3046,12 +2651,10 @@
               var preRowIdx = rowIdx;
               rowIdx += 1;
               isValidIdx = rowIdx >= 0 && rowIdx < rowCount;
-
               if (!isValidIdx) {
                 rowIdx = preRowIdx;
               }
             }
-
             return rowIdx;
           }
         }
@@ -3060,13 +2663,11 @@
       key: "widthToColIndex",
       value: function widthToColIndex(width, isCeil) {
         var colIdx = width / this.defaultCellWidth;
-
         if (isCeil) {
           colIdx = Math.ceil(colIdx);
         } else {
           colIdx = Math.floor(colIdx);
         }
-
         return colIdx;
       }
     }, {
@@ -3075,7 +2676,6 @@
         if (colIdx >= this.colCount) {
           return null;
         }
-
         return rowIdx * this.colCount + colIdx;
       }
     }, {
@@ -3085,15 +2685,12 @@
         if (this.defaultCellHeightMode) {
           return (end - start + 1) * this.defaultCellHeight;
         }
-
         var h,
-            sum = 0;
-
+          sum = 0;
         for (var i = start; i <= end; i++) {
           h = this.getRowHeight(i);
           sum += h;
         }
-
         return sum;
       }
     }, {
@@ -3104,21 +2701,19 @@
     }, {
       key: "getRowHeight",
       value: function getRowHeight(rowIdx) {
-        var cnt = this.colCount; // single column
-
+        var cnt = this.colCount;
+        // single column
         if (cnt <= 1) {
           return this.getCellHeight(this.colRowToCellIndex(0, rowIdx));
-        } // multiple columns, get the maximum height
+        }
 
-
+        // multiple columns, get the maximum height
         var maxHeight = 0,
-            cellHeight;
-
+          cellHeight;
         for (var i = 0; i < cnt; i++) {
           cellHeight = this.getCellHeight(this.colRowToCellIndex(i, rowIdx));
           if (maxHeight < cellHeight) maxHeight = cellHeight;
         }
-
         return maxHeight;
       }
     }, {
@@ -3132,7 +2727,6 @@
         if (!this.isValidCellIdx(cellIdx)) {
           return 0;
         }
-
         var cellHeight;
         if (this.defaultCellHeightMode) cellHeight = this.defaultCellHeight;else {
           var cell = this.getCell(cellIdx, false);
@@ -3152,7 +2746,6 @@
         if (this._totalRowsHeight === null) {
           this._totalRowsHeight = this.rowIndexToHeight(0, this.rowCount - 1);
         }
-
         return this._totalRowsHeight;
       }
     }, {
@@ -3176,29 +2769,24 @@
         if (!this.isValidCellIdx(cellIdx)) {
           return null;
         }
-
         if (createNewCell === undefined) {
           createNewCell = true;
         }
-
         if (this.cells[cellIdx] === null && createNewCell) {
           var cell = this.newCell(cellIdx);
           this.cells[cellIdx] = cell;
         }
-
         return this.cells[cellIdx];
       }
     }, {
       key: "newCell",
       value: function newCell(cellIdx) {
         var cell = this.cellPool.pop();
-
         if (cell === null) {
           cell = new Cell(this);
         } else {
           cell.setParent(this);
         }
-
         cell.index = cellIdx;
         return cell;
       }
@@ -3208,18 +2796,14 @@
         if (startIdx === undefined) {
           startIdx = 0;
         }
-
         var cells = this.cells,
-            cell;
-
+          cell;
         for (var i = startIdx, len = cells.length; i < len; i++) {
           cell = cells[i];
-
           if (cell) {
             cell.index = i;
           }
         }
-
         return this;
       }
     }, {
@@ -3233,17 +2817,14 @@
         if (typeof cell === 'number') {
           cell = this.cells[cell];
         }
-
         if (!cell) {
           return this;
         }
-
         cell.destroy();
         this.cellPool.push(cell);
         return this;
       }
     }]);
-
     return Table;
   }();
 
@@ -3253,11 +2834,11 @@
     var bottomTableOY = this.bottomTableOY;
     var tableOYExceedTop = oy > this.topTableOY;
     var tableOYExeceedBottom = oy < this.bottomTableOY;
-
     if (this.clampTableOXY) {
       var rowCount = table.rowCount;
-      var visibleRowCount = table.heightToRowIndex(this.instHeight, true); // less then 1 page            
+      var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
 
+      // less then 1 page            
       if (rowCount < visibleRowCount) {
         oy = 0;
       } else if (tableOYExceedTop) {
@@ -3266,25 +2847,20 @@
         oy = bottomTableOY;
       }
     }
-
     if (this._tableOY !== oy) {
       this._tableOY = oy;
     }
-
     if (tableOYExceedTop) {
       if (!this.execeedTopState) {
         this.emit('execeedtop', this, oy, topTableOY);
       }
     }
-
     this.execeedTopState = tableOYExceedTop;
-
     if (tableOYExeceedBottom) {
       if (!this.execeedBottomState) {
         this.emit('execeedbottom', this, oy, bottomTableOY);
       }
     }
-
     this.execeedBottomState = tableOYExeceedBottom;
     return this;
   };
@@ -3295,11 +2871,11 @@
     var rightTableOX = this.rightTableOX;
     var tableOXExeceedLeft = ox > this.leftTableOX;
     var tableOXExeceedRight = ox < this.rightTableOX;
-
     if (this.clampTableOXY) {
       var colCount = table.colCount;
-      var visibleColCount = table.widthToColIndex(this.instWidth, true); // less then 1 page            
+      var visibleColCount = table.widthToColIndex(this.instWidth, true);
 
+      // less then 1 page            
       if (colCount < visibleColCount) {
         ox = 0;
       } else if (tableOXExeceedLeft) {
@@ -3309,25 +2885,20 @@
         if (tableOXExeceedRight) ox = rightTableOX;
       }
     }
-
     if (this._tableOX !== ox) {
       this._tableOX = ox;
     }
-
     if (tableOXExeceedLeft) {
       if (!this.execeedLeftState) {
         this.emit('execeedleft', this, ox, leftTableOX);
       }
     }
-
     this.execeedLeftState = tableOXExeceedLeft;
-
     if (tableOXExeceedRight) {
       if (!this.execeedRightState) {
         this.emit('execeedright', this, ox, rightTableOX);
       }
     }
-
     this.execeedRightState = tableOXExeceedRight;
     return this;
   };
@@ -3338,46 +2909,36 @@
 
   var Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
   var Overlaps = Phaser.Geom.Rectangle.Overlaps;
-
   var MaskChildren = function MaskChildren(parent, mask, children) {
     if (!mask) {
       return;
     }
-
     if (children === undefined) {
       children = parent.getAllChildren();
     }
-
     var parentBounds = parent.getBounds();
     var maskGameObject = MaskToGameObject(mask);
     var child, childBounds, visiblePointsNumber;
-
     for (var i = 0, cnt = children.length; i < cnt; i++) {
       child = children[i];
-
       if (child.hasOwnProperty('isRexContainerLite')) {
         continue;
       }
-
       if (child === maskGameObject) {
         continue;
       }
-
       if (!IsVisible(child)) {
         // Child is invisible before masking
         continue;
       }
-
       if (child.getBounds) {
         childBounds = child.getBounds(childBounds);
         visiblePointsNumber = ContainsPoints(parentBounds, childBounds);
-
         switch (visiblePointsNumber) {
           case 4:
             // 4 points are all inside visible window, set visible
             ShowAll(parent, child);
             break;
-
           case 0:
             // No point is inside visible window
             // Parent intersects with child, or parent is inside child, set visible, and apply mask
@@ -3387,9 +2948,7 @@
               // Set invisible
               ShowNone(parent, child);
             }
-
             break;
-
           default:
             // Part of points are inside visible window, set visible, and apply mask
             ShowSome(parent, child, mask);
@@ -3400,21 +2959,17 @@
       }
     }
   };
-
   var IsVisible = function IsVisible(gameObject) {
     if (!gameObject.displayList) {
       return false;
     }
-
     while (1) {
       var localState = gameObject.rexContainer;
-
       if (!localState) {
         // Top game object
         return gameObject.visible;
       } else if (localState.visible) {
         var parent = localState.parent;
-
         if (parent) {
           // Test parent's visible
           gameObject = parent;
@@ -3429,39 +2984,32 @@
       }
     }
   };
-
   var ContainsPoints = function ContainsPoints(rectA, rectB) {
     var result = 0;
     var top = rectB.top,
-        bottom = rectB.bottom,
-        left = rectB.left,
-        right = rectB.right;
+      bottom = rectB.bottom,
+      left = rectB.left,
+      right = rectB.right;
     result += rectA.contains(left, top) ? 1 : 0;
     result += rectA.contains(left, bottom) ? 1 : 0;
     result += rectA.contains(right, top) ? 1 : 0;
     result += rectA.contains(right, bottom) ? 1 : 0;
     return result;
   };
-
   var ShowAll = function ShowAll(parent, child, mask) {
     parent.setChildMaskVisible(child, true);
-
     if (child.clearMask) {
       child.clearMask();
     }
   };
-
   var ShowSome = function ShowSome(parent, child, mask) {
     parent.setChildMaskVisible(child, true);
-
     if (child.setMask) {
       child.setMask(mask);
     }
   };
-
   var ShowNone = function ShowNone(parent, child, mask) {
     parent.setChildMaskVisible(child, false);
-
     if (child.clearMask) {
       child.clearMask();
     }
@@ -3469,14 +3017,12 @@
 
   var DrawShape = function DrawShape(width, height, padding, originX, originY) {
     this.clear().fillStyle(0xffffff);
-
     switch (this.shape) {
       case 1:
         // circle
         var radius = Math.min(width, height) / 2;
         this.fillCircle(-width * (originX - 0.5), -height * (originY - 0.5), radius + padding);
         break;
-
       default:
         // 0|'rectangle'
         this.fillRect(-(width * originX) - padding, -(height * originY) - padding, width + 2 * padding, height + 2 * padding);
@@ -3485,87 +3031,65 @@
   };
 
   var Graphics = Phaser.GameObjects.Graphics;
-
   var DefaultMaskGraphics = /*#__PURE__*/function (_Graphics) {
     _inherits(DefaultMaskGraphics, _Graphics);
-
     var _super = _createSuper(DefaultMaskGraphics);
-
     function DefaultMaskGraphics(parent, shape, padding) {
       var _this;
-
       _classCallCheck(this, DefaultMaskGraphics);
-
       if (shape === undefined) {
         shape = 0;
       }
-
       if (typeof shape === 'string') {
         shape = SHAPEMODE[shape];
       }
-
       if (padding === undefined) {
         padding = 0;
       }
-
       _this = _super.call(this, parent.scene);
       _this.parent = parent;
       _this.shape = shape;
       _this.padding = padding;
-
-      _this.setPosition().resize().setVisible(false); // Don't add it to display list
-
-
+      _this.setPosition().resize().setVisible(false);
+      // Don't add it to display list
       return _this;
     }
-
     _createClass(DefaultMaskGraphics, [{
       key: "destroy",
       value: function destroy() {
         this.parent = undefined;
-
         _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "destroy", this).call(this);
-
         return this;
       }
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
         var parent = this.parent;
-
         if (x === undefined) {
           x = parent.x;
         }
-
         if (y === undefined) {
           y = parent.y;
         }
-
         _get(_getPrototypeOf(DefaultMaskGraphics.prototype), "setPosition", this).call(this, x, y);
-
         return this;
       }
     }, {
       key: "resize",
       value: function resize(width, height, padding) {
         var parent = this.parent;
-
         if (width === undefined) {
           width = parent.width;
         }
-
         if (height === undefined) {
           height = parent.height;
         }
-
         if (padding === undefined) {
           padding = this.padding;
         }
-
         if (this.widthSave === width && this.heightSave === height && this.paddingSave === padding) {
           return this;
         }
-
         this.widthSave = width;
         this.heightSave = height;
         this.paddingSave = padding;
@@ -3580,31 +3104,24 @@
         if (originY === undefined) {
           originY = originX;
         }
-
         var parent = this.parent;
-
         if (originX === undefined) {
           originX = parent.originX;
         }
-
         if (originY === undefined) {
           originY = parent.originY;
         }
-
         if (this.originXSave === originX && this.originYSave === originY) {
           return this;
         }
-
         this.originXSave = originX;
         this.originYSave = originY;
         DrawShape.call(this, this.widthSave, this.heightSave, this.paddingSave, originX, originY);
         return this;
       }
     }]);
-
     return DefaultMaskGraphics;
   }(Graphics);
-
   var SHAPEMODE = {
     rectangle: 0,
     circle: 1
@@ -3612,7 +3129,6 @@
 
   var AddChildMask = function AddChildMask(maskTarget, sizeTarget, shape, padding) {
     var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
-
     if (maskTarget && !maskTarget.isRexSizer) {
       // Sizer game object can't apply mask
       var mask = maskGameObject.createGeometryMask();
@@ -3622,7 +3138,6 @@
         mask.destroy();
       });
     }
-
     this.pin(maskGameObject);
     return maskGameObject;
   };
@@ -3638,7 +3153,6 @@
         // No children mask
         return this;
       }
-
       this.setMaskUpdateMode(GetValue$2(config, 'updateMode', 0));
       this.enableChildrenMask(GetValue$2(config, 'padding', 0));
       this.setMaskLayer(GetValue$2(config, 'layer', undefined));
@@ -3649,7 +3163,6 @@
       if (!this.childrenMask) {
         return this;
       }
-
       this.stopMaskUpdate();
       this.childrenMask.destroy();
       this.childrenMask = undefined;
@@ -3659,7 +3172,6 @@
       if (typeof mode === 'string') {
         mode = MASKUPDATEMODE[mode];
       }
-
       this.maskUpdateMode = mode;
       return this;
     },
@@ -3671,15 +3183,14 @@
     },
     enableChildrenMask: function enableChildrenMask(maskPadding) {
       var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
-      this.childrenMask = maskGameObject.createGeometryMask(); // this.childrenMask is a mask object, not a (Graphics) game object
-
+      this.childrenMask = maskGameObject.createGeometryMask();
+      // this.childrenMask is a mask object, not a (Graphics) game object
       return this;
     },
     setMaskChildrenFlag: function setMaskChildrenFlag(value) {
       if (value === undefined) {
         value = true;
       }
-
       this.maskChildrenFlag = value;
       return this;
     },
@@ -3689,35 +3200,33 @@
       return this;
     },
     maskChildren: function maskChildren() {
-      if (!this.childrenMask || // No childrenMask
-      !this.maskChildrenFlag || // No maskChildrenFlag set
+      if (!this.childrenMask ||
+      // No childrenMask
+      !this.maskChildrenFlag ||
+      // No maskChildrenFlag set
       this.alpha === 0 || !this.visible // Parent is not visible
       ) {
         return this;
       }
-
       if (this.layer) {
         this.layer.setMask(this.childrenMask);
       } else if (this.maskLayer) {
         // 1. Add parent and children into layer
-        this.addToLayer(this.maskLayer); // 2. Mask this layer
-
+        this.addToLayer(this.maskLayer);
+        // 2. Mask this layer
         this.maskLayer.setMask(this.childrenMask);
       } else {
         MaskChildren(this, this.childrenMask);
       }
-
       if (this.maskUpdateMode === 0) {
         this.maskChildrenFlag = false;
       }
-
       return this;
     },
     layoutChildrenMask: function layoutChildrenMask() {
       if (!this.childrenMask) {
         return this;
       }
-
       var maskGameObject = MaskToGameObject(this.childrenMask);
       maskGameObject.setPosition().resize();
       this.resetChildPositionState(maskGameObject);
@@ -3725,7 +3234,8 @@
     }
   };
 
-  var NOOP = function NOOP() {//  NOOP
+  var NOOP = function NOOP() {
+    //  NOOP
   };
 
   var globZone = new Phaser.GameObjects.Zone({
@@ -3747,7 +3257,6 @@
     * @type {integer}
     */
     TOP_LEFT: 0,
-
     /**
     * A constant representing a top-center alignment or position.
     * @constant
@@ -3756,7 +3265,6 @@
     * @type {integer}
     */
     TOP_CENTER: 1,
-
     /**
     * A constant representing a top-right alignment or position.
     * @constant
@@ -3765,7 +3273,6 @@
     * @type {integer}
     */
     TOP_RIGHT: 2,
-
     /**
     * A constant representing a left-top alignment or position.
     * @constant
@@ -3774,7 +3281,6 @@
     * @type {integer}
     */
     LEFT_TOP: 3,
-
     /**
     * A constant representing a left-center alignment or position.
     * @constant
@@ -3783,7 +3289,6 @@
     * @type {integer}
     */
     LEFT_CENTER: 4,
-
     /**
     * A constant representing a left-bottom alignment or position.
     * @constant
@@ -3792,7 +3297,6 @@
     * @type {integer}
     */
     LEFT_BOTTOM: 5,
-
     /**
     * A constant representing a center alignment or position.
     * @constant
@@ -3801,7 +3305,6 @@
     * @type {integer}
     */
     CENTER: 6,
-
     /**
     * A constant representing a right-top alignment or position.
     * @constant
@@ -3810,7 +3313,6 @@
     * @type {integer}
     */
     RIGHT_TOP: 7,
-
     /**
     * A constant representing a right-center alignment or position.
     * @constant
@@ -3819,7 +3321,6 @@
     * @type {integer}
     */
     RIGHT_CENTER: 8,
-
     /**
     * A constant representing a right-bottom alignment or position.
     * @constant
@@ -3828,7 +3329,6 @@
     * @type {integer}
     */
     RIGHT_BOTTOM: 9,
-
     /**
     * A constant representing a bottom-left alignment or position.
     * @constant
@@ -3837,7 +3337,6 @@
     * @type {integer}
     */
     BOTTOM_LEFT: 10,
-
     /**
     * A constant representing a bottom-center alignment or position.
     * @constant
@@ -3846,7 +3345,6 @@
     * @type {integer}
     */
     BOTTOM_CENTER: 11,
-
     /**
     * A constant representing a bottom-right alignment or position.
     * @constant
@@ -3884,11 +3382,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetCenterX(gameObject, GetCenterX(alignIn) + offsetX);
     SetBottom(gameObject, GetBottom(alignIn) + offsetY);
     return gameObject;
@@ -3909,11 +3405,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetLeft(gameObject, GetLeft(alignIn) - offsetX);
     SetBottom(gameObject, GetBottom(alignIn) + offsetY);
     return gameObject;
@@ -3934,11 +3428,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetRight(gameObject, GetRight(alignIn) + offsetX);
     SetBottom(gameObject, GetBottom(alignIn) + offsetY);
     return gameObject;
@@ -3965,11 +3457,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     CenterOn(gameObject, GetCenterX(alignIn) + offsetX, GetCenterY(alignIn) + offsetY);
     return gameObject;
   };
@@ -3978,11 +3468,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetLeft(gameObject, GetLeft(alignIn) - offsetX);
     SetCenterY(gameObject, GetCenterY(alignIn) + offsetY);
     return gameObject;
@@ -3992,11 +3480,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetRight(gameObject, GetRight(alignIn) + offsetX);
     SetCenterY(gameObject, GetCenterY(alignIn) + offsetY);
     return gameObject;
@@ -4017,11 +3503,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetCenterX(gameObject, GetCenterX(alignIn) + offsetX);
     SetTop(gameObject, GetTop(alignIn) - offsetY);
     return gameObject;
@@ -4031,11 +3515,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetLeft(gameObject, GetLeft(alignIn) - offsetX);
     SetTop(gameObject, GetTop(alignIn) - offsetY);
     return gameObject;
@@ -4045,11 +3527,9 @@
     if (offsetX === undefined) {
       offsetX = 0;
     }
-
     if (offsetY === undefined) {
       offsetY = 0;
     }
-
     SetRight(gameObject, GetRight(alignIn) + offsetX);
     SetTop(gameObject, GetTop(alignIn) - offsetY);
     return gameObject;
@@ -4065,7 +3545,6 @@
   AlignInMap[ALIGN_CONST.TOP_CENTER] = TopCenter;
   AlignInMap[ALIGN_CONST.TOP_LEFT] = TopLeft;
   AlignInMap[ALIGN_CONST.TOP_RIGHT] = TopRight;
-
   var QuickSet = function QuickSet(child, alignIn, position, offsetX, offsetY) {
     return AlignInMap[position](child, alignIn, offsetX, offsetY);
   };
@@ -4079,17 +3558,14 @@
     if (this.cellsCount === 0) {
       return;
     }
-
     var table = this.table;
     var startRowIdx = table.heightToRowIndex(-this.tableOY);
-
     if (startRowIdx <= 0) {
       startRowIdx = 0; //Turn -0 to 0
     }
 
     var rowIdx = startRowIdx;
     var startColIdx = table.widthToColIndex(-this.tableOX);
-
     if (startColIdx <= 0) {
       startColIdx = 0; //Turn -0 to 0
     }
@@ -4101,20 +3577,16 @@
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
     var startCellTLX = this.getCellTLX(colIdx),
-        cellTLX = startCellTLX;
+      cellTLX = startCellTLX;
     var cellTLY = this.getCellTLY(rowIdx);
-
     while (cellTLY < bottomBound && cellIdx <= lastIdx) {
       if (this.table.isValidCellIdx(cellIdx)) {
         var cell = table.getCell(cellIdx, true);
         this.visibleCells.set(cell);
-
         if (!this.preVisibleCells.contains(cell)) {
           this.showCell(cell);
         }
-
         var x, y;
-
         if (this.scrollMode === 0) {
           x = cellTLX;
           y = cellTLY;
@@ -4122,7 +3594,6 @@
           x = cellTLY;
           y = cellTLX;
         }
-
         if (cell.cellContainerAlign == null) {
           cell.setXY(x, y);
         } else {
@@ -4131,7 +3602,6 @@
           cell.setXY(cellContainer.x, cellContainer.y);
         }
       }
-
       if (cellTLX < rightBound && colIdx < lastColIdx) {
         cellTLX += table.getColWidth(colIdx);
         colIdx += 1;
@@ -4141,7 +3611,6 @@
         colIdx = startColIdx;
         rowIdx += 1;
       }
-
       cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     }
   };
@@ -4150,31 +3619,25 @@
     // Attach container to cell by cell.setContainer(container) under this event
     var reusedCellContainer = null;
     var cellContainer = cell.getContainer();
-
     if (cellContainer) {
       reusedCellContainer = cellContainer;
       cell.popContainer();
     } else if (this.cellContainersPool) {
       reusedCellContainer = this.cellContainersPool.getFirstDead();
-
       if (reusedCellContainer !== null) {
         // Reuse this game object
         reusedCellContainer.setActive(true).setVisible(true);
       }
     }
-
     this.emit('cellvisible', cell, reusedCellContainer, this);
-
     if (this.cellContainersPool) {
       var cellContainer = cell.getContainer();
-
       if (cellContainer) {
         if (reusedCellContainer === null) {
           this.cellContainersPool.add(cellContainer); // New cell container, add to pool
         } else if (reusedCellContainer !== cellContainer) {
           // Why reusedCellContainer is not equal to cellContainer?
           this.cellContainersPool.add(cellContainer); // New cell container, add to pool
-
           this.cellContainersPool.killAndHide(reusedCellContainer); // Unused cell container, put back to pool
         }
       } else {
@@ -4211,15 +3674,12 @@
   var HideCell = function HideCell(cell) {
     // Option: pop container of cell by cell.popContainer() under this event 
     this.emit('cellinvisible', cell);
-
     if (this.cellContainersPool) {
       var cellContainer = cell.popContainer(); // null if already been removed
-
       if (cellContainer) {
         this.cellContainersPool.killAndHide(cellContainer);
       }
     }
-
     cell.destroyContainer(); // Destroy container of cell
   };
 
@@ -4227,19 +3687,16 @@
     if (refresh === undefined) {
       refresh = false;
     }
-
     if (refresh) {
       ClearVisibleCellIndexes.call(this);
       this.hideCells();
     }
-
     ClearVisibleCellIndexes.call(this);
     this.showCells();
     this.hideCells();
     this.setMaskChildrenFlag();
     return this;
   };
-
   var ClearVisibleCellIndexes = function ClearVisibleCellIndexes() {
     var tmp = this.preVisibleCells;
     this.preVisibleCells = this.visibleCells;
@@ -4261,25 +3718,19 @@
     var rowIdx = table.heightToRowIndex(-offsetTableOY);
     var colIdx = table.widthToColIndex(-offsetTableOX);
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
-
     if (cellIdx === null) {
       return null;
     }
-
     if (!this.isCellVisible(cellIdx)) {
       return null;
     }
-
     return cellIdx;
   };
-
   var PointToCellContainer = function PointToCellContainer(x, y) {
     var cellIdx = PointToCellIndex.call(this, x, y);
-
     if (cellIdx === null) {
       return undefined;
     }
-
     return this.getCellContainer(cellIdx);
   };
 
@@ -4287,19 +3738,17 @@
   var EachVisibleCell = function EachVisibleCell(callback, scope) {
     this.visibleCells.each(callback, scope);
     return this;
-  }; // For when you absolutely know this Set won't be modified during the iteration
+  };
 
-
+  // For when you absolutely know this Set won't be modified during the iteration
   var IterateVisibleCell = function IterateVisibleCell(callback, scope) {
     this.visibleCells.iterate(callback, scope);
     return this;
   };
-
   var EachCell = function EachCell(callback, scope) {
     this.table.cells.slice().forEach(callback, scope);
     return this;
   };
-
   var IterateCell = function IterateCell(callback, scope) {
     this.table.cells.forEach(callback, scope);
     return this;
@@ -4307,36 +3756,29 @@
 
   var SetCellsCount = function SetCellsCount(count) {
     var cellsCount = this.cellsCount;
-
     if (cellsCount === count) {
       return this;
     }
-
     if (cellsCount > count) {
       this.removeCells(count, cellsCount - count);
     } else {
       // cellsCount < count
       this.insertNewCells(cellsCount, count - cellsCount);
     }
-
     return this;
   };
 
   var Clamp = Phaser.Math.Clamp;
-
   var InsertNewCells = function InsertNewCells(cellIdx, count) {
     if (_typeof(cellIdx) === 'object') {
       cellIdx = cellIdx.index;
     }
-
     if (count === undefined) {
       count = 1;
     }
-
     if (count <= 0) {
       return this;
     }
-
     cellIdx = Clamp(cellIdx, 0, this.cellsCount);
     this.table.insertNewCells(cellIdx, count);
     return this;
@@ -4346,40 +3788,31 @@
     if (_typeof(cellIdx) === 'object') {
       cellIdx = cellIdx.index;
     }
-
     if (count === undefined) {
       count = 1;
     }
-
     if (cellIdx < 0) {
       count += cellIdx;
       cellIdx = 0;
     }
-
     if (count <= 0) {
       return this;
-    } // out-of-range
-
-
+    }
+    // out-of-range
     if (cellIdx > this.cellsCount) {
       return this;
     }
-
     var cell;
-
     for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
       cell = this.getCell(i, false);
-
       if (cell) {
         if (this.visibleCells.contains(cell)) {
           HideCell.call(this, cell);
           this.visibleCells["delete"](cell);
         }
-
         this.preVisibleCells["delete"](cell);
       }
     }
-
     this.table.removeCells(cellIdx, count);
     return this;
   };
@@ -4388,7 +3821,6 @@
     if (this.table.colCount === count) {
       return this;
     }
-
     this.table.setColumnCount(count);
     return this;
   };
@@ -4401,11 +3833,9 @@
 
   var UpdateVisibleCell = function UpdateVisibleCell(cellIdx) {
     var cell = this.table.getCell(cellIdx, false);
-
     if (!cell || !cell.container) {
       return this;
     }
-
     ShowCell.call(this, cell);
     return this;
   };
@@ -4439,21 +3869,15 @@
   var Group = Phaser.GameObjects.Group;
   var Set = Phaser.Structs.Set;
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var GridTable = /*#__PURE__*/function (_ContainerLite) {
     _inherits(GridTable, _ContainerLite);
-
     var _super = _createSuper(GridTable);
-
     function GridTable(scene, x, y, width, height, config) {
       var _this;
-
       _classCallCheck(this, GridTable);
-
       if (config === undefined) {
         config = {};
       }
-
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexGridTable';
       _this._tableOX = 0;
@@ -4465,41 +3889,30 @@
       _this.execeedLeftState = false;
       _this.execeedRightState = false;
       var reuseCellContainer = GetValue$1(config, 'reuseCellContainer', false);
-
       if (reuseCellContainer) {
         _this.cellContainersPool = new Group(scene); // Don't add Group into update list, I will destroy it manually
       }
 
       var callback = GetValue$1(config, 'cellVisibleCallback', null);
-
       if (callback !== null) {
         var scope = GetValue$1(config, 'cellVisibleCallbackScope', undefined);
-
         _this.on('cellvisible', callback, scope);
       }
-
       callback = GetValue$1(config, 'cellInvisibleCallback', null);
-
       if (callback !== null) {
         var scope = GetValue$1(config, 'cellInvisibleCallbackScope', undefined);
-
         _this.on('cellinvisible', callback, scope);
       }
-
       if (GetValue$1(config, 'enableLayer', false)) {
         _this.enableLayer();
       }
-
       _this.setupChildrenMask(GetValue$1(config, 'mask', undefined));
-
       _this.setScrollMode(GetValue$1(config, 'scrollMode', 0));
+      _this.setClampMode(GetValue$1(config, 'clamplTableOXY', true));
 
-      _this.setClampMode(GetValue$1(config, 'clamplTableOXY', true)); // Pre-process cell size
-
-
+      // Pre-process cell size
       var cellWidth, cellHeight, columns;
       var scrollY = _this.scrollMode === 0;
-
       if (scrollY) {
         // scroll y
         cellWidth = config.cellWidth;
@@ -4511,24 +3924,18 @@
         cellHeight = config.cellWidth;
         columns = GetValue$1(config, 'rows', config.columns);
       }
-
       _this.expandCellSize = cellWidth === undefined;
-
       if (_this.expandCellSize) {
         var width = scrollY ? _this.width : _this.height;
         cellWidth = width / columns;
       }
-
       config.cellWidth = cellWidth;
       config.cellHeight = cellHeight;
       config.columns = columns;
       _this.table = new Table(_assertThisInitialized(_this), config);
-
       _this.updateTable();
-
       return _this;
     }
-
     _createClass(GridTable, [{
       key: "destroy",
       value: function destroy(fromScene) {
@@ -4537,16 +3944,13 @@
         if (!this.scene) {
           return;
         }
-
         this.destroyChildrenMask();
         this.table.destroy(fromScene);
         this.table = undefined;
-
         if (this.cellContainersPool) {
           this.cellContainersPool.destroy(true);
           this.cellContainersPool = undefined;
         }
-
         _get(_getPrototypeOf(GridTable.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
@@ -4555,7 +3959,6 @@
         if (typeof mode === 'string') {
           mode = SCROLLMODE[mode.toLowerCase()];
         }
-
         this.scrollMode = mode;
         return this;
       }
@@ -4565,7 +3968,6 @@
         if (mode === undefined) {
           mode = true;
         }
-
         this.clampTableOXY = mode;
         return this;
       }
@@ -4619,11 +4021,9 @@
       key: "getTableOYPercentage",
       value: function getTableOYPercentage() {
         var tableVisibleHeight = this.tableVisibleHeight;
-
         if (tableVisibleHeight === 0) {
           return 0;
         }
-
         return this.tableOY / -tableVisibleHeight;
       }
     }, {
@@ -4637,17 +4037,16 @@
     }, {
       key: "scrollToBottom",
       value: function scrollToBottom() {
-        this.t = 1; // t will be 0 if table does not exceed visible area
-
+        this.t = 1;
+        // t will be 0 if table does not exceed visible area
         if (this.t === 0) {
           return this;
-        } // Table height might be expanded while cells are visible        
+        }
 
-
+        // Table height might be expanded while cells are visible        
         do {
           this.t = 1;
         } while (this.t !== 1);
-
         return this;
       }
     }, {
@@ -4660,11 +4059,9 @@
       value: function getCellContainer(cellIdx) {
         var cell = this.table.getCell(cellIdx, false);
         var container;
-
         if (cell) {
           container = cell.getContainer();
         }
-
         return container;
       }
     }, {
@@ -4681,30 +4078,24 @@
       key: "setCellHeight",
       value: function setCellHeight(cellIdx, height) {
         var cell;
-
         if (typeof cellIdx === 'number') {
           cell = this.table.getCell(cellIdx, true);
         } else {
           cell = cellIdx;
         }
-
         cell.height = height; // Only worked when scrollMode is 0
-
         return this;
       }
     }, {
       key: "setCellWidth",
       value: function setCellWidth(cellIdx, width) {
         var cell;
-
         if (typeof cellIdx === 'number') {
           cell = this.table.getCell(cellIdx, true);
         } else {
           cell = cellIdx;
         }
-
         cell.width = width; // Only worked when scrollMode is 1
-
         return this;
       }
     }, {
@@ -4751,11 +4142,9 @@
       key: "tableVisibleHeight",
       get: function get() {
         var h = this.tableHeight - this.instHeight;
-
         if (h < 0) {
           h = 0;
         }
-
         return h;
       }
     }, {
@@ -4764,13 +4153,11 @@
         var w;
         var tableWidth = this.tableWidth;
         var instWidth = this.instWidth;
-
         if (tableWidth > instWidth) {
           w = tableWidth - instWidth;
         } else {
           w = 0;
         }
-
         return w;
       }
     }, {
@@ -4817,25 +4204,23 @@
         if (this.width === width && this.height === height) {
           return this;
         }
-
         _get(_getPrototypeOf(GridTable.prototype), "resize", this).call(this, width, height);
-
         if (this.expandCellSize) {
           this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
         }
+        this.updateTable(true);
 
-        this.updateTable(true); // Layout children-mask
-
-        this.layoutChildrenMask(); // Re-mask children
-
+        // Layout children-mask
+        this.layoutChildrenMask();
+        // Re-mask children
         this.maskChildren();
         return this;
       }
     }]);
-
     return GridTable;
   }(ContainerLite);
 
+  // mixin
   Object.assign(GridTable.prototype, methods);
   var SCROLLMODE = {
     v: 0,
@@ -4856,18 +4241,17 @@
     if (config === undefined) {
       config = {};
     }
-
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-
     var width = GetValue(config, 'width', 256);
     var height = GetValue(config, 'height', 256);
-    var gameObject = new GridTable(this.scene, 0, 0, width, height, config); // set properties wo modify children
+    var gameObject = new GridTable(this.scene, 0, 0, width, height, config);
 
+    // set properties wo modify children
     gameObject.syncChildrenEnable = false;
-    BuildGameObject(this.scene, gameObject, config); // sync properties of children
-
+    BuildGameObject(this.scene, gameObject, config);
+    // sync properties of children
     gameObject.syncChildrenEnable = true;
     gameObject.syncPosition().syncVisible().syncAlpha();
     return gameObject;
@@ -4876,23 +4260,17 @@
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
   };
-
   var GetEntry = function GetEntry(target, keys, defaultEntry) {
     var entry = target;
-
     if (IsInValidKey(keys)) ; else {
       if (typeof keys === 'string') {
         keys = keys.split('.');
       }
-
       var key;
-
       for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
-
         if (entry[key] == null || _typeof(entry[key]) !== 'object') {
           var newEntry;
-
           if (i === cnt - 1) {
             if (defaultEntry === undefined) {
               newEntry = {};
@@ -4902,31 +4280,30 @@
           } else {
             newEntry = {};
           }
-
           entry[key] = newEntry;
         }
-
         entry = entry[key];
       }
     }
-
     return entry;
   };
-
   var SetValue = function SetValue(target, keys, value, delimiter) {
     if (delimiter === undefined) {
       delimiter = '.';
-    } // no object
+    }
 
-
+    // no object
     if (_typeof(target) !== 'object') {
       return;
-    } // invalid key
+    }
+
+    // invalid key
     else if (IsInValidKey(keys)) {
       // don't erase target
       if (value == null) {
         return;
-      } // set target to another object
+      }
+      // set target to another object
       else if (_typeof(value) === 'object') {
         target = value;
       }
@@ -4934,31 +4311,25 @@
       if (typeof keys === 'string') {
         keys = keys.split(delimiter);
       }
-
       var lastKey = keys.pop();
       var entry = GetEntry(target, keys);
       entry[lastKey] = value;
     }
-
     return target;
   };
 
   var GridTablePlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(GridTablePlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(GridTablePlugin);
-
     function GridTablePlugin(pluginManager) {
       var _this;
-
       _classCallCheck(this, GridTablePlugin);
+      _this = _super.call(this, pluginManager);
 
-      _this = _super.call(this, pluginManager); //  Register our new Game Object type
-
+      //  Register our new Game Object type
       pluginManager.registerGameObject('rexGridTable', Factory, Creator);
       return _this;
     }
-
     _createClass(GridTablePlugin, [{
       key: "start",
       value: function start() {
@@ -4966,10 +4337,8 @@
         eventEmitter.on('destroy', this.destroy, this);
       }
     }]);
-
     return GridTablePlugin;
   }(Phaser.Plugins.BasePlugin);
-
   SetValue(window, 'RexPlugins.GameObjects.GridTable', GridTable);
 
   return GridTablePlugin;

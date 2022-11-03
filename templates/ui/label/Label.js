@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import AddChildMask from '../../../plugins/gameobjects/container/containerlite/mask/AddChildMask.js';
+import SetDisplaySize from '../../../plugins/utils/size/SetDisplaySize.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -56,6 +57,11 @@ class Label extends Sizer {
                 iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
             }
         }
+        var iconSize = GetValue(config, 'iconSize');
+        this.setIconSize(
+            GetValue(config, 'iconWidth', iconSize),
+            GetValue(config, 'iconHeight', iconSize)
+        );
 
         if (text) {
             var expandTextWidth = GetValue(config, 'expandTextWidth', false);
@@ -88,6 +94,11 @@ class Label extends Sizer {
                 actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
             }
         }
+        var actionSize = GetValue(config, 'actionSize');
+        this.setActionSize(
+            GetValue(config, 'actionWidth', actionSize),
+            GetValue(config, 'actionHeight', actionSize)
+        );
 
         // Add space
         if (align === 'center') {
@@ -130,12 +141,35 @@ class Label extends Sizer {
     }
 
     // Access icon game object
-    setTexture(key, frame) {
+    setIconTexture(key, frame) {
         var imageObject = this.childrenMap.icon;
         if (imageObject === undefined) {
-            return;
+            return this;
         }
         imageObject.setTexture(key, frame);
+
+        SetDisplaySize(imageObject, this.iconWidth, this.iconHeight);
+        this.resetChildScaleState(imageObject);
+
+        return this;
+    }
+
+    setTexture(key, frame) {
+        this.setIconTexture(key, frame);
+        return this;
+    }
+
+    setIconSize(width, height) {
+        this.iconWidth = width;
+        this.iconHeight = height;
+
+        var imageObject = this.childrenMap.icon;
+        if (imageObject === undefined) {
+            return this;
+        }
+        SetDisplaySize(imageObject, width, height);
+        this.resetChildScaleState(imageObject);
+
         return this;
     }
 
@@ -155,10 +189,56 @@ class Label extends Sizer {
         return imageObject.frame;
     }
 
+    setActionTexture(key, frame) {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+            return this;
+        }
+        imageObject.setTexture(key, frame);
+
+        SetDisplaySize(imageObject, this.actionWidth, this.actionHeight);
+        this.resetChildScaleState(imageObject);
+
+        return this;
+    }
+
+    get actionTexture() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+            return undefined;
+        }
+        return imageObject.texture;
+    }
+
+    get actionFrame() {
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+            return undefined;
+        }
+        return imageObject.frame;
+    }
+
+    setActionSize(width, height) {
+        this.actionWidth = width;
+        this.actionHeight = height;
+
+        var imageObject = this.childrenMap.action;
+        if (imageObject === undefined) {
+            return this;
+        }
+        SetDisplaySize(imageObject, width, height);
+        this.resetChildScaleState(imageObject);
+
+        return this;
+    }
+
     runLayout(parent, newWidth, newHeight) {
         if (this.ignoreLayout) {
             return this;
         }
+
+        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
+        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
 
         super.runLayout(parent, newWidth, newHeight);
         // Pin icon-mask to icon game object

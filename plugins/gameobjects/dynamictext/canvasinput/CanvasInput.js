@@ -1,6 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
-import ExtractByPrefix from './methods/ExtractByPrefix.js';
+import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
 import AddLastInsertCursor from './methods/AddLastInsertCursor.js';
@@ -27,23 +27,25 @@ class CanvasInput extends DynamicText {
             delete config.text;
         }
 
-        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
         var focusStyle = ExtractByPrefix(config.background, 'focus');
+        var cursorStyle = ExtractByPrefix(config.style, 'cursor');
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexCanvasInput';
 
-        this.textEdit = CreateHiddenTextEdit(this, config);
+        this._text = '';
 
-        if (config.cursorStyle) {
-            Object.assign(cursorStyle, config.cursorStyle);
-        }
-        RegisterCursorStyle.call(this, cursorStyle);
+        this.textEdit = CreateHiddenTextEdit(this, config);
 
         if (config.focusStyle) {
             Object.assign(focusStyle, config.focusStyle);
         }
         RegisterFocusStyle.call(this, focusStyle);
+
+        if (config.cursorStyle) {
+            Object.assign(cursorStyle, config.cursorStyle);
+        }
+        RegisterCursorStyle.call(this, cursorStyle);
 
         var addCharCallback = config.onAddChar;
         if (addCharCallback) {
@@ -62,6 +64,8 @@ class CanvasInput extends DynamicText {
         if (moveCursorCallback) {
             this.on('movecursor', moveCursorCallback);
         }
+
+        this.setParseTextCallback(config.parseTextCallback);
 
         this.lastInsertCursor = AddLastInsertCursor(this);
         if (text) {
@@ -92,14 +96,116 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    get text() {
+        return this._text;
+    }
+
+    set text(value) {
+        if (value == null) {
+            value = '';
+        } else {
+            value = value.toString();
+        }
+        if (this._text === value) {
+            return;
+        }
+
+        if (value === '') {
+            this.popChild(this.lastInsertCursor);
+            this.removeChildren();
+            super.addChild(this.lastInsertCursor, 0);
+        } else {
+            this.moveChildToLast(this.lastInsertCursor);
+            SetText(this, value);
+        }
+
+        this._text = value;
+    }
+
     setText(text) {
-        this.moveChildToLast(this.lastInsertCursor);
-        SetText(this, text);
+        this.text = text;
         return this;
     }
 
     appendText(text) {
         this.setText(this.text + text);
+        return this;
+    }
+
+    setSize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
+        super.setSize(width, height);
+
+        // Run wrap again since fixedWidth and fixedHeight are changed
+        this.runWrap();
+
+        return this;
+    }
+
+    get displayText() {
+        return this.text;
+    }
+
+    set displayText(value) {
+        this.text = value;
+    }
+
+    setDisplayText(value) {
+        this.displayText = value;
+        return this;
+    }
+
+    get inputText() {
+        return this.textEdit.text;
+    }
+
+    set inputText(value) {
+        this.textEdit.text = value;
+    }
+
+    setInputText(value) {
+        this.inputText = value;
+        return this;
+    }
+
+    setParseTextCallback(callback) {
+        if (!callback) {
+            callback = DefaultParseTextCallback;
+        }
+        this.parseTextCallback = callback;
+        return this;
+    }
+
+    get value() {
+        return this.parseTextCallback(this.text);
+    }
+
+    set value(value) {
+        this.setText(value);
+    }
+
+    getValue() {
+        return this.value;
+    }
+
+    setValue(value) {
+        this.value = value;
+        return this;
+    }
+
+    get readOnly() {
+        return this.textEdit.readOnly;
+    }
+
+    set readOnly(value) {
+        this.textEdit.readOnly = value;
+    }
+
+    setReadOnly(value) {
+        this.textEdit.setReadOnly(value);
         return this;
     }
 
@@ -120,15 +226,26 @@ class CanvasInput extends DynamicText {
         return this.textEdit.isOpened;
     }
 
+    setFocusStyle(style) {
+        this.focusStyle = style;
+        return this;
+    }
+
     setCursorStyle(style) {
         this.cursorStyle = style;
         return this;
     }
 
-    setFocusStyle(style) {
-        this.focusStyle = style;
+    setNumberInput() {
+        this.textEdit.setNumberInput();
+        this.parseTextCallback = Number;
         return this;
     }
+
+}
+
+var DefaultParseTextCallback = function (text) {
+    return text;
 }
 
 export default CanvasInput;

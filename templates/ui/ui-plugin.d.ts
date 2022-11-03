@@ -123,7 +123,7 @@ declare class Factories {
     gridSizer: typeof GridSizerFactory;
     gridTable: typeof GridTableFactory;
     hiddenEdit: typeof HiddenEditFactory;
-    HolyGrail: typeof HolyGrailFactory;
+    holyGrail: typeof HolyGrailFactory;
     knob: typeof KnobFactory;
     label: typeof LabelFactory;
     lineProgress: typeof LineProgressFactory;
@@ -210,7 +210,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
 
     readonly maker: MakerClass;
 
-    yaml: yaml;
+    yaml: typeof yaml;
 }
 
 

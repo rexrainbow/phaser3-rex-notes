@@ -2,6 +2,7 @@ import { SetPadding } from '../../../../../../utils/padding/PaddingMethods.js';
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
 import { IsNewLineChar } from '../../../bob/Types.js';
+import GetDefaultTextHeight from './GetDefaultTextHeight.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -14,21 +15,35 @@ var RunWordWrap = function (config) {
     var paddingHorizontal = this.padding.left + this.padding.right + this.wrapPadding.left + this.wrapPadding.right;
 
     // Get lineHeight, maxLines
-    var lineHeight = GetValue(config, 'lineHeight', undefined);
+    var lineHeight = GetValue(config, 'lineHeight');
+    var ascent = GetValue(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
-        // Calculate lineHeight via maxLines, in fixedHeight mode
+        // Calculate lineHeight        
         maxLines = GetValue(config, 'maxLines', 0);
         if (this.fixedHeight > 0) {
             var innerHeight = this.fixedHeight - paddingVertical;
-            lineHeight = innerHeight / maxLines;
+            if (maxLines > 0) {
+                // Calculate lineHeight via maxLines, in fixedHeight mode
+                lineHeight = innerHeight / maxLines;
+            } else {
+                var textHeightResult = GetDefaultTextHeight.call(this);
+                lineHeight = textHeightResult.height;
+                ascent = textHeightResult.ascent;
+                // Calculate maxLines via (ascent, lineHeight), in fixedHeight mode
+                maxLines = Math.floor((innerHeight - ascent) / lineHeight);
+            }
         } else {
-            lineHeight = 0;
+            var textHeightResult = GetDefaultTextHeight.call(this);
+            lineHeight = textHeightResult.height;
+            ascent = textHeightResult.ascent;
         }
+
     } else {
+        // Calculate maxLines
         if (this.fixedHeight > 0) {
             // Calculate maxLines via lineHeight, in fixedHeight mode
-            maxLines = GetValue(config, 'maxLines', undefined);
+            maxLines = GetValue(config, 'maxLines');
             if (maxLines === undefined) {
                 var innerHeight = this.fixedHeight - paddingVertical;
                 maxLines = Math.floor(innerHeight / lineHeight);
@@ -38,6 +53,12 @@ var RunWordWrap = function (config) {
         }
 
     }
+
+    // If ascent is undefined, assign to lineHeight
+    if (ascent === undefined) {
+        ascent = lineHeight;
+    }
+
     var showAllLines = (maxLines === 0);
 
     // Get wrapWidth
@@ -58,9 +79,11 @@ var RunWordWrap = function (config) {
     var charWrap = GetValue(config, 'charWrap', false);
 
     var result = {
+        callback: 'runWordWrap',
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
         padding: this.wrapPadding,
+        ascent: ascent,
         lineHeight: lineHeight,
         maxLines: maxLines,
         wrapWidth: wrapWidth,
@@ -83,7 +106,7 @@ var RunWordWrap = function (config) {
     // Layout children
     wrapWidth += letterSpacing;
     var startX = this.padding.left + this.wrapPadding.left,
-        startY = this.padding.top + this.wrapPadding.top + lineHeight,  // Start(baseline) from 1st lineHeight, not 0
+        startY = this.padding.top + this.wrapPadding.top + ascent,  // Start(baseline) from ascent, not 0
         x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
@@ -163,7 +186,7 @@ var RunWordWrap = function (config) {
     AlignLines(result, innerWidth, innerHeight);
 
     // Resize
-    this.setSize(width, height);
+    this.setCanvasSize(width, height);
 
     // Set initial position
     for (var i = 0, cnt = resultChildren.length; i < cnt; i++) {

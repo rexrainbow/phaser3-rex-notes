@@ -13,13 +13,11 @@
       return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     }, _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -29,7 +27,6 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
@@ -38,12 +35,10 @@
     });
     return Constructor;
   }
-
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
     }
-
     subClass.prototype = Object.create(superClass && superClass.prototype, {
       constructor: {
         value: subClass,
@@ -56,14 +51,12 @@
     });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
-
   function _getPrototypeOf(o) {
     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
     };
     return _getPrototypeOf(o);
   }
-
   function _setPrototypeOf(o, p) {
     _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -71,12 +64,10 @@
     };
     return _setPrototypeOf(o, p);
   }
-
   function _isNativeReflectConstruct() {
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
-
     try {
       Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
@@ -84,71 +75,55 @@
       return false;
     }
   }
-
   function _assertThisInitialized(self) {
     if (self === void 0) {
       throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-
     return self;
   }
-
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
     } else if (call !== void 0) {
       throw new TypeError("Derived constructors may only return object or undefined");
     }
-
     return _assertThisInitialized(self);
   }
-
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
-
     return function _createSuperInternal() {
       var Super = _getPrototypeOf(Derived),
-          result;
-
+        result;
       if (hasNativeReflectConstruct) {
         var NewTarget = _getPrototypeOf(this).constructor;
-
         result = Reflect.construct(Super, arguments, NewTarget);
       } else {
         result = Super.apply(this, arguments);
       }
-
       return _possibleConstructorReturn(this, result);
     };
   }
-
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
       if (object === null) break;
     }
-
     return object;
   }
-
   function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get.bind();
     } else {
       _get = function _get(target, property, receiver) {
         var base = _superPropBase(target, property);
-
         if (!base) return;
         var desc = Object.getOwnPropertyDescriptor(base, property);
-
         if (desc.get) {
           return desc.get.call(arguments.length < 3 ? target : receiver);
         }
-
         return desc.value;
       };
     }
-
     return _get.apply(this, arguments);
   }
 
@@ -166,7 +141,6 @@
       if (this._eventEmitter && this._privateEE) {
         this._eventEmitter.shutdown();
       }
-
       return this;
     },
     getEventEmitter: function getEventEmitter() {
@@ -176,76 +150,65 @@
       if (this._eventEmitter) {
         this._eventEmitter.on.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     once: function once() {
       if (this._eventEmitter) {
         this._eventEmitter.once.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     off: function off() {
       if (this._eventEmitter) {
         this._eventEmitter.off.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     emit: function emit(event) {
       if (this._eventEmitter && event) {
         this._eventEmitter.emit.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     addListener: function addListener() {
       if (this._eventEmitter) {
         this._eventEmitter.addListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeListener: function removeListener() {
       if (this._eventEmitter) {
         this._eventEmitter.removeListener.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     removeAllListeners: function removeAllListeners() {
       if (this._eventEmitter) {
         this._eventEmitter.removeAllListeners.apply(this._eventEmitter, arguments);
       }
-
       return this;
     },
     listenerCount: function listenerCount() {
       if (this._eventEmitter) {
         return this._eventEmitter.listenerCount.apply(this._eventEmitter, arguments);
       }
-
       return 0;
     },
     listeners: function listeners() {
       if (this._eventEmitter) {
         return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
       }
-
       return [];
     },
     eventNames: function eventNames() {
       if (this._eventEmitter) {
         return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
       }
-
       return [];
     }
   };
 
   var SceneClass = Phaser.Scene;
-
   var IsSceneObject = function IsSceneObject(object) {
     return object instanceof SceneClass;
   };
@@ -262,51 +225,87 @@
     } else if (object.parent && object.parent.scene && IsSceneObject(object.parent.scene)) {
       // parent = bob object
       return object.parent.scene;
+    } else {
+      return null;
+    }
+  };
+
+  var GameClass = Phaser.Game;
+  var IsGame = function IsGame(object) {
+    return object instanceof GameClass;
+  };
+
+  var GetGame = function GetGame(object) {
+    if (IsGame(object)) {
+      return object;
+    } else if (IsGame(object.game)) {
+      return object.game;
+    } else if (IsSceneObject(object)) {
+      // object = scene object
+      return object.sys.game;
+    } else if (IsSceneObject(object.scene)) {
+      // object = game object
+      return object.scene.sys.game;
     }
   };
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-
-      this.parent = parent; // gameObject or scene
+      this.parent = parent; // gameObject, scene, or game
 
       this.scene = GetSceneObject(parent);
-      this.isShutdown = false; // Event emitter, default is private event emitter
+      this.game = GetGame(parent);
+      this.isShutdown = false;
 
-      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true)); // Register callback of parent destroy event, also see `shutdown` method
+      // Event emitter, default is private event emitter
+      this.setEventEmitter(GetValue$1(config, 'eventEmitter', true));
 
-      if (this.parent && this.parent === this.scene) {
-        // parent is a scene
-        this.scene.sys.events.once('shutdown', this.onSceneDestroy, this);
-      } else if (this.parent && this.parent.once) {
+      // Register callback of parent destroy event, also see `shutdown` method
+      if (this.parent) {
+        if (this.parent === this.scene) {
+          // parent is a scene
+          this.scene.sys.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent === this.game) {
+          // parent is game
+          this.game.events.once('shutdown', this.onEnvDestroy, this);
+        } else if (this.parent.once) {
+          // parent is game object or something else
+          this.parent.once('destroy', this.onParentDestroy, this);
+        }
+
         // bob object does not have event emitter
-        this.parent.once('destroy', this.onParentDestroy, this);
       }
     }
-
     _createClass(ComponentBase, [{
       key: "shutdown",
       value: function shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // parent might not be shutdown yet
+        }
 
+        // parent might not be shutdown yet
+        if (this.parent) {
+          if (this.parent === this.scene) {
+            // parent is a scene
+            this.scene.sys.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent === this.game) {
+            // parent is game
+            this.game.events.off('shutdown', this.onEnvDestroy, this);
+          } else if (this.parent.once) {
+            // parent is game object or something else
+            this.parent.off('destroy', this.onParentDestroy, this);
+          }
 
-        if (this.parent && this.parent === this.scene) {
-          // parent is a scene
-          this.scene.sys.events.off('shutdown', this.onSceneDestroy, this);
-        } else if (this.parent && this.parent.once) {
           // bob object does not have event emitter
-          this.parent.off('destroy', this.onParentDestroy, this);
         }
 
         this.destroyEventEmitter();
         this.parent = undefined;
         this.scene = undefined;
+        this.game = undefined;
         this.isShutdown = true;
       }
     }, {
@@ -315,8 +314,8 @@
         this.shutdown(fromScene);
       }
     }, {
-      key: "onSceneDestroy",
-      value: function onSceneDestroy() {
+      key: "onEnvDestroy",
+      value: function onEnvDestroy() {
         this.destroy(true);
       }
     }, {
@@ -325,7 +324,6 @@
         this.destroy(fromScene);
       }
     }]);
-
     return ComponentBase;
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
@@ -335,59 +333,46 @@
       if (preTest && !preTest(gameObject, pointer)) {
         return false;
       }
-
       if (!HitTest(gameObject, pointer)) {
         return false;
       }
-
       if (postTest && !postTest(gameObject, pointer)) {
         return false;
       }
-
       return true;
     } else {
       var inputManager = gameObject.scene.input.manager;
       var pointersTotal = inputManager.pointersTotal;
       var pointers = inputManager.pointers,
-          pointer;
-
+        pointer;
       for (var i = 0; i < pointersTotal; i++) {
         pointer = pointers[i];
-
         if (preTest && !preTest(gameObject, pointer)) {
           continue;
         }
-
         if (!HitTest(gameObject, pointer)) {
           continue;
         }
-
         if (postTest && !postTest(gameObject, pointer)) {
           continue;
         }
-
         return true;
       }
-
       return false;
     }
   };
-
   var HitTest = function HitTest(gameObject, pointer) {
     var scene = gameObject.scene;
     var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
     var inputManager = scene.input.manager;
     var gameObjects = [gameObject];
     var output;
-
     for (var i = 0, len = cameras.length; i < len; i++) {
       output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
-
       if (output.length > 0) {
         return true;
       }
     }
-
     return false;
   };
 
@@ -396,19 +381,16 @@
     var inputManager = inputPlugin.manager;
     var pointersTotal = inputManager.pointersTotal;
     var pointers = inputManager.pointers,
-        pointer;
-
+      pointer;
     for (var i = 0; i < pointersTotal; i++) {
       pointer = pointers[i];
-
       if (!pointer.primaryDown || inputPlugin.getDragState(pointer) !== 0 || !IsPointerInHitArea(gameObject, pointer)) {
         continue;
-      } // For 3.18.0
+      }
 
-
+      // For 3.18.0
       inputPlugin.setDragState(pointer, 1);
       inputPlugin._drag[pointer.id] = [gameObject];
-
       if (inputPlugin.dragDistanceThreshold === 0 || inputPlugin.dragTimeThreshold === 0) {
         //  No drag criteria, so snap immediately to mode 3
         inputPlugin.setDragState(pointer, 3);
@@ -416,44 +398,35 @@
       } else {
         //  Check the distance / time on the next event
         inputPlugin.setDragState(pointer, 2);
-      } // For 3.18.0
-
+      }
+      // For 3.18.0
 
       return true;
     }
-
     return false;
   };
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var DistanceBetween = Phaser.Math.Distance.Between;
   var RotateAroundDistance = Phaser.Math.RotateAroundDistance;
-
   var Drag = /*#__PURE__*/function (_ComponentBase) {
     _inherits(Drag, _ComponentBase);
-
     var _super = _createSuper(Drag);
-
     function Drag(gameObject, config) {
       var _this;
-
       _classCallCheck(this, Drag);
-
       _this = _super.call(this, gameObject, {
         eventEmitter: false
-      }); // No event emitter
+      });
+      // No event emitter
       // this.parent = gameObject;
 
       _this._enable = undefined;
       gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
-
       _this.resetFromJSON(config);
-
       _this.boot();
-
       return _this;
     }
-
     _createClass(Drag, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
@@ -486,14 +459,13 @@
         // Already shutdown
         if (this.isShutdown) {
           return;
-        } // GameObject events will be removed when this gameObject destroyed 
+        }
+
+        // GameObject events will be removed when this gameObject destroyed 
         // this.parent.on('dragstart', this.onDragStart, this);
         // this.parent.on('drag', this.onDrag, this);
         // this.parent.on('dragend', this.onDragEnd, this);
-
-
         this.pointer = undefined;
-
         _get(_getPrototypeOf(Drag.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
@@ -505,11 +477,9 @@
         if (this._enable === e) {
           return;
         }
-
         if (!e) {
           this.dragend();
         }
-
         this._enable = e;
         this.scene.input.setDraggable(this.parent, e);
         return this;
@@ -520,7 +490,6 @@
         if (e === undefined) {
           e = true;
         }
-
         this.enable = e;
         return this;
       }
@@ -536,7 +505,6 @@
         if (typeof m === 'string') {
           m = DIRECTIONNODE[m];
         }
-
         this.axisMode = m;
         return this;
       }
@@ -558,7 +526,6 @@
         if (!this.isDragging) {
           return;
         }
-
         this.scene.input.setDragState(this.pointer, 5);
         return this;
       }
@@ -568,7 +535,6 @@
         if (this.isDragging) {
           return;
         }
-
         this.pointer = pointer;
       }
     }, {
@@ -577,9 +543,7 @@
         if (this.pointer !== pointer) {
           return;
         }
-
         var gameObject = this.parent;
-
         if (this.axisMode === 0) {
           gameObject.x = dragX;
           gameObject.y = dragY;
@@ -597,13 +561,11 @@
           };
           dist = DistanceBetween(p1.x, p1.y, gameObject.x, gameObject.y);
           p1 = RotateAroundDistance(p1, gameObject.x, gameObject.y, -this.axisRotation, dist);
-
           if (this.axisMode === 1) {
             p1.y = gameObject.y;
           } else if (this.axisMode === 2) {
             p1.x = gameObject.x;
           }
-
           dist = DistanceBetween(p1.x, p1.y, gameObject.x, gameObject.y);
           p1 = RotateAroundDistance(p1, gameObject.x, gameObject.y, this.axisRotation, dist);
           gameObject.x = p1.x;
@@ -616,7 +578,6 @@
         if (this.pointer !== pointer) {
           return;
         }
-
         this.pointer = undefined;
       }
     }, {
@@ -625,10 +586,8 @@
         return this.pointer !== undefined;
       }
     }]);
-
     return Drag;
   }(ComponentBase);
-
   var DIRECTIONNODE = {
     'both': 0,
     'h&v': 0,
@@ -643,15 +602,11 @@
 
   var DragPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DragPlugin, _Phaser$Plugins$BaseP);
-
     var _super = _createSuper(DragPlugin);
-
     function DragPlugin(pluginManager) {
       _classCallCheck(this, DragPlugin);
-
       return _super.call(this, pluginManager);
     }
-
     _createClass(DragPlugin, [{
       key: "start",
       value: function start() {
@@ -664,7 +619,6 @@
         return new Drag(gameObject, config);
       }
     }]);
-
     return DragPlugin;
   }(Phaser.Plugins.BasePlugin);
 

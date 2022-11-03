@@ -7,10 +7,6 @@ class HiddenTextEdit extends HiddenTextEditBase {
             config = {};
         }
 
-        if (config.onUpdate === 'number') {
-            config.onUpdate = NumberInputUpdateCallback;
-        }
-
         super(gameObject, config);
         // this.parent = gameObject;
 
@@ -29,6 +25,9 @@ class HiddenTextEdit extends HiddenTextEditBase {
             })
             .on('close', function () {
                 gameObject.emit('close');
+            })
+            .on('nan', function (text) {
+                gameObject.emit('nan', text);
             })
     }
 
@@ -50,7 +49,10 @@ class HiddenTextEdit extends HiddenTextEditBase {
             }
         }
 
-        textObject.setText(text);
+        if (textObject.text !== text) {
+            textObject.setText(text);
+            textObject.emit('textchange', text, textObject, this);
+        }
 
         var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
         if (this.prevCursorPosition !== cursorPosition) {
@@ -59,7 +61,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
                     this.prevCursorPosition = null;
                 }
             }
-            
+
             if (this.prevCursorPosition != null) {
                 var child = textObject.getCharChild(this.prevCursorPosition);
                 textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
@@ -73,6 +75,11 @@ class HiddenTextEdit extends HiddenTextEditBase {
             this.prevCursorPosition = cursorPosition;
         }
 
+        return this;
+    }
+
+    setNumberInput() {
+        this.onUpdateCallback = NumberInputUpdateCallback;
         return this;
     }
 }
