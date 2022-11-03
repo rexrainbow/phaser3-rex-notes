@@ -58,16 +58,16 @@ var CreatePath = function (scene) {
                     .arc(centerX, centerY, radius, 90, 180)
                     .lineTo(centerX, centerY)
 
-                    .lineTo(centerX, centerY - radius)
-                    .arc(centerX, centerY, radius, 270, 360)
+                    .lineTo(centerX + radius, centerY)
+                    .arc(centerX, centerY, radius, 360, 270, true)
+                    .lineTo(centerX, centerY)
+
+                    .lineTo(centerX, centerY + radius)
+                    .arc(centerX, centerY, radius, 90, 360, true)
                     .lineTo(centerX, centerY)
 
                     .lineTo(centerX - radius, centerY)
                     .arc(centerX, centerY, radius, 180, 270)
-                    .lineTo(centerX, centerY)
-
-                    .lineTo(centerX + radius, centerY)
-                    .arc(centerX, centerY, radius, 360, 90)
                     .lineTo(centerX, centerY)
 
                     .close()
