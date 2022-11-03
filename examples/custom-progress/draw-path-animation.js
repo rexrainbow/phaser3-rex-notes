@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import CustomProgressPlugin from '../../plugins/customprogress-plugin.js';
-import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -18,14 +17,21 @@ class Demo extends Phaser.Scene {
             .setStrokeStyle(2, 0xffffff, 1)
             .setPosition(250, 300)
 
-        this.tweens.add({
+        var tween = this.tweens.add({
             targets: path,
             value: 1,
             repeat: -1
         })
 
-        // var gui = new Dat.GUI();
-        // gui.add(path, 'value', 0, 1);
+        this.input
+            .on('pointerdown', function () {
+                tween.setTimeScale(0.1);
+            })
+            .on('pointerup', function () {
+                tween.setTimeScale(1);
+            })
+
+
     }
 
     update() { }

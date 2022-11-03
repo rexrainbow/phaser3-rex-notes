@@ -376,6 +376,8 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
 
 ##### Lines
 
+###### Create path
+
 - Start, clear points data
     ```javascript
     lines.start();
@@ -452,6 +454,9 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         lines.end();
         ```
+
+###### Transform
+
 - Offset all points
     ```javascript
     lines.offset(x, y);
@@ -461,6 +466,24 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
     lines.rotateAround(centerX, centerY, angle);
     ```
     - `angle` : Rotate angle in degrees.
+
+###### Display path segment
+
+1. Create path, under `customShapes.isSizeChanged` condition.
+1. Display segment of path
+    ```javascript
+    lines.setDisplayPathSegment(startT, endT);
+    ```
+    or
+    ```javascript
+    lines.setDisplayPathSegment(endT);  // startT = 0
+    ```
+    - `startT`, `endT` : `0`~`1`. Start, end position on path, in percentage of path.
+        - `0` : Start position of path
+        - `1` : End position of path
+
+###### Misc
+
 - Get polygon
     ```javascript
     var polygon = lines.toPolygon();

@@ -2072,6 +2072,12 @@
       p1 = pathData[i1];
     return Linear$1(p0, p1, t);
   };
+  var WrapT = function WrapT(t) {
+    if (t % 1 === 0) {
+      return 1;
+    }
+    return Wrap(t, 0, 1);
+  };
   var PathSegmentMethods = {
     updateAccumulationLengths: function updateAccumulationLengths() {
       if (this.accumulationLengths == null) {
@@ -2119,8 +2125,8 @@
         endT = startT;
         startT = 0;
       }
-      startT = startT !== 1 ? Wrap(startT, 0, 1) : 1;
-      endT = endT !== 1 ? Wrap(endT, 0, 1) : 1;
+      startT = WrapT(startT);
+      endT = WrapT(endT);
       if (!this.pathDataSaved) {
         this.updateAccumulationLengths();
         this.savePathData();

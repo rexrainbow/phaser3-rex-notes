@@ -52,6 +52,13 @@ var GetInterpolation = function (pathData, i0, i1, t) {
     return Linear(p0, p1, t);
 }
 
+var WrapT = function (t) {
+    if ((t % 1) === 0) {
+        return 1;
+    }
+    return Wrap(t, 0, 1);
+}
+
 export default {
     updateAccumulationLengths() {
         if (this.accumulationLengths == null) {
@@ -109,8 +116,8 @@ export default {
             startT = 0;
         }
 
-        startT = (startT !== 1) ? Wrap(startT, 0, 1) : 1;
-        endT = (endT !== 1) ? Wrap(endT, 0, 1) : 1;
+        startT = WrapT(startT);
+        endT = WrapT(endT);
 
         if (!this.pathDataSaved) {
             this.updateAccumulationLengths();
