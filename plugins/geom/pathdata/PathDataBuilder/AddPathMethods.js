@@ -20,6 +20,8 @@ export default {
         this.accumulationLengths = undefined;
 
         StartAt(x, y, this.pathData);
+        this.firstPointX = x;
+        this.firstPointY = y;
         this.lastPointX = x;
         this.lastPointY = y;
 

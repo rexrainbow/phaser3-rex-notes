@@ -144,6 +144,8 @@ export default {
             AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
         }
 
+        this.firstPointX = this.pathData[0];
+        this.firstPointY = this.pathData[1];
         this.lastPointX = this.pathData[this.pathData.length - 2];
         this.lastPointY = this.pathData[this.pathData.length - 1];
         return this;

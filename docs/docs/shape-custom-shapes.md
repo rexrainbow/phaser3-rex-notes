@@ -511,6 +511,13 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
             hitAreaCallback: Phaser.Geom.Polygon.Contains,
         })
         ```
+- Position of first or last point
+    ```javascript
+    var p0x = lines.firstPointX;
+    var p0y = lines.firstPointY;
+    var pNx = lines.lastPointX;
+    var pNy = lines.lastPointY;
+    ```
 
 ##### Rectangle
 
@@ -644,33 +651,33 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
 - Center position
     - Get
         ```javascript
-        var x = arc.x;
-        var y = arc.y;
+        var x = circle.x;
+        var y = circle.y;
         ```
     - Set
         ```javascript
-        arc.setCenterPosition(x, y);
+        circle.setCenterPosition(x, y);
         ```
         or
         ```javascript
-        arc.x = x;
-        arc.y = y;
+        circle.x = x;
+        circle.y = y;
         ```
 - Radius
     - Get
         ```javascript
-        var radiusX = arc.radiusX;
-        var radiusY = arc.radiusY;
+        var radiusX = circle.radiusX;
+        var radiusY = circle.radiusY;
         ```
     - Set
         ```javascript
-        arc.setRadius(radiusX, radiusY);
+        circle.setRadius(radiusX, radiusY);
         // arc.setRadius(radius);
         ```
         or
         ```javascript
-        arc.radiusX = radiusX;
-        arc.radiusY = radiusY;
+        circle.radiusX = radiusX;
+        circle.radiusY = radiusY;
         ```
 
 ##### Ellipse

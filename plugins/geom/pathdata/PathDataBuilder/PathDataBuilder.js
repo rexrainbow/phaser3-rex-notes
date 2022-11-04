@@ -16,6 +16,8 @@ class PathDataBuilder {
         this.closePath = false;
         this.setIterations(32);
 
+        this.firstPointX = undefined;
+        this.firstPointY = undefined;
         this.lastPointX = undefined;
         this.lastPointY = undefined;
         this.accumulationLengths = undefined;

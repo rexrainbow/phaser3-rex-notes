@@ -13,8 +13,8 @@ class Demo extends Phaser.Scene {
     create() {
         var path = CreatePath(this)
             .setSize(200, 200)
-            .setFillStyle(0xff0000, 1)
-            .setStrokeStyle(2, 0xffffff, 1)
+            .setFillStyle(0x6ab7ff, 1)
+            .setStrokeStyle(5, 0x005cb2, 1)
             .setPosition(250, 300)
 
         var tween = this.tweens.add({
@@ -22,7 +22,6 @@ class Demo extends Phaser.Scene {
             value: 1,
             repeat: -1
         })
-
         this.input
             .on('pointerdown', function () {
                 tween.setTimeScale(0.1);
@@ -42,6 +41,7 @@ var CreatePath = function (scene) {
         create: [
             { name: 'pathRef', type: 'lines' },
             { name: 'path', type: 'lines' },
+            { name: 'dot', type: 'circle' },
         ],
         update: function () {
             var centerX = this.centerX,
@@ -69,14 +69,24 @@ var CreatePath = function (scene) {
                     .arc(centerX, centerY, radius, 180, 270)
                     .lineTo(centerX, centerY)
 
-                    .close()
+                    .end()
+
+                this.getShape('dot')
+                    .fillStyle(this.fillColor, this.fillAlpha)
+                    .setRadius(radius * 0.1)
             }
 
             var startT = this.value;
             var endT = startT + 0.2;
-            this.getShape('path')
+
+            var path = this.getShape('path');
+            path
                 .lineStyle(this.lineWidth, this.strokeColor, this.strokeAlpha)
                 .copyPathFrom(this.getShape('pathRef'), startT, endT)
+                .end()
+
+            this.getShape('dot')
+                .setCenterPosition(path.lastPointX, path.lastPointY)
 
         },
     })

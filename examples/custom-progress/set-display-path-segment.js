@@ -70,7 +70,7 @@ var CreatePath = function (scene) {
                     .arc(centerX, centerY, radius, 180, 270)
                     .lineTo(centerX, centerY)
 
-                    .close()
+                    .end()
             }
 
             var startT = this.value;

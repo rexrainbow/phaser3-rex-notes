@@ -4,6 +4,8 @@ export default class Lines extends PathBase {
     setIterations(iterations: number): this;
     iterations: number;
 
+    firstPointX: number;
+    firstPointY: number;
     lastPointX: number;
     lastPointY: number;
 

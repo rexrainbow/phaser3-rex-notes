@@ -2190,6 +2190,8 @@
       this.restorePathData();
       this.accumulationLengths = undefined;
       StartAt(x, y, this.pathData);
+      this.firstPointX = x;
+      this.firstPointY = y;
       this.lastPointX = x;
       this.lastPointY = y;
       return this;
@@ -2460,6 +2462,8 @@
         src.updateAccumulationLengths();
         AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
       }
+      this.firstPointX = this.pathData[0];
+      this.firstPointY = this.pathData[1];
       this.lastPointX = this.pathData[this.pathData.length - 2];
       this.lastPointY = this.pathData[this.pathData.length - 1];
       return this;
@@ -2512,6 +2516,8 @@
       this.pathData = pathData;
       this.closePath = false;
       this.setIterations(32);
+      this.firstPointX = undefined;
+      this.firstPointY = undefined;
       this.lastPointX = undefined;
       this.lastPointY = undefined;
       this.accumulationLengths = undefined;

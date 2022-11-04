@@ -9506,6 +9506,12 @@ or
 </code></pre></div></li>
 </ul>
 </li>
+<li>Position of first or last point
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">p0x</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">firstPointX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">p0y</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">firstPointY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">pNx</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">lastPointX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">pNy</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">lastPointY</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h5 id="rectangle">Rectangle<a class="headerlink" href="#rectangle" title="Permanent link">&para;</a></h5>
 <ul>
@@ -9633,30 +9639,30 @@ or
 <ul>
 <li>Center position<ul>
 <li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">circle</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
-<span class="nx">arc</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">circle</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Radius<ul>
 <li>Get
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">radiusX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">radiusY</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">circle</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">);</span>
 <span class="c1">// arc.setRadius(radius);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">radiusX</span><span class="p">;</span>
-<span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">radiusY</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">circle</span><span class="p">.</span><span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">radiusX</span><span class="p">;</span>
+<span class="nx">circle</span><span class="p">.</span><span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">radiusY</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 </li>
