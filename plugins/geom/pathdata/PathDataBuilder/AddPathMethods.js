@@ -5,6 +5,10 @@ import QuadraticBezierTo from '../QuadraticBezierTo.js';
 import CubicBezierCurveTo from '../QuadraticBezierTo.js';
 
 export default {
+    clear() {
+        this.start();
+        return this;
+    },
 
     start() {
         this.startAt();
@@ -13,10 +17,12 @@ export default {
 
     startAt(x, y) {
         this.restorePathData();
+        this.accumulationLengths = undefined;
+
         StartAt(x, y, this.pathData);
         this.lastPointX = x;
         this.lastPointY = y;
-        this.accumulationLengths = undefined;
+
         return this;
     },
 
@@ -59,9 +65,8 @@ export default {
             this.pathData
         );
 
-        var pathDataCnt = this.pathData.length;
-        this.lastPointX = this.pathData[pathDataCnt - 2];
-        this.lastPointY = this.pathData[pathDataCnt - 1];
+        this.lastPointX = this.pathData[this.pathData.length - 2];
+        this.lastPointY = this.pathData[this.pathData.length - 1];
         return this;
     },
 

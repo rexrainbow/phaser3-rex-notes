@@ -4,18 +4,37 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 const Wrap = Phaser.Math.Wrap;
 const Linear = Phaser.Math.Linear;
 
-var AddDisplayPathSegment = function (startT, endT) {
-    var startL = this.totalPathLength * startT;
-    var endL = this.totalPathLength * endT;
+var CopyFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
+    if (endT === undefined) {
+        endT = startT;
+        startT = 0;
+    }
 
-    var pathData = this.pathData,
-        pathDataRef = this.pathDataSave;
-    var accumulationLengths = this.accumulationLengths, d;
+    startT = WrapT(startT);
+    endT = WrapT(endT);
+
+    destPathData.length = 0;
+
+    if (startT === endT) {
+        return;
+    }
+
+    var totalPathLength = accumulationLengths[accumulationLengths.length - 1];
+    var startL = totalPathLength * startT;
+    var endL = totalPathLength * endT;
+    if (startT < endT) {
+        AddDisplayPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+    } else {
+        AddDisplayPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+        AddDisplayPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+    }
+}
+
+var AddDisplayPathSegment = function (srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = (startL > 0);
-    var pIdx;
     for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
-        pIdx = i * 2;
-        d = accumulationLengths[i];
+        var pIdx = i * 2;
+        var d = accumulationLengths[i];
 
         if (skipState) {
             if (d < startL) {
@@ -25,23 +44,23 @@ var AddDisplayPathSegment = function (startT, endT) {
             } else { // d > startL
                 var deltaD = d - accumulationLengths[i - 1];
                 var t = 1 - ((d - startL) / deltaD);
-                pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-                pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+                destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+                destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
                 skipState = false;
             }
         }
 
         if (d <= endL) {
-            pathData.push(pathDataRef[pIdx]);
-            pathData.push(pathDataRef[pIdx + 1]);
+            destPathData.push(srcPathData[pIdx]);
+            destPathData.push(srcPathData[pIdx + 1]);
             if (d === endL) {
                 break;
             }
         } else { // d > endL
             var deltaD = d - accumulationLengths[i - 1];
             var t = 1 - ((d - endL) / deltaD);
-            pathData.push(GetInterpolation(pathDataRef, pIdx - 2, pIdx, t));
-            pathData.push(GetInterpolation(pathDataRef, pIdx - 1, pIdx + 1, t));
+            destPathData.push(GetInterpolation(srcPathData, pIdx - 2, pIdx, t));
+            destPathData.push(GetInterpolation(srcPathData, pIdx - 1, pIdx + 1, t));
             break;
         }
     }
@@ -53,10 +72,7 @@ var GetInterpolation = function (pathData, i0, i1, t) {
 }
 
 var WrapT = function (t) {
-    if ((t % 1) === 0) {
-        return 1;
-    }
-    return Wrap(t, 0, 1);
+    return ((t % 1) === 0) ? 1 : Wrap(t, 0, 1);
 }
 
 export default {
@@ -111,29 +127,19 @@ export default {
     },
 
     setDisplayPathSegment(startT, endT) {
-        if (endT === undefined) {
-            endT = startT;
-            startT = 0;
-        }
-
-        startT = WrapT(startT);
-        endT = WrapT(endT);
-
         if (!this.pathDataSaved) {
             this.updateAccumulationLengths();
             this.savePathData();
         }
 
-        this.pathData.length = 0;
+        CopyFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
 
-        if (startT === endT) {
-            // Do nothing
-        } else if (startT < endT) {
-            AddDisplayPathSegment.call(this, startT, endT);
-        } else {
-            AddDisplayPathSegment.call(this, startT, 1);
-            AddDisplayPathSegment.call(this, 0, endT);
-        }
+        return this;
+    },
+
+    copyFromPathSegment(src, startT, endT) {
+        src.updateAccumulationLengths();
+        CopyFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
 
         return this;
     }

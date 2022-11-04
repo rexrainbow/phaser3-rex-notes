@@ -454,6 +454,14 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         lines.end();
         ```
+- Copy path from another lines
+    ```javascript
+    lines.copyPathFrom(srcLine);
+    ```    
+- Copy path segment from another lines
+    ```javascript
+    lines.copyPathFrom(srcLine, startT, endT);
+    ```
 
 ###### Transform
 

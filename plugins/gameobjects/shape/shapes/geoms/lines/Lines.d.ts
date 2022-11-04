@@ -50,4 +50,11 @@ export default class Lines extends PathBase {
         centerX: number, centerY: number,
         angle: number
     ): this;
+
+    copyPathFrom(src: Lines): this;
+    copyPathFrom(src: Lines, endT: number): this;
+    copyPathFrom(src: Lines, startT: number, endT: number): this;
+
+    setDisplayPathSegment(endT: number): this;
+    setDisplayPathSegment(startT: number, endT: number): this;
 }

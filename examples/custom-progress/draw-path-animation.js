@@ -73,7 +73,7 @@ var CreatePath = function (scene) {
                     .close()
             }
 
-            var startT = this.value + 0.5;
+            var startT = this.value;
             var endT = startT + 0.2;
             path.setDisplayPathSegment(startT, endT);
 

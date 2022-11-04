@@ -1,8 +1,10 @@
 import AddPathMethods from './AddPathMethods.js';
 import TransformPointsMethods from './TransformPointsMethods.js';
 import PathSegmentMethods from './PathSegmentMethods.js';
+import GraphicsMethods from './GraphicsMethods.js';
 import ToPoints from '../ToPoints.js';
 import ToPolygon from '../ToPolygon.js';
+import Copy from '../../../utils/array/Copy.js';
 
 
 class PathDataBuilder {
@@ -33,15 +35,17 @@ class PathDataBuilder {
         return ToPolygon(this.pathData, polygon);
     }
 
-    draw(graphics, isFill, isStroke) {
-        var points = this.toPoints();
-        if (isFill) {
-            graphics.fillPoints(points, this.closePath, this.closePath);
-        }
-        if (isStroke) {
-            graphics.strokePoints(points, this.closePath, this.closePath);
+    copyFrom(src, startT, endT) {
+        this.clear();
+
+        if (startT === undefined) {
+            Copy(this.pathData, src.pathDataSave);
+        } else {
+            this.copyFromPathSegment(src, startT, endT);
         }
 
+        this.lastPointX = this.pathData[this.pathData.length - 2];
+        this.lastPointY = this.pathData[this.pathData.length - 1];
         return this;
     }
 
@@ -51,7 +55,8 @@ Object.assign(
     PathDataBuilder.prototype,
     AddPathMethods,
     TransformPointsMethods,
-    PathSegmentMethods
+    PathSegmentMethods,
+    GraphicsMethods,
 )
 
 export default PathDataBuilder;
