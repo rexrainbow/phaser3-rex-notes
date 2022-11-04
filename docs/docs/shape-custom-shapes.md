@@ -457,10 +457,18 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
 - Copy path from another lines
     ```javascript
     lines.copyPathFrom(srcLine);
-    ```    
-- Copy path segment from another lines
+    ```
+    or
     ```javascript
     lines.copyPathFrom(srcLine, startT, endT);
+    ```
+- Append path from another lines
+    ```javascript
+    lines.appendPathFrom(srcLine);
+    ```
+    or
+    ```javascript
+    lines.appendPathFrom(srcLine, startT, endT);
     ```
 
 ###### Transform

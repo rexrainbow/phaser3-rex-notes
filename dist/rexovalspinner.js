@@ -2160,14 +2160,13 @@
   var DistanceBetween = Phaser.Math.Distance.Between;
   var Wrap = Phaser.Math.Wrap;
   var Linear = Phaser.Math.Linear;
-  var CopyFromPathSegment = function CopyFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
+  var AppendFromPathSegment = function AppendFromPathSegment(srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {
       endT = startT;
       startT = 0;
     }
     startT = WrapT(startT);
     endT = WrapT(endT);
-    destPathData.length = 0;
     if (startT === endT) {
       return;
     }
@@ -2175,13 +2174,13 @@
     var startL = totalPathLength * startT;
     var endL = totalPathLength * endT;
     if (startT < endT) {
-      AddDisplayPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+      AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
     } else {
-      AddDisplayPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
-      AddDisplayPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+      AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+      AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
     }
   };
-  var AddDisplayPathSegment = function AddDisplayPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
+  var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
     for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
       var pIdx = i * 2;
@@ -2271,12 +2270,20 @@
         this.updateAccumulationLengths();
         this.savePathData();
       }
-      CopyFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
+      this.pathData.length = 0;
+      AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
       return this;
     },
-    copyFromPathSegment: function copyFromPathSegment(src, startT, endT) {
-      src.updateAccumulationLengths();
-      CopyFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+    appendFromPathSegment: function appendFromPathSegment(src, startT, endT) {
+      if (startT === undefined) {
+        var _this$pathData;
+        (_this$pathData = this.pathData).push.apply(_this$pathData, _toConsumableArray(src.pathData));
+      } else {
+        src.updateAccumulationLengths();
+        AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+      }
+      this.lastPointX = this.pathData[this.pathData.length - 2];
+      this.lastPointY = this.pathData[this.pathData.length - 1];
       return this;
     }
   };
@@ -2346,19 +2353,6 @@
       key: "toPolygon",
       value: function toPolygon(polygon) {
         return ToPolygon(this.pathData, polygon);
-      }
-    }, {
-      key: "copyFrom",
-      value: function copyFrom(src, startT, endT) {
-        this.clear();
-        if (startT === undefined) {
-          Copy(this.pathData, src.pathDataSave);
-        } else {
-          this.copyFromPathSegment(src, startT, endT);
-        }
-        this.lastPointX = this.pathData[this.pathData.length - 2];
-        this.lastPointY = this.pathData[this.pathData.length - 1];
-        return this;
       }
     }]);
     return PathDataBuilder;

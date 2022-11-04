@@ -4,7 +4,6 @@ import PathSegmentMethods from './PathSegmentMethods.js';
 import GraphicsMethods from './GraphicsMethods.js';
 import ToPoints from '../ToPoints.js';
 import ToPolygon from '../ToPolygon.js';
-import Copy from '../../../utils/array/Copy.js';
 
 
 class PathDataBuilder {
@@ -33,20 +32,6 @@ class PathDataBuilder {
 
     toPolygon(polygon) {
         return ToPolygon(this.pathData, polygon);
-    }
-
-    copyFrom(src, startT, endT) {
-        this.clear();
-
-        if (startT === undefined) {
-            Copy(this.pathData, src.pathDataSave);
-        } else {
-            this.copyFromPathSegment(src, startT, endT);
-        }
-
-        this.lastPointX = this.pathData[this.pathData.length - 2];
-        this.lastPointY = this.pathData[this.pathData.length - 1];
-        return this;
     }
 
 }

@@ -4,7 +4,7 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 const Wrap = Phaser.Math.Wrap;
 const Linear = Phaser.Math.Linear;
 
-var CopyFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
+var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, endT, destPathData) {
     if (endT === undefined) {
         endT = startT;
         startT = 0;
@@ -12,8 +12,6 @@ var CopyFromPathSegment = function (srcPathData, accumulationLengths, startT, en
 
     startT = WrapT(startT);
     endT = WrapT(endT);
-
-    destPathData.length = 0;
 
     if (startT === endT) {
         return;
@@ -23,14 +21,14 @@ var CopyFromPathSegment = function (srcPathData, accumulationLengths, startT, en
     var startL = totalPathLength * startT;
     var endL = totalPathLength * endT;
     if (startT < endT) {
-        AddDisplayPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
+        AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData);
     } else {
-        AddDisplayPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
-        AddDisplayPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
+        AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
+        AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
     }
 }
 
-var AddDisplayPathSegment = function (srcPathData, accumulationLengths, startL, endL, destPathData) {
+var AddPathSegment = function (srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = (startL > 0);
     for (var i = 0, cnt = accumulationLengths.length; i < cnt; i++) {
         var pIdx = i * 2;
@@ -132,15 +130,22 @@ export default {
             this.savePathData();
         }
 
-        CopyFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
+        this.pathData.length = 0;
+        AppendFromPathSegment(this.pathDataSave, this.accumulationLengths, startT, endT, this.pathData);
 
         return this;
     },
 
-    copyFromPathSegment(src, startT, endT) {
-        src.updateAccumulationLengths();
-        CopyFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+    appendFromPathSegment(src, startT, endT) {
+        if (startT === undefined) {
+            this.pathData.push(...src.pathData);
+        } else {
+            src.updateAccumulationLengths();
+            AppendFromPathSegment(src.pathData, src.accumulationLengths, startT, endT, this.pathData);
+        }
 
+        this.lastPointX = this.pathData[this.pathData.length - 2];
+        this.lastPointY = this.pathData[this.pathData.length - 1];
         return this;
-    }
+    },
 }
