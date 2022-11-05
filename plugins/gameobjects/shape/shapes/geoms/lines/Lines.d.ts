@@ -53,6 +53,18 @@ export default class Lines extends PathBase {
         angle: number
     ): this;
 
+    scale(
+        centerX: number, centerY: number,
+        scaleX: number, scaleY: number
+    ): this;
+
+    savePathData(): this;
+    restorePathData(): this;
+
+    appendPathFrom(src: Lines): this;
+    appendPathFrom(src: Lines, endT: number): this;
+    appendPathFrom(src: Lines, startT: number, endT: number): this;
+
     copyPathFrom(src: Lines): this;
     copyPathFrom(src: Lines, endT: number): this;
     copyPathFrom(src: Lines, startT: number, endT: number): this;

@@ -10903,7 +10903,7 @@
     }
   };
 
-  var Scale$1 = {
+  var Scale$2 = {
     updateChildScale: function updateChildScale(child) {
       var state = GetLocalState(child);
       var parent = state.parent;
@@ -11980,7 +11980,7 @@
     changeOrigin: ChangeOrigin,
     drawBounds: DrawBounds$1
   };
-  Object.assign(methods$a, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$1, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
+  Object.assign(methods$a, Parent, AddChild$1, RemoveChild$1, ChildState, Transform, Position, Rotation, Scale$2, Visible, Alpha, Active, ScrollFactor, Mask, Depth, Children, Tween, AddToContainer$1, Layer, RenderTexture);
 
   var ContainerLite = /*#__PURE__*/function (_Base) {
     _inherits(ContainerLite, _Base);
@@ -14243,7 +14243,7 @@
   var GetValue$$ = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var Linear$6 = Phaser.Math.Linear;
-  var Scale = /*#__PURE__*/function (_EaseValueTaskBase) {
+  var Scale$1 = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(Scale, _EaseValueTaskBase);
     var _super = _createSuper(Scale);
     function Scale(gameObject, config) {
@@ -14396,7 +14396,7 @@
       ease: ease
     };
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -14410,7 +14410,7 @@
     }
 
     // Ease from current scale to 0
-    if (destroyMode instanceof Scale) {
+    if (destroyMode instanceof Scale$1) {
       scale = destroyMode;
       destroyMode = undefined;
     }
@@ -14439,7 +14439,7 @@
     config.duration = duration;
     config.ease = ease;
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -14493,7 +14493,7 @@
       repeat: repeat
     };
     if (scale === undefined) {
-      scale = new Scale(gameObject, config);
+      scale = new Scale$1(gameObject, config);
     } else {
       scale.resetFromJSON(config);
     }
@@ -28715,6 +28715,18 @@
     return pathData;
   };
 
+  var Scale = function Scale(centerX, centerY, scaleX, scaleY, pathData) {
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      var x = pathData[i] - centerX;
+      var y = pathData[i + 1] - centerY;
+      x *= scaleX;
+      y *= scaleY;
+      pathData[i] = x + centerX;
+      pathData[i + 1] = y + centerY;
+    }
+    return pathData;
+  };
+
   var Offset = function Offset(x, y, pathData) {
     for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
       pathData[i] += x;
@@ -28746,8 +28758,46 @@
       }
       return this;
     },
+    scale: function scale(centerX, centerY, scaleX, scaleY) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var x = this.lastCX - centerX;
+        var y = this.lastCY - centerY;
+        x *= scaleX;
+        y *= scaleY;
+        this.lastCX = x + centerX;
+        this.lastCY = y + centerY;
+      }
+      return this;
+    },
     offset: function offset(x, y) {
       Offset(x, y, this.pathData);
+      return this;
+    }
+  };
+
+  var SavePathDataMethods = {
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
       return this;
     }
   };
@@ -28840,24 +28890,6 @@
         prevY = y;
       }
       this.totalPathLength = accumulationLength;
-      return this;
-    },
-    savePathData: function savePathData() {
-      if (this.pathDataSaved) {
-        return this;
-      }
-      this.pathDataSave = _toConsumableArray(this.pathData);
-      this.pathData.length = 0;
-      this.pathDataSaved = true;
-      return this;
-    },
-    restorePathData: function restorePathData() {
-      if (!this.pathDataSaved) {
-        return this;
-      }
-      Copy(this.pathData, this.pathDataSave);
-      this.pathDataSave = undefined;
-      this.pathDataSaved = false;
       return this;
     },
     setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
@@ -28956,7 +28988,7 @@
     }]);
     return PathDataBuilder;
   }();
-  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods, GraphicsMethods);
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 

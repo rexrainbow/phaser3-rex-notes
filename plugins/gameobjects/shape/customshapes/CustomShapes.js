@@ -19,6 +19,18 @@ class CustomShapes extends BaseShapes {
         this.buildShapes(config);
     }
 
+    get centerX() {
+        return this.width / 2;
+    }
+
+    get centerY() {
+        return this.height / 2;
+    }
+
+    get radius() {
+        return Math.min(this.centerX, this.centerY);
+    }
+
     worldToLocalXY(worldX, worldY, camera, out) {
         if (typeof (camera) === 'boolean') {
             out = camera;

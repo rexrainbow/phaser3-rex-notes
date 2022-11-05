@@ -127,6 +127,13 @@ class Lines extends PathBase {
         return this;
     }
 
+    scale(centerX, centerY, scaleX, scaleY) {
+        this.builder.scale(centerX, centerY, scaleX, scaleY);
+
+        this.dirty = true;
+        return this;
+    }
+
     offset(x, y) {
         this.builder.offset(x, y);
 

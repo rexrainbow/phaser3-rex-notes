@@ -1976,6 +1976,18 @@
     return pathData;
   };
 
+  var Scale = function Scale(centerX, centerY, scaleX, scaleY, pathData) {
+    for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
+      var x = pathData[i] - centerX;
+      var y = pathData[i + 1] - centerY;
+      x *= scaleX;
+      y *= scaleY;
+      pathData[i] = x + centerX;
+      pathData[i + 1] = y + centerY;
+    }
+    return pathData;
+  };
+
   var Offset = function Offset(x, y, pathData) {
     for (var i = 0, cnt = pathData.length - 1; i < cnt; i += 2) {
       pathData[i] += x;
@@ -2007,6 +2019,23 @@
       }
       return this;
     },
+    scale: function scale(centerX, centerY, scaleX, scaleY) {
+      if (this.pathData.length === 0) {
+        return this;
+      }
+      Scale(centerX, centerY, scaleX, scaleY, this.pathData);
+      this.lastPointX = this.pathData[pathDataCnt - 2];
+      this.lastPointY = this.pathData[pathDataCnt - 1];
+      if (this.lastCX !== undefined) {
+        var x = this.lastCX - centerX;
+        var y = this.lastCY - centerY;
+        x *= scaleX;
+        y *= scaleY;
+        this.lastCX = x + centerX;
+        this.lastCY = y + centerY;
+      }
+      return this;
+    },
     offset: function offset(x, y) {
       Offset(x, y, this.pathData);
       return this;
@@ -2025,6 +2054,27 @@
       dest[i] = src[i + startIdx];
     }
     return dest;
+  };
+
+  var SavePathDataMethods = {
+    savePathData: function savePathData() {
+      if (this.pathDataSaved) {
+        return this;
+      }
+      this.pathDataSave = _toConsumableArray(this.pathData);
+      this.pathData.length = 0;
+      this.pathDataSaved = true;
+      return this;
+    },
+    restorePathData: function restorePathData() {
+      if (!this.pathDataSaved) {
+        return this;
+      }
+      Copy(this.pathData, this.pathDataSave);
+      this.pathDataSave = undefined;
+      this.pathDataSaved = false;
+      return this;
+    }
   };
 
   var DistanceBetween = Phaser.Math.Distance.Between;
@@ -2115,24 +2165,6 @@
         prevY = y;
       }
       this.totalPathLength = accumulationLength;
-      return this;
-    },
-    savePathData: function savePathData() {
-      if (this.pathDataSaved) {
-        return this;
-      }
-      this.pathDataSave = _toConsumableArray(this.pathData);
-      this.pathData.length = 0;
-      this.pathDataSaved = true;
-      return this;
-    },
-    restorePathData: function restorePathData() {
-      if (!this.pathDataSaved) {
-        return this;
-      }
-      Copy(this.pathData, this.pathDataSave);
-      this.pathDataSave = undefined;
-      this.pathDataSaved = false;
       return this;
     },
     setDisplayPathSegment: function setDisplayPathSegment(startT, endT) {
@@ -2231,7 +2263,7 @@
     }]);
     return PathDataBuilder;
   }();
-  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, PathSegmentMethods, GraphicsMethods);
+  Object.assign(PathDataBuilder.prototype, AddPathMethods, TransformPointsMethods, SavePathDataMethods, PathSegmentMethods, GraphicsMethods);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 

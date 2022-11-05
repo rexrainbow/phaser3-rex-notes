@@ -1,5 +1,6 @@
 import AddPathMethods from './AddPathMethods.js';
 import TransformPointsMethods from './TransformPointsMethods.js';
+import SavePathDataMethods from './SavePathDataMethods.js';
 import PathSegmentMethods from './PathSegmentMethods.js';
 import GraphicsMethods from './GraphicsMethods.js';
 import ToPoints from '../ToPoints.js';
@@ -42,6 +43,7 @@ Object.assign(
     PathDataBuilder.prototype,
     AddPathMethods,
     TransformPointsMethods,
+    SavePathDataMethods,
     PathSegmentMethods,
     GraphicsMethods,
 )
