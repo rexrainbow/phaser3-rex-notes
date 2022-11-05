@@ -43,8 +43,9 @@ var CreateCheckboxShape = function (scene) {
             var x = centerX - radius,
                 y = centerY - radius,
                 step = width / 4;
-
             var boxLineWidth = 4;
+            var checkLineWidth = Math.max(width / 10, 2);
+
             if (this.isSizeChanged) {
                 var halfBoxLineWidth = boxLineWidth / 2;
                 this.getShape('box')
@@ -60,7 +61,7 @@ var CreateCheckboxShape = function (scene) {
 
             if (this.checked) {
                 this.getShape('box').fillStyle(this.fillColor).lineStyle(boxLineWidth, this.fillColor)
-                this.getShape('check').lineStyle(width / 10, 0xffffff)
+                this.getShape('check').lineStyle(checkLineWidth, 0xffffff)
             } else {
                 this.getShape('box').fillStyle().lineStyle(boxLineWidth, this.fillColor)
                 this.getShape('check').lineStyle()

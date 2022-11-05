@@ -9,6 +9,7 @@ Custom shapes on shape.
 
 - [Speech bubble](https://codepen.io/rexrainbow/pen/vYgjyPJ)
 - [Jigsaw](https://codepen.io/rexrainbow/pen/vYZNZwr)
+- [Checkbox](https://codepen.io/rexrainbow/pen/jOKroer)
 - [World to localXY](https://codepen.io/rexrainbow/pen/PoeMXXQ)
 
 ## Usage
