@@ -1999,6 +1999,18 @@
     return pathData;
   };
 
+  var DuplicateLast = function DuplicateLast(pathData) {
+    var len = pathData.length;
+    if (len < 2) {
+      return pathData;
+    }
+    var lastX = pathData[len - 2];
+    var lastY = pathData[len - 1];
+    pathData.push(lastX);
+    pathData.push(lastY);
+    return pathData;
+  };
+
   var AddPathMethods = {
     clear: function clear() {
       this.start();
@@ -2085,7 +2097,7 @@
       return this;
     },
     end: function end() {
-      this.pathData.push(this.lastPointX, this.lastPointY);
+      DuplicateLast(this.pathData);
       return this;
     }
   };
@@ -2231,6 +2243,7 @@
       AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
       AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
     }
+    DuplicateLast(destPathData);
   };
   var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
@@ -2273,7 +2286,12 @@
     return Linear(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
-    return t % 1 === 0 ? 1 : Wrap(t, 0, 1);
+    if (t === 0) {
+      return 0;
+    } else if (t % 1 === 0) {
+      return 1;
+    }
+    return Wrap(t, 0, 1);
   };
   var PathSegmentMethods = {
     updateAccumulationLengths: function updateAccumulationLengths() {

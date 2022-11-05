@@ -1,3 +1,5 @@
+import DuplicateLast from '../DuplicateLast';
+
 const DistanceBetween = Phaser.Math.Distance.Between;
 const Wrap = Phaser.Math.Wrap;
 const Linear = Phaser.Math.Linear;
@@ -24,6 +26,8 @@ var AppendFromPathSegment = function (srcPathData, accumulationLengths, startT, 
         AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
         AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
     }
+
+    DuplicateLast(destPathData);
 }
 
 var AddPathSegment = function (srcPathData, accumulationLengths, startL, endL, destPathData) {
@@ -68,7 +72,12 @@ var GetInterpolation = function (pathData, i0, i1, t) {
 }
 
 var WrapT = function (t) {
-    return ((t % 1) === 0) ? 1 : Wrap(t, 0, 1);
+    if (t === 0) {
+        return 0;
+    } else if ((t % 1) === 0) {
+        return 1;
+    }
+    return Wrap(t, 0, 1);
 }
 
 export default {

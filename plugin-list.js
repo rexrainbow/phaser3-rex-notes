@@ -17,6 +17,7 @@ module.exports = {
     'circularprogressplugin': './plugins/circularprogress-plugin.js',
     'lineprogressplugin': './plugins/lineprogress-plugin.js',
     'customprogressplugin': './plugins/customprogress-plugin.js',
+    'checkboxplugin': './plugins/checkbox-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'hiddeninputtextplugin': './plugins/hiddeninputtext-plugin.js',
     'canvasinputplugin': './plugins/canvasinput-plugin.js',

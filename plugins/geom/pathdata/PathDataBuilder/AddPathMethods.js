@@ -3,6 +3,7 @@ import LineTo from '../LineTo.js';
 import ArcTo from '../ArcTo.js';
 import QuadraticBezierTo from '../QuadraticBezierTo.js';
 import CubicBezierCurveTo from '../QuadraticBezierTo.js';
+import DuplicateLast from '../DuplicateLast.js';
 
 export default {
     clear() {
@@ -125,7 +126,7 @@ export default {
     },
 
     end() {
-        this.pathData.push(this.lastPointX, this.lastPointY);
+        DuplicateLast(this.pathData);
         return this;
     },
 

@@ -1966,6 +1966,18 @@
     return pathData;
   };
 
+  var DuplicateLast = function DuplicateLast(pathData) {
+    var len = pathData.length;
+    if (len < 2) {
+      return pathData;
+    }
+    var lastX = pathData[len - 2];
+    var lastY = pathData[len - 1];
+    pathData.push(lastX);
+    pathData.push(lastY);
+    return pathData;
+  };
+
   var AddPathMethods = {
     clear: function clear() {
       this.start();
@@ -2052,7 +2064,7 @@
       return this;
     },
     end: function end() {
-      this.pathData.push(this.lastPointX, this.lastPointY);
+      DuplicateLast(this.pathData);
       return this;
     }
   };
@@ -2198,6 +2210,7 @@
       AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
       AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
     }
+    DuplicateLast(destPathData);
   };
   var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
@@ -2240,7 +2253,12 @@
     return Linear(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
-    return t % 1 === 0 ? 1 : Wrap(t, 0, 1);
+    if (t === 0) {
+      return 0;
+    } else if (t % 1 === 0) {
+      return 1;
+    }
+    return Wrap(t, 0, 1);
   };
   var PathSegmentMethods = {
     updateAccumulationLengths: function updateAccumulationLengths() {
@@ -2369,45 +2387,50 @@
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var RadToDeg = Phaser.Math.RadToDeg;
-  var UpdateShapes = function UpdateShapes() {
-    var x = this.radius;
-    var lineWidth = this.thickness * this.radius;
-    var barRadius = this.radius - lineWidth / 2;
-    var centerRadius = this.radius - lineWidth;
+  var ShapesUpdateMethods = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
+    },
+    updateShapes: function updateShapes() {
+      var x = this.radius;
+      var lineWidth = this.thickness * this.radius;
+      var barRadius = this.radius - lineWidth / 2;
+      var centerRadius = this.radius - lineWidth;
 
-    // Track shape
-    var trackShape = this.getShape('track');
-    if (this.trackColor != null && lineWidth > 0) {
-      trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
-    } else {
-      trackShape.reset();
-    }
-
-    // Bar shape
-    var barShape = this.getShape('bar');
-    if (this.barColor != null && barRadius > 0) {
-      var anticlockwise, startAngle, endAngle;
-      if (this.value === 1) {
-        anticlockwise = false;
-        startAngle = 0;
-        endAngle = 361; // overshoot 1
+      // Track shape
+      var trackShape = this.getShape('track');
+      if (this.trackColor != null && lineWidth > 0) {
+        trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
       } else {
-        anticlockwise = this.anticlockwise;
-        startAngle = RadToDeg(this.startAngle);
-        var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
-        endAngle = deltaAngle + startAngle;
+        trackShape.reset();
       }
-      barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
-    } else {
-      barShape.reset();
-    }
 
-    // Center shape
-    var centerShape = this.getShape('center');
-    if (this.centerColor && centerRadius > 0) {
-      centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
-    } else {
-      centerShape.reset();
+      // Bar shape
+      var barShape = this.getShape('bar');
+      if (this.barColor != null && barRadius > 0) {
+        var anticlockwise, startAngle, endAngle;
+        if (this.value === 1) {
+          anticlockwise = false;
+          startAngle = 0;
+          endAngle = 361; // overshoot 1
+        } else {
+          anticlockwise = this.anticlockwise;
+          startAngle = RadToDeg(this.startAngle);
+          var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
+          endAngle = deltaAngle + startAngle;
+        }
+        barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
+      } else {
+        barShape.reset();
+      }
+
+      // Center shape
+      var centerShape = this.getShape('center');
+      if (this.centerColor && centerRadius > 0) {
+        centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
+      } else {
+        centerShape.reset();
+      }
     }
   };
 
@@ -2433,7 +2456,6 @@
       _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
       _this.bootProgressBase(config);
-      _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
       _this.setRadius(radius);
       _this.setTrackColor(GetValue(config, 'trackColor', undefined));
       _this.setBarColor(barColor);
@@ -2441,6 +2463,7 @@
       _this.setThickness(GetValue(config, 'thickness', 0.2));
       _this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
       _this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
+      _this.buildShapes();
       _this.setValue(value);
       return _this;
     }
@@ -2569,10 +2592,7 @@
     }]);
     return CircularProgress;
   }(ProgressBase(BaseShapes));
-  var Methods = {
-    updateShapes: UpdateShapes
-  };
-  Object.assign(CircularProgress.prototype, Methods);
+  Object.assign(CircularProgress.prototype, ShapesUpdateMethods);
 
   function Factory (x, y, radius, barColor, value, config) {
     var gameObject = new CircularProgress(this.scene, x, y, radius, barColor, value, config);

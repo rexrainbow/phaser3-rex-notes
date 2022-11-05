@@ -1,0 +1,28 @@
+import EaseValueTask from '../../../../utils/ease/EaseValueTask.js';
+
+export default {
+    setCheckerAnimDuration(duration) {
+        if (duration === undefined) {
+            duration = 0;
+        }
+        this.checkerAnimDuration = duration;
+        return this;
+    },
+
+    playCheckerAnimation() {
+        if (this.checkerAnimProgressTask === undefined) {
+            this.checkerAnimProgressTask = new EaseValueTask(this);
+            this.checkerAnimProgressTask.on('update', this.setDirty, this);
+        }
+
+        this.checkerAnimProgressTask.restart({
+            key: 'checkerAnimProgress',
+            from: 0,
+            to: 1,
+            duration: this.checkerAnimDuration,
+        });
+
+        return this;
+    },
+
+}

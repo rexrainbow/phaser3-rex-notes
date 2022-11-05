@@ -58,6 +58,8 @@ export default class Lines extends PathBase {
         scaleX: number, scaleY: number
     ): this;
 
+    offset(x: number, y: number): this;
+
     savePathData(): this;
     restorePathData(): this;
 

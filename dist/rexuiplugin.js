@@ -572,7 +572,7 @@
     //  NOOP
   };
 
-  var Methods$h = {
+  var Methods$g = {
     _drawImage: NOOP,
     _drawTileSprite: NOOP,
     setGetFrameNameCallback: SetGetFrameNameCallback,
@@ -684,7 +684,7 @@
       }]);
       return NinePatch;
     }(GOClass);
-    Object.assign(NinePatch.prototype, Methods$h);
+    Object.assign(NinePatch.prototype, Methods$g);
     return NinePatch;
   };
 
@@ -720,7 +720,7 @@
     this.draw(gameObject, x, y);
   };
 
-  var Methods$g = {
+  var Methods$f = {
     _drawImage: DrawImage$2,
     _drawTileSprite: DrawTileSprite$1
   };
@@ -735,7 +735,7 @@
     }
     return _createClass(NinePatch);
   }(NinePatchBase(RenderTexture$2, 'rexNinePatch'));
-  Object.assign(NinePatch$1.prototype, Methods$g);
+  Object.assign(NinePatch$1.prototype, Methods$f);
 
   var IsInValidKey = function IsInValidKey(keys) {
     return keys == null || keys === '' || keys.length === 0;
@@ -1904,7 +1904,7 @@
     }
   };
 
-  var Methods$f = {
+  var Methods$e = {
     _drawImage: DrawImage$1,
     _drawTileSprite: DrawTileSprite
   };
@@ -1931,7 +1931,7 @@
     }]);
     return NinePatch;
   }(NinePatchBase(Blitter, 'rexNinePatch2'));
-  Object.assign(NinePatch.prototype, Methods$f);
+  Object.assign(NinePatch.prototype, Methods$e);
 
   ObjectFactory.register('ninePatch2', function (x, y, width, height, key, columns, rows, config) {
     var gameObject = new NinePatch(this.scene, x, y, width, height, key, columns, rows, config);
@@ -7225,7 +7225,7 @@
     return this;
   };
 
-  var Methods$e = {
+  var Methods$d = {
     open: Open$1,
     close: Close$1
   };
@@ -7592,7 +7592,7 @@
     }]);
     return HiddenTextEditBase;
   }(ComponentBase);
-  Object.assign(HiddenTextEditBase.prototype, Methods$e);
+  Object.assign(HiddenTextEditBase.prototype, Methods$d);
 
   var NumberInputUpdateCallback = function NumberInputUpdateCallback(text, textObject, hiddenInputText) {
     text = text.replace(' ', '');
@@ -10014,10 +10014,10 @@
   };
   var globBounds;
 
-  var Methods$d = {
+  var Methods$c = {
     contains: Contains$1
   };
-  Object.assign(Methods$d, RenderMethods);
+  Object.assign(Methods$c, RenderMethods);
 
   var DegToRad$8 = Phaser.Math.DegToRad;
   var RadToDeg$6 = Phaser.Math.RadToDeg;
@@ -10420,7 +10420,7 @@
     }]);
     return RenderBase;
   }(Base$1);
-  Object.assign(RenderBase.prototype, Methods$d);
+  Object.assign(RenderBase.prototype, Methods$c);
 
   var GetProperty = function GetProperty(name, config, defaultConfig) {
     if (config.hasOwnProperty(name)) {
@@ -12950,7 +12950,7 @@
     }
   };
 
-  var Methods$c = {
+  var Methods$b = {
     setFixedSize: SetFixedSize,
     setPadding: SetPadding,
     getPadding: GetPadding,
@@ -12998,7 +12998,7 @@
     setChildrenInteractiveEnable: SetChildrenInteractiveEnable,
     setInteractive: SetInteractive
   };
-  Object.assign(Methods$c, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
+  Object.assign(Methods$b, MoveChildMethods, BackgroundMethods, InnerBoundsMethods, SetAlignMethods);
 
   var GetFastValue$1 = Phaser.Utils.Objects.GetFastValue;
   var Pools = {};
@@ -13114,7 +13114,7 @@
     }]);
     return DynamicText;
   }(Canvas);
-  Object.assign(DynamicText.prototype, Methods$c);
+  Object.assign(DynamicText.prototype, Methods$b);
 
   ObjectFactory.register('dynamicText', function (x, y, width, height, config) {
     var gameObject = new DynamicText(this.scene, x, y, width, height, config);
@@ -15174,10 +15174,10 @@
     return this;
   };
 
-  var Methods$b = {
+  var Methods$a = {
     drawGameObjectsBounds: DrawGameObjectsBounds
   };
-  Object.assign(Methods$b, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
+  Object.assign(Methods$a, FadeMethods$1, AddMethods$1, RemoveMethods$1, PropertyMethods, CallMethods, DataMethods);
 
   var CameraClass = Phaser.Cameras.Scene2D.BaseCamera;
   var IsCameraObject = function IsCameraObject(object) {
@@ -15321,7 +15321,7 @@
     }]);
     return GOManager;
   }();
-  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$b);
+  Object.assign(GOManager.prototype, EventEmitterMethods, Methods$a);
 
   var AddGameObjectManager = function AddGameObjectManager(config, GameObjectManagerClass) {
     if (config === undefined) {
@@ -17224,7 +17224,7 @@
     return this;
   };
 
-  var Methods$a = {
+  var Methods$9 = {
     start: Start,
     typing: Typing,
     pause: Pause,
@@ -17238,7 +17238,7 @@
     setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay
   };
-  Object.assign(Methods$a, TypingSpeedMethods$1);
+  Object.assign(Methods$9, TypingSpeedMethods$1);
 
   var GetValue$1V = Phaser.Utils.Objects.GetValue;
   var TypeWriter = /*#__PURE__*/function () {
@@ -17338,7 +17338,7 @@
       }
     }
   };
-  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$a);
+  Object.assign(TypeWriter.prototype, EventEmitterMethods, Methods$9);
 
   var SpriteBob = /*#__PURE__*/function (_BobBase) {
     _inherits(SpriteBob, _BobBase);
@@ -17416,8 +17416,8 @@
     }
   };
 
-  var Methods$9 = {};
-  Object.assign(Methods$9, AnimationMethods);
+  var Methods$8 = {};
+  Object.assign(Methods$8, AnimationMethods);
 
   var SpriteManager = /*#__PURE__*/function (_GOManager) {
     _inherits(SpriteManager, _GOManager);
@@ -17456,7 +17456,7 @@
     }
     return scene.add.image(0, 0, textureKey, frameName);
   };
-  Object.assign(SpriteManager.prototype, Methods$9);
+  Object.assign(SpriteManager.prototype, Methods$8);
 
   var IsPlayAnimationTag = function IsPlayAnimationTag(tags, goType) {
     // goType.name.play
@@ -18142,7 +18142,7 @@
     }
   };
 
-  var Methods$8 = {
+  var Methods$7 = {
     setClickTarget: SetClickTarget,
     setTargetCamera: SetTargetCamera,
     setNextPageInput: SetNextPageInput,
@@ -18153,7 +18153,7 @@
     setIgnoreNextPageInput: SetIgnoreNextPageInput,
     showPage: ShowPage
   };
-  Object.assign(Methods$8, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
+  Object.assign(Methods$7, GameObjectManagerMethods, PlayMethods, PauseMethods, ResumeMethods, TypingSpeedMethods, SpriteMethods, ContentMethods);
 
   var ClearEvents = function ClearEvents(textPlayer) {
     for (var i = 0, cnt = ClearEvents$1.length; i < cnt; i++) {
@@ -18271,7 +18271,7 @@
     }]);
     return TextPlayer;
   }(Extend(DynamicText));
-  Object.assign(TextPlayer.prototype, Methods$8);
+  Object.assign(TextPlayer.prototype, Methods$7);
 
   ObjectFactory.register('textPlayer', function (x, y, width, height, config) {
     var gameObject = new TextPlayer(this.scene, x, y, width, height, config);
@@ -20137,6 +20137,18 @@
     return pathData;
   };
 
+  var DuplicateLast = function DuplicateLast(pathData) {
+    var len = pathData.length;
+    if (len < 2) {
+      return pathData;
+    }
+    var lastX = pathData[len - 2];
+    var lastY = pathData[len - 1];
+    pathData.push(lastX);
+    pathData.push(lastY);
+    return pathData;
+  };
+
   var AddPathMethods = {
     clear: function clear() {
       this.start();
@@ -20223,7 +20235,7 @@
       return this;
     },
     end: function end() {
-      this.pathData.push(this.lastPointX, this.lastPointY);
+      DuplicateLast(this.pathData);
       return this;
     }
   };
@@ -20369,6 +20381,7 @@
       AddPathSegment(srcPathData, accumulationLengths, startL, totalPathLength, destPathData);
       AddPathSegment(srcPathData, accumulationLengths, 0, endL, destPathData);
     }
+    DuplicateLast(destPathData);
   };
   var AddPathSegment = function AddPathSegment(srcPathData, accumulationLengths, startL, endL, destPathData) {
     var skipState = startL > 0;
@@ -20411,7 +20424,12 @@
     return Linear$7(p0, p1, t);
   };
   var WrapT = function WrapT(t) {
-    return t % 1 === 0 ? 1 : Wrap$1(t, 0, 1);
+    if (t === 0) {
+      return 0;
+    } else if (t % 1 === 0) {
+      return 1;
+    }
+    return Wrap$1(t, 0, 1);
   };
   var PathSegmentMethods = {
     updateAccumulationLengths: function updateAccumulationLengths() {
@@ -21007,45 +21025,50 @@
   }(BaseGeom);
 
   var RadToDeg$5 = Phaser.Math.RadToDeg;
-  var UpdateShapes$1 = function UpdateShapes() {
-    var x = this.radius;
-    var lineWidth = this.thickness * this.radius;
-    var barRadius = this.radius - lineWidth / 2;
-    var centerRadius = this.radius - lineWidth;
+  var ShapesUpdateMethods$1 = {
+    buildShapes: function buildShapes() {
+      this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
+    },
+    updateShapes: function updateShapes() {
+      var x = this.radius;
+      var lineWidth = this.thickness * this.radius;
+      var barRadius = this.radius - lineWidth / 2;
+      var centerRadius = this.radius - lineWidth;
 
-    // Track shape
-    var trackShape = this.getShape('track');
-    if (this.trackColor != null && lineWidth > 0) {
-      trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
-    } else {
-      trackShape.reset();
-    }
-
-    // Bar shape
-    var barShape = this.getShape('bar');
-    if (this.barColor != null && barRadius > 0) {
-      var anticlockwise, startAngle, endAngle;
-      if (this.value === 1) {
-        anticlockwise = false;
-        startAngle = 0;
-        endAngle = 361; // overshoot 1
+      // Track shape
+      var trackShape = this.getShape('track');
+      if (this.trackColor != null && lineWidth > 0) {
+        trackShape.setCenterPosition(x, x).setRadius(barRadius).lineStyle(lineWidth, this.trackColor);
       } else {
-        anticlockwise = this.anticlockwise;
-        startAngle = RadToDeg$5(this.startAngle);
-        var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
-        endAngle = deltaAngle + startAngle;
+        trackShape.reset();
       }
-      barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
-    } else {
-      barShape.reset();
-    }
 
-    // Center shape
-    var centerShape = this.getShape('center');
-    if (this.centerColor && centerRadius > 0) {
-      centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
-    } else {
-      centerShape.reset();
+      // Bar shape
+      var barShape = this.getShape('bar');
+      if (this.barColor != null && barRadius > 0) {
+        var anticlockwise, startAngle, endAngle;
+        if (this.value === 1) {
+          anticlockwise = false;
+          startAngle = 0;
+          endAngle = 361; // overshoot 1
+        } else {
+          anticlockwise = this.anticlockwise;
+          startAngle = RadToDeg$5(this.startAngle);
+          var deltaAngle = 360 * (anticlockwise ? 1 - this.value : this.value);
+          endAngle = deltaAngle + startAngle;
+        }
+        barShape.setCenterPosition(x, x).setRadius(barRadius).setAngle(startAngle, endAngle, anticlockwise).lineStyle(lineWidth, this.barColor);
+      } else {
+        barShape.reset();
+      }
+
+      // Center shape
+      var centerShape = this.getShape('center');
+      if (this.centerColor && centerRadius > 0) {
+        centerShape.setCenterPosition(x, x).setRadius(centerRadius).fillStyle(this.centerColor);
+      } else {
+        centerShape.reset();
+      }
     }
   };
 
@@ -21071,7 +21094,6 @@
       _this = _super.call(this, scene, x, y, width, width);
       _this.type = 'rexCircularProgress';
       _this.bootProgressBase(config);
-      _this.addShape(new Circle().setName('track')).addShape(new Arc().setName('bar')).addShape(new Circle().setName('center'));
       _this.setRadius(radius);
       _this.setTrackColor(GetValue$1Q(config, 'trackColor', undefined));
       _this.setBarColor(barColor);
@@ -21079,6 +21101,7 @@
       _this.setThickness(GetValue$1Q(config, 'thickness', 0.2));
       _this.setStartAngle(GetValue$1Q(config, 'startAngle', DefaultStartAngle$1));
       _this.setAnticlockwise(GetValue$1Q(config, 'anticlockwise', false));
+      _this.buildShapes();
       _this.setValue(value);
       return _this;
     }
@@ -21207,10 +21230,7 @@
     }]);
     return CircularProgress;
   }(ProgressBase(BaseShapes));
-  var Methods$7 = {
-    updateShapes: UpdateShapes$1
-  };
-  Object.assign(CircularProgress$1.prototype, Methods$7);
+  Object.assign(CircularProgress$1.prototype, ShapesUpdateMethods$1);
 
   ObjectFactory.register('circularProgress', function (x, y, radius, barColor, value, config) {
     var gameObject = new CircularProgress$1(this.scene, x, y, radius, barColor, value, config);

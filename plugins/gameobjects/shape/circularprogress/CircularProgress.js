@@ -1,7 +1,6 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import ProgressBase from '../../../utils/progressbase/ProgressBase.js';
-import { Arc, Circle } from '../shapes/geoms';
-import UpdateShapes from './UpdateShapes.js';
+import ShapesUpdateMethods from './ShapesUpdateMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -25,11 +24,6 @@ class CircularProgress extends ProgressBase(BaseShapes) {
 
         this.bootProgressBase(config);
 
-        this
-            .addShape((new Circle()).setName('track'))
-            .addShape((new Arc()).setName('bar'))
-            .addShape((new Circle()).setName('center'))
-
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
         this.setBarColor(barColor);
@@ -38,6 +32,8 @@ class CircularProgress extends ProgressBase(BaseShapes) {
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
+
+        this.buildShapes();
 
         this.setValue(value);
     }
@@ -159,13 +155,9 @@ class CircularProgress extends ProgressBase(BaseShapes) {
 
 }
 
-var Methods = {
-    updateShapes: UpdateShapes,
-}
-
 Object.assign(
     CircularProgress.prototype,
-    Methods,
+    ShapesUpdateMethods,
 )
 
 export default CircularProgress;
