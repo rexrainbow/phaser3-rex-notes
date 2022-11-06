@@ -2384,6 +2384,8 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  Phaser.Utils.Objects.GetValue;
+
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var RadToDeg = Phaser.Math.RadToDeg;

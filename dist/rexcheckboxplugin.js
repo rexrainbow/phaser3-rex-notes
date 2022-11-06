@@ -439,6 +439,18 @@
       this.checkerColor = color;
       this.checkAlpha = alpha;
       return this;
+    },
+    setBoxShape: function setBoxShape(isCircleShape) {
+      if (isCircleShape === undefined) {
+        isCircleShape = false;
+      }
+      if (this.isCircleShape === isCircleShape) {
+        return this;
+      }
+      this.isCircleShape = isCircleShape;
+      this.isSizeChanged = true;
+      this.dirty = true;
+      return this;
     }
   };
 
@@ -496,7 +508,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$7 = function GetValue(source, key, defaultValue) {
+  var GetValue$8 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -545,7 +557,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$7(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$8(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1412,13 +1424,15 @@
     return Lines;
   }(PathBase);
 
-  var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
-  var Rectangle = /*#__PURE__*/function (_BaseGeom) {
-    _inherits(Rectangle, _BaseGeom);
-    var _super = _createSuper(Rectangle);
-    function Rectangle(x, y, width, height) {
+  Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
+
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var RoundRectangle = /*#__PURE__*/function (_PathBase) {
+    _inherits(RoundRectangle, _PathBase);
+    var _super = _createSuper(RoundRectangle);
+    function RoundRectangle(x, y, width, height, radius, iterations) {
       var _this;
-      _classCallCheck(this, Rectangle);
+      _classCallCheck(this, RoundRectangle);
       if (x === undefined) {
         x = 0;
       }
@@ -1431,14 +1445,21 @@
       if (height === undefined) {
         height = width;
       }
+      if (radius === undefined) {
+        radius = 0;
+      }
+      if (iterations === undefined) {
+        iterations = 6;
+      }
       _this = _super.call(this);
-      _this.pathData = [];
-      _this.closePath = true;
       _this.setTopLeftPosition(x, y);
       _this.setSize(width, height);
+      _this.setRadius(radius);
+      _this.setIterations(iterations);
+      _this.closePath = true;
       return _this;
     }
-    _createClass(Rectangle, [{
+    _createClass(RoundRectangle, [{
       key: "x",
       get: function get() {
         return this._x;
@@ -1489,67 +1510,152 @@
         return this;
       }
     }, {
-      key: "updateData",
-      value: function updateData() {
-        this.pathData.length = 0;
-        var x0 = this.x,
-          x1 = x0 + this.width,
-          y0 = this.y,
-          y1 = y0 + this.height;
-        this.pathData.push(x0, y0);
-        this.pathData.push(x1, y0);
-        this.pathData.push(x1, y1);
-        this.pathData.push(x0, y1);
-        this.pathData.push(x0, y0);
-        _get(_getPrototypeOf(Rectangle.prototype), "updateData", this).call(this);
+      key: "radiusTL",
+      get: function get() {
+        return this._radiusTL;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusTL !== value;
+        this._radiusTL = value;
+      }
+    }, {
+      key: "radiusTR",
+      get: function get() {
+        return this._radiusTR;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusTR !== value;
+        this._radiusTR = value;
+      }
+    }, {
+      key: "radiusBL",
+      get: function get() {
+        return this._radiusBL;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusBL !== value;
+        this._radiusBL = value;
+      }
+    }, {
+      key: "radiusBR",
+      get: function get() {
+        return this._radiusBR;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusBR !== value;
+        this._radiusBR = value;
+      }
+    }, {
+      key: "radius",
+      get: function get() {
+        return Math.max(this.radiusTL, this.radiusTR, this.radiusBL, this.radiusBR);
+      },
+      set: function set(value) {
+        if (typeof value === 'number') {
+          this.radiusTL = value;
+          this.radiusTR = value;
+          this.radiusBL = value;
+          this.radiusBR = value;
+        } else {
+          this.radiusTL = GetValue$7(value, 'tl', 0);
+          this.radiusTR = GetValue$7(value, 'tr', 0);
+          this.radiusBL = GetValue$7(value, 'bl', 0);
+          this.radiusBR = GetValue$7(value, 'br', 0);
+        }
+      }
+    }, {
+      key: "setRadius",
+      value: function setRadius(radius) {
+        if (radius === undefined) {
+          radius = 0;
+        }
+        this.radius = radius;
         return this;
       }
     }, {
-      key: "webglRender",
-      value: function webglRender(pipeline, calcMatrix, alpha, dx, dy) {
-        if (this.isFilled) {
-          var fillTint = pipeline.fillTint;
-          var fillTintColor = GetTint(this.fillColor, this.fillAlpha * alpha);
-          fillTint.TL = fillTintColor;
-          fillTint.TR = fillTintColor;
-          fillTint.BL = fillTintColor;
-          fillTint.BR = fillTintColor;
-          pipeline.batchFillRect(-dx + this.x, -dy + this.y, this.width, this.height);
-        }
-        if (this.isStroked) {
-          StrokePathWebGL(pipeline, this, alpha, dx, dy);
-        }
+      key: "iterations",
+      get: function get() {
+        return this._iterations;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._iterations !== value;
+        this._iterations = value;
       }
     }, {
-      key: "canvasRender",
-      value: function canvasRender(ctx, dx, dy) {
-        if (this.isFilled) {
-          FillStyleCanvas(ctx, this);
-          ctx.fillRect(-dx, -dy, this.width, this.height);
+      key: "setIterations",
+      value: function setIterations(iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }, {
+      key: "updateData",
+      value: function updateData() {
+        var pathData = this.pathData;
+        pathData.length = 0;
+        var width = this.width,
+          height = this.height,
+          radius,
+          iterations = this.iterations + 1;
+
+        // top-left
+        radius = this.radiusTL;
+        if (radius > 0) {
+          var centerX = radius;
+          var centerY = radius;
+          ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+        } else {
+          LineTo(0, 0, pathData);
         }
-        if (this.isStroked) {
-          LineStyleCanvas(ctx, this);
-          ctx.beginPath();
-          ctx.rect(-dx, -dy, this.width, this.height);
-          ctx.stroke();
+
+        // top-right
+        radius = this.radiusTR;
+        if (radius > 0) {
+          var centerX = width - radius;
+          var centerY = radius;
+          ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+        } else {
+          LineTo(width, 0, pathData);
         }
+
+        // bottom-right
+        radius = this.radiusBR;
+        if (radius > 0) {
+          var centerX = width - radius;
+          var centerY = height - radius;
+          ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+        } else {
+          LineTo(width, height, pathData);
+        }
+
+        // bottom-left
+        radius = this.radiusBL;
+        if (radius > 0) {
+          var centerX = radius;
+          var centerY = height - radius;
+          ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+        } else {
+          LineTo(0, height, pathData);
+        }
+        pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
+        Offset(this.x, this.y, pathData);
+        _get(_getPrototypeOf(RoundRectangle.prototype), "updateData", this).call(this);
+        return this;
       }
     }]);
-    return Rectangle;
-  }(BaseGeom);
+    return RoundRectangle;
+  }(PathBase);
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var ShapesUpdateMethods = {
     buildShapes: function buildShapes() {
-      this.addShape(new Rectangle().setName('box')).addShape(new Lines().setName('checker'));
+      this.addShape(new RoundRectangle().setName('box')).addShape(new Lines().setName('checker'));
     },
     updateShapes: function updateShapes() {
       var centerX = this.width / 2,
         centerY = this.height / 2,
         radius = Math.min(centerX, centerY);
-      var width = radius * 2,
-        height = width;
+      var width = radius * 2;
       var x = centerX - radius,
         y = centerY - radius,
         step = width / 4;
@@ -1561,7 +1667,13 @@
       // Setup shapes
       if (this.isSizeChanged) {
         var halfBoxLineWidth = boxLineWidth / 2;
-        boxShape.setTopLeftPosition(x + halfBoxLineWidth, y + halfBoxLineWidth).setSize(width - boxLineWidth, height - boxLineWidth);
+        var boxInnerWidth = width - boxLineWidth;
+        boxShape.setTopLeftPosition(x + halfBoxLineWidth, y + halfBoxLineWidth).setSize(boxInnerWidth, boxInnerWidth);
+        if (this.isCircleShape) {
+          boxShape.setRadius(boxInnerWidth / 2);
+        } else {
+          boxShape.setRadius(0);
+        }
         checkerShape.startAt(step * 1, step * 2).lineTo(step * 2, step * 3).lineTo(step * 3, step * 1).offset(x, y).end();
       }
 
@@ -2404,8 +2516,9 @@
     },
     playCheckerAnimation: function playCheckerAnimation() {
       if (this.checkerAnimProgressTask === undefined) {
-        this.checkerAnimProgressTask = new EaseValueTask(this);
-        this.checkerAnimProgressTask.on('update', this.setDirty, this);
+        this.checkerAnimProgressTask = new EaseValueTask(this, {
+          eventEmitter: null
+        });
       }
       this.checkerAnimProgressTask.restart({
         key: 'checkerAnimProgress',
@@ -2413,6 +2526,13 @@
         to: 1,
         duration: this.checkerAnimDuration
       });
+      return this;
+    },
+    stopCheckerAnimation: function stopCheckerAnimation() {
+      if (this.checkerAnimProgressTask === undefined) {
+        return this;
+      }
+      this.checkerAnimProgressTask.stop();
       return this;
     }
   };
@@ -2445,10 +2565,11 @@
       if (color === undefined) {
         color = DefaultBoxFillColor;
       }
+      _this.setBoxShape(GetValue(config, 'circleBox', false));
       _this.setBoxFillStyle(color, GetValue(config, 'boxFillAlpha', 1));
       _this.setBoxStrokeStyle(GetValue(config, 'boxLineWidth', 4), GetValue(config, 'boxStrokeColor', color), GetValue(config, 'boxStrokeAlpha', 1));
       _this.setCheckerStyle(GetValue(config, 'checkerColor', 0xffffff), GetValue(config, 'checkerAlpha', 1));
-      _this.setCheckerAnimDuration(GetValue(config, 'animDuration', 150));
+      _this.setCheckerAnimDuration(GetValue(config, 'animationDuration', 150));
       _this.buildShapes();
       _this.setChecked(GetValue(config, 'checked', false));
       return _this;
@@ -2467,8 +2588,16 @@
         this._value = value;
         if (value) {
           this.playCheckerAnimation();
+        } else {
+          this.stopCheckerAnimation();
         }
         this.emit('valuechange', value);
+      }
+    }, {
+      key: "setValue",
+      value: function setValue(value) {
+        this.value = value;
+        return this;
       }
     }, {
       key: "checked",
@@ -2492,6 +2621,18 @@
       value: function toggleChecked() {
         this.checked = !this.checked;
         return this;
+      }
+    }, {
+      key: "checkerAnimProgress",
+      get: function get() {
+        return this._checkerAnimProgress;
+      },
+      set: function set(value) {
+        if (this._checkerAnimProgress === value) {
+          return;
+        }
+        this._checkerAnimProgress = value;
+        this.dirty = true;
       }
     }]);
     return Checkbox;

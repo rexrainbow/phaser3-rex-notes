@@ -26,6 +26,10 @@ class Checkbox extends BaseShapes {
             color = DefaultBoxFillColor;
         }
 
+        this.setBoxShape(
+            GetValue(config, 'circleBox', false),
+        );
+
         this.setBoxFillStyle(
             color,
             GetValue(config, 'boxFillAlpha', 1)
@@ -44,7 +48,7 @@ class Checkbox extends BaseShapes {
 
         this.setCheckerAnimDuration(
             GetValue(config, 'animationDuration', 150)
-        )
+        );
 
         this.buildShapes();
 
@@ -74,6 +78,11 @@ class Checkbox extends BaseShapes {
         }
 
         this.emit('valuechange', value);
+    }
+
+    setValue(value) {
+        this.value = value;
+        return this;
     }
 
     get checked() {

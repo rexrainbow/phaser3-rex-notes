@@ -2285,6 +2285,8 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  Phaser.Utils.Objects.GetValue;
+
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Linear = Phaser.Math.Linear;

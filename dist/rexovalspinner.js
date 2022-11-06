@@ -2417,6 +2417,8 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  Phaser.Utils.Objects.GetValue;
+
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Oval = /*#__PURE__*/function (_Base) {

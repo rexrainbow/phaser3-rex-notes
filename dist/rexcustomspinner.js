@@ -533,7 +533,7 @@
     }
   };
 
-  var GetValue$9 = Phaser.Utils.Objects.GetValue;
+  var GetValue$a = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -544,7 +544,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$9(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$a(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -612,7 +612,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$8 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     var _super = _createSuper(TickTask);
@@ -623,7 +623,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$8(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$9(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -740,7 +740,7 @@
     'always': 2
   };
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     var _super = _createSuper(SceneUpdateTickTask);
@@ -754,7 +754,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$7(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$8(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -790,7 +790,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
@@ -800,15 +800,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$6(o, 'state', IDLE);
-        this.timeScale = GetValue$6(o, 'timeScale', 1);
-        this.delay = GetValue$6(o, 'delay', 0);
-        this.repeat = GetValue$6(o, 'repeat', 0);
-        this.repeatCounter = GetValue$6(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$6(o, 'repeatDelay', 0);
-        this.duration = GetValue$6(o, 'duration', 0);
-        this.nowTime = GetValue$6(o, 'nowTime', 0);
-        this.justRestart = GetValue$6(o, 'justRestart', false);
+        this.state = GetValue$7(o, 'state', IDLE);
+        this.timeScale = GetValue$7(o, 'timeScale', 1);
+        this.delay = GetValue$7(o, 'delay', 0);
+        this.repeat = GetValue$7(o, 'repeat', 0);
+        this.repeatCounter = GetValue$7(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$7(o, 'repeatDelay', 0);
+        this.duration = GetValue$7(o, 'duration', 0);
+        this.nowTime = GetValue$7(o, 'nowTime', 0);
+        this.justRestart = GetValue$7(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -1037,7 +1037,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
@@ -1050,13 +1050,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$5(o, 'timer'));
-        this.setEnable(GetValue$5(o, 'enable', true));
-        this.setTarget(GetValue$5(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$6(o, 'timer'));
+        this.setEnable(GetValue$6(o, 'enable', true));
+        this.setTarget(GetValue$6(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-        this.setEase(GetValue$5(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$5(o, 'repeat', 0));
+        this.setEase(GetValue$6(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$6(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -1176,7 +1176,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Linear$1 = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -1199,15 +1199,15 @@
           return this;
         }
         var target = this.target;
-        this.propertyKey = GetValue$4(config, 'key', 'value');
+        this.propertyKey = GetValue$5(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$4(config, 'from', currentValue);
-        this.toValue = GetValue$4(config, 'to', currentValue);
-        this.setEase(GetValue$4(config, 'ease', this.ease));
-        this.setDuration(GetValue$4(config, 'duration', this.duration));
-        this.setRepeat(GetValue$4(config, 'repeat', 0));
-        this.setDelay(GetValue$4(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$4(config, 'repeatDelay', 0));
+        this.fromValue = GetValue$5(config, 'from', currentValue);
+        this.toValue = GetValue$5(config, 'to', currentValue);
+        this.setEase(GetValue$5(config, 'ease', this.ease));
+        this.setDuration(GetValue$5(config, 'duration', this.duration));
+        this.setRepeat(GetValue$5(config, 'repeat', 0));
+        this.setDelay(GetValue$5(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$5(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
@@ -1287,24 +1287,24 @@
     resume: Resume
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var Base = /*#__PURE__*/function (_BaseShapes) {
     _inherits(Base, _BaseShapes);
     var _super = _createSuper(Base);
     function Base(scene, config) {
       var _this;
       _classCallCheck(this, Base);
-      var x = GetValue$3(config, 'x', 0);
-      var y = GetValue$3(config, 'y', 0);
-      var width = GetValue$3(config, 'width', 64);
-      var height = GetValue$3(config, 'height', 64);
+      var x = GetValue$4(config, 'x', 0);
+      var y = GetValue$4(config, 'y', 0);
+      var width = GetValue$4(config, 'width', 64);
+      var height = GetValue$4(config, 'height', 64);
       _this = _super.call(this, scene, x, y, width, height);
-      _this.setDuration(GetValue$3(config, 'duration', 1000));
-      _this.setEase(GetValue$3(config, 'ease', 'Linear'));
-      _this.setDelay(GetValue$3(config, 'delay', 0));
-      _this.setRepeatDelay(GetValue$3(config, 'repeatDelay', 0));
-      var color = GetValue$3(config, 'color', 0xffffff);
-      var start = GetValue$3(config, 'start', true);
+      _this.setDuration(GetValue$4(config, 'duration', 1000));
+      _this.setEase(GetValue$4(config, 'ease', 'Linear'));
+      _this.setDelay(GetValue$4(config, 'delay', 0));
+      _this.setRepeatDelay(GetValue$4(config, 'repeatDelay', 0));
+      var color = GetValue$4(config, 'color', 0xffffff);
+      var start = GetValue$4(config, 'start', true);
       _this.buildShapes(config);
       _this.setColor(color);
       _this.setValue(0);
@@ -1455,7 +1455,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$2 = function GetValue(source, key, defaultValue) {
+  var GetValue$3 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -1504,7 +1504,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$2(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$3(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -2870,6 +2870,225 @@
     return Rectangle;
   }(BaseGeom);
 
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var RoundRectangle = /*#__PURE__*/function (_PathBase) {
+    _inherits(RoundRectangle, _PathBase);
+    var _super = _createSuper(RoundRectangle);
+    function RoundRectangle(x, y, width, height, radius, iterations) {
+      var _this;
+      _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      if (radius === undefined) {
+        radius = 0;
+      }
+      if (iterations === undefined) {
+        iterations = 6;
+      }
+      _this = _super.call(this);
+      _this.setTopLeftPosition(x, y);
+      _this.setSize(width, height);
+      _this.setRadius(radius);
+      _this.setIterations(iterations);
+      _this.closePath = true;
+      return _this;
+    }
+    _createClass(RoundRectangle, [{
+      key: "x",
+      get: function get() {
+        return this._x;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._x !== value;
+        this._x = value;
+      }
+    }, {
+      key: "y",
+      get: function get() {
+        return this._y;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._y !== value;
+        this._y = value;
+      }
+    }, {
+      key: "setTopLeftPosition",
+      value: function setTopLeftPosition(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._width !== value;
+        this._width = value;
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._height !== value;
+        this._height = value;
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.width = width;
+        this.height = height;
+        return this;
+      }
+    }, {
+      key: "radiusTL",
+      get: function get() {
+        return this._radiusTL;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusTL !== value;
+        this._radiusTL = value;
+      }
+    }, {
+      key: "radiusTR",
+      get: function get() {
+        return this._radiusTR;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusTR !== value;
+        this._radiusTR = value;
+      }
+    }, {
+      key: "radiusBL",
+      get: function get() {
+        return this._radiusBL;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusBL !== value;
+        this._radiusBL = value;
+      }
+    }, {
+      key: "radiusBR",
+      get: function get() {
+        return this._radiusBR;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusBR !== value;
+        this._radiusBR = value;
+      }
+    }, {
+      key: "radius",
+      get: function get() {
+        return Math.max(this.radiusTL, this.radiusTR, this.radiusBL, this.radiusBR);
+      },
+      set: function set(value) {
+        if (typeof value === 'number') {
+          this.radiusTL = value;
+          this.radiusTR = value;
+          this.radiusBL = value;
+          this.radiusBR = value;
+        } else {
+          this.radiusTL = GetValue$2(value, 'tl', 0);
+          this.radiusTR = GetValue$2(value, 'tr', 0);
+          this.radiusBL = GetValue$2(value, 'bl', 0);
+          this.radiusBR = GetValue$2(value, 'br', 0);
+        }
+      }
+    }, {
+      key: "setRadius",
+      value: function setRadius(radius) {
+        if (radius === undefined) {
+          radius = 0;
+        }
+        this.radius = radius;
+        return this;
+      }
+    }, {
+      key: "iterations",
+      get: function get() {
+        return this._iterations;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._iterations !== value;
+        this._iterations = value;
+      }
+    }, {
+      key: "setIterations",
+      value: function setIterations(iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }, {
+      key: "updateData",
+      value: function updateData() {
+        var pathData = this.pathData;
+        pathData.length = 0;
+        var width = this.width,
+          height = this.height,
+          radius,
+          iterations = this.iterations + 1;
+
+        // top-left
+        radius = this.radiusTL;
+        if (radius > 0) {
+          var centerX = radius;
+          var centerY = radius;
+          ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+        } else {
+          LineTo(0, 0, pathData);
+        }
+
+        // top-right
+        radius = this.radiusTR;
+        if (radius > 0) {
+          var centerX = width - radius;
+          var centerY = radius;
+          ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+        } else {
+          LineTo(width, 0, pathData);
+        }
+
+        // bottom-right
+        radius = this.radiusBR;
+        if (radius > 0) {
+          var centerX = width - radius;
+          var centerY = height - radius;
+          ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+        } else {
+          LineTo(width, height, pathData);
+        }
+
+        // bottom-left
+        radius = this.radiusBL;
+        if (radius > 0) {
+          var centerX = radius;
+          var centerY = height - radius;
+          ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+        } else {
+          LineTo(0, height, pathData);
+        }
+        pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
+        Offset(this.x, this.y, pathData);
+        _get(_getPrototypeOf(RoundRectangle.prototype), "updateData", this).call(this);
+        return this;
+      }
+    }]);
+    return RoundRectangle;
+  }(PathBase);
+
   var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
   var Triangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Triangle, _BaseGeom);
@@ -3048,6 +3267,7 @@
     line: Line,
     lines: Lines,
     rectangle: Rectangle,
+    roundRectangle: RoundRectangle,
     triangle: Triangle
   };
   var GetValue$1 = Phaser.Utils.Objects.GetValue;

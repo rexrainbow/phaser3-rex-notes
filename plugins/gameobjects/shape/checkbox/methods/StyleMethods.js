@@ -39,4 +39,18 @@ export default {
         this.checkAlpha = alpha;
         return this;
     },
+
+    setBoxShape(isCircleShape) {
+        if (isCircleShape === undefined) {
+            isCircleShape = false;
+        }
+        if (this.isCircleShape === isCircleShape) {
+            return this;
+        }
+
+        this.isCircleShape = isCircleShape;
+        this.isSizeChanged = true;
+        this.dirty = true;
+        return this;
+    }
 }

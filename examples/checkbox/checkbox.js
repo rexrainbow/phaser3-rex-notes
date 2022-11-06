@@ -13,6 +13,8 @@ class Demo extends Phaser.Scene {
     create() {
         var checkbox = this.add.rexCheckbox(400, 300, 40, 40, {
             color: 0x005cb2,
+            // circleBox: true,
+
             checked: true,
             // animationDuration: 2000
         });

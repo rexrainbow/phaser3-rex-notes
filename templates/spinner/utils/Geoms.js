@@ -6,6 +6,7 @@ import {
     Line,
     Lines,
     Rectangle,
+    RoundRectangle,
     Triangle
 } from '../../../plugins/gameobjects/shape/shapes/geoms';
 
@@ -17,5 +18,6 @@ export {
     Line,
     Lines,
     Rectangle,
+    RoundRectangle,
     Triangle
 }

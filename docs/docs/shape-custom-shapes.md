@@ -278,6 +278,7 @@ var out = customShapes.worldToLocalXY(worldX, worldY, camera, out);
         - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
         - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
         - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
+        - `'roundRectangle'` : Create [Round rectangle shape](shape-custom-shapes.md#round-rectangle).
         - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
     - `name` : A string name of this shape.
 
@@ -551,6 +552,67 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
         ```javascript
         rectangle.width = width;
         rectangle.height = height;
+        ```
+
+##### Round rectangle
+
+- Top-left
+    - Get
+        ```javascript
+        var left = roundRectangle.x;
+        var top = roundRectangle.y;
+        ```
+    - Set
+        ```javascript
+        roundRectangle.setTopLeftPosition(x, y);
+        ```
+        or
+        ```javascript
+        roundRectangle.x = left;
+        roundRectangle.y = top;
+        ```
+- Size
+    - Get
+        ```javascript
+        var width = roundRectangle.width;
+        var height = roundRectangle.height;
+        ```
+    - Set
+        ```javascript
+        roundRectangle.setSize(width, height);
+        ```
+        or
+        ```javascript
+        roundRectangle.width = width;
+        roundRectangle.height = height;
+        ```
+- Radius
+    - Get
+        ```javascript
+        var radius = roundRectangle.radius;
+        ```
+        or
+        ```javascript
+        var radiusTL = roundRectangle.radiusTL;
+        var radiusTR = roundRectangle.radiusTR;
+        var radiusBL = roundRectangle.radiusBL;
+        var radiusBR = roundRectangle.radiusBR;
+        ```
+    - Set
+        ```javascript
+        roundRectangle.setRadius(radius);
+        // roundRectangle.radius = radius;
+        ```
+        or
+        ```javascript
+        roundRectangle.setRadius({
+            tl: radiusTL, tr: radiusTR,
+            bl: radiusBL, br: radiusBR,
+        });
+        // roundRectangle.radiusTL = radiusTL;
+        // roundRectangle.radiusTR = radiusTR;
+        // roundRectangle.radiusBL = radiusBL;
+        // roundRectangle.radiusBR = radiusBR;
         ```
 
 ##### Triangle

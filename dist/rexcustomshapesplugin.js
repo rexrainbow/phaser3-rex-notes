@@ -465,7 +465,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$2 = function GetValue(source, key, defaultValue) {
+  var GetValue$3 = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -514,7 +514,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$2(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$3(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1880,6 +1880,225 @@
     return Rectangle;
   }(BaseGeom);
 
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var RoundRectangle = /*#__PURE__*/function (_PathBase) {
+    _inherits(RoundRectangle, _PathBase);
+    var _super = _createSuper(RoundRectangle);
+    function RoundRectangle(x, y, width, height, radius, iterations) {
+      var _this;
+      _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      if (radius === undefined) {
+        radius = 0;
+      }
+      if (iterations === undefined) {
+        iterations = 6;
+      }
+      _this = _super.call(this);
+      _this.setTopLeftPosition(x, y);
+      _this.setSize(width, height);
+      _this.setRadius(radius);
+      _this.setIterations(iterations);
+      _this.closePath = true;
+      return _this;
+    }
+    _createClass(RoundRectangle, [{
+      key: "x",
+      get: function get() {
+        return this._x;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._x !== value;
+        this._x = value;
+      }
+    }, {
+      key: "y",
+      get: function get() {
+        return this._y;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._y !== value;
+        this._y = value;
+      }
+    }, {
+      key: "setTopLeftPosition",
+      value: function setTopLeftPosition(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+      }
+    }, {
+      key: "width",
+      get: function get() {
+        return this._width;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._width !== value;
+        this._width = value;
+      }
+    }, {
+      key: "height",
+      get: function get() {
+        return this._height;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._height !== value;
+        this._height = value;
+      }
+    }, {
+      key: "setSize",
+      value: function setSize(width, height) {
+        this.width = width;
+        this.height = height;
+        return this;
+      }
+    }, {
+      key: "radiusTL",
+      get: function get() {
+        return this._radiusTL;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusTL !== value;
+        this._radiusTL = value;
+      }
+    }, {
+      key: "radiusTR",
+      get: function get() {
+        return this._radiusTR;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusTR !== value;
+        this._radiusTR = value;
+      }
+    }, {
+      key: "radiusBL",
+      get: function get() {
+        return this._radiusBL;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusBL !== value;
+        this._radiusBL = value;
+      }
+    }, {
+      key: "radiusBR",
+      get: function get() {
+        return this._radiusBR;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._radiusBR !== value;
+        this._radiusBR = value;
+      }
+    }, {
+      key: "radius",
+      get: function get() {
+        return Math.max(this.radiusTL, this.radiusTR, this.radiusBL, this.radiusBR);
+      },
+      set: function set(value) {
+        if (typeof value === 'number') {
+          this.radiusTL = value;
+          this.radiusTR = value;
+          this.radiusBL = value;
+          this.radiusBR = value;
+        } else {
+          this.radiusTL = GetValue$2(value, 'tl', 0);
+          this.radiusTR = GetValue$2(value, 'tr', 0);
+          this.radiusBL = GetValue$2(value, 'bl', 0);
+          this.radiusBR = GetValue$2(value, 'br', 0);
+        }
+      }
+    }, {
+      key: "setRadius",
+      value: function setRadius(radius) {
+        if (radius === undefined) {
+          radius = 0;
+        }
+        this.radius = radius;
+        return this;
+      }
+    }, {
+      key: "iterations",
+      get: function get() {
+        return this._iterations;
+      },
+      set: function set(value) {
+        this.dirty = this.dirty || this._iterations !== value;
+        this._iterations = value;
+      }
+    }, {
+      key: "setIterations",
+      value: function setIterations(iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }, {
+      key: "updateData",
+      value: function updateData() {
+        var pathData = this.pathData;
+        pathData.length = 0;
+        var width = this.width,
+          height = this.height,
+          radius,
+          iterations = this.iterations + 1;
+
+        // top-left
+        radius = this.radiusTL;
+        if (radius > 0) {
+          var centerX = radius;
+          var centerY = radius;
+          ArcTo(centerX, centerY, radius, radius, 180, 270, false, iterations, pathData);
+        } else {
+          LineTo(0, 0, pathData);
+        }
+
+        // top-right
+        radius = this.radiusTR;
+        if (radius > 0) {
+          var centerX = width - radius;
+          var centerY = radius;
+          ArcTo(centerX, centerY, radius, radius, 270, 360, false, iterations, pathData);
+        } else {
+          LineTo(width, 0, pathData);
+        }
+
+        // bottom-right
+        radius = this.radiusBR;
+        if (radius > 0) {
+          var centerX = width - radius;
+          var centerY = height - radius;
+          ArcTo(centerX, centerY, radius, radius, 0, 90, false, iterations, pathData);
+        } else {
+          LineTo(width, height, pathData);
+        }
+
+        // bottom-left
+        radius = this.radiusBL;
+        if (radius > 0) {
+          var centerX = radius;
+          var centerY = height - radius;
+          ArcTo(centerX, centerY, radius, radius, 90, 180, false, iterations, pathData);
+        } else {
+          LineTo(0, height, pathData);
+        }
+        pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
+        Offset(this.x, this.y, pathData);
+        _get(_getPrototypeOf(RoundRectangle.prototype), "updateData", this).call(this);
+        return this;
+      }
+    }]);
+    return RoundRectangle;
+  }(PathBase);
+
   var GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
   var Triangle = /*#__PURE__*/function (_BaseGeom) {
     _inherits(Triangle, _BaseGeom);
@@ -2058,6 +2277,7 @@
     line: Line,
     lines: Lines,
     rectangle: Rectangle,
+    roundRectangle: RoundRectangle,
     triangle: Triangle
   };
   var GetValue$1 = Phaser.Utils.Objects.GetValue;

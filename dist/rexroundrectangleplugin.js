@@ -517,32 +517,15 @@
         var geom = this.geom;
         var pathData = this.pathData;
         pathData.length = 0;
-        var cornerRadius = geom.cornerRadius,
+        var width = geom.width,
+          height = geom.height,
+          cornerRadius = geom.cornerRadius,
           radius,
           iteration = this.iteration + 1;
-        // bottom-right
-        radius = cornerRadius.br;
-        if (isArcCorner(radius)) {
-          var centerX = geom.width - radius.x;
-          var centerY = geom.height - radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
-        } else {
-          LineTo(geom.width, geom.height, pathData);
-        }
-
-        // bottom-left
-        radius = cornerRadius.bl;
-        if (isArcCorner(radius)) {
-          var centerX = radius.x;
-          var centerY = geom.height - radius.y;
-          ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
-        } else {
-          LineTo(0, geom.height, pathData);
-        }
 
         // top-left
         radius = cornerRadius.tl;
-        if (isArcCorner(radius)) {
+        if (IsArcCorner(radius)) {
           var centerX = radius.x;
           var centerY = radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
@@ -552,12 +535,32 @@
 
         // top-right
         radius = cornerRadius.tr;
-        if (isArcCorner(radius)) {
-          var centerX = geom.width - radius.x;
+        if (IsArcCorner(radius)) {
+          var centerX = width - radius.x;
           var centerY = radius.y;
           ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
         } else {
-          LineTo(geom.width, 0, pathData);
+          LineTo(width, 0, pathData);
+        }
+
+        // bottom-right
+        radius = cornerRadius.br;
+        if (IsArcCorner(radius)) {
+          var centerX = width - radius.x;
+          var centerY = height - radius.y;
+          ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
+        } else {
+          LineTo(width, height, pathData);
+        }
+
+        // bottom-left
+        radius = cornerRadius.bl;
+        if (IsArcCorner(radius)) {
+          var centerX = radius.x;
+          var centerY = height - radius.y;
+          ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
+        } else {
+          LineTo(0, height, pathData);
         }
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
@@ -740,7 +743,7 @@
     }]);
     return RoundRectangle;
   }(Shape);
-  var isArcCorner = function isArcCorner(radius) {
+  var IsArcCorner = function IsArcCorner(radius) {
     return radius.x !== 0 && radius.y !== 0;
   };
   Object.assign(RoundRectangle.prototype, Render);

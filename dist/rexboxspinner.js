@@ -2373,6 +2373,8 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  Phaser.Utils.Objects.GetValue;
+
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Box = /*#__PURE__*/function (_Base) {

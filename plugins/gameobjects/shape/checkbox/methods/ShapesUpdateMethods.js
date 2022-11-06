@@ -1,9 +1,9 @@
-import { Lines, Rectangle } from '../../shapes/geoms';
+import { Lines, RoundRectangle } from '../../shapes/geoms';
 
 export default {
     buildShapes() {
         this
-            .addShape(new Rectangle().setName('box'))
+            .addShape(new RoundRectangle().setName('box'))
             .addShape(new Lines().setName('checker'))
     },
 
@@ -11,8 +11,7 @@ export default {
         var centerX = this.width / 2,
             centerY = this.height / 2,
             radius = Math.min(centerX, centerY);
-        var width = radius * 2,
-            height = width;
+        var width = radius * 2;
         var x = centerX - radius,
             y = centerY - radius,
             step = width / 4;
@@ -26,9 +25,16 @@ export default {
         // Setup shapes
         if (this.isSizeChanged) {
             var halfBoxLineWidth = boxLineWidth / 2;
+            var boxInnerWidth = width - boxLineWidth;
             boxShape
                 .setTopLeftPosition(x + halfBoxLineWidth, y + halfBoxLineWidth)
-                .setSize(width - boxLineWidth, height - boxLineWidth)
+                .setSize(boxInnerWidth, boxInnerWidth)
+
+            if (this.isCircleShape) {
+                boxShape.setRadius(boxInnerWidth / 2);
+            } else {
+                boxShape.setRadius(0);
+            }
 
             checkerShape
                 .startAt(step * 1, step * 2)

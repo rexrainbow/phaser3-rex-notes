@@ -2407,6 +2407,8 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
+  Phaser.Utils.Objects.GetValue;
+
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
   var Yoyo = function Yoyo(t, threshold) {
