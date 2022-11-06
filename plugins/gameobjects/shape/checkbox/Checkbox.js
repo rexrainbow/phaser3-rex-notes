@@ -43,7 +43,7 @@ class Checkbox extends BaseShapes {
         );
 
         this.setCheckerAnimDuration(
-            GetValue(config, 'animDuration', 150)
+            GetValue(config, 'animationDuration', 150)
         )
 
         this.buildShapes();
@@ -69,6 +69,8 @@ class Checkbox extends BaseShapes {
 
         if (value) {
             this.playCheckerAnimation();
+        } else {
+            this.stopCheckerAnimation();
         }
 
         this.emit('valuechange', value);
@@ -95,6 +97,18 @@ class Checkbox extends BaseShapes {
         return this;
     }
 
+    get checkerAnimProgress() {
+        return this._checkerAnimProgress;
+    }
+
+    set checkerAnimProgress(value) {
+        if (this._checkerAnimProgress === value) {
+            return;
+        }
+
+        this._checkerAnimProgress = value;
+        this.dirty = true;
+    }
 }
 
 Object.assign(

@@ -11,8 +11,7 @@ export default {
 
     playCheckerAnimation() {
         if (this.checkerAnimProgressTask === undefined) {
-            this.checkerAnimProgressTask = new EaseValueTask(this);
-            this.checkerAnimProgressTask.on('update', this.setDirty, this);
+            this.checkerAnimProgressTask = new EaseValueTask(this, { eventEmitter: null });
         }
 
         this.checkerAnimProgressTask.restart({
@@ -22,6 +21,15 @@ export default {
             duration: this.checkerAnimDuration,
         });
 
+        return this;
+    },
+
+    stopCheckerAnimation() {
+        if (this.checkerAnimProgressTask === undefined) {
+            return this;
+        }
+
+        this.checkerAnimProgressTask.stop();
         return this;
     },
 

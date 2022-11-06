@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
         var checkbox = this.add.rexCheckbox(400, 300, 40, 40, {
             color: 0x005cb2,
             checked: true,
-            // animDuration: 2000
+            // animationDuration: 2000
         });
 
         checkbox
