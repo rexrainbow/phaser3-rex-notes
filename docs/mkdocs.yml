@@ -103,6 +103,7 @@ nav:
             - Custom progress: shape-custom-progress.md
             - Full window rectangle: shape-fullwindowrectangle.md
             - Cover: shape-cover.md
+            - Checkbox: shape-checkbox.md
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md

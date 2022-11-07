@@ -53,13 +53,26 @@ declare class Checkbox extends BaseShapes {
     setBoxShape(isCircleShape?: boolean): this;
 
     setBoxFillStyle(color: number, alpha?: number): this;
+    boxFillColor: number;
+    boxFillAlpha: number;
     setUncheckedBoxFillStyle(color: number, alpha?: number): this;
+    uncheckedBoxFillColor: number;
+    uncheckedBoxFillAlpha: number;
 
     setBoxStrokeStyle(lineWidth: number, color: number, alpha?: number): this;
-    setUncheckedBoxStrokeStyle(lineWidth: number, color: number, alpha?: number): this;
+    boxLineWidth: number;
+    boxStrokeColor: number;
+    boxStrokeAlpha: number;
 
+    setUncheckedBoxStrokeStyle(lineWidth: number, color: number, alpha?: number): this;
+    uncheckedBoxLineWidth: number;
+    uncheckedBoxStrokeColor: number;
+    uncheckedBoxStrokeAlpha: number;
 
     setCheckerStyle(color: number, alpha?: number): this;
+    checkerColor: number;
+    checkAlpha: number;
 
     setCheckerAnimDuration(duration: number): this;
+    checkerAnimDuration: number;
 }
