@@ -1,7 +1,6 @@
 import phaser from 'phaser/src/phaser.js';
 import CanvasPlugin from '../../plugins/canvas-plugin.js';
-import DrawSVPalette from '../../plugins/utils/canvas/DrawSVPalette.js';
-import DrawHPalette from '../../plugins/utils/canvas/DrawHPalette.js';
+import { DrawHPalette, DrawSVPalette } from '../../plugins/utils/canvas/DrawHSVPalette.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
