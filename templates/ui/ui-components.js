@@ -5,6 +5,7 @@ import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
 import HiddenEdit from './hiddenedit/HiddenEdit.js';
+import Checkbox from './checkbox/Checkbox.js';
 
 import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
@@ -106,6 +107,7 @@ export {
     BBCodeText,
     TagText,
     HiddenEdit,
+    Checkbox,
 
     Container,
     Canvas,

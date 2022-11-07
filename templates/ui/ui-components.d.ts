@@ -2,6 +2,8 @@ import RoundRectangle from './roundrectangle/RoundRectangle';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas';
 import BBCodeText from './bbcodetext/BBCodeText';
 import TagText from './tagtext/TagText';
+import HiddenEdit from './hiddenedit/HiddenEdit';
+import Checkbox from './checkbox/Checkbox';
 
 import Container from './container/Container';
 import Canvas from './canvas/Canvas';
@@ -86,7 +88,6 @@ import {
     IsShown,
 } from './utils/Hide';
 import Edit from './textedit/Edit';
-import HiddenEdit from './hiddenedit/HiddenEdit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import FontSizeExpandText from './utils/fontsizeexpandtext/FontSizeExpandText';
 import SetFontSizeToFitWidth from '../../plugins/utils/text/setfontsizetofitwidth/SetFontSizeToFitWidth';
@@ -104,6 +105,7 @@ export {
     BBCodeText,
     TagText,
     HiddenEdit,
+    Checkbox,
 
     Container,
     Canvas,
