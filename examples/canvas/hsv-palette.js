@@ -1,6 +1,7 @@
 import phaser from 'phaser/src/phaser.js';
 import CanvasPlugin from '../../plugins/canvas-plugin.js';
 import DrawSVPalette from '../../plugins/utils/canvas/DrawSVPalette.js';
+import DrawHPalette from '../../plugins/utils/canvas/DrawHPalette.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,9 +13,19 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var canvas = this.add.rexCanvas(400, 300, 128, 128)
+        var svPalette = this.add.rexCanvas(400, 300, 128, 128)
             .updateTexture(function (canvas, context) {
                 DrawSVPalette(canvas, context, 1);
+            })
+
+        var hPaletteH = this.add.rexCanvas(400, 400, 128, 20)
+            .updateTexture(function (canvas, context) {
+                DrawHPalette(canvas, context, false);
+            })
+
+        var hPaletteV = this.add.rexCanvas(500, 300, 20, 128)
+            .updateTexture(function (canvas, context) {
+                DrawHPalette(canvas, context, true);
             })
     }
 
