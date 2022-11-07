@@ -7,7 +7,7 @@ class Checkbox extends CheckboxBase {
     constructor(scene, x, y, width, height, color, config) {
         super(scene, x, y, width, height, color, config);
 
-        this._click = new Click(this, GetValue(config, 'input'));
+        this._click = new Click(this, GetValue(config, 'click'));
 
         this._click.on('click', this.toggleChecked, this);
     }

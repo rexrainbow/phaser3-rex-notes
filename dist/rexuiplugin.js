@@ -9671,8 +9671,7 @@
         radius = Math.min(centerX, centerY);
       var width = radius * 2;
       var x = centerX - radius,
-        y = centerY - radius,
-        step = width / 4;
+        y = centerY - radius;
       var boxLineWidth = this.boxLineWidth;
       var checkLineWidth = Math.max(width / 10, 2);
       var boxShape = this.getShape('box');
@@ -9688,7 +9687,11 @@
         } else {
           boxShape.setRadius(0);
         }
-        checkerShape.startAt(step * 1, step * 2).lineTo(step * 2, step * 3).lineTo(step * 3, step * 1).offset(x, y).end();
+        var unit = width / 4;
+        var u1 = unit * 1,
+          u2 = unit * 2,
+          u3 = unit * 3;
+        checkerShape.startAt(u1, u2).lineTo(u2, u3).lineTo(u3, u1).offset(x, y).end();
       }
 
       // Set styles
@@ -10667,7 +10670,7 @@
       var _this;
       _classCallCheck(this, Checkbox);
       _this = _super.call(this, scene, x, y, width, height, color, config);
-      _this._click = new Button(_assertThisInitialized(_this), GetValue$2e(config, 'input'));
+      _this._click = new Button(_assertThisInitialized(_this), GetValue$2e(config, 'click'));
       _this._click.on('click', _this.toggleChecked, _assertThisInitialized(_this));
       return _this;
     }

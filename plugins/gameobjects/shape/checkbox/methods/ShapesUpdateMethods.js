@@ -36,10 +36,12 @@ export default {
                 boxShape.setRadius(0);
             }
 
+            var unit = width / 4;
+            var u0 = 0, u1 = unit * 1, u2 = unit * 2, u3 = unit * 3;
             checkerShape
-                .startAt(step * 1, step * 2)
-                .lineTo(step * 2, step * 3)
-                .lineTo(step * 3, step * 1)
+                .startAt(u1, u2)
+                .lineTo(u2, u3)
+                .lineTo(u3, u1)
                 .offset(x, y)
                 .end()
         }
