@@ -14,6 +14,7 @@ class CustomShapes extends BaseShapes {
             width = GetValue(config, 'width', 2);
             height = GetValue(config, 'height', 2);
         }
+
         super(scene, x, y, width, height);
         this.type = GetValue(config, 'type', 'rexCustomShapes');
         this.buildShapes(config);

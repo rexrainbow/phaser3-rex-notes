@@ -8025,12 +8025,6 @@
         strokeAlpha = config.strokeAlpha;
         strokeWidth = config.strokeWidth;
       }
-      if (x === undefined) {
-        x = 0;
-      }
-      if (y === undefined) {
-        y = 0;
-      }
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
@@ -28040,7 +28034,7 @@
         y = 0;
       }
       if (width === undefined) {
-        width = 0;
+        width = 2;
       }
       if (height === undefined) {
         height = width;
@@ -29082,6 +29076,9 @@
         radius = GetValue$3(config, 'radius', 1);
         barColor = GetValue$3(config, 'barColor', undefined);
         value = GetValue$3(config, 'value', 0);
+      }
+      if (radius === undefined) {
+        radius = 1;
       }
       var width = radius * 2;
       _this = _super.call(this, scene, x, y, width, width);

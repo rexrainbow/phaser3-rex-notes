@@ -54,8 +54,8 @@ export default {
                 .lineStyle(checkLineWidth, this.checkerColor)
         } else {
             boxShape
-                .fillStyle()
-                .lineStyle(boxLineWidth, this.boxStrokeColor, this.boxStrokeAlpha)
+                .fillStyle(this.uncheckedBoxFillColor, this.uncheckedBoxFillAlpha)
+                .lineStyle(boxLineWidth, this.uncheckedBoxStrokeColor, this.uncheckedBoxStrokeAlpha)
 
             checkerShape
                 .lineStyle()

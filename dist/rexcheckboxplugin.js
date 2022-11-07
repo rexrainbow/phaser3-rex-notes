@@ -222,7 +222,7 @@
         y = 0;
       }
       if (width === undefined) {
-        width = 0;
+        width = 2;
       }
       if (height === undefined) {
         height = width;
@@ -421,6 +421,15 @@
       this.boxFillAlpha = alpha;
       return this;
     },
+    setUncheckedBoxFillStyle: function setUncheckedBoxFillStyle(color, alpha) {
+      if (alpha === undefined) {
+        alpha = 1;
+      }
+      this.dirty = this.dirty || this.uncheckedBoxFillColor !== color || this.uncheckedBoxFillAlpha !== alpha;
+      this.uncheckedBoxFillColor = color;
+      this.uncheckedBoxFillAlpha = alpha;
+      return this;
+    },
     setBoxStrokeStyle: function setBoxStrokeStyle(lineWidth, color, alpha) {
       if (alpha === undefined) {
         alpha = 1;
@@ -429,6 +438,16 @@
       this.boxLineWidth = lineWidth;
       this.boxStrokeColor = color;
       this.boxStrokeAlpha = alpha;
+      return this;
+    },
+    setUncheckedBoxStrokeStyle: function setUncheckedBoxStrokeStyle(lineWidth, color, alpha) {
+      if (alpha === undefined) {
+        alpha = 1;
+      }
+      this.dirty = this.dirty || this.uncheckedBoxLineWidth !== lineWidth || this.uncheckedBoxStrokeColor !== color || this.uncheckedBoxStrokeAlpha !== alpha;
+      this.uncheckedBoxLineWidth = lineWidth;
+      this.uncheckedBoxStrokeColor = color;
+      this.uncheckedBoxStrokeAlpha = alpha;
       return this;
     },
     setCheckerStyle: function setCheckerStyle(color, alpha) {
@@ -1682,7 +1701,7 @@
         boxShape.fillStyle(this.boxFillColor, this.boxFillAlpha).lineStyle(boxLineWidth, this.boxStrokeColor, this.boxStrokeAlpha);
         checkerShape.lineStyle(checkLineWidth, this.checkerColor);
       } else {
-        boxShape.fillStyle().lineStyle(boxLineWidth, this.boxStrokeColor, this.boxStrokeAlpha);
+        boxShape.fillStyle(this.uncheckedBoxFillColor, this.uncheckedBoxFillAlpha).lineStyle(boxLineWidth, this.uncheckedBoxStrokeColor, this.uncheckedBoxStrokeAlpha);
         checkerShape.lineStyle();
       }
 
@@ -2567,7 +2586,9 @@
       }
       _this.setBoxShape(GetValue(config, 'circleBox', false));
       _this.setBoxFillStyle(color, GetValue(config, 'boxFillAlpha', 1));
+      _this.setUncheckedBoxFillStyle(GetValue(config, 'uncheckedColor', null), GetValue(config, 'uncheckedBoxFillAlpha', 1));
       _this.setBoxStrokeStyle(GetValue(config, 'boxLineWidth', 4), GetValue(config, 'boxStrokeColor', color), GetValue(config, 'boxStrokeAlpha', 1));
+      _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
       _this.setCheckerStyle(GetValue(config, 'checkerColor', 0xffffff), GetValue(config, 'checkerAlpha', 1));
       _this.setCheckerAnimDuration(GetValue(config, 'animationDuration', 150));
       _this.buildShapes();

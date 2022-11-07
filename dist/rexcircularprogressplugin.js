@@ -222,7 +222,7 @@
         y = 0;
       }
       if (width === undefined) {
-        width = 0;
+        width = 2;
       }
       if (height === undefined) {
         height = width;
@@ -2453,6 +2453,9 @@
         radius = GetValue(config, 'radius', 1);
         barColor = GetValue(config, 'barColor', undefined);
         value = GetValue(config, 'value', 0);
+      }
+      if (radius === undefined) {
+        radius = 1;
       }
       var width = radius * 2;
       _this = _super.call(this, scene, x, y, width, width);

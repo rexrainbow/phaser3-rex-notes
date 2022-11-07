@@ -8,8 +8,13 @@ declare namespace Checkbox {
         width: number, height: number,
 
         color?: number, boxFillAlpha?: number,
+        uncheckedColor?: number, uncheckedBoxFillAlpha?: number,
+
         boxLineWidth?: number, boxStrokeColor?: number, boxStrokeAlpha?: number,
+        uncheckedBoxStrokeColor?: number, uncheckedBoxStrokeAlpha?: number,
+
         checkerColor?: number, checkerAlpha?: number,
+
         circleBox?: boolean,
 
         animationDuration?: number,
@@ -48,7 +53,12 @@ declare class Checkbox extends BaseShapes {
     setBoxShape(isCircleShape?: boolean): this;
 
     setBoxFillStyle(color: number, alpha?: number): this;
+    setUncheckedBoxFillStyle(color: number, alpha?: number): this;
+
     setBoxStrokeStyle(lineWidth: number, color: number, alpha?: number): this;
+    setUncheckedBoxStrokeStyle(lineWidth: number, color: number, alpha?: number): this;
+
+
     setCheckerStyle(color: number, alpha?: number): this;
 
     setCheckerAnimDuration(duration: number): this;

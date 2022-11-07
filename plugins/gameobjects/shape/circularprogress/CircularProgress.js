@@ -18,6 +18,9 @@ class CircularProgress extends ProgressBase(BaseShapes) {
             barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         }
+
+        if (radius === undefined) { radius = 1; }
+
         var width = radius * 2;
         super(scene, x, y, width, width);
         this.type = 'rexCircularProgress';

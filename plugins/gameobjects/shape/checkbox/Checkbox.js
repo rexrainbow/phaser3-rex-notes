@@ -35,11 +35,23 @@ class Checkbox extends BaseShapes {
             GetValue(config, 'boxFillAlpha', 1)
         );
 
+        this.setUncheckedBoxFillStyle(
+            GetValue(config, 'uncheckedColor', null),
+            GetValue(config, 'uncheckedBoxFillAlpha', 1)
+        )
+
         this.setBoxStrokeStyle(
             GetValue(config, 'boxLineWidth', 4),
             GetValue(config, 'boxStrokeColor', color),
             GetValue(config, 'boxStrokeAlpha', 1)
         );
+
+        this.setUncheckedBoxStrokeStyle(
+            this.boxLineWidth,
+            GetValue(config, 'uncheckedBoxStrokeColor', this.boxStrokeColor),
+            GetValue(config, 'uncheckedBoxStrokeAlpha', this.boxStrokeAlpha)
+        );
+
 
         this.setCheckerStyle(
             GetValue(config, 'checkerColor', 0xffffff),

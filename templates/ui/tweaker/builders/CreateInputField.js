@@ -8,6 +8,7 @@ import CreateNumberInput from './CreateNumberInput.js';
 import CreateRangeInput from './CreateRangeInput.js';
 import CreateListInput from './CreateListInput.js';
 import CreateButtonsInput from './CreateButtonsInput.js';
+import CreateCheckboxInput from './CreateCheckboxInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
 var CreateInputField = function (scene, config, style, gameObject) {
@@ -32,6 +33,10 @@ var CreateInputField = function (scene, config, style, gameObject) {
 
         case ButtonsType:
             callback = CreateButtonsInput;
+            break;
+
+        case BooleanType:
+            callback = CreateCheckboxInput;
             break;
 
         default:

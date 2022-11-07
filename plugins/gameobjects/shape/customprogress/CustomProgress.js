@@ -19,6 +19,7 @@ class CustomProgress extends ProgressBase(CustomShapes) {
         if (!config.type) {
             config.type = 'rexCustomProgress';
         }
+
         super(scene, x, y, width, height, config);
 
         this.bootProgressBase(config);

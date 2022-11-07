@@ -69,6 +69,12 @@ class Demo extends Phaser.Scene {
                 }
             )
             .addInput(
+                gameObject, 'visible',
+                {
+                    icon: 'settings',           // Title icon
+                }
+            )
+            .addInput(
                 gameObject, 'name',
                 {
                     icon: 'settings',           // Title icon
@@ -88,7 +94,7 @@ var CreatePanel = function (scene) {
 
         styles: {
             background: {
-                radius: 20,
+                radius: 10,
                 color: 0x0,
                 strokeColor: 0x888888
             },
@@ -160,6 +166,12 @@ var CreatePanel = function (scene) {
                     space: { left: 8, right: 8, top: 8, bottom: 8 }
                 },
 
+                checkbox: {
+                    color: COLOR_LIGHT,
+                    boxStrokeColor: COLOR_DARK,
+                    uncheckedColor: COLOR_DARK,
+                },
+
                 proportion: {
                     title: 1,
                     inputField: 2,
@@ -168,7 +180,7 @@ var CreatePanel = function (scene) {
             },
 
             space: {
-                left: 20, right: 20, top: 20, bottom: 20
+                left: 10, right: 10, top: 10, bottom: 10
             }
         },
     })
