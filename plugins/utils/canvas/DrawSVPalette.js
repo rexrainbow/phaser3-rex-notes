@@ -1,6 +1,5 @@
-import MapRange from '../math/MapRange.js';
-
 const Color = Phaser.Display.Color;
+const Percent = Phaser.Math.Percent;
 
 var DrawSVPalette = function (canvas, context, h) {
     var width = canvas.width;
@@ -10,8 +9,8 @@ var DrawSVPalette = function (canvas, context, h) {
     var color = new Color();
     for (var iy = 0; iy < height; iy++) {
         for (var ix = 0; ix < width; ix++) {
-            var s = MapRange(ix, 0, width, 0, 1);
-            var v = MapRange(iy, 0, height, 1, 0);
+            var s = Percent(ix, 0, width);
+            var v = 1 - Percent(iy, 0, height);
             color.setFromHSV(h, s, v);
             var i = ((iy * width) + ix) * 4;
             data[i] = color.red;
