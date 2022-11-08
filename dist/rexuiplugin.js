@@ -10359,12 +10359,12 @@
   var GetValue$2g = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$F = Phaser.Utils.Objects.IsPlainObject;
   var DefaultBoxFillColor = 0x005cb2;
-  var Checkbox$2 = /*#__PURE__*/function (_BaseShapes) {
-    _inherits(Checkbox, _BaseShapes);
-    var _super = _createSuper(Checkbox);
-    function Checkbox(scene, x, y, width, height, color, config) {
+  var CheckboxShape = /*#__PURE__*/function (_BaseShapes) {
+    _inherits(CheckboxShape, _BaseShapes);
+    var _super = _createSuper(CheckboxShape);
+    function CheckboxShape(scene, x, y, width, height, color, config) {
       var _this;
-      _classCallCheck(this, Checkbox);
+      _classCallCheck(this, CheckboxShape);
       if (IsPlainObject$F(x)) {
         config = x;
         x = GetValue$2g(config, 'x', 0);
@@ -10392,7 +10392,7 @@
       _this.setChecked(GetValue$2g(config, 'checked', false));
       return _this;
     }
-    _createClass(Checkbox, [{
+    _createClass(CheckboxShape, [{
       key: "value",
       get: function get() {
         return this._value;
@@ -10409,7 +10409,6 @@
         } else {
           this.stopCheckerAnimation();
         }
-        this.emit('valuechange', value);
       }
     }, {
       key: "setValue",
@@ -10453,9 +10452,9 @@
         this.dirty = true;
       }
     }]);
-    return Checkbox;
+    return CheckboxShape;
   }(BaseShapes);
-  Object.assign(Checkbox$2.prototype, methods$m);
+  Object.assign(CheckboxShape.prototype, methods$m);
 
   var GetValue$2f = Phaser.Utils.Objects.GetValue;
   var Button = /*#__PURE__*/function (_ComponentBase) {
@@ -10663,8 +10662,8 @@
   };
 
   var GetValue$2e = Phaser.Utils.Objects.GetValue;
-  var Checkbox$1 = /*#__PURE__*/function (_CheckboxBase) {
-    _inherits(Checkbox, _CheckboxBase);
+  var Checkbox$1 = /*#__PURE__*/function (_CheckboxShape) {
+    _inherits(Checkbox, _CheckboxShape);
     var _super = _createSuper(Checkbox);
     function Checkbox(scene, x, y, width, height, color, config) {
       var _this;
@@ -10672,9 +10671,23 @@
       _this = _super.call(this, scene, x, y, width, height, color, config);
       _this._click = new Button(_assertThisInitialized(_this), GetValue$2e(config, 'click'));
       _this._click.on('click', _this.toggleChecked, _assertThisInitialized(_this));
+      _this.setReadOnly(GetValue$2e(config, 'readOnly', false));
       return _this;
     }
     _createClass(Checkbox, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        value = !!value;
+        if (this._value === value) {
+          return;
+        }
+        _set(_getPrototypeOf(Checkbox.prototype), "value", value, this, true);
+        this.emit('valuechange', value);
+      }
+    }, {
       key: "readOnly",
       get: function get() {
         return !this._click.enable;
@@ -10693,7 +10706,7 @@
       }
     }]);
     return Checkbox;
-  }(Checkbox$2);
+  }(CheckboxShape);
 
   ObjectFactory.register('checkbox', function (x, y, width, height, color, config) {
     var gameObject = new Checkbox$1(this.scene, x, y, width, height, color, config);

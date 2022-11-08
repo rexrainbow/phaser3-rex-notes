@@ -35,6 +35,19 @@
     });
     return Constructor;
   }
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -125,6 +138,44 @@
       };
     }
     return _get.apply(this, arguments);
+  }
+  function set(target, property, value, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.set) {
+      set = Reflect.set;
+    } else {
+      set = function set(target, property, value, receiver) {
+        var base = _superPropBase(target, property);
+        var desc;
+        if (base) {
+          desc = Object.getOwnPropertyDescriptor(base, property);
+          if (desc.set) {
+            desc.set.call(receiver, value);
+            return true;
+          } else if (!desc.writable) {
+            return false;
+          }
+        }
+        desc = Object.getOwnPropertyDescriptor(receiver, property);
+        if (desc) {
+          if (!desc.writable) {
+            return false;
+          }
+          desc.value = value;
+          Object.defineProperty(receiver, property, desc);
+        } else {
+          _defineProperty(receiver, property, value);
+        }
+        return true;
+      };
+    }
+    return set(target, property, value, receiver);
+  }
+  function _set(target, property, value, receiver, isStrict) {
+    var s = set(target, property, value, receiver || target);
+    if (!s && isStrict) {
+      throw new Error('failed to set property');
+    }
+    return value;
   }
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -527,7 +578,7 @@
    *
    * @return {*} The value of the requested key.
    */
-  var GetValue$8 = function GetValue(source, key, defaultValue) {
+  var GetValue$a = function GetValue(source, key, defaultValue) {
     if (!source || typeof source === 'number') {
       return defaultValue;
     } else if (source.hasOwnProperty(key)) {
@@ -576,7 +627,7 @@
     },
     getData: function getData(key, defaultValue) {
       this.enableData();
-      return key === undefined ? this.data : GetValue$8(this.data, key, defaultValue);
+      return key === undefined ? this.data : GetValue$a(this.data, key, defaultValue);
     },
     incData: function incData(key, inc, defaultValue) {
       if (defaultValue === undefined) {
@@ -1445,7 +1496,7 @@
 
   Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha;
 
-  var GetValue$7 = Phaser.Utils.Objects.GetValue;
+  var GetValue$9 = Phaser.Utils.Objects.GetValue;
   var RoundRectangle = /*#__PURE__*/function (_PathBase) {
     _inherits(RoundRectangle, _PathBase);
     var _super = _createSuper(RoundRectangle);
@@ -1576,10 +1627,10 @@
           this.radiusBL = value;
           this.radiusBR = value;
         } else {
-          this.radiusTL = GetValue$7(value, 'tl', 0);
-          this.radiusTR = GetValue$7(value, 'tr', 0);
-          this.radiusBL = GetValue$7(value, 'bl', 0);
-          this.radiusBR = GetValue$7(value, 'br', 0);
+          this.radiusTL = GetValue$9(value, 'tl', 0);
+          this.radiusTR = GetValue$9(value, 'tr', 0);
+          this.radiusBL = GetValue$9(value, 'bl', 0);
+          this.radiusBR = GetValue$9(value, 'br', 0);
         }
       }
     }, {
@@ -1837,7 +1888,7 @@
     }
   };
 
-  var GetValue$6 = Phaser.Utils.Objects.GetValue;
+  var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
@@ -1848,7 +1899,7 @@
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
-      this.setEventEmitter(GetValue$6(config, 'eventEmitter', true));
+      this.setEventEmitter(GetValue$8(config, 'eventEmitter', true));
 
       // Register callback of parent destroy event, also see `shutdown` method
       if (this.parent) {
@@ -1916,7 +1967,7 @@
   }();
   Object.assign(ComponentBase.prototype, EventEmitterMethods);
 
-  var GetValue$5 = Phaser.Utils.Objects.GetValue;
+  var GetValue$7 = Phaser.Utils.Objects.GetValue;
   var TickTask = /*#__PURE__*/function (_ComponentBase) {
     _inherits(TickTask, _ComponentBase);
     var _super = _createSuper(TickTask);
@@ -1927,7 +1978,7 @@
       _this._isRunning = false;
       _this.isPaused = false;
       _this.tickingState = false;
-      _this.setTickingMode(GetValue$5(config, 'tickingMode', 1));
+      _this.setTickingMode(GetValue$7(config, 'tickingMode', 1));
       // boot() later
       return _this;
     }
@@ -2044,7 +2095,7 @@
     'always': 2
   };
 
-  var GetValue$4 = Phaser.Utils.Objects.GetValue;
+  var GetValue$6 = Phaser.Utils.Objects.GetValue;
   var SceneUpdateTickTask = /*#__PURE__*/function (_TickTask) {
     _inherits(SceneUpdateTickTask, _TickTask);
     var _super = _createSuper(SceneUpdateTickTask);
@@ -2058,7 +2109,7 @@
 
       // If this.scene is not available, use game's 'step' event
       var defaultEventName = _this.scene ? 'update' : 'step';
-      _this.tickEventName = GetValue$4(config, 'tickEventName', defaultEventName);
+      _this.tickEventName = GetValue$6(config, 'tickEventName', defaultEventName);
       _this.isSceneTicker = !IsGameUpdateEvent(_this.tickEventName);
       return _this;
     }
@@ -2094,7 +2145,7 @@
     return eventName === 'step' || eventName === 'poststep';
   };
 
-  var GetValue$3 = Phaser.Utils.Objects.GetValue;
+  var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var Clamp = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(config) {
@@ -2104,15 +2155,15 @@
     _createClass(Timer, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.state = GetValue$3(o, 'state', IDLE);
-        this.timeScale = GetValue$3(o, 'timeScale', 1);
-        this.delay = GetValue$3(o, 'delay', 0);
-        this.repeat = GetValue$3(o, 'repeat', 0);
-        this.repeatCounter = GetValue$3(o, 'repeatCounter', 0);
-        this.repeatDelay = GetValue$3(o, 'repeatDelay', 0);
-        this.duration = GetValue$3(o, 'duration', 0);
-        this.nowTime = GetValue$3(o, 'nowTime', 0);
-        this.justRestart = GetValue$3(o, 'justRestart', false);
+        this.state = GetValue$5(o, 'state', IDLE);
+        this.timeScale = GetValue$5(o, 'timeScale', 1);
+        this.delay = GetValue$5(o, 'delay', 0);
+        this.repeat = GetValue$5(o, 'repeat', 0);
+        this.repeatCounter = GetValue$5(o, 'repeatCounter', 0);
+        this.repeatDelay = GetValue$5(o, 'repeatDelay', 0);
+        this.duration = GetValue$5(o, 'duration', 0);
+        this.nowTime = GetValue$5(o, 'nowTime', 0);
+        this.justRestart = GetValue$5(o, 'justRestart', false);
       }
     }, {
       key: "toJSON",
@@ -2341,7 +2392,7 @@
     return TimerTickTask;
   }(SceneUpdateTickTask);
 
-  var GetValue$2 = Phaser.Utils.Objects.GetValue;
+  var GetValue$4 = Phaser.Utils.Objects.GetValue;
   var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
@@ -2354,13 +2405,13 @@
     _createClass(EaseValueTaskBase, [{
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue$2(o, 'timer'));
-        this.setEnable(GetValue$2(o, 'enable', true));
-        this.setTarget(GetValue$2(o, 'target', this.parent));
+        this.timer.resetFromJSON(GetValue$4(o, 'timer'));
+        this.setEnable(GetValue$4(o, 'enable', true));
+        this.setTarget(GetValue$4(o, 'target', this.parent));
         this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
         this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
-        this.setEase(GetValue$2(o, 'ease', 'Linear'));
-        this.setRepeat(GetValue$2(o, 'repeat', 0));
+        this.setEase(GetValue$4(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue$4(o, 'repeat', 0));
         return this;
       }
     }, {
@@ -2480,7 +2531,7 @@
     return EaseValueTaskBase;
   }(TimerTickTask);
 
-  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var GetValue$3 = Phaser.Utils.Objects.GetValue;
   var Linear = Phaser.Math.Linear;
   var EaseValueTask = /*#__PURE__*/function (_EaseValueTaskBase) {
     _inherits(EaseValueTask, _EaseValueTaskBase);
@@ -2503,15 +2554,15 @@
           return this;
         }
         var target = this.target;
-        this.propertyKey = GetValue$1(config, 'key', 'value');
+        this.propertyKey = GetValue$3(config, 'key', 'value');
         var currentValue = target[this.propertyKey];
-        this.fromValue = GetValue$1(config, 'from', currentValue);
-        this.toValue = GetValue$1(config, 'to', currentValue);
-        this.setEase(GetValue$1(config, 'ease', this.ease));
-        this.setDuration(GetValue$1(config, 'duration', this.duration));
-        this.setRepeat(GetValue$1(config, 'repeat', 0));
-        this.setDelay(GetValue$1(config, 'delay', 0));
-        this.setRepeatDelay(GetValue$1(config, 'repeatDelay', 0));
+        this.fromValue = GetValue$3(config, 'from', currentValue);
+        this.toValue = GetValue$3(config, 'to', currentValue);
+        this.setEase(GetValue$3(config, 'ease', this.ease));
+        this.setDuration(GetValue$3(config, 'duration', this.duration));
+        this.setRepeat(GetValue$3(config, 'repeat', 0));
+        this.setDelay(GetValue$3(config, 'delay', 0));
+        this.setRepeatDelay(GetValue$3(config, 'repeatDelay', 0));
         this.timer.setDuration(this.duration).setRepeat(this.repeat).setDelay(this.delay).setRepeatDelay(this.repeatDelay);
         target[this.propertyKey] = this.fromValue;
         _get(_getPrototypeOf(EaseValueTask.prototype), "start", this).call(this);
@@ -2562,43 +2613,43 @@
   var methods = {};
   Object.assign(methods, StyleMethods$1, ShapesUpdateMethods, CheckerAnimationMethods);
 
-  var GetValue = Phaser.Utils.Objects.GetValue;
+  var GetValue$2 = Phaser.Utils.Objects.GetValue;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var DefaultBoxFillColor = 0x005cb2;
-  var Checkbox = /*#__PURE__*/function (_BaseShapes) {
-    _inherits(Checkbox, _BaseShapes);
-    var _super = _createSuper(Checkbox);
-    function Checkbox(scene, x, y, width, height, color, config) {
+  var CheckboxShape = /*#__PURE__*/function (_BaseShapes) {
+    _inherits(CheckboxShape, _BaseShapes);
+    var _super = _createSuper(CheckboxShape);
+    function CheckboxShape(scene, x, y, width, height, color, config) {
       var _this;
-      _classCallCheck(this, Checkbox);
+      _classCallCheck(this, CheckboxShape);
       if (IsPlainObject(x)) {
         config = x;
-        x = GetValue(config, 'x', 0);
-        y = GetValue(config, 'y', 0);
-        width = GetValue(config, 'width', 2);
-        height = GetValue(config, 'height', 2);
-        color = GetValue(config, 'color', DefaultBoxFillColor);
+        x = GetValue$2(config, 'x', 0);
+        y = GetValue$2(config, 'y', 0);
+        width = GetValue$2(config, 'width', 2);
+        height = GetValue$2(config, 'height', 2);
+        color = GetValue$2(config, 'color', DefaultBoxFillColor);
       } else if (IsPlainObject(color)) {
         config = color;
-        color = GetValue(config, 'color', DefaultBoxFillColor);
+        color = GetValue$2(config, 'color', DefaultBoxFillColor);
       }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexCheckbox';
       if (color === undefined) {
         color = DefaultBoxFillColor;
       }
-      _this.setBoxShape(GetValue(config, 'circleBox', false));
-      _this.setBoxFillStyle(color, GetValue(config, 'boxFillAlpha', 1));
-      _this.setUncheckedBoxFillStyle(GetValue(config, 'uncheckedColor', null), GetValue(config, 'uncheckedBoxFillAlpha', 1));
-      _this.setBoxStrokeStyle(GetValue(config, 'boxLineWidth', 4), GetValue(config, 'boxStrokeColor', color), GetValue(config, 'boxStrokeAlpha', 1));
-      _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
-      _this.setCheckerStyle(GetValue(config, 'checkerColor', 0xffffff), GetValue(config, 'checkerAlpha', 1));
-      _this.setCheckerAnimDuration(GetValue(config, 'animationDuration', 150));
+      _this.setBoxShape(GetValue$2(config, 'circleBox', false));
+      _this.setBoxFillStyle(color, GetValue$2(config, 'boxFillAlpha', 1));
+      _this.setUncheckedBoxFillStyle(GetValue$2(config, 'uncheckedColor', null), GetValue$2(config, 'uncheckedBoxFillAlpha', 1));
+      _this.setBoxStrokeStyle(GetValue$2(config, 'boxLineWidth', 4), GetValue$2(config, 'boxStrokeColor', color), GetValue$2(config, 'boxStrokeAlpha', 1));
+      _this.setUncheckedBoxStrokeStyle(_this.boxLineWidth, GetValue$2(config, 'uncheckedBoxStrokeColor', _this.boxStrokeColor), GetValue$2(config, 'uncheckedBoxStrokeAlpha', _this.boxStrokeAlpha));
+      _this.setCheckerStyle(GetValue$2(config, 'checkerColor', 0xffffff), GetValue$2(config, 'checkerAlpha', 1));
+      _this.setCheckerAnimDuration(GetValue$2(config, 'animationDuration', 150));
       _this.buildShapes();
-      _this.setChecked(GetValue(config, 'checked', false));
+      _this.setChecked(GetValue$2(config, 'checked', false));
       return _this;
     }
-    _createClass(Checkbox, [{
+    _createClass(CheckboxShape, [{
       key: "value",
       get: function get() {
         return this._value;
@@ -2615,7 +2666,6 @@
         } else {
           this.stopCheckerAnimation();
         }
-        this.emit('valuechange', value);
       }
     }, {
       key: "setValue",
@@ -2659,9 +2709,261 @@
         this.dirty = true;
       }
     }]);
-    return Checkbox;
+    return CheckboxShape;
   }(BaseShapes);
-  Object.assign(Checkbox.prototype, methods);
+  Object.assign(CheckboxShape.prototype, methods);
+
+  var GetValue$1 = Phaser.Utils.Objects.GetValue;
+  var Button = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Button, _ComponentBase);
+    var _super = _createSuper(Button);
+    function Button(gameObject, config) {
+      var _this;
+      _classCallCheck(this, Button);
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+
+      _this._enable = undefined;
+      gameObject.setInteractive(GetValue$1(config, "inputConfig", undefined));
+      _this.resetFromJSON(config);
+      _this.boot();
+      return _this;
+    }
+    _createClass(Button, [{
+      key: "resetFromJSON",
+      value: function resetFromJSON(o) {
+        this.pointer = undefined;
+        this.lastClickTime = undefined;
+        this.setEnable(GetValue$1(o, "enable", true));
+        this.setMode(GetValue$1(o, "mode", 1));
+        this.setClickInterval(GetValue$1(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue$1(o, 'threshold', undefined));
+        return this;
+      }
+    }, {
+      key: "boot",
+      value: function boot() {
+        var gameObject = this.parent;
+        gameObject.on('pointerdown', this.onPress, this);
+        gameObject.on('pointerup', this.onRelease, this);
+        gameObject.on('pointerout', this.onPointOut, this);
+        gameObject.on('pointermove', this.onMove, this);
+        gameObject.on('pointerover', this.onOver, this);
+        gameObject.on('pointerout', this.onOut, this);
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.on('pointerdown', this.onPress, this);
+        // this.parent.on('pointerup', this.onRelease, this);
+        // this.parent.on('pointerout', this.onPointOut, this);
+        // this.parent.on('pointermove', this.onMove, this);
+        this.pointer = null;
+        _get(_getPrototypeOf(Button.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "enable",
+      get: function get() {
+        return this._enable;
+      },
+      set: function set(e) {
+        if (this._enable === e) {
+          return;
+        }
+        if (!e) {
+          this.cancel();
+        }
+        this._enable = e;
+        var eventName = e ? 'enable' : 'disable';
+        this.emit(eventName, this, this.parent);
+      }
+    }, {
+      key: "setEnable",
+      value: function setEnable(e) {
+        if (e === undefined) {
+          e = true;
+        }
+        this.enable = e;
+        return this;
+      }
+    }, {
+      key: "toggleEnable",
+      value: function toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "setMode",
+      value: function setMode(m) {
+        if (typeof m === 'string') {
+          m = CLICKMODE[m];
+        }
+        this.mode = m;
+        return this;
+      }
+    }, {
+      key: "setClickInterval",
+      value: function setClickInterval(interval) {
+        this.clickInterval = interval; // ms
+        return this;
+      }
+    }, {
+      key: "setDragThreshold",
+      value: function setDragThreshold(distance) {
+        this.dragThreshold = distance;
+        return this;
+      }
+
+      // internal
+    }, {
+      key: "onPress",
+      value: function onPress(pointer, localX, localY, event) {
+        if (this.pointer !== undefined) {
+          return;
+        }
+        this.pointer = pointer;
+        if (this.mode === 0) {
+          this.click(pointer.downTime, pointer, event);
+        }
+      }
+    }, {
+      key: "onRelease",
+      value: function onRelease(pointer, localX, localY, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        if (this.mode === 1) {
+          this.click(pointer.upTime, pointer, event);
+        }
+        this.pointer = undefined;
+      }
+    }, {
+      key: "onPointOut",
+      value: function onPointOut(pointer, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        this.cancel();
+      }
+    }, {
+      key: "onMove",
+      value: function onMove(pointer, localX, localY, event) {
+        if (this.pointer !== pointer) {
+          return;
+        }
+        if (this.dragThreshold === undefined) {
+          return;
+        }
+        if (pointer.getDistance() >= this.dragThreshold) {
+          this.cancel();
+        }
+      }
+    }, {
+      key: "click",
+      value: function click(nowTime, pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        if (nowTime === undefined) {
+          // fires 'click' event manually
+          this.emit('click', this, this.parent, pointer, event);
+          return this;
+        }
+        this.pointer = undefined;
+        var lastClickTime = this.lastClickTime;
+        if (lastClickTime !== undefined && nowTime - lastClickTime <= this.clickInterval) {
+          return this;
+        }
+        this.lastClickTime = nowTime;
+        this.emit('click', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "cancel",
+      value: function cancel() {
+        this.pointer = undefined;
+        return this;
+      }
+    }, {
+      key: "onOver",
+      value: function onOver(pointer, localX, localY, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.emit('over', this, this.parent, pointer, event);
+        return this;
+      }
+    }, {
+      key: "onOut",
+      value: function onOut(pointer, event) {
+        if (!this.enable) {
+          return this;
+        }
+        this.emit('out', this, this.parent, pointer, event);
+        return this;
+      }
+    }]);
+    return Button;
+  }(ComponentBase);
+  var CLICKMODE = {
+    press: 0,
+    pointerdown: 0,
+    release: 1,
+    pointerup: 1
+  };
+
+  var GetValue = Phaser.Utils.Objects.GetValue;
+  var Checkbox = /*#__PURE__*/function (_CheckboxShape) {
+    _inherits(Checkbox, _CheckboxShape);
+    var _super = _createSuper(Checkbox);
+    function Checkbox(scene, x, y, width, height, color, config) {
+      var _this;
+      _classCallCheck(this, Checkbox);
+      _this = _super.call(this, scene, x, y, width, height, color, config);
+      _this._click = new Button(_assertThisInitialized(_this), GetValue(config, 'click'));
+      _this._click.on('click', _this.toggleChecked, _assertThisInitialized(_this));
+      _this.setReadOnly(GetValue(config, 'readOnly', false));
+      return _this;
+    }
+    _createClass(Checkbox, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        value = !!value;
+        if (this._value === value) {
+          return;
+        }
+        _set(_getPrototypeOf(Checkbox.prototype), "value", value, this, true);
+        this.emit('valuechange', value);
+      }
+    }, {
+      key: "readOnly",
+      get: function get() {
+        return !this._click.enable;
+      },
+      set: function set(value) {
+        this._click.enable = !value;
+      }
+    }, {
+      key: "setReadOnly",
+      value: function setReadOnly(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        this.readOnly = enable;
+        return this;
+      }
+    }]);
+    return Checkbox;
+  }(CheckboxShape);
 
   function Factory (x, y, width, height, color, config) {
     var gameObject = new Checkbox(this.scene, x, y, width, height, color, config);

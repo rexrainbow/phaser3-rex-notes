@@ -1,6 +1,6 @@
 ## Introduction
 
-Checkbox shape with drawing checker path animation.
+Checkbox shape [input](button.md) with drawing checker path animation.
 
 - Author: Rex
 - Game object
@@ -104,7 +104,8 @@ var checkbox = scene.add.rexCheckbox({
 
     animationDuration: 150,
 
-    checked: false
+    checked: false,
+    readOnly: false,
 });
 ```
 
@@ -122,6 +123,7 @@ var checkbox = scene.add.rexCheckbox({
     - `true` : Circle shape box    
 - `animationDuration` : Duration of drawing path of checker.
 - `checked` : Initial value of checked.
+- `readOnly` : Set `ture` to disable input.
 
 ### Custom class
 
@@ -185,6 +187,22 @@ var checkbox = scene.add.rexCheckbox({
         checkbox.checked = !checkbox.checked;
         // checkbox.value = !checkbox.value;
         ```
+
+### Read only
+
+- Get
+    ```javascript
+    var readOnly = checkbox.readOnly;
+    ```
+- Set
+    ```javascript
+    checkbox.setReadOnly();
+    // checkbox.setReadOnly(true);
+    ```
+    or
+    ```javascript
+    checkbox.readOnly = true;
+    ```
 
 ### Box fill style
 

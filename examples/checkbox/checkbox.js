@@ -18,11 +18,6 @@ class Demo extends Phaser.Scene {
             checked: true,
             // animationDuration: 2000
         });
-
-        checkbox
-            .setInteractive()
-            .on('pointerdown', checkbox.toggleChecked, checkbox)
-
     }
 
     update() { }
