@@ -16,7 +16,7 @@ class HPaletteCanvas extends Canvas {
         super(scene, x, y, width, height);
         this.type = 'rexHPaletteCanvas';
 
-        this.color = new Color();
+        this.colorObject = new Color();
 
         this.setOrientation(orientation);
         this.setSize(width, height);
@@ -33,14 +33,26 @@ class HPaletteCanvas extends Canvas {
         return this;
     }
 
+    get hue() {
+        return this._hue;
+    }
+
+    set hue(value) {
+        this._hue = value;
+    }
+
     getHue(localX, localY) {
-        if (this.orientation === 0) {
-            var h = Percent(localX, 0, this.width);
-        } else {
-            var h = Percent(localY, 0, this.height);
+        if (localX === undefined) {
+            return this.hue;
         }
 
-        return h;
+        if (this.orientation === 0) {
+            this.hue = Percent(localX, 0, this.width);
+        } else {
+            this.hue = Percent(localY, 0, this.height);
+        }
+
+        return this.hue;
     }
 
     setColor(color) {
@@ -57,14 +69,14 @@ class HPaletteCanvas extends Canvas {
             out = LocalXY;
         }
 
-        this.color.setFromRGB(ColorToRGBA(color));
+        this.colorObject.setFromRGB(ColorToRGBA(color));
 
         if (this.orientation === 0) {
-            out.x = this.width * this.color.h;
+            out.x = this.width * this.colorObject.h;
             out.y = this.height / 2;
         } else {
             out.x = this.width / 2;
-            out.y = this.height * this.color.h;
+            out.y = this.height * this.colorObject.h;
         }
 
         return out;

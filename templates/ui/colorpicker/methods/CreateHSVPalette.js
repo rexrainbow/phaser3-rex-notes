@@ -7,8 +7,8 @@ var CreateHPalette = function (scene, width, height) {
     return hPalette;
 }
 
-var CreateSVPalette = function (scene) {
-    var svPalette = new SVPalette(scene);
+var CreateSVPalette = function (scene, width, height) {
+    var svPalette = new SVPalette(scene, width, height);
     scene.add.existing(svPalette);
     return svPalette;
 }

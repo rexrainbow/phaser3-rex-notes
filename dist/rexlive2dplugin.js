@@ -11014,6 +11014,7 @@
     if (gameObject.parentContainer) {
       if (tempMatrix === undefined) {
         tempMatrix = new TransformMatrix();
+        parentMatrix = new TransformMatrix();
       }
       gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
       tempMatrix.applyInverse(px, py, out);
@@ -11024,7 +11025,7 @@
     out.y += gameObject.displayOriginY;
     return out;
   };
-  var tempMatrix;
+  var tempMatrix, parentMatrix;
   var globOut$1 = {};
 
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;

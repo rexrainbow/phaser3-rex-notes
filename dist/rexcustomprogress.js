@@ -2363,6 +2363,7 @@
     if (gameObject.parentContainer) {
       if (tempMatrix === undefined) {
         tempMatrix = new TransformMatrix();
+        parentMatrix = new TransformMatrix();
       }
       gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
       tempMatrix.applyInverse(px, py, out);
@@ -2373,7 +2374,7 @@
     out.y += gameObject.displayOriginY;
     return out;
   };
-  var tempMatrix;
+  var tempMatrix, parentMatrix;
   var globOut = {};
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;

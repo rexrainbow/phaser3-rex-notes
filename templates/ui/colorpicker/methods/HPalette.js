@@ -1,5 +1,7 @@
 import OverlapSizer from '../../overlapsizer/OverlapSizer.js';
 import HPaletteCanvas from './HPaletteCanvas.js';
+import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
+import { LocalToWorld } from './Transform.js';
 
 class HPalette extends OverlapSizer {
     constructor(scene, width, height) {
@@ -9,20 +11,21 @@ class HPalette extends OverlapSizer {
         });
 
         var orientation = (width != null) ? 1 : 0;
-        var hPaletteCanvas = (new HPaletteCanvas(scene))
+        var paletteCanvas = (new HPaletteCanvas(scene))
             .setOrientation(orientation)
-        scene.add.existing(hPaletteCanvas);
+        scene.add.existing(paletteCanvas);
 
-        hPaletteCanvas
+        paletteCanvas
             .setInteractive()
             .on('pointerdown', this.onPaletteCanvasPointerDown, this)
             .on('pointermove', this.onPaletteCanvasPointerDown, this)
 
-        var marker = scene.add.rectangle(0, 0, 10, 10).setStrokeStyle(2, 0xffffff);
+        var marker = new RoundRectangle(scene, { strokeColor: 0xffffff, strokeWidth: 2 });
+        scene.add.existing(marker);
 
         this
             .add(
-                hPaletteCanvas,
+                paletteCanvas,
                 { key: 'paletteCanvas', expand: true }
             )
             .add(
@@ -49,32 +52,36 @@ class HPalette extends OverlapSizer {
             return;
         }
 
-        var hPaletteCanvas = this.childrenMap.paletteCanvas;
+        var paletteCanvas = this.childrenMap.paletteCanvas;
         var marker = this.childrenMap.marker;
 
-        if (hPaletteCanvas.orientation === 0) {
-            marker.x = pointer.worldX;
+        if (paletteCanvas.orientation === 0) {
+            marker.setPosition(pointer.worldX, this.centerY);
         } else {
-            marker.y = pointer.worldY;
+            marker.setPosition(this.centerX, pointer.worldY);
         }
         this.resetChildPositionState(marker);
 
-        var hue = hPaletteCanvas.getHue(localX, localY);
-        this.emit('valuechange', hue);
+        var hue = paletteCanvas.getHue(localX, localY);
+        this.emit('input', hue);
     }
 
     setColor(color) {
-        var hPaletteCanvas = this.childrenMap.paletteCanvas;
+        var paletteCanvas = this.childrenMap.paletteCanvas;
         var marker = this.childrenMap.marker;
 
-        hPaletteCanvas.setColor(color);
+        paletteCanvas.setColor(color);
 
-        var localXY = hPaletteCanvas.colorToLocalPosition(color, true);
-        // LocalToWorld.call(hPaletteCanvas, localXY);
-        // marker.setPosition(localXY.x, localXY.y);
-        // this.resetChildPositionState(marker);
+        var localXY = paletteCanvas.colorToLocalPosition(color, true);
+        LocalToWorld(paletteCanvas, localXY.x, localXY.y, marker);
+        this.resetChildPositionState(marker);
 
         return this;
+    }
+
+    getHue(localX, localY) {
+        var paletteCanvas = this.childrenMap.paletteCanvas;
+        return paletteCanvas.getHue(localX, localY);
     }
 }
 

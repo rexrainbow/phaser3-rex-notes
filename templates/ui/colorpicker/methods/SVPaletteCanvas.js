@@ -4,6 +4,7 @@ import { DrawSVPalette } from '../../../../plugins/utils/canvas/DrawHSVPalette.j
 const Color = Phaser.Display.Color;
 const Percent = Phaser.Math.Percent;
 const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
+const HSVToRGB = Phaser.Display.Color.HSVToRGB;
 
 class SVPaletteCanvas extends Canvas {
     constructor(scene, x, y, width, height, hue) {
@@ -19,10 +20,14 @@ class SVPaletteCanvas extends Canvas {
             hue = 1;
         }
 
-        this.color = new Color();
+        this.colorObject = new Color();
 
         this.setHue(hue);
         this.setSize(width, height);
+    }
+
+    get color() {
+        return this.colorObject.color;
     }
 
     get hue() {
@@ -34,6 +39,7 @@ class SVPaletteCanvas extends Canvas {
             return;
         }
         this._hue = hue;
+        this.colorObject.h = hue;
         this.dirty = true;
     }
 
@@ -48,9 +54,20 @@ class SVPaletteCanvas extends Canvas {
         return this;
     }
 
+    getColor(localX, localY) {
+        if (localX === undefined) {
+            return this.colorObject.color;
+        }
+
+        var s = Percent(localX, 0, this.width);
+        var v = 1 - Percent(localY, 0, this.height);
+        this.colorObject.setFromRGB(HSVToRGB(this.hue, s, v));
+        return this.colorObject.color;
+    }
+
     setColor(color) {
-        this.color.setFromRGB(ColorToRGBA(color));
-        this.setHue(this.color.h);
+        this.colorObject.setFromRGB(ColorToRGBA(color));
+        this.setHue(this.colorObject.h);
         return this;
     }
 
@@ -64,9 +81,9 @@ class SVPaletteCanvas extends Canvas {
             out = LocalXY;
         }
 
-        this.color.setFromRGB(ColorToRGBA(color));
-        out.x = this.width * this.color.s;
-        out.y = this.height * (1 - this.color.v);
+        this.colorObject.setFromRGB(ColorToRGBA(color));
+        out.x = this.width * this.colorObject.s;
+        out.y = this.height * (1 - this.colorObject.v);
 
         return out;
     }

@@ -33,7 +33,9 @@ class ColorPicker extends Sizer {
         }
         var hPalette = CreateHPalette(scene, hPaletteWidth, hPaletteHeight);
 
-        var svPalette = CreateSVPalette(scene);
+        var svPaletteWidth = GetValue(config, 'svPalette.width', undefined);
+        var svPaletteHeight = GetValue(config, 'svPalette.height', undefined);
+        var svPalette = CreateSVPalette(scene, svPaletteWidth, svPaletteWidth);
 
         if (background) {
             this.addBackground(background);
@@ -42,8 +44,17 @@ class ColorPicker extends Sizer {
         var hPaletteAddConfig = {
             proportion: 0, expand: true
         }
+
+        var svPaletteProportion, svPaletteExpand;
+        if (this.orientation === 0) {
+            svPaletteProportion = (svPaletteWidth === undefined) ? 1 : 0;
+            svPaletteExpand = (svPaletteHeight === undefined) ? true : false;
+        } else {
+            svPaletteProportion = (svPaletteHeight === undefined) ? 1 : 0;
+            svPaletteExpand = (svPaletteWidth === undefined) ? true : false;
+        }
         var svPaletteAddConfig = {
-            proportion: 1, expand: true
+            proportion: svPaletteProportion, expand: svPaletteExpand
         }
 
         if ((hPalettePosition === 0) || (hPalettePosition === 3)) {  // bottom, right
@@ -57,13 +68,21 @@ class ColorPicker extends Sizer {
         }
 
         hPalette
-            .on('valuechange', function (hue) {
-                svPalette.setHue(hue);
-            })
+            .on('input', function () {
+                svPalette.setHue(hPalette.getHue());
+                this.setValue(svPalette.getColor());
+            }, this)
+
+        svPalette
+            .on('input', function () {
+                this.setValue(svPalette.getColor());
+            }, this)
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('hPalette', hPalette);
         this.addChildrenMap('svPalette', svPalette);
+
+        this.setValue(GetValue(config, 'value', 0xffffff));
     }
 
     get value() {
@@ -79,6 +98,8 @@ class ColorPicker extends Sizer {
 
         this.childrenMap.hPalette.setColor(value);
         this.childrenMap.svPalette.setColor(value);
+
+        this.emit('valuechange', this._value);
     }
 
     setValue(value) {
@@ -98,6 +119,21 @@ class ColorPicker extends Sizer {
         this.color = color;
         return this;
     }
+
+
+    runLayout(parent, newWidth, newHeight) {
+        if (this.ignoreLayout) {
+            return this;
+        }
+
+        super.runLayout(parent, newWidth, newHeight);
+
+        this.childrenMap.hPalette.setColor(this.value);
+        this.childrenMap.svPalette.setColor(this.value);
+
+        return this;
+    }
+
 }
 
 var HPalettePositionNamesMap = {

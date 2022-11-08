@@ -1,23 +1,29 @@
 import OverlapSizer from '../../overlapsizer/OverlapSizer.js';
 import SVPaletteCanvas from './SVPaletteCanvas.js';
+import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
+import { LocalToWorld } from './Transform.js';
 
 class SVPalette extends OverlapSizer {
-    constructor(scene) {
-        super(scene);
+    constructor(scene, width, height) {
+        super(scene, {
+            width: width,
+            height: height
+        });
 
-        var svPaletteCanvas = new SVPaletteCanvas(scene);
-        scene.add.existing(svPaletteCanvas);
+        var paletteCanvas = new SVPaletteCanvas(scene);
+        scene.add.existing(paletteCanvas);
 
-        svPaletteCanvas
+        paletteCanvas
             .setInteractive()
             .on('pointerdown', this.onPaletteCanvasPointerDown, this)
             .on('pointermove', this.onPaletteCanvasPointerDown, this)
 
-        var marker = scene.add.circle(0, 0, 5).setStrokeStyle(2, 0xffffff);
+        var marker = new RoundRectangle(scene, { radius: 5, strokeColor: 0xffffff, strokeWidth: 2 });
+        scene.add.existing(marker);
 
         this
             .add(
-                svPaletteCanvas,
+                paletteCanvas,
                 { key: 'paletteCanvas', expand: true }
             )
             .add(
@@ -31,29 +37,38 @@ class SVPalette extends OverlapSizer {
             return;
         }
 
+        var paletteCanvas = this.childrenMap.paletteCanvas;
         var marker = this.childrenMap.marker;
+
         marker.setPosition(pointer.worldX, pointer.worldY);
         this.resetChildPositionState(marker);
+
+        var color = paletteCanvas.getColor(localX, localY);
+        this.emit('input', color);
     }
 
     setHue(hue) {
-        var svPaletteCanvas = this.childrenMap.paletteCanvas;
-        svPaletteCanvas.setHue(hue);
+        var paletteCanvas = this.childrenMap.paletteCanvas;
+        paletteCanvas.setHue(hue);
         return this;
     }
 
     setColor(color) {
-        var svPaletteCanvas = this.childrenMap.paletteCanvas;
+        var paletteCanvas = this.childrenMap.paletteCanvas;
         var marker = this.childrenMap.marker;
 
-        svPaletteCanvas.setColor(color);
+        paletteCanvas.setColor(color);
 
-        var localXY = svPaletteCanvas.colorToLocalPosition(color, true);
-        // LocalToWorld.call(svPaletteCanvas, localXY);
-        // marker.setPosition(localXY.x, localXY.y);
-        // this.resetChildPositionState(marker);
+        var localXY = paletteCanvas.colorToLocalPosition(color, true);
+        LocalToWorld(paletteCanvas, localXY.x, localXY.y, marker);
+        this.resetChildPositionState(marker);
 
         return this;
+    }
+
+    getColor(localX, localY) {
+        var paletteCanvas = this.childrenMap.paletteCanvas;
+        return paletteCanvas.getColor(localX, localY);
     }
 }
 
