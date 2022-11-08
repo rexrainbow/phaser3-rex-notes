@@ -148,7 +148,7 @@
 1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shader/warp](shader-warp.md): Warp post processing filter. 
 1. [Shake-position](shake-position.md): Shake position of game object.
-1. [Shape/Checkbox](shape-checkbox.md): Checkbox shape with drawing checker path animation.
+1. [Shape/Checkbox](shape-checkbox.md): Checkbox input with drawing checker path animation.
 1. [Shape/Circular progress](shape-circularprogress.md): Circular progress bar shape.
 1. [Shape/Cover](shape-cover.md): Rectangle shape covered full window, and block all touch events.
 1. [Shape/Custom progress](shape-custom-progress.md): Custom progress bar shape.

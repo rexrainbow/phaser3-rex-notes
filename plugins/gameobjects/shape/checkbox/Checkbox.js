@@ -13,22 +13,6 @@ class Checkbox extends CheckboxShape {
         this.setReadOnly(GetValue(config, 'readOnly', false));
     }
 
-    get value() {
-        return this._value;
-    }
-
-    set value(value) {
-        value = !!value;
-
-        if (this._value === value) {
-            return;
-        }
-
-        super.value = value;
-
-        this.emit('valuechange', value);
-    }
-
     get readOnly() {
         return !this._click.enable;
     }

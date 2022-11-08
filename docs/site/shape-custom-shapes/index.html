@@ -2205,6 +2205,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#round-rectangle" class="md-nav__link">
+    Round rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#triangle" class="md-nav__link">
     Triangle
   </a>
@@ -2306,6 +2313,20 @@
     <li class="md-nav__item">
       <a href="../shape-cover/" class="md-nav__link">
         Cover
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shape-checkbox/" class="md-nav__link">
+        Checkbox
       </a>
     </li>
   
@@ -8948,6 +8969,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#round-rectangle" class="md-nav__link">
+    Round rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#triangle" class="md-nav__link">
     Triangle
   </a>
@@ -9033,6 +9061,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/vYgjyPJ">Speech bubble</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYZNZwr">Jigsaw</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOKroer">Checkbox</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/PoeMXXQ">World to localXY</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -9278,6 +9307,7 @@ or
 <li><code>'line'</code> : Create <a href="./#line">Line shape</a>.</li>
 <li><code>'lines'</code> : Create <a href="./#lines">Lines shape</a>.</li>
 <li><code>'rectangle'</code> : Create <a href="./#rectangle">Rectangle shape</a>.</li>
+<li><code>'roundRectangle'</code> : Create <a href="./#round-rectangle">Round rectangle shape</a>.</li>
 <li><code>'triangle'</code> : Create <a href="./#triangle">Triangle shape</a>.</li>
 </ul>
 </li>
@@ -9540,6 +9570,63 @@ or
     or
     <div class="highlight"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
 <span class="nx">rectangle</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="round-rectangle">Round rectangle<a class="headerlink" href="#round-rectangle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Top-left<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">setTopLeftPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">left</span><span class="p">;</span>
+<span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">top</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Size<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Radius<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusTL</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">radiusTL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusTR</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">radiusTR</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusBL</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">radiusBL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusBR</span> <span class="o">=</span> <span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">radiusBR</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// roundRectangle.radius = radius;</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">roundRectangle</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">({</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radiusTL</span><span class="p">,</span> <span class="nx">tr</span><span class="o">:</span> <span class="nx">radiusTR</span><span class="p">,</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radiusBL</span><span class="p">,</span> <span class="nx">br</span><span class="o">:</span> <span class="nx">radiusBR</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="c1">// roundRectangle.radiusTL = radiusTL;</span>
+<span class="c1">// roundRectangle.radiusTR = radiusTR;</span>
+<span class="c1">// roundRectangle.radiusBL = radiusBL;</span>
+<span class="c1">// roundRectangle.radiusBR = radiusBR;</span>
 </code></pre></div></li>
 </ul>
 </li>

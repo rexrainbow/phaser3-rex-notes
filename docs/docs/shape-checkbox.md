@@ -1,6 +1,6 @@
 ## Introduction
 
-Checkbox shape [input](button.md) with drawing checker path animation.
+Checkbox [input](button.md) with drawing checker path animation.
 
 - Author: Rex
 - Game object
@@ -21,9 +21,13 @@ Checkbox shape [input](button.md) with drawing checker path animation.
     ```javascript
     scene.load.plugin('rexcheckboxplugin', 'https://raw.githubusercontent.com/rexrainbow/    phaser3-rex-notes/master/dist/rexcheckboxplugin.min.js', true);
     ```
-- Add shape object
+- Add checkbox input
     ```javascript
     var checkbox = scene.add.rexCheckbox(x, y, width, height, color, config);
+    ```
+- Add checkbox shape (without [click input](button.md))
+    ```javascript
+    var checkbox = scene.add.rexCheckboxShape(x, y, width, height, color, config);
     ```
 
 #### Import plugin
@@ -50,9 +54,13 @@ Checkbox shape [input](button.md) with drawing checker path animation.
     };
     var game = new Phaser.Game(config);
     ```
-- Add shape object
+- Add checkbox input
     ```javascript
     var checkbox = scene.add.rexCheckbox(x, y, width, height, color, config);
+    ```
+- Add checkbox shape (without [click input](button.md))
+    ```javascript
+    var checkbox = scene.add.rexCheckboxShape(x, y, width, height, color, config);
     ```
 
 #### Import class
@@ -65,13 +73,19 @@ Checkbox shape [input](button.md) with drawing checker path animation.
     ```javascript
     import Checkbox from 'phaser3-rex-plugins/plugins/checkbox.js';
     ```
-- Add shape object
+- Add checkbox input
     ```javascript    
     var checkbox = new Checkbox(scene, x, y, width, height, color, config);
     scene.add.existing(checkbox);
     ```
+- Add checkbox shape (without [click input](button.md))
+    ```javascript
+    // import CheckboxShape from 'phaser3-rex-plugins/plugins/checkboxshape.js';
+    var checkbox = new CheckboxShape(scene, x, y, width, height, color, config);
+    scene.add.existing(checkbox);
+    ```
 
-### Create shape object
+### Create checkbox input
 
 ```javascript
 var checkbox = scene.add.rexCheckbox(x, y, width, height, color, config);
@@ -105,6 +119,13 @@ var checkbox = scene.add.rexCheckbox({
     animationDuration: 150,
 
     checked: false,
+
+    click: undefined,
+    // click: {
+    //     mode: 1,            // 0|'press'|1|'release'
+    //     clickInterval: 100  // ms
+    //     threshold: undefined
+    // },
     readOnly: false,
 });
 ```
@@ -123,6 +144,13 @@ var checkbox = scene.add.rexCheckbox({
     - `true` : Circle shape box    
 - `animationDuration` : Duration of drawing path of checker.
 - `checked` : Initial value of checked.
+- `click` : Configuration of [click input](button.md#create-instance)
+    - `click.mode` :
+        - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
+        - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
+    - `click.clickInterval` : Interval between 2 'click' events, in ms.
+    - `click.threshold` : Cancel clicking detecting when dragging distance is larger then this threshold.
+        - `undefined` : Ignore this feature. Default behavior. 
 - `readOnly` : Set `ture` to disable input.
 
 ### Custom class

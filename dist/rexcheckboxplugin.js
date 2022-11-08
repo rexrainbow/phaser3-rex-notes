@@ -35,19 +35,6 @@
     });
     return Constructor;
   }
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  }
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -138,44 +125,6 @@
       };
     }
     return _get.apply(this, arguments);
-  }
-  function set(target, property, value, receiver) {
-    if (typeof Reflect !== "undefined" && Reflect.set) {
-      set = Reflect.set;
-    } else {
-      set = function set(target, property, value, receiver) {
-        var base = _superPropBase(target, property);
-        var desc;
-        if (base) {
-          desc = Object.getOwnPropertyDescriptor(base, property);
-          if (desc.set) {
-            desc.set.call(receiver, value);
-            return true;
-          } else if (!desc.writable) {
-            return false;
-          }
-        }
-        desc = Object.getOwnPropertyDescriptor(receiver, property);
-        if (desc) {
-          if (!desc.writable) {
-            return false;
-          }
-          desc.value = value;
-          Object.defineProperty(receiver, property, desc);
-        } else {
-          _defineProperty(receiver, property, value);
-        }
-        return true;
-      };
-    }
-    return set(target, property, value, receiver);
-  }
-  function _set(target, property, value, receiver, isStrict) {
-    var s = set(target, property, value, receiver || target);
-    if (!s && isStrict) {
-      throw new Error('failed to set property');
-    }
-    return value;
   }
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -2393,7 +2342,7 @@
   }(SceneUpdateTickTask);
 
   var GetValue$4 = Phaser.Utils.Objects.GetValue;
-  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
   var GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
   var EaseValueTaskBase = /*#__PURE__*/function (_TickTask) {
     _inherits(EaseValueTaskBase, _TickTask);
@@ -2408,8 +2357,8 @@
         this.timer.resetFromJSON(GetValue$4(o, 'timer'));
         this.setEnable(GetValue$4(o, 'enable', true));
         this.setTarget(GetValue$4(o, 'target', this.parent));
-        this.setDelay(GetAdvancedValue$1(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue$1(o, 'duration', 1000));
+        this.setDelay(GetAdvancedValue$2(o, 'delay', 0));
+        this.setDuration(GetAdvancedValue$2(o, 'duration', 1000));
         this.setEase(GetValue$4(o, 'ease', 'Linear'));
         this.setRepeat(GetValue$4(o, 'repeat', 0));
         return this;
@@ -2666,6 +2615,7 @@
         } else {
           this.stopCheckerAnimation();
         }
+        this.emit('valuechange', value);
       }
     }, {
       key: "setValue",
@@ -2932,19 +2882,6 @@
       return _this;
     }
     _createClass(Checkbox, [{
-      key: "value",
-      get: function get() {
-        return this._value;
-      },
-      set: function set(value) {
-        value = !!value;
-        if (this._value === value) {
-          return;
-        }
-        _set(_getPrototypeOf(Checkbox.prototype), "value", value, this, true);
-        this.emit('valuechange', value);
-      }
-    }, {
       key: "readOnly",
       get: function get() {
         return !this._click.enable;
@@ -2971,9 +2908,32 @@
     return gameObject;
   }
 
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+  function Creator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+    var width = GetAdvancedValue$1(config, 'width', undefined);
+    var height = GetAdvancedValue$1(config, 'height', width);
+    var color = GetAdvancedValue$1(config, 'color', 0x005cb2);
+    var gameObject = new Checkbox(this.scene, 0, 0, width, height, color, config);
+    BuildGameObject$1(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  function CheckboxShapeFactory (x, y, width, height, color, config) {
+    var gameObject = new CheckboxShape(this.scene, x, y, width, height, color, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function Creator (config, addToScene) {
+  function CheckboxShapeCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
     }
@@ -2983,7 +2943,7 @@
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', width);
     var color = GetAdvancedValue(config, 'color', 0x005cb2);
-    var gameObject = new Checkbox(this.scene, 0, 0, width, height, color, config);
+    var gameObject = new CheckboxShape(this.scene, 0, 0, width, height, color, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -3059,6 +3019,7 @@
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexCheckbox', Factory, Creator);
+      pluginManager.registerGameObject('rexCheckboxShape', CheckboxShapeFactory, CheckboxShapeCreator);
       return _this;
     }
     _createClass(CheckboxPlugin, [{
@@ -3071,6 +3032,7 @@
     return CheckboxPlugin;
   }(Phaser.Plugins.BasePlugin);
   SetValue(window, 'RexPlugins.GameObjects.Checkbox', Checkbox);
+  SetValue(window, 'RexPlugins.GameObjects.CheckboxShape', CheckboxShape);
 
   return CheckboxPlugin;
 

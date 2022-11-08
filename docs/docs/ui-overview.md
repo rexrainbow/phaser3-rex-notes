@@ -349,6 +349,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Checkbox](shape-checkbox.md): Checkbox [input](button.md) with drawing checker path animation.
+    ```javascript
+    var checkbox = scene.rexUI.add.checkbox(x, y, width, height, color, config);
+    ```
+    or
+    ```javascript
+    class MyCheckbox extends RexPlugins.UI.Checkbox {
+        constructor(scene, x, y, width, height, color, config) {
+            super(scene, x, y, width, height, color, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects

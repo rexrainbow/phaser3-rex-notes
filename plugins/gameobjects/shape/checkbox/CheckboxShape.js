@@ -88,6 +88,8 @@ class CheckboxShape extends BaseShapes {
         } else {
             this.stopCheckerAnimation();
         }
+
+        this.emit('valuechange', value);
     }
 
     setValue(value) {

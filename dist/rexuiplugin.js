@@ -10409,6 +10409,7 @@
         } else {
           this.stopCheckerAnimation();
         }
+        this.emit('valuechange', value);
       }
     }, {
       key: "setValue",
@@ -10675,19 +10676,6 @@
       return _this;
     }
     _createClass(Checkbox, [{
-      key: "value",
-      get: function get() {
-        return this._value;
-      },
-      set: function set(value) {
-        value = !!value;
-        if (this._value === value) {
-          return;
-        }
-        _set(_getPrototypeOf(Checkbox.prototype), "value", value, this, true);
-        this.emit('valuechange', value);
-      }
-    }, {
       key: "readOnly",
       get: function get() {
         return !this._click.enable;
