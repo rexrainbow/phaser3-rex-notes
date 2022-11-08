@@ -19,7 +19,9 @@ var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, o
     if (gameObject.parentContainer) {
         if (tempMatrix === undefined) {
             tempMatrix = new TransformMatrix();
+            parentMatrix = new TransformMatrix();
         }
+
         gameObject.getWorldTransformMatrix(tempMatrix, parentMatrix);
         tempMatrix.applyInverse(px, py, out);
     }
@@ -33,7 +35,7 @@ var WorldXYToGameObjectLocalXY = function (gameObject, worldX, worldY, camera, o
     return out;
 }
 
-var tempMatrix;
+var tempMatrix, parentMatrix;
 var globOut = {};
 
 export default WorldXYToGameObjectLocalXY;
