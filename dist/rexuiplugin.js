@@ -30892,6 +30892,7 @@
   var Color$1 = Phaser.Display.Color;
   var Percent$2 = Phaser.Math.Percent;
   var ColorToRGBA$1 = Phaser.Display.Color.ColorToRGBA;
+  var HSVToRGB$1 = Phaser.Display.Color.HSVToRGB;
   var HPaletteCanvas = /*#__PURE__*/function (_Canvas) {
     _inherits(HPaletteCanvas, _Canvas);
     var _super = _createSuper(HPaletteCanvas);
@@ -30911,7 +30912,7 @@
         height = 2;
       }
       _this = _super.call(this, scene, x, y, width, height);
-      _this.type = 'rexHPaletteCanvas';
+      _this.type = 'rexColorPicker.HPaletteCanvas';
       _this.colorObject = new Color$1();
       _this.setOrientation(orientation);
       _this.setSize(width, height);
@@ -30929,6 +30930,11 @@
         DrawHPalette(this.canvas, this.context, this.orientation);
         _get(_getPrototypeOf(HPaletteCanvas.prototype), "updateTexture", this).call(this);
         return this;
+      }
+    }, {
+      key: "color",
+      get: function get() {
+        return this.colorObject.color;
       }
     }, {
       key: "hue",
@@ -30952,8 +30958,21 @@
         return this.hue;
       }
     }, {
+      key: "getColor",
+      value: function getColor(localX, localY) {
+        if (localX === undefined) {
+          return this.color;
+        }
+        var h = this.getHue(localX, localY);
+        this.colorObject.setFromRGB(HSVToRGB$1(h, 1, 1));
+        return this.colorObject.color;
+      }
+    }, {
       key: "setColor",
       value: function setColor(color) {
+        if (this.color === color) {
+          return this;
+        }
         return this;
       }
     }, {
@@ -31018,6 +31037,7 @@
       var orientation = width != null ? 1 : 0;
       var paletteCanvas = new HPaletteCanvas(scene).setOrientation(orientation);
       scene.add.existing(paletteCanvas);
+      _this.type = 'rexColorPicker.HPalette';
       paletteCanvas.setInteractive().on('pointerdown', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this)).on('pointermove', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this));
       var marker = new RoundRectangle$3(scene, {
         strokeColor: 0xffffff,
@@ -31052,19 +31072,21 @@
           return;
         }
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
-        if (paletteCanvas.orientation === 0) {
-          marker.setPosition(pointer.worldX, this.centerY);
-        } else {
-          marker.setPosition(this.centerX, pointer.worldY);
-        }
-        this.resetChildPositionState(marker);
-        var hue = paletteCanvas.getHue(localX, localY);
-        this.emit('input', hue);
+        var color = paletteCanvas.getColor(localX, localY);
+        this.setMarkerPosition(color);
+        this.emit('input', color);
+      }
+    }, {
+      key: "color",
+      get: function get() {
+        return this.childrenMap.paletteCanvas.color;
       }
     }, {
       key: "setColor",
       value: function setColor(color) {
+        if (this.color === color) {
+          return this;
+        }
         var paletteCanvas = this.childrenMap.paletteCanvas;
         paletteCanvas.setColor(color);
         this.setMarkerPosition(color);
@@ -31113,7 +31135,7 @@
         height = 2;
       }
       _this = _super.call(this, scene, x, y, width, height);
-      _this.type = 'rexSVPaletteCanvas';
+      _this.type = 'rexColorPicker.SVPaletteCanvas';
       if (hue === undefined) {
         hue = 1;
       }
@@ -31167,6 +31189,9 @@
     }, {
       key: "setColor",
       value: function setColor(color) {
+        if (this.color === color) {
+          return this;
+        }
         this.colorObject.setFromRGB(ColorToRGBA(color));
         this.setHue(this.colorObject.h);
         return this;
@@ -31204,6 +31229,7 @@
       });
       var paletteCanvas = new SVPaletteCanvas(scene);
       scene.add.existing(paletteCanvas);
+      _this.type = 'rexColorPicker.SVPalette';
       paletteCanvas.setInteractive().on('pointerdown', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this)).on('pointermove', _this.onPaletteCanvasPointerDown, _assertThisInitialized(_this));
       var marker = new RoundRectangle$3(scene, {
         radius: 5,
@@ -31228,24 +31254,31 @@
           return;
         }
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
-        marker.setPosition(pointer.worldX, pointer.worldY);
-        this.resetChildPositionState(marker);
         var color = paletteCanvas.getColor(localX, localY);
+        this.setMarkerPosition(color);
         this.emit('input', color);
+      }
+    }, {
+      key: "color",
+      get: function get() {
+        return this.childrenMap.paletteCanvas.color;
       }
     }, {
       key: "setHue",
       value: function setHue(hue) {
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        paletteCanvas.setHue(hue);
+        paletteCanvas.setHue(hue); // Redraw paletteCanvas
+        // Position of marker does not change
         return this;
       }
     }, {
       key: "setColor",
       value: function setColor(color) {
+        if (this.color === color) {
+          return this;
+        }
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        paletteCanvas.setColor(color);
+        paletteCanvas.setColor(color); // Redraw paletteCanvas
         this.setMarkerPosition(color);
         return this;
       }
@@ -31258,12 +31291,6 @@
         LocalToWorld(paletteCanvas, localXY.x, localXY.y, marker);
         this.resetChildPositionState(marker);
         return this;
-      }
-    }, {
-      key: "getColor",
-      value: function getColor(localX, localY) {
-        var paletteCanvas = this.childrenMap.paletteCanvas;
-        return paletteCanvas.getColor(localX, localY);
       }
     }]);
     return SVPalette;
@@ -31289,6 +31316,7 @@
       _classCallCheck(this, ColorPicker);
       _this = _super.call(this, scene, config);
       _this.type = 'rexColorPicker';
+      _this.freezePalettes = false;
 
       // orientation
       var hPalettePosition = GetValue$1a(config, 'hPalette.position', 'bottom');
@@ -31305,12 +31333,17 @@
 
       // Add elements
       var background = GetValue$1a(config, 'background', undefined);
-      var hPaletteSize = GetValue$1a(config, 'hPalette.size', 10);
       var hPaletteWidth, hPaletteHeight;
       if (_this.orientation === 0) {
-        hPaletteWidth = hPaletteSize;
+        var hPaletteWidth = GetValue$1a(config, 'hPalette.width', undefined);
+        if (hPaletteWidth === undefined) {
+          hPaletteWidth = GetValue$1a(config, 'hPalette.size', 10);
+        }
       } else {
-        hPaletteHeight = hPaletteSize;
+        hPaletteHeight = GetValue$1a(config, 'hPalette.height', undefined);
+        if (hPaletteHeight === undefined) {
+          hPaletteHeight = GetValue$1a(config, 'hPalette.size', 10);
+        }
       }
       var hPalette = CreateHPalette(scene, hPaletteWidth, hPaletteHeight);
       var svPaletteWidth = GetValue$1a(config, 'svPalette.width', undefined);
@@ -31344,10 +31377,10 @@
       }
       hPalette.on('input', function () {
         svPalette.setHue(hPalette.getHue());
-        this.setValue(svPalette.getColor());
+        this.setValue(svPalette.color, true);
       }, _assertThisInitialized(_this));
       svPalette.on('input', function () {
-        this.setValue(svPalette.getColor());
+        this.setValue(svPalette.color, true);
       }, _assertThisInitialized(_this));
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('hPalette', hPalette);
@@ -31365,14 +31398,17 @@
           return;
         }
         this._value = value;
-        this.childrenMap.hPalette.setColor(value);
-        this.childrenMap.svPalette.setColor(value);
+        if (!this.freezePalettes) {
+          this.updatePalettes();
+        }
         this.emit('valuechange', this._value);
       }
     }, {
       key: "setValue",
-      value: function setValue(value) {
+      value: function setValue(value, freezePalettes) {
+        this.freezePalettes = !!freezePalettes;
         this.value = value;
+        this.freezePalettes = false;
         return this;
       }
     }, {
@@ -31387,6 +31423,13 @@
       key: "setColor",
       value: function setColor(color) {
         this.color = color;
+        return this;
+      }
+    }, {
+      key: "updatePalettes",
+      value: function updatePalettes() {
+        this.childrenMap.hPalette.setColor(this.color);
+        this.childrenMap.svPalette.setColor(this.color);
         return this;
       }
     }, {

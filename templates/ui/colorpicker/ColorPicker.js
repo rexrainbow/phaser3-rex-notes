@@ -8,6 +8,7 @@ class ColorPicker extends Sizer {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexColorPicker';
+        this.freezePalettes = false;
 
         // orientation
         var hPalettePosition = GetValue(config, 'hPalette.position', 'bottom');
@@ -24,12 +25,17 @@ class ColorPicker extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
 
-        var hPaletteSize = GetValue(config, 'hPalette.size', 10);
         var hPaletteWidth, hPaletteHeight;
         if (this.orientation === 0) {
-            hPaletteWidth = hPaletteSize;
+            var hPaletteWidth = GetValue(config, 'hPalette.width', undefined);
+            if (hPaletteWidth === undefined) {
+                hPaletteWidth = GetValue(config, 'hPalette.size', 10);
+            }
         } else {
-            hPaletteHeight = hPaletteSize;
+            hPaletteHeight = GetValue(config, 'hPalette.height', undefined);
+            if (hPaletteHeight === undefined) {
+                hPaletteHeight = GetValue(config, 'hPalette.size', 10);
+            }
         }
         var hPalette = CreateHPalette(scene, hPaletteWidth, hPaletteHeight);
 
@@ -70,12 +76,12 @@ class ColorPicker extends Sizer {
         hPalette
             .on('input', function () {
                 svPalette.setHue(hPalette.getHue());
-                this.setValue(svPalette.getColor());
+                this.setValue(svPalette.color, true);
             }, this)
 
         svPalette
             .on('input', function () {
-                this.setValue(svPalette.getColor());
+                this.setValue(svPalette.color, true);
             }, this)
 
         this.addChildrenMap('background', background);
@@ -96,14 +102,17 @@ class ColorPicker extends Sizer {
 
         this._value = value;
 
-        this.childrenMap.hPalette.setColor(value);
-        this.childrenMap.svPalette.setColor(value);
+        if (!this.freezePalettes) {
+            this.updatePalettes();
+        }
 
         this.emit('valuechange', this._value);
     }
 
-    setValue(value) {
+    setValue(value, freezePalettes) {
+        this.freezePalettes = !!freezePalettes;
         this.value = value;
+        this.freezePalettes = false;
         return this;
     }
 
@@ -117,6 +126,12 @@ class ColorPicker extends Sizer {
 
     setColor(color) {
         this.color = color;
+        return this;
+    }
+
+    updatePalettes() {
+        this.childrenMap.hPalette.setColor(this.color);
+        this.childrenMap.svPalette.setColor(this.color);
         return this;
     }
 

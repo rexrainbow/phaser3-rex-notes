@@ -12,6 +12,7 @@ class SVPalette extends OverlapSizer {
 
         var paletteCanvas = new SVPaletteCanvas(scene);
         scene.add.existing(paletteCanvas);
+        this.type = 'rexColorPicker.SVPalette';
 
         paletteCanvas
             .setInteractive()
@@ -38,28 +39,31 @@ class SVPalette extends OverlapSizer {
         }
 
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
-
-        marker.setPosition(pointer.worldX, pointer.worldY);
-        this.resetChildPositionState(marker);
-
         var color = paletteCanvas.getColor(localX, localY);
+        this.setMarkerPosition(color);
+
         this.emit('input', color);
+    }
+
+    get color() {
+        return this.childrenMap.paletteCanvas.color;
     }
 
     setHue(hue) {
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        paletteCanvas.setHue(hue);
+        paletteCanvas.setHue(hue);  // Redraw paletteCanvas
+        // Position of marker does not change
         return this;
     }
 
     setColor(color) {
+        if (this.color === color) {
+            return this;
+        }
+
         var paletteCanvas = this.childrenMap.paletteCanvas;
-
-        paletteCanvas.setColor(color);
-
+        paletteCanvas.setColor(color);  // Redraw paletteCanvas
         this.setMarkerPosition(color);
-
         return this;
     }
 
@@ -72,11 +76,6 @@ class SVPalette extends OverlapSizer {
         this.resetChildPositionState(marker);
 
         return this;
-    }
-
-    getColor(localX, localY) {
-        var paletteCanvas = this.childrenMap.paletteCanvas;
-        return paletteCanvas.getColor(localX, localY);
     }
 }
 

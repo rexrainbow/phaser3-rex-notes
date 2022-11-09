@@ -14,6 +14,7 @@ class HPalette extends OverlapSizer {
         var paletteCanvas = (new HPaletteCanvas(scene))
             .setOrientation(orientation)
         scene.add.existing(paletteCanvas);
+        this.type = 'rexColorPicker.HPalette';
 
         paletteCanvas
             .setInteractive()
@@ -53,24 +54,23 @@ class HPalette extends OverlapSizer {
         }
 
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
+        var color = paletteCanvas.getColor(localX, localY);
+        this.setMarkerPosition(color);
 
-        if (paletteCanvas.orientation === 0) {
-            marker.setPosition(pointer.worldX, this.centerY);
-        } else {
-            marker.setPosition(this.centerX, pointer.worldY);
-        }
-        this.resetChildPositionState(marker);
+        this.emit('input', color);
+    }
 
-        var hue = paletteCanvas.getHue(localX, localY);
-        this.emit('input', hue);
+    get color() {
+        return this.childrenMap.paletteCanvas.color;
     }
 
     setColor(color) {
+        if (this.color === color) {
+            return this;
+        }
+
         var paletteCanvas = this.childrenMap.paletteCanvas;
-
         paletteCanvas.setColor(color);
-
         this.setMarkerPosition(color);
 
         return this;

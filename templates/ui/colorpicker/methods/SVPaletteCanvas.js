@@ -14,7 +14,7 @@ class SVPaletteCanvas extends Canvas {
         if (height === undefined) { height = 2; }
 
         super(scene, x, y, width, height);
-        this.type = 'rexSVPaletteCanvas';
+        this.type = 'rexColorPicker.SVPaletteCanvas';
 
         if (hue === undefined) {
             hue = 1;
@@ -66,6 +66,10 @@ class SVPaletteCanvas extends Canvas {
     }
 
     setColor(color) {
+        if (this.color === color) {
+            return this;
+        }
+
         this.colorObject.setFromRGB(ColorToRGBA(color));
         this.setHue(this.colorObject.h);
         return this;

@@ -5,6 +5,7 @@ import { DrawHPalette } from '../../../../plugins/utils/canvas/DrawHSVPalette.js
 const Color = Phaser.Display.Color;
 const Percent = Phaser.Math.Percent;
 const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
+const HSVToRGB = Phaser.Display.Color.HSVToRGB;
 
 class HPaletteCanvas extends Canvas {
     constructor(scene, x, y, width, height, orientation) {
@@ -14,7 +15,7 @@ class HPaletteCanvas extends Canvas {
         if (height === undefined) { height = 2; }
 
         super(scene, x, y, width, height);
-        this.type = 'rexHPaletteCanvas';
+        this.type = 'rexColorPicker.HPaletteCanvas';
 
         this.colorObject = new Color();
 
@@ -31,6 +32,10 @@ class HPaletteCanvas extends Canvas {
         DrawHPalette(this.canvas, this.context, this.orientation);
         super.updateTexture();
         return this;
+    }
+
+    get color() {
+        return this.colorObject.color;
     }
 
     get hue() {
@@ -55,7 +60,21 @@ class HPaletteCanvas extends Canvas {
         return this.hue;
     }
 
+    getColor(localX, localY) {
+        if (localX === undefined) {
+            return this.color;
+        }
+
+        var h = this.getHue(localX, localY);
+        this.colorObject.setFromRGB(HSVToRGB(h, 1, 1));
+        return this.colorObject.color;
+    }
+
     setColor(color) {
+        if (this.color === color) {
+            return this;
+        }
+
         return this;
     }
 
