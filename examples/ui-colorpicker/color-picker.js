@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
                 height: 128
             },
             hPalette: {
-                position: 'right',
+                // position: 'right',
                 size: 16
             },
 

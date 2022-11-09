@@ -29,7 +29,7 @@ class SVPalette extends OverlapSizer {
             )
             .add(
                 marker,
-                { key: 'marker', expand: false, align: 'center' }
+                { key: 'marker', expand: false }
             )
     }
 
