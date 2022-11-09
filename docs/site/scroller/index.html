@@ -8895,10 +8895,11 @@
         <span class="nx">bottomBound</span><span class="p">,</span>
         <span class="nx">topBound</span>
     <span class="p">],</span>
-    <span class="nx">value</span><span class="o">:</span> <span class="nx">topBound</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="nx">topBound</span><span class="p">,</span>    
     <span class="c1">// threshold: 10,</span>
     <span class="c1">// slidingDeceleration: 5000,</span>
     <span class="c1">// backDeceleration: 2000,</span>
+    <span class="c1">// dragReverse: false,</span>
     <span class="c1">// enable: true,</span>
     <span class="c1">// orientation: &#39;vertical&#39;,</span>
     <span class="c1">// pointerOutRelease: true,</span>
@@ -8914,7 +8915,7 @@
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>bounds</code> : An array of 2 values [bound0, bound1]</li>
+<li><code>bounds</code> : An array of 2 values <code>[bound0, bound1]</code></li>
 <li><code>value</code> : Initial value between bound0 and bound1<ul>
 <li>Map this value to position of content under <a href="./#events">event 'valuechange'</a></li>
 </ul>
@@ -8926,6 +8927,17 @@
 </li>
 <li><code>backDeceleration</code> : Deceleration of pull back when out of bounds.<ul>
 <li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+<li><code>dragReverse</code> :<ul>
+<li><code>false</code> : Dragging up will decrease value, dragging down will increase value. Default behavior.<ul>
+<li>Use this mode when scrolling by position of game object.</li>
+</ul>
+</li>
+<li><code>true</code> : Dragging up will increase value, dragging down will decrease value.<ul>
+<li>Use this mode when scrolling by camera.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>enable</code> : Set true to get dragging events.</li>

@@ -10758,6 +10758,8 @@
         this.setDragThreshold(GetValue$6(o, 'threshold', 10));
         this.setSlidingDeceleration(GetValue$6(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue$6(o, 'backDeceleration', 2000));
+        var dragRatio = GetValue$6(o, 'dragReverse', false) ? -1 : 1;
+        this.setDragRatio(dragRatio);
         var bounds = GetValue$6(o, 'bounds', undefined);
         if (bounds) {
           this.setBounds(bounds);
@@ -10841,6 +10843,12 @@
       key: "setBackDeceleration",
       value: function setBackDeceleration(dec) {
         this.backDeceleration = dec;
+        return this;
+      }
+    }, {
+      key: "setDragRatio",
+      value: function setDragRatio(ratio) {
+        this.dragRatio = ratio;
         return this;
       }
     }, {
@@ -10967,28 +10975,34 @@
     }, {
       key: "dragDelta",
       get: function get() {
+        var delta;
         if (this.orientationMode === 0) {
           // y
-          return this.dragState.dy;
+          delta = this.dragState.dy;
         } else if (this.orientationMode === 1) {
           // x
-          return this.dragState.dx;
+          delta = this.dragState.dx;
         } else {
-          return 0;
+          delta = 0;
         }
+        delta *= this.dragRatio;
+        return delta;
       }
     }, {
       key: "dragSpeed",
       get: function get() {
+        var speed;
         if (this.orientationMode === 0) {
           // y
-          return this.dragState.speedY;
+          speed = this.dragState.speedY;
         } else if (this.orientationMode === 1) {
           // x
-          return this.dragState.speedX;
+          speed = this.dragState.speedX;
         } else {
-          return 0;
+          speed = 0;
         }
+        speed *= this.dragRatio;
+        return speed;
       }
 
       // enter_DRAG

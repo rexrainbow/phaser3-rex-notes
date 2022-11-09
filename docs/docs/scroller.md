@@ -78,10 +78,11 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
         bottomBound,
         topBound
     ],
-    value: topBound,
+    value: topBound,    
     // threshold: 10,
     // slidingDeceleration: 5000,
     // backDeceleration: 2000,
+    // dragReverse: false,
     // enable: true,
     // orientation: 'vertical',
     // pointerOutRelease: true,
@@ -97,7 +98,7 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
 });
 ```
 
-- `bounds` : An array of 2 values [bound0, bound1]
+- `bounds` : An array of 2 values `[bound0, bound1]`
 - `value` : Initial value between bound0 and bound1
     - Map this value to position of content under [event 'valuechange'](scroller.md#events)
 - `threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
@@ -105,6 +106,11 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
     - Set `false` to disable it.
 - `backDeceleration` : Deceleration of pull back when out of bounds.
     - Set `false` to disable it.
+- `dragReverse` :
+    - `false` : Dragging up will decrease value, dragging down will increase value. Default behavior.
+        - Use this mode when scrolling by position of game object.
+    - `true` : Dragging up will increase value, dragging down will decrease value.
+        - Use this mode when scrolling by camera.
 - `enable` : Set true to get dragging events.
 - `orientation` :
     - `'vertical'`,`'v'`, `'y'`, or `0` : dragging on vertical/y axis.
