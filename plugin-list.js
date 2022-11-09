@@ -233,6 +233,7 @@ module.exports = {
     'knob': './templates/ui/knob/Knob.js',
     'customshapes': './templates/ui/customshapes/CustomShapes.js',
     'customprogress': './templates/ui/customprogress/CustomProgress.js',
+    'colorpicker': './templates/ui/colorinput/colorpicker/ColorPicker.js',
     'chart': './templates/ui/chart/Chart.js',
     'dialog': './templates/ui/dialog/Dialog.js',
     'choices': './templates/ui/choices/Choices.js',

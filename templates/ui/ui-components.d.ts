@@ -22,6 +22,7 @@ import CustomProgress from './customprogress/CustomProgress';
 import TransitionImage from './transitionimage/TransitionImage';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
+import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
 import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 import NinePatch2 from './ninepatch2/NinePatch';
@@ -116,6 +117,7 @@ export {
     CanvasInput,
     FullWindowRectangle,
     Cover,
+    ColorPicker,
     Chart,
     CircularProgress,
     CircularProgressCanvas,
