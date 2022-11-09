@@ -31066,8 +31066,15 @@
       key: "setColor",
       value: function setColor(color) {
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
         paletteCanvas.setColor(color);
+        this.setMarkerPosition(color);
+        return this;
+      }
+    }, {
+      key: "setMarkerPosition",
+      value: function setMarkerPosition(color) {
+        var paletteCanvas = this.childrenMap.paletteCanvas;
+        var marker = this.childrenMap.marker;
         var localXY = paletteCanvas.colorToLocalPosition(color, true);
         LocalToWorld(paletteCanvas, localXY.x, localXY.y, marker);
         this.resetChildPositionState(marker);
@@ -31238,8 +31245,15 @@
       key: "setColor",
       value: function setColor(color) {
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
         paletteCanvas.setColor(color);
+        this.setMarkerPosition(color);
+        return this;
+      }
+    }, {
+      key: "setMarkerPosition",
+      value: function setMarkerPosition(color) {
+        var paletteCanvas = this.childrenMap.paletteCanvas;
+        var marker = this.childrenMap.marker;
         var localXY = paletteCanvas.colorToLocalPosition(color, true);
         LocalToWorld(paletteCanvas, localXY.x, localXY.y, marker);
         this.resetChildPositionState(marker);
@@ -31382,8 +31396,8 @@
           return this;
         }
         _get(_getPrototypeOf(ColorPicker.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
-        this.childrenMap.hPalette.setColor(this.value);
-        this.childrenMap.svPalette.setColor(this.value);
+        this.childrenMap.hPalette.setMarkerPosition(this.value);
+        this.childrenMap.svPalette.setMarkerPosition(this.value);
         return this;
       }
     }]);
