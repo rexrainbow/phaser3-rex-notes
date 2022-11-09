@@ -1,4 +1,4 @@
-import Sizer from '../sizer/Sizer.js';
+import Sizer from '../../sizer/Sizer.js';
 import { CreateHPalette, CreateSVPalette } from './methods/CreateHSVPalette.js';
 
 

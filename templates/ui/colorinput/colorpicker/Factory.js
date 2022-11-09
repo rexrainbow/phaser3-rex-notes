@@ -1,6 +1,6 @@
 import ColorPicker from './ColorPicker.js';
-import ObjectFactory from '../ObjectFactory.js';
-import SetValue from '../../../plugins/utils/object/SetValue.js';
+import ObjectFactory from '../../ObjectFactory.js';
+import SetValue from '../../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('colorPicker', function (config) {
     var gameObject = new ColorPicker(this.scene, config);

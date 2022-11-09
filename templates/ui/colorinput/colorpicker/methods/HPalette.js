@@ -1,6 +1,6 @@
-import OverlapSizer from '../../overlapsizer/OverlapSizer.js';
+import OverlapSizer from '../../../overlapsizer/OverlapSizer.js';
 import HPaletteCanvas from './HPaletteCanvas.js';
-import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
+import RoundRectangle from '../../../roundrectangle/RoundRectangle.js';
 import { LocalToWorld } from './Transform.js';
 
 class HPalette extends OverlapSizer {

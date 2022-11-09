@@ -1,5 +1,5 @@
-import Canvas from '../../canvas/Canvas.js';
-import { DrawSVPalette } from '../../../../plugins/utils/canvas/DrawHSVPalette.js';
+import Canvas from '../../../canvas/Canvas.js';
+import { DrawSVPalette } from '../../../../../plugins/utils/canvas/DrawHSVPalette.js';
 
 const Color = Phaser.Display.Color;
 const Percent = Phaser.Math.Percent;

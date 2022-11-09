@@ -1,6 +1,6 @@
-import Canvas from '../../canvas/Canvas.js';
-import GetOrientationMode from '../../utils/GetOrientationMode.js';
-import { DrawHPalette } from '../../../../plugins/utils/canvas/DrawHSVPalette.js';
+import Canvas from '../../../canvas/Canvas.js';
+import GetOrientationMode from '../../../utils/GetOrientationMode.js';
+import { DrawHPalette } from '../../../../../plugins/utils/canvas/DrawHSVPalette.js';
 
 const Color = Phaser.Display.Color;
 const Percent = Phaser.Math.Percent;

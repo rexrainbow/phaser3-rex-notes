@@ -1,6 +1,6 @@
-import OverlapSizer from '../../overlapsizer/OverlapSizer.js';
+import OverlapSizer from '../../../overlapsizer/OverlapSizer.js';
 import SVPaletteCanvas from './SVPaletteCanvas.js';
-import RoundRectangle from '../../roundrectangle/RoundRectangle.js';
+import RoundRectangle from '../../../roundrectangle/RoundRectangle.js';
 import { LocalToWorld } from './Transform.js';
 
 class SVPalette extends OverlapSizer {
