@@ -120,7 +120,6 @@ class ColorPicker extends Sizer {
         return this;
     }
 
-
     runLayout(parent, newWidth, newHeight) {
         if (this.ignoreLayout) {
             return this;
@@ -128,8 +127,8 @@ class ColorPicker extends Sizer {
 
         super.runLayout(parent, newWidth, newHeight);
 
-        this.childrenMap.hPalette.setColor(this.value);
-        this.childrenMap.svPalette.setColor(this.value);
+        this.childrenMap.hPalette.setMarkerPosition(this.value);
+        this.childrenMap.svPalette.setMarkerPosition(this.value);
 
         return this;
     }

@@ -68,9 +68,17 @@ class HPalette extends OverlapSizer {
 
     setColor(color) {
         var paletteCanvas = this.childrenMap.paletteCanvas;
-        var marker = this.childrenMap.marker;
 
         paletteCanvas.setColor(color);
+
+        this.setMarkerPosition(color);
+
+        return this;
+    }
+
+    setMarkerPosition(color) {
+        var paletteCanvas = this.childrenMap.paletteCanvas;
+        var marker = this.childrenMap.marker;
 
         var localXY = paletteCanvas.colorToLocalPosition(color, true);
         LocalToWorld(paletteCanvas, localXY.x, localXY.y, marker);
