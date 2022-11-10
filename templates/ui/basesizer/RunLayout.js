@@ -20,6 +20,8 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
     // Calculate parent height
     newHeight = this.resolveHeight(newHeight);
+    // The last chance of resolving size
+    this.postResolveSize(newWidth, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
 

@@ -11,6 +11,7 @@ import PaddingMethods from './PaddingMethods.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
 import ResolveHeight from './ResolveHeight.js';
+import PostResolveSize from './PostResolveSize.js';
 import GetChildWidth from './GetChildWidth.js';
 import GetChildHeight from './GetChildHeight.js';
 import GetExpandedChildWidth from './GetExpandedChildWidth.js';
@@ -53,6 +54,7 @@ var methods = {
     resolveWidth: ResolveWidth,
     resolveChildrenWidth: ResolveChildrenWidth,
     resolveHeight: ResolveHeight,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth,

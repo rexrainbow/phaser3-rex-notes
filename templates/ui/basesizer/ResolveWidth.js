@@ -1,4 +1,4 @@
-var ResolveWidth = function (width) {
+var ResolveWidth = function (width, forceResolving) {
     if (width === undefined) {
         width = Math.max(this.childrenWidth, this.minWidth);
     } else {
