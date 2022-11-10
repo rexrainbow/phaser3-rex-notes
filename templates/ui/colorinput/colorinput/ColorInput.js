@@ -3,6 +3,7 @@ import CreateSwatch from './methods/CreateSwatch.js';
 import CreateInputText from './methods/CreateInputText.js';
 import ColorStringToInteger from '../../../../plugins/utils/color/ColorStringToInteger.js';
 import GetHexColorString from '../../../../plugins/utils/color/GetHexColorString.js';
+import SetSwatchColor from './methods/SetSwatchColor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -81,7 +82,7 @@ class ColorInput extends Sizer {
         } else {
             value = Clamp(Math.floor(value), 0, 0xffffff);
         }
-        
+
         if (this._value === value) {
             return;
         }
@@ -89,7 +90,7 @@ class ColorInput extends Sizer {
         this._value = value;
 
         var swatch = this.childrenMap.swatch;
-        swatch.setFillStyle(value);
+        SetSwatchColor(swatch, value);
 
         var inputText = this.childrenMap.inputText;
         inputText.setText(GetHexColorString(value));
