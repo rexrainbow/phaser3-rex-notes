@@ -4323,7 +4323,7 @@
     return PoolManager;
   }();
 
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
@@ -4331,13 +4331,13 @@
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, DynamicText);
-      if (IsPlainObject$1(x)) {
+      if (IsPlainObject$2(x)) {
         config = x;
         x = GetValue$5(config, 'x', 0);
         y = GetValue$5(config, 'y', 0);
         fixedWidth = GetValue$5(config, 'width', 0);
         fixedHeight = GetValue$5(config, 'height', 0);
-      } else if (IsPlainObject$1(fixedWidth)) {
+      } else if (IsPlainObject$2(fixedWidth)) {
         config = fixedWidth;
         fixedWidth = GetValue$5(config, 'width', 0);
         fixedHeight = GetValue$5(config, 'height', 0);
@@ -5858,16 +5858,16 @@
     textObject.runWordWrap();
   };
 
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
     _inherits(CanvasInput, _DynamicText);
     var _super = _createSuper(CanvasInput);
     function CanvasInput(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, CanvasInput);
-      if (IsPlainObject(x)) {
+      if (IsPlainObject$1(x)) {
         config = x;
-      } else if (IsPlainObject(fixedWidth)) {
+      } else if (IsPlainObject$1(fixedWidth)) {
         config = fixedWidth;
       }
       if (config === undefined) {
@@ -6102,25 +6102,25 @@
     return text;
   };
 
-  function Factory (x, y, width, height, config) {
+  function CanvasInputFactory (x, y, width, height, config) {
     var gameObject = new CanvasInput(this.scene, x, y, width, height, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   }
 
-  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function Creator (config, addToScene) {
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
+  function CanvasInputCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
     }
     if (addToScene !== undefined) {
       config.add = addToScene;
     }
-    var width = GetAdvancedValue(config, 'width', undefined);
-    var height = GetAdvancedValue(config, 'height', undefined);
+    var width = GetAdvancedValue$1(config, 'width', undefined);
+    var height = GetAdvancedValue$1(config, 'height', undefined);
     var gameObject = new CanvasInput(this.scene, 0, 0, width, height, config);
-    BuildGameObject(this.scene, gameObject, config);
+    BuildGameObject$1(this.scene, gameObject, config);
     return gameObject;
   }
 
@@ -6185,6 +6185,54 @@
     return target;
   };
 
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+  var SingleIineInput = /*#__PURE__*/function (_CanvasInput) {
+    _inherits(SingleIineInput, _CanvasInput);
+    var _super = _createSuper(SingleIineInput);
+    function SingleIineInput(scene, x, y, fixedWidth, fixedHeight, config) {
+      var _this;
+      _classCallCheck(this, SingleIineInput);
+      if (IsPlainObject(x)) {
+        config = x;
+      } else if (IsPlainObject(fixedWidth)) {
+        config = fixedWidth;
+      }
+      if (config === undefined) {
+        config = {};
+      }
+      SetValue(config, 'wrap.vAlign', 'center');
+      SetValue(config, 'wrap.charWrap', true);
+      // SetValue(config, 'wrap.maxLines', 1);
+
+      _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
+      _this.type = 'rexSingleLineInput';
+      return _this;
+    }
+    return _createClass(SingleIineInput);
+  }(CanvasInput);
+
+  function SingleLineInputFactory (x, y, width, height, config) {
+    var gameObject = new SingleIineInput(this.scene, x, y, width, height, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject = Phaser.GameObjects.BuildGameObject;
+  function SingleLineInputCreator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+    var width = GetAdvancedValue(config, 'width', undefined);
+    var height = GetAdvancedValue(config, 'height', undefined);
+    var gameObject = new SingleIineInput(this.scene, 0, 0, width, height, config);
+    BuildGameObject(this.scene, gameObject, config);
+    return gameObject;
+  }
+
   var CanvasInputPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(CanvasInputPlugin, _Phaser$Plugins$BaseP);
     var _super = _createSuper(CanvasInputPlugin);
@@ -6194,7 +6242,8 @@
       _this = _super.call(this, pluginManager);
 
       //  Register our new Game Object type
-      pluginManager.registerGameObject('rexCanvasInput', Factory, Creator);
+      pluginManager.registerGameObject('rexCanvasInput', CanvasInputFactory, CanvasInputCreator);
+      pluginManager.registerGameObject('rexSingleLineInput', SingleLineInputFactory, SingleLineInputCreator);
       return _this;
     }
     _createClass(CanvasInputPlugin, [{
@@ -6207,6 +6256,7 @@
     return CanvasInputPlugin;
   }(Phaser.Plugins.BasePlugin);
   SetValue(window, 'RexPlugins.GameObjects.CanvasInput', CanvasInput);
+  SetValue(window, 'RexPlugins.GameObjects.SingleLineInput', SingleIineInput);
 
   return CanvasInputPlugin;
 

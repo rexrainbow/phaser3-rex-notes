@@ -1,6 +1,5 @@
 import phaser from 'phaser/src/phaser.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import ColorInput from '../../templates/ui/colorinput/colorinput/ColorInput.js';
 
 const COLOR_PRIMARY = 0x424242;
 const COLOR_LIGHT = 0x6d6d6d;
@@ -20,7 +19,7 @@ class Demo extends Phaser.Scene {
     create() {
         var ui = this.rexUI.add.sizer({
             x: 400, y: 300,
-            width: 200, height: 140,
+            width: 240, height: 100,
             orientation: 'y'
         })
             .add(
@@ -39,8 +38,26 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateColorInput = function (scene) {
-    return new ColorInput(scene, {
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 }
+    return scene.rexUI.add.colorInput({
+        inputText: {
+            background: {
+                color: COLOR_DARK
+            },
+            focusStyle: {
+                color: COLOR_PRIMARY,
+            },
+            style: {
+                backgroundBottomY: 4,
+                backgroundHeight: 18,
+            },
+            cursorStyle: {
+                color: 'black',
+                backgroundColor: 'white',
+            }
+        },
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+
+        value: 0x0000ff
     })
 }
 

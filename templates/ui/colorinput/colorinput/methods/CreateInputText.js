@@ -1,7 +1,9 @@
-import CanvasInput from '../../../canvasinput/CanvasInput.js';
+import SingleLineInput from '../../../singlelineinput/SingleLineInput.js';
+import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
 var CreateInputText = function (scene, config) {
-    var inputText = new CanvasInput(scene, config);
+    config = (config) ? DeepClone(config) : {};
+    var inputText = new SingleLineInput(scene, config);
     scene.add.existing(inputText);
     return inputText;
 }

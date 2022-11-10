@@ -2826,6 +2826,8 @@
     return height;
   };
 
+  var PostResolveSize = function PostResolveSize(width, height) {};
+
   var GetChildWidth = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -2993,6 +2995,8 @@
     }
     // Calculate parent height
     newHeight = this.resolveHeight(newHeight);
+    // The last chance of resolving size
+    this.postResolveSize(newWidth, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
     if (this.sizerEventsEnable) {
@@ -8452,6 +8456,7 @@
     resolveWidth: ResolveWidth$1,
     resolveChildrenWidth: ResolveChildrenWidth$1,
     resolveHeight: ResolveHeight$1,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$1,
@@ -8933,8 +8938,8 @@
     return width;
   };
 
-  var ResolveHeight = function ResolveHeight(parent, height) {
-    var height = ResolveHeight$1.call(this, parent, height);
+  var ResolveHeight = function ResolveHeight(height) {
+    var height = ResolveHeight$1.call(this, height);
 
     // Get proportionLength    
     if (this.proportionHeightLength === undefined) {

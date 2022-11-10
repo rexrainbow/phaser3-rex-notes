@@ -12949,6 +12949,8 @@
     return height;
   };
 
+  var PostResolveSize = function PostResolveSize(width, height) {};
+
   var GetChildWidth$1 = function GetChildWidth(child) {
     var childWidth;
     if (child.isRexSizer) {
@@ -13116,6 +13118,8 @@
     }
     // Calculate parent height
     newHeight = this.resolveHeight(newHeight);
+    // The last chance of resolving size
+    this.postResolveSize(newWidth, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
     if (this.sizerEventsEnable) {
@@ -18525,6 +18529,7 @@
     resolveWidth: ResolveWidth$2,
     resolveChildrenWidth: ResolveChildrenWidth$1,
     resolveHeight: ResolveHeight$2,
+    postResolveSize: PostResolveSize,
     getChildWidth: GetChildWidth$1,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth$3,
@@ -19082,8 +19087,8 @@
     return width;
   };
 
-  var ResolveHeight$1 = function ResolveHeight(parent, height) {
-    var height = ResolveHeight$2.call(this, parent, height);
+  var ResolveHeight$1 = function ResolveHeight(height) {
+    var height = ResolveHeight$2.call(this, height);
 
     // Get proportionLength
     if (this.proportionLength === undefined && this.orientation === 1) {
@@ -20202,8 +20207,8 @@
     return width;
   };
 
-  var ResolveHeight = function ResolveHeight(parent, height) {
-    var height = ResolveHeight$2.call(this, parent, height);
+  var ResolveHeight = function ResolveHeight(height) {
+    var height = ResolveHeight$2.call(this, height);
 
     // Get proportionLength    
     if (this.proportionHeightLength === undefined) {

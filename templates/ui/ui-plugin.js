@@ -26,6 +26,7 @@ import CustomProgressFactory from './customprogress/Factory.js';
 import TransitionImageFactory from './transitionimage/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
+import ColorInputFactory from './colorinput/colorinput/Factory.js';
 import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
