@@ -1,12 +1,10 @@
 import ResolveHeightBase from '../basesizer/ResolveHeight.js';
 
-var ResolveHeight = function (height, forceResolving) {
-    var height = ResolveHeightBase.call(this, height, forceResolving);
+var ResolveHeight = function (height) {
+    var height = ResolveHeightBase.call(this, height);
 
     // Get proportionLength    
-    if (forceResolving ||
-        (this.proportionHeightLength === undefined)
-    ) {
+    if (this.proportionHeightLength === undefined) {
         var totalRowProportions = this.totalRowProportions;
         if (totalRowProportions > 0) {
             var remainder = height - this.getChildrenHeight(false);

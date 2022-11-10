@@ -1,12 +1,10 @@
 import ResolveWidthBase from '../basesizer/ResolveWidth.js';
 
-var ResolveWidth = function (width, forceResolving) {
-    var width = ResolveWidthBase.call(this, width, forceResolving);
+var ResolveWidth = function (width) {
+    var width = ResolveWidthBase.call(this, width);
 
     // Get proportionLength
-    if (forceResolving ||
-        (this.proportionWidthLength === undefined)
-    ) {
+    if (this.proportionWidthLength === undefined) {
         var totalColumnProportions = this.totalColumnProportions;
         if (totalColumnProportions > 0) {
             var remainder = width - this.getChildrenWidth(false);

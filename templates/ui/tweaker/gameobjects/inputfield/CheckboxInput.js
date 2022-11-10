@@ -38,6 +38,8 @@ class CheckboxInput extends InputFiledBase {
         checkbox.resize(size, size);
 
         // Recalculate proportionLength
+        this.proportionLength = undefined;
+        this._childrenWidth = undefined;
         this.resolveWidth(width, true);
     }
 
