@@ -1,5 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import CreateHiddenTextEdit from './textedit/CreateHiddenTextEdit.js';
+import InjectDefaultConfig from './methods/InjectDefaultConfig.js';
 import ExtractByPrefix from '../../../utils/object/ExtractByPrefix.js';
 import RegisterCursorStyle from './methods/RegisterCursorStyle.js';
 import RegisterFocusStyle from './methods/RegisterFocusStyle.js';
@@ -20,6 +21,8 @@ class CanvasInput extends DynamicText {
         if (config === undefined) {
             config = {};
         }
+
+        InjectDefaultConfig(config);
 
         // Set text later
         var text = config.text;

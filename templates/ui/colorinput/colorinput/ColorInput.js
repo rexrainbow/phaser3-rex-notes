@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import CreateSwatch from './methods/CreateSwatch.js';
-import CreateInputText from './methods/CreateInputText.js';
+import CreateTextInput from './methods/CreateTextInput.js';
 import ColorStringToInteger from '../../../../plugins/utils/color/ColorStringToInteger.js';
 import GetHexColorString from '../../../../plugins/utils/color/GetHexColorString.js';
 import SetSwatchColor from './methods/SetSwatchColor.js';
@@ -20,7 +20,7 @@ class ColorInput extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var swatch = CreateSwatch(scene, GetValue(config, 'swatch'));
-        var inputText = CreateInputText(scene, GetValue(config, 'inputText'));
+        var inputText = CreateTextInput(scene, GetValue(config, 'inputText'));
 
         if (background) {
             this.addBackground(background);
