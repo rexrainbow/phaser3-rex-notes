@@ -10,14 +10,14 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/board-texture/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-colorpicker/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
     
     
       
-        <title>Tile texture - Notes of Phaser 3</title>
+        <title>Color picker - Notes of Phaser 3</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tile texture
+              Color picker
             
           </span>
         </div>
@@ -7101,12 +7101,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" checked>
       
       
       
@@ -7745,12 +7747,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15_16" type="checkbox" id="__nav_15_16" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15_16" type="checkbox" id="__nav_15_16" checked>
       
       
       
@@ -7771,11 +7775,151 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../ui-colorpicker/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Color picker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Color picker
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-colorpicker-object" class="md-nav__link">
+    Add colorPicker object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -7814,14 +7958,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16" type="checkbox" id="__nav_16" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_16" type="checkbox" id="__nav_16" >
       
       
       
@@ -8043,122 +8185,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Tile texture
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../board-texture/" class="md-nav__link">
         Tile texture
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav" aria-label="Install plugin">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-tile-texture" class="md-nav__link">
-    Create tile texture
-  </a>
-  
-    <nav class="md-nav" aria-label="Create tile texture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hexagon" class="md-nav__link">
-    Hexagon
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -8713,28 +8744,57 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#create-tile-texture" class="md-nav__link">
-    Create tile texture
-  </a>
-  
-    <nav class="md-nav" aria-label="Create tile texture">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#hexagon" class="md-nav__link">
-    Hexagon
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#add-colorpicker-object" class="md-nav__link">
+    Add colorPicker object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
   
 </li>
         
@@ -8755,33 +8815,33 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-texture.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-colorpicker.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-  <h1>Tile texture</h1>
+  <h1>Color picker</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Create <a href="canvas-texture">canvas-texture</a> of tile.</p>
+<p>Pick color value from H and SV palettes.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Help method of board</li>
+<li>Game object</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/LYmZZLm">Tile texture</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/JjZbQdM">Color picker</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-texture">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-colorPicker">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Create tile texture
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">createTileTexture</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
+<li>Add color-picker object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorPicker</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">colorPicker</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -8790,14 +8850,14 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">BoardPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">UIPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">BoardPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexBoard&#39;</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -8806,8 +8866,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Create tile texture
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">createTileTexture</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
+<li>Add color-picker object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorPicker</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">colorPicker</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -8816,34 +8876,186 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">CreateTileTexture</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">ColorPicker</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Create tile texture
-    <div class="highlight"><pre><span></span><code><span class="nx">CreateTileTexture</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
+<li>Add color-picker object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorPicker</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">ColorPicker</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">colorPicker</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h4 id="create-tile-texture">Create tile texture<a class="headerlink" href="#create-tile-texture" title="Permanent link">&para;</a></h4>
-<h5 id="hexagon">Hexagon<a class="headerlink" href="#hexagon" title="Permanent link">&para;</a></h5>
-<div class="highlight"><pre><span></span><code><span class="nx">CreateTileTexture</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
-<span class="c1">// CreateTileTexture(board, key, fillStyle, strokeStyle, lineWidth, overlapGrid, lineJoin);</span>
+<h3 id="add-colorpicker-object">Add colorPicker object<a class="headerlink" href="#add-colorpicker-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorPicker</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">colorPicker</span><span class="p">({</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// anchor: undefined,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
+
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
+    <span class="nx">hPalette</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">position</span><span class="o">:</span> <span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+        <span class="nx">size</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>       
+    <span class="p">},</span>
+
+    <span class="nx">svPalette</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">knob</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
+    <span class="nx">valuechangeCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">value</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+        <span class="nx">icon</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// sizerEvents: false,</span>
+    <span class="c1">// enableLayer: false,    </span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>board</code> : <a href="../board/">Board object</a>.</li>
-<li><code>fillStyle</code> : Fill color of tile texture.<ul>
-<li><code>undefined</code> : Don't fill tile texture.</li>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
+<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
+<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
+<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
 </ul>
 </li>
-<li><code>strokeStyle</code>, <code>lineWidth</code> : Stroke color, stroke line width of tile texture.<ul>
-<li><code>undefined</code> : Don't stroke tile texture.</li>
+<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
 </ul>
 </li>
-<li><code>overlapGrid</code> : <ul>
-<li><code>true</code> : Overlap grid. i.e. Grid width = lineWidth. Default behavior.</li>
-<li><code>false</code> : Don't overlap grid. i.e. Grid width = 2 * lineWidth.</li>
+<li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
+<li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
 </ul>
 </li>
-<li><code>lineJoin</code> : Join style of stroke lines. <code>'round'</code>, <code>'bevel'</code> and <code>'miter'</code>. Default is <code>'miter'</code>.</li>
+<li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly. </li>
 </ul>
+</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of colorPicker.</li>
+<li><code>hPalette</code> : Configuration of h-palette. H-palette is rendered on a <a href="../canvas/">canvas game object</a>.<ul>
+<li><code>hPalette.position</code> : Position of h-palette.<ul>
+<li><code>'bottom'</code> or <code>0</code> : Place h-palette at bottom side of sv-palette.</li>
+<li><code>'left'</code> or <code>1</code> : Place h-palette at left side of sv-palette.</li>
+<li><code>'top'</code> or <code>2</code> : Place h-palette at top side of sv-palette.</li>
+<li><code>'right'</code> or <code>3</code> : Place h-palette at right side of sv-palette.</li>
+</ul>
+</li>
+<li><code>hPalette.size</code> : Width (if position of h-palette is at left or right side) or height (if position of h-palette is at top or bottom side) of h-palette.</li>
+<li><code>hPalette.width</code> : Width (if position of h-palette is at left or right side) of h-palette.</li>
+<li><code>hPalette.height</code> : Height (if position of h-palette is at top or bottom side) of h-palette.</li>
+</ul>
+</li>
+<li><code>svPalette</code> : Configuration of sv-palette. SV-palette is rendered on a <a href="../canvas/">canvas game object</a>.<ul>
+<li><code>svPalette.width</code> : Width of sv-palette.</li>
+<li><code>svPalette.height</code> : Height of sv-palette.</li>
+</ul>
+</li>
+<li><code>valuechangeCallback</code> : callback function when value changed.</li>
+<li><code>value</code> : Initial color value (0 ~ 0xffffff).</li>
+<li><code>space</code> : Pads spaces.<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.item</code> : Space between sv-palette and h-palette.</li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this game object.</li>
+<li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
+<li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+<li><code>enableLayer</code> : <ul>
+<li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyColorPicker</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ColorPicker</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>Create instance
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorPicker</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyColorPicker</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">colorPicker</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</code></pre></div>
+<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>Background game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">colorPicker</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>H-palette game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">colorPicker</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;hPalette&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>SV-palette game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">textObject</span> <span class="o">=</span> <span class="nx">colorPicker</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;svPalette&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Get by name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">colorPicker</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = colorPicker.getElement(&#39;#&#39; + name, recursive);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">colorPicker</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = colorPicker.getByName(name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
+</ul>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<p>Change value will also change the position of marker on H-palette and SV-palette</p>
+<ul>
+<li>Get color value
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">colorPicker</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="c1">// var value = colorPicker.color;</span>
+</code></pre></div></li>
+<li>Set color value
+    <div class="highlight"><pre><span></span><code><span class="nx">colorPicker</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// colorPicker.setColor(value);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">colorPicker</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="nx">colorPicker</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On value changed
+    <div class="highlight"><pre><span></span><code><span class="nx">colorPicker</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">colorPicker</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
 
               
             </article>
@@ -8857,7 +9069,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../board-hexagonmap/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hexagon map" rel="prev">
+        <a href="../ui-holygrail/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Holy grail" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -8866,20 +9078,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Hexagon map
+              Holy grail
             </div>
           </div>
         </a>
       
       
         
-        <a href="../board-miniboard/" class="md-footer__link md-footer__link--next" aria-label="Next: Mini board" rel="next">
+        <a href="../ui-chart/" class="md-footer__link md-footer__link--next" aria-label="Next: Chart" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Mini board
+              Chart
             </div>
           </div>
           <div class="md-footer__button md-icon">
