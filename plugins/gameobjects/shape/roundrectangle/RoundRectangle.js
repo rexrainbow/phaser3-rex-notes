@@ -10,7 +10,7 @@ const Earcut = Phaser.Geom.Polygon.Earcut;
 
 class RoundRectangle extends Shape {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-        var strokeColor, strokeAlpha, strokeWidth;
+        var strokeColor, strokeAlpha, strokeWidth, shapeType;
         if (IsPlainObject(x)) {
             var config = x;
 
@@ -25,15 +25,27 @@ class RoundRectangle extends Shape {
             strokeColor = config.strokeColor;
             strokeAlpha = config.strokeAlpha;
             strokeWidth = config.strokeWidth;
+
+            shapeType = config.shape;
         }
 
         if (radiusConfig === undefined) { radiusConfig = 0; }
+        if (shapeType === undefined) { shapeType = 0; }
 
         var geom = new GeomRoundRectangle();  // Configurate it later
         super(scene, 'rexRoundRectangleShape', geom);
 
-        var radius = GetValue(radiusConfig, 'radius', radiusConfig);
-        geom.setTo(0, 0, width, height, radius);
+        this.setShapeType(shapeType);
+
+        if (this.shapeType === 0) {
+            var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+            geom.setTo(0, 0, width, height, radius);
+        } else {
+            if (width === undefined) { width = 0; }
+            if (height === undefined) { height = width; }
+            var radius = { x: (width / 2), y: (height / 2) };
+            geom.setTo(0, 0, width, height, radius);
+        }
 
         var iteration = GetValue(radiusConfig, 'iteration', undefined);
         this.setIteration(iteration);
@@ -110,6 +122,15 @@ class RoundRectangle extends Shape {
         return this;
     }
 
+    setShapeType(shapeType) {
+        if (typeof (shapeType) === 'string') {
+            shapeType = ShapeTypeMap[shapeType];
+        }
+
+        this.shapeType = shapeType;
+        return this;
+    }
+
     get width() {
         return this.geom.width;
     }
@@ -133,6 +154,14 @@ class RoundRectangle extends Shape {
             return this;
         }
         this.geom.setSize(width, height);
+
+        if (this.shapeType === 1) {
+            this.setRadius({
+                x: (width / 2),
+                y: (height / 2)
+            })
+        }
+
         this.updateDisplayOrigin();
         this.dirty = true;
 
@@ -146,34 +175,6 @@ class RoundRectangle extends Shape {
 
     resize(width, height) {
         this.setSize(width, height);
-        return this;
-    }
-
-    get iteration() {
-        return this._iteration;
-    }
-
-    set iteration(value) {
-        // Set iteration first time
-        if (this._iteration === undefined) {
-            this._iteration = value;
-            return;
-        }
-
-        // Change iteration value
-        if (this._iteration === value) {
-            return;
-        }
-
-        this._iteration = value;
-        this.dirty = true;
-    }
-
-    setIteration(iteration) {
-        if (iteration === undefined) {
-            iteration = 6;
-        }
-        this.iteration = iteration;
         return this;
     }
 
@@ -274,10 +275,44 @@ class RoundRectangle extends Shape {
     setCornerRadius(value) {
         return this.setRadius(value);
     }
+
+    get iteration() {
+        return this._iteration;
+    }
+
+    set iteration(value) {
+        // Set iteration first time
+        if (this._iteration === undefined) {
+            this._iteration = value;
+            return;
+        }
+
+        // Change iteration value
+        if (this._iteration === value) {
+            return;
+        }
+
+        this._iteration = value;
+        this.dirty = true;
+    }
+
+    setIteration(iteration) {
+        if (iteration === undefined) {
+            iteration = 6;
+        }
+        this.iteration = iteration;
+        return this;
+    }
+
 }
 
 var IsArcCorner = function (radius) {
     return ((radius.x !== 0) && (radius.y !== 0));
+}
+
+const ShapeTypeMap = {
+    rectangle: 0,
+    circle: 1
 }
 
 
