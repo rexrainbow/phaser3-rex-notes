@@ -2,6 +2,12 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class RoundRectangle {
     constructor(x, y, width, height, radiusConfig) {
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = x; }
+        if (width === undefined) { width = 0; }
+        if (height === undefined) { height = 0; }
+        if (radiusConfig === undefined) { radiusConfig = 0; }
+
         this.cornerRadius = {};
         this._width = 0;
         this._height = 0;
@@ -16,12 +22,6 @@ class RoundRectangle {
     }
 
     setPosition(x, y) {
-        if (x === undefined) {
-            x = 0;
-        }
-        if (y === undefined) {
-            y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
