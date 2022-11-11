@@ -157,8 +157,8 @@ var txt = scene.add.rexCanvasInput({
         wrapWidth: undefined,
         letterSpacing: 0,
         hAlign: 0,
-        vAlign: 0,
-        charWrap: false
+        vAlign: 'center',  // For single line text input
+        charWrap: true,    // For single line text input
     },
     
     // Parameters of hidden-text-editor   

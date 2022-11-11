@@ -4323,7 +4323,7 @@
     return PoolManager;
   }();
 
-  var IsPlainObject$2 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
   var DynamicText = /*#__PURE__*/function (_Canvas) {
     _inherits(DynamicText, _Canvas);
@@ -4331,13 +4331,13 @@
     function DynamicText(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, DynamicText);
-      if (IsPlainObject$2(x)) {
+      if (IsPlainObject$1(x)) {
         config = x;
         x = GetValue$5(config, 'x', 0);
         y = GetValue$5(config, 'y', 0);
         fixedWidth = GetValue$5(config, 'width', 0);
         fixedHeight = GetValue$5(config, 'height', 0);
-      } else if (IsPlainObject$2(fixedWidth)) {
+      } else if (IsPlainObject$1(fixedWidth)) {
         config = fixedWidth;
         fixedWidth = GetValue$5(config, 'width', 0);
         fixedHeight = GetValue$5(config, 'height', 0);
@@ -5315,6 +5315,101 @@
     return new HiddenTextEdit(parent, config);
   };
 
+  var HasValue = function HasValue(source, key) {
+    if (!source || typeof source === 'number') {
+      return false;
+    } else if (source.hasOwnProperty(key)) {
+      return true;
+    } else if (key.indexOf('.') !== -1) {
+      var keys = key.split('.');
+      var parent = source;
+
+      //  Use for loop here so we can break early
+      for (var i = 0; i < keys.length; i++) {
+        if (parent.hasOwnProperty(keys[i])) {
+          parent = parent[keys[i]];
+        } else {
+          //  Can't go any further
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  var IsInValidKey = function IsInValidKey(keys) {
+    return keys == null || keys === '' || keys.length === 0;
+  };
+  var GetEntry = function GetEntry(target, keys, defaultEntry) {
+    var entry = target;
+    if (IsInValidKey(keys)) ; else {
+      if (typeof keys === 'string') {
+        keys = keys.split('.');
+      }
+      var key;
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        key = keys[i];
+        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
+          var newEntry;
+          if (i === cnt - 1) {
+            if (defaultEntry === undefined) {
+              newEntry = {};
+            } else {
+              newEntry = defaultEntry;
+            }
+          } else {
+            newEntry = {};
+          }
+          entry[key] = newEntry;
+        }
+        entry = entry[key];
+      }
+    }
+    return entry;
+  };
+  var SetValue = function SetValue(target, keys, value, delimiter) {
+    if (delimiter === undefined) {
+      delimiter = '.';
+    }
+
+    // no object
+    if (_typeof(target) !== 'object') {
+      return;
+    }
+
+    // invalid key
+    else if (IsInValidKey(keys)) {
+      // don't erase target
+      if (value == null) {
+        return;
+      }
+      // set target to another object
+      else if (_typeof(value) === 'object') {
+        target = value;
+      }
+    } else {
+      if (typeof keys === 'string') {
+        keys = keys.split(delimiter);
+      }
+      var lastKey = keys.pop();
+      var entry = GetEntry(target, keys);
+      entry[lastKey] = value;
+    }
+    return target;
+  };
+
+  var InjectDefaultConfig = function InjectDefaultConfig(config) {
+    if (!HasValue(config, 'wrap.vAlign')) {
+      SetValue(config, 'wrap.vAlign', 'center');
+    }
+    if (!HasValue(config, 'wrap.charWrap')) {
+      SetValue(config, 'wrap.charWrap', true);
+    }
+    return config;
+  };
+
   var ExtractByPrefix = function ExtractByPrefix(obj, prefix, delimiter, out) {
     if (delimiter === undefined) {
       delimiter = '.';
@@ -5858,21 +5953,22 @@
     textObject.runWordWrap();
   };
 
-  var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
+  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var CanvasInput = /*#__PURE__*/function (_DynamicText) {
     _inherits(CanvasInput, _DynamicText);
     var _super = _createSuper(CanvasInput);
     function CanvasInput(scene, x, y, fixedWidth, fixedHeight, config) {
       var _this;
       _classCallCheck(this, CanvasInput);
-      if (IsPlainObject$1(x)) {
+      if (IsPlainObject(x)) {
         config = x;
-      } else if (IsPlainObject$1(fixedWidth)) {
+      } else if (IsPlainObject(fixedWidth)) {
         config = fixedWidth;
       }
       if (config === undefined) {
         config = {};
       }
+      InjectDefaultConfig(config);
 
       // Set text later
       var text = config.text;
@@ -6108,118 +6204,9 @@
     return gameObject;
   }
 
-  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject$1 = Phaser.GameObjects.BuildGameObject;
-  function CanvasInputCreator (config, addToScene) {
-    if (config === undefined) {
-      config = {};
-    }
-    if (addToScene !== undefined) {
-      config.add = addToScene;
-    }
-    var width = GetAdvancedValue$1(config, 'width', undefined);
-    var height = GetAdvancedValue$1(config, 'height', undefined);
-    var gameObject = new CanvasInput(this.scene, 0, 0, width, height, config);
-    BuildGameObject$1(this.scene, gameObject, config);
-    return gameObject;
-  }
-
-  var IsInValidKey = function IsInValidKey(keys) {
-    return keys == null || keys === '' || keys.length === 0;
-  };
-  var GetEntry = function GetEntry(target, keys, defaultEntry) {
-    var entry = target;
-    if (IsInValidKey(keys)) ; else {
-      if (typeof keys === 'string') {
-        keys = keys.split('.');
-      }
-      var key;
-      for (var i = 0, cnt = keys.length; i < cnt; i++) {
-        key = keys[i];
-        if (entry[key] == null || _typeof(entry[key]) !== 'object') {
-          var newEntry;
-          if (i === cnt - 1) {
-            if (defaultEntry === undefined) {
-              newEntry = {};
-            } else {
-              newEntry = defaultEntry;
-            }
-          } else {
-            newEntry = {};
-          }
-          entry[key] = newEntry;
-        }
-        entry = entry[key];
-      }
-    }
-    return entry;
-  };
-  var SetValue = function SetValue(target, keys, value, delimiter) {
-    if (delimiter === undefined) {
-      delimiter = '.';
-    }
-
-    // no object
-    if (_typeof(target) !== 'object') {
-      return;
-    }
-
-    // invalid key
-    else if (IsInValidKey(keys)) {
-      // don't erase target
-      if (value == null) {
-        return;
-      }
-      // set target to another object
-      else if (_typeof(value) === 'object') {
-        target = value;
-      }
-    } else {
-      if (typeof keys === 'string') {
-        keys = keys.split(delimiter);
-      }
-      var lastKey = keys.pop();
-      var entry = GetEntry(target, keys);
-      entry[lastKey] = value;
-    }
-    return target;
-  };
-
-  var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var SingleIineInput = /*#__PURE__*/function (_CanvasInput) {
-    _inherits(SingleIineInput, _CanvasInput);
-    var _super = _createSuper(SingleIineInput);
-    function SingleIineInput(scene, x, y, fixedWidth, fixedHeight, config) {
-      var _this;
-      _classCallCheck(this, SingleIineInput);
-      if (IsPlainObject(x)) {
-        config = x;
-      } else if (IsPlainObject(fixedWidth)) {
-        config = fixedWidth;
-      }
-      if (config === undefined) {
-        config = {};
-      }
-      SetValue(config, 'wrap.vAlign', 'center');
-      SetValue(config, 'wrap.charWrap', true);
-      // SetValue(config, 'wrap.maxLines', 1);
-
-      _this = _super.call(this, scene, x, y, fixedWidth, fixedHeight, config);
-      _this.type = 'rexSingleLineInput';
-      return _this;
-    }
-    return _createClass(SingleIineInput);
-  }(CanvasInput);
-
-  function SingleLineInputFactory (x, y, width, height, config) {
-    var gameObject = new SingleIineInput(this.scene, x, y, width, height, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  }
-
   var GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
   var BuildGameObject = Phaser.GameObjects.BuildGameObject;
-  function SingleLineInputCreator (config, addToScene) {
+  function CanvasInputCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
     }
@@ -6228,7 +6215,7 @@
     }
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', undefined);
-    var gameObject = new SingleIineInput(this.scene, 0, 0, width, height, config);
+    var gameObject = new CanvasInput(this.scene, 0, 0, width, height, config);
     BuildGameObject(this.scene, gameObject, config);
     return gameObject;
   }
@@ -6243,7 +6230,6 @@
 
       //  Register our new Game Object type
       pluginManager.registerGameObject('rexCanvasInput', CanvasInputFactory, CanvasInputCreator);
-      pluginManager.registerGameObject('rexSingleLineInput', SingleLineInputFactory, SingleLineInputCreator);
       return _this;
     }
     _createClass(CanvasInputPlugin, [{
@@ -6256,7 +6242,6 @@
     return CanvasInputPlugin;
   }(Phaser.Plugins.BasePlugin);
   SetValue(window, 'RexPlugins.GameObjects.CanvasInput', CanvasInput);
-  SetValue(window, 'RexPlugins.GameObjects.SingleLineInput', SingleIineInput);
 
   return CanvasInputPlugin;
 
