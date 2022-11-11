@@ -38,14 +38,12 @@ class Demo extends Phaser.Scene {
                 item: 10,
             },
 
+            valuechangeCallback(value) {
+                rect.setFillStyle(value);
+            },
             value: Phaser.Math.Between(0, 0x1000000)
         })
-            .on('valuechange', function (value) {
-                rect.setFillStyle(value)
-            })
             .layout()
-
-        rect.setFillStyle(colorPicker.value);
     }
 
     update() { }

@@ -105,6 +105,7 @@ var knob = scene.rexUI.add.knob({
     },
     valuechangeCallback: function(newValue, oldValue, knob) {
     },
+    valuechangeCallbackScope: undefined,
 
     space: {
         left: 0,

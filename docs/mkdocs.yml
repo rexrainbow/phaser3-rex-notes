@@ -411,6 +411,8 @@ nav:
     - Toast: ui-toast.md    
     - Tabs: ui-tabs.md        
     - Holy grail: ui-holygrail.md
+    - Color input:
+        - Color picker: ui-colorpicker.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md

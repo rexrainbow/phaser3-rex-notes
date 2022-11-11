@@ -1944,6 +1944,21 @@
   var RoundRectangle$4 = /*#__PURE__*/function () {
     function RoundRectangle(x, y, width, height, radiusConfig) {
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = x;
+      }
+      if (width === undefined) {
+        width = 0;
+      }
+      if (height === undefined) {
+        height = 0;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       this.cornerRadius = {};
       this._width = 0;
       this._height = 0;
@@ -1960,12 +1975,6 @@
     }, {
       key: "setPosition",
       value: function setPosition(x, y) {
-        if (x === undefined) {
-          x = 0;
-        }
-        if (y === undefined) {
-          y = x;
-        }
         this.x = x;
         this.y = y;
         return this;
@@ -2304,7 +2313,7 @@
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
       var _this;
       _classCallCheck(this, RoundRectangle);
-      var strokeColor, strokeAlpha, strokeWidth;
+      var strokeColor, strokeAlpha, strokeWidth, shapeType;
       if (IsPlainObject$H(x)) {
         var config = x;
         x = config.x;
@@ -2317,14 +2326,33 @@
         strokeColor = config.strokeColor;
         strokeAlpha = config.strokeAlpha;
         strokeWidth = config.strokeWidth;
+        shapeType = config.shape;
       }
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
+      if (shapeType === undefined) {
+        shapeType = 0;
+      }
       var geom = new RoundRectangle$4(); // Configurate it later
       _this = _super.call(this, scene, 'rexRoundRectangleShape', geom);
-      var radius = GetValue$2B(radiusConfig, 'radius', radiusConfig);
-      geom.setTo(0, 0, width, height, radius);
+      _this.setShapeType(shapeType);
+      if (_this.shapeType === 0) {
+        var radius = GetValue$2B(radiusConfig, 'radius', radiusConfig);
+        geom.setTo(0, 0, width, height, radius);
+      } else {
+        if (width === undefined) {
+          width = 0;
+        }
+        if (height === undefined) {
+          height = width;
+        }
+        var radius = {
+          x: width / 2,
+          y: height / 2
+        };
+        geom.setTo(0, 0, width, height, radius);
+      }
       var iteration = GetValue$2B(radiusConfig, 'iteration', undefined);
       _this.setIteration(iteration);
       _this.setPosition(x, y);
@@ -2397,6 +2425,15 @@
         return this;
       }
     }, {
+      key: "setShapeType",
+      value: function setShapeType(shapeType) {
+        if (typeof shapeType === 'string') {
+          shapeType = ShapeTypeMap[shapeType];
+        }
+        this.shapeType = shapeType;
+        return this;
+      }
+    }, {
       key: "width",
       get: function get() {
         return this.geom.width;
@@ -2423,6 +2460,12 @@
           return this;
         }
         this.geom.setSize(width, height);
+        if (this.shapeType === 1) {
+          this.setRadius({
+            x: width / 2,
+            y: height / 2
+          });
+        }
         this.updateDisplayOrigin();
         this.dirty = true;
         var input = this.input;
@@ -2436,34 +2479,6 @@
       key: "resize",
       value: function resize(width, height) {
         this.setSize(width, height);
-        return this;
-      }
-    }, {
-      key: "iteration",
-      get: function get() {
-        return this._iteration;
-      },
-      set: function set(value) {
-        // Set iteration first time
-        if (this._iteration === undefined) {
-          this._iteration = value;
-          return;
-        }
-
-        // Change iteration value
-        if (this._iteration === value) {
-          return;
-        }
-        this._iteration = value;
-        this.dirty = true;
-      }
-    }, {
-      key: "setIteration",
-      value: function setIteration(iteration) {
-        if (iteration === undefined) {
-          iteration = 6;
-        }
-        this.iteration = iteration;
         return this;
       }
     }, {
@@ -2570,11 +2585,43 @@
       value: function setCornerRadius(value) {
         return this.setRadius(value);
       }
+    }, {
+      key: "iteration",
+      get: function get() {
+        return this._iteration;
+      },
+      set: function set(value) {
+        // Set iteration first time
+        if (this._iteration === undefined) {
+          this._iteration = value;
+          return;
+        }
+
+        // Change iteration value
+        if (this._iteration === value) {
+          return;
+        }
+        this._iteration = value;
+        this.dirty = true;
+      }
+    }, {
+      key: "setIteration",
+      value: function setIteration(iteration) {
+        if (iteration === undefined) {
+          iteration = 6;
+        }
+        this.iteration = iteration;
+        return this;
+      }
     }]);
     return RoundRectangle;
   }(Shape$1);
   var IsArcCorner = function IsArcCorner(radius) {
     return radius.x !== 0 && radius.y !== 0;
+  };
+  var ShapeTypeMap = {
+    rectangle: 0,
+    circle: 1
   };
   Object.assign(RoundRectangle$3.prototype, Render$3);
 
@@ -30894,6 +30941,7 @@
     }
     var swatch = new RoundRectangle$3(scene, config);
     scene.add.existing(swatch);
+    swatch.expandSquare = true;
     return swatch;
   };
 
@@ -30999,19 +31047,23 @@
       key: "preLayout",
       value: function preLayout() {
         var swatch = this.childrenMap.swatch;
-        swatch.resize(1, 1);
+        if (swatch.expandSquare) {
+          swatch.resize(1, 1);
+        }
       }
     }, {
       key: "postResolveSize",
       value: function postResolveSize(width, height) {
         var swatch = this.childrenMap.swatch;
-        var size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
-        swatch.resize(size, size);
+        if (swatch.expandSquare) {
+          var size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
+          swatch.resize(size, size);
 
-        // Recalculate proportionLength
-        this.proportionLength = undefined;
-        this._childrenWidth = undefined;
-        this.resolveWidth(width, true);
+          // Recalculate proportionLength
+          this.proportionLength = undefined;
+          this._childrenWidth = undefined;
+          this.resolveWidth(width, true);
+        }
       }
     }, {
       key: "value",
@@ -31610,6 +31662,11 @@
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('hPalette', hPalette);
       _this.addChildrenMap('svPalette', svPalette);
+      var callback = GetValue$1a(config, 'valuechangeCallback', null);
+      if (callback !== null) {
+        var scope = GetValue$1a(config, 'valuechangeCallbackScope', undefined);
+        _this.on('valuechange', callback, scope);
+      }
       _this.setValue(GetValue$1a(config, 'value', 0xffffff));
       return _this;
     }
@@ -31622,11 +31679,12 @@
         if (this._value === value) {
           return;
         }
+        var oldValue = this._value;
         this._value = value;
         if (!this.freezePalettes) {
           this.updatePalettes();
         }
-        this.emit('valuechange', this._value);
+        this.emit('valuechange', value, oldValue, this);
       }
     }, {
       key: "setValue",

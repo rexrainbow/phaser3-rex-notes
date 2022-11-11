@@ -88,6 +88,12 @@ class ColorPicker extends Sizer {
         this.addChildrenMap('hPalette', hPalette);
         this.addChildrenMap('svPalette', svPalette);
 
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.on('valuechange', callback, scope);
+        }
+
         this.setValue(GetValue(config, 'value', 0xffffff));
     }
 
@@ -100,13 +106,14 @@ class ColorPicker extends Sizer {
             return;
         }
 
+        var oldValue = this._value;
         this._value = value;
 
         if (!this.freezePalettes) {
             this.updatePalettes();
         }
 
-        this.emit('valuechange', this._value);
+        this.emit('valuechange', value, oldValue, this);
     }
 
     setValue(value, freezePalettes) {
