@@ -8,6 +8,7 @@ var CreateSwatch = function (scene, config) {
 
     var swatch = new RoundRectangle(scene, config);
     scene.add.existing(swatch);
+    swatch.expandSquare = true;
     return swatch;
 }
 

@@ -51,20 +51,25 @@ class ColorInput extends Sizer {
 
     preLayout() {
         var swatch = this.childrenMap.swatch;
-        swatch.resize(1, 1);
+
+        if (swatch.expandSquare) {
+            swatch.resize(1, 1);
+        }
     }
 
     postResolveSize(width, height) {
         var swatch = this.childrenMap.swatch;
-        var size = height
-            - this.getInnerPadding('top') - this.getInnerPadding('bottom')
-            - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
-        swatch.resize(size, size);
+        if (swatch.expandSquare) {
+            var size = height
+                - this.getInnerPadding('top') - this.getInnerPadding('bottom')
+                - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
+            swatch.resize(size, size);
 
-        // Recalculate proportionLength
-        this.proportionLength = undefined;
-        this._childrenWidth = undefined;
-        this.resolveWidth(width, true);
+            // Recalculate proportionLength
+            this.proportionLength = undefined;
+            this._childrenWidth = undefined;
+            this.resolveWidth(width, true);
+        }
     }
 
     get value() {
