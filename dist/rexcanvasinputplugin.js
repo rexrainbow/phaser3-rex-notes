@@ -6057,14 +6057,8 @@
         if (this._text === value) {
           return;
         }
-        if (value === '') {
-          this.popChild(this.lastInsertCursor);
-          this.removeChildren();
-          _get(_getPrototypeOf(CanvasInput.prototype), "addChild", this).call(this, this.lastInsertCursor, 0);
-        } else {
-          this.moveChildToLast(this.lastInsertCursor);
-          SetText(this, value);
-        }
+        this.moveChildToLast(this.lastInsertCursor);
+        SetText(this, value);
         this._text = value;
       }
     }, {

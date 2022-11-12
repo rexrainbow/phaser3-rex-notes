@@ -113,14 +113,8 @@ class CanvasInput extends DynamicText {
             return;
         }
 
-        if (value === '') {
-            this.popChild(this.lastInsertCursor);
-            this.removeChildren();
-            super.addChild(this.lastInsertCursor, 0);
-        } else {
-            this.moveChildToLast(this.lastInsertCursor);
-            SetText(this, value);
-        }
+        this.moveChildToLast(this.lastInsertCursor);
+        SetText(this, value);
 
         this._text = value;
     }
