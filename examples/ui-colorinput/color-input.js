@@ -14,50 +14,85 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('img', './assets/images/flash-on.png');
     }
 
     create() {
         var ui = this.rexUI.add.sizer({
             x: 400, y: 300,
-            width: 240, height: 100,
+            width: 240,
             orientation: 'y'
         })
+            .addBackground(
+                this.rexUI.add.roundRectangle({ strokeColor: COLOR_LIGHT })
+            )
             .add(
-                CreateColorInput(this),
+                CreateColorInput0(this),
                 { proportion: 1, expand: true }
             )
             .add(
-                CreateColorInput(this),
+                CreateColorInput1(this),
+                { proportion: 1, expand: true }
+            )
+            .add(
+                CreateColorInput2(this),
                 { proportion: 1, expand: true }
             )
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000)
+        //.drawBounds(this.add.graphics(), 0xff0000)
     }
 
     update() { }
 }
 
-var CreateColorInput = function (scene) {
+const InputTextConfig = {
+    background: {
+        color: COLOR_DARK
+    },
+    focusStyle: {
+        color: COLOR_PRIMARY,
+    },
+    style: {
+        backgroundBottomY: 4,
+        backgroundHeight: 18,
+    },
+    cursorStyle: {
+        color: 'black',
+        backgroundColor: 'white',
+    }
+}
+
+var CreateColorInput0 = function (scene) {
     return scene.rexUI.add.colorInput({
-        inputText: {
-            background: {
-                color: COLOR_DARK
-            },
-            focusStyle: {
-                color: COLOR_PRIMARY,
-            },
-            style: {
-                backgroundBottomY: 4,
-                backgroundHeight: 18,
-            },
-            cursorStyle: {
-                color: 'black',
-                backgroundColor: 'white',
-            }
-        },
+        height: 60,
+        inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
-        value: 0x0000ff
+        value: Phaser.Math.Between(0, 0x1000000)
+    })
+}
+
+var CreateColorInput1 = function (scene) {
+    return scene.rexUI.add.colorInput({
+        height: 60,
+        swatch: {
+            shape: 'circle'
+        },
+        inputText: InputTextConfig,
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+
+        value: Phaser.Math.Between(0, 0x1000000)
+    })
+}
+
+var CreateColorInput2 = function (scene) {
+    return scene.rexUI.add.colorInput({
+        height: 60,
+        swatch: scene.add.image(0, 0, 'img'),
+        inputText: InputTextConfig,
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+
+        value: Phaser.Math.Between(0, 0x1000000)
     })
 }
 
