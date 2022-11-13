@@ -8110,6 +8110,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ring-chess" class="md-nav__link">
+    Ring -&gt; chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shape-tile-position" class="md-nav__link">
     Shape -&gt; tile position
   </a>
@@ -9328,6 +9335,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ring-chess" class="md-nav__link">
+    Ring -&gt; chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shape-tile-position" class="md-nav__link">
     Shape -&gt; tile position
   </a>
@@ -10069,7 +10083,7 @@
 <li><code>radius</code> : Radius of the ring.</li>
 </ul>
 </li>
-<li>Get array of tile position within a filled ring.
+<li>Get array of tile position within a filled ring. <code>centerTileXY</code> will be included.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">nearToFar</span><span class="p">);</span>
 <span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, out);</span>
@@ -10078,6 +10092,25 @@
 <li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
 <li><code>radius</code> : Radius of the ring.</li>
 <li><code>nearToFar</code> : From near ring to far ring. Default value is <code>true</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="ring-chess">Ring -&gt; chess<a class="headerlink" href="#ring-chess" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get array of chess around a ring.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">ringToChessArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.ringToChessArray(centerTileXY, radius, tileZ, out);</span>
+</code></pre></div><ul>
+<li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
+</ul>
+</li>
+<li>Get array of chess within a filled ring. Chess at <code>centerTileXY</code> will be included.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">,</span> <span class="nx">nearToFar</span><span class="p">);</span>
+<span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, tileZ, out);</span>
+<span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, tileZ, nearToFar, out);</span>
+</code></pre></div><ul>
+<li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
 </ul>
 </li>
 </ul>
