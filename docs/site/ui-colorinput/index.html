@@ -10,14 +10,14 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-chart/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-colorinput/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
     
     
       
-        <title>Chart - Notes of Phaser 3</title>
+        <title>Color input - Notes of Phaser 3</title>
       
     
     
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Chart
+              Color input
             
           </span>
         </div>
@@ -7747,12 +7747,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15_16" type="checkbox" id="__nav_15_16" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15_16" type="checkbox" id="__nav_15_16" checked>
       
       
       
@@ -7773,41 +7775,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../ui-colorinput/" class="md-nav__link">
-        Color input
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ui-colorpicker/" class="md-nav__link">
-        Color picker
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -7818,12 +7785,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Chart
+          Color input
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Chart
+        Color input
       </a>
       
         
@@ -7870,13 +7837,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-chartjs" class="md-nav__link">
-    Install chart.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#load-minify-file" class="md-nav__link">
     Load minify file
   </a>
@@ -7903,8 +7863,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-chart-object" class="md-nav__link">
-    Add chart object
+  <a href="#add-colorinput-object" class="md-nav__link">
+    Add colorInput object
   </a>
   
 </li>
@@ -7917,22 +7877,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-chart" class="md-nav__link">
-    Create chart
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chart-data" class="md-nav__link">
-    Chart data
+  <a href="#get-element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#manipulate-chart-object" class="md-nav__link">
-    Manipulate chart object
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -7946,6 +7920,41 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-colorpicker/" class="md-nav__link">
+        Color picker
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui-chart/" class="md-nav__link">
+        Chart
+      </a>
     </li>
   
 
@@ -8729,13 +8738,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-chartjs" class="md-nav__link">
-    Install chart.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#load-minify-file" class="md-nav__link">
     Load minify file
   </a>
@@ -8762,8 +8764,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-chart-object" class="md-nav__link">
-    Add chart object
+  <a href="#add-colorinput-object" class="md-nav__link">
+    Add colorInput object
   </a>
   
 </li>
@@ -8776,22 +8778,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-chart" class="md-nav__link">
-    Create chart
+  <a href="#layout-children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chart-data" class="md-nav__link">
-    Chart data
+  <a href="#get-element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#manipulate-chart-object" class="md-nav__link">
-    Manipulate chart object
+  <a href="#value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -8813,41 +8829,33 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-chart.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-colorinput.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-  <h1>Chart</h1>
+  <h1>Color input</h1>
 
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Draw <a href="https://www.chartjs.org/">chart</a> on <a href="../canvas/">canvas</a>.</p>
+<p>Color number (<code>0x0</code>~<code>0xffffff</code>) or color string (<code>'#000000'</code>~<code>'#ffffff'</code>, or <code>'red'</code>) input field.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/qwVBNy">Radar chart</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/MWXpmYP">Color input</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-chart">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-colorinput">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
-<h4 id="install-chartjs">Install chart.js<a class="headerlink" href="#install-chartjs" title="Permanent link">&para;</a></h4>
-<p><a href="https://www.chartjs.org/">Chart.js</a> is not included in rexUI, installs it before creating any chart.</p>
-<p><div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js&#39;</span><span class="p">);</span>
-</code></pre></div>
-or
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js&#39;</span><span class="p">);</span>
-</code></pre></div></p>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/Chart.min.js&#39;</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add chart object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add color-input object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorInput</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">colorInput</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -8872,8 +8880,8 @@ or
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add chart object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add color-input object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorInput</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">colorInput</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -8882,30 +8890,219 @@ or
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Chart</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">ColorInput</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add chart object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">chart</span><span class="p">);</span>
+<li>Add color-input object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorInput</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">ColorInput</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">colorInput</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-chart-object">Add chart object<a class="headerlink" href="#add-chart-object" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<h3 id="add-colorinput-object">Add colorInput object<a class="headerlink" href="#add-colorinput-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorInput</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">colorInput</span><span class="p">({</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// anchor: undefined,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
+
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
+    <span class="nx">swatch</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// swatch: { shape: &#39;circle&#39; },</span>
+    <span class="c1">// swatch: swatchGameObject,</span>
+
+    <span class="nx">inputText</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> 
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+        <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// {left: 0, right: 0, top: 0, bottom: 0}</span>
+
+        <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+
+            <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
+            <span class="c1">// Style when focus</span>
+            <span class="c1">// &#39;focus.color&#39;: ...</span>
+            <span class="c1">// &#39;focus.color2&#39;: ...</span>
+            <span class="c1">// &#39;focus.stroke&#39;: ...</span>
+        <span class="p">},</span>
+        <span class="nx">focusStyle</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+        <span class="nx">innerBounds</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span>
+        <span class="p">},</span>
+
+        <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">bold</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">italic</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+            <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+            <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">shadowColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">backgroundHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">backgroundBY</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+            <span class="c1">// Style when cursor move on</span>
+            <span class="c1">// &#39;cursor.color&#39;: ...</span>
+            <span class="c1">// &#39;cursor.backgroundColor&#39;: ...</span>
+            <span class="c1">// &#39;cursor.xxx&#39;: ...</span>
+        <span class="p">},</span>
+        <span class="nx">cursorStyle</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+        <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+                <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+                <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+                <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
+            <span class="p">},</span>
+            <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">hAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">vAlign</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>  <span class="c1">// For single line text input</span>
+            <span class="nx">charWrap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// For single line text input</span>
+        <span class="p">},</span>
+
+        <span class="c1">// enterClose: true,</span>
+        <span class="c1">// readOnly: false,</span>
+
+        <span class="c1">// Callbacks</span>
+        <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
+        <span class="c1">// },</span>
+
+        <span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
+        <span class="c1">// },</span>
+
+        <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
+        <span class="c1">//     return text;</span>
+        <span class="c1">// },   </span>
+
+        <span class="c1">// onAddChar: function(child, index, canvasInput) {</span>
+        <span class="c1">//    child.modifyStyle({...})</span>
+        <span class="c1">// },</span>
+
+        <span class="c1">// onCursorOut: function(child, cursorIndex, canvasInput) {</span>
+        <span class="c1">//     child.modifyStyle({</span>
+        <span class="c1">//         </span>
+        <span class="c1">//     });</span>
+        <span class="c1">// },</span>
+
+        <span class="c1">// onCursorIn: function(child, cursorIndex, canvasInput) {</span>
+        <span class="c1">//     child.modifyStyle({</span>
+        <span class="c1">//         </span>
+        <span class="c1">//     });</span>
+        <span class="c1">// },</span>
+    <span class="p">},</span>
+
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">knob</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
+    <span class="nx">valuechangeCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">value</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+        <span class="nx">icon</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// sizerEvents: false,</span>
+    <span class="c1">// enableLayer: false,    </span>
+<span class="p">});</span>
 </code></pre></div>
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this object.</li>
-<li><code>width</code>, <code>height</code> : Canvas size.</li>
-<li><code>config</code> : <a href="https://www.chartjs.org/docs/latest/configuration/">Configuration</a> for creating chart.<ul>
-<li>Set <code>undefined</code> to not create chart at beginning.</li>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
+<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
+<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
+<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+</ul>
+</li>
+<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
+<li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly. </li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of colorInput.</li>
+<li><code>swatch</code> : Display color value on a square, circle shape, or an image game object with tint.<ul>
+<li><code>undefein</code> : A square swatch. Default game object.</li>
+<li>A plain object : A circle, or a round square swatch.
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">shape</span><span class="o">:</span> <span class="s1">&#39;circle&#39;</span> <span class="p">}</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">radius</span><span class="o">:</span> <span class="mf">10</span> <span class="p">}</span>
+</code></pre></div></li>
+<li>An Image or Sprite game object : Tint this game object for displaying color value.</li>
+</ul>
+</li>
+<li><code>inputText</code> : Configuration of <a href="../canvasinput/#create-instance">canvasInput</a></li>
+<li><code>valuechangeCallback</code> : callback function when value changed.</li>
+<li><code>value</code> : Initial color value (0 ~ 0xffffff).<ul>
+<li>Number :  0 ~ 0xffffff</li>
+<li>String : <ul>
+<li><code>0x0</code>~<code>0xffffff</code></li>
+<li><code>'#000000'</code>~<code>'#ffffff'</code></li>
+<li><code>'red'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>space</code> : Pads spaces.<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.item</code> : Space between swatch and inputText.</li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this game object.</li>
+<li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
+<li><code>sizerEvents</code> : Set <code>true</code> to fire <a href="../ui-basesizer/#events">sizer events</a>. Default value is <code>false</code>.</li>
+<li><code>enableLayer</code> : <ul>
+<li><code>false</code> : Add child game objects into scene's display list. Default behavior.</li>
+<li><code>true</code> : Add child game objects into an internal <a href="../layer/">layer game object</a>. <a href="../containerlite/#layer">See also</a>.</li>
 </ul>
 </li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyChart</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Chart</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyColorInput</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ColorInput</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -8913,65 +9110,66 @@ or
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyChart</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">colorInput</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyColorInput</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="create-chart">Create chart<a class="headerlink" href="#create-chart" title="Permanent link">&para;</a></h3>
-<p>Create chart (if not creating at beginning).</p>
-<div class="highlight"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">setChart</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">colorInput</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
+<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>config</code> : <a href="https://www.chartjs.org/docs/latest/configuration/">Configuration</a> for creating chart.</li>
+<li>Get element<ul>
+<li>Background game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">colorInput</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Swatch game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">colorInput</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;swatch&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Input text game object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">textObject</span> <span class="o">=</span> <span class="nx">colorInput</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;inputText&#39;</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
-<h3 id="chart-data">Chart data<a class="headerlink" href="#chart-data" title="Permanent link">&para;</a></h3>
+</li>
+<li>Get by name
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">colorInput</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = colorInput.getElement(&#39;#&#39; + name, recursive);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">colorInput</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = colorInput.getByName(name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
+</ul>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<p>Change value will also change the position of marker on H-palette and SV-palette</p>
 <ul>
-<li>Get dataset
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">getChartDataset</span><span class="p">(</span><span class="nx">datasetIndex</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>datasetIndex</code> : Index number or label string.</li>
-</ul>
-</li>
-<li>Get data
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">getChartData</span><span class="p">(</span><span class="nx">datasetIndex</span><span class="p">,</span> <span class="nx">dataIndex</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>datasetIndex</code> : Index number or label string.</li>
-<li><code>dataIndex</code> : Index number or label string.</li>
-</ul>
-</li>
-<li>Set
-    <div class="highlight"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">setChartData</span><span class="p">(</span><span class="nx">datasetIndex</span><span class="p">,</span> <span class="nx">dataIndex</span><span class="p">,</span> <span class="nx">value</span><span class="p">).</span><span class="nx">updateChart</span><span class="p">();</span>
-</code></pre></div><ul>
-<li><code>datasetIndex</code> : Index number or label string.</li>
-<li><code>dataIndex</code> : Index number or label string.</li>
-</ul>
-</li>
-</ul>
-<h3 id="manipulate-chart-object">Manipulate chart object<a class="headerlink" href="#manipulate-chart-object" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Get chart object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">chart</span><span class="p">;</span>
+<li>Get color value
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">colorInput</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="c1">// var value = colorInput.color;</span>
 </code></pre></div></li>
-<li>Set properties of chart<ul>
-<li>Array of dataset
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">datasets</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">;</span>
-</code></pre></div><ul>
-<li>Label of dataset
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">label</span><span class="p">;</span>
+<li>Set color value
+    <div class="highlight"><pre><span></span><code><span class="nx">colorInput</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// colorInput.setColor(value);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">colorInput</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="nx">colorInput</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>Labels
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">labels</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">labels</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set chart data
-    <div class="highlight"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">[</span><span class="nx">datasetIndex</span><span class="p">].</span><span class="nx">data</span><span class="p">[</span><span class="nx">dataIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On value changed
+    <div class="highlight"><pre><span></span><code><span class="nx">colorInput</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">colorInput</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>Update chart
-    <div class="highlight"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
-</code></pre></div></li>
-</ol>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
 
               
             </article>
@@ -8985,7 +9183,7 @@ or
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../ui-colorpicker/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Color picker" rel="prev">
+        <a href="../ui-holygrail/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Holy grail" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -8994,20 +9192,20 @@ or
               <span class="md-footer__direction">
                 Previous
               </span>
-              Color picker
+              Holy grail
             </div>
           </div>
         </a>
       
       
         
-        <a href="../board-overview/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+        <a href="../ui-colorpicker/" class="md-footer__link md-footer__link--next" aria-label="Next: Color picker" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Overview
+              Color picker
             </div>
           </div>
           <div class="md-footer__button md-icon">
