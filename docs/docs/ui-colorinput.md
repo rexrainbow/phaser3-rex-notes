@@ -86,6 +86,7 @@ var colorInput = scene.rexUI.add.colorInput({
     swatch: undefined,
     // swatch: { shape: 'circle' },
     // swatch: swatchGameObject,
+    // swatch: false,
 
     inputText: {
         width: undefined, 
@@ -239,6 +240,7 @@ var colorInput = scene.rexUI.add.colorInput({
         { radius: 10 }
         ```
     - An Image or Sprite game object : Tint this game object for displaying color value.
+    - `false` : No swatch game object.
 - `inputText` : Configuration of [canvasInput](canvasinput.md#create-instance)
 - `valuechangeCallback` : callback function when value changed.
 - `value` : Initial color value (0 ~ 0xffffff).

@@ -21401,18 +21401,24 @@
 
     // textObject.setText(newText);
 
-    var results = diffChars(text, newText);
-    var charIndex = 0;
-    for (var i = 0, cnt = results.length; i < cnt; i++) {
-      var result = results[i];
-      if (result.removed) {
-        // Remove character at charIndex
-        textObject.removeText(charIndex, result.count);
-      } else if (result.added) {
-        textObject.insertText(charIndex, result.value);
-        charIndex += result.count;
-      } else {
-        charIndex += result.count;
+    if (newText === '') {
+      textObject.popChild(textObject.lastInsertCursor);
+      textObject.removeChildren();
+      textObject.addChild(textObject.lastInsertCursor, 0);
+    } else {
+      var results = diffChars(text, newText);
+      var charIndex = 0;
+      for (var i = 0, cnt = results.length; i < cnt; i++) {
+        var result = results[i];
+        if (result.removed) {
+          // Remove character at charIndex
+          textObject.removeText(charIndex, result.count);
+        } else if (result.added) {
+          textObject.insertText(charIndex, result.value);
+          charIndex += result.count;
+        } else {
+          charIndex += result.count;
+        }
       }
     }
     textObject.runWordWrap();
@@ -30930,7 +30936,9 @@
   };
 
   var CreateSwatch = function CreateSwatch(scene, config) {
-    if (IsGameObject(config)) {
+    if (config === false) {
+      return null;
+    } else if (IsGameObject(config)) {
       return config;
     }
     var swatch = new RoundRectangle$3(scene, config);
@@ -30939,7 +30947,7 @@
     return swatch;
   };
 
-  var CreateTextInput$2 = function CreateTextInput(scene, config) {
+  var CreateInputText$1 = function CreateInputText(scene, config) {
     config = config ? DeepClone(config) : {};
     var inputText = new CanvasInput(scene, config);
     scene.add.existing(inputText);
@@ -30989,6 +30997,9 @@
   };
 
   var SetSwatchColor = function SetSwatchColor(swatch, color) {
+    if (!swatch) {
+      return;
+    }
     if (swatch.setTint) {
       swatch.setTint(color);
     } else if (swatch.setFillStyle) {
@@ -31014,14 +31025,16 @@
       // Add elements
       var background = GetValue$1b(config, 'background', undefined);
       var swatch = CreateSwatch(scene, GetValue$1b(config, 'swatch'));
-      var inputText = CreateTextInput$2(scene, GetValue$1b(config, 'inputText'));
+      var inputText = CreateInputText$1(scene, GetValue$1b(config, 'inputText'));
       if (background) {
         _this.addBackground(background);
       }
-      _this.add(swatch, {
-        proportion: 0,
-        expand: false
-      });
+      if (swatch) {
+        _this.add(swatch, {
+          proportion: 0,
+          expand: false
+        });
+      }
       var proportion = GetValue$1b(config, 'inputText.width') === undefined ? 1 : 0;
       var expand = GetValue$1b(config, 'inputText.height') === undefined ? true : false;
       _this.add(inputText, {
@@ -31034,6 +31047,11 @@
       inputText.on('close', function () {
         this.setValue(inputText.value);
       }, _assertThisInitialized(_this));
+      var callback = GetValue$1b(config, 'valuechangeCallback', null);
+      if (callback !== null) {
+        var scope = GetValue$1b(config, 'valuechangeCallbackScope', undefined);
+        _this.on('valuechange', callback, scope);
+      }
       _this.setValue(GetValue$1b(config, 'value', 0x0));
       return _this;
     }
@@ -31041,7 +31059,7 @@
       key: "preLayout",
       value: function preLayout() {
         var swatch = this.childrenMap.swatch;
-        if (swatch.expandSquare) {
+        if (swatch && swatch.expandSquare) {
           swatch.resize(1, 1);
         }
       }
@@ -31049,7 +31067,7 @@
       key: "postResolveSize",
       value: function postResolveSize(width, height) {
         var swatch = this.childrenMap.swatch;
-        if (swatch.expandSquare) {
+        if (swatch && swatch.expandSquare) {
           var size = height - this.getInnerPadding('top') - this.getInnerPadding('bottom') - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
           swatch.resize(size, size);
 
@@ -31080,7 +31098,9 @@
         }
         this._value = value;
         var swatch = this.childrenMap.swatch;
-        SetSwatchColor(swatch, value);
+        if (swatch) {
+          SetSwatchColor(swatch, value);
+        }
         var inputText = this.childrenMap.inputText;
         inputText.setText(GetHexColorString(value));
         this.emit('valuechange', this._value);

@@ -4508,12 +4508,35 @@
       out = [];
     }
     centerTileXY = this.chessToTileXYZ(centerTileXY);
-    this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray);
+    this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray$1);
     var tileXY;
-    for (var i = 0, cnt = globTileArray.length; i < cnt; i++) {
-      tileXY = globTileArray[i];
+    for (var i = 0, cnt = globTileArray$1.length; i < cnt; i++) {
+      tileXY = globTileArray$1[i];
       if (this.contains(tileXY.x, tileXY.y)) {
         out.push(tileXY);
+      }
+    }
+    globTileArray$1.length = 0;
+    return out;
+  };
+  var globTileArray$1 = [];
+
+  var RingToChessArray = function RingToChessArray(centerTileXY, radius, tileZ, out) {
+    if (Array.isArray(tileZ)) {
+      out = tileZ;
+      tileZ = undefined;
+    }
+    if (out === undefined) {
+      out = [];
+    }
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+    this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray);
+    var tileXY, chess;
+    for (var i = 0, cnt = globTileArray.length; i < cnt; i++) {
+      tileXY = globTileArray[i];
+      chess = this.tileXYZToChess(tileXY.x, tileXY.y, tileZ);
+      if (chess) {
+        out.push(chess);
       }
     }
     globTileArray.length = 0;
@@ -4541,6 +4564,26 @@
     for (var i = 0; i <= radius; i++) {
       level = nearToFar ? i : radius - i;
       this.ringToTileXYArray(centerTileXY, level, out);
+    }
+    return out;
+  };
+
+  var FilledRingToChessArray = function FilledRingToChessArray(centerTileXY, radius, tileZ, nearToFar, out) {
+    if (IsArray(nearToFar)) {
+      out = nearToFar;
+      nearToFar = undefined;
+    }
+    if (nearToFar === undefined) {
+      nearToFar = true;
+    }
+    if (out === undefined) {
+      out = [];
+    }
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+    var level;
+    for (var i = 0; i <= radius; i++) {
+      level = nearToFar ? i : radius - i;
+      this.ringToChessArray(centerTileXY, level, tileZ, out);
     }
     return out;
   };
@@ -4696,7 +4739,9 @@
     areNeighbors: AreNeighbors,
     mapNeighbors: MapNeighbors,
     ringToTileXYArray: RingToTileXYArray$2,
+    ringToChessArray: RingToChessArray,
     filledRingToTileXYArray: FilledRingToTileXYArray,
+    filledRingToChessArray: FilledRingToChessArray,
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker
   }, _defineProperty(_getChessData$getChes, "getGridPoints", GetGridPoints$2), _defineProperty(_getChessData$getChes, "chessToBoard", GetBoard), _getChessData$getChes);

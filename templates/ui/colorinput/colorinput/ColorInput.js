@@ -26,10 +26,12 @@ class ColorInput extends Sizer {
             this.addBackground(background);
         }
 
-        this.add(
-            swatch,
-            { proportion: 0, expand: false }
-        );
+        if (swatch) {
+            this.add(
+                swatch,
+                { proportion: 0, expand: false }
+            );
+        }
 
         var proportion = (GetValue(config, 'inputText.width') === undefined) ? 1 : 0;
         var expand = (GetValue(config, 'inputText.height') === undefined) ? true : false;
@@ -59,14 +61,14 @@ class ColorInput extends Sizer {
     preLayout() {
         var swatch = this.childrenMap.swatch;
 
-        if (swatch.expandSquare) {
+        if (swatch && swatch.expandSquare) {
             swatch.resize(1, 1);
         }
     }
 
     postResolveSize(width, height) {
         var swatch = this.childrenMap.swatch;
-        if (swatch.expandSquare) {
+        if (swatch && swatch.expandSquare) {
             var size = height
                 - this.getInnerPadding('top') - this.getInnerPadding('bottom')
                 - this.getChildOuterPadding(swatch, 'top') - this.getChildOuterPadding(swatch, 'bottom');
@@ -102,7 +104,9 @@ class ColorInput extends Sizer {
         this._value = value;
 
         var swatch = this.childrenMap.swatch;
-        SetSwatchColor(swatch, value);
+        if (swatch) {
+            SetSwatchColor(swatch, value);
+        }
 
         var inputText = this.childrenMap.inputText;
         inputText.setText(GetHexColorString(value));

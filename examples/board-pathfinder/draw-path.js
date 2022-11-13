@@ -23,12 +23,12 @@ class Demo extends Phaser.Scene {
             // wrap: true
         });
 
-        // create chess       
+        // create chess
         for (var i = 0; i < 80; i++) {
             new ChessA(board);
         }
 
-        // click end tileXY
+        // click and tileXY
         var chess, pathTileXYArray = [];
         var state = 'IDLE';
         board

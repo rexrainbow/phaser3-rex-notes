@@ -2,7 +2,9 @@ import RoundRectangle from '../../../roundrectangle/RoundRectangle.js';
 import IsGameObject from '../../../../../plugins/utils/system/IsGameObject.js';
 
 var CreateSwatch = function (scene, config) {
-    if (IsGameObject(config)) {
+    if (config === false) {
+        return null;
+    } else if (IsGameObject(config)) {
         return config;
     }
 
