@@ -412,6 +412,7 @@ nav:
     - Tabs: ui-tabs.md        
     - Holy grail: ui-holygrail.md
     - Color input:
+        - Color input: ui-colorinput.md
         - Color picker: ui-colorpicker.md
     - Chart: ui-chart.md    
 - Board:

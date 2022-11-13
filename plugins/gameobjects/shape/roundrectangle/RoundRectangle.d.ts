@@ -4,7 +4,7 @@ export default RoundRectangle;
 
 declare namespace RoundRectangle {
 
-    export interface IRadiusConfig {
+    interface IRadiusConfig {
         tl?: (number | { x?: number, y?: number }),
         tr?: (number | { x?: number, y?: number }),
         bl?: (number | { x?: number, y?: number }),
@@ -12,6 +12,27 @@ declare namespace RoundRectangle {
 
         x?: number,
         y?: number,
+    }
+
+    interface IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+        radius?: number | RoundRectangle.IRadiusConfig |
+        ({
+            radius?: (number | RoundRectangle.IRadiusConfig),
+            iteration?: number
+        }),
+
+        color?: number,
+        alpha?: number,
+
+        strokeColor?: number,
+        strokeAlpha?: number,
+        strokeWidth?: number,
+
+        shape?: 0 | 'rectangle' | 1 | 'circle',
     }
 
 }
@@ -34,26 +55,7 @@ declare class RoundRectangle extends Phaser.GameObjects.Shape {
 
     constructor(
         scene: Phaser.Scene,
-        config?: {
-            x?: number,
-            y?: number,
-            width?: number,
-            height?: number,
-            radius?: number | RoundRectangle.IRadiusConfig |
-            ({
-                radius?: (number | RoundRectangle.IRadiusConfig),
-                iteration?: number
-            }),
-
-            color?: number,
-            alpha?: number,
-
-            strokeColor?: number,
-            strokeAlpha?: number,
-            strokeWidth?: number,
-
-            shape?: 0 | 'rectangle' | 1 | 'circle',
-        }
+        config?: RoundRectangle.IConfig
     )
 
     resize(width: number, height: number): this;

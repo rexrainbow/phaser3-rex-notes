@@ -38,6 +38,10 @@ class Demo extends Phaser.Scene {
                 CreateColorInput2(this),
                 { proportion: 1, expand: true }
             )
+            .add(
+                CreateColorInput3(this),
+                { proportion: 1, expand: true }
+            )
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000)
     }
@@ -86,6 +90,19 @@ var CreateColorInput1 = function (scene) {
 }
 
 var CreateColorInput2 = function (scene) {
+    return scene.rexUI.add.colorInput({
+        height: 60,
+        swatch: {
+            radius: 12,
+        },
+        inputText: InputTextConfig,
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+
+        value: Phaser.Math.Between(0, 0x1000000)
+    })
+}
+
+var CreateColorInput3 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
         swatch: scene.add.image(0, 0, 'img'),

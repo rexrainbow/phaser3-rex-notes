@@ -15,6 +15,7 @@ import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
 import ClickFactory from './click/Factory';
 import ClickOutsideFactory from './clickoutside/Factory';
+import ColorInputFactory from './colorinput/colorinput/Factory';
 import ColorPickerFactory from './colorinput/colorpicker/Factory';
 import InTouchingFactory from './intouching/Factory';
 import ContainerFactory from './container/Factory';
@@ -109,6 +110,7 @@ declare class Factories {
     circularProgress: typeof CircularProgressFactory;
     click: typeof ClickFactory;
     clickOutside: typeof ClickOutsideFactory;
+    colorInput: typeof ColorInputFactory;
     colorPicker: typeof ColorPickerFactory;
     inTouching: typeof InTouchingFactory;
     container: typeof ContainerFactory;
@@ -231,6 +233,7 @@ import CircularProgressCanvasClass from './circularprogresscanvas/CircularProgre
 import CircularProgressClass from './circularprogress/CircularProgress';
 import ClickClass from './click/Click';
 import ClickOutsideClass from './clickoutside/ClickOutside';
+import ColorInputClass from './colorinput/colorinput/ColorInput';
 import ColorPickerClass from './colorinput/colorpicker/ColorPicker';
 import ContainerClass from './container/Container';
 import CoverClass from './cover/Cover';
@@ -303,6 +306,7 @@ declare namespace UIPlugins {
     type CircularProgress = CircularProgressClass;
     type Click = ClickClass;
     type ClickOutside = ClickOutsideClass;
+    type ColorInput = ColorInputClass;
     type ColorPicker = ColorPickerClass;
     type Container = ContainerClass;
     type Cover = CoverClass;

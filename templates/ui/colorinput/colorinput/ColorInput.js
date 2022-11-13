@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import CreateSwatch from './methods/CreateSwatch.js';
-import CreateTextInput from './methods/CreateTextInput.js';
+import CreateInputText from './methods/CreateInputText.js';
 import ColorStringToInteger from '../../../../plugins/utils/color/ColorStringToInteger.js';
 import GetHexColorString from '../../../../plugins/utils/color/GetHexColorString.js';
 import SetSwatchColor from './methods/SetSwatchColor.js';
@@ -20,7 +20,7 @@ class ColorInput extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var swatch = CreateSwatch(scene, GetValue(config, 'swatch'));
-        var inputText = CreateTextInput(scene, GetValue(config, 'inputText'));
+        var inputText = CreateInputText(scene, GetValue(config, 'inputText'));
 
         if (background) {
             this.addBackground(background);
@@ -45,6 +45,13 @@ class ColorInput extends Sizer {
         inputText.on('close', function () {
             this.setValue(inputText.value);
         }, this);
+
+
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.on('valuechange', callback, scope);
+        }
 
         this.setValue(GetValue(config, 'value', 0x0));
     }
