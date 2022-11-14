@@ -25,6 +25,8 @@ class CircleMaskImage extends Canvas {
 
         var maskType = GetValue(config, 'maskType', 0);
         var backgroundColor = GetValue(config, 'backgroundColor', undefined);
+        var strokeColor = GetValue(config, 'strokeColor', undefined);
+        var strokeLineWidth = GetValue(config, 'strokeLineWidth', (strokeColor != null) ? 2 : 0);
 
         if (maskType === undefined) {
             maskType = 0;
@@ -41,9 +43,14 @@ class CircleMaskImage extends Canvas {
             return this;
         }
 
-        var hasBackgroundColor = (backgroundColor != null);
-        if (!hasBackgroundColor) { // No background color -- draw image first
-            this.loadTexture(key, frame);
+        var textureFrame = this.scene.sys.textures.getFrame(key, frame);
+        if (!textureFrame) {
+            return this;
+        }
+        if ((textureFrame.cutWidth !== this.width) || (textureFrame.cutHeight !== this.height)) {
+            this.setCanvasSize(textureFrame.cutWidth, textureFrame.cutHeight);
+        } else {
+            this.clear();
         }
 
         // Draw mask
@@ -52,41 +59,52 @@ class CircleMaskImage extends Canvas {
         var width = canvas.width,
             height = canvas.height;
 
+        if (backgroundColor != null) {
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, width, height);
+        }
+
         ctx.save();
-        ctx.globalCompositeOperation = (hasBackgroundColor) ? 'source-over' : 'destination-in';
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle
+        // Draw circle, ellipse, or roundRectangle        
         switch (maskType) {
             case 2:
                 var radiusConfig = GetValue(config, 'radius', 0);
                 var iteration = GetValue(config, 'iteration', undefined);
-                AddRoundRectanglePath(ctx, 0, 0, width, height, radiusConfig, iteration);
+                var doubleStrokeLineWidth = strokeLineWidth * 2;
+                AddRoundRectanglePath(
+                    ctx,
+                    strokeLineWidth, strokeLineWidth,
+                    width - doubleStrokeLineWidth, height - doubleStrokeLineWidth,
+                    radiusConfig,
+                    iteration
+                );
                 break;
 
             default: // circle, ellipse
                 var centerX = Math.floor(width / 2);
                 var centerY = Math.floor(height / 2);
                 if (maskType === 0) {
-                    ctx.arc(centerX, centerY, Math.min(centerX, centerY), 0, (2 * Math.PI));
+                    var radius = Math.min(centerX, centerY) - strokeLineWidth;
+                    ctx.arc(centerX, centerY, radius, 0, (2 * Math.PI));
                 } else {
-                    ctx.ellipse(centerX, centerY, centerX, centerY, 0, 0, (2 * Math.PI));
+                    var radiusX = centerX - strokeLineWidth;
+                    var radiusY = centerY - strokeLineWidth;
+                    ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, (2 * Math.PI));
                 }
                 break;
         }
 
-        if (hasBackgroundColor) {
-            ctx.fillStyle = backgroundColor;
+        if (strokeColor != null) {
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = strokeLineWidth;
+            ctx.stroke();
         }
-        ctx.fill();
-        ctx.restore();
 
-        if (hasBackgroundColor) {  // Has background color -- draw image last
-            ctx.save();
-            ctx.globalCompositeOperation = 'destination-atop';
-            this.loadTexture(key, frame);
-            ctx.restore();
-        }
+        ctx.clip();
+        this.loadTexture(key, frame);
+        ctx.restore();
 
         this.dirty = true;
         return this;
