@@ -63,7 +63,7 @@ class Demo extends Phaser.Scene {
                 var chessArray = board.tileXYArrayToChessArray(tileXYArray);
                 var startTerrainHeight = chessArray[0].getData('terrainHeight');
                 var endTerrainHeight = chessArray[chessArray.length - 1].getData('terrainHeight');
-                for (var i = chessArray.length - 2; i > 0; i--) {
+                for (var i = 1, cnt = chessArray.length - 2; i < cnt; i++) {
                     var terrainHeight = chessArray[i].getData('terrainHeight');
                     if ((terrainHeight > startTerrainHeight) && (terrainHeight > endTerrainHeight)) {
                         return false;

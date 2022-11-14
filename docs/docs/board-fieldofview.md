@@ -123,7 +123,7 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
         ```
 - `perspective` : 
     - `false` : Test visible until blocked tiles. Default behavior.
-    - `true` : Test visible until out-of-board. Will test cross any blocked tile.
+    - `true` : Test visible until out-of-board. Will test cross any blocked (invisible) tile.
 - Pre-test : Test tiles on visible path.
     - `occupiedTest` : Set `true` to test if target tile position is occupied or not.
     - `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker).
