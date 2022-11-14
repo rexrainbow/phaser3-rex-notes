@@ -41,6 +41,7 @@ class FieldOfView extends ComponentBase {
         this.setEdgeBlockerTest(edgeBlockerTest);
         this.setPreTestFunction(preTestCallback, preTestCallbackScope);
         this.setCostFunction(costCallback, costCallbackScope);
+        this.setPerspectiveEnable(GetValue(o, 'perspective', false));
         this.setDebugGraphics(GetValue(o, 'debug.graphics', undefined));
         this.setDebugLineColor(GetValue(o, 'debug.visibleLineColor', 0x00ff00), GetValue(o, 'debug.invisibleLineColor', 0xff0000));
         this.setDebugLog(GetValue(o, 'debug.log', false));
@@ -140,6 +141,15 @@ class FieldOfView extends ComponentBase {
     setPreTestFunction(callback, scope) {
         this.preTestCallback = callback;
         this.preTestCallbackScope = scope;
+        return this;
+    }
+
+    setPerspectiveEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.perspectiveEnable = enable;
         return this;
     }
 
