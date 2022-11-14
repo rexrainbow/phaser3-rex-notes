@@ -2,7 +2,6 @@ import phaser from 'phaser/src/phaser.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 import PerlinPlugin from '../../plugins/perlin-plugin.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const ChessColors = [0x558b2f, 0x7cb342, 0x9ccc65, 0xc5e1a5, 0xf1f8e9];
 
 class Demo extends Phaser.Scene {
@@ -48,7 +47,7 @@ class Demo extends Phaser.Scene {
 
                 board.tileXYArrayToChessArray(tileXYArray, chessArray);
                 for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
-                    chessArray[i].setStrokeStyle(4, 0xFFA500);
+                    chessArray[i].setStrokeStyle(2, 0xFFA500);
                 }
 
                 gameObject.setStrokeStyle(4, 0xff0000);

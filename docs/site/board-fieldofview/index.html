@@ -8858,6 +8858,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/qvGLPd">Field of view</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/pYwxmv">Line of sigh</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/gOKRmOZ">Perspective</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-fieldofview">Sample code</a></p>
@@ -8914,6 +8915,7 @@
     <span class="c1">// face: 0,</span>
     <span class="c1">// cone: undefined,</span>
     <span class="c1">// coneMode: 0,</span>
+    <span class="c1">// perspective: false,</span>
 
     <span class="c1">// ** pre-test **</span>
     <span class="c1">// occupiedTest: false,</span>
@@ -8957,6 +8959,11 @@ coneMode: 0
 cone : 120,
 coneMode: 1
 </code></pre></div></li>
+</ul>
+</li>
+<li><code>perspective</code> : <ul>
+<li><code>false</code> : Test visible until blocked tiles. Default behavior.</li>
+<li><code>true</code> : Test visible until out-of-board. Will test cross any blocked tile.</li>
 </ul>
 </li>
 <li>Pre-test : Test tiles on visible path.<ul>
