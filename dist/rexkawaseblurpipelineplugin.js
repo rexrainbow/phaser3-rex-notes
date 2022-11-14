@@ -376,7 +376,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;

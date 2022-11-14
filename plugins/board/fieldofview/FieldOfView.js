@@ -4,6 +4,7 @@ import GetChessData from '../chess/GetChessData.js';
 import CONST from './const.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import AngleNormalize from '../../utils/math/angle/Normalize.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import GetValue from '../../utils/object/GetValue.js';
 
 const BLOCKER = CONST.BLOCKER;
@@ -11,11 +12,16 @@ const INFINITY = CONST.INFINITY;
 
 class FieldOfView extends ComponentBase {
     constructor(gameObject, config) {
+        if (IsPlainObject(gameObject)) {
+            config = gameObject;
+            gameObject = undefined;
+        }
+
         super(gameObject, { eventEmitter: false });
         // No event emitter
         // this.parent = gameObject;
 
-        this.chessData = GetChessData(gameObject);
+        this.setChess(gameObject);
         this.resetFromJSON(config);
     }
 
@@ -60,11 +66,39 @@ class FieldOfView extends ComponentBase {
         super.shutdown(fromScene);
     }
 
+    setChess(gameObject) {
+        if (gameObject) {
+            this.chessData = GetChessData(gameObject);
+            if (this.parent !== gameObject) {
+                // Remove attatched event from previous gameObject
+                if (this.parent && this.parent.once) {
+                    this.parent.off('destroy', this.onParentDestroy, this);
+                }
+                // Attach event
+                this.setParent(gameObject);
+                if (this.parent && this.parent.once) {
+                    this.parent.once('destroy', this.onParentDestroy, this);
+                }
+            }
+        } else {
+            this.setParent();
+            this.chessData = undefined;
+        }
+        return this;
+    }
+
     get face() {
         return this._face;
     }
 
     set face(direction) {
+        if (!this.chessData) {
+            if (this._face === undefined) {
+                this._face = 0;
+            }
+            return;
+        }
+
         direction = this.board.grid.directionNormalize(direction);
         this._face = direction;
         if (this.coneMode === 0) { // Direction

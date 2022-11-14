@@ -236,7 +236,9 @@
   };
 
   var GetGame = function GetGame(object) {
-    if (IsGame(object)) {
+    if (object == null || _typeof(object) !== 'object') {
+      return null;
+    } else if (IsGame(object)) {
       return object;
     } else if (IsGame(object.game)) {
       return object.game;
@@ -253,10 +255,8 @@
   var ComponentBase = /*#__PURE__*/function () {
     function ComponentBase(parent, config) {
       _classCallCheck(this, ComponentBase);
-      this.parent = parent; // gameObject, scene, or game
+      this.setParent(parent); // gameObject, scene, or game
 
-      this.scene = GetSceneObject(parent);
-      this.game = GetGame(parent);
       this.isShutdown = false;
 
       // Event emitter, default is private event emitter
@@ -322,6 +322,15 @@
       key: "onParentDestroy",
       value: function onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+      }
+    }, {
+      key: "setParent",
+      value: function setParent(parent) {
+        this.parent = parent; // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+        return this;
       }
     }]);
     return ComponentBase;

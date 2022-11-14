@@ -6,10 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ComponentBase {
     constructor(parent, config) {
-        this.parent = parent;  // gameObject, scene, or game
-
-        this.scene = GetSceneObject(parent);
-        this.game = GetGame(parent);
+        this.setParent(parent);  // gameObject, scene, or game
 
         this.isShutdown = false;
 
@@ -74,6 +71,15 @@ class ComponentBase {
 
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
+    }
+
+    setParent(parent) {
+        this.parent = parent;  // gameObject, scene, or game
+
+        this.scene = GetSceneObject(parent);
+        this.game = GetGame(parent);
+
+        return this;
     }
 
 };

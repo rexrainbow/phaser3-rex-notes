@@ -39,6 +39,8 @@ declare namespace FieldOfView {
         costCallbackScope?: object,
         cost?: number,
 
+        perspective?: boolean,
+
         debug?: {
             graphics: Phaser.GameObjects.Graphics,
             visibleLineColor?: number,
@@ -53,6 +55,11 @@ declare class FieldOfView<ChessType = Phaser.GameObjects.GameObject> {
         gameObject: ChessType,
         config?: FieldOfView.IConfig
     );
+
+    constructor(
+        config?: FieldOfView.IConfig
+    );
+
     readonly board: Board;
 
     setPreTestFunction(

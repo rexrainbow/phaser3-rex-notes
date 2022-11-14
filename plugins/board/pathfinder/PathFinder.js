@@ -65,13 +65,13 @@ class PathFinder extends ComponentBase {
                     this.parent.off('destroy', this.onParentDestroy, this);
                 }
                 // Attach event
-                this.parent = gameObject;
+                this.setParent(gameObject);
                 if (this.parent && this.parent.once) {
                     this.parent.once('destroy', this.onParentDestroy, this);
                 }
             }
         } else {
-            this.parent = undefined;
+            this.setParent();
             this.chessData = undefined;
         }
         return this;
