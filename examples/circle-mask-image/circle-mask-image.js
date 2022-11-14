@@ -14,16 +14,24 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, 'image').setOrigin(0);
-        
-        this.add.rexCircleMaskImage(200, 300, 'image');
 
-        this.add.rexCircleMaskImage(400, 300, 'image', {
-            maskType: 'ellipse'
-        });
+        this.add.rexCircleMaskImage(100, 200, 'image');
 
-        this.add.rexCircleMaskImage(600, 300, 'image', {
-            maskType: 'roundRectangle',
-            radius: 20
+        //this.add.rexCircleMaskImage(300, 200, 'image', {
+        //    maskType: 'ellipse'
+        //});
+
+        //this.add.rexCircleMaskImage(500, 200, 'image', {
+        //    maskType: 'roundRectangle',
+        //    radius: 20
+        //});
+
+        // this.add.rexCircleMaskImage(700, 200, 'image', {            
+        //     strokeColor: 'red'
+        // });
+
+        this.add.rexCircleMaskImage(100, 400, 'image', {            
+            backgroundColor: 'yellow'
         });
     }
 
