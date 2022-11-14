@@ -12713,26 +12713,28 @@
         ctx.save();
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle        
+        // Draw circle, ellipse, or roundRectangle 
+        var halfStrokeLineWidth = strokeLineWidth / 2;
         switch (maskType) {
+          case 1:
+            // ellipse
+            var centerX = Math.floor(width / 2);
+            var centerY = Math.floor(height / 2);
+            var radiusX = centerX - halfStrokeLineWidth;
+            var radiusY = centerY - halfStrokeLineWidth;
+            ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
+            break;
           case 2:
             var radiusConfig = GetValue$2b(config, 'radius', 0);
             var iteration = GetValue$2b(config, 'iteration', undefined);
-            var doubleStrokeLineWidth = strokeLineWidth * 2;
-            AddRoundRectanglePath(ctx, strokeLineWidth, strokeLineWidth, width - doubleStrokeLineWidth, height - doubleStrokeLineWidth, radiusConfig, iteration);
+            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeLineWidth, height - strokeLineWidth, radiusConfig, iteration);
             break;
           default:
-            // circle, ellipse
+            // circle
             var centerX = Math.floor(width / 2);
             var centerY = Math.floor(height / 2);
-            if (maskType === 0) {
-              var radius = Math.min(centerX, centerY) - strokeLineWidth;
-              ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            } else {
-              var radiusX = centerX - strokeLineWidth;
-              var radiusY = centerY - strokeLineWidth;
-              ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
-            }
+            var radius = Math.min(centerX, centerY) - halfStrokeLineWidth;
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
             break;
         }
         if (strokeColor != null) {
