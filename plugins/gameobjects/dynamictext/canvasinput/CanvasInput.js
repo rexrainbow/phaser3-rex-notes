@@ -239,6 +239,32 @@ class CanvasInput extends DynamicText {
         return this;
     }
 
+    get maxLength() {
+        return this.textEdit.maxLength;
+    }
+
+    set maxLength(value) {
+        this.textEdit.maxLength = value
+    }
+
+    setMaxLength(value) {
+        this.maxLength = value;
+        return this;
+    }
+
+    get minLength() {
+        return this.textEdit.minLength;
+    }
+
+    set minLength(value) {
+        this.textEdit.minLength = value;
+    }
+
+    setMinLength(value) {
+        this.minLength = value;
+        return this;
+    }
+
 }
 
 var DefaultParseTextCallback = function (text) {

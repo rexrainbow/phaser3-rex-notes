@@ -163,9 +163,12 @@ var txt = scene.add.rexCanvasInput({
     
     // Parameters of hidden-text-editor   
     // inputType: 'text',  // 'text'|'password'|'textarea'|...                
+    
+    // readOnly: false,
+    // maxLength: undefined,
+    // minLength: undefined,
 
     // enterClose: true,
-    // readOnly: false,
 
     // Callbacks
     // onOpen: function (textObject, hiddenInputText) {
@@ -209,6 +212,7 @@ var txt = scene.add.rexCanvasInput({
     - `readOnly` : 
         - `true` : un-editable.
         - `false` : Editable. Defaule behavior.
+    - `maxLength`, `minLength` : Maximun or minimun of input characters
 - Callbacks
     - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript

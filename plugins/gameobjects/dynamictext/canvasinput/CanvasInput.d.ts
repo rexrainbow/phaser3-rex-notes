@@ -77,6 +77,10 @@ declare namespace CanvasInput {
         onMoveCursor?: MoveCursorCallbackType;
 
         parseTextCallback?: ParseTextCallbackType;
+
+        readOnly?: boolean,
+        maxLength?: number,
+        minLength?: number,
     }
 }
 
@@ -112,4 +116,10 @@ declare class CanvasInput extends DynamicText {
     ): this;
 
     setNumberInput(): this;
+
+    setMaxLength(value: number): this;
+    maxLength: number;
+
+    setMinLength(value: number): this;
+    minLength: number;
 }

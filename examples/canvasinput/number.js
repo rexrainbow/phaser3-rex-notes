@@ -82,6 +82,8 @@ var CreateCanvasInput = function (scene, text) {
                 })
             },
 
+            maxLength: 10,
+
             text: text,
         }
     )

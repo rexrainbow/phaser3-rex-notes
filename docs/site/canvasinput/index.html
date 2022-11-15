@@ -9111,8 +9111,11 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
     <span class="c1">// Parameters of hidden-text-editor   </span>
     <span class="c1">// inputType: &#39;text&#39;,  // &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;|...                </span>
 
-    <span class="c1">// enterClose: true,</span>
     <span class="c1">// readOnly: false,</span>
+    <span class="c1">// maxLength: undefined,</span>
+    <span class="c1">// minLength: undefined,</span>
+
+    <span class="c1">// enterClose: true,</span>
 
     <span class="c1">// Callbacks</span>
     <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
@@ -9160,6 +9163,7 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <li><code>false</code> : Editable. Defaule behavior.</li>
 </ul>
 </li>
+<li><code>maxLength</code>, <code>minLength</code> : Maximun or minimun of input characters</li>
 </ul>
 </li>
 <li>Callbacks<ul>
