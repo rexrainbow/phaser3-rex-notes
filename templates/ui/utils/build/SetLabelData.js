@@ -1,4 +1,4 @@
-var SetLabelData = function(label, config) {
+var SetLabelData = function (label, config) {
     if (config === undefined) {
         config = {};
     }
@@ -22,7 +22,7 @@ var SetLabelData = function(label, config) {
     var actionGameObjct = label.childrenMap.action;
     actionGameObjct.setTexture(config.action, config.actionFrame);
 
-    if (config.iconSize) {
+    if (config.actionSize) {
         actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
     }
 

@@ -28,6 +28,7 @@ import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
 import ColorInputFactory from './colorinput/colorinput/Factory.js';
 import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
+import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';
