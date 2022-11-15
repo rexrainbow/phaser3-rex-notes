@@ -27,7 +27,7 @@ import TransitionImageFactory from './transitionimage/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import CoverFactory from './cover/Factory.js';
 import ColorInputFactory from './colorinput/colorinput/Factory.js';
-import ColorInputLiteFactory from './colorinput/colorinputlite/Factory.js';
+import ColorInputLiteFactory from './colorinput/colorinputbase/Factory.js';
 import ColorPickerFactory from './colorinput/colorpicker/Factory.js';
 import ColorComponentsFactory from './colorinput/colorcomponents/Factory.js';
 import ChartFactory from './chart/Factory.js';

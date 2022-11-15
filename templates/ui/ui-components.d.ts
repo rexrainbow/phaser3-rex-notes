@@ -24,7 +24,7 @@ import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents';
 import ColorInput from './colorinput/colorinput/ColorInput';
-import ColorInputLite from './colorinput/colorinputlite/ColorInputLite';
+import ColorInputBase from './colorinput/colorinputbase/ColorInputBase';
 import ColorPicker from './colorinput/colorpicker/ColorPicker';
 import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
@@ -122,7 +122,7 @@ export {
     Cover,
     ColorComponents,
     ColorInput,
-    ColorInputLite,
+    ColorInputBase,
     ColorPicker,
     Chart,
     CircularProgress,

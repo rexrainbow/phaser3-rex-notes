@@ -2,9 +2,9 @@ import Sizer from '../../sizer/Sizer';
 import RoundRectangle from '../../roundrectangle/RoundRectangle'
 import CanvasInput from '../../canvasinput/CanvasInput';
 
-export default ColorInputLite;
+export default ColorInputBase;
 
-declare namespace ColorInputLite {
+declare namespace ColorInputBase {
     interface IConfig extends Sizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
 
@@ -12,16 +12,16 @@ declare namespace ColorInputLite {
 
         inputText?: CanvasInput.IConfig,
 
-        valuechangeCallback: (newValue: number, oldValue: number, colorPicker: ColorInputLite) => void,
+        valuechangeCallback: (newValue: number, oldValue: number, colorPicker: ColorInputBase) => void,
 
         value?: number | string
     }
 }
 
-declare class ColorInputLite extends Sizer {
+declare class ColorInputBase extends Sizer {
     constructor(
         scene: Phaser.Scene,
-        config?: ColorInputLite.IConfig
+        config?: ColorInputBase.IConfig
     );
 
     setValue(value: number): this;

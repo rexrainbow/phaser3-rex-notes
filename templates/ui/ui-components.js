@@ -26,7 +26,7 @@ import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
 import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
 import ColorInput from './colorinput/colorinput/ColorInput.js';
-import ColorInputLite from './colorinput/colorinputlite/ColorInputLite.js';
+import ColorInputBase from './colorinput/colorinputbase/ColorInputBase.js';
 import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
 import Chart from './chart/Chart.js';
 
@@ -124,7 +124,7 @@ export {
     Cover,
     ColorComponents,
     ColorInput,
-    ColorInputLite,
+    ColorInputBase,
     ColorPicker,
     Chart,
     CircularProgress,
