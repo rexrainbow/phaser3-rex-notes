@@ -1,5 +1,5 @@
 import InputFiledBase from './InputFieldBase.js';
-import CreateTextInput from '../utils/CreateTextInput.js';
+import CreateInputText from '../../../utils/build/CreateInputText.js';
 
 class TextInput extends InputFiledBase {
     constructor(scene, config) {
@@ -11,7 +11,7 @@ class TextInput extends InputFiledBase {
         this.type = 'rexTweaker.TextInput';
 
         var inputTextConfig = config.inputText;
-        var inputText = CreateTextInput(scene, inputTextConfig);
+        var inputText = CreateInputText(scene, inputTextConfig);
 
         this.add(
             inputText,

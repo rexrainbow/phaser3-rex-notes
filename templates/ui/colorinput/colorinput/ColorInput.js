@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import CreateSwatch from './methods/CreateSwatch.js';
-import CreateInputText from './methods/CreateInputText.js';
+import CreateInputText from '../../utils/build/CreateInputText.js';
 import ColorStringToInteger from '../../../../plugins/utils/color/ColorStringToInteger.js';
 import GetHexColorString from '../../../../plugins/utils/color/GetHexColorString.js';
 import SetSwatchColor from './methods/SetSwatchColor.js';
