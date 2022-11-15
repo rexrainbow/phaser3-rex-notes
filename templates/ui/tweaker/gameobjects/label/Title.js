@@ -1,6 +1,5 @@
 import Label from '../../../label/Label.js';
 import BuildLabelConfig from '../../../utils/build/BuildDisplayLabelConfig.js';
-import SetLabelData from '../../../utils/build/SetLabelData.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
 class Title extends Label {
@@ -17,7 +16,7 @@ class Title extends Label {
         config = DeepClone(config);
         config.text = config.text || config.title || '';
 
-        SetLabelData(this, config);
+        this.resetDisplayContent(config);
 
         return this;
     }

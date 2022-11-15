@@ -1,7 +1,6 @@
 import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 import BuildDisplayLabelConfig from './BuildDisplayLabelConfig.js';
 import CreateInteractiveLabel from './CreateInteractiveLabel.js';
-import SetLabelData from './SetLabelData.js';
 
 var BuildListConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};
@@ -14,8 +13,8 @@ var BuildListConfig = function (scene, config) {
     var listConfig = BuildDisplayLabelConfig(scene, labelConfig);
     listConfig.list = config;
     listConfig.list.createButtonCallback = function (scene, option) {
-        var gameObject = CreateInteractiveLabel(scene, listButtonConfig);
-        SetLabelData(gameObject, { text: option.text });
+        var gameObject = CreateInteractiveLabel(scene, listButtonConfig)
+            .resetDisplayContent({ text: option.text })
         return gameObject;
     }
     listConfig.list.onButtonOver = function (button, index, pointer, event) {

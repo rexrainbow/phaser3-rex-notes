@@ -5317,19 +5317,13 @@
   }(HiddenTextEditBase);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var PropertiesList = ['inputType', 'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength'];
   var CreateHiddenTextEdit = function CreateHiddenTextEdit(parent, parentConfig) {
     var config = GetValue(parentConfig, 'edit');
     if (config === undefined) {
       config = {};
     }
-    CopyProperty(parentConfig, config, 'inputType');
-    CopyProperty(parentConfig, config, 'readOnly');
-    CopyProperty(parentConfig, config, 'enterClose');
-    CopyProperty(parentConfig, config, 'onOpen');
-    CopyProperty(parentConfig, config, 'onFocus');
-    CopyProperty(parentConfig, config, 'onClose');
-    CopyProperty(parentConfig, config, 'onBlur');
-    CopyProperty(parentConfig, config, 'onUpdate');
+    CopyProperty(parentConfig, config, PropertiesList);
     return new HiddenTextEdit(parent, config);
   };
 
@@ -6207,6 +6201,34 @@
       value: function setNumberInput() {
         this.textEdit.setNumberInput();
         this.parseTextCallback = Number;
+        return this;
+      }
+    }, {
+      key: "maxLength",
+      get: function get() {
+        return this.textEdit.maxLength;
+      },
+      set: function set(value) {
+        this.textEdit.maxLength = value;
+      }
+    }, {
+      key: "setMaxLength",
+      value: function setMaxLength(value) {
+        this.maxLength = value;
+        return this;
+      }
+    }, {
+      key: "minLength",
+      get: function get() {
+        return this.textEdit.minLength;
+      },
+      set: function set(value) {
+        this.textEdit.minLength = value;
+      }
+    }, {
+      key: "setMinLength",
+      value: function setMinLength(value) {
+        this.minLength = value;
         return this;
       }
     }]);

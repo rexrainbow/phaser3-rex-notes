@@ -7417,6 +7417,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-display-content" class="md-nav__link">
+    Reset display content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -8832,6 +8839,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-display-content" class="md-nav__link">
+    Reset display content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -9156,6 +9170,31 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">textureKey</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<h3 id="reset-display-content">Reset display content<a class="headerlink" href="#reset-display-content" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">label</span><span class="p">.</span><span class="nx">resetDisplayContent</span><span class="p">({</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="nx">icon</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">iconFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">iconSize</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">actionFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">actionSize</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><code>text</code> : Set text string.</li>
+<li><code>icon</code>, <code>iconFrame</code> : Set texture of icon game object.<ul>
+<li><code>undefined</code>, or <code>null</code> : Hide icon game object.</li>
+</ul>
+</li>
+<li><code>iconSize</code> : Set display size of icon game object.</li>
+<li><code>action</code>, <code>actionFrame</code> : Set texture of action game object.<ul>
+<li><code>undefined</code>, or <code>null</code> : Hide action game object.</li>
+</ul>
+</li>
+<li><code>actionSize</code> : Set display size of action game object.</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>

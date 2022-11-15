@@ -9753,12 +9753,6 @@
       value: function setIconSize(width, height) {
         this.iconWidth = width;
         this.iconHeight = height;
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-          return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
         return this;
       }
     }, {
@@ -9814,13 +9808,14 @@
       value: function setActionSize(width, height) {
         this.actionWidth = width;
         this.actionHeight = height;
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-          return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
         return this;
+      }
+    }, {
+      key: "preLayout",
+      value: function preLayout() {
+        _get(_getPrototypeOf(Label.prototype), "preLayout", this).call(this);
+        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
+        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
       }
     }, {
       key: "runLayout",
@@ -9828,8 +9823,6 @@
         if (this.ignoreLayout) {
           return this;
         }
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
         _get(_getPrototypeOf(Label.prototype), "runLayout", this).call(this, parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
@@ -9858,6 +9851,40 @@
         var actionMask = this.childrenMap.actionMask;
         if (actionMask) {
           actionMask.resize();
+        }
+        return this;
+      }
+    }, {
+      key: "resetDisplayContent",
+      value: function resetDisplayContent(config) {
+        if (config === undefined) {
+          config = {};
+        }
+        var text = config.text || '';
+        this.setText(text);
+        var iconGameObjct = this.childrenMap.icon;
+        if (iconGameObjct) {
+          if (config.icon === undefined) {
+            this.hide(iconGameObjct);
+          } else {
+            this.show(iconGameObjct);
+          }
+          if (config.iconSize) {
+            iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+          }
+          this.setIconTexture(config.icon, config.iconFrame);
+        }
+        var actionGameObjct = this.childrenMap.action;
+        if (actionGameObjct) {
+          if (config.action === undefined) {
+            this.hide(actionGameObjct);
+          } else {
+            this.show(actionGameObjct);
+          }
+          if (config.actionSize) {
+            actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+          }
+          this.setActionTexture(config.action, config.actionFrame);
         }
         return this;
       }

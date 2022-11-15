@@ -2,7 +2,6 @@ import Sizer from '../../sizer/Sizer.js';
 import BuildListConfig from '../../utils/build/BuildListConfig.js';
 import CreateDropDownList from '../../utils/build/CreateDropDownList.js';
 import CreateInputText from '../../utils/build/CreateInputText.js';
-import SetLabelData from '../../utils/build/SetLabelData.js';
 import SetComponentsValue from './methods/SetComponentsValue.js';
 import GetComponentsValue from './methods/GetComponentsValue.js';
 
@@ -27,7 +26,7 @@ class ColorComponents extends Sizer {
             .setOptions([
                 { text: 'RGB', value: 0 }
             ])
-        SetLabelData(list, { text: 'RGB' })
+            .resetDisplayContent({ text: 'RGB' })
 
         var inputTextConfig = GetValue(config, 'inputText');
         var components = [];

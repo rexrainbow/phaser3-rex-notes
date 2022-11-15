@@ -1,7 +1,6 @@
 import InputFiledBase from './InputFieldBase.js';
 import BuildListConfig from '../../../utils/build/BuildListConfig.js';
 import CreateDropDownList from '../../../utils/build/CreateDropDownList.js';
-import SetLabelData from '../../../utils/build/SetLabelData.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 
 
@@ -42,7 +41,7 @@ class ListInput extends InputFiledBase {
 
         var list = this.childrenMap.list;
         var text = GetOptionText(list.options, value);
-        SetLabelData(list, { text: text });
+        list.resetDisplayContent({ text: text });
         super.value = value;
     }
 

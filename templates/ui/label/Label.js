@@ -163,13 +163,6 @@ class Label extends Sizer {
         this.iconWidth = width;
         this.iconHeight = height;
 
-        var imageObject = this.childrenMap.icon;
-        if (imageObject === undefined) {
-            return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
-
         return this;
     }
 
@@ -222,23 +215,19 @@ class Label extends Sizer {
         this.actionWidth = width;
         this.actionHeight = height;
 
-        var imageObject = this.childrenMap.action;
-        if (imageObject === undefined) {
-            return this;
-        }
-        SetDisplaySize(imageObject, width, height);
-        this.resetChildScaleState(imageObject);
-
         return this;
+    }
+
+    preLayout() {
+        super.preLayout();
+        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
+        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
     }
 
     runLayout(parent, newWidth, newHeight) {
         if (this.ignoreLayout) {
             return this;
         }
-
-        SetDisplaySize(this.childrenMap.icon, this.iconWidth, this.iconHeight);
-        SetDisplaySize(this.childrenMap.action, this.actionWidth, this.actionHeight);
 
         super.runLayout(parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
@@ -268,6 +257,43 @@ class Label extends Sizer {
         if (actionMask) {
             actionMask.resize();
         }
+        return this;
+    }
+
+    resetDisplayContent(config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        var text = config.text || '';
+        this.setText(text);
+
+        var iconGameObjct = this.childrenMap.icon;
+        if (iconGameObjct) {
+            if (config.icon === undefined) {
+                this.hide(iconGameObjct);
+            } else {
+                this.show(iconGameObjct);
+            }
+            if (config.iconSize) {
+                iconGameObjct.setDisplaySize(config.iconSize, config.iconSize);
+            }
+            this.setIconTexture(config.icon, config.iconFrame);
+        }
+
+        var actionGameObjct = this.childrenMap.action;
+        if (actionGameObjct) {
+            if (config.action === undefined) {
+                this.hide(actionGameObjct);
+            } else {
+                this.show(actionGameObjct);
+            }
+            if (config.actionSize) {
+                actionGameObjct.setDisplaySize(config.actionSize, config.actionSize);
+            }
+            this.setActionTexture(config.action, config.actionFrame);
+        }
+
         return this;
     }
 }

@@ -105,8 +105,8 @@ var CreatePanel = function (scene) {
                 },
 
                 title: {
-                    iconSize: 20,
-                    space: { icon: 3 }
+                    iconSize: 30,
+                    space: { icon: 2 }
                 },
 
                 inputText: {
@@ -176,7 +176,7 @@ var CreatePanel = function (scene) {
 
                 proportion: {
                     title: 1,
-                    inputField: 2,
+                    inputField: 1.5,
                     range: { slider: 2, inputText: 1 }
                 }
             },
