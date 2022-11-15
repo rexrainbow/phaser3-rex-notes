@@ -4,7 +4,7 @@ import GetPartialData from '../../../../../plugins/utils/object/GetPartialData.j
 import IsKeyValueEqual from '../../../../../plugins/utils/object/IsKeyValueEqual.js';
 
 
-var CreateRoundRectangle = function (scene, config) {
+var CreateButtonRoundRectangleBackground = function (scene, config) {
     var gameObject = new RoundRectangle(scene, config);
     scene.add.existing(gameObject);
 
@@ -74,4 +74,4 @@ const StyleToProperty = {
     strokeWidth: 'lineWidth',
 }
 
-export default CreateRoundRectangle;
+export default CreateButtonRoundRectangleBackground;

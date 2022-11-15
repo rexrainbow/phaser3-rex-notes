@@ -18,6 +18,18 @@ var BuildListConfig = function (scene, config) {
         SetLabelData(gameObject, { text: option.text });
         return gameObject;
     }
+    listConfig.list.onButtonOver = function (button, index, pointer, event) {
+        var background = button.childrenMap.background;
+        if (background.setActiveState) {
+            background.setActiveState(true);
+        }
+    }
+    listConfig.list.onButtonOut = function (button, index, pointer, event) {
+        var background = button.childrenMap.background;
+        if (background.setActiveState) {
+            background.setActiveState(false);
+        }
+    }
 
     return listConfig;
 }

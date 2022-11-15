@@ -1,5 +1,5 @@
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
-import CreateRoundRectangle from './CreateRoundRectangle.js';
+import CreateButtonRoundRectangleBackground from './CreateButtonRoundRectangleBackground.js';
 import CreateText from '../../../utils/build/CreateText.js';
 import CreateImage from '../../../utils/build/CreateImage.js';
 
@@ -7,7 +7,7 @@ var BuildLabelConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};
 
     var backgroundStyle = config.background || {};
-    config.background = CreateRoundRectangle(scene, backgroundStyle);
+    config.background = CreateButtonRoundRectangleBackground(scene, backgroundStyle);
 
     var textStyle = config.text || {};
     config.text = CreateText(scene, textStyle);

@@ -29,20 +29,20 @@ class Demo extends Phaser.Scene {
         // Width stroke line
         this.add.rexCircleMaskImage(100, 350, 'image', {
             strokeColor: 'gray',
-            strokeLineWidth: 10
+            strokeWidth: 10
         });
 
         this.add.rexCircleMaskImage(300, 350, 'image', {
             maskType: 'ellipse',
             strokeColor: 'gray',
-            strokeLineWidth: 10
+            strokeWidth: 10
         });
 
         this.add.rexCircleMaskImage(500, 350, 'image', {
             maskType: 'roundRectangle',
             radius: 20,
             strokeColor: 'gray',
-            strokeLineWidth: 10
+            strokeWidth: 10
         });
 
         // With background

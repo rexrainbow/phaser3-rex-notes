@@ -151,7 +151,9 @@ var CreatePanel = function (scene) {
                     button: {
                         background: {
                             color: COLOR_DARK,
-                            strokeColor: COLOR_LIGHT
+                            strokeColor: COLOR_LIGHT,
+
+                            'active.color': COLOR_LIGHT,
                         },
                         space: { left: 5, right: 5, top: 8, bottom: 8 }
                     },

@@ -1,5 +1,5 @@
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
-import CreateRoundRectangle from './CreateRoundRectangle.js';
+import CreateRoundRectangle from '../../../utils/build/CreateRoundRectangle.js';
 
 var BuildSliderConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};
