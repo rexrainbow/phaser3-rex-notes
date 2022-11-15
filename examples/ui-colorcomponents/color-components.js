@@ -62,6 +62,10 @@ class Demo extends Phaser.Scene {
                 }
             },
 
+            space: {
+                item: 5
+            },
+
             valuechangeCallback(value) {
                 rect.setFillStyle(value);
             },
