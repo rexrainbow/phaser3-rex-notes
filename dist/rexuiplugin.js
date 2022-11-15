@@ -45974,71 +45974,9 @@
   Object.assign(TweakerShell.prototype, methods$2);
 
   var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle(scene, config);
+    var gameObject = new RoundRectangle$3(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
-  };
-  var RoundRectangle = /*#__PURE__*/function (_RoundRectangleBase) {
-    _inherits(RoundRectangle, _RoundRectangleBase);
-    var _super = _createSuper(RoundRectangle);
-    function RoundRectangle(scene, config) {
-      var _this;
-      _classCallCheck(this, RoundRectangle);
-      _this = _super.call(this, scene, config);
-      var activeStyle = ExtractByPrefix(config, 'active');
-      for (var name in activeStyle) {
-        var propertyName = StyleToProperty[name] || name;
-        var value = activeStyle[name];
-        delete activeStyle[name];
-        activeStyle[propertyName] = value;
-      }
-      _this.activeStyle = activeStyle;
-      return _this;
-    }
-    _createClass(RoundRectangle, [{
-      key: "modifyStyle",
-      value: function modifyStyle(style) {
-        for (var key in style) {
-          this[key] = style[key];
-        }
-        return this;
-      }
-    }, {
-      key: "setActiveState",
-      value: function setActiveState(enable) {
-        if (enable === undefined) {
-          enable = true;
-        }
-        if (this.activeState === enable) {
-          return this;
-        }
-        this.activeState = enable;
-        if (enable) {
-          var activeStyle = this.activeStyle;
-          var styleSave = GetPartialData(this, activeStyle);
-          if (IsKeyValueEqual(activeStyle, styleSave)) {
-            return;
-          }
-          this.styleSave = styleSave;
-          this.modifyStyle(activeStyle);
-        } else {
-          if (!this.styleSave) {
-            return this;
-          }
-          this.modifyStyle(this.styleSave);
-          this.styleSave = undefined;
-        }
-        return this;
-      }
-    }]);
-    return RoundRectangle;
-  }(RoundRectangle$3);
-  var StyleToProperty = {
-    color: 'fillColor',
-    alpha: 'fillAlpha',
-    strokeColor: 'strokeColor',
-    strokeAlpha: 'strokeAlpha',
-    strokeWidth: 'lineWidth'
   };
 
   var CreateBackground = function CreateBackground(scene, config, style, gameObject) {
@@ -46122,6 +46060,74 @@
   }(Sizer);
   Object.assign(InputRow.prototype, BindingTargetMethods);
 
+  var CreateButtonRoundRectangleBackground = function CreateButtonRoundRectangleBackground(scene, config) {
+    var gameObject = new RoundRectangle(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+  var RoundRectangle = /*#__PURE__*/function (_RoundRectangleBase) {
+    _inherits(RoundRectangle, _RoundRectangleBase);
+    var _super = _createSuper(RoundRectangle);
+    function RoundRectangle(scene, config) {
+      var _this;
+      _classCallCheck(this, RoundRectangle);
+      _this = _super.call(this, scene, config);
+      var activeStyle = ExtractByPrefix(config, 'active');
+      for (var name in activeStyle) {
+        var propertyName = StyleToProperty[name] || name;
+        var value = activeStyle[name];
+        delete activeStyle[name];
+        activeStyle[propertyName] = value;
+      }
+      _this.activeStyle = activeStyle;
+      return _this;
+    }
+    _createClass(RoundRectangle, [{
+      key: "modifyStyle",
+      value: function modifyStyle(style) {
+        for (var key in style) {
+          this[key] = style[key];
+        }
+        return this;
+      }
+    }, {
+      key: "setActiveState",
+      value: function setActiveState(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+        if (this.activeState === enable) {
+          return this;
+        }
+        this.activeState = enable;
+        if (enable) {
+          var activeStyle = this.activeStyle;
+          var styleSave = GetPartialData(this, activeStyle);
+          if (IsKeyValueEqual(activeStyle, styleSave)) {
+            return;
+          }
+          this.styleSave = styleSave;
+          this.modifyStyle(activeStyle);
+        } else {
+          if (!this.styleSave) {
+            return this;
+          }
+          this.modifyStyle(this.styleSave);
+          this.styleSave = undefined;
+        }
+        return this;
+      }
+    }]);
+    return RoundRectangle;
+  }(RoundRectangle$3);
+  var StyleToProperty = {
+    color: 'fillColor',
+    alpha: 'fillAlpha',
+    strokeColor: 'strokeColor',
+    strokeAlpha: 'strokeAlpha',
+    strokeWidth: 'lineWidth'
+  };
+
   var PhaserText$1 = Phaser.GameObjects.Text;
   var CreateText$1 = function CreateText(scene, style) {
     var gameObject = new PhaserText$1(scene, 0, 0, '', style);
@@ -46139,7 +46145,7 @@
   var BuildLabelConfig = function BuildLabelConfig(scene, config) {
     config = config ? DeepClone(config) : {};
     var backgroundStyle = config.background || {};
-    config.background = CreateRoundRectangle$1(scene, backgroundStyle);
+    config.background = CreateButtonRoundRectangleBackground(scene, backgroundStyle);
     var textStyle = config.text || {};
     config.text = CreateText$1(scene, textStyle);
     config.icon || {};
@@ -46549,6 +46555,12 @@
         text: option.text
       });
       return gameObject;
+    };
+    listConfig.list.onButtonOver = function (button, index, pointer, event) {
+      button.setActiveState(true);
+    };
+    listConfig.list.onButtonOut = function (button, index, pointer, event) {
+      button.setActiveState(false);
     };
     return listConfig;
   };

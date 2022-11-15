@@ -19,16 +19,10 @@ var BuildListConfig = function (scene, config) {
         return gameObject;
     }
     listConfig.list.onButtonOver = function (button, index, pointer, event) {
-        var background = button.childrenMap.background;
-        if (background.setActiveState) {
-            background.setActiveState(true);
-        }
+        button.setActiveState(true);
     }
     listConfig.list.onButtonOut = function (button, index, pointer, event) {
-        var background = button.childrenMap.background;
-        if (background.setActiveState) {
-            background.setActiveState(false);
-        }
+        button.setActiveState(false);
     }
 
     return listConfig;
