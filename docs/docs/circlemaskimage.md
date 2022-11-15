@@ -102,7 +102,7 @@ var image = scene.add.rexCircleMaskImage(x, y, key, frame, {
     // backgroundColor: undefined,
     
     // strokeColor: undefined,
-    // strokeLineWidth: 0,
+    // strokeWidth: 0,
 });
 ```
 
@@ -116,7 +116,7 @@ var image = scene.add.rexCircleMaskImage(x, y, key, {
     // backgroundColor: undefined,
 
     // strokeColor: undefined,
-    // strokeLineWidth: 0,
+    // strokeWidth: 0,
 });
 ```
 
@@ -158,7 +158,7 @@ var image = scene.add.rexCircleMaskImage(x, y, key, {
     - `undefined`, or `null` : No background filling. Default behavior.
 - `strokeColor` : Add stroke around masked image.
     - `undefined`, or `null` : No stroke line. Default behavior.
-- `strokeLineWidth` : Stroke line width.
+- `strokeWidth` : Stroke line width.
 
 
 Add image from JSON
@@ -176,7 +176,7 @@ var image = scene.make.rexCircleMaskImage({
     // backgroundColor: undefined,
 
     // strokeColor: undefined,
-    // strokeLineWidth: 0,
+    // strokeWidth: 0,
     
     add: true
 });

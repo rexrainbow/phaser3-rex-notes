@@ -1,5 +1,5 @@
-import BuildLabelConfig from './BuildLabelConfig.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
+import BuildLabelConfig from './BuildLabelConfig.js';
 import CreateLabel from './CreateLabel.js';
 import SetLabelData from './SetLabelData.js';
 

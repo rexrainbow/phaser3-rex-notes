@@ -1,6 +1,6 @@
 import InputFiledBase from './InputFieldBase.js';
 import BuildListConfig from '../utils/BuildListConfig.js';
-import CreateList from '../../../utils/build/CreateDropDownList.js';
+import CreateDropDownList from '../../../utils/build/CreateDropDownList.js';
 import SetLabelData from '../utils/SetLabelData.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 
@@ -15,7 +15,7 @@ class ListInput extends InputFiledBase {
         this.type = 'rexTweaker.ListInput';
 
         var listConfig = BuildListConfig(scene, config.list);
-        var list = CreateList(scene, listConfig);
+        var list = CreateDropDownList(scene, listConfig);
 
         this.add(
             list,

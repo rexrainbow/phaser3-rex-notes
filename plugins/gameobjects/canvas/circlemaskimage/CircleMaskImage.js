@@ -27,8 +27,8 @@ class CircleMaskImage extends Canvas {
         var backgroundColor = GetValue(config, 'backgroundColor', undefined);
         var strokeColor = GetValue(config, 'strokeColor', undefined);
 
-        var defaultStrokeLineWidth = (strokeColor != null) ? 10 : 0;
-        var strokeLineWidth = GetValue(config, 'strokeLineWidth', defaultStrokeLineWidth);
+        var defaultStrokeWidth = (strokeColor != null) ? 10 : 0;
+        var strokeWidth = GetValue(config, 'strokeWidth', defaultStrokeWidth);
 
         if (maskType === undefined) {
             maskType = 0;
@@ -71,7 +71,7 @@ class CircleMaskImage extends Canvas {
         ctx.beginPath();
 
         // Build clip path 
-        var halfStrokeLineWidth = strokeLineWidth / 2;
+        var halfStrokeLineWidth = strokeWidth / 2;
         switch (maskType) {
             case 1:  // ellipse
                 var centerX = Math.floor(width / 2);
@@ -88,7 +88,7 @@ class CircleMaskImage extends Canvas {
                 AddRoundRectanglePath(
                     ctx,
                     halfStrokeLineWidth, halfStrokeLineWidth,
-                    width - strokeLineWidth, height - strokeLineWidth,
+                    width - strokeWidth, height - strokeWidth,
                     radiusConfig,
                     iteration
                 );
@@ -105,7 +105,7 @@ class CircleMaskImage extends Canvas {
         // Draw stroke line
         if (strokeColor != null) {
             ctx.strokeStyle = strokeColor;
-            ctx.lineWidth = strokeLineWidth;
+            ctx.lineWidth = strokeWidth;
             ctx.stroke();
         }
 

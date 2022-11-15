@@ -12678,7 +12678,8 @@
         var maskType = GetValue$2b(config, 'maskType', 0);
         var backgroundColor = GetValue$2b(config, 'backgroundColor', undefined);
         var strokeColor = GetValue$2b(config, 'strokeColor', undefined);
-        var strokeLineWidth = GetValue$2b(config, 'strokeLineWidth', strokeColor != null ? 2 : 0);
+        var defaultStrokeWidth = strokeColor != null ? 10 : 0;
+        var strokeWidth = GetValue$2b(config, 'strokeWidth', defaultStrokeWidth);
         if (maskType === undefined) {
           maskType = 0;
         } else if (typeof maskType === 'string') {
@@ -12695,17 +12696,18 @@
         if (!textureFrame) {
           return this;
         }
+        // Resize to frame size
         if (textureFrame.cutWidth !== this.width || textureFrame.cutHeight !== this.height) {
           this.setCanvasSize(textureFrame.cutWidth, textureFrame.cutHeight);
         } else {
           this.clear();
         }
-
-        // Draw mask
         var canvas = this.canvas,
           ctx = this.context;
         var width = canvas.width,
           height = canvas.height;
+
+        // Fill background
         if (backgroundColor != null) {
           ctx.fillStyle = backgroundColor;
           ctx.fillRect(0, 0, width, height);
@@ -12713,8 +12715,8 @@
         ctx.save();
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle 
-        var halfStrokeLineWidth = strokeLineWidth / 2;
+        // Build clip path 
+        var halfStrokeLineWidth = strokeWidth / 2;
         switch (maskType) {
           case 1:
             // ellipse
@@ -12727,7 +12729,7 @@
           case 2:
             var radiusConfig = GetValue$2b(config, 'radius', 0);
             var iteration = GetValue$2b(config, 'iteration', undefined);
-            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeLineWidth, height - strokeLineWidth, radiusConfig, iteration);
+            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeWidth, height - strokeWidth, radiusConfig, iteration);
             break;
           default:
             // circle
@@ -12737,11 +12739,15 @@
             ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
             break;
         }
+
+        // Draw stroke line
         if (strokeColor != null) {
           ctx.strokeStyle = strokeColor;
-          ctx.lineWidth = strokeLineWidth;
+          ctx.lineWidth = strokeWidth;
           ctx.stroke();
         }
+
+        // Clip frame image
         ctx.clip();
         this.loadTexture(key, frame);
         ctx.restore();
@@ -31045,7 +31051,8 @@
       // Add elements
       var background = GetValue$1b(config, 'background', undefined);
       var swatch = CreateSwatch(scene, GetValue$1b(config, 'swatch'));
-      var inputText = CreateInputText$1(scene, GetValue$1b(config, 'inputText'));
+      var inputTextConfig = GetValue$1b(config, 'inputText');
+      var inputText = CreateInputText$1(scene, inputTextConfig);
       if (background) {
         _this.addBackground(background);
       }
@@ -31055,8 +31062,8 @@
           expand: false
         });
       }
-      var proportion = GetValue$1b(config, 'inputText.width') === undefined ? 1 : 0;
-      var expand = GetValue$1b(config, 'inputText.height') === undefined ? true : false;
+      var proportion = GetValue$1b(inputTextConfig, 'width') === undefined ? 1 : 0;
+      var expand = GetValue$1b(inputTextConfig, 'height') === undefined ? true : false;
       _this.add(inputText, {
         proportion: proportion,
         expand: expand
@@ -46269,18 +46276,6 @@
     return InputFiledBase;
   }(Sizer);
 
-  var CreateTextInput$1 = function CreateTextInput(scene, config) {
-    config = config ? DeepClone(config) : {};
-
-    //if (!HasValue(config, 'wrap.hAlign')) {
-    //    SetValue(config, 'wrap.hAlign', 'right');
-    //}
-
-    var gameObject = new CanvasInput(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
-
   var TextInput = /*#__PURE__*/function (_InputFiledBase) {
     _inherits(TextInput, _InputFiledBase);
     var _super = _createSuper(TextInput);
@@ -46293,7 +46288,7 @@
       _this = _super.call(this, scene);
       _this.type = 'rexTweaker.TextInput';
       var inputTextConfig = config.inputText;
-      var inputText = CreateTextInput$1(scene, inputTextConfig);
+      var inputText = CreateInputText$1(scene, inputTextConfig);
       _this.add(inputText, {
         proportion: 1,
         expand: true
@@ -46351,7 +46346,7 @@
       _this = _super.call(this, scene);
       _this.type = 'rexTweaker.NumberInput';
       var inputTextConfig = config.inputNumber || config.inputText;
-      var inputText = CreateTextInput$1(scene, inputTextConfig).setNumberInput();
+      var inputText = CreateInputText$1(scene, inputTextConfig).setNumberInput();
       _this.add(inputText, {
         proportion: 1,
         expand: true
@@ -46451,7 +46446,7 @@
         expand: expand
       });
       var inputTextConfig = config.inputNumber || config.inputText;
-      var inputText = CreateTextInput$1(scene, inputTextConfig).setNumberInput();
+      var inputText = CreateInputText$1(scene, inputTextConfig).setNumberInput();
       var proportion = GetValue$d(config, 'proportion.range.inputText', 1);
       _this.add(inputText, {
         proportion: proportion,
@@ -46558,7 +46553,7 @@
     return listConfig;
   };
 
-  var CreateList = function CreateList(scene, config) {
+  var CreateDropDownList = function CreateDropDownList(scene, config) {
     var gameObject = new DropDownList(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
@@ -46595,7 +46590,7 @@
       _this = _super.call(this, scene);
       _this.type = 'rexTweaker.ListInput';
       var listConfig = BuildListConfig(scene, config.list);
-      var list = CreateList(scene, listConfig);
+      var list = CreateDropDownList(scene, listConfig);
       _this.add(list, {
         proportion: 1,
         expand: true

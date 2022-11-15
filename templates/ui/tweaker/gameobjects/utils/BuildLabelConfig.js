@@ -1,7 +1,7 @@
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 import CreateRoundRectangle from './CreateRoundRectangle.js';
-import CreateText from './CreateText.js';
-import CreateImage from './CreateImage.js';
+import CreateText from '../../../utils/build/CreateText.js';
+import CreateImage from '../../../utils/build/CreateImage.js';
 
 var BuildLabelConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};

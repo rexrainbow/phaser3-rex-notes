@@ -10255,7 +10255,8 @@
         var maskType = GetValue$1c(config, 'maskType', 0);
         var backgroundColor = GetValue$1c(config, 'backgroundColor', undefined);
         var strokeColor = GetValue$1c(config, 'strokeColor', undefined);
-        var strokeLineWidth = GetValue$1c(config, 'strokeLineWidth', strokeColor != null ? 2 : 0);
+        var defaultStrokeWidth = strokeColor != null ? 10 : 0;
+        var strokeWidth = GetValue$1c(config, 'strokeWidth', defaultStrokeWidth);
         if (maskType === undefined) {
           maskType = 0;
         } else if (typeof maskType === 'string') {
@@ -10272,17 +10273,18 @@
         if (!textureFrame) {
           return this;
         }
+        // Resize to frame size
         if (textureFrame.cutWidth !== this.width || textureFrame.cutHeight !== this.height) {
           this.setCanvasSize(textureFrame.cutWidth, textureFrame.cutHeight);
         } else {
           this.clear();
         }
-
-        // Draw mask
         var canvas = this.canvas,
           ctx = this.context;
         var width = canvas.width,
           height = canvas.height;
+
+        // Fill background
         if (backgroundColor != null) {
           ctx.fillStyle = backgroundColor;
           ctx.fillRect(0, 0, width, height);
@@ -10290,8 +10292,8 @@
         ctx.save();
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle 
-        var halfStrokeLineWidth = strokeLineWidth / 2;
+        // Build clip path 
+        var halfStrokeLineWidth = strokeWidth / 2;
         switch (maskType) {
           case 1:
             // ellipse
@@ -10304,7 +10306,7 @@
           case 2:
             var radiusConfig = GetValue$1c(config, 'radius', 0);
             var iteration = GetValue$1c(config, 'iteration', undefined);
-            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeLineWidth, height - strokeLineWidth, radiusConfig, iteration);
+            AddRoundRectanglePath(ctx, halfStrokeLineWidth, halfStrokeLineWidth, width - strokeWidth, height - strokeWidth, radiusConfig, iteration);
             break;
           default:
             // circle
@@ -10314,11 +10316,15 @@
             ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
             break;
         }
+
+        // Draw stroke line
         if (strokeColor != null) {
           ctx.strokeStyle = strokeColor;
-          ctx.lineWidth = strokeLineWidth;
+          ctx.lineWidth = strokeWidth;
           ctx.stroke();
         }
+
+        // Clip frame image
         ctx.clip();
         this.loadTexture(key, frame);
         ctx.restore();
