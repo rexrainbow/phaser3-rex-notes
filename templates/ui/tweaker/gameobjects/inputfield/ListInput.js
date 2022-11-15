@@ -1,6 +1,6 @@
 import InputFiledBase from './InputFieldBase.js';
 import BuildListConfig from '../utils/BuildListConfig.js';
-import CreateList from '../utils/CreateList.js';
+import CreateList from '../../../utils/build/CreateDropDownList.js';
 import SetLabelData from '../utils/SetLabelData.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 

@@ -20,7 +20,8 @@ class ColorInput extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var swatch = CreateSwatch(scene, GetValue(config, 'swatch'));
-        var inputText = CreateInputText(scene, GetValue(config, 'inputText'));
+        var inputTextConfig = GetValue(config, 'inputText');
+        var inputText = CreateInputText(scene, inputTextConfig);
 
         if (background) {
             this.addBackground(background);
@@ -33,8 +34,8 @@ class ColorInput extends Sizer {
             );
         }
 
-        var proportion = (GetValue(config, 'inputText.width') === undefined) ? 1 : 0;
-        var expand = (GetValue(config, 'inputText.height') === undefined) ? true : false;
+        var proportion = (GetValue(inputTextConfig, 'width') === undefined) ? 1 : 0;
+        var expand = (GetValue(inputTextConfig, 'height') === undefined) ? true : false;
         this.add(
             inputText,
             { proportion: proportion, expand: expand }
