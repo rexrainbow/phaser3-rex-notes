@@ -22,6 +22,7 @@ import CustomProgress from './customprogress/CustomProgress';
 import TransitionImage from './transitionimage/TransitionImage';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 import Cover from './cover/Cover';
+import ColorComponents from './colorinput/colorcomponents/ColorComponents';
 import ColorInput from './colorinput/colorinput/ColorInput';
 import ColorPicker from './colorinput/colorpicker/ColorPicker';
 import Chart from './chart/Chart';
@@ -118,6 +119,7 @@ export {
     CanvasInput,
     FullWindowRectangle,
     Cover,
+    ColorComponents,
     ColorInput,
     ColorPicker,
     Chart,

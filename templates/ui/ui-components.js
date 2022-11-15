@@ -24,6 +24,7 @@ import CustomProgress from './customprogress/CustomProgress.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Cover from './cover/Cover.js';
+import ColorComponents from './colorinput/colorcomponents/ColorComponents.js';
 import ColorInput from './colorinput/colorinput/ColorInput.js';
 import ColorPicker from './colorinput/colorpicker/ColorPicker.js';
 import Chart from './chart/Chart.js';
@@ -120,6 +121,7 @@ export {
     CanvasInput,
     FullWindowRectangle,
     Cover,
+    ColorComponents,
     ColorInput,
     ColorPicker,
     Chart,

@@ -3,7 +3,7 @@ import Sizer from '../../sizer/Sizer';
 export default ColorPicker;
 
 declare namespace ColorPicker {
-    interface IConfig {
+    interface IConfig extends Sizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
 
         hPalette?: {

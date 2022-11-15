@@ -26,6 +26,7 @@ class Demo extends Phaser.Scene {
 
             list: {
                 label: {
+                    width: 48,
                     background: {
                         color: COLOR_DARK,
                     },
@@ -38,13 +39,15 @@ class Demo extends Phaser.Scene {
 
                         'active.color': COLOR_LIGHT,
                     },
-                    space: { left: 5, right: 5, top: 8, bottom: 8 }
+                    space: { left: 5, right: 5, top: 5, bottom: 5 }
                 },
             },
 
             inputText: {
+                padding: { left: 5, right: 5 },
                 background: {
-                    color: COLOR_DARK
+                    color: COLOR_DARK,
+                    stroke: COLOR_PRIMARY,
                 },
                 focusStyle: {
                     color: COLOR_PRIMARY,
@@ -67,7 +70,7 @@ class Demo extends Phaser.Scene {
 
         ui
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000)
+        //.drawBounds(this.add.graphics(), 0xff0000)
 
     }
 

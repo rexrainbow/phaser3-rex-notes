@@ -2674,7 +2674,7 @@
     renderCanvas: CanvasRenderer$2
   };
 
-  var Color$3 = Phaser.Display.Color;
+  var Color$4 = Phaser.Display.Color;
   var CanvasMethods = {
     clear: function clear() {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -2740,7 +2740,7 @@
     },
     getPixel: function getPixel(x, y, out) {
       if (out === undefined) {
-        out = new Color$3();
+        out = new Color$4();
       }
       var rgb = this.context.getImageData(x, y, 1, 1);
       out.setTo(rgb.data[0], rgb.data[1], rgb.data[2], rgb.data[3]);
@@ -9945,7 +9945,7 @@
   };
 
   var GetValue$2m = Phaser.Utils.Objects.GetValue;
-  var Clamp$f = Phaser.Math.Clamp;
+  var Clamp$e = Phaser.Math.Clamp;
   var Timer$1 = /*#__PURE__*/function () {
     function Timer(config) {
       _classCallCheck(this, Timer);
@@ -10077,10 +10077,10 @@
             t = 1;
             break;
         }
-        return Clamp$f(t, 0, 1);
+        return Clamp$e(t, 0, 1);
       },
       set: function set(value) {
-        value = Clamp$f(value, -1, 1);
+        value = Clamp$e(value, -1, 1);
         if (value < 0) {
           this.state = DELAY;
           this.nowTime = -this.delay * value;
@@ -16703,7 +16703,7 @@
     return t;
   };
 
-  var Clamp$e = Phaser.Math.Clamp;
+  var Clamp$d = Phaser.Math.Clamp;
   var Timer = /*#__PURE__*/function () {
     function Timer(timeline, config) {
       _classCallCheck(this, Timer);
@@ -16793,7 +16793,7 @@
       key: "getProgress",
       value: function getProgress() {
         var value = 1 - this.remainder / this.duration;
-        value = Clamp$e(value, 0, 1);
+        value = Clamp$d(value, 0, 1);
         if (this.yoyo) {
           value = Yoyo$1(value);
         }
@@ -16802,7 +16802,7 @@
     }, {
       key: "setProgress",
       value: function setProgress(value) {
-        value = Clamp$e(value, 0, 1);
+        value = Clamp$d(value, 0, 1);
         this.remainder = this.duration * (1 - value);
       }
     }, {
@@ -21819,7 +21819,7 @@
   };
 
   var GetValue$1T = Phaser.Utils.Objects.GetValue;
-  var Clamp$d = Phaser.Math.Clamp;
+  var Clamp$c = Phaser.Math.Clamp;
   function ProgressBase (BaseClass) {
     var ProgressBase = /*#__PURE__*/function (_BaseClass) {
       _inherits(ProgressBase, _BaseClass);
@@ -21846,7 +21846,7 @@
           return this._value;
         },
         set: function set(value) {
-          value = Clamp$d(value, 0, 1);
+          value = Clamp$c(value, 0, 1);
           var oldValue = this._value;
           var valueChanged = oldValue != value;
           this.dirty = this.dirty || valueChanged;
@@ -21912,7 +21912,7 @@
 
   var GetValue$1S = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$B = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$c = Phaser.Math.Clamp;
+  var Clamp$b = Phaser.Math.Clamp;
   var DefaultStartAngle$1 = Phaser.Math.DegToRad(270);
   var CircularProgress$1 = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
@@ -22043,7 +22043,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$c(value, 0, 1);
+        value = Clamp$b(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -22191,7 +22191,7 @@
 
   var GetValue$1R = Phaser.Utils.Objects.GetValue;
   var IsPlainObject$A = Phaser.Utils.Objects.IsPlainObject;
-  var Clamp$b = Phaser.Math.Clamp;
+  var Clamp$a = Phaser.Math.Clamp;
   var DefaultStartAngle = Phaser.Math.DegToRad(270);
   var CircularProgress = /*#__PURE__*/function (_ProgressBase) {
     _inherits(CircularProgress, _ProgressBase);
@@ -22329,7 +22329,7 @@
         return this._thickness;
       },
       set: function set(value) {
-        value = Clamp$b(value, 0, 1);
+        value = Clamp$a(value, 0, 1);
         this.dirty = this.dirty || this._thickness != value;
         this._thickness = value;
       }
@@ -29924,7 +29924,7 @@
 
   var IsPlainObject$k = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$1h = Phaser.Utils.Objects.GetValue;
-  var Clamp$a = Phaser.Math.Clamp;
+  var Clamp$9 = Phaser.Math.Clamp;
   var TransitionImage = /*#__PURE__*/function (_Container) {
     _inherits(TransitionImage, _Container);
     var _super = _createSuper(TransitionImage);
@@ -30058,7 +30058,7 @@
         return this._t;
       },
       set: function set(value) {
-        value = Clamp$a(value, 0, 1);
+        value = Clamp$9(value, 0, 1);
         if (this._t === value) {
           return;
         }
@@ -31056,7 +31056,7 @@
   };
 
   var GetValue$1c = Phaser.Utils.Objects.GetValue;
-  var Clamp$9 = Phaser.Math.Clamp;
+  var Clamp$8 = Phaser.Math.Clamp;
   var ColorInput = /*#__PURE__*/function (_Sizer) {
     _inherits(ColorInput, _Sizer);
     var _super = _createSuper(ColorInput);
@@ -31140,7 +31140,7 @@
             return;
           }
         } else {
-          value = Clamp$9(Math.floor(value), 0, 0xffffff);
+          value = Clamp$8(Math.floor(value), 0, 0xffffff);
         }
         if (this._value === value) {
           return;
@@ -31185,7 +31185,7 @@
   });
   SetValue$1(window, 'RexPlugins.UI.ColorInput', ColorInput);
 
-  var Color$2 = Phaser.Display.Color;
+  var Color$3 = Phaser.Display.Color;
   var Percent$3 = Phaser.Math.Percent;
   var DrawHPalette = function DrawHPalette(canvas, context, verticalMode) {
     if (verticalMode === undefined) {
@@ -31193,7 +31193,7 @@
     }
     var width = canvas.width;
     var height = canvas.height;
-    var color = new Color$2();
+    var color = new Color$3();
     if (verticalMode) {
       for (var iy = 0; iy < height; iy++) {
         var h = Percent$3(iy, 0, height);
@@ -31215,7 +31215,7 @@
     var height = canvas.height;
     var imgData = context.getImageData(0, 0, width, height);
     var data = imgData.data;
-    var color = new Color$2();
+    var color = new Color$3();
     for (var iy = 0; iy < height; iy++) {
       for (var ix = 0; ix < width; ix++) {
         var s = Percent$3(ix, 0, width);
@@ -31231,10 +31231,10 @@
     context.putImageData(imgData, 0, 0);
   };
 
-  var Color$1 = Phaser.Display.Color;
+  var Color$2 = Phaser.Display.Color;
   var Percent$2 = Phaser.Math.Percent;
-  var ColorToRGBA$1 = Phaser.Display.Color.ColorToRGBA;
-  var HSVToRGB$1 = Phaser.Display.Color.HSVToRGB;
+  var ColorToRGBA$2 = Phaser.Display.Color.ColorToRGBA;
+  var HSVToRGB$2 = Phaser.Display.Color.HSVToRGB;
   var HPaletteCanvas = /*#__PURE__*/function (_Canvas) {
     _inherits(HPaletteCanvas, _Canvas);
     var _super = _createSuper(HPaletteCanvas);
@@ -31255,7 +31255,7 @@
       }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexColorPicker.HPaletteCanvas';
-      _this.colorObject = new Color$1();
+      _this.colorObject = new Color$2();
       _this.setOrientation(orientation);
       _this.setSize(width, height);
       return _this;
@@ -31306,7 +31306,7 @@
           return this.color;
         }
         var h = this.getHue(localX, localY);
-        this.colorObject.setFromRGB(HSVToRGB$1(h, 1, 1));
+        this.colorObject.setFromRGB(HSVToRGB$2(h, 1, 1));
         return this.colorObject.color;
       }
     }, {
@@ -31328,7 +31328,7 @@
           }
           out = LocalXY$1;
         }
-        this.colorObject.setFromRGB(ColorToRGBA$1(color));
+        this.colorObject.setFromRGB(ColorToRGBA$2(color));
         if (this.orientation === 0) {
           out.x = this.width * this.colorObject.h;
           out.y = this.height / 2;
@@ -31453,10 +31453,10 @@
     return HPalette;
   }(OverlapSizer);
 
-  var Color = Phaser.Display.Color;
+  var Color$1 = Phaser.Display.Color;
   var Percent$1 = Phaser.Math.Percent;
-  var ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
-  var HSVToRGB = Phaser.Display.Color.HSVToRGB;
+  var ColorToRGBA$1 = Phaser.Display.Color.ColorToRGBA;
+  var HSVToRGB$1 = Phaser.Display.Color.HSVToRGB;
   var SVPaletteCanvas = /*#__PURE__*/function (_Canvas) {
     _inherits(SVPaletteCanvas, _Canvas);
     var _super = _createSuper(SVPaletteCanvas);
@@ -31480,7 +31480,7 @@
       if (hue === undefined) {
         hue = 1;
       }
-      _this.colorObject = new Color();
+      _this.colorObject = new Color$1();
       _this.setHue(hue);
       _this.setSize(width, height);
       return _this;
@@ -31524,7 +31524,7 @@
         }
         var s = Percent$1(localX, 0, this.width);
         var v = 1 - Percent$1(localY, 0, this.height);
-        this.colorObject.setFromRGB(HSVToRGB(this.hue, s, v));
+        this.colorObject.setFromRGB(HSVToRGB$1(this.hue, s, v));
         return this.colorObject.color;
       }
     }, {
@@ -31533,7 +31533,7 @@
         if (this.color === color) {
           return this;
         }
-        this.colorObject.setFromRGB(ColorToRGBA(color));
+        this.colorObject.setFromRGB(ColorToRGBA$1(color));
         this.setHue(this.colorObject.h);
         return this;
       }
@@ -31548,7 +31548,7 @@
           }
           out = LocalXY;
         }
-        this.colorObject.setFromRGB(ColorToRGBA(color));
+        this.colorObject.setFromRGB(ColorToRGBA$1(color));
         out.x = this.width * this.colorObject.s;
         out.y = this.height * (1 - this.colorObject.v);
         return out;
@@ -33985,31 +33985,16 @@
     return gameObject;
   };
 
-  var SetComponentsValue = function SetComponentsValue(components, value) {
-    var componentValue;
-    for (var i = 0, cnt = components.length; i < cnt; i++) {
-      // RGB
-      componentValue = value >> 8 * (2 - i) & 0xff;
-      components[i].setValue(componentValue);
-    }
-  };
-
-  var Clamp$8 = Phaser.Math.Clamp;
-  var GetComponentsValue = function GetComponentsValue(components) {
-    var value = 0,
-      componentValue;
-    for (var i = 0, cnt = components.length; i < cnt; i++) {
-      componentValue = components[i].value;
-
-      // RGB
-      componentValue = Clamp$8(componentValue, 0, 255);
-      value += componentValue << 8 * (2 - i);
-    }
-    return value;
-  };
-
   var GetValue$13 = Phaser.Utils.Objects.GetValue;
+  var Color = Phaser.Display.Color;
+  var ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
+  var HSVToRGB = Phaser.Display.Color.HSVToRGB;
   var Clamp$7 = Phaser.Math.Clamp;
+  var ColorTypeList = [{
+    text: 'RGB'
+  }, {
+    text: 'HSV'
+  }];
   var ColorComponents = /*#__PURE__*/function (_Sizer) {
     _inherits(ColorComponents, _Sizer);
     var _super = _createSuper(ColorComponents);
@@ -34022,20 +34007,16 @@
       config.orientation = 0;
       _this = _super.call(this, scene, config);
       _this.type = 'rexColorComponents';
+      _this.colorObject = new Color();
 
       // Add elements
       var background = GetValue$13(config, 'background', undefined);
       var listConfig = BuildListConfig(scene, config.list);
-      var list = CreateDropDownList(scene, listConfig).setOptions([{
-        text: 'RGB',
-        value: 0
-      }]).resetDisplayContent({
-        text: 'RGB'
-      });
+      var list = CreateDropDownList(scene, listConfig).setOptions(ColorTypeList).resetDisplayContent(ColorTypeList[0]);
       var inputTextConfig = GetValue$13(config, 'inputText');
       var components = [];
       for (var i = 0; i < 3; i++) {
-        var inputText = CreateInputText$1(scene, inputTextConfig).setMaxLength(3);
+        var inputText = CreateInputText$1(scene, inputTextConfig).setMaxLength(3).setNumberInput();
         components.push(inputText);
       }
       if (background) {
@@ -34057,14 +34038,12 @@
       _this.addChildrenMap('list', list);
       _this.addChildrenMap('components', components);
       list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-        //var value = GetOptionValue(list.options, button.text);
-        //this.setValue(value);
+        this.colorType = button.text;
       }, _assertThisInitialized(_this));
       for (var i = 0, cnt = components.length; i < cnt; i++) {
         components[i].on('close', function () {
-          var components = this.childrenMap.components;
-          var value = GetComponentsValue(components);
-          this.setValue(value);
+          this.updateColorObject();
+          this.setValue(this.colorObject.color);
         }, _assertThisInitialized(_this));
       }
       var callback = GetValue$13(config, 'valuechangeCallback', null);
@@ -34086,8 +34065,8 @@
           return;
         }
         this._value = value;
-        var components = this.childrenMap.components;
-        SetComponentsValue(components, value);
+        this.colorObject.setFromRGB(ColorToRGBA(value));
+        this.updateComponents();
         this.emit('valuechange', this._value);
       }
     }, {
@@ -34108,6 +34087,61 @@
       key: "setColor",
       value: function setColor(color) {
         this.color = color;
+        return this;
+      }
+    }, {
+      key: "colorType",
+      get: function get() {
+        return this.childrenMap.list.text;
+      },
+      set: function set(value) {
+        if (this.colorType === value) {
+          return;
+        }
+        this.childrenMap.list.setText(value);
+        this.updateComponents();
+      }
+    }, {
+      key: "setColorType",
+      value: function setColorType(colrType) {
+        this.colorType = colrType;
+        return this;
+      }
+    }, {
+      key: "updateComponents",
+      value: function updateComponents() {
+        var components = this.childrenMap.components;
+        var value0, value1, value2;
+        if (this.colorType === 'RGB') {
+          value0 = this.colorObject.red;
+          value1 = this.colorObject.green;
+          value2 = this.colorObject.blue;
+        } else {
+          // colorType === 'HSV'
+          value0 = Math.round(this.colorObject.h * 100);
+          value1 = Math.round(this.colorObject.s * 100);
+          value2 = Math.round(this.colorObject.v * 100);
+        }
+        components[0].setValue(value0);
+        components[1].setValue(value1);
+        components[2].setValue(value2);
+        return this;
+      }
+    }, {
+      key: "updateColorObject",
+      value: function updateColorObject() {
+        var components = this.childrenMap.components;
+        if (this.colorType === 'RGB') {
+          var red = Clamp$7(components[0].value, 0, 255);
+          var green = Clamp$7(components[1].value, 0, 255);
+          var blue = Clamp$7(components[2].value, 0, 255);
+          this.colorObject.setTo(red, green, blue);
+        } else {
+          var h = Clamp$7(components[0].value, 0, 100) / 100;
+          var s = Clamp$7(components[1].value, 0, 100) / 100;
+          var v = Clamp$7(components[2].value, 0, 100) / 100;
+          this.colorObject.setFromRGB(HSVToRGB(h, s, v));
+        }
         return this;
       }
     }]);
