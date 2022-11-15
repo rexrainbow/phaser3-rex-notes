@@ -1,9 +1,9 @@
-import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
+import DeepClone from '../../../../plugins/utils/object/DeepClone.js';
 import CreateButtonRoundRectangleBackground from './CreateButtonRoundRectangleBackground.js';
-import CreateText from '../../../utils/build/CreateText.js';
-import CreateImage from '../../../utils/build/CreateImage.js';
+import CreateText from './CreateText.js';
+import CreateImage from './CreateImage.js';
 
-var BuildLabelConfig = function (scene, config) {
+var BuildInteractiveLabelConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};
 
     var backgroundStyle = config.background || {};
@@ -21,4 +21,4 @@ var BuildLabelConfig = function (scene, config) {
     return config;
 }
 
-export default BuildLabelConfig;
+export default BuildInteractiveLabelConfig;

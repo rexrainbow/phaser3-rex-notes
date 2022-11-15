@@ -1,7 +1,7 @@
 import InputFiledBase from './InputFieldBase.js';
 import CreateButtons from '../utils/CreateButtons.js';
-import CreateLabel from '../utils/CreateLabel.js';
-import SetLabelData from '../utils/SetLabelData.js';
+import CreateInteractiveLabel from '../../../utils/build/CreateInteractiveLabel.js';
+import SetLabelData from '../../../utils/build/SetLabelData.js';
 import { GetOptionText, GetOptionValue } from '../../utils/OptionsMethods.js';
 import SetButtonsActiveStateByText from '../utils/SetButtonsActiveState.js';
 
@@ -54,7 +54,7 @@ class ButtonsInput extends InputFiledBase {
         var labelConfig = list.labelConfig;
         list.clearButtons(true);
         for (var i = 0, cnt = options.length; i < cnt; i++) {
-            var button = CreateLabel(scene, labelConfig)
+            var button = CreateInteractiveLabel(scene, labelConfig)
                 .setActiveState(false);
 
             var option = options[i];

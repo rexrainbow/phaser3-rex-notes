@@ -1,7 +1,7 @@
-import RoundRectangleBase from '../../../roundrectangle/RoundRectangle.js';
-import ExtractByPrefix from '../../../../../plugins/utils/object/ExtractByPrefix.js';
-import GetPartialData from '../../../../../plugins/utils/object/GetPartialData.js';
-import IsKeyValueEqual from '../../../../../plugins/utils/object/IsKeyValueEqual.js';
+import RoundRectangleBase from '../../roundrectangle/RoundRectangle.js';
+import ExtractByPrefix from '../../../../plugins/utils/object/ExtractByPrefix.js';
+import GetPartialData from '../../../../plugins/utils/object/GetPartialData.js';
+import IsKeyValueEqual from '../../../../plugins/utils/object/IsKeyValueEqual.js';
 
 
 var CreateButtonRoundRectangleBackground = function (scene, config) {

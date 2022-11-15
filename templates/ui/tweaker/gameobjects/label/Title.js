@@ -1,6 +1,6 @@
 import Label from '../../../label/Label.js';
-import BuildLabelConfig from '../utils/BuildLabelConfig.js';
-import SetLabelData from '../utils/SetLabelData.js';
+import BuildLabelConfig from '../../../utils/build/BuildDisplayLabelConfig.js';
+import SetLabelData from '../../../utils/build/SetLabelData.js';
 import DeepClone from '../../../../../plugins/utils/object/DeepClone.js';
 
 class Title extends Label {
