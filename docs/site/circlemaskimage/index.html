@@ -8877,13 +8877,23 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircleMaskImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">maskType</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="c1">// radius: undefined</span>
+    <span class="c1">// radius: undefined,</span>
+
+    <span class="c1">// backgroundColor: undefined,</span>
+
+    <span class="c1">// strokeColor: undefined,</span>
+    <span class="c1">// strokeLineWidth: 0,</span>
 <span class="p">});</span>
 </code></pre></div>
 <p>or </p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircleMaskImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">maskType</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="c1">// radius: undefined</span>
+    <span class="c1">// radius: undefined,</span>
+
+    <span class="c1">// backgroundColor: undefined,</span>
+
+    <span class="c1">// strokeColor: undefined,</span>
+    <span class="c1">// strokeLineWidth: 0,</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -8924,6 +8934,15 @@
 </li>
 </ul>
 </li>
+<li><code>backgroundColor</code> : Fill background with color.<ul>
+<li><code>undefined</code>, or <code>null</code> : No background filling. Default behavior.</li>
+</ul>
+</li>
+<li><code>strokeColor</code> : Add stroke around masked image.<ul>
+<li><code>undefined</code>, or <code>null</code> : No stroke line. Default behavior.</li>
+</ul>
+</li>
+<li><code>strokeLineWidth</code> : Stroke line width.</li>
 </ul>
 <p>Add image from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexCircleMaskImage</span><span class="p">({</span>
@@ -8934,6 +8953,11 @@
     <span class="nx">maskType</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// radius: undefined</span>
     <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
+
+    <span class="c1">// backgroundColor: undefined,</span>
+
+    <span class="c1">// strokeColor: undefined,</span>
+    <span class="c1">// strokeLineWidth: 0,</span>
 
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>

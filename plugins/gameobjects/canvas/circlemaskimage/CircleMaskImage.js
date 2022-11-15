@@ -26,7 +26,9 @@ class CircleMaskImage extends Canvas {
         var maskType = GetValue(config, 'maskType', 0);
         var backgroundColor = GetValue(config, 'backgroundColor', undefined);
         var strokeColor = GetValue(config, 'strokeColor', undefined);
-        var strokeLineWidth = GetValue(config, 'strokeLineWidth', (strokeColor != null) ? 2 : 0);
+
+        var defaultStrokeLineWidth = (strokeColor != null) ? 10 : 0;
+        var strokeLineWidth = GetValue(config, 'strokeLineWidth', defaultStrokeLineWidth);
 
         if (maskType === undefined) {
             maskType = 0;
@@ -47,18 +49,19 @@ class CircleMaskImage extends Canvas {
         if (!textureFrame) {
             return this;
         }
+        // Resize to frame size
         if ((textureFrame.cutWidth !== this.width) || (textureFrame.cutHeight !== this.height)) {
             this.setCanvasSize(textureFrame.cutWidth, textureFrame.cutHeight);
         } else {
             this.clear();
         }
 
-        // Draw mask
         var canvas = this.canvas,
             ctx = this.context;
         var width = canvas.width,
             height = canvas.height;
 
+        // Fill background
         if (backgroundColor != null) {
             ctx.fillStyle = backgroundColor;
             ctx.fillRect(0, 0, width, height);
@@ -67,7 +70,7 @@ class CircleMaskImage extends Canvas {
         ctx.save();
         ctx.beginPath();
 
-        // Draw circle, ellipse, or roundRectangle 
+        // Build clip path 
         var halfStrokeLineWidth = strokeLineWidth / 2;
         switch (maskType) {
             case 1:  // ellipse
@@ -99,12 +102,14 @@ class CircleMaskImage extends Canvas {
                 break;
         }
 
+        // Draw stroke line
         if (strokeColor != null) {
             ctx.strokeStyle = strokeColor;
             ctx.lineWidth = strokeLineWidth;
             ctx.stroke();
         }
 
+        // Clip frame image
         ctx.clip();
         this.loadTexture(key, frame);
         ctx.restore();
