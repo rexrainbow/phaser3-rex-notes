@@ -11079,14 +11079,14 @@
   var HPalette = /*#__PURE__*/function (_OverlapSizer) {
     _inherits(HPalette, _OverlapSizer);
     var _super = _createSuper(HPalette);
-    function HPalette(scene, width, height) {
+    function HPalette(scene, config) {
       var _this;
       _classCallCheck(this, HPalette);
-      _this = _super.call(this, scene, {
-        width: width,
-        height: height
-      });
-      var orientation = width != null ? 1 : 0;
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene, config);
+      var orientation = config.width != null ? 1 : 0;
       var paletteCanvas = new HPaletteCanvas(scene).setOrientation(orientation);
       scene.add.existing(paletteCanvas);
       _this.type = 'rexColorPicker.HPalette';
@@ -11271,13 +11271,10 @@
   var SVPalette = /*#__PURE__*/function (_OverlapSizer) {
     _inherits(SVPalette, _OverlapSizer);
     var _super = _createSuper(SVPalette);
-    function SVPalette(scene, width, height) {
+    function SVPalette(scene, config) {
       var _this;
       _classCallCheck(this, SVPalette);
-      _this = _super.call(this, scene, {
-        width: width,
-        height: height
-      });
+      _this = _super.call(this, scene, config);
       var paletteCanvas = new SVPaletteCanvas(scene);
       scene.add.existing(paletteCanvas);
       _this.type = 'rexColorPicker.SVPalette';
@@ -11384,11 +11381,17 @@
           hPaletteHeight = GetValue(config, 'hPalette.size', 10);
         }
       }
-      var hPalette = new HPalette(scene, hPaletteWidth, hPaletteHeight);
+      var hPalette = new HPalette(scene, {
+        width: hPaletteWidth,
+        height: hPaletteHeight
+      });
       scene.add.existing(hPalette);
       var svPaletteWidth = GetValue(config, 'svPalette.width', undefined);
       var svPaletteHeight = GetValue(config, 'svPalette.height', undefined);
-      var svPalette = new SVPalette(scene, svPaletteWidth, svPaletteWidth);
+      var svPalette = new SVPalette(scene, {
+        width: svPaletteWidth,
+        height: svPaletteHeight
+      });
       scene.add.existing(svPalette);
       if (background) {
         _this.addBackground(background);

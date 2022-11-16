@@ -24,30 +24,21 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 200, height: 40,
 
-            list: {
-                label: {
-                    width: 48,
-                    background: {
-                        color: COLOR_DARK,
-                    },
-                    space: { left: 5, right: 5 }
-                },
-                button: {
-                    background: {
-                        color: COLOR_DARK,
-                        strokeColor: COLOR_LIGHT,
+            background: this.rexUI.add.roundRectangle({
+                strokeColor: COLOR_PRIMARY,
+                radius: 10
+            }),
 
-                        'active.color': COLOR_LIGHT,
-                    },
-                    space: { left: 5, right: 5, top: 5, bottom: 5 }
+            formatLabel: {
+                background: {
+                    color: COLOR_DARK,
                 },
+                space: { left: 5, right: 5 }
             },
 
             inputText: {
-                padding: { left: 5, right: 5 },
                 background: {
                     color: COLOR_DARK,
-                    stroke: COLOR_PRIMARY,
                 },
                 focusStyle: {
                     color: COLOR_PRIMARY,
@@ -63,6 +54,7 @@ class Demo extends Phaser.Scene {
             },
 
             space: {
+                left: 10, right: 10, top: 10, bottom: 10,
                 item: 5
             },
 
@@ -79,70 +71,6 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
-}
-
-const InputTextConfig = {
-    background: {
-        color: COLOR_DARK
-    },
-    focusStyle: {
-        color: COLOR_PRIMARY,
-    },
-    style: {
-        backgroundBottomY: 4,
-        backgroundHeight: 18,
-    },
-    cursorStyle: {
-        color: 'black',
-        backgroundColor: 'white',
-    }
-}
-
-var CreateColorInput0 = function (scene) {
-    return scene.rexUI.add.colorInput({
-        height: 60,
-        inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
-
-        value: Phaser.Math.Between(0, 0x1000000)
-    })
-}
-
-var CreateColorInput1 = function (scene) {
-    return scene.rexUI.add.colorInput({
-        height: 60,
-        swatch: {
-            shape: 'circle'
-        },
-        inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
-
-        value: Phaser.Math.Between(0, 0x1000000)
-    })
-}
-
-var CreateColorInput2 = function (scene) {
-    return scene.rexUI.add.colorInput({
-        height: 60,
-        swatch: {
-            radius: 12,
-        },
-        inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
-
-        value: Phaser.Math.Between(0, 0x1000000)
-    })
-}
-
-var CreateColorInput3 = function (scene) {
-    return scene.rexUI.add.colorInput({
-        height: 60,
-        swatch: scene.add.image(0, 0, 'img'),
-        inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
-
-        value: Phaser.Math.Between(0, 0x1000000)
-    })
 }
 
 var config = {

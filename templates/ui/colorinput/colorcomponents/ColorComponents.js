@@ -1,6 +1,5 @@
 import Sizer from '../../sizer/Sizer.js';
-import BuildListConfig from '../../utils/build/BuildListConfig.js';
-import CreateDropDownList from '../../utils/build/CreateDropDownList.js';
+import CreateDisplayLabel from '../../utils/build/CreateDisplayLabel.js';
 import CreateInputText from '../../utils/build/CreateInputText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -8,11 +7,6 @@ const Color = Phaser.Display.Color;
 const ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
 const HSVToRGB = Phaser.Display.Color.HSVToRGB;
 const Clamp = Phaser.Math.Clamp;
-
-const ColorTypeList = [
-    { text: 'RGB' },
-    { text: 'HSV' }
-]
 
 class ColorComponents extends Sizer {
     constructor(scene, config) {
@@ -28,10 +22,9 @@ class ColorComponents extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
 
-        var listConfig = BuildListConfig(scene, config.list);
-        var list = CreateDropDownList(scene, listConfig)
-            .setOptions(ColorTypeList)
-            .resetDisplayContent(ColorTypeList[0])
+        var formatLabelConfig = config.formatLabel;
+        var formatLabel = CreateDisplayLabel(scene, formatLabelConfig)
+            .resetDisplayContent(formatLabelConfig);
 
         var inputTextConfig = GetValue(config, 'inputText');
         var components = [];
@@ -47,9 +40,11 @@ class ColorComponents extends Sizer {
             this.addBackground(background);
         }
 
+        var proportion = GetValue(config, 'proportion.formatLabel', 0);
+        var expand = GetValue(config, 'expand.formatLabel', true);
         this.add(
-            list,
-            { proportion: 0, expand: true }
+            formatLabel,
+            { proportion: proportion, expand: expand }
         );
 
         var proportion = (GetValue(inputTextConfig, 'width') === undefined) ? 1 : 0;
@@ -62,12 +57,10 @@ class ColorComponents extends Sizer {
         }
 
         this.addChildrenMap('background', background);
-        this.addChildrenMap('list', list);
+        this.addChildrenMap('formatLabel', formatLabel);
         this.addChildrenMap('components', components);
 
-        list.on('button.click', function (dropDownList, listPanel, button, index, pointer, event) {
-            this.colorType = button.text;
-        }, this);
+        formatLabel.onClick(this.toggleColorFormat, this);
 
         for (var i = 0, cnt = components.length; i < cnt; i++) {
             components[i].on('close', function () {
@@ -82,6 +75,7 @@ class ColorComponents extends Sizer {
             this.on('valuechange', callback, scope);
         }
 
+        formatLabel.setText('RGB');
         this.setValue(GetValue(config, 'value', 0xffffff));
     }
 
@@ -122,31 +116,36 @@ class ColorComponents extends Sizer {
         return this;
     }
 
-    get colorType() {
-        return this.childrenMap.list.text;
+    get colorFormat() {
+        return this.childrenMap.formatLabel.text;
     }
 
-    set colorType(value) {
-        if (this.colorType === value) {
+    set colorFormat(value) {
+        if (this.colorFormat === value) {
             return;
         }
-        this.childrenMap.list.setText(value);
+        this.childrenMap.formatLabel.setText(value);
         this.updateComponents();
     }
 
-    setColorType(colrType) {
-        this.colorType = colrType;
+    setColorFormat(colrType) {
+        this.colorFormat = colrType;
+        return this;
+    }
+
+    toggleColorFormat() {
+        this.colorFormat = (this.colorFormat === 'RGB') ? 'HSV' : 'RGB';
         return this;
     }
 
     updateComponents() {
         var components = this.childrenMap.components;
         var value0, value1, value2
-        if (this.colorType === 'RGB') {
+        if (this.colorFormat === 'RGB') {
             value0 = this.colorObject.red;
             value1 = this.colorObject.green;
             value2 = this.colorObject.blue;
-        } else { // colorType === 'HSV'
+        } else { // colorFormat === 'HSV'
             value0 = Math.floor(this.colorObject.h * 360);
             value1 = Math.floor(this.colorObject.s * 100);
             value2 = Math.floor(this.colorObject.v * 100);
@@ -160,7 +159,7 @@ class ColorComponents extends Sizer {
 
     updateColorObject() {
         var components = this.childrenMap.components;
-        if (this.colorType === 'RGB') {
+        if (this.colorFormat === 'RGB') {
             var red = Clamp(components[0].value, 0, 255);
             var green = Clamp(components[1].value, 0, 255);
             var blue = Clamp(components[2].value, 0, 255);

@@ -5952,10 +5952,10 @@
 
     // textObject.setText(newText);
 
+    // Pop lastInsertCursor
+    textObject.popChild(textObject.lastInsertCursor);
     if (newText === '') {
-      textObject.popChild(textObject.lastInsertCursor);
       textObject.removeChildren();
-      textObject.addChild(textObject.lastInsertCursor, 0);
     } else {
       var results = diffChars(text, newText);
       var charIndex = 0;
@@ -5972,6 +5972,9 @@
         }
       }
     }
+
+    // Push back lastInsertCursor
+    textObject.addChild(textObject.lastInsertCursor);
     textObject.runWordWrap();
   };
 
@@ -6070,7 +6073,6 @@
         if (this._text === value) {
           return;
         }
-        this.moveChildToLast(this.lastInsertCursor);
         SetText(this, value);
         this._text = value;
       }
