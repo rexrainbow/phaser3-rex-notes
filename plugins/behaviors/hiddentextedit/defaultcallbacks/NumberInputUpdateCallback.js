@@ -12,7 +12,7 @@ var NumberInputUpdateCallback = function (text, textObject, hiddenInputText) {
         text = previousText;
         var cursorPosition = hiddenInputText.cursorPosition - 1;
         hiddenInputText.setText(text);
-        hiddenInputText.setCursorPosition(cursorPosition);        
+        hiddenInputText.setCursorPosition(cursorPosition);
     } else {
         // New number text, update previous texr
         hiddenInputText.previousText = text;
