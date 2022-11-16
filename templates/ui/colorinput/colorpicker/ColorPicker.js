@@ -1,6 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
-import { CreateHPalette, CreateSVPalette } from './methods/CreateHSVPalette.js';
-
+import HPalette from './methods/HPalette.js';
+import SVPalette from './methods/SVPalette.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -37,11 +37,13 @@ class ColorPicker extends Sizer {
                 hPaletteHeight = GetValue(config, 'hPalette.size', 10);
             }
         }
-        var hPalette = CreateHPalette(scene, hPaletteWidth, hPaletteHeight);
+        var hPalette = new HPalette(scene, hPaletteWidth, hPaletteHeight);
+        scene.add.existing(hPalette);
 
         var svPaletteWidth = GetValue(config, 'svPalette.width', undefined);
         var svPaletteHeight = GetValue(config, 'svPalette.height', undefined);
-        var svPalette = CreateSVPalette(scene, svPaletteWidth, svPaletteWidth);
+        var svPalette = new SVPalette(scene, svPaletteWidth, svPaletteWidth);
+        scene.add.existing(svPalette);
 
         if (background) {
             this.addBackground(background);
