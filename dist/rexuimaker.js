@@ -8035,6 +8035,18 @@
         strokeWidth = config.strokeWidth;
         shapeType = config.shape;
       }
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
@@ -8048,12 +8060,6 @@
         var radius = GetValue$1j(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
-        if (width === undefined) {
-          width = 0;
-        }
-        if (height === undefined) {
-          height = width;
-        }
         var radius = {
           x: width / 2,
           y: height / 2
@@ -16151,35 +16157,53 @@
   };
 
   var ClickMethods = {
-    onClick: function onClick(callback, scope, config) {
-      if (!callback) {
+    onClick: function onClick(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._click === undefined) {
-        this._click = new Button(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._click.on('click', callback, scope);
+      if (gameObject._click === undefined) {
+        gameObject._click = new Button(gameObject, config);
+      }
+      gameObject._click.on('click', callback, scope);
       return this;
     },
-    offClick: function offClick(callback, scope) {
-      if (this._click === undefined) {
+    offClick: function offClick(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.off('click', callback, scope);
+      gameObject._click.off('click', callback, scope);
       return this;
     },
-    enableClick: function enableClick(enabled) {
-      if (this._click === undefined) {
+    enableClick: function enableClick(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(enabled);
+      gameObject._click.setEnable(enabled);
       return this;
     },
-    disableClick: function disableClick() {
-      if (this._click === undefined) {
+    disableClick: function disableClick(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(false);
+      gameObject._click.setEnable(false);
       return this;
     }
   };
@@ -16386,35 +16410,53 @@
   };
 
   var ClickOutsideMethods = {
-    onClickOutside: function onClickOutside(callback, scope, config) {
-      if (!callback) {
+    onClickOutside: function onClickOutside(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._clickOutside === undefined) {
-        this._clickOutside = new ClickOutside(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._clickOutside.on('clickoutside', callback, scope);
+      if (gameObject._clickOutside === undefined) {
+        gameObject._clickOutside = new ClickOutside(gameObject, config);
+      }
+      gameObject._clickOutside.on('clickoutside', callback, scope);
       return this;
     },
-    offClickOutside: function offClickOutside(callback, scope) {
-      if (this._clickOutside === undefined) {
+    offClickOutside: function offClickOutside(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.off('clickoutside', callback, scope);
+      gameObject._clickOutside.off('clickoutside', callback, scope);
       return this;
     },
-    enableClickOutside: function enableClickOutside(enabled) {
-      if (this._clickOutside === undefined) {
+    enableClickOutside: function enableClickOutside(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(enabled);
+      gameObject._clickOutside.setEnable(enabled);
       return this;
     },
-    disableClickOutside: function disableClickOutside() {
-      if (this._clickOutside === undefined) {
+    disableClickOutside: function disableClickOutside(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(false);
+      gameObject._clickOutside.setEnable(false);
       return this;
     }
   };
@@ -17015,35 +17057,53 @@
   }(ComponentBase);
 
   var TouchingMethods = {
-    onTouching: function onTouching(callback, scope, config) {
-      if (!callback) {
+    onTouching: function onTouching(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._inTouching === undefined) {
-        this._inTouching = new InTouching(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._inTouching.on('intouch', callback, scope);
+      if (gameObject._inTouching === undefined) {
+        gameObject._inTouching = new InTouching(gameObject, config);
+      }
+      gameObject._inTouching.on('intouch', callback, scope);
       return this;
     },
-    offTouching: function offTouching(callback, scope) {
-      if (this._inTouching === undefined) {
+    offTouching: function offTouching(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.off('intouch', callback, scope);
+      gameObject._inTouching.off('intouch', callback, scope);
       return this;
     },
-    enableTouching: function enableTouching(enabled) {
-      if (this._inTouching === undefined) {
+    enableTouching: function enableTouching(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(enabled);
+      gameObject._inTouching.setEnable(enabled);
       return this;
     },
-    disableTouching: function disableTouching() {
-      if (this._inTouching === undefined) {
+    disableTouching: function disableTouching(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(false);
+      gameObject._inTouching.setEnable(false);
       return this;
     }
   };

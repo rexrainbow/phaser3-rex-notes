@@ -874,6 +874,21 @@
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
       var _this;
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexRoundRectangleCanvas';
       var radius = GetValue(radiusConfig, 'radius', radiusConfig);

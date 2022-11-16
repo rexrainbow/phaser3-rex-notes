@@ -492,6 +492,18 @@
         strokeWidth = config.strokeWidth;
         shapeType = config.shape;
       }
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
@@ -505,12 +517,6 @@
         var radius = GetValue$1(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
-        if (width === undefined) {
-          width = 0;
-        }
-        if (height === undefined) {
-          height = width;
-        }
         var radius = {
           x: width / 2,
           y: height / 2

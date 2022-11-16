@@ -2328,6 +2328,18 @@
         strokeWidth = config.strokeWidth;
         shapeType = config.shape;
       }
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
       if (radiusConfig === undefined) {
         radiusConfig = 0;
       }
@@ -2341,12 +2353,6 @@
         var radius = GetValue$2C(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);
       } else {
-        if (width === undefined) {
-          width = 0;
-        }
-        if (height === undefined) {
-          height = width;
-        }
         var radius = {
           x: width / 2,
           y: height / 2
@@ -3205,6 +3211,21 @@
     function RoundRectangle(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
       var _this;
       _classCallCheck(this, RoundRectangle);
+      if (x === undefined) {
+        x = 0;
+      }
+      if (y === undefined) {
+        y = 0;
+      }
+      if (width === undefined) {
+        width = 1;
+      }
+      if (height === undefined) {
+        height = width;
+      }
+      if (radiusConfig === undefined) {
+        radiusConfig = 0;
+      }
       _this = _super.call(this, scene, x, y, width, height);
       _this.type = 'rexRoundRectangleCanvas';
       var radius = GetValue$2B(radiusConfig, 'radius', radiusConfig);
@@ -20836,11 +20857,15 @@
           }
           if (this.prevCursorPosition != null) {
             var child = textObject.getCharChild(this.prevCursorPosition);
-            textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
+            if (child) {
+              textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
+            }
           }
           if (cursorPosition != null) {
             var child = textObject.getCharChild(cursorPosition);
-            textObject.emit('cursorin', child, cursorPosition, textObject);
+            if (child) {
+              textObject.emit('cursorin', child, cursorPosition, textObject);
+            }
           }
           textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
           this.prevCursorPosition = cursorPosition;
@@ -25705,35 +25730,53 @@
   };
 
   var ClickMethods = {
-    onClick: function onClick(callback, scope, config) {
-      if (!callback) {
+    onClick: function onClick(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._click === undefined) {
-        this._click = new Button(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._click.on('click', callback, scope);
+      if (gameObject._click === undefined) {
+        gameObject._click = new Button(gameObject, config);
+      }
+      gameObject._click.on('click', callback, scope);
       return this;
     },
-    offClick: function offClick(callback, scope) {
-      if (this._click === undefined) {
+    offClick: function offClick(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.off('click', callback, scope);
+      gameObject._click.off('click', callback, scope);
       return this;
     },
-    enableClick: function enableClick(enabled) {
-      if (this._click === undefined) {
+    enableClick: function enableClick(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(enabled);
+      gameObject._click.setEnable(enabled);
       return this;
     },
-    disableClick: function disableClick() {
-      if (this._click === undefined) {
+    disableClick: function disableClick(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._click === undefined) {
         return this;
       }
-      this._click.setEnable(false);
+      gameObject._click.setEnable(false);
       return this;
     }
   };
@@ -25892,35 +25935,53 @@
   };
 
   var ClickOutsideMethods = {
-    onClickOutside: function onClickOutside(callback, scope, config) {
-      if (!callback) {
+    onClickOutside: function onClickOutside(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._clickOutside === undefined) {
-        this._clickOutside = new ClickOutside(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._clickOutside.on('clickoutside', callback, scope);
+      if (gameObject._clickOutside === undefined) {
+        gameObject._clickOutside = new ClickOutside(gameObject, config);
+      }
+      gameObject._clickOutside.on('clickoutside', callback, scope);
       return this;
     },
-    offClickOutside: function offClickOutside(callback, scope) {
-      if (this._clickOutside === undefined) {
+    offClickOutside: function offClickOutside(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.off('clickoutside', callback, scope);
+      gameObject._clickOutside.off('clickoutside', callback, scope);
       return this;
     },
-    enableClickOutside: function enableClickOutside(enabled) {
-      if (this._clickOutside === undefined) {
+    enableClickOutside: function enableClickOutside(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(enabled);
+      gameObject._clickOutside.setEnable(enabled);
       return this;
     },
-    disableClickOutside: function disableClickOutside() {
-      if (this._clickOutside === undefined) {
+    disableClickOutside: function disableClickOutside(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._clickOutside === undefined) {
         return this;
       }
-      this._clickOutside.setEnable(false);
+      gameObject._clickOutside.setEnable(false);
       return this;
     }
   };
@@ -26521,35 +26582,53 @@
   }(ComponentBase);
 
   var TouchingMethods = {
-    onTouching: function onTouching(callback, scope, config) {
-      if (!callback) {
+    onTouching: function onTouching(gameObject, callback, scope, config) {
+      if (!gameObject) {
         return this;
       }
-      if (this._inTouching === undefined) {
-        this._inTouching = new InTouching(this, config);
+      if (typeof gameObject === 'function') {
+        config = scope;
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
       }
-      this._inTouching.on('intouch', callback, scope);
+      if (gameObject._inTouching === undefined) {
+        gameObject._inTouching = new InTouching(gameObject, config);
+      }
+      gameObject._inTouching.on('intouch', callback, scope);
       return this;
     },
-    offTouching: function offTouching(callback, scope) {
-      if (this._inTouching === undefined) {
+    offTouching: function offTouching(gameObject, callback, scope) {
+      if (typeof gameObject === 'function') {
+        scope = callback;
+        callback = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.off('intouch', callback, scope);
+      gameObject._inTouching.off('intouch', callback, scope);
       return this;
     },
-    enableTouching: function enableTouching(enabled) {
-      if (this._inTouching === undefined) {
+    enableTouching: function enableTouching(gameObject, enabled) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        enabled = gameObject;
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(enabled);
+      gameObject._inTouching.setEnable(enabled);
       return this;
     },
-    disableTouching: function disableTouching() {
-      if (this._inTouching === undefined) {
+    disableTouching: function disableTouching(gameObject) {
+      if (gameObject && _typeof(gameObject) !== 'object') {
+        gameObject = this;
+      }
+      if (gameObject._inTouching === undefined) {
         return this;
       }
-      this._inTouching.setEnable(false);
+      gameObject._inTouching.setEnable(false);
       return this;
     }
   };
@@ -31057,7 +31136,7 @@
 
   var GetValue$1c = Phaser.Utils.Objects.GetValue;
   var Clamp$8 = Phaser.Math.Clamp;
-  var ColorInput = /*#__PURE__*/function (_Sizer) {
+  var ColorInput$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(ColorInput, _Sizer);
     var _super = _createSuper(ColorInput);
     function ColorInput(scene, config) {
@@ -31068,7 +31147,7 @@
       }
       config.orientation = 0;
       _this = _super.call(this, scene, config);
-      _this.type = 'rexColorInput';
+      _this.type = 'rexColorInputLite';
 
       // Add elements
       var background = GetValue$1c(config, 'background', undefined);
@@ -31178,12 +31257,32 @@
     return ColorInput;
   }(Sizer);
 
+  var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
+    _inherits(ColorInput, _ColorInputBase);
+    var _super = _createSuper(ColorInput);
+    function ColorInput(scene, config) {
+      var _this;
+      _classCallCheck(this, ColorInput);
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexColorInput';
+      return _this;
+    }
+    return _createClass(ColorInput);
+  }(ColorInput$1);
+
   ObjectFactory.register('colorInput', function (config) {
     var gameObject = new ColorInput(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
   SetValue$1(window, 'RexPlugins.UI.ColorInput', ColorInput);
+
+  ObjectFactory.register('colorInputLite', function (config) {
+    var gameObject = new ColorInput$1(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue$1(window, 'RexPlugins.UI.ColorInputBase', ColorInput$1);
 
   var Color$3 = Phaser.Display.Color;
   var Percent$3 = Phaser.Math.Percent;
@@ -31636,17 +31735,6 @@
     return SVPalette;
   }(OverlapSizer);
 
-  var CreateHPalette = function CreateHPalette(scene, width, height) {
-    var hPalette = new HPalette(scene, width, height);
-    scene.add.existing(hPalette);
-    return hPalette;
-  };
-  var CreateSVPalette = function CreateSVPalette(scene, width, height) {
-    var svPalette = new SVPalette(scene, width, height);
-    scene.add.existing(svPalette);
-    return svPalette;
-  };
-
   var GetValue$1b = Phaser.Utils.Objects.GetValue;
   var ColorPicker = /*#__PURE__*/function (_Sizer) {
     _inherits(ColorPicker, _Sizer);
@@ -31685,10 +31773,12 @@
           hPaletteHeight = GetValue$1b(config, 'hPalette.size', 10);
         }
       }
-      var hPalette = CreateHPalette(scene, hPaletteWidth, hPaletteHeight);
+      var hPalette = new HPalette(scene, hPaletteWidth, hPaletteHeight);
+      scene.add.existing(hPalette);
       var svPaletteWidth = GetValue$1b(config, 'svPalette.width', undefined);
       var svPaletteHeight = GetValue$1b(config, 'svPalette.height', undefined);
-      var svPalette = CreateSVPalette(scene, svPaletteWidth, svPaletteWidth);
+      var svPalette = new SVPalette(scene, svPaletteWidth, svPaletteWidth);
+      scene.add.existing(svPalette);
       if (background) {
         _this.addBackground(background);
       }
@@ -34118,9 +34208,9 @@
           value2 = this.colorObject.blue;
         } else {
           // colorType === 'HSV'
-          value0 = Math.round(this.colorObject.h * 100);
-          value1 = Math.round(this.colorObject.s * 100);
-          value2 = Math.round(this.colorObject.v * 100);
+          value0 = Math.floor(this.colorObject.h * 360);
+          value1 = Math.floor(this.colorObject.s * 100);
+          value2 = Math.floor(this.colorObject.v * 100);
         }
         components[0].setValue(value0);
         components[1].setValue(value1);
@@ -34137,7 +34227,7 @@
           var blue = Clamp$7(components[2].value, 0, 255);
           this.colorObject.setTo(red, green, blue);
         } else {
-          var h = Clamp$7(components[0].value, 0, 100) / 100;
+          var h = Clamp$7(components[0].value, 0, 359) / 360;
           var s = Clamp$7(components[1].value, 0, 100) / 100;
           var v = Clamp$7(components[2].value, 0, 100) / 100;
           this.colorObject.setFromRGB(HSVToRGB(h, s, v));
