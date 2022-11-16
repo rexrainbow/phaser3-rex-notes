@@ -4,14 +4,12 @@ import CreateRoundRectangle from '../../../utils/build/CreateRoundRectangle.js';
 var BuildSliderConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};
 
-    var trackConfig = config.track;
-    if (trackConfig) {
-        config.track = CreateRoundRectangle(scene, trackConfig);
+    if (config.track) {
+        config.track = CreateRoundRectangle(scene, config.track);
     }
 
-    var indicatorConfig = config.indicator;
-    if (indicatorConfig) {
-        config.indicator = CreateRoundRectangle(scene, indicatorConfig);
+    if (config.indicator) {
+        config.indicator = CreateRoundRectangle(scene, config.indicator);
     }
 
     var thumbConfig = config.thumb;

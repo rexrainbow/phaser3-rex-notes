@@ -13,6 +13,9 @@ var CreateButtonRoundRectangleBackground = function (scene, config) {
 
 class RoundRectangle extends RoundRectangleBase {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
         super(scene, config);
 
         var activeStyle = ExtractByPrefix(config, 'active');

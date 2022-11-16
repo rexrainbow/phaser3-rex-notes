@@ -6,17 +6,13 @@ import CreateImage from './CreateImage.js';
 var BuildDisplayLabelConfig = function (scene, config) {
     config = (config) ? DeepClone(config) : {};
 
-    var backgroundStyle = config.background || {};
-    config.background = CreateRoundRectangle(scene, backgroundStyle);
+    config.background = CreateRoundRectangle(scene, config.background);
 
-    var textStyle = config.text || {};
-    config.text = CreateText(scene, textStyle);
+    config.text = CreateText(scene, config.text);
 
-    var iconConfig = config.icon || {};
-    config.icon = CreateImage(scene, iconConfig);
+    config.icon = CreateImage(scene, config.icon);
 
-    var actionConfig = config.action || {};
-    config.action = CreateImage(scene, actionConfig);
+    config.action = CreateImage(scene, config.action);
 
     return config;
 }

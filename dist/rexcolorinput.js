@@ -16846,14 +16846,10 @@
 
   var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config) {
     config = config ? DeepClone(config) : {};
-    var backgroundStyle = config.background || {};
-    config.background = CreateRoundRectangle(scene, backgroundStyle);
-    var textStyle = config.text || {};
-    config.text = CreateText(scene, textStyle);
-    config.icon || {};
-    config.icon = CreateImage(scene);
-    config.action || {};
-    config.action = CreateImage(scene);
+    config.background = CreateRoundRectangle(scene, config.background);
+    config.text = CreateText(scene, config.text);
+    config.icon = CreateImage(scene, config.icon);
+    config.action = CreateImage(scene, config.action);
     return config;
   };
 
@@ -17336,19 +17332,28 @@
 
       // Add elements
       var background = GetValue$1(config, 'background', undefined);
-      var formatLabelConfig = config.formatLabel;
-      var formatLabel = CreateDisplayLabel(scene, formatLabelConfig).resetDisplayContent(formatLabelConfig);
-      var inputTextConfig = GetValue$1(config, 'inputText');
+      var formatLabel = GetValue$1(config, 'formatLabel', undefined);
+      if (!IsGameObject(formatLabel)) {
+        formatLabel = CreateDisplayLabel(scene, formatLabel).resetDisplayContent();
+      }
       var components = [];
-      for (var i = 0; i < 3; i++) {
-        var inputText = CreateInputText(scene, inputTextConfig).setMaxLength(3).setNumberInput();
-        components.push(inputText);
+      if (config.inputText0 && config.inputText1 && config.inputText2) {
+        components.push(config.inputText0);
+        components.push(config.inputText1);
+        components.push(config.inputText2);
+      } else {
+        var inputTextConfig = GetValue$1(config, 'inputText');
+        for (var i = 0; i < 3; i++) {
+          var inputText = CreateInputText(scene, inputTextConfig).setMaxLength(3).setNumberInput();
+          components.push(inputText);
+        }
       }
       if (background) {
         _this.addBackground(background);
       }
       var proportion = GetValue$1(config, 'proportion.formatLabel', 0);
-      var expand = GetValue$1(config, 'expand.formatLabel', true);
+      var defaultExpand = formatLabel.isRexContainerLite ? true : false;
+      var expand = GetValue$1(config, 'expand.formatLabel', defaultExpand);
       _this.add(formatLabel, {
         proportion: proportion,
         expand: expand
@@ -17364,7 +17369,7 @@
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('formatLabel', formatLabel);
       _this.addChildrenMap('components', components);
-      formatLabel.onClick(_this.toggleColorFormat, _assertThisInitialized(_this));
+      _this.onClick(formatLabel, _this.toggleColorFormat, _assertThisInitialized(_this));
       for (var i = 0, cnt = components.length; i < cnt; i++) {
         components[i].on('close', function () {
           this.updateColorObject();

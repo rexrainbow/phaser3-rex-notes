@@ -31889,14 +31889,10 @@
 
   var BuildDisplayLabelConfig = function BuildDisplayLabelConfig(scene, config) {
     config = config ? DeepClone(config) : {};
-    var backgroundStyle = config.background || {};
-    config.background = CreateRoundRectangle$1(scene, backgroundStyle);
-    var textStyle = config.text || {};
-    config.text = CreateText$1(scene, textStyle);
-    config.icon || {};
-    config.icon = CreateImage$1(scene);
-    config.action || {};
-    config.action = CreateImage$1(scene);
+    config.background = CreateRoundRectangle$1(scene, config.background);
+    config.text = CreateText$1(scene, config.text);
+    config.icon = CreateImage$1(scene, config.icon);
+    config.action = CreateImage$1(scene, config.action);
     return config;
   };
 
@@ -32267,19 +32263,28 @@
 
       // Add elements
       var background = GetValue$1a(config, 'background', undefined);
-      var formatLabelConfig = config.formatLabel;
-      var formatLabel = CreateDisplayLabel(scene, formatLabelConfig).resetDisplayContent(formatLabelConfig);
-      var inputTextConfig = GetValue$1a(config, 'inputText');
+      var formatLabel = GetValue$1a(config, 'formatLabel', undefined);
+      if (!IsGameObject(formatLabel)) {
+        formatLabel = CreateDisplayLabel(scene, formatLabel).resetDisplayContent();
+      }
       var components = [];
-      for (var i = 0; i < 3; i++) {
-        var inputText = CreateInputText$1(scene, inputTextConfig).setMaxLength(3).setNumberInput();
-        components.push(inputText);
+      if (config.inputText0 && config.inputText1 && config.inputText2) {
+        components.push(config.inputText0);
+        components.push(config.inputText1);
+        components.push(config.inputText2);
+      } else {
+        var inputTextConfig = GetValue$1a(config, 'inputText');
+        for (var i = 0; i < 3; i++) {
+          var inputText = CreateInputText$1(scene, inputTextConfig).setMaxLength(3).setNumberInput();
+          components.push(inputText);
+        }
       }
       if (background) {
         _this.addBackground(background);
       }
       var proportion = GetValue$1a(config, 'proportion.formatLabel', 0);
-      var expand = GetValue$1a(config, 'expand.formatLabel', true);
+      var defaultExpand = formatLabel.isRexContainerLite ? true : false;
+      var expand = GetValue$1a(config, 'expand.formatLabel', defaultExpand);
       _this.add(formatLabel, {
         proportion: proportion,
         expand: expand
@@ -32295,7 +32300,7 @@
       _this.addChildrenMap('background', background);
       _this.addChildrenMap('formatLabel', formatLabel);
       _this.addChildrenMap('components', components);
-      formatLabel.onClick(_this.toggleColorFormat, _assertThisInitialized(_this));
+      _this.onClick(formatLabel, _this.toggleColorFormat, _assertThisInitialized(_this));
       for (var i = 0, cnt = components.length; i < cnt; i++) {
         components[i].on('close', function () {
           this.updateColorObject();
@@ -46678,13 +46683,11 @@
 
   var BuildSliderConfig = function BuildSliderConfig(scene, config) {
     config = config ? DeepClone(config) : {};
-    var trackConfig = config.track;
-    if (trackConfig) {
-      config.track = CreateRoundRectangle$1(scene, trackConfig);
+    if (config.track) {
+      config.track = CreateRoundRectangle$1(scene, config.track);
     }
-    var indicatorConfig = config.indicator;
-    if (indicatorConfig) {
-      config.indicator = CreateRoundRectangle$1(scene, indicatorConfig);
+    if (config.indicator) {
+      config.indicator = CreateRoundRectangle$1(scene, config.indicator);
     }
     var thumbConfig = config.thumb;
     if (thumbConfig) {
@@ -46807,6 +46810,9 @@
     function RoundRectangle(scene, config) {
       var _this;
       _classCallCheck(this, RoundRectangle);
+      if (config === undefined) {
+        config = {};
+      }
       _this = _super.call(this, scene, config);
       var activeStyle = ExtractByPrefix(config, 'active');
       for (var name in activeStyle) {
@@ -46866,14 +46872,10 @@
 
   var BuildInteractiveLabelConfig = function BuildInteractiveLabelConfig(scene, config) {
     config = config ? DeepClone(config) : {};
-    var backgroundStyle = config.background || {};
-    config.background = CreateButtonRoundRectangleBackground(scene, backgroundStyle);
-    var textStyle = config.text || {};
-    config.text = CreateText$1(scene, textStyle);
-    config.icon || {};
-    config.icon = CreateImage$1(scene);
-    config.action || {};
-    config.action = CreateImage$1(scene);
+    config.background = CreateButtonRoundRectangleBackground(scene, config.background);
+    config.text = CreateText$1(scene, config.text);
+    config.icon = CreateImage$1(scene, config.icon);
+    config.action = CreateImage$1(scene, config.action);
     return config;
   };
 

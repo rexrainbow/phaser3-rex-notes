@@ -1,4 +1,5 @@
 import Sizer from '../../sizer/Sizer.js';
+import IsGameObject from '../../../../plugins/utils/system/IsGameObject.js';
 import CreateDisplayLabel from '../../utils/build/CreateDisplayLabel.js';
 import CreateInputText from '../../utils/build/CreateInputText.js';
 
@@ -22,18 +23,26 @@ class ColorComponents extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
 
-        var formatLabelConfig = config.formatLabel;
-        var formatLabel = CreateDisplayLabel(scene, formatLabelConfig)
-            .resetDisplayContent(formatLabelConfig);
+        var formatLabel = GetValue(config, 'formatLabel', undefined);
+        if (!IsGameObject(formatLabel)) {
+            formatLabel = CreateDisplayLabel(scene, formatLabel)
+                .resetDisplayContent();
+        }
 
-        var inputTextConfig = GetValue(config, 'inputText');
         var components = [];
-        for (var i = 0; i < 3; i++) {
-            var inputText = CreateInputText(scene, inputTextConfig)
-                .setMaxLength(3)
-                .setNumberInput()
+        if (config.inputText0 && config.inputText1 && config.inputText2) {
+            components.push(config.inputText0);
+            components.push(config.inputText1);
+            components.push(config.inputText2);
+        } else {
+            var inputTextConfig = GetValue(config, 'inputText');
+            for (var i = 0; i < 3; i++) {
+                var inputText = CreateInputText(scene, inputTextConfig)
+                    .setMaxLength(3)
+                    .setNumberInput()
 
-            components.push(inputText);
+                components.push(inputText);
+            }
         }
 
         if (background) {
@@ -41,7 +50,8 @@ class ColorComponents extends Sizer {
         }
 
         var proportion = GetValue(config, 'proportion.formatLabel', 0);
-        var expand = GetValue(config, 'expand.formatLabel', true);
+        var defaultExpand = (formatLabel.isRexContainerLite) ? true : false;
+        var expand = GetValue(config, 'expand.formatLabel', defaultExpand);
         this.add(
             formatLabel,
             { proportion: proportion, expand: expand }
@@ -60,7 +70,7 @@ class ColorComponents extends Sizer {
         this.addChildrenMap('formatLabel', formatLabel);
         this.addChildrenMap('components', components);
 
-        formatLabel.onClick(this.toggleColorFormat, this);
+        this.onClick(formatLabel, this.toggleColorFormat, this);
 
         for (var i = 0, cnt = components.length; i < cnt; i++) {
             components[i].on('close', function () {
