@@ -2359,10 +2359,10 @@
     return this;
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var RemoveChild = function RemoveChild(child) {
     this.poolManager.free(child);
-    RemoveItem$1(this.children, child);
+    RemoveItem$2(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -2378,9 +2378,9 @@
     return this;
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var PopChild = function PopChild(child) {
-    RemoveItem(this.children, child);
+    RemoveItem$1(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -5944,6 +5944,7 @@
     return value;
   };
 
+  var RemoveItem = Phaser.Utils.Array.Remove;
   var SetText = function SetText(textObject, newText) {
     var text = textObject.text;
     if (newText === text) {
@@ -5952,8 +5953,8 @@
 
     // textObject.setText(newText);
 
-    // Pop lastInsertCursor
-    textObject.popChild(textObject.lastInsertCursor);
+    // Remove lastInsertCursor directly 
+    RemoveItem(textObject.children, textObject.lastInsertCursor);
     if (newText === '') {
       textObject.removeChildren();
     } else {
@@ -5973,8 +5974,8 @@
       }
     }
 
-    // Push back lastInsertCursor
-    textObject.addChild(textObject.lastInsertCursor);
+    // Push back lastInsertCursor directly
+    textObject.children.push(textObject.lastInsertCursor);
     textObject.runWordWrap();
   };
 

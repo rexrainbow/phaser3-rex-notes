@@ -1,5 +1,7 @@
 import { diffChars } from '../../../../utils/jsdiff/index.js'
 
+const RemoveItem = Phaser.Utils.Array.Remove;
+
 var SetText = function (textObject, newText) {
     var text = textObject.text;
     if (newText === text) {
@@ -8,8 +10,8 @@ var SetText = function (textObject, newText) {
 
     // textObject.setText(newText);
 
-    // Pop lastInsertCursor
-    textObject.popChild(textObject.lastInsertCursor);
+    // Remove lastInsertCursor directly 
+    RemoveItem(textObject.children, textObject.lastInsertCursor);
 
     if (newText === '') {
         textObject.removeChildren();
@@ -30,8 +32,8 @@ var SetText = function (textObject, newText) {
         }
     }
 
-    // Push back lastInsertCursor
-    textObject.addChild(textObject.lastInsertCursor);
+    // Push back lastInsertCursor directly
+    textObject.children.push(textObject.lastInsertCursor);
 
     textObject.runWordWrap();
 }

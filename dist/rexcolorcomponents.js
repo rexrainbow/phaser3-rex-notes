@@ -205,7 +205,7 @@
 
   var Zone$1 = Phaser.GameObjects.Zone;
   var AddItem = Phaser.Utils.Array.Add;
-  var RemoveItem$4 = Phaser.Utils.Array.Remove;
+  var RemoveItem$5 = Phaser.Utils.Array.Remove;
   var Base$2 = /*#__PURE__*/function (_Zone) {
     _inherits(Base, _Zone);
     var _super = _createSuper(Base);
@@ -274,7 +274,7 @@
       key: "remove",
       value: function remove(gameObjects, destroyChild) {
         var parent = this;
-        RemoveItem$4(this.children, gameObjects,
+        RemoveItem$5(this.children, gameObjects,
         // Callback of item removed
         function (gameObject) {
           gameObject.off('destroy', parent.onChildDestroy, parent);
@@ -9279,11 +9279,11 @@
     }
   };
 
-  var RemoveItem$3 = Phaser.Utils.Array.Remove;
+  var RemoveItem$4 = Phaser.Utils.Array.Remove;
   var ContainerRemove = ContainerLite.prototype.remove;
   var RemoveChild$1 = function RemoveChild(gameObject, destroyChild) {
     if (this.isBackground(gameObject)) {
-      RemoveItem$3(this.backgroundChildren, gameObject);
+      RemoveItem$4(this.backgroundChildren, gameObject);
     }
     ContainerRemove.call(this, gameObject, destroyChild);
     if (!destroyChild && this.sizerEventsEnable) {
@@ -9315,13 +9315,13 @@
     return this;
   };
 
-  var RemoveItem$2 = Phaser.Utils.Array.Remove;
+  var RemoveItem$3 = Phaser.Utils.Array.Remove;
   var RemoveChildMethods = {
     remove: function remove(gameObject, destroyChild) {
       if (this.getParentSizer(gameObject) !== this) {
         return this;
       }
-      RemoveItem$2(this.sizerChildren, gameObject);
+      RemoveItem$3(this.sizerChildren, gameObject);
       RemoveChild$1.call(this, gameObject, destroyChild);
       return this;
     },
@@ -12589,10 +12589,10 @@
     return this;
   };
 
-  var RemoveItem$1 = Phaser.Utils.Array.Remove;
+  var RemoveItem$2 = Phaser.Utils.Array.Remove;
   var RemoveChild = function RemoveChild(child) {
     this.poolManager.free(child);
-    RemoveItem$1(this.children, child);
+    RemoveItem$2(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -12608,9 +12608,9 @@
     return this;
   };
 
-  var RemoveItem = Phaser.Utils.Array.Remove;
+  var RemoveItem$1 = Phaser.Utils.Array.Remove;
   var PopChild = function PopChild(child) {
-    RemoveItem(this.children, child);
+    RemoveItem$1(this.children, child);
     this.lastAppendedChildren.length = 0;
     this.lastOverChild = null;
     this.dirty = true;
@@ -15896,6 +15896,7 @@
     return value;
   };
 
+  var RemoveItem = Phaser.Utils.Array.Remove;
   var SetText = function SetText(textObject, newText) {
     var text = textObject.text;
     if (newText === text) {
@@ -15904,8 +15905,8 @@
 
     // textObject.setText(newText);
 
-    // Pop lastInsertCursor
-    textObject.popChild(textObject.lastInsertCursor);
+    // Remove lastInsertCursor directly 
+    RemoveItem(textObject.children, textObject.lastInsertCursor);
     if (newText === '') {
       textObject.removeChildren();
     } else {
@@ -15925,8 +15926,8 @@
       }
     }
 
-    // Push back lastInsertCursor
-    textObject.addChild(textObject.lastInsertCursor);
+    // Push back lastInsertCursor directly
+    textObject.children.push(textObject.lastInsertCursor);
     textObject.runWordWrap();
   };
 
