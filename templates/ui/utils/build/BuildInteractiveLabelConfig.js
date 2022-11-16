@@ -10,9 +10,13 @@ var BuildInteractiveLabelConfig = function (scene, config) {
 
     config.text = CreateText(scene, config.text);
 
-    config.icon = CreateImage(scene, config.icon);
+    if (config.icon !== null) {
+        config.icon = CreateImage(scene, config.icon);
+    }
 
-    config.action = CreateImage(scene, config.action);
+    if (config.action != null) {
+        config.action = CreateImage(scene, config.action);
+    }
 
     return config;
 }

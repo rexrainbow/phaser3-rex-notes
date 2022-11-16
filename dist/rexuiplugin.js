@@ -31891,8 +31891,12 @@
     config = config ? DeepClone(config) : {};
     config.background = CreateRoundRectangle$1(scene, config.background);
     config.text = CreateText$1(scene, config.text);
-    config.icon = CreateImage$1(scene, config.icon);
-    config.action = CreateImage$1(scene, config.action);
+    if (config.icon !== null) {
+      config.icon = CreateImage$1(scene, config.icon);
+    }
+    if (config.action != null) {
+      config.action = CreateImage$1(scene, config.action);
+    }
     return config;
   };
 
@@ -46874,8 +46878,12 @@
     config = config ? DeepClone(config) : {};
     config.background = CreateButtonRoundRectangleBackground(scene, config.background);
     config.text = CreateText$1(scene, config.text);
-    config.icon = CreateImage$1(scene, config.icon);
-    config.action = CreateImage$1(scene, config.action);
+    if (config.icon !== null) {
+      config.icon = CreateImage$1(scene, config.icon);
+    }
+    if (config.action != null) {
+      config.action = CreateImage$1(scene, config.action);
+    }
     return config;
   };
 
