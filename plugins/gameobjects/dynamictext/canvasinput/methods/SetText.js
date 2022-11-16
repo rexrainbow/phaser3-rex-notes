@@ -8,10 +8,11 @@ var SetText = function (textObject, newText) {
 
     // textObject.setText(newText);
 
+    // Pop lastInsertCursor
+    textObject.popChild(textObject.lastInsertCursor);
+
     if (newText === '') {
-        textObject.popChild(textObject.lastInsertCursor);
         textObject.removeChildren();
-        textObject.addChild(textObject.lastInsertCursor, 0);
     } else {
         var results = diffChars(text, newText);
         var charIndex = 0;
@@ -28,6 +29,9 @@ var SetText = function (textObject, newText) {
             }
         }
     }
+
+    // Push back lastInsertCursor
+    textObject.addChild(textObject.lastInsertCursor);
 
     textObject.runWordWrap();
 }
