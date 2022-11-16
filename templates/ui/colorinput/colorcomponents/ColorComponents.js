@@ -147,9 +147,9 @@ class ColorComponents extends Sizer {
             value1 = this.colorObject.green;
             value2 = this.colorObject.blue;
         } else { // colorType === 'HSV'
-            value0 = Math.round(this.colorObject.h * 100);
-            value1 = Math.round(this.colorObject.s * 100);
-            value2 = Math.round(this.colorObject.v * 100);
+            value0 = Math.floor(this.colorObject.h * 360);
+            value1 = Math.floor(this.colorObject.s * 100);
+            value2 = Math.floor(this.colorObject.v * 100);
         }
 
         components[0].setValue(value0);
@@ -166,7 +166,7 @@ class ColorComponents extends Sizer {
             var blue = Clamp(components[2].value, 0, 255);
             this.colorObject.setTo(red, green, blue);
         } else {
-            var h = Clamp(components[0].value, 0, 100) / 100;
+            var h = Clamp(components[0].value, 0, 359) / 360;
             var s = Clamp(components[1].value, 0, 100) / 100;
             var v = Clamp(components[2].value, 0, 100) / 100;
             this.colorObject.setFromRGB(HSVToRGB(h, s, v));

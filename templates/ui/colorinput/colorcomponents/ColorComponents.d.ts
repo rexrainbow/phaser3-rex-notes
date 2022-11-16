@@ -15,7 +15,7 @@ declare namespace ColorComponents {
 
         background?: RoundRectangle.IConfig,
 
-        text?: Phaser.GameObjects.TextStyle
+        text?: Phaser.GameObjects.TextStyle,
         expandTextWidth?: boolean,
         expandTextHeight?: boolean,
 
