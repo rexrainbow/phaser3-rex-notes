@@ -37,12 +37,20 @@ class ColorPicker extends Sizer {
                 hPaletteHeight = GetValue(config, 'hPalette.size', 10);
             }
         }
-        var hPalette = new HPalette(scene, hPaletteWidth, hPaletteHeight);
+
+        var hPalette = new HPalette(scene, {
+            width: hPaletteWidth,
+            height: hPaletteHeight
+        });
         scene.add.existing(hPalette);
 
         var svPaletteWidth = GetValue(config, 'svPalette.width', undefined);
         var svPaletteHeight = GetValue(config, 'svPalette.height', undefined);
-        var svPalette = new SVPalette(scene, svPaletteWidth, svPaletteWidth);
+
+        var svPalette = new SVPalette(scene, {
+            width: svPaletteWidth,
+            height: svPaletteHeight
+        });
         scene.add.existing(svPalette);
 
         if (background) {

@@ -4,11 +4,8 @@ import RoundRectangle from '../../../roundrectangle/RoundRectangle.js';
 import { LocalToWorld } from './Transform.js';
 
 class SVPalette extends OverlapSizer {
-    constructor(scene, width, height) {
-        super(scene, {
-            width: width,
-            height: height
-        });
+    constructor(scene, config) {
+        super(scene, config);
 
         var paletteCanvas = new SVPaletteCanvas(scene);
         scene.add.existing(paletteCanvas);

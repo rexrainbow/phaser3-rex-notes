@@ -4,13 +4,13 @@ import RoundRectangle from '../../../roundrectangle/RoundRectangle.js';
 import { LocalToWorld } from './Transform.js';
 
 class HPalette extends OverlapSizer {
-    constructor(scene, width, height) {
-        super(scene, {
-            width: width,
-            height: height
-        });
+    constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+        super(scene, config);
 
-        var orientation = (width != null) ? 1 : 0;
+        var orientation = (config.width != null) ? 1 : 0;
         var paletteCanvas = (new HPaletteCanvas(scene))
             .setOrientation(orientation)
         scene.add.existing(paletteCanvas);
