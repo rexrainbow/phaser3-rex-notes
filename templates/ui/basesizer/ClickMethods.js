@@ -1,41 +1,65 @@
 import Click from '../click/Click.js';
 
 export default {
-    onClick(callback, scope, config) {
-        if (!callback) {
+    onClick(gameObject, callback, scope, config) {
+        if (!gameObject) {
             return this;
         }
-        if (this._click === undefined) {
-            this._click = new Click(this, config);
+
+        if (typeof (gameObject) === 'function') {
+            config = scope;
+            scope = callback;
+            callback = gameObject;
+            gameObject = this;
         }
-        this._click.on('click', callback, scope);
+
+        if (gameObject._click === undefined) {
+            gameObject._click = new Click(gameObject, config);
+        }
+        gameObject._click.on('click', callback, scope);
+
         return this;
     },
 
-    offClick(callback, scope) {
-        if (this._click === undefined) {
-            return this;
+    offClick(gameObject, callback, scope) {
+        if (typeof (gameObject) === 'function') {
+            scope = callback;
+            callback = gameObject;
+            gameObject = this;
         }
 
-        this._click.off('click', callback, scope);
+        if (gameObject._click === undefined) {
+            return this;
+        }
+        gameObject._click.off('click', callback, scope);
+
         return this;
     },
 
-    enableClick(enabled) {
-        if (this._click === undefined) {
+    enableClick(gameObject, enabled) {
+        if (gameObject && typeof (gameObject) !== 'object') {
+            enabled = gameObject;
+            gameObject = this;
+        }
+
+        if (gameObject._click === undefined) {
             return this;
         }
 
-        this._click.setEnable(enabled);
+        gameObject._click.setEnable(enabled);
         return this;
     },
 
-    disableClick() {
-        if (this._click === undefined) {
-            return this;
+    disableClick(gameObject) {
+        if (gameObject && typeof (gameObject) !== 'object') {
+            gameObject = this;
         }
 
-        this._click.setEnable(false);
+        if (gameObject._click === undefined) {
+            return this;
+        }
+        gameObject._click.setEnable(false);
+
         return this;
     }
 }

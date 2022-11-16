@@ -480,16 +480,53 @@ declare class BaseSizer extends ContainerLite {
         config?: Click.IConfig
     ): this;
 
+
+    onClick(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: (
+            click: Click,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+            event: Phaser.Types.Input.EventData
+        ) => void,
+        scope?: object,
+        config?: Click.IConfig
+    ): this;
+
     offClick(
+        callback: Function,
+        scope?: object
+    ): this;
+
+    offClick(
+        gameObject: Phaser.GameObjects.GameObject,
         callback: Function,
         scope?: object
     ): this;
 
     enableClick(enabled?: boolean): this;
 
+    enableClick(
+        gameObject: Phaser.GameObjects.GameObject,
+        enabled?: boolean
+    ): this;
+
     disableClick(): this;
 
+    disableClick(gameObject: Phaser.GameObjects.GameObject): this;
+
     onClickOutside(
+        callback: (
+            clickOutside: ClickOutside,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer
+        ) => void,
+        scope?: object,
+        config?: ClickOutside.IConfig
+    ): this;
+
+    onClickOutside(
+        gameObject: Phaser.GameObjects.GameObject,
         callback: (
             clickOutside: ClickOutside,
             gameObject: Phaser.GameObjects.GameObject,
@@ -504,11 +541,36 @@ declare class BaseSizer extends ContainerLite {
         scope?: object
     ): this;
 
+    offClickOutside(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: object
+    ): this;
+
+
     enableClickOutside(enabled?: boolean): this;
+
+    enableClickOutside(
+        gameObject: Phaser.GameObjects.GameObject,
+        enabled?: boolean
+    ): this;
 
     disableClickOutside(): this;
 
+    disableClickOutside(gameObject: Phaser.GameObjects.GameObject): this;
+
     onTouching(
+        callback: (
+            inTouch: InTouching,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+        ) => void,
+        scope?: object,
+        config?: InTouching.IConfig
+    ): this;
+
+    onTouching(
+        gameObject: Phaser.GameObjects.GameObject,
         callback: (
             inTouch: InTouching,
             gameObject: Phaser.GameObjects.GameObject,
@@ -523,9 +585,22 @@ declare class BaseSizer extends ContainerLite {
         scope?: object
     ): this;
 
+    offTouching(
+        gameObject: Phaser.GameObjects.GameObject,
+        callback: Function,
+        scope?: object
+    ): this;
+
     enableTouching(enable?: boolean): this;
 
+    enableTouching(
+        gameObject: Phaser.GameObjects.GameObject,
+        enable?: boolean
+    ): this;
+
     disableTouching(): this;
+
+    disableTouching(gameObject: Phaser.GameObjects.GameObject): this;
 
     setChildrenInteractive(
         config: SetChildrenInteractive.IConfig
