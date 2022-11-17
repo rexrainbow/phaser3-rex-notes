@@ -12,6 +12,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
 
         this.setSelectAllWhenFocusEnable(GetValue(config, 'selectAll', false));
 
+        this.cursorMoveStartIndex = null;
         this.prevCursorPosition = null;
         this.prevSelectionStart = null;
         this.prevSelectionEnd = null;
@@ -22,11 +23,14 @@ class HiddenTextEdit extends HiddenTextEditBase {
             // Open editor by 'pointerdown' event
             // Then set cursor position to nearest char
             .on('pointerdown', function (pointer, localX, localY, event) {
+                var child = gameObject.getNearestChild(localX, localY);
+                var charIndex = gameObject.getCharIndex(child);
+
                 if (!this.selectAllWhenFocus || !this.firstClickAfterOpen) {
-                    var child = gameObject.getNearestChild(localX, localY);
-                    var charIndex = gameObject.getCharIndex(child);
                     this.setCursorPosition(charIndex);
                 }
+
+                this.cursorMoveStartIndex = charIndex;
                 this.firstClickAfterOpen = false;
             }, this)
             .on('pointermove', function (pointer, localX, localY, event) {
@@ -35,14 +39,15 @@ class HiddenTextEdit extends HiddenTextEditBase {
                 }
                 var child = gameObject.getNearestChild(localX, localY);
                 var charIndex = gameObject.getCharIndex(child);
-                if (charIndex === this.selectionStart) {
-                    return;
+                if (this.cursorMoveStartIndex < charIndex) {
+                    this.selectText(this.cursorMoveStartIndex, charIndex);
+                } else {
+                    this.selectText(charIndex, this.cursorMoveStartIndex);
                 }
-                this.selectText(this.selectionStart, charIndex);
             }, this)
 
         this
-            .on('open', function () {                
+            .on('open', function () {
                 if (this.selectAllWhenFocus) {
                     this.selectAll();
                 }
@@ -92,6 +97,8 @@ class HiddenTextEdit extends HiddenTextEditBase {
             // console.log(prevSelectionStart, prevSelectionEnd, selectionStart, selectionEnd)
             OnSelectRange(this);
         } else if (!isSelectRange) {
+            this.prevSelectionStart = null;
+            this.prevSelectionEnd = null;
             OnMoveCursor(this);
         }
 
