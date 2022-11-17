@@ -1,8 +1,8 @@
-var OnMoveCursor = function (hiddenTextEdit) {
+var MoveCursor = function (hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     var text = textObject.text;
 
-    var cursorPosition = (hiddenTextEdit.isOpened) ? hiddenTextEdit.cursorPosition : null;
+    var cursorPosition = hiddenTextEdit.cursorPosition;
     if (hiddenTextEdit.prevCursorPosition === cursorPosition) {
         return;
     }
@@ -30,4 +30,4 @@ var OnMoveCursor = function (hiddenTextEdit) {
     hiddenTextEdit.prevCursorPosition = cursorPosition;
 }
 
-export default OnMoveCursor;
+export default MoveCursor;

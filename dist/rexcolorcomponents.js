@@ -15189,51 +15189,44 @@
   var OnSelectRange = function OnSelectRange(hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     // var text = textObject.text;
-    var selectionStart = hiddenTextEdit.selectionStart;
-    var selectionEnd = hiddenTextEdit.selectionEnd;
+    var selectionStart = hiddenTextEdit.isOpened ? hiddenTextEdit.selectionStart : null;
+    var selectionEnd = hiddenTextEdit.isOpened ? hiddenTextEdit.selectionEnd : null;
     var prevSelectionStart = hiddenTextEdit.prevSelectionStart;
     var prevSelectionEnd = hiddenTextEdit.prevSelectionEnd;
+    if (prevSelectionStart === selectionStart && prevSelectionEnd === selectionEnd) {
+      return;
+    }
+    var min, max;
     if (prevSelectionStart === null) {
-      // First step
-      for (var i = selectionStart; i < selectionEnd; i++) {
-        var child = textObject.getCharChild(i);
-        if (child) {
+      min = selectionStart;
+      max = selectionEnd;
+    } else {
+      min = Math.min(prevSelectionStart, selectionStart);
+      max = Math.max(prevSelectionEnd, selectionEnd);
+    }
+    for (var i = min; i < max; i++) {
+      var inPrevSelectionRange = prevSelectionStart === null ? false : i >= prevSelectionStart && i < prevSelectionEnd;
+      var inSelectionRange = i >= selectionStart && i < selectionEnd;
+      if (inPrevSelectionRange && inSelectionRange) {
+        continue;
+      }
+      var child = textObject.getCharChild(i);
+      if (child) {
+        if (inPrevSelectionRange) {
+          textObject.emit('cursorout', child, i, textObject);
+        } else {
           textObject.emit('cursorin', child, i, textObject);
         }
       }
-    } else if (!hiddenTextEdit.isOpened || selectionStart === selectionEnd) {
-      // Last step
-      for (var i = prevSelectionStart; i < prevSelectionEnd; i++) {
-        var child = textObject.getCharChild(i);
-        if (child) {
-          textObject.emit('cursorout', child, i, textObject);
-        }
-      }
-    } else {
-      var min = Math.min(prevSelectionStart, selectionStart);
-      var max = Math.max(prevSelectionEnd, selectionEnd);
-      for (var i = min; i < max; i++) {
-        var inPrevSelectionRange = i >= prevSelectionStart && i < prevSelectionEnd;
-        var inSelectionRange = i >= selectionStart && i < selectionEnd;
-        if (inPrevSelectionRange && inSelectionRange) {
-          continue;
-        }
-        var child = textObject.getCharChild(i);
-        if (child) {
-          if (inPrevSelectionRange) {
-            textObject.emit('cursorout', child, i, textObject);
-          } else {
-            textObject.emit('cursorin', child, i, textObject);
-          }
-        }
-      }
     }
+    hiddenTextEdit.prevSelectionStart = selectionStart;
+    hiddenTextEdit.prevSelectionEnd = selectionEnd;
   };
 
-  var OnMoveCursor = function OnMoveCursor(hiddenTextEdit) {
+  var MoveCursor = function MoveCursor(hiddenTextEdit) {
     var textObject = hiddenTextEdit.parent;
     var text = textObject.text;
-    var cursorPosition = hiddenTextEdit.isOpened ? hiddenTextEdit.cursorPosition : null;
+    var cursorPosition = hiddenTextEdit.cursorPosition;
     if (hiddenTextEdit.prevCursorPosition === cursorPosition) {
       return;
     }
@@ -15256,6 +15249,36 @@
     }
     textObject.emit('movecursor', cursorPosition, hiddenTextEdit.prevCursorPosition, textObject);
     hiddenTextEdit.prevCursorPosition = cursorPosition;
+  };
+
+  var ClearSelectRange = function ClearSelectRange(hiddenTextEdit) {
+    var prevSelectionStart = hiddenTextEdit.prevSelectionStart;
+    if (prevSelectionStart === null) {
+      return;
+    }
+    var prevSelectionEnd = hiddenTextEdit.prevSelectionEnd;
+    var textObject = hiddenTextEdit.parent;
+    for (var i = prevSelectionStart; i < prevSelectionEnd; i++) {
+      var child = textObject.getCharChild(i);
+      if (child) {
+        textObject.emit('cursorout', child, i, textObject);
+      }
+    }
+    hiddenTextEdit.prevSelectionStart = null;
+    hiddenTextEdit.prevSelectionEnd = null;
+  };
+
+  var ClearCursor = function ClearCursor(hiddenTextEdit) {
+    var prevCursorPosition = hiddenTextEdit.prevCursorPosition;
+    if (prevCursorPosition === null) {
+      return;
+    }
+    var textObject = hiddenTextEdit.parent;
+    var child = textObject.getCharChild(prevCursorPosition);
+    if (child) {
+      textObject.emit('cursorout', child, prevCursorPosition, textObject);
+    }
+    hiddenTextEdit.prevCursorPosition = null;
   };
 
   var GetValue$2 = Phaser.Utils.Objects.GetValue;
@@ -15331,25 +15354,17 @@
           textObject.setText(text);
           textObject.emit('textchange', text, textObject, this);
         }
-        var selectionStart = this.isOpened ? this.selectionStart : null;
-        var selectionEnd = this.isOpened ? this.selectionEnd : null;
-        var prevSelectionStart = this.prevSelectionStart;
-        var prevSelectionEnd = this.prevSelectionEnd;
-        var isPrevSelectRange = prevSelectionStart !== prevSelectionEnd;
-        var isSelectRange = selectionStart !== selectionEnd;
-        var isSelectRangeChanged = (isPrevSelectRange || isSelectRange) && (prevSelectionStart !== selectionStart || prevSelectionEnd !== selectionEnd);
-        if (isSelectRangeChanged) {
-          OnSelectRange(this);
-        }
-        if (!isSelectRange) {
-          OnMoveCursor(this);
-        }
-        if (this.isOpened && isSelectRange) {
-          this.prevSelectionStart = selectionStart;
-          this.prevSelectionEnd = selectionEnd;
+        if (this.isOpened) {
+          if (this.selectionStart !== this.selectionEnd) {
+            ClearCursor(this);
+            OnSelectRange(this);
+          } else {
+            ClearSelectRange(this);
+            MoveCursor(this);
+          }
         } else {
-          this.prevSelectionStart = null;
-          this.prevSelectionEnd = null;
+          ClearSelectRange(this);
+          ClearCursor(this);
         }
         return this;
       }

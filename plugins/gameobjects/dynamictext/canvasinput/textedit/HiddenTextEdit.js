@@ -1,7 +1,9 @@
 import HiddenTextEditBase from '../../../../behaviors/hiddentextedit/HiddenTextEditBase.js';
 import NumberInputUpdateCallback from '../../../../behaviors/hiddentextedit/defaultcallbacks/NumberInputUpdateCallback.js';
-import OnSelectRange from './OnSelectRange.js';
-import OnMoveCursor from './OnMoveCursor.js';
+import SelectRange from './SelectRange.js';
+import MoveCursor from './MoveCursor.js';
+import ClearSelectRange from './ClearSelectRange.js';
+import ClearCursor from './ClearCursor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -83,30 +85,17 @@ class HiddenTextEdit extends HiddenTextEditBase {
             textObject.emit('textchange', text, textObject, this);
         }
 
-        var selectionStart = (this.isOpened) ? this.selectionStart : null;
-        var selectionEnd = (this.isOpened) ? this.selectionEnd : null;
-        var prevSelectionStart = this.prevSelectionStart;
-        var prevSelectionEnd = this.prevSelectionEnd;
-
-        var isPrevSelectRange = (prevSelectionStart !== prevSelectionEnd);
-        var isSelectRange = (selectionStart !== selectionEnd);
-        var isSelectRangeChanged = (isPrevSelectRange || isSelectRange) &&
-            ((prevSelectionStart !== selectionStart) || (prevSelectionEnd !== selectionEnd));
-
-        if (isSelectRangeChanged) {
-            OnSelectRange(this);
-        }
-
-        if (!isSelectRange) {
-            OnMoveCursor(this);
-        }
-
-        if (this.isOpened && isSelectRange) {
-            this.prevSelectionStart = selectionStart;
-            this.prevSelectionEnd = selectionEnd;
+        if (this.isOpened) {
+            if (this.selectionStart !== this.selectionEnd) {
+                ClearCursor(this);
+                SelectRange(this);
+            } else {
+                ClearSelectRange(this);
+                MoveCursor(this);
+            }
         } else {
-            this.prevSelectionStart = null;
-            this.prevSelectionEnd = null;
+            ClearSelectRange(this);
+            ClearCursor(this);
         }
 
         return this;

@@ -167,6 +167,7 @@ var txt = scene.add.rexCanvasInput({
     // readOnly: false,
     // maxLength: undefined,
     // minLength: undefined,
+    // selectAll: false,
 
     // enterClose: true,
 
@@ -213,6 +214,7 @@ var txt = scene.add.rexCanvasInput({
         - `true` : un-editable.
         - `false` : Editable. Defaule behavior.
     - `maxLength`, `minLength` : Maximun or minimun of input characters
+    - `selectAll` : Set to `true` to select all characters when focusing.
 - Callbacks
     - `onOpen` : Callback invoked when focus on this hidden input text.
         ```javascript
