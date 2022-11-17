@@ -3,14 +3,14 @@ import NumberInputUpdateCallback from '../../../../behaviors/hiddentextedit/defa
 import OnSelectRange from './OnSelectRange.js';
 import OnMoveCursor from './OnMoveCursor.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class HiddenTextEdit extends HiddenTextEditBase {
     constructor(gameObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-
         super(gameObject, config);
         // this.parent = gameObject;
+
+        this.setSelectAllWhenFocusEnable(GetValue(config, 'selectAll', false));
 
         this.prevCursorPosition = null;
         this.prevSelectionStart = null;
@@ -22,7 +22,7 @@ class HiddenTextEdit extends HiddenTextEditBase {
             // Open editor by 'pointerdown' event
             // Then set cursor position to nearest char
             .on('pointerdown', function (pointer, localX, localY, event) {
-                if (!this.onOpenSelectAll || !this.firstClickAfterOpen) {
+                if (!this.selectAllWhenFocus || !this.firstClickAfterOpen) {
                     var child = gameObject.getNearestChild(localX, localY);
                     var charIndex = gameObject.getCharIndex(child);
                     this.setCursorPosition(charIndex);
@@ -42,8 +42,12 @@ class HiddenTextEdit extends HiddenTextEditBase {
             }, this)
 
         this
-            .on('open', function () {
-                this.firstClickAfterOpen = true
+            .on('open', function () {                
+                if (this.selectAllWhenFocus) {
+                    this.selectAll();
+                }
+                this.firstClickAfterOpen = true;
+
                 gameObject.emit('open');
             }, this)
             .on('close', function () {
@@ -96,6 +100,15 @@ class HiddenTextEdit extends HiddenTextEditBase {
 
     setNumberInput() {
         this.onUpdateCallback = NumberInputUpdateCallback;
+        return this;
+    }
+
+    setSelectAllWhenFocusEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.selectAllWhenFocus = enable;
         return this;
     }
 }
