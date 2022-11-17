@@ -81,6 +81,7 @@ declare namespace CanvasInput {
         readOnly?: boolean,
         maxLength?: number,
         minLength?: number,
+        selectAll?: boolean,
     }
 }
 

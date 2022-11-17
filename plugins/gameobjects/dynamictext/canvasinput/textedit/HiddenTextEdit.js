@@ -1,5 +1,7 @@
 import HiddenTextEditBase from '../../../../behaviors/hiddentextedit/HiddenTextEditBase.js';
 import NumberInputUpdateCallback from '../../../../behaviors/hiddentextedit/defaultcallbacks/NumberInputUpdateCallback.js';
+import OnSelectRange from './OnSelectRange.js';
+import OnMoveCursor from './OnMoveCursor.js';
 
 class HiddenTextEdit extends HiddenTextEditBase {
     constructor(gameObject, config) {
@@ -10,25 +12,43 @@ class HiddenTextEdit extends HiddenTextEditBase {
         super(gameObject, config);
         // this.parent = gameObject;
 
+        this.prevCursorPosition = null;
+        this.prevSelectionStart = null;
+        this.prevSelectionEnd = null;
+        this.firstClickAfterOpen = false;
+
+
         gameObject
             // Open editor by 'pointerdown' event
             // Then set cursor position to nearest char
             .on('pointerdown', function (pointer, localX, localY, event) {
+                if (!this.onOpenSelectAll || !this.firstClickAfterOpen) {
+                    var child = gameObject.getNearestChild(localX, localY);
+                    var charIndex = gameObject.getCharIndex(child);
+                    this.setCursorPosition(charIndex);
+                }
+                this.firstClickAfterOpen = false;
+            }, this)
+            .on('pointermove', function (pointer, localX, localY, event) {
+                if (!pointer.isDown) {
+                    return;
+                }
                 var child = gameObject.getNearestChild(localX, localY);
                 var charIndex = gameObject.getCharIndex(child);
-                this.setCursorPosition(charIndex);
+                if (charIndex === this.selectionStart) {
+                    return;
+                }
+                this.selectText(this.selectionStart, charIndex);
             }, this)
 
         this
             .on('open', function () {
+                this.firstClickAfterOpen = true
                 gameObject.emit('open');
-            })
+            }, this)
             .on('close', function () {
                 gameObject.emit('close');
-            })
-            .on('nan', function (text) {
-                gameObject.emit('nan', text);
-            })
+            }, this)
     }
 
     initText() {
@@ -54,29 +74,21 @@ class HiddenTextEdit extends HiddenTextEditBase {
             textObject.emit('textchange', text, textObject, this);
         }
 
-        var cursorPosition = (this.isOpened) ? this.cursorPosition : null;
-        if (this.prevCursorPosition !== cursorPosition) {
-            if (this.prevCursorPosition != null) {
-                if (this.prevCursorPosition > text.length) {
-                    this.prevCursorPosition = null;
-                }
-            }
+        var selectionStart = (this.isOpened) ? this.selectionStart : null;
+        var selectionEnd = (this.isOpened) ? this.selectionEnd : null;
+        var prevSelectionStart = this.prevSelectionStart;
+        var prevSelectionEnd = this.prevSelectionEnd;
 
-            if (this.prevCursorPosition != null) {
-                var child = textObject.getCharChild(this.prevCursorPosition);
-                if (child) {
-                    textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
-                }
-            }
-            if (cursorPosition != null) {
-                var child = textObject.getCharChild(cursorPosition);
-                if (child) {
-                    textObject.emit('cursorin', child, cursorPosition, textObject);
-                }
-            }
-            textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
+        var isPrevSelectRange = (prevSelectionStart !== prevSelectionEnd);
+        var isSelectRange = (selectionStart !== selectionEnd);
+        var isSelectRangeChanged = (isPrevSelectRange || isSelectRange) &&
+            ((prevSelectionStart !== selectionStart) || (prevSelectionEnd !== selectionEnd));
 
-            this.prevCursorPosition = cursorPosition;
+        if (isSelectRangeChanged) {
+            // console.log(prevSelectionStart, prevSelectionEnd, selectionStart, selectionEnd)
+            OnSelectRange(this);
+        } else if (!isSelectRange) {
+            OnMoveCursor(this);
         }
 
         return this;

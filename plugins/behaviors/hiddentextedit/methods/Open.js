@@ -34,9 +34,14 @@ var Open = function () {
 
     this.scene.input.on('pointerdown', this.onClickOutside, this);
 
+    if (this.onOpenSelectAll) {
+        this.selectAll();
+    }
+
     if (this.onOpenCallback) {
         this.onOpenCallback(this.parent, this);
     }
+
     this.emit('open', this);
 
     return this;

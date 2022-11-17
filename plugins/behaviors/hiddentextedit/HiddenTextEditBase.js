@@ -31,6 +31,8 @@ class HiddenTextEditBase extends ComponentBase {
 
         this.onUpdateCallback = GetValue(config, 'onUpdate', undefined);
 
+        this.onOpenSelectAll = GetValue(config, 'selectAll', false);
+
         this.isOpened = false;
 
         gameObject

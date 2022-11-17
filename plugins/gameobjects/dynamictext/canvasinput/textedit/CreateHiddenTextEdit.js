@@ -6,7 +6,7 @@ const PropertiesList = [
     'inputType',
     'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate',
     'enterClose',
-    'readOnly', 'maxLength', 'minLength',
+    'readOnly', 'maxLength', 'minLength', 'selectAll'
 ];
 
 var CreateHiddenTextEdit = function (parent, parentConfig) {

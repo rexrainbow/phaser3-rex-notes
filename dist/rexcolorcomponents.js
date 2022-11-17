@@ -14761,6 +14761,9 @@
     // so updating cursor position every tick
     this.scene.sys.events.on('postupdate', this.updateText, this);
     this.scene.input.on('pointerdown', this.onClickOutside, this);
+    if (this.onOpenSelectAll) {
+      this.selectAll();
+    }
     if (this.onOpenCallback) {
       this.onOpenCallback(this.parent, this);
     }
@@ -14828,6 +14831,7 @@
       }
       _this.onCloseCallback = onClose;
       _this.onUpdateCallback = GetValue$2(config, 'onUpdate', undefined);
+      _this.onOpenSelectAll = GetValue$2(config, 'selectAll', false);
       _this.isOpened = false;
       gameObject.on('pointerdown', function () {
         this.open();
@@ -15186,6 +15190,88 @@
     return text;
   };
 
+  var OnSelectRange = function OnSelectRange(hiddenTextEdit) {
+    var textObject = hiddenTextEdit.parent;
+    // var text = textObject.text;
+    var selectionStart = hiddenTextEdit.selectionStart;
+    var selectionEnd = hiddenTextEdit.selectionEnd;
+    var prevSelectionStart = hiddenTextEdit.prevSelectionStart;
+    var prevSelectionEnd = hiddenTextEdit.prevSelectionEnd;
+    if (prevSelectionStart === null) {
+      // First step
+      var min = Math.min(selectionStart, selectionEnd);
+      var max = Math.max(selectionStart, selectionEnd);
+      for (var i = min; i <= max; i++) {
+        var child = textObject.getCharChild(i);
+        if (child) {
+          textObject.emit('cursorin', child, i, textObject);
+        }
+      }
+    } else if (!hiddenTextEdit.isOpened) {
+      // Last step
+      var min = Math.min(prevSelectionStart, prevSelectionEnd);
+      var max = Math.max(prevSelectionStart, prevSelectionEnd);
+      for (var i = min; i <= max; i++) {
+        var child = textObject.getCharChild(i);
+        if (child) {
+          textObject.emit('cursorout', child, i, textObject);
+        }
+      }
+    } else {
+      var minPrevSelection = Math.min(prevSelectionStart, prevSelectionEnd);
+      var maxPrevSelection = Math.max(prevSelectionStart, prevSelectionEnd);
+      var minSelection = Math.min(selectionStart, selectionEnd);
+      var maxSelection = Math.max(selectionStart, selectionEnd);
+      var min = Math.min(minPrevSelection, minSelection);
+      var max = Math.max(maxPrevSelection, maxSelection);
+      for (var i = min; i <= max; i++) {
+        var inPrevSelectionRange = i >= minPrevSelection && i <= maxPrevSelection;
+        var inSelectionRange = i >= minSelection && i <= maxSelection;
+        if (inPrevSelectionRange && inSelectionRange) {
+          continue;
+        }
+        var child = textObject.getCharChild(i);
+        if (child) {
+          if (inPrevSelectionRange) {
+            textObject.emit('cursorout', child, i, textObject);
+          } else {
+            textObject.emit('cursorin', child, i, textObject);
+          }
+        }
+      }
+    }
+    hiddenTextEdit.prevSelectionStart = hiddenTextEdit.isOpened ? selectionStart : null;
+    hiddenTextEdit.prevSelectionEnd = hiddenTextEdit.isOpened ? selectionEnd : null;
+  };
+
+  var OnMoveCursor = function OnMoveCursor(hiddenTextEdit) {
+    var textObject = hiddenTextEdit.parent;
+    var text = textObject.text;
+    var cursorPosition = hiddenTextEdit.isOpened ? hiddenTextEdit.cursorPosition : null;
+    if (hiddenTextEdit.prevCursorPosition === cursorPosition) {
+      return;
+    }
+    if (hiddenTextEdit.prevCursorPosition !== null) {
+      if (hiddenTextEdit.prevCursorPosition > text.length) {
+        hiddenTextEdit.prevCursorPosition = null;
+      }
+    }
+    if (hiddenTextEdit.prevCursorPosition !== null) {
+      var child = textObject.getCharChild(hiddenTextEdit.prevCursorPosition);
+      if (child) {
+        textObject.emit('cursorout', child, hiddenTextEdit.prevCursorPosition, textObject);
+      }
+    }
+    if (cursorPosition != null) {
+      var child = textObject.getCharChild(cursorPosition);
+      if (child) {
+        textObject.emit('cursorin', child, cursorPosition, textObject);
+      }
+    }
+    textObject.emit('movecursor', cursorPosition, hiddenTextEdit.prevCursorPosition, textObject);
+    hiddenTextEdit.prevCursorPosition = cursorPosition;
+  };
+
   var HiddenTextEdit = /*#__PURE__*/function (_HiddenTextEditBase) {
     _inherits(HiddenTextEdit, _HiddenTextEditBase);
     var _super = _createSuper(HiddenTextEdit);
@@ -15198,21 +15284,37 @@
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
 
+      _this.prevCursorPosition = null;
+      _this.prevSelectionStart = null;
+      _this.prevSelectionEnd = null;
+      _this.firstClickAfterOpen = false;
       gameObject
       // Open editor by 'pointerdown' event
       // Then set cursor position to nearest char
       .on('pointerdown', function (pointer, localX, localY, event) {
+        if (!this.onOpenSelectAll || !this.firstClickAfterOpen) {
+          var child = gameObject.getNearestChild(localX, localY);
+          var charIndex = gameObject.getCharIndex(child);
+          this.setCursorPosition(charIndex);
+        }
+        this.firstClickAfterOpen = false;
+      }, _assertThisInitialized(_this)).on('pointermove', function (pointer, localX, localY, event) {
+        if (!pointer.isDown) {
+          return;
+        }
         var child = gameObject.getNearestChild(localX, localY);
         var charIndex = gameObject.getCharIndex(child);
-        this.setCursorPosition(charIndex);
+        if (charIndex === this.selectionStart) {
+          return;
+        }
+        this.selectText(this.selectionStart, charIndex);
       }, _assertThisInitialized(_this));
       _this.on('open', function () {
+        this.firstClickAfterOpen = true;
         gameObject.emit('open');
-      }).on('close', function () {
+      }, _assertThisInitialized(_this)).on('close', function () {
         gameObject.emit('close');
-      }).on('nan', function (text) {
-        gameObject.emit('nan', text);
-      });
+      }, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(HiddenTextEdit, [{
@@ -15238,27 +15340,18 @@
           textObject.setText(text);
           textObject.emit('textchange', text, textObject, this);
         }
-        var cursorPosition = this.isOpened ? this.cursorPosition : null;
-        if (this.prevCursorPosition !== cursorPosition) {
-          if (this.prevCursorPosition != null) {
-            if (this.prevCursorPosition > text.length) {
-              this.prevCursorPosition = null;
-            }
-          }
-          if (this.prevCursorPosition != null) {
-            var child = textObject.getCharChild(this.prevCursorPosition);
-            if (child) {
-              textObject.emit('cursorout', child, this.prevCursorPosition, textObject);
-            }
-          }
-          if (cursorPosition != null) {
-            var child = textObject.getCharChild(cursorPosition);
-            if (child) {
-              textObject.emit('cursorin', child, cursorPosition, textObject);
-            }
-          }
-          textObject.emit('movecursor', cursorPosition, this.prevCursorPosition, textObject);
-          this.prevCursorPosition = cursorPosition;
+        var selectionStart = this.isOpened ? this.selectionStart : null;
+        var selectionEnd = this.isOpened ? this.selectionEnd : null;
+        var prevSelectionStart = this.prevSelectionStart;
+        var prevSelectionEnd = this.prevSelectionEnd;
+        var isPrevSelectRange = prevSelectionStart !== prevSelectionEnd;
+        var isSelectRange = selectionStart !== selectionEnd;
+        var isSelectRangeChanged = (isPrevSelectRange || isSelectRange) && (prevSelectionStart !== selectionStart || prevSelectionEnd !== selectionEnd);
+        if (isSelectRangeChanged) {
+          // console.log(prevSelectionStart, prevSelectionEnd, selectionStart, selectionEnd)
+          OnSelectRange(this);
+        } else if (!isSelectRange) {
+          OnMoveCursor(this);
         }
         return this;
       }
@@ -15273,7 +15366,7 @@
   }(HiddenTextEditBase);
 
   var GetValue$1 = Phaser.Utils.Objects.GetValue;
-  var PropertiesList = ['inputType', 'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength'];
+  var PropertiesList = ['inputType', 'onOpen', 'onFocus', 'onClose', 'onBlur', 'onUpdate', 'enterClose', 'readOnly', 'maxLength', 'minLength', 'selectAll'];
   var CreateHiddenTextEdit = function CreateHiddenTextEdit(parent, parentConfig) {
     var config = GetValue$1(parentConfig, 'edit');
     if (config === undefined) {
