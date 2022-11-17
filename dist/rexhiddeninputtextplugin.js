@@ -532,9 +532,6 @@
     // so updating cursor position every tick
     this.scene.sys.events.on('postupdate', this.updateText, this);
     this.scene.input.on('pointerdown', this.onClickOutside, this);
-    if (this.onOpenSelectAll) {
-      this.selectAll();
-    }
     if (this.onOpenCallback) {
       this.onOpenCallback(this.parent, this);
     }
@@ -602,7 +599,6 @@
       }
       _this.onCloseCallback = onClose;
       _this.onUpdateCallback = GetValue$1(config, 'onUpdate', undefined);
-      _this.onOpenSelectAll = GetValue$1(config, 'selectAll', false);
       _this.isOpened = false;
       gameObject.on('pointerdown', function () {
         this.open();

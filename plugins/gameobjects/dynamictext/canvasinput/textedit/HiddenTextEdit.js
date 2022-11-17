@@ -40,9 +40,9 @@ class HiddenTextEdit extends HiddenTextEditBase {
                 var child = gameObject.getNearestChild(localX, localY);
                 var charIndex = gameObject.getCharIndex(child);
                 if (this.cursorMoveStartIndex < charIndex) {
-                    this.selectText(this.cursorMoveStartIndex, charIndex);
+                    this.selectText(this.cursorMoveStartIndex, charIndex + 1);
                 } else {
-                    this.selectText(charIndex, this.cursorMoveStartIndex);
+                    this.selectText(charIndex, this.cursorMoveStartIndex + 1);
                 }
             }, this)
 
@@ -94,12 +94,19 @@ class HiddenTextEdit extends HiddenTextEditBase {
             ((prevSelectionStart !== selectionStart) || (prevSelectionEnd !== selectionEnd));
 
         if (isSelectRangeChanged) {
-            // console.log(prevSelectionStart, prevSelectionEnd, selectionStart, selectionEnd)
             OnSelectRange(this);
-        } else if (!isSelectRange) {
+        }
+
+        if (!isSelectRange) {
+            OnMoveCursor(this);
+        }
+
+        if (this.isOpened && isSelectRange) {
+            this.prevSelectionStart = selectionStart;
+            this.prevSelectionEnd = selectionEnd;
+        } else {
             this.prevSelectionStart = null;
             this.prevSelectionEnd = null;
-            OnMoveCursor(this);
         }
 
         return this;

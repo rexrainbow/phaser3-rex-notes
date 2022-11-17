@@ -7,36 +7,26 @@ var OnSelectRange = function (hiddenTextEdit) {
     var prevSelectionEnd = hiddenTextEdit.prevSelectionEnd;
 
     if (prevSelectionStart === null) {  // First step
-        var min = Math.min(selectionStart, selectionEnd);
-        var max = Math.max(selectionStart, selectionEnd);
-
-        for (var i = min; i <= max; i++) {
+        for (var i = selectionStart; i < selectionEnd; i++) {
             var child = textObject.getCharChild(i);
             if (child) {
                 textObject.emit('cursorin', child, i, textObject);
             }
         }
-    } else if (!hiddenTextEdit.isOpened) { // Last step
-        var min = Math.min(prevSelectionStart, prevSelectionEnd);
-        var max = Math.max(prevSelectionStart, prevSelectionEnd);
-
-        for (var i = min; i <= max; i++) {
+    } else if (!hiddenTextEdit.isOpened || (selectionStart === selectionEnd)) { // Last step
+        for (var i = prevSelectionStart; i < prevSelectionEnd; i++) {
             var child = textObject.getCharChild(i);
             if (child) {
                 textObject.emit('cursorout', child, i, textObject);
             }
         }
     } else {
-        var minPrevSelection = Math.min(prevSelectionStart, prevSelectionEnd);
-        var maxPrevSelection = Math.max(prevSelectionStart, prevSelectionEnd);
-        var minSelection = Math.min(selectionStart, selectionEnd);
-        var maxSelection = Math.max(selectionStart, selectionEnd);
-        var min = Math.min(minPrevSelection, minSelection);
-        var max = Math.max(maxPrevSelection, maxSelection);
+        var min = Math.min(prevSelectionStart, selectionStart);
+        var max = Math.max(prevSelectionEnd, selectionEnd);
 
-        for (var i = min; i <= max; i++) {
-            var inPrevSelectionRange = (i >= minPrevSelection) && (i <= maxPrevSelection);
-            var inSelectionRange = (i >= minSelection) && (i <= maxSelection);
+        for (var i = min; i < max; i++) {
+            var inPrevSelectionRange = (i >= prevSelectionStart) && (i < prevSelectionEnd);
+            var inSelectionRange = (i >= selectionStart) && (i < selectionEnd);
 
             if (inPrevSelectionRange && inSelectionRange) {
                 continue;
@@ -52,9 +42,6 @@ var OnSelectRange = function (hiddenTextEdit) {
             }
         }
     }
-
-    hiddenTextEdit.prevSelectionStart = (hiddenTextEdit.isOpened) ? selectionStart : null;
-    hiddenTextEdit.prevSelectionEnd = (hiddenTextEdit.isOpened) ? selectionEnd : null;
 }
 
 export default OnSelectRange;
