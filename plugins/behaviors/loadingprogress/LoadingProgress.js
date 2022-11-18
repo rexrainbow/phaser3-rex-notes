@@ -1,6 +1,6 @@
 import Transition from '../transition/Transition.js';
 import PopUp from '../../popup.js';
-import ScaleDownDestroy from '../../scale-down-destroy.js';
+import ScaleDown from '../scale/ScaleDown.js';
 import NOOP from '../../utils/object/NOOP.js';
 import AwaitLoader from '../../awaitloader.js';
 import GetProgress from './GetProgress.js';
@@ -67,11 +67,6 @@ class LoadingProgress extends Transition {
             this.requestClose();
         }
     }
-}
-
-var ScaleDown = function (gameObject, duration) {
-    // Don't destroy here
-    ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
 }
 
 export default LoadingProgress;

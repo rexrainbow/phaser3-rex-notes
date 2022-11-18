@@ -17,7 +17,7 @@ class Transition extends ComponentBase {
         this.setTransitOutCallback(GetValue(config, 'transitOut'));
         this.destroyParent = GetValue(config, 'destroy', true);
 
-        this.timer = undefined;
+        this.delayCallTimer = undefined;
         this._state = new State(this, { eventEmitter: false });
         this.closeEventData = undefined;        
     }
@@ -71,14 +71,14 @@ class Transition extends ComponentBase {
 
     delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
         return this;
     }
 
     removeDelayCall() {
-        if (this.timer) {
-            this.timer.remove(false);
-            this.timer = undefined;
+        if (this.delayCallTimer) {
+            this.delayCallTimer.remove(false);
+            this.delayCallTimer = undefined;
         }
         return this;
     }
