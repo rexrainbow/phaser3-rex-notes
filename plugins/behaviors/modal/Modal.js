@@ -5,6 +5,7 @@ import {
     DefaultCoverTransitInCallback,
     DefaultCoverTransitOutCallback
 } from './DefaultCoverTransitCallbacks.js';
+import IsPointInBounds from '../../utils/bounds/IsPointInBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -33,17 +34,20 @@ class Modal extends Transition {
         }
 
         // Close conditions:
-        // OK/Cancel buttons, invoke modal.requestClose()
-        var manualClose = GetValue(config, 'manualClose', true);
-        // Timeout/any-touch
-        if (!manualClose) {
+        // Priority : manualClose, clickOutsideClose, timeOutClose|anyTouchClose
+        if (GetValue(config, 'manualClose', true)) {
+            // OK/Cancel buttons, invoke modal.requestClose()
+            this.setDisplayTime(-1);
+        } else if (GetValue(config, 'clickOutsideClose', false)) {
+            // Click outside of parent
+            this.setDisplayTime(-1);
+            this.clickOutsideClose();
+        } else {
+            // Timeout/any-touch
             this.setDisplayTime(GetValue(config, 'duration.hold', 2000));
-            var anyTouchClose = GetValue(config, 'anyTouchClose', true);
-            if (anyTouchClose) {
+            if (GetValue(config, 'anyTouchClose', true)) {
                 this.anyTouchClose();
             }
-        } else {
-            this.setDisplayTime(-1);
         }
 
         this.start();
@@ -55,9 +59,9 @@ class Modal extends Transition {
             return;
         }
 
-        // Registered in anyTouchClose()
+        // Registered in clickOutsideClose(), or anyTouchClose()
         if (!this.cover) {
-            this.scene.input.off('pointerup', this.requestClose, this);
+            this.scene.input.off('pointerup', this.touchCloseCallback, this);
         }
 
         if (this.cover && !fromScene) {
@@ -68,13 +72,30 @@ class Modal extends Transition {
         super.shutdown(fromScene);
     }
 
+    clickOutsideClose() {
+        if (this.cover) {
+            this.cover.on('pointerup', this.touchCloseCallback, this);
+        } else {
+            this.scene.input.on('pointerup', this.touchCloseCallback, this);
+        }
+        this.clickOutsideTest = true;
+        return this;
+    }
+
     anyTouchClose() {
         if (this.cover) {
-            this.cover.once('pointerup', this.requestClose, this);
+            this.cover.once('pointerup', this.touchCloseCallback, this);
         } else {
-            this.scene.input.once('pointerup', this.requestClose, this);
+            this.scene.input.once('pointerup', this.touchCloseCallback, this);
         }
         return this;
+    }
+
+    touchCloseCallback(pointer) {
+        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
+            return;
+        }
+        this.requestClose();
     }
 
     transitionIn() {

@@ -67,6 +67,7 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
     // cover: false, 
 
     // manualClose: true,
+    // clickOutsideClose: false,
     // anyTouchClose: true,
 
     // duration: {
@@ -98,7 +99,12 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
         ```
 - `manualClose` :
     - `true` : Close modal dialog via `modal.requestClose()` method. Default behavior.
-    - `false` : Close modal dialog when timeout (`duration.hold`), or any-touch (if set `anyTouchClose` to `true`)
+    - `false` : Close modal dialog when 
+        - Click-outside if set `clickOutsideClose` to `true`, or
+        - Timeout (`duration.hold`), or any-touch (if set `anyTouchClose` to `true`)
+- `clickOutsideClose` :
+    - `true` : When `manualClose` set to `false`, close modal dialog when clicking out side of gameObject.
+    - `false` : Disable click-outside feature
 - `anyTouchClose` :
     - `true` : When `manualClose` set to `false`, close modal dialog when timeout, or any-touch.
     - `false` : Disable any-touch feature.
@@ -149,13 +155,16 @@ graph TB
 Modal["add('gameObject, config)"]
 OnOpen["modal.on('open')"]
 RequestCloseEvent["modal.requestClose(closeEventData)"]
+ClickOutside["Click outside<br>of game object"]
 TimeOut["Timeout<br>Any touch"]
 OnClose["modal.on('close', function(closeEventData) {})"]
 
 Modal --> |Transition-in| OnOpen
 OnOpen --> |manualClose| RequestCloseEvent
-OnOpen --> |Not manualClose| TimeOut
+OnOpen --> |Not manualClose &&<br> ClickOutsideClose| ClickOutside
+OnOpen --> |Not manualClose &&<br> No ClickOutsideClose| TimeOut
 RequestCloseEvent --> |Transition-out| OnClose
+ClickOutside --> |Transition-out| OnClose
 TimeOut --> |Transition-out| OnClose
 ```
 
