@@ -11,7 +11,7 @@ class ColorPicker extends Sizer {
         this.freezePalettes = false;
 
         // orientation
-        var hPalettePosition = GetValue(config, 'hPalette.position', 'bottom');
+        var hPalettePosition = GetValue(config, 'hPalette.position', 0);
         if (typeof (hPalettePosition) === 'string') {
             hPalettePosition = HPalettePositionNamesMap[hPalettePosition];
         }

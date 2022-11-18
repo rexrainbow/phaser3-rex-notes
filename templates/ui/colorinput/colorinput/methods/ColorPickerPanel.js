@@ -6,45 +6,48 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ColorPickerPanel extends Sizer {
     constructor(scene, config) {
-        var colorPickerConfig = GetValue(config, 'colorPicker', undefined);
-        if (colorPickerConfig === undefined) {
-            colorPickerConfig = {};
+        if (config === undefined) {
+            config = {};
         }
 
-        colorPickerConfig.orientation = 1;
-        super(scene, colorPickerConfig);
+        config.orientation = 1;
+        super(scene, config);
         this.type = 'rexColorInput.ColorPickerPanel';
 
         // Add elements
-        var background = GetValue(colorPickerConfig, 'background', undefined);
+        var background = GetValue(config, 'background', undefined);
 
         var colorPicker = new ColorPicker(scene, {
-            hPalette: colorPickerConfig.hPalette,
-            svPalette: colorPickerConfig.svPalette,
+            hPalette: config.hPalette || {},
+            svPalette: config.svPalette || {},
             space: {
-                item: GetValue(colorPickerConfig, 'space.hPalette', 0)
+                item: GetValue(config, 'space.hPalette', 5)
             }
         });
         scene.add.existing(colorPicker);
 
-        var colorComponents = new ColorComponents(scene, {
-            text: GetValue(colorPickerConfig, 'text'),
-        });
-        scene.add.existing(colorComponents);
+        //var colorComponents = new ColorComponents(scene, {
+        //    text: GetValue(config, 'text'),
+        //});
+        //scene.add.existing(colorComponents);
 
         this.add(
             colorPicker,
-            {}
+            { proportion: 1, expand: true }
         );
 
-        this.add(
-            colorComponents,
-            {}
-        );
+        //this.add(
+        //    colorComponents,
+        //    {}
+        //);
 
         this.addChildrenMap('background', background);
-        this.addChildrenMap('hPalette', hPalette);
-        this.addChildrenMap('svPalette', svPalette);
+        this.addChildrenMap('colorPicker', colorPicker);
+        //this.addChildrenMap('colorComponents', colorComponents);
+
+        colorPicker.on('valuechange', function () {
+            this.emit('valuechange', colorPicker.value);
+        }, this)
     }
 
 }

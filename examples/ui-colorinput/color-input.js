@@ -72,6 +72,11 @@ var CreateColorInput0 = function (scene) {
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
+        colorPicker: {
+            width: 160,
+            height: 160
+        },
+
         value: Phaser.Math.Between(0, 0x1000000)
     })
 }
