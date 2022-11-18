@@ -1,4 +1,4 @@
-import ConfigListMethods from './listpanel/ConfigMethods.js';
+import ConfigurationMethods from './listpanel/ConfigurationMethods.js';
 import OpenListPanel from './listpanel/OpenListPanel.js';
 import CloseListPanel from './listpanel/CloseListPanel.js';
 import ToggleListPanel from './listpanel/ToggleListPanel.js';
@@ -12,7 +12,7 @@ var Methods = {
 
 Object.assign(
     Methods,
-    ConfigListMethods,
+    ConfigurationMethods,
     DelayCallMethods
 );
 

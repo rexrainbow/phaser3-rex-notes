@@ -5,7 +5,7 @@ import PostUpdateDelayCall from '../../utils/time/PostUpdateDelayCall.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Modal extends ComponentBase {
+class Transition extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
@@ -123,4 +123,4 @@ class Modal extends ComponentBase {
     }
 }
 
-export default Modal;
+export default Transition;
