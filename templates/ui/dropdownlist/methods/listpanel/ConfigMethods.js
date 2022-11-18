@@ -1,10 +1,10 @@
 var PopUp = function (listPanel, duration) {
-    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic')
+    listPanel.popUp(duration, 'y', 'Cubic')
 }
 
 var ScaleDown = function (listPanel, duration) {
     // Don't destroy here
-    listPanel.scaleDown(this.listEaseOutDuration, 'y', 'Linear')
+    listPanel.scaleDown(duration, 'y', 'Linear')
 }
 
 var methods = {
@@ -76,7 +76,7 @@ var methods = {
         return this;
     },
 
-    settListTTransitOutCallback(callback) {
+    settListTransitOutCallback(callback) {
         if (callback === undefined) {
             callback = ScaleDown;
         }
