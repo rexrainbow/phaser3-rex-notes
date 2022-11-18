@@ -55,16 +55,9 @@ class Canvas extends GameObject {
         }
 
         this.dirty = true;
-
-        scene.sys.game.events.on('contextrestored', this.onContextRestored, this);
-    }
-
-    onContextRestored() {
-        this.dirty = true;
     }
 
     preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
 

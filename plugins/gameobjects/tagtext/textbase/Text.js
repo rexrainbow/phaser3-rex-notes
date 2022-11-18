@@ -158,20 +158,12 @@ class Text extends TextBase {
         }
 
         this.setText(text);
-
-        scene.sys.game.events.on('contextrestored', this.onContextRestored, this);
-    }
-
-    onContextRestored() {
-        this.dirty = true;
     }
 
     preDestroy() {
         if (this.style.rtl) {
             RemoveFromDOM(this.canvas);
         }
-
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
 
         this.canvasText.destroy();
         this.canvasText = undefined;
