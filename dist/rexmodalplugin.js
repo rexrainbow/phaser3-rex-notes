@@ -2379,10 +2379,12 @@
       } else {
         _this.setDisplayTime(-1);
       }
+
+      // Registet touch-close event after opened
       if (anyTouchClose) {
-        _this.anyTouchClose();
+        _this.once('open', _this.anyTouchClose, _assertThisInitialized(_this));
       } else if (touchOutsideClose) {
-        _this.touchOutsideClose();
+        _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
       _this.start();
       return _this;

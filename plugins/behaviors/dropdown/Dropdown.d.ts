@@ -28,6 +28,8 @@ declare namespace DropDown {
 
         touchOutsideClose?: boolean,
 
+        anyTouchClose?: boolean,
+
         destroy?: boolean,
     }
 }
@@ -37,4 +39,6 @@ declare class DropDown {
         gameObject: Phaser.GameObjects.GameObject,
         config?: DropDown.IConfig,
     )
+
+    requestClose(closeEventData: any): this;
 }

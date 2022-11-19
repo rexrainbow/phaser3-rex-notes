@@ -1,40 +1,14 @@
 import CreateListPanel from './CreateListPanel.js';
-import GetViewport from '../../../../../plugins/utils/system/GetViewport.js';
+import DropDown from '../../../dropdown/DropDown.js';
 
 var OpenListPanel = function () {
     if (this.listPanel) {
         return this;
     }
 
-    var scene = this.scene;
-    // Expand direction
-    var isExpandDown = (this.listExpandDirection === 0);
-    var isExpandUp = (this.listExpandDirection === 1);
-    var flexExpand = !isExpandDown && !isExpandUp;
+    var listPanel = CreateListPanel.call(this, this.scene);
 
-    var listPanel = CreateListPanel.call(this, scene);
-
-    var originX = 0;
-    var originY = (isExpandDown || flexExpand) ? 0 : 1;
-    listPanel
-        .setOrigin(originX, originY)
-        .layout();
-
-    var x = this.getElement(this.listAlignMode).getTopLeft().x;
-    var y = (isExpandDown || flexExpand) ? this.bottom : this.top;
-    listPanel.setPosition(x, y);
-
-    var bounds = this.listBounds;
-    if (!bounds) {
-        bounds = GetViewport(scene);
-    }
-    if (flexExpand && (listPanel.bottom > bounds.bottom)) {
-        // Out of bounds, can't put list-panel below parent
-        listPanel
-            .changeOrigin(0, 1)
-            .setPosition(x, this.top);
-    }
-
+    // Button over/out
     listPanel
         .on('button.over', function (button, index, pointer, event) {
             if (this.listOnButtonOver) {
@@ -51,27 +25,48 @@ var OpenListPanel = function () {
             this.emit('button.out', this, listPanel, button, index, pointer, event);
         }, this);
 
-    var duration = this.listEaseInDuration;
-    this.listTransitInCallback(listPanel, duration);
-    this.delayCall(duration, function () {
-        // After popping up
-        // Can click
-        listPanel.on('button.click', function (button, index, pointer, event) {
-            if (this.listOnButtonClick) {
-                this.listOnButtonClick.call(this, button, index, pointer, event);
-            }
-            this.emit('button.click', this, listPanel, button, index, pointer, event);
-        }, this);
+    var dropDownBehavior = new DropDown(listPanel, {
+        // Transition
+        duration: {
+            in: this.listEaseInDuration,
+            out: this.listEaseOutDuration
+        },
+        transitIn: this.listTransitInCallback,
+        transitOut: this.listTransitOutCallback,
 
-        // Can close list panel
-        scene.input.once('pointerup', this.closeListPanel, this);
+        // Position
+        expandDirection: this.listExpandDirection,
 
-        this.emit('list.open', this, listPanel);
-    }, this);
+        alignTargetX: this.getElement(this.listAlignMode),
+        alignTargetY: this,
 
-    this.pin(listPanel);
+        bounds: this.listBounds,
+
+        // Close condition
+        anyTouchClose: true,
+    })
+        .on('open', function () {
+            // After popping up
+            // Can click
+            listPanel.on('button.click', function (button, index, pointer, event) {
+                if (this.listOnButtonClick) {
+                    this.listOnButtonClick.call(this, button, index, pointer, event);
+                }
+                this.emit('button.click', this, listPanel, button, index, pointer, event);
+            }, this);
+
+            this.emit('list.open', this, listPanel);
+        }, this)
+
+        .on('close', function () {
+            this.dropDownBehavior = undefined;
+            this.listPanel = undefined;
+        }, this)
 
     this.listPanel = listPanel;
+    this.dropDownBehavior = dropDownBehavior;
+
+    this.pin(listPanel);
 
     return this;
 }

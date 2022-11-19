@@ -27,5 +27,5 @@ declare class Transition extends Phaser.Events.EventEmitter {
         config?: Transition.IConfig
     );
 
-
+    requestClose(closeEventData: any): this;
 }

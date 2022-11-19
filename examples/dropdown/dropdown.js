@@ -32,6 +32,8 @@ class Demo extends Phaser.Scene {
                     })
 
                 var dropDownBehavior = this.plugins.get('rexDropDown').add(dropDownPanel, {
+                    touchOutsideClose: true,
+
                     alignTarget: button,
                     //alignOffsetX: 20,
                     //alignOffsetY: -10,

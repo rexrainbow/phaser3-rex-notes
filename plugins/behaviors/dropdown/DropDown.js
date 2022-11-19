@@ -31,9 +31,18 @@ class DropDown extends Transition {
         }
 
         // Close conditions:
-        var touchOutsideClose = GetValue(config, 'touchOutsideClose', true);
-        if (touchOutsideClose) {
-            this.touchOutsideClose();
+        var touchOutsideClose = GetValue(config, 'touchOutsideClose', false);
+        var anyTouchClose = GetValue(config, 'anyTouchClose', false);
+
+        if (anyTouchClose) {
+            touchOutsideClose = false;
+        }
+
+        // Registet touch-close event after opened
+        if (anyTouchClose) {
+            this.once('open', this.anyTouchClose, this);
+        } else if (touchOutsideClose) {
+            this.once('open', this.touchOutsideClose, this);
         }
 
         this.start();
@@ -53,15 +62,32 @@ class DropDown extends Transition {
 
     touchOutsideClose() {
         this.scene.input.on('pointerup', this.touchCloseCallback, this);
+        this.clickOutsideTest = true;
+        return this;
+    }
+
+    anyTouchClose() {
+        this.scene.input.once('pointerup', this.touchCloseCallback, this);    
         return this;
     }
 
     touchCloseCallback(pointer) {
-        if (IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
+        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
             return;
         }
         this.requestClose();
     }
+
+    onOpen() {
+        this.emit('open', this.parent, this);
+        super.onOpen();
+    }
+
+    onClose() {
+        this.emit('close', this.parent, this);
+        super.onClose();
+    }
+
 }
 
 export default DropDown;

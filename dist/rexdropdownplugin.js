@@ -2131,9 +2131,17 @@
       }
 
       // Close conditions:
-      var touchOutsideClose = GetValue(config, 'touchOutsideClose', true);
-      if (touchOutsideClose) {
-        _this.touchOutsideClose();
+      var touchOutsideClose = GetValue(config, 'touchOutsideClose', false);
+      var anyTouchClose = GetValue(config, 'anyTouchClose', false);
+      if (anyTouchClose) {
+        touchOutsideClose = false;
+      }
+
+      // Registet touch-close event after opened
+      if (anyTouchClose) {
+        _this.once('open', _this.anyTouchClose, _assertThisInitialized(_this));
+      } else if (touchOutsideClose) {
+        _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
       }
       _this.start();
       return _this;
@@ -2154,15 +2162,34 @@
       key: "touchOutsideClose",
       value: function touchOutsideClose() {
         this.scene.input.on('pointerup', this.touchCloseCallback, this);
+        this.clickOutsideTest = true;
+        return this;
+      }
+    }, {
+      key: "anyTouchClose",
+      value: function anyTouchClose() {
+        this.scene.input.once('pointerup', this.touchCloseCallback, this);
         return this;
       }
     }, {
       key: "touchCloseCallback",
       value: function touchCloseCallback(pointer) {
-        if (IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
+        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
           return;
         }
         this.requestClose();
+      }
+    }, {
+      key: "onOpen",
+      value: function onOpen() {
+        this.emit('open', this.parent, this);
+        _get(_getPrototypeOf(DropDown.prototype), "onOpen", this).call(this);
+      }
+    }, {
+      key: "onClose",
+      value: function onClose() {
+        this.emit('close', this.parent, this);
+        _get(_getPrototypeOf(DropDown.prototype), "onClose", this).call(this);
       }
     }]);
     return DropDown;

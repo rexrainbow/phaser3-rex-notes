@@ -56,10 +56,11 @@ class Modal extends Transition {
             this.setDisplayTime(-1);
         }
 
+        // Registet touch-close event after opened
         if (anyTouchClose) {
-            this.anyTouchClose();
+            this.once('open', this.anyTouchClose, this);
         } else if (touchOutsideClose) {
-            this.touchOutsideClose();
+            this.once('open', this.touchOutsideClose, this);
         }
 
         this.start();
