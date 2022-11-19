@@ -91,6 +91,7 @@ module.exports = {
     'anchorplugin': './plugins/anchor-plugin.js',
     'boundsplugin': './plugins/bounds-plugin.js',
     'modalplugin': './plugins/modal-plugin.js',
+    'dropdownplugin': './plugins/dropdown-plugin.js',
     'particlesalongboundsplugin': './plugins/particlesalongbounds-plugin.js',
     'loadingprogressplugin': './plugins/loadingprogress-plugin.js',
     // member of game object, arcade behavior

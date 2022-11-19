@@ -1,0 +1,40 @@
+export default DropDown;
+
+declare namespace DropDown {
+    type TransitCallbackType = (
+        gameObject: Phaser.GameObjects.GameObject,
+        duration: number
+    ) => void;
+
+    interface IConfig {
+
+        duration?: {
+            in?: number,
+            out?: number,
+        },
+
+        transitIn?: TransitCallbackType,
+        transitOut?: TransitCallbackType,
+
+        expandDirection?: 0 | 1 | 'down' | 'up',
+
+        alignTarget?: Phaser.GameObjects.GameObject,
+        alignTargetX?: Phaser.GameObjects.GameObject,
+        alignTargetY?: Phaser.GameObjects.GameObject,
+        alignOffsetX?: number,
+        alignOffsetY?: number,
+
+        bounds?: Phaser.Geom.Rectangle,
+
+        touchOutsideClose?: boolean,
+
+        destroy?: boolean,
+    }
+}
+
+declare class DropDown {
+    constructor(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: DropDown.IConfig,
+    )
+}
