@@ -16,7 +16,7 @@ class DropDown extends Transition {
                 PopUp(gameObject, duration, 'y', 'Cubic')
             };
         }
-        if (!config.transitOut == null) {
+        if (config.transitOut == null) {
             config.transitOut = function (gameObject, duration) {
                 // Don't destroy here
                 ScaleDown(gameObject, duration, 'y', 'Linear')
