@@ -34,20 +34,32 @@ class Modal extends Transition {
         }
 
         // Close conditions:
-        // Priority : manualClose, clickOutsideClose, timeOutClose|anyTouchClose
-        if (GetValue(config, 'manualClose', true)) {
-            // OK/Cancel buttons, invoke modal.requestClose()
-            this.setDisplayTime(-1);
-        } else if (GetValue(config, 'clickOutsideClose', false)) {
-            // Click outside of parent
-            this.setDisplayTime(-1);
-            this.clickOutsideClose();
+        var touchOutsideClose = GetValue(config, 'touchOutsideClose', false);
+        var timeOutDuration = GetValue(config, 'duration.hold', -1);
+        var timeOutClose = GetValue(config, 'timeOutClose', (timeOutDuration >= 0));
+        var anyTouchClose = GetValue(config, 'anyTouchClose', false);
+        var manualClose = GetValue(config, 'manualClose', false);
+
+        if (manualClose) {
+            touchOutsideClose = false;
+            anyTouchClose = false;
+            timeOutClose = false;
+        }
+
+        if (anyTouchClose) {
+            touchOutsideClose = false;
+        }
+
+        if (timeOutClose) {
+            this.setDisplayTime(timeOutDuration);
         } else {
-            // Timeout/any-touch
-            this.setDisplayTime(GetValue(config, 'duration.hold', 2000));
-            if (GetValue(config, 'anyTouchClose', true)) {
-                this.anyTouchClose();
-            }
+            this.setDisplayTime(-1);
+        }
+
+        if (anyTouchClose) {
+            this.anyTouchClose();
+        } else if (touchOutsideClose) {
+            this.touchOutsideClose();
         }
 
         this.start();
@@ -59,7 +71,7 @@ class Modal extends Transition {
             return;
         }
 
-        // Registered in clickOutsideClose(), or anyTouchClose()
+        // Registered in touchOutsideClose(), or anyTouchClose()
         if (!this.cover) {
             this.scene.input.off('pointerup', this.touchCloseCallback, this);
         }
@@ -72,7 +84,7 @@ class Modal extends Transition {
         super.shutdown(fromScene);
     }
 
-    clickOutsideClose() {
+    touchOutsideClose() {
         if (this.cover) {
             this.cover.on('pointerup', this.touchCloseCallback, this);
         } else {

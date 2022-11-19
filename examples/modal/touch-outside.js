@@ -31,9 +31,8 @@ class Demo extends Phaser.Scene {
                     })
                 // button will be destroyed after modal closing
 
-                var modelBehavior = this.plugins.get('rexModal').add(modalGameObject, {
-                    manualClose: false,
-                    clickOutsideClose: true,
+                var modelBehavior = this.plugins.get('rexModal').add(modalGameObject, {                    
+                    touchOutsideClose: true,
                     duration: {
                         in: 1000,
                         out: 1000

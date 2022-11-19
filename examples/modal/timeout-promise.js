@@ -30,7 +30,6 @@ class Demo extends Phaser.Scene {
             })
         // button will be destroyed after modal closing
         this.plugins.get('rexModal').promise(button, {
-            manualClose: false,
             duration: {
                 in: 1000,
                 hold: 3000,

@@ -27,8 +27,7 @@ class Demo extends Phaser.Scene {
             })
         // button will be destroyed after modal closing
 
-        var model = this.plugins.get('rexModal').add(button, {
-            manualClose: false,
+        var model = this.plugins.get('rexModal').add(button, {          
             duration: {
                 in: 1000,
                 hold: 3000,

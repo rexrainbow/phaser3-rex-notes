@@ -915,12 +915,12 @@
   };
 
   var GetValue$6 = Phaser.Utils.Objects.GetValue;
-  var Modal = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Modal, _ComponentBase);
-    var _super = _createSuper(Modal);
-    function Modal(gameObject, config) {
+  var Transition = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Transition, _ComponentBase);
+    var _super = _createSuper(Transition);
+    function Transition(gameObject, config) {
       var _this;
-      _classCallCheck(this, Modal);
+      _classCallCheck(this, Transition);
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -930,14 +930,14 @@
       _this.setTransitInCallback(GetValue$6(config, 'transitIn'));
       _this.setTransitOutCallback(GetValue$6(config, 'transitOut'));
       _this.destroyParent = GetValue$6(config, 'destroy', true);
-      _this.timer = undefined;
+      _this.delayCallTimer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
         eventEmitter: false
       });
       _this.closeEventData = undefined;
       return _this;
     }
-    _createClass(Modal, [{
+    _createClass(Transition, [{
       key: "start",
       value: function start() {
         this._state.next();
@@ -958,7 +958,7 @@
         this.transitOutCallback = undefined;
         this.closeEventData = undefined;
         this.removeDelayCall();
-        _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
+        _get(_getPrototypeOf(Transition.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "transitionIn",
@@ -991,15 +991,15 @@
       key: "delayCall",
       value: function delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
         return this;
       }
     }, {
       key: "removeDelayCall",
       value: function removeDelayCall() {
-        if (this.timer) {
-          this.timer.remove(false);
-          this.timer = undefined;
+        if (this.delayCallTimer) {
+          this.delayCallTimer.remove(false);
+          this.delayCallTimer = undefined;
         }
         return this;
       }
@@ -1047,7 +1047,7 @@
         return this;
       }
     }]);
-    return Modal;
+    return Transition;
   }(ComponentBase);
 
   var GetValue$5 = Phaser.Utils.Objects.GetValue;
@@ -1778,21 +1778,12 @@
     return scale;
   };
 
-  var ScaleDownDestroy = function ScaleDownDestroy(gameObject, duration, orientation, ease, destroyMode, scale) {
+  var ScaleDown = function ScaleDown(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Linear';
     }
-
-    // Ease from current scale to 0
-    if (destroyMode instanceof Scale) {
-      scale = destroyMode;
-      destroyMode = undefined;
-    }
-    if (destroyMode === undefined) {
-      destroyMode = true;
-    }
     var config = {};
-    config.mode = destroyMode ? 1 : 0;
+    config.mode = 0;
     switch (orientation) {
       case 0:
       case 'x':
@@ -1988,11 +1979,7 @@
       }
     }]);
     return LoadingProgress;
-  }(Modal);
-  var ScaleDown = function ScaleDown(gameObject, duration) {
-    // Don't destroy here
-    ScaleDownDestroy(gameObject, duration, undefined, undefined, false);
-  };
+  }(Transition);
 
   var LoadingProgressPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(LoadingProgressPlugin, _Phaser$Plugins$BaseP);
