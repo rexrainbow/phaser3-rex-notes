@@ -8838,6 +8838,7 @@
     <span class="c1">// cover: false, </span>
 
     <span class="c1">// manualClose: true,</span>
+    <span class="c1">// clickOutsideClose: false,</span>
     <span class="c1">// anyTouchClose: true,</span>
 
     <span class="c1">// duration: {</span>
@@ -8869,7 +8870,16 @@
 </li>
 <li><code>manualClose</code> :<ul>
 <li><code>true</code> : Close modal dialog via <code>modal.requestClose()</code> method. Default behavior.</li>
-<li><code>false</code> : Close modal dialog when timeout (<code>duration.hold</code>), or any-touch (if set <code>anyTouchClose</code> to <code>true</code>)</li>
+<li><code>false</code> : Close modal dialog when <ul>
+<li>Click-outside if set <code>clickOutsideClose</code> to <code>true</code>, or</li>
+<li>Timeout (<code>duration.hold</code>), or any-touch (if set <code>anyTouchClose</code> to <code>true</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>clickOutsideClose</code> :<ul>
+<li><code>true</code> : When <code>manualClose</code> set to <code>false</code>, close modal dialog when clicking out side of gameObject.</li>
+<li><code>false</code> : Disable click-outside feature</li>
 </ul>
 </li>
 <li><code>anyTouchClose</code> :<ul>
@@ -8926,13 +8936,16 @@
 Modal["add('gameObject, config)"]
 OnOpen["modal.on('open')"]
 RequestCloseEvent["modal.requestClose(closeEventData)"]
+ClickOutside["Click outside&lt;br&gt;of game object"]
 TimeOut["Timeout&lt;br&gt;Any touch"]
 OnClose["modal.on('close', function(closeEventData) {})"]
 
 Modal --&gt; |Transition-in| OnOpen
 OnOpen --&gt; |manualClose| RequestCloseEvent
-OnOpen --&gt; |Not manualClose| TimeOut
+OnOpen --&gt; |Not manualClose &amp;&amp;&lt;br&gt; ClickOutsideClose| ClickOutside
+OnOpen --&gt; |Not manualClose &amp;&amp;&lt;br&gt; No ClickOutsideClose| TimeOut
 RequestCloseEvent --&gt; |Transition-out| OnClose
+ClickOutside --&gt; |Transition-out| OnClose
 TimeOut --&gt; |Transition-out| OnClose</code></pre>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
