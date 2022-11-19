@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var print = this.add.text(0, 0, 'Click outside of rectangle\n').setDepth(1);
+        var print = this.add.text(0, 0, 'Click gray rectangle\n').setDepth(1);
 
         this.add.image(400, 300, 'classroom')
             .setInteractive()
@@ -21,30 +21,38 @@ class Demo extends Phaser.Scene {
                 print.text += 'Click bottom image\n';
             })
 
-        var button = this.add.rectangle(400, 300, 100, 100, 0xffffff)
-            .on('destroy', function () {
-                print.text += 'parent destroy\n'
-            })
-        // button will be destroyed after modal closing
+        var basePanel = this.add.rectangle(200, 300, 100, 100, 0xAAAAAA)
+            .setInteractive()
+            .on('pointerdown', function () {
+                // Create modal game object after click basePanel
+                var modalGameObject = this.add.rectangle(400, 300, 100, 100, 0xffffff)
+                    .on('destroy', function () {
+                        print.text += 'parent destroy\n'
+                    })
+                // button will be destroyed after modal closing
 
-        var model = this.plugins.get('rexModal').add(button, {
-            manualClose: false,
-            clickOutsideClose: true,
-            duration: {
-                in: 1000,
-                out: 1000
-            },
+                var modelBehavior = this.plugins.get('rexModal').add(modalGameObject, {
+                    manualClose: false,
+                    clickOutsideClose: true,
+                    duration: {
+                        in: 1000,
+                        out: 1000
+                    },
 
-            // destroy: false
-        })
+                    // destroy: false
+                })
 
-        model
-            .on('open', function () {
-                print.text += 'modal.open\n';
-            })
-            .on('close', function () {
-                print.text += 'modal.close\n';
-            })
+                modelBehavior
+                    .on('open', function () {
+                        print.text += 'modal.open\n';
+                    })
+                    .on('close', function () {
+                        print.text += 'modal.close\n';
+                    })
+
+                print.text += 'Click outside of white rectangle\n';
+            }, this)
+
     }
 
     update() {
