@@ -9,6 +9,7 @@ Pop-up modal dialog, then scale-down this dialog.
 
 - [Manual](https://codepen.io/rexrainbow/pen/KKvmzod)
 - [Timeout](https://codepen.io/rexrainbow/pen/xxLdEbv)
+- [Touch outside](https://codepen.io/rexrainbow/pen/XWYzGax)
 - [Custom transit](https://codepen.io/rexrainbow/pen/yLvwxJX)
 
 ## Usage
@@ -150,24 +151,6 @@ modal.requestClose();
     })
     ```
 
-```mermaid
-graph TB
-
-Modal["add('gameObject, config)"]
-OnOpen["modal.on('open')"]
-RequestCloseEvent["modal.requestClose(closeEventData)"]
-ClickOutside["Click outside<br>of game object"]
-TimeOut["Timeout<br>Any touch"]
-OnClose["modal.on('close', function(closeEventData) {})"]
-
-Modal --> |Transition-in| OnOpen
-OnOpen --> |manualClose| RequestCloseEvent
-OnOpen --> |Not manualClose &&<br> ClickOutsideClose| ClickOutside
-OnOpen --> |Not manualClose &&<br> No ClickOutsideClose| TimeOut
-RequestCloseEvent --> |Transition-out| OnClose
-ClickOutside --> |Transition-out| OnClose
-TimeOut --> |Transition-out| OnClose
-```
 
 ### Events
 

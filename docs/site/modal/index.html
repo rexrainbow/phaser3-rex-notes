@@ -8792,6 +8792,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/KKvmzod">Manual</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/xxLdEbv">Timeout</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/XWYzGax">Touch outside</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/yLvwxJX">Custom transit</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -8837,9 +8838,11 @@
     <span class="c1">// },</span>
     <span class="c1">// cover: false, </span>
 
-    <span class="c1">// manualClose: true,</span>
-    <span class="c1">// clickOutsideClose: false,</span>
-    <span class="c1">// anyTouchClose: true,</span>
+    <span class="c1">// When to close modal dialog?</span>
+    <span class="c1">// touchOutsideClose: false,</span>
+    <span class="c1">// anyTouchClose: false,</span>
+    <span class="c1">// timeOutClose: false,</span>
+    <span class="c1">// manualClose: false,</span>
 
     <span class="c1">// duration: {</span>
     <span class="c1">//     in: 200,</span>
@@ -8868,29 +8871,30 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li><code>manualClose</code> :<ul>
-<li><code>true</code> : Close modal dialog via <code>modal.requestClose()</code> method. Default behavior.</li>
-<li><code>false</code> : Close modal dialog when <ul>
-<li>Click-outside if set <code>clickOutsideClose</code> to <code>true</code>, or</li>
-<li>Timeout (<code>duration.hold</code>), or any-touch (if set <code>anyTouchClose</code> to <code>true</code>)</li>
+<li><code>touchOutsideClose</code> : Set to <code>true</code> to close modal dialog when clicking out side of gameObject. <ul>
+<li>Default value is <code>false</code>.  Will be set to <code>false</code> if <code>anyTouchClose</code> is set to <code>true</code>.</li>
 </ul>
 </li>
+<li><code>anyTouchClose</code> : Set to <code>true</code> to close modal dialog when any clicking. <ul>
+<li>Default value is <code>false</code>.</li>
 </ul>
 </li>
-<li><code>clickOutsideClose</code> :<ul>
-<li><code>true</code> : When <code>manualClose</code> set to <code>false</code>, close modal dialog when clicking out side of gameObject.</li>
-<li><code>false</code> : Disable click-outside feature</li>
+<li><code>timeOutClose</code> : Set to <code>true</code> to close modal dialog when holding time out (<code>duration.hold</code>).<ul>
+<li>If <code>duration.hold</code> is given, default value is <code>true</code>. Otherwise default value is <code>false</code>.</li>
 </ul>
 </li>
-<li><code>anyTouchClose</code> :<ul>
-<li><code>true</code> : When <code>manualClose</code> set to <code>false</code>, close modal dialog when timeout, or any-touch.</li>
-<li><code>false</code> : Disable any-touch feature.</li>
+<li><code>manualClose</code> : Set to <code>true</code> to close modal dialog via <code>modal.requestClose()</code> method.<ul>
+<li>Default value is <code>false</code>. When this parameter is <code>true</code>, other closing methods will be disabled.</li>
+<li>If <code>touchOutsideClose</code>,  <code>anyTouchClose</code>, and <code>timeOutClose</code> are <code>false</code>, it is equal to <code>manualClose</code>.</li>
 </ul>
 </li>
 <li><code>duration</code> : Duration of transition-in, hold, trantion-out.<ul>
 <li><code>duration.in</code> : Duration of transition-in (open dialog).</li>
 <li><code>duration.out</code> : Duration of transition-out (close dialog).</li>
-<li><code>duration.hold</code> : Duration of hold. Used in <code>manualClose</code> is set to <code>false</code>.</li>
+<li><code>duration.hold</code> : Duration of hold.<ul>
+<li><code>-1</code> : Disable <code>timeOutClose</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>transitIn</code> : Tween behavior of opening dialog.<ul>
@@ -8931,22 +8935,6 @@
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
-<pre class="mermaid"><code>graph TB
-
-Modal["add('gameObject, config)"]
-OnOpen["modal.on('open')"]
-RequestCloseEvent["modal.requestClose(closeEventData)"]
-ClickOutside["Click outside&lt;br&gt;of game object"]
-TimeOut["Timeout&lt;br&gt;Any touch"]
-OnClose["modal.on('close', function(closeEventData) {})"]
-
-Modal --&gt; |Transition-in| OnOpen
-OnOpen --&gt; |manualClose| RequestCloseEvent
-OnOpen --&gt; |Not manualClose &amp;&amp;&lt;br&gt; ClickOutsideClose| ClickOutside
-OnOpen --&gt; |Not manualClose &amp;&amp;&lt;br&gt; No ClickOutsideClose| TimeOut
-RequestCloseEvent --&gt; |Transition-out| OnClose
-ClickOutside --&gt; |Transition-out| OnClose
-TimeOut --&gt; |Transition-out| OnClose</code></pre>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On opened dialog
