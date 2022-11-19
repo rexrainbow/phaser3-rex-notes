@@ -51,7 +51,6 @@ class DropDownList extends Label {
         }
 
         super.destroy(fromScene);
-        this.removeDelayCall();
     }
 
     setOptions(options) {
