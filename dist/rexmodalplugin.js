@@ -915,12 +915,12 @@
   };
 
   var GetValue$9 = Phaser.Utils.Objects.GetValue;
-  var Modal$2 = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Modal, _ComponentBase);
-    var _super = _createSuper(Modal);
-    function Modal(gameObject, config) {
+  var Transition = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Transition, _ComponentBase);
+    var _super = _createSuper(Transition);
+    function Transition(gameObject, config) {
       var _this;
-      _classCallCheck(this, Modal);
+      _classCallCheck(this, Transition);
       _this = _super.call(this, gameObject, config);
       // this.parent = gameObject;
       // this.scene
@@ -930,14 +930,14 @@
       _this.setTransitInCallback(GetValue$9(config, 'transitIn'));
       _this.setTransitOutCallback(GetValue$9(config, 'transitOut'));
       _this.destroyParent = GetValue$9(config, 'destroy', true);
-      _this.timer = undefined;
+      _this.delayCallTimer = undefined;
       _this._state = new State(_assertThisInitialized(_this), {
         eventEmitter: false
       });
       _this.closeEventData = undefined;
       return _this;
     }
-    _createClass(Modal, [{
+    _createClass(Transition, [{
       key: "start",
       value: function start() {
         this._state.next();
@@ -958,7 +958,7 @@
         this.transitOutCallback = undefined;
         this.closeEventData = undefined;
         this.removeDelayCall();
-        _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
+        _get(_getPrototypeOf(Transition.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
       key: "transitionIn",
@@ -991,15 +991,15 @@
       key: "delayCall",
       value: function delayCall(delay, callback, scope) {
         // Invoke callback under scene's 'postupdate' event
-        this.timer = PostUpdateDelayCall(this, delay, callback, scope);
+        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
         return this;
       }
     }, {
       key: "removeDelayCall",
       value: function removeDelayCall() {
-        if (this.timer) {
-          this.timer.remove(false);
-          this.timer = undefined;
+        if (this.delayCallTimer) {
+          this.delayCallTimer.remove(false);
+          this.delayCallTimer = undefined;
         }
         return this;
       }
@@ -1047,10 +1047,10 @@
         return this;
       }
     }]);
-    return Modal;
+    return Transition;
   }(ComponentBase);
 
-  var Rectangle = Phaser.GameObjects.Rectangle;
+  var Rectangle$1 = Phaser.GameObjects.Rectangle;
   var FullWindowRectangle = /*#__PURE__*/function (_Rectangle) {
     _inherits(FullWindowRectangle, _Rectangle);
     var _super = _createSuper(FullWindowRectangle);
@@ -1110,7 +1110,7 @@
       }
     }]);
     return FullWindowRectangle;
-  }(Rectangle);
+  }(Rectangle$1);
 
   var GetValue$8 = Phaser.Utils.Objects.GetValue;
   var TouchEventStop = /*#__PURE__*/function (_ComponentBase) {
@@ -2159,6 +2159,179 @@
     FadeOutDestroy(cover, duration, false);
   };
 
+  var GetDisplayWidth = function GetDisplayWidth(gameObject) {
+    if (gameObject.displayWidth !== undefined) {
+      return gameObject.displayWidth;
+    } else {
+      return gameObject.width;
+    }
+  };
+  var GetDisplayHeight = function GetDisplayHeight(gameObject) {
+    if (gameObject.displayHeight !== undefined) {
+      return gameObject.displayHeight;
+    } else {
+      return gameObject.height;
+    }
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+  var Vector2 = Phaser.Math.Vector2;
+  var RotateAround = Phaser.Math.RotateAround;
+  var GetBounds = function GetBounds(gameObject, output) {
+    if (output === undefined) {
+      output = new Rectangle();
+    } else if (output === true) {
+      if (GlobRect === undefined) {
+        GlobRect = new Rectangle();
+      }
+      output = GlobRect;
+    }
+    if (gameObject.getBounds) {
+      return gameObject.getBounds(output);
+    }
+
+    //  We can use the output object to temporarily store the x/y coords in:
+
+    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy;
+
+    // Instead of doing a check if parent container is
+    // defined per corner we only do it once.
+    if (gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      GetTopLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      parentMatrix.transformPoint(output.x, output.y, output);
+      BRx = output.x;
+      BRy = output.y;
+    } else {
+      GetTopLeft(gameObject, output);
+      TLx = output.x;
+      TLy = output.y;
+      GetTopRight(gameObject, output);
+      TRx = output.x;
+      TRy = output.y;
+      GetBottomLeft(gameObject, output);
+      BLx = output.x;
+      BLy = output.y;
+      GetBottomRight(gameObject, output);
+      BRx = output.x;
+      BRy = output.y;
+    }
+    output.x = Math.min(TLx, TRx, BLx, BRx);
+    output.y = Math.min(TLy, TRy, BLy, BRy);
+    output.width = Math.max(TLx, TRx, BLx, BRx) - output.x;
+    output.height = Math.max(TLy, TRy, BLy, BRy) - output.y;
+    return output;
+  };
+  var GlobRect = undefined;
+  var GetTopLeft = function GetTopLeft(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+      output = GlobVector;
+    }
+    if (gameObject.getTopLeft) {
+      return gameObject.getTopLeft(output);
+    }
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+  var GetTopRight = function GetTopRight(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+      output = GlobVector;
+    }
+    if (gameObject.getTopRight) {
+      return gameObject.getTopRight(output);
+    }
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY;
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+  var GetBottomLeft = function GetBottomLeft(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+      output = GlobVector;
+    }
+    if (gameObject.getBottomLeft) {
+      return gameObject.getBottomLeft(output);
+    }
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX;
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+  var GetBottomRight = function GetBottomRight(gameObject, output, includeParent) {
+    if (output === undefined) {
+      output = new Vector2();
+    } else if (output === true) {
+      if (GlobVector === undefined) {
+        GlobVector = new Vector2();
+      }
+      output = GlobVector;
+    }
+    if (gameObject.getBottomRight) {
+      return gameObject.getBottomRight(output);
+    }
+    output.x = gameObject.x - GetDisplayWidth(gameObject) * gameObject.originX + GetDisplayWidth(gameObject);
+    output.y = gameObject.y - GetDisplayHeight(gameObject) * gameObject.originY + GetDisplayHeight(gameObject);
+    return PrepareBoundsOutput(gameObject, output, includeParent);
+  };
+  var GlobVector = undefined;
+  var PrepareBoundsOutput = function PrepareBoundsOutput(gameObject, output, includeParent) {
+    if (includeParent === undefined) {
+      includeParent = false;
+    }
+    if (gameObject.rotation !== 0) {
+      RotateAround(output, gameObject.x, gameObject.y, gameObject.rotation);
+    }
+    if (includeParent && gameObject.parentContainer) {
+      var parentMatrix = gameObject.parentContainer.getBoundsTransformMatrix();
+      parentMatrix.transformPoint(output.x, output.y, output);
+    }
+    return output;
+  };
+
+  var IsPointInBounds = function IsPointInBounds(gameObject, x, y, preTest, postTest) {
+    // Can't get bounds
+    if (!gameObject || !gameObject.getBounds) {
+      return false;
+    }
+    if (preTest && !preTest(gameObject, x, y)) {
+      return false;
+    }
+    var boundsRect = GetBounds(gameObject, true);
+    if (!boundsRect.contains(x, y)) {
+      return false;
+    }
+    if (postTest && !postTest(gameObject, x, y)) {
+      return false;
+    }
+    return true;
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var Modal$1 = /*#__PURE__*/function (_Transition) {
     _inherits(Modal, _Transition);
@@ -2188,17 +2361,20 @@
       }
 
       // Close conditions:
-      // OK/Cancel buttons, invoke modal.requestClose()
-      var manualClose = GetValue(config, 'manualClose', true);
-      // Timeout/any-touch
-      if (!manualClose) {
+      // Priority : manualClose, clickOutsideClose, timeOutClose|anyTouchClose
+      if (GetValue(config, 'manualClose', true)) {
+        // OK/Cancel buttons, invoke modal.requestClose()
+        _this.setDisplayTime(-1);
+      } else if (GetValue(config, 'clickOutsideClose', false)) {
+        // Click outside of parent
+        _this.setDisplayTime(-1);
+        _this.clickOutsideClose();
+      } else {
+        // Timeout/any-touch
         _this.setDisplayTime(GetValue(config, 'duration.hold', 2000));
-        var anyTouchClose = GetValue(config, 'anyTouchClose', true);
-        if (anyTouchClose) {
+        if (GetValue(config, 'anyTouchClose', true)) {
           _this.anyTouchClose();
         }
-      } else {
-        _this.setDisplayTime(-1);
       }
       _this.start();
       return _this;
@@ -2211,9 +2387,9 @@
           return;
         }
 
-        // Registered in anyTouchClose()
+        // Registered in clickOutsideClose(), or anyTouchClose()
         if (!this.cover) {
-          this.scene.input.off('pointerup', this.requestClose, this);
+          this.scene.input.off('pointerup', this.touchCloseCallback, this);
         }
         if (this.cover && !fromScene) {
           this.cover.destroy();
@@ -2222,14 +2398,33 @@
         _get(_getPrototypeOf(Modal.prototype), "shutdown", this).call(this, fromScene);
       }
     }, {
+      key: "clickOutsideClose",
+      value: function clickOutsideClose() {
+        if (this.cover) {
+          this.cover.on('pointerup', this.touchCloseCallback, this);
+        } else {
+          this.scene.input.on('pointerup', this.touchCloseCallback, this);
+        }
+        this.clickOutsideTest = true;
+        return this;
+      }
+    }, {
       key: "anyTouchClose",
       value: function anyTouchClose() {
         if (this.cover) {
-          this.cover.once('pointerup', this.requestClose, this);
+          this.cover.once('pointerup', this.touchCloseCallback, this);
         } else {
-          this.scene.input.once('pointerup', this.requestClose, this);
+          this.scene.input.once('pointerup', this.touchCloseCallback, this);
         }
         return this;
+      }
+    }, {
+      key: "touchCloseCallback",
+      value: function touchCloseCallback(pointer) {
+        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
+          return;
+        }
+        this.requestClose();
       }
     }, {
       key: "transitionIn",
@@ -2329,7 +2524,7 @@
       }
     }]);
     return Modal;
-  }(Modal$2);
+  }(Transition);
   var TransitionMode = {
     popUp: 0,
     fadeIn: 1,

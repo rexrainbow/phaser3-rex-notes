@@ -10087,18 +10087,11 @@
         _this.frame.source.glTexture = null;
       }
       _this.dirty = true;
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Canvas, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;
@@ -11355,7 +11348,7 @@
       _this.freezePalettes = false;
 
       // orientation
-      var hPalettePosition = GetValue(config, 'hPalette.position', 'bottom');
+      var hPalettePosition = GetValue(config, 'hPalette.position', 0);
       if (typeof hPalettePosition === 'string') {
         hPalettePosition = HPalettePositionNamesMap[hPalettePosition];
       }

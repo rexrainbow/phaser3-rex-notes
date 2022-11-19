@@ -7045,21 +7045,14 @@
         _this.setPadding(style.padding);
       }
       _this.setText(text);
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Text, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
         if (this.style.rtl) {
           RemoveFromDOM(this.canvas);
         }
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         this.canvasText.destroy();
         this.canvasText = undefined;
         if (this._imageManager) {
@@ -10104,18 +10097,11 @@
         _this.frame.source.glTexture = null;
       }
       _this.dirty = true;
-      scene.sys.game.events.on('contextrestored', _this.onContextRestored, _assertThisInitialized(_this));
       return _this;
     }
     _createClass(Canvas, [{
-      key: "onContextRestored",
-      value: function onContextRestored() {
-        this.dirty = true;
-      }
-    }, {
       key: "preDestroy",
       value: function preDestroy() {
-        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
         CanvasPool.remove(this.canvas);
         this.texture.destroy();
         this.canvas = null;

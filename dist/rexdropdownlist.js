@@ -9947,11 +9947,11 @@
   }(Sizer);
 
   var PopUp = function PopUp(listPanel, duration) {
-    listPanel.popUp(this.listEaseInDuration, 'y', 'Cubic');
+    listPanel.popUp(duration, 'y', 'Cubic');
   };
   var ScaleDown = function ScaleDown(listPanel, duration) {
     // Don't destroy here
-    listPanel.scaleDown(this.listEaseOutDuration, 'y', 'Linear');
+    listPanel.scaleDown(duration, 'y', 'Linear');
   };
   var methods$2 = {
     setWrapEnable: function setWrapEnable(enable) {
@@ -10010,7 +10010,7 @@
       // callback = function(gameObject, duration) {}
       return this;
     },
-    settListTTransitOutCallback: function settListTTransitOutCallback(callback) {
+    settListTransitOutCallback: function settListTransitOutCallback(callback) {
       if (callback === undefined) {
         callback = ScaleDown;
       }
@@ -11547,7 +11547,7 @@
       _this.setListEaseInDuration(GetValue(listConfig, 'easeIn', 500));
       _this.setListEaseOutDuration(GetValue(listConfig, 'easeOut', 100));
       _this.setListTransitInCallback(GetValue(listConfig, 'transitIn'));
-      _this.settListTTransitOutCallback(GetValue(listConfig, 'transitOut'));
+      _this.settListTransitOutCallback(GetValue(listConfig, 'transitOut'));
       _this.setListSize(GetValue(listConfig, 'width'), GetValue(listConfig, 'height'));
       _this.setListAlignmentMode(GetValue(listConfig, 'alignParent', 'text'));
       _this.setListBounds(GetValue(listConfig, 'bounds'));
