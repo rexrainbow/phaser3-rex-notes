@@ -14,10 +14,10 @@ class Modal extends Transition {
         if (config === undefined) {
             config = {};
         }
-        if (!config.hasOwnProperty('transitIn')) {
+        if (config.transitIn == null) {
             config.transitIn = TransitionMode.popUp;
         }
-        if (!config.hasOwnProperty('transitOut')) {
+        if (config.transitOut == null) {
             config.transitOut = TransitionMode.scaleDown;
         }
 

@@ -59,8 +59,8 @@ var OpenListPanel = function () {
         }, this)
 
         .on('close', function () {
-            this.dropDownBehavior = undefined;
             this.listPanel = undefined;
+            this.dropDownBehavior = undefined;
         }, this)
 
     this.listPanel = listPanel;

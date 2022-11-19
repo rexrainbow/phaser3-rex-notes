@@ -11,10 +11,10 @@ class DropDown extends Transition {
         if (config === undefined) {
             config = {};
         }
-        if (!config.hasOwnProperty('transitIn')) {
+        if (config.transitIn == null) {
             config.transitIn = PopUp;
         }
-        if (!config.hasOwnProperty('transitOut')) {
+        if (!config.transitOut == null) {
             config.transitOut = ScaleDown;
         }
         config.manualClose = true;
@@ -67,7 +67,7 @@ class DropDown extends Transition {
     }
 
     anyTouchClose() {
-        this.scene.input.once('pointerup', this.touchCloseCallback, this);    
+        this.scene.input.once('pointerup', this.touchCloseCallback, this);
         return this;
     }
 
