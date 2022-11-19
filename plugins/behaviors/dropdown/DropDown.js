@@ -12,10 +12,15 @@ class DropDown extends Transition {
             config = {};
         }
         if (config.transitIn == null) {
-            config.transitIn = PopUp;
+            config.transitIn = function (gameObject, duration) {
+                PopUp(gameObject, duration, 'y', 'Cubic')
+            };
         }
         if (!config.transitOut == null) {
-            config.transitOut = ScaleDown;
+            config.transitOut = function (gameObject, duration) {
+                // Don't destroy here
+                ScaleDown(gameObject, duration, 'y', 'Linear')
+            };
         }
         config.manualClose = true;
         config.clickOutsideClose = true;

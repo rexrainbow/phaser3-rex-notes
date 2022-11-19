@@ -1,12 +1,3 @@
-var PopUp = function (listPanel, duration) {
-    listPanel.popUp(duration, 'y', 'Cubic')
-}
-
-var ScaleDown = function (listPanel, duration) {
-    // Don't destroy here
-    listPanel.scaleDown(duration, 'y', 'Linear')
-}
-
 var methods = {
     setWrapEnable(enable) {
         if (enable === undefined) {
@@ -67,20 +58,12 @@ var methods = {
     },
 
     setListTransitInCallback(callback) {
-        if (callback === undefined) {
-            callback = PopUp;
-        }
-
         this.listTransitInCallback = callback;
         // callback = function(gameObject, duration) {}
         return this;
     },
 
     settListTransitOutCallback(callback) {
-        if (callback === undefined) {
-            callback = ScaleDown;
-        }
-
         this.listTransitOutCallback = callback;
         // callback = function(gameObject, duration) {}
         return this;
