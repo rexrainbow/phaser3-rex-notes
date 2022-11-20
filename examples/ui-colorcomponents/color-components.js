@@ -36,6 +36,12 @@ class Demo extends Phaser.Scene {
                 space: { left: 5, right: 5 }
             },
 
+            // formatLabel: this.rexUI.add.label({
+            //     background: this.rexUI.add.roundRectangle({ color: COLOR_DARK }),
+            //     text: this.add.text(0, 0, ''),
+            //     space: { left: 5, right: 5 }
+            // }),
+
             inputText: {
                 background: {
                     color: COLOR_DARK,

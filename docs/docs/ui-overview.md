@@ -84,6 +84,7 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
 
 1. [Badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [Buttons](ui-buttons.md): A container with a group of buttons.
+1. [Color componets](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
 1. [Color input](ui-colorinput.md): Color number (`0x0`~`0xffffff`) or color string (`'#000000'`~`'#ffffff'`, or `'red'`) input field.
 1. [Color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.

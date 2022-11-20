@@ -179,6 +179,7 @@
 1. [UI/badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [UI/buttons](ui-buttons.md): A container with a group of buttons.
 1. [UI/chart](ui-chart.md): Draw chart on canvas.
+1. [UI/color components](ui-colorcomponents.md): Edit color value by RGB, or HSV input fields.
 1. [UI/color input](ui-colorinput.md): Color value input field.
 1. [UI/color picker](ui-colorpicker.md): Pick color value from H and SV palettes.
 1. [UI/dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.

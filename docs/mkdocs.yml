@@ -415,6 +415,7 @@ nav:
     - Color input:
         - Color input: ui-colorinput.md
         - Color picker: ui-colorpicker.md
+        - Color components: ui-colorcomponents.md
     - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md

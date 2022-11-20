@@ -31,6 +31,11 @@ declare namespace ColorComponents {
         inputText2?: Phaser.GameObjects.GameObject,
         inputText?: CanvasInput.IConfig,
 
+        proportion?: {
+            formatLabel?: number,
+            
+        },
+
         valuechangeCallback: (newValue: number, oldValue: number, colorComponents: ColorComponents) => void,
 
         value?: number
