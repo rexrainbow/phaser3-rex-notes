@@ -1571,6 +1571,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-colorcomponents/</loc>
+         <lastmod>2022-11-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-colorinput/</loc>
          <lastmod>2022-11-20</lastmod>
          <changefreq>daily</changefreq>
