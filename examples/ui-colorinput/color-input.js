@@ -69,11 +69,12 @@ const InputTextConfig = {
 const ColorPickerConfig = {
     width: 160, height: 160,
 
-    createBackgroundCallback(scene) {
-        return scene.rexUI.add.roundRectangle({
-            color: COLOR_DARK, strokeColor: COLOR_PRIMARY
-        })
-    },
+    background: { color: COLOR_DARK, strokeColor: COLOR_PRIMARY },
+    // createBackgroundCallback(scene) {
+    //     return scene.rexUI.add.roundRectangle({
+    //         color: COLOR_DARK, strokeColor: COLOR_PRIMARY
+    //     })
+    // },
 
     space: { left: 10, right: 10, top: 10, bottom: 10 },
 }

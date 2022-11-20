@@ -17160,6 +17160,7 @@
       colorPicker.on('valuechange', function () {
         this.emit('valuechange', colorPicker.value);
       }, _assertThisInitialized(_this));
+      _this.setValue(GetValue$4(config, 'value', 0xffffff));
       return _this;
     }
     _createClass(ColorPickerPanel, [{
@@ -17205,10 +17206,10 @@
       width: width,
       height: height,
       background: background,
-      space: this.colorPickerSpace
+      space: this.colorPickerSpace,
+      value: this.value
     });
     scene.add.existing(colorPicker);
-    colorPicker.setValue(this.value);
     return colorPicker;
   };
 
@@ -17695,6 +17696,12 @@
   };
   Object.assign(methods, methods$2);
 
+  var CreateRoundRectangle = function CreateRoundRectangle(scene, config) {
+    var gameObject = new RoundRectangle(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
   var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
     _inherits(ColorInput, _ColorInputBase);
@@ -17711,7 +17718,16 @@
       var hasColorPicker = !!colorPickerConfig;
       if (hasColorPicker) {
         _this.setColorPickerSize(GetValue(colorPickerConfig, 'width'), GetValue(colorPickerConfig, 'height'));
-        _this.setCreateColorPickerBackgroundCallback(GetValue(colorPickerConfig, 'createBackgroundCallback'));
+        var createBackgroundCallback;
+        var background = GetValue(colorPickerConfig, 'background');
+        if (background) {
+          createBackgroundCallback = function createBackgroundCallback(scene) {
+            return CreateRoundRectangle(scene, background);
+          };
+        } else {
+          createBackgroundCallback = GetValue(colorPickerConfig, 'createBackgroundCallback');
+        }
+        _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
         _this.setColorPickerExpandDirection(GetValue(colorPickerConfig, 'expandDirection'));
         _this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 500));
         _this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 500));

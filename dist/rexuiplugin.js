@@ -32107,6 +32107,7 @@
       colorPicker.on('valuechange', function () {
         this.emit('valuechange', colorPicker.value);
       }, _assertThisInitialized(_this));
+      _this.setValue(GetValue$1e(config, 'value', 0xffffff));
       return _this;
     }
     _createClass(ColorPickerPanel, [{
@@ -32152,10 +32153,10 @@
       width: width,
       height: height,
       background: background,
-      space: this.colorPickerSpace
+      space: this.colorPickerSpace,
+      value: this.value
     });
     scene.add.existing(colorPicker);
-    colorPicker.setValue(this.value);
     return colorPicker;
   };
 
@@ -32642,6 +32643,12 @@
   };
   Object.assign(methods$g, methods$h);
 
+  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
+    var gameObject = new RoundRectangle$3(scene, config);
+    scene.add.existing(gameObject);
+    return gameObject;
+  };
+
   var GetValue$1a = Phaser.Utils.Objects.GetValue;
   var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
     _inherits(ColorInput, _ColorInputBase);
@@ -32658,7 +32665,16 @@
       var hasColorPicker = !!colorPickerConfig;
       if (hasColorPicker) {
         _this.setColorPickerSize(GetValue$1a(colorPickerConfig, 'width'), GetValue$1a(colorPickerConfig, 'height'));
-        _this.setCreateColorPickerBackgroundCallback(GetValue$1a(colorPickerConfig, 'createBackgroundCallback'));
+        var createBackgroundCallback;
+        var background = GetValue$1a(colorPickerConfig, 'background');
+        if (background) {
+          createBackgroundCallback = function createBackgroundCallback(scene) {
+            return CreateRoundRectangle$1(scene, background);
+          };
+        } else {
+          createBackgroundCallback = GetValue$1a(colorPickerConfig, 'createBackgroundCallback');
+        }
+        _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
         _this.setColorPickerExpandDirection(GetValue$1a(colorPickerConfig, 'expandDirection'));
         _this.setColorPickerEaseInDuration(GetValue$1a(colorPickerConfig, 'easeIn', 500));
         _this.setColorPickerEaseOutDuration(GetValue$1a(colorPickerConfig, 'easeOut', 500));
@@ -32697,12 +32713,6 @@
     return gameObject;
   });
   SetValue$1(window, 'RexPlugins.UI.ColorPicker', ColorPicker);
-
-  var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
-    var gameObject = new RoundRectangle$3(scene, config);
-    scene.add.existing(gameObject);
-    return gameObject;
-  };
 
   var PhaserText$1 = Phaser.GameObjects.Text;
   var CreateText$1 = function CreateText(scene, style) {
