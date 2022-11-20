@@ -1133,23 +1133,34 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setHitAreaMode(GetValue$8(o, 'hitAreaMode', 0));
-        this.setEnable(GetValue$8(o, "enable", true));
+        this.setEnable(GetValue$8(o, 'enable', true));
+        this.setStopMode(GetValue$8(o, 'stopAllLevels', true));
         return this;
       }
     }, {
       key: "boot",
       value: function boot() {
         this.parent.on('pointerdown', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerup', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointermove', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerover', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerout', function (pointer, event) {
-          event.stopPropagation();
-        });
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerup', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointermove', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerover', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerout', function (pointer, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this);
       }
     }, {
       key: "setHitAreaMode",
@@ -1185,6 +1196,15 @@
           this.parent.disableInteractive();
         }
         this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setStopMode",
+      value: function setStopMode(allLevels) {
+        if (allLevels === undefined) {
+          allLevels = true;
+        }
+        this.stopAllLevels = allLevels;
         return this;
       }
     }, {
@@ -2342,10 +2362,10 @@
       if (config === undefined) {
         config = {};
       }
-      if (!config.hasOwnProperty('transitIn')) {
+      if (config.transitIn == null) {
         config.transitIn = TransitionMode.popUp;
       }
-      if (!config.hasOwnProperty('transitOut')) {
+      if (config.transitOut == null) {
         config.transitOut = TransitionMode.scaleDown;
       }
       _this = _super.call(this, gameObject, config);

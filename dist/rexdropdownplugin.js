@@ -2113,11 +2113,16 @@
       if (config === undefined) {
         config = {};
       }
-      if (!config.hasOwnProperty('transitIn')) {
-        config.transitIn = PopUp;
+      if (config.transitIn == null) {
+        config.transitIn = function (gameObject, duration) {
+          PopUp(gameObject, duration, 'y', 'Cubic');
+        };
       }
-      if (!config.hasOwnProperty('transitOut')) {
-        config.transitOut = ScaleDown;
+      if (config.transitOut == null) {
+        config.transitOut = function (gameObject, duration) {
+          // Don't destroy here
+          ScaleDown(gameObject, duration, 'y', 'Linear');
+        };
       }
       config.manualClose = true;
       config.clickOutsideClose = true;

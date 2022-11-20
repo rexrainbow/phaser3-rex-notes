@@ -4244,7 +4244,7 @@
     yoyo: 2
   };
 
-  var PopUp$1 = function PopUp(gameObject, duration, orientation, ease, scale) {
+  var PopUp = function PopUp(gameObject, duration, orientation, ease, scale) {
     if (ease === undefined) {
       ease = 'Cubic';
     }
@@ -4427,7 +4427,7 @@
         ease = config.ease;
       }
       var isInit = this._scale === undefined;
-      this._scale = PopUp$1(this, duration, orientation, ease, this._scale);
+      this._scale = PopUp(this, duration, orientation, ease, this._scale);
       if (isInit) {
         OnInitScale(this, this._scale);
       }
@@ -9946,13 +9946,6 @@
     return Label;
   }(Sizer);
 
-  var PopUp = function PopUp(listPanel, duration) {
-    listPanel.popUp(duration, 'y', 'Cubic');
-  };
-  var ScaleDown$1 = function ScaleDown(listPanel, duration) {
-    // Don't destroy here
-    listPanel.scaleDown(duration, 'y', 'Linear');
-  };
   var methods$2 = {
     setWrapEnable: function setWrapEnable(enable) {
       if (enable === undefined) {
@@ -9965,7 +9958,7 @@
       this.listCreateButtonCallback = callback;
       return this;
     },
-    setCreateBackgroundCallback: function setCreateBackgroundCallback(callback) {
+    setCreateListBackgroundCallback: function setCreateListBackgroundCallback(callback) {
       this.listCreateBackgroundCallback = callback;
       return this;
     },
@@ -10003,17 +9996,11 @@
       return this;
     },
     setListTransitInCallback: function setListTransitInCallback(callback) {
-      if (callback === undefined) {
-        callback = PopUp;
-      }
       this.listTransitInCallback = callback;
       // callback = function(gameObject, duration) {}
       return this;
     },
     settListTransitOutCallback: function settListTransitOutCallback(callback) {
-      if (callback === undefined) {
-        callback = ScaleDown$1;
-      }
       this.listTransitOutCallback = callback;
       // callback = function(gameObject, duration) {}
       return this;
@@ -11348,7 +11335,8 @@
   }(FixWidthSizer);
   Object.assign(Buttons.prototype, AddChildMethods, RemoveChildMethods, ButtonMethods, ButtonStateMethods);
 
-  var CreateListPanel = function CreateListPanel(scene) {
+  var CreateListPanel = function CreateListPanel() {
+    var scene = this.scene;
     var background;
     var createBackgroundCallback = this.listCreateBackgroundCallback;
     if (createBackgroundCallback) {
@@ -11778,11 +11766,16 @@
       if (config === undefined) {
         config = {};
       }
-      if (!config.hasOwnProperty('transitIn')) {
-        config.transitIn = PopUp$1;
+      if (config.transitIn == null) {
+        config.transitIn = function (gameObject, duration) {
+          PopUp(gameObject, duration, 'y', 'Cubic');
+        };
       }
-      if (!config.hasOwnProperty('transitOut')) {
-        config.transitOut = ScaleDown;
+      if (config.transitOut == null) {
+        config.transitOut = function (gameObject, duration) {
+          // Don't destroy here
+          ScaleDown(gameObject, duration, 'y', 'Linear');
+        };
       }
       config.manualClose = true;
       config.clickOutsideClose = true;
@@ -11864,7 +11857,7 @@
     if (this.listPanel) {
       return this;
     }
-    var listPanel = CreateListPanel.call(this, this.scene);
+    var listPanel = CreateListPanel.call(this);
 
     // Button over/out
     listPanel.on('button.over', function (button, index, pointer, event) {
@@ -11904,8 +11897,8 @@
       }, this);
       this.emit('list.open', this, listPanel);
     }, this).on('close', function () {
-      this.dropDownBehavior = undefined;
       this.listPanel = undefined;
+      this.dropDownBehavior = undefined;
     }, this);
     this.listPanel = listPanel;
     this.dropDownBehavior = dropDownBehavior;
@@ -11930,27 +11923,12 @@
     return this;
   };
 
-  var DelayCallMethods = {
-    delayCall: function delayCall(delay, callback, scope) {
-      // Invoke callback under scene's 'postupdate' event
-      this.timer = PostUpdateDelayCall(this, delay, callback, scope);
-      return this;
-    },
-    removeDelayCall: function removeDelayCall() {
-      if (this.timer) {
-        this.timer.remove(false);
-        this.timer = undefined;
-      }
-      return this;
-    }
-  };
-
   var Methods = {
     openListPanel: OpenListPanel,
     closeListPanel: CloseListPanel,
     toggleListPanel: ToggleListPanel
   };
-  Object.assign(Methods, methods$2, DelayCallMethods);
+  Object.assign(Methods, methods$2);
 
   var GetValue = Phaser.Utils.Objects.GetValue;
   var DropDownList = /*#__PURE__*/function (_Label) {
@@ -11966,7 +11944,7 @@
       var listConfig = GetValue(config, 'list');
       _this.setWrapEnable(GetValue(listConfig, 'wrap', false));
       _this.setCreateButtonCallback(GetValue(listConfig, 'createButtonCallback'));
-      _this.setCreateBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
+      _this.setCreateListBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
       _this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
       _this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
       _this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
@@ -11997,7 +11975,6 @@
           this.listPanel = undefined;
         }
         _get(_getPrototypeOf(DropDownList.prototype), "destroy", this).call(this, fromScene);
-        this.removeDelayCall();
       }
     }, {
       key: "setOptions",

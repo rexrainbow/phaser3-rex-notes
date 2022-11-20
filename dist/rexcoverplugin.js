@@ -420,23 +420,34 @@
       key: "resetFromJSON",
       value: function resetFromJSON(o) {
         this.setHitAreaMode(GetValue$1(o, 'hitAreaMode', 0));
-        this.setEnable(GetValue$1(o, "enable", true));
+        this.setEnable(GetValue$1(o, 'enable', true));
+        this.setStopMode(GetValue$1(o, 'stopAllLevels', true));
         return this;
       }
     }, {
       key: "boot",
       value: function boot() {
         this.parent.on('pointerdown', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerup', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointermove', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerover', function (pointer, localX, localY, event) {
-          event.stopPropagation();
-        }).on('pointerout', function (pointer, event) {
-          event.stopPropagation();
-        });
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerup', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointermove', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerover', function (pointer, localX, localY, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this).on('pointerout', function (pointer, event) {
+          if (this.stopAllLevels) {
+            event.stopPropagation();
+          }
+        }, this);
       }
     }, {
       key: "setHitAreaMode",
@@ -472,6 +483,15 @@
           this.parent.disableInteractive();
         }
         this.enable = e;
+        return this;
+      }
+    }, {
+      key: "setStopMode",
+      value: function setStopMode(allLevels) {
+        if (allLevels === undefined) {
+          allLevels = true;
+        }
+        this.stopAllLevels = allLevels;
         return this;
       }
     }, {
