@@ -34,7 +34,7 @@ declare namespace DropDown {
     }
 }
 
-declare class DropDown {
+declare class DropDown extends Phaser.Events.EventEmitter {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: DropDown.IConfig,

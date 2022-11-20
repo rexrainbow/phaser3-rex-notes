@@ -48,6 +48,7 @@
 1. [Curve/Spiral](curve-spiral.md): Spiral curve.
 1. [Drag](drag.md): Drag game object.
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
+1. [Drop down](dropdown.md): Drop down game object below another target game object.
 1. [Dynamic text](dynamictext.md): Control position, angle of each character drawn on a canvas.
 1. [Ease-data](easedata.md): Easing data value of game object's data-manager.
 1. [Ease-move](easemove.md): Ease-move game object.

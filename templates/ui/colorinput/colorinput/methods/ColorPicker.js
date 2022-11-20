@@ -56,6 +56,8 @@ class ColorPickerPanel extends Sizer {
         colorPicker.on('valuechange', function () {
             this.emit('valuechange', colorPicker.value);
         }, this)
+
+        this.setValue(GetValue(config, 'value', 0xffffff));
     }
 
     get value() {

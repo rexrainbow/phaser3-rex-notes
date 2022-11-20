@@ -27,10 +27,10 @@ var CreateColorPicker = function (scene) {
 
         background: background,
         space: this.colorPickerSpace,
+
+        value: this.value
     });
     scene.add.existing(colorPicker);
-
-    colorPicker.setValue(this.value);
 
     return colorPicker;
 }

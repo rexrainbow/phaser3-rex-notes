@@ -123,7 +123,6 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 
         }
         ```
-    - `false`, `null` : No transitIn.
 - `transitOut` : Tween behavior of closing dialog.
     - `0`, `'scaleDown'` : Scale down dialog
     - `1`, `'fadeOut'` : Fade out dialog
@@ -133,7 +132,6 @@ var modal = scene.plugins.get('rexModal').add(gameObject, {
 
         }
         ```
-    - `false`, `null` : No transitOut.
 - `destroy`
     - `true` : Destroy dialog when closing completed. Default behavior.
     - `fasle` : Don't destroy dialog.

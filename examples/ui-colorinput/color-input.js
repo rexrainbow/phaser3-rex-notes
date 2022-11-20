@@ -66,23 +66,25 @@ const InputTextConfig = {
     }
 }
 
+const ColorPickerConfig = {
+    width: 160, height: 160,
+
+    createBackgroundCallback(scene) {
+        return scene.rexUI.add.roundRectangle({
+            color: COLOR_DARK, strokeColor: COLOR_PRIMARY
+        })
+    },
+
+    space: { left: 10, right: 10, top: 10, bottom: 10 },
+}
+
 var CreateColorInput0 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
-        colorPicker: {
-            width: 160, height: 160,
-
-            createBackgroundCallback(scene) {
-                return scene.rexUI.add.roundRectangle({
-                    color: COLOR_DARK, strokeColor: COLOR_PRIMARY
-                })
-            },
-
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
-        },
+        colorPicker: ColorPickerConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
@@ -97,17 +99,7 @@ var CreateColorInput1 = function (scene) {
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
-        colorPicker: {
-            width: 160, height: 160,
-
-            createBackgroundCallback(scene) {
-                return scene.rexUI.add.roundRectangle({
-                    color: COLOR_DARK, strokeColor: COLOR_PRIMARY
-                })
-            },
-
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
-        },
+        colorPicker: ColorPickerConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
@@ -122,17 +114,7 @@ var CreateColorInput2 = function (scene) {
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
-        colorPicker: {
-            width: 160, height: 160,
-
-            createBackgroundCallback(scene) {
-                return scene.rexUI.add.roundRectangle({
-                    color: COLOR_DARK, strokeColor: COLOR_PRIMARY
-                })
-            },
-
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
-        },
+        colorPicker: ColorPickerConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
@@ -145,17 +127,7 @@ var CreateColorInput3 = function (scene) {
         inputText: InputTextConfig,
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
-        colorPicker: {
-            width: 160, height: 160,
-
-            createBackgroundCallback(scene) {
-                return scene.rexUI.add.roundRectangle({
-                    color: COLOR_DARK, strokeColor: COLOR_PRIMARY
-                })
-            },
-
-            space: { left: 10, right: 10, top: 10, bottom: 10 },
-        },
+        colorPicker: ColorPickerConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
