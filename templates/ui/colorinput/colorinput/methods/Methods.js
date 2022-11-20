@@ -1,15 +1,13 @@
-import SetColorPickerTransitCallbackMethods from './SetColorPickerTransitCallbackMethods.js';
-import CreateColorPickerPanel from './CreateColorPickerPanel.js';
-import DelayCallMethods from './DelayCallMethods.js';
+import ConfigurationMethods from './ConfigurationMethods.js'
+import OpenColorPicker from './OpenColorPicker.js';
 
 var methods = {
-    createColorPickerPanel: CreateColorPickerPanel
+    openColorPicker: OpenColorPicker
 }
 
 Object.assign(
     methods,
-    SetColorPickerTransitCallbackMethods,
-    DelayCallMethods
+    ConfigurationMethods,
 );
 
 export default methods;

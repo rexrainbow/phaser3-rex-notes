@@ -12,51 +12,25 @@ class ColorInput extends ColorInputBase {
         super(scene, config);
         this.type = 'rexColorInput';
 
-        var hasColorPicker = !!config.colorPicker;
+        var colorPickerConfig = config.colorPicker;
+        var hasColorPicker = !!colorPickerConfig;
 
         if (hasColorPicker) {
-            this.setColorPickerTransitInCallback(GetValue(config.colorPicker, 'transitIn'));
-            this.setColorPickerTransitOutCallback(GetValue(config.colorPicker, 'transitIn'));
+            this.setColorPickerSize(GetValue(colorPickerConfig, 'width'), GetValue(colorPickerConfig, 'height'));
+            this.setCreateColorPickerBackgroundCallback(GetValue(colorPickerConfig, 'createBackgroundCallback'))
+            this.setColorPickerExpandDirection(GetValue(colorPickerConfig, 'expandDirection'));
+            this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 500));
+            this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 500));
+            this.setColorPickerTransitInCallback(GetValue(colorPickerConfig, 'transitIn'));
+            this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitIn'));
+            this.setColorPickerBounds(GetValue(colorPickerConfig, 'bounds'));
+            this.setColorPickerSpace(GetValue(colorPickerConfig, 'space'));
         }
 
         var swatch = this.childrenMap.swatch;
         if (swatch && hasColorPicker) {
-            this.onClick(swatch, function () {
-                if (this.colorPickerPanel) {
-                    return;
-                }
-
-                this.colorPickerPanel = this.createColorPickerPanel(scene, config)
-                    .once('destroy', function () {
-                        this.colorPickerPanel = null;
-                    }, this)
-                    .setOrigin(0, 0)
-                    .layout()
-                    .setPosition(this.left, this.bottom)
-                    .on('valuechange', function (value) {
-                        this.setValue(value);
-                    }, this)
-
-                this.pin(this.colorPickerPanel);
-
-                this.delayCall(0, function () {
-                    this.colorPickerPanel.onClickOutside(function () {
-                        this.colorPickerPanel.destroy();
-                    }, this)
-                }, this)
-
-            }, this);
+            this.onClick(swatch, this.openColorPicker, this);
         }
-    }
-
-    destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-            return;
-        }
-
-        super.destroy(fromScene);
-        this.removeDelayCall();
     }
 }
 

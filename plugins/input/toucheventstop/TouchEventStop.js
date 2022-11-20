@@ -14,27 +14,38 @@ class TouchEventStop extends ComponentBase {
 
     resetFromJSON(o) {
         this.setHitAreaMode(GetValue(o, 'hitAreaMode', 0));
-        this.setEnable(GetValue(o, "enable", true));
+        this.setEnable(GetValue(o, 'enable', true));
+        this.setStopMode(GetValue(o, 'stopAllLevels', true));
         return this;
     }
 
     boot() {
         this.parent
             .on('pointerdown', function (pointer, localX, localY, event) {
-                event.stopPropagation();
-            })
+                if (this.stopAllLevels) {
+                    event.stopPropagation();
+                }
+            }, this)
             .on('pointerup', function (pointer, localX, localY, event) {
-                event.stopPropagation();
-            })
+                if (this.stopAllLevels) {
+                    event.stopPropagation();
+                }
+            }, this)
             .on('pointermove', function (pointer, localX, localY, event) {
-                event.stopPropagation();
-            })
+                if (this.stopAllLevels) {
+                    event.stopPropagation();
+                }
+            }, this)
             .on('pointerover', function (pointer, localX, localY, event) {
-                event.stopPropagation();
-            })
+                if (this.stopAllLevels) {
+                    event.stopPropagation();
+                }
+            }, this)
             .on('pointerout', function (pointer, event) {
-                event.stopPropagation();
-            })
+                if (this.stopAllLevels) {
+                    event.stopPropagation();
+                }
+            }, this)
     }
 
     setHitAreaMode(mode) {
@@ -71,6 +82,14 @@ class TouchEventStop extends ComponentBase {
         }
 
         this.enable = e;
+        return this;
+    }
+
+    setStopMode(allLevels) {
+        if (allLevels === undefined) {
+            allLevels = true;
+        }
+        this.stopAllLevels = allLevels;
         return this;
     }
 

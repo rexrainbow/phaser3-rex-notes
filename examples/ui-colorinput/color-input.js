@@ -73,8 +73,15 @@ var CreateColorInput0 = function (scene) {
         space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
 
         colorPicker: {
-            width: 160,
-            height: 160
+            width: 160, height: 160,
+
+            createBackgroundCallback(scene) {
+                return scene.rexUI.add.roundRectangle({
+                    color: COLOR_DARK, strokeColor: COLOR_PRIMARY
+                })
+            },
+
+            space: { left: 10, right: 10, top: 10, bottom: 10 },
         },
 
         value: Phaser.Math.Between(0, 0x1000000)
