@@ -6,7 +6,7 @@ var OpenListPanel = function () {
         return this;
     }
 
-    var listPanel = CreateListPanel.call(this, this.scene);
+    var listPanel = CreateListPanel.call(this);
 
     // Button over/out
     listPanel

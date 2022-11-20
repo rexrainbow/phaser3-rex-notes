@@ -1,7 +1,9 @@
 import Buttons from '../../../buttons/Buttons.js';
 import FixWidthButtons from '../../../fixwidthbuttons/FixWidthButtons.js';
 
-var CreateListPanel = function (scene) {
+var CreateListPanel = function () {
+    var scene = this.scene;
+
     var background;
     var createBackgroundCallback = this.listCreateBackgroundCallback;
     if (createBackgroundCallback) {
