@@ -13,7 +13,7 @@ var methods = {
         return this;
     },
 
-    setCreateBackgroundCallback(callback) {
+    setCreateListBackgroundCallback(callback) {
         this.listCreateBackgroundCallback = callback;
         return this;
     },

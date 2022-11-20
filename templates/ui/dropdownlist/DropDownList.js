@@ -15,7 +15,7 @@ class DropDownList extends Label {
         var listConfig = GetValue(config, 'list');
         this.setWrapEnable(GetValue(listConfig, 'wrap', false));
         this.setCreateButtonCallback(GetValue(listConfig, 'createButtonCallback'));
-        this.setCreateBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
+        this.setCreateListBackgroundCallback(GetValue(listConfig, 'createBackgroundCallback'));
         this.setButtonClickCallback(GetValue(listConfig, 'onButtonClick'));
         this.setButtonOverCallback(GetValue(listConfig, 'onButtonOver'));
         this.setButtonOutCallback(GetValue(listConfig, 'onButtonOut'));
