@@ -15156,9 +15156,10 @@
     var ascent = GetValue$2a(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
-      // Calculate lineHeight        
+      // Calculate lineHeight
+      var useDefaultTextHeight = GetValue$2a(config, 'useDefaultTextHeight', false);
       maxLines = GetValue$2a(config, 'maxLines', 0);
-      if (this.fixedHeight > 0) {
+      if (this.fixedHeight > 0 && !useDefaultTextHeight) {
         var innerHeight = this.fixedHeight - paddingVertical;
         if (maxLines > 0) {
           // Calculate lineHeight via maxLines, in fixedHeight mode
@@ -21024,6 +21025,12 @@
     }
     if (!HasValue(config, 'wrap.charWrap')) {
       SetValue$1(config, 'wrap.charWrap', true);
+    }
+    if (!HasValue(config, 'wrap.maxLines')) {
+      SetValue$1(config, 'wrap.maxLines', 1);
+    }
+    if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
+      SetValue$1(config, 'wrap.useDefaultTextHeight', true);
     }
     return config;
   };
@@ -31382,6 +31389,7 @@
   }(Sizer);
 
   var methods$h = {
+    // Color picker
     setCreateColorPickerBackgroundCallback: function setCreateColorPickerBackgroundCallback(callback) {
       this.colorPickerCreateBackgroundCallback = callback;
       return this;
@@ -31438,6 +31446,26 @@
         space = {};
       }
       this.colorPickerSpace = space;
+      return this;
+    },
+    // Color components
+    setColorComponentsHeight: function setColorComponentsHeight(height) {
+      this.colorComponentsHeight = height;
+      return this;
+    },
+    setColorComponentsFormatLabelConfig: function setColorComponentsFormatLabelConfig(config) {
+      this.colorComponentsFormatLabelConfig = config;
+      return this;
+    },
+    setColorComponentsInputTextConfig: function setColorComponentsInputTextConfig(config) {
+      this.colorComponentsInputTextConfig = config;
+      return this;
+    },
+    setColorComponentsSpace: function setColorComponentsSpace(space) {
+      if (space === undefined) {
+        space = {};
+      }
+      this.colorComponentsSpace = space;
       return this;
     }
   };
@@ -32054,665 +32082,11 @@
     right: 3
   };
 
-  var GetValue$1e = Phaser.Utils.Objects.GetValue;
-  var ColorPickerPanel = /*#__PURE__*/function (_Sizer) {
-    _inherits(ColorPickerPanel, _Sizer);
-    var _super = _createSuper(ColorPickerPanel);
-    function ColorPickerPanel(scene, config) {
-      var _this;
-      _classCallCheck(this, ColorPickerPanel);
-      if (config === undefined) {
-        config = {};
-      }
-      config.orientation = 1;
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexColorInput.ColorPickerPanel';
-
-      // Add elements
-      var background = GetValue$1e(config, 'background', undefined);
-      var colorPicker = new ColorPicker(scene, {
-        hPalette: config.hPalette || {},
-        svPalette: config.svPalette || {},
-        space: {
-          item: GetValue$1e(config, 'space.hPalette', 8)
-        }
-      });
-      scene.add.existing(colorPicker);
-
-      //var colorComponents = new ColorComponents(scene, {
-      //    text: GetValue(config, 'text'),
-      //});
-      //scene.add.existing(colorComponents);
-
-      if (background) {
-        _this.addBackground(background);
-        new TouchEventStop(background, {
-          stopAllLevels: false
-        });
-      }
-      _this.add(colorPicker, {
-        proportion: 1,
-        expand: true
-      });
-
-      //this.add(
-      //    colorComponents,
-      //    {}
-      //);
-
-      _this.addChildrenMap('background', background);
-      _this.addChildrenMap('colorPicker', colorPicker);
-      //this.addChildrenMap('colorComponents', colorComponents);
-
-      colorPicker.on('valuechange', function () {
-        this.emit('valuechange', colorPicker.value);
-      }, _assertThisInitialized(_this));
-      _this.setValue(GetValue$1e(config, 'value', 0xffffff));
-      return _this;
-    }
-    _createClass(ColorPickerPanel, [{
-      key: "value",
-      get: function get() {
-        return this._value;
-      },
-      set: function set(value) {
-        if (this._value === value) {
-          return;
-        }
-        this._value = value;
-        this.childrenMap.colorPicker.setValue(value);
-      }
-    }, {
-      key: "setValue",
-      value: function setValue(value) {
-        this.value = value;
-        return this;
-      }
-    }]);
-    return ColorPickerPanel;
-  }(Sizer);
-
-  Phaser.Utils.Objects.GetValue;
-  var CreateColorPicker = function CreateColorPicker(scene) {
-    var scene = this.scene;
-    var background;
-    var createBackgroundCallback = this.colorPickerCreateBackgroundCallback;
-    if (createBackgroundCallback) {
-      background = createBackgroundCallback.call(this, scene);
-      scene.add.existing(background);
-    }
-    var width = this.colorPickerWidth;
-    if (width === undefined) {
-      width = this.width;
-    }
-    var height = this.colorPickerHeight;
-    if (height === undefined) {
-      height = width;
-    }
-    var colorPicker = new ColorPickerPanel(scene, {
-      width: width,
-      height: height,
-      background: background,
-      space: this.colorPickerSpace,
-      value: this.value
-    });
-    scene.add.existing(colorPicker);
-    return colorPicker;
-  };
-
-  var State$3 = /*#__PURE__*/function (_FSM) {
-    _inherits(State, _FSM);
-    var _super = _createSuper(State);
-    function State(parent, config) {
-      var _this;
-      _classCallCheck(this, State);
-      _this = _super.call(this, config);
-      _this.parent = parent;
-      _this.init();
-      return _this;
-    }
-    _createClass(State, [{
-      key: "init",
-      value: function init() {
-        this.start('IDLE');
-      }
-
-      // IDLE -> TRANS_OPNE
-    }, {
-      key: "next_IDLE",
-      value: function next_IDLE() {
-        return 'TRANS_OPNE';
-      }
-      // IDLE
-
-      // TRANS_OPNE -> OPEN
-    }, {
-      key: "next_TRANS_OPNE",
-      value: function next_TRANS_OPNE() {
-        return 'OPEN';
-      }
-    }, {
-      key: "enter_TRANS_OPNE",
-      value: function enter_TRANS_OPNE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.transitionIn();
-        transitionBehavior.delayCall(transitionBehavior.transitInTime, this.next, this);
-      }
-    }, {
-      key: "exit_TRANS_OPNE",
-      value: function exit_TRANS_OPNE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.removeDelayCall();
-      }
-      // TRANS_OPNE
-
-      // OPEN -> TRANS_CLOSE    
-    }, {
-      key: "next_OPEN",
-      value: function next_OPEN() {
-        return 'TRANS_CLOSE';
-      }
-    }, {
-      key: "enter_OPEN",
-      value: function enter_OPEN() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.onOpen();
-      }
-    }, {
-      key: "exit_OPEN",
-      value: function exit_OPEN() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.removeDelayCall();
-      }
-      // OPEN
-
-      // TRANS_CLOSE -> CLOSE
-    }, {
-      key: "next_TRANS_CLOSE",
-      value: function next_TRANS_CLOSE() {
-        return 'CLOSE';
-      }
-    }, {
-      key: "enter_TRANS_CLOSE",
-      value: function enter_TRANS_CLOSE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.transitionOut();
-        transitionBehavior.delayCall(transitionBehavior.transitOutTime, this.next, this);
-      }
-    }, {
-      key: "exit_TRANS_CLOSE",
-      value: function exit_TRANS_CLOSE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.removeDelayCall();
-      }
-      // TRANS_CLOSE
-
-      // CLOSE
-    }, {
-      key: "next_CLOSE",
-      value: function next_CLOSE() {}
-    }, {
-      key: "enter_CLOSE",
-      value: function enter_CLOSE() {
-        var transitionBehavior = this.parent;
-        transitionBehavior.onClose();
-      }
-    }, {
-      key: "exit_CLOSE",
-      value: function exit_CLOSE() {}
-      // CLOSE
-    }]);
-    return State;
-  }(FSM);
-
-  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
-    // Invoke callback under scene's 'postupdate' event
-    var scene = gameObject.scene;
-    var sceneEE = scene.sys.events;
-    var timer = scene.time.delayedCall(delay,
-    // delay
-    sceneEE.once,
-    // callback
-    [
-    // Event name of scene
-    'postupdate',
-    // Callback
-    function () {
-      callback.call(scope, args);
-    }],
-    // args
-    sceneEE // scope, scene's EE
-    );
-
-    return timer;
-  };
-
-  var GetValue$1d = Phaser.Utils.Objects.GetValue;
-  var Transition = /*#__PURE__*/function (_ComponentBase) {
-    _inherits(Transition, _ComponentBase);
-    var _super = _createSuper(Transition);
-    function Transition(gameObject, config) {
-      var _this;
-      _classCallCheck(this, Transition);
-      _this = _super.call(this, gameObject, config);
-      // this.parent = gameObject;
-      // this.scene
-
-      _this.setTransitInTime(GetValue$1d(config, 'duration.in', 200));
-      _this.setTransitOutTime(GetValue$1d(config, 'duration.out', 200));
-      _this.setTransitInCallback(GetValue$1d(config, 'transitIn'));
-      _this.setTransitOutCallback(GetValue$1d(config, 'transitOut'));
-      _this.destroyParent = GetValue$1d(config, 'destroy', true);
-      _this.delayCallTimer = undefined;
-      _this._state = new State$3(_assertThisInitialized(_this), {
-        eventEmitter: false
-      });
-      _this.closeEventData = undefined;
-      return _this;
-    }
-    _createClass(Transition, [{
-      key: "start",
-      value: function start() {
-        this._state.next();
-      }
-    }, {
-      key: "state",
-      get: function get() {
-        return this._state.state;
-      }
-    }, {
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-        this.transitInCallback = undefined;
-        this.transitOutCallback = undefined;
-        this.closeEventData = undefined;
-        this.removeDelayCall();
-        _get(_getPrototypeOf(Transition.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "transitionIn",
-      value: function transitionIn() {
-        var duration = this.transitInTime;
-        this.transitInCallback(this.parent, duration);
-        return this;
-      }
-    }, {
-      key: "transitionOut",
-      value: function transitionOut() {
-        var duration = this.transitOutTime;
-        this.transitOutCallback(this.parent, duration);
-        return this;
-      }
-    }, {
-      key: "onOpen",
-      value: function onOpen() {}
-    }, {
-      key: "onClose",
-      value: function onClose() {
-        if (this.destroyParent) {
-          this.parent.destroy();
-          // Will invoke `this.destroy()`
-        } else {
-          this.destroy();
-        }
-      }
-    }, {
-      key: "delayCall",
-      value: function delayCall(delay, callback, scope) {
-        // Invoke callback under scene's 'postupdate' event
-        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
-        return this;
-      }
-    }, {
-      key: "removeDelayCall",
-      value: function removeDelayCall() {
-        if (this.delayCallTimer) {
-          this.delayCallTimer.remove(false);
-          this.delayCallTimer = undefined;
-        }
-        return this;
-      }
-    }, {
-      key: "setTransitInTime",
-      value: function setTransitInTime(time) {
-        this.transitInTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitOutTime",
-      value: function setTransitOutTime(time) {
-        this.transitOutTime = time;
-        return this;
-      }
-    }, {
-      key: "setTransitInCallback",
-      value: function setTransitInCallback(callback) {
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitInCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "setTransitOutCallback",
-      value: function setTransitOutCallback(callback) {
-        if (!callback) {
-          callback = NOOP;
-        }
-        this.transitOutCallback = callback;
-        // callback = function(gameObject, duration) {}
-        return this;
-      }
-    }, {
-      key: "requestClose",
-      value: function requestClose(closeEventData) {
-        // Only can close modal in OPEN state
-        if (this._state.state === 'OPEN') {
-          this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
-          this._state.next(); // OPEN -> TRANS_CLOSE 
-        }
-
-        return this;
-      }
-    }]);
-    return Transition;
-  }(ComponentBase);
-
-  var ScaleDown$1 = function ScaleDown(gameObject, duration, orientation, ease, scale) {
-    if (ease === undefined) {
-      ease = 'Linear';
-    }
-    var config = {};
-    config.mode = 0;
-    switch (orientation) {
-      case 0:
-      case 'x':
-        config.end = {
-          x: 0
-        };
-        break;
-      case 1:
-      case 'y':
-        config.end = {
-          y: 0
-        };
-        break;
-      default:
-        config.end = 0;
-        break;
-    }
-    config.duration = duration;
-    config.ease = ease;
-    if (scale === undefined) {
-      scale = new Scale(gameObject, config);
-    } else {
-      scale.resetFromJSON(config);
-    }
-    scale.restart();
-    return scale;
-  };
-
-  var GetValueFromAliasKeys = function GetValueFromAliasKeys(source, key0, key1, key2, defaultValue) {
-    if (HasValue(source, key0)) {
-      return GetValue$2K(source, key0);
-    } else if (key1 && HasValue(source, key1)) {
-      return GetValue$2K(source, key1);
-    } else if (key2 && HasValue(source, key2)) {
-      return GetValue$2K(source, key2);
-    } else {
-      return defaultValue;
-    }
-  };
-
-  var GetValue$1c = Phaser.Utils.Objects.GetValue;
-  var SetPosition = function SetPosition(gameObject, config) {
-    var expandDirection = GetValue$1c(config, 'expandDirection', undefined);
-    if (typeof expandDirection === 'string') {
-      expandDirection = ExpandDirections[expandDirection];
-    }
-    var alignTargetX = GetValueFromAliasKeys(config, 'alignTarget', 'alignTargetX');
-    var alignTargetY = GetValue$1c(config, 'alignTargetY', alignTargetX);
-    var alignOffsetX = GetValue$1c(config, 'alignOffsetX', 0);
-    var alignOffsetY = GetValue$1c(config, 'alignOffsetY', 0);
-    var positionBounds = GetValue$1c(config, 'bounds');
-
-    // Expand direction
-    var isExpandDown = expandDirection === 0;
-    var isExpandUp = expandDirection === 1;
-    var flexExpand = !isExpandDown && !isExpandUp;
-    var originY = isExpandDown || flexExpand ? 0 : 1;
-    gameObject.setOrigin(0, originY);
-    var x = alignTargetX.getTopLeft().x;
-    var y = alignTargetY.getBottomLeft().y;
-    gameObject.setPosition(x + alignOffsetX, y + alignOffsetY);
-    var bounds = positionBounds;
-    if (!bounds) {
-      bounds = GetViewport(gameObject.scene);
-    }
-    if (flexExpand && gameObject.getBottomLeft().y > bounds.bottom) {
-      // Out of bounds, can't put list-panel below parent
-      y = alignTargetY.getTopLeft().y;
-      gameObject.setOrigin(0, 1).setPosition(x + alignOffsetX, y + alignOffsetY);
-    }
-  };
-  var ExpandDirections = {
-    down: 0,
-    up: 1
-  };
-
-  var GetValue$1b = Phaser.Utils.Objects.GetValue;
-  var DropDown = /*#__PURE__*/function (_Transition) {
-    _inherits(DropDown, _Transition);
-    var _super = _createSuper(DropDown);
-    function DropDown(gameObject, config) {
-      var _this;
-      _classCallCheck(this, DropDown);
-      if (config === undefined) {
-        config = {};
-      }
-      if (config.transitIn == null) {
-        config.transitIn = function (gameObject, duration) {
-          PopUp$1(gameObject, duration, 'y', 'Cubic');
-        };
-      }
-      if (config.transitOut == null) {
-        config.transitOut = function (gameObject, duration) {
-          // Don't destroy here
-          ScaleDown$1(gameObject, duration, 'y', 'Linear');
-        };
-      }
-      config.manualClose = true;
-      config.clickOutsideClose = true;
-      _this = _super.call(this, gameObject, config);
-      // this.parent = gameObject;
-      // this.scene
-
-      SetPosition(gameObject, config);
-      if (gameObject.isRexSizer) {
-        gameObject.layout();
-      }
-
-      // Close conditions:
-      var touchOutsideClose = GetValue$1b(config, 'touchOutsideClose', false);
-      var anyTouchClose = GetValue$1b(config, 'anyTouchClose', false);
-      if (anyTouchClose) {
-        touchOutsideClose = false;
-      }
-
-      // Registet touch-close event after opened
-      if (anyTouchClose) {
-        _this.once('open', _this.anyTouchClose, _assertThisInitialized(_this));
-      } else if (touchOutsideClose) {
-        _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
-      }
-      _this.start();
-      return _this;
-    }
-    _createClass(DropDown, [{
-      key: "shutdown",
-      value: function shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-          return;
-        }
-
-        // Registered in touchOutsideClose()
-        this.scene.input.off('pointerup', this.touchCloseCallback, this);
-        _get(_getPrototypeOf(DropDown.prototype), "shutdown", this).call(this, fromScene);
-      }
-    }, {
-      key: "touchOutsideClose",
-      value: function touchOutsideClose() {
-        this.scene.input.on('pointerup', this.touchCloseCallback, this);
-        this.clickOutsideTest = true;
-        return this;
-      }
-    }, {
-      key: "anyTouchClose",
-      value: function anyTouchClose() {
-        this.scene.input.once('pointerup', this.touchCloseCallback, this);
-        return this;
-      }
-    }, {
-      key: "touchCloseCallback",
-      value: function touchCloseCallback(pointer) {
-        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
-          return;
-        }
-        this.requestClose();
-      }
-    }, {
-      key: "onOpen",
-      value: function onOpen() {
-        this.emit('open', this.parent, this);
-        _get(_getPrototypeOf(DropDown.prototype), "onOpen", this).call(this);
-      }
-    }, {
-      key: "onClose",
-      value: function onClose() {
-        this.emit('close', this.parent, this);
-        _get(_getPrototypeOf(DropDown.prototype), "onClose", this).call(this);
-      }
-    }]);
-    return DropDown;
-  }(Transition);
-
-  var OpenColorPicker = function OpenColorPicker() {
-    if (this.colorPicker) {
-      return;
-    }
-    var colorPicker = CreateColorPicker.call(this);
-    var dropDownBehavior = new DropDown(colorPicker, {
-      // Transition
-      duration: {
-        "in": this.colorPickerEaseInDuration,
-        out: this.colorPickerEaseOutDuration
-      },
-      transitIn: this.colorPickerTransitInCallback,
-      transitOut: this.colorPickerTransitOutCallback,
-      // Position
-      expandDirection: this.colorPickerExpandDirection,
-      alignTargetX: this,
-      alignTargetY: this,
-      bounds: this.colorPickerBounds,
-      // Close condition
-      touchOutsideClose: true
-    }).on('open', function () {
-      // After popping up
-      // Can click
-      colorPicker.on('valuechange', function (value) {
-        this.setValue(value);
-      }, this);
-    }, this).on('close', function () {
-      this.colorPicker = undefined;
-      this.dropDownBehavior = undefined;
-    }, this);
-    this.colorPicker = colorPicker;
-    this.dropDownBehavior = dropDownBehavior;
-    this.pin(colorPicker);
-    return this;
-  };
-
-  var methods$g = {
-    openColorPicker: OpenColorPicker
-  };
-  Object.assign(methods$g, methods$h);
-
   var CreateRoundRectangle$1 = function CreateRoundRectangle(scene, config) {
     var gameObject = new RoundRectangle$3(scene, config);
     scene.add.existing(gameObject);
     return gameObject;
   };
-
-  var GetValue$1a = Phaser.Utils.Objects.GetValue;
-  var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
-    _inherits(ColorInput, _ColorInputBase);
-    var _super = _createSuper(ColorInput);
-    function ColorInput(scene, config) {
-      var _this;
-      _classCallCheck(this, ColorInput);
-      if (config === undefined) {
-        config = {};
-      }
-      _this = _super.call(this, scene, config);
-      _this.type = 'rexColorInput';
-      var colorPickerConfig = config.colorPicker;
-      var hasColorPicker = !!colorPickerConfig;
-      if (hasColorPicker) {
-        _this.setColorPickerSize(GetValue$1a(colorPickerConfig, 'width'), GetValue$1a(colorPickerConfig, 'height'));
-        var createBackgroundCallback;
-        var background = GetValue$1a(colorPickerConfig, 'background');
-        if (background) {
-          createBackgroundCallback = function createBackgroundCallback(scene) {
-            return CreateRoundRectangle$1(scene, background);
-          };
-        } else {
-          createBackgroundCallback = GetValue$1a(colorPickerConfig, 'createBackgroundCallback');
-        }
-        _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
-        _this.setColorPickerExpandDirection(GetValue$1a(colorPickerConfig, 'expandDirection'));
-        _this.setColorPickerEaseInDuration(GetValue$1a(colorPickerConfig, 'easeIn', 500));
-        _this.setColorPickerEaseOutDuration(GetValue$1a(colorPickerConfig, 'easeOut', 500));
-        _this.setColorPickerTransitInCallback(GetValue$1a(colorPickerConfig, 'transitIn'));
-        _this.setColorPickerTransitOutCallback(GetValue$1a(colorPickerConfig, 'transitIn'));
-        _this.setColorPickerBounds(GetValue$1a(colorPickerConfig, 'bounds'));
-        _this.setColorPickerSpace(GetValue$1a(colorPickerConfig, 'space'));
-      }
-      var swatch = _this.childrenMap.swatch;
-      if (swatch && hasColorPicker) {
-        _this.onClick(swatch, _this.openColorPicker, _assertThisInitialized(_this));
-      }
-      return _this;
-    }
-    return _createClass(ColorInput);
-  }(ColorInput$1);
-  Object.assign(ColorInput.prototype, methods$g);
-
-  ObjectFactory.register('colorInput', function (config) {
-    var gameObject = new ColorInput(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue$1(window, 'RexPlugins.UI.ColorInput', ColorInput);
-
-  ObjectFactory.register('colorInputLite', function (config) {
-    var gameObject = new ColorInput$1(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue$1(window, 'RexPlugins.UI.ColorInputBase', ColorInput$1);
-
-  ObjectFactory.register('colorPicker', function (config) {
-    var gameObject = new ColorPicker(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue$1(window, 'RexPlugins.UI.ColorPicker', ColorPicker);
 
   var PhaserText$1 = Phaser.GameObjects.Text;
   var CreateText$1 = function CreateText(scene, style) {
@@ -32780,7 +32154,7 @@
     return gameObject;
   };
 
-  var GetValue$19 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1e = Phaser.Utils.Objects.GetValue;
   var Label$1 = /*#__PURE__*/function (_Sizer) {
     _inherits(Label, _Sizer);
     var _super = _createSuper(Label);
@@ -32792,17 +32166,17 @@
       _this.type = 'rexLabel';
 
       // Add elements
-      var background = GetValue$19(config, 'background', undefined);
-      var icon = GetValue$19(config, 'icon', undefined);
-      var iconMask = GetValue$19(config, 'iconMask', undefined);
-      var text = GetValue$19(config, 'text', undefined);
-      var action = GetValue$19(config, 'action', undefined);
-      var actionMask = GetValue$19(config, 'actionMask', undefined);
+      var background = GetValue$1e(config, 'background', undefined);
+      var icon = GetValue$1e(config, 'icon', undefined);
+      var iconMask = GetValue$1e(config, 'iconMask', undefined);
+      var text = GetValue$1e(config, 'text', undefined);
+      var action = GetValue$1e(config, 'action', undefined);
+      var actionMask = GetValue$1e(config, 'actionMask', undefined);
       // Align
-      var align = GetValue$19(config, 'align', undefined); // undefined/left/top: no space
+      var align = GetValue$1e(config, 'align', undefined); // undefined/left/top: no space
       // Space
-      var iconSpace = GetValue$19(config, 'space.icon', 0);
-      var textSpace = GetValue$19(config, 'space.text', 0);
+      var iconSpace = GetValue$1e(config, 'space.icon', 0);
+      var textSpace = GetValue$1e(config, 'space.text', 0);
       if (background) {
         _this.addBackground(background);
       }
@@ -32835,11 +32209,11 @@
         }
       }
 
-      var iconSize = GetValue$19(config, 'iconSize');
-      _this.setIconSize(GetValue$19(config, 'iconWidth', iconSize), GetValue$19(config, 'iconHeight', iconSize));
+      var iconSize = GetValue$1e(config, 'iconSize');
+      _this.setIconSize(GetValue$1e(config, 'iconWidth', iconSize), GetValue$1e(config, 'iconHeight', iconSize));
       if (text) {
-        var expandTextWidth = GetValue$19(config, 'expandTextWidth', false);
-        var expandTextHeight = GetValue$19(config, 'expandTextHeight', false);
+        var expandTextWidth = GetValue$1e(config, 'expandTextWidth', false);
+        var expandTextHeight = GetValue$1e(config, 'expandTextHeight', false);
         var proportion, padding, expand;
         if (_this.orientation === 0) {
           proportion = expandTextWidth ? 1 : 0;
@@ -32871,8 +32245,8 @@
         }
       }
 
-      var actionSize = GetValue$19(config, 'actionSize');
-      _this.setActionSize(GetValue$19(config, 'actionWidth', actionSize), GetValue$19(config, 'actionHeight', actionSize));
+      var actionSize = GetValue$1e(config, 'actionSize');
+      _this.setActionSize(GetValue$1e(config, 'actionWidth', actionSize), GetValue$1e(config, 'actionHeight', actionSize));
 
       // Add space
       if (align === 'center') {
@@ -33087,7 +32461,7 @@
     return gameObject;
   };
 
-  var GetValue$18 = Phaser.Utils.Objects.GetValue;
+  var GetValue$1d = Phaser.Utils.Objects.GetValue;
   var Color = Phaser.Display.Color;
   var ColorToRGBA = Phaser.Display.Color.ColorToRGBA;
   var HSVToRGB = Phaser.Display.Color.HSVToRGB;
@@ -33107,8 +32481,8 @@
       _this.colorObject = new Color();
 
       // Add elements
-      var background = GetValue$18(config, 'background', undefined);
-      var formatLabel = GetValue$18(config, 'formatLabel', undefined);
+      var background = GetValue$1d(config, 'background', undefined);
+      var formatLabel = GetValue$1d(config, 'formatLabel', undefined);
       if (!IsGameObject(formatLabel)) {
         formatLabel = CreateDisplayLabel(scene, formatLabel).resetDisplayContent();
       }
@@ -33118,7 +32492,7 @@
         components.push(config.inputText1);
         components.push(config.inputText2);
       } else {
-        var inputTextConfig = GetValue$18(config, 'inputText');
+        var inputTextConfig = GetValue$1d(config, 'inputText');
         for (var i = 0; i < 3; i++) {
           var inputText = CreateInputText$1(scene, inputTextConfig).setMaxLength(3).setNumberInput();
           components.push(inputText);
@@ -33127,15 +32501,15 @@
       if (background) {
         _this.addBackground(background);
       }
-      var proportion = GetValue$18(config, 'proportion.formatLabel', 0);
+      var proportion = GetValue$1d(config, 'proportion.formatLabel', 0);
       var defaultExpand = formatLabel.isRexContainerLite ? true : false;
-      var expand = GetValue$18(config, 'expand.formatLabel', defaultExpand);
+      var expand = GetValue$1d(config, 'expand.formatLabel', defaultExpand);
       _this.add(formatLabel, {
         proportion: proportion,
         expand: expand
       });
-      var proportion = GetValue$18(inputTextConfig, 'width') === undefined ? 1 : 0;
-      var expand = GetValue$18(inputTextConfig, 'height') === undefined ? true : false;
+      var proportion = GetValue$1d(inputTextConfig, 'width') === undefined ? 1 : 0;
+      var expand = GetValue$1d(inputTextConfig, 'height') === undefined ? true : false;
       for (var i = 0, cnt = components.length; i < cnt; i++) {
         _this.add(components[i], {
           proportion: proportion,
@@ -33152,13 +32526,13 @@
           this.setValue(this.colorObject.color);
         }, _assertThisInitialized(_this));
       }
-      var callback = GetValue$18(config, 'valuechangeCallback', null);
+      var callback = GetValue$1d(config, 'valuechangeCallback', null);
       if (callback !== null) {
-        var scope = GetValue$18(config, 'valuechangeCallbackScope', undefined);
+        var scope = GetValue$1d(config, 'valuechangeCallbackScope', undefined);
         _this.on('valuechange', callback, scope);
       }
       formatLabel.setText('RGB');
-      _this.setValue(GetValue$18(config, 'value', 0xffffff));
+      _this.setValue(GetValue$1d(config, 'value', 0xffffff));
       return _this;
     }
     _createClass(ColorComponents, [{
@@ -33260,6 +32634,693 @@
     }]);
     return ColorComponents;
   }(Sizer);
+
+  var GetValue$1c = Phaser.Utils.Objects.GetValue;
+  var ColorPickerPanel = /*#__PURE__*/function (_Sizer) {
+    _inherits(ColorPickerPanel, _Sizer);
+    var _super = _createSuper(ColorPickerPanel);
+    function ColorPickerPanel(scene, config) {
+      var _this;
+      _classCallCheck(this, ColorPickerPanel);
+      if (config === undefined) {
+        config = {};
+      }
+      config.orientation = 1;
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexColorInput.ColorPickerPanel';
+
+      // Add elements
+      var background = GetValue$1c(config, 'background', undefined);
+      var colorPicker = new ColorPicker(scene, {
+        hPalette: config.hPalette || {},
+        svPalette: config.svPalette || {},
+        space: {
+          item: GetValue$1c(config, 'space.hPalette', 8)
+        }
+      });
+      scene.add.existing(colorPicker);
+      var colorComponents;
+      if (config.colorComponents) {
+        colorComponents = new ColorComponents(scene, config.colorComponents);
+        scene.add.existing(colorComponents);
+      }
+      if (background) {
+        _this.addBackground(background);
+        new TouchEventStop(background, {
+          stopAllLevels: false
+        });
+      }
+      _this.add(colorPicker, {
+        proportion: 1,
+        expand: true
+      });
+      if (colorComponents) {
+        _this.add(colorComponents, {
+          proportion: 0,
+          expand: true
+        });
+      }
+      _this.addChildrenMap('background', background);
+      _this.addChildrenMap('colorPicker', colorPicker);
+      _this.addChildrenMap('colorComponents', colorComponents);
+      colorPicker.on('valuechange', function (value) {
+        this.setValue(value);
+      }, _assertThisInitialized(_this));
+      if (colorComponents) {
+        colorComponents.on('valuechange', function (value) {
+          this.setValue(value);
+        }, _assertThisInitialized(_this));
+      }
+      _this.setValue(GetValue$1c(config, 'value', 0xffffff));
+      return _this;
+    }
+    _createClass(ColorPickerPanel, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value === value) {
+          return;
+        }
+        this._value = value;
+        var colorPicker = this.childrenMap.colorPicker;
+        colorPicker.setValue(value);
+        var colorComponents = this.childrenMap.colorComponents;
+        if (colorComponents) {
+          colorComponents.setValue(value);
+        }
+        this.emit('valuechange', value);
+      }
+    }, {
+      key: "setValue",
+      value: function setValue(value) {
+        this.value = value;
+        return this;
+      }
+    }]);
+    return ColorPickerPanel;
+  }(Sizer);
+
+  Phaser.Utils.Objects.GetValue;
+  var CreateColorPicker = function CreateColorPicker(scene) {
+    var scene = this.scene;
+    var background;
+    var createBackgroundCallback = this.colorPickerCreateBackgroundCallback;
+    if (createBackgroundCallback) {
+      background = createBackgroundCallback.call(this, scene);
+      scene.add.existing(background);
+    }
+    var width = this.colorPickerWidth;
+    if (width === undefined) {
+      width = this.width;
+    }
+    var height = this.colorPickerHeight;
+    if (height === undefined) {
+      height = width;
+    }
+    var colorComponentsConfig;
+    if (this.colorComponentsHeight > 0) {
+      colorComponentsConfig = {
+        height: this.colorComponentsHeight,
+        formatLabel: this.colorComponentsFormatLabelConfig,
+        inputText: this.colorComponentsInputTextConfig,
+        space: this.colorComponentsSpace
+      };
+    } else {
+      colorComponentsConfig = false;
+    }
+    var colorPicker = new ColorPickerPanel(scene, {
+      width: width,
+      height: height,
+      background: background,
+      space: this.colorPickerSpace,
+      colorComponents: colorComponentsConfig,
+      value: this.value
+    });
+    scene.add.existing(colorPicker);
+    return colorPicker;
+  };
+
+  var State$3 = /*#__PURE__*/function (_FSM) {
+    _inherits(State, _FSM);
+    var _super = _createSuper(State);
+    function State(parent, config) {
+      var _this;
+      _classCallCheck(this, State);
+      _this = _super.call(this, config);
+      _this.parent = parent;
+      _this.init();
+      return _this;
+    }
+    _createClass(State, [{
+      key: "init",
+      value: function init() {
+        this.start('IDLE');
+      }
+
+      // IDLE -> TRANS_OPNE
+    }, {
+      key: "next_IDLE",
+      value: function next_IDLE() {
+        return 'TRANS_OPNE';
+      }
+      // IDLE
+
+      // TRANS_OPNE -> OPEN
+    }, {
+      key: "next_TRANS_OPNE",
+      value: function next_TRANS_OPNE() {
+        return 'OPEN';
+      }
+    }, {
+      key: "enter_TRANS_OPNE",
+      value: function enter_TRANS_OPNE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.transitionIn();
+        transitionBehavior.delayCall(transitionBehavior.transitInTime, this.next, this);
+      }
+    }, {
+      key: "exit_TRANS_OPNE",
+      value: function exit_TRANS_OPNE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      }
+      // TRANS_OPNE
+
+      // OPEN -> TRANS_CLOSE    
+    }, {
+      key: "next_OPEN",
+      value: function next_OPEN() {
+        return 'TRANS_CLOSE';
+      }
+    }, {
+      key: "enter_OPEN",
+      value: function enter_OPEN() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.onOpen();
+      }
+    }, {
+      key: "exit_OPEN",
+      value: function exit_OPEN() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      }
+      // OPEN
+
+      // TRANS_CLOSE -> CLOSE
+    }, {
+      key: "next_TRANS_CLOSE",
+      value: function next_TRANS_CLOSE() {
+        return 'CLOSE';
+      }
+    }, {
+      key: "enter_TRANS_CLOSE",
+      value: function enter_TRANS_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.transitionOut();
+        transitionBehavior.delayCall(transitionBehavior.transitOutTime, this.next, this);
+      }
+    }, {
+      key: "exit_TRANS_CLOSE",
+      value: function exit_TRANS_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.removeDelayCall();
+      }
+      // TRANS_CLOSE
+
+      // CLOSE
+    }, {
+      key: "next_CLOSE",
+      value: function next_CLOSE() {}
+    }, {
+      key: "enter_CLOSE",
+      value: function enter_CLOSE() {
+        var transitionBehavior = this.parent;
+        transitionBehavior.onClose();
+      }
+    }, {
+      key: "exit_CLOSE",
+      value: function exit_CLOSE() {}
+      // CLOSE
+    }]);
+    return State;
+  }(FSM);
+
+  var PostUpdateDelayCall = function PostUpdateDelayCall(gameObject, delay, callback, scope, args) {
+    // Invoke callback under scene's 'postupdate' event
+    var scene = gameObject.scene;
+    var sceneEE = scene.sys.events;
+    var timer = scene.time.delayedCall(delay,
+    // delay
+    sceneEE.once,
+    // callback
+    [
+    // Event name of scene
+    'postupdate',
+    // Callback
+    function () {
+      callback.call(scope, args);
+    }],
+    // args
+    sceneEE // scope, scene's EE
+    );
+
+    return timer;
+  };
+
+  var GetValue$1b = Phaser.Utils.Objects.GetValue;
+  var Transition = /*#__PURE__*/function (_ComponentBase) {
+    _inherits(Transition, _ComponentBase);
+    var _super = _createSuper(Transition);
+    function Transition(gameObject, config) {
+      var _this;
+      _classCallCheck(this, Transition);
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+      // this.scene
+
+      _this.setTransitInTime(GetValue$1b(config, 'duration.in', 200));
+      _this.setTransitOutTime(GetValue$1b(config, 'duration.out', 200));
+      _this.setTransitInCallback(GetValue$1b(config, 'transitIn'));
+      _this.setTransitOutCallback(GetValue$1b(config, 'transitOut'));
+      _this.destroyParent = GetValue$1b(config, 'destroy', true);
+      _this.delayCallTimer = undefined;
+      _this._state = new State$3(_assertThisInitialized(_this), {
+        eventEmitter: false
+      });
+      _this.closeEventData = undefined;
+      return _this;
+    }
+    _createClass(Transition, [{
+      key: "start",
+      value: function start() {
+        this._state.next();
+      }
+    }, {
+      key: "state",
+      get: function get() {
+        return this._state.state;
+      }
+    }, {
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+        this.transitInCallback = undefined;
+        this.transitOutCallback = undefined;
+        this.closeEventData = undefined;
+        this.removeDelayCall();
+        _get(_getPrototypeOf(Transition.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "transitionIn",
+      value: function transitionIn() {
+        var duration = this.transitInTime;
+        this.transitInCallback(this.parent, duration);
+        return this;
+      }
+    }, {
+      key: "transitionOut",
+      value: function transitionOut() {
+        var duration = this.transitOutTime;
+        this.transitOutCallback(this.parent, duration);
+        return this;
+      }
+    }, {
+      key: "onOpen",
+      value: function onOpen() {}
+    }, {
+      key: "onClose",
+      value: function onClose() {
+        if (this.destroyParent) {
+          this.parent.destroy();
+          // Will invoke `this.destroy()`
+        } else {
+          this.destroy();
+        }
+      }
+    }, {
+      key: "delayCall",
+      value: function delayCall(delay, callback, scope) {
+        // Invoke callback under scene's 'postupdate' event
+        this.delayCallTimer = PostUpdateDelayCall(this, delay, callback, scope);
+        return this;
+      }
+    }, {
+      key: "removeDelayCall",
+      value: function removeDelayCall() {
+        if (this.delayCallTimer) {
+          this.delayCallTimer.remove(false);
+          this.delayCallTimer = undefined;
+        }
+        return this;
+      }
+    }, {
+      key: "setTransitInTime",
+      value: function setTransitInTime(time) {
+        this.transitInTime = time;
+        return this;
+      }
+    }, {
+      key: "setTransitOutTime",
+      value: function setTransitOutTime(time) {
+        this.transitOutTime = time;
+        return this;
+      }
+    }, {
+      key: "setTransitInCallback",
+      value: function setTransitInCallback(callback) {
+        if (!callback) {
+          callback = NOOP;
+        }
+        this.transitInCallback = callback;
+        // callback = function(gameObject, duration) {}
+        return this;
+      }
+    }, {
+      key: "setTransitOutCallback",
+      value: function setTransitOutCallback(callback) {
+        if (!callback) {
+          callback = NOOP;
+        }
+        this.transitOutCallback = callback;
+        // callback = function(gameObject, duration) {}
+        return this;
+      }
+    }, {
+      key: "requestClose",
+      value: function requestClose(closeEventData) {
+        // Only can close modal in OPEN state
+        if (this._state.state === 'OPEN') {
+          this.closeEventData = arguments.length > 0 ? closeEventData : this.parent;
+          this._state.next(); // OPEN -> TRANS_CLOSE 
+        }
+
+        return this;
+      }
+    }]);
+    return Transition;
+  }(ComponentBase);
+
+  var ScaleDown$1 = function ScaleDown(gameObject, duration, orientation, ease, scale) {
+    if (ease === undefined) {
+      ease = 'Linear';
+    }
+    var config = {};
+    config.mode = 0;
+    switch (orientation) {
+      case 0:
+      case 'x':
+        config.end = {
+          x: 0
+        };
+        break;
+      case 1:
+      case 'y':
+        config.end = {
+          y: 0
+        };
+        break;
+      default:
+        config.end = 0;
+        break;
+    }
+    config.duration = duration;
+    config.ease = ease;
+    if (scale === undefined) {
+      scale = new Scale(gameObject, config);
+    } else {
+      scale.resetFromJSON(config);
+    }
+    scale.restart();
+    return scale;
+  };
+
+  var GetValueFromAliasKeys = function GetValueFromAliasKeys(source, key0, key1, key2, defaultValue) {
+    if (HasValue(source, key0)) {
+      return GetValue$2K(source, key0);
+    } else if (key1 && HasValue(source, key1)) {
+      return GetValue$2K(source, key1);
+    } else if (key2 && HasValue(source, key2)) {
+      return GetValue$2K(source, key2);
+    } else {
+      return defaultValue;
+    }
+  };
+
+  var GetValue$1a = Phaser.Utils.Objects.GetValue;
+  var SetPosition = function SetPosition(gameObject, config) {
+    var expandDirection = GetValue$1a(config, 'expandDirection', undefined);
+    if (typeof expandDirection === 'string') {
+      expandDirection = ExpandDirections[expandDirection];
+    }
+    var alignTargetX = GetValueFromAliasKeys(config, 'alignTarget', 'alignTargetX');
+    var alignTargetY = GetValue$1a(config, 'alignTargetY', alignTargetX);
+    var alignOffsetX = GetValue$1a(config, 'alignOffsetX', 0);
+    var alignOffsetY = GetValue$1a(config, 'alignOffsetY', 0);
+    var positionBounds = GetValue$1a(config, 'bounds');
+
+    // Expand direction
+    var isExpandDown = expandDirection === 0;
+    var isExpandUp = expandDirection === 1;
+    var flexExpand = !isExpandDown && !isExpandUp;
+    var originY = isExpandDown || flexExpand ? 0 : 1;
+    gameObject.setOrigin(0, originY);
+    var x = alignTargetX.getTopLeft().x;
+    var y = alignTargetY.getBottomLeft().y;
+    gameObject.setPosition(x + alignOffsetX, y + alignOffsetY);
+    var bounds = positionBounds;
+    if (!bounds) {
+      bounds = GetViewport(gameObject.scene);
+    }
+    if (flexExpand && gameObject.getBottomLeft().y > bounds.bottom) {
+      // Out of bounds, can't put list-panel below parent
+      y = alignTargetY.getTopLeft().y;
+      gameObject.setOrigin(0, 1).setPosition(x + alignOffsetX, y + alignOffsetY);
+    }
+  };
+  var ExpandDirections = {
+    down: 0,
+    up: 1
+  };
+
+  var GetValue$19 = Phaser.Utils.Objects.GetValue;
+  var DropDown = /*#__PURE__*/function (_Transition) {
+    _inherits(DropDown, _Transition);
+    var _super = _createSuper(DropDown);
+    function DropDown(gameObject, config) {
+      var _this;
+      _classCallCheck(this, DropDown);
+      if (config === undefined) {
+        config = {};
+      }
+      if (config.transitIn == null) {
+        config.transitIn = function (gameObject, duration) {
+          PopUp$1(gameObject, duration, 'y', 'Cubic');
+        };
+      }
+      if (config.transitOut == null) {
+        config.transitOut = function (gameObject, duration) {
+          // Don't destroy here
+          ScaleDown$1(gameObject, duration, 'y', 'Linear');
+        };
+      }
+      config.manualClose = true;
+      config.clickOutsideClose = true;
+      _this = _super.call(this, gameObject, config);
+      // this.parent = gameObject;
+      // this.scene
+
+      SetPosition(gameObject, config);
+      if (gameObject.isRexSizer) {
+        gameObject.layout();
+      }
+
+      // Close conditions:
+      var touchOutsideClose = GetValue$19(config, 'touchOutsideClose', false);
+      var anyTouchClose = GetValue$19(config, 'anyTouchClose', false);
+      if (anyTouchClose) {
+        touchOutsideClose = false;
+      }
+
+      // Registet touch-close event after opened
+      if (anyTouchClose) {
+        _this.once('open', _this.anyTouchClose, _assertThisInitialized(_this));
+      } else if (touchOutsideClose) {
+        _this.once('open', _this.touchOutsideClose, _assertThisInitialized(_this));
+      }
+      _this.start();
+      return _this;
+    }
+    _createClass(DropDown, [{
+      key: "shutdown",
+      value: function shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+          return;
+        }
+
+        // Registered in touchOutsideClose()
+        this.scene.input.off('pointerup', this.touchCloseCallback, this);
+        _get(_getPrototypeOf(DropDown.prototype), "shutdown", this).call(this, fromScene);
+      }
+    }, {
+      key: "touchOutsideClose",
+      value: function touchOutsideClose() {
+        this.scene.input.on('pointerup', this.touchCloseCallback, this);
+        this.clickOutsideTest = true;
+        return this;
+      }
+    }, {
+      key: "anyTouchClose",
+      value: function anyTouchClose() {
+        this.scene.input.once('pointerup', this.touchCloseCallback, this);
+        return this;
+      }
+    }, {
+      key: "touchCloseCallback",
+      value: function touchCloseCallback(pointer) {
+        if (this.clickOutsideTest && IsPointInBounds(this.parent, pointer.worldX, pointer.worldY)) {
+          return;
+        }
+        this.requestClose();
+      }
+    }, {
+      key: "onOpen",
+      value: function onOpen() {
+        this.emit('open', this.parent, this);
+        _get(_getPrototypeOf(DropDown.prototype), "onOpen", this).call(this);
+      }
+    }, {
+      key: "onClose",
+      value: function onClose() {
+        this.emit('close', this.parent, this);
+        _get(_getPrototypeOf(DropDown.prototype), "onClose", this).call(this);
+      }
+    }]);
+    return DropDown;
+  }(Transition);
+
+  var OpenColorPicker = function OpenColorPicker() {
+    if (this.colorPicker) {
+      return;
+    }
+    var colorPicker = CreateColorPicker.call(this);
+    var dropDownBehavior = new DropDown(colorPicker, {
+      // Transition
+      duration: {
+        "in": this.colorPickerEaseInDuration,
+        out: this.colorPickerEaseOutDuration
+      },
+      transitIn: this.colorPickerTransitInCallback,
+      transitOut: this.colorPickerTransitOutCallback,
+      // Position
+      expandDirection: this.colorPickerExpandDirection,
+      alignTargetX: this,
+      alignTargetY: this,
+      bounds: this.colorPickerBounds,
+      // Close condition
+      touchOutsideClose: true
+    }).on('open', function () {
+      // After popping up
+      // Can click
+      colorPicker.on('valuechange', function (value) {
+        this.setValue(value);
+      }, this);
+    }, this).on('close', function () {
+      this.colorPicker = undefined;
+      this.dropDownBehavior = undefined;
+    }, this);
+    this.colorPicker = colorPicker;
+    this.dropDownBehavior = dropDownBehavior;
+    this.pin(colorPicker);
+    return this;
+  };
+
+  var methods$g = {
+    openColorPicker: OpenColorPicker
+  };
+  Object.assign(methods$g, methods$h);
+
+  var GetValue$18 = Phaser.Utils.Objects.GetValue;
+  var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
+    _inherits(ColorInput, _ColorInputBase);
+    var _super = _createSuper(ColorInput);
+    function ColorInput(scene, config) {
+      var _this;
+      _classCallCheck(this, ColorInput);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene, config);
+      _this.type = 'rexColorInput';
+      var colorPickerConfig = config.colorPicker;
+      var hasColorPicker = !!colorPickerConfig;
+      if (hasColorPicker) {
+        _this.setColorPickerSize(GetValue$18(colorPickerConfig, 'width'), GetValue$18(colorPickerConfig, 'height'));
+        var createBackgroundCallback;
+        var background = GetValue$18(colorPickerConfig, 'background');
+        if (background) {
+          createBackgroundCallback = function createBackgroundCallback(scene) {
+            return CreateRoundRectangle$1(scene, background);
+          };
+        } else {
+          createBackgroundCallback = GetValue$18(colorPickerConfig, 'createBackgroundCallback');
+        }
+        _this.setCreateColorPickerBackgroundCallback(createBackgroundCallback);
+        _this.setColorPickerExpandDirection(GetValue$18(colorPickerConfig, 'expandDirection'));
+        _this.setColorPickerEaseInDuration(GetValue$18(colorPickerConfig, 'easeIn', 500));
+        _this.setColorPickerEaseOutDuration(GetValue$18(colorPickerConfig, 'easeOut', 500));
+        _this.setColorPickerTransitInCallback(GetValue$18(colorPickerConfig, 'transitIn'));
+        _this.setColorPickerTransitOutCallback(GetValue$18(colorPickerConfig, 'transitIn'));
+        _this.setColorPickerBounds(GetValue$18(colorPickerConfig, 'bounds'));
+        _this.setColorPickerSpace(GetValue$18(colorPickerConfig, 'space'));
+      }
+      var colorComponentsConfig = config.colorComponents;
+      var hasColorComponents = !!colorComponentsConfig;
+      if (hasColorPicker && hasColorComponents) {
+        _this.setColorComponentsHeight(GetValue$18(colorComponentsConfig, 'height', 30));
+        _this.setColorComponentsFormatLabelConfig(GetValue$18(colorComponentsConfig, 'formatLabel'));
+        var colorComponentsInputTextConfig = GetValue$18(colorComponentsConfig, 'inputText');
+        if (!colorComponentsInputTextConfig) {
+          colorComponentsInputTextConfig = GetValue$18(config, 'inputText');
+        }
+        _this.setColorComponentsInputTextConfig(colorComponentsInputTextConfig);
+        _this.setColorComponentsSpace(GetValue$18(colorComponentsConfig, 'space'));
+      }
+      var swatch = _this.childrenMap.swatch;
+      if (swatch && hasColorPicker) {
+        _this.onClick(swatch, _this.openColorPicker, _assertThisInitialized(_this));
+      }
+      return _this;
+    }
+    return _createClass(ColorInput);
+  }(ColorInput$1);
+  Object.assign(ColorInput.prototype, methods$g);
+
+  ObjectFactory.register('colorInput', function (config) {
+    var gameObject = new ColorInput(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue$1(window, 'RexPlugins.UI.ColorInput', ColorInput);
+
+  ObjectFactory.register('colorInputLite', function (config) {
+    var gameObject = new ColorInput$1(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue$1(window, 'RexPlugins.UI.ColorInputBase', ColorInput$1);
+
+  ObjectFactory.register('colorPicker', function (config) {
+    var gameObject = new ColorPicker(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue$1(window, 'RexPlugins.UI.ColorPicker', ColorPicker);
 
   ObjectFactory.register('colorComponents', function (config) {
     var gameObject = new ColorComponents(this.scene, config);

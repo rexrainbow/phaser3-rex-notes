@@ -6122,9 +6122,10 @@
     var ascent = GetValue$7(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
-      // Calculate lineHeight        
+      // Calculate lineHeight
+      var useDefaultTextHeight = GetValue$7(config, 'useDefaultTextHeight', false);
       maxLines = GetValue$7(config, 'maxLines', 0);
-      if (this.fixedHeight > 0) {
+      if (this.fixedHeight > 0 && !useDefaultTextHeight) {
         var innerHeight = this.fixedHeight - paddingVertical;
         if (maxLines > 0) {
           // Calculate lineHeight via maxLines, in fixedHeight mode

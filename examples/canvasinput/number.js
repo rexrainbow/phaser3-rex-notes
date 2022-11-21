@@ -47,8 +47,7 @@ var CreateCanvasInput = function (scene, text) {
             },
 
             wrap: {
-                lineHeight: 40,
-                maxLines: 0,       // Set maxLines to 0
+                lineHeight: 40,           
                 letterSpacing: 1,
                 padding: { bottom: 10 },
                 vAlign: 0

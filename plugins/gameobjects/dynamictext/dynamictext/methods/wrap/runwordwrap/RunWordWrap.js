@@ -19,9 +19,10 @@ var RunWordWrap = function (config) {
     var ascent = GetValue(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
-        // Calculate lineHeight        
+        // Calculate lineHeight
+        var useDefaultTextHeight = GetValue(config, 'useDefaultTextHeight', false);
         maxLines = GetValue(config, 'maxLines', 0);
-        if (this.fixedHeight > 0) {
+        if ((this.fixedHeight > 0) && (!useDefaultTextHeight)) {
             var innerHeight = this.fixedHeight - paddingVertical;
             if (maxLines > 0) {
                 // Calculate lineHeight via maxLines, in fixedHeight mode

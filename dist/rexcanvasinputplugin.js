@@ -3332,9 +3332,10 @@
     var ascent = GetValue$9(config, 'ascent', lineHeight);
     var maxLines;
     if (lineHeight === undefined) {
-      // Calculate lineHeight        
+      // Calculate lineHeight
+      var useDefaultTextHeight = GetValue$9(config, 'useDefaultTextHeight', false);
       maxLines = GetValue$9(config, 'maxLines', 0);
-      if (this.fixedHeight > 0) {
+      if (this.fixedHeight > 0 && !useDefaultTextHeight) {
         var innerHeight = this.fixedHeight - paddingVertical;
         if (maxLines > 0) {
           // Calculate lineHeight via maxLines, in fixedHeight mode
@@ -5530,6 +5531,12 @@
     }
     if (!HasValue(config, 'wrap.charWrap')) {
       SetValue(config, 'wrap.charWrap', true);
+    }
+    if (!HasValue(config, 'wrap.maxLines')) {
+      SetValue(config, 'wrap.maxLines', 1);
+    }
+    if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
+      SetValue(config, 'wrap.useDefaultTextHeight', true);
     }
     return config;
   };

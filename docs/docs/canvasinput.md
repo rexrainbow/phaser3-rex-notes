@@ -153,7 +153,8 @@ var txt = scene.add.rexCanvasInput({
             bottom: 0
         },
         lineHeight: undefined,
-        maxLines: undefined,
+        useDefaultLineHeight: true,
+        maxLines: 1,
         wrapWidth: undefined,
         letterSpacing: 0,
         hAlign: 0,
@@ -206,6 +207,10 @@ var txt = scene.add.rexCanvasInput({
 ```
 
 - Parameters of [DynamicText](dynamictext.md#create-instance)...
+    - `wrap` : Some default value in `wrap` are changed
+        - `wrap.useDefaultLineHeight` : Default value is `true`
+        - `wrap.maxLines` : Default value is `1`
+        - `wrap.vAlign` : Default value is `'center'`
 - Parameters of hidden-text-editor
     - `inputType` : Type of element
         - `'text'`, `'password'`, `'textarea'`, ...

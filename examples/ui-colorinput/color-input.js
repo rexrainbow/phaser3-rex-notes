@@ -67,7 +67,7 @@ const InputTextConfig = {
 }
 
 const ColorPickerConfig = {
-    width: 160, height: 160,
+    width: 160, height: 170,
 
     background: { color: COLOR_DARK, strokeColor: COLOR_PRIMARY },
     // createBackgroundCallback(scene) {
@@ -83,7 +83,7 @@ const ColorComponentsConfig = {
     height: 20,
 
     formatLabel: {
-        text: { fontSize: 14 },       
+        text: { fontSize: 14 },
     },
 
     inputText: {
@@ -104,7 +104,7 @@ const ColorComponentsConfig = {
         }
     },
 
-    space: { item: 8 }
+    space: { top: 10, item: 8 }
 }
 
 var CreateColorInput0 = function (scene) {

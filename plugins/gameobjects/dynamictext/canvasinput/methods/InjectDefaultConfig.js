@@ -10,6 +10,14 @@ var InjectDefaultConfig = function (config) {
         SetValue(config, 'wrap.charWrap', true);
     }
 
+    if (!HasValue(config, 'wrap.maxLines')) {
+        SetValue(config, 'wrap.maxLines', 1);
+    }
+
+    if (!HasValue(config, 'wrap.useDefaultTextHeight')) {
+        SetValue(config, 'wrap.useDefaultTextHeight', true);
+    }
+
     return config;
 }
 
