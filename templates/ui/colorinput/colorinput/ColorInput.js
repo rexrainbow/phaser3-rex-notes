@@ -20,7 +20,7 @@ class ColorInput extends ColorInputBase {
         }
 
         var colorPickerConfig = config.colorPicker;
-        var hasColorPicker = !!colorPickerConfig;
+        var hasColorPicker = (colorPickerConfig !== false) && (colorPickerConfig !== null);
 
         if (hasColorPicker) {
             this.setColorPickerSize(
@@ -54,7 +54,7 @@ class ColorInput extends ColorInputBase {
         }
 
         var colorComponentsConfig = config.colorComponents;
-        var hasColorComponents = !!colorComponentsConfig;
+        var hasColorComponents = (colorComponentsConfig !== false) && (colorComponentsConfig !== null);
         if (hasColorPicker && hasColorComponents) {
             this.setColorComponentsHeight(GetValue(colorComponentsConfig, 'height', 30));
 

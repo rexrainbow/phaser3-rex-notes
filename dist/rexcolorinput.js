@@ -18430,7 +18430,7 @@
         };
       }
       var colorPickerConfig = config.colorPicker;
-      var hasColorPicker = !!colorPickerConfig;
+      var hasColorPicker = colorPickerConfig !== false && colorPickerConfig !== null;
       if (hasColorPicker) {
         _this.setColorPickerSize(GetValue(colorPickerConfig, 'width', 160), GetValue(colorPickerConfig, 'height', 170));
         var createBackgroundCallback;
@@ -18462,7 +18462,7 @@
         _this.setColorPickerSpace(colorPickerSpaceConfig);
       }
       var colorComponentsConfig = config.colorComponents;
-      var hasColorComponents = !!colorComponentsConfig;
+      var hasColorComponents = colorComponentsConfig !== false && colorComponentsConfig !== null;
       if (hasColorPicker && hasColorComponents) {
         _this.setColorComponentsHeight(GetValue(colorComponentsConfig, 'height', 30));
         _this.setColorComponentsFormatLabelConfig(GetValue(colorComponentsConfig, 'formatLabel'));

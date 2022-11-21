@@ -182,6 +182,31 @@ var CreatePanel = function (scene) {
                     uncheckedColor: COLOR_DARK,
                 },
 
+                colorInput: {
+                    colorPicker: {
+                        background: { color: 0x0, strokeColor: COLOR_LIGHT },
+                    },
+
+                    colorComponents: {
+                        inputText: {
+                            background: {
+                                color: COLOR_DARK
+                            },
+                            focusStyle: {
+                                color: COLOR_PRIMARY,
+                            },
+                            style: {
+                                backgroundBottomY: 4,
+                                backgroundHeight: 18,
+                            },
+                            cursorStyle: {
+                                color: 'black',
+                                backgroundColor: 'white',
+                            }
+                        }
+                    }
+                },
+
                 proportion: {
                     title: 1,
                     inputField: 1.5,
