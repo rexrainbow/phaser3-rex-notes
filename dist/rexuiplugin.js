@@ -33260,7 +33260,7 @@
       var colorPickerConfig = config.colorPicker;
       var hasColorPicker = !!colorPickerConfig;
       if (hasColorPicker) {
-        _this.setColorPickerSize(GetValue$18(colorPickerConfig, 'width'), GetValue$18(colorPickerConfig, 'height'));
+        _this.setColorPickerSize(GetValue$18(colorPickerConfig, 'width', 160), GetValue$18(colorPickerConfig, 'height', 170));
         var createBackgroundCallback;
         var background = GetValue$18(colorPickerConfig, 'background');
         if (background) {
@@ -33277,7 +33277,17 @@
         _this.setColorPickerTransitInCallback(GetValue$18(colorPickerConfig, 'transitIn'));
         _this.setColorPickerTransitOutCallback(GetValue$18(colorPickerConfig, 'transitOut'));
         _this.setColorPickerBounds(GetValue$18(colorPickerConfig, 'bounds'));
-        _this.setColorPickerSpace(GetValue$18(colorPickerConfig, 'space'));
+        var colorPickerSpaceConfig = GetValue$18(colorPickerConfig, 'space');
+        if (colorPickerSpaceConfig === undefined) {
+          colorPickerSpaceConfig = {
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10,
+            item: 8
+          };
+        }
+        _this.setColorPickerSpace(colorPickerSpaceConfig);
       }
       var colorComponentsConfig = config.colorComponents;
       var hasColorComponents = !!colorComponentsConfig;
@@ -33289,7 +33299,13 @@
           colorComponentsInputTextConfig = GetValue$18(config, 'inputText');
         }
         _this.setColorComponentsInputTextConfig(colorComponentsInputTextConfig);
-        _this.setColorComponentsSpace(GetValue$18(colorComponentsConfig, 'space'));
+        var colorComponentsSpace = GetValue$18(colorComponentsConfig, 'space');
+        if (colorComponentsSpace === undefined) {
+          colorComponentsSpace = {
+            item: 8
+          };
+        }
+        _this.setColorComponentsSpace(colorComponentsSpace);
       }
       var swatch = _this.childrenMap.swatch;
       if (swatch && hasColorPicker) {

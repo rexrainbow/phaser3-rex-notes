@@ -1,6 +1,6 @@
 ## Introduction
 
-Edit color value by RGB, or HSV input fields.
+Edit color value by RGB, or HSV input fields. Clicking fist label can switch color format between *RGB* and *HSV*
 
 - Author: Rex
 - Game object
@@ -265,7 +265,7 @@ var colorComponents = scene.rexUI.add.colorComponents({
     - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of colorComponents.
-- `formatLabel` :
+- `formatLabel` : Clicking this label can switch color format between *RGB* and *HSV*
     - A [label](ui-label.md) game object, or a [text](text.md) game object.
     - A plain object
         ```javascript

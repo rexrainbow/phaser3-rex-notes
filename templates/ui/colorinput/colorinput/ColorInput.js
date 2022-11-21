@@ -17,7 +17,10 @@ class ColorInput extends ColorInputBase {
         var hasColorPicker = !!colorPickerConfig;
 
         if (hasColorPicker) {
-            this.setColorPickerSize(GetValue(colorPickerConfig, 'width'), GetValue(colorPickerConfig, 'height'));
+            this.setColorPickerSize(
+                GetValue(colorPickerConfig, 'width', 160),
+                GetValue(colorPickerConfig, 'height', 170)
+            );
 
             var createBackgroundCallback;
             var background = GetValue(colorPickerConfig, 'background');
@@ -36,7 +39,12 @@ class ColorInput extends ColorInputBase {
             this.setColorPickerTransitInCallback(GetValue(colorPickerConfig, 'transitIn'));
             this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitOut'));
             this.setColorPickerBounds(GetValue(colorPickerConfig, 'bounds'));
-            this.setColorPickerSpace(GetValue(colorPickerConfig, 'space'));
+
+            var colorPickerSpaceConfig = GetValue(colorPickerConfig, 'space');
+            if (colorPickerSpaceConfig === undefined) {
+                colorPickerSpaceConfig = { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
+            }
+            this.setColorPickerSpace(colorPickerSpaceConfig);
         }
 
         var colorComponentsConfig = config.colorComponents;
@@ -52,7 +60,11 @@ class ColorInput extends ColorInputBase {
             }
             this.setColorComponentsInputTextConfig(colorComponentsInputTextConfig);
 
-            this.setColorComponentsSpace(GetValue(colorComponentsConfig, 'space'));
+            var colorComponentsSpace = GetValue(colorComponentsConfig, 'space');
+            if (colorComponentsSpace === undefined) {
+                colorComponentsSpace = { item: 8 }
+            }
+            this.setColorComponentsSpace(colorComponentsSpace);
         }
 
 

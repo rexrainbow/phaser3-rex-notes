@@ -76,12 +76,11 @@ const ColorPickerConfig = {
     //     })
     // },
 
-    space: { left: 10, right: 10, top: 10, bottom: 10 },
+    space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 }
 
-const ColorComponentsConfig = {
-    height: 30,
-    space: { top: 10, item: 8 }
+const ColorComponentsConfig = {  
+    space: { item: 8 }
 }
 
 var CreateColorInput0 = function (scene) {

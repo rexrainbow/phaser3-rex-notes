@@ -88,112 +88,34 @@ var colorInput = scene.rexUI.add.colorInput({
     // swatch: swatchGameObject,
     // swatch: false,
 
-    inputText: {
-        width: undefined, 
-        height: undefined,
-    
-        padding: 0,  // {left: 0, right: 0, top: 0, bottom: 0}
-    
+    inputText: inputTextConfig,
+
+    colorPicker : {
+        width: 160, height: 170,
+
         background: {
-            color: null,
-            color2: null,
-            horizontalGradient: true,
-    
-            stroke: null,
-            strokeThickness: 2,
-    
-            cornerRadius: 0,
-            cornerIteration: null,
-            
-            // Style when focus
-            // 'focus.color': ...
-            // 'focus.color2': ...
-            // 'focus.stroke': ...
+            radius: 0,
+            color: undefined, alpha: undefined,
+            strokeColor: undefined, strokeAlpha: undefined, strokeWidth: 2
         },
-        focusStyle: undefined,
-    
-        innerBounds: {
-            color: null,
-            color2: null,
-            horizontalGradient: true,
-    
-            stroke: null,
-            strokeThickness: 2
-        },
-    
-        style: {
-            bold: false,
-            italic: false,
-            fontSize: '16px',
-            fontFamily: 'Courier',
-            color: '#fff',
-            stroke: '#fff',
-            strokeThickness: 0,
-            shadowColor: null,
-            shadowOffsetX: 0,
-            shadowOffsetY: 0,
-            shadowBlur: 0,
-            backgroundColor: null,
-            backgroundHeight: undefined,
-            backgroundBY: undefined,
-            offsetX: 0,
-            offsetY: 0,
-    
-            // Style when cursor move on
-            // 'cursor.color': ...
-            // 'cursor.backgroundColor': ...
-            // 'cursor.xxx': ...
-        },
-        cursorStyle: undefined,
+        // createBackgroundCallback: function(scene) {
+        //     return gameObject;
+        // }
 
-        wrap: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            },
-            lineHeight: undefined,
-            maxLines: undefined,
-            wrapWidth: undefined,
-            letterSpacing: 0,
-            hAlign: 0,
-            vAlign: 'center',  // For single line text input
-            charWrap: true,    // For single line text input
-        },
-
-        // enterClose: true,
-        // readOnly: false,
-    
-        // Callbacks
-        // onOpen: function (textObject, hiddenInputText) {
-        // },
-    
-        // onClose: function (textObject, hiddenInputText) {
-        // },
-
-        // onUpdate: function (text, textObject, hiddenInputText) {
-        //     return text;
-        // },   
-    
-        // onAddChar: function(child, index, canvasInput) {
-        //    child.modifyStyle({...})
-        // },
-    
-        // onCursorOut: function(child, cursorIndex, canvasInput) {
-        //     child.modifyStyle({
-        //         
-        //     });
-        // },
-    
-        // onCursorIn: function(child, cursorIndex, canvasInput) {
-        //     child.modifyStyle({
-        //         
-        //     });
-        // },
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
     },
 
-    valuechangeCallback: function(newValue, oldValue, knob) {
+    colorComponents: {
+        height: undefined,
+        
+        formatLabel: undefined,
+
+        inputText: undefined,
+
+        space: { item: 8 }
+    },
+
+    valuechangeCallback: function(newValue, oldValue, colorInput) {
     },
     valuechangeCallbackScope: undefined,
 
@@ -242,6 +164,42 @@ var colorInput = scene.rexUI.add.colorInput({
     - An Image or Sprite game object : Tint this game object for displaying color value.
     - `false` : No swatch game object.
 - `inputText` : Configuration of [canvasInput](canvasinput.md#create-instance)
+- `colorPicker` : Configuration of a drop-down [color picker](ui-colorpicker.md), triggered by clicking swatch.
+    - `colorPicker.width`, `colorPicker.height` : Sizer of color picker. Default value is `180`x`170`
+    - `colorPicker.background` : Parameters to create [round rectangle](shape-roundrectangle.me) game object, optional.
+    - `colorPicker.createBackgroundCallback` : Callback to create background game object, optional.
+        ```javascript
+        function(scene) {
+            return gameObject;
+        }
+        ```
+    - `colorPicker.space` : Padding space around color picker. Default value is
+        ```javascript
+        { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
+        ```
+- `colorComponents` : Configuration of [color components](ui-colorcomponents.md) inside the drop down color picker.
+    - `colorComponents.height` : Height of color components.
+    - `colorComponents.formatLabel` : Clicking this label can switch color format between *RGB* and *HSV* 
+        - `undefined` : Will create a label with default [text](text.md) game object.
+        - A plain object
+            ```javascript
+            {
+                background: {
+                    radius: 0,
+                    color: undefined, alpha: undefined,
+                    strokeColor: undefined, strokeAlpha: undefined, strokeWidth: 2
+                },
+            
+                text: textStyle,
+            
+                space: {left: 0, right: 0, top: 0, bottom: 0}
+            }            
+            ```
+    - `colorComponents.inputText` : Configuration of [canvasInput](canvasinput.md#create-instance) used in this color components. Will use `inputText` of color input if this parameter is not given.
+    - `colorComponents.space` : Padding space around color components. Default value is
+        ```javascript
+        { item: 8 }
+        ```
 - `valuechangeCallback` : callback function when value changed.
 - `value` : Initial color value (0 ~ 0xffffff).
     - Number :  0 ~ 0xffffff

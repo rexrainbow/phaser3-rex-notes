@@ -18425,7 +18425,7 @@
       var colorPickerConfig = config.colorPicker;
       var hasColorPicker = !!colorPickerConfig;
       if (hasColorPicker) {
-        _this.setColorPickerSize(GetValue(colorPickerConfig, 'width'), GetValue(colorPickerConfig, 'height'));
+        _this.setColorPickerSize(GetValue(colorPickerConfig, 'width', 160), GetValue(colorPickerConfig, 'height', 170));
         var createBackgroundCallback;
         var background = GetValue(colorPickerConfig, 'background');
         if (background) {
@@ -18442,7 +18442,17 @@
         _this.setColorPickerTransitInCallback(GetValue(colorPickerConfig, 'transitIn'));
         _this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitOut'));
         _this.setColorPickerBounds(GetValue(colorPickerConfig, 'bounds'));
-        _this.setColorPickerSpace(GetValue(colorPickerConfig, 'space'));
+        var colorPickerSpaceConfig = GetValue(colorPickerConfig, 'space');
+        if (colorPickerSpaceConfig === undefined) {
+          colorPickerSpaceConfig = {
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10,
+            item: 8
+          };
+        }
+        _this.setColorPickerSpace(colorPickerSpaceConfig);
       }
       var colorComponentsConfig = config.colorComponents;
       var hasColorComponents = !!colorComponentsConfig;
@@ -18454,7 +18464,13 @@
           colorComponentsInputTextConfig = GetValue(config, 'inputText');
         }
         _this.setColorComponentsInputTextConfig(colorComponentsInputTextConfig);
-        _this.setColorComponentsSpace(GetValue(colorComponentsConfig, 'space'));
+        var colorComponentsSpace = GetValue(colorComponentsConfig, 'space');
+        if (colorComponentsSpace === undefined) {
+          colorComponentsSpace = {
+            item: 8
+          };
+        }
+        _this.setColorComponentsSpace(colorComponentsSpace);
       }
       var swatch = _this.childrenMap.swatch;
       if (swatch && hasColorPicker) {

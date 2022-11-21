@@ -13,7 +13,7 @@ declare namespace ColorInput {
 
     interface IConfig extends ColorInputBase.IConfig {
         colorPicker?: {
-            width: number, height: number,
+            width?: number, height?: number,
 
             background?: RoundRectangle.IConfig,
             createBackgroundCallback: (
@@ -36,7 +36,7 @@ declare namespace ColorInput {
         },
 
         colorComponents?: {
-            height: number,
+            height?: number,
 
             formatLabel?: ColorComponents.IFormatLabelConfig,
 
