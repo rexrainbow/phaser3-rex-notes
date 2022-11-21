@@ -33275,7 +33275,7 @@
         _this.setColorPickerEaseInDuration(GetValue$18(colorPickerConfig, 'easeIn', 500));
         _this.setColorPickerEaseOutDuration(GetValue$18(colorPickerConfig, 'easeOut', 500));
         _this.setColorPickerTransitInCallback(GetValue$18(colorPickerConfig, 'transitIn'));
-        _this.setColorPickerTransitOutCallback(GetValue$18(colorPickerConfig, 'transitIn'));
+        _this.setColorPickerTransitOutCallback(GetValue$18(colorPickerConfig, 'transitOut'));
         _this.setColorPickerBounds(GetValue$18(colorPickerConfig, 'bounds'));
         _this.setColorPickerSpace(GetValue$18(colorPickerConfig, 'space'));
       }

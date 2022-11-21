@@ -7,7 +7,7 @@ export default ColorComponents;
 
 declare namespace ColorComponents {
 
-    interface ILabelConfig {
+    interface IFormatLabelConfig {
         space?: {
             left?: number, right?: number, top?: number, bottom?: number,
         },
@@ -24,7 +24,7 @@ declare namespace ColorComponents {
     interface IConfig extends Sizer.IConfig {
         background?: Phaser.GameObjects.GameObject,
 
-        formatLabel?: Phaser.GameObjects.GameObject | ILabelConfig;
+        formatLabel?: Phaser.GameObjects.GameObject | IFormatLabelConfig;
 
         inputText0?: Phaser.GameObjects.GameObject,
         inputText1?: Phaser.GameObjects.GameObject,
@@ -33,7 +33,7 @@ declare namespace ColorComponents {
 
         proportion?: {
             formatLabel?: number,
-            
+
         },
 
         valuechangeCallback: (newValue: number, oldValue: number, colorComponents: ColorComponents) => void,

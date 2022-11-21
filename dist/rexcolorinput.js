@@ -18440,7 +18440,7 @@
         _this.setColorPickerEaseInDuration(GetValue(colorPickerConfig, 'easeIn', 500));
         _this.setColorPickerEaseOutDuration(GetValue(colorPickerConfig, 'easeOut', 500));
         _this.setColorPickerTransitInCallback(GetValue(colorPickerConfig, 'transitIn'));
-        _this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitIn'));
+        _this.setColorPickerTransitOutCallback(GetValue(colorPickerConfig, 'transitOut'));
         _this.setColorPickerBounds(GetValue(colorPickerConfig, 'bounds'));
         _this.setColorPickerSpace(GetValue(colorPickerConfig, 'space'));
       }
