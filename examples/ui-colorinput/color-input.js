@@ -80,30 +80,7 @@ const ColorPickerConfig = {
 }
 
 const ColorComponentsConfig = {
-    height: 20,
-
-    formatLabel: {
-        text: { fontSize: 14 },
-    },
-
-    inputText: {
-        background: {
-            color: COLOR_DARK
-        },
-        focusStyle: {
-            color: COLOR_PRIMARY,
-        },
-        style: {
-            fontSize: 14,
-            backgroundBottomY: 1,
-            backgroundHeight: 12,
-        },
-        cursorStyle: {
-            color: 'black',
-            backgroundColor: 'white',
-        }
-    },
-
+    height: 30,
     space: { top: 10, item: 8 }
 }
 
