@@ -1,6 +1,6 @@
 import Sizer from '../../../sizer/Sizer.js';
 import ColorPicker from '../../colorpicker/ColorPicker.js';
-// import ColorComponents from '../../colorcomponents/ColorComponents.js';
+import ColorComponents from '../../colorcomponents/ColorComponents.js';
 import TouchEventStop from '../../../toucheventstop/TouchEventStop.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -27,10 +27,11 @@ class ColorPickerPanel extends Sizer {
         });
         scene.add.existing(colorPicker);
 
-        //var colorComponents = new ColorComponents(scene, {
-        //    text: GetValue(config, 'text'),
-        //});
-        //scene.add.existing(colorComponents);
+        var colorComponents;
+        if (config.colorComponents) {
+            colorComponents = new ColorComponents(scene, config.colorComponents);
+            scene.add.existing(colorComponents);
+        }
 
         if (background) {
             this.addBackground(background);
@@ -44,18 +45,26 @@ class ColorPickerPanel extends Sizer {
             { proportion: 1, expand: true }
         );
 
-        //this.add(
-        //    colorComponents,
-        //    {}
-        //);
+        if (colorComponents) {
+            this.add(
+                colorComponents,
+                { proportion: 0, expand: true }
+            );
+        }
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('colorPicker', colorPicker);
-        //this.addChildrenMap('colorComponents', colorComponents);
+        this.addChildrenMap('colorComponents', colorComponents);
 
-        colorPicker.on('valuechange', function () {
-            this.emit('valuechange', colorPicker.value);
+        colorPicker.on('valuechange', function (value) {
+            this.setValue(value);
         }, this)
+
+        if (colorComponents) {
+            colorComponents.on('valuechange', function (value) {
+                this.setValue(value);
+            }, this)
+        }
 
         this.setValue(GetValue(config, 'value', 0xffffff));
     }
@@ -70,7 +79,16 @@ class ColorPickerPanel extends Sizer {
         }
 
         this._value = value;
-        this.childrenMap.colorPicker.setValue(value);
+
+        var colorPicker = this.childrenMap.colorPicker;
+        colorPicker.setValue(value);
+
+        var colorComponents = this.childrenMap.colorComponents;
+        if (colorComponents) {
+            colorComponents.setValue(value);
+        }
+
+        this.emit('valuechange', value);
     }
 
     setValue(value) {

@@ -79,13 +79,42 @@ const ColorPickerConfig = {
     space: { left: 10, right: 10, top: 10, bottom: 10 },
 }
 
+const ColorComponentsConfig = {
+    height: 20,
+
+    formatLabel: {
+        text: { fontSize: 14 },       
+    },
+
+    inputText: {
+        background: {
+            color: COLOR_DARK
+        },
+        focusStyle: {
+            color: COLOR_PRIMARY,
+        },
+        style: {
+            fontSize: 14,
+            backgroundBottomY: 1,
+            backgroundHeight: 12,
+        },
+        cursorStyle: {
+            color: 'black',
+            backgroundColor: 'white',
+        }
+    },
+
+    space: { item: 8 }
+}
+
 var CreateColorInput0 = function (scene) {
     return scene.rexUI.add.colorInput({
         height: 60,
         inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
         colorPicker: ColorPickerConfig,
+        colorComponents: ColorComponentsConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
@@ -98,9 +127,10 @@ var CreateColorInput1 = function (scene) {
             shape: 'circle'
         },
         inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
         colorPicker: ColorPickerConfig,
+        colorComponents: ColorComponentsConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
@@ -113,9 +143,10 @@ var CreateColorInput2 = function (scene) {
             radius: 12,
         },
         inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
         colorPicker: ColorPickerConfig,
+        colorComponents: ColorComponentsConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })
@@ -126,9 +157,10 @@ var CreateColorInput3 = function (scene) {
         height: 60,
         swatch: scene.add.image(0, 0, 'img'),
         inputText: InputTextConfig,
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 5 },
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 8 },
 
         colorPicker: ColorPickerConfig,
+        colorComponents: ColorComponentsConfig,
 
         value: Phaser.Math.Between(0, 0x1000000)
     })

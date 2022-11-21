@@ -22,11 +22,25 @@ var CreateColorPicker = function (scene) {
         height = width;
     }
 
+    var colorComponentsConfig;
+    if (this.colorComponentsHeight > 0) {
+        colorComponentsConfig = {
+            height: this.colorComponentsHeight,
+            formatLabel: this.colorComponentsFormatLabelConfig,
+            inputText: this.colorComponentsInputTextConfig,
+            space: this.colorComponentsSpace,
+        }
+    } else {
+        colorComponentsConfig = false;
+    }
+
     var colorPicker = new ColorPicker(scene, {
         width: width, height: height,
 
         background: background,
         space: this.colorPickerSpace,
+
+        colorComponents: colorComponentsConfig,
 
         value: this.value
     });

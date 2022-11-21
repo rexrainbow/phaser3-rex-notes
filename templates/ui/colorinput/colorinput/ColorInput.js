@@ -39,6 +39,24 @@ class ColorInput extends ColorInputBase {
             this.setColorPickerSpace(GetValue(colorPickerConfig, 'space'));
         }
 
+        var colorComponentsConfig = config.colorComponents;
+        var hasColorComponents = !!colorComponentsConfig;
+        if (hasColorPicker && hasColorComponents) {
+            this.setColorComponentsHeight(GetValue(colorComponentsConfig, 'height', 30));
+
+            this.setColorComponentsFormatLabelConfig(GetValue(colorComponentsConfig, 'formatLabel'));
+
+            var colorComponentsInputTextConfig = GetValue(colorComponentsConfig, 'inputText');
+            if (!colorComponentsInputTextConfig) {
+                colorComponentsInputTextConfig = GetValue(config, 'inputText');
+            }
+            this.setColorComponentsInputTextConfig(colorComponentsInputTextConfig);
+
+            this.setColorComponentsSpace(GetValue(colorComponentsConfig, 'space'));
+        }
+
+
+
         var swatch = this.childrenMap.swatch;
         if (swatch && hasColorPicker) {
             this.onClick(swatch, this.openColorPicker, this);

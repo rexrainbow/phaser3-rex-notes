@@ -1,4 +1,5 @@
 var methods = {
+    // Color picker
     setCreateColorPickerBackgroundCallback(callback) {
         this.colorPickerCreateBackgroundCallback = callback;
         return this;
@@ -59,7 +60,7 @@ var methods = {
         this.setColorPickerWidth(width).setColorPickerHeight(height);
         return this;
     },
-    
+
     setColorPickerSpace(space) {
         if (space === undefined) {
             space = {};
@@ -68,6 +69,29 @@ var methods = {
         return this;
     },
 
+    // Color components
+    setColorComponentsHeight(height) {
+        this.colorComponentsHeight = height;
+        return this;
+    },
+
+    setColorComponentsFormatLabelConfig(config) {
+        this.colorComponentsFormatLabelConfig = config;
+        return this;
+    },
+
+    setColorComponentsInputTextConfig(config) {
+        this.colorComponentsInputTextConfig = config;
+        return this;
+    },
+
+    setColorComponentsSpace(space) {
+        if (space === undefined) {
+            space = {};
+        }
+        this.colorComponentsSpace = space;
+        return this;
+    },
 }
 
 const ColorPickerExpandDirections = {
