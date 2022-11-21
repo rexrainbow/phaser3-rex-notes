@@ -18422,6 +18422,13 @@
       }
       _this = _super.call(this, scene, config);
       _this.type = 'rexColorInput';
+      if (!config.hasOwnProperty('colorPicker')) {
+        config.colorPicker = {
+          background: {
+            color: 0x0
+          }
+        };
+      }
       var colorPickerConfig = config.colorPicker;
       var hasColorPicker = !!colorPickerConfig;
       if (hasColorPicker) {

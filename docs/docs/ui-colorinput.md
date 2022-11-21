@@ -177,6 +177,7 @@ var colorInput = scene.rexUI.add.colorInput({
         ```javascript
         { left: 10, right: 10, top: 10, bottom: 10, item: 8 }
         ```
+    - `false` : No color picker.
 - `colorComponents` : Configuration of [color components](ui-colorcomponents.md) inside the drop down color picker.
     - `colorComponents.height` : Height of color components.
     - `colorComponents.formatLabel` : Clicking this label can switch color format between *RGB* and *HSV* 
@@ -200,6 +201,7 @@ var colorInput = scene.rexUI.add.colorInput({
         ```javascript
         { item: 8 }
         ```
+    - `false` : No color components.
 - `valuechangeCallback` : callback function when value changed.
 - `value` : Initial color value (0 ~ 0xffffff).
     - Number :  0 ~ 0xffffff

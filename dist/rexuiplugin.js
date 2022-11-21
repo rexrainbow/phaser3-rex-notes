@@ -31267,7 +31267,7 @@
 
   var GetValue$1g = Phaser.Utils.Objects.GetValue;
   var Clamp$8 = Phaser.Math.Clamp;
-  var ColorInput$1 = /*#__PURE__*/function (_Sizer) {
+  var ColorInput$2 = /*#__PURE__*/function (_Sizer) {
     _inherits(ColorInput, _Sizer);
     var _super = _createSuper(ColorInput);
     function ColorInput(scene, config) {
@@ -33246,7 +33246,7 @@
   Object.assign(methods$g, methods$h);
 
   var GetValue$18 = Phaser.Utils.Objects.GetValue;
-  var ColorInput = /*#__PURE__*/function (_ColorInputBase) {
+  var ColorInput$1 = /*#__PURE__*/function (_ColorInputBase) {
     _inherits(ColorInput, _ColorInputBase);
     var _super = _createSuper(ColorInput);
     function ColorInput(scene, config) {
@@ -33257,6 +33257,13 @@
       }
       _this = _super.call(this, scene, config);
       _this.type = 'rexColorInput';
+      if (!config.hasOwnProperty('colorPicker')) {
+        config.colorPicker = {
+          background: {
+            color: 0x0
+          }
+        };
+      }
       var colorPickerConfig = config.colorPicker;
       var hasColorPicker = !!colorPickerConfig;
       if (hasColorPicker) {
@@ -33314,22 +33321,22 @@
       return _this;
     }
     return _createClass(ColorInput);
-  }(ColorInput$1);
-  Object.assign(ColorInput.prototype, methods$g);
+  }(ColorInput$2);
+  Object.assign(ColorInput$1.prototype, methods$g);
 
   ObjectFactory.register('colorInput', function (config) {
-    var gameObject = new ColorInput(this.scene, config);
-    this.scene.add.existing(gameObject);
-    return gameObject;
-  });
-  SetValue$1(window, 'RexPlugins.UI.ColorInput', ColorInput);
-
-  ObjectFactory.register('colorInputLite', function (config) {
     var gameObject = new ColorInput$1(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
   });
-  SetValue$1(window, 'RexPlugins.UI.ColorInputBase', ColorInput$1);
+  SetValue$1(window, 'RexPlugins.UI.ColorInput', ColorInput$1);
+
+  ObjectFactory.register('colorInputLite', function (config) {
+    var gameObject = new ColorInput$2(this.scene, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  });
+  SetValue$1(window, 'RexPlugins.UI.ColorInputBase', ColorInput$2);
 
   ObjectFactory.register('colorPicker', function (config) {
     var gameObject = new ColorPicker(this.scene, config);
@@ -47943,6 +47950,60 @@
     return gameObject;
   };
 
+  var CreateColorInput$1 = function CreateColorInput(scene, config) {
+    config = config ? DeepClone(config) : {};
+    var inputText = new ColorInput$1(scene, config);
+    scene.add.existing(inputText);
+    return inputText;
+  };
+
+  var ColorInput = /*#__PURE__*/function (_InputFiledBase) {
+    _inherits(ColorInput, _InputFiledBase);
+    var _super = _createSuper(ColorInput);
+    function ColorInput(scene, config) {
+      var _this;
+      _classCallCheck(this, ColorInput);
+      if (config === undefined) {
+        config = {};
+      }
+      _this = _super.call(this, scene);
+      _this.type = 'rexTweaker.ColorInput';
+      var colorInputConfig = config.colorInput;
+      var colorInput = CreateColorInput$1(scene, colorInputConfig);
+      _this.add(colorInput, {
+        proportion: 1,
+        expand: true
+      });
+      _this.addChildrenMap('colorInput', colorInput);
+      colorInput.on('valuechange', function (value) {
+        this.setValue(value);
+      }, _assertThisInitialized(_this));
+      return _this;
+    }
+    _createClass(ColorInput, [{
+      key: "value",
+      get: function get() {
+        return this._value;
+      },
+      set: function set(value) {
+        if (this._value === value) {
+          return;
+        }
+        this.childrenMap.colorInput.setValue(value);
+        _set(_getPrototypeOf(ColorInput.prototype), "value", value, this, true);
+      }
+    }]);
+    return ColorInput;
+  }(InputFiledBase);
+
+  var CreateColorInput = function CreateColorInput(scene, config, style, gameObject) {
+    if (!gameObject) {
+      gameObject = new ColorInput(scene, style);
+      scene.add.existing(gameObject);
+    }
+    return gameObject;
+  };
+
   var CreateInputField = function CreateInputField(scene, config, style, gameObject) {
     var viewType = config.view;
     var callback;
@@ -47964,6 +48025,9 @@
         break;
       case BooleanType:
         callback = CreateCheckboxInput;
+        break;
+      case ColorType:
+        callback = CreateColorInput;
         break;
       default:
         callback = IsFunction(viewType) ? viewType : CreateTextInput;

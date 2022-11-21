@@ -75,6 +75,14 @@ class Demo extends Phaser.Scene {
                 }
             )
             .addInput(
+                gameObject, 'fillColor',
+                {
+                    title: 'color',             // Custom title
+                    icon: 'settings',           // Title icon
+                    view: 'color',
+                }
+            )
+            .addInput(
                 gameObject, 'name',
                 {
                     icon: 'settings',           // Title icon
