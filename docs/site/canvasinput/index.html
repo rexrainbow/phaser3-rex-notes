@@ -9128,7 +9128,8 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
             <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
         <span class="p">},</span>
         <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">useDefaultLineHeight</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">maxLines</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
         <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">hAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -9180,7 +9181,15 @@ receive character input and display on <a href="../dynamictext/">DynamicText</a>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
-<li>Parameters of <a href="../dynamictext/#create-instance">DynamicText</a>...</li>
+<li>Parameters of <a href="../dynamictext/#create-instance">DynamicText</a>...<ul>
+<li><code>wrap</code> : Some default value in <code>wrap</code> are changed<ul>
+<li><code>wrap.useDefaultLineHeight</code> : Default value is <code>true</code></li>
+<li><code>wrap.maxLines</code> : Default value is <code>1</code></li>
+<li><code>wrap.vAlign</code> : Default value is <code>'center'</code></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Parameters of hidden-text-editor<ul>
 <li><code>inputType</code> : Type of element<ul>
 <li><code>'text'</code>, <code>'password'</code>, <code>'textarea'</code>, ...</li>

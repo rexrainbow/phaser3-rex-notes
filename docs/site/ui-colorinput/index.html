@@ -8940,112 +8940,34 @@
     <span class="c1">// swatch: swatchGameObject,</span>
     <span class="c1">// swatch: false,</span>
 
-    <span class="nx">inputText</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> 
-        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">inputText</span><span class="o">:</span> <span class="nx">inputTextConfig</span><span class="p">,</span>
 
-        <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// {left: 0, right: 0, top: 0, bottom: 0}</span>
+    <span class="nx">colorPicker</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mf">160</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="mf">170</span><span class="p">,</span>
 
         <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-
-            <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
-
-            <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-
-            <span class="c1">// Style when focus</span>
-            <span class="c1">// &#39;focus.color&#39;: ...</span>
-            <span class="c1">// &#39;focus.color2&#39;: ...</span>
-            <span class="c1">// &#39;focus.stroke&#39;: ...</span>
+            <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">alpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+            <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mf">2</span>
         <span class="p">},</span>
-        <span class="nx">focusStyle</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="c1">// createBackgroundCallback: function(scene) {</span>
+        <span class="c1">//     return gameObject;</span>
+        <span class="c1">// }</span>
 
-        <span class="nx">innerBounds</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-
-            <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span>
-        <span class="p">},</span>
-
-        <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">bold</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-            <span class="nx">italic</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-            <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-            <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-            <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-            <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">shadowColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-            <span class="nx">backgroundHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">backgroundBY</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-
-            <span class="c1">// Style when cursor move on</span>
-            <span class="c1">// &#39;cursor.color&#39;: ...</span>
-            <span class="c1">// &#39;cursor.backgroundColor&#39;: ...</span>
-            <span class="c1">// &#39;cursor.xxx&#39;: ...</span>
-        <span class="p">},</span>
-        <span class="nx">cursorStyle</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
-        <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
-                <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
-            <span class="p">},</span>
-            <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-            <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">hAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">vAlign</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>  <span class="c1">// For single line text input</span>
-            <span class="nx">charWrap</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>    <span class="c1">// For single line text input</span>
-        <span class="p">},</span>
-
-        <span class="c1">// enterClose: true,</span>
-        <span class="c1">// readOnly: false,</span>
-
-        <span class="c1">// Callbacks</span>
-        <span class="c1">// onOpen: function (textObject, hiddenInputText) {</span>
-        <span class="c1">// },</span>
-
-        <span class="c1">// onClose: function (textObject, hiddenInputText) {</span>
-        <span class="c1">// },</span>
-
-        <span class="c1">// onUpdate: function (text, textObject, hiddenInputText) {</span>
-        <span class="c1">//     return text;</span>
-        <span class="c1">// },   </span>
-
-        <span class="c1">// onAddChar: function(child, index, canvasInput) {</span>
-        <span class="c1">//    child.modifyStyle({...})</span>
-        <span class="c1">// },</span>
-
-        <span class="c1">// onCursorOut: function(child, cursorIndex, canvasInput) {</span>
-        <span class="c1">//     child.modifyStyle({</span>
-        <span class="c1">//         </span>
-        <span class="c1">//     });</span>
-        <span class="c1">// },</span>
-
-        <span class="c1">// onCursorIn: function(child, cursorIndex, canvasInput) {</span>
-        <span class="c1">//     child.modifyStyle({</span>
-        <span class="c1">//         </span>
-        <span class="c1">//     });</span>
-        <span class="c1">// },</span>
+        <span class="nx">space</span><span class="o">:</span> <span class="p">{</span> <span class="nx">left</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
     <span class="p">},</span>
 
-    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">knob</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">colorComponents</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+        <span class="nx">formatLabel</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+        <span class="nx">inputText</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+        <span class="nx">space</span><span class="o">:</span> <span class="p">{</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">colorInput</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">},</span>
     <span class="nx">valuechangeCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
@@ -9102,6 +9024,44 @@
 </ul>
 </li>
 <li><code>inputText</code> : Configuration of <a href="../canvasinput/#create-instance">canvasInput</a></li>
+<li><code>colorPicker</code> : Configuration of a drop-down <a href="../ui-colorpicker/">color picker</a>, triggered by clicking swatch.<ul>
+<li><code>colorPicker.width</code>, <code>colorPicker.height</code> : Sizer of color picker. Default value is <code>180</code>x<code>170</code></li>
+<li><code>colorPicker.background</code> : Parameters to create <a href="shape-roundrectangle.me">round rectangle</a> game object, optional.</li>
+<li><code>colorPicker.createBackgroundCallback</code> : Callback to create background game object, optional.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>colorPicker.space</code> : Padding space around color picker. Default value is
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">left</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>colorComponents</code> : Configuration of <a href="../ui-colorcomponents/">color components</a> inside the drop down color picker.<ul>
+<li><code>colorComponents.height</code> : Height of color components.</li>
+<li><code>colorComponents.formatLabel</code> : Clicking this label can switch color format between <em>RGB</em> and <em>HSV</em> <ul>
+<li><code>undefined</code> : Will create a label with default <a href="../text/">text</a> game object.</li>
+<li>A plain object
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">radius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">alpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">strokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeAlpha</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">strokeWidth</span><span class="o">:</span> <span class="mf">2</span>
+    <span class="p">},</span>
+
+    <span class="nx">text</span><span class="o">:</span> <span class="nx">textStyle</span><span class="p">,</span>
+
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">}</span>
+<span class="p">}</span>            
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>colorComponents.inputText</code> : Configuration of <a href="../canvasinput/#create-instance">canvasInput</a> used in this color components. Will use <code>inputText</code> of color input if this parameter is not given.</li>
+<li><code>colorComponents.space</code> : Padding space around color components. Default value is
+    <div class="highlight"><pre><span></span><code><span class="p">{</span> <span class="nx">item</span><span class="o">:</span> <span class="mf">8</span> <span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>
 <li><code>value</code> : Initial color value (0 ~ 0xffffff).<ul>
 <li>Number :  0 ~ 0xffffff</li>

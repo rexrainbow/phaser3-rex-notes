@@ -9734,6 +9734,7 @@ or</p>
     <span class="p">},</span>
     <span class="nx">ascent</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">useDefaultTextHeight</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -9750,6 +9751,11 @@ or</p>
 <li><code>ascent</code>, <code>lineHeight</code> : Height of first line and remainder lines<ul>
 <li><code>ascent</code> will set to <code>lineHeight</code> if <code>ascent</code> is <code>undefined</code> but <code>lineHeight</code> is not <code>undefined</code> (backward compatible)</li>
 <li>Get <code>ascent</code>, <code>lineHeight</code> from default text style and test string, if <code>ascent</code>, <code>lineHeight</code> are both <code>undefined</code></li>
+</ul>
+</li>
+<li><code>useDefaultTextHeight</code> : If parameter <code>lineHeight</code> is not given,<ul>
+<li><code>false</code> : Set line height to (<em>total line height / maxLines</em>), if parameter <code>maxLines</code> is larger than <code>0</code>. Default behavior.</li>
+<li><code>true</code> : Set line height to default text height.</li>
 </ul>
 </li>
 <li><code>maxLines</code> : Lines number of this page. <ul>
