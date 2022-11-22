@@ -20,7 +20,7 @@ class TweakerShell extends Sizer {
 
         this.styles = GetValue(config, 'styles') || {};
 
-        var background = CreateBackground(scene, undefined, this.styles.background);
+        var background = CreateBackground(scene, undefined, config.background);
         if (background) {
             this.addBackground(background);
         }

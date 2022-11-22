@@ -26,6 +26,9 @@ class Demo extends Phaser.Scene {
             .layout();
 
         panel
+            .addFolder({
+                title: 'Position'
+            })
             .addInput(
                 gameObject, 'x',
                 {
@@ -49,6 +52,8 @@ class Demo extends Phaser.Scene {
                     // Default list is dropdown-list
                 }
             )
+
+        panel
             .addInput(
                 gameObject, 'radius',
                 {
@@ -62,6 +67,11 @@ class Demo extends Phaser.Scene {
                     view: 'buttons'             // Buttons list
                 }
             )
+
+        panel
+            .addFolder({
+                title: 'Representation'
+            })
             .addInput(
                 gameObject, 'alpha',
                 {
@@ -82,6 +92,8 @@ class Demo extends Phaser.Scene {
                     view: 'color',
                 }
             )
+
+        panel
             .addInput(
                 gameObject, 'name',
                 {
@@ -104,7 +116,7 @@ var CreatePanel = function (scene) {
             background: {
                 radius: 10,
                 color: 0x0,
-                strokeColor: 0x888888
+                strokeColor: 0xffffff,
             },
 
             inputRow: {
@@ -211,6 +223,18 @@ var CreatePanel = function (scene) {
                     title: 1,
                     inputField: 1.5,
                     range: { slider: 2, inputText: 1 }
+                }
+            },
+
+            folder: {
+                title: {
+                    iconSize: 30,
+                    background: { color: COLOR_DARK },
+                    space: { top: 10, icon: 2 }
+                },
+
+                space: {
+                    left: 10, right: 0, top: 5, bottom: 5
                 }
             },
 

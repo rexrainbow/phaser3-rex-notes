@@ -10,12 +10,8 @@ class Tweaker extends TweakerShell {
             config.styles = {};  // TODO: Default styles
         }
 
-        // Overwrite space parameter
-        var space = config.styles.space;
-        if (space) {
-            config.space = space;
-            delete config.styles.space;
-        }
+        config.background = config.styles.background || {};
+        config.space = config.styles.space || {};
 
         // Create sizer
         super(scene, config);
