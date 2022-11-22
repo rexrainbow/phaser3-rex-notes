@@ -5,28 +5,25 @@ import CreateInputField from './CreateInputField.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateInputRow = function (scene, config, style, gameObject) {
-    if (!gameObject) {
-        var titleStyle = GetValue(style, 'title') || {};
-        var inputTitle = CreateTitleLabel(scene, config, titleStyle);
+var CreateInputRow = function (scene, config, style) {
+    var titleStyle = GetValue(style, 'title') || {};
+    var inputTitle = CreateTitleLabel(scene, config, titleStyle);
 
-        var inputField = CreateInputField(scene, config, style);
+    var inputField = CreateInputField(scene, config, style);
 
-        var backgroundStyle = GetValue(style, 'background') || {};
-        var background = CreateRoundRectangle(scene, backgroundStyle);
+    var backgroundStyle = GetValue(style, 'background') || {};
+    var background = CreateRoundRectangle(scene, backgroundStyle);
 
-        var inputSizerconfig = {
-            ...config,
-            ...style,
+    var inputSizerconfig = {
+        ...config,
+        ...style,
 
-            inputTitle: inputTitle,
-            inputField: inputField,
-            background: background,
-        }
-        gameObject = new InputRow(scene, inputSizerconfig);
-
-        scene.add.existing(gameObject);
+        inputTitle: inputTitle,
+        inputField: inputField,
+        background: background,
     }
+    var gameObject = new InputRow(scene, inputSizerconfig);
+    scene.add.existing(gameObject);
 
     return gameObject;
 }

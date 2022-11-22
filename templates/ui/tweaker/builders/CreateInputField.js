@@ -12,7 +12,7 @@ import CreateCheckboxInput from './CreateCheckboxInput.js';
 import CreateColorInput from './CreateColorInput.js';
 import IsFunction from '../../../../plugins/utils/object/IsFunction.js';
 
-var CreateInputField = function (scene, config, style, gameObject) {
+var CreateInputField = function (scene, config, style) {
     var viewType = config.view;
     var callback;
     switch (viewType) {
